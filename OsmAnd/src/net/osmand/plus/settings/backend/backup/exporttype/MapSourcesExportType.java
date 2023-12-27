@@ -14,6 +14,8 @@ import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,6 +53,17 @@ class MapSourcesExportType extends AbstractExportType {
 			}
 		}
 		return iTileSources;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) settingsItem;
+		if (importCompleted) {
+			return mapSourcesItem.getAppliedItems();
+		} else {
+			return mapSourcesItem.getItems();
+		}
 	}
 
 	@NonNull

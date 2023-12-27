@@ -4,48 +4,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
-import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-class FavoritesBackupExportType extends AbstractExportType {
-
-	@Override
-	public int getTitleId() {
-		return R.string.favorites_backup;
-	}
-
-	@Override
-	public int getIconId() {
-		return R.drawable.ic_action_folder_favorites;
-	}
+public abstract class AbstractVoiceExportType extends LocalResourcesExportType {
 
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class) && offlineBackup) {
-			return app.getFavoritesHelper().getFileHelper().getBackupFiles();
-		}
-		return Collections.emptyList();
+		return collectLocalResources(app);
 	}
 
 	@NonNull
 	@Override
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
 		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
-		return Collections.singletonList(fileSettingsItem);
+		return Collections.singletonList(fileSettingsItem.getFile());
 	}
 
 	@NonNull
@@ -58,18 +38,6 @@ class FavoritesBackupExportType extends AbstractExportType {
 	@Override
 	public SettingsItemType relatedSettingsItemType() {
 		return SettingsItemType.FILE;
-	}
-
-	@NonNull
-	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
-		return Collections.singletonList(FileSubtype.FAVORITES_BACKUP);
-	}
-
-	@Nullable
-	@Override
-	public LocalItemType relatedLocalItemType() {
-		return null;
 	}
 
 	@Nullable

@@ -12,6 +12,8 @@ import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +39,13 @@ class ProfileExportType extends AbstractExportType {
 			appModeBeans.add(appMode.toModeBean());
 		}
 		return appModeBeans;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) settingsItem;
+		return Collections.singletonList(profileSettingsItem.getModeBean());
 	}
 
 	@Override

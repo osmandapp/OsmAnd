@@ -10,13 +10,15 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public abstract class MapExportType extends LocalResourcesExportType {
+public abstract class AbstractMapExportType extends LocalResourcesExportType {
 
 	public static final String OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY = "OFFLINE_MAPS";
 
@@ -29,6 +31,13 @@ public abstract class MapExportType extends LocalResourcesExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		return collectSortedLocalResource(app);
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+		return Collections.singletonList(fileSettingsItem);
 	}
 
 	@NonNull

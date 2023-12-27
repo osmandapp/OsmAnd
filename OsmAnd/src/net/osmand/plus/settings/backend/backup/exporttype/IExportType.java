@@ -11,6 +11,7 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.List;
 
@@ -30,6 +31,9 @@ interface IExportType {
 
 	@NonNull
 	List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup);
+
+	@NonNull
+	List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted);
 
 	@NonNull
 	ExportCategory relatedExportCategory();

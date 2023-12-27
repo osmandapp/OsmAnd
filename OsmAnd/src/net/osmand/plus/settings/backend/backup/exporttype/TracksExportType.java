@@ -9,7 +9,9 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.track.helpers.GpxDataItem;
 
 import java.io.File;
@@ -41,6 +43,13 @@ class TracksExportType extends AbstractExportType {
 			}
 		}
 		return files;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+		return Collections.singletonList(fileSettingsItem);
 	}
 
 	@NonNull

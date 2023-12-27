@@ -10,7 +10,9 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +44,13 @@ class CustomRoutingExportType extends AbstractExportType {
 			}
 		}
 		return routingProfiles;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+		return Collections.singletonList(fileSettingsItem.getFile());
 	}
 
 	@NonNull

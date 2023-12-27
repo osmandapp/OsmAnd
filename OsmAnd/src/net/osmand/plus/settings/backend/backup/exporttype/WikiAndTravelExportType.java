@@ -12,7 +12,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import java.util.Arrays;
 import java.util.List;
 
-class WikiAndTravelExportType extends MapExportType {
+class WikiAndTravelExportType extends AbstractMapExportType {
 
 	private static final String DEFAULT_WIKIVOYAGE =
 			"Default_wikivoyage" + IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;

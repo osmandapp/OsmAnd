@@ -12,6 +12,8 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -38,6 +40,17 @@ class OsmNotesExportType extends AbstractExportType {
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 		return plugin != null ? plugin.getDBBug().getOsmBugsPoints() : Collections.emptyList();
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		OsmNotesSettingsItem osmNotesSettingsItem = (OsmNotesSettingsItem) settingsItem;
+		if (importCompleted) {
+			return osmNotesSettingsItem.getAppliedItems();
+		} else {
+			return osmNotesSettingsItem.getItems();
+		}
 	}
 
 	@NonNull

@@ -10,7 +10,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import java.util.Collections;
 import java.util.List;
 
-class RoadMapsExportType extends MapExportType {
+class RoadMapsExportType extends AbstractMapExportType {
 
 	@Override
 	public int getTitleId() {

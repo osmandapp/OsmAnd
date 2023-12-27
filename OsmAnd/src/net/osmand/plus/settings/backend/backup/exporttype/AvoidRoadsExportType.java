@@ -12,7 +12,9 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +39,17 @@ class AvoidRoadsExportType extends AbstractExportType {
 		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
 		Map<LatLon, AvoidRoadInfo> impassableRoads = avoidSpecificRoads.getImpassableRoads();
 		return new ArrayList<>(impassableRoads.values());
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) settingsItem;
+		if (importCompleted) {
+			return avoidRoadsItem.getAppliedItems();
+		} else {
+			return avoidRoadsItem.getItems();
+		}
 	}
 
 	@NonNull

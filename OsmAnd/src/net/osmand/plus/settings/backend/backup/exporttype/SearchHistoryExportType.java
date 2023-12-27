@@ -11,6 +11,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.enums.HistorySource;
 
 import java.util.Collections;
@@ -34,6 +36,13 @@ class SearchHistoryExportType extends AbstractExportType {
 		boolean onlyPoints = false;
 		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 		return helper.getHistoryEntries(HistorySource.SEARCH, onlyPoints);
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) settingsItem;
+		return searchHistorySettingsItem.getItems();
 	}
 
 	@NonNull

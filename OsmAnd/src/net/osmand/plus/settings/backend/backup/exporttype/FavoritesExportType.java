@@ -9,7 +9,9 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +32,13 @@ class FavoritesExportType extends AbstractExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		return app.getFavoritesHelper().getFavoriteGroups();
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		FavoritesSettingsItem favoritesSettingsItem = (FavoritesSettingsItem) settingsItem;
+		return favoritesSettingsItem.getItems();
 	}
 
 	@Override

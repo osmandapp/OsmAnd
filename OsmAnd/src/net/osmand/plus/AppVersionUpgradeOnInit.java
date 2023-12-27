@@ -5,7 +5,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
-import static net.osmand.plus.settings.backend.backup.exporttype.MapExportType.OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
+import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;

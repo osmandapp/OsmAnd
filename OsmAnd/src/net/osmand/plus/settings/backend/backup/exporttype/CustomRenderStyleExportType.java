@@ -9,7 +9,9 @@ import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +36,13 @@ class CustomRenderStyleExportType extends AbstractExportType {
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		Map<String, File> externalRenderers = app.getRendererRegistry().getExternalRenderers();
 		return new ArrayList<>(externalRenderers.values());
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+		return Collections.singletonList(fileSettingsItem.getFile());
 	}
 
 	@NonNull

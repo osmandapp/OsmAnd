@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
-import static net.osmand.plus.settings.backend.backup.exporttype.MapExportType.OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
+import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.util.Algorithms.addAllIfNotContains;
 import static net.osmand.util.Algorithms.addIfNotContains;
 import static net.osmand.util.Algorithms.filterElementsWithCondition;

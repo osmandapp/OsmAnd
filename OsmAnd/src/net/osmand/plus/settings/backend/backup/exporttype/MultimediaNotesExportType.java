@@ -12,7 +12,9 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,6 +48,13 @@ class MultimediaNotesExportType extends AbstractExportType {
 			return files;
 		}
 		return Collections.emptyList();
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
+		return Collections.singletonList(fileSettingsItem);
 	}
 
 	@NonNull

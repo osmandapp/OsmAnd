@@ -15,12 +15,6 @@ import java.util.List;
 abstract class LocalResourcesExportType extends AbstractExportType {
 
 	@NonNull
-	@Override
-	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		return collectLocalResources(app);
-	}
-
-	@NonNull
 	protected List<File> collectLocalResources(@NonNull OsmandApplication app) {
 		LocalItemType relatedLocalItemType = relatedLocalItemType();
 		if (relatedLocalItemType != null) {

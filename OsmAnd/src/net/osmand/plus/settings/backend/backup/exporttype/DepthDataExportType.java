@@ -4,14 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 import java.util.Collections;
 import java.util.List;
 
-class DepthDataExportType extends MapExportType {
+class DepthDataExportType extends AbstractMapExportType {
 
 	@Override
 	public int getTitleId() {

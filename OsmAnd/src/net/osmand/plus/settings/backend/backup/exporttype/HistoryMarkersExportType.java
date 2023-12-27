@@ -13,6 +13,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,6 +43,13 @@ class HistoryMarkersExportType extends AbstractExportType {
 			return Collections.singletonList(markersGroup);
 		}
 		return Collections.emptyList();
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		HistoryMarkersSettingsItem historyMarkersSettingsItem = (HistoryMarkersSettingsItem) settingsItem;
+		return Collections.singletonList(historyMarkersSettingsItem.getMarkersGroup());
 	}
 
 	@NonNull

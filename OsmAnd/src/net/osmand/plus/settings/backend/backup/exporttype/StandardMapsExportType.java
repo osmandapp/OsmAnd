@@ -13,7 +13,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import java.util.Collections;
 import java.util.List;
 
-class StandardMapsExportType extends MapExportType {
+class StandardMapsExportType extends AbstractMapExportType {
 
 	private static final String BASE_MINI =
 			WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;

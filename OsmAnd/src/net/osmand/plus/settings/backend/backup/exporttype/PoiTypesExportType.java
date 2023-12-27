@@ -10,6 +10,8 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +33,17 @@ class PoiTypesExportType extends AbstractExportType {
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		boolean includeDeleted = false;
 		return app.getPoiFilters().getUserDefinedPoiFilters(includeDeleted);
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) settingsItem;
+		if (importCompleted) {
+			return poiUiFilterItem.getAppliedItems();
+		} else {
+			return poiUiFilterItem.getItems();
+		}
 	}
 
 	@NonNull

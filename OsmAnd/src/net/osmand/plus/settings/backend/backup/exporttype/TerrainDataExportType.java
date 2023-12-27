@@ -10,7 +10,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import java.util.Arrays;
 import java.util.List;
 
-class TerrainDataExportType extends MapExportType {
+class TerrainDataExportType extends AbstractMapExportType {
 
 	@Override
 	public int getTitleId() {
