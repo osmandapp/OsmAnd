@@ -131,7 +131,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		super.onViewCreated(view, savedInstanceState);
 		ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 				app,
-				SettingsHelper.getSettingsToOperate(settingsItems, true, false),
+				SettingsHelper.collectSettingsToOperate(settingsItems, true, false),
 				nightMode,
 				this::navigateTo);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));

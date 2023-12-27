@@ -194,7 +194,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 			}
 			dataToOperate.put(exportType, filesByType);
 		}
-		return SettingsHelper.getSettingsToOperateByCategory(dataToOperate, true);
+		return SettingsHelper.categorizeSettingsToOperate(dataToOperate, true);
 	}
 
 	@NonNull

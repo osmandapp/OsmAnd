@@ -58,11 +58,15 @@ class MapSourcesExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
-		MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) settingsItem;
-		if (importCompleted) {
-			return mapSourcesItem.getAppliedItems();
+		if (settingsItem instanceof MapSourcesSettingsItem) {
+			MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) settingsItem;
+			if (importCompleted) {
+				return mapSourcesItem.getAppliedItems();
+			} else {
+				return mapSourcesItem.getItems();
+			}
 		} else {
-			return mapSourcesItem.getItems();
+			return Collections.singletonList(settingsItem);
 		}
 	}
 

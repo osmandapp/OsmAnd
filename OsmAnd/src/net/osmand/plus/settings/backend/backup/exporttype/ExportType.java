@@ -93,11 +93,15 @@ public enum ExportType {
 
 	@NonNull
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
-		return fetchImportData(settingsItem, importCompleted);
+		return instance.fetchImportData(settingsItem, importCompleted);
 	}
 
 	public boolean isMap() {
 		return instance.isMap();
+	}
+
+	public boolean isRelatedToCategory(@NonNull ExportCategory exportCategory) {
+		return instance.isRelatedToCategory(exportCategory);
 	}
 
 	public boolean isSettingsCategory() {
@@ -117,7 +121,8 @@ public enum ExportType {
 	}
 
 	public boolean isEnabled() {
-		return enabledValues().contains(this);
+		Class<? extends OsmandPlugin> clazz = instance.relatedPluginClass();
+		return clazz == null || PluginsHelper.isActive(clazz);
 	}
 
 	@Nullable
@@ -157,27 +162,24 @@ public enum ExportType {
 
 	@NonNull
 	public static List<ExportType> mapValues() {
-		return filterElementsWithCondition(valuesList(), exportType -> exportType.instance.isMap());
-	}
-
-	@NonNull
-	public static List<ExportType> enabledValues() {
-		return filterElementsWithCondition(valuesList(), exportType -> {
-			Class<? extends OsmandPlugin> clazz = exportType.instance.relatedPluginClass();
-			return clazz == null || PluginsHelper.isActive(clazz);
-		});
+		return filterElementsWithCondition(valuesList(), ExportType::isMap);
 	}
 
 	@NonNull
 	public static List<ExportType> enabledValuesOf(@NonNull ExportCategory exportCategory) {
 		return filterElementsWithCondition(enabledValues(),
-				exportType -> exportType.instance.isRelatedToCategory(exportCategory));
+				exportType -> exportType.isRelatedToCategory(exportCategory));
 	}
 
 	@NonNull
-	public static List<ExportType> valuesOf(@NonNull List<String> typeKeys) {
+	public static List<ExportType> enabledValues() {
+		return filterElementsWithCondition(valuesList(), ExportType::isEnabled);
+	}
+
+	@NonNull
+	public static List<ExportType> valuesOf(@NonNull List<String> keys) {
 		List<ExportType> result = new ArrayList<>();
-		for (String key : typeKeys) {
+		for (String key : keys) {
 			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {
 				addAllIfNotContains(result, mapValues());
 			} else {

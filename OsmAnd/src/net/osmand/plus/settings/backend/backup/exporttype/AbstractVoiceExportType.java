@@ -13,7 +13,7 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class AbstractVoiceExportType extends LocalResourcesExportType {
+abstract class AbstractVoiceExportType extends LocalResourcesExportType {
 
 	@NonNull
 	@Override

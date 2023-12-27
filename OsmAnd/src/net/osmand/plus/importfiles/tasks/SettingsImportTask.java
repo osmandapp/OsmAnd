@@ -1,7 +1,7 @@
 package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.getSettingsToOperate;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.collectSettingsToOperate;
 
 import android.app.ProgressDialog;
 import android.net.Uri;
@@ -94,7 +94,7 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 								FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 							}
 						} else {
-							Map<ExportType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
+							Map<ExportType, List<?>> allSettingsMap = collectSettingsToOperate(pluginIndependentItems, false, false);
 							List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
 							settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 						}

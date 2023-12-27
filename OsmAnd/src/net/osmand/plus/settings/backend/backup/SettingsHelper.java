@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -368,23 +366,23 @@ public abstract class SettingsHelper {
 		return null;
 	}
 
-	public static Map<ExportCategory, SettingsCategoryItems> getSettingsToOperateByCategory(List<SettingsItem> items, boolean importComplete, boolean addEmptyItems) {
-		Map<ExportType, List<?>> settingsToOperate = getSettingsToOperate(items, importComplete, addEmptyItems);
-		return getSettingsToOperateByCategory(settingsToOperate, addEmptyItems);
+	public static Map<ExportCategory, SettingsCategoryItems> categorizeSettingsToOperate(List<SettingsItem> items, boolean importComplete, boolean addEmptyItems) {
+		Map<ExportType, List<?>> settingsToOperate = collectSettingsToOperate(items, importComplete, addEmptyItems);
+		return categorizeSettingsToOperate(settingsToOperate, addEmptyItems);
 	}
 
-	public static Map<ExportCategory, SettingsCategoryItems> getSettingsToOperateByCategory(Map<ExportType, List<?>> settingsToOperate, boolean addEmptyItems) {
+	public static Map<ExportCategory, SettingsCategoryItems> categorizeSettingsToOperate(Map<ExportType, List<?>> settingsToOperate, boolean addEmptyItems) {
 		Map<ExportType, List<?>> settingsItems = new LinkedHashMap<>();
 		Map<ExportType, List<?>> myPlacesItems = new LinkedHashMap<>();
 		Map<ExportType, List<?>> resourcesItems = new LinkedHashMap<>();
 
 		for (Map.Entry<ExportType, List<?>> entry : settingsToOperate.entrySet()) {
 			ExportType type = entry.getKey();
-			if (type.isSettingsCategory()) {
+			if (type.isRelatedToCategory(ExportCategory.SETTINGS)) {
 				settingsItems.put(type, entry.getValue());
-			} else if (type.isMyPlacesCategory()) {
+			} else if (type.isRelatedToCategory(ExportCategory.MY_PLACES)) {
 				myPlacesItems.put(type, entry.getValue());
-			} else if (type.isResourcesCategory()) {
+			} else if (type.isRelatedToCategory(ExportCategory.RESOURCES)) {
 				resourcesItems.put(type, entry.getValue());
 			}
 		}
@@ -402,286 +400,25 @@ public abstract class SettingsHelper {
 		return exportMap;
 	}
 
-	public static Map<ExportType, List<?>> getSettingsToOperate(List<SettingsItem> settingsItems, boolean importComplete, boolean addEmptyItems) {
+	public static Map<ExportType, List<?>> collectSettingsToOperate(@NonNull List<SettingsItem> settingItems,
+	                                                                boolean importCompleted, boolean addEmptyTypes) {
 		Map<ExportType, List<?>> settingsToOperate = new EnumMap<>(ExportType.class);
-		List<ApplicationModeBean> profiles = new ArrayList<>();
-		List<QuickAction> quickActions = new ArrayList<>();
-		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
-		List<ITileSource> tileSourceTemplates = new ArrayList<>();
-		List<File> routingFilesList = new ArrayList<>();
-		List<File> renderFilesList = new ArrayList<>();
-		List<File> ttsVoiceFilesList = new ArrayList<>();
-		List<File> voiceFilesList = new ArrayList<>();
-		List<FileSettingsItem> mapFilesList = new ArrayList<>();
-		List<FileSettingsItem> wikiFilesList = new ArrayList<>();
-		List<FileSettingsItem> terrainFilesList = new ArrayList<>();
-		List<FileSettingsItem> roadsOnlyFilesList = new ArrayList<>();
-		List<FileSettingsItem> nauticalFilesList = new ArrayList<>();
-		List<FileSettingsItem> tracksFilesList = new ArrayList<>();
-		List<FileSettingsItem> favouritesBackupFilesList = new ArrayList<>();
-		List<FileSettingsItem> multimediaFilesList = new ArrayList<>();
-		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
-		List<GlobalSettingsItem> globalSettingsItems = new ArrayList<>();
-		List<OsmNotesPoint> notesPointList = new ArrayList<>();
-		List<OpenstreetmapPoint> editsPointList = new ArrayList<>();
-		List<FavoriteGroup> favoriteGroups = new ArrayList<>();
-		List<MapMarkersGroup> markersGroups = new ArrayList<>();
-		List<HistoryEntry> historySearchEntries = new ArrayList<>();
-		List<HistoryEntry> historyNavigationEntries = new ArrayList<>();
-		List<OnlineRoutingEngine> onlineRoutingEngines = new ArrayList<>();
-		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
+		for (SettingsItem settingsItem : settingItems) {
+			ExportType exportType = ExportType.findBy(settingsItem);
+			if (exportType != null) {
+				List<?> importData = exportType.fetchImportData(settingsItem, importCompleted);
+				if (!importData.isEmpty() || addEmptyTypes) {
+					// Use the same list to store Active and History markers
+					exportType = exportType == ExportType.HISTORY_MARKERS ? ExportType.ACTIVE_MARKERS : exportType;
 
-		for (SettingsItem item : settingsItems) {
-			switch (item.getType()) {
-				case PROFILE:
-					profiles.add(((ProfileSettingsItem) item).getModeBean());
-					break;
-				case FILE:
-					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
-						renderFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
-						routingFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
-						multimediaFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
-						tracksFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_BACKUP) {
-						favouritesBackupFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.OBF_MAP) {
-						mapFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.WIKI_MAP || fileItem.getSubtype() == FileSubtype.TRAVEL) {
-						wikiFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.SRTM_MAP || fileItem.getSubtype() == FileSubtype.TERRAIN_DATA) {
-						terrainFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.ROAD_MAP) {
-						roadsOnlyFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.NAUTICAL_DEPTH) {
-						nauticalFilesList.add(fileItem);
-					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
-						ttsVoiceFilesList.add(fileItem.getFile());
-					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
-						voiceFilesList.add(fileItem.getFile());
+					List<Object> newDataByType = new ArrayList<>();
+					List<?> dataByType = settingsToOperate.get(exportType);
+					if (dataByType != null) {
+						newDataByType.addAll(dataByType);
 					}
-					break;
-				case QUICK_ACTIONS:
-					QuickActionsSettingsItem quickActionsItem = (QuickActionsSettingsItem) item;
-					if (importComplete) {
-						quickActions.addAll(quickActionsItem.getAppliedItems());
-					} else {
-						quickActions.addAll(quickActionsItem.getItems());
-					}
-					break;
-				case POI_UI_FILTERS:
-					PoiUiFiltersSettingsItem poiUiFilterItem = (PoiUiFiltersSettingsItem) item;
-					if (importComplete) {
-						poiUIFilters.addAll(poiUiFilterItem.getAppliedItems());
-					} else {
-						poiUIFilters.addAll(poiUiFilterItem.getItems());
-					}
-					break;
-				case MAP_SOURCES:
-					MapSourcesSettingsItem mapSourcesItem = (MapSourcesSettingsItem) item;
-					if (importComplete) {
-						tileSourceTemplates.addAll(mapSourcesItem.getAppliedItems());
-					} else {
-						tileSourceTemplates.addAll(mapSourcesItem.getItems());
-					}
-					break;
-				case AVOID_ROADS:
-					AvoidRoadsSettingsItem avoidRoadsItem = (AvoidRoadsSettingsItem) item;
-					if (importComplete) {
-						avoidRoads.addAll(avoidRoadsItem.getAppliedItems());
-					} else {
-						avoidRoads.addAll(avoidRoadsItem.getItems());
-					}
-					break;
-				case GLOBAL:
-					globalSettingsItems.add((GlobalSettingsItem) item);
-					break;
-				case OSM_NOTES:
-					OsmNotesSettingsItem osmNotesSettingsItem = (OsmNotesSettingsItem) item;
-					if (importComplete) {
-						notesPointList.addAll(osmNotesSettingsItem.getAppliedItems());
-					} else {
-						notesPointList.addAll(osmNotesSettingsItem.getItems());
-					}
-					break;
-				case OSM_EDITS:
-					OsmEditsSettingsItem osmEditsSettingsItem = (OsmEditsSettingsItem) item;
-					if (importComplete) {
-						editsPointList.addAll(osmEditsSettingsItem.getAppliedItems());
-					} else {
-						editsPointList.addAll(osmEditsSettingsItem.getItems());
-					}
-					break;
-				case FAVOURITES:
-					FavoritesSettingsItem favoritesSettingsItem = (FavoritesSettingsItem) item;
-					favoriteGroups.addAll(favoritesSettingsItem.getItems());
-					break;
-				case ACTIVE_MARKERS:
-					MarkersSettingsItem markersSettingsItem = (MarkersSettingsItem) item;
-					markersGroups.add(markersSettingsItem.getMarkersGroup());
-					break;
-				case HISTORY_MARKERS:
-					HistoryMarkersSettingsItem historyMarkersSettingsItem = (HistoryMarkersSettingsItem) item;
-					markersGroups.add(historyMarkersSettingsItem.getMarkersGroup());
-					break;
-				case SEARCH_HISTORY:
-					SearchHistorySettingsItem searchHistorySettingsItem = (SearchHistorySettingsItem) item;
-					historySearchEntries.addAll(searchHistorySettingsItem.getItems());
-					break;
-				case NAVIGATION_HISTORY:
-					NavigationHistorySettingsItem navigationHistorySettingsItem = (NavigationHistorySettingsItem) item;
-					historyNavigationEntries.addAll(navigationHistorySettingsItem.getItems());
-					break;
-				case GPX:
-					tracksFilesList.add((GpxSettingsItem) item);
-					break;
-				case ONLINE_ROUTING_ENGINES:
-					OnlineRoutingSettingsItem onlineRoutingSettingsItem = (OnlineRoutingSettingsItem) item;
-					onlineRoutingEngines.addAll(onlineRoutingSettingsItem.getItems());
-					break;
-				case ITINERARY_GROUPS:
-					ItinerarySettingsItem itinerarySettingsItem = (ItinerarySettingsItem) item;
-					itineraryGroups.addAll(itinerarySettingsItem.getItems());
-					break;
-				default:
-					break;
-			}
-		}
-		for (SettingsItem item : settingsItems) {
-			switch (item.getType()) {
-				case PROFILE:
-					if (!profiles.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.PROFILE, profiles);
-					}
-					break;
-				case FILE:
-					FileSettingsItem fileItem = (FileSettingsItem) item;
-					if (fileItem.getSubtype() == FileSubtype.RENDERING_STYLE) {
-						if (!renderFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.CUSTOM_RENDER_STYLE, renderFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.ROUTING_CONFIG) {
-						if (!routingFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.CUSTOM_ROUTING, routingFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.MULTIMEDIA_NOTES) {
-						if (!multimediaFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.MULTIMEDIA_NOTES, multimediaFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.GPX) {
-						if (!tracksFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.TRACKS, tracksFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.FAVORITES_BACKUP) {
-						if (!favouritesBackupFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.FAVORITES_BACKUP, favouritesBackupFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.OBF_MAP) {
-						if (!mapFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.STANDARD_MAPS, mapFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.WIKI_MAP || fileItem.getSubtype() == FileSubtype.TRAVEL) {
-						if (!wikiFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.WIKI_AND_TRAVEL, wikiFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.SRTM_MAP || fileItem.getSubtype() == FileSubtype.TERRAIN_DATA) {
-						if (!terrainFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.TERRAIN_DATA, terrainFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.ROAD_MAP) {
-						if (!roadsOnlyFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.ROAD_MAPS, roadsOnlyFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.NAUTICAL_DEPTH) {
-						if (!nauticalFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.DEPTH_DATA, nauticalFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
-						if (!ttsVoiceFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.TTS_VOICE, ttsVoiceFilesList);
-						}
-					} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
-						if (!voiceFilesList.isEmpty() || addEmptyItems) {
-							settingsToOperate.put(ExportType.VOICE, voiceFilesList);
-						}
-					}
-					break;
-				case QUICK_ACTIONS:
-					if (!quickActions.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.QUICK_ACTIONS, quickActions);
-					}
-					break;
-				case POI_UI_FILTERS:
-					if (!poiUIFilters.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.POI_TYPES, poiUIFilters);
-					}
-					break;
-				case MAP_SOURCES:
-					if (!tileSourceTemplates.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.MAP_SOURCES, tileSourceTemplates);
-					}
-					break;
-				case AVOID_ROADS:
-					if (!avoidRoads.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.AVOID_ROADS, avoidRoads);
-					}
-					break;
-				case GLOBAL:
-					if (!globalSettingsItems.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.GLOBAL, globalSettingsItems);
-					}
-					break;
-				case OSM_NOTES:
-					if (!notesPointList.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.OSM_NOTES, notesPointList);
-					}
-					break;
-				case OSM_EDITS:
-					if (!editsPointList.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.OSM_EDITS, editsPointList);
-					}
-					break;
-				case FAVOURITES:
-					if (!favoriteGroups.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.FAVORITES, favoriteGroups);
-					}
-					break;
-				case ACTIVE_MARKERS:
-				case HISTORY_MARKERS:
-					if (!markersGroups.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.ACTIVE_MARKERS, markersGroups);
-					}
-					break;
-				case SEARCH_HISTORY:
-					if (!historySearchEntries.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.SEARCH_HISTORY, historySearchEntries);
-					}
-					break;
-				case NAVIGATION_HISTORY:
-					if (!historyNavigationEntries.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.NAVIGATION_HISTORY, historyNavigationEntries);
-					}
-					break;
-				case GPX:
-					if (!tracksFilesList.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.TRACKS, tracksFilesList);
-					}
-					break;
-				case ONLINE_ROUTING_ENGINES:
-					if (!onlineRoutingEngines.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
-					}
-					break;
-				case ITINERARY_GROUPS:
-					if (!itineraryGroups.isEmpty() || addEmptyItems) {
-						settingsToOperate.put(ExportType.ITINERARY_GROUPS, itineraryGroups);
-					}
-					break;
-				default:
-					break;
+					newDataByType.addAll(importData);
+					settingsToOperate.put(exportType, newDataByType);
+				}
 			}
 		}
 		return settingsToOperate;
