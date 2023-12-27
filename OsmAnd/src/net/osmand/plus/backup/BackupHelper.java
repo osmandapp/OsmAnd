@@ -39,7 +39,7 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.settings.backend.ExportType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -988,7 +988,7 @@ public class BackupHelper {
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
 					ExportType exportType = ExportType.findBy(remoteFile);
-					if (exportType == null || exportType.isNotEnabled() || remoteFile.isRecordedVoiceFile()) {
+					if (exportType == null || !exportType.isEnabled() || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
@@ -1020,7 +1020,7 @@ public class BackupHelper {
 				}
 				for (LocalFile localFile : localFiles.values()) {
 					ExportType exportType = ExportType.findBy(localFile.item);
-					if (exportType == null || exportType.isNotEnabled()) {
+					if (exportType == null || !exportType.isEnabled()) {
 						continue;
 					}
 					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());

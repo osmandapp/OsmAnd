@@ -2,7 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.settings.backend.ExportType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

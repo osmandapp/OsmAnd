@@ -6,13 +6,16 @@ import static net.osmand.util.Algorithms.addIfNotContains;
 import static net.osmand.util.Algorithms.filterElementsWithCondition;
 import static net.osmand.util.Algorithms.searchElementWithCondition;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
@@ -60,6 +63,20 @@ public enum ExportType {
 		this.instance = instance;
 	}
 
+	@StringRes
+	public int getTitleId() {
+		return instance.getTitleId();
+	}
+
+	@DrawableRes
+	public int getIconRes() {
+		return instance.getIconId();
+	}
+
+	public String getItemName() {
+		return instance.relatedSettingsItemType().name();
+	}
+
 	@NonNull
 	public String getCompatibleId() {
 		if (instance.isMap()) {
@@ -68,12 +85,28 @@ public enum ExportType {
 		return name();
 	}
 
-	public boolean isEnabled() {
-		return enabledValues().contains(this);
+	public boolean isMap() {
+		return instance.isMap();
 	}
 
-	public boolean isNotEnabled() {
-		return !isEnabled();
+	public boolean isSettingsCategory() {
+		return instance.isRelatedToCategory(ExportCategory.SETTINGS);
+	}
+
+	public boolean isMyPlacesCategory() {
+		return instance.isRelatedToCategory(ExportCategory.MY_PLACES);
+	}
+
+	public boolean isResourcesCategory() {
+		return instance.isRelatedToCategory(ExportCategory.RESOURCES);
+	}
+
+	public boolean isAllowedInFreeVersion() {
+		return instance.isAllowedInFreeVersion();
+	}
+
+	public boolean isEnabled() {
+		return enabledValues().contains(this);
 	}
 
 	@Nullable
@@ -95,7 +128,7 @@ public enum ExportType {
 		if (item.getType() == SettingsItemType.FILE) {
 			return findBy(((FileSettingsItem) item).getSubtype());
 		}
-		return searchElementWithCondition(valuesList(), 
+		return searchElementWithCondition(valuesList(),
 				exportType -> exportType.instance.relatedSettingsItemType() == item.getType());
 	}
 
@@ -125,7 +158,7 @@ public enum ExportType {
 	}
 
 	@NonNull
-	public static List<ExportType> valuesOf(@NonNull List<String> typeKeys) {
+	public static List<ExportType> valuesOfKeys(@NonNull List<String> typeKeys) {
 		List<ExportType> result = new ArrayList<>();
 		for (String key : typeKeys) {
 			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {

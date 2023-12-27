@@ -37,7 +37,7 @@ class ActiveMarkersExportType extends AbstractExportType {
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		if (!mapMarkers.isEmpty()) {
 			String name = app.getString(R.string.map_markers);
-			String groupId = net.osmand.plus.settings.backend.ExportType.ACTIVE_MARKERS.name();
+			String groupId = ExportType.ACTIVE_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(mapMarkers);
 			return Collections.singletonList(markersGroup);

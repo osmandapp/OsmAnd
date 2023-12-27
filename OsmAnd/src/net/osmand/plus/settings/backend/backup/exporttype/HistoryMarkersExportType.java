@@ -37,7 +37,7 @@ class HistoryMarkersExportType extends AbstractExportType {
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
 		if (!markersHistory.isEmpty()) {
 			String name = app.getString(R.string.shared_string_history);
-			String groupId = net.osmand.plus.settings.backend.ExportType.HISTORY_MARKERS.name();
+			String groupId = ExportType.HISTORY_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(markersHistory);
 			return Collections.singletonList(markersGroup);

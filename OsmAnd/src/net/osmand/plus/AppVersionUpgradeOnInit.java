@@ -53,9 +53,9 @@ import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
@@ -775,7 +775,7 @@ public class AppVersionUpgradeOnInit {
 		Boolean oldBackupTypePrefValue =
 				settings.registerBooleanPreference(prefId, true).makeGlobal().get();
 
-		for (ExportType newExportType : ExportType.mapTypes()) {
+		for (ExportType newExportType : ExportType.mapValues()) {
 			BackupHelper.getVersionHistoryTypePref(app, newExportType).set(oldVersionHistoryPrefValue);
 			BackupHelper.getBackupTypePref(app, newExportType).set(oldBackupTypePrefValue);
 		}
