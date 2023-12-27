@@ -3,9 +3,11 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -29,6 +31,13 @@ class OsmNotesExportType extends AbstractExportType {
 	@Override
 	public boolean isAllowedInFreeVersion() {
 		return true;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		OsmEditingPlugin plugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
+		return plugin != null ? plugin.getDBBug().getOsmBugsPoints() : Collections.emptyList();
 	}
 
 	@NonNull

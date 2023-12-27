@@ -13,7 +13,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import java.util.Collections;
 import java.util.List;
 
-class VoiceExportType extends AbstractExportType {
+class VoiceExportType extends LocalResourcesExportType {
 
 	@Override
 	public int getTitleId() {

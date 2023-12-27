@@ -3,13 +3,17 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+import net.osmand.plus.track.helpers.GpxDataItem;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +27,20 @@ class TracksExportType extends AbstractExportType {
 	@Override
 	public int getIconId() {
 		return R.drawable.ic_action_polygom_dark;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		List<GpxDataItem> gpxItems = app.getGpxDbHelper().getItems();
+		List<File> files = new ArrayList<>();
+		for (GpxDataItem gpxItem : gpxItems) {
+			File file = gpxItem.getFile();
+			if (file.exists() && !file.isDirectory()) {
+				files.add(file);
+			}
+		}
+		return files;
 	}
 
 	@NonNull

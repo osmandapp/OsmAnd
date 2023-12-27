@@ -3,15 +3,23 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
+import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 class MapSourcesExportType extends AbstractExportType {
 
@@ -23,6 +31,26 @@ class MapSourcesExportType extends AbstractExportType {
 	@Override
 	public int getIconId() {
 		return R.drawable.ic_action_layers;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		List<ITileSource> iTileSources = new ArrayList<>();
+		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
+		for (String name : tileSourceNames) {
+			File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
+			ITileSource template;
+			if (file.getName().endsWith(SQLiteTileSource.EXT)) {
+				template = new SQLiteTileSource(app, file, TileSourceManager.getKnownSourceTemplates());
+			} else {
+				template = TileSourceManager.createTileSourceTemplate(file);
+			}
+			if (template.getUrlTemplate() != null) {
+				iTileSources.add(template);
+			}
+		}
+		return iTileSources;
 	}
 
 	@NonNull

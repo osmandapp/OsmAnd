@@ -3,13 +3,17 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +27,21 @@ class ProfileExportType extends AbstractExportType {
 	@Override
 	public int getIconId() {
 		return R.drawable.ic_action_manage_profiles;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		List<ApplicationModeBean> appModeBeans = new ArrayList<>();
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			appModeBeans.add(appMode.toModeBean());
+		}
+		return appModeBeans;
+	}
+
+	@Override
+	public boolean isAllowedInFreeVersion() {
+		return true;
 	}
 
 	@NonNull
@@ -53,10 +72,5 @@ class ProfileExportType extends AbstractExportType {
 	@Override
 	public Class<? extends OsmandPlugin> relatedPluginClass() {
 		return null;
-	}
-
-	@Override
-	public boolean isAllowedInFreeVersion() {
-		return true;
 	}
 }

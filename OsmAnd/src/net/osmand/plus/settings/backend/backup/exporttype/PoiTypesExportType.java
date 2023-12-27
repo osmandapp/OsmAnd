@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -23,6 +24,13 @@ class PoiTypesExportType extends AbstractExportType {
 	@Override
 	public int getIconId() {
 		return R.drawable.ic_action_info_dark;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		boolean includeDeleted = false;
+		return app.getPoiFilters().getUserDefinedPoiFilters(includeDeleted);
 	}
 
 	@NonNull

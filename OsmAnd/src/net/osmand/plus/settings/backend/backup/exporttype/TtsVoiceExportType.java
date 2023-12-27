@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -13,7 +14,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtyp
 import java.util.Collections;
 import java.util.List;
 
-class TtsVoiceExportType extends AbstractExportType {
+class TtsVoiceExportType extends LocalResourcesExportType {
 
 	@Override
 	public int getTitleId() {

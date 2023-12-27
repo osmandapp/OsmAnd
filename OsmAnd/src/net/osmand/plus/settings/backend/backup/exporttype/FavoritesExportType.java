@@ -3,6 +3,7 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -23,6 +24,17 @@ class FavoritesExportType extends AbstractExportType {
 	@Override
 	public int getIconId() {
 		return R.drawable.ic_action_favorite;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		return app.getFavoritesHelper().getFavoriteGroups();
+	}
+
+	@Override
+	public boolean isAllowedInFreeVersion() {
+		return true;
 	}
 
 	@NonNull
@@ -53,10 +65,5 @@ class FavoritesExportType extends AbstractExportType {
 	@Override
 	public Class<? extends OsmandPlugin> relatedPluginClass() {
 		return null;
-	}
-
-	@Override
-	public boolean isAllowedInFreeVersion() {
-		return true;
 	}
 }

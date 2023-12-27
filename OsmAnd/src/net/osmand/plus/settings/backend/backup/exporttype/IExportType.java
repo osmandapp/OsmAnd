@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -26,6 +27,9 @@ interface IExportType {
 	boolean isAllowedInFreeVersion();
 
 	boolean isRelatedToCategory(@NonNull ExportCategory exportCategory);
+
+	@NonNull
+	List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup);
 
 	@NonNull
 	ExportCategory relatedExportCategory();

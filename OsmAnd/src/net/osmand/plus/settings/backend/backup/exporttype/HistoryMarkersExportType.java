@@ -3,8 +3,12 @@ package net.osmand.plus.settings.backend.backup.exporttype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.mapmarkers.ItineraryType;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -23,6 +27,20 @@ class HistoryMarkersExportType extends AbstractExportType {
 	@Override
 	public int getIconId() {
 		return R.drawable.ic_action_flag;
+	}
+
+	@NonNull
+	@Override
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
+		if (!markersHistory.isEmpty()) {
+			String name = app.getString(R.string.shared_string_history);
+			String groupId = net.osmand.plus.settings.backend.ExportType.HISTORY_MARKERS.name();
+			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
+			markersGroup.setMarkers(markersHistory);
+			return Collections.singletonList(markersGroup);
+		}
+		return Collections.emptyList();
 	}
 
 	@NonNull
