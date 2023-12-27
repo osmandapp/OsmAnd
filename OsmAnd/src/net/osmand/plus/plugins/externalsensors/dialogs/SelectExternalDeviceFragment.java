@@ -198,7 +198,6 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	}
 
 	private void updatePairedSensorsList() {
-		List<AbstractDevice<?>> devices = plugin.getPairedDevices();
 		List<AbstractDevice<?>> filteredDevices = plugin.getPairedDevicesByWidgetType(widgetDataFieldType);
 		if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
 			currentState = States.CONTENT;
