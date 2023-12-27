@@ -92,11 +92,13 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
-		if (flattenedTrackItems == null) {
-			flattenedTrackItems = getTrackItems();
+		if (this.flattenedTrackItems == null) {
+			List<TrackItem> flattenedTrackItems = new ArrayList<>();
+			flattenedTrackItems.addAll(getTrackItems());
 			for (TrackFolder folder : getSubFolders()) {
 				flattenedTrackItems.addAll(folder.getFlattenedTrackItems());
 			}
+			this.flattenedTrackItems = flattenedTrackItems;
 		}
 		return flattenedTrackItems;
 	}
