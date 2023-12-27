@@ -19,7 +19,7 @@ abstract class LocalResourcesExportType extends AbstractExportType {
 		LocalItemType relatedLocalItemType = relatedLocalItemType();
 		if (relatedLocalItemType != null) {
 			List<LocalItem> localItems = collectLocalItems(app, relatedLocalItemType);
-			return collectFilesFromLocalItems(localItems);
+			return collectFilesFromLocalItems(localItems, relatedLocalItemType);
 		}
 		return Collections.emptyList();
 	}
@@ -34,11 +34,12 @@ abstract class LocalResourcesExportType extends AbstractExportType {
 	}
 
 	@NonNull
-	private List<File> collectFilesFromLocalItems(@NonNull List<LocalItem> localItems) {
+	private List<File> collectFilesFromLocalItems(@NonNull List<LocalItem> localItems,
+	                                              @NonNull LocalItemType localItemType) {
 		List<File> result = new ArrayList<>();
 		for (LocalItem localItem : localItems) {
 			File file = new File(localItem.getPath());
-			if (file.exists() && !shouldSkipLocalItem(localItem)) {
+			if (file.exists() && localItemType == localItem.getType() && !shouldSkipLocalItem(localItem)) {
 				result.add(file);
 			}
 		}

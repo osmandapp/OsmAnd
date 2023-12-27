@@ -325,7 +325,7 @@ public class ImportHelper {
 			ArrayList<String> exportTypeKeys = extras.getStringArrayList(EXPORT_TYPE_LIST_KEY);
 			List<ExportType> exportTypes = null;
 			if (exportTypeKeys != null) {
-				exportTypes = ExportType.valuesOfKeys(exportTypeKeys);
+				exportTypes = ExportType.valuesOf(exportTypeKeys);
 			}
 			handleOsmAndSettingsImport(intentUri, fileName, exportTypes, replace, silentImport, latestChanges, version);
 		} else {

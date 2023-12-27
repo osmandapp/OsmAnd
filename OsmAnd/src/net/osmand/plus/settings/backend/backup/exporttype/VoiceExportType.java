@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
-import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 import java.util.Collections;

@@ -2390,7 +2390,7 @@ public class OsmandAidlApi {
 	public boolean exportProfile(String appModeKey, List<String> acceptedExportTypeKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
-			List<ExportType> acceptedExportTypes = ExportType.valuesOfKeys(acceptedExportTypeKeys);
+			List<ExportType> acceptedExportTypes = ExportType.valuesOf(acceptedExportTypeKeys);
 			acceptedExportTypes.remove(ExportType.PROFILE);
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));

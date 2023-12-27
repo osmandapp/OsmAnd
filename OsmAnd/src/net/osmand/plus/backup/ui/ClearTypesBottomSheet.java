@@ -34,7 +34,7 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 			if (savedInstanceState.containsKey(DISABLED_TYPES_KEY)) {
 				List<String> names = savedInstanceState.getStringArrayList(DISABLED_TYPES_KEY);
 				if (names != null) {
-					types.addAll(ExportType.valuesOfKeys(names));
+					types.addAll(ExportType.valuesOf(names));
 				}
 			}
 			if (savedInstanceState.containsKey(CLEAR_TYPE_KEY)) {

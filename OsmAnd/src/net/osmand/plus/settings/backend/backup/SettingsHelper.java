@@ -5,39 +5,21 @@ import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.Fil
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.Collator;
 import net.osmand.IndexConstants;
-import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
-import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalIndexHelper;
-import net.osmand.plus.download.local.LocalItem;
-import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -63,23 +45,18 @@ import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public abstract class SettingsHelper {
 
@@ -150,11 +127,11 @@ public abstract class SettingsHelper {
 
 	public List<SettingsItem> getFilteredSettingsItems(List<ExportType> acceptedTypes,
 	                                                   boolean export, boolean addEmptyItems, boolean offlineBackup) {
-		Map<ExportType, List<?>> typesMap = new HashMap<>();
-		typesMap.putAll(getSettingsItems(acceptedTypes, addEmptyItems));
-		typesMap.putAll(getMyPlacesItems(acceptedTypes, addEmptyItems));
-		typesMap.putAll(getResourcesItems(acceptedTypes, addEmptyItems, offlineBackup));
-		return getFilteredSettingsItems(typesMap, acceptedTypes, Collections.emptyList(), export);
+		Map<ExportType, List<?>> categorizedExportData = new HashMap<>();
+		for (ExportCategory exportCategory : ExportCategory.values()) {
+			categorizedExportData.putAll(collectExportData(exportCategory, acceptedTypes, addEmptyItems, offlineBackup));
+		}
+		return getFilteredSettingsItems(categorizedExportData, acceptedTypes, Collections.emptyList(), export);
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(@NonNull Map<ExportType, List<?>> allSettingsMap,
@@ -171,315 +148,32 @@ public abstract class SettingsHelper {
 		return filteredSettingsItems;
 	}
 
-	public Map<ExportCategory, SettingsCategoryItems> getSettingsByCategory(boolean addEmptyItems, boolean offlineBackup) {
+	@NonNull
+	public Map<ExportCategory, SettingsCategoryItems> collectCategorizedExportData(boolean allowEmptyTypes, boolean offlineBackup) {
 		Map<ExportCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
-
-		Map<ExportType, List<?>> settingsItems = getSettingsItems(null, addEmptyItems);
-		Map<ExportType, List<?>> myPlacesItems = getMyPlacesItems(null, addEmptyItems);
-		Map<ExportType, List<?>> resourcesItems = getResourcesItems(null, addEmptyItems, offlineBackup);
-
-		if (!settingsItems.isEmpty() || addEmptyItems) {
-			dataList.put(ExportCategory.SETTINGS, new SettingsCategoryItems(settingsItems));
+		for (ExportCategory exportCategory : ExportCategory.values()) {
+			Map<ExportType, List<?>> exportData = collectExportData(exportCategory, null, allowEmptyTypes, offlineBackup);
+			if (!exportData.isEmpty() || allowEmptyTypes) {
+				dataList.put(exportCategory, new SettingsCategoryItems(exportData));
+			}
 		}
-		if (!myPlacesItems.isEmpty() || addEmptyItems) {
-			dataList.put(ExportCategory.MY_PLACES, new SettingsCategoryItems(myPlacesItems));
-		}
-		if (!resourcesItems.isEmpty() || addEmptyItems) {
-			dataList.put(ExportCategory.RESOURCES, new SettingsCategoryItems(resourcesItems));
-		}
-
 		return dataList;
 	}
 
-	private Map<ExportType, List<?>> getSettingsItems(@Nullable List<ExportType> acceptedTypes,
-	                                                  boolean addEmptyItems) {
-		Map<ExportType, List<?>> settingsItems = new LinkedHashMap<>();
-
-		if (acceptedTypes == null || acceptedTypes.contains(ExportType.PROFILE)) {
-			List<ApplicationModeBean> appModeBeans = new ArrayList<>();
-			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				appModeBeans.add(mode.toModeBean());
-			}
-			settingsItems.put(ExportType.PROFILE, appModeBeans);
-		}
-		List<GlobalSettingsItem> globalSettingsList = acceptedTypes == null || acceptedTypes.contains(ExportType.GLOBAL)
-				? Collections.singletonList(new GlobalSettingsItem(app.getSettings()))
-				: Collections.emptyList();
-		if (!globalSettingsList.isEmpty() || addEmptyItems) {
-			settingsItems.put(ExportType.GLOBAL, globalSettingsList);
-		}
-		QuickActionRegistry registry = app.getQuickActionRegistry();
-		List<QuickAction> actionsList = acceptedTypes == null || acceptedTypes.contains(ExportType.QUICK_ACTIONS)
-				? registry.getQuickActions()
-				: Collections.emptyList();
-		if (!actionsList.isEmpty() || addEmptyItems) {
-			settingsItems.put(ExportType.QUICK_ACTIONS, actionsList);
-		}
-		List<PoiUIFilter> poiList = acceptedTypes == null || acceptedTypes.contains(ExportType.POI_TYPES)
-				? app.getPoiFilters().getUserDefinedPoiFilters(false)
-				: Collections.emptyList();
-		if (!poiList.isEmpty() || addEmptyItems) {
-			settingsItems.put(ExportType.POI_TYPES, poiList);
-		}
-		Map<LatLon, AvoidRoadInfo> impassableRoads = acceptedTypes == null || acceptedTypes.contains(ExportType.AVOID_ROADS)
-				? app.getAvoidSpecificRoads().getImpassableRoads()
-				: Collections.emptyMap();
-		if (!impassableRoads.isEmpty() || addEmptyItems) {
-			settingsItems.put(ExportType.AVOID_ROADS, new ArrayList<>(impassableRoads.values()));
-		}
-		return settingsItems;
-	}
-
-	private Map<ExportType, List<?>> getMyPlacesItems(@Nullable List<ExportType> acceptedTypes,
-	                                                  boolean addEmptyItems) {
-		Map<ExportType, List<?>> myPlacesItems = new LinkedHashMap<>();
-
-		List<FavoriteGroup> favoriteGroups = acceptedTypes == null || acceptedTypes.contains(ExportType.FAVORITES)
-				? app.getFavoritesHelper().getFavoriteGroups()
-				: Collections.emptyList();
-		if (!favoriteGroups.isEmpty() || addEmptyItems) {
-			myPlacesItems.put(ExportType.FAVORITES, favoriteGroups);
-		}
-		List<GpxDataItem> gpxItems = acceptedTypes == null || acceptedTypes.contains(ExportType.TRACKS)
-				? app.getGpxDbHelper().getItems()
-				: Collections.emptyList();
-		if (!gpxItems.isEmpty() || addEmptyItems) {
-			List<File> files = new ArrayList<>();
-			for (GpxDataItem gpxItem : gpxItems) {
-				File file = gpxItem.getFile();
-				if (file.exists() && !file.isDirectory()) {
-					files.add(file);
-				}
-			}
-			if (!files.isEmpty() || addEmptyItems) {
-				myPlacesItems.put(ExportType.TRACKS, files);
-			}
-		}
-		OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null) {
-			List<OsmNotesPoint> notesPointList = acceptedTypes == null || acceptedTypes.contains(ExportType.OSM_NOTES)
-					? osmEditingPlugin.getDBBug().getOsmBugsPoints()
-					: Collections.emptyList();
-			if (!notesPointList.isEmpty() || addEmptyItems) {
-				myPlacesItems.put(ExportType.OSM_NOTES, notesPointList);
-			}
-			List<OpenstreetmapPoint> editsPointList = acceptedTypes == null || acceptedTypes.contains(ExportType.OSM_EDITS)
-					? osmEditingPlugin.getDBPOI().getOpenstreetmapPoints()
-					: Collections.emptyList();
-			if (!editsPointList.isEmpty() || addEmptyItems) {
-				myPlacesItems.put(ExportType.OSM_EDITS, editsPointList);
-			}
-		}
-		AudioVideoNotesPlugin avNotesPlugin = PluginsHelper.getActivePlugin(AudioVideoNotesPlugin.class);
-		if (avNotesPlugin != null) {
-			List<File> files = new ArrayList<>();
-			if (acceptedTypes == null || acceptedTypes.contains(ExportType.MULTIMEDIA_NOTES)) {
-				for (Recording rec : avNotesPlugin.getAllRecordings()) {
-					File file = rec.getFile();
-					if (file != null && file.exists()) {
-						files.add(file);
-					}
-				}
-			}
-			if (!files.isEmpty() || addEmptyItems) {
-				myPlacesItems.put(ExportType.MULTIMEDIA_NOTES, files);
-			}
-		}
-		List<MapMarker> mapMarkers = acceptedTypes == null || acceptedTypes.contains(ExportType.ACTIVE_MARKERS)
-				? app.getMapMarkersHelper().getMapMarkers()
-				: Collections.emptyList();
-		if (!mapMarkers.isEmpty() || addEmptyItems) {
-			if (mapMarkers.isEmpty()) {
-				myPlacesItems.put(ExportType.ACTIVE_MARKERS, Collections.emptyList());
-			} else {
-				String name = app.getString(R.string.map_markers);
-				String groupId = ExportType.ACTIVE_MARKERS.name();
-				MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
-				markersGroup.setMarkers(mapMarkers);
-				myPlacesItems.put(ExportType.ACTIVE_MARKERS, Collections.singletonList(markersGroup));
-			}
-		}
-		List<MapMarker> markersHistory = acceptedTypes == null || acceptedTypes.contains(ExportType.HISTORY_MARKERS)
-				? app.getMapMarkersHelper().getMapMarkersHistory()
-				: Collections.emptyList();
-		if (!markersHistory.isEmpty() || addEmptyItems) {
-			if (markersHistory.isEmpty()) {
-				myPlacesItems.put(ExportType.HISTORY_MARKERS, Collections.emptyList());
-			} else {
-				String name = app.getString(R.string.shared_string_history);
-				String groupId = ExportType.HISTORY_MARKERS.name();
-				MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
-				markersGroup.setMarkers(markersHistory);
-				myPlacesItems.put(ExportType.HISTORY_MARKERS, Collections.singletonList(markersGroup));
-			}
-		}
-		List<HistoryEntry> searchHistoryEntries = acceptedTypes == null || acceptedTypes.contains(ExportType.SEARCH_HISTORY)
-				? SearchHistoryHelper.getInstance(app).getHistoryEntries(HistorySource.SEARCH, false)
-				: Collections.emptyList();
-		if (!searchHistoryEntries.isEmpty() || addEmptyItems) {
-			myPlacesItems.put(ExportType.SEARCH_HISTORY, searchHistoryEntries);
-		}
-		List<HistoryEntry> navigationHistoryEntries = acceptedTypes == null || acceptedTypes.contains(ExportType.NAVIGATION_HISTORY)
-				? SearchHistoryHelper.getInstance(app).getHistoryEntries(HistorySource.NAVIGATION, false)
-				: Collections.emptyList();
-		if (!navigationHistoryEntries.isEmpty() || addEmptyItems) {
-			myPlacesItems.put(ExportType.NAVIGATION_HISTORY, navigationHistoryEntries);
-		}
-		List<MapMarkersGroup> markersGroups = acceptedTypes == null || acceptedTypes.contains(ExportType.ITINERARY_GROUPS)
-				? app.getMapMarkersHelper().getVisibleMapMarkersGroups()
-				: Collections.emptyList();
-		if (!markersGroups.isEmpty() || addEmptyItems) {
-			myPlacesItems.put(ExportType.ITINERARY_GROUPS, markersGroups);
-		}
-		return myPlacesItems;
-	}
-
-	private Map<ExportType, List<?>> getResourcesItems(@Nullable List<ExportType> acceptedTypes,
-	                                                   boolean addEmptyItems, boolean offlineBackup) {
-		Map<ExportType, List<?>> resourcesItems = new LinkedHashMap<>();
-
-		Map<String, File> externalRenderers = acceptedTypes == null || acceptedTypes.contains(ExportType.CUSTOM_RENDER_STYLE)
-				? app.getRendererRegistry().getExternalRenderers()
-				: Collections.emptyMap();
-		if (!externalRenderers.isEmpty() || addEmptyItems) {
-			resourcesItems.put(ExportType.CUSTOM_RENDER_STYLE, new ArrayList<>(externalRenderers.values()));
-		}
-		List<File> routingProfiles = new ArrayList<>();
-		if (acceptedTypes == null || acceptedTypes.contains(ExportType.CUSTOM_ROUTING)) {
-			File routingProfilesFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-			if (routingProfilesFolder.exists() && routingProfilesFolder.isDirectory()) {
-				File[] fl = routingProfilesFolder.listFiles();
-				if (fl != null && fl.length > 0) {
-					routingProfiles.addAll(Arrays.asList(fl));
-				}
-			}
-		}
-		if (!Algorithms.isEmpty(routingProfiles) || addEmptyItems) {
-			resourcesItems.put(ExportType.CUSTOM_ROUTING, routingProfiles);
-		}
-		List<OnlineRoutingEngine> onlineRoutingEngines = acceptedTypes == null || acceptedTypes.contains(ExportType.ONLINE_ROUTING_ENGINES)
-				? app.getOnlineRoutingHelper().getOnlyCustomEngines()
-				: Collections.emptyList();
-		if (!Algorithms.isEmpty(onlineRoutingEngines) || addEmptyItems) {
-			resourcesItems.put(ExportType.ONLINE_ROUTING_ENGINES, onlineRoutingEngines);
-		}
-		List<ITileSource> iTileSources = new ArrayList<>();
-		if (acceptedTypes == null || acceptedTypes.contains(ExportType.MAP_SOURCES)) {
-			Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
-			for (String name : tileSourceNames) {
-				File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
-				ITileSource template;
-				if (file.getName().endsWith(SQLiteTileSource.EXT)) {
-					template = new SQLiteTileSource(app, file, TileSourceManager.getKnownSourceTemplates());
-				} else {
-					template = TileSourceManager.createTileSourceTemplate(file);
-				}
-				if (template.getUrlTemplate() != null) {
-					iTileSources.add(template);
-				}
-			}
-		}
-		if (!iTileSources.isEmpty() || addEmptyItems) {
-			resourcesItems.put(ExportType.MAP_SOURCES, iTileSources);
-		}
-
-		collectResourcesForLocalTypes(resourcesItems, acceptedTypes, addEmptyItems, Arrays.asList(
-				LocalItemType.MAP_DATA,
-				LocalItemType.WIKI_AND_TRAVEL_MAPS,
-				LocalItemType.DEPTH_DATA,
-				LocalItemType.ROAD_DATA,
-				LocalItemType.TERRAIN_DATA,
-				LocalItemType.TTS_VOICE_DATA,
-				LocalItemType.VOICE_DATA
-		));
-		if (PluginsHelper.isEnabled(OsmandDevelopmentPlugin.class) && offlineBackup) {
-			List<File> files = app.getFavoritesHelper().getFileHelper().getBackupFiles();
-			if (!files.isEmpty() || addEmptyItems) {
-				resourcesItems.put(ExportType.FAVORITES_BACKUP, files);
-			}
-		}
-		return resourcesItems;
-	}
-
-	private void collectResourcesForLocalTypes(@NonNull Map<ExportType, List<?>> resources,
-	                                           @Nullable List<ExportType> acceptedTypes,
-	                                           boolean addEmptyItems,
-	                                           @NonNull List<LocalItemType> localTypes) {
-		List<LocalItem> filteredLocalItems = getFilteredLocalItems(localTypes, acceptedTypes);
-		for (LocalItemType localType : localTypes) {
-			List<File> files = getFilesByType(filteredLocalItems, localType);
-			if (!files.isEmpty() || addEmptyItems) {
-				if (!Algorithms.equalsToAny(localType, LocalItemType.TTS_VOICE_DATA, LocalItemType.VOICE_DATA)) {
-					sortLocalFiles(files);
-				}
-				resources.put(ExportType.findBy(localType), files);
-			}
-		}
-	}
-
 	@NonNull
-	private List<LocalItem> getFilteredLocalItems(@NonNull List<LocalItemType> localTypes,
-	                                              @Nullable List<ExportType> acceptedTypes) {
-		List<LocalItemType> filteredLocalTypes = getFilteredLocalTypes(localTypes, acceptedTypes);
-		if (Algorithms.isEmpty(filteredLocalTypes)) {
-			return Collections.emptyList();
-		}
-		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
-		LocalItemType[] localItemTypes = localTypes.toArray(new LocalItemType[0]);
-		List<LocalItem> localIndexes = indexHelper.getLocalIndexItems(true, false, null, localItemTypes);
-		if (Algorithms.containsAny(localTypes, LocalItemType.MAP_DATA, LocalItemType.WIKI_AND_TRAVEL_MAPS)) {
-			filterDefaultLocalItems(localIndexes);
-		}
-		return localIndexes;
-	}
-
-	@NonNull
-	private List<LocalItemType> getFilteredLocalTypes(@NonNull List<LocalItemType> localTypes,
-	                                                  @Nullable List<ExportType> acceptedTypes) {
-		List<LocalItemType> result = new ArrayList<>(localTypes);
-		if (acceptedTypes != null) {
-			Iterator<LocalItemType> iterator = result.iterator();
-			while (iterator.hasNext()) {
-				if (!acceptedTypes.contains(ExportType.findBy(iterator.next()))) {
-					iterator.remove();
+	private Map<ExportType, List<?>> collectExportData(@NonNull ExportCategory exportCategory,
+	                                                   @Nullable List<ExportType> acceptedTypes,
+	                                                   boolean allowEmptyTypes, boolean offlineBackup) {
+		Map<ExportType, List<?>> exportDataMap = new LinkedHashMap<>();
+		for (ExportType exportType : ExportType.enabledValuesOf(exportCategory)) {
+			if (acceptedTypes == null || acceptedTypes.contains(exportType)) {
+				List<?> exportData = exportType.fetchExportData(app, offlineBackup);
+				if (!exportData.isEmpty() || allowEmptyTypes) {
+					exportDataMap.put(exportType, new ArrayList<>(exportData));
 				}
 			}
 		}
-		return result;
-	}
-
-	private void filterDefaultLocalItems(@NonNull List<LocalItem> localItems) {
-		String baseMini = WorldRegion.WORLD_BASEMAP_MINI + IndexConstants.BINARY_MAP_INDEX_EXT;
-		String defaultWikivoyage = "Default_wikivoyage" + IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-
-		Iterator<LocalItem> iterator = localItems.iterator();
-		while (iterator.hasNext()) {
-			LocalItem localItem = iterator.next();
-			boolean isBaseMini = localItem.getType() == LocalItemType.MAP_DATA && baseMini.equalsIgnoreCase(localItem.getFileName());
-			boolean isDefaultWikivoyage = localItem.getType() == LocalItemType.WIKI_AND_TRAVEL_MAPS && defaultWikivoyage.equalsIgnoreCase(localItem.getFileName());
-			if (isBaseMini || isDefaultWikivoyage) {
-				iterator.remove();
-			}
-		}
-	}
-
-	@NonNull
-	private List<File> getFilesByType(@NonNull List<LocalItem> localItems, LocalItemType... types) {
-		List<File> files = new ArrayList<>();
-		for (LocalItem info : localItems) {
-			File file = new File(info.getPath());
-			boolean filtered = false;
-			for (LocalItemType type : types) {
-				if (info.getType() == type) {
-					filtered = true;
-					break;
-				}
-			}
-			if (file.exists() && filtered) {
-				files.add(file);
-			}
-		}
-		return files;
+		return exportDataMap;
 	}
 
 	public List<SettingsItem> prepareSettingsItems(List<?> data, List<SettingsItem> settingsItems, boolean export) {
@@ -991,19 +685,5 @@ public abstract class SettingsHelper {
 			}
 		}
 		return settingsToOperate;
-	}
-
-	private void sortLocalFiles(List<File> files) {
-		Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(files, new Comparator<File>() {
-			@Override
-			public int compare(File lhs, File rhs) {
-				return collator.compare(getNameToDisplay(lhs), getNameToDisplay(rhs));
-			}
-
-			private String getNameToDisplay(File item) {
-				return FileNameTranslationHelper.getFileNameWithRegion(app, item.getName());
-			}
-		});
 	}
 }

@@ -75,6 +75,6 @@ class FavoritesBackupExportType extends AbstractExportType {
 	@Nullable
 	@Override
 	public Class<? extends OsmandPlugin> relatedPluginClass() {
-		return null;
+		return OsmandDevelopmentPlugin.class;
 	}
 }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -34,7 +35,6 @@ public enum ExportType {
 	POI_TYPES(new PoiTypesExportType()),
 	AVOID_ROADS(new AvoidRoadsExportType()),
 	FAVORITES(new FavoritesExportType()),
-	FAVORITES_BACKUP(new FavoritesBackupExportType()),
 	TRACKS(new TracksExportType()),
 	OSM_NOTES(new OsmNotesExportType()),
 	OSM_EDITS(new OsmEditsExportType()),
@@ -43,18 +43,19 @@ public enum ExportType {
 	HISTORY_MARKERS(new HistoryMarkersExportType()),
 	SEARCH_HISTORY(new SearchHistoryExportType()),
 	NAVIGATION_HISTORY(new NavigationHistoryExportType()),
+	ITINERARY_GROUPS(new ItineraryGroupsExportType()),
 	CUSTOM_RENDER_STYLE(new CustomRenderStyleExportType()),
 	CUSTOM_ROUTING(new CustomRoutingExportType()),
+	ONLINE_ROUTING_ENGINES(new OnlineRoutingEnginesExportType()),
 	MAP_SOURCES(new MapSourcesExportType()),
 	STANDARD_MAPS(new StandardMapsExportType()),
-	ROAD_MAPS(new RoadMapsExportType()),
 	WIKI_AND_TRAVEL(new WikiAndTravelExportType()),
-	TERRAIN_DATA(new TerrainDataExportType()),
 	DEPTH_DATA(new DepthDataExportType()),
+	ROAD_MAPS(new RoadMapsExportType()),
+	TERRAIN_DATA(new TerrainDataExportType()),
 	TTS_VOICE(new TtsVoiceExportType()),
 	VOICE(new VoiceExportType()),
-	ONLINE_ROUTING_ENGINES(new OnlineRoutingEnginesExportType()),
-	ITINERARY_GROUPS(new ItineraryGroupsExportType());
+	FAVORITES_BACKUP(new FavoritesBackupExportType());
 
 	@NonNull
 	private final IExportType instance;
@@ -83,6 +84,16 @@ public enum ExportType {
 			return OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
 		}
 		return name();
+	}
+
+	@NonNull
+	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
+		return instance.fetchExportData(app, offlineBackup);
+	}
+
+	@NonNull
+	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
+		return fetchImportData(settingsItem, importCompleted);
 	}
 
 	public boolean isMap() {
@@ -158,7 +169,13 @@ public enum ExportType {
 	}
 
 	@NonNull
-	public static List<ExportType> valuesOfKeys(@NonNull List<String> typeKeys) {
+	public static List<ExportType> enabledValuesOf(@NonNull ExportCategory exportCategory) {
+		return filterElementsWithCondition(enabledValues(),
+				exportType -> exportType.instance.isRelatedToCategory(exportCategory));
+	}
+
+	@NonNull
+	public static List<ExportType> valuesOf(@NonNull List<String> typeKeys) {
 		List<ExportType> result = new ArrayList<>();
 		for (String key : typeKeys) {
 			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {

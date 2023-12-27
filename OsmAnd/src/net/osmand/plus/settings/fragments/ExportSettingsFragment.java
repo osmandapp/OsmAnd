@@ -81,7 +81,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(true, true);
+		dataList = app.getFileSettingsHelper().collectCategorizedExportData(true, true);
 
 		if (savedInstanceState == null) {
 			if (!globalExport) {
