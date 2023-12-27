@@ -78,7 +78,7 @@ class ExternalDeviceDetailsFragment : ExternalDevicesBaseFragment(), DeviceListe
         super.onCreate(savedInstanceState)
         val deviceId = arguments?.getString(DEVICE_ID_KEY)
             ?: throw IllegalArgumentException("DEVICE_ID in not defined")
-        device = plugin.getDevice(deviceId)
+        device = plugin.getAnyDevice(deviceId)
             ?: throw IllegalArgumentException("Device in not found")
     }
 
