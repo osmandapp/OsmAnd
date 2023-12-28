@@ -221,24 +221,50 @@ public class AndroidUtils {
 	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
 		Paint bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		int layers = layerDrawable.getNumberOfLayers() - 1;
+		int maxVectorLayerWidth = 0;
+		int maxVectorLayerHeight = 0;
+		for (int i = 0; i <= layers; i++) {
+			Drawable drawable = layerDrawable.getDrawable(i);
+			if (drawable instanceof VectorDrawable) {
+				maxVectorLayerWidth = Math.max(maxVectorLayerWidth, drawable.getIntrinsicWidth());
+				maxVectorLayerHeight = Math.max(maxVectorLayerHeight, drawable.getIntrinsicHeight());
+			}
+		}
 		for (int i = 0; i <= layers; i++) {
 			Drawable drawable = layerDrawable.getDrawable(i);
 			if (drawable != null) {
-				int width = (int) (drawable.getIntrinsicWidth() * scale);
-				int height = (int) (drawable.getIntrinsicHeight() * scale);
 				if (drawable instanceof VectorDrawable) {
+					int width = (int) (drawable.getIntrinsicWidth() * scale);
+					int height = (int) (drawable.getIntrinsicHeight() * scale);
 					Rect boundsVector = new Rect(locationX - width / 2, locationY - height / 2,
 							locationX + width / 2, locationY + height / 2);
 					drawable.setBounds(boundsVector);
 					drawable.draw(canvas);
 				} else {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
-					Rect srcRect = new Rect(0, 0, srcBitmap.getWidth(), srcBitmap.getHeight());
+					float scaleX = (float) maxVectorLayerWidth / srcBitmap.getWidth();
+					float scaleY = (float) maxVectorLayerHeight / srcBitmap.getHeight();
+					if (maxVectorLayerWidth == 0) {
+						scaleX = 1;
+					}
+					if (scaleY == 0) {
+						scaleY = 1;
+					}
+					int width = (int) (srcBitmap.getWidth() * scaleX * scale);
+					int height = (int) (srcBitmap.getHeight() * scaleY * scale);
+					Bitmap scaledBitmap = AndroidUtils.scaleBitmap(srcBitmap,
+							width,
+							height,
+							true);
+					Rect srcRect = new Rect(0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight());
 					Rect dstRect = new Rect(locationX - width / 2,
 							locationY - height / 2,
 							locationX + width / 2,
 							locationY + height / 2);
-					canvas.drawBitmap(srcBitmap, srcRect, dstRect, bitmapPaint);
+					canvas.drawBitmap(scaledBitmap, srcRect, dstRect, bitmapPaint);
+					if (srcBitmap != scaledBitmap) {
+						scaledBitmap.recycle();
+					}
 				}
 			}
 		}
