@@ -88,7 +88,7 @@ public class EditDevicePropertyDialog extends BaseOsmAndDialogFragment {
 					}
 
 				}
-				AbstractDevice<?> device = plugin.getAnyDevice(deviceId);
+				AbstractDevice<?> device = plugin.getDevice(deviceId);
 				if (device != null) {
 					propertyOldValueValue = plugin.getFormattedDevicePropertyValue(device, property).replace(",", ".");
 					textInput.setText(propertyOldValueValue);

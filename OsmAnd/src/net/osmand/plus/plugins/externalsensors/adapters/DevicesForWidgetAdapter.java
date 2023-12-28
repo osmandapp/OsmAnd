@@ -48,7 +48,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 		boolean anyConnected = plugin.isAnyConnectedDeviceId(selectedDeviceId);
 		if (itemType == NONE_ITEM_TYPE) {
 			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId)
-					|| !anyConnected && plugin.getAnyDevice(selectedDeviceId) == null);
+					|| !anyConnected && plugin.getDevice(selectedDeviceId) == null);
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, null));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.shared_string_none);

@@ -93,7 +93,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	}
 
 	private void updateSourceDeviceUI() {
-		AbstractDevice<?> sourceDevice = plugin.getAnyDevice(sourceDeviceId);
+		AbstractDevice<?> sourceDevice = plugin.getDevice(sourceDeviceId);
 		if (sourceDevice == null) {
 			deviceIcon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_sensor, nightMode));
 			AbstractDevice<?> connectedDevice = null;

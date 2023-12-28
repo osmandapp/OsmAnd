@@ -194,7 +194,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Nullable
-	public AbstractDevice<?> getAnyDevice(@NonNull String deviceId) {
+	public AbstractDevice<?> getDevice(@NonNull String deviceId) {
 		return devicesHelper.getAnyDevice(deviceId);
 	}
 
@@ -405,7 +405,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	public void changeDeviceName(@NonNull String deviceId, @NonNull String newName) {
-		AbstractDevice<?> device = getAnyDevice(deviceId);
+		AbstractDevice<?> device = getDevice(deviceId);
 		if (device != null) {
 			devicesHelper.setDeviceProperty(device, DeviceChangeableProperty.NAME, newName);
 		}
