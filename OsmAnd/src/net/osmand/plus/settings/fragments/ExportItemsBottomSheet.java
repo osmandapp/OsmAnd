@@ -133,19 +133,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 					.setChecked(selectedItems.contains(object))
 					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !item[0].isChecked();
-							item[0].setChecked(checked);
-							if (checked) {
-								selectedItems.add(item[0].getTag());
-							} else {
-								selectedItems.remove(item[0].getTag());
-							}
-							updateTitleView();
-							setupBottomSheetItem(item[0], item[0].getTag());
+					.setOnClickListener(v -> {
+						boolean checked = !item[0].isChecked();
+						item[0].setChecked(checked);
+						if (checked) {
+							selectedItems.add(item[0].getTag());
+						} else {
+							selectedItems.remove(item[0].getTag());
 						}
+						updateTitleView();
+						setupBottomSheetItem(item[0], item[0].getTag());
 					})
 					.setTag(object);
 			item[0] = builder.create();
@@ -174,19 +171,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		selectedSize = view.findViewById(R.id.selected_size);
 		TextView textView = view.findViewById(R.id.title);
 		textView.setText(type.getTitleId());
-		view.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkBox.performClick();
-				boolean checked = checkBox.getState() == CHECKED;
-				if (checked) {
-					selectedItems.addAll(allItems);
-				} else {
-					selectedItems.clear();
-				}
-				updateTitleView();
-				updateItems();
+		view.findViewById(R.id.select_all_button).setOnClickListener(v -> {
+			checkBox.performClick();
+			boolean checked = checkBox.getState() == CHECKED;
+			if (checked) {
+				selectedItems.addAll(allItems);
+			} else {
+				selectedItems.clear();
 			}
+			updateTitleView();
+			updateItems();
 		});
 		setupDescription(view);
 		updateTitleView();
