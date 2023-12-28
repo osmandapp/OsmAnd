@@ -2245,7 +2245,7 @@
     <string name="av_camera_focus_descr">相机对焦模式：</string>
     <string name="av_camera_focus_hiperfocal">超焦距对焦</string>
     <string name="av_camera_focus_edof">扩展景深／全幅聚焦 （EDOF）</string>
-    <string name="av_camera_focus_infinity">将焦点设置在无穷远</string>
+    <string name="av_camera_focus_infinity">将焦点设置为无穷远</string>
     <string name="av_camera_focus_macro">微距（特写）对焦模式</string>
     <string name="av_camera_focus_continuous">相机将尝试连续对焦</string>
     <string name="av_camera_pic_size">相机图片大小</string>
@@ -5439,4 +5439,14 @@
     <string name="date_of_creation">创建日期</string>
     <string name="map_is_up_to_date">%1$s 地图已为最新版本。</string>
     <string name="delete_map_description">您确定要删除 %1$s 地图吗？</string>
+    <string name="change_button">更改按钮</string>
+    <string name="root_folder">根文件夹</string>
+    <string name="deletion_error">删除错误</string>
+    <string name="shared_string_button">按钮</string>
+    <string name="folder">文件夹</string>
+    <string name="key_event_action_toggle_drower">显示/隐藏侧边栏</string>
+    <string name="precise_distance_numbers">精确距离数字</string>
+    <string name="external_input_device_title">外部输入设备</string>
+    <string name="key_event_action_move_to_my_location">移动到我的位置</string>
+    <string name="download_to_device">下载到设备</string>
 </resources>
