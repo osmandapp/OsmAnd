@@ -54,8 +54,8 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 
 		if (Algorithms.isEmpty(deviceId)) {
 			deviceName = getString(R.string.shared_string_none);
-		} else if (plugin.getAnyDevice(deviceId) != null) {
-			AbstractDevice<?> device = plugin.getAnyDevice(deviceId);
+		} else if (plugin.getDevice(deviceId) != null) {
+			AbstractDevice<?> device = plugin.getDevice(deviceId);
 			if (device != null) {
 				deviceName = device.getName();
 				deviceFound = true;

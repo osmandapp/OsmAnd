@@ -47,7 +47,7 @@ class ForgetDeviceDialog : BottomSheetDialogFragment() {
         nightMode = app.daynightHelper.isNightModeForMapControls
         val plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin::class.java)
         val deviceId = arguments?.getString(DEVICE_ID_KEY)
-        device = plugin.getAnyDevice(deviceId!!)!!
+        device = plugin.getDevice(deviceId!!)!!
     }
 
     override fun onCreateView(

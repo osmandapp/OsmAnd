@@ -306,7 +306,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 				if (!Algorithms.isEmpty(deviceId)) {
 					boolean sensorLinked = false;
 					if (!plugin.isAnyConnectedDeviceId(deviceId)) {
-						if (plugin.getAnyDevice(deviceId) != null) {
+						if (plugin.getDevice(deviceId) != null) {
 							sensorLinked = true;
 						}
 					} else if (plugin.getAnyDevice(dataType.getSensorType()) != null) {
