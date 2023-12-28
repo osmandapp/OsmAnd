@@ -134,7 +134,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
 		boolean showProIcon = !InAppPurchaseUtils.isBackupAvailable(app) && !type.isAllowedInFreeVersion();
-		setupChildIcon(view, type.getIconRes(), selected && !showProIcon);
+		setupChildIcon(view, type.getIconId(), selected && !showProIcon);
 		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 		view.setOnClickListener(view1 -> {
 			compoundButton.performClick();

@@ -148,7 +148,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		subTextTv.setText(getSelectedTypeDescr(type, items));
 
 		ImageView icon = child.findViewById(R.id.explicit_indicator);
-		setupIcon(icon, type.getIconRes(), !Algorithms.isEmpty(selectedItems));
+		setupIcon(icon, type.getIconId(), !Algorithms.isEmpty(selectedItems));
 
 		ThreeStateCheckbox checkBox = child.findViewById(R.id.check_box);
 		if (selectedItems == null) {

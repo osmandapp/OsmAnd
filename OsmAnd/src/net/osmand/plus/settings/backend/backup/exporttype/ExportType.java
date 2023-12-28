@@ -70,7 +70,7 @@ public enum ExportType {
 	}
 
 	@DrawableRes
-	public int getIconRes() {
+	public int getIconId() {
 		return instance.getIconId();
 	}
 
