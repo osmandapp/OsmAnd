@@ -5592,4 +5592,5 @@
     <string name="complex_widget_alert">%1$s modul kan kun placeres på sin egen række.</string>
     <string name="precise_distance_numbers">Præcise afstandstal</string>
     <string name="any_connected">Alle forbundne</string>
+    <string name="any_connected_with_device">Alle forbundne: %s</string>
 </resources>
