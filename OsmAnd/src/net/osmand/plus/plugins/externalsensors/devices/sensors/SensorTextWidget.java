@@ -1,15 +1,10 @@
 package net.osmand.plus.plugins.externalsensors.devices.sensors;
 
-import static net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY;
-
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.externalsensors.DeviceStateListener;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
@@ -18,13 +13,12 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class SensorTextWidget extends SimpleWidget implements DeviceStateListener {
+public class SensorTextWidget extends SimpleWidget {
 
 	private final ExternalSensorsPlugin plugin;
 	private final SensorWidgetDataFieldType fieldType;
@@ -32,7 +26,6 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 
 	private AbstractSensor sensor;
 	private String externalDeviceId;
-	private AbstractDevice<?> currentDevice;
 
 	private Number cachedNumber;
 
@@ -42,16 +35,17 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 	                        @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, fieldType.getWidgetType(), customId, widgetsPanel);
 		this.fieldType = fieldType;
+		plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		deviceIdPref = registerSensorDevicePref(customId);
 		externalDeviceId = getDeviceId(appMode);
-		plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
 		applyDeviceId();
 		updateInfo(null);
 		setIcons(fieldType.getWidgetType());
 	}
 
 	private void applyDeviceId() {
-		if (externalDeviceId == null || ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(externalDeviceId)) {
+		AbstractDevice<?> currentDevice = null;
+		if (externalDeviceId == null || plugin.isAnyConnectedDeviceId(externalDeviceId)) {
 			List<AbstractDevice<?>> deviceList = plugin.getPairedDevicesByWidgetType(fieldType);
 			if (!Algorithms.isEmpty(deviceList)) {
 				currentDevice = deviceList.get(0);
@@ -91,18 +85,18 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 	}
 
 	@Nullable
-	public AbstractSensor getWidgetSensor() {
-		return sensor;
+	public AbstractDevice<?> getWidgetDevice() {
+		return sensor == null ? null : sensor.device;
 	}
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
+		AbstractDevice<?> currentDevice = null;
 		if (sensor != null) {
+			currentDevice = this.sensor.getDevice();
+		}
+		if (sensor != null && currentDevice.isConnected() && !Algorithms.isEmpty(sensor.getLastSensorDataList())) {
 			List<SensorData> dataList = sensor.getLastSensorDataList();
-			if (!sensor.getDevice().isConnected() || Algorithms.isEmpty(dataList)) {
-				setText(NO_VALUE, null);
-				return;
-			}
 			SensorWidgetDataField field = null;
 			for (SensorData data : dataList) {
 				if (data != null) {
@@ -128,6 +122,19 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 		} else {
 			setText(NO_VALUE, null);
 		}
+		if (plugin.isAnyConnectedDeviceId(externalDeviceId) &&
+				(currentDevice == null || (!currentDevice.isConnected() && !currentDevice.isConnecting()))) {
+			AbstractDevice<?> device = plugin.getAnyDevice(getFieldType());
+			if (device != null) {
+				AbstractSensor newSensor = getSensor(device);
+				if (newSensor != null) {
+					if (currentDevice != null) {
+						currentDevice.removeListener(deviceListener);
+					}
+					setSensor(newSensor);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -135,7 +142,7 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 		return true;
 	}
 
-	private AbstractDevice.DeviceListener deviceListener = new AbstractDevice.DeviceListener() {
+	private final AbstractDevice.DeviceListener deviceListener = new AbstractDevice.DeviceListener() {
 		@Override
 		public void onDeviceConnect(@NonNull AbstractDevice<?> device, @NonNull DeviceConnectionResult result, @Nullable String error) {
 			app.runInUIThread(() -> updateInfo(null));
@@ -158,7 +165,7 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 	@NonNull
 	private CommonPreference<String> registerSensorDevicePref(@Nullable String customId) {
 		String prefId = Algorithms.isEmpty(customId) ? fieldType.name() : fieldType.name() + customId;
-		return settings.registerStringPreference(prefId, null)
+		return settings.registerStringPreference(prefId, plugin.getAnyConnectedDeviceId())
 				.makeProfile()
 				.cache();
 	}
@@ -186,40 +193,5 @@ public class SensorTextWidget extends SimpleWidget implements DeviceStateListene
 
 	public SensorWidgetDataFieldType getFieldType() {
 		return fieldType;
-	}
-
-	@Override
-	public void attachView(@NonNull ViewGroup container, @NonNull WidgetsPanel widgetsPanel, @NonNull List<MapWidget> followingWidgets) {
-		super.attachView(container, widgetsPanel, followingWidgets);
-		plugin.addDeviceStateListener(this);
-	}
-
-	@Override
-	public void detachView(@NonNull WidgetsPanel widgetsPanel) {
-		super.detachView(widgetsPanel);
-		plugin.removeDeviceStateListener(this);
-	}
-
-	@Override
-	public void onDeviceConnected(@NonNull String deviceId) {
-		if (ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(externalDeviceId) &&
-				(currentDevice == null || (!currentDevice.isConnected() && !currentDevice.isConnecting()))) {
-			AbstractDevice<?> device = plugin.getDevice(deviceId);
-			if (device != null) {
-				AbstractSensor sensor = getSensor(device);
-				if (sensor != null) {
-					if (currentDevice != null) {
-						currentDevice.removeListener(deviceListener);
-					}
-					currentDevice = device;
-					setSensor(sensor);
-				}
-			}
-		}
-	}
-
-	@Override
-	public void onDeviceDisconnected(@NonNull String deviceId) {
-
 	}
 }
