@@ -641,7 +641,7 @@
     <string name="voice_data_unavailable">Pachetul de mesaje vocale selectat nu este disponibil</string>
     <string name="sd_unmounted">Cardul de memorie nu este accesibil.
 \nNu veți putea să vedeți hărți sau să găsiți lucruri.</string>
-    <string name="sd_mounted_ro">Cartela de memorie numai pentru citire.
+    <string name="sd_mounted_ro">Cartela de memorie se poate doar citi.
 \nAcum este posibilă doar vizualizarea hărții preîncărcate, nu și descărcarea de noi zone.</string>
     <string name="unzipping_file">Se decomprimă fișierul…</string>
     <string name="route_tr">Virați la dreapta și continuați pe</string>
@@ -3685,7 +3685,7 @@
     <string name="no_inet_connection_desc_map">Necesar pentru a descărca hărți.</string>
     <string name="first_usage_wizard_desc">Lăsați OsmAnd să vă determine locația și să vă recomande hărți de descărcat pentru regiunea respectivă.</string>
     <string name="skip_map_downloading_desc">Nu aveți instalată nicio hartă offline. Puteți selecta o hartă din listă sau descărca hărți mai târziu prin \"Menu - %1$s\".</string>
-    <string name="skip_map_downloading">Săriți peste descărcarea hărților</string>
+    <string name="skip_map_downloading">Sări peste descărcarea hărților</string>
     <string name="osmand_plus_banner_desc">Descărcări nelimitate de hărți, actualizări și plugin Wikipedia.</string>
     <string name="osm_live_banner_desc">Obțineți descărcări nelimitate de hărți, adăugând actualizări săptămânale, zilnice sau chiar din oră în oră.</string>
     <string name="get_for">Obțineți pentru %1$s</string>
@@ -5567,4 +5567,6 @@
     <string name="add_new_button">Adaugă buton nou</string>
     <string name="topography_maps">Hărți topografice</string>
     <string name="precise_distance_numbers">Numere de distanță exacte</string>
+    <string name="any_connected_with_device">Oricare conectat: %s</string>
+    <string name="any_connected">Oricare conectat</string>
 </resources>
