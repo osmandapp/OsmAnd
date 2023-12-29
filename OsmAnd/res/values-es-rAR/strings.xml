@@ -5603,4 +5603,5 @@
     <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
     <string name="precise_distance_numbers">Números precisos de distancia</string>
     <string name="any_connected">Cualquiera conectado</string>
+    <string name="any_connected_with_device">Cualquiera conectado: %s</string>
 </resources>
