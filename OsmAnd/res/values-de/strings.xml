@@ -2062,7 +2062,7 @@
     <string name="routing_attr_allow_motorway_description">Erlaubt Autobahnen.</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
     <string name="lang_zh_hk">Chinesisch (Hong Kong)</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Wasser</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Wasserflächen ausblenden</string>
     <string name="rendering_attr_contourWidth_description">Breite der Höhenlinien</string>
     <string name="rendering_attr_contourWidth_name">Breite der Höhenlinien</string>
     <string name="rendering_attr_contourDensity_description">Dichte der Höhenlinien</string>
@@ -2070,7 +2070,7 @@
     <string name="rendering_value_high_name">Hoch</string>
     <string name="rendering_value_medium_w_name">Mittel</string>
     <string name="rendering_value_low_name">Niedrig</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Wasserflächen ausblenden</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Wasserflächen</string>
     <string name="quick_action_item_action">Aktion %d</string>
     <string name="quick_action_item_screen">Bildschirm %d</string>
     <string name="quick_action_add_marker">Kartenmarker hinzufügen</string>
@@ -4605,10 +4605,10 @@
     <string name="circle_settings">Kreiseinstellungen</string>
     <string name="map_widget_trip_recording_distance">Entfernung</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Militärische Bereiche ausblenden</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche ausblenden</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Militärische Bereiche</string>
     <string name="routing_attr_hazmat_category_name">Gefahrgutkategorie</string>
     <string name="average_speed_skip_stops">Zwischenstopps berücksichtigen</string>
-    <string name="map_widget_true_bearing">Rechtweisende Peilung</string>
+    <string name="map_widget_true_bearing">Tatsächliche Peilung</string>
     <string name="average_speed_time_interval_desc">Gib das Zeitintervall für die Durchschnittsberechnung der Geschwindigkeit an.</string>
     <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Reise an.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
@@ -4620,7 +4620,7 @@
     <string name="shared_string_mode">Modus</string>
     <string name="map_widget_time_to_destination">Zeit bis zum Ziel</string>
     <string name="map_widget_time_to_intermediate">Zeit bis zum Zwischenziel</string>
-    <string name="map_widget_distance_to_intermediate">Entfernung bis zum Zwischenstopp</string>
+    <string name="map_widget_distance_to_intermediate">Entfernung zum Zwischenziel</string>
     <string name="routing_attr_avoid_4wd_only_description">Straßen vermeiden, die nur für Allradfahrzeuge geeignet sind</string>
     <string name="radius_ruler_mode_desc">Durch Antippen des Widgets wechseln Sie in den Radiuslineal-Modus.</string>
     <string name="routing_attr_allow_private_for_truck_description">Zufahrt zu Privatgrundstücken für Lkw erlauben.</string>
@@ -4636,7 +4636,7 @@
     <string name="map_widget_trip_recording_downhill">Bergab</string>
     <string name="map_widget_trip_recording_uphill">Bergauf</string>
     <string name="explore_plans">Pläne erkunden</string>
-    <string name="widget_secondary_desc_part_of">Teil des %1$s-Plugins.</string>
+    <string name="widget_secondary_desc_part_of">Teil des Plugins %1$s.</string>
     <string name="av_notes_choose_action_widget_desc">Aktion auswählen.</string>
     <string name="kg">kg</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>
@@ -4788,7 +4788,7 @@
     <string name="map_widget_camera_tilt">Kameraneigung</string>
     <string name="developer_widgets">Entwickler-Widgets</string>
     <string name="map_widget_target_distance_desc">Zeigt die Entfernung zwischen Kamera und Zielort an.</string>
-    <string name="external_sensor_widgets">ANT+ Widgets</string>
+    <string name="external_sensor_widgets">ANT+-Widgets</string>
     <string name="map_widget_target_distance">Entfernung zwischen Kamera und Ziel</string>
     <string name="favorites_backup">Gesicherte Favoriten</string>
     <string name="map_widget_ant_bicycle_dist">Fahrradentfernung</string>
@@ -5451,23 +5451,27 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigieren nach Markierungen</string>
     <string name="smart_folder_saved">Intelligenter Ordner gespeichert</string>
     <string name="help_article_widgets_markers_name">Markierungs-Widgets</string>
-    <string name="release_4_6">• Möglichkeit zum Ändern der Tastenbelegung für externe Eingabegeräte hinzugefügt
+    <string name="release_4_6">• Android Auto: 3D-Modus hinzugefügt
 \n
-\n• Widget „Gleitzahl“ hinzugefügt
+\n• Tracks: Filter und intelligente Ordner eingeführt, Speicheroptimierung für größere Dateien
 \n
-\n• Filter und intelligente Ordner für Tracks hinzugefügt
+\n• Verbesserte obere und untere Widget-Leisten, um alle Widgets unterzubringen
 \n
-\n• Reihen für obere und untere Widget-Panels mit Unterstützung für alle Widgets hinzugefügt
+\n• Verbessertes lokales Ressourcenmanagement
 \n
-\n• Unterstützung für ANT+ Temperatur-Widget hinzugefügt
+\n• Anpassbare Tastenbelegung für externe Controller
 \n
-\n• Speicherverwaltung für große GPX-Tracks verbessert
+\n• Neue Widgets: „Gleitzahl“ und „Sonnenposition“
 \n
-\n• Verwaltung der lokalen Ressourcen in Downloads aktualisiert
+\n• OsmAnd Cloud: jetzt Zugriff auf gelöschte Dateien
 \n
-\n• Widget „Verfügbarer RAM“ hinzugefügt
+\n• Verbesserte Streckenfärbung im Hangneigungsmodus mit neuem symmetrischen Gradienten
 \n
-\n• Probleme mit der transparenten Statusleiste behoben
+\n• Probleme mit transparenter Statusleiste behoben
+\n
+\n• Unterstützung für ANT+-Widget „Temperatur“ hinzugefügt
+\n
+\n• Widget „Verfügbarer RAM“ eingeführt
 \n
 \n</string>
     <string name="help_article_map_tracks_on_map_name">Strecken und Routen</string>
@@ -5580,4 +5584,11 @@
     <string name="lang_zh_hant">Traditionelles Chinesisch</string>
     <string name="add_new_button">Eine neue Schaltfläche hinzufügen</string>
     <string name="use_v1_auto_zoom">Diskreter Autozoom (alte Version)</string>
+    <string name="shared_string_next_event">Nächste Veranstaltung</string>
+    <string name="map_widget_sun_position">Sonnenposition</string>
+    <string name="map_widget_sun_position_desc">Dieses Widget zeigt die Zeit bis zum Sonnenaufgang oder Sonnenuntergang an, abhängig von der aktuellen Uhrzeit.</string>
+    <string name="previous_row_has_complex_widget">Vorherige Zeile hat komplexes Widget</string>
+    <string name="complex_widget_alert">Das Widget %1$s kann nur in seiner eigenen Zeile platziert werden.</string>
+    <string name="precise_distance_numbers">Genaue Entfernungsangaben</string>
+    <string name="any_connected">Alle verbundenen</string>
 </resources>

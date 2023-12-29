@@ -1089,7 +1089,7 @@
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
     <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
-    <string name="rendering_attr_showAccess_name">Показати обмеження доступу та платний проїзд</string>
+    <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показувати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Веломаршрути</string>
@@ -5464,23 +5464,27 @@
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
     <string name="delete_smart_folder_dialog_message">Це видалить розумну теку \"%1$s\".</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
-    <string name="release_4_6">• Додано можливість зміни прив’язки клавіш для зовнішніх пристроїв введення
+    <string name="release_4_6">• Android Auto: Додано 3D-режим
 \n
-\n • Додано віджет \"Коефіцієнт ковзання\"
+\n • Треки: Впроваджено фільтри та розумні теки, оптимізовано пам\'ять для більших файлів
 \n
-\n • Додано фільтри та розумні теки для треків
+\n • Розширені верхня та нижня панелі віджетів для розміщення всіх віджетів
 \n
-\n • Додано рядки для верхньої та нижньої панелей віджетів з підтримкою усіх віджетів
+\n • Покращення керування локальними ресурсами
+\n
+\n • Налаштовуване призначення кнопок для зовнішніх контролерів
+\n
+\n • Нові віджети: \"Коефіцієнт ковзання\" та \"Положення сонця\"
+\n
+\n • OsmAnd Cloud: Доступ до видалених файлів
+\n
+\n • Покращене забарвлення треку в режимі схилу з новим симетричним градієнтом
+\n
+\n • Усунено проблеми з прозорою панеллю стану
 \n
 \n • Додано підтримку віджета температури ANT+
 \n
-\n • Покращено керування пам\'яттю для великих GPX-треків
-\n
-\n • Оновлене керування локальними ресурсами у Завантаженнях
-\n
 \n • Додано віджет \"Доступна оперативна пам\'ять\"
-\n
-\n • Виправлено проблеми з прозорим рядком стану
 \n
 \n</string>
     <string name="map_widget_group_glide_desc">Віджети показують відношення ковзання до цілі або середнє відношення ковзання для поточної поїздки.</string>
@@ -5508,7 +5512,7 @@
     <string name="key_event_action_move_left">Вліво</string>
     <string name="restore_from_trash">Відновити зі смітника</string>
     <string name="all_folders">Усі теки</string>
-    <string name="press_button_to_link_with_action">Натисніть кнопку на вашому пристрої, щоб призначити його до дії: %1$s</string>
+    <string name="press_button_to_link_with_action">Натисніть кнопку на вашому пристрої, щоб призначити її дії: %1$s</string>
     <string name="deletion_error">Помилка видалення</string>
     <string name="key_event_action_move_right">Вправо</string>
     <string name="shared_string_show_less">Показувати менше</string>
@@ -5535,7 +5539,7 @@
 \nЦю дію неможливо скасувати.</string>
     <string name="key_event_action_zoom_out">Зменшити</string>
     <string name="key_event_action_toggle_drower">Показати/сховати бічне меню</string>
-    <string name="key_is_already_assigned_error">Клавіша \"%1$s\" вже призначена до такої дії: \"%2$s\"</string>
+    <string name="key_is_already_assigned_error">Кнопка \"%1$s\" вже призначена такій дії: \"%2$s\"</string>
     <string name="key_event_action_open_navigation_view">Відкрити навігацію</string>
     <string name="shared_string_empty_trash">Очистити смітник</string>
     <string name="shared_string_delete_immediately">Видалити назавжди</string>
@@ -5579,4 +5583,17 @@
     <string name="map_widget_sun_position">Розташування сонця</string>
     <string name="add_new_button">Додати нову кнопку</string>
     <string name="map_widget_sun_position_desc">Цей віджет показує час до сходу або заходу сонця, залежно від поточного часу.</string>
+    <string name="rendering_attr_showToll_name">Показати обмеження плати за проїзд</string>
+    <string name="reset_key_assignments_desc">Усі призначення кнопок для вибраного типу буде вилучено.</string>
+    <string name="lang_zh_hans">Китайська спрощена</string>
+    <string name="shared_string_reassign">Перепризначити</string>
+    <string name="reset_key_assignments">Скинути призначення кнопок</string>
+    <string name="rendering_attr_showToll_description">Показати обмеження плати за проїзд дорогами</string>
+    <string name="target_elevation">Висота цілі</string>
+    <string name="lang_zh_hant">Китайська традиційна</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="previous_row_has_complex_widget">У попередньому рядку розміщено складний віджет</string>
+    <string name="complex_widget_alert">Віджет %1$s можна розмістити лише в окремому рядку.</string>
+    <string name="precise_distance_numbers">Точні значення відстаней</string>
+    <string name="any_connected">Нічого не під\'єднано</string>
 </resources>

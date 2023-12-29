@@ -10,11 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptySmartFolderLoadingTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
@@ -45,7 +43,6 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -98,19 +95,11 @@ public class TrackFoldersAdapter extends RecyclerView.Adapter<ViewHolder> {
 	public void setItems(@NonNull List<Object> items) {
 		this.items.clear();
 		this.items.addAll(items);
-		sortItems();
 		notifyDataSetChanged();
 	}
 
 	public void setSortMode(@NonNull TracksSortMode sortMode) {
 		this.sortMode = sortMode;
-		sortItems();
-		notifyDataSetChanged();
-	}
-
-	private void sortItems() {
-		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
-		Collections.sort(items, new TracksComparator(sortMode, latLon));
 	}
 
 	public void setSelectionMode(boolean selectionMode) {

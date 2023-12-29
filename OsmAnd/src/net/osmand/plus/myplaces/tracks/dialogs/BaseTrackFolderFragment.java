@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -39,6 +40,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
+import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
@@ -75,6 +77,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -260,8 +263,17 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	public void updateContent() {
-		adapter.setItems(getAdapterItems());
-		adapter.setSortMode(getTracksSortMode());
+		List<Object> items = getAdapterItems();
+		TracksSortMode sortMode = getTracksSortMode();
+		sortItems(items, sortMode);
+
+		adapter.setSortMode(sortMode);
+		adapter.setItems(items);
+	}
+
+	private void sortItems(@NonNull List<Object> items, @NonNull TracksSortMode sortMode) {
+		LatLon latLon = app.getMapViewTrackingUtilities().getDefaultLocation();
+		Collections.sort(items, new TracksComparator(sortMode, latLon));
 	}
 
 	public void showTrackOnMap(@NonNull TrackItem trackItem) {
@@ -330,16 +342,15 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
-		adapter.setSortMode(sortMode);
-
 		Map<String, String> tabsSortModes = settings.getTrackSortModes();
 		if (smartFolder != null) {
 			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getFolderName(), sortMode.name());
 		} else {
 			tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
 		}
-
 		settings.saveTabsSortModes(tabsSortModes);
+
+		updateContent();
 	}
 
 	@Override

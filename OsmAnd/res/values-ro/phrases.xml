@@ -3298,7 +3298,7 @@
     <string name="poi_direction_ne">Direcția: nord-est</string>
     <string name="poi_direction_nne">Direcția: nord-nord-est</string>
     <string name="poi_direction_n">Direcția: nord</string>
-    <string name="poi_spaceport">Portul spațial</string>
+    <string name="poi_spaceport">Port spațial</string>
     <string name="poi_animal_shelter_purpose_release_no">Eliberare: nu</string>
     <string name="poi_animal_shelter_purpose_release_yes">Eliberare: da</string>
     <string name="poi_animal_shelter_purpose_adoption_no">Adopție: nu</string>
@@ -3333,7 +3333,7 @@
     <string name="poi_zoo_enclosure">Carcasă</string>
     <string name="poi_zoo_wildlife_park">Parc de animale sălbatice</string>
     <string name="poi_zoo_petting_zoo">Grădina zoologică pentru animale de companie</string>
-    <string name="poi_life_ring">Inel de viață</string>
+    <string name="poi_life_ring">Colac de salvare</string>
     <string name="poi_language_school">Școală de limbi străine</string>
     <string name="poi_music_school">Școală de muzică</string>
     <string name="poi_resort_kids_camp">Tabăra pentru copii</string>
@@ -4340,7 +4340,7 @@
     <string name="poi_dog_leashed">Câini: numai în lesă</string>
     <string name="poi_dog_unleashed">Câini: nu este nevoie să fie ținuți în lesă</string>
     <string name="poi_dog_designated">Desemnat pentru câini</string>
-    <string name="poi_first_aid_kit">Trusa de prim ajutor</string>
+    <string name="poi_first_aid_kit">Trusă de prim ajutor</string>
     <string name="poi_playground_structure">Structură</string>
     <string name="poi_playground_balancebeam">Grindă de echilibru</string>
     <string name="poi_playground_playhouse">Casă de jucărie</string>

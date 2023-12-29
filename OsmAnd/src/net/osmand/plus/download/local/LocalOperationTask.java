@@ -1,26 +1,6 @@
 package net.osmand.plus.download.local;
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.FONT_INDEX_DIR;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
-import static net.osmand.IndexConstants.HIDDEN_BACKUP_DIR;
-import static net.osmand.IndexConstants.HIDDEN_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TIF_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
@@ -45,6 +25,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -54,7 +35,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> {
+public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, String> {
 
 	private final OsmandApplication app;
 	private final OperationType type;
@@ -74,17 +55,17 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 	}
 
 	@Override
-	protected void onProgressUpdate(LocalItem... values) {
+	protected void onProgressUpdate(BaseLocalItem... values) {
 		if (listener != null) {
 			listener.onOperationProgress(type, values);
 		}
 	}
 
 	@Override
-	protected String doInBackground(LocalItem... params) {
+	protected String doInBackground(BaseLocalItem... params) {
 		int count = 0;
 		int total = 0;
-		for (LocalItem item : params) {
+		for (BaseLocalItem item : params) {
 			if (!isCancelled()) {
 				boolean success = processItem(item);
 				total++;
@@ -113,6 +94,23 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 		if (listener != null) {
 			listener.onOperationFinished(type, result);
 		}
+	}
+
+	private boolean processItem(@NonNull BaseLocalItem item) {
+		if (item instanceof LocalItem) {
+			return processItem((LocalItem) item);
+		} else if (item instanceof LiveGroupItem) {
+			LiveGroupItem groupItem = (LiveGroupItem) item;
+
+			boolean success = false;
+			for (LocalItem localItem : groupItem.getItems()) {
+				if (!isCancelled()) {
+					success |= processItem(localItem);
+				}
+			}
+			return success;
+		}
+		return false;
 	}
 
 	private boolean processItem(@NonNull LocalItem item) {
@@ -288,7 +286,7 @@ public class LocalOperationTask extends AsyncTask<LocalItem, LocalItem, String> 
 
 		}
 
-		default void onOperationProgress(@NonNull OperationType type, @NonNull LocalItem... items) {
+		default void onOperationProgress(@NonNull OperationType type, @NonNull BaseLocalItem... items) {
 
 		}
 

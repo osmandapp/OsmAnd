@@ -603,7 +603,7 @@ public class MapSelectionHelper {
 	                                  @Nullable List<String> names, long id, int radius) {
 		id = getOsmId(id >> AMENITY_ID_RIGHT_SHIFT);
 		QuadRect rect = MapUtils.calculateLatLonBbox(latLon.getLatitude(), latLon.getLongitude(), radius);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
 		Amenity res = null;
 		for (Amenity amenity : amenities) {

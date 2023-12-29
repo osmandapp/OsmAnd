@@ -66,6 +66,8 @@ public class OsmAndFormatter {
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
+	private static final int[] ROUNDING_DISTANCE_BOUNDS = Algorithms.generate10BaseRoundingBounds(100, 5);
+
 	private static boolean twelveHoursFormat;
 	private static TimeFormatter fullTimeFormatter;
 	private static TimeFormatter shortTimeFormatter;
@@ -213,9 +215,9 @@ public class OsmAndFormatter {
 		return formattedInterval + " " + unitsStr;
 	}
 
-	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, boolean forceTrailingZeros) {
+	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, OsmAndFormatterParams pms) {
 		double roundedDist = calculateRoundedDist(interval, app);
-		return getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
+		return getFormattedDistance((float) roundedDist, app, pms);
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
@@ -324,32 +326,72 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static class OsmAndFormatterParams {
+		public static final boolean DEFAULT_FORCE_TRAILING = true;
+		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
+		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING ;
+		int extraDecimalPrecision =  DEFAULT_EXTRA_DECIMAL_PRECISION;
+
+		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
+		public static final OsmAndFormatterParams NO_TRAILING_ZEROS = new OsmAndFormatterParams().setTrailingZerosForMainUnit(false);
+		public static final OsmAndFormatterParams DEFAULT = new OsmAndFormatterParams();
+
+		boolean useLowerBound = false;
+
+		public boolean isUseLowerBound() {
+			return useLowerBound;
+		}
+
+		private static OsmAndFormatterParams useLowerBoundParam() {
+			OsmAndFormatterParams p = new OsmAndFormatterParams();
+			p.useLowerBound = true;
+			p.extraDecimalPrecision = 0;
+			p.forceTrailingZerosInDecimalMainUnit = true;
+			return p;
+		}
+
+		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
+			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
+			return this;
+		}
+
+	}
+
 	@NonNull
 	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx) {
-		return getFormattedDistance(meters, ctx, true);
+		return getFormattedDistance(meters, ctx, null);
 	}
 
 	@NonNull
-	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx, boolean forceTrailingZeros) {
+	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx, OsmAndFormatterParams pms) {
 		MetricsConstants mc = ctx.getSettings().METRIC_SYSTEM.get();
-		return getFormattedDistance(meters, ctx, forceTrailingZeros, mc);
+		return getFormattedDistance(meters, ctx, pms, mc);
 	}
 
 	@NonNull
-	public static String getFormattedDistance(float meters,
-	                                          @NonNull OsmandApplication ctx,
-	                                          boolean forceTrailingZeros,
-	                                          @NonNull MetricsConstants mc) {
-		return getFormattedDistanceValue(meters, ctx, forceTrailingZeros, mc).format(ctx);
+	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx,
+											  OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
+		return getFormattedDistanceValue(meters, ctx, pms, mc).format(ctx);
 	}
 
+	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx) {
+		return getFormattedDistanceValue(meters, ctx, null, ctx.getSettings().METRIC_SYSTEM.get());
+	}
+
+	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx, OsmAndFormatterParams pms) {
+		return getFormattedDistanceValue(meters, ctx, pms, ctx.getSettings().METRIC_SYSTEM.get());
+	}
 	@NonNull
-	public static FormattedValue getFormattedDistanceValue(float meters,
-	                                                       @NonNull OsmandApplication ctx,
-	                                                       boolean forceTrailingZeros,
-	                                                       @NonNull MetricsConstants mc) {
+	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx,
+														   OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
 		int mainUnitStr;
 		float mainUnitInMeters;
+		if (pms == null) {
+			pms = OsmAndFormatterParams.DEFAULT;
+		}
+		if (pms.isUseLowerBound() && ctx.getSettings().PRECISE_DISTANCE_NUMBERS.get()) {
+			pms = OsmAndFormatterParams.DEFAULT;
+		}
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
@@ -362,37 +404,49 @@ public class OsmAndFormatter {
 		}
 
 		float floatDistance = meters / mainUnitInMeters;
-
+		boolean forceTrailingZeros  = pms.forceTrailingZerosInDecimalMainUnit;
+		int decimalPrecision = pms.extraDecimalPrecision;
 		if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
 					0, ctx);
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, decimalPrecision, ctx);
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else {
-			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
-				return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
-			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+
+			if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				int feet = (int) (meters * FEET_IN_ONE_METER + 0.5);
+				if (pms.isUseLowerBound()) {
+					feet = Algorithms.lowerTo10BaseRoundingBounds(feet, ROUNDING_DISTANCE_BOUNDS);
+				}
 				return formatValue(feet, R.string.foot, forceTrailingZeros, 0, ctx);
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 				int yards = (int) (meters * YARDS_IN_ONE_METER + 0.5);
+				if (pms.isUseLowerBound()) {
+					yards = Algorithms.lowerTo10BaseRoundingBounds(yards, ROUNDING_DISTANCE_BOUNDS);
+				}
 				return formatValue(yards, R.string.yard, forceTrailingZeros, 0, ctx);
 			}
-			return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
+			// mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
+			int m = (int) (meters + 0.5);
+			if (pms.isUseLowerBound()) {
+				m = Algorithms.lowerTo10BaseRoundingBounds(m, ROUNDING_DISTANCE_BOUNDS);
+			}
+			return formatValue(m, R.string.m, forceTrailingZeros, 0, ctx);
 		}
 	}
+
 
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
@@ -857,6 +911,12 @@ public class OsmAndFormatter {
 
 		@NonNull
 		public String format(@NonNull Context context) {
+			return format(context, value, unit, separateWithSpace);
+		}
+
+		@NonNull
+		public static String format(@NonNull Context context, @NonNull String value,
+		                            @NonNull String unit, boolean separateWithSpace) {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
 					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});

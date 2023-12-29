@@ -83,7 +83,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 	private void setText(float distance) {
 		if (distance > 0) {
 			FormattedValue formattedDistance = OsmAndFormatter
-					.getFormattedDistanceValue(distance, app, true, settings.METRIC_SYSTEM.get());
+					.getFormattedDistanceValue(distance, app);
 			setText(formattedDistance.value, formattedDistance.unit);
 		} else {
 			setText(getString(R.string.monitoring_control_start), null);

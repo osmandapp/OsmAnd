@@ -17,6 +17,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
@@ -83,6 +84,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupTripRecordingPrefs();
 
+		setupMapTextsPrefs();
+
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
@@ -125,7 +128,9 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 	private void setupHeightmapRelatedPrefs() {
 		SwitchPreferenceEx preference = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
 		preference.setIconSpaceReserved(false);
-		preference.setEnabled(plugin.isRelief3dAllowed());
+		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+		boolean enabled = srtmPlugin != null && srtmPlugin.is3DReliefAllowed();
+		preference.setEnabled(enabled);
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -187,6 +192,19 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx headingPref = findPreference(plugin.SAVE_HEADING_TO_GPX.getId());
 		headingPref.setIconSpaceReserved(false);
 		headingPref.setDescription(R.string.write_heading_description);
+	}
+
+	private void setupMapTextsPrefs() {
+		Preference textsCategory = findPreference("texts");
+		textsCategory.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
+		syminfoPref.setIconSpaceReserved(false);
+		syminfoPref.setDescription("Display graphical info about placement of each map text");
+
+		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
+		symtopPref.setIconSpaceReserved(false);
+		symtopPref.setDescription("Allow displaying map texts on top of each other");
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {

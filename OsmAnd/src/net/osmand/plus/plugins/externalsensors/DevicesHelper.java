@@ -35,12 +35,12 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DevicePreferencesListener;
+import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice.DeviceListener;
 import net.osmand.plus.plugins.externalsensors.devices.DeviceConnectionResult;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntAbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikePowerDevice;
-import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection.DeviceSettings;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedCadenceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntBikeSpeedDistanceDevice;
 import net.osmand.plus.plugins.externalsensors.devices.ant.AntHeartRateDevice;
@@ -93,7 +93,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private boolean installAntPluginAsked;
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
-	private ExternalSensorsPlugin externalSensorsPlugin;
+	private final ExternalSensorsPlugin externalSensorsPlugin;
 
 	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
 		this.app = app;
@@ -236,7 +236,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return;
 			}
 			ScanRecord scanRecord = result.getScanRecord();
-			if (isSupportedBleDevice(scanRecord)) {
+			if (scanRecord != null && isSupportedBleDevice(scanRecord)) {
 				String address = result.getDevice().getAddress();
 				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
@@ -266,7 +266,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	};
 
-	private boolean isSupportedBleDevice(ScanRecord scanRecord) {
+	private boolean isSupportedBleDevice(@NonNull ScanRecord scanRecord) {
 		List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 		if (uuids != null) {
 			for (ParcelUuid uuid : uuids) {
@@ -379,7 +379,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@Nullable
-	AbstractDevice<?> getDevice(@NonNull String deviceId) {
+	AbstractDevice<?> getAnyDevice(@NonNull String deviceId) {
 		for (AbstractDevice<?> device : getDevices()) {
 			if (Algorithms.stringsEqual(device.getDeviceId(), deviceId)) {
 				return device;

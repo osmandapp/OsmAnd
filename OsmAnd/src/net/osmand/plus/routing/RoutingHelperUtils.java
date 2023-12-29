@@ -179,7 +179,7 @@ public class RoutingHelperUtils {
 					? prevRouteLocation.bearingTo(nextRouteLocation)
 					: currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
-			if (Math.abs(diff) > 60f) {
+			if (Math.abs(diff) > 90f) {
 				// require delay interval since first detection, to avoid false positive
 				//but leave out for now, as late detection is worse than false positive (it may reset voice router then cause bogus turn and u-turn prompting)
 				//if (wrongMovementDetected == 0) {

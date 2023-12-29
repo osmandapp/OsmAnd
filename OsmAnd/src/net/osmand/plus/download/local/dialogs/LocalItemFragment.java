@@ -19,6 +19,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalItem;
@@ -40,7 +41,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 
 	public static final String TAG = LocalItemFragment.class.getSimpleName();
 
-	private LocalItem localItem;
+	private BaseLocalItem localItem;
 	private ItemMenuProvider menuProvider;
 	private ViewGroup itemsContainer;
 	private CollapsingToolbarLayout toolbarLayout;
@@ -61,7 +62,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 
 		menuProvider = new ItemMenuProvider(requireDownloadActivity(), this);
 		menuProvider.setShowInfoItem(false);
-		menuProvider.setLocalItem(localItem);
+		menuProvider.setItem(localItem);
 		menuProvider.setColorId(ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
 	}
 
@@ -95,7 +96,7 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 	}
 
 	private void updateToolbar() {
-		menuProvider.setLocalItem(localItem);
+		menuProvider.setItem(localItem);
 		toolbarLayout.setTitle(localItem.getName(app).toString());
 	}
 
@@ -136,15 +137,15 @@ public class LocalItemFragment extends LocalBaseFragment implements ConfirmDelet
 		super.fileRenamed(src, dest);
 
 		LocalItemType type = LocalItemUtils.getItemType(app, dest);
-		if (type != null) {
+		if (type != null && localItem instanceof LocalItem) {
 			localItem = new LocalItem(dest, type);
-			LocalItemUtils.updateItem(app, localItem);
+			LocalItemUtils.updateItem(app, (LocalItem) localItem);
 		}
 		updateToolbar();
 		updateContent();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull LocalItem localItem, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull BaseLocalItem localItem, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			LocalItemFragment fragment = new LocalItemFragment();
 			fragment.localItem = localItem;

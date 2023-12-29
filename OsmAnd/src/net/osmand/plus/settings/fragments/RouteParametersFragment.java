@@ -558,7 +558,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 		String summary = String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point),
 				enabled ? getString(R.string.shared_string_enabled) : getString(R.string.shared_string_disabled),
-				OsmAndFormatter.getFormattedDistance(allowedValue, app, false));
+				OsmAndFormatter.getFormattedDistance(allowedValue, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		switchPref.setSummary(summary);
 		switchPref.setChecked(enabled);
 	}

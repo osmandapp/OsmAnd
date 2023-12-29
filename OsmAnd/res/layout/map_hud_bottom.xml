@@ -51,18 +51,6 @@
                 tools:textColor="@color/activity_background_color_dark"/>
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/map_app_mode_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            tools:text="13.44"
-            android:layout_marginBottom="@dimen/map_button_shadow_width"
-            android:layout_marginLeft="@dimen/map_alarm_bottom_text_margin"
-            android:layout_marginStart="@dimen/map_alarm_bottom_text_margin"
-            android:layout_gravity="bottom|start"
-            android:textSize="@dimen/map_button_text_size"/>
-
         <LinearLayout
             android:id="@+id/map_transparency_layout"
             android:layout_width="wrap_content"

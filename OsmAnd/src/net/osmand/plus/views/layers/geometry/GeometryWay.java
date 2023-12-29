@@ -48,7 +48,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	//OpenGL
 	private final List<Integer> tx31 = new ArrayList<>();
 	private final List<Integer> ty31 = new ArrayList<>();
-	protected List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
+	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
 	public int baseOrder = -1;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
@@ -390,15 +390,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return false;
 	}
 
-	protected void cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
-	                                    @NonNull RotatedTileBox tb,
-	                                    int startLocationIndex,
-	                                    boolean previousVisible) {
-		List<List<DrawPathData31>> newPathsData31Cache = new ArrayList<>();
+	@Nullable
+	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
+	                                                          @NonNull RotatedTileBox tb,
+	                                                          int startLocationIndex,
+	                                                          boolean previousVisible) {
+		List<List<DrawPathData31>> croppedPathsData31 = new ArrayList<>();
 		boolean drawNext = false;
 		for (List<DrawPathData31> pathsDataList : pathsData31Cache) {
 			if (drawNext) {
-				newPathsData31Cache.add(pathsDataList);
+				croppedPathsData31.add(pathsDataList);
 				drawPathLine(tb, pathsDataList);
 				continue;
 			}
@@ -439,12 +440,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					drawNext = true;
 				}
 			}
-			newPathsData31Cache.add(newPathsDataList);
+			croppedPathsData31.add(newPathsDataList);
 			drawPathLine(tb, newPathsDataList);
-		}
-
-		if (drawNext) {
-			this.pathsData31Cache = newPathsData31Cache;
 		}
 
 		if (shouldDrawArrows()) {
@@ -459,6 +456,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				mapRenderer.addSymbolsProvider(newArrowsProvider);
 			}
 		}
+
+		return drawNext ? croppedPathsData31 : null;
 	}
 
 	protected boolean shouldDrawArrows() {

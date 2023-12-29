@@ -154,12 +154,19 @@ public class RouteGeometryWay extends
 		return added;
 	}
 
+	@Nullable
 	@Override
-	protected void cutStartOfCachedPath(@NonNull MapRendererView mapRenderer, @NonNull RotatedTileBox tb, int startLocationIndex, boolean previousVisible) {
-		super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
+	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
+	                                                          @NonNull RotatedTileBox tb,
+	                                                          int startLocationIndex,
+	                                                          boolean previousVisible) {
+		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
+		if (croppedPathData31 == null) {
+			return null;
+		}
 
 		List<Segment> segments = new ArrayList<>();
-		for (List<DrawPathData31> segmentData : pathsData31Cache) {
+		for (List<DrawPathData31> segmentData : croppedPathData31) {
 
 			Segment segment = new Segment();
 			segment.indexes = new ArrayList<>();
@@ -190,6 +197,8 @@ public class RouteGeometryWay extends
 		}
 
 		cachedSegments = segments;
+
+		return croppedPathData31;
 	}
 
 	@Override

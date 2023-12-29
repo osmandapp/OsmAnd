@@ -23,7 +23,7 @@ import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -57,8 +57,8 @@ public class TrackAltitudeBottomSheet extends MenuBottomSheetDialogFragment impl
 			dividerItem.setMargins(margin, 0, 0, 0);
 			items.add(dividerItem);
 
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin != null && plugin.isRelief3dAllowed()) {
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+			if (plugin != null && plugin.is3DReliefAllowed()) {
 				createOfflineItem();
 			} else {
 				createOnlineItem();
