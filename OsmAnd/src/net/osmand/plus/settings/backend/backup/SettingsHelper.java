@@ -133,12 +133,12 @@ public abstract class SettingsHelper {
 	}
 
 	public List<SettingsItem> getFilteredSettingsItems(@NonNull Map<ExportType, List<?>> allSettingsMap,
-	                                                   @NonNull List<ExportType> settingsTypes,
+	                                                   @NonNull List<ExportType> exportTypes,
 	                                                   @NonNull List<SettingsItem> settingsItems,
 	                                                   boolean export) {
 		List<SettingsItem> filteredSettingsItems = new ArrayList<>();
-		for (ExportType settingsType : settingsTypes) {
-			List<?> settingsDataObjects = allSettingsMap.get(settingsType);
+		for (ExportType exportType : exportTypes) {
+			List<?> settingsDataObjects = allSettingsMap.get(exportType);
 			if (settingsDataObjects != null) {
 				filteredSettingsItems.addAll(prepareSettingsItems(settingsDataObjects, settingsItems, export));
 			}
@@ -377,13 +377,13 @@ public abstract class SettingsHelper {
 		Map<ExportType, List<?>> resourcesItems = new LinkedHashMap<>();
 
 		for (Map.Entry<ExportType, List<?>> entry : settingsToOperate.entrySet()) {
-			ExportType type = entry.getKey();
-			if (type.isRelatedToCategory(ExportCategory.SETTINGS)) {
-				settingsItems.put(type, entry.getValue());
-			} else if (type.isRelatedToCategory(ExportCategory.MY_PLACES)) {
-				myPlacesItems.put(type, entry.getValue());
-			} else if (type.isRelatedToCategory(ExportCategory.RESOURCES)) {
-				resourcesItems.put(type, entry.getValue());
+			ExportType exportType = entry.getKey();
+			if (exportType.isRelatedToCategory(ExportCategory.SETTINGS)) {
+				settingsItems.put(exportType, entry.getValue());
+			} else if (exportType.isRelatedToCategory(ExportCategory.MY_PLACES)) {
+				myPlacesItems.put(exportType, entry.getValue());
+			} else if (exportType.isRelatedToCategory(ExportCategory.RESOURCES)) {
+				resourcesItems.put(exportType, entry.getValue());
 			}
 		}
 		Map<ExportCategory, SettingsCategoryItems> exportMap = new LinkedHashMap<>();

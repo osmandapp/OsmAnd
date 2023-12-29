@@ -152,7 +152,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		outState.putBoolean(KEY_NEED_RESTART, needRestart);
 	}
 
-	private void navigateTo(ExportType type) {
+	private void navigateTo(@NonNull ExportType exportType) {
 		FragmentManager fm = getFragmentManager();
 		FragmentActivity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {
@@ -160,7 +160,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 		dismissFragment();
 		fm.popBackStack(DRAWER_SETTINGS_ID, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-		switch (type) {
+		switch (exportType) {
 			case GLOBAL:
 			case PROFILE:
 			case CUSTOM_ROUTING:
@@ -203,7 +203,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			case FAVORITES:
 			case MULTIMEDIA_NOTES:
 			case FAVORITES_BACKUP:
-				int tabId = getFavoritesTabId(type);
+				int tabId = getFavoritesTabId(exportType);
 				openFavouritesActivity(activity, tabId);
 				break;
 			case SEARCH_HISTORY:

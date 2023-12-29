@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -78,8 +79,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		description.setText(getCategoryDescr(category));
 
 		int selectedTypes = 0;
-		for (ExportType type : items.getTypes()) {
-			if (selectedItemsMap.get(type) != null) {
+		for (ExportType exportType : items.getTypes()) {
+			if (selectedItemsMap.get(exportType) != null) {
 				selectedTypes++;
 			}
 		}
@@ -117,29 +118,29 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		}
 		ExportCategory category = itemsTypes.get(groupPosition);
 		SettingsCategoryItems categoryItems = itemsMap.get(category);
-		ExportType type = categoryItems.getTypes().get(childPosition);
-		List<?> items = categoryItems.getItemsForType(type);
-		List<?> selectedItems = selectedItemsMap.get(type);
+		ExportType exportType = categoryItems.getTypes().get(childPosition);
+		List<?> items = categoryItems.getItemsForType(exportType);
+		List<?> selectedItems = selectedItemsMap.get(exportType);
 
 		boolean selected = selectedItems != null;
 		TextView title = view.findViewById(R.id.title);
-		title.setText(type.getTitleId());
+		title.setText(exportType.getTitleId());
 
 		TextView description = view.findViewById(R.id.description);
-		description.setText(getSelectedTypeDescr(app, selectedItemsMap, type, items));
+		description.setText(getSelectedTypeDescr(app, selectedItemsMap, exportType, items));
 
 		CompoundButton compoundButton = view.findViewById(R.id.switch_widget);
 		compoundButton.setChecked(selected);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
 		ImageView proIcon = view.findViewById(R.id.pro_icon);
-		boolean showProIcon = !InAppPurchaseUtils.isBackupAvailable(app) && !type.isAllowedInFreeVersion();
-		setupChildIcon(view, type.getIconId(), selected && !showProIcon);
+		boolean showProIcon = !InAppPurchaseUtils.isBackupAvailable(app) && !exportType.isAllowedInFreeVersion();
+		setupChildIcon(view, exportType.getIconId(), selected && !showProIcon);
 		proIcon.setImageResource(nightMode ? R.drawable.img_button_pro_night : R.drawable.img_button_pro_day);
 		view.setOnClickListener(view1 -> {
 			compoundButton.performClick();
 			if (listener != null) {
-				listener.onTypeSelected(type, compoundButton.isChecked());
+				listener.onTypeSelected(exportType, compoundButton.isChecked());
 			}
 			notifyDataSetChanged();
 		});
@@ -172,8 +173,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		icon.setImageDrawable(uiUtilities.getIcon(iconRes, colorRes));
 	}
 
-	public void updateSettingsItems(Map<ExportCategory, SettingsCategoryItems> itemsMap,
-									Map<ExportType, List<?>> selectedItemsMap) {
+	public void updateSettingsItems(@NonNull Map<ExportCategory, SettingsCategoryItems> itemsMap,
+									@NonNull Map<ExportType, List<?>> selectedItemsMap) {
 		this.itemsMap = itemsMap;
 		this.itemsTypes = new ArrayList<>(itemsMap.keySet());
 		this.selectedItemsMap = selectedItemsMap;
@@ -185,10 +186,10 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 		SettingsCategoryItems items = itemsMap.get(category);
-		for (ExportType type : items.getTypes()) {
-			if (selectedItemsMap.get(type) != null) {
+		for (ExportType exportType : items.getTypes()) {
+			if (selectedItemsMap.get(exportType) != null) {
 				selectedTypes++;
-				itemsSize += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(type));
+				itemsSize += ExportSettingsAdapter.calculateItemsSize(items.getItemsForType(exportType));
 			}
 		}
 		String description;
@@ -203,12 +204,13 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 		return itemsSize == 0 ? description : app.getString(R.string.ltr_or_rtl_combine_via_comma, description, formattedSize);
 	}
 
-	public static String getSelectedTypeDescr(OsmandApplication app, Map<ExportType, List<?>> selectedItemsMap,
-	                                          ExportType type, List<?> items) {
+	public static String getSelectedTypeDescr(@NonNull OsmandApplication app,
+	                                          @NonNull Map<ExportType, List<?>> selectedItemsMap,
+	                                          @NonNull ExportType exportType, @NonNull List<?> items) {
 		long itemsSize = 0;
 		int selectedTypes = 0;
 
-		List<?> selectedItems = selectedItemsMap.get(type);
+		List<?> selectedItems = selectedItemsMap.get(exportType);
 		if (!Algorithms.isEmpty(selectedItems)) {
 			for (int i = 0; i < items.size(); i++) {
 				Object object = items.get(i);
@@ -266,8 +268,8 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 	@Override
 	public Object getChild(int groupPosition, int childPosition) {
 		SettingsCategoryItems categoryItems = itemsMap.get(itemsTypes.get(groupPosition));
-		ExportType type = categoryItems.getTypes().get(groupPosition);
-		return categoryItems.getItemsForType(type).get(childPosition);
+		ExportType exportType = categoryItems.getTypes().get(groupPosition);
+		return categoryItems.getItemsForType(exportType).get(childPosition);
 	}
 
 	@Override
@@ -292,9 +294,9 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 
 	public interface OnItemSelectedListener {
 
-		void onTypeSelected(ExportType type, boolean selected);
+		void onTypeSelected(@NonNull ExportType exportType, boolean selected);
 
-		void onCategorySelected(ExportCategory type, boolean selected);
+		void onCategorySelected(ExportCategory exportCategory, boolean selected);
 
 	}
 }

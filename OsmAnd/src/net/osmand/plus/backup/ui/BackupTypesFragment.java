@@ -43,28 +43,28 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 	protected Map<ExportType, List<?>> getSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		for (ExportType type : ExportType.values()) {
-			if (backupHelper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || available)) {
-				selectedItemsMap.put(type, getItemsForType(type));
+		for (ExportType exportType : ExportType.values()) {
+			if (backupHelper.getBackupTypePref(exportType).get() && (exportType.isAllowedInFreeVersion() || available)) {
+				selectedItemsMap.put(exportType, getItemsForType(exportType));
 			}
 		}
 		return selectedItemsMap;
 	}
 
 	@Override
-	public void onCategorySelected(ExportCategory category, boolean selected) {
-		super.onCategorySelected(category, selected);
+	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
+		super.onCategorySelected(exportCategory, selected);
 
-		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportType type : categoryItems.getTypes()) {
-			backupHelper.getBackupTypePref(type).set(selected);
+		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+		for (ExportType exportType : categoryItems.getTypes()) {
+			backupHelper.getBackupTypePref(exportType).set(selected);
 		}
 	}
 
 	@Override
-	public void onTypeSelected(ExportType type, boolean selected) {
-		super.onTypeSelected(type, selected);
-		backupHelper.getBackupTypePref(type).set(selected);
+	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
+		super.onTypeSelected(exportType, selected);
+		backupHelper.getBackupTypePref(exportType).set(selected);
 	}
 
 	@Override

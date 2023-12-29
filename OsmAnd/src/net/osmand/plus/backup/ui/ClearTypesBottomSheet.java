@@ -62,8 +62,8 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		ArrayList<String> names = new ArrayList<>();
-		for (ExportType type : types) {
-			names.add(type.name());
+		for (ExportType exportType : types) {
+			names.add(exportType.name());
 		}
 		outState.putStringArrayList(DISABLED_TYPES_KEY, names);
 		outState.putString(CLEAR_TYPE_KEY, clearType.name());

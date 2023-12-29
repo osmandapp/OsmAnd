@@ -50,19 +50,19 @@ public class VersionHistoryFragment extends BaseBackupTypesFragment {
 	}
 
 	@Override
-	public void onCategorySelected(ExportCategory category, boolean selected) {
-		super.onCategorySelected(category, selected);
+	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
+		super.onCategorySelected(exportCategory, selected);
 
-		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportType type : categoryItems.getTypes()) {
-			backupHelper.getVersionHistoryTypePref(type).set(selected);
+		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+		for (ExportType exportType : categoryItems.getTypes()) {
+			backupHelper.getVersionHistoryTypePref(exportType).set(selected);
 		}
 	}
 
 	@Override
-	public void onTypeSelected(ExportType type, boolean selected) {
-		super.onTypeSelected(type, selected);
-		backupHelper.getVersionHistoryTypePref(type).set(selected);
+	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
+		super.onTypeSelected(exportType, selected);
+		backupHelper.getVersionHistoryTypePref(exportType).set(selected);
 	}
 
 	@Override

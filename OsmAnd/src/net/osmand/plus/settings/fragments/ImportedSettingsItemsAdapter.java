@@ -204,6 +204,6 @@ public class ImportedSettingsItemsAdapter extends
 	}
 
 	interface OnItemClickListener {
-		void onItemClick(ExportType type);
+		void onItemClick(@NonNull ExportType type);
 	}
 }

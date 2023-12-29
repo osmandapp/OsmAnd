@@ -23,19 +23,15 @@ public class SettingsCategoryItems {
 
 	public List<ExportType> getNotEmptyTypes() {
 		List<ExportType> notEmptyTypes = new ArrayList<>();
-		for (ExportType type : getTypes()) {
-			if (!Algorithms.isEmpty(itemsMap.get(type))) {
-				notEmptyTypes.add(type);
+		for (ExportType exportType : getTypes()) {
+			if (!Algorithms.isEmpty(itemsMap.get(exportType))) {
+				notEmptyTypes.add(exportType);
 			}
 		}
 		return notEmptyTypes;
 	}
 
-	public List<?> getItemsForType(ExportType type) {
+	public List<?> getItemsForType(@NonNull ExportType type) {
 		return itemsMap.get(type);
-	}
-
-	public Map<ExportType, List<?>> getItemsMap() {
-		return itemsMap;
 	}
 }

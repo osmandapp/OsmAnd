@@ -104,18 +104,6 @@ public enum ExportType {
 		return instance.isRelatedToCategory(exportCategory);
 	}
 
-	public boolean isSettingsCategory() {
-		return instance.isRelatedToCategory(ExportCategory.SETTINGS);
-	}
-
-	public boolean isMyPlacesCategory() {
-		return instance.isRelatedToCategory(ExportCategory.MY_PLACES);
-	}
-
-	public boolean isResourcesCategory() {
-		return instance.isRelatedToCategory(ExportCategory.RESOURCES);
-	}
-
 	public boolean isAllowedInFreeVersion() {
 		return instance.isAllowedInFreeVersion();
 	}

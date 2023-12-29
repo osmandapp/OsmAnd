@@ -253,12 +253,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportType type,
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportType exportType,
 	                                @NonNull BaseSettingsListFragment target, boolean exportMode) {
 		try {
 			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ExportItemsBottomSheet fragment = new ExportItemsBottomSheet();
-				fragment.type = type;
+				fragment.type = exportType;
 				fragment.exportMode = exportMode;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, TAG);

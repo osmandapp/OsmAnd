@@ -247,40 +247,43 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	@Override
-	public void onCategorySelected(@NonNull ExportCategory category, boolean selected) {
-		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportType type : categoryItems.getNotEmptyTypes()) {
-			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();
-			selectedItemsMap.put(type, selectedItems);
+	public void onCategorySelected(@NonNull ExportCategory exportCategory, boolean selected) {
+		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+		for (ExportType exportType : categoryItems.getNotEmptyTypes()) {
+			List<?> selectedItems = selected ? categoryItems.getItemsForType(exportType) : new ArrayList<>();
+			selectedItemsMap.put(exportType, selectedItems);
 		}
 		updateAvailableSpace();
 	}
 
 	@Override
-	public void onItemsSelected(@NonNull ExportType type, List<?> selectedItems) {
-		selectedItemsMap.put(type, selectedItems);
+	public void onItemsSelected(@NonNull ExportType exportType, List<?> selectedItems) {
+		selectedItemsMap.put(exportType, selectedItems);
 		adapter.notifyDataSetChanged();
 		updateAvailableSpace();
 	}
 
-	protected List<Object> getItemsForType(@NonNull ExportType type) {
+	@Nullable
+	protected List<Object> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
-			if (categoryItems.getTypes().contains(type)) {
-				return (List<Object>) categoryItems.getItemsForType(type);
+			if (categoryItems.getTypes().contains(exportType)) {
+				return new ArrayList<>(categoryItems.getItemsForType(exportType));
 			}
 		}
 		return null;
 	}
 
-	protected List<Object> getSelectedItemsForType(@NonNull ExportType type) {
-		return (List<Object>) selectedItemsMap.get(type);
+	@Nullable
+	protected List<Object> getSelectedItemsForType(@NonNull ExportType exportType) {
+		List<?> itemsForType = selectedItemsMap.get(exportType);
+		return itemsForType != null ? new ArrayList<>(itemsForType) : null;
 	}
 
 	@Override
-	public void onTypeClicked(@NonNull ExportType type) {
+	public void onTypeClicked(@NonNull ExportType exportType) {
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null && type != ExportType.GLOBAL && type != ExportType.SEARCH_HISTORY && type != ExportType.NAVIGATION_HISTORY) {
-			ExportItemsBottomSheet.showInstance(fragmentManager, type, this, exportMode);
+		if (fragmentManager != null && exportType != ExportType.GLOBAL && exportType != ExportType.SEARCH_HISTORY && exportType != ExportType.NAVIGATION_HISTORY) {
+			ExportItemsBottomSheet.showInstance(fragmentManager, exportType, this, exportMode);
 		}
 	}
 }

@@ -140,16 +140,16 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onCategorySelected(ExportCategory category, boolean selected) {
+	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
 		boolean hasItemsToDelete = false;
-		SettingsCategoryItems categoryItems = dataList.get(category);
+		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
 		List<ExportType> exportTypes = categoryItems.getTypes();
 		boolean backupFeaturePurchased = InAppPurchaseUtils.isBackupAvailable(app);
-		for (ExportType type : exportTypes) {
-			if (type.isAllowedInFreeVersion() || backupFeaturePurchased) {
-				List<?> items = getItemsForType(type);
+		for (ExportType exportType : exportTypes) {
+			if (exportType.isAllowedInFreeVersion() || backupFeaturePurchased) {
+				List<?> items = getItemsForType(exportType);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
-				selectedItemsMap.put(type, selected ? items : null);
+				selectedItemsMap.put(exportType, selected ? items : null);
 			}
 		}
 		if (!selected && hasItemsToDelete) {
@@ -158,13 +158,13 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onTypeSelected(ExportType type, boolean selected) {
+	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
 		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		if (type.isAllowedInFreeVersion() || available) {
-			List<?> items = getItemsForType(type);
-			selectedItemsMap.put(type, selected ? items : null);
+		if (exportType.isAllowedInFreeVersion() || available) {
+			List<?> items = getItemsForType(exportType);
+			selectedItemsMap.put(exportType, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
-				showClearTypesBottomSheet(Collections.singletonList(type));
+				showClearTypesBottomSheet(Collections.singletonList(exportType));
 			}
 		} else {
 			OsmAndProPlanFragment.showInstance(requireActivity());
@@ -198,10 +198,10 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@NonNull
-	protected List<?> getItemsForType(ExportType type) {
+	protected List<?> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
-			if (categoryItems.getTypes().contains(type)) {
-				return categoryItems.getItemsForType(type);
+			if (categoryItems.getTypes().contains(exportType)) {
+				return categoryItems.getItemsForType(exportType);
 			}
 		}
 		return Collections.emptyList();
