@@ -5579,5 +5579,5 @@
     <string name="complex_widget_alert">Le gadget %1$s ne peut être placé que sur sa propre ligne.</string>
     <string name="precise_distance_numbers">Distances précises</string>
     <string name="any_connected">N\'importe quel appareil connecté</string>
-    <string name="any_connected_with_device">Tout appareil connecté : %s</string>
+    <string name="any_connected_with_device">N\'importe quel appareil connecté : %s</string>
 </resources>
