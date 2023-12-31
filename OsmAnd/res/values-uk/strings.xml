@@ -5596,4 +5596,5 @@
     <string name="complex_widget_alert">Віджет %1$s можна розмістити лише в окремому рядку.</string>
     <string name="precise_distance_numbers">Точні значення відстаней</string>
     <string name="any_connected">Нічого не під\'єднано</string>
+    <string name="any_connected_with_device">Будь-який підключений: %s</string>
 </resources>
