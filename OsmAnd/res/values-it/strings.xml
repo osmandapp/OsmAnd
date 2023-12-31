@@ -4778,7 +4778,7 @@
     <string name="ant_go_to_store">Vai al Play Store</string>
     <string name="send_uuid_preference">Invia Unique User Identifier (UUID)</string>
     <string name="shared_string_cross_buy">Acquisto multi piattaforma</string>
-    <string name="map_widget_ant_heart_rate_desc">Mosta il battito cardicato dell\'utente durante un\'attività in tempo reale</string>
+    <string name="map_widget_ant_heart_rate_desc">Mostra il battito cardiaco dell\'utente durante un\'attività in tempo reale</string>
     <string name="map_widget_ant_bicycle_cadence">Cadenza bicicletta</string>
     <string name="map_widget_ant_bicycle_power">Potenza bicicletta</string>
     <string name="worldwide_maps">Mappe internazionali</string>
@@ -5352,7 +5352,7 @@
     <string name="help_article_search_search_all_name">Cerca tutto</string>
     <string name="help_article_search_search_coordinates_name">Cerca coordinate</string>
     <string name="help_article_troubleshooting_crash_logs_name">Registri di arresto anomalo</string>
-    <string name="help_article_map_legend_ski_map_name">Stile cartina sciistica</string>
+    <string name="help_article_map_legend_ski_map_name">Stile mappa sciistica</string>
     <string name="help_article_map_interact_with_map_name">Interagisci con la mappa</string>
     <string name="help_article_map_track_context_menu_name">Menu contestuale delle tracce</string>
     <string name="help_article_map_tracks_on_map_name">Tracce e percorsi</string>
