@@ -5592,4 +5592,5 @@
     <string name="see_all_plans">Ver todos os planos</string>
     <string name="clear_key_assignment_desc">A atribuição de tecla para a ação selecionada será desmarcada e definida como \"Nenhuma\".</string>
     <string name="map_widget_sun_position_desc">Este widget mostra o tempo que falta até ao nascer ou pôr do sol, dependendo da hora atual.</string>
+    <string name="any_connected_with_device">Quaisquer ligados: %s</string>
 </resources>
