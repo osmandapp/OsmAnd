@@ -7,7 +7,7 @@
     <string name="rendering_attr_roadColors_name">Schemă de culori pentru drumuri</string>
     <string name="map_widget_show_destination_arrow">Arată direcția destinației</string>
     <string name="enable_plugin_monitoring_services">Activați pluginul \"Înregistrare călătorie\" pentru a utiliza serviciile de înregistrare a poziției (înregistrare GPX, urmărire online)</string>
-    <string name="non_optimal_route_calculation">Calculează rute mai puțin optime pentru distanțe foarte mari</string>
+    <string name="non_optimal_route_calculation">Calculează rute posibil neoptime pentru distanțe foarte mari</string>
     <string name="gps_not_available">Activați GPS-ul în setări</string>
     <string name="map_widget_monitoring_services">Servicii de jurnalizare</string>
     <string name="no_route">Nicio rută</string>
@@ -134,7 +134,7 @@
     <string name="show_traffic_warnings">Avertismente de trafic</string>
     <string name="avoid_toll_roads">Fără drumuri cu taxă</string>
     <string name="continue_follow_previous_route_auto">Continuați să urmați navigarea anterioară neterminată\? (%1$s seconds)</string>
-    <string name="route_updated_loc_found">Așteptarea poziției pentru a calcula traseul</string>
+    <string name="route_updated_loc_found">Se așteaptă poziționarea pentru a calcula traseul</string>
     <string name="osmand_parking_hours">Ore</string>
     <string name="osmand_parking_minutes">Minute</string>
     <string name="osmand_parking_position_description_add_time">Mașina este parcată la</string>
@@ -172,9 +172,9 @@
     <string name="gpxup_trackable">Urmăribil</string>
     <string name="gpxup_private">Privat</string>
     <string name="asap">Cât mai repede</string>
-    <string name="route_roundabout">Sens giratoriu: Luați ieșirea %1$d și mergeți</string>
+    <string name="route_roundabout">Sens giratoriu: alegeți ieșirea %1$d și continuați</string>
     <string name="route_kl">Păstrați banda stângă și continuați</string>
-    <string name="route_kr">Țineți pe dreapta și mergeți</string>
+    <string name="route_kr">Țineți banda dreapta și continuați</string>
     <string name="rendering_attr_noPolygons_description">Asigurați transparența tuturor elementelor de suprafață de pe hartă.</string>
     <string name="rendering_attr_noPolygons_name">Poligoane</string>
     <string name="rendering_attr_appMode_name">Mod de randare</string>
@@ -364,7 +364,7 @@
     <string name="city_type_village">Sat</string>
     <string name="city_type_town">Oraș</string>
     <string name="city_type_city">Oraș</string>
-    <string name="animate_route_off">Opriți simularea</string>
+    <string name="animate_route_off">Oprește simularea</string>
     <string name="animate_route">Porniți simularea</string>
     <string name="file_can_not_be_renamed">Nu s-a putut redenumi fișierul.</string>
     <string name="file_with_name_already_exists">Există deja un fișier cu acest nume.</string>
@@ -644,12 +644,12 @@
     <string name="sd_mounted_ro">Cartela de memorie se poate doar citi.
 \nAcum este posibilă doar vizualizarea hărții preîncărcate, nu și descărcarea de noi zone.</string>
     <string name="unzipping_file">Se decomprimă fișierul…</string>
-    <string name="route_tr">Virați la dreapta și continuați pe</string>
+    <string name="route_tr">Virați la dreapta și continuați</string>
     <string name="route_tshr">Virați puternic la dreapta și continuați</string>
-    <string name="route_tslr">Virați ușor la dreapta și continuați pe</string>
-    <string name="route_tl">Virați la stânga și continuați pe</string>
+    <string name="route_tslr">Virați ușor la dreapta și continuați</string>
+    <string name="route_tl">Virați la stânga și continuați</string>
     <string name="route_tshl">Virați puternic la stânga și continuați</string>
-    <string name="route_tsll">Virați ușor la stânga și continuați pe</string>
+    <string name="route_tsll">Virați ușor la stânga și continuați</string>
     <string name="route_tu">Întoarceți și continuați</string>
     <string name="route_head">Mergeți înainte</string>
     <string name="first_time_continue">Apoi</string>
@@ -870,7 +870,7 @@
     <string name="incomplete_locale">incomplet</string>
     <string name="search_villages_and_postcodes">Căută mai multe sate/coduri poștale</string>
     <string name="no_buildings_found">Nicio clădire găsită.</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="map_widget_max_speed">Limită de viteză</string>
     <string name="rendering_attr_noAdminboundaries_name">Limite</string>
     <string name="rendering_attr_noAdminboundaries_description">Nu afișa limitele regionale (niveluri administrative 5-9).</string>
@@ -1947,13 +1947,13 @@
     <string name="rendering_attr_hideWaterPolygons_name">Ape</string>
     <string name="search_map_hint">Oraș sau regiune</string>
     <string name="upload_poi">Încărcă punct de interes</string>
-    <string name="route_calculation">Calcularea rutei</string>
+    <string name="route_calculation">Se calculează ruta</string>
     <string name="gpx_add_track">Adaugă mai multe…</string>
     <string name="shared_string_notifications">Notificări</string>
     <string name="shared_string_continue">Continuă</string>
     <string name="shared_string_pause">Pauză</string>
-    <string name="shared_string_trip">Excursie</string>
-    <string name="shared_string_recorded">Înregistrată</string>
+    <string name="shared_string_trip">Călătorie</string>
+    <string name="shared_string_recorded">Înregistrat</string>
     <string name="shared_string_record">Înregistrează</string>
     <string name="gpx_logging_no_data">Nu sunt date</string>
     <string name="rendering_value_light_brown_name">Maro deschis</string>
@@ -2075,7 +2075,7 @@
     <string name="interrupt_music">Întrerupeți muzica</string>
     <string name="osmand_play_title_30_chars">Hărți și navigație OsmAnd</string>
     <string name="osmand_plus_play_title_30_chars">Hărți și navigație OsmAnd+</string>
-    <string name="share_route_as_gpx">Distribuiți ruta ca și fișier GPX</string>
+    <string name="share_route_as_gpx">Distribuiți ruta ca fișier GPX</string>
     <string name="share_route_subject">Traseu distribuit prin OsmAnd</string>
     <string name="support_new_features_descr">Donați pentru a vedea funcționalități noi implementate în aplicație.</string>
     <string name="arrival_distance_factor_early">Devreme</string>
@@ -2254,7 +2254,7 @@
     <string name="app_mode_public_transport">Transport public</string>
     <string name="avoid_roads_descr">Selectați un drum pe care doriți să îl evitați în timpul navigației, fie pe hartă, fie din lista de mai jos:</string>
     <string name="show_along_the_route">Afișare de-a lungul rutei</string>
-    <string name="simulate_navigation">Simulați navigația</string>
+    <string name="simulate_navigation">Simulare navigație</string>
     <string name="choose_track_file_to_follow">Alegeți un fisier ca traseu, pe care să-l urmăriți</string>
     <string name="voice_announcements">Indicații vocale</string>
     <string name="intermediate_destinations">Destinații intermediare</string>
@@ -2665,7 +2665,7 @@
     <string name="added_profiles_descr">Profiluri adăugate de plugin</string>
     <string name="shared_string_turn_off">Oprește</string>
     <string name="new_plugin_added">S-a adăugat un plugin nou</string>
-    <string name="join_segments">Alăturați segmente</string>
+    <string name="join_segments">Alăturare segmente</string>
     <string name="add_new_profile_q">Adăugați profilul nou \'%1$s\'\?</string>
     <string name="save_heading">Includeți titlul</string>
     <string name="save_heading_descr">Salvează direcția la fiecare punct de traseu în timpul înregistrării.</string>
@@ -3270,7 +3270,7 @@
     <string name="lost_data_warning">Toate datele nesalvate vor fi pierdute.</string>
     <string name="show_start_dialog">Arată dialogul de pornire</string>
     <string name="trip_recording_show_start_dialog_setting">Dacă este dezactivată, înregistrarea va începe imediat după atingerea widgetului sau a elementului din meniu, sărind peste dialogul de confirmare.</string>
-    <string name="customize_route_line">Personalizați linia de traseu</string>
+    <string name="customize_route_line">Personalizează linia de traseu</string>
     <string name="shared_string_route_line">Linia de rută</string>
     <string name="specify_color_for_map_mode">Specificați culoarea pentru modul hartă %1$s.</string>
     <string name="no_purchases">Nu aveți achiziții</string>
@@ -4006,7 +4006,7 @@
     <string name="purchase_cancelled_dialog_descr">Reînnoiți abonamentul pentru a continua să utilizați toate funcțiile:</string>
     <string name="how_to_open_link">Cum se deschide link-ul\?</string>
     <string name="read_wikipedia_offline_description">Obțineți abonamentul OsmAnd Live pentru a citi articolele Wikipedia și Wikivoyage offline.</string>
-    <string name="default_render_descr">Stil pentru uzul general. Orașele dense sunt reprezentate curat. Oferă rute, calitate suprafețe, restricții de acces, scuturi rutiere, căi desenate conform scării SAC/CAI, elemente de rafting, caracteristici topografice precum curbe de nivel.</string>
+    <string name="default_render_descr">Stil pentru uz general. Orașe dense sunt reprezentate curat. Oferă rute, calitate suprafețe, restricții de acces, simboluri drumuri, căi desenate conform scării SAC/CAI, elemente de rafting, caracteristici topografice precum curbe de nivel.</string>
     <string name="snowmobile_render_descr">Pentru conducerea snowmobilelor, cu drumuri și piste dedicate.</string>
     <string name="turn_screen_on_router">Trezirea la întoarcere</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
