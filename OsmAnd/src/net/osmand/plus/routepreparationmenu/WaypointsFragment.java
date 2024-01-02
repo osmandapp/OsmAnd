@@ -89,6 +89,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	private boolean wasDrawerDisabled;
 
 	private boolean useRouteInfoMenu;
+	private boolean anyWaypointSelected;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -420,11 +421,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	                                                                  ArrayAdapter<Object> listAdapter) {
 		return (adapterView, view, item, l) -> {
 			if (listAdapter.getItem(item) instanceof LocationPointWrapper) {
+				anyWaypointSelected = true;
+				dismiss();
 				LocationPointWrapper ps = (LocationPointWrapper) listAdapter.getItem(item);
 				if (ps != null) {
 					showOnMap(app, ctx, ps.getPoint(), false);
 				}
-				dismiss();
 			}
 		};
 	}
@@ -836,7 +838,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	private void onDismiss() {
 		try {
-			if (useRouteInfoMenu) {
+			if (useRouteInfoMenu && !anyWaypointSelected) {
 				MapActivity mapActivity = (MapActivity) getActivity();
 				if (mapActivity != null) {
 					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
