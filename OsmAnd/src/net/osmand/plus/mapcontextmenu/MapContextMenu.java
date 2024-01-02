@@ -213,7 +213,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return findMenuFragment() != null;
 	}
 
-	public void hideMenues() {
+	public void hideMenus() {
 		if (isVisible()) {
 			hide();
 		} else {
