@@ -431,7 +431,7 @@
     <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
     <string name="rotate_map_compass_opt">Smer kompasu</string>
     <string name="rotate_map_bearing_opt">Smer pohybu</string>
-    <string name="rotate_map_north_opt">Pevné (sever je hore)</string>
+    <string name="rotate_map_north_opt">Sever je hore</string>
     <string name="rotate_map_to_descr">Otáčanie mapy:</string>
     <string name="rotate_map_to">Otáčanie mapy</string>
     <string name="show_route">Zobraziť cestu</string>
@@ -606,7 +606,7 @@
     <string name="save_track_interval_descr">Zadajte interval zaznamenávania stopy počas navigácie</string>
     <string name="save_track_interval">Interval zaznamenávania pri navigácii</string>
     <string name="save_track_to_gpx">Automaticky zaznamenávať stopu počas navigácie</string>
-    <string name="update_tile">Aktualizovať mapu</string>
+    <string name="update_tile">Aktualizovať</string>
     <string name="reload_tile">Znovu načítať dlaždicu</string>
     <string name="open_street_map_login_descr">Potrebné pre prispievanie do openstreetmap.org.</string>
     <string name="user_name">Vaše používateľské meno v OSM</string>
@@ -1222,7 +1222,7 @@
     <string name="arrival_distance_factor_early">Skoro</string>
     <string name="arrival_distance_factor_normally">Normálne</string>
     <string name="arrival_distance_factor_late">Neskoro</string>
-    <string name="arrival_distance_factor_at_last">V posledných metroch</string>
+    <string name="arrival_distance_factor_at_last">Veľmi neskoro</string>
     <string name="av_camera_pic_size">Veľkosť fotografie</string>
     <string name="av_camera_pic_size_descr">Nastaviť veľkosť obrázka fotoaparátu</string>
     <string name="rendering_value_browse_map_name">Štandardná</string>
@@ -1670,7 +1670,7 @@
     <string name="hillshade_layer_disabled">Tieňovaný reliéf vypnutý</string>
     <string name="buy">Kúpiť</string>
     <string name="activate_seamarks_plugin">Prosím zapnite modul \"Námorný mapový pohľad\"</string>
-    <string name="activate_srtm_plugin">Prosím zapnite modul \"Vrstevnice\"</string>
+    <string name="activate_srtm_plugin">Prosím zapnite modul \"Topografia\"</string>
     <string name="later">Neskôr</string>
     <string name="get_full_version">Plná verzia</string>
     <string name="downloads">Sťahovania</string>
@@ -2010,7 +2010,7 @@
     <string name="selected_categories">Vybrané kategórie</string>
     <string name="create_custom_poi">Vytvoriť vlastný filter</string>
     <string name="custom_search">Vlastné vyhľadávanie</string>
-    <string name="edit_filter">Upraviť kategórie</string>
+    <string name="edit_filter">Upraviť filter</string>
     <string name="subcategories">Podkategórie</string>
     <string name="translit_names">Transliterovať názvy</string>
     <string name="rendering_value_light_brown_name">Svetlohnedá</string>
@@ -2875,8 +2875,8 @@
     <string name="shared_string_walk">Chôdza</string>
     <string name="save_poi_value_exceed_length">Skráťte dĺžku značky \"%s\" na menej ako 255 znakov.</string>
     <string name="save_poi_value_exceed_length_title">Dĺžka hodnoty \"%s\"</string>
-    <string name="routing_attr_avoid_sett_name">Žiadne nerovné dlažobné kamene</string>
-    <string name="routing_attr_avoid_sett_description">Vyhne sa nerovným dlažobným kameňom a kockám</string>
+    <string name="routing_attr_avoid_sett_name">Žiadne dlažobné kocky</string>
+    <string name="routing_attr_avoid_sett_description">Vyhne sa dlažobným kockám</string>
     <string name="routing_attr_avoid_tram_name">Žiadne električky</string>
     <string name="routing_attr_avoid_tram_description">Vyhnúť sa električkám</string>
     <string name="routing_attr_avoid_bus_name">Žiadne autobusy</string>
@@ -3447,7 +3447,7 @@
     <string name="select_distance_route_will_recalc">Zvoľte vzdialenosť, po ktorej bude trasa prepočítaná.</string>
     <string name="recalculate_route_distance_promo">Trasa bude prepočítaná ak vzdialenosť od trasy k aktuálnej polohe je väčšia ako zvolená hodnota.</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
-    <string name="download_slope_maps">Sklony svahov</string>
+    <string name="download_slope_maps">Svah</string>
     <string name="quick_action_terrain_descr">Tlačidlo pre zobrazenie alebo skrytie vrstvy terénu na mape.</string>
     <string name="delete_description">Vymazať popis</string>
     <string name="add_description">Pridať popis</string>
@@ -3654,7 +3654,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Ovládať priblíženie mapy tlačidlami hlasitosti zariadenia.</string>
     <string name="use_volume_buttons_as_zoom">Tlačidlá hlasitosti na približovanie</string>
     <string name="lenght_limit_description">Zadajte dĺžku vášho vozidla, pretože na trase môžu byť obmedzenia pre dlhé vozidlá.</string>
-    <string name="quick_action_remove_next_destination">Vymazať najbližší cieľový bod</string>
+    <string name="quick_action_remove_next_destination">Vymazať ďalší cieľový bod</string>
     <string name="please_provide_point_name_error">Prosím zadajte názov pre bod</string>
     <string name="quick_action_remove_next_destination_descr">Vymaže nasledujúci cieľ vašej trasy. Ak je to posledný cieľ, navigácia sa zastaví.</string>
     <string name="search_download_wikipedia_maps">Stiahnuť mapy Wikipédia</string>
@@ -3765,7 +3765,7 @@
     <string name="sort_name_descending">Názov: Z – A</string>
     <string name="sort_name_ascending">Názov: A – Z</string>
     <string name="start_finish_icons">Ikony štartu a cieľa</string>
-    <string name="contour_lines_thanks">Ďakujeme za zakúpenie modulu \'Vrstevnice\'</string>
+    <string name="contour_lines_thanks">Ďakujeme za zakúpenie modulu \'Topografia\'</string>
     <string name="osm_live_payment_desc_hw">Predplatné bude spoplatnené v zvolenom intervale. Predplatné zrušte kedykoľvek na AppGallery.</string>
     <string name="osm_live_payment_subscription_management_hw">Platba bude stiahnutá z vášho účtu AppGallery po potvrdení nákupu.
 \n
@@ -3949,7 +3949,7 @@
     <string name="uploading_count">Odosiela sa %1$d z %2$d</string>
     <string name="uploaded_count">Odoslané %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Zvoľte úpravy na odoslanie</string>
-    <string name="hillshade_slope_contour_lines">Tieňované svahy / Sklony svahov / Vrstevnice</string>
+    <string name="hillshade_slope_contour_lines">Vrstevnice / Tieňované svahy / Sklony svahov</string>
     <string name="open_place_reviews_plugin_description">Prispievajte do projektu OpenPlaceReviews, napríklad fotografiami, recenziami, odkazmi o verejných miestach ako sú reštaurácie, hotely alebo múzeá.
 \n
 \nInštrukcie ako prispievať nájdete na našej webstránke %1$s.</string>
@@ -4079,7 +4079,7 @@
     <string name="osmand_cloud_help_descr">Potrebujete pomoc\? Prosím kontaktujte nás na %1$s</string>
     <string name="osmand_cloud_create_account_descr">Prosím zadajte vašu emailovú adresu, na ktorú bude zaslaný overovací kód
 \na budú na ňu naviazané všetky údaje.</string>
-    <string name="osmand_cloud_login_descr">Prosím zadajte emailovú adresu, s ktorou ste sa registrovali. Bude na ňu zaslané jednorazové heslo pre ďalší krok.</string>
+    <string name="osmand_cloud_login_descr">Prosím zadajte emailovú adresu, s ktorou ste sa registrovali. Bude na ňu zaslané jednorazové heslo.</string>
     <string name="verify_email_address">Overiť emailovú adresu</string>
     <string name="verify_email_address_descr">Overovací kód bol zaslaný na %1$s. Prosím zadajte ho do poľa nižšie.</string>
     <string name="cloud_email_not_registered">Táto emailová adresa nie je registrovaná pre OsmAnd Cloud</string>
@@ -4189,7 +4189,7 @@
     <string name="send_crash_log">Odoslať záznam o páde aplikácie</string>
     <string name="send_logcat_log">Odoslať záznam logcat</string>
     <string name="purchases_feature_desc_nautical">Získajte prístup k údajom o námornej hĺbke</string>
-    <string name="purchases_feature_desc_terrain">Terénne vrstevnice, mapy s tieňovanými svahmi a mapy sklonov s farbami na zvýraznenie vrcholov a nížin.</string>
+    <string name="purchases_feature_desc_terrain">Terénne vrstevnice, mapy so sivými tieňovanými svahmi a mapy sklonov s farbami na zvýraznenie vrcholov a nížin.</string>
     <string name="purchases_feature_desc_wikivoyage">Skúmajte sprievodcov Wikivoyage offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
     <string name="purchases_feature_desc_wikipedia">Poskytuje offline všetky články Wikipédie vzťahujúce sa k geografickým miestam, čím vám pomôže spoznať navštevované miesta na vašom výlete jednoduchým stlačením na mape. Nezabudnite si stiahnuť mapy Wikipédie pre príslušný región.</string>
     <string name="release_4_0">• Zálohovanie do Cloudu
@@ -4709,7 +4709,7 @@
     <string name="distance_to_intermediate_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k prvému prechodnému bodu. Keď je prechodný bod dosiahnutý, vzdialenosť je aktualizovaná k ďalšiemu prechodnému bodu.</string>
     <string name="distance_to_destination_widget_desc">Nástroj zobrazuje zostávajúcu vzdialenosť k poslednému cieľovému bodu.</string>
     <string name="widget_with_dot">Nástroj.</string>
-    <string name="compass_click_desc">Pomôcka: Stlačte nástroj kompasu pre prepnutie režimu orientácie mapy.</string>
+    <string name="compass_click_desc">Pomôcka: Stlačte tlačidlo kompasu pre prepnutie režimu orientácie mapy.</string>
     <string name="compass_desc">Zobrazuje smer k severu.</string>
     <string name="rendering_attr_depthContourColorScheme_description">Farebná schéma hĺbkových vrstevníc</string>
     <string name="rendering_attr_depthContourWidth_description">Hrúbka čiary hĺbkových vrstevníc</string>
@@ -4820,7 +4820,7 @@
     <string name="quick_action_map_center_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Stred mapy.</string>
     <string name="quick_action_current_location_widget_descr">Prepínač na zobrazenie alebo skrytie nástroja Súčasná poloha.</string>
     <string name="coordinates_widget_current_location_desc">Nástroj zobrazuje zemepisné súradnice súčasnej polohy</string>
-    <string name="rotate_map_manual_opt">Pevné (manuálne otočené)</string>
+    <string name="rotate_map_manual_opt">Manuálne otočené</string>
     <string name="speak_gps_signal_status">Oznámiť stratu a obnovenie GPS signálu</string>
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
     <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>
@@ -5106,5 +5106,42 @@
     <string name="select_layer">Zvoľte vrstvu</string>
     <string name="weather_download_error">Nepodarilo sa stiahnuť %1$s dlaždíc.</string>
     <string name="contact_us">Kontaktujte nás</string>
-    <string name="live_monitoring_adress_descr">Specify webová adresa s parametrom syntax: lat={0}, lon={1}, častamp={2}, hdop={3}, nadmorská výška ={4}, rýchlosť = {5}, ložisko = {6}, eta = {7}, etfa={8}, eda={9}, {10}.</string>
+    <string name="live_monitoring_adress_descr">Zadajte webovú adresu pomocou syntaxe parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="shared_string_cache">Vyrovnávacia pamäť</string>
+    <string name="widget_available_ram_desc">Zobrazí dostupnú pamäť pridelenú pre OsmAnd.</string>
+    <string name="delete_map">Vymazať mapu</string>
+    <string name="standard_maps">Štandardné mapy</string>
+    <string name="max_altitude">Max. nadm. výška</string>
+    <string name="release_4_6">• Android Auto: Pridaný 3D režim
+\n
+\n • Stopy: Doplnené filtre a chytré priečinky, znížená spotreba pamäte pre väčšie súbory
+\n
+\n • Vylepšený horný a dolný panel nástrojov, aby mohli pojať všetky nástroje
+\n
+\n • Vylepšená správa lokálnych zdrojov
+\n
+\n • Nastaviteľné mapovanie tlačidiel pre externé ovládače
+\n
+\n • Nové nástroje: \"Pomer kĺzania\" a \"Poloha slnka\"
+\n
+\n • OsmAnd Cloud: Prístup k vymazaným súborom
+\n
+\n • Vylepšené farbenie stôp v režime sklonu svahov s novým symetrickým gradientom
+\n
+\n • Vyriešené problémy s priehľadným stavovým riadkom
+\n
+\n • Pridaná podpora pre nástroj teploty ANT+
+\n
+\n • Pridaný nástroj \"Dostupná pamať RAM\"
+\n
+\n</string>
+    <string name="app_mode_paragliding">Paragliding</string>
+    <string name="app_mode_baby_transport">Preprava detí</string>
+    <string name="wikipedia_and_travel_maps">Wikipédia a cestovné mapy</string>
+    <string name="rendering_styles">Štýly vykresľovania</string>
+    <string name="app_mode_hang_gliding">Závesné lietanie</string>
+    <string name="map_is_up_to_date">Mapa %1$s je aktuálna.</string>
+    <string name="widget_available_ram">Dostupná pamať RAM</string>
+    <string name="terrain_maps">Mapy terénu</string>
+    <string name="shared_string_temperature">Teplota</string>
 </resources>
