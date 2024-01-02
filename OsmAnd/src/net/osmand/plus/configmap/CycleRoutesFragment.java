@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.osm.OsmRouteType.BICYCLE;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CYCLE_NODE_NETWORK_ROUTES_ATTR;
-import static net.osmand.plus.configmap.ConfigureMapMenu.SHOW_CYCLE_ROUTES_ATTR;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,7 +63,8 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
-		title.setText(AndroidUtils.getRenderingStringPropertyName(app, SHOW_CYCLE_ROUTES_ATTR, SHOW_CYCLE_ROUTES_ATTR));
+		String propertyAttr = BICYCLE.getRenderingPropertyAttr();
+		title.setText(AndroidUtils.getRenderingStringPropertyName(app, propertyAttr, propertyAttr));
 		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bicycle_dark, pref.get() ? selectedColor : disabledColor));
 		description.setText(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 
@@ -142,7 +143,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	private CommonPreference<Boolean> getPreference() {
-		return settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
+		return settings.getCustomRenderBooleanProperty(BICYCLE.getRenderingPropertyAttr());
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
