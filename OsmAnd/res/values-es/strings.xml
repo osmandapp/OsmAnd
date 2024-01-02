@@ -4312,7 +4312,7 @@
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="send_crash_log">Enviar informe de errores</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios para los tipos de datos obsoletos en OsmAnd Cloud?</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
     <string name="backup_data">Datos de la copia de seguridad</string>
     <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
