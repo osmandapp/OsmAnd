@@ -293,7 +293,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		ImageView buttonToolbarImage = view.findViewById(R.id.buttonToolbarImage);
 		buttonToolbarImage.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
 		buttonToolbarFilter = view.findViewById(R.id.filterButton);
-		buttonToolbarFilter.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_filter));
+		buttonToolbarFilter.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_filter_dark));
 		buttonToolbarFilter.setOnClickListener(v -> {
 			SearchPhrase searchPhrase = searchUICore.getPhrase();
 			if (searchPhrase.isLastWord(POI_TYPE)) {
@@ -834,10 +834,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarFilter.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
 		if (filterButtonVisible) {
 			if (word.getResult().object instanceof PoiUIFilter) {
-				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter, ColorUtilities.getActiveColorId(nightMode)));
-				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter, app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter_dark, ColorUtilities.getActiveColorId(nightMode)));
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter_dark, app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 			} else {
-				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter_dark));
 			}
 		}
 	}

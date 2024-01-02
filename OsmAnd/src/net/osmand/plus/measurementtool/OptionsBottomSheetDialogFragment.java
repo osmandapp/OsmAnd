@@ -185,7 +185,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		boolean plainTrack = editingCtx.getPointsCount() > 0 && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
 		if (plainTrack) {
 			BaseBottomSheetItem gpsFilter = new Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_filter))
+					.setIcon(getContentIcon(R.drawable.ic_action_filter_dark))
 					.setTitle(getString(R.string.shared_string_gps_filter))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(v -> {
