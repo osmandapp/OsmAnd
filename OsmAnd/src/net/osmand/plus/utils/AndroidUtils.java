@@ -244,27 +244,18 @@ public class AndroidUtils {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
 					float scaleX = (float) maxVectorLayerWidth / srcBitmap.getWidth();
 					float scaleY = (float) maxVectorLayerHeight / srcBitmap.getHeight();
-					if (maxVectorLayerWidth == 0) {
+					if (maxVectorLayerWidth == 0 || maxVectorLayerHeight == 0) {
 						scaleX = 1;
-					}
-					if (scaleY == 0) {
 						scaleY = 1;
 					}
 					int width = (int) (srcBitmap.getWidth() * scaleX * scale);
 					int height = (int) (srcBitmap.getHeight() * scaleY * scale);
-					Bitmap scaledBitmap = AndroidUtils.scaleBitmap(srcBitmap,
-							width,
-							height,
-							true);
-					Rect srcRect = new Rect(0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight());
+					Rect srcRect = new Rect(0, 0, srcBitmap.getWidth(), srcBitmap.getHeight());
 					Rect dstRect = new Rect(locationX - width / 2,
 							locationY - height / 2,
 							locationX + width / 2,
 							locationY + height / 2);
-					canvas.drawBitmap(scaledBitmap, srcRect, dstRect, bitmapPaint);
-					if (srcBitmap != scaledBitmap) {
-						scaledBitmap.recycle();
-					}
+					canvas.drawBitmap(srcBitmap, srcRect, dstRect, bitmapPaint);
 				}
 			}
 		}
