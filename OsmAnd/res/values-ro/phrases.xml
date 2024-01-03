@@ -2457,8 +2457,8 @@
     <string name="poi_internet_access_type_no">Fără acces la internet</string>
     <string name="poi_internet_access_type_service">Tipul de acces la internet: serviciu</string>
     <string name="poi_internet_access_type_public">Tipul de acces la internet: public</string>
-    <string name="poi_internet_access_type_wired">Cablat</string>
-    <string name="poi_internet_access_type_terminal">Terminalul</string>
+    <string name="poi_internet_access_type_wired">Prin fir</string>
+    <string name="poi_internet_access_type_terminal">Terminal</string>
     <string name="poi_internet_access_type_wlan">WLAN</string>
     <string name="poi_shelter_type_abandoned">Tip adăpost: abandonat</string>
     <string name="poi_shelter_type_tent">Tip adăpost: cort</string>
@@ -2585,9 +2585,9 @@
     <string name="poi_sauna_yes">Servicii de saună</string>
     <string name="poi_massage_yes">Servicii de masaj</string>
     <string name="poi_massage_therapeutic">Terapeutic</string>
-    <string name="poi_massage_chinese">Chineză</string>
-    <string name="poi_massage_sexual">Sexualitate</string>
-    <string name="poi_massage_thai">Thailandeză</string>
+    <string name="poi_massage_chinese">Chinezesc</string>
+    <string name="poi_massage_sexual">Sexual</string>
+    <string name="poi_massage_thai">Thailandez</string>
     <string name="poi_castle_type_shiro">Tip castel: shiro</string>
     <string name="poi_castle_type_castrum">Tip castel: castru</string>
     <string name="poi_castle_type_defensive_stately">Tip castel: defensiv, impunător</string>
@@ -3080,7 +3080,7 @@
     <string name="poi_direction_sw">Direcția: sud-vest</string>
     <string name="poi_direction_ssw">Direcția: sud-sud-vest</string>
     <string name="poi_gambling_pachinko">Joc de Pachinko</string>
-    <string name="poi_gambling_lottery">Loteria</string>
+    <string name="poi_gambling_lottery">Loterie</string>
     <string name="poi_gambling_type">Tip</string>
     <string name="poi_gambling">Jocuri de noroc</string>
     <string name="poi_lottery">Bilete de loterie</string>
