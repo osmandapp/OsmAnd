@@ -249,10 +249,13 @@ public class SideWidgetsPanel extends FrameLayout {
 
 	@Override
 	public void setVisibility(int visibility) {
-		super.setVisibility(visibility);
 		if (!selfVisibilityChanging) {
 			selfShowAllowed = visibility == VISIBLE;
 		}
+		if (visibility == VISIBLE && !hasVisibleWidgets()) {
+			return;
+		}
+		super.setVisibility(visibility);
 	}
 
 	/**
