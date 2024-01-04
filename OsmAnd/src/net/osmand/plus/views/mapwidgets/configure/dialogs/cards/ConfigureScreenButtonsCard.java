@@ -92,6 +92,7 @@ public class ConfigureScreenButtonsCard extends MapBaseCard {
 		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(appMode);
 		setupButton(button, getString(R.string.map_3d_mode_action), visibility.getTitle(app), visibility.iconId, true, nightMode);
 
+		AndroidUiHelper.updateVisibility(button, app.useOpenGlRenderer());
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}
 
