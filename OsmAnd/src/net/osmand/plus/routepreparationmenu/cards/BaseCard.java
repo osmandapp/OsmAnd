@@ -12,21 +12,24 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseCard {
 
 	protected final OsmandApplication app;
+	protected final OsmandSettings settings;
 	protected final FragmentActivity activity;
 
 	protected View view;
+	protected LayoutInflater themedInflater;
 
 	boolean showTopShadow;
 	boolean showBottomShadow;
@@ -54,7 +57,8 @@ public abstract class BaseCard {
 	public BaseCard(@NonNull FragmentActivity activity, boolean usedOnMap) {
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
-		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+		this.settings = app.getSettings();
+		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !settings.isLightContent();
 	}
 
 	public abstract int getCardLayoutId();
@@ -111,10 +115,10 @@ public abstract class BaseCard {
 
 	protected abstract void updateContent();
 
-	public View build(Context ctx) {
-		ContextThemeWrapper context =
-				new ContextThemeWrapper(ctx, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		view = LayoutInflater.from(context).inflate(getCardLayoutId(), null);
+	@NonNull
+	public View build(@NonNull Context ctx) {
+		themedInflater = UiUtilities.getInflater(ctx, nightMode);
+		view = themedInflater.inflate(getCardLayoutId(), null);
 		update();
 		return view;
 	}
@@ -202,5 +206,10 @@ public abstract class BaseCard {
 	@NonNull
 	public final String getString(@StringRes int resId) {
 		return app.getString(resId);
+	}
+
+	@NonNull
+	public final String getString(@StringRes int resId, Object... formatArgs) {
+		return app.getString(resId, formatArgs);
 	}
 }

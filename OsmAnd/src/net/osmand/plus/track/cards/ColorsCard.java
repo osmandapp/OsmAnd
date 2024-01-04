@@ -192,8 +192,8 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return colorItemView;
 	}
 
-	private View createCircleView(FlowLayout rootView) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
+	@NonNull
+	private View createCircleView(@NonNull FlowLayout rootView) {
 		return themedInflater.inflate(R.layout.point_editor_button, rootView, false);
 	}
 

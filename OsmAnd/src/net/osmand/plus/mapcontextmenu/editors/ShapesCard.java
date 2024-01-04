@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,7 +15,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 
 public class ShapesCard extends MapBaseCard {
@@ -52,19 +50,18 @@ public class ShapesCard extends MapBaseCard {
 		FlowLayout flowLayout = ((FlowLayout) view);
 		flowLayout.setHorizontalAutoSpacing(true);
 
-		LayoutInflater inflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		int width = getDimen(R.dimen.favorites_select_icon_button_right_padding);
 		for (BackgroundType shape : BackgroundType.values()) {
 			if (shape.isSelected()) {
 				FlowLayout.LayoutParams layoutParams = new FlowLayout.LayoutParams(width, 0);
-				flowLayout.addView(createShapeItemView(inflater, shape), layoutParams);
+				flowLayout.addView(createShapeItemView(shape), layoutParams);
 			}
 		}
 	}
 
 	@NonNull
-	private View createShapeItemView(@NonNull LayoutInflater inflater, @NonNull BackgroundType shape) {
-		View shapeItemView = inflater.inflate(R.layout.point_editor_button, ((ViewGroup) view), false);
+	private View createShapeItemView(@NonNull BackgroundType shape) {
+		View shapeItemView = themedInflater.inflate(R.layout.point_editor_button, ((ViewGroup) view), false);
 		shapeItemView.setTag(shape);
 
 		ImageView background = shapeItemView.findViewById(R.id.background);

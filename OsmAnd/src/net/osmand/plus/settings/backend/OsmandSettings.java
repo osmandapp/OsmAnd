@@ -95,7 +95,6 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -1899,14 +1898,14 @@ public class OsmandSettings {
 		Iterator<String> iterator = pages.iterator();
 		while (iterator.hasNext()) {
 			String page = iterator.next();
-			for (String id : Arrays.asList(page.split(WIDGET_SEPARATOR))) {
+			for (String id : page.split(WIDGET_SEPARATOR)) {
 				if (WidgetType.isComplexWidget(id)) {
 					builder.append(id).append(PAGE_SEPARATOR);
 				} else {
 					builder.append(id).append(WIDGET_SEPARATOR);
 				}
 			}
-			if (iterator.hasNext() && !builder.toString().endsWith(PAGE_SEPARATOR)) {
+			if (iterator.hasNext() && builder.lastIndexOf(PAGE_SEPARATOR) != builder.length() - PAGE_SEPARATOR.length()) {
 				builder.append(PAGE_SEPARATOR);
 			}
 		}
