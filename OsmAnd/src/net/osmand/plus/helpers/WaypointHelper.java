@@ -253,16 +253,23 @@ public class WaypointHelper {
 							&& currentRoute < inf.getLastLocationIndex()) {
 						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
 					}
-					int distance = route.getDistanceToPoint(inf.getLocationIndex());
+					int distance = route.getDistanceFromPoint(currentRoute) - route.getDistanceFromPoint(inf.getLocationIndex() - 1);
+					Location nextLocation = route.getNextRouteLocation();
+					Location nextInfoLocation = new Location("", inf.getLatitude(), inf.getLongitude());
 					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
-					boolean lastSegmentBeforeAlarm = inf.getLocationIndex() - currentRoute == 1;
-					if (lastSegmentBeforeAlarm && lastKnownLocation != null) {
+					if (lastKnownLocation != null) {
+						float distanceBefore = lastKnownLocation.distanceTo(nextLocation);
+						distance += distanceBefore;
+						float distanceAfter = route.getImmutableAllLocations().get(inf.getLocationIndex() - 1).distanceTo(nextInfoLocation);
+						distance += distanceAfter;
+					}
+					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLocationIndex() == currentRoute && lastKnownLocation != null) {
 						distance = (int) Math.max(0.0, MapUtils.getDistance(
 								lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
 								inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
-					}
-					if (inf.getLocationIndex() == currentRoute && distance > 10) {
-						return null;
+					} else if (inf.getLocationIndex() == currentRoute) {
+						kIterator++;
+						continue;
 					}
 					if (!atd.isTurnStateActive(0, distance, STATE_LONG_PNT_APPROACH)) {
 						break;
