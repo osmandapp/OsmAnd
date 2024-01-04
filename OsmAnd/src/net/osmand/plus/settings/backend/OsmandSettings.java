@@ -1897,15 +1897,18 @@ public class OsmandSettings {
 
 		Iterator<String> iterator = pages.iterator();
 		while (iterator.hasNext()) {
+			boolean pageSeparatorAdded = false;
 			String page = iterator.next();
 			for (String id : page.split(WIDGET_SEPARATOR)) {
 				if (WidgetType.isComplexWidget(id)) {
+					pageSeparatorAdded = true;
 					builder.append(id).append(PAGE_SEPARATOR);
 				} else {
+					pageSeparatorAdded = false;
 					builder.append(id).append(WIDGET_SEPARATOR);
 				}
 			}
-			if (iterator.hasNext() && builder.lastIndexOf(PAGE_SEPARATOR) != builder.length() - PAGE_SEPARATOR.length()) {
+			if (iterator.hasNext() && !pageSeparatorAdded) {
 				builder.append(PAGE_SEPARATOR);
 			}
 		}
