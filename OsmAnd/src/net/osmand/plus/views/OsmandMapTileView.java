@@ -95,6 +95,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int FOG_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int SKY_DEFAULT_COLOR = 0xffffffff;
+	public static final int FOG_NIGHTMODE_COLOR = 0xff243060;
+	public static final int SKY_NIGHTMODE_COLOR = 0xff304080;
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
