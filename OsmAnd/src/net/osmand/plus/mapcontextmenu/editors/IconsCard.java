@@ -5,7 +5,6 @@ import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -215,10 +214,9 @@ public class IconsCard extends MapBaseCard {
 		iconsSelector.setHorizontalAutoSpacing(true);
 
 		int width = getDimen(R.dimen.favorites_select_icon_button_right_padding);
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		for (String iconName : getIconNameListToShow()) {
 			LayoutParams layoutParams = new LayoutParams(width, 0);
-			iconsSelector.addView(createIconItemView(inflater, iconName), layoutParams);
+			iconsSelector.addView(createIconItemView(iconName), layoutParams);
 		}
 	}
 
@@ -248,8 +246,8 @@ public class IconsCard extends MapBaseCard {
 	}
 
 	@NonNull
-	private View createIconItemView(@NonNull LayoutInflater inflater, @NonNull String iconName) {
-		View iconItemView = inflater.inflate(R.layout.point_editor_button, iconsSelector, false);
+	private View createIconItemView(@NonNull String iconName) {
+		View iconItemView = themedInflater.inflate(R.layout.point_editor_button, iconsSelector, false);
 
 		int iconId = getIconId(iconName);
 		iconItemView.setTag(iconId);

@@ -23,7 +23,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.controllers.CompassModeWidgetDialogController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
+import net.osmand.plus.settings.enums.CompassVisibility;
 
 public class CompassButton extends MapButton {
 

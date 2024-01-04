@@ -181,8 +181,7 @@ public class RouteInfoCard extends MapBaseCard {
 
 	@NonNull
 	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key, @NonNull String value, boolean needLinks, boolean showDivider) {
-		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
-		View view = inflater.inflate(R.layout.list_item_with_descr, container, false);
+		View view = themedInflater.inflate(R.layout.list_item_with_descr, container, false);
 
 		TextView tvLabel = view.findViewById(R.id.description);
 		TextView tvContent = view.findViewById(R.id.title);

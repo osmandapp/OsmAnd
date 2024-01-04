@@ -1,9 +1,7 @@
-package net.osmand.plus.views.mapwidgets.configure;
+package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,11 +10,8 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -26,8 +21,8 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.CompassVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -139,48 +134,6 @@ public class CompassVisibilityBottomSheetDialogFragment extends MenuBottomSheetD
 			args.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(args);
 			fragment.show(fragmentManager, TAG);
-		}
-	}
-
-	public enum CompassVisibility {
-
-		ALWAYS_VISIBLE(R.string.compass_always_visible, 0, R.drawable.ic_action_compass_north, R.id.always_visible_mode),
-		ALWAYS_HIDDEN(R.string.compass_always_hidden, 0, R.drawable.ic_action_compass_hidden, R.id.always_hidden_mode),
-		VISIBLE_IF_MAP_ROTATED(R.string.compass_visible_if_map_rotated, R.string.compass_visible_if_map_rotated_desc, R.drawable.ic_action_compass_rotated, R.id.visible_if_map_rotated_mode);
-
-		@StringRes
-		public int titleId;
-		@StringRes
-		public int descId;
-		@DrawableRes
-		public int iconId;
-		@IdRes
-		public int containerId;
-
-		CompassVisibility(@StringRes int titleId, @StringRes int descId, @DrawableRes int iconId, @IdRes int containerId) {
-			this.titleId = titleId;
-			this.descId = descId;
-			this.iconId = iconId;
-			this.containerId = containerId;
-		}
-
-		@NonNull
-		public String getTitle(@NonNull Context context) {
-			return context.getString(titleId);
-		}
-
-		@Nullable
-		public String getDescription(@NonNull Context context) {
-			return descId == 0 ? null : context.getString(descId);
-		}
-
-		@Nullable
-		public static CompassVisibility getFromCustomization(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode) {
-			OsmAndAppCustomization customization = app.getAppCustomization();
-			if (customization.areWidgetsCustomized()) {
-				return customization.isWidgetVisible(WIDGET_COMPASS, appMode) ? ALWAYS_VISIBLE : ALWAYS_HIDDEN;
-			}
-			return null;
 		}
 	}
 
