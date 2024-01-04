@@ -17,12 +17,30 @@
 		<include layout="@layout/configure_widgets_header" />
 
 		<include
-			android:id="@+id/reset_button"
-			layout="@layout/configure_screen_list_item_button" />
+			android:id="@+id/left_panel"
+			layout="@layout/configure_screen_list_item" />
 
 		<include
-			android:id="@+id/copy_button"
-			layout="@layout/configure_screen_list_item_button" />
+			android:id="@+id/right_panel"
+			layout="@layout/configure_screen_list_item" />
+
+		<include
+			android:id="@+id/top_panel"
+			layout="@layout/configure_screen_list_item" />
+
+		<include
+			android:id="@+id/bottom_panel"
+			layout="@layout/configure_screen_list_item" />
+
+		<include
+			android:id="@+id/transparent_widgets_button"
+			layout="@layout/configure_screen_list_item" />
+
+		<LinearLayout
+			android:id="@+id/items_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical" />
 
 	</LinearLayout>
 
