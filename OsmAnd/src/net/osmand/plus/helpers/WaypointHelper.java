@@ -245,13 +245,15 @@ public class WaypointHelper {
 				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
 				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() != -1
-						&& inf.getLastLocationIndex() < currentRoute) {
+						&& inf.getLastLocationIndex() < currentRoute
+						|| inf.getType() != AlarmInfoType.TUNNEL && inf.getLocationIndex() == currentRoute) {
 					// skip
 				} else {
 					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLastLocationIndex() != -1
 							&& currentRoute > inf.getLocationIndex()
 							&& currentRoute < inf.getLastLocationIndex()) {
-						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
+						float remainTunnelLength = route.getDistanceToPoint(inf.getLastLocationIndex());
+						inf.setFloatValue(remainTunnelLength);
 					}
 					int distance = route.getDistanceFromPoint(currentRoute) - route.getDistanceFromPoint(inf.getLocationIndex() - 1);
 					Location nextLocation = route.getNextRouteLocation();
@@ -262,14 +264,10 @@ public class WaypointHelper {
 						distance += distanceBefore;
 						float distanceAfter = route.getImmutableAllLocations().get(inf.getLocationIndex() - 1).distanceTo(nextInfoLocation);
 						distance += distanceAfter;
-					}
-					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLocationIndex() == currentRoute && lastKnownLocation != null) {
-						distance = (int) Math.max(0.0, MapUtils.getDistance(
-								lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-								inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
-					} else if (inf.getLocationIndex() == currentRoute) {
-						kIterator++;
-						continue;
+						if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLocationIndex() == currentRoute) {
+							distance += MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+									inf.getLatitude(), inf.getLongitude());
+						}
 					}
 					if (!atd.isTurnStateActive(0, distance, STATE_LONG_PNT_APPROACH)) {
 						break;
