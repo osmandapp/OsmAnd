@@ -445,6 +445,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 							selectedAppMode, selectedPanel, widgetInfo.key, externalProviderPackage, null);
 				}
 			});
+			view.setOnClickListener(v -> infoButton.callOnClick());
+
 			AndroidUiHelper.updateVisibility(infoButton, true);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
