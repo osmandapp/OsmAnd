@@ -5569,4 +5569,16 @@
     <string name="precise_distance_numbers">Numere de distanță exacte</string>
     <string name="any_connected_with_device">Oricare conectat: %s</string>
     <string name="any_connected">Oricare conectat</string>
+    <string name="key_assignments">Asignările tastelor</string>
+    <string name="previous_row_has_complex_widget">Rândul anterior are un widget complex</string>
+    <string name="shared_string_reassign">Redistribuiți</string>
+    <string name="complex_widget_alert">Widgetul %1$s poate fi plasat numai pe propriul rând.</string>
+    <string name="target_elevation">Altitudine țintă</string>
+    <string name="shared_string_next_event">Următorul eveniment</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="clear_key_assignment">Ștergeți atribuirea tastelor</string>
+    <string name="map_widget_sun_position">Poziția soarelui</string>
+    <string name="see_all_plans">Vedeți toate planurile</string>
+    <string name="clear_key_assignment_desc">Legătura tastelor pentru acțiunea selectată va fi ștearsă și setată la None.</string>
+    <string name="map_widget_sun_position_desc">Acest widget afișează timpul până la răsăritul sau apusul soarelui, în funcție de ora curentă.</string>
 </resources>
