@@ -31,6 +31,7 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.CategoryType;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
@@ -63,7 +64,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	private ImportHelper importHelper;
 	private ItemMenuProvider itemMenuProvider;
 	private GroupMenuProvider groupMenuProvider;
-	private final ItemsSelectionHelper<LocalItem> selectionHelper = new ItemsSelectionHelper<>();
+	private final ItemsSelectionHelper<BaseLocalItem> selectionHelper = new ItemsSelectionHelper<>();
 
 	private LocalItemsAdapter adapter;
 	private boolean selectionMode;
@@ -89,7 +90,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@NonNull
-	public ItemsSelectionHelper<LocalItem> getSelectionHelper() {
+	public ItemsSelectionHelper<BaseLocalItem> getSelectionHelper() {
 		return selectionHelper;
 	}
 
@@ -189,13 +190,13 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 
 	@NonNull
 	private List<Object> getSortedItems() {
-		List<LocalItem> activeItems = new ArrayList<>();
-		List<LocalItem> backupedItems = new ArrayList<>();
+		List<BaseLocalItem> activeItems = new ArrayList<>();
+		List<BaseLocalItem> backupedItems = new ArrayList<>();
 
 		LocalGroup group = getGroup();
 		if (group != null) {
-			for (LocalItem item : group.getItems()) {
-				if (item.isBackuped(app)) {
+			for (BaseLocalItem item : group.getItems()) {
+				if (item instanceof LocalItem && ((LocalItem) item).isBackuped(app)) {
 					backupedItems.add(item);
 				} else {
 					activeItems.add(item);
@@ -213,7 +214,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 		return items;
 	}
 
-	private void sortItems(@NonNull List<LocalItem> items) {
+	private void sortItems(@NonNull List<BaseLocalItem> items) {
 		if (type.isMapsSortingSupported()) {
 			MapsSortMode sortMode = settings.LOCAL_MAPS_SORT_MODE.get();
 			Collections.sort(items, new MapsComparator(app, sortMode));
@@ -294,7 +295,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public boolean isItemSelected(@NonNull LocalItem item) {
+	public boolean isItemSelected(@NonNull BaseLocalItem item) {
 		return selectionHelper.isItemSelected(item);
 	}
 
@@ -304,7 +305,7 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void onItemSelected(@NonNull LocalItem item) {
+	public void onItemSelected(@NonNull BaseLocalItem item) {
 		if (selectionMode) {
 			boolean selected = !isItemSelected(item);
 			selectionHelper.onItemsSelected(Collections.singleton(item), selected);
@@ -318,8 +319,8 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
-		itemMenuProvider.setLocalItem(item);
+	public void onItemOptionsSelected(@NonNull BaseLocalItem item, @NonNull View view) {
+		itemMenuProvider.setItem(item);
 		itemMenuProvider.showMenu(view);
 	}
 
@@ -346,11 +347,11 @@ public class LocalItemsFragment extends LocalBaseFragment implements LocalItemLi
 	}
 
 	@Override
-	public void onOperationProgress(@NonNull OperationType type, @NonNull LocalItem... values) {
+	public void onOperationProgress(@NonNull OperationType type, @NonNull BaseLocalItem... values) {
 		LocalGroup group = getGroup();
 		if (type == DELETE_OPERATION && group != null) {
-			for (LocalItem item : values) {
-				group.removeItem(item);
+			for (BaseLocalItem item : values) {
+				group.removeItem(app, item);
 			}
 		}
 		if (isAdded()) {

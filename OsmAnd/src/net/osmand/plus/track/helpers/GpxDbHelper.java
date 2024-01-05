@@ -68,7 +68,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		for (GPXInfo gpxInfo : gpxInfos) {
 			File file = new File(gpxInfo.getFileName());
 			if (file.exists() && !file.isDirectory() && !hasItem(file)) {
-				add(new GpxDataItem(file));
+				add(new GpxDataItem(app, file));
 			}
 		}
 	}
@@ -84,7 +84,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
 		boolean success = database.rename(currentFile, newFile);
 		if (success) {
-			GpxDataItem newItem = new GpxDataItem(newFile);
+			GpxDataItem newItem = new GpxDataItem(app, newFile);
 			GpxDataItem oldItem = dataItems.get(currentFile);
 			if (oldItem != null) {
 				newItem.copyData(oldItem);
@@ -194,7 +194,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	private void readGpxItem(@NonNull File file, @Nullable GpxDataItem item, @Nullable GpxDataItemCallback callback) {
-		readingItemsMap.put(file, item != null ? item : new GpxDataItem(file));
+		readingItemsMap.put(file, item != null ? item : new GpxDataItem(app, file));
 		if (callback != null) {
 			readingItemsCallbacks.put(file, callback);
 		}

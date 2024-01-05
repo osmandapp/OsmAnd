@@ -216,7 +216,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		processScreenHeight(container);
 
 		MapActivity mapActivity = requireMapActivity();
-		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity);
 
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
 		markerPaddingXPx = dpToPx(MARKER_PADDING_X_DP);
@@ -1317,7 +1317,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			if (MapRouteInfoMenu.chooseRoutesVisible) {
 				mapActivity.getFragmentsHelper().getChooseRouteFragment().dismiss();
 			}
-			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app, false);
+			updateLocationViewCache = UpdateLocationUtils.getUpdateLocationViewCache(mapActivity, false);
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
 			mapActivity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -1542,7 +1542,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void runLayoutListener() {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
@@ -1975,7 +1974,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int addStatusBarHeightIfNeeded(int res) {
 		MapActivity mapActivity = getMapActivity();
-		if (Build.VERSION.SDK_INT >= 21 && mapActivity != null) {
+		if (mapActivity != null) {
 			// One pixel is needed to fill a thin gap between the status bar and the fragment.
 			return res + AndroidUtils.getStatusBarHeight(mapActivity) - 1;
 		}

@@ -43,7 +43,7 @@ public class AmenityExtensionsHelper {
 	@Nullable
 	public Amenity findAmenity(@NonNull String nameEn, double lat, double lon) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
 		for (Amenity amenity : amenities) {
 			if (Algorithms.stringsEqual(amenity.toStringEn(), nameEn)) {

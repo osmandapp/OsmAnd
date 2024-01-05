@@ -192,7 +192,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun addTrackItemToSmartFolder(item: TrackItem) {
-		LOG.debug("addTrackItemToSmartFolder")
+		LOG.debug("addTrackItemToSmartFolder " + item.name)
 		val newSet = HashSet(allAvailableTrackItems)
 		newSet.add(item)
 		allAvailableTrackItems = newSet

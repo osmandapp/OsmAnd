@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.configmap.tracks.SelectedTracksHelper;
+import net.osmand.plus.configmap.tracks.TrackTabsHelper;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksFragment;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -37,7 +37,7 @@ public class RecentlyVisibleViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView() {
-		SelectedTracksHelper helper = fragment.getSelectedTracksHelper();
+		TrackTabsHelper helper = fragment.getTrackTabsHelper();
 		Set<TrackItem> recentlyVisibleTracks = helper.getRecentlyVisibleTracks();
 		title.setText(app.getString(R.string.recently_visible, "(" + recentlyVisibleTracks.size() + ")"));
 

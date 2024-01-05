@@ -235,6 +235,25 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			mapRendererContext.updateElevationConfiguration();
+			mapRendererContext.recreateHeightmapProvider();
+		}
+	}
+
+	// If enabled, map should be rendered with elevation data (in 3D)
+	public boolean is3DMapsEnabled() {
+		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get();
+	}
+
+	public boolean is3DReliefAllowed() {
+		return app.useOpenGlRenderer() && InAppPurchaseUtils.is3dMapsAvailable(app);
+	}
+
 	public boolean isTerrainLayerEnabled() {
 		return TERRAIN.get();
 	}

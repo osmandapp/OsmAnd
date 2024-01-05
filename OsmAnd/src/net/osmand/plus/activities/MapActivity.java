@@ -104,7 +104,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
-import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
@@ -477,6 +477,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
+
+		importHelper.setUiActivity(this);
 		if (!intentHelper.parseLaunchIntents()) {
 			intentHelper.parseContentIntent();
 		}
@@ -789,7 +791,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void readLocationToShow() {
 		showMapControls();
 		OsmandMapTileView mapView = getMapView();
-		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon currentLatLon = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow(latLonToShow);
 		Object toShow = settings.getAndClearObjectToShow();
@@ -884,7 +886,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (editToShow) {
 					mapContextMenu.openEditor();
 				}
-			} else if (!latLonToShow.equals(cur)) {
+			} else if (!latLonToShow.equals(currentLatLon)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
@@ -1304,7 +1306,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void hideContextAndRouteInfoMenues() {
-		mapContextMenu.hideMenues();
+		mapContextMenu.hideMenus();
 		mapRouteInfoMenu.hide();
 	}
 

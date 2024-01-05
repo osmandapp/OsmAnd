@@ -91,7 +91,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			}
 		});
 
-		adapter = new HistoryAdapter(app, this, nightMode);
+		adapter = new HistoryAdapter(mapActivity, this, nightMode);
 		adapter.updateSettingsItems(items, itemsGroups, selectedItems);
 		recyclerView.setAdapter(adapter);
 

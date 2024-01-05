@@ -234,9 +234,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						R.layout.popup_list_text_item, options));
 				popup.setOnItemClickListener((parent, view, position, id) -> {
 					selectedSplitInterval = position;
-					GpxSelectionParams params = GpxSelectionParams.newInstance()
-							.showOnMap().selectedByUser().syncGroup().addToMarkers()
-							.addToHistory().saveSelection();
+					GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 					SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), params);
 					List<GpxDisplayGroup> groups = getDisplayGroups();
 					if (groups.size() > 0) {

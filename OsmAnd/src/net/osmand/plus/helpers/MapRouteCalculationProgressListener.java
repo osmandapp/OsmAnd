@@ -38,50 +38,56 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 
 	@Override
 	public void onCalculationStart() {
-		ProgressBar progressBar = activity.findViewById(R.id.map_horizontal_progress);
-		activity.setupRouteCalculationProgressBar(progressBar);
-		activity.getMapRouteInfoMenu().routeCalculationStarted();
+		app.runInUIThread(() -> {
+			ProgressBar progressBar = activity.findViewById(R.id.map_horizontal_progress);
+			activity.setupRouteCalculationProgressBar(progressBar);
+			activity.getMapRouteInfoMenu().routeCalculationStarted();
 
-		if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
-			activity.getDashboard().updateRouteCalculationProgress(0);
-		}
+			if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
+				activity.getDashboard().updateRouteCalculationProgress(0);
+			}
+		});
 	}
 
 	@Override
 	public void onUpdateCalculationProgress(int progress) {
-		activity.getMapRouteInfoMenu().updateRouteCalculationProgress(progress);
-		activity.getDashboard().updateRouteCalculationProgress(progress);
-		activity.updateProgress(progress);
+		app.runInUIThread(() -> {
+			activity.getMapRouteInfoMenu().updateRouteCalculationProgress(progress);
+			activity.getDashboard().updateRouteCalculationProgress(progress);
+			activity.updateProgress(progress);
+		});
 	}
 
 	@Override
 	public void onRequestPrivateAccessRouting() {
-		ApplicationMode routingProfile = routingHelper.getAppMode();
-		if (AndroidUtils.isActivityNotDestroyed(activity)
-				&& !settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
-			List<ApplicationMode> modes = ApplicationMode.values(app);
-			for (ApplicationMode mode : modes) {
-				if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
-					settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
+		app.runInUIThread(() -> {
+			ApplicationMode routingProfile = routingHelper.getAppMode();
+			if (AndroidUtils.isActivityNotDestroyed(activity)
+					&& !settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(routingProfile)) {
+				List<ApplicationMode> modes = ApplicationMode.values(app);
+				for (ApplicationMode mode : modes) {
+					if (!getAllowPrivatePreference(mode).getModeValue(mode)) {
+						settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
+					}
+				}
+				OsmandPreference<Boolean> allowPrivate = getAllowPrivatePreference(routingProfile);
+				if (!allowPrivate.getModeValue(routingProfile)) {
+					AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
+					dlg.setMessage(R.string.private_access_routing_req);
+					dlg.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+						for (ApplicationMode mode : modes) {
+							OsmandPreference<Boolean> preference = getAllowPrivatePreference(mode);
+							if (!preference.getModeValue(mode)) {
+								preference.setModeValue(mode, true);
+							}
+						}
+						routingHelper.onSettingsChanged(null, true);
+					});
+					dlg.setNegativeButton(R.string.shared_string_no, null);
+					dlg.show();
 				}
 			}
-			OsmandPreference<Boolean> allowPrivate = getAllowPrivatePreference(routingProfile);
-			if (!allowPrivate.getModeValue(routingProfile)) {
-				AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
-				dlg.setMessage(R.string.private_access_routing_req);
-				dlg.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-					for (ApplicationMode mode : modes) {
-						OsmandPreference<Boolean> preference = getAllowPrivatePreference(mode);
-						if (!preference.getModeValue(mode)) {
-							preference.setModeValue(mode, true);
-						}
-					}
-					routingHelper.onSettingsChanged(null, true);
-				});
-				dlg.setNegativeButton(R.string.shared_string_no, null);
-				dlg.show();
-			}
-		}
+		});
 	}
 
 	@NonNull
@@ -96,21 +102,25 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 
 	@Override
 	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-		activity.getMapRouteInfoMenu().updateSuggestedMissingMaps(missingMaps, onlineSearch);
+		app.runInUIThread(() -> {
+			activity.getMapRouteInfoMenu().updateSuggestedMissingMaps(missingMaps, onlineSearch);
+		});
 	}
 
 	@Override
 	public void onCalculationFinish() {
-		activity.getMapRouteInfoMenu().routeCalculationFinished();
-		activity.getDashboard().routeCalculationFinished();
+		app.runInUIThread(() -> {
+			activity.getMapRouteInfoMenu().routeCalculationFinished();
+			activity.getDashboard().routeCalculationFinished();
 
-		ProgressBar progressBar = activity.findViewById(R.id.map_horizontal_progress);
-		AndroidUiHelper.updateVisibility(progressBar, false);
+			ProgressBar progressBar = activity.findViewById(R.id.map_horizontal_progress);
+			AndroidUiHelper.updateVisibility(progressBar, false);
 
-		// for voice navigation. (routingAppMode may have changed.)
-		ApplicationMode routingAppMode = routingHelper.getAppMode();
-		if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
-			activity.setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
-		}
+			// for voice navigation. (routingAppMode may have changed.)
+			ApplicationMode routingAppMode = routingHelper.getAppMode();
+			if (routingAppMode != null && settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode) != null) {
+				activity.setVolumeControlStream(settings.AUDIO_MANAGER_STREAM.getModeValue(routingAppMode));
+			}
+		});
 	}
 }

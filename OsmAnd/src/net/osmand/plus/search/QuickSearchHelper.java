@@ -164,7 +164,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(ACCEPT_ALL_POI_TYPE_FILTER, rect, true);
 
 		MapPoiTypes types = app.getPoiTypes();
 		for (Amenity amenity : amenities) {

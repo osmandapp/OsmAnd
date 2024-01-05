@@ -1,7 +1,6 @@
 package net.osmand.plus.utils;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -21,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -77,10 +75,6 @@ public class UiUtilities {
 
 	private static final Log LOG = PlatformUtil.getLog(UiUtilities.class);
 
-	private static final int ORIENTATION_0 = 0;
-	private static final int ORIENTATION_90 = 3;
-	private static final int ORIENTATION_270 = 1;
-	private static final int ORIENTATION_180 = 2;
 	private final TLongObjectHashMap<Drawable> drawableCache = new TLongObjectHashMap<>();
 	private final OsmandApplication app;
 	private static final int INVALID_ID = -1;
@@ -219,35 +213,6 @@ public class UiUtilities {
 		}
 
 		return coloredDrawable;
-	}
-
-	public int getScreenOrientation() {
-		return getScreenOrientation(app);
-	}
-
-	public int getScreenOrientation(@NonNull Context context) {
-		int screenOrientation = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
-		switch (screenOrientation) {
-			case ORIENTATION_0:   // Device default (normally portrait)
-				screenOrientation = 0;
-				break;
-			case ORIENTATION_90:  // Landscape right
-				screenOrientation = 90;
-				break;
-			case ORIENTATION_270: // Landscape left
-				screenOrientation = 270;
-				break;
-			case ORIENTATION_180: // Upside down
-				screenOrientation = 180;
-				break;
-		}
-		//Looks like screenOrientation correction must not be applied for devices without compass?
-		PackageManager manager = app.getPackageManager();
-		boolean hasCompass = manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
-		if (!hasCompass) {
-			screenOrientation = 0;
-		}
-		return screenOrientation;
 	}
 
 	public static void setupSnackbar(Snackbar snackbar, boolean nightMode) {

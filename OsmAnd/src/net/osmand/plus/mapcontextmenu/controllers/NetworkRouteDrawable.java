@@ -80,7 +80,7 @@ public class NetworkRouteDrawable extends Drawable {
 			RenderingRuleSearchRequest request = renderer.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 			request.saveState();
 
-			String tag = "route_" + routeKey.type.getTag();
+			String tag = "route_" + routeKey.type.getName();
 			String color = routeKey.getValue("osmc_textcolor");
 
 			request.setInitialTagValueZoom(tag, null, 14, null);

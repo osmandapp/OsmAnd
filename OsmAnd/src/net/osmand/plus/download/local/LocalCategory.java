@@ -39,7 +39,7 @@ public class LocalCategory {
 			group = new LocalGroup(itemType);
 			groups.put(itemType, group);
 		}
-		group.addItem(item);
+		group.addItem(item.getFileName(), item);
 	}
 
 	public long getSize() {

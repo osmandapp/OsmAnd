@@ -40,7 +40,7 @@ public enum MapsSortMode {
 
 	@NonNull
 	public static MapsSortMode getDefaultSortMode() {
-		return NAME_ASCENDING;
+		return COUNTRY_NAME_ASCENDING;
 	}
 
 	@NonNull

@@ -39,7 +39,7 @@ import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
-import net.osmand.plus.auto.NavigationScreen;
+import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;

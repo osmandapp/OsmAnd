@@ -52,7 +52,7 @@
     <string name="public_transport_try_change_settings">Assajatz de cambiar lei paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calcular la caminada</string>
     <string name="public_transport_type">Mena de transpòrts</string>
-    <string name="send_log">Envia lo registre d\'errors</string>
+    <string name="send_log">Mandar lo jornau</string>
     <string name="routing_attr_avoid_tram_name">Evitar lo transvai</string>
     <string name="routing_attr_avoid_tram_description">Evita lo transvai</string>
     <string name="routing_attr_avoid_bus_name">Sensa autobus</string>
@@ -1575,7 +1575,7 @@
     <string name="updated">Actualizat : %s</string>
     <string name="osmand_live">OsmAnd Live</string>
     <string name="troubleshooting_description">Per cas de dificultats amb vòstreis cròmpas, seguir aquest liame.</string>
-    <string name="troubleshooting">Resolucion dei dificultats</string>
+    <string name="troubleshooting">Resolucion de dificultats</string>
     <string name="contact_support">Contactar lo suppòrt</string>
     <string name="contact_support_description">Per tota demanda, seretz ben brave de nos contactar au %1$s .</string>
     <string name="empty_purchases_description">Se vòstra cròmpa se visualiza pas aicí, clicatz sus «%1$s» ò contactatz nòstra equipa d\'ajuda.</string>
@@ -2342,4 +2342,13 @@
     <string name="purchases_feature_desc_cross_buy">Utilisatz vòstre abonament sus totei lei plataformas (Android, iOS, web) sensa còst suplementari.</string>
     <string name="compass_visible_if_map_rotated">Visible se la mapa es revirada</string>
     <string name="osm_live_banner_desc">Teledescargatz un nombre de mapas illimitat, amb d’actualizacions setmanieras, jornadieras emai oràrias.</string>
+    <string name="dialogs_and_notifications_descr">Controlar lei fenestrons contextuaus, lei boitas de dialòg e lei notificacions.</string>
+    <string name="user_guide">Guida de l\'utilizator</string>
+    <string name="coords_format">Format de coordonadas</string>
+    <string name="rotate_map_bearing_opt">Segon la direccion</string>
+    <string name="unit_of_length_descr">Modificar leis unitats de longitud.</string>
+    <string name="most_viewed">Lei pus vistas</string>
+    <string name="rotate_map_compass_opt">Segon la bossòla</string>
+    <string name="driving_region_descr">Seleccionatz la region guida: EUA, Euròpa, Reiaume Unit, Asia ò autres.</string>
+    <string name="max_speed">Velocitat maximala</string>
 </resources>

@@ -183,10 +183,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		}
 	}
 
-	public void updateWptPt(String wptName, int wptIndex, GPXUtilities.WptPt newWpt) {
+	public void updateWptPt(String wptName, int wptIndex, GPXUtilities.WptPt newWpt, boolean updateTimestamp) {
 		GPXUtilities.WptPt currentWpt = getWptPt(wptName, wptIndex);
 		if (currentWpt != null) {
-			updateWptPt(currentWpt, newWpt);
+			updateWptPt(currentWpt, newWpt, updateTimestamp);
 		} else {
 			addPoint(newWpt);
 		}
@@ -203,13 +203,17 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return currentWpt;
 	}
 
-	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
+	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt, boolean updateTimestamp) {
 		int index = points.indexOf(existingPoint);
 		if (index == -1) {
 			return;
 		}
 		String prevGroupName = existingPoint.category == null ? DEFAULT_WPT_GROUP_NAME : existingPoint.category;
+		long prevTime = existingPoint.time;
 		existingPoint.updatePoint(newWpt);
+		if (!updateTimestamp) {
+			existingPoint.time = prevTime;
+		}
 		if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
 				|| Algorithms.isEmpty(newWpt.category) && Algorithms.isEmpty(prevGroupName)) {
 			removePointFromGroup(existingPoint, prevGroupName);
@@ -218,6 +222,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		}
 		modifiedTime = System.currentTimeMillis();
 		pointsModifiedTime = modifiedTime;
+	}
+	
+	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
+		updateWptPt(existingPoint, newWpt, true);
 	}
 
 	public void updatePointsGroup(String prevGroupName, GPXUtilities.PointsGroup pointsGroup) {

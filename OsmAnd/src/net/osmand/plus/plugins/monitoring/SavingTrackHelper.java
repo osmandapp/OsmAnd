@@ -272,7 +272,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					return new SaveGpxResult(warnings, new HashMap<>());
 				}
 
-				GpxDataItem item = new GpxDataItem(fout);
+				GpxDataItem item = new GpxDataItem(app, fout);
 				item.setAnalysis(gpx.getAnalysis(fout.lastModified()));
 				app.getGpxDbHelper().add(item);
 				lastTimeFileSaved = fout.lastModified();

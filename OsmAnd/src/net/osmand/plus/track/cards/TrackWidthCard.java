@@ -1,7 +1,6 @@
 package net.osmand.plus.track.cards;
 
 import android.graphics.drawable.GradientDrawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -225,7 +224,6 @@ public class TrackWidthCard extends BaseCard {
 		@NonNull
 		@Override
 		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = getDimen(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = getDimen(R.dimen.gpx_group_button_height);

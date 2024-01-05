@@ -70,7 +70,7 @@ public class NavigateGpxHelper {
 	}
 
 	public void step2_markImportedIfNeeded() {
-		GpxDataItem item = new GpxDataItem(new File(gpxFile.path));
+		GpxDataItem item = new GpxDataItem(app, new File(gpxFile.path));
 		item.readGpxParams(gpxFile);
 		item.setParameter(API_IMPORTED, navigationParams.isImportedByApi());
 		app.getGpxDbHelper().add(item);
@@ -83,9 +83,7 @@ public class NavigateGpxHelper {
 		if (selectedGpx != null) {
 			selectedGpx.setGpxFile(gpxFile, app);
 		} else {
-			GpxSelectionParams selectionParams = GpxSelectionParams.newInstance()
-					.showOnMap().syncGroup().selectedByUser().addToMarkers()
-					.addToHistory().saveSelection();
+			GpxSelectionParams selectionParams = GpxSelectionParams.getDefaultSelectionParams();
 			helper.selectGpxFile(gpxFile, selectionParams);
 		}
 		step4_approximateGpxIfNeeded();

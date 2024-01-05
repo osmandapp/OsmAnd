@@ -55,7 +55,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 		if (app == null || dashboard == null) {
 			return;
 		}
-		UpdateLocationViewCache cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		UpdateLocationViewCache cache = UpdateLocationUtils.getUpdateLocationViewCache(requireContext());
 		for (DashLocationView view : distances) {
 			cache.arrowResId = view.arrowResId;
 			cache.paintTxt = view.paint;
