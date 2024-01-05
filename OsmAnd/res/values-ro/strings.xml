@@ -5569,7 +5569,7 @@
     <string name="precise_distance_numbers">Numere de distanță exacte</string>
     <string name="any_connected_with_device">Oricare conectat: %s</string>
     <string name="any_connected">Oricare conectat</string>
-    <string name="key_assignments">Key assignments</string>
+    <string name="key_assignments">Asignările tastelor</string>
     <string name="previous_row_has_complex_widget">Rândul anterior are un widget complex</string>
     <string name="shared_string_reassign">Redistribuiți</string>
     <string name="complex_widget_alert">Widgetul %1$s poate fi plasat numai pe propriul rând.</string>
