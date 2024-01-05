@@ -5581,4 +5581,5 @@
     <string name="see_all_plans">Vedeți toate planurile</string>
     <string name="clear_key_assignment_desc">Legătura tastelor pentru acțiunea selectată va fi ștearsă și setată la None.</string>
     <string name="map_widget_sun_position_desc">Acest widget afișează timpul până la răsăritul sau apusul soarelui, în funcție de ora curentă.</string>
+    <string name="tripltek_promo">Promoție Tripltek pentru %1$s luni</string>
 </resources>
