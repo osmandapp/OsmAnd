@@ -158,9 +158,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
 			route = createRouteSegmentFromFinalPoint(hctx, finalPnt);
+			
 			time = (System.nanoTime() - time) ;
 			System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
-			hctx.stats.routingTime+= time/ 1e6;
+			hctx.stats.routingTime += time / 1e6;
+			// TODO wrong routing increased
+//			System.out.println("----");
+//			for (int i = 0; i < route.segments.size(); i++) {
+//				HHNetworkSegmentRes s = route.segments.get(i);
+//				System.out.println("... " + i + " " + s.segment + " " + s.list);
+//			}
 
 			System.out.printf("Parse detailed route segments...");
 			time = System.nanoTime();
@@ -923,10 +930,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (ASSERT_AND_CORRECT_DIST_SMALLER && hctx.config.HEURISTIC_COEFFICIENT > 0
 					&& smallestSegmentCost(hctx, point, nextPoint) - connected.dist >  1) {
 				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
-				// TODO lots of incorrect distance in db 
 				System.err.printf("Incorrect distance %s -> %s: db = %.2f > fastest %.2f \n", point, nextPoint, connected.dist, smallestSegmentCost);
 				connected.dist = smallestSegmentCost;
-//				segmentDist = smallestSegmentCost;
 			}
 			double cost = point.rt(reverse).rtDistanceFromStart  + connected.dist + distanceToEnd(hctx, reverse, nextPoint);
 			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
@@ -1091,7 +1096,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.calculationProgress = new RouteCalculationProgress();
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
 		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());
-		ExcludeTLongObjectMap<RouteSegment> bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps);
+		long ps2 = calcRPId(s, s.getSegmentEnd(), s.getSegmentStart());
+		ExcludeTLongObjectMap<RouteSegment> bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps, ps2);
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) plan.searchRouteInternal(hctx.rctx, s, null, bounds);
 		hctx.rctx.config.MAX_VISITED = -1;
 		TLongObjectHashMap<RouteSegment> resUnique = new TLongObjectHashMap<>();
