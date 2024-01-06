@@ -263,13 +263,16 @@ public class HHRouteDataStructure {
 			Iterator<T> it = queueAdded.iterator();
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
-				FinalRouteSegment rev = p.rt(false).rtDetailedRoute;
-				FinalRouteSegment pos = p.rt(true).rtDetailedRoute;
+				FinalRouteSegment pos = p.rt(false).rtDetailedRoute;
+				FinalRouteSegment rev = p.rt(true).rtDetailedRoute;
 				p.clearRouting();
 				if (stPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(false, rev);
-				} else if (endPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(true, pos);
+					p.setDistanceToEnd(false, distanceToEnd(false, p));
+					p.setDetailedParentRt(false, pos);
+				} 
+				if (endPoints.containsKey(p.index)) {
+					p.setDistanceToEnd(true, distanceToEnd(true, p));
+					p.setDetailedParentRt(true, rev);
 				}
 				it.remove();
 			}
@@ -379,6 +382,19 @@ public class HHRouteDataStructure {
 			return b.toString();
 		}
 		
+		public double distanceToEnd(boolean reverse,  NetworkDBPoint nextPoint) {
+			if (config.HEURISTIC_COEFFICIENT > 0) {
+				double distanceToEnd = nextPoint.rt(reverse).rtDistanceToEnd;
+				if (distanceToEnd == 0) {
+					double dist = HHRoutePlanner.squareRootDist31(reverse ? startX : endX, reverse ? startY : endY, 
+							nextPoint.midX(), nextPoint.midY());
+					distanceToEnd = config.HEURISTIC_COEFFICIENT * dist / rctx.getRouter().getMaxSpeed();
+					nextPoint.setDistanceToEnd(reverse, distanceToEnd);
+				}
+				return distanceToEnd;
+			}
+			return 0;
+		}
 	}
 
 	static class NetworkDBPointCost<T> {
