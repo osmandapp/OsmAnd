@@ -3090,4 +3090,13 @@
 \n • 기타 버그 수정
 \n
 \n</string>
+    <string name="key_event_action_next_app_profile">다음 앱 프로파일</string>
+    <string name="selected_profile">선택된 프로필</string>
+    <string name="voice_announcements">음성 프롬프트</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">음성 프롬프트/알림</string>
+    <string name="start_up_message_pref">팝업 메시지</string>
+    <string name="help_article_personal_storage_name">저장공간</string>
+    <string name="select_voice_provider">음성 안내</string>
+    <string name="key_event_action_previous_app_profile">이전 앱 프로필</string>
+    <string name="application_profiles">앱 프로필</string>
 </resources>
