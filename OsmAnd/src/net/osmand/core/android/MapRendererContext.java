@@ -3,6 +3,10 @@ package net.osmand.core.android;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.FOG_DEFAULT_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.FOG_NIGHTMODE_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.SKY_DEFAULT_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.SKY_NIGHTMODE_COLOR;
 
 import android.util.Log;
 
@@ -241,6 +245,7 @@ public class MapRendererContext {
 			}
 			setMapBackgroundColor();
 		}
+		setSkyAndFogColors();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -261,6 +266,14 @@ public class MapRendererContext {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			mapRendererView.setBackgroundColor(NativeUtilities.createFColorRGB(color));
+		}
+	}
+
+	private void setSkyAndFogColors() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.setSkyColor(NativeUtilities.createFColorRGB(nightMode ? SKY_NIGHTMODE_COLOR : SKY_DEFAULT_COLOR));
+			mapRendererView.setFogColor(NativeUtilities.createFColorRGB(nightMode ? FOG_NIGHTMODE_COLOR : FOG_DEFAULT_COLOR));
 		}
 	}
 
