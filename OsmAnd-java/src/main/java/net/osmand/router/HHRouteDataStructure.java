@@ -13,6 +13,7 @@ import java.util.Queue;
 
 import com.google.protobuf.CodedInputStream;
 
+import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
@@ -300,11 +301,22 @@ public class HHRouteDataStructure {
 		public TLongObjectHashMap<T> loadNetworkPoints(Class<T> pointClass) throws SQLException, IOException {
 			TLongObjectHashMap<T> points = new TLongObjectHashMap<>();
 			for (HHRouteRegionPointsCtx<T> r : regions) {
+				TLongObjectHashMap<T> pnts = null;
 				if (r.networkDB != null) {
-					points.putAll(r.networkDB.loadNetworkPoints(r.id, pointClass));
+					pnts = r.networkDB.loadNetworkPoints(r.id, pointClass);
 				}
 				if (r.file != null) {
-					points.putAll(r.file.initHHPoints(r.fileRegion, r.id, pointClass));
+					pnts = r.file.initHHPoints(r.fileRegion, r.id, pointClass);
+				}
+				if (pnts != null) {
+					TLongObjectIterator<T> it = pnts.iterator();
+					while (it.hasNext()) {
+						it.advance();
+						T pnt = it.value();
+						if (!pnt.incomplete || !points.contains(it.key())) {
+							points.put(it.key(), pnt);
+						}
+					}
 				}
 			}
 			return points;
@@ -465,7 +477,7 @@ public class HHRouteDataStructure {
 			List<? extends NetworkDBPoint> lst, NetworkDBPoint pnt, boolean out)  {
 		try {
 			List<NetworkDBSegment> l = new ArrayList<>();
-			if (bytes == null) {
+			if (bytes == null || bytes.length == 0 || pnt.incomplete) {
 				return l;
 			}
 			ByteArrayInputStream str = new ByteArrayInputStream(bytes);
@@ -480,6 +492,10 @@ public class HHRouteDataStructure {
 				NetworkDBSegment seg = new NetworkDBSegment(start, end, dist, out, false);
 				l.add(seg);
 			}
+			if (str.available() > 0) {
+				System.err.println("Error reading file: " + pnt + " " + out);
+			}
+
 			return l;
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
@@ -562,6 +578,7 @@ public class HHRouteDataStructure {
 		public int clusterId;
 		public int fileId;
 		public short mapId;
+		public boolean incomplete;
 		
 		public long roadId;
 		public short start;
