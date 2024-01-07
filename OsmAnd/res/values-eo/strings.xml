@@ -5419,21 +5419,27 @@
     <string name="copy_build_version">Kopii version de kompilaĵo</string>
     <string name="most_viewed">Ofte legataj</string>
     <string name="app_mode_baby_transport">Transporto de beboj</string>
-    <string name="release_4_6">• eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj
+    <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo
 \n
-\n • nova fenestraĵo: Glisrilato
+\n• spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por granadj dosieroj
 \n
-\n • filtriloj kaj inteligantaj dosierujoj por spuroj
+\n• modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon
 \n
-\n • aldonis vicojn por spura kaj malsupra paneloj de fenestraĵoj kun subteno por ĉiuj fenestraĵoj
+\n• plibonigita administrado de lokaj rimedoj
+\n
+\n• eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj
+\n
+\n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno
+\n
+\n• OsmAnd-Nubo: aliro por forigitaj dosieroj
+\n
+\n• plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento
+\n
+\n • riparitaj problemoj pri travideblaj stataj strioj
 \n
 \n • aldonis fenestraĵon ANT+: temperaturo
 \n
-\n • pli bona mastrumado de memoro por grandaj GPX-spuroj
-\n
 \n • nova fenestraĵo: Disponebla RAM
-\n
-\n • riparitaj problemoj pri travideblaj stataj strioj
 \n
 \n</string>
     <string name="live_monitoring_adress_descr">Difini la retadreson uzante la jenajn argumentojn: latitudo={0}, longitudo={1}, tempomarko={2}, hdop(horizontala diluo de precizo)={3}, altitudo={4}, rapido={5}, direkto={6}, eta(alvena tempo)={7}, etfa(alvena tempo al intercelo)={8}, eda(distanco)={9}, edfa(distanco al intercelo)={10}.</string>
@@ -5569,4 +5575,12 @@
     <string name="clear_key_assignment">Forviŝi klav-asignon</string>
     <string name="see_all_plans">Montri ĉiujn planojn</string>
     <string name="clear_key_assignment_desc">Klav-asigno por la elektita ago estos agordita al neniu klavo.</string>
+    <string name="any_connected_with_device">Ĉiu konektita: %s</string>
+    <string name="precise_distance_numbers">Precizaj valoroj de distancoj</string>
+    <string name="complex_widget_alert">La fenestraĵo %1$s estu nur en aparta vico.</string>
+    <string name="previous_row_has_complex_widget">Antaŭa vico enhavas kompleksan fenestraĵon</string>
+    <string name="shared_string_next_event">Sekva okazaĵo</string>
+    <string name="any_connected">Ĉiu konektita</string>
+    <string name="map_widget_sun_position_desc">Fenestraĵo montranta tempon ĝis sunleviĝo aŭ sunsubiro, depende de la nuna tempo.</string>
+    <string name="map_widget_sun_position">Pozicio de Suno</string>
 </resources>
