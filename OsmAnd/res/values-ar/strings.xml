@@ -299,7 +299,7 @@
     <string name="recording_description">تسجيل %1$s %3$s %2$s</string>
     <string name="map_widget_av_notes">ملاحظات صوت/فيديو</string>
     <string name="audionotes_plugin_description">هذا الملحق يوفر وظائف لتدوين ملاحظات صوتية/مصورة/فيديو خلال الرحلة، سواء باستخدام زر على شاشة الخريطة، أو مباشرة من القائمة لأي موقع على الخريطة.</string>
-    <string name="audionotes_plugin_name">ملاحظات صوتية/مصورة</string>
+    <string name="audionotes_plugin_name">ملاحظات صوت/فيديو</string>
     <string name="download_roads_only_maps">خرائط الطرقات فقط</string>
     <string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية (المستويات الإدارية من 5-9).</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرقات فقط :</string>
@@ -466,7 +466,7 @@
     <string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
     <string name="routing_settings">التوجيه مع الطرق</string>
     <string name="routing_settings_descr">حدد خيارات للتنقل.</string>
-    <string name="general_settings">إعدادات عامة</string>
+    <string name="general_settings">عام</string>
     <string name="general_settings_descr">قم بإعداد العرض والإعدادات العامة للتطبيق.</string>
     <string name="open_street_map_login_descr">مطلوب للمساهمة في Open Street Map (Osm).</string>
     <string name="local_openstreetmap_uploading">يتم الرفع…</string>
@@ -1852,7 +1852,7 @@
     <string name="lang_new">نيوار / نيبال بهاسا</string>
     <string name="lang_ceb">السيبوانية</string>
     <string name="archive_wikipedia_data">لديك بيانات ويكيبيديا منزلة قديمة غير متوافقة. هل تريد أرشفتها؟</string>
-    <string name="disable_recording_once_app_killed">التسجيل في الخلفية</string>
+    <string name="disable_recording_once_app_killed">منع التسجيل في الخلفية</string>
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
     <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
     <string name="rendering_value_disabled_name">معطل</string>
@@ -5417,7 +5417,7 @@
     <string name="external_sensor_name_property_description">اسم المستشعر</string>
     <string name="contact_us">اتصل بنا</string>
     <string name="help_article_map_legend_nautical_map_name">نمط الخرائط البحرية</string>
-    <string name="help_article_map_legend_osmand_name">نمط خرائط أوسماند</string>
+    <string name="help_article_map_legend_osmand_name">ثيم خرائط أوسماند</string>
     <string name="help_article_map_legend_ski_map_name">نمط خريطة التزلج</string>
     <string name="help_article_map_interact_with_map_name">التفاعل مع الخريطة</string>
     <string name="help_article_map_point_layers_on_map_name">النقاط على الخريطة</string>
@@ -5434,7 +5434,7 @@
     <string name="help_article_navigation_routing_moped_routing_name">توجيه الدراجة</string>
     <string name="help_article_navigation_routing_online_routing_name">التوجيه عبر الإنترنت</string>
     <string name="help_article_navigation_routing_osmand_routing_name">حول توجيه أوسماند</string>
-    <string name="help_article_start_with_first_steps_name">الخطوات الأولي</string>
+    <string name="help_article_start_with_first_steps_name">الخطوات الأولى</string>
     <string name="help_article_start_with_main_menu_name">القائمة الرئيسية</string>
     <string name="help_article_troubleshooting_crash_logs_name">سجلات الأعطال</string>
     <string name="copy_build_version">نسخ رقم النسخة</string>
@@ -5491,25 +5491,29 @@
     <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
     <string name="help_article_plan_route_name">تخطيط الطريق</string>
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
-    <string name="release_4_6">• تمت إضافة قدرة تغيير روابط المفاتيح لأجهزة الإدخال الخارجية
+    <string name="release_4_6">"• أندررويد أوتو: تمت إضافة الوضع ثلاثي الأبعاد
 \n
-\n • تمت إضافة ويدجت\"نسبة الإنحدار\".
+\n  • المسارات: خيارات المرشحات والمجلدات الذكية، والذاكرة المحسنة للملفات الأكبر حجمًا
 \n
-\n • تمت إضافة المرشحات والمجلدات الذكية للمسارات
+\n  • تعزيز الويدجت العلوي والسفلي لاستيعاب كافة الإضافات
 \n
-\n • تمت إضافة ويدجت صفوف للوحات العلوية والسفلية مع دعم لجميع الأدوات
+\n  • تحسين إدارة الموارد المحلية
 \n
-\n • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
+\n  • تعيين زر قابل للتخصيص لوحدات التحكم الخارجية
 \n
-\n • تحسين إدارة الذاكرة لمسارات GPX الكبيرة
+\n  • أدوات جديدة: \"نسبة الانحدار\" و\"موضع الشمس\"
 \n
-\n • تحديث إدارة الموارد المحلية في التنزيلات
+\n  • أوسماند كلاود: يمكنك الآن الوصول إلى الملفات المحذوفة
 \n
-\n • تمت إضافة القطعة \"ذاكرة الوصول العشوائي المتوفرة\"
+\n  • تحسين تلوين المسار في وضع المنحدر مع تدرج متماثل جديد
 \n
-\n • تم إصلاح المشكلات المتعلقة بشفافية شريط الحالة
+\n  • حل المشكلات المتعلقة بشريط الحالة الشفاف
 \n
-\n</string>
+\n  • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
+\n
+\n  • خيار ويدجت \"ذاكرة الوصول العشوائي المتوفرة\".
+\n
+\n"</string>
     <string name="app_mode_baby_transport">عربة الطفل</string>
     <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="sensor_temperature_desc">درجة الحرارة من جهاز الاستشعار</string>
@@ -5647,4 +5651,12 @@
     <string name="key_assignments_already_cleared_message">تم مسح كافة التعيينات الرئيسية بالفعل</string>
     <string name="use_v1_auto_zoom">التكبير التلقائي المنفصل (الإصدار القديم)</string>
     <string name="add_new_button">أضف زر جديد</string>
+    <string name="precise_distance_numbers">أرقام المسافة الصحيحة</string>
+    <string name="any_connected">أي صلة</string>
+    <string name="any_connected_with_device">أي صلة: %s</string>
+    <string name="complex_widget_alert">%1$s لا يمكن وضع ويدجت إلا في الصف المخصص.</string>
+    <string name="previous_row_has_complex_widget">يحتوي الصف السابق على حيارات ويدجت مستخدم</string>
+    <string name="shared_string_next_event">التالي</string>
+    <string name="map_widget_sun_position">موقع الشمس</string>
+    <string name="map_widget_sun_position_desc">يعرض هذا الويدجت الوقت حتى شروق الشمس أو غروبها، اعتمادا على الوقت الحالي.</string>
 </resources>
