@@ -32,7 +32,7 @@ public class TrackFolderAnalysis {
 		}
 		for (TrackItem trackItem : items) {
 			GpxDataItem dataItem = trackItem.getDataItem();
-			GPXTrackAnalysis analysis = dataItem != null ? dataItem.getGpxData().getAnalysis() : null;
+			GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;
 			if (analysis != null) {
 				totalDistance += analysis.totalDistance;
 				diffElevationUp += analysis.diffElevationUp;

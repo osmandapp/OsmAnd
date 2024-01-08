@@ -89,27 +89,12 @@ import net.osmand.plus.settings.backend.preferences.PreferenceWithListener;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.settings.backend.storages.IntermediatePointsStorage;
-import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.AutoZoomMap;
-import net.osmand.plus.settings.enums.CompassMode;
-import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.settings.enums.DistanceByTapTextSize;
-import net.osmand.plus.settings.enums.DrivingRegion;
-import net.osmand.plus.settings.enums.HistorySource;
-import net.osmand.plus.settings.enums.LocationSource;
-import net.osmand.plus.settings.enums.Map3DModeVisibility;
-import net.osmand.plus.settings.enums.MapsSortMode;
-import net.osmand.plus.settings.enums.MetricsConstants;
-import net.osmand.plus.settings.enums.SimulationMode;
-import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.settings.enums.TracksSortByMode;
-import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.settings.enums.*;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -1279,6 +1264,12 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference(this, "use_kalman_filter_compass", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> USE_VOLUME_BUTTONS_AS_ZOOM = new BooleanPreference(this, "use_volume_buttons_as_zoom", false).makeProfile().cache();
 
+	public final CommonPreference<Boolean> PRECISE_DISTANCE_NUMBERS = new BooleanPreference(this, "precise_distance_numbers", true).makeProfile().cache();
+
+	{
+		PRECISE_DISTANCE_NUMBERS.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
+
 	public final OsmandPreference<Boolean> DO_NOT_SHOW_STARTUP_MESSAGES = new BooleanPreference(this, "do_not_show_startup_messages", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> SHOW_DOWNLOAD_MAP_DIALOG = new BooleanPreference(this, "show_download_map_dialog", true).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference(this, "do_not_use_animations", false).makeProfile().cache();
@@ -1304,11 +1295,6 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Float> MAP_DENSITY = new FloatPreference(this, "map_density_n", 1f).makeProfile().cache();
-
-	{
-		MAP_DENSITY.setModeDefaultValue(ApplicationMode.CAR, 1.5f);
-	}
-
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference(this, "show_poi_label", false).makeProfile();
 
@@ -1424,6 +1410,7 @@ public class OsmandSettings {
 	{
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.CAR, true);
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
 	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference(this, "interrupt_music", false).makeProfile();
@@ -1721,7 +1708,7 @@ public class OsmandSettings {
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
-		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_BEARING);
 	}
 
 	public boolean isCompassMode(@NonNull CompassMode compassMode) {
@@ -1910,15 +1897,18 @@ public class OsmandSettings {
 
 		Iterator<String> iterator = pages.iterator();
 		while (iterator.hasNext()) {
+			boolean pageSeparatorAdded = false;
 			String page = iterator.next();
-			for (String id : Arrays.asList(page.split(WIDGET_SEPARATOR))) {
+			for (String id : page.split(WIDGET_SEPARATOR)) {
 				if (WidgetType.isComplexWidget(id)) {
+					pageSeparatorAdded = true;
 					builder.append(id).append(PAGE_SEPARATOR);
 				} else {
+					pageSeparatorAdded = false;
 					builder.append(id).append(WIDGET_SEPARATOR);
 				}
 			}
-			if (iterator.hasNext()) {
+			if (iterator.hasNext() && !pageSeparatorAdded) {
 				builder.append(PAGE_SEPARATOR);
 			}
 		}
@@ -2774,7 +2764,7 @@ public class OsmandSettings {
 	 * map 3d mode
 	 */
 
-	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE_IN_3D_MODE, Map3DModeVisibility.values()).makeProfile().cache();
+	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE, Map3DModeVisibility.values()).makeProfile().cache();
 
 	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
 
@@ -2966,7 +2956,7 @@ public class OsmandSettings {
 			Map<String, IndexItem> supportedTTS = getSupportedTtsByLanguages(ctx);
 			IndexItem index = supportedTTS.get(language);
 			if (index != null) {
-				if (!index.isDownloaded() && !index.isDownloading(ctx)) {
+				if (!index.isDownloaded() && (ctx.isApplicationInitializing() || !index.isDownloading(ctx))) {
 					downloadTtsWithoutInternet(ctx, index);
 				}
 				return language + IndexConstants.VOICE_PROVIDER_SUFFIX;
@@ -3112,9 +3102,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
 			new BooleanPreference(this, "show_relative_bearing", true).makeProfile();
 
-	public final OsmandPreference<Boolean> APPROXIMATE_BEARING =
-			new BooleanPreference(this, "calculate_bearing", false).makeProfile();
-
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();
 
@@ -3129,13 +3116,7 @@ public class OsmandSettings {
 
 	// UI boxes
 	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME =
-			new BooleanPreference(this, "transparent_map_theme", true).makeProfile();
-
-	{
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.CAR, false);
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
+			new BooleanPreference(this, "transparent_map_theme", false).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_STREET_NAME = new BooleanPreference(this, "show_street_name", false).makeProfile();
 

@@ -7,6 +7,7 @@ import net.osmand.plus.R
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.FilterType.FOLDER
 import net.osmand.plus.track.data.TrackFolder
+import net.osmand.plus.track.helpers.GpxDbUtils
 import net.osmand.util.Algorithms
 
 class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterChangedListener?) :
@@ -29,7 +30,9 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 		} else {
 			val newCollection = HashMap<String, Int>()
 			for (item in items!!) {
-				val folderName = item.dataItem?.gpxData?.containingFolder ?: ""
+				val folderName = item.dataItem?.file?.let {
+					GpxDbUtils.getGpxFileDir(app, it)
+				} ?: ""
 				val count = newCollection[folderName] ?: 0
 				newCollection[folderName] = count + 1
 			}
@@ -44,7 +47,7 @@ class TrackFolderFilter(app: OsmandApplication, filterChangedListener: FilterCha
 			if (!Algorithms.isEmpty(selectedItems)) {
 				for (folder in selectedItems) {
 					trackItem.dataItem?.let { gpxDataItem ->
-						if (Algorithms.stringsEqual(gpxDataItem.gpxData.containingFolder, folder)) {
+						if (Algorithms.stringsEqual(GpxDbUtils.getGpxFileDir(app, gpxDataItem.file), folder)) {
 							return true
 						}
 					}

@@ -4,6 +4,7 @@ import static net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
+import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
 import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.CURRENT_RECORDING;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.OPEN_TAB_NAME;
@@ -53,7 +54,7 @@ import net.osmand.plus.myplaces.favorites.dialogs.EditFavoriteGroupDialogFragmen
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -64,7 +65,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
@@ -492,7 +493,9 @@ public class IntentHelper {
 					}
 				}
 			}
-
+			if (intent.getBooleanExtra(CLOSE_ALL_FRAGMENTS, false)) {
+				mapActivity.getFragmentsHelper().closeAllFragments();
+			}
 			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
 				Bundle openMapMarkersGroupsExtra = intent.getBundleExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
 				if (openMapMarkersGroupsExtra != null) {

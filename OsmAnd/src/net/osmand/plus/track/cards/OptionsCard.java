@@ -278,7 +278,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createGpsFilterItem() {
-		Drawable gpxFilterIcon = getActiveIcon(R.drawable.ic_action_filter);
+		Drawable gpxFilterIcon = getActiveIcon(R.drawable.ic_action_filter_dark);
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(AndroidUtils.getDrawableForDirection(app, gpxFilterIcon))
 				.setTitle(app.getString(R.string.shared_string_gps_filter))

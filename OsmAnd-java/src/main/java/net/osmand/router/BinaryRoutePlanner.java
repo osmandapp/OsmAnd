@@ -78,19 +78,16 @@ public class BinaryRoutePlanner {
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, TLongObjectMap<RouteSegment> boundaries) throws InterruptedException, IOException {
+	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end, 
+			TLongObjectMap<RouteSegment> boundaries) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
 		// Initializing priority queue to visit way segments 
 		PriorityQueue<RouteSegmentCost> graphDirectSegments = new PriorityQueue<>(50, new SegmentsComparator());
 		PriorityQueue<RouteSegmentCost> graphReverseSegments = new PriorityQueue<>(50, new SegmentsComparator());
-
 		// Set to not visit one segment twice (stores road.id << X + segmentStart)
-		TLongObjectMap<RouteSegment> visitedDirectSegments = start == null && boundaries != null ? boundaries
-				: new TLongObjectHashMap<RouteSegment>();
-		TLongObjectMap<RouteSegment> visitedOppositeSegments = end == null && boundaries != null ? boundaries
-				: new TLongObjectHashMap<RouteSegment>();
-
+		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
+		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 		initQueuesWithStartEnd(ctx, start, end, graphDirectSegments, graphReverseSegments);
 
 		boolean onlyBackward = ctx.getPlanRoadDirection() < 0;
@@ -174,11 +171,11 @@ public class BinaryRoutePlanner {
 				if (forwardSearch) {
 					boolean doNotAddIntersections = onlyBackward;
 					processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, segment,
-							visitedOppositeSegments, doNotAddIntersections);
+							visitedOppositeSegments, boundaries, doNotAddIntersections);
 				} else {
 					boolean doNotAddIntersections = onlyForward;
 					processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, segment,
-							visitedDirectSegments, doNotAddIntersections);
+							visitedDirectSegments, boundaries, doNotAddIntersections);
 				}
 			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
@@ -192,9 +189,24 @@ public class BinaryRoutePlanner {
 				minCost = new float[] { Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY };
 			}
 			if (ctx.planRouteIn2Directions()) {
-				if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
-					// can't proceed - so no route
-					break;
+				// initial iteration make in 2 directions 
+				if (visitedDirectSegments.isEmpty() && !graphDirectSegments.isEmpty()) {
+					forwardSearch = true;
+				} else if (visitedOppositeSegments.isEmpty() && !graphReverseSegments.isEmpty()) {
+					forwardSearch = false;
+				} else if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
+					// can't proceed any more - check if final already exist
+					graphSegments = graphDirectSegments.isEmpty() ? graphReverseSegments : graphDirectSegments;
+					if (finalSegment == null) {
+						while (!graphSegments.isEmpty()) {
+							RouteSegmentCost pc = graphSegments.poll();
+							if (pc.segment instanceof FinalRouteSegment) {
+								finalSegment = (FinalRouteSegment) pc.segment;
+								break;
+							}
+						}
+					}
+					return finalSegment;
 				} else {
 					RouteSegment fw = graphDirectSegments.peek().segment;
 					RouteSegment bw = graphReverseSegments.peek().segment;
@@ -225,8 +237,7 @@ public class BinaryRoutePlanner {
 		if (ctx.calculationProgress != null) {
 			ctx.calculationProgress.visitedDirectSegments += visitedDirectSegments.size();
 			ctx.calculationProgress.visitedOppositeSegments += visitedOppositeSegments.size();
-			ctx.calculationProgress.directQueueSize += graphDirectSegments.size(); // Math.max(ctx.directQueueSize,
-																					// graphDirectSegments.size());
+			ctx.calculationProgress.directQueueSize += graphDirectSegments.size(); // Math.max(ctx.directQueueSize, graphDirectSegments.size());
 			ctx.calculationProgress.oppositeQueueSize += graphReverseSegments.size();
 		}
 		return finalSegment;
@@ -469,8 +480,9 @@ public class BinaryRoutePlanner {
 	}
 
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegmentCost> graphSegments, TLongObjectMap<RouteSegment> visitedSegments, 
-            RouteSegment startSegment, TLongObjectMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) {
+			PriorityQueue<RouteSegmentCost> graphSegments, TLongObjectMap<RouteSegment> visitedSegments,
+			RouteSegment startSegment, TLongObjectMap<RouteSegment> oppositeSegments,
+			TLongObjectMap<RouteSegment> boundaries, boolean doNotAddIntersections) {
 		if (ASSERT_CHECKS && !checkMovementAllowed(ctx, reverseWaySearch, startSegment)) {
 			throw new IllegalStateException();
 		}
@@ -498,7 +510,8 @@ public class BinaryRoutePlanner {
 			// 2. check if segment was already visited in opposite direction
 			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
 			// onto each segment).
-			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
+			boolean bothDirVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments,
+					currentSegment, oppositeSegments, boundaries);
  			
 			// 3. upload segment itself to visited segments
 			long nextPntId = calculateRoutePointId(currentSegment);
@@ -611,10 +624,15 @@ public class BinaryRoutePlanner {
 	}
 
 	private boolean checkIfOppositeSegmentWasVisited(RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegmentCost> graphSegments, RouteSegment currentSegment, TLongObjectMap<RouteSegment> oppositeSegments) {
+			PriorityQueue<RouteSegmentCost> graphSegments, RouteSegment currentSegment,
+			TLongObjectMap<RouteSegment> oppositeSegments, TLongObjectMap<RouteSegment> boundaries) {
 		// check inverse direction for opposite
 		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
+		if (boundaries != null && ctx.dijkstraMode != 0) {
+			// limit by boundaries for dijkstra mode
+			oppositeSegments = boundaries;
+		}
 		if (oppositeSegments.containsKey(currPoint)) {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
 			RouteSegment curParent = getParentDiffId(currentSegment);
@@ -643,6 +661,10 @@ public class BinaryRoutePlanner {
 				}
 				return true;
 			}
+		}
+		if (boundaries != null && ctx.dijkstraMode == 0 && boundaries.containsKey(currPoint)) {
+			// limit search by boundaries 
+			return true;
 		}
 		return false;
 	}

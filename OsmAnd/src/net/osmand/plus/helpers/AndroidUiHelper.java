@@ -3,7 +3,9 @@ package net.osmand.plus.helpers;
 import static android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
@@ -13,11 +15,13 @@ import android.view.Surface;
 import android.view.View;
 import android.view.View.OnAttachStateChangeListener;
 import android.view.WindowInsetsController;
+import android.view.WindowManager;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.annotation.UiContext;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +32,41 @@ import net.osmand.PlatformUtil;
  */
 public class AndroidUiHelper {
 
+	private static final int ORIENTATION_0 = 0;
+	private static final int ORIENTATION_90 = 3;
+	private static final int ORIENTATION_270 = 1;
+	private static final int ORIENTATION_180 = 2;
+
+	//TODO check constants correctness, looks like ORIENTATION_.. differs from Surface.ROTATION_.. is it intended?
+	public static int getScreenRotation(@NonNull @UiContext Context context) {
+		WindowManager windowManager = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+		int rotation = windowManager.getDefaultDisplay().getRotation();
+		switch (rotation) {
+			case ORIENTATION_0:   // Device default (normally portrait)
+				rotation = 0;
+				break;
+			case ORIENTATION_90:  // Landscape right
+				rotation = 90;
+				break;
+			case ORIENTATION_270: // Landscape left
+				rotation = 270;
+				break;
+			case ORIENTATION_180: // Upside down
+				rotation = 180;
+				break;
+		}
+		//Looks like rotation correction must not be applied for devices without compass?
+		PackageManager manager = context.getPackageManager();
+		boolean hasCompass = manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_COMPASS);
+		if (!hasCompass) {
+			rotation = 0;
+		}
+		return rotation;
+	}
+
     public static int getScreenOrientation(@NonNull Activity activity) {
-        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+	    WindowManager windowManager = activity.getWindowManager();
+        int rotation = windowManager.getDefaultDisplay().getRotation();
         DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;

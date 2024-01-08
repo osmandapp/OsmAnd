@@ -13,6 +13,7 @@ import java.util.Queue;
 
 import com.google.protobuf.CodedInputStream;
 
+import gnu.trove.iterator.TLongObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
@@ -31,6 +32,13 @@ public class HHRouteDataStructure {
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
 		
+		// tweaks for route recalculations
+		int FULL_DIJKSTRA_NETWORK_RECALC = 10;
+		int MAX_START_END_REITERATIONS = 50;  
+		double MAX_INC_COST_CF = 1.25;
+		double MAX_TIME_REITERATION_MS = 60000;
+		
+		///////////
 		Double INITIAL_DIRECTION = null;
 		public final static int CALCULATE_ALL_DETAILED = 3;
 		
@@ -42,7 +50,6 @@ public class HHRouteDataStructure {
 		
 		boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
-		// TODO 3.1 HHRoutePlanner Alternative routes - could use distributions like 50% route (2 alt), 25%/75% route (1 alt)
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
 		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
@@ -161,11 +168,14 @@ public class HHRouteDataStructure {
 			this.networkDB = networkDB;
 		}
 		
-		public HHRouteRegionPointsCtx(short id, HHRouteRegion fileRegion, BinaryMapIndexReader file) {
+		public HHRouteRegionPointsCtx(short id, HHRouteRegion fileRegion, BinaryMapIndexReader file, int routingProfile) {
 			this.id = id;
 			this.fileRegion = fileRegion;
 			this.file = file;
 			this.networkDB = null;
+			if (routingProfile >= 0) {
+				this.routingProfile = routingProfile;
+			}
 		}
 		
 		public int getRoutingProfile() {
@@ -253,12 +263,16 @@ public class HHRouteDataStructure {
 			Iterator<T> it = queueAdded.iterator();
 			while (it.hasNext()) {
 				NetworkDBPoint p = it.next();
+				FinalRouteSegment pos = p.rt(false).rtDetailedRoute;
+				FinalRouteSegment rev = p.rt(true).rtDetailedRoute;
+				p.clearRouting();
 				if (stPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(false, p.rt(false).rtDetailedRoute);
-				} else if (endPoints.containsKey(p.index)) {
-					p.setDetailedParentRt(true, p.rt(true).rtDetailedRoute);
-				} else {
-					p.clearRouting();
+					p.setDistanceToEnd(false, distanceToEnd(false, p));
+					p.setDetailedParentRt(false, pos);
+				} 
+				if (endPoints.containsKey(p.index)) {
+					p.setDistanceToEnd(true, distanceToEnd(true, p));
+					p.setDetailedParentRt(true, rev);
 				}
 				it.remove();
 			}
@@ -290,11 +304,22 @@ public class HHRouteDataStructure {
 		public TLongObjectHashMap<T> loadNetworkPoints(Class<T> pointClass) throws SQLException, IOException {
 			TLongObjectHashMap<T> points = new TLongObjectHashMap<>();
 			for (HHRouteRegionPointsCtx<T> r : regions) {
+				TLongObjectHashMap<T> pnts = null;
 				if (r.networkDB != null) {
-					points.putAll(r.networkDB.loadNetworkPoints(r.id, pointClass));
+					pnts = r.networkDB.loadNetworkPoints(r.id, pointClass);
 				}
 				if (r.file != null) {
-					points.putAll(r.file.initHHPoints(r.fileRegion, r.id, pointClass));
+					pnts = r.file.initHHPoints(r.fileRegion, r.id, pointClass);
+				}
+				if (pnts != null) {
+					TLongObjectIterator<T> it = pnts.iterator();
+					while (it.hasNext()) {
+						it.advance();
+						T pnt = it.value();
+						if (!pnt.incomplete || !points.contains(it.key())) {
+							points.put(it.key(), pnt);
+						}
+					}
 				}
 			}
 			return points;
@@ -357,6 +382,19 @@ public class HHRouteDataStructure {
 			return b.toString();
 		}
 		
+		public double distanceToEnd(boolean reverse,  NetworkDBPoint nextPoint) {
+			if (config.HEURISTIC_COEFFICIENT > 0) {
+				double distanceToEnd = nextPoint.rt(reverse).rtDistanceToEnd;
+				if (distanceToEnd == 0) {
+					double dist = HHRoutePlanner.squareRootDist31(reverse ? startX : endX, reverse ? startY : endY, 
+							nextPoint.midX(), nextPoint.midY());
+					distanceToEnd = config.HEURISTIC_COEFFICIENT * dist / rctx.getRouter().getMaxSpeed();
+					nextPoint.setDistanceToEnd(reverse, distanceToEnd);
+				}
+				return distanceToEnd;
+			}
+			return 0;
+		}
 	}
 
 	static class NetworkDBPointCost<T> {
@@ -455,7 +493,7 @@ public class HHRouteDataStructure {
 			List<? extends NetworkDBPoint> lst, NetworkDBPoint pnt, boolean out)  {
 		try {
 			List<NetworkDBSegment> l = new ArrayList<>();
-			if (bytes == null) {
+			if (bytes == null || bytes.length == 0 || pnt.incomplete) {
 				return l;
 			}
 			ByteArrayInputStream str = new ByteArrayInputStream(bytes);
@@ -470,6 +508,10 @@ public class HHRouteDataStructure {
 				NetworkDBSegment seg = new NetworkDBSegment(start, end, dist, out, false);
 				l.add(seg);
 			}
+			if (str.available() > 0) {
+				System.err.println("Error reading file: " + pnt + " " + out);
+			}
+
 			return l;
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
@@ -483,7 +525,7 @@ public class HHRouteDataStructure {
 		final NetworkDBPoint start;
 		final NetworkDBPoint end;
 		final boolean shortcut;
-		final double dist;
+		double dist;
 		List<LatLon> geom;
 		
 		public NetworkDBSegment(NetworkDBPoint start, NetworkDBPoint end, double dist, boolean direction, boolean shortcut) {
@@ -552,6 +594,7 @@ public class HHRouteDataStructure {
 		public int clusterId;
 		public int fileId;
 		public short mapId;
+		public boolean incomplete;
 		
 		public long roadId;
 		public short start;

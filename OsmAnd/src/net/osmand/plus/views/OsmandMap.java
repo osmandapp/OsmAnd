@@ -4,15 +4,11 @@ import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.WindowManager;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -25,6 +21,8 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+
 public class OsmandMap {
 
 	private final OsmandApplication app;
@@ -35,24 +33,21 @@ public class OsmandMap {
 	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
-	private List<OsmandMapListener> listeners = new ArrayList<>();
+	private List<RenderingViewSetupListener> renderingViewSetupListeners = new ArrayList<>();
 
-	public interface OsmandMapListener {
-		void onChangeZoom(int stp);
-
-		void onSetMapElevation(float angle);
+	public interface RenderingViewSetupListener {
 
 		void onSetupRenderingView();
 	}
 
-	public void addListener(@NonNull OsmandMapListener listener) {
-		if (!listeners.contains(listener)) {
-			listeners = Algorithms.addToList(listeners, listener);
+	public void addRenderingViewSetupListener(@NonNull RenderingViewSetupListener listener) {
+		if (!renderingViewSetupListeners.contains(listener)) {
+			renderingViewSetupListeners = Algorithms.addToList(renderingViewSetupListeners, listener);
 		}
 	}
 
-	public void removeListener(@NonNull OsmandMapListener listener) {
-		listeners = Algorithms.removeFromList(listeners, listener);
+	public void removeRenderingViewSetupListener(@NonNull RenderingViewSetupListener listener) {
+		renderingViewSetupListeners = Algorithms.removeFromList(renderingViewSetupListeners, listener);
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {
@@ -119,60 +114,14 @@ public class OsmandMap {
 		mapView.refreshMap(updateVectorRendering);
 	}
 
-	public void changeZoom(int stp, long time) {
-		mapViewTrackingUtilities.setZoomTime(time);
-		changeZoom(stp);
-	}
-
-	public void changeZoom(int stp) {
-		// delta = Math.round(delta * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
-		boolean changeLocation = false;
-		// if (settings.AUTO_ZOOM_MAP.get() == AutoZoomMap.NONE) {
-		// changeLocation = false;
-		// }
-
-		// double curZoom = mapView.getZoom() + mapView.getZoomFractionalPart() + stp * 0.3;
-		// int newZoom = (int) Math.round(curZoom);
-		// double zoomFrac = curZoom - newZoom;
-		AnimateDraggingMapThread animateDraggingThread = mapView.getAnimatedDraggingThread();
-		if (animateDraggingThread.isAnimatingMapZoom()) {
-			animateDraggingThread.stopAnimatingSync();
-		}
-
-		Zoom zoom = new Zoom(mapView.getZoom(), mapView.getZoomFloatPart(), mapView.getMinZoom(), mapView.getMaxZoom());
-
-		if (stp > 0 && !zoom.isZoomInAllowed()) {
-			Toast.makeText(app, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
-			return;
-		} else if (stp < 0 && !zoom.isZoomOutAllowed()) {
-			Toast.makeText(app, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show();
-			return;
-		}
-
-		zoom.changeZoom(stp);
-		animateDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, changeLocation);
-		if (app.accessibilityEnabled()) {
-			Toast.makeText(app, app.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
-		}
-		for (OsmandMapListener listener : listeners) {
-			listener.onChangeZoom(stp);
-		}
-	}
-
 	public void setMapLocation(double lat, double lon) {
 		mapView.setLatLon(lat, lon);
 		mapViewTrackingUtilities.locationChanged(lat, lon, this);
 	}
 
-	public void setMapElevation(float angle) {
-		for (OsmandMapListener listener : listeners) {
-			listener.onSetMapElevation(angle);
-		}
-	}
-
 	public void setupRenderingView() {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		for (OsmandMapListener listener : listeners) {
+		for (RenderingViewSetupListener listener : renderingViewSetupListeners) {
 			listener.onSetupRenderingView();
 		}
 		NavigationSession navigationSession = app.getCarNavigationSession();

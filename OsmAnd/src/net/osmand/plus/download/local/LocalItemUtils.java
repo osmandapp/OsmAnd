@@ -55,19 +55,29 @@ import static net.osmand.plus.settings.backend.OsmandSettings.CUSTOM_SHARED_PREF
 import static net.osmand.plus.settings.backend.OsmandSettings.SHARED_PREFERENCES_NAME;
 import static java.text.DateFormat.SHORT;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
+import net.osmand.map.OsmandRegions;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
+import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
@@ -228,7 +238,7 @@ public class LocalItemUtils {
 			return ROUTING;
 		} else if (name.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT) || name.endsWith(BINARY_WIKI_MAP_INDEX_EXT)) {
 			return WIKI_AND_TRAVEL_MAPS;
-		} else if (path.contains(LIVE_INDEX_DIR)) {
+		} else if (path.contains(LIVE_INDEX_DIR) && path.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return LIVE_UPDATES;
 		} else if (name.endsWith(BINARY_MAP_INDEX_EXT)) {
 			return name.endsWith(BINARY_ROAD_MAP_INDEX_EXT) ? ROAD_DATA : MAP_DATA;
@@ -240,5 +250,72 @@ public class LocalItemUtils {
 			return OTHER;
 		}
 		return null;
+	}
+
+	@NonNull
+	public static CharSequence getItemName(@NonNull Context context, @NonNull LocalItem item) {
+		LocalItemType type = item.getType();
+		String fileName = item.getFileName();
+		Object attachedObject = item.getAttachedObject();
+
+		if (Algorithms.equalsToAny(type, OSM_EDITS, OSM_NOTES, ACTIVE_MARKERS)) {
+			return type.toHumanString(context);
+		} else if (type == CACHE) {
+			if (fileName.startsWith("heightmap")) {
+				return context.getString(R.string.relief_3d);
+			} else if (fileName.startsWith("hillshade")) {
+				return context.getString(R.string.shared_string_hillshade);
+			} else if (fileName.startsWith("slope")) {
+				return context.getString(R.string.shared_string_slope);
+			} else if (fileName.equals("weather_tiffs.db")) {
+				return context.getString(R.string.weather_online);
+			}
+		} else if (Algorithms.equalsToAny(type, VOICE_DATA, TTS_VOICE_DATA)) {
+			return FileNameTranslationHelper.getVoiceName(context, fileName);
+		} else if (type == MULTIMEDIA_NOTES) {
+			if (attachedObject instanceof Recording) {
+				return ((Recording) attachedObject).getName(context, true);
+			}
+		} else if (type == TRACKS) {
+			return GpxUiHelper.getGpxTitle(fileName);
+		} else if (type == PROFILES) {
+			String key = Algorithms.getFileNameWithoutExtension(fileName);
+			if (Algorithms.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
+				return context.getString(R.string.osmand_settings);
+			} else if (attachedObject instanceof ApplicationMode) {
+				return ((ApplicationMode) attachedObject).toHumanString();
+			}
+		} else if (type == RENDERING_STYLES) {
+			if (attachedObject instanceof String) {
+				return RendererRegistry.getRendererName(context, (String) attachedObject);
+			}
+		}
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandSettings settings = app.getSettings();
+		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
+		boolean reversed = !settings.LOCAL_MAPS_SORT_MODE.get().isCountryMode();
+
+		String divider = ", ";
+		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, true, reversed);
+		if (!Algorithms.isEmpty(name)) {
+			int index = name.indexOf(divider);
+			if (index != -1) {
+				int color = AndroidUtils.getColorFromAttr(context, android.R.attr.textColorSecondary);
+				return UiUtilities.createColorSpannable(name, color, name.substring(index));
+			}
+			return name;
+		}
+		return Algorithms.getFileNameWithoutExtension(fileName).replace('_', ' ');
+	}
+
+	@NonNull
+	public static String getItemDescription(@NonNull Context context, @NonNull LocalItem item) {
+		String size = AndroidUtils.formatSize(context, item.getFile().length());
+		if (item.getType() == CACHE) {
+			return size;
+		} else {
+			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
+			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);
+		}
 	}
 }

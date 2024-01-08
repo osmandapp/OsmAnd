@@ -41,7 +41,7 @@ public class MapZoomCommand extends KeyEventCommand {
 	}
 
 	private void changeZoom(int zoomStep) {
-		app.getOsmandMap().changeZoom(zoomStep);
+		app.getOsmandMap().getMapView().changeZoomManually(zoomStep);
 	}
 
 	@NonNull

@@ -69,7 +69,7 @@ public class RulerWidget {
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(maxWidth / pixDensity, app);
 
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, false);
+			String cacheRulerText = OsmAndFormatter.getFormattedDistance((float) roundedDist, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 			textShadow.setText(cacheRulerText);
 			text.setText(cacheRulerText);
 			ViewGroup.LayoutParams lp = layout.getLayoutParams();

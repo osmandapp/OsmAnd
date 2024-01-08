@@ -104,7 +104,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
-import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
@@ -477,6 +477,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
 		setIntent(intent);
+
+		importHelper.setUiActivity(this);
 		if (!intentHelper.parseLaunchIntents()) {
 			intentHelper.parseContentIntent();
 		}
@@ -699,7 +701,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			disableDrawer();
 		}
 
-		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(mapViewMapActivity)) {
+		if (showWelcomeScreen && FirstUsageWizardFragment.showFragment(this)) {
 			SecondSplashScreenFragment.SHOW = false;
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
 			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
@@ -789,7 +791,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void readLocationToShow() {
 		showMapControls();
 		OsmandMapTileView mapView = getMapView();
-		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
+		LatLon currentLatLon = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
 		PointDescription mapLabelToShow = settings.getAndClearMapLabelToShow(latLonToShow);
 		Object toShow = settings.getAndClearObjectToShow();
@@ -879,13 +881,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					editingContext.setGpxData(gpxData);
 					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext, PLAN_ROUTE_MODE, true);
 				} else {
-					fragmentsHelper.closeAllFragments();
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
 				if (editToShow) {
 					mapContextMenu.openEditor();
 				}
-			} else if (!latLonToShow.equals(cur)) {
+			} else if (!latLonToShow.equals(currentLatLon)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
@@ -1182,6 +1183,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapWidgetsVisibilityHelper;
 	}
 
+	public static void launchMapActivityMoveToTop(@NonNull Context activity) {
+		launchMapActivityMoveToTop(activity, null, null, null);
+	}
+
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
 	                                              @Nullable Bundle prevIntentParams,
 	                                              @Nullable Uri intentData,
@@ -1223,14 +1228,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			AndroidUtils.startActivityIfSafe(activity, newIntent);
 		}
-	}
-
-	public static void launchMapActivityMoveToTop(@NonNull Context activity) {
-		launchMapActivityMoveToTop(activity, null);
-	}
-
-	public static void launchMapActivityMoveToTop(@NonNull Context activity, @Nullable Bundle prevIntentParams) {
-		launchMapActivityMoveToTop(activity, prevIntentParams, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {
@@ -1309,7 +1306,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void hideContextAndRouteInfoMenues() {
-		mapContextMenu.hideMenues();
+		mapContextMenu.hideMenus();
 		mapRouteInfoMenu.hide();
 	}
 

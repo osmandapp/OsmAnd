@@ -342,7 +342,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		double maxCircleRadius = maxRadius;
 		int i = 1;
 		while ((maxCircleRadius -= radius) > 0) {
-			cacheDistances.add(OsmAndFormatter.getFormattedDistance((float) roundedDist * i++, app, false));
+			cacheDistances.add(OsmAndFormatter.getFormattedDistance((float) roundedDist * i++, app,
+					OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS));
 		}
 	}
 

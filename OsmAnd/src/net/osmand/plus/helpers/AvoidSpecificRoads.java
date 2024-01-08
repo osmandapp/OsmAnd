@@ -23,6 +23,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -243,7 +244,7 @@ public class AvoidSpecificRoads {
 			RouteSegmentSearchResult searchResult =
 					RouteSegmentSearchResult.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);
 			if (searchResult != null) {
-				QuadPoint point = searchResult.getPoint();
+				QuadPointDouble point = searchResult.getPoint();
 				LatLon newLoc = new LatLon(MapUtils.get31LatitudeY((int) point.y), MapUtils.get31LongitudeX((int) point.x));
 				ll.setLatitude(newLoc.getLatitude());
 				ll.setLongitude(newLoc.getLongitude());

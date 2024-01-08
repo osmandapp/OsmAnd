@@ -466,7 +466,7 @@
     <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire.</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
-    <string name="arrived_at_destination">Vous êtes arrivés.</string>
+    <string name="arrived_at_destination">Vous êtes arrivé.</string>
     <string name="invalid_locations">Coordonnées invalides</string>
     <string name="go_back_to_osmand">Retourner à la carte</string>
     <string name="shared_string_close">Fermer</string>
@@ -2887,7 +2887,7 @@
     <string name="routing_attr_avoid_subway_description">Évite le métro et les transports ferrés</string>
     <string name="routing_attr_avoid_ferry_name">Éviter le ferry</string>
     <string name="routing_attr_avoid_ferry_description">Éviter le ferry</string>
-    <string name="send_log">Envoyer le journal</string>
+    <string name="send_log">Envoyer les journaux</string>
     <string name="routing_attr_avoid_bus_description">Éviter le bus et le trolleybus</string>
     <string name="routing_attr_avoid_sett_name">Sans pavés</string>
     <string name="routing_attr_avoid_sett_description">Éviter les pavés</string>
@@ -4031,7 +4031,7 @@
     <string name="specify_color_for_map_mode">Définissez une couleur pour le mode de carte %1$s.</string>
     <string name="contact_support_description">Si vous avez des questions, veuillez nous contacter sur %1$s.</string>
     <string name="empty_purchases_description">Si vos achats n\'apparaissent pas ici, appuyez sur \"%1$s\" ou contactez notre équipe d\'assistance.</string>
-    <string name="troubleshooting">Résolution de problèmes</string>
+    <string name="troubleshooting">FAQ</string>
     <string name="troubleshooting_description">Veuillez suivre ce lien si vous rencontrez des problèmes avec vos achats.</string>
     <string name="in_grace_period">En période d\'essai</string>
     <string name="update_all_maps_added">Mettre à jour toutes les cartes ajoutées à %1$s \?</string>
@@ -4157,7 +4157,7 @@
     <string name="unlimited_map_downloads">Téléchargements illimités de cartes</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
     <string name="offline_wikipeadia">Wikipédia hors ligne</string>
-    <string name="offline_wikivoyage">Wikivoyage hors ligne</string>
+    <string name="offline_wikivoyage">Wikivoyage hors-ligne</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continuer avec %1$s</string>
     <string name="not_available_with">Non disponible avec %1$s</string>
@@ -5108,7 +5108,7 @@
     <string name="external_device_characteristic_diastolic">Diastolique</string>
     <string name="external_device_characteristic_cuff_pressure">Pression du brassard</string>
     <string name="external_device_characteristic_pulse_rate">Fréquence du pouls</string>
-    <string name="external_device_characteristic_stride_length">Longueur de foulée</string>
+    <string name="external_device_characteristic_stride_length">Longueur de la foulée</string>
     <string name="ant_plus_bluetooth_off_description">Activez le Bluetooth pour rechercher et appairer des capteurs.</string>
     <string name="external_device_characteristic_temperature">Température</string>
     <string name="external_device_details_information">Information</string>
@@ -5208,7 +5208,7 @@
     <string name="save_track_external_sensors_data">Données</string>
     <string name="external_sensors_source_of_data">Source des données</string>
     <string name="external_sensors_not_found">Capteurs non trouvés</string>
-    <string name="write_data_from_sensor_to_track">Ajouter les données des capteurs externes dans le fichier GPX lors de l\'enregistrement d\'un trajet.</string>
+    <string name="write_data_from_sensor_to_track">Stocker les données des capteurs externes dans le fichier GPX lors de l\'enregistrement de traces.</string>
     <string name="error_calculate">Le résultat du calcul est vide</string>
     <string name="calculate_offline_altitude_descr">Calculer l\'altitude hors ligne sur la base des données de la carte de terrain 3D. Les différences par rapport à l\'altitude fournie par l\'appareil peuvent être utilisées pour corriger l\'altitude.</string>
     <string name="calculate_offline">Calculer hors ligne</string>
@@ -5384,7 +5384,7 @@
     <string name="help_article_start_with_first_steps_name">Premiers pas</string>
     <string name="help_article_widgets_radius_ruler_name">Règle et règle-rayon</string>
     <string name="shared_string_setup">Configuration</string>
-    <string name="telegram_chats">Conversations Telegram</string>
+    <string name="telegram_chats">Chats Telegram</string>
     <string name="github_discussion">Discussions GitHub</string>
     <string name="free_versions_descr">Téléchargez et installez la version gratuite d\'OsmAnd</string>
     <string name="free_versions">Versions gratuites</string>
@@ -5400,7 +5400,7 @@
     <string name="help_article_widgets_markers_name">Gadgets de marqueur</string>
     <string name="help_article_widgets_nav_widgets_name">Gadgets de guidage</string>
     <string name="telegram_chats_descr">Rejoignez l\'une de nos conversations Telegram locales.</string>
-    <string name="copy_build_version">Copier le numéro de build</string>
+    <string name="copy_build_version">Copier la version du build</string>
     <string name="help_article_purchases_giveaway_name">Concours</string>
     <string name="help_article_search_search_all_name">Rechercher tout</string>
     <string name="help_article_start_with_main_menu_name">Menu principal</string>
@@ -5410,30 +5410,34 @@
     <string name="open_issue_on_github">Ouvrir une issue sur GitHub</string>
     <string name="help_article_troubleshooting_general_name">Général</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Enregistrement de trace</string>
-    <string name="most_viewed">Les plus vus</string>
+    <string name="most_viewed">Les plus vu(e)s</string>
     <string name="help_article_widgets_name">Gadgets de la carte</string>
     <string name="help_article_widgets_info_widgets_name">Gadgets d\'information</string>
     <string name="help_article_widgets_map_buttons_name">Boutons de la carte</string>
     <string name="live_monitoring_adress_descr">Spécifiez l\'adresse web avec la syntaxe de paramètre suivants : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Température</string>
     <string name="sensor_temperature_desc">Affiche la température fournie par le capteur</string>
-    <string name="release_4_6">• Ajout de la possibilité de changer les assignements de touches pour les périphériques externes
+    <string name="release_4_6">• Android Auto : ajout du mode 3D
 \n
-\n• Ajout du gadget \"finesse de l\'aile\"
+\n• Traces : Introduction de filtres et de dossiers intelligents, optimisation de la mémoire pour les fichiers plus volumineux
 \n
-\n• Ajout de filtres et de dossiers intelligents pour les traces
+\n• Amélioration des panneaux de gadgets supérieur et inférieur pour accueillir tous les widgets
 \n
-\n• Ajout des lignes pour les gadgets en haut et en bas avec support de tous les gadgets
+\n• Amélioration de la gestion des ressources locales
 \n
-\n• Ajout du support pour le gadget de température ANT+
+\n• Assignation des boutons personnalisable pour les contrôleurs externes
 \n
-\n• Gestion de la mémoire améliorée pour les grandes traces GPX
+\n• Nouveaux gadgets : \"Rapport de glisse\" et \"Position du soleil\"
 \n
-\n• Mise à jour de la gestion des ressources locales dans \"Téléchargements\"
+\n• OsmAnd Cloud : Accès aux fichiers supprimés
 \n
-\n• Ajout du gadget \"RAM disponible\"
+\n• Amélioration de la coloration des pistes en mode Pente avec un nouveau dégradé symétrique
 \n
-\n• Correction de bug avec la barre d\'état transparente
+\n• Résolution des problèmes concernant la barre d\'état transparente
+\n
+\n• Ajout de la prise en charge du widget de température ANT+
+\n
+\n• Introduction du widget \"RAM disponible\"
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transport de bébés</string>
@@ -5567,4 +5571,13 @@
     <string name="button_already_assigned_to_this_action">Ce bouton est déjà assigné à cette action.</string>
     <string name="key_assignments_already_cleared_message">Toutes les assignations de touches ont déjà été effacées</string>
     <string name="add_new_button">Ajouter un nouveau bouton</string>
+    <string name="use_v1_auto_zoom">Auto-zoom discret (ancienne version)</string>
+    <string name="shared_string_next_event">Prochain évènement</string>
+    <string name="map_widget_sun_position">Position du soleil</string>
+    <string name="map_widget_sun_position_desc">Ce gadget indique le temps restant avant le lever ou le coucher du soleil, en fonction de l\'heure actuelle.</string>
+    <string name="previous_row_has_complex_widget">La ligne précédente possède un gadget complexe</string>
+    <string name="complex_widget_alert">Le gadget %1$s ne peut être placé que sur sa propre ligne.</string>
+    <string name="precise_distance_numbers">Distances précises</string>
+    <string name="any_connected">N\'importe quel appareil connecté</string>
+    <string name="any_connected_with_device">N\'importe quel appareil connecté : %s</string>
 </resources>

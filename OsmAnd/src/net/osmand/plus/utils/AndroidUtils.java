@@ -111,7 +111,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -222,18 +221,35 @@ public class AndroidUtils {
 	public static void drawScaledLayerDrawable(@NonNull Canvas canvas, @NonNull LayerDrawable layerDrawable, int locationX, int locationY, float scale) {
 		Paint bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		int layers = layerDrawable.getNumberOfLayers() - 1;
+		int maxVectorLayerWidth = 0;
+		int maxVectorLayerHeight = 0;
+		for (int i = 0; i <= layers; i++) {
+			Drawable drawable = layerDrawable.getDrawable(i);
+			if (drawable instanceof VectorDrawable) {
+				maxVectorLayerWidth = Math.max(maxVectorLayerWidth, drawable.getIntrinsicWidth());
+				maxVectorLayerHeight = Math.max(maxVectorLayerHeight, drawable.getIntrinsicHeight());
+			}
+		}
 		for (int i = 0; i <= layers; i++) {
 			Drawable drawable = layerDrawable.getDrawable(i);
 			if (drawable != null) {
-				int width = (int) (drawable.getIntrinsicWidth() * scale);
-				int height = (int) (drawable.getIntrinsicHeight() * scale);
 				if (drawable instanceof VectorDrawable) {
+					int width = (int) (drawable.getIntrinsicWidth() * scale);
+					int height = (int) (drawable.getIntrinsicHeight() * scale);
 					Rect boundsVector = new Rect(locationX - width / 2, locationY - height / 2,
 							locationX + width / 2, locationY + height / 2);
 					drawable.setBounds(boundsVector);
 					drawable.draw(canvas);
 				} else {
 					Bitmap srcBitmap = ((BitmapDrawable) drawable).getBitmap();
+					float scaleX = (float) maxVectorLayerWidth / srcBitmap.getWidth();
+					float scaleY = (float) maxVectorLayerHeight / srcBitmap.getHeight();
+					if (maxVectorLayerWidth == 0 || maxVectorLayerHeight == 0) {
+						scaleX = 1;
+						scaleY = 1;
+					}
+					int width = (int) (srcBitmap.getWidth() * scaleX * scale);
+					int height = (int) (srcBitmap.getHeight() * scaleY * scale);
 					Rect srcRect = new Rect(0, 0, srcBitmap.getWidth(), srcBitmap.getHeight());
 					Rect dstRect = new Rect(locationX - width / 2,
 							locationY - height / 2,
@@ -303,9 +319,9 @@ public class AndroidUtils {
 		return isFragmentCanBeAdded(manager, tag, false);
 	}
 
-	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean useTag) {
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag, boolean preventFragmentDuplication) {
 		boolean isStateSaved = manager.isStateSaved();
-		return useTag ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
+		return preventFragmentDuplication ? !isStateSaved && manager.findFragmentByTag(tag) == null : !isStateSaved;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -340,7 +356,7 @@ public class AndroidUtils {
 			s.removeSpan(span);
 			span = new URLSpan(span.getURL()) {
 				@Override
-				public void updateDrawState(TextPaint ds) {
+				public void updateDrawState(@NonNull TextPaint ds) {
 					super.updateDrawState(ds);
 					ds.setUnderlineText(false);
 				}
@@ -360,28 +376,14 @@ public class AndroidUtils {
 				" " + DateFormat.getTimeFormat(ctx).format(d);
 	}
 
-	public static String formatTime(Context ctx, long time) {
-		return DateFormat.getTimeFormat(ctx).format(new Date(time));
-	}
-
-	@NonNull
-	public static String formatRatioOfSizes(@NonNull Context ctx, long sizeBytes, long totalBytes, boolean round) {
-		FormattedSize size = formatSize(sizeBytes, round);
-		FormattedSize total = formatSize(totalBytes, round);
-		if (size != null && total != null) {
-			String firstPart = Objects.equals(size.numSuffix, total.numSuffix)
-					? size.num
-					: ctx.getString(R.string.ltr_or_rtl_combine_via_space, size.num, size.numSuffix);
-			String secondPart =
-					ctx.getString(R.string.ltr_or_rtl_combine_via_space, total.num, total.numSuffix);
-			return ctx.getString(R.string.ltr_or_rtl_combine_via_slash, firstPart, secondPart);
-		}
-		return "";
-	}
-
 	@NonNull
 	public static String formatSize(Context ctx, long sizeBytes) {
-		FormattedSize formattedSize = formatSize(sizeBytes, false);
+		return formatSize(ctx, sizeBytes, false);
+	}
+
+	@NonNull
+	public static String formatSize(Context ctx, long sizeBytes, boolean round) {
+		FormattedSize formattedSize = formatSize(sizeBytes, round);
 		if (formattedSize != null) {
 			String size = formattedSize.num;
 			String numSuffix = formattedSize.numSuffix;

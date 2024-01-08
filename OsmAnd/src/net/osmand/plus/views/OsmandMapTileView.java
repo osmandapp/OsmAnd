@@ -31,6 +31,7 @@ import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapAnimator;
+import net.osmand.core.jni.MapRendererDebugSettings;
 import net.osmand.core.jni.PointD;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.ZoomLevel;
@@ -48,7 +49,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.auto.CarSurfaceView;
+import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
@@ -56,6 +57,7 @@ import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -93,6 +95,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int FOG_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int SKY_DEFAULT_COLOR = 0xffffffff;
+	public static final int FOG_NIGHTMODE_COLOR = 0xff243060;
+	public static final int SKY_NIGHTMODE_COLOR = 0xff304080;
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
@@ -142,6 +148,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		boolean onTrackBallEvent(MotionEvent e);
 	}
 
+	public interface TouchListener {
+		void onTouchEvent(@NonNull MotionEvent event);
+	}
+
 	public interface OnLongClickListener {
 		boolean onLongPressEvent(PointF point);
 	}
@@ -152,6 +162,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public interface OnDrawMapListener {
 		void onDrawOverMap();
+	}
+
+	public interface ManualZoomListener {
+		void onManualZoomChange();
 	}
 
 	public interface ViewportListener {
@@ -168,7 +182,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private List<IMapLocationListener> locationListeners = new ArrayList<>();
 	private List<ElevationListener> elevationListeners = new ArrayList<>();
+	private List<ManualZoomListener> manualZoomListeners = new ArrayList<>();
 	private List<ViewportListener> viewportListeners = new ArrayList<>();
+	private List<TouchListener> touchListeners = new ArrayList<>();
 
 	private OnLongClickListener onLongClickListener;
 
@@ -384,11 +400,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void zoomOut() {
-		application.getOsmandMap().changeZoom(-1, System.currentTimeMillis());
+		changeZoomManually(-1);
 	}
 
 	public void zoomIn() {
-		application.getOsmandMap().changeZoom(1, System.currentTimeMillis());
+		changeZoomManually(1);
 	}
 
 	public void scrollMap(float dx, float dy) {
@@ -523,6 +539,35 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 		return true;
+	}
+
+	public void changeZoomManually(int zoomStep) {
+		if (animatedDraggingThread.isAnimatingMapZoom()) {
+			animatedDraggingThread.stopAnimatingSync();
+		}
+
+		Zoom zoom = new Zoom(getZoom(), getZoomFloatPart(), getMinZoom(), getMaxZoom());
+
+		if (zoomStep > 0 && !zoom.isZoomInAllowed()) {
+			Toast.makeText(application, R.string.edit_tilesource_maxzoom, Toast.LENGTH_SHORT).show();
+			return;
+		} else if (zoomStep < 0 && !zoom.isZoomOutAllowed()) {
+			Toast.makeText(application, R.string.edit_tilesource_minzoom, Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		zoom.changeZoom(zoomStep);
+		animatedDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
+
+		mapViewTrackingUtilities.setZoomTime(System.currentTimeMillis());
+		showAndHideMapPosition();
+		if (application.accessibilityEnabled()) {
+			Toast.makeText(application, application.getString(R.string.zoomIs) + " " + zoom.getBaseZoom(), Toast.LENGTH_SHORT).show();
+		}
+
+		for (ManualZoomListener listener : manualZoomListeners) {
+			listener.onManualZoomChange();
+		}
 	}
 
 	public void setIntZoom(int zoom) {
@@ -689,6 +734,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return multiTouchSupport != null && multiTouchSupport.isInZoomAndRotationMode();
 	}
 
+	public boolean isAfterDoubleTap() {
+		return afterDoubleTap;
+	}
+
 	public float getElevationAngle() {
 		return elevationAngle;
 	}
@@ -722,6 +771,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		locationListeners = Algorithms.removeFromList(locationListeners, listener);
 	}
 
+	public void addManualZoomChangeListener(@NonNull ManualZoomListener listener) {
+		if (!manualZoomListeners.contains(listener)) {
+			manualZoomListeners = Algorithms.addToList(manualZoomListeners, listener);
+		}
+	}
+
+	public void removeManualZoomListener(@NonNull ManualZoomListener listener) {
+		manualZoomListeners = Algorithms.removeFromList(manualZoomListeners, listener);
+	}
+
 	public void addElevationListener(@NonNull ElevationListener listener) {
 		if (!elevationListeners.contains(listener)) {
 			elevationListeners = Algorithms.addToList(elevationListeners, listener);
@@ -744,6 +803,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setOnDrawMapListener(@Nullable OnDrawMapListener listener) {
 		this.onDrawMapListener = listener;
+	}
+
+	public void addTouchListener(@NonNull TouchListener listener) {
+		if (!touchListeners.contains(listener)) {
+			touchListeners = Algorithms.addToList(touchListeners, listener);
+		}
+	}
+
+	public void removeTouchListener(@NonNull TouchListener listener) {
+		touchListeners = Algorithms.removeFromList(touchListeners, listener);
 	}
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
@@ -1697,9 +1766,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return true;
 		}
 
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			animatedDraggingThread.stopAnimating();
+		for (TouchListener listener : touchListeners) {
+			listener.onTouchEvent(event);
 		}
+
 		boolean wasInTiltMode = multiTouchSupport != null && multiTouchSupport.isInTiltMode();
 		boolean isMultiTouch = multiTouchSupport != null && multiTouchSupport.onTouchEvent(event);
 
@@ -1986,6 +2056,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		@Override
+		public void onStopChangingViewAngle() {
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					notifyOnStopChangingElevation(mapRenderer.getElevationAngle());
+				}
+			}
+		}
+
+		@Override
 		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getCurrentRotatedTileBox().copy();
@@ -2128,13 +2208,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setElevationAngle(float angle) {
 		angle = normalizeElevationAngle(angle);
 		this.elevationAngle = angle;
-		application.getOsmandMap().setMapElevation(angle);
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			mapRenderer.setElevationAngle(angle);
+		}
 		notifyOnElevationChanging(angle);
 	}
 
 	private void notifyOnElevationChanging(float angle) {
 		for (ElevationListener listener : elevationListeners) {
 			listener.onElevationChanging(angle);
+		}
+	}
+
+	private void notifyOnStopChangingElevation(float angle) {
+		for (ElevationListener listener : elevationListeners) {
+			listener.onStopChangingElevation(angle);
 		}
 	}
 
@@ -2270,6 +2359,23 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return application.getOsmandMap().getMapLayers().getMeasurementToolLayer();
 	}
 
+	public void applyDebugSettings(MapRendererView mapRenderer) {
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			boolean show = plugin.SHOW_SYMBOLS_DEBUG_INFO.get();
+			boolean allow = plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.get();
+			MapRendererDebugSettings debugSettings = mapRenderer.getDebugSettings();
+			debugSettings.setDebugStageEnabled(show);
+			debugSettings.setShowSymbolsMarksRejectedByViewpoint(show);
+			debugSettings.setShowSymbolsBBoxesRejectedByIntersectionCheck(show);
+			debugSettings.setShowSymbolsBBoxesRejectedByMinDistanceToSameContentFromOtherSymbolCheck(show);
+			debugSettings.setShowSymbolsBBoxesRejectedByPresentationMode(show);
+			debugSettings.setShowTooShortOnPathSymbolsRenderablesPaths(show);
+			debugSettings.setSkipSymbolsIntersectionCheck(allow);
+			mapRenderer.setDebugSettings(debugSettings);
+		}
+	}
+
 	private boolean isUseOpenGL() {
 		return getApplication().useOpenGlRenderer();
 	}
@@ -2280,5 +2386,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public interface ElevationListener {
 		void onElevationChanging(float angle);
+
+		void onStopChangingElevation(float angle);
 	}
 }

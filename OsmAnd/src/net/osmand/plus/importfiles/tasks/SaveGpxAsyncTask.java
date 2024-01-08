@@ -120,8 +120,8 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 				DeletePointsTask.syncGpx(app, gpxFile);
 			}
 		}
-		GpxDataItem item = new GpxDataItem(file);
-		item.getGpxData().readGpxParams(gpxFile);
+		GpxDataItem item = new GpxDataItem(app, file);
+		item.readGpxParams(gpxFile);
 		app.getGpxDbHelper().add(item);
 		app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(file));
 	}

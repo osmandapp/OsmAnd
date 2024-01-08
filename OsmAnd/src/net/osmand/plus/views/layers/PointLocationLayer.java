@@ -506,7 +506,7 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 				markersRecreated = recreateMarkerCollection();
 				markersInvalidated = false;
 			}
-			boolean showHeading = shouldShowHeading();
+			boolean showHeading = shouldShowHeading() && locationProvider.getHeading() != null;
 			boolean showBearing = shouldShowBearing(lastKnownLocation);
 			boolean stateUpdated = setMarkerState(showBearing ?
 					MarkerState.Move : MarkerState.Stay, showHeading, markersRecreated);

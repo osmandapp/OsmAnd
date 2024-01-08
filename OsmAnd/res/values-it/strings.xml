@@ -1184,7 +1184,7 @@
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
-    <string name="rendering_attr_showAccess_name">Mostra limitazioni di accesso e pedaggi</string>
+    <string name="rendering_attr_showAccess_name">Mostra limitazioni di accesso</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Percorsi ciclabili</string>
@@ -4778,7 +4778,7 @@
     <string name="ant_go_to_store">Vai al Play Store</string>
     <string name="send_uuid_preference">Invia Unique User Identifier (UUID)</string>
     <string name="shared_string_cross_buy">Acquisto multi piattaforma</string>
-    <string name="map_widget_ant_heart_rate_desc">Mosta il battito cardicato dell\'utente durante un\'attività in tempo reale</string>
+    <string name="map_widget_ant_heart_rate_desc">Mostra il battito cardiaco dell\'utente durante un\'attività in tempo reale</string>
     <string name="map_widget_ant_bicycle_cadence">Cadenza bicicletta</string>
     <string name="map_widget_ant_bicycle_power">Potenza bicicletta</string>
     <string name="worldwide_maps">Mappe internazionali</string>
@@ -5352,7 +5352,7 @@
     <string name="help_article_search_search_all_name">Cerca tutto</string>
     <string name="help_article_search_search_coordinates_name">Cerca coordinate</string>
     <string name="help_article_troubleshooting_crash_logs_name">Registri di arresto anomalo</string>
-    <string name="help_article_map_legend_ski_map_name">Stile cartina sciistica</string>
+    <string name="help_article_map_legend_ski_map_name">Stile mappa sciistica</string>
     <string name="help_article_map_interact_with_map_name">Interagisci con la mappa</string>
     <string name="help_article_map_track_context_menu_name">Menu contestuale delle tracce</string>
     <string name="help_article_map_tracks_on_map_name">Tracce e percorsi</string>
@@ -5412,23 +5412,27 @@
     <string name="help_article_widgets_radius_ruler_name">Righello radiale e righello</string>
     <string name="external_sensor_name_property_description">Nome del sensore</string>
     <string name="sensor_temperature_desc">Mostra la temperatura dal sensore</string>
-    <string name="release_4_6">• Aggiunta la possibilità di modificare le associazioni dei tasti per i dispositivi di input esterni
+    <string name="release_4_6">• Android Auto: aggiunta la vista 3D
 \n
-\n• Aggiunto widget \"Rapporto di planata\".
+\n• Tracce: Introdotti filtri e cartelle intelligenti, memoria ottimizzata per file più grandi
 \n
-\n• Aggiunti filtri e cartelle intelligenti per le tracce
+\n• Pannelli widget superiore e inferiore migliorati per accogliere tutti i widget
 \n
-\n• Aggiunte righe per i pannelli widget superiore e inferiore con supporto per tutti i widget
+\n• Migliorata la gestione delle risorse locali
+\n
+\n• Mappatura dei pulsanti personalizzabile per controller esterni
+\n
+\n• Nuovi widget: \"Rapporto di planata\" e \"Posizione del sole\"
+\n
+\n• OsmAnd Cloud: ora accedi ai file eliminati
+\n
+\n• Colorazione migliorata dei tracciati in modalità Slope con un nuovo gradiente simmetrico
+\n
+\n• Risolti problemi con la barra di stato trasparente
 \n
 \n• Aggiunto supporto per widget temperatura ANT+
 \n
-\n• Gestione migliorata della memoria per tracce GPX di grandi dimensioni
-\n
-\n• Aggiornata la gestione delle risorse locali nei download
-\n
 \n• Aggiunto widget \"RAM disponibile\"
-\n
-\n• Risolti problemi con la barra di stato trasparente
 \n
 \n</string>
     <string name="shared_string_temperature">Tempertura</string>
@@ -5566,4 +5570,11 @@
     <string name="zoom_animated">Zoom animato</string>
     <string name="clear_key_assignment">Elimina l\'associazione dei tasti</string>
     <string name="add_new_button">Aggiungi un nuovo pulsante</string>
+    <string name="zoom_non_animated">Zoom senza animazione</string>
+    <string name="use_v1_auto_zoom">Zoom automatico discreto (vecchia versione)</string>
+    <string name="shared_string_next_event">Prossimo evento</string>
+    <string name="map_widget_sun_position">Posizione del sole</string>
+    <string name="map_widget_sun_position_desc">Questo widget mostra il tempo fino all\'alba o al tramonto, a seconda dell\'ora corrente.</string>
+    <string name="previous_row_has_complex_widget">La riga precedente ha un widget complesso</string>
+    <string name="complex_widget_alert">Il widget %1$s può essere posizionato solo sulla propria riga.</string>
 </resources>

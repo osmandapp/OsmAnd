@@ -37,6 +37,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.SMALL_NEXT_TURN;
 import static net.osmand.plus.views.mapwidgets.WidgetType.STREET_NAME;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNRISE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.SUNSET;
+import static net.osmand.plus.views.mapwidgets.WidgetType.SUN_POSITION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_DESTINATION;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_INTERMEDIATE;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TRUE_BEARING;
@@ -82,12 +83,13 @@ public class WidgetsAvailabilityHelper {
 		ApplicationMode[] none = {};
 
 		// left
-		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
-		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
+		ApplicationMode[] nextTurnSet = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
+		ApplicationMode[] smallNextTurnSet = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
+		ApplicationMode[] secondNextTurnSet = {CAR, BICYCLE, PEDESTRIAN, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 
-		regWidgetVisibility(NEXT_TURN, navigationSet1);
-		regWidgetVisibility(SMALL_NEXT_TURN, navigationSet2);
-		regWidgetVisibility(SECOND_NEXT_TURN, navigationSet1);
+		regWidgetVisibility(NEXT_TURN, nextTurnSet);
+		regWidgetVisibility(SMALL_NEXT_TURN, smallNextTurnSet);
+		regWidgetVisibility(SECOND_NEXT_TURN, secondNextTurnSet);
 		regWidgetAvailability(NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
@@ -113,6 +115,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetAvailability(ALTITUDE_MAP_CENTER, all);
 		regWidgetAvailability(SUNRISE, all);
 		regWidgetAvailability(SUNSET, all);
+		regWidgetAvailability(SUN_POSITION, all);
 		regWidgetAvailability(GLIDE_TARGET, all);
 		regWidgetAvailability(GLIDE_AVERAGE, all);
 

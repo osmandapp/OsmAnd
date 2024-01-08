@@ -4305,8 +4305,8 @@
 	<string name="poi_fire_hydrant_type_pipe">Pipe</string>
 	<string name="poi_water_source_groundwater">Groundwater</string>
 
-	<string name="poi_osmand_fire_hydrant_pressure_pressurized">Pressurized</string>
-	<string name="poi_osmand_fire_hydrant_pressure_suction">Suction</string>
+	<string name="poi_fire_hydrant_pressure_pressurized">Pressurized</string>
+	<string name="poi_fire_hydrant_pressure_suction">Suction</string>
 
 	<string name="poi_pump_status_missing_beam">Pump status: missing beam</string>
 	<string name="poi_traffic_signals_vibration_no">Vibration: no</string>
@@ -4977,8 +4977,8 @@
 	<string name="poi_climbing_bolt_abseil">Abseil</string>
 	<string name="poi_climbing_bolt_anchor">Anchor</string>
 
-	<string name="poi_osmand_climbing_bolts_yes">Yes</string>
-	<string name="poi_osmand_climbing_bolts_no">No</string>
+	<string name="poi_climbing_bolts_yes">Yes</string>
+	<string name="poi_climbing_bolts_no">No</string>
 	<string name="poi_climbing_bolts">Climbing bolts</string>
 	<string name="poi_climbing_quality_medium">Medium</string>
 
@@ -5175,7 +5175,7 @@
 	<string name="poi_surface_rubber">Surface: rubber</string>
 
 	<string name="poi_assembly_point">Assembly point</string>
-	<string name="poi_osmand_not_pt_shelter_yes">All except public transport shelters</string>
+	<string name="poi_not_pt_shelter_yes">Shelter (not for public transport)</string>
 
 	<string name="poi_bicycle_designated">Designated for bicycles</string>
 	<string name="poi_horse_designated">Designated for horses</string>
@@ -5268,5 +5268,32 @@
 	<string name="poi_healthcare_speciality_physical_therapy">Physical therapy</string>
 	<string name="poi_healthcare_speciality_microbiology">Microbiology</string>
 	<string name="poi_healthcare_speciality_venereology">Venereology</string>
+
+	<string name="poi_from">From</string>
+	<string name="poi_to">To</string>
+	<string name="poi_distance">Distance</string>
+	<string name="poi_cycle_network">Cycle network</string>
+	<string name="poi_state_proposed">State: proposed</string>
+	<string name="poi_state_alternate">State: alternate</string>
+	<string name="poi_state_connection">State: connection</string>
+	<string name="poi_state_inuse">State: in use</string>
+	<string name="poi_state_recommended">State: recommended</string>
+	<string name="poi_state_temporary">State: temporary</string>
+	<string name="poi_state_disused">State: disused</string>
+	<string name="poi_state_closed">State: closed</string>
+	<string name="poi_state_abandoned">State: abandoned</string>
+	<string name="poi_state_approved">State: approved</string>
+	<string name="poi_state_active">State: active</string>
+	<string name="poi_state_under_construction">State: under construction</string>
+	<string name="poi_state_main">State: main</string>
+	<string name="poi_state_suspended">State: suspended</string>
+	<string name="poi_state_detour">State: detour</string>
+	<string name="poi_ascent">Ascent</string>
+	<string name="poi_descent">Descent</string>
+	<string name="poi_direction">Direction</string>
+	<string name="poi_roundtrip_yes">Roundtrip: yes</string>
+	<string name="poi_roundtrip_no">Roundtrip: no</string>
+
+	<string name="poi_border_zone">Border zone</string>
 
 </resources>

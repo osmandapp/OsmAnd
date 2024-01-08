@@ -3883,7 +3883,7 @@
     <string name="poi_traffic_signals_arrow_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_yes">Ja</string>
     <string name="poi_traffic_signals_vibration_no">Trilling: nee</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Onder druk</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Onder druk</string>
     <string name="poi_water_source_groundwater">Grondwater</string>
     <string name="poi_fire_hydrant_type_pipe">Pijp</string>
     <string name="poi_drinking_water_refill_network">Netwerk van drinkwater vulpunten</string>

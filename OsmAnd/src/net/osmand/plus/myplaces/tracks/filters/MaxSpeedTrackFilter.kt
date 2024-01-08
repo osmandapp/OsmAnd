@@ -33,7 +33,7 @@ class MaxSpeedTrackFilter(
 		}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val maxSpeed = trackItem.dataItem?.gpxData?.analysis?.maxSpeed
+		val maxSpeed = trackItem.dataItem?.analysis?.maxSpeed
 		if (maxSpeed == null || (maxSpeed == 0f)) {
 			return false
 		}

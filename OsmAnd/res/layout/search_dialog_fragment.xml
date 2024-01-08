@@ -162,7 +162,7 @@
                         android:layout_width="48dp"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/poi_filter_custom_filter"
-                        app:srcCompat="@drawable/ic_action_filter"
+                        app:srcCompat="@drawable/ic_action_filter_dark"
                         android:visibility="gone"/>
 
                 </LinearLayout>

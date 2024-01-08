@@ -1,5 +1,12 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpxParameter.SMOOTHING_THRESHOLD;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
@@ -20,8 +27,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.FilteredSelectedGpxFile;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.ColorUtilities;
@@ -161,7 +168,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 						filter.updateValues((values.get(0)), values.get(1));
 						updateDisplayedFilterNumbers(container, filter);
 						if (gpxDataItem != null) {
-							boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+							boolean updated = updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
 							if (updated) {
 								gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
 							}
@@ -182,7 +189,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 						filter.updateValue((slider.getValue()));
 						updateDisplayedFilterNumbers(container, filter);
 						if (gpxDataItem != null) {
-							boolean updated = gpxDbHelper.updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
+							boolean updated = updateGpsFilters(gpxDataItem, filteredSelectedGpxFile);
 							if (updated) {
 								gpsFilterHelper.filterGpxFile(filteredSelectedGpxFile, true);
 							}
@@ -192,6 +199,17 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 			}
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));
 		}
+	}
+
+	public boolean updateGpsFilters(@NonNull GpxDataItem item, @NonNull FilteredSelectedGpxFile selectedGpxFile) {
+		item.setParameter(SMOOTHING_THRESHOLD, selectedGpxFile.getSmoothingFilter().getSelectedMaxValue());
+		item.setParameter(MIN_FILTER_SPEED, selectedGpxFile.getSpeedFilter().getSelectedMinValue());
+		item.setParameter(MAX_FILTER_SPEED, selectedGpxFile.getSpeedFilter().getSelectedMaxValue());
+		item.setParameter(MIN_FILTER_ALTITUDE, selectedGpxFile.getAltitudeFilter().getSelectedMinValue());
+		item.setParameter(MAX_FILTER_ALTITUDE, selectedGpxFile.getAltitudeFilter().getSelectedMaxValue());
+		item.setParameter(MAX_FILTER_HDOP, selectedGpxFile.getHdopFilter().getSelectedMaxValue());
+
+		return gpxDbHelper.updateDataItem(item);
 	}
 
 	private void updateDisplayedFilterNumbers(@NonNull View container, @NonNull GpsFilter filter) {

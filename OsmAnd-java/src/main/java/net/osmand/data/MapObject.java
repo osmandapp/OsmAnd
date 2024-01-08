@@ -339,7 +339,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return json;
 	}
 	
-	String unzipContent(String str) {
+	public static String unzipContent(String str) {
 		if (isContentZipped(str)) {
 			try {
 				int ind = 4;

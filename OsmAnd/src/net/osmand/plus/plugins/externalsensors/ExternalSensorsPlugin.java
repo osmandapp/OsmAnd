@@ -1,9 +1,22 @@
 package net.osmand.plus.plugins.externalsensors;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ANT_PLUS;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty.NAME;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_CADENCE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_DISTANCE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
+import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TEMPERATURE;
+
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.github.mikephil.charting.charts.LineChart;
 
@@ -46,33 +59,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ANT_PLUS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_ANT_PLUS;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.DeviceChangeableProperty.NAME;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_CADENCE;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_DISTANCE;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_POWER;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.BIKE_SPEED;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.HEART_RATE;
-import static net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType.TEMPERATURE;
-
 public class ExternalSensorsPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(ExternalSensorsPlugin.class);
 	private static final int DEVICES_SEARCH_TIMEOUT = 10000;
+	private static final String ANY_DEVICE = "any_connected_device_write_sensor_data_to_track_key";
 
-	private final DevicesHelper devicesHelper;
-	private ScanDevicesListener scanDevicesListener;
 	private final OsmandSettings settings;
+	private final DevicesHelper devicesHelper;
 
 	public final CommonPreference<String> SPEED_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> CADENCE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> POWER_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> HEART_RATE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
-	public final static String DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY = "deny_write_sensor_data";
+
+	private ScanDevicesListener scanDevicesListener;
 
 	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -170,7 +171,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 
 	@Nullable
-	public AbstractDevice<?> getPairedDeviceById(String deviceId) {
+	public AbstractDevice<?> getPairedDeviceById(@NonNull String deviceId) {
 		return devicesHelper.getPairedDeviceById(deviceId);
 	}
 
@@ -180,8 +181,21 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Nullable
+	public AbstractDevice<?> getAnyDevice(@NonNull SensorWidgetDataFieldType fieldType) {
+		for (AbstractDevice<?> device : getPairedDevices()) {
+			for (AbstractSensor sensor : device.getSensors()) {
+				List<SensorWidgetDataFieldType> supportedTypes = sensor.getSupportedWidgetDataFieldTypes();
+				if (supportedTypes.contains(fieldType)) {
+					return device;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
 	public AbstractDevice<?> getDevice(@NonNull String deviceId) {
-		return devicesHelper.getDevice(deviceId);
+		return devicesHelper.getAnyDevice(deviceId);
 	}
 
 	@Override
@@ -191,20 +205,34 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void attachDeviceSensorInfoToRecordedTrack(ExternalSensorTrackDataType externalSensorTrackDataType, JSONObject json) {
-		ApplicationMode selectedAppMode = settings.getApplicationMode();
-		CommonPreference<String> deviceIdPref = getWriteToTrackDeviceIdPref(externalSensorTrackDataType);
-		String speedDeviceId = deviceIdPref.getModeValue(selectedAppMode);
-		if (!Algorithms.isEmpty(speedDeviceId) && !DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(speedDeviceId)) {
-			AbstractDevice<?> device = devicesHelper.getDevice(speedDeviceId);
-			if (device != null) {
+	private void attachDeviceSensorInfoToRecordedTrack(@NonNull ExternalSensorTrackDataType dataType, @NonNull JSONObject json) {
+		CommonPreference<String> preference = getWriteToTrackDeviceIdPref(dataType);
+		String deviceId = preference.getModeValue(settings.getApplicationMode());
+		if (!Algorithms.isEmpty(deviceId)) {
+			boolean anyConnected = ANY_DEVICE.equals(deviceId);
+			AbstractDevice<?> deviceById = devicesHelper.getAnyDevice(deviceId);
+			ArrayList<AbstractDevice<?>> devices = new ArrayList<>();
+			if(anyConnected) {
+				devices.addAll(devicesHelper.getDevices());
+			} else if(deviceById != null) {
+				devices.add(deviceById);
+			}
+			for (AbstractDevice<?> device : devices) {
 				try {
-					device.writeSensorDataToJson(json, externalSensorTrackDataType.getSensorType());
+					device.writeSensorDataToJson(json, dataType.getSensorType());
 				} catch (JSONException e) {
 					LOG.error(e);
 				}
 			}
 		}
+	}
+
+	public boolean isAnyConnectedDeviceId(@NonNull String deviceId){
+		return ANY_DEVICE.equals(deviceId);
+	}
+
+	public String getAnyConnectedDeviceId(){
+		return ANY_DEVICE;
 	}
 
 	@Override

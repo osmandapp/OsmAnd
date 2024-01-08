@@ -25,7 +25,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenActionsCard;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureScreenActionsCard;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
@@ -170,7 +170,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void setupActionsCard() {
 		int panelTitleId = selectedPanel.getTitleId(AndroidUtils.isLayoutRtl(app));
-		View cardView = new ConfigureScreenActionsCard(requireMapActivity(), this, selectedAppMode, panelTitleId)
+		View cardView = new ConfigureScreenActionsCard(requireMapActivity(), this, panelTitleId)
 				.build(view.getContext());
 		actionsCardContainer.addView(cardView);
 	}

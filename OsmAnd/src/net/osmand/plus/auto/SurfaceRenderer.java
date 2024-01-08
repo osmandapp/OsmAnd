@@ -22,10 +22,12 @@ import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.MapRendererView.MapRendererViewListener;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -66,7 +68,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		this.callback = callback;
 	}
 
-	interface SurfaceRendererCallback {
+	public interface SurfaceRendererCallback {
 		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
 	}
 
@@ -329,6 +331,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 						}
 						offscreenMapRendererView = new AtlasMapRendererView(carContext);
 						offscreenMapRendererView.setupRenderer(carContext, getWidth(), getHeight(), mapRendererView);
+						offscreenMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
+						offscreenMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 						offscreenMapRendererView.setAzimuth(0);
 						float elevationAngle = mapView.normalizeElevationAngle(getApp().getSettings().getLastKnownMapElevation());
 						offscreenMapRendererView.setElevationAngle(elevationAngle);

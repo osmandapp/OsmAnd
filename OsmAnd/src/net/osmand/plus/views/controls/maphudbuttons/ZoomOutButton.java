@@ -22,7 +22,7 @@ public class ZoomOutButton extends MapButton {
 			if (mapActivity.getContextMenu().zoomOutPressed()) {
 				return;
 			}
-			app.getOsmandMap().changeZoom(-1, System.currentTimeMillis());
+			mapActivity.getMapView().zoomOut();
 		});
 		setOnLongClickListener(MapControlsLayer.getOnClickMagnifierListener(mapActivity.getMapView()));
 		updateIcon(app.getDaynightHelper().isNightModeForMapControls());

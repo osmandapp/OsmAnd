@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +44,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(OsmandApplication app, GPXFile gpx) {
-		this.app = app;
+	public CoordinateInputAdapter(@NonNull Context context, GPXFile gpx) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.gpx = gpx;
 
 		uiUtilities = app.getUIUtilities();
-		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		nightTheme = !app.getSettings().isLightContent();
 	}
 

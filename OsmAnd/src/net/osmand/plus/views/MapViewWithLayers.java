@@ -15,14 +15,18 @@ import androidx.annotation.Nullable;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.MapRendererDebugSettings;
+import net.osmand.core.jni.ZoomLevel;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.OsmandMap.OsmandMapListener;
+import net.osmand.plus.views.OsmandMap.RenderingViewSetupListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
 public class MapViewWithLayers extends FrameLayout {
@@ -33,7 +37,7 @@ public class MapViewWithLayers extends FrameLayout {
 	private final OsmandSettings settings;
 	private final OsmandMapTileView mapView;
 
-	private OsmandMapListener mapListener;
+	private RenderingViewSetupListener renderingViewSetupListener;
 	private AtlasMapRendererView atlasMapRendererView;
 
 	public MapViewWithLayers(@NonNull Context context) {
@@ -55,7 +59,7 @@ public class MapViewWithLayers extends FrameLayout {
 		settings = app.getSettings();
 
 		OsmandMap osmandMap = app.getOsmandMap();
-		osmandMap.addListener(getMapListener());
+		osmandMap.addRenderingViewSetupListener(getRenderingViewSetupListener());
 
 		mapView = osmandMap.getMapView();
 		mapView.setupTouchDetectors(getContext());
@@ -121,11 +125,14 @@ public class MapViewWithLayers extends FrameLayout {
 			else
 				atlasMapRendererView.handleOnCreate(null);
 			atlasMapRendererView.setupRenderer(getContext(), 0, 0, mapRendererView);
+			atlasMapRendererView.setMinZoomLevel(ZoomLevel.swigToEnum(mapView.getMinZoom()));
+			atlasMapRendererView.setMaxZoomLevel(ZoomLevel.swigToEnum(mapView.getMaxZoom()));
 			atlasMapRendererView.setAzimuth(0);
 			float elevationAngle = mapView.normalizeElevationAngle(settings.getLastKnownMapElevation());
 			atlasMapRendererView.setElevationAngle(elevationAngle);
 			atlasMapRendererView.setSymbolsUpdateInterval(SYMBOLS_UPDATE_INTERVAL);
 			mapRendererContext.setMapRendererView(atlasMapRendererView);
+			mapView.applyDebugSettings(atlasMapRendererView);
 		}
 	}
 
@@ -157,7 +164,7 @@ public class MapViewWithLayers extends FrameLayout {
 			atlasMapRendererView.handleOnDestroy();
 		}
 		mapView.clearTouchDetectors();
-		app.getOsmandMap().removeListener(getMapListener());
+		app.getOsmandMap().removeRenderingViewSetupListener(getRenderingViewSetupListener());
 	}
 
 	@NonNull
@@ -166,29 +173,10 @@ public class MapViewWithLayers extends FrameLayout {
 	}
 
 	@NonNull
-	private OsmandMapListener getMapListener() {
-		if (mapListener == null) {
-			mapListener = new OsmandMapListener() {
-
-				@Override
-				public void onChangeZoom(int stp) {
-					mapView.showAndHideMapPosition();
-				}
-
-				@Override
-				public void onSetMapElevation(float angle) {
-					MapRendererView mapRenderer = mapView.getMapRenderer();
-					if (mapRenderer != null) {
-						mapRenderer.setElevationAngle(angle);
-					}
-				}
-
-				@Override
-				public void onSetupRenderingView() {
-					setupRenderingView();
-				}
-			};
+	private RenderingViewSetupListener getRenderingViewSetupListener() {
+		if (renderingViewSetupListener == null) {
+			renderingViewSetupListener = this::setupRenderingView;
 		}
-		return mapListener;
+		return renderingViewSetupListener;
 	}
 }

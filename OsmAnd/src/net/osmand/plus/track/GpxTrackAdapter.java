@@ -168,7 +168,7 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		if (currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (dataItem != null) {
-			analysis = dataItem.getGpxData().getAnalysis();
+			analysis = dataItem.getAnalysis();
 		}
 		if (analysis == null) {
 			holder.readSection.setVisibility(View.GONE);

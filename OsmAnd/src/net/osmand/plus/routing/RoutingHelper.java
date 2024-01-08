@@ -464,11 +464,15 @@ public class RoutingHelper {
 
 				// calculate projection of current location
 				if (currentRoute > 0 && !inRecalc) {
-					locationProjection = RoutingHelperUtils.getProject(currentLocation, routeNodes.get(currentRoute - 1),
-							routeNodes.get(currentRoute));
-					if (settings.APPROXIMATE_BEARING.get()) {
-						RoutingHelperUtils.approximateBearingIfNeeded(this, locationProjection,
-								currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					Location previousRouteLocation = routeNodes.get(currentRoute - 1);
+					Location currentRouteLocation = routeNodes.get(currentRoute);
+					locationProjection = RoutingHelperUtils.getProject(currentLocation, previousRouteLocation,
+							currentRouteLocation);
+					if (settings.SNAP_TO_ROAD.get() && currentRoute + 1 < routeNodes.size()) {
+						Location nextRouteLocation = routeNodes.get(currentRoute + 1);
+						RoutingHelperUtils.approximateBearingIfNeeded(this,
+								locationProjection, currentLocation,
+								previousRouteLocation, currentRouteLocation, nextRouteLocation);
 					}
 				}
 			}

@@ -15,7 +15,7 @@ class MaxAltitudeTrackFilter(
 	override val unitResId = R.string.m
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val elevation = trackItem.dataItem?.gpxData?.analysis?.maxElevation
+		val elevation = trackItem.dataItem?.analysis?.maxElevation
 		return if (elevation == null)
 			false
 		else

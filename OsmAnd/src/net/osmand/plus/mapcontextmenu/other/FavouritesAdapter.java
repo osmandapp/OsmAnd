@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,10 +29,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 	private final UpdateLocationViewCache cache;
 
-	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
-		this.app = app;
+	public FavouritesAdapter(@NonNull Context context, List<FavouritePoint> FavouritePoints) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.favouritePoints = FavouritePoints;
-		cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		cache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 	}
 
 	@Override
