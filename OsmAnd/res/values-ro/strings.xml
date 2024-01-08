@@ -5393,7 +5393,7 @@
     <string name="help_article_navigation_routing_online_routing_name">Rutare online</string>
     <string name="help_article_map_map_context_menu_name">Meniul contextual al hărții</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_map_track_context_menu_name">Meniul contextual pentru trasee</string>
+    <string name="help_article_map_track_context_menu_name">Meniul contextual Tracks</string>
     <string name="help_article_map_legend_osmand_name">Stil de hartă OsmAnd</string>
     <string name="sensor_temperature_desc">Arată temperatura de la senzor</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
