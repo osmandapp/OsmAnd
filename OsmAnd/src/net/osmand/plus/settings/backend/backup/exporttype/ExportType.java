@@ -6,6 +6,8 @@ import static net.osmand.util.Algorithms.addIfNotContains;
 import static net.osmand.util.Algorithms.filterElementsWithCondition;
 import static net.osmand.util.Algorithms.searchElementWithCondition;
 
+import android.content.Context;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,6 +66,11 @@ public enum ExportType {
 		this.instance = instance;
 	}
 
+	@NonNull
+	public String getTitle(@NonNull Context context) {
+		return context.getString(getTitleId());
+	}
+
 	@StringRes
 	public int getTitleId() {
 		return instance.getTitleId();
@@ -103,6 +110,12 @@ public enum ExportType {
 	public boolean isEnabled() {
 		Class<? extends OsmandPlugin> clazz = instance.getRelatedPluginClass();
 		return clazz == null || PluginsHelper.isActive(clazz);
+	}
+
+	@Nullable
+	public static ExportType findBy(@NonNull OsmandApplication app, @NonNull Object object) {
+		return searchElementWithCondition(valuesList(),
+				exportType -> exportType.instance.isRelatedObject(app, object));
 	}
 
 	@Nullable

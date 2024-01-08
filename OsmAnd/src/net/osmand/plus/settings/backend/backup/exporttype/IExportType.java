@@ -35,6 +35,8 @@ interface IExportType {
 	@NonNull
 	List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted);
 
+	boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object);
+
 	@NonNull
 	ExportCategory getRelatedExportCategory();
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract class LocalResourcesExportType extends AbstractExportType {
+abstract class LocalResourcesExportType extends AbstractFileExportType {
 
 	@NonNull
 	protected List<File> collectLocalResources(@NonNull OsmandApplication app) {

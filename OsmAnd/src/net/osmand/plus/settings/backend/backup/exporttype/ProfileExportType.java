@@ -49,6 +49,11 @@ class ProfileExportType extends AbstractExportType {
 	}
 
 	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		return object instanceof ApplicationModeBean;
+	}
+
+	@Override
 	public boolean isAvailableInFreeVersion() {
 		return true;
 	}

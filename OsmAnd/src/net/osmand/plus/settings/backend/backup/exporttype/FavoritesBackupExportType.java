@@ -10,17 +10,15 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-class FavoritesBackupExportType extends AbstractExportType {
+class FavoritesBackupExportType extends AbstractFileExportType {
 
 	@Override
 	public int getTitleId() {

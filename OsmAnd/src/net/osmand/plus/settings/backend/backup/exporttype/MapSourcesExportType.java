@@ -70,6 +70,11 @@ class MapSourcesExportType extends AbstractExportType {
 		}
 	}
 
+	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		return object instanceof ITileSource;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {

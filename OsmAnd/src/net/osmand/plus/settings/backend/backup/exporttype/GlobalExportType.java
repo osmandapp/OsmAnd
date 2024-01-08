@@ -42,6 +42,11 @@ class GlobalExportType extends AbstractExportType {
 	}
 
 	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		return false;
+	}
+
+	@Override
 	public boolean isAvailableInFreeVersion() {
 		return true;
 	}

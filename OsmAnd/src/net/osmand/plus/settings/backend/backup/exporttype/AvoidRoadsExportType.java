@@ -52,6 +52,11 @@ class AvoidRoadsExportType extends AbstractExportType {
 		}
 	}
 
+	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		return object instanceof AvoidRoadInfo;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {

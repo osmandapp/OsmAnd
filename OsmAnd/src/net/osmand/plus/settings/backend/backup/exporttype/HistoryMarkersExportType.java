@@ -52,6 +52,14 @@ class HistoryMarkersExportType extends AbstractExportType {
 		return Collections.singletonList(historyMarkersSettingsItem.getMarkersGroup());
 	}
 
+	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		if (object instanceof MapMarker) {
+			return ((MapMarker) object).history;
+		}
+		return false;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {

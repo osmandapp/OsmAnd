@@ -36,7 +36,7 @@ class ActiveMarkersExportType extends AbstractExportType {
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		List<MapMarker> mapMarkers = app.getMapMarkersHelper().getMapMarkers();
 		if (!mapMarkers.isEmpty()) {
-			String name = app.getString(R.string.map_markers);
+			String name = app.getString(getTitleId());
 			String groupId = ExportType.ACTIVE_MARKERS.name();
 			MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 			markersGroup.setMarkers(mapMarkers);
@@ -50,6 +50,14 @@ class ActiveMarkersExportType extends AbstractExportType {
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
 		MarkersSettingsItem markersSettingsItem = (MarkersSettingsItem) settingsItem;
 		return Collections.singletonList(markersSettingsItem.getMarkersGroup());
+	}
+
+	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		if (object instanceof MapMarker) {
+			return !((MapMarker) object).history;
+		}
+		return false;
 	}
 
 	@NonNull

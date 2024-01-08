@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-class CustomRoutingExportType extends AbstractExportType {
+class CustomRoutingExportType extends AbstractFileExportType {
 
 	@Override
 	public int getTitleId() {

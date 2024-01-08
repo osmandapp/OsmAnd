@@ -45,6 +45,11 @@ class NavigationHistoryExportType extends AbstractExportType {
 		return navigationHistorySettingsItem.getItems();
 	}
 
+	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		return false;
+	}
+
 	@NonNull
 	@Override
 	public ExportCategory getRelatedExportCategory() {

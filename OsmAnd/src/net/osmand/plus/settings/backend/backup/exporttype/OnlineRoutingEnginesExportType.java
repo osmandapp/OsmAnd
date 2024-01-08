@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -39,6 +40,11 @@ class OnlineRoutingEnginesExportType extends AbstractExportType {
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
 		OnlineRoutingSettingsItem onlineRoutingSettingsItem = (OnlineRoutingSettingsItem) settingsItem;
 		return onlineRoutingSettingsItem.getItems();
+	}
+
+	@Override
+	public boolean isRelatedObject(@NonNull OsmandApplication app, @NonNull Object object) {
+		return object instanceof OnlineRoutingEngine;
 	}
 
 	@NonNull

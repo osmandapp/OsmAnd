@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class MultimediaNotesExportType extends AbstractExportType {
+class MultimediaNotesExportType extends AbstractFileExportType {
 
 	@Override
 	public int getTitleId() {

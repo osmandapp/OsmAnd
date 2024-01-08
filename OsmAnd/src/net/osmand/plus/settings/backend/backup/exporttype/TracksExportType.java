@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class TracksExportType extends AbstractExportType {
+class TracksExportType extends AbstractFileExportType {
 
 	@Override
 	public int getTitleId() {

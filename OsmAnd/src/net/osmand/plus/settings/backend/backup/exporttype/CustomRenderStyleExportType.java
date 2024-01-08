@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-class CustomRenderStyleExportType extends AbstractExportType {
+class CustomRenderStyleExportType extends AbstractFileExportType {
 
 	@Override
 	public int getTitleId() {
