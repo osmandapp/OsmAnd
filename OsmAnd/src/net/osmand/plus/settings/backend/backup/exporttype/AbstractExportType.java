@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.settings.backend.ExportCategory;
 
-public abstract class AbstractExportType implements IExportType {
+abstract class AbstractExportType implements IExportType {
 
-	public boolean isAllowedInFreeVersion() {
+	public boolean isAvailableInFreeVersion() {
 		return false;
 	}
 
@@ -15,6 +15,6 @@ public abstract class AbstractExportType implements IExportType {
 	}
 
 	public boolean isRelatedToCategory(@NonNull ExportCategory category) {
-		return relatedExportCategory() == category;
+		return getRelatedExportCategory() == category;
 	}
 }

@@ -49,37 +49,37 @@ class ProfileExportType extends AbstractExportType {
 	}
 
 	@Override
-	public boolean isAllowedInFreeVersion() {
+	public boolean isAvailableInFreeVersion() {
 		return true;
 	}
 
 	@NonNull
 	@Override
-	public ExportCategory relatedExportCategory() {
+	public ExportCategory getRelatedExportCategory() {
 		return ExportCategory.SETTINGS;
 	}
 
 	@NonNull
 	@Override
-	public SettingsItemType relatedSettingsItemType() {
+	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.PROFILE;
 	}
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.emptyList();
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.PROFILES;
 	}
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> relatedPluginClass() {
+	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
 	}
 }

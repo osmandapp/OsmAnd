@@ -31,7 +31,7 @@ class OsmNotesExportType extends AbstractExportType {
 	}
 
 	@Override
-	public boolean isAllowedInFreeVersion() {
+	public boolean isAvailableInFreeVersion() {
 		return true;
 	}
 
@@ -55,31 +55,31 @@ class OsmNotesExportType extends AbstractExportType {
 
 	@NonNull
 	@Override
-	public ExportCategory relatedExportCategory() {
+	public ExportCategory getRelatedExportCategory() {
 		return ExportCategory.MY_PLACES;
 	}
 
 	@NonNull
 	@Override
-	public SettingsItemType relatedSettingsItemType() {
+	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.OSM_NOTES;
 	}
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.emptyList();
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.OSM_NOTES;
 	}
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> relatedPluginClass() {
+	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return OsmEditingPlugin.class;
 	}
 }

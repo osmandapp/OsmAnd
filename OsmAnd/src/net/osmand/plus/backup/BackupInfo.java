@@ -89,10 +89,11 @@ public class BackupInfo {
 	private void createFilteredFilesToUpload(@NonNull OsmandApplication app) {
 		List<LocalFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (LocalFile localFile : filesToUpload) {
 			ExportType type = ExportType.findBy(localFile.item);
-			if (type != null && helper.getBackupTypePref(type).get() && (type.isAllowedInFreeVersion() || available)) {
+			if (type != null
+					&& helper.getBackupTypePref(type).get()
+					&& InAppPurchaseUtils.isExportTypeAvailable(app, type)) {
 				files.add(localFile);
 			}
 		}

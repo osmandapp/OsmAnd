@@ -30,19 +30,19 @@ abstract class AbstractVoiceExportType extends LocalResourcesExportType {
 
 	@NonNull
 	@Override
-	public ExportCategory relatedExportCategory() {
+	public ExportCategory getRelatedExportCategory() {
 		return ExportCategory.RESOURCES;
 	}
 
 	@NonNull
 	@Override
-	public SettingsItemType relatedSettingsItemType() {
+	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.FILE;
 	}
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> relatedPluginClass() {
+	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
 	}
 }

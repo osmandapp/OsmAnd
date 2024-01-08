@@ -1,6 +1,6 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
-import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
+import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.util.Algorithms.addAllIfNotContains;
 import static net.osmand.util.Algorithms.addIfNotContains;
 import static net.osmand.util.Algorithms.filterElementsWithCondition;
@@ -75,15 +75,7 @@ public enum ExportType {
 	}
 
 	public String getItemName() {
-		return instance.relatedSettingsItemType().name();
-	}
-
-	@NonNull
-	public String getCompatibleId() {
-		if (instance.isMap()) {
-			return OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY;
-		}
-		return name();
+		return instance.getRelatedSettingsItemType().name();
 	}
 
 	@NonNull
@@ -104,12 +96,12 @@ public enum ExportType {
 		return instance.isRelatedToCategory(exportCategory);
 	}
 
-	public boolean isAllowedInFreeVersion() {
-		return instance.isAllowedInFreeVersion();
+	public boolean isAvailableInFreeVersion() {
+		return instance.isAvailableInFreeVersion();
 	}
 
 	public boolean isEnabled() {
-		Class<? extends OsmandPlugin> clazz = instance.relatedPluginClass();
+		Class<? extends OsmandPlugin> clazz = instance.getRelatedPluginClass();
 		return clazz == null || PluginsHelper.isActive(clazz);
 	}
 
@@ -122,7 +114,7 @@ public enum ExportType {
 			return findBy(FileSubtype.getSubtypeByFileName(remoteFile.getName()));
 		}
 		return searchElementWithCondition(valuesList(), exportType -> {
-			SettingsItemType relatedSettingsType = exportType.instance.relatedSettingsItemType();
+			SettingsItemType relatedSettingsType = exportType.instance.getRelatedSettingsItemType();
 			return Objects.equals(relatedSettingsType.name(), remoteFile.getType());
 		});
 	}
@@ -133,19 +125,19 @@ public enum ExportType {
 			return findBy(((FileSettingsItem) item).getSubtype());
 		}
 		return searchElementWithCondition(valuesList(),
-				exportType -> exportType.instance.relatedSettingsItemType() == item.getType());
+				exportType -> exportType.instance.getRelatedSettingsItemType() == item.getType());
 	}
 
 	@Nullable
 	public static ExportType findBy(@NonNull FileSubtype fileSubtype) {
 		return searchElementWithCondition(valuesList(),
-				type -> type.instance.relatedFileSubtypes().contains(fileSubtype));
+				type -> type.instance.getRelatedFileSubtypes().contains(fileSubtype));
 	}
 
 	@Nullable
 	public static ExportType findBy(@NonNull LocalItemType localItemType) {
 		return searchElementWithCondition(valuesList(),
-				exportType -> exportType.instance.relatedLocalItemType() == localItemType);
+				exportType -> exportType.instance.getRelatedLocalItemType() == localItemType);
 	}
 
 	@NonNull
@@ -168,7 +160,7 @@ public enum ExportType {
 	public static List<ExportType> valuesOf(@NonNull List<String> keys) {
 		List<ExportType> result = new ArrayList<>();
 		for (String key : keys) {
-			if (Objects.equals(OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {
+			if (Objects.equals(OFFLINE_MAPS_EXPORT_TYPE_KEY, key)) {
 				addAllIfNotContains(result, mapValues());
 			} else {
 				addIfNotContains(result, valueOf(key));

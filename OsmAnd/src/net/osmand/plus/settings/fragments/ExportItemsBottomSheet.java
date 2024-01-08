@@ -106,7 +106,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		Fragment target = getTargetFragment();
 		if (target instanceof BaseSettingsListFragment) {
 			BaseSettingsListFragment fragment = (BaseSettingsListFragment) target;
-			List<Object> items = fragment.getItemsForType(type);
+			List<?> items = fragment.getItemsForType(type);
 			if (items != null) {
 				allItems.addAll(items);
 			}

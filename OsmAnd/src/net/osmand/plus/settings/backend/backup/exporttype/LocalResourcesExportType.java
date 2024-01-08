@@ -16,7 +16,7 @@ abstract class LocalResourcesExportType extends AbstractExportType {
 
 	@NonNull
 	protected List<File> collectLocalResources(@NonNull OsmandApplication app) {
-		LocalItemType relatedLocalItemType = relatedLocalItemType();
+		LocalItemType relatedLocalItemType = getRelatedLocalItemType();
 		if (relatedLocalItemType != null) {
 			List<LocalItem> localItems = collectLocalItems(app, relatedLocalItemType);
 			return collectFilesFromLocalItems(localItems, relatedLocalItemType);

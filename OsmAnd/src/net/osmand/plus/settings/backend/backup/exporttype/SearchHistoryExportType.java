@@ -47,31 +47,31 @@ class SearchHistoryExportType extends AbstractExportType {
 
 	@NonNull
 	@Override
-	public ExportCategory relatedExportCategory() {
+	public ExportCategory getRelatedExportCategory() {
 		return ExportCategory.MY_PLACES;
 	}
 
 	@NonNull
 	@Override
-	public SettingsItemType relatedSettingsItemType() {
+	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.SEARCH_HISTORY;
 	}
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.emptyList();
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return null;
 	}
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> relatedPluginClass() {
+	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
 	}
 }

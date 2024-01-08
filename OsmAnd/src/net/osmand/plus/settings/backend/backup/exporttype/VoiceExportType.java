@@ -24,13 +24,13 @@ class VoiceExportType extends AbstractVoiceExportType {
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.singletonList(FileSubtype.VOICE);
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.VOICE_DATA;
 	}
 }

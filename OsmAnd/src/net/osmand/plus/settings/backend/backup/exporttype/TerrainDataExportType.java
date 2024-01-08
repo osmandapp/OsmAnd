@@ -24,13 +24,13 @@ class TerrainDataExportType extends AbstractMapExportType {
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Arrays.asList(FileSubtype.SRTM_MAP, FileSubtype.TERRAIN_DATA);
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.TERRAIN_DATA;
 	}
 }

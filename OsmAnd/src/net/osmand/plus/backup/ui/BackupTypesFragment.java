@@ -42,9 +42,8 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 	@Override
 	protected Map<ExportType, List<?>> getSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
 		for (ExportType exportType : ExportType.values()) {
-			if (backupHelper.getBackupTypePref(exportType).get() && (exportType.isAllowedInFreeVersion() || available)) {
+			if (backupHelper.getBackupTypePref(exportType).get() && InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
 				selectedItemsMap.put(exportType, getItemsForType(exportType));
 			}
 		}

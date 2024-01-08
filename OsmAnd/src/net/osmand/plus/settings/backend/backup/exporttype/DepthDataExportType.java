@@ -24,13 +24,13 @@ class DepthDataExportType extends AbstractMapExportType {
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.singletonList(FileSubtype.NAUTICAL_DEPTH);
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.DEPTH_DATA;
 	}
 }

@@ -168,7 +168,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void updateSelectedProfile() {
-		List<Object> profileItems = getItemsForType(ExportType.PROFILE);
+		List<?> profileItems = getItemsForType(ExportType.PROFILE);
 		if (!Algorithms.isEmpty(profileItems)) {
 			for (Object item : profileItems) {
 				if (item instanceof ApplicationModeBean && appMode.getStringKey().equals(((ApplicationModeBean) item).stringKey)) {

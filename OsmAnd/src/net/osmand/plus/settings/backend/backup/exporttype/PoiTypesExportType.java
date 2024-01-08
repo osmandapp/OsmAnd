@@ -48,31 +48,31 @@ class PoiTypesExportType extends AbstractExportType {
 
 	@NonNull
 	@Override
-	public ExportCategory relatedExportCategory() {
+	public ExportCategory getRelatedExportCategory() {
 		return ExportCategory.SETTINGS;
 	}
 
 	@NonNull
 	@Override
-	public SettingsItemType relatedSettingsItemType() {
+	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.POI_UI_FILTERS;
 	}
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.emptyList();
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return null;
 	}
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> relatedPluginClass() {
+	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
 	}
 }

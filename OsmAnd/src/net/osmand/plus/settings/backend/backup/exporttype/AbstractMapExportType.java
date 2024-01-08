@@ -20,7 +20,7 @@ import java.util.List;
 
 public abstract class AbstractMapExportType extends LocalResourcesExportType {
 
-	public static final String OLD_OFFLINE_MAPS_EXPORT_TYPE_KEY = "OFFLINE_MAPS";
+	public static final String OFFLINE_MAPS_EXPORT_TYPE_KEY = "OFFLINE_MAPS";
 
 	@Override
 	public boolean isMap() {
@@ -63,19 +63,19 @@ public abstract class AbstractMapExportType extends LocalResourcesExportType {
 
 	@NonNull
 	@Override
-	public ExportCategory relatedExportCategory() {
+	public ExportCategory getRelatedExportCategory() {
 		return ExportCategory.RESOURCES;
 	}
 
 	@NonNull
 	@Override
-	public SettingsItemType relatedSettingsItemType() {
+	public SettingsItemType getRelatedSettingsItemType() {
 		return SettingsItemType.FILE;
 	}
 
 	@Nullable
 	@Override
-	public Class<? extends OsmandPlugin> relatedPluginClass() {
+	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
 	}
 }

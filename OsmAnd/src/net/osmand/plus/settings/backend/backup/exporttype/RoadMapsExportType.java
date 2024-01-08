@@ -24,13 +24,13 @@ class RoadMapsExportType extends AbstractMapExportType {
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.singletonList(FileSubtype.ROAD_MAP);
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.ROAD_DATA;
 	}
 }

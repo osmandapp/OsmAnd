@@ -24,13 +24,13 @@ class TtsVoiceExportType extends AbstractVoiceExportType {
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Collections.singletonList(FileSubtype.TTS_VOICE);
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.TTS_VOICE_DATA;
 	}
 }

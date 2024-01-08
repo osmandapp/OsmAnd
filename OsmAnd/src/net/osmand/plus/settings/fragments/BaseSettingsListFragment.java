@@ -264,10 +264,10 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	@Nullable
-	protected List<Object> getItemsForType(@NonNull ExportType exportType) {
+	protected List<?> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
 			if (categoryItems.getTypes().contains(exportType)) {
-				return new ArrayList<>(categoryItems.getItemsForType(exportType));
+				return categoryItems.getItemsForType(exportType);
 			}
 		}
 		return null;

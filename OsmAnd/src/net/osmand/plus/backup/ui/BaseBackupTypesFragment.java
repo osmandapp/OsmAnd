@@ -144,9 +144,8 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		boolean hasItemsToDelete = false;
 		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
 		List<ExportType> exportTypes = categoryItems.getTypes();
-		boolean backupFeaturePurchased = InAppPurchaseUtils.isBackupAvailable(app);
 		for (ExportType exportType : exportTypes) {
-			if (exportType.isAllowedInFreeVersion() || backupFeaturePurchased) {
+			if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
 				List<?> items = getItemsForType(exportType);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
 				selectedItemsMap.put(exportType, selected ? items : null);
@@ -159,8 +158,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		if (exportType.isAllowedInFreeVersion() || available) {
+		if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
 			List<?> items = getItemsForType(exportType);
 			selectedItemsMap.put(exportType, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {

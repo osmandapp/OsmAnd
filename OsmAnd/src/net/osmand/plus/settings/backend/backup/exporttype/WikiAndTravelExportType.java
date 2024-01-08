@@ -35,13 +35,13 @@ class WikiAndTravelExportType extends AbstractMapExportType {
 
 	@NonNull
 	@Override
-	public List<FileSubtype> relatedFileSubtypes() {
+	public List<FileSubtype> getRelatedFileSubtypes() {
 		return Arrays.asList(FileSubtype.WIKI_MAP, FileSubtype.TRAVEL);
 	}
 
 	@Nullable
 	@Override
-	public LocalItemType relatedLocalItemType() {
+	public LocalItemType getRelatedLocalItemType() {
 		return LocalItemType.WIKI_AND_TRAVEL_MAPS;
 	}
 }

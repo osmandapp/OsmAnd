@@ -25,7 +25,7 @@ interface IExportType {
 
 	boolean isMap();
 
-	boolean isAllowedInFreeVersion();
+	boolean isAvailableInFreeVersion();
 
 	boolean isRelatedToCategory(@NonNull ExportCategory exportCategory);
 
@@ -36,18 +36,18 @@ interface IExportType {
 	List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted);
 
 	@NonNull
-	ExportCategory relatedExportCategory();
+	ExportCategory getRelatedExportCategory();
 
 	@NonNull
-	SettingsItemType relatedSettingsItemType();
+	SettingsItemType getRelatedSettingsItemType();
 
 	@NonNull
-	List<FileSubtype> relatedFileSubtypes();
+	List<FileSubtype> getRelatedFileSubtypes();
 
 	@Nullable
-	LocalItemType relatedLocalItemType();
+	LocalItemType getRelatedLocalItemType();
 
 	@Nullable
-	Class<? extends OsmandPlugin> relatedPluginClass();
+	Class<? extends OsmandPlugin> getRelatedPluginClass();
 
 }
