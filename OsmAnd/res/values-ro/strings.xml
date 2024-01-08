@@ -5407,7 +5407,7 @@
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutare pentru biciclete (MTB)</string>
     <string name="help_article_map_interact_with_map_name">Interacționați cu harta</string>
     <string name="help_article_map_raster_maps_name">Hărți raster (online / offline)</string>
-    <string name="help_article_map_legend_ski_map_name">Stilul hărții de schi</string>
+    <string name="help_article_map_legend_ski_map_name">Stil hartă de ski</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Despre rutarea OsmAnd</string>
     <string name="help_article_plan_route_coordinate_input_name">Introducerea coordonatelor</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>
