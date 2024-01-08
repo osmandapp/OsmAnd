@@ -32,4 +32,5 @@
     <string name="last_available_location">사용 가능한 마지막 위치</string>
     <string name="shared_string_enabled">활성화</string>
     <string name="sharing_status">공유 상태</string>
+    <string name="units_and_formats">단위 &amp; 형식</string>
 </resources>
