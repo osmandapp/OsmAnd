@@ -5584,4 +5584,5 @@
     <string name="delete_map_description">Ziur %1$s mapa ezabatu nahi duzula?</string>
     <string name="searching_matching_tracks">Bilatu bat datozen arrasto guztiak</string>
     <string name="maps_and_resources">Mapa eta baliabideak</string>
+    <string name="any_connected_with_device">Konektatutako edozein: %s</string>
 </resources>

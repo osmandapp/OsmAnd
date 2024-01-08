@@ -1065,7 +1065,7 @@
     <string name="sleep_mode_stop_dialog">Opriți modul de fundal GPS\?</string>
     <string name="stop_navigation_service">Oprește</string>
     <string name="confirm_every_run">Întreabă mereu</string>
-    <string name="save_global_track_interval">Interval de înregistrare generală</string>
+    <string name="save_global_track_interval">Interval general de înregistrare</string>
     <string name="enable_sleep_mode">Activează modul GPS în fundal</string>
     <string name="save_track_to_gpx_globally_descr">Înregistrarea generală a poziției într-un fișier GPX poate fi activată sau dezactivată cu ajutorul widget-ului de înregistrare GPX de pe hartă.</string>
     <string name="save_track_interval_globally">Interval de salvare</string>
@@ -2989,8 +2989,8 @@
     <string name="continue_with">Continuă cu %1$s</string>
     <string name="not_available_with">Nu este disponibil cu %1$s</string>
     <string name="redeem_promo_code">Revendică cod promoțional</string>
-    <string name="osmand_maps_plus_tagline">Obțineți funcționalități extinse</string>
-    <string name="osmand_pro_tagline">Obțineți funcționalitățile maxime</string>
+    <string name="osmand_maps_plus_tagline">Obținere funcționalități extinse</string>
+    <string name="osmand_pro_tagline">Obținere maximul de funcționalități</string>
     <string name="shared_string_learn_more">Aflați mai multe</string>
     <string name="cancel_anytime_in_huawei_appgallery">Anulați-o oricând în Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Anulați-o oricând pe Google Play.</string>
@@ -3625,7 +3625,7 @@
 \n
 \nAceastă vizualizare poate fi revenită fie prin dezactivarea ei din nou aici, fie prin modificarea \'Stilului hărții\' în \'Configurați harta\', după cum doriți.</string>
     <string name="plugin_touringview_name">Vizualizare hartă turistică</string>
-    <string name="srtm_plugin_description">Informații privind terenul, cum ar fi curbe de nivel, nuanțe, pante, vă ajută să evaluați vizual așezarea pământului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei.
+    <string name="srtm_plugin_description">Informații privind terenul (e.g. curbe de nivel, nuanțe, pante) vă ajută să evaluați vizual așezarea pământului, relieful, navigabilitatea și multe altele. Informațiile topografice pot fi reprezentate pe hartă prin curbe de nivel, umbrirea reliefului și/sau colorarea pantei.
 \n
 \nDatele de bază provin din SRTM și ASTER.
 \n
@@ -3688,7 +3688,7 @@
     <string name="skip_map_downloading">Sări peste descărcarea hărților</string>
     <string name="osmand_plus_banner_desc">Descărcări nelimitate de hărți, actualizări și plugin Wikipedia.</string>
     <string name="osm_live_banner_desc">Obțineți descărcări nelimitate de hărți, adăugând actualizări săptămânale, zilnice sau chiar din oră în oră.</string>
-    <string name="get_for">Obțineți pentru %1$s</string>
+    <string name="get_for">Obține pentru %1$s</string>
     <string name="get_it">Ia-l</string>
     <string name="osm_live_subscription_desc">Abonamentul permite actualizări din oră în oră, zilnic, săptămânal și descărcări nelimitate pentru toate hărțile la nivel global.</string>
     <string name="donation_to_osm_desc">O parte din donația dvs. este trimisă contribuitorilor OSM. Costul abonamentului rămâne neschimbat.</string>
@@ -5257,7 +5257,7 @@
 \n
 \nIntroduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
     <string name="free_favorites_backup_description">Înregistrați-vă în OsmAnd Cloud pentru a obține backup gratuit pentru favorite și setări.</string>
-    <string name="get_osmand_cloud">Obțineți OsmAnd Cloud</string>
+    <string name="get_osmand_cloud">Obține OsmAnd Cloud</string>
     <string name="free_account">Cont gratuit</string>
     <string name="folder_export_empty_error">Nimic de exportat, folderul este gol</string>
     <string name="free_favorites_backup">Backup gratuit pentru favorite</string>
@@ -5351,7 +5351,7 @@
     <string name="average_glide_time_interval_desc">Specifică intervalul de timp pentru calcularea mediei de planare.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Rata medie de planare</string>
-    <string name="help_article_map_legend_nautical_map_name">Stil de hartă nautică</string>
+    <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
     <string name="release_4_6">• A fost adăugată posibilitatea de a schimba legăturile de chei pentru dispozitivele de intrare externe
 \n
 \n • A fost adăugat widgetul \"Glide Ratio\"
@@ -5405,7 +5405,7 @@
     <string name="help_article_navigation_routing_moped_routing_name">Rutare pentru mopede</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Rutare pentru bărci</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutare pentru biciclete (MTB)</string>
-    <string name="help_article_map_interact_with_map_name">Interacțiunea cu harta</string>
+    <string name="help_article_map_interact_with_map_name">Interacționați cu harta</string>
     <string name="help_article_map_raster_maps_name">Hărți raster (online / offline)</string>
     <string name="help_article_map_legend_ski_map_name">Stil hartă de ski</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Despre rutarea OsmAnd</string>
