@@ -791,7 +791,7 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 					if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-						mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+						mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
 					}
 				}
 			}

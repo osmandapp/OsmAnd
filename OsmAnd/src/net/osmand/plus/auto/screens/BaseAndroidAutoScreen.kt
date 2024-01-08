@@ -59,7 +59,7 @@ abstract class BaseAndroidAutoScreen(carContext: CarContext) : Screen(carContext
 	}
 
 	private fun startNavigation() {
-		app.osmandMap.mapLayers.mapControlsLayer.startNavigation()
+		app.osmandMap.mapLayers.mapActionsHelper.startNavigation()
 		val session = app.carNavigationSession
 		if (session != null && session.hasStarted()) {
 			session.startNavigation()
