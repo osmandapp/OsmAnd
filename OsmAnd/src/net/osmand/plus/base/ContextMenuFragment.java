@@ -50,9 +50,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeInfoProvider {
+public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;

@@ -114,7 +114,7 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UploadFileTask;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeProvider;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
@@ -142,7 +142,7 @@ import java.util.Locale;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister,
+		SaveAsNewTrackFragmentListener, MapControlsThemeProvider, GpsFilterFragmentLister,
 		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
@@ -2072,7 +2072,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (isFollowTrackMode()) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoControlDialog();
 				dismiss(mapActivity);
 			}
 		} else {

@@ -548,7 +548,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				if (!mapActivity.isChangingConfigurations()) {
 					mapActivity.getMapRouteInfoMenu().cancelSelectionFromTracks();
 				}
-				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoControlDialog();
 			}
 		} catch (Exception e) {
 			log.error(e);

@@ -128,11 +128,11 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDERLAY);
 				}
 				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY) {
-					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY);
+					mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper().showTransparencyBar(settings.MAP_TRANSPARENCY);
 				}
 			} else {
 				settings.MAP_UNDERLAY.set(null);
-				mapActivity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
+				mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper().hideTransparencyBar();
 				settings.MAP_UNDERLAY_PREVIOUS.set(null);
 			}
 			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_UNDERLAY);
