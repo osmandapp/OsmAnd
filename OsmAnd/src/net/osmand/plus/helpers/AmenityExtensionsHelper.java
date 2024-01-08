@@ -7,27 +7,22 @@ import static net.osmand.data.Amenity.SEPARATOR;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
-import net.osmand.osm.AbstractPoiType;
-import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class AmenityExtensionsHelper {
 
@@ -87,47 +82,9 @@ public class AmenityExtensionsHelper {
 		if (openingHours != null) {
 			result.put(AMENITY_PREFIX + OPENING_HOURS, openingHours);
 		}
-		Map<String, String> additionalInfo = amenity.getInternalAdditionalInfoMap();
-		if (!Algorithms.isEmpty(additionalInfo)) {
-			MapPoiTypes poiTypes = app.getPoiTypes();
-			for (Entry<String, String> entry : additionalInfo.entrySet()) {
-				String key = entry.getKey();
-				String value = entry.getValue();
-
-				//collect tags with categories and skip
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-				if (pt == null && !Algorithms.isEmpty(value) && value.length() < 50) {
-					pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + value);
-				}
-				PoiType pType = null;
-				if (pt != null) {
-					pType = (PoiType) pt;
-					if (pType.isFilterOnly()) {
-						continue;
-					}
-				}
-				if (pType != null && !pType.isText()) {
-					String categoryName = pType.getPoiAdditionalCategory();
-					if (!Algorithms.isEmpty(categoryName)) {
-						List<PoiType> poiAdditionalCategoryTypes = collectedPoiAdditionalCategories.get(categoryName);
-						if (poiAdditionalCategoryTypes == null) {
-							poiAdditionalCategoryTypes = new ArrayList<>();
-							collectedPoiAdditionalCategories.put(categoryName, poiAdditionalCategoryTypes);
-						}
-						poiAdditionalCategoryTypes.add(pType);
-						continue;
-					}
-				}
-
-				//save all other values to separate lines
-				if (key.endsWith(OPENING_HOURS)) {
-					continue;
-				}
-				if (!HIDING_EXTENSIONS_AMENITY_TAGS.contains(key)) {
-					key = OSM_PREFIX + key;
-				}
-				result.put(key, entry.getValue());
-			}
+		if (amenity.hasAdditionalInfo()) {
+			result.putAll(amenity.getAdditionalInfoAndCollectCategories(app.getPoiTypes(),
+					HIDING_EXTENSIONS_AMENITY_TAGS, collectedPoiAdditionalCategories, null));
 
 			//join collected tags by category into one string
 			for (Map.Entry<String, List<PoiType>> entry : collectedPoiAdditionalCategories.entrySet()) {

@@ -1,5 +1,7 @@
 package net.osmand.data;
 
+import static net.osmand.gpx.GPXUtilities.OSM_PREFIX;
+
 import net.osmand.Location;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -126,41 +128,70 @@ public class Amenity extends MapObject {
 		return str;
 	}
 
+	public boolean hasAdditionalInfo() {
+		return !Algorithms.isEmpty(additionalInfo);
+	}
+
 	// this method should be used carefully
-	public Map<String, String> getInternalAdditionalInfoMap() {
+	private Map<String, String> getInternalAdditionalInfoMap() {
 		if (additionalInfo == null) {
 			return Collections.emptyMap();
 		}
 		return additionalInfo;
 	}
 
-	public String getTranslatedAdditionalInfo(String alternateName) {
-		Map<String, String> additionalInfo = getInternalAdditionalInfoMap();
-		if (!Algorithms.isEmpty(additionalInfo)) {
-			MapPoiTypes poiTypes = MapPoiTypes.getDefault();
-			for (Map.Entry<String, String> entry : additionalInfo.entrySet()) {
-				String key = entry.getKey();
-				String value = entry.getValue();
-				if (Amenity.isContentZipped(value)) {
+	public Map<String, String> getAdditionalInfoAndCollectCategories(
+			MapPoiTypes poiTypes,
+			List<String> hiddenAdditional,
+			Map<String, List<PoiType>> collectedPoiAdditionalCategories,
+			String[] alternateName) {
+		Map<String, String> result = new HashMap<>();
+		for (Entry<String, String> entry : getInternalAdditionalInfoMap().entrySet()) {
+			String key = entry.getKey();
+			String value = entry.getValue();
+
+			//collect tags with categories and skip
+			AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
+			if (pt == null && !isContentZipped(value)) {
+				pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + value);
+			}
+			PoiType pType = null;
+			if (pt != null) {
+				pType = (PoiType) pt;
+				if (pType.isFilterOnly()) {
 					continue;
 				}
-				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(key);
-				if (pt == null) {
-					pt = poiTypes.getAnyPoiAdditionalTypeByKey(key + "_" + value);
-				}
-				PoiType pType = null;
-				if (pt != null) {
-					pType = (PoiType) pt;
-					if (pType.isFilterOnly()) {
+			}
+			if (pType != null && !pType.isText()) {
+				if (collectedPoiAdditionalCategories != null) {
+					String categoryName = pType.getPoiAdditionalCategory();
+					if (!Algorithms.isEmpty(categoryName)) {
+						List<PoiType> poiAdditionalCategoryTypes = collectedPoiAdditionalCategories.get(categoryName);
+						if (poiAdditionalCategoryTypes == null) {
+							poiAdditionalCategoryTypes = new ArrayList<>();
+							collectedPoiAdditionalCategories.put(categoryName, poiAdditionalCategoryTypes);
+						}
+						poiAdditionalCategoryTypes.add(pType);
 						continue;
 					}
-				}
-				if (pType != null && !pType.isText() && value.equals(alternateName)) {
-					return pType.getTranslation();
+				} else {
+					if (value.equals(alternateName[0])) {
+						alternateName[0] = pType.getTranslation();
+						return null;
+					}
 				}
 			}
+
+			//save all other values to separate lines
+			if (key.endsWith(OPENING_HOURS)) {
+				continue;
+			}
+			if (!Algorithms.isEmpty(hiddenAdditional) && !hiddenAdditional.contains(key)) {
+				key = OSM_PREFIX + key;
+			}
+			result.put(key, value);
 		}
-		return alternateName;
+		return result;
 	}
 
 	public Collection<String> getAdditionalInfoValues(boolean excludeZipped) {
