@@ -5380,7 +5380,7 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Navigare după marcaje</string>
     <string name="help_article_map_point_layers_on_map_name">Puncte pe hartă</string>
     <string name="help_article_map_vector_maps_name">Hărți vectoriale (stiluri de hartă)</string>
-    <string name="help_article_navigation_guidance_voice_navigation_name">Indicații vocale / Notificări</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Solicitări vocale / Notificări</string>
     <string name="help_article_map_tracks_on_map_name">Piste și rute</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Rutare directă la punct (Barcă)</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Ecranul hărții în timpul navigației</string>
@@ -5403,8 +5403,8 @@
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_name">Parametrii rutei</string>
     <string name="help_article_navigation_routing_moped_routing_name">Rutare pentru mopede</string>
-    <string name="help_article_navigation_routing_boat_navigation_name">Rutare pentru bărci</string>
-    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutare pentru biciclete (MTB)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Traseu pentru bărci</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Traseu pentru biciclete (MTB)</string>
     <string name="help_article_map_interact_with_map_name">Interacționați cu harta</string>
     <string name="help_article_map_raster_maps_name">Hărți raster (online / offline)</string>
     <string name="help_article_map_legend_ski_map_name">Stil hartă de ski</string>
