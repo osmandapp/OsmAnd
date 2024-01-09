@@ -692,7 +692,7 @@
     <string name="search_history_int_streets">Intersecție: {0} x {1} în {2}</string>
     <string name="search_history_building">Număr: {0}, {1}, {2}</string>
     <string name="favorite">Favorit</string>
-    <string name="shared_string_clear_all">Curăță tot</string>
+    <string name="shared_string_clear_all">Șterge tot</string>
     <string name="shared_string_history">Istoric</string>
     <string name="uploading_data">Se încarcă date…</string>
     <string name="uploading">Se încarcă…</string>
@@ -3653,7 +3653,7 @@
     <string name="no_waypoints_found">Nu s-au găsit puncte intermediare</string>
     <string name="no_map_markers_found">Adăugați marcaje folosind harta</string>
     <string name="rendering_value_bold_name">Groasă</string>
-    <string name="rendering_value_fine_name">Fin</string>
+    <string name="rendering_value_fine_name">Fină</string>
     <string name="access_map_linked_to_location">Harta legată de locație</string>
     <string name="access_autoannounce_period_descr">Interval de timp minim între anunțuri.</string>
     <string name="access_autoannounce_period">Perioadă de anunțare automată</string>
@@ -4252,7 +4252,7 @@
 \n
 \nPoate că unele hărți nu sunt încărcate, puteți efectua o verificare online pentru hărțile necesare.</string>
     <string name="online_maps_searching_descr">Se căută online…</string>
-    <string name="reset_to_original">Resetare la original</string>
+    <string name="reset_to_original">Resetează la original</string>
     <string name="backup_error_no_subscription">Nu există abonament</string>
     <string name="map_updates_for_mappers">Actualizări de hartă pentru cartografi</string>
     <string name="benefits_for_contributors">Beneficii pentru contribuitorii OSM activi</string>
@@ -4446,7 +4446,7 @@
     <string name="distance_between_points">Distanță între puncte</string>
     <string name="shared_string_uphill">Urcare</string>
     <string name="shared_string_downhill">Coborâre</string>
-    <string name="gps_filter_speed_altitude_desc">Doar punctele traseului ce corespund intervalului setat vor apărea pe grafic și pe hartă, iar restul vor fi ascunse.</string>
+    <string name="gps_filter_speed_altitude_desc">Doar punctele traseului ce corespund intervalului setat vor apărea pe grafic și pe hartă, restul fiind ascunse.</string>
     <string name="gps_filter_smoothing_desc">Setați distanța minimă între puncte.
 \nPunctele care nu se află la cel puțin această distanță de ultimul punct vizibil vor fi ascunse.
 \nRețineți că o valoare mare poate simplifica excesiv geometria traseului.</string>
@@ -4893,7 +4893,7 @@
     <string name="map_widget_ant_heart_rate">Ritm cardiac</string>
     <string name="map_widget_ant_heart_rate_desc">Arată în timp real ritmul cardiac al utilizatorului în timpul unei anumite activități</string>
     <string name="map_widget_zoom_level">Nivel de zoom</string>
-    <string name="favorite_delete_group">Șterge grup</string>
+    <string name="favorite_delete_group">Ștergere grup</string>
     <string name="download_heightmap_maps">Hartă înălțimi</string>
     <string name="coordinates_widget_map_center_desc">Arată coordonatele geografice ale centrului actual al hărții</string>
     <string name="display_position">Afișare poziție</string>
@@ -5404,7 +5404,7 @@
     <string name="help_article_navigation_routing_name">Parametrii rutei</string>
     <string name="help_article_navigation_routing_moped_routing_name">Rutare pentru mopede</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Rutare pentru bărci</string>
-    <string name="help_article_navigation_routing_bicycle_based_routing_name">Traseu pentru biciclete (MTB)</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutare pentru biciclete (MTB)</string>
     <string name="help_article_map_interact_with_map_name">Interacționați cu harta</string>
     <string name="help_article_map_raster_maps_name">Hărți raster (online / offline)</string>
     <string name="help_article_map_legend_ski_map_name">Stil hartă de ski</string>
