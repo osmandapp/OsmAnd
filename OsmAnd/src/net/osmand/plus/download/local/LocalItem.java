@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.utils.FileUtils;
 
 import java.io.File;
@@ -22,6 +23,8 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 
 	@Nullable
 	private Object attachedObject;
+	@Nullable
+	private LiveGroupItem liveUpdatesItem;
 	private long lastModified;
 
 
@@ -63,6 +66,15 @@ public class LocalItem extends BaseLocalItem implements Comparable<LocalItem> {
 	public boolean isHidden(@NonNull OsmandApplication app) {
 		File hiddenDir = app.getAppInternalPath(IndexConstants.HIDDEN_DIR);
 		return path.startsWith(hiddenDir.getAbsolutePath());
+	}
+
+	@Nullable
+	public LiveGroupItem getLiveUpdatesItem() {
+		return liveUpdatesItem;
+	}
+
+	public void setLiveUpdatesItem(@Nullable LiveGroupItem liveUpdatesItem) {
+		this.liveUpdatesItem = liveUpdatesItem;
 	}
 
 	@Nullable

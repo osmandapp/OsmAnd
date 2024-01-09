@@ -238,10 +238,12 @@ public class LocalItemUtils {
 			return ROUTING;
 		} else if (name.endsWith(BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT) || name.endsWith(BINARY_WIKI_MAP_INDEX_EXT)) {
 			return WIKI_AND_TRAVEL_MAPS;
-		} else if (path.contains(LIVE_INDEX_DIR) && path.endsWith(BINARY_MAP_INDEX_EXT)) {
-			return LIVE_UPDATES;
-		} else if (name.endsWith(BINARY_MAP_INDEX_EXT)) {
-			return name.endsWith(BINARY_ROAD_MAP_INDEX_EXT) ? ROAD_DATA : MAP_DATA;
+		} else if (path.endsWith(BINARY_MAP_INDEX_EXT)) {
+			if (path.contains(LIVE_INDEX_DIR) | path.matches(".*/backup/.*(_[0-9]{2}){3}\\.obf")) {
+				return LIVE_UPDATES;
+			} else {
+				return name.endsWith(BINARY_ROAD_MAP_INDEX_EXT) ? ROAD_DATA : MAP_DATA;
+			}
 		} else if (path.startsWith(app.getCacheDir().getAbsolutePath()) && (path.contains(WEATHER_FORECAST_DIR)
 				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
 			return file.isFile() ? CACHE : null;

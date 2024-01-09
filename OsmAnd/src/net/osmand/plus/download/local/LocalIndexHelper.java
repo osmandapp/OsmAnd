@@ -66,6 +66,15 @@ public class LocalIndexHelper {
 			collectFiles(categories, externalDir, noBackupDir, true);
 		}
 
+		LocalCategory resources = categories.get(CategoryType.RESOURCES);
+		if (resources != null) {
+			LocalGroup mainMaps = resources.getGroups().get(MAP_DATA);
+			LocalGroup liveUpdates = resources.getGroups().get(LIVE_UPDATES);
+			if (mainMaps != null && liveUpdates != null) {
+				linkLiveUpdatesToMainMaps(mainMaps, liveUpdates);
+			}
+		}
+
 		return categories;
 	}
 
@@ -116,14 +125,13 @@ public class LocalIndexHelper {
 	}
 
 	private void addLiveItem(@NonNull LocalCategory category, @NonNull File file, @NonNull LocalItemType itemType) {
-		String basename = FileNameTranslationHelper.getBasename(app, file.getName());
-		String liveGroupName = getNameToDisplay(basename.replaceAll("(_\\d*)*$", ""), app);
-
 		LocalGroup localGroup = category.getGroups().get(LIVE_UPDATES);
 		if (localGroup == null) {
 			localGroup = new LocalGroup(LIVE_UPDATES);
 			category.getGroups().put(LIVE_UPDATES, localGroup);
 		}
+
+		String liveGroupName = getLiveGroupName(file);
 		LiveGroupItem liveGroup = (LiveGroupItem) localGroup.getItem(liveGroupName);
 		if (liveGroup == null) {
 			liveGroup = new LiveGroupItem(liveGroupName);
@@ -132,6 +140,27 @@ public class LocalIndexHelper {
 		LocalItem item = new LocalItem(file, itemType);
 		LocalItemUtils.updateItem(app, item);
 		((LiveGroupItem) liveGroup).addLocalItem(item);
+	}
+
+	private void linkLiveUpdatesToMainMaps(@NonNull LocalGroup mainMaps, @NonNull LocalGroup liveUpdates) {
+		for (BaseLocalItem baseItem : mainMaps.getItems()) {
+			if (!(baseItem instanceof LocalItem)) {
+				continue;
+			}
+
+			LocalItem localItem = (LocalItem) baseItem;
+			String liveGroupName = getLiveGroupName(localItem.getFile());
+			BaseLocalItem liveGroupItem = liveUpdates.getItem(liveGroupName);
+			if (liveGroupItem instanceof LiveGroupItem) {
+				localItem.setLiveUpdatesItem((LiveGroupItem) liveGroupItem);
+			}
+		}
+	}
+
+	@NonNull
+	private String getLiveGroupName(@NonNull File file) {
+		String basename = FileNameTranslationHelper.getBasename(app, file.getName());
+		return getNameToDisplay(basename.replaceAll("(_\\d*)*$", ""), app);
 	}
 
 	private void collectLocalItems(@NonNull List<LocalItem> items, @NonNull LocalItemType type,

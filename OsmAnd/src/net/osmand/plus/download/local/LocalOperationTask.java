@@ -3,6 +3,7 @@ package net.osmand.plus.download.local;
 import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
+import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
@@ -100,30 +101,41 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 		if (item instanceof LocalItem) {
 			return processItem((LocalItem) item);
 		} else if (item instanceof LiveGroupItem) {
-			LiveGroupItem groupItem = (LiveGroupItem) item;
-
-			boolean success = false;
-			for (LocalItem localItem : groupItem.getItems()) {
-				if (!isCancelled()) {
-					success |= processItem(localItem);
-				}
-			}
-			return success;
+			return processLiveItem((LiveGroupItem) item);
 		}
 		return false;
 	}
 
 	private boolean processItem(@NonNull LocalItem item) {
+		LiveGroupItem liveUpdatesItem = item.getLiveUpdatesItem();
 		if (type == DELETE_OPERATION) {
 			return deleteItem(item);
 		} else if (type == RESTORE_OPERATION) {
-			return restoreItem(item);
+			boolean restored = restoreItem(item);
+			if (restored && liveUpdatesItem != null) {
+				processLiveItem(liveUpdatesItem);
+			}
+			return restored;
 		} else if (type == BACKUP_OPERATION) {
-			return backupItem(item);
+			boolean backedUp = backupItem(item);
+			if (backedUp && liveUpdatesItem != null) {
+				processLiveItem(liveUpdatesItem);
+			}
+			return backedUp;
 		} else if (type == CLEAR_TILES_OPERATION) {
 			return clearTilesItem(item);
 		}
 		return false;
+	}
+
+	private boolean processLiveItem(@NonNull LiveGroupItem liveItem) {
+		boolean success = false;
+		for (LocalItem localItem : liveItem.getItems()) {
+			if (!isCancelled()) {
+				success |= processItem(localItem);
+			}
+		}
+		return success;
 	}
 
 	private boolean deleteItem(@NonNull LocalItem item) {
@@ -201,6 +213,8 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 				} else {
 					parent = app.getAppPath(MAPS_PATH);
 				}
+			} else if (item.getType() == LIVE_UPDATES) {
+				parent = app.getAppPath(LIVE_INDEX_DIR);
 			} else if (item.getType() == TILES_DATA) {
 				if (fileName.endsWith(HEIGHTMAP_SQLITE_EXT)) {
 					parent = app.getAppPath(HEIGHTMAP_INDEX_DIR);
