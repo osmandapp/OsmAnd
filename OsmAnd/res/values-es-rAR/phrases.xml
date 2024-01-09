@@ -4719,4 +4719,5 @@
     <string name="poi_state_approved">Estado: aprobado</string>
     <string name="poi_state_proposed">Estado: propuesto</string>
     <string name="poi_state_main">Estado: principal</string>
+    <string name="poi_border_zone">Zona fronteriza</string>
 </resources>
