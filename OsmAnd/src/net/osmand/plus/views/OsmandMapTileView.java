@@ -727,7 +727,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getBaseZoom() {
 		MapRendererView mapRenderer = getMapRenderer();
-		return mapRenderer != null ? mapRenderer.getState().getZoomLevel().ordinal() : currentViewport.getZoom();
+		if (mapRenderer != null) {
+			return mapRenderer.getState().getZoomLevel().ordinal() + mapRenderer.getTileZoomOffset();
+		}
+		return currentViewport.getZoom();
 	}
 
 	public boolean isPinchZoomingOrRotating() {
