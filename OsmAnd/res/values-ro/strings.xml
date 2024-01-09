@@ -5403,7 +5403,7 @@
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_name">Parametrii rutei</string>
     <string name="help_article_navigation_routing_moped_routing_name">Rutare pentru mopede</string>
-    <string name="help_article_navigation_routing_boat_navigation_name">Traseu pentru bărci</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Rutare pentru bărci</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Traseu pentru biciclete (MTB)</string>
     <string name="help_article_map_interact_with_map_name">Interacționați cu harta</string>
     <string name="help_article_map_raster_maps_name">Hărți raster (online / offline)</string>
