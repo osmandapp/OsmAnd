@@ -3172,4 +3172,43 @@
     <string name="shared_string_swap">전환</string>
     <string name="keep_screen_off">화면 꺼짐 유지</string>
     <string name="deletion_error">삭제 오류</string>
+    <string name="ant_plus_pair_new_sensor">새 센서 페어링</string>
+    <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LE 및 ANT+ 센서를 OsmAnd와 페어링할 수 있습니다.</string>
+    <string name="save_track_logging_accuracy">로깅정확도</string>
+    <string name="cloud_email_not_registered">이 이메일 주소는 OsmAnd Cloud에 등록되어 있지 않음</string>
+    <string name="cloud_all_changes_downloaded">다운로드된 모든 변경 사항</string>
+    <string name="attach_to_the_roads">도로에 부착</string>
+    <string name="select_track_width">너비 선택</string>
+    <string name="save_track_external_sensors_data">데이터</string>
+    <string name="ant_plus_pair_new_sensor_ble">피어 Bluetooth LE 센서</string>
+    <string name="cloud_changes">클라우드 변화</string>
+    <string name="photo_notes">사진 메모</string>
+    <string name="previous_route">이전 노선</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">쌍 ANT+ 센서</string>
+    <string name="release_4_0">• 클라우드 백업
+\n
+\n • \"Topo\" 맵 스타일
+\n
+\n에 야간 모드 추가 • 등고선을 피트
+\n
+\n 단위로 다운로드할 수 있는 옵션 추가 • 이제 고도, 속도 또는 경사에 따라 트랙을 채색할 수 있습니다.
+\n
+\n • 업데이트된 \"여행 기록\" 대화 상자
+\n
+\n • 탭에 의한 거리가 반경 눈금자에서 별도의 옵션
+\n
+\n으로 이동되었습니다. • 경로 계획: 이제 내비게이션을 변경할 수 있습니다. 옵션, 지도 구성에 접근하고 경로 계획을
+\n
+\n 벗어나지 않고 검색할 수 있습니다. • 자세한 구매 정보가
+\n
+\n 포함된 새로운 \"구매\" 화면 • 노선 모양을
+\n
+\n • OsmAnd Live 업데이트가 \"업데이트 다운로드\"로 이동&gt;
+\n
+\n</string>
+    <string name="video_notes">비디오 노트</string>
+    <string name="shared_string_color">색상</string>
+    <string name="shared_string_slope">경사</string>
+    <string name="enter_verification_code">일회용 암호 입력</string>
+    <string name="login_account">계정</string>
 </resources>
