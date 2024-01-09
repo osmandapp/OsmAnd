@@ -1,6 +1,6 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

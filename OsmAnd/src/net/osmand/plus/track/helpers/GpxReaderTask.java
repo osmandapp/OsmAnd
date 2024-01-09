@@ -1,7 +1,7 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
-import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
 
 import android.os.AsyncTask;
 

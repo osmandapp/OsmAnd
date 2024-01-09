@@ -1,10 +1,10 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.track.helpers.GpxParameter.*;
-import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_HEART_RATE;
-import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_TEMPERATURE;
+import static net.osmand.gpx.GpxParameter.*;
+import static net.osmand.gpx.GpxParameter.AVG_SENSOR_HEART_RATE;
+import static net.osmand.gpx.GpxParameter.AVG_SENSOR_SPEED;
+import static net.osmand.gpx.GpxParameter.AVG_SENSOR_TEMPERATURE;
 
 import android.util.Pair;
 
@@ -15,6 +15,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;

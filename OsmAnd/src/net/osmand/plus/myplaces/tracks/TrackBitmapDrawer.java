@@ -1,7 +1,7 @@
 package net.osmand.plus.myplaces.tracks;
 
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

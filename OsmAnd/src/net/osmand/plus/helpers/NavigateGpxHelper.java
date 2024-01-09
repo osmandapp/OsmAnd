@@ -2,7 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
-import static net.osmand.plus.track.helpers.GpxParameter.API_IMPORTED;
+import static net.osmand.gpx.GpxParameter.API_IMPORTED;
 
 import android.content.ContentResolver;
 import android.content.Context;

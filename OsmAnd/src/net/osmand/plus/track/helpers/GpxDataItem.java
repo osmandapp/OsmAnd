@@ -1,13 +1,14 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.*;
-import static net.osmand.plus.track.helpers.GpxParameter.AVG_SENSOR_SPEED;
+import static net.osmand.gpx.GpxParameter.*;
+import static net.osmand.gpx.GpxParameter.AVG_SENSOR_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;

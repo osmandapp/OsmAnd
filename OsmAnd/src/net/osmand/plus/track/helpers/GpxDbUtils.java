@@ -3,12 +3,13 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_UPDATE_PARAMETERS_START;
-import static net.osmand.plus.track.helpers.GpxParameter.*;
+import static net.osmand.gpx.GpxParameter.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;

@@ -19,9 +19,9 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
-import static net.osmand.plus.track.helpers.GpxParameter.API_IMPORTED;
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.FILE_LAST_MODIFIED_TIME;
+import static net.osmand.gpx.GpxParameter.API_IMPORTED;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

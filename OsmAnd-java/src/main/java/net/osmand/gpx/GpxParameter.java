@@ -1,7 +1,4 @@
-package net.osmand.plus.track.helpers;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+package net.osmand.gpx;
 
 import net.osmand.util.Algorithms;
 
@@ -60,39 +57,33 @@ public enum GpxParameter {
 	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double.class, 0d);
 
 
-	@NonNull
 	private final String columnName;
-	@NonNull
 	private final String columnType;
-	@NonNull
 	private final Class<?> typeClass;
-	@Nullable
 	private final Object defaultValue;
 
-	GpxParameter(@NonNull String columnName, @NonNull String columnType,
-	                     @NonNull Class<?> typeClass, @Nullable Object defaultValue) {
+	GpxParameter(String columnName, String columnType,
+	             Class<?> typeClass, Object defaultValue) {
 		this.columnName = columnName;
 		this.columnType = columnType;
 		this.typeClass = typeClass;
 		this.defaultValue = defaultValue;
 	}
 
-	@NonNull
+	
 	public String getColumnName() {
 		return columnName;
 	}
 
-	@NonNull
+	
 	public String getColumnType() {
 		return columnType;
 	}
 
-	@NonNull
 	public Class<?> getTypeClass() {
 		return typeClass;
 	}
 
-	@Nullable
 	public Object getDefaultValue() {
 		return defaultValue;
 	}
@@ -101,12 +92,11 @@ public enum GpxParameter {
 		return defaultValue == null;
 	}
 
-	public boolean isValidValue(@Nullable Object value) {
+	public boolean isValidValue(Object value) {
 		return value == null && isNullSupported() || value != null && getTypeClass() == value.getClass();
 	}
 
-	@Nullable
-	public Object convertToDbValue(@Nullable Object value) {
+	public Object convertToDbValue(Object value) {
 		if (getTypeClass() == Boolean.class) {
 			return value instanceof Boolean && ((Boolean) value) ? 1 : 0;  // 1 = true, 0 = false
 		} else if (this == COLOR) {
@@ -122,7 +112,7 @@ public enum GpxParameter {
 		return ordinal();
 	}
 
-	@NonNull
+	
 	@Override
 	public String toString() {
 		return columnName;

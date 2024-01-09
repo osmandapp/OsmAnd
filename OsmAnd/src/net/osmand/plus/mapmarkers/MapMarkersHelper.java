@@ -1,7 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_AS_MARKERS;
+import static net.osmand.gpx.GpxParameter.SHOW_AS_MARKERS;
 
 import android.util.Pair;
 

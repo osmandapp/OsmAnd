@@ -11,11 +11,11 @@ import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
-import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 
 import android.text.SpannableStringBuilder;

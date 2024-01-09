@@ -5,7 +5,7 @@ import android.util.Pair
 import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.track.helpers.GpxParameter
+import net.osmand.gpx.GpxParameter
 import net.osmand.util.Algorithms
 import java.lang.IllegalArgumentException
 

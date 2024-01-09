@@ -4,7 +4,7 @@ import androidx.annotation.StringRes
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.filters.NonDbTrackParam.VISIBLE_ON_MAP
 import net.osmand.plus.myplaces.tracks.filters.NonDbTrackParam.WITH_WAYPOINTS
-import net.osmand.plus.track.helpers.GpxParameter
+import net.osmand.gpx.GpxParameter
 import java.util.Collections
 
 enum class FilterType(

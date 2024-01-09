@@ -4,7 +4,7 @@ import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
 import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
-import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

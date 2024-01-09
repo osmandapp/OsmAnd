@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.settings.enums.MetricsConstants
-import net.osmand.plus.track.helpers.GpxParameter
+import net.osmand.gpx.GpxParameter
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue
 import kotlin.math.ceil
@@ -236,9 +236,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 
 			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
 				value.toFloat(),
-				app,
-				true,
-				metricsConstants)
+				app)
 
 			MeasureUnitType.TIME_DURATION -> FormattedValue(value.toFloat() / 1000 / 60, value, "")
 
