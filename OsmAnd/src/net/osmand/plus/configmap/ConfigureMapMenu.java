@@ -22,6 +22,15 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ITEMS_ID_SC
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.osm.OsmRouteType.ALPINE;
+import static net.osmand.osm.OsmRouteType.BICYCLE;
+import static net.osmand.osm.OsmRouteType.FITNESS;
+import static net.osmand.osm.OsmRouteType.HIKING;
+import static net.osmand.osm.OsmRouteType.HORSE;
+import static net.osmand.osm.OsmRouteType.MTB;
+import static net.osmand.osm.OsmRouteType.RUNNING;
+import static net.osmand.osm.OsmRouteType.SKI;
+import static net.osmand.osm.OsmRouteType.WATER;
 import static net.osmand.plus.configmap.DifficultyClassificationFragment.getDifficultyClassificationDescription;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.DIFFICULTY_CLASSIFICATION;
 import static net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment.DEPTH_CONTOUR_COLOR_SCHEME;
@@ -98,18 +107,8 @@ public class ConfigureMapMenu {
 
 	private static final Log LOG = PlatformUtil.getLog(ConfigureMapMenu.class);
 
-	public static final String HORSE_ROUTES_ATTR = "horseRoutes";
-	public static final String PISTE_ROUTES_ATTR = "pisteRoutes";
-	public static final String ALPINE_HIKING_ATTR = "alpineHiking";
 	public static final String ALPINE_HIKING_SCALE_SCHEME_ATTR = "alpineHikingScaleScheme";
-	public static final String SHOW_MTB_ROUTES_ATTR = "showMtbRoutes";
-	public static final String SHOW_CYCLE_ROUTES_ATTR = "showCycleRoutes";
-	public static final String WHITE_WATER_SPORTS_ATTR = "whiteWaterSports";
-	public static final String HIKING_ROUTES_OSMC_ATTR = "hikingRoutesOSMC";
 	public static final String CYCLE_NODE_NETWORK_ROUTES_ATTR = "showCycleNodeNetworkRoutes";
-	public static final String SHOW_FITNESS_TRAILS_ATTR = "showFitnessTrails";
-	public static final String SHOW_RUNNING_ROUTES_ATTR = "showRunningRoutes";
-	public static final String SHOW_MTB_ROUTES = "showMtbRoutes";
 	public static final String SHOW_MTB_SCALE_IMBA_TRAILS = "showMtbScaleIMBATrails";
 	public static final String SHOW_MTB_SCALE = "showMtbScale";
 	public static final String SHOW_MTB_SCALE_UPHILL = "showMtbScaleUphill";
@@ -258,13 +257,13 @@ public class ConfigureMapMenu {
 
 		for (String attrName : getRoutesAttrsNames(customRules)) {
 			RenderingRuleProperty property = getPropertyForAttr(customRules, attrName);
-			if (SHOW_CYCLE_ROUTES_ATTR.equals(attrName)) {
+			if (BICYCLE.getRenderingPropertyAttr().equals(attrName)) {
 				adapter.addItem(createCycleRoutesItem(activity, attrName, property, nightMode));
-			} else if (HIKING_ROUTES_OSMC_ATTR.equals(attrName)) {
+			} else if (HIKING.getRenderingPropertyAttr().equals(attrName)) {
 				adapter.addItem(createHikingRoutesItem(activity, attrName, property, nightMode));
-			} else if (SHOW_MTB_ROUTES.equals(attrName)) {
+			} else if (MTB.getRenderingPropertyAttr().equals(attrName)) {
 				adapter.addItem(createMtbRoutesItem(activity, attrName, property, nightMode));
-			} else if (ALPINE_HIKING_ATTR.equals(attrName)) {
+			} else if (ALPINE.getRenderingPropertyAttr().equals(attrName)) {
 				adapter.addItem(createAlpineHikingItem(activity, attrName, nightMode));
 			} else {
 				String id = ROUTES_ITEMS_ID_SCHEME + attrName;
@@ -480,13 +479,13 @@ public class ConfigureMapMenu {
 
 	private static Map<String, String> getRoutesDefaultAttrs() {
 		Map<String, String> attrs = new LinkedHashMap<>();
-		attrs.put(SHOW_CYCLE_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
-		attrs.put(SHOW_MTB_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
-		attrs.put(HIKING_ROUTES_OSMC_ATTR, RendererRegistry.DEFAULT_RENDER);
-		attrs.put(ALPINE_HIKING_ATTR, RendererRegistry.DEFAULT_RENDER);
-		attrs.put(PISTE_ROUTES_ATTR, RendererRegistry.WINTER_SKI_RENDER);
-		attrs.put(HORSE_ROUTES_ATTR, RendererRegistry.DEFAULT_RENDER);
-		attrs.put(WHITE_WATER_SPORTS_ATTR, RendererRegistry.DEFAULT_RENDER);
+		attrs.put(BICYCLE.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
+		attrs.put(MTB.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
+		attrs.put(HIKING.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
+		attrs.put(ALPINE.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
+		attrs.put(SKI.getRenderingPropertyAttr(), RendererRegistry.WINTER_SKI_RENDER);
+		attrs.put(HORSE.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
+		attrs.put(WATER.getRenderingPropertyAttr(), RendererRegistry.DEFAULT_RENDER);
 		return attrs;
 	}
 
@@ -507,26 +506,25 @@ public class ConfigureMapMenu {
 
 	@DrawableRes
 	private int getIconIdForAttr(@NonNull String attrName) {
-		switch (attrName) {
-			case SHOW_CYCLE_ROUTES_ATTR:
-				return R.drawable.ic_action_bicycle_dark;
-			case SHOW_MTB_ROUTES_ATTR:
-				return R.drawable.ic_action_mountain_bike;
-			case WHITE_WATER_SPORTS_ATTR:
-				return R.drawable.ic_action_kayak;
-			case HORSE_ROUTES_ATTR:
-				return R.drawable.ic_action_horse;
-			case HIKING_ROUTES_OSMC_ATTR:
-			case ALPINE_HIKING_ATTR:
-				return R.drawable.ic_action_trekking_dark;
-			case PISTE_ROUTES_ATTR:
-				return R.drawable.ic_action_skiing;
-			case TRAVEL_ROUTES:
-				return R.drawable.mm_routes;
-			case SHOW_FITNESS_TRAILS_ATTR:
-				return R.drawable.mx_sport_athletics;
-			case SHOW_RUNNING_ROUTES_ATTR:
-				return R.drawable.mx_running;
+		if (BICYCLE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_bicycle_dark;
+		} else if (MTB.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_mountain_bike;
+		} else if (WATER.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_kayak;
+		} else if (HORSE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_horse;
+		} else if (HIKING.getRenderingPropertyAttr().equals(attrName)
+				|| ALPINE.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_trekking_dark;
+		} else if (SKI.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.ic_action_skiing;
+		} else if (FITNESS.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.mx_sport_athletics;
+		} else if (RUNNING.getRenderingPropertyAttr().equals(attrName)) {
+			return R.drawable.mx_running;
+		} else if (TRAVEL_ROUTES.equals(attrName)) {
+			return R.drawable.mm_routes;
 		}
 		return INVALID_ID;
 	}
@@ -710,7 +708,7 @@ public class ConfigureMapMenu {
 		return !(A_APP_MODE.equals(attrName)
 				|| A_BASE_APP_MODE.equals(attrName)
 				|| A_ENGINE_V1.equals(attrName)
-				|| HIKING_ROUTES_OSMC_ATTR.equals(attrName)
+				|| HIKING.getRenderingPropertyAttr().equals(attrName)
 				|| ROAD_STYLE_ATTR.equals(attrName)
 				|| CONTOUR_WIDTH_ATTR.equals(attrName)
 				|| CONTOUR_DENSITY_ATTR.equals(attrName)
@@ -725,7 +723,7 @@ public class ConfigureMapMenu {
 				|| RENDERING_CATEGORY_OSM_ASSISTANT.equals(category)
 				|| DEPTH_CONTOUR_WIDTH.equals(attrName)
 				|| DEPTH_CONTOUR_COLOR_SCHEME.equals(attrName)
-				|| ALPINE_HIKING_ATTR.equals(attrName)
+				|| ALPINE.getRenderingPropertyAttr().equals(attrName)
 				|| ALPINE_HIKING_SCALE_SCHEME_ATTR.equals(attrName)
 		);
 	}

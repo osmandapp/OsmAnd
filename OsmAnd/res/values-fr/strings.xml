@@ -466,7 +466,7 @@
     <string name="error_calculating_route">Impossible de calculer l\'itinéraire.</string>
     <string name="error_calculating_route_occured">Impossible de calculer l\'itinéraire.</string>
     <string name="empty_route_calculated">L\'itinéraire calculé est vide.</string>
-    <string name="arrived_at_destination">Vous êtes arrivés.</string>
+    <string name="arrived_at_destination">Vous êtes arrivé.</string>
     <string name="invalid_locations">Coordonnées invalides</string>
     <string name="go_back_to_osmand">Retourner à la carte</string>
     <string name="shared_string_close">Fermer</string>
@@ -5579,4 +5579,5 @@
     <string name="complex_widget_alert">Le gadget %1$s ne peut être placé que sur sa propre ligne.</string>
     <string name="precise_distance_numbers">Distances précises</string>
     <string name="any_connected">N\'importe quel appareil connecté</string>
+    <string name="any_connected_with_device">N\'importe quel appareil connecté : %s</string>
 </resources>

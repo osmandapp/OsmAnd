@@ -5591,4 +5591,5 @@
     <string name="complex_widget_alert">Das Widget %1$s kann nur in seiner eigenen Zeile platziert werden.</string>
     <string name="precise_distance_numbers">Genaue Entfernungsangaben</string>
     <string name="any_connected">Alle verbundenen</string>
+    <string name="any_connected_with_device">Alle verbundene: %s</string>
 </resources>

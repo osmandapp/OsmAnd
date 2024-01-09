@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Superficie: plástico</string>
     <string name="poi_surface_rubber">Superficie: caucho</string>
     <string name="poi_assembly_point">Punto de encuentro</string>
-    <string name="poi_not_pt_shelter_yes">Todas excepto las marquesinas de transporte público</string>
+    <string name="poi_not_pt_shelter_yes">Marquesina (no para transporte público)</string>
     <string name="poi_horse_designated">Destinado a caballos</string>
     <string name="poi_foot_designated">Destinado a peatones</string>
     <string name="poi_motor_vehicle_designated">Destinado a vehículos a motor</string>

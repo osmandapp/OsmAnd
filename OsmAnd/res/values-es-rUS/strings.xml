@@ -4136,7 +4136,7 @@
     <string name="restore_complete">Restaurado</string>
     <string name="backup_version_history">Historial de versiones</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios para los tipos de datos obsoletos en OsmAnd Cloud?</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
@@ -5602,4 +5602,5 @@
     <string name="map_widget_sun_position">Ubicación del Sol</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
     <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
+    <string name="any_connected_with_device">Cualquiera conectado: %s</string>
 </resources>

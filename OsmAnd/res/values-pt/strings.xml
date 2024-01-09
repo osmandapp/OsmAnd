@@ -3073,8 +3073,8 @@
     <string name="shared_string_file_is_saved">%s está guardado</string>
     <string name="shared_string_open_track">Abrir trilho</string>
     <string name="shared_string_track_is_saved">O trilho %s está guardado</string>
-    <string name="rendering_attr_showLez_description">Mostrar zonas de baixas emissões (proibida circulação de veículos poluentes) no mapa. Não afeta o roteamento.</string>
-    <string name="rendering_attr_showLez_name">Mostrar zonas de baixas emissões poluentes</string>
+    <string name="rendering_attr_showLez_description">Mostrar no mapa zonas onde é proibida a circulação de veículos muito poluentes. Não afeta o roteamento.</string>
+    <string name="rendering_attr_showLez_name">Mostrar zonas de emissões reduzidas</string>
     <string name="temporary_conditional_routing">Aplicar limitações temporárias (obras...)</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %1$s; tempo do roteador %2$s
@@ -3680,7 +3680,7 @@
     <string name="select_track_width">Espessura da linha do trilho</string>
     <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo no trilho serão mostradas.</string>
     <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
-    <string name="shared_string_custom">Personalizado</string>
+    <string name="shared_string_custom">Ajustado</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
     <string name="track_coloring_solid">Sólido</string>
     <string name="plan_route_last_edited">Última edição</string>
@@ -3785,7 +3785,7 @@
     <string name="use_live_public_transport">Dados do OsmAnd Live</string>
     <string name="use_live_routing">Dados do OsmAnd Live</string>
     <string name="complex_routing_descr">Roteamento em duas fases para a navegação automóvel.</string>
-    <string name="use_native_pt">Desenvolvimento nativos de transportes públicos</string>
+    <string name="use_native_pt">Desenvolvimento nativo de transportes públicos</string>
     <string name="use_native_pt_desc">Mudar para o cálculo de rotas de transportes públicos Java (seguro)</string>
     <string name="perform_oauth_authorization_description">Inicie sessão com o OAuth para usar os recursos de edição OpenStreetMap</string>
     <string name="perform_oauth_authorization">Iniciar sessão com OAuth</string>
@@ -5592,4 +5592,5 @@
     <string name="see_all_plans">Ver todos os planos</string>
     <string name="clear_key_assignment_desc">A atribuição de tecla para a ação selecionada será desmarcada e definida como \"Nenhuma\".</string>
     <string name="map_widget_sun_position_desc">Este widget mostra o tempo que falta até ao nascer ou pôr do sol, dependendo da hora atual.</string>
+    <string name="any_connected_with_device">Qualquer conectado: %s</string>
 </resources>

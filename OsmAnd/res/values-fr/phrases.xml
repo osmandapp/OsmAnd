@@ -73,7 +73,7 @@
     <string name="poi_canoe">Canoë-kayak</string>
     <string name="poi_cape">Cap</string>
     <string name="poi_car">Concession automobile</string>
-    <string name="poi_car_parts">Magasin de pièces détachées pour automobiles</string>
+    <string name="poi_car_parts">Magasin de pièces détachées automobiles</string>
     <string name="poi_car_rental">Location de voitures</string>
     <string name="poi_car_repair">Garagiste;Atelier de réparation automobile;Garage;Réparation de véhicules</string>
     <string name="poi_car_sharing">Autopartage</string>
@@ -1422,11 +1422,11 @@
     <string name="poi_service_bicycle_repair_no">Réparation de vélos : non</string>
     <string name="poi_service_bicycle_rental_yes">Location de vélos : oui</string>
     <string name="poi_service_bicycle_rental_no">Location de vélos : non</string>
-    <string name="poi_service_bicycle_pump_yes">Pompe à bicyclette/vélo</string>
+    <string name="poi_service_bicycle_pump_yes">Pompe à vélo</string>
     <string name="poi_service_bicycle_pump_no">Pompe à vélo : non</string>
-    <string name="poi_service_bicycle_diy_yes">Outils en libre service pour réparer des bicyclettes/vélos</string>
+    <string name="poi_service_bicycle_diy_yes">Outils en libre service pour réparer des vélos</string>
     <string name="poi_service_bicycle_diy_no">Outils en libre service : non</string>
-    <string name="poi_service_bicycle_cleaning_yes">Nettoyage bicyclettes/vélos</string>
+    <string name="poi_service_bicycle_cleaning_yes">Nettoyage de vélos</string>
     <string name="poi_service_bicycle_cleaning_no">Nettoyage de vélos : non</string>
     <string name="poi_service_bicycle_chaintool_yes">Dérive-chaîne de vélo : oui</string>
     <string name="poi_service_bicycle_chaintool_no">Dérive-chaîne : non</string>
@@ -2113,7 +2113,7 @@
     <string name="poi_historic_period_stone_bronze_undetermined">Période historique : âge de pierre / âge de bronze (indéterminé)</string>
     <string name="poi_material_earth">Matière : terre</string>
     <string name="poi_covered">Couvert</string>
-    <string name="poi_aerialway_bicycle">Transport de vélos</string>
+    <string name="poi_aerialway_bicycle">Transport de vélo</string>
     <string name="poi_aerialway_heating">Chauffage</string>
     <string name="poi_pharmacy_dispensing">Ordonnance</string>
     <string name="poi_star_rating">Évaluation (étoiles)</string>
@@ -4589,7 +4589,7 @@
     <string name="poi_surface_plastic">Surface : plastique</string>
     <string name="poi_draft">Profondeur du chenal</string>
     <string name="poi_assembly_point">Point de rassemblement</string>
-    <string name="poi_not_pt_shelter_yes">Tout sauf abris de transports en commun</string>
+    <string name="poi_not_pt_shelter_yes">Abri (pas pour transport en commun)</string>
     <string name="poi_motor_vehicle_designated">Désigné pour les véhicules motorisés</string>
     <string name="poi_motorcar_designated">Désigné pour les voitures</string>
     <string name="poi_bicycle_designated">Désigné pour les vélos</string>
@@ -4708,4 +4708,9 @@
     <string name="poi_state_approved">État : approuvé</string>
     <string name="poi_state_proposed">État : proposé</string>
     <string name="poi_state_main">État : principal</string>
+    <string name="poi_healthcare_speciality_sleep">Sommeil</string>
+    <string name="poi_healthcare_speciality_hydrotherapy">Hydrothérapie</string>
+    <string name="poi_healthcare_speciality_applied_kinesiology">Kinésiologie appliquée</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Anthroposophique</string>
+    <string name="poi_healthcare_speciality_aromatherapy">Aromathérapie</string>
 </resources>

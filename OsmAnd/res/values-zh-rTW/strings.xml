@@ -5577,4 +5577,5 @@
     <string name="complex_widget_alert">%1$s 小工具只能放在自己的列上。</string>
     <string name="precise_distance_numbers">精確的距離數字</string>
     <string name="any_connected">任何已連線</string>
+    <string name="any_connected_with_device">任何已連結的：%s</string>
 </resources>

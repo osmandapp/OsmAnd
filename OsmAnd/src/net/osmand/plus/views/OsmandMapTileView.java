@@ -2052,6 +2052,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		@Override
+		public void onStopChangingViewAngle() {
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					notifyOnStopChangingElevation(mapRenderer.getElevationAngle());
+				}
+			}
+		}
+
+		@Override
 		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getCurrentRotatedTileBox().copy();
@@ -2204,6 +2214,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void notifyOnElevationChanging(float angle) {
 		for (ElevationListener listener : elevationListeners) {
 			listener.onElevationChanging(angle);
+		}
+	}
+
+	private void notifyOnStopChangingElevation(float angle) {
+		for (ElevationListener listener : elevationListeners) {
+			listener.onStopChangingElevation(angle);
 		}
 	}
 
@@ -2366,5 +2382,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public interface ElevationListener {
 		void onElevationChanging(float angle);
+
+		void onStopChangingElevation(float angle);
 	}
 }

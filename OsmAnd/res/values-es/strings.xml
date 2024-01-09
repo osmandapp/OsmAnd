@@ -883,7 +883,7 @@
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="audionotes_plugin_description">Tome notas de audio / foto / video durante un viaje, utilizando un botón de mapa o el menú contextual de la ubicación.</string>
-    <string name="audionotes_plugin_name">Notas audio/vídeo</string>
+    <string name="audionotes_plugin_name">Notas de audio/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">El complemento de OsmAnd para características las topográficas sin conexión como líneas de contorno, sombreado, pendiente</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">Pulsa «Usar ubicación…» para añadir una nota a la ubicación.</string>
@@ -4312,7 +4312,7 @@
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="send_crash_log">Enviar informe de errores</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios para los tipos de datos obsoletos en OsmAnd Cloud?</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
     <string name="backup_data">Datos de la copia de seguridad</string>
     <string name="backup_delete_old_data_warning">Se borrará el historial de cambios de los datos cargados previamente.
@@ -5347,15 +5347,15 @@
     <string name="average_glide_time_interval_desc">Determinar el período de tiempo requerido para el promedio deslizante.</string>
     <string name="average_glide_ratio">Tasa media de planeo</string>
     <string name="glide_ratio_to_target">Tasa de planeo hasta el objetivo</string>
-    <string name="help_article_map_legend_nautical_map_name">Estilo de las cartas náuticas</string>
-    <string name="help_article_map_legend_osmand_name">Estilo del mapa de OsmAnd</string>
-    <string name="help_article_map_legend_ski_map_name">Estilo del mapa pistas de esquí</string>
+    <string name="help_article_map_legend_nautical_map_name">Estilo del mapa náutico</string>
+    <string name="help_article_map_legend_osmand_name">Estilo del mapa OsmAnd</string>
+    <string name="help_article_map_legend_ski_map_name">Estilo del mapa de esquí</string>
     <string name="help_article_map_interact_with_map_name">Interactuar con el mapa</string>
     <string name="help_article_map_map_context_menu_name">Menú contextual del mapa</string>
-    <string name="help_article_map_point_layers_on_map_name">Puntos del mapa</string>
-    <string name="help_article_map_raster_maps_name">Mapas rasterizados (con conexión/sin conexión)</string>
+    <string name="help_article_map_point_layers_on_map_name">Puntos en el mapa</string>
+    <string name="help_article_map_raster_maps_name">Mapas rasterizados (con conexión / sin conexión)</string>
     <string name="help_article_map_track_context_menu_name">Menú contextual de las pistas</string>
-    <string name="help_article_map_tracks_on_map_name">Vías y rutas</string>
+    <string name="help_article_map_tracks_on_map_name">Pistas y rutas</string>
     <string name="help_article_map_vector_maps_name">Mapas vectoriales (Estilos de mapas)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
@@ -5378,7 +5378,7 @@
     <string name="help_article_navigation_routing_train_routing_name">Recorrido de los trenes</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navegar por la pista</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navegar por los marcadores</string>
-    <string name="help_article_navigation_setup_route_details_name">Detalles del itinerario</string>
+    <string name="help_article_navigation_setup_route_details_name">Detalles de la ruta</string>
     <string name="help_article_navigation_setup_route_navigation_name">Preparación del itinerario</string>
     <string name="help_article_personal_name">Mis datos</string>
     <string name="help_article_personal_import_export_name">Importar / Exportar</string>
@@ -5400,9 +5400,9 @@
     <string name="help_article_troubleshooting_general_name">General</string>
     <string name="help_article_troubleshooting_maps_data_name">Mapas y datos</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Grabación de pistas</string>
-    <string name="help_article_widgets_name">Complementos de los mapas</string>
+    <string name="help_article_widgets_name">Widgets de los mapas</string>
     <string name="help_article_widgets_map_buttons_name">Botones del mapa</string>
-    <string name="help_article_navigation_guidance_voice_navigation_name">Avisos por voz / Notificaciones</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Avisos de voz / Notificaciones</string>
     <string name="contact_us">Contacta con nosotros</string>
     <string name="help_article_widgets_info_widgets_name">Complementos de información</string>
     <string name="help_article_widgets_markers_name">Complementos de marcadores</string>
@@ -5588,4 +5588,5 @@
     <string name="complex_widget_alert">El widget %1$s solo puede colocarse en su propia fila.</string>
     <string name="precise_distance_numbers">Números exactos de distancia</string>
     <string name="any_connected">Cualquiera conectado</string>
+    <string name="any_connected_with_device">Cualquiera conectado: %s</string>
 </resources>

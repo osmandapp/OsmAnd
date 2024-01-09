@@ -1281,7 +1281,7 @@ public class MenuBuilder {
 						mapActivity.refreshMap();
 					}
 				});
-				mapContextMenu.hideMenues();
+				mapContextMenu.hideMenus();
 				mapActivity.showTopToolbar(controller);
 				mapActivity.refreshMap();
 			}
