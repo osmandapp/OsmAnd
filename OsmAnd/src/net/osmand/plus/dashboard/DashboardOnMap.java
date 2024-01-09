@@ -443,7 +443,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = v -> {
-			mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
+			mapActivity.getMapLayers().getMapActionsHelper().doNavigate();
 			hideDashboard();
 		};
 
@@ -452,7 +452,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = v -> {
 			hideDashboard();
-			mapActivity.getMapLayers().getMapControlsLayer().doRoute();
+			mapActivity.getMapLayers().getMapActionsHelper().doRoute();
 		};
 
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);

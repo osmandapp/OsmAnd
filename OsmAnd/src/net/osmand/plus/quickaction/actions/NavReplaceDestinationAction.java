@@ -33,7 +33,7 @@ public class NavReplaceDestinationAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		LatLon latLon = getMapLocation(mapActivity);
-		mapActivity.getMapLayers().getMapControlsLayer().replaceDestination(latLon);
+		mapActivity.getMapLayers().getMapActionsHelper().replaceDestination(latLon);
 	}
 
 	@Override

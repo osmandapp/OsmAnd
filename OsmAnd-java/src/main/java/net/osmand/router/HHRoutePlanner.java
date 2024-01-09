@@ -123,9 +123,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 //			c.preloadSegments();
 			c.ROUTE_LAST_MILE = true;
 			c.calcDetailed(2);
-			c.calcAlternative();
+//			c.calcAlternative();
 //			c.gc();
-			DEBUG_VERBOSE_LEVEL = 1;
+			DEBUG_VERBOSE_LEVEL = 0;
 			DEBUG_ALT_ROUTE_SELECTION++;
 //			c.ALT_EXCLUDE_RAD_MULT_IN = 1;
 //			c.ALT_EXCLUDE_RAD_MULT = 0.05;
@@ -158,10 +158,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
 			route = createRouteSegmentFromFinalPoint(hctx, finalPnt);
+			
 			time = (System.nanoTime() - time) ;
 			System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
-			hctx.stats.routingTime+= time/ 1e6;
-
+			hctx.stats.routingTime += time / 1e6;
+			
 			System.out.printf("Parse detailed route segments...");
 			time = System.nanoTime();
 			boolean recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS);
@@ -665,7 +666,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					}
 					T pnt  = reverse ? (T) pSelect.dualPoint : pSelect;
 					double cost = MapUtils.getDistance(pnt.getPoint(), startLat, startLon) / spd;
-					pnt.setCostParentRt(reverse, cost + distanceToEnd(hctx, reverse, pnt), null, cost);
+					pnt.setCostParentRt(reverse, cost + hctx.distanceToEnd(reverse, pnt), null, cost);
 					pnts.put(pnt.index, pnt);
 				}
 			}
@@ -688,12 +689,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					negCost += hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
 				}
 			}
-			finitePnt.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, finitePnt));
+			finitePnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, finitePnt));
 			finitePnt.setCostParentRt(reverse, plusCost, null, plusCost);
 			pnts.put(finitePnt.index, finitePnt);
 			
 			T dualPoint = (T) finitePnt.dualPoint;
-			dualPoint.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, dualPoint));
+			dualPoint.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, dualPoint));
 			dualPoint.setCostParentRt(reverse, negCost, null, negCost);
 			pnts.put(dualPoint.index, dualPoint);
 			
@@ -744,7 +745,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					if (pnt.rt(reverse).rtCost != 0) {
 						throw new IllegalStateException();
 					}
-					pnt.setDistanceToEnd(reverse, distanceToEnd(hctx, reverse, pnt));
+					pnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, pnt));
 					pnt.setDetailedParentRt(reverse, o);
 					pnts.put(pnt.index, pnt);
 				}
@@ -923,16 +924,14 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (ASSERT_AND_CORRECT_DIST_SMALLER && hctx.config.HEURISTIC_COEFFICIENT > 0
 					&& smallestSegmentCost(hctx, point, nextPoint) - connected.dist >  1) {
 				double smallestSegmentCost = smallestSegmentCost(hctx, point, nextPoint);
-				// TODO lots of incorrect distance in db 
 				System.err.printf("Incorrect distance %s -> %s: db = %.2f > fastest %.2f \n", point, nextPoint, connected.dist, smallestSegmentCost);
 				connected.dist = smallestSegmentCost;
-//				segmentDist = smallestSegmentCost;
 			}
-			double cost = point.rt(reverse).rtDistanceFromStart  + connected.dist + distanceToEnd(hctx, reverse, nextPoint);
+			double cost = point.rt(reverse).rtDistanceFromStart  + connected.dist + hctx.distanceToEnd(reverse, nextPoint);
 			if (ASSERT_COST_INCREASING && point.rt(reverse).rtCost - cost > 1) {
 				String msg = String.format("%s (cost %.2f) -> %s (cost %.2f) st=%.2f-> + %.2f, toend=%.2f->%.2f: ",
 						point, point.rt(reverse).rtCost, nextPoint, cost, point.rt(reverse).rtDistanceFromStart,
-						connected.dist, point.rt(reverse).rtDistanceToEnd, distanceToEnd(hctx, reverse, nextPoint));
+						connected.dist, point.rt(reverse).rtDistanceToEnd, hctx.distanceToEnd(reverse, nextPoint));
 				throw new IllegalStateException(msg);
 			}
 			double exCost = nextPoint.rt(reverse).rtCost;
@@ -966,19 +965,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return dist / hctx.rctx.getRouter().getMaxSpeed();
 	}
 
-	private double distanceToEnd(HHRoutingContext<T> hctx, boolean reverse,  NetworkDBPoint nextPoint) {
-		if (hctx.config.HEURISTIC_COEFFICIENT > 0) {
-			double distanceToEnd = nextPoint.rt(reverse).rtDistanceToEnd;
-			if (distanceToEnd == 0) {
-				double dist = squareRootDist31(reverse ? hctx.startX : hctx.endX, reverse ? hctx.startY : hctx.endY, 
-						nextPoint.midX(), nextPoint.midY());
-				distanceToEnd = hctx.config.HEURISTIC_COEFFICIENT * dist / hctx.rctx.getRouter().getMaxSpeed();
-				nextPoint.setDistanceToEnd(reverse, distanceToEnd);
-			}
-			return distanceToEnd;
-		}
-		return 0;
-	}
 		
 	private void printPoint(T p, boolean rev) {
 		if (DEBUG_VERBOSE_LEVEL > 1) {
@@ -1091,7 +1077,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.calculationProgress = new RouteCalculationProgress();
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
 		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());
-		ExcludeTLongObjectMap<RouteSegment> bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps);
+		long ps2 = calcRPId(s, s.getSegmentEnd(), s.getSegmentStart());
+		ExcludeTLongObjectMap<RouteSegment> bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps, ps2);
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) plan.searchRouteInternal(hctx.rctx, s, null, bounds);
 		hctx.rctx.config.MAX_VISITED = -1;
 		TLongObjectHashMap<RouteSegment> resUnique = new TLongObjectHashMap<>();
@@ -1113,7 +1100,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 							+ plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
 					NetworkDBSegment c = start.getSegment(p, true);
 					if (c != null) {
-//					System.out.printf("Correct dist %.2f -> %.2f\n", c.dist, routeTime);
+						// System.out.printf("Corrected dist %.2f -> %.2f\n", c.dist, routeTime);
 						c.dist = routeTime;
 					} else {
 						start.connected.add(new NetworkDBSegment(start, p, routeTime, true, false));

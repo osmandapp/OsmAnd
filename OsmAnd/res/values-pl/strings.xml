@@ -5514,4 +5514,5 @@
     <string name="download_to_device">Pobierz na urządzenie</string>
     <string name="key_event_action_move_down">Przesuń w dół</string>
     <string name="key_event_category_actions">Akcje</string>
+    <string name="precise_distance_numbers">Dokładna odległość</string>
 </resources>

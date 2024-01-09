@@ -193,16 +193,15 @@ public class MapMarkerSideWidgetSettingsFragment extends BaseSimpleWidgetSetting
 		TextView tvTitle = view.findViewById(R.id.title);
 		tvTitle.setText(title);
 
-		TextView tvDesc = view.findViewById(R.id.description);
-		tvDesc.setText(desc);
-		AndroidUiHelper.updateVisibility(tvDesc, true);
+		TextView description = view.findViewById(R.id.description);
+		description.setText(desc);
+		AndroidUiHelper.updateVisibility(description, true);
 
-		if (showShortDivider) {
-			view.findViewById(R.id.short_divider).setVisibility(View.VISIBLE);
-		}
+		view.findViewById(R.id.button_container).setOnClickListener(listener);
 
-		setupClickListener(view, listener);
 		setupListItemBackground(view);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), showShortDivider);
+
 		return view;
 	}
 
@@ -295,11 +294,6 @@ public class MapMarkerSideWidgetSettingsFragment extends BaseSimpleWidgetSetting
 		int color = selectedAppMode.getProfileColor(nightMode);
 		Drawable background = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
 		AndroidUtils.setBackground(button, background);
-	}
-
-	private void setupClickListener(@NonNull View view, @Nullable OnClickListener listener) {
-		View button = view.findViewById(R.id.button_container);
-		button.setOnClickListener(listener);
 	}
 
 	private void updateToolbarIcon() {

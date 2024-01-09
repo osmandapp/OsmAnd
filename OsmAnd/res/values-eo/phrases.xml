@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Pavimo: plasto</string>
     <string name="poi_surface_rubber">Pavimo: gumo</string>
     <string name="poi_assembly_point">Renkontejo post evakuo</string>
-    <string name="poi_not_pt_shelter_yes">ĉio escepte de publik-transportaj ŝirmejoj</string>
+    <string name="poi_not_pt_shelter_yes">ŝirmejo (ne publik-transporta)</string>
     <string name="poi_bicycle_designated">Destinita por bicikloj</string>
     <string name="poi_horse_designated">Destinita por ĉevaloj</string>
     <string name="poi_foot_designated">Destinita por piedirantoj</string>
@@ -4695,4 +4695,28 @@
     <string name="poi_healthcare_speciality_travel_clinic">vojaĝa medicino</string>
     <string name="poi_healthcare_speciality_neonatology">novnaskit-medicino</string>
     <string name="poi_healthcare_speciality_psychology">psiĥologio</string>
+    <string name="poi_distance">Distanco</string>
+    <string name="poi_cycle_network">Bicikl-kursa reto</string>
+    <string name="poi_state_alternate">Stato: alternativa</string>
+    <string name="poi_state_connection">Stato: ligilo</string>
+    <string name="poi_state_inuse">Stato: uzata</string>
+    <string name="poi_state_recommended">Stato: konsilinda</string>
+    <string name="poi_state_temporary">Stato: provizora</string>
+    <string name="poi_state_disused">Stato: neuzata</string>
+    <string name="poi_state_closed">Stato: fermita</string>
+    <string name="poi_state_abandoned">Stato: forlasita</string>
+    <string name="poi_state_approved">Stato: permesita</string>
+    <string name="poi_state_active">Stato: aktiva</string>
+    <string name="poi_state_under_construction">Stato: konstruata</string>
+    <string name="poi_state_main">Stato: ĉefa</string>
+    <string name="poi_state_suspended">Stato: interrompita</string>
+    <string name="poi_state_detour">Stato: ĉirkaŭvojo</string>
+    <string name="poi_ascent">Supreniroj</string>
+    <string name="poi_descent">Malsupreniroj</string>
+    <string name="poi_direction">Direkto</string>
+    <string name="poi_roundtrip_yes">Fermita kurso: jes</string>
+    <string name="poi_roundtrip_no">Fermita kurso: ne</string>
+    <string name="poi_from">El</string>
+    <string name="poi_to">Al</string>
+    <string name="poi_state_proposed">Stato: proponita</string>
 </resources>

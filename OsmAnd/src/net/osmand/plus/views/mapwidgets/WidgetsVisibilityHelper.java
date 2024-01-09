@@ -31,7 +31,6 @@ import java.util.Set;
 public class WidgetsVisibilityHelper {
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
 
 	private final MapActivity mapActivity;
@@ -40,7 +39,6 @@ public class WidgetsVisibilityHelper {
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
-		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		mapLayers = app.getOsmandMap().getMapLayers();
 	}
