@@ -3211,4 +3211,231 @@
     <string name="shared_string_slope">경사</string>
     <string name="enter_verification_code">일회용 암호 입력</string>
     <string name="login_account">계정</string>
+    <string name="precise_distance_numbers">정확한 거리 수치</string>
+    <string name="any_connected_with_device">어떤 연결: %s</string>
+    <string name="complex_widget_alert">%1$s 위젯은 자체 행에 배치 할 수 있습니다.</string>
+    <string name="previous_row_has_complex_widget">이전 행에는 복잡한 위젯이 있습니다</string>
+    <string name="use_v1_auto_zoom">Discrete 자동 급상승 (old version)</string>
+    <string name="key_event_action_open_search_view">본문 바로가기</string>
+    <string name="key_event_action_open_navigation_view">본문 바로가기</string>
+    <string name="not_specified">지정하지 않음</string>
+    <string name="cloud_trash_clear_confirmation">당신은 영구적으로 Trash에서 모든 항목을 삭제하시겠습니까? 이 동작은 undone일 수 없습니다.</string>
+    <string name="delete_all_items">모든 항목 삭제</string>
+    <string name="shared_string_loading">로딩 중</string>
+    <string name="loading_tracks">Reloading 트랙</string>
+    <string name="searching_matching_tracks">모든 일치 트랙 검색</string>
+    <string name="configure_filter">필터 구성</string>
+    <string name="no_config_smart_folder_description">Smart 폴더는 적용 필터로 그룹 트랙을 허용합니다</string>
+    <string name="discard_filter_changes_prompt">모든 필터를 재설정 하시겠습니까?</string>
+    <string name="delete_smart_folder_dialog_message">이것은 \"%1$s\"스마트 폴더를 삭제합니다.</string>
+    <string name="empty_name">빈 이름</string>
+    <string name="weather_online">날씨 예보</string>
+    <string name="shared_string_created">생성됨</string>
+    <string name="sort_size_ascending">가장 작은 것부터</string>
+    <string name="sort_size_descending">가장 큰 것부터</string>
+    <string name="sort_country_name_ascending">국가 이름: A – Z</string>
+    <string name="sort_country_name_descending">국가 이름: Z – A</string>
+    <string name="delete_map_description">%1$s 맵을 삭제하시겠습니까?</string>
+    <string name="delete_map">파일 삭제</string>
+    <string name="map_is_up_to_date">%1$s 지도는 현재까지 입니다.</string>
+    <string name="shared_string_cache">캐시</string>
+    <string name="rendering_styles">렌더링 스타일</string>
+    <string name="help_article_navigation_setup_route_details_name">경로 세부 정보</string>
+    <string name="help_article_navigation_setup_route_navigation_name">경로 준비</string>
+    <string name="simulation_real_mode_desc">똑바른 도로 단면도에, 속도는 최대 허용한 속도에 대략적일 것입니다.
+\n교차로에서 시뮬레이션이 느리게됩니다.
+\n여분 penalties는 교통 신호, 정지 표시, 등에 적용될 것입니다.</string>
+    <string name="release_4_0_beta">• 피트에 Contour 라인을 다운로드 할 수있는 옵션 추가
+\n
+\n• 계획 경로 풍경: 포인트 또는 그래프 사이 전환 탭 추가
+\n
+\n• OsmAnd 라이브 업데이트가 \"다운로드 &gt; 업데이트\"로 이동
+\n
+\n· 트랙은 이제 고도, 속도, 또는 사면에 의해 착색 될 수 있습니다.
+\n
+\n• 노선 선 외관을 변경하는 옵션이 추가되었습니다.
+\n
+\n• 업데이트 된 \"Trip 레코딩\" 대화 상자
+\n
+\n</string>
+    <string name="save_global_track_interval_descr">일반 트랙 기록에 대한 로깅 간격을 지정합니다(지도의 \'여행 기록\' 위젯을 통해 켜짐).</string>
+    <string name="pass_whole_track_descr">트랙의 지점을 탐색</string>
+    <string name="recalc_angle_dialog_title">내 위치와 경로 사이의 최소 각도</string>
+    <string name="map_widget_sun_position_desc">이 위젯은 현재 시간에 따라 일출 또는 일몰까지 시간을 보여줍니다.</string>
+    <string name="discard_filter_changes">Discard 필터 변경</string>
+    <string name="shared_string_show_icon">아이콘 표시</string>
+    <string name="empty_smart_folder_title">일치하는 궤도 없음</string>
+    <string name="empty_smart_folder_description">모든 일치 트랙은 자동으로 여기에 나타납니다</string>
+    <string name="osm_live_payment_subscription_management">결제는 구매 확인시 Google Play 계정에서 청구됩니다.
+\n
+\n선택된 갱신 기간 전에 취소하지 않는 갱신.
+\n
+\nGoogle Play 설정에서 구독을 관리하거나 취소하십시오.</string>
+    <string name="all_next_segments">모든 후속 세그먼트</string>
+    <string name="key_event_action_change_map_orientation">찾아오시는 길</string>
+    <string name="key_event_action_take_media_note">미디어 노트 작성</string>
+    <string name="key_event_action_move_down">아래로 이동</string>
+    <string name="key_event_action_move_up">맨 위로</string>
+    <string name="key_event_action_move_to_my_location">내 위치 이동</string>
+    <string name="route_between_points">지점 간 경로</string>
+    <string name="osmand_plus_extended_description_part5">안전 기능
+\n• 선택적인 자동화한 일/밤 전망 엇바꾸기
+\n• 당신이 그것을 초과하는 경우에 상기와 더불어 선택적인 속도 한계 전시,
+\n• 선택적인 속도 의존하는 급상승
+\n· 친구가 당신을 찾을 수 있도록 귀하의 위치를 공유
+\n</string>
+    <string name="smart_folder_saved">스마트 폴더 저장</string>
+    <string name="add_to_a_track">트랙에 추가</string>
+    <string name="whole_track">전체 트랙</string>
+    <string name="shared_string_is_deleted">%1$s 삭제됩니다.</string>
+    <string name="shared_string_delete_item">관련 상품</string>
+    <string name="shared_string_delete_immediately">즉시 삭제</string>
+    <string name="restore_from_trash">Trash에서 복원</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia 및 여행지도</string>
+    <string name="smart_folder_name_present">그런 스마트 폴더 이미 현재</string>
+    <string name="save_as_smart_folder">스마트 폴더로 저장</string>
+    <string name="key_event_action_emit_navigation_hint">Emit 탐색 힌트</string>
+    <string name="key_event_action_move_right">맨 위로</string>
+    <string name="add_new_type">새 유형 추가</string>
+    <string name="shared_string_trash">휴지통</string>
+    <string name="shared_string_show_less">간략히 보기</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">WunderLINQ를 여십시오 데이터그리드</string>
+    <string name="maps_and_resources">지도 &amp; 리소스</string>
+    <string name="shared_string_graph">그래프</string>
+    <string name="context_menu_item_add_waypoint">트랙 웨이 포인트 추가</string>
+    <string name="off_road_render_descr">\'Topo\' 스타일에 기반을 둔 오프로드 운전과 녹색 위성 이미지를 언더레이로 사용합니다. 주요 도로 간격 감소, 궤도, 경로, 자전거 및 다른 노선의 증가된 간격.</string>
+    <string name="disable_recording_once_app_killed_descrp">트랙 로깅은 앱이 죽었을 때 일시 중지됩니다 (최근 앱을 통해). (OsmAnd 배경 표시는 Android 알림 바에서 사라집니다.)</string>
+    <string name="release_3_9">· 설정, 리소스, 내 장소를 포함한 모든 데이터를 내보내고 가져올 수있는 옵션
+\n
+\n• 계획 경로 : 경로와 트랙 세그먼트에 대한 그래프, 여러 트랙 세그먼트를 만들고 편집 할 수있는 능력을 추가
+\n
+\n• OpenStreetMap에 대한 OAuth 인증 방법 추가, OSM 대화 상자의 UI 향상
+\n
+\n• 즐겨 찾기 및 트랙 waypoints에 대한 사용자 정의 색상 지원
+\n
+\n</string>
+    <string name="osmand_plus_extended_description_part8">대략적인 지도 적용 및 질:
+\n• 서부 유럽: 더 보기
+\n• 동부 유럽: ***
+\n• 러시아: 호텔지도
+\n• 북아메리카: 호텔지도
+\n• 남아메리카: **
+\n• 아시아: **
+\n• 일본과 한국: 호텔지도
+\n• 중동: **
+\n• 아프리카: **
+\n• 남극 대륙 : *
+\n다운로드가 가능한 전 세계 대부분의 국가
+\n아프가니스탄에서 짐바브웨까지, 호주에서 미국으로. 아르헨티나, 브라질, 캐나다, 프랑스, 독일, 멕시코, 영국, 스페인, ..
+\n</string>
+    <string name="osmand_extended_description_part6">산책, 하이킹, 도시 투어
+\n· 지도는 산책과 하이킹 경로를 보여줍니다.
+\n• 선호하는 언어의 Wikipedia는 도시 여행 중에 많은 것을 말할 수 있습니다.
+\n• 공공 교통 정지 (버스, 트램, 기차), 라인 이름 포함, 새로운 도시에서 탐색하는 데 도움이
+\n• 보행자 모드에서 GPS 네비게이션은 걷기 경로를 사용하여 경로 구축
+\n• 업로드 및 GPX 경로 또는 레코드를 따라 자신의 공유
+\n</string>
+    <string name="release_3_8">· 업데이트 된 경로 기능 : 세그먼트 당 다른 탐색 유형을 사용하여 트랙의 포함
+\n
+\n• 트랙의 새로운 외관 메뉴 : 색상, 두께, 디스플레이 방향 화살표, 시작 및 마무리 아이콘을 선택하십시오.
+\n
+\n• 자전거 노드의 향상된 가시성.
+\n
+\n· 트랙은 이제 탭할 수 있으며 기본 정보로 컨텍스트 메뉴가 있습니다.
+\n
+\n• 향상된 검색 알고리즘
+\n
+\n• Navigation의 트랙 옵션 개선
+\n
+\n• 프로필 설정의 import/export와 문제 수정
+\n
+\n</string>
+    <string name="release_4_4">• 향상된 \"Tracks\" 메뉴에서 \"Configure Map\"
+\n
+\n• Context 메뉴는 이제 POI의 로컬화된 이름을 표시합니다.
+\n
+\n• 링크로 경로 공유 옵션 추가
+\n
+\n• 길이의 \"Nautical Mile/feet\"단위 추가
+\n
+\n• 지도 오리엔테이션은 새로운 조정 형태를 추가했습니다
+\n
+\n• 단순 시작 화면
+\n
+\n• Android Auto에서 분할 화면 모드에서 고정 위치 위치
+\n
+\n• 트랙 분석을위한 \"Speed/Slope\"Graph 추가
+\n
+\n• Android 13은 앱 언어 선택으로 시스템 설정 이동
+\n
+\n• Vegan 장소를 표시하는 고정 문제
+\n
+\n• \"Overlay\"또는 \"Underlay\"지도로 사용되는 온라인 타일을 다운로드 할 수있는 가능성을 추가
+\n
+\n• \"차량 매개 변수\"에 대한 제국 단위의 추가 지원
+\n
+\n• 새로운 Moped 단면도
+\n
+\n• \"Display position\" 추가 새로운 옵션 \"자동\"
+\n
+\n• 경사, 급상승 및 교체를 위한 고정 맵 제스처
+\n
+\n</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions)는 전 세계 무료 및 고품질 OSM 데이터에 액세스할 수 있는 지도와 내비게이션 앱입니다.
+\n음성 및 광학 네비게이션을 즐기고 POIs (이자점)를보고 GPX 트랙을 만들고 관리하며, 윤곽선 시각화 및 토피 정보를 사용하여 운전, 사이클링, 보행자 모드, OSM 편집 및 훨씬 더 선택할 수 있습니다.
+\n
+\nOsmAnd+는 유료 앱 버전입니다. 그것을 구입함으로써, 당신은 프로젝트를 지원, 새로운 기능의 개발을 기금, 그리고 최신 업데이트를받을.
+\n
+\n주요 특징의 몇몇:</string>
+    <string name="monitoring_min_speed_descr_remark">말: 속도 &gt; 0 체크: 대부분의 GPS 칩셋은 알고리즘이 모션에 있다는 것을 결정하는 경우에만 속도 값을 보고, 아무도 당신이 아닙니다. Hence 사용 &gt; 감에 있는 이 여과기에 있는 0 조정은 GPS 칩셋의 동의 탐지를 이용합니다. 그러나 기록 시간에 여기에서 필터링하지 않는 경우에도 GPX 분석에서이 기능을 사용하여 거리를 결정합니다. 즉, 해당 필드에 표시된 값은 모션 중에 기록 된 거리입니다.</string>
+    <string name="release_3_7">· 새로운 오프라인 슬로프 맵
+\n
+\n• 즐겨 찾기 및 GPX Waypoints의 전체 사용자 정의 - 사용자 정의 색상, 아이콘, 모양
+\n
+\n• \"Context Menu\", \"Configure Map\" 및 \"Drawer\"에서 아이템 주문을 사용자 정의
+\n
+\n• 지도를 구성하는 별도의 레이어로 Wikipedia, 필요한 언어만 선택
+\n
+\n• 자신의 POI 필터 / 전체 유연성 맵 만들기
+\n
+\n• 사용자 정의 프로파일에 대한 설정 복원 옵션 추가
+\n
+\n• 항법 지원 교통 차선에서 가득 차있는 GPX 노선 및 완전한 우회 지시
+\n
+\n• 태블릿에서 UI 크기를 수정
+\n
+\n• RTL로 버그 수정
+\n
+\n</string>
+    <string name="key_event_action_activity_back_pressed">활동 뒤로 누름</string>
+    <string name="key_event_action_zoom_out">축소</string>
+    <string name="key_event_action_zoom_in">확대</string>
+    <string name="key_event_action_move_left">왼쪽 이동</string>
+    <string name="enable_to_use_external_input_device">OsmAnd를 가진 외부 입력 장치를 사용하는 가능하게</string>
+    <string name="key_bindings">키 바인딩</string>
+    <string name="external_input_device_title">외부 입력 장치</string>
+    <string name="shared_string_empty_trash">휴지통 비우기</string>
+    <string name="trash_is_empty_banner_desc">OsmAnd Cloud에서 삭제 된 파일은 다음 날 %1$s에 대해 여기에서 사용할 수 있습니다.</string>
+    <string name="trash_alert_card_desc">쓰레기의 항목은 %1$s 일 후에 지워질 것입니다.</string>
+    <string name="routing_profile_straightline">스트라이트 라인</string>
+    <string name="recalc_angle_dialog_descr">내 위치와 계산 된 경로 사이의 여분 직선 세그먼트는 경로가 재 계산 될 때까지 표시됩니다</string>
+    <string name="next_segment">다음 세그먼트</string>
+    <string name="save_track_to_gpx_descrp">탐색하는 동안 트랙 녹음을 자동으로 시작하고 나중에 자동 저장합니다.</string>
+    <string name="osmand_extended_description_part7">오픈스트리트맵
+\n에 기여하기 • 데이터 버그
+\n신고 • 앱에서
+\n 직접 GPX 트랙을 오픈스트리트맵에 업로드하기 • POI를 추가하고 오픈스트리트맵에 직접 업로드하기 (오프라인일 경우 나중에)
+\n</string>
+    <string name="key_event_action_toggle_drower">사이드 메뉴 표시/숨기기</string>
+    <string name="keep_passed_markers_descr">Markers는 즐겨찾기 그룹 또는 GPX waypoints 표시된 Passed가 맵에 남아있을 것입니다. 그룹이 활성화되지 않은 경우, 마커는지도에서 사라집니다.</string>
+    <string name="topo_render_descr">하이킹, 트레킹 및 자연 사이클링. 읽기 쉬운 옥외. Contrasting 도로와 자연적인 목표, 다른 노선 유형, 진보된 윤곽선 선택권, 여분 세부사항. 지상 무결성은 도로 질을 구별합니다. 밤 형태 없음.</string>
+    <string name="osmand_plus_extended_description_part7">OSM에 직접 기여
+\n• 데이터 버그 보고
+\n• 앱에서 GPX 트랙을 OSM에 직접 업로드
+\n• POIs를 추가하고 직접 OSM에 업로드하십시오 (또는 오프라인 경우 나중에)
+\n• 배경 모드에서도 옵션 여행 기록 (위험 장치는 수면 모드에서)
+\nOsmAnd는 적극적으로 오픈 소스 소프트웨어 개발. 누구나 버그 보고, 번역 개선, 새로운 기능을 코딩하여 앱에 기여할 수 있습니다. 또한 프로젝트는 새로운 기능의 코딩 및 테스트에 대한 금융 기여에 의존합니다.
+\n</string>
+    <string name="trash_is_empty">Trash는 비어 있습니다</string>
+    <string name="snap_to_road_descr">현재 위치 아이콘이 현재 내비게이션 경로로 스냅하기</string>
 </resources>
