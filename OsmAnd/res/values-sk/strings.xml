@@ -5162,4 +5162,21 @@
     <string name="map_widget_sun_position_desc">Tento nástroj zobrazuje čas do východu alebo západu slnka, na základe aktuálneho času.</string>
     <string name="map_widget_sun_position">Poloha slnka</string>
     <string name="use_v1_auto_zoom">Krokové automatické priblíženie (stará verzia)</string>
+    <string name="topography_maps">Topografické mapy</string>
+    <string name="clear_key_assignment">Vymazať priradenie klávesy</string>
+    <string name="shared_string_reassign">Znovu priradiť</string>
+    <string name="key_assignments">Priradenia kláves</string>
+    <string name="target_elevation">Nadmorská výška cieľa</string>
+    <string name="shared_string_eta">Odhad.čas príjazdu</string>
+    <string name="change_button">Zmeniť tlačidlo</string>
+    <string name="download_to_device">Stiahnuť do zariadenia</string>
+    <string name="shared_string_rows">Riadky</string>
+    <string name="shared_string_road_maps">Cestné mpay</string>
+    <string name="clear_key_assignment_desc">Priradenie klávesy k zvolenej akcii bude vymazané a nastavené na Žiadne.</string>
+    <string name="see_all_plans">Zobraziť všetky predplatné</string>
+    <string name="remove_widget_first">Prosím najprv odstráňte nástroj</string>
+    <string name="add_row">Pridať riadok</string>
+    <string name="row_number">Riadok %1$s</string>
+    <string name="discard_changes_prompt">Naozaj chcete zrušiť zmeny?</string>
+    <string name="deletion_error">Chyba výmazu</string>
 </resources>
