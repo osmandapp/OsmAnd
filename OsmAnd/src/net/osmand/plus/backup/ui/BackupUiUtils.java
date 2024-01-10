@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
@@ -57,8 +57,8 @@ public class BackupUiUtils {
 		if (item instanceof ProfileSettingsItem) {
 			return ((ProfileSettingsItem) item).getAppMode().getIconRes();
 		}
-		ExportSettingsType type = ExportSettingsType.getExportSettingsTypeForItem(item);
-		return type != null ? type.getIconRes() : -1;
+		ExportType exportType = ExportType.findBy(item);
+		return exportType != null ? exportType.getIconId() : -1;
 	}
 
 	@NonNull

@@ -49,7 +49,7 @@ import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -531,8 +531,8 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		for (TrackItem trackItem : trackItems) {
 			selectedFiles.add(trackItem.getFile());
 		}
-		HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
-		selectedTypes.put(ExportSettingsType.TRACKS, selectedFiles);
+		HashMap<ExportType, List<?>> selectedTypes = new HashMap<>();
+		selectedTypes.put(ExportType.TRACKS, selectedFiles);
 
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(SELECTED_TYPES, selectedTypes);

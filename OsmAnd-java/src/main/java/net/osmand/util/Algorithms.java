@@ -1363,11 +1363,51 @@ public class Algorithms {
 		return copy;
 	}
 
+	public static <T> void addAllIfNotContains(Collection<T> collection, Collection<T> elements) {
+		for (T element : elements) {
+			addIfNotContains(collection, element);
+		}
+	}
+
+	public static <T> void addIfNotContains(Collection<T> collection, T element) {
+		if (!collection.contains(element)) {
+			collection.add(element);
+		}
+	}
+
+	public static <T> boolean containsAny(Collection<T> collection, T... objects) {
+		for (T object : objects) {
+			if (collection.contains(object)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@SafeVarargs
 	public static <T> List<T> asOneList(Collection<T> ... collections) {
 		List<T> result = new ArrayList<>();
 		for (Collection<T> collection : collections) {
 			result.addAll(collection);
+		}
+		return result;
+	}
+
+	public static <T> T searchElementWithCondition(Collection<T> collection, CallbackWithObject<T> condition) {
+		for (T element : collection) {
+			if (condition.processResult(element)) {
+				return element;
+			}
+		}
+		return null;
+	}
+
+	public static <T> List<T> filterElementsWithCondition(Collection<T> collection, CallbackWithObject<T> condition) {
+		List<T> result = new ArrayList<>();
+		for (T element : collection) {
+			if (condition.processResult(element)) {
+				result.add(element);
+			}
 		}
 		return result;
 	}

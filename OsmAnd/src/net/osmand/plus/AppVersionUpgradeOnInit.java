@@ -5,6 +5,7 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
+import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
@@ -44,6 +45,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
@@ -53,6 +55,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
@@ -127,8 +130,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_6_06 = 4606;
 	// 4607 - 4.6-07 (Migrate custom input devices preference from global to profile dependent)
 	public static final int VERSION_4_6_07 = 4607;
+	// 4608 - 4.6-08 (Expand the list of export types by dividing the general offline maps' type into subtypes)
+	public static final int VERSION_4_6_08 = 4608;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_07;
+	public static final int LAST_APP_VERSION = VERSION_4_6_08;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -238,6 +243,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_6_07) {
 					migrateCustomInputDevicesPreference();
+				}
+				if (prevAppVersion < VERSION_4_6_08) {
+					migrateFromCommonMapsExportTypeToSubtypes();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -753,6 +761,23 @@ public class AppVersionUpgradeOnInit {
 		String oldPreferenceValue = oldPreference.get();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, oldPreferenceValue);
+		}
+	}
+	
+	private void migrateFromCommonMapsExportTypeToSubtypes() {
+		OsmandSettings settings = app.getSettings();
+
+		String prefId = "save_version_history_" + OFFLINE_MAPS_EXPORT_TYPE_KEY;
+		Boolean oldVersionHistoryPrefValue =
+				settings.registerBooleanPreference(prefId, true).makeGlobal().get();
+
+		prefId = "backup_type_" + OFFLINE_MAPS_EXPORT_TYPE_KEY;
+		Boolean oldBackupTypePrefValue =
+				settings.registerBooleanPreference(prefId, true).makeGlobal().get();
+
+		for (ExportType newExportType : ExportType.mapValues()) {
+			BackupHelper.getVersionHistoryTypePref(app, newExportType).set(oldVersionHistoryPrefValue);
+			BackupHelper.getBackupTypePref(app, newExportType).set(oldBackupTypePrefValue);
 		}
 	}
 }

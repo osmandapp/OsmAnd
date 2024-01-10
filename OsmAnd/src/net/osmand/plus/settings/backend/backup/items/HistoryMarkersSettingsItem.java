@@ -14,7 +14,7 @@ import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -151,7 +151,7 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 
 	public MapMarkersGroup getMarkersGroup() {
 		String name = app.getString(R.string.markers_history);
-		String groupId = ExportSettingsType.HISTORY_MARKERS.name();
+		String groupId = ExportType.HISTORY_MARKERS.name();
 		MapMarkersGroup markersGroup = new MapMarkersGroup(groupId, name, ItineraryType.MARKERS);
 		markersGroup.setMarkers(items);
 		return markersGroup;
