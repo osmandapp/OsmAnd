@@ -466,6 +466,7 @@ public class DownloadTilesFragment extends BaseOsmAndFragment implements IMapLoc
 		}
 		mapView.addMapLocationListener(this);
 		handler.startUpdatesIfNotRunning();
+		showHideMapControls(false);
 	}
 
 	@Override
