@@ -263,6 +263,23 @@ public class Amenity extends MapObject {
 		}
 	}
 
+	public StringBuilder printNamesAndAdditional() {
+		StringBuilder s = new StringBuilder();
+		printNames(" ", getInternalAdditionalInfoMap(), s);
+		printNames(" name:", getNamesMap(true), s);
+		return s;
+	}
+
+	private void printNames(String prefix, Map<String, String> stringMap, StringBuilder s) {
+		for (Entry<String, String> e : stringMap.entrySet()) {
+			if (e.getValue().startsWith(" gz ")) {
+				s.append(prefix).append(e.getKey()).append("='gzip ...'");
+			} else {
+				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("'");
+			}
+		}
+	}
+
 	@Override
 	public String toStringEn() {
 		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
