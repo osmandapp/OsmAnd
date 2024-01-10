@@ -4719,4 +4719,5 @@
     <string name="poi_state_approved">Стан: затверджено</string>
     <string name="poi_state_proposed">Стан: запропоновано</string>
     <string name="poi_state_main">Стан: основний</string>
+    <string name="poi_border_zone">Прикордонна смуга</string>
 </resources>
