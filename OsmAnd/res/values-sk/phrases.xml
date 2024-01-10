@@ -4341,4 +4341,14 @@
     <string name="poi_ship_delivery">Prístup lodí: len zásobovanie</string>
     <string name="poi_emergency_bay">Núdzová odstavná plocha</string>
     <string name="poi_dressing_room">Šatňa/prezliekáreň</string>
+    <string name="poi_cuisine_suki">Suki</string>
+    <string name="poi_vending_machine_fuel_filter">Automatické dávkovače paliva;Automat na palivo</string>
+    <string name="poi_healthcare_speciality_clinic">Zdravotná špecializácia: klinika</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Zdravotná špecializácia: psychoterapeut</string>
+    <string name="poi_socket_typee_voltage_filter">Typ E napätie konektora</string>
+    <string name="poi_socket_typee_output_filter">Typ E výkon konektora</string>
+    <string name="poi_second_hand_filter">Tovar z druhej ruky (použitý)</string>
+    <string name="poi_cuisine_yakitori">Yakitori</string>
+    <string name="poi_cuisine_yakiniku">Yakiniku</string>
+    <string name="poi_healthcare_speciality_laboratory">Zdravotná špecializácia: laboratórium</string>
 </resources>
