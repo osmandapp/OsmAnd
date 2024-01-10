@@ -393,7 +393,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			((TextView) view.findViewById(R.id.title)).setText(title);
 
 			View infoButton = view.findViewById(R.id.info_button);
-			infoButton.setOnClickListener(v -> {
+			view.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -407,7 +407,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					}
 				}
 			});
-			view.setOnClickListener(v -> infoButton.callOnClick());
 
 			AndroidUiHelper.updateVisibility(infoButton, true);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
