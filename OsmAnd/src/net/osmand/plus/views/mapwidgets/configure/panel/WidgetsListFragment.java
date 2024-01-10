@@ -391,8 +391,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					: getString(widgetType.titleId);
 			((TextView) view.findViewById(R.id.title)).setText(title);
 
-			View infoButton = view.findViewById(R.id.info_button);
-			infoButton.setOnClickListener(v -> {
+			view.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -406,8 +405,9 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 					}
 				}
 			});
-			view.setOnClickListener(v -> infoButton.callOnClick());
 
+			View infoButton = view.findViewById(R.id.info_button);
+			infoButton.setClickable(false);
 			AndroidUiHelper.updateVisibility(infoButton, true);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
@@ -434,8 +434,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 			TextView title = view.findViewById(R.id.title);
 			title.setText(widgetInfo.getTitle(app));
 
-			View infoButton = view.findViewById(R.id.info_button);
-			infoButton.setOnClickListener(v -> {
+			view.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				String externalProviderPackage = widgetInfo.getExternalProviderPackage();
 				if (activity != null && !Algorithms.isEmpty(externalProviderPackage)) {
@@ -444,12 +443,15 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 							selectedAppMode, selectedPanel, widgetInfo.key, externalProviderPackage, null);
 				}
 			});
+			View infoButton = view.findViewById(R.id.info_button);
+			infoButton.setClickable(false);
 			AndroidUiHelper.updateVisibility(infoButton, true);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.settings_button), false);
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), false);
 
 			boolean last = i + 1 == externalWidgets.size();
 			AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), !last);
+			setupListItemBackground(view);
 
 			availableWidgetsContainer.addView(view);
 		}
