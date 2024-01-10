@@ -307,7 +307,7 @@ public class BinaryRoutePlanner {
 		if (!originalDir && (seg.getSegmentStart() != pnt.getSegmentEnd() || seg.getSegmentEnd() != pnt.getSegmentStart())) {
 			throw new IllegalStateException();
 		}
-		if (!originalDir && ctx.config.initialDirection == null && ctx.config.PENALTY_FOR_REVERSE_DIRECTION < 0) {
+		if (!originalDir && ctx.config.initialDirection == null && ctx.config.penaltyForReverseDirection < 0) {
 			// special case for single side spread point-dijkstra
 			return null;
 		}
@@ -322,7 +322,7 @@ public class BinaryRoutePlanner {
 			double plusDir = seg.getRoad().directionRoute(seg.getSegmentStart(), seg.isPositive());
 			double diff = plusDir - (reverseSearchWay ? ctx.config.targetDirection : ctx.config.initialDirection);
 			if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
-				seg.distanceFromStart += ctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+				seg.distanceFromStart += ctx.config.penaltyForReverseDirection;
 			}
 		}
 		if (checkMovementAllowed(ctx, reverseSearchWay, seg)) {

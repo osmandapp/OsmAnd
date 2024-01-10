@@ -682,11 +682,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (hctx.rctx.config.initialDirection != null) {
 				double diff = s.getRoad().directionRoute(s.getSegmentStart(), s.isPositive()) - hctx.rctx.config.initialDirection;
 				if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
-					plusCost += hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+					plusCost += hctx.rctx.config.penaltyForReverseDirection;
 				}
 				diff = s.getRoad().directionRoute(s.getSegmentEnd(), !s.isPositive()) - hctx.rctx.config.initialDirection;
 				if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
-					negCost += hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+					negCost += hctx.rctx.config.penaltyForReverseDirection;
 				}
 			}
 			finitePnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, finitePnt));
@@ -999,8 +999,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.println(String.format("End point is not present in detailed maps: %s", endS));
 			return null;
 		}
-		double oldP = hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION;
-		hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION = RoutingConfiguration.DEFAULT_PENALTY_FOR_REVERSE_DIRECTION * 4; 
+		double oldP = hctx.rctx.config.penaltyForReverseDirection;
+		hctx.rctx.config.penaltyForReverseDirection *= 4; // [BRP!=HH] TODO: is the 4x amplification really necessary?
 		hctx.rctx.config.initialDirection = start.getRoad().directionRoute(start.getSegmentStart(), start.isPositive());
 		hctx.rctx.config.targetDirection = end.getRoad().directionRoute(end.getSegmentEnd(), !end.isPositive());
 		hctx.rctx.config.MAX_VISITED = useBoundaries ? -1 : MAX_POINTS_CLUSTER_ROUTING * 2;
@@ -1019,7 +1019,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		// clean up
 		hctx.rctx.config.initialDirection = null;
 		hctx.rctx.config.targetDirection = null;
-		hctx.rctx.config.PENALTY_FOR_REVERSE_DIRECTION = oldP;
+		hctx.rctx.config.penaltyForReverseDirection = oldP;
 		return f;
 		
 	}
