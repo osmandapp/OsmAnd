@@ -137,7 +137,7 @@ public class GPXTrackAnalysis {
 		return new GPXTrackAnalysis().prepareInformation(fileTimeStamp, pointsAnalyzer, new SplitSegment(segment));
 	}
 
-	public GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) { // TODO
+	public GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) {
 		float[] calculations = new float[1];
 
 		long startTimeOfSingleSegment = 0;
