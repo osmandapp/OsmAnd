@@ -2,9 +2,11 @@ package net.osmand.gpx;
 
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
+import static net.osmand.util.Algorithms.parseFloatSilently;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities.RouteSegment;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize.ColorizationType;
@@ -29,6 +31,7 @@ public class GPXTrackAnalysis {
 	public long endTime = Long.MIN_VALUE;
 	public long timeSpan = 0;
 	public long timeSpanWithoutGaps = 0;
+	public long expectedDuration = 0;
 	//Next few lines for Issue 3222 heuristic testing only
 	//public long timeMoving0 = 0;
 	//public float totalDistanceMoving0 = 0;
@@ -134,7 +137,7 @@ public class GPXTrackAnalysis {
 		return new GPXTrackAnalysis().prepareInformation(fileTimeStamp, pointsAnalyzer, new SplitSegment(segment));
 	}
 
-	public GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) {
+	public GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyser, SplitSegment... splitSegments) { // TODO
 		float[] calculations = new float[1];
 
 		long startTimeOfSingleSegment = 0;
@@ -161,6 +164,7 @@ public class GPXTrackAnalysis {
 			metricEnd += s.metricEnd;
 			secondaryMetricEnd += s.secondaryMetricEnd;
 			points += numberOfPoints;
+			expectedDuration += calculateExpectedSegmentDuration(s);
 			for (int j = 0; j < numberOfPoints; j++) {
 				WptPt point = s.get(j);
 				if (j == 0 && locationStart == null) {
@@ -342,6 +346,23 @@ public class GPXTrackAnalysis {
 		if (timeSpan == 0) {
 			timeSpan = endTime - startTime;
 		}
+	}
+
+	private long calculateExpectedSegmentDuration(SplitSegment s) {
+		List<RouteSegment> routeSegments = s.segment.routeSegments;
+		if (routeSegments != null && !s.segment.generalSegment) {
+			long result = 0;
+			for (RouteSegment routeSegment : routeSegments) {
+				result += (long) (1000 * parseFloatSilently(routeSegment.segmentTime, 0.0f));
+			}
+			return result;
+		}
+		return 0;
+	}
+
+	public int getDurationInSeconds() {
+		long durationMs = timeSpan > 0 ? timeSpan : expectedDuration;
+		return (int) (durationMs / 1000 + 0.5f);
 	}
 
 	private void processAverageValues(float totalElevation, int elevationPoints, double totalSpeedSum, int speedCount) {

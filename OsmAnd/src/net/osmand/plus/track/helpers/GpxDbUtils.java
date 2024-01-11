@@ -175,6 +175,9 @@ public class GpxDbUtils {
 		if (oldVersion < 16) {
 			addTableColumn(db, FILE_CREATION_TIME);
 		}
+		if (oldVersion < 17) {
+			addTableColumn(db, EXPECTED_DURATION);
+		}
 		db.execSQL(getIndexQuery());
 	}
 
@@ -193,7 +196,8 @@ public class GpxDbUtils {
 					|| analysis.wptCategoryNames == null
 					|| analysis.latLonStart == null && analysis.points > 0
 					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0;
+					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
+					|| (long) item.getParameter(EXPECTED_DURATION) < 0;
 		}
 		return true;
 	}
