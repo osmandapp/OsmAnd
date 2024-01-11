@@ -5586,4 +5586,5 @@
     <string name="precise_distance_numbers">Pontos távolságadatok</string>
     <string name="any_connected">Bármelyik csatlakoztatott</string>
     <string name="any_connected_with_device">Bármelyik csatlakozva: %s</string>
+    <string name="shared_string_road_maps">Útitérképek</string>
 </resources>
