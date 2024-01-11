@@ -17,15 +17,11 @@
 		<include layout="@layout/configure_widgets_header" />
 
 		<include
-			android:id="@+id/compass_button"
+			android:id="@+id/map_display_position_button"
 			layout="@layout/configure_screen_list_item" />
 
 		<include
-			android:id="@+id/map_3d_mode_button"
-			layout="@layout/configure_screen_list_item" />
-
-		<include
-			android:id="@+id/quick_actions_button"
+			android:id="@+id/distance_by_tap_button"
 			layout="@layout/configure_screen_list_item" />
 
 	</LinearLayout>
