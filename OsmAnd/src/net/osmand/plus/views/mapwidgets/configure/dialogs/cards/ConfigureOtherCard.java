@@ -12,6 +12,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.controllers.MapFocusDialogController;
+import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 
 public class ConfigureOtherCard extends MapBaseCard {
@@ -30,10 +32,25 @@ public class ConfigureOtherCard extends MapBaseCard {
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.shared_string_other);
 
-		setupDistanceRulerButton(settings.getApplicationMode());
+		ApplicationMode appMode = settings.getApplicationMode();
+		setupDisplayPositionButton(appMode);
+		setupDistanceRulerButton(appMode);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), false);
+	}
+
+	private void setupDisplayPositionButton(@NonNull ApplicationMode appMode) {
+		View button = view.findViewById(R.id.map_display_position_button);
+		button.setOnClickListener(v -> MapFocusDialogController.showDialog(getMapActivity(), appMode));
+
+		int value = settings.POSITION_PLACEMENT_ON_MAP.getModeValue(appMode);
+		MapFocus mapFocus = MapFocus.valueOf(value);
+		ConfigureButtonsCard.setupButton(button, getString(R.string.display_position),
+				getString(mapFocus.getTitleId()), mapFocus.getIconId(), true, nightMode);
+
+		AndroidUiHelper.updateVisibility(button, app.useOpenGlRenderer());
+		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}
 
 	private void setupDistanceRulerButton(@NonNull ApplicationMode appMode) {

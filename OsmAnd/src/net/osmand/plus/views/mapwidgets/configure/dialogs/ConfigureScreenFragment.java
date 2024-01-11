@@ -77,6 +77,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
+	private StateChangedListener<Integer> displayPositionListener;
 	private StateChangedListener<Boolean> distanceByTapListener;
 
 	@Override
@@ -118,12 +119,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onResume() {
 		super.onResume();
 		updateCard(widgetsCard);
+		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
 		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
 		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
 	}
 
@@ -317,6 +320,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	@Override
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
+	}
+
+	@NonNull
+	private StateChangedListener<Integer> getDisplayPositionListener() {
+		if (displayPositionListener == null) {
+			displayPositionListener = value -> app.runInUIThread(() -> updateCard(otherCard));
+		}
+		return displayPositionListener;
 	}
 
 	@NonNull
