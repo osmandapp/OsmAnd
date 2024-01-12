@@ -5589,4 +5589,5 @@
     <string name="precise_distance_numbers">Números exactos de distancia</string>
     <string name="any_connected">Cualquiera conectado</string>
     <string name="any_connected_with_device">Cualquiera conectado: %s</string>
+    <string name="shared_string_road_maps">Mapas de carreteras</string>
 </resources>
