@@ -16,6 +16,7 @@ import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -278,7 +279,7 @@ public class BackupExporter extends Exporter {
 		if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
 			RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
 			if (remoteFile != null) {
-				oldFilesToDelete = Algorithms.addToList(oldFilesToDelete, remoteFile);
+				oldFilesToDelete = CollectionUtils.addToList(oldFilesToDelete, remoteFile);
 			}
 		}
 	}

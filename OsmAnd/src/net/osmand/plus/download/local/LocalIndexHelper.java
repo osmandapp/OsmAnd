@@ -29,6 +29,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -314,7 +315,7 @@ public class LocalIndexHelper {
 			for (File file : listFilesSorted(dir)) {
 				if (file.isFile()) {
 					String fileName = file.getName();
-					boolean tilesData = Algorithms.endsWithAny(fileName, SQLiteTileSource.EXT, HEIGHTMAP_SQLITE_EXT);
+					boolean tilesData = CollectionUtils.endsWithAny(fileName, SQLiteTileSource.EXT, HEIGHTMAP_SQLITE_EXT);
 					if (tilesData) {
 						loadLocalData(file, TILES_DATA, items, shouldUpdate, task);
 					}

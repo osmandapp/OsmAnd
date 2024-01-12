@@ -17,6 +17,7 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +43,12 @@ public class OsmandMap {
 
 	public void addRenderingViewSetupListener(@NonNull RenderingViewSetupListener listener) {
 		if (!renderingViewSetupListeners.contains(listener)) {
-			renderingViewSetupListeners = Algorithms.addToList(renderingViewSetupListeners, listener);
+			renderingViewSetupListeners = CollectionUtils.addToList(renderingViewSetupListeners, listener);
 		}
 	}
 
 	public void removeRenderingViewSetupListener(@NonNull RenderingViewSetupListener listener) {
-		renderingViewSetupListeners = Algorithms.removeFromList(renderingViewSetupListeners, listener);
+		renderingViewSetupListeners = CollectionUtils.removeFromList(renderingViewSetupListeners, listener);
 	}
 
 	public OsmandMap(@NonNull OsmandApplication app) {

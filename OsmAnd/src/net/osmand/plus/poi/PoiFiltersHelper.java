@@ -19,6 +19,7 @@ import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -261,7 +262,7 @@ public class PoiFiltersHelper {
 				filters.add(f);
 			}
 			PluginsHelper.registerCustomPoiFilters(filters);
-			this.cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, filters);
+			this.cacheTopStandardFilters = CollectionUtils.addAllToList(cacheTopStandardFilters, filters);
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
 		for (PoiUIFilter filter : cacheTopStandardFilters) {
@@ -430,7 +431,7 @@ public class PoiFiltersHelper {
 				filtersToRemove.add(f);
 			}
 		}
-		cacheTopStandardFilters = Algorithms.removeAllFromList(cacheTopStandardFilters, filtersToRemove);
+		cacheTopStandardFilters = CollectionUtils.removeAllFromList(cacheTopStandardFilters, filtersToRemove);
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
 			addTopPoiFilter(filter);
@@ -496,13 +497,13 @@ public class PoiFiltersHelper {
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
 		checkTopStandardFiltersCache();
-		cacheTopStandardFilters = Algorithms.addToList(cacheTopStandardFilters, filter);
+		cacheTopStandardFilters = CollectionUtils.addToList(cacheTopStandardFilters, filter);
 		return filter;
 	}
 
 	private void removeTopPoiFilter(@NonNull PoiUIFilter filter) {
 		checkTopStandardFiltersCache();
-		cacheTopStandardFilters = Algorithms.removeFromList(cacheTopStandardFilters, filter);
+		cacheTopStandardFilters = CollectionUtils.removeFromList(cacheTopStandardFilters, filter);
 	}
 
 	private void checkTopStandardFiltersCache() {

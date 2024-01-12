@@ -26,6 +26,7 @@ import net.osmand.plus.mapsource.EditMapSourceDialogFragment.OnMapSourceUpdateLi
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils.RenameCallback;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -111,7 +112,7 @@ public abstract class LocalBaseFragment extends BaseOsmAndFragment implements Op
 		}
 		DownloadActivity activity = getDownloadActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
-			if (Algorithms.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION, CLEAR_TILES_OPERATION)) {
+			if (CollectionUtils.equalsToAny(type, RESTORE_OPERATION, BACKUP_OPERATION, CLEAR_TILES_OPERATION)) {
 				activity.reloadLocalIndexes();
 			} else {
 				activity.onUpdatedIndexesList();

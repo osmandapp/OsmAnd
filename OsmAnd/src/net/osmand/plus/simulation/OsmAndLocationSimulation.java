@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.simulation.LoadSimulatedLocationsTask.LoadSimulatedLocationsListener;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +43,11 @@ public class OsmAndLocationSimulation {
 	}
 
 	public void addListener(@NonNull LoadSimulatedLocationsListener listener) {
-		loadLocationsListeners = Algorithms.addToList(loadLocationsListeners, listener);
+		loadLocationsListeners = CollectionUtils.addToList(loadLocationsListeners, listener);
 	}
 
 	public void removeListener(@NonNull LoadSimulatedLocationsListener listener) {
-		loadLocationsListeners = Algorithms.removeFromList(loadLocationsListeners, listener);
+		loadLocationsListeners = CollectionUtils.removeFromList(loadLocationsListeners, listener);
 	}
 
 	@Nullable

@@ -9,6 +9,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -316,7 +317,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		if (object.pointTypes != null && start < object.pointTypes.length) {
 			int[][] types = Arrays.copyOfRange(object.pointTypes, start, Math.min(end, object.pointTypes.length));
 			if (reversed) {
-				Algorithms.reverseArray(types);
+				CollectionUtils.reverseArray(types);
 			}
 			bundle.putArray("pointTypes", convertTypes(types, rules));
 		}
@@ -327,8 +328,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			int[][] types = Arrays.copyOfRange(object.pointNameTypes, start, Math.min(end, object.pointNameTypes.length));
 			String[][] names = Arrays.copyOfRange(object.pointNames, start, Math.min(end, object.pointNames.length));
 			if (reversed) {
-				Algorithms.reverseArray(types);
-				Algorithms.reverseArray(names);
+				CollectionUtils.reverseArray(types);
+				CollectionUtils.reverseArray(names);
 			}
 			bundle.putArray("pointNames", convertPointNames(types, names, rules));
 		}

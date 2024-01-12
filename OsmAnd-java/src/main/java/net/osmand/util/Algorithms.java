@@ -1,5 +1,7 @@
 package net.osmand.util;
 
+import static net.osmand.util.CollectionUtils.startsWithAny;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -50,10 +52,6 @@ import java.util.zip.GZIPOutputStream;
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
-
-	public static boolean isEmpty(Collection<?> c) {
-		return c == null || c.size() == 0;
-	}
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
@@ -112,6 +110,10 @@ public class Algorithms {
 			}
 		}
 		return splitStr;
+	}
+
+	public static boolean isEmpty(Collection<?> c) {
+		return c == null || c.size() == 0;
 	}
 
 	public static boolean isEmpty(Map<?, ?> map) {
@@ -555,60 +557,7 @@ public class Algorithms {
 		return ((ch1 << 8) + ch2);
 	}
 
-	public static boolean startsWithAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.startsWith(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
-	public static boolean containsAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.contains(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean endsWithAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.endsWith(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean equalsToAny(Object o, Object ... args) {
-		if (o != null && args != null) {
-			for (Object o1 : args) {
-				if (o.equals(o1)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean anyIsNull(Object ... args) {
-		if (args != null) {
-			for (Object o : args) {
-				if (o == null) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
@@ -1186,78 +1135,6 @@ public class Algorithms {
 		return map;
 	}
 
-	public static <T> void reverseArray(T[] array) {
-		for (int i = 0; i < array.length / 2; i++) {
-			T temp = array[i];
-			array[i] = array[array.length - i - 1];
-			array[array.length - i - 1] = temp;
-		}
-	}
-
-	public static boolean containsInArrayL(long[] array, long value) {
-		return Arrays.binarySearch(array, value) >= 0;
-	}
-
-	public static long[] addToArrayL(long[] array, long value, boolean skipIfExists) {
-		long[] result;
-		if (array == null) {
-			result = new long[]{ value };
-		} else if (skipIfExists && Arrays.binarySearch(array, value) >= 0) {
-			result = array;
-		} else {
-			result = new long[array.length + 1];
-			System.arraycopy(array, 0, result, 0, array.length);
-			result[result.length - 1] = value;
-			Arrays.sort(result);
-		}
-		return result;
-	}
-
-	public static long[] removeFromArrayL(long[] array, long value) {
-		long[] result;
-		if (array != null) {
-			int index = Arrays.binarySearch(array, value);
-			if (index >= 0) {
-				result = new long[array.length - 1];
-				System.arraycopy(array, 0, result, 0, index);
-				if (index < result.length) {
-					System.arraycopy(array, index + 1, result, index, array.length - (index + 1));
-				}
-				return result;
-			} else {
-				return array;
-			}
-		} else {
-			return array;
-		}
-	}
-
-	public static String arrayToString(int[] a) {
-		if (a == null || a.length == 0) {
-			return null;
-		}
-		StringBuilder b = new StringBuilder();
-		for (int value : a) {
-			if (b.length() > 0) {
-				b.append(",");
-			}
-			b.append(value);
-		}
-		return b.toString();
-	}
-
-	public static int[] stringToArray(String array) throws NumberFormatException {
-		if (array == null || array.length() == 0) {
-			return null;
-		}
-		String[] items = array.split(",");
-		int[] res = new int[items.length];
-		for (int i = 0; i < items.length; i++) {
-			res[i] = Integer.parseInt(items[i]);
-		}
-		return res;
-	}
-
 	public static boolean isValidMessageFormat(CharSequence sequence) {
 		if (!isEmpty(sequence)) {
 			int counter = 0;
@@ -1331,85 +1208,6 @@ public class Algorithms {
 			copy.add(new WeakReference<>(item));
 		}
 		return copy;
-	}
-
-	public static <T> List<T> addToList(Collection<T> original, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.add(element);
-		return copy;
-	}
-
-	public static <T> List<T> addAllToList(Collection<T> original, Collection<T> elements) {
-		List<T> copy = new ArrayList<>(original);
-		copy.addAll(elements);
-		return copy;
-	}
-
-	public static <T> List<T> setInList(Collection<T> original, int position, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.set(position, element);
-		return copy;
-	}
-
-	public static <T> List<T> removeFromList(Collection<T> original, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.remove(element);
-		return copy;
-	}
-
-	public static <T> List<T> removeAllFromList(Collection<T> original, Collection<T> elements) {
-		List<T> copy = new ArrayList<>(original);
-		copy.removeAll(elements);
-		return copy;
-	}
-
-	public static <T> void addAllIfNotContains(Collection<T> collection, Collection<T> elements) {
-		for (T element : elements) {
-			addIfNotContains(collection, element);
-		}
-	}
-
-	public static <T> void addIfNotContains(Collection<T> collection, T element) {
-		if (!collection.contains(element)) {
-			collection.add(element);
-		}
-	}
-
-	public static <T> boolean containsAny(Collection<T> collection, T... objects) {
-		for (T object : objects) {
-			if (collection.contains(object)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@SafeVarargs
-	public static <T> List<T> asOneList(Collection<T> ... collections) {
-		List<T> result = new ArrayList<>();
-		for (Collection<T> collection : collections) {
-			result.addAll(collection);
-		}
-		return result;
-	}
-
-	public static <T> T searchElementWithCondition(Collection<T> collection, CallbackWithObject<T> condition) {
-		for (T element : collection) {
-			if (condition.processResult(element)) {
-				return element;
-			}
-		}
-		return null;
-	}
-
-	public static <T> List<T> filterElementsWithCondition(Collection<T> collection, CallbackWithObject<T> condition) {
-		List<T> result = new ArrayList<>();
-		for (T element : collection) {
-			if (condition.processResult(element)) {
-				result.add(element);
-			}
-		}
-		return result;
 	}
 
 	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
