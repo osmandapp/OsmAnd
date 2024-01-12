@@ -176,15 +176,15 @@ public class TracksComparator implements Comparator<Object> {
 				}
 				return Float.compare(analysis1.totalDistance, analysis2.totalDistance);
 			case DURATION_DESCENDING:
-				if (analysis1.timeSpan == analysis2.timeSpan) {
+				if (analysis1.getDurationInSeconds() == analysis2.getDurationInSeconds()) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return -Long.compare(analysis1.timeSpan, analysis2.timeSpan);
+				return -Long.compare(analysis1.getDurationInSeconds(), analysis2.getDurationInSeconds());
 			case DURATION_ASCENDING:
-				if (analysis1.timeSpan == analysis2.timeSpan) {
+				if (analysis1.getDurationInSeconds() == analysis2.getDurationInSeconds()) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return Long.compare(analysis1.timeSpan, analysis2.timeSpan);
+				return Long.compare(analysis1.getDurationInSeconds(), analysis2.getDurationInSeconds());
 		}
 		return 0;
 	}

@@ -361,8 +361,11 @@ public class GPXTrackAnalysis {
 	}
 
 	public int getDurationInSeconds() {
-		long durationMs = timeSpan > 0 ? timeSpan : expectedDuration;
-		return (int) (durationMs / 1000 + 0.5f);
+		return (int) (getDurationInMs() / 1000 + 0.5f);
+	}
+
+	public long getDurationInMs() {
+		return timeSpan > 0 ? timeSpan : expectedDuration;
 	}
 
 	private void processAverageValues(float totalElevation, int elevationPoints, double totalSpeedSum, int speedCount) {

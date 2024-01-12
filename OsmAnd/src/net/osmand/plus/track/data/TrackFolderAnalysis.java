@@ -43,7 +43,7 @@ public class TrackFolderAnalysis {
 					fileSize += file.length();
 				}
 				if (analysis.isTimeSpecified()) {
-					timeSpan += analysis.timeSpan / 1000.0f;
+					timeSpan += analysis.getDurationInMs() / 1000.0f;
 				}
 			}
 		}

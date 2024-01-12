@@ -43,7 +43,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<T
 		if (analysis != null) {
 			pointsCount.setText(String.valueOf(analysis.wptPoints));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
-			time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+			time.setText(formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 		}
 		AndroidUiHelper.setVisibility(View.VISIBLE, distance, pointsCount, time);
 	}
