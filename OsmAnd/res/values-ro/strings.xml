@@ -5382,10 +5382,10 @@
     <string name="help_article_map_vector_maps_name">Hărți vectoriale (stiluri de hartă)</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Solicitări vocale / Notificări</string>
     <string name="help_article_map_tracks_on_map_name">Trasee și rute</string>
-    <string name="help_article_navigation_routing_direct_to_point_routing_name">Rutare directă la punct (Barcă)</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Rutare directă la punct (Barca)</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Ecranul hărții în timpul navigației</string>
     <string name="help_article_navigation_guidance_name">Ghidare</string>
-    <string name="help_article_navigation_routing_car_based_routing_name">Rutare auto (camion, motocicletă)</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Rută auto (camion, motocicletă)</string>
     <string name="help_article_navigation_setup_route_details_name">Detalii despre rută</string>
     <string name="help_article_navigation_setup_route_navigation_name">Pregătirea rutei</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Rutare pietonală</string>
@@ -5397,7 +5397,7 @@
     <string name="help_article_map_legend_osmand_name">Stil de hartă OsmAnd</string>
     <string name="sensor_temperature_desc">Arată temperatura de la senzor</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_navigation_routing_horse_routing_name">Rutare pentru călărit</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Drumeție călare</string>
     <string name="help_article_navigation_routing_ski_routing_name">Rutare pentru schi</string>
     <string name="help_article_personal_name">Datele mele</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
@@ -5587,4 +5587,5 @@
     <string name="remove_widget_first">Stergeți întâi widgetul</string>
     <string name="row_number">Rând %1$s</string>
     <string name="add_row">Adaugă rând</string>
+    <string name="shared_string_road_maps">Hărți rutiere</string>
 </resources>
