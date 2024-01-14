@@ -5179,4 +5179,13 @@
     <string name="row_number">Riadok %1$s</string>
     <string name="discard_changes_prompt">Naozaj chcete zrušiť zmeny?</string>
     <string name="deletion_error">Chyba výmazu</string>
+    <string name="change_key_binding">Zmeniť priradenia kláves</string>
+    <string name="key_event_category_map_interactions">Interakcia s mapou</string>
+    <string name="tripltek_promo_description">Prístup zdarma k funkciám ako neobmedzené sťahovanie máp, 3D reliéf na %1$s mesiacov</string>
+    <string name="shared_string_button">Tlačidlo</string>
+    <string name="shared_string_action">Akcia</string>
+    <string name="key_event_category_actions">Akcie</string>
+    <string name="show_toast_about_key_pressed">Zobraziť oznámenie o stlačenej klávese</string>
+    <string name="key_is_already_assigned_error">Klávesa \"%1$s\" je už priradená k akcii: \"%2$s\"</string>
+    <string name="press_button_to_link_with_action">Stlačte na vašom zariadení tlačidlo, ktoré má byť priradené k akcii: %1$s</string>
 </resources>
