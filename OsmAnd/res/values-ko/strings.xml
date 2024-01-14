@@ -3589,4 +3589,16 @@
     <string name="key_event_category_map_interactions">매핑 상호 작용</string>
     <string name="key_event_category_actions">작업</string>
     <string name="user_guide">사용자 가이드</string>
+    <string name="shared_string_new_track">새로운 트랙</string>
+    <string name="no_visible_tracks_description">트랙을 선택하여 지도에 표시합니다.</string>
+    <string name="you_can_get_feature_as_part_of_pattern">%2$s 계획의 일부로 \"%1$s\"를 가져옵니다. 비교:</string>
+    <string name="shared_string_visible_on_map">지도에서 표시</string>
+    <string name="save_as_new_track">새 트랙으로 저장</string>
+    <string name="visible_in_3d_mode">3D 모드에서 볼 수 있음</string>
+    <string name="sort_last_modified">최종 수정됨</string>
+    <string name="shared_string_save_as_gpx">새 트랙 파일로 저장</string>
+    <string name="empty_state_osm_edits">OpenStreetMap 개체 생성 또는 수정</string>
+    <string name="empty_state_osm_edits_descr">OpenStreetMap POI를 만들거나 수정하고 OSM 노트를 열거나 주석을 달며 녹음된 GPX 파일을 작성합니다.</string>
+    <string name="no_visible_tracks">지도에 트랙이 없음</string>
+    <string name="measurement_tool_save_as_new_track_descr">점을 경로 점 또는 선으로 저장합니다.</string>
 </resources>
