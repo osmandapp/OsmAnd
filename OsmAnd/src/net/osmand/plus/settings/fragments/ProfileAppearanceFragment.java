@@ -3,6 +3,7 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.settings.backend.ApplicationMode.CUSTOM_MODE_KEY_SEPARATOR;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -61,11 +62,12 @@ import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 
@@ -430,7 +432,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	public void onPause() {
 		super.onPause();
 		if (isNewProfile) {
-			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+			File file = FileUtils.getBackupFileForCustomAppMode(app, changedProfile.stringKey);
 			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				app.getFileSettingsHelper().updateExportListener(file, null);
@@ -753,7 +755,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	private void checkSavingProfile() {
 		if (isNewProfile) {
-			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+			File file = FileUtils.getBackupFileForCustomAppMode(app, changedProfile.stringKey);
 			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showNewProfileSavingDialog(null);
@@ -787,14 +789,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private String getUniqueStringKey(ApplicationMode mode) {
-		return mode.getStringKey() + "_" + System.currentTimeMillis();
+	@NonNull
+	private String getUniqueStringKey(@NonNull ApplicationMode mode) {
+		return mode.getStringKey() + CUSTOM_MODE_KEY_SEPARATOR + System.currentTimeMillis();
 	}
 
 	private boolean hasNameDuplicate() {
-		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.toHumanString().trim().equals(changedProfile.name.trim()) &&
-					!m.getStringKey().trim().equals(profile.stringKey.trim())) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (mode.toHumanString().trim().equals(changedProfile.name.trim()) &&
+					!mode.getStringKey().trim().equals(profile.stringKey.trim())) {
 				return true;
 			}
 		}
