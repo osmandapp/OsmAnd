@@ -1,7 +1,5 @@
 package net.osmand.util;
 
-import net.osmand.PlatformUtil;
-
 import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -43,8 +41,8 @@ public class RouterUtilTest {
 			Class.forName("android.os.Build");
 			return true;
 		} catch (ClassNotFoundException e) {
-			return false;
 		}
+		return "true".equals(System.getProperty("isAndroidBuild"));
 	}
 
 	public static String getNativeLibPath() {
