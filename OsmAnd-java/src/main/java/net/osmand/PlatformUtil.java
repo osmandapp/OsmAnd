@@ -31,5 +31,5 @@ public class PlatformUtil {
 	public static XmlSerializer newSerializer() {
 		return new org.kxml2.io.KXmlSerializer();
 	}
-	
+
 }

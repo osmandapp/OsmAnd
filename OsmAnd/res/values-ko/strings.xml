@@ -3438,4 +3438,167 @@
 \n</string>
     <string name="trash_is_empty">Trash는 비어 있습니다</string>
     <string name="snap_to_road_descr">현재 위치 아이콘이 현재 내비게이션 경로로 스냅하기</string>
+    <string name="shared_string_reassign">재할당</string>
+    <string name="shared_string_rows">행</string>
+    <string name="standard_maps">표준 맵</string>
+    <string name="terrain_maps">지형 지도</string>
+    <string name="widget_available_ram_desc">OsmAnd에 할당된 사용 가능한 메모리를 표시합니다.</string>
+    <string name="widget_available_ram">사용 가능한 RAM</string>
+    <string name="app_mode_hang_gliding">행글라이딩</string>
+    <string name="help_article_navigation_routing_moped_routing_name">오토바이 라우팅</string>
+    <string name="help_article_navigation_routing_online_routing_name">온라인 라우팅</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">OsmAnd 라우팅 정보</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">대중 교통 노선</string>
+    <string name="help_article_personal_import_export_name">가져오기/내보내기</string>
+    <string name="help_article_purchases_android_name">Android 구매</string>
+    <string name="help_article_troubleshooting_crash_logs_name">오류 로그</string>
+    <string name="help_article_troubleshooting_general_name">기본 설정</string>
+    <string name="help_article_troubleshooting_maps_data_name">지도 및 데이터</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">트랙 기록</string>
+    <string name="help_article_widgets_name">지도 위젯</string>
+    <string name="help_article_widgets_map_buttons_name">맵 버튼</string>
+    <string name="help_article_widgets_markers_name">마커 위젯</string>
+    <string name="shared_string_setup">구성</string>
+    <string name="about_osmand">OsmAnd 소개</string>
+    <string name="send_logcat_log_descr">자세한 로그 파일</string>
+    <string name="open_issue_on_github_descr">질문하기, 기능 제안</string>
+    <string name="open_issue_on_github">GitHub에서 미해결 문제</string>
+    <string name="shared_string_not_checked">확인되지 않음</string>
+    <string name="shared_string_avoid">제외</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">기타 설정</string>
+    <string name="dangerous_goods">위험물</string>
+    <string name="file_already_imported">파일이 이미 OsmAnd에 임포트되어 있음</string>
+    <string name="osm_edit_logout_success">로그아웃됨</string>
+    <string name="clear_osm_token">OpenStreetMap OAuth 토큰 지우기</string>
+    <string name="perform_oauth_authorization_description">OAuth로 로그인하여 osmedit 기능 사용</string>
+    <string name="use_native_pt_desc">Java(안전) 대중 교통 경로 계산으로 전환</string>
+    <string name="visited_screens">방문한 화면</string>
+    <string name="topography_maps">지형도</string>
+    <string name="app_mode_paragliding">패러글라이딩</string>
+    <string name="write_bearing">베어링 쓰기</string>
+    <string name="help_article_map_legend_ski_map_name">스키 지도 스타일</string>
+    <string name="help_article_map_interact_with_map_name">지도와 상호 작용</string>
+    <string name="help_article_map_point_layers_on_map_name">지도의 포인트</string>
+    <string name="sensor_temperature_desc">센서의 온도를 표시함</string>
+    <string name="shared_string_reset_all">모두 재설정</string>
+    <string name="track_filter_date_selected_format">[</string>
+    <string name="filter_screen_title">검색 필터</string>
+    <string name="help_article_widgets_info_widgets_name">정보 위젯</string>
+    <string name="tripltek_promo">Tripltek 프로모션에 대한 %1$s 달</string>
+    <string name="free_versions_descr">무료 OsmAnd 버전 다운로드 및 설치</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">부식성 물질</string>
+    <string name="most_viewed">높은 조회수</string>
+    <string name="hide_compass_ruler">나침반 눈금자 숨기기</string>
+    <string name="icon_group_transport">대중교통</string>
+    <string name="row_number">행 %1$s</string>
+    <string name="remove_type_q">\"%1$s\"타입을 제거하시겠습니까?</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">독성 및 전염성 물질</string>
+    <string name="perform_oauth_authorization">OAuth를 통해 로그인</string>
+    <string name="cloud_item_restored">%1$s Cloud로 복원됩니다.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\"은 영구적으로 삭제됩니다. 견적 요청
+\n
+\n이 동작은 undone일 수 없습니다.</string>
+    <string name="with_waypoints">경유지 포함</string>
+    <string name="help_article_plan_route_name">계획경로</string>
+    <string name="use_native_pt">토종 대중교통 개발</string>
+    <string name="local_indexes_category_terrain">지형 지도(3D)</string>
+    <string name="icon_group_special">특별</string>
+    <string name="help_article_widgets_nav_widgets_name">탐색 위젯</string>
+    <string name="contact_us">연락처</string>
+    <string name="free_versions">무료 버전</string>
+    <string name="rendering_value_sacScale_description">스위스 알파인 클럽</string>
+    <string name="icon_group_amenity">생활 편의시설</string>
+    <string name="shared_string_local_maps">지역 지도</string>
+    <string name="apply_to_all_profiles">모든 프로필에게 적용</string>
+    <string name="collected_data_descr">OsmAnd가 공유할 수 있는 데이터를 정의하세요.</string>
+    <string name="visited_screens_collect_descr">OsmAnd 기능의 인기도를 이해하는 데 도움이 됩니다.</string>
+    <plurals name="tracks">
+        <item quantity="other">%1$d (%2$d 트랙)</item>
+    </plurals>
+    <string name="app_mode_baby_transport">유모차</string>
+    <string name="shared_string_temperature">온도</string>
+    <string name="date_of_creation">생성 날짜</string>
+    <string name="filter_by_name">이름으로 필터링</string>
+    <string name="filter_tracks_count">필</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">직선 라우팅(항공기)</string>
+    <string name="help_article_personal_name">내 데이터</string>
+    <string name="help_article_personal_profiles_name">프로필(설정)</string>
+    <string name="help_article_plan_route_web_name">웹 경로 플래너</string>
+    <string name="help_article_purchases_giveaway_name">무료</string>
+    <string name="help_article_purchases_ios_name">iOS 구매</string>
+    <string name="help_article_search_search_all_name">모두 검색</string>
+    <string name="help_article_search_search_coordinates_name">검색 좌표</string>
+    <string name="help_article_search_search_poi_name">검색 POI</string>
+    <string name="help_article_start_with_name">OsmAnd로 시작</string>
+    <string name="help_article_start_with_first_steps_name">첫 번째 단계</string>
+    <string name="help_article_start_with_main_menu_name">메인 메뉴</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">폭</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">가스</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">가연성 고체</string>
+    <string name="shared_string_class">등급</string>
+    <string name="show_compass_ruler">나침반 눈금자 표시</string>
+    <string name="show_toast_about_key_pressed">눌러진 키에 대한 toast보기</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd 지도 스타일</string>
+    <string name="help_article_map_vector_maps_name">벡터 맵(맵 스타일)</string>
+    <string name="wheel_circumference">휠 인치</string>
+    <string name="write_heading_description">기록하는 동안 각 트랙 포인트에 제목 저장</string>
+    <string name="rendering_value_caiScale_description">이탈리안 알파인 클럽</string>
+    <string name="report_an_issues">문제 보고하기</string>
+    <string name="copy_build_version">빌드 버전 복사</string>
+    <string name="shared_string_road_maps">로드맵</string>
+    <string name="tripltek_promo_description">무제한 맵 다운로드, 3D 릴리프 등을 포함한 기능 무료 액세스 %1$s 월</string>
+    <string name="release_4_6">• Android Auto: 3D 모드 추가
+\n
+\n• 트랙 : 소개 된 필터 및 스마트 폴더, 더 큰 파일에 최적화 된 메모리
+\n
+\n• 향상된 상단 및 하단 위젯 패널 모든 위젯을 수용
+\n
+\n• 현지 자원 관리 개선
+\n
+\n• 외부 관제사를 위한 Customizable 단추 mapping
+\n
+\n• 새로운 위젯 : \"Glide ratio\"및 \"Sun Position\"
+\n
+\n• OsmAnd 클라우드: 삭제 된 파일
+\n
+\n• 새로운 비대칭 gradient를 가진 Slope 형태에 있는 강화된 궤도
+\n
+\n• 투명 상태 표시를 가진 해결된 문제점
+\n
+\n• ANT + 온도 위젯에 대한 추가 지원
+\n
+\n• \"Available RAM\" 위젯 소개
+\n
+\n</string>
+    <string name="live_monitoring_adress_descr">Lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, Bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="max_altitude">산 최대 높이</string>
+    <string name="map_widget_group_glide_desc">위젯은 목표에 대한 활공비 또는 현재 여행의 평균 활공비를 보여줍니다.</string>
+    <string name="map_widget_group_glide_ratio">활공비</string>
+    <string name="help_article_map_raster_maps_name">래스터 맵(온라인/오프라인)</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">자전거 노선 (MTB)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">보트 경로</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">자동차 경로(트럭, 오토바이)</string>
+    <string name="external_sensor_name_property_description">센서 이름</string>
+    <string name="shared_string_checked">확인됨</string>
+    <string name="write_heading">제목 쓰기</string>
+    <string name="free_ride">무임승차</string>
+    <string name="collected_data">수집되는 데이터</string>
+    <string name="shared_string_button">버튼</string>
+    <string name="shared_string_action">액션</string>
+    <string name="change_key_binding">키 바인딩 변경</string>
+    <string name="key_event_category_map_interactions">매핑 상호 작용</string>
+    <string name="key_event_category_actions">작업</string>
+    <string name="user_guide">사용자 가이드</string>
+    <string name="shared_string_new_track">새로운 트랙</string>
+    <string name="no_visible_tracks_description">트랙을 선택하여 지도에 표시합니다.</string>
+    <string name="you_can_get_feature_as_part_of_pattern">%2$s 계획의 일부로 \"%1$s\"를 가져옵니다. 비교:</string>
+    <string name="shared_string_visible_on_map">지도에서 표시</string>
+    <string name="save_as_new_track">새 트랙으로 저장</string>
+    <string name="visible_in_3d_mode">3D 모드에서 볼 수 있음</string>
+    <string name="sort_last_modified">최종 수정됨</string>
+    <string name="shared_string_save_as_gpx">새 트랙 파일로 저장</string>
+    <string name="empty_state_osm_edits">OpenStreetMap 개체 생성 또는 수정</string>
+    <string name="empty_state_osm_edits_descr">OpenStreetMap POI를 만들거나 수정하고 OSM 노트를 열거나 주석을 달며 녹음된 GPX 파일을 작성합니다.</string>
+    <string name="no_visible_tracks">지도에 트랙이 없음</string>
+    <string name="measurement_tool_save_as_new_track_descr">점을 경로 점 또는 선으로 저장합니다.</string>
 </resources>

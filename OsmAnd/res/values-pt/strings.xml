@@ -836,10 +836,10 @@
     <string name="ending_point_too_far">Destino muito longe da estrada mais próxima.</string>
     <string name="add_tag">Adicionar etiqueta</string>
     <string name="rendering_attr_showRoadMaps_description">Escolher quando mostrar apenas mapas de estradas:</string>
-    <string name="rendering_attr_showRoadMaps_name">Mapas de estradas</string>
+    <string name="rendering_attr_showRoadMaps_name">Mapas só de estradas</string>
     <string name="download_roads_only_item">Só estradas</string>
     <string name="download_regular_maps">Mapa padrão</string>
-    <string name="download_roads_only_maps">Mapas só de estradas</string>
+    <string name="download_roads_only_maps">Mapa só de estradas</string>
     <string name="safe_mode_description">Executar a aplicação no modo de segurança (mais lento).</string>
     <string name="safe_mode">Modo de segurança</string>
     <string name="native_library_not_running">A aplicação está a ser executada no modo de segurança (desative em \"Configurações\").</string>
@@ -5593,4 +5593,5 @@
     <string name="clear_key_assignment_desc">A atribuição de tecla para a ação selecionada será desmarcada e definida como \"Nenhuma\".</string>
     <string name="map_widget_sun_position_desc">Este widget mostra o tempo que falta até ao nascer ou pôr do sol, dependendo da hora atual.</string>
     <string name="any_connected_with_device">Qualquer conectado: %s</string>
+    <string name="shared_string_road_maps">Mapas de estradas</string>
 </resources>

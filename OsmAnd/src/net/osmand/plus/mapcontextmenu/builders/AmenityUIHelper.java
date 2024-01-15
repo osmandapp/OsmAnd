@@ -65,14 +65,11 @@ import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -89,7 +86,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.zip.GZIPInputStream;
 
 
 public class AmenityUIHelper extends MenuBuilder {
@@ -190,7 +186,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !(Algorithms.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
+			boolean needLinks = !(CollectionUtils.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -460,7 +456,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					if (icon == null) {
 						icon = getRowIcon(R.drawable.ic_action_note_dark);
 					}
-					boolean cuisineOrDish = Algorithms.equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
+					boolean cuisineOrDish = CollectionUtils.equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
 					CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true,
 							categoryTypes, true, cuisineOrDish ? cuisineRow : null, type);
 					infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon,

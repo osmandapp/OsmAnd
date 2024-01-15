@@ -5597,4 +5597,5 @@
     <string name="precise_distance_numbers">Точні значення відстаней</string>
     <string name="any_connected">Нічого не під\'єднано</string>
     <string name="any_connected_with_device">Будь-який підключений: %s</string>
+    <string name="shared_string_road_maps">Дорожні карти</string>
 </resources>

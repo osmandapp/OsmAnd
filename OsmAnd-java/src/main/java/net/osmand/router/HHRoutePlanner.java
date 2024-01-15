@@ -1000,7 +1000,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			return null;
 		}
 		double oldP = hctx.rctx.config.penaltyForReverseDirection;
-		hctx.rctx.config.penaltyForReverseDirection *= 4; // runDetailedRouting requires stronger penalty TODO try -1
+		hctx.rctx.config.penaltyForReverseDirection *= 4; // probably we should try -1 (to fully avoid roundabout) but we don't have use cases yet
 		hctx.rctx.config.initialDirection = start.getRoad().directionRoute(start.getSegmentStart(), start.isPositive());
 		hctx.rctx.config.targetDirection = end.getRoad().directionRoute(end.getSegmentEnd(), !end.isPositive());
 		hctx.rctx.config.MAX_VISITED = useBoundaries ? -1 : MAX_POINTS_CLUSTER_ROUTING * 2;

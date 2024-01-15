@@ -48,6 +48,7 @@ import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.json.JSONException;
@@ -1086,7 +1087,7 @@ public class RouteProvider {
 					String slanes = item.getExtensionsToRead().get("lanes");
 					if (slanes != null) {
 						try {
-							int[] lanes = Algorithms.stringToArray(slanes);
+							int[] lanes = CollectionUtils.stringToArray(slanes);
 							if (lanes != null && lanes.length > 0) {
 								turnType.setLanes(lanes);
 							}

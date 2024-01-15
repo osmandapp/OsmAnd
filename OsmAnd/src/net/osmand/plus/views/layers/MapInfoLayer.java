@@ -37,6 +37,7 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -238,7 +239,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 
-			rulerWidgets = Algorithms.addToList(rulerWidgets, rulerWidget);
+			rulerWidgets = CollectionUtils.addToList(rulerWidgets, rulerWidget);
 
 			return rulerWidget;
 		} else {
@@ -248,20 +249,20 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
 		if (rulerWidgets != null) {
-			rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
+			rulerWidgets = CollectionUtils.removeAllFromList(rulerWidgets, rulers);
 		}
 	}
 
 	public void addSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
-			sideWidgetsPanels = Algorithms.addToList(sideWidgetsPanels, panel);
+			sideWidgetsPanels = CollectionUtils.addToList(sideWidgetsPanels, panel);
 			panel.updateColors(calculateTextState(false));
 		}
 	}
 
 	public void removeSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
-			sideWidgetsPanels = Algorithms.removeFromList(sideWidgetsPanels, panel);
+			sideWidgetsPanels = CollectionUtils.removeFromList(sideWidgetsPanels, panel);
 		}
 	}
 

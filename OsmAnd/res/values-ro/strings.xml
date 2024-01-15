@@ -3277,7 +3277,7 @@
     <string name="new_device_account">Dispozitiv nou / cont nou</string>
     <string name="contact_support_description">Dacă aveți întrebări, contactați-ne la %1$s.</string>
     <string name="empty_purchases_description">Dacă achizițiile voastre nu apar aici, apăsați pe \"%1$s\" sau contactați echipa noastră de asistență.</string>
-    <string name="contact_support">Contactează asistența</string>
+    <string name="contact_support">Contactează suportul tehnic</string>
     <string name="troubleshooting">Depanare</string>
     <string name="troubleshooting_description">Urmați acest link dacă aveți probleme cu achizițiile.</string>
     <string name="osmand_live">OsmAnd Live</string>
@@ -3608,11 +3608,11 @@
     <string name="rendering_attr_pisteGrooming_name">Amenajare pistă</string>
     <string name="osmand_distance_planning_plugin_description">Creați trasee prin atingerea hărții sau prin utilizarea sau modificarea fișierelor GPX existente, pentru a planifica o călătorie și a măsura distanța dintre puncte. Rezultatul poate fi salvat ca fișier GPX pentru a fi folosit ulterior pentru navigare.</string>
     <string name="plugin_ski_descr">Conceput pentru a naviga în zonele de sporturi de iarnă: vedeți piste de schi și teleschiuri, precum și pârtii de schi fond, cu linii colorate indicând gradele de dificultate. Pentru a-l utiliza, activați acest plugin, mergeți la \"Configurare hartă\" și alegeți stilul de hartă \"Iarnă și schi\".</string>
-    <string name="plugin_ski_name">Vedere ca hartă de schi</string>
+    <string name="plugin_ski_name">Hartă de schi</string>
     <string name="plugin_nautical_descr">Îmbogățește harta cu informații despre rute de navigație, lumini de navigație, zone de pericol nautic, zone cu restricții de navigație sau de acostare etc. Pentru a le utiliza, descărcați hărțile nautice respective și activați stilul \"Hartă nautică\" în \"Configurare hartă\".
 \n
 \nPentru mai multe informații, consultați %1$s.</string>
-    <string name="plugin_nautical_name">Vedere ca hartă nautică</string>
+    <string name="plugin_nautical_name">Hartă nautică</string>
     <string name="plugin_touringview_descr">Activarea acestei vizualizări schimbă stilul hărții OsmAnd în \"Touring view\", aceasta fiind o vizualizare specială, cu multe detalii, pentru călătorii și șoferii profesioniști.
 \n
 \nAceastă vizualizare oferă, la un anumit zoom al hărții, cantitatea maximă de detalii de călătorie disponibile în datele hărții (în special drumuri, trasee, poteci și semne de orientare).
@@ -3932,7 +3932,7 @@
     <string name="value_downloaded_of_max">%1$.1f de %2$.1f MB</string>
     <string name="confirm_download_roadmaps">Harta doar pentru drumuri nu este necesară, deoarece aveți harta standard (completă). O descărcați totuși\?</string>
     <string name="activate_srtm_plugin">Activați pluginul \'Topografie\'</string>
-    <string name="activate_seamarks_plugin">Activați pluginul \'Vedere ca hartă nautică\'</string>
+    <string name="activate_seamarks_plugin">Activați pluginul \'Hartă nautică\'</string>
     <string name="show_free_version_banner_description">Afișați bannerul versiunii gratuite chiar și în versiunea cu plată.</string>
     <string name="show_free_version_banner">Afișați bannerul versiunii gratuite</string>
     <string name="unsaved_changes_will_be_lost">Orice modificări nesalvate vor fi pierdute. Continuați\?</string>
@@ -5352,30 +5352,32 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Rata medie de planare</string>
     <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
-    <string name="release_4_6">• A fost adăugată posibilitatea de a schimba legăturile de chei pentru dispozitivele de intrare externe
+    <string name="release_4_6">• Android Auto: A fost adăugat modul 3D
 \n
-\n • A fost adăugat widgetul \"Glide Ratio\"
+\n • Tracks: Au fost introduse filtre și foldere inteligente, a fost optimizată memoria pentru fișiere mai mari
 \n
-\n • Au fost adăugate filtre și foldere inteligente pentru piese
+\n • Gestionarea îmbunătățită a resurselor locale
 \n
-\n • Au fost adăugate rânduri pentru panourile de widget-uri de sus și de jos, cu suport pentru toate widget-urile
+\n • Mapare personalizabilă a butoanelor pentru controllere externe
 \n
-\n • A adăugat suport pentru widget-ul de temperatură ANT+
+\n •Widget-uri noi: \"Glide Ratio\" și \"Sun Position\"
 \n
-\n • Gestionarea îmbunătățită a memoriei pentru piesele GPX mari
+\n • OsmAnd Cloud: Acum accesați fișierele șterse
 \n
-\n • Gestionarea actualizată a resurselor locale în Descărcări
-\n
-\n • A fost adăugat widget-ul \"RAM disponibil\"
+\n • Colorare îmbunătățită a pistei în modul Slope cu un nou gradient simetric
 \n
 \n • Probleme rezolvate cu bara de stare transparentă
+\n
+\n • A fost adăugat suport pentru widget-ul ANT+ pentru temperatură
+\n
+\n• A fost introdus widgetul \"RAM disponibil\"
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
     <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Temperatură</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Rutare în linie dreaptă (aeronave)</string>
-    <string name="help_article_navigation_routing_train_routing_name">Rutare cu trenuri</string>
+    <string name="help_article_navigation_routing_train_routing_name">Rutare folosind trenuri</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Rutare transport public</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navigare după marcaje</string>
     <string name="help_article_map_point_layers_on_map_name">Puncte pe hartă</string>
@@ -5386,19 +5388,19 @@
     <string name="help_article_navigation_guidance_map_during_navigation_name">Ecranul hărții în timpul navigației</string>
     <string name="help_article_navigation_guidance_name">Ghidare</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Rutare auto (camion, motocicletă)</string>
-    <string name="help_article_navigation_setup_route_details_name">Detalii despre rută</string>
+    <string name="help_article_navigation_setup_route_details_name">Detalii despre traseu</string>
     <string name="help_article_navigation_setup_route_navigation_name">Pregătirea rutei</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Rutare pietonală</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigare după traseu</string>
-    <string name="help_article_navigation_routing_online_routing_name">Rutare online</string>
+    <string name="help_article_navigation_routing_online_routing_name">Traseu online</string>
     <string name="help_article_map_map_context_menu_name">Meniul contextual al hărții</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_map_track_context_menu_name">Meniul contextual pentru trasee</string>
     <string name="help_article_map_legend_osmand_name">Stil de hartă OsmAnd</string>
     <string name="sensor_temperature_desc">Arată temperatura de la senzor</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_navigation_routing_horse_routing_name">Rutare pentru călărit</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Rutare pentru schi</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Rutare pentru călărie</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Rutare pentru schiat</string>
     <string name="help_article_personal_name">Datele mele</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_name">Parametrii rutei</string>
@@ -5411,7 +5413,7 @@
     <string name="help_article_navigation_routing_osmand_routing_name">Despre rutarea OsmAnd</string>
     <string name="help_article_plan_route_coordinate_input_name">Introducerea coordonatelor</string>
     <string name="help_article_personal_import_export_name">Import / Export</string>
-    <string name="help_article_plan_route_name">Planificarea traseului</string>
+    <string name="help_article_plan_route_name">Planificare traseu</string>
     <string name="help_article_personal_storage_name">Stocare</string>
     <string name="help_article_search_search_coordinates_name">Căutare coordonate</string>
     <string name="help_article_start_with_main_menu_name">Meniu principal</string>
@@ -5423,7 +5425,7 @@
     <string name="help_article_plan_route_web_name">Planificator rute pe web</string>
     <string name="help_article_purchases_ios_name">Achiziții iOS</string>
     <string name="help_article_search_search_all_name">Căutare prin toate</string>
-    <string name="help_article_troubleshooting_crash_logs_name">Jurnale erori aplicație</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Jurnale de erori</string>
     <string name="with_waypoints">Cu puncte intermediare</string>
     <string name="help_article_search_search_poi_name">Căutare punct de interes</string>
     <string name="max_altitude">Altitudine maximă</string>
@@ -5452,7 +5454,7 @@
     <string name="free_versions_descr">Descarcă și instalează versiunea gratuită a OsmAnd</string>
     <string name="free_versions">Versiuni gratuite</string>
     <string name="open_issue_on_github_descr">Puneți întrebări, propuneți funcționalitate nouă</string>
-    <string name="github_discussion">Discuție pe GitHub</string>
+    <string name="github_discussion">Discuții pe GitHub</string>
     <string name="most_viewed">Cele mai vizualizate</string>
     <string name="copy_build_version">Copiază versiunea build-ului</string>
     <string name="help_article_widgets_radius_ruler_name">Rigla pentru rază și Rigla</string>
@@ -5587,4 +5589,5 @@
     <string name="remove_widget_first">Stergeți întâi widgetul</string>
     <string name="row_number">Rând %1$s</string>
     <string name="add_row">Adaugă rând</string>
+    <string name="shared_string_road_maps">Hărți rutiere</string>
 </resources>

@@ -5,12 +5,10 @@ import android.content.Context;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 public enum LocalItemType {
 
@@ -77,22 +75,22 @@ public enum LocalItemType {
 	}
 
 	public boolean isSettingsCategory() {
-		return Algorithms.equalsToAny(this, PROFILES, OTHER);
+		return CollectionUtils.equalsToAny(this, PROFILES, OTHER);
 	}
 
 	public boolean isMyPlacesCategory() {
-		return Algorithms.equalsToAny(this, FAVORITES, TRACKS, OSM_EDITS, OSM_NOTES,
+		return CollectionUtils.equalsToAny(this, FAVORITES, TRACKS, OSM_EDITS, OSM_NOTES,
 				MULTIMEDIA_NOTES, ACTIVE_MARKERS, HISTORY_MARKERS, ITINERARY_GROUPS);
 	}
 
 	public boolean isResourcesCategory() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA, LIVE_UPDATES, TERRAIN_DATA,
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, LIVE_UPDATES, TERRAIN_DATA,
 				WIKI_AND_TRAVEL_MAPS, DEPTH_DATA, WEATHER_DATA, TILES_DATA, RENDERING_STYLES,
 				ROUTING, TTS_VOICE_DATA, VOICE_DATA, FONT_DATA, CACHE);
 	}
 
 	public boolean isDownloadType() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA, TILES_DATA, TERRAIN_DATA,
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, TILES_DATA, TERRAIN_DATA,
 				DEPTH_DATA, WIKI_AND_TRAVEL_MAPS, WEATHER_DATA, TTS_VOICE_DATA, VOICE_DATA, FONT_DATA);
 	}
 
@@ -101,11 +99,11 @@ public enum LocalItemType {
 	}
 
 	public boolean isDeletionSupported() {
-		return isDownloadType() || Algorithms.equalsToAny(this, LIVE_UPDATES);
+		return isDownloadType() || CollectionUtils.equalsToAny(this, LIVE_UPDATES);
 	}
 
 	public boolean isBackupSupported() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA, WIKI_AND_TRAVEL_MAPS, TERRAIN_DATA, DEPTH_DATA);
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA, WIKI_AND_TRAVEL_MAPS, TERRAIN_DATA, DEPTH_DATA);
 	}
 
 	public boolean isRenamingSupported() {
@@ -113,6 +111,6 @@ public enum LocalItemType {
 	}
 
 	public boolean isMapsSortingSupported() {
-		return Algorithms.equalsToAny(this, MAP_DATA, ROAD_DATA);
+		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA);
 	}
 }

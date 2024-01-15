@@ -5351,13 +5351,13 @@
     <string name="average_glide_ratio">Mittlere Gleitzahl</string>
     <string name="wheel_circumference">Radumfang</string>
     <string name="external_sensor_name_property_description">Sensorname</string>
-    <string name="help_article_map_legend_nautical_map_name">Seekartenstil</string>
+    <string name="help_article_map_legend_nautical_map_name">Nautischer Kartenstil</string>
     <string name="help_article_map_legend_osmand_name">OsmAnd-Kartenstil</string>
-    <string name="help_article_map_legend_ski_map_name">Skikartenstil</string>
-    <string name="help_article_map_interact_with_map_name">Mit Karte interagieren</string>
+    <string name="help_article_map_legend_ski_map_name">Skikarten-Stil</string>
+    <string name="help_article_map_interact_with_map_name">Mit der Karte interagieren</string>
     <string name="help_article_map_map_context_menu_name">Kontextmenü der Karte</string>
     <string name="help_article_map_point_layers_on_map_name">Punkte auf der Karte</string>
-    <string name="help_article_map_raster_maps_name">Rasterkarten (online / offline)</string>
+    <string name="help_article_map_raster_maps_name">Rasterkarten (Online / Offline)</string>
     <string name="help_article_map_track_context_menu_name">Kontextmenü der Tracks</string>
     <string name="contact_us">Kontaktieren Sie uns</string>
     <string name="help_article_map_vector_maps_name">Vektorkarten (Kartenstile)</string>
@@ -5592,4 +5592,5 @@
     <string name="precise_distance_numbers">Genaue Entfernungsangaben</string>
     <string name="any_connected">Alle verbundenen</string>
     <string name="any_connected_with_device">Alle verbundene: %s</string>
+    <string name="shared_string_road_maps">Straßenkarten</string>
 </resources>

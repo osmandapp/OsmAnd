@@ -78,6 +78,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -129,12 +130,12 @@ public class ImportHelper {
 
 	public void addImportTaskListener(@NonNull ImportTaskListener listener) {
 		if (!taskListeners.contains(listener)) {
-			taskListeners = Algorithms.addToList(taskListeners, listener);
+			taskListeners = CollectionUtils.addToList(taskListeners, listener);
 		}
 	}
 
 	public void removeImportTaskListener(@NonNull ImportTaskListener listener) {
-		taskListeners = Algorithms.removeFromList(taskListeners, listener);
+		taskListeners = CollectionUtils.removeFromList(taskListeners, listener);
 	}
 
 	public void notifyImportFinished() {
@@ -317,7 +318,7 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
 		fileName = fileName.replace(ZIP_EXT, "");
-		if (extras != null && Algorithms.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
+		if (extras != null && CollectionUtils.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
 			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
 			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);

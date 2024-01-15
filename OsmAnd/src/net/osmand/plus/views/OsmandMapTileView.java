@@ -76,6 +76,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -766,42 +767,42 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
 		if (!locationListeners.contains(listener)) {
-			locationListeners = Algorithms.addToList(locationListeners, listener);
+			locationListeners = CollectionUtils.addToList(locationListeners, listener);
 		}
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners = Algorithms.removeFromList(locationListeners, listener);
+		locationListeners = CollectionUtils.removeFromList(locationListeners, listener);
 	}
 
 	public void addManualZoomChangeListener(@NonNull ManualZoomListener listener) {
 		if (!manualZoomListeners.contains(listener)) {
-			manualZoomListeners = Algorithms.addToList(manualZoomListeners, listener);
+			manualZoomListeners = CollectionUtils.addToList(manualZoomListeners, listener);
 		}
 	}
 
 	public void removeManualZoomListener(@NonNull ManualZoomListener listener) {
-		manualZoomListeners = Algorithms.removeFromList(manualZoomListeners, listener);
+		manualZoomListeners = CollectionUtils.removeFromList(manualZoomListeners, listener);
 	}
 
 	public void addElevationListener(@NonNull ElevationListener listener) {
 		if (!elevationListeners.contains(listener)) {
-			elevationListeners = Algorithms.addToList(elevationListeners, listener);
+			elevationListeners = CollectionUtils.addToList(elevationListeners, listener);
 		}
 	}
 
 	public void removeElevationListener(@NonNull ElevationListener listener) {
-		elevationListeners = Algorithms.removeFromList(elevationListeners, listener);
+		elevationListeners = CollectionUtils.removeFromList(elevationListeners, listener);
 	}
 
 	public void addViewportListener(@NonNull ViewportListener listener) {
 		if (!viewportListeners.contains(listener)) {
-			viewportListeners = Algorithms.addToList(viewportListeners, listener);
+			viewportListeners = CollectionUtils.addToList(viewportListeners, listener);
 		}
 	}
 
 	public void removeViewportListener(@NonNull ViewportListener listener) {
-		viewportListeners = Algorithms.removeFromList(viewportListeners, listener);
+		viewportListeners = CollectionUtils.removeFromList(viewportListeners, listener);
 	}
 
 	public void setOnDrawMapListener(@Nullable OnDrawMapListener listener) {
@@ -810,12 +811,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void addTouchListener(@NonNull TouchListener listener) {
 		if (!touchListeners.contains(listener)) {
-			touchListeners = Algorithms.addToList(touchListeners, listener);
+			touchListeners = CollectionUtils.addToList(touchListeners, listener);
 		}
 	}
 
 	public void removeTouchListener(@NonNull TouchListener listener) {
-		touchListeners = Algorithms.removeFromList(touchListeners, listener);
+		touchListeners = CollectionUtils.removeFromList(touchListeners, listener);
 	}
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
