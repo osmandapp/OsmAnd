@@ -19,7 +19,6 @@
             android:layout_height="@dimen/map_alarm_size"
             android:layout_gravity="bottom|start"
             android:layout_marginBottom="@dimen/map_alarm_bottom_margin"
-            android:layout_marginLeft="@dimen/map_button_shadow_margin"
 	        android:layout_marginStart="@dimen/map_button_shadow_margin">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -64,10 +63,7 @@
                 android:layout_width="@dimen/map_trans_seek_size"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/dashPadding"
-                android:layout_marginRight="@dimen/dashPadding"
-				android:layout_marginStart="@dimen/dashPadding"
-				android:layout_marginEnd="@dimen/dashPadding" />
+	            android:layout_marginHorizontal="@dimen/dashPadding" />
 
         </LinearLayout>
 
@@ -85,10 +81,7 @@
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/dashPadding"
-                android:layout_marginRight="@dimen/dashPadding"
-				android:layout_marginStart="@dimen/dashPadding"
-				android:layout_marginEnd="@dimen/dashPadding" />
+	            android:layout_marginHorizontal="@dimen/dashPadding" />
 
         </LinearLayout>
 
@@ -97,7 +90,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
             android:layout_marginBottom="@dimen/map_button_margin"
-            android:layout_marginLeft="@dimen/map_button_margin"
 	        android:layout_marginStart="@dimen/map_button_margin">
 
             <ImageButton
@@ -112,7 +104,6 @@
                 android:id="@+id/map_route_info_button"
                 android:layout_width="@dimen/map_button_size"
                 android:layout_height="@dimen/map_button_size"
-                android:layout_marginLeft="@dimen/map_button_spacing"
 	            android:layout_marginStart="@dimen/map_button_spacing"
                 android:background="@drawable/btn_round"
                 android:contentDescription="@string/layer_route"
@@ -139,6 +130,7 @@
 			        android:layout_gravity="bottom"
 			        layout="@layout/profile_with_config_btn_layout"
 			        android:visibility="gone" />
+
 	        </FrameLayout>
 
             <LinearLayout
@@ -152,8 +144,7 @@
                     android:layout_width="@dimen/map_ruler_width"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:layout_marginStart="@dimen/map_button_margin"
-                    android:layout_marginLeft="@dimen/map_button_margin" />
+                    android:layout_marginStart="@dimen/map_button_margin" />
             </LinearLayout>
 
         </LinearLayout>
@@ -164,7 +155,6 @@
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="bottom|end"
 		    android:layout_marginEnd="@dimen/map_button_margin"
-		    android:layout_marginRight="@dimen/map_button_margin"
 		    android:layout_marginBottom="@dimen/map_button_margin" />
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar

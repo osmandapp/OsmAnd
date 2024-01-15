@@ -26,16 +26,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                android:paddingRight="@dimen/context_menu_padding_margin_default"
-	            android:paddingStart="@dimen/context_menu_padding_margin_default"
-	            android:paddingEnd="@dimen/context_menu_padding_margin_default">
+	            android:paddingHorizontal="@dimen/context_menu_padding_margin_default">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_default"
-                    android:layout_marginRight="@dimen/context_menu_padding_margin_default"
                     android:layout_marginTop="@dimen/context_menu_first_line_top_margin"
                     android:layout_weight="1"
                     android:orientation="vertical">
@@ -86,10 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                android:paddingRight="@dimen/context_menu_padding_margin_default"
-	            android:paddingStart="@dimen/context_menu_padding_margin_default"
-	            android:paddingEnd="@dimen/context_menu_padding_margin_default">
+	            android:paddingHorizontal="@dimen/context_menu_padding_margin_default">
 
 				<LinearLayout
 					android:id="@+id/main_transport_route_badge"
@@ -119,7 +112,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
-                    android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                     android:text="@string/more_transport_on_stop_hint"
                     android:textSize="@dimen/default_sub_text_size"
                     android:visibility="gone"
@@ -143,7 +135,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/context_menu_padding_margin_small"
-                        android:layout_marginRight="@dimen/context_menu_padding_margin_small"
                         android:textSize="@dimen/default_sub_text_size"
                         osmand:typeface="@string/font_roboto_medium" />
 
@@ -390,13 +381,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+	            android:focusable="true"
                 android:gravity="center_vertical"
                 android:minHeight="@dimen/context_menu_action_buttons_h"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/context_menu_padding_margin_small"
                 android:paddingEnd="@dimen/context_menu_progress_padding_right"
-                android:paddingLeft="@dimen/context_menu_progress_padding_left"
-                android:paddingRight="@dimen/context_menu_progress_padding_right"
                 android:paddingStart="@dimen/context_menu_progress_padding_left"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -410,7 +400,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginRight="@dimen/content_padding_small"
                         android:layout_marginEnd="@dimen/content_padding_small"
                         android:layout_weight="1"
                         android:orientation="vertical">
@@ -457,10 +446,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="@dimen/map_widget_icon_margin"
-                android:paddingRight="@dimen/map_widget_icon_margin"
-	            android:paddingStart="@dimen/map_widget_icon_margin"
-	            android:paddingEnd="@dimen/map_widget_icon_margin">
+	            android:paddingHorizontal="@dimen/map_widget_icon_margin">
 
 	            <!--Filled programmatically-->
 
@@ -485,10 +471,7 @@
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="start|center_vertical"
-                    android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                    android:paddingRight="@dimen/context_menu_padding_margin_default"
-                    android:paddingStart="@dimen/context_menu_padding_margin_default"
-                    android:paddingEnd="@dimen/context_menu_padding_margin_default"
+	                android:paddingHorizontal="@dimen/context_menu_padding_margin_default"
                     android:text="@string/rendering_category_details"
                     android:textAllCaps="true"
                     android:textSize="@dimen/default_desc_text_size"
@@ -501,10 +484,7 @@
                     android:layout_height="match_parent"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="end|center_vertical"
-                    android:paddingLeft="@dimen/context_menu_padding_margin_default"
-                    android:paddingRight="@dimen/context_menu_padding_margin_default"
-                    android:paddingEnd="@dimen/context_menu_padding_margin_default"
-                    android:paddingStart="@dimen/context_menu_padding_margin_default"
+                    android:paddingHorizontal="@dimen/context_menu_padding_margin_default"
                     android:text="@string/shared_string_navigation"
                     android:textAllCaps="true"
                     android:textSize="@dimen/default_desc_text_size"
@@ -546,7 +526,6 @@
         android:id="@+id/context_menu_top_button_container"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dashboard_map_toolbar"
-        android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
         android:alpha="0">
 
@@ -639,7 +618,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginRight="@dimen/map_button_margin"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone"
@@ -662,6 +640,7 @@
                 android:background="@drawable/btn_circle"
                 android:contentDescription="@string/zoomOut"
                 tools:src="@drawable/ic_action_remove_dark"/>
+
         </LinearLayout>
 
     </FrameLayout>
