@@ -831,14 +831,13 @@ public class RoutePlannerFrontEnd {
 			HHNetworkRouteRes r = null;
 			Double dir = ctx.config.initialDirection ;
 			for (int i = 0; i < targets.size(); i++) {
-				if (!intermediatesEmpty && i > 0) {
-					ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty for inter-points only (*0.5)
+				double initialPenalty = ctx.config.penaltyForReverseDirection;
+				if (i > 0) {
+					ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty (only for inter-points)
 				}
 				HHNetworkRouteRes res = calculateHHRoute(routePlanner, ctx, i == 0 ? start : targets.get(i - 1),
 						targets.get(i), dir);
-				if (!intermediatesEmpty && i > 0) {
-					ctx.config.penaltyForReverseDirection *= 2; // get back reverse-penalty
-				}
+				ctx.config.penaltyForReverseDirection = initialPenalty;
 				if (r == null) {
 					r = res;
 				} else {
