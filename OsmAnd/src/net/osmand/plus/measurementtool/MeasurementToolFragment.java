@@ -96,6 +96,7 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.SelectTrackFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
@@ -143,7 +144,7 @@ import java.util.Locale;
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeProvider, GpsFilterFragmentLister,
-		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider {
+		OnFileUploadCallback, CalculateAltitudeListener, IMapDisplayPositionProvider, CallbackWithObject<String> {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -1593,9 +1594,22 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void showAddToTrackDialog(MapActivity mapActivity) {
 		if (mapActivity != null) {
-			SelectFileBottomSheet.showInstance(mapActivity.getSupportFragmentManager(),
-					createAddToTrackFileListener(), ADD_TO_TRACK);
+			SelectTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 		}
+	}
+
+	@Override
+	public boolean processResult(String filePath) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			getGpxFile(filePath, gpxFile -> {
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+				boolean showOnMap = selectedGpxFile != null;
+				saveExistingGpx(gpxFile, showOnMap, false, true, FinalSaveAction.SHOW_IS_SAVED_FRAGMENT);
+				return true;
+			});
+		}
+		return true;
 	}
 
 	private void applyMovePointMode() {
