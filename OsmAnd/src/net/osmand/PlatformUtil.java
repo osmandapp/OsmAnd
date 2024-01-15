@@ -188,5 +188,4 @@ public class PlatformUtil {
 		return Xml.newSerializer();
 	}
 
-
 }
