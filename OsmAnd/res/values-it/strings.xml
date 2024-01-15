@@ -5577,4 +5577,5 @@
     <string name="map_widget_sun_position_desc">Questo widget mostra il tempo fino all\'alba o al tramonto, a seconda dell\'ora corrente.</string>
     <string name="previous_row_has_complex_widget">La riga precedente ha un widget complesso</string>
     <string name="complex_widget_alert">Il widget %1$s può essere posizionato solo sulla propria riga.</string>
+    <string name="shared_string_road_maps">Mappe stradali</string>
 </resources>

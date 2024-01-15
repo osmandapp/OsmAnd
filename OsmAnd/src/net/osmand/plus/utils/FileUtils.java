@@ -1,11 +1,13 @@
 package net.osmand.plus.utils;
 
+import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
 import static net.osmand.IndexConstants.DOWNLOAD_EXT;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
 import static net.osmand.IndexConstants.MAPS_PATH;
 import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
 import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
 import static net.osmand.IndexConstants.TEMP_DIR;
@@ -352,6 +354,13 @@ public class FileUtils {
 			parent.mkdirs();
 		}
 		return from.renameTo(to);
+	}
+
+	@NonNull
+	public static File getBackupFileForCustomAppMode(@NonNull OsmandApplication app, @NonNull String appModeKey) {
+		String fileName = appModeKey + OSMAND_SETTINGS_FILE_EXT;
+		File backupDir = FileUtils.getExistingDir(app, BACKUP_INDEX_DIR);
+		return new File(backupDir, fileName);
 	}
 
 	public interface RenameCallback {
