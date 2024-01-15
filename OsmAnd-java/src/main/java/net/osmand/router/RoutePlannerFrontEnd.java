@@ -830,12 +830,15 @@ public class RoutePlannerFrontEnd {
 			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
 			HHNetworkRouteRes r = null;
 			Double dir = ctx.config.initialDirection ;
-			if (!intermediatesEmpty) {
-				ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty in case of inter-points
-			}
 			for (int i = 0; i < targets.size(); i++) {
+				if (!intermediatesEmpty && i > 0) {
+					ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty for inter-points only (*0.5)
+				}
 				HHNetworkRouteRes res = calculateHHRoute(routePlanner, ctx, i == 0 ? start : targets.get(i - 1),
 						targets.get(i), dir);
+				if (!intermediatesEmpty && i > 0) {
+					ctx.config.penaltyForReverseDirection *= 2; // get back reverse-penalty
+				}
 				if (r == null) {
 					r = res;
 				} else {
