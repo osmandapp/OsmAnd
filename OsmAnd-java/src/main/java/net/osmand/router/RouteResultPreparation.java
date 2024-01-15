@@ -1749,7 +1749,7 @@ public class RouteResultPreparation {
 		if (oneLane) {
 			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
 		} else {
-			int ls = currentLanesCount + rs.leftLanes + rs.rightLanes;
+			int ls = rs.leftLanes + currentLanesCount + rs.rightLanes;
 			lanes = new int[ls];
 			for (int it = 0; it < ls; it++) {
 				if (it < rs.leftLanes) {
@@ -1766,11 +1766,15 @@ public class RouteResultPreparation {
 					if (laneType != TurnType.C) {
 						lanes[it] = TurnType.getNext(laneType) << 1;
 					} else {
-						lanes[it] = TurnType.C << 1;
+						if (it == rs.leftLanes + currentLanesCount && currentLanesCount < prevLanesCount) {
+							lanes[it] = getTurnByAngle(rs.attachedAngles.get(rs.leftLanes + it - currentLanesCount)) << 1;
+						} else {
+							lanes[it] = TurnType.C << 1;
+						}
 					}
 				} else {
 					// active lane
-					if (currentLanesCount == 1) {
+					if (currentLanesCount == 1 && rs.rightLanes == 0 ) {
 						int[] combined = createCombinedTurnTypeForSingleLane(rs, deviation);
 						lanes[it] = combined[0];
 					} else {
