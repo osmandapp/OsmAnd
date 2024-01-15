@@ -19,6 +19,7 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -169,7 +170,7 @@ public class SearchHistoryHelper {
 			if (pd.isCustomPoiFilter()) {
 				app.getPoiFilters().markHistory(pd.getName(), false);
 			}
-			loadedEntries = Algorithms.removeFromList(loadedEntries, model);
+			loadedEntries = CollectionUtils.removeFromList(loadedEntries, model);
 			mp.remove(pd);
 		}
 	}
@@ -202,7 +203,7 @@ public class SearchHistoryHelper {
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.update(model);
 			} else {
-				loadedEntries = Algorithms.addToList(loadedEntries, model);
+				loadedEntries = CollectionUtils.addToList(loadedEntries, model);
 				mp.put(model.getName(), model);
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.add(model);

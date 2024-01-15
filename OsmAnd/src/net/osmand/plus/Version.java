@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.core.android.NativeCore;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -142,7 +143,7 @@ public class Version {
 	}
 
 	public static boolean isFreeVersion(@NonNull OsmandApplication app) {
-		return Algorithms.equalsToAny(app.getPackageName(), FREE_VERSION_NAME, FREE_DEV_VERSION_NAME) || isHuawei();
+		return CollectionUtils.equalsToAny(app.getPackageName(), FREE_VERSION_NAME, FREE_DEV_VERSION_NAME) || isHuawei();
 	}
 
 	public static boolean isFullVersion(@NonNull OsmandApplication app) {
@@ -167,7 +168,7 @@ public class Version {
 	}
 
 	public static boolean isTripltekBuild() {
-		return Algorithms.equalsToAny(TRIPLTEK_NAME, Build.BRAND, Build.MANUFACTURER);
+		return CollectionUtils.equalsToAny(TRIPLTEK_NAME, Build.BRAND, Build.MANUFACTURER);
 	}
 
 	public static String getVersionForTracker(@NonNull OsmandApplication app) {

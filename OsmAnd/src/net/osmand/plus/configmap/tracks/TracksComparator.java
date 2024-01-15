@@ -18,7 +18,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.ComparableTracksGroup;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -190,7 +190,7 @@ public class TracksComparator implements Comparator<Object> {
 	}
 
 	private boolean shouldCheckAnalysis() {
-		return !Algorithms.equalsToAny(sortMode, NAME_ASCENDING, NAME_DESCENDING, LAST_MODIFIED);
+		return !CollectionUtils.equalsToAny(sortMode, NAME_ASCENDING, NAME_DESCENDING, LAST_MODIFIED);
 	}
 
 	@Nullable

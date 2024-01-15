@@ -12,6 +12,7 @@ import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class GpxDisplayGroup {
 	}
 
 	public void addDisplayItems(@NonNull List<GpxDisplayItem> items) {
-		displayItems = Algorithms.addAllToList(displayItems, items);
+		displayItems = CollectionUtils.addAllToList(displayItems, items);
 	}
 
 	public void clearDisplayItems() {

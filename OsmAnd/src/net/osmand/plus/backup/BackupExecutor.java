@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,17 +53,17 @@ public class BackupExecutor extends ThreadPoolExecutor {
 	}
 
 	public void addListener(@NonNull BackupExecutorListener listener) {
-		listeners = Algorithms.addToList(listeners, listener);
+		listeners = CollectionUtils.addToList(listeners, listener);
 	}
 
 	public void removeListener(@NonNull BackupExecutorListener listener) {
-		listeners = Algorithms.removeFromList(listeners, listener);
+		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
 	public void runCommand(@NonNull BackupCommand command) {
 		updateActiveCommands();
 		if (command.getStatus() == AsyncTask.Status.PENDING) {
-			activeCommands = Algorithms.addToList(activeCommands, command);
+			activeCommands = CollectionUtils.addToList(activeCommands, command);
 			command.executeOnExecutor(this);
 		}
 	}
@@ -121,6 +121,6 @@ public class BackupExecutor extends ThreadPoolExecutor {
 				commandsToRemove.add(command);
 			}
 		}
-		activeCommands = Algorithms.removeAllFromList(activeCommands, commandsToRemove);
+		activeCommands = CollectionUtils.removeAllFromList(activeCommands, commandsToRemove);
 	}
 }
