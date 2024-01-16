@@ -160,7 +160,7 @@ public class TrackTabsHelper {
 	}
 
 	@NonNull
-	private TrackTab getFoldersTab(TrackFolder folder) {
+	private TrackTab getFoldersTab(@NonNull TrackFolder folder) {
 		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
 		trackTab.items.add(TYPE_SORT_TRACKS);
 		trackTab.items.addAll(folder.getSubFolders());

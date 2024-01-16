@@ -24,14 +24,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.GpxDialogs;
-import net.osmand.plus.track.SelectTrackFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
-public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackFragment.GpxFileSelectionListener {
+public class SimulateLocationFragment extends BaseOsmAndFragment implements SelectTrackTabsFragment.GpxFileSelectionListener {
 
 	public static final String TAG = SimulateLocationFragment.class.getSimpleName();
 
@@ -161,7 +161,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 			updateCard();
 			return true;
 		}, nightMode));
-		trackButton.setOnClickListener(v -> SelectTrackFragment.showInstance(requireActivity().getSupportFragmentManager(), this));
+		trackButton.setOnClickListener(v -> SelectTrackTabsFragment.showInstance(requireActivity().getSupportFragmentManager(), this));
 		TextView trackTextview = trackItem.findViewById(R.id.title);
 		trackTextview.setText(R.string.shared_string_gpx_track);
 
@@ -280,7 +280,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	@Override
-	public void onSelectGpxFile(GPXFile gpxFile) {
+	public void onSelectGpxFile(@NonNull GPXFile gpxFile) {
 		this.gpxFile = gpxFile;
 		updateCard();
 	}

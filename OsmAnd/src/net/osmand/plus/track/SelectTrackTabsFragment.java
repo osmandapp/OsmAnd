@@ -27,13 +27,12 @@ import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 
-import java.io.File;
 import java.util.List;
 import java.util.Set;
 
-public class SelectTrackFragment extends BaseTracksFragment {
+public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 
-	public static final String TAG = SelectTrackFragment.class.getSimpleName();
+	public static final String TAG = SelectTrackTabsFragment.class.getSimpleName();
 
 	private Object fileSelectionListener;
 
@@ -145,7 +144,7 @@ public class SelectTrackFragment extends BaseTracksFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SelectTrackFragment fragment = new SelectTrackFragment();
+			SelectTrackTabsFragment fragment = new SelectTrackTabsFragment();
 			fragment.fileSelectionListener = fileSelectionListener;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
@@ -153,6 +152,6 @@ public class SelectTrackFragment extends BaseTracksFragment {
 	}
 
 	public interface GpxFileSelectionListener {
-		void onSelectGpxFile(GPXFile gpxFile);
+		void onSelectGpxFile(@NonNull GPXFile gpxFile);
 	}
 }

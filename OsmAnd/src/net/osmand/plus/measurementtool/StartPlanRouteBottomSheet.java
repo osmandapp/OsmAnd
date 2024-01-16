@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 import static net.osmand.plus.track.helpers.GpxUiHelper.getSortedGPXFilesInfo;
 
 import android.app.Activity;
@@ -29,9 +28,8 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import net.osmand.plus.track.GpxTrackAdapter;
-import net.osmand.plus.track.SelectTrackFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -87,7 +85,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 					MapActivity mapActivity = (MapActivity) getActivity();
 					if (mapActivity != null) {
 						hideBottomSheet();
-						SelectTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+						SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 					}
 				})
 				.create();

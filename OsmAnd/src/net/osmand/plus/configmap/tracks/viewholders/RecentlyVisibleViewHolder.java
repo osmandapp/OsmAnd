@@ -13,7 +13,7 @@ import net.osmand.plus.configmap.tracks.TrackTabsHelper;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.track.BaseTracksFragment;
+import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -24,10 +24,10 @@ public class RecentlyVisibleViewHolder extends RecyclerView.ViewHolder {
 	private final OsmandApplication app;
 	private final TextView title;
 	private final CheckBox checkbox;
-	private final BaseTracksFragment fragment;
+	private final BaseTracksTabsFragment fragment;
 	private final boolean nightMode;
 
-	public RecentlyVisibleViewHolder(@NonNull View view, @NonNull BaseTracksFragment fragment, boolean nightMode) {
+	public RecentlyVisibleViewHolder(@NonNull View view, @NonNull BaseTracksTabsFragment fragment, boolean nightMode) {
 		super(view);
 		this.fragment = fragment;
 		this.nightMode = nightMode;

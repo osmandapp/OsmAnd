@@ -42,7 +42,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.settings.enums.TracksSortMode;
-import net.osmand.plus.track.BaseTracksFragment;
+import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -65,11 +65,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class TracksFragment extends BaseTracksFragment implements LoadTracksListener,
+public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTracksListener,
 		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
 		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
-	public static final String TAG = TracksFragment.class.getSimpleName();
+	public static final String TAG = TracksTabsFragment.class.getSimpleName();
 
 	private ImageView searchButton;
 
@@ -457,7 +457,7 @@ public class TracksFragment extends BaseTracksFragment implements LoadTracksList
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable PreselectedTabParams params) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			TracksFragment fragment = new TracksFragment();
+			TracksTabsFragment fragment = new TracksTabsFragment();
 			fragment.preselectedTabParams = params;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);

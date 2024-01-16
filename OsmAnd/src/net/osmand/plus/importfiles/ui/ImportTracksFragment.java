@@ -38,7 +38,7 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
@@ -468,9 +468,9 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 
 	private void dismissAndOpenTracks() {
 		FragmentActivity activity = getActivity();
-		TracksFragment tracksFragment = null;
+		TracksTabsFragment tracksFragment = null;
 		if (activity instanceof MapActivity) {
-			tracksFragment = ((MapActivity) activity).getFragmentsHelper().getFragment(TracksFragment.TAG);
+			tracksFragment = ((MapActivity) activity).getFragmentsHelper().getFragment(TracksTabsFragment.TAG);
 		}
 		if (!(activity instanceof MyPlacesActivity) && tracksFragment == null) {
 			openTracksTabInMyPlaces();

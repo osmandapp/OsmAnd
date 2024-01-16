@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
@@ -19,7 +20,7 @@ import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
-import net.osmand.plus.track.BaseTracksFragment;
+import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -44,13 +45,13 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private boolean selectionMode = true;
 	private boolean selectTrackMode;
 	private TrackTab trackTab;
-	private final BaseTracksFragment fragment;
+	private final BaseTracksTabsFragment fragment;
 	protected final boolean nightMode;
 	private EmptyTracksListener emptyTracksListener;
 	private TrackSelectionListener trackSelectionListener;
 	private SortTracksListener sortTracksListener;
 
-	public TracksAdapter(@NonNull Context context, @NonNull TrackTab trackTab, @NonNull BaseTracksFragment fragment, boolean nightMode) {
+	public TracksAdapter(@NonNull Context context, @NonNull TrackTab trackTab, @NonNull BaseTracksTabsFragment fragment, boolean nightMode) {
 		this.trackTab = trackTab;
 		this.fragment = fragment;
 		this.nightMode = nightMode;
@@ -70,15 +71,15 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.selectTrackMode = selectTrackMode;
 	}
 
-	public void setEmptyTracksListener(EmptyTracksListener emptyTracksListener) {
+	public void setEmptyTracksListener(@Nullable EmptyTracksListener emptyTracksListener) {
 		this.emptyTracksListener = emptyTracksListener;
 	}
 
-	public void setTrackSelectionListener(TrackSelectionListener trackSelectionListener) {
+	public void setTrackSelectionListener(@Nullable TrackSelectionListener trackSelectionListener) {
 		this.trackSelectionListener = trackSelectionListener;
 	}
 
-	public void setSortTracksListener(SortTracksListener sortTracksListener) {
+	public void setSortTracksListener(@Nullable SortTracksListener sortTracksListener) {
 		this.sortTracksListener = sortTracksListener;
 	}
 

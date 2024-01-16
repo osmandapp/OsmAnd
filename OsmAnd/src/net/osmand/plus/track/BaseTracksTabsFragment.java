@@ -1,7 +1,8 @@
 package net.osmand.plus.track;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.*;
+import static net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
+import static net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.Status;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 
@@ -65,7 +66,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public abstract class BaseTracksFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
+public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment implements LoadTracksListener,
 		SelectionHelperProvider<TrackItem>, OnTrackFileMoveListener, RenameCallback,
 		TrackSelectionListener, SortTracksListener, EmptyTracksListener, SelectGpxTaskListener {
 
@@ -80,6 +81,28 @@ public abstract class BaseTracksFragment extends BaseOsmAndDialogFragment implem
 	protected ProgressBar progressBar;
 	protected TracksTabAdapter adapter;
 	protected int tabSize;
+
+	@Override
+	protected boolean isUsedOnMap() {
+		return true;
+	}
+
+	@ColorRes
+	public int getStatusBarColorId() {
+		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
+		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
+	}
+
+	@NonNull
+	public TrackTabsHelper getTrackTabsHelper() {
+		return trackTabsHelper;
+	}
+
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
+		return itemsSelectionHelper;
+	}
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -344,27 +367,4 @@ public abstract class BaseTracksFragment extends BaseOsmAndDialogFragment implem
 	@Override
 	public void fileRenamed(@NonNull File src, @NonNull File dest) {
 	}
-
-	@NonNull
-	public TrackTabsHelper getTrackTabsHelper() {
-		return trackTabsHelper;
-	}
-
-	@NonNull
-	@Override
-	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
-		return itemsSelectionHelper;
-	}
-
-	@ColorRes
-	public int getStatusBarColorId() {
-		AndroidUiHelper.setStatusBarContentColor(getView(), nightMode);
-		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
-	}
-
-	@Override
-	protected boolean isUsedOnMap() {
-		return true;
-	}
-
 }

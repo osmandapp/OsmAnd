@@ -28,6 +28,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
@@ -37,8 +39,8 @@ import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksAdapter;
 import net.osmand.plus.configmap.tracks.TracksComparator;
-import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder;
-import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder;
+import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
+import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
@@ -51,7 +53,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implements OsmAndLocationProvider.OsmAndCompassListener, OsmAndLocationProvider.OsmAndLocationListener, TrackItemsContainer, TrackViewHolder.TrackSelectionListener, SortTracksViewHolder.SortTracksListener {
+public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
+		OsmAndLocationListener, TrackItemsContainer, TrackSelectionListener, SortTracksListener {
 
 	public static final String TAG = SelectTrackFolderFragment.class.getSimpleName();
 
@@ -138,7 +141,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	}
 
 	private void setupAdapter() {
-		BaseTracksFragment fragment = (BaseTracksFragment) getTargetFragment();
+		BaseTracksTabsFragment fragment = (BaseTracksTabsFragment) getTargetFragment();
 		if (fragment != null) {
 			adapter = new TracksAdapter(requireContext(), getUpdatedTrackTab(), fragment, nightMode);
 			adapter.setSelectionMode(fragment.selectionMode());
@@ -263,16 +266,16 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 		TrackItem firstTrackItem = trackItems.iterator().next();
 		if (fileSelectionListener instanceof CallbackWithObject) {
 			((CallbackWithObject<String>) fileSelectionListener).processResult(firstTrackItem.getPath());
-		} else if (fileSelectionListener instanceof SelectTrackFragment.GpxFileSelectionListener) {
+		} else if (fileSelectionListener instanceof SelectTrackTabsFragment.GpxFileSelectionListener) {
 			GpxSelectionHelper.getGpxFile(requireActivity(), firstTrackItem.getFile(), true, result -> {
-				((SelectTrackFragment.GpxFileSelectionListener) fileSelectionListener).onSelectGpxFile(result);
+				((SelectTrackTabsFragment.GpxFileSelectionListener) fileSelectionListener).onSelectGpxFile(result);
 				return true;
 			});
 		}
 		dismiss();
-		Fragment selectTrackFragment = requireActivity().getSupportFragmentManager().findFragmentByTag(SelectTrackFragment.TAG);
-		if (selectTrackFragment instanceof SelectTrackFragment) {
-			((SelectTrackFragment) selectTrackFragment).dismiss();
+		Fragment selectTrackFragment = requireActivity().getSupportFragmentManager().findFragmentByTag(SelectTrackTabsFragment.TAG);
+		if (selectTrackFragment instanceof SelectTrackTabsFragment) {
+			((SelectTrackTabsFragment) selectTrackFragment).dismiss();
 		}
 	}
 
@@ -301,8 +304,8 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 		adapter.notifyDataSetChanged();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, BaseTracksFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
-									Object fileSelectionListener, TrackFolder baseTrackFolder, TrackFolder currentTrackFolder) {
+	public static void showInstance(@NonNull FragmentManager manager, BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
+	                                Object fileSelectionListener, TrackFolder baseTrackFolder, TrackFolder currentTrackFolder) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackFolderFragment fragment = new SelectTrackFolderFragment();
 			fragment.sortMode = sortMode;

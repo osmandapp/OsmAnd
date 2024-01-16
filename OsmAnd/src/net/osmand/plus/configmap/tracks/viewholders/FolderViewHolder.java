@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 public class FolderViewHolder extends RecyclerView.ViewHolder {
+
 	private final OsmandApplication app;
 	private final TrackViewHolder.TrackSelectionListener listener;
 	private final boolean nightMode;
@@ -51,10 +52,6 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
 		title.setText(trackFolder.getName(app));
 		imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, ColorUtilities.getDefaultIconColor(app, nightMode)));
 
-		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), false);
-		AndroidUiHelper.updateVisibility(menuButton, false);
-		AndroidUiHelper.updateVisibility(directionIcon, false);
-
 		int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
 		AndroidUtils.setMargins(params, margin, 0, margin, 0);
@@ -64,12 +61,16 @@ public class FolderViewHolder extends RecyclerView.ViewHolder {
 				listener.onTrackFolderSelected(trackFolder);
 			}
 		});
-		AndroidUiHelper.updateVisibility(divider, showDivider);
 
 		long lastModified = trackFolder.getLastModified();
 		if (lastModified > 0) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
 			description.setText(format.format(new Date(lastModified)));
 		}
+
+		AndroidUiHelper.updateVisibility(divider, showDivider);
+		AndroidUiHelper.updateVisibility(menuButton, false);
+		AndroidUiHelper.updateVisibility(directionIcon, false);
+		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), false);
 	}
 }

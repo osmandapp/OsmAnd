@@ -7,7 +7,6 @@ import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
 import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
@@ -96,7 +95,7 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.MapPosition;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.SelectTrackFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
 import net.osmand.plus.track.fragments.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.fragments.TrackAltitudeBottomSheet;
@@ -1594,7 +1593,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private void showAddToTrackDialog(MapActivity mapActivity) {
 		if (mapActivity != null) {
-			SelectTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
 		}
 	}
 
