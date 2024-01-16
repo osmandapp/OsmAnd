@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -545,24 +546,27 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private View createNavigationIconView(NavigationIcon navigationIcon, ViewGroup rootView) {
-		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
-				.inflate(R.layout.preference_select_icon_button, rootView, false);
-		LayerDrawable navigationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
-		if (navigationIconDrawable != null) {
-			DrawableCompat.setTint(DrawableCompat.wrap(navigationIconDrawable.getDrawable(1)),
-					changedProfile.getActualColor());
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), isNightMode());
+		FrameLayout navigationIconView = (FrameLayout) inflater.inflate(R.layout.preference_select_icon_button, rootView, false);
+		LayerDrawable navigationDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
+		if (navigationDrawable != null) {
+			Drawable topDrawable = DrawableCompat.wrap(navigationDrawable.getDrawable(1));
+			DrawableCompat.setTint(topDrawable, changedProfile.getActualColor());
 		}
 		ImageView imageView = navigationIconView.findViewById(R.id.icon);
-		imageView.setImageDrawable(navigationIconDrawable);
+		imageView.setImageDrawable(navigationDrawable);
 		Matrix matrix = new Matrix();
 		imageView.setScaleType(ImageView.ScaleType.MATRIX);
-		matrix.postRotate((float) -90, imageView.getDrawable().getIntrinsicWidth() / 2,
-				imageView.getDrawable().getIntrinsicHeight() / 2);
+		float width = imageView.getDrawable().getIntrinsicWidth() / 2f;
+		float height = imageView.getDrawable().getIntrinsicHeight() / 2f;
+		matrix.postRotate((float) -90, width, height);
 		imageView.setImageMatrix(matrix);
+
 		ImageView coloredRect = navigationIconView.findViewById(R.id.backgroundRect);
-		AndroidUtils.setBackground(coloredRect,
-				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
-						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+		Drawable coloredDrawable = UiUtilities.tintDrawable(
+				AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
+				ColorUtilities.getColor(app, R.color.icon_color_default_light, 0.1f));
+		AndroidUtils.setBackground(coloredRect, coloredDrawable);
 		coloredRect.setOnClickListener(v -> {
 			if (navigationIcon != changedProfile.navigationIcon) {
 				setVerticalScrollBarEnabled(false);

@@ -8,7 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -205,13 +204,12 @@ public class UiUtilities {
 				coloredDrawable = coloredDrawable.getConstantState().newDrawable();
 			}
 			coloredDrawable.mutate();
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && coloredDrawable instanceof RippleDrawable) {
+			if (coloredDrawable instanceof RippleDrawable) {
 				((RippleDrawable) coloredDrawable).setColor(ColorStateList.valueOf(color));
 			} else {
 				DrawableCompat.setTint(coloredDrawable, color);
 			}
 		}
-
 		return coloredDrawable;
 	}
 
