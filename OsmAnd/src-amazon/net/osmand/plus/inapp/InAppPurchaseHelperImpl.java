@@ -393,7 +393,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 
 				private void onSubscriptionExpired() {
-					if (!isDepthContoursPurchased(ctx)) {
+					if (!InAppPurchaseUtils.isDepthContoursPurchased(ctx)) {
 						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 					}
 				}
