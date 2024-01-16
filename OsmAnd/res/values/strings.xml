@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_all_tracks">All tracks</string>
     <string name="precise_distance_numbers">Precise distance numbers</string>
     <string name="any_connected">Any connected</string>
     <string name="any_connected_with_device">Any connected: %s</string>

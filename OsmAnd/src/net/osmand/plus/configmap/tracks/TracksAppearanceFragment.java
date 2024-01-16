@@ -377,8 +377,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			((MapActivity) activity).refreshMapComplete();
 		}
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof TracksFragment) {
-			((TracksFragment) fragment).updateTabsContent();
+		if (fragment instanceof TracksTabsFragment) {
+			((TracksTabsFragment) fragment).updateTabsContent();
 		} else if (fragment instanceof TracksSelectionFragment) {
 			((TracksSelectionFragment) fragment).dismiss();
 		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
