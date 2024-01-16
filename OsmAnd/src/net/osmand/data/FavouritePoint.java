@@ -447,6 +447,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.name = getName();
 		point.desc = getDescription();
 		point.comment = getComment();
+		point.link = getLink();
 
 		if (!Algorithms.isEmpty(getCategory())) {
 			point.category = getCategory();

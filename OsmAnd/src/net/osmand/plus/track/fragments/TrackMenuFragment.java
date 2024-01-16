@@ -108,7 +108,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.cards.AuthorCard;
 import net.osmand.plus.track.cards.CopyrightCard;
 import net.osmand.plus.track.cards.DescriptionCard;
-import net.osmand.plus.track.cards.ExtensionsCard;
+import net.osmand.plus.track.cards.MetadataExtensionsCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
 import net.osmand.plus.track.cards.OverviewCard;
@@ -185,7 +185,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private GpxInfoCard gpxInfoCard;
 	private AuthorCard authorCard;
 	private CopyrightCard copyrightCard;
-	private ExtensionsCard extensionsCard;
+	private MetadataExtensionsCard metadataExtensionsCard;
 	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
@@ -779,20 +779,20 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (shouldReattachCards && authorCard != null && authorCard.getView() != null) {
 			reattachCard(cardsContainer, authorCard);
 		} else {
-			authorCard = new AuthorCard(getMapActivity(), selectedGpxFile.getGpxFile(), nightMode);
+			authorCard = new AuthorCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
 			cardsContainer.addView(authorCard.build(mapActivity));
 		}
 		if (shouldReattachCards && copyrightCard != null && copyrightCard.getView() != null) {
 			reattachCard(cardsContainer, copyrightCard);
 		} else {
-			copyrightCard = new CopyrightCard(getMapActivity(), selectedGpxFile.getGpxFile(), nightMode);
+			copyrightCard = new CopyrightCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
 			cardsContainer.addView(copyrightCard.build(mapActivity));
 		}
-		if (shouldReattachCards && extensionsCard != null && extensionsCard.getView() != null) {
-			reattachCard(cardsContainer, extensionsCard);
+		if (shouldReattachCards && metadataExtensionsCard != null && metadataExtensionsCard.getView() != null) {
+			reattachCard(cardsContainer, metadataExtensionsCard);
 		} else {
-			extensionsCard = new ExtensionsCard(getMapActivity(), selectedGpxFile.getGpxFile(), nightMode);
-			cardsContainer.addView(extensionsCard.build(mapActivity));
+			metadataExtensionsCard = new MetadataExtensionsCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
+			cardsContainer.addView(metadataExtensionsCard.build(mapActivity));
 		}
 	}
 
@@ -1407,8 +1407,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (copyrightCard != null) {
 			copyrightCard.updateContent();
 		}
-		if (extensionsCard != null) {
-			extensionsCard.updateContent();
+		if (metadataExtensionsCard != null) {
+			metadataExtensionsCard.updateContent();
 		}
 		updatePointGroupsCard();
 		setupCards(true);
