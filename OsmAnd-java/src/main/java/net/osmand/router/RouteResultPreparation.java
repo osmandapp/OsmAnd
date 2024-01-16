@@ -1647,14 +1647,14 @@ public class RouteResultPreparation {
 		rs.attachedAngles = new ArrayList<>();
 		for (RouteSegmentResult attached : attachedRoutes) {
 			boolean restricted = false;
-			for(int k = 0; k < prevSegm.getObject().getRestrictionLength(); k++) {
-				if(prevSegm.getObject().getRestrictionId(k) == attached.getObject().getId() && 
+			for (int k = 0; k < prevSegm.getObject().getRestrictionLength(); k++) {
+				if (prevSegm.getObject().getRestrictionId(k) == attached.getObject().getId() &&
 						prevSegm.getObject().getRestrictionType(k) <= MapRenderingTypes.RESTRICTION_NO_STRAIGHT_ON) {
 					restricted = true;
 					break;
 				}
 			}
-			if(restricted) {
+			if (restricted) {
 				continue;
 			}
 			double ex = MapUtils.degreesDiff(attached.getBearingBegin(), currentSegm.getBearingBegin());
@@ -1716,7 +1716,9 @@ public class RouteResultPreparation {
 					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
 				}
 			}
-			rs.attachedAngles.add(deviation);
+			for (int i = 0; i < lanes; i++) {
+				rs.attachedAngles.add(deviation);
+			}
 		}
 		return rs;
 	}
@@ -1758,16 +1760,20 @@ public class RouteResultPreparation {
 						// avoid repeat of turns, e.g. for TSLL get TL
 						lanes[it] = TurnType.getPrev(laneType) << 1;
 					} else {
-						// can be several straight directions
-						lanes[it] = TurnType.C << 1;
+						if (currentLanesCount + rs.rightLanes < prevLanesCount) {
+							lanes[it] = getTurnByAngle(rs.attachedAngles.get(it)) << 1;
+						} else {
+							// can be several straight directions
+							lanes[it] = TurnType.C << 1;
+						}
 					}
-				} else if (it >= rs.leftLanes + currentLanesCount) {
+				} else if (it > rs.leftLanes + currentLanesCount - 1) {
 					// lanes in right from active
 					if (laneType != TurnType.C) {
 						lanes[it] = TurnType.getNext(laneType) << 1;
 					} else {
-						if (it == rs.leftLanes + currentLanesCount && currentLanesCount < prevLanesCount) {
-							lanes[it] = getTurnByAngle(rs.attachedAngles.get(rs.leftLanes + it - currentLanesCount)) << 1;
+						if (rs.leftLanes + currentLanesCount < prevLanesCount) {
+							lanes[it] = getTurnByAngle(rs.attachedAngles.get(it - currentLanesCount)) << 1;
 						} else {
 							lanes[it] = TurnType.C << 1;
 						}
@@ -1801,9 +1807,14 @@ public class RouteResultPreparation {
 		boolean allStraight = rs.allAreStraight();
 		int[] lanes = new int[1];
 		int extraLanes = 0;
+		double prevAngle = Double.NaN;
 		// iterate from left to right turns
 		for (int i = size - 1; i >= 0; i--) {
 			double angle = rs.attachedAngles.get(i);
+			if (angle == prevAngle) {
+				continue;
+			}
+			prevAngle = angle;
 			int turn;
 			if (allStraight) {
 				// create fork intersection
