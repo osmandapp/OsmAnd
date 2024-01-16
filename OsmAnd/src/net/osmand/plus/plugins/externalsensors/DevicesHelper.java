@@ -93,7 +93,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	private boolean installAntPluginAsked;
 	private BluetoothAdapter bluetoothAdapter;
 	private BluetoothLeScanner bleScanner;
-	private ExternalSensorsPlugin externalSensorsPlugin;
+	private final ExternalSensorsPlugin externalSensorsPlugin;
 
 	DevicesHelper(@NonNull OsmandApplication app, @NonNull ExternalSensorsPlugin plugin) {
 		this.app = app;
@@ -236,7 +236,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 				return;
 			}
 			ScanRecord scanRecord = result.getScanRecord();
-			if (isSupportedBleDevice(scanRecord)) {
+			if (scanRecord != null && isSupportedBleDevice(scanRecord)) {
 				String address = result.getDevice().getAddress();
 				DevicesSettingsCollection.DeviceSettings settings = devicesSettingsCollection.getDeviceSettings(address);
 				String deviceName;
@@ -266,7 +266,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 		}
 	};
 
-	private boolean isSupportedBleDevice(ScanRecord scanRecord) {
+	private boolean isSupportedBleDevice(@NonNull ScanRecord scanRecord) {
 		List<ParcelUuid> uuids = scanRecord.getServiceUuids();
 		if (uuids != null) {
 			for (ParcelUuid uuid : uuids) {
@@ -379,7 +379,7 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	}
 
 	@Nullable
-	AbstractDevice<?> getDevice(@NonNull String deviceId) {
+	AbstractDevice<?> getAnyDevice(@NonNull String deviceId) {
 		for (AbstractDevice<?> device : getDevices()) {
 			if (Algorithms.stringsEqual(device.getDeviceId(), deviceId)) {
 				return device;
@@ -429,7 +429,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 						app.showShortToastMessage(R.string.device_connected, getFormattedDevicePropertyValue(device, NAME));
 					}
 				}
-				externalSensorsPlugin.onDeviceConnected(device.getDeviceId());
 				break;
 			case DEPENDENCY_NOT_INSTALLED:
 				if (isAntDevice(device)) {
@@ -456,7 +455,6 @@ public class DevicesHelper implements DeviceListener, DevicePreferencesListener 
 	public void onDeviceDisconnect(@NonNull AbstractDevice<?> device) {
 		LOG.debug(device + " disconnected");
 		app.showShortToastMessage(R.string.device_disconnected, getFormattedDevicePropertyValue(device, NAME));
-		externalSensorsPlugin.onDeviceDisconnected(device.getDeviceId());
 	}
 
 	@Override

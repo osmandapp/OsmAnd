@@ -54,19 +54,19 @@ public class ExternalSettingsWriteToTrackSettingsFragment extends BaseSettingsFr
 
 		if (Algorithms.isEmpty(deviceId)) {
 			deviceName = getString(R.string.shared_string_none);
-		} else if (ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
-			AbstractDevice<?> connectedDevice = plugin.getDevice(dataType.getSensorType());
-			StringBuilder builder = new StringBuilder(getString(R.string.any_connected));
-			if (connectedDevice != null) {
-				builder.append(": ").append(connectedDevice.getName());
-				deviceName = builder.toString();
-				deviceFound = true;
-			}
-		} else {
+		} else if (plugin.getDevice(deviceId) != null) {
 			AbstractDevice<?> device = plugin.getDevice(deviceId);
 			if (device != null) {
 				deviceName = device.getName();
 				deviceFound = true;
+			}
+		} else {
+			AbstractDevice<?> connectedDevice = plugin.getAnyDevice(dataType.getSensorType());
+			if (connectedDevice != null) {
+				deviceName = String.format(getString(R.string.any_connected_with_device), connectedDevice.getName());
+				deviceFound = true;
+			} else {
+				deviceName = getString(R.string.any_connected);
 			}
 		}
 		pref.setSummary(deviceName);

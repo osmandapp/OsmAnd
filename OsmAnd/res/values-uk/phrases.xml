@@ -1916,7 +1916,7 @@
     <string name="poi_street_cabinet_street_lighting">Вид шафи: вуличне освітлення</string>
     <string name="poi_ramp_luggage_no">Пандус для багажу: відсутній</string>
     <string name="poi_payment_westfalen_card_yes">Westfalen</string>
-    <string name="poi_artwork_type_mural">Вид: фреска</string>
+    <string name="poi_artwork_type_mural">Вид: мурал</string>
     <string name="poi_step_count">Кількість сходинок</string>
     <string name="poi_military_checkpoint">Військовий контрольно-пропускний пункт</string>
     <string name="poi_artwork_type_architecture">Вид: архітектура</string>
@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Поверхня: пластик</string>
     <string name="poi_surface_rubber">Поверхня: гума</string>
     <string name="poi_assembly_point">Точка збору</string>
-    <string name="poi_not_pt_shelter_yes">Усі, крім зупинок громадського транспорту</string>
+    <string name="poi_not_pt_shelter_yes">Зупинки (не для громадського транспорту)</string>
     <string name="poi_vehicle_designated">Призначено для вантажівок</string>
     <string name="poi_bicycle_designated">Призначено для велосипедів</string>
     <string name="poi_horse_designated">Призначено для коней</string>
@@ -4719,4 +4719,5 @@
     <string name="poi_state_approved">Стан: затверджено</string>
     <string name="poi_state_proposed">Стан: запропоновано</string>
     <string name="poi_state_main">Стан: основний</string>
+    <string name="poi_border_zone">Прикордонна смуга</string>
 </resources>

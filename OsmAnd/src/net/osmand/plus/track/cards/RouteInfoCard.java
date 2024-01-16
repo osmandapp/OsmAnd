@@ -15,6 +15,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,7 +31,6 @@ import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class RouteInfoCard extends MapBaseCard {
 		container.removeAllViews();
 
 		RouteKey routeKey = this.routeKey;
-		String routeTypeName = routeKey.type.getTag();
+		String routeTypeName = routeKey.type.getName();
 
 		String routeTypeToDisplay = capitalizeFirstLetterAndLowercase(routeTypeName);
 		routeTypeToDisplay = getActivityTypeStringPropertyName(app, routeTypeName, routeTypeToDisplay);
@@ -181,8 +181,7 @@ public class RouteInfoCard extends MapBaseCard {
 
 	@NonNull
 	private View addInfoRow(@NonNull ViewGroup container, @NonNull String key, @NonNull String value, boolean needLinks, boolean showDivider) {
-		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
-		View view = inflater.inflate(R.layout.list_item_with_descr, container, false);
+		View view = themedInflater.inflate(R.layout.list_item_with_descr, container, false);
 
 		TextView tvLabel = view.findViewById(R.id.description);
 		TextView tvContent = view.findViewById(R.id.title);
@@ -279,10 +278,10 @@ public class RouteInfoCard extends MapBaseCard {
 		}
 
 		@NonNull
-		public String getFormattedValue(@NonNull OsmandApplication app, @NonNull RouteType routeType) {
+		public String getFormattedValue(@NonNull OsmandApplication app, @NonNull OsmRouteType routeType) {
 			switch (key) {
 				case "network":
-					String network = getStringByProperty(app, "poi_route_" + routeType.getTag() + "_" + value + "_poi");
+					String network = getStringByProperty(app, "poi_route_" + routeType.getName() + "_" + value + "_poi");
 					return Algorithms.isEmpty(network) ? value : network;
 				case "wikipedia":
 					return WikiAlgorithms.getWikiUrl(value);

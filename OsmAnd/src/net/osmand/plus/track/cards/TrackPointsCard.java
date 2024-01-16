@@ -12,7 +12,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -197,8 +196,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	}
 
 	private void addActions() {
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		actionsView = inflater.inflate(R.layout.track_points_actions, listView, false);
+		actionsView = themedInflater.inflate(R.layout.track_points_actions, listView, false);
 		listView.addFooterView(actionsView);
 
 		setupActionsHeader();
@@ -430,8 +428,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			Context context = view.getContext();
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = LayoutInflater.from(context);
-				row = inflater.inflate(R.layout.track_points_group_item, parent, false);
+				row = themedInflater.inflate(R.layout.track_points_group_item, parent, false);
 			}
 
 			row.setOnClickListener(v -> {
@@ -529,8 +526,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = LayoutInflater.from(view.getContext());
-				row = inflater.inflate(R.layout.track_points_list_item, parent, false);
+				row = themedInflater.inflate(R.layout.track_points_list_item, parent, false);
 			}
 
 			GpxDisplayGroup group = getGroup(groupPosition);

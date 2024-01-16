@@ -3206,7 +3206,7 @@
     <string name="poi_location_underwater">Localização: submerso</string>
     <string name="poi_location_overground">Localização: à superfície</string>
     <string name="poi_location_overhead">Localização: suspenso</string>
-    <string name="poi_location_roof">Localização: teto</string>
+    <string name="poi_location_roof">Localização: telhado</string>
     <string name="poi_location_rooftop">Localização: telhado</string>
     <string name="poi_location_outdoor">Localização: externo</string>
     <string name="poi_location_indoor">Localização: interno</string>
@@ -4637,7 +4637,7 @@
     <string name="poi_osmand_vehicle_no">Acesso de veículos: não</string>
     <string name="poi_osmand_access_no">Acesso: não</string>
     <string name="poi_osmand_access_private">Acesso: privado</string>
-    <string name="poi_osmand_foot_private">Acesso de pedestre: privada</string>
+    <string name="poi_osmand_foot_private">Acesso de pedestre: privado</string>
     <string name="poi_osmand_bicycle_private">Acesso de bicicleta: privado</string>
     <string name="poi_osmand_motor_vehicle_private">Acesso de veículos motorizados: privado</string>
     <string name="poi_osmand_foot_no">Acesso de pedestre: não</string>

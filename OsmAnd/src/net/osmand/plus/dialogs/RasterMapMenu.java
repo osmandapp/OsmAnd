@@ -30,8 +30,6 @@ import org.jetbrains.annotations.NotNull;
 
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.OVERLAY;
 import static net.osmand.plus.plugins.rastermaps.LayerTransparencySeekbarMode.UNDERLAY;
-import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
-import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
 
 
 public class RasterMapMenu {
@@ -126,11 +124,11 @@ public class RasterMapMenu {
 						settings.SHOW_MAP_LAYER_PARAMETER.set(true);
 						MapTileLayer overlayLayer = plugin.getOverlayLayer();
 						if (overlayLayer != null) {
-							mapLayers.getMapControlsLayer().showParameterBar(overlayLayer);
+							mapLayers.getMapControlsLayer().getMapTransparencyHelper().showParameterBar(overlayLayer);
 						}
 					} else {
 						settings.SHOW_MAP_LAYER_PARAMETER.set(false);
-						mapLayers.getMapControlsLayer().hideParameterBar();
+						mapLayers.getMapControlsLayer().getMapTransparencyHelper().hideParameterBar();
 						updateTransparencyBarVisibility(isSeekbarVisible(app, RasterMapType.OVERLAY));
 					}
 				}
@@ -140,11 +138,11 @@ public class RasterMapMenu {
 			private void updateTransparencyBarVisibility(boolean visible) {
 				if (visible) {
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMode);
-					mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+					mapLayers.getMapControlsLayer().getMapTransparencyHelper().showTransparencyBar(mapTransparencyPreference);
 				} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMode)
 				{
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
-					mapLayers.getMapControlsLayer().hideTransparencyBar();
+					mapLayers.getMapControlsLayer().getMapTransparencyHelper().hideTransparencyBar();
 				}
 			}
 		};
@@ -165,7 +163,7 @@ public class RasterMapMenu {
 			OnIntegerValueChangedListener integerListener =
 					newValue -> {
 						mapTransparencyPreference.set(newValue);
-						mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySliderValue();
+						mapActivity.getMapLayers().getMapControlsLayer().getMapTransparencyHelper().updateTransparencySliderValue();
 						mapActivity.refreshMap();
 						return false;
 					};

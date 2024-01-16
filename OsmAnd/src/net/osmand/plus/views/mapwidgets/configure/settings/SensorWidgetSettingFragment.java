@@ -87,7 +87,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 	}
 
 	private void setupDataSource() {
-		if (sensorWidget != null && sensorWidget.getWidgetSensor() != null) {
+		if (sensorWidget != null) {
 			sourceDeviceId = sensorWidget.getDeviceId(appMode);
 		}
 	}
@@ -98,17 +98,19 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 			deviceIcon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_sensor, nightMode));
 			AbstractDevice<?> connectedDevice = null;
 			if (sensorWidget != null) {
-				if (sensorWidget.getWidgetSensor() != null) {
-					connectedDevice = sensorWidget.getWidgetSensor().getDevice();
+				if (sensorWidget.getWidgetDevice() != null) {
+					connectedDevice = sensorWidget.getWidgetDevice();
 				} else {
-					connectedDevice = plugin.getDevice(sensorWidget.getFieldType());
+					connectedDevice = plugin.getAnyDevice(sensorWidget.getFieldType());
 				}
 			}
-			StringBuilder builder = new StringBuilder(getString(R.string.any_connected));
+			String prompt;
 			if (connectedDevice != null) {
-				builder.append(": ").append(connectedDevice.getName());
+				prompt = String.format(getString(R.string.any_connected_with_device), connectedDevice.getName());
+			} else {
+				prompt = getString(R.string.any_connected);
 			}
-			((TextView) view.findViewById(R.id.device_name)).setText(builder);
+			((TextView) view.findViewById(R.id.device_name)).setText(prompt);
 		} else {
 			((TextView) view.findViewById(R.id.device_name)).setText(sourceDevice.getName());
 			DeviceType deviceType = sourceDevice.getDeviceType();

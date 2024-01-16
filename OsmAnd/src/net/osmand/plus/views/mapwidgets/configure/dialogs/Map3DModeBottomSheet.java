@@ -1,4 +1,4 @@
-package net.osmand.plus.views.mapwidgets.configure;
+package net.osmand.plus.views.mapwidgets.configure.dialogs;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 

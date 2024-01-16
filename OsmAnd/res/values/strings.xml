@@ -16,10 +16,12 @@
     <string name="shared_string_link">Link</string>
     <string name="shared_string_copyright">Copyright</string>
     <string name="shared_string_author">Author</string>
-    <string name="any_connected">Any connected</string>
     <string name="precise_distance_numbers">Precise distance numbers</string>
+    <string name="any_connected">Any connected</string>
+    <string name="any_connected_with_device">Any connected: %s</string>
     <string name="complex_widget_alert">%1$s widget can only be placed on its own row.</string>
     <string name="previous_row_has_complex_widget">Previous row has complex widget</string>
+    <string name="shared_string_road_maps">Road maps</string>
     <string name="shared_string_next_event">Next event</string>
     <string name="map_widget_sun_position_desc">This widget shows the time until sunrise or sunset, depending on the current time.</string>
     <string name="map_widget_sun_position">Sun position</string>

@@ -95,7 +95,6 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.CompassVisibilityBottomSheetDialogFragment.CompassVisibility;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -1411,6 +1410,7 @@ public class OsmandSettings {
 	{
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.CAR, true);
 		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 
 	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference(this, "interrupt_music", false).makeProfile();
@@ -1708,7 +1708,7 @@ public class OsmandSettings {
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
-		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_BEARING);
 	}
 
 	public boolean isCompassMode(@NonNull CompassMode compassMode) {
@@ -1897,15 +1897,18 @@ public class OsmandSettings {
 
 		Iterator<String> iterator = pages.iterator();
 		while (iterator.hasNext()) {
+			boolean pageSeparatorAdded = false;
 			String page = iterator.next();
-			for (String id : Arrays.asList(page.split(WIDGET_SEPARATOR))) {
+			for (String id : page.split(WIDGET_SEPARATOR)) {
 				if (WidgetType.isComplexWidget(id)) {
+					pageSeparatorAdded = true;
 					builder.append(id).append(PAGE_SEPARATOR);
 				} else {
+					pageSeparatorAdded = false;
 					builder.append(id).append(WIDGET_SEPARATOR);
 				}
 			}
-			if (iterator.hasNext() && !builder.toString().endsWith(PAGE_SEPARATOR)) {
+			if (iterator.hasNext() && !pageSeparatorAdded) {
 				builder.append(PAGE_SEPARATOR);
 			}
 		}
@@ -2761,7 +2764,7 @@ public class OsmandSettings {
 	 * map 3d mode
 	 */
 
-	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE_IN_3D_MODE, Map3DModeVisibility.values()).makeProfile().cache();
+	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE, Map3DModeVisibility.values()).makeProfile().cache();
 
 	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
 
@@ -3113,13 +3116,7 @@ public class OsmandSettings {
 
 	// UI boxes
 	public final CommonPreference<Boolean> TRANSPARENT_MAP_THEME =
-			new BooleanPreference(this, "transparent_map_theme", true).makeProfile();
-
-	{
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.CAR, false);
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
+			new BooleanPreference(this, "transparent_map_theme", false).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_STREET_NAME = new BooleanPreference(this, "show_street_name", false).makeProfile();
 

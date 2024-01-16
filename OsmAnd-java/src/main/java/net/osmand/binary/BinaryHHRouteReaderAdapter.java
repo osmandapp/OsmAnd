@@ -258,6 +258,9 @@ public class BinaryHHRouteReaderAdapter {
 			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.CLUSTERID_FIELD_NUMBER:
 				pnt.clusterId = codedIS.readInt32();
 				break;
+			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.PARTIALIND_FIELD_NUMBER:
+				pnt.incomplete = codedIS.readInt32() > 0;
+				break;
 			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.DUALPOINTID_FIELD_NUMBER:
 				dualIdPoint = codedIS.readInt32();
 				break;

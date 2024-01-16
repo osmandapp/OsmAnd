@@ -76,6 +76,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -95,6 +96,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int FOG_DEFAULT_COLOR = 0xffebe7e4;
+	public static final int SKY_DEFAULT_COLOR = 0xffffffff;
+	public static final int FOG_NIGHTMODE_COLOR = 0xff243060;
+	public static final int SKY_NIGHTMODE_COLOR = 0xff304080;
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 4;
@@ -723,7 +728,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getBaseZoom() {
 		MapRendererView mapRenderer = getMapRenderer();
-		return mapRenderer != null ? mapRenderer.getState().getZoomLevel().ordinal() : currentViewport.getZoom();
+		if (mapRenderer != null) {
+			return mapRenderer.getState().getZoomLevel().ordinal() + mapRenderer.getTileZoomOffset();
+		}
+		return currentViewport.getZoom();
 	}
 
 	public boolean isPinchZoomingOrRotating() {
@@ -759,42 +767,42 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void addMapLocationListener(@NonNull IMapLocationListener listener) {
 		if (!locationListeners.contains(listener)) {
-			locationListeners = Algorithms.addToList(locationListeners, listener);
+			locationListeners = CollectionUtils.addToList(locationListeners, listener);
 		}
 	}
 
 	public void removeMapLocationListener(@NonNull IMapLocationListener listener) {
-		locationListeners = Algorithms.removeFromList(locationListeners, listener);
+		locationListeners = CollectionUtils.removeFromList(locationListeners, listener);
 	}
 
 	public void addManualZoomChangeListener(@NonNull ManualZoomListener listener) {
 		if (!manualZoomListeners.contains(listener)) {
-			manualZoomListeners = Algorithms.addToList(manualZoomListeners, listener);
+			manualZoomListeners = CollectionUtils.addToList(manualZoomListeners, listener);
 		}
 	}
 
 	public void removeManualZoomListener(@NonNull ManualZoomListener listener) {
-		manualZoomListeners = Algorithms.removeFromList(manualZoomListeners, listener);
+		manualZoomListeners = CollectionUtils.removeFromList(manualZoomListeners, listener);
 	}
 
 	public void addElevationListener(@NonNull ElevationListener listener) {
 		if (!elevationListeners.contains(listener)) {
-			elevationListeners = Algorithms.addToList(elevationListeners, listener);
+			elevationListeners = CollectionUtils.addToList(elevationListeners, listener);
 		}
 	}
 
 	public void removeElevationListener(@NonNull ElevationListener listener) {
-		elevationListeners = Algorithms.removeFromList(elevationListeners, listener);
+		elevationListeners = CollectionUtils.removeFromList(elevationListeners, listener);
 	}
 
 	public void addViewportListener(@NonNull ViewportListener listener) {
 		if (!viewportListeners.contains(listener)) {
-			viewportListeners = Algorithms.addToList(viewportListeners, listener);
+			viewportListeners = CollectionUtils.addToList(viewportListeners, listener);
 		}
 	}
 
 	public void removeViewportListener(@NonNull ViewportListener listener) {
-		viewportListeners = Algorithms.removeFromList(viewportListeners, listener);
+		viewportListeners = CollectionUtils.removeFromList(viewportListeners, listener);
 	}
 
 	public void setOnDrawMapListener(@Nullable OnDrawMapListener listener) {
@@ -803,12 +811,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void addTouchListener(@NonNull TouchListener listener) {
 		if (!touchListeners.contains(listener)) {
-			touchListeners = Algorithms.addToList(touchListeners, listener);
+			touchListeners = CollectionUtils.addToList(touchListeners, listener);
 		}
 	}
 
 	public void removeTouchListener(@NonNull TouchListener listener) {
-		touchListeners = Algorithms.removeFromList(touchListeners, listener);
+		touchListeners = CollectionUtils.removeFromList(touchListeners, listener);
 	}
 
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
@@ -2052,6 +2060,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 
 		@Override
+		public void onStopChangingViewAngle() {
+			if (mapGestureAllowed(MapGestureType.TWO_POINTERS_TILT)) {
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null) {
+					notifyOnStopChangingElevation(mapRenderer.getElevationAngle());
+				}
+			}
+		}
+
+		@Override
 		public void onZoomStarted(PointF centerPoint) {
 			initialMultiTouchCenterPoint = centerPoint;
 			initialViewport = getCurrentRotatedTileBox().copy();
@@ -2204,6 +2222,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private void notifyOnElevationChanging(float angle) {
 		for (ElevationListener listener : elevationListeners) {
 			listener.onElevationChanging(angle);
+		}
+	}
+
+	private void notifyOnStopChangingElevation(float angle) {
+		for (ElevationListener listener : elevationListeners) {
+			listener.onStopChangingElevation(angle);
 		}
 	}
 
@@ -2366,5 +2390,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public interface ElevationListener {
 		void onElevationChanging(float angle);
+
+		void onStopChangingElevation(float angle);
 	}
 }

@@ -231,10 +231,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						name = pointDescription.getName();
 					}
 				}
-				mapActivity.getMapLayers().getMapControlsLayer().selectAddress(name, latitude, longitude, searchType);
+				mapActivity.getMapLayers().getMapActionsHelper().selectAddress(name, latitude, longitude, searchType);
 
 				dialogFragment.dismiss();
-				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu();
+				mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoMenu();
 			} else {
 				app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);

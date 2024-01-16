@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 enum TrackFolderOption {
 	DETAILS(R.string.shared_string_details, R.drawable.ic_action_info_dark),
@@ -37,7 +37,7 @@ enum TrackFolderOption {
 	}
 
 	public boolean shouldShowBottomDivider() {
-		return Algorithms.equalsToAny(this, SHOW_ALL_TRACKS, CHANGE_APPEARANCE, MOVE);
+		return CollectionUtils.equalsToAny(this, SHOW_ALL_TRACKS, CHANGE_APPEARANCE, MOVE);
 	}
 
 	@NonNull

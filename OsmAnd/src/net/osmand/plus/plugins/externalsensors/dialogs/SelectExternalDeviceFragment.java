@@ -30,6 +30,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment implements SelectDeviceListener, DeviceListener {
@@ -197,20 +198,15 @@ public class SelectExternalDeviceFragment extends ExternalDevicesBaseFragment im
 	}
 
 	private void updatePairedSensorsList() {
-		List<AbstractDevice<?>> devices = plugin.getPairedDevices();
 		List<AbstractDevice<?>> filteredDevices = plugin.getPairedDevicesByWidgetType(widgetDataFieldType);
-		if (filteredDevices.isEmpty()) {
-			if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
-				currentState = States.CONTENT;
-			} else {
-				currentState = States.NO_BLUETOOTH;
-			}
-		} else {
+		if (AndroidUtils.isBluetoothEnabled(requireActivity())) {
 			currentState = States.CONTENT;
 			app.runInUIThread(() -> {
 				appBar.setExpanded(false);
-				devicesListAdapter.setItems(filteredDevices);
+				devicesListAdapter.setItems(new ArrayList<>(filteredDevices));
 			});
+		} else {
+			currentState = States.NO_BLUETOOTH;
 		}
 		updateCurrentStateView();
 	}

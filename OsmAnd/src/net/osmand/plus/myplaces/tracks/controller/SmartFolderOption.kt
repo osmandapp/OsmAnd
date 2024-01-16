@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import net.osmand.plus.R
 import net.osmand.util.Algorithms
+import net.osmand.util.CollectionUtils
 
 internal enum class SmartFolderOption(
 	@field:StringRes @get:StringRes
@@ -30,7 +31,7 @@ internal enum class SmartFolderOption(
 	DELETE_FOLDER(R.string.delete_folder, R.drawable.ic_action_delete_dark);
 
 	fun shouldShowBottomDivider(): Boolean {
-		return Algorithms.equalsToAny(this, SHOW_ALL_TRACKS, EDIT_FILTER, EXPORT)
+		return CollectionUtils.equalsToAny(this, SHOW_ALL_TRACKS, EDIT_FILTER, EXPORT)
 	}
 
 	companion object {

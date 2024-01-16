@@ -39,10 +39,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -65,14 +65,11 @@ import net.osmand.plus.wikipedia.WikiAlgorithms;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -89,7 +86,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.zip.GZIPInputStream;
 
 
 public class AmenityUIHelper extends MenuBuilder {
@@ -190,7 +186,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
-			boolean needLinks = !(Algorithms.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
+			boolean needLinks = !(CollectionUtils.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
 			boolean isUrl = false;
@@ -460,7 +456,7 @@ public class AmenityUIHelper extends MenuBuilder {
 					if (icon == null) {
 						icon = getRowIcon(R.drawable.ic_action_note_dark);
 					}
-					boolean cuisineOrDish = Algorithms.equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
+					boolean cuisineOrDish = CollectionUtils.equalsToAny(e.getKey(), Amenity.CUISINE, Amenity.DISH);
 					CollapsableView collapsableView = getPoiTypeCollapsableView(view.getContext(), true,
 							categoryTypes, true, cuisineOrDish ? cuisineRow : null, type);
 					infoRows.add(new AmenityInfoRow(poiAdditionalCategoryName, icon,
@@ -1053,40 +1049,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			return null;
 		}
 		String str = additionalInfo.get(key);
-		str = unzipContent(str);
+		str = Amenity.unzipContent(str);
 		return str;
-	}
-
-	String unzipContent(String str) {
-		if (isContentZipped(str)) {
-			try {
-				int ind = 4;
-				byte[] bytes = new byte[str.length() - ind];
-				for (int i = ind; i < str.length(); i++) {
-					char ch = str.charAt(i);
-					bytes[i - ind] = (byte) ((int) ch - 128 - 32);
-				}
-				GZIPInputStream gzn = new GZIPInputStream(new ByteArrayInputStream(bytes));
-				BufferedReader br = new BufferedReader(new InputStreamReader(gzn, "UTF-8"));
-				StringBuilder bld = new StringBuilder();
-				String s;
-				while ((s = br.readLine()) != null) {
-					bld.append(s);
-				}
-				br.close();
-				str = bld.toString();
-				// ugly fix of temporary problem of map generation
-				if (isContentZipped(str)) {
-					str = unzipContent(str);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return str;
-	}
-
-	boolean isContentZipped(String str) {
-		return str != null && str.startsWith(" gz ");
 	}
 }

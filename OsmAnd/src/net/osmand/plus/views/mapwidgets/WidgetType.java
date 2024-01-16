@@ -25,6 +25,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
@@ -39,7 +40,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettings
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -188,7 +189,7 @@ public enum WidgetType {
 
 	public boolean isAllowed() {
 		if (this == ALTITUDE_MAP_CENTER) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 			return plugin != null && plugin.is3DMapsEnabled();
 		}
 		return true;
@@ -360,7 +361,7 @@ public enum WidgetType {
 	}
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
-		return Algorithms.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
+		return CollectionUtils.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
 	}
 
 	@NonNull

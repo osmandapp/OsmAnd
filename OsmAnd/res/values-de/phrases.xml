@@ -4593,7 +4593,7 @@
     <string name="poi_surface_plastic">Oberfläche: Plastik</string>
     <string name="poi_surface_rubber">Oberfläche: Gummi</string>
     <string name="poi_assembly_point">Sammelplatz</string>
-    <string name="poi_not_pt_shelter_yes">Alle außer Wartehäuschen für öffentliche Verkehrsmittel</string>
+    <string name="poi_not_pt_shelter_yes">Unterstand (nicht für öffentliche Verkehrsmittel)</string>
     <string name="poi_foot_designated">Ausgewiesen für Fußgänger</string>
     <string name="poi_horse_designated">Ausgewiesen für Pferde</string>
     <string name="poi_bicycle_designated">Ausgewiesen für Fahrräder</string>
@@ -4719,4 +4719,5 @@
     <string name="poi_state_approved">Status: genehmigt</string>
     <string name="poi_state_proposed">Status: vorgeschlagen</string>
     <string name="poi_state_main">Status: hauptsächlich</string>
+    <string name="poi_border_zone">Grenzgebiet</string>
 </resources>

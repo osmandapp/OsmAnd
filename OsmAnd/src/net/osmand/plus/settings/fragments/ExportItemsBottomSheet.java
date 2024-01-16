@@ -52,7 +52,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
@@ -79,13 +79,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = ExportItemsBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(ExportItemsBottomSheet.class);
 
-	private static final String SETTINGS_TYPE_KEY = "settings_type_key";
+	private static final String EXPORT_TYPE_KEY = "export_type_key";
 	private static final String EXPORT_MODE_KEY = "export_mode_key";
 
 	private OsmandApplication app;
 	private UiUtilities uiUtilities;
 
-	private ExportSettingsType type;
+	private ExportType type;
 	private final List<Object> allItems = new ArrayList<>();
 	private final List<Object> selectedItems = new ArrayList<>();
 
@@ -101,12 +101,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			exportMode = savedInstanceState.getBoolean(EXPORT_MODE_KEY);
-			type = ExportSettingsType.valueOf(savedInstanceState.getString(SETTINGS_TYPE_KEY));
+			type = ExportType.valueOf(savedInstanceState.getString(EXPORT_TYPE_KEY));
 		}
 		Fragment target = getTargetFragment();
 		if (target instanceof BaseSettingsListFragment) {
 			BaseSettingsListFragment fragment = (BaseSettingsListFragment) target;
-			List<Object> items = fragment.getItemsForType(type);
+			List<?> items = fragment.getItemsForType(type);
 			if (items != null) {
 				allItems.addAll(items);
 			}
@@ -133,19 +133,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 					.setChecked(selectedItems.contains(object))
 					.setButtonTintList(AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes))
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
-					.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							boolean checked = !item[0].isChecked();
-							item[0].setChecked(checked);
-							if (checked) {
-								selectedItems.add(item[0].getTag());
-							} else {
-								selectedItems.remove(item[0].getTag());
-							}
-							updateTitleView();
-							setupBottomSheetItem(item[0], item[0].getTag());
+					.setOnClickListener(v -> {
+						boolean checked = !item[0].isChecked();
+						item[0].setChecked(checked);
+						if (checked) {
+							selectedItems.add(item[0].getTag());
+						} else {
+							selectedItems.remove(item[0].getTag());
 						}
+						updateTitleView();
+						setupBottomSheetItem(item[0], item[0].getTag());
 					})
 					.setTag(object);
 			item[0] = builder.create();
@@ -163,7 +160,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(EXPORT_MODE_KEY, exportMode);
-		outState.putString(SETTINGS_TYPE_KEY, type.name());
+		outState.putString(EXPORT_TYPE_KEY, type.name());
 	}
 
 	private BaseBottomSheetItem createTitleItem() {
@@ -174,19 +171,16 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		selectedSize = view.findViewById(R.id.selected_size);
 		TextView textView = view.findViewById(R.id.title);
 		textView.setText(type.getTitleId());
-		view.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkBox.performClick();
-				boolean checked = checkBox.getState() == CHECKED;
-				if (checked) {
-					selectedItems.addAll(allItems);
-				} else {
-					selectedItems.clear();
-				}
-				updateTitleView();
-				updateItems();
+		view.findViewById(R.id.select_all_button).setOnClickListener(v -> {
+			checkBox.performClick();
+			boolean checked = checkBox.getState() == CHECKED;
+			if (checked) {
+				selectedItems.addAll(allItems);
+			} else {
+				selectedItems.clear();
 			}
+			updateTitleView();
+			updateItems();
 		});
 		setupDescription(view);
 		updateTitleView();
@@ -204,7 +198,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
 		String description;
-		if (type == ExportSettingsType.OFFLINE_MAPS && !selectedItems.isEmpty()) {
+		if (type != null && type.isMap() && !selectedItems.isEmpty()) {
 			String size = AndroidUtils.formatSize(app, calculateSelectedItemsSize());
 			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, selected, size);
@@ -259,12 +253,12 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportSettingsType type,
+	public static void showInstance(@NonNull FragmentManager fm, @NonNull ExportType exportType,
 	                                @NonNull BaseSettingsListFragment target, boolean exportMode) {
 		try {
 			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
 				ExportItemsBottomSheet fragment = new ExportItemsBottomSheet();
-				fragment.type = type;
+				fragment.type = exportType;
 				fragment.exportMode = exportMode;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, TAG);
@@ -276,7 +270,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private String setupDescription(View view) {
 		TextView description = view.findViewById(R.id.title_description);
-		if (type == ExportSettingsType.FAVORITES) {
+		if (type == ExportType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
 			description.setText(R.string.select_items_for_import);
@@ -377,10 +371,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_settings, getItemIconColor(object)));
 		} else if (object instanceof MapMarkersGroup) {
 			MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-			if (ExportSettingsType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
+			if (ExportType.ACTIVE_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.map_markers));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_flag, getItemIconColor(object)));
-			} else if (ExportSettingsType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
+			} else if (ExportType.HISTORY_MARKERS.name().equals(markersGroup.getId())) {
 				item.setTitle(getString(R.string.markers_history));
 				item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_history, getItemIconColor(object)));
 			} else {
@@ -530,6 +524,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			return getString(R.string.download_roads_only_item);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return getString(R.string.download_wikipedia_maps);
+		} else if (file.getName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			return getString(R.string.download_maps_travel);
+		} else if (file.getName().endsWith(IndexConstants.TIF_EXT)) {
+			return getString(R.string.shared_string_terrain);
 		} else if (SrtmDownloadItem.isSrtmFile(file.getName())) {
 			return getString(R.string.download_srtm_maps);
 		} else if (file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {

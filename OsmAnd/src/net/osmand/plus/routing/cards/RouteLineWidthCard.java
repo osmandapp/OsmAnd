@@ -240,7 +240,6 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 		@NonNull
 		@Override
 		public AppearanceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-			LayoutInflater themedInflater = UiUtilities.getInflater(parent.getContext(), nightMode);
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = getDimen(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = getDimen(R.dimen.gpx_group_button_height);

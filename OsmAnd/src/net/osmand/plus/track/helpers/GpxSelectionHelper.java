@@ -50,6 +50,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GpxSelectionHelper {
 
@@ -68,7 +69,7 @@ public class GpxSelectionHelper {
 	private final GpxDisplayHelper gpxDisplayHelper;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
-	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
+	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new ConcurrentHashMap<>();
 	private List<WeakReference<SelectGpxTaskListener>> listeners = new ArrayList<>();
 	private SelectGpxTask selectGpxTask;
 

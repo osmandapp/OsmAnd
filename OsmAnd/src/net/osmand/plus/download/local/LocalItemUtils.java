@@ -81,6 +81,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -125,7 +126,7 @@ public class LocalItemUtils {
 			}
 		} else if (type == PROFILES) {
 			String key = Algorithms.getFileNameWithoutExtension(fileName);
-			if (!Algorithms.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
+			if (!CollectionUtils.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
 				int index = key.lastIndexOf('.');
 				if (index != -1) {
 					key = key.substring(index + 1);
@@ -145,7 +146,7 @@ public class LocalItemUtils {
 
 	@NonNull
 	public static Date getInstalledDate(@NonNull OsmandApplication app, @NonNull File file, @NonNull LocalItemType type) {
-		if (Algorithms.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
+		if (CollectionUtils.equalsToAny(type, MAP_DATA, ROAD_DATA)) {
 			ResourceManager resourceManager = app.getResourceManager();
 			String fileModifiedDate = resourceManager.getIndexFileNames().get(file.getName());
 			if (fileModifiedDate != null) {
@@ -258,7 +259,7 @@ public class LocalItemUtils {
 		String fileName = item.getFileName();
 		Object attachedObject = item.getAttachedObject();
 
-		if (Algorithms.equalsToAny(type, OSM_EDITS, OSM_NOTES, ACTIVE_MARKERS)) {
+		if (CollectionUtils.equalsToAny(type, OSM_EDITS, OSM_NOTES, ACTIVE_MARKERS)) {
 			return type.toHumanString(context);
 		} else if (type == CACHE) {
 			if (fileName.startsWith("heightmap")) {
@@ -270,7 +271,7 @@ public class LocalItemUtils {
 			} else if (fileName.equals("weather_tiffs.db")) {
 				return context.getString(R.string.weather_online);
 			}
-		} else if (Algorithms.equalsToAny(type, VOICE_DATA, TTS_VOICE_DATA)) {
+		} else if (CollectionUtils.equalsToAny(type, VOICE_DATA, TTS_VOICE_DATA)) {
 			return FileNameTranslationHelper.getVoiceName(context, fileName);
 		} else if (type == MULTIMEDIA_NOTES) {
 			if (attachedObject instanceof Recording) {
@@ -280,7 +281,7 @@ public class LocalItemUtils {
 			return GpxUiHelper.getGpxTitle(fileName);
 		} else if (type == PROFILES) {
 			String key = Algorithms.getFileNameWithoutExtension(fileName);
-			if (Algorithms.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
+			if (CollectionUtils.equalsToAny(key, SHARED_PREFERENCES_NAME, CUSTOM_SHARED_PREFERENCES_PREFIX)) {
 				return context.getString(R.string.osmand_settings);
 			} else if (attachedObject instanceof ApplicationMode) {
 				return ((ApplicationMode) attachedObject).toHumanString();

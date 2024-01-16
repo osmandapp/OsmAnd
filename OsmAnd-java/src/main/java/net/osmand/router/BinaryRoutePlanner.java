@@ -189,9 +189,24 @@ public class BinaryRoutePlanner {
 				minCost = new float[] { Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY };
 			}
 			if (ctx.planRouteIn2Directions()) {
-				if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
-					// can't proceed - so no route
-					break;
+				// initial iteration make in 2 directions 
+				if (visitedDirectSegments.isEmpty() && !graphDirectSegments.isEmpty()) {
+					forwardSearch = true;
+				} else if (visitedOppositeSegments.isEmpty() && !graphReverseSegments.isEmpty()) {
+					forwardSearch = false;
+				} else if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
+					// can't proceed any more - check if final already exist
+					graphSegments = graphDirectSegments.isEmpty() ? graphReverseSegments : graphDirectSegments;
+					if (finalSegment == null) {
+						while (!graphSegments.isEmpty()) {
+							RouteSegmentCost pc = graphSegments.poll();
+							if (pc.segment instanceof FinalRouteSegment) {
+								finalSegment = (FinalRouteSegment) pc.segment;
+								break;
+							}
+						}
+					}
+					return finalSegment;
 				} else {
 					RouteSegment fw = graphDirectSegments.peek().segment;
 					RouteSegment bw = graphReverseSegments.peek().segment;
@@ -292,7 +307,7 @@ public class BinaryRoutePlanner {
 		if (!originalDir && (seg.getSegmentStart() != pnt.getSegmentEnd() || seg.getSegmentEnd() != pnt.getSegmentStart())) {
 			throw new IllegalStateException();
 		}
-		if (!originalDir && ctx.config.initialDirection == null && ctx.config.PENALTY_FOR_REVERSE_DIRECTION < 0) {
+		if (!originalDir && ctx.config.initialDirection == null && ctx.config.penaltyForReverseDirection < 0) {
 			// special case for single side spread point-dijkstra
 			return null;
 		}
@@ -307,7 +322,7 @@ public class BinaryRoutePlanner {
 			double plusDir = seg.getRoad().directionRoute(seg.getSegmentStart(), seg.isPositive());
 			double diff = plusDir - (reverseSearchWay ? ctx.config.targetDirection : ctx.config.initialDirection);
 			if (Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
-				seg.distanceFromStart += ctx.config.PENALTY_FOR_REVERSE_DIRECTION;
+				seg.distanceFromStart += ctx.config.penaltyForReverseDirection;
 			}
 		}
 		if (checkMovementAllowed(ctx, reverseSearchWay, seg)) {
@@ -614,15 +629,9 @@ public class BinaryRoutePlanner {
 		// check inverse direction for opposite
 		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
-		if (boundaries != null) {
-			if(ctx.dijkstraMode == 0) {
-				if (boundaries.containsKey(currPoint)) {
-					return true;
-				}
-			} else {
-				// limit by boundaries for dijkstra mode
-				oppositeSegments = boundaries;
-			}
+		if (boundaries != null && ctx.dijkstraMode != 0) {
+			// limit by boundaries for dijkstra mode
+			oppositeSegments = boundaries;
 		}
 		if (oppositeSegments.containsKey(currPoint)) {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
@@ -652,6 +661,10 @@ public class BinaryRoutePlanner {
 				}
 				return true;
 			}
+		}
+		if (boundaries != null && ctx.dijkstraMode == 0 && boundaries.containsKey(currPoint)) {
+			// limit search by boundaries 
+			return true;
 		}
 		return false;
 	}

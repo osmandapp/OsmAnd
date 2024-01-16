@@ -19,8 +19,8 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	private File dirFile;
 	private final TrackFolder parentFolder;
-	private final List<TrackItem> trackItems = new ArrayList<>();
-	private final List<TrackFolder> subFolders = new ArrayList<>();
+	private List<TrackItem> trackItems = new ArrayList<>();
+	private List<TrackFolder> subFolders = new ArrayList<>();
 
 	private List<TrackItem> flattenedTrackItems;
 	private List<TrackFolder> flattenedSubFolders;
@@ -60,21 +60,21 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackFolder> getSubFolders() {
-		return new ArrayList<>(subFolders);
+		return subFolders;
 	}
 
 	@NonNull
 	@Override
 	public List<TrackItem> getTrackItems() {
-		return new ArrayList<>(trackItems);
+		return trackItems;
 	}
 
-	public void addSubFolder(@NonNull TrackFolder folder) {
-		subFolders.add(folder);
+	public void setSubFolders(List<TrackFolder> subFolders) {
+		this.subFolders = subFolders;
 	}
 
-	public void addTrackItem(@NonNull TrackItem trackItem) {
-		trackItems.add(trackItem);
+	public void setTrackItems(List<TrackItem> trackItems) {
+		this.trackItems = trackItems;
 	}
 
 	public boolean isEmpty() {
@@ -92,11 +92,13 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
-		if (flattenedTrackItems == null) {
-			flattenedTrackItems = getTrackItems();
+		if (this.flattenedTrackItems == null) {
+			List<TrackItem> flattenedTrackItems = new ArrayList<>();
+			flattenedTrackItems.addAll(getTrackItems());
 			for (TrackFolder folder : getSubFolders()) {
 				flattenedTrackItems.addAll(folder.getFlattenedTrackItems());
 			}
+			this.flattenedTrackItems = flattenedTrackItems;
 		}
 		return flattenedTrackItems;
 	}
@@ -104,10 +106,14 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 	@NonNull
 	public List<TrackFolder> getFlattenedSubFolders() {
 		if (flattenedSubFolders == null) {
-			flattenedSubFolders = getSubFolders();
-			for (TrackFolder folder : getSubFolders()) {
+			List<TrackFolder> flattenedSubFolders = new ArrayList<>();
+			List<TrackFolder> sub = getSubFolders();
+			flattenedSubFolders.addAll(sub);
+			for (TrackFolder folder : sub) {
 				flattenedSubFolders.addAll(folder.getFlattenedSubFolders());
 			}
+			this.flattenedSubFolders = flattenedSubFolders;
+
 		}
 		return flattenedSubFolders;
 	}

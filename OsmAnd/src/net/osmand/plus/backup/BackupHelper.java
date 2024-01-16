@@ -39,7 +39,7 @@ import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.resources.SQLiteTileSource;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -70,7 +70,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -309,12 +308,31 @@ public class BackupHelper {
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
 	}
 
-	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportSettingsType type) {
+	@NonNull
+	private List<ExportType> getEnabledExportTypes() {
+		List<ExportType> result = new ArrayList<>();
+		for (ExportType exportType : ExportType.enabledValues()) {
+			if (getBackupTypePref(exportType).get()) {
+				result.add(exportType);
+			}
+		}
+		return result;
+	}
+
+	public CommonPreference<Boolean> getBackupTypePref(@NonNull ExportType exportType) {
+		return getBackupTypePref(app, exportType);
+	}
+
+	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportType exportType) {
+		return getVersionHistoryTypePref(app, exportType);
+	}
+
+	public static CommonPreference<Boolean> getBackupTypePref(@NonNull OsmandApplication app, @NonNull ExportType type) {
 		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
 	}
 
-	public CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull ExportSettingsType type) {
-		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + type.name(), true).makeGlobal().makeShared();
+	public static CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull OsmandApplication app, @NonNull ExportType exportType) {
+		return app.getSettings().registerBooleanPreference(VERSION_HISTORY_PREFIX + exportType.name(), true).makeGlobal().makeShared();
 	}
 
 	public static boolean applyItem(@NonNull SettingsItem item, @NonNull String type, @NonNull String name) {
@@ -676,12 +694,12 @@ public class BackupHelper {
 				});
 	}
 
-	public void deleteAllFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable List<ExportType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAllFilesCommand(this, types));
 	}
 
-	public void deleteOldFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable List<ExportType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
@@ -909,14 +927,7 @@ public class BackupHelper {
 			}
 
 			private List<SettingsItem> getLocalItems() {
-				List<ExportSettingsType> types = ExportSettingsType.getEnabledTypes();
-				Iterator<ExportSettingsType> it = types.iterator();
-				while (it.hasNext()) {
-					ExportSettingsType type = it.next();
-					if (!getBackupTypePref(type).get()) {
-						it.remove();
-					}
-				}
+				List<ExportType> types = getEnabledExportTypes();
 				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, false);
 			}
 
@@ -976,8 +987,8 @@ public class BackupHelper {
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
-					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
-					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType) || remoteFile.isRecordedVoiceFile()) {
+					ExportType exportType = ExportType.findBy(remoteFile);
+					if (exportType == null || !exportType.isEnabled() || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
@@ -1008,9 +1019,8 @@ public class BackupHelper {
 					}
 				}
 				for (LocalFile localFile : localFiles.values()) {
-					ExportSettingsType exportType = localFile.item != null
-							? ExportSettingsType.getExportSettingsTypeForItem(localFile.item) : null;
-					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
+					ExportType exportType = ExportType.findBy(localFile.item);
+					if (exportType == null || !exportType.isEnabled()) {
 						continue;
 					}
 					boolean hasRemoteFile = uniqueRemoteFiles.containsKey(localFile.getTypeFileName());

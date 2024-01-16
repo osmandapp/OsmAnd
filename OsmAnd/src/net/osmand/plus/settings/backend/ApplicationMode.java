@@ -1,7 +1,6 @@
 package net.osmand.plus.settings.backend;
 
-import static net.osmand.binary.BinaryMapRouteReaderAdapter.*;
-
+import static net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -21,7 +20,6 @@ import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -34,6 +32,7 @@ import java.util.Set;
 
 public class ApplicationMode {
 
+	public static final String CUSTOM_MODE_KEY_SEPARATOR = "_";
 	public static final float FAST_SPEED_THRESHOLD = 10;
 	private static final float MIN_VALUE_KM_H = -10;
 	private static final float MAX_VALUE_KM_H = 20;
@@ -176,8 +175,12 @@ public class ApplicationMode {
 	}
 
 	public boolean isCustomProfile() {
+		return isCustomProfile(getStringKey());
+	}
+
+	public static boolean isCustomProfile(@NonNull String key) {
 		for (ApplicationMode mode : defaultValues) {
-			if (Algorithms.stringsEqual(mode.getStringKey(), getStringKey())) {
+			if (Algorithms.stringsEqual(mode.getStringKey(), key)) {
 				return false;
 			}
 		}
@@ -193,7 +196,7 @@ public class ApplicationMode {
 		return RouteTypeRule.PROFILE_NONE;
 	}
 
-	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
+	public boolean isDerivedRoutingFrom(@NonNull ApplicationMode mode) {
 		return this == mode || getParent() == mode;
 	}
 
@@ -464,7 +467,7 @@ public class ApplicationMode {
 		reorderAppModes();
 	}
 
-	private static void initModesParams(OsmandApplication app) {
+	private static void initModesParams(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
 			iconNameListener = change -> {
@@ -564,14 +567,16 @@ public class ApplicationMode {
 		return mode;
 	}
 
-	public static ApplicationModeBean fromJson(OsmandApplication app, String json) {
+	@NonNull
+	public static ApplicationModeBean fromJson(@NonNull OsmandApplication app, @NonNull String json) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		ApplicationModeBean modeBean = gson.fromJson(json, ApplicationModeBean.class);
-		checkAndReplaceInvalidIconName(app, modeBean);
+		ApplicationModeBean.checkAndReplaceInvalidValues(app, modeBean);
 		return modeBean;
 	}
 
-	public static ApplicationModeBuilder fromModeBean(OsmandApplication app, ApplicationModeBean modeBean) {
+	@NonNull
+	public static ApplicationModeBuilder fromModeBean(@NonNull OsmandApplication app, @NonNull ApplicationModeBean modeBean) {
 		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(modeBean.parent, null), modeBean.stringKey, app);
 		builder.setUserProfileName(modeBean.userProfileName);
 		builder.setIconResName(modeBean.iconName);
@@ -664,18 +669,6 @@ public class ApplicationMode {
 		ApplicationModeBuilder builder = create(parent, -1, stringKey);
 		builder.getApplicationMode().app = app;
 		return builder;
-	}
-
-	private static void checkAndReplaceInvalidIconName(OsmandApplication app, ApplicationModeBean modeBean) {
-		if (AndroidUtils.getDrawableId(app, modeBean.iconName) == 0) {
-			ApplicationMode appMode = valueOfStringKey(modeBean.stringKey, null);
-			if (appMode == null) {
-				appMode = valueOfStringKey(modeBean.parent, null);
-			}
-			if (appMode != null) {
-				modeBean.iconName = appMode.getIconName();
-			}
-		}
 	}
 
 	public static class ApplicationModeBuilder {
@@ -786,5 +779,11 @@ public class ApplicationMode {
 			this.navigationIcon = navIcon;
 			return this;
 		}
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return getStringKey();
 	}
 }

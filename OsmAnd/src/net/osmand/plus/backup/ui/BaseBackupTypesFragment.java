@@ -28,8 +28,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.settings.backend.ExportSettingsCategory;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.ExportCategory;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
@@ -49,8 +49,8 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	protected BackupHelper backupHelper;
 
-	protected Map<ExportSettingsCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
-	protected Map<ExportSettingsType, List<?>> selectedItemsMap = new EnumMap<>(ExportSettingsType.class);
+	protected Map<ExportCategory, SettingsCategoryItems> dataList = new LinkedHashMap<>();
+	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 
 	protected ProgressBar progressBar;
 	protected BackupClearType clearType;
@@ -77,7 +77,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	protected abstract RemoteFilesType getRemoteFilesType();
 
-	protected abstract Map<ExportSettingsType, List<?>> getSelectedItems();
+	protected abstract Map<ExportType, List<?>> getSelectedItems();
 
 	@Nullable
 	@Override
@@ -140,67 +140,66 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
+	public void onCategorySelected(ExportCategory exportCategory, boolean selected) {
 		boolean hasItemsToDelete = false;
-		SettingsCategoryItems categoryItems = dataList.get(category);
-		List<ExportSettingsType> types = categoryItems.getTypes();
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		for (ExportSettingsType type : types) {
-			if (type.isAllowedInFreeVersion() || available) {
-				List<Object> items = getItemsForType(type);
+		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
+		List<ExportType> exportTypes = categoryItems.getTypes();
+		for (ExportType exportType : exportTypes) {
+			if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+				List<?> items = getItemsForType(exportType);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
-				selectedItemsMap.put(type, selected ? items : null);
+				selectedItemsMap.put(exportType, selected ? items : null);
 			}
 		}
 		if (!selected && hasItemsToDelete) {
-			showClearTypesBottomSheet(types);
+			showClearTypesBottomSheet(exportTypes);
 		}
 	}
 
 	@Override
-	public void onTypeSelected(ExportSettingsType type, boolean selected) {
-		boolean available = InAppPurchaseUtils.isBackupAvailable(app);
-		if (type.isAllowedInFreeVersion() || available) {
-			List<Object> items = getItemsForType(type);
-			selectedItemsMap.put(type, selected ? items : null);
+	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
+		if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+			List<?> items = getItemsForType(exportType);
+			selectedItemsMap.put(exportType, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
-				showClearTypesBottomSheet(Collections.singletonList(type));
+				showClearTypesBottomSheet(Collections.singletonList(exportType));
 			}
 		} else {
 			OsmAndProPlanFragment.showInstance(requireActivity());
 		}
 	}
 
-	protected void showClearTypesBottomSheet(List<ExportSettingsType> types) {
+	protected void showClearTypesBottomSheet(List<ExportType> types) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			ClearTypesBottomSheet.showInstance(activity.getSupportFragmentManager(), types, clearType, this);
 		}
 	}
 
-	protected Map<ExportSettingsCategory, SettingsCategoryItems> getDataList() {
+	@NonNull
+	protected Map<ExportCategory, SettingsCategoryItems> getDataList() {
 		Map<String, RemoteFile> remoteFiles = backupHelper.getBackup().getRemoteFiles(getRemoteFilesType());
 		if (remoteFiles == null) {
 			remoteFiles = Collections.emptyMap();
 		}
-
-		Map<ExportSettingsType, List<?>> settingsToOperate = new EnumMap<>(ExportSettingsType.class);
-		for (ExportSettingsType type : ExportSettingsType.getEnabledTypes()) {
+		Map<ExportType, List<?>> dataToOperate = new EnumMap<>(ExportType.class);
+		for (ExportType exportType : ExportType.enabledValues()) {
 			List<RemoteFile> filesByType = new ArrayList<>();
 			for (RemoteFile remoteFile : remoteFiles.values()) {
-				if (ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile) == type) {
+				if (ExportType.findBy(remoteFile) == exportType) {
 					filesByType.add(remoteFile);
 				}
 			}
-			settingsToOperate.put(type, filesByType);
+			dataToOperate.put(exportType, filesByType);
 		}
-		return SettingsHelper.getSettingsToOperateByCategory(settingsToOperate, true);
+		return SettingsHelper.categorizeSettingsToOperate(dataToOperate, true);
 	}
 
-	protected List<Object> getItemsForType(ExportSettingsType type) {
+	@NonNull
+	protected List<?> getItemsForType(@NonNull ExportType exportType) {
 		for (SettingsCategoryItems categoryItems : dataList.values()) {
-			if (categoryItems.getTypes().contains(type)) {
-				return (List<Object>) categoryItems.getItemsForType(type);
+			if (categoryItems.getTypes().contains(exportType)) {
+				return categoryItems.getItemsForType(exportType);
 			}
 		}
 		return Collections.emptyList();

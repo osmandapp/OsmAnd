@@ -1,7 +1,5 @@
 package net.osmand.plus.plugins.externalsensors.adapters;
 
-import static net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY;
-
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,6 +11,9 @@ import net.osmand.plus.plugins.externalsensors.devices.AbstractDevice;
 import net.osmand.plus.plugins.externalsensors.devices.sensors.SensorWidgetDataFieldType;
 import net.osmand.plus.plugins.externalsensors.viewholders.FoundDeviceViewHolder;
 import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 
@@ -44,7 +45,7 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		int itemType = getItemViewType(position);
-		boolean anyConnected = ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(selectedDeviceId);
+		boolean anyConnected = plugin.isAnyConnectedDeviceId(selectedDeviceId);
 		if (itemType == NONE_ITEM_TYPE) {
 			holder.selectionMark.setChecked(Algorithms.isEmpty(selectedDeviceId)
 					|| !anyConnected && plugin.getDevice(selectedDeviceId) == null);
@@ -54,15 +55,15 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 			holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_track_disabled, nightMode));
 		} else if (itemType == ANY_CONNECTED_ITEM_TYPE) {
 			holder.selectionMark.setChecked(anyConnected);
-			holder.itemView.setOnClickListener(v -> onItemClicked(holder, ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY));
+			holder.itemView.setOnClickListener(v -> onItemClicked(holder, plugin.getAnyConnectedDeviceId()));
 			holder.description.setVisibility(View.GONE);
 			holder.name.setText(R.string.any_connected);
 			holder.icon.setImageDrawable(uiUtils.getIcon(widgetDataFieldType.getIconId(), nightMode));
 		} else if (itemType == DEVICE_ITEM_TYPE) {
-			super.onBindViewHolder(holder, position - getNonDeviceItemsCount());
+			super.onBindViewHolder(holder, position);
 			holder.description.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.GONE);
-			AbstractDevice<?> device = items.get(position - getNonDeviceItemsCount());
+			AbstractDevice<?> device = (AbstractDevice<?>) items.get(position);
 			holder.selectionMark.setChecked(Algorithms.stringsEqual(selectedDeviceId, device.getDeviceId()));
 			holder.itemView.setOnClickListener(v -> onItemClicked(holder, device.getDeviceId()));
 		}
@@ -74,13 +75,18 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 
 	@Override
 	public int getItemViewType(int position) {
-		if (position == 0) {
-			return withNoneVariant ? NONE_ITEM_TYPE : ANY_CONNECTED_ITEM_TYPE;
-		} else if (position == 1) {
-			return withNoneVariant ? ANY_CONNECTED_ITEM_TYPE : DEVICE_ITEM_TYPE;
-		} else {
+		Object object = items.get(position);
+		if (object instanceof AbstractDevice) {
 			return DEVICE_ITEM_TYPE;
+		} else if (object instanceof Integer) {
+			int item = (Integer) object;
+			if (NONE_ITEM_TYPE == item) {
+				return NONE_ITEM_TYPE;
+			} else if (ANY_CONNECTED_ITEM_TYPE == item) {
+				return ANY_CONNECTED_ITEM_TYPE;
+			}
 		}
+		throw new IllegalArgumentException("Unsupported view type");
 	}
 
 	private void setSelectedPosition(int position) {
@@ -93,16 +99,18 @@ public class DevicesForWidgetAdapter extends FoundDevicesAdapter {
 		deviceClickListener.onDeviceSelected(deviceId);
 	}
 
-	@Override
-	public int getItemCount() {
-		return super.getItemCount() + getNonDeviceItemsCount();
-	}
-
 	public interface SelectDeviceListener {
 		void onDeviceSelected(@Nullable String deviceId);
 	}
 
-	private int getNonDeviceItemsCount() {
-		return withNoneVariant ? 2 : 1;
+	@Override
+	public void setItems(@NonNull List<Object> items) {
+		ArrayList<Object> newItems = new ArrayList<>();
+		if (withNoneVariant) {
+			newItems.add(NONE_ITEM_TYPE);
+		}
+		newItems.add(ANY_CONNECTED_ITEM_TYPE);
+		newItems.addAll(items);
+		super.setItems(newItems);
 	}
 }

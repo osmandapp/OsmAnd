@@ -21,6 +21,7 @@ import net.osmand.plus.myplaces.tracks.filters.TrackNameFilter;
 import net.osmand.plus.myplaces.tracks.filters.WidthTrackFilter;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -177,13 +178,13 @@ public class TracksSearchFilter extends Filter implements FilterChangedListener 
 
 	public void addFiltersChangedListener(FilterChangedListener listener) {
 		if (!filterChangedListeners.contains(listener)) {
-			filterChangedListeners = Algorithms.addToList(filterChangedListeners, listener);
+			filterChangedListeners = CollectionUtils.addToList(filterChangedListeners, listener);
 		}
 	}
 
 	public void removeFiltersChangedListener(FilterChangedListener listener) {
 		if (filterChangedListeners.contains(listener)) {
-			filterChangedListeners = Algorithms.removeFromList(filterChangedListeners, listener);
+			filterChangedListeners = CollectionUtils.removeFromList(filterChangedListeners, listener);
 		}
 	}
 

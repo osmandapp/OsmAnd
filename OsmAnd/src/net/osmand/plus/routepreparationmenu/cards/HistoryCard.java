@@ -62,8 +62,7 @@ public class HistoryCard extends MapBaseCard {
 		items.removeAllViews();
 
 		boolean showLimitExceeds = list.size() > limit + 1;
-		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		Context context = UiUtilities.getThemedContext(activity, nightMode);
 
 		int iconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		int iconColor = ContextCompat.getColor(app, iconColorId);
@@ -77,7 +76,7 @@ public class HistoryCard extends MapBaseCard {
 			LinearLayout view;
 			QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
 			if (searchResult.objectType == ObjectType.GPX_TRACK) {
-				view = (LinearLayout) inflater.inflate(R.layout.search_gpx_list_item, items, false);
+				view = (LinearLayout) themedInflater.inflate(R.layout.search_gpx_list_item, items, false);
 
 				GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
 				QuickSearchListAdapter.bindGpxTrack(view, listItem, gpxInfo);
@@ -105,7 +104,7 @@ public class HistoryCard extends MapBaseCard {
 					}
 				});
 			} else {
-				view = (LinearLayout) inflater.inflate(R.layout.search_list_item, items, false);
+				view = (LinearLayout) themedInflater.inflate(R.layout.search_list_item, items, false);
 				QuickSearchListAdapter.bindSearchResult(view, listItem);
 
 				ImageView icon = view.findViewById(R.id.imageView);
@@ -120,7 +119,7 @@ public class HistoryCard extends MapBaseCard {
 				});
 			}
 			View itemContainer = view.findViewById(R.id.searchListItemLayout);
-			itemContainer.setBackground(UiUtilities.getSelectableDrawable(themedContext));
+			itemContainer.setBackground(UiUtilities.getSelectableDrawable(context));
 			itemContainer.setMinimumHeight(getDimen(R.dimen.route_info_card_item_height));
 
 			int margin = getDimen(R.dimen.route_info_list_text_padding);

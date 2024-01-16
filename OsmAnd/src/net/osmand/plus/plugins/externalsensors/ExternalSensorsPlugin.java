@@ -57,13 +57,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ExternalSensorsPlugin extends OsmandPlugin {
 	private static final Log LOG = PlatformUtil.getLog(ExternalSensorsPlugin.class);
 	private static final int DEVICES_SEARCH_TIMEOUT = 10000;
-	public static final String ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY = "any_connected_device_write_sensor_data_to_track_key";
+	private static final String ANY_DEVICE = "any_connected_device_write_sensor_data_to_track_key";
 
 	private final OsmandSettings settings;
 	private final DevicesHelper devicesHelper;
@@ -75,7 +74,6 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	public final CommonPreference<String> TEMPERATURE_SENSOR_WRITE_TO_TRACK_DEVICE_ID;
 
 	private ScanDevicesListener scanDevicesListener;
-	private List<DeviceStateListener> deviceStateListeners = new ArrayList<>();
 
 	public ExternalSensorsPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -183,7 +181,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Nullable
-	public AbstractDevice<?> getDevice(@NonNull SensorWidgetDataFieldType fieldType) {
+	public AbstractDevice<?> getAnyDevice(@NonNull SensorWidgetDataFieldType fieldType) {
 		for (AbstractDevice<?> device : getPairedDevices()) {
 			for (AbstractSensor sensor : device.getSensors()) {
 				List<SensorWidgetDataFieldType> supportedTypes = sensor.getSupportedWidgetDataFieldTypes();
@@ -197,7 +195,7 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	@Nullable
 	public AbstractDevice<?> getDevice(@NonNull String deviceId) {
-		return devicesHelper.getDevice(deviceId);
+		return devicesHelper.getAnyDevice(deviceId);
 	}
 
 	@Override
@@ -211,18 +209,30 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 		CommonPreference<String> preference = getWriteToTrackDeviceIdPref(dataType);
 		String deviceId = preference.getModeValue(settings.getApplicationMode());
 		if (!Algorithms.isEmpty(deviceId)) {
-			boolean anyConnected = ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId);
-			List<AbstractDevice<?>> devices = anyConnected ? devicesHelper.getDevices() : Collections.singletonList(devicesHelper.getDevice(deviceId));
+			boolean anyConnected = ANY_DEVICE.equals(deviceId);
+			AbstractDevice<?> deviceById = devicesHelper.getAnyDevice(deviceId);
+			ArrayList<AbstractDevice<?>> devices = new ArrayList<>();
+			if(anyConnected) {
+				devices.addAll(devicesHelper.getDevices());
+			} else if(deviceById != null) {
+				devices.add(deviceById);
+			}
 			for (AbstractDevice<?> device : devices) {
 				try {
-					if (device != null) {
-						device.writeSensorDataToJson(json, dataType.getSensorType());
-					}
+					device.writeSensorDataToJson(json, dataType.getSensorType());
 				} catch (JSONException e) {
 					LOG.error(e);
 				}
 			}
 		}
+	}
+
+	public boolean isAnyConnectedDeviceId(@NonNull String deviceId){
+		return ANY_DEVICE.equals(deviceId);
+	}
+
+	public String getAnyConnectedDeviceId(){
+		return ANY_DEVICE;
 	}
 
 	@Override
@@ -461,25 +471,5 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 
 	public String getFormattedDevicePropertyValue(@NonNull AbstractDevice<?> device, @NonNull DeviceChangeableProperty property) {
 		return devicesHelper.getFormattedDevicePropertyValue(device, property);
-	}
-
-	public void addDeviceStateListener(@NonNull DeviceStateListener listener) {
-		deviceStateListeners = Algorithms.addToList(deviceStateListeners, listener);
-	}
-
-	public void removeDeviceStateListener(@NonNull DeviceStateListener listener) {
-		deviceStateListeners = Algorithms.removeFromList(deviceStateListeners, listener);
-	}
-
-	public void onDeviceConnected(@NonNull String deviceId) {
-		for (DeviceStateListener listener : deviceStateListeners) {
-			listener.onDeviceConnected(deviceId);
-		}
-	}
-
-	public void onDeviceDisconnected(@NonNull String deviceId) {
-		for (DeviceStateListener listener : deviceStateListeners) {
-			listener.onDeviceDisconnected(deviceId);
-		}
 	}
 }

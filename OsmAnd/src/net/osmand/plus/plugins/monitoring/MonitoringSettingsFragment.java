@@ -2,7 +2,6 @@ package net.osmand.plus.plugins.monitoring;
 
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.plugins.PluginInfoFragment.PLUGIN_INFO;
-import static net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin.ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
@@ -306,11 +305,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 				String deviceId = pref.getModeValue(appMode);
 				if (!Algorithms.isEmpty(deviceId)) {
 					boolean sensorLinked = false;
-					if (!ANY_CONNECTED_DEVICE_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId)) {
+					if (!plugin.isAnyConnectedDeviceId(deviceId)) {
 						if (plugin.getDevice(deviceId) != null) {
 							sensorLinked = true;
 						}
-					} else if (plugin.getDevice(dataType.getSensorType()) != null) {
+					} else if (plugin.getAnyDevice(dataType.getSensorType()) != null) {
 						sensorLinked = true;
 					}
 					if (sensorLinked) {

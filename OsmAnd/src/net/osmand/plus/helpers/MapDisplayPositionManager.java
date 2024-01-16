@@ -13,6 +13,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.ViewportListener;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,12 +109,12 @@ public class MapDisplayPositionManager implements ViewportListener {
 
 	public void registerMapPositionProvider(@NonNull IMapDisplayPositionProvider provider) {
 		if (!displayPositionProviders.contains(provider)) {
-			displayPositionProviders = Algorithms.addToList(displayPositionProviders, provider);
+			displayPositionProviders = CollectionUtils.addToList(displayPositionProviders, provider);
 		}
 	}
 
 	public void unregisterMapPositionProvider(@NonNull IMapDisplayPositionProvider provider) {
-		displayPositionProviders = Algorithms.removeFromList(displayPositionProviders, provider);
+		displayPositionProviders = CollectionUtils.removeFromList(displayPositionProviders, provider);
 	}
 
 	public void updateCoveredScreenRectProvider(@NonNull ICoveredScreenRectProvider provider, boolean register) {
@@ -126,12 +127,12 @@ public class MapDisplayPositionManager implements ViewportListener {
 
 	public void registerCoveredScreenRectProvider(@NonNull ICoveredScreenRectProvider provider) {
 		if (!coveredScreenRectProviders.contains(provider)) {
-			coveredScreenRectProviders = Algorithms.addToList(coveredScreenRectProviders, provider);
+			coveredScreenRectProviders = CollectionUtils.addToList(coveredScreenRectProviders, provider);
 		}
 	}
 
 	public void unregisterCoveredScreenRectProvider(@NonNull ICoveredScreenRectProvider provider) {
-		coveredScreenRectProviders = Algorithms.removeFromList(coveredScreenRectProviders, provider);
+		coveredScreenRectProviders = CollectionUtils.removeFromList(coveredScreenRectProviders, provider);
 	}
 
 	public void updateMapDisplayPosition() {

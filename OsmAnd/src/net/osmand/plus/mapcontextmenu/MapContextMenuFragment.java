@@ -107,7 +107,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		ICoveredScreenRectProvider, IMapDisplayPositionProvider {
 	public static final String TAG = "MapContextMenuFragment";
 
-	public static final float ZOOM_PADDING_TOP_DP = 4f;
 	public static final float MARKER_PADDING_DP = 20f;
 	public static final float MARKER_PADDING_X_DP = 50f;
 	public static final int ZOOM_IN_STANDARD = 17;
@@ -224,7 +223,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		topScreenPosY = addStatusBarHeightIfNeeded(-shadowHeight);
 		bottomToolbarPosY = addStatusBarHeightIfNeeded(getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar));
 		minHalfY = viewHeight - (int) (viewHeight * menu.getHalfScreenMaxHeightKoef());
-		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
+		zoomPaddingTop = getDimensionPixelSize(R.dimen.map_button_margin);
 
 		view = themedInflater.inflate(R.layout.fragment_map_context_menu, container, false);
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
@@ -1542,7 +1541,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
-	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	private void runLayoutListener() {
 		if (view != null) {
 			ViewTreeObserver vto = view.getViewTreeObserver();
@@ -1975,7 +1973,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private int addStatusBarHeightIfNeeded(int res) {
 		MapActivity mapActivity = getMapActivity();
-		if (Build.VERSION.SDK_INT >= 21 && mapActivity != null) {
+		if (mapActivity != null) {
 			// One pixel is needed to fill a thin gap between the status bar and the fragment.
 			return res + AndroidUtils.getStatusBarHeight(mapActivity) - 1;
 		}
