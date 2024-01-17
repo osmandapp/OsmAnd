@@ -3630,4 +3630,13 @@
     <string name="shared_string_degrees">각도</string>
     <string name="angular_measeurement">각도 단위</string>
     <string name="subsequent_dest_description">대상을 위로 이동하고 생성</string>
+    <string name="routing_attr_prefer_hiking_routes_name">하이킹 경로 선호</string>
+    <string name="routing_attr_allow_intermittent_name">간헐적인 수로 허용</string>
+    <string name="routing_attr_allow_intermittent_description">간헐적인 수로 허용</string>
+    <string name="shared_string_server_url">서버 URL</string>
+    <string name="routing_attr_allow_streams_description">스트림 및 드레인 허용</string>
+    <string name="shared_string_enter_param">매개 변수 입력</string>
+    <string name="routing_attr_allow_streams_name">스트림 및 드레인 허용</string>
+    <string name="shared_string_api_key">API 키</string>
+    <string name="shared_string_last_used">마지막으로 사용한 날짜</string>
 </resources>
