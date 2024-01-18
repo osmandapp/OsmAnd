@@ -68,6 +68,21 @@ public class QuadRect {
 				&& Math.max(a.bottom, a.top) >= Math.min(b.bottom, b.top);
 	}
 	
+	public static double intersectionArea(QuadRect a, QuadRect b) {
+		double xleft = Math.max(Math.min(a.left, a.right), Math.min(b.left, b.right));
+		double xright = Math.min(Math.max(a.left, a.right), Math.max(b.left, b.right));
+		double ytop = Math.max(Math.min(a.top, a.bottom), Math.min(b.top, b.bottom));
+		double ybottom = Math.min(Math.max(a.top, a.bottom), Math.max(b.top, b.bottom));
+		if (xright <= xleft || ybottom <= ytop) {
+	        return 0;
+		}
+		double intersectionArea = (xright - xleft) * (ybottom - ytop);
+//		double aArea = Math.abs(a.right - a.left) * Math.abs(a.bottom - a.top);
+//		double bArea = Math.abs(b.right - b.left) * Math.abs(b.bottom - b.top);
+		// double iou = intersectionArea / (aArea + bArea - intersectionArea);
+		return intersectionArea;
+	}
+	
 	 public static boolean trivialOverlap(QuadRect a, QuadRect b) {
 		 return intersects(a, b);
 	 }

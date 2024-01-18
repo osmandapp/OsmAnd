@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.TreeMap;
 
 import gnu.trove.map.TLongObjectMap;
@@ -19,8 +21,10 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -507,6 +511,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		public int extraParam = 0;
 		public int matchParam = 0;
 		public boolean containsStartEnd;
+		public double sumIntersects;
 		
 		public HHRouteRegionsGroup(long edition, String params) {
 			this.profileParams = params;
@@ -514,7 +519,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		public static <T extends NetworkDBPoint> void appendToGroups(HHRouteRegion r, BinaryMapIndexReader rdr,
-				List<HHRouteRegionsGroup<T>> groups) {
+				List<HHRouteRegionsGroup<T>> groups, double iou) {
 			for (String params : r.profileParams) {
 				HHRouteRegionsGroup<T> matchGroup = null;
 				for (HHRouteRegionsGroup<T> g : groups) {
@@ -524,19 +529,43 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					}
 				}
 				if (matchGroup == null) {
-					matchGroup = new HHRouteRegionsGroup<T>(r.edition, params); 
+					matchGroup = new HHRouteRegionsGroup<T>(r.edition, params);
 					groups.add(matchGroup);
 				}
 				matchGroup.regions.add(r);
 				matchGroup.readers.add(rdr);
+				matchGroup.sumIntersects += iou;
 			}
 		}
 
-		public boolean contains(LatLon p) {
+		public boolean contains(LatLon p) throws IOException {
+			int zoomToLoad = 14;
+			int x = MapUtils.get31TileNumberX(p.getLongitude()) >> zoomToLoad;
+			int y = MapUtils.get31TileNumberY(p.getLatitude()) >> zoomToLoad;
 			boolean contains = false;
-			for (HHRouteRegion r : regions) {
-				if (r.top.contains(p)) {
-					contains = true;
+			SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
+					(x + 1) << zoomToLoad, y << zoomToLoad, (y + 1) << zoomToLoad, null);
+			Set<String> checked = new HashSet<>();
+			for (int i = 0; i < regions.size(); i++) {
+				BinaryMapIndexReader rd = readers.get(i);
+				if (rd.containsRouteData()) {
+					for (RouteRegion reg : rd.getRoutingIndexes()) {
+						if (checked.contains(reg.getName())) {
+							continue;
+						}
+						checked.add(reg.getName());
+						List<RouteSubregion> res = rd.searchRouteIndexTree(request, reg.getSubregions());
+						if (!res.isEmpty()) {
+							contains = true;
+						}
+					}
+				} else {
+					HHRouteRegion reg = regions.get(i);
+					if (reg.top.contains(x, y)) {
+						contains = true;
+					}
+				}
+				if (contains) {
 					break;
 				}
 			}
@@ -544,7 +573,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 
-	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) {
+	private HHRoutingContext<T> selectBestRoutingFiles(LatLon start, LatLon end, HHRoutingContext<T> hctx) throws IOException {
 		List<HHRouteRegionsGroup<T>> groups = new ArrayList<>();
 	
 		GeneralRouter router = hctx.rctx.config.router;
@@ -559,16 +588,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		for (BinaryMapIndexReader r : hctx.rctx.map.keySet()) {
 			for (HHRouteRegion hhregion : r.getHHRoutingIndexes()) {
 				if (hhregion.profile.equals(profile) && QuadRect.intersects(hhregion.getLatLonBbox(), qr)) {
-					HHRouteRegionsGroup.appendToGroups(hhregion, r, groups);
+					double intersect = QuadRect.intersectionArea(hhregion.getLatLonBbox(), qr);
+					HHRouteRegionsGroup.appendToGroups(hhregion, r, groups, intersect);
 				}
 			}
 		}
-		HHRouteRegionsGroup<T> bestGroup = null;
 		for (HHRouteRegionsGroup<T> g : groups) {
-			g.containsStartEnd = g.contains(start) && g.contains(end); 
-			if (bestGroup == null) {
-				bestGroup = g;
-			}
+			g.containsStartEnd = g.contains(start) && g.contains(end);
 			String[] params = g.profileParams.split(",");
 			for (String p : params) {
 				if (p.trim().length() == 0) {
@@ -580,23 +606,26 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					g.matchParam++;
 				}
 			}
-			if (g.containsStartEnd != bestGroup.containsStartEnd) {
-				if (g.containsStartEnd) {
-					bestGroup = g;
-				}
-			} else if (g.extraParam != bestGroup.extraParam) {
-				if (g.extraParam < bestGroup.extraParam) {
-					bestGroup = g;
-				}
-			} else if (g.matchParam != bestGroup.matchParam) {
-				if (g.matchParam > bestGroup.matchParam) {
-					bestGroup = g;
-				}
-			}
 		}
-		if (bestGroup == null) {
+		Collections.sort(groups, new Comparator<HHRouteRegionsGroup<T>>() {
+
+			@Override
+			public int compare(HHRouteRegionsGroup<T> o1, HHRouteRegionsGroup<T> o2) {
+				if (o1.containsStartEnd != o2.containsStartEnd) {
+					return o1.containsStartEnd ? -1 : 1;
+				} else if (o1.extraParam != o2.extraParam) {
+					return o1.extraParam < o2.extraParam ? -1 : 1;
+				} else if (o1.matchParam != o2.matchParam) {
+					return o1.matchParam > o2.matchParam ? -1 : 1;
+				}
+				return -Double.compare(o1.sumIntersects, o2.sumIntersects); // higher is better
+			}
+			
+		});
+		if (groups.size() == 0) {
 			return null;
 		}
+		HHRouteRegionsGroup<T> bestGroup = groups.get(0);
 		List<HHRouteRegionPointsCtx<T>> regions = new ArrayList<>();
 		for(short mapId = 0; mapId < bestGroup.regions.size(); mapId++) {
 			HHRouteRegionPointsCtx<T> reg = new HHRouteRegionPointsCtx<T>(mapId, bestGroup.regions.get(mapId),
