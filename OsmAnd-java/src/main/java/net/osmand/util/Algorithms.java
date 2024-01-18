@@ -189,6 +189,9 @@ public class Algorithms {
 	public static float parseFloatSilently(String input, float def) {
 		if (!isEmpty(input)) {
 			try {
+				if(Float.isInfinite(Float.parseFloat(input))) {
+					Float.parseFloat(input);
+				}
 				return Float.parseFloat(input);
 			} catch (NumberFormatException e) {
 				return def;

@@ -17,6 +17,10 @@ abstract class BaseTrackFilter(
 		filterChangedListener?.onFilterChanged()
 	}
 
+	open fun isValid(): Boolean {
+		return true
+	}
+
 	open fun initFilter() {}
 
 	override fun equals(other: Any?): Boolean {

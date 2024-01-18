@@ -18,6 +18,7 @@ import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 
+import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -30,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -180,7 +182,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			}
 			description.setText(builder);
 		}
-		boolean showDirection = sortMode == NEAREST && analysis != null && analysis.latLonStart != null;
+		boolean showDirection = sortMode == NEAREST && analysis != null && analysis.getLatLonStart() != null;
 		AndroidUiHelper.updateVisibility(directionIcon, showDirection);
 	}
 
@@ -198,7 +200,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendNameDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,
 	                                   @NonNull GPXTrackAnalysis analysis, boolean shouldShowFolder) {
-		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		if (analysis.isTimeSpecified()) {
 			builder.append(" • ");
 			appendDuration(builder, analysis);
@@ -216,7 +218,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}
-		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		if (analysis.isTimeSpecified()) {
 			builder.append(" • ");
 			appendDuration(builder, analysis);
@@ -232,7 +234,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			setupTextSpan(builder);
 			builder.append(" | ");
 		}
-		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		if (analysis.isTimeSpecified()) {
 			builder.append(" • ");
 			appendDuration(builder, analysis);
@@ -242,7 +244,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendDistanceDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,
 	                                       @NonNull GPXTrackAnalysis analysis, boolean shouldShowFolder) {
-		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		setupTextSpan(builder);
 
 		if (analysis.isTimeSpecified()) {
@@ -260,7 +262,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			setupTextSpan(builder);
 			builder.append(" • ");
 		}
-		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 		appendPoints(builder, analysis);
 		appendFolderName(builder, trackItem, shouldShowFolder);
@@ -269,8 +271,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder,
 	                                      @NonNull GPXTrackAnalysis analysis,
 	                                      @Nullable String cityName) {
-		if (analysis.latLonStart != null) {
-			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, analysis.latLonStart);
+		LatLon latLon = analysis.getLatLonStart();
+		if (latLon != null) {
+			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, latLon);
 			builder.append(UpdateLocationUtils.getFormattedDistance(app, locationInfo, locationViewCache));
 
 			if (!Algorithms.isEmpty(cityName)) {
@@ -279,7 +282,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 			builder.append(" | ");
 			UpdateLocationUtils.updateDirectionDrawable(app, directionIcon, locationInfo, locationViewCache);
 		}
-		builder.append(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		builder.append(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		if (analysis.isTimeSpecified()) {
 			builder.append(" • ");
 			appendDuration(builder, analysis);
@@ -289,15 +292,15 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendDuration(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
 		if (analysis.isTimeSpecified()) {
-			int duration = (int) (analysis.timeSpan / 1000.0f + 0.5);
+			int duration = (int) (analysis.getTimeSpan() / 1000.0f + 0.5);
 			builder.append(Algorithms.formatDuration(duration, app.accessibilityEnabled()));
 		}
 	}
 
 	private void appendPoints(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
-		if (analysis.wptPoints > 0) {
+		if (analysis.getWptPoints() > 0) {
 			builder.append(" • ");
-			builder.append(String.valueOf(analysis.wptPoints));
+			builder.append(String.valueOf(analysis.getWptPoints()));
 		}
 	}
 

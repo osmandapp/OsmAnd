@@ -103,13 +103,13 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		name.setText(titleGpxTrack);
 		distance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		pointsCount.setText(String.valueOf(analysis.wptPoints));
+		pointsCount.setText(String.valueOf(analysis.getWptPoints()));
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		boolean timeSpecified = analysis.isTimeSpecified();
 		if (timeSpecified) {
-			time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000),
+			time.setText(Algorithms.formatDuration((int) (analysis.getTimeSpan() / 1000),
 					app.accessibilityEnabled()));
 		}
 		AndroidUiHelper.updateVisibility(time, timeSpecified);

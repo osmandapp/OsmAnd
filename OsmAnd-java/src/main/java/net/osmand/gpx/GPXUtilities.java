@@ -1465,7 +1465,7 @@ public class GPXUtilities {
 											if (t.equals("heartrate")) {
 												t = "hr";
 											}
-											if (t.equals("speed")) {
+											if (t.equals("speed")) { //***
 												t = PointAttributes.SENSOR_TAG_SPEED;
 											}
 											parse.getExtensionsToWrite().put(t, value);
@@ -1776,7 +1776,8 @@ public class GPXUtilities {
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;
-			log.error("Error reading gpx", e); //$NON-NLS-1$
+			log.error("Error reading gpx " + gpxFile.path, e); //$NON-NLS-1$
+			log.info("Error reading gpx " + gpxFile.path);
 		}
 
 		return gpxFile;

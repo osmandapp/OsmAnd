@@ -485,7 +485,7 @@ public class RouteColorize {
             case SPEED:
                 return 0.0;
             case ELEVATION:
-                return analysis.minElevation;
+                return analysis.getMinElevation();
             case SLOPE:
                 return SLOPE_MIN_VALUE;
             default:
@@ -496,9 +496,9 @@ public class RouteColorize {
     public static double getMaxValue(ColorizationType type, GPXTrackAnalysis analysis, double minValue, double maxProfileSpeed) {
         switch (type) {
             case SPEED:
-                return Math.max(analysis.maxSpeed, maxProfileSpeed);
+                return Math.max(analysis.getMaxSpeed(), maxProfileSpeed);
             case ELEVATION:
-                return Math.max(analysis.maxElevation, minValue + 50);
+                return Math.max(analysis.getMaxElevation(), minValue + 50);
             case SLOPE:
                 return SLOPE_MAX_VALUE;
             default:

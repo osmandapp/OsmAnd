@@ -522,7 +522,7 @@ public class GpsFilterHelper {
 
 		@Override
 		public double getMaxValue() {
-			return Math.ceil(analysis.maxSpeed);
+			return Math.ceil(analysis.getMaxSpeed());
 		}
 
 		@Override
@@ -613,12 +613,12 @@ public class GpsFilterHelper {
 
 		@Override
 		public double getMinValue() {
-			return ((int) Math.floor(analysis.minElevation));
+			return ((int) Math.floor(analysis.getMinElevation()));
 		}
 
 		@Override
 		public double getMaxValue() {
-			return ((int) Math.ceil(analysis.maxElevation));
+			return ((int) Math.ceil(analysis.getMaxElevation()));
 		}
 
 		@Override

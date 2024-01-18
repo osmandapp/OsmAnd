@@ -109,22 +109,22 @@ public class GpxUiHelper {
 		// OUTPUT:
 		// 1. Total distance, Start time, End time
 		description.append(app.getString(R.string.gpx_info_distance, getColorValue(distanceClr,
-						OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), html),
-				getColorValue(distanceClr, analysis.points + "", html)));
-		if (analysis.totalTracks > 1) {
-			description.append(nl).append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.totalTracks + "", html)));
+						OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app), html),
+				getColorValue(distanceClr, analysis.getPoints() + "", html)));
+		if (analysis.getTotalTracks() > 1) {
+			description.append(nl).append(app.getString(R.string.gpx_info_subtracks, getColorValue(speedClr, analysis.getTotalTracks() + "", html)));
 		}
-		if (analysis.wptPoints > 0) {
-			description.append(nl).append(app.getString(R.string.gpx_info_waypoints, getColorValue(speedClr, analysis.wptPoints + "", html)));
+		if (analysis.getWptPoints() > 0) {
+			description.append(nl).append(app.getString(R.string.gpx_info_waypoints, getColorValue(speedClr, analysis.getWptPoints() + "", html)));
 		}
 		if (analysis.isTimeSpecified()) {
-			description.append(nl).append(app.getString(R.string.gpx_info_start_time, analysis.startTime));
-			description.append(nl).append(app.getString(R.string.gpx_info_end_time, analysis.endTime));
+			description.append(nl).append(app.getString(R.string.gpx_info_start_time, analysis.getStartTime()));
+			description.append(nl).append(app.getString(R.string.gpx_info_end_time, analysis.getEndTime()));
 		}
 
 		// 2. Time span
-		if (analysis.timeSpan > 0 && analysis.timeSpan != analysis.timeMoving) {
-			String formatDuration = Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled());
+		if (analysis.getTimeSpan() > 0 && analysis.getTimeSpan() != analysis.getTimeMoving()) {
+			String formatDuration = Algorithms.formatDuration((int) (analysis.getTimeSpan() / 1000.0f + 0.5), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timespan,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}
@@ -132,26 +132,26 @@ public class GpxUiHelper {
 		// 3. Time moving, if any
 		if (analysis.isTimeMoving()) {
 			//Next few lines for Issue 3222 heuristic testing only
-			//final String formatDuration0 = Algorithms.formatDuration((int) (analysis.timeMoving0 / 1000.0f + 0.5), app.accessibilityEnabled());
+			//final String formatDuration0 = Algorithms.formatDuration((int) (analysis.getTimeMoving()0 / 1000.0f + 0.5), app.accessibilityEnabled());
 			//description.append(nl).append(app.getString(R.string.gpx_timemoving,
 			//		getColorValue(timeSpanClr, formatDuration0, html)));
 			//description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving0, app), html) + ")");
-			String formatDuration = Algorithms.formatDuration((int) (analysis.timeMoving / 1000.0f + 0.5), app.accessibilityEnabled());
+			String formatDuration = Algorithms.formatDuration((int) (analysis.getTimeMoving() / 1000.0f + 0.5), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timemoving,
 					getColorValue(timeSpanClr, formatDuration, html)));
-			description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app), html) + ")");
+			description.append(" (" + getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.getTotalDistanceMoving(), app), html) + ")");
 		}
 
 		// 4. Elevation, eleUp, eleDown, if recorded
 		if (analysis.isElevationSpecified()) {
 			description.append(nl);
 			description.append(app.getString(R.string.gpx_info_avg_altitude,
-					getColorValue(speedClr, OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app), html)));
+					getColorValue(speedClr, OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app), html)));
 			description.append(nl);
-			String min = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app), html);
-			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app), html);
-			String asc = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app), html);
-			String desc = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app), html);
+			String min = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app), html);
+			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app), html);
+			String asc = getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app), html);
+			String desc = getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app), html);
 			description.append(app.getString(R.string.gpx_info_diff_altitude, min + " - " + max));
 			description.append(nl);
 			description.append(app.getString(R.string.gpx_info_asc_altitude, "\u2193 " + desc + "   \u2191 " + asc + ""));
@@ -159,8 +159,8 @@ public class GpxUiHelper {
 
 
 		if (analysis.isSpeedSpecified()) {
-			String avg = getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app), html);
-			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app), html);
+			String avg = getColorValue(speedClr, OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app), html);
+			String max = getColorValue(ascClr, OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app), html);
 			description.append(nl).append(app.getString(R.string.gpx_info_average_speed, avg));
 			description.append(nl).append(app.getString(R.string.gpx_info_maximum_speed, max));
 		}
@@ -299,11 +299,11 @@ public class GpxUiHelper {
 			TextView time = v.findViewById(R.id.time);
 			TextView distance = v.findViewById(R.id.distance);
 			TextView pointsCount = v.findViewById(R.id.points_count);
-			pointsCount.setText(String.valueOf(analysis.wptPoints));
-			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+			pointsCount.setText(String.valueOf(analysis.getWptPoints()));
+			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000.0f + 0.5), app.accessibilityEnabled()) + "");
+				time.setText(Algorithms.formatDuration((int) (analysis.getTimeSpan() / 1000.0f + 0.5), app.accessibilityEnabled()) + "");
 			} else {
 				time.setText("");
 			}
@@ -767,11 +767,11 @@ public class GpxUiHelper {
 			TextView time = view.findViewById(R.id.time);
 			TextView distance = view.findViewById(R.id.distance);
 			TextView pointsCount = view.findViewById(R.id.points_count);
-			pointsCount.setText(String.valueOf(analysis.wptPoints));
-			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+			pointsCount.setText(String.valueOf(analysis.getWptPoints()));
+			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+				time.setText(formatDuration((int) (analysis.getTimeSpan() / 1000), app.accessibilityEnabled()));
 			} else {
 				time.setText("");
 			}

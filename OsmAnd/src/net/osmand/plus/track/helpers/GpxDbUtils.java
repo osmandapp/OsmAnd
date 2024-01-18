@@ -176,17 +176,11 @@ public class GpxDbUtils {
 		if (oldVersion < 16) {
 			addTableColumn(db, FILE_CREATION_TIME);
 		}
-		if (oldVersion < 17) {
-			addTableColumn(db, MAX_SENSOR_POWER);
-			addTableColumn(db, AVG_SENSOR_POWER);
-			addTableColumn(db, MAX_SENSOR_CADENCE);
-			addTableColumn(db, AVG_SENSOR_CADENCE);
-			addTableColumn(db, MAX_SENSOR_SPEED);
-			addTableColumn(db, AVG_SENSOR_SPEED);
-			addTableColumn(db, MAX_SENSOR_HEART_RATE);
-			addTableColumn(db, AVG_SENSOR_HEART_RATE);
-			addTableColumn(db, MAX_SENSOR_TEMPERATURE);
-			addTableColumn(db, AVG_SENSOR_TEMPERATURE);
+		SQLiteCursor cursor = db.rawQuery("select * from " + GPX_TABLE_NAME + " limit 0", null);
+		for (GpxParameter gpxParameter : values()) {
+			if(cursor.getColumnIndex(gpxParameter.getColumnName()) == -1) {
+				addTableColumn(db, gpxParameter);
+			}
 		}
 		db.execSQL(getIndexQuery());
 	}
@@ -204,7 +198,7 @@ public class GpxDbUtils {
 			GPXTrackAnalysis analysis = item.getAnalysis();
 			return !item.hasData() || analysis == null
 					|| analysis.wptCategoryNames == null
-					|| analysis.latLonStart == null && analysis.points > 0
+					|| analysis.getLatLonStart() == null && analysis.getPoints() > 0
 					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
 					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0;
 		}
@@ -214,7 +208,7 @@ public class GpxDbUtils {
 	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
-			return item.getParameter(NEAREST_CITY_NAME) == null && analysis != null && analysis.latLonStart != null;
+			return item.getParameter(NEAREST_CITY_NAME) == null && analysis != null && analysis.getLatLonStart() != null;
 		}
 		return true;
 	}
@@ -259,35 +253,35 @@ public class GpxDbUtils {
 
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		boolean hasAnalysis = analysis != null;
-		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
-		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
-		map.put(START_TIME, hasAnalysis ? analysis.startTime : null);
-		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
-		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
-		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
-		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
-		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
-		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
-		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
-		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
-		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
-		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
-		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
-		map.put(MAX_SENSOR_TEMPERATURE, hasAnalysis ? analysis.maxSensorTemperature : null);
-		map.put(AVG_SENSOR_TEMPERATURE, hasAnalysis ? analysis.avgSensorTemperature : null);
-		map.put(MAX_SENSOR_POWER, hasAnalysis ? analysis.maxSensorPower : null);
-		map.put(AVG_SENSOR_POWER, hasAnalysis ? analysis.avgSensorPower : null);
-		map.put(MAX_SENSOR_SPEED, hasAnalysis ? analysis.maxSensorSpeed : null);
-		map.put(AVG_SENSOR_SPEED, hasAnalysis ? analysis.avgSensorSpeed : null);
-		map.put(MAX_SENSOR_CADENCE, hasAnalysis ? analysis.maxSensorCadence : null);
-		map.put(AVG_SENSOR_CADENCE, hasAnalysis ? analysis.avgSensorCadence : null);
-		map.put(MAX_SENSOR_HEART_RATE, hasAnalysis ? analysis.maxSensorHr : null);
-		map.put(AVG_SENSOR_HEART_RATE, hasAnalysis ? analysis.avgSensorHr : null);
-		map.put(POINTS, hasAnalysis ? analysis.points : null);
-		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
+		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.getTotalDistance() : null);
+		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.getTotalTracks() : null);
+		map.put(START_TIME, hasAnalysis ? analysis.getStartTime() : null);
+		map.put(END_TIME, hasAnalysis ? analysis.getEndTime() : null);
+		map.put(TIME_SPAN, hasAnalysis ? analysis.getTimeSpan() : null);
+		map.put(TIME_MOVING, hasAnalysis ? analysis.getTimeMoving() : null);
+		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.getTotalDistanceMoving() : null);
+		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.getDiffElevationUp() : null);
+		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.getDiffElevationDown() : null);
+		map.put(AVG_ELEVATION, hasAnalysis ? analysis.getAvgElevation() : null);
+		map.put(MIN_ELEVATION, hasAnalysis ? analysis.getMinElevation() : null);
+		map.put(MAX_ELEVATION, hasAnalysis ? analysis.getMaxElevation() : null);
+		map.put(MAX_SPEED, hasAnalysis ? analysis.getMaxSpeed() : null);
+		map.put(AVG_SPEED, hasAnalysis ? analysis.getAvgSpeed() : null);
+		map.put(MAX_SENSOR_TEMPERATURE, hasAnalysis ? analysis.getMaxSensorTemperature() : null);
+		map.put(AVG_SENSOR_TEMPERATURE, hasAnalysis ? analysis.getAvgSensorTemperature() : null);
+		map.put(MAX_SENSOR_POWER, hasAnalysis ? analysis.getMaxSensorPower() : null);
+		map.put(AVG_SENSOR_POWER, hasAnalysis ? analysis.getAvgSensorPower() : null);
+		map.put(MAX_SENSOR_SPEED, hasAnalysis ? analysis.getMaxSensorSpeed() : null);
+		map.put(AVG_SENSOR_SPEED, hasAnalysis ? analysis.getAvgSensorSpeed() : null);
+		map.put(MAX_SENSOR_CADENCE, hasAnalysis ? analysis.getMaxSensorCadence() : null);
+		map.put(AVG_SENSOR_CADENCE, hasAnalysis ? analysis.getAvgSensorCadence() : null);
+		map.put(MAX_SENSOR_HEART_RATE, hasAnalysis ? analysis.getMaxSensorHr() : null);
+		map.put(AVG_SENSOR_HEART_RATE, hasAnalysis ? analysis.getAvgSensorHr() : null);
+		map.put(POINTS, hasAnalysis ? analysis.getPoints() : null);
+		map.put(WPT_POINTS, hasAnalysis ? analysis.getWptPoints() : null);
 		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
+		map.put(START_LAT, hasAnalysis  ? analysis.getLatStart() : null);
+		map.put(START_LON, hasAnalysis  ? analysis.getLonStart() : null);
 
 		return map;
 	}

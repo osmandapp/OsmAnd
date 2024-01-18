@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Pair
 import com.google.gson.annotations.Expose
@@ -156,7 +157,7 @@ open class ListTrackFilter(
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
 		val trackItemPropertyValue = getTrackPropertyValue(trackItem)
-		for (item in selectedItems) {
+		for (item in selectedItems) {//***
 			if (Algorithms.stringsEqual(trackItemPropertyValue, item)) {
 				return true
 			}
@@ -165,8 +166,11 @@ open class ListTrackFilter(
 	}
 
 	private fun getTrackPropertyValue(trackItem: TrackItem): String {
-		val value = trackItem.dataItem?.getParameter<Any>(filterType.propertyList[0])
-		return if(value != null) value as String else ""
+		var value = trackItem.dataItem?.getParameter<Any>(filterType.propertyList[0])
+		value?.let {
+			value = collectionFilterParams.trackParamToString(it)
+		}
+		return value?.toString() ?: ""
 	}
 
 	override fun equals(other: Any?): Boolean {

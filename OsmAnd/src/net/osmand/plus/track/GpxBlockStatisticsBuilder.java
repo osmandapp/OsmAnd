@@ -181,15 +181,15 @@ public class GpxBlockStatisticsBuilder {
 		items.clear();
 		if (analysis != null) {
 			if (tabItem == null) {
-				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-				String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-				String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-				String minElevation = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-				String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-				String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-				long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+				String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+				String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
+				String minElevation = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+				String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
+				String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
+				String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
+				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+				long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.getTimeMoving();
 				prepareDataDistance(totalDistance);
 				prepareDataAscent(asc);
 				prepareDataDescent(desc);
@@ -201,10 +201,10 @@ public class GpxBlockStatisticsBuilder {
 			} else {
 				switch (tabItem) {
 					case GPX_TAB_ITEM_GENERAL: {
-						float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-						float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-						Date start = new Date(analysis.startTime);
-						Date end = new Date(analysis.endTime);
+						float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+						float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+						Date start = new Date(analysis.getStartTime());
+						Date end = new Date(analysis.getEndTime());
 						prepareDataDistance(totalDistance);
 						prepareDataTimeSpan(timeSpan);
 						prepareDataStartTime(start);
@@ -212,10 +212,10 @@ public class GpxBlockStatisticsBuilder {
 						break;
 					}
 					case GPX_TAB_ITEM_ALTITUDE: {
-						String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-						String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-						String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-						String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+						String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+						String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
+						String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+						String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 						prepareDataAverageAltitude();
 						prepareDataAltitudeRange(min, max);
 						prepareDataAscent(asc);
@@ -223,10 +223,10 @@ public class GpxBlockStatisticsBuilder {
 						break;
 					}
 					case GPX_TAB_ITEM_SPEED: {
-						String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-						String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-						long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
-						float totalDistanceMoving = withoutGaps ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+						String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
+						String max = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
+						long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.getTimeMoving();
+						float totalDistanceMoving = withoutGaps ? analysis.totalDistanceMovingWithoutGaps : analysis.getTotalDistanceMoving();
 						prepareDataAverageSpeed(avg);
 						prepareDataMaximumSpeed(max);
 						prepareDataTimeMoving(timeMoving);
@@ -244,7 +244,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void prepareDataAverageAltitude() {
-		prepareData(app.getString(R.string.average_altitude), OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app),
+		prepareData(app.getString(R.string.average_altitude), OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app),
 				R.drawable.ic_action_altitude_average_16, GPXDataSetType.ALTITUDE, null, ItemType.ITEM_ALTITUDE);
 	}
 
@@ -317,13 +317,13 @@ public class GpxBlockStatisticsBuilder {
 		StatBlock statBlock = new StatBlock(title, value, imageResId, imageColorId, firstType, secondType, itemType);
 		switch (statBlock.itemType) {
 			case ITEM_DISTANCE: {
-				if (analysis.totalDistance != 0f) {
+				if (analysis.getTotalDistance() != 0f) {
 					items.add(statBlock);
 				}
 				break;
 			}
 			case ITEM_DISTANCE_MOVING: {
-				if (analysis.totalDistanceMoving != 0f) {
+				if (analysis.getTotalDistanceMoving() != 0f) {
 					items.add(statBlock);
 				}
 				break;
@@ -341,7 +341,7 @@ public class GpxBlockStatisticsBuilder {
 				break;
 			}
 			case ITEM_TIME: {
-				if (analysis.timeSpan > 0) {
+				if (analysis.getTimeSpan() > 0) {
 					items.add(statBlock);
 				}
 				break;

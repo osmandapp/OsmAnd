@@ -94,7 +94,7 @@ open class FilterRangeViewHolder(
 		minMaxContainer = itemView.findViewById(R.id.min_max_container)
 		titleContainer = itemView.findViewById(R.id.title_container)
 		titleContainer.setOnClickListener {
-			expanded = !expanded
+			expanded = !expanded && filter.isValid()
 			updateExpandState()
 		}
 		rangeInputContainer = itemView.findViewById(R.id.range_input_container)
@@ -113,7 +113,8 @@ open class FilterRangeViewHolder(
 					if (filter.getDisplayValueFrom() != newValue
 						&& filter.valueTo is Number
 						&& newValue < (filter.valueTo as Number).toInt()
-						&& !isSliderDragging) {
+						&& !isSliderDragging
+						&& !isBinding) {
 						filter.setValueFrom(newValue.toString())
 						updateValues()
 					}
@@ -129,7 +130,8 @@ open class FilterRangeViewHolder(
 					if (filter.getDisplayValueTo() != newValue
 						&& filter.valueFrom is Number
 						&& newValue > (filter.valueFrom as Number).toInt()
-						&& !isSliderDragging) {
+						&& !isSliderDragging
+						&& !isBinding) {
 						filter.setValueTo(newValue.toString())
 						updateValues()
 					}
@@ -140,6 +142,7 @@ open class FilterRangeViewHolder(
 		valueToInputContainer = itemView.findViewById(R.id.value_to)
 	}
 
+	var isBinding = false
 	fun bindView(filter: RangeTrackFilter<*>) {
 		this.filter = filter
 		title.setText(filter.filterType.nameResId)
@@ -161,13 +164,21 @@ open class FilterRangeViewHolder(
 	}
 
 	private fun updateValues() {
+		isBinding = true
 		val valueFrom = filter.getDisplayValueFrom()
 		val valueTo = filter.getDisplayValueTo()
 		val minValue = filter.getDisplayMinValue()
 		val maxValue = filter.getDisplayMaxValue()
-		slider.valueTo = maxValue.toFloat()
-		slider.valueFrom = minValue.toFloat()
-		slider.setValues(valueFrom.toFloat(), valueTo.toFloat())
+		if (maxValue > minValue) {
+			slider.valueTo = maxValue.toFloat()
+			slider.valueFrom = minValue.toFloat()
+			slider.setValues(valueFrom.toFloat(), valueTo.toFloat())
+		} else {
+			expanded = false
+			updateExpandState()
+		}
+//		slider.valueTo = maxValue.toFloat()
+//		slider.valueFrom = minValue.toFloat()
 		valueFromInput.setText(valueFrom.toString())
 		valueFromInput.setSelection(valueFromInput.length())
 		valueToInput.setText(valueTo.toString())
@@ -180,6 +191,7 @@ open class FilterRangeViewHolder(
 		maxFilterValue.text = maxValuePrompt
 		AndroidUiHelper.updateVisibility(selectedValue, filter.isEnabled())
 		updateSelectedValue(valueFrom.toString(), valueTo.toString())
+		isBinding = false
 	}
 
 	open fun updateSelectedValue(valueFrom: String, valueTo: String) {

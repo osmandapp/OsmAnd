@@ -127,7 +127,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
 	private void checkAndSearchNearestCity(@NonNull GpxDataItem item) {
 		GPXTrackAnalysis analysis = item.getAnalysis();
-		LatLon latLon = analysis != null ? analysis.latLonStart : null;
+		LatLon latLon = analysis != null ? analysis.getLatLonStart() : null;
 		if (latLon == null) {
 			item.setParameter(NEAREST_CITY_NAME, "");
 		} else {

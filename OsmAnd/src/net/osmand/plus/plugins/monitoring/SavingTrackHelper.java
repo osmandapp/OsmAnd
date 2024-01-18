@@ -823,10 +823,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		currentTrack.processPoints(app);
 		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
-		distance = analysis.totalDistance;
-		points = analysis.wptPoints;
-		duration = analysis.timeSpan;
-		trkPoints = analysis.points;
+		distance = analysis.getTotalDistance();
+		points = analysis.getWptPoints();
+		duration = analysis.getTimeSpan();
+		trkPoints = analysis.getPoints();
 	}
 
 	private void prepareCurrentTrackForRecording() {

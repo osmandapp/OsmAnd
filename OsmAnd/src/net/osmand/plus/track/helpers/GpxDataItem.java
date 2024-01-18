@@ -23,7 +23,7 @@ public class GpxDataItem {
 
 	@NonNull
 	private final File file;
-	private final Map<GpxParameter, Object> map = new HashMap<>();
+	public final Map<GpxParameter, Object> map = new HashMap<>();
 
 	@Nullable
 	private GPXTrackAnalysis analysis;
@@ -84,35 +84,15 @@ public class GpxDataItem {
 
 	private void updateAnalysisParameters() {
 		boolean hasAnalysis = analysis != null;
-		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
-		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
-		map.put(START_TIME, hasAnalysis ? analysis.startTime : null);
-		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
-		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
-		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
-		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
-		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
-		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
-		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
-		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
-		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
-		map.put(MAX_SPEED, hasAnalysis ? (double) analysis.maxSpeed : null);
-		map.put(AVG_SPEED, hasAnalysis ? (double) analysis.avgSpeed : null);
-		map.put(POINTS, hasAnalysis ? analysis.points : null);
-		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
+		for(GpxParameter gpxParameter: values()) {
+			if(gpxParameter.isAnalysisParameter()) {
+				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
+			}
+		}
+
 		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
-		map.put(MAX_SENSOR_TEMPERATURE, hasAnalysis ? analysis.maxSensorTemperature : null);
-		map.put(AVG_SENSOR_TEMPERATURE, hasAnalysis ? (double) analysis.avgSensorTemperature : null);
-		map.put(MAX_SENSOR_POWER, hasAnalysis ? analysis.maxSensorPower : null);
-		map.put(AVG_SENSOR_POWER, hasAnalysis ? (double) analysis.avgSensorPower : null);
-		map.put(MAX_SENSOR_CADENCE, hasAnalysis ? (double) analysis.maxSensorCadence : null);
-		map.put(AVG_SENSOR_CADENCE, hasAnalysis ? (double) analysis.avgSensorCadence : null);
-		map.put(MAX_SENSOR_SPEED, hasAnalysis ? (double) analysis.maxSensorSpeed : null);
-		map.put(AVG_SENSOR_SPEED, hasAnalysis ? (double) analysis.avgSensorSpeed : null);
-		map.put(MAX_SENSOR_HEART_RATE, hasAnalysis ? analysis.maxSensorHr : null);
-		map.put(AVG_SENSOR_HEART_RATE, hasAnalysis ? (double) analysis.avgSensorHr : null);
+//		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
+//		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
 	}
 
 	public void readGpxParams(@NonNull GPXFile gpxFile) {

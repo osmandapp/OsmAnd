@@ -130,13 +130,13 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		}
 	}
 
-	fun setMaxValue(value: Any) {
-		val displayValue = getFormattedValue(value.toString()).valueSrc
-		val normalizedValue = ceil(displayValue)
-		val baseValue = getBaseValueFromFormatted(normalizedValue.toString())
-		val convertedValue = getComparableValue(baseValue)
-		maxValue = convertedValue
-		valueTo = convertedValue
+	fun setMaxValue(value: T) {
+//		val displayValue = getFormattedValue(value.toString()).valueSrc
+//		val normalizedValue = ceil(displayValue)
+//		val baseValue = getBaseValueFromFormatted(normalizedValue.toString())
+//		val convertedValue = getComparableValue(baseValue)
+		maxValue = getComparableValue(value)
+		valueTo = getComparableValue(value)
 	}
 
 	override fun equals(other: Any?): Boolean {
@@ -283,5 +283,9 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		result = 31 * result + valueFrom.hashCode()
 		result = 31 * result + valueTo.hashCode()
 		return result
+	}
+
+	override fun isValid(): Boolean {
+		return maxValue > minValue
 	}
 }

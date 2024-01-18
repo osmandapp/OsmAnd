@@ -124,7 +124,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	private void populateList(GpxDataItem item) {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
-			if (analysis != null && analysis.wptPoints > 0) {
+			if (analysis != null && analysis.getWptPoints() > 0) {
 				int index = gpxList.indexOf(item);
 				if (index != -1) {
 					gpxList.set(index, item);

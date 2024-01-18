@@ -38,7 +38,7 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	private static final int DB_VERSION = 17;
+	private static final int DB_VERSION = 20;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
@@ -124,6 +124,14 @@ public class GPXDatabase {
 	}
 
 	public boolean updateDataItem(@NonNull GpxDataItem item) {
+		String fileName = item.getParameter(FILE_NAME);
+		LOG.fatal("updateDataItem " + fileName);
+		if(fileName.equals("Mon 31 Oct 2022-reversed.gpx")) {
+			LOG.info("set maxSpeed " + item.getParameter(MAX_SPEED));
+			if(item.getParameter(MAX_SPEED) != GpxDbUtils.getItemParameters(app, item).get(MAX_SPEED) && item.getAnalysis() != null) {
+				LOG.info("changes!!");
+			}
+		}
 		Map<GpxParameter, Object> map = GpxDbUtils.getItemParameters(app, item);
 		return updateGpxParameters(map, GpxDbUtils.getItemRowsToSearch(app, item.getFile()));
 	}
@@ -143,6 +151,11 @@ public class GPXDatabase {
 	private boolean updateGpxParameters(@NonNull SQLiteConnection db, @NonNull Map<GpxParameter, Object> rowsToUpdate, @NonNull Map<String, Object> rowsToSearch) {
 		Map<String, Object> map = GpxDbUtils.convertGpxParameters(rowsToUpdate);
 		Pair<String, Object[]> pair = AndroidDbUtils.createDbUpdateQuery(GPX_TABLE_NAME, map, rowsToSearch);
+		String fileName = (String) map.get("fileName");
+		LOG.fatal("update track " + fileName);
+		if(fileName.equals("Mon 31 Oct 2022-reversed.gpx")) {
+			LOG.info("set maxSpeed " + map.get("maxSpeed"));
+		}
 		db.execSQL(pair.first, pair.second);
 		return true;
 	}
@@ -186,6 +199,11 @@ public class GPXDatabase {
 
 	void insert(@NonNull GpxDataItem item, @NonNull SQLiteConnection db) {
 		Map<String, Object> map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(app, item));
+		String fileName = (String) map.get("fileName");
+		LOG.fatal("insert track " + fileName);
+		if(fileName.equals("Mon 31 Oct 2022-reversed.gpx")) {
+			LOG.info("");
+		}
 		db.execSQL(AndroidDbUtils.createDbInsertQuery(GPX_TABLE_NAME, map.keySet()), map.values().toArray());
 	}
 
@@ -200,42 +218,48 @@ public class GPXDatabase {
 		GpxDataItem item = new GpxDataItem(app, new File(dir, fileName));
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 
-		analysis.totalDistance = (float) query.getDouble(TOTAL_DISTANCE.getSelectColumnIndex());
-		analysis.totalTracks = query.getInt(TOTAL_TRACKS.getSelectColumnIndex());
-		analysis.startTime = query.getLong(START_TIME.getSelectColumnIndex());
-		analysis.endTime = query.getLong(END_TIME.getSelectColumnIndex());
-		analysis.timeSpan = query.getLong(TIME_SPAN.getSelectColumnIndex());
-		analysis.timeMoving = query.getLong(TIME_MOVING.getSelectColumnIndex());
-		analysis.totalDistanceMoving = (float) query.getDouble(TOTAL_DISTANCE_MOVING.getSelectColumnIndex());
-		analysis.diffElevationUp = query.getDouble(DIFF_ELEVATION_UP.getSelectColumnIndex());
-		analysis.diffElevationDown = query.getDouble(DIFF_ELEVATION_DOWN.getSelectColumnIndex());
-		analysis.avgElevation = query.getDouble(AVG_ELEVATION.getSelectColumnIndex());
-		analysis.minElevation = query.getDouble(MIN_ELEVATION.getSelectColumnIndex());
-		analysis.maxElevation = query.getDouble(MAX_ELEVATION.getSelectColumnIndex());
-		analysis.minSpeed = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
-		analysis.maxSpeed = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
-		analysis.avgSpeed = (float) query.getDouble(AVG_SPEED.getSelectColumnIndex());
-		analysis.maxSensorTemperature = query.getInt(MAX_SENSOR_TEMPERATURE.getSelectColumnIndex());
-		analysis.avgSensorTemperature = (float) query.getDouble(AVG_SENSOR_TEMPERATURE.getSelectColumnIndex());
-		analysis.maxSensorCadence = (float) query.getDouble(MAX_SENSOR_CADENCE.getSelectColumnIndex());
-		analysis.avgSensorCadence = (float) query.getDouble(AVG_SENSOR_CADENCE.getSelectColumnIndex());
-		analysis.maxSensorPower = query.getInt(MAX_SENSOR_POWER.getSelectColumnIndex());
-		analysis.avgSensorPower = (float) query.getDouble(AVG_SENSOR_POWER.getSelectColumnIndex());
-		analysis.maxSensorSpeed = (float) query.getDouble(MAX_SENSOR_SPEED.getSelectColumnIndex());
-		analysis.avgSensorSpeed = (float) query.getDouble(AVG_SENSOR_SPEED.getSelectColumnIndex());
-		analysis.maxSensorHr = query.getInt(MAX_SENSOR_HEART_RATE.getSelectColumnIndex());
-		analysis.avgSensorHr = (float)query.getDouble(AVG_SENSOR_HEART_RATE.getSelectColumnIndex());
-		analysis.points = query.getInt(POINTS.getSelectColumnIndex());
-		analysis.wptPoints = query.getInt(WPT_POINTS.getSelectColumnIndex());
+		for (GpxParameter parameter :
+				values()) {
+			if (parameter.isAnalysisParameter()) {
+				analysis.setGpxParameter(parameter, queryColumnValue(query, parameter));
+			}
+		}
+//		analysis.getTotalDistance() = (float) query.getDouble(TOTAL_DISTANCE.getSelectColumnIndex());
+//		analysis.getTotalTracks() = query.getInt(TOTAL_TRACKS.getSelectColumnIndex());
+//		analysis.getStartTime() = query.getLong(START_TIME.getSelectColumnIndex());
+//		analysis.getEndTime() = query.getLong(END_TIME.getSelectColumnIndex());
+//		analysis.getTimeSpan() = query.getLong(TIME_SPAN.getSelectColumnIndex());
+//		analysis.getTimeMoving() = query.getLong(TIME_MOVING.getSelectColumnIndex());
+//		analysis.getTotalDistanceMoving() = (float) query.getDouble(TOTAL_DISTANCE_MOVING.getSelectColumnIndex());
+//		analysis.getDiffElevationUp() = query.getDouble(DIFF_ELEVATION_UP.getSelectColumnIndex());
+//		analysis.getDiffElevationDown() = query.getDouble(DIFF_ELEVATION_DOWN.getSelectColumnIndex());
+//		analysis.getAvgElevation() = query.getDouble(AVG_ELEVATION.getSelectColumnIndex());
+//		analysis.getMinElevation() = query.getDouble(MIN_ELEVATION.getSelectColumnIndex());
+//		analysis.getMaxElevation() = query.getDouble(MAX_ELEVATION.getSelectColumnIndex());
+//		analysis.minSpeed = (float) query.getDouble(MIN_SPEED.getSelectColumnIndex());
+//		analysis.getMaxSpeed() = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
+//		analysis.getAvgSpeed() = (float) query.getDouble(AVG_SPEED.getSelectColumnIndex());
+//		analysis.maxSensorTemperature = query.getInt(MAX_SENSOR_TEMPERATURE.getSelectColumnIndex());
+//		analysis.avgSensorTemperature = (float) query.getDouble(AVG_SENSOR_TEMPERATURE.getSelectColumnIndex());
+//		analysis.maxSensorCadence = (float) query.getDouble(MAX_SENSOR_CADENCE.getSelectColumnIndex());
+//		analysis.avgSensorCadence = (float) query.getDouble(AVG_SENSOR_CADENCE.getSelectColumnIndex());
+//		analysis.maxSensorPower = query.getInt(MAX_SENSOR_POWER.getSelectColumnIndex());
+//		analysis.avgSensorPower = (float) query.getDouble(AVG_SENSOR_POWER.getSelectColumnIndex());
+//		analysis.maxSensorSpeed = (float) query.getDouble(MAX_SENSOR_SPEED.getSelectColumnIndex());
+//		analysis.avgSensorSpeed = (float) query.getDouble(AVG_SENSOR_SPEED.getSelectColumnIndex());
+//		analysis.maxSensorHr = query.getInt(MAX_SENSOR_HEART_RATE.getSelectColumnIndex());
+//		analysis.avgSensorHr = (float) query.getDouble(AVG_SENSOR_HEART_RATE.getSelectColumnIndex());
+//		analysis.getPoints() = query.getInt(POINTS.getSelectColumnIndex());
+//		analysis.getWptPoints() = query.getInt(WPT_POINTS.getSelectColumnIndex());
 
 		String names = query.getString(WPT_CATEGORY_NAMES.getSelectColumnIndex());
 		analysis.wptCategoryNames = names != null ? Algorithms.decodeStringSet(names) : null;
 
-		if (!query.isNull(START_LAT.getSelectColumnIndex()) && !query.isNull(START_LON.getSelectColumnIndex())) {
-			double lat = query.getDouble(START_LAT.getSelectColumnIndex());
-			double lon = query.getDouble(START_LON.getSelectColumnIndex());
-			analysis.latLonStart = new LatLon(lat, lon);
-		}
+//		if (!query.isNull(START_LAT.getSelectColumnIndex()) && !query.isNull(START_LON.getSelectColumnIndex())) {
+//			double lat = query.getDouble(START_LAT.getSelectColumnIndex());
+//			double lon = query.getDouble(START_LON.getSelectColumnIndex());
+//			analysis.latLonStart = new LatLon(lat, lon);
+//		}
 		item.setAnalysis(analysis);
 		item.setParameter(COLOR, GPXUtilities.parseColor(query.getString(COLOR.getSelectColumnIndex()), 0));
 		item.setParameter(FILE_LAST_MODIFIED_TIME, query.getLong(FILE_LAST_MODIFIED_TIME.getSelectColumnIndex()));
@@ -267,6 +291,21 @@ public class GPXDatabase {
 		}
 		return item;
 	}
+
+	private Object queryColumnValue(@NonNull SQLiteCursor query, GpxParameter gpxParameter) {
+		switch (gpxParameter.getColumnType()) {
+			case "TEXT":
+				return query.getString(gpxParameter.getSelectColumnIndex());
+			case "double":
+				return query.getDouble(gpxParameter.getSelectColumnIndex());
+			case "int":
+				return query.getInt(gpxParameter.getSelectColumnIndex());
+			case "long":
+				return query.getLong(gpxParameter.getSelectColumnIndex());
+		}
+		throw new IllegalArgumentException("Unknown column type " + gpxParameter.getColumnType());
+	}
+
 
 	public long getTracksMinCreateDate() {
 		long minDate = -1;
