@@ -338,7 +338,7 @@
     <string name="rendering_value_low_name">Retka</string>
     <string name="rendering_attr_contourWidth_description">Debljina linije izohipse</string>
     <string name="rendering_attr_contourWidth_name">Debljina linije izohipsi</string>
-    <string name="rendering_attr_hideWaterPolygons_description">Vode</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
     <string name="rendering_attr_hideWaterPolygons_name">Sakrij vodu</string>
     <string name="routing_attr_allow_motorway_name">Koristi autoputeve</string>
     <string name="quick_action_add_configure_map">Podesite mapu</string>
@@ -2721,76 +2721,76 @@
     <string name="search_my_location">Pronađi moj lokaciju</string>
     <string name="first_usage_greeting">Uzmi uputstva i otkrij nova mesta, i bez interneta</string>
     <string name="allow_access_location">Omogući pristup određivanju lokacija</string>
-    <string name="give_permission">Dajte dozvole</string>
+    <string name="give_permission">Daj dozvole</string>
     <string name="storage_place_description">Skladište podataka OsmAnda (za mape, datoteke ruta itd.): %1$s.</string>
-    <string name="storage_free_space">Slobodno mesto skladišta</string>
-    <string name="search_location">Pretražujem lokaciju…</string>
-    <string name="no_inet_connection_desc_map">Zahtevane za preuzimanje.</string>
-    <string name="no_inet_connection">Nema mrežne veze</string>
-    <string name="location_not_found">Nije prepoznat lokaciju</string>
-    <string name="first_usage_wizard_desc">Pusti da OsmAnd odredi Vaš lokaciju i da prema tome predloži mape za preuzimanje te oblasti.</string>
+    <string name="storage_free_space">Slobodan prostor</string>
+    <string name="search_location">Lociranje…</string>
+    <string name="no_inet_connection_desc_map">Potrebno za preuzimanje mapa.</string>
+    <string name="no_inet_connection">Nema interneta</string>
+    <string name="location_not_found">Lokacija nije nađena</string>
+    <string name="first_usage_wizard_desc">Pusti da OsmAnd odredi lokaciju i da prema tome predloži mape za preuzimanje te oblasti.</string>
     <string name="search_map">Pretražujem mape…</string>
     <string name="search_another_country">Odaberi drugu oblast</string>
     <string name="skip_map_downloading_desc">Nemaš ugrađenih mapa. Možete izabrati mapu sa spiska ili preuzeti mape kasnije preko \'meni - %1$s\'.</string>
     <string name="skip_map_downloading">Preskoči preuzimanje mapa</string>
     <string name="si_mi_meters">Milje/metri</string>
     <string name="osmand_plus_banner_desc">Neograničena preuzimanja mapi, ažuriranje, dodatak za Vikipediju.</string>
-    <string name="osm_live_banner_desc">Dobavite neograničeno preuzimanje mapa, uz sedmična, dnevna i čak časovna osvežavanja.</string>
-    <string name="get_for">Dobavite za %1$s</string>
-    <string name="get_it">Dobavite je</string>
-    <string name="osm_live_subscription_desc">Članarina omogućava časovne, dnevno i sedmično ažuriranje, i neograničena preuzimanja svih mapa.</string>
+    <string name="osm_live_banner_desc">Dobavi neograničeno preuzimanje mapa, uz sedmična, dnevna i čak časovna osvežavanja.</string>
+    <string name="get_for">Dobavi za %1$s</string>
+    <string name="get_it">Dobavi ga</string>
+    <string name="osm_live_subscription_desc">#Pretplata #omogućivati hourly, #dnevni, @weekly #poboljšati, a @unlimited #preuzimanje @for @all #karta globally#.</string>
     <string name="donation_to_osm_desc">Deo članarine će biti poslat korisnicima OSM-a. Članarina ostaje ista.</string>
-    <string name="donation_to_osm">Prilog zajednici OSM-a</string>
-    <string name="osm_live_payment_desc">Članarina se naplaćuje po odabranom vremenskom razmaku. Možete je otkazati na Gugl pleju kad god poželite.</string>
+    <string name="donation_to_osm">Donacija OSM zajednici</string>
+    <string name="osm_live_payment_desc">"Preplata se naplaćuje po odabranom vremenskom razmaku. Možeš je otkazati na Google Play  kad god poželiš."</string>
     <string name="new_filter_desc">Molimo, upiši naziv za novi filter, koji će biti dodan u oznaku \"Kategorija\".</string>
     <string name="new_filter">Novi filter</string>
     <string name="delete_filter">Obriši filter</string>
     <string name="save_filter">Sačuvaj filter</string>
     <string name="apply_filters">Primeni filtere</string>
-    <string name="shared_string_filters">Propusnici</string>
-    <string name="custom_search">Proizvoljna pretraga</string>
+    <string name="shared_string_filters">Filteri</string>
+    <string name="custom_search">Prilagođena pretraga</string>
     <string name="create_custom_poi">Napravi proizvoljni filter</string>
     <string name="selected_categories">Izabrane kategorije</string>
     <string name="subcategories">Potkategorije</string>
-    <string name="edit_filter">Izmeni kategorije</string>
+    <string name="edit_filter">Uredi filter</string>
     <string name="translit_names">Preslovi imena</string>
-    <string name="search_hint">Ukucajte grad, adresu, ime tačke od interesa</string>
+    <string name="search_hint">Ukucajte grad, adresu, ime TOI</string>
     <string name="rendering_attr_surfaceIntegrity_name">Kvalitet puta</string>
-    <string name="rendering_attr_contourColorScheme_name">Obrazac boja linija izohipsi</string>
-    <string name="rendering_value_dark_brown_name">Tamna smeđa</string>
-    <string name="rendering_value_light_brown_name">Svetla smeđa</string>
+    <string name="rendering_attr_contourColorScheme_name">Šema boja linija izohipsi</string>
+    <string name="rendering_value_dark_brown_name">Tamno smeđa</string>
+    <string name="rendering_value_light_brown_name">Braon svetla</string>
     <string name="christmas_desc_q">Prikazuj božićne TOI?</string>
     <string name="christmas_desc">U čekanju Božića i Nove Godine, možete izabrati prikaz TOI vezanih za Božić: Badnjake, božićna drva, trgovine, itd.</string>
-    <string name="christmas_poi">Božićne tačke</string>
+    <string name="christmas_poi">Božićne TOI</string>
     <string name="save_track_precision_descr">Propusnik: Nema zapisa dok se ne dostigne ova tačnost.</string>
     <string name="save_track_precision">Najmanja tačnost beleženja</string>
-    <string name="save_track_min_distance_descr">Propusnik: Postavi najmanju udaljenost od tačke da bi se beležila nove tačke.</string>
-    <string name="save_track_min_distance">Najmanji pomeraj beleženja</string>
-    <string name="save_track_min_speed_descr">Propusnik: Nema zapisa tačaka ispod ove brzine.</string>
+    <string name="save_track_min_distance_descr">Filtar: postavite minimalnu udaljenost od tačke da bi zabiležio novu.</string>
+    <string name="save_track_min_distance">Prijave minimalnog pomaka</string>
+    <string name="save_track_min_speed_descr">Filter: Nema zapisa tačaka ispod ove brzine.</string>
     <string name="save_track_min_speed">Najmanja brzina beleženja</string>
     <string name="rendering_attr_contourColorScheme_description">Obrazac boja linija izohipsi</string>
     <string name="gpx_logging_no_data">Nema podataka</string>
     <string name="shared_string_record">Snimaj</string>
     <string name="shared_string_recorded">Snimljeno</string>
-    <string name="shared_string_trip">Putovanje</string>
+    <string name="shared_string_trip">#Putovanje</string>
     <string name="shared_string_paused">Pauzirano</string>
-    <string name="shared_string_pause">Pauziraj</string>
+    <string name="shared_string_pause">&amp;Pauziraj</string>
     <string name="shared_string_continue">Nastavi</string>
     <string name="shared_string_resume">Nastavi</string>
     <string name="shared_string_notifications">Obaveštenja</string>
     <string name="trip_rec_notification_settings_desc">Prikazuj obaveštenje koje omogućava pokretanje snimanja putovanja.</string>
     <string name="trip_rec_notification_settings">Uključi brzo snimanje</string>
     <string name="shared_string_appearance">Izgled</string>
-    <string name="gpx_add_track">Dodaj još…</string>
-    <string name="gpx_no_tracks_title_folder">Takođe, možete dodati datoteke ruta u folder</string>
-    <string name="gpx_no_tracks_title">Još uvek nemaš ni jednu datoteku ruta</string>
+    <string name="gpx_add_track">Ugradi još…</string>
+    <string name="gpx_no_tracks_title_folder">Takođe, možete dodati datoteke rute u folder</string>
+    <string name="gpx_no_tracks_title">Još uvek nemaš ni jednu datoteku rute</string>
     <string name="route_calculation">Proračun rute</string>
-    <string name="upload_poi">Otpremi tačku zanimanja</string>
+    <string name="upload_poi">Učitaj TOI</string>
     <string name="route_roundabout_short">Odredi izlaz %1$d i idi</string>
     <string name="search_map_hint">Grad ili oblast</string>
     <string name="wiki_around">Članci Vikipedije o okolini</string>
-    <string name="upload_osm_note_description">Otpremajte svoju belešku OSM-a anonimno ili korišćenjem svog profila na OpenStreetMap.org-u.</string>
-    <string name="routing_attr_allow_motorway_description">Dozvoli autoputeve.</string>
+    <string name="upload_osm_note_description">Otpremaj svoju belešku OSM-a anonimno ili korišćenjem svog profila na OpenStreetMap.org</string>
+    <string name="routing_attr_allow_motorway_description">Omogućiti autoputeve</string>
     <string name="auto_split_recording_descr">Počni novi odsečak posle razmaka od 6 minuta, novu rutu posle razmaka od 2 sata, ili novu datoteku posle dužeg razmaka ako je dan izmenjen.</string>
     <string name="auto_split_recording_title">Sam podeli snimke posle razmaka</string>
     <string name="rendering_attr_depthContours_name">Pomorske izobate</string>
@@ -4927,7 +4927,7 @@
     <string name="sound_beep_simple">Bip: jednostavan</string>
     <string name="key_assignments_already_cleared_message">Svi ključni zadaci već su očišćeni</string>
     <string name="button_already_assigned_to_this_action">Ovo dugme je već dodeljeno za ovu akciju.</string>
-    <string name="enable_to_use_external_input_device">Omogući korištenje spoljnog ulaznog uređaja sa OsmAnd</string>
+    <string name="enable_to_use_external_input_device">Omogući korištenje spoljnog uređaja sa OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Promeni orijentaciju mape</string>
     <string name="sort_size_ascending">Prvo mala veličina</string>
     <string name="standard_maps">Standardne mape</string>
@@ -5087,8 +5087,8 @@
     <string name="widget_available_ram_desc">Prikazuje raspoloživu memoriju, dodjeljuje za OsmAnd.</string>
     <string name="rendering_styles">Stilovi prikazivanja</string>
     <string name="widget_available_ram">Dostupan RAM</string>
-    <string name="terrain_maps">Reljefna mapa</string>
-    <string name="shared_string_created">Created</string>
+    <string name="terrain_maps">Reljefne mape</string>
+    <string name="shared_string_created">Kreirano</string>
     <string name="delete_map_description">Jeste li siguran da želiš izbrisati %1$s mapu?</string>
     <string name="app_mode_baby_transport">Prevoz beba</string>
     <string name="wikipedia_and_travel_maps">Wikipedia i Travel maps</string>
@@ -5147,7 +5147,7 @@
     <string name="remove_widget_first">Prvo ukloni vidžet</string>
     <string name="add_row">Dodaj liniju</string>
     <string name="row_number">Linija%1$s</string>
-    <string name="key_event_action_move_to_my_location">Premesti u Moja lokacija</string>
+    <string name="key_event_action_move_to_my_location">Premesti u moje lokacije</string>
     <string name="help_article_navigation_setup_route_navigation_name">Priprema rute</string>
     <string name="help_article_start_with_main_menu_name">Glavni meni</string>
     <string name="help_article_troubleshooting_maps_data_name">Mape i podaci</string>
@@ -5200,14 +5200,30 @@
     <string name="switch_widget_mode_desc">Kliktanje na widget menja načine.</string>
     <string name="goods_delivery_desc_2">Putevi zabranjeni za dostavna vozila će biti izbegavani.</string>
     <string name="goods_delivery_desc">Dostavna vozila mogu biti zabranjena na nekim putevima.</string>
-    <string name="release_4_6">• Widget razmere jedrenja 
-\n 
-\n • Dodat je ANT+toplotna widget 
-\n 
-\n • Bolje upravljanje skladištem za velike tragove GPX-a
+    <string name="release_4_6">• Android Auto: Dodat 3D mod
+\n
+\n• Staze: Uvedeni filteri i pametne mape, optimizirana memorija za veće datoteke
+\n
+\n• Staze: Uvedeni filteri i pametne mape, optimizirana memorija za veće datoteke
+\n
+\n• Poboljšano upravljanje lokalnim resursima
+\n
+\n• Prilagodljivo mapiranje gumba za vanjske kontrolere
+\n
+\n• Novi vidžet: \'Koeficijent klizanja\' i \'Položaj sunca\'
+\n
+\n • OsmAnd Cloud:Sada pristupite izbrisanim datotekama
+\n
+\n• Poboljšano bojenje staze u načinu nagiba s novim simetričnim prelazom
+\n
+\n• Eliminirše probleme s transparentnom statusnom linijom
+\n
+\n• Dodana podrška za vidžet ANT + temperature vidžet
+\n
+\n• Predstavljen vidžet \"Dostupan RAM\"
 \n
 \n</string>
-    <string name="live_monitoring_adress_descr">Odredite adresu veba sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
+    <string name="live_monitoring_adress_descr">Odredi WEB adresu sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="map_widget_glide_target_desc">Prikazuje razmeru jedrenja potrebnu za dostizanje odredišta.</string>
     <string name="average_glide_time_interval_desc">Odredite međuvreme za određivanje proseka jedrenja.</string>
     <string name="help_article_map_tracks_on_map_name">Rute i rute</string>
@@ -5276,7 +5292,7 @@
     <string name="external_device_characteristic_diastolic">Dijastolički</string>
     <string name="external_device_characteristic_arterial_pressure">Arterijski pritisak</string>
     <string name="external_device_characteristic_stride_length">Dužina koraka</string>
-    <string name="external_device_characteristic_temperature">Toplota</string>
+    <string name="external_device_characteristic_temperature">Temperatura</string>
     <string name="external_device_details_information">Podatak</string>
     <string name="external_device_details_connection">Veza</string>
     <string name="external_device_details_total_distance">Ukupno rastojanje</string>
@@ -5471,4 +5487,57 @@
     <string name="map_widget_altitude_map_center_desc">Prikazuje nadmorsku visinu na trenutnom centru mape.</string>
     <string name="map_widget_altitude_current_location_desc">Prikazuje nadmorsku visinu, iznad mora, trenutne lokacije.</string>
     <string name="send_uuid_preference_desc">Nasumični UUID se koristi za preuzimanje online mapa sa OsmAnd servera za praćenje pravednog korišćenja resursa servera, predviđanje saobraćajnih obrazaca i generisanje anonimnih mesečnih izveštaja mapa.</string>
+    <string name="discard_filter_changes">Odbaci promene filtera</string>
+    <string name="with_waypoints">Sa međuodredištima</string>
+    <string name="configure_filter">Konfiguracija filtera</string>
+    <string name="key_bindings">Tipka povezivanja</string>
+    <string name="restore_from_trash">Vrati iz kante</string>
+    <string name="cloud_item_restored">%1$s vraća se u Cloud.</string>
+    <string name="sort_size_descending">Prvo velika veličina</string>
+    <string name="add_new_type">Dodaj novu vrstu</string>
+    <string name="remove_type_q">Jesi li siguran da želiš ukloniti \"%1$s\" vrstu ?</string>
+    <string name="shared_string_empty_trash">Isprazni kantu</string>
+    <string name="trash_alert_card_desc">Predmeti u kanti će biti izbrisani posle %1$s dana.</string>
+    <string name="trash_is_empty">Kanta je prazna</string>
+    <string name="shared_string_trash">Kanta</string>
+    <string name="all_folders">Svi folderi</string>
+    <string name="shared_string_show_less">Prikaži manje</string>
+    <string name="root_folder">Root folder</string>
+    <string name="shared_string_loading">Preuzimanje</string>
+    <string name="searching_matching_tracks">Pretražite sve podudarne staze</string>
+    <string name="empty_smart_folder_title">Nema odgovarajućeg tragova</string>
+    <string name="empty_smart_folder_description">Sve podudarne staze automatski će se pojaviti ovde</string>
+    <string name="smart_folder_saved">Pametan folder je snimljen</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" biće trajno izbrisan. Jesi li siguran?
+\n
+\nOva se radnja ne može se poništiti.</string>
+    <string name="no_config_smart_folder_title">NIje konfigurisano</string>
+    <string name="not_specified">Nije naznačeno</string>
+    <string name="shared_string_is_deleted">%1$s je obrisan.</string>
+    <string name="shared_string_delete_immediately">Obriši odmah</string>
+    <string name="shared_string_delete_item">Obriši stavku</string>
+    <string name="delete_smart_folder_dialog_message">Ovo će izbrisati \"%1$s\" pametan folder.</string>
+    <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
+    <string name="empty_name">Prazan naziv</string>
+    <string name="loading_tracks">Ponovno učitavanje staza</string>
+    <string name="filter_by_name">Filtriranje po nazivu</string>
+    <string name="shared_string_reset_all">Resetuj sve</string>
+    <string name="date_of_creation">Datum kreiranjaaa</string>
+    <string name="delete_all_items">Obrisati sve stavke</string>
+    <string name="save_as_smart_folder">Snimi kao pametan folder</string>
+    <string name="folder">Folder</string>
+    <string name="no_config_smart_folder_description">Pametni folderi omogućuju grupiranje pesama prema primenjenim filterima</string>
+    <string name="discard_filter_changes_prompt">Jeste li siguran da želiš poništiti sve filtere?</string>
+    <string name="app_mode_paragliding">Paraglajding</string>
+    <string name="max_altitude">Maksimalna nadmorska visina</string>
+    <string name="cloud_trash_clear_confirmation">Jesi li siguran da želiš trajno izbrisati sve stavke u kanti? Ova se radnja ne može se poništiti.</string>
+    <string name="trash_is_empty_banner_desc">Datoteke, izbrisane iz Osmand Cloud, će biti dostupne ovde za %1$s dana.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d trag)</item>
+        <item quantity="few">%1$d (%2$d tragovi)</item>
+        <item quantity="other">%1$d (%2$d tragova)</item>
+    </plurals>
+    <string name="shared_string_all_tracks">Sve snimljene rute</string>
 </resources>
