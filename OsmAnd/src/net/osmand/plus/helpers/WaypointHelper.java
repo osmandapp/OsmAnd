@@ -244,10 +244,9 @@ public class WaypointHelper {
 				LocationPointWrapper lwp = lp.get(kIterator);
 				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
-				if (((inf.getLocationIndex() < currentRoute) && (inf.getLastLocationIndex() != -1)
-						&& (inf.getLastLocationIndex() < currentRoute))
-						|| ((inf.getType() != AlarmInfoType.TUNNEL) && (inf.getLocationIndex() == currentRoute))) {
-					// skip
+				// getLastLocationIndex()  == -1 is always < currentRoute
+				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() < currentRoute) {
+					// skip already passed alarms
 				} else {
 					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLastLocationIndex() != -1
 							&& currentRoute > inf.getLocationIndex()
@@ -255,23 +254,17 @@ public class WaypointHelper {
 						float remainTunnelLength = route.getDistanceToPoint(inf.getLastLocationIndex());
 						inf.setFloatValue(remainTunnelLength);
 					}
-					int distanceByRoute = route.getDistanceFromPoint(currentRoute)
-							- route.getDistanceFromPoint(inf.getLocationIndex() - 1);
-					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
-					if (lastKnownLocation != null) {
-						Location nextLocation = route.getNextRouteLocation();
-						Location nextInfoLocation = new Location("", inf.getLatitude(), inf.getLongitude());
-						float distanceByCurrentSegment = lastKnownLocation.distanceTo(nextLocation);
-						distanceByRoute += distanceByCurrentSegment;
-						float distanceByLastSegment = route.getImmutableAllLocations().get(inf.getLocationIndex() - 1)
-								.distanceTo(nextInfoLocation);
-						distanceByRoute += distanceByLastSegment;
-						if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLocationIndex() == currentRoute) {
+					int distanceByRoute = 0;
+					if (inf.getLocationIndex() >= currentRoute) {
+						distanceByRoute = route.getDistanceFromPoint(currentRoute) - route.getDistanceFromPoint(inf.getLocationIndex());
+						Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
+						if (lastKnownLocation != null) {
 							distanceByRoute += MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-									inf.getLatitude(), inf.getLongitude());
+									route.getNextRouteLocation().getLatitude(), route.getNextRouteLocation().getLongitude());
 						}
 					}
-					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_LONG_PNT_APPROACH)) {
+					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_SHORT_PNT_APPROACH)) { // TODO or STATE_LONG_PNT_APPROACH
+						// break once first future alarm is far away as others will be also far away
 						break;
 					}
 					float time = speed > 0 ? distanceByRoute / speed : Integer.MAX_VALUE;
@@ -398,6 +391,9 @@ public class WaypointHelper {
 					while (kIterator < lp.size() && lp.get(kIterator).routeIndex < currentRoute) {
 						if (type == ALARMS) {
 							AlarmInfo alarm = (AlarmInfo) lp.get(kIterator).getPoint();
+							// TODO test tunnels that alarm in the tunnel works correctly
+							// if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() < currentRoute) { same condition
+
 							if (alarm.getLastLocationIndex() >= currentRoute) {
 								break;
 							}
