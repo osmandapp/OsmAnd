@@ -248,20 +248,13 @@ public class WaypointHelper {
 				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() < currentRoute) {
 					// skip already passed alarms
 				} else {
-					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLastLocationIndex() != -1
-							&& currentRoute > inf.getLocationIndex()
-							&& currentRoute < inf.getLastLocationIndex()) {
-						float remainTunnelLength = route.getDistanceToPoint(inf.getLastLocationIndex());
-						inf.setFloatValue(remainTunnelLength);
-					}
 					int distanceByRoute = 0;
-					if (inf.getLocationIndex() >= currentRoute) {
-						distanceByRoute = route.getDistanceFromPoint(currentRoute) - route.getDistanceFromPoint(inf.getLocationIndex());
-						Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
-						if (lastKnownLocation != null) {
-							distanceByRoute += MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-									route.getNextRouteLocation().getLatitude(), route.getNextRouteLocation().getLongitude());
-						}
+					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
+					if (inf.getLocationIndex() < currentRoute) {
+						// update remaining length
+						inf.setFloatValue(route.getDistanceToPoint(lastKnownLocation, inf.getLastLocationIndex()));
+					} else {
+						distanceByRoute = route.getDistanceToPoint(lastKnownLocation, inf.getLocationIndex());
 					}
 					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_SHORT_PNT_APPROACH)) { // TODO or STATE_LONG_PNT_APPROACH
 						// break once first future alarm is far away as others will be also far away
