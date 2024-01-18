@@ -140,6 +140,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return c;
 	}
 
+	public static HHNetworkRouteRes cancelledStatus() {
+		return new HHNetworkRouteRes("Routing was cancelled.");
+	}
+	
 	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig config) throws SQLException, IOException, InterruptedException {
 		long startTime = System.nanoTime();
 		config = prepareDefaultRoutingConfig(config);
@@ -150,6 +154,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			printGCInformation();
 		}
+		RouteCalculationProgress progress = hctx.rctx.calculationProgress;
 		
 		System.out.println(config.toString(start, end));
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
@@ -161,15 +166,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.printf("Routing...");
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
+			if (progress.isCancelled) {
+				return cancelledStatus();
+			}
 			route = createRouteSegmentFromFinalPoint(hctx, finalPnt);
-			
 			time = (System.nanoTime() - time) ;
 			System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			
 			System.out.printf("Parse detailed route segments...");
 			time = System.nanoTime();
-			boolean recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS);
+			boolean recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
+			if (progress.isCancelled) {
+				return cancelledStatus();
+			}
 			time = (System.nanoTime() - time);
 			System.out.printf("%.2f ms\n", time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
@@ -185,14 +195,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx.config.CALC_ALTERNATIVES) {
 			System.out.printf("Alternative routes...");
 			long time = System.nanoTime();
-			calcAlternativeRoute(hctx, route, stPoints, endPoints);
+			calcAlternativeRoute(hctx, route, stPoints, endPoints, progress);
+			if (progress.isCancelled) {
+				return cancelledStatus();
+			}
 			hctx.stats.altRoutingTime += (System.nanoTime() - time) / 1e6;
 			hctx.stats.routingTime += hctx.stats.altRoutingTime;
 			System.out.printf("%d %.2f ms\n", route.altRoutes.size(), hctx.stats.altRoutingTime);
 
 			time = System.nanoTime();
 			for (HHNetworkRouteRes alt : route.altRoutes) {
-				retrieveSegmentsGeometry(hctx, rrp, alt, hctx.config.ROUTE_ALL_ALT_SEGMENTS);
+				retrieveSegmentsGeometry(hctx, rrp, alt, hctx.config.ROUTE_ALL_ALT_SEGMENTS, progress);
+				if (progress.isCancelled) {
+					return cancelledStatus();
+				}
 			}
 			hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
 		}
@@ -219,6 +235,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		System.out.println(hctx.config.toString(start, end));
 		System.out.printf("Calculate turns...");
 		
+		if (progress.isCancelled) {
+			return cancelledStatus();
+		}
 		if (hctx.config.ROUTE_ALL_SEGMENTS && route.detailed != null) {
 			route.detailed = rrp.prepareResult(hctx.rctx, route.detailed).detailed;
 		}
@@ -304,7 +323,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 
 	private void calcAlternativeRoute(HHRoutingContext<T> hctx, HHNetworkRouteRes route, TLongObjectHashMap<T> stPoints,
-			TLongObjectHashMap<T> endPoints) throws SQLException, IOException {
+			TLongObjectHashMap<T> endPoints, RouteCalculationProgress progress) throws SQLException, IOException {
 		List<NetworkDBPoint>  exclude = new ArrayList<>();
 		try {
 			HHNetworkRouteRes rt = route;
@@ -367,6 +386,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (DEBUG_VERBOSE_LEVEL >= 1) {
 				System.out.printf("Selected %d points for alternatives %s\n", altPoints, Arrays.toString(minDistance));
 			}
+			if (progress.isCancelled) {
+				return;
+			}
 			for (int i = 0; i < distances.length; i++) {
 				if (!useToSkip[i]) {
 					continue;
@@ -388,6 +410,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 				
 				NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
+				if (progress.isCancelled) {
+					return;
+				}
 				if (finalPnt != null) {
 					double cost = (finalPnt.rt(false).rtDistanceFromStart + finalPnt.rt(true).rtDistanceFromStart);
 					if (DEBUG_VERBOSE_LEVEL == 1) {
@@ -733,7 +758,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.rctx.config.planRoadDirection = reverse ? -1 : 1;
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
-		hctx.rctx.calculationProgress = new RouteCalculationProgress();
+		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // reuse same progress
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
@@ -830,6 +855,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	private T runRoutingWithInitQueue(HHRoutingContext<T> hctx) throws SQLException, IOException {
 		float DIR_CONFIG = hctx.config.DIJKSTRA_DIRECTION;
+		RouteCalculationProgress progress = hctx.rctx == null ? null : hctx.rctx.calculationProgress;
 		while (true) {
 			Queue<NetworkDBPointCost<T>> queue;
 			if (HHRoutingContext.USE_GLOBAL_QUEUE) {
@@ -851,6 +877,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						break;
 					}
 				}
+			}
+			if (progress != null && progress.isCancelled) {
+				return null;
 			}
 			long tm = System.nanoTime();
 			NetworkDBPointCost<T> pointCost = queue.poll();
@@ -1054,7 +1083,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 	
 	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
-			boolean routeSegments) throws SQLException, InterruptedException, IOException {
+			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
 		for (int i = 0; i < route.segments.size(); i++) {
 			HHNetworkSegmentRes s = route.segments.get(i);
 			if (s.segment == null) {
@@ -1066,6 +1095,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			
 			if (routeSegments) {
+				if (progress.isCancelled) {
+					return false;
+				}
 				FinalRouteSegment f = runDetailedRouting(hctx, s.segment.start, s.segment.end, true);
 				if (f == null) {
 					boolean full = hctx.config.FULL_DIJKSTRA_NETWORK_RECALC-- > 0;
@@ -1103,7 +1135,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		// SPEEDUP: Speed up by just clearing visited
 		hctx.rctx.unloadAllData(); // needed for proper multidijsktra work
 		RouteSegmentPoint s = loadPoint(hctx.rctx, start);
-		hctx.rctx.calculationProgress = new RouteCalculationProgress();
+		// hctx.rctx.calculationProgress = new RouteCalculationProgress(); // we should reuse same progress for cancellation
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING * 2;
 		long ps = calcRPId(s, s.getSegmentStart(), s.getSegmentEnd());
 		long ps2 = calcRPId(s, s.getSegmentEnd(), s.getSegmentStart());

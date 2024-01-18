@@ -918,7 +918,7 @@ public class RoutePlannerFrontEnd {
 		NativeLibrary nativeLib = ctx.nativeLib;
 		ctx.nativeLib = null; // keep null to interfere with detailed 
 		try {
-			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
+			HHRoutingConfig cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
 			cfg.INITIAL_DIRECTION = dir;
 			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
 			if (res != null && res.error == null) {
