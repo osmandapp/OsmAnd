@@ -3639,4 +3639,19 @@
     <string name="routing_attr_allow_streams_name">스트림 및 드레인 허용</string>
     <string name="shared_string_api_key">API 키</string>
     <string name="shared_string_last_used">마지막으로 사용한 날짜</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">마커로 탐색</string>
+    <string name="telegram_chats_descr">지역 텔레그램 채팅 중 하나에 참여하세요.</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">방사성 물질</string>
+    <string name="routing_attr_allow_via_ferrata_name">산비탈 루트 (비아 페라타)</string>
+    <string name="routing_attr_allow_via_ferrata_description">고정 케이블, 템플, 사다리 및 다리가 설치된 산길입니다.</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Direct-to-point 라우팅(보트)</string>
+    <string name="choose_data_to_share">공유할 데이터 유형을 선택:</string>
+    <string name="osmand_cloud_deleted_account_descr">계정 및 모든 데이터가 OsmAnd Cloud에서 삭제되었습니다.</string>
+    <string name="free_favorites_backup_description">OsmAnd Cloud에 등록하면 즐겨찾기 및 설정을 무료로 백업할 수 있습니다.</string>
+    <string name="dangerous_goods_description">일부 도로 및 터널에서는 위험 물질의 운송이 금지되어 있습니다.</string>
+    <string name="free_favorites_backup">무료 즐겨찾기 백업</string>
+    <string name="help_article_widgets_radius_ruler_name">Radius-ruler 및 Ruler</string>
+    <string name="telegram_chats">텔레그램 채팅</string>
+    <string name="press_button_to_link_with_action">장치의 버튼을 눌러 작업에 할당: %1$s</string>
+    <string name="shared_string_all_tracks">모든 트랙</string>
 </resources>
