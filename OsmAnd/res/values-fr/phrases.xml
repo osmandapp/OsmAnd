@@ -4535,7 +4535,7 @@
     <string name="poi_recycling_plastic_bottle_tops">Bouchons de bouteilles en plastique</string>
     <string name="poi_sinkhole_bluehole">Gouffre : trou bleu</string>
     <string name="poi_sinkhole_ponor">Gouffre : perte</string>
-    <string name="poi_sinkhole_pit">Gouffre : gouffre</string>
+    <string name="poi_sinkhole_pit">Gouffre : gouffre</string>
     <string name="poi_sinkhole_estavelle">Gouffre : estavelle</string>
     <string name="poi_sinkhole_doline">Gouffre : doline</string>
     <string name="poi_barrier_coupure">Barrière de digue</string>
@@ -4574,7 +4574,7 @@
     <string name="poi_cemt_via">6a</string>
     <string name="poi_sac_scale">Échelle SAC</string>
     <string name="poi_cai_scale">Échelle CAI</string>
-    <string name="poi_barrier_bar">Barre</string>
+    <string name="poi_barrier_bar">Barre barrière</string>
     <string name="poi_lock_name">Nom de l\'écluse</string>
     <string name="poi_lock_ref">Référence d\'une écluse</string>
     <string name="poi_lock_height">Hauteur d\'une écluse</string>
@@ -4713,4 +4713,5 @@
     <string name="poi_healthcare_speciality_applied_kinesiology">Kinésiologie appliquée</string>
     <string name="poi_healthcare_speciality_anthroposophical">Anthroposophique</string>
     <string name="poi_healthcare_speciality_aromatherapy">Aromathérapie</string>
+    <string name="poi_border_zone">Zone frontière</string>
 </resources>
