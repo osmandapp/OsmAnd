@@ -126,7 +126,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 		});
 		msDialog.setSelectionUpdateListener(this::updateSize);
 		msDialog.setOnApplySelectionListener(selItems -> {
-			mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+			mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
 			mapActivity.getMapRouteInfoMenu().resetRouteCalculation();
 
 			List<IndexItem> indexes = new ArrayList<>();

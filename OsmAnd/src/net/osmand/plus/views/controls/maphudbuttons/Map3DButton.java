@@ -35,7 +35,7 @@ public class Map3DButton extends MapButton {
 	public Map3DButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
 		super(mapActivity, fabButton, id, false);
 		OsmandMapTileView mapView = mapActivity.getMapView();
-		elevationListener = angle -> updateButton(angle != DEFAULT_ELEVATION_ANGLE);
+		elevationListener = getElevationListener();
 		animateDraggingMapThread = mapView.getAnimatedDraggingThread();
 		defaultContainer = (ViewGroup) fabButton.getParent();
 
@@ -56,9 +56,6 @@ public class Map3DButton extends MapButton {
 		return view -> {
 			boolean defaultElevationAngle = isDefaultElevationAngle();
 			float tiltAngle = defaultElevationAngle ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE;
-			if (!defaultElevationAngle) {
-				settings.MAP_3D_MODE_ELEVATION_ANGLE.set(app.getOsmandMap().getMapView().getElevationAngle());
-			}
 			animateDraggingMapThread.startTilting(tiltAngle);
 			mapView.refreshMap();
 		};
@@ -81,6 +78,20 @@ public class Map3DButton extends MapButton {
 		} else {
 			return 30;
 		}
+	}
+
+	private ElevationListener getElevationListener() {
+		return new ElevationListener() {
+			@Override
+			public void onElevationChanging(float angle) {
+				updateButton(angle != DEFAULT_ELEVATION_ANGLE);
+			}
+
+			@Override
+			public void onStopChangingElevation(float angle) {
+				settings.MAP_3D_MODE_ELEVATION_ANGLE.set(angle);
+			}
+		};
 	}
 
 	private View.OnLongClickListener getLongClickListener(ImageView fabButton) {

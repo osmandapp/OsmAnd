@@ -25,6 +25,7 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -518,7 +519,7 @@ public class FavouritesHelper {
 		group.setColor(color);
 		group.setIconName(iconName);
 		group.setBackgroundType(backgroundType);
-		favoriteGroups = Algorithms.addToList(favoriteGroups, group);
+		favoriteGroups = CollectionUtils.addToList(favoriteGroups, group);
 		Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 		tmpFlatGroups.put(group.getName(), group);
 		flatGroups = tmpFlatGroups;
@@ -615,15 +616,15 @@ public class FavouritesHelper {
 	}
 
 	private void addFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints = Algorithms.addToList(cachedFavoritePoints, point);
+		cachedFavoritePoints = CollectionUtils.addToList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints = Algorithms.removeFromList(cachedFavoritePoints, point);
+		cachedFavoritePoints = CollectionUtils.removeFromList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
-		cachedFavoritePoints = Algorithms.removeAllFromList(cachedFavoritePoints, points);
+		cachedFavoritePoints = CollectionUtils.removeAllFromList(cachedFavoritePoints, points);
 	}
 
 	public void recalculateCachedFavPoints() {
@@ -753,7 +754,7 @@ public class FavouritesHelper {
 				tmpFlatGroups.put(group.getName(), group);
 				flatGroups = tmpFlatGroups;
 			} else {
-				favoriteGroups = Algorithms.removeFromList(favoriteGroups, group);
+				favoriteGroups = CollectionUtils.removeFromList(favoriteGroups, group);
 			}
 			for (FavouritePoint point : group.getPoints()) {
 				point.setCategory(newName);
@@ -783,7 +784,7 @@ public class FavouritesHelper {
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 			tmpFlatGroups.put(favoriteGroup.getName(), favoriteGroup);
 			flatGroups = tmpFlatGroups;
-			favoriteGroups = Algorithms.addToList(favoriteGroups, favoriteGroup);
+			favoriteGroups = CollectionUtils.addToList(favoriteGroups, favoriteGroup);
 		}
 		updateGroupAppearance(favoriteGroup, pointsGroup);
 

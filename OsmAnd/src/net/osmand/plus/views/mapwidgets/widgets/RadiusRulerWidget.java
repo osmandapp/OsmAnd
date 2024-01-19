@@ -79,8 +79,7 @@ public class RadiusRulerWidget extends TextInfoWidget {
 	}
 
 	private void setDistanceText(float dist) {
-		FormattedValue formattedDistance = OsmAndFormatter
-				.getFormattedDistanceValue(dist, app, true, settings.METRIC_SYSTEM.get());
+		FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(dist, app);
 		setText(formattedDistance.value, formattedDistance.unit);
 	}
 

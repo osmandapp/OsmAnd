@@ -25,7 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -81,7 +81,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(true, true);
+		dataList = app.getFileSettingsHelper().collectCategorizedExportData(true, true);
 
 		if (savedInstanceState == null) {
 			if (!globalExport) {
@@ -89,21 +89,21 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			}
 			Bundle args = getArguments();
 			if (args != null && args.containsKey(SELECTED_TYPES)) {
-				addSelectedTypes((Map<ExportSettingsType, List<?>>) AndroidUtils.getSerializable(args, SELECTED_TYPES, HashMap.class));
+				addSelectedTypes((Map<ExportType, List<?>>) AndroidUtils.getSerializable(args, SELECTED_TYPES, HashMap.class));
 			}
 		}
 	}
 
-	private void addSelectedTypes(@Nullable Map<ExportSettingsType, List<?>> selectedTypes) {
+	private void addSelectedTypes(@Nullable Map<ExportType, List<?>> selectedTypes) {
 		if (!Algorithms.isEmpty(selectedTypes)) {
-			for (Map.Entry<ExportSettingsType, List<?>> entry : selectedTypes.entrySet()) {
-				ExportSettingsType settingsType = entry.getKey();
+			for (Map.Entry<ExportType, List<?>> entry : selectedTypes.entrySet()) {
+				ExportType exportType = entry.getKey();
 				List<?> items = entry.getValue();
 				if (items == null) {
-					items = getItemsForType(settingsType);
+					items = getItemsForType(exportType);
 				}
 				if (!Algorithms.isEmpty(items)) {
-					selectedItemsMap.put(settingsType, items);
+					selectedItemsMap.put(exportType, items);
 				}
 			}
 		}
@@ -168,13 +168,13 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void updateSelectedProfile() {
-		List<Object> profileItems = getItemsForType(ExportSettingsType.PROFILE);
+		List<?> profileItems = getItemsForType(ExportType.PROFILE);
 		if (!Algorithms.isEmpty(profileItems)) {
 			for (Object item : profileItems) {
 				if (item instanceof ApplicationModeBean && appMode.getStringKey().equals(((ApplicationModeBean) item).stringKey)) {
 					List<Object> selectedProfiles = new ArrayList<>();
 					selectedProfiles.add(item);
-					selectedItemsMap.put(ExportSettingsType.PROFILE, selectedProfiles);
+					selectedItemsMap.put(ExportType.PROFILE, selectedProfiles);
 					break;
 				}
 			}
@@ -305,7 +305,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull ApplicationMode appMode,
-	                                @Nullable HashMap<ExportSettingsType, List<?>> selectedTypes, boolean globalExport) {
+	                                @Nullable HashMap<ExportType, List<?>> selectedTypes, boolean globalExport) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;

@@ -74,8 +74,6 @@ public class RouteCalculationResult {
 	protected int currentDirectionInfo;
 	protected int currentRoute;
 	protected int nextIntermediate;
-	protected int currentWaypointGPX;
-	protected int lastWaypointGPX;
 	protected int currentStraightAngleRoute = -1;
 	protected Location currentStraightAnglePoint;
 
@@ -1281,7 +1279,7 @@ public class RouteCalculationResult {
 		for (int i = increase; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
 			Location loc = locations.get(currentRoute + i);
 			double dist = MapUtils.getDistance(locations.get(currentRoute), loc);
-			if (Math.abs(meters) >= dist) {
+			if (dist >= Math.abs(meters)) {
 				return loc;
 			}
 		}
@@ -1298,6 +1296,16 @@ public class RouteCalculationResult {
 			return directions.get(currentDirectionInfo);
 		}
 		return null;
+	}
+
+	public int getDistanceToPoint(Location lastKnownLocation, int locationIndex ) {
+		int dist = getDistanceToPoint(locationIndex);
+		Location next = getNextRouteLocation();
+		if (lastKnownLocation != null && next != null) {
+			dist += MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+					next.getLatitude(), next.getLongitude());
+		}
+		return dist;
 	}
 
 	public int getDistanceToPoint(int locationIndex) {

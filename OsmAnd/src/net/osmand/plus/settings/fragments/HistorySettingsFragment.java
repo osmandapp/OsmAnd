@@ -20,7 +20,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.bottomsheets.ClearAllHistoryBottomSheet;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.utils.AndroidUtils;
@@ -149,10 +149,10 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 		if (fragmentManager != null) {
 			switch (prefId) {
 				case BACKUP_TO_FILE:
-					HashMap<ExportSettingsType, List<?>> selectedTypes = new HashMap<>();
-					selectedTypes.put(ExportSettingsType.SEARCH_HISTORY, null);
-					selectedTypes.put(ExportSettingsType.NAVIGATION_HISTORY, null);
-					selectedTypes.put(ExportSettingsType.HISTORY_MARKERS, null);
+					HashMap<ExportType, List<?>> selectedTypes = new HashMap<>();
+					selectedTypes.put(ExportType.SEARCH_HISTORY, null);
+					selectedTypes.put(ExportType.NAVIGATION_HISTORY, null);
+					selectedTypes.put(ExportType.HISTORY_MARKERS, null);
 
 					ApplicationMode mode = getSelectedAppMode();
 					ExportSettingsFragment.showInstance(fragmentManager, mode, selectedTypes, true);

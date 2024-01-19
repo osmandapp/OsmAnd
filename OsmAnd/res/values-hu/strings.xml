@@ -5335,14 +5335,14 @@
     <string name="shared_string_included">Belefoglalva</string>
     <string name="local_indexes_category_terrain">Domborzati térképek (3D)</string>
     <string name="hillshade_slope">Domborzatárnyékolás, lejtés</string>
-    <string name="map_widget_group_glide_ratio">Siklási arány</string>
-    <string name="average_glide_ratio">Átlagos siklási arány</string>
-    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklási arányt.</string>
-    <string name="average_glide_time_interval_desc">Adja meg a siklás átlagolás időintervallumát.</string>
+    <string name="map_widget_group_glide_ratio">Siklószám</string>
+    <string name="average_glide_ratio">Átlagos siklószám</string>
+    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklószámot.</string>
+    <string name="average_glide_time_interval_desc">Adja meg a siklószám átlagának kiszámításához használt időintervallumot.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_group_glide_desc">A widgetek a célhoz viszonyított vagy átlagos siklásarányt mutatják az aktuális utazáshoz.</string>
-    <string name="glide_ratio_to_target">Siklási arány a célig</string>
-    <string name="map_widget_glide_average_desc">Mutatja a beállított intervallum átlagos siklási arányát.</string>
+    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklószámot mutatják.</string>
+    <string name="glide_ratio_to_target">Siklószám a célig</string>
+    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott intervallumhoz.</string>
     <string name="external_sensor_name_property_description">Szenzor neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
@@ -5423,23 +5423,27 @@
     <string name="most_viewed">Legnézettebb</string>
     <string name="live_monitoring_adress_descr">Adja meg a webcímet a következő paraméter szintaxissal: szélesség={0}, hosszúság={1}, időbélyeg={2}, hdop={3}, magasság={4}, sebesség={5}, irány={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_temperature">Hőmérséklet</string>
-    <string name="release_4_6">• Külső beviteli eszközök billentyű hozzárendelés megváltoztatásának lehetősége hozzáadva
+    <string name="release_4_6">• Android Auto: 3D mód hozzáadva
 \n
-\n • Siklási arány widget hozzáadva
+\n • Nyomvonalak: szűrők és intelligens mappák bevezetése, optimalizált memória a nagyobb fájlok számára
 \n
-\n • Szűrők és okosmappák a nyomvonalakhoz hozzáadva
+\n • Továbbfejlesztett felső és alsó widgetpanel az összes widget fogadásához
 \n
-\n • Sorok hozzáadva a felső és alsó widget panelekhez, az összes widget támogatásával
+\n • Továbbfejlesztett helyi erőforrás-kezelés
 \n
-\n • ANT+ hőmérséklet widget támogatás hozzáadva
+\n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
 \n
-\n • Jobb memóriakezelés a nagy GPX nyomvonalakhoz
+\n • Új widgetek: „Siklási arány” és „Nap állása”
 \n
-\n • Frissítve a helyi erőforrás-kezelés a Letöltésekben
+\n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
 \n
-\n • \"Elérhető memória\" widget hozzáadva
+\n • Továbbfejlesztett vonalszínezés a lejtviszonyok módban új szimmetrikus gradienssel
 \n
-\n • Átlátszó állapotsor problémái javítva
+\n • Az átlátszó állapotsorral kapcsolatos probléma javítva
+\n
+\n • Hozzáadott támogatás az ANT+ hőmérséklet widgethez
+\n
+\n • Bemutatjuk az \"Elérhető RAM\" widgetet
 \n
 \n</string>
     <string name="sensor_temperature_desc">Megjeleníti az érzékelő által mért hőmérsékletet</string>
@@ -5575,6 +5579,12 @@
     <string name="add_new_button">Új gomb hozzáadása</string>
     <string name="use_v1_auto_zoom">Diszkrét automatikus zoom (régi verzió)</string>
     <string name="shared_string_next_event">Következő esemény</string>
-    <string name="map_widget_sun_position">Nap helyzete</string>
+    <string name="map_widget_sun_position">Nap állása</string>
     <string name="map_widget_sun_position_desc">Ez a widget az aktuális időtől függően mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
+    <string name="previous_row_has_complex_widget">Az előző sorban összetett widget van</string>
+    <string name="complex_widget_alert">%1$s widget csak a saját sorában helyezhető el.</string>
+    <string name="precise_distance_numbers">Pontos távolságadatok</string>
+    <string name="any_connected">Bármelyik csatlakoztatott</string>
+    <string name="any_connected_with_device">Bármelyik csatlakozva: %s</string>
+    <string name="shared_string_road_maps">Útitérképek</string>
 </resources>

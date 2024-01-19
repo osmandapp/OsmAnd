@@ -1336,8 +1336,8 @@
     <string name="poi_diet_vegetarian_no">Вегетарианское питание не предлагается</string>
     <string name="poi_diet_vegan_filter_yes">Для веганов</string>
     <string name="poi_diet_vegan_only">Только вегетарианское питание</string>
-    <string name="poi_diet_vegan_yes">Вегетарианское питание</string>
-    <string name="poi_diet_vegan_no">Вегетарианское питание не предлагается</string>
+    <string name="poi_diet_vegan_yes">Веганское питание</string>
+    <string name="poi_diet_vegan_no">Веганское питание не предлагается</string>
     <string name="poi_diet_gluten_free_filter_yes">Безглютеновое питание</string>
     <string name="poi_diet_gluten_free_only">Только безглютеновое питание</string>
     <string name="poi_diet_gluten_free_yes">Безглютеновое питание</string>
@@ -1577,7 +1577,7 @@
     <string name="poi_faa">Код FAA</string>
     <string name="poi_artwork_type_sculpture">Тип: скульптура</string>
     <string name="poi_artwork_type_statue">Тип: статуя</string>
-    <string name="poi_artwork_type_mural">Тип: фреска</string>
+    <string name="poi_artwork_type_mural">Тип: мурал</string>
     <string name="poi_artwork_type_architecture">Тип: архитектура</string>
     <string name="poi_artwork_type_painting">Тип: живопись</string>
     <string name="poi_artwork_type_stone">Тип: камень</string>

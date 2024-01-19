@@ -5,8 +5,8 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
-	android:fitsSystemWindows="true"
 	android:clickable="true"
+	android:fitsSystemWindows="true"
 	android:focusable="true">
 
 	<com.google.android.material.appbar.AppBarLayout
@@ -52,9 +52,9 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
-						android:tint="@color/icon_color_default_light"
+						android:contentDescription="@string/shared_string_back"
 						osmand:srcCompat="@drawable/ic_arrow_back"
-						android:contentDescription="@string/shared_string_back"/>
+						osmand:tint="@color/icon_color_default_light" />
 
 					<net.osmand.plus.widgets.TextViewEx
 						android:id="@+id/toolbar_title"
@@ -80,9 +80,9 @@
 						style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 						android:layout_width="@dimen/toolbar_height"
 						android:layout_height="@dimen/toolbar_height"
+						android:contentDescription="@string/shared_string_menu"
 						android:tint="?default_icon_color"
-						osmand:srcCompat="@drawable/ic_overflow_menu_white"
-						android:contentDescription="@string/shared_string_menu"/>
+						osmand:srcCompat="@drawable/ic_overflow_menu_white" />
 
 				</LinearLayout>
 
@@ -120,88 +120,11 @@
 				android:overScrollMode="never">
 
 				<LinearLayout
+					android:id="@+id/cards_container"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="@dimen/content_padding"
-					android:orientation="vertical">
-
-					<include
-						layout="@layout/card_bottom_divider"
-						android:visibility="invisible" />
-
-					<View
-						android:layout_width="match_parent"
-						android:layout_height="4dp" />
-
-					<include layout="@layout/card_top_divider" />
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:background="?attr/list_background_color"
-						android:orientation="vertical">
-
-						<net.osmand.plus.widgets.TextViewEx
-							style="@style/TitleStyle.Medium"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginHorizontal="@dimen/content_padding"
-							android:layout_marginTop="@dimen/content_padding_small"
-							android:text="@string/shared_string_widgets"
-							android:textColor="?android:textColorPrimary" />
-
-						<net.osmand.plus.widgets.TextViewEx
-							style="@style/DescStyle"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginHorizontal="@dimen/content_padding"
-							android:layout_marginBottom="@dimen/content_padding_small"
-							android:text="@string/configure_screen_widgets_descr"
-							android:textColor="?android:textColorSecondary" />
-
-						<LinearLayout
-							android:id="@+id/widgets_card"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:orientation="vertical" />
-
-					</LinearLayout>
-
-					<include layout="@layout/list_item_divider" />
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:background="?attr/list_background_color"
-						android:orientation="vertical">
-
-						<net.osmand.plus.widgets.TextViewEx
-							style="@style/TitleStyle.Medium"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginHorizontal="@dimen/content_padding"
-							android:layout_marginVertical="@dimen/content_padding_small"
-							android:text="@string/shared_string_buttons"
-							android:textColor="?android:textColorPrimary" />
-
-						<LinearLayout
-							android:id="@+id/buttons_card"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:orientation="vertical" />
-
-					</LinearLayout>
-					
-					<include layout="@layout/list_item_divider" />
-
-					<FrameLayout
-						android:id="@+id/configure_screen_actions_container"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content" />
-
-					<include layout="@layout/card_bottom_divider" />
-
-				</LinearLayout>
+					android:orientation="vertical" />
 
 			</androidx.core.widget.NestedScrollView>
 

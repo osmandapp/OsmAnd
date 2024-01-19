@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
@@ -23,7 +24,7 @@ public class SimulationProvider {
 
 	private int currentRoad;
 	private int currentSegment;
-	private QuadPoint currentPoint;
+	private QuadPointDouble currentPoint;
 
 	public SimulationProvider(@NonNull Location location, @NonNull List<RouteSegmentResult> roads) {
 		this.startLocation = new Location(location);

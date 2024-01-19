@@ -54,9 +54,9 @@ import net.osmand.plus.myplaces.favorites.dialogs.EditFavoriteGroupDialogFragmen
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
@@ -65,7 +65,7 @@ import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoParsedPoint;
 import net.osmand.util.GeoPointParserUtil;
@@ -567,7 +567,7 @@ public class IntentHelper {
 			if (intent.hasExtra(ExportSettingsFragment.SELECTED_TYPES)) {
 				ApplicationMode mode = settings.getApplicationMode();
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				HashMap<ExportSettingsType, List<?>> selectedTypes = (HashMap<ExportSettingsType, List<?>>) intent.getSerializableExtra(SELECTED_TYPES);
+				HashMap<ExportType, List<?>> selectedTypes = (HashMap<ExportType, List<?>>) intent.getSerializableExtra(SELECTED_TYPES);
 				ExportSettingsFragment.showInstance(manager, mode, selectedTypes, true);
 
 				clearIntent(intent);

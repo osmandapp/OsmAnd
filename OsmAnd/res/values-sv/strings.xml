@@ -5421,4 +5421,56 @@
     <string name="shared_string_delete_item">Radera objekt</string>
     <string name="key_event_category_actions">Åtgärder</string>
     <string name="delete_folder_question">Radera mapp?</string>
+    <string name="quick_action_toggle_preference">Knapp för att växla preferens.</string>
+    <string name="no_items_of_type_message">Du har inga objekt av den typen</string>
+    <string name="shared_storage_warning_title">Ändringar i regler för lagringsåtkomst</string>
+    <string name="android_auto_purchase_request_title">Köp OsmAnd Pro eller Maps+ för att använda appen med Android Auto</string>
+    <string name="backup_error_token_is_not_valid">Någonting är fel med angivet enhets-id eller token</string>
+    <string name="shared_storage_warning_description">Sedan november 2021 har OsmAnd inte länge tillgång till delad lagring, pga nya Android-regler.
+\n
+\nFlytta data-mappen från delad lagring till annan tillgänglig lagringsplats, annars kommer appen förlora tillgång till data som offlinekartor, gpx-spår mm.</string>
+    <string name="promo_subscription">Kampanj-prenumeration</string>
+    <string name="android_auto_map_placeholder_title">Kartan visas på fordonets skärm.</string>
+    <string name="backup_error_no_valid_subscription">Ingen giltig prenumeration hittades</string>
+    <string name="shared_app_storage_description">Delad lagring är inte längre tillgängligt pga ändrade Android-regler.</string>
+    <string name="search_title">Sök: %1$s</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Färglägg leder utifrån deras egna färg och symbol (om de finns angivna i OSM).</string>
+    <string name="shortcut_start_recording">Starta inspelning</string>
+    <string name="transparent_status_bar">Genomskinligt statusfält</string>
+    <string name="approx_safe_mode">Säker GPX-approximering</string>
+    <string name="delete_history_items">Radera %1$s historikobjekt?</string>
+    <string name="transparent_status_bar_descr">Visa kartan bakom statusfältet</string>
+    <string name="online_maps_required_descr">Tyvärr kunde inte OsmAnd fastställa en rutt utifrån dina inställningar.
+\n
+\nKanske någon karta saknas, du kan köra en kontroll online efter nödvändiga kartor.</string>
+    <string name="previous_row_has_complex_widget">Föregående rad har komplex widget</string>
+    <string name="delete_history_items_descr">Radera valda historikobjekt?</string>
+    <string name="setting_supported_by_style">Inställningen tillhandahålls av kartstilen \'%1$s\'</string>
+    <string name="use_routing_fallback">Offline-alternativ för ruttberäkning</string>
+    <string name="location_access_request_title">OsmAnd behöver Platsåtkomst för navigering.</string>
+    <string name="use_external_timestamps_description">Använd onlinetjänstens tidsstämplar för att justera förväntad restid och genomsnittshastighet</string>
+    <string name="android_auto_map_placeholder_descr">Koppla ifrån enheten från Android Auto för att visa kartan i appen.</string>
+    <string name="complex_widget_alert">%1$s widgeten kan bara placeras på sin egen rad.</string>
+    <string name="distance_by_tap_use_description">Klicka i kartan för att se avståndet mellan aktuell position och klickad punkt.
+\nKlicka på två punkter samtidigt för att se avståndet mellan de två punkterna.</string>
+    <string name="online_direct_line_maps_link">Kontrollera nödvändiga kartor.</string>
+    <string name="remove_group_from_markers">Ta bort grupp från markörlista</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Färglägg leder utifrån deras nätverkstyp (internationell, regional, lokal).</string>
+    <string name="shared_string_next_event">Nästa händelse</string>
+    <string name="sample_wikivoyage">Wikivoyage-exempel</string>
+    <string name="use_external_timestamps">Använd externa tidsstämplar</string>
+    <string name="display_route_tracks_as_poi">Visa spår som intressepunkter</string>
+    <string name="precise_distance_numbers">Exakta avståndsvärden</string>
+    <string name="exit_pan_mode_descr">Tryck Välj för att lämna panoreringsläget</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ogiltig eller utgången token</string>
+    <string name="hillshade_slope">Terrängskuggning, lutning</string>
+    <string name="mapillary_menu_filter_description_new">Filtrera bilder på datum eller typ. Endast aktivt vid hög zoomnivå.</string>
+    <string name="attach_roads_descr">Anpassa ditt spår efter tillgängliga vägar för att beräkna rutt mellan punkter och koppla till svänginstruktioner och ruttegenskaper.</string>
+    <string name="backup_error_no_subscription">Ingen prenumeration hittades</string>
+    <string name="approx_safe_mode_description">Utför GPX-approximering med långsammare Android istället för appens egna kod.</string>
+    <string name="map_widget_sun_position">Solens position</string>
+    <string name="duration_moment_ago">alldeles nyss</string>
+    <string name="use_routing_fallback_description">Använd en ruttberäkning offline vid tillfällen då online-alternativet inte är tillgängligt.</string>
+    <string name="map_widget_sun_position_desc">Denna widget visar tid till solens upp- eller nedgång, beroende på aktuell tid.</string>
+    <string name="no_activity_for_intent">Installera en app som kan utföra denna åtgärd.</string>
 </resources>

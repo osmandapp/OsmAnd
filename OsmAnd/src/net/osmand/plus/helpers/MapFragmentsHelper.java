@@ -1,10 +1,10 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab.ADDRESS;
-import static net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab.CATEGORIES;
-import static net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab.HISTORY;
-import static net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType.REGULAR;
+import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab.ADDRESS;
+import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab.CATEGORIES;
+import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab.HISTORY;
+import static net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType.REGULAR;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -38,9 +38,9 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.plugins.rastermaps.DownloadTilesFragment;
 import net.osmand.plus.plugins.weather.dialogs.WeatherForecastFragment;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
-import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
-import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchTab;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.ShowQuickSearchMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;

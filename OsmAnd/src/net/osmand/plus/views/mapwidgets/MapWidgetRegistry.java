@@ -21,6 +21,7 @@ import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.StreetNameWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,11 +127,11 @@ public class MapWidgetRegistry {
 	}
 
 	public void addWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		listeners = Algorithms.addToList(listeners, listener);
+		listeners = CollectionUtils.addToList(listeners, listener);
 	}
 
 	public void removeWidgetsRegistryListener(@NonNull WidgetsRegistryListener listener) {
-		listeners = Algorithms.removeFromList(listeners, listener);
+		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
 	private void notifyWidgetRegistered(@NonNull MapWidgetInfo widgetInfo) {

@@ -111,7 +111,7 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
@@ -791,7 +791,7 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 					if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-						mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+						mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
 					}
 				}
 			}
@@ -2325,7 +2325,7 @@ public class OsmandAidlApi {
 	                               boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
-			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
+			bundle.putStringArrayList(SettingsHelper.EXPORT_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
 			bundle.putBoolean(REPLACE_KEY, replace);
 			bundle.putBoolean(SILENT_IMPORT_KEY, silent);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
@@ -2387,20 +2387,17 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
+	public boolean exportProfile(String appModeKey, List<String> acceptedExportTypeKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
-			List<ExportSettingsType> settingsTypes = new ArrayList<>();
-			for (String key : settingsTypesKeys) {
-				settingsTypes.add(ExportSettingsType.valueOf(key));
-			}
-			settingsTypes.remove(ExportSettingsType.PROFILE);
+			List<ExportType> acceptedExportTypes = ExportType.valuesOf(acceptedExportTypeKeys);
+			acceptedExportTypes.remove(ExportType.PROFILE);
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false, true));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(acceptedExportTypes, true, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}

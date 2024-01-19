@@ -34,7 +34,7 @@ public class NavAddDestinationAction extends QuickAction {
 	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		LatLon latLon = getMapLocation(mapActivity);
-		mapActivity.getMapLayers().getMapControlsLayer().addDestination(latLon);
+		mapActivity.getMapLayers().getMapActionsHelper().addDestination(latLon);
 	}
 
 	@Override

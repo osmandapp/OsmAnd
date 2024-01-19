@@ -142,6 +142,25 @@
 		android:title="@string/write_heading" />
 
 	<PreferenceCategory
+		android:key="texts"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="Map texts" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="show_symbols_debug_info"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="Show debug information" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="allow_symbols_display_on_top"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="Allow display on top" />
+
+	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/info_button" />

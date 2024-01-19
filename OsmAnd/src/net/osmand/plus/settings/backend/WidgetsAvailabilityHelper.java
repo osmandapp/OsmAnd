@@ -83,12 +83,13 @@ public class WidgetsAvailabilityHelper {
 		ApplicationMode[] none = {};
 
 		// left
-		ApplicationMode[] navigationSet1 = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
-		ApplicationMode[] navigationSet2 = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
+		ApplicationMode[] nextTurnSet = {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
+		ApplicationMode[] smallNextTurnSet = {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT, TRAIN};
+		ApplicationMode[] secondNextTurnSet = {CAR, BICYCLE, PEDESTRIAN, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE, MOPED};
 
-		regWidgetVisibility(NEXT_TURN, navigationSet1);
-		regWidgetVisibility(SMALL_NEXT_TURN, navigationSet2);
-		regWidgetVisibility(SECOND_NEXT_TURN, navigationSet1);
+		regWidgetVisibility(NEXT_TURN, nextTurnSet);
+		regWidgetVisibility(SMALL_NEXT_TURN, smallNextTurnSet);
+		regWidgetVisibility(SECOND_NEXT_TURN, secondNextTurnSet);
 		regWidgetAvailability(NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);

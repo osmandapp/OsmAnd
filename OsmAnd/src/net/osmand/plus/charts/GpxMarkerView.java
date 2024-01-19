@@ -158,9 +158,7 @@ public class GpxMarkerView extends MarkerView {
 	private void updateXAxisValueWithDistance(@NonNull OrderedLineDataSet dataSet, @NonNull Entry entry) {
 		OsmandApplication app = getMyApplication();
 		float meters = entry.getX() * dataSet.getDivX();
-		MetricsConstants metricsConstants = app.getSettings().METRIC_SYSTEM.get();
-		FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(meters, app,
-				true, metricsConstants);
+		FormattedValue formattedDistance = OsmAndFormatter.getFormattedDistanceValue(meters, app);
 
 		TextView xAxisValueText = xAxisContainer.findViewById(R.id.x_axis_value);
 		TextView xAxisUnitText = xAxisContainer.findViewById(R.id.x_axis_unit);

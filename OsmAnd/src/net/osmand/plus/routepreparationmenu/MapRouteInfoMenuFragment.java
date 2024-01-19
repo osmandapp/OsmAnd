@@ -484,7 +484,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 					slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
 				}
 			}
-			mapActivity.getContextMenu().hideMenues();
+			mapActivity.getContextMenu().hideMenus();
 
 			Bundle args = new Bundle();
 			args.putInt(MENU_STATE_KEY, initialMenuState);

@@ -1,5 +1,7 @@
 package net.osmand.util;
 
+import static net.osmand.util.CollectionUtils.startsWithAny;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -50,10 +52,6 @@ import java.util.zip.GZIPOutputStream;
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
-
-	public static boolean isEmpty(Collection<?> c) {
-		return c == null || c.size() == 0;
-	}
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
@@ -112,6 +110,10 @@ public class Algorithms {
 			}
 		}
 		return splitStr;
+	}
+
+	public static boolean isEmpty(Collection<?> c) {
+		return c == null || c.size() == 0;
 	}
 
 	public static boolean isEmpty(Map<?, ?> map) {
@@ -555,60 +557,7 @@ public class Algorithms {
 		return ((ch1 << 8) + ch2);
 	}
 
-	public static boolean startsWithAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.startsWith(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
-	public static boolean containsAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.contains(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean endsWithAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.endsWith(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean equalsToAny(Object o, Object ... args) {
-		if (o != null && args != null) {
-			for (Object o1 : args) {
-				if (o.equals(o1)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean anyIsNull(Object ... args) {
-		if (args != null) {
-			for (Object o : args) {
-				if (o == null) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
@@ -1186,78 +1135,6 @@ public class Algorithms {
 		return map;
 	}
 
-	public static <T> void reverseArray(T[] array) {
-		for (int i = 0; i < array.length / 2; i++) {
-			T temp = array[i];
-			array[i] = array[array.length - i - 1];
-			array[array.length - i - 1] = temp;
-		}
-	}
-
-	public static boolean containsInArrayL(long[] array, long value) {
-		return Arrays.binarySearch(array, value) >= 0;
-	}
-
-	public static long[] addToArrayL(long[] array, long value, boolean skipIfExists) {
-		long[] result;
-		if (array == null) {
-			result = new long[]{ value };
-		} else if (skipIfExists && Arrays.binarySearch(array, value) >= 0) {
-			result = array;
-		} else {
-			result = new long[array.length + 1];
-			System.arraycopy(array, 0, result, 0, array.length);
-			result[result.length - 1] = value;
-			Arrays.sort(result);
-		}
-		return result;
-	}
-
-	public static long[] removeFromArrayL(long[] array, long value) {
-		long[] result;
-		if (array != null) {
-			int index = Arrays.binarySearch(array, value);
-			if (index >= 0) {
-				result = new long[array.length - 1];
-				System.arraycopy(array, 0, result, 0, index);
-				if (index < result.length) {
-					System.arraycopy(array, index + 1, result, index, array.length - (index + 1));
-				}
-				return result;
-			} else {
-				return array;
-			}
-		} else {
-			return array;
-		}
-	}
-
-	public static String arrayToString(int[] a) {
-		if (a == null || a.length == 0) {
-			return null;
-		}
-		StringBuilder b = new StringBuilder();
-		for (int value : a) {
-			if (b.length() > 0) {
-				b.append(",");
-			}
-			b.append(value);
-		}
-		return b.toString();
-	}
-
-	public static int[] stringToArray(String array) throws NumberFormatException {
-		if (array == null || array.length() == 0) {
-			return null;
-		}
-		String[] items = array.split(",");
-		int[] res = new int[items.length];
-		for (int i = 0; i < items.length; i++) {
-			res[i] = Integer.parseInt(items[i]);
-		}
-		return res;
-	}
-
 	public static boolean isValidMessageFormat(CharSequence sequence) {
 		if (!isEmpty(sequence)) {
 			int counter = 0;
@@ -1333,45 +1210,6 @@ public class Algorithms {
 		return copy;
 	}
 
-	public static <T> List<T> addToList(Collection<T> original, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.add(element);
-		return copy;
-	}
-
-	public static <T> List<T> addAllToList(Collection<T> original, Collection<T> elements) {
-		List<T> copy = new ArrayList<>(original);
-		copy.addAll(elements);
-		return copy;
-	}
-
-	public static <T> List<T> setInList(Collection<T> original, int position, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.set(position, element);
-		return copy;
-	}
-
-	public static <T> List<T> removeFromList(Collection<T> original, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.remove(element);
-		return copy;
-	}
-
-	public static <T> List<T> removeAllFromList(Collection<T> original, Collection<T> elements) {
-		List<T> copy = new ArrayList<>(original);
-		copy.removeAll(elements);
-		return copy;
-	}
-
-	@SafeVarargs
-	public static <T> List<T> asOneList(Collection<T> ... collections) {
-		List<T> result = new ArrayList<>();
-		for (Collection<T> collection : collections) {
-			result.addAll(collection);
-		}
-		return result;
-	}
-
 	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
 		mapRect.left = mapRect.left == 0.0 ? longitude : Math.min(mapRect.left, longitude);
 		mapRect.right = Math.max(mapRect.right, longitude);
@@ -1412,5 +1250,47 @@ public class Algorithms {
 		}
 		while (!checkNameCallback.processResult(newName));
 		return newName;
+	}
+	
+
+	public static int lowerTo10BaseRoundingBounds(int num, int[] roundRange) {
+		int k = 1;
+		while (k < roundRange.length && (roundRange[k] > num || roundRange[k - 1] > num) ) {
+			k += 2;
+		}
+		if (k < roundRange.length) {
+			return (num / roundRange[k - 1]) * roundRange[k - 1];
+		}
+		return num;
+	}
+	
+	public static int[] generate10BaseRoundingBounds(int max, int multCoef) {
+		int basenum = 1, mult = 1, num = basenum * mult, ind = 0;
+		List<Integer> bounds = new ArrayList<>();
+		while (num < max) {
+			ind++;
+			if (ind % 3 == 1) {
+				mult = 2;
+			} else if (ind % 3 == 2) {
+				mult = 5;
+			} else {
+				basenum *= 10;
+				mult = 1;
+			}
+			if (ind > 1) {
+				int bound = num * multCoef;
+				while (bound % (basenum * mult) != 0 && bound > basenum * mult ) {
+					bound += num;
+				}
+				bounds.add(bound);
+			}
+			num = basenum * mult;
+			bounds.add(num);
+		}
+		int[] ret = new int[bounds.size()];
+		for(int j = 0; j < ret.length; j++) {
+			ret[j] = bounds.get(bounds.size() - j - 1);
+		}
+		return ret;
 	}
 }

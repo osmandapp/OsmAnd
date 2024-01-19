@@ -38,9 +38,9 @@ android {
 
 	defaultConfig {
 		minSdkVersion 23
-		versionCode 4600
+		versionCode 4700
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
-		versionName "4.6.0"
+		versionName "4.7.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -209,11 +209,11 @@ dependencies {
 	//openglImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
 
 	// Comment for local debug
-	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:4.6@aar"
-	opengldebugImplementation "net.osmand:OsmAndCore_android:4.6@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:master-snapshot@aar"
+	opengldebugImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
-	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:4.6@aar"
-	openglImplementation "net.osmand:OsmAndCore_android:4.6@aar"
+	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:master-snapshot@aar"
+	openglImplementation "net.osmand:OsmAndCore_android:master-snapshot@aar"
 
 	//huaweiImplementation 'com.huawei.agconnect:agconnect-core:1.8.0.300'
 	huaweiImplementation 'com.huawei.hms:iap:6.4.0.301'

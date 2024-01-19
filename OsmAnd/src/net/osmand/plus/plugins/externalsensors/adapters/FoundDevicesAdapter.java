@@ -29,7 +29,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	protected final OsmandApplication app;
 	protected final ExternalSensorsPlugin plugin;
 	protected final boolean nightMode;
-	protected List<AbstractDevice<? extends AbstractSensor>> items = new ArrayList<>();
+	protected List<Object> items = new ArrayList<>();
 	protected DeviceClickListener deviceClickListener;
 	protected UiUtilities uiUtils;
 
@@ -52,7 +52,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	@Override
 	public void onBindViewHolder(@NonNull FoundDeviceViewHolder holder, int position) {
 		holder.menuIcon.setVisibility(View.VISIBLE);
-		AbstractDevice<?> device = items.get(position);
+		AbstractDevice<?> device = (AbstractDevice<?>) items.get(position);
 		DeviceType deviceType = device.getDeviceType();
 		holder.name.setText(plugin.getDeviceName(device));
 		holder.icon.setImageResource(device.isConnected() ? (nightMode ? deviceType.nightIconId : deviceType.dayIconId) : deviceType.disconnectedIconId);
@@ -98,7 +98,7 @@ public class FoundDevicesAdapter extends RecyclerView.Adapter<FoundDeviceViewHol
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
-	public void setItems(@NonNull List<AbstractDevice<?>> items) {
+	public void setItems(@NonNull List<Object> items) {
 		this.items = items;
 		notifyDataSetChanged();
 	}

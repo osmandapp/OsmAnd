@@ -13,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.keyevent.KeyEventCommandsCache;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,19 +68,19 @@ public class KeyAssignment {
 
 	public void addKeyCode(int keyCode) {
 		if (!keyCodes.contains(keyCode)) {
-			keyCodes = Algorithms.addToList(keyCodes, keyCode);
+			keyCodes = CollectionUtils.addToList(keyCodes, keyCode);
 		}
 	}
 
 	public void updateKeyCode(int oldKeyCode, int newKeyCode) {
 		if (keyCodes.contains(oldKeyCode)) {
 			int index = keyCodes.indexOf(oldKeyCode);
-			keyCodes = Algorithms.setInList(keyCodes, index, newKeyCode);
+			keyCodes = CollectionUtils.setInList(keyCodes, index, newKeyCode);
 		}
 	}
 
 	public void removeKeyCode(int keyCode) {
-		keyCodes = Algorithms.removeFromList(keyCodes, (Integer) keyCode);
+		keyCodes = CollectionUtils.removeFromList(keyCodes, (Integer) keyCode);
 	}
 
 	public void clearKeyCodes() {

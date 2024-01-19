@@ -31,7 +31,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapActionsHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -149,9 +149,9 @@ public class LauncherShortcutsHelper {
 
 	private void navigateTo(@NonNull MapActivity mapActivity, @Nullable FavouritePoint point) {
 		if (point == null) {
-			MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
-			if (mapControlsLayer != null) {
-				mapControlsLayer.doRoute();
+			MapActionsHelper controlsHelper = mapActivity.getMapLayers().getMapActionsHelper();
+			if (controlsHelper != null) {
+				controlsHelper.doRoute();
 			}
 		} else {
 			app.getRoutingHelper().setRoutePlanningMode(true);

@@ -42,7 +42,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;

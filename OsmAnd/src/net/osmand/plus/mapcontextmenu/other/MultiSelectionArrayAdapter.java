@@ -127,7 +127,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
 			if (pair.first instanceof RouteKey) {
 				RouteKey key = (RouteKey) pair.first;
-				String tag = key.type.getTag();
+				String tag = key.type.getName();
 				String routeType = getActivityTypeStringPropertyName(item.getMyApplication(), tag, capitalizeFirstLetterAndLowercase(tag));
 				line2Str.append(" - ").append(routeType);
 			}

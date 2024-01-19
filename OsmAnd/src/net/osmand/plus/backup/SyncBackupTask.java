@@ -19,7 +19,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -153,7 +153,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		if (info != null) {
 			List<SettingsItem> oldItemsToDelete = new ArrayList<>();
 			for (SettingsItem item : info.itemsToUpload) {
-				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+				ExportType exportType = ExportType.findBy(item);
 				if (exportType != null && backupHelper.getVersionHistoryTypePref(exportType).get()) {
 					oldItemsToDelete.add(item);
 				}

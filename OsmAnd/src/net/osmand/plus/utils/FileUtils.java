@@ -30,6 +30,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -303,7 +304,7 @@ public class FileUtils {
 
 	public static void removeFilesWithExtensions(@NonNull File dir, boolean withSubdirs, @NonNull String... extensions) {
 		File[] files = dir.listFiles(pathname -> pathname.isDirectory()
-				? withSubdirs : Algorithms.endsWithAny(pathname.getName(), extensions));
+				? withSubdirs : CollectionUtils.endsWithAny(pathname.getName(), extensions));
 		if (files == null) {
 			return;
 		}

@@ -42,8 +42,8 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.search.QuickSearchDialogFragment;
-import net.osmand.plus.search.QuickSearchListAdapter;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchFreeBannerListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -64,6 +64,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.wiki.WikiCoreHelper;
 import net.osmand.wiki.WikiImage;
 
@@ -81,6 +82,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class WikipediaPlugin extends OsmandPlugin {
+
 	private static final Log LOG = PlatformUtil.getLog(WikipediaPlugin.class);
 	public static final String URL_PHOTO = "url-photo";
 	public static final String ORG_WIKI_SUFFIX = ".org/wiki/";
@@ -550,7 +552,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 				return pf.isWikiFilter();
 			} else if (obj instanceof AbstractPoiType) {
 				AbstractPoiType pt = (AbstractPoiType) obj;
-				return Algorithms.startsWithAny(pt.getKeyName(), WIKI_LANG, WIKI_PLACE, OSM_WIKI_CATEGORY);
+				return CollectionUtils.startsWithAny(pt.getKeyName(), WIKI_LANG, WIKI_PLACE, OSM_WIKI_CATEGORY);
 			}
 		}
 		return false;
@@ -577,7 +579,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {
-		return Algorithms.containsAny(fileName,
+		return CollectionUtils.containsAny(fileName,
 				WIKI_NAME, IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
 	}
 }

@@ -6,6 +6,7 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 
 import java.util.Collections;
@@ -564,15 +565,15 @@ public class MapUtils {
 
 
 	
-	public static QuadPoint getProjectionPoint31(int px, int py, int st31x, int st31y, int end31x, int end31y) {
+	public static QuadPointDouble getProjectionPoint31(int px, int py, int st31x, int st31y, int end31x, int end31y) {
 		// st31x, st31y - A, end31x, end31y - B, px, py - C
 		double tWidth = getTileWidth(py);
 		// Scalar multiplication between (AB, AC)
 		double projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth
 				+ (end31y - st31y) * tWidth * (py - st31y) * tWidth;
 		double mDist = squareRootDist31(end31x, end31y, st31x, st31y);
-		int pry = end31y;
-		int prx = end31x;
+		double pry = end31y;
+		double prx = end31x;
 		if (projection < 0) {
 			prx = st31x;
 			pry = st31y;
@@ -580,10 +581,10 @@ public class MapUtils {
 			prx = end31x;
 			pry = end31y;
 		} else {
-			prx = (int) (st31x + (end31x - st31x) * (projection / (mDist * mDist)));
-			pry = (int) (st31y + (end31y - st31y) * (projection / (mDist * mDist)));
+			prx = st31x + (end31x - st31x) * (projection / (mDist * mDist));
+			pry = st31y + (end31y - st31y) * (projection / (mDist * mDist));
 		}
-		return new QuadPoint(prx, pry);
+		return new QuadPointDouble(prx, pry);
 	}
 
 

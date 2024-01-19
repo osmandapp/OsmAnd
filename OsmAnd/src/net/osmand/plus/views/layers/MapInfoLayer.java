@@ -6,11 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.auto.AndroidAutoMapPlaceholderView;
+import net.osmand.plus.auto.views.AndroidAutoMapPlaceholderView;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
@@ -33,13 +37,10 @@ import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
@@ -100,8 +101,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			bottomWidgetsPanel.addOnLayoutChangeListener(bottomPanelBoundsChangeListener);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 		} else {
-			topWidgetsPanel.removeOnLayoutChangeListener(topPanelBoundsChangeListener);
-			bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
+			if (topWidgetsPanel != null) {
+				topWidgetsPanel.removeOnLayoutChangeListener(topPanelBoundsChangeListener);
+			}
+			if (bottomWidgetsPanel != null) {
+				bottomWidgetsPanel.removeOnLayoutChangeListener(bottomPanelBoundsChangeListener);
+			}
 			mapDisplayPositionManager.unregisterCoveredScreenRectProvider(this);
 			mapDisplayPositionManager.updateMapDisplayPosition(true);
 
@@ -219,7 +224,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
-	public void updateRow(MapWidget widget){
+	public void updateRow(MapWidget widget) {
 		topWidgetsPanel.updateRow(widget);
 		bottomWidgetsPanel.updateRow(widget);
 	}
@@ -234,7 +239,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 
-			rulerWidgets = Algorithms.addToList(rulerWidgets, rulerWidget);
+			rulerWidgets = CollectionUtils.addToList(rulerWidgets, rulerWidget);
 
 			return rulerWidget;
 		} else {
@@ -244,20 +249,20 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	public void removeRulerWidgets(@NonNull List<RulerWidget> rulers) {
 		if (rulerWidgets != null) {
-			rulerWidgets = Algorithms.removeAllFromList(rulerWidgets, rulers);
+			rulerWidgets = CollectionUtils.removeAllFromList(rulerWidgets, rulers);
 		}
 	}
 
 	public void addSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
-			sideWidgetsPanels = Algorithms.addToList(sideWidgetsPanels, panel);
+			sideWidgetsPanels = CollectionUtils.addToList(sideWidgetsPanels, panel);
 			panel.updateColors(calculateTextState(false));
 		}
 	}
 
 	public void removeSideWidgetsPanel(@NonNull SideWidgetsPanel panel) {
 		if (sideWidgetsPanels != null) {
-			sideWidgetsPanels = Algorithms.removeFromList(sideWidgetsPanels, panel);
+			sideWidgetsPanels = CollectionUtils.removeFromList(sideWidgetsPanels, panel);
 		}
 	}
 

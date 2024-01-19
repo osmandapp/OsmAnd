@@ -61,7 +61,6 @@ import androidx.fragment.app.FragmentManager;
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -444,7 +443,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = v -> {
-			mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
+			mapActivity.getMapLayers().getMapActionsHelper().doNavigate();
 			hideDashboard();
 		};
 
@@ -453,7 +452,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = v -> {
 			hideDashboard();
-			mapActivity.getMapLayers().getMapControlsLayer().doRoute();
+			mapActivity.getMapLayers().getMapActionsHelper().doRoute();
 		};
 
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);
@@ -562,7 +561,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visible) {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
 			mapActivity.getFragmentsHelper().dismissFragment(TrackMenuFragment.TAG);
-			mapActivity.getContextMenu().hideMenues();
+			mapActivity.getContextMenu().hideMenus();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
 			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
