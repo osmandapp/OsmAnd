@@ -5333,4 +5333,5 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="hillshade_slope">Senčenje terena, naklon</string>
     <string name="local_indexes_category_terrain">Zemljevidi terena (3D)</string>
+    <string name="shared_string_all_tracks">Vse sledi</string>
 </resources>
