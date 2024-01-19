@@ -1377,13 +1377,15 @@ public class GPXUtilities {
 			gpxFile.path = file.getAbsolutePath();
 			gpxFile.modifiedTime = file.lastModified();
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
-
 			Algorithms.closeStream(fis);
+			if (gpxFile.error != null) {
+				log.info("4Error reading gpx " + gpxFile.path);
+			}
 			return gpxFile;
 		} catch (IOException e) {
 			GPXFile gpxFile = new GPXFile(null);
 			gpxFile.path = file.getAbsolutePath();
-			log.error("Error reading gpx " + gpxFile.path, e); //$NON-NLS-1$
+			log.error("1Error reading gpx " + gpxFile.path, e); //$NON-NLS-1$
 			gpxFile.error = e;
 			return gpxFile;
 		} finally {
@@ -1776,8 +1778,8 @@ public class GPXUtilities {
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;
-			log.error("Error reading gpx " + gpxFile.path, e); //$NON-NLS-1$
-			log.info("Error reading gpx " + gpxFile.path);
+			log.error("2Error reading gpx " + gpxFile.path, e); //$NON-NLS-1$
+			log.info("2Error reading gpx " + gpxFile.path);
 		}
 
 		return gpxFile;

@@ -163,7 +163,7 @@ class ListFilterAdapter(
 	}
 
 	override fun getItemCount(): Int {
-		val correctionForSelectAllItem = if (filter.collectionFilterParams.hasSelectAllVariant()) 1 else 0
+		val correctionForSelectAllItem = getIndexCorrectionForSelectAllItem()
 		return if (showAllItems) {
 			items.size
 		} else if (items.size > MIN_VISIBLE_COUNT) {
@@ -189,7 +189,7 @@ class ListFilterAdapter(
 	}
 
 	private fun getItem(position: Int): String {
-		val correctionForSelectAllItem = if (filter.collectionFilterParams.hasSelectAllVariant()) 1 else 0
+		val correctionForSelectAllItem = getIndexCorrectionForSelectAllItem()
 		return if (showAllItems) {
 			items[position]
 		} else if (position - correctionForSelectAllItem < MIN_VISIBLE_COUNT) {
@@ -199,10 +199,13 @@ class ListFilterAdapter(
 		}
 	}
 
+	private fun getIndexCorrectionForSelectAllItem() = if (filter.collectionFilterParams.hasSelectAllVariant()) 1 else 0
+
 	override fun setNewSelectedItems(newSelectedItems: List<String>) {
 		val additionalItems = ArrayList<String>()
+		val correctionForSelectAllItem = getIndexCorrectionForSelectAllItem()
 		for (selectedItem in newSelectedItems) {
-			if (items.indexOf(selectedItem) >= MIN_VISIBLE_COUNT) {
+			if (items.indexOf(selectedItem) + correctionForSelectAllItem >= MIN_VISIBLE_COUNT) {
 				additionalItems.add(selectedItem)
 			}
 		}
@@ -213,13 +216,13 @@ class ListFilterAdapter(
 	override fun filterCollection(query: String) {
 		val filteredItems = ArrayList<String>()
 		if (Algorithms.isEmpty(query)) {
-			filteredItems.addAll(filter.allItemsCollection.keys)
+			filteredItems.addAll(filter.allItems)
 		} else {
 			val matcher = SearchPhrase.NameStringMatcher(
 				query.trim { it <= ' ' },
 				CollatorStringMatcher.StringMatcherMode.CHECK_CONTAINS)
 			filter.let {
-				for (item in it.allItemsCollection.keys) {
+				for (item in it.allItems) {
 					if (matcher.matches(item)) {
 						filteredItems.add(item)
 					}

@@ -54,7 +54,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 				val adapter = ListFilterAdapter(app, nightMode, null, null)
 				adapter.filter = currentFilter
 				adapter.showAllItems = true
-				adapter.items = ArrayList(filter.allItemsCollection.keys)
+				adapter.items = ArrayList(filter.allItems)
 				val fragment = FilterAllVariantsListFragment()
 				fragment.initialFilter = initialFilter
 				fragment.retainInstance = true
