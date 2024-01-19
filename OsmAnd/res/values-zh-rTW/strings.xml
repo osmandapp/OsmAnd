@@ -5579,4 +5579,5 @@
     <string name="any_connected">任何已連線</string>
     <string name="any_connected_with_device">任何已連結的：%s</string>
     <string name="shared_string_road_maps">道路地圖</string>
+    <string name="shared_string_all_tracks">所有軌跡</string>
 </resources>

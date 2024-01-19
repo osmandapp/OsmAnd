@@ -5594,4 +5594,5 @@
     <string name="any_connected">Alle forbundne</string>
     <string name="any_connected_with_device">Alle forbundne: %s</string>
     <string name="shared_string_road_maps">Vejkort</string>
+    <string name="shared_string_all_tracks">Alle spor</string>
 </resources>
