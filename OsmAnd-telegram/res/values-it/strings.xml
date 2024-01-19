@@ -190,7 +190,7 @@
     <string name="disable_monitoring">Disattiva il monitoraggio</string>
     <string name="location_recording_enabled">Registrazione della posizione abilitata</string>
     <string name="timeline_description">Attivare il monitoraggio per salvare lo storico delle locazioni.</string>
-    <string name="app_name_short">Tracker OsmAnd</string>
+    <string name="app_name_short">Tracciatore OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'applicazione di messaggistica) viene usato per connettersi e comunicare con le persone.</string>
     <string name="privacy_policy_telegram_client">Il tracker OsmAnd è uno dei client utilizzati dalla piattaforma aperta Telegram. I tuoi contatti possono usare un qualsiasi cliente Telegram.</string>
