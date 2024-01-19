@@ -355,10 +355,10 @@
     <string name="voice_prompts_timetable">Vremena glasovnih navođenja</string>
     <string name="routing_attr_freeride_policy_description">Spuštanje izvan staze neslužbenim rutama, obično su neuređena, neodržavana i nisi sigurna noću. Ulazite na sopstveni rizik.</string>
     <string name="routing_attr_freeride_policy_name">Van staze</string>
-    <string name="routing_attr_difficulty_preference_description">Dajte prednost rutama ovog nivoa težine, navigacija težim ili lakšim padinama moguća je ako su kraće.</string>
+    <string name="routing_attr_difficulty_preference_description">Daj prednost rutama ove težine, navigacija na težim ili lakšim padinama moguća je ako su kraće.</string>
     <string name="routing_attr_difficulty_preference_name">Preferirana težina</string>
-    <string name="routing_attr_allow_classic_only_description">Staze pripremljene za običan način bez puteva za klizanje. Ovo uključuje i staze pripremljene malim vozilima za sneg i putanjama koje su skijaši napravili.</string>
-    <string name="routing_attr_allow_classic_only_name">Dozvoli samo uobičajene puteve</string>
+    <string name="routing_attr_allow_classic_only_description">Staze pripremljene za običan način bez puteva za klizanje. Ovo uključuje i staze pripremljene manjim motornim sankama za sneg i putanjama koje su skijaši napravili.</string>
+    <string name="routing_attr_allow_classic_only_name">Dozvoli samo klasične rute</string>
     <string name="routing_attr_allow_skating_only_description">Snimljene rute za slobodni način ili samo klizanje bez uobičajenih putanja.</string>
     <string name="routing_attr_allow_skating_only_name">Dozvoli puteve samo za klizanje</string>
     <string name="routing_attr_allow_expert_description">Užasno teški putevi, sa opasnim preprekama i okolinom.</string>
