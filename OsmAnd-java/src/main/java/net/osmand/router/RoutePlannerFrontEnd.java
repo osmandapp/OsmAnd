@@ -268,9 +268,6 @@ public class RoutePlannerFrontEnd {
 	
 	public RoutePlannerFrontEnd setUseOnlyHHRouting(boolean useOnlyHHRouting) {
 		this.useOnlyHHRouting = useOnlyHHRouting;
-		if (useOnlyHHRouting && hhRoutingConfig == null) {
-			this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
-		}
 		return this;
 	}
 
@@ -854,7 +851,11 @@ public class RoutePlannerFrontEnd {
 				return r;
 			}
 		}
-		
+
+		if (useOnlyHHRouting) {
+			return new HHNetworkRouteRes("useOnlyHHRouting: old routing engine is disabled for this request");
+		}
+
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;
