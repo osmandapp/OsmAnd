@@ -261,7 +261,16 @@ public class RoutePlannerFrontEnd {
 		this.hhRoutingConfig = hhRoutingConfig;
 		return this;
 	}
-	
+
+	public RoutePlannerFrontEnd disableHHRoutingConfig() {
+		this.hhRoutingConfig = null;
+		return this;
+	}
+
+	public boolean isHHRoutingConfigured() {
+		return this.hhRoutingConfig != null;
+	}
+
 	public void setDefaultHHRoutingConfig() {
 		this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
 	}
