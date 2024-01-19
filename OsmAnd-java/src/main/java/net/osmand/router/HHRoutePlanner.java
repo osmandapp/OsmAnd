@@ -260,7 +260,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		int startReiterate = -1, endReiterate = -1;
 		boolean found = false;
 		RouteSegmentPoint startPnt = planner.findRouteSegment(start.getLatitude(), start.getLongitude(), hctx.rctx, null);
+		if (startPnt == null) {
+			return;
+		}
 		RouteSegmentPoint endPnt = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
+		if (endPnt == null) {
+			return;
+		}
 		List<RouteSegmentPoint> stOthers = startPnt.others, endOthers = endPnt.others;
 		while (!found) {
 			if (startReiterate + endReiterate >= hctx.config.MAX_START_END_REITERATIONS) {
