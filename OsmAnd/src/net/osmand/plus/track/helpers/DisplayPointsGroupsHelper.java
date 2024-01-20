@@ -149,6 +149,7 @@ public class DisplayPointsGroupsHelper {
 	}
 
 	public static class DisplayGroupsHolder {
+
 		public List<GpxDisplayGroup> groups;
 		public Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups;
 

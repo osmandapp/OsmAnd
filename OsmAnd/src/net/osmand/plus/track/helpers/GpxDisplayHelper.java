@@ -119,7 +119,23 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	public List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile, boolean processTrack) {
+	public List<GpxDisplayGroup> collectDisplayGroups(@Nullable SelectedGpxFile selectedGpxFile,
+	                                                  @NonNull GPXFile gpxFile, boolean processTrack) {
+		if (selectedGpxFile == null) {
+			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+		}
+		List<GpxDisplayGroup> displayGroups = null;
+		if (selectedGpxFile != null) {
+			displayGroups = selectedGpxFile.getDisplayGroups(app);
+		}
+		if (displayGroups == null) {
+			displayGroups = collectDisplayGroups(gpxFile, processTrack);
+		}
+		return displayGroups;
+	}
+
+	@NonNull
+	private List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile, boolean processTrack) {
 		List<GpxDisplayGroup> dg = new ArrayList<>();
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.tracks.size() > 0) {
