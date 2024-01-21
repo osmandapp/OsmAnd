@@ -2949,7 +2949,7 @@
     <string name="set_working_days_to_continue">Za nastavak odredite radne dane</string>
     <string name="route_between_points">Ruta između tačaka</string>
     <string name="plan_a_route">Nova ruta</string>
-    <string name="add_to_a_track">Dodaj stazi</string>
+    <string name="add_to_a_track">Dodaj stazu</string>
     <string name="track_show_start_finish_icons">Prikaži početne i krajne sličice</string>
     <string name="select_track_width">Izaberi širinu</string>
     <string name="gpx_split_interval_descr">Izaberi međuvreme na kome će se prikazivati oznake sa razdaljinom ili vremenom na stazi.</string>
