@@ -175,6 +175,9 @@ public class GpxDbUtils {
 		if (oldVersion < 16) {
 			addTableColumn(db, FILE_CREATION_TIME);
 		}
+		if (oldVersion < 17) {
+			addTableColumn(db, EXPECTED_ROUTE_DURATION);
+		}
 		db.execSQL(getIndexQuery());
 	}
 
@@ -193,7 +196,8 @@ public class GpxDbUtils {
 					|| analysis.wptCategoryNames == null
 					|| analysis.latLonStart == null && analysis.points > 0
 					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0;
+					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
+					|| (long) item.getParameter(EXPECTED_ROUTE_DURATION) < 0;
 		}
 		return true;
 	}
@@ -252,6 +256,7 @@ public class GpxDbUtils {
 		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
 		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
 		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
+		map.put(EXPECTED_ROUTE_DURATION, hasAnalysis ? analysis.expectedRouteDuration : null);
 		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
 		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
 		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);

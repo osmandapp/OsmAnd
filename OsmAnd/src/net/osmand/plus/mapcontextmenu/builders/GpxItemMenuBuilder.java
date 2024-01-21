@@ -61,7 +61,7 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor,
 				OsmAndFormatter.getFormattedDistance(item.analysis.totalDistance, app));
 		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_time_16);
-		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor, Algorithms.formatDuration((int) (item.analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor, Algorithms.formatDuration(item.analysis.getDurationInSeconds(), app.accessibilityEnabled()) + "");
 	}
 
 	private void buildIcon(LinearLayout ll, int gpxSmallIconMargin, int iconId) {

@@ -5,9 +5,11 @@ import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities.RouteSegment;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -29,6 +31,7 @@ public class GPXTrackAnalysis {
 	public long endTime = Long.MIN_VALUE;
 	public long timeSpan = 0;
 	public long timeSpanWithoutGaps = 0;
+	public long expectedRouteDuration = 0;
 	//Next few lines for Issue 3222 heuristic testing only
 	//public long timeMoving0 = 0;
 	//public float totalDistanceMoving0 = 0;
@@ -161,6 +164,8 @@ public class GPXTrackAnalysis {
 			metricEnd += s.metricEnd;
 			secondaryMetricEnd += s.secondaryMetricEnd;
 			points += numberOfPoints;
+			expectedRouteDuration += getExpectedRouteSegmentDuration(s);
+
 			for (int j = 0; j < numberOfPoints; j++) {
 				WptPt point = s.get(j);
 				if (j == 0 && locationStart == null) {
@@ -342,6 +347,26 @@ public class GPXTrackAnalysis {
 		if (timeSpan == 0) {
 			timeSpan = endTime - startTime;
 		}
+	}
+
+	public long getDurationInMs() {
+		return timeSpan > 0 ? timeSpan : expectedRouteDuration;
+	}
+
+	public int getDurationInSeconds() {
+		return (int) (getDurationInMs() / 1000f + 0.5f);
+	}
+
+	private long getExpectedRouteSegmentDuration(SplitSegment segment) {
+		List<RouteSegment> routeSegments = segment.segment.routeSegments;
+		if (routeSegments != null && !segment.segment.generalSegment) {
+			long result = 0;
+			for (RouteSegment routeSegment : routeSegments) {
+				result += (long) (1000 * Algorithms.parseFloatSilently(routeSegment.segmentTime, 0.0f));
+			}
+			return result;
+		}
+		return 0;
 	}
 
 	private void processAverageValues(float totalElevation, int elevationPoints, double totalSpeedSum, int speedCount) {

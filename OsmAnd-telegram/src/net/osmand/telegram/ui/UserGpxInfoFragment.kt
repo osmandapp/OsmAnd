@@ -381,7 +381,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		avgElevationTv.text = if (analysis != null && analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
 		avgSpeedTv.text = if (analysis != null && analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
 		totalDistanceTv.text = if (analysis != null && analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app) else "-"
-		timeSpanTv.text = if (analysis != null && analysis.timeSpan != 0L) Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true) else "-"
+		timeSpanTv.text = if (analysis != null && analysis.durationInSeconds != 0) Algorithms.formatDuration((analysis.durationInSeconds, true) else "-"
 	}
 
 	private fun updateGPXMap() {

@@ -109,8 +109,8 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		boolean timeSpecified = analysis.isTimeSpecified();
 		if (timeSpecified) {
-			time.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000),
-					app.accessibilityEnabled()));
+			time.setText(Algorithms.formatDuration(
+					analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 		}
 		AndroidUiHelper.updateVisibility(time, timeSpecified);
 		AndroidUiHelper.updateVisibility(timeIcon, timeSpecified);
