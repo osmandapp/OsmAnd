@@ -79,7 +79,7 @@
     <string name="routing_settings_descr">운행을 위한 옵션을 설정합니다</string>
     <string name="global_settings">일반 설정</string>
     <string name="index_settings_descr">기기에 저장된 오프라인 지도를 다운로드하고 관리합니다</string>
-    <string name="general_settings">일반</string>
+    <string name="general_settings">기본 설정</string>
     <string name="general_settings_descr">앱에 대한 디스플레이와 일반 설정을 구성합니다</string>
     <string name="global_app_settings">일반 앱 설정</string>
     <string name="user_name">OSM 사용자 이름</string>
@@ -620,7 +620,7 @@
     <string name="keep_and_add_destination_point">도착지로 추가</string>
     <string name="select_gpx">GPX 선택…</string>
     <string name="route_descr_select_destination">도착지 선택</string>
-    <string name="route_info">경로 정보</string>
+    <string name="route_info">노선 정보</string>
     <string name="routing_attr_prefer_motorway_name">전용도로 선호</string>
     <string name="routing_attr_prefer_motorway_description">전용도로 선호</string>
     <string name="routing_attr_avoid_toll_name">유료도로 회피</string>
@@ -1648,7 +1648,7 @@
     <string name="confirm_download_roadmaps">모든 지도를 가지고 있더러도 지도를 다운로드 하시겠습니까?</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="value_downloaded_of_max">%2$.1f MB 에서 %1$.1f</string>
-    <string name="move_marker_bottom_sheet_title"/>
+    <string name="move_marker_bottom_sheet_title">지도를 이동하여 마커 위치 변경</string>
     <string name="follow_us">팔로우하기</string>
     <string name="access_direction_audio_feedback">오디오 길찾기</string>
     <string name="access_direction_audio_feedback_descr">소리별로 목표점 방향을 나타냅니다.</string>
@@ -3654,4 +3654,110 @@
     <string name="telegram_chats">텔레그램 채팅</string>
     <string name="press_button_to_link_with_action">장치의 버튼을 눌러 작업에 할당: %1$s</string>
     <string name="shared_string_all_tracks">모든 트랙</string>
+    <string name="send_crash_log_descr">충돌에 대한 정보만 포함함</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">산화제와 유기 과산화물</string>
+    <string name="shared_string_deleting">삭제하기</string>
+    <string name="deleting_complete">삭제 완료</string>
+    <string name="terrain_map">지형 지도(3D)</string>
+    <string name="track_not_recorded">기록되지 않음</string>
+    <string name="shared_string_inches">인치</string>
+    <string name="inch">인치</string>
+    <string name="shared_string_kilograms">킬로그램</string>
+    <string name="weather_pressure_hectopascals">헥토파스칼</string>
+    <string name="weather_temperature_celsius">섭씨</string>
+    <string name="shared_string_custom">사용자 맞춤</string>
+    <string name="write_bearing_description">기록하는 동안 각 트랙 포인트에 방위각을 저장함</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">래스터 sqlitedb를 사용하여 언덕기슭/경사</string>
+    <string name="map_3d_mode_hint">버튼을 길게 탭하면 버튼 위치를 변경할 수 있습니다.</string>
+    <string name="show_all_tracks">모든 트랙 표시</string>
+    <string name="impassable_road_desc">내비게이션 중에 피하고 싶은 도로를 선택합니다.</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="in_grace_period">유예 기간 중</string>
+    <string name="weather_forecast_is_outdated">예측이 오래되었습니다.</string>
+    <string name="route_parameters">경로 매개변수</string>
+    <string name="folder_export_empty_error">내보낼 항목이 없으며 폴더가 비어 있음</string>
+    <string name="shared_string_apply_changes">변경사항 적용</string>
+    <string name="free_account">체험 계정</string>
+    <string name="osmand_cloud_deleting_account_descr">잠시 후 모든 데이터와 계정이 OsmAnd Cloud에서 삭제됩니다.
+\n
+\n장치의 모든 데이터는 그대로 유지됩니다.</string>
+    <string name="osmand_cloud_deletion_account_warning">귀하의 계정 및 모든 계정 세부 정보는 다음과 같음 %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">OsmAnd Cloud의 모든 데이터는 %1$s. 장치의 데이터는 그대로 유지됩니다.</string>
+    <string name="routing_attr_freeride_policy_description">\'프리라이드(Freeride)\'와 \'오프 피스트(Off-piste)\'는 비공식 루트이자 통로입니다. 일반적으로 손질되지 않고 유지 관리되지 않으며 저녁에 확인되지 않습니다. 자신의 책임하에 입장하십시오.</string>
+    <string name="shared_string_close_the_dialog">대화상자 닫기</string>
+    <string name="error_calculate">계산 결과가 비어 있음</string>
+    <string name="external_sensors_not_found">센서를 찾을 수 없음</string>
+    <string name="external_sensors_source_of_data">데이터 원본</string>
+    <string name="delete_folder_question">폴더를 삭제하시겠습니까?</string>
+    <string name="delete_folder">폴더 삭제</string>
+    <string name="show_all_tracks_on_the_map">지도에 모든 트랙 표시</string>
+    <string name="rssi_widget_desc">외부 장치의 RSSI 레벨을 표시합니다.</string>
+    <string name="map_widget_rssi">Rssi</string>
+    <string name="tracks_empty_folder_description">이 폴더에는 아직 트랙이 없습니다.</string>
+    <string name="tracks_empty_folder">빈 폴더</string>
+    <string name="rendering_attr_lightDetail_name">라이트 디테일</string>
+    <string name="empty_tracks_description">OsmAnd를 사용하여 트랙 파일을 가져오거나, 만들거나, 녹음할 수 있습니다.</string>
+    <string name="subscribe_email_desc">앱 할인에 대한 메일링 리스트를 구독하고 지도를 3회 더 다운로드받으세요!</string>
+    <string name="shared_string_on_map">지도 위</string>
+    <string name="display_position_automatic_descr">지도 방향에 따라 다름: 이동 방향은 아래쪽, 다른 모든 방향은 중심입니다.</string>
+    <string name="shared_string_recorded">기록</string>
+    <string name="select_distance_route_will_recalc">경로가 다시 계산될 거리를 선택합니다.</string>
+    <string name="route_is_too_long_v2">장거리의 경우: 10분 이내에 경로를 찾을 수 없는 경우 중간 목적지를 추가하세요.</string>
+    <string name="transfers">전송</string>
+    <string name="nothing_found">찾을 수 없음</string>
+    <string name="measurement_units">측정 단위</string>
+    <string name="osmand_plus_extended_description_part2">내비게이션
+\n• 온라인(빠른) 또는 오프라인에서 작동(해외에 있을 때 로밍 요금 없음)
+\n• 턴바이턴 음성 안내(녹음 및 합성된 음성)
+\n• 차선 안내(옵션), 도로명 표시 및 도착 예정 시간
+\n• 여정의 중간 지점 지원
+\n• 경로에서 벗어날 때마다 자동 경로 변경
+\n• 주소, 유형(예: 레스토랑, 호텔, 주유소, 박물관) 또는 지리적 좌표로 장소 검색</string>
+    <string name="there_are_no_connected_sensors_of_this_type">이 유형의 연결된 센서가 없음</string>
+    <string name="approximate_bearing_descr">따라가는 탐색 경로에서 방위를 파생합니다.</string>
+    <string name="revolutions_per_minute_unit">RPM</string>
+    <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
+    <string name="rendering_attr_lightDetail_description">기본: Seamark 이름 (light character.group.period), 부문에 추가 정보를 선택 1 에 3 또는 부문 1,2,3,4,5 가벼운 문자</string>
+    <string name="simplified_track">단순화된 트랙</string>
+    <string name="recalculate_route_distance_promo">경로에서 현재 위치까지의 거리가 선택한 값보다 크면 경로가 다시 계산됩니다.</string>
+    <string name="select_street">거리 선택</string>
+    <string name="do_not_show_startup_messages_desc">앱 할인및 특별 지역 이벤트 메시지를 표시하지 마십시오.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">OsmAnd Pro 구독은 취소되지 않습니다.</string>
+    <string name="manage_subscriptions">구독을 관리합니다.</string>
+    <string name="backup_error_delete_account_email_match">이메일이 로그인 사용자 이름과 일치하지 않음</string>
+    <string name="relief_3d">3D 릴리프</string>
+    <string name="shared_string_yards">야드</string>
+    <string name="empty_tracks">트랙 파일이 없습니다.</string>
+    <string name="shared_string_all_world">모든 세계</string>
+    <string name="weather_forecast">일기 예보</string>
+    <string name="offline_weather_forecast">오프라인 일기 예보</string>
+    <string name="si_nm_mt">항해술의 마일/미터</string>
+    <string name="weather_temperature_fahrenheit">화씨</string>
+    <string name="action_cannot_be_undone">이 작업은 취소할 수 없습니다.</string>
+    <string name="last_seven_days">최근 7일</string>
+    <string name="relief_3d_description">이웃 또는 대륙 전체의 축척 모델을 소유하고 관찰하십시오.</string>
+    <string name="power_watts_unit">와트</string>
+    <string name="shared_string_turn">턴</string>
+    <string name="parked_at">에 주차됨</string>
+    <string name="special_routing_type">특별 라우팅</string>
+    <string name="map_3d_mode_description">두 손가락으로 지도를 터치하고 위아래로 움직여 지도 기울기를 조정합니다.</string>
+    <string name="no_poi_for_category">POI를 찾을 수 없음</string>
+    <string name="rendering_value_sectors_name">섹터</string>
+    <string name="tts_title">음성합성</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="rendering_value_caiScale_name">CAI</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="shared_string_paused">일시중지됨</string>
+    <string name="feature_available_as_part_of_plan">%1$s 의 일부로 사용할 수 있는 %2$s 계획</string>
+    <string name="rendering_value_sacScale_name">SAC</string>
+    <string name="shared_string_select_recent">최근 항목 선택</string>
+    <string name="change_appearance">모양 변경</string>
+    <string name="switch_folder">폴더 전환</string>
+    <string name="accessibility_announce">발표</string>
+    <string name="osmand_default_routing">OsmAnd 라우팅</string>
+    <string name="calculate_offline">오프라인 계산</string>
+    <string name="key_is_already_assigned_error">이 \"%1$s\" 키가 이미 작업에 할당되어 있음: \"%2$s\"</string>
+    <string name="may_be_used_if_there_is_shortcut">단축키가 있는 경우 사용할 수 있음</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">보조 기기는 OsmAnd Cloud에서 로그오프되고 유료 기능을 사용할 수 없게 됩니다.</string>
+    <string name="write_data_from_sensor_to_track">트립 기록하는 동안 외부 센서에서 GPX로 데이터를 씁니다.</string>
 </resources>
