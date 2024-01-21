@@ -50,6 +50,7 @@ public class RouteCalculationProgress {
 
 	public long routeCalculationStartTime;
 	public List<WorldRegion> missingMaps;
+	private HHIteration hhIterationStep;
 	
 
 	private static final float INITIAL_PROGRESS = 0.05f;
@@ -128,6 +129,22 @@ public class RouteCalculationProgress {
 	}
 	
 	public float getLinearProgress() {
+		if(hhIterationStep != null) {
+			double progress = 0;
+			for (HHIteration i : HHIteration.values()) {
+				if (i == hhIterationStep) {
+					break;
+				}
+				progress += i.approxStepLength;
+			}
+			double intermediateProgress = 0.5;
+			// 1. implement 2-3 reiterations progress
+			// 2. implement in progress start/finish
+			// 3. implement in progress routing
+			// 4. implement in progress detailed
+			progress += intermediateProgress * hhIterationStep.approxStepLength;
+			return (float) Math.min(progress * 100f, 99);
+		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
 		float all = totalEstimatedDistance * 1.35f;
 		float pr = 0;
@@ -161,5 +178,17 @@ public class RouteCalculationProgress {
 	public void nextIteration() {
 		iteration++;
 		totalEstimatedDistance = 0;
+	}
+
+	public enum HHIteration {
+		SELECT_REGIONS(0.05), LOAD_POINS(0.05), START_END_POINT(0.25), ROUTING(0.25), DETAILED(0.3), ALTERNATIVES(0.1), DONE(0);
+		public final double approxStepLength;
+		
+		HHIteration(double approximate) {
+			this.approxStepLength = approximate;
+		}
+	}
+	public void hhIteration(HHIteration step) {
+		this.hhIterationStep = step;
 	}
 }
