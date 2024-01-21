@@ -29,6 +29,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -224,7 +225,7 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 						itemsSize += ((RemoteFile) object).getZipSize();
 					} else if (object instanceof MapMarkersGroup) {
 						MapMarkersGroup markersGroup = (MapMarkersGroup) object;
-						if (Algorithms.equalsToAny(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name(), ExportType.HISTORY_MARKERS.name())) {
+						if (CollectionUtils.equalsToAny(markersGroup.getId(), ExportType.ACTIVE_MARKERS.name(), ExportType.HISTORY_MARKERS.name())) {
 							itemsSize += ((MapMarkersGroup) object).getMarkers().size();
 						}
 					}

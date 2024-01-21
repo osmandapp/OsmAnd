@@ -5582,4 +5582,5 @@
     <string name="map_widget_sun_position_desc">Виджет показывает время до восхода или заката солнца в зависимости от текущего времени.</string>
     <string name="previous_row_has_complex_widget">Предыдущий ряд содержит составной виджет</string>
     <string name="complex_widget_alert">Виджет %1$s можно разместить только в отдельном ряде.</string>
+    <string name="shared_string_all_tracks">Все треки</string>
 </resources>

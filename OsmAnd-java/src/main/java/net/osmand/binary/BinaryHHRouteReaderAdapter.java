@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.router.HHRouteDataStructure;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
@@ -50,12 +49,7 @@ public class BinaryHHRouteReaderAdapter {
 			return q;
 		}
 
-		public boolean contains(LatLon e) {
-			if(e == null) {
-				return false;
-			}
-			int y = MapUtils.get31TileNumberY(e.getLatitude());
-			int x = MapUtils.get31TileNumberX(e.getLongitude());
+		public boolean contains(int x, int y) {
 			return x >= left && x <= right && y >= top && y <= bottom;
 		}
 	}

@@ -12,6 +12,7 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -73,7 +74,7 @@ public class GpxDataItem {
 	public void copyData(@NonNull GpxDataItem item) {
 		for (Map.Entry<GpxParameter, Object> entry : item.map.entrySet()) {
 			GpxParameter parameter = entry.getKey();
-			if (!Algorithms.equalsToAny(parameter, FILE_NAME, FILE_DIR, FILE_LAST_MODIFIED_TIME)) {
+			if (!CollectionUtils.equalsToAny(parameter, FILE_NAME, FILE_DIR, FILE_LAST_MODIFIED_TIME)) {
 				map.put(parameter, entry.getValue());
 			}
 		}

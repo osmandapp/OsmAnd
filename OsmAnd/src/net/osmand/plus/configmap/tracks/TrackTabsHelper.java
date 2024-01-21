@@ -11,12 +11,14 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -80,6 +82,17 @@ public class TrackTabsHelper {
 		updateTrackTabs(trackTabs);
 	}
 
+	public void updateItems(@NonNull TrackFolder folder){
+		List<TrackItem> allTrackItems = new ArrayList<>(folder.getFlattenedTrackItems());
+		if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || gpxSelectionHelper.getSelectedCurrentRecordingTrack() != null) {
+			SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+			TrackItem trackItem = new TrackItem(app, selectedGpxFile.getGpxFile());
+			allTrackItems.add(trackItem);
+		}
+		itemsSelectionHelper.setAllItems(allTrackItems);
+		updateSelectTrackTabs(folder);
+	}
+
 	private void updateTrackTabs(@NonNull Map<String, TrackTab> folderTabs) {
 		processVisibleTracks();
 		processRecentlyVisibleTracks();
@@ -88,6 +101,17 @@ public class TrackTabsHelper {
 		trackTabs.put(TrackTabType.ALL.name(), getAllTracksTab());
 		trackTabs.putAll(getAllSmartFoldersTabs());
 		trackTabs.putAll(folderTabs);
+		loadTabsSortModes();
+		sortTrackTabs();
+	}
+
+	private void updateSelectTrackTabs(@NonNull TrackFolder folder) {
+		processVisibleTracks();
+		processRecentlyVisibleTracks();
+		trackTabs.clear();
+		trackTabs.put(app.getString(R.string.shared_string_visible), getTracksOnMapTab());
+		trackTabs.put(app.getString(R.string.shared_string_all_tracks), getAllTracksTab());
+		trackTabs.put(app.getString(R.string.shared_string_folders), getFoldersTab(folder));
 		loadTabsSortModes();
 		sortTrackTabs();
 	}
@@ -133,6 +157,15 @@ public class TrackTabsHelper {
 			items.addAll(allTrackItems);
 		}
 		return items;
+	}
+
+	@NonNull
+	private TrackTab getFoldersTab(@NonNull TrackFolder folder) {
+		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
+		trackTab.items.add(TYPE_SORT_TRACKS);
+		trackTab.items.addAll(folder.getSubFolders());
+		trackTab.items.addAll(folder.getTrackItems());
+		return trackTab;
 	}
 
 	@NonNull

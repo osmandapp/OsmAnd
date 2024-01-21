@@ -19,11 +19,6 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/rotate_map_to" />
 
-	<Preference
-		android:key="position_placement_on_map"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/display_position" />
-
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="map_screen_orientation"
 		android:layout="@layout/preference_with_descr"

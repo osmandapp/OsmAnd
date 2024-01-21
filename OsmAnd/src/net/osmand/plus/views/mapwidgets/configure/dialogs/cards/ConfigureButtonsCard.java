@@ -1,7 +1,5 @@
 package net.osmand.plus.views.mapwidgets.configure.dialogs.cards;
 
-import static android.util.TypedValue.COMPLEX_UNIT_PX;
-
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,10 +24,9 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheetDialogFragment;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.Map3DModeBottomSheet;
 
-public class ConfigureScreenButtonsCard extends MapBaseCard {
+public class ConfigureButtonsCard extends MapBaseCard {
 
 	private final Fragment target;
 
@@ -38,7 +35,7 @@ public class ConfigureScreenButtonsCard extends MapBaseCard {
 		return R.layout.configure_buttons_card;
 	}
 
-	public ConfigureScreenButtonsCard(@NonNull MapActivity activity, @NonNull Fragment target) {
+	public ConfigureButtonsCard(@NonNull MapActivity activity, @NonNull Fragment target) {
 		super(activity, false);
 		this.target = target;
 	}
@@ -53,25 +50,9 @@ public class ConfigureScreenButtonsCard extends MapBaseCard {
 
 		setupCompassVisibilityButton(appMode);
 		setupMap3DModeVisibilityButton(appMode);
-		setupDistanceRulerButton(appMode);
 		setupQuickActionsButton(appMode);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), false);
-	}
-
-	private void setupDistanceRulerButton(@NonNull ApplicationMode appMode) {
-		boolean enabled = settings.SHOW_DISTANCE_RULER.getModeValue(appMode);
-
-		View button = view.findViewById(R.id.distance_by_tap_button);
-		button.setOnClickListener(v -> DistanceByTapFragment.showInstance(getMapActivity()));
-		setupButton(button, getString(R.string.map_widget_distance_by_tap), null, R.drawable.ic_action_ruler_line, enabled, nightMode);
-
-		TextView count = button.findViewById(R.id.items_count_descr);
-		count.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);
-		count.setTextSize(COMPLEX_UNIT_PX, app.getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
-
-		AndroidUiHelper.updateVisibility(count, true);
-		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}
 
 	private void setupQuickActionsButton(@NonNull ApplicationMode appMode) {

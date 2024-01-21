@@ -39,6 +39,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -96,14 +97,19 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
-	                     boolean showDivider, boolean shouldShowFolder, boolean selectionMode) {
+						 boolean showDivider, boolean shouldShowFolder, boolean selectionMode){
+		bindView(sortMode, trackItem, showDivider, shouldShowFolder, selectionMode, false);
+	}
+
+	public void bindView(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
+	                     boolean showDivider, boolean shouldShowFolder, boolean selectionMode, boolean hideOptionsButton) {
 		title.setText(trackItem.getName());
 
 		boolean selected = listener != null && listener.isTrackItemSelected(trackItem);
 		checkbox.setChecked(selected);
 		UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), checkbox);
 		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.checkbox_container), selectionMode);
-		AndroidUiHelper.updateVisibility(menuButton, !selectionMode);
+		AndroidUiHelper.updateVisibility(menuButton, !selectionMode && !hideOptionsButton);
 
 		int margin = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();
@@ -332,6 +338,10 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		}
 
 		default void onTrackItemsSelected(@NonNull Set<TrackItem> trackItems, boolean selected) {
+
+		}
+
+		default void onTrackFolderSelected(@NonNull TrackFolder trackFolder) {
 
 		}
 

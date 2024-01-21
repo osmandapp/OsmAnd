@@ -623,7 +623,12 @@ public class MapUtils {
 		double y = y31 / 1.0 / (1 << (31 - PRECISION_ZOOM));
 		int tileY = (int) y; // width the same for all x
 		double ry = y - tileY;
-		Double d = DIST_CACHE.get(tileY);
+		Double d = null, dp = null;
+		try {
+			d = DIST_CACHE.get(tileY);
+		} catch (RuntimeException e) {
+			// parallel access crash
+		}
 		if (d == null) {
 			synchronized (MapUtils.class) {
 				d = getTileDistanceWidth(MapUtils.get31LatitudeY(tileY << (31 - PRECISION_ZOOM)), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));
@@ -631,7 +636,11 @@ public class MapUtils {
 			}
 		}
 		tileY = tileY + 1;
-		Double dp = DIST_CACHE.get(tileY);
+		try {
+			dp = DIST_CACHE.get(tileY);
+		} catch (RuntimeException e) {
+			// parallel access crash
+		}
 		if (dp == null) {
 			synchronized (MapUtils.class) {
 				dp = getTileDistanceWidth(MapUtils.get31LatitudeY(tileY << (31 - PRECISION_ZOOM)), PRECISION_ZOOM) / (1 << (31 - PRECISION_ZOOM));

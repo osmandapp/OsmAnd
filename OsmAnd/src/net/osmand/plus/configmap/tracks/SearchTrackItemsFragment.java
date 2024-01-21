@@ -80,8 +80,8 @@ public class SearchTrackItemsFragment extends SearchTrackBaseFragment implements
 
 	private void saveChanges() {
 		Fragment fragment = getTargetFragment();
-		if (fragment instanceof TracksFragment) {
-			TracksFragment tracksFragment = (TracksFragment) fragment;
+		if (fragment instanceof TracksTabsFragment) {
+			TracksTabsFragment tracksFragment = (TracksTabsFragment) fragment;
 			ItemsSelectionHelper<TrackItem> originalHelper = tracksFragment.getSelectionHelper();
 			originalHelper.syncWith(selectionHelper);
 			tracksFragment.saveChanges();

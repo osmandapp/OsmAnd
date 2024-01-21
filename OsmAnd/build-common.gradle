@@ -33,10 +33,6 @@ android {
 		// additionalParameters "--no-version-vectors"
 	}
 
-	dexOptions {
-		javaMaxHeapSize "4g"
-	}
-
 	sourceSets {
 		main {
 			manifest.srcFile "AndroidManifest.xml"

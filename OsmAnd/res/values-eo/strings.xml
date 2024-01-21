@@ -5583,4 +5583,5 @@
     <string name="any_connected">Ĉiu konektita</string>
     <string name="map_widget_sun_position_desc">Fenestraĵo montranta tempon ĝis sunleviĝo aŭ sunsubiro, depende de la nuna tempo.</string>
     <string name="map_widget_sun_position">Pozicio de Suno</string>
+    <string name="shared_string_road_maps">Vojaj mapoj</string>
 </resources>

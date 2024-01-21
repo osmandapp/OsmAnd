@@ -1473,7 +1473,7 @@
     <string name="select_folder_descr">Dewiswch ffolder neu ychwanegu un newydd</string>
     <string name="shared_string_folders">Ffolderi</string>
     <string name="edit_track">Golygu trac</string>
-    <string name="upload_to_openstreetmap">Uchwlwytho i OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Uwchlwytho i OpenStreetMap</string>
     <string name="transport_nearby_routes">O fewn</string>
     <string name="shared_string_upload">Uwchlwytho</string>
     <string name="osmand_parking_time_left">ar ôl</string>
@@ -2157,7 +2157,7 @@
     <string name="coordinates_format">Fformat cyfesurynnau</string>
     <string name="osn_modify_dialog_title">Addasu nodyn</string>
     <string name="elevation_profile">Proffil uchder</string>
-    <string name="update_all_maps_added">Diweddaru pob map wedi\'i uchwanegu at %1$s\?</string>
+    <string name="update_all_maps_added">Diweddaru pob map wedi\'i ychwanegu at %1$s?</string>
     <string name="osmand_live_cancelled">Wedi\'i ganslo</string>
     <string name="monthly_subscription">Tanysgrifiad misol</string>
     <string name="waypoints_added_to_map_markers">Cyfeirbwyntiau wedi\'u hychwanegu at nodau map</string>

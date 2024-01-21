@@ -770,4 +770,5 @@
     <string name="poi_doors">문</string>
     <string name="poi_site_type_fortification">방어시설</string>
     <string name="facebook">페이스북</string>
+    <string name="poi_operator">연산자</string>
 </resources>

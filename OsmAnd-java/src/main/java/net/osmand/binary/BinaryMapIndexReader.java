@@ -317,7 +317,7 @@ public class BinaryMapIndexReader {
 					}
 				}
 			}
-			if(reg.calculatedCenter == null) {
+			if (reg.calculatedCenter == null) {
 				for (RouteRegion map : routingIndexes) {
 					if (Algorithms.objectEquals(reg.name, map.name)) {
 						reg.calculatedCenter = new LatLon(map.getTopLatitude() / 2 + map.getBottomLatitude() / 2,

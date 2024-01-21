@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 public class PurchaseUiData {
 
@@ -102,6 +102,6 @@ public class PurchaseUiData {
 	}
 
 	public boolean isPromo() {
-		return Algorithms.equalsToAny(origin, PROMO, TRIPLTEK_PROMO);
+		return CollectionUtils.equalsToAny(origin, PROMO, TRIPLTEK_PROMO);
 	}
 }

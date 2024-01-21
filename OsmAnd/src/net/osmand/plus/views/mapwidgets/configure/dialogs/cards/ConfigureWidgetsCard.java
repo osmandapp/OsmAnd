@@ -30,18 +30,18 @@ import net.osmand.plus.views.mapwidgets.configure.panel.ConfigureWidgetsFragment
 
 import java.util.Collections;
 
-public class ConfigureScreenWidgetsCard extends MapBaseCard {
+public class ConfigureWidgetsCard extends MapBaseCard {
 
 	private final MapWidgetRegistry widgetRegistry;
-
-	public ConfigureScreenWidgetsCard(@NonNull MapActivity mapActivity) {
-		super(mapActivity, false);
-		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
-	}
 
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.configure_widgets_card;
+	}
+
+	public ConfigureWidgetsCard(@NonNull MapActivity mapActivity) {
+		super(mapActivity, false);
+		widgetRegistry = mapActivity.getMapLayers().getMapWidgetRegistry();
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class ConfigureScreenWidgetsCard extends MapBaseCard {
 		View button = view.findViewById(R.id.transparent_widgets_button);
 
 		boolean enabled = settings.TRANSPARENT_MAP_THEME.getModeValue(appMode);
-		ConfigureScreenButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
+		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_transparent), null, R.drawable.ic_action_appearance, enabled, nightMode);
 
 		CompoundButton compoundButton = button.findViewById(R.id.compound_button);
 		compoundButton.setChecked(enabled);
