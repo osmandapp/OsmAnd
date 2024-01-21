@@ -467,14 +467,14 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				overviewTextView.setTextColor(defaultTextColor);
 				overviewTextView.setText(app.getString(R.string.shared_string_overview));
 				if (currentGpxDisplayItem != null) {
-					String overview = app.getString(R.string.shared_string_overview);
+					String overview = getString(R.string.shared_string_overview);
 					String points = String.valueOf(currentGpxDisplayItem.analysis.points);
-					overviewTextView.setText(app.getString(R.string.ltr_or_rtl_combine_with_brackets, overview, points));
+					overviewTextView.setText(getString(R.string.ltr_or_rtl_combine_with_brackets, overview, points));
 
-					String timeSpan = app.getString(R.string.shared_string_time_span);
+					String timeSpan = getString(R.string.shared_string_time_span);
 					String formattedDuration = Algorithms.formatDuration(currentGpxDisplayItem.analysis.getDurationInSeconds(), app.accessibilityEnabled());
 					TextView tvDuration = convertView.findViewById(R.id.fragment_count_text);
-					tvDuration.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, timeSpan, formattedDuration));
+					tvDuration.setText(getString(R.string.ltr_or_rtl_combine_via_colon, timeSpan, formattedDuration));
 				}
 			} else {
 				if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
