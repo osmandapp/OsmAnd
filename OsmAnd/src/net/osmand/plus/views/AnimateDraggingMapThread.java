@@ -444,9 +444,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 			animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Target);
 
-			boolean animateZoom = endZoom != startZoom || startZoomFP != endZoomFloatPart;
-			if (!animateZoom)
+			boolean animateZoom = Math.abs(endZoom + endZoomFloatPart - startZoom - startZoomFP) > 0.001f;
+			if (!animateZoom) {
 				zoomAnimation = null;
+			}
 			if (zoomAnimation != null) {
 				animator.cancelAnimation(zoomAnimation);
 				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Zoom);
