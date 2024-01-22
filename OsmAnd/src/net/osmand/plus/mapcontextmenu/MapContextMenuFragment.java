@@ -1715,7 +1715,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (!alreadyAdjusted) {
 			calcLatLon = getAdjustedMarkerLocation(getPosY(), calcLatLon, true, zoom);
 		}
-		thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
+		thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom);
 	}
 
 	private void setAddressLocation() {

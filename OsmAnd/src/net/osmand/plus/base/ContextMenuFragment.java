@@ -1046,7 +1046,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int currentZoom = mapActivity.getMapView().getZoom();
-			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(15, currentZoom), true);
+			mapActivity.getMapView().getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), Math.max(15, currentZoom));
 		}
 	}
 

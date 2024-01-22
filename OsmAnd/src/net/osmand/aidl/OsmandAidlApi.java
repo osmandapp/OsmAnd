@@ -369,8 +369,7 @@ public class OsmandAidlApi {
 							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
-							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart,
-									true, false, null, null);
+							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
 							mapView.setLatLon(lat, lon);
 							mapView.setZoomWithFloatPart(zoom, zoomFloatPart);
