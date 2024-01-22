@@ -1287,6 +1287,8 @@ public class RouteProvider {
 		bpars.putDoubleArray("nogoLats", nogoLats);
 		bpars.putDoubleArray("nogoLons", nogoLons);
 		bpars.putDoubleArray("nogoRadi", nogoRadi);
+		bpars.putString("fast", params.fast ? "1" : "0");
+		bpars.putString("v", mode);
 		bpars.putString("trackFormat", "gpx");
 		bpars.putString("turnInstructionFormat", "osmand");
 		bpars.putString("acceptCompressedResult", "true");
@@ -1300,9 +1302,6 @@ public class RouteProvider {
 				if (brouter_Profile_Name.length() > 0) {
 					//  set the profile-name in the new parameter "profile" to transmit the profile-name to the brouter
 					bpars.putString("profile", brouter_Profile_Name );
-				} else {
-					bpars.putString("fast", params.fast ? "1" : "0");
-					bpars.putString("v", mode);
 				}
 			}
 		}
