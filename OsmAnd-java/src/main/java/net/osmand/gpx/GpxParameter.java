@@ -11,7 +11,7 @@ public enum GpxParameter {
 	START_TIME("startTime", "long", Long.class, Long.MAX_VALUE, true),
 	END_TIME("endTime", "long", Long.class, Long.MIN_VALUE, true),
 	TIME_SPAN("timeSpan", "long", Long.class, 0L, true),
-	EXPECTED_ROUTE_DURATION("timeSpan", "long", Long.class, 0L, true),
+	EXPECTED_ROUTE_DURATION("expectedRouteDuration", "long", Long.class, -1L, true),
 	TIME_MOVING("timeMoving", "long", Long.class, 0L, true),
 	TOTAL_DISTANCE_MOVING("totalDistanceMoving", "double", Double.class, 0d, true),
 	DIFF_ELEVATION_UP("diffElevationUp", "double", Double.class, 0d, true),
