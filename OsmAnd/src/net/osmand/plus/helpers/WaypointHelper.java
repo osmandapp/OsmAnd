@@ -245,7 +245,7 @@ public class WaypointHelper {
 				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
 				// getLastLocationIndex()  == -1 is always < currentRoute
-				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() < currentRoute) {
+				if (inf.getLocationIndex() <= currentRoute && inf.getLastLocationIndex() < currentRoute) {
 					// skip already passed alarms
 				} else {
 					int distanceByRoute = 0;
@@ -254,7 +254,7 @@ public class WaypointHelper {
 						// update remaining length
 						inf.setFloatValue(route.getDistanceToPoint(lastKnownLocation, inf.getLastLocationIndex()));
 					} else {
-						distanceByRoute = route.getDistanceToPoint(lastKnownLocation, inf.getLocationIndex());
+						distanceByRoute = route.getDistanceToPoint(lastKnownLocation, inf.getLocationIndex() - 1);
 					}
 					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_SHORT_PNT_APPROACH)) { // TODO or STATE_LONG_PNT_APPROACH
 						// break once first future alarm is far away as others will be also far away
@@ -411,8 +411,8 @@ public class WaypointHelper {
 								break;
 							}
 							LocationPoint point = lwp.point;
-							double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
+							double d1 = Math.max(0.0, route.getDistanceToPoint(lastKnownLocation, lwp.routeIndex - 1)
+									- lwp.getDeviationDistance());
 							Integer state = locationPointsStates.get(point);
 							if (state != null && state == ANNOUNCED_ONCE
 									&& atd.isTurnStateActive(atdSpeed, d1, STATE_SHORT_PNT_APPROACH)) {
