@@ -1,10 +1,12 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.gpx.GpxParameter.*;
-import static net.osmand.gpx.GpxParameter.AVG_SENSOR_HEART_RATE;
-import static net.osmand.gpx.GpxParameter.AVG_SENSOR_SPEED;
-import static net.osmand.gpx.GpxParameter.AVG_SENSOR_TEMPERATURE;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.FILE_DIR;
+import static net.osmand.gpx.GpxParameter.FILE_NAME;
+import static net.osmand.gpx.GpxParameter.values;
 
 import android.util.Pair;
 
@@ -12,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GpxParameter;
@@ -125,7 +126,7 @@ public class GPXDatabase {
 	private boolean updateGpxParameters(@NonNull SQLiteConnection db, @NonNull Map<GpxParameter, Object> rowsToUpdate, @NonNull Map<String, Object> rowsToSearch) {
 		Map<String, Object> map = GpxDbUtils.convertGpxParameters(rowsToUpdate);
 		Pair<String, Object[]> pair = AndroidDbUtils.createDbUpdateQuery(GPX_TABLE_NAME, map, rowsToSearch);
-		//done in ui
+		//todo (done in ui, move to worker)
 		db.execSQL(pair.first, pair.second);
 		return true;
 	}

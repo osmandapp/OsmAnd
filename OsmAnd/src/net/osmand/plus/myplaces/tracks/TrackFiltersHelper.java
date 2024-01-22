@@ -6,11 +6,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
-import net.osmand.plus.myplaces.tracks.filters.TrackFilterType;
 import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.TextTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.TrackFilterType;
 
 import java.util.Date;
 

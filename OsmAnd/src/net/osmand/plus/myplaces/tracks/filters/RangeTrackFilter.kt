@@ -134,10 +134,6 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	}
 
 	fun setMaxValue(value: T) {
-//		val displayValue = getFormattedValue(value.toString()).valueSrc
-//		val normalizedValue = ceil(displayValue)
-//		val baseValue = getBaseValueFromFormatted(normalizedValue.toString())
-//		val convertedValue = getComparableValue(baseValue)
 		maxValue = getComparableValue(value)
 		valueTo = getComparableValue(value)
 	}

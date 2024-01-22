@@ -1,5 +1,10 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.settings.enums.TracksSortMode.DATE_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.DATE_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_ASCENDING;
@@ -11,14 +16,8 @@ import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
-import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
-import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 
-import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
@@ -99,7 +98,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
-						 boolean showDivider, boolean shouldShowFolder, boolean selectionMode){
+	                     boolean showDivider, boolean shouldShowFolder, boolean selectionMode) {
 		bindView(sortMode, trackItem, showDivider, shouldShowFolder, selectionMode, false);
 	}
 

@@ -27,4 +27,10 @@ abstract class BaseTrackFilter(
 		return other is BaseTrackFilter && other.trackFilterType == trackFilterType
 	}
 
+	override fun hashCode(): Int {
+		var result = trackFilterType.hashCode()
+		result = 31 * result + (filterChangedListener?.hashCode() ?: 0)
+		return result
+	}
+
 }

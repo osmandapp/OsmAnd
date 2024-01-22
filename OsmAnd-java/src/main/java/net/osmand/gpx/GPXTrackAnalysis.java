@@ -39,6 +39,25 @@ public class GPXTrackAnalysis {
 
 	private final Map<GpxParameter, Object> paramaters = new HashMap<>();
 
+	public double minHdop = Double.NaN;
+	public double maxHdop = Double.NaN;
+
+	public double metricEnd;
+	public double secondaryMetricEnd;
+
+	public WptPt locationStart;
+	public WptPt locationEnd;
+
+	public double left = 0;
+	public double right = 0;
+	public double top = 0;
+	public double bottom = 0;
+
+	public List<PointAttributes> pointAttributes;
+	public Set<String> availableAttributes;
+
+	public boolean hasSpeedInTrack = false;
+
 	public Object getGpxParameter(GpxParameter gpxParameter) {
 		Object value = gpxParameter.getDefaultValue();
 		if (paramaters.containsKey(gpxParameter)) {
@@ -293,26 +312,6 @@ public class GPXTrackAnalysis {
 		Object totalDistance = getGpxParameter(GpxParameter.TOTAL_DISTANCE);
 		return ((Double) totalDistance).floatValue();
 	}
-
-	public double minHdop = Double.NaN;
-	public double maxHdop = Double.NaN;
-
-	public double metricEnd;
-	public double secondaryMetricEnd;
-
-	//	public LatLon latLonStart;
-	public WptPt locationStart;
-	public WptPt locationEnd;
-
-	public double left = 0;
-	public double right = 0;
-	public double top = 0;
-	public double bottom = 0;
-
-	public List<PointAttributes> pointAttributes;
-	public Set<String> availableAttributes;
-
-	public boolean hasSpeedInTrack = false;
 
 	public boolean isTimeSpecified() {
 		return getStartTime() != Long.MAX_VALUE && getStartTime() != 0;

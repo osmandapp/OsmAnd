@@ -1,8 +1,8 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import com.google.gson.annotations.Expose
-import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.gpx.GpxParameter
+import net.osmand.plus.configmap.tracks.TrackItem
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

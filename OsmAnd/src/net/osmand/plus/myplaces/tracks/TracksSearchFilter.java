@@ -13,14 +13,12 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
-import net.osmand.plus.myplaces.tracks.filters.FilterType;
-import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams;
-import net.osmand.plus.myplaces.tracks.filters.TrackFilterType;
 import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.SingleFieldTrackFilterParams;
 import net.osmand.plus.myplaces.tracks.filters.TextTrackFilter;
+import net.osmand.plus.myplaces.tracks.filters.TrackFilterType;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
