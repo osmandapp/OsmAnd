@@ -852,7 +852,7 @@ public class SearchUICore {
 			}
 			return false;
 		}
-		
+
 		@Override
 		public boolean isCancelled() {
 			boolean cancelled = request != requestNumber.get();

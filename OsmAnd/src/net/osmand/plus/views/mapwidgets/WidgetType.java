@@ -40,7 +40,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettings
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -361,7 +361,7 @@ public enum WidgetType {
 	}
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
-		return Algorithms.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
+		return CollectionUtils.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
 	}
 
 	@NonNull

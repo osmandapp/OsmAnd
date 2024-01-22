@@ -245,7 +245,7 @@
     <string name="poi_variety_store">Magazin de varietăți</string>
     <string name="poi_vacuum_cleaner">Magazin de aspiratoare</string>
     <string name="poi_tyres">Magazin de anvelope</string>
-    <string name="poi_trade">Post de schimb</string>
+    <string name="poi_trade">Magazin tehnic</string>
     <string name="poi_toys">Magazin de jucării</string>
     <string name="poi_tobacco">Magazin de tutun</string>
     <string name="poi_ticket">Vânzări de bilete</string>
@@ -4266,7 +4266,7 @@
     <string name="poi_hot_water_no">Apă caldă: nu</string>
     <string name="poi_post_office_bureau">Birou</string>
     <string name="poi_post_office_post_annex">Anexă poștală</string>
-    <string name="poi_post_office_post_partner">Partener de post</string>
+    <string name="poi_post_office_post_partner">Partener poștal</string>
     <string name="poi_post_office_service_brand">Marcă oficiu poștal</string>
     <string name="poi_post_office_collection_times">Ore de colectare la oficiul poștal</string>
     <string name="poi_post_office_opening_hours">Ore de deschidere a oficiilor poștale</string>

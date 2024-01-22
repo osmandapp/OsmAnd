@@ -1,7 +1,7 @@
 package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.getSettingsToOperate;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.collectSettingsToOperate;
 
 import android.app.ProgressDialog;
 import android.net.Uri;
@@ -20,7 +20,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -39,14 +39,14 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 
 	private final Uri uri;
 	private final String name;
-	private final List<ExportSettingsType> settingsTypes;
+	private final List<ExportType> settingsTypes;
 	private final boolean replace;
 	private final boolean silentImport;
 	private final String latestChanges;
 	private final int version;
 
 	public SettingsImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-							  @NonNull String name, List<ExportSettingsType> settingsTypes,
+							  @NonNull String name, List<ExportType> settingsTypes,
 							  boolean replace, boolean silentImport, String latestChanges, int version) {
 		super(activity);
 		this.uri = uri;
@@ -94,7 +94,7 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 								FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 							}
 						} else {
-							Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
+							Map<ExportType, List<?>> allSettingsMap = collectSettingsToOperate(pluginIndependentItems, false, false);
 							List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
 							settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 						}

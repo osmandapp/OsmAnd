@@ -114,15 +114,18 @@ public class ColorUtilities {
 	@ColorInt
 	public static int getAppModeColor(@NonNull ApplicationMode appMode, boolean nightMode, float alpha) {
 		int color = appMode.getProfileColor(nightMode);
-		if (alpha < 1.0f) {
-			color = ColorUtilities.getColorWithAlpha(color, alpha);
-		}
-		return color;
+		return alpha < 1.0f ? getColorWithAlpha(color, alpha) : color;
 	}
 
 	@ColorInt
 	public static int getColor(@NonNull Context ctx, @ColorRes int colorId) {
-		return ContextCompat.getColor(ctx, colorId);
+		return getColor(ctx, colorId, 1.0f);
+	}
+
+	@ColorInt
+	public static int getColor(@NonNull Context ctx, @ColorRes int colorId, float alpha) {
+		int color = ContextCompat.getColor(ctx, colorId);
+		return alpha < 1.0f ? getColorWithAlpha(color, alpha) : color;
 	}
 
 	@ColorInt

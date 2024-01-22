@@ -123,8 +123,8 @@ public class GpxUiHelper {
 		}
 
 		// 2. Time span
-		if (analysis.getTimeSpan() > 0 && analysis.getTimeSpan() != analysis.getTimeMoving()) {
-			String formatDuration = Algorithms.formatDuration((int) (analysis.getTimeSpan() / 1000.0f + 0.5), app.accessibilityEnabled());
+		if (analysis.getDurationInMs() > 0 && analysis.getDurationInMs() != analysis.getTimeMoving()) {
+			String formatDuration = Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled());
 			description.append(nl).append(app.getString(R.string.gpx_timespan,
 					getColorValue(timeSpanClr, formatDuration, html)));
 		}
@@ -303,7 +303,7 @@ public class GpxUiHelper {
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(Algorithms.formatDuration((int) (analysis.getTimeSpan() / 1000.0f + 0.5), app.accessibilityEnabled()) + "");
+				time.setText(Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 			} else {
 				time.setText("");
 			}
@@ -771,7 +771,7 @@ public class GpxUiHelper {
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 			if (analysis.isTimeSpecified()) {
-				time.setText(formatDuration((int) (analysis.getTimeSpan() / 1000), app.accessibilityEnabled()));
+				time.setText(formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 			} else {
 				time.setText("");
 			}

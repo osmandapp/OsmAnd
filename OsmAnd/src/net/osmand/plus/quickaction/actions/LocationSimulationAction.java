@@ -32,7 +32,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -254,7 +254,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
 
 			TextView timeText = trackInfoContainer.findViewById(R.id.time);
-			int duration = (int) (analysis.getTimeSpan() / 1000);
+			int duration = analysis.getDurationInSeconds();
 			timeText.setText(Algorithms.formatDuration(duration, app.accessibilityEnabled()));
 		} else {
 			AndroidUiHelper.updateVisibility(timeIcon, false);
@@ -264,7 +264,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 	}
 
 	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity, CallbackWithObject<String> onFileSelect) {
-		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), getDialog(mapActivity), onFileSelect);
+		SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), onFileSelect != null ? onFileSelect : getDialog(mapActivity));
 	}
 
 	private void setupSpeedUpSlider(@NonNull View container, @NonNull OsmandApplication app) {

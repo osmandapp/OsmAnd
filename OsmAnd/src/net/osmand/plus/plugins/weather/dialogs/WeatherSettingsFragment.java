@@ -31,7 +31,7 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetA
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -158,7 +158,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		String key = preference.getKey();
-		if (Algorithms.equalsToAny(key, WEATHER_ONLINE_CACHE, WEATHER_OFFLINE_CACHE)) {
+		if (CollectionUtils.equalsToAny(key, WEATHER_ONLINE_CACHE, WEATHER_OFFLINE_CACHE)) {
 			boolean forLocal = key.equals(WEATHER_OFFLINE_CACHE);
 			viewHolders.put(key, new WeatherTotalCacheSizeViewHolder(app, holder.itemView, forLocal));
 			updateCacheSizePreferences();

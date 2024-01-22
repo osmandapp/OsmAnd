@@ -19,6 +19,7 @@ import net.osmand.plus.helpers.Kml2Gpx;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -49,7 +50,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
 		InputStream is = null;
 		ZipInputStream zis = null;
 		try {
-			boolean createTmpFile = !Algorithms.endsWithAny(fileName, KML_SUFFIX, KMZ_SUFFIX, ZIP_EXT);
+			boolean createTmpFile = !CollectionUtils.endsWithAny(fileName, KML_SUFFIX, KMZ_SUFFIX, ZIP_EXT);
 			if (createTmpFile) {
 				File tmpDir = FileUtils.getTempDir(app);
 				File file = new File(tmpDir, System.currentTimeMillis() + "_" + fileName);

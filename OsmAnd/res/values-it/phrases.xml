@@ -3956,4 +3956,10 @@
     <string name="poi_healthcare_speciality_laboratory">Specialità sanitaria: laboratorio</string>
     <string name="poi_healthcare_speciality_psychotherapist">Specialità sanitaria: psicoterapeuta</string>
     <string name="poi_healthcare_speciality_clinic">Specialità sanitaria: ambulatorio</string>
+    <string name="poi_medical_system_ayurveeda_yes">Ayurveeda</string>
+    <string name="poi_free_flying_site_toplanding">Assembramento</string>
+    <string name="poi_firepit">Braciere</string>
+    <string name="poi_free_flying_site_towing">Traino</string>
+    <string name="poi_free_flying_hanggliding_no">Deltaplano: no</string>
+    <string name="poi_free_flying_hanggliding_yes">Deltaplano</string>
 </resources>

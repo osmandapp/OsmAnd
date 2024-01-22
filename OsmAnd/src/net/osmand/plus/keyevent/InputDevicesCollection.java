@@ -12,6 +12,7 @@ import net.osmand.plus.keyevent.devices.DefaultInputDevices;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +49,7 @@ class InputDevicesCollection {
 
 	@NonNull
 	public List<InputDeviceProfile> getAllDevices() {
-		return Algorithms.asOneList(defaultDevices, customDevices);
+		return CollectionUtils.asOneList(defaultDevices, customDevices);
 	}
 
 	@NonNull
@@ -57,14 +58,14 @@ class InputDevicesCollection {
 	}
 
 	public void addCustomDevice(@NonNull InputDeviceProfile device) {
-		customDevices = Algorithms.addToList(customDevices, device);
+		customDevices = CollectionUtils.addToList(customDevices, device);
 		syncCachedDevices();
 	}
 
 	public void removeCustomDevice(String deviceId) {
 		InputDeviceProfile device = getDeviceById(deviceId);
 		if (device != null) {
-			customDevices = Algorithms.removeFromList(customDevices, device);
+			customDevices = CollectionUtils.removeFromList(customDevices, device);
 			syncCachedDevices();
 		}
 	}

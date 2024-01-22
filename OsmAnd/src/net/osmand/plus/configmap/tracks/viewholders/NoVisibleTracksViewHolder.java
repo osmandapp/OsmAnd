@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackTabType;
-import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class NoVisibleTracksViewHolder extends RecyclerView.ViewHolder {
@@ -21,7 +21,7 @@ public class NoVisibleTracksViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView icon;
 	private final DialogButton button;
 
-	public NoVisibleTracksViewHolder(@NonNull View view, @NonNull TracksFragment fragment) {
+	public NoVisibleTracksViewHolder(@NonNull View view, @NonNull BaseTracksTabsFragment fragment) {
 		super(view);
 		app = (OsmandApplication) itemView.getContext().getApplicationContext().getApplicationContext();
 

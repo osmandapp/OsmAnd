@@ -25,7 +25,11 @@ plugins {
 
 allprojects {
     group "net.osmand"
-    
+    // Configure all test tasks
+    tasks.withType(Test) {
+        // Set a system property for all unit tests
+        systemProperty 'isAndroidBuild', 'true'
+    }
     repositories {
         ivy {
             name = "OsmAndBinariesIvy"

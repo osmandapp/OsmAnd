@@ -20,21 +20,21 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment;
 
-public class ConfigureScreenActionsCard extends MapBaseCard {
+public class ConfigureActionsCard extends MapBaseCard {
 
 	private final Fragment target;
 	@StringRes
 	private final int screenTitleId;
 
-	public ConfigureScreenActionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @StringRes int screenTitleId) {
-		super(mapActivity, false);
-		this.target = target;
-		this.screenTitleId = screenTitleId;
-	}
-
 	@Override
 	public int getCardLayoutId() {
 		return R.layout.configure_widgets_actions_card;
+	}
+
+	public ConfigureActionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target, @StringRes int screenTitleId) {
+		super(mapActivity, false);
+		this.target = target;
+		this.screenTitleId = screenTitleId;
 	}
 
 	@Override

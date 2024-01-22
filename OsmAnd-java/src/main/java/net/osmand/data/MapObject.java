@@ -368,7 +368,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return str;
 	}
 
-	static boolean isContentZipped(String str) {
+	public static boolean isContentZipped(String str) {
 		return str != null && str.startsWith(" gz ");
 	}
 

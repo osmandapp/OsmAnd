@@ -5,7 +5,7 @@ import static net.osmand.plus.keyevent.KeySymbolMapper.getKeySymbol;
 import static net.osmand.plus.utils.AndroidUtils.setBackground;
 import static net.osmand.plus.utils.ColorUtilities.getActiveColor;
 import static net.osmand.plus.utils.UiUtilities.getColoredSelectableDrawable;
-import static net.osmand.util.Algorithms.equalsToAny;
+import static net.osmand.util.CollectionUtils.equalsToAny;
 
 import android.content.Context;
 import android.graphics.Typeface;

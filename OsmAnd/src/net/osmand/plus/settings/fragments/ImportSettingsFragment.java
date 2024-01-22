@@ -1,8 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +27,9 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import org.apache.commons.logging.Log;
 
-import java.util.Collections;
 import java.util.List;
 
 public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
@@ -65,7 +60,7 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 			duplicateStartTime = savedInstanceState.getLong(DUPLICATES_START_TIME_KEY);
 		}
 		if (settingsItems != null) {
-			dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
+			dataList = SettingsHelper.categorizeSettingsToOperate(settingsItems, false, false);
 		}
 	}
 

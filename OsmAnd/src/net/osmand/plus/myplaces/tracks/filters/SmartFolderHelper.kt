@@ -12,6 +12,7 @@ import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
 import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.util.Algorithms
+import net.osmand.util.CollectionUtils
 import java.util.Date
 
 class SmartFolderHelper(val app: OsmandApplication) {
@@ -145,13 +146,13 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	fun addUpdateListener(listener: SmartFolderUpdateListener) {
 		if (!updateListeners.contains(listener)) {
-			updateListeners = Algorithms.addToList(updateListeners, listener)
+			updateListeners = CollectionUtils.addToList(updateListeners, listener)
 		}
 	}
 
 	fun removeUpdateListener(listener: SmartFolderUpdateListener) {
 		if (updateListeners.contains(listener)) {
-			updateListeners = Algorithms.removeFromList(updateListeners, listener)
+			updateListeners = CollectionUtils.removeFromList(updateListeners, listener)
 		}
 	}
 
@@ -186,7 +187,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun deleteSmartFolder(smartFolder: SmartFolder) {
-		smartFolderCollection = Algorithms.removeFromList(smartFolderCollection, smartFolder)
+		smartFolderCollection = CollectionUtils.removeFromList(smartFolderCollection, smartFolder)
 		writeSettings()
 		notifyUpdateListeners()
 	}

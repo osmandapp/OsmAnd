@@ -1,6 +1,6 @@
 package net.osmand.plus.keyevent.listener;
 
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 public enum EventType {
 
@@ -17,12 +17,12 @@ public enum EventType {
 	RESET_ASSIGNMENTS;
 
 	public boolean isDeviceRelated() {
-		return Algorithms.equalsToAny(this, SELECT_DEVICE,
+		return CollectionUtils.equalsToAny(this, SELECT_DEVICE,
 				RENAME_DEVICE, ADD_NEW_DEVICE, DELETE_DEVICE);
 	}
 
 	public boolean isAssignmentRelated() {
-		return Algorithms.equalsToAny(this, RENAME_ASSIGNMENT,
+		return CollectionUtils.equalsToAny(this, RENAME_ASSIGNMENT,
 				UPDATE_ASSIGNMENT_KEYCODE, ADD_ASSIGNMENT_KEYCODE,
 				REMOVE_ASSIGNMENT_KEYCODE, RESET_ASSIGNMENTS,
 				CLEAR_ASSIGNMENT_KEYCODES);

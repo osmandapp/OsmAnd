@@ -97,6 +97,7 @@ import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.OpeningHoursParser;
 
 import org.apache.commons.logging.Log;
@@ -790,14 +791,14 @@ public class AppInitializer implements IProgress {
 	}
 
 	public void addListener(@NonNull AppInitializeListener listener) {
-		listeners = Algorithms.addToList(listeners, listener);
+		listeners = CollectionUtils.addToList(listeners, listener);
 		if (!appInitializing) {
 			listener.onFinish(this);
 		}
 	}
 
 	public void removeListener(@NonNull AppInitializeListener listener) {
-		listeners = Algorithms.removeFromList(listeners, listener);
+		listeners = CollectionUtils.removeFromList(listeners, listener);
 	}
 
 	@Override

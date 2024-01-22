@@ -5578,4 +5578,6 @@
     <string name="map_widget_sun_position">Posição do sol</string>
     <string name="add_new_button">Adicionar um novo botão</string>
     <string name="map_widget_sun_position_desc">Este widget mostra a hora até o nascer ou pôr do sol, dependendo da hora atual.</string>
+    <string name="shared_string_all_tracks">Todas as trilhas</string>
+    <string name="shared_string_road_maps">Mapas de rodovias</string>
 </resources>

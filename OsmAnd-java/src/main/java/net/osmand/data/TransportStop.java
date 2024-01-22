@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -84,11 +85,11 @@ public class TransportStop extends MapObject {
 	
 	public void addRouteId(long routeId) {
 		// make assumption that ids are sorted
-		routesIds = Algorithms.addToArrayL(routesIds, routeId, true);
+		routesIds = CollectionUtils.addToArrayL(routesIds, routeId, true);
 	}
 	 
 	public void addDeletedRouteId(long routeId) {
-		deletedRoutesIds = Algorithms.addToArrayL(deletedRoutesIds, routeId, true);
+		deletedRoutesIds = CollectionUtils.addToArrayL(deletedRoutesIds, routeId, true);
 	}
 
 	public boolean isRouteDeleted(long routeId) {

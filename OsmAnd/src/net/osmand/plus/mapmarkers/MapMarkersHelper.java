@@ -29,6 +29,7 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -987,39 +988,39 @@ public class MapMarkersHelper {
 	}
 
 	private void removeFromMapMarkersList(MapMarker marker) {
-		mapMarkers = Algorithms.removeFromList(mapMarkers, marker);
+		mapMarkers = CollectionUtils.removeFromList(mapMarkers, marker);
 	}
 
 	private void removeFromMapMarkersList(List<MapMarker> markers) {
-		mapMarkers = Algorithms.removeAllFromList(mapMarkers, markers);
+		mapMarkers = CollectionUtils.removeAllFromList(mapMarkers, markers);
 	}
 
 	// accessors to history markers:
 
 	private void addToMapMarkersHistoryList(MapMarker marker) {
-		mapMarkersHistory = Algorithms.addToList(mapMarkersHistory, marker);
+		mapMarkersHistory = CollectionUtils.addToList(mapMarkersHistory, marker);
 	}
 
 	private void addToMapMarkersHistoryList(List<MapMarker> markers) {
-		mapMarkersHistory = Algorithms.addAllToList(mapMarkersHistory, markers);
+		mapMarkersHistory = CollectionUtils.addAllToList(mapMarkersHistory, markers);
 	}
 
 	private void removeFromMapMarkersHistoryList(MapMarker marker) {
-		mapMarkersHistory = Algorithms.removeFromList(mapMarkersHistory, marker);
+		mapMarkersHistory = CollectionUtils.removeFromList(mapMarkersHistory, marker);
 	}
 
 	private void removeFromMapMarkersHistoryList(List<MapMarker> markers) {
-		mapMarkersHistory = Algorithms.removeAllFromList(mapMarkersHistory, markers);
+		mapMarkersHistory = CollectionUtils.removeAllFromList(mapMarkersHistory, markers);
 	}
 
 	// accessors to markers groups:
 
 	private void addToGroupsList(MapMarkersGroup group) {
-		mapMarkersGroups = Algorithms.addToList(mapMarkersGroups, group);
+		mapMarkersGroups = CollectionUtils.addToList(mapMarkersGroups, group);
 	}
 
 	private void removeFromGroupsList(MapMarkersGroup group) {
-		mapMarkersGroups = Algorithms.removeFromList(mapMarkersGroups, group);
+		mapMarkersGroups = CollectionUtils.removeFromList(mapMarkersGroups, group);
 	}
 
 	// ---------------------------------------------------------------------------------------------

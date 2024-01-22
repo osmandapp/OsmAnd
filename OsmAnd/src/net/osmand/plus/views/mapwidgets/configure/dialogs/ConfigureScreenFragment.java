@@ -41,9 +41,10 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureScreenActionsCard;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureScreenButtonsCard;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureScreenWidgetsCard;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureButtonsCard;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureOtherCard;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureWidgetsCard;
 import net.osmand.plus.widgets.chips.ChipItem;
 import net.osmand.plus.widgets.chips.HorizontalChipsView;
 import net.osmand.util.Algorithms;
@@ -68,13 +69,15 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private ViewGroup cardsContainer;
 	private NestedScrollView scrollView;
 
-	private ConfigureScreenWidgetsCard widgetsCard;
-	private ConfigureScreenButtonsCard buttonsCard;
-	private ConfigureScreenActionsCard actionsCard;
+	private ConfigureWidgetsCard widgetsCard;
+	private ConfigureButtonsCard buttonsCard;
+	private ConfigureOtherCard otherCard;
+	private ConfigureActionsCard actionsCard;
 
 	private int currentScrollY;
 	private int currentAppBarOffset;
 
+	private StateChangedListener<Integer> displayPositionListener;
 	private StateChangedListener<Boolean> distanceByTapListener;
 
 	@Override
@@ -116,12 +119,14 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	public void onResume() {
 		super.onResume();
 		updateCard(widgetsCard);
+		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
 		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
 		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
 	}
 
@@ -231,13 +236,16 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	private void setupCards() {
 		cardsContainer.removeAllViews();
 
-		widgetsCard = new ConfigureScreenWidgetsCard(mapActivity);
+		widgetsCard = new ConfigureWidgetsCard(mapActivity);
 		cardsContainer.addView(widgetsCard.build(mapActivity));
 
-		buttonsCard = new ConfigureScreenButtonsCard(mapActivity, this);
+		buttonsCard = new ConfigureButtonsCard(mapActivity, this);
 		cardsContainer.addView(buttonsCard.build(mapActivity));
 
-		actionsCard = new ConfigureScreenActionsCard(mapActivity, this, R.string.map_widget_config);
+		otherCard = new ConfigureOtherCard(mapActivity);
+		cardsContainer.addView(otherCard.build(mapActivity));
+
+		actionsCard = new ConfigureActionsCard(mapActivity, this, R.string.map_widget_config);
 		cardsContainer.addView(actionsCard.build(mapActivity));
 	}
 
@@ -315,9 +323,17 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@NonNull
+	private StateChangedListener<Integer> getDisplayPositionListener() {
+		if (displayPositionListener == null) {
+			displayPositionListener = value -> app.runInUIThread(() -> updateCard(otherCard));
+		}
+		return displayPositionListener;
+	}
+
+	@NonNull
 	private StateChangedListener<Boolean> getDistanceByTapListener() {
 		if (distanceByTapListener == null) {
-			distanceByTapListener = change -> app.runInUIThread(() -> updateCard(buttonsCard));
+			distanceByTapListener = change -> app.runInUIThread(() -> updateCard(otherCard));
 		}
 		return distanceByTapListener;
 	}

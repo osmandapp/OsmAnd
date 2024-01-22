@@ -22,6 +22,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
@@ -65,6 +66,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.track.CachedTrack;
+import net.osmand.plus.track.CachedTrackParams;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.GpsFilterFragment;
@@ -77,6 +79,8 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GpxUtils;
+import net.osmand.plus.track.helpers.ParseGpxRouteTask;
+import net.osmand.plus.track.helpers.ParseGpxRouteTask.ParseGpxRouteListener;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -99,6 +103,7 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -113,6 +118,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
@@ -152,6 +160,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private GpxDbHelper gpxDbHelper;
 	private MapMarkersHelper mapMarkersHelper;
 	private GpxSelectionHelper selectedGpxHelper;
+
+	private final Map<String, ParseGpxRouteTask> parseGpxRouteTasks = new ConcurrentHashMap<>();
+	private final ExecutorService parseGpxRouteSingleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private Map<SelectedGpxFile, Long> visibleGPXFilesMap = new HashMap<>();
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
@@ -1166,7 +1177,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				RenderableSegment renderableSegment = (RenderableSegment) ts.renderer;
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
-					updated |= renderableSegment.setRoute(getCachedTrack(selectedGpxFile).getCachedRouteSegments(segmentIdx));
+					CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
+					updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
 					updated |= renderableSegment.setDrawArrows(isShowArrowsForTrack(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
@@ -1316,7 +1328,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@NonNull
-	private CachedTrack getCachedTrack(SelectedGpxFile selectedGpxFile) {
+	private CachedTrack getCachedTrack(@NonNull SelectedGpxFile selectedGpxFile) {
 		String path = selectedGpxFile.getGpxFile().path;
 		CachedTrack cachedTrack = segmentsCache.get(path);
 		if (cachedTrack == null) {
@@ -1324,6 +1336,56 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			segmentsCache.put(path, cachedTrack);
 		}
 		return cachedTrack;
+	}
+
+	@NonNull
+	public List<RouteSegmentResult> getCachedRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx) {
+		List<RouteSegmentResult> routeSegments = cachedTrack.getCachedRouteSegments(nonEmptySegmentIdx);
+		if (routeSegments == null) {
+			loadRouteSegments(cachedTrack, nonEmptySegmentIdx);
+		}
+		return routeSegments != null ? routeSegments : new ArrayList<>();
+	}
+
+	private void loadRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx) {
+		CachedTrackParams trackParams = cachedTrack.getCachedTrackParams();
+		GPXFile gpxFile = cachedTrack.getSelectedGpxFile().getGpxFileToDisplay();
+
+		boolean parsingGpxRoute = isParsingGpxRoute(gpxFile);
+		boolean paramsChanged = cachedTrackParamsChanged(gpxFile, trackParams);
+		if (paramsChanged) {
+			cancelGpxRouteParsing(gpxFile);
+		}
+		if (paramsChanged || !parsingGpxRoute) {
+			ParseGpxRouteListener listener = (routeSegments, success) -> {
+				if (success) {
+					cachedTrack.setCachedRouteSegments(routeSegments, nonEmptySegmentIdx);
+				}
+				parseGpxRouteTasks.remove(gpxFile.path);
+			};
+			ParseGpxRouteTask task = new ParseGpxRouteTask(gpxFile, trackParams, nonEmptySegmentIdx, listener);
+			parseGpxRouteTasks.put(gpxFile.path, task);
+			task.executeOnExecutor(parseGpxRouteSingleThreadExecutor);
+		}
+	}
+
+	private boolean cachedTrackParamsChanged(@NonNull GPXFile gpxFile, @NonNull CachedTrackParams params) {
+		ParseGpxRouteTask task = parseGpxRouteTasks.get(gpxFile.path);
+		if (task != null) {
+			return !Algorithms.objectEquals(params, task.getCachedTrackParams());
+		}
+		return false;
+	}
+
+	public boolean isParsingGpxRoute(@NonNull GPXFile gpxFile) {
+		return parseGpxRouteTasks.containsKey(gpxFile.path);
+	}
+
+	public void cancelGpxRouteParsing(@NonNull GPXFile gpxFile) {
+		ParseGpxRouteTask task = parseGpxRouteTasks.get(gpxFile.path);
+		if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+			task.cancel(false);
+		}
 	}
 
 	private boolean isPointVisited(WptPt o) {

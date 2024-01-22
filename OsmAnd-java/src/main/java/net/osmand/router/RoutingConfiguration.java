@@ -32,7 +32,7 @@ public class RoutingConfiguration {
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	public static final int DEFAULT_NATIVE_MEMORY_LIMIT = 256;
 	public static final float DEVIATION_RADIUS = 3000;
-	public static final double DEFAULT_PENALTY_FOR_REVERSE_DIRECTION = 500;
+	public static final double DEFAULT_PENALTY_FOR_REVERSE_DIRECTION = 60; // if no penaltyForReverseDirection in xml
 	public Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 	// 1. parameters of routing and different tweaks
@@ -56,9 +56,8 @@ public class RoutingConfiguration {
 	// 1.4 Used to calculate route in movement
 	public Double initialDirection;
 	public Double targetDirection;
-	public double PENALTY_FOR_REVERSE_DIRECTION = DEFAULT_PENALTY_FOR_REVERSE_DIRECTION; // -1 reverse is forbidden
-	
-	
+	public double penaltyForReverseDirection = DEFAULT_PENALTY_FOR_REVERSE_DIRECTION; // -1 means reverse is forbidden
+
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
 
@@ -204,6 +203,7 @@ public class RoutingConfiguration {
 			i.minStepApproximation = parseSilentFloat(getAttribute(i.router, "minStepApproximation"), i.minStepApproximation);
 			i.maxStepApproximation = parseSilentFloat(getAttribute(i.router, "maxStepApproximation"), i.maxStepApproximation);
 			i.smoothenPointsNoRoute = parseSilentFloat(getAttribute(i.router, "smoothenPointsNoRoute"), i.smoothenPointsNoRoute);
+			i.penaltyForReverseDirection = parseSilentFloat(getAttribute(i.router, "penaltyForReverseDirection"), (float) i.penaltyForReverseDirection);
 
 			i.router.setImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);

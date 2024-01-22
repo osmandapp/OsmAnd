@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes;
 import net.osmand.plus.R;
 
 public enum NavigationIcon {
+
 	DEFAULT(R.drawable.map_navigation_default),
 	NAUTICAL(R.drawable.map_navigation_nautical),
 	CAR(R.drawable.map_navigation_car);

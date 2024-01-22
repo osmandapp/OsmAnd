@@ -56,8 +56,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocationListener,
-		OsmAndCompassListener, IContextMenuProvider {
+public class PointLocationLayer extends OsmandMapLayer
+		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
@@ -331,7 +331,8 @@ public class PointLocationLayer extends OsmandMapLayer implements OsmAndLocation
 				boolean updateBearing = cachedBearing == null || Math.abs(bearing - cachedBearing) > 0.1;
 				if (updateBearing) {
 					lastBearingCached = bearing;
-					updateMarkerBearing(bearing, isAnimateMyLocation());
+					boolean animateBearing = isAnimateMyLocation() && !settings.SNAP_TO_ROAD.get();
+					updateMarkerBearing(bearing, animateBearing);
 				}
 			}
 		}

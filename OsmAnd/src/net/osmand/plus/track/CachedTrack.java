@@ -2,14 +2,16 @@ package net.osmand.plus.track;
 
 import static net.osmand.router.RouteColorize.LIGHT_GREY;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
@@ -23,49 +25,47 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class CachedTrack {
 
 	private final OsmandApplication app;
 
 	private final SelectedGpxFile selectedGpxFile;
-	private boolean useFilteredGpx;
-	private boolean useJoinSegments;
 
-	private final Map<GradientScaleType, List<TrkSegment>> nonSimplifiedSegmentsCache = new HashMap<>();
+	private final Map<Integer, List<RouteSegmentResult>> routeCache = new ConcurrentHashMap<>();
 	private final Map<String, List<TrkSegment>> simplifiedSegmentsCache = new HashMap<>();
+	private final Map<GradientScaleType, List<TrkSegment>> nonSimplifiedSegmentsCache = new HashMap<>();
 	private Set<String> availableColoringTypes;
 
-	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
-
-	private long prevModifiedTime = -1;
+	private CachedTrackParams params;
 
 	public CachedTrack(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 		this.app = app;
 		this.selectedGpxFile = selectedGpxFile;
-		this.useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
+		this.params = new CachedTrackParams(-1, selectedGpxFile.getFilteredSelectedGpxFile() != null, false);
 	}
 
+	@NonNull
+	public SelectedGpxFile getSelectedGpxFile() {
+		return selectedGpxFile;
+	}
+
+	@NonNull
+	public CachedTrackParams getCachedTrackParams() {
+		return params;
+	}
+
+	@Nullable
 	public List<RouteSegmentResult> getCachedRouteSegments(int nonEmptySegmentIdx) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		if (isCachedTrackChanged()) {
 			clearCaches();
-			List<RouteSegmentResult> routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(),
-					gpxFile, new ArrayList<>(), nonEmptySegmentIdx);
-			routeCache.put(nonEmptySegmentIdx, routeSegments);
-			return routeSegments;
-		} else {
-			List<RouteSegmentResult> routeSegments = routeCache.get(nonEmptySegmentIdx);
-			if (routeSegments == null) {
-				routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(), gpxFile,
-						new ArrayList<>(), nonEmptySegmentIdx);
-				routeCache.put(nonEmptySegmentIdx, routeSegments);
-			}
-			return routeSegments;
 		}
+		return routeCache.get(nonEmptySegmentIdx);
+	}
+
+	public void setCachedRouteSegments(@NonNull List<RouteSegmentResult> routeSegments, int nonEmptySegmentIdx) {
+		routeCache.put(nonEmptySegmentIdx, routeSegments);
 	}
 
 	@NonNull
@@ -113,19 +113,16 @@ public class CachedTrack {
 	}
 
 	private boolean isCachedTrackChanged() {
-		boolean trackChanged = false;
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
-		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 		boolean useJoinSegments = selectedGpxFile.isJoinSegments();
-		if (useFilteredGpx != this.useFilteredGpx
-				|| useJoinSegments != this.useJoinSegments
-				|| prevModifiedTime != gpxFile.modifiedTime) {
-			this.useFilteredGpx = useFilteredGpx;
-			this.useJoinSegments = useJoinSegments;
-			prevModifiedTime = gpxFile.modifiedTime;
-			trackChanged = true;
+		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
+		if (useFilteredGpx != params.useFilteredGpx
+				|| useJoinSegments != params.useJoinSegments
+				|| gpxFile.modifiedTime != params.prevModifiedTime) {
+			params = new CachedTrackParams(gpxFile.modifiedTime, useFilteredGpx, useJoinSegments);
+			return true;
 		}
-		return trackChanged;
+		return false;
 	}
 
 	@NonNull
@@ -195,7 +192,7 @@ public class CachedTrack {
 	}
 
 	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
-		if (prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().modifiedTime || availableColoringTypes == null) {
+		if (params.prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().modifiedTime || availableColoringTypes == null) {
 			availableColoringTypes = listAvailableColoringTypes();
 		}
 		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));

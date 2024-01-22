@@ -11,11 +11,12 @@ import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -274,11 +275,11 @@ public class BackupExporter extends Exporter {
 
 	private void markOldFileForDeletion(@NonNull SettingsItem item, @NonNull String fileName) {
 		String type = item.getType().name();
-		ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+		ExportType exportType = ExportType.findBy(item);
 		if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
 			RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
 			if (remoteFile != null) {
-				oldFilesToDelete = Algorithms.addToList(oldFilesToDelete, remoteFile);
+				oldFilesToDelete = CollectionUtils.addToList(oldFilesToDelete, remoteFile);
 			}
 		}
 	}

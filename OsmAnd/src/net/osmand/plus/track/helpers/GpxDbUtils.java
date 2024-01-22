@@ -200,7 +200,8 @@ public class GpxDbUtils {
 					|| Algorithms.isEmpty(analysis.getWptCategoryNames())
 					|| analysis.getLatLonStart() == null && analysis.getPoints() > 0
 					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0;
+					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
+					|| (long) item.getParameter(EXPECTED_ROUTE_DURATION) < 0;
 		}
 		return true;
 	}

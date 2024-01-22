@@ -19,10 +19,9 @@ import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
@@ -31,7 +30,6 @@ import java.util.Set;
 public class WidgetsVisibilityHelper {
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
 
 	private final MapActivity mapActivity;
@@ -40,7 +38,6 @@ public class WidgetsVisibilityHelper {
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
-		settings = app.getSettings();
 		routingHelper = app.getRoutingHelper();
 		mapLayers = app.getOsmandMap().getMapLayers();
 	}
@@ -115,7 +112,7 @@ public class WidgetsVisibilityHelper {
 		Set<MapWidgetInfo> enabledWidgets = widgetRegistry.getWidgetsForPanel(activity, appMode, ENABLED_MODE, Collections.singletonList(panel));
 
 		for (MapWidgetInfo widgetInfo : enabledWidgets) {
-			if (Algorithms.containsAny(widgetInfo.key, widgetsIds)) {
+			if (CollectionUtils.containsAny(widgetInfo.key, widgetsIds)) {
 				return true;
 			}
 		}

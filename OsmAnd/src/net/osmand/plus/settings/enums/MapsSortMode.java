@@ -6,6 +6,7 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 public enum MapsSortMode {
 
@@ -54,7 +55,7 @@ public enum MapsSortMode {
 	}
 
 	public boolean isCountryMode() {
-		return Algorithms.equalsToAny(this, COUNTRY_NAME_ASCENDING, COUNTRY_NAME_DESCENDING);
+		return CollectionUtils.equalsToAny(this, COUNTRY_NAME_ASCENDING, COUNTRY_NAME_DESCENDING);
 	}
 }
 

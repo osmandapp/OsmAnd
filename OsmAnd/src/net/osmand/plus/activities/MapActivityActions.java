@@ -404,7 +404,7 @@ public class MapActivityActions extends MapActions {
 	public void recalculateRoute(boolean showDialog) {
 		super.recalculateRoute(showDialog);
 		if (showDialog) {
-			app.getOsmandMap().getMapLayers().getMapControlsLayer().showRouteInfoMenu();
+			app.getOsmandMap().getMapLayers().getMapActionsHelper().showRouteInfoMenu();
 		}
 	}
 
@@ -570,7 +570,7 @@ public class MapActivityActions extends MapActions {
 					app.logEvent("drawer_directions_open");
 					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 					if (mapControlsLayer != null) {
-						mapControlsLayer.doRoute();
+						mapControlsLayer.getMapActionsHelper().doRoute();
 					}
 					return true;
 				}));

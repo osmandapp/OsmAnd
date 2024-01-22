@@ -27,11 +27,8 @@ import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.controllers.CompassModeDialogController;
-import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.AngularConstants;
-import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -52,7 +49,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
-		setupPositionPlacementOnMapPref();
 		setupMapScreenOrientationPref();
 		setupTurnScreenOnPref();
 
@@ -116,20 +112,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			Drawable icon = getIcon(compassMode.getIconId(isNightMode()));
 			uiPreference.setIcon(icon);
 			uiPreference.setSummary(compassMode.getTitleId());
-		}
-	}
-
-	private void setupPositionPlacementOnMapPref() {
-		ApplicationMode appMode = getSelectedAppMode();
-		CommonPreference<Integer> preference = settings.POSITION_PLACEMENT_ON_MAP;
-		int value = preference.getModeValue(appMode);
-		MapFocus mapFocus = MapFocus.getByValue(value);
-
-		Preference uiPreference = findPreference(preference.getId());
-		if (uiPreference != null) {
-			Drawable icon = getActiveIcon(mapFocus.getIconId());
-			uiPreference.setIcon(icon);
-			uiPreference.setSummary(mapFocus.getTitleId());
 		}
 	}
 
@@ -397,11 +379,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			showSingleSelectionDialog(CompassModeDialogController.PROCESS_ID, controller);
 			controller.setCallback(this);
 			return true;
-		} else if (key.equals(settings.POSITION_PLACEMENT_ON_MAP.getId())) {
-			MapFocusDialogController controller = new MapFocusDialogController(app, appMode);
-			showSingleSelectionDialog(MapFocusDialogController.PROCESS_ID, controller);
-			controller.setCallback(this);
-			return true;
 		} else if (key.equals(settings.EXTERNAL_INPUT_DEVICE.getId())) {
 			BaseSettingsFragment.showInstance(requireActivity(), EXTERNAL_INPUT_DEVICE, appMode, new Bundle(), this);
 			return true;
@@ -416,11 +393,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		controller = dialogManager.findController(CompassModeDialogController.PROCESS_ID);
 		if (controller instanceof CompassModeDialogController) {
 			((CompassModeDialogController) controller).setCallback(this);
-		}
-
-		controller = dialogManager.findController(MapFocusDialogController.PROCESS_ID);
-		if (controller instanceof MapFocusDialogController) {
-			((MapFocusDialogController) controller).setCallback(this);
 		}
 	}
 
