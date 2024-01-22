@@ -5495,7 +5495,7 @@
     <string name="cloud_item_restored">%1$s vraća se u Cloud.</string>
     <string name="sort_size_descending">Prvo velika veličina</string>
     <string name="add_new_type">Dodaj novu vrstu</string>
-    <string name="remove_type_q">Jesi li siguran da želiš ukloniti \"%1$s\" vrstu ?</string>
+    <string name="remove_type_q">Jesi li siguran da želiš ukloniti \"%1$s\" vrstu?</string>
     <string name="shared_string_empty_trash">Isprazni kantu</string>
     <string name="trash_alert_card_desc">Predmeti u kanti će biti izbrisani posle %1$s dana.</string>
     <string name="trash_is_empty">Kanta je prazna</string>
@@ -5540,4 +5540,5 @@
         <item quantity="other">%1$d (%2$d tragova)</item>
     </plurals>
     <string name="shared_string_all_tracks">Sve snimljene rute</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
 </resources>
