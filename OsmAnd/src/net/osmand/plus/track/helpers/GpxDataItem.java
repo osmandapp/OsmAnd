@@ -89,13 +89,12 @@ public class GpxDataItem {
 				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
 			}
 		}
-
-		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-//		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-//		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
 	}
 
-	public void readGpxParams(@NonNull GPXFile gpxFile) {
+	public void readGpxParams(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
+		setParameter(FILE_NAME, getFile().getName());
+		setParameter(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
+		setParameter(FILE_LAST_MODIFIED_TIME, getFile().lastModified());
 		setParameter(COLOR, gpxFile.getColor(0));
 		setParameter(WIDTH, gpxFile.getWidth(null));
 		setParameter(SHOW_ARROWS, gpxFile.isShowArrows());

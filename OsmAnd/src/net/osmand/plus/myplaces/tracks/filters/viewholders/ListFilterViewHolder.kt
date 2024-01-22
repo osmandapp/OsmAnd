@@ -50,7 +50,7 @@ class ListFilterViewHolder(var app: OsmandApplication, itemView: View, nightMode
 		this.filter = filter
 		adapter.filter = filter
 		adapter.fragmentManager = fragmentManager
-		title.setText(filter.filterType.nameResId)
+		title.setText(filter.trackFilterType.nameResId)
 		updateExpandState()
 		updateValues()
 	}

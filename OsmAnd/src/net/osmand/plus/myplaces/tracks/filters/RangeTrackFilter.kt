@@ -1,12 +1,9 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import com.google.gson.annotations.Expose
+import net.osmand.gpx.GpxParameter
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.settings.enums.MetricsConstants
-import net.osmand.gpx.GpxParameter
-import net.osmand.plus.utils.OsmAndFormatter
-import net.osmand.plus.utils.OsmAndFormatter.FormattedValue
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -15,9 +12,9 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	minValue: T,
 	maxValue: T,
 	val app: OsmandApplication,
-	filterType: FilterType,
+	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?)
-	: BaseTrackFilter(filterType, filterChangedListener) {
+	: BaseTrackFilter(trackFilterType, filterChangedListener) {
 
 	@Expose
 	var minValue: T
@@ -72,18 +69,24 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		if (convertedValue != null) {
 			return convertedValue
 		} else {
-			throw java.lang.IllegalArgumentException("value can not be cast to ${filterType.propertyList[0].typeClass}")
+			throw java.lang.IllegalArgumentException("value can not be cast to ${trackFilterType.property!!.typeClass}")
 		}
 
 	}
 
 	fun setValueTo(to: String, updateListeners: Boolean = true) {
-		val baseValue = getComparableValue(getBaseValueFromFormatted(to)).toString()
+		val baseValue = getComparableValue(
+			trackFilterType.measureUnitType.getBaseValueFromFormatted(
+				app,
+				to)).toString()
 		setValueTo(getValueFromString(baseValue), updateListeners)
 	}
 
 	fun setValueFrom(from: String, updateListeners: Boolean = true) {
-		val baseValue = getComparableValue(getBaseValueFromFormatted(from)).toString()
+		val baseValue = getComparableValue(
+			trackFilterType.measureUnitType.getBaseValueFromFormatted(
+				app,
+				from)).toString()
 		setValueFrom(getValueFromString(baseValue), updateListeners)
 	}
 
@@ -103,7 +106,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	}
 
 	override fun isTrackAccepted(trackItem: TrackItem): Boolean {
-		val value: Comparable<Any> = trackItem.dataItem?.getParameter(filterType.propertyList[0])
+		val value: Comparable<Any> = trackItem.dataItem?.getParameter(trackFilterType.property!!)
 			?: return false
 		val comparableValue = getComparableValue(value)
 		return comparableValue > valueFrom && comparableValue < valueTo
@@ -149,7 +152,7 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	}
 
 	open fun getDisplayMinValue(): Int {
-		val formattedValue = getFormattedValue(flor(minValue))
+		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, flor(minValue))
 		return formattedValue.valueSrc.toInt()
 	}
 
@@ -186,70 +189,27 @@ open class RangeTrackFilter<T : Comparable<T>>(
 	}
 
 	open fun getDisplayMaxValue(): Int {
-		val formattedValue = getFormattedValue(ceil(maxValue))
+		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(maxValue))
 		return formattedValue.valueSrc.toInt()
 	}
 
 	open fun getDisplayValueFrom(): Int {
-		val formattedValue = getFormattedValue(valueFrom.toString())
+		val formattedValue =
+			trackFilterType.measureUnitType.getFormattedValue(app, valueFrom.toString())
 		return formattedValue.valueSrc.toInt()
 	}
 
 	open fun getDisplayValueTo(): Int {
-		val formattedValue = getFormattedValue(ceil(valueTo))
+		val formattedValue = trackFilterType.measureUnitType.getFormattedValue(app, ceil(valueTo))
 		return formattedValue.valueSrc.toInt()
 	}
 
-	private fun getBaseValueFromFormatted(value: String): Float {
-		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
-		val mode = app.settings.applicationMode
-		val speedConstant = app.settings.SPEED_SYSTEM.getModeValue(mode)
-		return when (filterType.measureUnitType) {
-			MeasureUnitType.SPEED -> OsmAndFormatter.getBaseValueFromFormattedSpeed(
-				value.toFloat(),
-				app,
-				speedConstant)
-
-			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getMetersFromFormattedAltitudeValue(
-				value.toFloat(),
-				metricsConstants)
-
-			MeasureUnitType.DISTANCE -> OsmAndFormatter.getMetersFromFormattedDistanceValue(
-				value.toFloat(),
-				metricsConstants)
-
-			MeasureUnitType.TIME_DURATION -> value.toFloat() * 1000 * 60
-
-			else -> value.toFloat()
-		}
-
-	}
-
-	private fun getFormattedValue(value: String): FormattedValue {
-		val metricsConstants: MetricsConstants = app.settings.METRIC_SYSTEM.get()
-		return when (filterType.measureUnitType) {
-			MeasureUnitType.SPEED -> OsmAndFormatter.getFormattedSpeedValue(value.toFloat(), app)
-			MeasureUnitType.ALTITUDE -> OsmAndFormatter.getFormattedAltitudeValue(
-				value.toDouble(),
-				app,
-				metricsConstants)
-
-			MeasureUnitType.DISTANCE -> OsmAndFormatter.getFormattedDistanceValue(
-				value.toFloat(),
-				app)
-
-			MeasureUnitType.TIME_DURATION -> FormattedValue(value.toFloat() / 1000 / 60, value, "")
-
-			else -> FormattedValue(value.toFloat(), value, "")
-		}
-	}
-
 	private fun getProperty(): GpxParameter {
-		return filterType.propertyList[0]
+		return trackFilterType.property!!
 	}
 
 	private fun getComparableValue(value: Any): T {
-		if(value is String) {
+		if (value is String) {
 			return getValueFromString(value)
 		} else if (value is Number) {
 			return when (getProperty().typeClass) {

@@ -22,12 +22,24 @@ public class SingleFieldTrackFilterParams {
 	}
 
 	@Nullable
-	Drawable getSelectAllItemIcon(OsmandApplication app, boolean isChecked, boolean nightMode) {
+	Drawable getAllItemIcon(OsmandApplication app, boolean isChecked, boolean nightMode) {
 		return null;
 	}
 
 	@NonNull
 	String trackParamToString(@NonNull Object trackParam) {
 		return trackParam.toString();
+	}
+
+	public boolean includeEmptyValues() {
+		return false;
+	}
+
+	public boolean sortByName() {
+		return false;
+	}
+
+	public boolean sortDescending() {
+		return true;
 	}
 }

@@ -51,7 +51,7 @@ class FilterOtherViewHolder(itemView: View, nightMode: Boolean) :
 	fun bindView(filter: OtherTrackFilter) {
 		this.filter = filter
 		adapter.filter = filter
-		title.setText(filter.filterType.nameResId)
+		title.setText(filter.trackFilterType.nameResId)
 		updateExpandState()
 		updateValues()
 	}

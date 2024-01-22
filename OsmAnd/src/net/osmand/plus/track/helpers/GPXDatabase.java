@@ -38,7 +38,7 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	private static final int DB_VERSION = 20;
+	private static final int DB_VERSION = 17;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
@@ -60,33 +60,15 @@ public class GPXDatabase {
 			"MAX(%s) " +
 			" FROM " + GPX_TABLE_NAME;
 
-	private static final String GPX_TRACK_FOLDERS_COLLECTION = "SELECT " +
-			FILE_DIR.getColumnName() + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
-			" FROM " + GPX_TABLE_NAME +
-			" group by " + FILE_DIR.getColumnName() +
-			" ORDER BY " + FILE_DIR.getColumnName() + " ASC";
-
-	private static final String GPX_TRACK_NEAREST_CITIES_COLLECTION = "SELECT " +
-			NEAREST_CITY_NAME.getColumnName() + ", count (*) as " + TMP_NAME_COLUMN_COUNT +
-			" FROM " + GPX_TABLE_NAME +
-			" WHERE " + NEAREST_CITY_NAME.getColumnName() + " NOT NULL" + " AND " +
-			NEAREST_CITY_NAME.getColumnName() + " <> '' " +
-			" group by " + NEAREST_CITY_NAME.getColumnName() +
-			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
-
-	private static final String GPX_TRACK_COLORS_COLLECTION = "SELECT DISTINCT " +
-			"case when " + COLOR.getColumnName() + " is null then '' else " + COLOR.getColumnName() + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
+	private static final String CHANGE_NULL_TO_EMPTY_STRING_QUERY_PART = "case when %1$s is null then '' else %1$s end as %1$s";
+	private static final String INCLUDE_NON_NULL_COLUMN_CONDITION = " WHERE %1$s NOT NULL AND %1$s <> '' ";
+	private static final String GET_ITEM_COUNT_COLLECTION_BASE = "SELECT " +
+			"%s, " +
 			"count (*) as " + TMP_NAME_COLUMN_COUNT +
 			" FROM " + GPX_TABLE_NAME +
-			" group by " + TMP_NAME_COLUMN_NOT_NULL +
-			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
-
-	private static final String GPX_TRACK_WIDTH_COLLECTION = "SELECT DISTINCT " +
-			"case when " + WIDTH.getColumnName() + " is null then '' else " + WIDTH.getColumnName() + " end as " + TMP_NAME_COLUMN_NOT_NULL + ", " +
-			"count (*) as " + TMP_NAME_COLUMN_COUNT +
-			" FROM " + GPX_TABLE_NAME +
-			" group by " + TMP_NAME_COLUMN_NOT_NULL +
-			" ORDER BY " + TMP_NAME_COLUMN_COUNT + " DESC";
+			"%s" +
+			" group by %s" +
+			" ORDER BY %s %s";
 
 	private final OsmandApplication app;
 
@@ -124,15 +106,7 @@ public class GPXDatabase {
 	}
 
 	public boolean updateDataItem(@NonNull GpxDataItem item) {
-		String fileName = item.getParameter(FILE_NAME);
-		LOG.fatal("updateDataItem " + fileName);
-		if(fileName.equals("Mon 31 Oct 2022-reversed.gpx")) {
-			LOG.info("set maxSpeed " + item.getParameter(MAX_SPEED));
-			if(item.getParameter(MAX_SPEED) != GpxDbUtils.getItemParameters(app, item).get(MAX_SPEED) && item.getAnalysis() != null) {
-				LOG.info("changes!!");
-			}
-		}
-		Map<GpxParameter, Object> map = GpxDbUtils.getItemParameters(app, item);
+		Map<GpxParameter, Object> map = GpxDbUtils.getItemParameters(item);
 		return updateGpxParameters(map, GpxDbUtils.getItemRowsToSearch(app, item.getFile()));
 	}
 
@@ -151,11 +125,7 @@ public class GPXDatabase {
 	private boolean updateGpxParameters(@NonNull SQLiteConnection db, @NonNull Map<GpxParameter, Object> rowsToUpdate, @NonNull Map<String, Object> rowsToSearch) {
 		Map<String, Object> map = GpxDbUtils.convertGpxParameters(rowsToUpdate);
 		Pair<String, Object[]> pair = AndroidDbUtils.createDbUpdateQuery(GPX_TABLE_NAME, map, rowsToSearch);
-		String fileName = (String) map.get("fileName");
-		LOG.fatal("update track " + fileName);
-		if(fileName.equals("Mon 31 Oct 2022-reversed.gpx")) {
-			LOG.info("set maxSpeed " + map.get("maxSpeed"));
-		}
+		//done in ui
 		db.execSQL(pair.first, pair.second);
 		return true;
 	}
@@ -198,12 +168,7 @@ public class GPXDatabase {
 	}
 
 	void insert(@NonNull GpxDataItem item, @NonNull SQLiteConnection db) {
-		Map<String, Object> map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(app, item));
-		String fileName = (String) map.get("fileName");
-		LOG.fatal("insert track " + fileName);
-		if(fileName.equals("Mon 31 Oct 2022-reversed.gpx")) {
-			LOG.info("");
-		}
+		Map<String, Object> map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(item));
 		db.execSQL(AndroidDbUtils.createDbInsertQuery(GPX_TABLE_NAME, map.keySet()), map.values().toArray());
 	}
 
@@ -218,77 +183,28 @@ public class GPXDatabase {
 		GpxDataItem item = new GpxDataItem(app, new File(dir, fileName));
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 
-		for (GpxParameter parameter :
-				values()) {
+		for (GpxParameter parameter : values()) {
+			Object value = queryColumnValue(query, parameter);
 			if (parameter.isAnalysisParameter()) {
-				analysis.setGpxParameter(parameter, queryColumnValue(query, parameter));
+				analysis.setGpxParameter(parameter, value);
+			} else {
+				if (parameter == COLOR) {
+					value = GPXUtilities.parseColor((String) value, 0);
+				} else if (parameter == COLORING_TYPE) {
+					String coloringTypeName = (String) value;
+					if (ColoringType.getNullableTrackColoringTypeByName(coloringTypeName) == null &&
+							GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
+						GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);
+						ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+						value = coloringType == null ? null : coloringType.getName(null);
+					} else {
+						continue;
+					}
+				}
+				item.setParameter(parameter, value);
 			}
 		}
-//		analysis.getTotalDistance() = (float) query.getDouble(TOTAL_DISTANCE.getSelectColumnIndex());
-//		analysis.getTotalTracks() = query.getInt(TOTAL_TRACKS.getSelectColumnIndex());
-//		analysis.getStartTime() = query.getLong(START_TIME.getSelectColumnIndex());
-//		analysis.getEndTime() = query.getLong(END_TIME.getSelectColumnIndex());
-//		analysis.getTimeSpan() = query.getLong(TIME_SPAN.getSelectColumnIndex());
-//		analysis.getTimeMoving() = query.getLong(TIME_MOVING.getSelectColumnIndex());
-//		analysis.getTotalDistanceMoving() = (float) query.getDouble(TOTAL_DISTANCE_MOVING.getSelectColumnIndex());
-//		analysis.getDiffElevationUp() = query.getDouble(DIFF_ELEVATION_UP.getSelectColumnIndex());
-//		analysis.getDiffElevationDown() = query.getDouble(DIFF_ELEVATION_DOWN.getSelectColumnIndex());
-//		analysis.getAvgElevation() = query.getDouble(AVG_ELEVATION.getSelectColumnIndex());
-//		analysis.getMinElevation() = query.getDouble(MIN_ELEVATION.getSelectColumnIndex());
-//		analysis.getMaxElevation() = query.getDouble(MAX_ELEVATION.getSelectColumnIndex());
-//		analysis.minSpeed = (float) query.getDouble(MIN_SPEED.getSelectColumnIndex());
-//		analysis.getMaxSpeed() = (float) query.getDouble(MAX_SPEED.getSelectColumnIndex());
-//		analysis.getAvgSpeed() = (float) query.getDouble(AVG_SPEED.getSelectColumnIndex());
-//		analysis.maxSensorTemperature = query.getInt(MAX_SENSOR_TEMPERATURE.getSelectColumnIndex());
-//		analysis.avgSensorTemperature = (float) query.getDouble(AVG_SENSOR_TEMPERATURE.getSelectColumnIndex());
-//		analysis.maxSensorCadence = (float) query.getDouble(MAX_SENSOR_CADENCE.getSelectColumnIndex());
-//		analysis.avgSensorCadence = (float) query.getDouble(AVG_SENSOR_CADENCE.getSelectColumnIndex());
-//		analysis.maxSensorPower = query.getInt(MAX_SENSOR_POWER.getSelectColumnIndex());
-//		analysis.avgSensorPower = (float) query.getDouble(AVG_SENSOR_POWER.getSelectColumnIndex());
-//		analysis.maxSensorSpeed = (float) query.getDouble(MAX_SENSOR_SPEED.getSelectColumnIndex());
-//		analysis.avgSensorSpeed = (float) query.getDouble(AVG_SENSOR_SPEED.getSelectColumnIndex());
-//		analysis.maxSensorHr = query.getInt(MAX_SENSOR_HEART_RATE.getSelectColumnIndex());
-//		analysis.avgSensorHr = (float) query.getDouble(AVG_SENSOR_HEART_RATE.getSelectColumnIndex());
-//		analysis.getPoints() = query.getInt(POINTS.getSelectColumnIndex());
-//		analysis.getWptPoints() = query.getInt(WPT_POINTS.getSelectColumnIndex());
-
-		String names = query.getString(WPT_CATEGORY_NAMES.getSelectColumnIndex());
-		analysis.wptCategoryNames = names != null ? Algorithms.decodeStringSet(names) : null;
-
-//		if (!query.isNull(START_LAT.getSelectColumnIndex()) && !query.isNull(START_LON.getSelectColumnIndex())) {
-//			double lat = query.getDouble(START_LAT.getSelectColumnIndex());
-//			double lon = query.getDouble(START_LON.getSelectColumnIndex());
-//			analysis.latLonStart = new LatLon(lat, lon);
-//		}
 		item.setAnalysis(analysis);
-		item.setParameter(COLOR, GPXUtilities.parseColor(query.getString(COLOR.getSelectColumnIndex()), 0));
-		item.setParameter(FILE_LAST_MODIFIED_TIME, query.getLong(FILE_LAST_MODIFIED_TIME.getSelectColumnIndex()));
-		item.setParameter(FILE_LAST_UPLOADED_TIME, query.getLong(FILE_LAST_UPLOADED_TIME.getSelectColumnIndex()));
-		item.setParameter(FILE_CREATION_TIME, query.isNull(FILE_CREATION_TIME.getSelectColumnIndex()) ? -1 : query.getLong(FILE_CREATION_TIME.getSelectColumnIndex()));
-		item.setParameter(SPLIT_TYPE, query.getInt(SPLIT_TYPE.getSelectColumnIndex()));
-		item.setParameter(SPLIT_INTERVAL, query.getDouble(SPLIT_INTERVAL.getSelectColumnIndex()));
-		item.setParameter(API_IMPORTED, query.getInt(API_IMPORTED.getSelectColumnIndex()) == 1);
-		item.setParameter(SHOW_AS_MARKERS, query.getInt(SHOW_AS_MARKERS.getSelectColumnIndex()) == 1);
-		item.setParameter(JOIN_SEGMENTS, query.getInt(JOIN_SEGMENTS.getSelectColumnIndex()) == 1);
-		item.setParameter(SHOW_ARROWS, query.getInt(SHOW_ARROWS.getSelectColumnIndex()) == 1);
-		item.setParameter(SHOW_START_FINISH, query.getInt(SHOW_START_FINISH.getSelectColumnIndex()) == 1);
-		item.setParameter(WIDTH, query.getString(WIDTH.getSelectColumnIndex()));
-		item.setParameter(NEAREST_CITY_NAME, query.getString(NEAREST_CITY_NAME.getSelectColumnIndex()));
-		item.setParameter(SMOOTHING_THRESHOLD, query.getDouble(SMOOTHING_THRESHOLD.getSelectColumnIndex()));
-		item.setParameter(MIN_FILTER_SPEED, query.getDouble(MIN_FILTER_SPEED.getSelectColumnIndex()));
-		item.setParameter(MAX_FILTER_SPEED, query.getDouble(MAX_FILTER_SPEED.getSelectColumnIndex()));
-		item.setParameter(MIN_FILTER_ALTITUDE, query.getDouble(MIN_FILTER_ALTITUDE.getSelectColumnIndex()));
-		item.setParameter(MAX_FILTER_ALTITUDE, query.getDouble(MAX_FILTER_ALTITUDE.getSelectColumnIndex()));
-		item.setParameter(MAX_FILTER_HDOP, query.getDouble(MAX_FILTER_HDOP.getSelectColumnIndex()));
-
-		String coloringTypeName = query.getString(COLORING_TYPE.getSelectColumnIndex());
-		if (ColoringType.getNullableTrackColoringTypeByName(coloringTypeName) != null) {
-			item.setParameter(COLORING_TYPE, coloringTypeName);
-		} else if (GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
-			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);
-			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
-			item.setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
-		}
 		return item;
 	}
 
@@ -299,7 +215,8 @@ public class GPXDatabase {
 			case "double":
 				return query.getDouble(gpxParameter.getSelectColumnIndex());
 			case "int":
-				return query.getInt(gpxParameter.getSelectColumnIndex());
+				int value = query.getInt(gpxParameter.getSelectColumnIndex());
+				return gpxParameter.getTypeClass() == Boolean.class ? value == 1 : value;
 			case "long":
 				return query.getLong(gpxParameter.getSelectColumnIndex());
 		}
@@ -353,27 +270,20 @@ public class GPXDatabase {
 	}
 
 	@NonNull
-	public List<Pair<String, Integer>> getTrackFolders() {
-		return getStringIntItemsCollection(GPX_TRACK_FOLDERS_COLLECTION);
+	public List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
+	                                                               boolean includeEmptyValues,
+	                                                               boolean sortByName,
+	                                                               boolean sortDescending) {
+		String column1 = includeEmptyValues ? String.format(CHANGE_NULL_TO_EMPTY_STRING_QUERY_PART, columnName) : columnName;
+		String includeEmptyValuesPart = includeEmptyValues ? "" : String.format(INCLUDE_NON_NULL_COLUMN_CONDITION, columnName);
+		String orderBy = sortByName ? columnName : TMP_NAME_COLUMN_COUNT;
+		String sortDirection = sortDescending ? "DESC" : "ASC";
+		String query = String.format(GET_ITEM_COUNT_COLLECTION_BASE, column1, includeEmptyValuesPart, columnName, orderBy, sortDirection);
+		return getStringIntItemsCollection(query);
 	}
 
 	@NonNull
-	public List<Pair<String, Integer>> getNearestCityCollection() {
-		return getStringIntItemsCollection(GPX_TRACK_NEAREST_CITIES_COLLECTION);
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getTrackColorsCollection() {
-		return getStringIntItemsCollection(GPX_TRACK_COLORS_COLLECTION);
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getTrackWidthCollection() {
-		return getStringIntItemsCollection(GPX_TRACK_WIDTH_COLLECTION);
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String dataQuery) {
+	private List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String dataQuery) {
 		List<Pair<String, Integer>> folderCollection = new ArrayList<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {

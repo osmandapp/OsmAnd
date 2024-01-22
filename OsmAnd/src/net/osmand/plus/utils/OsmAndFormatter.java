@@ -505,7 +505,7 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static float getMetersFromFormattedDistanceValue(float distance, MetricsConstants mc) {
+	public static float convertToMeters(float distance, MetricsConstants mc) {
 		float mainUnitInMeters;
 		switch (mc) {
 			case MILES_AND_FEET:
@@ -548,7 +548,7 @@ public class OsmAndFormatter {
 		return metersInUnit;
 	}
 
-	public static float getBaseValueFromFormattedSpeed(float formattedValueSrc, @NonNull OsmandApplication app, SpeedConstants mc) {
+	public static float convertSpeedToMetersPerSecond(float formattedValueSrc, SpeedConstants mc) {
 		switch (mc) {
 			case KILOMETERS_PER_HOUR:
 				return formattedValueSrc / 3.6f;

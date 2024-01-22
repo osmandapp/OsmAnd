@@ -16,7 +16,7 @@ class OtherFilterAdapter(
 	val filterChangedListener: FilterChangedListener?) :
 	RecyclerView.Adapter<OtherFilterAdapter.OtherViewHolder>() {
 
-	var items = ArrayList<NonDbTrackParam>()
+	var items = ArrayList<OtherTrackParam>()
 	lateinit var fragmentManager: FragmentManager
 	lateinit var filter: OtherTrackFilter
 

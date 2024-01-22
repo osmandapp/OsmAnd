@@ -1416,32 +1416,4 @@ public class AndroidUtils {
 		BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
 		return bluetoothAdapter != null && bluetoothAdapter.isEnabled();
 	}
-
-	public static void runInBackground(@NonNull Runnable actionInBackground, @Nullable Runnable callbackInUi, @Nullable Runnable onProgress) {
-		new AsyncTask<Void, Void, Void>(){
-
-			@Override
-			protected Void doInBackground(Void... voids) {
-				actionInBackground.run();
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(Void unused) {
-				if(callbackInUi != null) {
-					callbackInUi.run();
-				}
-				super.onPostExecute(unused);
-			}
-
-			@Override
-			protected void onProgressUpdate(Void... values) {
-				if(onProgress != null) {
-					onProgress.run();
-				}
-				super.onProgressUpdate(values);
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
 }

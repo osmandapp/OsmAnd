@@ -51,7 +51,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 	@Nullable
 	private String getDescription(GpxDataItem item) {
 		GPXTrackAnalysis analysis = item.getAnalysis();
-		Set<String> categories = analysis != null ? analysis.wptCategoryNames : null;
+		Set<String> categories = analysis != null ? analysis.getWptCategoryNamesSet() : null;
 		if (categories != null && !categories.isEmpty() && !(categories.size() == 1 && categories.contains(""))) {
 			StringBuilder sb = new StringBuilder();
 			Iterator<String> it = categories.iterator();

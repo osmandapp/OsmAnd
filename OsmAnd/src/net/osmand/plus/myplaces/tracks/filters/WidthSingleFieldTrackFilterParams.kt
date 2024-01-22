@@ -44,4 +44,8 @@ class WidthSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 			}
 		}
 	}
+
+	override fun includeEmptyValues(): Boolean {
+		return true
+	}
 }

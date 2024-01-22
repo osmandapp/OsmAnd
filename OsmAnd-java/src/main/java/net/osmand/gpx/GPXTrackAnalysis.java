@@ -8,6 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -25,14 +26,11 @@ public class GPXTrackAnalysis {
 	public String name;
 
 	public float totalDistanceWithoutGaps = 0;
-	//	public int totalTracks = 0;
-//	public long endTime = Long.MIN_VALUE;
 	public long timeSpanWithoutGaps = 0;
 	//Next few lines for Issue 3222 heuristic testing only
 	//public long timeMoving0 = 0;
 	//public float totalDistanceMoving0 = 0;
 	public long timeMovingWithoutGaps = 0;
-	//	public float totalDistanceMoving = 0;
 	public float totalDistanceMovingWithoutGaps = 0;
 
 	private final Map<GpxParameter, Object> paramaters = new HashMap<>();
@@ -149,9 +147,6 @@ public class GPXTrackAnalysis {
 	}
 
 	public void setMaxSpeed(float maxSpeed) {
-		if(Float.isInfinite(maxSpeed)) {
-			LOG.debug("infinite");
-		}
 		setGpxParameter(GpxParameter.MAX_SPEED, (double) maxSpeed);
 	}
 
@@ -215,9 +210,6 @@ public class GPXTrackAnalysis {
 	}
 
 	public void setMaxSensorSpeed(float maxSensorSpeed) {
-		if(Float.isInfinite(maxSensorSpeed)) {
-			LOG.debug("inf");
-		}
 		setGpxParameter(GpxParameter.MAX_SENSOR_SPEED, (double) maxSensorSpeed);
 	}
 
@@ -298,18 +290,8 @@ public class GPXTrackAnalysis {
 		return ((Double) totalDistance).floatValue();
 	}
 
-//	public double diffElevationUp = 0;
-//	public double diffElevationDown = 0;
-
-//	public float maxSensorCadence = 0;
-//
-//
-//
-
 	public double minHdop = Double.NaN;
 	public double maxHdop = Double.NaN;
-
-	public Set<String> wptCategoryNames;
 
 	public double metricEnd;
 	public double secondaryMetricEnd;
@@ -408,6 +390,23 @@ public class GPXTrackAnalysis {
 		} else {
 			availableAttributes.remove(tag);
 		}
+	}
+
+	public void setWptCategoryNames(String wptCategoryNames) {
+		setGpxParameter(GpxParameter.WPT_CATEGORY_NAMES, wptCategoryNames);
+	}
+
+	public void setWptCategoryNames(Set<String> wptCategoryNames) {
+		setGpxParameter(GpxParameter.WPT_CATEGORY_NAMES, wptCategoryNames == null ? null : Algorithms.encodeCollection(wptCategoryNames));
+	}
+
+	public String getWptCategoryNames() {
+		return (String) getGpxParameter(GpxParameter.WPT_CATEGORY_NAMES);
+	}
+
+	public Set<String> getWptCategoryNamesSet() {
+		String wptCategoryNames = getWptCategoryNames();
+		return wptCategoryNames == null ? null : Algorithms.decodeStringSet(wptCategoryNames);
 	}
 
 	public static GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyzer, TrkSegment segment) {

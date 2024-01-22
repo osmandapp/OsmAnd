@@ -6,7 +6,7 @@ import net.osmand.plus.configmap.tracks.TrackItem
 
 abstract class BaseTrackFilter(
 	@Expose
-	@SerializedName("filterType") val filterType: FilterType,
+	@SerializedName("filterType") val trackFilterType: TrackFilterType,
 	var filterChangedListener: FilterChangedListener?) {
 
 	abstract fun isEnabled(): Boolean
@@ -24,7 +24,7 @@ abstract class BaseTrackFilter(
 	open fun initFilter() {}
 
 	override fun equals(other: Any?): Boolean {
-		return other is BaseTrackFilter && other.filterType == filterType
+		return other is BaseTrackFilter && other.trackFilterType == trackFilterType
 	}
 
 }

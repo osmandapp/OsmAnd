@@ -58,7 +58,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 						val newFilters: MutableList<BaseTrackFilter> = mutableListOf()
 						for (filter in it) {
 							val newFilter =
-								TrackFiltersHelper.createFilter(app, filter.filterType, null)
+								TrackFiltersHelper.createFilter(app, filter.trackFilterType, null)
 							newFilter.initWithValue(filter)
 							newFilters.add(newFilter)
 						}

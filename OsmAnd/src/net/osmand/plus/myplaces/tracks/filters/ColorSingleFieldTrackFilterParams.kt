@@ -39,4 +39,8 @@ class ColorSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 	override fun trackParamToString(trackParam: Any): String {
 		return Algorithms.colorToString(trackParam as Int)
 	}
+
+	override fun includeEmptyValues(): Boolean {
+		return true
+	}
 }

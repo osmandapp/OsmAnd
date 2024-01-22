@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
-import net.osmand.plus.myplaces.tracks.filters.viewholders.ListFilterViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterDateViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterNameViewHolder.TextChangedListener
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterOtherViewHolder
 import net.osmand.plus.myplaces.tracks.filters.viewholders.FilterRangeViewHolder
+import net.osmand.plus.myplaces.tracks.filters.viewholders.ListFilterViewHolder
 import net.osmand.plus.utils.UiUtilities
 
 class FiltersAdapter(
@@ -30,23 +30,23 @@ class FiltersAdapter(
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		val inflater = UiUtilities.getInflater(parent.context, nightMode)
 
-		return when (FilterDisplayType.values()[viewType]) {
-			FilterDisplayType.TEXT -> {
+		return when (FilterType.values()[viewType]) {
+			FilterType.TEXT -> {
 				val view = inflater.inflate(R.layout.filter_name_item, parent, false)
 				FilterNameViewHolder(view, nightMode)
 			}
 
-			FilterDisplayType.RANGE -> {
+			FilterType.RANGE -> {
 				val view = inflater.inflate(R.layout.filter_range_item, parent, false)
 				FilterRangeViewHolder(view, nightMode)
 			}
 
-			FilterDisplayType.DATE_RANGE -> {
+			FilterType.DATE_RANGE -> {
 				val view = inflater.inflate(R.layout.filter_date_item, parent, false)
 				FilterDateViewHolder(view, nightMode)
 			}
 
-			FilterDisplayType.SINGLE_FIELD_LIST -> {
+			FilterType.SINGLE_FIELD_LIST -> {
 				val view = inflater.inflate(R.layout.filter_list_item, parent, false)
 				ListFilterViewHolder(
 					app,
@@ -54,7 +54,7 @@ class FiltersAdapter(
 					nightMode)
 			}
 
-			FilterDisplayType.OTHER -> {
+			FilterType.OTHER -> {
 				val view = inflater.inflate(R.layout.filter_list_item, parent, false)
 				FilterOtherViewHolder(view, nightMode)
 			}
@@ -63,7 +63,7 @@ class FiltersAdapter(
 
 	override fun getItemViewType(position: Int): Int {
 		val filter = items[position]
-		return filter.filterType.filterDisplayType.ordinal
+		return filter.trackFilterType.filterType.ordinal
 	}
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -96,7 +96,7 @@ class FiltersAdapter(
 
 	fun onTracksFilteringComplete() {
 		for (i in 0 until items.size) {
-			if (items[i].filterType.updateOnOtherFiltersChangeNeeded) {
+			if (items[i].trackFilterType.updateOnOtherFiltersChangeNeeded) {
 				notifyItemChanged(i)
 			}
 		}

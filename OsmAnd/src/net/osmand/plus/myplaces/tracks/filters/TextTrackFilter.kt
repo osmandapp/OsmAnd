@@ -6,8 +6,8 @@ import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.search.core.SearchPhrase
 import net.osmand.util.Algorithms
 
-class TextTrackFilter(filterType: FilterType, filterChangedListener: FilterChangedListener?)
-	: BaseTrackFilter(filterType, filterChangedListener) {
+class TextTrackFilter(trackFilterType: TrackFilterType, filterChangedListener: FilterChangedListener?)
+	: BaseTrackFilter(trackFilterType, filterChangedListener) {
 
 	@Expose
 	var value = ""

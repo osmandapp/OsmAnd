@@ -178,7 +178,7 @@ public class GpxDbUtils {
 		}
 		SQLiteCursor cursor = db.rawQuery("select * from " + GPX_TABLE_NAME + " limit 0", null);
 		for (GpxParameter gpxParameter : values()) {
-			if(cursor.getColumnIndex(gpxParameter.getColumnName()) == -1) {
+			if (cursor.getColumnIndex(gpxParameter.getColumnName()) == -1) {
 				addTableColumn(db, gpxParameter);
 			}
 		}
@@ -197,7 +197,7 @@ public class GpxDbUtils {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
 			return !item.hasData() || analysis == null
-					|| analysis.wptCategoryNames == null
+					|| Algorithms.isEmpty(analysis.getWptCategoryNames())
 					|| analysis.getLatLonStart() == null && analysis.getPoints() > 0
 					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
 					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0;
@@ -224,65 +224,18 @@ public class GpxDbUtils {
 	}
 
 	@NonNull
-	public static Map<GpxParameter, Object> getItemParameters(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
+	public static Map<GpxParameter, Object> getItemParameters(@NonNull GpxDataItem item) {
 		File file = item.getFile();
-
 		Map<GpxParameter, Object> map = new LinkedHashMap<>();
-		map.put(FILE_NAME, file.getName());
-		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
-		map.put(COLOR, item.getParameter(COLOR));
-		map.put(FILE_LAST_MODIFIED_TIME, file.lastModified());
-		map.put(FILE_LAST_UPLOADED_TIME, item.getParameter(FILE_LAST_UPLOADED_TIME));
-		map.put(FILE_CREATION_TIME, item.getParameter(FILE_CREATION_TIME));
-		map.put(SPLIT_TYPE, item.getParameter(SPLIT_TYPE));
-		map.put(SPLIT_INTERVAL, item.getParameter(SPLIT_INTERVAL));
-		map.put(API_IMPORTED, item.getParameter(API_IMPORTED));
-		map.put(SHOW_AS_MARKERS, item.getParameter(SHOW_AS_MARKERS));
-		map.put(JOIN_SEGMENTS, item.getParameter(JOIN_SEGMENTS));
-		map.put(SHOW_ARROWS, item.getParameter(SHOW_ARROWS));
-		map.put(SHOW_START_FINISH, item.getParameter(SHOW_START_FINISH));
-		map.put(WIDTH, item.getParameter(WIDTH));
-		map.put(COLORING_TYPE, item.getParameter(COLORING_TYPE));
-		map.put(SMOOTHING_THRESHOLD, item.getParameter(SMOOTHING_THRESHOLD));
-		map.put(MIN_FILTER_SPEED, item.getParameter(MIN_FILTER_SPEED));
-		map.put(MAX_FILTER_SPEED, item.getParameter(MAX_FILTER_SPEED));
-		map.put(MIN_FILTER_ALTITUDE, item.getParameter(MIN_FILTER_ALTITUDE));
-		map.put(MAX_FILTER_ALTITUDE, item.getParameter(MAX_FILTER_ALTITUDE));
-		map.put(MAX_FILTER_HDOP, item.getParameter(MAX_FILTER_HDOP));
-		map.put(NEAREST_CITY_NAME, item.getParameter(NEAREST_CITY_NAME));
-
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		boolean hasAnalysis = analysis != null;
-		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.getTotalDistance() : null);
-		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.getTotalTracks() : null);
-		map.put(START_TIME, hasAnalysis ? analysis.getStartTime() : null);
-		map.put(END_TIME, hasAnalysis ? analysis.getEndTime() : null);
-		map.put(TIME_SPAN, hasAnalysis ? analysis.getTimeSpan() : null);
-		map.put(TIME_MOVING, hasAnalysis ? analysis.getTimeMoving() : null);
-		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.getTotalDistanceMoving() : null);
-		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.getDiffElevationUp() : null);
-		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.getDiffElevationDown() : null);
-		map.put(AVG_ELEVATION, hasAnalysis ? analysis.getAvgElevation() : null);
-		map.put(MIN_ELEVATION, hasAnalysis ? analysis.getMinElevation() : null);
-		map.put(MAX_ELEVATION, hasAnalysis ? analysis.getMaxElevation() : null);
-		map.put(MAX_SPEED, hasAnalysis ? analysis.getMaxSpeed() : null);
-		map.put(AVG_SPEED, hasAnalysis ? analysis.getAvgSpeed() : null);
-		map.put(MAX_SENSOR_TEMPERATURE, hasAnalysis ? analysis.getMaxSensorTemperature() : null);
-		map.put(AVG_SENSOR_TEMPERATURE, hasAnalysis ? analysis.getAvgSensorTemperature() : null);
-		map.put(MAX_SENSOR_POWER, hasAnalysis ? analysis.getMaxSensorPower() : null);
-		map.put(AVG_SENSOR_POWER, hasAnalysis ? analysis.getAvgSensorPower() : null);
-		map.put(MAX_SENSOR_SPEED, hasAnalysis ? analysis.getMaxSensorSpeed() : null);
-		map.put(AVG_SENSOR_SPEED, hasAnalysis ? analysis.getAvgSensorSpeed() : null);
-		map.put(MAX_SENSOR_CADENCE, hasAnalysis ? analysis.getMaxSensorCadence() : null);
-		map.put(AVG_SENSOR_CADENCE, hasAnalysis ? analysis.getAvgSensorCadence() : null);
-		map.put(MAX_SENSOR_HEART_RATE, hasAnalysis ? analysis.getMaxSensorHr() : null);
-		map.put(AVG_SENSOR_HEART_RATE, hasAnalysis ? analysis.getAvgSensorHr() : null);
-		map.put(POINTS, hasAnalysis ? analysis.getPoints() : null);
-		map.put(WPT_POINTS, hasAnalysis ? analysis.getWptPoints() : null);
-		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-		map.put(START_LAT, hasAnalysis  ? analysis.getLatStart() : null);
-		map.put(START_LON, hasAnalysis  ? analysis.getLonStart() : null);
-
+		for (GpxParameter gpxParameter : GpxParameter.values()) {
+			if (gpxParameter.isAnalysisParameter()) {
+				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
+			} else {
+				map.put(gpxParameter, item.getParameter(gpxParameter));
+			}
+		}
 		return map;
 	}
 

@@ -11,7 +11,6 @@ import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
 import net.osmand.plus.myplaces.tracks.filters.MeasureUnitType
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter
-import net.osmand.plus.settings.enums.MetricsConstants
 import net.osmand.plus.utils.OsmAndFormatter
 import net.osmand.plus.utils.UiUtilities
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
@@ -145,11 +144,17 @@ open class FilterRangeViewHolder(
 	var isBinding = false
 	fun bindView(filter: RangeTrackFilter<*>) {
 		this.filter = filter
-		title.setText(filter.filterType.nameResId)
+		title.setText(filter.trackFilterType.nameResId)
 		valueFromInputContainer.labelText =
-			"${app.getString(R.string.shared_string_from)}, ${getFilterUnitText()}"
+			"${app.getString(R.string.shared_string_from)}, ${
+				getMeasureUnitType().getFilterUnitText(
+					app)
+			}"
 		valueToInputContainer.labelText =
-			"${app.getString(R.string.shared_string_to)}, ${getFilterUnitText()}"
+			"${app.getString(R.string.shared_string_to)}, ${
+				getMeasureUnitType().getFilterUnitText(
+					app)
+			}"
 		updateExpandState()
 		updateValues()
 	}
@@ -177,16 +182,20 @@ open class FilterRangeViewHolder(
 			expanded = false
 			updateExpandState()
 		}
-//		slider.valueTo = maxValue.toFloat()
-//		slider.valueFrom = minValue.toFloat()
 		valueFromInput.setText(valueFrom.toString())
 		valueFromInput.setSelection(valueFromInput.length())
 		valueToInput.setText(valueTo.toString())
 		valueToInput.setSelection(valueToInput.length())
 		val minValuePrompt =
-			"${decimalFormat.format(minValue.toFloat())} ${getFilterUnitText()}"
+			"${decimalFormat.format(minValue.toFloat())} ${
+				getMeasureUnitType().getFilterUnitText(
+					app)
+			}"
 		val maxValuePrompt =
-			"${decimalFormat.format(maxValue.toFloat())} ${getFilterUnitText()}"
+			"${decimalFormat.format(maxValue.toFloat())} ${
+				getMeasureUnitType().getFilterUnitText(
+					app)
+			}"
 		minFilterValue.text = minValuePrompt
 		maxFilterValue.text = maxValuePrompt
 		AndroidUiHelper.updateVisibility(selectedValue, filter.isEnabled())
@@ -195,7 +204,7 @@ open class FilterRangeViewHolder(
 	}
 
 	open fun updateSelectedValue(valueFrom: String, valueTo: String) {
-		if (filter.filterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
+		if (filter.trackFilterType.measureUnitType == MeasureUnitType.TIME_DURATION) {
 			val fromTxt =
 				OsmAndFormatter.getFormattedDuration(valueFrom.toLong() * 60L, app)
 			val toTxt = OsmAndFormatter.getFormattedDuration(valueTo.toLong() * 60L, app)
@@ -210,85 +219,11 @@ open class FilterRangeViewHolder(
 				app.getString(R.string.track_filter_range_selected_format),
 				fromTxt,
 				toTxt,
-				getFilterUnitText())
+				getMeasureUnitType().getFilterUnitText(app))
 		}
 	}
 
-	private fun getFilterUnitText(): String {
-		val unitResId = getFilterUnit()
-		return if (unitResId > 0) app.getString(unitResId) else ""
-	}
-
-	private fun getFilterUnit(): Int {
-		return when (filter.filterType.measureUnitType) {
-			MeasureUnitType.TIME_DURATION -> R.string.shared_string_minute_lowercase
-			MeasureUnitType.DISTANCE -> getDistanceUnits()
-			MeasureUnitType.ALTITUDE -> getAltitudeUnits()
-			MeasureUnitType.SPEED -> getSpeedUnits()
-			MeasureUnitType.TEMPERATURE -> getTemperatureUnits()
-			MeasureUnitType.ROTATIONS -> getRotationUnits()
-			MeasureUnitType.BPM -> getBPMUnits()
-			MeasureUnitType.POWER -> getPowerUnits()
-			MeasureUnitType.DATE -> 0
-			else -> 0
-		}
-	}
-
-	private fun getDistanceUnits(): Int {
-		val settings = app.settings
-		val mc = settings.METRIC_SYSTEM.get()
-		return when (mc!!) {
-			MetricsConstants.MILES_AND_METERS,
-			MetricsConstants.MILES_AND_FEET,
-			MetricsConstants.MILES_AND_YARDS -> R.string.mile
-
-			MetricsConstants.NAUTICAL_MILES_AND_FEET,
-			MetricsConstants.NAUTICAL_MILES_AND_METERS -> R.string.nm
-
-			MetricsConstants.KILOMETERS_AND_METERS -> R.string.km
-		}
-	}
-
-	private fun getPowerUnits(): Int {
-		return R.string.power_watts_unit
-	}
-
-	private fun getTemperatureUnits(): Int {
-		return R.string.degree_celsius
-	}
-
-	private fun getBPMUnits(): Int {
-		return R.string.beats_per_minute_short
-	}
-
-	private fun getRotationUnits(): Int {
-		return R.string.revolutions_per_minute_unit
-	}
-
-	private fun getSpeedUnits(): Int {
-		val settings = app.settings
-		val mc = settings.METRIC_SYSTEM.get()
-		return when (mc!!) {
-			MetricsConstants.MILES_AND_METERS,
-			MetricsConstants.MILES_AND_FEET,
-			MetricsConstants.MILES_AND_YARDS -> R.string.mile_per_hour
-
-			MetricsConstants.NAUTICAL_MILES_AND_FEET,
-			MetricsConstants.NAUTICAL_MILES_AND_METERS -> R.string.nm_h
-
-			MetricsConstants.KILOMETERS_AND_METERS -> R.string.km_h
-		}
-	}
-
-	private fun getAltitudeUnits(): Int {
-		val settings = app.settings
-		val mc = settings.METRIC_SYSTEM.get()
-		val useFeet =
-			mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET
-		return if (useFeet) {
-			R.string.foot
-		} else {
-			R.string.m
-		}
+	private fun getMeasureUnitType(): MeasureUnitType {
+		return filter.trackFilterType.measureUnitType
 	}
 }

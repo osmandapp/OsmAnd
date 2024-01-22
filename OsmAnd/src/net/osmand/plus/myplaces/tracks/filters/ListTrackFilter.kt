@@ -1,27 +1,25 @@
 package net.osmand.plus.myplaces.tracks.filters
 
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Pair
 import com.google.gson.annotations.Expose
+import net.osmand.gpx.GpxParameter
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.gpx.GpxParameter
 import net.osmand.util.Algorithms
-import java.lang.IllegalArgumentException
 
 open class ListTrackFilter(
 	val app: OsmandApplication,
-	filterType: FilterType,
+	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(filterType, filterChangedListener) {
+	BaseTrackFilter(trackFilterType, filterChangedListener) {
 
 	var collectionFilterParams: SingleFieldTrackFilterParams
 
 	init {
-		val additionalData = filterType.additionalData
-		if(additionalData == null || additionalData !is SingleFieldTrackFilterParams) {
-			throw IllegalArgumentException("additionalData in $filterType filter should be valid instance of CollectionTrackFilterParams")
+		val additionalData = trackFilterType.additionalData
+		if (additionalData == null || additionalData !is SingleFieldTrackFilterParams) {
+			throw IllegalArgumentException("additionalData in $trackFilterType filter should be valid instance of CollectionTrackFilterParams")
 		}
 		collectionFilterParams = additionalData
 	}
@@ -166,7 +164,7 @@ open class ListTrackFilter(
 	}
 
 	private fun getTrackPropertyValue(trackItem: TrackItem): String {
-		var value = trackItem.dataItem?.getParameter<Any>(filterType.propertyList[0])
+		var value = trackItem.dataItem?.getParameter<Any>(trackFilterType.property!!)
 		value?.let {
 			value = collectionFilterParams.trackParamToString(it)
 		}

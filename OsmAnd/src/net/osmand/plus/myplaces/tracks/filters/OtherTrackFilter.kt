@@ -7,22 +7,22 @@ import net.osmand.util.Algorithms
 
 class OtherTrackFilter(
 	val app: OsmandApplication,
-	filterType: FilterType,
+	trackFilterType: TrackFilterType,
 	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(filterType, filterChangedListener) {
+	BaseTrackFilter(trackFilterType, filterChangedListener) {
 
 	@Expose
-	var selectedParams = ArrayList<NonDbTrackParam>()
+	var selectedParams = ArrayList<OtherTrackParam>()
 
-	val parameters = ArrayList<NonDbTrackParam>()
+	val parameters = ArrayList<OtherTrackParam>()
 
 	init {
-		if (filterType.additionalData is List<*>) {
-			for (nameResId in filterType.additionalData) {
-				if (nameResId is NonDbTrackParam) {
+		if (trackFilterType.additionalData is List<*>) {
+			for (nameResId in trackFilterType.additionalData) {
+				if (nameResId is OtherTrackParam) {
 					parameters.add(nameResId)
 				} else {
-					throw IllegalArgumentException("$filterType's additionalParams should contain list of NonDbTrackParam elements")
+					throw IllegalArgumentException("$trackFilterType's additionalParams should contain list of NonDbTrackParam elements")
 				}
 			}
 		}
@@ -32,11 +32,11 @@ class OtherTrackFilter(
 		return !Algorithms.isEmpty(selectedParams)
 	}
 
-	fun isParamSelected(param: NonDbTrackParam): Boolean {
+	fun isParamSelected(param: OtherTrackParam): Boolean {
 		return selectedParams.contains(param)
 	}
 
-	fun setItemSelected(param: NonDbTrackParam, selected: Boolean) {
+	fun setItemSelected(param: OtherTrackParam, selected: Boolean) {
 		val newList = ArrayList(selectedParams)
 		if (selected) {
 			if (!newList.contains(param)) {
@@ -49,14 +49,14 @@ class OtherTrackFilter(
 		filterChangedListener?.onFilterChanged()
 	}
 
-	private fun isTrackParamAccepted(trackItem: TrackItem, param: NonDbTrackParam): Boolean {
+	private fun isTrackParamAccepted(trackItem: TrackItem, param: OtherTrackParam): Boolean {
 		return when (param) {
-			NonDbTrackParam.VISIBLE_ON_MAP -> {
+			OtherTrackParam.VISIBLE_ON_MAP -> {
 				val selectedGpxHelper = app.selectedGpxHelper
 				selectedGpxHelper.getSelectedFileByPath(trackItem.path) != null
 			}
 
-			NonDbTrackParam.WITH_WAYPOINTS -> {
+			OtherTrackParam.WITH_WAYPOINTS -> {
 				val wptPointsCount = trackItem.dataItem?.analysis?.wptPoints ?: 0
 				wptPointsCount != 0
 			}
@@ -86,7 +86,7 @@ class OtherTrackFilter(
 	override fun equals(other: Any?): Boolean {
 		return super.equals(other) &&
 				other is OtherTrackFilter &&
-				other.filterType == filterType &&
+				other.trackFilterType == trackFilterType &&
 				selectedParams.size == other.selectedParams.size &&
 				selectedParams.containsAll(other.selectedParams)
 	}

@@ -127,18 +127,15 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	public List<Pair<String, Integer>> getNearestCityList() {
-		return database.getNearestCityCollection();
-	}
+	public List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
+	                                                               boolean includeEmptyValues,
+	                                                               boolean sortByName,
+	                                                               boolean sortDescending) {
 
-	@NonNull
-	public List<Pair<String, Integer>> getTrackColorsList() {
-		return database.getTrackColorsCollection();
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getTrackWidthList() {
-		return database.getTrackWidthCollection();
+		return database.getStringIntItemsCollection(columnName,
+				includeEmptyValues,
+				sortByName,
+				sortDescending);
 	}
 
 	public long getTracksMinCreateDate() {
@@ -147,11 +144,6 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public String getMaxParameterValue(GpxParameter parameter) {
 		return database.getColumnMaxValue(parameter);
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getTrackFolders() {
-		return database.getTrackFolders();
 	}
 
 	@Nullable

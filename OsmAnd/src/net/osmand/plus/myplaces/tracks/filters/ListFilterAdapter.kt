@@ -133,7 +133,7 @@ class ListFilterAdapter(
 				}
 				isSelectAllItemsBeingSet = false
 				holder.icon.setImageDrawable(
-					filter.collectionFilterParams.getSelectAllItemIcon(app,
+					filter.collectionFilterParams.getAllItemIcon(app,
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
 				holder.switch.setOnCheckedChangeListener { _, isChecked ->

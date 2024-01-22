@@ -8,10 +8,10 @@ import java.util.Date
 import java.util.Locale
 
 class DateTrackFilter(
-	filterType: FilterType,
+	trackFilterType: TrackFilterType,
 	dateFrom: Long,
 	filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(filterType, filterChangedListener) {
+	BaseTrackFilter(trackFilterType, filterChangedListener) {
 	var initialValueFrom = dateFrom
 	var initialValueTo = Date().time
 

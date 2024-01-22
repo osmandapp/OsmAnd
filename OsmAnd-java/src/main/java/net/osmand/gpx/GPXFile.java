@@ -297,7 +297,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 		analysis.name = path;
 		analysis.setWptPoints(points.size());
-		analysis.wptCategoryNames = getWaypointCategories();
+		analysis.setWptCategoryNames(getWaypointCategories());
 
 		List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, segments.toArray(new SplitSegment[0]));

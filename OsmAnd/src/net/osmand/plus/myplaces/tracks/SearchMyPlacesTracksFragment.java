@@ -121,7 +121,7 @@ public class SearchMyPlacesTracksFragment extends SearchTrackBaseFragment implem
 				filtersChanged = true;
 			} else {
 				for (BaseTrackFilter folderFilter : smartFolder.getFilters()) {
-					BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getFilterType());
+					BaseTrackFilter currentFilter = searchFilter.getFilterByType(folderFilter.getTrackFilterType());
 					if (currentFilter == null || !currentFilter.equals(folderFilter)) {
 						filtersChanged = true;
 						break;

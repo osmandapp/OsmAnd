@@ -2675,14 +2675,14 @@ public class OsmandAidlApi {
 		return new AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
 				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
 				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
-				a.getPoints(), a.getWptPoints(), a.wptCategoryNames);
+				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
 	}
 
 	private static net.osmand.aidlapi.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GPXTrackAnalysis a) {
 		return new net.osmand.aidlapi.gpx.AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
 				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
 				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
-				a.getPoints(), a.getWptPoints(), a.wptCategoryNames);
+				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
 	}
 
 	public boolean onKeyEvent(KeyEvent event) {
