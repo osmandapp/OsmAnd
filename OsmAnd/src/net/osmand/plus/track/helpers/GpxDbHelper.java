@@ -154,7 +154,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = dataItems.get(file);
-		if ((GpxDbUtils.isAnalyseNeeded(file, item) || GpxDbUtils.isCitySearchNeeded(item)) && !isGpxReading(file)) {
+		if (GpxDbUtils.isAnalyseNeeded(file, item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;

@@ -197,19 +197,8 @@ public class GpxDbUtils {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
 			return !item.hasData() || analysis == null
-					|| Algorithms.isEmpty(analysis.getWptCategoryNames())
-					|| analysis.getLatLonStart() == null && analysis.getPoints() > 0
-					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
-					|| (long) item.getParameter(EXPECTED_ROUTE_DURATION) < 0;
-		}
-		return true;
-	}
-
-	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
-		if (item != null) {
-			GPXTrackAnalysis analysis = item.getAnalysis();
-			return item.getParameter(NEAREST_CITY_NAME) == null && analysis != null && analysis.getLatLonStart() != null;
+					|| GPXTrackAnalysis.ANALYSIS_VERSION + GPXDatabase.DB_VERSION > (int) item.getParameter(DATA_VERSION)
+					;
 		}
 		return true;
 	}

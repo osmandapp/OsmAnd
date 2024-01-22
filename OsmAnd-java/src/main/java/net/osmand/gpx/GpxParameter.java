@@ -56,7 +56,8 @@ public enum GpxParameter {
 	MAX_SENSOR_CADENCE("maxSensorCadence", "double", Double.class, 0d, true),
 	AVG_SENSOR_CADENCE("avgSensorCadence", "double", Double.class, 0d, true),
 	MAX_SENSOR_HEART_RATE("maxSensorHr", "int", Integer.class, 0, true),
-	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double.class, 0d, true);
+	AVG_SENSOR_HEART_RATE("avgSensorHr", "double", Double.class, 0d, true),
+	DATA_VERSION("dataVersion", "int", Integer.class, 0, true);
 
 
 	private final String columnName;
