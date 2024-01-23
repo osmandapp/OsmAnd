@@ -65,8 +65,11 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 			if (isCancelled()) {
 				return null;
 			}
-			model.updateSplit(splitParams);
-			processGroupTrack(app, model, progress, splitParams.joinSegments);
+			if (model.getTrack() != null) {
+				model.clearDisplayItems();
+				model.updateSplit(splitParams);
+				processGroupTrack(app, model, progress, splitParams.joinSegments);
+			}
 		}
 		return null;
 	}

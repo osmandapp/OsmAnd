@@ -136,7 +136,7 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	private List<GpxDisplayGroup> collectDisplayGroups(@NonNull GPXFile gpxFile, boolean processTrack) {
-		List<GpxDisplayGroup> dg = new ArrayList<>();
+		List<GpxDisplayGroup> displayGroups = new ArrayList<>();
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.tracks.size() > 0) {
 			for (int i = 0; i < gpxFile.tracks.size(); i++) {
@@ -146,7 +146,7 @@ public class GpxDisplayHelper {
 					SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
 				}
 				if (!Algorithms.isEmpty(group.getDisplayItems()) || !processTrack) {
-					dg.add(group);
+					displayGroups.add(group);
 				}
 			}
 		}
@@ -163,7 +163,7 @@ public class GpxDisplayHelper {
 				group.setDescription(d);
 				String ks = (k++) + "";
 				group.setName(getString(R.string.gpx_selection_route_points, name, gpxFile.routes.size() == 1 ? "" : ks));
-				dg.add(group);
+				displayGroups.add(group);
 				List<GpxDisplayItem> displayItems = new ArrayList<>();
 				int t = 0;
 				for (WptPt r : route.points) {
@@ -185,9 +185,9 @@ public class GpxDisplayHelper {
 		}
 		if (!gpxFile.isPointsEmpty()) {
 			GpxDisplayGroup group = buildPointsDisplayGroup(gpxFile, gpxFile.getPoints(), name);
-			dg.add(group);
+			displayGroups.add(group);
 		}
-		return dg;
+		return displayGroups;
 	}
 
 	public void processSplitAsync(@NonNull SelectedGpxFile selectedGpxFile, @Nullable CallbackWithObject<Boolean> callback) {
@@ -227,15 +227,6 @@ public class GpxDisplayHelper {
 		}
 	}
 
-	private boolean splitParamsChanged(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxSplitParams splitParams) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		SplitTrackAsyncTask splitTask = splitTrackTasks.get(gpxFile.path);
-		if (splitTask != null) {
-			return !Algorithms.objectEquals(splitParams, splitTask.getSplitParams());
-		}
-		return false;
-	}
-
 	public void splitTrackAsync(@NonNull SelectedGpxFile selectedGpxFile, @NonNull List<GpxDisplayGroup> groups,
 	                            @NonNull GpxSplitParams splitParams, @Nullable SplitTrackListener listener) {
 		boolean splittingTrack = isSplittingTrack(selectedGpxFile);
@@ -248,6 +239,15 @@ public class GpxDisplayHelper {
 			splitTrackTasks.put(selectedGpxFile.getGpxFile().path, splitTask);
 			splitTask.executeOnExecutor(splitTrackSingleThreadExecutor);
 		}
+	}
+
+	private boolean splitParamsChanged(@NonNull SelectedGpxFile selectedGpxFile, @NonNull GpxSplitParams splitParams) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		SplitTrackAsyncTask splitTask = splitTrackTasks.get(gpxFile.path);
+		if (splitTask != null) {
+			return !Algorithms.objectEquals(splitParams, splitTask.getSplitParams());
+		}
+		return false;
 	}
 
 	public boolean isSplittingTrack(@NonNull SelectedGpxFile selectedGpxFile) {

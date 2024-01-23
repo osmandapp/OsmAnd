@@ -121,8 +121,6 @@ public class GpxDisplayGroup {
 	}
 
 	public void updateSplit(@NonNull GpxSplitParams splitParams) {
-		clearDisplayItems();
-
 		if (splitParams.splitType == NO_SPLIT) {
 			splitDistance = -1;
 			splitTime = -1;
