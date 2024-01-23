@@ -5594,4 +5594,9 @@
     <string name="any_connected_with_device">Alle verbundenen: %s</string>
     <string name="shared_string_road_maps">Straßenkarten</string>
     <string name="shared_string_all_tracks">Alle Tracks</string>
+    <string name="shared_string_license">Lizenz</string>
+    <string name="shared_string_link">Verknüpfung</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_extensions">Erweiterungen</string>
 </resources>
