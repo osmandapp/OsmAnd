@@ -99,7 +99,7 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 		String vehicle = getVehicleKeyForUrl();
 		if (!isEmpty(vehicle)) {
 			if (!isCustomParameterizedVehicle()) {
-				sb.append('&').append("vehicle=");
+				sb.append('&').append("profile=");
 			}
 			sb.append(vehicle);
 		}
@@ -107,7 +107,6 @@ public class GraphhopperEngine extends JsonOnlineRoutingEngine {
 		if (!isEmpty(apiKey)) {
 			sb.append('&').append("key=").append(apiKey);
 		}
-		sb.append('&').append("details=").append("lanes");
 	}
 
 	@Nullable

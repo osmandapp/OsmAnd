@@ -29,6 +29,7 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
+import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
 import net.osmand.util.MapUtils;
 
@@ -261,7 +262,16 @@ public class RoutePlannerFrontEnd {
 		this.hhRoutingConfig = hhRoutingConfig;
 		return this;
 	}
-	
+
+	public RoutePlannerFrontEnd disableHHRoutingConfig() {
+		this.hhRoutingConfig = null;
+		return this;
+	}
+
+	public boolean isHHRoutingConfigured() {
+		return this.hhRoutingConfig != null;
+	}
+
 	public void setDefaultHHRoutingConfig() {
 		this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
 	}
@@ -827,7 +837,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		if (hhRoutingConfig != null) {
-			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx, null);
+			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx);
 			HHNetworkRouteRes r = null;
 			Double dir = ctx.config.initialDirection ;
 			for (int i = 0; i < targets.size(); i++) {
@@ -918,13 +928,15 @@ public class RoutePlannerFrontEnd {
 		NativeLibrary nativeLib = ctx.nativeLib;
 		ctx.nativeLib = null; // keep null to interfere with detailed 
 		try {
-			HHRoutingConfig cfg = routePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
+			HHRoutingConfig cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
 			cfg.INITIAL_DIRECTION = dir;
 			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
 			if (res != null && res.error == null) {
+				ctx.calculationProgress.hhIteration(HHIteration.DONE);
 				makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
 				return res;
 			}
+			ctx.calculationProgress.hhIteration(null);
 		} catch (SQLException e) {
 			throw new IOException(e.getMessage(), e);
 		} catch (IOException | RuntimeException e) {

@@ -5395,4 +5395,193 @@
     <string name="smart_folder_name_present">Takýto chytrý priečinok už existuje</string>
     <string name="smart_folder_saved">Chytrý priečinok bol uložený</string>
     <string name="help_article_widgets_name">Nástroje na mape</string>
+    <string name="shared_string_close_the_dialog">Zavrieť okno</string>
+    <string name="shared_string_visible_on_map">Viditeľné na mape</string>
+    <string name="external_device_ble">BLE</string>
+    <string name="map_2d_mode_action">2D režim</string>
+    <string name="shared_string_ear_lobe">Ušný lalok</string>
+    <string name="external_device_blood_pressure">Krvný tlak</string>
+    <string name="rendering_attr_lightDetail_description">Predvolené: názov námornej značky (svetelný znak.skupina.obdobie), zvoľte ďalšie informácie o sektoroch 1 až 3 alebo sektor 1,2,3,4,5 svetelný znak</string>
+    <string name="shared_string_hand">Ruka</string>
+    <string name="file_already_exists_description">\"%1$s\". Súbor s týmto názvom už existuje. Nahradenie prepíše všetky zmeny urobené s aktuálnou verziou.</string>
+    <string name="external_device_characteristic_pulse_rate">Pulz</string>
+    <string name="external_device_characteristic_systolic">Systolický</string>
+    <string name="external_device_characteristic_diastolic">Diastolický</string>
+    <string name="external_device_characteristic_stride_length">Dĺžka kroku</string>
+    <string name="external_device_characteristic_temperature">Teplota</string>
+    <string name="shared_string_all_tracks">Všetky stopy</string>
+    <string name="action_cannot_be_undone">Táto akcia sa nedá odvolať.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Toto nezruší vaše predplatné OsmAnd Pro.</string>
+    <string name="delete_account_warning">Naozaj chcete odstrániť účet %1$s?</string>
+    <string name="backup_error_delete_account_email_match">E-mail nezodpovedá prihlasovaciemu menu</string>
+    <string name="external_device_characteristic_arterial_pressure">Arteriálny tlak</string>
+    <string name="verify_account">Overiť účet</string>
+    <string name="external_device_characteristic_cuff_pressure">Tlak v manžete</string>
+    <string name="slope_legend_description">Sklony používajú farby pre vizualizovanie strmosť terénu. Viac o mape Sklonov si môžete prečítať na %1$s.</string>
+    <string name="calculate_offline_altitude_descr">Vypočítať nadmorskú výšku offline, na základe údajov terénnej mapy (3D). Rozdiely oproti nadmorskej výške zmeranej zariadením môžu byť použité na korekcie výšky.</string>
+    <string name="save_track_external_sensors_data">Údaje</string>
+    <string name="delete_track_folder_dialog_message">Toto vymaže priečinok \"%1$s\" a všetky stopy (%2$s) v ňom.</string>
+    <string name="delete_folder_question">Odstrániť priečinok?</string>
+    <string name="tracks_empty_folder_description">Tento priečinok ešte nemá žiadne stopy.</string>
+    <string name="track_not_recorded">Nezaznamenané</string>
+    <string name="folder_export_empty_error">Priečinok je prázdny, nie je čo exportovať</string>
+    <string name="osmand_cloud_deleting_account_descr">Čoskoro budú všetky vaše údaje a účet odstránený z OsmAnd Cloud.
+\n
+\nVšetky údaje na zariadení zostanú zachované.</string>
+    <string name="deleting_complete">Odstránenie dokončené</string>
+    <string name="ant_plus_searching">Hľadanie</string>
+    <string name="power_watts_unit">Watt</string>
+    <string name="visible_in_3d_mode">Viditeľné v režime 3D</string>
+    <string name="external_device_details_information">Informácie</string>
+    <string name="ant_plus_searching_text">Hľadanie snímačov</string>
+    <string name="ant_plus_pair_new_sensor_ant_plus">Spárovať snímač ANT+</string>
+    <string name="external_device_characteristic_total_distance">Celková vzdialenosť</string>
+    <string name="map_3d_mode_description">Dotknite sa mapy dvoma prstami a pohybom nahor alebo nadol upravte sklon mapy.</string>
+    <string name="osmand_cloud_deletion_account_warning">Váš účet a všetky jeho detaily budú %1$s</string>
+    <string name="external_device_details_connection">Pripojenie</string>
+    <string name="manage_subscriptions">Spravovať predplatné.</string>
+    <string name="rendering_value_small_name">Malý</string>
+    <string name="running_scds_device_name">Bežecké zariadenie</string>
+    <string name="rendering_value_name_only_name">Len názov</string>
+    <string name="device_connected">%1$s pripojené</string>
+    <string name="no_bt_permission">Oprávnenie na Bluetooth nebolo udelené</string>
+    <string name="beats_per_minute_short">tep</string>
+    <string name="shared_string_chest">Hruď</string>
+    <string name="shared_string_wrist">Zápästie</string>
+    <string name="shared_string_foot">Noha</string>
+    <string name="no_search_results">Žiadne výsledky</string>
+    <string name="is_imported">%1$s je importované.</string>
+    <string name="external_device_details_disconnect">Odpojiť</string>
+    <string name="bluetooth_disconnected">Odpojené, %s</string>
+    <string name="ant_plus_pair_new_sensor">Spárovať nový snímač</string>
+    <string name="delete_account">Odstrániť účet</string>
+    <string name="calculate_offline">Vypočítať offline</string>
+    <string name="device_disconnected">%1$s odpojené</string>
+    <string name="poi_categories">Kategórie bodov záujmu</string>
+    <string name="external_device_forget_sensor">Zabudnúť snímač</string>
+    <string name="external_device_characteristic_speed">Rýchlosť</string>
+    <string name="external_device_details_battery">Batéria</string>
+    <string name="terrain_map">Mapa terénu (3D)</string>
+    <string name="tracks_empty_folder">Prázdny priečinok</string>
+    <string name="map_3d_mode_hint">Dlhým stlačením tlačidla môžete zmeniť polohu tlačidla.</string>
+    <string name="rendering_value_sector1_name">Sektor 1</string>
+    <string name="number_of_tracks">%1$s stôp</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
+    <string name="bicycle_scd_device_name">Cyklistické zariadenie</string>
+    <string name="file_already_exists">Súbor už existuje</string>
+    <string name="nav_profile_confirm_delete">Naozaj chcete vymazať \"%1$s\"?</string>
+    <string name="external_device_low_battery">Slabá batéria</string>
+    <string name="revolutions_per_minute_unit">ot/min</string>
+    <string name="ant_plus_help_title">Neviem aký typ snímača mám</string>
+    <string name="terrain_category_description">Terénne vrstevnice, sivo tieňované svahy a farebne vyznačený sklonov svahov, pre zobrazenia vrcholov a nížin.</string>
+    <string name="map_3d_mode_action">3D režim</string>
+    <string name="rendering_value_sectors_name">Sektory</string>
+    <string name="external_sensors_not_found">Snímače nenájdené</string>
+    <string name="rssi_widget_desc">Zobrazuje úroveň RSSI externého zariadenia.</string>
+    <string name="external_device_forget_sensor_description">Snímač bude odstránený zo zoznamu. Tento senzor budete môcť kedykoľvek spárovať znovu.</string>
+    <string name="external_device_disconnected">Odpojené</string>
+    <string name="external_device_connected">Pripojené</string>
+    <string name="external_device_menu_forget">Zabudnúť</string>
+    <string name="ant_plus_nothing_found_text">Nepodarilo sa nájsť žiadne snímače</string>
+    <string name="get_osmand_cloud">Získajte OsmAnd Cloud</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Naozaj chcete odstrániť účet v OsmAnd Cloud?
+\n
+\nTáto akcia sa nedá odvolať.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Vymazať účet?</string>
+    <string name="release_4_5">• Snímače BLE/ANT+: prepracované pripojenie, zápis a zobrazovanie prijatých údajov do GPX
+\n
+\n • Bezplatné zálohovanie obľúbených bodov a nastavení do \"OsmAnd Cloud\"
+\n
+\n • Nový formát terénnych máp s podporou 3D reliéfom
+\n
+\n • Správa stôp: zmenené rozhranie, pridané triedenie, podpora vnorených priečinkov
+\n
+\n • Android Auto: nové úvodné menu pre prístup k obľúbeným bodom, stopám a kategóriám bodov záujmu
+\n
+\n • Jeden zoznam nástrojov pre horný/dolný panel
+\n
+\n • Nový profil \"Vlak\", ktorý umožňuje výpočet trás po železnici
+\n
+\n • Vrstevnice fungujú s akýmkoľvek \"zdrojom máp\"
+\n
+\n • Rozšírený zoznam predvolených akcií pre externé klávesnice
+\n
+\n • Vlastné súbory pre výpočet trasy, pridané voľby pre výmaz alebo prepis
+\n
+\n • Pridaná voľba pre \"hlásenie o odchýlení od trasy\"
+\n
+\n • Úvodná obrazovka: pridaná možnosť obnoviť stav OsmAndu zo súboru
+\n
+\n • Pridané triedy \"nebezpečných látok\" pre navigáciu nákladných áut v Severnej Amerike
+\n
+\n • Pridaná podpora pre navigáciu chodcov cez \"Via ferrata\"
+\n
+\n • Pridaná stupnica \"CAI\" pre klasifikovanie obtiažnosti trás
+\n
+\n • Opravený výber jazyka pre aplikáciu
+\n
+\n • Pridaná podpora pre tématické ikony
+\n
+\n • OsmAnd Cloud: pridaná možnosť odstrániť účet
+\n
+\n • Prístupnosť: veľkosť tlačidiel pre dotyk zmenená na 48 dp; opravená chyba s mapovým rozhraním viditeľným pre čítačky obrazovky
+\n
+\n • Prepracované hlasové pokyny v japončine
+\n
+\n • Prepracované vyhodnotenie zmeny sklonu a nadmorskej výšky
+\n
+\n</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Druhotné zariadenia budú odpojené od OsmAnd Cloud a stratia prístup k plateným funkciám.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Všetky údaje v OsmAnd Cloud budú %1$s. Údaje v zariadení zostanú nedotknuté.</string>
+    <string name="shared_string_deleting">Odstraňovanie</string>
+    <string name="error_calculate">Výsledok výpočtu je prázdny</string>
+    <string name="no_poi_for_category">Bod záujmu nenájdený</string>
+    <string name="rendering_attr_lightDetail_name">Detail osvetlenia</string>
+    <string name="rendering_value_sector2_name">Sektor 2</string>
+    <string name="free_favorites_backup">Bezplatné zálohovanie obľúbených bodov</string>
+    <string name="osmand_cloud_deleted_account_descr">Účet a všetky údaje boli odstránené z OsmAnd Cloud.</string>
+    <string name="free_favorites_backup_description">Zaregistrujte si OsmAnd Cloud a získate bezplatné zálohovanie vašich nastavení a obľúbených bodov.</string>
+    <string name="free_account">Bezplatný účet</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
+    <string name="shared_string_finger">Prst</string>
+    <string name="search_track_by_name">Hľadať stopu podľa názvu</string>
+    <string name="external_device_characteristic_distance">Vzdialenosť</string>
+    <string name="external_device_characteristic_battery_level">Batéria</string>
+    <string name="external_device_characteristic_gear_ratio">Prevodový stupeň</string>
+    <string name="external_device_characteristic_cadence">Otáčky</string>
+    <string name="external_device_characteristic_heart_rate">Tepová frekvencia</string>
+    <string name="external_device_details_received_data">Prijaté údaje</string>
+    <string name="external_device_details_speed">Rýchlosť</string>
+    <string name="external_device_details_total_distance">Celková vzdialenosť</string>
+    <string name="external_device_details_distance">Vzdialenosť</string>
+    <string name="external_device_details_connect">Pripojiť</string>
+    <string name="external_device_details_pair">Spárovať</string>
+    <string name="bluetooth_connected">Pripojené, %s</string>
+    <string name="external_device_ant">ANT</string>
+    <string name="bluetooth_found_title">Nájdené: %d</string>
+    <string name="bluetooth_not_supported">Bluetooth nie je podporovaný</string>
+    <string name="ble_search_again">Hľadať znovu</string>
+    <string name="ant_plus_nothing_found_description">Uistite sa, že:
+\n– Bluetooth je zapnutý
+\n– Snímač je aktívny
+\n– Toto zariadenie je umiestnené blízko snímača</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth je vypnutý</string>
+    <string name="ant_plus_bluetooth_off_description">Zapnite vyhľadávanie cez Bluetooth a spárujte snímače.</string>
+    <string name="ant_plus_searching_text_description">Prosím držte zariadenie blízko snímača. Musíte aktivovať snímač, aby ho OsmAnd mohol nájsť.</string>
+    <string name="ant_plus_open_settings">Otvoriť nastavenia</string>
+    <string name="ant_plus_pair_new_sensor_ble">Spárovať snímač Bluetooth LE</string>
+    <string name="ant_plus_pair_bluetooth_prompt">S OsmAndom môžete spárovať snímače Bluetooth LE a ANT+.</string>
+    <string name="shared_string_new_track">Nová stopa</string>
+    <string name="verify_account_deletion_descr">Pred vymazaním vášho účtu ho musíme overiť.
+\n
+\nProsím zadajte e-mailovú adresu s ktorou ste sa zaregistrovali. Na ňu bude zaslané jednorazové heslo pre ďalší krok.</string>
+    <string name="relief_3d">3D reliéf</string>
+    <string name="relief_3d_description">Získajte a preskúmajte zmenšený model vášho okolia alebo celého kontinentu.</string>
+    <string name="write_data_from_sensor_to_track">Zapísať údaje z externých snímačov do GPX počas záznamu výletu.</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nie sú pripojené žiadne snímače tohto typu</string>
+    <string name="external_sensors_source_of_data">Zdroj údajov</string>
+    <string name="delete_folder">Odstrániť priečinok</string>
+    <string name="show_all_tracks_on_the_map">Zobraziť všetky stopy na mape</string>
+    <string name="map_widget_rssi">RSSI</string>
 </resources>

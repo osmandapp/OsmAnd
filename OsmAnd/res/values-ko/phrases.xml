@@ -770,4 +770,8 @@
     <string name="poi_doors">문</string>
     <string name="poi_site_type_fortification">방어시설</string>
     <string name="facebook">페이스북</string>
+    <string name="poi_operator">연산자</string>
+    <string name="poi_fuel_avia_type">연료 종류(avia)</string>
+    <string name="poi_fuel_type">연료 유형</string>
+    <string name="poi_payment_type">지불 유형</string>
 </resources>

@@ -5177,11 +5177,11 @@
     <string name="no_search_results">Keine Ergebnisse</string>
     <string name="search_track_by_name">Track nach Namen suchen</string>
     <string name="device_connected">%1$s wurde verbunden</string>
-    <string name="running_scds_device_name">Laufendes Gerät</string>
-    <string name="bicycle_scd_device_name">Fahrradgerät</string>
+    <string name="running_scds_device_name">Laufgerät</string>
+    <string name="bicycle_scd_device_name">Fahrradcomputer</string>
     <string name="external_device_blood_pressure">Blutdruck</string>
     <string name="no_bt_permission">Bluetooth-Erlaubnis wird nicht erteilt</string>
-    <string name="beats_per_minute_short">spm</string>
+    <string name="beats_per_minute_short">HF</string>
     <string name="shared_string_chest">Brust</string>
     <string name="shared_string_wrist">Handgelenk</string>
     <string name="shared_string_finger">Finger</string>
@@ -5377,7 +5377,7 @@
     <string name="help_article_purchases_android_name">Android-Käufe</string>
     <string name="help_article_purchases_ios_name">iOS-Käufe</string>
     <string name="help_article_search_search_coordinates_name">Koordinaten suchen</string>
-    <string name="help_article_search_search_poi_name">OVI suchen</string>
+    <string name="help_article_search_search_poi_name">POI suchen</string>
     <string name="help_article_start_with_first_steps_name">Erste Schritte</string>
     <string name="help_article_start_with_name">Mit OsmAnd anfangen</string>
     <string name="help_article_start_with_main_menu_name">Hauptmenü</string>
@@ -5591,6 +5591,7 @@
     <string name="complex_widget_alert">Das Widget %1$s kann nur in seiner eigenen Zeile platziert werden.</string>
     <string name="precise_distance_numbers">Genaue Entfernungsangaben</string>
     <string name="any_connected">Alle verbundenen</string>
-    <string name="any_connected_with_device">Alle verbundene: %s</string>
+    <string name="any_connected_with_device">Alle verbundenen: %s</string>
     <string name="shared_string_road_maps">Straßenkarten</string>
+    <string name="shared_string_all_tracks">Alle Tracks</string>
 </resources>

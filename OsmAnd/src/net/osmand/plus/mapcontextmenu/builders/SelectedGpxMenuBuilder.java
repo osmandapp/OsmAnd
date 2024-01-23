@@ -68,7 +68,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 				OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app), 0, null,
 				false, null, false, 0, false, false, false, null, false);
 
-		String timeSpan = Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled());
+		String timeSpan = Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled());
 		String timeMoving = Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled());
 		String timeSpanTitle = app.getString(R.string.shared_string_time_span) + " / " + app.getString(R.string.moving_time);
 		buildRow(view, getThemedIcon(R.drawable.ic_action_time_span), null, timeSpanTitle,
@@ -197,7 +197,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 
 		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_time_16);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor,
-				Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()) + "");
+				Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()) + "");
 	}
 
 	private void buildIcon(LinearLayout ll, int gpxSmallIconMargin, int iconId) {

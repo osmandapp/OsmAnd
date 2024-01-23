@@ -17,6 +17,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.track.BaseTracksTabsFragment;
 import net.osmand.util.MapUtils;
 
 import java.util.Set;
@@ -68,14 +69,15 @@ public class TrackItemsFragment extends BaseOsmAndFragment implements OsmAndComp
 	}
 
 	private void setupAdapter(@NonNull TrackTab trackTab) {
-		TracksFragment fragment = (TracksFragment) requireParentFragment();
+		BaseTracksTabsFragment fragment = (BaseTracksTabsFragment) requireParentFragment();
 		adapter = new TracksAdapter(requireContext(), trackTab, fragment, nightMode);
+		adapter.setSelectionMode(fragment.selectionMode());
 		recyclerView.setAdapter(adapter);
 	}
 
 	@Nullable
 	public TrackTab getTrackTab() {
-		TracksFragment fragment = (TracksFragment) requireParentFragment();
+		BaseTracksTabsFragment fragment = (BaseTracksTabsFragment) requireParentFragment();
 		return fragment.getTab(trackTabName);
 	}
 

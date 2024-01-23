@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.SmartFolder;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
@@ -96,6 +97,17 @@ public class TrackTab {
 			}
 		}
 		return trackItems;
+	}
+
+	@NonNull
+	public List<TrackFolder> getTrackFolders() {
+		List<TrackFolder> trackFolders = new ArrayList<>();
+		for (Object object : items) {
+			if (object instanceof TrackFolder) {
+				trackFolders.add((TrackFolder) object);
+			}
+		}
+		return trackFolders;
 	}
 
 	@NonNull

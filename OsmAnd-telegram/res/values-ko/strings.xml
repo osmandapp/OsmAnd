@@ -33,4 +33,5 @@
     <string name="shared_string_enabled">활성화</string>
     <string name="sharing_status">공유 상태</string>
     <string name="units_and_formats">단위 &amp; 형식</string>
+    <string name="by_name">이름별</string>
 </resources>

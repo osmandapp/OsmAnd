@@ -266,11 +266,11 @@ public class HHRouteDataStructure {
 				FinalRouteSegment pos = p.rt(false).rtDetailedRoute;
 				FinalRouteSegment rev = p.rt(true).rtDetailedRoute;
 				p.clearRouting();
-				if (stPoints.containsKey(p.index)) {
+				if (stPoints.containsKey(p.index) && pos != null) {
 					p.setDistanceToEnd(false, distanceToEnd(false, p));
 					p.setDetailedParentRt(false, pos);
 				} 
-				if (endPoints.containsKey(p.index)) {
+				if (endPoints.containsKey(p.index) && rev != null) {
 					p.setDistanceToEnd(true, distanceToEnd(true, p));
 					p.setDetailedParentRt(true, rev);
 				}

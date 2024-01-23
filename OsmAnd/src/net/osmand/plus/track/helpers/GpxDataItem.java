@@ -89,6 +89,7 @@ public class GpxDataItem {
 		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
 		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
 		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
+		map.put(EXPECTED_ROUTE_DURATION, hasAnalysis ? analysis.expectedRouteDuration : null);
 		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
 		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
 		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);

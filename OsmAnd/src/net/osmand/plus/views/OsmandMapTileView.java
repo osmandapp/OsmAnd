@@ -2105,12 +2105,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				return true;
 			} else if (!startZooming) {
 				return Math.abs(angle) >= ZONE_0_ANGLE_THRESHOLD;
-			} else if (deltaZoom >= ZONE_2_ZOOM_THRESHOLD) {
-				return Math.abs(angle) >= ZONE_3_ANGLE_THRESHOLD;
-			} else if (deltaZoom >= ZONE_1_ZOOM_THRESHOLD) {
-				return Math.abs(angle) >= ZONE_2_ANGLE_THRESHOLD;
 			} else {
-				return Math.abs(angle) >= ZONE_1_ANGLE_THRESHOLD;
+				return false;
 			}
 		}
 

@@ -467,8 +467,14 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				overviewTextView.setTextColor(defaultTextColor);
 				overviewTextView.setText(app.getString(R.string.shared_string_overview));
 				if (currentGpxDisplayItem != null) {
-					overviewTextView.setText(app.getString(R.string.shared_string_overview) + "  (" + currentGpxDisplayItem.analysis.points + ")");
-					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.shared_string_time_span) + ": " + Algorithms.formatDuration((int) (currentGpxDisplayItem.analysis.timeSpan / 1000), app.accessibilityEnabled()));
+					String overview = getString(R.string.shared_string_overview);
+					String points = String.valueOf(currentGpxDisplayItem.analysis.points);
+					overviewTextView.setText(getString(R.string.ltr_or_rtl_combine_with_brackets, overview, points));
+
+					String timeSpan = getString(R.string.shared_string_time_span);
+					String formattedDuration = Algorithms.formatDuration(currentGpxDisplayItem.analysis.getDurationInSeconds(), app.accessibilityEnabled());
+					TextView tvDuration = convertView.findViewById(R.id.fragment_count_text);
+					tvDuration.setText(getString(R.string.ltr_or_rtl_combine_via_colon, timeSpan, formattedDuration));
 				}
 			} else {
 				if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
@@ -525,8 +531,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					} else {
 						if (currentGpxDisplayItem.group.isSplitDistance()) {
 							distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-							if (analysis.timeSpan > 0) {
-								distanceOrTimeSpanValue.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+							if (analysis.getDurationInMs() > 0) {
+								distanceOrTimeSpanValue.setText(Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 							} else {
 								distanceOrTimeSpanValue.setText("-");
 							}
