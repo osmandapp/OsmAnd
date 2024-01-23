@@ -1753,19 +1753,6 @@ public class GPXUtilities {
 						Object pop = parserState.pop();
 						assert pop instanceof WptPt;
 					}
-				} else if (tok == XmlPullParser.TEXT) {
-					GPXExtensions parse = parserState.peek();
-					if (parse instanceof Author) {
-						String text = parser.getText();
-						if(((Author) parse).name == null){
-							((Author) parse).name = text;
-						}
-					} else if (parse instanceof Copyright) {
-						String text = parser.getText();
-						if (((Copyright) parse).author == null) {
-							((Copyright) parse).author = text;
-						}
-					}
 				}
 			}
 			if (!routeTrackSegment.points.isEmpty()) {
