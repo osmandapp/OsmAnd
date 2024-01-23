@@ -1,49 +1,46 @@
 package net.osmand.plus.track.cards;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.Copyright;
+import net.osmand.gpx.GPXUtilities.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 public class CopyrightCard extends BaseMetadataCard {
-	private final GPXUtilities.Metadata metadata;
 
-	public CopyrightCard(@NonNull MapActivity mapActivity, @NonNull GPXUtilities.Metadata metadata) {
-		super(mapActivity);
-		this.metadata = metadata;
+	public CopyrightCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata) {
+		super(mapActivity, metadata);
 	}
 
 	@Override
-	void updateCard() {
-		GPXUtilities.Copyright copyright = metadata.copyright;
-		if (copyright == null) {
-			return;
-		}
-		String author = copyright.author;
-		String year = copyright.year;
-		String license = copyright.license;
-
-		boolean showCard = !Algorithms.isEmpty(author) || !Algorithms.isEmpty(year) || !Algorithms.isEmpty(license);
-		updateVisibility(showCard);
-		if (!showCard) {
-			return;
-		}
-
-		if (!Algorithms.isEmpty(author)) {
-			addNewItem(R.string.shared_string_name, author, false, true);
-		}
-		if (!Algorithms.isEmpty(year)) {
-			addNewItem(R.string.year, year, false, true);
-		}
-		if (!Algorithms.isEmpty(license)) {
-			addNewItem(R.string.shared_string_license, license, false, true);
-		}
-	}
-
-	@Override
-	protected int getCardTitle() {
+	@StringRes
+	protected int getTitleId() {
 		return R.string.shared_string_copyright;
+	}
+
+	@Override
+	public void updateContent() {
+		super.updateContent();
+
+		Copyright copyright = metadata.copyright;
+		boolean visible = copyright != null && (!Algorithms.isEmpty(copyright.author)
+				|| !Algorithms.isEmpty(copyright.year) || !Algorithms.isEmpty(copyright.license));
+
+		updateVisibility(visible);
+
+		if (visible) {
+			if (!Algorithms.isEmpty(copyright.author)) {
+				createItemRow(getString(R.string.shared_string_name), copyright.author, null);
+			}
+			if (!Algorithms.isEmpty(copyright.year)) {
+				createItemRow(getString(R.string.year), copyright.year, null);
+			}
+			if (!Algorithms.isEmpty(copyright.license)) {
+				createItemRow(getString(R.string.shared_string_license), copyright.license, null);
+			}
+		}
 	}
 }

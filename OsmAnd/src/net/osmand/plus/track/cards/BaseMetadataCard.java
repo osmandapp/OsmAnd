@@ -1,101 +1,70 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.view.LayoutInflater;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
+import net.osmand.gpx.GPXUtilities.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.UiUtilities;
 
 public abstract class BaseMetadataCard extends MapBaseCard {
-	public static final int NO_ICON = -1;
-	protected LayoutInflater inflater;
-	protected ViewGroup container;
 
-	public BaseMetadataCard(@NonNull MapActivity mapActivity) {
+	protected final Metadata metadata;
+
+	private ViewGroup itemsContainer;
+
+	public BaseMetadataCard(@NonNull MapActivity mapActivity, @NonNull Metadata metadata) {
 		super(mapActivity);
-		inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		this.metadata = metadata;
 	}
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.metadata_card;
+		return R.layout.gpx_info_card;
 	}
+
+	@StringRes
+	abstract protected int getTitleId();
 
 	@Override
 	public void updateContent() {
-		TextView titleView = view.findViewById(R.id.card_title);
-		titleView.setText(getCardTitle());
-		container = view.findViewById(R.id.item_container);
+		TextView header = view.findViewById(R.id.header);
+		header.setText(getTitleId());
 
-		updateCard();
+		itemsContainer = view.findViewById(R.id.items_container);
+		itemsContainer.removeAllViews();
 	}
 
-	abstract void updateCard();
+	@NonNull
+	protected View createItemRow(@NonNull String title, @NonNull String description, @Nullable Drawable icon) {
+		View view = themedInflater.inflate(R.layout.item_with_title_desc, itemsContainer, false);
+		itemsContainer.addView(view);
 
-	abstract protected int getCardTitle();
+		ImageView iconIv = view.findViewById(R.id.icon);
+		TextView titleTv = view.findViewById(R.id.title);
+		TextView descriptionTv = view.findViewById(R.id.description);
 
-	protected void addNewItem(int titleId, String descriptionText, boolean isUrl, boolean copyOnLongClick) {
-		addNewItem(app.getString(titleId), descriptionText, isUrl, copyOnLongClick);
-	}
+		titleTv.setText(title);
+		descriptionTv.setText(description);
+		iconIv.setImageDrawable(icon);
+		AndroidUiHelper.updateVisibility(iconIv, icon != null);
 
-	protected void addNewItem(String title, String descriptionText, boolean isUrl, boolean copyOnLongClick) {
-		LinearLayout nameView = (LinearLayout) inflater.inflate(R.layout.item_with_title_desc, null);
-		container.addView(nameView);
-		fillCardItems(nameView, NO_ICON, title, descriptionText, isUrl, copyOnLongClick);
-	}
+		view.setOnLongClickListener(v -> {
+			ShareMenu.copyToClipboardWithToast(activity, description, Toast.LENGTH_SHORT);
+			return true;
+		});
 
-	private void fillCardItems(LinearLayout container, int iconId, String titleText, String descriptionText, boolean isUrl, boolean copyOnLongClick) {
-		ImageView icon = container.findViewById(R.id.icon);
-		TextView title = container.findViewById(R.id.title);
-		TextView description = container.findViewById(R.id.description);
-
-		title.setText(titleText);
-		if (iconId == NO_ICON) {
-			icon.setVisibility(View.GONE);
-		} else {
-			icon.setImageResource(iconId);
-		}
-		description.setText(descriptionText);
-
-		if (isUrl) {
-			container.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-			int linkTextColor = ContextCompat.getColor(view.getContext(), !nightMode ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
-			description.setTextColor(linkTextColor);
-			container.setOnClickListener(v -> {
-				if (app.getAppCustomization().isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(descriptionText));
-					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
-				}
-			});
-		}
-		if (copyOnLongClick) {
-			container.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
-			container.setOnLongClickListener(v -> {
-				copyToClipboard(descriptionText, view.getContext());
-				return true;
-			});
-		}
-	}
-
-	protected static void copyToClipboard(String text, Context ctx) {
-		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		return view;
 	}
 }

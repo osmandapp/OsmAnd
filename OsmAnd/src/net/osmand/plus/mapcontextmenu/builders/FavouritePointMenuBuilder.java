@@ -71,7 +71,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildNearestRow(View view, List<Amenity> nearestAmenities, int iconId, String text, String amenityKey) {
-		if (amenity == null || !(amenity instanceof Amenity)) {
+		if (amenity == null) {
 			super.buildNearestRow(view, nearestAmenities, iconId, text, amenityKey);
 		}
 	}
@@ -85,11 +85,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	@Override
 	public void buildInternal(View view) {
 		buildDateRow(view, point.getTimestamp());
-		if (!Algorithms.isEmpty(point.getLink())) {
-			buildRow(view, R.drawable.ic_world_globe_dark,
-					null, point.getLink(), 0,
-					false, null, false, 0, true, null, false);
-		}
 		buildCommentRow(view, point.getComment());
 
 		if (!Algorithms.isEmpty(amenityExtensions)) {
