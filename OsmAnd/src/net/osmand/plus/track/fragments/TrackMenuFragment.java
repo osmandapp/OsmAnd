@@ -105,7 +105,10 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.cards.AuthorCard;
+import net.osmand.plus.track.cards.CopyrightCard;
 import net.osmand.plus.track.cards.DescriptionCard;
+import net.osmand.plus.track.cards.MetadataExtensionsCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
 import net.osmand.plus.track.cards.OverviewCard;
@@ -180,6 +183,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
 	private GpxInfoCard gpxInfoCard;
+	private AuthorCard authorCard;
+	private CopyrightCard copyrightCard;
+	private MetadataExtensionsCard metadataExtensionsCard;
 	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
 	private TrackPointsCard pointsCard;
@@ -724,38 +730,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					cardsContainer.addView(optionsCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuTab.OVERVIEW) {
-				if (shouldReattachCards && overviewCard != null && overviewCard.getView() != null) {
-					reattachCard(cardsContainer, overviewCard);
-				} else {
-					overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile,
-							analysis, displayHelper.getGpxDataItem(), this);
-					overviewCard.setListener(this);
-					cardsContainer.addView(overviewCard.build(mapActivity));
-					if (isCurrentRecordingTrack()) {
-						overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
-					}
-				}
-
-				if (shouldReattachCards && descriptionCard != null && descriptionCard.getView() != null) {
-					reattachCard(cardsContainer, descriptionCard);
-				} else {
-					descriptionCard = new DescriptionCard(getMapActivity(), this, selectedGpxFile.getGpxFile());
-					cardsContainer.addView(descriptionCard.build(mapActivity));
-				}
-				if (routeKey != null) {
-					if (shouldReattachCards && routeInfoCard != null && routeInfoCard.getView() != null) {
-						reattachCard(cardsContainer, routeInfoCard);
-					} else {
-						routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, selectedGpxFile.getGpxFile());
-						cardsContainer.addView(routeInfoCard.build(mapActivity));
-					}
-				}
-				if (shouldReattachCards && gpxInfoCard != null && gpxInfoCard.getView() != null) {
-					reattachCard(cardsContainer, gpxInfoCard);
-				} else {
-					gpxInfoCard = new GpxInfoCard(getMapActivity(), selectedGpxFile.getGpxFile());
-					cardsContainer.addView(gpxInfoCard.build(mapActivity));
-				}
+				setupOverviewCards(mapActivity, cardsContainer, shouldReattachCards);
 			} else if (menuType == TrackMenuTab.POINTS) {
 				if (shouldReattachCards && pointsCard != null && pointsCard.getView() != null) {
 					reattachCard(cardsContainer, pointsCard);
@@ -765,6 +740,59 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					cardsContainer.addView(pointsCard.build(mapActivity));
 				}
 			}
+		}
+	}
+
+	private void setupOverviewCards(MapActivity mapActivity, ViewGroup cardsContainer, boolean shouldReattachCards){
+		if (shouldReattachCards && overviewCard != null && overviewCard.getView() != null) {
+			reattachCard(cardsContainer, overviewCard);
+		} else {
+			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile,
+					analysis, displayHelper.getGpxDataItem(), this);
+			overviewCard.setListener(this);
+			cardsContainer.addView(overviewCard.build(mapActivity));
+			if (isCurrentRecordingTrack()) {
+				overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
+			}
+		}
+
+		if (shouldReattachCards && descriptionCard != null && descriptionCard.getView() != null) {
+			reattachCard(cardsContainer, descriptionCard);
+		} else {
+			descriptionCard = new DescriptionCard(getMapActivity(), this, selectedGpxFile.getGpxFile());
+			cardsContainer.addView(descriptionCard.build(mapActivity));
+		}
+		if (routeKey != null) {
+			if (shouldReattachCards && routeInfoCard != null && routeInfoCard.getView() != null) {
+				reattachCard(cardsContainer, routeInfoCard);
+			} else {
+				routeInfoCard = new RouteInfoCard(getMapActivity(), routeKey, selectedGpxFile.getGpxFile());
+				cardsContainer.addView(routeInfoCard.build(mapActivity));
+			}
+		}
+		if (shouldReattachCards && gpxInfoCard != null && gpxInfoCard.getView() != null) {
+			reattachCard(cardsContainer, gpxInfoCard);
+		} else {
+			gpxInfoCard = new GpxInfoCard(getMapActivity(), selectedGpxFile.getGpxFile());
+			cardsContainer.addView(gpxInfoCard.build(mapActivity));
+		}
+		if (shouldReattachCards && authorCard != null && authorCard.getView() != null) {
+			reattachCard(cardsContainer, authorCard);
+		} else {
+			authorCard = new AuthorCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
+			cardsContainer.addView(authorCard.build(mapActivity));
+		}
+		if (shouldReattachCards && copyrightCard != null && copyrightCard.getView() != null) {
+			reattachCard(cardsContainer, copyrightCard);
+		} else {
+			copyrightCard = new CopyrightCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
+			cardsContainer.addView(copyrightCard.build(mapActivity));
+		}
+		if (shouldReattachCards && metadataExtensionsCard != null && metadataExtensionsCard.getView() != null) {
+			reattachCard(cardsContainer, metadataExtensionsCard);
+		} else {
+			metadataExtensionsCard = new MetadataExtensionsCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
+			cardsContainer.addView(metadataExtensionsCard.build(mapActivity));
 		}
 	}
 
@@ -1372,6 +1400,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (pointsCard != null) {
 			pointsCard.updateContent();
+		}
+		if (authorCard != null) {
+			authorCard.updateContent();
+		}
+		if (copyrightCard != null) {
+			copyrightCard.updateContent();
+		}
+		if (metadataExtensionsCard != null) {
+			metadataExtensionsCard.updateContent();
 		}
 		updatePointGroupsCard();
 		setupCards(true);

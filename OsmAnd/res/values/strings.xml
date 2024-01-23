@@ -10,6 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_string_extensions">Extensions</string>
+    <string name="shared_string_license">License</string>
+    <string name="shared_string_link">Link</string>
+    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_author">Author</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_all_tracks">All tracks</string>
     <string name="precise_distance_numbers">Precise distance numbers</string>

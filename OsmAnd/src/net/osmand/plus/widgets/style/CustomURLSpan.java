@@ -14,10 +14,15 @@ public class CustomURLSpan extends URLSpan {
 		super(url);
 	}
 
+	public void setUseBoldTypeface(boolean useBoldTypeface) {
+		this.useBoldTypeface = useBoldTypeface;
+	}
+
 	@Override
 	public void updateDrawState(@NonNull TextPaint ds) {
 		super.updateDrawState(ds);
 		ds.setUnderlineText(false);
+
 		if (useBoldTypeface) {
 			ds.setTypeface(Typeface.DEFAULT_BOLD);
 		}
