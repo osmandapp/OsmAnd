@@ -2422,7 +2422,7 @@
     <string name="change_default_appearance">기본 모양 변경</string>
     <string name="route_line_use_map_style_width">지도 스타일(%1$s) 기본 너비를 사용합니다.</string>
     <string name="reset_all_settings_desc">모든 설정을 기본값으로 재설정하시겠습니까\?</string>
-    <string name="announcement_time_descr">다양한 음성 안내의 안내 시간은 안내 유형, 현재 탐색 속도 및 기본 탐색 속도에 따라 다릅니다.</string>
+    <string name="announcement_time_descr">다른 음성 프롬프트의 발표 타이밍은 프롬프트유형, 현재 탐색 속도 및 기본 탐색 속도에 따라 다릅니다.</string>
     <string name="copy_from_other_profile">다른 프로필에서 복사</string>
     <string name="default_appearance_desc">기본 색상, 아이콘 및 모양은 그룹에 추가된 즐겨찾기 포인트에 적용됩니다.</string>
     <string name="profile_by_default_description">응용 프로그램 시작 시 사용할 프로필을 선택합니다.</string>
@@ -2504,7 +2504,7 @@
     <string name="open_wikipedia_link_online">온라인 위키백과 링크 열기</string>
     <string name="shared_string_contact">연락하기</string>
     <string name="average_speed_skip_stops_desc">%1$s 미만의 속도는 계산되지 않으며 평균 속도에 영향을 미칩니다.</string>
-    <string name="average_speed_widget_desc">현재 주행차의 평균 속도를 표시합니다.</string>
+    <string name="average_speed_widget_desc">현재 이동의 평균 속도를 표시합니다.</string>
     <string name="map_widget_average_speed">평균 속도</string>
     <string name="marker_save_as_track">경로 파일로 저장</string>
     <string name="layer_gpx_layer">경로</string>
@@ -2702,7 +2702,7 @@
     <string name="rendering_attr_weatherTempContours_name">온도 아이소라인</string>
     <string name="routing_attr_hazmat_category_name">유해 물질 카테고리</string>
     <string name="rendering_attr_horseScale_name">말길의 난이도</string>
-    <string name="map_widget_trip_recording_downhill">다운힐</string>
+    <string name="map_widget_trip_recording_downhill">내리막길</string>
     <string name="map_widget_trip_recording_uphill">오르막길</string>
     <string name="current_time_widget_desc">기기의 현재 시간을 표시합니다.</string>
     <string name="average_speed_time_interval_desc">속도 평균화의 시간 간격을 지정합니다.</string>
@@ -3760,4 +3760,25 @@
     <string name="may_be_used_if_there_is_shortcut">단축키가 있는 경우 사용할 수 있음</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">보조 기기는 OsmAnd Cloud에서 로그오프되고 유료 기능을 사용할 수 없게 됩니다.</string>
     <string name="write_data_from_sensor_to_track">트립 기록하는 동안 외부 센서에서 GPX로 데이터를 씁니다.</string>
+    <string name="running_scds_device_name">실행 중인 장치</string>
+    <string name="bicycle_scd_device_name">자전거 장치</string>
+    <string name="external_device_blood_pressure">혈압</string>
+    <string name="trip_rec_notification_settings">빠른 녹화 켜기</string>
+    <string name="round_trip">왕복</string>
+    <string name="trip_recording_uphill_widget_desc">현재 기록된 여행의 모든 등반의 합계를 표시합니다.</string>
+    <string name="live_monitoring_descr">여행 기록을 사용하여 현재 위치를 공유할 수 있습니다.</string>
+    <string name="trip_recording_downhill_widget_desc">현재 기록된 여행의 모든 내리막의 합계를 표시합니다.</string>
+    <string name="private_access_routing_req">목적지는 개인 출입이 가능한 지역에 있습니다. 이 여행에 사유 도로를 사용할 수 있습니까?</string>
+    <string name="shared_string_chest">가슴</string>
+    <string name="planning_trip_item">여행 계획하기</string>
+    <string name="make_round_trip_descr">출발지 사본을 목적지로 추가합니다.</string>
+    <string name="make_round_trip">왕복 여행</string>
+    <string name="next_turn_widget_desc">위젯은 기동 및 거리의 그림과 함께 다음 턴에 대한 정보를 보여줍니다.</string>
+    <string name="trip_rec_notification_settings_desc">트립 기록을 시작할 수 있는 시스템 알림을 표시합니다.</string>
+    <string name="shared_string_foot">도보</string>
+    <string name="shared_string_ear_lobe">귓불</string>
+    <string name="map_widget_trip_recording_duration">경과시간</string>
+    <string name="shared_string_wrist">손목</string>
+    <string name="shared_string_finger">손가락</string>
+    <string name="shared_string_hand">손</string>
 </resources>

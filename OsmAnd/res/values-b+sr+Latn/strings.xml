@@ -1140,38 +1140,38 @@
 \n</string>
     <string name="osmand_plus_short_description_80_chars">Zemaljski pregled mapa na mobilnim uređajima i za mape OSM-a na mreži i bez interneta</string>
     <string name="osmand_plus_play_title_30_chars">OsmAndove+ mape &amp; navođenje</string>
-    <string name="osmand_extended_description_part8">OsmAnd je mekotvorina otvorenog koda na kojoj se aktivno radi. Svako može da doprinese programu tako što će da prijavljuje greške, poboljšava prevode ili da programira nove mogućnosti. Dodatno, projekat se oslanja na novčane priloge radi ulaganja u razvoj i proveru novih mogućnosti. 
-\n Približna pokrivenost mape i kvalitet: 
-\n • Zapadna Evropa: **** 
-\n • Istočna Evropa: *** 
-\n • Rusija: *** 
-\n • Severna Amerika: *** 
-\n • Južna Amerika: ** 
-\n • Azija: ** 
-\n • Japan i Koreja: *** 
-\n • Bliski istok: ** 
-\n • Afrika: ** 
-\n • Antarktik: * 
-\n Većina država na svetu se može preuzeti! 
-\n Dobijte pouzdanog vodiča u Vašoj državi - bilo da je to Francuska, Nemačka, Meksiko, Velika Britanija, Holandija, SAD, Rusija, Brazil ili neka druga.</string>
-    <string name="osmand_extended_description_part7">Doprinesite OSM-u 
-\n • Prijavljujte greške u podacima 
-\n • Otpremajte rute GPXa neposredno iz programa 
-\n • Dodaj TOI i otpremajte ih neposredno na OSM (ili kasnije ako niste na mreži)
+    <string name="osmand_extended_description_part8">OsmAnd je otvorenog koda na kojoj se aktivno radi. Svako može da doprinese programu tako što će da prijavljuje greške, poboljšava prevode ili da programira nove mogućnosti. Dodatno, projekat se oslanja na novčane priloge radi ulaganja u razvoj i proveru novih mogućnosti.
+\n Približna pokrivenost mape i kvalitet:
+\n • Zapadna Evropa: ****
+\n • Istočna Evropa: ***
+\n • Rusija: ***
+\n • Severna Amerika: ***
+\n • Južna Amerika: **
+\n • Azija: **
+\n • Japan i Koreja: ***
+\n • Bliski istok: **
+\n • Afrika: **
+\n • Antarktik: *
+\n Većina država na svetu se može preuzeti!
+\n Dobijaš pouzdanog vodiča u državi - bilo da je to Francuska, Nemačka, Meksiko, Velika Britanija, Holandija, SAD, Rusija, Brazil ili neka druga.</string>
+    <string name="osmand_extended_description_part7">Doprinesite OSM-u
+\n • Prijavljuj greške u podacima
+\n • Uvezi rute GPX neposredno iz programa
+\n • Dodaj TOI i otpremaj ih neposredno na OSM (ili kasnije ako nisi na internetu)
 \n</string>
-    <string name="osmand_extended_description_part6">Šetanje, planinarenje, gradske ture 
-\n • Mapa Vam pokazuje pešačke i planinarske staze 
-\n • Vikipedija na tvom jeziku Vam može reći mnogo za vreme putovanja po gradu 
-\n • Stanice javnog prevoza (autobusi, tramvaji, vozovi), uključujući i imena linija će Vam pomoći kretanje po nepoznatom gradu 
-\n • Navođenje GPS-om u radu pešačenja Vam pravi rutu koristeći puteve na kojima se može proći peške 
-\n • Otpremajte i pratite tragove GPXa ili snimajte i Deli tvoje sopstvene
+    <string name="osmand_extended_description_part6">Šetanje, planinarenje, gradske ture
+\n • Mapa pokazuje pešačke i planinarske staze
+\n • Vikipedija na tvom jeziku može reći mnogo za vreme putovanja po gradu
+\n • Stanice javnog prevoza (autobusi, tramvaji, vozovi), uključujući i imena linija će pomoći kretanje po nepoznatom gradu
+\n • Navođenje GPS-om u režimu pešačenja pravi rutu koristeći staze na kojima se može proći peške
+\n • Uvezi i prati tragove GPX rute ili snimaj i deli sopstvene
 \n</string>
-    <string name="osmand_extended_description_part5">Biciklizam 
-\n • Nađite biciklističke staze na mapama 
-\n • Navođenje GPS-om za bicikle Vam pronalazi rutu na biciklističkim putevima 
-\n • VIdi Vašu brzinu i nadmorsku visinu 
-\n • Mogućnost snimanja GPXom Vam omogućava da snimiti tvoje putovanje i da ga Deli 
-\n • Uz još dodataka možete da Uključi i izohipse i reljef</string>
+    <string name="osmand_extended_description_part5">Biciklizam
+\n • Nađite biciklističke staze na mapama
+\n • Navođenje GPS-om za bicikle pronalazi rutu na biciklističkim stazama
+\n • Vidi brzinu i nadmorsku visinu
+\n • Mogućnost snimanja GPXom omogućava da snimiš putovanje i da ga deliš
+\n • Uz još dodataka možeš da uključiš i izohipse i reljef</string>
     <string name="osmand_extended_description_part4">Skijanje 
 \n OsmAndov dodatak za skijaške mape Vam omogućava pregled skijaške staze uz njihovu težinu i dodatne podatke, kao što su lokaciju skijaških žičara i ostalih objekata.</string>
     <string name="osmand_extended_description_part3">Mapa 
@@ -1183,21 +1183,21 @@
 \n • Dozvoljava da izaberete kako prikazujete imena na mapi: na engleskom, oblasnom jeziku ili slovni izgovor 
 \n • Prikazuje odgovarajuće slike sa mreže, satelitske snimke (sa Binga), različite preklapajuće slojeve za obilaske/navođenje sa stazama GPXa i dodatne slojeve sa podesivom prozirnošću
 \n</string>
-    <string name="osmand_extended_description_part2">Navođenje GPS-om 
-\n • Odabir između navođenja preko interneta (brzo) ili bez interneta (ne plaćate roming kada ste van zemlje) 
-\n • Glasovno navođenje od skretanja do skretanja (snimljeni ili pretvoreni glasovi) 
-\n • Samostalno preračunavanje puta kada se odaljite sa rute 
-\n • Dodatno navođenje u odgovarajuću traku, prikaz imena ulica i procenjeno vreme dolaska 
-\n • Samostalno menjanje dnevnog/noćnog prikaza za bezbednije putovanje 
-\n • Prikaz ograničenja brzine i podsetnik kada je prekoračite 
-\n • Približavanje mape se prilagođava brzini 
-\n • Pretraga mesta po adresi, vrsti (npr. gostione, prenoćišta, gorivne crpne stanice, muzeji), ili po koordinatama 
-\n • Podrška za usputne tačke 
-\n • Snimanje ili otpremanje ruta GPX-a i njihovo praćenje
+    <string name="osmand_extended_description_part2">GPS navigacija
+\n • Odabir između navođenja preko interneta (brzo) ili bez interneta (ne plaćate roming kada ste van zemlje)
+\n • Glasovno navođenje od vrata do vrata (snimljeni ili sintetizovani glasovi)
+\n • Samostalno preračunavanje puta kada se udaljite sa rute
+\n • Dodatno navođenje u odgovarajuću traku, prikaz imena ulica i procenjeno vreme dolaska
+\n • Samostalno menjanje dnevnog/ noćnog prikaza za bezbednije putovanje
+\n • Prikaz ograničenja brzine i podsetnik kada je prekoračite
+\n • Približavanje mape se prilagođava brzini
+\n • Pretraga mesta po adresi, vrsti (npr. kafane, prenoćišta, pumpe, muzeji), ili po koordinatama
+\n • Podrška za međuodredišta
+\n • Snimanje ili uvoz ruta GPX-a i njihovo praćenje
 \n</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, Samostalno navođenje prevcima OSM) je program za mape i navođenje koja pristupa besplatnim visokokvalitetnim podacima OSM iz celog sveta. 
-\n 
-\n Uživajte u prikazanom i glasovnom navođenju, pregledu TOI, pravljenjem i upravljanjem putanjama GPXa, korišćenjem izobata i podacima o visini (kroz dodatak), izboru između načina vožnje, biciklizma, pešačenja, izmena na OSM-u i još mnogo toga.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM automatizovani navigaciona uputstva, Samostalno navođenje prevcima OSM) je program za mape i navođenje koja pristupa besplatnim visokokvalitetnim podacima OSM iz celog sveta.
+\n
+\n Uživaj u prikazanom i glasovnom navođenju, pregledu TOI, pravljenjem i upravljanjem putanjama GPXa, korišćenjem izobata i podacima o visini (kroz dodatak), izboru između načina vožnje, bicikla, pešačenja, izmena na OSM-u i još mnogo toga.</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM samostalno navođenje upućivanjem) 
 \n 
 \n OsmAnd je is aplikacija otvorenog koda za navođenje sa pristupom raznim zemaljskim podacima OSM-a. Svi podaci na mapi (vektorski ili sličice mape) se mogu uskladištiti na memorijsku mapicu telefona za upotrebu i bez interneta. Nude se mogućnosti navođenja i sa i bez veze sa internetom, uključujući u glasovno navođenje. 
@@ -1221,7 +1221,7 @@
 \n 
 \n OsmAnd se razvija i naš projekat i stalni napredak se oslanja na novčane priloge za razvoj i probu novih mogućnosti. Molimo, razmislite o kupovini programa OsmAnd+ ili novčanoj pomoći razvoja novih mogućnosti ili davanju priloga na https://osmand.net.</string>
     <string name="osmand_short_description_80_chars">Zemaljski pregled mapi na mobilnim uređajima i navođenje mapama OSM-a na mreži i bez interneta</string>
-    <string name="osmand_play_title_30_chars">OsmAndove mape &amp; navođenje</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
     <string name="interrupt_music">Zaustavi muziku</string>
     <string name="interrupt_music_descr">Glasovna uputstva zaustavljaju muziku.</string>
     <string name="snap_to_road">Prilepi na ruta</string>
@@ -5495,7 +5495,7 @@
     <string name="cloud_item_restored">%1$s vraća se u Cloud.</string>
     <string name="sort_size_descending">Prvo velika veličina</string>
     <string name="add_new_type">Dodaj novu vrstu</string>
-    <string name="remove_type_q">Jesi li siguran da želiš ukloniti \"%1$s\" vrstu ?</string>
+    <string name="remove_type_q">Jesi li siguran da želiš ukloniti \"%1$s\" vrstu?</string>
     <string name="shared_string_empty_trash">Isprazni kantu</string>
     <string name="trash_alert_card_desc">Predmeti u kanti će biti izbrisani posle %1$s dana.</string>
     <string name="trash_is_empty">Kanta je prazna</string>
@@ -5540,4 +5540,5 @@
         <item quantity="other">%1$d (%2$d tragova)</item>
     </plurals>
     <string name="shared_string_all_tracks">Sve snimljene rute</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
 </resources>
