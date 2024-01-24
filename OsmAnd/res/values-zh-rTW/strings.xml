@@ -5580,4 +5580,10 @@
     <string name="any_connected_with_device">任何已連結的：%s</string>
     <string name="shared_string_road_maps">道路地圖</string>
     <string name="shared_string_all_tracks">所有軌跡</string>
+    <string name="shared_string_license">授權條款</string>
+    <string name="shared_string_link">連結</string>
+    <string name="shared_string_copyright">著作權</string>
+    <string name="shared_string_author">作者</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_extensions">擴充套件</string>
 </resources>
