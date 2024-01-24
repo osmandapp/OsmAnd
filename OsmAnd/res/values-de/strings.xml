@@ -5599,4 +5599,5 @@
     <string name="shared_string_author">Autor</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Erweiterungen</string>
+    <string name="shared_string_copyright">Urheberrecht</string>
 </resources>
