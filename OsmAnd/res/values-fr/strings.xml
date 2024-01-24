@@ -5582,4 +5582,10 @@
     <string name="any_connected_with_device">N\'importe quel appareil connecté : %s</string>
     <string name="shared_string_road_maps">Cartes routières</string>
     <string name="shared_string_all_tracks">Toutes les traces</string>
+    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_author">Auteur</string>
+    <string name="shared_string_extensions">Extensions</string>
+    <string name="shared_string_license">Licence</string>
+    <string name="shared_string_link">Lien</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
 </resources>
