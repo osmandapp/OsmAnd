@@ -4592,7 +4592,7 @@
     <string name="poi_healthcare_speciality_covid19">Covid19</string>
     <string name="poi_barrier_tyres">Autógumi</string>
     <string name="poi_tunnel_name">Alagút neve</string>
-    <string name="poi_boat_private">Csónakhoz való hozzáférés: magán</string>
+    <string name="poi_boat_private">Kishajóval a tulajdonos engedélyével használható</string>
     <string name="poi_cai_scale">CAI skála</string>
     <string name="poi_osmand_access_no">Használat: tilos</string>
     <string name="poi_osmand_vehicle_no">Járművel használni tilos</string>
@@ -4603,7 +4603,7 @@
     <string name="poi_direction">Irány</string>
     <string name="poi_roundtrip_yes">Körútvonal</string>
     <string name="poi_roundtrip_no">Nem körútvonal</string>
-    <string name="poi_osmand_access_private">Használat: magántulajdon</string>
+    <string name="poi_osmand_access_private">A tulajdonos engedélyével használható</string>
     <string name="poi_healthcare_speciality_weight_loss">Testtömegcsökkentés</string>
     <string name="poi_healthcare_speciality_blood_check">Vérvizsgálat</string>
     <string name="poi_healthcare_speciality_intensive">Intenzív ellátás</string>
@@ -4617,4 +4617,27 @@
     <string name="poi_healthcare_speciality_abortion">Terhességmegszakítás</string>
     <string name="poi_healthcare_speciality_palliative">Palliatív gyógyászat</string>
     <string name="poi_dressing_room">Öltöző</string>
+    <string name="poi_boat_unknown">Használat kishajóval: ismeretlen</string>
+    <string name="poi_boat_yes">Kishajóval használható</string>
+    <string name="poi_ship_designated">Kifejezetten nagyobb hajók számára kijelölve</string>
+    <string name="poi_ship_yes">Nagyobb hajóval használható</string>
+    <string name="poi_ship_no">Nagyobb hajóval nem használható</string>
+    <string name="poi_ship_private">Nagyobb hajóval a tulajdonos engedélyével használható</string>
+    <string name="poi_osmand_motor_vehicle_no">Gépjárművel behajtani tilos</string>
+    <string name="poi_osmand_vehicle_private">Járművel a tulajdonos engedélyével használható</string>
+    <string name="poi_osmand_motorcar_no">Személygépkocsival behajtani tilos</string>
+    <string name="poi_osmand_motorcycle_no">Motorkerékpárral nem használható</string>
+    <string name="poi_osmand_motor_vehicle_private">Gépjárművel a tulajdonos engedélyével használható</string>
+    <string name="poi_osmand_bicycle_no">Kerékpárral behajtani tilos</string>
+    <string name="poi_osmand_foot_private">Gyalogosan a tulajdonos engedélyével használható</string>
+    <string name="poi_boat_destination">Használat kishajóval: csak célforgalom</string>
+    <string name="poi_boat_permissive">Kishajóval használata megtűrt</string>
+    <string name="poi_boat_no">Kishajóval nem használható</string>
+    <string name="poi_ship_destination">Használat nagyobb hajóval: csak célforgalom</string>
+    <string name="poi_ship_delivery">Nagyobb hajóval csak áruszállításra használható</string>
+    <string name="poi_osmand_motorcycle_private">Motorkerékpárral a tulajdonos engedélyével használható</string>
+    <string name="poi_osmand_bicycle_private">Kerékpárral a tulajdonos engedélyével használható</string>
+    <string name="poi_osmand_motorcar_private">Személygépkocsival a tulajdonos engedélyével használható</string>
+    <string name="poi_boat_designated">Kishajók számára kijelölve</string>
+    <string name="poi_ship_permissive">Használata nagyobb hajóval megtűrt</string>
 </resources>
