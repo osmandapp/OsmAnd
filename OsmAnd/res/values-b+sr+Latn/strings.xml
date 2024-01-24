@@ -1827,7 +1827,7 @@
     <string name="access_default_color">Podrazumevana boja</string>
     <string name="access_autoannounce_period_descr">Najkraće vreme između najava.</string>
     <string name="access_autoannounce_period">Međuvreme pametnih najava</string>
-    <string name="access_smart_autoannounce_descr">Obavesti me samo ako je pravac ka ciljnoj tačci izmenjen.</string>
+    <string name="access_smart_autoannounce_descr">Obavesti me samo ako je pravac ka odredištu izmenjen.</string>
     <string name="access_smart_autoannounce">Pametna najava</string>
     <string name="access_disable_wrong_direction_recalc_descr">Bez samostalnog preračunavanja rute ako se samo krećeš u suprotnom smeru.</string>
     <string name="access_disable_wrong_direction_recalc">Nema proračuna puta zbog pogrešnog pravca</string>
@@ -1976,8 +1976,8 @@
     <string name="lang_zh_hk">Kineski (hongkongški)</string>
     <string name="lang_zh_cn">Kineski (pojadnostavljeni)</string>
     <string name="lang_sw">Svahili</string>
-    <string name="lang_sr_latn">Srpska latinica</string>
-    <string name="lang_sr">Srpska ćirilica</string>
+    <string name="lang_sr_latn">Srpski</string>
+    <string name="lang_sr">Српски</string>
     <string name="lang_sc">Sardinijski</string>
     <string name="lang_ru">Ruski</string>
     <string name="lang_ro">Rumunski</string>
@@ -1998,7 +1998,7 @@
     <string name="lang_hi">Indijski</string>
     <string name="lang_iw">Hebrejski</string>
     <string name="lang_he">Hebrejski</string>
-    <string name="access_direction_haptic_feedback_descr">Odredite pravac ciljne tačke uz pomoć vibracije.</string>
+    <string name="access_direction_haptic_feedback_descr">Odredi pravac odredišta uz pomoć vibracije.</string>
     <string name="access_direction_haptic_feedback">Uputstva trešenjem</string>
     <string name="access_direction_audio_feedback_descr">Ukazuj na pravac ciljne tačke zvukom.</string>
     <string name="access_direction_audio_feedback">Zvučna uputstva</string>
@@ -3924,7 +3924,7 @@
     <string name="rename_track">Preimenuj rutu</string>
     <string name="change_folder">Izmeni folder</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_passing">Prolaženje</string>
+    <string name="announcement_time_passing">Prolazak</string>
     <string name="announcement_time_approach">Dostupno</string>
     <string name="announcement_time_prepare_long">Dugo pripremanje</string>
     <string name="announcement_time_prepare">Priprema</string>
@@ -4362,7 +4362,7 @@
     <string name="rendering_attr_horse_scale_impossible_name">Nemoguća</string>
     <string name="rendering_attr_showMonorailRoutes_name">Putanje sa jednim kolosekom</string>
     <string name="rendering_attr_showFunicularRoutes_name">Putanje žičara</string>
-    <string name="waypoint_appearance">Izgled međuodredišne tačke</string>
+    <string name="waypoint_appearance">Izgled međuodredišta</string>
     <string name="track_file_description">Dodirom na ovu radnju prikazaće dostupne rute.</string>
     <string name="routeInfo_roadClass_description">Obojite rutu ili liniju rute prema klasifikaciji puteva.</string>
     <string name="osm_live_payment_subscription_management_amz">Plaćanje se skida sa tvog profila Amazona prilikom potvrde kupovine.
@@ -4634,7 +4634,7 @@
     <string name="rendering_attr_showRunningRoutes_description">Prikaz ruta za trčanje</string>
     <string name="exit_import">Izaći?</string>
     <string name="quick_action_add_route_descr">Dugme za pokretanje rute od sredine ekrana.</string>
-    <string name="always_ask_waypoint_appearance_description">Dodirom na ovu radnju otvoriće se ekran „Dodaj prolaznu tačku“, gde možete promeniti ime i pojavu.</string>
+    <string name="always_ask_waypoint_appearance_description">Dodirom na ovu radnju otvoriće se ekran „Dodaj međuodredište“, gde možeš promeniti ime i izgled.</string>
     <string name="track_file">Datoteka rute</string>
     <string name="shared_storage_last_step">Možete odrediti novu folder sa podacima kasnije.</string>
     <string name="shared_storage_third_step">Odobrite dozvolu za pristup ovoj fascikli. Bez nje, OsmAnd ne može da umnožava datoteke.</string>
@@ -5504,7 +5504,7 @@
     <string name="shared_string_show_less">Prikaži manje</string>
     <string name="root_folder">Root folder</string>
     <string name="shared_string_loading">Preuzimanje</string>
-    <string name="searching_matching_tracks">Pretražite sve podudarne staze</string>
+    <string name="searching_matching_tracks">Pretraži sve podudarne staze</string>
     <string name="empty_smart_folder_title">Nema odgovarajućeg tragova</string>
     <string name="empty_smart_folder_description">Sve podudarne staze automatski će se pojaviti ovde</string>
     <string name="smart_folder_saved">Pametan folder je snimljen</string>
@@ -5541,4 +5541,9 @@
     </plurals>
     <string name="shared_string_all_tracks">Sve snimljene rute</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_license">Licenca</string>
+    <string name="shared_string_link">Link</string>
+    <string name="shared_string_extensions">Ekstenzije</string>
+    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_author">Autor</string>
 </resources>
