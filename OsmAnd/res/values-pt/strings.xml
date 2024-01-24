@@ -5594,4 +5594,5 @@
     <string name="map_widget_sun_position_desc">Este widget mostra o tempo que falta até ao nascer ou pôr do sol, dependendo da hora atual.</string>
     <string name="any_connected_with_device">Qualquer conectado: %s</string>
     <string name="shared_string_road_maps">Mapas de estradas</string>
+    <string name="shared_string_all_tracks">Todos os trilhos</string>
 </resources>

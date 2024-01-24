@@ -41,6 +41,7 @@ import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPointCost;
 import net.osmand.router.HHRouteDataStructure.NetworkDBSegment;
 import net.osmand.router.HHRouteDataStructure.RoutingStats;
+import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
@@ -57,46 +58,48 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	
 	private static boolean ASSERT_COST_INCREASING = false;
 	private static boolean ASSERT_AND_CORRECT_DIST_SMALLER = true;
-	HHRoutingContext<T> cacheHctx;
 	private final Class<T> pointClass;
+	private final HHRouteRegionPointsCtx<T> predefinedRegions;
+	private HHRoutingContext<T> currentCtx; // never null
 	
 	
-	public static HHRoutePlanner<NetworkDBPoint> create(RoutingContext ctx, HHRoutingDB networkDB) {
-		if (networkDB != null) {
-			return new HHRoutePlanner<NetworkDBPoint>(ctx,
+	public static HHRoutePlanner<NetworkDBPoint> createDB(RoutingContext ctx, HHRoutingDB networkDB) {
+		return new HHRoutePlanner<NetworkDBPoint>(ctx,
 					new HHRouteRegionPointsCtx<NetworkDBPoint>((short) 0, networkDB), NetworkDBPoint.class);
-		}
+	}
+	
+	public static <Ts extends NetworkDBPoint> HHRoutePlanner<Ts> createDB(RoutingContext ctx, HHRoutingDB networkDB, Class<Ts> cl) {
+		return new HHRoutePlanner<Ts>(ctx, new HHRouteRegionPointsCtx<Ts>((short) 0, networkDB), cl);
+	}
+	
+	public static HHRoutePlanner<NetworkDBPoint> create(RoutingContext ctx) {
 		return new HHRoutePlanner<NetworkDBPoint>(ctx, null, NetworkDBPoint.class);
 	}
 	
-	
-	public HHRoutePlanner(RoutingContext ctx, HHRouteRegionPointsCtx<T> src, Class<T> cl) {
+	private HHRoutePlanner(RoutingContext ctx, HHRouteRegionPointsCtx<T> src, Class<T> cl) {
 		this.pointClass = cl;
+		this.predefinedRegions = src;
 		initNewContext(ctx, src == null ? null : Collections.singletonList(src));
 	}
 	
 	private HHRoutingContext<T> initNewContext(RoutingContext ctx, List<HHRouteRegionPointsCtx<T>> regions) {
-		if (cacheHctx != null) {
-			for (HHRouteRegionPointsCtx<T> p : cacheHctx.regions) {
-				if (p.networkDB != null) {
-					try {
-						p.networkDB.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-		cacheHctx = new HHRoutingContext<T>();
-		cacheHctx.rctx = ctx;
+		currentCtx = new HHRoutingContext<T>();
+		currentCtx.rctx = ctx;
 		if (regions != null) {
-			cacheHctx.regions.addAll(regions);
+			currentCtx.regions.addAll(regions);
 		}
-		return cacheHctx;
+		return currentCtx;
 	}
 
 	public void close() throws SQLException {
-		initNewContext(cacheHctx.rctx, null);
+		if (predefinedRegions != null && predefinedRegions.networkDB != null) {
+			try {
+				predefinedRegions.networkDB.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		currentCtx.regions.clear();
 	}
 	
 	public static double squareRootDist31(int x1, int y1, int x2, int y2) {
@@ -145,6 +148,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 	
 	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig config) throws SQLException, IOException, InterruptedException {
+		RouteCalculationProgress progress = currentCtx.rctx.calculationProgress;
+
 		long startTime = System.nanoTime();
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
@@ -154,15 +159,16 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			printGCInformation();
 		}
-		RouteCalculationProgress progress = hctx.rctx.calculationProgress;
 		
 		System.out.println(config.toString(start, end));
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
+		progress.hhIteration(HHIteration.START_END_POINT);
 		findFirstLastSegments(hctx, start, end, stPoints, endPoints);
 
 		RouteResultPreparation rrp = new RouteResultPreparation();
 		HHNetworkRouteRes route = null;
 		while (route == null) {
+			progress.hhIteration(HHIteration.ROUTING);
 			System.out.printf("Routing...");
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
@@ -174,6 +180,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			System.out.printf("%d segments, cost %.2f, %.2f ms\n", route.segments.size(), route.getHHRoutingTime(), time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			
+			progress.hhIteration(HHIteration.DETAILED);
 			System.out.printf("Parse detailed route segments...");
 			time = System.nanoTime();
 			boolean recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
@@ -193,6 +200,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		if (hctx.config.CALC_ALTERNATIVES) {
+			progress.hhIteration(HHIteration.ALTERNATIVES);
 			System.out.printf("Alternative routes...");
 			long time = System.nanoTime();
 			calcAlternativeRoute(hctx, route, stPoints, endPoints, progress);
@@ -480,8 +488,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 
 	protected HHRoutingContext<T> initHCtx(HHRoutingConfig c, LatLon start, LatLon end) throws SQLException, IOException {
-		HHRoutingContext<T> hctx = this.cacheHctx;
-		if (hctx.regions.size() != 1 || hctx.regions.get(0).networkDB == null) {
+		HHRoutingContext<T> hctx = this.currentCtx;
+		RouteCalculationProgress progress = hctx.rctx.calculationProgress;
+		if (predefinedRegions == null) {
+			progress.hhIteration(HHIteration.SELECT_REGIONS);
 			hctx = selectBestRoutingFiles(start, end, hctx);
 		}
 		System.out.println("Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
@@ -497,6 +507,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		long time = System.nanoTime();
+		progress.hhIteration(HHIteration.LOAD_POINS);
 		System.out.print("Loading points... ");
 		hctx.pointsById = hctx.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
@@ -664,24 +675,22 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			regions.add(reg);
 			
 		}
-		if (cacheHctx != null) {
-			boolean allMatched = true;
-			for (HHRouteRegionPointsCtx<T> r : regions) {
-				boolean match = false;
-				for (HHRouteRegionPointsCtx<T> p : cacheHctx.regions) {
-					if (p.file == r.file && p.fileRegion == r.fileRegion && p.routingProfile == r.routingProfile) {
-						match = true;
-						break;
-					}
-				}
-				if (!match) {
-					allMatched = false;
+		boolean allMatched = true;
+		for (HHRouteRegionPointsCtx<T> r : regions) {
+			boolean match = false;
+			for (HHRouteRegionPointsCtx<T> p : currentCtx.regions) {
+				if (p.file == r.file && p.fileRegion == r.fileRegion && p.routingProfile == r.routingProfile) {
+					match = true;
 					break;
 				}
 			}
-			if (allMatched) {
-				return cacheHctx;
+			if (!match) {
+				allMatched = false;
+				break;
 			}
+		}
+		if (allMatched) {
+			return currentCtx;
 		}
 		return initNewContext(hctx.rctx, regions);
 	}

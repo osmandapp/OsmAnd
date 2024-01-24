@@ -166,23 +166,23 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		buildDescriptionRow(sortMode, trackItem, analysis, cityName, shouldShowFolder);
 	}
 
-	private void buildDescriptionRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem item,
+	private void buildDescriptionRow(@NonNull TracksSortMode sortMode, @NonNull TrackItem trackItem,
 	                                 @Nullable GPXTrackAnalysis analysis, @Nullable String cityName,
 	                                 boolean shouldShowFolder) {
 		if (analysis != null) {
 			SpannableStringBuilder builder = new SpannableStringBuilder();
 			if (sortMode == NAME_ASCENDING || sortMode == NAME_DESCENDING) {
-				appendNameDescription(builder, item, analysis, shouldShowFolder);
+				appendNameDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == DATE_ASCENDING || sortMode == DATE_DESCENDING) {
-				appendCreationTimeDescription(builder, item, analysis);
+				appendCreationTimeDescription(builder, trackItem, analysis);
 			} else if (sortMode == DISTANCE_ASCENDING || sortMode == DISTANCE_DESCENDING) {
-				appendDistanceDescription(builder, item, analysis, shouldShowFolder);
+				appendDistanceDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == DURATION_ASCENDING || sortMode == DURATION_DESCENDING) {
-				appendDurationDescription(builder, item, analysis, shouldShowFolder);
+				appendDurationDescription(builder, trackItem, analysis, shouldShowFolder);
 			} else if (sortMode == NEAREST) {
 				appendNearestDescription(builder, analysis, cityName);
 			} else if (sortMode == LAST_MODIFIED) {
-				appendLastModifiedDescription(builder, item, analysis);
+				appendLastModifiedDescription(builder, trackItem, analysis);
 			}
 			description.setText(builder);
 		}
@@ -213,8 +213,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 		appendFolderName(builder, trackItem, shouldShowFolder);
 	}
 
-	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem item, @NonNull GPXTrackAnalysis analysis) {
-		GpxDataItem dataItem = item.getDataItem();
+	private void appendCreationTimeDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem, @NonNull GPXTrackAnalysis analysis) {
+		GpxDataItem dataItem = trackItem.getDataItem();
 		long creationTime = dataItem != null ? dataItem.getParameter(FILE_CREATION_TIME) : -1;
 		if (creationTime > 10) {
 			DateFormat format = OsmAndFormatter.getDateFormat(app);
@@ -295,7 +295,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void appendDuration(@NonNull SpannableStringBuilder builder, @NonNull GPXTrackAnalysis analysis) {
 		if (analysis.isTimeSpecified()) {
-			int duration = (int) (analysis.timeSpan / 1000.0f + 0.5);
+			int duration = analysis.getDurationInSeconds();
 			builder.append(Algorithms.formatDuration(duration, app.accessibilityEnabled()));
 		}
 	}

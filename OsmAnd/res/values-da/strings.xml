@@ -5595,4 +5595,10 @@
     <string name="any_connected_with_device">Alle forbundne: %s</string>
     <string name="shared_string_road_maps">Vejkort</string>
     <string name="shared_string_all_tracks">Alle spor</string>
+    <string name="shared_string_license">Licens</string>
+    <string name="shared_string_link">Link</string>
+    <string name="shared_string_copyright">Ophavsret</string>
+    <string name="shared_string_author">Forfatter</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_extensions">Udvidelser</string>
 </resources>
