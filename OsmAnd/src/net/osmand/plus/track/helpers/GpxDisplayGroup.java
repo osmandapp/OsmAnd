@@ -23,6 +23,7 @@ public class GpxDisplayGroup {
 
 	private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
 	private List<GpxDisplayItem> displayItems = new ArrayList<>();
+	private int index;
 	private String gpxName;
 	private String name;
 	private String description;
@@ -37,6 +38,7 @@ public class GpxDisplayGroup {
 	}
 
 	public GpxDisplayGroup(@NonNull GpxDisplayGroup group) {
+		index = group.index;
 		gpxFile = group.gpxFile;
 		type = group.type;
 		name = group.name;
@@ -71,6 +73,10 @@ public class GpxDisplayGroup {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public String getGpxName() {
 		return gpxName;
 	}
@@ -79,8 +85,12 @@ public class GpxDisplayGroup {
 		this.gpxName = gpxName;
 	}
 
-	public String getName() {
-		return name;
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 
 	@NonNull

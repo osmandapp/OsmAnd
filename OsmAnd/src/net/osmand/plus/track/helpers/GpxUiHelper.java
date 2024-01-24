@@ -575,11 +575,9 @@ public class GpxUiHelper {
 	@Nullable
 	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                                @NonNull ChartPointLayer chartPointLayer, @Nullable GPXTrackAnalysis analysis) {
-		GpxDisplayGroup displayGroup = null;
+		GpxDisplayGroup displayGroup;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			String groupName = GpxDisplayHelper.getGroupName(app, gpxFile);
-			displayGroup = app.getGpxDisplayHelper().buildGpxDisplayGroup(gpxFile, 0, groupName);
-
+			displayGroup = app.getGpxDisplayHelper().buildTrackDisplayGroup(gpxFile);
 			if (analysis == null) {
 				SplitTrackAsyncTask.processGroupTrack(app, displayGroup, null, false);
 				if (!Algorithms.isEmpty(displayGroup.getDisplayItems())) {

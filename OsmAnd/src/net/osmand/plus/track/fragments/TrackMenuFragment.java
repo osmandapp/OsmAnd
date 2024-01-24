@@ -969,7 +969,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void updateFile(@NonNull File file) {
 		displayHelper.setFile(file);
-		displayHelper.updateDisplayGroups();
 		updateGpxTitle();
 		toolbarTextView.setText(gpxTitle);
 		updateHeader();
