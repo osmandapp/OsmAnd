@@ -5502,4 +5502,7 @@
     <string name="key_event_category_actions">Handlinger</string>
     <string name="key_event_action_previous_app_profile">Forrige programprofil</string>
     <string name="add_new_button">Legg til ny knapp</string>
+    <string name="telegram_chats_descr">Ta del i en av våre lokale Telegram-sludringer.</string>
+    <string name="telegram_chats">Telegram-sludringer</string>
+    <string name="shared_string_eta">ETA</string>
 </resources>
