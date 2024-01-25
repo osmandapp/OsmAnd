@@ -1298,6 +1298,16 @@ public class RouteCalculationResult {
 		return null;
 	}
 
+	public int getDistanceToPoint(Location lastKnownLocation, int locationIndex ) {
+		int dist = getDistanceToPoint(locationIndex);
+		Location next = getNextRouteLocation();
+		if (lastKnownLocation != null && next != null) {
+			dist += MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+					next.getLatitude(), next.getLongitude());
+		}
+		return dist;
+	}
+
 	public int getDistanceToPoint(int locationIndex) {
 		if (listDistance != null && currentRoute < listDistance.length && locationIndex < listDistance.length &&
 				locationIndex > currentRoute) {
