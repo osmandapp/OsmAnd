@@ -4767,7 +4767,7 @@
     <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
-    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="display_position">Posición de la ubicación</string>
@@ -5181,7 +5181,7 @@
     <string name="ant_plus_bluetooth_off_description">Activa los sensores de búsqueda y vinculación de Bluetooth.</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
     <string name="file_already_exists">El archivo ya existe</string>
-    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»\?</string>
+    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»?</string>
     <string name="file_already_exists_description">«%1$s». Ya existe un archivo con ese nombre. Al reemplazarlo, se sobrescribirán todos los cambios realizados con la versión actual.</string>
     <string name="is_imported">%1$s se ha importado.</string>
     <string name="search_track_by_name">Buscar traza por el nombre</string>
@@ -5251,13 +5251,13 @@
     <string name="slope_legend_description">La pendiente usa colores para visualizar la inclinación del terreno. Puedes leer más sobre «Pendientes» en %1$s.</string>
     <string name="terrain_category_description">Curvas de nivel del terreno, sombreados en tonos grises e indicaciones de pendientes en colores, mostrando picos y tierras bajas.</string>
     <string name="manage_subscriptions">Gestionar suscripciones.</string>
-    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»\?</string>
+    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»?</string>
     <string name="shared_string_deleting">Borrando</string>
     <string name="delete_account">Borrar cuenta</string>
     <string name="osmand_cloud_deleting_account_descr">En un momento será borrada tu cuenta con todos los datos de OsmAnd Cloud.
 \n
 \nTodos los datos en el dispositivo permanecen intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud?
 \n
 \nEsta acción no puede deshacerse.</string>
     <string name="action_cannot_be_undone">Esta acción no puede deshacerse.</string>
@@ -5491,7 +5491,7 @@
     <string name="widget_available_ram">RAM disponible</string>
     <string name="terrain_maps">Mapas topográficos</string>
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
-    <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
+    <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
     <string name="shared_string_show_icon">Mostrar icono</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
@@ -5507,7 +5507,7 @@
     <string name="no_config_smart_folder_title">No configurado</string>
     <string name="discard_filter_changes">Descartar cambios del filtro</string>
     <string name="shared_string_loading">Cargando</string>
-    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros\?</string>
+    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros?</string>
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
     <string name="loading_tracks">Recargando trazas</string>
     <string name="searching_matching_tracks">Buscar las trazas que coincidan</string>
@@ -5516,11 +5516,11 @@
         <item quantity="many">%1$d (%2$d trazas)</item>
         <item quantity="other"/>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera\? Esta acción no se puede deshacer.</string>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera? Esta acción no se puede deshacer.</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
     <string name="delete_all_items">Borrar todos los elementos</string>
     <string name="trash_is_empty_banner_desc">Los elementos borrados desde OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
-    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
+    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro?
 \n
 \nEsta acción no se puede deshacer.</string>
     <string name="shared_string_empty_trash">Vaciar papelera</string>
@@ -5552,7 +5552,7 @@
     <string name="key_event_action_take_media_note">Crear nota multimedia</string>
     <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
     <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
-    <string name="remove_type_q">¿Quitar el tipo «%1$s»\?</string>
+    <string name="remove_type_q">¿Quitar el tipo «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir nuevo tipo</string>
     <string name="key_event_action_move_up">Mover arriba</string>
