@@ -4352,7 +4352,7 @@
     <string name="map_widget_ant_heart_rate">Detak Jantung</string>
     <string name="worldwide_maps">Peta dunia</string>
     <string name="map_widget_camera_distance">Ketinggian kamera</string>
-    <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)?</string>
     <string name="map_widget_ant_bicycle_dist">Jarak Sepeda</string>
     <string name="nautical_depth_points">Titik kedalaman bahari</string>
     <string name="map_widget_camera_distance_desc">Menampilkan ketinggian kamera di atas tingkat permukaan.</string>
@@ -5136,7 +5136,7 @@
     <string name="external_device_characteristic_temperature">Suhu</string>
     <string name="external_device_forget_sensor">Abaikan sensor</string>
     <string name="external_device_low_battery">Baterai lemah</string>
-    <string name="nav_profile_confirm_delete">Apakah Anda yakin ingin menghapus \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Apakah Anda yakin ingin menghapus \"%1$s\"?</string>
     <string name="external_device_details_information">Informasi</string>
     <string name="external_device_details_connection">Koneksi</string>
     <string name="is_imported">%1$s telah diimpor.</string>
@@ -5237,13 +5237,13 @@
     <string name="deleting_complete">Penghapusan selesai</string>
     <string name="osmand_cloud_deletion_account_warning">Akun dan semua detail akun Anda akan %1$s</string>
     <string name="shared_string_deleting">Menghapus</string>
-    <string name="delete_account_warning">Apakah Anda ingin menghapus akun %1$s\?</string>
+    <string name="delete_account_warning">Apakah Anda ingin menghapus akun %1$s?</string>
     <string name="slope_legend_description">Lereng menggunakan warna untuk menampilkan kecuraman medan. Anda dapat mempelajari lebih lanjut tentang Lereng di %1$s.</string>
     <string name="terrain_category_description">Garis kontur medan, bukit berskala abu-abu dan indikasi lereng skala warna, untuk menunjukkan puncak dan dataran rendah.</string>
     <string name="osmand_cloud_deleting_account_descr">Dalam beberapa detik, semua data dan akun Anda akan dihapus dari OsmAnd Cloud.
 \n
 \nSemua data di perangkat tidak akan disentuh.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Apakah Anda yakin ingin menghapus akun OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Apakah Anda yakin ingin menghapus akun OsmAnd Cloud?
 \n
 \nTindakan ini tidak dapat diurungkan.</string>
     <string name="osmand_cloud_delete_account_confirmation">Hapus akun\?</string>
@@ -5475,7 +5475,7 @@
     <string name="widget_available_ram">RAM yang tersedia</string>
     <string name="terrain_maps">Peta medan</string>
     <string name="sort_country_name_descending">Nama negara: Z–A</string>
-    <string name="delete_map_description">Apakah Anda yakin ingin menghapus peta %1$s\?</string>
+    <string name="delete_map_description">Apakah Anda yakin ingin menghapus peta %1$s?</string>
     <string name="maps_and_resources">Peta &amp; Sumber Daya</string>
     <string name="shared_string_show_icon">Tampilkan ikon</string>
     <string name="smart_folder_name_present">Folder pintar sudah ada</string>
@@ -5491,7 +5491,7 @@
     <string name="no_config_smart_folder_title">Tidak ada yang diatur</string>
     <string name="discard_filter_changes">Abaikan perubahan penyaring</string>
     <string name="shared_string_loading">Memuat</string>
-    <string name="discard_filter_changes_prompt">Apakah Anda yakin ingin mengatur ulang semua saringan\?</string>
+    <string name="discard_filter_changes_prompt">Apakah Anda yakin ingin mengatur ulang semua saringan?</string>
     <string name="no_config_smart_folder_description">Folder pintar memungkinkan untuk mengelompokkan trek berdasarkan saringan yang diterapkan</string>
     <string name="loading_tracks">Memuat ulang trek</string>
     <string name="searching_matching_tracks">Cari semua trek yang cocok</string>
