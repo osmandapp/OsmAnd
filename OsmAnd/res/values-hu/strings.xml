@@ -5588,4 +5588,10 @@
     <string name="any_connected_with_device">Bármelyik csatlakozva: %s</string>
     <string name="shared_string_road_maps">Útitérképek</string>
     <string name="shared_string_all_tracks">Minden nyomvonal</string>
+    <string name="shared_string_license">Licenc</string>
+    <string name="shared_string_link">Hivatkozás</string>
+    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_author">Szerző</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_extensions">Bővítmények</string>
 </resources>
