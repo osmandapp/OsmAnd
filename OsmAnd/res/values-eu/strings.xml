@@ -4673,7 +4673,7 @@
     <string name="coordinates_widget_map_center_desc">Uneko maparen erdigunearen koordenatu geografikoak erakusten ditu</string>
     <string name="coordinates_widget_current_location">Koordenatuak: uneko kokapena</string>
     <string name="available_as_part_of_subscription_plan">%1$s harpidetzaren barruan eskuragarri.</string>
-    <string name="favorite_confirm_delete_group">Ziur \"%1$s\" taldea eta sartutako puntu guztiak (%2$d) ezabatu nahi dituzula\?</string>
+    <string name="favorite_confirm_delete_group">Ziur \"%1$s\" taldea eta sartutako puntu guztiak (%2$d) ezabatu nahi dituzula?</string>
     <string name="weather_pressure_hectopascals">Hektopascalak</string>
     <string name="weather_pressure_inches_of_mercury">Hazbete merkurio</string>
     <string name="show_map_symbols_desc">Testua, bide seinaleak eta beste.</string>
@@ -5164,7 +5164,7 @@
     <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LE eta ANT+ sentsoreak OsmAnd-ekin parekatu ditzakezu.</string>
     <string name="external_device_forget_sensor">Ahaztu sentsorea</string>
     <string name="rendering_attr_lightDetail_name">Argitasuna</string>
-    <string name="nav_profile_confirm_delete">Ziur \"%1$s\" ezabatu nahi duzula\?</string>
+    <string name="nav_profile_confirm_delete">Ziur \"%1$s\" ezabatu nahi duzula?</string>
     <string name="no_bt_permission">Ez da Bluetooth baimenik eman</string>
     <string name="beats_per_minute_short">Taupadak minutuko</string>
     <string name="shared_string_chest">Bularra</string>
@@ -5227,7 +5227,7 @@
 \n
 \nGailuko datu guztiak ukitu gabe geratuko dira.</string>
     <string name="relief_3d_description">Eduki eta behatu zure auzoko edo kontinente osoko maketa.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Ziur OsmAnd Cloud kontua ezabatu nahi duzula\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Ziur OsmAnd Cloud kontua ezabatu nahi duzula?
 \n
 \nEkintza hau ezin da desegin.</string>
     <string name="osmand_cloud_delete_account_confirmation">Kontua ezabatu\?</string>
@@ -5237,7 +5237,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">OsmAnd Cloud-en datu guztiak %1$s izango dira. Gailuko datuak ukitu gabe geratuko dira.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Horrek ez du zure OsmAnd Pro harpidetza bertan behera utziko.</string>
     <string name="manage_subscriptions">Kudeatu harpidetzak.</string>
-    <string name="delete_account_warning">Ziur %1$s kontua ezabatu nahi duzula\?</string>
+    <string name="delete_account_warning">Ziur %1$s kontua ezabatu nahi duzula?</string>
     <string name="shared_string_deleting">Ezabatzen</string>
     <string name="deleting_complete">Ezabatzea osatu da</string>
     <string name="delete_account">Ezabatu kontua</string>
