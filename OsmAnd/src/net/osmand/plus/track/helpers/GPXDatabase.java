@@ -39,13 +39,12 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	public static final int DB_VERSION = 17;
+	private static final int DB_VERSION = 17;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
 
 	private static final String TMP_NAME_COLUMN_COUNT = "itemsCount";
-	private static final String TMP_NAME_COLUMN_NOT_NULL = "nonnull";
 
 	public static final long UNKNOWN_TIME_THRESHOLD = 10;
 
@@ -362,5 +361,9 @@ public class GPXDatabase {
 			}
 		}
 		return null;
+	}
+
+	public static int createDataVersion(int analysisVersion) {
+		return (DB_VERSION << 10) + analysisVersion;
 	}
 }

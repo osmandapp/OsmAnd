@@ -78,8 +78,8 @@ open class RangeTrackFilter<T : Comparable<T>>(
 		val baseValue = getComparableValue(
 			trackFilterType.measureUnitType.getBaseValueFromFormatted(
 				app,
-				to)).toString()
-		setValueTo(getValueFromString(baseValue), updateListeners)
+				to))
+		setValueTo(baseValue, updateListeners)
 	}
 
 	fun setValueFrom(from: String, updateListeners: Boolean = true) {

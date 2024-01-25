@@ -89,7 +89,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
 						}
 						setupNearestCityName(item);
-						item.setParameter(GpxParameter.DATA_VERSION, GPXTrackAnalysis.ANALYSIS_VERSION + GPXDatabase.DB_VERSION);
+						item.setParameter(GpxParameter.DATA_VERSION, GPXDatabase.createDataVersion(GPXTrackAnalysis.ANALYSIS_VERSION));
 						gpxDbHelper.updateDataItem(item);
 					}
 					if (listener != null) {

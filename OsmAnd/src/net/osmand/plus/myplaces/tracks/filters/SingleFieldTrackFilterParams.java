@@ -22,7 +22,7 @@ public class SingleFieldTrackFilterParams {
 	}
 
 	@Nullable
-	Drawable getAllItemIcon(OsmandApplication app, boolean isChecked, boolean nightMode) {
+	Drawable getAllItemsIcon(OsmandApplication app, boolean isChecked, boolean nightMode) {
 		return null;
 	}
 

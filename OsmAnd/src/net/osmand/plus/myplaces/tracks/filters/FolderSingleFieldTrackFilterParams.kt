@@ -20,7 +20,7 @@ class FolderSingleFieldTrackFilterParams : SingleFieldTrackFilterParams() {
 			app.getColor(R.color.icon_color_default_light))
 	}
 
-	override fun getAllItemIcon(
+	override fun getAllItemsIcon(
 		app: OsmandApplication,
 		isChecked: Boolean,
 		nightMode: Boolean): Drawable? {

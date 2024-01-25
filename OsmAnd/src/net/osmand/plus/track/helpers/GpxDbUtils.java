@@ -197,7 +197,7 @@ public class GpxDbUtils {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
 			return !item.hasData() || analysis == null
-					|| GPXTrackAnalysis.ANALYSIS_VERSION + GPXDatabase.DB_VERSION > (int) item.getParameter(DATA_VERSION)
+					|| GPXDatabase.createDataVersion(GPXTrackAnalysis.ANALYSIS_VERSION) > (int) item.getParameter(DATA_VERSION)
 					;
 		}
 		return true;

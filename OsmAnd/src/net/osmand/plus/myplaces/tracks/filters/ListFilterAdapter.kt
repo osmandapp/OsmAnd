@@ -133,7 +133,7 @@ class ListFilterAdapter(
 				}
 				isSelectAllItemsBeingSet = false
 				holder.icon.setImageDrawable(
-					filter.collectionFilterParams.getAllItemIcon(app,
+					filter.collectionFilterParams.getAllItemsIcon(app,
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
 				holder.switch.setOnCheckedChangeListener { _, isChecked ->
@@ -163,7 +163,7 @@ class ListFilterAdapter(
 	}
 
 	override fun getItemCount(): Int {
-		val correctionForSelectAllItem = getIndexCorrectionForSelectAllItem()
+		val correctionForSelectAllItem = if (hasSelectAllVariant()) 1 else 0
 		return if (showAllItems) {
 			items.size
 		} else if (items.size > MIN_VISIBLE_COUNT) {
@@ -179,7 +179,7 @@ class ListFilterAdapter(
 	override fun getItemViewType(position: Int): Int {
 		return if (showAllItems) {
 			ITEM_TYPE
-		} else if (position == 0 && filter.collectionFilterParams.hasSelectAllVariant()) {
+		} else if (position == 0 && hasSelectAllVariant()) {
 			SELECT_ALL_ITEM_TYPE
 		} else if (position == itemCount - 1 && items.size > MIN_VISIBLE_COUNT + additionalItems.size) {
 			SHOW_ALL_ITEM_TYPE
@@ -189,7 +189,7 @@ class ListFilterAdapter(
 	}
 
 	private fun getItem(position: Int): String {
-		val correctionForSelectAllItem = getIndexCorrectionForSelectAllItem()
+		val correctionForSelectAllItem = if (hasSelectAllVariant()) 1 else 0
 		return if (showAllItems) {
 			items[position]
 		} else if (position - correctionForSelectAllItem < MIN_VISIBLE_COUNT) {
@@ -199,11 +199,11 @@ class ListFilterAdapter(
 		}
 	}
 
-	private fun getIndexCorrectionForSelectAllItem() = if (filter.collectionFilterParams.hasSelectAllVariant()) 1 else 0
+	private fun hasSelectAllVariant() = filter.collectionFilterParams.hasSelectAllVariant()
 
 	override fun setNewSelectedItems(newSelectedItems: List<String>) {
 		val additionalItems = ArrayList<String>()
-		val correctionForSelectAllItem = getIndexCorrectionForSelectAllItem()
+		val correctionForSelectAllItem = if (hasSelectAllVariant()) 1 else 0
 		for (selectedItem in newSelectedItems) {
 			if (items.indexOf(selectedItem) + correctionForSelectAllItem >= MIN_VISIBLE_COUNT) {
 				additionalItems.add(selectedItem)

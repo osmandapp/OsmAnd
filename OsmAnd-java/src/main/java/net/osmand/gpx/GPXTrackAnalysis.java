@@ -37,7 +37,7 @@ public class GPXTrackAnalysis {
 	public long timeMovingWithoutGaps = 0;
 	public float totalDistanceMovingWithoutGaps = 0;
 
-	private final Map<GpxParameter, Object> paramaters = new HashMap<>();
+	private final Map<GpxParameter, Object> parameters = new HashMap<>();
 
 	public double minHdop = Double.NaN;
 	public double maxHdop = Double.NaN;
@@ -60,14 +60,14 @@ public class GPXTrackAnalysis {
 
 	public Object getGpxParameter(GpxParameter gpxParameter) {
 		Object value = gpxParameter.getDefaultValue();
-		if (paramaters.containsKey(gpxParameter)) {
-			value = paramaters.get(gpxParameter);
+		if (parameters.containsKey(gpxParameter)) {
+			value = parameters.get(gpxParameter);
 		}
 		return value;
 	}
 
 	public void setGpxParameter(GpxParameter gpxParameter, Object value) {
-		paramaters.put(gpxParameter, value);
+		parameters.put(gpxParameter, value);
 	}
 
 	public void setStartTime(long startTime) {
