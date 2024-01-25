@@ -944,7 +944,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	private void moveMapToLatLon(double lat, double lon) {
-		view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
+		view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom());
 	}
 
 	public void moveMapToPoint(int pos) {
