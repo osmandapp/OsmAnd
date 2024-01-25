@@ -4720,7 +4720,7 @@
     <string name="goods_delivery_desc">Kjøretøy som transporterer varer kan ha begrenset tilgang til noen veier.</string>
     <string name="included_in_your_current_plan">Inkludert i din nåværende «%1$s»-plan</string>
     <string name="available_as_part_of_subscription_plan">Tilgjengelig som del av %1$s-abonnementet.</string>
-    <string name="favorite_confirm_delete_group">Vil du slette gruppen \"%1$s\" og alle dens punkter (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Vil du slette gruppen \"%1$s\" og alle dens punkter (%2$d)?</string>
     <string name="favorite_delete_group">Slett gruppe</string>
     <string name="display_position">Vis posisjon</string>
     <string name="download_heightmap_maps">Høydekart</string>
@@ -5156,7 +5156,7 @@
 \n– At denne enheten befinner seg nærme sensoren</string>
     <string name="is_imported">%1$s importert.</string>
     <string name="file_already_exists_description">«%1$s». En fil med dette navnet finnes allerede. Å erstatte vil overskrive alle endringer gjort med gjeldende versjon.</string>
-    <string name="nav_profile_confirm_delete">Er du sikker på at du vil slette «%1$s»\?</string>
+    <string name="nav_profile_confirm_delete">Er du sikker på at du vil slette «%1$s»?</string>
     <string name="file_already_exists">Filen finnes allerede</string>
     <string name="no_search_results">Resultatløst</string>
     <string name="search_track_by_name">Søk etter spor ved navn</string>
@@ -5206,7 +5206,7 @@
     <string name="shared_string_wrist">Håndledd</string>
     <string name="shared_string_chest">Bryst</string>
     <string name="deleting_complete">Sletting fullført</string>
-    <string name="delete_account_warning">Er du sikker på at du vil slette kontoen %1$s\?</string>
+    <string name="delete_account_warning">Er du sikker på at du vil slette kontoen %1$s?</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengstoff</string>
     <string name="shared_string_class">Klasse</string>
     <string name="dangerous_goods_description">På noen veier og i noen tunneller er transport av farlige materialer forbudt.</string>
@@ -5278,7 +5278,7 @@
     <string name="no_bt_permission">Blåtannstilgang ikke innvilget</string>
     <string name="beats_per_minute_short">slag per minutt</string>
     <string name="may_be_used_if_there_is_shortcut">Kan brukes hvis det finnes en snarvei</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Vil du slette din OsmAnd-sky for godt\?</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Vil du slette din OsmAnd-sky for godt?</string>
     <string name="rendering_value_small_name">Liten</string>
     <string name="rssi_widget_desc">Viser RSSI-nivå for din eksterne enhet.</string>
     <string name="free_ride">Gratis tur</string>
@@ -5391,7 +5391,7 @@
     <string name="widget_available_ram">Tilgjengelig RAM</string>
     <string name="terrain_maps">Terrengkart</string>
     <string name="sort_country_name_descending">Landets navn: Å – A</string>
-    <string name="delete_map_description">Er du sikker på at du vil slette kartet %1$s\?</string>
+    <string name="delete_map_description">Er du sikker på at du vil slette kartet %1$s?</string>
     <string name="maps_and_resources">Kart &amp; Ressurser</string>
     <string name="smart_folder_name_present">Slik en smart-mappe finnes allerede</string>
     <string name="smart_folder_saved">Smart-mappe lagret</string>
