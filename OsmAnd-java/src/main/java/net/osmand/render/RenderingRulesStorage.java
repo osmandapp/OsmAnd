@@ -565,8 +565,8 @@ public class RenderingRulesStorage {
 
 	public static void main(String[] args) throws XmlPullParserException, IOException {
 		STORE_ATTRIBUTES = true;
-		File styleFile;
-		String styleName;
+		final File styleFile;
+		final String styleName;
 		InputStream defaultIS;
 		if (args.length > 0) {
 			styleFile = new File(args[0]);
@@ -575,7 +575,7 @@ public class RenderingRulesStorage {
 		} else {
 			File stylesDir = new File(System.getProperty("repo.dir") + "/resources/rendering_styles/");
 			defaultIS = new FileInputStream(new File(stylesDir, "default.render.xml"));
-			styleName = "default";
+//			styleName = "default";
 			styleName = "topo";
 			styleFile = new File(stylesDir, styleName +".render.xml");
 		}
