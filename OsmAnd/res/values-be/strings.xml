@@ -4762,7 +4762,7 @@
     <string name="attach_roads_descr">Падладзьце свой след да дазволеных дарог, каб пракласці маршрут паміж пунктамі, і прывяжыце інструкцыі маршруту да следу.</string>
     <string name="available_as_part_of_subscription_plan">Даступна як частка падпіскі %1$s.</string>
     <string name="included_in_your_current_plan">Уключана ў ваш бягучы тарыфны план \"%1$s\"</string>
-    <string name="favorite_confirm_delete_group">Сапраўды хочаце выдаліць групу %1$s і ўсе ўключаныя пункты (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Сапраўды хочаце выдаліць групу %1$s і ўсе ўключаныя пункты (%2$d)?</string>
     <string name="favorite_delete_group">Выдаліць групу</string>
     <string name="download_heightmap_maps">Мапа вышынь</string>
     <string name="display_position">Паказваць пазіцыю</string>
@@ -4998,11 +4998,11 @@
     <string name="osmand_cloud_deleting_account_descr">Праз некалькі хвілін усе вашы даныя і ўліковы запіс будуць выдалены з OsmAnd Cloud.
 \n
 \nУсе даныя на прыладзе застануцца некранутымі.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Вы ўпэўнены, што хочаце выдаліць уліковы запіс OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Вы ўпэўнены, што хочаце выдаліць уліковы запіс OsmAnd Cloud?
 \n
 \nГэта дзеянне нельга скасаваць.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Усе даныя з OsmAnd Cloud будуць %1$s. Даныя на прыладзе застануцца некранутымі.</string>
-    <string name="delete_account_warning">Вы сапраўды хочаце выдаліць уліковы запіс %1$s\?</string>
+    <string name="delete_account_warning">Вы сапраўды хочаце выдаліць уліковы запіс %1$s?</string>
     <string name="delete_account">Выдаліць уліковы запіс</string>
     <string name="slope_legend_description">Карта схілаў выкарыстоўвае колеры для візуалізацыі крутасці рэльефу. Вы можаце прачытаць больш пра карту схілаў у %1$s.</string>
     <string name="external_device_characteristic_heart_rate">Частата сардэчнага рытму</string>
@@ -5046,7 +5046,7 @@
     <string name="speak_route_deviation">Апавясціць аб адхіленні ад маршруту</string>
     <string name="app_mode_climbing">Скалалазанне</string>
     <string name="external_device_details_received_data">Атрыманыя даныя</string>
-    <string name="nav_profile_confirm_delete">Вы сапраўды хочаце выдаліць \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Вы сапраўды хочаце выдаліць \"%1$s\"?</string>
     <string name="external_device_low_battery">Нізкі зарад батарэі</string>
     <string name="file_already_exists_description">\"%1$s\". Файл з такой назвай ужо існуе. Замена перазапіша ўсе змяненні, зробленыя ў бягучай версіі.</string>
     <string name="file_already_exists">Файл ужо існуе</string>
