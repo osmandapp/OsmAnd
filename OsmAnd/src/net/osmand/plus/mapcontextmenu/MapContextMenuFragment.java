@@ -174,6 +174,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private boolean zoomIn;
 
 	private boolean created;
+	private boolean destroyed;
 
 	private boolean transportBadgesCreated;
 
@@ -1359,6 +1360,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		destroyed = true;
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
 	}
@@ -1822,7 +1824,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			altitudeLayout.setVisibility(View.GONE);
 
 			menu.getFormattedAltitude(formattedAltitude -> {
-				if (!TextUtils.isEmpty(formattedAltitude)) {
+				if (!TextUtils.isEmpty(formattedAltitude) && !destroyed) {
 					AndroidUiHelper.updateVisibility(altitudeSeparator, addSeparator);
 
 					tvAltitude.setText(formattedAltitude);
