@@ -384,4 +384,14 @@ public class ColorUtilities {
 	public static int getOsmandIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 	}
+
+	@ColorInt
+	public static int getWarningColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getWarningColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getWarningColorId(boolean nightMode) {
+		return R.color.deletion_color_warning;
+	}
 }
