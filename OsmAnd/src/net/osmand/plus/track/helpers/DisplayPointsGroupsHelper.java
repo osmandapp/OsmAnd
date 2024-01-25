@@ -133,7 +133,7 @@ public class DisplayPointsGroupsHelper {
 		Collections.sort(categories, comparator);
 		for (String category : categories) {
 			List<GpxDisplayItem> values = itemsMap.get(category);
-			GpxDisplayGroup categoryGroup = new GpxDisplayGroup(group);
+			GpxDisplayGroup categoryGroup = group.copy();
 			categoryGroup.setName(category);
 			for (GpxDisplayItem i : values) {
 				if (i.locationStart != null && i.locationStart.getColor() != 0) {

@@ -125,7 +125,7 @@ public class TrackDisplayHelper {
 		displayGroups = displayHelper.collectDisplayGroups(selectedGpxFile, gpx, true);
 		originalGroups.clear();
 		for (GpxDisplayGroup group : displayGroups) {
-			originalGroups.add(new GpxDisplayGroup(group));
+			originalGroups.add(group.copy());
 		}
 	}
 

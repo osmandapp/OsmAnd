@@ -4,6 +4,8 @@ import static net.osmand.plus.track.GpxSplitType.DISTANCE;
 import static net.osmand.plus.track.GpxSplitType.NO_SPLIT;
 import static net.osmand.plus.track.GpxSplitType.TIME;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,40 +13,29 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GpxDisplayGroup {
+public abstract class GpxDisplayGroup {
 
 	private final GPXFile gpxFile;
 
-	private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
 	private List<GpxDisplayItem> displayItems = new ArrayList<>();
-	private int index;
 	private String gpxName;
 	private String name;
 	private String description;
 	private Track track;
+	private int index = -1;
 	private double splitDistance = -1;
 	private int splitTime = -1;
 	private int color;
 	private boolean generalTrack;
 
-	public GpxDisplayGroup(@NonNull GPXFile gpxFile) {
+	GpxDisplayGroup(@NonNull GPXFile gpxFile, int index) {
 		this.gpxFile = gpxFile;
-	}
-
-	public GpxDisplayGroup(@NonNull GpxDisplayGroup group) {
-		index = group.index;
-		gpxFile = group.gpxFile;
-		type = group.type;
-		name = group.name;
-		description = group.description;
-		track = group.track;
-		displayItems = new ArrayList<>(group.displayItems);
+		this.index = index;
 	}
 
 	@NonNull
@@ -60,6 +51,8 @@ public class GpxDisplayGroup {
 	public void setTrack(@Nullable Track track) {
 		this.track = track;
 	}
+
+	public abstract void applyName(@NonNull Context context, @NonNull String name);
 
 	public String getDescription() {
 		return description;
@@ -89,10 +82,6 @@ public class GpxDisplayGroup {
 		return index;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
 	@NonNull
 	public List<GpxDisplayItem> getDisplayItems() {
 		return new ArrayList<>(displayItems);
@@ -104,14 +93,6 @@ public class GpxDisplayGroup {
 
 	public void clearDisplayItems() {
 		displayItems = new ArrayList<>();
-	}
-
-	public GpxDisplayItemType getType() {
-		return type;
-	}
-
-	public void setType(GpxDisplayItemType type) {
-		this.type = type;
 	}
 
 	public boolean isSplitDistance() {
@@ -158,4 +139,18 @@ public class GpxDisplayGroup {
 	public void setGeneralTrack(boolean generalTrack) {
 		this.generalTrack = generalTrack;
 	}
+
+	public abstract GpxDisplayItemType getType();
+
+	@NonNull
+	public GpxDisplayGroup copy() {
+		GpxDisplayGroup copy = newInstance(gpxFile, index);
+		copy.name = name;
+		copy.description = description;
+		copy.track = track;
+		copy.displayItems = new ArrayList<>(displayItems);
+		return copy;
+	}
+
+	protected abstract GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile, int index);
 }
