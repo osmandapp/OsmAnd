@@ -2979,7 +2979,7 @@
     <string name="sync_now">지금 동기화</string>
     <string name="local_changes">로컬 변경</string>
     <string name="rendering_attr_alpineHiking_description">경로의 난이도 분류 유형입니다.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud 계정을 삭제하시겠습니까\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud 계정을 삭제하시겠습니까?
 \n
 \n이 작업은 취소할 수 없습니다.</string>
     <string name="osmand_cloud_delete_account_confirmation">계정 탈퇴\?</string>
