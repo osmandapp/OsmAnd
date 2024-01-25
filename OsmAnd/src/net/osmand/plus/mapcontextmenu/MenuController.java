@@ -497,8 +497,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			OsmandApplication app = activity.getMyApplication();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
-			NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon(),
-					altitude -> callback.onResult(OsmAndFormatter.getFormattedAlt(altitude, app)));
+			NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon(), altitude -> {
+				if (altitude != null) {
+					callback.onResult(OsmAndFormatter.getFormattedAlt(altitude, app));
+				} else {
+					callback.onResult(null);
+				}
+			});
 		} else {
 			callback.onResult(null);
 		}
