@@ -256,7 +256,7 @@ public class WaypointHelper {
 					} else {
 						distanceByRoute = route.getDistanceToPoint(lastKnownLocation, inf.getLocationIndex() - 1);
 					}
-					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_SHORT_PNT_APPROACH)) { // TODO or STATE_LONG_PNT_APPROACH
+					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_LONG_PNT_APPROACH)) {
 						// break once first future alarm is far away as others will be also far away
 						break;
 					}
@@ -384,9 +384,6 @@ public class WaypointHelper {
 					while (kIterator < lp.size() && lp.get(kIterator).routeIndex < currentRoute) {
 						if (type == ALARMS) {
 							AlarmInfo alarm = (AlarmInfo) lp.get(kIterator).getPoint();
-							// TODO test tunnels that alarm in the tunnel works correctly
-							// if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() < currentRoute) { same condition
-
 							if (alarm.getLastLocationIndex() >= currentRoute) {
 								break;
 							}
@@ -401,13 +398,9 @@ public class WaypointHelper {
 					float atdSpeed = atd.getSpeed(lastKnownLocation);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
-						if (type == ALARMS && lwp.routeIndex < currentRoute) {
-							kIterator++;
-							continue;
-						}
 						if (lwp.announce) {
 							if (!atd.isTurnStateActive(atdSpeed,
-									route.getDistanceToPoint(lwp.routeIndex) / 2, STATE_LONG_PNT_APPROACH)) {
+									route.getDistanceToPoint(lwp.routeIndex) / 2f, STATE_LONG_PNT_APPROACH)) {
 								break;
 							}
 							LocationPoint point = lwp.point;
@@ -425,6 +418,10 @@ public class WaypointHelper {
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
 								AlarmInfo alarm = (AlarmInfo) point;
 								AlarmInfoType t = alarm.getType();
+								if (beforeTunnelEntrance(currentRoute, alarm)) {
+									kIterator++;
+									continue;
+								}
 								int announceRadius;
 								boolean filterCloseAlarms = false;
 								switch (t) {
@@ -509,6 +506,9 @@ public class WaypointHelper {
 		}
 	}
 
+	private static boolean beforeTunnelEntrance(int currentRoute, AlarmInfo alarm) {
+		return alarm.getLocationIndex() > currentRoute && alarm.getLastLocationIndex() > currentRoute;
+	}
 
 	protected VoiceRouter getVoiceRouter() {
 		return app.getRoutingHelper().getVoiceRouter();
