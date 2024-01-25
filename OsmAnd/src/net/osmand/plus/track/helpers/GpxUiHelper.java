@@ -575,7 +575,7 @@ public class GpxUiHelper {
 	@Nullable
 	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                                @NonNull ChartPointLayer chartPointLayer, @Nullable GPXTrackAnalysis analysis) {
-		GpxDisplayGroup group;
+		TrackDisplayGroup group;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			group = app.getGpxDisplayHelper().buildTrackDisplayGroup(gpxFile);
 			if (analysis == null) {

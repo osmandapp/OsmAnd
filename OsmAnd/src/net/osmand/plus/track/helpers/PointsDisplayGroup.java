@@ -21,12 +21,14 @@ class PointsDisplayGroup extends GpxDisplayGroup {
 	}
 
 	@Override
+	@NonNull
 	public GpxDisplayItemType getType() {
 		return GpxDisplayItemType.TRACK_POINTS;
 	}
 
 	@Override
-	protected GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile, int index) {
+	@NonNull
+	protected GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile) {
 		return new PointsDisplayGroup(gpxFile);
 	}
 

@@ -128,7 +128,8 @@ public class DisplayPointsGroupsHelper {
 		return itemsMapFiltered;
 	}
 
-	private void setCollectedItems(GpxDisplayGroup group, Map<String, List<GpxDisplayItem>> itemsMap) {
+	private void setCollectedItems(@NonNull GpxDisplayGroup group,
+	                               @NonNull Map<String, List<GpxDisplayItem>> itemsMap) {
 		List<String> categories = new ArrayList<>(itemsMap.keySet());
 		Collections.sort(categories, comparator);
 		for (String category : categories) {

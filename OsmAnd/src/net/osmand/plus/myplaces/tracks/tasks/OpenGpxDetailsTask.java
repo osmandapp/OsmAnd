@@ -62,16 +62,14 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	@NonNull
 	private GpxDisplayGroup buildGeneralGpxDisplayGroup(@NonNull GPXFile gpxFile, @NonNull Track track) {
 		String name = GpxDisplayHelper.getGroupName(app, gpxFile);
-		GpxDisplayGroup group = new TrackDisplayGroup(gpxFile);
+		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, true);
 		group.applyName(app, name);
 		group.setColor(track.getColor(gpxFile.getColor(0)));
-		group.setTrack(track);
 		String description = "";
 		if (track.name != null && !track.name.isEmpty()) {
 			description = track.name + " " + description;
 		}
 		group.setDescription(description);
-		group.setGeneralTrack(true);
 		SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
 		return group;
 	}

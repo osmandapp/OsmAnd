@@ -24,12 +24,14 @@ class RouteDisplayGroup extends GpxDisplayGroup {
 	}
 
 	@Override
+	@NonNull
 	public GpxDisplayItemType getType() {
 		return GpxDisplayItemType.TRACK_ROUTE_POINTS;
 	}
 
 	@Override
-	protected GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile, int index) {
-		return new RouteDisplayGroup(gpxFile, index);
+	@NonNull
+	protected GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile) {
+		return new RouteDisplayGroup(gpxFile, getIndex());
 	}
 }

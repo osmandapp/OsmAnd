@@ -64,7 +64,7 @@ public class GpxDisplayHelper {
 		String name = getGroupName(app, gpxFile);
 		if (gpxFile.tracks.size() > 0) {
 			for (int i = 0; i < gpxFile.tracks.size(); i++) {
-				GpxDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name);
+				TrackDisplayGroup group = buildTrackDisplayGroup(gpxFile, i, name);
 				if (processTrack) {
 					SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
 				}
@@ -87,23 +87,21 @@ public class GpxDisplayHelper {
 	}
 
 	@NonNull
-	public GpxDisplayGroup buildTrackDisplayGroup(@NonNull GPXFile gpxFile) {
+	public TrackDisplayGroup buildTrackDisplayGroup(@NonNull GPXFile gpxFile) {
 		return buildTrackDisplayGroup(gpxFile, 0, "");
 	}
 
 	@NonNull
-	private GpxDisplayGroup buildTrackDisplayGroup(@NonNull GPXFile gpxFile, int trackIndex, @NonNull String name) {
-		Track t = gpxFile.tracks.get(trackIndex);
-		GpxDisplayGroup group = new TrackDisplayGroup(gpxFile, trackIndex);
+	private TrackDisplayGroup buildTrackDisplayGroup(@NonNull GPXFile gpxFile, int trackIndex, @NonNull String name) {
+		Track track = gpxFile.tracks.get(trackIndex);
+		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, track.generalTrack, trackIndex);
 		group.applyName(app, name);
-		group.setColor(t.getColor(gpxFile.getColor(0)));
-		group.setTrack(t);
+		group.setColor(track.getColor(gpxFile.getColor(0)));
 		String description = "";
-		if (t.name != null && !t.name.isEmpty()) {
-			description = t.name + " " + description;
+		if (track.name != null && !track.name.isEmpty()) {
+			description = track.name + " " + description;
 		}
 		group.setDescription(description);
-		group.setGeneralTrack(t.generalTrack);
 		return group;
 	}
 

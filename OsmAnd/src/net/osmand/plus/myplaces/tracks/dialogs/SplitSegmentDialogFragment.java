@@ -1,5 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
+
 import android.app.Dialog;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
@@ -44,6 +46,7 @@ import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -374,12 +377,14 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void addOptionSplit(int value, boolean distance, List<GpxDisplayGroup> model) {
+		GpxDisplayGroup group = model.get(0);
+		TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
 		if (distance) {
 			double dvalue = OsmAndFormatter.calculateRoundedDist(value, app);
 			options.add(OsmAndFormatter.getFormattedDistance((float) dvalue, app));
 			distanceSplit.add(dvalue);
 			timeSplit.add(-1);
-			if (Math.abs(model.get(0).getSplitDistance() - dvalue) < 1) {
+			if (trackGroup != null && Math.abs(trackGroup.getSplitDistance() - dvalue) < 1) {
 				selectedSplitInterval = distanceSplit.size() - 1;
 			}
 		} else {
@@ -392,7 +397,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			}
 			distanceSplit.add(-1d);
 			timeSplit.add(value);
-			if (model.get(0).getSplitTime() == value) {
+			if (trackGroup != null && trackGroup.getSplitTime() == value) {
 				selectedSplitInterval = distanceSplit.size() - 1;
 			}
 		}
@@ -404,13 +409,16 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		List<GpxDisplayGroup> result = displayHelper.getGpxFile(true);
 		if (result != null && result.size() > 0 && trkSegment.points.size() > 0) {
 			for (GpxDisplayGroup group : result) {
-				splitSegments.addAll(collectDisplayItemsFromGroup(group));
+				TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
+				if (trackGroup != null) {
+					splitSegments.addAll(collectDisplayItemsFromGroup(trackGroup));
+				}
 			}
 		}
 		return splitSegments;
 	}
 
-	private List<GpxDisplayItem> collectDisplayItemsFromGroup(GpxDisplayGroup group) {
+	private List<GpxDisplayItem> collectDisplayItemsFromGroup(@NonNull TrackDisplayGroup group) {
 		List<GpxDisplayItem> splitSegments = new ArrayList<>();
 		boolean generalTrack = gpxItem.isGeneralTrack();
 		boolean generalGroup = group.isGeneralTrack();
@@ -450,6 +458,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		@Override
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			GpxDisplayItem currentGpxDisplayItem = getItem(position);
+			TrackDisplayGroup trackGroup = null;
+			if (currentGpxDisplayItem != null) {
+				trackGroup = getTrackDisplayGroup(currentGpxDisplayItem.group);
+			}
 			FragmentActivity trackActivity = requireActivity();
 			if (convertView == null) {
 				convertView = trackActivity.getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
@@ -479,7 +491,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			} else {
 				if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
 					overviewTextView.setTextColor(app.getColor(activeColorId));
-					if (currentGpxDisplayItem.group.isSplitDistance()) {
+					if (trackGroup != null && trackGroup.isSplitDistance()) {
 						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, activeColorId));
 						overviewTextView.setText("");
 						double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.totalDistance;
@@ -487,7 +499,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
 						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.points + ")");
-					} else if (currentGpxDisplayItem.group.isSplitTime()) {
+					} else if (trackGroup != null && trackGroup.isSplitTime()) {
 						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 						overviewTextView.setText("");
 						double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.timeSpan / 1000);
@@ -529,7 +541,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {
-						if (currentGpxDisplayItem.group.isSplitDistance()) {
+						if (trackGroup != null && trackGroup.isSplitDistance()) {
 							distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 							if (analysis.getDurationInMs() > 0) {
 								distanceOrTimeSpanValue.setText(Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
@@ -537,7 +549,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 								distanceOrTimeSpanValue.setText("-");
 							}
 							distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
-						} else if (currentGpxDisplayItem.group.isSplitTime()) {
+						} else if (trackGroup != null && trackGroup.isSplitTime()) {
 							distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 							distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 							distanceOrTimeSpanText.setText(app.getString(R.string.distance));
