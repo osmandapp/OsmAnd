@@ -4757,7 +4757,7 @@
     <string name="average_speed_skip_stops_desc">Hastigheder under %1$s vil blive medregnet og påvirke gennemsnitshastigheden.</string>
     <string name="included_in_your_current_plan">Inkluderet i dit nuværende \"%1$s\" abonnement</string>
     <string name="available_as_part_of_subscription_plan">Tilgængelig som en del af abonnementet %1$s.</string>
-    <string name="favorite_confirm_delete_group">Er du sikker på, at du ønsker at slette gruppen \"%1$s\" og alle inkluderede punkter (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Er du sikker på, at du ønsker at slette gruppen \"%1$s\" og alle inkluderede punkter (%2$d)?</string>
     <string name="favorite_delete_group">Slet gruppe</string>
     <string name="download_heightmap_maps">Højdekort</string>
     <string name="display_position">Vis position</string>
@@ -5172,7 +5172,7 @@
     <string name="ant_plus_pair_new_sensor">Par ny sensor</string>
     <string name="file_already_exists">Fil eksisterer allerede</string>
     <string name="file_already_exists_description">\"%1$s\". Der findes allerede en fil med dette navn. Hvis den erstattes, overskrives alle ændringer, der er foretaget med den aktuelle version.</string>
-    <string name="nav_profile_confirm_delete">Er du sikker på, at du vil slette \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Er du sikker på, at du vil slette \"%1$s\"?</string>
     <string name="is_imported">%1$s importeres.</string>
     <string name="no_search_results">Ingen resultater</string>
     <string name="search_track_by_name">Søg spor efter navn</string>
@@ -5237,7 +5237,7 @@
     <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.
 \n
 \nAlle data på enheden forbliver uberørte.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Er du sikker på, at du vil slette din OsmAnd Cloud-konto\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Er du sikker på, at du vil slette din OsmAnd Cloud-konto?
 \n
 \nDenne handling kan ikke fortrydes.</string>
     <string name="osmand_cloud_delete_account_confirmation">Slet konto\?</string>
@@ -5246,7 +5246,7 @@
     <string name="osmand_cloud_deletion_account_warning">Din konto og alle kontooplysninger vil blive %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Alle data fra OsmAnd Cloud vil blive %1$s. Data på enheden forbliver uberørt.</string>
     <string name="manage_subscriptions">Administrer abonnementer.</string>
-    <string name="delete_account_warning">Er du sikker på, at du vil slette %1$s konto\?</string>
+    <string name="delete_account_warning">Er du sikker på, at du vil slette %1$s konto?</string>
     <string name="shared_string_deleting">Sletter</string>
     <string name="deleting_complete">Sletning fuldført</string>
     <string name="delete_account">Slet konto</string>
@@ -5481,7 +5481,7 @@
     <string name="widget_available_ram">Tilgængelig RAM</string>
     <string name="terrain_maps">Terrænkort</string>
     <string name="sort_country_name_descending">Landenavn: Z – A</string>
-    <string name="delete_map_description">Er du sikker på, at du vil slette %1$s kort\?</string>
+    <string name="delete_map_description">Er du sikker på, at du vil slette %1$s kort?</string>
     <string name="maps_and_resources">Kort og ressourcer</string>
     <string name="shared_string_show_icon">Vis ikon</string>
     <string name="empty_name">Tomt navn</string>
@@ -5497,7 +5497,7 @@
     <string name="no_config_smart_folder_title">Ikke konfigureret</string>
     <string name="discard_filter_changes">Kassér filterændringer</string>
     <string name="shared_string_loading">Indlæser</string>
-    <string name="discard_filter_changes_prompt">Er du sikker på, at du vil nulstille alle filtre\?</string>
+    <string name="discard_filter_changes_prompt">Er du sikker på, at du vil nulstille alle filtre?</string>
     <string name="no_config_smart_folder_description">Smarte mapper gør det muligt at gruppere spor efter anvendte filtre</string>
     <string name="loading_tracks">Genindlæser spor</string>
     <string name="searching_matching_tracks">Søg alle matchende spor</string>
