@@ -5491,7 +5491,7 @@
     <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
     <string name="shared_string_loading">Betöltés</string>
     <string name="discard_filter_changes_prompt">Visszaállít minden szűrőt?</string>
-    <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
+    <string name="no_config_smart_folder_description">Az okosmappákkal szűrők alapján csoportosíthatók a nyomvonalak</string>
     <string name="loading_tracks">Nyomvonalak újratöltése</string>
     <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
     <plurals name="tracks">
