@@ -12,7 +12,7 @@ public class DisplayDialogButtonItem {
 	@StringRes
 	private int titleId;
 	private DialogButtonType buttonType = DialogButtonType.SECONDARY;
-	private IOnClickListener clickListener;
+	private IOnClickListener onClickListener;
 
 	@StringRes
 	public int getTitleId() {
@@ -36,14 +36,17 @@ public class DisplayDialogButtonItem {
 		return this;
 	}
 
-	@Nullable
-	public IOnClickListener getOnClickListener() {
-		return clickListener;
+	public void onButtonClick(@Nullable IOnClickListener alternative) {
+		if (onClickListener != null) {
+			onClickListener.onClick();
+		} else if (alternative != null) {
+			alternative.onClick();
+		}
 	}
 
 	@NonNull
 	public DisplayDialogButtonItem setOnClickListener(@Nullable IOnClickListener onClickListener) {
-		this.clickListener = onClickListener;
+		this.onClickListener = onClickListener;
 		return this;
 	}
 }

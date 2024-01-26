@@ -22,7 +22,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DialogExtra;
-import net.osmand.plus.base.dialog.interfaces.other.IOnClickListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -81,12 +80,7 @@ public class CustomizableQuestionV1BottomSheet extends CustomizableBottomSheet {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		IOnClickListener listener = getDialogButton(1).getOnClickListener();
-		if (listener != null) {
-			listener.onClick();
-		} else {
-			super.onRightBottomButtonClick();
-		}
+		getDialogButton(1).onButtonClick(super::onRightBottomButtonClick);
 	}
 
 	@Override
@@ -101,12 +95,7 @@ public class CustomizableQuestionV1BottomSheet extends CustomizableBottomSheet {
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		IOnClickListener listener = getDialogButton(2).getOnClickListener();
-		if (listener != null) {
-			listener.onClick();
-		} else {
-			super.onDismissButtonClickAction();
-		}
+		getDialogButton(2).onButtonClick(super::onDismissButtonClickAction);
 	}
 
 	@Override
@@ -121,12 +110,7 @@ public class CustomizableQuestionV1BottomSheet extends CustomizableBottomSheet {
 
 	@Override
 	protected void onThirdBottomButtonClick() {
-		IOnClickListener listener = getDialogButton(0).getOnClickListener();
-		if (listener != null) {
-			listener.onClick();
-		} else {
-			super.onThirdBottomButtonClick();
-		}
+		getDialogButton(0).onButtonClick(super::onThirdBottomButtonClick);
 	}
 
 	@Override
