@@ -324,7 +324,6 @@ public class RenderingRulesStorage {
 		}
 		
 		public void startElement(Map<String, String> attrsMap, String name) throws XmlPullParserException, IOException {
-			boolean stateChanged = false;
 			final boolean isCase = isCase(name);
 			final boolean isSwitch = isSwitch(name);
 			if(isCase || isSwitch){ //$NON-NLS-1$
@@ -566,18 +565,25 @@ public class RenderingRulesStorage {
 
 	public static void main(String[] args) throws XmlPullParserException, IOException {
 		STORE_ATTRIBUTES = true;
-//		InputStream is = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
-		final String stylesDir = System.getProperty("repo.dir") + "/resources/rendering_styles/";
-		String styleName = "topo";
-//		String styleName = "default";
-		if(args.length > 0) {
-			styleName = args[0];
+		final File styleFile;
+		final String styleName;
+		InputStream defaultIS;
+		if (args.length > 0) {
+			styleFile = new File(args[0]);
+			styleName = styleFile.getName().substring(0, styleFile.getName().indexOf('.'));
+			defaultIS = RenderingRulesStorage.class.getResourceAsStream("default.render.xml");
+		} else {
+			File stylesDir = new File(System.getProperty("repo.dir") + "/resources/rendering_styles/");
+			defaultIS = new FileInputStream(new File(stylesDir, "default.render.xml"));
+//			styleName = "default";
+			styleName = "topo";
+			styleFile = new File(stylesDir, styleName +".render.xml");
 		}
 		final Map<String, String> renderingConstants = new LinkedHashMap<String, String>();
-		InputStream is = new FileInputStream(stylesDir + "default.render.xml");
+		
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(is, "UTF-8");
+			parser.setInput(defaultIS, "UTF-8");
 			int tok;
 			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
@@ -591,7 +597,7 @@ public class RenderingRulesStorage {
 				}
 			}
 		} finally {
-			is.close();
+			defaultIS.close();
 		}
 		RenderingRulesStorage storage = new RenderingRulesStorage(styleName, renderingConstants);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
@@ -599,15 +605,16 @@ public class RenderingRulesStorage {
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException {
 				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingConstants);
 //				depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name + ".render.xml"), ref);
-				depends.parseRulesFromXmlInputStream(new FileInputStream(stylesDir + name + ".render.xml"), ref, false);
+				depends.parseRulesFromXmlInputStream(
+						new FileInputStream(new File(styleFile.getParentFile(), name + ".render.xml")), ref, false);
 				return depends;
 			}
 		};
 		
-		is = new FileInputStream(stylesDir + styleName + ".render.xml");
-		storage.parseRulesFromXmlInputStream(is, resolver, false);
-		if (stylesDir != null) {
-			for (File file : new File(stylesDir).listFiles()) {
+		defaultIS = new FileInputStream(styleFile);
+		storage.parseRulesFromXmlInputStream(defaultIS, resolver, false);
+		if (styleFile.getParentFile() != null) {
+			for (File file : styleFile.getParentFile().listFiles()) {
 				if (file.isFile() && file.getName().endsWith("addon.render.xml")) {
 					InputStream is3 = new FileInputStream(file);
 					storage.parseRulesFromXmlInputStream(is3, resolver, true);

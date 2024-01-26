@@ -4893,8 +4893,8 @@
     <string name="shared_string_eta">Procenjeno vreme</string>
     <string name="help_article_map_interact_with_map_name">Interakcija sa mapom</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Da li ste sigurni da želite izbrisati profil Oblaka OsmAnda? 
-\n 
+    <string name="osmand_cloud_delete_account_confirmation_descr">Da li ste sigurni da želite izbrisati profil Oblaka OsmAnda?
+\n
 \nOvo dejstvo ne može biti opozvano.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Ovo neće otkazati Vašu pretplatu na OsmAnd pro.</string>
     <string name="no_bt_permission">Dozvola Blututu nije odobrena</string>

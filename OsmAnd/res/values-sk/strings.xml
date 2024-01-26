@@ -4809,7 +4809,7 @@
     <string name="coordinates_widget_current_location">Súradnice: súčasná poloha</string>
     <string name="map_marker_interval_dialog_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť pre výpočet odhadovaného času príjazdu.</string>
     <string name="available_as_part_of_subscription_plan">Dostupné ako súčasť predplatného %1$s.</string>
-    <string name="favorite_confirm_delete_group">Naozaj chcete odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Naozaj chcete odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)?</string>
     <string name="coordinates_widget_map_center_desc">Zobrazuje zemepisné súradnice stredu mapy</string>
     <string name="included_in_your_current_plan">Zahrnuté vo vašom súčasnom predplatnom \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Ťuknite na mapu pre zobrazenie vzdialenosti medzi súčasnou polohou a označeným bodom.

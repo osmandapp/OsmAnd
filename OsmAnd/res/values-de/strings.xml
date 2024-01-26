@@ -4759,7 +4759,7 @@
     <string name="shared_string_only_missing">Nur fehlende</string>
     <string name="included_in_your_current_plan">In Ihrem aktuellen „%1$s“-Plan enthalten</string>
     <string name="available_as_part_of_subscription_plan">Verfügbar im Rahmen des %1$s Abonnements.</string>
-    <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe „%1$s“ und alle enthaltenen Punkte (%2$d) wirklich löschen\?</string>
+    <string name="favorite_confirm_delete_group">Möchten Sie die Gruppe „%1$s“ und alle enthaltenen Punkte (%2$d) wirklich löschen?</string>
     <string name="favorite_delete_group">Gruppe löschen</string>
     <string name="download_heightmap_maps">Höhenkarte</string>
     <string name="display_position">Positionsanzeige</string>
@@ -5172,7 +5172,7 @@
     <string name="ant_plus_searching_text_description">Bitte halten Sie das Gerät nahe an den Sensor. Sie müssen den Sensor aktivieren, damit OsmAnd ihn finden kann.</string>
     <string name="file_already_exists_description">„%1$s“. Eine Datei mit diesem Namen existiert bereits. Ersetzen überschreibt alle mit der aktuellen Version vorgenommenen Änderungen.</string>
     <string name="file_already_exists">Datei existiert bereits</string>
-    <string name="nav_profile_confirm_delete">Sind Sie sicher, dass Sie „%1$s“ löschen möchten\?</string>
+    <string name="nav_profile_confirm_delete">Sind Sie sicher, dass Sie „%1$s“ löschen möchten?</string>
     <string name="is_imported">%1$s ist importiert.</string>
     <string name="no_search_results">Keine Ergebnisse</string>
     <string name="search_track_by_name">Track nach Namen suchen</string>
@@ -5235,7 +5235,7 @@
     <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Ihr OsmAnd Pro-Abonnement wird dadurch nicht gekündigt.</string>
     <string name="manage_subscriptions">Abonnements verwalten.</string>
-    <string name="delete_account_warning">Sind Sie sicher, dass Sie das Konto %1$s löschen möchten\?</string>
+    <string name="delete_account_warning">Sind Sie sicher, dass Sie das Konto %1$s löschen möchten?</string>
     <string name="shared_string_deleting">Wird gelöscht</string>
     <string name="deleting_complete">Löschen abgeschlossen</string>
     <string name="delete_account">Konto löschen</string>
@@ -5247,7 +5247,7 @@
     <string name="osmand_cloud_deleting_account_descr">In Kürze werden alle Ihre Daten und Ihr Konto von OsmAnd Cloud gelöscht.
 \n
 \nAlle Daten auf dem Gerät bleiben unangetastet.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sind Sie sicher, dass Sie Ihr OsmAnd Cloud-Konto löschen möchten?
 \n
 \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Alle Daten von OsmAnd Cloud werden %1$s. Daten auf dem Gerät bleiben unangetastet.</string>
@@ -5440,7 +5440,7 @@
     <string name="widget_available_ram">Verfügbarer RAM</string>
     <string name="terrain_maps">Geländekarten</string>
     <string name="sort_country_name_descending">Landesname: Z – A</string>
-    <string name="delete_map_description">Sind Sie sicher, dass Sie die Karte %1$s löschen möchten\?</string>
+    <string name="delete_map_description">Sind Sie sicher, dass Sie die Karte %1$s löschen möchten?</string>
     <string name="maps_and_resources">Karten &amp; Ressourcen</string>
     <string name="app_mode_paragliding">Paragleiten</string>
     <string name="rendering_styles">Darstellungsstile</string>
@@ -5494,7 +5494,7 @@
     <string name="configure_filter">Filter konfigurieren</string>
     <string name="no_config_smart_folder_title">Nicht konfiguriert</string>
     <string name="discard_filter_changes">Filteränderungen verwerfen</string>
-    <string name="discard_filter_changes_prompt">Sind Sie sicher, dass Sie alle Filter zurücksetzen möchten\?</string>
+    <string name="discard_filter_changes_prompt">Sind Sie sicher, dass Sie alle Filter zurücksetzen möchten?</string>
     <string name="empty_smart_folder_title">Keine übereinstimmenden Tracks</string>
     <string name="empty_smart_folder_description">Alle übereinstimmenden Tracks werden automatisch hier angezeigt</string>
     <plurals name="tracks">
@@ -5504,11 +5504,11 @@
     <string name="no_config_smart_folder_description">Intelligente Ordner ermöglichen das Gruppieren von Strecken anhand angewendeter Filter</string>
     <string name="loading_tracks">Tracks neu laden</string>
     <string name="searching_matching_tracks">Alle passenden Tracks suchen</string>
-    <string name="cloud_trash_clear_confirmation">Sind Sie sicher, dass Sie alle Elemente im Papierkorb dauerhaft löschen möchten\? Diese Aktion kann nicht rückgängig gemacht werden.</string>
+    <string name="cloud_trash_clear_confirmation">Sind Sie sicher, dass Sie alle Elemente im Papierkorb dauerhaft löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="restore_from_trash">Aus dem Papierkorb wiederherstellen</string>
     <string name="delete_all_items">Alle Elemente löschen</string>
     <string name="trash_is_empty_banner_desc">Dateien, die aus der OsmAnd Cloud entfernt wurden, stehen hier für %1$s Tage zur Verfügung.</string>
-    <string name="delete_trash_item_confirmation_desc">„%1$s“ wird endgültig gelöscht. Sind Sie sicher\?
+    <string name="delete_trash_item_confirmation_desc">„%1$s“ wird endgültig gelöscht. Sind Sie sicher?
 \n
 \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="shared_string_empty_trash">Papierkorb leeren</string>
@@ -5553,7 +5553,7 @@
     <string name="key_event_action_next_app_profile">Nächstes App-Profil</string>
     <string name="key_event_action_activity_back_pressed">Aktivität zurückgedrückt</string>
     <string name="key_event_action_emit_navigation_hint">Navigationshinweis ausgeben</string>
-    <string name="remove_type_q">Sind Sie sicher, dass Sie den Typ „%1$s“ entfernen wollen\?</string>
+    <string name="remove_type_q">Sind Sie sicher, dass Sie den Typ „%1$s“ entfernen wollen?</string>
     <string name="key_event_action_move_up">Nach oben bewegen</string>
     <string name="key_event_action_move_to_my_location">Zu meinem Standort bewegen</string>
     <string name="download_to_device">Auf das Gerät herunterladen</string>

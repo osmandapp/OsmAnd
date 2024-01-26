@@ -4747,7 +4747,7 @@
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Mostrar senderos dedicados al ciclismo de montaña.</string>
     <string name="display_position">Posición</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
-    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="second_next_turn_widget_desc">El widget muestra la información sobre su segundo giro siguiente, que se activa si el giro está a una distancia cercana.</string>
     <string name="map_markers_desc">El widget muestra la distancia o la hora estimada de llegada (ETA) de los dos primeros marcadores de la lista de marcadores del mapa.</string>
@@ -5168,7 +5168,7 @@
     <string name="is_imported">%1$s ha sido importado.</string>
     <string name="file_already_exists_description">\"%1$s\". Ya existe un fichero con ese nombre. Reemplazar sobrescribirá todos los cambios realizados con la versión actual.</string>
     <string name="file_already_exists">El archivo ya existe</string>
-    <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">¿Seguro que quieres borrar \"%1$s\"?</string>
     <string name="no_search_results">No hay resultados</string>
     <string name="search_track_by_name">Buscar las pista por nombre</string>
     <string name="number_of_tracks">%1$s pistas</string>
@@ -5228,7 +5228,7 @@
     <string name="terrain_map">Mapa del terreno (3D)</string>
     <string name="relief_3d_description">Posee y observa la maqueta a escala de tu barrio o de todo el continente.</string>
     <string name="free_favorites_backup">Copia de seguridad gratuita de tus favoritos</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">¿Estás seguro de que quieres eliminar la cuenta de OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">¿Estás seguro de que quieres eliminar la cuenta de OsmAnd Cloud?
 \n
 \nEsta acción no se puede deshacer.</string>
     <string name="osmand_cloud_deleting_account_descr">En unos instantes todos tus datos y tu cuenta serán eliminados de OsmAnd Cloud.
@@ -5245,7 +5245,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos del dispositivo permanecen intactos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará tu suscripción a OsmAnd Pro.</string>
     <string name="manage_subscriptions">Gestiona las suscripciones.</string>
-    <string name="delete_account_warning">¿Está seguro de que deseas eliminar la cuenta %1$s\?</string>
+    <string name="delete_account_warning">¿Está seguro de que deseas eliminar la cuenta %1$s?</string>
     <string name="shared_string_deleting">Borrando</string>
     <string name="deleting_complete">Borrado completo</string>
     <string name="delete_account">Eliminar la cuenta</string>
@@ -5476,7 +5476,7 @@
     <string name="widget_available_ram">Memoria RAM disponible</string>
     <string name="terrain_maps">Mapas del terreno</string>
     <string name="sort_country_name_descending">Nombre del país: Z - A</string>
-    <string name="delete_map_description">¿Seguro que quieres borrar el mapa %1$s\?</string>
+    <string name="delete_map_description">¿Seguro que quieres borrar el mapa %1$s?</string>
     <string name="maps_and_resources">Mapas y recursos</string>
     <string name="shared_string_show_icon">Mostrar el icono</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente ya está presente</string>
@@ -5492,7 +5492,7 @@
     <string name="no_config_smart_folder_title">Sin configurar</string>
     <string name="discard_filter_changes">Descartar los cambios del filtro</string>
     <string name="shared_string_loading">Cargando</string>
-    <string name="discard_filter_changes_prompt">¿Estás seguro de que quieres restablecer todos los filtros\?</string>
+    <string name="discard_filter_changes_prompt">¿Estás seguro de que quieres restablecer todos los filtros?</string>
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar las pistas según los filtros que apliques</string>
     <string name="loading_tracks">Recargar las pistas</string>
     <string name="searching_matching_tracks">Buscar todas las pistas coincidentes</string>
@@ -5501,11 +5501,11 @@
         <item quantity="many">%1$d (%2$d pistas)</item>
         <item quantity="other">%1$d (%2$d pistas)</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">¿Estás seguro de que deseas eliminar permanentemente todos los elementos de la Papelera\? Esta acción no se puede deshacer.</string>
+    <string name="cloud_trash_clear_confirmation">¿Estás seguro de que deseas eliminar permanentemente todos los elementos de la Papelera? Esta acción no se puede deshacer.</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
     <string name="delete_all_items">Borrar todos los elementos</string>
     <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. ¿Estás seguro\?
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. ¿Estás seguro?
 \n
 \nEsta acción no se puede deshacer.</string>
     <string name="shared_string_empty_trash">Vaciar la papelera</string>
@@ -5536,7 +5536,7 @@
     <string name="key_event_action_take_media_note">Toma nota de los medios</string>
     <string name="key_event_action_activity_back_pressed">Actividad pulsada de nuevo</string>
     <string name="key_event_action_emit_navigation_hint">Emitir una sugerencia para la navegación</string>
-    <string name="remove_type_q">¿Está seguro de que desea eliminar el tipo \"%1$s\"\?</string>
+    <string name="remove_type_q">¿Está seguro de que desea eliminar el tipo \"%1$s\"?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir un nuevo tipo</string>
     <string name="key_event_action_move_up">Hacia arriba</string>

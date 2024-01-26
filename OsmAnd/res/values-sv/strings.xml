@@ -4566,7 +4566,7 @@
     <string name="rendering_value_name_only_name">Enbart namn</string>
     <string name="is_imported">%1$s har importerats.</string>
     <string name="file_already_exists">Filen finns redan</string>
-    <string name="nav_profile_confirm_delete">Är du säker på att du vill radera \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Är du säker på att du vill radera \"%1$s\"?</string>
     <string name="external_device_characteristic_speed">Hastighet</string>
     <string name="external_device_characteristic_distance">Sträcka</string>
     <string name="external_device_characteristic_heart_rate">Puls</string>
@@ -4851,7 +4851,7 @@
     <string name="widget_available_ram">Tillgängligt minne</string>
     <string name="terrain_maps">Terrängkartor</string>
     <string name="sort_country_name_descending">Land: Ö - A</string>
-    <string name="delete_map_description">Är du säker på att du vill radera kartan %1$s\?</string>
+    <string name="delete_map_description">Är du säker på att du vill radera kartan %1$s?</string>
     <string name="maps_and_resources">Kartor &amp; Resurser</string>
     <string name="turn_arrows_descr">Välj om svängpilar ska visas på ruttlinjen.</string>
     <string name="reset_to_default_category_button_promo">\'Återställ till förval\' återställer sorteringsordningen till installationsförvalet.</string>
@@ -5111,7 +5111,7 @@
     <string name="true_bearing_wdiget_desc">Vinkeln mellan norr och målpunkten observerad från din position.</string>
     <string name="waypoint_template">Mall för ruttpunkt</string>
     <string name="rendering_attr_weatherPressureContours_name">Lufttryck-isolinjer</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Är du säker på att du vill radera kontot på OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Är du säker på att du vill radera kontot på OsmAnd Cloud?
 \n
 \nDenna åtgärd kan inte ångras.</string>
     <string name="free_account">Gratiskonto</string>
@@ -5141,7 +5141,7 @@
     <string name="shared_storage_third_step">Ge åtkomst för att få tillgång till mappen. Utan det kan OsmAnd inte kopiera filer.</string>
     <string name="no_altitude_data_desc">För att ta emot %1$s-data, koppla ditt spår till vägarna eller beräkna det online.</string>
     <string name="routing_attr_carriage_restrictions_name">Begränsningar för hästvagn</string>
-    <string name="delete_account_warning">Är du säker på att du vill radera kontot %1$s \?</string>
+    <string name="delete_account_warning">Är du säker på att du vill radera kontot %1$s ?</string>
     <string name="searching_matching_tracks">Sök alla matchande spår</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Använd raster sqlitedb för terrängskuggning / lutningsgrad</string>
     <string name="write_heading">Logga kurs</string>

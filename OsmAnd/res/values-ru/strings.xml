@@ -4765,7 +4765,7 @@
     <string name="attach_roads_descr">«Автопритягивание» трека к подходящим дорогам для маршрутизации и совпадения навигационных указаний с дорогой.</string>
     <string name="included_in_your_current_plan">Включено в ваш текущий план «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках подписки %1$s.</string>
-    <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Удалить группу «%1$s» и все включённые в неё точки (%2$d)?</string>
     <string name="favorite_delete_group">Удалить группу</string>
     <string name="download_heightmap_maps">Карта высот</string>
     <string name="display_position">Позиция на экране</string>
@@ -5115,7 +5115,7 @@
     <string name="weather_download_error">Не удалось загрузить тайлы %1$s.</string>
     <string name="is_imported">%1$s импортирован.</string>
     <string name="file_already_exists">Файл уже существует</string>
-    <string name="nav_profile_confirm_delete">Вы уверены, что хотите удалить \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Вы уверены, что хотите удалить \"%1$s\"?</string>
     <string name="external_device_menu_forget">Забыть</string>
     <string name="file_already_exists_description">«%1$s». Файл с таким именем уже существует. Замена перезапишет все изменения, сделанные в текущей версии.</string>
     <string name="external_device_characteristic_speed">Скорость</string>
@@ -5235,7 +5235,7 @@
     <string name="osmand_cloud_deletion_account_warning">Ваш аккаунт и все данные аккаунта будут %1$s</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Это действие не отменит вашу подписку OsmAnd Pro.</string>
     <string name="manage_subscriptions">Управление подписками.</string>
-    <string name="delete_account_warning">Вы уверены, что хотите удалить аккаунт %1$s\?</string>
+    <string name="delete_account_warning">Вы уверены, что хотите удалить аккаунт %1$s?</string>
     <string name="deleting_complete">Удаление завершено</string>
     <string name="delete_account">Удалить аккаунт</string>
     <string name="backup_error_delete_account_email_match">Адрес электронной почты не соответствует имени пользователя для входа.</string>
@@ -5435,7 +5435,7 @@
     <string name="sort_size_ascending">Сначала маленькие файлы</string>
     <string name="terrain_maps">Карты рельефа</string>
     <string name="sort_country_name_descending">Названия стран: Я – А</string>
-    <string name="delete_map_description">Удалить карту %1$s\?</string>
+    <string name="delete_map_description">Удалить карту %1$s?</string>
     <string name="maps_and_resources">Карты и ресурсы</string>
     <string name="widget_available_ram_desc">Отображает доступную память, выделенную для OsmAnd.</string>
     <string name="glide_ratio_to_target">Коэффициент планирования к цели</string>
@@ -5485,7 +5485,7 @@
     <string name="no_config_smart_folder_title">Не настроен</string>
     <string name="discard_filter_changes">Отменить изменения фильтра</string>
     <string name="shared_string_loading">Загрузка</string>
-    <string name="discard_filter_changes_prompt">Сбросить все фильтры\?</string>
+    <string name="discard_filter_changes_prompt">Сбросить все фильтры?</string>
     <string name="no_config_smart_folder_description">Смарт-папки позволяют группировать треки по примененным фильтрам</string>
     <string name="loading_tracks">Перезагрузка треков</string>
     <string name="searching_matching_tracks">Искать все подходящие треки</string>

@@ -4750,7 +4750,7 @@
     <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
     <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
-    <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)?</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció megjelenítése</string>
@@ -5166,7 +5166,7 @@
     <string name="is_imported">%1$s importálva.</string>
     <string name="file_already_exists_description">\"%1$s\". Egy azonos nevű fájl már létezik. A csere felülír minden, a jelenlegi verzióval készített változást.</string>
     <string name="file_already_exists">A fájl már létezik</string>
-    <string name="nav_profile_confirm_delete">Biztosan törli ezt: \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Biztosan törli ezt: \"%1$s\"?</string>
     <string name="no_search_results">Nincs találat</string>
     <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
     <string name="number_of_tracks">%1$s nyomvonal</string>
@@ -5228,7 +5228,7 @@
     <string name="slope_legend_description">A lejtés színekkel jelzi a terep meredekségét. A lejtési viszonyokról bővebben itt olvashat: %1$s.</string>
     <string name="terrain_category_description">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="shared_string_deleting">Törlés folyamatban</string>
-    <string name="delete_account_warning">Biztosan törli ezt a fiókot: %1$s\?</string>
+    <string name="delete_account_warning">Biztosan törli ezt a fiókot: %1$s?</string>
     <string name="osmand_cloud_delete_account_confirmation">Fiók törlése\?</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">A másodlagos eszközök ki lesznek lépteve az OsmAnd Cloud-ból és elveszítik a hozzáférést a fizetős funkciókhoz.</string>
     <string name="osmand_cloud_deletion_account_warning">A fiók és minden fiókadat %1$s lesz</string>
@@ -5245,7 +5245,7 @@
     <string name="osmand_cloud_deleting_account_descr">Pillanatokon belül törölve lesz minden fiók- és egyéb adat az OsmAnd Cloud-ból.
 \n
 \nAz eszközön lévő adatok érintetlenek maradnak.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Biztosan törli a OsmAnd Cloud fiókot\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Biztosan törli a OsmAnd Cloud fiókot?
 \n
 \nA művelet nem visszavonható.</string>
     <string name="action_cannot_be_undone">A művelet nem visszavonható.</string>
@@ -5474,7 +5474,7 @@
     <string name="widget_available_ram">Elérhető memória</string>
     <string name="terrain_maps">Domborzati térképek</string>
     <string name="sort_country_name_descending">Országnév Z - A</string>
-    <string name="delete_map_description">Biztosan törli %1$s térképét\?</string>
+    <string name="delete_map_description">Biztosan törli %1$s térképét?</string>
     <string name="maps_and_resources">Térképek és erőforrások</string>
     <string name="shared_string_show_icon">Ikon mutatása</string>
     <string name="smart_folder_name_present">Ilyen okosmappa már van</string>
@@ -5490,7 +5490,7 @@
     <string name="no_config_smart_folder_title">Nincs konfigurálva</string>
     <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
     <string name="shared_string_loading">Betöltés</string>
-    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt\?</string>
+    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt?</string>
     <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
     <string name="loading_tracks">Nyomvonalak újratöltése</string>
     <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
@@ -5498,11 +5498,11 @@
         <item quantity="one">%1$d (%2$d nyomvonal)</item>
         <item quantity="other">%1$d (%2$d nyomvonal)</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">Biztos, hogy véglegesen törölni szeretné az összes elemet a Lomtárból\? Ezt a műveletet nem lehet később visszavonni.</string>
+    <string name="cloud_trash_clear_confirmation">Biztos, hogy véglegesen törölni szeretné az összes elemet a Lomtárból? Ezt a műveletet nem lehet később visszavonni.</string>
     <string name="restore_from_trash">Visszaállítás a Lomtárból</string>
     <string name="delete_all_items">Összes elem törlése</string>
     <string name="trash_is_empty_banner_desc">Az OsmAnd felhőből eltávolított elemek itt még elérhetőek %1$s napig.</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" véglegesen törlődik. Biztos benne\?
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" véglegesen törlődik. Biztos benne?
 \n
 \nA művelet nem vonható vissza.</string>
     <string name="shared_string_empty_trash">Lomtár kiürítése</string>
@@ -5533,7 +5533,7 @@
     <string name="key_event_action_take_media_note">Médiajegyzet felvétele</string>
     <string name="key_event_action_activity_back_pressed">Művelet vissza megnyomva</string>
     <string name="key_event_action_emit_navigation_hint">Navigációs tippek adása</string>
-    <string name="remove_type_q">Biztosan eltávolítja a(z) \"%1$s\" típust\?</string>
+    <string name="remove_type_q">Biztosan eltávolítja a(z) \"%1$s\" típust?</string>
     <string name="shared_string_action">Művelet</string>
     <string name="add_new_type">Új típus hozzáadása</string>
     <string name="key_event_action_move_up">Mozgás fel</string>
@@ -5590,7 +5590,7 @@
     <string name="shared_string_all_tracks">Minden nyomvonal</string>
     <string name="shared_string_license">Licenc</string>
     <string name="shared_string_link">Hivatkozás</string>
-    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_copyright">Szerzői jogok</string>
     <string name="shared_string_author">Szerző</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Bővítmények</string>

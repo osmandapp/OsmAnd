@@ -4000,7 +4000,7 @@
     <string name="shared_string_finger">Sormi</string>
     <string name="shared_string_hand">Käsi</string>
     <string name="file_already_exists">Tiedosto on jo olemassa</string>
-    <string name="nav_profile_confirm_delete">Haluatko varmasti poistaa \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Haluatko varmasti poistaa \"%1$s\"?</string>
     <string name="external_device_characteristic_temperature">Lämpötila</string>
     <string name="app_mode_climbing">Nousu</string>
     <string name="shared_string_yards">jaardi</string>

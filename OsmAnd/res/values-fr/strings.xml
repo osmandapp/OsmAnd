@@ -4744,7 +4744,7 @@
     <string name="included_in_your_current_plan">Inclus dans votre abonnement %1$s</string>
     <string name="available_as_part_of_subscription_plan">Disponible avec l\'abonnement %1$s.</string>
     <string name="favorite_delete_group">Supprimer le groupe</string>
-    <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) \?</string>
+    <string name="favorite_confirm_delete_group">Êtes-vous certains de vouloir supprimer le groupe \"%1$s\" et ses points (%2$d) ?</string>
     <string name="download_heightmap_maps">Carte des altitudes</string>
     <string name="display_position">Emplacement sur l’écran</string>
     <string name="shared_string_normal">Normal</string>
@@ -5139,7 +5139,7 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Appairer un capteur ANT+</string>
     <string name="learn_more_about_sensors_link">En savoir plus sur les capteurs.</string>
     <string name="file_already_exists">Le fichier existe déjà</string>
-    <string name="nav_profile_confirm_delete">Êtes-vous sûr de vouloir supprimer \"%1$s\" \?</string>
+    <string name="nav_profile_confirm_delete">Êtes-vous sûr de vouloir supprimer \"%1$s\" ?</string>
     <string name="external_device_characteristic_arterial_pressure">Pression artérielle</string>
     <string name="external_device_details_total_distance">Distance totale</string>
     <string name="ant_plus_nothing_found_description">Vérifiez que :
@@ -5223,7 +5223,7 @@
     <string name="osmand_cloud_deleting_account_descr">Dans quelques instants, toutes vos données et votre compte seront supprimés du cloud OsmAnd.
 \n
 \nLes données de l\'appareil ne seront pas affectées.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Êtes-vous sûr de vouloir supprimer votre compte OsmAnd Cloud \?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Êtes-vous sûr de vouloir supprimer votre compte OsmAnd Cloud ?
 \n
 \nCette action est irréversible.</string>
     <string name="osmand_cloud_delete_account_confirmation">Supprimer le compte \?</string>
@@ -5233,7 +5233,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Toutes les données du cloud OsmAnd seront %1$s. Les données de l\'appareil ne seront pas affectées.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Cela n\'annulera pas votre abonnement OsmAnd Pro.</string>
     <string name="manage_subscriptions">Gérer les abonnements.</string>
-    <string name="delete_account_warning">Êtes-vous sûr de vouloir supprimer le compte %1$s \?</string>
+    <string name="delete_account_warning">Êtes-vous sûr de vouloir supprimer le compte %1$s ?</string>
     <string name="shared_string_deleting">Suppression</string>
     <string name="deleting_complete">Suppression terminée</string>
     <string name="delete_account">Supprimer le compte</string>
@@ -5467,7 +5467,7 @@
     <string name="widget_available_ram">RAM disponible</string>
     <string name="terrain_maps">Cartes de terrain</string>
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
-    <string name="delete_map_description">Êtes-vous certain de vouloir effacer la carte %1$s \?</string>
+    <string name="delete_map_description">Êtes-vous certain de vouloir effacer la carte %1$s ?</string>
     <string name="maps_and_resources">Cartes et ressources</string>
     <string name="shared_string_show_icon">Afficher l\'icône</string>
     <string name="smart_folder_name_present">Ce dossier intelligent existe déjà</string>
@@ -5483,7 +5483,7 @@
     <string name="no_config_smart_folder_title">Non paramétré</string>
     <string name="discard_filter_changes">Effacer les filtres</string>
     <string name="shared_string_loading">Chargement</string>
-    <string name="discard_filter_changes_prompt">Êtes-vous certain de vouloir réinitialiser tous les filtres \?</string>
+    <string name="discard_filter_changes_prompt">Êtes-vous certain de vouloir réinitialiser tous les filtres ?</string>
     <string name="no_config_smart_folder_description">Les dossiers intelligents regroupent les traces grâce aux filtres</string>
     <string name="loading_tracks">Rechargement des traces</string>
     <string name="searching_matching_tracks">Rechercher tous les traces correspondantes</string>
@@ -5492,11 +5492,11 @@
         <item quantity="many">%1$d (%2$d traces)</item>
         <item quantity="other">%1$d (%2$d traces)</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">Êtes-vous certain de vouloir supprimer de manière définitive tous les éléments présents dans la corbeille \? Cette action ne pourra pas être annulée.</string>
+    <string name="cloud_trash_clear_confirmation">Êtes-vous certain de vouloir supprimer de manière définitive tous les éléments présents dans la corbeille ? Cette action ne pourra pas être annulée.</string>
     <string name="restore_from_trash">Restaurer depuis la corbeille</string>
     <string name="delete_all_items">Supprimer tous les éléments</string>
     <string name="trash_is_empty_banner_desc">Les fichiers supprimés d\'OsmAnd Cloud seront disponibles ici pendant %1$s jours.</string>
-    <string name="delete_trash_item_confirmation_desc">Êtes-vous certain de vouloir supprimer \"%1$s\" de manière définitive \?
+    <string name="delete_trash_item_confirmation_desc">Êtes-vous certain de vouloir supprimer \"%1$s\" de manière définitive ?
 \n
 \nCette action ne pourra pas être annulée.</string>
     <string name="shared_string_empty_trash">Vider la corbeille</string>
@@ -5517,7 +5517,7 @@
     <string name="shared_string_show_less">Réduire</string>
     <string name="shared_string_button">Bouton</string>
     <string name="folder">Dossier</string>
-    <string name="remove_type_q">Êtes-vous certain de vouloir supprimer le type \"%1$s\" \?</string>
+    <string name="remove_type_q">Êtes-vous certain de vouloir supprimer le type \"%1$s\" ?</string>
     <string name="shared_string_action">Action</string>
     <string name="add_new_type">Ajouter un nouveau type</string>
     <string name="key_event_action_move_up">Déplacer vers le haut</string>

@@ -4747,7 +4747,7 @@
     <string name="attach_roads_descr">Približaj svojo sled dovoljenim cestam za pot med točkami, da dobiš natančna navodila za zavijanje ter lastnosti poti.</string>
     <string name="included_in_your_current_plan">Vključeno v tvoji trenutni naročnini na »%1$s«</string>
     <string name="available_as_part_of_subscription_plan">Na voljo kot del naročnine na %1$s.</string>
-    <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Ali si prepričan/a, da želiš izbrisati skupino »%1$s« in vse vključene točke (%2$d)?</string>
     <string name="favorite_delete_group">Izbriši skupino</string>
     <string name="download_heightmap_maps">Zemljevid višin</string>
     <string name="display_position">Pokaži položaj</string>
@@ -5109,7 +5109,7 @@
     <string name="ant_plus_pair_new_sensor_ant_plus">Seznani senzor ANT+</string>
     <string name="is_imported">%1$s je uvožen/a/o.</string>
     <string name="file_already_exists">Datoteka že obstaja</string>
-    <string name="nav_profile_confirm_delete">Si zares prepričan/a, da želiš izbrisati »%1$s«\?</string>
+    <string name="nav_profile_confirm_delete">Si zares prepričan/a, da želiš izbrisati »%1$s«?</string>
     <string name="external_device_forget_sensor">Pozabi na senzor</string>
     <string name="file_already_exists_description">»%1$s«. Datoteka s tem imenom že obstaja. Z izbiro Zamenjaj se bodo prepisale vse spremembe, narejene s trenutno različico.</string>
     <string name="external_device_forget_sensor_description">Senzor bo odstranjen s seznama. Ta senzor bo lahko kadar koli znova seznanjen.</string>
@@ -5273,13 +5273,13 @@
 \n</string>
     <string name="manage_subscriptions">Upravljanje naročnin.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Vsi podatki iz OsmAnd Cloud-a bodo %1$s. Podatki v napravi bodo ostali nedotaknjeni.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Ali si prepričan/a, da želiš izbrisati račun OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Ali si prepričan/a, da želiš izbrisati račun OsmAnd Cloud?
 \n
 \nTega dejanja ni mogoče razveljaviti.</string>
     <string name="osmand_cloud_delete_account_confirmation">Izbrisati račun\?</string>
     <string name="action_cannot_be_undone">Tega dejanja ni mogoče preklicati.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundarne naprave bodo odjavljene iz OsmAnd Cloud-a in bodo izgubile dostop do plačljivih funkcij.</string>
-    <string name="delete_account_warning">Si zares prepričan/a, da želiš izbrisati račun %1$s\?</string>
+    <string name="delete_account_warning">Si zares prepričan/a, da želiš izbrisati račun %1$s?</string>
     <string name="shared_string_deleting">Brisanje</string>
     <string name="deleting_complete">Brisanje končano</string>
     <string name="relief_3d_description">Imej in opazuj maketo svoje soseske ali cele celine.</string>

@@ -4747,7 +4747,7 @@
     <string name="shared_string_normal">Normale</string>
     <string name="display_position">Mostra posizione</string>
     <string name="download_heightmap_maps">Mappa altimetrica</string>
-    <string name="favorite_confirm_delete_group">Vuoi davvero eliminare il gruppo \"%1$s\" e tutti i punti che contiene ( %2$d )\?</string>
+    <string name="favorite_confirm_delete_group">Vuoi davvero eliminare il gruppo \"%1$s\" e tutti i punti che contiene ( %2$d )?</string>
     <string name="favorite_delete_group">Elimina Gruppo</string>
     <string name="how_to_use">Come si utilizza:</string>
     <string name="distance_by_tap_use_description">Tocca sulla mappa per mostrare la distanza tra la tua posizione attuale e il punto toccato.
@@ -5124,7 +5124,7 @@
     <string name="shared_string_foot">Piede</string>
     <string name="number_of_tracks">%1$s tracce</string>
     <string name="no_search_results">Nessun risultato</string>
-    <string name="nav_profile_confirm_delete">Sicuro di voler eliminare \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Sicuro di voler eliminare \"%1$s\"?</string>
     <string name="external_device_low_battery">Batteria in esaurimento</string>
     <string name="device_disconnected">%1$s disconnesso</string>
     <string name="device_connected">%1$s connesso</string>
@@ -5228,7 +5228,7 @@
     <string name="osmand_cloud_deleting_account_descr">Tra pochi istanti tutti i tuoi dati e il tuo account verranno cancellati da OsmAnd Cloud.
 \n
 \nTutti i dati sul dispositivo rimarranno intatti.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sei sicuro di voler eliminare l\'account OsmAnd Cloud?
 \n
 \nQuesta azione non può essere annullata.</string>
     <string name="osmand_cloud_delete_account_confirmation">Eliminare l\'account\?</string>
@@ -5238,7 +5238,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Tutti i dati di OsmAnd Cloud saranno %1$s. I dati sul dispositivo rimarranno intatti.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Questo non cancellerà il tuo abbonamento a OsmAnd Pro.</string>
     <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
-    <string name="delete_account_warning">Sei sicuro di voler eliminare l\'account %1$s\?</string>
+    <string name="delete_account_warning">Sei sicuro di voler eliminare l\'account %1$s?</string>
     <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
 \n
@@ -5469,7 +5469,7 @@
     <string name="widget_available_ram">RAM disponibile</string>
     <string name="terrain_maps">Mappe del terreno</string>
     <string name="sort_country_name_descending">Nome del paese: Z - A</string>
-    <string name="delete_map_description">Sei sicuro di voler eliminare la mappa %1$s\?</string>
+    <string name="delete_map_description">Sei sicuro di voler eliminare la mappa %1$s?</string>
     <string name="maps_and_resources">Mappe e risorse</string>
     <string name="empty_smart_folder_title">Nessuna traccia corrispondente</string>
     <string name="smart_folder_name_present">Tale cartella intelligente è già presente</string>
@@ -5480,11 +5480,11 @@
     <string name="discard_filter_changes">Scarta le modifiche al filtro</string>
     <string name="save_as_smart_folder">Salva come cartella intelligente</string>
     <string name="shared_string_loading">Caricamento</string>
-    <string name="discard_filter_changes_prompt">Sei sicuro di voler reimpostare tutti i filtri\?</string>
+    <string name="discard_filter_changes_prompt">Sei sicuro di voler reimpostare tutti i filtri?</string>
     <string name="no_config_smart_folder_description">Le cartelle intelligenti consentono di raggruppare le tracce in base ai filtri applicati</string>
     <string name="loading_tracks">Ricaricamento delle tracce</string>
     <string name="searching_matching_tracks">Cerca tutte le tracce corrispondenti</string>
-    <string name="cloud_trash_clear_confirmation">Confermi di voler eliminare definitivamente tutti gli elementi nel cestino\? L\'azione non è reversibile.</string>
+    <string name="cloud_trash_clear_confirmation">Confermi di voler eliminare definitivamente tutti gli elementi nel cestino? L\'azione non è reversibile.</string>
     <string name="with_waypoints">Con punti intermedi</string>
     <string name="restore_from_trash">Recupera dal cestino</string>
     <string name="delete_all_items">Elimina tutti gli elementi</string>
@@ -5495,7 +5495,7 @@
         <item quantity="other">%1$d (%2$d tracce)</item>
     </plurals>
     <string name="help_article_navigation_routing_online_routing_name">Navigazione online</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" sarà cancellato definitivamente. Confermi\?
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" sarà cancellato definitivamente. Confermi?
 \n
 \nQuesta azione non può essere cancellata.</string>
     <string name="live_monitoring_adress_descr">Specifica l\'indirizzo web con la sintassi parametrica: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
@@ -5525,7 +5525,7 @@
     <string name="folder">Cartella</string>
     <string name="change_key_binding">Cambia l\'associazione dei tasti</string>
     <string name="key_event_action_take_media_note">Prendi nota dei media</string>
-    <string name="remove_type_q">Sei sicuro di voler rimuovere \"%1$s\"\?</string>
+    <string name="remove_type_q">Sei sicuro di voler rimuovere \"%1$s\"?</string>
     <string name="shared_string_action">Azione</string>
     <string name="add_new_type">Aggiungi nuovo tipo</string>
     <string name="key_event_action_move_up">Vai su</string>
