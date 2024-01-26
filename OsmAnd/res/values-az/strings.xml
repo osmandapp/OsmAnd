@@ -3354,7 +3354,7 @@
     <string name="map_widget_target_distance">Kameradan hədəfə qədər məsafə</string>
     <string name="map_widget_ant_heart_rate">Ürək döyüntüsü</string>
     <string name="map_widget_ant_heart_rate_desc">Real vaxt rejimində müəyyən fəaliyyət zamanı istifadəçinin ürək döyüntülərini göstərir</string>
-    <string name="favorite_confirm_delete_group">“%1$s” qrupunu və bütün daxil olan nöqtələri (%2$d) silmək istədiyinizə əminsiniz\?</string>
+    <string name="favorite_confirm_delete_group">“%1$s” qrupunu və bütün daxil olan nöqtələri (%2$d) silmək istədiyinizə əminsiniz?</string>
     <string name="shared_string_duplicate">Surətini çıxar</string>
     <string name="duplacate_widget_added_snackbar">Siyahıya vidcetin surəti əlavə edilir.</string>
     <string name="routing_attr_motor_type_petrol_name">Benzin</string>

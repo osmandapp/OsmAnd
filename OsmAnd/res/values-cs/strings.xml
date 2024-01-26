@@ -4921,7 +4921,7 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">Středně pokročilý</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trolejbusové linky</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Trasy kyvadlové dopravy</string>
-    <string name="favorite_confirm_delete_group">Opravdu chcete odstranit skupinu \"%1$s\" a všechny zahrnuté body (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Opravdu chcete odstranit skupinu \"%1$s\" a všechny zahrnuté body (%2$d)?</string>
     <string name="trip_recording_duration_widget_desc">Zobrazuje aktuálně zaznamenaný čas jízdy.</string>
     <string name="true_bearing_wdiget_desc">Úhel mezi skutečným severem a cílovým bodem pozorovaným z vaší polohy.</string>
     <string name="time_to_destination_widget_desc">Widget zobrazuje \"Čas příjezdu\" nebo \"Čas do odjezdu\" do posledního cílového bodu. Čas je během navigace neustále aktualizován a rovná se času na trase z aktuální polohy.</string>
@@ -5217,14 +5217,14 @@
     <string name="beats_per_minute_short">bpm</string>
     <string name="osmand_cloud_delete_account_confirmation">Smazat účet\?</string>
     <string name="action_cannot_be_undone">Tuto akci nelze vzít zpět.</string>
-    <string name="delete_account_warning">Opravdu chcete odstranit účet %1$s\?</string>
+    <string name="delete_account_warning">Opravdu chcete odstranit účet %1$s?</string>
     <string name="shared_string_deleting">Mazání</string>
     <string name="backup_error_delete_account_email_match">E-mail neodpovídá přihlašovacímu jménu</string>
     <string name="osmand_cloud_deleting_account_descr">Během několika okamžiků budou všechna vaše data a účet z OsmAnd Cloud odstraněny.
 \n
 \nVšechna data v zařízení zůstanou nedotčena.</string>
     <string name="osmand_cloud_deleted_account_descr">Účet a všechna data byla z OsmAnd Cloud odstraněna.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Opravdu chcete smazat účet OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Opravdu chcete smazat účet OsmAnd Cloud?
 \n
 \nTuto akci nelze vzít zpět.</string>
     <string name="verify_account_deletion_descr">Před smazáním vašeho účtu jej musíme ověřit.
@@ -5312,7 +5312,7 @@
     <string name="shared_string_ear_lobe">Ušní lalok</string>
     <string name="shared_string_foot">Noha</string>
     <string name="poi_categories">Kategorie bodů zájmu</string>
-    <string name="nav_profile_confirm_delete">Opravdu chcete smazat \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Opravdu chcete smazat \"%1$s\"?</string>
     <string name="number_of_tracks">%1$s stop</string>
     <string name="search_track_by_name">Hledat stopu podle názvu</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundární zařízení budou odpojena od OsmAnd Cloud a ztratí přístup k placeným funkcím.</string>
@@ -5432,7 +5432,7 @@
     <string name="help_article_search_search_all_name">Vyhledat vše</string>
     <string name="help_article_personal_storage_name">Úložiště</string>
     <string name="sort_country_name_descending">Název země: Z – A</string>
-    <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s\?</string>
+    <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
     <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
@@ -5450,7 +5450,7 @@
     <string name="shared_string_show_icon">Zobrazit ikonu</string>
     <string name="shared_string_loading">Načítání</string>
     <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\".</string>
-    <string name="discard_filter_changes_prompt">Opravdu chcete resetovat všechny filtry\?</string>
+    <string name="discard_filter_changes_prompt">Opravdu chcete resetovat všechny filtry?</string>
     <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
     <string name="loading_tracks">Znovu načítání tras</string>
     <string name="searching_matching_tracks">Vyhledat všechny odpovídající trasy</string>

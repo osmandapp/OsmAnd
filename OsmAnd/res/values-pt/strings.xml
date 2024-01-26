@@ -4756,7 +4756,7 @@
     <string name="shared_string_only_missing">Só os que faltam</string>
     <string name="available_as_part_of_subscription_plan">Disponível como parte da subscrição %1$s.</string>
     <string name="included_in_your_current_plan">Incluído no seu plano \"%1$s\" atual</string>
-    <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)?</string>
     <string name="favorite_delete_group">Eliminar grupo</string>
     <string name="download_heightmap_maps">Mapa de atitudes</string>
     <string name="display_position">Posição</string>
@@ -5148,7 +5148,7 @@
     <string name="ant_plus_help_title">Não sei que tipo de sensor tenho</string>
     <string name="is_imported">%1$s é importado.</string>
     <string name="file_already_exists">O ficheiro já existe</string>
-    <string name="nav_profile_confirm_delete">Quer mesmo eliminar \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Quer mesmo eliminar \"%1$s\"?</string>
     <string name="external_device_details_battery">Bateria</string>
     <string name="external_device_details_speed">Velocidade</string>
     <string name="ant_plus_searching">A procurar</string>
@@ -5339,7 +5339,7 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
     <string name="shared_string_included">Incluído</string>
-    <string name="cloud_trash_clear_confirmation">Quer mesmo eliminar permanentemente todos os itens do lixo\? Esta ação não pode ser desfeita.</string>
+    <string name="cloud_trash_clear_confirmation">Quer mesmo eliminar permanentemente todos os itens do lixo? Esta ação não pode ser desfeita.</string>
     <string name="key_event_action_zoom_in">Aproximar</string>
     <string name="empty_smart_folder_title">Nenhum trilho correspondente</string>
     <string name="wheel_circumference">Circunferência da roda</string>
@@ -5438,7 +5438,7 @@
     <string name="filter_by_name">Filtrar por nome</string>
     <string name="key_event_action_emit_navigation_hint">Emitir uma sugestão de navegação</string>
     <string name="shared_string_reset_all">Repor tudo</string>
-    <string name="remove_type_q">Quer mesmo remover o tipo \"%1$s\"\?</string>
+    <string name="remove_type_q">Quer mesmo remover o tipo \"%1$s\"?</string>
     <string name="no_config_smart_folder_title">Não configurado</string>
     <string name="help_article_navigation_guidance_name">Guia</string>
     <string name="shared_string_action">Ação</string>
@@ -5474,7 +5474,7 @@
     <string name="filter_tracks_count">Filtrar: %d</string>
     <string name="sort_country_name_ascending">Nome do país: A – Z</string>
     <string name="help_article_widgets_radius_ruler_name">Régua radial e régua</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. Tem a certeza\?
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. Tem a certeza?
 \n
 \nEsta ação não pode ser desfeita.</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Gravar viagem</string>
@@ -5513,7 +5513,7 @@
     <string name="filter_screen_title">Filtro</string>
     <string name="hillshade_slope">Sombras de relevo, declives</string>
     <string name="external_sensor_name_property_description">Nome do sensor</string>
-    <string name="discard_filter_changes_prompt">Quer mesmo repor todos os filtros\?</string>
+    <string name="discard_filter_changes_prompt">Quer mesmo repor todos os filtros?</string>
     <string name="key_bindings">Atalhos de teclado</string>
     <string name="no_config_smart_folder_description">As pastas inteligentes permitem agrupar trilhos por filtros</string>
     <string name="widget_available_ram">RAM disponível</string>
@@ -5551,7 +5551,7 @@
     <string name="shared_string_temperature">Temperatura</string>
     <string name="help_article_personal_storage_name">Armazenamento</string>
     <string name="sort_country_name_descending">Nome do país: Z – A</string>
-    <string name="delete_map_description">Quer mesmo eliminar o mapa %1$s\?</string>
+    <string name="delete_map_description">Quer mesmo eliminar o mapa %1$s?</string>
     <string name="searching_matching_tracks">Pesquisar todos os trilhos correspondentes</string>
     <string name="help_article_map_legend_ski_map_name">Estilo de mapa de esqui</string>
     <string name="maps_and_resources">Mapas e recursos</string>
