@@ -43,7 +43,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
-import net.osmand.plus.settings.controllers.DisableBatteryOptimizationController;
+import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -123,7 +123,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private void setupDisableBatteryOptimizationPref() {
 		Preference preference = findPreference(DISABLE_BATTERY_OPTIMIZATION);
 		preference.setIcon(getIcon(R.drawable.ic_action_warning_colored));
-		preference.setVisible(DisableBatteryOptimizationController.shouldShowWarningBanner(app));
+		preference.setVisible(!BatteryOptimizationController.isIgnoringBatteryOptimizations(app));
 	}
 
 	private void setupShowStartDialog() {
@@ -418,7 +418,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				DisableBatteryOptimizationController.showDialog(mapActivity, getSelectedAppMode(), false);
+				BatteryOptimizationController.showDialog(mapActivity, getSelectedAppMode(), false);
 			}
 		}
 		return super.onPreferenceClick(preference);

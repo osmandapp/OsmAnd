@@ -7,7 +7,9 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.SECONDARY_BUTTON_TITL
 import static net.osmand.plus.base.dialog.data.DialogExtra.TERTIARY_BUTTON_TITLE_ID;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.PowerManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,15 +28,15 @@ import net.osmand.plus.settings.bottomsheets.CustomizableThreeOptionsBottomSheet
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
-public class DisableBatteryOptimizationController extends BaseDialogController implements IDisplayDataProvider {
+public class BatteryOptimizationController extends BaseDialogController implements IDisplayDataProvider {
 
 	public static final String PROCESS_ID = "disable_battery_optimization";
 
 	private final ApplicationMode appMode;
 	private final OsmandSettings settings;
 
-	public DisableBatteryOptimizationController(@NonNull OsmandApplication app,
-	                                            @NonNull ApplicationMode appMode) {
+	public BatteryOptimizationController(@NonNull OsmandApplication app,
+	                                     @NonNull ApplicationMode appMode) {
 		super(app);
 		this.appMode = appMode;
 		this.settings = app.getSettings();
@@ -65,22 +67,24 @@ public class DisableBatteryOptimizationController extends BaseDialogController i
 		return displayData;
 	}
 
-	public static boolean shouldShowWarningBanner(@NonNull OsmandApplication app) {
-		// returns true only if battery optimization is still enabled for OsmAnd
-		return true;
+	public static boolean isIgnoringBatteryOptimizations(@NonNull OsmandApplication app) {
+		String packageName = app.getPackageName();
+		PowerManager powerManager = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
+		return powerManager.isIgnoringBatteryOptimizations(packageName);
 	}
 
 	public static void askShowDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, boolean usedOnMap) {
 		// check is feature still enabled or if user disabled the display of the dialog
-		boolean shouldShowDialog = true;
-		if (shouldShowDialog) {
+		boolean notRequestAgain = false;
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (!notRequestAgain && !isIgnoringBatteryOptimizations(app)) {
 			showDialog(mapActivity, appMode, usedOnMap);
 		}
 	}
 
 	public static void showDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, boolean usedOnMap) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		DisableBatteryOptimizationController controller = new DisableBatteryOptimizationController(app, appMode);
+		BatteryOptimizationController controller = new BatteryOptimizationController(app, appMode);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);
