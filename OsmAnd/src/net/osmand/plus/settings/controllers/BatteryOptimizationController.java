@@ -37,8 +37,6 @@ public class BatteryOptimizationController extends BaseDialogController
 	private final OsmandSettings settings;
 	private final OnCompleteCallback callback;
 
-	private static boolean doNotAskAnymore = false;
-
 	public BatteryOptimizationController(@NonNull OsmandApplication app,
 	                                     @Nullable OnCompleteCallback callback) {
 		super(app);
@@ -91,13 +89,18 @@ public class BatteryOptimizationController extends BaseDialogController
 	}
 
 	private void onDoNotAskAnymoreClicked() {
-		doNotAskAnymore = true;
+		settings.DISABLE_SHOW_BATTERY_OPTIMIZATION_DIALOG.set(true);
 		dialogManager.askDismissDialog(getProcessId());
 	}
 
 	@Override
 	public void onDialogDismissed() {
 		askResumePreviousProcess(callback);
+	}
+
+	private static boolean isDisableShowDialog(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		return settings.DISABLE_SHOW_BATTERY_OPTIMIZATION_DIALOG.get();
 	}
 
 	public static boolean isIgnoringBatteryOptimizations(@NonNull OsmandApplication app) {
@@ -112,18 +115,18 @@ public class BatteryOptimizationController extends BaseDialogController
 		}
 	}
 
-	public static void askShowDialog(@NonNull FragmentActivity activity,
-	                                 boolean usedOnMap, @Nullable OnCompleteCallback callback) {
+	public static void askShowDialog(@NonNull FragmentActivity activity, boolean usedOnMap,
+	                                 @Nullable OnCompleteCallback callback) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (!doNotAskAnymore && !isIgnoringBatteryOptimizations(app)) {
+		if (!isDisableShowDialog(app) && !isIgnoringBatteryOptimizations(app)) {
 			showDialog(activity, usedOnMap, callback);
 			return;
 		}
 		askResumePreviousProcess(callback);
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity,
-	                              boolean usedOnMap, @Nullable OnCompleteCallback callback) {
+	public static void showDialog(@NonNull FragmentActivity activity, boolean usedOnMap,
+	                              @Nullable OnCompleteCallback callback) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		BatteryOptimizationController controller = new BatteryOptimizationController(app, callback);
 
