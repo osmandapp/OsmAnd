@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -37,14 +38,21 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
-		return v -> {
-			if (cachedTimeSpan > 0) {
-				Bundle params = new Bundle();
-				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
-				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
-						null, null, params);
-			}
-		};
+		return v -> askShowBatteryOptimizationDialog();
+	}
+
+	private void askShowBatteryOptimizationDialog() {
+		boolean usedOnMap = true;
+		BatteryOptimizationController.askShowDialog(mapActivity, usedOnMap, this::askShowTrackMenuDialog);
+	}
+
+	private void askShowTrackMenuDialog() {
+		if (cachedTimeSpan > 0) {
+			Bundle params = new Bundle();
+			params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
+			TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
+					null, null, params);
+		}
 	}
 
 	@Override

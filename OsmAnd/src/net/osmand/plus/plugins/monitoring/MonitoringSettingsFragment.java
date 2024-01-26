@@ -418,7 +418,8 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				BatteryOptimizationController.showDialog(mapActivity, getSelectedAppMode(), false);
+				boolean usedOnMap = false;
+				BatteryOptimizationController.showDialog(mapActivity, usedOnMap, null);
 			}
 		}
 		return super.onPreferenceClick(preference);

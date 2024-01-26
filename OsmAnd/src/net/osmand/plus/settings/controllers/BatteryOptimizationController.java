@@ -11,35 +11,39 @@ import android.os.PowerManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.OnCompleteCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DisplayData;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogDismissCallback;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableQuestionV1BottomSheet;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
-public class BatteryOptimizationController extends BaseDialogController implements IDisplayDataProvider {
+public class BatteryOptimizationController extends BaseDialogController
+		implements IDisplayDataProvider, IDialogDismissCallback {
 
 	public static final String PROCESS_ID = "disable_battery_optimization";
 
-	private final ApplicationMode appMode;
 	private final OsmandSettings settings;
+	private final OnCompleteCallback callback;
+
+	private static boolean doNotAskAnymore = false;
 
 	public BatteryOptimizationController(@NonNull OsmandApplication app,
-	                                     @NonNull ApplicationMode appMode) {
+	                                     @Nullable OnCompleteCallback callback) {
 		super(app);
-		this.appMode = appMode;
 		this.settings = app.getSettings();
+		this.callback = callback;
 	}
 
 	@NonNull
@@ -87,7 +91,13 @@ public class BatteryOptimizationController extends BaseDialogController implemen
 	}
 
 	private void onDoNotAskAnymoreClicked() {
+		doNotAskAnymore = true;
 		dialogManager.askDismissDialog(getProcessId());
+	}
+
+	@Override
+	public void onDialogDismissed() {
+		askResumePreviousProcess(callback);
 	}
 
 	public static boolean isIgnoringBatteryOptimizations(@NonNull OsmandApplication app) {
@@ -96,23 +106,31 @@ public class BatteryOptimizationController extends BaseDialogController implemen
 		return powerManager.isIgnoringBatteryOptimizations(packageName);
 	}
 
-	public static void askShowDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, boolean usedOnMap) {
-		// check is feature still enabled or if user disabled the display of the dialog
-		boolean doNotRequestAgain = false;
-		OsmandApplication app = mapActivity.getMyApplication();
-		if (!doNotRequestAgain && !isIgnoringBatteryOptimizations(app)) {
-			showDialog(mapActivity, appMode, usedOnMap);
+	private static void askResumePreviousProcess(@Nullable OnCompleteCallback completionCallback) {
+		if (completionCallback != null) {
+			completionCallback.onComplete();
 		}
 	}
 
-	public static void showDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, boolean usedOnMap) {
-		OsmandApplication app = mapActivity.getMyApplication();
-		BatteryOptimizationController controller = new BatteryOptimizationController(app, appMode);
+	public static void askShowDialog(@NonNull FragmentActivity activity,
+	                                 boolean usedOnMap, @Nullable OnCompleteCallback callback) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		if (!doNotAskAnymore && !isIgnoringBatteryOptimizations(app)) {
+			showDialog(activity, usedOnMap, callback);
+			return;
+		}
+		askResumePreviousProcess(callback);
+	}
+
+	public static void showDialog(@NonNull FragmentActivity activity,
+	                              boolean usedOnMap, @Nullable OnCompleteCallback callback) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+		BatteryOptimizationController controller = new BatteryOptimizationController(app, callback);
 
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.register(PROCESS_ID, controller);
 
-		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		FragmentManager manager = activity.getSupportFragmentManager();
 		CustomizableQuestionV1BottomSheet.showInstance(manager, PROCESS_ID, usedOnMap);
 	}
 }
