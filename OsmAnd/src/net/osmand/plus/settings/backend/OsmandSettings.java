@@ -3027,7 +3027,11 @@ public class OsmandSettings {
 	}
 
 	public boolean isRenderProperty(@NonNull String prefId) {
-		return customRendersProps.containsKey(prefId) || customBooleanRendersProps.containsKey(prefId);
+		return prefId.startsWith(RENDERER_PREFERENCE_PREFIX);
+	}
+
+	public boolean isRoutingProperty(@NonNull String prefId) {
+		return prefId.startsWith(ROUTING_PREFERENCE_PREFIX);
 	}
 
 	@NonNull
