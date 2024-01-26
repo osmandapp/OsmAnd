@@ -4750,7 +4750,7 @@
     <string name="attach_roads_descr">A pontok közötti útvonaltervezés érdekében a nyomvonal közelítése az engedélyezett utakhoz, valamint pontos kanyarodási utasítások és útvonaltulajdonságok hozzárendelése.</string>
     <string name="included_in_your_current_plan">Az Ön jelenlegi %1$s előfizetése tartalmazza</string>
     <string name="available_as_part_of_subscription_plan">A következő előfizetés részeként érhető el: %1$s.</string>
-    <string name="favorite_confirm_delete_group">Biztosan törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Törölni akarja a(z) „%1$s” csoportot és minden benne foglalt pontot (%2$d)?</string>
     <string name="favorite_delete_group">Csoport törlése</string>
     <string name="download_heightmap_maps">Magassági térkép</string>
     <string name="display_position">Pozíció megjelenítése</string>
@@ -5166,7 +5166,7 @@
     <string name="is_imported">%1$s importálva.</string>
     <string name="file_already_exists_description">\"%1$s\". Egy azonos nevű fájl már létezik. A csere felülír minden, a jelenlegi verzióval készített változást.</string>
     <string name="file_already_exists">A fájl már létezik</string>
-    <string name="nav_profile_confirm_delete">Biztosan törli ezt: \"%1$s\"?</string>
+    <string name="nav_profile_confirm_delete">Törli ezt: \"%1$s\"?</string>
     <string name="no_search_results">Nincs találat</string>
     <string name="search_track_by_name">Nyomvonal keresése név alapján</string>
     <string name="number_of_tracks">%1$s nyomvonal</string>
@@ -5228,7 +5228,7 @@
     <string name="slope_legend_description">A lejtés színekkel jelzi a terep meredekségét. A lejtési viszonyokról bővebben itt olvashat: %1$s.</string>
     <string name="terrain_category_description">Szintvonalak, szürkeárnyalatos domborzatárnyékolás és a lejtviszonyokat színskálával ábrázoló térképek a csúcsok és síkságok megjelenítéséhez.</string>
     <string name="shared_string_deleting">Törlés folyamatban</string>
-    <string name="delete_account_warning">Biztosan törli ezt a fiókot: %1$s?</string>
+    <string name="delete_account_warning">Törli a fiókot: %1$s?</string>
     <string name="osmand_cloud_delete_account_confirmation">Fiók törlése\?</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">A másodlagos eszközök ki lesznek lépteve az OsmAnd Cloud-ból és elveszítik a hozzáférést a fizetős funkciókhoz.</string>
     <string name="osmand_cloud_deletion_account_warning">A fiók és minden fiókadat %1$s lesz</string>
@@ -5245,7 +5245,7 @@
     <string name="osmand_cloud_deleting_account_descr">Pillanatokon belül törölve lesz minden fiók- és egyéb adat az OsmAnd Cloud-ból.
 \n
 \nAz eszközön lévő adatok érintetlenek maradnak.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Biztosan törli a OsmAnd Cloud fiókot?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Törli a OsmAnd Cloud fiókot?
 \n
 \nA művelet nem visszavonható.</string>
     <string name="action_cannot_be_undone">A művelet nem visszavonható.</string>
@@ -5474,7 +5474,7 @@
     <string name="widget_available_ram">Elérhető memória</string>
     <string name="terrain_maps">Domborzati térképek</string>
     <string name="sort_country_name_descending">Országnév Z - A</string>
-    <string name="delete_map_description">Biztosan törli %1$s térképét?</string>
+    <string name="delete_map_description">Törli %1$s térképét?</string>
     <string name="maps_and_resources">Térképek és erőforrások</string>
     <string name="shared_string_show_icon">Ikon mutatása</string>
     <string name="smart_folder_name_present">Ilyen okosmappa már van</string>
@@ -5485,12 +5485,12 @@
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
     <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
     <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
-    <string name="empty_smart_folder_description">Minden egyező nyomvonal itt fog megjelenni</string>
+    <string name="empty_smart_folder_description">Az egyező nyomvonalak itt jelennek meg</string>
     <string name="configure_filter">Szűrő konfigurálása</string>
     <string name="no_config_smart_folder_title">Nincs konfigurálva</string>
     <string name="discard_filter_changes">Szűrőmódosítások elvetése</string>
     <string name="shared_string_loading">Betöltés</string>
-    <string name="discard_filter_changes_prompt">Biztosan vissza akarja állítani az összes szűrőt?</string>
+    <string name="discard_filter_changes_prompt">Visszaállít minden szűrőt?</string>
     <string name="no_config_smart_folder_description">Az okosmappák lehetővé teszik a nyomvonalak csoportosítását szűrők alapján</string>
     <string name="loading_tracks">Nyomvonalak újratöltése</string>
     <string name="searching_matching_tracks">Összes egyező nyomvonal keresése</string>
@@ -5498,11 +5498,11 @@
         <item quantity="one">%1$d (%2$d nyomvonal)</item>
         <item quantity="other">%1$d (%2$d nyomvonal)</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">Biztos, hogy véglegesen törölni szeretné az összes elemet a Lomtárból? Ezt a műveletet nem lehet később visszavonni.</string>
+    <string name="cloud_trash_clear_confirmation">Véglegesen törli az összes elemet a Lomtárból?</string>
     <string name="restore_from_trash">Visszaállítás a Lomtárból</string>
     <string name="delete_all_items">Összes elem törlése</string>
     <string name="trash_is_empty_banner_desc">Az OsmAnd felhőből eltávolított elemek itt még elérhetőek %1$s napig.</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" véglegesen törlődik. Biztos benne?
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" végleges törlése?
 \n
 \nA művelet nem vonható vissza.</string>
     <string name="shared_string_empty_trash">Lomtár kiürítése</string>
@@ -5533,7 +5533,7 @@
     <string name="key_event_action_take_media_note">Médiajegyzet felvétele</string>
     <string name="key_event_action_activity_back_pressed">Művelet vissza megnyomva</string>
     <string name="key_event_action_emit_navigation_hint">Navigációs tippek adása</string>
-    <string name="remove_type_q">Biztosan eltávolítja a(z) \"%1$s\" típust?</string>
+    <string name="remove_type_q">\"%1$s\" típus eltávolítása?</string>
     <string name="shared_string_action">Művelet</string>
     <string name="add_new_type">Új típus hozzáadása</string>
     <string name="key_event_action_move_up">Mozgás fel</string>
@@ -5554,7 +5554,7 @@
     <string name="download_to_device">Letöltés az eszközre</string>
     <string name="remove_widget_first">Előbb távolítsa el a widgetet</string>
     <string name="add_row">Sor hozzáadása</string>
-    <string name="discard_changes_prompt">Biztosan elveti a változtatásokat?</string>
+    <string name="discard_changes_prompt">Változtatások elvetése?</string>
     <string name="row_number">%1$s. sor</string>
     <string name="tripltek_promo">Tripltek ajánlat %1$s hónapra</string>
     <string name="tripltek_promo_description">Ingyenes hozzáférés a funkciókhoz %1$s hónapig, beleértve a korlátlan térképletöltést, 3D domborzatot stb</string>
@@ -5574,13 +5574,13 @@
     <string name="zoom_non_animated">Animáció nélküli zoomolás</string>
     <string name="lang_zh_hant">Hagyományos kínai</string>
     <string name="zoom_animated">Animált zoomolás</string>
-    <string name="button_already_assigned_to_this_action">Ez a gomb már hozzá van rendelve ehhez a művelethez.</string>
+    <string name="button_already_assigned_to_this_action">A gomb már hozzá van rendelve ehhez a művelethez.</string>
     <string name="key_assignments_already_cleared_message">Minden billentyű-hozzárendelés már törölve van</string>
     <string name="add_new_button">Új gomb hozzáadása</string>
     <string name="use_v1_auto_zoom">Diszkrét automatikus zoom (régi verzió)</string>
     <string name="shared_string_next_event">Következő esemény</string>
     <string name="map_widget_sun_position">Nap állása</string>
-    <string name="map_widget_sun_position_desc">Ez a widget az aktuális időtől függően mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
+    <string name="map_widget_sun_position_desc">Mutatja a napfelkeltéig vagy napnyugtáig hátralévő időt.</string>
     <string name="previous_row_has_complex_widget">Az előző sorban összetett widget van</string>
     <string name="complex_widget_alert">%1$s widget csak a saját sorában helyezhető el.</string>
     <string name="precise_distance_numbers">Pontos távolságadatok</string>
