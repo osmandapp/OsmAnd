@@ -5493,10 +5493,10 @@
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
     <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
-    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera? Esta acción no se puede deshacer.</string>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera?</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
-    <string name="empty_smart_folder_description">Todas las trazas que coincidan, serán añadidas automáticamente aquí</string>
+    <string name="empty_smart_folder_description">Las trazas que coincidan, serán añadidas aquí</string>
     <string name="configure_filter">Configurar filtro</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
@@ -5511,9 +5511,7 @@
     <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
-    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro?
-\n
-\nEsta acción no se puede deshacer.</string>
+    <string name="delete_trash_item_confirmation_desc">¿Borrar «%1$s» permanentemente?</string>
     <string name="discard_filter_changes">Descartar cambios del filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="shared_string_empty_trash">Vaciar papelera</string>
@@ -5591,7 +5589,7 @@
     <string name="shared_string_eta">ETA</string>
     <string name="clear_key_assignment">Vaciar asignación de tecla</string>
     <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
-    <string name="button_already_assigned_to_this_action">Este botón ya se encuentra asignado a esta acción.</string>
+    <string name="button_already_assigned_to_this_action">El botón ya se ha asignado a esta acción.</string>
     <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
     <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de teclas ya fueron vaciadas</string>
@@ -5601,6 +5599,14 @@
     <string name="any_connected">Cualquiera conectado</string>
     <string name="map_widget_sun_position">Ubicación del Sol</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
-    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
+    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer.</string>
     <string name="any_connected_with_device">Cualquiera conectado: %s</string>
+    <string name="shared_string_link">Enlace</string>
+    <string name="shared_string_copyright">Derechos de autor</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="shared_string_road_maps">Mapas viales</string>
+    <string name="shared_string_extensions">Extensiones</string>
+    <string name="shared_string_license">Licencia</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Todas las trazas</string>
 </resources>
