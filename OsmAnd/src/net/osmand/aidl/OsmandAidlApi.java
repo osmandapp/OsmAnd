@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
 import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
@@ -15,7 +16,6 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
@@ -45,10 +45,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.aidlapi.navigation.NavigateGpxParams;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -69,9 +65,13 @@ import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
+import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
@@ -111,12 +111,12 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -134,8 +134,8 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -2502,7 +2502,12 @@ public class OsmandAidlApi {
 		if (pref != null && settings.isExportAvailableForPref(pref)) {
 			String value = params.getValue();
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
-			return settings.setPreference(prefId, value, appMode);
+
+			boolean success = settings.setPreference(prefId, value, appMode);
+			if (success && settings.isRenderProperty(prefId) && mapActivity != null) {
+				mapActivity.refreshMapComplete();
+			}
+			return success;
 		}
 		return false;
 	}
