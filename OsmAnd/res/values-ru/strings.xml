@@ -5583,4 +5583,9 @@
     <string name="previous_row_has_complex_widget">Предыдущий ряд содержит составной виджет</string>
     <string name="complex_widget_alert">Виджет %1$s можно разместить только в отдельном ряде.</string>
     <string name="shared_string_all_tracks">Все треки</string>
+    <string name="shared_string_license">Лицензия</string>
+    <string name="shared_string_author">Автор</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_link">Ссылка</string>
+    <string name="shared_string_extensions">Расширения</string>
 </resources>
