@@ -2970,7 +2970,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="nearest_cities">Nearest cities</string>
     <string name="select_city">Select city</string>
     <string name="select_postcode">Postcode search</string>
-    <string name="quick_action_auto_zoom">Auto-zoomed map on/off</string>
+    <string name="quick_action_auto_zoom">Auto-zoom map</string>
     <string name="quick_action_auto_zoom_desc">Button to turn speed-controlled auto-zooming on or off.</string>
     <string name="quick_action_auto_zoom_on">Turn on auto-zooming</string>
     <string name="quick_action_auto_zoom_off">Turn off auto-zooming</string>
@@ -3727,7 +3727,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
-    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
+    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto-announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
     <string name="osm_editing_plugin_description">Make contributions to OpenStreetMap, a global community maintaining a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instructions on how to edit the map on our website %1$s.</string>
     <string name="osmand_development_plugin_description">Provides functionality to test and debug OsmAnd: simulate navigation routes, monitor the screen rendering, check performance, etc. This plugin is not required for normal app use.</string>
@@ -4091,7 +4091,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
     <string name="route_is_too_long_v2">For long distances: Please add intermediate destinations if no route is found within 10 minutes.</string>
-    <string name="auto_zoom_none">No auto-zooming</string>
+    <string name="auto_zoom_none">No auto zooming</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
     <string name="auto_zoom_farthest">To long-range</string>
@@ -4322,7 +4322,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="use_compass_navigation">Use compass</string>
     <string name="avoid_motorway">No motorways</string>
     <string name="auto_zoom_map_descr">Zoom level according to your speed (while map is synchronized with current position).</string>
-    <string name="auto_zoom_map">Auto-zoomed map</string>
+    <string name="auto_zoom_map">Auto zoom map</string>
     <string name="snap_to_road">Snap to road</string>
     <string name="interrupt_music_descr">Voice prompts pause music playback.</string>
     <string name="interrupt_music">Pause music</string>
