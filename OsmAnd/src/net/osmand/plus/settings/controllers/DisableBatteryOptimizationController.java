@@ -65,6 +65,11 @@ public class DisableBatteryOptimizationController extends BaseDialogController i
 		return displayData;
 	}
 
+	public static boolean shouldShowWarningBanner(@NonNull OsmandApplication app) {
+		// returns true only if battery optimization is still enabled for OsmAnd
+		return true;
+	}
+
 	public static void askShowDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, boolean usedOnMap) {
 		// check is feature still enabled or if user disabled the display of the dialog
 		boolean shouldShowDialog = true;

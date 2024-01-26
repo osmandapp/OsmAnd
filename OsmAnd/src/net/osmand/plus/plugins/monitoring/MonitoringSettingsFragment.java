@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
@@ -42,6 +43,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.controllers.DisableBatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -55,6 +57,7 @@ import java.util.List;
 
 public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
+	private static final String DISABLE_BATTERY_OPTIMIZATION = "disable_battery_optimization";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
@@ -92,6 +95,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 	@Override
 	protected void setupPreferences() {
+		setupDisableBatteryOptimizationPref();
 		setupShowStartDialog();
 
 		setupSaveTrackToGpxPref();
@@ -114,6 +118,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 
 		setupCopyProfileSettingsPref();
 		setupResetToDefaultPref();
+	}
+
+	private void setupDisableBatteryOptimizationPref() {
+		Preference preference = findPreference(DISABLE_BATTERY_OPTIMIZATION);
+		preference.setIcon(getIcon(R.drawable.ic_action_warning_colored));
+		preference.setVisible(DisableBatteryOptimizationController.shouldShowWarningBanner(app));
 	}
 
 	private void setupShowStartDialog() {
@@ -375,6 +385,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		if (DISABLE_BATTERY_OPTIMIZATION.equals(preference.getKey())) {
+			setupPrefRoundedBg(holder);
+		}
+	}
+
+	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 		if (OPEN_TRACKS.equals(prefId)) {
@@ -396,6 +414,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
+			}
+		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				DisableBatteryOptimizationController.showDialog(mapActivity, getSelectedAppMode(), false);
 			}
 		}
 		return super.onPreferenceClick(preference);
