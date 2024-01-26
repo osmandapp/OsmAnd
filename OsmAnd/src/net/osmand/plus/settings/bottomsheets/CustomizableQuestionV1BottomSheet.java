@@ -1,10 +1,8 @@
 package net.osmand.plus.settings.bottomsheets;
 
 import static net.osmand.plus.base.dialog.data.DialogExtra.DESCRIPTION;
+import static net.osmand.plus.base.dialog.data.DialogExtra.DIALOG_BUTTONS;
 import static net.osmand.plus.base.dialog.data.DialogExtra.DRAWABLE;
-import static net.osmand.plus.base.dialog.data.DialogExtra.PRIMARY_BUTTON_TITLE_ID;
-import static net.osmand.plus.base.dialog.data.DialogExtra.SECONDARY_BUTTON_TITLE_ID;
-import static net.osmand.plus.base.dialog.data.DialogExtra.TERTIARY_BUTTON_TITLE_ID;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import android.content.Context;
@@ -22,14 +20,18 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DialogExtra;
+import net.osmand.plus.base.dialog.interfaces.other.IOnClickListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
-public class CustomizableThreeOptionsBottomSheet extends CustomizableBottomSheet {
+import java.util.Objects;
 
-	public static final String TAG = CustomizableThreeOptionsBottomSheet.class.getSimpleName();
+public class CustomizableQuestionV1BottomSheet extends CustomizableBottomSheet {
+
+	public static final String TAG = CustomizableQuestionV1BottomSheet.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -69,35 +71,73 @@ public class CustomizableThreeOptionsBottomSheet extends CustomizableBottomSheet
 
 	@Override
 	protected int getRightBottomButtonTextId() {
-		Integer titleId = (Integer) getExtra(SECONDARY_BUTTON_TITLE_ID);
-		return titleId != null ? titleId : super.getRightBottomButtonTextId();
+		return getDialogButton(1).getTitleId();
 	}
 
 	@Override
 	protected DialogButtonType getRightBottomButtonType() {
-		return DialogButtonType.SECONDARY;
+		return getDialogButton(1).getButtonType();
+	}
+
+	@Override
+	protected void onRightBottomButtonClick() {
+		IOnClickListener listener = getDialogButton(1).getOnClickListener();
+		if (listener != null) {
+			listener.onClick();
+		} else {
+			super.onRightBottomButtonClick();
+		}
 	}
 
 	@Override
 	protected int getDismissButtonTextId() {
-		Integer titleId = (Integer) getExtra(TERTIARY_BUTTON_TITLE_ID);
-		return titleId != null ? titleId : super.getDismissButtonTextId();
+		return getDialogButton(2).getTitleId();
+	}
+
+	@Override
+	protected DialogButtonType getDismissButtonType() {
+		return getDialogButton(2).getButtonType();
+	}
+
+	@Override
+	protected void onDismissButtonClickAction() {
+		IOnClickListener listener = getDialogButton(2).getOnClickListener();
+		if (listener != null) {
+			listener.onClick();
+		} else {
+			super.onDismissButtonClickAction();
+		}
 	}
 
 	@Override
 	protected int getThirdBottomButtonTextId() {
-		Integer titleId = (Integer) getExtra(PRIMARY_BUTTON_TITLE_ID);
-		return titleId != null ? titleId : super.getThirdBottomButtonTextId();
+		return getDialogButton(0).getTitleId();
 	}
 
 	@Override
 	protected DialogButtonType getThirdBottomButtonType() {
-		return DialogButtonType.PRIMARY;
+		return getDialogButton(0).getButtonType();
+	}
+
+	@Override
+	protected void onThirdBottomButtonClick() {
+		IOnClickListener listener = getDialogButton(0).getOnClickListener();
+		if (listener != null) {
+			listener.onClick();
+		} else {
+			super.onThirdBottomButtonClick();
+		}
 	}
 
 	@Override
 	public int getFirstDividerHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+	}
+
+	@NonNull
+	private DisplayDialogButtonItem getDialogButton(int index) {
+		DisplayDialogButtonItem[] buttons = (DisplayDialogButtonItem[]) getExtra(DIALOG_BUTTONS);
+		return Objects.requireNonNull(buttons)[index];
 	}
 
 	@Nullable
@@ -108,7 +148,7 @@ public class CustomizableThreeOptionsBottomSheet extends CustomizableBottomSheet
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull String processId, boolean usedOnMap) {
 		try {
-			CustomizableThreeOptionsBottomSheet fragment = new CustomizableThreeOptionsBottomSheet();
+			CustomizableQuestionV1BottomSheet fragment = new CustomizableQuestionV1BottomSheet();
 			fragment.setProcessId(processId);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.show(fragmentManager, TAG);

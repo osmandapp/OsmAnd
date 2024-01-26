@@ -1,10 +1,8 @@
 package net.osmand.plus.settings.controllers;
 
 import static net.osmand.plus.base.dialog.data.DialogExtra.DESCRIPTION;
+import static net.osmand.plus.base.dialog.data.DialogExtra.DIALOG_BUTTONS;
 import static net.osmand.plus.base.dialog.data.DialogExtra.DRAWABLE;
-import static net.osmand.plus.base.dialog.data.DialogExtra.PRIMARY_BUTTON_TITLE_ID;
-import static net.osmand.plus.base.dialog.data.DialogExtra.SECONDARY_BUTTON_TITLE_ID;
-import static net.osmand.plus.base.dialog.data.DialogExtra.TERTIARY_BUTTON_TITLE_ID;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import android.content.Context;
@@ -20,13 +18,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.CustomizableThreeOptionsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.CustomizableQuestionV1BottomSheet;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class BatteryOptimizationController extends BaseDialogController implements IDisplayDataProvider {
 
@@ -57,14 +57,37 @@ public class BatteryOptimizationController extends BaseDialogController implemen
 		DisplayData displayData = new DisplayData();
 		displayData.putExtra(TITLE, getString(R.string.battery_optimization));
 		displayData.putExtra(DESCRIPTION, getString(R.string.battery_optimization_desc));
-		displayData.putExtra(PRIMARY_BUTTON_TITLE_ID, R.string.battery_optimization_settings);
-		displayData.putExtra(SECONDARY_BUTTON_TITLE_ID, R.string.dont_ask_anymore);
-		displayData.putExtra(TERTIARY_BUTTON_TITLE_ID, R.string.shared_string_cancel);
+
+		DisplayDialogButtonItem btnBatterySettings = new DisplayDialogButtonItem()
+				.setTitleId(R.string.battery_optimization_settings)
+				.setButtonType(DialogButtonType.PRIMARY)
+				.setOnClickListener(this::onBatteryOptimizationSettingsClicked);
+
+		DisplayDialogButtonItem btnDoNotAskAnymore = new DisplayDialogButtonItem()
+				.setTitleId(R.string.dont_ask_anymore)
+				.setButtonType(DialogButtonType.SECONDARY)
+				.setOnClickListener(this::onDoNotAskAnymoreClicked);
+
+		DisplayDialogButtonItem btnCloseDialog = new DisplayDialogButtonItem()
+				.setTitleId(R.string.shared_string_cancel)
+				.setButtonType(DialogButtonType.SECONDARY);
+
+		displayData.putExtra(DIALOG_BUTTONS, new DisplayDialogButtonItem[] {
+				btnBatterySettings, btnDoNotAskAnymore, btnCloseDialog
+		});
 
 		int warningColor = ColorUtilities.getWarningColor(app, nightMode);
 		Drawable brokenTrackIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_track_broken, warningColor);
 		displayData.putExtra(DRAWABLE, brokenTrackIcon);
 		return displayData;
+	}
+
+	private void onBatteryOptimizationSettingsClicked() {
+		dialogManager.askDismissDialog(getProcessId());
+	}
+
+	private void onDoNotAskAnymoreClicked() {
+		dialogManager.askDismissDialog(getProcessId());
 	}
 
 	public static boolean isIgnoringBatteryOptimizations(@NonNull OsmandApplication app) {
@@ -75,9 +98,9 @@ public class BatteryOptimizationController extends BaseDialogController implemen
 
 	public static void askShowDialog(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, boolean usedOnMap) {
 		// check is feature still enabled or if user disabled the display of the dialog
-		boolean notRequestAgain = false;
+		boolean doNotRequestAgain = false;
 		OsmandApplication app = mapActivity.getMyApplication();
-		if (!notRequestAgain && !isIgnoringBatteryOptimizations(app)) {
+		if (!doNotRequestAgain && !isIgnoringBatteryOptimizations(app)) {
 			showDialog(mapActivity, appMode, usedOnMap);
 		}
 	}
@@ -90,6 +113,6 @@ public class BatteryOptimizationController extends BaseDialogController implemen
 		dialogManager.register(PROCESS_ID, controller);
 
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		CustomizableThreeOptionsBottomSheet.showInstance(manager, PROCESS_ID, usedOnMap);
+		CustomizableQuestionV1BottomSheet.showInstance(manager, PROCESS_ID, usedOnMap);
 	}
 }
