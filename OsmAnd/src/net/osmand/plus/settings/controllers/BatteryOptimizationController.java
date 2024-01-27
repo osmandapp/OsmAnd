@@ -6,8 +6,10 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.DRAWABLE;
 import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.PowerManager;
+import android.provider.Settings;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableQuestionV1BottomSheet;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -84,12 +87,19 @@ public class BatteryOptimizationController extends BaseDialogController
 	}
 
 	private void onBatteryOptimizationSettingsClicked() {
+		openBatteryOptimizationSettings();
 		dialogManager.askDismissDialog(getProcessId());
 	}
 
 	private void onDoNotAskAnymoreClicked() {
 		settings.DISABLE_SHOW_BATTERY_OPTIMIZATION_DIALOG.set(true);
 		dialogManager.askDismissDialog(getProcessId());
+	}
+
+	public void openBatteryOptimizationSettings() {
+		Intent intent = new Intent();
+		intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+		AndroidUtils.startActivityIfSafe(app, intent);
 	}
 
 	@Override

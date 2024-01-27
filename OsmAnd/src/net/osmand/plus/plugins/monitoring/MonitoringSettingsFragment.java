@@ -6,6 +6,7 @@ import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
+import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -65,6 +66,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
 	boolean showSwitchProfile;
+	boolean cachedIsIgnoringBatteryOptimizations;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,9 +123,10 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupDisableBatteryOptimizationPref() {
+		cachedIsIgnoringBatteryOptimizations = isIgnoringBatteryOptimizations(app);
 		Preference preference = findPreference(DISABLE_BATTERY_OPTIMIZATION);
 		preference.setIcon(getIcon(R.drawable.ic_action_warning_colored));
-		preference.setVisible(!BatteryOptimizationController.isIgnoringBatteryOptimizations(app));
+		preference.setVisible(!cachedIsIgnoringBatteryOptimizations);
 	}
 
 	private void setupShowStartDialog() {
@@ -370,6 +373,15 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private void setupResetToDefaultPref() {
 		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
 		resetToDefault.setIcon(getActiveIcon(R.drawable.ic_action_reset_to_default_dark));
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		boolean newIsIgnoringBatteryOptimizations = isIgnoringBatteryOptimizations(app);
+		if (cachedIsIgnoringBatteryOptimizations != newIsIgnoringBatteryOptimizations) {
+			updateSetting(DISABLE_BATTERY_OPTIMIZATION);
+		}
 	}
 
 	@Override
