@@ -14,14 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.OnCompleteCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DisplayData;
-import net.osmand.plus.base.dialog.interfaces.controller.IDialogDismissCallback;
+import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableQuestionV1BottomSheet;
@@ -30,15 +29,15 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class BatteryOptimizationController extends BaseDialogController
-		implements IDisplayDataProvider, IDialogDismissCallback {
+		implements IDisplayDataProvider, IOnDialogDismissed {
 
 	public static final String PROCESS_ID = "disable_battery_optimization";
 
 	private final OsmandSettings settings;
-	private final OnCompleteCallback callback;
+	private final IOnDialogDismissed callback;
 
 	public BatteryOptimizationController(@NonNull OsmandApplication app,
-	                                     @Nullable OnCompleteCallback callback) {
+	                                     @Nullable IOnDialogDismissed callback) {
 		super(app);
 		this.settings = app.getSettings();
 		this.callback = callback;
@@ -94,8 +93,8 @@ public class BatteryOptimizationController extends BaseDialogController
 	}
 
 	@Override
-	public void onDialogDismissed() {
-		askResumePreviousProcess(callback);
+	public void onDialogDismissed(@NonNull FragmentActivity activity) {
+		askResumePreviousProcess(callback, activity);
 	}
 
 	private static boolean isDisableShowDialog(@NonNull OsmandApplication app) {
@@ -109,24 +108,18 @@ public class BatteryOptimizationController extends BaseDialogController
 		return powerManager.isIgnoringBatteryOptimizations(packageName);
 	}
 
-	private static void askResumePreviousProcess(@Nullable OnCompleteCallback completionCallback) {
-		if (completionCallback != null) {
-			completionCallback.onComplete();
-		}
-	}
-
 	public static void askShowDialog(@NonNull FragmentActivity activity, boolean usedOnMap,
-	                                 @Nullable OnCompleteCallback callback) {
+	                                 @Nullable IOnDialogDismissed callback) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		if (!isDisableShowDialog(app) && !isIgnoringBatteryOptimizations(app)) {
 			showDialog(activity, usedOnMap, callback);
 			return;
 		}
-		askResumePreviousProcess(callback);
+		askResumePreviousProcess(callback, activity);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity, boolean usedOnMap,
-	                              @Nullable OnCompleteCallback callback) {
+	                              @Nullable IOnDialogDismissed callback) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		BatteryOptimizationController controller = new BatteryOptimizationController(app, callback);
 
@@ -135,5 +128,12 @@ public class BatteryOptimizationController extends BaseDialogController
 
 		FragmentManager manager = activity.getSupportFragmentManager();
 		CustomizableQuestionV1BottomSheet.showInstance(manager, PROCESS_ID, usedOnMap);
+	}
+
+	private static void askResumePreviousProcess(@Nullable IOnDialogDismissed callback,
+	                                             @NonNull FragmentActivity activity) {
+		if (callback != null) {
+			callback.onDialogDismissed(activity);
+		}
 	}
 }

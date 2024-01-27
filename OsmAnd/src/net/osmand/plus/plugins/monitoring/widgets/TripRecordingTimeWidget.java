@@ -42,8 +42,7 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 	}
 
 	private void askShowBatteryOptimizationDialog() {
-		boolean usedOnMap = true;
-		BatteryOptimizationController.askShowDialog(mapActivity, usedOnMap, this::askShowTrackMenuDialog);
+		BatteryOptimizationController.askShowDialog(mapActivity, true, activity -> askShowTrackMenuDialog());
 	}
 
 	private void askShowTrackMenuDialog() {

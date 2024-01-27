@@ -248,8 +248,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public void askStartRecording(@NonNull FragmentActivity activity) {
 		boolean usedOnMap = true;
-		BatteryOptimizationController.askShowDialog(activity, usedOnMap,
-				() -> askStartRecordingStep2(mapActivity != null ? mapActivity : activity)
+		BatteryOptimizationController.askShowDialog(activity, usedOnMap, this::askStartRecordingStep2
 		);
 	}
 
