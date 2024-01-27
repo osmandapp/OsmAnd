@@ -1,15 +1,4 @@
-package net.osmand.plus.common;
-
-import android.view.View;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.R;
-
-import org.hamcrest.Matcher;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.NonNull;
-import androidx.test.espresso.ViewInteraction;
+package net.osmand.test.common;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -20,28 +9,38 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
-import static net.osmand.plus.common.EspressoUtils.waitForDataToPerform;
-import static net.osmand.plus.common.EspressoUtils.waitForView;
-import static net.osmand.plus.common.Matchers.childAtPosition;
-import static net.osmand.plus.common.Matchers.hasOnClickListener;
-import static net.osmand.plus.common.Matchers.searchItemWithLocaleName;
+import static net.osmand.test.common.OsmAndDialogInteractions.skipSpeedCamerasBottomSheet;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+
+import android.view.View;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
+import androidx.test.espresso.ViewInteraction;
+
+import net.osmand.data.LatLon;
+import net.osmand.plus.R;
+
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
 public class Interactions {
 
 	public static void openNavigationMenu() throws Throwable {
-		ViewInteraction appCompatImageButton = waitForView(allOf(withId(R.id.map_route_info_button),
-				hasOnClickListener(),
+		ViewInteraction appCompatImageButton = EspressoUtils.waitForView(Matchers.allOf(withId(R.id.map_route_info_button),
+				net.osmand.test.common.Matchers.hasOnClickListener(),
 				isDisplayed()));
 		appCompatImageButton.perform(click());
+
+		skipSpeedCamerasBottomSheet();
 	}
 
 	public static void startNavigation() {
 		ViewInteraction frameLayout = onView(
-				allOf(withId(R.id.start_button),
-						childAtPosition(
-								childAtPosition(
+				Matchers.allOf(withId(R.id.start_button),
+						net.osmand.test.common.Matchers.childAtPosition(
+								net.osmand.test.common.Matchers.childAtPosition(
 										withId(R.id.control_buttons),
 										1),
 								2),
@@ -70,9 +69,9 @@ public class Interactions {
 		int id = start ? R.id.FromLayout : R.id.ToLayout;
 		int position = start ? 0 : 4;
 		ViewInteraction linearLayout = onView(
-				allOf(withId(id),
-						childAtPosition(
-								childAtPosition(
+				Matchers.allOf(withId(id),
+						net.osmand.test.common.Matchers.childAtPosition(
+								net.osmand.test.common.Matchers.childAtPosition(
 										withId(R.id.route_menu_top_shadow_all),
 										1),
 								position),
@@ -82,9 +81,9 @@ public class Interactions {
 
 	public static void openRoutePointSearch() {
 		ViewInteraction linearLayout = onView(
-				allOf(withId(R.id.first_item),
-						childAtPosition(
-								childAtPosition(
+				Matchers.allOf(withId(R.id.first_item),
+						net.osmand.test.common.Matchers.childAtPosition(
+								net.osmand.test.common.Matchers.childAtPosition(
 										withClassName(is("android.widget.LinearLayout")),
 										0),
 								0)));
@@ -93,10 +92,10 @@ public class Interactions {
 
 	public static void searchCoordinate(@NonNull String coordinate) {
 		ViewInteraction appCompatEditText = onView(
-				allOf(withId(R.id.searchEditText),
-						childAtPosition(
-								allOf(withId(R.id.search_container),
-										childAtPosition(
+				Matchers.allOf(withId(R.id.searchEditText),
+						net.osmand.test.common.Matchers.childAtPosition(
+								Matchers.allOf(withId(R.id.search_container),
+										net.osmand.test.common.Matchers.childAtPosition(
 												withId(R.id.toolbar),
 												0)),
 								0),
@@ -105,10 +104,10 @@ public class Interactions {
 	}
 
 	public static void selectSearchedCoordinate(@NonNull String coordinate) throws Throwable {
-		Matcher<View> adapterMatcher = allOf(withId(android.R.id.list),
-				childAtPosition(
+		Matcher<View> adapterMatcher = Matchers.allOf(withId(android.R.id.list),
+				net.osmand.test.common.Matchers.childAtPosition(
 						allOf(withClassName(is("android.widget.LinearLayout")), withParent(withId(R.id.search_view))),
 						0));
-		waitForDataToPerform(searchItemWithLocaleName(coordinate), adapterMatcher, click());
+		EspressoUtils.waitForDataToPerform(net.osmand.test.common.Matchers.searchItemWithLocaleName(coordinate), adapterMatcher, click());
 	}
 }

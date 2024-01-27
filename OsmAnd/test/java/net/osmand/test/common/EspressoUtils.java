@@ -1,8 +1,13 @@
-package net.osmand.plus.common;
+package net.osmand.test.common;
 
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+
+import android.content.Context;
+import android.os.Build;
 import android.view.View;
-
-import org.hamcrest.Matcher;
 
 import androidx.annotation.NonNull;
 import androidx.test.espresso.NoMatchingViewException;
@@ -11,11 +16,16 @@ import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.util.TreeIterables;
 
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import org.hamcrest.Matcher;
 
 public class EspressoUtils {
+
+	public static void grantPermissions(@NonNull Context ctx) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			getInstrumentation().getUiAutomation().executeShellCommand(
+					"pm grant " + ctx.getPackageName() + " android.permission.POST_NOTIFICATIONS");
+		}
+	}
 
 	@NonNull
 	public static ViewInteraction waitForView(@NonNull Matcher<View> viewMatcher) throws Throwable {
@@ -95,5 +105,16 @@ public class EspressoUtils {
 		} while (System.currentTimeMillis() < endTime);
 
 		throw new Exception("Failed to list item in " + waitMillis + " millis matching " + dataMatcher);
+	}
+
+	public static String escapeRegex(@NonNull String input) {
+		StringBuilder sb = new StringBuilder();
+		for (char c : input.toCharArray()) {
+			if ("*+{}[\\]|()?".indexOf(c) != -1 || c == '\\') {
+				sb.append('\\');
+			}
+			sb.append(c);
+		}
+		return sb.toString();
 	}
 }

@@ -1,21 +1,22 @@
-package net.osmand.plus.activities;
+package net.osmand.test.activities;
+
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static net.osmand.test.common.EspressoUtils.waitForView;
+import static net.osmand.test.common.Interactions.openNavigationMenu;
+import static net.osmand.test.common.Interactions.setRouteStart;
+import static net.osmand.test.common.Interactions.startNavigation;
+import static net.osmand.test.common.Matchers.childAtPosition;
+import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
+import static org.hamcrest.Matchers.allOf;
 
 import android.os.Handler;
 import android.os.Looper;
-
-import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.common.AndroidTest;
-import net.osmand.plus.common.BaseIdlingResource;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.test.espresso.Espresso;
@@ -25,19 +26,23 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static net.osmand.plus.common.EspressoUtils.waitForView;
-import static net.osmand.plus.common.Interactions.openNavigationMenu;
-import static net.osmand.plus.common.Interactions.setRouteStart;
-import static net.osmand.plus.common.Interactions.startNavigation;
-import static net.osmand.plus.common.Matchers.childAtPosition;
-import static org.hamcrest.Matchers.allOf;
+import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.test.common.AndroidTest;
+import net.osmand.test.common.BaseIdlingResource;
+import net.osmand.test.common.ResourcesImporter;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -57,6 +62,11 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		super.setup();
 		IdlingPolicies.setIdlingResourceTimeout(40, TimeUnit.SECONDS);
 		enableSimulation(500);
+		try {
+			ResourcesImporter.importGpxAssets(app, Collections.singletonList("gpx_recalc_test.gpx"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@After
@@ -69,6 +79,8 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 	@Test
 	public void test() throws Throwable {
+		skipAppStartDialogs(app);
+
 		openNavigationMenu();
 
 		ViewInteraction linearLayout = waitForView(allOf(withId(R.id.map_options_route_button),
@@ -106,10 +118,11 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 		observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
 		registerIdlingResources(observeDistToFinishIdlingResource);
+
 		Espresso.onIdle();
 	}
 
-	private class ObserveDistToFinishIdlingResource extends BaseIdlingResource {
+	private static class ObserveDistToFinishIdlingResource extends BaseIdlingResource {
 
 		private static final int CHECK_INTERVAL = 1000;
 		private static final int IDLE_ON_LEFT_DISTANCE = 5900;

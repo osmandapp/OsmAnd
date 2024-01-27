@@ -1,4 +1,4 @@
-package net.osmand.plus.common;
+package net.osmand.test.common;
 
 import android.content.Context;
 
@@ -25,6 +25,8 @@ public abstract class AndroidTest {
 	public void setup() {
 		Context context = InstrumentationRegistry.getInstrumentation().getTargetContext();
 		app = ((OsmandApplication) context.getApplicationContext());
+
+		EspressoUtils.grantPermissions(app);
 
 		appInitIdlingResource = new AppInitIdlingResource(app);
 		registerIdlingResources(appInitIdlingResource);

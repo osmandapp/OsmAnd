@@ -1,4 +1,4 @@
-package net.osmand.plus.common;
+package net.osmand.test.common;
 
 import net.osmand.plus.OsmandApplication;
 

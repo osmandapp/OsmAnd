@@ -47,7 +47,9 @@ android {
 			assets.srcDirs = ["assets"]
 		}
 		androidTest {
-			java.srcDirs = ["tests"]
+			java.srcDirs = ["test/java"]
+			res.srcDirs = ["test/res"]
+			assets.srcDirs = ["test/assets"]
 		}
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
@@ -274,6 +276,15 @@ task copyWidgetIcons(type: Sync) {
 	}
 }
 
+task collectTestResources(type: Copy) {
+	into "test/assets/"
+	from("../../resources/test-resources/ui/") {
+		include "*"
+		include "/search/*"
+		include "/routing/*"
+	}
+}
+
 task collectExternalResources {
 	dependsOn collectVoiceAssets,
 			collectFonts,
@@ -291,7 +302,8 @@ task collectExternalResources {
 			copyHeightmapFiles,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
-			downloadDefaultWikivoyage
+			downloadDefaultWikivoyage,
+			collectTestResources
 }
 
 // Legacy core build
@@ -405,13 +417,13 @@ dependencies {
 
 	implementation 'com.google.android.gms:play-services-location:21.0.1'
 
-	implementation "androidx.tracing:tracing:1.1.0"
-	debugImplementation 'androidx.test:monitor:1.6.1'
+	//implementation "androidx.tracing:tracing:1.1.0"
+	//debugImplementation 'androidx.test:monitor:1.6.1'
 	androidTestImplementation "androidx.test:runner:1.5.2"
 	androidTestImplementation "androidx.test:rules:1.5.0"
 	androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-	debugImplementation("androidx.test:core:1.5.0")
-	androidTestImplementation 'androidx.test.ext:junit:1.2.0-alpha02'
+	//debugImplementation("androidx.test:core:1.5.0")
+	androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 	androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.5.1') {
 		exclude module: "protobuf-lite"
 	}
