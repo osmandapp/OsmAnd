@@ -7,6 +7,8 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 
+import androidx.annotation.NonNull;
+
 public class AlarmInfo implements LocationPoint {
 	public enum AlarmInfoType {
 		SPEED_CAMERA(1, R.string.traffic_warning_speed_camera),
@@ -47,12 +49,12 @@ public class AlarmInfo implements LocationPoint {
 	private double latitude;
 	private double longitude;
 	
-	public AlarmInfo(AlarmInfoType type, int locationIndex){
+	public AlarmInfo(@NonNull AlarmInfoType type, int locationIndex) {
 		this.type = type;
 		this.locationIndex = locationIndex;
 	}
 	
-	
+	@NonNull
 	public AlarmInfoType getType() {
 		return type;
 	}

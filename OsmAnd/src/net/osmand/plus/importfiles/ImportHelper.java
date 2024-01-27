@@ -380,26 +380,43 @@ public class ImportHelper {
 		}
 		String error = null;
 		InputStream in = null;
-		OutputStream out = null;
-		ZipInputStream zis = null;
 		try {
 			in = app.getContentResolver().openInputStream(uri);
 			if (in != null) {
-				if (unzip) {
-					ZipEntry entry;
-					zis = new ZipInputStream(in);
-					String extension = Algorithms.getFileExtension(dest);
-					while ((entry = zis.getNextEntry()) != null) {
-						if (entry.getName().endsWith(extension)) {
-							out = new FileOutputStream(dest);
-							Algorithms.streamCopy(zis, out);
-							break;
-						}
+				error = copyFile(app, dest, in, overwrite, unzip);
+			}
+		} catch (IOException | SecurityException e) {
+			e.printStackTrace();
+			error = e.getMessage();
+		} finally {
+			Algorithms.closeStream(in);
+		}
+		return error;
+	}
+
+	@Nullable
+	public static String copyFile(@NonNull OsmandApplication app, @NonNull File dest, @NonNull InputStream in, boolean overwrite, boolean unzip) {
+		if (dest.exists() && !overwrite) {
+			return app.getString(R.string.file_with_name_already_exists);
+		}
+		String error = null;
+		OutputStream out = null;
+		ZipInputStream zis = null;
+		try {
+			if (unzip) {
+				ZipEntry entry;
+				zis = new ZipInputStream(in);
+				String extension = Algorithms.getFileExtension(dest);
+				while ((entry = zis.getNextEntry()) != null) {
+					if (entry.getName().endsWith(extension)) {
+						out = new FileOutputStream(dest);
+						Algorithms.streamCopy(zis, out);
+						break;
 					}
-				} else {
-					out = new FileOutputStream(dest);
-					Algorithms.streamCopy(in, out);
 				}
+			} else {
+				out = new FileOutputStream(dest);
+				Algorithms.streamCopy(in, out);
 			}
 		} catch (IOException | SecurityException e) {
 			e.printStackTrace();
