@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.base.dialog.interfaces.other.IOnClickListener;
+import net.osmand.plus.base.dialog.interfaces.other.IOnButtonClick;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 public class DisplayDialogButtonItem {
@@ -12,7 +12,7 @@ public class DisplayDialogButtonItem {
 	@StringRes
 	private int titleId;
 	private DialogButtonType buttonType = DialogButtonType.SECONDARY;
-	private IOnClickListener onClickListener;
+	private IOnButtonClick onClickListener;
 
 	@StringRes
 	public int getTitleId() {
@@ -36,16 +36,16 @@ public class DisplayDialogButtonItem {
 		return this;
 	}
 
-	public void onButtonClick(@Nullable IOnClickListener alternative) {
+	public void onButtonClick(@Nullable IOnButtonClick alternative) {
 		if (onClickListener != null) {
-			onClickListener.onClick();
+			onClickListener.onButtonClicked();
 		} else if (alternative != null) {
-			alternative.onClick();
+			alternative.onButtonClicked();
 		}
 	}
 
 	@NonNull
-	public DisplayDialogButtonItem setOnClickListener(@Nullable IOnClickListener onClickListener) {
+	public DisplayDialogButtonItem setOnClickListener(@Nullable IOnButtonClick onClickListener) {
 		this.onClickListener = onClickListener;
 		return this;
 	}
