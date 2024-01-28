@@ -5515,4 +5515,15 @@
     <string name="key_event_action_move_down">Przesuń w dół</string>
     <string name="key_event_category_actions">Akcje</string>
     <string name="precise_distance_numbers">Dokładna odległość</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="add_new_button">Dodaj nowy przycisk</string>
+    <string name="shared_string_road_maps">Mapy dróg</string>
+    <string name="map_widget_sun_position_desc">Wyświetla czas do wschodu lub zachodu słońca.</string>
+    <string name="map_widget_sun_position">Pozycja słońca</string>
+    <string name="use_v1_auto_zoom">Dyskretny automatyczny zoom (stara wersja)</string>
+    <string name="button_already_assigned_to_this_action">Przycisk już przypisany do tej akcji.</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Wszystkie trasy</string>
+    <string name="shared_string_extensions">Rozszerzenia</string>
+    <string name="shared_string_license">Licencja</string>
 </resources>
