@@ -1,5 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_ACTION_HUD_ID;
+import static net.osmand.plus.utils.AndroidUtils.getCenterViewCoordinates;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -9,15 +12,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.Build;
-import android.os.Vibrator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.getkeepsafe.taptargetview.TapTarget;
-import com.getkeepsafe.taptargetview.TapTargetView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -36,26 +39,14 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.enums.MapPosition;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.util.Pair;
-
-import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
-import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
-import static net.osmand.plus.utils.AndroidUtils.getCenterViewCoordinates;
-import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
-import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 /**
  * Created by okorsun on 23.12.16.
@@ -69,15 +60,13 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     private final OsmandSettings settings;
     private final QuickActionRegistry quickActionRegistry;
 
-    private ImageButton quickActionButton;
+    private QuickActionButton quickActionButton;
     private QuickActionsWidget quickActionsWidget;
 
     private MapPosition previousMapPosition;
 
-    private boolean inMovingMarkerMode;
     private boolean isLayerOn;
-
-    private boolean nightMode;
+    private boolean inMovingMarkerMode;
     private Boolean currentWidgetState;
 
     public MapQuickActionLayer(@NonNull Context context) {
@@ -107,27 +96,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         super.setMapActivity(mapActivity);
         if (mapActivity != null) {
             quickActionsWidget = mapActivity.findViewById(R.id.quick_action_widget);
-            quickActionButton = mapActivity.findViewById(R.id.map_quick_actions_button);
-            setQuickActionButtonMargin();
+
+            ImageButton button = mapActivity.findViewById(R.id.map_quick_actions_button);
+            quickActionButton = new QuickActionButton(mapActivity, button, QUICK_ACTION_HUD_ID);
+
             isLayerOn = quickActionRegistry.isQuickActionOn();
-            nightMode = app.getDaynightHelper().isNightMode();
-            updateQuickActionButton(false);
-            quickActionButton.setContentDescription(getString(R.string.configure_screen_quick_action));
-            quickActionButton.setOnClickListener(v -> {
-                mapActivity.getFragmentsHelper().dismissCardDialog();
-                if (!showTutorialIfNeeded()) {
-                    setLayerState(!isWidgetVisible());
-                }
-            });
-            quickActionButton.setOnLongClickListener(v -> {
-                Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.vibrate(VIBRATE_SHORT);
-                quickActionButton.setScaleX(1.5f);
-                quickActionButton.setScaleY(1.5f);
-                quickActionButton.setAlpha(0.95f);
-                quickActionButton.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, quickActionButton, settings.QUICK_ACTION_FAB_MARGIN));
-                return true;
-            });
         } else {
             quickActionsWidget = null;
             quickActionButton = null;
@@ -137,60 +110,11 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
     public void refreshLayer() {
         setLayerState(false);
         isLayerOn = quickActionRegistry.isQuickActionOn();
-        setupQuickActionBtnVisibility();
+        quickActionButton.updateVisibility();
         if (isLayerOn) {
-            setQuickActionButtonMargin();
+            quickActionButton.setQuickActionButtonMargin();
         }
     }
-
-    private boolean showTutorialIfNeeded() {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity != null && isLayerOn && !app.accessibilityEnabled()
-                && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get()) {
-            TapTargetView.showFor(mapActivity,                 // `this` is an Activity
-                    TapTarget.forView(quickActionButton, getString(R.string.quick_action_btn_tutorial_title), getString(R.string.quick_action_btn_tutorial_descr))
-                            // All options below are optional
-                            .outerCircleColor(R.color.osmand_orange)      // Specify a color for the outer circle
-                            .targetCircleColor(R.color.card_and_list_background_light)   // Specify a color for the target circle
-                            .titleTextSize(20)                  // Specify the size (in sp) of the title text
-                            .descriptionTextSize(16)            // Specify the size (in sp) of the description text
-                            .descriptionTextColor(R.color.card_and_list_background_light)            // Specify a color for both the title and description text
-                            .titleTextColor(R.color.card_and_list_background_light)            // Specify a color for both the title and description text
-                            .drawShadow(true)                   // Whether to draw a drop shadow or not
-                            .cancelable(false)                  // Whether tapping outside the outer circle dismisses the view
-                            .tintTarget(false)                   // Whether to tint the target view's color
-                            .transparentTarget(false)           // Specify whether the target is transparent (displays the content underneath)
-                            .targetRadius(50),                  // Specify the target radius (in dp)
-                    new TapTargetView.Listener() {          // The listener can listen for regular clicks, long clicks or cancels
-                        @Override
-                        public void onTargetClick(TapTargetView view) {
-                            super.onTargetClick(view);      // This call is optional
-                            settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.set(true);
-                        }
-                    });
-            return true;
-        } else
-            return false;
-    }
-
-    private void setQuickActionButtonMargin() {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity != null) {
-            int defRightMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
-            int defBottomMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
-            FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) quickActionButton.getLayoutParams();
-            FabMarginPreference preference = settings.QUICK_ACTION_FAB_MARGIN;
-            if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-                Pair<Integer, Integer> fabMargin = preference.getPortraitFabMargin();
-                setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, 0, defBottomMargin);
-            } else {
-                Pair<Integer, Integer> fabMargin = preference.getLandscapeFabMargin();
-                setFabButtonMargin(mapActivity, quickActionButton, param, fabMargin, defRightMargin, 0);
-            }
-        }
-    }
-
-
 
 	public boolean isWidgetVisible() {
 		return quickActionsWidget != null && quickActionsWidget.getVisibility() == View.VISIBLE;
@@ -213,7 +137,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		}
 		currentWidgetState = showWidget;
 
-		updateQuickActionButton(showWidget);
+		quickActionButton.updateButton(showWidget);
 		if (settings.DO_NOT_USE_ANIMATIONS.get() || !quickActionsWidget.isAttachedToWindow()) {
 			AndroidUiHelper.updateVisibility(quickActionsWidget, showWidget);
 		} else {
@@ -240,7 +164,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         }
         AnimatorSet set = new AnimatorSet();
         List<Animator> animators = new ArrayList<>();
-        int[] animationCoordinates = getCenterViewCoordinates(quickActionButton);
+        int[] animationCoordinates = getCenterViewCoordinates(quickActionButton.getView());
         int centerX = quickActionsWidget.getWidth() / 2;
         int centerY = quickActionsWidget.getHeight() / 2;
         float initialValueX = show ? animationCoordinates[0] - centerX : 0;
@@ -281,16 +205,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         });
         set.start();
     }
-
-	private void updateQuickActionButton(boolean widgetVisible) {
-	    if (quickActionButton != null) {
-            quickActionButton.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans);
-            int iconId = !widgetVisible ? R.drawable.ic_quick_action : R.drawable.ic_action_close;
-            int colorId = ColorUtilities.getMapButtonIconColorId(nightMode);
-            setMapButtonIcon(quickActionButton, app.getUIUtilities().getIcon(iconId, colorId));
-            quickActionButton.setContentDescription(getString(!widgetVisible ? R.string.configure_screen_quick_action : R.string.shared_string_cancel));
-        }
-	}
 
     private void enterMovingMode(RotatedTileBox tileBox) {
         MapActivity mapActivity = getMapActivity();
@@ -393,30 +307,18 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         return quickActionsWidget != null && py <= quickActionsWidget.getHeight();
     }
 
-	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
-		boolean nightMode = app.getDaynightHelper().isNightMode();
-		if (isInMovingMarkerMode()) {
-			canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
-			contextMarker.draw(canvas);
-		}
-		if (this.nightMode != nightMode) {
-            this.nightMode = nightMode;
-            boolean widgetVisible = false;
-            if (currentWidgetState != null) {
-                widgetVisible = currentWidgetState;
-            }
-            updateQuickActionButton(widgetVisible);
+    @Override
+    public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
+        if (isInMovingMarkerMode()) {
+            canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
+            contextMarker.draw(canvas);
         }
-		setupQuickActionBtnVisibility();
-	}
+        boolean nightMode = app.getDaynightHelper().isNightMode();
+        quickActionButton.update(nightMode, false, false);
+    }
 
-    private void setupQuickActionBtnVisibility() {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity != null) {
-            boolean visible = mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
-            quickActionButton.setVisibility(visible ? View.VISIBLE : View.GONE);
-        }
+    public boolean getCurrentWidgetState() {
+        return currentWidgetState != null ? currentWidgetState : false;
     }
 
     @Override
