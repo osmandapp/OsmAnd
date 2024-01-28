@@ -216,7 +216,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	private void updateListItems() {
 		MapActivity ma = getMapActivity();
 		OsmandApplication app = ma.getMyApplication();
-		List<QuickAction> actions = quickActionRegistry.getFilteredQuickActions();
+		List<QuickAction> actions = quickActionRegistry.getQuickActions();
 
 		updateToolbarActionButton();
 		List<ListItem> items = new ArrayList<>();
@@ -479,13 +479,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 					h.deleteBtn.setClickable(true);
 					h.deleteBtn.setFocusable(true);
 					h.itemContainer.setOnClickListener(view -> {
-						CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-						FragmentManager fm = getFragmentManager();
-						if (fm != null && !dialog.isStateSaved()) {
-							dialog.show(fm, CreateEditActionDialog.TAG);
+						FragmentManager manager = getFragmentManager();
+						if (manager != null) {
+							CreateEditActionDialog.showInstance(manager, action);
 						}
 					});
-
 				} else if (screenType == SCREEN_TYPE_DELETE) {
 					h.moveButton.setVisibility(View.GONE);
 					h.deleteIcon.setVisibility(View.GONE);
@@ -698,8 +696,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class DescriptionVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class DescriptionVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			private final TextView tvDescription;
 
@@ -714,8 +711,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class ListDividerVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class ListDividerVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			public ListDividerVH(View itemView) {
 				super(itemView);
@@ -727,8 +723,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class BottomShadowVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class BottomShadowVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			public BottomShadowVH(View itemView) {
 				super(itemView);
@@ -740,8 +735,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			}
 		}
 
-		private class ButtonVH extends RecyclerView.ViewHolder
-				implements ReorderItemTouchHelperCallback.UnmovableItem {
+		private class ButtonVH extends RecyclerView.ViewHolder implements UnmovableItem {
 
 			private final View container;
 			private final ImageView icon;
@@ -803,9 +797,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void showAddQuickActionDialog() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null) {
-			AddQuickActionDialog.showInstance(fm, false);
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			AddQuickActionDialog.showInstance(manager, false);
 		}
 	}
 
@@ -833,23 +827,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
-		showInstance(activity, false);
-	}
-
-	public static void showInstance(@NonNull FragmentActivity activity, boolean animate) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
-			int slideInAnim = 0;
-			int slideOutAnim = 0;
-			OsmandApplication app = ((OsmandApplication) activity.getApplication());
-			if (animate && !app.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			}
-
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			QuickActionListFragment fragment = new QuickActionListFragment();
-			fm.beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

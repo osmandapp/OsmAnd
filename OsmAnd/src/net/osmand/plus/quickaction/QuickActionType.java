@@ -1,6 +1,7 @@
 package net.osmand.plus.quickaction;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import java.lang.reflect.InvocationTargetException;
@@ -63,15 +64,12 @@ public class QuickActionType {
 		return this;
 	}
 
-
-
+	@NonNull
 	public QuickAction createNew() {
 		if(cl != null) {
 			try {
 				return cl.newInstance();
-			} catch (InstantiationException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (IllegalAccessException e) {
+			} catch (InstantiationException | IllegalAccessException e) {
 				throw new UnsupportedOperationException(e);
 			}
 		} else {
@@ -79,21 +77,16 @@ public class QuickActionType {
 		}
 	}
 
-	public QuickAction createNew(QuickAction q) {
-		if(cl != null) {
+	@NonNull
+	public QuickAction createNew(@NonNull QuickAction action) {
+		if (cl != null) {
 			try {
-				return cl.getConstructor(QuickAction.class).newInstance(q);
-			} catch (InstantiationException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (IllegalAccessException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (NoSuchMethodException e) {
-				throw new UnsupportedOperationException(e);
-			} catch (InvocationTargetException e) {
+				return cl.getConstructor(QuickAction.class).newInstance(action);
+			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 				throw new UnsupportedOperationException(e);
 			}
 		} else {
-			return new QuickAction(q);
+			return new QuickAction(action);
 		}
 	}
 

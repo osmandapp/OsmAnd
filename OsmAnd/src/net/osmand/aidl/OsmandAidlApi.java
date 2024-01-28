@@ -880,7 +880,7 @@ public class OsmandAidlApi {
 				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
 				MapActivity mapActivity = mapActivityRef.get();
 				if (actionNumber != -1 && mapActivity != null) {
-					List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+					List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
 					if (actionNumber < actionsList.size()) {
 						QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
 					}
@@ -2357,7 +2357,7 @@ public class OsmandAidlApi {
 		Type type = new TypeToken<HashMap<String, String>>() {
 		}.getType();
 
-		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
 		for (int i = 0; i < actionsList.size(); i++) {
 			QuickAction action = actionsList.get(i);
 			String name = action.getName(app);
@@ -2374,7 +2374,7 @@ public class OsmandAidlApi {
 		Type type = new TypeToken<HashMap<String, String>>() {
 		}.getType();
 
-		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
 		for (int i = 0; i < actionsList.size(); i++) {
 			QuickAction action = actionsList.get(i);
 			String name = action.getName(app);

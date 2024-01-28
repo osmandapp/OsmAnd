@@ -28,9 +28,9 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 
-public class CompassVisibilityBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = CompassVisibilityBottomSheetDialogFragment.class.getSimpleName();
+	public static final String TAG = CompassVisibilityBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -127,12 +127,13 @@ public class CompassVisibilityBottomSheetDialogFragment extends MenuBottomSheetD
 	                                @Nullable Fragment target,
 	                                @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			CompassVisibilityBottomSheetDialogFragment fragment = new CompassVisibilityBottomSheetDialogFragment();
-			fragment.setTargetFragment(target, 0);
-			fragment.setUsedOnMap(false);
 			Bundle args = new Bundle();
 			args.putString(APP_MODE_KEY, appMode.getStringKey());
+
+			CompassVisibilityBottomSheet fragment = new CompassVisibilityBottomSheet();
 			fragment.setArguments(args);
+			fragment.setUsedOnMap(false);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 		}
 	}
