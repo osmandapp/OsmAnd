@@ -44,238 +44,238 @@ import java.util.List;
 
 public class CreateEditActionDialog extends DialogFragment implements CallbackWithObject<Object>, OnConfirmButtonClickListener {
 
-    public static final String TAG = CreateEditActionDialog.class.getSimpleName();
+	public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
-    public static final String KEY_ACTION_ID = "action_id";
-    public static final String KEY_ACTION_TYPE = "action_type";
-    public static final String KEY_ACTION_IS_NEW = "action_is_new";
+	public static final String KEY_ACTION_ID = "action_id";
+	public static final String KEY_ACTION_TYPE = "action_type";
+	public static final String KEY_ACTION_IS_NEW = "action_is_new";
 
-    private OsmandApplication app;
-    private OsmandSettings settings;
-    private UiUtilities uiUtilities;
-    private QuickActionRegistry actionRegistry;
-    private QuickAction action;
+	private OsmandApplication app;
+	private OsmandSettings settings;
+	private UiUtilities uiUtilities;
+	private QuickActionRegistry actionRegistry;
+	private QuickAction action;
 
-    private boolean isNew;
-    private boolean nightMode;
+	private boolean isNew;
+	private boolean nightMode;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        app = (OsmandApplication) requireActivity().getApplication();
-        settings = app.getSettings();
-        uiUtilities = app.getUIUtilities();
-        actionRegistry = app.getQuickActionRegistry();
+		app = (OsmandApplication) requireActivity().getApplication();
+		settings = app.getSettings();
+		uiUtilities = app.getUIUtilities();
+		actionRegistry = app.getQuickActionRegistry();
 
-        nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
-        setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
+		nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
+		setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 
-        int type = savedInstanceState == null ? getArguments().getInt(KEY_ACTION_TYPE) : savedInstanceState.getInt(KEY_ACTION_TYPE);
-        long actionId = savedInstanceState == null ? getArguments().getLong(KEY_ACTION_ID) : savedInstanceState.getLong(KEY_ACTION_ID);
-        isNew = savedInstanceState == null ? actionId == 0 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
+		int type = savedInstanceState == null ? getArguments().getInt(KEY_ACTION_TYPE) : savedInstanceState.getInt(KEY_ACTION_TYPE);
+		long actionId = savedInstanceState == null ? getArguments().getLong(KEY_ACTION_ID) : savedInstanceState.getLong(KEY_ACTION_ID);
+		isNew = savedInstanceState == null ? actionId == 0 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
 
-        QuickAction quickAction = isNew ? actionRegistry.newActionByType(type) : actionRegistry.getQuickAction(actionId);
-        action = QuickActionRegistry.produceAction(quickAction);
-    }
+		QuickAction quickAction = isNew ? actionRegistry.newActionByType(type) : actionRegistry.getQuickAction(actionId);
+		action = QuickActionRegistry.produceAction(quickAction);
+	}
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = new Dialog(UiUtilities.getThemedContext(getActivity(), nightMode, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
-        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		Dialog dialog = new Dialog(UiUtilities.getThemedContext(getActivity(), nightMode, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
+		dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        return dialog;
-    }
+		return dialog;
+	}
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.quick_action_create_edit_dialog, parent, false);
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.quick_action_create_edit_dialog, parent, false);
 
-        setupToolbar(view);
-        setupHeader(view, savedInstanceState);
-        setupFooter(view);
+		setupToolbar(view);
+		setupHeader(view, savedInstanceState);
+		setupFooter(view);
 
-        action.drawUI(view.findViewById(R.id.container), getMapActivity());
+		action.drawUI(view.findViewById(R.id.container), getMapActivity());
 
-        return view;
-    }
+		return view;
+	}
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
 
-        outState.putLong(KEY_ACTION_ID, action.getId());
-        outState.putInt(KEY_ACTION_TYPE, action.getType());
-        outState.putBoolean(KEY_ACTION_IS_NEW, isNew);
-    }
+		outState.putLong(KEY_ACTION_ID, action.getId());
+		outState.putInt(KEY_ACTION_TYPE, action.getType());
+		outState.putBoolean(KEY_ACTION_IS_NEW, isNew);
+	}
 
-    private void setupToolbar(@NonNull View root) {
-        Toolbar toolbar = root.findViewById(R.id.toolbar);
-        toolbar.setTitle(isNew ? R.string.quick_action_new_action : R.string.quick_action_edit_action);
+	private void setupToolbar(@NonNull View root) {
+		Toolbar toolbar = root.findViewById(R.id.toolbar);
+		toolbar.setTitle(isNew ? R.string.quick_action_new_action : R.string.quick_action_edit_action);
 
-        int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-        toolbar.setTitleTextColor(ContextCompat.getColor(app, color));
-        toolbar.setNavigationIcon(uiUtilities.getIcon(AndroidUtils.getNavigationIconResId(app), color));
-        toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-        toolbar.setNavigationOnClickListener(v -> dismiss());
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, color));
+		toolbar.setNavigationIcon(uiUtilities.getIcon(AndroidUtils.getNavigationIconResId(app), color));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(v -> dismiss());
 
-        if (!isNew) {
-            Menu menu = toolbar.getMenu();
-            menu.clear();
+		if (!isNew) {
+			Menu menu = toolbar.getMenu();
+			menu.clear();
 
-            MenuItem item = menu.add(R.string.shared_string_delete).setIcon(R.drawable.ic_action_delete_dark);
-            item.setOnMenuItemClickListener(i -> {
-                FragmentActivity activity = getActivity();
-                if (activity != null) {
-                    showConfirmDeleteAnActionBottomSheet(activity, CreateEditActionDialog.this, action, false);
-                }
-                return true;
-            });
-            item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-        }
-    }
+			MenuItem item = menu.add(R.string.shared_string_delete).setIcon(R.drawable.ic_action_delete_dark);
+			item.setOnMenuItemClickListener(i -> {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					showConfirmDeleteAnActionBottomSheet(activity, CreateEditActionDialog.this, action, false);
+				}
+				return true;
+			});
+			item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		}
+	}
 
-    private void setupHeader(@NonNull View root, @Nullable Bundle savedInstanceState) {
-        EditText nameEditText = root.findViewById(R.id.name);
-        nameEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
-        nameEditText.addTextChangedListener(new SimpleTextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                action.setName(charSequence.toString());
-            }
-        });
-        nameEditText.setEnabled(action.isActionEditable());
-        action.setAutoGeneratedTitle(nameEditText);
+	private void setupHeader(@NonNull View root, @Nullable Bundle savedInstanceState) {
+		EditText nameEditText = root.findViewById(R.id.name);
+		nameEditText.setTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
+		nameEditText.addTextChangedListener(new SimpleTextWatcher() {
+			@Override
+			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+				action.setName(charSequence.toString());
+			}
+		});
+		nameEditText.setEnabled(action.isActionEditable());
+		action.setAutoGeneratedTitle(nameEditText);
 
-        if (savedInstanceState == null) {
-            String name = action.getName(app);
-            if (!action.isActionEditable() && action.getActionNameRes() != 0
-                    && !name.contains(getString(action.getActionNameRes()))) {
-                String actionName = getString(action.getActionNameRes());
-                nameEditText.setText(getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name));
-            } else {
-                nameEditText.setText(name);
-            }
-        } else {
-            action.setName(nameEditText.getText().toString());
-        }
-        ImageView image = root.findViewById(R.id.image);
-        image.setImageResource(action.getIconRes(app));
-    }
+		if (savedInstanceState == null) {
+			String name = action.getName(app);
+			if (!action.isActionEditable() && action.getActionNameRes() != 0
+					&& !name.contains(getString(action.getActionNameRes()))) {
+				String actionName = getString(action.getActionNameRes());
+				nameEditText.setText(getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name));
+			} else {
+				nameEditText.setText(name);
+			}
+		} else {
+			action.setName(nameEditText.getText().toString());
+		}
+		ImageView image = root.findViewById(R.id.image);
+		image.setImageResource(action.getIconRes(app));
+	}
 
-    private void setupFooter(@NonNull View root) {
-        root.findViewById(R.id.btnApply).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (action instanceof AddPOIAction) {
-                    saveFirstTagWithEmptyValue();
-                }
-                if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
-                    if (actionRegistry.isNameUnique(action, app)) {
-                        if (isNew) {
-                            actionRegistry.addQuickAction(action);
-                        } else {
-                            actionRegistry.updateQuickAction(action);
-                        }
-                        dismiss();
-                    } else {
-                        action = actionRegistry.generateUniqueName(action, app);
-                        showDuplicatedDialog();
-                        ((EditText) root.findViewById(R.id.name)).setText(action.getName(app));
-                    }
-                } else {
-                    app.showShortToastMessage(R.string.quick_action_empty_param_error);
-                }
-            }
+	private void setupFooter(@NonNull View root) {
+		root.findViewById(R.id.btnApply).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (action instanceof AddPOIAction) {
+					saveFirstTagWithEmptyValue();
+				}
+				if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
+					if (actionRegistry.isNameUnique(action, app)) {
+						if (isNew) {
+							actionRegistry.addQuickAction(action);
+						} else {
+							actionRegistry.updateQuickAction(action);
+						}
+						dismiss();
+					} else {
+						action = actionRegistry.generateUniqueName(action, app);
+						showDuplicatedDialog();
+						((EditText) root.findViewById(R.id.name)).setText(action.getName(app));
+					}
+				} else {
+					app.showShortToastMessage(R.string.quick_action_empty_param_error);
+				}
+			}
 
-            private void saveFirstTagWithEmptyValue() {
-                ((ViewGroup) root.findViewById(R.id.container)).getChildAt(0).requestFocus();
-            }
-        });
-    }
+			private void saveFirstTagWithEmptyValue() {
+				((ViewGroup) root.findViewById(R.id.container)).getChildAt(0).requestFocus();
+			}
+		});
+	}
 
-    private void showDuplicatedDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle(R.string.quick_action_duplicate);
-        builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(app)));
-        builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-            if (isNew) {
-                actionRegistry.addQuickAction(action);
-            } else {
-                actionRegistry.updateQuickAction(action);
-            }
-            CreateEditActionDialog.this.dismiss();
-            dismiss();
-        });
-        builder.create().show();
+	private void showDuplicatedDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+		builder.setTitle(R.string.quick_action_duplicate);
+		builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(app)));
+		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+			if (isNew) {
+				actionRegistry.addQuickAction(action);
+			} else {
+				actionRegistry.updateQuickAction(action);
+			}
+			CreateEditActionDialog.this.dismiss();
+			dismiss();
+		});
+		builder.create().show();
 
-    }
+	}
 
-    @Override
-    public boolean processResult(Object result) {
-        if (action instanceof SwitchableAction) {
-            ((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
-        } else if (action instanceof FileSelected) {
-            View container = getView() != null ? getView().findViewById(R.id.container) : null;
-            MapActivity mapActivity = getMapActivity();
-            if (container != null && mapActivity != null && result instanceof String) {
-                ((FileSelected) action).onGpxFileSelected(container, mapActivity, (String) result);
-            }
-        }
-        return false;
-    }
+	@Override
+	public boolean processResult(Object result) {
+		if (action instanceof SwitchableAction) {
+			((SwitchableAction) action).onItemsSelected(getContext(), (List) result);
+		} else if (action instanceof FileSelected) {
+			View container = getView() != null ? getView().findViewById(R.id.container) : null;
+			MapActivity mapActivity = getMapActivity();
+			if (container != null && mapActivity != null && result instanceof String) {
+				((FileSelected) action).onGpxFileSelected(container, mapActivity, (String) result);
+			}
+		}
+		return false;
+	}
 
-    @Override
-    public void onConfirmButtonClick() {
-        actionRegistry.deleteQuickAction(action);
-        dismiss();
-    }
+	@Override
+	public void onConfirmButtonClick() {
+		actionRegistry.deleteQuickAction(action);
+		dismiss();
+	}
 
-    public void hide() {
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            dialog.hide();
-        }
-    }
+	public void hide() {
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			dialog.hide();
+		}
+	}
 
-    public void show() {
-        Dialog dialog = getDialog();
-        if (dialog != null) {
-            dialog.show();
-        }
-    }
+	public void show() {
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			dialog.show();
+		}
+	}
 
-    @Nullable
-    private MapActivity getMapActivity() {
-        return getActivity() == null ? null : ((MapActivity) getActivity());
-    }
+	@Nullable
+	private MapActivity getMapActivity() {
+		return getActivity() == null ? null : ((MapActivity) getActivity());
+	}
 
-    public interface FileSelected {
-        void onGpxFileSelected(@NonNull View container, @NonNull MapActivity mapActivity, @NonNull String gpxFilePath);
-    }
+	public interface FileSelected {
+		void onGpxFileSelected(@NonNull View container, @NonNull MapActivity mapActivity, @NonNull String gpxFilePath);
+	}
 
-    public static void showInstance(@NonNull FragmentManager manager, int actionTypeId) {
-        if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-            Bundle args = new Bundle();
-            args.putInt(KEY_ACTION_TYPE, actionTypeId);
+	public static void showInstance(@NonNull FragmentManager manager, int actionTypeId) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putInt(KEY_ACTION_TYPE, actionTypeId);
 
-            CreateEditActionDialog dialog = new CreateEditActionDialog();
-            dialog.setArguments(args);
-            dialog.show(manager, TAG);
-        }
-    }
+			CreateEditActionDialog dialog = new CreateEditActionDialog();
+			dialog.setArguments(args);
+			dialog.show(manager, TAG);
+		}
+	}
 
-    public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
-        if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-            Bundle args = new Bundle();
-            args.putLong(KEY_ACTION_ID, action.id);
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = new Bundle();
+			args.putLong(KEY_ACTION_ID, action.id);
 
-            CreateEditActionDialog dialog = new CreateEditActionDialog();
-            dialog.setArguments(args);
-            dialog.show(fragmentManager, TAG);
-        }
-    }
+			CreateEditActionDialog dialog = new CreateEditActionDialog();
+			dialog.setArguments(args);
+			dialog.show(fragmentManager, TAG);
+		}
+	}
 }

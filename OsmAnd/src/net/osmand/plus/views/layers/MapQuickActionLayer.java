@@ -44,68 +44,68 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
  */
 
 public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUpdatesListener,
-        QuickActionSelectionListener, IMapDisplayPositionProvider {
+		QuickActionSelectionListener, IMapDisplayPositionProvider {
 
-    private ImageView contextMarker;
-    private final OsmandApplication app;
-    private final OsmandSettings settings;
-    private final QuickActionRegistry quickActionRegistry;
+	private ImageView contextMarker;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+	private final QuickActionRegistry quickActionRegistry;
 
-    private QuickActionButton quickActionButton;
-    private QuickActionsWidget quickActionsWidget;
+	private QuickActionButton quickActionButton;
+	private QuickActionsWidget quickActionsWidget;
 
-    private MapPosition previousMapPosition;
+	private MapPosition previousMapPosition;
 
-    private boolean isLayerOn;
-    private boolean inMovingMarkerMode;
-    private Boolean currentWidgetState;
+	private boolean isLayerOn;
+	private boolean inMovingMarkerMode;
+	private Boolean currentWidgetState;
 
-    public MapQuickActionLayer(@NonNull Context context) {
-        super(context);
-        app = getApplication();
-        settings = app.getSettings();
-        quickActionRegistry = app.getQuickActionRegistry();
-    }
+	public MapQuickActionLayer(@NonNull Context context) {
+		super(context);
+		app = getApplication();
+		settings = app.getSettings();
+		quickActionRegistry = app.getQuickActionRegistry();
+	}
 
-    @Override
-    public void initLayer(@NonNull OsmandMapTileView view) {
-        super.initLayer(view);
+	@Override
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		super.initLayer(view);
 
-        Context context = getContext();
-        contextMarker = new ImageView(context);
-        contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-        contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));
-        contextMarker.setClickable(true);
-        int width = contextMarker.getDrawable().getMinimumWidth();
-        int height = contextMarker.getDrawable().getMinimumHeight();
-        contextMarker.layout(0, 0, width, height);
-    }
+		Context context = getContext();
+		contextMarker = new ImageView(context);
+		contextMarker.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+		contextMarker.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu));
+		contextMarker.setClickable(true);
+		int width = contextMarker.getDrawable().getMinimumWidth();
+		int height = contextMarker.getDrawable().getMinimumHeight();
+		contextMarker.layout(0, 0, width, height);
+	}
 
-    @SuppressLint("ClickableViewAccessibility")
-    @Override
-    public void setMapActivity(@Nullable MapActivity mapActivity) {
-        super.setMapActivity(mapActivity);
-        if (mapActivity != null) {
-            quickActionsWidget = mapActivity.findViewById(R.id.quick_action_widget);
+	@SuppressLint("ClickableViewAccessibility")
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			quickActionsWidget = mapActivity.findViewById(R.id.quick_action_widget);
 
-            ImageButton button = mapActivity.findViewById(R.id.map_quick_actions_button);
-            quickActionButton = new QuickActionButton(mapActivity, button, QUICK_ACTION_HUD_ID);
+			ImageButton button = mapActivity.findViewById(R.id.map_quick_actions_button);
+			quickActionButton = new QuickActionButton(mapActivity, button, QUICK_ACTION_HUD_ID);
 
-            isLayerOn = quickActionRegistry.isQuickActionOn();
-        } else {
-            quickActionsWidget = null;
-            quickActionButton = null;
-        }
-    }
+			isLayerOn = quickActionRegistry.isQuickActionOn();
+		} else {
+			quickActionsWidget = null;
+			quickActionButton = null;
+		}
+	}
 
-    public void refreshLayer() {
-        updateWidgetVisibility(false);
-        isLayerOn = quickActionRegistry.isQuickActionOn();
-        quickActionButton.updateVisibility();
-        if (isLayerOn) {
-            quickActionButton.setQuickActionButtonMargin();
-        }
-    }
+	public void refreshLayer() {
+		updateWidgetVisibility(false);
+		isLayerOn = quickActionRegistry.isQuickActionOn();
+		quickActionButton.updateVisibility();
+		if (isLayerOn) {
+			quickActionButton.setQuickActionButtonMargin();
+		}
+	}
 
 	public boolean isWidgetVisible() {
 		return quickActionsWidget != null && quickActionsWidget.getVisibility() == View.VISIBLE;
@@ -142,164 +142,164 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		return true;
 	}
 
-    private void animateWidget(boolean show) {
-        if (quickActionsWidget != null) {
-            int[] coordinates = getCenterViewCoordinates(quickActionButton.getView());
-            quickActionsWidget.animateWidget(show, coordinates);
-        }
-    }
+	private void animateWidget(boolean show) {
+		if (quickActionsWidget != null) {
+			int[] coordinates = getCenterViewCoordinates(quickActionButton.getView());
+			quickActionsWidget.animateWidget(show, coordinates);
+		}
+	}
 
-    private void enterMovingMode(RotatedTileBox tileBox) {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity == null) {
-            return;
-        }
-        previousMapPosition = mapActivity.getMapPositionManager().getNavigationMapPosition();
-        MapContextMenu menu = mapActivity.getContextMenu();
+	private void enterMovingMode(RotatedTileBox tileBox) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		previousMapPosition = mapActivity.getMapPositionManager().getNavigationMapPosition();
+		MapContextMenu menu = mapActivity.getContextMenu();
 
-        LatLon ll = menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon())
-                ? menu.getLatLon() : tileBox.getCenterLatLon();
-        boolean isFollowPoint = isFollowPoint(tileBox, menu);
+		LatLon ll = menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon())
+				? menu.getLatLon() : tileBox.getCenterLatLon();
+		boolean isFollowPoint = isFollowPoint(tileBox, menu);
 
-        menu.updateMapCenter(null);
-        menu.close();
+		menu.updateMapCenter(null);
+		menu.close();
 
-        RotatedTileBox rb = new RotatedTileBox(tileBox);
-        if (!isFollowPoint && previousMapPosition != MapPosition.BOTTOM)
-            rb.setCenterLocation(0.5f, 0.3f);
+		RotatedTileBox rb = new RotatedTileBox(tileBox);
+		if (!isFollowPoint && previousMapPosition != MapPosition.BOTTOM)
+			rb.setCenterLocation(0.5f, 0.3f);
 
-        rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
+		rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
 
-        MapRendererView mapRenderer = view.getMapRenderer();
-        if (mapRenderer != null) {
-            if (!isFollowPoint) {
-                view.setLatLon(ll.getLatitude(), ll.getLongitude());
-            }
-        } else {
-            double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-            double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-            view.setLatLon(lat, lon);
-        }
-        inMovingMarkerMode = true;
-        AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
-                R.id.map_ruler_layout, R.id.map_left_widgets_panel,
-                R.id.map_right_widgets_panel, R.id.map_center_info);
-        updateMapDisplayPosition();
-        view.refreshMap();
-    }
+		MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			if (!isFollowPoint) {
+				view.setLatLon(ll.getLatitude(), ll.getLongitude());
+			}
+		} else {
+			double lat = rb.getLatFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			view.setLatLon(lat, lon);
+		}
+		inMovingMarkerMode = true;
+		AndroidUiHelper.setVisibility(mapActivity, View.INVISIBLE,
+				R.id.map_ruler_layout, R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel, R.id.map_center_info);
+		updateMapDisplayPosition();
+		view.refreshMap();
+	}
 
-    private void quitMovingMarker() {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity == null) {
-            return;
-        }
-        RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
-        if (!isFollowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != MapPosition.BOTTOM) {
-            RotatedTileBox rb = tileBox.copy();
-            rb.setCenterLocation(0.5f, 0.5f);
-            LatLon ll = tileBox.getCenterLatLon();
-            MapRendererView mapRenderer = view.getMapRenderer();
-            if (mapRenderer != null) {
-                NativeUtilities.calculateTarget31(mapRenderer, ll.getLatitude(), ll.getLongitude(), true);
-            } else {
-                rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
-                double lat = tileBox.getLatFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
-                double lon = tileBox.getLonFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
-                view.setLatLon(lat, lon);
-            }
-        }
-        inMovingMarkerMode = false;
-        AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
-                R.id.map_ruler_layout, R.id.map_left_widgets_panel,
-                R.id.map_right_widgets_panel, R.id.map_center_info);
-        updateMapDisplayPosition();
-        view.refreshMap();
-    }
+	private void quitMovingMarker() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		RotatedTileBox tileBox = mapActivity.getMapView().getCurrentRotatedTileBox();
+		if (!isFollowPoint(tileBox, mapActivity.getContextMenu()) && previousMapPosition != MapPosition.BOTTOM) {
+			RotatedTileBox rb = tileBox.copy();
+			rb.setCenterLocation(0.5f, 0.5f);
+			LatLon ll = tileBox.getCenterLatLon();
+			MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null) {
+				NativeUtilities.calculateTarget31(mapRenderer, ll.getLatitude(), ll.getLongitude(), true);
+			} else {
+				rb.setLatLonCenter(ll.getLatitude(), ll.getLongitude());
+				double lat = tileBox.getLatFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
+				double lon = tileBox.getLonFromPixel(rb.getCenterPixelX(), rb.getCenterPixelY());
+				view.setLatLon(lat, lon);
+			}
+		}
+		inMovingMarkerMode = false;
+		AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE,
+				R.id.map_ruler_layout, R.id.map_left_widgets_panel,
+				R.id.map_right_widgets_panel, R.id.map_center_info);
+		updateMapDisplayPosition();
+		view.refreshMap();
+	}
 
-    private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
-        return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
-                app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
-                menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to follow if there is selected point on map
-    }
+	private boolean isFollowPoint(RotatedTileBox tileBox, MapContextMenu menu) {
+		return OsmAndLocationProvider.isLocationPermissionAvailable(getContext()) &&
+				app.getMapViewTrackingUtilities().isMapLinkedToLocation() ||
+				menu.isActive() && NativeUtilities.containsLatLon(getMapRenderer(), tileBox, menu.getLatLon());  // remove if not to follow if there is selected point on map
+	}
 
-    private void updateMapDisplayPosition() {
-        MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
-        manager.updateMapPositionProviders(this, inMovingMarkerMode);
-        manager.updateMapDisplayPosition();
-    }
+	private void updateMapDisplayPosition() {
+		MapDisplayPositionManager manager = app.getMapViewTrackingUtilities().getMapDisplayPositionManager();
+		manager.updateMapPositionProviders(this, inMovingMarkerMode);
+		manager.updateMapDisplayPosition();
+	}
 
-    @Nullable
-    @Override
-    public MapPosition getMapDisplayPosition() {
-        if (inMovingMarkerMode) {
-            return MapPosition.MIDDLE_BOTTOM;
-        }
-        return null;
-    }
+	@Nullable
+	@Override
+	public MapPosition getMapDisplayPosition() {
+		if (inMovingMarkerMode) {
+			return MapPosition.MIDDLE_BOTTOM;
+		}
+		return null;
+	}
 
-    @Override
-    public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
-        if (isInMovingMarkerMode() && !pressedQuickActionWidget(point.x, point.y)) {
-            updateWidgetVisibility(false);
-            return true;
-        } else
-            return false;
-    }
+	@Override
+	public boolean onSingleTap(@NonNull PointF point, @NonNull RotatedTileBox tileBox) {
+		if (isInMovingMarkerMode() && !pressedQuickActionWidget(point.x, point.y)) {
+			updateWidgetVisibility(false);
+			return true;
+		} else
+			return false;
+	}
 
-    private boolean pressedQuickActionWidget(float px, float py) {
-        return quickActionsWidget != null && py <= quickActionsWidget.getHeight();
-    }
+	private boolean pressedQuickActionWidget(float px, float py) {
+		return quickActionsWidget != null && py <= quickActionsWidget.getHeight();
+	}
 
-    @Override
-    public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
-        if (isInMovingMarkerMode()) {
-            canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
-            contextMarker.draw(canvas);
-        }
-        boolean nightMode = app.getDaynightHelper().isNightMode();
-        quickActionButton.update(nightMode, false, false);
-    }
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
+		if (isInMovingMarkerMode()) {
+			canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
+			contextMarker.draw(canvas);
+		}
+		boolean nightMode = app.getDaynightHelper().isNightMode();
+		quickActionButton.update(nightMode, false, false);
+	}
 
-    public boolean getCurrentWidgetState() {
-        return currentWidgetState != null ? currentWidgetState : false;
-    }
+	public boolean getCurrentWidgetState() {
+		return currentWidgetState != null ? currentWidgetState : false;
+	}
 
-    @Override
-    public boolean drawInScreenPixels() {
-        return true;
-    }
+	@Override
+	public boolean drawInScreenPixels() {
+		return true;
+	}
 
 
-    @Override
-    public void onActionsUpdated() {
-        if (quickActionsWidget != null) {
-            quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
-        }
-    }
+	@Override
+	public void onActionsUpdated() {
+		if (quickActionsWidget != null) {
+			quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
+		}
+	}
 
-    @Override
-    public void onActionSelected(@NonNull QuickAction action) {
-        MapActivity mapActivity = getMapActivity();
-        if (mapActivity != null) {
-            QuickActionRegistry.produceAction(action).execute(mapActivity);
-            updateWidgetVisibility(false);
-        }
-    }
+	@Override
+	public void onActionSelected(@NonNull QuickAction action) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			QuickActionRegistry.produceAction(action).execute(mapActivity);
+			updateWidgetVisibility(false);
+		}
+	}
 
-    @NonNull
-    public PointF getMovableCenterPoint(@NonNull RotatedTileBox tb) {
-        return new PointF(tb.getPixWidth() / 2f, tb.getPixHeight() / 2f);
-    }
+	@NonNull
+	public PointF getMovableCenterPoint(@NonNull RotatedTileBox tb) {
+		return new PointF(tb.getPixWidth() / 2f, tb.getPixHeight() / 2f);
+	}
 
-    public boolean isInMovingMarkerMode() {
-        return isLayerOn && inMovingMarkerMode;
-    }
+	public boolean isInMovingMarkerMode() {
+		return isLayerOn && inMovingMarkerMode;
+	}
 
-    public boolean isLayerOn() {
-        return isLayerOn;
-    }
+	public boolean isLayerOn() {
+		return isLayerOn;
+	}
 
-    public boolean onBackPressed() {
-        return updateWidgetVisibility(false);
-    }
+	public boolean onBackPressed() {
+		return updateWidgetVisibility(false);
+	}
 }
