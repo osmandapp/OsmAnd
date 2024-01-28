@@ -66,7 +66,7 @@ public class QuickActionButton extends MapButton {
 		return v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
 			if (!showTutorialIfNeeded()) {
-				layer.setLayerState(!layer.isWidgetVisible());
+				layer.updateWidgetVisibility(!layer.isWidgetVisible());
 			}
 		};
 	}

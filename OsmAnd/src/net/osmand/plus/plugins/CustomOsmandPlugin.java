@@ -283,7 +283,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							List<QuickAction> quickActions = quickActionsSettingsItem.getItems();
 							QuickActionRegistry actionRegistry = app.getQuickActionRegistry();
 							for (QuickAction action : quickActions) {
-								QuickAction savedAction = actionRegistry.getQuickAction(app, action.getType(), action.getName(app), action.getParams());
+								QuickAction savedAction = actionRegistry.getQuickAction(action.getType(), action.getName(app), action.getParams());
 								if (savedAction != null) {
 									actionRegistry.deleteQuickAction(savedAction);
 								}
