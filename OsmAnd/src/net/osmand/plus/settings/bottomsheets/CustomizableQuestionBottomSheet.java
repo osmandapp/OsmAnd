@@ -23,14 +23,15 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DialogExtra;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 
 import java.util.Objects;
 
-public class CustomizableQuestionV1BottomSheet extends CustomizableBottomSheet {
+public class CustomizableQuestionBottomSheet extends CustomizableBottomSheet {
 
-	public static final String TAG = CustomizableQuestionV1BottomSheet.class.getSimpleName();
+	public static final String TAG = CustomizableQuestionBottomSheet.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -129,16 +130,13 @@ public class CustomizableQuestionV1BottomSheet extends CustomizableBottomSheet {
 		return displayData == null ? null : displayData.getExtra(parameterKey);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull String processId, boolean usedOnMap) {
-		try {
-			CustomizableQuestionV1BottomSheet fragment = new CustomizableQuestionV1BottomSheet();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			CustomizableQuestionBottomSheet fragment = new CustomizableQuestionBottomSheet();
 			fragment.setProcessId(processId);
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
 	}
 }

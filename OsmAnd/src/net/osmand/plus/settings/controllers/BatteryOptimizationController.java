@@ -25,7 +25,7 @@ import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.CustomizableQuestionV1BottomSheet;
+import net.osmand.plus.settings.bottomsheets.CustomizableQuestionBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -137,7 +137,7 @@ public class BatteryOptimizationController extends BaseDialogController
 		dialogManager.register(PROCESS_ID, controller);
 
 		FragmentManager manager = activity.getSupportFragmentManager();
-		CustomizableQuestionV1BottomSheet.showInstance(manager, PROCESS_ID, usedOnMap);
+		CustomizableQuestionBottomSheet.showInstance(manager, PROCESS_ID, usedOnMap);
 	}
 
 	private static void askResumePreviousProcess(@Nullable IOnDialogDismissed callback,

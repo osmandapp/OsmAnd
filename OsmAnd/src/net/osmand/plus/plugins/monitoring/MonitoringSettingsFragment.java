@@ -66,7 +66,6 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	private static final String SAVE_GLOBAL_TRACK_INTERVAL = "save_global_track_interval";
 
 	boolean showSwitchProfile;
-	boolean cachedIsIgnoringBatteryOptimizations;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,10 +122,9 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupDisableBatteryOptimizationPref() {
-		cachedIsIgnoringBatteryOptimizations = isIgnoringBatteryOptimizations(app);
 		Preference preference = findPreference(DISABLE_BATTERY_OPTIMIZATION);
 		preference.setIcon(getIcon(R.drawable.ic_action_warning_colored));
-		preference.setVisible(!cachedIsIgnoringBatteryOptimizations);
+		preference.setVisible(!isIgnoringBatteryOptimizations(app));
 	}
 
 	private void setupShowStartDialog() {
@@ -378,10 +376,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	@Override
 	public void onResume() {
 		super.onResume();
-		boolean newIsIgnoringBatteryOptimizations = isIgnoringBatteryOptimizations(app);
-		if (cachedIsIgnoringBatteryOptimizations != newIsIgnoringBatteryOptimizations) {
-			updateSetting(DISABLE_BATTERY_OPTIMIZATION);
-		}
+		setupDisableBatteryOptimizationPref();
 	}
 
 	@Override
@@ -430,8 +425,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				boolean usedOnMap = false;
-				BatteryOptimizationController.showDialog(mapActivity, usedOnMap, null);
+				BatteryOptimizationController.showDialog(mapActivity, false, null);
 			}
 		}
 		return super.onPreferenceClick(preference);
