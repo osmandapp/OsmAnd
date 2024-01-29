@@ -346,13 +346,6 @@ public class RouteDataObject {
 	public String getDestinationName(String lang, boolean transliterate, boolean direction) {
 		if (names != null) {
 			int[] nameKeys = names.keys();
-
-			// Issue #3181: Parse destination keys in this order:
-			//              destination:lang:XX:forward/backward
-			//              destination:forward/backward
-			//              destination:lang:XX
-			//              destination
-
 			Map<String, Integer> tagPriorities = new HashMap<>();
 			int tagPriority = 1;
 			if (!Algorithms.isEmpty(lang)) {
