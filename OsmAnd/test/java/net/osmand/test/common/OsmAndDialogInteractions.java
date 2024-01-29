@@ -12,20 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.ViewInteraction;
 
-import net.osmand.StringMatcher;
 import net.osmand.plus.R;
 
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.hamcrest.core.StringRegularExpression;
-
-import java.util.regex.Pattern;
+import org.hamcrest.core.StringStartsWith;
 
 public class OsmAndDialogInteractions {
 
 	public static void skipAppStartDialogs(@NonNull Context ctx) {
 		skipFirstUsageDialog();
 		skipNavigationRestoration(ctx);
+		skipWhatsNewDialog(ctx);
 	}
 
 	public static void skipFirstUsageDialog() {
@@ -54,6 +51,16 @@ public class OsmAndDialogInteractions {
 			String regex = template.replace("<NUMBER>", "\\d+");
 			EspressoUtils.waitForView(org.hamcrest.Matchers.allOf(
 					withText(StringRegularExpression.matchesRegex(regex)),
+					isDisplayed()), 500);
+			Espresso.pressBack();
+		} catch (Throwable ignore) {
+		}
+	}
+
+	public static void skipWhatsNewDialog(@NonNull Context ctx) {
+		try {
+			EspressoUtils.waitForView(org.hamcrest.Matchers.allOf(
+					withText(StringStartsWith.startsWith(ctx.getString(R.string.whats_new))),
 					isDisplayed()), 500);
 			Espresso.pressBack();
 		} catch (Throwable ignore) {
