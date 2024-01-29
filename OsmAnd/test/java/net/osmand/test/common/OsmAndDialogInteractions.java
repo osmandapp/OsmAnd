@@ -23,6 +23,7 @@ public class OsmAndDialogInteractions {
 		skipFirstUsageDialog();
 		skipNavigationRestoration(ctx);
 		skipWhatsNewDialog(ctx);
+		skipArrivedDestinationDialog();
 	}
 
 	public static void skipFirstUsageDialog() {
@@ -61,6 +62,16 @@ public class OsmAndDialogInteractions {
 		try {
 			EspressoUtils.waitForView(org.hamcrest.Matchers.allOf(
 					withText(StringStartsWith.startsWith(ctx.getString(R.string.whats_new))),
+					isDisplayed()), 500);
+			Espresso.pressBack();
+		} catch (Throwable ignore) {
+		}
+	}
+
+	public static void skipArrivedDestinationDialog() {
+		try {
+			EspressoUtils.waitForView(org.hamcrest.Matchers.allOf(
+					withText(R.string.arrived_at_destination),
 					isDisplayed()), 500);
 			Espresso.pressBack();
 		} catch (Throwable ignore) {
