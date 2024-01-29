@@ -381,7 +381,7 @@ dependencies {
 	implementation 'org.immutables:gson:2.5.0'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
 	implementation 'com.google.openlocationcode:openlocationcode:1.0.4'
-	implementation 'com.android.billingclient:billing:5.0.0'
+	implementation 'com.android.billingclient:billing:6.1.0'
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
