@@ -20,10 +20,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.BaseDialogController;
 import net.osmand.plus.base.dialog.DialogManager;
-import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.data.DisplayData;
-import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
+import net.osmand.plus.base.dialog.data.DisplayDialogButtonItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
+import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.CustomizableQuestionBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
@@ -92,7 +92,7 @@ public class BatteryOptimizationController extends BaseDialogController
 	}
 
 	private void onDoNotAskAnymoreClicked() {
-		settings.DISABLE_SHOW_BATTERY_OPTIMIZATION_DIALOG.set(true);
+		settings.SHOW_BATTERY_OPTIMIZATION_DIALOG.set(false);
 		dialogManager.askDismissDialog(getProcessId());
 	}
 
@@ -107,9 +107,8 @@ public class BatteryOptimizationController extends BaseDialogController
 		askResumePreviousProcess(callback, activity);
 	}
 
-	private static boolean isDisableShowDialog(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		return settings.DISABLE_SHOW_BATTERY_OPTIMIZATION_DIALOG.get();
+	private static boolean shouldShowDialog(@NonNull OsmandApplication app) {
+		return app.getSettings().SHOW_BATTERY_OPTIMIZATION_DIALOG.get() && !isIgnoringBatteryOptimizations(app);
 	}
 
 	public static boolean isIgnoringBatteryOptimizations(@NonNull OsmandApplication app) {
@@ -121,11 +120,11 @@ public class BatteryOptimizationController extends BaseDialogController
 	public static void askShowDialog(@NonNull FragmentActivity activity, boolean usedOnMap,
 	                                 @Nullable IOnDialogDismissed callback) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (!isDisableShowDialog(app) && !isIgnoringBatteryOptimizations(app)) {
+		if (shouldShowDialog(app)) {
 			showDialog(activity, usedOnMap, callback);
-			return;
+		} else {
+			askResumePreviousProcess(callback, activity);
 		}
-		askResumePreviousProcess(callback, activity);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity, boolean usedOnMap,
