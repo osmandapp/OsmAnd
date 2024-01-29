@@ -113,10 +113,13 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
+import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -874,6 +877,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public void selectTrack(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
+		selectTrack(gpxFile, showSelectionDialog, null);
+	}
+
+	public void selectTrack(@NonNull GPXFile gpxFile, boolean showSelectionDialog, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -888,11 +895,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 			if (showSelectionDialog && TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFile)) {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				Fragment fragment = manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
-				if (fragment == null) {
-					fragment = manager.findFragmentByTag(FollowTrackFragment.TAG);
+				if (onSegmentSelectedListener == null) {
+					onSegmentSelectedListener = (MapRouteInfoMenuFragment) manager.findFragmentByTag(MapRouteInfoMenuFragment.TAG);
 				}
-				TrackSelectSegmentBottomSheet.showInstance(manager, gpxFile, fragment);
+				if (onSegmentSelectedListener == null) {
+					onSegmentSelectedListener = (FollowTrackFragment) manager.findFragmentByTag(FollowTrackFragment.TAG);
+				}
+				TrackSelectSegmentBottomSheet.showInstance(manager, gpxFile, onSegmentSelectedListener);
 			} else {
 				mapActivity.getMapActions().setGPXRouteParams(gpxFile);
 				app.getTargetPointsHelper().updateRouteAndRefresh(true);
@@ -1653,7 +1662,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					GPXRouteParamsBuilder routeParams1 = mapActivity1.getRoutingHelper().getCurrentGPXRoute();
 					if (routeParams1 != null) {
 						hide();
-						showFollowTrack();
+						chooseAndShowFollowTrack();
 					}
 				}
 			});
@@ -2038,13 +2047,57 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void showFollowTrack() {
+	public void chooseAndShowFollowTrack() {
 		selectFromTracks = true;
 		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+				if (TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFile)) {
+					mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true, getOnSegmentSelectedListener());
+				} else {
+					mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, false);
+					FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+					FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
+				}
+			};
+			SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
+		}
+	}
+
+	private OnSegmentSelectedListener getOnSegmentSelectedListener() {
+		return new OnSegmentSelectedListener() {
+			@Override
+			public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
+				if (app == null) {
+					return;
+				}
+				selectTrack(gpxFile, false);
+				onGpxSelected(app, gpxFile, app.getSettings().GPX_SEGMENT_INDEX, selectedSegment);
+			}
+
+			@Override
+			public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+				if (app == null) {
+					return;
+				}
+				onGpxSelected(app, gpxFile, app.getSettings().GPX_ROUTE_INDEX, selectedRoute);
+			}
+		};
+	}
+
+	private void onGpxSelected(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @NonNull OsmandPreference<Integer> gpxRouteSegmentPreference, int selectedIndex) {
+		gpxRouteSegmentPreference.set(selectedIndex);
+		selectTrack(gpxFile, false);
+		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
+		if (paramsBuilder != null) {
+			paramsBuilder.setSelectedRoute(selectedIndex);
+			app.getRoutingHelper().onSettingsChanged(true);
+		}
 		if (mapActivity != null) {
 			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
 			FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
 		}
+		updateCards();
 	}
 
 	public void cancelSelectionFromTracks() {

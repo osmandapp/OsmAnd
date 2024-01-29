@@ -564,7 +564,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 					public void onClick(View view) {
 						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 						mapRouteInfoMenu.hide();
-						mapRouteInfoMenu.showFollowTrack();
+						mapRouteInfoMenu.chooseAndShowFollowTrack();
 						dismiss();
 					}
 				})
