@@ -1436,12 +1436,12 @@ public class OsmandSettings {
 	public final CommonPreference<String> USER_ANDROID_ID = new StringPreference(this, "user_android_id", "").makeGlobal();
 	public final CommonPreference<Long> USER_ANDROID_ID_EXPIRED_TIME = new LongPreference(this, "user_android_id_expired_time", 0).makeGlobal();
 
-	public static final String SAVE_CURRENT_TRACK = "save_current_track";
 
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_TO_GPX = new BooleanPreference(this, "save_global_track_to_gpx", false).makeGlobal().cache();
 	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference(this, "save_global_track_interval", 5000).makeProfile().cache();
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference(this, "save_global_track_remember", false).makeProfile().cache();
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_START_DIALOG = new BooleanPreference(this, "show_trip_recording_start_dialog", true).makeGlobal().makeShared();
+	public final CommonPreference<Boolean> SHOW_BATTERY_OPTIMIZATION_DIALOG = new BooleanPreference(this, "show_battery_optimization_dialog", true).makeGlobal().makeShared();
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference(this, "save_track_to_gpx", false).makeProfile().cache();
 
 	{
