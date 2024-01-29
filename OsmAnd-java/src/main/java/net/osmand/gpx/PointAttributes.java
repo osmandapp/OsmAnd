@@ -5,11 +5,11 @@ import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
 
 public class PointAttributes {
 
-	public static final String SENSOR_TAG_HEART_RATE = "hr";
+	public static final String SENSOR_TAG_HEART_RATE = "gpxtpx:hr";
 	public static final String SENSOR_TAG_SPEED = "osmand:speed_sensor";
-	public static final String SENSOR_TAG_CADENCE = "cadence";
+	public static final String SENSOR_TAG_CADENCE = "gpxtpx:cadence";
 	public static final String SENSOR_TAG_BIKE_POWER = "power";
-	public static final String SENSOR_TAG_TEMPERATURE = "temp";
+	public static final String SENSOR_TAG_TEMPERATURE = "gpxtpx:temp";
 	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
 
 	public static final String DEV_RAW_ZOOM = "raw_zoom";
