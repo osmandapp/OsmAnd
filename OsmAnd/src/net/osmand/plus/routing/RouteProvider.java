@@ -1293,6 +1293,19 @@ public class RouteProvider {
 		bpars.putString("turnInstructionFormat", "osmand");
 		bpars.putString("acceptCompressedResult", "true");
 
+		String osmand_Profile_Name = params.mode.getUserProfileName();
+		if ( osmand_Profile_Name.indexOf("Brouter") == 0) { 
+			if ( osmand_Profile_Name .indexOf("[") != -1 && osmand_Profile_Name .indexOf("]") != -1) {
+				String  brouter_Profile_Name = osmand_Profile_Name.substring(osmand_Profile_Name .indexOf("[") + 1, osmand_Profile_Name .indexOf("]"));
+
+				// log.info (" BROUTER_PROFILE_NAME = " + brouter_Profile_Name );
+				if (brouter_Profile_Name.length() > 0) {
+					//  set the profile-name in the new parameter "profile" to transmit the profile-name to the brouter
+					bpars.putString("profile", brouter_Profile_Name );
+				}
+			}
+		}
+
 		OsmandApplication ctx = params.ctx;
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> dir = new ArrayList<>();
