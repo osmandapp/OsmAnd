@@ -558,7 +558,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private boolean shouldRecordLocation(@Nullable Location location, long locationTime) {
 		boolean record = false;
-		if (location != null && (SimulationProvider.isNotSimulatedLocation(location) || true)
+		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
