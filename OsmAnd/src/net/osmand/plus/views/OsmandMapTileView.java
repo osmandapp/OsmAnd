@@ -1632,8 +1632,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			clon = tb.getLonFromPixel(x, y);
 		}
 
-		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart(),
-				true, false, null, null);
+		animatedDraggingThread.startMoving(clat, clon, zoom.getBaseZoom(), zoom.getZoomFloatPart());
 	}
 
 	public RotatedTileBox getTileBox(int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
@@ -1684,7 +1683,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			clon = tb.getLonFromPixel(x, y);
 		}
 		if (animated) {
-			animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
+			animatedDraggingThread.startMoving(clat, clon, tb.getZoom());
 		} else {
 			setLatLon(clat, clon);
 		}
@@ -1699,7 +1698,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			double lon = tb.getLonFromPixel(event.getX(), event.getY());
 			int zoomDir = event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0 ? -1 : 1;
 			int endZoom = normalizeZoomWithLimits(getZoom() + zoomDir);
-			getAnimatedDraggingThread().startMoving(lat, lon, endZoom, true);
+			getAnimatedDraggingThread().startMoving(lat, lon, endZoom);
 			return true;
 		}
 		return false;
@@ -2130,8 +2129,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 						getAnimatedDraggingThread().startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), latlon, true);
 					} else {
 						getAnimatedDraggingThread().startMoving(
-								latlon.getLatitude(), latlon.getLongitude(), zoom.getBaseZoom(), zoom.getZoomFloatPart(),
-								true, false, null, null);
+								latlon.getLatitude(), latlon.getLongitude(), zoom.getBaseZoom(), zoom.getZoomFloatPart());
 					}
 				}
 				afterDoubleTap = true;

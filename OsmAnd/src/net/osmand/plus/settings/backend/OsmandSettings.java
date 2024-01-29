@@ -3006,6 +3006,7 @@ public class OsmandSettings {
 		return getCustomRenderProperty(attrName).get();
 	}
 
+	@NonNull
 	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName) {
 		if (!customRendersProps.containsKey(attrName)) {
 			registerCustomRenderProperty(attrName, "");
@@ -3013,6 +3014,7 @@ public class OsmandSettings {
 		return customRendersProps.get(attrName);
 	}
 
+	@NonNull
 	public CommonPreference<String> registerCustomRenderProperty(@NonNull String attrName, @Nullable String defaultValue) {
 		CommonPreference<String> preference = new StringPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
 		customRendersProps.put(attrName, preference);
@@ -3024,6 +3026,15 @@ public class OsmandSettings {
 		getCustomRenderProperty("defAppMode");
 	}
 
+	public boolean isRenderProperty(@NonNull String prefId) {
+		return prefId.startsWith(RENDERER_PREFERENCE_PREFIX);
+	}
+
+	public boolean isRoutingProperty(@NonNull String prefId) {
+		return prefId.startsWith(ROUTING_PREFERENCE_PREFIX);
+	}
+
+	@NonNull
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(@NonNull String attrName) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
 			registerCustomRenderBooleanProperty(attrName, false);
@@ -3031,12 +3042,14 @@ public class OsmandSettings {
 		return customBooleanRendersProps.get(attrName);
 	}
 
+	@NonNull
 	public CommonPreference<Boolean> registerCustomRenderBooleanProperty(@NonNull String attrName, boolean defaultValue) {
 		CommonPreference<Boolean> preference = new BooleanPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, defaultValue).makeProfile();
 		customBooleanRendersProps.put(attrName, preference);
 		return preference;
 	}
 
+	@NonNull
 	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
 			customRoutingProps.put(attrName, new StringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
@@ -3044,6 +3057,7 @@ public class OsmandSettings {
 		return customRoutingProps.get(attrName);
 	}
 
+	@NonNull
 	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
 			customBooleanRoutingProps.put(attrName, new BooleanStringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defaulfValue).makeProfile());

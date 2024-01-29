@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:background="?attr/selectableItemBackground"
 	android:minHeight="@dimen/setting_list_item_group_height"
 	android:orientation="horizontal">
 
@@ -20,26 +21,28 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginVertical="@dimen/list_header_text_left_margin"
 		android:layout_marginHorizontal="@dimen/content_padding"
+		android:layout_marginVertical="@dimen/list_header_text_left_margin"
 		android:orientation="vertical">
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/title"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			tools:text="@string/shared_string_size"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="@dimen/default_desc_text_size"
-			app:typeface="@string/font_roboto_regular" />
+			app:typeface="@string/font_roboto_regular"
+			tools:text="@string/shared_string_size" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/description"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			tools:text="9.7 mb"
 			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
-			app:typeface="@string/font_roboto_regular" />
+			app:typeface="@string/font_roboto_regular"
+			tools:text="9.7 mb" />
+
 	</LinearLayout>
+
 </LinearLayout>

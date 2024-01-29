@@ -4721,7 +4721,7 @@
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
     <string name="trip_recording_downhill_widget_desc">Приказује укупно све спустове на путу који се тренутно снима.</string>
-    <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Да ли сте сигурни да желите да обришете групу „%1$s” и све придружене тачке (%2$d)?</string>
     <string name="av_notes_audio_widget_desc">Тап по справици ће снимити звучну белешку.</string>
     <string name="auto_25_chars_route_roundabout_kl">Изађите на излазу %1$d и држите лево</string>
     <string name="download_complete">Преузимање је завршено</string>
@@ -5094,7 +5094,7 @@
     <string name="is_imported">%1$s је увезен.</string>
     <string name="file_already_exists_description">„%1$s“. Датотека са таквим именом већ постоји. Замена ће преписати све измене садашњим издањем.</string>
     <string name="file_already_exists">Датотека већ постоји</string>
-    <string name="nav_profile_confirm_delete">Да ли сте сигурни да желите избрисати „%1$s“\?</string>
+    <string name="nav_profile_confirm_delete">Да ли сте сигурни да желите избрисати „%1$s“?</string>
     <string name="external_device_low_battery">Батерија је отпразна</string>
     <string name="external_device_menu_forget">Заборави</string>
     <string name="external_device_characteristic_speed">Брзина</string>
@@ -5337,7 +5337,7 @@
     <string name="help_article_personal_name">Моји подаци</string>
     <string name="help_article_purchases_android_name">Куповине Андроидом</string>
     <string name="telegram_chats_descr">Придружите се неком нашем ћаскању на телеграму.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Да ли сте сигурни да желите избрисати налог Облака ОсмАнда\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Да ли сте сигурни да желите избрисати налог Облака ОсмАнда?
 \n
 \nОво дејство не може бити опозвано.</string>
     <string name="free_account">Бесплатни налог</string>
@@ -5371,7 +5371,7 @@
     <string name="help_article_troubleshooting_crash_logs_name">Дневник рушења програма</string>
     <string name="shared_string_temperature">Топлота</string>
     <string name="help_article_personal_storage_name">Складиште</string>
-    <string name="delete_account_warning">Да ли сте сигурни да желите избрисати налог %1$s\?</string>
+    <string name="delete_account_warning">Да ли сте сигурни да желите избрисати налог %1$s?</string>
     <string name="help_article_map_legend_ski_map_name">Начин приказа скијашке карте</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Користи растер скулитедб сенчења брда / падина</string>
     <string name="help_article_navigation_routing_osmand_routing_name">О путањи османда</string>

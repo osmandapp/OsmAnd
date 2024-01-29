@@ -131,6 +131,9 @@ public class AlarmWidget {
 				info = createWidgetInfo(alarm);
 				if (info != null) {
 					visible = true;
+					if (layout != null) {
+						layout.setContentDescription(alarm.getType().getVisualName(app));
+					}
 					if (info.locImgId != imgId) {
 						changed = true;
 						imgId = info.locImgId;

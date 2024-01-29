@@ -888,7 +888,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			} else if (!latLonToShow.equals(currentLatLon)) {
 				mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(),
-						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
+						latLonToShow.getLongitude(), settings.getMapZoomToShow());
 			}
 		}
 	}

@@ -580,7 +580,7 @@ public class ExternalApiHelper {
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_EXECUTE_QUICK_ACTION.equals(cmd)) {
 				int actionNumber = Integer.parseInt(uri.getQueryParameter(PARAM_QUICK_ACTION_NUMBER));
-				List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+				List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
 				if (actionNumber >= 0 && actionNumber < actionsList.size()) {
 					QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
 					resultCode = Activity.RESULT_OK;
@@ -592,7 +592,7 @@ public class ExternalApiHelper {
 				}
 			} else if (API_CMD_GET_QUICK_ACTION_INFO.equals(cmd)) {
 				int actionNumber = Integer.parseInt(uri.getQueryParameter(PARAM_QUICK_ACTION_NUMBER));
-				List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+				List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
 				if (actionNumber >= 0 && actionNumber < actionsList.size()) {
 					QuickAction action = actionsList.get(actionNumber);
 

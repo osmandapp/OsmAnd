@@ -383,8 +383,14 @@ public class AnimateDraggingMapThread implements TouchListener {
 		});
 	}
 
-	public void startMoving(double finalLat, double finalLon, int endZoom, boolean notifyListener) {
-		startMoving(finalLat, finalLon, endZoom, 0, notifyListener, false, null, null);
+	public void startMoving(double finalLat, double finalLon, int finalIntZoom) {
+		startMoving(finalLat, finalLon, finalIntZoom, 0.0f);
+	}
+
+	public void startMoving(double finalLat, double finalLon, int finalIntZoom, float finalZoomFloatPart) {
+		Runnable startAnimationCallback = () -> app.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+		startMoving(finalLat, finalLon, finalIntZoom, finalZoomFloatPart, true,
+				false, startAnimationCallback, null);
 	}
 
 	public void startMoving(double finalLat, double finalLon, int endZoom, float endZoomFloatPart,
@@ -438,9 +444,10 @@ public class AnimateDraggingMapThread implements TouchListener {
 
 			animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Target);
 
-			boolean animateZoom = endZoom != startZoom || startZoomFP != endZoomFloatPart;
-			if (!animateZoom)
+			boolean animateZoom = Math.abs(endZoom + endZoomFloatPart - startZoom - startZoomFP) > 0.001f;
+			if (!animateZoom) {
 				zoomAnimation = null;
+			}
 			if (zoomAnimation != null) {
 				animator.cancelAnimation(zoomAnimation);
 				animator.cancelCurrentAnimation(userInteractionAnimationKey, AnimatedValue.Zoom);
