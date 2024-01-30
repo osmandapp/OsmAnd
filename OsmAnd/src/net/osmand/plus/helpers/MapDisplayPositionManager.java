@@ -79,7 +79,7 @@ public class MapDisplayPositionManager implements ViewportListener {
 
 	@Nullable
 	public PointF projectRatioToVisibleMapRect(@NonNull PointF ratio) {
-		if (visibleMapRect == null) {
+		if (visibleMapRect == null || mapView == null) {
 			return null;
 		}
 
