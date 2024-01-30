@@ -5581,7 +5581,14 @@
     <string name="previous_row_has_complex_widget">Antaŭa vico enhavas kompleksan fenestraĵon</string>
     <string name="shared_string_next_event">Sekva okazaĵo</string>
     <string name="any_connected">Ĉiu konektita</string>
-    <string name="map_widget_sun_position_desc">Fenestraĵo montranta tempon ĝis sunleviĝo aŭ sunsubiro, depende de la nuna tempo.</string>
+    <string name="map_widget_sun_position_desc">Montras tempon ĝis sunleviĝo aŭ sunsubiro.</string>
     <string name="map_widget_sun_position">Pozicio de Suno</string>
     <string name="shared_string_road_maps">Vojaj mapoj</string>
+    <string name="shared_string_license">Permesilo</string>
+    <string name="shared_string_link">Ligilo</string>
+    <string name="shared_string_copyright">Aŭtorrajto</string>
+    <string name="shared_string_author">Aŭtoro</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Ĉiuj spuroj</string>
+    <string name="shared_string_extensions">Etendaĵoj</string>
 </resources>
