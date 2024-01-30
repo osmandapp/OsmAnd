@@ -21,4 +21,6 @@
 	<dimen name="map_button_inset_shadow">3dp</dimen>
 	<dimen name="map_button_inset">3dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
+	<dimen name="map_small_button_size">66dp</dimen>
+	<dimen name="map_small_button_margin">9dp</dimen>
 </resources>
