@@ -170,7 +170,7 @@
 \n
 \n Laden Sie Kachelkarten direkt herunter oder kopieren Sie sie als SQLite-Datenbankdateien in den Datenordner von OsmAnd, indem Sie eines der vielen Kartenvorbereitungstools von Drittanbietern verwenden.</string>
     <string name="osmand_background_plugin_description">Zeigt die Einstellungen zum Einschalten der Hintergrundverfolgung und -Navigation durch regelmäßiges Aufwecken des GPS-Empfängers (bei ausgeschaltetem Bildschirm) an.</string>
-    <string name="osmand_accessibility_description">Macht die Bedienungshilfen des Geräts direkt in OsmAnd verfügbar. Dies erleichtert z. B. die Anpassung der Sprechgeschwindigkeit für Text-to-Speech-Stimmen, die Konfiguration der D-Pad-Navigation, die Verwendung eines Trackballs zur Zoomsteuerung oder für Text-to-Speech-Feedback, um beispielsweise Ihre Position automatisch anzusagen.</string>
+    <string name="osmand_accessibility_description">Macht die Bedienungshilfen des Geräts direkt in OsmAnd verfügbar. Dies erleichtert z. B. die Anpassung der Sprechgeschwindigkeit für Text-to-Speech-Stimmen, die Konfiguration der D-Pad-Navigation, die Verwendung eines Trackballs zur Zoomsteuerung oder für Text-to-Speech-Rückmeldung, um beispielsweise Ihre Position automatisch anzusagen.</string>
     <string name="osmand_development_plugin_description">Bietet Funktionen zum Testen und Debuggen von OsmAnd: Simulieren von Navigationsrouten, Überwachen der Bildschirmdarstellung, Prüfen der Leistung usw. Diese Erweiterung ist für die normale Nutzung der App nicht erforderlich.</string>
     <string name="plugins_screen">Erweiterungen</string>
     <string name="prefs_plugins_descr">Erweiterungen aktivieren weitere Einstellungen und zusätzliche Funktionen.</string>
@@ -5598,4 +5598,11 @@
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Erweiterungen</string>
     <string name="shared_string_copyright">Urheberrecht</string>
+    <string name="battery_optimization">Akku-Optimierung</string>
+    <string name="battery_optimization_banner_content">Android-Batterie-Optimierung kann Lücken und Ungenauigkeiten in aufgezeichneten Tracks verursachen.</string>
+    <string name="dont_ask_anymore">Nicht nochmal fragen</string>
+    <string name="battery_optimization_settings">Einstellungen der Batterieoptimierung</string>
+    <string name="battery_optimization_desc">Batterieoptimierung in Android kann Lücken und Ungenauigkeiten in aufgezeichneten Tracks verursachen.
+\n
+\nWenn Sie diese Probleme erleben, können Sie versuchen, die Batterienutzung auf \'Unbeschränkt\' zu ändern</string>
 </resources>
