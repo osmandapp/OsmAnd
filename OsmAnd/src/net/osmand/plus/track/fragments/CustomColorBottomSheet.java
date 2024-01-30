@@ -1,6 +1,6 @@
 package net.osmand.plus.track.fragments;
 
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLOR;
 
 import android.app.Activity;
 import android.graphics.Color;

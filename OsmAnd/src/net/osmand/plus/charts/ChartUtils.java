@@ -150,7 +150,7 @@ public class ChartUtils {
 		legend.setEnabled(false);
 	}
 
-	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, float meters) {
+	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float divX;
@@ -368,7 +368,7 @@ public class ChartUtils {
 		xAxis.setEnabled(false);
 
 		YAxis yAxis = getYAxis(chart, null, useRightAxis);
-		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
+		float divX = setupAxisDistance(app, yAxis, analysis.getTotalDistance());
 
 		List<RouteSegmentAttribute> segments = routeStatistics.elements;
 		List<BarEntry> entries = new ArrayList<>();
@@ -482,7 +482,7 @@ public class ChartUtils {
 		}
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
-		dataSet.setPriority((float) ((analysis.avgElevation - analysis.minElevation) * convEle));
+		dataSet.setPriority((float) ((analysis.getAvgElevation() - analysis.getMinElevation()) * convEle));
 		dataSet.setDivX(divX);
 		dataSet.setUnits(mainUnitY);
 
@@ -579,9 +579,9 @@ public class ChartUtils {
 		});
 
 		if (Float.isNaN(divSpeed)) {
-			dataSet.setPriority(analysis.avgSpeed * mulSpeed);
+			dataSet.setPriority(analysis.getAvgSpeed() * mulSpeed);
 		} else {
-			dataSet.setPriority(divSpeed / analysis.avgSpeed);
+			dataSet.setPriority(divSpeed / analysis.getAvgSpeed());
 		}
 		dataSet.setDivX(divX);
 		dataSet.setUnits(mainUnitY);
@@ -597,11 +597,11 @@ public class ChartUtils {
 	                            boolean calcWithoutGaps) {
 		XAxis xAxis = lineChart.getXAxis();
 		if (axisType == TIME && analysis.isTimeSpecified()) {
-			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
+			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan());
 		} else if (axisType == TIME_OF_DAY && analysis.isTimeSpecified()) {
-			return setupXAxisTimeOfDay(xAxis, analysis.startTime);
+			return setupXAxisTimeOfDay(xAxis, analysis.getStartTime());
 		} else {
-			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance());
 		}
 	}
 
@@ -689,7 +689,7 @@ public class ChartUtils {
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
-		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+		double totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
@@ -780,7 +780,7 @@ public class ChartUtils {
 		boolean hasSameY = false;
 		Entry lastEntry = null;
 		int lastIndex = calculatedSlopeDist.length - 1;
-		float timeSpanInSeconds = analysis.timeSpan / 1000f;
+		float timeSpanInSeconds = analysis.getTimeSpan() / 1000f;
 		for (int i = 0; i < calculatedSlopeDist.length; i++) {
 			if ((axisType == TIME_OF_DAY || axisType == TIME) && analysis.isTimeSpecified()) {
 				x = (timeSpanInSeconds * i) / calculatedSlopeDist.length;

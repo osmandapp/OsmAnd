@@ -3,12 +3,13 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_UPDATE_PARAMETERS_START;
-import static net.osmand.plus.track.helpers.GpxParameter.*;
+import static net.osmand.gpx.GpxParameter.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -175,8 +176,11 @@ public class GpxDbUtils {
 		if (oldVersion < 16) {
 			addTableColumn(db, FILE_CREATION_TIME);
 		}
-		if (oldVersion < 17) {
-			addTableColumn(db, EXPECTED_ROUTE_DURATION);
+		SQLiteCursor cursor = db.rawQuery("select * from " + GPX_TABLE_NAME + " limit 0", null);
+		for (GpxParameter gpxParameter : values()) {
+			if (cursor.getColumnIndex(gpxParameter.getColumnName()) == -1) {
+				addTableColumn(db, gpxParameter);
+			}
 		}
 		db.execSQL(getIndexQuery());
 	}
@@ -193,19 +197,8 @@ public class GpxDbUtils {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
 			return !item.hasData() || analysis == null
-					|| analysis.wptCategoryNames == null
-					|| analysis.latLonStart == null && analysis.points > 0
-					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != file.lastModified()
-					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
-					|| (long) item.getParameter(EXPECTED_ROUTE_DURATION) < 0;
-		}
-		return true;
-	}
-
-	public static boolean isCitySearchNeeded(@Nullable GpxDataItem item) {
-		if (item != null) {
-			GPXTrackAnalysis analysis = item.getAnalysis();
-			return item.getParameter(NEAREST_CITY_NAME) == null && analysis != null && analysis.latLonStart != null;
+					|| GPXDatabase.createDataVersion(GPXTrackAnalysis.ANALYSIS_VERSION) > (int) item.getParameter(DATA_VERSION)
+					;
 		}
 		return true;
 	}
@@ -221,56 +214,18 @@ public class GpxDbUtils {
 	}
 
 	@NonNull
-	public static Map<GpxParameter, Object> getItemParameters(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
+	public static Map<GpxParameter, Object> getItemParameters(@NonNull GpxDataItem item) {
 		File file = item.getFile();
-
 		Map<GpxParameter, Object> map = new LinkedHashMap<>();
-		map.put(FILE_NAME, file.getName());
-		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
-		map.put(COLOR, item.getParameter(COLOR));
-		map.put(FILE_LAST_MODIFIED_TIME, file.lastModified());
-		map.put(FILE_LAST_UPLOADED_TIME, item.getParameter(FILE_LAST_UPLOADED_TIME));
-		map.put(FILE_CREATION_TIME, item.getParameter(FILE_CREATION_TIME));
-		map.put(SPLIT_TYPE, item.getParameter(SPLIT_TYPE));
-		map.put(SPLIT_INTERVAL, item.getParameter(SPLIT_INTERVAL));
-		map.put(API_IMPORTED, item.getParameter(API_IMPORTED));
-		map.put(SHOW_AS_MARKERS, item.getParameter(SHOW_AS_MARKERS));
-		map.put(JOIN_SEGMENTS, item.getParameter(JOIN_SEGMENTS));
-		map.put(SHOW_ARROWS, item.getParameter(SHOW_ARROWS));
-		map.put(SHOW_START_FINISH, item.getParameter(SHOW_START_FINISH));
-		map.put(WIDTH, item.getParameter(WIDTH));
-		map.put(COLORING_TYPE, item.getParameter(COLORING_TYPE));
-		map.put(SMOOTHING_THRESHOLD, item.getParameter(SMOOTHING_THRESHOLD));
-		map.put(MIN_FILTER_SPEED, item.getParameter(MIN_FILTER_SPEED));
-		map.put(MAX_FILTER_SPEED, item.getParameter(MAX_FILTER_SPEED));
-		map.put(MIN_FILTER_ALTITUDE, item.getParameter(MIN_FILTER_ALTITUDE));
-		map.put(MAX_FILTER_ALTITUDE, item.getParameter(MAX_FILTER_ALTITUDE));
-		map.put(MAX_FILTER_HDOP, item.getParameter(MAX_FILTER_HDOP));
-		map.put(NEAREST_CITY_NAME, item.getParameter(NEAREST_CITY_NAME));
-
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		boolean hasAnalysis = analysis != null;
-		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
-		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
-		map.put(START_TIME, hasAnalysis ? analysis.startTime : null);
-		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
-		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
-		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
-		map.put(EXPECTED_ROUTE_DURATION, hasAnalysis ? analysis.expectedRouteDuration : null);
-		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
-		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
-		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
-		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
-		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
-		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
-		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
-		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
-		map.put(POINTS, hasAnalysis ? analysis.points : null);
-		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
-		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
-
+		for (GpxParameter gpxParameter : GpxParameter.values()) {
+			if (gpxParameter.isAnalysisParameter()) {
+				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
+			} else {
+				map.put(gpxParameter, item.getParameter(gpxParameter));
+			}
+		}
 		return map;
 	}
 

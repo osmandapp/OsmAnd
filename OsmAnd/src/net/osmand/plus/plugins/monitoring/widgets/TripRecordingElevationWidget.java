@@ -97,7 +97,7 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 			if (reset) {
 				diffElevationUp = 0;
 			}
-			diffElevationUp = Math.max(getAnalysis().diffElevationUp, diffElevationUp);
+			diffElevationUp = Math.max(getAnalysis().getDiffElevationUp(), diffElevationUp);
 			return diffElevationUp;
 		}
 	}
@@ -116,7 +116,7 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 			if (reset) {
 				diffElevationDown = 0;
 			}
-			diffElevationDown = Math.max(getAnalysis().diffElevationDown, diffElevationDown);
+			diffElevationDown = Math.max(getAnalysis().getDiffElevationDown(), diffElevationDown);
 			return diffElevationDown;
 		}
 	}

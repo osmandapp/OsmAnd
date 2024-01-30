@@ -367,7 +367,7 @@ public class TrackDetailsMenu {
 					float startTime = startPos * 1000;
 					float endTime = endPos * 1000;
 					for (WptPt p : segment.points) {
-						if (p.time - gpxItem.analysis.startTime >= startTime && p.time - gpxItem.analysis.startTime <= endTime) {
+						if (p.time - gpxItem.analysis.getStartTime() >= startTime && p.time - gpxItem.analysis.getStartTime() <= endTime) {
 							if (left == 0 && right == 0) {
 								left = p.getLongitude();
 								right = p.getLongitude();
@@ -662,8 +662,8 @@ public class TrackDetailsMenu {
 		});
 
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
-		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / HOUR_IN_MILLIS > 0;
-		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.startTime, useHours);
+		boolean useHours = analysis.getTimeSpan() != 0 && analysis.getTimeSpan() / HOUR_IN_MILLIS > 0;
+		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.getStartTime(), useHours);
 		ChartUtils.setupGPXChart(chart, markerView, 24, 16, true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();

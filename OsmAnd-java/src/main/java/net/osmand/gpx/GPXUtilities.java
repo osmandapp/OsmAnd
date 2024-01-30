@@ -1395,6 +1395,9 @@ public class GPXUtilities {
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
 
 			Algorithms.closeStream(fis);
+			if (gpxFile.error != null) {
+				log.info("Error reading gpx " + gpxFile.path);
+			}
 			return gpxFile;
 		} catch (IOException e) {
 			GPXFile gpxFile = new GPXFile(null);
@@ -1480,6 +1483,9 @@ public class GPXUtilities {
 											String value = entry.getValue();
 											if (t.equals("heartrate")) {
 												t = "hr";
+											}
+											if (t.equals("speed")) {
+												t = PointAttributes.SENSOR_TAG_SPEED;
 											}
 											parse.getExtensionsToWrite().put(t, value);
 
