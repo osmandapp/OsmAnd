@@ -66,6 +66,7 @@ import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -803,10 +804,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		if (gpxFile.modifiedTime != modifiedTime) {
 			modifiedTime = gpxFile.modifiedTime;
-			displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpxFile, true);
-			if (selectedGpxFile.getDisplayGroups(app) != null) {
-				displayGroups = selectedGpxFile.getDisplayGroups(app);
-			}
+			GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
+			displayGroups = displayHelper.collectDisplayGroups(selectedGpxFile, gpxFile, true);
 		}
 		return displayGroups;
 	}

@@ -10,6 +10,7 @@ import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITU
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -54,6 +55,7 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -665,7 +667,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		view.findViewById(R.id.analyze_on_map).setOnClickListener(v -> openAnalyzeOnMap(tabType));
 
 		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-		if (!gpxItem.group.getTrack().generalTrack) {
+		TrackDisplayGroup trackGroup = getTrackDisplayGroup(gpxItem.group);
+		if (trackGroup == null || !trackGroup.isGeneralTrack()) {
 			setupOptionsPopupMenu(overflowMenu, confirmDeletion);
 		} else {
 			overflowMenu.setVisibility(View.GONE);
