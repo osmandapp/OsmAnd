@@ -2339,9 +2339,9 @@
     <string name="quick_action_add_destination_desc">En knap til at gøre centrum af skærmen til rutedestinationen. En tidligere valgt destination bliver i stedet den sidste mellemliggende destination.</string>
     <string name="quick_action_replace_destination_desc">En knap til at gøre skærmens centrum til den nye rutedestination og erstatte den tidligere valgte destination (hvis nogen).</string>
     <string name="quick_action_add_first_intermediate_desc">En knap til at gøre skærmens centrum til den første mellemliggende destination.</string>
-    <string name="quick_action_auto_zoom">Automatisk kortzoom til/fra</string>
-    <string name="quick_action_auto_zoom_desc">Knap til at slå hastighedafhængig autozoom til eller fra.</string>
-    <string name="quick_action_auto_zoom_on">Aktiver automatisk zoom</string>
+    <string name="quick_action_auto_zoom">Automatisk kortzoom</string>
+    <string name="quick_action_auto_zoom_desc">Knap til at slå hastighedafhængig auto-zoom til eller fra.</string>
+    <string name="quick_action_auto_zoom_on">Aktivér automatisk zoom</string>
     <string name="quick_action_auto_zoom_off">Deaktiver automatisk zoom</string>
     <string name="shared_string_paused">Pauset</string>
     <string name="type_city_town">Indtast by/bydel/sted</string>
