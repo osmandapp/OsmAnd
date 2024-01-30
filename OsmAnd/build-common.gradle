@@ -246,36 +246,6 @@ task copyLargePOIIcons(type: Sync) {
 	}
 }
 
-task copyWidgetIconsXhdpi(type: Sync) {
-	from "res/drawable-xxhdpi/"
-	into "res/drawable-large-xhdpi/"
-	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	preserve {
-		include '*'
-		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	}
-}
-
-task copyWidgetIconsHdpi(type: Sync) {
-	from "res/drawable-xhdpi/"
-	into "res/drawable-large-hdpi/"
-	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	preserve {
-		include '*'
-		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	}
-}
-
-task copyWidgetIcons(type: Sync) {
-	from "res/drawable-hdpi/"
-	into "res/drawable-large/"
-	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	preserve {
-		include '*'
-		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	}
-}
-
 task collectTestResources(type: Copy) {
 	into "test/assets/"
 	from("../../resources/test-resources/ui/") {
@@ -294,9 +264,6 @@ task collectExternalResources {
 			copyMapPOIIcons,
 			copyLargePOIIcons,
 			validateTranslate,
-			copyWidgetIcons,
-			copyWidgetIconsHdpi,
-			copyWidgetIconsXhdpi,
 			copyProjDb,
 			copyWeatherFiles,
 			copyHeightmapFiles,
