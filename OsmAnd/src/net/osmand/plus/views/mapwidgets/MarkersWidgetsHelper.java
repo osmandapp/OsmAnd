@@ -144,7 +144,7 @@ public class MarkersWidgetsHelper implements WidgetsRegistryListener {
 			LatLon pointToNavigate = marker.point;
 			if (pointToNavigate != null) {
 				int fZoom = Math.max(mapView.getZoom(), 15);
-				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom);
 			}
 		}
 	}

@@ -34,4 +34,16 @@
     <string name="sharing_status">공유 상태</string>
     <string name="units_and_formats">단위 &amp; 형식</string>
     <string name="by_name">이름별</string>
+    <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="send_live_location_error">실시간 위치 오류 보내기: %1$s</string>
+    <string name="shared_string_error_short">ERR</string>
+    <string name="duration_ago">%1$s 전</string>
+    <string name="buffer_time_descr">버퍼의 포인트를 저장하는 최대 시간</string>
+    <string name="time_zone_descr">위치 메시지에 표시할 시간대를 선택합니다.</string>
+    <string name="time_zone">시간 영역</string>
+    <string name="unit_of_length">측정 단위</string>
+    <string name="unit_of_length_descr">거리가 측정되는 것을 변경하십시오.</string>
+    <string name="unit_of_speed_system_descr">속도를 정의합니다.</string>
+    <string name="unit_of_speed_system">속도 단위</string>
 </resources>

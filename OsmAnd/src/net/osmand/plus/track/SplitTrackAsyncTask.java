@@ -161,13 +161,13 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 
 		if (!group.isSplitDistance()) {
 			String color = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
-			builder.append(GpxUiHelper.getColorValue(color, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app)));
+			builder.append(GpxUiHelper.getColorValue(color, OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app)));
 		}
-		if ((analysis.timeSpan > 0 || analysis.timeMoving > 0) && !group.isSplitTime()) {
+		if ((analysis.getTimeSpan() > 0 || analysis.getTimeMoving() > 0) && !group.isSplitTime()) {
 			if (!Algorithms.isEmpty(builder)) {
 				builder.append(", ");
 			}
-			long time = analysis.timeMoving != 0 ? analysis.timeMoving : analysis.timeSpan;
+			long time = analysis.getTimeMoving() != 0 ? analysis.getTimeMoving() : analysis.getTimeSpan();
 			String color = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_time_span_color));
 			builder.append(GpxUiHelper.getColorValue(color, Algorithms.formatDuration((int) (time / 1000), app.accessibilityEnabled())));
 		}
@@ -176,7 +176,7 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 				builder.append(", ");
 			}
 			String color = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_speed));
-			builder.append(GpxUiHelper.getColorValue(color, OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app)));
+			builder.append(GpxUiHelper.getColorValue(color, OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app)));
 		}
 		// add min/max elevation data to split track analysis to facilitate easier track/segment identification
 		String ascClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_asc));
@@ -185,22 +185,22 @@ public class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 			if (!Algorithms.isEmpty(builder)) {
 				builder.append(", ");
 			}
-			builder.append(GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.minElevation, app)));
+			builder.append(GpxUiHelper.getColorValue(descClr, OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app)));
 			builder.append(" - ");
-			builder.append(GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app)));
+			builder.append(GpxUiHelper.getColorValue(ascClr, OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app)));
 		}
 		if (analysis.isElevationSpecified()
-				&& (analysis.diffElevationUp > ELEVATION_THRESHOLD || analysis.diffElevationDown > ELEVATION_THRESHOLD)) {
+				&& (analysis.getDiffElevationUp() > ELEVATION_THRESHOLD || analysis.getDiffElevationDown() > ELEVATION_THRESHOLD)) {
 			if (!Algorithms.isEmpty(builder)) {
 				builder.append(", ");
 			}
-			if (analysis.diffElevationDown > ELEVATION_THRESHOLD) {
+			if (analysis.getDiffElevationDown() > ELEVATION_THRESHOLD) {
 				builder.append(GpxUiHelper.getColorValue(descClr, " ↓ " +
-						OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app)));
+						OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app)));
 			}
-			if (analysis.diffElevationUp > ELEVATION_THRESHOLD) {
+			if (analysis.getDiffElevationUp() > ELEVATION_THRESHOLD) {
 				builder.append(GpxUiHelper.getColorValue(ascClr, " ↑ " +
-						OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app)));
+						OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app)));
 			}
 		}
 		return builder.toString();

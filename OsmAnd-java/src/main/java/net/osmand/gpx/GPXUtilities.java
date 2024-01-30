@@ -148,6 +148,7 @@ public class GPXUtilities {
 	public static class GPXExtensions {
 		public Map<String, String> extensions = null;
 		GPXExtensionsWriter extensionsWriter = null;
+		GPXExtensionsWriter additionalExtensionsWriter = null;
 
 		public Map<String, String> getExtensionsToRead() {
 			if (extensions == null) {
@@ -170,12 +171,20 @@ public class GPXUtilities {
 			}
 		}
 
+		public GPXExtensionsWriter getAdditionalExtensionsWriter() {
+			return additionalExtensionsWriter;
+		}
+
 		public GPXExtensionsWriter getExtensionsWriter() {
 			return extensionsWriter;
 		}
 
 		public void setExtensionsWriter(GPXExtensionsWriter extensionsWriter) {
 			this.extensionsWriter = extensionsWriter;
+		}
+
+		public void setAdditionalExtensionsWriter(GPXExtensionsWriter additionalExtensionsWriter) {
+			this.additionalExtensionsWriter = additionalExtensionsWriter;
 		}
 
 		public int getColor(int defColor) {
@@ -403,7 +412,7 @@ public class GPXUtilities {
 				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
 			}
 		}
-		
+
 		public void setHidden(String hidden) {
 			getExtensionsToWrite().put(HIDDEN_EXTENSION, hidden);
 		}
@@ -777,7 +786,7 @@ public class GPXUtilities {
 		public int hashCode() {
 			return Algorithms.hash(name, iconName, backgroundType, color, points);
 		}
-		
+
 		public void setName(String name) {
 			this.name = name;
 		}
@@ -931,6 +940,7 @@ public class GPXUtilities {
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "xmlns:osmand", "https://osmand.net");
+			serializer.attribute(null, "xmlns:gpxtpx", "http://www.garmin.com/xmlschemas/TrackPointExtension/v1");
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
@@ -1129,6 +1139,7 @@ public class GPXUtilities {
 
 	private static void writeExtensions(XmlSerializer serializer, Map<String, String> extensions, GPXExtensions p, IProgress progress) throws IOException {
 		GPXExtensionsWriter extensionsWriter = p.getExtensionsWriter();
+		GPXExtensionsWriter additionalExtensionsWriter = p.getAdditionalExtensionsWriter();
 		if (!extensions.isEmpty() || extensionsWriter != null) {
 			serializer.startTag(null, "extensions");
 			if (!extensions.isEmpty()) {
@@ -1139,6 +1150,11 @@ public class GPXUtilities {
 					}
 					writeNotNullText(serializer, key, entry.getValue());
 				}
+			}
+			if (additionalExtensionsWriter != null) {
+				serializer.startTag(null, "gpxtpx:TrackPointExtension");
+				additionalExtensionsWriter.writeExtensions(serializer);
+				serializer.endTag(null, "gpxtpx:TrackPointExtension");
 			}
 			if (extensionsWriter != null) {
 				extensionsWriter.writeExtensions(serializer);
@@ -1379,6 +1395,9 @@ public class GPXUtilities {
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
 
 			Algorithms.closeStream(fis);
+			if (gpxFile.error != null) {
+				log.info("Error reading gpx " + gpxFile.path);
+			}
 			return gpxFile;
 		} catch (IOException e) {
 			GPXFile gpxFile = new GPXFile(null);
@@ -1464,6 +1483,9 @@ public class GPXUtilities {
 											String value = entry.getValue();
 											if (t.equals("heartrate")) {
 												t = "hr";
+											}
+											if (t.equals("speed")) {
+												t = PointAttributes.SENSOR_TAG_SPEED;
 											}
 											parse.getExtensionsToWrite().put(t, value);
 

@@ -127,7 +127,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		TextRadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
 		TextRadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
 
-		time.setEnabled(selectedGpxFile == null || selectedGpxFile.getTrackAnalysisToDisplay(app).timeSpan > 0);
+		time.setEnabled(selectedGpxFile == null || selectedGpxFile.getTrackAnalysisToDisplay(app).getTimeSpan() > 0);
 
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(none, time, distance);

@@ -23,11 +23,7 @@ import androidx.core.widget.CompoundButtonCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -39,6 +35,9 @@ import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 	private LinearLayout itemsContainer;
 	private View.OnClickListener onClickListener;
-	private ColorStateList rbColorList;
+	private ColorStateList colorStateList;
 
 	private String selectedItem;
 	private QuickAction action;
@@ -58,29 +57,21 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Bundle args = getArguments();
-		if (args == null) {
-			return;
-		}
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		if (args == null || mapActivity == null) {
 			return;
 		}
 		long id = args.getLong(SwitchableAction.KEY_ID);
 		OsmandApplication app = mapActivity.getMyApplication();
-
 		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
-		action = quickActionRegistry.getQuickAction(id);
-		action = QuickActionRegistry.produceAction(action);
-		if (action == null) {
-			return;
-		}
-		OsmandSettings settings = app.getSettings();
+		action = QuickActionRegistry.produceAction(quickActionRegistry.getQuickAction(id));
+
 		if (savedInstanceState != null) {
 			selectedItem = savedInstanceState.getString(SELECTED_ITEM_KEY);
 		} else {
-			selectedItem  = ((SwitchableAction<?>) action).getSelectedItem(app);
+			selectedItem = ((SwitchableAction<?>) action).getSelectedItem(app);
 		}
-		rbColorList = AndroidUtils.createCheckedColorStateList(app, R.color.icon_color_default_light, getActiveColorId());
+		colorStateList = AndroidUtils.createCheckedColorStateList(app, R.color.icon_color_default_light, getActiveColorId());
 
 		items.add(new TitleItem(action.getName(app)));
 
@@ -131,12 +122,10 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 	@Override
 	protected void onDismissButtonClickAction() {
-		FragmentManager fm = getFragmentManager();
-		if (fm == null) {
-			return;
+		FragmentManager manager = getFragmentManager();
+		if (manager != null) {
+			CreateEditActionDialog.showInstance(manager, action);
 		}
-		CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.getId());
-		dialog.show(fm, CreateEditActionDialog.TAG);
 	}
 
 	@Override
@@ -147,7 +136,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	@Nullable
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
-		if (activity != null && activity instanceof MapActivity) {
+		if (activity instanceof MapActivity) {
 			return (MapActivity) activity;
 		}
 		return null;
@@ -206,34 +195,30 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 		RadioButton rb = view.findViewById(R.id.compound_button);
 		rb.setChecked(selected);
-		CompoundButtonCompat.setButtonTintList(rb, rbColorList);
+		CompoundButtonCompat.setButtonTintList(rb, colorStateList);
 		ImageView imageView = view.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
 	}
 
 	@ColorInt
 	private int getStyleTitleColor(boolean selected) {
-		int colorId = selected
-				? getActiveColorId()
-				: ColorUtilities.getPrimaryTextColorId(nightMode);
+		int colorId = selected ? getActiveColorId() : ColorUtilities.getPrimaryTextColorId(nightMode);
 		return getResolvedColor(colorId);
 	}
 
+	@NonNull
 	private View.OnClickListener getOnClickListener() {
 		if (onClickListener == null) {
-			onClickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity == null) {
-						return;
-					}
-					selectedItem = (String) v.getTag();
-					if (action instanceof SwitchableAction) {
-						((SwitchableAction) action).executeWithParams(mapActivity, selectedItem);
-					}
-					dismiss();
+			onClickListener = v -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity == null) {
+					return;
 				}
+				selectedItem = (String) v.getTag();
+				if (action instanceof SwitchableAction) {
+					((SwitchableAction) action).executeWithParams(mapActivity, selectedItem);
+				}
+				dismiss();
 			};
 		}
 		return onClickListener;

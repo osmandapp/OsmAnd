@@ -49,7 +49,7 @@ public abstract class DistanceToPointWidget extends SimpleWidget {
 		LatLon pointToNavigate = getPointToNavigate();
 		if (pointToNavigate != null) {
 			int fZoom = Math.max(view.getZoom(), 15);
-			thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+			thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom);
 		}
 	}
 

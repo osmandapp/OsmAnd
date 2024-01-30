@@ -30,9 +30,9 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -480,7 +480,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				overviewTextView.setText(app.getString(R.string.shared_string_overview));
 				if (currentGpxDisplayItem != null) {
 					String overview = getString(R.string.shared_string_overview);
-					String points = String.valueOf(currentGpxDisplayItem.analysis.points);
+					String points = String.valueOf(currentGpxDisplayItem.analysis.getPoints());
 					overviewTextView.setText(getString(R.string.ltr_or_rtl_combine_with_brackets, overview, points));
 
 					String timeSpan = getString(R.string.shared_string_time_span);
@@ -494,19 +494,19 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					if (trackGroup != null && trackGroup.isSplitDistance()) {
 						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, activeColorId));
 						overviewTextView.setText("");
-						double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.totalDistance;
+						double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.getTotalDistance();
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
-						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.points + ")");
+						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 					} else if (trackGroup != null && trackGroup.isSplitTime()) {
 						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 						overviewTextView.setText("");
-						double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.timeSpan / 1000);
+						double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.getTimeSpan() / 1000);
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) metricStart, app));
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) currentGpxDisplayItem.analysis.metricEnd, app));
-						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.points + ")");
+						overviewTextView.append("  (" + currentGpxDisplayItem.analysis.getPoints() + ")");
 					}
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.of, position, adapter.getCount() - 1));
 				}
@@ -537,7 +537,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					TextView distanceOrTimeSpanText = convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-						float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {
@@ -551,7 +551,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 							distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
 						} else if (trackGroup != null && trackGroup.isSplitTime()) {
 							distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-							distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+							distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 							distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 						}
 					}
@@ -560,15 +560,15 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					TextView startDateValue = convertView.findViewById(R.id.start_date_value);
 					TextView endTimeValue = convertView.findViewById(R.id.end_time_value);
 					TextView endDateValue = convertView.findViewById(R.id.end_date_value);
-					if (analysis.timeSpan > 0) {
+					if (analysis.getTimeSpan() > 0) {
 						DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 						DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
-						Date start = new Date(analysis.startTime);
+						Date start = new Date(analysis.getStartTime());
 						startTimeValue.setText(tf.format(start));
 						startDateValue.setText(df.format(start));
 
-						Date end = new Date(analysis.endTime);
+						Date end = new Date(analysis.getEndTime());
 						endTimeValue.setText(tf.format(end));
 						endDateValue.setText(df.format(end));
 					} else {
@@ -585,10 +585,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						elevationSection.setVisibility(View.VISIBLE);
 
 						((TextView) convertView.findViewById(R.id.average_altitude_value))
-								.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+								.setText(OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app));
 
-						String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-						String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+						String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+						String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 						String min_max_elevation = min.substring(0, min.indexOf(" ")).concat("/").concat(max);
 						if (min_max_elevation.length() > 9) {
 							(convertView.findViewById(R.id.min_altitude_value))
@@ -616,8 +616,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						TextView descentValue = convertView.findViewById(R.id.descent_value);
 						TextView ascentDescentValue = convertView.findViewById(R.id.ascent_descent_value);
 
-						String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-						String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+						String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+						String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 						String asc_desc = asc.substring(0, asc.indexOf(" ")).concat("/").concat(desc);
 						if (asc_desc.length() > 9) {
 							ascentValue.setVisibility(View.VISIBLE);
@@ -644,12 +644,12 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						speedSection.setVisibility(View.VISIBLE);
 
 						((TextView) convertView.findViewById(R.id.moving_time_value))
-								.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
+								.setText(Algorithms.formatDuration((int) (analysis.getTimeMoving() / 1000), app.accessibilityEnabled()));
 						((TextView) convertView.findViewById(R.id.average_speed_value))
-								.setText(OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+								.setText(OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app));
 
-						String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-						String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
+						String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
+						String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.getMinSpeed(), app);
 						String maxMinSpeed;
 						if (maxSpeed.contains(" ")) {
 							maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
@@ -670,7 +670,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						minMaxSpeedPaint.getTextBounds(maxMinSpeed, 0, maxMinSpeed.length(), minMaxSpeedTextBounds);
 						int minMaxStringWidth = minMaxSpeedTextBounds.width();
 
-						if (analysis.minSpeed == 0) {
+						if (analysis.getMinSpeed() == 0) {
 							(convertView.findViewById(R.id.max_speed_value))
 									.setVisibility(View.VISIBLE);
 							(convertView.findViewById(R.id.min_speed_value))

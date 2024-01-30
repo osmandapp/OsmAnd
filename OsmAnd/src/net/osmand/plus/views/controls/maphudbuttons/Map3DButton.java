@@ -1,9 +1,10 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.plus.settings.backend.preferences.FabMarginPreference.setFabButtonMargin;
-import static net.osmand.plus.utils.AndroidUtils.*;
 import static net.osmand.plus.utils.AndroidUtils.calculateTotalSizePx;
-import static net.osmand.plus.views.OsmandMapTileView.*;
+import static net.osmand.plus.utils.AndroidUtils.getMoveFabOnTouchListener;
+import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
+import static net.osmand.plus.views.OsmandMapTileView.ElevationListener;
 import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 import android.content.Context;
@@ -80,6 +81,7 @@ public class Map3DButton extends MapButton {
 		}
 	}
 
+	@NonNull
 	private ElevationListener getElevationListener() {
 		return new ElevationListener() {
 			@Override
@@ -94,7 +96,8 @@ public class Map3DButton extends MapButton {
 		};
 	}
 
-	private View.OnLongClickListener getLongClickListener(ImageView fabButton) {
+	@NonNull
+	private View.OnLongClickListener getLongClickListener(@NonNull ImageView fabButton) {
 		return view -> {
 			if (!specialPosition) {
 				Vibrator vibrator = (Vibrator) mapActivity.getSystemService(Context.VIBRATOR_SERVICE);
@@ -146,7 +149,7 @@ public class Map3DButton extends MapButton {
 		}
 	}
 
-	private void setMap3DButtonMargin(ImageView fabButton) {
+	private void setMap3DButtonMargin(@NonNull ImageView fabButton) {
 		if (mapActivity != null && !specialPosition) {
 			int defMarginPortrait = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing);
 			int defMarginLandscape = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land);

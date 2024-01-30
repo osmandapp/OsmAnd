@@ -1,11 +1,11 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -78,6 +78,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String TRACK_COL_HEADING = "heading";
 	private static final String TRACK_COL_BEARING = "bearing";
 	private static final String TRACK_COL_PLUGINS_INFO = "plugins_info";
+
+	private static final String GPXTPX_PREFIX = "gpxtpx:";
 
 	private static final String POINT_NAME = "point";
 	private static final String POINT_COL_DATE = "date";
@@ -444,16 +446,31 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private void assignExtensionWriter(@NonNull WptPt wptPt, @NonNull Map<String, String> pluginsExtensions) {
 		if (wptPt.getExtensionsWriter() == null) {
-			wptPt.setExtensionsWriter(serializer -> {
-				for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
-					try {
-						GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
-					} catch (IOException e) {
-						log.error(e);
-					}
+			HashMap<String, String> regularExtensions = new HashMap<>();
+			HashMap<String, String> gpxtpxExtensions = new HashMap<>();
+
+			for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
+				if (entry.getKey().startsWith(GPXTPX_PREFIX)) {
+					gpxtpxExtensions.put(entry.getKey(), entry.getValue());
+				} else {
+					regularExtensions.put(entry.getKey(), entry.getValue());
 				}
-			});
+			}
+			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions));
+			wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions));
 		}
+	}
+
+	private GPXUtilities.GPXExtensionsWriter createExtensionsWriter(@NonNull Map<String, String> pluginsExtensions) {
+		return serializer -> {
+			for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
+				try {
+					GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
+				} catch (IOException e) {
+					log.error(e);
+				}
+			}
+		};
 	}
 
 	@NonNull
@@ -823,10 +840,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		currentTrack.processPoints(app);
 		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
-		distance = analysis.totalDistance;
-		points = analysis.wptPoints;
-		duration = analysis.timeSpan;
-		trkPoints = analysis.points;
+		distance = analysis.getTotalDistance();
+		points = analysis.getWptPoints();
+		duration = analysis.getTimeSpan();
+		trkPoints = analysis.getPoints();
 	}
 
 	private void prepareCurrentTrackForRecording() {

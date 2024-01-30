@@ -1,11 +1,11 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_HDOP;
-import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.SMOOTHING_THRESHOLD;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

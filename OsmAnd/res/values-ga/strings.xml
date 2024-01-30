@@ -10,7 +10,7 @@
     <string name="free_favorites_backup_description">Cláraigh ar Scamall OsmAnd chun cúltaca do na ceanáin agus na socruithe a fháil saor in aisce.</string>
     <string name="weather_wind_kilimeters_per_hour">Ciliméadair san uair</string>
     <string name="lang_pnb">Puinseáibis</string>
-    <string name="cloud_trash_clear_confirmation">An bhfuil tú cinnte gach rud sa bhosca bruscair a scriosadh go buan\? Ní féidir dul siar air.</string>
+    <string name="cloud_trash_clear_confirmation">An bhfuil tú cinnte gach rud sa bhosca bruscair a scriosadh go buan? Ní féidir dul siar air.</string>
     <string name="north">tuaisceart</string>
     <string name="info_button">Eolas</string>
     <string name="new_file">Comhad nua</string>
@@ -28,7 +28,7 @@
     <string name="activity_type_offroad_name">Easbhóthair</string>
     <string name="click_on_widget">Cliceáil ar an ngiuirléid</string>
     <string name="about_osmand">Faoi OsmAnd</string>
-    <string name="favorite_confirm_delete_group">An bhfuil tú cinnte an grúpa \"%1$s\" a scriosadh agus gach pointe (%2$d) san áireamh\?</string>
+    <string name="favorite_confirm_delete_group">An bhfuil tú cinnte an grúpa \"%1$s\" a scriosadh agus gach pointe (%2$d) san áireamh?</string>
     <string name="share_geo">geo:</string>
     <string name="amenity_type_entertainment">Siamsaíocht</string>
     <string name="osb_comment_dialog_message">Teachtaireacht</string>
@@ -565,7 +565,7 @@
     <string name="expired">As feidhm</string>
     <string name="shared_string_search">Cuardaigh</string>
     <string name="shared_string_complete">déanta</string>
-    <string name="delete_trash_item_confirmation_desc">Scriosfar \"%1$s\" go buan. An bhfuil tú cinnte\?
+    <string name="delete_trash_item_confirmation_desc">Scriosfar \"%1$s\" go buan. An bhfuil tú cinnte?
 \n
 \nNí féidir leat dul siar ar an ngníomh seo.</string>
     <string name="external_device_details_battery">Cadhnra</string>
@@ -829,7 +829,7 @@
     <string name="shared_string_purchased">Ceannaithe</string>
     <string name="rendering_attr_noPolygons_name">Polagáin</string>
     <string name="shared_string_next">Ar aghaidh</string>
-    <string name="discard_filter_changes_prompt">An bhfuil tú cinnte gur mian leat gach scagaire a athshocrú\?</string>
+    <string name="discard_filter_changes_prompt">An bhfuil tú cinnte gur mian leat gach scagaire a athshocrú?</string>
     <string name="rendering_attr_horse_scale_difficult_name">An-deacair</string>
     <string name="show_lanes">Lánaí</string>
     <string name="icon_group_amenity">Áis</string>
@@ -1038,7 +1038,7 @@
     <string name="sort_country_name_descending">Ainm tíre: Z – A</string>
     <string name="icon_group_service">Seirbhís</string>
     <string name="foot">ft</string>
-    <string name="delete_map_description">An bhfuil tú cinnte gur mian leat an léarscáil %1$s a scriosadh\?</string>
+    <string name="delete_map_description">An bhfuil tú cinnte gur mian leat an léarscáil %1$s a scriosadh?</string>
     <string name="user_password">Pasfhocal</string>
     <string name="shared_string_used">Úsáidte</string>
     <string name="app_mode_moped">Móipéid</string>
@@ -1971,7 +1971,7 @@
     <string name="wikivoyage_travel_guide">Treoirleabhair thaistil</string>
     <string name="shared_string_add_photo">Cuir grianghraf leis</string>
     <string name="register_opr_create_new_account">Cruthaigh cuntas nua</string>
-    <string name="remove_type_q">An bhfuil tú cinnte gur mian leat an cineál \"%1$s\" a bhaint\?</string>
+    <string name="remove_type_q">An bhfuil tú cinnte gur mian leat an cineál \"%1$s\" a bhaint?</string>
     <string name="shared_string_search_history">Stair chuardaigh</string>
     <string name="shared_string_action">Gníomh</string>
     <string name="rendering_attr_weatherTempContours_name">Isilínte teochta</string>

@@ -492,6 +492,38 @@ public class OsmAndFormatter {
 		return getFormattedSpeedValue(metersPerSeconds, app, mode.hasFastSpeed(), app.getSettings().SPEED_SYSTEM.getModeValue(mode));
 	}
 
+	public static float getMpSFromFormattedValue(OsmandApplication app, float value, SpeedConstants speedFormat) {
+		return (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER) / 3.6f;
+	}
+
+	public static float getMetersFromFormattedAltitudeValue(float altitude, MetricsConstants mc) {
+		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
+		if (useFeet) {
+			return altitude / FEET_IN_ONE_METER;
+		} else {
+			return altitude;
+		}
+	}
+
+	public static float convertToMeters(float distance, MetricsConstants mc) {
+		float mainUnitInMeters;
+		switch (mc) {
+			case MILES_AND_FEET:
+			case MILES_AND_METERS:
+				mainUnitInMeters = METERS_IN_ONE_MILE;
+				break;
+			case NAUTICAL_MILES_AND_METERS:
+			case NAUTICAL_MILES_AND_FEET:
+				mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
+				break;
+			default:
+				mainUnitInMeters = METERS_IN_KILOMETER;
+				break;
+		}
+
+		return distance * mainUnitInMeters;
+	}
+
 	@NonNull
 	public static float getMetersInModeUnit(@NonNull OsmandApplication app, @NonNull SpeedConstants speedFormat) {
 		float metersInUnit = 0f;
@@ -514,6 +546,19 @@ public class OsmAndFormatter {
 				break;
 		}
 		return metersInUnit;
+	}
+
+	public static float convertSpeedToMetersPerSecond(float formattedValueSrc, SpeedConstants mc) {
+		switch (mc) {
+			case KILOMETERS_PER_HOUR:
+				return formattedValueSrc / 3.6f;
+			case MILES_PER_HOUR:
+				return (float) (formattedValueSrc * METERS_IN_ONE_MILE / 3.6 * 1000);
+			case NAUTICALMILES_PER_HOUR:
+				return (float) (formattedValueSrc * METERS_IN_ONE_NAUTICALMILE / 3.6 * 1000);
+			default:
+				return formattedValueSrc;
+		}
 	}
 
 	@NonNull

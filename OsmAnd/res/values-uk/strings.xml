@@ -4760,7 +4760,7 @@
     <string name="included_in_your_current_plan">Включено до поточного плану \"%1$s\"</string>
     <string name="available_as_part_of_subscription_plan">Доступно в рамках передплати %1$s.</string>
     <string name="favorite_delete_group">Вилучити групу</string>
-    <string name="favorite_confirm_delete_group">Ви впевнені, що хочете вилучити групу «%1$s» і всі її точки (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Видалити групу \"%1$s\" і всі її точки (%2$d)?</string>
     <string name="download_heightmap_maps">Мапа висот</string>
     <string name="display_position">Місцеположення на екрані</string>
     <string name="distance_by_tap_use_description">Торкніться мапи, щоб переглянути відстань між вашим поточним розташуванням і точкою дотику.
@@ -5175,7 +5175,7 @@
     <string name="is_imported">%1$s імпортовано.</string>
     <string name="file_already_exists_description">«%1$s». Файл з такою назвою вже існує. Заміна перезапише всі зміни, внесені в поточну версію.</string>
     <string name="file_already_exists">Файл вже існує</string>
-    <string name="nav_profile_confirm_delete">Ви дійсно бажаєте вилучити «%1$s»\?</string>
+    <string name="nav_profile_confirm_delete">Видалити \"%1$s\"?</string>
     <string name="search_track_by_name">Пошук треків за назвою</string>
     <string name="no_search_results">Нічого не знайдено</string>
     <string name="number_of_tracks">%1$s треків</string>
@@ -5247,7 +5247,7 @@
     <string name="osmand_cloud_deleting_account_descr">Через кілька хвилин усі ваші дані та обліковий запис буде видалено з OsmAnd Cloud.
 \n
 \nУсі дані на пристрої залишаться недоторканими.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Ви дійсно хочете видалити обліковий запис OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Видалити обліковий запис OsmAnd Cloud?
 \n
 \nЦю дію не можна скасувати.</string>
     <string name="osmand_cloud_delete_account_confirmation">Видалити обліковий запис\?</string>
@@ -5257,7 +5257,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Усі дані з OsmAnd Cloud будуть %1$s. Дані на пристрої залишаються недоторканими.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Це не скасує вашу передплату на OsmAnd Pro.</string>
     <string name="manage_subscriptions">Керування передплатами.</string>
-    <string name="delete_account_warning">Ви дійсно хочете видалити обліковий запис %1$s\?</string>
+    <string name="delete_account_warning">Видалити обліковий запис %1$s?</string>
     <string name="deleting_complete">Видалення завершено</string>
     <string name="free_favorites_backup_description">Зареєструйтеся в OsmAnd Cloud, щоб отримати безплатне резервне копіювання закладок і налаштувань.</string>
     <string name="free_favorites_backup">Безплатне резервне копіювання закладок</string>
@@ -5453,7 +5453,7 @@
     <string name="widget_available_ram">Доступна оперативна пам\'ять</string>
     <string name="terrain_maps">Мапи рельєфу</string>
     <string name="sort_country_name_descending">Назва країни: Я – А</string>
-    <string name="delete_map_description">Ви впевнені, що хочете видалити мапу %1$s\?</string>
+    <string name="delete_map_description">Видалити мапу %1$s?</string>
     <string name="maps_and_resources">Мапи й ресурси</string>
     <string name="shared_string_show_icon">Показати піктограму</string>
     <string name="smart_folder_name_present">Така розумна тека вже існує</string>
@@ -5491,16 +5491,16 @@
     <string name="map_widget_glide_average_desc">Показує середній коефіцієнт ковзання для встановленого інтервалу.</string>
     <string name="map_widget_glide_target_desc">Показує коефіцієнт ковзання, необхідний для досягнення цільової точки.</string>
     <string name="empty_smart_folder_title">Немає відповідного треку</string>
-    <string name="empty_smart_folder_description">Усі відповідні треки автоматично з\'являться тут</string>
+    <string name="empty_smart_folder_description">Відповідні треки з\'являться тут</string>
     <string name="configure_filter">Сконфігурувати фільтр</string>
     <string name="no_config_smart_folder_title">Не сконфігуровано</string>
     <string name="discard_filter_changes">Відкинути заміну фільтрів</string>
     <string name="shared_string_loading">Завантаження</string>
-    <string name="discard_filter_changes_prompt">Ви впевнені, що хочете скинути всі фільтри\?</string>
+    <string name="discard_filter_changes_prompt">Скинути всі фільтри?</string>
     <string name="no_config_smart_folder_description">Розумні теки дозволяють групувати треки за застосованими фільтрами</string>
     <string name="loading_tracks">Перезавантаження треків</string>
     <string name="searching_matching_tracks">Шукати всі відповідні треки</string>
-    <string name="cloud_trash_clear_confirmation">Ви дійсно хочете остаточно видалити всі елементи зі Смітника\? Ця дія незворотна.</string>
+    <string name="cloud_trash_clear_confirmation">Видалити всі елементи зі смітника остаточно?</string>
     <string name="key_event_action_zoom_in">Збільшити</string>
     <string name="change_button">Змінити кнопку</string>
     <string name="enable_to_use_external_input_device">Увімкнути зовнішній пристрій введення з OsmAnd</string>
@@ -5522,7 +5522,7 @@
     <string name="delete_all_items">Видалити всі елементи</string>
     <string name="change_key_binding">Змінити прив\'язку клавіш</string>
     <string name="key_event_action_take_media_note">Створити медіа-нотатку</string>
-    <string name="remove_type_q">Ви дійсно хочете вилучити тип \"%1$s\"\?</string>
+    <string name="remove_type_q">Вилучити тип \"%1$s\"?</string>
     <string name="shared_string_action">Дія</string>
     <string name="trash_is_empty_banner_desc">Вилучені з OsmAnd Cloud файли будуть тут доступні ще %1$s днів.</string>
     <string name="add_new_type">Додати новий тип</string>
@@ -5534,9 +5534,7 @@
         <item quantity="other">%1$d (%2$d треків)</item>
     </plurals>
     <string name="key_event_action_open_search_view">Відкрити пошук</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" буде видалено назавжди. Ви впевнені\?
-\n
-\nЦю дію неможливо скасувати.</string>
+    <string name="delete_trash_item_confirmation_desc">Видалити \"%1$s\" назавжди?</string>
     <string name="key_event_action_zoom_out">Зменшити</string>
     <string name="key_event_action_toggle_drower">Показати/сховати бічне меню</string>
     <string name="key_is_already_assigned_error">Кнопка \"%1$s\" вже призначена такій дії: \"%2$s\"</string>
@@ -5565,24 +5563,24 @@
     <string name="map_widget_group_glide_ratio">Коефіцієнт ковзання</string>
     <string name="remove_widget_first">Спочатку видаліть віджет</string>
     <string name="add_row">Додати рядок</string>
-    <string name="discard_changes_prompt">Ви дійсно хочете відкинути зміни?</string>
+    <string name="discard_changes_prompt">Відкинути зміни?</string>
     <string name="row_number">Рядок %1$s</string>
     <string name="key_assignments">Прив\'язки клавіш</string>
     <string name="topography_maps">Топографічні мапи</string>
     <string name="tripltek_promo">Промо Tripltek на %1$s місяців</string>
     <string name="tripltek_promo_description">Безплатний доступ до функцій, включно з необмеженим завантаженням мап, 3D-рельєф тощо за %1$s на місяць</string>
     <string name="clear_key_assignment">Очистити прив\'язку клавіш</string>
-    <string name="clear_key_assignment_desc">Прив\'язку клавіш для обраної дії буде очищено та встановлено як \"Ні\".</string>
+    <string name="clear_key_assignment_desc">Прив\'язку клавіш для вибраної дії буде очищено та встановлено як \"Ні\".</string>
     <string name="see_all_plans">Переглянути всі плани</string>
-    <string name="button_already_assigned_to_this_action">Ця кнопка вже призначена для цієї дії.</string>
+    <string name="button_already_assigned_to_this_action">Кнопка вже призначена для цієї дії.</string>
     <string name="zoom_non_animated">Неанімований зум</string>
     <string name="key_assignments_already_cleared_message">Всі призначення кнопок вже очищено</string>
     <string name="shared_string_next_event">Наступна подія</string>
-    <string name="use_v1_auto_zoom">Дискретний автозум (стара версія)</string>
+    <string name="use_v1_auto_zoom">Дискретний автомасштаб (стара версія)</string>
     <string name="zoom_animated">Анімований зум</string>
     <string name="map_widget_sun_position">Розташування сонця</string>
     <string name="add_new_button">Додати нову кнопку</string>
-    <string name="map_widget_sun_position_desc">Цей віджет показує час до сходу або заходу сонця, залежно від поточного часу.</string>
+    <string name="map_widget_sun_position_desc">Показує час до сходу або заходу сонця.</string>
     <string name="rendering_attr_showToll_name">Показати обмеження плати за проїзд</string>
     <string name="reset_key_assignments_desc">Усі призначення кнопок для вибраного типу буде вилучено.</string>
     <string name="lang_zh_hans">Китайська спрощена</string>
@@ -5599,4 +5597,10 @@
     <string name="any_connected_with_device">Будь-який підключений: %s</string>
     <string name="shared_string_road_maps">Дорожні карти</string>
     <string name="shared_string_all_tracks">Усі треки</string>
+    <string name="shared_string_license">Ліцензія</string>
+    <string name="shared_string_link">Посилання</string>
+    <string name="shared_string_copyright">Авторське право</string>
+    <string name="shared_string_author">Автор</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_extensions">Розширення</string>
 </resources>

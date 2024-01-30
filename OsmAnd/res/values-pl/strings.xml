@@ -4732,7 +4732,7 @@
     <string name="auto_backup_preference_desc">Domyślnie Android zapisuje kopie zapasowe ulubionych, tokenów map i ustawień OsmAnd, aby przywrócić je na nowych urządzeniach lub po reinstalacji. Ta kopia zapasowa jest ograniczona do 25 MB.
 \nW przypadku korzystania z OsmAnd Cloud może to prowadzić do nieporozumień po reinstalacji.</string>
     <string name="compass_desc">Pokazuje kierunek północny.</string>
-    <string name="favorite_confirm_delete_group">Czy na pewno chcesz usunąć grupę \"%1$s\" i wszystkie zawarte w niej punkty (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Czy na pewno chcesz usunąć grupę \"%1$s\" i wszystkie zawarte w niej punkty (%2$d)?</string>
     <string name="external_sensors_plugin_name">Czujniki zewnętrzne</string>
     <string name="simulate_location_by_gpx">Symuluj lokalizację za pomocą GPX</string>
     <string name="shared_string_terms_of_use">Warunki użytkowania</string>
@@ -5116,7 +5116,7 @@
     <string name="ant_plus_pair_new_sensor_ble">Sparuj czujnik Bluetooth LE</string>
     <string name="file_already_exists_description">\"%1$s\". Plik o tej nazwie już istnieje. Polecenie Zastąp nadpisze wszystkie zmiany wprowadzone z aktualną wersją.</string>
     <string name="file_already_exists">Plik już istnieje</string>
-    <string name="nav_profile_confirm_delete">Czy na pewno chcesz usunąć „%1$s”\?</string>
+    <string name="nav_profile_confirm_delete">Czy na pewno chcesz usunąć „%1$s”?</string>
     <string name="external_device_characteristic_diastolic">Rozkurczowe</string>
     <string name="external_device_characteristic_arterial_pressure">Ciśnienie tętnicze</string>
     <string name="external_device_characteristic_cuff_pressure">Ciśnienie w mankiecie</string>
@@ -5253,7 +5253,7 @@
     <string name="osmand_cloud_deleting_account_descr">W ciągu kilku chwil wszystkie dane i konto zostaną usunięte z OsmAnd Cloud.
 \n
 \nWszystkie dane na urządzeniu pozostaną nietknięte.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Czy na pewno chcesz usunąć konto OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Czy na pewno chcesz usunąć konto OsmAnd Cloud?
 \n
 \nTej czynności nie można cofnąć.</string>
     <string name="routing_attr_allow_via_ferrata_description">Trasa górska wyposażona w stałe liny, słupy, drabiny i mosty.</string>
@@ -5269,7 +5269,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Wszystkie dane z OsmAnd Cloud zostaną %1$s. Dane na urządzeniu pozostaną nienaruszone.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Nie spowoduje to anulowania subskrypcji OsmAnd Pro.</string>
     <string name="manage_subscriptions">Zarządzanie subskrypcjami.</string>
-    <string name="delete_account_warning">Czy na pewno chcesz usunąć konto %1$s\?</string>
+    <string name="delete_account_warning">Czy na pewno chcesz usunąć konto %1$s?</string>
     <string name="shared_string_deleting">Usuwanie</string>
     <string name="deleting_complete">Usuwanie zakończone</string>
     <string name="delete_account">Usuń konto</string>
@@ -5367,7 +5367,7 @@
     <string name="widget_available_ram">Dostępna pamięć RAM</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="terrain_maps">Mapy terenu</string>
-    <string name="delete_map_description">Czy na pewno chcesz usunąć mapę %1$s\?</string>
+    <string name="delete_map_description">Czy na pewno chcesz usunąć mapę %1$s?</string>
     <string name="open_issue_on_github">Otwórz problem na GitHubie</string>
     <string name="about_osmand">O aplikacji OsmAnd</string>
     <string name="user_guide">Samouczek</string>
@@ -5475,11 +5475,11 @@
     <string name="no_config_smart_folder_title">Nieskonfigurowane</string>
     <string name="discard_filter_changes">Odrzuć zmiany filtrów</string>
     <string name="shared_string_loading">Wczytywanie</string>
-    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry\?</string>
+    <string name="discard_filter_changes_prompt">Czy na pewno chcesz zresetować wszystkie filtry?</string>
     <string name="no_config_smart_folder_description">Mądre foldery pozwalają grupować trasy według zastosowanych filtrów</string>
     <string name="loading_tracks">Ponowne wczytywanie tras</string>
     <string name="searching_matching_tracks">Wyszukaj wszystkie pasujące trasy</string>
-    <string name="cloud_trash_clear_confirmation">Czy na pewno chcesz trwale usunąć wszystkie elementy z Kosza\? Tej czynności nie można cofnąć.</string>
+    <string name="cloud_trash_clear_confirmation">Czy na pewno chcesz trwale usunąć wszystkie elementy z Kosza? Tej czynności nie można cofnąć.</string>
     <string name="restore_from_trash">Przywróć z kosza</string>
     <string name="delete_all_items">Usuń wszystkie elementy</string>
     <string name="trash_is_empty_banner_desc">Pliki usunięte z OsmAnd Cloud będą dostępne tutaj przez %1$s dni.</string>
@@ -5515,4 +5515,15 @@
     <string name="key_event_action_move_down">Przesuń w dół</string>
     <string name="key_event_category_actions">Akcje</string>
     <string name="precise_distance_numbers">Dokładna odległość</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="add_new_button">Dodaj nowy przycisk</string>
+    <string name="shared_string_road_maps">Mapy dróg</string>
+    <string name="map_widget_sun_position_desc">Wyświetla czas do wschodu lub zachodu słońca.</string>
+    <string name="map_widget_sun_position">Pozycja słońca</string>
+    <string name="use_v1_auto_zoom">Dyskretny automatyczny zoom (stara wersja)</string>
+    <string name="button_already_assigned_to_this_action">Przycisk już przypisany do tej akcji.</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Wszystkie trasy</string>
+    <string name="shared_string_extensions">Rozszerzenia</string>
+    <string name="shared_string_license">Licencja</string>
 </resources>

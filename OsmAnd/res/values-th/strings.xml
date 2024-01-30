@@ -111,7 +111,7 @@
     <string name="no_search_results">ไม่มีพบผลลัพธ์</string>
     <string name="is_imported">%1$s ได้ถูกนำเข้าแล้ว</string>
     <string name="file_already_exists">มีไฟล์อยู่แล้ว</string>
-    <string name="nav_profile_confirm_delete">คุณแน่ใจไหมว่าคุณต้องการลบ \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">คุณแน่ใจไหมว่าคุณต้องการลบ \"%1$s\"?</string>
     <string name="shared_string_chest">หน้าอก</string>
     <string name="external_device_characteristic_speed">ความเร็ว</string>
     <string name="delete_folder_question">ต้องการลบโฟลเดอร์ไหม\?</string>

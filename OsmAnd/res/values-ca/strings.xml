@@ -4266,7 +4266,7 @@
     <string name="speak_route_deviation">Anunciar desviació de la ruta</string>
     <string name="select_layer">Selecciona una capa</string>
     <string name="routing_attr_motor_type_name">Combustible utilitzat pel motor</string>
-    <string name="favorite_confirm_delete_group">Esteu segur que voleu suprimir el grup «%1$s» i tots els punts inclosos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Esteu segur que voleu suprimir el grup «%1$s» i tots els punts inclosos (%2$d)?</string>
     <string name="auto_backup_preference_desc">Per defecte, Android desa còpies de seguretat dels favorits, fitxes de mapes i configuració d\'OsmAnd per restaurar-los en dispositius nous o després de la reinstal·lació. Aquesta còpia de seguretat està limitada a 25 MB.
 \nQuan utilitzeu OsmAnd Cloud, això pot provocar malentesos després de la reinstal·lació.</string>
     <string name="routing_attr_motor_type_lpg_name">Gas liquat del petroli (GLP)</string>

@@ -795,4 +795,7 @@
     <string name="poi_payment_routex_no">노선 연료 카드는 허용되지 않습니다</string>
     <string name="poi_payment_v_pay_no">V PAY 카드 허용되지 않음</string>
     <string name="poi_payment_golden_crown_no">골든 크라운 카드는 허용되지 않습니다</string>
+    <string name="poi_vending_parking_tickets_public_transport_tickets">주차권; 대중교통권</string>
+    <string name="poi_traffic_signals_sound">소리</string>
+    <string name="poi_highway_crossing_type">속성 보기</string>
 </resources>

@@ -4756,7 +4756,7 @@
     <string name="shared_string_only_missing">Só os que faltam</string>
     <string name="available_as_part_of_subscription_plan">Disponível como parte da subscrição %1$s.</string>
     <string name="included_in_your_current_plan">Incluído no seu plano \"%1$s\" atual</string>
-    <string name="favorite_confirm_delete_group">Quer eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Eliminar o grupo \"%1$s\" e todos os pontos incluídos (%2$d)?</string>
     <string name="favorite_delete_group">Eliminar grupo</string>
     <string name="download_heightmap_maps">Mapa de atitudes</string>
     <string name="display_position">Posição</string>
@@ -5148,7 +5148,7 @@
     <string name="ant_plus_help_title">Não sei que tipo de sensor tenho</string>
     <string name="is_imported">%1$s é importado.</string>
     <string name="file_already_exists">O ficheiro já existe</string>
-    <string name="nav_profile_confirm_delete">Quer mesmo eliminar \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Eliminar \"%1$s\"?</string>
     <string name="external_device_details_battery">Bateria</string>
     <string name="external_device_details_speed">Velocidade</string>
     <string name="ant_plus_searching">A procurar</string>
@@ -5235,12 +5235,12 @@
 \n
 \nPor favor, introduza o endereço de e-mail com que se registou. Ser-lhe-á enviada uma palavra-passe única para o passo seguinte.</string>
     <string name="osmand_cloud_deleted_account_descr">A conta e todos os dados foram eliminados do OsmAnd Cloud.</string>
-    <string name="delete_account_warning">Quer mesmo eliminar a conta %1$s?</string>
+    <string name="delete_account_warning">Eliminar a conta %1$s?</string>
     <string name="delete_account">Eliminar conta</string>
     <string name="osmand_cloud_deleting_account_descr">Em poucos instantes, todos os seus dados e conta serão eliminados do OsmAnd Cloud.
 \n
 \nTodos os dados no dispositivo permanecem intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Quer mesmo eliminar a conta OsmAnd Cloud?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Eliminar a conta OsmAnd Cloud?
 \n
 \nEsta ação não pode ser desfeita.</string>
     <string name="action_cannot_be_undone">Essa ação não pode ser desfeita.</string>
@@ -5339,7 +5339,7 @@
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="feature_available_as_part_of_plan">%1$s disponível como parte do plano %2$s</string>
     <string name="shared_string_included">Incluído</string>
-    <string name="cloud_trash_clear_confirmation">Quer mesmo eliminar permanentemente todos os itens do lixo\? Esta ação não pode ser desfeita.</string>
+    <string name="cloud_trash_clear_confirmation">Eliminar permanentemente todos os itens no lixo?</string>
     <string name="key_event_action_zoom_in">Aproximar</string>
     <string name="empty_smart_folder_title">Nenhum trilho correspondente</string>
     <string name="wheel_circumference">Circunferência da roda</string>
@@ -5362,7 +5362,7 @@
     <string name="help_article_search_search_coordinates_name">Pesquisar coordenadas</string>
     <string name="help_article_navigation_setup_markers_navigation_name">Navegar por marcadores</string>
     <string name="help_article_map_point_layers_on_map_name">Pontos no mapa</string>
-    <string name="empty_smart_folder_description">Todos os trilhos correspondentes aparecerão automaticamente aqui</string>
+    <string name="empty_smart_folder_description">Os trilhos correspondentes aparecem aqui</string>
     <string name="with_waypoints">Com pontos de rotas</string>
     <string name="shared_string_rows">Linhas</string>
     <string name="key_event_action_move_left">Mover para a esquerda</string>
@@ -5438,7 +5438,7 @@
     <string name="filter_by_name">Filtrar por nome</string>
     <string name="key_event_action_emit_navigation_hint">Emitir uma sugestão de navegação</string>
     <string name="shared_string_reset_all">Repor tudo</string>
-    <string name="remove_type_q">Quer mesmo remover o tipo \"%1$s\"\?</string>
+    <string name="remove_type_q">Remover o tipo \"%1$s\"?</string>
     <string name="no_config_smart_folder_title">Não configurado</string>
     <string name="help_article_navigation_guidance_name">Guia</string>
     <string name="shared_string_action">Ação</string>
@@ -5474,9 +5474,7 @@
     <string name="filter_tracks_count">Filtrar: %d</string>
     <string name="sort_country_name_ascending">Nome do país: A – Z</string>
     <string name="help_article_widgets_radius_ruler_name">Régua radial e régua</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" será eliminado permanentemente. Tem a certeza\?
-\n
-\nEsta ação não pode ser desfeita.</string>
+    <string name="delete_trash_item_confirmation_desc">Eliminar \"%1$s\" permanentemente?</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Gravar viagem</string>
     <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
@@ -5513,9 +5511,9 @@
     <string name="filter_screen_title">Filtro</string>
     <string name="hillshade_slope">Sombras de relevo, declives</string>
     <string name="external_sensor_name_property_description">Nome do sensor</string>
-    <string name="discard_filter_changes_prompt">Quer mesmo repor todos os filtros\?</string>
+    <string name="discard_filter_changes_prompt">Repor todos os filtros?</string>
     <string name="key_bindings">Atalhos de teclado</string>
-    <string name="no_config_smart_folder_description">As pastas inteligentes permitem agrupar trilhos por filtros</string>
+    <string name="no_config_smart_folder_description">As pastas inteligentes permitem agrupar trilhos por filtros aplicados</string>
     <string name="widget_available_ram">RAM disponível</string>
     <string name="trash_is_empty">O lixo está vazio</string>
     <string name="key_event_action_move_to_my_location">Mover para minha localização</string>
@@ -5551,7 +5549,7 @@
     <string name="shared_string_temperature">Temperatura</string>
     <string name="help_article_personal_storage_name">Armazenamento</string>
     <string name="sort_country_name_descending">Nome do país: Z – A</string>
-    <string name="delete_map_description">Quer mesmo eliminar o mapa %1$s\?</string>
+    <string name="delete_map_description">Eliminar o mapa %1$s?</string>
     <string name="searching_matching_tracks">Pesquisar todos os trilhos correspondentes</string>
     <string name="help_article_map_legend_ski_map_name">Estilo de mapa de esqui</string>
     <string name="maps_and_resources">Mapas e recursos</string>
@@ -5565,7 +5563,7 @@
     <string name="lang_zh_hans">Chinês simplificado</string>
     <string name="tripltek_promo">Promoção Tripltek por %1$s meses</string>
     <string name="tripltek_promo_description">Acesso gratuito a recursos, incluindo descarregamentos ilimitados de mapas, relevo 3D etc. durante %1$s mês</string>
-    <string name="button_already_assigned_to_this_action">Este botão já está atribuído a esta ação.</string>
+    <string name="button_already_assigned_to_this_action">Botão já atribuído a esta ação.</string>
     <string name="previous_row_has_complex_widget">A linha anterior tem um widget complexo</string>
     <string name="shared_string_reassign">Repor</string>
     <string name="reset_key_assignments">Repor atribuições de teclas</string>
@@ -5578,7 +5576,7 @@
     <string name="lang_zh_hant">Chinês tradicional</string>
     <string name="add_row">Adicionar linha</string>
     <string name="shared_string_next_event">Próximo evento</string>
-    <string name="discard_changes_prompt">Quer descartar as alterações?</string>
+    <string name="discard_changes_prompt">Descartar as alterações?</string>
     <string name="precise_distance_numbers">Números de distância precisos</string>
     <string name="use_v1_auto_zoom">Ampliação automática discreta (versão antiga)</string>
     <string name="zoom_animated">Ampliação animada</string>
@@ -5591,8 +5589,14 @@
     <string name="add_new_button">Adicionar um novo botão</string>
     <string name="see_all_plans">Ver todos os planos</string>
     <string name="clear_key_assignment_desc">A atribuição de tecla para a ação selecionada será desmarcada e definida como \"Nenhuma\".</string>
-    <string name="map_widget_sun_position_desc">Este widget mostra o tempo que falta até ao nascer ou pôr do sol, dependendo da hora atual.</string>
+    <string name="map_widget_sun_position_desc">Mostra o tempo que falta até ao nascer ou pôr do sol.</string>
     <string name="any_connected_with_device">Qualquer conectado: %s</string>
     <string name="shared_string_road_maps">Mapas de estradas</string>
     <string name="shared_string_all_tracks">Todos os trilhos</string>
+    <string name="shared_string_extensions">Extensões</string>
+    <string name="shared_string_license">Licença</string>
+    <string name="shared_string_link">Hiperligação</string>
+    <string name="shared_string_copyright">Direitos de autor</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
 </resources>

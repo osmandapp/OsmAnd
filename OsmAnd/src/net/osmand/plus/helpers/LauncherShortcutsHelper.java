@@ -136,7 +136,10 @@ public class LauncherShortcutsHelper {
 				navigateTo(mapActivity, work);
 			}
 		} else if (Shortcut.START_RECORDING.id.equals(shortcutId)) {
-			TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
+			OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
+			if (plugin != null) {
+				plugin.askStartRecording(mapActivity);
+			}
 		} else if (Shortcut.SEARCH.id.equals(shortcutId)) {
 			mapActivity.getFragmentsHelper().showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 		} else if (Shortcut.MY_PLACES.id.equals(shortcutId)) {

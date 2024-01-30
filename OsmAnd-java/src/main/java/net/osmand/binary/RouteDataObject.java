@@ -3,9 +3,11 @@ package net.osmand.binary;
 import static net.osmand.router.GeneralRouter.*;
 
 import java.util.Arrays;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
+
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -343,45 +345,33 @@ public class RouteDataObject {
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction) {
 		if (names != null) {
-			int[] kt = names.keys();
-
-			// Issue #3181: Parse destination keys in this order:
-			//              destination:lang:XX:forward/backward
-			//              destination:forward/backward
-			//              destination:lang:XX
-			//              destination
-
-			String destinationTagLangFB = "destination:lang:XX";
+			int[] nameKeys = names.keys();
+			Map<String, Integer> tagPriorities = new HashMap<>();
+			int tagPriority = 1;
 			if (!Algorithms.isEmpty(lang)) {
-				destinationTagLangFB = (direction == true) ? "destination:lang:" + lang + ":forward" : "destination:lang:" + lang + ":backward";
+				tagPriorities.put("destination:lang:" + lang + (direction ? ":forward" : ":backward"), tagPriority++);
 			}
-			String destinationTagFB = (direction == true) ? "destination:forward" : "destination:backward";
-			String destinationTagLang = "destination:lang:XX";
+			tagPriorities.put("destination:" + (direction ? "forward" : "backward"), tagPriority++);
 			if (!Algorithms.isEmpty(lang)) {
-				destinationTagLang = "destination:lang:" + lang;
+				tagPriorities.put("destination:lang:" + lang, tagPriority++);
 			}
-			String destinationTagDefault = "destination";
-			String destinationDefault = null;
+			tagPriorities.put("destination", tagPriority);
 
-			for (int i = 0; i < kt.length; i++) {
-				int k = kt[i];
-				if (region.routeEncodingRules.size() > k) {
-					if (!Algorithms.isEmpty(lang) && destinationTagLangFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
-					}
-					if (destinationTagFB.equals(region.routeEncodingRules.get(k).getTag())) {
-						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
-					}
-					if (!Algorithms.isEmpty(lang) && destinationTagLang.equals(region.routeEncodingRules.get(k).getTag())) {
-						return (transliterate) ? TransliterationHelper.transliterate(names.get(k)) : names.get(k);
-					}
-					if (destinationTagDefault.equals(region.routeEncodingRules.get(k).getTag())) {
-						destinationDefault = names.get(k);
+			int highestPriorityNameKey = -1;
+			int highestPriority = Integer.MAX_VALUE;
+			for (int nameKey : nameKeys) {
+				if (region.routeEncodingRules.size() > nameKey) {
+					String tag = region.routeEncodingRules.get(nameKey).getTag();
+					Integer priority = tagPriorities.get(tag);
+					if (priority != null && priority < highestPriority) {
+						highestPriority = priority;
+						highestPriorityNameKey = nameKey;
 					}
 				}
 			}
-			if (destinationDefault != null) {
-				return (transliterate) ? TransliterationHelper.transliterate(destinationDefault) : destinationDefault;
+			if (highestPriorityNameKey > 0) {
+				String name = names.get(highestPriorityNameKey);
+				return transliterate ? TransliterationHelper.transliterate(name) : name;
 			}
 		}
 		return "";
@@ -390,7 +380,7 @@ public class RouteDataObject {
 	public int getPoint31XTile(int i) {
 		return pointsX[i];
 	}
-	
+
 	public int getPoint31XTile(int s, int e) {
 		return pointsX[s] / 2 + pointsX[e] / 2;
 	}

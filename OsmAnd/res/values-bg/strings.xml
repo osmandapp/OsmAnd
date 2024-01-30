@@ -1538,7 +1538,7 @@
     <string name="lang_mk">Македонски</string>
     <string name="lang_fy">фризки</string>
     <string name="lang_als">албански</string>
-    <string name="read_more">Прочети повече</string>
+    <string name="read_more">Подробности</string>
     <string name="whats_new">Какво е новото в</string>
     <string name="rendering_attr_showProposed_name">Предложени обекти</string>
     <string name="shared_string_update">Обновяване</string>
@@ -1822,7 +1822,7 @@
     <string name="add_time_span">Добавете времеви интервал</string>
     <string name="shared_string_remove">Премахване</string>
     <string name="rendering_attr_hideUnderground_name">Подземни обекти</string>
-    <string name="shared_string_read_more">Прочети още</string>
+    <string name="shared_string_read_more">Подробности</string>
     <string name="find_parking">Намери паркинг</string>
     <string name="shared_string_status">Статус</string>
     <string name="shared_string_save_changes">Запази промените</string>
@@ -3137,7 +3137,7 @@
     <string name="points_of_interests">Интересни места (POI)</string>
     <string name="selected_waypoints_descr">Избраните отправни точки ще бъдат добавени към трасето „%1$s“</string>
     <string name="apply_to_existing_favorites_descr">Прилагане на промените към съществуващите избрани точки в групата или само към новите\?</string>
-    <string name="favorite_confirm_delete_group">Сигурни ли сте, че желаете да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Сигурни ли сте, че желаете да бъде премахната групата „%1$s“ и всички точки в нея (%2$d)?</string>
     <string name="keep_passed_markers_descr">Маркерите, добавени група Избрани или Отправни точки на GPX, отбекязани като преминати, ще останат на картата. Ако групата е изключена, маркерите ще изчезнат от картата.</string>
     <string name="shortcut_navigate_to_home">Към „Вкъщи“</string>
     <string name="enable_3d_maps">Включване на триизмерни карти</string>
@@ -3163,7 +3163,7 @@
     <string name="deleted_file">Премахнат файл</string>
     <string name="waypoint_template">Шаблон за отправни точки</string>
     <string name="quick_action_remove_next_destination">Премахване на следващото местоназначение</string>
-    <string name="nav_profile_confirm_delete">Сигурни ли сте, че желаете да премахнете „%1$s“\?</string>
+    <string name="nav_profile_confirm_delete">Сигурни ли сте, че желаете да премахнете „%1$s“?</string>
     <string name="external_device_characteristic_gear_ratio">Съотношение на предавките</string>
     <string name="sort_date_ascending">Първо по-пресните</string>
     <string name="work_button">На работа</string>

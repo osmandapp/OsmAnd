@@ -854,7 +854,7 @@ public class AndroidUtils {
 		return new Rect(left, top, left + view.getWidth(), top + view.getHeight());
 	}
 
-	public static int[] getCenterViewCoordinates(View view) {
+	public static int[] getCenterViewCoordinates(@NonNull View view) {
 		int[] coordinates = new int[2];
 		view.getLocationOnScreen(coordinates);
 		coordinates[0] += view.getWidth() / 2;

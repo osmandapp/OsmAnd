@@ -29,7 +29,6 @@ import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener
-import net.osmand.plus.myplaces.tracks.filters.FilterType
 import net.osmand.plus.myplaces.tracks.filters.FiltersAdapter
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderUpdateListener
@@ -279,7 +278,7 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 					changed = true
 				} else {
 					for (folderFilter in it) {
-						if (folderFilter != filter.getFilterByType(folderFilter.filterType)) {
+						if (folderFilter != filter.getFilterByType(folderFilter.trackFilterType)) {
 							changed = true
 							break
 						}
@@ -333,8 +332,10 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun updateProgressVisibility(visible: Boolean) {
-		AndroidUiHelper.setVisibility(
-			if (visible) View.VISIBLE else View.GONE, progressBar)
+		app.runInUIThread{
+			AndroidUiHelper.setVisibility(
+				if (visible) View.VISIBLE else View.GONE, progressBar)
+		}
 	}
 
 	override fun onDismiss(dialog: DialogInterface) {

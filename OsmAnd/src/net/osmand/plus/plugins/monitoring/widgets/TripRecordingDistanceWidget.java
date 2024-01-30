@@ -40,7 +40,7 @@ public class TripRecordingDistanceWidget extends SimpleWidget {
 		return v -> {
 			OsmandMonitoringPlugin plugin = getPlugin();
 			if (plugin != null) {
-				plugin.showTripRecordingDialog(mapActivity);
+				plugin.askShowTripRecordingDialog(mapActivity);
 			}
 		};
 	}

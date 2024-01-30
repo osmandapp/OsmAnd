@@ -41,8 +41,8 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<T
 		TrackItem trackItem = item.getObject();
 		GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(trackItem, app, null);
 		if (analysis != null) {
-			pointsCount.setText(String.valueOf(analysis.wptPoints));
-			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+			pointsCount.setText(String.valueOf(analysis.getWptPoints()));
+			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 			time.setText(formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 		}
 		AndroidUiHelper.setVisibility(View.VISIBLE, distance, pointsCount, time);

@@ -4797,7 +4797,7 @@
     <string name="map_widget_ant_bicycle_speed">Hraði hjólandi</string>
     <string name="map_widget_ant_bicycle_speed_desc">Sýnir ferðahraðann</string>
     <string name="map_markers_desc">Viðmótshlutinn sýnir vegalengd eða áætlaðan komutíma (ETA) fyrir fyrstu tvö kortamerkin í kortamerkjalistanum.</string>
-    <string name="favorite_confirm_delete_group">Ertu viss um að þú viljir eyða ”%1$s” hópnum og öllum inniföldum punktum (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Ertu viss um að þú viljir eyða ”%1$s” hópnum og öllum inniföldum punktum (%2$d)?</string>
     <string name="ant_missing_dependency_descr">Nauðsynlega þjónustan \"%1$s\" fannst ekki.
 \nÞú þarft að setja upp ANT+ Plugins þjónustuna.
 \nViltu ræsa Play Store hugbúnaðarsafnið til að ná í þetta\?</string>
@@ -5135,7 +5135,7 @@
     <string name="number_of_tracks">%1$s ferlar</string>
     <string name="search_track_by_name">Leita að ferli eftir heiti</string>
     <string name="no_search_results">Engar niðurstöður</string>
-    <string name="nav_profile_confirm_delete">Ertu viss um að þú viljir eyða \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Ertu viss um að þú viljir eyða \"%1$s\"?</string>
     <string name="device_disconnected">%1$s aftengt</string>
     <string name="device_connected">%1$s tengt</string>
     <string name="external_device_blood_pressure">Blóðþrýstingur</string>
@@ -5301,7 +5301,7 @@
     <string name="help_article_troubleshooting_crash_logs_name">Hrunskrár</string>
     <string name="shared_string_temperature">Hitastig</string>
     <string name="help_article_personal_storage_name">Geymsla</string>
-    <string name="delete_account_warning">Ertu viss um að þú viljir eyða %1$s aðgangnum\?</string>
+    <string name="delete_account_warning">Ertu viss um að þú viljir eyða %1$s aðgangnum?</string>
     <string name="help_article_map_legend_ski_map_name">Skíðakortastíll</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Um leiðagerð OsmAnd</string>
     <string name="shared_string_setup">Uppsetning</string>

@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu;
 
-import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
-
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -12,15 +10,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.OnResultCallback;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.core.android.MapRendererView;
@@ -31,6 +23,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.SpecialPointType;
 import net.osmand.data.TransportStop;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -71,7 +64,6 @@ import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryImage;
 import net.osmand.plus.plugins.mapillary.MapillaryMenuController;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -94,6 +86,14 @@ import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+
+import static net.osmand.plus.download.DownloadValidationManager.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
 
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
@@ -490,18 +490,23 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return false;
 	}
 
-	public String getFormattedAltitude() {
-		Double altitude = null;
-		OsmandApplication app = null;
+	public void getFormattedAltitude(@NonNull OnResultCallback<String> callback) {
 		MapActivity activity = getMapActivity();
 		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
-		if (activity != null && srtmPlugin != null && srtmPlugin.is3DMapsEnabled()) {
-			app = activity.getMyApplication();
+		if (activity != null && srtmPlugin != null && srtmPlugin.is3DReliefAllowed()) {
+			OsmandApplication app = activity.getMyApplication();
 			OsmandMapTileView mapView = activity.getMapView();
 			MapRendererView mapRenderer = mapView.getMapRenderer();
-			altitude = NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon());
+			NativeUtilities.getAltitudeForLatLon(mapRenderer, getLatLon(), altitude -> {
+				if (altitude != null) {
+					callback.onResult(OsmAndFormatter.getFormattedAlt(altitude, app));
+				} else {
+					callback.onResult(null);
+				}
+			});
+		} else {
+			callback.onResult(null);
 		}
-		return altitude != null ? OsmAndFormatter.getFormattedAlt(altitude, app) : null;
 	}
 
 	public int getRightIconId() {

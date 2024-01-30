@@ -1707,7 +1707,7 @@
     <string name="no_location_permission">Odobri pristup podacima o lokaciju.</string>
     <string name="shared_string_sound">Zvuk</string>
     <string name="impassable_road_desc">Izaberi koje puteve želiš da izbegavaš tokom navođenja.</string>
-    <string name="select_voice_provider_descr">Izaberi ili preuzmite glasovno navođenje svog jezika.</string>
+    <string name="select_voice_provider_descr">Izaberi ili preuzmi glasovno navođenje svog jezika.</string>
     <string name="select_voice_provider">Izaberi glasovno navođenje</string>
     <string name="available_maps">Dostupne mape</string>
     <string name="live_updates">Ažuriranje uživo</string>
@@ -4893,8 +4893,8 @@
     <string name="shared_string_eta">Procenjeno vreme</string>
     <string name="help_article_map_interact_with_map_name">Interakcija sa mapom</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Da li ste sigurni da želite izbrisati profil Oblaka OsmAnda? 
-\n 
+    <string name="osmand_cloud_delete_account_confirmation_descr">Da li ste sigurni da želite izbrisati profil Oblaka OsmAnda?
+\n
 \nOvo dejstvo ne može biti opozvano.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Ovo neće otkazati Vašu pretplatu na OsmAnd pro.</string>
     <string name="no_bt_permission">Dozvola Blututu nije odobrena</string>
@@ -5084,7 +5084,7 @@
     <string name="key_event_action_open_navigation_view">Otvori ekran navigacije</string>
     <string name="key_event_action_next_app_profile">Sledeći profil aplikacije</string>
     <string name="weather_online">Online prognoza</string>
-    <string name="widget_available_ram_desc">Prikazuje raspoloživu memoriju, dodjeljuje za OsmAnd.</string>
+    <string name="widget_available_ram_desc">Prikazuje raspoloživu memoriju, dodjeljenu za OsmAnd.</string>
     <string name="rendering_styles">Stilovi prikazivanja</string>
     <string name="widget_available_ram">Dostupan RAM</string>
     <string name="terrain_maps">Reljefne mape</string>
@@ -5153,7 +5153,7 @@
     <string name="help_article_troubleshooting_maps_data_name">Mape i podaci</string>
     <string name="help_article_widgets_nav_widgets_name">Widgeti za navođenje</string>
     <string name="help_article_widgets_radius_ruler_name">Merač prečnika i lenjir</string>
-    <string name="free_favorites_backup_description">Prijavite se u Oblaku OsmAnda radi dobavljanja besplatnog skladišta za omiljeno i podešavanja.</string>
+    <string name="free_favorites_backup_description">Prijavi se u OsmAnd Coud radi dobavljanja besplatnog skladišta za favorite i podešavanja.</string>
     <string name="free_favorites_backup">Besplatno skladište omiljenih</string>
     <string name="map_widget_rssi">RSSI</string>
     <string name="select_layer">Odaberi nivo</string>
@@ -5421,7 +5421,7 @@
     <string name="display_position">Prikaži lokaciju</string>
     <string name="download_heightmap_maps">Visinska mapa</string>
     <string name="included_in_your_current_plan">Uključen je vaš plan „%1$s“</string>
-    <string name="favorite_confirm_delete_group">Da li ste sigurni da želite da obrišete grupu „%1$s” i sve pridružene tačke (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Brišeš „%1$s” grupu i sve tačke (%2$d)?</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Prikazuj tragove MTB IMBA</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Prikazuj odgovarajuće planinske biciklističke staze.</string>
     <string name="attach_roads_warning">Samo snimljena putanja može da se slepi uz puteve.</string>
@@ -5546,4 +5546,50 @@
     <string name="shared_string_extensions">Ekstenzije</string>
     <string name="shared_string_copyright">Copyright</string>
     <string name="shared_string_author">Autor</string>
+    <string name="shared_string_cache">Keš</string>
+    <string name="filter_screen_title">Filter</string>
+    <string name="filter_tracks_count">Filter: %d</string>
+    <string name="release_4_5">• BLE/ANT+ senzori: prepravljena veza, pisanje i pregled primljenih podataka GPX -u
+\n
+\n• Besplatna sigurnosna kopija za favorite i postavke u \'Osmand Cloud\'
+\n
+\n• Novi format za karte terena s 3D podrškom za pomoć
+\n
+\n• Prati upravljanje: Ažurirano korisnički interfejs, dodano sortiranje, podrška grupisanim folderima
+\n
+\n• Android Auto: Novi Start Menu za favorite, zapise i TOI kategorije
+\n
+\n• Jedna lista widžeta za gornju/donju ploču
+\n
+\n• Novi profil \'voza\', omogućava izračunavanje železničkih ruta
+\n
+\n• Contour Lines funkcioniše s bilo kojim \'izvorom karte\'
+\n
+\n• Prošireni popis zadanih radnji za spoljnu tastaturu
+\n
+\n• Prilagođene datoteke usmeravanja, dodane opcije za brisanje ili prepisivanje
+\n
+\n• Dodana opcija za \'najavljivanje odstupanja od rute\'
+\n
+\n• Ekran za pokretanje: dodana opcija Obnovite stanje OsmAnd iz datoteke
+\n
+\n• Dodana klasa \'opasnih materijala\' za kamionske navigacije u Severnoj Americi
+\n
+\n• Dodana podrška \'putem Ferrata\' za pešačko naviđenje
+\n
+\n• Dodana \'CAI\' lestvica za poteškoće klasifikacije ruta
+\n
+\n• Fiksni odabir jezika po aplikaciji
+\n
+\n• Dodana podrška za tematske ikone
+\n
+\n• Osmand Cloud: dodana opcija za brisanje naloga
+\n
+\n• Pristupačnost: dodirnite veličinu cilja za dugme promenjene na 48 dp; Popravljeni problem s izgledom karte vidljivo za čitanje ekrana
+\n
+\n• Japanski glas je prepravljen
+\n
+\n• Promena nadmorske visine i procena nagiba je prerađena
+\n
+\n</string>
 </resources>

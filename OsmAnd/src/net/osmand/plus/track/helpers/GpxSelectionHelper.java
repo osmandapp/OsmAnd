@@ -1,8 +1,8 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.FILE_LAST_MODIFIED_TIME;
-import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_AS_MARKERS;
+import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
+import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.gpx.GpxParameter.SHOW_AS_MARKERS;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -42,7 +42,6 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;

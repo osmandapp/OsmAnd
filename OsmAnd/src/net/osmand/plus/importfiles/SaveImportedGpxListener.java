@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface SaveImportedGpxListener {
 
-	void onGpxSavingStarted();
+	default void onGpxSavingStarted() {}
 
-	void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile);
+	default void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {}
 
-	void onGpxSavingFinished(@NonNull List<String> warnings);
+	default void onGpxSavingFinished(@NonNull List<String> warnings) {}
 }
