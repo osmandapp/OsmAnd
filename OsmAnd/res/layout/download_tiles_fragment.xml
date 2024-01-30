@@ -3,90 +3,105 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical"
-	android:background="@color/color_transparent">
+	android:background="@color/color_transparent"
+	android:orientation="vertical">
 
 	<include layout="@layout/download_tiles_toolbar" />
 
-	<LinearLayout
-		android:id="@+id/map_window_container"
+	<net.osmand.plus.LockableScrollView
+		android:id="@+id/scroll_view"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:orientation="vertical">
+		android:layout_height="wrap_content">
 
-		<RelativeLayout
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
-			<View
-	 			android:layout_width="match_parent"
-				android:layout_height="@dimen/content_padding_half"
-				android:background="@color/map_window_outer_color" />
-
-			<View
-				android:layout_width="@dimen/content_padding_half"
-				android:layout_height="0dp"
-				android:layout_marginTop="@dimen/content_padding_half"
-				android:layout_alignParentTop="true"
-				android:layout_alignBottom="@id/map_window_layout"
-				android:background="@color/map_window_outer_color" />
-
-			<View
-				android:layout_width="@dimen/content_padding_half"
-				android:layout_height="0dp"
-				android:layout_marginTop="@dimen/content_padding_half"
-				android:layout_alignParentTop="true"
-				android:layout_alignParentEnd="true"
-				android:layout_alignBottom="@id/map_window_layout"
-				android:background="@color/map_window_outer_color" />
-
-			<androidx.constraintlayout.widget.ConstraintLayout
-				android:id="@+id/map_window_layout"
+			<LinearLayout
+				android:id="@+id/map_window_container"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
 
-				<FrameLayout
-					android:id="@+id/map_window"
+				<RelativeLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content">
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="@dimen/content_padding_half"
+						android:background="@color/map_window_outer_color" />
+
+					<View
+						android:layout_width="@dimen/content_padding_half"
+						android:layout_height="0dp"
+						android:layout_alignBottom="@id/map_window_layout"
+						android:layout_alignParentTop="true"
+						android:layout_marginTop="@dimen/content_padding_half"
+						android:background="@color/map_window_outer_color" />
+
+					<View
+						android:layout_width="@dimen/content_padding_half"
+						android:layout_height="0dp"
+						android:layout_alignBottom="@id/map_window_layout"
+						android:layout_alignParentTop="true"
+						android:layout_alignParentEnd="true"
+						android:layout_marginTop="@dimen/content_padding_half"
+						android:background="@color/map_window_outer_color" />
+
+					<androidx.constraintlayout.widget.ConstraintLayout
+						android:id="@+id/map_window_layout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content">
+
+						<FrameLayout
+							android:id="@+id/map_window"
+							android:layout_width="match_parent"
+							android:layout_height="0dp"
+							android:layout_marginStart="@dimen/content_padding_small_half"
+
+							android:layout_marginTop="@dimen/content_padding_small_half"
+							android:layout_marginEnd="@dimen/content_padding_small_half"
+							android:background="@drawable/map_window_border"
+							app:layout_constraintBottom_toBottomOf="parent"
+							app:layout_constraintDimensionRatio="1"
+							app:layout_constraintLeft_toLeftOf="parent"
+							app:layout_constraintRight_toRightOf="parent"
+							app:layout_constraintTop_toTopOf="parent" />
+
+					</androidx.constraintlayout.widget.ConstraintLayout>
+
+				</RelativeLayout>
+
+				<include layout="@layout/map_window_caption" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/main_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+
+				<ScrollView
 					android:layout_width="match_parent"
 					android:layout_height="0dp"
-					app:layout_constraintDimensionRatio="1"
+					android:layout_weight="1"
+					android:fillViewport="true"
+					android:overScrollMode="never">
 
-					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintLeft_toLeftOf="parent"
-					app:layout_constraintRight_toRightOf="parent"
-					app:layout_constraintTop_toTopOf="parent"
-					android:layout_marginStart="@dimen/content_padding_small_half"
-					android:layout_marginTop="@dimen/content_padding_small_half"
-					android:layout_marginEnd="@dimen/content_padding_small_half"
-					android:background="@drawable/map_window_border" />
+					<include layout="@layout/download_tiles_content" />
 
-			</androidx.constraintlayout.widget.ConstraintLayout>
+				</ScrollView>
 
-		</RelativeLayout>
+				<include layout="@layout/download_tiles_bottom_button" />
 
-		<include layout="@layout/map_window_caption" />
+			</LinearLayout>
 
-	</LinearLayout>
+		</LinearLayout>
 
-	<LinearLayout
-		android:id="@+id/main_view"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical">
+	</net.osmand.plus.LockableScrollView>
 
-		<ScrollView
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
-			android:layout_weight="1"
-			android:fillViewport="true"
-			android:overScrollMode="never">
-
-			<include layout="@layout/download_tiles_content" />
-
-		</ScrollView>
-
-		<include layout="@layout/download_tiles_bottom_button" />
-
-	</LinearLayout>
 
 </LinearLayout>
