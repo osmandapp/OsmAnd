@@ -11,7 +11,6 @@ import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERA
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
-import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
 
 import android.content.Context;
 import android.graphics.Matrix;
