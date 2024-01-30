@@ -146,14 +146,14 @@ public class RouteStatisticCard extends MapBaseCard {
 		buildHeader(analysis);
 		boolean hasElevationData = analysis.hasElevationData();
 		if (hasElevationData) {
-			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app));
 
-			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+			String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+			String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 			((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
 
-			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+			String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+			String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 			((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 			((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 

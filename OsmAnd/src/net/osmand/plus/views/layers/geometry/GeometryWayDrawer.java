@@ -12,8 +12,10 @@ import android.graphics.PorterDuffColorFilter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListFColorARGB;
+import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.QListVectorLine;
 import net.osmand.core.jni.QVectorPointI;
 import net.osmand.core.jni.VectorDouble;
@@ -21,6 +23,8 @@ import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 
@@ -154,9 +158,35 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               @NonNull List<DrawPathData31> pathsData) {
 		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
 		QVectorPointI points = new QVectorPointI();
+		QListFloat heights = new QListFloat();
+		QListFColorARGB traceColorizationMapping = new QListFColorARGB();
+		float r = 0.2f;
+		float g = 0.6f;
+		float b = 1.0f;
+		boolean showRaised = false;
+		boolean showTransparentTraces = false;
+		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+		if (plugin != null) {
+			showRaised = plugin.RAISE_ROUTES_ABOVE_RELIEF.get();
+			showTransparentTraces = plugin.SHOW_TRANSPARENT_TRACES.get();
+			if (showRaised) {
+				if (!showTransparentTraces)
+					traceColorizationMapping = colorizationMapping;
+			}
+		}
 		for (DrawPathData31 data : pathsData) {
 			for (int i = 0; i < data.tx.size(); i++) {
 				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
+				if (showRaised) {
+					heights.add(1000.0f);
+				}
+			}
+		}
+		if (showRaised && hasColorizationMapping && showTransparentTraces) {
+			long size = colorizationMapping.size();
+			for (int i = 0; i < size; i++) {
+				float a = (float) i / (float) size;
+				traceColorizationMapping.add(new FColorARGB( a * a * a * a, r, g, b));
 			}
 		}
 		QListVectorLine lines = collection.getLines();
@@ -177,6 +207,19 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					if (specialPathBitmap != null && specialBitmapStep != -1) {
 						line.setSpecialPathIconStep(specialBitmapStep);
 					}
+				}
+				if (showRaised) {
+					line.setHeights(heights);
+					line.setFillColor(new FColorARGB(1.0f, r, g, b));
+					line.setColorizationMapping(new QListFColorARGB());
+					line.setOutlineColorizationMapping(traceColorizationMapping);
+					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
+					if (showTransparentTraces) {
+						line.setColorizationScheme(1);
+						line.setNearOutlineColor(new FColorARGB(0.0f, r, g, b));
+						line.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
+					} else
+						line.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
 				}
 				return;
 			}
@@ -215,6 +258,19 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		if (hasColorizationMapping) {
 			builder.setColorizationMapping(colorizationMapping);
 			builder.setColorizationScheme(colorizationScheme);
+		}
+		if (showRaised) {
+			builder.setHeights(heights)
+					.setFillColor(new FColorARGB(1.0f, r, g, b))
+					.setColorizationMapping(new QListFColorARGB())
+					.setOutlineColorizationMapping(traceColorizationMapping)
+					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
+			if (showTransparentTraces) {
+				builder.setColorizationScheme(1)
+						.setNearOutlineColor(new FColorARGB(0.0f, r, g, b))
+						.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
+			} else
+				builder.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
 		}
 		builder.buildAndAddToCollection(collection);
 	}

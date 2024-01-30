@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.helpers.AndroidUiHelper
-import net.osmand.plus.myplaces.tracks.filters.DateCreationTrackFilter
+import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter
 import net.osmand.plus.widgets.OsmandTextFieldBoxes
 import net.osmand.plus.widgets.TextViewEx
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -30,7 +30,7 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 	private val titleContainer: View
 	private val rangeInputContainer: View
 	private val explicitIndicator: ImageView
-	private var filter: DateCreationTrackFilter? = null
+	private var filter: DateTrackFilter? = null
 	private val valueFromInput: ExtendedEditText
 	private val valueToInput: EditText
 	private val valueFromInputContainer: OsmandTextFieldBoxes
@@ -56,9 +56,9 @@ class FilterDateViewHolder(itemView: View, nightMode: Boolean) :
 		valueToInputContainer = itemView.findViewById(R.id.value_to)
 	}
 
-	fun bindView(filter: DateCreationTrackFilter, activity: Activity) {
+	fun bindView(filter: DateTrackFilter, activity: Activity) {
 		this.filter = filter
-		title.setText(filter.displayNameId)
+		title.setText(filter.trackFilterType.nameResId)
 		updateExpandState()
 		updateValues()
 		valueFromInputContainer.setOnClickListener {

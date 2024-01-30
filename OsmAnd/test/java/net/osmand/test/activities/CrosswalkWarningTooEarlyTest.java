@@ -14,7 +14,9 @@ import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialog
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -33,53 +35,65 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 
 	private static final LatLon START = new LatLon(45.92051, 35.20653);
-	private static final LatLon END = new LatLon(45.91882, 35.20774);
+	private static final LatLon END = new LatLon(45.91741, 35.21372);
+	public static final int SPEED_KM_PER_HOUR = 80;
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> mActivityScenarioRule =
 			new ActivityScenarioRule<>(MapActivity.class);
 
-    @Before
-    @Override
-    public void setup() {
-        super.setup();
-        enableSimulation(80);
-	    try {
-		    ResourcesImporter.importObfAssets(app, Collections.singletonList("alarm_test.obf"));
-	    } catch (IOException e) {
-		    throw new RuntimeException(e);
-	    }
-    }
+	@Before
+	@Override
+	public void setup() {
+		super.setup();
+		enableSimulation(SPEED_KM_PER_HOUR);
+		try {
+			ResourcesImporter.importObfAssets(app, Collections.singletonList("alarm_test.obf"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    @Test
+	@Test
 	public void crosswalkWarningTooEarlyTest() throws Throwable {
-	    skipAppStartDialogs(app);
+		skipAppStartDialogs(app);
 
 		openNavigationMenu();
 		setRouteStart(START);
 		setRouteEnd(END);
-        startNavigation();
+		startNavigation();
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
+		ViewInteraction alarmWidget = onView(withId(R.id.map_alarm_warning));
+		List<TestWidget> testWidgets = Arrays.asList(
+				new TestWidget(R.string.traffic_warning_pedestrian, 720, 550),
+				new TestWidget(R.string.tunnel_warning, 480, 300),
+				new TestWidget(R.string.traffic_warning_pedestrian, 300, 160),
+				new TestWidget(R.string.tunnel_warning, 160, 0));
+		float delta = SPEED_KM_PER_HOUR / 3.6f;
+		TestWidget widget = testWidgets.get(0);
+		int id = 0;
+		int leftDistance;
 		do {
-			int leftDistance = routingHelper.getLeftDistance();
+			leftDistance = routingHelper.getLeftDistance();
 			if (leftDistance > 0) {
-				if (leftDistance < 50) {
-					break;
+
+				if (leftDistance > widget.leftDistanceShow + delta) {
+					checkAlarmWidgetNotDisplayed(alarmWidget, leftDistance, widget.descriptionId);
+				} else if (leftDistance < widget.leftDistanceShow - delta && leftDistance > widget.leftDistanceHide + delta) {
+					checkAlarmWidgetDisplayed(alarmWidget, leftDistance, widget.descriptionId);
 				}
-				ViewInteraction alarmWidget = onView(withId(R.id.map_alarm_warning));
-				if (leftDistance > 200) {
-					checkCrosswalkAlarmNotDisplayed(alarmWidget, leftDistance);
-				} else if (leftDistance < 150) {
-					checkCrosswalkAlarmDisplayed(alarmWidget, leftDistance);
-					break;
+				if (id < testWidgets.size() && widget.leftDistanceHide > leftDistance) {
+					widget = testWidgets.get(id++);
 				}
 			}
 
@@ -87,26 +101,45 @@ public class CrosswalkWarningTooEarlyTest extends AndroidTest {
 				Thread.sleep(1000);
 			} catch (Exception ignored) {
 			}
-		} while (true);
+		} while (leftDistance > 50);
 	}
 
-	private void checkCrosswalkAlarmNotDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance) {
+	private void checkAlarmWidgetNotDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance, @IdRes int descriptionId) {
 		try {
 			alarmWidget.check(matches(not(isDisplayed())));
 		} catch (Throwable e) {
 			try {
-				alarmWidget.check(matches(not(withContentDescription(R.string.traffic_warning_pedestrian))));
+				alarmWidget.check(matches(not(withContentDescription(descriptionId))));
 			} catch (Throwable e1) {
-				throw new AssertionError("Crosswalk alarm was shown too early (" + leftDistance + " m to finish)");
+				throw new AssertionError(getString(descriptionId) + " alarm was shown too early ("
+						+ leftDistance + " m to finish)");
 			}
 		}
 	}
 
-	private void checkCrosswalkAlarmDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance) {
+	private void checkAlarmWidgetDisplayed(@NonNull ViewInteraction alarmWidget, int leftDistance, @IdRes int descriptionId) {
 		try {
-			alarmWidget.check(matches(allOf(isDisplayed(), withContentDescription(R.string.traffic_warning_pedestrian))));
+			alarmWidget.check(matches(allOf(isDisplayed(), withContentDescription(descriptionId))));
 		} catch (Throwable e) {
-			throw new AssertionError("Crosswalk alarm still was not shown (" + leftDistance + " m to finish)");
+			throw new AssertionError(getString(descriptionId) + " alarm still was not shown ("
+					+ leftDistance + " m to finish)");
+		}
+	}
+
+	private String getString(int id) {
+		return ApplicationProvider.getApplicationContext().getResources().getString(id);
+	}
+
+	private static class TestWidget {
+		@IdRes
+		int descriptionId;
+		int leftDistanceShow;
+		int leftDistanceHide;
+
+		public TestWidget(int descriptionId, int leftDistanceShow, int leftDistanceHide) {
+			this.descriptionId = descriptionId;
+			this.leftDistanceShow = leftDistanceShow;
+			this.leftDistanceHide = leftDistanceHide;
 		}
 	}
 }

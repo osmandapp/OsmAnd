@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.plus.charts.ChartUtils.CHART_LABEL_COUNT;
 import static net.osmand.plus.charts.GPXDataSetType.ALTITUDE;
 import static net.osmand.plus.charts.GPXDataSetType.SLOPE;
@@ -9,7 +10,7 @@ import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_ALTITU
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_NO_ALTITUDE;
 import static net.osmand.plus.myplaces.tracks.GPXTabItemType.GPX_TAB_ITEM_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
 
 import android.content.Context;
 import android.graphics.Matrix;
@@ -54,6 +55,7 @@ import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.GpxUtils;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -415,7 +417,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				setupGeneralStatisticsIcons(view, iconsCache);
 				setupJoinGapsInfo(view);
 
-				if (analysis.timeSpan > 0) {
+				if (analysis.getTimeSpan() > 0) {
 					setupTimeSpanStatistics(view, analysis);
 				} else {
 					view.findViewById(R.id.list_divider).setVisibility(View.GONE);
@@ -449,10 +451,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		DateFormat timeFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 		DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
-		Date start = new Date(analysis.startTime);
+		Date start = new Date(analysis.getStartTime());
 		((TextView) container.findViewById(R.id.start_time_text)).setText(timeFormat.format(start));
 		((TextView) container.findViewById(R.id.start_date_text)).setText(dateFormat.format(start));
-		Date end = new Date(analysis.endTime);
+		Date end = new Date(analysis.getEndTime());
 		((TextView) container.findViewById(R.id.end_time_text)).setText(timeFormat.format(end));
 		((TextView) container.findViewById(R.id.end_date_text)).setText(dateFormat.format(end));
 	}
@@ -665,7 +667,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		view.findViewById(R.id.analyze_on_map).setOnClickListener(v -> openAnalyzeOnMap(tabType));
 
 		TextView overflowMenu = view.findViewById(R.id.overflow_menu);
-		if (!gpxItem.group.getTrack().generalTrack) {
+		TrackDisplayGroup trackGroup = getTrackDisplayGroup(gpxItem.group);
+		if (trackGroup == null || !trackGroup.isGeneralTrack()) {
 			setupOptionsPopupMenu(overflowMenu, confirmDeletion);
 		} else {
 			overflowMenu.setVisibility(View.GONE);
@@ -713,8 +716,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	public static void updateGeneralTabInfo(@NonNull View container, @NonNull OsmandApplication app,
 	                                        @NonNull GPXTrackAnalysis analysis,
 	                                        boolean joinSegments, boolean generalTrack) {
-		float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-		float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+		float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+		float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
 
 		TextView distanceText = container.findViewById(R.id.distance_text);
 		TextView durationText = container.findViewById(R.id.duration_text);
@@ -725,34 +728,34 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	public static void updateAltitudeTabInfo(@NonNull View container, @NonNull OsmandApplication app,
 	                                         @NonNull GPXTrackAnalysis analysis) {
-		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+		String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+		String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 
 		TextView averageAltitudeText = container.findViewById(R.id.average_text);
 		TextView altitudeRangeText = container.findViewById(R.id.range_text);
 		TextView ascentText = container.findViewById(R.id.ascent_text);
 		TextView descentText = container.findViewById(R.id.descent_text);
 
-		averageAltitudeText.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+		averageAltitudeText.setText(OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app));
 		altitudeRangeText.setText(String.format("%s - %s", min, max));
-		ascentText.setText(OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
-		descentText.setText(OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+		ascentText.setText(OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app));
+		descentText.setText(OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app));
 	}
 
 	public static void updateSpeedTabInfo(@NonNull View container, @NonNull OsmandApplication app,
 	                                      @NonNull GPXTrackAnalysis analysis,
 	                                      boolean joinSegments, boolean generalTrack) {
-		long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+		long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.getTimeMoving();
 		float totalDistanceMoving = !joinSegments && generalTrack ?
-				analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+				analysis.totalDistanceMovingWithoutGaps : analysis.getTotalDistanceMoving();
 
 		TextView averageSpeedText = container.findViewById(R.id.average_text);
 		TextView maxSpeedText = container.findViewById(R.id.max_text);
 		TextView timeMovingText = container.findViewById(R.id.time_moving_text);
 		TextView distanceText = container.findViewById(R.id.distance_text);
 
-		averageSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
-		maxSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app));
+		averageSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app));
+		maxSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app));
 		timeMovingText.setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
 		distanceText.setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
 	}

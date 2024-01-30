@@ -49,6 +49,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 		GPXFile gpxFile = filteredSelectedGpxFile.getGpxFile();
 		displayHelper.setFile(new File(gpxFile.path));
 		displayHelper.setGpx(gpxFile);
+		displayHelper.setSelectedGpxFile(filteredSelectedGpxFile);
 		return displayHelper;
 	}
 

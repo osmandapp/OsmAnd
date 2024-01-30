@@ -1,5 +1,7 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.plus.helpers.TrackSelectSegmentAdapter.*;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,7 +17,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +45,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 	private OsmandApplication app;
 	private GPXFile gpxFile;
+	private OnSegmentSelectedListener onSegmentSelectedListener;
 
 	@Override
 	protected boolean useScrollableItemsContainer() {
@@ -103,9 +105,9 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		icon.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_polygom_dark));
 		name.setText(titleGpxTrack);
 		distance.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 		pointsCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-		pointsCount.setText(String.valueOf(analysis.wptPoints));
+		pointsCount.setText(String.valueOf(analysis.getWptPoints()));
 		time.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 		boolean timeSpecified = analysis.isTimeSpecified();
 		if (timeSpecified) {
@@ -116,9 +118,8 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		AndroidUiHelper.updateVisibility(timeIcon, timeSpecified);
 
 		routesContainer.setOnClickListener(v -> {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof OnSegmentSelectedListener) {
-				((OnSegmentSelectedListener) fragment).onSegmentSelect(gpxFile, -1);
+			if (onSegmentSelectedListener != null) {
+				onSegmentSelectedListener.onSegmentSelect(gpxFile, -1);
 			}
 			dismiss();
 		});
@@ -131,18 +132,20 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 
 		TrackSelectSegmentAdapter adapter = new TrackSelectSegmentAdapter(view.getContext(), gpxFile);
 		adapter.setAdapterListener((item) -> {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof OnSegmentSelectedListener) {
-				OnSegmentSelectedListener listener = (OnSegmentSelectedListener) fragment;
-				if (item instanceof SegmentItem) {
-					listener.onSegmentSelect(gpxFile, item.index);
-				} else if (item instanceof RouteItem) {
-					listener.onRouteSelected(gpxFile, item.index);
-				}
-			}
+			notifyListener(item);
 			dismiss();
 		});
 		recyclerView.setAdapter(adapter);
+	}
+
+	private void notifyListener(GpxItem item) {
+		if (onSegmentSelectedListener != null) {
+			if (item instanceof SegmentItem) {
+				onSegmentSelectedListener.onSegmentSelect(gpxFile, item.index);
+			} else if (item instanceof RouteItem) {
+				onSegmentSelectedListener.onRouteSelected(gpxFile, item.index);
+			}
+		}
 	}
 
 	public interface OnSegmentSelectedListener {
@@ -155,11 +158,11 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		return gpxFile.getNonEmptySegmentsCount() > 1 || gpxFile.routes.size() > 1;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GPXFile gpxFile, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GPXFile gpxFile, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
 		if (!fragmentManager.isStateSaved()) {
 			TrackSelectSegmentBottomSheet fragment = new TrackSelectSegmentBottomSheet();
 			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
+			fragment.onSegmentSelectedListener = onSegmentSelectedListener;
 			fragment.gpxFile = gpxFile;
 			fragment.show(fragmentManager, TAG);
 		}

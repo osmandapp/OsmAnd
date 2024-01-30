@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
+
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
@@ -48,6 +50,7 @@ public class GpxDisplayItem {
 	}
 
 	public boolean isGeneralTrack() {
-		return group != null && group.isGeneralTrack();
+		TrackDisplayGroup trackGroup = getTrackDisplayGroup(group);
+		return trackGroup != null && trackGroup.isGeneralTrack();
 	}
 }

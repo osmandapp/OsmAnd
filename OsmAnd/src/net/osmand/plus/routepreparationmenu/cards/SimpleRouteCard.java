@@ -87,8 +87,8 @@ public class SimpleRouteCard extends MapBaseCard {
 			TextView uphill = view.findViewById(R.id.uphill);
 			TextView downhill = view.findViewById(R.id.downhill);
 
-			uphill.setText(getFormattedAlt(analysis.diffElevationUp, app));
-			downhill.setText(getFormattedAlt(analysis.diffElevationDown, app));
+			uphill.setText(getFormattedAlt(analysis.getDiffElevationUp(), app));
+			downhill.setText(getFormattedAlt(analysis.getDiffElevationDown(), app));
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.uphill_container), hasElevationData);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.downhill_container), hasElevationData);

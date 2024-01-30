@@ -36,7 +36,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 			markersGroupViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
 			markersGroupViewHolder.name.setText(gpx.getFile().getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " "));
 			GPXTrackAnalysis analysis = gpx.getAnalysis();
-			markersGroupViewHolder.numberCount.setText(analysis != null ? String.valueOf(analysis.wptPoints) : "");
+			markersGroupViewHolder.numberCount.setText(analysis != null ? String.valueOf(analysis.getWptPoints()) : "");
 			String description = getDescription(gpx);
 			markersGroupViewHolder.description.setVisibility(description == null ? View.GONE : View.VISIBLE);
 			markersGroupViewHolder.description.setText(description);
@@ -51,7 +51,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 	@Nullable
 	private String getDescription(GpxDataItem item) {
 		GPXTrackAnalysis analysis = item.getAnalysis();
-		Set<String> categories = analysis != null ? analysis.wptCategoryNames : null;
+		Set<String> categories = analysis != null ? analysis.getWptCategoryNamesSet() : null;
 		if (categories != null && !categories.isEmpty() && !(categories.size() == 1 && categories.contains(""))) {
 			StringBuilder sb = new StringBuilder();
 			Iterator<String> it = categories.iterator();

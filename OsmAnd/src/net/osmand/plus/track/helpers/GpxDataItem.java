@@ -1,12 +1,14 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.*;
+import static net.osmand.gpx.GpxParameter.*;
+import static net.osmand.gpx.GpxParameter.AVG_SENSOR_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
@@ -22,7 +24,7 @@ public class GpxDataItem {
 
 	@NonNull
 	private final File file;
-	private final Map<GpxParameter, Object> map = new HashMap<>();
+	public final Map<GpxParameter, Object> map = new HashMap<>();
 
 	@Nullable
 	private GPXTrackAnalysis analysis;
@@ -83,29 +85,17 @@ public class GpxDataItem {
 
 	private void updateAnalysisParameters() {
 		boolean hasAnalysis = analysis != null;
-		map.put(TOTAL_DISTANCE, hasAnalysis ? analysis.totalDistance : null);
-		map.put(TOTAL_TRACKS, hasAnalysis ? analysis.totalTracks : null);
-		map.put(START_TIME, hasAnalysis ? analysis.startTime : null);
-		map.put(END_TIME, hasAnalysis ? analysis.endTime : null);
-		map.put(TIME_SPAN, hasAnalysis ? analysis.timeSpan : null);
-		map.put(TIME_MOVING, hasAnalysis ? analysis.timeMoving : null);
-		map.put(EXPECTED_ROUTE_DURATION, hasAnalysis ? analysis.expectedRouteDuration : null);
-		map.put(TOTAL_DISTANCE_MOVING, hasAnalysis ? analysis.totalDistanceMoving : null);
-		map.put(DIFF_ELEVATION_UP, hasAnalysis ? analysis.diffElevationUp : null);
-		map.put(DIFF_ELEVATION_DOWN, hasAnalysis ? analysis.diffElevationDown : null);
-		map.put(AVG_ELEVATION, hasAnalysis ? analysis.avgElevation : null);
-		map.put(MIN_ELEVATION, hasAnalysis ? analysis.minElevation : null);
-		map.put(MAX_ELEVATION, hasAnalysis ? analysis.maxElevation : null);
-		map.put(MAX_SPEED, hasAnalysis ? analysis.maxSpeed : null);
-		map.put(AVG_SPEED, hasAnalysis ? analysis.avgSpeed : null);
-		map.put(POINTS, hasAnalysis ? analysis.points : null);
-		map.put(WPT_POINTS, hasAnalysis ? analysis.wptPoints : null);
-		map.put(WPT_CATEGORY_NAMES, hasAnalysis ? Algorithms.encodeCollection(analysis.wptCategoryNames) : null);
-		map.put(START_LAT, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLatitude() : null);
-		map.put(START_LON, hasAnalysis && analysis.latLonStart != null ? analysis.latLonStart.getLongitude() : null);
+		for(GpxParameter gpxParameter: values()) {
+			if(gpxParameter.isAnalysisParameter()) {
+				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
+			}
+		}
 	}
 
-	public void readGpxParams(@NonNull GPXFile gpxFile) {
+	public void readGpxParams(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
+		setParameter(FILE_NAME, getFile().getName());
+		setParameter(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
+		setParameter(FILE_LAST_MODIFIED_TIME, getFile().lastModified());
 		setParameter(COLOR, gpxFile.getColor(0));
 		setParameter(WIDTH, gpxFile.getWidth(null));
 		setParameter(SHOW_ARROWS, gpxFile.isShowArrows());

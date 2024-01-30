@@ -505,8 +505,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (analysis != null) {
 			File parent = dataItem.getFile().getParentFile();
 			String folder = Algorithms.capitalizeFirstLetter(parent.getName());
-			String dist = OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app);
-			String points = analysis.wptPoints + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
+			String dist = OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app);
+			String points = analysis.getWptPoints() + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
 			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);
 			return getString(R.string.ltr_or_rtl_combine_via_comma, descr, points);
 		}

@@ -6,19 +6,21 @@ import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FI
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_HDOP;
-import static net.osmand.plus.track.helpers.GpxParameter.MAX_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpxParameter.MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.plus.track.helpers.GpxParameter.SMOOTHING_THRESHOLD;
-import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.gpx.GpxParameter.WIDTH;
+
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,9 +70,9 @@ public class GpxAppearanceInfo {
 
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
-			timeSpan = analysis.timeSpan;
-			wptPoints = analysis.wptPoints;
-			totalDistance = analysis.totalDistance;
+			timeSpan = analysis.getTimeSpan();
+			wptPoints = analysis.getWptPoints();
+			totalDistance = analysis.getTotalDistance();
 		}
 		smoothingThreshold = dataItem.getParameter(SMOOTHING_THRESHOLD);
 		minFilterSpeed = dataItem.getParameter(MIN_FILTER_SPEED);

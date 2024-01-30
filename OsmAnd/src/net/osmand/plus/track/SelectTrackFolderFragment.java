@@ -2,9 +2,13 @@ package net.osmand.plus.track;
 
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_NO_TRACKS;
 import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_SORT_TRACKS;
+import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -38,26 +43,37 @@ import net.osmand.plus.configmap.tracks.TrackItemsContainer;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksAdapter;
+import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
 import net.osmand.plus.configmap.tracks.TracksComparator;
+import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.IntentHelper;
+import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.MultipleTracksImportListener;
+import net.osmand.plus.importfiles.OnSuccessfulGpxImport;
 import net.osmand.plus.settings.enums.TracksSortMode;
+import net.osmand.plus.track.SelectTrackTabsFragment.GpxDataItemSelectionListener;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
 public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implements OsmAndCompassListener,
-		OsmAndLocationListener, TrackItemsContainer, TrackSelectionListener, SortTracksListener {
+		OsmAndLocationListener, TrackItemsContainer, TrackSelectionListener, SortTracksListener, EmptyTracksViewHolder.EmptyTracksListener {
 
 	public static final String TAG = SelectTrackFolderFragment.class.getSimpleName();
 
+	private ImportHelper importHelper;
 	private View view;
 	private TracksAdapter adapter;
 	private RecyclerView recyclerView;
@@ -71,6 +87,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	private TrackFolder baseTrackFolder;
 	private TrackFolder currentTrackFolder;
 	private Object fileSelectionListener;
+	private ItemVisibilityCallback itemVisibilityCallback;
 
 	@Override
 	protected boolean isUsedOnMap() {
@@ -102,6 +119,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		importHelper = app.getImportHelper();
 		updateNightMode();
 		view = themedInflater.inflate(R.layout.select_track_folder_fragment, container, false);
 		view.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light));
@@ -148,6 +166,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 			adapter.setSelectTrackMode(true);
 			adapter.setTrackSelectionListener(this);
 			adapter.setSortTracksListener(this);
+			adapter.setEmptyTracksListener(this);
 		}
 		recyclerView.setAdapter(adapter);
 	}
@@ -161,15 +180,24 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 
 	private TrackTab getUpdatedTrackTab() {
 		TrackTab trackTab = new TrackTab(TrackTabType.FOLDERS);
-		List<TrackFolder> subFolder = currentTrackFolder.getSubFolders();
+		List<TrackFolder> subFolders = currentTrackFolder.getSubFolders();
 		List<TrackItem> trackItems = currentTrackFolder.getTrackItems();
-		if (Algorithms.isEmpty(subFolder) && Algorithms.isEmpty(trackItems)) {
+		if (Algorithms.isEmpty(subFolders) && Algorithms.isEmpty(trackItems)) {
 			trackTab.items.add(TYPE_NO_TRACKS);
 		} else {
 			trackTab.items.add(TYPE_SORT_TRACKS);
 			trackTab.items.addAll(currentTrackFolder.getSubFolders());
 			trackTab.items.addAll(currentTrackFolder.getTrackItems());
 			trackTab.setSortMode(sortMode);
+		}
+		if (itemVisibilityCallback != null) {
+			List<Object> items = new ArrayList<>();
+			for (Object object : trackTab.items) {
+				if (object instanceof TrackItem && !itemVisibilityCallback.shouldShowItem((TrackItem) object)) {
+					items.add(object);
+				}
+			}
+			trackTab.items.removeAll(items);
 		}
 		return trackTab;
 	}
@@ -271,6 +299,8 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 				((SelectTrackTabsFragment.GpxFileSelectionListener) fileSelectionListener).onSelectGpxFile(result);
 				return true;
 			});
+		} else if (fileSelectionListener instanceof GpxDataItemSelectionListener) {
+			((GpxDataItemSelectionListener) fileSelectionListener).onSelectGpxDataItem(firstTrackItem.getDataItem());
 		}
 		dismiss();
 		Fragment selectTrackFragment = requireActivity().getSupportFragmentManager().findFragmentByTag(SelectTrackTabsFragment.TAG);
@@ -304,17 +334,78 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 		adapter.notifyDataSetChanged();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
-	                                Object fileSelectionListener, TrackFolder baseTrackFolder, TrackFolder currentTrackFolder) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull BaseTracksTabsFragment selectTrackFragment, @Nullable TracksSortMode sortMode,
+									@Nullable Object fileSelectionListener, @NonNull TrackFolder baseTrackFolder, @NonNull TrackFolder currentTrackFolder,
+									@Nullable ItemVisibilityCallback itemVisibilityCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackFolderFragment fragment = new SelectTrackFolderFragment();
 			fragment.sortMode = sortMode;
 			fragment.baseTrackFolder = baseTrackFolder;
 			fragment.currentTrackFolder = currentTrackFolder;
 			fragment.fileSelectionListener = fileSelectionListener;
+			fragment.itemVisibilityCallback = itemVisibilityCallback;
 			fragment.setTargetFragment(selectTrackFragment, 0);
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
+	}
+
+	@Override
+	public void importTracks() {
+		Intent intent = ImportHelper.getImportFileIntent();
+		intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FILE_REQUEST);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == IMPORT_FILE_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				List<Uri> filesUri = IntentHelper.getIntentUris(data);
+				if (!Algorithms.isEmpty(filesUri)) {
+					int filesSize = filesUri.size();
+					boolean singleTrack = filesSize == 1;
+					File dir;
+					if (currentTrackFolder != null) {
+						dir = currentTrackFolder.getDirFile();
+					} else {
+						dir = ImportHelper.getGpxDestinationDir(app, true);
+					}
+					OnSuccessfulGpxImport onGpxImport = singleTrack ? OPEN_GPX_CONTEXT_MENU : null;
+
+					importHelper.setGpxImportListener(getGpxImportListener(filesSize));
+					importHelper.handleGpxFilesImport(filesUri, dir, onGpxImport, true, singleTrack);
+				}
+			}
+		} else {
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
+
+	@NonNull
+	private GpxImportListener getGpxImportListener(int filesSize) {
+		return new MultipleTracksImportListener(filesSize) {
+
+			@Override
+			public void onImportStarted() {}
+
+			@Override
+			public void onImportFinished() {
+				importHelper.setGpxImportListener(null);
+			}
+
+			@Override
+			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+				if (isAdded() && success) {
+					addTrackItem(new TrackItem(new File(gpxFile.path)));
+				}
+				super.onSaveComplete(success, gpxFile);
+			}
+		};
+	}
+
+	protected void addTrackItem(@NonNull TrackItem item) {
+		currentTrackFolder.getTrackItems().add(item);
+		updateContent();
 	}
 }
