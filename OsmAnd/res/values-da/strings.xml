@@ -5599,4 +5599,11 @@
     <string name="shared_string_author">Forfatter</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Udvidelser</string>
+    <string name="battery_optimization_banner_content">Android-batterioptimering kan forårsage huller og unøjagtigheder i optagede spor.</string>
+    <string name="dont_ask_anymore">Spørg ikke mere</string>
+    <string name="battery_optimization_settings">Indstillinger for batterioptimering</string>
+    <string name="battery_optimization_desc">Batterioptimering i Android kan forårsage huller og unøjagtigheder i optagede spor.
+\n
+\nHvis du oplever nogle af disse problemer, kan du prøve at ændre batteriforbruget til \'Ubegrænset\'.</string>
+    <string name="battery_optimization">Batterioptimering</string>
 </resources>
