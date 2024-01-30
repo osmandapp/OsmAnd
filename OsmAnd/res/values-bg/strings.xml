@@ -1538,7 +1538,7 @@
     <string name="lang_mk">Македонски</string>
     <string name="lang_fy">фризки</string>
     <string name="lang_als">албански</string>
-    <string name="read_more">Прочети повече</string>
+    <string name="read_more">Подробности</string>
     <string name="whats_new">Какво е новото в</string>
     <string name="rendering_attr_showProposed_name">Предложени обекти</string>
     <string name="shared_string_update">Обновяване</string>
@@ -1822,7 +1822,7 @@
     <string name="add_time_span">Добавете времеви интервал</string>
     <string name="shared_string_remove">Премахване</string>
     <string name="rendering_attr_hideUnderground_name">Подземни обекти</string>
-    <string name="shared_string_read_more">Прочети още</string>
+    <string name="shared_string_read_more">Подробности</string>
     <string name="find_parking">Намери паркинг</string>
     <string name="shared_string_status">Статус</string>
     <string name="shared_string_save_changes">Запази промените</string>
