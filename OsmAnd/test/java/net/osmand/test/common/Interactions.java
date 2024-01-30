@@ -36,8 +36,8 @@ public class Interactions {
 		skipSpeedCamerasBottomSheet();
 	}
 
-	public static void startNavigation() {
-		ViewInteraction frameLayout = onView(
+	public static void startNavigation() throws Throwable {
+		ViewInteraction frameLayout = EspressoUtils.waitForView(
 				Matchers.allOf(withId(R.id.start_button),
 						net.osmand.test.common.Matchers.childAtPosition(
 								net.osmand.test.common.Matchers.childAtPosition(
