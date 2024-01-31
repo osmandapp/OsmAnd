@@ -2188,7 +2188,7 @@
     <string name="nearest_cities">最近的城市</string>
     <string name="select_city">選擇城市</string>
     <string name="select_postcode">郵遞區號搜尋</string>
-    <string name="quick_action_auto_zoom">自動縮放地圖開/關</string>
+    <string name="quick_action_auto_zoom">自動縮放地圖</string>
     <string name="quick_action_auto_zoom_on">開啟自動縮放</string>
     <string name="quick_action_auto_zoom_off">關閉自動縮放</string>
     <string name="quick_action_add_destination">設定目的地</string>
@@ -5584,4 +5584,21 @@
     <string name="shared_string_author">作者</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">擴充套件</string>
+    <string name="battery_optimization_banner_content">Android 電池最佳化可能導致錄製的軌跡出現空白或不準確。</string>
+    <string name="dont_ask_anymore">不再詢問</string>
+    <string name="battery_optimization_settings">電池最佳化設定</string>
+    <string name="battery_optimization_desc">Android 中的電池最佳化可能導致錄製的軌跡出現空白或不準確。
+\n
+\n若您遇到這些問題，可以試試看將電池使用改為「無限制」</string>
+    <string name="battery_optimization">電池最佳化</string>
+    <string name="max_sensor_heartrate">最大心率</string>
+    <string name="avg_sensor_heartrate">平均心率</string>
+    <string name="max_sensor_cadence">腳踏車最大踏頻</string>
+    <string name="avg_sensor_cadence">腳踏車平均踏頻</string>
+    <string name="max_sensor_bycicle_power">腳踏車最大功率</string>
+    <string name="avg_sensor_bycicle_power">腳踏車平均功率</string>
+    <string name="max_sensor_speed">最大感應器速度</string>
+    <string name="avg_sensor_speed">平均感應器速度</string>
+    <string name="max_sensor_temperature">最大溫度</string>
+    <string name="avg_sensor_temperature">平均溫度</string>
 </resources>
