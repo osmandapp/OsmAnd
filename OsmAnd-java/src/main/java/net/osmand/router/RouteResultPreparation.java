@@ -1730,17 +1730,17 @@ public class RouteResultPreparation {
 		boolean makeSlightTurn = Math.abs(deviation) > TURN_SLIGHT_DEGREE;
 
 		TurnType t = null;
-		int laneType = TurnType.C;
+		int mainLaneType = TurnType.C;
 
 		if (rs.keepLeft && rs.keepRight) {
 			t = TurnType.valueOf(TurnType.C, leftSide);
 		} else if (rs.keepLeft || rs.keepRight) {
 			if (deviation < -TURN_SLIGHT_DEGREE && makeSlightTurn) {
 				t = TurnType.valueOf(TurnType.TSLR, leftSide);
-				laneType = TurnType.TSLR;
+				mainLaneType = TurnType.TSLR;
 			} else if (deviation > TURN_SLIGHT_DEGREE && makeSlightTurn) {
 				t = TurnType.valueOf(TurnType.TSLL, leftSide);
-				laneType = TurnType.TSLL;
+				mainLaneType = TurnType.TSLL;
 			} else {
 				t = TurnType.valueOf(rs.keepLeft ? TurnType.KL : TurnType.KR, leftSide);
 			}
@@ -1762,18 +1762,17 @@ public class RouteResultPreparation {
 			// active lanes
 			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
 				int ind = ltr ? i : lanes.length - i - 1;
-				lanes[ind] = (laneType << 1) + 1;
+				lanes[ind] = (mainLaneType << 1) + 1;
 			}
 			// left lanes
 			for(int i = 0; i < Math.min(lanes.length, rs.leftLanes); i++) {
 				int lane = getTurnByAngle(rs.attachedAngles.get(i));
+				if (lane >= mainLaneType) {
+					lane = TurnType.getPrev(mainLaneType);
+				}
 				if (lanes[i] == 0) {
 					lanes[i] = lane << 1;
 				} else {
-					if (TurnType.getPrimaryTurn(lanes[i]) == lane) {
-						lane = TurnType.KL;
-						TurnType.setPrimaryTurn(lanes, i, TurnType.KR);
-					}
 					TurnType.setSecondaryTurn(lanes, i, lane);
 				}
 			}
@@ -1781,13 +1780,12 @@ public class RouteResultPreparation {
 			for (int i = 0; i < Math.min(lanes.length, rs.rightLanes); i++) {
 				int ind = lanes.length - i - 1;
 				int lane = getTurnByAngle(rs.attachedAngles.get(rs.leftLanes + rs.rightLanes - i - 1));
+				if (lane <= mainLaneType) {
+					lane = TurnType.getNext(mainLaneType);
+				}
 				if (lanes[ind] == 0) {
 					lanes[ind] = lane << 1;
 				} else {
-					if (TurnType.getPrimaryTurn(lanes[ind]) == lane) {
-						lane = TurnType.KR;
-						TurnType.setPrimaryTurn(lanes, ind, TurnType.KL);
-					}
 					TurnType.setSecondaryTurn(lanes, ind, lane);
 				}
 			}
