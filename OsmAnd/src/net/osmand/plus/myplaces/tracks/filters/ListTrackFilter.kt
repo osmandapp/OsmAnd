@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.filters
 import android.graphics.drawable.Drawable
 import android.util.Pair
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import net.osmand.gpx.GpxParameter
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
@@ -51,6 +52,7 @@ open class ListTrackFilter(
 	}
 
 	@Expose
+	@SerializedName("selectedItems", alternate=["selectedCities", "electedColors", "selectedWidths"])
 	var selectedItems = ArrayList<String>()
 		protected set
 	var allItems: MutableList<String> = arrayListOf()
@@ -106,7 +108,7 @@ open class ListTrackFilter(
 				} else {
 					ArrayList(value.selectedItems)
 				})
-			for (item in value.selectedItems) {
+			for (item in selectedItems) {
 				if (!allItems.contains(item)) {
 					allItems.add(item)
 					allItemsCollection[item] = 0

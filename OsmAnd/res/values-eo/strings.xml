@@ -922,7 +922,7 @@
     <string name="osmand_background_plugin_description">Montras agordojn pri aktivigi spuradon kaj navigadon fone per periode aktivigi GPS (ĉe malŝaltita ekrano).</string>
     <string name="contribution_activity">Instaleblaj versioj</string>
     <string name="accessibility_options">Alireblecaj agordoj</string>
-    <string name="osmand_accessibility_description">Ebligas uzi alireblecajn eblaĵojn senpere en OsmAnd. Plifaciligas ekzemple agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montril‑butonojn por navigado sur ekrano, uzi stirglobon por skalado, aŭ uzi voĉajn sciigojn ekzemple por aŭtomate anonci vian pozicion.</string>
+    <string name="osmand_accessibility_description">Ebligas uzi alireblecajn eblaĵojn senpere en OsmAnd. Plifaciligas ekzemple agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montril‑butonojn por navigi sur ekrano, uzi stirglobon por skalado, aŭ uzi voĉajn sciigojn ekzemple por aŭtomate anonci vian pozicion.</string>
     <string name="select_address_activity">Enigu adreson</string>
     <string name="favourites_list_activity">Elekti ŝatatan</string>
     <string name="local_openstreetmap_act_title">Modifoj de OSM</string>
@@ -2328,7 +2328,7 @@
     <string name="no_underlay">Neniu subtavolo</string>
     <string name="subscribe_email_error">Eraro</string>
     <string name="subscribe_email_desc">Abonu nian dissendoliston pri rabatoj de aplikaĵo kaj havigu 3 pliajn map-elŝutojn!</string>
-    <string name="quick_action_auto_zoom">Aŭtomata map-skalado ek/for</string>
+    <string name="quick_action_auto_zoom">Aŭtomata map-skalado</string>
     <string name="quick_action_auto_zoom_desc">Butono por (mal)aktivigi aŭtomatan map-skaladon laŭ rapido.</string>
     <string name="quick_action_auto_zoom_on">Aktivigi aŭtomatan map-skaladon</string>
     <string name="quick_action_auto_zoom_off">Malaktivigi aŭtomatan map-skaladon</string>
@@ -4747,7 +4747,7 @@
     <string name="rendering_attr_depthContourWidth_description">Larĝoj de linioj de maraj profundec-kurboj</string>
     <string name="available_as_part_of_subscription_plan">Disponebla kiel parto de la abono %1$s.</string>
     <string name="included_in_your_current_plan">Inkluzivita en via nuna plano %1$s</string>
-    <string name="favorite_confirm_delete_group">Ĉu vi certe volas forigi la grupon “%1$s” kaj ĉiujn ĝiajn punktojn (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Ĉu forigi la grupon “%1$s” kaj ĉiujn ĝiajn punktojn (%2$d)?</string>
     <string name="download_heightmap_maps">Altmapo</string>
     <string name="display_position">Markilo de nuna pozicio</string>
     <string name="favorite_delete_group">Forigi grupon</string>
@@ -5116,7 +5116,7 @@
     <string name="search_track_by_name">Serĉi spuron laŭ nomo</string>
     <string name="no_search_results">Neniu serĉ-rezulto</string>
     <string name="file_already_exists">Dosiero jam ekzistas</string>
-    <string name="nav_profile_confirm_delete">Ĉu vi certe volas forigi la profilon “%1$s”?</string>
+    <string name="nav_profile_confirm_delete">Ĉu forigi la profilon “%1$s”?</string>
     <string name="external_device_characteristic_battery_level">Baterio</string>
     <string name="external_device_characteristic_gear_ratio">Rapidmalpliigilo</string>
     <string name="external_device_characteristic_stride_length">Paŝlongo</string>
@@ -5224,7 +5224,7 @@
     <string name="relief_3d_description">Havigu kaj vidu skalitan modelon de via najbaraĵo aŭ de la tuta kontinento.</string>
     <string name="osmand_cloud_deleted_account_descr">Forigis konton kaj ĉiujn datumojn el OsmAnd-Nubo.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Aliaj aparatoj estos elsalutintaj el OsmAnd-Nubo kaj perdos aliron al pagendaj ebloj.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Ĉu vi certe volas forigi vian konton OsmAnd-Nubo?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Ĉu forigi vian konton en OsmAnd-Nubo?
 \n
 \nTiu ĉi ago estas neinversigebla.</string>
     <string name="backup_error_delete_account_email_match">Retpoŝta adreso ne kongruas kun uzantnomo</string>
@@ -5240,7 +5240,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Ĉiuj viaj datumoj en OsmAnd-Nubo estos %1$s. Datumoj en la aparato ne perdiĝos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Via abono OsmAnd Pro estos nuligita.</string>
     <string name="manage_subscriptions">Administri abonojn.</string>
-    <string name="delete_account_warning">Ĉu vi certe volas forigi vian konton %1$s?</string>
+    <string name="delete_account_warning">Ĉu forigi la konton %1$s?</string>
     <string name="shared_string_deleting">Forigado</string>
     <string name="deleting_complete">Forigado plenumita</string>
     <string name="delete_account">Forigi konton</string>
@@ -5471,7 +5471,7 @@
     <string name="widget_available_ram">Disponebla RAM</string>
     <string name="terrain_maps">Terenaj mapoj</string>
     <string name="sort_country_name_descending">landnomo (Z → A)</string>
-    <string name="delete_map_description">Ĉu vi certe volas forigi la mapon: %1$s?</string>
+    <string name="delete_map_description">Ĉu forigi la mapon: %1$s?</string>
     <string name="maps_and_resources">Mapoj kaj rimedoj</string>
     <string name="show_toast_about_key_pressed">Montri sciigon pri premita klavo</string>
     <string name="shared_string_rows">Vicoj</string>
@@ -5480,7 +5480,7 @@
     <string name="shared_string_button">Butono</string>
     <string name="shared_string_action">Ago</string>
     <string name="key_is_already_assigned_error">La klavo “%1$s” estas jam asignita al la ago: “%2$s”</string>
-    <string name="cloud_trash_clear_confirmation">Ĉu vi certe volas por ĉiam forigi ĉiujn objektojn el la rubujo? Tiu ĉi ago estas nemalfarebla.</string>
+    <string name="cloud_trash_clear_confirmation">Ĉu neinversigeble forigi ĉiujn objektojn en la rubujo?</string>
     <string name="key_event_action_zoom_in">Pligrandigi</string>
     <string name="empty_smart_folder_title">Neniu kongrua spuro</string>
     <string name="enable_to_use_external_input_device">Aktivigu por uzi eksterajn enigajn aparatojn kun OsmAnd</string>
@@ -5488,7 +5488,7 @@
     <string name="smart_folder_name_present">Inteligenta dosierujo kun tiu ĉi nomo jam ekzistas</string>
     <string name="root_folder">Ĉefdosierujo</string>
     <string name="key_event_action_previous_app_profile">Antaŭa aplikaĵa profilo</string>
-    <string name="empty_smart_folder_description">Ĉiuj kongruaj spuroj aŭtomate montriĝos tie ĉi</string>
+    <string name="empty_smart_folder_description">Kongruaj spuroj montriĝos tie ĉi</string>
     <string name="key_event_action_move_left">Movi maldekstren</string>
     <string name="configure_filter">Agordi filtrilon</string>
     <string name="restore_from_trash">Restarigi el rubujo</string>
@@ -5503,7 +5503,7 @@
     <string name="key_event_action_take_media_note">Fari aŭdvidan noton</string>
     <string name="key_event_action_activity_back_pressed">Premi agon “malfari”</string>
     <string name="key_event_action_emit_navigation_hint">Montri navigan konsilon</string>
-    <string name="remove_type_q">Ĉu vi certe volas forigi la specon “%1$s”?</string>
+    <string name="remove_type_q">Ĉu forigi la specon “%1$s”?</string>
     <string name="no_config_smart_folder_title">Neagordita</string>
     <string name="trash_is_empty_banner_desc">Dosieroj forigitaj el OsmAnd-Nubo estos disponeblaj tie ĉi ankoraŭ dum %1$s tagoj.</string>
     <string name="add_new_type">Aldoni novan specon</string>
@@ -5516,9 +5516,7 @@
     <string name="empty_name">Malplena nomo</string>
     <string name="edit_filter">Redakti filtrilon</string>
     <string name="key_event_action_open_search_view">Malfermi vidon “serĉi”</string>
-    <string name="delete_trash_item_confirmation_desc">“%1$s” estos forigita por ĉiam. Ĉui vi certas?
-\n
-\nTiu ĉi ago estas neinversigebla.</string>
+    <string name="delete_trash_item_confirmation_desc">Ĉu forigi neinversigeble “%1$s”?</string>
     <string name="discard_filter_changes">Rezigni ŝanĝi filtrilon</string>
     <string name="key_event_action_zoom_out">Malgrandigi</string>
     <string name="key_event_action_toggle_drower">Montri/kaŝi flankan menuon</string>
@@ -5533,7 +5531,7 @@
     <string name="cloud_item_restored">%1$s estas restarigita al OsmAnd-Nubo.</string>
     <string name="trash_alert_card_desc">Objektoj en la rubujo estos forigitaj post %1$s tagoj.</string>
     <string name="external_input_device_title">Ekstera eniga aparato</string>
-    <string name="discard_filter_changes_prompt">Ĉu vi certe volas reagordi ĉiujn filtrilojn?</string>
+    <string name="discard_filter_changes_prompt">Ĉu reagordi ĉiujn filtrilojn?</string>
     <string name="key_bindings">Klav-asignoj</string>
     <string name="no_config_smart_folder_description">Inteligentaj dosierujoj ebligas grupigi spurojn laŭ aplikitaj filtriloj</string>
     <string name="trash_is_empty">Rubujo estas malplena</string>
@@ -5550,7 +5548,7 @@
     <string name="change_button">Ŝanĝi butonon</string>
     <string name="download_to_device">Elŝuti al aparato</string>
     <string name="rendering_attr_showToll_name">Voj-impostejoj</string>
-    <string name="button_already_assigned_to_this_action">Tiu ĉi butono estas jam asignita al tiu ĉi ago.</string>
+    <string name="button_already_assigned_to_this_action">Butono jam asignita al tiu ĉi ago.</string>
     <string name="rendering_attr_showToll_description">Montri vojimpostajn pagejojn</string>
     <string name="zoom_non_animated">Nemovbilda pligrandigo</string>
     <string name="key_assignments_already_cleared_message">Ĉiuj klav-asignoj jam estas forviŝitaj</string>
@@ -5568,7 +5566,7 @@
     <string name="remove_widget_first">Unue forigu la fenestraĵon</string>
     <string name="lang_zh_hant">Ĉina tradicia</string>
     <string name="add_row">Aldoni vicon</string>
-    <string name="discard_changes_prompt">Ĉu vi certe volas rezigni fari ŝanĝojn?</string>
+    <string name="discard_changes_prompt">Ĉu rezigni fari ŝanĝojn?</string>
     <string name="use_v1_auto_zoom">Diskreta aŭtomata pligrandigo (malnova versio)</string>
     <string name="shared_string_eta">Proksimuma alvena tempo</string>
     <string name="row_number">Vico %1$s</string>
@@ -5591,4 +5589,11 @@
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_all_tracks">Ĉiuj spuroj</string>
     <string name="shared_string_extensions">Etendaĵoj</string>
+    <string name="dont_ask_anymore">Ne demandi ree</string>
+    <string name="battery_optimization_settings">Agordoj pri bateri-optimumigo</string>
+    <string name="battery_optimization_desc">Optimumigo de baterio fare de Android povas kaŭzi interrompojn kaj malprecizon en registrataj spuroj.
+\n
+\nSe vi spertas la menciitajn problemojn, provu ŝanĝi uzadon de baterio al “Senlima”.</string>
+    <string name="battery_optimization">Optimumigo de baterio</string>
+    <string name="battery_optimization_banner_content">Optimumigo de baterio de Android povas kaŭzi interrompojn kaj malprecizon en registrataj spuroj.</string>
 </resources>

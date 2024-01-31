@@ -5606,4 +5606,14 @@
 \n
 \nHvis du oplever nogle af disse problemer, kan du prøve at ændre batteriforbruget til \'Ubegrænset\'.</string>
     <string name="battery_optimization">Batterioptimering</string>
+    <string name="max_sensor_heartrate">Puls, maks.</string>
+    <string name="avg_sensor_heartrate">Puls, gennemsnit</string>
+    <string name="avg_sensor_speed">Sensorhastighed, gennemsnit</string>
+    <string name="max_sensor_cadence">Cykelkadence, maks.</string>
+    <string name="avg_sensor_cadence">Cykelkadence, gennemsnit</string>
+    <string name="max_sensor_bycicle_power">Cykeleffekt, maks.</string>
+    <string name="avg_sensor_bycicle_power">Cykeleffekt, gennemsnit</string>
+    <string name="max_sensor_temperature">Temperatur, maks.</string>
+    <string name="avg_sensor_temperature">Temperatur, gennemsnit</string>
+    <string name="max_sensor_speed">Sensorhastighed, maks.</string>
 </resources>
