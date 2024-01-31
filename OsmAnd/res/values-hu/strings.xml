@@ -5605,4 +5605,8 @@
     <string name="avg_sensor_speed">Érzékelő sebessége (átlag)</string>
     <string name="max_sensor_heartrate">Pulzus (maximum)</string>
     <string name="avg_sensor_heartrate">Pulzus (átlag)</string>
+    <string name="max_sensor_cadence">Pedálfordulat, max</string>
+    <string name="max_sensor_bycicle_power">Kerékpáros teljesítmény, max</string>
+    <string name="avg_sensor_bycicle_power">Kerékpáros teljesítmény, átlag</string>
+    <string name="avg_sensor_cadence">Pedálfordulat, átlag</string>
 </resources>
