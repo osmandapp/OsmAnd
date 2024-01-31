@@ -52,7 +52,7 @@ open class ListTrackFilter(
 	}
 
 	@Expose
-	@SerializedName("selectedItems", alternate=["selectedCities", "electedColors", "selectedWidths"])
+	@SerializedName("selectedItems", alternate=["selectedFolders", "selectedCities", "electedColors", "selectedWidths"])
 	var selectedItems = ArrayList<String>()
 		protected set
 	var allItems: MutableList<String> = arrayListOf()
