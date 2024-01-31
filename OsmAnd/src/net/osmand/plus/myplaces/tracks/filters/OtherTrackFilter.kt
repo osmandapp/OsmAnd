@@ -16,6 +16,13 @@ class OtherTrackFilter(
 
 	val parameters = ArrayList<OtherTrackParam>()
 
+	//for migration purposes only
+	@Expose
+	private var isVisibleOnMap: Boolean = false
+
+	@Expose
+	private var hasWaypoints: Boolean = false
+
 	init {
 		if (trackFilterType.additionalData is List<*>) {
 			for (nameResId in trackFilterType.additionalData) {
@@ -78,7 +85,17 @@ class OtherTrackFilter(
 
 	override fun initWithValue(value: BaseTrackFilter) {
 		if (value is OtherTrackFilter) {
-			selectedParams = ArrayList(value.selectedParams)
+			if (value.selectedParams != null) {
+				selectedParams = ArrayList(value.selectedParams)
+			} else {
+				selectedParams = ArrayList()
+				if (value.isVisibleOnMap == true) {
+					selectedParams.add(OtherTrackParam.VISIBLE_ON_MAP)
+				}
+				if (value.hasWaypoints == true) {
+					selectedParams.add(OtherTrackParam.WITH_WAYPOINTS)
+				}
+			}
 			filterChangedListener?.onFilterChanged()
 		}
 	}
