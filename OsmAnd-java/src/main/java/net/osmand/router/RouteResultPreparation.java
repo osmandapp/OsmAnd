@@ -1722,86 +1722,13 @@ public class RouteResultPreparation {
 		}
 		return rs;
 	}
-	
-	protected TurnType createSimpleKeepLeftRightTurn1(boolean leftSide, RouteSegmentResult prevSegm,
-			RouteSegmentResult currentSegm, RoadSplitStructure rs) {
-		double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
-		boolean makeSlightTurn = Math.abs(deviation) > TURN_SLIGHT_DEGREE && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
-		TurnType t = null;
-		int laneType = TurnType.C;
-		if (rs.keepLeft && rs.keepRight) {
-			t = TurnType.valueOf(TurnType.C, leftSide);
-		} else if (rs.keepLeft || rs.keepRight) {
-			if (deviation < -TURN_SLIGHT_DEGREE && makeSlightTurn) {
-				t = TurnType.valueOf(TurnType.TSLR, leftSide);
-				laneType = TurnType.TSLR;
-			} else if (deviation > TURN_SLIGHT_DEGREE && makeSlightTurn) {
-				t = TurnType.valueOf(TurnType.TSLL, leftSide);
-				laneType = TurnType.TSLL;
-			} else {
-				t = TurnType.valueOf(rs.keepLeft ? TurnType.KL : TurnType.KR, leftSide);
-			}
-		} else {
-			return null;
-		}
-		int currentLanesCount = countLanesMinOne(currentSegm);
-		int prevLanesCount = countLanesMinOne(prevSegm);
-		boolean oneLane = currentLanesCount == 1 && prevLanesCount == 1;
-		int[] lanes;
-		if (oneLane) {
-			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
-		} else {
-			int ls = rs.leftLanes + currentLanesCount + rs.rightLanes;
-			lanes = new int[ls];
-			for (int it = 0; it < ls; it++) {
-				if (it < rs.leftLanes) {
-					// lanes left from active
-					if (laneType != TurnType.C) {
-						// avoid repeat of turns, e.g. for TSLL get TL
-						lanes[it] = TurnType.getPrev(laneType) << 1;
-					} else {
-						if (currentLanesCount + rs.rightLanes < prevLanesCount) {
-							lanes[it] = getTurnByAngle(rs.attachedAngles.get(it)) << 1;
-						} else {
-							// can be several straight directions
-							lanes[it] = TurnType.C << 1;
-						}
-					}
-				} else if (it > rs.leftLanes + currentLanesCount - 1) {
-					// lanes in right from active
-					if (laneType != TurnType.C) {
-						lanes[it] = TurnType.getNext(laneType) << 1;
-					} else {
-						if (rs.leftLanes + currentLanesCount < prevLanesCount) {
-							lanes[it] = getTurnByAngle(rs.attachedAngles.get(it - currentLanesCount)) << 1;
-						} else {
-							lanes[it] = TurnType.C << 1;
-						}
-					}
-				} else {
-					// active lane
-					if (currentLanesCount == 1 && rs.rightLanes == 0 ) {
-						int[] combined = createCombinedTurnTypeForSingleLane(rs, deviation);
-						lanes[it] = combined[0];
-					} else {
-						lanes[it] = (laneType << 1) + 1;
-					}
-				}
-			}
-		}
-		t.setSkipToSpeak(!rs.speak);
-		t.setLanes(lanes);
-		return t;
-	}
 
 	protected TurnType createSimpleKeepLeftRightTurn(boolean leftSide, RouteSegmentResult prevSegm,
-	                                                 RouteSegmentResult currentSegm, RoadSplitStructure rs) {
+			RouteSegmentResult currentSegm, RoadSplitStructure rs) {
 		double deviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
-		boolean makeSlightTurn = Math.abs(deviation) > TURN_SLIGHT_DEGREE && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
-
+		boolean makeSlightTurn = Math.abs(deviation) > TURN_SLIGHT_DEGREE;
 		TurnType t = null;
 		int laneType = TurnType.C;
-
 		if (rs.keepLeft && rs.keepRight) {
 			t = TurnType.valueOf(TurnType.C, leftSide);
 		} else if (rs.keepLeft || rs.keepRight) {
@@ -1817,52 +1744,54 @@ public class RouteResultPreparation {
 		} else {
 			return null;
 		}
-
 		int currentLanesCount = countLanesMinOne(currentSegm);
 		int prevLanesCount = countLanesMinOne(prevSegm);
 		boolean oneLane = currentLanesCount == 1 && prevLanesCount == 1;
 		int[] lanes;
-
 		if (oneLane) {
 			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
 		} else {
 			int totalLanes = rs.leftLanes + currentLanesCount + rs.rightLanes;
 			lanes = new int[totalLanes];
 
-			// Fill Array of source lanes with Active lanes (1) from left to right
-			int currentIndex = 0;
-			for (int i = 0; i < rs.leftLanes; i++) {
-				lanes[currentIndex] = (laneType != TurnType.C) ? (TurnType.getPrev(laneType) << 1) : (currentLanesCount + rs.rightLanes < prevLanesCount) ?
-						(getTurnByAngle(rs.attachedAngles.get(currentIndex)) << 1) : (TurnType.C << 1);
-				currentIndex++;
-			}
-			// Fill Array of source lanes with Right Lanes from right to left
-			for (int i = 0; i < rs.rightLanes; i++) {
-				lanes[totalLanes - 1 - i] = (laneType != TurnType.C) ? (TurnType.getNext(laneType) << 1) : (currentLanesCount + rs.rightLanes < prevLanesCount) ?
-						(getTurnByAngle(rs.attachedAngles.get(currentIndex)) << 1) : (TurnType.C << 1);
-				currentIndex++;
+			// Loop for lanes left from active
+			for (int it = 0; it < rs.leftLanes; it++) {
+				if (laneType != TurnType.C) {
+					// Avoid repeat of turns, e.g., for TSLL, get TL
+					lanes[it] = TurnType.getPrev(laneType) << 1;
+				} else {
+					if (currentLanesCount + rs.rightLanes < prevLanesCount) {
+						lanes[it] = getTurnByAngle(rs.attachedAngles.get(it)) << 1;
+					} else {
+						// Can be several straight directions
+						lanes[it] = TurnType.C << 1;
+					}
+				}
 			}
 
-			// Fill Array of source lanes with Left Lanes from left to right (assume 1 TL)
-			for (int i = currentIndex; i < totalLanes; i++) {
-				lanes[i] = (laneType << 1) + 1;
+			// Loop for lanes in right from active
+			for (int it = 0; it < rs.rightLanes; it++) {
+				int indexFromRight = totalLanes - 1 - it;
+				if (laneType != TurnType.C) {
+					lanes[indexFromRight] = TurnType.getNext(laneType) << 1;
+				} else {
+					if (rs.leftLanes + currentLanesCount < prevLanesCount) {
+						lanes[indexFromRight] = getTurnByAngle(rs.attachedAngles.get(indexFromRight - currentLanesCount)) << 1;
+					} else {
+						lanes[indexFromRight] = TurnType.C << 1;
+					}
+				}
+			}
+
+			// Loop for the active lanes
+			for (int it = rs.leftLanes; it < rs.leftLanes + currentLanesCount; it++) {
+				lanes[it] = (laneType << 1) + 1;
 			}
 		}
-
-		// Set properties for the TurnType object
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);
-
-		// Fill All left empty slots with inactive C
-		for (int i = 0; i < lanes.length; i++) {
-			if (lanes[i] == 0) {
-				lanes[i] = TurnType.C << 1;
-			}
-		}
-
 		return t;
 	}
-
 
 	private int[] createCombinedTurnTypeForSingleLane(RoadSplitStructure rs, double currentDeviation) {
 		rs.attachedAngles.add(currentDeviation);
