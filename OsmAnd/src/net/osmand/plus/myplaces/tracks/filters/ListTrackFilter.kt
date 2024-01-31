@@ -106,7 +106,7 @@ open class ListTrackFilter(
 				} else {
 					ArrayList(value.selectedItems)
 				})
-			for (item in value.selectedItems) {
+			for (item in selectedItems) {
 				if (!allItems.contains(item)) {
 					allItems.add(item)
 					allItemsCollection[item] = 0
