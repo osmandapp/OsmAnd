@@ -163,7 +163,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		System.out.println(config.toString(start, end));
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
 		progress.hhIteration(HHIteration.START_END_POINT);
-		findFirstLastSegments(hctx, start, end, stPoints, endPoints);
+		findFirstLastSegments(hctx, start, end, stPoints, endPoints, progress);
 
 		RouteResultPreparation rrp = new RouteResultPreparation();
 		HHNetworkRouteRes route = null;
@@ -260,17 +260,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return route;
 	}
 
-	private void findFirstLastSegments(HHRoutingContext<T> hctx, LatLon start, LatLon end, 
-			 TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) throws IOException, InterruptedException {
+	private void findFirstLastSegments(HHRoutingContext<T> hctx, LatLon start, LatLon end,
+	                                   TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints,
+	                                   RouteCalculationProgress progress) throws IOException, InterruptedException {
 		long time = System.nanoTime();
 		System.out.println("Finding first / last segments...");
 		RoutePlannerFrontEnd planner = new RoutePlannerFrontEnd();
 		int startReiterate = -1, endReiterate = -1;
 		boolean found = false;
+		progress.hhIterationProgress(0.00);
 		RouteSegmentPoint startPnt = planner.findRouteSegment(start.getLatitude(), start.getLongitude(), hctx.rctx, null);
 		if (startPnt == null) {
 			return;
 		}
+		progress.hhIterationProgress(0.25);
 		RouteSegmentPoint endPnt = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
 		if (endPnt == null) {
 			return;
@@ -308,6 +311,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()), null);
+			progress.hhIterationProgress(0.50);
 			initStart(hctx, startP, false, stPoints);
 			hctx.rctx.config.initialDirection = prev;
 			if (stPoints.isEmpty()) {
@@ -322,6 +326,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (stPoints.containsKey(PNT_SHORT_ROUTE_START_END)) {
 				endPoints.put(PNT_SHORT_ROUTE_START_END, stPoints.get(PNT_SHORT_ROUTE_START_END));
 			}
+			progress.hhIterationProgress(0.75);
 			initStart(hctx, endP, true, endPoints);
 			if (endPoints.isEmpty()) {
 				System.out.println("Reiterate with next end point: " + endP);
@@ -839,9 +844,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return runRoutingWithInitQueue(hctx);
 
 	}
-	
+
 	protected T runRoutingPointsToPoints(HHRoutingContext<T> hctx, TLongObjectHashMap<T> stPoints,
-			TLongObjectHashMap<T> endPoints) throws SQLException, IOException {
+	                                     TLongObjectHashMap<T> endPoints) throws SQLException, IOException {
 		for (T start : stPoints.valueCollection()) {
 			if (start.rtExclude) {
 				continue;
@@ -871,6 +876,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private T runRoutingWithInitQueue(HHRoutingContext<T> hctx) throws SQLException, IOException {
 		float DIR_CONFIG = hctx.config.DIJKSTRA_DIRECTION;
 		RouteCalculationProgress progress = hctx.rctx == null ? null : hctx.rctx.calculationProgress;
+		double straightDistanceStartEnd = squareRootDist31(hctx.startX, hctx.startY, hctx.endX, hctx.endY);
 		while (true) {
 			Queue<NetworkDBPointCost<T>> queue;
 			if (HHRoutingContext.USE_GLOBAL_QUEUE) {
@@ -895,6 +901,13 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			if (progress != null && progress.isCancelled) {
 				return null;
+			}
+			if (progress != null && straightDistanceStartEnd > 0) {
+				// approximate correlation between the distance and vertices (enough for progress bar)
+				double k = (double) hctx.stats.visitedVertices * 11 / straightDistanceStartEnd;
+				if (k < 1.0) {
+					progress.hhIterationProgress(k);
+				}
 			}
 			long tm = System.nanoTime();
 			NetworkDBPointCost<T> pointCost = queue.poll();
@@ -949,7 +962,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 		}			
 		return null;
-		
 	}
 
 	private T scanFinalPoint(T finalPoint, List<T> lt) {
@@ -1100,6 +1112,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
 			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
 		for (int i = 0; i < route.segments.size(); i++) {
+			progress.hhIterationProgress((double) i / route.segments.size());
+
 			HHNetworkSegmentRes s = route.segments.get(i);
 			if (s.segment == null) {
 				// start / end points
