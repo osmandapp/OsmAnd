@@ -262,10 +262,9 @@ class SettingsDialogFragment : BaseDialogFragment() {
 
 	private fun createLocationSourcePref(inflater: LayoutInflater, container: ViewGroup) {
 		inflater.inflate(R.layout.item_divider, container)
-		/*TODO use ic_action_device_location*/
 		inflater.inflate(R.layout.item_with_right_value, container, false).apply {
 			id = R.id.location_source_preference_container
-			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_location_history))
+			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_device_location))
 			findViewById<TextView>(R.id.title).text = getText(R.string.location_source)
 			findViewById<TextView>(R.id.value).text = getText(settings.locationSource.nameId)
 			setOnClickListener {

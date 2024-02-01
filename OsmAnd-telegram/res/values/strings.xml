@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--TODO no translate-->
-    <string name="google_play_services">Google Play Services</string>
-    <string name="android_api">Android API</string>
-    <!--TODO end no translate-->
-
     <string name="location_source_summary">By default, OsmAnd installed from Google Play uses Google Play Services to determine location.\n\nIf you get inaccurate location information or using device without Google Play Services, try to switch to "Android API"</string>
     <string name="location_source">Location source</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>

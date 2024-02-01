@@ -59,9 +59,15 @@ class LocationSourceBottomSheet : DialogFragment() {
 		radioButton.isChecked = item == app.settings.locationSource
 		title.text = getText(item.nameId)
 		view.setOnClickListener {
-			app.settings.locationSource = item
-			targetFragment?.also { target ->
-				target.onActivityResult(targetRequestCode, LOCATION_SOURCE_PREFERENCES_UPDATED_REQUEST_CODE, null)
+			if (app.settings.locationSource != item) {
+				app.settings.locationSource = item
+				targetFragment?.also { target ->
+					target.onActivityResult(
+						targetRequestCode,
+						LOCATION_SOURCE_PREFERENCES_UPDATED_REQUEST_CODE,
+						null
+					)
+				}
 			}
 			dismiss()
 		}
