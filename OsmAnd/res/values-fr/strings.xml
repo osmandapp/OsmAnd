@@ -5586,4 +5586,7 @@
     <string name="shared_string_license">Licence</string>
     <string name="shared_string_link">Lien</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="max_sensor_heartrate">Rythme cardiaque, max</string>
+    <string name="avg_sensor_heartrate">Rythme cardiaque, moyenne</string>
+    <string name="dont_ask_anymore">Ne plus demander</string>
 </resources>

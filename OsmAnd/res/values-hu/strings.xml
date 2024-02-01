@@ -5596,7 +5596,7 @@
     <string name="battery_optimization_settings">Akkumulátoroptimalizálási beállítások</string>
     <string name="battery_optimization_desc">Az Android akkumulátoroptimalizálása kihagyásokat és pontatlanságokat okozhat a rögzített nyomvonalakban.
 \n
-\nHa ilyent tapasztal, megpróbálhatja az akkumulátor használatot „Nem korlátozott”-ra állítani.</string>
+\nHa ilyet tapasztal, megpróbálhatja az akkumulátor használatot „Nem korlátozott”-ra állítani.</string>
     <string name="battery_optimization">Akkumulátor optimalizálása</string>
     <string name="battery_optimization_banner_content">Az Android akkumulátoroptimalizálása kihagyásokat és pontatlanságokat okozhat a rögzített nyomvonalakban.</string>
     <string name="max_sensor_speed">Érzékelő sebessége (maximum)</string>
