@@ -53,6 +53,7 @@ public class RouteCalculationProgress {
 
 	private HHIteration hhIterationStep;
 	private double hhCurrentStepProgress;
+	private int hhTargetsDone, hhTargetsTotal;
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
@@ -126,20 +127,26 @@ public class RouteCalculationProgress {
 		}
 		return map;
 	}
-	
+
+	public float getLinearProgressHH() {
+		double progress = 0;
+		for (HHIteration i : HHIteration.values()) {
+			if (i == hhIterationStep) {
+				break;
+			}
+			progress += i.approxStepLength;
+		}
+		// 1. implement 2-3 reiterations progress
+
+		progress += hhCurrentStepProgress * hhIterationStep.approxStepLength; // current step
+		progress = (1.0 * hhTargetsDone + progress) / hhTargetsTotal; // intermediate points
+
+		return (float) Math.min(progress * 100f, 99);
+	}
+
 	public float getLinearProgress() {
 		if(hhIterationStep != null) {
-			double progress = 0;
-			for (HHIteration i : HHIteration.values()) {
-				if (i == hhIterationStep) {
-					break;
-				}
-				progress += i.approxStepLength;
-			}
-			// 1. implement 2-3 reiterations progress
-			// 2. implement joined progress for interpoints
-			progress += hhCurrentStepProgress * hhIterationStep.approxStepLength;
-			return (float) Math.min(progress * 100f, 99);
+			return getLinearProgressHH();
 		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
 		float all = totalEstimatedDistance * 1.35f;
@@ -201,5 +208,10 @@ public class RouteCalculationProgress {
 		if (k > 0 && k <= 1.0 && k > this.hhCurrentStepProgress) {
 			this.hhCurrentStepProgress = k;
 		}
+	}
+
+	public void hhTargetsProgress(int done, int total) {
+		this.hhTargetsDone = done;
+		this.hhTargetsTotal = total;
 	}
 }

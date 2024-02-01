@@ -1371,5 +1371,4 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		long MEMORY_LAST_USED_MB = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20;
 		System.out.printf("***** Memory used %d MB *****\n", MEMORY_LAST_USED_MB);		
 	}
-
 }
