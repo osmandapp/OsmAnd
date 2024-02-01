@@ -876,7 +876,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	private T runRoutingWithInitQueue(HHRoutingContext<T> hctx) throws SQLException, IOException {
 		float DIR_CONFIG = hctx.config.DIJKSTRA_DIRECTION;
 		RouteCalculationProgress progress = hctx.rctx == null ? null : hctx.rctx.calculationProgress;
-		double straightDistanceStartEnd = squareRootDist31(hctx.startX, hctx.startY, hctx.endX, hctx.endY);
+		double straightStartEndCost = squareRootDist31(hctx.startX, hctx.startY, hctx.endX, hctx.endY) /
+				hctx.rctx.getRouter().getMaxSpeed();
 		while (true) {
 			Queue<NetworkDBPointCost<T>> queue;
 			if (HHRoutingContext.USE_GLOBAL_QUEUE) {
@@ -901,11 +902,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			if (progress != null && progress.isCancelled) {
 				return null;
-			}
-			if (progress != null && straightDistanceStartEnd > 0) {
-				final double APPROX_VERTICES_PER_1M = 11.0; // approximate
-				// correlation between the distance and vertices (enough for the progress bar)
-				progress.hhIterationProgress(hctx.stats.visitedVertices * APPROX_VERTICES_PER_1M / straightDistanceStartEnd);
 			}
 			long tm = System.nanoTime();
 			NetworkDBPointCost<T> pointCost = queue.poll();
@@ -947,6 +943,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.visited.add(point);
 			(rev ? hctx.visited : hctx.visitedRev).add(point);
 			printPoint(point, rev);
+			if (progress != null && straightStartEndCost > 0) {
+				final double STRAIGHT_TO_ROUTE_COST = 1.25; // approximate, tested on car/bike
+				// correlation between straight-cost and route-cost (enough for the progress bar)
+				double k = (pointCost.cost - straightStartEndCost) / straightStartEndCost * STRAIGHT_TO_ROUTE_COST;
+				progress.hhIterationProgress(k);
+			}
 			if (hctx.config.MAX_COST > 0 && pointCost.cost > hctx.config.MAX_COST) {
 				break;
 			}
