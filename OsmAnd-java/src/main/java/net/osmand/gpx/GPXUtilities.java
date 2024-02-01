@@ -89,7 +89,14 @@ public class GPXUtilities {
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-	private static final List<String> TAG_PREFIXES_TO_KEEP = Collections.singletonList("gpxtpx");
+	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>() {{
+		put("heartrate", PointAttributes.SENSOR_TAG_HEART_RATE);
+		put("osmand:hr", PointAttributes.SENSOR_TAG_HEART_RATE);
+		put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
+		put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
+		put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
+		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE);
+	}};
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
@@ -1322,10 +1329,6 @@ public class GPXUtilities {
 			if (tok == XmlPullParser.END_TAG) {
 				String tag = parser.getName();
 				if (text != null && !Algorithms.isEmpty(text.toString().trim())) {
-					String prefix = parser.getPrefix();
-					if (prefix != null && TAG_PREFIXES_TO_KEEP.contains(prefix)) {
-						tag = String.format("%s:%s", prefix, tag);
-					}
 					result.put(tag, text.toString());
 				}
 				if (tag.equals(key)) {
@@ -1520,15 +1523,9 @@ public class GPXUtilities {
 									if (values.size() > 0) {
 										for (Entry<String, String> entry : values.entrySet()) {
 											String t = entry.getKey().toLowerCase();
+											String supportedTag = getExtensionsSupportedTag(t);
 											String value = entry.getValue();
-											if (t.equals("heartrate")) {
-												t = "hr";
-											}
-											if (t.equals("speed")) {
-												t = PointAttributes.SENSOR_TAG_SPEED;
-											}
-											parse.getExtensionsToWrite().put(t, value);
-
+											parse.getExtensionsToWrite().put(supportedTag, value);
 											if (parse instanceof WptPt) {
 												WptPt wptPt = (WptPt) parse;
 												if (POINT_SPEED.equals(tag)) {
@@ -1839,6 +1836,14 @@ public class GPXUtilities {
 		}
 
 		return gpxFile;
+	}
+
+	private static String getExtensionsSupportedTag(String tag) {
+		if(SUPPORTED_EXTENSION_TAGS.containsKey(tag)) {
+			return SUPPORTED_EXTENSION_TAGS.get(tag);
+		} else {
+			return tag;
+		}
 	}
 
 	private static Map<String, String> parseRouteKeyAttributes(XmlPullParser parser) {
