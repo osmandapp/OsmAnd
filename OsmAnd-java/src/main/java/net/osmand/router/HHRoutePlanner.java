@@ -903,11 +903,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				return null;
 			}
 			if (progress != null && straightDistanceStartEnd > 0) {
-				// approximate correlation between the distance and vertices (enough for progress bar)
-				double k = (double) hctx.stats.visitedVertices * 11 / straightDistanceStartEnd;
-				if (k < 1.0) {
-					progress.hhIterationProgress(k);
-				}
+				final double APPROX_VERTICES_PER_1M = 11.0; // approximate
+				// correlation between the distance and vertices (enough for the progress bar)
+				progress.hhIterationProgress(hctx.stats.visitedVertices * APPROX_VERTICES_PER_1M / straightDistanceStartEnd);
 			}
 			long tm = System.nanoTime();
 			NetworkDBPointCost<T> pointCost = queue.poll();
