@@ -178,7 +178,7 @@ public class RouteCalculationProgress {
 
 	public enum HHIteration {
 		SELECT_REGIONS(0.05),  // +0.05 = 0.05
-		LOAD_POINS(0.05),      // +0.05 = 0.10
+		LOAD_POINTS(0.05),     // +0.05 = 0.10
 		START_END_POINT(0.15), // +0.15 = 0.25
 		ROUTING(0.25),         // +0.25 = 0.50
 		DETAILED(0.50),        // +0.50 = 1.00

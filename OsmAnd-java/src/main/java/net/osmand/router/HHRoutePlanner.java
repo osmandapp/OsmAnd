@@ -512,7 +512,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		
 		long time = System.nanoTime();
-		progress.hhIteration(HHIteration.LOAD_POINS);
+		progress.hhIteration(HHIteration.LOAD_POINTS);
 		System.out.print("Loading points... ");
 		hctx.pointsById = hctx.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
