@@ -38,13 +38,13 @@ public class TravelGpx extends TravelArticle {
 		if (gpxFile.hasAltitude) {
 			analysis = gpxFile.getAnalysis(0);
 		} else {
-			analysis.diffElevationDown = diffElevationDown;
-			analysis.diffElevationUp = diffElevationUp;
-			analysis.maxElevation = maxElevation;
-			analysis.minElevation = minElevation;
-			analysis.totalDistance = totalDistance;
+			analysis.setDiffElevationDown(diffElevationDown);
+			analysis.setDiffElevationUp(diffElevationUp);
+			analysis.setMaxElevation(maxElevation);
+			analysis.setMinElevation(minElevation);
+			analysis.setTotalDistance(totalDistance);
 			analysis.totalDistanceWithoutGaps = totalDistance;
-			analysis.avgElevation = avgElevation;
+			analysis.setAvgElevation(avgElevation);
 
 			if (!Double.isNaN(maxElevation) || !Double.isNaN(minElevation)) {
 				analysis.setHasData(POINT_ELEVATION, true);

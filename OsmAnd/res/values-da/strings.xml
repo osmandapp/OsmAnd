@@ -2339,9 +2339,9 @@
     <string name="quick_action_add_destination_desc">En knap til at gøre centrum af skærmen til rutedestinationen. En tidligere valgt destination bliver i stedet den sidste mellemliggende destination.</string>
     <string name="quick_action_replace_destination_desc">En knap til at gøre skærmens centrum til den nye rutedestination og erstatte den tidligere valgte destination (hvis nogen).</string>
     <string name="quick_action_add_first_intermediate_desc">En knap til at gøre skærmens centrum til den første mellemliggende destination.</string>
-    <string name="quick_action_auto_zoom">Automatisk kortzoom til/fra</string>
-    <string name="quick_action_auto_zoom_desc">Knap til at slå hastighedafhængig autozoom til eller fra.</string>
-    <string name="quick_action_auto_zoom_on">Aktiver automatisk zoom</string>
+    <string name="quick_action_auto_zoom">Automatisk kortzoom</string>
+    <string name="quick_action_auto_zoom_desc">Knap til at slå hastighedafhængig auto-zoom til eller fra.</string>
+    <string name="quick_action_auto_zoom_on">Aktivér automatisk zoom</string>
     <string name="quick_action_auto_zoom_off">Deaktiver automatisk zoom</string>
     <string name="shared_string_paused">Pauset</string>
     <string name="type_city_town">Indtast by/bydel/sted</string>
@@ -5599,4 +5599,21 @@
     <string name="shared_string_author">Forfatter</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Udvidelser</string>
+    <string name="battery_optimization_banner_content">Android-batterioptimering kan forårsage huller og unøjagtigheder i optagede spor.</string>
+    <string name="dont_ask_anymore">Spørg ikke mere</string>
+    <string name="battery_optimization_settings">Indstillinger for batterioptimering</string>
+    <string name="battery_optimization_desc">Batterioptimering i Android kan forårsage huller og unøjagtigheder i optagede spor.
+\n
+\nHvis du oplever nogle af disse problemer, kan du prøve at ændre batteriforbruget til \'Ubegrænset\'.</string>
+    <string name="battery_optimization">Batterioptimering</string>
+    <string name="max_sensor_heartrate">Puls, maks.</string>
+    <string name="avg_sensor_heartrate">Puls, gennemsnit</string>
+    <string name="avg_sensor_speed">Sensorhastighed, gennemsnit</string>
+    <string name="max_sensor_cadence">Cykelkadence, maks.</string>
+    <string name="avg_sensor_cadence">Cykelkadence, gennemsnit</string>
+    <string name="max_sensor_bycicle_power">Cykeleffekt, maks.</string>
+    <string name="avg_sensor_bycicle_power">Cykeleffekt, gennemsnit</string>
+    <string name="max_sensor_temperature">Temperatur, maks.</string>
+    <string name="avg_sensor_temperature">Temperatur, gennemsnit</string>
+    <string name="max_sensor_speed">Sensorhastighed, maks.</string>
 </resources>

@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="battery_optimization_banner_content">Android battery optimization can cause gaps and inaccuracies in recorded tracks.</string>
+    <string name="dont_ask_anymore">Don\'t ask anymore</string>
+    <string name="battery_optimization_settings">Battery optimization settings</string>
+    <string name="battery_optimization_desc">Battery optimization in Android can cause gaps and inaccuracies in recorded tracks.\n\nIf you experience any of these issues, you can try changing the battery usage to \'Unrestricted.\'</string>
+    <string name="battery_optimization">Battery optimization</string>
     <string name="shared_string_extensions">Extensions</string>
     <string name="shared_string_license">License</string>
     <string name="shared_string_link">Link</string>
@@ -27,6 +32,16 @@
     <string name="shared_string_next_event">Next event</string>
     <string name="map_widget_sun_position_desc">Shows the time until sunrise or sunset.</string>
     <string name="map_widget_sun_position">Sun position</string>
+    <string name="max_sensor_heartrate">Heart rate, max</string>
+    <string name="avg_sensor_heartrate">Heart rate, average</string>
+    <string name="max_sensor_cadence">Bicycle Cadence, max</string>
+    <string name="avg_sensor_cadence">Bicycle Cadence, average</string>
+    <string name="max_sensor_bycicle_power">Bicycle Power, max</string>
+    <string name="avg_sensor_bycicle_power">Bicycle Power, average</string>
+    <string name="max_sensor_temperature">Temperature, max</string>
+    <string name="avg_sensor_temperature">Temperature, average</string>
+    <string name="max_sensor_speed">Sensor speed, max</string>
+    <string name="avg_sensor_speed">Sensor speed, average</string>
     <string name="use_v1_auto_zoom">Discrete auto-zoom (old version)</string>
     <string name="button_already_assigned_to_this_action">Button already assigned to this action.</string>
     <string name="key_assignments_already_cleared_message">All key assignments are already cleared</string>
@@ -240,7 +255,7 @@
     <string name="help_article_widgets_radius_ruler_name">Radius-ruler and Ruler</string>
     <string name="shared_string_setup">Setup</string>
     <string name="user_guide">User guide</string>
-    <string name="telegram_chats_descr">Join to one of our local telegram chats.</string>
+    <string name="telegram_chats_descr">Join one of our local Telegram chats.</string>
     <string name="telegram_chats">Telegram chats</string>
     <string name="github_discussion">GitHub Discussion</string>
     <string name="contact_us">Contact us</string>
@@ -2970,10 +2985,10 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="nearest_cities">Nearest cities</string>
     <string name="select_city">Select city</string>
     <string name="select_postcode">Postcode search</string>
-    <string name="quick_action_auto_zoom">Auto zoom map on/off</string>
-    <string name="quick_action_auto_zoom_desc">Button to turn speed controlled auto zoom on or off.</string>
-    <string name="quick_action_auto_zoom_on">Turn on auto zooming</string>
-    <string name="quick_action_auto_zoom_off">Turn off auto zooming</string>
+    <string name="quick_action_auto_zoom">Auto-zoom map</string>
+    <string name="quick_action_auto_zoom_desc">Button to turn speed-controlled auto-zooming on or off.</string>
+    <string name="quick_action_auto_zoom_on">Turn on auto-zooming</string>
+    <string name="quick_action_auto_zoom_off">Turn off auto-zooming</string>
     <string name="quick_action_add_destination">Set destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
@@ -3727,7 +3742,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
-    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
+    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto-announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
     <string name="osm_editing_plugin_description">Make contributions to OpenStreetMap, a global community maintaining a comprehensive map of the world and providing up-to date open-source data to every user. \n\nYou can find instructions on how to edit the map on our website %1$s.</string>
     <string name="osmand_development_plugin_description">Provides functionality to test and debug OsmAnd: simulate navigation routes, monitor the screen rendering, check performance, etc. This plugin is not required for normal app use.</string>
@@ -4091,7 +4106,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="animate_routing_route">Simulate using calculated route</string>
     <string name="animate_routing_gpx">Simulate using GPX track</string>
     <string name="route_is_too_long_v2">For long distances: Please add intermediate destinations if no route is found within 10 minutes.</string>
-    <string name="auto_zoom_none">No auto zoom</string>
+    <string name="auto_zoom_none">No auto zooming</string>
     <string name="auto_zoom_close">To close-up</string>
     <string name="auto_zoom_far">To mid-range</string>
     <string name="auto_zoom_farthest">To long-range</string>

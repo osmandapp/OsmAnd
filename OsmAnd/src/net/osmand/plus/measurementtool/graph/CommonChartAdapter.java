@@ -151,7 +151,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 		GPXItemPagerAdapter.updateGeneralTabInfo(generalStatistics, app, analysis, false, false);
 		GPXItemPagerAdapter.setupGeneralStatisticsIcons(generalStatistics, app.getUIUtilities());
 
-		boolean timeDefined = analysis.timeSpan > 0;
+		boolean timeDefined = analysis.getTimeSpan() > 0;
 		AndroidUiHelper.updateVisibility(generalStatistics.findViewById(R.id.list_divider), timeDefined);
 		AndroidUiHelper.updateVisibility(generalStatistics.findViewById(R.id.bottom_line_blocks), timeDefined);
 		if (timeDefined) {

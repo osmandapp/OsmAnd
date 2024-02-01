@@ -241,12 +241,12 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		ImageView distanceIcon = trackInfoContainer.findViewById(R.id.distance_icon);
 		TextView distanceText = trackInfoContainer.findViewById(R.id.distance);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 		ImageView waypointsIcon = trackInfoContainer.findViewById(R.id.points_icon);
 		TextView waypointsCountText = trackInfoContainer.findViewById(R.id.points_count);
 		waypointsIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_waypoint_16));
-		waypointsCountText.setText(String.valueOf(analysis.wptPoints));
+		waypointsCountText.setText(String.valueOf(analysis.getWptPoints()));
 
 		ImageView timeIcon = trackInfoContainer.findViewById(R.id.time_icon);
 		if (analysis.isTimeSpecified()) {
@@ -260,7 +260,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			AndroidUiHelper.updateVisibility(timeIcon, false);
 		}
 
-		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.totalDistance / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
+		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.getTotalDistance() / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
 	}
 
 	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity, CallbackWithObject<String> onFileSelect) {

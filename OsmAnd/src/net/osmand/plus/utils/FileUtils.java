@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -147,9 +148,10 @@ public class FileUtils {
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectedGpxFile.resetSplitProcessed();
 			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
+			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
+			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
 		}
 	}
 

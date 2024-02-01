@@ -1,5 +1,7 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.configmap.tracks.TracksAdapter.TYPE_RECENTLY_VISIBLE_TRACKS;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -21,12 +23,17 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
+import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
+import net.osmand.plus.configmap.tracks.viewholders.RecentlyVisibleViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,6 +42,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	public static final String TAG = SelectTrackTabsFragment.class.getSimpleName();
 
 	private Object fileSelectionListener;
+	private ItemVisibilityCallback itemVisibilityCallback;
 
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
@@ -100,9 +108,9 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	@Override
 	public void onTrackFolderSelected(@NonNull TrackFolder trackFolder) {
 		FragmentActivity activity = getActivity();
-		if (activity != null) {
+		if (activity != null && trackFolder.getParentFolder() != null) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			SelectTrackFolderFragment.showInstance(manager, this, getTracksSortMode(), fileSelectionListener, trackFolder.getParentFolder(), trackFolder);
+			SelectTrackFolderFragment.showInstance(manager, this, getTracksSortMode(), fileSelectionListener, trackFolder.getParentFolder(), trackFolder, itemVisibilityCallback);
 		}
 	}
 
@@ -133,8 +141,37 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 				((GpxFileSelectionListener) fileSelectionListener).onSelectGpxFile(result);
 				return true;
 			});
+		} else if (fileSelectionListener instanceof GpxDataItemSelectionListener) {
+			((GpxDataItemSelectionListener) fileSelectionListener).onSelectGpxDataItem(firstTrackItem.getDataItem());
 		}
 		dismiss();
+	}
+
+	@Nullable
+	public TrackTab getTab(@NonNull String name) {
+		for (TrackTab trackTab : getTrackTabs()) {
+			if (Algorithms.stringsEqual(name, trackTab.getTypeName())) {
+				updateTrackItemsVisibility(trackTab);
+				return trackTab;
+			}
+		}
+		return null;
+	}
+
+	private void updateTrackItemsVisibility(TrackTab trackTab) {
+		if (itemVisibilityCallback != null) {
+			List<Object> items = new ArrayList<>();
+			for (Object object : trackTab.items) {
+				if (object instanceof TrackItem && !itemVisibilityCallback.shouldShowItem((TrackItem) object)) {
+					items.add(object);
+				}
+			}
+			trackTab.items.removeAll(items);
+			Object lastItem = trackTab.items.get(trackTab.items.size() - 1);
+			if (lastItem instanceof Integer && (Integer) lastItem == TYPE_RECENTLY_VISIBLE_TRACKS) {
+				trackTab.items.remove(lastItem);
+			}
+		}
 	}
 
 	@Override
@@ -142,10 +179,20 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 		return false;
 	}
 
+	@Override
+	public boolean selectTrackMode() {
+		return true;
+	}
+
 	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener) {
+		showInstance(manager, fileSelectionListener, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, Object fileSelectionListener, @Nullable ItemVisibilityCallback itemVisibilityCallback) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SelectTrackTabsFragment fragment = new SelectTrackTabsFragment();
 			fragment.fileSelectionListener = fileSelectionListener;
+			fragment.itemVisibilityCallback = itemVisibilityCallback;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
@@ -153,5 +200,9 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 
 	public interface GpxFileSelectionListener {
 		void onSelectGpxFile(@NonNull GPXFile gpxFile);
+	}
+
+	public interface GpxDataItemSelectionListener {
+		void onSelectGpxDataItem(@Nullable GpxDataItem gpxDataItem);
 	}
 }

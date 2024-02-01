@@ -165,8 +165,7 @@ public abstract class MapButton {
 		this.routeDialogOpened = routeDialogOpened;
 		this.showBottomButtons = bottomButtonsAllowed;
 
-		boolean show = shouldShow();
-		updateVisibility(show);
+		updateVisibility();
 
 		if (view.getVisibility() != View.VISIBLE) {
 			return;
@@ -191,6 +190,10 @@ public abstract class MapButton {
 
 	protected void setDrawable(@NonNull Drawable drawable) {
 		setMapButtonIcon(view, drawable);
+	}
+
+	public boolean updateVisibility() {
+		return updateVisibility(shouldShow());
 	}
 
 	protected boolean updateVisibility(boolean visible) {

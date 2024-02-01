@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
+import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.fragments.TrackMenuFragment.TrackMenuTab;
@@ -40,15 +41,21 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 
 	@Override
 	protected View.OnClickListener getOnClickListener() {
-		return v -> {
-			if (getAnalysis().hasElevationData()) {
-				Bundle params = new Bundle();
-				params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
-				params.putString(TrackMenuFragment.CHART_TAB_NAME, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE.name());
-				TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
-						null, null, params);
-			}
-		};
+		return v -> askShowBatteryOptimizationDialog();
+	}
+
+	private void askShowBatteryOptimizationDialog() {
+		BatteryOptimizationController.askShowDialog(mapActivity, true, activity -> askShowTrackMenuDialog());
+	}
+
+	private void askShowTrackMenuDialog() {
+		if (getAnalysis().hasElevationData()) {
+			Bundle params = new Bundle();
+			params.putString(TrackMenuFragment.OPEN_TAB_NAME, TrackMenuTab.TRACK.name());
+			params.putString(TrackMenuFragment.CHART_TAB_NAME, GPXTabItemType.GPX_TAB_ITEM_ALTITUDE.name());
+			TrackMenuFragment.showInstance(mapActivity, savingTrackHelper.getCurrentTrack(), null,
+					null, null, params);
+		}
 	}
 
 	@Override
@@ -90,7 +97,7 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 			if (reset) {
 				diffElevationUp = 0;
 			}
-			diffElevationUp = Math.max(getAnalysis().diffElevationUp, diffElevationUp);
+			diffElevationUp = Math.max(getAnalysis().getDiffElevationUp(), diffElevationUp);
 			return diffElevationUp;
 		}
 	}
@@ -109,7 +116,7 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 			if (reset) {
 				diffElevationDown = 0;
 			}
-			diffElevationDown = Math.max(getAnalysis().diffElevationDown, diffElevationDown);
+			diffElevationDown = Math.max(getAnalysis().getDiffElevationDown(), diffElevationDown);
 			return diffElevationDown;
 		}
 	}

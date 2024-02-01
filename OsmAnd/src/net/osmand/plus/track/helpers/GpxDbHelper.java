@@ -1,7 +1,7 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.track.helpers.GpxParameter.SPLIT_TYPE;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.os.AsyncTask;
 import android.util.Pair;
@@ -9,6 +9,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.data.GPXInfo;
@@ -126,31 +127,23 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	@NonNull
-	public List<Pair<String, Integer>> getNearestCityList() {
-		return database.getNearestCityCollection();
-	}
+	public List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String columnName,
+	                                                               boolean includeEmptyValues,
+	                                                               boolean sortByName,
+	                                                               boolean sortDescending) {
 
-	@NonNull
-	public List<Pair<String, Integer>> getTrackColorsList() {
-		return database.getTrackColorsCollection();
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getTrackWidthList() {
-		return database.getTrackWidthCollection();
+		return database.getStringIntItemsCollection(columnName,
+				includeEmptyValues,
+				sortByName,
+				sortDescending);
 	}
 
 	public long getTracksMinCreateDate() {
 		return database.getTracksMinCreateDate();
 	}
 
-	public double getTracksMaxDuration() {
-		return database.getTracksMaxDuration();
-	}
-
-	@NonNull
-	public List<Pair<String, Integer>> getTrackFolders() {
-		return database.getTrackFolders();
+	public String getMaxParameterValue(GpxParameter parameter) {
+		return database.getColumnMaxValue(parameter);
 	}
 
 	@Nullable
@@ -161,7 +154,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = dataItems.get(file);
-		if ((GpxDbUtils.isAnalyseNeeded(file, item) || GpxDbUtils.isCitySearchNeeded(item)) && !isGpxReading(file)) {
+		if (GpxDbUtils.isAnalyseNeeded(file, item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;

@@ -223,7 +223,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		modifiedTime = System.currentTimeMillis();
 		pointsModifiedTime = modifiedTime;
 	}
-	
+
 	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
 		updateWptPt(existingPoint, newWpt, true);
 	}
@@ -296,8 +296,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance, TrackPointsAnalyser pointsAnalyzer) {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 		analysis.name = path;
-		analysis.wptPoints = points.size();
-		analysis.wptCategoryNames = getWaypointCategories();
+		analysis.setWptPoints(points.size());
+		analysis.setWptCategoryNames(getWaypointCategories());
 
 		List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, segments.toArray(new SplitSegment[0]));
@@ -310,7 +310,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 			GPXUtilities.Track subtrack = tracks.get(i);
 			for (GPXUtilities.TrkSegment segment : subtrack.segments) {
 				if (!segment.generalSegment) {
-					analysis.totalTracks++;
+					int totalTracks = analysis.getTotalTracks();
+					analysis.setTotalTracks(totalTracks + 1);
 					if (segment.points.size() > 1) {
 						splitSegments.add(createSplitSegment(segment, fromDistance, toDistance));
 					}

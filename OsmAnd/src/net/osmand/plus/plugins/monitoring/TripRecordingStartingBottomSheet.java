@@ -19,15 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
-import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,6 +32,7 @@ import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.ItemType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
@@ -64,19 +62,6 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 		}
 	}
 
-	public static void showTripRecordingDialog(@NonNull OsmandApplication app, @NonNull FragmentActivity activity) {
-		FragmentManager manager = activity.getSupportFragmentManager();
-		if (!manager.isStateSaved()) {
-			OsmandSettings settings = app.getSettings();
-			boolean showStartDialog = settings.SHOW_TRIP_REC_START_DIALOG.get();
-			if (showStartDialog) {
-				showInstance(manager);
-			} else {
-				startRecording(app, activity);
-			}
-		}
-	}
-
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
@@ -91,12 +76,7 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 
 		LinearLayout expandHideIntervalContainer = itemView.findViewById(R.id.interval_view_container);
 		upDownBtn = itemView.findViewById(R.id.up_down_button);
-		expandHideIntervalContainer.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateIntervalContainer();
-			}
-		});
+		expandHideIntervalContainer.setOnClickListener(v -> updateIntervalContainer());
 
 		intervalValueView = itemView.findViewById(R.id.interval_value);
 		intervalContainer = itemView.findViewById(R.id.always_ask_and_range_slider_container);
@@ -222,23 +202,20 @@ public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogF
 		upDownBtn.setImageDrawable(getContentIcon(iconId));
 	}
 
-	private static void startRecording(@NonNull OsmandApplication app, @Nullable FragmentActivity activity) {
-		app.getSavingTrackHelper().startNewSegment();
-		app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
-		app.startNavigationService(NavigationService.USED_BY_GPX);
-
-		if (activity != null) {
-			AndroidUtils.requestNotificationPermissionIfNeeded(activity);
+	private void startRecording() {
+		OsmandMonitoringPlugin plugin = PluginsHelper.getPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			plugin.startRecording(getActivity());
+			showTripRecordingDialog();
 		}
+		dismiss();
 	}
 
-	private void startRecording() {
-		startRecording(app, getActivity());
+	private void showTripRecordingDialog() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 		}
-		dismiss();
 	}
 
 	public void show() {

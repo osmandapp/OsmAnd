@@ -5588,4 +5588,8 @@
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_link">Ссылка</string>
     <string name="shared_string_extensions">Расширения</string>
+    <string name="battery_optimization_banner_content">Оптимизация использования батареи в Android может привести к появлению пропусков и неточностей в записанных треках.</string>
+    <string name="dont_ask_anymore">Больше не спрашивать</string>
+    <string name="battery_optimization_settings">Настройки оптимизации батареи</string>
+    <string name="battery_optimization">Оптимизация батареи</string>
 </resources>

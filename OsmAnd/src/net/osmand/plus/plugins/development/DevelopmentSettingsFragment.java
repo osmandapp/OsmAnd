@@ -86,6 +86,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMapTextsPrefs();
 
+		setupRoutesPrefs();
+
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
@@ -207,14 +209,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		symtopPref.setDescription("Allow displaying map texts on top of each other");
 	}
 
+	private void setupRoutesPrefs() {
+		Preference textsCategory = findPreference("routes");
+		textsCategory.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx raiseRoutesPref = findPreference(plugin.RAISE_ROUTES_ABOVE_RELIEF.getId());
+		raiseRoutesPref.setIconSpaceReserved(false);
+		raiseRoutesPref.setDescription("Display routes 1000 meters higher above the ground");
+
+		SwitchPreferenceEx showTracesPref = findPreference(plugin.SHOW_TRANSPARENT_TRACES.getId());
+		showTracesPref.setIconSpaceReserved(false);
+		showTracesPref.setDescription("Display semi-transparent trace under the route");
+	}
+
 	private void setupMemoryAllocatedForRoutingPref() {
-		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
 		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
-		String description = getString(
-				R.string.ltr_or_rtl_combine_via_space,
-				String.valueOf(value),
-				"MB");
-		preference.setSummary(description);
+		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
+		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "MB"));
 		preference.setIconSpaceReserved(false);
 	}
 
@@ -224,7 +235,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024 * 1024L);
 
 		Preference globalAppAllocatedMemory = findPreference("global_app_allocated_memory");
-		globalAppAllocatedMemory.setSummary(getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
+		globalAppAllocatedMemory.setSummary(getString(R.string.global_app_allocated_memory_descr,
+				String.valueOf(javaAvailMem), String.valueOf(javaTotal), String.valueOf(dalvikSize)));
 		globalAppAllocatedMemory.setIconSpaceReserved(false);
 	}
 

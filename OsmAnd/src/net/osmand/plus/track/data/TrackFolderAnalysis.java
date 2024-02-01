@@ -34,9 +34,9 @@ public class TrackFolderAnalysis {
 			GpxDataItem dataItem = trackItem.getDataItem();
 			GPXTrackAnalysis analysis = dataItem != null ? dataItem.getAnalysis() : null;
 			if (analysis != null) {
-				totalDistance += analysis.totalDistance;
-				diffElevationUp += analysis.diffElevationUp;
-				diffElevationDown += analysis.diffElevationDown;
+				totalDistance += analysis.getTotalDistance();
+				diffElevationUp += analysis.getDiffElevationUp();
+				diffElevationDown += analysis.getDiffElevationDown();
 
 				File file = trackItem.getFile();
 				if (file != null && file.exists()) {

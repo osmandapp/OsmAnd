@@ -66,6 +66,7 @@ public abstract class CustomizableBottomSheet extends MenuBottomSheetDialogFragm
 		super.onDismiss(dialog);
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
+			manager.onDialogDismissed(processId, activity);
 			// Automatically unregister controller when close the dialog
 			// to avoid any possible memory leaks
 			manager.unregister(processId);

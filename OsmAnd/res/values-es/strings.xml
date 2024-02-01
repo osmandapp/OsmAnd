@@ -5595,4 +5595,18 @@
     <string name="shared_string_author">Autor</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Ampliaciones</string>
+    <string name="max_sensor_heartrate">Frecuencia cardíaca, máx</string>
+    <string name="max_sensor_temperature">Temperatura, máx</string>
+    <string name="avg_sensor_temperature">Temperatura, promedio</string>
+    <string name="max_sensor_speed">Velocidad del sensor, máx</string>
+    <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
+    <string name="avg_sensor_cadence">Cadencia de bicicleta, media</string>
+    <string name="battery_optimization_banner_content">La optimización de la batería de Android puede causar lagunas e imprecisiones en las pistas grabadas.</string>
+    <string name="dont_ask_anymore">No preguntes más</string>
+    <string name="battery_optimization_settings">Ajustes de optimización de batería</string>
+    <string name="battery_optimization">Optimización de batería</string>
+    <string name="avg_sensor_heartrate">Frecuencia cardiaca, media</string>
+    <string name="max_sensor_cadence">Cadencia de bicicleta, máx</string>
+    <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
+    <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
 </resources>

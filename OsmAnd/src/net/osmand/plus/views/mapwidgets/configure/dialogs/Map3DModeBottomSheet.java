@@ -91,7 +91,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 			settings.MAP_3D_MODE_VISIBILITY.setModeValue(appMode, itemVisibility);
 			Fragment targetFragment = getTargetFragment();
 			if (targetFragment instanceof Map3DModeUpdateListener) {
-				((Map3DModeUpdateListener) targetFragment).onMap3DModeUpdated();
+				((Map3DModeUpdateListener) targetFragment).onMap3DModeUpdated(itemVisibility);
 			}
 			Activity activity = getActivity();
 			if (activity instanceof MapActivity) {
@@ -142,6 +142,6 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public interface Map3DModeUpdateListener {
 
-		void onMap3DModeUpdated();
+		void onMap3DModeUpdated(@NonNull Map3DModeVisibility visibility);
 	}
 }

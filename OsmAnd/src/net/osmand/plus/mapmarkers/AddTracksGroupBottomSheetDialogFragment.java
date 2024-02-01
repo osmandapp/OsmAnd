@@ -23,6 +23,7 @@ import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	protected void onItemClick(int position) {
 		GpxDataItem dataItem = gpxList.get(position - 1);
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
-		if (analysis != null && analysis.wptCategoryNames != null && analysis.wptCategoryNames.size() > 1) {
+		if (analysis != null && !Algorithms.isEmpty(analysis.getWptCategoryNames())) {
 			Bundle args = new Bundle();
 			args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, dataItem.getFile().getAbsolutePath());
 
@@ -124,7 +125,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	private void populateList(GpxDataItem item) {
 		if (item != null) {
 			GPXTrackAnalysis analysis = item.getAnalysis();
-			if (analysis != null && analysis.wptPoints > 0) {
+			if (analysis != null && analysis.getWptPoints() > 0) {
 				int index = gpxList.indexOf(item);
 				if (index != -1) {
 					gpxList.set(index, item);

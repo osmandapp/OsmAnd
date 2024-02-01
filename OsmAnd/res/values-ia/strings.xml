@@ -8,4 +8,10 @@
     <string name="shared_string_current">Actual</string>
     <string name="start_point">Initiar</string>
     <string name="added_profiles">Profilos addite</string>
+    <string name="shared_string_next_event">Proxime evento</string>
+    <string name="shared_string_license">Licentia</string>
+    <string name="shared_string_link">Ligamine</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_road_maps">Mappas de stratas</string>
 </resources>

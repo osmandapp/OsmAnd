@@ -369,6 +369,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFile());
+		displayHelper.setSelectedGpxFile(selectedGpxFile);
 		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 			displayHelper.setFilteredGpxFile(selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile());
 		}
@@ -685,7 +686,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private boolean hasPointsGroups() {
-		return getDisplayGroupsHolder().groups.size() > 0;
+		DisplayGroupsHolder holder = getDisplayGroupsHolder();
+		return holder.groups.size() > 0;
 	}
 
 	private void hideSelectedGpx() {
@@ -993,9 +995,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private void updateFile(File file) {
+	private void updateFile(@NonNull File file) {
 		displayHelper.setFile(file);
-		displayHelper.updateDisplayGroups();
 		updateGpxTitle();
 		toolbarTextView.setText(gpxTitle);
 		updateHeader();

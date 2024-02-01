@@ -13,6 +13,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -97,7 +98,7 @@ public class SelectedGpxFile {
 		long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
 				? System.currentTimeMillis()
 				: new File(gpxFile.path).lastModified();
-		trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
+		trackAnalysis = gpxFile.getAnalysis(fileTimestamp, null, null, PluginsHelper.getTrackPointsAnalyser());
 
 		updateSplit(app);
 

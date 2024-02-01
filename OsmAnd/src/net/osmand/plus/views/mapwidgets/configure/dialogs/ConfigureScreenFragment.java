@@ -33,6 +33,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.enums.CompassVisibility;
+import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -40,7 +41,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetsRegistryListener;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheetDialogFragment.CompassVisibilityUpdateListener;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheet.CompassVisibilityUpdateListener;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureButtonsCard;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureOtherCard;
@@ -339,7 +340,7 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	@Override
-	public void onMap3DModeUpdated() {
+	public void onMap3DModeUpdated(@NonNull Map3DModeVisibility visibility) {
 		updateCard(buttonsCard);
 	}
 

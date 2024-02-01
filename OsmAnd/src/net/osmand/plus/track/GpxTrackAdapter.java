@@ -187,8 +187,8 @@ public class GpxTrackAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		} else {
 			holder.readSection.setVisibility(View.VISIBLE);
 			holder.unknownSection.setVisibility(View.GONE);
-			holder.pointsCount.setText(String.valueOf(analysis.wptPoints));
-			holder.distance.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+			holder.pointsCount.setText(String.valueOf(analysis.getWptPoints()));
+			holder.distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 			if (analysis.isTimeSpecified()) {
 				holder.time.setText(Algorithms.formatDuration(analysis.getDurationInSeconds(), app.accessibilityEnabled()));
 			} else {

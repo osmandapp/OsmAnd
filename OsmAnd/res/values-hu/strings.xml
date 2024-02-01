@@ -661,7 +661,7 @@
 \n
 \nTöltse le közvetlenül a csempetérképeket, vagy másolja őket SQLite adatbázis-fájlként az OsmAnd adatmappájába a számos harmadik féltől származó térkép-előkészítő eszköz egyikével.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
-    <string name="osmand_accessibility_description">Az eszköz kisegítő lehetőségeit közvetlenül elérhetővé teszi az OsmAndban. Ez megkönnyíti például a beszédsebesség beállítását a szövegfelolvasásánál (TTS) esetében, a D-pad navigációs beállítását, a trackball használatát a nagyítás vezérléséhez vagy a szövegfelolvasó visszajelzését például a pozíció automatikus bemondásához.</string>
+    <string name="osmand_accessibility_description">Az eszköz kisegítő lehetőségeit közvetlenül elérhetővé teszi az OsmAndban. Ez megkönnyíti például a beszédsebesség beállítását a szövegfelolvasásánál (TTS) esetében, a D-pad navigációs beállítását, a trackball használatát a nagyítás vezérléséhez vagy a szövegfelolvasó visszajelzését, például a pozíció automatikus bemondásához.</string>
     <string name="osmand_development_plugin_description">Funkciókat biztosít az OsmAnd teszteléshez: navigációs útvonalak szimulálása, a képernyőn való megjelenítés, a teljesítmény ellenőrzése stb. Ez a bővítmény az alkalmazás normál használatához nem szükséges.</string>
     <string name="plugins_screen">Bővítmények</string>
     <string name="prefs_plugins_descr">A bővítmények speciális beállításokat és kiegészítő funkciókat aktiválnak.</string>
@@ -2189,8 +2189,8 @@
     <string name="type_city_town">Település beírása</string>
     <string name="type_postcode">Adja meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
-    <string name="quick_action_auto_zoom">Térkép automatikus nagyítása be/ki</string>
-    <string name="quick_action_auto_zoom_desc">Gomb, amely be- vagy kikapcsolja a sebességtől függő automatikus térképnagyítást.</string>
+    <string name="quick_action_auto_zoom">Térkép automatikus nagyítás</string>
+    <string name="quick_action_auto_zoom_desc">Gomb, amely be- vagy kikapcsolja a sebességfüggő automatikus térképnagyítást.</string>
     <string name="quick_action_auto_zoom_on">Automatikus nagyítás bekapcsolása</string>
     <string name="quick_action_auto_zoom_off">Automatikus nagyítás kikapcsolása</string>
     <string name="quick_action_add_destination">Célpont megadása</string>
@@ -5592,4 +5592,21 @@
     <string name="shared_string_author">Szerző</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Bővítmények</string>
+    <string name="dont_ask_anymore">Ne kérdezze meg többé</string>
+    <string name="battery_optimization_settings">Akkumulátoroptimalizálási beállítások</string>
+    <string name="battery_optimization_desc">Az Android akkumulátoroptimalizálása kihagyásokat és pontatlanságokat okozhat a rögzített nyomvonalakban.
+\n
+\nHa ilyent tapasztal, megpróbálhatja az akkumulátor használatot „Nem korlátozott”-ra állítani.</string>
+    <string name="battery_optimization">Akkumulátor optimalizálása</string>
+    <string name="battery_optimization_banner_content">Az Android akkumulátoroptimalizálása kihagyásokat és pontatlanságokat okozhat a rögzített nyomvonalakban.</string>
+    <string name="max_sensor_speed">Érzékelő sebessége (maximum)</string>
+    <string name="max_sensor_temperature">Hőmérséklet (maximum)</string>
+    <string name="avg_sensor_temperature">Hőmérséklet (átlag)</string>
+    <string name="avg_sensor_speed">Érzékelő sebessége (átlag)</string>
+    <string name="max_sensor_heartrate">Pulzus (maximum)</string>
+    <string name="avg_sensor_heartrate">Pulzus (átlag)</string>
+    <string name="max_sensor_cadence">Pedálfordulat, max</string>
+    <string name="max_sensor_bycicle_power">Kerékpáros teljesítmény, max</string>
+    <string name="avg_sensor_bycicle_power">Kerékpáros teljesítmény, átlag</string>
+    <string name="avg_sensor_cadence">Pedálfordulat, átlag</string>
 </resources>

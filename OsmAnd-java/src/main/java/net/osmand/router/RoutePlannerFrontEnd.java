@@ -841,6 +841,7 @@ public class RoutePlannerFrontEnd {
 			HHNetworkRouteRes r = null;
 			Double dir = ctx.config.initialDirection ;
 			for (int i = 0; i < targets.size(); i++) {
+				float previousTime = ctx.routingTime;
 				double initialPenalty = ctx.config.penaltyForReverseDirection;
 				if (i > 0) {
 					ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty (only for inter-points)
@@ -859,6 +860,7 @@ public class RoutePlannerFrontEnd {
 				if (r.detailed.size() > 0) {
 					dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 				}
+				ctx.routingTime += previousTime;
 			}
 			if (r != null && r.isCorrect() || useOnlyHHRouting) {
 				return r;

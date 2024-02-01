@@ -1,28 +1,29 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import com.google.gson.annotations.Expose
-import net.osmand.plus.R
+import net.osmand.gpx.GpxParameter
 import net.osmand.plus.configmap.tracks.TrackItem
-import net.osmand.plus.myplaces.tracks.filters.FilterType.DATE_CREATION
-import net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
-	BaseTrackFilter(R.string.date_of_creation, DATE_CREATION, filterChangedListener) {
-	var initialValueFrom = Date().time
+class DateTrackFilter(
+	trackFilterType: TrackFilterType,
+	dateFrom: Long,
+	filterChangedListener: FilterChangedListener?) :
+	BaseTrackFilter(trackFilterType, filterChangedListener) {
+	var initialValueFrom = dateFrom
 	var initialValueTo = Date().time
 
 	@Expose
-	var valueFrom = Date().time
+	var valueFrom = initialValueFrom
 		set(value) {
 			field = value
 			filterChangedListener?.onFilterChanged()
 		}
 
 	@Expose
-	var valueTo = Date().time
+	var valueTo = initialValueTo
 		set(value) {
 			field = value
 			filterChangedListener?.onFilterChanged()
@@ -44,13 +45,14 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 		return if (trackItem.dataItem == null)
 			false
 		else {
-			val result = trackItem.dataItem!!.getParameter(FILE_CREATION_TIME) in valueFrom..valueTo
+			val result =
+				trackItem.dataItem!!.getParameter(GpxParameter.FILE_CREATION_TIME) in valueFrom..valueTo
 			result
 		}
 	}
 
 	override fun initWithValue(value: BaseTrackFilter) {
-		if (value is DateCreationTrackFilter) {
+		if (value is DateTrackFilter) {
 			valueTo = value.valueTo
 			valueFrom = value.valueFrom
 			if (initialValueTo < valueTo) {
@@ -64,9 +66,13 @@ class DateCreationTrackFilter(filterChangedListener: FilterChangedListener?) :
 
 	override fun equals(other: Any?): Boolean {
 		return super.equals(other) &&
-				other is DateCreationTrackFilter &&
+				other is DateTrackFilter &&
 				isDatesEquals(valueFrom, other.valueFrom) &&
 				isDatesEquals(valueTo, other.valueTo)
+	}
+
+	override fun hashCode(): Int {
+		return valueFrom.hashCode() + valueTo.hashCode()
 	}
 
 	private fun getDateFormat(): SimpleDateFormat {

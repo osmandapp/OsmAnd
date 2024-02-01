@@ -5,24 +5,32 @@ import com.google.gson.annotations.SerializedName
 import net.osmand.plus.configmap.tracks.TrackItem
 
 abstract class BaseTrackFilter(
-	val displayNameId: Int,
 	@Expose
-	@SerializedName("filterType") val filterType: FilterType,
+	@SerializedName("filterType") val trackFilterType: TrackFilterType,
 	var filterChangedListener: FilterChangedListener?) {
 
 	abstract fun isEnabled(): Boolean
 
 	abstract fun isTrackAccepted(trackItem: TrackItem): Boolean
 
-	abstract fun initWithValue(value: BaseTrackFilter)
+	open fun initWithValue(value: BaseTrackFilter) {
+		filterChangedListener?.onFilterChanged()
+	}
+
+	open fun isValid(): Boolean {
+		return true
+	}
 
 	open fun initFilter() {}
 
 	override fun equals(other: Any?): Boolean {
-		return other is BaseTrackFilter && other.filterType == filterType
+		return other is BaseTrackFilter && other.trackFilterType == trackFilterType
 	}
 
-	open fun updateOnOtherFiltersChangeNeeded(): Boolean {
-		return false
+	override fun hashCode(): Int {
+		var result = trackFilterType.hashCode()
+		result = 31 * result + (filterChangedListener?.hashCode() ?: 0)
+		return result
 	}
+
 }
