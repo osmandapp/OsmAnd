@@ -2325,7 +2325,7 @@
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacencia</string>
-    <string name="quick_action_auto_zoom">Alternar zum automático del mapa</string>
+    <string name="quick_action_auto_zoom">Zum automático del mapa</string>
     <string name="quick_action_auto_zoom_desc">Un botón que alterna el zum automático de acuerdo a la velocidad.</string>
     <string name="quick_action_auto_zoom_on">Activar el zum automático</string>
     <string name="quick_action_auto_zoom_off">Desactivar el zum automático</string>
@@ -5610,4 +5610,21 @@
     <string name="shared_string_copyright">Derechos de autor</string>
     <string name="shared_string_author">Autor</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="max_sensor_heartrate">Ritmo cardíaco, máx</string>
+    <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
+    <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
+    <string name="avg_sensor_temperature">Temperatura, promedio</string>
+    <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
+    <string name="battery_optimization_banner_content">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.</string>
+    <string name="dont_ask_anymore">No preguntar más</string>
+    <string name="battery_optimization_settings">Ajustes de optimización de la batería</string>
+    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.
+\n
+\nSi experimenta alguno de estos problemas, puede intentar cambiar el uso de la batería a «Sin restricciones».</string>
+    <string name="battery_optimization">Optimización de la batería</string>
+    <string name="avg_sensor_heartrate">Ritmo cardíaco, promedio</string>
+    <string name="max_sensor_cadence">Cadencia de la bicicleta, máx</string>
+    <string name="avg_sensor_cadence">Cadencia de la bicicleta, promedio</string>
+    <string name="max_sensor_temperature">Temperatura, máx</string>
+    <string name="max_sensor_speed">Velocidad del sensor, máx</string>
 </resources>
