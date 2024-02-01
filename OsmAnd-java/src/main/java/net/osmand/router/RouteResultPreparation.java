@@ -1757,8 +1757,7 @@ public class RouteResultPreparation {
 			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
 		} else {
 			lanes = new int[prevLanesCount];
-			boolean ltr = rs.leftLanes == rs.rightLanes ? rs.roadsOnLeft < rs.roadsOnRight
-					: rs.leftLanes < rs.rightLanes;
+			boolean ltr = rs.leftLanes < rs.rightLanes;
 			// active lanes
 			for(int i = 0; i < Math.min(lanes.length, currentLanesCount); i++) {
 				int ind = ltr ? i : lanes.length - i - 1;
