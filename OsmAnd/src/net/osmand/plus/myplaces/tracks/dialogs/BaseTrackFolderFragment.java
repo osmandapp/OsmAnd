@@ -318,6 +318,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		}
 	}
 
+	public boolean isUsedOnMap(){
+		return super.isUsedOnMap();
+	}
+
 	@NonNull
 	@Override
 	public TracksSortMode getTracksSortMode() {
