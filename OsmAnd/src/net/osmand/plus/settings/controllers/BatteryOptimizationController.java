@@ -8,6 +8,7 @@ import static net.osmand.plus.base.dialog.data.DialogExtra.TITLE;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.PowerManager;
 import android.provider.Settings;
 
@@ -98,7 +99,9 @@ public class BatteryOptimizationController extends BaseDialogController
 
 	public void openBatteryOptimizationSettings() {
 		Intent intent = new Intent();
-		intent.setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+		intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+		String packageName = app.getPackageName();
+		intent.setData(Uri.parse("package:" + packageName));
 		AndroidUtils.startActivityIfSafe(app, intent);
 	}
 
