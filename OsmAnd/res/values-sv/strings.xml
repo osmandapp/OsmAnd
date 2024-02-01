@@ -2128,7 +2128,7 @@
     <string name="nearest_cities">Närmaste städer</string>
     <string name="select_city">Välj stad</string>
     <string name="select_postcode">Postnummer sökning</string>
-    <string name="quick_action_auto_zoom">Autozoomning på/av</string>
+    <string name="quick_action_auto_zoom">Automatisk kartzoom</string>
     <string name="quick_action_showhide_osmbugs_descr">Knapp för att visa eller dölja OSM-anteckningar på kartan.</string>
     <string name="restart_search">Starta om sökningen</string>
     <string name="increase_search_radius">Utöka sökradien</string>
@@ -4566,7 +4566,7 @@
     <string name="rendering_value_name_only_name">Enbart namn</string>
     <string name="is_imported">%1$s har importerats.</string>
     <string name="file_already_exists">Filen finns redan</string>
-    <string name="nav_profile_confirm_delete">Är du säker på att du vill radera \"%1$s\"?</string>
+    <string name="nav_profile_confirm_delete">Radera \"%1$s\"?</string>
     <string name="external_device_characteristic_speed">Hastighet</string>
     <string name="external_device_characteristic_distance">Sträcka</string>
     <string name="external_device_characteristic_heart_rate">Puls</string>
@@ -4811,7 +4811,7 @@
     <string name="help_article_widgets_map_buttons_name">Kartknappar</string>
     <string name="help_article_widgets_nav_widgets_name">Navigeringswidgets</string>
     <string name="user_guide">Användarmanual</string>
-    <string name="telegram_chats_descr">Gå med i en av våra lokala telegramchattar.</string>
+    <string name="telegram_chats_descr">Gå med i en av våra lokala Telegramchattar.</string>
     <string name="telegram_chats">Telegramchattar</string>
     <string name="help_article_map_point_layers_on_map_name">Punkter på kartan</string>
     <string name="help_article_map_raster_maps_name">Rasterkartor (Online / Offline)</string>
@@ -4851,7 +4851,7 @@
     <string name="widget_available_ram">Tillgängligt minne</string>
     <string name="terrain_maps">Terrängkartor</string>
     <string name="sort_country_name_descending">Land: Ö - A</string>
-    <string name="delete_map_description">Är du säker på att du vill radera kartan %1$s?</string>
+    <string name="delete_map_description">Radera kartan %1$s?</string>
     <string name="maps_and_resources">Kartor &amp; Resurser</string>
     <string name="turn_arrows_descr">Välj om svängpilar ska visas på ruttlinjen.</string>
     <string name="reset_to_default_category_button_promo">\'Återställ till förval\' återställer sorteringsordningen till installationsförvalet.</string>
@@ -4868,21 +4868,23 @@
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="average_glide_ratio">Genomsnittligt glidtal</string>
-    <string name="release_4_6">• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
+    <string name="release_4_6">• Android Auto: nytt 3D läge
 \n
-\n• Ny widget för \"Glidtal\"
+\n• Möjligt att anpassa snabbknappar/tangentgenvägar för externa inmatningsenheter
 \n
-\n• Filter och smarta mappar för spår tillagda
+\n• Nya widgetar: Glidtal, Solens position, Tillgängligt minne
 \n
-\n• Nya rader för övre och nedre widgetpanel med stöd för alla widgetar
+\n• Spår: Filter och smarta mappar tillagda, förbättrad minneshantering för stora filer
+\n
+\n• Förbättrad färgläggning av spår i lutningsläget, med ny symmetrisk gradient
+\n
+\n• Förbättrade övre och nedre widgetpaneler med stöd för alla widgetar
+\n
+\n• OsmAnd Cloud: Tillgång till raderade filer
 \n
 \n• Stöd för ANT+ temperatur widget
 \n
-\n• Förbättrad minneshantering för stora gpx-spår
-\n
-\n• Uppdaterad resurshantering i Nedladdningar
-\n
-\n• Ny widget \"Tillgängligt minne\"
+\n• Uppdaterad lokal resurshantering
 \n
 \n• Löst problem med genomskinligt statusfält
 \n
@@ -5111,7 +5113,7 @@
     <string name="true_bearing_wdiget_desc">Vinkeln mellan norr och målpunkten observerad från din position.</string>
     <string name="waypoint_template">Mall för ruttpunkt</string>
     <string name="rendering_attr_weatherPressureContours_name">Lufttryck-isolinjer</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Är du säker på att du vill radera kontot på OsmAnd Cloud?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Radera kontot på OsmAnd Cloud?
 \n
 \nDenna åtgärd kan inte ångras.</string>
     <string name="free_account">Gratiskonto</string>
@@ -5141,7 +5143,7 @@
     <string name="shared_storage_third_step">Ge åtkomst för att få tillgång till mappen. Utan det kan OsmAnd inte kopiera filer.</string>
     <string name="no_altitude_data_desc">För att ta emot %1$s-data, koppla ditt spår till vägarna eller beräkna det online.</string>
     <string name="routing_attr_carriage_restrictions_name">Begränsningar för hästvagn</string>
-    <string name="delete_account_warning">Är du säker på att du vill radera kontot %1$s ?</string>
+    <string name="delete_account_warning">Radera kontot %1$s ?</string>
     <string name="searching_matching_tracks">Sök alla matchande spår</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Använd raster sqlitedb för terrängskuggning / lutningsgrad</string>
     <string name="write_heading">Logga kurs</string>
@@ -5306,7 +5308,7 @@
     <string name="provided_by">Tillhandahålls av %1$s</string>
     <string name="topography_maps">Topografikartor</string>
     <string name="key_assignments">Knapp-kopplingar</string>
-    <string name="favorite_confirm_delete_group">Vill du radera gruppen \'%1$s\' och alla dess inkluderade punkter (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Radera gruppen \'%1$s\' och alla dess inkluderade punkter (%2$d)?</string>
     <string name="waypoint_appearance">Ruttpunktens utseende</string>
     <string name="reset_key_assignments_desc">Alla knapp-kopplingar för den valda typen kommer tas bort.</string>
     <string name="rendering_attr_showToll_name">Visa betalvägsbegränsningar</string>
@@ -5314,7 +5316,7 @@
     <string name="predefined_waypoint_appearance_description">Tryck på snabbåtgärden för att autospara ruttpunkten med förinställda parametrar.</string>
     <string name="track_file_description">Tryck på snabbåtgärden visar tillgängliga spår.</string>
     <string name="included_in_your_current_plan">Inkluderad i din nuvarande \'%1$s\' prenumeration</string>
-    <string name="button_already_assigned_to_this_action">Den här knappen är redan kopplad till denna åtgärd.</string>
+    <string name="button_already_assigned_to_this_action">Knappen är redan kopplad till denna åtgärd.</string>
     <string name="change_key_binding">Ändra knapp-koppling</string>
     <string name="shared_string_reassign">Koppla om</string>
     <string name="reset_key_assignments">Återställ knapp-kopplingar</string>
@@ -5330,8 +5332,8 @@
     <string name="clear_key_assignment">Rensa knapp-koppling</string>
     <string name="duplacate_widget_added_snackbar">En duplicerad widget läggs till listan.</string>
     <string name="add_new_button">Lägg till en ny knapp</string>
-    <string name="clear_key_assignment_desc">Knapp-kopplingen för vald åtgärd kommer rensas och sättas till Ingen.</string>
-    <string name="cloud_trash_clear_confirmation">Är du säker på att du vill radera alla objekt i Papperskorgen permanent? Åtgärden kan inte ångras.</string>
+    <string name="clear_key_assignment_desc">Knapp-kopplingen för vald åtgärd kommer rensas och sättas till \'Ingen\'.</string>
+    <string name="cloud_trash_clear_confirmation">Radera alla objekt i Papperskorgen permanent?</string>
     <string name="key_event_action_zoom_in">Zooma in</string>
     <string name="empty_smart_folder_title">Inget matchande spår</string>
     <string name="change_button">Ändra knapp</string>
@@ -5344,7 +5346,7 @@
     <string name="key_event_action_previous_app_profile">Föregående app-profil</string>
     <string name="show_toast_about_key_pressed">Visa toast-meddelande om nedtryckt knapp</string>
     <string name="rendering_value_caiScale_description">Italienska alpinistföreningen (Club Alpino Italiano)</string>
-    <string name="empty_smart_folder_description">Alla matchande spår kommer automatiskt visas här</string>
+    <string name="empty_smart_folder_description">Matchande spår visas automatiskt här</string>
     <string name="delete_folder">Radera mapp</string>
     <string name="key_event_action_move_left">Flytta vänster</string>
     <string name="help_article_plan_route_coordinate_input_name">Koordinat-inmatning</string>
@@ -5369,7 +5371,7 @@
     <string name="key_event_action_activity_back_pressed">Aktivitet bakåt tryckt</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Rakt till punkt-vägvisning (Båt)</string>
     <string name="key_event_action_emit_navigation_hint">Skicka navigeringshint</string>
-    <string name="remove_type_q">Är du säker på att du vill radera typen \'%1$s\'?</string>
+    <string name="remove_type_q">Radera typen \'%1$s\'?</string>
     <string name="trash_is_empty_banner_desc">Filer borttagna från OsmAnd Cloud kommer finnas tillgängliga här i %1$s dagar.</string>
     <string name="tracks_empty_folder">Tom mapp</string>
     <string name="add_new_type">Lägg till ny typ</string>
@@ -5379,9 +5381,7 @@
     <string name="add_smart_folder">Lägg till smart mapp</string>
     <string name="empty_name">Tomt namn</string>
     <string name="key_event_action_open_search_view">Öppna sökvyn</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" kommer raderas permanent. Är du säker?
-\n
-\nDenna åtgärd kan inte ångras.</string>
+    <string name="delete_trash_item_confirmation_desc">Radera \"%1$s\" permanent?</string>
     <string name="rssi_widget_desc">Visar RSSI-nivån (signalstyrka) för din externa enhet.</string>
     <string name="discard_filter_changes">Kassera filterändringar</string>
     <string name="remove_widget_first">Ta bort widgeten först</string>
@@ -5393,7 +5393,7 @@
     <string name="help_article_map_track_context_menu_name">Kontextmeny för spår</string>
     <string name="key_event_action_open_navigation_view">Öppna navigeringsvyn</string>
     <string name="add_row">Lägg till rad</string>
-    <string name="discard_changes_prompt">Är du säker på att du vill slänga ändringarna?</string>
+    <string name="discard_changes_prompt">Kassera ändringarna?</string>
     <string name="shared_string_empty_trash">Töm papperskorgen</string>
     <string name="delete_track_folder_dialog_message">Detta kommer radera mappen \'%1$s\' och alla innehållande spår (%2$s).</string>
     <string name="shared_string_delete_immediately">Radera omedelbart</string>
@@ -5406,7 +5406,7 @@
     <string name="external_input_device_title">Extern inmatningsenhet</string>
     <string name="help_article_navigation_routing_horse_routing_name">Ridvägvisning</string>
     <string name="row_number">Rad %1$s</string>
-    <string name="discard_filter_changes_prompt">Är du säker på att du vill återställa alla filter?</string>
+    <string name="discard_filter_changes_prompt">Återställa alla filter?</string>
     <string name="no_config_smart_folder_description">Smart mappar möjliggör att gruppera spår med tillämpade filter</string>
     <string name="trash_is_empty">Papperskorgen är tom</string>
     <string name="key_event_action_move_to_my_location">Flytta till min position</string>
@@ -5471,6 +5471,32 @@
     <string name="map_widget_sun_position">Solens position</string>
     <string name="duration_moment_ago">alldeles nyss</string>
     <string name="use_routing_fallback_description">Använd en ruttberäkning offline vid tillfällen då online-alternativet inte är tillgängligt.</string>
-    <string name="map_widget_sun_position_desc">Denna widget visar tid till solens upp- eller nedgång, beroende på aktuell tid.</string>
+    <string name="map_widget_sun_position_desc">Visar tid kvar till solens upp- eller nedgång.</string>
     <string name="no_activity_for_intent">Installera en app som kan utföra denna åtgärd.</string>
+    <string name="battery_optimization_banner_content">Androids batterioptimering kan orsaka luckor och andra små fel i spårinspelningar.</string>
+    <string name="battery_optimization">Batterioptimering</string>
+    <string name="dont_ask_anymore">Don\'t ask anymore</string>
+    <string name="max_sensor_heartrate">Puls, max</string>
+    <string name="shared_string_road_maps">Vägkartor</string>
+    <string name="avg_sensor_heartrate">Puls, medel</string>
+    <string name="max_sensor_cadence">Kadens, max</string>
+    <string name="avg_sensor_cadence">Kadens, medel</string>
+    <string name="max_sensor_temperature">Temperatur, max</string>
+    <string name="avg_sensor_speed">Sensorhastighet, medel</string>
+    <string name="shared_string_license">Licens</string>
+    <string name="shared_string_link">Länk</string>
+    <string name="shared_string_copyright">Upphovsrätt</string>
+    <string name="shared_string_author">Författare</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="lang_zh_hans">Förenklad kinesiska</string>
+    <string name="lang_zh_hant">Traditionell kinesiska</string>
+    <string name="battery_optimization_settings">Inställningar för batterioptimering</string>
+    <string name="shared_string_all_tracks">Alla spår</string>
+    <string name="max_sensor_bycicle_power">Cykeleffekt, max</string>
+    <string name="avg_sensor_bycicle_power">Cykeleffekt, medel</string>
+    <string name="avg_sensor_temperature">Temperatur, medel</string>
+    <string name="max_sensor_speed">Sensorhastighet, max</string>
+    <string name="battery_optimization_desc">Androids batterioptimering kan orsaka luckor och andra små fel i spårinspelningar.
+\n
+\nOm du upplever liknande problem, prova att ändra batterianvändningen till \'Obegränsad\'.</string>
 </resources>
