@@ -52,7 +52,7 @@ public class RouteCalculationProgress {
 	public List<WorldRegion> missingMaps;
 
 	private HHIteration hhIterationStep;
-	private double hhStepProgress;
+	private double hhCurrentStepProgress;
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
@@ -138,7 +138,7 @@ public class RouteCalculationProgress {
 			}
 			// 1. implement 2-3 reiterations progress
 			// 2. implement joined progress for interpoints
-			progress += hhStepProgress * hhIterationStep.approxStepLength;
+			progress += hhCurrentStepProgress * hhIterationStep.approxStepLength;
 			return (float) Math.min(progress * 100f, 99);
 		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
@@ -193,13 +193,13 @@ public class RouteCalculationProgress {
 	}
 	public void hhIteration(HHIteration step) {
 		this.hhIterationStep = step;
-		this.hhStepProgress = 0;
+		this.hhCurrentStepProgress = 0;
 	}
 
 	public void hhIterationProgress(double k) {
 		// validate 0-100% and disallow to progress back
-		if (k > 0 && k <= 1.0 && k > this.hhStepProgress) {
-			this.hhStepProgress = k;
+		if (k > 0 && k <= 1.0 && k > this.hhCurrentStepProgress) {
+			this.hhCurrentStepProgress = k;
 		}
 	}
 }
