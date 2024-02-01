@@ -2320,7 +2320,7 @@
 \n • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz 
 \n • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise
 \n</string>
-    <string name="quick_action_auto_zoom">Automatische Vergrößerung an/aus</string>
+    <string name="quick_action_auto_zoom">Automatische Vergrößerung</string>
     <string name="quick_action_auto_zoom_desc">Schaltfläche zum Ein- oder Ausschalten des geschwindigkeitsgesteuerten automatischen Zooms.</string>
     <string name="quick_action_auto_zoom_on">Automatische Vergrößerung einschalten</string>
     <string name="quick_action_auto_zoom_off">Automatische Vergrößerung ausschalten</string>
@@ -5605,4 +5605,14 @@
     <string name="battery_optimization_desc">Batterieoptimierung in Android kann Lücken und Ungenauigkeiten in aufgezeichneten Tracks verursachen.
 \n
 \nWenn Sie diese Probleme erleben, können Sie versuchen, die Batterienutzung auf \'Unbeschränkt\' zu ändern</string>
+    <string name="max_sensor_heartrate">Herzfrequenz, maximal</string>
+    <string name="avg_sensor_heartrate">Herzfrequenz, durchschnittlich</string>
+    <string name="avg_sensor_cadence">Trittfrequenz, durchschnittlich</string>
+    <string name="avg_sensor_temperature">Temperatur, durchschnittlich</string>
+    <string name="max_sensor_speed">Sensorgeschwindigkeit, maximal</string>
+    <string name="avg_sensor_speed">Sensorgeschwindigkeit, durchschnittlich</string>
+    <string name="max_sensor_cadence">Trittfrequenz, maximal</string>
+    <string name="max_sensor_bycicle_power">Leistung, maximal</string>
+    <string name="avg_sensor_bycicle_power">Leistung, durchschnittlich</string>
+    <string name="max_sensor_temperature">Temperatur, maximal</string>
 </resources>
