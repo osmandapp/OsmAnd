@@ -17,6 +17,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.*;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 
 import org.apache.commons.logging.Log;
 
@@ -225,7 +226,7 @@ public class NativeLibrary {
 		return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
 	}
 
-	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRouteDataStructure.HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
+	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
 		// if hhRoutingConfig == null - process old routing
 		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ? -2 * (float) Math.PI : c.config.initialDirection.floatValue(),
 				regions, basemap);
@@ -290,7 +291,7 @@ public class NativeLibrary {
 
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
 
-	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c, HHRouteDataStructure.HHRoutingConfig hhRoutingConfig,  float initDirection, RouteRegion[] regions, boolean basemap);
+	protected static native RouteSegmentResult[] nativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig,  float initDirection, RouteRegion[] regions, boolean basemap);
 
 	protected static native NativeTransportRoutingResult[] nativeTransportRouting(int[] coordinates, TransportRoutingConfiguration cfg,
 																				  RouteCalculationProgress progress);

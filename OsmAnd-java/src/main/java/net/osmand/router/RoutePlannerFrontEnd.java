@@ -45,7 +45,7 @@ public class RoutePlannerFrontEnd {
 //	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
-	private boolean useOnlyHHRouting = true;
+	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
 	
 
@@ -930,7 +930,8 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	private HHNetworkRouteRes runHHRoute(RoutingContext ctx, LatLon start, List<LatLon> targets) throws IOException, InterruptedException {
+	private HHNetworkRouteRes runHHRoute(RoutingContext ctx, LatLon start, List<LatLon> targets)
+			throws IOException, InterruptedException {
 		HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx);
 		HHNetworkRouteRes r = null;
 		Double dir = ctx.config.initialDirection;
