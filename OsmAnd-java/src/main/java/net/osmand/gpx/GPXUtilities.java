@@ -63,7 +63,7 @@ public class GPXUtilities {
 	public static final String ADDRESS_EXTENSION = "address";
 	public static final String HIDDEN_EXTENSION = "hidden";
 
-	private static final String GPXTPX_PREFIX = "gpxtpx:";
+	public static final String GPXTPX_PREFIX = "gpxtpx:";
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
 	public static final String OSM_PREFIX = "osm_tag_";
 	public static final String AMENITY_PREFIX = "amenity_";
@@ -1238,11 +1238,11 @@ public class GPXUtilities {
 		}
 	}
 
-	private static GPXUtilities.GPXExtensionsWriter createExtensionsWriter(final Map<String, String> pluginsExtensions) {
+	private static GPXUtilities.GPXExtensionsWriter createExtensionsWriter(final Map<String, String> extensions) {
 		return new GPXExtensionsWriter() {
 			@Override
 			public void writeExtensions(XmlSerializer serializer) {
-				for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
+				for (Entry<String, String> entry : extensions.entrySet()) {
 					try {
 						GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
 					} catch (IOException e) {
@@ -1268,7 +1268,9 @@ public class GPXUtilities {
 	}
 
 	private static void writeCopyright(XmlSerializer serializer, Copyright copyright) throws IOException {
-		writeNotNullText(serializer, "author", copyright.author);
+		if(copyright.author != null) {
+			serializer.attribute(null, "author", copyright.author);
+		}
 		writeNotNullText(serializer, "year", copyright.year);
 		writeNotNullText(serializer, "license", copyright.license);
 	}
@@ -1839,11 +1841,8 @@ public class GPXUtilities {
 	}
 
 	private static String getExtensionsSupportedTag(String tag) {
-		if(SUPPORTED_EXTENSION_TAGS.containsKey(tag)) {
-			return SUPPORTED_EXTENSION_TAGS.get(tag);
-		} else {
-			return tag;
-		}
+		String supportedTag = SUPPORTED_EXTENSION_TAGS.get(tag);
+		return supportedTag == null ? tag : supportedTag;
 	}
 
 	private static Map<String, String> parseRouteKeyAttributes(XmlPullParser parser) {
