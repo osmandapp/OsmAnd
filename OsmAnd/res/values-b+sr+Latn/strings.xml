@@ -596,11 +596,11 @@
     <string name="map_source">Izvor mape</string>
     <string name="map_tile_source">Izvor sličice mape</string>
     <string name="map_tile_source_descr">Izaberi izvor mrežnih ili zahvaćenih pločica mapa.</string>
-    <string name="show_poi_over_map">Prikaži nivo TOI iznad mape</string>
+    <string name="show_poi_over_map">TOI vidljivi na mapi</string>
     <string name="show_poi_over_map_description">Prikaži poslednji korišćeni nivo TOI.</string>
-    <string name="map_view_3d">Prostorni prikaz mape</string>
-    <string name="map_view_3d_descr">Uključi prostorni prikaz mape.</string>
-    <string name="show_view_angle">Prikaži smer gledanja</string>
+    <string name="map_view_3d">3D mapa</string>
+    <string name="map_view_3d_descr">Uključi 3D</string>
+    <string name="show_view_angle">Prikaži smer kretanja</string>
     <string name="ChooseCountry">Izaberi državu</string>
     <string name="choose_city">Izaberi grad ili poštanski broj</string>
     <string name="choose_street">Izaberi ulicu</string>
@@ -2206,7 +2206,7 @@
     <string name="distance_indication_descr">Izaberi način prikaza rastojanja do dejstvenih oznaka.</string>
     <string name="shared_string_do_not_use">Ne koristi</string>
     <string name="shared_string_yes">Da</string>
-    <string name="shared_string_cancel">Otkaži</string>
+    <string name="shared_string_cancel">Prekid</string>
     <string name="shared_string_ok">U redu</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="general_settings_2">Opšte podešavanje</string>
@@ -2637,7 +2637,7 @@
     <string name="quick_action_item">Brze radnje</string>
     <string name="radius_ruler_item">Lenjir prečnika</string>
     <string name="measure_distance_item">Izmeri udaljenost</string>
-    <string name="travel_item">Putovanje (Vikivuajaž i Vikipedija)</string>
+    <string name="travel_item">Putovanje (Wikivoyage i Vikipedija)</string>
     <string name="map_markers_item">Oznake na mapi</string>
     <string name="favorites_item">Omiljena mesta</string>
     <string name="subscription_osmandlive_item">Članarina - OsmAnd uživo</string>
@@ -2928,16 +2928,16 @@
     <string name="routing_attr_length_name">Ograničenje dužine</string>
     <string name="shared_string_bearing">Pravac</string>
     <string name="item_deleted">%1$s obrisano</string>
-    <string name="speed_cameras_restart_descr">Ponovo pokrenite program radi brisanja svih podataka prekršajnih kamera.</string>
-    <string name="shared_string_uninstall_and_restart">Ukloni i ponovo pokreni</string>
+    <string name="speed_cameras_restart_descr">Ponovo pokreni program radi brisanja prekršajnih kamera.</string>
+    <string name="shared_string_uninstall_and_restart">Deinstaliraj i restartuj</string>
     <string name="speed_cameras_removed_descr">Ovaj uređaj nema prekršajne kamere.</string>
     <string name="app_mode_inline_skates">Koturaljke</string>
     <string name="quick_action_remove_next_destination">Obriši sledeću odredišnu tačku</string>
     <string name="use_volume_buttons_as_zoom_descr">Upravljaj stepenom uveličanja mape pomoću dugmića za jačinu zvuka na uređaju.</string>
     <string name="use_volume_buttons_as_zoom">Dugmići za jačinu zvuka za uveličanje mape</string>
-    <string name="please_provide_point_name_error">Molimo odredite ime tačke</string>
+    <string name="please_provide_point_name_error">Navedi naziv tačke</string>
     <string name="quick_action_remove_next_destination_descr">Uklanja trenutnu odredišnu tačku. Ako je ona i završna tačka, navođenje će se zaustaviti.</string>
-    <string name="search_download_wikipedia_maps">Preuzmite mape Vikipedije</string>
+    <string name="search_download_wikipedia_maps">Preuzmi Wikipedia mape</string>
     <string name="plugin_wikipedia_description">Podaci o tačkama zanimanja potražite na Vikipediji, džepnom vanmrežnom vodiču koji ima članke o mestima i odredištima.</string>
     <string name="add_hidden_group_info">Dodatu tačku možete naći u „%s“. Otkrij sakrivenu označenu grupu da je prikaži na mapi.</string>
     <string name="app_mode_enduro_motorcycle">Motocikl za loše puteve</string>
@@ -3059,9 +3059,9 @@
     <string name="use_live_routing">Podaci OsmAnda uživo</string>
     <string name="complex_routing_descr">Dvofazno usmeravanje navođenja auta.</string>
     <string name="use_fast_recalculation_desc">Preračunava samo početni deo puta, korisno za duga putovanja.</string>
-    <string name="use_native_pt">Razvoj matičnog javnog prevoza</string>
+    <string name="use_native_pt">Razvoj lokalnog javnog prevoza</string>
     <string name="use_native_pt_desc">Prebacite se na proračun navođenja javnog prevoza Java (bezbedan)</string>
-    <string name="perform_oauth_authorization_description">Prijavite se pomoću OAuth -a radi korišćenja mogućnosti uređivanja Openstritmapa</string>
+    <string name="perform_oauth_authorization_description">Prijavi se pomoću OAuth -a radi korišćenja mogućnosti uređivanja OpenStritMapa</string>
     <string name="perform_oauth_authorization">Prijavite se preko OAuth-a</string>
     <string name="clear_osm_token">Obriši OpenStreetMap OAuth token</string>
     <string name="osm_edit_logout_success">Odjavljen</string>
@@ -3219,7 +3219,7 @@
     <string name="start_editing_card_image_text">Besplatni svetski turistički vodič koji svako može da uređuje.</string>
     <string name="download_file">Preuzmi datoteku</string>
     <string name="update_is_available">Nadogradnja je dostupna</string>
-    <string name="travel_card_download_descr">Preuzmite turističke vodiče Vikivojažaradi čitanja članaka o mestima po celom svetu bez veze sa internetom.</string>
+    <string name="travel_card_download_descr">Preuzmi turističke vodiče Wikivoyage čitanja članaka o mestima po celom svetu bez interneta.</string>
     <string name="travel_card_update_descr">Dostupni su novi podaci Vikibojaža, osvežite ih radi uživanja.</string>
     <string name="paid_plugin">Plaćeni dodatak</string>
     <string name="paid_app">Plaćeni program</string>
@@ -3544,9 +3544,9 @@
 \nZemaljski podaci (između 70° severno i 70° južno) se zasnovani na SRTM i ASTER. 
 \n 
 \nViše podataka na %1$s.</string>
-    <string name="srtm_plugin_name">Izohipse</string>
+    <string name="srtm_plugin_name">Topografija</string>
     <string name="osmand_srtm_short_description_80_chars">Dodatak OsmAnd-a za linije izohipsi bez interneta</string>
-    <string name="srtm_paid_version_title">Dodatak za izohipse</string>
+    <string name="srtm_paid_version_title">Topografski dodatak</string>
     <string name="record_plugin_description">Snimite svoja putovanja ili vežbanje, i raščlanite podatke po brzini, sakupljenom spuštanju i penjanju, proseku razlike visine, itd. Snimljeni Rute mogu biti pohranjeni, podeljeni sa prijateljima, uređeni i obrađeni. 
 \n 
 \nDalje čitanje na %1$s.</string>
@@ -4192,7 +4192,7 @@
     <string name="backup_restore_data_descr">Vratite podatke na uređaj pomoću rezervnih kopija na mreži.</string>
     <string name="backup_data">Sačuvaj rezervu podataka</string>
     <string name="backup_delete_all_data_descr">Svi podaci na OsmAnd oblaku će biti izbrisani. Lokalne verzije ostaće netaknute.</string>
-    <string name="backup_no_internet_descr">Proverite internet vezu i preuzmite ponovo.</string>
+    <string name="backup_no_internet_descr">Proveri internet i preuzmi ponovo.</string>
     <string name="backup_view_conflicts">Pogledajte sukobe</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Izbegavati zone niskih emisija</string>
     <string name="route_line_use_map_style_color">Koristite zadanu boju za stil mape (%1$s).</string>
@@ -4221,7 +4221,7 @@
     <string name="coordinates_widget_desc">Prikazuje zemljopisne koordinate trenutnog zemaljskog lokacija.</string>
     <string name="track_attach_to_the_roads_descr">Staza će biti prikačena za ruta pomoću offline mapa, oblik staze će biti promenjen.</string>
     <string name="get_altitude_data">Dobavi podatke o nadmorskoj visini</string>
-    <string name="turn_on_public_transport_description">Uključi da vIdi rute javnog prevoza na mapi.</string>
+    <string name="turn_on_public_transport_description">Uključi prikaz linija javnog prevoza.</string>
     <string name="configure_screen_widgets_descr">Izaberi stranu ekrana radi dodavanja ili preuređenja widget.</string>
     <string name="osm_carto_render_descr">Slično načinu prikaza mapa OpenStritMapa koji se koristi na glavnim stranicama OSM-a</string>
     <string name="speed_mode">Način rada brzine</string>
@@ -4268,7 +4268,7 @@
 \nNećete moći da vratite izbrisane podatke.</string>
     <string name="shared_string_logout">Odjava</string>
     <string name="download_server_version">Preuzmi server verziju</string>
-    <string name="upload_local_version">Otpremi lokalnu verziju</string>
+    <string name="upload_local_version">Preuzeti lokalnu verziju</string>
     <string name="make_backup_descr">Na ovom uređaju ima mnogo promena, napravite rezervnu kopiju ovih podataka kako ih ne biste izgubili.</string>
     <string name="osmand_cloud_authorize_descr">Nikada ne gubite podatke, pravite rezervne kopije i vraćajte sve informacije bez problema.</string>
     <string name="tts_description">Pretvaranje teksta u govor (TTS) može izgovoriti sve vrste uputstava: nazive ulica, uputstva za skretanje, imena POI itd.</string>
@@ -4332,7 +4332,7 @@
     <string name="icon_group_nautical">More</string>
     <string name="exit_pan_mode_descr">Kliknite Izaberi radi napuštanja načina rada pomeranja</string>
     <string name="search_title">Pretraga: %1$s</string>
-    <string name="sample_wikivoyage">Primer Vikiputovanja</string>
+    <string name="sample_wikivoyage">Primer Wikivoyage</string>
     <string name="no_items_of_type_message">Nemaš ni jednu stavku ove vrste</string>
     <string name="amz_manage_subscription_descr">Upravljaj svojom pretplatom koristeći program Amazon ili web stranu Amazona.</string>
     <string name="map_updates_are_unavailable_yet">Nadogradnje mapa još uvek nisu dostupne. :=(</string>
@@ -4586,14 +4586,14 @@
     <string name="you_can_get_feature_as_part_of_pattern">Uzmi „%1$s“ kao deo: %2$s plana. Uporedi planove:</string>
     <string name="purchases_feature_desc_osmand_cloud">Nabavite OsmAnd oblak za skladištenje svih podataka OsmAnd -a na mreži. Zaboravite na gubitak podataka nakon ponovne instalacije, napravite rezervne kopije i vratite sve podatke bez problema.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Obezbedite pristup češćem ažuriranju mapa, Izaberi između: ažuriranja po satu, dnevno ili nedeljno. Ažuriranja se preuzimaju postepeno, samo za promenjeno područje.</string>
-    <string name="offline_wikivoyage">bez interneta Vikivojaž</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="purchases_feature_desc_unlimited_map_download">Nabavite neograničena preuzimanja oflajn mapa za sve kontinente i regione.</string>
     <string name="send_logcat_log">Pošalji logkat log</string>
     <string name="delete_version_history">Obriši istoriju verzije</string>
     <string name="backup_version_history">Istorija verzija</string>
     <string name="choose_what_to_restore">Izaberi šta želite da vratite.</string>
     <string name="restore_from_osmand_cloud">Vrati sa OsmAnd oblaka</string>
-    <string name="purchases_feature_desc_wikivoyage">Istražite Vikiputovanje bez interneta. Članci su podeljeni po zemljama i regionima i dostupni na svim jezicima.</string>
+    <string name="purchases_feature_desc_wikivoyage">Istražite offline Wikivoyage. Članci su podeljeni po zemljama i regionima i dostupni na svim jezicima.</string>
     <string name="backup_pause_all">Pauziraj sve</string>
     <string name="local_backup_descr">Napravite rezervnu kopiju ili vratite podatke iz lokalne datoteke.</string>
     <string name="local_backup">Lokalna rezervna kopija</string>
@@ -4669,7 +4669,7 @@
     <string name="backup_version_history_removed">Sva izdanja istorije su uklonjena.</string>
     <string name="backup_deleted_all_data_descr">Svi Vaši podaci su uspešno izbrisani sa oblaka OsmAnda.</string>
     <string name="backup_error_gzip_only_supported_upload">Datoteku treba poslati u .gzip formatu</string>
-    <string name="wikipedia_and_wikivoyage_offline">Vikipedia i Vikivojaž bez interneta</string>
+    <string name="wikipedia_and_wikivoyage_offline">Vikipedia i Wikivoyage offline</string>
     <string name="delete_history_items_descr">Obrisati odabrane stavke iz istorijata?</string>
     <string name="altitude_widget_desc">Prikazuje visinu iznad nivoa mora trenutne geolokacije.</string>
     <string name="max_speed_widget_desc">Prikazuje ograničenje brzine puta kojim se trenutno vozi.</string>
@@ -4739,7 +4739,7 @@
     <string name="osmand_cloud_delete_account_confirmation">Da li izbrisati profil?</string>
     <string name="external_device_characteristic_pulse_rate">Brzina otkucaja srca</string>
     <string name="external_device_details_battery">Baterija</string>
-    <string name="app_mode_climbing">Pentranje</string>
+    <string name="app_mode_climbing">Alpinizam</string>
     <string name="cloud_version_confirm_delete">Da li izbrisati „%1$s“ iz Oblaka OsmAnda?</string>
     <string name="shared_string_contours">Linije obrisa</string>
     <string name="temperature_widget_desc">Prikazuje toplotu na trenutnom središtu mape.</string>
@@ -4809,7 +4809,7 @@
     <string name="shared_string_avoid">Izbegavati</string>
     <string name="external_device_details_distance">Rastojanje</string>
     <string name="external_device_details_disconnect">Prekini vezu</string>
-    <string name="generate_hillshade_from_3d_maps">Obrazuj okvirne mape senčenih padina iz prostornih, 3D mapa</string>
+    <string name="generate_hillshade_from_3d_maps">Kreiranje senčenja reljefa na temelju 3D mape</string>
     <string name="no_visible_tracks_description">Izaberi tragove za prikaz na mapi.</string>
     <string name="quick_action_precipitation_layer">Prekidač za prikaz ili skrivanje slojeva padavina na mapi.</string>
     <string name="shared_string_next_sunset">Sledeći zalazak Sunca</string>
@@ -4832,7 +4832,7 @@
     <string name="mtb_imba">IMBA</string>
     <string name="bluetooth_found_title">Pronađen: %d</string>
     <string name="ant_plus_pair_new_sensor_ble">Upari senzor Blutut LE</string>
-    <string name="free_maps_updates">Slobodno ažuriranje (hitnost)</string>
+    <string name="free_maps_updates">Slobodno ažuriranje (hitno)</string>
     <string name="rendering_attr_depthContourWidth_description">Širina linija obrisa dubine</string>
     <string name="rendering_attr_alpineHiking_description">Razvrstavanje po težini vrsta putanja.</string>
     <string name="simulate_location_by_gpx">Simuliraj lokaciju po GPXu</string>
@@ -4851,7 +4851,7 @@
     <string name="rendering_attr_alpineHiking_name">Razvrstavanje po težini</string>
     <string name="rssi_widget_desc">Prikazuj stepen RSSI tvog spoljnjeg uređaja.</string>
     <string name="ant_plus_pair_bluetooth_prompt">Možete upariti senzore Blututa LE i ANT+ sa Osmandom.</string>
-    <string name="camera_app">Program kamere</string>
+    <string name="camera_app">Kamera</string>
     <string name="no_visible_tracks">Nema ruta na mapi</string>
     <string name="recently_visible">Nedavno vidljiv %1$s</string>
     <string name="change_appearance">Izmeni izgled</string>
@@ -5299,16 +5299,16 @@
     <string name="external_device_details_connect">Poveži</string>
     <string name="bluetooth_not_supported">Blutut nije podržan</string>
     <string name="ant_plus_nothing_found_text">Nisam uspeo da pronađem ni jedan senzor</string>
-    <string name="ant_plus_bluetooth_off">Blutut je isključen</string>
-    <string name="ant_plus_bluetooth_off_description">Uključi pretragu Blututa i uparite senzore.</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth je isključen</string>
+    <string name="ant_plus_bluetooth_off_description">Uključi Bluetooth i upari senzore.</string>
     <string name="ant_plus_help_title">Ne znak kakvu vrstu senzora imam</string>
     <string name="ant_plus_searching">Pretražujem</string>
     <string name="ant_plus_open_settings">Otvori podešavanja</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Upari senzor ANT+</string>
-    <string name="clear_online_cache">Očisti mrežni zahvat</string>
-    <string name="offline_cache">Vanmrežni zahvat</string>
-    <string name="shared_string_alt_name">Zamensko ime</string>
-    <string name="generate_slope_from_3d_maps">Obrazuj okvire mapa nagiba iz prostornih, 3D mapa</string>
+    <string name="clear_online_cache">Očisti online keš</string>
+    <string name="offline_cache">Offline keš</string>
+    <string name="shared_string_alt_name">Alternativno ime</string>
+    <string name="generate_slope_from_3d_maps">Stvaranje rasterskih mapa nagiba na temelju 3D mapa</string>
     <string name="enable_3d_maps">Omogući prostorne, 3D-mape</string>
     <string name="selected_value">Odabrana vrednost</string>
     <string name="sort_distance_ascending">Najpre najkraće rastojanje</string>
@@ -5592,4 +5592,11 @@
 \n• Promena nadmorske visine i procena nagiba je prerađena
 \n
 \n</string>
+    <string name="battery_optimization_banner_content">Optimizacija baterije može uzrokovati praznine i netačnosti u snimljenim rutama.</string>
+    <string name="dont_ask_anymore">Ne pitati više</string>
+    <string name="battery_optimization_settings">Podešavanje optimizacija baterije</string>
+    <string name="battery_optimization_desc">Optimizacija baterije može uzrokovati praznine i netačnosti u snimljenim rutama.
+\n
+\nAko imaš problem, možeš pokušati promeniti potrošnju baterije na \'Neograničeno\'.</string>
+    <string name="battery_optimization">Optimizacija baterije</string>
 </resources>
