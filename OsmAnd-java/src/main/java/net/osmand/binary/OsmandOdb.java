@@ -67814,17 +67814,17 @@ public final class OsmandOdb {
        */
       int getPartialInd();
 
-      // repeated int32 tagValueIds = 12;
+      // repeated int32 tagValueIds = 12 [packed = true];
       /**
-       * <code>repeated int32 tagValueIds = 12;</code>
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
        */
       java.util.List<java.lang.Integer> getTagValueIdsList();
       /**
-       * <code>repeated int32 tagValueIds = 12;</code>
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
        */
       int getTagValueIdsCount();
       /**
-       * <code>repeated int32 tagValueIds = 12;</code>
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
        */
       int getTagValueIds(int index);
     }
@@ -68252,28 +68252,29 @@ public final class OsmandOdb {
         return partialInd_;
       }
 
-      // repeated int32 tagValueIds = 12;
+      // repeated int32 tagValueIds = 12 [packed = true];
       public static final int TAGVALUEIDS_FIELD_NUMBER = 12;
       private java.util.List<java.lang.Integer> tagValueIds_;
       /**
-       * <code>repeated int32 tagValueIds = 12;</code>
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
        */
       public java.util.List<java.lang.Integer>
           getTagValueIdsList() {
         return tagValueIds_;
       }
       /**
-       * <code>repeated int32 tagValueIds = 12;</code>
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
        */
       public int getTagValueIdsCount() {
         return tagValueIds_.size();
       }
       /**
-       * <code>repeated int32 tagValueIds = 12;</code>
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
        */
       public int getTagValueIds(int index) {
         return tagValueIds_.get(index);
       }
+      private int tagValueIdsMemoizedSerializedSize = -1;
 
       private void initFields() {
         id_ = 0;
@@ -68358,8 +68359,12 @@ public final class OsmandOdb {
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           output.writeInt32(11, partialInd_);
         }
+        if (getTagValueIdsList().size() > 0) {
+          output.writeRawVarint32(98);
+          output.writeRawVarint32(tagValueIdsMemoizedSerializedSize);
+        }
         for (int i = 0; i < tagValueIds_.size(); i++) {
-          output.writeInt32(12, tagValueIds_.get(i));
+          output.writeInt32NoTag(tagValueIds_.get(i));
         }
         getUnknownFields().writeTo(output);
       }
@@ -68426,7 +68431,12 @@ public final class OsmandOdb {
               .computeInt32SizeNoTag(tagValueIds_.get(i));
           }
           size += dataSize;
-          size += 1 * getTagValueIdsList().size();
+          if (!getTagValueIdsList().isEmpty()) {
+            size += 1;
+            size += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(dataSize);
+          }
+          tagValueIdsMemoizedSerializedSize = dataSize;
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -69267,7 +69277,7 @@ public final class OsmandOdb {
           return this;
         }
 
-        // repeated int32 tagValueIds = 12;
+        // repeated int32 tagValueIds = 12 [packed = true];
         private java.util.List<java.lang.Integer> tagValueIds_ = java.util.Collections.emptyList();
         private void ensureTagValueIdsIsMutable() {
           if (!((bitField0_ & 0x00000800) == 0x00000800)) {
@@ -69276,26 +69286,26 @@ public final class OsmandOdb {
            }
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public java.util.List<java.lang.Integer>
             getTagValueIdsList() {
           return java.util.Collections.unmodifiableList(tagValueIds_);
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public int getTagValueIdsCount() {
           return tagValueIds_.size();
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public int getTagValueIds(int index) {
           return tagValueIds_.get(index);
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public Builder setTagValueIds(
             int index, int value) {
@@ -69305,7 +69315,7 @@ public final class OsmandOdb {
           return this;
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public Builder addTagValueIds(int value) {
           ensureTagValueIdsIsMutable();
@@ -69314,7 +69324,7 @@ public final class OsmandOdb {
           return this;
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public Builder addAllTagValueIds(
             java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -69324,7 +69334,7 @@ public final class OsmandOdb {
           return this;
         }
         /**
-         * <code>repeated int32 tagValueIds = 12;</code>
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
          */
         public Builder clearTagValueIds() {
           tagValueIds_ = java.util.Collections.emptyList();
@@ -74255,7 +74265,7 @@ public final class OsmandOdb {
       "ataObjects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\022" +
       "1\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.Restr" +
       "ictionData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd" +
-      ".OBF.StringTable\"\225\010\n\024OsmAndHHRoutingInde" +
+      ".OBF.StringTable\"\231\010\n\024OsmAndHHRoutingInde" +
       "x\022\017\n\007edition\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rp" +
       "rofileParams\030\003 \003(\t\022/\n\016tagValuesTable\030\004 \001" +
       "(\0132\027.OsmAnd.OBF.StringTable\022E\n\npointBoxe" +
@@ -74267,24 +74277,24 @@ public final class OsmandOdb {
       "\016\n\006bottom\030\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd." +
       "OBF.OsmAndHHRoutingIndex.HHRoutePointsBo" +
       "x\022D\n\006points\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHR" +
-      "outingIndex.HHRouteNetworkPoint\032\362\001\n\023HHRo" +
+      "outingIndex.HHRouteNetworkPoint\032\366\001\n\023HHRo" +
       "uteNetworkPoint\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022" +
       "\n\n\002dy\030\003 \002(\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030" +
       "\005 \002(\003\022\031\n\021roadStartEndIndex\030\006 \002(\005\022\021\n\tclus" +
       "terId\030\007 \001(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdual",
       "ClusterId\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\np" +
-      "artialInd\030\013 \001(\005\022\023\n\013tagValueIds\030\014 \003(\005\032\360\001\n" +
-      "\024HHRouteBlockSegments\022\024\n\014idRangeStart\030\001 " +
-      "\002(\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\tprofileId\030" +
-      "\003 \001(\005\022J\n\013innerBlocks\030\006 \003(\01325.OsmAnd.OBF." +
-      "OsmAndHHRoutingIndex.HHRouteBlockSegment" +
-      "s\022L\n\rpointSegments\030\004 \003(\01325.OsmAnd.OBF.Os" +
-      "mAndHHRoutingIndex.HHRoutePointSegments\032" +
-      "?\n\024HHRoutePointSegments\022\022\n\nsegmentsIn\030\002 " +
-      "\002(\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013OsmAndOwner\022",
-      "\014\n\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013descr" +
-      "iption\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021net.os" +
-      "mand.binaryB\tOsmandOdb"
+      "artialInd\030\013 \001(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001" +
+      "\032\360\001\n\024HHRouteBlockSegments\022\024\n\014idRangeStar" +
+      "t\030\001 \002(\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\tprofil" +
+      "eId\030\003 \001(\005\022J\n\013innerBlocks\030\006 \003(\01325.OsmAnd." +
+      "OBF.OsmAndHHRoutingIndex.HHRouteBlockSeg" +
+      "ments\022L\n\rpointSegments\030\004 \003(\01325.OsmAnd.OB" +
+      "F.OsmAndHHRoutingIndex.HHRoutePointSegme" +
+      "nts\032?\n\024HHRoutePointSegments\022\022\n\nsegmentsI" +
+      "n\030\002 \002(\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013OsmAndOw",
+      "ner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013d" +
+      "escription\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021ne" +
+      "t.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

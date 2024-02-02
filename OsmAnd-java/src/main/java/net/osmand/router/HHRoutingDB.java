@@ -58,7 +58,7 @@ public class HHRoutingDB {
 		this.file = f;
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
-		tagValuesDB = checkColumnExist(st, "points", "tagValues");
+		tagValuesDB = checkColumnExist(st, "tagValues", "points");
 		String tagValuesSel = tagValuesDB ? ", tagValues " : ""; 
 		st.execute("CREATE TABLE IF NOT EXISTS profiles(profile, id, params)");
 		if (!compactDB) {
