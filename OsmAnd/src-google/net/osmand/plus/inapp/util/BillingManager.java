@@ -13,7 +13,6 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClient.BillingResponseCode;
 import com.android.billingclient.api.BillingClient.FeatureType;
 import com.android.billingclient.api.BillingClient.ProductType;
-import com.android.billingclient.api.BillingClient.SkuType;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingFlowParams.SubscriptionUpdateParams;
@@ -153,9 +152,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 	/**
 	 * Start a purchase or subscription replace flow
 	 */
-	public void initiatePurchaseFlow(Activity activity, ProductDetails productDetails, String oldSku, String purchaseToken, int selectedOfferIndex) {
+	public void initiatePurchaseFlow(Activity activity, ProductDetails productDetails, String oldProductId, String purchaseToken, int selectedOfferIndex) {
 		Runnable purchaseFlowRequest = () -> {
-			LOG.debug("Launching in-app purchase flow. Replace old SKU? " + (oldSku != null && purchaseToken != null));
+			LOG.debug("Launching in-app purchase flow. Replace old ProductId? " + (oldProductId != null && purchaseToken != null));
 			String offerToken = null;
 			List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails
 					.getSubscriptionOfferDetails();
@@ -177,9 +176,9 @@ public class BillingManager implements PurchasesUpdatedListener {
 			if (!TextUtils.isEmpty(mObfuscatedProfileId)) {
 				billingFlowParams.setObfuscatedProfileId(mObfuscatedProfileId);
 			}
-			if (oldSku != null && purchaseToken != null) {
+			if (oldProductId != null && purchaseToken != null) {
 				SubscriptionUpdateParams.Builder updateParamsBuilder = SubscriptionUpdateParams.newBuilder();
-				updateParamsBuilder.setOldSkuPurchaseToken(purchaseToken);
+				updateParamsBuilder.setOldPurchaseToken(purchaseToken);
 				billingFlowParams.setSubscriptionUpdateParams(updateParamsBuilder.build());
 			}
 			mBillingClient.launchBillingFlow(activity, billingFlowParams.build());
@@ -204,17 +203,17 @@ public class BillingManager implements PurchasesUpdatedListener {
 		}
 	}
 
-	public void queryProductDetailsAsync(@SkuType String itemType, List<String> skuList,
+	public void queryProductDetailsAsync(@ProductType String itemType, List<String> productIdList,
 	                                     ProductDetailsResponseListener listener) {
 		// Creating a runnable from the request to use it inside our connection retry policy below
 		Runnable queryRequest = () -> {
 			// Query the purchase async
 
 			ArrayList<QueryProductDetailsParams.Product> products = new ArrayList<>();
-			for (String sku : skuList) {
+			for (String productId : productIdList) {
 				QueryProductDetailsParams.Product pr = QueryProductDetailsParams.Product.newBuilder()
 						.setProductType(itemType)
-						.setProductId(sku).build();
+						.setProductId(productId).build();
 				products.add(pr);
 			}
 			QueryProductDetailsParams params = QueryProductDetailsParams.newBuilder()

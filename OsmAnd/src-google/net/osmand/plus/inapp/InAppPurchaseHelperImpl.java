@@ -145,13 +145,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						}
 						skuSubscriptions.addAll(subscriptionStateMap.keySet());
 
-						BillingManager billingManager1 = getBillingManager();
+						BillingManager manager = getBillingManager();
 						// Have we been disposed of in the meantime? If so, quit.
-						if (billingManager1 == null) {
+						if (manager == null) {
 							stop(true);
 							return;
 						}
-						billingManager1.queryProductDetailsAsync(BillingClient.ProductType.SUBS, skuSubscriptions, new ProductDetailsResponseListener() {
+						manager.queryProductDetailsAsync(BillingClient.ProductType.SUBS, skuSubscriptions, new ProductDetailsResponseListener() {
 							@Override
 							public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsListSubs) {
 								// Is it a failure?
