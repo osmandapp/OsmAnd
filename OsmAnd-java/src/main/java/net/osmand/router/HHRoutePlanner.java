@@ -268,12 +268,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		RoutePlannerFrontEnd planner = new RoutePlannerFrontEnd();
 		int startReiterate = -1, endReiterate = -1;
 		boolean found = false;
-		progress.hhIterationProgress(0.00);
+		progress.hhIterationProgress(0.00); // %
 		RouteSegmentPoint startPnt = planner.findRouteSegment(start.getLatitude(), start.getLongitude(), hctx.rctx, null);
 		if (startPnt == null) {
 			return;
 		}
-		progress.hhIterationProgress(0.25);
+		progress.hhIterationProgress(0.25); // %
 		RouteSegmentPoint endPnt = planner.findRouteSegment(end.getLatitude(), end.getLongitude(), hctx.rctx, null);
 		if (endPnt == null) {
 			return;
@@ -311,7 +311,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.rctx.config.initialDirection = hctx.config.INITIAL_DIRECTION;
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentEnd(), endP.getSegmentStart()), null);
 			hctx.boundaries.put(calcRPId(endP, endP.getSegmentStart(), endP.getSegmentEnd()), null);
-			progress.hhIterationProgress(0.50);
+			progress.hhIterationProgress(0.50); // %
 			initStart(hctx, startP, false, stPoints);
 			hctx.rctx.config.initialDirection = prev;
 			if (stPoints.isEmpty()) {
@@ -326,7 +326,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			if (stPoints.containsKey(PNT_SHORT_ROUTE_START_END)) {
 				endPoints.put(PNT_SHORT_ROUTE_START_END, stPoints.get(PNT_SHORT_ROUTE_START_END));
 			}
-			progress.hhIterationProgress(0.75);
+			progress.hhIterationProgress(0.75); // %
 			initStart(hctx, endP, true, endPoints);
 			if (endPoints.isEmpty()) {
 				System.out.println("Reiterate with next end point: " + endP);
