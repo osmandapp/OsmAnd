@@ -12,17 +12,14 @@ import android.text.Html;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.utils.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
+import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -31,6 +28,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -41,6 +39,9 @@ import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -155,6 +156,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return routerNames;
 	}
 
+	@Nullable
 	private Drawable getIconForFile(String path, Map<String, String> fileNames) {
 		for (Map.Entry<String, String> entry : fileNames.entrySet()) {
 			String value = entry.getValue();
@@ -435,9 +437,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public void loadResources() {
 		File pluginResDir = getPluginResDir();
 		if (pluginResDir.exists() && pluginResDir.isDirectory()) {
-			File[] files = pluginResDir.listFiles();
-			for (File resFile : files) {
-				String path = resFile.getAbsolutePath();
+			List<File> files = FileUtils.collectDirFiles(pluginResDir);
+			for (File file : files) {
+				String path = file.getAbsolutePath();
 				if (icon == null) {
 					icon = getIconForFile(path, iconNames);
 				}
