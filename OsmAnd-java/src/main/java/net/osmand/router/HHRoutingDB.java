@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.TreeMap;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -42,6 +43,7 @@ public class HHRoutingDB {
 	protected String routingProfile = "";
 	protected TIntObjectHashMap<String> routingProfiles = new TIntObjectHashMap<String>();
 	protected boolean compactDB;
+	private boolean tagValuesDB;
 	
 	protected static Comparator<NetworkDBPoint> indexComparator = new Comparator<NetworkDBPoint>() {
 
@@ -56,10 +58,12 @@ public class HHRoutingDB {
 		this.file = f;
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
+		tagValuesDB = checkColumnExist(st, "points", "tagValues");
+		String tagValuesSel = tagValuesDB ? ", tagValues " : ""; 
 		st.execute("CREATE TABLE IF NOT EXISTS profiles(profile, id, params)");
 		if (!compactDB) {
 			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, clusterId, fileDbId, dualIdPoint, dualClusterId, "
-					+ "chInd, roadId, start, end, sx31, sy31, ex31, ey31, tagValues, PRIMARY KEY(idPoint))");
+					+ "chInd, roadId, start, end, sx31, sy31, ex31, ey31" + tagValuesSel + ", PRIMARY KEY(idPoint))");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS pointsUnique on points(pointGeoId)");
 			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut, profile)");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS segmentsUnique on segments(idPoint, idConnPoint, profile)");
@@ -153,9 +157,21 @@ public class HHRoutingDB {
 			pnt.startY = rs.getInt(p++);
 			pnt.endX = rs.getInt(p++);
 			pnt.endY = rs.getInt(p++);
-			// to implement
-//			String string = rs.getString(p++);
-//			pnt.tagValues = string;
+			if (tagValuesDB) {
+				String tagValues;
+				if (compactDB) {
+					tagValues = Algorithms.gzipToString(rs.getBytes(p++));
+				} else {
+					tagValues = rs.getString(p++);
+				}
+				String[] arr = Algorithms.deserializeStringArray(tagValues);
+				if (arr != null) {
+					pnt.tagValues = new TreeMap<String, String>();
+					for (int i = 0; i < arr.length; i += 2) {
+						pnt.tagValues.put(arr[i], arr[i + 1]);
+					}
+				}
+			}
 			mp.put(pnt.index, pnt);
 			if (mp.contains(dualIdPoint)) {
 				pnt.dualPoint = mp.get(dualIdPoint);
