@@ -3987,4 +3987,12 @@
     <string name="simulate_location_by_gpx">GPX의 위치 시뮬레이션</string>
     <string name="ant_plus_bluetooth_off">Bluetooth는 꺼집니다</string>
     <string name="camera_app">카메라 앱</string>
+    <string name="today">오늘</string>
+    <string name="save_track_min_distance">최소 변위</string>
+    <string name="save_track_precision">Logging 최소 정확도</string>
+    <string name="save_track_min_speed">빠른 속도</string>
+    <string name="save_track_min_distance_descr">필터: 포인트에서 최소 거리를 설정하여 새로운 것을 로그인하십시오.</string>
+    <string name="coordinate_input">좌표 입력</string>
+    <string name="monitoring_min_accuracy">최소 정확도</string>
+    <string name="monitoring_min_distance">공급 능력</string>
 </resources>
