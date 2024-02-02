@@ -25,14 +25,14 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 
 	private static final Log log = PlatformUtil.getLog(IndexItem.class);
 
-	String description;
-	String fileName;
-	String size;
-	long timestamp;
-	long contentSize;
-	long containerSize;
-	boolean extra;
-	boolean hidden;
+	protected String description;
+	protected String fileName;
+	protected String size;
+	protected long timestamp;
+	protected long contentSize;
+	protected long containerSize;
+	protected boolean extra;
+	protected boolean hidden;
 
 	// Update information
 	boolean outdated;
@@ -111,11 +111,11 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public long getTimestamp() {
 		return timestamp;
 	}
-	
-	public long getSize(){
+
+	public long getSize() {
 		return containerSize;
 	}
-	
+
 	public long getContentSize() {
 		return contentSize;
 	}
@@ -125,11 +125,11 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 
 	public double getContentSizeMB() {
-		return ((double)contentSize) / (1 << 20);
+		return ((double) contentSize) / (1 << 20);
 	}
-	
+
 	public double getArchiveSizeMB() {
-		return ((double)containerSize) / (1 << 20);
+		return ((double) containerSize) / (1 << 20);
 	}
 
 	@Override
@@ -164,8 +164,8 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			entry.urlToDownload = entry.type.getBaseUrl(ctx, fileName) + entry.type.getUrlSuffix(ctx);
 			entry.zipStream = type.isZipStream();
 			entry.unzipFolder = type.isZipFolder();
-			entry.dateModified = timestamp; 
-			entry.sizeMB = contentSize / (1024f*1024f);
+			entry.dateModified = timestamp;
+			entry.sizeMB = contentSize / (1024f * 1024f);
 			entry.targetFile = getTargetFile(ctx);
 		}
 		return entry;
@@ -202,7 +202,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public File getBackupFile(OsmandApplication ctx) {
 		return new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), getTargetFile(ctx).getName());
 	}
-	
+
 	@Override
 	public int compareTo(@NonNull IndexItem another) {
 		return getFileName().compareTo(another.getFileName());
@@ -211,7 +211,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
 		return remote ? getRemoteDate(dateFormat) : getLocalDate(dateFormat);
 	}
-	
+
 	public String getRemoteDate(DateFormat dateFormat) {
 		if (timestamp <= 0) {
 			return "";
@@ -225,7 +225,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return dateFormat.format(new Date(localTimestamp));
 	}
-	
+
 	public boolean isOutdated() {
 		return outdated
 				&& getType() != DownloadActivityType.HILLSHADE_FILE
@@ -237,7 +237,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	public void setOutdated(boolean outdated) {
 		this.outdated = outdated;
 	}
-	
+
 	public void setDownloaded(boolean downloaded) {
 		this.downloaded = downloaded;
 	}
@@ -293,24 +293,25 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		}
 		return 0;
 	}
-	
+
 	public static class DownloadEntry {
 		public long dateModified;
 		public double sizeMB;
-		
+
 		public File targetFile;
 		public boolean zipStream;
 		public boolean unzipFolder;
-		
+
 		public File fileToDownload;
-		
+
 		public String baseName;
 		public String urlToDownload;
 		public boolean isAsset;
 		public String assetName;
 		public DownloadActivityType type;
 
-		public DownloadEntry() { }
+		public DownloadEntry() {
+		}
 
 		public DownloadEntry(String assetName, String fileName, long dateModified) {
 			this.dateModified = dateModified;

@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.plugins.custom;
 
 import android.content.Context;
 
@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo;
 import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
