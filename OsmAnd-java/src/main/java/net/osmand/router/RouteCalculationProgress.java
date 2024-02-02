@@ -205,7 +205,7 @@ public class RouteCalculationProgress {
 
 	public void hhIterationProgress(double k) {
 		// validate 0-100% and disallow to progress back
-		if (k > 0 && k <= 1.0 && k > this.hhCurrentStepProgress) {
+		if (k >= 0 && k <= 1.0 && k > this.hhCurrentStepProgress) {
 			this.hhCurrentStepProgress = k;
 		}
 	}
