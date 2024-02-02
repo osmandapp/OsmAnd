@@ -59,11 +59,13 @@ public class HHRoutingDB {
 		Statement st = conn.createStatement();
 		compactDB = checkColumnExist(st, "ins", "segments");
 		tagValuesDB = checkColumnExist(st, "tagValues", "points");
-		String tagValuesSel = tagValuesDB ? ", tagValues " : ""; 
 		st.execute("CREATE TABLE IF NOT EXISTS profiles(profile, id, params)");
 		if (!compactDB) {
-			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, clusterId, fileDbId, dualIdPoint, dualClusterId, "
-					+ "chInd, roadId, start, end, sx31, sy31, ex31, ey31" + tagValuesSel + ", PRIMARY KEY(idPoint))");
+			boolean create = st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, clusterId, fileDbId, dualIdPoint, dualClusterId, "
+					+ "chInd, roadId, start, end, sx31, sy31, ex31, ey31, tagValues, PRIMARY KEY(idPoint))");
+			if (create) {
+				tagValuesDB = true;
+			}
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS pointsUnique on points(pointGeoId)");
 			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut, profile)");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS segmentsUnique on segments(idPoint, idConnPoint, profile)");
@@ -128,7 +130,9 @@ public class HHRoutingDB {
 	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> loadNetworkPoints(short mapId, Class<T> cl) throws SQLException {
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31, tagValues from points");
+		String tagValuesSel = tagValuesDB ? ", tagValues " : "";
+		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 "
+				+  tagValuesSel + " from points");
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
 		while (rs.next()) {
 			T pnt;
