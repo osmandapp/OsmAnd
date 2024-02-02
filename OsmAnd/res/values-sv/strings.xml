@@ -2559,7 +2559,7 @@
     <string name="shared_string_explore">Utforska</string>
     <string name="shared_string_result">Resultat</string>
     <string name="use_two_digits_longitude">Använd tvåsiffrig longitud</string>
-    <string name="shared_string_travel_guides">Resor</string>
+    <string name="shared_string_travel_guides">Reseguider</string>
     <string name="waypoints_removed_from_map_markers">Waypoints tas bort från kartmarkörer</string>
     <string name="total_donations">Donationer totalt</string>
     <string name="shared_string_bookmark">Bokmärke</string>
@@ -2585,7 +2585,7 @@
     <string name="maps_you_need_descr">Baserat på de artiklar som du bokmärkt, följande kartor rekommenderas för dig att hämta:</string>
     <string name="maps_you_need">Kartor du behöver</string>
     <string name="osmand_team">OsmAnd team</string>
-    <string name="popular_destinations">Populära destinationer</string>
+    <string name="popular_destinations">Populära resmål</string>
     <string name="paid_app">Betald app</string>
     <string name="paid_plugin">Betald plugin</string>
     <string name="travel_card_update_descr">Nya Wikivoyage-data tillgängliga, uppdatera för att njuta.</string>
@@ -3619,7 +3619,7 @@
     <string name="unlimited_map_downloads">Obegränsade kartnedladdningar</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia och Wikivoyage i nedkopplat läge</string>
     <string name="offline_wikipeadia">Wikipedia i nedkopplat läge</string>
-    <string name="offline_wikivoyage">Wikivoyage i nedkopplat läge</string>
+    <string name="offline_wikivoyage">Wikivoyage offline</string>
     <string name="pro_features">Pro-finesser</string>
     <string name="select_wikipedia_article_langs">Välj språk för Wikipedia-artiklar på kartan. Byt till vilket annat tillgängligt språk som helst vid läsning av artikeln.</string>
     <string name="measure_distance_item">Mät avstånd</string>
@@ -4436,7 +4436,7 @@
     <string name="stop_and_exit">Avbryt och avsluta</string>
     <string name="shared_string_shape">Figur</string>
     <string name="location_source">Platskälla</string>
-    <string name="app_mode_moped">Moped</string>
+    <string name="app_mode_moped">Moped klass I</string>
     <string name="ui_customization">Anpassning av användargränssnittet</string>
     <string name="osm_editing_prefs_descr">Användarnamn, lösenord, offline-redigering</string>
     <string name="auto_25_chars_route_tu_kl">Gör en u-sväng och håll till vänster</string>
@@ -4816,7 +4816,7 @@
     <string name="help_article_map_point_layers_on_map_name">Punkter på kartan</string>
     <string name="help_article_map_raster_maps_name">Rasterkartor (Online / Offline)</string>
     <string name="help_article_navigation_guidance_name">Vägledning</string>
-    <string name="help_article_navigation_guidance_voice_navigation_name">Röstinstruktioner / Notifikationer</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Röstinstruktioner / Aviseringar</string>
     <string name="help_article_navigation_routing_name">Ruttparametrar</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigera efter spår</string>
@@ -5159,7 +5159,7 @@
     <string name="open_issue_on_github_descr">Ställ frågor, föreslå nya funktioner</string>
     <string name="feature_available_as_part_of_plan">%1$s tillgänglig som del av abonnemanget %2$s</string>
     <string name="github_discussion">GitHub-diskussion</string>
-    <string name="most_viewed">Mest läst</string>
+    <string name="most_viewed">Mest sedd</string>
     <string name="write_bearing_description">Spara bäringen till varje spårpunkt vid inspelning</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d spår)</item>
