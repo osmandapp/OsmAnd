@@ -93,7 +93,7 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;

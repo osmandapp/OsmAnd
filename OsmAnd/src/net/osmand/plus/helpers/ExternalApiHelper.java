@@ -44,7 +44,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;

@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.plugins.custom;
 
 import android.content.Context;
 
@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo;
 import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
@@ -67,13 +69,8 @@ public class CustomIndexItem extends IndexItem {
 	}
 
 	@Override
-	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions) {
-		return getVisibleName(ctx, osmandRegions, true);
-	}
-
-	@Override
-	public String getVisibleName(@NonNull Context ctx, OsmandRegions osmandRegions, boolean includingParent) {
-		String name = super.getVisibleName(ctx, osmandRegions, includingParent);
+	public String getVisibleName(@NonNull Context ctx, @NonNull OsmandRegions regions, boolean includingParent, boolean useShortName) {
+		String name = super.getVisibleName(ctx, regions, includingParent, useShortName);
 		return JsonUtils.getLocalizedResFromMap(ctx, names, name);
 	}
 
