@@ -1293,4 +1293,62 @@ public class Algorithms {
 		}
 		return ret;
 	}
+	
+	public static final String DEFAULT_SERIALIZER = ",";
+
+	public static String serializeStringArray(String[] array) {
+		return serializeStringArray(array, DEFAULT_SERIALIZER);
+	}
+	public static String serializeStringArray(String[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < array.length; i++) {
+			String v = array[i];
+			if (v == null) {
+				v = "";
+			}
+	        sb.append("\"").append(v.replace("\"", "\"\"")).append("\""); // Double quotes are escaped by doubling them
+	        if (i < array.length - 1) {
+	            sb.append(delimiter);
+	        }
+	    }
+	    return sb.toString();
+	}
+
+	public static String[] deserializeStringArray(String serialized) {
+		return deserializeStringArray(serialized, DEFAULT_SERIALIZER);
+	}
+
+    public static String[] deserializeStringArray(String serialized, String delimiter) {
+		if (serialized == null || serialized.length() == 0) {
+			return new String[0];
+		}
+        List<String> resultList = new ArrayList<>();
+        boolean inQuotes = false;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < serialized.length(); i++) {
+            char c = serialized.charAt(i);
+            if (c == '"') {
+                if (i < serialized.length() - 1 && serialized.charAt(i + 1) == '"') {
+                    sb.append(c); // Append one quote of the escaped quotes
+                    i++; // Skip the next quote since it's part of the escaped pair
+                } else {
+                    inQuotes = !inQuotes;
+                }
+                continue;
+            }
+            if (!inQuotes && c == delimiter.charAt(0)) {
+                resultList.add(sb.toString());
+                sb = new StringBuilder();
+            } else {
+                sb.append(c);
+            }
+        }
+        resultList.add(sb.toString());
+        return resultList.toArray(new String[resultList.size()]);
+    }
+	
+	
 }

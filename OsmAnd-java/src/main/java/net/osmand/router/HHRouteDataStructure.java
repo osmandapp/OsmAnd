@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -589,6 +590,7 @@ public class HHRouteDataStructure {
 	
 	
 	public static class NetworkDBPoint {
+		public Map<String, String> tagValues = null;
 		public NetworkDBPoint dualPoint;
 		public int index;
 		public int clusterId;
