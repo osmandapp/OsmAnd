@@ -821,7 +821,9 @@ public class Algorithms {
 
 	public static String gzipToString(byte[] gzip) {
 		try {
-			if ( gzip == null ) return null;
+			if (gzip == null) {
+				return null;
+			}
 			GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
 			return readFromInputStream(gzipIs).toString();
 		} catch (IOException e) {
@@ -831,6 +833,9 @@ public class Algorithms {
 	
 	public static byte[] stringToGzip(String str) {
 		try {
+			if (str == null) {
+				return null;
+			}
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
 			GZIPOutputStream gzout = new GZIPOutputStream(bous);
 			gzout.write(str.getBytes());
@@ -1322,34 +1327,33 @@ public class Algorithms {
 		return deserializeStringArray(serialized, DEFAULT_SERIALIZER);
 	}
 
-    public static String[] deserializeStringArray(String serialized, String delimiter) {
+	public static String[] deserializeStringArray(String serialized, String delimiter) {
 		if (serialized == null || serialized.length() == 0) {
 			return new String[0];
 		}
-        List<String> resultList = new ArrayList<>();
-        boolean inQuotes = false;
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < serialized.length(); i++) {
-            char c = serialized.charAt(i);
-            if (c == '"') {
-                if (i < serialized.length() - 1 && serialized.charAt(i + 1) == '"') {
-                    sb.append(c); // Append one quote of the escaped quotes
-                    i++; // Skip the next quote since it's part of the escaped pair
-                } else {
-                    inQuotes = !inQuotes;
-                }
-                continue;
-            }
-            if (!inQuotes && c == delimiter.charAt(0)) {
-                resultList.add(sb.toString());
-                sb = new StringBuilder();
-            } else {
-                sb.append(c);
-            }
-        }
-        resultList.add(sb.toString());
-        return resultList.toArray(new String[resultList.size()]);
-    }
-	
-	
+		List<String> resultList = new ArrayList<>();
+		boolean inQuotes = false;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < serialized.length(); i++) {
+			char c = serialized.charAt(i);
+			if (c == '"') {
+				if (i < serialized.length() - 1 && serialized.charAt(i + 1) == '"') {
+					sb.append(c); // Append one quote of the escaped quotes
+					i++; // Skip the next quote since it's part of the escaped pair
+				} else {
+					inQuotes = !inQuotes;
+				}
+				continue;
+			}
+			if (!inQuotes && c == delimiter.charAt(0)) {
+				resultList.add(sb.toString());
+				sb = new StringBuilder();
+			} else {
+				sb.append(c);
+			}
+		}
+		resultList.add(sb.toString());
+		return resultList.toArray(new String[resultList.size()]);
+	}
+
 }

@@ -165,7 +165,7 @@ public class HHRoutingDB {
 				tagValues = rs.getString(p++);
 			}
 			String[] arr = Algorithms.deserializeStringArray(tagValues);
-			if (arr != null) {
+			if (arr != null && arr.length > 0) {
 				pnt.tagValues = new TreeMap<String, String>();
 				for (int i = 0; i < arr.length; i += 2) {
 					pnt.tagValues.put(arr[i], arr[i + 1]);
