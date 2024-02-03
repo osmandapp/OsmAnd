@@ -5024,7 +5024,7 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямку руху, по центру — для всіх інших.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямком руху, по центру — для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
