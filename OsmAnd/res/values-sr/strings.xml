@@ -5406,4 +5406,5 @@
     <string name="topography_maps">Топографске мапе</string>
     <string name="clear_key_assignment_desc">Додела тастера за одабрану активност биће уклоњена и постављена на Ниједна.</string>
     <string name="key_assignments">Додељивање тастера</string>
+    <string name="battery_optimization_banner_content">Оптимизација батерије андроида може довести до пропуста и нетачности снимљених путања.</string>
 </resources>
