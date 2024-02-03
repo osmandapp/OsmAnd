@@ -821,6 +821,7 @@ public class Algorithms {
 
 	public static String gzipToString(byte[] gzip) {
 		try {
+			if ( gzip == null ) return null;
 			GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
 			return readFromInputStream(gzipIs).toString();
 		} catch (IOException e) {
