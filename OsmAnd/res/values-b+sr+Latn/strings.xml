@@ -715,7 +715,7 @@
     <string name="voice_data_initializing">Pokretanje glasovnih podataka…</string>
     <string name="menu_mute_on">Zvuk je isključen</string>
     <string name="menu_mute_off">Zvuk je uključen</string>
-    <string name="search_poi_filter">Propusnik</string>
+    <string name="search_poi_filter">Filter</string>
     <string name="show_poi_filter">Prikaži filter</string>
     <string name="hide_poi_filter">Sakrij filter</string>
     <string name="off_router_service_no_gps_available">Službi navođenja iz pozadine je potrebno da dostavljač lokacija bude uključen.</string>
@@ -2762,7 +2762,7 @@
     <string name="christmas_desc_q">Prikazuj božićne TOI?</string>
     <string name="christmas_desc">U čekanju Božića i Nove Godine, možete izabrati prikaz TOI vezanih za Božić: Badnjake, božićna drva, trgovine, itd.</string>
     <string name="christmas_poi">Božićne TOI</string>
-    <string name="save_track_precision_descr">Propusnik: Nema zapisa dok se ne dostigne ova tačnost.</string>
+    <string name="save_track_precision_descr">Filter: Nema zapisa dok se ne dostigne ova tačnost.</string>
     <string name="save_track_precision">Najmanja tačnost beleženja</string>
     <string name="save_track_min_distance_descr">Filtar: postavite minimalnu udaljenost od tačke da bi zabiležio novu.</string>
     <string name="save_track_min_distance">Prijave minimalnog pomaka</string>
@@ -4070,11 +4070,11 @@
     <string name="rendering_attr_seabedDetail_description">Dodatni pismena obavetenja o kakvoći morskog dna, vrstama podloge, vrstama korova ili morske trave</string>
     <string name="rendering_value_category_name">Vrsta</string>
     <string name="rendering_value_all_name">Sve</string>
-    <string name="gps_filter_hdop_desc">postavi najveću prihvaćenu vrednost za vodoravnu preciznost. 
-\nTačke sa većim vrednostima će biti sakrivene.</string>
-    <string name="gps_filter_smoothing_desc">postavi granicu udaljenosti među tačkama. 
-\nTačke rute koje su udaljene bar X od poslednje vidljive tačke će biti skrivene. 
-\nBudite pažljivi sa velikim vrednostima udaljenosti što je geometrija rute prostija.</string>
+    <string name="gps_filter_hdop_desc">Postavi najveću prihvaćenu vrednost za vodoravnu preciznost.
+\nTačke sa većim vrednostima biće sakrivene.</string>
+    <string name="gps_filter_smoothing_desc">Postavi graničnu udaljenost između tačaka.
+\nTačke rute koje nisu bliže od ove udaljenosti od zadnje vidljive tačke biće skrivene.
+\nVisoki pragovi mogu previše pojednostaviti geometriju rute.</string>
     <string name="clear_all_history_warning">Želiš li da obrišeš sve unosene istorije, uključujući pretragu, navođenje i istoriju oznaka?</string>
     <string name="upload_gpx_description_hint">Ostavite prazno, imena putanja će se koristiti kao opis. Unešen opis će se primeniti za svaku rutu.</string>
     <string name="routing_attr_prefer_horse_routes_name">Omiljeni putevi konja</string>
@@ -4103,7 +4103,7 @@
     <string name="backup_storage_taken">Zauzeto skladište</string>
     <string name="restore_complete">Vraćeno</string>
     <string name="rendering_attr_natureReserves_name">Zaštićeno područje prirode</string>
-    <string name="shared_string_gps_filter">Propusnik GPS-a</string>
+    <string name="shared_string_gps_filter">GPS filter</string>
     <string name="shared_string_memory">Skladište</string>
     <string name="backup_welcome_back">Dobrodošli nazad!</string>
     <string name="backup_error_token_is_not_valid">Nešto nije u redu sa navedenim ID-om uređaja ili tokenom</string>
@@ -4159,7 +4159,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Oznake popravke</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Šematski prikaz sličica pri malom približavanju</string>
     <string name="distance_between_points">Udaljenost između tačaka</string>
-    <string name="save_as_copy">Sačuvaj kao umnožak</string>
+    <string name="save_as_copy">Sačuvaj kao kupiju</string>
     <string name="storage_migration_wrong_folder_warning">Nema podataka OsmAnda u odabranoj fascikli. Pokušajte ponovo.</string>
     <string name="from_to_with_params">Od %1$s do %2$s</string>
     <string name="progress_complete">%1$s završeno</string>
@@ -4197,7 +4197,7 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Izbegavati zone niskih emisija</string>
     <string name="route_line_use_map_style_color">Koristite zadanu boju za stil mape (%1$s).</string>
     <string name="map_widget_time_to_intermediate">Vreme do međuodredišta</string>
-    <string name="map_widget_distance_to_intermediate">Udaljenost do posredne tačke</string>
+    <string name="map_widget_distance_to_intermediate">Udaljenost do međuodredišta</string>
     <string name="lang_sat">Santalski</string>
     <string name="map_widget_time_to_destination">Vreme do odredišta</string>
     <string name="radius_ruler_mode_desc">Tapkanje na widget prelazi u način rada mernog šestara.</string>
@@ -4388,7 +4388,7 @@
     <string name="shared_string_mode">Način</string>
     <string name="time_to_navigation_point_widget_settings_desc">Dodirnite widget radi promene načina rada.</string>
     <string name="elevation_profile_widget_desc">Widget prikazuje visinu i presek nagiba trenutne rute.</string>
-    <string name="battery_widget_desc">Prikazuje popunjenost baterije tvog uređaja.</string>
+    <string name="battery_widget_desc">Prikazuje nivo popunjenosti baterije.</string>
     <string name="please_provide_group_name_message">Molim, imenujte grupu.</string>
     <string name="shared_string_size">Veličina</string>
     <string name="no_plugins_enabled">Nemaš uključenih priključaka. Možeš naći spisak dostupnih priključaka preko „meni“ → „Priključci“.</string>
@@ -4488,7 +4488,7 @@
 \nSnimi sve podatke u novu folder.</string>
     <string name="skip_confirmation">Da, preskoči</string>
     <string name="save_changes_into_file">Sačuvaj izmene u datoteku</string>
-    <string name="exit_without_saving_warning">Da li napustiti bez čuvanja izmena?</string>
+    <string name="exit_without_saving_warning">Izlaz bez čuvanja izmena?</string>
     <string name="fold_unfold">sklopi/razvij</string>
     <string name="memory_allocated_for_routing_ds">Veće vrednosti skladišta ubrzavaju izračunavanje dužih putanja (preko 500km), ali mogu da utiču na učinak ostalih programa. 
 \nNema uticaj na brzinu izračunavanja kraćih putanja.</string>
@@ -4508,28 +4508,28 @@
     <string name="continue_on_phone">Nastavite na mobilnom uređaju</string>
     <string name="location_access_request_title">OsmAndu je potrebna dozvola za lokaciju radi navođenja.</string>
     <string name="shared_string_articles">Članci</string>
-    <string name="release_4_1">• Dodata početna podrška za Android Auto 
-\n 
-\n • Osvežavanje korisničkog interfejsa za pretragu koordinata UTM 
-\n 
-\n• Propusnik GPS-a putanja GPX-a 
-\n 
-\n • Widget za visinski profil (izdanja pro) 
-\n 
-\n • Omiljeno: dodata je mogućnost pregleda nedavno korišćenih sličica 
-\n 
-\n • Planiranje rute: koristiće se izabrani profil nakon pokretanja 
-\n 
-\n • Popravljen je nivo Mapilarija, priključak je sada podrazumevano onemogućen 
-\n 
-\n • Dodat je prikaz za upravljanje celokupnom istorijom u programu 
-\n 
-\n • Usmerenje mape se ne vraća na početno nakon ponovnog pokretanja programa 
-\n 
-\n • Poboljšano je prikazivanje oznake visine SRTM 
-\n 
-\n • Ispravljeni su arapski natpisi mapa 
-\n 
+    <string name="release_4_1">• Dodata početna podrška za Android Auto
+\n
+\n • Osvežavanje korisničkog interfejsa za pretragu koordinata UTM
+\n
+\n• Filter GPS-a putanja GPX-a
+\n
+\n • Widget za visinski profil (izdanja pro)
+\n
+\n • Omiljeno: dodata je mogućnost pregleda nedavno korišćenih sličica
+\n
+\n • Planiranje rute: koristiće se izabrani profil nakon pokretanja
+\n
+\n • Popravljen je nivo Mapilarija, priključak je sada podrazumevano onemogućen
+\n
+\n • Dodat je prikaz za upravljanje celokupnom istorijom u programu
+\n
+\n • Usmerenje mape se ne vraća na početno nakon ponovnog pokretanja programa
+\n
+\n • Poboljšano je prikazivanje oznake visine SRTM
+\n
+\n • Ispravljeni su arapski natpisi mapa
+\n
 \n • Ispravljeni su različiti problemi sa navođenjem
 \n
 \n</string>
@@ -5599,4 +5599,10 @@
 \n
 \nAko imaš problem, možeš pokušati promeniti potrošnju baterije na \'Neograničeno\'.</string>
     <string name="battery_optimization">Optimizacija baterije</string>
+    <string name="max_sensor_speed">Brzina senzora, max</string>
+    <string name="max_sensor_bycicle_power">Snaga bicikla, max</string>
+    <string name="max_sensor_cadence">Kadenca bicikla, max</string>
+    <string name="max_sensor_heartrate">Otkucaji srca, max</string>
+    <string name="avg_sensor_temperature">Temperatura, prosečna</string>
+    <string name="max_sensor_temperature">Temperatura, prosečna</string>
 </resources>
