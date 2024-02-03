@@ -4757,4 +4757,24 @@
     <string name="poi_nfs_recreation_area_activity_caving">Espeleísmo</string>
     <string name="poi_nfs_recreation_area_activity_day_hiking">Senderismo diurno</string>
     <string name="poi_nfs_recreation_area_activity_fishing">Pesca</string>
+    <string name="poi_nfs_recreation_area_activity_geocaching_and_letterboxing">Geocaching y letterboxing</string>
+    <string name="poi_nfs_recreation_area_activity_gold_panning">Lavado de oro;Bateo de oro</string>
+    <string name="poi_nfs_recreation_area_activity_group_camping">Campamento de grupo</string>
+    <string name="poi_nfs_recreation_area_activity_group_picnicking">Picnic de grupo</string>
+    <string name="poi_nfs_recreation_area_activity_hang_gliding">Ala delta</string>
+    <string name="poi_nfs_recreation_area_activity_horse_riding_and_camping">Campamento y centro ecuestre</string>
+    <string name="poi_nfs_recreation_area_activity_hunting">Cazería</string>
+    <string name="poi_nfs_recreation_area_activity_ice_fishing">Pesca sobre hielo</string>
+    <string name="poi_nfs_recreation_area_activity_lake_and_pond_fishing">Pesca en lago y estanque</string>
+    <string name="poi_nfs_recreation_area_activity_metal_detecting">Detector de metales</string>
+    <string name="poi_nfs_recreation_area_activity_mountain_biking">Ciclismo de montaña</string>
+    <string name="poi_nfs_recreation_area_activity_mountain_climbing">Escalada de montaña</string>
+    <string name="poi_nfs_recreation_area_activity_nature_viewing">Observación de la naturaleza</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_camping">Campamento OHV</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_open_area_riding">Área abierta de centro OHV</string>
+    <string name="poi_nfs_recreation_area_activity_hiking">Senderismo</string>
+    <string name="poi_nfs_recreation_area_activity_horse_riding">Centro ecuestre</string>
+    <string name="poi_nfs_recreation_area_activity_horse_camping">Campamento ecuestre</string>
+    <string name="poi_nfs_recreation_area_activity_ice_skating">Patinaje sobre hielo</string>
+    <string name="poi_nfs_recreation_area_activity_interpretive_areas">Zonas interpretativas</string>
 </resources>
