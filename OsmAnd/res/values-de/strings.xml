@@ -830,8 +830,8 @@
     <string name="filter_current_poiButton">Filtern</string>
     <string name="edit_filter_save_as_menu_item">Speichern als</string>
     <string name="edit_filter_delete_dialog_title">Diesen Filter löschen\?</string>
-    <string name="edit_filter_delete_message">Filter %1$s gelöscht</string>
-    <string name="edit_filter_create_message">Filter \'%1$s\' erstellt</string>
+    <string name="edit_filter_delete_message">Filter „%1$s“ gelöscht</string>
+    <string name="edit_filter_create_message">Filter „%1$s“ erstellt</string>
     <string name="offline_navigation_not_available">OsmAnd-Offline-Navigation steht zur Zeit nicht zur Verfügung.</string>
     <string name="left_side_navigation">Linksverkehr</string>
     <string name="left_side_navigation_descr">Für Länder, in denen man auf der linken Straßenseite fährt.</string>
@@ -2119,7 +2119,7 @@
     <string name="quick_action_map_source">Kartenquelle ändern</string>
     <string name="quick_action_map_source_title">Kartenquellen</string>
     <string name="quick_action_map_source_action">Kartenquelle hinzufügen</string>
-    <string name="quick_action_map_source_switch">Die Kartenquelle wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_source_switch">Kartenquelle wurde in „%s“ geändert.</string>
     <string name="quick_action_btn_tutorial_title">Schaltflächenposition ändern</string>
     <string name="quick_action_category_descr">Kategorie, in der der Favorit gespeichert werden soll:</string>
     <string name="quick_action_gpx_category_descr">Wählen Sie eine beliebige Kategorie.</string>
@@ -2389,7 +2389,7 @@
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
-    <string name="plugin_mapillary_descr">Bildmaterial von Straßenansichten. Sie können auch selbst einen Beitrag leisten. Um die vorhandenen Daten als Kartenebene zu sehen, aktivieren Sie „Straßenbilder“ im Menü „Karte konfigurieren“.</string>
+    <string name="plugin_mapillary_descr">Bildmaterial von Straßenansichten. Sie können auch selbst einen Beitrag leisten. Um die vorhandenen Daten als Kartenebene zu sehen, aktivieren Sie „Bilder auf Straßenebene“ im Menü „Karte konfigurieren“.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installieren Sie Mapillary, um Fotos zu dieser Kartenposition hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
@@ -3474,7 +3474,7 @@
     <string name="custom_osmand_plugin">Benutzerdefinierte OsmAnd-Erweiterung</string>
     <string name="slope_description">Hangneigungskarte verwendet Farben, um die Geländesteilheit zu visualisieren.</string>
     <string name="replace_point_descr">Einen anderen Punkt durch diesen ersetzen.</string>
-    <string name="changes_applied_to_profile">Die Änderungen wurden auf das \'%1$s\' Profil angewendet.</string>
+    <string name="changes_applied_to_profile">Die Änderungen wurden auf das Profil \'%1$s\' angewendet.</string>
     <string name="settings_item_read_error">Konnte nicht von \'%1$s\' lesen.</string>
     <string name="settings_item_write_error">Konnte nicht nach \'%1$s\' schreiben.</string>
     <string name="settings_item_import_error">Konnte nicht von \'%1$s\' importieren.</string>
@@ -5496,7 +5496,7 @@
     <string name="discard_filter_changes">Filteränderungen verwerfen</string>
     <string name="discard_filter_changes_prompt">Alle Filter zurücksetzen?</string>
     <string name="empty_smart_folder_title">Keine übereinstimmenden Tracks</string>
-    <string name="empty_smart_folder_description">Übereinstimmenden Tracks werden hier angezeigt</string>
+    <string name="empty_smart_folder_description">Übereinstimmende Tracks werden hier angezeigt</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d Track)</item>
         <item quantity="other">%1$d (%2$d Tracks)</item>
@@ -5604,7 +5604,7 @@
     <string name="battery_optimization_settings">Einstellungen der Akkuoptimierung</string>
     <string name="battery_optimization_desc">Akkuoptimierung in Android kann Lücken und Ungenauigkeiten in aufgezeichneten Tracks verursachen.
 \n
-\nWenn Sie diese Probleme erleben, können Sie versuchen, die Akkunutzung auf „Unbeschränkt“ zu ändern</string>
+\nWenn Sie diese Probleme erleben, können Sie versuchen, die Akkunutzung auf „Unbeschränkt“ zu ändern.</string>
     <string name="max_sensor_heartrate">Herzfrequenz, maximal</string>
     <string name="avg_sensor_heartrate">Herzfrequenz, durchschnittlich</string>
     <string name="avg_sensor_cadence">Trittfrequenz, durchschnittlich</string>
