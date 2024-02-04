@@ -622,11 +622,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	@Nullable
 	private String getPriceCurrencyCode(ProductDetails productDetails) {
 		ProductDetails.PricingPhase phase = getMostPricedOfferPhase(productDetails);
-		String period = null;
+		String currencyCode = null;
 		if (phase != null) {
-			period = phase.getPriceCurrencyCode();
+			currencyCode = phase.getPriceCurrencyCode();
 		}
-		return period;
+		return currencyCode;
 	}
 
 
