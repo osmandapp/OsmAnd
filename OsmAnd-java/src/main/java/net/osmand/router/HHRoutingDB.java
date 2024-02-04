@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.TreeMap;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
@@ -166,9 +166,9 @@ public class HHRoutingDB {
 			}
 			String[] arr = Algorithms.deserializeStringArray(tagValues);
 			if (arr != null && arr.length > 0) {
-				pnt.tagValues = new TreeMap<String, String>();
+				pnt.tagValues = new ArrayList<>();
 				for (int i = 0; i < arr.length; i += 2) {
-					pnt.tagValues.put(arr[i], arr[i + 1]);
+					pnt.tagValues.add(new TagValuePair(arr[i], arr[i + 1], -1));
 				}
 			}
 			mp.put(pnt.index, pnt);
