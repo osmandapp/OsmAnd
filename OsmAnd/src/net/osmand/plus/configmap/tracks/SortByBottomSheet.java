@@ -40,8 +40,6 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String TRACKS_SORT_MODE_KEY = "tracks_sort_mode_key";
 
 	private TracksSortMode tracksSortMode;
-	@Nullable
-	private SortTracksListener sortTracksListener;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,16 +97,13 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 			holder.groupTypeIcon.setImageDrawable(getIcon(sortMode.getIconId(), colorId));
 
 			holder.itemView.setOnClickListener(view -> {
-				if (sortTracksListener == null) {
-					Fragment target = getTargetFragment();
-					if (target instanceof SortTracksListener)
-						sortTracksListener = (SortTracksListener) target;
-				}
-
+				Fragment target = getTargetFragment();
 				int adapterPosition = holder.getAdapterPosition();
-				if (adapterPosition != RecyclerView.NO_POSITION && sortTracksListener != null) {
+				if (adapterPosition != RecyclerView.NO_POSITION && target instanceof SortTracksListener) {
+					SortTracksListener sortTracksListener = (SortTracksListener) target;
+					Bundle bundle = getArguments();
 					TracksSortMode mode = sortModes.get(position);
-					sortTracksListener.setTracksSortMode(mode);
+					sortTracksListener.setTracksSortMode(mode, bundle);
 				}
 				dismiss();
 			});
@@ -151,24 +146,17 @@ public class SortByBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksSortMode sortMode,
 									@NonNull Fragment target, boolean usedOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			SortByBottomSheet fragment = new SortByBottomSheet();
-			fragment.tracksSortMode = sortMode;
-			fragment.setUsedOnMap(usedOnMap);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
-		}
+		showInstance(manager, sortMode, target, usedOnMap, null);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull TracksSortMode sortMode,
-	                                @Nullable Fragment target, boolean usedOnMap, @Nullable SortTracksListener sortTracksListener) {
+									@NonNull Fragment target, boolean usedOnMap, @Nullable Bundle bundle) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SortByBottomSheet fragment = new SortByBottomSheet();
 			fragment.tracksSortMode = sortMode;
-			fragment.sortTracksListener = sortTracksListener;
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);
-			fragment.setRetainInstance(true);
+			fragment.setArguments(bundle);
 			fragment.show(manager, TAG);
 		}
 	}

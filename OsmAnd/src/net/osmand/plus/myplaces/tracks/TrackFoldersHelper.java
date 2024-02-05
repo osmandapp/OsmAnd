@@ -29,7 +29,6 @@ import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
-import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -51,9 +50,7 @@ import net.osmand.plus.myplaces.tracks.tasks.OpenGpxDetailsTask;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -74,12 +71,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TrackFoldersHelper implements OnTrackFileMoveListener {
+
+	public final static String SORT_SUB_FOLDERS_KEY = "sort_sub_folders_key";
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -128,15 +126,6 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		asyncLoader.executeOnExecutor(singleThreadExecutor);
 	}
 
-	private void sortFolders(TrackFolder trackFolder, Map<String, String> tabsSortModes, TracksSortMode sortMode) {
-		for (TrackFolder folder : trackFolder.getSubFolders()) {
-			tabsSortModes.put(folder.getDirName(), sortMode.name());
-			if (!Algorithms.isEmpty(folder.getSubFolders())) {
-				sortFolders(folder, tabsSortModes, sortMode);
-			}
-		}
-	}
-
 	public void showFolderOptionsMenu(@NonNull TrackFolder trackFolder, @NonNull View view, @NonNull BaseTrackFolderFragment fragment, boolean isRootFolder) {
 		List<PopUpMenuItem> items = new ArrayList<>();
 
@@ -152,8 +141,12 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.sort_subfolders)
 					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_sort_subfolder))
-					.setOnClickListener(v -> SortByBottomSheet.showInstance(getActivity().getSupportFragmentManager(), fragment.getTracksSortMode(),
-							null, fragment.isUsedOnMap(), getSortTracksListener(fragment, trackFolder)))
+					.setOnClickListener(v -> {
+						Bundle bundle = new Bundle();
+						bundle.putBoolean(SORT_SUB_FOLDERS_KEY, true);
+						SortByBottomSheet.showInstance(getActivity().getSupportFragmentManager(), fragment.getTracksSortMode(),
+								fragment, false, bundle);
+					})
 					.showTopDivider(true)
 					.create());
 		}
@@ -190,31 +183,6 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 		displayData.menuItems = items;
 		displayData.nightMode = fragment.isNightMode();
 		PopUpMenu.show(displayData);
-	}
-
-	private SortTracksListener getSortTracksListener(@NonNull BaseTrackFolderFragment fragment, @NonNull TrackFolder trackFolder){
-		return new SortTracksListener() {
-			@Override
-			public void showSortByDialog() {
-
-			}
-
-			@NonNull
-			@Override
-			public TracksSortMode getTracksSortMode() {
-				return fragment.getTracksSortMode();
-			}
-
-			@Override
-			public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
-				OsmandSettings settings = app.getSettings();
-				Map<String, String> tabsSortModes = settings.getTrackSortModes();
-				sortFolders(trackFolder, tabsSortModes, sortMode);
-				settings.saveTabsSortModes(tabsSortModes);
-
-				app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, trackFolder.getName(app), app.getString(sortMode.getNameId())));
-			}
-		};
 	}
 
 	public void showItemOptionsMenu(@NonNull TrackItem trackItem, @NonNull View view, @NonNull BaseTrackFolderFragment fragment) {

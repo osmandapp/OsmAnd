@@ -325,7 +325,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, @Nullable Bundle bundle) {
 		this.sortMode = sortMode;
 		TrackTab trackTab = adapter.getTrackTab();
 		trackTab.setSortMode(sortMode);
