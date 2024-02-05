@@ -92,7 +92,7 @@
     <string name="download_srtm_maps">Izohipse</string>
     <string name="rendering_attr_noAdminboundaries_name">Granice</string>
     <string name="map_widget_max_speed">Ograničenje brzine</string>
-    <string name="no_buildings_found">Nema pronađenih predmeta.</string>
+    <string name="no_buildings_found">Nema pronađenih zgrada.</string>
     <string name="incremental_search_city">Postupna pretraga grada</string>
     <string name="search_villages_and_postcodes">Pretraga za još sela/poštanskih kodova</string>
     <string name="native_library_not_supported">Prirodna biblioteka nije podržana na ovom uređaju.</string>
@@ -1261,7 +1261,7 @@
     <string name="intermediate_point">Međuodredište %1$s</string>
     <string name="target_point">Odredište %1$s</string>
     <string name="delete_target_point">Ukloni odredište</string>
-    <string name="no_route">Nema puta</string>
+    <string name="no_route">Nema rute</string>
     <string name="map_widget_monitoring_services">Usluge beleženja rute</string>
     <string name="gps_not_available">Omogući GPS u podešavanjima</string>
     <string name="non_optimal_route_calculation">Računaj moguću približnu rutu za velike razdaljine</string>
@@ -1395,7 +1395,7 @@
     <string name="local_index_select_gpx_file">Odaberi rutu</string>
     <string name="none_selected_gpx">Odaberi GPX fajl dugim pritiskanjem.</string>
     <string name="select_index_file_to_download">Ništa nije nađeno, ali možete ga sami napraviti (pogledajte https://osmand.net).</string>
-    <string name="no_index_file_to_download">Nema pronađenih preuzimanja, proverite vezu sa internetom.</string>
+    <string name="no_index_file_to_download">Nema pronađenih preuzimanja, proveri internet.</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklističke staze</string>
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikazati kvalitet puteva</string>
@@ -1804,7 +1804,7 @@
     <string name="shared_string_move_up">Pomeri ↑</string>
     <string name="storage_permission_restart_is_required">Programu je sada dozvoljen upis na spoljnju karticu, mora da se restartuje aplikacija.</string>
     <string name="report">Izveštaj</string>
-    <string name="no_waypoints_found">Nema pronađenih prolaznih tačaka</string>
+    <string name="no_waypoints_found">Nema međuodredišta</string>
     <string name="no_map_markers_found">Dodaj oznake mapa na mapi</string>
     <string name="rendering_value_bold_name">Podebljana</string>
     <string name="rendering_value_medium_name">Srednja</string>
@@ -1938,16 +1938,16 @@
     <string name="routing_attr_width_name">Širina</string>
     <string name="routing_attr_weight_description">Odredi dozvoljenu težinu vozila na putanji.</string>
     <string name="routing_attr_weight_name">Težina</string>
-    <string name="routing_attr_avoid_borders_description">Bez prelaženja državnih granica</string>
-    <string name="routing_attr_avoid_borders_name">Bez graničnih prelaza</string>
+    <string name="routing_attr_avoid_borders_description">Državne granice</string>
+    <string name="routing_attr_avoid_borders_name">Granični prelazi</string>
     <string name="routing_attr_avoid_stairs_description">Izbegavati stepenice</string>
-    <string name="routing_attr_avoid_stairs_name">Bez stepenica</string>
+    <string name="routing_attr_avoid_stairs_name">Stepenice</string>
     <string name="routing_attr_avoid_motorway_description">Izbegavati autoputeve</string>
-    <string name="routing_attr_avoid_motorway_name">Bez autoputeva</string>
-    <string name="routing_attr_avoid_ferries_description">Bez trajekta</string>
-    <string name="routing_attr_avoid_ferries_name">Bez trajekta</string>
+    <string name="routing_attr_avoid_motorway_name">Autoputevi</string>
+    <string name="routing_attr_avoid_ferries_description">Trajekti</string>
+    <string name="routing_attr_avoid_ferries_name">Trajekti</string>
     <string name="routing_attr_avoid_unpaved_description">Izbegavati makadame</string>
-    <string name="routing_attr_avoid_unpaved_name">Bez makadama</string>
+    <string name="routing_attr_avoid_unpaved_name">Makadami</string>
     <string name="routing_attr_avoid_toll_description">Izbegavati puteve sa putarinom</string>
     <string name="routing_attr_avoid_toll_name">Bez putarina</string>
     <string name="routing_attr_prefer_motorway_description">Prednost putevima za motorna vozila</string>
@@ -2076,7 +2076,7 @@
     <string name="sorted_by_distance">Razvrstano po udaljenosti</string>
     <string name="quick_action_showhide_osmbugs_descr">Dugme da prikažite ili da sakrijete OSM beleške na mapi.</string>
     <string name="nothing_found_descr">Promeni pretragu ili povećajte oblast pretrage.</string>
-    <string name="nothing_found">Nema ničeg pronađenog</string>
+    <string name="nothing_found">Nema ničeg</string>
     <string name="increase_search_radius">Povećaj oblast pretrage</string>
     <string name="restart_search">Prepokreni pretragu</string>
     <string name="private_access_routing_req">Tvoje odredište se nalazi na privatnom posedu. Dozvoliti korišćenje privatnih puteva na ovom putovanju?</string>
@@ -3356,7 +3356,7 @@
     <string name="shared_string_milliradians">Miliradijani</string>
     <string name="shared_string_degrees">Stepeni</string>
     <string name="routing_attr_avoid_ferry_description">Izbegavati trajekte</string>
-    <string name="routing_attr_avoid_ferry_name">Bez trajekta</string>
+    <string name="routing_attr_avoid_ferry_name">Trajekti</string>
     <string name="routing_attr_avoid_subway_description">Izbegavati podzemne i lake železnice</string>
     <string name="routing_attr_avoid_subway_name">Izbegavati podzemne železnice</string>
     <string name="routing_attr_avoid_train_description">Izbegavati vozove</string>
@@ -4212,7 +4212,7 @@
     <string name="map_widget_trip_recording_duration">Trajanje</string>
     <string name="map_widget_trip_recording_distance">Rastojanje</string>
     <string name="routing_attr_hazmat_category_name">Vrsta opasnih materija</string>
-    <string name="routing_attr_hazmat_category_no_restrictions_name">A (nema ograničenja)</string>
+    <string name="routing_attr_hazmat_category_no_restrictions_name">A (nema restrikcija)</string>
     <string name="coordinates_widget_secondary_desc">Oblik koordinata se može promeniti u %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">Deo %1$s dodatka.</string>
     <string name="parking_widget_desc">Prikazuje udaljenost od središta ekrana do mesta parkiranja.</string>
@@ -4249,7 +4249,7 @@
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Sakrij vojna područja</string>
-    <string name="routing_attr_avoid_4wd_only_description">Bez puteva za 4WD vozila</string>
+    <string name="routing_attr_avoid_4wd_only_description">Putevi za 4WD vozila</string>
     <string name="lanes_widgets_desc">Prikazuje trenutni raspored kolovozne trake i ističe trake za prestrojavanje prilikom navođenja.</string>
     <string name="route_maneuvers">Skretanja rute</string>
     <string name="map_widget_altitude">Nadmorska visina trenutnog lokacija</string>
@@ -4339,7 +4339,7 @@
     <string name="map_updates_for_mappers">Ažuriranje mapa za kartografe</string>
     <string name="option_available_only_in_osmand_pro">Dostupno je samo kao deo pretplate na OsmAnd Pro pretplate.</string>
     <string name="track_has_no_needed_data">Staza ne sadrži potrebne podatke.</string>
-    <string name="backup_do_not_have_any">Još uvek nemaš na mreži ni jedno skladište umnožaka</string>
+    <string name="backup_do_not_have_any">Još nemaš sigurnosnu kopiju na mreži</string>
     <string name="backup_error_no_valid_subscription">Nema važeće pretplate</string>
     <string name="backup_error_subscription_was_expired_descr">Pretplata OsmAnd je istekla, obnovi je za korištenje sigurnosne kopije.</string>
     <string name="backup_error_user_is_already_registered">Ova adresa e-pošte se koristi na drugom profilu</string>
@@ -4391,7 +4391,7 @@
     <string name="battery_widget_desc">Prikazuje nivo popunjenosti baterije.</string>
     <string name="please_provide_group_name_message">Molim, imenujte grupu.</string>
     <string name="shared_string_size">Veličina</string>
-    <string name="no_plugins_enabled">Nemaš uključenih priključaka. Možeš naći spisak dostupnih priključaka preko „meni“ → „Priključci“.</string>
+    <string name="no_plugins_enabled">Nemaš uključenih dodataka. Možeš naći spisak dostupnih dodataka preko „meni“ → „Dodaci“.</string>
     <string name="active_till">Traje do %1$s</string>
     <string name="backup_into_file">Pravljenje rezervne kopije u datoteci</string>
     <string name="co2_mission">izduv CO2</string>
@@ -4412,7 +4412,7 @@
     <string name="routing_attr_hazmat_category_description">Vrsta opasnih materije / Razmotrite dozvole za pristup sa opasnim materijema</string>
     <string name="distance_circles">Krugovi rastojanja</string>
     <string name="circle_settings">Podešavanja kruga</string>
-    <string name="routing_attr_avoid_4wd_only_name">Bez puteva za 4WD vozila</string>
+    <string name="routing_attr_avoid_4wd_only_name">Putevi za 4WD vozila</string>
     <string name="bearing_secondary_desc">Možeš promeniti u: %1$s – %2$s – %3$s.</string>
     <string name="radius_rules_widget_desc">Alatka za merni šestar prikazuje kružnice rastojanja oko izabrane tačke na mapi.</string>
     <string name="current_time_widget_desc">Prikazuje trenutno vreme tvog uređaja.</string>
@@ -4574,7 +4574,7 @@
     <string name="no_activity_for_intent">Ugradi program koji može da izvede ovu radnju.</string>
     <string name="empty_category_name">Ime vrste je prazno</string>
     <string name="available_until">Dostupno do %1$s</string>
-    <string name="backup_error_no_subscription">Nema dostupne pretplate</string>
+    <string name="backup_error_no_subscription">Nema pretplate</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Boji rute po njihovim mesnim bojama (ako postoje na OpenStritMapama) i bojama znakova oznaka.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Istraži informacije o pretplati OsmAnd i pronađi šta ti odgovara.</string>
     <string name="shared_string_purchased">Kupljeno</string>
@@ -5017,7 +5017,7 @@
     <string name="routing_attr_allow_via_ferrata_description">Planinarska putanja opremljena postavljenim užadima, gredama, lestvicama i brvnima.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Da li izmeniti izgled traga %1$s?</string>
     <string name="empty_tracks_description">Možeš uvoziti, kreirati ili snimati datoteke ruta korišćenjem OsmAnda.</string>
-    <string name="empty_tracks">Nemaš datoteke ruta.</string>
+    <string name="empty_tracks">Nema datoteke ruta.</string>
     <string name="switch_folder">Promeni folder</string>
     <string name="shared_string_on_map">Na mapi</string>
     <string name="display_position_automatic_descr">Zavisi od usmerenja mape: dno za smer kretanja, središte za sve ostalo.</string>
@@ -5363,7 +5363,7 @@
     <string name="cloud_all_changes_uploaded">Sve izmene su otpremljene</string>
     <string name="cloud_all_changes_downloaded">Sve izmene su preuzete</string>
     <string name="cloud_all_changes_uploaded_descr">Sve izmene učinjene na ovom uređaju su usklađene sa Oblakom OsmAnda.</string>
-    <string name="cloud_no_conflicts">Nema sukoba.</string>
+    <string name="cloud_no_conflicts">Nema konflikta.</string>
     <string name="last_sync">Poslednje usklađivanje</string>
     <string name="import_export">Uvoz/izvoz</string>
     <string name="export_to_file">Izvezi u datoteku</string>
