@@ -3777,7 +3777,7 @@
     <string name="purchases_feature_desc_android_auto">Ger dig OsmAnds offline-kartor och navigering på skärmen i din bil, och interagerar med bilens kontroller.</string>
     <string name="routeInfo_smoothness_description">Klassificering av vägar och gångvägar för hjulfordon, särskilt med avseende på ytans jämnhet/planhet.</string>
     <string name="import_profile_dialog_description">Den importerade profilen innehåller extra data. Klicka på \"Importera\" för att endast importera profildata, eller välj ytterligare data.</string>
-    <string name="recalc_angle_dialog_descr">En raksträcka mellan min position och den beräknade rutten visas, tills rutten har beräknats om.</string>
+    <string name="recalc_angle_dialog_descr">En rak linje mellan min position och den beräknade rutten visas, tills rutten har beräknats om</string>
     <string name="turn_screen_on_descr">Välj alternativ för skärmväckning (se till att OsmAnd är i förgrunden när enheten låses):</string>
     <string name="search_poi_types_descr">Kombinera POI-typer från olika kategorier. Tryck på knappen för att välja alla, tryck på vänster sida för att välja kategori.</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Medel</string>
@@ -5475,7 +5475,7 @@
     <string name="no_activity_for_intent">Installera en app som kan utföra denna åtgärd.</string>
     <string name="battery_optimization_banner_content">Androids batterioptimering kan orsaka luckor och andra små fel i spårinspelningar.</string>
     <string name="battery_optimization">Batterioptimering</string>
-    <string name="dont_ask_anymore">Don\'t ask anymore</string>
+    <string name="dont_ask_anymore">Fråga inte igen</string>
     <string name="max_sensor_heartrate">Puls, max</string>
     <string name="shared_string_road_maps">Vägkartor</string>
     <string name="avg_sensor_heartrate">Puls, medel</string>
@@ -5499,4 +5499,5 @@
     <string name="battery_optimization_desc">Androids batterioptimering kan orsaka luckor och andra små fel i spårinspelningar.
 \n
 \nOm du upplever liknande problem, prova att ändra batterianvändningen till \'Obegränsad\'.</string>
+    <string name="shared_string_extensions">Tillägg</string>
 </resources>
