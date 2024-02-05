@@ -2320,7 +2320,7 @@
     <string name="nautical_maps">Námorné mapy</string>
     <string name="analyze_on_map">Analyzovať na mape</string>
     <string name="shared_string_visible">Viditeľné</string>
-    <string name="quick_action_auto_zoom">Automatické priblíženie mapy zap/vyp</string>
+    <string name="quick_action_auto_zoom">Automatické priblíženie mapy</string>
     <string name="quick_action_auto_zoom_desc">Tlačidlo pre zapnutie alebo vypnutie automatického priblíženia mapy podľa vašej rýchlosti.</string>
     <string name="quick_action_auto_zoom_on">Zapnúť automatické približovanie</string>
     <string name="quick_action_auto_zoom_off">Vypnúť automatické približovanie</string>
@@ -4809,7 +4809,7 @@
     <string name="coordinates_widget_current_location">Súradnice: súčasná poloha</string>
     <string name="map_marker_interval_dialog_desc">Zadajte časový interval pre ktorý bude meraná priemerná rýchlosť pre výpočet odhadovaného času príjazdu.</string>
     <string name="available_as_part_of_subscription_plan">Dostupné ako súčasť predplatného %1$s.</string>
-    <string name="favorite_confirm_delete_group">Naozaj chcete odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Odstrániť skupinu \"%1$s\" a všetky v nej obsiahnuté body (%2$d)?</string>
     <string name="coordinates_widget_map_center_desc">Zobrazuje zemepisné súradnice stredu mapy</string>
     <string name="included_in_your_current_plan">Zahrnuté vo vašom súčasnom predplatnom \"%1$s\"</string>
     <string name="distance_by_tap_use_description">Ťuknite na mapu pre zobrazenie vzdialenosti medzi súčasnou polohou a označeným bodom.
@@ -4823,7 +4823,7 @@
     <string name="rotate_map_manual_opt">Manuálne otočené</string>
     <string name="speak_gps_signal_status">Oznámiť stratu a obnovenie GPS signálu</string>
     <string name="speak_route_recalculation">Oznámiť prepočítanie trasy</string>
-    <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, rýchlosť pedálovania a srdcový tep.</string>
+    <string name="purchases_feature_desc_external_sensors">Zobrazte a nahrajte údaje z externých senzorov: rýchlosť bicykla, výkon bicykla, frekvencia pedálovania a srdcový tep.</string>
     <string name="external_sensors_support">Podpora externých senzorov</string>
     <string name="release_4_3">• Nové rýchlejšie vykresľovanie mapy verzie 2 (OpenGL), aj s pohľadom 2.5D
 \n
@@ -5149,7 +5149,7 @@
     <string name="zoom_non_animated">Neanimované priblíženie</string>
     <string name="shared_string_next_event">Nasledujúca udalosť</string>
     <string name="any_connected_with_device">Akýkoľvek pripojený: %s</string>
-    <string name="button_already_assigned_to_this_action">Toto tlačidlo je už priradené k tejto akcii.</string>
+    <string name="button_already_assigned_to_this_action">Tlačidlo je už priradené k tejto akcii.</string>
     <string name="rendering_attr_showToll_name">Zobraziť mýtne obmedzenia</string>
     <string name="rendering_attr_showToll_description">Zobraziť mýtne obmedzenia na cestách</string>
     <string name="reset_key_assignments_desc">Všetky priradenia kláves zvoleného typu budú odstránené.</string>
@@ -5159,7 +5159,7 @@
     <string name="any_connected">Akýkoľvek pripojený</string>
     <string name="complex_widget_alert">Nástroj %1$s môže byť umiestnený len na samostatnom riadku.</string>
     <string name="previous_row_has_complex_widget">Predchádzajúci riadok má zložitý nástroj</string>
-    <string name="map_widget_sun_position_desc">Tento nástroj zobrazuje čas do východu alebo západu slnka, na základe aktuálneho času.</string>
+    <string name="map_widget_sun_position_desc">Zobrazuje čas do východu alebo západu slnka.</string>
     <string name="map_widget_sun_position">Poloha slnka</string>
     <string name="use_v1_auto_zoom">Krokové automatické priblíženie (stará verzia)</string>
     <string name="topography_maps">Topografické mapy</string>
@@ -5172,12 +5172,12 @@
     <string name="download_to_device">Stiahnuť do zariadenia</string>
     <string name="shared_string_rows">Riadky</string>
     <string name="shared_string_road_maps">Cestné mpay</string>
-    <string name="clear_key_assignment_desc">Priradenie klávesy k zvolenej akcii bude vymazané a nastavené na Žiadne.</string>
+    <string name="clear_key_assignment_desc">Priradenie klávesy k zvolenej akcii bude vymazané a nastavené na \"Žiadne\".</string>
     <string name="see_all_plans">Zobraziť všetky predplatné</string>
     <string name="remove_widget_first">Prosím najprv odstráňte nástroj</string>
     <string name="add_row">Pridať riadok</string>
     <string name="row_number">Riadok %1$s</string>
-    <string name="discard_changes_prompt">Naozaj chcete zrušiť zmeny?</string>
+    <string name="discard_changes_prompt">Zrušiť zmeny?</string>
     <string name="deletion_error">Chyba výmazu</string>
     <string name="change_key_binding">Zmeniť priradenia kláves</string>
     <string name="key_event_category_map_interactions">Interakcia s mapou</string>
@@ -5190,14 +5190,14 @@
     <string name="press_button_to_link_with_action">Stlačte na vašom zariadení tlačidlo, ktoré má byť priradené k akcii: %1$s</string>
     <string name="key_event_action_move_right">Posunúť doprava</string>
     <string name="enable_to_use_external_input_device">Zapnite pre možnosť použitie externého vstupného zariadenia s OsmAnd</string>
-    <string name="remove_type_q">Naozaj chcete odstrániť typ \"%1$s\"?</string>
+    <string name="remove_type_q">Odstrániť typ \"%1$s\"?</string>
     <string name="not_specified">Neurčené</string>
     <string name="shared_string_is_deleted">%1$s je vymazaný.</string>
     <string name="help_article_map_raster_maps_name">Rastrové mapy (Online / Offline)</string>
     <string name="help_article_navigation_guidance_name">Sprievodca</string>
     <string name="help_article_navigation_routing_horse_routing_name">Navigácia pre jazdu na koni</string>
     <string name="lang_zh_hant">Tradičná Čínština</string>
-    <string name="cloud_trash_clear_confirmation">Naozaj chcete natrvalo odstrániť všetky položky v koši? Táto akcia nemôže byť odvolaná.</string>
+    <string name="cloud_trash_clear_confirmation">Natrvalo odstrániť všetky položky v koši?</string>
     <string name="help_article_navigation_setup_route_details_name">Detaily trasy</string>
     <string name="help_article_navigation_setup_route_navigation_name">Príprava trasy</string>
     <string name="help_article_widgets_radius_ruler_name">Polomerové pravítko a pravítko</string>
@@ -5216,9 +5216,7 @@
     <string name="key_event_action_move_left">Posunúť doľava</string>
     <string name="add_new_type">Pridať nový typ</string>
     <string name="shared_string_empty_trash">Vyprázdniť kôš</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" bude natrvalo odstránený. Ste si istý?
-\n
-\nTáto akcia nemôže byť odvolaná.</string>
+    <string name="delete_trash_item_confirmation_desc">Odstrániť \"%1$s\" natrvalo?</string>
     <string name="trash_is_empty_banner_desc">Súbory odstránené z OsmAnd Cloudu tu budú dostupné po dobu %1$s dní.</string>
     <string name="trash_is_empty">Kôš je prázdny</string>
     <string name="rendering_value_sacScale_description">Švajčiarsky alpinistický klub</string>
@@ -5228,7 +5226,7 @@
     <string name="map_widget_group_glide_ratio">Pomer kĺzania</string>
     <string name="average_glide_ratio">Priemerný pomer kĺzania</string>
     <string name="empty_smart_folder_title">Žiadna vyhovujúca stopa</string>
-    <string name="empty_smart_folder_description">Všetky vyhovujúce stopy sa tu automaticky zobrazia</string>
+    <string name="empty_smart_folder_description">Vyhovujúce stopy sa zobrazia tu</string>
     <string name="delete_smart_folder_dialog_message">Toto odstráni chytrý priečinok \"%1$s\".</string>
     <string name="empty_name">Prázdny názov</string>
     <string name="add_smart_folder">Pridať chytrý priečinok</string>
@@ -5294,7 +5292,7 @@
     <string name="no_config_smart_folder_description">Chytré priečinky umožňujú zoskupiť stopy podľa použitých filtrov</string>
     <string name="searching_matching_tracks">Vyhľadať vyhovujúce stopy</string>
     <string name="discard_filter_changes">Zahodiť zmeny filtru</string>
-    <string name="discard_filter_changes_prompt">Naozaj chcete resetovať všetky filtre?</string>
+    <string name="discard_filter_changes_prompt">Resetovať všetky filtre?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="shared_string_created">Vytvorené</string>
     <string name="sort_size_ascending">Malá veľkosť hore</string>
@@ -5346,7 +5344,7 @@
     <string name="shared_string_show_less">Zobraziť menej</string>
     <string name="all_folders">Všetky priečinky</string>
     <string name="root_folder">Koreňový priečinok</string>
-    <string name="delete_map_description">Naozaj chcete odstrániť mapu %1$s?</string>
+    <string name="delete_map_description">Odstrániť mapu %1$s?</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Navigácia priamo do bodu (Lode)</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Navigácia chodcov</string>
@@ -5412,7 +5410,7 @@
     <string name="shared_string_all_tracks">Všetky stopy</string>
     <string name="action_cannot_be_undone">Táto akcia sa nedá odvolať.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Toto nezruší vaše predplatné OsmAnd Pro.</string>
-    <string name="delete_account_warning">Naozaj chcete odstrániť účet %1$s?</string>
+    <string name="delete_account_warning">Odstrániť účet %1$s?</string>
     <string name="backup_error_delete_account_email_match">E-mail nezodpovedá prihlasovaciemu menu</string>
     <string name="external_device_characteristic_arterial_pressure">Arteriálny tlak</string>
     <string name="verify_account">Overiť účet</string>
@@ -5470,7 +5468,7 @@
     <string name="rendering_value_sector4_name">Sektor 4</string>
     <string name="bicycle_scd_device_name">Cyklistické zariadenie</string>
     <string name="file_already_exists">Súbor už existuje</string>
-    <string name="nav_profile_confirm_delete">Naozaj chcete vymazať \"%1$s\"?</string>
+    <string name="nav_profile_confirm_delete">Vymazať \"%1$s\"?</string>
     <string name="external_device_low_battery">Slabá batéria</string>
     <string name="revolutions_per_minute_unit">ot/min</string>
     <string name="ant_plus_help_title">Neviem aký typ snímača mám</string>
@@ -5485,7 +5483,7 @@
     <string name="external_device_menu_forget">Zabudnúť</string>
     <string name="ant_plus_nothing_found_text">Nepodarilo sa nájsť žiadne snímače</string>
     <string name="get_osmand_cloud">Získajte OsmAnd Cloud</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Naozaj chcete odstrániť účet v OsmAnd Cloud?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Odstrániť účet v OsmAnd Cloud?
 \n
 \nTáto akcia sa nedá odvolať.</string>
     <string name="osmand_cloud_delete_account_confirmation">Vymazať účet?</string>
@@ -5549,7 +5547,7 @@
     <string name="external_device_characteristic_distance">Vzdialenosť</string>
     <string name="external_device_characteristic_battery_level">Batéria</string>
     <string name="external_device_characteristic_gear_ratio">Prevodový stupeň</string>
-    <string name="external_device_characteristic_cadence">Otáčky</string>
+    <string name="external_device_characteristic_cadence">Frekvencia šliapania</string>
     <string name="external_device_characteristic_heart_rate">Tepová frekvencia</string>
     <string name="external_device_details_received_data">Prijaté údaje</string>
     <string name="external_device_details_speed">Rýchlosť</string>
@@ -5584,4 +5582,27 @@
     <string name="delete_folder">Odstrániť priečinok</string>
     <string name="show_all_tracks_on_the_map">Zobraziť všetky stopy na mape</string>
     <string name="map_widget_rssi">RSSI</string>
+    <string name="max_sensor_cadence">Frekvencia šliapania, max</string>
+    <string name="max_sensor_bycicle_power">Výkon bicykla, max</string>
+    <string name="shared_string_extensions">Rozšírenia</string>
+    <string name="shared_string_license">Licencia</string>
+    <string name="shared_string_link">Odkaz</string>
+    <string name="battery_optimization_banner_content">Optimalizácia batérie v Androide môže spôsobiť medzery a nepresnosti v zaznamenaných stopách.</string>
+    <string name="dont_ask_anymore">Nabudúce sa nepýtať</string>
+    <string name="battery_optimization_settings">Nastavenia optimalizácie batérie</string>
+    <string name="battery_optimization_desc">Optimalizácia batérie v Androide môže spôsobiť medzery a nepresnosti v zaznamenaných stopách.
+\n
+\nAk spozorujete tieto problémy, môžete skúsiť nastaviť používanie batérie na \'Neobmedzené.\'</string>
+    <string name="battery_optimization">Optimalizácia batérie</string>
+    <string name="shared_string_copyright">Autorské práva</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="avg_sensor_cadence">Frekvencia šliapania, priemer</string>
+    <string name="max_sensor_heartrate">Srdcový tep, max</string>
+    <string name="avg_sensor_heartrate">Srdcový tep, priemer</string>
+    <string name="avg_sensor_bycicle_power">Výkon bicykla, priemer</string>
+    <string name="max_sensor_temperature">Teplota, max</string>
+    <string name="avg_sensor_temperature">Teplota, priemer</string>
+    <string name="max_sensor_speed">Rýchlosť snímača, max</string>
+    <string name="avg_sensor_speed">Rýchlosť snímača, priemer</string>
 </resources>
