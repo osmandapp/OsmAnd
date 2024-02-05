@@ -108,6 +108,7 @@ import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.cards.AuthorCard;
 import net.osmand.plus.track.cards.CopyrightCard;
 import net.osmand.plus.track.cards.DescriptionCard;
+import net.osmand.plus.track.cards.InfoCard;
 import net.osmand.plus.track.cards.MetadataExtensionsCard;
 import net.osmand.plus.track.cards.GpxInfoCard;
 import net.osmand.plus.track.cards.OptionsCard;
@@ -185,6 +186,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private GpxInfoCard gpxInfoCard;
 	private AuthorCard authorCard;
 	private CopyrightCard copyrightCard;
+	private InfoCard infoCard;
 	private MetadataExtensionsCard metadataExtensionsCard;
 	private RouteInfoCard routeInfoCard;
 	private OverviewCard overviewCard;
@@ -764,6 +766,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			descriptionCard = new DescriptionCard(getMapActivity(), this, selectedGpxFile.getGpxFile());
 			cardsContainer.addView(descriptionCard.build(mapActivity));
 		}
+
 		if (routeKey != null) {
 			if (shouldReattachCards && routeInfoCard != null && routeInfoCard.getView() != null) {
 				reattachCard(cardsContainer, routeInfoCard);
@@ -772,24 +775,35 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				cardsContainer.addView(routeInfoCard.build(mapActivity));
 			}
 		}
+
 		if (shouldReattachCards && gpxInfoCard != null && gpxInfoCard.getView() != null) {
 			reattachCard(cardsContainer, gpxInfoCard);
 		} else {
 			gpxInfoCard = new GpxInfoCard(getMapActivity(), selectedGpxFile.getGpxFile());
 			cardsContainer.addView(gpxInfoCard.build(mapActivity));
 		}
+
+		if (shouldReattachCards && infoCard != null && infoCard.getView() != null) {
+			reattachCard(cardsContainer, authorCard);
+		} else {
+			infoCard = new InfoCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata, routeKey);
+			cardsContainer.addView(infoCard.build(mapActivity));
+		}
+
 		if (shouldReattachCards && authorCard != null && authorCard.getView() != null) {
 			reattachCard(cardsContainer, authorCard);
 		} else {
 			authorCard = new AuthorCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
 			cardsContainer.addView(authorCard.build(mapActivity));
 		}
+
 		if (shouldReattachCards && copyrightCard != null && copyrightCard.getView() != null) {
 			reattachCard(cardsContainer, copyrightCard);
 		} else {
 			copyrightCard = new CopyrightCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata);
 			cardsContainer.addView(copyrightCard.build(mapActivity));
 		}
+
 		if (shouldReattachCards && metadataExtensionsCard != null && metadataExtensionsCard.getView() != null) {
 			reattachCard(cardsContainer, metadataExtensionsCard);
 		} else {
