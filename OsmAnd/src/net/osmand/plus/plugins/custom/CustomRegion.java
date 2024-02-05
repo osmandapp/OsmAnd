@@ -1,4 +1,4 @@
-package net.osmand.plus.download;
+package net.osmand.plus.plugins.custom;
 
 import android.content.Context;
 
@@ -6,13 +6,15 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidNetworkUtils;
-import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.plus.utils.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadDescriptionInfo;
+import net.osmand.plus.utils.AndroidNetworkUtils;
+import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -161,6 +163,7 @@ public class CustomRegion extends WorldRegion {
 		return jsonObject;
 	}
 
+	@NonNull
 	public List<IndexItem> loadIndexItems() {
 		List<IndexItem> items = new ArrayList<>();
 		items.addAll(loadIndexItems(downloadItemsJson));
@@ -168,7 +171,8 @@ public class CustomRegion extends WorldRegion {
 		return items;
 	}
 
-	private List<IndexItem> loadIndexItems(JSONArray itemsJson) {
+	@NonNull
+	private List<IndexItem> loadIndexItems(@Nullable JSONArray itemsJson) {
 		List<IndexItem> items = new ArrayList<>();
 		if (itemsJson != null) {
 			try {
@@ -235,7 +239,7 @@ public class CustomRegion extends WorldRegion {
 				}
 			};
 
-			AndroidNetworkUtils.sendRequestAsync(app, dynamicDownloadItems.getUrl(), null,
+			AndroidNetworkUtils.sendRequestAsync(app, dynamicDownloadItems.url, null,
 					null, false, false, resultListener);
 		}
 	}
@@ -303,38 +307,30 @@ public class CustomRegion extends WorldRegion {
 
 	public static class DynamicDownloadItems {
 
-		private String url;
-		private String format;
-		private String itemsPath;
-		private JSONObject mapping;
+		public final String url;
+		public final String format;
+		public final String itemsPath;
+		public final JSONObject mapping;
 
-		public String getUrl() {
-			return url;
+		public DynamicDownloadItems(@NonNull String url, @NonNull String format,
+		                            @NonNull String itemsPath, @Nullable JSONObject mapping) {
+			this.url = url;
+			this.format = format;
+			this.itemsPath = itemsPath;
+			this.mapping = mapping;
 		}
 
-		public String getFormat() {
-			return format;
+		@NonNull
+		public static DynamicDownloadItems fromJson(@NonNull JSONObject object) {
+			String url = object.optString("url");
+			String format = object.optString("format");
+			String itemsPath = object.optString("items-path");
+			JSONObject mapping = object.optJSONObject("mapping");
+
+			return new DynamicDownloadItems(url, format, itemsPath, mapping);
 		}
 
-		public String getItemsPath() {
-			return itemsPath;
-		}
-
-		public JSONObject getMapping() {
-			return mapping;
-		}
-
-		public static DynamicDownloadItems fromJson(JSONObject object) {
-			DynamicDownloadItems dynamicDownloadItems = new DynamicDownloadItems();
-
-			dynamicDownloadItems.url = object.optString("url", null);
-			dynamicDownloadItems.format = object.optString("format", null);
-			dynamicDownloadItems.itemsPath = object.optString("items-path", null);
-			dynamicDownloadItems.mapping = object.optJSONObject("mapping");
-
-			return dynamicDownloadItems;
-		}
-
+		@NonNull
 		public JSONObject toJson() throws JSONException {
 			JSONObject jsonObject = new JSONObject();
 

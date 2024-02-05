@@ -51,19 +51,19 @@ public class GpxInfoCard extends MapBaseCard {
 		updateVisibility(true);
 
 		TextView header = view.findViewById(R.id.header);
-		header.setText(R.string.info_button);
+		header.setText(R.string.general_settings);
 
 		ViewGroup container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
-
-		File file = new File(gpxFile.path);
-		String trackSize = AndroidUtils.formatSize(app, file.length());
-		createItemRow(container, R.string.shared_string_size, R.drawable.ic_sdcard, trackSize);
 
 		if (gpxFile.metadata.time > 0) {
 			String trackDate = DATE_FORMAT.format(gpxFile.metadata.time);
 			createItemRow(container, R.string.created_on, R.drawable.ic_action_data, trackDate);
 		}
+
+		File file = new File(gpxFile.path);
+		String trackSize = AndroidUtils.formatSize(app, file.length());
+		createItemRow(container, R.string.shared_string_size, R.drawable.ic_sdcard, trackSize);
 
 		String dirName = "";
 		File dir = file.getParentFile();
@@ -72,28 +72,8 @@ public class GpxInfoCard extends MapBaseCard {
 		}
 		createItemRow(container, R.string.shared_string_location, R.drawable.ic_action_folder, dirName);
 
-		addLinkRow(container);
-
 		if (!Algorithms.isEmpty(gpxFile.metadata.desc)) {
 			createItemRow(container, R.string.shared_string_description, R.drawable.ic_action_description, gpxFile.metadata.desc);
-		}
-	}
-
-	private void addLinkRow(@NonNull ViewGroup container) {
-		String link = gpxFile.metadata.link;
-		if (!Algorithms.isEmpty(link)) {
-			View itemRow = createItemRow(container, R.string.shared_string_link, R.drawable.ic_world_globe_dark, link);
-
-			TextView description = itemRow.findViewById(R.id.description);
-			description.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
-
-			itemRow.setOnClickListener(v -> {
-				if (app.getAppCustomization().isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(link));
-					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
-				}
-			});
 		}
 	}
 

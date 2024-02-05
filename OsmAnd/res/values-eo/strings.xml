@@ -5596,4 +5596,14 @@
 \nSe vi spertas la menciitajn problemojn, provu ŝanĝi uzadon de baterio al “Senlima”.</string>
     <string name="battery_optimization">Optimumigo de baterio</string>
     <string name="battery_optimization_banner_content">Optimumigo de baterio de Android povas kaŭzi interrompojn kaj malprecizon en registrataj spuroj.</string>
+    <string name="max_sensor_heartrate">Korbata frekvenco (maksimuma)</string>
+    <string name="avg_sensor_heartrate">Korbata frekvenco (mezuma)</string>
+    <string name="avg_sensor_temperature">Temperaturo (mezuma)</string>
+    <string name="max_sensor_cadence">Rapido de pedalado (maksimuma)</string>
+    <string name="avg_sensor_cadence">Rapido de pedalado (mezuma)</string>
+    <string name="max_sensor_bycicle_power">Povumo de biciklado (maksimuma)</string>
+    <string name="avg_sensor_bycicle_power">Povumo de biciklado (mezuma)</string>
+    <string name="max_sensor_temperature">Temperaturo (maksimuma)</string>
+    <string name="max_sensor_speed">Rapido (laŭ sentilo, maksimuma)</string>
+    <string name="avg_sensor_speed">Rapido (laŭ sentilo, mezuma)</string>
 </resources>

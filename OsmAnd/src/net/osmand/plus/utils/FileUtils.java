@@ -41,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -284,6 +285,13 @@ public class FileUtils {
 
 	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
 		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
+	}
+
+	@NonNull
+	public static List<File> collectDirFiles(@NonNull File dir) {
+		List<File> files = new ArrayList<>();
+		collectDirFiles(dir, files);
+		return files;
 	}
 
 	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {

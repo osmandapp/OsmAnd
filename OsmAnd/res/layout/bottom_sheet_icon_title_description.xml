@@ -31,6 +31,7 @@
 		android:layout_height="wrap_content"
 		android:textColor="?android:textColorPrimary"
 		android:textSize="@dimen/default_list_text_size"
+		android:lineSpacingExtra="@dimen/titleLineSpacingExtra"
 		tools:text="@string/speed_cameras_legal_descr" />
 
 </LinearLayout>

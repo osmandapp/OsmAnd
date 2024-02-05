@@ -65893,6 +65893,20 @@ public final class OsmandOdb {
     com.google.protobuf.ByteString
         getProfileParamsBytes(int index);
 
+    // optional .OsmAnd.OBF.StringTable tagValuesTable = 4;
+    /**
+     * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+     */
+    boolean hasTagValuesTable();
+    /**
+     * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+     */
+    net.osmand.binary.OsmandOdb.StringTable getTagValuesTable();
+    /**
+     * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+     */
+    net.osmand.binary.OsmandOdb.StringTableOrBuilder getTagValuesTableOrBuilder();
+
     // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
     /**
      * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
@@ -66005,9 +66019,22 @@ public final class OsmandOdb {
               profileParams_.add(input.readBytes());
               break;
             }
+            case 34: {
+              net.osmand.binary.OsmandOdb.StringTable.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = tagValuesTable_.toBuilder();
+              }
+              tagValuesTable_ = input.readMessage(net.osmand.binary.OsmandOdb.StringTable.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(tagValuesTable_);
+                tagValuesTable_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
             case 42: {
               net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
                 subBuilder = pointBoxes_.toBuilder();
               }
               pointBoxes_ = input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.PARSER, extensionRegistry);
@@ -66015,13 +66042,13 @@ public final class OsmandOdb {
                 subBuilder.mergeFrom(pointBoxes_);
                 pointBoxes_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000008;
               break;
             }
             case 50: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
                 pointSegments_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000020;
               }
               pointSegments_.add(input.readMessage(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.PARSER, extensionRegistry));
               break;
@@ -66037,7 +66064,7 @@ public final class OsmandOdb {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           profileParams_ = new com.google.protobuf.UnmodifiableLazyStringList(profileParams_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
         }
         this.unknownFields = unknownFields.build();
@@ -67786,6 +67813,20 @@ public final class OsmandOdb {
        * </pre>
        */
       int getPartialInd();
+
+      // repeated int32 tagValueIds = 12 [packed = true];
+      /**
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+       */
+      java.util.List<java.lang.Integer> getTagValueIdsList();
+      /**
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+       */
+      int getTagValueIdsCount();
+      /**
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+       */
+      int getTagValueIds(int index);
     }
     /**
      * Protobuf type {@code OsmAnd.OBF.OsmAndHHRoutingIndex.HHRouteNetworkPoint}
@@ -67909,6 +67950,27 @@ public final class OsmandOdb {
                 partialInd_ = input.readInt32();
                 break;
               }
+              case 96: {
+                if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                  tagValueIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000800;
+                }
+                tagValueIds_.add(input.readInt32());
+                break;
+              }
+              case 98: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000800) == 0x00000800) && input.getBytesUntilLimit() > 0) {
+                  tagValueIds_ = new java.util.ArrayList<java.lang.Integer>();
+                  mutable_bitField0_ |= 0x00000800;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  tagValueIds_.add(input.readInt32());
+                }
+                input.popLimit(limit);
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -67919,6 +67981,9 @@ public final class OsmandOdb {
         } finally {
           if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
             profileIds_ = java.util.Collections.unmodifiableList(profileIds_);
+          }
+          if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+            tagValueIds_ = java.util.Collections.unmodifiableList(tagValueIds_);
           }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -68187,6 +68252,30 @@ public final class OsmandOdb {
         return partialInd_;
       }
 
+      // repeated int32 tagValueIds = 12 [packed = true];
+      public static final int TAGVALUEIDS_FIELD_NUMBER = 12;
+      private java.util.List<java.lang.Integer> tagValueIds_;
+      /**
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getTagValueIdsList() {
+        return tagValueIds_;
+      }
+      /**
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+       */
+      public int getTagValueIdsCount() {
+        return tagValueIds_.size();
+      }
+      /**
+       * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+       */
+      public int getTagValueIds(int index) {
+        return tagValueIds_.get(index);
+      }
+      private int tagValueIdsMemoizedSerializedSize = -1;
+
       private void initFields() {
         id_ = 0;
         dx_ = 0;
@@ -68199,6 +68288,7 @@ public final class OsmandOdb {
         dualClusterId_ = 0;
         profileIds_ = java.util.Collections.emptyList();
         partialInd_ = 0;
+        tagValueIds_ = java.util.Collections.emptyList();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -68269,6 +68359,13 @@ public final class OsmandOdb {
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           output.writeInt32(11, partialInd_);
         }
+        if (getTagValueIdsList().size() > 0) {
+          output.writeRawVarint32(98);
+          output.writeRawVarint32(tagValueIdsMemoizedSerializedSize);
+        }
+        for (int i = 0; i < tagValueIds_.size(); i++) {
+          output.writeInt32NoTag(tagValueIds_.get(i));
+        }
         getUnknownFields().writeTo(output);
       }
 
@@ -68326,6 +68423,20 @@ public final class OsmandOdb {
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(11, partialInd_);
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < tagValueIds_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeInt32SizeNoTag(tagValueIds_.get(i));
+          }
+          size += dataSize;
+          if (!getTagValueIdsList().isEmpty()) {
+            size += 1;
+            size += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(dataSize);
+          }
+          tagValueIdsMemoizedSerializedSize = dataSize;
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -68465,6 +68576,8 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000200);
           partialInd_ = 0;
           bitField0_ = (bitField0_ & ~0x00000400);
+          tagValueIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
           return this;
         }
 
@@ -68538,6 +68651,11 @@ public final class OsmandOdb {
             to_bitField0_ |= 0x00000200;
           }
           result.partialInd_ = partialInd_;
+          if (((bitField0_ & 0x00000800) == 0x00000800)) {
+            tagValueIds_ = java.util.Collections.unmodifiableList(tagValueIds_);
+            bitField0_ = (bitField0_ & ~0x00000800);
+          }
+          result.tagValueIds_ = tagValueIds_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -68593,6 +68711,16 @@ public final class OsmandOdb {
           }
           if (other.hasPartialInd()) {
             setPartialInd(other.getPartialInd());
+          }
+          if (!other.tagValueIds_.isEmpty()) {
+            if (tagValueIds_.isEmpty()) {
+              tagValueIds_ = other.tagValueIds_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+            } else {
+              ensureTagValueIdsIsMutable();
+              tagValueIds_.addAll(other.tagValueIds_);
+            }
+            onChanged();
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -69145,6 +69273,72 @@ public final class OsmandOdb {
         public Builder clearPartialInd() {
           bitField0_ = (bitField0_ & ~0x00000400);
           partialInd_ = 0;
+          onChanged();
+          return this;
+        }
+
+        // repeated int32 tagValueIds = 12 [packed = true];
+        private java.util.List<java.lang.Integer> tagValueIds_ = java.util.Collections.emptyList();
+        private void ensureTagValueIdsIsMutable() {
+          if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+            tagValueIds_ = new java.util.ArrayList<java.lang.Integer>(tagValueIds_);
+            bitField0_ |= 0x00000800;
+           }
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public java.util.List<java.lang.Integer>
+            getTagValueIdsList() {
+          return java.util.Collections.unmodifiableList(tagValueIds_);
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public int getTagValueIdsCount() {
+          return tagValueIds_.size();
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public int getTagValueIds(int index) {
+          return tagValueIds_.get(index);
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public Builder setTagValueIds(
+            int index, int value) {
+          ensureTagValueIdsIsMutable();
+          tagValueIds_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public Builder addTagValueIds(int value) {
+          ensureTagValueIdsIsMutable();
+          tagValueIds_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public Builder addAllTagValueIds(
+            java.lang.Iterable<? extends java.lang.Integer> values) {
+          ensureTagValueIdsIsMutable();
+          super.addAll(values, tagValueIds_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated int32 tagValueIds = 12 [packed = true];</code>
+         */
+        public Builder clearTagValueIds() {
+          tagValueIds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
           onChanged();
           return this;
         }
@@ -71379,6 +71573,28 @@ public final class OsmandOdb {
       return profileParams_.getByteString(index);
     }
 
+    // optional .OsmAnd.OBF.StringTable tagValuesTable = 4;
+    public static final int TAGVALUESTABLE_FIELD_NUMBER = 4;
+    private net.osmand.binary.OsmandOdb.StringTable tagValuesTable_;
+    /**
+     * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+     */
+    public boolean hasTagValuesTable() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+     */
+    public net.osmand.binary.OsmandOdb.StringTable getTagValuesTable() {
+      return tagValuesTable_;
+    }
+    /**
+     * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+     */
+    public net.osmand.binary.OsmandOdb.StringTableOrBuilder getTagValuesTableOrBuilder() {
+      return tagValuesTable_;
+    }
+
     // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
     public static final int POINTBOXES_FIELD_NUMBER = 5;
     private net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes_;
@@ -71386,7 +71602,7 @@ public final class OsmandOdb {
      * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
      */
     public boolean hasPointBoxes() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
@@ -71441,6 +71657,7 @@ public final class OsmandOdb {
       edition_ = 0L;
       profile_ = "";
       profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      tagValuesTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
       pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
       pointSegments_ = java.util.Collections.emptyList();
     }
@@ -71488,6 +71705,9 @@ public final class OsmandOdb {
         output.writeBytes(3, profileParams_.getByteString(i));
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(4, tagValuesTable_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(5, pointBoxes_);
       }
       for (int i = 0; i < pointSegments_.size(); i++) {
@@ -71520,6 +71740,10 @@ public final class OsmandOdb {
         size += 1 * getProfileParamsList().size();
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, tagValuesTable_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, pointBoxes_);
       }
@@ -71639,6 +71863,7 @@ public final class OsmandOdb {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getTagValuesTableFieldBuilder();
           getPointBoxesFieldBuilder();
           getPointSegmentsFieldBuilder();
         }
@@ -71655,15 +71880,21 @@ public final class OsmandOdb {
         bitField0_ = (bitField0_ & ~0x00000002);
         profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (tagValuesTableBuilder_ == null) {
+          tagValuesTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+        } else {
+          tagValuesTableBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         if (pointBoxesBuilder_ == null) {
           pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
         } else {
           pointBoxesBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (pointSegmentsBuilder_ == null) {
           pointSegments_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           pointSegmentsBuilder_.clear();
         }
@@ -71712,15 +71943,23 @@ public final class OsmandOdb {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
+        if (tagValuesTableBuilder_ == null) {
+          result.tagValuesTable_ = tagValuesTable_;
+        } else {
+          result.tagValuesTable_ = tagValuesTableBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
         if (pointBoxesBuilder_ == null) {
           result.pointBoxes_ = pointBoxes_;
         } else {
           result.pointBoxes_ = pointBoxesBuilder_.build();
         }
         if (pointSegmentsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
             pointSegments_ = java.util.Collections.unmodifiableList(pointSegments_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.pointSegments_ = pointSegments_;
         } else {
@@ -71760,6 +71999,9 @@ public final class OsmandOdb {
           }
           onChanged();
         }
+        if (other.hasTagValuesTable()) {
+          mergeTagValuesTable(other.getTagValuesTable());
+        }
         if (other.hasPointBoxes()) {
           mergePointBoxes(other.getPointBoxes());
         }
@@ -71767,7 +72009,7 @@ public final class OsmandOdb {
           if (!other.pointSegments_.isEmpty()) {
             if (pointSegments_.isEmpty()) {
               pointSegments_ = other.pointSegments_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensurePointSegmentsIsMutable();
               pointSegments_.addAll(other.pointSegments_);
@@ -71780,7 +72022,7 @@ public final class OsmandOdb {
               pointSegmentsBuilder_.dispose();
               pointSegmentsBuilder_ = null;
               pointSegments_ = other.pointSegments_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
               pointSegmentsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPointSegmentsFieldBuilder() : null;
@@ -72114,6 +72356,123 @@ public final class OsmandOdb {
         return this;
       }
 
+      // optional .OsmAnd.OBF.StringTable tagValuesTable = 4;
+      private net.osmand.binary.OsmandOdb.StringTable tagValuesTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          net.osmand.binary.OsmandOdb.StringTable, net.osmand.binary.OsmandOdb.StringTable.Builder, net.osmand.binary.OsmandOdb.StringTableOrBuilder> tagValuesTableBuilder_;
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public boolean hasTagValuesTable() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public net.osmand.binary.OsmandOdb.StringTable getTagValuesTable() {
+        if (tagValuesTableBuilder_ == null) {
+          return tagValuesTable_;
+        } else {
+          return tagValuesTableBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public Builder setTagValuesTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (tagValuesTableBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          tagValuesTable_ = value;
+          onChanged();
+        } else {
+          tagValuesTableBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public Builder setTagValuesTable(
+          net.osmand.binary.OsmandOdb.StringTable.Builder builderForValue) {
+        if (tagValuesTableBuilder_ == null) {
+          tagValuesTable_ = builderForValue.build();
+          onChanged();
+        } else {
+          tagValuesTableBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public Builder mergeTagValuesTable(net.osmand.binary.OsmandOdb.StringTable value) {
+        if (tagValuesTableBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              tagValuesTable_ != net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance()) {
+            tagValuesTable_ =
+              net.osmand.binary.OsmandOdb.StringTable.newBuilder(tagValuesTable_).mergeFrom(value).buildPartial();
+          } else {
+            tagValuesTable_ = value;
+          }
+          onChanged();
+        } else {
+          tagValuesTableBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public Builder clearTagValuesTable() {
+        if (tagValuesTableBuilder_ == null) {
+          tagValuesTable_ = net.osmand.binary.OsmandOdb.StringTable.getDefaultInstance();
+          onChanged();
+        } else {
+          tagValuesTableBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public net.osmand.binary.OsmandOdb.StringTable.Builder getTagValuesTableBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getTagValuesTableFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      public net.osmand.binary.OsmandOdb.StringTableOrBuilder getTagValuesTableOrBuilder() {
+        if (tagValuesTableBuilder_ != null) {
+          return tagValuesTableBuilder_.getMessageOrBuilder();
+        } else {
+          return tagValuesTable_;
+        }
+      }
+      /**
+       * <code>optional .OsmAnd.OBF.StringTable tagValuesTable = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          net.osmand.binary.OsmandOdb.StringTable, net.osmand.binary.OsmandOdb.StringTable.Builder, net.osmand.binary.OsmandOdb.StringTableOrBuilder> 
+          getTagValuesTableFieldBuilder() {
+        if (tagValuesTableBuilder_ == null) {
+          tagValuesTableBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              net.osmand.binary.OsmandOdb.StringTable, net.osmand.binary.OsmandOdb.StringTable.Builder, net.osmand.binary.OsmandOdb.StringTableOrBuilder>(
+                  tagValuesTable_,
+                  getParentForChildren(),
+                  isClean());
+          tagValuesTable_ = null;
+        }
+        return tagValuesTableBuilder_;
+      }
+
       // required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;
       private net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes_ = net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
@@ -72122,7 +72481,7 @@ public final class OsmandOdb {
        * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
       public boolean hasPointBoxes() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
@@ -72147,7 +72506,7 @@ public final class OsmandOdb {
         } else {
           pointBoxesBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
@@ -72161,7 +72520,7 @@ public final class OsmandOdb {
         } else {
           pointBoxesBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
@@ -72169,7 +72528,7 @@ public final class OsmandOdb {
        */
       public Builder mergePointBoxes(net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox value) {
         if (pointBoxesBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
               pointBoxes_ != net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.getDefaultInstance()) {
             pointBoxes_ =
               net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.newBuilder(pointBoxes_).mergeFrom(value).buildPartial();
@@ -72180,7 +72539,7 @@ public final class OsmandOdb {
         } else {
           pointBoxesBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         return this;
       }
       /**
@@ -72193,14 +72552,14 @@ public final class OsmandOdb {
         } else {
           pointBoxesBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       /**
        * <code>required .OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoutePointsBox pointBoxes = 5;</code>
        */
       public net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointsBox.Builder getPointBoxesBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         onChanged();
         return getPointBoxesFieldBuilder().getBuilder();
       }
@@ -72235,9 +72594,9 @@ public final class OsmandOdb {
       private java.util.List<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments> pointSegments_ =
         java.util.Collections.emptyList();
       private void ensurePointSegmentsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           pointSegments_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments>(pointSegments_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -72386,7 +72745,7 @@ public final class OsmandOdb {
       public Builder clearPointSegments() {
         if (pointSegmentsBuilder_ == null) {
           pointSegments_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           pointSegmentsBuilder_.clear();
@@ -72463,7 +72822,7 @@ public final class OsmandOdb {
           pointSegmentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegments.Builder, net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRouteBlockSegmentsOrBuilder>(
                   pointSegments_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           pointSegments_ = null;
@@ -73906,34 +74265,36 @@ public final class OsmandOdb {
       "ataObjects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\022" +
       "1\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.Restr" +
       "ictionData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd" +
-      ".OBF.StringTable\"\317\007\n\024OsmAndHHRoutingInde" +
+      ".OBF.StringTable\"\231\010\n\024OsmAndHHRoutingInde" +
       "x\022\017\n\007edition\030\001 \002(\003\022\017\n\007profile\030\002 \002(\t\022\025\n\rp" +
-      "rofileParams\030\003 \003(\t\022E\n\npointBoxes\030\005 \002(\01321" +
-      ".OsmAnd.OBF.OsmAndHHRoutingIndex.HHRoute" +
-      "PointsBox\022L\n\rpointSegments\030\006 \003(\01325.OsmAn" +
-      "d.OBF.OsmAndHHRoutingIndex.HHRouteBlockS" +
-      "egments\032\324\001\n\020HHRoutePointsBox\022\014\n\004left\030\002 \002",
-      "(\021\022\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022\016\n\006bottom" +
-      "\030\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd.OBF.OsmAn" +
-      "dHHRoutingIndex.HHRoutePointsBox\022D\n\006poin" +
-      "ts\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHRoutingInd" +
-      "ex.HHRouteNetworkPoint\032\335\001\n\023HHRouteNetwor" +
-      "kPoint\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002" +
-      "(\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030\005 \002(\003\022\031\n\021" +
-      "roadStartEndIndex\030\006 \002(\005\022\021\n\tclusterId\030\007 \001" +
-      "(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdualClusterId" +
-      "\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\npartialInd",
-      "\030\013 \001(\005\032\360\001\n\024HHRouteBlockSegments\022\024\n\014idRan" +
-      "geStart\030\001 \002(\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\t" +
-      "profileId\030\003 \001(\005\022J\n\013innerBlocks\030\006 \003(\01325.O" +
-      "smAnd.OBF.OsmAndHHRoutingIndex.HHRouteBl" +
-      "ockSegments\022L\n\rpointSegments\030\004 \003(\01325.Osm" +
-      "And.OBF.OsmAndHHRoutingIndex.HHRoutePoin" +
-      "tSegments\032?\n\024HHRoutePointSegments\022\022\n\nseg" +
-      "mentsIn\030\002 \002(\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013Os" +
-      "mAndOwner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(" +
-      "\t\022\023\n\013description\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\t",
-      "B\036\n\021net.osmand.binaryB\tOsmandOdb"
+      "rofileParams\030\003 \003(\t\022/\n\016tagValuesTable\030\004 \001" +
+      "(\0132\027.OsmAnd.OBF.StringTable\022E\n\npointBoxe" +
+      "s\030\005 \002(\01321.OsmAnd.OBF.OsmAndHHRoutingInde" +
+      "x.HHRoutePointsBox\022L\n\rpointSegments\030\006 \003(" +
+      "\01325.OsmAnd.OBF.OsmAndHHRoutingIndex.HHRo",
+      "uteBlockSegments\032\324\001\n\020HHRoutePointsBox\022\014\n" +
+      "\004left\030\002 \002(\021\022\r\n\005right\030\003 \002(\021\022\013\n\003top\030\004 \002(\021\022" +
+      "\016\n\006bottom\030\005 \002(\021\022@\n\005boxes\030\006 \003(\01321.OsmAnd." +
+      "OBF.OsmAndHHRoutingIndex.HHRoutePointsBo" +
+      "x\022D\n\006points\030\007 \003(\01324.OsmAnd.OBF.OsmAndHHR" +
+      "outingIndex.HHRouteNetworkPoint\032\366\001\n\023HHRo" +
+      "uteNetworkPoint\022\n\n\002id\030\001 \002(\005\022\n\n\002dx\030\002 \002(\021\022" +
+      "\n\n\002dy\030\003 \002(\021\022\020\n\010globalId\030\004 \002(\005\022\016\n\006roadId\030" +
+      "\005 \002(\003\022\031\n\021roadStartEndIndex\030\006 \002(\005\022\021\n\tclus" +
+      "terId\030\007 \001(\005\022\023\n\013dualPointId\030\010 \001(\005\022\025\n\rdual",
+      "ClusterId\030\t \001(\005\022\022\n\nprofileIds\030\n \003(\005\022\022\n\np" +
+      "artialInd\030\013 \001(\005\022\027\n\013tagValueIds\030\014 \003(\005B\002\020\001" +
+      "\032\360\001\n\024HHRouteBlockSegments\022\024\n\014idRangeStar" +
+      "t\030\001 \002(\005\022\025\n\ridRangeLength\030\002 \002(\005\022\021\n\tprofil" +
+      "eId\030\003 \001(\005\022J\n\013innerBlocks\030\006 \003(\01325.OsmAnd." +
+      "OBF.OsmAndHHRoutingIndex.HHRouteBlockSeg" +
+      "ments\022L\n\rpointSegments\030\004 \003(\01325.OsmAnd.OB" +
+      "F.OsmAndHHRoutingIndex.HHRoutePointSegme" +
+      "nts\032?\n\024HHRoutePointSegments\022\022\n\nsegmentsI" +
+      "n\030\002 \002(\014\022\023\n\013segmentsOut\030\003 \002(\014\"T\n\013OsmAndOw",
+      "ner\022\014\n\004name\030\001 \002(\t\022\020\n\010resource\030\002 \001(\t\022\023\n\013d" +
+      "escription\030\003 \001(\t\022\020\n\010pluginid\030\004 \001(\tB\036\n\021ne" +
+      "t.osmand.binaryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -74239,7 +74600,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor,
-              new java.lang.String[] { "Edition", "Profile", "ProfileParams", "PointBoxes", "PointSegments", });
+              new java.lang.String[] { "Edition", "Profile", "ProfileParams", "TagValuesTable", "PointBoxes", "PointSegments", });
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_descriptor =
             internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(0);
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRoutePointsBox_fieldAccessorTable = new
@@ -74251,7 +74612,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteNetworkPoint_descriptor,
-              new java.lang.String[] { "Id", "Dx", "Dy", "GlobalId", "RoadId", "RoadStartEndIndex", "ClusterId", "DualPointId", "DualClusterId", "ProfileIds", "PartialInd", });
+              new java.lang.String[] { "Id", "Dx", "Dy", "GlobalId", "RoadId", "RoadStartEndIndex", "ClusterId", "DualPointId", "DualClusterId", "ProfileIds", "PartialInd", "TagValueIds", });
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_descriptor =
             internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_descriptor.getNestedTypes().get(2);
           internal_static_OsmAnd_OBF_OsmAndHHRoutingIndex_HHRouteBlockSegments_fieldAccessorTable = new
