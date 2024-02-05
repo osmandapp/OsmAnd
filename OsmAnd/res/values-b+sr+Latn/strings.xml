@@ -13,7 +13,7 @@
     <string name="shared_string_remember_my_choice">Zapamti izbor</string>
     <string name="shared_string_and">i</string>
     <string name="shared_string_or">ili</string>
-    <string name="auto_zoom_none">Bez auto zumiranja</string>
+    <string name="auto_zoom_none">Bez autozumiranja</string>
     <string name="base_world_map">Osnovna mapa sveta</string>
     <string name="local_index_tile_data_expire">Ističe za (minuta): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Najveće uveličanje: %1$s</string>
@@ -265,7 +265,7 @@
     <string name="map_widget_right">Desni panel</string>
     <string name="map_widget_left">Levi panel</string>
     <string name="shared_string_show">Prikaži</string>
-    <string name="configure_map">Podesi mapu</string>
+    <string name="configure_map">Podešavanje mape</string>
     <string name="anonymous_user_hint">Neimenovani korisnici ne mogu:
 \n
 \n- da prave grupe; 
@@ -701,7 +701,7 @@
     <string name="transport_Routes">Putevi</string>
     <string name="add_new_rule">Dodaj novo pravilo</string>
     <string name="opening_hours_not_supported">Ne mogu da izmenim oblik radnog vremena.</string>
-    <string name="map_screen_orientation_descr">Položeno, uspravno ili kao i uređaj.</string>
+    <string name="map_screen_orientation_descr">Uspravno, vodoravno, sistem.</string>
     <string name="route_tshr">Skrenite oštro desno i nastavite</string>
     <string name="route_tr">Skrenite desno i nastavite</string>
     <string name="unzipping_file">Izdvajanje datoteka…</string>
@@ -853,7 +853,7 @@
     <string name="layer_overlay">Vidljivo na mapi…</string>
     <string name="map_underlay_descr">Izaberi mapu sloja ispod</string>
     <string name="map_underlay">Mapa ispod</string>
-    <string name="layer_underlay">Mapa sloja ispod…</string>
+    <string name="layer_underlay">Mapa u pozadini</string>
     <string name="map_transparency">Prozirnost osnovne mape</string>
     <string name="map_transparency_descr">Podesite prozirnost osnovne mape.</string>
     <string name="overlay_transparency">Prozirnost sloja iznad</string>
@@ -1281,9 +1281,9 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Planinske staze</string>
     <string name="download_roads_only_maps">Mapa puteva</string>
     <string name="map_screen_orientation">Orijentacija ekrana</string>
-    <string name="map_orientation_landscape">Položeno</string>
+    <string name="map_orientation_landscape">Vodoravno</string>
     <string name="map_orientation_portrait">Uspravno</string>
-    <string name="map_orientation_default">Kao i uređaj</string>
+    <string name="map_orientation_default">Sistem</string>
     <string name="search_nearby">Pretraži okolinu</string>
     <string name="search_near_map">Pretraži blizu trenutnog središta mape</string>
     <string name="search_poi_location">Tražim signal…</string>
@@ -1763,7 +1763,7 @@
     <string name="download_files_error_not_enough_space">Nema dovoljno prostora! 
 \n {3} MB je privremeno potrebno, a {1} MB trajno. 
 \n (dostupno je samo {2} MB.)</string>
-    <string name="show_transparency_seekbar">Prikazuj prozirnu traku pretrage</string>
+    <string name="show_transparency_seekbar">Prikazati regulator prozirnosti</string>
     <string name="upload_anonymously">Otpremi anonimno</string>
     <string name="map_markers_other">Ostali markeri</string>
     <string name="select_map_marker">Odaberi marker</string>
@@ -2430,11 +2430,11 @@
     <string name="monitoring_min_accuracy_descr_recommendation">Preporuka: teško je predvideti šta će se beležiti, a šta neće, pa je najbolje da isključite ovaj filter.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Usputna pojava: Kao ishod propuštanja podataka po tačnosti, neke tačke mogu skroz nedostajati npr. ispod mostova, drveća, između visokih zgrada, ili u određenim vremenskim uslovima.</string>
     <string name="monitoring_min_accuracy_descr">Ovo će snimati samo tačke izmerene sa naznačivanjem najmanje tačnosti (u metrima/stopama, kao što prijavljuje Android za Vaš čipove). Tačnost je približna merenjima stvarnog lokacija, i nije neposredno vezana za preciznost, koja je rasipanje ponovljenih merenja.</string>
-    <string name="monitoring_min_speed_descr_remark">Opaska: provera brzine &gt; 0: većina čipova GPS-a prijavljuju vrednost brzine samo ako algoritam primeti da ste u pokretu i ništa ukoliko niste. Korišćenje podešavanja &gt;0 u ovom filteru je zapravo korišćenje senzora pokreta iz čipa GPS-a. Čak iako se ne izbira propust podataka ovde za vreme snimanja, mi i dalje koristimo ovu mogućnost u našem raščlanjivanju GPX-a analizi da odredimo pređenu udaljenost, tj. vrednost koju prikazujemo u tom polju je pređena udaljenost za vreme kretanja.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Preporuka: Pokušajte prvo da koristite prepoznavač kretanja preko filtera najmanjeg pomeraja (B), pošto može dati bolji učinak i izgubićete manje podataka. Ako Vaši Rute ostanu pune šuma pri malim brzinama, probajte sa ne-ništavnim vrednostima ovde. Pazite da neke vrste merenja neće uopšte davati merenja brzine (neki načini preko mreže) u kom slučaju nećete snimiti ništa.</string>
-    <string name="monitoring_min_speed_descr_side_effect">Usputne pojave: Vašim stazama će nedostajati svi odsečci gde merilo najmanje brzine nije bio ispunjeno (npr. gde ste gurali bicikl uzbrdo). Takođe, neće biti podataka o razdobljima mirovanja, kao što su pravljenje odmora. Ovo može da ima uticaja na raščlanjivanje ili naknadnu obradu, kao što je određivanje ukupne dužine puta, vremena kretanja, ili prosečne brzine.</string>
+    <string name="monitoring_min_speed_descr_remark">Napomena: provera brzine &gt; 0: većina čipova GPS-a prijavljuju vrednost brzine samo ako algoritam primeti da si u pokretu i ništa ukoliko niste. Korišćenje podešavanja &gt;0 u ovom filteru je zapravo korišćenje senzora pokreta iz čipa GPS-a. Čak iako se ne izbira propust podataka ovde za vreme snimanja, mi i dalje koristimo ovu mogućnost u našem raščlanjivanju GPX-a analizi da odredimo pređenu udaljenost, tj. vrednost koju prikazujemo u tom polju je pređena udaljenost za vreme kretanja.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Preporuka: prvo koristi detekciju pokreta kroz filtar minimalnog pomaka (B), na taj ćeš način dobiti bolje rezultate i kasnije izgubiti manje podataka. Ako snimanje ruta nastavi \'usporeno\' pri malim brzinama, pokušaj uneti vrednosti veće od nule. Za neka merenja brzina (zavisno od interneta) uopšte ne prijavljuju, pa će u skladu s tim takvi zapisi nedostajati.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Usputne pojave: Tvojim rutama će nedostajati sve dionice na kojima nije zadovoljen kriterijum minimalne brzine (npr. gde ste gurali bicikl uzbrdo). Takođe, neće biti podataka o razdobljima mirovanja, kao što su odmori. Ovo može uticati na analizu ili naknadnu obradu, kao što je određivanje ukupne dužine puta, vremena vožnje, ili prosečne brzine.</string>
     <string name="monitoring_min_speed_descr">Ovo je filter za odsecanje malih brzina koji ne beleži tačke ispod određene brzine. Ovim snimljeni Rute izgledaju glatkije kada se gledaju na mapi.</string>
-    <string name="not_support_file_type_with_ext">Umesto toga Odaberi podržanu datoteku proširenja %1$s.</string>
+    <string name="not_support_file_type_with_ext">Neispravan format %1$s odaberi fajl sa ekstenzijom %1$s.</string>
     <string name="file_does_not_contain_routing_rules">Nema pravila za navođenje u ’%1$s’. Odaberi drugu datoteku.</string>
     <string name="logcat_buffer_descr">Pregled i zajedničko korišćenje dnevnika o aplikacijama</string>
     <string name="permission_is_required">Potrebne su dozvole za korišćenje ove mogućnosti.</string>
@@ -2959,8 +2959,8 @@
     <string name="track_coloring_solid">Čvrst</string>
     <string name="plan_route_last_edited">Poslednje izmenjena</string>
     <string name="plan_route_import_track">Uvezi rutu</string>
-    <string name="plan_route_open_existing_track">Otvori postojeću rutu</string>
-    <string name="plan_route_create_new_route">Kreiraj novu rutu</string>
+    <string name="plan_route_open_existing_track">Snimljene rute</string>
+    <string name="plan_route_create_new_route">Nova ruta</string>
     <string name="plan_route_select_track_file_for_open">Izaberi datoteku rute za otvaranje.</string>
     <string name="shared_string_done">Završeno</string>
     <string name="overwrite_track">Zameni rutu</string>
@@ -3299,7 +3299,7 @@
     <string name="choose_track_file_to_follow">Odaberi datoteku rute za praćenje</string>
     <string name="simulate_navigation">Simulacija rute</string>
     <string name="show_along_the_route">Prikaži duž rute</string>
-    <string name="avoid_roads_descr">Odaberi ruta koji biste izbegli u navođenju, ili na mapi ili sa spiska ispod:</string>
+    <string name="avoid_roads_descr">Na ruti izbegavati:</string>
     <string name="app_mode_public_transport">Javni saobraćaj</string>
     <string name="waiting_for_route_calculation">Izračunavanje puta…</string>
     <string name="points_of_interests">TOI</string>
@@ -3526,7 +3526,7 @@
     <string name="osmand_parking_plugin_description">Označava gde su vam auta ostavljena, i obaveštava Vam kalendar kada će isteći vreme parkiranja. Radi smeštaja oznake, Izaberi mesto na mapi, Idi na „Radnje“ i tapnite na „Dodaj parking“.</string>
     <string name="osmand_parking_plugin_name">lokaciju parkiranja</string>
     <string name="audionotes_plugin_description">Pravite zvučne/video beleške za vreme putovanja, ili kroz dugme na mapi ili kroz priručni meni lokacija.</string>
-    <string name="audionotes_plugin_name">Zabeleške zvuka i snimaka</string>
+    <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="plugin_touringview_descr">Uključivanjem ovog pogleda se menja način izgeda mape na „Turistički pregled“, koji je naročiti bogati pregled za turiste i službene vozače. 
 \n 
 \nOvaj pogled nudi, na svakom stupnju približavanja najveću količinu turističkih detalja na podacima mape (posebno puteve, tragove, staze i znakove snalaženja u prostoru). 
@@ -4700,7 +4700,7 @@
     <string name="weather_precip_milimeters">Milimetri</string>
     <string name="weather_wind_miles_per_hour">Milje po satu</string>
     <string name="weather_pressure_inches_of_mercury">Inči žive</string>
-    <string name="show_map_symbols">Prikazuj znamenja mapa</string>
+    <string name="show_map_symbols">Prikazati oznake na mapi</string>
     <string name="help_article_plan_route_coordinate_input_name">Unos koordinata</string>
     <string name="telegram_chats">Ćaskanja Telegramom</string>
     <string name="folder_export_empty_error">Nema ničeg za izvoz, folder je prazan</string>
@@ -4845,7 +4845,7 @@
     <string name="github_discussion">Razgovor na Githubu</string>
     <string name="contact_us">Obratite nam se</string>
     <string name="send_crash_log_descr">Sadrži samo podatke o rušenjima programa</string>
-    <string name="open_issue_on_github_descr">Upitajte, predložite nove mogućnosti</string>
+    <string name="open_issue_on_github_descr">Postavi pitanje, predloži nove mogućnosti</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Eksplozivi</string>
     <string name="rendering_value_caiScale_name">KAI</string>
     <string name="rendering_attr_alpineHiking_name">Razvrstavanje po težini</string>
@@ -5163,7 +5163,7 @@
     <string name="weather_widget_group_desc">Skup widget koje prikazuju razne podatke o vremenskim prilikama.</string>
     <string name="precipitation_widget_desc">Prikazuje padavine na trenutnom središtu mape.</string>
     <string name="rendering_engine_failed">Render OsmAnd mape se srušio.</string>
-    <string name="show_map_symbols_desc">Pismo, saobraćajni znaci, i ostalo.</string>
+    <string name="show_map_symbols_desc">Tekst, saobraćajni znaci i ostalo.</string>
     <string name="map_widget_camera_tilt_desc">Prikazuje nagnutost kamere u pregledu prostora. Podrazumevana nagnutost je 90° (bez naginjanja).</string>
     <string name="map_widget_zoom_level">Nivo uvećanja</string>
     <string name="go_to_marker_location">Idi na lokaciju oznake</string>
@@ -5238,7 +5238,7 @@
     <string name="telegram_chats_descr">Pridružite se nekom našem ćaskanju na telegramu.</string>
     <string name="free_versions">Besplatna izdanja</string>
     <string name="send_logcat_log_descr">Datoteka podrobnog dnevnika</string>
-    <string name="open_issue_on_github">Otvori grešku na Githubu</string>
+    <string name="open_issue_on_github">Otvori grešku na GitHubu</string>
     <string name="report_an_issues">Prijavi grešku</string>
     <string name="most_viewed">Najpregledanije</string>
     <string name="feature_available_as_part_of_plan">%1$s je dostupno kao deo plana %2$s</string>

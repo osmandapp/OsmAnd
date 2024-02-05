@@ -4720,4 +4720,19 @@
     <string name="poi_state_proposed">Status: vorgeschlagen</string>
     <string name="poi_state_main">Status: hauptsächlich</string>
     <string name="poi_border_zone">Grenzgebiet</string>
+    <string name="poi_padus_manager_type_fullname">Betreibertyp</string>
+    <string name="poi_nfs_recreation_area_activity_beachcombing">Strandräubern</string>
+    <string name="poi_nfs_recreation_area_activity_bicycling">Radfahren</string>
+    <string name="poi_nfs_recreation_area_activity_big_game_hunting">Großwildjagd</string>
+    <string name="poi_nfs_recreation_area_activity">Freizeitgelände Aktivität</string>
+    <string name="poi_nfs_recreation_area_open_status">Freizeitgelände Zugangsstatus</string>
+    <string name="poi_padus_manager_fullname">Betreiber</string>
+    <string name="poi_hang_gliding">Drachenfliegen</string>
+    <string name="poi_padus_owner_fullname">Eigentümer</string>
+    <string name="poi_padus_public_access_restricted">Zugang: beschränkt</string>
+    <string name="poi_padus_public_access_open">Zugang: öffentlich</string>
+    <string name="poi_padus_public_access_unknown">Zugang: unbekannt</string>
+    <string name="poi_padus_public_access_closed">Zugang: geschlossen</string>
+    <string name="poi_nfs_recreation_area_activity_backpacking">Rucksackreise</string>
+    <string name="poi_nfs_recreation_area_activity_boating_motorized">Motorboot fahren</string>
 </resources>
