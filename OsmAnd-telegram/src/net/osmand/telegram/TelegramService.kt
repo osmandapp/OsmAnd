@@ -4,17 +4,19 @@ import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.location.Location
 import android.os.*
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.location.*
+import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramSettings.ShareChatInfo
 import net.osmand.telegram.TelegramSettings.SharingStatus
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
 import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
+import net.osmand.telegram.helpers.location.LocationCallback
+import net.osmand.telegram.helpers.location.LocationServiceHelper
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
@@ -23,8 +25,7 @@ private const val UPDATE_WIDGET_INTERVAL_MS = 1000L // 1 sec
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
 private const val UPDATE_LIVE_TRACKS_INTERVAL_MS = 30000L // 30 sec
 
-class TelegramService : Service(), TelegramIncomingMessagesListener,
-		TelegramOutgoingMessagesListener {
+class TelegramService : Service(), TelegramIncomingMessagesListener, TelegramOutgoingMessagesListener {
 	
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
@@ -39,15 +40,7 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 	private var updateWidgetHandler: Handler? = null
 	private var updateWidgetThread = HandlerThread("WidgetUpdateServiceThread")
 
-	// FusedLocationProviderClient - Main class for receiving location updates.
-	private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-	// LocationRequest - Requirements for the location updates, i.e., how often you should receive
-	// updates, the priority, etc.
-	private lateinit var locationRequest: LocationRequest
-
-	// LocationCallback - Called when FusedLocationProviderClient has a new Location.
-	private lateinit var locationCallback: LocationCallback
+	private lateinit var locationServiceHelper: LocationServiceHelper
 
 	var usedBy = 0
 		private set
@@ -66,42 +59,7 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 		updateShareInfoHandler = Handler(mHandlerThread.looper)
 		updateTracksHandler = Handler(tracksHandlerThread.looper)
 		updateWidgetHandler = Handler(updateWidgetThread.looper)
-
-		fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-
-		locationRequest = LocationRequest().apply {
-			// Sets the desired interval for active location updates. This interval is inexact. You
-			// may not receive updates at all if no location sources are available, or you may
-			// receive them less frequently than requested. You may also receive updates more
-			// frequently than requested if other applications are requesting location at a more
-			// frequent interval.
-			//
-			// IMPORTANT NOTE: Apps running on Android 8.0 and higher devices (regardless of
-			// targetSdkVersion) may receive updates less frequently than this interval when the app
-			// is no longer in the foreground.
-			interval = 1000
-
-			// Sets the fastest rate for active location updates. This interval is exact, and your
-			// application will never receive updates more frequently than this value.
-			//fastestInterval = 500
-
-			// Sets the maximum time when batched location updates are delivered. Updates may be
-			// delivered sooner than this interval.
-			maxWaitTime = 0
-
-			priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-		}
-
-		locationCallback = object : LocationCallback() {
-			override fun onLocationResult(locationResult: LocationResult?) {
-				super.onLocationResult(locationResult)
-				val location = convertLocation(locationResult?.lastLocation)
-				if (System.currentTimeMillis() - lastLocationSentTime > sendLocationInterval * 1000) {
-					lastLocationSentTime = System.currentTimeMillis()
-					app().shareLocationHelper.updateLocation(location)
-				}
-			}
-		}
+		locationServiceHelper = app().createLocationServiceHelper()
 	}
 
 	override fun onBind(intent: Intent): IBinder {
@@ -181,6 +139,12 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 		stopForeground(java.lang.Boolean.TRUE)
 	}
 
+	fun updateLocationSource() {
+		removeLocationUpdates()
+		locationServiceHelper = app().createLocationServiceHelper()
+		resumeLocationUpdates()
+	}
+
 	fun updateSendLocationInterval(newInterval: Long) {
 		sendLocationInterval = newInterval
 	}
@@ -195,14 +159,27 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 		getFirstTimeRunDefaultLocation { location ->
 			app().shareLocationHelper.updateLocation(location)
 		}
+		resumeLocationUpdates()
+	}
 
-		// request location updates
+	private fun resumeLocationUpdates() {
 		try {
-			fusedLocationProviderClient.requestLocationUpdates(
-					locationRequest, locationCallback, Looper.myLooper())
-		} catch (unlikely: SecurityException) {
+			locationServiceHelper.requestLocationUpdates(
+				object : LocationCallback() {
+					override fun onLocationResult(locations: List<Location>) {
+						if (locations.isNotEmpty()) {
+							val location: Location = locations[locations.size - 1]
+							if (System.currentTimeMillis() - lastLocationSentTime > sendLocationInterval * 1000) {
+								lastLocationSentTime = System.currentTimeMillis()
+								app().shareLocationHelper.updateLocation(location)
+							}
+						}
+					}
+				}
+			)
+		} catch (e: SecurityException) {
 			Toast.makeText(this, R.string.no_location_permission, Toast.LENGTH_LONG).show()
-			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't request updates. $unlikely")
+			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't request updates. $e")
 		} catch (e: IllegalArgumentException) {
 			Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show()
 			Log.d(PlatformUtil.TAG, "GPS location provider not available")
@@ -267,22 +244,27 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 	}
 
 	@SuppressLint("MissingPermission")
-	private fun getFirstTimeRunDefaultLocation(locationListener: (net.osmand.Location?) -> Unit) {
+	private fun getFirstTimeRunDefaultLocation(locationListener: (Location?) -> Unit) {
 		val app = app()
 		if (!AndroidUtils.isLocationPermissionAvailable(app)) {
 			locationListener(null)
 			return
 		}
-		fusedLocationProviderClient.lastLocation
-				.addOnSuccessListener { location : Location? ->
-					locationListener(convertLocation(location))
+		locationServiceHelper.getFirstTimeRunDefaultLocation(
+			object : LocationCallback() {
+				override fun onLocationResult(locations: List<Location>) {
+					if (locations.isNotEmpty()) {
+						val location = locations[locations.size - 1]
+						locationListener(location)
+					}
 				}
+			}
+		)
 	}
 
 	private fun removeLocationUpdates() {
-		// remove updates
 		try {
-			fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+			locationServiceHelper.removeLocationUpdates()
 		} catch (unlikely: SecurityException) {
 			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't remove updates. $unlikely")
 		}
@@ -356,32 +338,6 @@ class TelegramService : Service(), TelegramIncomingMessagesListener,
 
 		fun isUsedByUsersLocations(usedBy: Int): Boolean {
 			return (usedBy and USED_BY_USERS_LOCATIONS) > 0
-		}
-
-		fun convertLocation(l: Location?): net.osmand.Location? {
-			if (l == null) {
-				return null
-			}
-			val r = net.osmand.Location(l.provider)
-			r.latitude = l.latitude
-			r.longitude = l.longitude
-			r.time = l.time
-			if (l.hasAccuracy()) {
-				r.accuracy = l.accuracy
-			}
-			if (l.hasSpeed()) {
-				r.speed = l.speed
-			}
-			if (l.hasAltitude()) {
-				r.altitude = l.altitude
-			}
-			if (l.hasBearing()) {
-				r.bearing = l.bearing
-			}
-			if (l.hasAltitude()) {
-				r.altitude = l.altitude
-			}
-			return r
 		}
 	}
 }

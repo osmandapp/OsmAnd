@@ -253,6 +253,8 @@ class SettingsDialogFragment : BaseDialogFragment() {
 				}
 			}
 			LocationSourceBottomSheet.LOCATION_SOURCE_PREFERENCES_UPDATED_REQUEST_CODE -> {
+				app.locationProvider.updateLocationSource()
+				app.telegramService?.updateLocationSource()
 				view?.findViewById<ViewGroup>(R.id.location_source_preference_container)?.apply {
 					findViewById<TextView>(R.id.value).text = getText(settings.locationSource.nameId)
 				}
