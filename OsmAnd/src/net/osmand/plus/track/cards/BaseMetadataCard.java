@@ -1,12 +1,17 @@
 package net.osmand.plus.track.cards;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
+
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -17,6 +22,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
 
 public abstract class BaseMetadataCard extends MapBaseCard {
 
@@ -66,5 +76,40 @@ public abstract class BaseMetadataCard extends MapBaseCard {
 		});
 
 		return view;
+	}
+
+	public void createLinkItemRow(@NonNull String title, @Nullable String link, @DrawableRes int iconRes) {
+		if (!Algorithms.isEmpty(link)) {
+			Drawable icon = getContentIcon(iconRes);
+			View view = createItemRow(title, link, icon);
+
+			TextView description = view.findViewById(R.id.description);
+			description.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+
+			view.setOnClickListener(v -> {
+				if (app.getAppCustomization().isFeatureEnabled(CONTEXT_MENU_LINKS_ID)) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(link));
+					AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				}
+			});
+		}
+	}
+
+	public void createEmailItemRow(@NonNull String title, @Nullable String email, @DrawableRes int iconRes) {
+		if (!Algorithms.isEmpty(email)) {
+			Drawable icon = getContentIcon(iconRes);
+			View view = createItemRow(title, email, icon);
+
+			TextView description = view.findViewById(R.id.description);
+			description.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
+
+			view.setOnClickListener(v -> sendEmail(email));
+		}
+	}
+
+	private void sendEmail(@NonNull String email) {
+		Intent intent = new Intent("android.intent.action.SENDTO", Uri.fromParts("mailto", email, null));
+		AndroidUtils.startActivityIfSafe(view.getContext(), intent);
 	}
 }

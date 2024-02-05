@@ -19,7 +19,7 @@ public class MetadataExtensionsCard extends BaseMetadataCard {
 	@Override
 	@StringRes
 	protected int getTitleId() {
-		return R.string.shared_string_extensions;
+		return R.string.shared_string_additional;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class MetadataExtensionsCard extends BaseMetadataCard {
 			for (String key : extensions.keySet()) {
 				String title = extensions.get(key);
 				if (title != null) {
-					createItemRow(title, key, null);
+					createItemRow(key, title, null);
 				}
 			}
 		}
