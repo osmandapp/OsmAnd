@@ -42,6 +42,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
@@ -285,8 +286,21 @@ public class RouteInfoCard extends MapBaseCard {
 					return Algorithms.isEmpty(network) ? value : network;
 				case "wikipedia":
 					return WikiAlgorithms.getWikiUrl(value);
+				case "ascent":
+				case "descent":
+					return getValueWithUnits(app, R.string.m);
+				case "distance":
+					return getValueWithUnits(app, R.string.km);
 				default:
 					return value;
+			}
+		}
+
+		private String getValueWithUnits(@NonNull OsmandApplication app, @StringRes int resId) {
+			if (value.split(" ").length > 1) {
+				return value;
+			} else {
+				return value + " " + app.getString(resId);
 			}
 		}
 
