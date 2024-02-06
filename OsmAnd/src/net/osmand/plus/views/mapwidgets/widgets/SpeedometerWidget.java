@@ -130,8 +130,8 @@ public class SpeedometerWidget {
 				break;
 		}
 		FrameLayout.LayoutParams speedLimitValueParams = (FrameLayout.LayoutParams) speedLimitValueView.getLayoutParams();
-		speedLimitValueParams.setMargins(0, isUsaRegion() ? dpToPx(2) : 0, 0, 0);
-		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaRegion());
+		speedLimitValueParams.setMargins(0, isUsaOrCanadaRegion() ? dpToPx(2) : 0, 0, 0);
+		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanadaRegion());
 	}
 
 	public int dpToPx(float dp) {
@@ -202,12 +202,12 @@ public class SpeedometerWidget {
 		GradientDrawable gradientDrawable = (GradientDrawable) speedometerDrawable;
 		gradientDrawable.setColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
 
-		speedLimitContainer.setBackground(AppCompatResources.getDrawable(app, isUsaRegion() ? R.drawable.speed_limit_usa_shape : R.drawable.speed_limit_shape));
+		speedLimitContainer.setBackground(AppCompatResources.getDrawable(app, isUsaOrCanadaRegion() ? R.drawable.speed_limit_usa_shape : R.drawable.speed_limit_shape));
 		Drawable speedLimitDrawable = speedLimitContainer.getBackground();
 		LayerDrawable layerDrawable = (LayerDrawable) speedLimitDrawable;
 		GradientDrawable backgroundDrawable = (GradientDrawable) layerDrawable.findDrawableByLayerId(R.id.background);
 		backgroundDrawable.setColor(ColorUtilities.getWidgetSecondaryBackgroundColor(app, nightMode));
-		if (!isUsaRegion()) {
+		if (!isUsaOrCanadaRegion()) {
 			backgroundDrawable.setStroke(20, ContextCompat.getColor(app, nightMode ? R.color.map_window_stroke_dark : R.color.widget_background_color_light));
 		}
 
@@ -223,8 +223,9 @@ public class SpeedometerWidget {
 		speedLimitValueView.setText(value);
 	}
 
-	private boolean isUsaRegion() {
-		return settings.DRIVING_REGION.getModeValue(mode) == DrivingRegion.US;
+	private boolean isUsaOrCanadaRegion() {
+		DrivingRegion region = settings.DRIVING_REGION.getModeValue(mode);
+		return region == DrivingRegion.US || region == DrivingRegion.CANADA;
 	}
 
 	public void setVisibility(boolean visible) {
