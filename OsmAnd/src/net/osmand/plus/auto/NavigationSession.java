@@ -43,6 +43,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Session class for the Navigation sample app.
@@ -68,6 +70,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 */
 	public static final float ZOOM_OUT_BUTTON_SCALE_FACTOR = 0.9f;
 
+	private static final Pattern ACTION_NAVIGATE_PATTERN = Pattern.compile("^(?<geo>geo:[\\.0-9]+,[\\.0-9]+)(\\?q=(?<query>.*))?$");
 
 	NavigationScreen navigationScreen;
 	LandingScreen landingScreen;
@@ -238,21 +241,26 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onNewIntent(@NonNull Intent intent) {
 		Log.i(TAG, "In onNewIntent() " + intent);
 		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+
 		if (CarContext.ACTION_NAVIGATE.equals(intent.getAction())) {
-			Uri uri = Uri.parse("http://" + intent.getDataString());
+			String data = intent.getDataString();
+			if (data == null)
+				return;
+
+			Matcher matcher = ACTION_NAVIGATE_PATTERN.matcher(data);
+			if (!matcher.matches())
+				return;
+
 			screenManager.popToRoot();
-			String query = uri.getQueryParameter("q");
-			if (query == null) {
-				query = "";
-			}
+			String geo = matcher.group("geo");
+			String query = matcher.group("query");
 			screenManager.pushForResult(
 					new SearchResultsScreen(
 							getCarContext(),
 							settingsAction,
-							query),
+							"geo:0,0".equals(geo) && query != null ? Uri.decode(query.replace('+', ' ')) : geo),
 					(obj) -> {
 					});
-
 			return;
 		}
 
