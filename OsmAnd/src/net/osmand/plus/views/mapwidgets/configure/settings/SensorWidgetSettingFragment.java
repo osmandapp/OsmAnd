@@ -120,6 +120,7 @@ public class SensorWidgetSettingFragment extends BaseSimpleWidgetSettingsFragmen
 
 	@Override
 	protected void applySettings() {
+		super.applySettings();
 		sensorWidget.setDeviceId(getSourceDeviceId());
 	}
 }

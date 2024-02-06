@@ -3995,4 +3995,129 @@
     <string name="coordinate_input">좌표 입력</string>
     <string name="monitoring_min_accuracy">최소 정확도</string>
     <string name="monitoring_min_distance">공급 능력</string>
+    <string name="rendering_attr_showShareTaxiRoutes_name">셔틀 노선</string>
+    <string name="store_tracks_in_daily_directories">일일 폴더의 기록 트랙</string>
+    <string name="enter_path_to_folder">폴더에 경로 입력</string>
+    <string name="altitude_range">고도 범위</string>
+    <string name="rendering_attr_surface_ground_name">흙</string>
+    <string name="rendering_attr_horseRoutes_name">경마 노선</string>
+    <string name="max_sensor_heartrate">심박수, 최대</string>
+    <string name="wiki_around">가까운 위키백과 기사</string>
+    <string name="avg_sensor_heartrate">심박수, 평균</string>
+    <string name="max_sensor_cadence">자전거 Cadence, 최대</string>
+    <string name="avg_sensor_cadence">자전거 Cadence, 평균</string>
+    <string name="max_sensor_bycicle_power">자전거 힘, 최대</string>
+    <string name="avg_sensor_bycicle_power">자전거 힘, 평균</string>
+    <string name="max_sensor_temperature">온도, 최대</string>
+    <string name="free_downloads_used">무료 다운로드 사용</string>
+    <string name="compass_always_hidden">항상 숨기기</string>
+    <string name="added_profiles">추가 프로필</string>
+    <string name="store_tracks_in_daily_directories_descrp">녹음 일 당 하위 폴더에 기록 트랙 (like 2018-01-01).</string>
+    <string name="store_tracks_in_rec_directory">\'rec\'폴더에 기록 트랙</string>
+    <string name="shared_string_calculate">계산</string>
+    <string name="avoid_in_routing_descr_">유료 도로, 비 포장 도로, 페리 제외</string>
+    <string name="change_osmand_data_folder_question">변화 Osm 그리고 데이터 폴더?</string>
+    <string name="move_maps_to_new_destination">새로운 목적지로 이동</string>
+    <string name="rendering_attr_surface_paving_stones_name">돌포장</string>
+    <string name="shared_string_total">총 개수</string>
+    <string name="total_distance">총 거리</string>
+    <string name="delete_waypoints">방법의 삭제</string>
+    <string name="rendering_attr_surface_grass_paver_name">잔디보도</string>
+    <string name="average_altitude">평균 고도</string>
+    <string name="osmand_extended_description_part8">OsmAnd는 적극적으로 오픈 소스 소프트웨어 개발. 누구나 버그 보고, 번역 개선, 새로운 기능을 코딩하여 앱에 기여할 수 있습니다. 또한 프로젝트는 새로운 기능의 코딩 및 테스트에 대한 금융 기여에 의존합니다.
+\n대략적인 지도 적용 및 질:
+\n• 서부 유럽: 더 보기
+\n• 동부 유럽: ***
+\n• 러시아: 호텔지도
+\n• 북아메리카: 호텔지도
+\n• 남아메리카: **
+\n• 아시아: **
+\n• 일본과 한국: 호텔지도
+\n• 중동: **
+\n• 아프리카: **
+\n• 남극 대륙 : *
+\n전세계 대부분의 국가는 다운로드 할 수 있습니다!
+\n당신의 국가에 있는 믿을 수 있는 항해자를 얻으십시오 - 그것 프랑스, 독일, 멕시코, 영국, 스페인, 네덜란드, 미국, 러시아, 브라질 또는 다른 어떤.</string>
+    <string name="rendering_attr_showTrolleybusRoutes_name">무궤도전차 노선</string>
+    <string name="added_profiles_descr">플러그인에 의해 추가 된 프로필</string>
+    <string name="track_storage_directory_descrp">트랙은 \'rec\'폴더, 월, 또는 일일 폴더에 저장할 수 있습니다.</string>
+    <string name="shared_string_osmand_usage">OsmAnd 사용법</string>
+    <string name="change_data_storage_full_description">OsmAnd 데이터 파일을 새로운 목적지로 이동?
+\n%1$s &gt; %2$s</string>
+    <string name="shared_string_select_folder">폴더…</string>
+    <string name="paste_Osmand_data_folder_path">OsmAnd 데이터로 폴더에 붙여넣기</string>
+    <string name="rendering_attr_showTramRoutes_name">전차 노선</string>
+    <string name="show_on_start_description">\'off\'는 직접지도를 시작합니다.</string>
+    <string name="rendering_attr_surface_concrete_name">콘크리트</string>
+    <string name="free_downloads_used_description">무료 다운로드의 금액을 표시합니다.</string>
+    <string name="routeInfo_tracktype_name">표면적 단단함</string>
+    <string name="simulate_initial_startup">첫 번째 앱 시작</string>
+    <string name="shared_string_add_to_map_markers">Map markers 추가</string>
+    <string name="rendering_attr_showTrainRoutes_name">기차 노선</string>
+    <string name="rendering_attr_showLightRailRoutes_name">LRT 노선</string>
+    <string name="rendering_attr_showBusRoutes_name">버스 노선</string>
+    <string name="gpx_no_routes_title">오시는 길</string>
+    <string name="exit_number">출구 번호</string>
+    <string name="save_track_to_gpx_globally">현재 트랙을 GPX파일로 저장</string>
+    <string name="rendering_attr_surface_paved_name">포장</string>
+    <string name="shared_string_gpx_waypoints">트랙 경유지</string>
+    <string name="shared_string_near">인근</string>
+    <string name="rendering_attr_surface_grass_name">잔디</string>
+    <string name="altitude_descent">하강</string>
+    <string name="shared_string_send">전송</string>
+    <string name="routeInfo_surface_name">지표면</string>
+    <string name="routeInfo_roadClass_name">도로 유형</string>
+    <string name="rendering_attr_showFunicularRoutes_name">강삭철도 노선</string>
+    <string name="rendering_attr_showMonorailRoutes_name">모노레일 노선</string>
+    <string name="rendering_attr_surface_asphalt_name">아스팔트</string>
+    <string name="rendering_attr_surface_ice_name">얼음</string>
+    <string name="rendering_attr_surface_salt_name">소금</string>
+    <string name="rendering_attr_surface_wood_name">나무</string>
+    <string name="rendering_attr_surface_gravel_name">자갈</string>
+    <string name="rendering_attr_surface_fine_gravel_name">파쇄석</string>
+    <string name="map_downloaded">지도 다운로드됨</string>
+    <string name="rendering_attr_surface_metal_name">금속</string>
+    <string name="compass_visible_if_map_rotated_desc">North이 일어날 때 숨깁니다</string>
+    <string name="monitoring_min_speed_descr_side_effect">옆 효력: 귀하의 트랙은 최소 속도 크리터가 충족되지 않은 모든 섹션을 누락됩니다 (예 : 가파른 언덕을 밀어). 또한 휴식의 기간에 대한 정보는 없습니다. 이것은 어떤 분석 또는 포스트 가공에 효력이 있습니다, 당신의 여행의 총 길이를 결정하려고 할 때, 동의에 있는 시간, 또는 당신의 평균 속도.</string>
+    <string name="share_menu_location">위치 보내기</string>
+    <string name="compass_visible_if_map_rotated">지도가 회전된 경우 표시</string>
+    <string name="shared_string_hidden">숨김</string>
+    <string name="development">개발</string>
+    <string name="quick_action_add_gpx">트랙 웨이 포인트 추가</string>
+    <string name="step_by_step">턴-바이-턴</string>
+    <string name="routeInfo_road_types_name">도로 유형</string>
+    <string name="developer_plugin">Developer 플러그인</string>
+    <string name="rendering_attr_surface_mud_name">진흙</string>
+    <string name="rendering_attr_surface_snow_name">눈</string>
+    <string name="rendering_attr_surface_sett_name">돌블럭</string>
+    <string name="rendering_attr_surface_cobblestone_name">과속방지블록</string>
+    <string name="rendering_attr_surface_pebblestone_name">조약돌</string>
+    <string name="rendering_attr_surface_stone_name">돌</string>
+    <string name="routeInfo_steepness_name">경사도</string>
+    <string name="rendering_attr_surface_unpaved_name">비포장</string>
+    <string name="rendering_attr_surface_sand_name">모래</string>
+    <string name="battery_optimization_banner_content">안드로이드 배터리 최적화는 기록된 트랙의 간격과 부정확성을 유발할 수 있습니다.</string>
+    <string name="dont_ask_anymore">다시 묻지 않음</string>
+    <string name="battery_optimization_settings">배터리 최적화 설정</string>
+    <string name="battery_optimization_desc">Android의 배터리 최적화는 기록 된 트랙의 격차와 inaccuracies를 일으킬 수 있습니다.
+\n
+\n이 문제의 어떤 경험을 쌓으면 배터리 사용을 제한할 수 있습니다. 이름 *</string>
+    <string name="battery_optimization">배터리 최적화</string>
+    <string name="share_geo">위치:</string>
+    <string name="simulate_initial_startup_descr">첫 번째 앱 시작을 나타내는 플래그를 설정하고 다른 설정을 변경하지 마십시오.</string>
+    <string name="go_to_map">지도보기</string>
+    <string name="avg_sensor_temperature">온도, 평균</string>
+    <string name="max_sensor_speed">감지기 속도, 최대</string>
+    <string name="avg_sensor_speed">감지기 속도, 평균</string>
+    <string name="track_storage_directory">트랙 스토리지 폴더</string>
+    <string name="app_mode_utv">사이드 바이 사이드</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">연결</string>
+    <string name="data_storage_space_description">%1$s GB 여유 (전체 %2$s GB)</string>
+    <string name="rendering_attr_surface_dirt_name">더트</string>
+    <string name="rendering_attr_surface_compacted_name">평탄화됨</string>
+    <string name="arrive_at_time">%1$s에 도착</string>
+    <string name="intermediate_waypoint">중간 지점</string>
+    <string name="yesterday">어제</string>
+    <string name="altitude_ascent">상승</string>
+    <string name="shared_string_automatic">자동</string>
 </resources>
