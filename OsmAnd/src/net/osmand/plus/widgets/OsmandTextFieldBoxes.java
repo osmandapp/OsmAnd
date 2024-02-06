@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.utils.UiUtilities;
 
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
@@ -71,10 +73,10 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	}
 
 	public void hideClearButton() {
-		clearButton.setAlpha(0f);
+		AndroidUiHelper.updateVisibility(clearButton, false);
 	}
 
 	public void showClearButton() {
-		clearButton.setAlpha(1f);
+		AndroidUiHelper.updateVisibility(clearButton, true);
 	}
 }

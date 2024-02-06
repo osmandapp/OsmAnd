@@ -1300,6 +1300,14 @@ public class GeneralRouter implements VehicleRouter {
 		
 	}
 
+	
+	public void clearCaches() {
+		if (evalCache != null) {
+			for (int i = 0; i < evalCache.length; i++) {
+				evalCache[i].clear();
+			}
+		}
+	}
 
 	public void printRules(PrintStream out) {
 		for(int i = 0; i < RouteDataObjectAttribute.values().length ; i++) {
