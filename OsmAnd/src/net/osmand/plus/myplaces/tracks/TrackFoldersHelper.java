@@ -142,10 +142,8 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					.setTitleId(R.string.sort_subfolders)
 					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_sort_subfolder))
 					.setOnClickListener(v -> {
-						Bundle bundle = new Bundle();
-						bundle.putBoolean(SORT_SUB_FOLDERS_KEY, true);
 						SortByBottomSheet.showInstance(getActivity().getSupportFragmentManager(), fragment.getTracksSortMode(),
-								fragment, false, bundle);
+								fragment, false, true);
 					})
 					.showTopDivider(true)
 					.create());

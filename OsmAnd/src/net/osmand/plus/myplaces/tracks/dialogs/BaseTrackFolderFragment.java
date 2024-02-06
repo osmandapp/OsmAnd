@@ -343,8 +343,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode, @Nullable Bundle bundle) {
-		if (bundle != null && bundle.containsKey(SORT_SUB_FOLDERS_KEY) && bundle.getBoolean(SORT_SUB_FOLDERS_KEY)) {
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
+		if (sortSubFolders) {
 			sortSubFolder(sortMode);
 		} else {
 			Map<String, String> tabsSortModes = settings.getTrackSortModes();

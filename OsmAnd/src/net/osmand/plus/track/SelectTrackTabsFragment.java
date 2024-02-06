@@ -121,7 +121,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode, @Nullable Bundle bundle) {
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);

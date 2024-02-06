@@ -88,7 +88,7 @@ public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 		@NonNull
 		TracksSortMode getTracksSortMode();
 
-		void setTracksSortMode(@NonNull TracksSortMode sortMode, @Nullable Bundle bundle);
+		void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders);
 	}
 }
 
