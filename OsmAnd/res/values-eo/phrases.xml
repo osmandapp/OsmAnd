@@ -230,11 +230,11 @@
     <string name="poi_wiki_lang_ar">Vikipedio Araba</string>
     <string name="poi_library">Biblioteko</string>
     <string name="poi_retail">Komerca tereno</string>
-    <string name="poi_atv">Ĉiuterenveturil-vendejo</string>
+    <string name="poi_atv">kvada (ĉiuterenveturila) vendejo</string>
     <string name="poi_cosmetics">Kosmetikaĵ-vendejo</string>
     <string name="poi_sewing">Kudrilar-vendejo</string>
     <string name="poi_watches">Horloĝ-vendejo</string>
-    <string name="poi_swimming_pool_shop">Naĝej-akcesoriaĵoj vendejo</string>
+    <string name="poi_swimming_pool_shop">Naĝej-akcesoriaĵa vendejo</string>
     <string name="poi_games">Tabullud‑vendejo</string>
     <string name="poi_model">Modelfar-vendejo</string>
     <string name="poi_trophy">Pokaloj-k-premioj-vendejo</string>
@@ -4776,4 +4776,5 @@
     <string name="poi_nfs_recreation_area_activity_group_picnicking">piknikado grupa</string>
     <string name="poi_nfs_recreation_area_activity_hang_gliding">deltaplanado</string>
     <string name="poi_nfs_recreation_area_activity_horse_riding_and_camping">ĉevalrajdado kaj kampado</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_camping">kampado kaj kvad-veturado</string>
 </resources>
