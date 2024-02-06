@@ -31,9 +31,9 @@ public class MetadataExtensionsCard extends BaseMetadataCard {
 
 		if (extensions != null) {
 			for (String key : extensions.keySet()) {
-				String title = extensions.get(key);
-				if (title != null) {
-					createItemRow(key, title, null);
+				String value = extensions.get(key);
+				if (value != null) {
+					createItemRow(Algorithms.capitalizeFirstLetter(key), value, null);
 				}
 			}
 		}
