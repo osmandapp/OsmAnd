@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="sorted_sufolders_toast">Subfolders in “%1$s” is sorted by: “%2$s”</string>
+    <string name="sort_subfolders">Sort subfolders</string>
     <string name="shared_string_activity">Activity</string>
     <string name="shared_string_keywords">Keywords</string>
     <string name="shared_string_additional">Additional</string>

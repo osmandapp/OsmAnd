@@ -24,6 +24,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -75,6 +76,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class TrackFoldersHelper implements OnTrackFileMoveListener {
+
+	public final static String SORT_SUB_FOLDERS_KEY = "sort_sub_folders_key";
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -134,6 +137,18 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					showTracksSelection(trackFolder, fragment, null, null, screenPositionData);
 				}).create());
 
+		if (!Algorithms.isEmpty(trackFolder.getSubFolders())) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(R.string.sort_subfolders)
+					.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_sort_subfolder))
+					.setOnClickListener(v -> {
+						SortByBottomSheet.showInstance(getActivity().getSupportFragmentManager(), fragment.getTracksSortMode(),
+								fragment, false, true);
+					})
+					.showTopDivider(true)
+					.create());
+		}
+
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.add_new_folder)
 				.setIcon(uiUtilities.getThemedIcon(R.drawable.ic_action_folder_add_outlined))
@@ -142,7 +157,6 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					FragmentManager manager = activity.getSupportFragmentManager();
 					AddNewTrackFolderBottomSheet.showInstance(manager, dir, null, fragment, false);
 				})
-				.showTopDivider(true)
 				.create());
 
 		if (isRootFolder) {
