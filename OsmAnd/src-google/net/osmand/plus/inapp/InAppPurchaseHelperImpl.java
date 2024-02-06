@@ -303,14 +303,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		return new ProductDetailsResponseListener() {
 
 			@NonNull
-			private List<String> getAllOwnedSubscriptionSkus() {
+			private List<String> getAllOwnedSubscriptionProducts() {
 				List<String> result = new ArrayList<>();
 				BillingManager billingManager = getBillingManager();
 				if (billingManager != null) {
 					for (Purchase p : billingManager.getPurchases()) {
-						List<String> skus = p.getSkus();
-						if (!Algorithms.isEmpty(skus) && getInAppPurchases().getInAppSubscriptionBySku(skus.get(0)) != null) {
-							result.add(skus.get(0));
+						List<String> products = p.getProducts();
+						if (!Algorithms.isEmpty(products) && getInAppPurchases().getInAppSubscriptionBySku(products.get(0)) != null) {
+							result.add(products.get(0));
 						}
 					}
 				}
@@ -329,7 +329,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			@Override
 			public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
 
-				logDebug("Query sku details finished.");
+				logDebug("Query product details finished.");
 
 				// Have we been disposed of in the meantime? If so, quit.
 				if (getBillingManager() == null) {
@@ -345,7 +345,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					return;
 				}
 
-				logDebug("Query sku details was successful.");
+				logDebug("Query product details was successful.");
 
 				/*
 				 * Check for items we own. Notice that for each purchase, we check
@@ -353,7 +353,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				 * verifyDeveloperPayload().
 				 */
 
-				List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
+				List<String> allOwnedSubscriptionProducts = getAllOwnedSubscriptionProducts();
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					if (hasDetails(s.getSku())) {
 						Purchase purchase = getPurchase(s.getSku());
@@ -361,14 +361,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						if (liveUpdatesDetails != null) {
 							fetchInAppPurchase(s, liveUpdatesDetails, purchase);
 						}
-						allOwnedSubscriptionSkus.remove(s.getSku());
+						allOwnedSubscriptionProducts.remove(s.getSku());
 					}
 				}
-				for (String sku : allOwnedSubscriptionSkus) {
-					Purchase purchase = getPurchase(sku);
-					ProductDetails liveUpdatesDetails = getProductDetails(sku);
+				for (String products : allOwnedSubscriptionProducts) {
+					Purchase purchase = getPurchase(products);
+					ProductDetails liveUpdatesDetails = getProductDetails(products);
 					if (liveUpdatesDetails != null) {
-						InAppSubscription s = getSubscriptions().upgradeSubscription(sku);
+						InAppSubscription s = getSubscriptions().upgradeSubscription(products);
 						if (s == null) {
 							s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
 						}
@@ -537,50 +537,58 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			inAppPurchase.restorePurchaseInfo(ctx);
 		}
 		if (BillingClient.ProductType.SUBS.equals(productDetails.getProductType())) {
-			ProductDetails.PricingPhase pricingPhrase = getMostPricedOfferPhase(productDetails);
-			if (pricingPhrase != null) {
-				inAppPurchase.setPrice(pricingPhrase.getFormattedPrice());
-				inAppPurchase.setOriginalPrice(pricingPhrase.getFormattedPrice());
-				inAppPurchase.setPriceCurrencyCode(pricingPhrase.getPriceCurrencyCode());
-				if (pricingPhrase.getPriceAmountMicros() > 0) {
-					inAppPurchase.setPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
-					inAppPurchase.setOriginalPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
-				}
-				String subscriptionPeriod = pricingPhrase.getBillingPeriod();
-				if (!Algorithms.isEmpty(subscriptionPeriod)) {
-					if (inAppPurchase instanceof InAppSubscription) {
-						try {
-							((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
-						} catch (ParseException e) {
-							LOG.error(e);
-						}
+			List<ProductDetails.SubscriptionOfferDetails> basePlans = getBasePlans(productDetails);
+			if (!Algorithms.isEmpty(basePlans)) {
+				ProductDetails.SubscriptionOfferDetails basePlan = basePlans.get(0);
+				List<ProductDetails.SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
+				ProductDetails.SubscriptionOfferDetails offer = basePlanOffers == null ? basePlan : basePlanOffers.get(0);
+				ProductDetails.PricingPhase pricingPhrase = offer.getPricingPhases().getPricingPhaseList().get(0);
+				if (pricingPhrase != null) {
+					inAppPurchase.setPrice(pricingPhrase.getFormattedPrice());
+					inAppPurchase.setOriginalPrice(basePlan.getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice());
+					inAppPurchase.setPriceCurrencyCode(pricingPhrase.getPriceCurrencyCode());
+					if (pricingPhrase.getPriceAmountMicros() > 0) {
+						inAppPurchase.setPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
+						inAppPurchase.setOriginalPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
 					}
-				}
-				if (inAppPurchase instanceof InAppSubscription) {
-					InAppSubscription s = (InAppSubscription) inAppPurchase;
-					s.restoreState(ctx);
-					s.restoreExpireTime(ctx);
-					SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
-					if (stateHolder != null) {
-						s.setState(ctx, stateHolder.state);
-						s.setExpireTime(ctx, stateHolder.expireTime);
-					}
-					if (s.getState().isGone() && s.hasStateChanged()) {
-						ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
-						ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
-					}
-					ProductDetails.PricingPhase introPricingPhase = getLeastPricedOfferPhase(productDetails);
-					if (introPricingPhase != null) {
-						String introductoryPrice = introPricingPhase.getFormattedPrice();
-						String introductoryPricePeriod = introPricingPhase.getBillingPeriod();
-						int introductoryPriceCycles = introPricingPhase.getBillingCycleCount();
-						long introductoryPriceAmountMicros = introPricingPhase.getPriceAmountMicros();
-						if (!Algorithms.isEmpty(introductoryPrice)) {
+					String subscriptionPeriod = pricingPhrase.getBillingPeriod();
+					if (!Algorithms.isEmpty(subscriptionPeriod)) {
+						if (inAppPurchase instanceof InAppSubscription) {
 							try {
-								s.setIntroductoryInfo(new InAppPurchases.InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
-										introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
+								((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
 							} catch (ParseException e) {
 								LOG.error(e);
+							}
+						}
+					}
+					if (inAppPurchase instanceof InAppSubscription) {
+						InAppSubscription s = (InAppSubscription) inAppPurchase;
+						s.restoreState(ctx);
+						s.restoreExpireTime(ctx);
+						SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
+						if (stateHolder != null) {
+							s.setState(ctx, stateHolder.state);
+							s.setExpireTime(ctx, stateHolder.expireTime);
+						}
+						if (s.getState().isGone() && s.hasStateChanged()) {
+							ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
+							ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
+						}
+						if (basePlanOffers != null) {
+							ProductDetails.PricingPhase introPricingPhase = basePlanOffers.get(0).getPricingPhases().getPricingPhaseList().get(0);
+							if (introPricingPhase != null) {
+								String introductoryPrice = introPricingPhase.getFormattedPrice();
+								String introductoryPricePeriod = introPricingPhase.getBillingPeriod();
+								int introductoryPriceCycles = introPricingPhase.getBillingCycleCount();
+								long introductoryPriceAmountMicros = introPricingPhase.getPriceAmountMicros();
+								if (!Algorithms.isEmpty(introductoryPrice)) {
+									try {
+										s.setIntroductoryInfo(new InAppPurchases.InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
+												introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
+									} catch (ParseException e) {
+										LOG.error(e);
+									}
+								}
 							}
 						}
 					}
@@ -596,100 +604,34 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-
-	// equivalent to skuDetails.originalPriceAmountMicros
-	private long getPriceAmountMicros(ProductDetails productDetails) {
-		ProductDetails.PricingPhase phase = getMostPricedOfferPhase(productDetails);
-		long price = 0;
-		if (phase != null) {
-			price = phase.getPriceAmountMicros();
-		}
-		return price;
-	}
-
-	// skuDetails.subscriptionPeriod
 	@Nullable
-	private String getBillingPeriod(ProductDetails productDetails) {
-		ProductDetails.PricingPhase phase = getMostPricedOfferPhase(productDetails);
-		String period = null;
-		if (phase != null) {
-			period = phase.getBillingPeriod();
-		}
-		return period;
-	}
-
-	// skuDetails.priceCurrencyCode
-	@Nullable
-	private String getPriceCurrencyCode(ProductDetails productDetails) {
-		ProductDetails.PricingPhase phase = getMostPricedOfferPhase(productDetails);
-		String currencyCode = null;
-		if (phase != null) {
-			currencyCode = phase.getPriceCurrencyCode();
-		}
-		return currencyCode;
-	}
-
-
-	// skuDetails.freeTrialPeriod
-	private Period getTrialDays(ProductDetails productDetails) {
-		String billingPeriod = getLeastPricedBillingPeriod(productDetails);
-		Period trialPeriod = null;
-		if (billingPeriod != null) {
-			try {
-				trialPeriod = Period.parse(billingPeriod);
-			} catch (ParseException error) {
-				LOG.error("Can't parse " + billingPeriod + "period");
-			}
-		}
-		return trialPeriod;
-	}
-
-	@Nullable
-	private String getLeastPricedBillingPeriod(ProductDetails productDetails) {
-		ProductDetails.PricingPhase pricingPhase = getLeastPricedOfferPhase(productDetails);
-		if (pricingPhase != null) {
-			return pricingPhase.getBillingPeriod();
-		} else {
-			return null;
-		}
-	}
-
-	@Nullable
-	private ProductDetails.PricingPhase getMostPricedOfferPhase(ProductDetails productDetails) {
+	private List<ProductDetails.SubscriptionOfferDetails> getBasePlans(@NonNull ProductDetails productDetails) {
 		List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
 		if (Algorithms.isEmpty(offerDetails)) {
 			return null;
 		}
-		ProductDetails.PricingPhase mostPricedPhase = null;
-		long highestPrice = Long.MIN_VALUE;
+		ArrayList<ProductDetails.SubscriptionOfferDetails> basePlans = new ArrayList<>();
 		for (ProductDetails.SubscriptionOfferDetails offer : offerDetails) {
-			for (ProductDetails.PricingPhase phase : offer.getPricingPhases().getPricingPhaseList()) {
-				if (phase.getPriceAmountMicros() > highestPrice) {
-					highestPrice = phase.getPriceAmountMicros();
-					mostPricedPhase = phase;
-				}
+			if (offer.getOfferId() == null) {
+				basePlans.add(offer);
 			}
 		}
-		return mostPricedPhase;
+		return basePlans;
 	}
 
 	@Nullable
-	private ProductDetails.PricingPhase getLeastPricedOfferPhase(ProductDetails productDetails) {
+	private List<ProductDetails.SubscriptionOfferDetails> getBasePlanOffers(@NonNull ProductDetails productDetails, @NonNull String basePlanId) {
 		List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
-		if (Algorithms.isEmpty(offerDetails) || offerDetails.size() <= 1) {
+		if (Algorithms.isEmpty(offerDetails)) {
 			return null;
 		}
-		ProductDetails.PricingPhase leastPricedPhase = null;
-		long lowestPrice = Long.MAX_VALUE;
+		ArrayList<ProductDetails.SubscriptionOfferDetails> offers = new ArrayList<>();
 		for (ProductDetails.SubscriptionOfferDetails offer : offerDetails) {
-			for (ProductDetails.PricingPhase phase : offer.getPricingPhases().getPricingPhaseList()) {
-				if (phase.getPriceAmountMicros() < lowestPrice) {
-					lowestPrice = phase.getPriceAmountMicros();
-					leastPricedPhase = phase;
-				}
+			if (basePlanId.equals(offer.getBasePlanId()) && offer.getOfferId() != null) {
+				offers.add(offer);
 			}
 		}
-		return leastPricedPhase;
+		return offers;
 	}
 
 	@Override
