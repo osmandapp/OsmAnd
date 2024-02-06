@@ -5609,4 +5609,7 @@
     <string name="max_sensor_bycicle_power">Kerékpáros teljesítmény, max</string>
     <string name="avg_sensor_bycicle_power">Kerékpáros teljesítmény, átlag</string>
     <string name="avg_sensor_cadence">Pedálfordulat, átlag</string>
+    <string name="shared_string_keywords">Kulcsszavak</string>
+    <string name="shared_string_activity">Tevékenység</string>
+    <string name="shared_string_additional">További</string>
 </resources>
