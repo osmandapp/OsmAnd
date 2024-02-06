@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="speed_limit_warning">Speed limit warning</string>
+    <string name="shared_string_limit">Limit</string>
+    <string name="when_exceeded">When exceeded</string>
+    <string name="speedometer_description">Shows your current speed as reported via GPS</string>
+    <string name="shared_string_speedometer">Speedometer</string>
     <string name="battery_optimization_banner_content">Android battery optimization can cause gaps and inaccuracies in recorded tracks.</string>
     <string name="dont_ask_anymore">Don\'t ask anymore</string>
     <string name="battery_optimization_settings">Battery optimization settings</string>

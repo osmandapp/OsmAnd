@@ -81,14 +81,16 @@ public class SimpleWidgetState extends WidgetState {
 	}
 
 	public enum WidgetSize {
-		SMALL(R.string.rendering_value_small_name),
-		MEDIUM(R.string.rendering_value_medium_w_name),
-		LARGE(R.string.shared_string_large);
+		SMALL(R.string.rendering_value_small_name, R.drawable.ic_action_item_size_s),
+		MEDIUM(R.string.rendering_value_medium_w_name, R.drawable.ic_action_item_size_m),
+		LARGE(R.string.shared_string_large, R.drawable.ic_action_item_size_l);
 
 		public final int descriptionId;
+		public final int iconId;
 
-		WidgetSize(@StringRes int descriptionId) {
+		WidgetSize(@StringRes int descriptionId, int iconId) {
 			this.descriptionId = descriptionId;
+			this.iconId = iconId;
 		}
 
 		@NonNull

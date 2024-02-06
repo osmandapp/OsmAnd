@@ -35,6 +35,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -56,6 +57,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 	private View mapRulerLayout;
 	private AlarmWidget alarmControl;
+	private SpeedometerWidget speedometerControl;
 	private List<RulerWidget> rulerWidgets;
 	private List<SideWidgetsPanel> sideWidgetsPanels;
 
@@ -122,6 +124,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 			drawSettings = null;
 			alarmControl = null;
+			speedometerControl = null;
 			rulerWidgets = null;
 			sideWidgetsPanels = null;
 			topToolbarView = null;
@@ -195,6 +198,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 
 		alarmControl = new AlarmWidget(mapActivity.getMyApplication(), mapActivity);
 		alarmControl.setVisibility(false);
+
+		speedometerControl = new SpeedometerWidget(mapActivity.findViewById(R.id.speedometer_widget), mapActivity.getMyApplication(), settings.getApplicationMode());
+		speedometerControl.setVisibility(false);
 
 		setupRulerWidget(mapRulerLayout);
 		widgetRegistry.registerAllControls(mapActivity);
@@ -380,6 +386,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			rightWidgetsPanel.update(drawSettings);
 			topToolbarView.updateInfo();
 			alarmControl.updateInfo(drawSettings, false);
+			speedometerControl.updateInfo(drawSettings, false);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateInfo(tileBox);

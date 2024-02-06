@@ -8,6 +8,7 @@ import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.gpx.GPXUtilities;
@@ -225,6 +226,17 @@ public class WaypointHelper {
 		return found;
 	}
 
+	@Nullable
+	public AlarmInfo getSpeedLimitAlarm(SpeedConstants sc, boolean whenExceeded){
+		Location lastProjection = app.getRoutingHelper().getLastProjection();
+		if(route != null){
+			float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
+			float delta = whenExceeded ? app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : mxspeed * -1;
+			return createSpeedAlarm(sc, mxspeed, lastProjection, delta);
+		}
+		return null;
+	}
+
 	public AlarmInfo getMostImportantAlarm(SpeedConstants sc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
@@ -325,6 +337,12 @@ public class WaypointHelper {
 			return app.getSettings().SHOW_WPT.get();
 		}
 		return true;
+	}
+
+	public AlarmInfo calculateSpeedLimitAlarm(RouteDataObject ro, Location loc, SpeedConstants sc, boolean whenExceeded){
+		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
+		float delta = whenExceeded ? app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : mxspeed * -1;
+		return createSpeedAlarm(sc, mxspeed, loc, delta);
 	}
 
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
