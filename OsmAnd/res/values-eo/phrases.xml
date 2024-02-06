@@ -4776,5 +4776,15 @@
     <string name="poi_nfs_recreation_area_activity_group_picnicking">piknikado grupa</string>
     <string name="poi_nfs_recreation_area_activity_hang_gliding">deltaplanado</string>
     <string name="poi_nfs_recreation_area_activity_horse_riding_and_camping">ĉevalrajdado kaj kampado</string>
-    <string name="poi_nfs_recreation_area_activity_ohv_camping">kampado kaj kvad-veturado</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_camping">kampado kun kvadoj</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_riding_and_camping">kvad-veturado kaj kampado</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_trail_riding">kvad-veturado (kampaj vojoj)</string>
+    <string name="poi_nfs_recreation_area_activity_other_activities">aliaj aktivecoj</string>
+    <string name="poi_nfs_recreation_area_activity_outdoor_learning">eksterdoma lernado</string>
+    <string name="poi_nfs_recreation_area_activity_river_and_stream_fishing">fiŝhokado (rivera)</string>
+    <string name="poi_nfs_recreation_area_activity_road_cycling">ŝosea biciklado</string>
+    <string name="poi_nfs_recreation_area_activity_rock_climbing">rok-grimpado</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_open_area_riding">kvad-veturado (malfermita tereno)</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_road_riding">kvad-veturado (ŝoseoj)</string>
+    <string name="poi_nfs_recreation_area_activity_picnicking">piknikado</string>
 </resources>
