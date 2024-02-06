@@ -4815,4 +4815,10 @@
     <string name="poi_nfs_recreation_area_accessibility_info">Informação sobre acessibilidade</string>
     <string name="poi_nfs_recreation_area_activity_group_camping">Campismo de grupo</string>
     <string name="poi_nfs_recreation_area_activity_sand_play">Brincadeiras na areia</string>
+    <string name="poi_nfs_recreation_area_activity_backpacking">Viajem de mochila às costas</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_road_riding">Condução com veículos fora de estrada (OHV)</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_riding_and_camping">Condução e campismo com veículos fora de estrada (OHV)</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_trail_riding">Condução em trilhos com veículos fora de estrada (OHV)</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_camping">Campismo com veículos fora da estrada (OHV)</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_open_area_riding">Condução em área aberta com veículos fora de estrada (OHV)</string>
 </resources>
