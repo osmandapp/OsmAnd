@@ -2220,7 +2220,7 @@
     <string name="nearest_cities">Міста поруч</string>
     <string name="select_city">Виберіть місто</string>
     <string name="select_postcode">Пошук поштового індексу</string>
-    <string name="quick_action_auto_zoom">Автомасштаб мапи увімк/вимк</string>
+    <string name="quick_action_auto_zoom">Автомасштабування мапи</string>
     <string name="quick_action_auto_zoom_desc">Кнопка для перемикання автоматичної зміни масштабу при зміні швидкості.</string>
     <string name="quick_action_auto_zoom_on">Увімкнути автомасштабування мапи</string>
     <string name="quick_action_auto_zoom_off">Вимкнути автомасштабування мапи</string>
@@ -4302,7 +4302,7 @@
     <string name="service_is_not_available_please_try_later">Служба недоступна. Повторіть спробу пізніше.</string>
     <string name="shared_string_files">Файли</string>
     <string name="travel_route_types">Типи маршрутів</string>
-    <string name="sample_wikivoyage">Приклад Вікімадрів</string>
+    <string name="sample_wikivoyage">Приклад Вікімандрів</string>
     <string name="shared_string_mini">міні</string>
     <string name="horseback_riding">Верхова їзда</string>
     <string name="routing_attr_prefer_horse_routes_description">Надавати перевагу кінним маршрутам</string>
@@ -4968,7 +4968,7 @@
     <string name="rendering_attr_weatherWindSpeedContours_name">Ізолінії швидкості вітру</string>
     <string name="open_weather_action_description">Дозволяє вам відкрити екран з детальною інформацією про погоду.</string>
     <string name="open_weather_action">Відкрити погоду</string>
-    <string name="shared_string_open">Відкрити</string>
+    <string name="shared_string_open">Відкритий</string>
     <string name="shared_string_purchased_on">Придбано</string>
     <string name="shared_string_expires">Спливає</string>
     <string name="choose_what_to_sync">Виберіть, що синхронізувати</string>
@@ -5024,7 +5024,7 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямку руху, по центру — для всіх інших.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямком руху, по центру — для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
     <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
@@ -5416,7 +5416,7 @@
     <string name="help_article_navigation_setup_markers_navigation_name">Навігація за позначками</string>
     <string name="shared_string_setup">Встановлення</string>
     <string name="user_guide">Посібник користувача</string>
-    <string name="telegram_chats_descr">Приєднуйтесь до одної з наших місцевих телеграм-бесід.</string>
+    <string name="telegram_chats_descr">Приєднуйтесь до одного з наших локальних телеграм-чатів.</string>
     <string name="telegram_chats">Телеграм-бесіди</string>
     <string name="github_discussion">Обговорення GitHub</string>
     <string name="free_versions_descr">Завантажити й установити безплатну версію OsmAnd</string>
@@ -5603,4 +5603,15 @@
     <string name="shared_string_author">Автор</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_extensions">Розширення</string>
+    <string name="max_sensor_heartrate">Пульс, макс</string>
+    <string name="avg_sensor_heartrate">Пульс, серед</string>
+    <string name="max_sensor_temperature">Температура, макс</string>
+    <string name="avg_sensor_temperature">Температура, серед</string>
+    <string name="battery_optimization_banner_content">Оптимізація використання зарядку акумулятора в Android може призвести до пропусків та неточностей в записаних треках.</string>
+    <string name="dont_ask_anymore">Більше не питати</string>
+    <string name="battery_optimization_settings">Оптимізація заряду батареї</string>
+    <string name="battery_optimization_desc">Оптимізація використання батареї в Android може призвести до пропусків та неточностей в записаних треках.
+\n
+\nЯкщо у вас виникли такі проблеми, спробуйте змінити використання батареї на \'Unrestricted.\'</string>
+    <string name="battery_optimization">Оптимізація батареї</string>
 </resources>

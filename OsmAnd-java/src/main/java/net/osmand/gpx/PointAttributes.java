@@ -1,16 +1,18 @@
 package net.osmand.gpx;
 
+import static net.osmand.gpx.GPXUtilities.GPXTPX_PREFIX;
+import static net.osmand.gpx.GPXUtilities.OSMAND_EXTENSIONS_PREFIX;
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
 
 public class PointAttributes {
 
-	public static final String SENSOR_TAG_HEART_RATE = "gpxtpx:hr";
-	public static final String SENSOR_TAG_SPEED = "osmand:speed_sensor";
-	public static final String SENSOR_TAG_CADENCE = "gpxtpx:cadence";
-	public static final String SENSOR_TAG_BIKE_POWER = "power";
-	public static final String SENSOR_TAG_TEMPERATURE = "gpxtpx:temp";
-	public static final String SENSOR_TAG_DISTANCE = "osmand:bike_distance_sensor";
+	public static final String SENSOR_TAG_HEART_RATE = GPXTPX_PREFIX + "hr";
+	public static final String SENSOR_TAG_SPEED = OSMAND_EXTENSIONS_PREFIX + "speed_sensor";
+	public static final String SENSOR_TAG_CADENCE = GPXTPX_PREFIX + "cad" ;
+	public static final String SENSOR_TAG_BIKE_POWER = GPXTPX_PREFIX + "power";
+	public static final String SENSOR_TAG_TEMPERATURE = GPXTPX_PREFIX + "wtemp";
+	public static final String SENSOR_TAG_DISTANCE = OSMAND_EXTENSIONS_PREFIX + "bike_distance_sensor";
 
 	public static final String DEV_RAW_ZOOM = "raw_zoom";
 	public static final String DEV_ANIMATED_ZOOM = "animated_zoom";

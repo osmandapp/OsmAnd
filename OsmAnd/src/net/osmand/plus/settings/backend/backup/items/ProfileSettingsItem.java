@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;

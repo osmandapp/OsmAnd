@@ -436,11 +436,11 @@ public class GPXTrackAnalysis {
 		int sensorSpeedCount = 0;
 		double totalSensorSpeedSum = 0;
 		int sensorHrCount = 0;
-		long totalSensorHrSum = 0;
+		double totalSensorHrSum = 0;
 		int sensorPowerCount = 0;
-		long totalSensorPowerSum = 0;
+		double totalSensorPowerSum = 0;
 		int sensorTemperatureCount = 0;
-		long totalSensorTemperatureSum = 0;
+		double totalSensorTemperatureSum = 0;
 		int sensorCadenceCount = 0;
 		double totalSensorCadenceSum = 0;
 

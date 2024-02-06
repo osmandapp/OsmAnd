@@ -28,7 +28,7 @@ import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.download.CustomRegion;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
@@ -37,6 +37,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.accessibility.AccessibilityPlugin;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
@@ -475,12 +476,13 @@ public class PluginsHelper {
 		return l;
 	}
 
+	@NonNull
 	public static List<IndexItem> getCustomDownloadItems() {
-		List<IndexItem> l = new ArrayList<>();
+		List<IndexItem> items = new ArrayList<>();
 		for (WorldRegion region : getCustomDownloadRegions()) {
-			collectIndexItemsFromSubregion(region, l);
+			collectIndexItemsFromSubregion(region, items);
 		}
-		return l;
+		return items;
 	}
 
 	public static void collectIndexItemsFromSubregion(WorldRegion region, List<IndexItem> items) {

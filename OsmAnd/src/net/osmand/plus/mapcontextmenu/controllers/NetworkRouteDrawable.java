@@ -1,8 +1,5 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import static net.osmand.plus.render.TextRenderer.DROID_SERIF;
-import static net.osmand.router.network.NetworkRouteSelector.*;
-
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -13,8 +10,6 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-
-import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,6 +22,14 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+
+import static net.osmand.plus.render.TextRenderer.DROID_SERIF;
+import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 
 public class NetworkRouteDrawable extends Drawable {
 
@@ -51,14 +54,22 @@ public class NetworkRouteDrawable extends Drawable {
 		setupTextPaint(nightMode);
 	}
 
+	@Nullable
 	private Drawable createBackgroundIcon() {
-		Drawable foregroundIcon = getIcon("osmc_foreground", "mm_osmc_", "");
-		Drawable backgroundIcon = getIcon("osmc_background", "h_osmc_", "_bg");
+		List<Drawable> icons = new ArrayList<>();
+		for (OsmcIconParams iconParams : OsmcIconParams.values()) {
+			Drawable icon = getIcon(iconParams.key, iconParams.prefix, iconParams.suffix);
+			if (icon != null) {
+				icons.add(icon);
+			}
+		}
 
-		if (foregroundIcon != null && backgroundIcon != null) {
-			return UiUtilities.getLayeredIcon(backgroundIcon, foregroundIcon);
+		if (icons.isEmpty()) {
+			return null;
+		} else if (icons.size() == 1) {
+			return icons.get(0);
 		} else {
-			return foregroundIcon != null ? foregroundIcon : backgroundIcon;
+			return UiUtilities.getLayeredIcon(icons.toArray(new Drawable[0]));
 		}
 	}
 
@@ -93,6 +104,7 @@ public class NetworkRouteDrawable extends Drawable {
 		}
 	}
 
+	@Nullable
 	private Drawable getIcon(@NonNull String key, @NonNull String prefix, @NonNull String suffix) {
 		String name = routeKey.getValue(key);
 		String iconName = prefix + name + suffix;
@@ -204,5 +216,24 @@ public class NetworkRouteDrawable extends Drawable {
 	@Override
 	public int getOpacity() {
 		return backgroundDrawable != null ? backgroundDrawable.getOpacity() : PixelFormat.UNKNOWN;
+	}
+
+	private enum OsmcIconParams {
+		BACKGROUND("osmc_background", "h_osmc_", "_bg"),
+		FOREGROUND("osmc_foreground", "mm_osmc_", ""),
+		FOREGROUND_2("osmc_foreground2", "mm_osmc_", "");
+
+		@NonNull
+		final String key;
+		@NonNull
+		final String prefix;
+		@NonNull
+		final String suffix;
+
+		OsmcIconParams(@NonNull String key, @NonNull String prefix, @NonNull String suffix) {
+			this.key = key;
+			this.prefix = prefix;
+			this.suffix = suffix;
+		}
 	}
 }

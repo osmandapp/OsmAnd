@@ -5526,4 +5526,26 @@
     <string name="shared_string_all_tracks">Wszystkie trasy</string>
     <string name="shared_string_extensions">Rozszerzenia</string>
     <string name="shared_string_license">Licencja</string>
+    <string name="any_connected_with_device">Dowolne połączenie: %s</string>
+    <string name="max_sensor_temperature">Temperatura, max</string>
+    <string name="max_sensor_heartrate">Maksymalne tętno</string>
+    <string name="shared_string_next_event">Następne zdarzenie</string>
+    <string name="key_assignments_already_cleared_message">Wszystkie kluczowe zadania są już wyczyszczone</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="zoom_animated">Animowane powiększenie</string>
+    <string name="rendering_attr_showToll_name">Pokaż ograniczenia opłat drogowych</string>
+    <string name="clear_key_assignment_desc">Powiązanie klawiszy dla wybranej akcji zostanie wyczyszczone i ustawione na \"Brak\".</string>
+    <string name="clear_key_assignment">Wyczyść przypisanie przycisków</string>
+    <string name="key_assignments">Główne zadania</string>
+    <string name="any_connected">Dowolny połączony</string>
+    <string name="complex_widget_alert">Widżet %1$s można umieścić tylko w osobnym wierszu.</string>
+    <string name="previous_row_has_complex_widget">Poprzedni wiersz ma złożony widżet</string>
+    <string name="see_all_plans">Zobacz wszystkie plany</string>
+    <string name="battery_optimization_banner_content">Optymalizacja baterii systemu Android może powodować luki i niedokładności w nagranych ścieżkach.</string>
+    <string name="dont_ask_anymore">Nie pytaj więcej</string>
+    <string name="battery_optimization_settings">Ustawienia optymalizacji baterii</string>
+    <string name="battery_optimization_desc">Optymalizacja baterii w systemie Android może powodować luki i niedokładności w nagranych ścieżkach.
+\n
+\nJeśli wystąpi którykolwiek z tych problemów, możesz spróbować zmienić zużycie baterii na \"Nieograniczone\".</string>
+    <string name="battery_optimization">Optymalizacja baterii</string>
 </resources>

@@ -11,6 +11,7 @@ import com.google.protobuf.WireFormat;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder;
@@ -59,6 +60,7 @@ public class BinaryHHRouteReaderAdapter {
 		public String profile;
 		public List<String> profileParams = new ArrayList<>();
 		public HHRoutePointsBox top = null;
+		public List<TagValuePair> encodingRules = new ArrayList<>();
 		/// not stored in cache
 		public List<HHRouteBlockSegments> segments = null;
 
@@ -108,8 +110,20 @@ public class BinaryHHRouteReaderAdapter {
 			case 0:
 				codedIS.popLimit(oldLimit);
 				return mp;
+			case OsmandOdb.OsmAndHHRoutingIndex.TAGVALUESTABLE_FIELD_NUMBER:
+				int length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
+				List<String> st = readStringTable();
+				for (String s : st) {
+					int i = s.indexOf('=');
+					if (i > 0) {
+						reg.encodingRules.add(new TagValuePair(s.substring(0, i), s.substring(i + 1), -1));
+					}
+				}
+				codedIS.popLimit(oldLimit);
+				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
-				readPointBox(cl, mapId, mp, null);
+				readPointBox(reg, cl, mapId, mp, null);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTSEGMENTS_FIELD_NUMBER:
 				reg.segments.add(readRegionSegmentHeader());
@@ -120,7 +134,24 @@ public class BinaryHHRouteReaderAdapter {
 			}
 		}
 				
-				
+	}
+	
+	protected List<String> readStringTable() throws IOException {
+		List<String> list = new ArrayList<String>();
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return list;
+			case OsmandOdb.StringTable.S_FIELD_NUMBER :
+				list.add(codedIS.readString());
+				break;
+			default:
+				skipUnknownField(t);
+				break;
+			}
+		}
 	}
 
 	public void readHHIndex(HHRouteRegion region, boolean fullInit) throws IOException {
@@ -141,7 +172,7 @@ public class BinaryHHRouteReaderAdapter {
 				region.profileParams.add(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
-				region.top = readPointBox(null, (short) 0, null, null);
+				region.top = readPointBox(region, null, (short) 0, null, null);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTSEGMENTS_FIELD_NUMBER:
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -153,7 +184,7 @@ public class BinaryHHRouteReaderAdapter {
 		}
 	}
 
-	private <T extends NetworkDBPoint>  HHRoutePointsBox readPointBox(Class<T> cl, short mapId, 
+	private <T extends NetworkDBPoint>  HHRoutePointsBox readPointBox(HHRouteRegion reg, Class<T> cl, short mapId, 
 			TLongObjectHashMap<T> mp, HHRoutePointsBox parent) throws IOException {
 		HHRoutePointsBox box = new HHRoutePointsBox();
 		box.length = readInt();
@@ -185,14 +216,14 @@ public class BinaryHHRouteReaderAdapter {
 				if (cl == null) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				} else {
-					readPointBox(cl, mapId, mp, box);
+					readPointBox(reg, cl, mapId, mp, box);
 				}
 				break;
 			case OsmAndHHRoutingIndex.HHRoutePointsBox.POINTS_FIELD_NUMBER:
 				if (cl == null) {
 					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				} else {
-					readPoint(cl, mapId, mp, box.left, box.top);
+					readPoint(reg, cl, mapId, mp, box.left, box.top);
 				}
 				break;
 			default:
@@ -202,7 +233,7 @@ public class BinaryHHRouteReaderAdapter {
 		}		
 	}
 
-	private <T extends NetworkDBPoint> T readPoint(Class<T> cl, short mapId, TLongObjectHashMap<T> mp, int dx, int dy) throws IOException {
+	private <T extends NetworkDBPoint> T readPoint(HHRouteRegion reg, Class<T> cl, short mapId, TLongObjectHashMap<T> mp, int dx, int dy) throws IOException {
 		T pnt;
 		try {
 			pnt = cl.getDeclaredConstructor().newInstance();
@@ -240,6 +271,22 @@ public class BinaryHHRouteReaderAdapter {
 				break;
 			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.GLOBALID_FIELD_NUMBER:
 				pnt.index = codedIS.readInt32();
+				break;
+			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.TAGVALUEIDS_FIELD_NUMBER:
+				int sz = codedIS.readRawVarint32();
+				int old = codedIS.pushLimit(sz);
+				while (codedIS.getBytesUntilLimit() > 0) {
+					int tvId = codedIS.readInt32();
+					if (tvId < reg.encodingRules.size()) {
+						TagValuePair tagValuePair = reg.encodingRules.get(tvId);
+						if (pnt.tagValues == null) {
+							pnt.tagValues = new ArrayList<TagValuePair>();
+						}
+						pnt.tagValues.add(tagValuePair);
+					}
+				}
+				codedIS.popLimit(old);
+
 				break;
 			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.ROADID_FIELD_NUMBER:
 				pnt.roadId = codedIS.readInt64();

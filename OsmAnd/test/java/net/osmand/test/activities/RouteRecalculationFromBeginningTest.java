@@ -3,10 +3,10 @@ package net.osmand.test.activities;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.EspressoUtils.waitForView;
 import static net.osmand.test.common.Interactions.openNavigationMenu;
 import static net.osmand.test.common.Interactions.setRouteStart;
@@ -30,6 +30,8 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.tracks.TrackTabType;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
@@ -48,6 +50,8 @@ import java.util.concurrent.TimeUnit;
 @RunWith(AndroidJUnit4.class)
 public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
+	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
+
 	private static final LatLon START = new LatLon(50.17356, 18.51406);
 
 	@Rule
@@ -63,7 +67,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		IdlingPolicies.setIdlingResourceTimeout(40, TimeUnit.SECONDS);
 		enableSimulation(500);
 		try {
-			ResourcesImporter.importGpxAssets(app, Collections.singletonList("gpx_recalc_test.gpx"));
+			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -96,12 +100,13 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 						6));
 		linearLayout2.perform(scrollTo(), click());
 
-		ViewInteraction recyclerView = onView(
-				allOf(withId(R.id.track_list),
-						childAtPosition(
-								withId(R.id.prev_route_card),
-								1)));
-		recyclerView.perform(actionOnItemAtPosition(1, click()));
+		ViewInteraction allTab = onView(allOf(withId(android.R.id.text1),
+				withText(app.getString(TrackTabType.ALL.titleId))));
+		allTab.perform(click());
+
+		ViewInteraction trackItemView = onView(allOf(withId(R.id.title),
+				withText(GpxUiHelper.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
+		trackItemView.perform(click());
 
 		ViewInteraction appCompatImageButton2 = onView(
 				allOf(withId(R.id.close_button), withContentDescription("Navigate up"),

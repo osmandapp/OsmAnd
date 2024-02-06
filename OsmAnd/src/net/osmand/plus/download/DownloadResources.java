@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
