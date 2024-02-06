@@ -678,7 +678,7 @@ public abstract class InAppPurchaseHelper {
 
 	protected abstract InAppCommand getRequestInventoryCommand(boolean userRequested) throws UnsupportedOperationException;
 
-	protected void onSkuDetailsResponseDone(@NonNull List<PurchaseInfo> purchaseInfoList, boolean userRequested) {
+	protected void onProductDetailsResponseDone(@NonNull List<PurchaseInfo> purchaseInfoList, boolean userRequested) {
 		OnRequestResultListener listener = new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
