@@ -66,7 +66,6 @@ public class SpeedometerWidget {
 
 	private float cachedSpeed;
 
-
 	public SpeedometerWidget(View view, OsmandApplication app, ApplicationMode mode) {
 		this.view = view;
 		this.app = app;
@@ -92,11 +91,14 @@ public class SpeedometerWidget {
 	}
 
 	private void setupWidget() {
+		FrameLayout.LayoutParams speedLimitValueParams = (FrameLayout.LayoutParams) speedLimitValueView.getLayoutParams();
+		speedLimitValueParams.setMargins(0, isUsaOrCanadaRegion() ? dpToPx(2) : 0, 0, 0);
+		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanadaRegion());
+
 		WidgetSize newWidgetSize = sizePref.getModeValue(mode);
 		if (previousWidgetSize == newWidgetSize) {
 			return;
 		}
-
 		previousWidgetSize = newWidgetSize;
 		LinearLayout.LayoutParams speedometerLayoutParams = (LinearLayout.LayoutParams) speedometerContainer.getLayoutParams();
 		LinearLayout.LayoutParams speedLimitLayoutParams = (LinearLayout.LayoutParams) speedLimitContainer.getLayoutParams();
@@ -129,9 +131,6 @@ public class SpeedometerWidget {
 				speedLimitDescriptionParams.setMargins(0, dpToPx(14), 0, 0);
 				break;
 		}
-		FrameLayout.LayoutParams speedLimitValueParams = (FrameLayout.LayoutParams) speedLimitValueView.getLayoutParams();
-		speedLimitValueParams.setMargins(0, isUsaOrCanadaRegion() ? dpToPx(2) : 0, 0, 0);
-		AndroidUiHelper.updateVisibility(speedLimitDescription, isUsaOrCanadaRegion());
 	}
 
 	public int dpToPx(float dp) {
