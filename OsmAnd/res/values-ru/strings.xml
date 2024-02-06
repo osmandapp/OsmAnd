@@ -5115,7 +5115,7 @@
     <string name="weather_download_error">Не удалось загрузить тайлы %1$s.</string>
     <string name="is_imported">%1$s импортирован.</string>
     <string name="file_already_exists">Файл уже существует</string>
-    <string name="nav_profile_confirm_delete">Вы уверены, что хотите удалить \"%1$s\"?</string>
+    <string name="nav_profile_confirm_delete">Удалить \"%1$s\"?</string>
     <string name="external_device_menu_forget">Забыть</string>
     <string name="file_already_exists_description">«%1$s». Файл с таким именем уже существует. Замена перезапишет все изменения, сделанные в текущей версии.</string>
     <string name="external_device_characteristic_speed">Скорость</string>
@@ -5290,7 +5290,7 @@
 \nПри этом данные на устройстве сохранятся без изменений.</string>
     <string name="osmand_cloud_deleted_account_descr">Аккаунт и все его данные удалены с OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Все данные из OsmAnd Cloud будут %1$s. Данные на устройстве останутся нетронутыми.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Удалить аккаунта в OsmAnd Cloud?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Удалить аккаунт OsmAnd Cloud?
 \n
 \nДействие нельзя будет отменить.</string>
     <string name="shared_string_deleting">Удаление</string>
@@ -5480,7 +5480,7 @@
     <string name="save_as_smart_folder">Сохранить как смарт-папку</string>
     <string name="delete_smart_folder_dialog_message">Это приведёт к удалению смарт-папки \"%1$s\".</string>
     <string name="empty_smart_folder_title">Нет подходящего трека</string>
-    <string name="empty_smart_folder_description">Здесь автоматически появится все подходящие треки</string>
+    <string name="empty_smart_folder_description">Здесь появится все подходящие треки</string>
     <string name="configure_filter">Настройка фильтра</string>
     <string name="no_config_smart_folder_title">Не настроен</string>
     <string name="discard_filter_changes">Отменить изменения фильтра</string>
@@ -5500,7 +5500,7 @@
     <string name="shared_string_button">Кнопка</string>
     <string name="key_event_action_next_app_profile">Следующий профиль</string>
     <string name="change_key_binding">Изменить привязку клавиш</string>
-    <string name="remove_type_q">Вы точно хотите удалить тип «%1$s»?</string>
+    <string name="remove_type_q">Удалить тип «%1$s»?</string>
     <string name="shared_string_action">Действие</string>
     <string name="add_new_type">Добавить новый тип</string>
     <string name="key_event_action_move_up">Сдвиг вверх</string>
@@ -5519,7 +5519,7 @@
     <string name="shared_string_rows">Ряды</string>
     <string name="key_is_already_assigned_error">Кнопка «%1$s» уже назначена на действие: «%2$s»</string>
     <string name="topography_maps">Карты ландшафта</string>
-    <string name="cloud_trash_clear_confirmation">Вы точно хотите удалить все элементы в к корзине? Это действие нельзя отменить.</string>
+    <string name="cloud_trash_clear_confirmation">Удалить все элементы в корзине окончательно?</string>
     <string name="key_assignments">Назначения кнопок</string>
     <string name="change_button">Изменить клавишу</string>
     <string name="root_folder">Корневая папка</string>
@@ -5536,7 +5536,7 @@
     <string name="remove_widget_first">Пожалуйста, сначала удалите виджет</string>
     <string name="add_row">Добавить ряд</string>
     <string name="shared_string_included">Включено</string>
-    <string name="discard_changes_prompt">Вы точно хотите отклонить изменения?</string>
+    <string name="discard_changes_prompt">Отклонить изменения?</string>
     <string name="shared_string_delete_immediately">Удалить сразу</string>
     <string name="shared_string_eta">предполагаемое время</string>
     <string name="cloud_item_restored">%1$s восстановлено в Облако.</string>
@@ -5556,7 +5556,7 @@
     <string name="map_widget_glide_average_desc">Показывать средний коэффициент планирования для заданного интервала.</string>
     <string name="map_widget_glide_target_desc">Показывать средний коэффициент планирования для достижения целевой точки.</string>
     <string name="lang_zh_hans">Китайский упрощённый</string>
-    <string name="button_already_assigned_to_this_action">Эта кнопка уже назначена на это действие.</string>
+    <string name="button_already_assigned_to_this_action">Кнопка уже назначена на это действие.</string>
     <string name="zoom_non_animated">Приближение без анимации</string>
     <string name="key_assignments_already_cleared_message">Все назначения кнопок уже удалены</string>
     <string name="lang_zh_hant">Китайский традиционный</string>
@@ -5570,16 +5570,14 @@
     <string name="key_event_action_take_media_note">Сделать медиазаметку</string>
     <string name="key_event_action_emit_navigation_hint">Вызвать навигационную подсказку</string>
     <string name="trash_is_empty_banner_desc">Файлы, удаленные из OsmAnd Cloud, будут доступны здесь в течение %1$s дней.</string>
-    <string name="delete_trash_item_confirmation_desc">«%1$s» будет удален навсегда. Вы уверены?
-\n
-\nЭто действие нельзя отменить.</string>
+    <string name="delete_trash_item_confirmation_desc">Удалить «%1$s» окончательно?</string>
     <string name="shared_string_next_event">Следующее событие</string>
     <string name="shared_string_empty_trash">Очистить корзину</string>
     <string name="trash_alert_card_desc">Объекты в корзине будут удалены через %1$s дней.</string>
     <string name="map_widget_sun_position">Положение солнца</string>
     <string name="see_all_plans">Показать все планы</string>
     <string name="shared_string_delete_item">Удалить объект</string>
-    <string name="map_widget_sun_position_desc">Виджет показывает время до восхода или заката солнца в зависимости от текущего времени.</string>
+    <string name="map_widget_sun_position_desc">Виджет показывает время до восхода или заката.</string>
     <string name="previous_row_has_complex_widget">Предыдущий ряд содержит составной виджет</string>
     <string name="complex_widget_alert">Виджет %1$s можно разместить только в отдельном ряде.</string>
     <string name="shared_string_all_tracks">Все треки</string>
@@ -5592,4 +5590,21 @@
     <string name="dont_ask_anymore">Больше не спрашивать</string>
     <string name="battery_optimization_settings">Настройки оптимизации батареи</string>
     <string name="battery_optimization">Оптимизация батареи</string>
+    <string name="shared_string_keywords">Ключевые слова</string>
+    <string name="max_sensor_heartrate">Частота пульса, макс.</string>
+    <string name="avg_sensor_heartrate">Частота пульса, средняя</string>
+    <string name="max_sensor_cadence">Каденс, макс.</string>
+    <string name="avg_sensor_cadence">Каденс, средний</string>
+    <string name="max_sensor_bycicle_power">Мощность, макс.</string>
+    <string name="avg_sensor_bycicle_power">Мощность, средняя</string>
+    <string name="max_sensor_temperature">Температура, макс.</string>
+    <string name="avg_sensor_temperature">Температура, средняя</string>
+    <string name="max_sensor_speed">Скорость, макс.</string>
+    <string name="avg_sensor_speed">Скорость, средняя</string>
+    <string name="shared_string_activity">Активность</string>
+    <string name="shared_string_road_maps">Карты дорог</string>
+    <string name="target_elevation">Целевая высота</string>
+    <string name="battery_optimization_desc">Оптимизация батареи в Android может привести к появлению пропусков и неточностей в записанных треках.
+\n
+\nЕсли вы столкнулись с подобными проблемами, попробуйте изменить расход батареи на «Неограниченный».</string>
 </resources>
