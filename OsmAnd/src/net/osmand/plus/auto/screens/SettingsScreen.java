@@ -51,6 +51,22 @@ public final class SettingsScreen extends BaseAndroidAutoScreen {
                         sectionABuilder.build(),
                         getCarContext().getString(R.string.voice_pref_title)));
 
+		ItemList.Builder sectionBBuilder = new ItemList.Builder();
+		sectionBBuilder.addItem(new Row.Builder()
+				.setTitle(getCarContext().getString(R.string.settings_favorites_sortorder))
+				.setToggle(
+						new Toggle.Builder(
+								(value) -> osmandSettings.SORT_FAV_BY_DISTANCE.set(value))
+								.setChecked(osmandSettings.SORT_FAV_BY_DISTANCE.get())
+								.build())
+				.build()
+		);
+
+		templateBuilder.addSectionedList(
+				SectionedItemList.create(
+						sectionBBuilder.build(),
+						getCarContext().getString(R.string.shared_string_favorites)));
+
         /*
         ItemList.Builder sectionBBuilder = new ItemList.Builder();
         sectionBBuilder.addItem(
