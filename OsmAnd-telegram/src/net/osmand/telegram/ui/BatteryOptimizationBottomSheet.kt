@@ -52,14 +52,9 @@ class BatteryOptimizationBottomSheet : DialogFragment() {
 			setText(R.string.go_to_settings)
 			setOnClickListener {
 				if (Build.VERSION.SDK_INT >= 26) {
-					val pkg = app.packageName
 					val pm = app.getSystemService(PowerManager::class.java)
 					if (pm != null) {
-						val intent = if (!pm.isIgnoringBatteryOptimizations(pkg)) {
-							Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).setData(Uri.parse("package:$pkg"))
-						} else {
-							Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-						}
+						val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
 						if (intent.resolveActivity(app.packageManager) != null) {
 							startActivity(intent)
 						} else {
