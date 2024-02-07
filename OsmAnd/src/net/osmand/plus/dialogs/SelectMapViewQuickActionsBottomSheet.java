@@ -31,7 +31,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
@@ -63,8 +63,8 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		}
 		long id = args.getLong(SwitchableAction.KEY_ID);
 		OsmandApplication app = mapActivity.getMyApplication();
-		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
-		action = QuickActionRegistry.produceAction(quickActionRegistry.getQuickAction(id));
+		MapButtonsHelper mapButtonsHelper = app.getQuickActionRegistry();
+		action = MapButtonsHelper.produceAction(mapButtonsHelper.getQuickAction(id));
 
 		if (savedInstanceState != null) {
 			selectedItem = savedInstanceState.getString(SELECTED_ITEM_KEY);

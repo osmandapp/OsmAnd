@@ -29,8 +29,8 @@ import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProv
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
-import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.quickaction.QuickActionRegistry.QuickActionUpdatesListener;
+import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapPosition;
@@ -49,7 +49,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	private ImageView contextMarker;
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
-	private final QuickActionRegistry quickActionRegistry;
+	private final MapButtonsHelper mapButtonsHelper;
 
 	private QuickActionButton quickActionButton;
 	private QuickActionsWidget quickActionsWidget;
@@ -64,7 +64,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		super(context);
 		app = getApplication();
 		settings = app.getSettings();
-		quickActionRegistry = app.getQuickActionRegistry();
+		mapButtonsHelper = app.getQuickActionRegistry();
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			ImageButton button = mapActivity.findViewById(R.id.map_quick_actions_button);
 			quickActionButton = new QuickActionButton(mapActivity, button, QUICK_ACTION_HUD_ID);
 
-			isLayerOn = quickActionRegistry.isQuickActionOn();
+			isLayerOn = mapButtonsHelper.isQuickActionOn();
 		} else {
 			quickActionsWidget = null;
 			quickActionButton = null;
@@ -100,7 +100,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 	public void refreshLayer() {
 		updateWidgetVisibility(false);
-		isLayerOn = quickActionRegistry.isQuickActionOn();
+		isLayerOn = mapButtonsHelper.isQuickActionOn();
 		quickActionButton.updateVisibility();
 		if (isLayerOn) {
 			quickActionButton.setQuickActionButtonMargin();
@@ -131,12 +131,12 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 		if (!showWidget) {
 			quitMovingMarker();
-			quickActionRegistry.removeUpdatesListener(this);
+			mapButtonsHelper.removeUpdatesListener(this);
 			quickActionsWidget.setSelectionListener(null);
 		} else {
 			enterMovingMode(mapActivity.getMapView().getCurrentRotatedTileBox());
-			quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
-			quickActionRegistry.addUpdatesListener(this);
+			quickActionsWidget.setActions(mapButtonsHelper.getQuickActions());
+			mapButtonsHelper.addUpdatesListener(this);
 			quickActionsWidget.setSelectionListener(this);
 		}
 		return true;
@@ -273,7 +273,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	@Override
 	public void onActionsUpdated() {
 		if (quickActionsWidget != null) {
-			quickActionsWidget.setActions(quickActionRegistry.getQuickActions());
+			quickActionsWidget.setActions(mapButtonsHelper.getQuickActions());
 		}
 	}
 
@@ -281,7 +281,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	public void onActionSelected(@NonNull QuickAction action) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			QuickActionRegistry.produceAction(action).execute(mapActivity);
+			MapButtonsHelper.produceAction(action).execute(mapActivity);
 			updateWidgetVisibility(false);
 		}
 	}

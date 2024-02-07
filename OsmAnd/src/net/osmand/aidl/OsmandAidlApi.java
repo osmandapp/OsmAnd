@@ -102,7 +102,7 @@ import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -882,7 +882,7 @@ public class OsmandAidlApi {
 				if (actionNumber != -1 && mapActivity != null) {
 					List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
 					if (actionNumber < actionsList.size()) {
-						QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
 					}
 				}
 			}

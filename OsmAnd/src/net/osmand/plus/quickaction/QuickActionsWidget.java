@@ -193,7 +193,7 @@ public class QuickActionsWidget extends LinearLayout {
 			View view = inflater.inflate(R.layout.quick_action_widget_item, gridLayout, false);
 
 			if (i + (position * ACTIONS_PER_PAGE) < actions.size()) {
-				QuickAction action = QuickActionRegistry.produceAction(
+				QuickAction action = MapButtonsHelper.produceAction(
 						actions.get(i + (position * ACTIONS_PER_PAGE)));
 
 				((ImageView) view.findViewById(imageView))

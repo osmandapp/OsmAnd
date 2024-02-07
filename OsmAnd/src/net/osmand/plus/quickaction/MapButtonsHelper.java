@@ -30,7 +30,7 @@ import java.util.TreeSet;
  * Created by rosty on 12/27/16.
  */
 
-public class QuickActionRegistry {
+public class MapButtonsHelper {
 
 	public interface QuickActionUpdatesListener {
 
@@ -62,7 +62,7 @@ public class QuickActionRegistry {
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
 
-	public QuickActionRegistry(@NonNull OsmandApplication app) {
+	public MapButtonsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
 		updateActionTypes();

@@ -31,10 +31,10 @@ public class AddQuickActionDialog extends MenuBottomSheetDialogFragment {
 	public void createMenuItems(Bundle savedInstanceState) {
 		OsmandApplication app = requiredMyApplication();
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
-		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
+		MapButtonsHelper mapButtonsHelper = app.getQuickActionRegistry();
 
 		items.add(new TitleItem(getString(R.string.dialog_add_action_title)));
-		List<QuickActionType> actions = quickActionRegistry.produceTypeActionsListWithHeaders();
+		List<QuickActionType> actions = mapButtonsHelper.produceTypeActionsListWithHeaders();
 		boolean firstHeader = true;
 		for (QuickActionType type : actions) {
 			if (type.getId() == 0) {

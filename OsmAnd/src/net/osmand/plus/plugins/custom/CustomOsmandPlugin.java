@@ -27,7 +27,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
@@ -281,11 +281,11 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 					if (item instanceof QuickActionsSettingsItem) {
 						QuickActionsSettingsItem quickActionsSettingsItem = (QuickActionsSettingsItem) item;
 						List<QuickAction> quickActions = quickActionsSettingsItem.getItems();
-						QuickActionRegistry actionRegistry = app.getQuickActionRegistry();
+						MapButtonsHelper mapButtonsHelper = app.getQuickActionRegistry();
 						for (QuickAction action : quickActions) {
-							QuickAction savedAction = actionRegistry.getQuickAction(action.getType(), action.getName(app), action.getParams());
+							QuickAction savedAction = mapButtonsHelper.getQuickAction(action.getType(), action.getName(app), action.getParams());
 							if (savedAction != null) {
-								actionRegistry.deleteQuickAction(savedAction);
+								mapButtonsHelper.deleteQuickAction(savedAction);
 							}
 						}
 					} else if (item instanceof MapSourcesSettingsItem) {

@@ -53,7 +53,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private UiUtilities uiUtilities;
-	private QuickActionRegistry actionRegistry;
+	private MapButtonsHelper mapButtonsHelper;
 	private QuickAction action;
 
 	private boolean isNew;
@@ -66,7 +66,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
-		actionRegistry = app.getQuickActionRegistry();
+		mapButtonsHelper = app.getQuickActionRegistry();
 
 		nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
 		setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
@@ -75,8 +75,8 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		long actionId = savedInstanceState == null ? getArguments().getLong(KEY_ACTION_ID) : savedInstanceState.getLong(KEY_ACTION_ID);
 		isNew = savedInstanceState == null ? actionId == 0 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
 
-		QuickAction quickAction = isNew ? actionRegistry.newActionByType(type) : actionRegistry.getQuickAction(actionId);
-		action = QuickActionRegistry.produceAction(quickAction);
+		QuickAction quickAction = isNew ? mapButtonsHelper.newActionByType(type) : mapButtonsHelper.getQuickAction(actionId);
+		action = MapButtonsHelper.produceAction(quickAction);
 	}
 
 	@Override
@@ -174,15 +174,15 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 					saveFirstTagWithEmptyValue();
 				}
 				if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
-					if (actionRegistry.isNameUnique(action, app)) {
+					if (mapButtonsHelper.isNameUnique(action, app)) {
 						if (isNew) {
-							actionRegistry.addQuickAction(action);
+							mapButtonsHelper.addQuickAction(action);
 						} else {
-							actionRegistry.updateQuickAction(action);
+							mapButtonsHelper.updateQuickAction(action);
 						}
 						dismiss();
 					} else {
-						action = actionRegistry.generateUniqueName(action, app);
+						action = mapButtonsHelper.generateUniqueName(action, app);
 						showDuplicatedDialog();
 						((EditText) root.findViewById(R.id.name)).setText(action.getName(app));
 					}
@@ -203,9 +203,9 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(app)));
 		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 			if (isNew) {
-				actionRegistry.addQuickAction(action);
+				mapButtonsHelper.addQuickAction(action);
 			} else {
-				actionRegistry.updateQuickAction(action);
+				mapButtonsHelper.updateQuickAction(action);
 			}
 			CreateEditActionDialog.this.dismiss();
 			dismiss();
@@ -230,7 +230,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 
 	@Override
 	public void onConfirmButtonClick() {
-		actionRegistry.deleteQuickAction(action);
+		mapButtonsHelper.deleteQuickAction(action);
 		dismiss();
 	}
 

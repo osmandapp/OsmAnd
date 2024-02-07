@@ -11,7 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -30,7 +30,7 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 
 	private static final int APPROXIMATE_QUICK_ACTION_SIZE_BYTES = 135;
 
-	private QuickActionRegistry actionRegistry;
+	private MapButtonsHelper mapButtonsHelper;
 
 	public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull List<QuickAction> items) {
 		super(app, null, items);
@@ -47,8 +47,8 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	@Override
 	protected void init() {
 		super.init();
-		actionRegistry = app.getQuickActionRegistry();
-		existingItems = actionRegistry.getQuickActions();
+		mapButtonsHelper = app.getQuickActionRegistry();
+		existingItems = mapButtonsHelper.getQuickActions();
 	}
 
 	@NonNull
@@ -59,23 +59,23 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 
 	@Override
 	public long getLocalModifiedTime() {
-		return actionRegistry.getLastModifiedTime();
+		return mapButtonsHelper.getLastModifiedTime();
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		actionRegistry.setLastModifiedTime(lastModifiedTime);
+		mapButtonsHelper.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@Override
 	public boolean isDuplicate(@NonNull QuickAction item) {
-		return !actionRegistry.isNameUnique(item, app);
+		return !mapButtonsHelper.isNameUnique(item, app);
 	}
 
 	@NonNull
 	@Override
 	public QuickAction renameItem(@NonNull QuickAction item) {
-		return actionRegistry.generateUniqueName(item, app);
+		return mapButtonsHelper.generateUniqueName(item, app);
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 				appliedItems.addAll(duplicateItems);
 			}
 			newActions.addAll(appliedItems);
-			actionRegistry.updateQuickActions(newActions);
+			mapButtonsHelper.updateQuickActions(newActions);
 		}
 	}
 
@@ -136,16 +136,16 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 			Gson gson = new Gson();
 			Type type = new TypeToken<HashMap<String, String>>() {
 			}.getType();
-			QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
+			MapButtonsHelper mapButtonsHelper = app.getQuickActionRegistry();
 			JSONArray itemsJson = json.getJSONArray("items");
 			for (int i = 0; i < itemsJson.length(); i++) {
 				JSONObject object = itemsJson.getJSONObject(i);
 				String name = object.getString("name");
 				QuickAction quickAction = null;
 				if (object.has("actionType")) {
-					quickAction = quickActionRegistry.newActionByStringType(object.getString("actionType"));
+					quickAction = mapButtonsHelper.newActionByStringType(object.getString("actionType"));
 				} else if (object.has("type")) {
-					quickAction = quickActionRegistry.newActionByType(object.getInt("type"));
+					quickAction = mapButtonsHelper.newActionByType(object.getInt("type"));
 				}
 				if (quickAction != null) {
 					String paramsString = object.getString("params");

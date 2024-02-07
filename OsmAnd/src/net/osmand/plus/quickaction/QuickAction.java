@@ -35,7 +35,7 @@ public class QuickAction {
     private QuickActionType actionType;
 
     protected QuickAction() {
-        this(QuickActionRegistry.TYPE_ADD_ITEMS);
+        this(MapButtonsHelper.TYPE_ADD_ITEMS);
     }
 
     public QuickAction(QuickActionType type) {
