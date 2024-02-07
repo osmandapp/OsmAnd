@@ -613,7 +613,7 @@
 \n
 \n Descargue los mosaicos de los mapas directamente, o cópielos como archivos de base de datos SQLite a la carpeta de datos de OsmAnd utilizando una de las muchas herramientas de preparación de mapas de terceros.</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el seguimiento y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
-    <string name="osmand_accessibility_description">Hace que las funciones de accesibilidad del dispositivo estén disponibles directamente en OsmAnd. Esto facilita, por ejemplo, el ajuste de la velocidad del habla para las voces de texto a voz, la configuración de la navegación con el D-pad, el uso de un trackball para el control del zoom, o la retroalimentación de texto a voz, por ejemplo para anunciar automáticamente su posición.</string>
+    <string name="osmand_accessibility_description">Hace que las funciones de accesibilidad del dispositivo estén directamente disponibles en OsmAnd. Esto facilita, por ejemplo, el ajuste de la velocidad de voz para las voces de texto a voz, la configuración de la navegación con el D-pad, el uso de un trackball para controlar el zoom o la retroalimentación de texto a voz, por ejemplo para anunciar automáticamente tu posición.</string>
     <string name="osmand_development_plugin_description">Proporciona funcionalidad para probar y depurar OsmAnd: simular rutas de navegación, monitorizar el renderizado de la pantalla, comprobar el rendimiento, etc. Este plugin no es necesario para el uso normal de la app.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
@@ -2252,10 +2252,10 @@
 \n • Antártida: * 
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
-    <string name="quick_action_auto_zoom">Alternar zoom automático del mapa</string>
-    <string name="quick_action_auto_zoom_desc">Un botón que alterna el zoom automático de acuerdo a la velocidad.</string>
-    <string name="quick_action_auto_zoom_on">Activa zoom automático</string>
-    <string name="quick_action_auto_zoom_off">Desactivar zoom automático</string>
+    <string name="quick_action_auto_zoom">Mapa con zoom automático</string>
+    <string name="quick_action_auto_zoom_desc">Botón para activar o desactivar el zoom automático controlado por velocidad.</string>
+    <string name="quick_action_auto_zoom_on">Activar el zoom automático</string>
+    <string name="quick_action_auto_zoom_off">Desactivar el zoom automático</string>
     <string name="quick_action_add_destination">Definir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
@@ -5409,7 +5409,7 @@
     <string name="help_article_widgets_nav_widgets_name">Complementos de navegación</string>
     <string name="shared_string_setup">Configurar</string>
     <string name="user_guide">Manual del usuario</string>
-    <string name="telegram_chats_descr">Únete a uno de nuestros chats en telegram.</string>
+    <string name="telegram_chats_descr">Únete a uno de nuestros chats locales de Telegram.</string>
     <string name="telegram_chats">Chats de Telegram</string>
     <string name="github_discussion">Debates en GitHub</string>
     <string name="free_versions_descr">Descargar e instalar la versión gratuita de OsmAnd</string>
@@ -5609,4 +5609,10 @@
     <string name="max_sensor_cadence">Cadencia de bicicleta, máx</string>
     <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
     <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
+    <string name="shared_string_keywords">Palabras clave</string>
+    <string name="shared_string_additional">Adicionales</string>
+    <string name="shared_string_activity">Actividad</string>
+    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar lagunas e imprecisiones en las pistas grabadas.
+\n
+\nSi experimentas alguno de estos problemas, puedes probar a cambiar el uso de la batería a \'Sin restricciones\'</string>
 </resources>

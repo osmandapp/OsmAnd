@@ -5615,4 +5615,7 @@
     <string name="max_sensor_bycicle_power">Leistung, maximal</string>
     <string name="avg_sensor_bycicle_power">Leistung, durchschnittlich</string>
     <string name="max_sensor_temperature">Temperatur, maximal</string>
+    <string name="shared_string_keywords">Schlüsselwörter</string>
+    <string name="shared_string_additional">Zusätzlich</string>
+    <string name="shared_string_activity">Aktivität</string>
 </resources>

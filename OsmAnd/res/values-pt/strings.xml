@@ -5616,4 +5616,7 @@
     <string name="max_sensor_temperature">Temperatura, máximo</string>
     <string name="max_sensor_speed">Velocidade do sensor, máximo</string>
     <string name="avg_sensor_speed">Velocidade do sensor, média</string>
+    <string name="shared_string_additional">Adicional</string>
+    <string name="shared_string_activity">Atividade</string>
+    <string name="shared_string_keywords">Palavras-chave</string>
 </resources>

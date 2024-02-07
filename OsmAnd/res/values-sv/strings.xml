@@ -5452,7 +5452,7 @@
     <string name="android_auto_map_placeholder_descr">Koppla ifrån enheten från Android Auto för att visa kartan i appen.</string>
     <string name="complex_widget_alert">%1$s widgeten kan bara placeras på sin egen rad.</string>
     <string name="distance_by_tap_use_description">Klicka i kartan för att se avståndet mellan aktuell position och klickad punkt.
-\nKlicka på två punkter samtidigt för att se avståndet mellan de två punkterna.</string>
+\nKlicka på två punkter samtidigt för att se avståndet mellan de två punkterna</string>
     <string name="online_direct_line_maps_link">Kontrollera nödvändiga kartor.</string>
     <string name="remove_group_from_markers">Ta bort grupp från markörlista</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Färglägg leder utifrån deras nätverkstyp (internationell, regional, lokal).</string>
