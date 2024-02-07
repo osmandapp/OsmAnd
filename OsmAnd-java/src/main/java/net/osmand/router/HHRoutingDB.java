@@ -79,7 +79,7 @@ public class HHRoutingDB {
 		}
 		ResultSet rs = st.executeQuery("SELECT profile, id, params from profiles");
 		while (rs.next()) {
-			routingProfile = rs.getString(1);
+			routingProfile = rs.getString(1); // only 1 profile supported for now
 			routingProfiles.put(rs.getInt(2), rs.getString(3));
 		}
 		st.close();
@@ -203,6 +203,20 @@ public class HHRoutingDB {
 			byte[] outs = rs.getBytes(3);
 			res[1] = outs;
 		}
+		rs.close();
+	}
+	
+	public synchronized void loadSegmentPointInternalSync(int id, int profile, byte[][] res) throws SQLException {
+		loadSegmentStart.setInt(1, id);
+		loadSegmentStart.setInt(2, profile);
+		ResultSet rs = loadSegmentStart.executeQuery();
+		if (rs.next()) {
+			byte[] ins = rs.getBytes(2);
+			res[0] = ins;
+			byte[] outs = rs.getBytes(3);
+			res[1] = outs;
+		}
+		rs.close();
 	}
 	
 	
