@@ -9,16 +9,18 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
@@ -36,6 +38,7 @@ public class WidgetsSettingsHelper {
 
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapWidgetsFactory widgetsFactory;
+	private final MapButtonsHelper mapButtonsHelper;
 
 	private ApplicationMode appMode;
 
@@ -46,6 +49,7 @@ public class WidgetsSettingsHelper {
 		this.appMode = appMode;
 		this.widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 		this.widgetsFactory = new MapWidgetsFactory(mapActivity);
+		this.mapButtonsHelper = app.getMapButtonsHelper();
 	}
 
 	public void setAppMode(@NonNull ApplicationMode appMode) {
@@ -65,9 +69,9 @@ public class WidgetsSettingsHelper {
 		}
 
 		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(appMode);
-		settings.COMPASS_VISIBILITY.resetModeToDefault(appMode);
+		mapButtonsHelper.getCompassButtonState().getVisibilityPref().resetModeToDefault(appMode);
 		settings.SHOW_DISTANCE_RULER.resetModeToDefault(appMode);
-		settings.QUICK_ACTION.resetModeToDefault(appMode);
+		mapButtonsHelper.resetQuickActionsForMode(appMode);
 	}
 
 	public void copyConfigureScreenSettings(@NonNull ApplicationMode fromAppMode) {
@@ -75,9 +79,9 @@ public class WidgetsSettingsHelper {
 			copyWidgetsForPanel(fromAppMode, panel);
 		}
 		copyPrefFromAppMode(settings.TRANSPARENT_MAP_THEME, fromAppMode);
-		copyPrefFromAppMode(settings.COMPASS_VISIBILITY, fromAppMode);
+		copyPrefFromAppMode(mapButtonsHelper.getCompassButtonState().getVisibilityPref(), fromAppMode);
 		copyPrefFromAppMode(settings.SHOW_DISTANCE_RULER, fromAppMode);
-		copyPrefFromAppMode(settings.QUICK_ACTION, fromAppMode);
+		mapButtonsHelper.copyQuickActionsFromMode(settings.getApplicationMode(), fromAppMode);
 	}
 
 	public void copyWidgetsForPanel(@NonNull ApplicationMode fromAppMode, @NonNull WidgetsPanel panel) {

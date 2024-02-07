@@ -106,7 +106,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
-					showChooseDialog(mapActivity.getSupportFragmentManager());
+					showChooseDialog(mapActivity);
 					return;
 				}
 				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());

@@ -339,7 +339,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return appCustomization;
 	}
 
-	public MapButtonsHelper getQuickActionRegistry() {
+	public MapButtonsHelper getMapButtonsHelper() {
 		return mapButtonsHelper;
 	}
 
