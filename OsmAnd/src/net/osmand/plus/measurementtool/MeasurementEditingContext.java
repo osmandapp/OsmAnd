@@ -646,6 +646,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	public void clearBeforeSegments() {
 		before.points.clear();
+		if (beforeSegments != null) {
+			beforeSegments.clear();
+		}
 		if (beforeSegmentsForSnap != null) {
 			beforeSegmentsForSnap.clear();
 		}
@@ -653,6 +656,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 	public void clearAfterSegments() {
 		after.points.clear();
+		if (afterSegments != null) {
+			afterSegments.clear();
+		}
 		if (afterSegmentsForSnap != null) {
 			afterSegmentsForSnap.clear();
 		}

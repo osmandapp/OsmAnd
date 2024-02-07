@@ -290,14 +290,16 @@ class TracksFilterFragment : BaseOsmAndDialogFragment(),
 	}
 
 	private fun updateUI() {
-		resetAllButton?.isEnabled = filter.appliedFiltersCount > 0
-		var filteredItemsCount = 0
-		if (filter.filteredTrackItems?.size != null) {
-			filteredItemsCount = filter.filteredTrackItems!!.size
+		app.runInUIThread{
+			resetAllButton?.isEnabled = filter.appliedFiltersCount > 0
+			var filteredItemsCount = 0
+			if (filter.filteredTrackItems?.size != null) {
+				filteredItemsCount = filter.filteredTrackItems!!.size
+			}
+			showButton?.setTitle(
+				app.getString(R.string.shared_string_show) + " " +
+						String.format(app.getString(R.string.number_in_breckets), filteredItemsCount))
 		}
-		showButton?.setTitle(
-			app.getString(R.string.shared_string_show) + " " +
-					String.format(app.getString(R.string.number_in_breckets), filteredItemsCount))
 	}
 
 	override fun onResume() {

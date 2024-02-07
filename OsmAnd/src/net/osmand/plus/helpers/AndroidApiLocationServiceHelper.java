@@ -43,18 +43,6 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 				locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 			}
 		}
-
-		@Override
-		public void onProviderDisabled(@NonNull String provider) {
-		}
-
-		@Override
-		public void onProviderEnabled(@NonNull String provider) {
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-		}
 	}
 
 	public AndroidApiLocationServiceHelper(@NonNull OsmandApplication app) {
@@ -162,10 +150,6 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 			net.osmand.Location l = convertLocation(location);
 			locationCallback.onLocationResult(l == null ? Collections.emptyList() : Collections.singletonList(l));
 		}
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
 	}
 
 	@Override

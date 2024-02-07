@@ -19,6 +19,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -589,6 +590,7 @@ public class HHRouteDataStructure {
 	
 	
 	public static class NetworkDBPoint {
+		public List<TagValuePair> tagValues = null;
 		public NetworkDBPoint dualPoint;
 		public int index;
 		public int clusterId;

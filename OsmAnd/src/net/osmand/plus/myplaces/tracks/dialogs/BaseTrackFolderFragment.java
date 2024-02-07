@@ -8,6 +8,7 @@ import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
+import static net.osmand.plus.myplaces.tracks.TrackFoldersHelper.SORT_SUB_FOLDERS_KEY;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
@@ -61,6 +62,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFil
 import net.osmand.plus.myplaces.tracks.dialogs.viewholders.TracksGroupViewHolder.TrackGroupsListener;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
@@ -341,16 +343,35 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
-		Map<String, String> tabsSortModes = settings.getTrackSortModes();
-		if (smartFolder != null) {
-			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getFolderName(), sortMode.name());
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
+		if (sortSubFolders) {
+			sortSubFolder(sortMode);
 		} else {
-			tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
+			Map<String, String> tabsSortModes = settings.getTrackSortModes();
+			if (smartFolder != null) {
+				tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getFolderName(), sortMode.name());
+			} else {
+				tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
+			}
+			settings.saveTabsSortModes(tabsSortModes);
+
+			updateContent();
 		}
+	}
+
+	private void sortSubFolder(TracksSortMode sortMode) {
+		OsmandSettings settings = app.getSettings();
+		Map<String, String> tabsSortModes = settings.getTrackSortModes();
+		sortFolders(selectedFolder, tabsSortModes, sortMode);
 		settings.saveTabsSortModes(tabsSortModes);
 
-		updateContent();
+		app.showToastMessage(app.getString(R.string.sorted_sufolders_toast, selectedFolder.getName(app), app.getString(sortMode.getNameId())));
+	}
+
+	private void sortFolders(TrackFolder trackFolder, Map<String, String> tabsSortModes, TracksSortMode sortMode) {
+		for (TrackFolder folder : trackFolder.getFlattenedSubFolders()) {
+			tabsSortModes.put(folder.getDirName(), sortMode.name());
+		}
 	}
 
 	@Override

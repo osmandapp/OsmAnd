@@ -3,12 +3,13 @@ package net.osmand.telegram
 import android.annotation.SuppressLint
 import android.content.Context
 import android.hardware.*
-import android.location.Location
-import android.os.Looper
+import android.os.Build
 import android.util.Log
-import com.google.android.gms.location.*
+import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.data.LatLon
+import net.osmand.telegram.helpers.location.LocationCallback
+import net.osmand.telegram.helpers.location.LocationServiceHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.util.MapUtils
 import java.util.*
@@ -16,6 +17,7 @@ import kotlin.math.atan2
 
 class TelegramLocationProvider(private val app: TelegramApplication) : SensorEventListener {
 
+	private var locationServiceHelper: LocationServiceHelper = app.createLocationServiceHelper()
 	private var lastTimeGPSLocationFixed: Long = 0
 
 	private var sensorRegistered = false
@@ -40,26 +42,8 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 	// Current screen orientation
 	private var currentScreenOrientation: Int = 0
 
-	var lastKnownLocation: net.osmand.Location? = null
+	var lastKnownLocation: Location? = null
 		private set
-
-	private var fusedLocationProviderClient: FusedLocationProviderClient? = null
-	private val locationRequest = LocationRequest().apply {
-		interval = 1000
-		//fastestInterval = 500
-		maxWaitTime = 0
-		priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-	}
-	private val locationCallback = object : LocationCallback() {
-		override fun onLocationResult(locationResult: LocationResult?) {
-			super.onLocationResult(locationResult)
-			val lastLocation = locationResult?.lastLocation
-			if (lastLocation != null) {
-				lastTimeGPSLocationFixed = lastLocation.time
-			}
-			setLocation(convertLocation(lastLocation))
-		}
-	}
 
 	private val locationListeners = ArrayList<TelegramLocationListener>()
 	private val compassListeners = ArrayList<TelegramCompassListener>()
@@ -74,28 +58,95 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 		}
 
 	interface TelegramLocationListener {
-		fun updateLocation(location: net.osmand.Location?)
+		fun updateLocation(location: Location?)
 	}
 
 	interface TelegramCompassListener {
 		fun updateCompassValue(value: Float)
 	}
 
+	fun updateLocationSource() {
+		pauseAllUpdates()
+		locationServiceHelper = app.createLocationServiceHelper()
+		resumeAllUpdates()
+	}
+
 	@SuppressLint("MissingPermission")
 	fun resumeAllUpdates() {
-		if (AndroidUtils.isLocationPermissionAvailable(app) && fusedLocationProviderClient == null) {
-			fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(app)
-		}
-
-		try {
-			fusedLocationProviderClient?.requestLocationUpdates(
-					locationRequest, locationCallback, Looper.myLooper())
-		} catch (unlikely: SecurityException) {
-			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't request updates. $unlikely")
-		}
-
 		registerOrUnregisterCompassListener(true)
+
+		if (AndroidUtils.isLocationPermissionAvailable(app)) {
+			try {
+				locationServiceHelper.requestLocationUpdates(
+					object : LocationCallback() {
+						override fun onLocationResult(locations: List<Location>) {
+							var location: Location? = null
+							if (locations.isNotEmpty()) {
+								location = locations[locations.size - 1]
+								lastTimeGPSLocationFixed = System.currentTimeMillis()
+							}
+							setLocation(location)
+						}
+					}
+				)
+			} catch (e : SecurityException) {
+				// Location service permission not granted
+			} catch (e : IllegalArgumentException) {
+				// GPS location provider not available
+			}
+			// try to always ask for network provide : it is faster way to find location
+			if (locationServiceHelper.isNetworkLocationUpdatesSupported()) {
+				locationServiceHelper.requestNetworkLocationUpdates(
+					object : LocationCallback() {
+						override fun onLocationResult(locations: List<Location>) {
+							if (locations.isNotEmpty() && !useOnlyGPS()) {
+								setLocation(locations[locations.size - 1])
+							}
+						}
+					}
+				)
+			}
+		}
 	}
+
+	fun pauseAllUpdates() {
+		stopLocationRequests()
+		registerOrUnregisterCompassListener(false)
+	}
+
+	private fun stopLocationRequests() {
+		try {
+			locationServiceHelper.removeLocationUpdates()
+		} catch (unlikely: SecurityException) {
+			// Location service permission not granted
+		}
+	}
+
+	private fun setLocation(location: Location?) {
+		this.lastKnownLocation = location
+		updateLocation(this.lastKnownLocation)
+	}
+
+	private fun updateLocation(loc: Location?) {
+		for (l in locationListeners) {
+			l.updateLocation(loc)
+		}
+	}
+
+	fun checkIfLastKnownLocationIsValid() {
+		val loc = lastKnownLocation
+		if (loc != null && System.currentTimeMillis() - loc.time > INTERVAL_TO_CLEAR_SET_LOCATION) {
+			setLocation(null)
+		}
+	}
+
+	private fun useOnlyGPS(): Boolean {
+		val now = System.currentTimeMillis()
+		val timePassed = now - lastTimeGPSLocationFixed < NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS
+		return timePassed || isRunningOnEmulator()
+	}
+
+	private fun isRunningOnEmulator(): Boolean = Build.DEVICE == "generic"
 
 	fun updateScreenOrientation(orientation: Int) {
 		currentScreenOrientation = orientation
@@ -270,62 +321,8 @@ class TelegramLocationProvider(private val app: TelegramApplication) : SensorEve
 		(atan2(sinA.toDouble(), cosA.toDouble()) * 180 / Math.PI).toFloat()
 	)
 
-	private fun updateLocation(loc: net.osmand.Location?) {
-		for (l in locationListeners) {
-			l.updateLocation(loc)
-		}
-	}
-
-	private fun stopLocationRequests() {
-		try {
-			fusedLocationProviderClient?.removeLocationUpdates(locationCallback)
-		} catch (unlikely: SecurityException) {
-			Log.d(PlatformUtil.TAG, "Lost location permissions. Couldn't remove updates. $unlikely")
-		}
-	}
-
-	fun pauseAllUpdates() {
-		stopLocationRequests()
-		registerOrUnregisterCompassListener(false)
-	}
-
-	private fun setLocation(location: net.osmand.Location?) {
-		this.lastKnownLocation = location
-		updateLocation(this.lastKnownLocation)
-	}
-
-	fun checkIfLastKnownLocationIsValid() {
-		val loc = lastKnownLocation
-		if (loc != null && System.currentTimeMillis() - loc.time > INTERVAL_TO_CLEAR_SET_LOCATION) {
-			setLocation(null)
-		}
-	}
-
 	companion object {
-
 		private const val INTERVAL_TO_CLEAR_SET_LOCATION = 30 * 1000
-
-		fun convertLocation(l: Location?): net.osmand.Location? {
-			if (l == null) {
-				return null
-			}
-			val r = net.osmand.Location(l.provider)
-			r.latitude = l.latitude
-			r.longitude = l.longitude
-			r.time = l.time
-			if (l.hasAccuracy()) {
-				r.accuracy = l.accuracy
-			}
-			if (l.hasSpeed()) {
-				r.speed = l.speed
-			}
-			if (l.hasAltitude()) {
-				r.altitude = l.altitude
-			}
-			if (l.hasBearing()) {
-				r.bearing = l.bearing
-			}
-			return r
-		}
+		private const val NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000
 	}
 }

@@ -24,7 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
-import net.osmand.plus.configmap.tracks.viewholders.RecentlyVisibleViewHolder;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.TrackFolder;
@@ -122,7 +121,7 @@ public class SelectTrackTabsFragment extends BaseTracksTabsFragment {
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		TrackTab trackTab = getSelectedTab();
 		if (trackTab != null) {
 			trackTab.setSortMode(sortMode);

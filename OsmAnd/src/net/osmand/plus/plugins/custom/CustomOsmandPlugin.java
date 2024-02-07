@@ -1,4 +1,4 @@
-package net.osmand.plus.plugins;
+package net.osmand.plus.plugins.custom;
 
 import static net.osmand.IndexConstants.SQLITE_EXT;
 
@@ -12,25 +12,23 @@ import android.text.Html;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.utils.JsonUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
-import net.osmand.plus.download.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -41,6 +39,9 @@ import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.JsonUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -155,6 +156,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		return routerNames;
 	}
 
+	@Nullable
 	private Drawable getIconForFile(String path, Map<String, String> fileNames) {
 		for (Map.Entry<String, String> entry : fileNames.entrySet()) {
 			String value = entry.getValue();
@@ -273,71 +275,68 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	private void removePluginItemsFromFile(File file, PluginItemsListener itemsListener) {
-		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
-			@Override
-			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
-				if (succeed && !items.isEmpty()) {
-					for (SettingsItem item : items) {
-						if (item instanceof QuickActionsSettingsItem) {
-							QuickActionsSettingsItem quickActionsSettingsItem = (QuickActionsSettingsItem) item;
-							List<QuickAction> quickActions = quickActionsSettingsItem.getItems();
-							QuickActionRegistry actionRegistry = app.getQuickActionRegistry();
-							for (QuickAction action : quickActions) {
-								QuickAction savedAction = actionRegistry.getQuickAction(action.getType(), action.getName(app), action.getParams());
-								if (savedAction != null) {
-									actionRegistry.deleteQuickAction(savedAction);
-								}
+		app.getFileSettingsHelper().collectSettings(file, "", 1, (succeed, empty, items) -> {
+			if (succeed && !items.isEmpty()) {
+				for (SettingsItem item : items) {
+					if (item instanceof QuickActionsSettingsItem) {
+						QuickActionsSettingsItem quickActionsSettingsItem = (QuickActionsSettingsItem) item;
+						List<QuickAction> quickActions = quickActionsSettingsItem.getItems();
+						QuickActionRegistry actionRegistry = app.getQuickActionRegistry();
+						for (QuickAction action : quickActions) {
+							QuickAction savedAction = actionRegistry.getQuickAction(action.getType(), action.getName(app), action.getParams());
+							if (savedAction != null) {
+								actionRegistry.deleteQuickAction(savedAction);
 							}
-						} else if (item instanceof MapSourcesSettingsItem) {
-							MapSourcesSettingsItem mapSourcesSettingsItem = (MapSourcesSettingsItem) item;
-							List<ITileSource> mapSources = mapSourcesSettingsItem.getItems();
+						}
+					} else if (item instanceof MapSourcesSettingsItem) {
+						MapSourcesSettingsItem mapSourcesSettingsItem = (MapSourcesSettingsItem) item;
+						List<ITileSource> mapSources = mapSourcesSettingsItem.getItems();
 
-							for (ITileSource tileSource : mapSources) {
-								String tileSourceName = tileSource.getName();
-								if (tileSource instanceof SQLiteTileSource) {
-									tileSourceName += SQLITE_EXT;
+						for (ITileSource tileSource : mapSources) {
+							String tileSourceName = tileSource.getName();
+							if (tileSource instanceof SQLiteTileSource) {
+								tileSourceName += SQLITE_EXT;
+							}
+
+							ITileSource savedTileSource = app.getSettings().getTileSourceByName(tileSourceName, false);
+							if (savedTileSource != null) {
+								if (savedTileSource instanceof SQLiteTileSource) {
+									SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) savedTileSource);
+									sqLiteTileSource.closeDB();
 								}
 
-								ITileSource savedTileSource = app.getSettings().getTileSourceByName(tileSourceName, false);
-								if (savedTileSource != null) {
-									if (savedTileSource instanceof SQLiteTileSource) {
-										SQLiteTileSource sqLiteTileSource = ((SQLiteTileSource) savedTileSource);
-										sqLiteTileSource.closeDB();
-									}
-
-									File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-									File dir = new File(tPath, tileSourceName);
-									Algorithms.removeAllFiles(dir);
-								}
+								File tPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
+								File dir = new File(tPath, tileSourceName);
+								Algorithms.removeAllFiles(dir);
 							}
-						} else if (item instanceof PoiUiFiltersSettingsItem) {
-							PoiUiFiltersSettingsItem poiUiFiltersSettingsItem = (PoiUiFiltersSettingsItem) item;
-							List<PoiUIFilter> poiUIFilters = poiUiFiltersSettingsItem.getItems();
-							for (PoiUIFilter filter : poiUIFilters) {
-								app.getPoiFilters().removePoiFilter(filter);
-							}
-							app.getPoiFilters().reloadAllPoiFilters();
-							app.getPoiFilters().loadSelectedPoiFilters();
-							app.getSearchUICore().refreshCustomPoiFilters();
-						} else if (item instanceof AvoidRoadsSettingsItem) {
-							AvoidRoadsSettingsItem avoidRoadsSettingsItem = (AvoidRoadsSettingsItem) item;
-							List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoadInfos = avoidRoadsSettingsItem.getItems();
-							for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : avoidRoadInfos) {
-								app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoad);
-							}
-						} else if (item instanceof ProfileSettingsItem) {
-							ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
-							ApplicationMode mode = profileSettingsItem.getAppMode();
-							ApplicationMode savedMode = ApplicationMode.valueOfStringKey(mode.getStringKey(), null);
-							if (savedMode != null) {
-								ApplicationMode.changeProfileAvailability(savedMode, false, app);
-							}
+						}
+					} else if (item instanceof PoiUiFiltersSettingsItem) {
+						PoiUiFiltersSettingsItem poiUiFiltersSettingsItem = (PoiUiFiltersSettingsItem) item;
+						List<PoiUIFilter> poiUIFilters = poiUiFiltersSettingsItem.getItems();
+						for (PoiUIFilter filter : poiUIFilters) {
+							app.getPoiFilters().removePoiFilter(filter);
+						}
+						app.getPoiFilters().reloadAllPoiFilters();
+						app.getPoiFilters().loadSelectedPoiFilters();
+						app.getSearchUICore().refreshCustomPoiFilters();
+					} else if (item instanceof AvoidRoadsSettingsItem) {
+						AvoidRoadsSettingsItem avoidRoadsSettingsItem = (AvoidRoadsSettingsItem) item;
+						List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoadInfos = avoidRoadsSettingsItem.getItems();
+						for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : avoidRoadInfos) {
+							app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoad);
+						}
+					} else if (item instanceof ProfileSettingsItem) {
+						ProfileSettingsItem profileSettingsItem = (ProfileSettingsItem) item;
+						ApplicationMode mode = profileSettingsItem.getAppMode();
+						ApplicationMode savedMode = ApplicationMode.valueOfStringKey(mode.getStringKey(), null);
+						if (savedMode != null) {
+							ApplicationMode.changeProfileAvailability(savedMode, false, app);
 						}
 					}
 				}
-				if (itemsListener != null) {
-					itemsListener.onItemsRemoved();
-				}
+			}
+			if (itemsListener != null) {
+				itemsListener.onItemsRemoved();
 			}
 		});
 	}
@@ -435,9 +434,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public void loadResources() {
 		File pluginResDir = getPluginResDir();
 		if (pluginResDir.exists() && pluginResDir.isDirectory()) {
-			File[] files = pluginResDir.listFiles();
-			for (File resFile : files) {
-				String path = resFile.getAbsolutePath();
+			List<File> files = FileUtils.collectDirFiles(pluginResDir);
+			for (File file : files) {
+				String path = file.getAbsolutePath();
 				if (icon == null) {
 					icon = getIconForFile(path, iconNames);
 				}

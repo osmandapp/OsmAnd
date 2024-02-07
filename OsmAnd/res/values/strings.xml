@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="sorted_sufolders_toast">Subfolders in “%1$s” is sorted by: “%2$s”</string>
+    <string name="sort_subfolders">Sort subfolders</string>
+    <string name="shared_string_activity">Activity</string>
+    <string name="shared_string_keywords">Keywords</string>
+    <string name="shared_string_additional">Additional</string>
     <string name="battery_optimization_banner_content">Android battery optimization can cause gaps and inaccuracies in recorded tracks.</string>
     <string name="dont_ask_anymore">Don\'t ask anymore</string>
     <string name="battery_optimization_settings">Battery optimization settings</string>

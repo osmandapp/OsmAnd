@@ -406,7 +406,7 @@
 \n
 \nOs mosaicos dos mapas podem ser descarregados diretamente online ou copiados os ficheiros da base de dados SQLite para a pasta do OsmAnd utilizando uma das muitas ferramentas de terceiros para preparação de mapas.</string>
     <string name="osmand_background_plugin_description">Mostra as configurações para ativar o rastreamento em segundo plano e a navegação, despertando periodicamente o dispositivo GPS (com o ecrã desligado).</string>
-    <string name="osmand_accessibility_description">Mostra os recursos de acessibilidade do dispositivo disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS (texto-para-voz), configurando a navegação no ecrã com o teclado direcional, usando uma trackball para controlo da ampliação, ou feedback texto-para-voz, por exemplo, para avisar automaticamente por voz a sua posição.</string>
+    <string name="osmand_accessibility_description">Torna os recursos de acessibilidade do dispositivo disponíveis diretamente no OsmAnd. Facilita, por exemplo, o ajuste da velocidade da fala para vozes TTS (texto-para-voz), a configuração da navegação no ecrã com o teclado direcional (D-pad), usando uma trackball para controlo da ampliação, ou feedback texto-para-voz, por exemplo, para avisar automaticamente a sua posição por voz.</string>
     <string name="osmand_development_plugin_description">Fornece a funcionalidade para testar e depurar o OsmAnd: simula rotas de navegação, verificar a renderização do ecrã, verificar o desempenho, etc. Este complemento não é necessário para uma utilização normal da aplicação.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Os complementos ativam configurações avançadas e funcionalidades adicionais.</string>
@@ -1929,7 +1929,7 @@
     <string name="nearest_cities">Cidades próximas</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Pesquisa por código postal</string>
-    <string name="quick_action_auto_zoom">Ampliação automática do mapa ativada/desativada</string>
+    <string name="quick_action_auto_zoom">Ampliação automática do mapa</string>
     <string name="quick_action_auto_zoom_desc">Botão para ativar ou desativar a ampliação automática controlada pela velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar a ampliação automática</string>
     <string name="quick_action_auto_zoom_off">Desativar a ampliação automática</string>
@@ -5599,4 +5599,24 @@
     <string name="shared_string_copyright">Direitos de autor</string>
     <string name="shared_string_author">Autor</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="battery_optimization_settings">Configurações de otimização da bateria</string>
+    <string name="dont_ask_anymore">Não perguntar novamente</string>
+    <string name="battery_optimization_banner_content">A otimização Android da bateria pode causar falhas e imprecisões em trilhos gravados.</string>
+    <string name="avg_sensor_heartrate">Frequência cardíaca, média</string>
+    <string name="avg_sensor_temperature">Temperatura, média</string>
+    <string name="battery_optimization_desc">A otimização da bateria no Android pode causar falhas e imprecisões em trilhos gravados.
+\n
+\nSe tiver um destes problemas, pode tentar alterar o uso da bateria para \"Não restringida.\"</string>
+    <string name="battery_optimization">Otimização da bateria</string>
+    <string name="max_sensor_cadence">Cadência de bicicleta, máximo</string>
+    <string name="max_sensor_heartrate">Frequência cardíaca, máximo</string>
+    <string name="avg_sensor_cadence">Cadência de bicicleta, média</string>
+    <string name="max_sensor_bycicle_power">Potência da bicicleta, máximo</string>
+    <string name="avg_sensor_bycicle_power">Potência da bicicleta, média</string>
+    <string name="max_sensor_temperature">Temperatura, máximo</string>
+    <string name="max_sensor_speed">Velocidade do sensor, máximo</string>
+    <string name="avg_sensor_speed">Velocidade do sensor, média</string>
+    <string name="shared_string_additional">Adicional</string>
+    <string name="shared_string_activity">Atividade</string>
+    <string name="shared_string_keywords">Palavras-chave</string>
 </resources>

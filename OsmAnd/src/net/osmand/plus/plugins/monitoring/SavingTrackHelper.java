@@ -79,8 +79,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private static final String TRACK_COL_BEARING = "bearing";
 	private static final String TRACK_COL_PLUGINS_INFO = "plugins_info";
 
-	private static final String GPXTPX_PREFIX = "gpxtpx:";
-
 	private static final String POINT_NAME = "point";
 	private static final String POINT_COL_DATE = "date";
 	private static final String POINT_COL_LAT = "lat";
@@ -401,7 +399,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				if (!Algorithms.isEmpty(extensions)) {
-					assignExtensionWriter(pt, extensions);
+					GPXUtilities.assignExtensionWriter(pt, extensions);
 				}
 
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
@@ -442,35 +440,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		query.close();
 		dropEmptyTracks(dataTracks);
-	}
-
-	private void assignExtensionWriter(@NonNull WptPt wptPt, @NonNull Map<String, String> pluginsExtensions) {
-		if (wptPt.getExtensionsWriter() == null) {
-			HashMap<String, String> regularExtensions = new HashMap<>();
-			HashMap<String, String> gpxtpxExtensions = new HashMap<>();
-
-			for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
-				if (entry.getKey().startsWith(GPXTPX_PREFIX)) {
-					gpxtpxExtensions.put(entry.getKey(), entry.getValue());
-				} else {
-					regularExtensions.put(entry.getKey(), entry.getValue());
-				}
-			}
-			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions));
-			wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions));
-		}
-	}
-
-	private GPXUtilities.GPXExtensionsWriter createExtensionsWriter(@NonNull Map<String, String> pluginsExtensions) {
-		return serializer -> {
-			for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
-				try {
-					GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
-				} catch (IOException e) {
-					log.error(e);
-				}
-			}
-		};
 	}
 
 	@NonNull
@@ -548,7 +517,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			String pluginsInfo = getPluginsInfo(location);
 			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
 			if (!Algorithms.isEmpty(extensions)) {
-				assignExtensionWriter(wptPt, extensions);
+				GPXUtilities.assignExtensionWriter(wptPt, extensions);
 			}
 
 			insertData(wptPt, pluginsInfo);

@@ -15,7 +15,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

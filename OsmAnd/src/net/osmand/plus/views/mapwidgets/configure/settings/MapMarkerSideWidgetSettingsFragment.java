@@ -312,6 +312,7 @@ public class MapMarkerSideWidgetSettingsFragment extends BaseSimpleWidgetSetting
 
 	@Override
 	protected void applySettings() {
+		super.applySettings();
 		markerModePref.setModeValue(appMode, selectedMarkerMode);
 		if (selectedMarkerMode == SideMarkerMode.ESTIMATED_ARRIVAL_TIME) {
 			averageSpeedIntervalPref.setModeValue(appMode, selectedIntervalMillis);

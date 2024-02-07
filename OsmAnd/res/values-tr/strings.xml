@@ -5022,4 +5022,82 @@
     <string name="shared_string_created">Oluşturuldu</string>
     <string name="delete_map">Haritayı sil</string>
     <string name="weather_online">Çevrim içi hava durumu</string>
+    <string name="send_crash_log_descr">Yalnızca çökmelerle ilgili bilgileri içerir</string>
+    <string name="open_issue_on_github_descr">Soru sorun, özellik önerin</string>
+    <string name="shared_string_checked">İşaretli</string>
+    <string name="shared_string_keywords">Anahtar sözcükler</string>
+    <string name="shared_string_additional">Ek</string>
+    <string name="max_sensor_heartrate">Kalp atış hızı, en yüksek</string>
+    <string name="max_sensor_temperature">Sıcaklık, en yüksek</string>
+    <string name="avg_sensor_speed">Sensör hızı, ortalama</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Navigasyon sırasında harita ekranı</string>
+    <string name="free_versions_descr">Ücretsiz OsmAnd sürümünü indirin ve kurun</string>
+    <string name="free_versions">Ücretsiz sürümler</string>
+    <string name="open_issue_on_github">GitHub\'da sorun açın</string>
+    <string name="report_an_issues">Hata bildir</string>
+    <string name="copy_build_version">Derleme sürümünü kopyala</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Aşındırıcı Maddeler</string>
+    <string name="may_be_used_if_there_is_shortcut">Bir kısayol varsa kullanılabilir</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud hesabı silinsin mi?
+\n
+\nBu işlem geri alınamaz.</string>
+    <string name="manage_subscriptions">Abonelikleri yönet.</string>
+    <string name="delete_account_warning">%1$s hesabı silinsin mi?</string>
+    <string name="shared_string_deleting">Siliniyor</string>
+    <string name="deleting_complete">Silme işlemi tamamlandı</string>
+    <string name="verify_account">Hesabınızı doğrulayın</string>
+    <string name="shared_string_activity">Etkinlik</string>
+    <string name="avg_sensor_heartrate">Kalp atış hızı, ortalama</string>
+    <string name="avg_sensor_temperature">Sıcaklık, ortalama</string>
+    <string name="about_osmand">OsmAnd hakkında</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Zehirli ve Bulaşıcı Maddeler</string>
+    <string name="help_article_widgets_radius_ruler_name">Yarıçap cetveli ve Cetvel</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Radyoaktif Maddeler</string>
+    <string name="contact_us">Bize ulaşın</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Yanıcı Sıvılar</string>
+    <string name="github_discussion">GitHub Tartışmaları</string>
+    <string name="cache_size">Önbellek boyutu</string>
+    <string name="shared_string_avoid">Kaçın</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Bu işlem OsmAnd Pro aboneliğinizi iptal etmeyecektir.</string>
+    <string name="telegram_chats_descr">Yerel Telegram sohbetlerimize katılın.</string>
+    <string name="telegram_chats">Telegram sohbetleri</string>
+    <string name="most_viewed">En çok görüntülenen</string>
+    <string name="external_sensor_name_property_description">Sensör adı</string>
+    <string name="folder_export_empty_error">Dışa aktarılacak bir şey yok, klasör boş</string>
+    <string name="osmand_cloud_deleting_account_descr">Birkaç dakika içinde tüm verileriniz ve hesabınız OsmAnd Cloud\'dan silinecektir.
+\n
+\nAygıttaki tüm veriler dokunulmadan kalır.</string>
+    <string name="osmand_cloud_deletion_account_warning">Hesabınız ve tüm hesap bilgileriniz %1$s</string>
+    <string name="osmand_cloud_deletion_all_data_warning">OsmAnd Cloud\'daki tüm veriler %1$s. Aygıttaki verilere dokunulmaz.</string>
+    <string name="verify_account_deletion_descr">Hesabınızı silmeden önce doğrulamamız gerekiyor.
+\n
+\nLütfen kayıt olduğunuz e-posta adresini girin. Bir sonraki adım için tek kullanımlık bir parola gönderilecektir.</string>
+    <string name="delete_account">Hesabı sil</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Sesli komutlar / Bildirimler</string>
+    <string name="shared_string_class">Sınıf</string>
+    <string name="routing_attr_hazmat_category_usa_9_name">Çeşitli</string>
+    <string name="dangerous_goods">Tehlikeli maddeler</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Oksitleyici Maddeler ve Organik Peroksitler</string>
+    <string name="free_account">Ücretsiz hesap</string>
+    <string name="osmand_cloud_deleted_account_descr">Hesap ve tüm veriler OsmAnd Cloud\'dan silindi.</string>
+    <string name="backup_error_delete_account_email_match">E-posta adresi, oturum açma kullanıcı adıyla eşleşmiyor</string>
+    <string name="send_logcat_log_descr">Ayrıntılı günlük dosyası</string>
+    <string name="max_altitude">En yüksek rakım</string>
+    <string name="shared_string_not_checked">İşaretli değil</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="rendering_attr_alpineHiking_name">Zorluk sınıflandırması</string>
+    <string name="routing_attr_hazmat_category_usa_1_name">Patlayıcılar</string>
+    <string name="routing_attr_hazmat_category_usa_2_name">Gazlar</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Yanıcı Katılar</string>
+    <string name="action_cannot_be_undone">Bu işlem geri alınamaz.</string>
+    <string name="osmand_cloud_delete_account_confirmation">Hesap silinsin mi?</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">İkincil aygıtların OsmAnd Cloud\'dan oturumu kapatılacak ve ücretli özelliklere erişimi kaybedilecektir.</string>
+    <string name="battery_optimization_banner_content">Android pil iyileştirmesi, kaydedilen yollarda boşluklara ve yanlışlıklara neden olabilir.</string>
+    <string name="dont_ask_anymore">Bir daha sorma</string>
+    <string name="battery_optimization_settings">Pil iyileştirme ayarları</string>
+    <string name="battery_optimization_desc">Android\'de pil iyileştirmesi, kaydedilen yollarda boşluklara ve yanlışlıklara neden olabilir.
+\n
+\nBu sorunlardan herhangi biriyle karşılaşırsanız, pil kullanımını \'Sınırsız\' olarak değiştirmeyi deneyebilirsiniz.</string>
+    <string name="battery_optimization">Pil iyileştirmesi</string>
+    <string name="max_sensor_speed">Sensör hızı, en yüksek</string>
 </resources>
