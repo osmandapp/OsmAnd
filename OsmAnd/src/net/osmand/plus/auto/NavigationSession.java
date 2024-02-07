@@ -258,7 +258,9 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					new SearchResultsScreen(
 							getCarContext(),
 							settingsAction,
-							"geo:0,0".equals(geo) && query != null ? Uri.decode(query.replace('+', ' ')) : geo),
+							geo == null || "geo:0,0".equals(geo)
+								? (query == null ? "" : Uri.decode(query.replace('+', ' ')))
+								: geo),
 					(obj) -> {
 					});
 			return;
