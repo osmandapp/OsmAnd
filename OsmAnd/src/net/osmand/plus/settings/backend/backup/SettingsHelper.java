@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.plus.settings.backend.backup.SettingsItemType.QUICK_ACTIONS;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -17,32 +19,15 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
-import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
-import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.NavigationHistorySettingsItem;
-import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
-import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.*;
 import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -176,7 +161,7 @@ public abstract class SettingsHelper {
 
 	public List<SettingsItem> prepareSettingsItems(List<?> data, List<SettingsItem> settingsItems, boolean export) {
 		List<SettingsItem> result = new ArrayList<>();
-		List<QuickAction> quickActions = new ArrayList<>();
+		List<QuickActionButtonState> quickActionButtons = new ArrayList<>();
 		List<PoiUIFilter> poiUIFilters = new ArrayList<>();
 		List<ITileSource> tileSourceTemplates = new ArrayList<>();
 		List<AvoidRoadInfo> avoidRoads = new ArrayList<>();
@@ -192,8 +177,8 @@ public abstract class SettingsHelper {
 		List<MapMarkersGroup> itineraryGroups = new ArrayList<>();
 
 		for (Object object : data) {
-			if (object instanceof QuickAction) {
-				quickActions.add((QuickAction) object);
+			if (object instanceof QuickActionButtonState) {
+				quickActionButtons.add((QuickActionButtonState) object);
 			} else if (object instanceof PoiUIFilter) {
 				poiUIFilters.add((PoiUIFilter) object);
 			} else if (object instanceof TileSourceTemplate || object instanceof SQLiteTileSource) {
@@ -243,9 +228,11 @@ public abstract class SettingsHelper {
 				onlineRoutingEngines.add((OnlineRoutingEngine) object);
 			}
 		}
-		if (!quickActions.isEmpty()) {
-			QuickActionsSettingsItem baseItem = getBaseItem(SettingsItemType.QUICK_ACTIONS, QuickActionsSettingsItem.class, settingsItems);
-			result.add(new QuickActionsSettingsItem(app, baseItem, quickActions));
+		if (!quickActionButtons.isEmpty()) {
+			for (QuickActionButtonState buttonState : quickActionButtons) {
+				QuickActionsSettingsItem baseItem = getBaseQuickActionsSettingsItem(buttonState, settingsItems);
+				result.add(new QuickActionsSettingsItem(app, baseItem, buttonState));
+			}
 		}
 		if (!poiUIFilters.isEmpty()) {
 			PoiUiFiltersSettingsItem baseItem = getBaseItem(SettingsItemType.POI_UI_FILTERS, PoiUiFiltersSettingsItem.class, settingsItems);
@@ -350,6 +337,20 @@ public abstract class SettingsHelper {
 				ApplicationModeBean bean = profileItem.getModeBean();
 				if (Algorithms.objectEquals(bean.stringKey, modeBean.stringKey) && Algorithms.objectEquals(bean.userProfileName, modeBean.userProfileName)) {
 					return profileItem;
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	private QuickActionsSettingsItem getBaseQuickActionsSettingsItem(QuickActionButtonState buttonState, List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			if (settingsItem.getType() == QUICK_ACTIONS) {
+				QuickActionsSettingsItem item = (QuickActionsSettingsItem) settingsItem;
+				QuickActionButtonState state = item.getButtonState();
+				if (Algorithms.objectEquals(state.getId(), buttonState.getId()) && Algorithms.objectEquals(state.getName(), buttonState.getName())) {
+					return item;
 				}
 			}
 		}
