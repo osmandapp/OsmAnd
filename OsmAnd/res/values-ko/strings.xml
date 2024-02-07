@@ -4272,4 +4272,21 @@
     <string name="threshold_distance">Threshold 거리</string>
     <string name="delete_track_folder_dialog_message">이것은 \"%1$s\" 폴더와 모든 트랙 (%2$s) 삭제할 것입니다.</string>
     <string name="cloud_sync_progress">동기화 ...%1$s</string>
+    <string name="av_video_quality_descr">비디오 품질을 선택하십시오.</string>
+    <string name="av_video_quality_high">높은 품질</string>
+    <string name="av_video_quality_low">낮은 품질</string>
+    <string name="access_from_map_description">메뉴 단추는 메뉴 보다는 오히려 대쉬보드를 발사합니다</string>
+    <string name="dialog_add_action_title">액션 추가</string>
+    <string name="default_speed_setting_title">기본 속도</string>
+    <string name="quick_action_new_action">액션 추가</string>
+    <string name="monitoring_min_speed_descr_recommendation">추천 : 로깅 최소 변위 필터 (B)를 통해 모션 감지를 사용해보십시오. 먼저 더 나은 결과를 생성 할 수 있으며 더 적은 데이터를 잃게됩니다. 트랙이 저속에서 noisy를 유지한다면, 여기에서 non-zero 값을 시도하십시오. 일부 측정은 모든 속도 값 (일부 네트워크 기반 방법)을보고 할 수 없습니다. 어떤 경우도 기록 할 수 없습니다.</string>
+    <string name="av_audio_bitrate">오디오 비트레이트</string>
+    <string name="av_audio_bitrate_descr">오디오 비트레이트 선택.</string>
+    <string name="please_specify_poi_type_only_from_list">올바른 POI 유형을 지정하거나 건너뛰십시오.</string>
+    <string name="copied_to_clipboard">클립보드에 복사되었습니다</string>
+    <string name="no_location_permission">Grant 위치 데이터 액세스.</string>
+    <string name="no_microphone_permission">Grant mic 액세스.</string>
+    <string name="route_distance">거리:</string>
+    <string name="route_duration">시간:</string>
+    <string name="osmand_plus_extended_description_part6">자전거 및 보행자 기능 • 야외 활동에 적합한, 걷기, 하이킹, 및 자전거 경로 보기 • 자전거 및 보행자를 위한 전용 경로 및 모드 표시 • 선명을 포함하는 선택적 대중 교통 정류장(버스, 전차, 기차) • 로컬 GPX 파일이나 온라인 서비스로 선택적 여행 기록 • 선택적 속도 및 고도 표시 • (추가 플러그인을 통한) 등고선 및 언덕 음영 표시</string>
 </resources>
