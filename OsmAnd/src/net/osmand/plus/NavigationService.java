@@ -24,7 +24,7 @@ import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
-import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
+import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;

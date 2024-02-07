@@ -10,9 +10,13 @@ import android.os.Build
 import android.os.Handler
 import androidx.core.content.ContextCompat
 import net.osmand.PlatformUtil
+import net.osmand.telegram.TelegramSettings.LocationSource.GOOGLE_PLAY_SERVICES
 import net.osmand.telegram.helpers.*
 import net.osmand.telegram.helpers.OsmandAidlHelper.OsmandHelperListener
 import net.osmand.telegram.helpers.OsmandAidlHelper.UpdatesListener
+import net.osmand.telegram.helpers.location.AndroidApiLocationServiceHelper
+import net.osmand.telegram.helpers.location.GmsLocationServiceHelper
+import net.osmand.telegram.helpers.location.LocationServiceHelper
 import net.osmand.telegram.notifications.NotificationHelper
 import net.osmand.telegram.ui.TrackerLogcatActivity
 import net.osmand.telegram.utils.AndroidUtils
@@ -182,6 +186,14 @@ class TelegramApplication : Application() {
 
 	fun stopUserLocationService() {
 		telegramService?.stopIfNeeded(this, TelegramService.USED_BY_USERS_LOCATIONS)
+	}
+
+	fun createLocationServiceHelper(): LocationServiceHelper {
+		return if (settings.locationSource == GOOGLE_PLAY_SERVICES) {
+			GmsLocationServiceHelper(this)
+		} else {
+			AndroidApiLocationServiceHelper(this)
+		}
 	}
 
 	fun runInUIThread(action: (() -> Unit)) {

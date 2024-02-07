@@ -65,12 +65,14 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 		}
 
-		container = mainView.findViewById<ViewGroup>(R.id.units_and_formats_container)
+		createLocationSourcePref(inflater, container)
+
+		container = mainView.findViewById(R.id.units_and_formats_container)
 		settings.unitsAndFormatsPrefs.forEach {
 			createListPref(inflater, container, it)
 		}
 
-		container = mainView.findViewById<ViewGroup>(R.id.gps_points_container)
+		container = mainView.findViewById(R.id.gps_points_container)
 		inflater.inflate(R.layout.item_with_descr_and_right_switch, container, false).apply {
 			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_connect))
 			findViewById<TextView>(R.id.title).text = getText(R.string.show_gps_points)
@@ -86,7 +88,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			container.addView(this)
 		}
 
-		container = mainView.findViewById<ViewGroup>(R.id.proxy_settings_container)
+		container = mainView.findViewById(R.id.proxy_settings_container)
 		inflater.inflate(R.layout.item_with_descr_and_right_switch, container, false).apply {
 			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_proxy))
 			findViewById<ImageView>(R.id.icon_right).apply {
@@ -149,7 +151,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 		container = mainView.findViewById(R.id.osmand_connect_container)
 		for (appConn in TelegramSettings.AppConnect.values()) {
 			val pack = appConn.appPackage
-			val installed = AndroidUtils.isAppInstalled(context!!, pack)
+			val installed = AndroidUtils.isAppInstalled(requireContext(), pack)
 			if (!installed && appConn.showOnlyInstalled) {
 				continue
 			}
@@ -250,6 +252,27 @@ class SettingsDialogFragment : BaseDialogFragment() {
 					findViewById<Switch>(R.id.switcher)?.isChecked = app.settings.proxyEnabled
 				}
 			}
+			LocationSourceBottomSheet.LOCATION_SOURCE_PREFERENCES_UPDATED_REQUEST_CODE -> {
+				app.locationProvider.updateLocationSource()
+				app.telegramService?.updateLocationSource()
+				view?.findViewById<ViewGroup>(R.id.location_source_preference_container)?.apply {
+					findViewById<TextView>(R.id.value).text = getText(settings.locationSource.nameId)
+				}
+			}
+		}
+	}
+
+	private fun createLocationSourcePref(inflater: LayoutInflater, container: ViewGroup) {
+		inflater.inflate(R.layout.item_divider, container)
+		inflater.inflate(R.layout.item_with_right_value, container, false).apply {
+			id = R.id.location_source_preference_container
+			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_device_location))
+			findViewById<TextView>(R.id.title).text = getText(R.string.location_source)
+			findViewById<TextView>(R.id.value).text = getText(settings.locationSource.nameId)
+			setOnClickListener {
+				fragmentManager?.also { LocationSourceBottomSheet.showInstance(it, this@SettingsDialogFragment) }
+			}
+			container.addView(this)
 		}
 	}
 
@@ -335,7 +358,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			} else {
 				telegramHelper.getUserGreyPhotoPath(user)
 			}
-			TelegramUiHelper.setupPhoto(app, view.findViewById<ImageView>(R.id.icon), path, R.drawable.img_user_picture, false)
+			TelegramUiHelper.setupPhoto(app, view.findViewById(R.id.icon), path, R.drawable.img_user_picture, false)
 		} else {
 			val icon = if (checked) {
 				uiUtils.getActiveIcon(R.drawable.ic_device_picture)
