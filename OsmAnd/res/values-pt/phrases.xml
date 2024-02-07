@@ -4821,4 +4821,14 @@
     <string name="poi_nfs_recreation_area_activity_ohv_trail_riding">Condução em trilhos com veículos fora de estrada (OHV)</string>
     <string name="poi_nfs_recreation_area_activity_ohv_camping">Campismo com veículos fora da estrada (OHV)</string>
     <string name="poi_nfs_recreation_area_activity_ohv_open_area_riding">Condução em área aberta com veículos fora de estrada (OHV)</string>
+    <string name="poi_padus_area">Área PAD-US</string>
+    <string name="poi_padus_category_easement">Categoria: direito de passagem</string>
+    <string name="poi_nfs_recreation_area_activity_beachcombing">Recolhas na praia (conchas...)</string>
+    <string name="poi_nfs_recreation_area_activity_game_bird_waterfowl">Caça de aves aquáticas</string>
+    <string name="poi_nfs_recreation_area_activity_mushing_skijoring">Desportos de tração canina (mushing) e em esquis (skijoring)</string>
+    <string name="poi_nfs_recreation_area_activity_scenic_driving">Condução em paisagens boas</string>
+    <string name="poi_nfs_recreation_area_activity_sledding_tubing">Escorrega na neve em boia</string>
+    <string name="poi_nfs_recreation_area_activity_trapping">Armadilhas para animais</string>
+    <string name="poi_nfs_recreation_area_activity_tubing">Atividades sentado em boia</string>
+    <string name="poi_nfs_recreation_area_activity_xc_skiing_snowshoeing">Esqui de fundo (cross-country) e nórdico</string>
 </resources>
