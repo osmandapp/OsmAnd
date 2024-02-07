@@ -25,6 +25,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.RELATIVE_BEARING;
 import static net.osmand.plus.views.mapwidgets.WidgetType.TIME_TO_GO_LEGACY;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
 import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
@@ -35,6 +36,7 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -59,6 +61,7 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.preferences.BooleanPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
+import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
@@ -132,8 +135,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_6_07 = 4607;
 	// 4608 - 4.6-08 (Expand the list of export types by dividing the general offline maps' type into subtypes)
 	public static final int VERSION_4_6_08 = 4608;
+	public static final int VERSION_4_6_09 = 4609;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_08;
+	public static final int LAST_APP_VERSION = VERSION_4_6_09;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -246,6 +250,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_6_08) {
 					migrateFromCommonMapsExportTypeToSubtypes();
+				}
+				if (prevAppVersion < VERSION_4_6_09) {
+					migrateQuickActionButtons();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -370,19 +377,30 @@ public class AppVersionUpgradeOnInit {
 		}
 	}
 
-	public void migrateQuickActionStates() {
+	private void migrateQuickActionStates() {
 		OsmandSettings settings = app.getSettings();
-		String quickActionsJson = settings.getSettingsAPI().getString(settings.getGlobalPreferences(), "quick_action_new", "");
-		if (!Algorithms.isEmpty(quickActionsJson)) {
+		String json = settings.getSettingsAPI().getString(settings.getGlobalPreferences(), "quick_action_new", "");
+		if (!Algorithms.isEmpty(json)) {
 			Gson gson = new GsonBuilder().create();
-			Type type = new TypeToken<HashMap<String, Boolean>>() {
-			}.getType();
-			HashMap<String, Boolean> quickActions = gson.fromJson(quickActionsJson, type);
+			Type type = new TypeToken<HashMap<String, Boolean>>() {}.getType();
+			HashMap<String, Boolean> quickActions = gson.fromJson(json, type);
 			if (!Algorithms.isEmpty(quickActions)) {
 				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-					settings.setQuickActions(quickActions, mode);
+					setQuickActions(quickActions, mode);
 				}
 			}
+		}
+	}
+
+	private void setQuickActions(@NonNull Map<String, Boolean> quickActions, @NonNull ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<Boolean> preference = settings.registerBooleanPreference("quick_action_state", false).makeProfile();
+		if (!preference.isSetForMode(mode)) {
+			Boolean actionState = quickActions.get(mode.getStringKey());
+			if (actionState == null) {
+				actionState = preference.getDefaultValue();
+			}
+			preference.setModeValue(mode, actionState);
 		}
 	}
 
@@ -742,7 +760,7 @@ public class AppVersionUpgradeOnInit {
 		updatedIds.put(3, WunderLINQDeviceProfile.ID);
 
 		OsmandSettings settings = app.getSettings();
-		OsmandPreference<Integer> oldPreference = new IntPreference(settings, "external_input_device", 1).makeProfile();;
+		OsmandPreference<Integer> oldPreference = new IntPreference(settings, "external_input_device", 1).makeProfile();
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
 			Integer oldId = oldPreference.getModeValue(appMode);
 			String newId = oldId != null ? updatedIds.get(oldId) : null;
@@ -763,7 +781,7 @@ public class AppVersionUpgradeOnInit {
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, oldPreferenceValue);
 		}
 	}
-	
+
 	private void migrateFromCommonMapsExportTypeToSubtypes() {
 		OsmandSettings settings = app.getSettings();
 
@@ -778,6 +796,37 @@ public class AppVersionUpgradeOnInit {
 		for (ExportType newExportType : ExportType.mapValues()) {
 			BackupHelper.getVersionHistoryTypePref(app, newExportType).set(oldVersionHistoryPrefValue);
 			BackupHelper.getBackupTypePref(app, newExportType).set(oldBackupTypePrefValue);
+		}
+	}
+
+	private void migrateQuickActionButtons() {
+		OsmandSettings settings = app.getSettings();
+		SharedPreferences globalPreferences = (SharedPreferences) settings.getGlobalPreferences();
+
+		CommonPreference<Boolean> oldStatePref = new BooleanPreference(settings, "quick_action_state", false).makeProfile();
+		CommonPreference<Boolean> newStatePref = new BooleanPreference(settings, DEFAULT_BUTTON_ID + "_state", false).makeProfile();
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			newStatePref.setModeValue(appMode, oldStatePref.getModeValue(appMode));
+			settings.QUICK_ACTION_BUTTONS.addModeValue(appMode, DEFAULT_BUTTON_ID);
+		}
+
+		String value = globalPreferences.getString("quick_action_list", "");
+		if (!Algorithms.isEmpty(value)) {
+			CommonPreference<String> actionsPref = new StringPreference(settings, DEFAULT_BUTTON_ID + "_list", "").makeProfile();
+			for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+				actionsPref.setModeValue(appMode, value);
+			}
+		}
+
+		FabMarginPreference oldFabMarginPref = new FabMarginPreference(settings, "quick_fab_margin");
+		FabMarginPreference fabMarginPref = new FabMarginPreference(settings, DEFAULT_BUTTON_ID + "_fab_margin");
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			Pair<Integer, Integer> portrait = oldFabMarginPref.getPortraitFabMargin(appMode);
+			Pair<Integer, Integer> landscape = oldFabMarginPref.getLandscapeFabMargin(appMode);
+
+			fabMarginPref.setPortraitFabMargin(appMode, portrait.first, portrait.second);
+			fabMarginPref.setLandscapeFabMargin(appMode, landscape.first, landscape.second);
 		}
 	}
 }
