@@ -1048,6 +1048,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		updateMapSettings();
 		app.getPoiFilters().loadSelectedPoiFilters();
 		app.getSearchUICore().refreshCustomPoiFilters();
+		app.getMapButtonsHelper().updateActiveActions();
 		getMapViewTrackingUtilities().appModeChanged();
 		keyEventHelper.updateGlobalCommands();
 

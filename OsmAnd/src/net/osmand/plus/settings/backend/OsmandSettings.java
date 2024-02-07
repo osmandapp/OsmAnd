@@ -15,6 +15,7 @@ import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
@@ -2740,7 +2741,13 @@ public class OsmandSettings {
 		return impassableRoadsStorage.movePoint(latLonEx, latLonNew);
 	}
 
+	/**
+	 * quick actions prefs
+	 */
+
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
+	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", null, ";").makeProfile();
+
 
 	/**
 	 * the location of a parked car

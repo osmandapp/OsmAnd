@@ -1,23 +1,25 @@
 package net.osmand.plus.quickaction;
 
-import android.content.Context;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_ACTION_HUD_ID;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
 import net.osmand.plus.quickaction.actions.*;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.Map3DButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +58,10 @@ public class MapButtonsHelper {
 	private final QuickActionSerializer serializer = new QuickActionSerializer();
 	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
 
-	private List<QuickAction> quickActions;
+	private Map3DButtonState map3DButtonState;
+	private CompassButtonState compassButtonState;
+	private List<QuickActionButtonState> mapButtonStates = new ArrayList<>();
+
 	private List<QuickActionType> enabledTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
@@ -66,18 +71,24 @@ public class MapButtonsHelper {
 		this.app = app;
 		this.settings = app.getSettings();
 		updateActionTypes();
+		initDefaultButtons();
+	}
+
+	private void initDefaultButtons() {
+		map3DButtonState = new Map3DButtonState(app);
+		compassButtonState = new CompassButtonState(app);
 	}
 
 	public void addUpdatesListener(@NonNull QuickActionUpdatesListener listener) {
-		Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>(this.updatesListeners);
-		updatesListeners.add(listener);
-		this.updatesListeners = updatesListeners;
+		Set<QuickActionUpdatesListener> listeners = new HashSet<>(this.updatesListeners);
+		listeners.add(listener);
+		updatesListeners = listeners;
 	}
 
 	public void removeUpdatesListener(@NonNull QuickActionUpdatesListener listener) {
-		Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>(this.updatesListeners);
-		updatesListeners.remove(listener);
-		this.updatesListeners = updatesListeners;
+		Set<QuickActionUpdatesListener> listeners = new HashSet<>(this.updatesListeners);
+		listeners.remove(listener);
+		updatesListeners = listeners;
 	}
 
 	private void notifyUpdates() {
@@ -87,78 +98,80 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public List<QuickAction> getQuickActions() {
-		return new ArrayList<>(quickActions);
+	public Map3DButtonState getMap3DButtonState() {
+		return map3DButtonState;
 	}
 
-	public long getLastModifiedTime() {
-		return settings.QUICK_ACTION_LIST.getLastModifiedTime();
+	@NonNull
+	public CompassButtonState getCompassButtonState() {
+		return compassButtonState;
 	}
 
-	public void setLastModifiedTime(long lastModifiedTime) {
-		settings.QUICK_ACTION_LIST.setLastModifiedTime(lastModifiedTime);
+	@NonNull
+	public List<QuickActionButtonState> getButtonsStates() {
+		return mapButtonStates;
 	}
 
-	public void addQuickAction(@NonNull QuickAction action) {
-		quickActions.add(action);
-		onDataChanged();
-	}
-
-	public void deleteQuickAction(@NonNull QuickAction action) {
-		quickActions.remove(action);
-		onDataChanged();
-	}
-
-	public void updateQuickAction(@NonNull QuickAction action) {
-		int index = quickActions.indexOf(action);
-		if (index >= 0) {
-			quickActions.set(index, action);
+	@NonNull
+	public List<QuickAction> getFlattenedQuickActions() {
+		List<QuickAction> actions = new ArrayList<>();
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			actions.addAll(buttonState.getQuickActions());
 		}
-		onDataChanged();
+		return actions;
 	}
 
-	public void updateQuickActions(List<QuickAction> quickActions) {
-		this.quickActions.clear();
-		this.quickActions.addAll(quickActions);
-		onDataChanged();
+	@NonNull
+	public List<QuickActionButtonState> getEnabledButtonsStates() {
+		List<QuickActionButtonState> list = new ArrayList<>();
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			if (buttonState.isEnabled()) {
+				list.add(buttonState);
+			}
+		}
+		return list;
 	}
 
-	private void onDataChanged() {
-		saveActions();
+	public void addQuickAction(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
+		buttonState.getQuickActions().add(action);
+		onDataChanged(buttonState);
+	}
+
+	public void deleteQuickAction(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
+		buttonState.getQuickActions().remove(action);
+		onDataChanged(buttonState);
+	}
+
+	public void updateQuickAction(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
+		List<QuickAction> actions = buttonState.getQuickActions();
+		int index = actions.indexOf(action);
+		if (index >= 0) {
+			actions.set(index, action);
+		}
+		onDataChanged(buttonState);
+	}
+
+	public void updateQuickActions(@NonNull QuickActionButtonState buttonState, @NonNull List<QuickAction> actions) {
+		List<QuickAction> quickActions = buttonState.getQuickActions();
+		quickActions.clear();
+		quickActions.addAll(actions);
+		onDataChanged(buttonState);
+	}
+
+	public void setQuickActionFabState(@NonNull QuickActionButtonState buttonState, boolean enabled) {
+		buttonState.setEnabled(enabled);
 		notifyUpdates();
 	}
 
-	private void saveActions() {
-		Type type = new TypeToken<List<QuickAction>>() {
-		}.getType();
-		settings.QUICK_ACTION_LIST.set(gson.toJson(quickActions, type));
-	}
-
-	public QuickAction getQuickAction(long id) {
-		for (QuickAction action : quickActions) {
-			if (action.id == id) {
-				return action;
-			}
-		}
-		return null;
-	}
-
-	@Nullable
-	public QuickAction getQuickAction(int type, String name, Map<String, String> params) {
-		for (QuickAction action : quickActions) {
-			if (action.getType() == type
-					&& (action.hasCustomName(app) && action.getName(app).equals(name) || !action.hasCustomName(app))
-					&& action.getParams().equals(params)) {
-				return action;
-			}
-		}
-		return null;
+	private void onDataChanged(@NonNull QuickActionButtonState buttonState) {
+		buttonState.saveActions(gson);
+		notifyUpdates();
 	}
 
 	@NonNull
 	public List<QuickAction> collectQuickActionsByType(@NonNull QuickActionType type) {
 		List<QuickAction> actions = new ArrayList<>();
-		for (QuickAction action : quickActions) {
+		for (QuickAction action : getFlattenedQuickActions()) {
 			if (action.getType() == type.getId()) {
 				actions.add(action);
 			}
@@ -166,58 +179,49 @@ public class MapButtonsHelper {
 		return actions;
 	}
 
-	public boolean isNameUnique(@NonNull QuickAction action, @NonNull Context context) {
-		for (QuickAction a : quickActions) {
-			if (action.id != a.id) {
-				if (action.getName(context).equals(a.getName(context))) {
-					return false;
-				}
+	public boolean isActionNameUnique(@NonNull List<QuickAction> actions, @NonNull QuickAction quickAction) {
+		for (QuickAction action : actions) {
+			if (quickAction.id != action.id && Algorithms.stringsEqual(quickAction.getName(app), action.getName(app))) {
+				return false;
 			}
 		}
 		return true;
 	}
 
 	@NonNull
-	public QuickAction generateUniqueName(@NonNull QuickAction action, @NonNull Context context) {
+	public QuickAction generateUniqueActionName(@NonNull List<QuickAction> actions, @NonNull QuickAction action) {
 		int number = 0;
-		String name = action.getName(context);
+		String name = action.getName(app);
 		while (true) {
 			number++;
 			action.setName(name + " (" + number + ")");
-			if (isNameUnique(action, context)) {
+			if (isActionNameUnique(actions, action)) {
 				return action;
 			}
 		}
 	}
 
-	public boolean isQuickActionOn() {
-		return settings.QUICK_ACTION.get();
-	}
-
-	public void setQuickActionFabState(boolean isOn) {
-		settings.QUICK_ACTION.set(isOn);
-		notifyUpdates();
-	}
-
-	private List<QuickAction> parseActiveActionsList(String json) {
-		List<QuickAction> resQuickActions;
-		if (!Algorithms.isEmpty(json)) {
-			Type type = new TypeToken<List<QuickAction>>() {
-			}.getType();
-			List<QuickAction> quickActions = gson.fromJson(json, type);
-			resQuickActions = new ArrayList<>(quickActions.size());
-			if (quickActions != null) {
-				for (QuickAction qa : quickActions) {
-					if (qa != null) {
-						resQuickActions.add(qa);
-					}
-				}
+	@NonNull
+	public QuickActionButtonState generateUniqueButtonName(@NonNull QuickActionButtonState buttonState) {
+		int number = 0;
+		String name = buttonState.getName();
+		while (true) {
+			number++;
+			String newName = name + " (" + number + ")";
+			if (isActionButtonNameUnique(newName)) {
+				buttonState.setName(newName);
+				return buttonState;
 			}
-		} else {
-			resQuickActions = new ArrayList<>();
 		}
-		this.quickActions = resQuickActions;
-		return resQuickActions;
+	}
+
+	public boolean hasEnabledButtons() {
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			if (buttonState.isEnabled()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void updateActionTypes() {
@@ -264,36 +268,77 @@ public class MapButtonsHelper {
 		serializer.setQuickActionTypesStr(quickActionTypesStr);
 		serializer.setQuickActionTypesInt(quickActionTypesInt);
 
-		parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
+		updateActiveActions();
+	}
+
+	public void updateActiveActions() {
+		mapButtonStates = getButtonsStateForMode(settings.getApplicationMode());
 	}
 
 	@NonNull
-	public List<QuickActionType> produceTypeActionsListWithHeaders() {
-		List<QuickActionType> result = new ArrayList<>();
-		filterQuickActions(TYPE_ADD_ITEMS, result);
-		filterQuickActions(TYPE_CONFIGURE_MAP, result);
-		filterQuickActions(TYPE_NAVIGATION, result);
-//		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
-		filterQuickActions(TYPE_SETTINGS, result);
-		filterQuickActions(TYPE_OPEN, result);
-		return result;
+	public List<QuickActionButtonState> getButtonsStateForMode(@NonNull ApplicationMode appMode) {
+		List<QuickActionButtonState> list = new ArrayList<>();
+		List<String> actionsKeys = settings.QUICK_ACTION_BUTTONS.getStringsListForProfile(appMode);
+		if (!Algorithms.isEmpty(actionsKeys)) {
+			for (String key : actionsKeys) {
+				if (!Algorithms.isEmpty(key)) {
+					QuickActionButtonState buttonState = new QuickActionButtonState(app, key);
+					buttonState.parseQuickActions(gson);
+					list.add(buttonState);
+				}
+			}
+		}
+		return list;
 	}
 
-	private void filterQuickActions(@NonNull QuickActionType filter, @NonNull List<QuickActionType> result) {
-		result.add(filter);
-		Set<Integer> set = new TreeSet<>();
-		for (QuickAction qa : quickActions) {
-			set.add(qa.getActionType().getId());
+	public void resetQuickActionsForMode(@NonNull ApplicationMode appMode) {
+		for (QuickActionButtonState buttonState : getButtonsStateForMode(appMode)) {
+			buttonState.resetForMode(appMode);
 		}
-		for (QuickActionType t : enabledTypes) {
-			if (t.getCategory() == filter.getCategory()) {
-				if (!t.isActionEditable()) {
-					boolean instanceInList = set.contains(t.getId());
+		settings.QUICK_ACTION_BUTTONS.resetModeToDefault(appMode);
+		updateActionTypes();
+	}
+
+	public void copyQuickActionsFromMode(@NonNull ApplicationMode toAppMode, @NonNull ApplicationMode fromAppMode) {
+		settings.QUICK_ACTION_BUTTONS.setModeValue(toAppMode, settings.QUICK_ACTION_BUTTONS.getModeValue(fromAppMode));
+
+		for (QuickActionButtonState buttonState : getButtonsStateForMode(fromAppMode)) {
+			buttonState.copyForMode(fromAppMode, toAppMode);
+		}
+		updateActionTypes();
+	}
+
+	@NonNull
+	public List<QuickActionType> produceTypeActionsListWithHeaders(@NonNull QuickActionButtonState buttonState) {
+		List<QuickActionType> actionTypes = new ArrayList<>();
+		filterQuickActions(buttonState, TYPE_ADD_ITEMS, actionTypes);
+		filterQuickActions(buttonState, TYPE_CONFIGURE_MAP, actionTypes);
+		filterQuickActions(buttonState, TYPE_NAVIGATION, actionTypes);
+//		filterQuickActions(buttonState, TYPE_CONFIGURE_SCREEN, actionTypes);
+		filterQuickActions(buttonState, TYPE_SETTINGS, actionTypes);
+		filterQuickActions(buttonState, TYPE_OPEN, actionTypes);
+
+		return actionTypes;
+	}
+
+	private void filterQuickActions(@NonNull QuickActionButtonState buttonState,
+	                                @NonNull QuickActionType filter,
+	                                @NonNull List<QuickActionType> actionTypes) {
+		actionTypes.add(filter);
+
+		Set<Integer> set = new TreeSet<>();
+		for (QuickAction action : buttonState.getQuickActions()) {
+			set.add(action.getActionType().getId());
+		}
+		for (QuickActionType type : enabledTypes) {
+			if (type.getCategory() == filter.getCategory()) {
+				if (!type.isActionEditable()) {
+					boolean instanceInList = set.contains(type.getId());
 					if (!instanceInList) {
-						result.add(t);
+						actionTypes.add(type);
 					}
 				} else {
-					result.add(t);
+					actionTypes.add(type);
 				}
 			}
 		}
@@ -327,8 +372,50 @@ public class MapButtonsHelper {
 		}
 	}
 
+	public boolean isActionButtonNameUnique(@NonNull String name) {
+		return getButtonStateByName(name) != null;
+	}
+
+	@Nullable
+	public QuickActionButtonState getButtonStateByName(@NonNull String name) {
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			if (Algorithms.stringsEqual(buttonState.getName(), name)) {
+				return buttonState;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public QuickActionButtonState getButtonStateById(@NonNull String id) {
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			if (Algorithms.stringsEqual(buttonState.getId(), id)) {
+				return buttonState;
+			}
+		}
+		return null;
+	}
+
 	@NonNull
-	public static QuickAction produceAction(@NonNull QuickAction quickAction) {
-		return quickAction.getActionType().createNew(quickAction);
+	public QuickActionButtonState createNewButtonState() {
+		String id = QUICK_ACTION_HUD_ID + "__" + System.currentTimeMillis();
+		return new QuickActionButtonState(app, id);
+	}
+
+	public void addQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
+		settings.QUICK_ACTION_BUTTONS.addValue(buttonState.getId());
+		updateActiveActions();
+		notifyUpdates();
+	}
+
+	public void removeQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
+		settings.QUICK_ACTION_BUTTONS.removeValue(buttonState.getId());
+		updateActiveActions();
+		notifyUpdates();
+	}
+
+	@NonNull
+	public static QuickAction produceAction(@NonNull QuickAction action) {
+		return action.getActionType().createNew(action);
 	}
 }
