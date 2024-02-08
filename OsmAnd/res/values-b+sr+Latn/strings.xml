@@ -471,7 +471,7 @@
     <string name="quick_actions_delete">Obriši radnju</string>
     <string name="dialog_add_action_title">Dodaj radnju</string>
     <string name="quick_action_add_favorite">Dodaj favorit</string>
-    <string name="quick_action_edit_action">Uredi dejstvo</string>
+    <string name="quick_action_edit_action">Uredi akciju</string>
     <string name="quick_action_new_action">Dodaj radnju</string>
     <string name="quick_action_add_parking">Dodaj mesto parkiranja</string>
     <string name="quick_action_navigation_voice_on">Isključi glas</string>
@@ -578,7 +578,7 @@
     <string name="position_on_map_center">Na sredini</string>
     <string name="app_mode_pedestrian">Pešačenje</string>
     <string name="app_mode_bicycle">Bicikla</string>
-    <string name="app_mode_car">Vožnja</string>
+    <string name="app_mode_car">Auto</string>
     <string name="Closest_Amenities">Najbliže usluge</string>
     <string name="choose_intersected_street">Odaberi ulicu koja je seče</string>
     <string name="choose_available_region">Odaberi oblast sa spiska</string>
@@ -1566,10 +1566,10 @@
     <string name="rendering_out_of_memory">Nedovoljno je memorije da se prikaže odabrano područje</string>
     <string name="arrival_distance_descr">Koliko brzo želite da dobijete obaveštenje o pristizanju?</string>
     <string name="arrival_distance">Obaveštenje o dolasku</string>
-    <string name="arrival_distance_factor_at_last">U poslednjih par metara</string>
-    <string name="arrival_distance_factor_late">Kasno</string>
+    <string name="arrival_distance_factor_at_last">Par metara pre</string>
+    <string name="arrival_distance_factor_late">Kasnije</string>
     <string name="arrival_distance_factor_normally">Normalno</string>
-    <string name="arrival_distance_factor_early">Rano</string>
+    <string name="arrival_distance_factor_early">Ranije</string>
     <string name="accessibility_preferences_descr">Mogućnosti pristupačnosti.</string>
     <string name="zoom_by_trackball">Koristi točkić za približavanje</string>
     <string name="zoom_by_trackball_descr">Promeni približavanje vodoravnim pokretima točkića.</string>
@@ -2142,7 +2142,7 @@
     <string name="passed">Poslednje korišćeno: %1$s</string>
     <string name="shared_string_groups">Grupe</string>
     <string name="shared_string_list">Spisak</string>
-    <string name="marker_moved_to_active">Oznaka mape je premeštena u dejstvujuće</string>
+    <string name="marker_moved_to_active">Marker mape je premešten u aktivne</string>
     <string name="marker_moved_to_history">Oznake mape su premeštene u istoriju</string>
     <string name="all_markers_moved_to_history">Sve oznake mape su premeštene u istoriju</string>
     <string name="marker_show_distance_descr">Izaberi kako ukazati na rastojanje i pravac ka oznakama mape na mapi:</string>
@@ -2203,7 +2203,7 @@
     <string name="shared_string_right">Desno</string>
     <string name="digits_quantity">Broj decimalnih brojki</string>
     <string name="active_markers_descr">Odaberi broj pokazivača pravca.</string>
-    <string name="distance_indication_descr">Izaberi način prikaza rastojanja do dejstvenih oznaka.</string>
+    <string name="distance_indication_descr">Izaberi način prikaza rastojanja do markera.</string>
     <string name="shared_string_do_not_use">Ne koristi</string>
     <string name="shared_string_yes">Da</string>
     <string name="shared_string_cancel">Prekid</string>
@@ -2224,9 +2224,9 @@
     <string name="shared_string_minute_lowercase">min</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osm_edits">Izmene OSM-a</string>
-    <string name="action_delete">Dejstvo brisanja</string>
-    <string name="action_modify">Dejstvo izmene</string>
-    <string name="action_create">Dejstvo stvaranja</string>
+    <string name="action_delete">Brisanje akcije</string>
+    <string name="action_modify">Izmena akcije</string>
+    <string name="action_create">Stvaranje akcije</string>
     <string name="osmand_parking_overdue">zakasneo</string>
     <string name="shared_string_go">Idi</string>
     <string name="delay_to_start_navigation">Pokreni navođenje skretanja nakon…</string>
@@ -2394,8 +2394,8 @@
     <string name="simulate_initial_startup_descr">Postavlja oznaku koja označava prvo pokretanje aplikacije, ostavljajući ostale postavke nepromijenjene.</string>
     <string name="go_to_map">Prikaži mapu</string>
     <string name="map_downloaded_descr">Mapa %1$s je spremna za korišćenje.</string>
-    <string name="show_arrows_descr">Prikazuj jednu ili dve strelice koje pokazuju pravac dejstvenih oznaka.</string>
-    <string name="show_guide_line_descr">Prikazuj vođice od svog lokacija do lokacija dejstvene oznake.</string>
+    <string name="show_arrows_descr">Prikazuj jednu ili dve strelice koje pokazuju pravac markera.</string>
+    <string name="show_guide_line_descr">Pokazuje liniju smera od položaja do lokacija markera.</string>
     <string name="shared_string_one">Jedan</string>
     <string name="shared_string_two">Dva</string>
     <string name="empty_state_markers_history_desc">Oznake označene kao pređene će se pojaviti na ekranu.</string>
@@ -2674,13 +2674,13 @@
     <string name="shared_string_collapse">Sklopi</string>
     <string name="shared_string_exit">Izlaz</string>
     <string name="shared_string_close">Zatvori</string>
-    <string name="shared_string_action_template">Dejstvo {0}</string>
+    <string name="shared_string_action_template">Akcija {0}</string>
     <string name="shared_string_unexpected_error">Neočekivana greška</string>
     <string name="shared_string_io_error">Ulazno-izlazna greška</string>
     <string name="shared_string_download_successful">Preuzeto</string>
     <string name="shared_string_downloading">Preuzimam…</string>
     <string name="shared_string_refresh">Osveži</string>
-    <string name="shared_string_more_actions">Još dejstava</string>
+    <string name="shared_string_more_actions">Još akcija</string>
     <string name="shared_string_more">Još…</string>
     <string name="shared_string_export">Izvezi</string>
     <string name="shared_string_control_stop">Zaustavi</string>
@@ -2846,7 +2846,7 @@
     <string name="add_edit_favorite">Dodaj ili izmeni omiljeno</string>
     <string name="reset_deafult_order">Vrati podrazumevani poredak stavki</string>
     <string name="back_to_editing">Povratak uređivanju</string>
-    <string name="quick_action_switch_profile_descr">Dejstveno dugme menja između izabranih profila.</string>
+    <string name="quick_action_switch_profile_descr">Dugme menja između izabranih profila.</string>
     <string name="shared_string_add_profile">Dodaj profil</string>
     <string name="change_application_profile">Promeni profil programa</string>
     <string name="profiles_for_action_not_found">Nisam uspeo da pronađem takav profil.</string>
@@ -3907,7 +3907,7 @@
     <string name="keep_it_empty_if_not">Zadrži je praznom ako nije</string>
     <string name="online_routing_example_hint">Adresa sa svim odrednicama će izgledati ovako:</string>
     <string name="test_route_calculation">Probaj izračunavanje puta</string>
-    <string name="routing_engine_vehicle_type_driving">Vožnja automobila</string>
+    <string name="routing_engine_vehicle_type_driving">Vožnja</string>
     <string name="routing_engine_vehicle_type_foot">Peške</string>
     <string name="routing_engine_vehicle_type_bike">Bicikl</string>
     <string name="routing_engine_vehicle_type_car">Automobil</string>
@@ -4229,7 +4229,7 @@
     <string name="backup_error_subscription_was_expired">Istekla pretplata</string>
     <string name="shared_string_complete">završeno</string>
     <string name="stop_and_exit">Zaustavi i izađi</string>
-    <string name="folder_access_denied">Potrebne dozvole za pristup odabranoj fascikli.</string>
+    <string name="folder_access_denied">Potrebna dozvola za pristup odabranom folderu.</string>
     <string name="shared_storage_second_step">Kliknite „koristi ovu folder”.</string>
     <string name="routes_color_by_type">Oboj rute po…</string>
     <string name="select_backup_data_descr">Izaberi podatke i foldere za rezervne kopije.</string>
@@ -4610,7 +4610,7 @@
     <string name="srtm_download_single_help_message">Odaberi vrstu. Moraćete ponovo da preuzmete datoteku radi promene oblika.</string>
     <string name="navigate_point_format_swiss_grid">Švajcarska mreža (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švajcarska mreža (CH1903+)</string>
-    <string name="av_notes_choose_action_widget_desc">Izaberi dejstvo.</string>
+    <string name="av_notes_choose_action_widget_desc">Izaberi akciju.</string>
     <string name="edit_category">Uredi kategoriju</string>
     <string name="shared_string_shape">Oblik</string>
     <string name="select_suggested_points">Izaberi predložene tačke</string>
@@ -4817,7 +4817,7 @@
     <string name="shared_string_next_sunrise">Sledeći zalazak Sunca</string>
     <string name="action_not_supported_with_map_style">Ova radnja nije podržana po izabranom načinu prikaza mape.</string>
     <string name="map_widget_rendering_fps_desc">Prikazuje brzinu osvežavanja mape i elemenata mape koji se prikazuju i osvežavaju, izraženo u sličicama po sekundi (FPS).</string>
-    <string name="map_widget_ant_heart_rate_desc">Prikazuje trenutne korisnikove srčane otkucaje prilikom datog dejstva</string>
+    <string name="map_widget_ant_heart_rate_desc">Prikazuje korisnikove srčane otkucaje u realnom vremeni</string>
     <string name="pressure_layer">Nivo pritiska</string>
     <string name="disable_vertex_hillshade_3d">Onemogući senčenje vrhova u 3D</string>
     <string name="write_heading">Snimanje pravca</string>
