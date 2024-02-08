@@ -352,7 +352,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private void sendCodeForDeletion(@NonNull String email) {
 		try {
 			progressBar.setVisibility(View.VISIBLE);
-			backupHelper.sendCode(email, "@ACTION_DELETE@");
+			backupHelper.sendCode(email, "delete");
 		} catch (UserNotRegisteredException e) {
 			progressBar.setVisibility(View.INVISIBLE);
 			LOG.error(e);
