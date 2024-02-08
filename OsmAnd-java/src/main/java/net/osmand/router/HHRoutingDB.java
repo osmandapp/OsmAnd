@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -166,6 +167,10 @@ public class HHRoutingDB {
 			}
 			String[] arr = Algorithms.deserializeStringArray(tagValues);
 			if (arr != null && arr.length > 0) {
+				if (arr.length % 2 == 1) {
+					throw new IllegalArgumentException(
+							String.format("Illegal tag/values %s - %s ", pnt, Arrays.toString(arr)));
+				}
 				pnt.tagValues = new ArrayList<>();
 				for (int i = 0; i < arr.length; i += 2) {
 					pnt.tagValues.add(new TagValuePair(arr[i], arr[i + 1], -1));
