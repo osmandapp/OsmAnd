@@ -1809,6 +1809,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> USE_HH_ROUTING = new BooleanPreference(this, "use_hh_routing", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> HH_ROUTING_CPP = new BooleanPreference(this, "hh_routing_cpp", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> USE_V1_AUTO_ZOOM = new BooleanPreference(this, "use_v1_auto_zoom", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
