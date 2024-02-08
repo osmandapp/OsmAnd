@@ -5069,12 +5069,12 @@
 \n
 \n</string>
     <string name="sort_duration_ascending">Prima la durata più breve</string>
-    <string name="sort_duration_descending">Prima la durata più lunga</string>
-    <string name="sort_distance_ascending">Prima la distanza più breve</string>
-    <string name="sort_distance_descending">Prima la distanza più lunga</string>
+    <string name="sort_duration_descending">Prima la durata maggiore</string>
+    <string name="sort_distance_ascending">Prima la distanza minore</string>
+    <string name="sort_distance_descending">Prima la distanza maggiore</string>
     <string name="sort_date_ascending">Prima la data più recente</string>
     <string name="sort_date_descending">Prima la data meno recente</string>
-    <string name="shared_string_nearest">Più vicino</string>
+    <string name="shared_string_nearest">Il più vicino</string>
     <string name="selected_value">Valore selezionato</string>
     <string name="app_mode_moped">Ciclomotore</string>
     <string name="offline_cache">Cache offline</string>
@@ -5601,4 +5601,9 @@
     <string name="avg_sensor_temperature">Temperatura, media</string>
     <string name="max_sensor_speed">Velocità del sensore, massima</string>
     <string name="avg_sensor_speed">Velocità del sensore, media</string>
+    <string name="shared_string_activity">Attività</string>
+    <string name="sort_subfolders">Ordina le sottocartelle</string>
+    <string name="shared_string_additional">Ulteriori</string>
+    <string name="shared_string_keywords">Parole chiave</string>
+    <string name="sorted_sufolders_toast">Le sottocartelle in “%1$s” sono ordinate per: “%2$s”</string>
 </resources>
