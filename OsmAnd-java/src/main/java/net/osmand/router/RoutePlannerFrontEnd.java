@@ -45,7 +45,7 @@ public class RoutePlannerFrontEnd {
 //	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
-	private boolean useOnlyHHRouting = true;
+	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
 	
