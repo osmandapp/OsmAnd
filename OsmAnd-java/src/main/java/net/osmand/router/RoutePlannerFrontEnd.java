@@ -47,6 +47,7 @@ public class RoutePlannerFrontEnd {
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = true;
 	private HHRoutingConfig hhRoutingConfig = null;
+	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
 	
 
 	public RoutePlannerFrontEnd() {
@@ -56,6 +57,19 @@ public class RoutePlannerFrontEnd {
 		BASE,
 		NORMAL,
 		COMPLEX
+	}
+
+	private enum HHRoutingType {
+		JAVA,
+		CPP
+	}
+
+	public void setHHRouteCpp(boolean cpp) {
+		if (cpp) {
+			hhRoutingType = HHRoutingType.CPP;
+		} else {
+			hhRoutingType = HHRoutingType.JAVA;
+		}
 	}
 	
 	
@@ -837,7 +851,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		if (hhRoutingConfig != null) {
-			if (ctx.nativeLib == null) {
+			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
 					return r;
