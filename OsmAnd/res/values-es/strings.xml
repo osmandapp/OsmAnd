@@ -4500,7 +4500,7 @@
     <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
 \n
 \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
-    <string name="location_source">Proveedor de ubicación</string>
+    <string name="location_source">Fuente de la ubicación</string>
     <string name="shared_string_shape">Forma</string>
     <string name="default_appearance_desc">El color, el icono y la forma predeterminados se aplicarán a los puntos favoritos añadidos al grupo.</string>
     <string name="default_appearance">Aspecto predefinido</string>
