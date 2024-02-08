@@ -1189,6 +1189,10 @@ public class RoutePlannerFrontEnd {
 		}
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		// long time = System.currentTimeMillis();
+		if (ctx.intermediatesX == null || ctx.intermediatesY == null) {
+			ctx.intermediatesX = new int[0];
+			ctx.intermediatesY = new int[0];
+		}
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, hhConfig, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		if (TRACE_ROUTING) {
 			log.info("Native routing result!");
