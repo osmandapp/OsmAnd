@@ -5609,7 +5609,9 @@
     <string name="max_sensor_bycicle_power">Kerékpáros teljesítmény, max</string>
     <string name="avg_sensor_bycicle_power">Kerékpáros teljesítmény, átlag</string>
     <string name="avg_sensor_cadence">Pedálfordulat, átlag</string>
-    <string name="shared_string_keywords">Kulcsszavak</string>
-    <string name="shared_string_activity">Tevékenység</string>
+    <string name="shared_string_keywords">kulcsszavak</string>
+    <string name="shared_string_activity">tevékenység</string>
     <string name="shared_string_additional">További</string>
+    <string name="sort_subfolders">Almappák sorba rendezése</string>
+    <string name="sorted_sufolders_toast">A „%1$s” mappában lévő almappák %2$s szerint vannak sorba rendezve</string>
 </resources>

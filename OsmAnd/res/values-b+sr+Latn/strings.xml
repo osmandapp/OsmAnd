@@ -3073,10 +3073,10 @@
 \nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
-    <string name="icon_group_amenity">Prijatnost</string>
-    <string name="icon_group_special">Naročita</string>
+    <string name="icon_group_amenity">Slobodno vreme</string>
+    <string name="icon_group_special">Specijalna</string>
     <string name="icon_group_transport">Prevoz</string>
-    <string name="icon_group_service">Usluga</string>
+    <string name="icon_group_service">Servisi</string>
     <string name="icon_group_symbols">Znamenja</string>
     <string name="icon_group_sport">Sport</string>
     <string name="icon_group_emergency">Hitna pomoć</string>
@@ -4382,7 +4382,7 @@
     <string name="receiving_data_from_server">Prijem podataka sa servera…</string>
     <string name="restore_selected_data">Vrati izabrane podatke</string>
     <string name="move_map_to_select_area">Pomerite mapu radi odabira potrebne oblasti.</string>
-    <string name="default_appearance_desc">Podrazumevana boja, sličica i oblik će se primeniti na dodane Favoriti u grupi.</string>
+    <string name="default_appearance_desc">Podrazumevana boja, ikona i oblik će se primeniti na dodane favorite u grupi.</string>
     <string name="selected_waypoints_descr">Odabrane prolazne tačke biće dodate putanji %1$s</string>
     <string name="created_on">Datum stvaranja</string>
     <string name="shared_string_mode">Način</string>
@@ -4611,7 +4611,7 @@
     <string name="navigate_point_format_swiss_grid">Švajcarska mreža (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švajcarska mreža (CH1903+)</string>
     <string name="av_notes_choose_action_widget_desc">Izaberi dejstvo.</string>
-    <string name="edit_category">Uredi vrstu</string>
+    <string name="edit_category">Uredi kategoriju</string>
     <string name="shared_string_shape">Oblik</string>
     <string name="select_suggested_points">Izaberi predložene tačke</string>
     <string name="storage_copied_files_size">Umnožavanje %1$s datoteka %2$s</string>
@@ -4734,7 +4734,7 @@
     <string name="available_as_part_of_subscription_plan">Dostupno kao deo pretplate %1$s.</string>
     <string name="relative_bearing_widget_desc">Prikazuje ugao između pravca tvog kretanja i ciljane tačke.</string>
     <string name="help_article_map_legend_osmand_name">Stil OsmAnd mape</string>
-    <string name="help_article_navigation_routing_online_routing_name">Putanja mrežna</string>
+    <string name="help_article_navigation_routing_online_routing_name">Online rutiranje</string>
     <string name="free_versions_descr">Preuzmi i ugradi besplatno izdanje OsmAnda</string>
     <string name="osmand_cloud_delete_account_confirmation">Brišeš profil?</string>
     <string name="external_device_characteristic_pulse_rate">Brzina otkucaja srca</string>
@@ -4801,10 +4801,10 @@
     <string name="key_event_action_previous_app_profile">Prethodni profil aplikacije</string>
     <string name="tripltek_promo">Tripltek promo za %1$s meseci</string>
     <string name="delete_map">Brisanje mape</string>
-    <string name="help_article_navigation_routing_car_based_routing_name">Putanja kolima (teretnjakom, motociklom)</string>
-    <string name="help_article_navigation_routing_horse_routing_name">Putanja jahanja konja</string>
-    <string name="help_article_navigation_routing_moped_routing_name">Putanja motociklom</string>
-    <string name="help_article_navigation_routing_public_transport_navigation_name">Putanja javnog prevoza</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Rutiranje autom (kamion, motor)</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Rutiranje jahanjem</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Rutiranje mopedom</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Rutiranje javnim prevozom</string>
     <string name="help_article_purchases_android_name">Kupovine Androidom</string>
     <string name="shared_string_avoid">Izbegavati</string>
     <string name="external_device_details_distance">Rastojanje</string>
@@ -4839,7 +4839,7 @@
     <string name="ant_missing_dependency">Nedostaje zavisnost</string>
     <string name="external_device_low_battery">Baterija je otprazna</string>
     <string name="shared_string_temperature">Temperatura</string>
-    <string name="map_widget_group_glide_desc">Spravca koja prikazuje razmeru jedrenja do cilja ili prosečnu razmeru jedrenja trenutnog putovanja.</string>
+    <string name="map_widget_group_glide_desc">Widžeti koja prikazuje razmeru jedrenja do cilja ili prosečnu razmeru jedrenja trenutnog putovanja.</string>
     <string name="map_widget_glide_average_desc">Prikazuje prosečnu razmeru jedrenja za postavljeno vreme.</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Navigacija pomoću rute</string>
     <string name="github_discussion">Razgovor na Githubu</string>
@@ -4915,7 +4915,7 @@
     <string name="goods_delivery_desc_4">Koristite odeljak teretnog vozila za vozila teža od 3.5 tona.</string>
     <string name="beats_per_minute_short">bpm</string>
     <string name="show_all_tracks">Prikaži sve tragove</string>
-    <string name="help_article_navigation_routing_direct_to_point_routing_name">Putanja neposredno-u-tačku (plovilom)</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Rutiranje direktno-u-tačku (plovilom)</string>
     <string name="help_article_widgets_info_widgets_name">Informativni widgeti</string>
     <string name="shared_string_expires">Ističe</string>
     <string name="map_center_widget">Koordinate: središte mape</string>
@@ -4938,15 +4938,15 @@
     <string name="map_widget_group_glide_ratio">Koeficijent planiranja</string>
     <string name="help_article_map_track_context_menu_name">Priručni meni ruta</string>
     <string name="help_article_map_raster_maps_name">Rasterske mape (online/ offline)</string>
-    <string name="help_article_navigation_guidance_map_during_navigation_name">Zaslon mape prilikom navođenja</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Ekran prilikom navođenja</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Glasovna uputstva / obaveštenja</string>
-    <string name="help_article_navigation_routing_name">Odrednice rute</string>
-    <string name="help_article_navigation_routing_brouter_name">Bputanja</string>
-    <string name="help_article_navigation_routing_ski_routing_name">Putanja skijanja</string>
-    <string name="help_article_navigation_routing_pedestrian_routing_name">Putanja pešačenja</string>
-    <string name="help_article_navigation_routing_straight_line_routing_name">Putanja pravom linijom (letelicom)</string>
-    <string name="help_article_navigation_routing_train_routing_name">Putanja vozna</string>
-    <string name="help_article_navigation_setup_route_details_name">Pojedinosti rute</string>
+    <string name="help_article_navigation_routing_name">Parametri rute</string>
+    <string name="help_article_navigation_routing_brouter_name">BRouter</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Ski rute</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Rutiranje hodanjem</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">rutiranje pravom linijom (letelicom)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Rutiranje vozom</string>
+    <string name="help_article_navigation_setup_route_details_name">Detalji rute</string>
     <string name="copy_build_version">Snimi broj izdanja</string>
     <string name="routing_attr_hazmat_category_usa_4_name">Zapaljive čvrste materije</string>
     <string name="routing_attr_hazmat_category_usa_5_name">Zapaljive i nagrizajuće materije i organski peroksidi</string>
@@ -5008,7 +5008,7 @@
     <string name="use_v1_auto_zoom">Diskretno autozumiranje (stara verzija)</string>
     <string name="topography_maps">Topografske mape</string>
     <string name="change_button">Promeni dugme</string>
-    <string name="discard_changes_prompt">Jeste li siguran da želiš odbaciti promene?</string>
+    <string name="discard_changes_prompt">Odbacuješ promene?</string>
     <string name="map_is_up_to_date">%1$s mapa je ažurirana.</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Zapaljive tečnosti</string>
     <string name="free_settings_backup">Skladištenje besplatnih postavki</string>
@@ -5089,19 +5089,19 @@
     <string name="widget_available_ram">Dostupan RAM</string>
     <string name="terrain_maps">Reljefne mape</string>
     <string name="shared_string_created">Kreirano</string>
-    <string name="delete_map_description">Jeste li siguran da želiš izbrisati %1$s mapu?</string>
+    <string name="delete_map_description">Brišeš %1$s mapu?</string>
     <string name="app_mode_baby_transport">Prevoz beba</string>
     <string name="wikipedia_and_travel_maps">Wikipedia i Travel maps</string>
     <string name="sort_country_name_ascending">Po imenu od A – Ž</string>
     <string name="sort_country_name_descending">Po imenu od Ž – A</string>
-    <string name="sensor_temperature_desc">Prikazuje toplotu izmerenu senzorom</string>
+    <string name="sensor_temperature_desc">Prikazuje temperaturu izmerenu senzorom</string>
     <string name="help_article_map_point_layers_on_map_name">TOI na mapi</string>
-    <string name="help_article_navigation_routing_osmand_routing_name">O putanji OsmAnda</string>
-    <string name="help_article_navigation_setup_markers_navigation_name">Navodi pomoću oznaka</string>
-    <string name="help_article_navigation_routing_bicycle_based_routing_name">Putanja biciklom (MTB)</string>
-    <string name="help_article_navigation_routing_boat_navigation_name">Putanja plovilom</string>
+    <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd rutiranju</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">Navođenje pomoću oznaka</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutiranje biciklom (MTB)</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Rutiranje plovilom</string>
     <string name="help_article_personal_import_export_name">Uvoz / izvoz</string>
-    <string name="help_article_personal_profiles_name">Preseci (podešavanja)</string>
+    <string name="help_article_personal_profiles_name">Profili (podešavanja)</string>
     <string name="help_article_navigation_guidance_name">Uputstva</string>
     <string name="help_article_plan_route_web_name">Planiranje rute vebom</string>
     <string name="help_article_search_search_all_name">Pretraži sve</string>
@@ -5225,13 +5225,13 @@
 \n</string>
     <string name="live_monitoring_adress_descr">Odredi WEB adresu sa pravilima izraza za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="map_widget_glide_target_desc">Prikazuje razmeru jedrenja potrebnu za dostizanje odredišta.</string>
-    <string name="average_glide_time_interval_desc">Odredite međuvreme za određivanje proseka jedrenja.</string>
-    <string name="help_article_map_tracks_on_map_name">Rute i rute</string>
-    <string name="help_article_map_vector_maps_name">Vektorske mape (načini prikaza mape)</string>
+    <string name="average_glide_time_interval_desc">Odredi međuvreme za određivanje proseka jedrenja.</string>
+    <string name="help_article_map_tracks_on_map_name">Staze i rute</string>
+    <string name="help_article_map_vector_maps_name">Vektorske mape (stil mape)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_plan_route_name">Planiranje rute</string>
     <string name="help_article_troubleshooting_crash_logs_name">Dnevnik rušenja programa</string>
-    <string name="help_article_troubleshooting_general_name">Opšte</string>
+    <string name="help_article_troubleshooting_general_name">Generalno</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Snimanje traga</string>
     <string name="help_article_widgets_map_buttons_name">Dugmad mape</string>
     <string name="shared_string_setup">Podešavanja</string>
@@ -5495,7 +5495,7 @@
     <string name="cloud_item_restored">%1$s vraća se u Cloud.</string>
     <string name="sort_size_descending">Prvo velika veličina</string>
     <string name="add_new_type">Dodaj novu vrstu</string>
-    <string name="remove_type_q">Jesi li siguran da želiš ukloniti \"%1$s\" vrstu?</string>
+    <string name="remove_type_q">Uklanjaš \"%1$s\" vrstu?</string>
     <string name="shared_string_empty_trash">Isprazni kantu</string>
     <string name="trash_alert_card_desc">Predmeti u kanti će biti izbrisani posle %1$s dana.</string>
     <string name="trash_is_empty">Kanta je prazna</string>
@@ -5506,13 +5506,11 @@
     <string name="shared_string_loading">Preuzimanje</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne staze</string>
     <string name="empty_smart_folder_title">Nema odgovarajućeg tragova</string>
-    <string name="empty_smart_folder_description">Sve podudarne staze automatski će se pojaviti ovde</string>
+    <string name="empty_smart_folder_description">Odgovarajuće staze automatski će se pojaviti ovde</string>
     <string name="smart_folder_saved">Pametan folder je snimljen</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" biće trajno izbrisan. Jesi li siguran?
-\n
-\nOva se radnja ne može se poništiti.</string>
+    <string name="delete_trash_item_confirmation_desc">Brišeš \"%1$s\" trajno?</string>
     <string name="no_config_smart_folder_title">NIje konfigurisano</string>
     <string name="not_specified">Nije naznačeno</string>
     <string name="shared_string_is_deleted">%1$s je obrisan.</string>
@@ -5528,11 +5526,11 @@
     <string name="delete_all_items">Obrisati sve stavke</string>
     <string name="save_as_smart_folder">Snimi kao pametan folder</string>
     <string name="folder">Folder</string>
-    <string name="no_config_smart_folder_description">Pametni folderi omogućuju grupiranje pesama prema primenjenim filterima</string>
-    <string name="discard_filter_changes_prompt">Jeste li siguran da želiš poništiti sve filtere?</string>
+    <string name="no_config_smart_folder_description">Pametni folderi omogućuju grupisanje ruta prema primenjenim filterima</string>
+    <string name="discard_filter_changes_prompt">Poništavaš sve filtere?</string>
     <string name="app_mode_paragliding">Paraglajding</string>
     <string name="max_altitude">Maksimalna nadmorska visina</string>
-    <string name="cloud_trash_clear_confirmation">Jesi li siguran da želiš trajno izbrisati sve stavke u kanti? Ova se radnja ne može se poništiti.</string>
+    <string name="cloud_trash_clear_confirmation">Brišeš sve stavke u kanti?</string>
     <string name="trash_is_empty_banner_desc">Datoteke, izbrisane iz Osmand Cloud, će biti dostupne ovde za %1$s dana.</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d trag)</item>
@@ -5611,4 +5609,18 @@
     <string name="avg_sensor_cadence">Kadenca bicikle, prosečna</string>
     <string name="avg_sensor_bycicle_power">Snaga bicikle, prosečna</string>
     <string name="avg_sensor_speed">Brzina senzora, prosečna</string>
+    <string name="relief_3d">3D reljef</string>
+    <string name="save_track_external_sensors_data">Podaci</string>
+    <string name="calculate_offline_altitude_descr">Izračunaj nadmorsku visinu, bez interneta, na temelju podataka mape terena (3D). Razlike u odnosu na nadmorsku visinu snimljenu uređajem mogu se koristiti kao korekcija visine.</string>
+    <string name="sorted_sufolders_toast">Podfolder u “%1$s” i razvrstan prema: “%2$s”</string>
+    <string name="sort_subfolders">Sortiranje podfildera</string>
+    <string name="shared_string_activity">Aktivnost</string>
+    <string name="shared_string_keywords">Ključne reči</string>
+    <string name="shared_string_additional">Dodatni</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nema povezanih senzora ove vrste</string>
+    <string name="relief_3d_description">Kupi i posmatraj susedne države ili ceo kontinent.</string>
+    <string name="write_data_from_sensor_to_track">Piši podatke s spoljnih senzora na GPX tokom snimanja putovanja.</string>
+    <string name="lang_zh_hans">Pojednostavljeni kineski</string>
+    <string name="lang_zh_hant">Tradicionalni kineski</string>
+    <string name="error_calculate">Rezultat kalkulacije je prazan</string>
 </resources>
