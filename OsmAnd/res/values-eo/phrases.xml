@@ -4787,4 +4787,18 @@
     <string name="poi_nfs_recreation_area_activity_ohv_open_area_riding">kvad-veturado (malfermita tereno)</string>
     <string name="poi_nfs_recreation_area_activity_ohv_road_riding">kvad-veturado (ŝoseoj)</string>
     <string name="poi_nfs_recreation_area_activity_picnicking">piknikado</string>
+    <string name="poi_nfs_recreation_area_activity_rocks_and_minerals">rokoj kaj mineraloj</string>
+    <string name="poi_nfs_recreation_area_activity_rv_camping">kampado kun kampad-veturiloj</string>
+    <string name="poi_nfs_recreation_area_activity_salt_water_fishing">fiŝhokado (salakva)</string>
+    <string name="poi_nfs_recreation_area_activity_sand_play">sabloludado</string>
+    <string name="poi_nfs_recreation_area_activity_scenic_driving">veturado admirante pejzaĝon</string>
+    <string name="poi_nfs_recreation_area_activity_scuba_diving">naĝado subakva</string>
+    <string name="poi_nfs_recreation_area_activity_skiing_snowboarding">skiado kaj neĝtabulado</string>
+    <string name="poi_nfs_recreation_area_activity_sledding_tubing">toboganado</string>
+    <string name="poi_nfs_recreation_area_activity_small_game_hunting">ĉasado (malgrandaj bestoj)</string>
+    <string name="poi_nfs_recreation_area_activity_snowmobiling">motorsledado</string>
+    <string name="poi_nfs_recreation_area_activity_surfing">ondorajdado</string>
+    <string name="poi_nfs_recreation_area_activity_target_shooting">pafado al ŝildo</string>
+    <string name="poi_nfs_recreation_area_activity_rockhounding">kolektado de ŝtonoj</string>
+    <string name="poi_nfs_recreation_area_activity_swimming">naĝado</string>
 </resources>

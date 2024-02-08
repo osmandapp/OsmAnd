@@ -4412,7 +4412,7 @@
     <string name="selected_value">Valt värde</string>
     <string name="sort_duration_descending">Längsta tid först</string>
     <string name="sort_distance_descending">Längsta distans först</string>
-    <string name="shared_string_nearest">Närmaste</string>
+    <string name="shared_string_nearest">Närmsta</string>
     <string name="shared_string_add_manually">Lägg till manuellt…</string>
     <string name="shared_string_inches">tum</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ändra utseendet för %1$s spår\?</string>

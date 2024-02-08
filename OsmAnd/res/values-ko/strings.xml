@@ -1682,8 +1682,8 @@
     <string name="access_shared_string_navigate_up">위로 이동</string>
     <string name="access_sort">정렬</string>
     <string name="map_mode">지도 모드</string>
-    <string name="rendering_value_thin_name"/>
-    <string name="rendering_value_medium_name"/>
+    <string name="rendering_value_thin_name">얇게</string>
+    <string name="rendering_value_medium_name">중간</string>
     <string name="rendering_value_bold_name">굵게</string>
     <string name="no_map_markers_found"/>
     <string name="no_waypoints_found"/>
@@ -2189,7 +2189,7 @@
     <string name="backup_delete_old_data_descr">현재 버전의 데이터는 OsmAnd Cloud에서 보존됨</string>
     <string name="backup_delete_old_data">이전 버전 제거</string>
     <string name="troubleshooting_description">구매에 문제가 있으시면 이 링크를 따라오세요.</string>
-    <string name="troubleshooting">문제 해결</string>
+    <string name="troubleshooting">문제 해결하기</string>
     <string name="what_is_here">여기 있는 내용:</string>
     <string name="shared_string_pause">일시 중지</string>
     <string name="what_is_new">새로운 소식</string>
@@ -4289,4 +4289,333 @@
     <string name="route_distance">거리:</string>
     <string name="route_duration">시간:</string>
     <string name="osmand_plus_extended_description_part6">자전거 및 보행자 기능 • 야외 활동에 적합한, 걷기, 하이킹, 및 자전거 경로 보기 • 자전거 및 보행자를 위한 전용 경로 및 모드 표시 • 선명을 포함하는 선택적 대중 교통 정류장(버스, 전차, 기차) • 로컬 GPX 파일이나 온라인 서비스로 선택적 여행 기록 • 선택적 속도 및 고도 표시 • (추가 플러그인을 통한) 등고선 및 언덕 음영 표시</string>
+    <string name="change_default_tracks_appearance_confirmation_description">트랙 %1$s 모양 변경?</string>
+    <string name="value_downloaded_of_mb">다운로드중 %1$.1f/%2$.1f MB</string>
+    <string name="temperature_layer">온도층</string>
+    <string name="pressure_layer">압력 층</string>
+    <string name="shared_string_sunset">해질녘</string>
+    <string name="shared_string_contours">윤곽</string>
+    <string name="quick_action_terrain_descr">지도에 테라코타 층을 표시하거나 숨기려면 버튼.</string>
+    <string name="choose_icon_color_name">아이콘, 색상 및 이름</string>
+    <string name="rendering_value_low_name">낮음</string>
+    <string name="context_menu_item_delete_waypoint">GPX waypoint 삭제?</string>
+    <string name="morning">아침</string>
+    <string name="shared_string_reload">다시 로드</string>
+    <string name="shared_string_layers">레이어</string>
+    <string name="weather_precip_milimeters">밀리미터</string>
+    <string name="osm_editing_prefs_descr">로그인, 비밀번호, 오프라인 편집</string>
+    <string name="osn_add_dialog_title">노트 만들기</string>
+    <string name="favorite_empty_place_name">장소</string>
+    <string name="true_bearing_wdiget_desc">진북과 현재 위치에서 관찰한 대상 지점 사이의 각도입니다.</string>
+    <string name="storage_directory_readonly_desc">선택된 데이터 저장 폴더가 쓰기 보호되기 때문에 내부 메모리로 전환. writable storage 디렉토리를 선택하십시오.</string>
+    <string name="move_point">지점 이동</string>
+    <string name="shared_string_qr_code">QR 코드</string>
+    <string name="shared_string_record">기록</string>
+    <string name="quick_action_temperature_layer">지도에서 온도 레이어를 표시하거나 숨기는 토글입니다.</string>
+    <string name="navigation_item_description">네비게이션을 설정을 시작합니다.</string>
+    <string name="download_wiki_region_placeholder">이 지역</string>
+    <string name="shared_string_shows">보여주기</string>
+    <string name="rendering_attr_showLez_description">지도에서 낮은 배출 구역을 표시합니다. routing에 영향을 미치지 않습니다.</string>
+    <string name="add_intermediate_point">경유지 추가</string>
+    <string name="rendering_value_high_name">높음</string>
+    <string name="poi_dialog_reopen">다시열기</string>
+    <string name="enter_country_name">국가 이름 입력</string>
+    <string name="night">야간</string>
+    <string name="wiki_article_not_found">찾을 수 없음</string>
+    <string name="open_in_browser_wiki_description">웹 브라우저에서 기사보기.</string>
+    <string name="tunnel_warning">전방 터널</string>
+    <string name="run_full_osmand_msg">당신은 {0} OsmAnd에 의해 구동되는지도를 사용합니다. OsmAnd 전체 버전을 시작하시겠습니까?</string>
+    <string name="routing_attr_freeride_policy_name">오프-피스트</string>
+    <string name="map_settings_weather_temp">온도</string>
+    <string name="trip_recording_duration_widget_desc">현재 기록된 이동 시간을 표시합니다.</string>
+    <string name="mapillary_menu_title_dates">일자</string>
+    <string name="map_settings_weather_air_pressure">공기의 압력</string>
+    <string name="map_settings_weather_precip">제출하기</string>
+    <string name="routing_attr_allow_expert_name">전문 경로 허용</string>
+    <string name="mtb_segment_classification">세그먼트 분류</string>
+    <string name="shared_string_large">크게</string>
+    <string name="map_marker_interval_dialog_desc">평균 속도가 도착 시간의 예상 시간을 계산하기 위해 시간 간격을 지정합니다.</string>
+    <string name="shared_string_switch_mode">스위치 모드</string>
+    <string name="quick_action_add_destination_desc">화면 센터를 만들기 위해 버튼이 경로 목적지로 이전 선택한 목적지가 마지막 중간 목적지가 될 것입니다.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd는 앱의 일부에 대한 정보를 수집합니다. 귀하의 위치는 결코 전송되지 않습니다, 또는 당신이 표시하는 응용 프로그램 또는 지역의 세부 사항, 검색, 또는 다운로드.</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">힐리</string>
+    <string name="routing_attr_driving_style_balance_name">균형</string>
+    <string name="rendering_value_fine_name">끝</string>
+    <string name="select_map_markers">맵 마커 선택</string>
+    <string name="osn_close_dialog_title">노트 닫기</string>
+    <string name="offline_weather_forecast_desc">7일 동안의 일기 예보를 다운로드할 수 있습니다.</string>
+    <string name="base_profile_descr_aircraft">비행기, 글라이더</string>
+    <string name="cloud_layer">구름 층</string>
+    <string name="quick_action_bug_message">메시지</string>
+    <string name="lang_ast">아스투리아스어</string>
+    <string name="sort_subfolders">하위 폴더 정렬</string>
+    <string name="rendering_attr_showMtbScale_name">MTB 축척 표시</string>
+    <string name="quick_action_wind_layer">맵에서 바람 레이어를 표시하거나 숨기는 토글입니다.</string>
+    <string name="map_settings_weather_cloud">구름</string>
+    <string name="empty_screen_weather_precipitation_layer">지도에서 강수층을 볼 수 있습니다.</string>
+    <string name="weather_wind_kmh">km/h</string>
+    <string name="quick_action_current_location_widget_descr">지도에 현재 위치 위젯을 표시하거나 숨기려면 toggle.</string>
+    <string name="coordinates_widget_map_center_desc">현재 맵 센터의 지리적 좌표 표시</string>
+    <string name="auto_25_chars_route_roundabout_kl">%1$d 출구를 타고 왼쪽으로</string>
+    <string name="relative_bearing_widget_desc">앞으로 이동 방향과 대상 지점 사이의 각도를 표시합니다.</string>
+    <string name="first_marker_widget_desc">첫 번째 맵 마커로 도착의 거리 또는 예상 시간을 표시 할 위젯을 구성 할 수 있습니다.</string>
+    <string name="distance_to_destination_widget_desc">위젯은 마지막 목적지 지점에 왼쪽 거리를 보여줍니다.</string>
+    <string name="routing_attr_short_way_description">최적화 된 단축 경로 (energy Saving)</string>
+    <string name="speed_cameras_legal_descr">일부 국가에서 또는 지역, 속도 카메라 경고 앱의 사용은 법에 의해 금지됩니다.
+\n
+\n국가의 법에 따라 선택을해야합니다.
+\n
+\n%1$s를 선택하고 속도 카메라에 대한 경고와 경고를 받게됩니다.
+\n
+\n%2$s를 선택하십시오. 속도 카메라와 관련된 모든 데이터 : 경고, 알림, POIs는 OsmAnd가 완전히 재설치 될 때까지 삭제됩니다.</string>
+    <string name="monitoring_prefs_descr">네비게이션, 로깅 정확도</string>
+    <string name="voice_announces_descr">내비게이션 지침 및 안내음성</string>
+    <string name="edit_profile_screen_options_subtitle">화면 옵션 선택</string>
+    <string name="base_profile_descr_pedestrian">걷기, 하이킹, 달리기</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">지도에서 선택한 트랙을 표시하거나 숨기려면 버튼.</string>
+    <string name="shared_string_restore">복원</string>
+    <string name="improve_coverage_install_mapillary_desc">이 지도 위치로 사진을 추가하는 Mapillary를 설치하십시오.</string>
+    <string name="shared_string_plugin">플러그인</string>
+    <string name="shared_string_time">시간</string>
+    <string name="rendering_attr_hideWaterPolygons_description">물</string>
+    <string name="shared_string_move_down">이동 ↓</string>
+    <string name="number_of_recipients">인원수</string>
+    <string name="osm_recipient_stat">편집 %1$s, 합계 %2$s mBTC</string>
+    <string name="osm_editors_ranking">OSM 정보 에디터 순위</string>
+    <string name="osm_live_subscription">OsmAnd 라이브 구독</string>
+    <string name="osm_live_not_active">비활성</string>
+    <string name="osm_live_header">이 구독은 전 세계 모든지도에 대한 시간별 업데이트가 가능합니다.
+\n소득의 일부가 OSM 커뮤니티로 돌아갑니다. 각 OSM 기여에 대해 지급됩니다.
+\nOsmAnd와 OSM을 좋아한다면 지원하고 지원할 수 있습니다.</string>
+    <string name="shared_string_not_selected">선택되지 않음</string>
+    <string name="osn_reopen_dialog_title">노트 다시열기</string>
+    <string name="shared_string_commit">반영</string>
+    <string name="context_menu_item_edit_waypoint">GPX 방법점 편집</string>
+    <string name="osn_add_dialog_error">노트를 만들 수 없습니다.</string>
+    <string name="lang_fy">프리지아어</string>
+    <string name="shared_string_location">위치</string>
+    <string name="map_downloaded_descr">%1$s 맵은 사용 가능합니다.</string>
+    <string name="world_map_download_descr">World Basemap (낮은 급상승 수준에서 전체 세계를 커버) 누락 또는 초과. 글로벌 개요에 대한 다운로드를 고려하시기 바랍니다.</string>
+    <string name="lang_nds">낮은 독일어</string>
+    <string name="share_osm_edits_subject">OsmAnd를 통해 공유된 OSM 편집</string>
+    <string name="lang_kn">칸나다어</string>
+    <string name="plugins_menu_group">부가 기능</string>
+    <string name="faq_item_description">자주 묻는 질문입니다.</string>
+    <string name="weekly">주간</string>
+    <string name="toast_empty_name_error">이름 없는 위치</string>
+    <string name="copy_location_name">복사 위치/POI 이름</string>
+    <string name="routing_attr_difficulty_preference_description">이 난이도의 프리퍼 경로, 더 열심히 routing 또는 더 쉬운 피리스트는 더 짧은 경우 여전히 가능합니다.</string>
+    <string name="routing_attr_allow_skating_only_description">클래식 트랙없이 프리 스타일의 또는 스케이팅 전용 노선.</string>
+    <string name="routing_attr_allow_skating_only_name">Skating만 노선을 허용</string>
+    <string name="routing_attr_allow_intermediate_description">가파른 단면도를 가진 더 어려운 노선. 일반적으로 피해야 할 장애물.</string>
+    <string name="quick_action_need_to_add_item_to_list">\'Quick action\' 설정에서 목록으로 적어도 하나의 항목을 추가하십시오</string>
+    <string name="routing_attr_avoid_sett_description">설정 방지</string>
+    <string name="routeInfo_smoothness_name">부드럽게</string>
+    <string name="download_wikipedia_description">다운로드 Wikipedia ꀰ사 - %1$s.</string>
+    <string name="mtb_imba_full">국제 산악 자전거 협회</string>
+    <string name="rendering_attr_showMtbScale_description">MTB 스케일에 따라 트레일을 표시합니다.</string>
+    <string name="storage_migration_fragment_close_descr">복사는 단지 %1$s % % 완료. 이제 중지하면 앱이 제대로 작동하지 않을 수 있습니다.</string>
+    <string name="switch_mode_by_tapping_on_widget">위젯을 탭하여 모드를 전환합니다.</string>
+    <string name="shared_string_time_left">남은 시간</string>
+    <string name="shared_string_sunrise">해돋이</string>
+    <string name="map_widget_group_sunrise_sunset">일출, 일몰</string>
+    <string name="rendering_attr_depthContourWidth_name">선 두께</string>
+    <string name="map_settings_weather_wind">바람</string>
+    <string name="empty_screen_weather_clouds_layer">지도에 구름 적용 층을 볼 수 있습니다.</string>
+    <string name="empty_screen_weather_temperature_layer">지도에 온도 층을 볼 수 있습니다.</string>
+    <string name="empty_screen_view_selected_weather_data">지도에서 선택한 날씨 데이터를 볼 수 있습니다.</string>
+    <string name="weather_precip_in">in</string>
+    <string name="weather_precip_inches">인치</string>
+    <string name="coordinates_widget_current_location">좌표: 현재 위치</string>
+    <string name="favorite_confirm_delete_group">\"%1$s\" 그룹 및 모든 포함 포인트를 삭제 (%2$d)?</string>
+    <string name="touring_view_render_descr">높은 대조와 최대 세부사항을 가진 여행 작풍. OsmAnd 기본 스타일의 모든 옵션을 포함, 가능한 한 많은 세부 사항으로 표시하는 동안, 특정 도로, 경로 및 여행하는 다른 방법. 도로 유형과 구별되는 \"touring atlas\"를 지우십시오. 일, 밤 및 옥외 사용을 위해 적당한.</string>
+    <string name="shared_string_reverse_order">역순</string>
+    <string name="show_map_markers_description">맵 마커 기능을 활성화합니다.</string>
+    <string name="shared_string_undo_all">모두 실행 취소</string>
+    <string name="lang_mk">마케도니아어</string>
+    <string name="lang_als">알바니아어 (Tosk)</string>
+    <string name="touring_view_renderer">관광 명소</string>
+    <string name="total_donations">총 기부</string>
+    <string name="osm_recipients_label">OSM 로그인</string>
+    <string name="all_data">모든 정보</string>
+    <string name="report">신고</string>
+    <string name="precipitation_layer">강수량층</string>
+    <string name="number_of_gpx_files_selected_pattern">%s 트랙 파일 선택됨</string>
+    <string name="monitoring_min_accuracy_descr">이것은 최소한의 정확도 표시 (미터/피트에서, 당신의 칩셋을 위해 안드로이드에 의해 보고되는 것과 같이) 측정된 유일한 점을 기록할 것입니다. 정확도는 진실한 위치에 측정의 근접이고, 반복한 측정의 scatter인 정밀도와 직접 관련이 없습니다.</string>
+    <string name="manage_profiles_descr">프로필 만들기, 가져오기, 편집</string>
+    <string name="base_profile_descr_boat">선박, 행, 항해</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">플랫</string>
+    <string name="shared_string_save_changes">변경 내용 저장</string>
+    <string name="shared_string_email_address">E-mail 주소</string>
+    <string name="how_to_open_wiki_title">Wikipedia 기사를 열려면?</string>
+    <string name="routing_attr_difficulty_preference_name">선호하는 어려움</string>
+    <string name="routing_attr_allow_classic_only_name">고전적인 단지 노선을 허용</string>
+    <string name="go_to_marker_location">마커 위치로 이동</string>
+    <string name="routing_attr_piste_type_sled_name">썰매</string>
+    <string name="av_notes_audio_widget_desc">위젯을 탭하면 오디오 메모를 취할 수 있습니다.</string>
+    <string name="day_off_label">끔</string>
+    <string name="routing_attr_allow_intermediate_name">중간 노선을 허용</string>
+    <string name="faq_item">질문과 답변</string>
+    <string name="routing_attr_allow_expert_description">극단적으로 어려운 경로, 위험한 장애물과 주변.</string>
+    <string name="subscribe_email_error">에러</string>
+    <string name="recently_visible">최근에 표시됨 %1$s</string>
+    <string name="si_nm_ft">해리/피트</string>
+    <string name="hourly">시간별</string>
+    <string name="daily">일별</string>
+    <string name="routing_attr_allow_advanced_name">고급 루트 허용</string>
+    <string name="base_profile_descr_car">자동차, 트럭, 오토바이</string>
+    <string name="favourites_group">즐겨찾기 카테고리</string>
+    <string name="map_widget_search">찾기</string>
+    <string name="shared_string_next_sunset">다음 일몰</string>
+    <string name="quick_action_precipitation_layer">맵에서 강수량 레이어를 표시하거나 숨기는 토글입니다.</string>
+    <string name="quick_action_air_pressure_layer">표시하거나 지도에 공기 압력 층을 숨기려면 toggle.</string>
+    <string name="quick_action_cloud_layer">맵에서 바람 레이어를 표시하거나 숨기는 토글입니다.</string>
+    <string name="rendering_attr_depthContourColorScheme_name">라인 색상 계획</string>
+    <string name="weather_offline_forecast">Offline 예측</string>
+    <string name="time_to_destination_widget_desc">위젯은 마지막 목적지 지점에 \"Arrival time\"또는 \"Time to go\"를 보여줍니다. 시간이 지남에 따라 지속적으로 업데이트되고 현재 위치의 경로 시간에 동일합니다.</string>
+    <string name="driving_region_australia">호주</string>
+    <string name="wind_layer">바람 층</string>
+    <string name="mapillary_menu_title_username">유저 이름</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="weather_wind_kn">kn</string>
+    <string name="weather_wind_mph">mph</string>
+    <string name="rendering_value_medium_w_name">중간</string>
+    <string name="map_widget_sunset_desc">다음 일몰의 시간을 표시하거나 일몰까지 왼쪽 시간.</string>
+    <string name="map_widget_sunrise_desc">다음 일출의 시간을 표시하거나 일요일까지 왼쪽 시간.</string>
+    <string name="shared_string_next_sunrise">다음 해돋이</string>
+    <string name="map_widget_group_sunrise_sunset_desc">이 위젯은 다음 일출과 일몰에 대한 정보를 보여줍니다.</string>
+    <string name="depth_contour_lines">깊이 contour 선</string>
+    <string name="turn_on_nautical_depth_description">지도에 nautical Depth 데이터를 볼 수 있습니다.</string>
+    <string name="second_marker_widget_desc">두 번째 맵 마커에 도착의 거리 또는 예상 시간을 표시 할 위젯을 구성 할 수 있습니다.</string>
+    <string name="shared_string_type">유형</string>
+    <string name="release_3_6">· 프로필 : 이제 주문 변경, 맵 아이콘 설정, 기본 프로필에 대한 모든 설정을 변경하고 기본으로 다시 복원 할 수 있습니다.
+\n
+\n• 항법에 있는 출구 수를 추가하십시오
+\n
+\n• Reworked 플러그인 설정
+\n
+\n• 모든 프로파일에 빠른 액세스를 위한 Reworked Settings Screen
+\n
+\n• 다른 프로파일에서 설정을 복사 할 수있는 옵션 추가
+\n
+\n• 주문 변경 또는 POI 범주 검색
+\n
+\n• 정확한 맵에 POI 아이콘 정렬
+\n
+\n• 지도를 구성하는 Sunset / Sunrise 데이터 추가
+\n
+\n• 지도에 홈/작업 아이콘 추가
+\n
+\n• 설정에서 Multiline 설명에 대한 추가 지원
+\n
+\n• 일본지도에 정확한 transliteration 추가
+\n
+\n• Antarctica 지도 추가
+\n
+\n</string>
+    <string name="monitoring_min_distance_descr_side_effect">한계: 휴식의 기간은 모두 기록되지 않습니다 또는 한 지점으로. 마이너 운동 (예를 들어, 여행에서 가능한 회전을 표시하는 도로의 측면에) 필터링 할 수 있습니다. 파일이 포스트 처리에 대한 더 적은 정보를 포함 할 것이며 동시에 나쁜 리셉션이나 칩셋 효과에 기인 한 GPS artifacts를 잠재적으로 저장할 수 있습니다.</string>
+    <string name="monitoring_min_accuracy_descr_remark">말: GPS가 기록하기 전에 즉시 꺼졌던 경우, 측정된 첫번째 점은 감소한 정확도가 있을지도 모르다, 그래서 우리의 부호에서 우리는 점 (또는 3개의 연속점, 등의 베스트를 기록하기 전에 두번째를 기다릴지도 모릅니다), 그러나 이것은 아직 실행되지 않습니다.</string>
+    <string name="expire_time_descr">지정된 수 분 후에 다시 다운로드 할 수 있습니다. 이 소스에 타일을 새로 고침하지 않도록이 필드를 비워.
+\n
+\n1 일 1440 분입니다.
+\n1 주일은 10 080 분입니다.
+\n한 달은 43 829 분입니다.</string>
+    <string name="time_to_intermediate_widget_desc">위젯은 \"Arrival time\"또는 \"Time to go\"를 첫 번째 중간 지점으로 보여줍니다. 시간이 지남에 따라 지속적으로 업데이트됩니다. 한 번 중간 지점이 통과되면, 시간은 다음 중간 지점으로 업데이트됩니다.</string>
+    <string name="routing_attr_allow_classic_only_description">스케이팅 트레일 없이 클래식 스타일의 길. 이 루트는 작은 snowmobile에 의해 작은 스키어에 의해 수동으로 만들어진 느슨한 piste 및 트랙을 포함한다.</string>
+    <string name="run_full_osmand_header">OsmAnd 시작?</string>
+    <string name="test_voice_desrc">단추를 탭하고 해당 음성 프롬프트를 듣고 누락되거나 결함이 있는 경우</string>
+    <string name="import_track_desc">File %1$s는 waypoints를 포함하지 않으며 트랙으로 가져올 수 있습니까?</string>
+    <string name="optional_point_name">선택적 포인트명</string>
+    <string name="add_destination_point">목적지 설정</string>
+    <string name="avoid_roads_descr">네비게이션 중에 피하고 싶은 도로를 선택, 지도 중 하나 또는 아래 목록에서:</string>
+    <string name="empty_screen_weather_wind_layer">지도에 바람 층을 볼 수 있습니다.</string>
+    <string name="sorted_sufolders_toast">하위 폴더 “%1$s” 의 정렬 기준: “%2$s”</string>
+    <string name="coordinates_widget_map_center">좌표: 지도 중심</string>
+    <string name="map_markers_desc">Widget은 지도 마커 목록에 있는 첫번째 2 마커를 위한 도착 (ETA)의 거리 또는 예상된 시간을 보여줍니다.</string>
+    <string name="coord_input_add_point">지점 추가</string>
+    <string name="shared_string_notifications">알림</string>
+    <string name="shared_string_filters">필터</string>
+    <string name="lang_ber">베르베르어</string>
+    <string name="distance_to_intermediate_widget_desc">위젯은 첫 번째 중간 지점에 왼쪽 거리를 보여줍니다. 중간 지점이 통과되면, 거리는 다음 중간 지점으로 업데이트됩니다.</string>
+    <string name="new_version">새 버전</string>
+    <string name="techical_articles_item">기술 관련 기사</string>
+    <string name="lang_kab">커바일어</string>
+    <string name="shared_string_permissions">권한</string>
+    <string name="routing_attr_avoid_train_description">기차를 회피</string>
+    <string name="donation_to_osm_desc">기부금의 일부는 OSM 기여자에게 보내집니다. 구독 비용은 동일합니다.</string>
+    <string name="storage_permission_restart_is_required">앱은 이제 외부 저장소에 쓸 수 있지만 다시 시작해야 합니다.</string>
+    <string name="shared_string_move_up">이동 ↑</string>
+    <string name="weight_limit_error">최소 값은 \"%1$s\"톤입니다. \"%2$s\" 프로파일을 사용하여 차량 무게가 최소 값보다 적습니다.</string>
+    <string name="second_next_turn_widget_desc">위젯은 접근 거리 내에서 설정하면 두 번째 다음 차례에 대한 정보를 보여줍니다.</string>
+    <string name="map_source_zoom_levels_descr">지도 또는 overlay/underlay로 사용될 때 스크린을 Affects.
+\n
+\n%1$s: 지도는 선택된 급상승 수준 범위에 한정됩니다.
+\n
+\n%2$s는 원래 타일이 눈에 보이고, 확장 또는 축소가 이러한 값 밖에 발생할 수있는 수준입니다.</string>
+    <string name="store_tracks_in_monthly_directories">녹음된 트랙을 월간 폴더에 저장</string>
+    <string name="save_poi_without_poi_type_message">POI를 입력하지 않고 저장합니까?</string>
+    <string name="routing_attr_allow_advanced_description">위험한 장애물과 가파른 부분과 더불어 Difficult 노선.</string>
+    <string name="routing_attr_avoid_sett_name">설정 없음</string>
+    <string name="coordinates_widget_current_location_desc">현재 위치의 지리적 좌표 표시</string>
+    <string name="osmand_plus_extended_description_part4">OSM 및 Wikipedia 데이터 사용
+\n• 세계 최고의 협업 프로젝트의 고품질 정보
+\n• 국가 또는 지역 당 OSM 데이터 사용
+\n• Wikipedia POIs, 관광에 좋은
+\n• 무제한 무료 다운로드, 앱에서 직접
+\n• 컴팩트 오프라인 벡터 맵은 한 달에 적어도 업데이트
+\n
+\n• 완전한 지역 자료와 단지 도로 네트워크 사이 선택 (예를들면: 일본 전부는 도로 네트워크를 위한 700 MB 또는 200 MB입니다)</string>
+    <string name="monitoring_control_start">REC</string>
+    <string name="osn_add_dialog_success">노트가 생성됨</string>
+    <string name="vehicle_parameters_descr">무게, 고도, 길이, 속도</string>
+    <string name="add_group">그룹에서 추가</string>
+    <string name="shared_string_to">으로</string>
+    <string name="mapillary_menu_date_from">부터</string>
+    <string name="quick_action_replace_destination_desc">스크린 센터를 만들기 위한 버튼은 이전에 선택한 목적지를 대체하는 새로운 경로 목적지입니다.</string>
+    <string name="shared_string_max">최대</string>
+    <string name="shared_string_move">이동</string>
+    <string name="language_description">선호하는 언어 및 음성 지도 유형 선택.</string>
+    <string name="powered_by_osmand">OsmAnd에서</string>
+    <string name="lang_be_by">벨라루스어 (라틴)</string>
+    <string name="route_parameters_descr">경로 매개 변수 설정</string>
+    <string name="radius_rules_widget_desc">반경 바퀴 도구는지도에 선택한 지점 주변의 거리를 표시합니다.</string>
+    <string name="configure_screen_widgets_descr">추가 또는 rearange 위젯에 화면 측면을 선택합니다.</string>
+    <string name="routing_attr_driving_style_description">더 짧은, 더 빠른 또는 더 안전한 경로를 얻기 위해 운전 목적을 선택</string>
+    <string name="lang_sat">산탈리어</string>
+    <string name="map_during_navigation_info">탐색 중 맵</string>
+    <string name="edit_profile_setup_map_subtitle">프로필에 대한지도 옵션을 선택</string>
+    <string name="default_speed_setting_descr">기본 속도 설정 변경</string>
+    <string name="minmax_speed_dialog_title">Min/max 속도 설정</string>
+    <string name="profile_alert_need_routing_type_title">네비게이션 타입 선택</string>
+    <string name="select_travel_book">여행 책 선택</string>
+    <string name="select_waypoints_category_description">모든 트랙의 통로를 추가하거나 별도의 범주를 선택하십시오.</string>
+    <string name="choose_file_type">파일 형식선택</string>
+    <string name="shared_string_gpx_tracks">트랙</string>
+    <string name="lang_es_us">스페인어 (미국)</string>
+    <string name="lang_hu_formal">헝가리어 (formal)</string>
+    <string name="select_shape">모양 선택</string>
+    <string name="shared_string_max_speed">최대. 속도</string>
+    <string name="select_map_marker">지도 마커 선택</string>
+    <string name="lang_en_gb">영어 (영국)</string>
+    <string name="shared_string_revert">되돌림</string>
+    <string name="turn_screen_on_navigation_instructions">내비게이션 지침</string>
+    <string name="shared_string_min_speed">최소. 속도</string>
+    <string name="add_favourites_group_to_markers_descr">즐겨찾기의 종류를 선택하여 마커에 추가합니다.</string>
+    <string name="marker_show_distance_descr">지도의 지도 표시에 거리와 방향을 나타내는 방법을 선택하십시오:</string>
+    <string name="profile_alert_need_routing_type_msg">새 앱 프로필에 대한 탐색 유형을 선택하십시오</string>
+    <string name="lang_sr_latn">세르비아어 (라틴)</string>
+    <string name="lang_zh_hk">중국어(홍콩)</string>
+    <string name="edit_profile_nav_settings_subtitle">프로필에 대한 내비게이션 설정 선택</string>
+    <string name="select_suggested_points">제안 포인트 선택</string>
+    <string name="turn_screen_on_power_button_descr">장치 힘 단추를 누르는 것은 자물쇠 스크린의 정상에 OsmAnd로 스크린을 돌 것입니다.</string>
+    <string name="empty_state_markers_active_desc">긴 또는 짧은 탭 \'장소\', 다음 마커 플래그 버튼을 누릅니다.</string>
+    <string name="lang_oc">오크어</string>
+    <string name="configure_navigation">탐색 구성</string>
+    <string name="turn_screen_on_power_button_disabled">지원하다 \'Keep Screen on\' 을 \'Timeout after Wake-up\' 으로 요구합니다.</string>
+    <string name="av_locations_selected_desc">선택된 노트의 좌표와 데이터를 가진 GPX 파일.</string>
+    <string name="turn_screen_on_power_button">전원 버튼</string>
+    <string name="change_markers_position">변경 마커 위치</string>
+    <string name="add_track_to_markers_descr">Markers에 대한 통로를 추가하기 위해 트랙을 선택합니다.</string>
+    <string name="fast_coordinates_input_descr">좌표 입력 형식을 선택하십시오. \'Options\'를 탭하여 변경합니다.</string>
 </resources>
