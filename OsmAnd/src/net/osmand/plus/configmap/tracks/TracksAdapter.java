@@ -61,6 +61,7 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		emptyTracksListener = fragment;
 		trackSelectionListener = fragment;
 		sortTracksListener = fragment;
+		selectTrackMode = fragment.selectTrackMode();
 	}
 
 	public void setSelectionMode(boolean selectionMode) {
@@ -197,5 +198,9 @@ public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public int getItemCount() {
 		return getItems().size();
+	}
+
+	public interface ItemVisibilityCallback{
+		boolean shouldShowItem(TrackItem trackItem);
 	}
 }

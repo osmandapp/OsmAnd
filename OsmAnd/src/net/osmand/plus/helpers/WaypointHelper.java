@@ -234,7 +234,7 @@ public class WaypointHelper {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
 		}
 		AlarmInfo mostImportant = speedAlarm;
-		int value = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
+		int mostPriority = speedAlarm != null ? speedAlarm.updateDistanceAndGetPriority(0, 0) : Integer.MAX_VALUE;
 		float speed = lastProjection != null && lastProjection.hasSpeed() ? lastProjection.getSpeed() : 0;
 		AnnounceTimeDistances atd = getVoiceRouter().getAnnounceTimeDistances();
 		if (ALARMS < pointsProgress.size()) {
@@ -244,29 +244,27 @@ public class WaypointHelper {
 				LocationPointWrapper lwp = lp.get(kIterator);
 				AlarmInfo inf = (AlarmInfo) lwp.point;
 				int currentRoute = route.getCurrentRoute();
-				if (inf.getLocationIndex() < currentRoute && inf.getLastLocationIndex() != -1
-						&& inf.getLastLocationIndex() < currentRoute) {
-					// skip
+				// getLastLocationIndex()  == -1 is always < currentRoute
+				if (inf.getLocationIndex() <= currentRoute && inf.getLastLocationIndex() < currentRoute) {
+					// skip already passed alarms
 				} else {
-					if (inf.getType() == AlarmInfoType.TUNNEL && inf.getLastLocationIndex() != -1
-							&& currentRoute > inf.getLocationIndex()
-							&& currentRoute < inf.getLastLocationIndex()) {
-						inf.setFloatValue(route.getDistanceToPoint(inf.getLastLocationIndex()));
-					}
+					int distanceByRoute = 0;
 					Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
-					int d = (int) Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-							inf.getLatitude(), inf.getLongitude()) - lwp.getDeviationDistance());
-					if (inf.getLocationIndex() == currentRoute && d > 10) {
-						return null;
+					if (inf.getLocationIndex() < currentRoute) {
+						// update remaining length
+						inf.setFloatValue(route.getDistanceToPoint(lastKnownLocation, inf.getLastLocationIndex()));
+					} else {
+						distanceByRoute = route.getDistanceToPoint(lastKnownLocation, inf.getLocationIndex() - 1);
 					}
-					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
+					if (!atd.isTurnStateActive(0, distanceByRoute, STATE_LONG_PNT_APPROACH)) {
+						// break once first future alarm is far away as others will be also far away
 						break;
 					}
-					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
-					int vl = inf.updateDistanceAndGetPriority(time, d);
-					if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
+					float time = speed > 0 ? distanceByRoute / speed : Integer.MAX_VALUE;
+					int priority = inf.updateDistanceAndGetPriority(time, distanceByRoute);
+					if (priority < mostPriority && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
 						mostImportant = inf;
-						value = vl;
+						mostPriority = priority;
 					}
 				}
 				kIterator++;
@@ -400,18 +398,14 @@ public class WaypointHelper {
 					float atdSpeed = atd.getSpeed(lastKnownLocation);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
-						if (type == ALARMS && lwp.routeIndex < currentRoute) {
-							kIterator++;
-							continue;
-						}
 						if (lwp.announce) {
 							if (!atd.isTurnStateActive(atdSpeed,
-									route.getDistanceToPoint(lwp.routeIndex) / 2, STATE_LONG_PNT_APPROACH)) {
+									route.getDistanceToPoint(lwp.routeIndex) / 2f, STATE_LONG_PNT_APPROACH)) {
 								break;
 							}
 							LocationPoint point = lwp.point;
-							double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
+							double d1 = Math.max(0.0, route.getDistanceToPoint(lastKnownLocation, lwp.routeIndex - 1)
+									- lwp.getDeviationDistance());
 							Integer state = locationPointsStates.get(point);
 							if (state != null && state == ANNOUNCED_ONCE
 									&& atd.isTurnStateActive(atdSpeed, d1, STATE_SHORT_PNT_APPROACH)) {
@@ -424,6 +418,10 @@ public class WaypointHelper {
 							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)) {
 								AlarmInfo alarm = (AlarmInfo) point;
 								AlarmInfoType t = alarm.getType();
+								if (beforeTunnelEntrance(currentRoute, alarm)) {
+									kIterator++;
+									continue;
+								}
 								int announceRadius;
 								boolean filterCloseAlarms = false;
 								switch (t) {
@@ -508,6 +506,9 @@ public class WaypointHelper {
 		}
 	}
 
+	private static boolean beforeTunnelEntrance(int currentRoute, AlarmInfo alarm) {
+		return alarm.getLocationIndex() > currentRoute && alarm.getLastLocationIndex() > currentRoute;
+	}
 
 	protected VoiceRouter getVoiceRouter() {
 		return app.getRoutingHelper().getVoiceRouter();

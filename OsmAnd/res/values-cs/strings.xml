@@ -1252,7 +1252,7 @@
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
     <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu a mýtné</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
     <string name="pause_navigation">Pozastavit navigaci</string>
@@ -1272,7 +1272,7 @@
     <string name="arrival_distance_factor_early">Brzy</string>
     <string name="arrival_distance_factor_normally">Normální</string>
     <string name="arrival_distance_factor_late">Později</string>
-    <string name="arrival_distance_factor_at_last">V posledních metrech</string>
+    <string name="arrival_distance_factor_at_last">Velmi pozdě</string>
     <string name="av_camera_pic_size">Velikost fotografie</string>
     <string name="av_camera_pic_size_descr">Nastavte velikost obrázku fotoaparátu</string>
     <string name="shared_string_more">Více…</string>
@@ -2221,7 +2221,7 @@
     <string name="change_color">Změnit barvu</string>
     <string name="edit_name">Upravit název</string>
     <string name="animate_my_location">Animovat vlastní polohu</string>
-    <string name="animate_my_location_desc">Zapnout animovaný posun \'Mé polohy\' na mapě během navigace.</string>
+    <string name="animate_my_location_desc">Plynulý posun mapy během pohybu. Způsobuje malé zpoždění.</string>
     <string name="shared_string_overview">Přehled</string>
     <string name="select_street">Vyberte ulici</string>
     <string name="shared_string_in_name">v %1$s</string>
@@ -4921,7 +4921,7 @@
     <string name="routing_attr_difficulty_preference_intermediate_name">Středně pokročilý</string>
     <string name="rendering_attr_showTrolleybusRoutes_name">Trolejbusové linky</string>
     <string name="rendering_attr_showShareTaxiRoutes_name">Trasy kyvadlové dopravy</string>
-    <string name="favorite_confirm_delete_group">Opravdu chcete odstranit skupinu \"%1$s\" a všechny zahrnuté body (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Odstranit skupinu \"%1$s\" a všechny zahrnuté body (%2$d)?</string>
     <string name="trip_recording_duration_widget_desc">Zobrazuje aktuálně zaznamenaný čas jízdy.</string>
     <string name="true_bearing_wdiget_desc">Úhel mezi skutečným severem a cílovým bodem pozorovaným z vaší polohy.</string>
     <string name="time_to_destination_widget_desc">Widget zobrazuje \"Čas příjezdu\" nebo \"Čas do odjezdu\" do posledního cílového bodu. Čas je během navigace neustále aktualizován a rovná se času na trase z aktuální polohy.</string>
@@ -5217,14 +5217,14 @@
     <string name="beats_per_minute_short">bpm</string>
     <string name="osmand_cloud_delete_account_confirmation">Smazat účet\?</string>
     <string name="action_cannot_be_undone">Tuto akci nelze vzít zpět.</string>
-    <string name="delete_account_warning">Opravdu chcete odstranit účet %1$s\?</string>
+    <string name="delete_account_warning">Odstranit účet %1$s?</string>
     <string name="shared_string_deleting">Mazání</string>
     <string name="backup_error_delete_account_email_match">E-mail neodpovídá přihlašovacímu jménu</string>
     <string name="osmand_cloud_deleting_account_descr">Během několika okamžiků budou všechna vaše data a účet z OsmAnd Cloud odstraněny.
 \n
 \nVšechna data v zařízení zůstanou nedotčena.</string>
     <string name="osmand_cloud_deleted_account_descr">Účet a všechna data byla z OsmAnd Cloud odstraněna.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Opravdu chcete smazat účet OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Smazat účet OsmAnd Cloud?
 \n
 \nTuto akci nelze vzít zpět.</string>
     <string name="verify_account_deletion_descr">Před smazáním vašeho účtu jej musíme ověřit.
@@ -5312,7 +5312,7 @@
     <string name="shared_string_ear_lobe">Ušní lalok</string>
     <string name="shared_string_foot">Noha</string>
     <string name="poi_categories">Kategorie bodů zájmu</string>
-    <string name="nav_profile_confirm_delete">Opravdu chcete smazat \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Smazat \"%1$s\"?</string>
     <string name="number_of_tracks">%1$s stop</string>
     <string name="search_track_by_name">Hledat stopu podle názvu</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Sekundární zařízení budou odpojena od OsmAnd Cloud a ztratí přístup k placeným funkcím.</string>
@@ -5348,21 +5348,27 @@
     <string name="help_article_map_map_context_menu_name">Kontextová nabídka mapy</string>
     <string name="help_article_map_point_layers_on_map_name">Body na mapě</string>
     <string name="help_article_map_legend_nautical_map_name">Styl námořní mapy</string>
-    <string name="release_4_6">• Přidán widget \"Glide Ratio\"
+    <string name="release_4_6">• Android Auto: Přidán 3D režim
 \n
-\n• Přidány filtry a chytré složky pro stopy
+\n• Stopy: Přidány filtry a chytré složky, paměť optimalizována pro velké soubory
 \n
-\n• Přidány řádky pro horní a dolní panely widgetů s podporou všech widgetů
+\n• Vylepšený horní a dolní panel nástrojů
 \n
-\n• Přidána podpora pro widget teploty ANT+
+\n• Vylepšená správa lokálních zdrojů
 \n
-\n• Vylepšená správa paměti pro velké stopy GPX
+\n• Nastavitelné funkce tlačítek v externích ovladačích
 \n
-\n• Aktualizovaná správa místních zdrojů v sekci Stažené soubory
+\n• Nové nástroje \"Klouzavý poměr\" a \"Pozice slunce\"
 \n
-\n• Přidán widget \"Dostupná paměť RAM\"
+\n• OsmAnd Cloud: Nově přístupné smazané soubory
+\n
+\n• Vylepšené obarvení stop novým symetrickým gradientem v režimu Svahy
 \n
 \n• Opraveny problémy s průhledným stavovým řádkem
+\n
+\n• Přidána podpora pro nástroj teploty ANT+
+\n
+\n• Přidán nástroj \"Dostupná paměť RAM\"
 \n
 \n</string>
     <string name="app_mode_baby_transport">Přeprava dětí</string>
@@ -5432,13 +5438,13 @@
     <string name="help_article_search_search_all_name">Vyhledat vše</string>
     <string name="help_article_personal_storage_name">Úložiště</string>
     <string name="sort_country_name_descending">Název země: Z – A</string>
-    <string name="delete_map_description">Opravdu chcete odstranit mapu %1$s\?</string>
+    <string name="delete_map_description">Odstranit mapu %1$s?</string>
     <string name="maps_and_resources">Mapy a zdroje</string>
     <string name="help_article_navigation_routing_osmand_routing_name">O OsmAnd navigaci</string>
     <string name="empty_smart_folder_title">Žádná odpovídající trasa</string>
     <string name="smart_folder_name_present">Taková chytrá složka již existuje</string>
     <string name="help_article_search_search_coordinates_name">Hledat souřadnice</string>
-    <string name="empty_smart_folder_description">Zde se automaticky zobrazí všechny odpovídající trasy</string>
+    <string name="empty_smart_folder_description">Odpovídající trasy se zobrazí zde</string>
     <string name="configure_filter">Nastavit filtr</string>
     <string name="smart_folder_saved">Chytrá složka uložena</string>
     <string name="no_config_smart_folder_title">Není nastaveno</string>
@@ -5450,7 +5456,7 @@
     <string name="shared_string_show_icon">Zobrazit ikonu</string>
     <string name="shared_string_loading">Načítání</string>
     <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\".</string>
-    <string name="discard_filter_changes_prompt">Opravdu chcete resetovat všechny filtry\?</string>
+    <string name="discard_filter_changes_prompt">Resetovat všechny filtry?</string>
     <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
     <string name="loading_tracks">Znovu načítání tras</string>
     <string name="searching_matching_tracks">Vyhledat všechny odpovídající trasy</string>
@@ -5460,7 +5466,7 @@
     <string name="use_v1_auto_zoom">Krokové automatické přiblížení (stará verze)</string>
     <string name="zoom_animated">Plynulé přiblížení</string>
     <string name="zoom_non_animated">Neanimované přiblížení</string>
-    <string name="button_already_assigned_to_this_action">Toto tlačítko je již k této akci přiřazené.</string>
+    <string name="button_already_assigned_to_this_action">Tlačítko je již k této akci přiřazené.</string>
     <string name="rendering_attr_showToll_description">Zobrazit mýtná omezení na cestách</string>
     <string name="rendering_attr_showToll_name">Zobrazit mýtná omezení</string>
     <string name="tripltek_promo">Tripltek promo na %1$s měsíců</string>
@@ -5474,7 +5480,7 @@
     <string name="key_event_action_open_wunderlinq_datagrid">Otevřít datovou tabulku WunderLINQ</string>
     <string name="topography_maps">Topografické mapy</string>
     <string name="clear_key_assignment">Vymazat přiřazení klávesy</string>
-    <string name="clear_key_assignment_desc">Přiřazení klávesy ke zvolené akci bude odstraněno a nastaveno na Žádné.</string>
+    <string name="clear_key_assignment_desc">Přiřazení klávesy ke zvolené akci bude odstraněno a nastaveno na \"Žádné\".</string>
     <string name="key_event_category_map_interactions">Interakce s mapou</string>
     <string name="shared_string_next_event">Následující událost</string>
     <string name="change_button">Změnit tlačítko</string>
@@ -5483,7 +5489,7 @@
     <string name="shared_string_reassign">Znovu přiřadit</string>
     <string name="target_elevation">Nadmořská výška cíle</string>
     <string name="shared_string_eta">Odhadovaný čas příjezdu</string>
-    <string name="discard_changes_prompt">Opravdu chcete zrušit změny?</string>
+    <string name="discard_changes_prompt">Zrušit změny?</string>
     <string name="reset_key_assignments_desc">Přiřazení všech kláves pro vybraný typ bude odstraněno.</string>
     <string name="reset_key_assignments">Odstranit přiřazení kláves</string>
     <string name="precise_distance_numbers">Přesné hodnoty vzdálenosti</string>
@@ -5500,6 +5506,98 @@
     <string name="shared_string_rows">Řádky</string>
     <string name="complex_widget_alert">Nástroj %1$s může být umístěný pouze na samostatném řádku.</string>
     <string name="shared_string_road_maps">Silniční mapy</string>
-    <string name="map_widget_sun_position_desc">Tento nástroj zobrazuje čas do východu nebo západu slunce, podle aktuálního času.</string>
+    <string name="map_widget_sun_position_desc">Zobrazuje čas do východu nebo západu slunce.</string>
     <string name="key_is_already_assigned_error">Klávesa \"%1$s\" je již přiřazená k akci: \"%2$s\"</string>
+    <string name="key_event_action_zoom_out">Oddálit</string>
+    <string name="enable_to_use_external_input_device">Zapněte pro možnost použití externího vstupního zařízení s OsmAnd</string>
+    <string name="delete_all_items">Smazat všechny položky</string>
+    <string name="shared_string_delete_immediately">Odstranit okamžitě</string>
+    <string name="restore_from_trash">Obnovit z koše</string>
+    <string name="shared_string_show_less">Zobrazit méně</string>
+    <string name="key_event_action_activity_back_pressed">Stisknutý návrat z aktivity</string>
+    <string name="key_event_action_move_left">Posunout doleva</string>
+    <string name="help_article_search_search_poi_name">Hledat body zájmu</string>
+    <string name="open_issue_on_github">Otevřít hlášení na GitHubu</string>
+    <string name="help_article_troubleshooting_general_name">Všeobecné</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Záznam stop</string>
+    <string name="key_event_action_move_up">Posunout nahoru</string>
+    <string name="key_event_action_previous_app_profile">Předchozí profil aplikace</string>
+    <string name="key_event_action_change_map_orientation">Změnit orientaci mapy</string>
+    <string name="trash_is_empty_banner_desc">Soubory odstraněné z OsmAnd Cloud zde budou k dispozici ještě %1$s dní poté.</string>
+    <string name="all_folders">Všechny složky</string>
+    <string name="wheel_circumference">Obvod kola</string>
+    <string name="external_sensor_name_property_description">Název snímače</string>
+    <string name="copy_build_version">Kopírovat verzi sestavení</string>
+    <string name="shared_string_checked">Zvoleno</string>
+    <string name="key_event_action_zoom_in">Přiblížit</string>
+    <string name="key_event_action_next_app_profile">Následující profil aplikace</string>
+    <string name="key_event_action_open_search_view">Otevřít vyhledávání</string>
+    <string name="key_event_action_open_navigation_view">Otevřít navigaci</string>
+    <string name="shared_string_empty_trash">Vyprázdnit koš</string>
+    <string name="trash_alert_card_desc">Položky v koši budou odstraněny po %1$s dnech.</string>
+    <string name="cloud_trash_clear_confirmation">Natrvalo smazat všechny položky z koše?</string>
+    <string name="about_osmand">O aplikaci OsmAnd</string>
+    <string name="report_an_issues">Nahlásit problém</string>
+    <string name="key_event_action_move_to_my_location">Přesunout na moji polohu</string>
+    <string name="remove_type_q">Odstranit typ \"%1$s\"?</string>
+    <string name="shared_string_not_checked">Nezvoleno</string>
+    <string name="cloud_item_restored">%1$s je obnoveno do cloudu.</string>
+    <string name="shared_string_delete_item">Smazat položku</string>
+    <string name="trash_is_empty">Koš je prázdný</string>
+    <string name="help_article_widgets_map_buttons_name">Mapová tlačítka</string>
+    <string name="send_crash_log_descr">Obsahuje pouze informace o pádech aplikace</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d stopa)</item>
+        <item quantity="few">%1$d (%2$d stopy)</item>
+        <item quantity="other">%1$d (%2$d stop)</item>
+    </plurals>
+    <string name="user_guide">Uživatelská příručka</string>
+    <string name="key_event_action_move_right">Posunout doprava</string>
+    <string name="delete_trash_item_confirmation_desc">Smazat \"%1$s\" natrvalo?</string>
+    <string name="shared_string_trash">Koš</string>
+    <string name="help_article_start_with_main_menu_name">Hlavní menu</string>
+    <string name="help_article_start_with_name">Začínáme s OsmAnd</string>
+    <string name="help_article_start_with_first_steps_name">První kroky</string>
+    <string name="most_viewed">Nejčastěji prohlížené</string>
+    <string name="help_article_troubleshooting_crash_logs_name">Záznamy o pádech aplikace</string>
+    <string name="help_article_widgets_info_widgets_name">Informační nástroje</string>
+    <string name="help_article_widgets_markers_name">Nástroje pro značky</string>
+    <string name="help_article_widgets_nav_widgets_name">Navigační nástroje</string>
+    <string name="help_article_widgets_radius_ruler_name">Kruhové pravítko a pravítko</string>
+    <string name="key_event_action_emit_navigation_hint">Vydat navigační pokyn</string>
+    <string name="telegram_chats">Telegram chaty</string>
+    <string name="github_discussion">Diskuse na GitHubu</string>
+    <string name="free_versions_descr">Stáhnout a nainstalovat bezplatnou verzi OsmAnd</string>
+    <string name="free_versions">Bezplatné verze</string>
+    <string name="contact_us">Kontaktujte nás</string>
+    <string name="lang_zh_hans">Zjednodušená čínština</string>
+    <string name="lang_zh_hant">Tradiční čínština</string>
+    <string name="dont_ask_anymore">Příště se neptat</string>
+    <string name="battery_optimization_settings">Nastavení optimalizace baterie</string>
+    <string name="battery_optimization_desc">Optimalizace baterie v Androidu může zapříčinit mezery a nepřesnosti v zaznamenaných trasách.
+\n
+\nPokud máte tyto problémy, můžete zkusit změnit využití baterie na \'Neomezeno.\'</string>
+    <string name="battery_optimization">Optimalizace baterie</string>
+    <string name="shared_string_extensions">Rozšíření</string>
+    <string name="shared_string_license">Licence</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Všechny stopy</string>
+    <string name="key_event_action_move_down">Posunout dolů</string>
+    <string name="add_new_type">Přidat nový typ</string>
+    <string name="key_bindings">Přiřazení kláves</string>
+    <string name="external_input_device_title">Externí vstupní zařízení</string>
+    <string name="not_specified">Nespecifikováno</string>
+    <string name="shared_string_is_deleted">%1$s je smazáno.</string>
+    <string name="root_folder">Kořenová složka</string>
+    <string name="folder">Složka</string>
+    <string name="help_article_troubleshooting_maps_data_name">Mapy a data</string>
+    <string name="help_article_widgets_name">Mapové nástroje</string>
+    <string name="shared_string_setup">Nastavení</string>
+    <string name="telegram_chats_descr">Přidejte se k jedné z našich lokálních skupin na Telegramu.</string>
+    <string name="open_issue_on_github_descr">Položte otázku, navrhněte funkci</string>
+    <string name="send_logcat_log_descr">Soubor s podrobným záznamem</string>
+    <string name="battery_optimization_banner_content">Optimalizace baterie v Androidu může zapříčinit mezery a nepřesnosti v zaznamenaných trasách.</string>
+    <string name="shared_string_link">Odkaz</string>
+    <string name="shared_string_copyright">Autorská práva</string>
+    <string name="shared_string_author">Autor</string>
 </resources>

@@ -46,6 +46,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
 import static net.osmand.plus.views.layers.geometry.RouteGeometryWay.MIN_COLOR_SQUARE_DISTANCE;
 import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
 import static net.osmand.render.RenderingRuleStorageProperties.TAG;
@@ -363,7 +364,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 		SharedPreferences preferences = (SharedPreferences) view.getSettings().getProfilePreferences(getAppMode());
 		for (RenderingRuleProperty property : renderer.PROPS.getCustomRules()) {
-			String preferenceKey = "nrenderer_" + property.getAttrName();
+			String preferenceKey = RENDERER_PREFERENCE_PREFIX + property.getAttrName();
 			if (property.isString()) {
 				request.setStringFilter(property, preferences.getString(preferenceKey, null));
 			} else if (property.isBoolean()) {

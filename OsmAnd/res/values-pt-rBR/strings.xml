@@ -4698,7 +4698,7 @@
     <string name="shared_string_only_missing">Faltando apenas</string>
     <string name="download_tiles">Baixar mosaicos</string>
     <string name="auto_25_chars_route_roundabout_kr">Pegue a saída %1$d e mantenha-se à direita</string>
-    <string name="favorite_confirm_delete_group">Tem certeza que deseja excluir o grupo \"%1$s\" e todos os pontos incluídos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Tem certeza que deseja excluir o grupo \"%1$s\" e todos os pontos incluídos (%2$d)?</string>
     <string name="av_notes_photo_widget_desc">Tocar no widget permite tirar uma foto.</string>
     <string name="av_notes_video_widget_desc">Tocar no widget permite gravar um vídeo.</string>
     <string name="trip_recording_downhill_widget_desc">Mostra a soma de todos os descendentes da viagem atualmente gravada.</string>
@@ -5174,7 +5174,7 @@
     <string name="search_track_by_name">Pesquisar trilha por nome</string>
     <string name="no_search_results">SME resultados</string>
     <string name="file_already_exists">O arquivo já existe</string>
-    <string name="nav_profile_confirm_delete">Tem certeza de que deseja excluir \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Tem certeza de que deseja excluir \"%1$s\"?</string>
     <string name="map_2d_mode_action">Modo 2D</string>
     <string name="map_3d_mode_hint">Toque longo no botão permite alterar a posição do botão.</string>
     <string name="rendering_value_sector1_name">Setor 1</string>
@@ -5289,7 +5289,7 @@
 \n</string>
     <string name="osmand_cloud_deletion_all_data_warning">Todos os dados do OsmAnd Cloud serão %1$s. Os dados no aparelho permanecem intocados.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Isto não cancelará a sua assinatura do OsmAnd Pro.</string>
-    <string name="delete_account_warning">Tem certeza que pretende excluir a conta %1$s\?</string>
+    <string name="delete_account_warning">Tem certeza que pretende excluir a conta %1$s?</string>
     <string name="free_account">Conta gratuita</string>
     <string name="folder_export_empty_error">Nada para exportar, a pasta está vazia</string>
     <string name="osmand_cloud_deleted_account_descr">A conta e todos os dados foram excluídos do OsmAnd Cloud.</string>
@@ -5310,7 +5310,7 @@
     <string name="osmand_cloud_deleting_account_descr">Em poucos instantes, todos os seus dados e a sua conta serão excluídos do OsmAnd Cloud.
 \n
 \nTodos os dados no aparelho permanecem intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Tem certeza de que deseja excluir a conta no OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Tem certeza de que deseja excluir a conta no OsmAnd Cloud?
 \n
 \nEsta ação não pode ser desfeita.</string>
     <string name="delete_account">Excluir conta</string>
@@ -5436,7 +5436,7 @@
     <string name="help_article_search_search_all_name">Pesquisar tudo</string>
     <string name="help_article_troubleshooting_crash_logs_name">Registros de falhas</string>
     <string name="sort_country_name_descending">Nome do país: Z – A</string>
-    <string name="delete_map_description">Tem certeza de que deseja excluir o mapa %1$s\?</string>
+    <string name="delete_map_description">Tem certeza de que deseja excluir o mapa %1$s?</string>
     <string name="help_article_map_legend_ski_map_name">Estilo de mapa de esqui</string>
     <string name="maps_and_resources">Mapas e recursos</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Sobre o roteamento do OsmAnd</string>
@@ -5461,7 +5461,7 @@
     <string name="live_monitoring_adress_descr">Especifique o endereço da web com a sintaxe do parâmetro lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="discard_filter_changes">Descartar alterações de filtro</string>
     <string name="shared_string_loading">Carregando</string>
-    <string name="discard_filter_changes_prompt">Tem certeza de que deseja redefinir todos os filtros\?</string>
+    <string name="discard_filter_changes_prompt">Tem certeza de que deseja redefinir todos os filtros?</string>
     <string name="no_config_smart_folder_description">Pastas inteligentes permitem agrupar trilhas por filtros aplicados</string>
     <string name="loading_tracks">Carregando trilhas</string>
     <string name="searching_matching_tracks">Pesquisar todas as faixas correspondentes</string>
@@ -5580,4 +5580,10 @@
     <string name="map_widget_sun_position_desc">Este widget mostra a hora até o nascer ou pôr do sol, dependendo da hora atual.</string>
     <string name="shared_string_all_tracks">Todas as trilhas</string>
     <string name="shared_string_road_maps">Mapas de rodovias</string>
+    <string name="shared_string_license">Licença</string>
+    <string name="shared_string_link">Link</string>
+    <string name="shared_string_copyright">Direitos do autor</string>
+    <string name="shared_string_extensions">Extensões</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
 </resources>

@@ -4886,7 +4886,7 @@
     <string name="shared_string_switch_mode">Schimbă modul</string>
     <string name="click_on_widget">Atingeți widgetul</string>
     <string name="shared_string_shows">Arată</string>
-    <string name="favorite_confirm_delete_group">Sunteți sigur că doriți să ștergeți grupul \"%1$s\" și toate punctele incluse (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Sunteți sigur că doriți să ștergeți grupul \"%1$s\" și toate punctele incluse (%2$d)?</string>
     <string name="how_to_use">Cum se utilizează:</string>
     <string name="distance_by_tap_use_description">Atingeți harta pentru a vizualiza distanța dintre locația dumneavoastră curentă și punctul atins.
 \nAtingeți cu 2 degete pentru a vizualiza distanța dintre punctele atinse</string>
@@ -5191,7 +5191,7 @@
     <string name="poi_categories">Categorii de puncte de interes</string>
     <string name="camera_app">Aplicație de cameră</string>
     <string name="file_already_exists">Fișierul există deja</string>
-    <string name="nav_profile_confirm_delete">Sunteți sigur că doriți să ștergeți \"%1$s\"\?</string>
+    <string name="nav_profile_confirm_delete">Sunteți sigur că doriți să ștergeți \"%1$s\"?</string>
     <string name="external_device_connected">Conectat</string>
     <string name="external_device_menu_forget">Uită</string>
     <string name="ant_plus_searching">Se caută</string>
@@ -5236,7 +5236,7 @@
     <string name="osmand_cloud_deleting_account_descr">Toate datele și contul dumneavoastră vor fi șterse din OsmAnd Cloud în câteva momente.
 \n
 \nToate datele de pe dispozitiv rămân neatinse.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Sunteți sigur că doriți să ștergeți contul OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Sunteți sigur că doriți să ștergeți contul OsmAnd Cloud?
 \n
 \nAceastă acțiune nu poate fi anulată.</string>
     <string name="osmand_cloud_delete_account_confirmation">Ștergeți contul\?</string>
@@ -5245,7 +5245,7 @@
     <string name="osmand_cloud_deletion_account_warning">Contul dumneavoastră și toate detaliile contului vor fi %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Toate datele din OsmAnd Cloud vor fi %1$s. Datele de pe dispozitiv rămân neatinse.</string>
     <string name="manage_subscriptions">Gestionare abonamente.</string>
-    <string name="delete_account_warning">Sunteți sigur că doriți să ștergeți contul %1$s\?</string>
+    <string name="delete_account_warning">Sunteți sigur că doriți să ștergeți contul %1$s?</string>
     <string name="shared_string_deleting">Se șterge</string>
     <string name="deleting_complete">Ștergere completă</string>
     <string name="delete_account">Șterge contul</string>
@@ -5478,7 +5478,7 @@
     <string name="widget_available_ram">RAM disponibil</string>
     <string name="terrain_maps">Hărți de teren</string>
     <string name="sort_country_name_descending">Nume țară: Z – A</string>
-    <string name="delete_map_description">Sunteți sigur că vreți să ștergeți harta %1$s\?</string>
+    <string name="delete_map_description">Sunteți sigur că vreți să ștergeți harta %1$s?</string>
     <string name="maps_and_resources">Hărți și resurse</string>
     <string name="shared_string_show_icon">Arată icon</string>
     <string name="smart_folder_name_present">Există deja un asemenea folder inteligent</string>
@@ -5494,7 +5494,7 @@
     <string name="no_config_smart_folder_title">Neconfigurat</string>
     <string name="discard_filter_changes">Renunță la modificările filtrelor</string>
     <string name="shared_string_loading">Se încarcă</string>
-    <string name="discard_filter_changes_prompt">Sigur doriți să resetați toate filtrele\?</string>
+    <string name="discard_filter_changes_prompt">Sigur doriți să resetați toate filtrele?</string>
     <string name="no_config_smart_folder_description">Folderele inteligente vă permit să grupați trasee în funcție de filtrele aplicate</string>
     <string name="loading_tracks">Se reîncarcă traseele</string>
     <string name="searching_matching_tracks">Caută toate traseele ce se potrivesc</string>
@@ -5531,7 +5531,7 @@
     <string name="key_event_action_open_search_view">Deschide fereastra de căutare</string>
     <string name="key_event_action_open_navigation_view">Deschide fereastra de navigație</string>
     <string name="key_event_action_move_to_my_location">Mută la \"Locația mea\"</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" va fi șters definitiv. Sunteți sigur\?
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" va fi șters definitiv. Sunteți sigur?
 \n
 \nAceastă acțiune nu poate fi anulată.</string>
     <string name="shared_string_is_deleted">%1$s este șters.</string>
@@ -5540,7 +5540,7 @@
     <string name="key_bindings">Asignări de taste</string>
     <string name="not_specified">Nespecificat</string>
     <string name="shared_string_delete_item">Șterge elementul</string>
-    <string name="cloud_trash_clear_confirmation">Sunteți sigur că doriți să ștergeți definitiv toate elementele din Coșul de gunoi\? Această acțiune nu poate fi anulată.</string>
+    <string name="cloud_trash_clear_confirmation">Sunteți sigur că doriți să ștergeți definitiv toate elementele din Coșul de gunoi? Această acțiune nu poate fi anulată.</string>
     <string name="restore_from_trash">Restaurare din coșul de gunoi</string>
     <string name="delete_all_items">Șterge toate elementele</string>
     <string name="trash_is_empty_banner_desc">Fișierele eliminate din OsmAnd Cloud vor fi disponibile aici timp de %1$s zile.</string>
@@ -5555,7 +5555,7 @@
     <string name="folder">Folder</string>
     <string name="change_button">Comută butonul</string>
     <string name="enable_to_use_external_input_device">Activați utilizarea dispozitivului de intrare extern cu OsmAnd</string>
-    <string name="remove_type_q">Sunteți sigur că doriți să eliminați tipul \"%1$s\"\?</string>
+    <string name="remove_type_q">Sunteți sigur că doriți să eliminați tipul \"%1$s\"?</string>
     <string name="add_new_type">Adăugă tip nou</string>
     <string name="reset_key_assignments_desc">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
     <string name="rendering_attr_showToll_name">Arată restricțiile de taxare</string>

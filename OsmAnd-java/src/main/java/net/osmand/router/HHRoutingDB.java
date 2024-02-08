@@ -14,6 +14,7 @@ import java.util.List;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
 import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
@@ -58,7 +59,8 @@ public class HHRoutingDB {
 		compactDB = checkColumnExist(st, "ins", "segments");
 		st.execute("CREATE TABLE IF NOT EXISTS profiles(profile, id, params)");
 		if (!compactDB) {
-			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, clusterId, fileDbId, dualIdPoint, dualClusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31, PRIMARY KEY(idPoint))");
+			st.execute("CREATE TABLE IF NOT EXISTS points(idPoint, pointGeoUniDir, pointGeoId, clusterId, fileDbId, dualIdPoint, dualClusterId, "
+					+ "chInd, roadId, start, end, sx31, sy31, ex31, ey31, tagValues, PRIMARY KEY(idPoint))");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS pointsUnique on points(pointGeoId)");
 			st.execute("CREATE TABLE IF NOT EXISTS segments(idPoint, idConnPoint, dist, shortcut, profile)");
 			st.execute("CREATE UNIQUE INDEX IF NOT EXISTS segmentsUnique on segments(idPoint, idConnPoint, profile)");
@@ -77,7 +79,7 @@ public class HHRoutingDB {
 		}
 		ResultSet rs = st.executeQuery("SELECT profile, id, params from profiles");
 		while (rs.next()) {
-			routingProfile = rs.getString(1);
+			routingProfile = rs.getString(1); // only 1 profile supported for now
 			routingProfiles.put(rs.getInt(2), rs.getString(3));
 		}
 		st.close();
@@ -123,7 +125,8 @@ public class HHRoutingDB {
 	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> loadNetworkPoints(short mapId, Class<T> cl) throws SQLException {
 		Statement st = conn.createStatement();
-		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31 from points");
+		ResultSet rs = st.executeQuery("SELECT dualIdPoint, idPoint, clusterId, chInd, roadId, start, end, sx31, sy31, ex31, ey31, tagValues "
+				+ " from points");
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
 		while (rs.next()) {
 			T pnt;
@@ -152,6 +155,22 @@ public class HHRoutingDB {
 			pnt.startY = rs.getInt(p++);
 			pnt.endX = rs.getInt(p++);
 			pnt.endY = rs.getInt(p++);
+			String tagValues = null;
+			if (compactDB) {
+				byte[] bytes = rs.getBytes(p++);
+				if (bytes != null) {
+					tagValues = Algorithms.gzipToString(bytes);
+				}
+			} else {
+				tagValues = rs.getString(p++);
+			}
+			String[] arr = Algorithms.deserializeStringArray(tagValues);
+			if (arr != null && arr.length > 0) {
+				pnt.tagValues = new ArrayList<>();
+				for (int i = 0; i < arr.length; i += 2) {
+					pnt.tagValues.add(new TagValuePair(arr[i], arr[i + 1], -1));
+				}
+			}
 			mp.put(pnt.index, pnt);
 			if (mp.contains(dualIdPoint)) {
 				pnt.dualPoint = mp.get(dualIdPoint);
@@ -184,6 +203,20 @@ public class HHRoutingDB {
 			byte[] outs = rs.getBytes(3);
 			res[1] = outs;
 		}
+		rs.close();
+	}
+	
+	public synchronized void loadSegmentPointInternalSync(int id, int profile, byte[][] res) throws SQLException {
+		loadSegmentStart.setInt(1, id);
+		loadSegmentStart.setInt(2, profile);
+		ResultSet rs = loadSegmentStart.executeQuery();
+		if (rs.next()) {
+			byte[] ins = rs.getBytes(2);
+			res[0] = ins;
+			byte[] outs = rs.getBytes(3);
+			res[1] = outs;
+		}
+		rs.close();
 	}
 	
 	

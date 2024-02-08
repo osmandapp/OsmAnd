@@ -428,7 +428,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
-			view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
+			view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom());
 			if (planRouteContext.isMarkersListOpened()) {
 				planRouteContext.setAdjustMapOnStart(false);
 				showHideMarkersList();

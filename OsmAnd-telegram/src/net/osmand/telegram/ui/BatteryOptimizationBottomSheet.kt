@@ -24,14 +24,14 @@ class BatteryOptimizationBottomSheet : DialogFragment() {
 
 	private val log = PlatformUtil.getLog(BatteryOptimizationBottomSheet::class.java)
 
-	override fun onCreateDialog(savedInstanceState: Bundle?) = BottomSheetDialog(context!!)
+	override fun onCreateDialog(savedInstanceState: Bundle?) = BottomSheetDialog(requireContext())
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		val mainView = inflater.inflate(R.layout.bottom_sheet_battery_optimization, container, false)
 
 		mainView.findViewById<View>(R.id.scroll_view_container).setOnClickListener { dismiss() }
 
-		BottomSheetBehavior.from(mainView.findViewById<View>(R.id.scroll_view))
+		BottomSheetBehavior.from(mainView.findViewById(R.id.scroll_view))
 			.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 
 				override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -52,14 +52,9 @@ class BatteryOptimizationBottomSheet : DialogFragment() {
 			setText(R.string.go_to_settings)
 			setOnClickListener {
 				if (Build.VERSION.SDK_INT >= 26) {
-					val pkg = app.packageName
 					val pm = app.getSystemService(PowerManager::class.java)
 					if (pm != null) {
-						val intent = if (!pm.isIgnoringBatteryOptimizations(pkg)) {
-							Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).setData(Uri.parse("package:$pkg"))
-						} else {
-							Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-						}
+						val intent = Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
 						if (intent.resolveActivity(app.packageManager) != null) {
 							startActivity(intent)
 						} else {

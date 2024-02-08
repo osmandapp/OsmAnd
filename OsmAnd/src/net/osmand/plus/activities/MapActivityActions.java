@@ -87,8 +87,6 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
-import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
@@ -554,11 +552,7 @@ public class MapActivityActions extends MapActions {
 					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.logEvent("trip_recording_open");
 						MapActivity.clearPrevActivityIntent();
-						if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
-							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
-						} else {
-							TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
-						}
+						monitoringPlugin.askShowTripRecordingDialog(mapActivity);
 						return true;
 					}));
 		}

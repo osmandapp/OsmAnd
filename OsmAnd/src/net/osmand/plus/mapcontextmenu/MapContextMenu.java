@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.OnResultCallback;
 import net.osmand.StateChangedListener;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
@@ -1470,12 +1471,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return menuController != null && menuController.displayDistanceDirection();
 	}
 
-	public CharSequence getFormattedAltitude() {
+	public void getFormattedAltitude(@NonNull OnResultCallback<String> callback) {
 		MenuController menuController = getMenuController();
 		if (menuController != null) {
-			return menuController.getFormattedAltitude();
+			menuController.getFormattedAltitude(callback);
+		} else {
+			callback.onResult(null);
 		}
-		return "";
 	}
 
 	public CharSequence getSubtypeStr() {

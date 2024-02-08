@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Not translatable -->
+	<string name="google_play_services">Google Play Services</string>
+	<string name="android_api">Android API</string>
+</resources>

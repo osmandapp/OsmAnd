@@ -11,6 +11,7 @@ android {
 		targetSdkVersion 33
 		multiDexEnabled true
 		vectorDrawables.useSupportLibrary = true
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 	}
 
 	lintOptions {
@@ -45,7 +46,11 @@ android {
 			res.srcDirs = ["res"]
 			assets.srcDirs = ["assets"]
 		}
-
+		androidTest {
+			java.srcDirs = ["test/java"]
+			res.srcDirs = ["test/res"]
+			assets.srcDirs = ["test/assets"]
+		}
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
 		}
@@ -241,33 +246,12 @@ task copyLargePOIIcons(type: Sync) {
 	}
 }
 
-task copyWidgetIconsXhdpi(type: Sync) {
-	from "res/drawable-xxhdpi/"
-	into "res/drawable-large-xhdpi/"
-	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	preserve {
-		include '*'
-		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	}
-}
-
-task copyWidgetIconsHdpi(type: Sync) {
-	from "res/drawable-xhdpi/"
-	into "res/drawable-large-hdpi/"
-	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	preserve {
-		include '*'
-		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	}
-}
-
-task copyWidgetIcons(type: Sync) {
-	from "res/drawable-hdpi/"
-	into "res/drawable-large/"
-	include "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
-	preserve {
-		include '*'
-		exclude "**/widget_*.png",  "**/widget_*.xml",  "**/map_*.xml", "**/map_*.png"
+task collectTestResources(type: Copy) {
+	into "test/assets/"
+	from("../../resources/test-resources/ui/") {
+		include "*"
+		include "/search/*"
+		include "/routing/*"
 	}
 }
 
@@ -280,15 +264,13 @@ task collectExternalResources {
 			copyMapPOIIcons,
 			copyLargePOIIcons,
 			validateTranslate,
-			copyWidgetIcons,
-			copyWidgetIconsHdpi,
-			copyWidgetIconsXhdpi,
 			copyProjDb,
 			copyWeatherFiles,
 			copyHeightmapFiles,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
-			downloadDefaultWikivoyage
+			downloadDefaultWikivoyage,
+			collectTestResources
 }
 
 // Legacy core build
@@ -366,7 +348,7 @@ dependencies {
 	implementation 'org.immutables:gson:2.5.0'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
 	implementation 'com.google.openlocationcode:openlocationcode:1.0.4'
-	implementation 'com.android.billingclient:billing:5.0.0'
+	implementation 'com.android.billingclient:billing:6.1.0'
 	// turn off for now
 	//implementation 'com.atilika.kuromoji:kuromoji-ipadic:0.9.0'
 	implementation 'com.squareup.picasso:picasso:2.71828'
@@ -401,4 +383,15 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.2.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+	//implementation "androidx.tracing:tracing:1.1.0"
+	//debugImplementation 'androidx.test:monitor:1.6.1'
+	androidTestImplementation "androidx.test:runner:1.5.2"
+	androidTestImplementation "androidx.test:rules:1.5.0"
+	androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+	//debugImplementation("androidx.test:core:1.5.0")
+	androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+	androidTestImplementation ('androidx.test.espresso:espresso-contrib:3.5.1') {
+		exclude module: "protobuf-lite"
+	}
 }

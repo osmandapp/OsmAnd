@@ -2139,7 +2139,7 @@
     <string name="poi_categories">Categorias de PI</string>
     <string name="is_imported">%1$s es estat importat.</string>
     <string name="file_already_exists_description">Se tròba ja un fichier nomat \"%1$s\". De remplaçar esquicharà lo fichier corrent e totei lei modificacions.</string>
-    <string name="nav_profile_confirm_delete">Siatz ben segur de vouguer eliminar \"%1$s\" \?</string>
+    <string name="nav_profile_confirm_delete">Siatz ben segur de vouguer eliminar \"%1$s\" ?</string>
     <string name="external_device_connected">Connectat</string>
     <string name="external_device_characteristic_battery_level">Batariá</string>
     <string name="external_device_characteristic_gear_ratio">Demultiplicacion</string>

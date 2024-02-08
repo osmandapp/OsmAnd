@@ -685,15 +685,19 @@ public class RouteProvider {
 			int endIndex = segment.getStartPointIndex() + step;
 
 			for (int index = startIndex; index != endIndex && checkedDistance < searchDistance; index += step) {
-				LatLon routePoint = segment.getPoint(index);
-				double distance = MapUtils.getDistance(routePoint, startLocation.getLatitude(), startLocation.getLongitude());
+				LatLon prevRoutePoint = segment.getPoint(index);
+				LatLon nextRoutePoint = segment.getPoint(index - step);
+				double distance = MapUtils.getOrthogonalDistance(
+						startLocation.getLatitude(), startLocation.getLongitude(),
+						prevRoutePoint.getLatitude(), prevRoutePoint.getLongitude(),
+						nextRoutePoint.getLatitude(), nextRoutePoint.getLongitude());
 
 				if (distance < Math.min(minDistance, MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT)) {
 					minDistance = (float) distance;
 					nearestSegmentIndex = segmentIndex;
 				}
 
-				checkedDistance += MapUtils.getDistance(routePoint, segment.getPoint(index - step));
+				checkedDistance += MapUtils.getDistance(prevRoutePoint, nextRoutePoint);
 			}
 		}
 
@@ -710,15 +714,19 @@ public class RouteProvider {
 		float minDistance = Float.POSITIVE_INFINITY;
 
 		for (int i = routeLocations.size() - 2; i >= 0 && checkedDistance < searchDistance; i--) {
-			Location routeLocation = routeLocations.get(i);
-			float distance = startLocation.distanceTo(routeLocation);
+			Location prevRoutePoint = routeLocations.get(i);
+			Location nextRoutePoint = routeLocations.get(i + 1);
+			float distance = (float) MapUtils.getOrthogonalDistance(
+					startLocation.getLatitude(), startLocation.getLongitude(),
+					prevRoutePoint.getLatitude(), prevRoutePoint.getLongitude(),
+					nextRoutePoint.getLatitude(), nextRoutePoint.getLongitude());
 
 			if (distance < Math.min(minDistance, MIN_DISTANCE_FOR_INSERTING_ROUTE_SEGMENT)) {
 				minDistance = distance;
-				newStartIndex = i;
+				newStartIndex = i + 1;
 			}
 
-			checkedDistance += routeLocation.distanceTo(routeLocations.get(i + 1));
+			checkedDistance += prevRoutePoint.distanceTo(nextRoutePoint);
 		}
 
 		return newStartIndex;
@@ -1293,6 +1301,19 @@ public class RouteProvider {
 		bpars.putString("trackFormat", "gpx");
 		bpars.putString("turnInstructionFormat", "osmand");
 		bpars.putString("acceptCompressedResult", "true");
+
+		String osmand_Profile_Name = params.mode.getUserProfileName();
+		if ( osmand_Profile_Name.indexOf("Brouter") == 0) { 
+			if ( osmand_Profile_Name .indexOf("[") != -1 && osmand_Profile_Name .indexOf("]") != -1) {
+				String  brouter_Profile_Name = osmand_Profile_Name.substring(osmand_Profile_Name .indexOf("[") + 1, osmand_Profile_Name .indexOf("]"));
+
+				// log.info (" BROUTER_PROFILE_NAME = " + brouter_Profile_Name );
+				if (brouter_Profile_Name.length() > 0) {
+					//  set the profile-name in the new parameter "profile" to transmit the profile-name to the brouter
+					bpars.putString("profile", brouter_Profile_Name );
+				}
+			}
+		}
 
 		OsmandApplication ctx = params.ctx;
 		List<Location> res = new ArrayList<Location>();

@@ -1,6 +1,7 @@
 package net.osmand.plus.track.fragments;
 
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.plus.track.helpers.GpxDisplayGroup.getTrackDisplayGroup;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.track.helpers.TrackDisplayGroup;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -125,7 +127,7 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		TextRadioItem time = createRadioButton(GpxSplitType.TIME, R.string.shared_string_time);
 		TextRadioItem distance = createRadioButton(GpxSplitType.DISTANCE, R.string.distance);
 
-		time.setEnabled(selectedGpxFile == null || selectedGpxFile.getTrackAnalysisToDisplay(app).timeSpan > 0);
+		time.setEnabled(selectedGpxFile == null || selectedGpxFile.getTrackAnalysisToDisplay(app).getTimeSpan() > 0);
 
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		radioGroup.setItems(none, time, distance);
@@ -196,13 +198,14 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		addTimeOptionSplit(3600, groups);
 	}
 
-	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> displayGroups) {
+	private void addDistanceOptionSplit(int value, @NonNull List<GpxDisplayGroup> model) {
 		double roundedDist = OsmAndFormatter.calculateRoundedDist(value, app);
 		String formattedDist = OsmAndFormatter.getFormattedDistanceInterval(app, value, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 		distanceSplitOptions.put(formattedDist, roundedDist);
 
-		if (displayGroups.size() > 0) {
-			if (Math.abs(displayGroups.get(0).getSplitDistance() - roundedDist) < 1) {
+		if (model.size() > 0) {
+			TrackDisplayGroup trackGroup = getTrackDisplayGroup(model.get(0));
+			if (trackGroup != null && Math.abs(trackGroup.getSplitDistance() - roundedDist) < 1) {
 				selectedDistanceSplitInterval = distanceSplitOptions.size() - 1;
 			}
 		}
@@ -213,7 +216,8 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		timeSplitOptions.put(time, value);
 
 		if (model.size() > 0) {
-			if (model.get(0).getSplitTime() == value) {
+			TrackDisplayGroup trackGroup = getTrackDisplayGroup(model.get(0));
+			if (trackGroup != null && trackGroup.getSplitTime() == value) {
 				selectedTimeSplitInterval = timeSplitOptions.size() - 1;
 			}
 		}

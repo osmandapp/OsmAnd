@@ -23,7 +23,7 @@ import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheetDialogFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheet;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.Map3DModeBottomSheet;
 
 public class ConfigureButtonsCard extends MapBaseCard {
@@ -60,7 +60,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		int actionsCount = app.getQuickActionRegistry().getQuickActions().size();
 
 		View button = view.findViewById(R.id.quick_actions_button);
-		button.setOnClickListener(v -> QuickActionListFragment.showInstance(getMapActivity(), false));
+		button.setOnClickListener(v -> QuickActionListFragment.showInstance(getMapActivity()));
 		setupButton(button, getString(R.string.configure_screen_quick_action), getString(R.string.ltr_or_rtl_combine_via_colon, actions, String.valueOf(actionsCount)), R.drawable.ic_quick_action, settings.QUICK_ACTION.getModeValue(appMode), nightMode);
 	}
 
@@ -71,7 +71,7 @@ public class ConfigureButtonsCard extends MapBaseCard {
 			Map3DModeBottomSheet.showInstance(fragmentManager, target, appMode);
 		});
 		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(appMode);
-		setupButton(button, getString(R.string.map_3d_mode_action), visibility.getTitle(app), visibility.iconId, true, nightMode);
+		setupButton(button, getString(R.string.map_3d_mode_action), getString(visibility.getTitleId()), visibility.iconId, true, nightMode);
 
 		AndroidUiHelper.updateVisibility(button, app.useOpenGlRenderer());
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
@@ -81,10 +81,10 @@ public class ConfigureButtonsCard extends MapBaseCard {
 		View button = view.findViewById(R.id.compass_button);
 		button.setOnClickListener(v -> {
 			FragmentManager fragmentManager = getMapActivity().getSupportFragmentManager();
-			CompassVisibilityBottomSheetDialogFragment.showInstance(fragmentManager, target, appMode);
+			CompassVisibilityBottomSheet.showInstance(fragmentManager, target, appMode);
 		});
 		CompassVisibility visibility = settings.COMPASS_VISIBILITY.getModeValue(appMode);
-		setupButton(button, getString(R.string.map_widget_compass), visibility.getTitle(app), visibility.iconId, true, nightMode);
+		setupButton(button, getString(R.string.map_widget_compass), getString(visibility.getTitleId()), visibility.iconId, true, nightMode);
 
 		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}

@@ -1,12 +1,10 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.Location;
+import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.PointI;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.NativeUtilities;
@@ -15,6 +13,9 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class AltitudeWidget extends SimpleWidget {
 
@@ -30,10 +31,13 @@ public class AltitudeWidget extends SimpleWidget {
 
 	@Override
 	protected void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
-		Double altitude = getAltitudeInMeters();
+		getAltitudeInMeters(this::updateAltitudeText);
+	}
+
+	private void updateAltitudeText(@Nullable Double altitude) {
 		if (altitude != null) {
 			int newAltitude = (int) (double) altitude;
-			if (isUpdateNeeded() || cachedAltitude != (int) newAltitude) {
+			if (isUpdateNeeded() || cachedAltitude != newAltitude) {
 				cachedAltitude = newAltitude;
 				String formattedAltitude = OsmAndFormatter.getFormattedAlt(cachedAltitude, app);
 				int index = formattedAltitude.lastIndexOf(' ');
@@ -47,28 +51,38 @@ public class AltitudeWidget extends SimpleWidget {
 			cachedAltitude = 0;
 			setText(NO_VALUE, null);
 		}
+
 	}
 
-	private Double getAltitudeInMeters() {
+	private void getAltitudeInMeters(@NonNull OnResultCallback<Double> callback) {
 		switch (widgetType) {
 			case ALTITUDE_MY_LOCATION: {
 				Location location = locationProvider.getLastKnownLocation();
 				if (location != null && location.hasAltitude()) {
-					return location.getAltitude();
+					callback.onResult(location.getLatitude());
+				} else {
+					callback.onResult(null);
 				}
 				break;
 			}
 			case ALTITUDE_MAP_CENTER: {
 				MapRendererView mapRenderer = mapView.getMapRenderer();
 				if (mapRenderer != null) {
-					RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
-					PointI screenPoint = new PointI(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-					return NativeUtilities.getAltitudeForPixelPoint(mapRenderer, screenPoint);
+					RotatedTileBox tileBox = mapView.getRotatedTileBox();
+					int centerX = tileBox.getCenterPixelX();
+					int centerY = tileBox.getCenterPixelY();
+					LatLon centerLatLon = NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tileBox, centerX, centerY);
+					NativeUtilities.getAltitudeForLatLon(mapRenderer, centerLatLon, callback);
+				} else {
+					callback.onResult(null);
 				}
 				break;
 			}
+			default: {
+				callback.onResult(null);
+				break;
+			}
 		}
-		return null;
 	}
 
 	@Override

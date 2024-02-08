@@ -3,49 +3,22 @@ package net.osmand.plus.quickaction;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.ShowHideMapillaryAction;
-import net.osmand.plus.quickaction.actions.DayNightModeAction;
-import net.osmand.plus.quickaction.actions.DisplayPositionAction;
-import net.osmand.plus.quickaction.actions.FavoriteAction;
-import net.osmand.plus.quickaction.actions.GPXAction;
-import net.osmand.plus.quickaction.actions.MapStyleAction;
-import net.osmand.plus.quickaction.actions.MarkerAction;
-import net.osmand.plus.quickaction.actions.NavAddDestinationAction;
-import net.osmand.plus.quickaction.actions.NavAddFirstIntermediateAction;
-import net.osmand.plus.quickaction.actions.NavAutoZoomMapAction;
-import net.osmand.plus.quickaction.actions.NavDirectionsFromAction;
-import net.osmand.plus.quickaction.actions.NavRemoveNextDestination;
-import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
-import net.osmand.plus.quickaction.actions.NavResumePauseAction;
-import net.osmand.plus.quickaction.actions.NavStartStopAction;
-import net.osmand.plus.quickaction.actions.NavVoiceAction;
-import net.osmand.plus.quickaction.actions.RouteAction;
-import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
-import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
-import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
-import net.osmand.plus.quickaction.actions.ShowHideTransportLinesAction;
-import net.osmand.plus.quickaction.actions.SwitchProfileAction;
+import net.osmand.plus.quickaction.actions.*;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -78,47 +51,44 @@ public class QuickActionRegistry {
 			nameRes(R.string.shared_string_open).category(QuickActionType.OPEN);
 
 
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
+	private final QuickActionSerializer serializer = new QuickActionSerializer();
+	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
 
 	private List<QuickAction> quickActions;
-	private final Gson gson;
 	private List<QuickActionType> enabledTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
 
-	public QuickActionRegistry(OsmandSettings settings) {
-		this.settings = settings;
-		gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, new QuickActionSerializer()).create();
+	public QuickActionRegistry(@NonNull OsmandApplication app) {
+		this.app = app;
+		this.settings = app.getSettings();
 		updateActionTypes();
 	}
 
-	public void addUpdatesListener(@NonNull QuickActionUpdatesListener updatesListener) {
+	public void addUpdatesListener(@NonNull QuickActionUpdatesListener listener) {
 		Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>(this.updatesListeners);
-		updatesListeners.add(updatesListener);
+		updatesListeners.add(listener);
 		this.updatesListeners = updatesListeners;
 	}
 
-	public void removeUpdatesListener(@NonNull QuickActionUpdatesListener updatesListener) {
+	public void removeUpdatesListener(@NonNull QuickActionUpdatesListener listener) {
 		Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>(this.updatesListeners);
-		updatesListeners.remove(updatesListener);
+		updatesListeners.remove(listener);
 		this.updatesListeners = updatesListeners;
 	}
 
 	private void notifyUpdates() {
-		if (!Algorithms.isEmpty(updatesListeners)) {
-			for (QuickActionUpdatesListener updateListener : updatesListeners) {
-				updateListener.onActionsUpdated();
-			}
+		for (QuickActionUpdatesListener listener : updatesListeners) {
+			listener.onActionsUpdated();
 		}
 	}
 
+	@NonNull
 	public List<QuickAction> getQuickActions() {
 		return new ArrayList<>(quickActions);
-	}
-
-	public List<QuickAction> getFilteredQuickActions() {
-		return getQuickActions();
 	}
 
 	public long getLastModifiedTime() {
@@ -129,17 +99,17 @@ public class QuickActionRegistry {
 		settings.QUICK_ACTION_LIST.setLastModifiedTime(lastModifiedTime);
 	}
 
-	public void addQuickAction(QuickAction action) {
+	public void addQuickAction(@NonNull QuickAction action) {
 		quickActions.add(action);
 		onDataChanged();
 	}
 
-	public void deleteQuickAction(QuickAction action) {
+	public void deleteQuickAction(@NonNull QuickAction action) {
 		quickActions.remove(action);
 		onDataChanged();
 	}
 
-	public void updateQuickAction(QuickAction action) {
+	public void updateQuickAction(@NonNull QuickAction action) {
 		int index = quickActions.indexOf(action);
 		if (index >= 0) {
 			quickActions.set(index, action);
@@ -173,7 +143,8 @@ public class QuickActionRegistry {
 		return null;
 	}
 
-	public QuickAction getQuickAction(OsmandApplication app, int type, String name, Map<String, String> params) {
+	@Nullable
+	public QuickAction getQuickAction(int type, String name, Map<String, String> params) {
 		for (QuickAction action : quickActions) {
 			if (action.getType() == type
 					&& (action.hasCustomName(app) && action.getName(app).equals(name) || !action.hasCustomName(app))
@@ -184,7 +155,8 @@ public class QuickActionRegistry {
 		return null;
 	}
 
-	public List<QuickAction> collectQuickActionsByType(QuickActionType type) {
+	@NonNull
+	public List<QuickAction> collectQuickActionsByType(@NonNull QuickActionType type) {
 		List<QuickAction> actions = new ArrayList<>();
 		for (QuickAction action : quickActions) {
 			if (action.getType() == type.getId()) {
@@ -194,7 +166,7 @@ public class QuickActionRegistry {
 		return actions;
 	}
 
-	public boolean isNameUnique(QuickAction action, Context context) {
+	public boolean isNameUnique(@NonNull QuickAction action, @NonNull Context context) {
 		for (QuickAction a : quickActions) {
 			if (action.id != a.id) {
 				if (action.getName(context).equals(a.getName(context))) {
@@ -205,7 +177,8 @@ public class QuickActionRegistry {
 		return true;
 	}
 
-	public QuickAction generateUniqueName(QuickAction action, Context context) {
+	@NonNull
+	public QuickAction generateUniqueName(@NonNull QuickAction action, @NonNull Context context) {
 		int number = 0;
 		String name = action.getName(context);
 		while (true) {
@@ -247,7 +220,7 @@ public class QuickActionRegistry {
 		return resQuickActions;
 	}
 
-	public List<QuickActionType> updateActionTypes() {
+	public void updateActionTypes() {
 		List<QuickActionType> allTypes = new ArrayList<>();
 		allTypes.add(FavoriteAction.TYPE);
 		allTypes.add(GPXAction.TYPE);
@@ -287,11 +260,14 @@ public class QuickActionRegistry {
 		this.enabledTypes = enabledTypes;
 		this.quickActionTypesInt = quickActionTypesInt;
 		this.quickActionTypesStr = quickActionTypesStr;
-		// reparse to get new quick actions
+
+		serializer.setQuickActionTypesStr(quickActionTypesStr);
+		serializer.setQuickActionTypesInt(quickActionTypesInt);
+
 		parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
-		return enabledTypes;
 	}
 
+	@NonNull
 	public List<QuickActionType> produceTypeActionsListWithHeaders() {
 		List<QuickActionType> result = new ArrayList<>();
 		filterQuickActions(TYPE_ADD_ITEMS, result);
@@ -303,7 +279,7 @@ public class QuickActionRegistry {
 		return result;
 	}
 
-	private void filterQuickActions(QuickActionType filter, List<QuickActionType> result) {
+	private void filterQuickActions(@NonNull QuickActionType filter, @NonNull List<QuickActionType> result) {
 		result.add(filter);
 		Set<Integer> set = new TreeSet<>();
 		for (QuickAction qa : quickActions) {
@@ -323,6 +299,7 @@ public class QuickActionRegistry {
 		}
 	}
 
+	@Nullable
 	public QuickAction newActionByStringType(String actionType) {
 		QuickActionType quickActionType = quickActionTypesStr.get(actionType);
 		if (quickActionType != null) {
@@ -331,6 +308,7 @@ public class QuickActionRegistry {
 		return null;
 	}
 
+	@Nullable
 	public QuickAction newActionByType(int type) {
 		QuickActionType quickActionType = quickActionTypesInt.get(type);
 		if (quickActionType != null) {
@@ -349,53 +327,8 @@ public class QuickActionRegistry {
 		}
 	}
 
-	public static QuickAction produceAction(QuickAction quickAction) {
+	@NonNull
+	public static QuickAction produceAction(@NonNull QuickAction quickAction) {
 		return quickAction.getActionType().createNew(quickAction);
-	}
-
-	private class QuickActionSerializer implements JsonDeserializer<QuickAction>,
-			JsonSerializer<QuickAction> {
-
-		@Override
-		public QuickAction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-			JsonObject obj = json.getAsJsonObject();
-			QuickActionType found = null;
-			if (obj.has("actionType")) {
-				String actionType = obj.get("actionType").getAsString();
-				found = quickActionTypesStr.get(actionType);
-			} else if (obj.has("type")) {
-				int type = obj.get("type").getAsInt();
-				found = quickActionTypesInt.get(type);
-			}
-			if (found != null) {
-				QuickAction qa = found.createNew();
-				if (obj.has("name")) {
-					qa.setName(obj.get("name").getAsString());
-				}
-				if (obj.has("id")) {
-					qa.setId(obj.get("id").getAsLong());
-				}
-				if (obj.has("params")) {
-					qa.setParams(context.deserialize(obj.get("params"),
-							new TypeToken<HashMap<String, String>>() {
-							}.getType())
-					);
-				}
-				return qa;
-			}
-			return null;
-		}
-
-		@Override
-		public JsonElement serialize(QuickAction src, Type typeOfSrc, JsonSerializationContext context) {
-			JsonObject el = new JsonObject();
-			el.addProperty("actionType", src.getActionType().getStringId());
-			el.addProperty("id", src.getId());
-			if (src.getRawName() != null) {
-				el.addProperty("name", src.getRawName());
-			}
-			el.add("params", context.serialize(src.getParams()));
-			return el;
-		}
 	}
 }

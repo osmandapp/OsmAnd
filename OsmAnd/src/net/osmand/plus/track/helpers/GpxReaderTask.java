@@ -1,7 +1,7 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.FILE_CREATION_TIME;
-import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
 
 import android.os.AsyncTask;
 
@@ -16,11 +16,13 @@ import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GpxParameter;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -76,23 +78,19 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 					GpxDataItem item = readingItemsMap.remove(file);
 					if (GpxDbUtils.isAnalyseNeeded(file, item)) {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
-						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified());
+						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified(), null, null, PluginsHelper.getTrackPointsAnalyser());
 						if (item == null) {
 							item = new GpxDataItem(app, file);
-							item.setAnalysis(analysis);
 							database.insert(item, conn);
-						} else {
-							item.setAnalysis(analysis);
-							database.updateDataItem(item);
 						}
+						item.setAnalysis(analysis);
 						long creationTime = item.getParameter(FILE_CREATION_TIME);
 						if (creationTime <= 0) {
 							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
-							gpxDbHelper.updateDataItem(item);
 						}
-					}
-					if (GpxDbUtils.isCitySearchNeeded(item)) {
 						setupNearestCityName(item);
+						item.setParameter(GpxParameter.DATA_VERSION, GPXDatabase.createDataVersion(GPXTrackAnalysis.ANALYSIS_VERSION));
+						gpxDbHelper.updateDataItem(item);
 					}
 					if (listener != null) {
 						listener.onGpxDataItemRead(item);
@@ -126,7 +124,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
 	private void checkAndSearchNearestCity(@NonNull GpxDataItem item) {
 		GPXTrackAnalysis analysis = item.getAnalysis();
-		LatLon latLon = analysis != null ? analysis.latLonStart : null;
+		LatLon latLon = analysis != null ? analysis.getLatLonStart() : null;
 		if (latLon == null) {
 			item.setParameter(NEAREST_CITY_NAME, "");
 		} else {

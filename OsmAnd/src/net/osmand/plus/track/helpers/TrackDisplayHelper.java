@@ -1,6 +1,6 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.plus.track.helpers.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +22,7 @@ public class TrackDisplayHelper {
 	private GPXFile gpxFile;
 	private GPXFile filteredGpxFile;
 	private GpxDataItem gpxDataItem;
+	private SelectedGpxFile selectedGpxFile;
 
 	private long modifiedTime = -1;
 	private List<GpxDisplayGroup> displayGroups;
@@ -65,10 +66,15 @@ public class TrackDisplayHelper {
 		this.filteredGpxFile = filteredGpxFile;
 	}
 
-	public void setGpxDataItem(GpxDataItem gpxDataItem) {
+	public void setGpxDataItem(@Nullable GpxDataItem gpxDataItem) {
 		this.gpxDataItem = gpxDataItem;
 	}
 
+	public void setSelectedGpxFile(@Nullable SelectedGpxFile selectedGpxFile) {
+		this.selectedGpxFile = selectedGpxFile;
+	}
+
+	@NonNull
 	public QuadRect getRect() {
 		if (filteredGpxFile != null) {
 			return filteredGpxFile.getRect();
@@ -114,17 +120,12 @@ public class TrackDisplayHelper {
 
 	public void updateDisplayGroups() {
 		modifiedTime = gpxFile.modifiedTime;
+		GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
 		GPXFile gpx = filteredGpxFile != null ? filteredGpxFile : gpxFile;
-		displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(gpx, true);
+		displayGroups = displayHelper.collectDisplayGroups(selectedGpxFile, gpx, true);
 		originalGroups.clear();
 		for (GpxDisplayGroup group : displayGroups) {
-			originalGroups.add(new GpxDisplayGroup(group));
-		}
-		if (file != null) {
-			SelectedGpxFile sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
-			if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
-				displayGroups = sf.getDisplayGroups(app);
-			}
+			originalGroups.add(group.copy());
 		}
 	}
 

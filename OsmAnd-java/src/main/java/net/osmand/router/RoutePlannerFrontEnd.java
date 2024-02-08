@@ -954,6 +954,7 @@ public class RoutePlannerFrontEnd {
 			if (i > 0) {
 				ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty (only for inter-points)
 			}
+			ctx.calculationProgress.hhTargetsProgress(i, targets.size());
 			HHNetworkRouteRes res = calculateHHRoute(routePlanner, ctx, i == 0 ? start : targets.get(i - 1),
 					targets.get(i), dir);
 			ctx.config.penaltyForReverseDirection = initialPenalty;

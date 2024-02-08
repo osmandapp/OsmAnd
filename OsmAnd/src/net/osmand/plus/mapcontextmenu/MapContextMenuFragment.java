@@ -174,6 +174,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private boolean zoomIn;
 
 	private boolean created;
+	private boolean destroyed;
 
 	private boolean transportBadgesCreated;
 
@@ -1359,6 +1360,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		destroyed = true;
 		menu.setMapCenter(null);
 		menu.setMapZoom(0);
 	}
@@ -1715,7 +1717,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (!alreadyAdjusted) {
 			calcLatLon = getAdjustedMarkerLocation(getPosY(), calcLatLon, true, zoom);
 		}
-		thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
+		thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom);
 	}
 
 	private void setAddressLocation() {
@@ -1803,24 +1805,33 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			View compassSeparator = view.findViewById(R.id.info_compass_separator);
 			compassSeparator.setVisibility(showCompassSeparator ? View.VISIBLE : View.GONE);
 
-			View altitudeLayout = view.findViewById(R.id.altitude_layout);
-			CharSequence formattedAltitude = menu.getFormattedAltitude();
-			boolean showAltitude = !TextUtils.isEmpty(formattedAltitude);
-			if (showAltitude) {
-				TextView tvAltitude = view.findViewById(R.id.altitude);
-				tvAltitude.setText(formattedAltitude);
-				altitudeLayout.setVisibility(View.VISIBLE);
-			} else {
-				altitudeLayout.setVisibility(View.GONE);
-			}
-
-			boolean showAltitudeSeparator = showAltitude && (showAdditionalInfo || showCompass);
-			View altitudeSeparator = view.findViewById(R.id.info_altitude_separator);
-			altitudeSeparator.setVisibility(showAltitudeSeparator ? View.VISIBLE : View.GONE);
+			updateAltitudeText(showAdditionalInfo || showCompass);
 		}
 
 		updateCompassVisibility();
 		updateAdditionalInfoVisibility();
+	}
+
+	private void updateAltitudeText(boolean addSeparator) {
+		View altitudeSeparator = view.findViewById(R.id.info_altitude_separator);
+		View altitudeLayout = view.findViewById(R.id.altitude_layout);
+		TextView tvAltitude = view.findViewById(R.id.altitude);
+
+		if (tvAltitude.length() > 0) {
+			AndroidUiHelper.updateVisibility(altitudeSeparator, addSeparator);
+		} else {
+			altitudeSeparator.setVisibility(View.GONE);
+			altitudeLayout.setVisibility(View.GONE);
+
+			menu.getFormattedAltitude(formattedAltitude -> {
+				if (!TextUtils.isEmpty(formattedAltitude) && !destroyed) {
+					AndroidUiHelper.updateVisibility(altitudeSeparator, addSeparator);
+
+					tvAltitude.setText(formattedAltitude);
+					altitudeLayout.setVisibility(View.VISIBLE);
+				}
+			});
+		}
 	}
 
 	private void updateCompassVisibility() {

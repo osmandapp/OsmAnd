@@ -74,7 +74,7 @@ class ListFilterAdapter(
 					false)
 				val topBottomPadding =
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_small)
-				val leftRightPadding = if(items.size > 0 && filter.getItemIcon(items[0]) != null) {
+				val leftRightPadding = if(items.size > 0 && filter.collectionFilterParams.getItemIcon(app, items[0]) != null) {
 					app.resources.getDimensionPixelSize(R.dimen.content_padding_extra_large)
 				} else {
 					app.resources.getDimensionPixelSize(R.dimen.content_padding)
@@ -105,8 +105,8 @@ class ListFilterAdapter(
 
 			is FilterVariantViewHolder -> {
 				val itemName = getItem(position)
-				val icon = filter.getItemIcon(itemName)
-				holder.title.text = filter.getItemText(itemName)
+				val icon = filter.collectionFilterParams.getItemIcon(app, itemName)
+				holder.title.text = filter.collectionFilterParams.getItemText(app, itemName)
 				holder.icon.setImageDrawable(icon)
 				AndroidUiHelper.updateVisibility(holder.icon, icon != null)
 				AndroidUiHelper.updateVisibility(holder.divider, position != itemCount - 1)
@@ -133,7 +133,7 @@ class ListFilterAdapter(
 				}
 				isSelectAllItemsBeingSet = false
 				holder.icon.setImageDrawable(
-					filter.getSelectAllItemIcon(
+					filter.collectionFilterParams.getAllItemsIcon(app,
 						holder.switch.state != ThreeStateCheckbox.State.UNCHECKED,
 						nightMode))
 				holder.switch.setOnCheckedChangeListener { _, isChecked ->
@@ -152,7 +152,7 @@ class ListFilterAdapter(
 		filter.isSelectAllItemsSelected = selected
 		if (selected) {
 			checkbox.state = ThreeStateCheckbox.State.CHECKED
-			filter.addSelectedItems(filter.allItems)
+			filter.addSelectedItems(ArrayList(filter.allItemsCollection.keys))
 		} else {
 			filter.clearSelectedItems()
 			checkbox.state = ThreeStateCheckbox.State.UNCHECKED
@@ -163,7 +163,7 @@ class ListFilterAdapter(
 	}
 
 	override fun getItemCount(): Int {
-		val correctionForSelectAllItem = if (filter.hasSelectAllVariant()) 1 else 0
+		val correctionForSelectAllItem = if (hasSelectAllVariant()) 1 else 0
 		return if (showAllItems) {
 			items.size
 		} else if (items.size > MIN_VISIBLE_COUNT) {
@@ -179,7 +179,7 @@ class ListFilterAdapter(
 	override fun getItemViewType(position: Int): Int {
 		return if (showAllItems) {
 			ITEM_TYPE
-		} else if (position == 0 && filter.hasSelectAllVariant()) {
+		} else if (position == 0 && hasSelectAllVariant()) {
 			SELECT_ALL_ITEM_TYPE
 		} else if (position == itemCount - 1 && items.size > MIN_VISIBLE_COUNT + additionalItems.size) {
 			SHOW_ALL_ITEM_TYPE
@@ -189,7 +189,7 @@ class ListFilterAdapter(
 	}
 
 	private fun getItem(position: Int): String {
-		val correctionForSelectAllItem = if (filter.hasSelectAllVariant()) 1 else 0
+		val correctionForSelectAllItem = if (hasSelectAllVariant()) 1 else 0
 		return if (showAllItems) {
 			items[position]
 		} else if (position - correctionForSelectAllItem < MIN_VISIBLE_COUNT) {
@@ -199,10 +199,13 @@ class ListFilterAdapter(
 		}
 	}
 
+	private fun hasSelectAllVariant() = filter.collectionFilterParams.hasSelectAllVariant()
+
 	override fun setNewSelectedItems(newSelectedItems: List<String>) {
 		val additionalItems = ArrayList<String>()
+		val correctionForSelectAllItem = if (hasSelectAllVariant()) 1 else 0
 		for (selectedItem in newSelectedItems) {
-			if (items.indexOf(selectedItem) >= MIN_VISIBLE_COUNT) {
+			if (items.indexOf(selectedItem) + correctionForSelectAllItem >= MIN_VISIBLE_COUNT) {
 				additionalItems.add(selectedItem)
 			}
 		}

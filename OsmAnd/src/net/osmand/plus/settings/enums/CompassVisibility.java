@@ -37,9 +37,14 @@ public enum CompassVisibility {
 		this.containerId = containerId;
 	}
 
-	@NonNull
-	public String getTitle(@NonNull Context context) {
-		return context.getString(titleId);
+	@StringRes
+	public int getTitleId() {
+		return titleId;
+	}
+
+	@DrawableRes
+	public int getIconId() {
+		return iconId;
 	}
 
 	@Nullable

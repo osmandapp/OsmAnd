@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.dialogs.RenameFileBottomSheet;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.util.Algorithms;
@@ -40,6 +41,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -147,9 +149,10 @@ public class FileUtils {
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(src.getAbsolutePath());
 		if (selectedGpxFile != null) {
-			selectedGpxFile.resetSplitProcessed();
 			selectedGpxFile.getGpxFile().path = dest.getAbsolutePath();
 			gpxSelectionHelper.updateSelectedGpxFile(selectedGpxFile);
+			GpxDisplayHelper gpxDisplayHelper = app.getGpxDisplayHelper();
+			gpxDisplayHelper.updateDisplayGroupsNames(selectedGpxFile);
 		}
 	}
 
@@ -282,6 +285,13 @@ public class FileUtils {
 
 	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
 		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
+	}
+
+	@NonNull
+	public static List<File> collectDirFiles(@NonNull File dir) {
+		List<File> files = new ArrayList<>();
+		collectDirFiles(dir, files);
+		return files;
 	}
 
 	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {

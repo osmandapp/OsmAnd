@@ -25,7 +25,7 @@ public class QuickAction {
 
     public interface QuickActionSelectionListener {
 
-        void onActionSelected(QuickAction action);
+        void onActionSelected(@NonNull QuickAction action);
     }
     private static int SEQ;
 
@@ -103,6 +103,7 @@ public class QuickAction {
 		return getNameRes() != 0 ? context.getString(getNameRes()) : "";
 	}
 
+	@NonNull
 	public Map<String, String> getParams() {
         if (params == null) {
         	params = new HashMap<>();

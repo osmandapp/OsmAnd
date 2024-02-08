@@ -45,7 +45,7 @@ public class UpdateVectorRendererAsyncTask extends AsyncTask<Void, Void, Boolean
 		if (mapView.hasMapRenderer()) {
 			MapRendererContext rendererContext = NativeCoreContext.getMapRendererContext();
 			if (rendererContext != null) {
-				rendererContext.updateMapSettings(false);
+				rendererContext.updateMapSettings(true);
 			}
 		}
 		return changed;

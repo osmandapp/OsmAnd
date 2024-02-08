@@ -5,7 +5,7 @@ import static net.osmand.plus.track.cards.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.EDIT_BUTTON_INDEX;
 import static net.osmand.plus.track.cards.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
 import static net.osmand.plus.track.helpers.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
 import static net.osmand.plus.wikipedia.WikiArticleHelper.getFirstParagraph;

@@ -128,12 +128,13 @@ public class DisplayPointsGroupsHelper {
 		return itemsMapFiltered;
 	}
 
-	private void setCollectedItems(GpxDisplayGroup group, Map<String, List<GpxDisplayItem>> itemsMap) {
+	private void setCollectedItems(@NonNull GpxDisplayGroup group,
+	                               @NonNull Map<String, List<GpxDisplayItem>> itemsMap) {
 		List<String> categories = new ArrayList<>(itemsMap.keySet());
 		Collections.sort(categories, comparator);
 		for (String category : categories) {
 			List<GpxDisplayItem> values = itemsMap.get(category);
-			GpxDisplayGroup categoryGroup = new GpxDisplayGroup(group);
+			GpxDisplayGroup categoryGroup = group.copy();
 			categoryGroup.setName(category);
 			for (GpxDisplayItem i : values) {
 				if (i.locationStart != null && i.locationStart.getColor() != 0) {
@@ -149,6 +150,7 @@ public class DisplayPointsGroupsHelper {
 	}
 
 	public static class DisplayGroupsHolder {
+
 		public List<GpxDisplayGroup> groups;
 		public Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups;
 

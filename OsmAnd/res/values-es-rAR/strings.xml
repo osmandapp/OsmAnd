@@ -2325,7 +2325,7 @@
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacencia</string>
-    <string name="quick_action_auto_zoom">Alternar zum automático del mapa</string>
+    <string name="quick_action_auto_zoom">Zum automático del mapa</string>
     <string name="quick_action_auto_zoom_desc">Un botón que alterna el zum automático de acuerdo a la velocidad.</string>
     <string name="quick_action_auto_zoom_on">Activar el zum automático</string>
     <string name="quick_action_auto_zoom_off">Desactivar el zum automático</string>
@@ -4767,7 +4767,7 @@
     <string name="attach_roads_warning">Sólo se puede adjuntar al camino una traza grabada.</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
-    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)?</string>
     <string name="favorite_delete_group">Borrar grupo</string>
     <string name="download_heightmap_maps">Mapa de alturas</string>
     <string name="display_position">Posición de la ubicación</string>
@@ -5181,7 +5181,7 @@
     <string name="ant_plus_bluetooth_off_description">Activa los sensores de búsqueda y vinculación de Bluetooth.</string>
     <string name="ant_plus_open_settings">Abrir los ajustes</string>
     <string name="file_already_exists">El archivo ya existe</string>
-    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»\?</string>
+    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»?</string>
     <string name="file_already_exists_description">«%1$s». Ya existe un archivo con ese nombre. Al reemplazarlo, se sobrescribirán todos los cambios realizados con la versión actual.</string>
     <string name="is_imported">%1$s se ha importado.</string>
     <string name="search_track_by_name">Buscar traza por el nombre</string>
@@ -5251,13 +5251,13 @@
     <string name="slope_legend_description">La pendiente usa colores para visualizar la inclinación del terreno. Puedes leer más sobre «Pendientes» en %1$s.</string>
     <string name="terrain_category_description">Curvas de nivel del terreno, sombreados en tonos grises e indicaciones de pendientes en colores, mostrando picos y tierras bajas.</string>
     <string name="manage_subscriptions">Gestionar suscripciones.</string>
-    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»\?</string>
+    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»?</string>
     <string name="shared_string_deleting">Borrando</string>
     <string name="delete_account">Borrar cuenta</string>
     <string name="osmand_cloud_deleting_account_descr">En un momento será borrada tu cuenta con todos los datos de OsmAnd Cloud.
 \n
 \nTodos los datos en el dispositivo permanecen intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud?
 \n
 \nEsta acción no puede deshacerse.</string>
     <string name="action_cannot_be_undone">Esta acción no puede deshacerse.</string>
@@ -5491,7 +5491,7 @@
     <string name="widget_available_ram">RAM disponible</string>
     <string name="terrain_maps">Mapas topográficos</string>
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
-    <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
+    <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
     <string name="shared_string_show_icon">Mostrar icono</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
@@ -5502,12 +5502,12 @@
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
-    <string name="empty_smart_folder_description">Todas las trazas que coincidan, serán añadidas automáticamente aquí</string>
+    <string name="empty_smart_folder_description">Las trazas que coincidan, serán añadidas aquí</string>
     <string name="configure_filter">Configurar filtro</string>
     <string name="no_config_smart_folder_title">No configurado</string>
     <string name="discard_filter_changes">Descartar cambios del filtro</string>
     <string name="shared_string_loading">Cargando</string>
-    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros\?</string>
+    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros?</string>
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
     <string name="loading_tracks">Recargando trazas</string>
     <string name="searching_matching_tracks">Buscar las trazas que coincidan</string>
@@ -5516,13 +5516,11 @@
         <item quantity="many">%1$d (%2$d trazas)</item>
         <item quantity="other"/>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera\? Esta acción no se puede deshacer.</string>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera?</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
     <string name="delete_all_items">Borrar todos los elementos</string>
     <string name="trash_is_empty_banner_desc">Los elementos borrados desde OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
-    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
-\n
-\nEsta acción no se puede deshacer.</string>
+    <string name="delete_trash_item_confirmation_desc">¿Borrar «%1$s» permanentemente?</string>
     <string name="shared_string_empty_trash">Vaciar papelera</string>
     <string name="shared_string_delete_immediately">Borrar de inmediato</string>
     <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
@@ -5552,7 +5550,7 @@
     <string name="key_event_action_take_media_note">Crear nota multimedia</string>
     <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
     <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
-    <string name="remove_type_q">¿Quitar el tipo «%1$s»\?</string>
+    <string name="remove_type_q">¿Quitar el tipo «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir nuevo tipo</string>
     <string name="key_event_action_move_up">Mover arriba</string>
@@ -5592,17 +5590,46 @@
     <string name="zoom_non_animated">Zum no animado</string>
     <string name="lang_zh_hant">Chino tradicional</string>
     <string name="zoom_animated">Zum animado</string>
-    <string name="button_already_assigned_to_this_action">Este botón ya se encuentra asignado a esta acción.</string>
+    <string name="button_already_assigned_to_this_action">El botón ya se ha asignado a esta acción.</string>
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de teclas ya fueron vaciadas</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
     <string name="use_v1_auto_zoom">Zum automático discreto (versión antigua)</string>
     <string name="shared_string_next_event">Próximo evento</string>
     <string name="map_widget_sun_position">Ubicación del Sol</string>
-    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
+    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer.</string>
     <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
     <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
     <string name="precise_distance_numbers">Números precisos de distancia</string>
     <string name="any_connected">Cualquiera conectado</string>
     <string name="any_connected_with_device">Cualquiera conectado: %s</string>
     <string name="shared_string_road_maps">Mapas viales</string>
+    <string name="shared_string_all_tracks">Todas las trazas</string>
+    <string name="shared_string_extensions">Extensiones</string>
+    <string name="shared_string_license">Licencia</string>
+    <string name="shared_string_link">Enlace</string>
+    <string name="shared_string_copyright">Derechos de autor</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="max_sensor_heartrate">Ritmo cardíaco, máx</string>
+    <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
+    <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
+    <string name="avg_sensor_temperature">Temperatura, promedio</string>
+    <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
+    <string name="battery_optimization_banner_content">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.</string>
+    <string name="dont_ask_anymore">No preguntar más</string>
+    <string name="battery_optimization_settings">Ajustes de optimización de la batería</string>
+    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.
+\n
+\nSi experimenta alguno de estos problemas, puede intentar cambiar el uso de la batería a «Sin restricciones».</string>
+    <string name="battery_optimization">Optimización de la batería</string>
+    <string name="avg_sensor_heartrate">Ritmo cardíaco, promedio</string>
+    <string name="max_sensor_cadence">Cadencia de la bicicleta, máx</string>
+    <string name="avg_sensor_cadence">Cadencia de la bicicleta, promedio</string>
+    <string name="max_sensor_temperature">Temperatura, máx</string>
+    <string name="max_sensor_speed">Velocidad del sensor, máx</string>
+    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s», ordenadas por: «%2$s»</string>
+    <string name="sort_subfolders">Ordenar subcarpetas</string>
+    <string name="shared_string_activity">Actividad</string>
+    <string name="shared_string_keywords">Palabras clave</string>
+    <string name="shared_string_additional">Adicional</string>
 </resources>

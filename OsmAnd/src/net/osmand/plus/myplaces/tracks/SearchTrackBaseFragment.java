@@ -302,7 +302,7 @@ public abstract class SearchTrackBaseFragment extends BaseOsmAndDialogFragment i
 	}
 
 	@Override
-	public void setTracksSortMode(@NonNull TracksSortMode sortMode) {
+	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		settings.SEARCH_TRACKS_SORT_MODE.set(sortMode);
 		adapter.setTracksSortMode(getTracksSortMode());
 	}

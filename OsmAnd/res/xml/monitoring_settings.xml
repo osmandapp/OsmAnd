@@ -4,6 +4,14 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/monitoring_settings">
 
+	<Preference
+		android:key="disable_battery_optimization"
+		android:layout="@layout/preference_permission"
+		android:persistent="false"
+		android:summary="@string/read_more"
+		android:title="@string/battery_optimization_banner_content"
+		tools:icon="@drawable/ic_action_warning_colored" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="show_trip_recording_start_dialog"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"

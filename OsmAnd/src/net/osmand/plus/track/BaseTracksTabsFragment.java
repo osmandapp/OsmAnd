@@ -360,6 +360,10 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 		return true;
 	}
 
+	public boolean selectTrackMode() {
+		return false;
+	}
+
 	@Override
 	public void onFileMove(@Nullable File src, @NonNull File dest) {
 	}

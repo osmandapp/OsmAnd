@@ -4843,7 +4843,7 @@
     <string name="map_widget_camera_distance">Hoogte van camera</string>
     <string name="shared_string_shows">Toont</string>
     <string name="how_to_use">Gebruiksaanwijzing:</string>
-    <string name="favorite_confirm_delete_group">Weet u zeker dat u de groep \"%1$s\" met bijbehorende punten (%2$d) wilt verwijderen\?</string>
+    <string name="favorite_confirm_delete_group">Weet u zeker dat u de groep \"%1$s\" met bijbehorende punten (%2$d) wilt verwijderen?</string>
     <string name="included_in_your_current_plan">Meegenomen in uw huidige \"%1$s\" abonnement</string>
     <string name="attach_roads_warning">Enkel een opgenomen pad kan bij de wegen worden bijgevoegd.</string>
     <string name="shared_string_only_missing">Enkel missende</string>
@@ -5096,7 +5096,7 @@
 \n- Bluetooth is ingeschakeld
 \n- Sensor is geactiveerd
 \n- Dit apparaat bevindt zich in de buurt van de sensor</string>
-    <string name="nav_profile_confirm_delete">Weet je zeker dat je \"%1$s\" wilt verwijderen\?</string>
+    <string name="nav_profile_confirm_delete">Weet je zeker dat je \"%1$s\" wilt verwijderen?</string>
     <string name="external_device_details_distance">Afstand</string>
     <string name="external_device_details_disconnect">Verbreek verbinding</string>
     <string name="external_device_ble">BLE</string>
@@ -5201,7 +5201,7 @@
     <string name="feature_available_as_part_of_plan">%1$s beschikbaar als onderdeel van het %2$s abonnement</string>
     <string name="free_settings_backup">Gratis instellingen back-up</string>
     <string name="free_favorites_backup">Gratis favorieten back-up</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Weet je zeker dat je jouw OsmAnd Cloud account wilt verwijderen\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Weet je zeker dat je jouw OsmAnd Cloud account wilt verwijderen?
 \n
 \nDeze actie kan niet ongedaan worden gemaakt.</string>
     <string name="osmand_cloud_deletion_account_warning">Je account en alle accountgegevens worden %1$s</string>
@@ -5234,7 +5234,7 @@
     <string name="osmand_cloud_delete_account_confirmation">Account verwijderen\?</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Secundaire apparaten worden afgemeld bij OsmAnd Cloud en verliezen toegang tot betaalde functies.</string>
     <string name="manage_subscriptions">Beheer abonnementen.</string>
-    <string name="delete_account_warning">Weet je zeker dat je %1$s account wilt verwijderen\?</string>
+    <string name="delete_account_warning">Weet je zeker dat je %1$s account wilt verwijderen?</string>
     <string name="verify_account">Je account verifiëren</string>
     <string name="slope_legend_description">De hellingshoek visualiseert de steilheid van het terrein met kleuren. Je kunt meer lezen over hellingen in %1$s.</string>
     <string name="calculate_offline_altitude_descr">Bereken de hoogte offline, gebaseerd op gegevens van de terreinkaart (3D). Verschillen ten opzichte van de door het apparaat geregistreerde hoogte kunnen worden gebruikt als hoogtecorrectie.</string>
@@ -5250,4 +5250,10 @@
     <string name="number_of_tracks">%1$s track</string>
     <string name="external_device_blood_pressure">Bloeddruk</string>
     <string name="no_bt_permission">Bluetooth toestemming is niet verleend</string>
+    <string name="shared_string_license">Licentie</string>
+    <string name="shared_string_copyright">Auteursrechten</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_author">Auteur</string>
+    <string name="shared_string_extensions">Extensies</string>
+    <string name="shared_string_link">Link</string>
 </resources>

@@ -190,7 +190,7 @@ public enum WidgetType {
 	public boolean isAllowed() {
 		if (this == ALTITUDE_MAP_CENTER) {
 			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
-			return plugin != null && plugin.is3DMapsEnabled();
+			return plugin != null && plugin.is3DReliefAllowed();
 		}
 		return true;
 	}

@@ -695,7 +695,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (mAddGpxPointBottomSheetHelper != null) {
 				mAddGpxPointBottomSheetHelper.setTitle(title);
 			}
-			view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
+			view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom());
 		} else if (provider == null || !provider.showMenuAction(object)) {
 			selectedObjectContextMenuProvider = provider;
 			hideVisibleMenues();
@@ -740,7 +740,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (mInAddGpxPointMode) {
 				String title = pointDescription == null ? "" : pointDescription.getName();
 				mAddGpxPointBottomSheetHelper.setTitle(title);
-				view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
+				view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom());
 			} else {
 				showContextMenu(latLon, pointDescription, selectedObj, provider);
 			}
@@ -754,7 +754,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			getApplication().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 			if (mInAddGpxPointMode) {
 				mAddGpxPointBottomSheetHelper.setTitle("");
-				view.getAnimatedDraggingThread().startMoving(pointLatLon.getLatitude(), pointLatLon.getLongitude(), view.getZoom(), true);
+				view.getAnimatedDraggingThread().startMoving(pointLatLon.getLatitude(), pointLatLon.getLongitude(), view.getZoom());
 			} else {
 				menu.show(pointLatLon, null, null);
 			}

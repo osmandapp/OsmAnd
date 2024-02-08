@@ -4779,7 +4779,7 @@
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
-    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)?</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
@@ -5180,7 +5180,7 @@
     <string name="ant_plus_pair_bluetooth_prompt">Puedes vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
     <string name="learn_more_about_sensors_link">Véase más sobre sensores.</string>
     <string name="file_already_exists_description">«%1$s». Ya existe un archivo con ese nombre. Al reemplazarlo, se sobrescribirán todos los cambios realizados con la versión actual.</string>
-    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»\?</string>
+    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»?</string>
     <string name="number_of_tracks">%1$s trazas</string>
     <string name="search_track_by_name">Buscar traza por el nombre</string>
     <string name="no_search_results">Sin resultados</string>
@@ -5245,7 +5245,7 @@
     <string name="osmand_cloud_deleting_account_descr">En un momento será borrada tu cuenta con todos los datos de OsmAnd Cloud.
 \n
 \nTodos los datos en el dispositivo permanecen intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud?
 \n
 \nEsta acción no puede deshacerse.</string>
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
@@ -5255,7 +5255,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos en el dispositivo se mantienen intactos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="manage_subscriptions">Gestionar suscripciones.</string>
-    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»\?</string>
+    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»?</string>
     <string name="shared_string_deleting">Borrando</string>
     <string name="deleting_complete">Borrado completo</string>
     <string name="delete_account">Borrar cuenta</string>
@@ -5491,12 +5491,12 @@
     <string name="terrain_maps">Mapas topográficos</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
-    <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
+    <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
     <string name="maps_and_resources">Mapas y Recursos</string>
-    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera\? Esta acción no se puede deshacer.</string>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera?</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
-    <string name="empty_smart_folder_description">Todas las trazas que coincidan, serán añadidas automáticamente aquí</string>
+    <string name="empty_smart_folder_description">Las trazas que coincidan, serán añadidas aquí</string>
     <string name="configure_filter">Configurar filtro</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
@@ -5511,9 +5511,7 @@
     <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
-    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
-\n
-\nEsta acción no se puede deshacer.</string>
+    <string name="delete_trash_item_confirmation_desc">¿Borrar «%1$s» permanentemente?</string>
     <string name="discard_filter_changes">Descartar cambios del filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="shared_string_empty_trash">Vaciar papelera</string>
@@ -5523,7 +5521,7 @@
     <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
     <string name="cloud_item_restored">«%1$s» se ha restaurado en Cloud.</string>
     <string name="trash_alert_card_desc">Los elementos en la papelera serán borrados pasados los %1$s días.</string>
-    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros\?</string>
+    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros?</string>
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
     <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
@@ -5551,7 +5549,7 @@
     <string name="key_event_action_take_media_note">Crear nota multimedia</string>
     <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
     <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
-    <string name="remove_type_q">¿Quitar el tipo «%1$s»\?</string>
+    <string name="remove_type_q">¿Quitar el tipo «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir nuevo tipo</string>
     <string name="key_event_action_move_up">Mover arriba</string>
@@ -5591,7 +5589,7 @@
     <string name="shared_string_eta">ETA</string>
     <string name="clear_key_assignment">Vaciar asignación de tecla</string>
     <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
-    <string name="button_already_assigned_to_this_action">Este botón ya se encuentra asignado a esta acción.</string>
+    <string name="button_already_assigned_to_this_action">El botón ya se ha asignado a esta acción.</string>
     <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
     <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
     <string name="key_assignments_already_cleared_message">Todas las asignaciones de teclas ya fueron vaciadas</string>
@@ -5601,6 +5599,14 @@
     <string name="any_connected">Cualquiera conectado</string>
     <string name="map_widget_sun_position">Ubicación del Sol</string>
     <string name="add_new_button">Añadir un nuevo botón</string>
-    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer, dependiendo del momento actual.</string>
+    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer.</string>
     <string name="any_connected_with_device">Cualquiera conectado: %s</string>
+    <string name="shared_string_link">Enlace</string>
+    <string name="shared_string_copyright">Derechos de autor</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="shared_string_road_maps">Mapas viales</string>
+    <string name="shared_string_extensions">Extensiones</string>
+    <string name="shared_string_license">Licencia</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Todas las trazas</string>
 </resources>

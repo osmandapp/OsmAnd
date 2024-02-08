@@ -1,11 +1,11 @@
 package net.osmand.plus.plugins.monitoring;
 
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
-import static net.osmand.plus.track.helpers.GpxParameter.COLOR;
-import static net.osmand.plus.track.helpers.GpxParameter.COLORING_TYPE;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_ARROWS;
-import static net.osmand.plus.track.helpers.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.plus.track.helpers.GpxParameter.WIDTH;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -399,7 +399,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 				Map<String, String> extensions = getPluginsExtensions(query.getString(7));
 				if (!Algorithms.isEmpty(extensions)) {
-					assignExtensionWriter(pt, extensions);
+					GPXUtilities.assignExtensionWriter(pt, extensions);
 				}
 
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
@@ -440,20 +440,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		query.close();
 		dropEmptyTracks(dataTracks);
-	}
-
-	private void assignExtensionWriter(@NonNull WptPt wptPt, @NonNull Map<String, String> pluginsExtensions) {
-		if (wptPt.getExtensionsWriter() == null) {
-			wptPt.setExtensionsWriter(serializer -> {
-				for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
-					try {
-						GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
-					} catch (IOException e) {
-						log.error(e);
-					}
-				}
-			});
-		}
 	}
 
 	@NonNull
@@ -531,7 +517,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			String pluginsInfo = getPluginsInfo(location);
 			Map<String, String> extensions = getPluginsExtensions(pluginsInfo);
 			if (!Algorithms.isEmpty(extensions)) {
-				assignExtensionWriter(wptPt, extensions);
+				GPXUtilities.assignExtensionWriter(wptPt, extensions);
 			}
 
 			insertData(wptPt, pluginsInfo);
@@ -823,10 +809,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		currentTrack.processPoints(app);
 		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
-		distance = analysis.totalDistance;
-		points = analysis.wptPoints;
-		duration = analysis.timeSpan;
-		trkPoints = analysis.points;
+		distance = analysis.getTotalDistance();
+		points = analysis.getWptPoints();
+		duration = analysis.getTimeSpan();
+		trkPoints = analysis.getPoints();
 	}
 
 	private void prepareCurrentTrackForRecording() {

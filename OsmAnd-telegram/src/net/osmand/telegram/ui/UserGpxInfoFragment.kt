@@ -78,7 +78,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		savedInstanceState: Bundle?
 	): View {
 		mainView = inflater.inflate(R.layout.fragment_user_gpx_info, parent)
-		AndroidUtils.addStatusBarPadding19v(context!!, mainView)
+		AndroidUtils.addStatusBarPadding19v(requireContext(), mainView)
 
 		readFromBundle(savedInstanceState ?: arguments)
 
@@ -381,7 +381,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		avgElevationTv.text = if (analysis != null && analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
 		avgSpeedTv.text = if (analysis != null && analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
 		totalDistanceTv.text = if (analysis != null && analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app) else "-"
-		timeSpanTv.text = if (analysis != null && analysis.durationInSeconds != 0) Algorithms.formatDuration(analysis.durationInSeconds, true) else "-"
+		timeSpanTv.text = if (analysis != null && analysis.durationInSeconds != 0) Algorithms.formatDuration(analysis.getDurationInSeconds(), true) else "-"
 	}
 
 	private fun updateGPXMap() {

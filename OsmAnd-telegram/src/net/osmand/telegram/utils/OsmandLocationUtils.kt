@@ -58,6 +58,29 @@ object OsmandLocationUtils {
 		timeZone = TimeZone.getTimeZone("UTC")
 	}
 
+	fun convertLocation(l: android.location.Location?): Location? {
+		if (l == null) {
+			return null
+		}
+		val r = Location(l.provider)
+		r.latitude = l.latitude
+		r.longitude = l.longitude
+		r.time = l.time
+		if (l.hasAccuracy()) {
+			r.accuracy = l.accuracy
+		}
+		if (l.hasSpeed()) {
+			r.speed = l.speed
+		}
+		if (l.hasAltitude()) {
+			r.altitude = l.altitude
+		}
+		if (l.hasBearing()) {
+			r.bearing = l.bearing
+		}
+		return r
+	}
+
 	fun getLastUpdatedTime(message: TdApi.Message): Int {
 		val content = message.content
 		return when (content) {

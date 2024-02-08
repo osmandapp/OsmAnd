@@ -27,7 +27,7 @@ import net.osmand.plus.settings.enums.CompassMode
 import net.osmand.plus.track.data.GPXInfo
 import net.osmand.plus.track.helpers.GpxDataItem
 import net.osmand.plus.track.helpers.GpxDbHelper
-import net.osmand.plus.track.helpers.GpxParameter.NEAREST_CITY_NAME
+import net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME
 import net.osmand.plus.track.helpers.SelectedGpxFile
 import net.osmand.plus.views.layers.base.OsmandMapLayer.CustomMapObjects
 import net.osmand.search.core.ObjectType
