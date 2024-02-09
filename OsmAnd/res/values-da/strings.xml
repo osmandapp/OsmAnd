@@ -5621,4 +5621,5 @@
     <string name="sorted_sufolders_toast">Undermapper i “%1$s” sorteres efter: “%2$s”</string>
     <string name="sort_subfolders">Sortér undermapper</string>
     <string name="shared_string_keywords">Nøgleord</string>
+    <string name="special_routing_cpp">Speciel type ruteberegning</string>
 </resources>
