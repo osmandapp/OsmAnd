@@ -1021,7 +1021,7 @@
     <string name="osmand_parking_delete">Obriši oznaku parkinga</string>
     <string name="osmand_parking_delete_confirm">Obrisati oznaku lokacija parkinga?</string>
     <string name="osmand_parking_time_limit_title">Odaberi najduže vreme parkiranja</string>
-    <string name="osmand_parking_warning_text">Obaveštenje da preuzmete auta je dodato u Vaš kalendar i tamo možete da ga izmeni ili uklonite.</string>
+    <string name="osmand_parking_warning_text">Obaveštenje da preuzmeš auta je dodato u kalendar i tamo možeš da ga izmeniš ili ukloniš.</string>
     <string name="osmand_parking_warning">Upozorenje</string>
     <string name="osmand_parking_event">Uzmite auta sa parkinga</string>
     <string name="shared_location">Deljeni lokaciju</string>
@@ -1195,7 +1195,7 @@
 \n • Podrška za međuodredišta
 \n • Snimanje ili uvoz ruta GPX-a i njihovo praćenje
 \n</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM automatizovani navigaciona uputstva, Samostalno navođenje prevcima OSM) je program za mape i navođenje koja pristupa besplatnim visokokvalitetnim podacima OSM iz celog sveta.
+    <string name="osmand_extended_description_part1">OsmAnd je aplikacija za mape i navigaciju s pristupom besplatnim, svetskim i visokokvalitetnim OSM podacima.
 \n
 \n Uživaj u prikazanom i glasovnom navođenju, pregledu TOI, pravljenjem i upravljanjem putanjama GPXa, korišćenjem izobata i podacima o visini (kroz dodatak), izboru između načina vožnje, bicikla, pešačenja, izmena na OSM-u i još mnogo toga.</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM samostalno navođenje upućivanjem) 
@@ -1394,7 +1394,7 @@
     <string name="gpx_split_interval">Vreme razdvajanja</string>
     <string name="local_index_select_gpx_file">Odaberi rutu</string>
     <string name="none_selected_gpx">Odaberi GPX fajl dugim pritiskanjem.</string>
-    <string name="select_index_file_to_download">Ništa nije nađeno, ali možete ga sami napraviti (pogledajte https://osmand.net).</string>
+    <string name="select_index_file_to_download">Ništa nije nađeno, ali možeš ga sam i napraviti (pogledaj https://osmand.net).</string>
     <string name="no_index_file_to_download">Nema pronađenih preuzimanja, proveri internet.</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklističke staze</string>
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
@@ -1574,9 +1574,9 @@
     <string name="zoom_by_trackball">Koristi točkić za približavanje</string>
     <string name="zoom_by_trackball_descr">Promeni približavanje vodoravnim pokretima točkića.</string>
     <string name="i_am_here">Ja sam ovde</string>
-    <string name="auto_announce_off">Zaustavi samostalno najavljivanje</string>
-    <string name="auto_announce_on">Započni samostalno najavljivanje</string>
-    <string name="settings_direction_style_descr">Izaberi način izražavanja odnosnih pravaca prilikom kretanja</string>
+    <string name="auto_announce_off">Zaustavi automatsko najavljivanje</string>
+    <string name="auto_announce_on">Pokrenuti automatsko najavljivanje</string>
+    <string name="settings_direction_style_descr">Izaberi stil izražavanja relativnih pravaca prilikom kretanja</string>
     <string name="settings_direction_style">Način prikaza usmerenja</string>
     <string name="direction_style_clockwise">U smeru kazaljke na satu (12 odsečaka)</string>
     <string name="direction_style_sidewise">Bočno (8 odsečaka)</string>
@@ -1929,8 +1929,8 @@
     <string name="copying_osmand_files">Kopiram OSM podatke…</string>
     <string name="copying_osmand_files_descr">Kopiram OSM podatke na novo mesto (%s)…</string>
     <string name="copying_osmand_one_file_descr">Kopiram datoteku (%s) na novo mesto…</string>
-    <string name="android_19_location_disabled">Od Androida 4.4 (KitKat), folder skladišta (%s) je zastarela. Kopiraj sve datoteke OsmAnda na novi lokaciju skladišta? 
-\n Beleška 1: Tvoje stare datoteka neće viti dirane (ali možete ih Vi sami obrisati). 
+    <string name="android_19_location_disabled">Od Androida 4.4 (KitKat), folder skladišta (%s) je zastareo. Kopiraj sve datoteke OsmAnda na novi lokaciju skladišta?
+\n Beleška 1: Tvoje stare datoteka neće viti dirane (ali možete ih Vi sami obrisati).
 \n Beleška 2: U novoj lokaciju skladišta, neće biti moguće deliti datoteke između programa OsmAnd i OsmAnd+.</string>
     <string name="routing_attr_height_description">Odredi visinu vozila koja je dozvoljena na putevima.</string>
     <string name="routing_attr_height_name">Visina</string>
@@ -2160,7 +2160,7 @@
     <string name="marker_save_as_track_descr">Izvezite oznake u sledeću datoteku GPX-a:</string>
     <string name="coordinate_input">Unos koordinata</string>
     <string name="shared_string_sort">Razvrstaj</string>
-    <string name="plan_route">Nova ruta</string>
+    <string name="plan_route">Planiranje rute</string>
     <string name="shared_string_finish">Kraj</string>
     <string name="my_location">Moja lokacija</string>
     <string name="add_location_as_first_point_descr">Dodaj svoj lokaciju kao tačku polaska da isplaniraš savršeno putovanje.</string>
@@ -2203,7 +2203,7 @@
     <string name="shared_string_right">Desno</string>
     <string name="digits_quantity">Broj decimalnih brojki</string>
     <string name="active_markers_descr">Odaberi broj pokazivača pravca.</string>
-    <string name="distance_indication_descr">Izaberi način prikaza rastojanja do markera.</string>
+    <string name="distance_indication_descr">Odaberite kako prikazati udaljenost do aktivnih markera.</string>
     <string name="shared_string_do_not_use">Ne koristi</string>
     <string name="shared_string_yes">Da</string>
     <string name="shared_string_cancel">Prekid</string>
@@ -2492,8 +2492,8 @@
     <string name="route_recalculation_dist_title">Najmanja udaljenost za preračunavanje puta</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_menu">meni</string>
-    <string name="plugin_disabled_descr">Ovaj dodatak je poseban program i ako ga isključite, nećete ga ukloniti. 
-\n 
+    <string name="plugin_disabled_descr">Ovaj dodatak je poseban program i ako ga isključiš, nećete ga ukloniti.
+\n
 \nMožete da ga izbrišete iz podešavanja programa na Androidu.</string>
     <string name="plugin_disabled">Dodatak je isključen</string>
     <string name="open_settings">Otvori podešavanja</string>
@@ -2623,11 +2623,11 @@
     <string name="lang_lmo">Lombardijski</string>
     <string name="custom_color">Proizvoljna boja</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Plaćanje se naplaćuje s tvog Google Play računa prilikom potvrde kupovine. 
-\n 
-\nPretplata se samostalno obnavlja ukoliko nije otkazana pre datuma obnove. 
-\n 
-\nPretplatama možete upravljati i otkazati ih tako što ćeš otići na svoja Google Play podešavanja.</string>
+    <string name="osm_live_payment_subscription_management">Plaćanje se naplaćuje s tvog Google Play računa prilikom potvrde kupovine.
+\n
+\nPretplata se samostalno obnavlja ukoliko nije otkazana pre datuma obnove.
+\n
+\nPretplatama možeš upravljati i otkazati ih tako što ćeš otići na svoja Google Play podešavanja.</string>
     <string name="search_poi_types">Pretraga vrsti TOI</string>
     <string name="search_poi_types_descr">Združeno koristite tačake zanimanja različitih vrsti. Kliknite prekidač radi odabira svih, kliknite na levu stranu da odaberete vrstu.</string>
     <string name="extra_maps_menu_group">Dodatne mape</string>
@@ -2760,7 +2760,7 @@
     <string name="rendering_value_dark_brown_name">Tamno smeđa</string>
     <string name="rendering_value_light_brown_name">Braon svetla</string>
     <string name="christmas_desc_q">Prikazuj božićne TOI?</string>
-    <string name="christmas_desc">U čekanju Božića i Nove Godine, možete izabrati prikaz TOI vezanih za Božić: Badnjake, božićna drva, trgovine, itd.</string>
+    <string name="christmas_desc">U čekanju Božića i Nove Godine, možeš izabrati prikaz TOI vezanih za Božić: badnjake, jelke, trgovine, itd.</string>
     <string name="christmas_poi">Božićne TOI</string>
     <string name="save_track_precision_descr">Filter: Nema zapisa dok se ne dostigne ova tačnost.</string>
     <string name="save_track_precision">Najmanja tačnost beleženja</string>
@@ -2939,7 +2939,7 @@
     <string name="quick_action_remove_next_destination_descr">Uklanja trenutnu odredišnu tačku. Ako je ona i završna tačka, navođenje će se zaustaviti.</string>
     <string name="search_download_wikipedia_maps">Preuzmi Wikipedia mape</string>
     <string name="plugin_wikipedia_description">Podaci o tačkama zanimanja potražite na Vikipediji, džepnom vanmrežnom vodiču koji ima članke o mestima i odredištima.</string>
-    <string name="add_hidden_group_info">Dodatu tačku možete naći u „%s“. Otkrij sakrivenu označenu grupu da je prikaži na mapi.</string>
+    <string name="add_hidden_group_info">Dodatu tačku možeš naći u „%s“. Otkrij sakrivenu označenu grupu pa je prikaži na mapi.</string>
     <string name="app_mode_enduro_motorcycle">Motocikl za loše puteve</string>
     <string name="app_mode_motor_scooter">Motocikl</string>
     <string name="app_mode_wheelchair">Invalidska kolica</string>
@@ -2948,7 +2948,7 @@
     <string name="osm_edit_closed_note">Zatvorena beleška OSM-a</string>
     <string name="set_working_days_to_continue">Za nastavak odredite radne dane</string>
     <string name="route_between_points">Ruta između tačaka</string>
-    <string name="plan_a_route">Nova ruta</string>
+    <string name="plan_a_route">Planiranje rute</string>
     <string name="add_to_a_track">Dodaj stazu</string>
     <string name="track_show_start_finish_icons">Prikaži ikonu za početak i kraj</string>
     <string name="select_track_width">Izaberi širinu</string>
@@ -3047,11 +3047,11 @@
     <string name="start_finish_icons">Slicice početka i završetka</string>
     <string name="contour_lines_thanks">Hvala vam što ste kupili „Izohipse“</string>
     <string name="osm_live_payment_desc_hw">Članarina se naplaćuje po izabranom vremenu. Otkažite je u AppGallery u bilo kom trenutku.</string>
-    <string name="osm_live_payment_subscription_management_hw">Uplata će biti naplaćena sa tvog računa AppGallery pri potvrdi kupovine. 
-\n 
-\nČlanarina se samostalno obnavlja ukoliko nije otkazana pre dana obnove. 
-\n 
-\nČlanarinama možete upravljati i otkazati ih tako što ćete otići u podešavanja programa AppGallery.</string>
+    <string name="osm_live_payment_subscription_management_hw">Plaćanje se naplaćuje s AppGallery računa prilikom potvrde kupovine.
+\n
+\nČlanarina se samostalno obnavlja ukoliko nije otkazana pre dana obnove.
+\n
+\nČlanarinama možeš upravljati i otkazati ih tako što ćeš otići u podešavanja programa AppGallery.</string>
     <string name="routing_attr_avoid_footways_description">Izbegavati pešačke staze</string>
     <string name="routing_attr_avoid_footways_name">Izbegavati pešačke staze</string>
     <string name="development">Razvoj</string>
@@ -3087,9 +3087,9 @@
     <string name="login_open_street_map_org">Prijavite se na OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Prijavi se pomoću OpenStreetMap-a</string>
     <string name="osm_edits_view_descr">Pogledaj sve tvoje još uvek neotpremljene izmene ili beleške OSM-a u %1$s. Otpremljene tačke se ne više prikazuju.</string>
-    <string name="open_street_map_login_mode">Prijavi se da bi otpremip nove ili izmenjene promene.
+    <string name="open_street_map_login_mode">Prijavi se da bi otpremio nove ili izmenjene promene.
 \n
-\nMožete se prijaviti koristeći bezbedan način prijave OAuth ili koristite svoje korisničko ime i lozinku.</string>
+\nMožeš se prijaviti koristeći bezbedan način prijave OAuth ili koristite svoje korisničko ime i lozinku.</string>
     <string name="use_login_password">Koristite korisničko ime i lozinku</string>
     <string name="login_account">Nalog</string>
     <string name="user_password">Lozinka</string>
@@ -3214,7 +3214,7 @@
     <string name="welcome_to_open_beta">Dobrodošli u otvorenu betu</string>
     <string name="get_unlimited_access">Dobavi neograničeni pristup</string>
     <string name="start_editing">Početak uređivanja</string>
-    <string name="start_editing_card_description">Možete i trebali biste da menjate bilo koji članak na Vikivojažu, a i nadamo se da hoćete. Deli tvoje znanje, iskustvo, dar i pažnju.</string>
+    <string name="start_editing_card_description">Možeš i trebao bi menjati bilo koji članak na Wikivoyage. Deli tvoje znanje, iskustvo, talenat i pažnju.</string>
     <string name="welcome_to_open_beta_description">Turistički vodiči su trenutno zasnovani na Vikivojažu. Isprobajte sve mogućnosti besplatno.</string>
     <string name="start_editing_card_image_text">Besplatni svetski turistički vodič koji svako može da uređuje.</string>
     <string name="download_file">Preuzmi datoteku</string>
@@ -3248,7 +3248,7 @@
     <string name="show_full_description">Prikaži ceo opis</string>
     <string name="hide_full_description">Sakrij ceo opis</string>
     <string name="shared_string_bookmark">Zabeleži</string>
-    <string name="unirs_render_descr">Izmena podrazumevanog načina prikaza za bolje isticanje pešačkih i biciklističkih puteva. Koristi stare obrasce boja Mapnika.</string>
+    <string name="unirs_render_descr">Modifikacija osnovnog stila za povećanje kontrasta pešačkih i biciklističkih puteva. Koristi stare obrasce boja Mapnika.</string>
     <string name="get_osmand_live">Nabavi OsmAnd Live radi korišćenja ovih mogućnosti: dnevna ažuriranja mapa sa neograničenim brojem preuzimanja, svi plaćeni i besplatni dodaci, Wikipedia, Wikivoyage i još mnogo toga.</string>
     <string name="quick_action_edit_actions">Izmeni radnje</string>
     <string name="error_notification_desc">Pošalji snimak ekrana ovog obaveštenja na support@osmand.net</string>
@@ -4173,7 +4173,7 @@
     <string name="pro_features">Profesionalne funkcije</string>
     <string name="shared_string_contributions">Doprinos</string>
     <string name="not_enough_contributions_descr">Najmanje od %1$s izmena kroz vreme od poslednja dva meseca %2$s je potrebno radi dobavljanja pristupa neograničenim osveženjima mape svakih sat vremena.</string>
-    <string name="enough_contributions_descr">Čestitamo, stekao si dovoljno doprinosa OpenStritMap-ama i sada možete uživati neograničeno u osvežavanju mapa OsmAnda!</string>
+    <string name="enough_contributions_descr">Čestitamo, stekao si dovoljno doprinosa u uređivanji OpenStreetMap i sada možeš uživati neograničeno u ažuriranju mapa!</string>
     <string name="benefits_for_contributors_primary_descr">Trenutni doprinosioci OpenStritMapama mogu imati pravo na neograničena osvežavanja mape svakih sat vremena.</string>
     <string name="travel_routes">Putanje putovanja</string>
     <string name="online_maps_required_descr">Nažalost, OsmAnd nije uspeo da odredi rutu po podešavanjima.
@@ -4223,7 +4223,7 @@
     <string name="get_altitude_data">Dobavi podatke o nadmorskoj visini</string>
     <string name="turn_on_public_transport_description">Uključi prikaz linija javnog prevoza.</string>
     <string name="configure_screen_widgets_descr">Izaberi stranu ekrana radi dodavanja ili preuređenja widget.</string>
-    <string name="osm_carto_render_descr">Slično načinu prikaza mapa OpenStritMapa koji se koristi na glavnim stranicama OSM-a</string>
+    <string name="osm_carto_render_descr">Slično kao OpenStreetMap stil koji se koristi na glavnoj OSM web strani</string>
     <string name="speed_mode">Način rada brzine</string>
     <string name="purchases_feature_desc_android_auto">Prikazuje offline mape OsmAnda i navođenje na ekranu tvog vozila i usklađuje se sa upravljačima tvog vozila.</string>
     <string name="backup_error_subscription_was_expired">Istekla pretplata</string>
@@ -4815,7 +4815,7 @@
     <string name="shared_string_next_sunset">Sledeći zalazak Sunca</string>
     <string name="map_widget_sunrise_desc">Prikazuje vreme do sledećeg izlaska sunca, ili preostalo vreme do sledećeg izlaska sunca.</string>
     <string name="shared_string_next_sunrise">Sledeći zalazak Sunca</string>
-    <string name="action_not_supported_with_map_style">Ova radnja nije podržana po izabranom načinu prikaza mape.</string>
+    <string name="action_not_supported_with_map_style">Ovu radnju ne podržava odabrani stil karte.</string>
     <string name="map_widget_rendering_fps_desc">Prikazuje brzinu osvežavanja mape i elemenata mape koji se prikazuju i osvežavaju, izraženo u sličicama po sekundi (FPS).</string>
     <string name="map_widget_ant_heart_rate_desc">Prikazuje korisnikove srčane otkucaje u realnom vremeni</string>
     <string name="pressure_layer">Nivo pritiska</string>
@@ -5408,7 +5408,7 @@
     <string name="rendering_engine_failed_descr">Osmand se je vratio na prikaz mape „Verzija 1“. Možeš pokušati da povratiš novi način za prikaz „Verzija 2 (OpenGL)“ u podešavanjima.
 \n
 \nMolimo, podržite poboljšanja dostavljanjem dnevnika grešaka.</string>
-    <string name="map_rendering_engine_descr">Verzija 2 (OpenGL) je brži motor za prikaz mapa, takođe predstavlja pogled 2.5. Verzija 1 pregleda je bilo podrazumevano pre OsmAnda 4.3, koje je i dalje poželjno na starijim uređajima.</string>
+    <string name="map_rendering_engine_descr">Verzija 2 (OpenGL) je brži motor za prikaz mapa, takođe predstavlja 2.5D pogled. Verzija 1 je za starije uređaje i bila podrazumevana pre OsmAnda 4.3</string>
     <string name="map_rendering_engine">Motor za prikaz mape</string>
     <string name="show_borders_of_downloaded_maps">Prikazuj granice preuzetih mapa</string>
     <string name="dismiss_changes">Odbaciti promene?</string>
