@@ -4536,7 +4536,7 @@
     <string name="poi_sinkhole_doline">Sinkloch: Doline</string>
     <string name="poi_sinkhole_ponor">Sinkloch: Ponor</string>
     <string name="poi_sinkhole_pit">Sinkloch: Grube</string>
-    <string name="poi_barrier_coupure">Deichschart Barriere</string>
+    <string name="poi_barrier_coupure">Deichschart-Barriere</string>
     <string name="poi_sinkhole_estavelle">Sinkloch: Estavelle</string>
     <string name="poi_sinkhole_bluehole">Sinkloch: Blue Hole</string>
     <string name="poi_barrier_planter">Blumenkübel</string>
@@ -4636,7 +4636,7 @@
     <string name="poi_dressing_room">Umkleideraum</string>
     <string name="poi_emergency_bay">Rettungsbucht</string>
     <string name="poi_osmand_motor_vehicle_no">Zufahrt für Kraftfahrzeuge: nein</string>
-    <string name="poi_osmand_motorcar_no">PKW-Zufahrt: nein</string>
+    <string name="poi_osmand_motorcar_no">Pkw-Zufahrt: nein</string>
     <string name="poi_osmand_vehicle_no">Zufahrt: nein</string>
     <string name="poi_osmand_access_no">Zugang: nein</string>
     <string name="poi_osmand_access_private">Zugang: privat</string>
@@ -4646,7 +4646,7 @@
     <string name="poi_osmand_foot_no">Fußgängerzugang: nein</string>
     <string name="poi_osmand_bicycle_no">Fahrradzufahrt: nein</string>
     <string name="poi_osmand_vehicle_private">Zufahrt: privat</string>
-    <string name="poi_osmand_motorcar_private">PKW-Zufahrt: privat</string>
+    <string name="poi_osmand_motorcar_private">Pkw-Zufahrt: privat</string>
     <string name="poi_osmand_motorcycle_no">Motorradzufahrt: nein</string>
     <string name="poi_osmand_motorcycle_private">Motorradzufahrt: privat</string>
     <string name="poi_healthcare_speciality_denturist">Zahntechniker</string>
@@ -4735,7 +4735,7 @@
     <string name="poi_padus_public_access_closed">Zugang: geschlossen</string>
     <string name="poi_nfs_recreation_area_activity_backpacking">Rucksackreise</string>
     <string name="poi_nfs_recreation_area_activity_boating_motorized">Motorboot fahren</string>
-    <string name="poi_padus_area">US Naturschutzgebiete</string>
+    <string name="poi_padus_area">US-Naturschutzgebiete</string>
     <string name="poi_padus_category_fee">Kategorie: Gebühr</string>
     <string name="poi_nfs_recreation_area_activity_day_hiking">Wandern</string>
     <string name="poi_nfs_recreation_area_activity_disc_golf">Disc Golf</string>
@@ -4748,7 +4748,7 @@
     <string name="poi_nfs_recreation_area_activity_snowmobiling">Schneemobilfahren</string>
     <string name="poi_nfs_recreation_area_activity_target_shooting">Zielschießen</string>
     <string name="poi_nfs_recreation_area_activity_viewing_wildlife">Tiere beobachten</string>
-    <string name="poi_nfs_recreation_area_activity_waterskiing">Wasserski fahren</string>
+    <string name="poi_nfs_recreation_area_activity_waterskiing">Wasserskifahren</string>
     <string name="poi_nfs_recreation_area_activity_winter_sports">Wintersport</string>
     <string name="poi_nfs_recreation_area_open_status_open">Geöffnet</string>
     <string name="poi_padus_category_designation">Kategorie: Widmung</string>
@@ -4769,7 +4769,7 @@
     <string name="poi_nfs_recreation_area_activity_visitor_centers">Besucherzentren</string>
     <string name="poi_nfs_recreation_area_activity_water_activities">Wasseraktivitäten</string>
     <string name="poi_nfs_recreation_area_open_status_closed">Geschlossen</string>
-    <string name="poi_nfs_recreation_area_activity_picnicking">Piknicken</string>
+    <string name="poi_nfs_recreation_area_activity_picnicking">Picknicken</string>
     <string name="poi_nfs_recreation_area_activity_windsurfing">Windsurfen</string>
     <string name="poi_nfs_recreation_area_open_status_temporarily_closed">Temporär geschlossen</string>
     <string name="poi_nfs_recreation_area_open_status_unreachable">Unerreichbar</string>
@@ -4805,10 +4805,10 @@
     <string name="poi_nfs_recreation_area_open_status_open_2">Status des Zugangs zum Erholungsgebiet (2): geöffnet</string>
     <string name="poi_nfs_recreation_area_reservation_info">Reservierungsinfo</string>
     <string name="poi_nfs_recreation_area_restrictions">Einschränkungen</string>
-    <string name="poi_nfs_recreation_area_activity_boating_non_motorized">Nichtmotorisiertes Bootfahren</string>
+    <string name="poi_nfs_recreation_area_activity_boating_non_motorized">Nicht motorisiertes Bootfahren</string>
     <string name="poi_padus_local_designation">Ortsbezeichnung</string>
     <string name="poi_padus_local_manager">Lokaler Manager</string>
-    <string name="poi_nfs_recreation_area_activity_cabin_rentals">Vermietung von Kabinen</string>
+    <string name="poi_nfs_recreation_area_activity_cabin_rentals">Vermietung von Ferienhütten</string>
     <string name="poi_nfs_recreation_area_activity_campground_camping">Zeltplatz-Camping</string>
     <string name="poi_nfs_recreation_area_activity_dispersed_camping">Verteilter Campingplatz</string>
     <string name="poi_nfs_recreation_area_activity_fossil_collecting">Fossilien sammeln</string>
