@@ -5620,4 +5620,5 @@
     <string name="shared_string_activity">Aktivität</string>
     <string name="sort_subfolders">Unterordner sortieren</string>
     <string name="sorted_sufolders_toast">Unterordner in “%1$s” werden sortiert nach: “%2$s”</string>
+    <string name="special_routing_cpp">Spezieller Navigationstyp</string>
 </resources>
