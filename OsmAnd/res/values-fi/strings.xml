@@ -3208,7 +3208,9 @@
     <string name="height_limit_description">Ilmoita ajoneuvosi korkeus, sillä korkeisiin ajoneuvoihin voi kohdistua joitakin reittirajoituksia.</string>
     <string name="lenght_limit_description">Ilmoita ajoneuvosi pituus, sillä pitkiin ajoneuvoihin voi kohdistua joitakin reittirajoituksia.</string>
     <string name="weight_limit_description">Ilmoita ajoneuvosi paino, sillä raskaisiin ajoneuvoihin voi kohdistua joitakin reittirajoituksia.</string>
-    <string name="gpx_parse_error">OsmAnd GPX ei ole hyvin muodostettu, ota yhteyttä tukitiimiin selvittääksesi asiaa tarkemmin.</string>
+    <string name="gpx_parse_error">GPX-tiedostosta löytyi ongelmia.
+\n
+\nVoit ottaa yhteyttä OsmAndin tukeen asian selvittämiseksi.</string>
     <string name="shared_string_in_name">%1$s:ssa</string>
     <string name="shared_string_resume">Jatka</string>
     <string name="shared_string_max">Maks.</string>
@@ -4049,4 +4051,29 @@
     <string name="rendering_attr_hideMilitaryAreas_description">Piilota sotilasalueet</string>
     <string name="show_borders_of_downloaded_maps">Näytä ladattujen karttojen rajat</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Piilota sotilasalueet</string>
+    <string name="weather_wind_knots">Solmua</string>
+    <string name="import_export">Tuo/vie</string>
+    <string name="map_settings_weather_precip">Sademäärä</string>
+    <string name="shared_string_weather">Sää</string>
+    <string name="weather_precip_milimeters">Millimetriä</string>
+    <string name="weather_precip_mm">mm</string>
+    <string name="shared_string_keywords">Avainsanat</string>
+    <string name="weather_forecast">Sääennuste</string>
+    <string name="explore_weather_forecast">Tutki sääennusteita.</string>
+    <string name="weather_wind_miles_per_hour">Mailia tunnissa</string>
+    <string name="weather_precip_inches">Tuumaa</string>
+    <string name="weather_wind_kilimeters_per_hour">Kilometriä tunnissa</string>
+    <string name="weather_temperature_celsius">Celsius</string>
+    <string name="map_settings_weather_temp">Lämpötila</string>
+    <string name="weather_temperature_fahrenheit">Fahrenheit</string>
+    <string name="weather_forecast_is_outdated">Ennuste on vanhentunut.</string>
+    <string name="weather_precip_in">sisällä</string>
+    <string name="history_actions_descr">Voit viedä historian tiedostoon.</string>
+    <string name="export_to_file">Vie tiedostoon</string>
+    <string name="map_settings_weather_air_pressure">Ilmanpaine</string>
+    <string name="weather_wind_ms">m/s</string>
+    <string name="help_article_personal_import_export_name">Tuo / vie</string>
+    <string name="folder_export_empty_error">Ei mitään vietävää, kansio on tyhjä</string>
+    <string name="weather_wind_kmh">km/t</string>
+    <string name="weather_wind_meters_per_second">Metriä/sekunti</string>
 </resources>

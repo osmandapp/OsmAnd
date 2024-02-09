@@ -396,7 +396,7 @@
     <string name="show_tunnels">Tuneli</string>
     <string name="tunnel_warning">Tunel je ispred</string>
     <string name="toast_empty_name_error">Neimenovana lokacija</string>
-    <string name="copy_location_name">Snimi lokaciju/ime tačke</string>
+    <string name="copy_location_name">Kopiraj lokaciju/ ime TOI</string>
     <string name="nautical_renderer">Nautika</string>
     <string name="touring_view_renderer">Turistički pregled</string>
     <string name="winter_and_ski_renderer">Zima i skijanje</string>
@@ -464,7 +464,7 @@
     <string name="quick_action_take_video_note_descr">Dugme za dodavanje video beleške na sredinu ekrana.</string>
     <string name="quick_action_take_audio_note_descr">Dugme za dodavanje zvučne beleške na sredinu ekrana.</string>
     <string name="quick_action_add_gpx_descr">Dugme za dodavanje prolazne tačke GPX-a na sredinu ekrana.</string>
-    <string name="quick_action_add_marker_descr">Dugme za dodavanje oznake na mapi na lokaciju na središtu ekrana.</string>
+    <string name="quick_action_add_marker_descr">Dugme za dodavanje oznake na mapi za lokaciju na sredini ekrana.</string>
     <string name="quick_favorites_name_preset">Unapred postavljeno ime</string>
     <string name="quick_favorites_show_favorites_dialog">Prikaži prozor omiljenih</string>
     <string name="quick_actions_delete_text">Obrisati radnju „%s“?</string>
@@ -821,8 +821,8 @@
     <string name="add_waypoint_dialog_added">Prolazna tačka GPX-a „{0}“ je dodata</string>
     <string name="context_menu_item_share_location">Podeli lokaciju</string>
     <string name="send_location">Pošalji lokaciju</string>
-    <string name="send_location_email_pattern">Da vIdi lokaciju, pratite vezu ka veb lokaciji %1$s ili Android intent vezu %2$s</string>
-    <string name="send_location_sms_pattern">lokaciju: %1$s 
+    <string name="send_location_email_pattern">Da vidiš lokaciju, prati link ka web strani %1$s ili Android linku %2$s</string>
+    <string name="send_location_sms_pattern">Lokacija: %1$s
 \n%2$s</string>
     <string name="send_location_way_choose_title">Podeli lokaciju koristeći</string>
     <string name="mile">mi</string>
@@ -838,7 +838,7 @@
     <string name="preferred_locale">Jezik</string>
     <string name="preferred_locale_descr">Jezik za prikaz programa (koristiće se od kada se OsmAnd ponovo pokrene).</string>
     <string name="system_locale">Sistem</string>
-    <string name="search_osm_offline">Pretraži po geografskom lokaciju</string>
+    <string name="search_osm_offline">Traži po geografskoj lokaciji</string>
     <string name="search_offline_geo_error">Nisam uspeo da rasčlanim geo-nameru ’%s’.</string>
     <string name="error_doing_search">Pretraga bez interneta ne može da se obavi.</string>
     <string name="create_poi_link_to_osm_doc"><u>Vrsta mapa na mreži OSM</u> sa slikama.</string>
@@ -1011,7 +1011,7 @@
     <string name="osmand_parking_am">PoP</string>
     <string name="osmand_parking_pm">PrP</string>
     <string name="osmand_parking_position_description_add">Uzeti vozilo sa parkinga u:</string>
-    <string name="osmand_parking_position_description">lokaciju parkiranja tvog vozila. %1$s</string>
+    <string name="osmand_parking_position_description">Lokacija parkiranog vozila. %1$s</string>
     <string name="osmand_parking_time_no_limit">Parking bez vremenskog ograničenja</string>
     <string name="osmand_parking_time_limit">Parking sa vremenskim ograničenjem</string>
     <string name="osmand_parking_add_event">Dodaj obaveštenje u program kalendara</string>
@@ -1024,7 +1024,7 @@
     <string name="osmand_parking_warning_text">Obaveštenje da preuzmeš auta je dodato u kalendar i tamo možeš da ga izmeniš ili ukloniš.</string>
     <string name="osmand_parking_warning">Upozorenje</string>
     <string name="osmand_parking_event">Uzmite auta sa parkinga</string>
-    <string name="shared_location">Deljeni lokaciju</string>
+    <string name="shared_location">Pošalji lokaciju</string>
     <string name="starting_point_too_far">Tačka polaska je previše daleko od najbližeg puta.</string>
     <string name="native_app_allocated_memory">Ukupno skladišta</string>
     <string name="native_app_allocated_memory_descr">Ukupno memorije koje je premestio program %1$s MB (Dalvik %2$s MB, ostalo %3$s MB). 
@@ -1296,7 +1296,7 @@
     <string name="route_tl">Skrenite levo i nastavite</string>
     <string name="route_tslr">Skrenite blago desno i nastavite</string>
     <string name="download_regular_maps">Uobičajena mapa</string>
-    <string name="audionotes_location_not_defined">Kliknite „Koristi lokaciju…“ da dodate belešku određenoj lokaciji.</string>
+    <string name="audionotes_location_not_defined">Tapni „Koristi lokaciju…“ da dodate belešku određenoj lokaciji.</string>
     <string name="recording_description">Snimam %1$s %3$s %2$s</string>
     <string name="recording_can_not_be_played">Ne mogu da pustim snimak.</string>
     <string name="recording_open_external_player">Otvori program spoljnjeg izvođača</string>
@@ -1346,7 +1346,7 @@
     <string name="localization_pref_title">Prevod</string>
     <string name="misc_pref_title">Razno</string>
     <string name="voice_pref_title">Glas</string>
-    <string name="always_center_position_on_map">Uvek prikazuj lokaciju u sredini</string>
+    <string name="always_center_position_on_map">Pozicija uvek u centru</string>
     <string name="use_points_as_intermediates">Računaj ruta između tačaka</string>
     <string name="int_days">dana</string>
     <string name="osmo_connect_menu">Poveži se</string>
@@ -1505,7 +1505,7 @@
     <string name="keep_informing">Kada tapneš na strelicu (ručno)</string>
     <string name="keep_informing_descr">Ponavljaj uputstva navođenja u pravilnim razmacima.</string>
     <string name="keep_informing_never">Samo ručno (klikom na strelicu)</string>
-    <string name="choose_auto_follow_route_descr">Vreme dok se pregled mape ne uskladi sa trenutnim lokacijuem.</string>
+    <string name="choose_auto_follow_route_descr">Vreme dok se pregled mape sinhronizuje sa trenutnom pozicijom.</string>
     <string name="use_transparent_map_theme">Prozirna tema</string>
     <string name="download_files_not_enough_space">Nema dovoljno slobodnog prostora za preuzimanje %1$s MB (slobodno: %2$s).</string>
     <string name="osmand_service_descr">OsmAnd radi u pozadini dok je ekran isključen.</string>
@@ -2356,7 +2356,7 @@
     <string name="av_locations">Lokacije</string>
     <string name="av_locations_descr">Datoteka GPX sa lokacijama</string>
     <string name="looking_up_address">Pretražujem adresu</string>
-    <string name="simulate_your_location_gpx_descr">Simulirajte svoj lokaciju koristeću snimljenu putanje GPX-a.</string>
+    <string name="simulate_your_location_gpx_descr">Simuliraj svoj lokaciju koristeću snimljenu putanje GPX-a.</string>
     <string name="simulate_your_location_descr">Simuliraj upotrebom proračunate rute ili snimka GPX-a.</string>
     <string name="simulate_your_location_stop_descr">Zaustavi simuliranje svog lokaciju.</string>
     <string name="favourites_edit_dialog_title">Omiljena obaveštenja</string>
@@ -3524,7 +3524,7 @@
     <string name="cancel_subscription">Poništi članarinu</string>
     <string name="get_discount_second_part">Onda %1$s</string>
     <string name="osmand_parking_plugin_description">Označava gde su vam auta ostavljena, i obaveštava Vam kalendar kada će isteći vreme parkiranja. Radi smeštaja oznake, Izaberi mesto na mapi, Idi na „Radnje“ i tapnite na „Dodaj parking“.</string>
-    <string name="osmand_parking_plugin_name">lokaciju parkiranja</string>
+    <string name="osmand_parking_plugin_name">Parking pozicija</string>
     <string name="audionotes_plugin_description">Pravite zvučne/video beleške za vreme putovanja, ili kroz dugme na mapi ili kroz priručni meni lokacija.</string>
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="plugin_touringview_descr">Uključivanjem ovog pogleda se menja način izgeda mape na „Turistički pregled“, koji je naročiti bogati pregled za turiste i službene vozače. 
