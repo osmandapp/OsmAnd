@@ -24,5 +24,5 @@ public interface IMultiStateCardController {
 
 	boolean onMenuItemSelected(@NonNull PopUpMenuItem item);
 
-	void onBindContentView(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup container);
+	void onBindStateRelatedContent(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup container);
 }

@@ -37,8 +37,8 @@ public class MultiStateCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		updateTitle();
-		updateSelector();
-		updateContentView();
+		updateStateSelector();
+		updateStateRelatedContent();
 	}
 
 	private void updateTitle() {
@@ -46,42 +46,42 @@ public class MultiStateCard extends BaseCard {
 		tvTitle.setText(cardController.getCardTitle());
 	}
 
-	private void updateSelector() {
+	private void updateStateSelector() {
 		View selector = view.findViewById(R.id.card_selector);
 		if (!cardController.shouldShowMenuButton()) {
 			selector.setVisibility(View.GONE);
 			return;
 		}
 		selector.setVisibility(View.VISIBLE);
-		selector.setOnClickListener(v -> showSelectionMenu());
+		selector.setOnClickListener(v -> showStateSelectionMenu());
 
 		int colorId = ColorUtilities.getActiveColor(app, nightMode);
 		Drawable selectableBackground = UiUtilities.getColoredSelectableDrawable(app, colorId);
 		selector.setBackground(selectableBackground);
 
-		updateSelectorTitle();
+		updateStateSelectorTitle();
 	}
 
-	private void updateSelectorTitle() {
+	private void updateStateSelectorTitle() {
 		View selector = view.findViewById(R.id.card_selector);
 		TextView tvTitle = selector.findViewById(R.id.title);
 		tvTitle.setText(cardController.getMenuButtonTitle());
 	}
 
-	private void updateContentView() {
+	private void updateStateRelatedContent() {
 		ViewGroup contentContainer = view.findViewById(R.id.content);
 		contentContainer.removeAllViews();
-		cardController.onBindContentView(themedInflater, contentContainer);
+		cardController.onBindStateRelatedContent(themedInflater, contentContainer);
 	}
 
-	private void showSelectionMenu() {
+	private void showStateSelectionMenu() {
 		View selector = view.findViewById(R.id.card_selector);
 		List<PopUpMenuItem> menuItems = cardController.getMenuItems();
 
 		OnPopUpMenuItemClickListener onItemClickListener = item -> {
 			if (cardController.onMenuItemSelected(item)) {
-				updateSelector();
-				updateContentView();
+				updateStateSelector();
+				updateStateRelatedContent();
 			}
 		};
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
