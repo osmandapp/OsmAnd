@@ -1657,7 +1657,7 @@
     <string name="lang_mk">Makedonski</string>
     <string name="lang_nds">Niskonemački</string>
     <string name="share_osm_edits_subject">Izmene OSM-a deljene preko OsmAnd-a</string>
-    <string name="shared_string_location">lokaciju</string>
+    <string name="shared_string_location">Lokacija</string>
     <string name="context_menu_item_edit_waypoint">Izmeni međiodredišnu tačku GPX-a</string>
     <string name="context_menu_item_delete_waypoint">Izbrisati prolaznu tačku GPX-a?</string>
     <string name="shared_string_commit">Predaj</string>
