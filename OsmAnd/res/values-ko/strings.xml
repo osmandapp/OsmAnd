@@ -4618,4 +4618,5 @@
     <string name="change_markers_position">변경 마커 위치</string>
     <string name="add_track_to_markers_descr">Markers에 대한 통로를 추가하기 위해 트랙을 선택합니다.</string>
     <string name="fast_coordinates_input_descr">좌표 입력 형식을 선택하십시오. \'Options\'를 탭하여 변경합니다.</string>
+    <string name="mapillary_menu_title_pano">360° 이미지로만 표시</string>
 </resources>
