@@ -2,32 +2,35 @@ package net.osmand.plus.widgets.popup;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
 
 public class PopUpMenuItem {
 
 	private final CharSequence title;
 	private final Drawable icon;
-	private final View.OnClickListener onClickListener;
+	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
 	private final Integer compoundBtnColor;
 	private final boolean selected;
 	private final boolean showTopDivider;
+	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
-	                     Drawable icon,
-	                     View.OnClickListener onClickListener,
-	                     Integer compoundBtnColor,
-	                     boolean selected,
-	                     boolean showTopDivider) {
+	                      Drawable icon,
+	                      OnPopUpMenuItemClickListener onClickListener,
+	                      Integer compoundBtnColor,
+	                      boolean selected,
+	                      boolean showTopDivider,
+	                      Object tag) {
 		this.title = title;
 		this.icon = icon;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
 		this.selected = selected;
 		this.showTopDivider = showTopDivider;
+		this.tag = tag;
 	}
 
 	public CharSequence getTitle() {
@@ -38,7 +41,8 @@ public class PopUpMenuItem {
 		return icon;
 	}
 
-	public View.OnClickListener getOnClickListener() {
+	@Nullable
+	public OnPopUpMenuItemClickListener getOnClickListener() {
 		return onClickListener;
 	}
 
@@ -58,15 +62,20 @@ public class PopUpMenuItem {
 		return showTopDivider;
 	}
 
+	public Object getTag() {
+		return tag;
+	}
+
 	public static class Builder {
 		private final Context ctx;
 		private CharSequence title;
 		private Drawable icon;
-		private View.OnClickListener onClickListener;
+		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
 		private Integer compoundBtnColor;
 		private boolean selected;
 		private boolean showTopDivider;
+		private Object tag;
 
 		public Builder(Context ctx) {
 			this.ctx = ctx;
@@ -87,7 +96,7 @@ public class PopUpMenuItem {
 			return this;
 		}
 
-		public Builder setOnClickListener(View.OnClickListener onClickListener) {
+		public Builder setOnClickListener(@Nullable OnPopUpMenuItemClickListener onClickListener) {
 			this.onClickListener = onClickListener;
 			return this;
 		}
@@ -107,8 +116,14 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder setTag(Object tag) {
+			this.tag = tag;
+			return this;
+		}
+
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, icon, onClickListener, compoundBtnColor, selected, showTopDivider);
+			return new PopUpMenuItem(title, icon, onClickListener,
+					compoundBtnColor, selected, showTopDivider, tag);
 		}
 	}
 }

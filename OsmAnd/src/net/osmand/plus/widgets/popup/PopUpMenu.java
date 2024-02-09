@@ -83,10 +83,7 @@ public class PopUpMenu {
 		}
 		listPopupWindow.setOnItemClickListener((parent, view, position, id) -> {
 			if (position < menuItems.size()) {
-				View.OnClickListener listener = menuItems.get(position).getOnClickListener();
-				if (listener != null) {
-					listener.onClick(view);
-				}
+				notifyItemClicked(displayData, menuItems.get(position));
 			}
 			listPopupWindow.dismiss();
 		});
@@ -113,6 +110,17 @@ public class PopUpMenu {
 	private int getDimension(@NonNull Context ctx, int resId) {
 		Resources resources = ctx.getResources();
 		return resources.getDimensionPixelSize(resId);
+	}
+
+	private static void notifyItemClicked(@NonNull PopUpMenuDisplayData displayData,
+	                                      @NonNull PopUpMenuItem menuItem) {
+		OnPopUpMenuItemClickListener listener = menuItem.getOnClickListener();
+		if (listener == null) {
+			listener = displayData.onItemClickListener;
+		}
+		if (listener != null) {
+			listener.onPopUpItemClicked(menuItem);
+		}
 	}
 
 	public static void show(@NonNull PopUpMenuDisplayData displayData) {
@@ -143,7 +151,7 @@ public class PopUpMenu {
 				MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
 				menuItem.setIcon(popupMenuItem.getIcon());
 				menuItem.setOnMenuItemClickListener(item -> {
-					popupMenuItem.getOnClickListener().onClick(view);
+					notifyItemClicked(displayData, popupMenuItem);
 					popupMenu.dismiss();
 					return true;
 				});

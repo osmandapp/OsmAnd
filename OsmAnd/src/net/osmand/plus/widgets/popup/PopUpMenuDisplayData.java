@@ -16,4 +16,5 @@ public class PopUpMenuDisplayData {
 	public boolean nightMode;
 	public PopUpMenuWidthMode widthMode = PopUpMenuWidthMode.AS_ANCHOR_VIEW;
 	public List<PopUpMenuItem> menuItems;
+	public OnPopUpMenuItemClickListener onItemClickListener;
 }
