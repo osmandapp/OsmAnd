@@ -1507,7 +1507,7 @@ public class RouteResultPreparation {
 		int[] lanes = t.getLanes();
 		String turnLanes = TurnType.convertLanesToOsmString(lanes, true, false);
 		if (turnLanes != null) {
-			int[] uniq = getUniqTurnTypes(turnLanes);
+			int[] uniq = getUniqDirections(turnLanes);
 			// if we have 2 and more active directions
 			if (uniq.length >= 2) {
 				return turnLanes;
@@ -1713,13 +1713,13 @@ public class RouteResultPreparation {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
-					for (int i = 0; i < lanes; i++) {
-						rs.attachedAngles.add(deviation);
-					}
 					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
 				}
 			}
-			
+			for (int i = 0; i < lanes; i++) {
+				rs.attachedAngles.add(deviation);
+			}
+
 		}
 		return rs;
 	}
@@ -2231,7 +2231,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private int[] getUniqTurnTypes(String turnLanes) {
+	private int[] getUniqDirections(String turnLanes) {
 		LinkedHashSet<Integer> turnTypes = new LinkedHashSet<>();
 		String[] splitLaneOptions = turnLanes.split("\\|", -1);
 		for (int i = 0; i < splitLaneOptions.length; i++) {
@@ -2250,6 +2250,30 @@ public class RouteResultPreparation {
 		return r;
 	}
 
+	private int[] getSyntheticDirections(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, RoadSplitStructure rs) {
+		double currentDeviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+		rs.attachedAngles.add(currentDeviation);
+		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
+			@Override
+			public int compare(Double c1, Double c2) {
+				return Double.compare(c2, c1);
+			}
+		});
+		int size = rs.attachedAngles.size();
+		double prevAngle = Double.NaN;
+		int[] directions = new int[size];
+		// iterate from left to right turns
+		for (int i = 0; i < size; i++) {
+			double angle = rs.attachedAngles.get(i);
+			if (!Double.isNaN(prevAngle) && angle == prevAngle) {
+				continue;
+			}
+			prevAngle = angle;
+			directions[i] = getTurnByAngle(angle);
+		}
+		return directions;
+	}
+
 	private int[] findActiveIndex(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, int[] rawLanes, RoadSplitStructure rs, String turnLanes) {
 		int[] pair = {-1, -1};
 		if (turnLanes == null) {
@@ -2264,7 +2288,10 @@ public class RouteResultPreparation {
 		if (rs == null) {
 			return pair;
 		}
-		int[] directions = getUniqTurnTypes(turnLanes);
+		int[] directions = getUniqDirections(turnLanes);
+		if (rs.roadsOnLeft + rs.roadsOnRight >= directions.length) {
+			directions = getSyntheticDirections(prevSegm, currentSegm, rs);
+		}
 		if (rs.roadsOnLeft + rs.roadsOnRight < directions.length) {
 			int startDirection = directions[rs.roadsOnLeft];
 			int endDirection = directions[directions.length - rs.roadsOnRight - 1];
@@ -2294,7 +2321,7 @@ public class RouteResultPreparation {
 		if (turnLanes == null) {
 			return false;
 		}
-		int[] uniqTurnTypes = getUniqTurnTypes(turnLanes);
+		int[] uniqTurnTypes = getUniqDirections(turnLanes);
 		for (int lane : uniqTurnTypes) {
 			if (lane == turnType) {
 				return true;
@@ -2307,7 +2334,7 @@ public class RouteResultPreparation {
 		if (turnLanesPrevSegm == null) {
 			return false;
 		}
-		int[] uniqTurnTypes = getUniqTurnTypes(turnLanesPrevSegm);
+		int[] uniqTurnTypes = getUniqDirections(turnLanesPrevSegm);
 		for (int lane : uniqTurnTypes) {
 			if (TurnType.isSharpOrReverse(lane)) {
 				return true;
@@ -2322,8 +2349,8 @@ public class RouteResultPreparation {
 		if (turnLanesPrevSegm == null || turnLanesCurrSegm == null) {
 			return false;
 		}
-		int[] uniqPrev = getUniqTurnTypes(turnLanesPrevSegm);
-		int[] uniqCurr = getUniqTurnTypes(turnLanesCurrSegm);
+		int[] uniqPrev = getUniqDirections(turnLanesPrevSegm);
+		int[] uniqCurr = getUniqDirections(turnLanesCurrSegm);
 		if (uniqPrev.length != uniqCurr.length) {
 			return false;
 		}
