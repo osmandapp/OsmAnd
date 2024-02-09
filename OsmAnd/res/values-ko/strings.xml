@@ -1656,7 +1656,7 @@
     <string name="access_direction_haptic_feedback_descr">진동에 의한 목표점 방향을 나타냅니다.</string>
     <string name="use_osm_live_routing_description">OsmAnd Live 변경사항에 대한 탐색을 활성화합니다.</string>
     <string name="use_osm_live_routing">OsmAnd Live 탐색</string>
-    <string name="access_no_destination"/>
+    <string name="access_no_destination">접근성 플러그인: 대상 없음</string>
     <string name="map_widget_magnetic_bearing"/>
     <string name="map_widget_bearing"/>
     <string name="access_disable_offroute_recalc"/>
@@ -1931,7 +1931,7 @@
     <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org에 적극적으로 기여한 사람은 시간당 지도 업데이트를 무제한으로 받을 수 있습니다.</string>
     <string name="offline_wikivoyage">오프라인 Wikivoyage</string>
     <string name="offline_wikipeadia">오프라인 Wikipedia</string>
-    <string name="routing_attr_avoid_tunnels_name">터널 방지</string>
+    <string name="routing_attr_avoid_tunnels_name">터널 우회</string>
     <string name="purchases_feature_desc_terrain">지형 등고선, 어두운 색조가 있는 완전한 언덕길 지도, 봉우리와 저지대를 보여주는 색상의 경사 지도.</string>
     <string name="backup_danger_zone">위험 영역</string>
     <string name="shared_string_online">온라인</string>
@@ -4409,7 +4409,7 @@
     <string name="routing_attr_allow_skating_only_name">Skating만 노선을 허용</string>
     <string name="routing_attr_allow_intermediate_description">가파른 단면도를 가진 더 어려운 노선. 일반적으로 피해야 할 장애물.</string>
     <string name="quick_action_need_to_add_item_to_list">\'Quick action\' 설정에서 목록으로 적어도 하나의 항목을 추가하십시오</string>
-    <string name="routing_attr_avoid_sett_description">설정 방지</string>
+    <string name="routing_attr_avoid_sett_description">포석도로 우회</string>
     <string name="routeInfo_smoothness_name">부드럽게</string>
     <string name="download_wikipedia_description">다운로드 Wikipedia ꀰ사 - %1$s.</string>
     <string name="mtb_imba_full">국제 산악 자전거 협회</string>
@@ -4556,7 +4556,7 @@
     <string name="store_tracks_in_monthly_directories">녹음된 트랙을 월간 폴더에 저장</string>
     <string name="save_poi_without_poi_type_message">POI를 입력하지 않고 저장합니까?</string>
     <string name="routing_attr_allow_advanced_description">위험한 장애물과 가파른 부분과 더불어 Difficult 노선.</string>
-    <string name="routing_attr_avoid_sett_name">설정 없음</string>
+    <string name="routing_attr_avoid_sett_name">포석도로 없음</string>
     <string name="coordinates_widget_current_location_desc">현재 위치의 지리적 좌표 표시</string>
     <string name="osmand_plus_extended_description_part4">OSM 및 Wikipedia 데이터 사용
 \n• 세계 최고의 협업 프로젝트의 고품질 정보
@@ -4619,4 +4619,195 @@
     <string name="add_track_to_markers_descr">Markers에 대한 통로를 추가하기 위해 트랙을 선택합니다.</string>
     <string name="fast_coordinates_input_descr">좌표 입력 형식을 선택하십시오. \'Options\'를 탭하여 변경합니다.</string>
     <string name="mapillary_menu_title_pano">360° 이미지로만 표시</string>
+    <string name="tts_description">Text-to-speech (TTS)는 모든 유형의 지시를 발음할 수 있습니다: 거리 이름, 회전 지시, POI 이름 등.</string>
+    <string name="osm_live_payment_subscription_management_hw">결제는 구매 확인시 AppGallery 계정에서 청구됩니다.
+\n
+\n선택된 갱신 기간 전에 취소하지 않는 갱신.
+\n
+\nAppGallery 설정에서 구독을 관리하거나 취소하십시오.</string>
+    <string name="quick_action_remove_next_destination_descr">경로에 다음 목적지를 삭제합니다. 마지막 목적지인 경우, 네비게이션이 중지됩니다.</string>
+    <string name="import_rendering_file">렌더링 파일 가져오기</string>
+    <string name="routing_attr_avoid_subway_name">지하철 없음</string>
+    <string name="hide_passed">통행 숨기기</string>
+    <string name="rendering_attr_ice_road_name">얼음 도로</string>
+    <string name="use_login_password">사용자 이름 및 암호 사용</string>
+    <string name="add_hidden_group_info">추가 포인트는 \"%s\"에서 찾을 수 있습니다. 선택한 그룹이지도에 표시 할 수 없습니다.</string>
+    <string name="unirs_render_descr">보행자 및 자전거 도로의 대비를 증가하는 기본 스타일의 수정. 레거시 Mapnik 색상을 사용합니다.</string>
+    <string name="rendering_attr_seabedDetail_description">추가 텍스트 정보 seabed surface_qualification, 결합 된 표면 유형, 카테고리 및 weed 또는 seagrass의 taxon</string>
+    <string name="osm_live_payment_desc_hw">구독은 선택된 기간 당 청구됩니다. AppGallery에서 언제든지 취소하십시오.</string>
+    <string name="apply_to_current_profile">\"%1$s\"에만 적용</string>
+    <string name="shared_string_open_track">트랙 열기</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">학년 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">학년 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">급료 4</string>
+    <string name="routing_attr_avoid_stairs_name">계단 없음</string>
+    <string name="quick_action_take_photo_note_descr">화면의 중간에 사진 메모를 추가하는 버튼.</string>
+    <string name="quick_action_add_gpx_descr">화면의 중간에 GPX 웨이포인트를 추가하는 버튼.</string>
+    <string name="auto_split_recording_descr">6분 간격 후 새 세그먼트, 2시간 간격 후 새 트랙, 날짜가 변경된 경우 더 긴 간격 후 새 파일을 시작합니다.</string>
+    <string name="tracker_item">OsmAnd 트래커</string>
+    <string name="vessel_height_warning">낮은 다리를 피하기 위해 선박 높이를 설정합니다. 다리가 움직일 경우, 열릴 때 높이가 사용됩니다.</string>
+    <string name="compass_click_desc">Hint: compass 버튼을 눌러지도 방향 모드를 전환합니다.</string>
+    <string name="exit_import_descr">변경없이 출구?</string>
+    <string name="select_segments_description">%1$s에는 1 개 이상의 세그먼트가 포함되어있어 내비게이션의 부분을 지정해야합니다.</string>
+    <string name="rendering_attr_winter_road_name">겨울 도로</string>
+    <string name="rendering_attr_smoothness_very_bad_name">매우 나쁨</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">아주 끔찍한</string>
+    <string name="new_filter_desc">새 필터의 이름을 입력하면 \'카테고리\' 탭에 추가됩니다.</string>
+    <string name="trip_recording_distance_widget_desc">현재 기록된 이동 거리를 표시합니다.</string>
+    <string name="time_to_go_desc">목적지에 도달해야 할 분 또는 시간.</string>
+    <string name="routeInfo_horse_scale_name">말길의 난이도</string>
+    <string name="routing_attr_carriage_restrictions_name">차량 제한</string>
+    <string name="osm_carto_render_descr">OpenStreet와 유사한 주요 OSM 사이트 맵-carto 스타일</string>
+    <string name="stop_download_desc">다운로드가 완료되지 않습니다. 다운로드를 중단하면 타일의 일부만 볼 수 있습니다.</string>
+    <string name="stop_download">다운로드 중지</string>
+    <string name="shared_string_complete">완료</string>
+    <string name="estimated_download_size">예상 다운로드 크기</string>
+    <string name="number_of_tiles">타일의 수</string>
+    <string name="edit_category">카테고리 편집</string>
+    <string name="shared_string_reading_file">파일 읽는 중…</string>
+    <string name="import_tracks_descr">%1$s, %2$s 별도의 트랙이 포함되어 있습니다. 가져올 트랙을 선택합니다.</string>
+    <string name="please_provide_group_name_message">그룹 이름을 넣어주세요.</string>
+    <string name="rendering_attr_seabedDetail_name">Seabed 세부사항</string>
+    <string name="migration_files_present">%1$d 파일 (s) (%2$s)는 이미 대상 \'%3$s\'에 제시하고 overwritten하지 않습니다.</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">수도권 공해차량제한지역 우회</string>
+    <string name="recorded_description">녹음된 목소리는 더 낫습니다, 그러나 prerecorded 구문만 발음할 수 있습니다: 지시를 도십시오. 거리 이름 또는 POI 이름을 발표 할 수 없습니다.</string>
+    <string name="empty_purchases_description">구매가 여기에 표시되지 않는 경우, \"%1$s\"를 탭하거나 지원 팀에 문의하십시오.</string>
+    <string name="routing_attr_height_obstacles_description">계획된 여행 시간은 고각 충격을 반영할 것입니다. Routing 선호는 가파른 언덕을 피할 수 있습니다:</string>
+    <string name="export_not_enough_space_descr">귀하의 장치 만 %1$s 무료. 일부 공간 또는 수출에 일부 항목을 선택 해제하십시오.</string>
+    <string name="subscription_payment_issue_title">Google Play에서 결제 방법을 설정하여 구독을 수정하십시오.</string>
+    <string name="select_wikipedia_article_langs">지도에 Wikipedia 기사의 언어를 선택하십시오. 문서를 읽는 동안 사용 가능한 언어로 전환하십시오.</string>
+    <string name="checking_for_duplicate_description">OsmAnd 체크 %1$s 앱의 기존 항목과 중복.
+\n
+\n몇 번 걸릴 수 있습니다.</string>
+    <string name="use_system_screen_timeout_promo">기본적으로 비활성화: OsmAnd는 전경에서 달리는 동안, 스크린은 밖으로 시간하지 않을 것입니다.
+\n
+\n활성화되면 OsmAnd는 시스템 타임아웃 설정을 사용합니다.</string>
+    <string name="monitoring_min_distance_descr">이 필터를 켜면 이동이 거의 감지되지 않을 때 추가 데이터 기록을 피할 수 있습니다. 그것은 또한 더 가공 없이 궤도의 공간 외관을 개량합니다.</string>
+    <string name="import_routing_file">가져오기 경로 파일</string>
+    <string name="save_heading_descr">기록하는 동안 각 트랙 포인트에 제목 저장합니다.</string>
+    <string name="utm_format_descr">OsmAnd는 UTM NATO 형식과 유사하지만 동일하지 않는 UTM 표준을 사용합니다.</string>
+    <string name="rendering_attr_tracktype_grade3_name">가장 단단한</string>
+    <string name="app_mode_campervan">캠버반 (RV)</string>
+    <string name="app_mode_pickup_truck">픽업 트럭</string>
+    <string name="shared_string_track_is_saved">트랙 %s 이 저장됨</string>
+    <string name="settings_routing_mode_string">모드: %s</string>
+    <string name="profile_type_descr_string">유형: %s</string>
+    <string name="profile_alert_duplicate_name_title">중복 이름</string>
+    <string name="light_rs_render_descr">간단한 운전 스타일. 젠틀 나이트 모드, 오렌지 스타일의 도로 대조, 디엠 이차지도 개체, 윤곽선과 같은 전기 기능.</string>
+    <string name="download_files_error_not_enough_space">충분히 공간!
+\n{3} MB는 일시적으로 필요합니다. {1} MB 영구적으로.
+\n(단, {2} MB만 가능)</string>
+    <string name="download_files_question_space_with_temp">{0} 파일 다운로드(s)?
+\n{3} MB는 일시적으로 사용되며, {1} MB는 영구적으로 사용됩니다. (Of {2} MB)</string>
+    <string name="average">평균</string>
+    <string name="routing_attr_avoid_highway_name">고속도로 제외</string>
+    <string name="map_markers_bar_widget_desc">상단 바 위젯은 현재 위치의 다음지도 마커에 거리와 방향을 표시합니다. 위젯은 1 또는 2 마커를 표시 할 수 있습니다.</string>
+    <string name="page_number">페이지 %1$s</string>
+    <string name="rendering_attr_horse_scale_difficult_name">까다로움</string>
+    <string name="rendering_attr_showFitnessTrails_description">피트니스 트레일</string>
+    <string name="move_map_to_select_area">필요한 지역을 선택할지도를 이동합니다.</string>
+    <string name="shared_string_shape">모양</string>
+    <string name="exit_import">종료?</string>
+    <string name="gpx_no_routes_descr">\"%1$s\" 도구를 사용하여 파일을 추가 할 수 있습니다.</string>
+    <string name="gps_filter_hdop_desc">HDOP의 최대 허용값을 설정합니다.
+\n더 높은 값으로 포인트가 숨겨져 있습니다.</string>
+    <string name="storage_found_files_descr">\"%1$s\"를 탭하여 \"%2$s\"파일을 \"%3$s\"에서 \"%4$s\"로 복사합니다. 그것은 잠시 걸릴 수 있습니다.</string>
+    <string name="search_poi_types_descr">다른 카테고리에서 POI 유형을 결합하십시오. 탭 스위치를 선택하여, 범주 선택에 왼쪽을 탭합니다.</string>
+    <string name="terrain_slider_description">레이어가 표시될 최소 및 최대 줌 레벨을 설정합니다.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">추천 : 그것은 기록 될 것 예측 하 고 무엇 하지 않습니다, 그것은이 필터를 해제 하는 것이 좋습니다.</string>
+    <string name="welcome_to_open_beta">오픈 베타에 오신 것을 환영합니다</string>
+    <string name="upload_anonymously">익명으로 업로드</string>
+    <string name="on_with_params">%1$s 에 %2$s</string>
+    <string name="default_speed_dialog_msg">알 수 없는 도로 유형에 대한 도착 시간을 추정하고 모든 도로의 속도를 제한합니다(경로에 영향을 줄 수 있음)</string>
+    <string name="distance_circles">거리-원</string>
+    <string name="rendering_attr_horse_scale_impossible_name">어림없음</string>
+    <string name="ui_customization_description">\"Drawer\", \"Configure Map\" 및 \"Context Menu\"의 항목의 수량을 사용자 정의하십시오.
+\n
+\n모든 컨트롤을 숨기려면 사용하지 않는 플러그인을 끄십시오. %1$s.</string>
+    <string name="plugin_disabled_descr">이 플러그인은 별도의 앱이며 제거하지 않습니다.
+\n
+\nAndroid \'Apps\' 설정에서 제거 할 수 있습니다.</string>
+    <string name="error_notification_desc">support@osmand.net로 이 알림의 스크린 샷을 보내주십시오</string>
+    <string name="wikivoyage_download_pics_descr">문서 이미지는 오프라인 사용으로 다운로드 할 수 있습니다.
+\n\'Explore\' → \'Options\'에서 항상 사용할 수 있습니다.</string>
+    <string name="empty_state_av_notes_desc">위젯 또는 컨텍스트 메뉴를 사용하여 지도에 오디오, 비디오 또는 사진 메모를 추가하십시오.</string>
+    <string name="all_markers_moved_to_history">모든지도 마커는 역사로 이동</string>
+    <string name="marker_moved_to_history">Map Marker가 역사로 이동</string>
+    <string name="quick_action_take_audio_note_descr">화면의 중간에 오디오 메모를 추가하는 버튼.</string>
+    <string name="import_complete_description">%1$s에서 모든 데이터를 가져옵니다. 아래의 버튼을 사용하여 앱의 일부가 관리할 수 있습니다.</string>
+    <string name="application_profile_changed">앱 프로필 \"%s\"로 변경</string>
+    <string name="rendering_attr_tracktype_grade4_name">가장 부드러운</string>
+    <string name="dashboard_or_drawer_description">선택은 주로 유연한 대시보드 또는 정적 메뉴를 통해 앱을 제어 할 수 있습니다. 선택은 항상 대쉬보드 설정에서 변경할 수 있습니다.</string>
+    <string name="parking_widget_desc">스크린 센터에서 주차 장소에 거리를 표시합니다.</string>
+    <string name="edit_profiles_descr">OsmAnd 기본 프로파일은 삭제 될 수 없습니다, 하지만 비활성화 (이전 화면에), 또는 하단에 정렬.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">급료 1</string>
+    <string name="show_passed">통행 보기</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">수도권 공해차량제한지역 우회</string>
+    <string name="routing_attr_avoid_stairs_description">계단을 제외</string>
+    <string name="quick_action_add_route_descr">화면의 중간에서 경로를 시작합니다.</string>
+    <string name="plugin_wikipedia_description">Wikipedia의 관심점에 대한 정보를 얻기, 장소 및 목적지에 대한 기사를 갖춘 포켓 오프라인 가이드.</string>
+    <string name="quick_action_day_night_mode">%s 모드</string>
+    <string name="passed">마지막 사용: %1$s</string>
+    <string name="snackbar_page_removed">\"페이지 %1$s\"가 제거되었습니다.</string>
+    <string name="points_selection_descr">닫기 및 모든 변경을 잃어?</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">옆 효력: 정확도로 필터링의 결과로, 점은 높은 건물, 또는 특정 기상 조건과 같은 나무의 밑에 교량의 밑에 e.g.를 위해 완전히 누락될지도 모릅니다.</string>
+    <string name="app_mode_personal_transporter">개인 운송업자</string>
+    <string name="by_transport_type">으로 %1$s</string>
+    <string name="widget_with_dot">위젯.</string>
+    <string name="turn_screen_on_descr">화면 깨우기 옵션을 선택하십시오 (OmAnd는 장치가 잠겨있을 때 전경에 있습니다) :</string>
+    <string name="profile_alert_need_save_title">변경 내용 저장</string>
+    <string name="routing_profile_broutrer">BRouter (오프라인)</string>
+    <string name="third_party_routing_type">제3자-라우팅</string>
+    <string name="route_maneuvers">루트 maneuvers</string>
+    <string name="intermediate_destinations">중간 경유지</string>
+    <string name="send_search_query_description">검색 쿼리가 전송됩니다 : \"%1$s\", 위치와 함께.
+\n
+\n개인 정보는 수집되지 않습니다. 검색을 개선하기 위해 필요한 검색 데이터 만 검색하십시오.</string>
+    <string name="mapillary_menu_filter_description">제출자별, 날짜별 또는 유형별로 이미지를 필터링합니다. 클로즈업 줌에서만 활성화됩니다.</string>
+    <string name="track_points_category_name">Waypoints, 관심점, 특징</string>
+    <string name="shared_string_gpx_track">트래킹</string>
+    <string name="route_points_category_name">이 경로에 전달하기</string>
+    <string name="gpx_add_track">더 추가…</string>
+    <string name="christmas_desc">크리스마스 및 새해 휴일을 예상, 당신은 크리스마스 나무 및 시장, 등과 같은 관련 POIs를 표시 할 수 있습니다.</string>
+    <string name="osm_live_payment_desc">선택된 기간에 한함. 언제든지 Google Play에서 취소하십시오.</string>
+    <string name="osm_live_subscription_desc">구독은 시간당, 일일, 주간 업데이트 및 전세계 모든지도의 무제한 다운로드를 가능하게합니다.</string>
+    <string name="osm_live_region_desc">기부금의 일부는 해당 지역의 지도로 변경되는 OSM 사용자에게 보내집니다.</string>
+    <string name="routing_attr_avoid_borders_name">국경 없음</string>
+    <string name="quick_action_take_video_note_descr">화면의 중간에 비디오 메모를 추가하는 버튼.</string>
+    <string name="quick_action_add_osm_bug_descr">스크린의 중간에 OSM 메모를 추가하는 버튼.</string>
+    <string name="retry">다시시도</string>
+    <string name="live_monitoring_tracking_interval">추적 간격</string>
+    <string name="track_saved">트랙이 저장됨</string>
+    <string name="selected_waypoints_descr">선택된 방법점은 \"%1$s\" 트랙에 추가됩니다</string>
+    <string name="route_parameters_info">선택된 프로필에서 라우팅 설정 \"%1$s\".</string>
+    <string name="one_tap_active_descr">맵에 표시를 탭하여 컨텍스트 메뉴를 열지 않고 활성 마커의 상단으로 이동합니다.</string>
+    <string name="compass_desc">북쪽 방향을 표시합니다.</string>
+    <string name="routing_attr_avoid_highway_description">고속도로 우회</string>
+    <string name="routing_attr_avoid_fords_name">개울길 우회</string>
+    <string name="routing_attr_avoid_fords_description">개울길 우회</string>
+    <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">제거하지 마십시오</string>
+    <string name="routing_attr_freeride_policy_prefer_offpiste_name">프리퍼 offpiste</string>
+    <string name="routing_attr_carriage_restrictions_description">Horse-drawn 차량에 대한 액세스 권한을 고려</string>
+    <string name="routing_attr_avoid_subway_description">지하철 및 경량 철도 수송 우회</string>
+    <string name="avoid_pt_types">수송 유형을 피하십시오..</string>
+    <string name="gps_filter_smoothing_desc">포인트 사이의 임계값 거리를 설정합니다.
+\n마지막 가시점에서 적어도 이 거리는 숨겨지지지 않습니다.
+\n높은 임계 값이 트랙 형상을 oversimplify 할 수 있다는 것을 알고 있습니다.</string>
+    <string name="default_render_descr">일반적인 목적 작풍. Dense 도시는 청결하게 보입니다. 특징 노선, 지상 질, 접근 제한, 도로 방패, SAC/CAI 가늠자, 백색 물 스포츠 품목, contour 선 같이 전기 특징에 따라 경로 연출.</string>
+    <string name="monitoring_min_speed_descr">이것은 일정한 속도의 밑에 점을 기록하지 않는 저속 커트오프 여과기입니다. 이것은 기록 된 트랙이 맵에 볼 때 매끄럽게 보입니다.</string>
+    <string name="vessel_height_limit_description">낮은 교량을 피하기 위하여 배 고도를 놓으십시오. 다리가 움직일 경우, 우리는 개방 상태의 높이를 사용합니다.</string>
+    <string name="osm_edits_view_descr">아직 업로드된 편집 또는 OSM 버그를 모두 볼 수 있습니다. %1$s. Already 업로드 변경은 더 이상 표시되지 않습니다.</string>
+    <string name="route_between_points_desc">스트레이트 라인에 의해 포인트를 연결하는 방법을 선택하거나 아래에 지정된 경로를 계산합니다.</string>
+    <string name="open_street_map_login_mode">새 또는 수정 된 변경을 업로드하려면 로그인하십시오.
+\n
+\nOAuth 메소드를 사용하거나 OSM 사용자 이름과 암호를 사용합니다.</string>
+    <string name="route_recalculation_dist_descr">경로가 지정된 매개 변수보다 길어지면 다시 계산됩니다</string>
+    <string name="osm_live_thanks">OsmAnd 지원 주셔서 감사합니다!
+\nOsmAnd를 다시 시작해야 할 모든 새로운 기능을 활성화하려면.</string>
+    <string name="zoom_levels_difference_description">줌 수준 간의 큰 차이는 다운로드되는 데이터의 크기를 증가시킬 수 있다.</string>
+    <string name="all_groups">모든 그룹</string>
+    <string name="list_of_groups">그룹 목록</string>
+    <string name="shared_string_item">항목</string>
+    <string name="stop_and_exit">정지 및 나가기</string>
+    <string name="quick_action_directions_from_desc">스크린 센터를 만들기 위한 단추 출발점. 그런 다음 목적지를 설정하거나 경로 계산을 트리거하십시오.</string>
 </resources>

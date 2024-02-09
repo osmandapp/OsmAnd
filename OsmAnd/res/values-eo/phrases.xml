@@ -4803,4 +4803,15 @@
     <string name="poi_nfs_recreation_area_activity_swimming">naĝado</string>
     <string name="poi_nfs_recreation_area_activity_tidepooling">admirado de vadmaro</string>
     <string name="poi_nfs_recreation_area_activity_trapping">ĉasado per kaptiloj</string>
+    <string name="poi_nfs_recreation_area_activity_tubing">akvodeglitado</string>
+    <string name="poi_nfs_recreation_area_activity_viewing_plants">rigardado de kreskaĵoj</string>
+    <string name="poi_nfs_recreation_area_activity_viewing_scenery">rigardado de pejzaĝoj</string>
+    <string name="poi_nfs_recreation_area_activity_viewing_wildlife">rigardado de sovaĝbestoj</string>
+    <string name="poi_nfs_recreation_area_activity_visitor_centers">turisma centro</string>
+    <string name="poi_nfs_recreation_area_activity_visitor_programs">turismaj programoj</string>
+    <string name="poi_nfs_recreation_area_activity_water_activities">akvosportoj</string>
+    <string name="poi_nfs_recreation_area_activity_waterskiing">akvoskiado</string>
+    <string name="poi_nfs_recreation_area_activity_windsurfing">ondorajdado</string>
+    <string name="poi_nfs_recreation_area_activity_xc_skiing_snowshoeing">skikurado kaj skimarŝado</string>
+    <string name="poi_nfs_recreation_area_activity_winter_sports">vintraj sportoj</string>
 </resources>
