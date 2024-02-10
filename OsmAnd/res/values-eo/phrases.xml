@@ -4814,4 +4814,21 @@
     <string name="poi_nfs_recreation_area_activity_windsurfing">ondorajdado</string>
     <string name="poi_nfs_recreation_area_activity_xc_skiing_snowshoeing">skikurado kaj skimarŝado</string>
     <string name="poi_nfs_recreation_area_activity_winter_sports">vintraj sportoj</string>
+    <string name="poi_nfs_recreation_area_open_status_open">malfermita</string>
+    <string name="poi_nfs_recreation_area_open_status_closed">fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_temporarily_closed">provizore fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_unreachable">nealirebla</string>
+    <string name="poi_nfs_recreation_area_open_status_open_2">Aliro al ripoza tereno (2): malfermita</string>
+    <string name="poi_nfs_recreation_area_open_status_closed_2">Aliro al ripoza tereno (2): fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_temporarily_closed_2">Aliro al ripoza tereno (2): provizore fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_unreachable_2">Aliro al ripoza tereno (2): nealirebla</string>
+    <string name="poi_nfs_recreation_area_fee_description">Priskribo de pago</string>
+    <string name="poi_nfs_recreation_area_open_season_start">Komenco de malferma sezono</string>
+    <string name="poi_nfs_recreation_area_open_season_end">Fino de malferma sezono</string>
+    <string name="poi_nfs_recreation_area_operational_hours">Malfermaj horoj</string>
+    <string name="poi_nfs_recreation_area_forest_name">Nomo de arbaro</string>
+    <string name="poi_nfs_recreation_area_reservation_info">Informoj pri rezervado</string>
+    <string name="poi_nfs_recreation_area_restrictions">Informoj pri malpermesoj</string>
+    <string name="poi_nfs_recreation_area_activity_description">Priskribo de aktiveco</string>
+    <string name="poi_nfs_recreation_area_accessibility_info">Informoj pri aliro</string>
 </resources>
