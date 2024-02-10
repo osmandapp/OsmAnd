@@ -5607,4 +5607,6 @@
     <string name="battery_optimization_desc">Оптимизация батареи в Android может привести к появлению пропусков и неточностей в записанных треках.
 \n
 \nЕсли вы столкнулись с подобными проблемами, попробуйте изменить расход батареи на «Неограниченный».</string>
+    <string name="sort_subfolders">Сортировать подпапки</string>
+    <string name="sorted_sufolders_toast">Подпапки в «%1$s» сортируются по: «%2$s»</string>
 </resources>
