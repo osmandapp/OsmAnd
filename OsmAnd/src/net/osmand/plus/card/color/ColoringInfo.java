@@ -12,19 +12,28 @@ import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.Objects;
 
-public class ColoringTypeWrapper {
+public class ColoringInfo {
 
 	private final ColoringType coloringType;
 	private final String routeInfoAttribute;
 
-	public ColoringTypeWrapper(@NonNull ColoringType coloringType) {
+	public ColoringInfo(@NonNull ColoringType coloringType) {
 		this(coloringType, null);
 	}
 
-	public ColoringTypeWrapper(@NonNull ColoringType coloringType,
-	                           @Nullable String routeInfoAttribute) {
+	public ColoringInfo(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+	}
+
+	@NonNull
+	public ColoringType getColoringType() {
+		return coloringType;
+	}
+
+	@Nullable
+	public String getRouteInfoAttribute() {
+		return routeInfoAttribute;
 	}
 
 	@NonNull
@@ -46,9 +55,9 @@ public class ColoringTypeWrapper {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof ColoringTypeWrapper)) return false;
+		if (!(o instanceof ColoringInfo)) return false;
 
-		ColoringTypeWrapper that = (ColoringTypeWrapper) o;
+		ColoringInfo that = (ColoringInfo) o;
 		if (coloringType != that.coloringType) return false;
 		return Objects.equals(routeInfoAttribute, that.routeInfoAttribute);
 	}

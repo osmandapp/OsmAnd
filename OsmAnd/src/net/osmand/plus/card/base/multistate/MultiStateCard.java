@@ -71,7 +71,7 @@ public class MultiStateCard extends BaseCard {
 	private void updateStateRelatedContent() {
 		ViewGroup contentContainer = view.findViewById(R.id.content);
 		contentContainer.removeAllViews();
-		cardController.onBindStateRelatedContent(themedInflater, contentContainer);
+		cardController.onBindContentView(activity, contentContainer);
 	}
 
 	private void showStateSelectionMenu() {

@@ -28,45 +28,45 @@ public abstract class ColorsCardController implements IMultiStateCardController 
 	@NonNull
 	@Override
 	public String getMenuButtonTitle() {
-		return getSelectedColoringType().toHumanString(app);
+		return getSelectedColoring().toHumanString(app);
 	}
 
 	@Override
 	public boolean shouldShowMenuButton() {
-		return getSupportedColoringTypes().size() > 1;
+		return getSupportedColorings().size() > 1;
 	}
 
 	@NonNull
 	@Override
 	public List<PopUpMenuItem> getMenuItems() {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		for (ColoringTypeWrapper coloringType : getSupportedColoringTypes()) {
+		for (ColoringInfo coloringInfo : getSupportedColorings()) {
 			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitle(coloringType.toHumanString(app))
-					.showTopDivider(shouldShowTopDivider(coloringType))
-					.setTag(coloringType)
+					.setTitle(coloringInfo.toHumanString(app))
+					.showTopDivider(shouldShowTopDivider(coloringInfo))
+					.setTag(coloringInfo)
 					.create()
 			);
 		}
 		return menuItems;
 	}
 
-	protected abstract boolean shouldShowTopDivider(@NonNull ColoringTypeWrapper coloringType);
+	protected abstract boolean shouldShowTopDivider(@NonNull ColoringInfo coloringInfo);
 
 	@NonNull
-	protected abstract ColoringTypeWrapper getSelectedColoringType();
+	protected abstract ColoringInfo getSelectedColoring();
 
-	protected abstract void setSelectedColoringType(@NonNull ColoringTypeWrapper coloringType);
+	protected abstract void setSelectedColoring(@NonNull ColoringInfo coloringInfo);
 
 	@NonNull
-	protected abstract List<ColoringTypeWrapper> getSupportedColoringTypes();
+	protected abstract List<ColoringInfo> getSupportedColorings();
 
 	@Override
 	public boolean onMenuItemSelected(@NonNull PopUpMenuItem item) {
-		ColoringTypeWrapper selectedColoringType = getSelectedColoringType();
-		ColoringTypeWrapper coloringType = (ColoringTypeWrapper) item.getTag();
-		if (!Objects.equals(selectedColoringType, coloringType)) {
-			setSelectedColoringType(coloringType);
+		ColoringInfo selectedColoring = getSelectedColoring();
+		ColoringInfo newColoring = (ColoringInfo) item.getTag();
+		if (!Objects.equals(selectedColoring, newColoring)) {
+			setSelectedColoring(newColoring);
 			return true;
 		}
 		return false;

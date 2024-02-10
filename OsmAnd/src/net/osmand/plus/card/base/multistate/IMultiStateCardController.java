@@ -1,9 +1,9 @@
 package net.osmand.plus.card.base.multistate;
 
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
@@ -24,5 +24,5 @@ public interface IMultiStateCardController {
 
 	boolean onMenuItemSelected(@NonNull PopUpMenuItem item);
 
-	void onBindStateRelatedContent(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup container);
+	void onBindContentView(@NonNull FragmentActivity activity, @NonNull ViewGroup container);
 }
