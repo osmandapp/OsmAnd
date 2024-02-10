@@ -60,7 +60,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.FileUtils;
@@ -79,8 +79,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback,
-		CardListener, ColorPickerListener {
+public class ProfileAppearanceFragment extends BaseSettingsFragment
+		implements OnSelectProfileCallback, CardListener, ColorPickerListener {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -914,12 +914,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-	}
-
-	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
+	public void onApplyColorSelection(Integer oldColor, int newColor) {
+		colorsCard.onApplyColorSelection(oldColor, newColor);
 		this.onCardPressed(colorsCard);
 	}
 

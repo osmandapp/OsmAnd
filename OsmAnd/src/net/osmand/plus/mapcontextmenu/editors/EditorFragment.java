@@ -34,6 +34,7 @@ import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -44,7 +45,6 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
@@ -300,8 +300,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
+	public void onApplyColorSelection(Integer oldColor, int newColor) {
+		colorsCard.onApplyColorSelection(oldColor, newColor);
 		setColor(colorsCard.getSelectedColor());
 		updateContent();
 	}

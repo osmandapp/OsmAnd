@@ -3,7 +3,6 @@ package net.osmand.plus.routing.cards;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -36,10 +35,9 @@ import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.cards.ColoringTypeCard;
 import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.render.RenderingRulesStorage;
@@ -223,8 +221,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
+	public void onApplyColorSelection(Integer oldColor, int newColor) {
+		colorsCard.onApplyColorSelection(oldColor, newColor);
 		updateSelectedCustomColor();
 	}
 

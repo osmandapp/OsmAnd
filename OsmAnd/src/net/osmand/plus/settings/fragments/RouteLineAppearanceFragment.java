@@ -38,8 +38,8 @@ import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.DayNightMode;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
@@ -504,8 +504,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorCard.onColorSelected(prevColor, newColor);
+	public void onApplyColorSelection(Integer oldColor, int newColor) {
+		colorCard.onApplyColorSelection(oldColor, newColor);
 	}
 
 	public void onSelectedColorChanged() {

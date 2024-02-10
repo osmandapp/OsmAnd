@@ -48,9 +48,9 @@ import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackColoringCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
+import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -322,16 +322,16 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		if (prevColor != null) {
+	public void onApplyColorSelection(Integer oldColor, int newColor) {
+		if (oldColor != null) {
 			List<Integer> customColors = ColorsCard.getCustomColors(settings.CUSTOM_TRACK_COLORS);
-			int index = customColors.indexOf(prevColor);
+			int index = customColors.indexOf(oldColor);
 			if (index != ColorsCard.INVALID_VALUE) {
-				CustomColorBottomSheet.saveCustomColorsToTracks(app, prevColor, newColor);
+				TrackColorController.saveCustomColorsToTracks(app, oldColor, newColor);
 			}
 		}
 		trackDrawInfo.setColor(newColor);
-		colorsCard.onColorSelected(prevColor, newColor);
+		colorsCard.onApplyColorSelection(oldColor, newColor);
 		updateColorItems();
 	}
 

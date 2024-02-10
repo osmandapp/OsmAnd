@@ -10,17 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.ColorUtils;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController;
+import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
+import net.osmand.plus.track.fragments.controller.IColorPickerDialogController;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
@@ -41,8 +43,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public static final int INVALID_VALUE = -1;
 
-	private final Fragment targetFragment;
-
+	private final ColorPickerListener colorPickerListener;
 	private final ApplicationMode appMode;
 	private final ListStringPreference colorsListPreference;
 
@@ -58,18 +59,19 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	public ColorsCard(@NonNull FragmentActivity activity,
 	                  @Nullable ApplicationMode appMode,
-	                  @Nullable Fragment targetFragment,
+	                  @Nullable ColorPickerListener colorPickerListener,
 	                  @ColorInt int selectedColor,
 	                  @NonNull List<Integer> colors,
 	                  @NonNull ListStringPreference colorsListPreference,
 	                  boolean usedOnMap) {
 		super(activity, usedOnMap);
-		this.targetFragment = targetFragment;
+		this.colorPickerListener = colorPickerListener;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
 		this.colorsListPreference = colorsListPreference;
 		this.customColors = getCustomColors(colorsListPreference, appMode);
 		this.appMode = appMode;
+		updateColorPickerListener();
 	}
 
 	@ColorInt
@@ -82,14 +84,22 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		updateContent();
 	}
 
+	private void updateColorPickerListener() {
+		DialogManager dialogManager = app.getDialogManager();
+		IDialogController controller = dialogManager.findController(ColorPickerDialogController.PROCESS_ID);
+		if (controller instanceof ColorPickerDialogController) {
+			((ColorPickerDialogController) controller).setListener(colorPickerListener);
+		}
+	}
+
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		if (prevColor != null) {
-			int index = customColors.indexOf(prevColor);
+	public void onApplyColorSelection(Integer oldColor, int newColor) {
+		if (oldColor != null) {
+			int index = customColors.indexOf(oldColor);
 			if (index != INVALID_VALUE) {
 				customColors.set(index, newColor);
 			}
-			if (selectedColor == prevColor) {
+			if (selectedColor == oldColor) {
 				selectedColor = newColor;
 			}
 		} else if (customColors.size() < MAX_CUSTOM_COLORS) {
@@ -167,7 +177,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		});
 		if (customColor) {
 			backgroundCircle.setOnLongClickListener(v -> {
-				CustomColorBottomSheet.showInstance(activity.getSupportFragmentManager(), targetFragment, color);
+				ColorPickerDialogController.showDialog(activity, colorPickerListener, color);
 				return false;
 			});
 		}
@@ -188,7 +198,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorResId));
 
 		backgroundCircle.setImageDrawable(backgroundIcon);
-		backgroundCircle.setOnClickListener(v -> CustomColorBottomSheet.showInstance(activity.getSupportFragmentManager(), targetFragment, null));
+		backgroundCircle.setOnClickListener(v -> ColorPickerDialogController.showDialog(activity, colorPickerListener, null));
 		return colorItemView;
 	}
 
