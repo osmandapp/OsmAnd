@@ -4563,7 +4563,7 @@
     <string name="poi_cemt_va">Va</string>
     <string name="poi_cemt_vb">Vb</string>
     <string name="poi_cai_scale">CAI-Skala</string>
-    <string name="poi_cemt_i">1</string>
+    <string name="poi_cemt_i">I</string>
     <string name="poi_maxlength">Maximale Länge</string>
     <string name="poi_lock_name">Schleusenname</string>
     <string name="poi_draft">Fahrwasserstiefe</string>
