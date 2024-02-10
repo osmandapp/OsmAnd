@@ -107,7 +107,7 @@
     <string name="file_can_not_be_renamed">Ne mogu da preimenujem datoteku.</string>
     <string name="file_with_name_already_exists">Datoteka sa tim imenom već postoji.</string>
     <string name="poi_filter_by_name">Pretraga po imenu</string>
-    <string name="update_poi_file_not_found">Mestna datoteka koja održava promene zanimljive tačke nije pronađena i ne može da se napravi.</string>
+    <string name="update_poi_file_not_found">Lokalna datoteka koja održava promene TOI nije pronađena i ne može da se napravi.</string>
     <string name="button_upgrade_osmandplus">Nadogradite OsmAnd+</string>
     <string name="map_version_changed_info">Preuzmi novo izdanje ovog programa radi mogućnosti upotrebe novih datoteka mapa.</string>
     <string name="shared_string_rename">Preimenuj</string>
@@ -164,9 +164,9 @@
     <string name="renderers">Vektorska obrada slike</string>
     <string name="rotate_map_to_descr">Centriranje mape:</string>
     <string name="show_route">Detalji rute</string>
-    <string name="poi_namefinder_query_empty">Kucajte radi pretrage tačkaka zanimanja</string>
+    <string name="poi_namefinder_query_empty">Kucajte radi pretrage TOI</string>
     <string name="layer_osm_bugs">Beleške OSM-a (na mreži)</string>
-    <string name="layer_poi">Prikazati TOI</string>
+    <string name="layer_poi">TOI sloj…</string>
     <string name="context_menu_item_search_poi">Pretraga TOI</string>
     <string name="where_am_i">Gde sam ja?</string>
     <string name="process_navigation_service">Usluga navođenja OsmAnd</string>
@@ -232,14 +232,14 @@
     <string name="local_index_mi_restore">Pokreni</string>
     <string name="local_index_mi_backup">Isključi</string>
     <string name="shared_string_download">Preuzmi</string>
-    <string name="local_index_poi_data">Podaci TOI</string>
+    <string name="local_index_poi_data">TOI podaci</string>
     <string name="local_index_address_data">Podaci adresa</string>
     <string name="local_index_transport_data">Podaci javnog prevoza</string>
     <string name="local_index_map_data">Podaci mape</string>
     <string name="local_indexes_cat_backup">Isključeno</string>
     <string name="local_indexes_cat_tts">Glasovna navođenja (TTS)</string>
     <string name="local_indexes_cat_voice">Glasovna navođenja (snimljena)</string>
-    <string name="local_indexes_cat_poi">Podaci TOI</string>
+    <string name="local_indexes_cat_poi">TOI podaci</string>
     <string name="ttsvoice">Glas TTS-a</string>
     <string name="search_offline_clear_search">Nova pretraga</string>
     <string name="map_text_size_descr">Veličinu slova za imena na mapama:</string>
@@ -678,11 +678,11 @@
     <string name="search_history_street">Ulica: {0}, {1}</string>
     <string name="search_history_city">Grad: {0}</string>
     <string name="context_menu_item_update_map_confirm">Želite li ažurirati lokalne podatke s interneta?</string>
-    <string name="context_menu_item_update_poi">Osveži TOI</string>
-    <string name="update_poi_is_not_available_for_zoom">Osvežićete TOI ako još približite</string>
+    <string name="context_menu_item_update_poi">Ažuriranje TOI</string>
+    <string name="update_poi_is_not_available_for_zoom">Zumiranje omogućuje ažuriranje TOI</string>
     <string name="update_poi_no_offline_poi_index">Nema TOI bez interneta za ovo područje</string>
     <string name="update_poi_error_loading">Učitavanje podataka sa služitelja je neuspešno.</string>
-    <string name="update_poi_error_local">Nisam uspeo da osvežim mestni spisak TOI.</string>
+    <string name="update_poi_error_local">Nisam uspeo da osvežim lokalnu listu TOI.</string>
     <string name="update_poi_success">Podaci TOI su osveženi ({0} je učitano)</string>
     <string name="hello">OsmAnd, program za navođenje</string>
     <string name="show_transport_over_map">Prikaži stanice prevoza</string>
@@ -748,8 +748,8 @@
     <string name="transport_searching_transport">Rezultati prevoza (bez odredišta):</string>
     <string name="context_menu_item_search_transport">Pretraži javni prevoz</string>
     <string name="use_high_res_maps_descr">Ne rasteži (i ne čini mutnim) sličice mape na ekranima sa velikom gustinom.</string>
-    <string name="poi_context_menu_call">Prikaži telefone u tačkama od interesa</string>
-    <string name="poi_context_menu_website">Prikaži veb sajtove u tačkama od interesa</string>
+    <string name="poi_context_menu_call">Prikaži telefone u TOI</string>
+    <string name="poi_context_menu_website">Prikaži web strane u TOI</string>
     <string name="renderers_descr">Izaberi izgled prikaza</string>
     <string name="continuous_rendering_descr">Iscrtavaj neprekidno umesto crtanja slike po slike.</string>
     <string name="continuous_rendering">Neprekidno iscrtavanje</string>
@@ -787,7 +787,7 @@
     <string name="reading_cached_tiles">Čitam uskladištene sličice…</string>
     <string name="poi_filter_namefinder">Pronalazač imena na mreži</string>
     <string name="poi_filter_custom_filter">Proizvoljni filter</string>
-    <string name="poi_filter_closest_poi">Najbliže TOI</string>
+    <string name="poi_filter_closest_poi">TOI u blizini</string>
     <string name="old_map_index_is_not_supported">Stari oblik podataka mape \'\'{0}\'\' nije podržan</string>
     <string name="m">m</string>
     <string name="km_h">km/h</string>
@@ -971,7 +971,7 @@
     <string name="local_indexes_cat_map">Standardne mape (vektorske)</string>
     <string name="local_indexes_cat_tile">Internet mape u sličicama</string>
     <string name="basemap_was_selected_to_download">Osnovna mapa je potrebna za osnovni rad.</string>
-    <string name="first_time_msg">Hvala što koristiš OsmAnd. Preuzmi regionalne podatke preko \'Podešavanja\' → \'Upravljanje fajlovima mapa\' za pregled mapa, nađete adrese, TOI, javni prevoz i još mnogo toga.</string>
+    <string name="first_time_msg">Hvala što koristiš OsmAnd. Preuzmi regionalne podatke preko \'Podešavanja\' → \'Preuzmi mape\' za pregled mapa, nađe adrese, TOI, javni prevoz i još mnogo toga.</string>
     <string name="confirm_interrupt_download">Otkaži preuzimanje?</string>
     <string name="modify_transparency">Postavi prozirnost (0 - skroz prozirno, 255 - potpuno neprovidno)</string>
     <string name="unknown_location">Pozicija još nije poznata.</string>
@@ -984,7 +984,7 @@
     <string name="transport_search_desc">Pretraga javnog prevoza</string>
     <string name="navpoint_search_desc">Koordinate</string>
     <string name="address_search_desc">Pretraga adresa</string>
-    <string name="poi_search_desc">Pretraga TOI</string>
+    <string name="poi_search_desc">TOI pretraga</string>
     <string name="navigate_point_format">Oblik</string>
     <string name="local_index_routing_data">Podaci u podešavanjima rute</string>
     <string name="rendering_attr_hmRendered_name">Prikaži više detalja na mapi</string>
@@ -1052,7 +1052,7 @@
     <string name="map_widget_view_direction">Smer gledanja</string>
     <string name="select_navigation_mode">Vrsta prevoza:</string>
     <string name="recalculate_route_to_your_location">Način prevoza:</string>
-    <string name="filterpoi_activity">Napravi odabir TOI</string>
+    <string name="filterpoi_activity">Kreiraj TOI filter</string>
     <string name="osmand_plus_extended_description_part8">Približna pokrivenost mape i kvalitet: 
 \n • Zapadna Evropa: **** 
 \n • Istočna Evropa: *** 
@@ -1067,12 +1067,12 @@
 \n Većina država na svetu se može skinuti 
 \n Od Avganistana do Šri Lanke, gore od Aljaske do Australije. Argentina, Brazil, Kanada, Francuska, Nemačka, Meksiko, Velika Britanija, Španija, …
 \n</string>
-    <string name="osmand_plus_extended_description_part7">Doprinesite neposredno OSM-u 
-\n • Prijavljujte greške u podacima 
-\n • Otpremajte rute GPX-a neposredno iz programa 
-\n • Dodaj TOI i otpremajte ih neposredno na OSM (ili kasnije ako niste na mreži) 
-\n • Moguće snimanje puta i u pozadini (dok je uređaj u radu spavanja) 
-\n OsmAnd je mekotvorina otvorenog koda koja se razvija. Svako može da doprinese programu prijavljujući greške, poboljšavajući prevode ili razvijajući nove mogućnosti. Dodatno se projekat oslanja i na novčanu pomoć radi novčane pomoći programiranju i probi novih mogućnosti.
+    <string name="osmand_plus_extended_description_part7">Doprinesi direktno OSM-u
+\n • Prijavljuj greške u podacima
+\n • Otpremaj GPX putovanja neposredno iz programa
+\n • Dodaj TOI i otpremaj ih neposredno na OSM (ili kasnije ako nisti na internetu)
+\n • Moguće snimanje putovanja i u pozadini (dok je uređaj u stanju mirovanja)
+\n OsmAnd aktivno razvija softver otvorenog koda. Svako može da doprinese programu prijavljujući greške, poboljšavajući prevode ili razvijajući nove mogućnosti. Dodatno se projekat oslanja i na novčanu pomoć radi novčane pomoći programiranju i probi novih mogućnosti.
 \n</string>
     <string name="osmand_plus_extended_description_part6">Mogućnost rada za bicikliste i pešake 
 \n • Pregled staza za pešanjenje, hodanje i bicikle, sjajno za delovanje van kuće 
@@ -1494,7 +1494,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Američki atlas puteva</string>
     <string name="old_poi_file_should_be_deleted">Datoteka sa podacima TOI \'%1$s\' je nepotrebna i može biti izbrisana.</string>
     <string name="data_to_search_poi_not_available">Preuzmi podatke za pretragu TOI bez interneta.</string>
-    <string name="poi_query_by_name_matches_categories">Nađeno je nekoliko vrsti TOI.</string>
+    <string name="poi_query_by_name_matches_categories">Nađeno je nekoliko TOI kategorija.</string>
     <string name="city_type_city">Grad</string>
     <string name="city_type_hamlet">Zaseok</string>
     <string name="delete_confirmation_msg">Obriši %1$s?</string>
@@ -1524,7 +1524,7 @@
     <string name="amenity_type_osmwiki">Vikipedija (bez interneta)</string>
     <string name="index_name_tts_voice">Glasovna navođenja TTS</string>
     <string name="index_name_voice">Glasovna navođenja (snimljena, ograničene mogućnosti)</string>
-    <string name="index_name_wiki">TOI sveta sa Vikipedije</string>
+    <string name="index_name_wiki">TOI Wikipedia širom sveta</string>
     <string name="index_name_other">Svetske i tematske mape</string>
     <string name="index_name_antarctica">Antarktik</string>
     <string name="index_name_oceania">Australija i Okeanija</string>
@@ -1550,7 +1550,7 @@
     <string name="live_monitoring_url_descr">Unesi adresu veba sa sledećim oblikom za odrednice: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_interval">Interval praćenja na internetu</string>
     <string name="live_monitoring_interval_descr">Odredite međuvreme praćenja na mreži.</string>
-    <string name="local_openstreetmap_settings_descr">Prikazuj i upravljaj tačkama zanimanja/beleškama OSM-a iz skladišta podataka sa uređaja.</string>
+    <string name="local_openstreetmap_settings_descr">Prikazuj i upravljaj sa TOI/beleškama iz skladišta podataka sa uređaja.</string>
     <string name="local_openstreetmap_settings">TOI/beleške OSM-a sačuvane na uređaju</string>
     <string name="local_openstreetmap_descr_title">Neusklađeno uređivanje OSM:</string>
     <string name="local_openstreetmap_delete">Obriši izmenu</string>
