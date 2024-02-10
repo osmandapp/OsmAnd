@@ -3080,7 +3080,7 @@
     <string name="app_mode_utv">UTV (kis terepautó)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Kötélpályás felvonó</string>
     <string name="switch_profile">Profil váltás</string>
-    <string name="application_profile_changed">Alkalmazás profi módosítva erre: %s</string>
+    <string name="application_profile_changed">Alkalmazásprofil módosítva erre: %s</string>
     <string name="change_data_storage_full_description">Áthelyezi az OsmAnd fájlokat az új helyre\?
 \n%1$s &gt; %2$s</string>
     <string name="rendering_value_white_name">Fehér</string>
