@@ -57,7 +57,7 @@
     <string name="plugin_distance_point_ele">visina</string>
     <string name="plugin_distance_point">Tačka</string>
     <string name="gpx_file_name">Naziv datoteke GPX-a</string>
-    <string name="gpx_saved_sucessfully">Datoteka GPX-a je sačuvana u {0}</string>
+    <string name="gpx_saved_sucessfully">GPX fajl je sačuvan u {0}</string>
     <string name="osmand_distance_planning_plugin_name">Računar rastojanja i alat za planiranje</string>
     <string name="shared_string_do_not_show_again">Ne prikazuj ponovo</string>
     <string name="distance_measurement_start_editing">Počni uređivanje</string>
@@ -68,8 +68,8 @@
     <string name="use_kalman_filter_compass">Koristi Kalmanov filter</string>
     <string name="use_magnetic_sensor">Koristi magnetni senzor</string>
     <string name="other_location">Ostalo</string>
-    <string name="files_limit">%1$d datoteka je preostalo</string>
-    <string name="available_downloads_left">%1$d datoteka je preostalo da se preuzme</string>
+    <string name="files_limit">%1$d preostalih fajlova</string>
+    <string name="available_downloads_left">%1$d preostalo fajlova za preuzimanje</string>
     <string name="install_paid">Puno izdanje</string>
     <string name="av_settings_descr">Podesi zvuk i sliku.</string>
     <string name="av_settings">Zvučna i video podešavanja</string>
@@ -105,11 +105,11 @@
     <string name="animate_route_off">Zaustavi simulaciju</string>
     <string name="animate_route">Započni simulaciju</string>
     <string name="file_can_not_be_renamed">Ne mogu da preimenujem datoteku.</string>
-    <string name="file_with_name_already_exists">Datoteka sa tim imenom već postoji.</string>
+    <string name="file_with_name_already_exists">Fajl sa tim imenom već postoji.</string>
     <string name="poi_filter_by_name">Pretraga po imenu</string>
-    <string name="update_poi_file_not_found">Lokalna datoteka koja održava promene TOI nije pronađena i ne može da se napravi.</string>
+    <string name="update_poi_file_not_found">Lokalni fajl koja održava promene TOI nije pronađen i ne može da se napravi.</string>
     <string name="button_upgrade_osmandplus">Nadogradite OsmAnd+</string>
-    <string name="map_version_changed_info">Preuzmi novo izdanje ovog programa radi mogućnosti upotrebe novih datoteka mapa.</string>
+    <string name="map_version_changed_info">Preuzmi novo izdanje ovog programa radi mogućnosti upotrebe novih fajlova mapa.</string>
     <string name="shared_string_rename">Preimenuj</string>
     <string name="poi_filter_nominatim">Pretraga imenom na mreži</string>
     <string name="search_position_address">Adresa…</string>
@@ -214,7 +214,7 @@
     <string name="select_search_position">Izvor:</string>
     <string name="context_menu_item_search">Traži u blizini</string>
     <string name="filename_input">Ime datoteke:</string>
-    <string name="file_with_name_already_exist">Datoteka sa istim imenom već postoji.</string>
+    <string name="file_with_name_already_exist">Fajl sa istim imenom već postoji.</string>
     <string name="shared_string_save">Sačuvaj</string>
     <string name="local_index_upload_gpx_description">Otpremite datoteke OSM-a zajednici, radi poboljšanja mapa.</string>
     <string name="local_index_items_uploaded">%1$d od %2$d stavki je otpremljeno.</string>
@@ -228,7 +228,7 @@
     <string name="basemap_missing">Preuzmite osnovnu mapu sveta radi dobavljanja pregled celog sveta na malom uveličanju.</string>
     <string name="local_index_installed">Mestno izdanje</string>
     <string name="local_index_no_items_to_do">Nema stavki za %1$s</string>
-    <string name="local_index_descr_title">Upravljaj datotekama mapa.</string>
+    <string name="local_index_descr_title">Upravljaj sa fajlovima mape.</string>
     <string name="local_index_mi_restore">Pokreni</string>
     <string name="local_index_mi_backup">Isključi</string>
     <string name="shared_string_download">Preuzmi</string>
@@ -404,7 +404,7 @@
     <string name="total_donations">Ukupna donacija</string>
     <string name="osm_recipients_label">Primaoci OSM-a</string>
     <string name="move_point">Pomeri tačku</string>
-    <string name="import_track_desc">Datoteka %1$s ne sadrži prolazne tačke, da li da je uvezem kao putanju?</string>
+    <string name="import_track_desc">Fajl %1$s ne sadrži međuodredišta, da li da ga uvezeš kao putanju?</string>
     <string name="import_track">Uvezi datoteku GPX</string>
     <string name="empty_state_favourites_desc">Uvezite favoriti ili ih dodaj označavajući ih kao oznake na mapi.</string>
     <string name="empty_state_favourites">Dodaj omiljene</string>
@@ -679,7 +679,7 @@
     <string name="search_history_city">Grad: {0}</string>
     <string name="context_menu_item_update_map_confirm">Želite li ažurirati lokalne podatke s interneta?</string>
     <string name="context_menu_item_update_poi">Ažuriranje TOI</string>
-    <string name="update_poi_is_not_available_for_zoom">Zumiranje omogućuje ažuriranje TOI</string>
+    <string name="update_poi_is_not_available_for_zoom">Zumiranje ti omogućuje ažuriranje TOI</string>
     <string name="update_poi_no_offline_poi_index">Nema TOI bez interneta za ovo područje</string>
     <string name="update_poi_error_loading">Učitavanje podataka sa služitelja je neuspešno.</string>
     <string name="update_poi_error_local">Nisam uspeo da osvežim lokalnu listu TOI.</string>
@@ -704,7 +704,7 @@
     <string name="map_screen_orientation_descr">Uspravno, vodoravno, sistem.</string>
     <string name="route_tshr">Skrenite oštro desno i nastavite</string>
     <string name="route_tr">Skrenite desno i nastavite</string>
-    <string name="unzipping_file">Izdvajanje datoteka…</string>
+    <string name="unzipping_file">Raspakivanje fajla…</string>
     <string name="sd_mounted_ro">Memorijska mapica može samo da se čita. 
 \nSad je moguće samo gledati već učitane mape, ne možete preuzimati nove oblasti.</string>
     <string name="sd_unmounted">Memorijska mapica nije dostupna. 
@@ -735,7 +735,7 @@
     <string name="share_fav_subject">Favoriti podeljene preko OsmAnda</string>
     <string name="no_fav_to_save">Nema Omiljenih tačaka za snimanje</string>
     <string name="fav_saved_sucessfully">Favoriti sačuvane u {0}</string>
-    <string name="fav_file_to_load_not_found">Datoteka GPX-a sa omiljenim tačkama nije nađena u {0}</string>
+    <string name="fav_file_to_load_not_found">GPX fajl sa favoritima nije nađen u {0}</string>
     <string name="import_file_favourites">Sačuvaj podatke kao datoteku GPX-a ili uvezi prolazne tačke u „Favoriti“?</string>
     <string name="fav_imported_sucessfully">Favoriti su uvezene</string>
     <string name="rotate_map_bearing_opt">U smeru kretanja</string>
@@ -1351,7 +1351,7 @@
     <string name="int_days">dana</string>
     <string name="osmo_connect_menu">Poveži se</string>
     <string name="osmo_edit_color">Boja prikaza</string>
-    <string name="gpx_file_is_empty">Prazna datoteka GPX-a</string>
+    <string name="gpx_file_is_empty">Prazan GPX fajl</string>
     <string name="gpx_selection_track">%1$s
 \nPutanja %2$s</string>
     <string name="gpx_selection_points">%1$s
@@ -1492,7 +1492,7 @@
     <string name="navigate_point_olc">Otvoreni kôd lokacija</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="rendering_value_americanRoadAtlas_name">Američki atlas puteva</string>
-    <string name="old_poi_file_should_be_deleted">Datoteka sa podacima TOI \'%1$s\' je nepotrebna i može biti izbrisana.</string>
+    <string name="old_poi_file_should_be_deleted">Fajl sa podacima TOI \'%1$s\' je nepotreban i može biti izbrisan.</string>
     <string name="data_to_search_poi_not_available">Preuzmi podatke za pretragu TOI bez interneta.</string>
     <string name="poi_query_by_name_matches_categories">Nađeno je nekoliko TOI kategorija.</string>
     <string name="city_type_city">Grad</string>
@@ -1519,7 +1519,7 @@
     <string name="routing_settings_descr">Odaberi mogućnosti navođenja.</string>
     <string name="routing_settings">Navigacija</string>
     <string name="profile_settings">Podešavanja naročite za profila</string>
-    <string name="fav_export_confirmation">Datoteka sa već izvezenim omiljenim tačkama već postoji. Zameniti ga?</string>
+    <string name="fav_export_confirmation">Fajl sa izvezenim favoritima već postoji. Menjaš ga?</string>
     <string name="amenity_type_user_defined">Korisnički određeno</string>
     <string name="amenity_type_osmwiki">Vikipedija (bez interneta)</string>
     <string name="index_name_tts_voice">Glasovna navođenja TTS</string>
@@ -1622,7 +1622,7 @@
     <string name="support_new_features_descr">Priložite radi korišćenjanovih mogućnosti programa.</string>
     <string name="support_new_features">Podržite nove funkcionalnosti</string>
     <string name="default_buttons_support">Podrška</string>
-    <string name="validate_gpx_upload_name_pwd">Radi otpremanja datoteka GPX-a morate navesti korisničko ime i lozinku OSM-a.</string>
+    <string name="validate_gpx_upload_name_pwd">Navedi tvoje OSM korisničko ime i lozinku za prenos GPX fajlova.</string>
     <string name="shared_string_description">Opis</string>
     <string name="gpx_tags_txt">Oznake</string>
     <string name="gpx_visibility_txt">Vidljivost</string>
@@ -1710,7 +1710,7 @@
     <string name="select_voice_provider_descr">Izaberi ili preuzmi glasovno navođenje svog jezika.</string>
     <string name="select_voice_provider">Izaberi glasovno navođenje</string>
     <string name="available_maps">Dostupne mape</string>
-    <string name="live_updates">Ažuriranje uživo</string>
+    <string name="live_updates">Trenutno ažuriranje</string>
     <string name="rec_split_storage_size_desc">Veličina zauzeća svih snimljenih odsečaka.</string>
     <string name="rec_split_storage_size">Veličina ostave</string>
     <string name="rec_split_clip_length_desc">Povećaj vremensko ograničenje snimaka.</string>
@@ -1756,9 +1756,9 @@
     <string name="map_marker_2nd">Drugi marker na mapi</string>
     <string name="map_marker_1st">Prvi marker na mapi</string>
     <string name="upload_osm_note">Otpremi belešku OSM-a</string>
-    <string name="download_files_question_space">Preuzeti {0} datoteka? 
+    <string name="download_files_question_space">Preuzemaš {0} fajl)ove)?
 \nBiće iskorišćeno {1} MB (od {2} MB).</string>
-    <string name="download_files_question_space_with_temp">Preuzeti {0} datoteka? 
+    <string name="download_files_question_space_with_temp">Preuzemaš {0} fajl)ove)?
 \n {3} MB je iskorišćeno privremenog prostora, a {1} MB trajnog. (od {2} MB.)</string>
     <string name="download_files_error_not_enough_space">Nema dovoljno prostora! 
 \n {3} MB je privremeno potrebno, a {1} MB trajno. 
@@ -1887,7 +1887,7 @@
 \n * Tapnite na widget za merenje da vIdi još radnji.</string>
     <string name="local_osm_changes_backup">Pravi skladišni umnožak izmena OSM-a</string>
     <string name="local_osm_changes_backup_failed">Pravljenje skladišta izmena OSM-a nije uspelo.</string>
-    <string name="local_osm_changes_backup_successful">Stvorena je datoteka %1$s sa izmenama OSM-a</string>
+    <string name="local_osm_changes_backup_successful">OSM je promenio generisan fajl %1$s</string>
     <string name="intermediate_items_sort_by_distance">Sortiraj od vrata do vrata</string>
     <string name="intermediate_items_sort_return">Optimizovan redosled međuodredišta na putu do odredišta</string>
     <string name="search_street_in_neighborhood_cities">Traži ulicu u okolnim gradovima</string>
@@ -1931,7 +1931,7 @@
     <string name="copying_osmand_one_file_descr">Kopiram datoteku (%s) na novo mesto…</string>
     <string name="android_19_location_disabled">Od Androida 4.4 (KitKat), folder skladišta (%s) je zastareo. Kopiraj sve datoteke OsmAnda na novi lokaciju skladišta?
 \n Beleška 1: Tvoje stare datoteka neće viti dirane (ali možete ih Vi sami obrisati).
-\n Beleška 2: U novoj lokaciju skladišta, neće biti moguće deliti datoteke između programa OsmAnd i OsmAnd+.</string>
+\n Beleška 2: U novoj lokaciju skladišta, neće biti moguće deliti fajlove između programa OsmAnd i OsmAnd+.</string>
     <string name="routing_attr_height_description">Odredi visinu vozila koja je dozvoljena na putevima.</string>
     <string name="routing_attr_height_name">Visina</string>
     <string name="routing_attr_width_description">Naznači dozvoljenu širinu vozila na putu.</string>
@@ -2191,7 +2191,7 @@
     <string name="import_file">Uvezi datoteku</string>
     <string name="import_as_favorites">Uvezi kao omiljeno</string>
     <string name="import_as_gpx">Uvezi kao datoteku GPX</string>
-    <string name="import_gpx_file_description">može se uvesti ili kao Favoriti ili kao datoteka GPX-a.</string>
+    <string name="import_gpx_file_description">može se uvesti ili kao Favoriti ili kao GPX fajl.</string>
     <string name="mark_passed">Oznaka je prođena</string>
     <string name="tap_on_map_to_hide_interface">Pun ekran</string>
     <string name="tap_on_map_to_hide_interface_descr">Tapkanje na mapu prebacuje tipke za upravljanje i vidžet.</string>
@@ -2262,7 +2262,7 @@
     <string name="storage_directory_internal_app">Unutrašnje skladište programa</string>
     <string name="storage_directory_multiuser">Skladište za više korisnika</string>
     <string name="storage_directory_external">Spoljnje skladište</string>
-    <string name="copying_osmand_file_failed">Premeštanje datoteka nije uspelo</string>
+    <string name="copying_osmand_file_failed">Premeštanje fajlova nije uspelo</string>
     <string name="specified_directiory_not_writeable">Nisam uspeo obrazovati mape u određenoj fascikli</string>
     <string name="application_dir_change_warning3">Premestiti datoteke podataka OSM-a na novo odredište?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Kućne brojeve</string>
@@ -2346,7 +2346,7 @@
     <string name="rendering_attr_currentTrackColor_name">Boja GPX-a</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Podrazumevano (prozirna zelenkasto-plava)</string>
     <string name="rendering_value_default13_name">Podrazumevano (13)</string>
-    <string name="download_live_updates">Ažuriranje uživo</string>
+    <string name="download_live_updates">Trenutno ažuriranje</string>
     <string name="no_updates_available">Nema dostupnog ažuriranja</string>
     <string name="rendering_value_boldOutline_name">Zadebljaj obrisne linije</string>
     <string name="traffic_warning_hazard">Opasnost</string>
@@ -2354,7 +2354,7 @@
     <string name="routing_attr_avoid_shuttle_train_name">Bez autovoza</string>
     <string name="plugin_settings">Dodaci</string>
     <string name="av_locations">Lokacije</string>
-    <string name="av_locations_descr">Datoteka GPX sa lokacijama</string>
+    <string name="av_locations_descr">GPX fajl sa lokacijama</string>
     <string name="looking_up_address">Pretražujem adresu</string>
     <string name="simulate_your_location_gpx_descr">Simuliraj svoj lokaciju koristeću snimljenu putanje GPX-a.</string>
     <string name="simulate_your_location_descr">Simuliraj upotrebom proračunate rute ili snimka GPX-a.</string>
@@ -2666,7 +2666,7 @@
     <string name="quick_action_transport_descr">Dugme koje prikazuje ili skriva javni prevoz na mapi.</string>
     <string name="create_edit_poi">Napravi ili izmeni TOI</string>
     <string name="parking_positions">Lokacija parkinga</string>
-    <string name="osmand_distance_planning_plugin_description">Napravite rute tapkanjem na mapu, ili upotrebom i izmenom postojećih datoteka GPX-a, radi planiranja puta i merenja rastojanja između tačaka. Ishodi se gu sačuvati kao datoteke GPX-a za kasnije navođenje.</string>
+    <string name="osmand_distance_planning_plugin_description">Napravi rute tapkanjem na mapu, ili upotrebom i izmenom postojećih GPX fajlova, radi planiranja puta i merenja rastojanja između tačaka. Rezultat može biti snimljen GPX fajlova za kasnije vođenje</string>
     <string name="shared_string_favorites">Favoriti</string>
     <string name="shared_string_favorite">Favoriti</string>
     <string name="shared_string_map">Mapa</string>
@@ -2734,7 +2734,7 @@
     <string name="skip_map_downloading_desc">Nemaš preuzetih mapa. Možeš izabrati mapu sa spiska ili preuzeti mape kasnije preko \'meni - %1$s\'.</string>
     <string name="skip_map_downloading">Preskoči preuzimanje mapa</string>
     <string name="si_mi_meters">Milje/metri</string>
-    <string name="osmand_plus_banner_desc">Neograničena preuzimanja mapi, ažuriranje, dodatak za Vikipediju.</string>
+    <string name="osmand_plus_banner_desc">Neograničena preuzimanja mapa, ažuriranje, i vidžet za Vikipediju.</string>
     <string name="osm_live_banner_desc">Dobavi neograničeno preuzimanje mapa, uz sedmična, dnevna i čak časovna osvežavanja.</string>
     <string name="get_for">Dobavi za %1$s</string>
     <string name="get_it">Dobavi ga</string>
@@ -2808,7 +2808,7 @@
     <string name="shared_string_gpx_tracks">Putanje</string>
     <string name="shared_string_move">Premesti</string>
     <string name="file_can_not_be_moved">Nisam uspeo da premestim datoteku.</string>
-    <string name="select_gpx_folder">Izaberi folder datoteka GPXa</string>
+    <string name="select_gpx_folder">Odaberi folder sa GPX fajlom</string>
     <string name="shared_string_color">Boja</string>
     <string name="shared_string_end_time">Vreme dolaska</string>
     <string name="shared_string_start_time">Vreme polaska</string>
@@ -2874,8 +2874,8 @@
     <string name="keep_screen_on">Drži ekran uključenim</string>
     <string name="keep_screen_off">Drži ekran isključenim</string>
     <string name="pseudo_mercator_projection">Pseudo-Projekcija Merkatora</string>
-    <string name="one_image_per_tile">Jedna datoteka po sličici</string>
-    <string name="sqlite_db_file">Datoteka SQLite</string>
+    <string name="one_image_per_tile">Jedna slika na tajl</string>
+    <string name="sqlite_db_file">SQLite fajl</string>
     <string name="online_map_name_helper_text">Unesi ime ovom mrežnom izvoru mape.</string>
     <string name="online_map_url_helper_text">Unesi ili nalepite adresu mrežnog izvora.</string>
     <string name="edit_online_source">Izmeni mrežni izvor</string>
@@ -3009,7 +3009,7 @@
     <string name="simplified_track">Pojednostavljene putanje</string>
     <string name="simplified_track_description">Samo linija rute će biti sačuvana, a putne tačke će biti izbrisane.</string>
     <string name="shared_string_file_name">Ime datoteke</string>
-    <string name="number_of_gpx_files_selected_pattern">%s izabranih datoteka putanje</string>
+    <string name="number_of_gpx_files_selected_pattern">%s izabranih fajlova putanja</string>
     <string name="monitoring_control_start">REK</string>
     <string name="disable_recording_once_app_killed_descrp">Beleženje putanje će biti zaustavljeno kada se program ubije (preko skorašnjih programa). (Ukazivač rada OsmAnda u pozadini tada nestaje iz obaveštajne trake.)</string>
     <string name="save_global_track_interval_descr">Navedi interval zavođenja opšteg snimanja putanje (uključeno pomoću widžeta „snimanje putovanja“ na mapi).</string>
@@ -3065,7 +3065,7 @@
     <string name="perform_oauth_authorization">Prijavite se preko OAuth-a</string>
     <string name="clear_osm_token">Obriši OpenStreetMap OAuth token</string>
     <string name="osm_edit_logout_success">Odjavljen</string>
-    <string name="file_already_imported">Datoteka je već uvezena u OsmAnd</string>
+    <string name="file_already_imported">Fajl je već uvezen u OsmAnd</string>
     <string name="use_two_phase_routing">Koristite dvofazni algoritam usmeravanja A*</string>
     <string name="shared_string_graph">Grafikon</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s podaci dostupni samo na putevima, izračunajte rutu koristeći „Ruta između tačaka“ da biste videli grafike.</string>
@@ -3107,13 +3107,13 @@
     <string name="shared_string_added">Dodato</string>
     <string name="shared_string_edited">Uređeno</string>
     <string name="shared_string_deleted">Izbrisano</string>
-    <string name="empty_state_osm_edits_descr">Kreiraj ili menjaj OpenStreetMap TOI, otvori ili piši komentare OSM-u i doprinosi snimanjem datoteka GPX-a.</string>
+    <string name="empty_state_osm_edits_descr">Kreiraj ili menjaj OpenStreetMap TOI, otvori ili piši komentare OSM-u i doprinosi snimanjem GPX fajlova.</string>
     <string name="empty_state_osm_edits">Stvarajte ili menjajte predmete OpenStritMapa</string>
     <string name="shared_string_marker">Oznaka</string>
     <string name="shared_string_actions">Brzi meni</string>
     <string name="modify_the_search_query">izmeni pretragu.</string>
-    <string name="av_locations_all_desc">Datoteka GPX-a sa koordinatama i podacima svih beležaka.</string>
-    <string name="av_locations_selected_desc">Datoteka GPX-a sa koordinatama i podacima izabrane beleške.</string>
+    <string name="av_locations_all_desc">GPX- fajl sa koordinatama i podacima svih beležaka.</string>
+    <string name="av_locations_selected_desc">GPX fajl sa koordinatama i podacima izabrane beleške.</string>
     <string name="additional_actions">Dodatne radnje</string>
     <string name="will_open_on">Otvara se u</string>
     <string name="will_open_at">Otvara se u</string>
@@ -3134,8 +3134,8 @@
     <string name="all_data">Svi podaci</string>
     <string name="osm_edits_export_desc">Izvezi kao beleške OSM-a, TOI ili oba.</string>
     <string name="choose_file_type">Odaberi vrstu datoteke</string>
-    <string name="osc_file">Datoteka OSC</string>
-    <string name="shared_string_gpx_file">Datoteka GPX-a</string>
+    <string name="osc_file">OSC fajl</string>
+    <string name="shared_string_gpx_file">GPX fajl</string>
     <string name="osc_file_desc">OSC - pogodno za izvoz u Openstritmap.</string>
     <string name="gpx_file_desc">GPX - pogodno za izvoz u JOSM i druge uređivače OSM-a.</string>
     <string name="switch_osm_notes_visibility_desc">Prikaži ili sakrij beleške OSM-a na mapi.</string>
@@ -3376,10 +3376,10 @@
     <string name="public_transport_ped_route_title">Ruta pešice je približno %1$s i možda može biti brži nego sa javnim prevozom</string>
     <string name="dont_move_maps">Ne premeštati</string>
     <string name="move_maps">Premesti mape</string>
-    <string name="files_present">%1$d datoteka (%2$s) postoje na prethodnom lokaciju \'%3$s\'.</string>
-    <string name="files_failed">Nisi uspeo da snimiti %1$d datoteka (%2$s).</string>
-    <string name="files_copied">Snimljeno je %1$d datoteka (%2$s).</string>
-    <string name="files_moved">Premešteno je %1$d datoteka (%2$s).</string>
+    <string name="files_present">%1$d fajlovi (%2$s) postoje na prethodnoj lokaciji \'%3$s\'.</string>
+    <string name="files_failed">Nisi uspeo da snimiti %1$d fajlove (%2$s).</string>
+    <string name="files_copied">Snimljeno je %1$d fajlova (%2$s).</string>
+    <string name="files_moved">Premešteno je %1$d fajlova (%2$s).</string>
     <string name="coordinates_widget">Vidžet za koordinate</string>
     <string name="searching_gps">Tražim GPS</string>
     <string name="application_profiles">Primenljivi nalozi</string>
@@ -3794,7 +3794,7 @@
     <string name="work_button">Posao</string>
     <string name="add_work">Dodaj posao</string>
     <string name="add_home">Dodaj kuću</string>
-    <string name="previous_route">Prethodni ruta</string>
+    <string name="previous_route">Prethodna ruta</string>
     <string name="add_destination_query">Prvo postavi odredište</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Dugme koje prikazuje ili sakriva odabrane putanje sa mape.</string>
     <string name="tracks_on_map">Prikazane putanje</string>
@@ -3991,7 +3991,7 @@
     <string name="snap_to_road_descr">Vođica biće prilepljena za rutu</string>
     <string name="restart">Ponovo pokreni</string>
     <string name="shared_strings_all_regions">Svi regije</string>
-    <string name="delete_number_files_question">Obriši %1$d datoteka?</string>
+    <string name="delete_number_files_question">Brišeš %1$d fajlove?</string>
     <string name="track_recording_stop_without_saving">Zaustavi bez snimanja</string>
     <string name="track_recording_save_and_stop">Sačuvaj i zaustavi snimanje</string>
     <string name="track_recording_title">Snimanje rute zaustavljeno</string>
@@ -4259,7 +4259,7 @@
     <string name="shared_storage_warning_description">Zbog novih pravila u Androidu, počevši od novembra 2021. godine, OsmAnd 4.2 će izgubiti pristup deljenom skladištu. 
 \n 
 \nMolim, premestite skladište podataka iz deljenog skladišta na drugo dostupno skladište, ili će program izgubiti pristup Vašim podacima, kao što su mape bez interneta, rute GPX-a, itd.</string>
-    <string name="backup_error_file_not_available">Datoteka nije dostupna</string>
+    <string name="backup_error_file_not_available">Fajl nije dostupan</string>
     <string name="shared_string_discussion">Diskusija</string>
     <string name="backup_delete_old_data_descr">Trenutne verzije podataka će biti sačuvane na OsmAnd oblaku</string>
     <string name="delete_all_confirmation">Da, izbriši sve</string>
@@ -4289,7 +4289,7 @@
     <string name="street_name_widget_desc">Widgžet za naziv ulice prikazuje naziv sa pravom strelicom lokacije ili narednu ulicu sa strelicom na sledeće skretanje.</string>
     <string name="simulation_constant_mode_title">Ista brzina</string>
     <string name="rendering_attr_showFitnessTrails_name">Staze za trčanje</string>
-    <string name="storage_copying_files_size">Umnožavanje %1$s datoteka %2$s</string>
+    <string name="storage_copying_files_size">Kopiranje %1$s fajlova %2$s</string>
     <string name="backup_deleting_all_data_descr">Sačekajte dok OsmAnd izbriše tvoje podatke sa oblaka. Svi podaci na uređaju će ostati netaknuti.</string>
     <string name="backup_promocode">Promotivni kôd</string>
     <string name="shared_string_min_height">Min. visina</string>
@@ -4321,12 +4321,12 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Prikaži oznake popravke</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikone pri malom uvećanju</string>
     <string name="shared_string_not_used">Ne koristi se</string>
-    <string name="migration_files_present">Postoji %1$d datoteka (%2$s) koji su prisutni na odabranom lokaciju %3$s.</string>
+    <string name="migration_files_present">%1$d fajl(ovi) (%2$s) nalaze se na odabranoj lokaciji %3$s.</string>
     <string name="app_profile_type">Vrsta primenljivih profila</string>
     <string name="add_to_group">Dodaj u grupu</string>
     <string name="files_remaining">Preostale datoteke: %1$s %2$s</string>
-    <string name="storage_found_files_descr">Dodirnite „%1$s“ radi umnožavanja %2$s datoteka sa „%3$s“ na „%4$s“. Može potrajati neko vreme.</string>
-    <string name="storage_found_files_size">Pronađeno je %1$s datoteka %2$s</string>
+    <string name="storage_found_files_descr">Tapni „%1$s“ radi umnožavanja %2$s fajlova sa „%3$s“ na „%4$s“. Može potrajati neko vreme.</string>
+    <string name="storage_found_files_size">Pronađeno je %1$s fajlova %2$s</string>
     <string name="history_preferences_descr">Možeš onemogućiti beleženje istorije pojedinačno za svaku vrstu istorije.</string>
     <string name="shortcut_start_recording">Počni sa snimanjem</string>
     <string name="icon_group_nautical">More</string>
@@ -4480,9 +4480,9 @@
     <string name="gps_filter_speed_altitude_desc">Samo tačke putanja koje odgovaraju postavljenom međuvremenu će se naći na grafikonu i mapi, a ostale će biti skrivene.</string>
     <string name="reading_files">Čitam datoteke…</string>
     <string name="no_items_selected_warning">Odaberi bar jednu stavku</string>
-    <string name="shared_string_skip_warning">Da li preskočiti prenos? OsmAnd više nema pristup vašim datotekama u deljenom skladištu. 
-\n 
-\nProgram će započeti sa korišćenjem tvoje nove foldere podataka.</string>
+    <string name="shared_string_skip_warning">Da li preskočiti prenos? OsmAnd više nema pristup fajlovima u deljenom skladištu.
+\n
+\nProgram će započeti sa korišćenjem novi folder za podatke.</string>
     <string name="shared_storage_migration_descr">Zbog izmena prava pristupa skladištu u sklopu Androida, OsmAnd više ne može da koristi %1$s. 
 \n 
 \nSnimi sve podatke u novu folder.</string>
@@ -4632,7 +4632,7 @@
     <string name="edit_category">Uredi kategoriju</string>
     <string name="shared_string_shape">Oblik</string>
     <string name="select_suggested_points">Izaberi predložene tačke</string>
-    <string name="storage_copied_files_size">Umnožavanje %1$s datoteka %2$s</string>
+    <string name="storage_copied_files_size">Obrađeno %1$s fajl(ova), %2$s</string>
     <string name="use_external_timestamps">Koristi spoljne vremenske oznake</string>
     <string name="shared_storage_warning_title">Promene pravila pristupa skladištu</string>
     <string name="backup_delete_old_data">Uklonite stare verzije</string>
@@ -4653,11 +4653,11 @@
     <string name="exit_import">Izaći?</string>
     <string name="quick_action_add_route_descr">Dugme za pokretanje rute od sredine ekrana.</string>
     <string name="always_ask_waypoint_appearance_description">Dodirom na ovu radnju otvoriće se ekran „Dodaj međuodredište“, gde možeš promeniti ime i izgled.</string>
-    <string name="track_file">Datoteka putanja</string>
+    <string name="track_file">Fajl putanja</string>
     <string name="shared_storage_last_step">Možeš kasnije odrediti novu folder za podatke.</string>
     <string name="shared_storage_third_step">Odobrite dozvolu za pristup ovoj fascikli. Bez nje, OsmAnd ne može da umnožava datoteke.</string>
-    <string name="shared_storage_first_step">Pritisnite „%1$s”. 
-\nUpravnik datoteka otvara gde treba da nađete i otvorite folder OsmAnda.</string>
+    <string name="shared_storage_first_step">Pritisnite „%1$s”.
+\nFajl menadžer otvara gde treba da nađeš i otvoriš folder OsmAnd.</string>
     <string name="shared_string_copy_to">Snimi u</string>
     <string name="history_is_disabled_descr">Omogući istoriju radi dobavljanja bržeg pristupa poslednjim korišćenim nalazima.</string>
     <string name="history_actions_descr">Možeš da izvezeš istoriju u fajl.</string>
@@ -4769,7 +4769,7 @@
     <string name="delete_folder">Obriši folder</string>
     <string name="external_device_forget_sensor_description">Prijemnik će biti uklonjen sa spiska. Moći ćete da uparite ovaj senzor kad god poželite.</string>
     <string name="learn_more_about_sensors_link">Saznaj podrobnije o prijemnicima.</string>
-    <string name="backup_error_failed_to_fetch_remote_items">Nisam uspeo da dobavim spisak datoteka sa služitelja.</string>
+    <string name="backup_error_failed_to_fetch_remote_items">Nisam uspeo da dobavim spisak fajlova sa servera.</string>
     <string name="weather_wind_meters_per_second">Metri/sekunde</string>
     <string name="sound_beep_complex">Bip: složen</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Nagrizajuće materije</string>
@@ -4840,7 +4840,7 @@
     <string name="disable_vertex_hillshade_3d">Onemogući senčenje vrhova u 3D</string>
     <string name="write_heading">Snimanje pravca</string>
     <string name="choose_what_to_sync">Odredi šta će se sinhronizovati</string>
-    <string name="deleted_file">Izbrisana datoteka</string>
+    <string name="deleted_file">Obrisan fajl</string>
     <string name="auto_backup_title">Automatske sigurnosne kopije</string>
     <string name="ant_plus_searching_text_description">Molim, držite uređaj blizu senzora. Morate uključiti senzor da bi ga OsmAnd pronašao.</string>
     <string name="external_sensors_source_of_data">Izvor podataka</string>
@@ -4988,8 +4988,8 @@
     <string name="rendering_value_small_name">Mali</string>
     <string name="rendering_value_name_only_name">Samo ime</string>
     <string name="device_disconnected">Odspojen %1$s</string>
-    <string name="file_already_exists">Datoteka već postoji</string>
-    <string name="file_already_exists_description">„%1$s“. Datoteka sa takvim imenom već postoji. Zamena će prepisati sve izmene sadašnjim izdanjem.</string>
+    <string name="file_already_exists">Fajl već postoji</string>
+    <string name="file_already_exists_description">„%1$s“. Fajl sa takvim imenom već postoji. Zamena će prepisati sve izmene sadašnjim izdanjem.</string>
     <string name="nav_profile_confirm_delete">Da li ste sigurni da želite izbrisati „%1$s“?</string>
     <string name="external_device_disconnected">Nepovezan</string>
     <string name="external_device_characteristic_distance">Rastojanje</string>
@@ -5004,7 +5004,7 @@
     <string name="approximate_bearing">Približno odredi usmerenje u prostoru</string>
     <string name="approximate_bearing_descr">Izvedite usmerenje iz rute navođenja.</string>
     <string name="shared_string_kilograms">kilogrami</string>
-    <string name="local_file_will_be_restored">Mestna datoteka će biti povraćena</string>
+    <string name="local_file_will_be_restored">Lokalni fajl biće povraćen</string>
     <string name="empty_screen_weather_precipitation_layer">Uključi radi pregleda sloja padavina na mapi.</string>
     <string name="empty_screen_view_selected_weather_data">Uključi radi pregleda označenih vremenskih prilika na mapi.</string>
     <string name="weather_precip_in">in</string>
@@ -5041,7 +5041,7 @@
     <string name="display_position_automatic_descr">Zavisi od usmerenja mape: dno za smer kretanja, središte za sve ostalo.</string>
     <string name="cloud_changes">Izmene u oblaku</string>
     <string name="shared_string_cloud">Oblak</string>
-    <string name="modified_file">Izmenjena datoteka</string>
+    <string name="modified_file">Izmenjen fajl</string>
     <string name="open_weather_action">Otvori vremenske prognoza</string>
     <string name="rendering_attr_showMtbScale_description">Prikazuj tragove po lestvici MTB-a.</string>
     <string name="map_settings_weather_temp">Toplota</string>
@@ -5198,7 +5198,7 @@
     <string name="sync_now">Uskladi sada</string>
     <string name="includes_osm_changes_until">Uključuje izmene OSM-a načinjene do %1$s.</string>
     <string name="next_live_update_date_and_time">Sledeće osveženje na %1$s u %2$s.</string>
-    <string name="new_file">Nova datoteka</string>
+    <string name="new_file">Novi fajl</string>
     <string name="shared_string_shows">Prikazuje</string>
     <string name="external_input_device_title">Spoljni ulazni uređaj</string>
     <string name="about_osmand">O aplikaciji</string>
@@ -5255,7 +5255,7 @@
     <string name="shared_string_setup">Postavljanje</string>
     <string name="telegram_chats_descr">Pridružite se nekom našem ćaskanju na telegramu.</string>
     <string name="free_versions">Besplatna izdanja</string>
-    <string name="send_logcat_log_descr">Datoteka detaljnog dnevnika</string>
+    <string name="send_logcat_log_descr">Fajl detaljnog dnevnika</string>
     <string name="open_issue_on_github">Otvori grešku na GitHubu</string>
     <string name="report_an_issues">Prijavi grešku</string>
     <string name="most_viewed">Najpregledanije</string>
