@@ -322,7 +322,7 @@
     <string name="poi_neighbourhood">Nachbarschaft</string>
     <string name="poi_newsagent">Zeitungshändler</string>
     <string name="poi_newspaper">Redaktion</string>
-    <string name="poi_ngo">NGO</string>
+    <string name="poi_ngo">Nichtregierungsorganisation</string>
     <string name="poi_nightclub">Diskothek;Disco;Disko</string>
     <string name="poi_nursing_home">Pflegeheim</string>
     <string name="poi_observatory">Sternwarte</string>
@@ -900,7 +900,7 @@
     <string name="poi_recycling_mobile_phones">Mobiltelefone</string>
     <string name="poi_recycling_computers">Computer</string>
     <string name="poi_recycling_tyres">Reifen</string>
-    <string name="poi_recycling_tv_monitor">TV und Monitore</string>
+    <string name="poi_recycling_tv_monitor">TV-Geräte und Monitore</string>
     <string name="poi_recycling_bottles">Flaschen</string>
     <string name="poi_recycling_cork">Kork</string>
     <string name="poi_recycling_printer_cartridges">Druckerpatronen</string>
@@ -4091,7 +4091,7 @@
     <string name="poi_service_fleurop_yes">ja;Fleurop</string>
     <string name="poi_mattress_no">nein</string>
     <string name="poi_furniture_sofa">Sofa;Möbel</string>
-    <string name="poi_medical_supply_filter">Sanitätsbedarf Kategorie</string>
+    <string name="poi_medical_supply_filter">Kategorie des Sanitätsbedarfs</string>
     <string name="poi_agrarian_type">Landwirtschaftliche Betriebsmittel</string>
     <string name="poi_beauty_salon_cosmetics">Kosmetik</string>
     <string name="poi_beauty_salon_tanning">Sonnenstudio</string>
@@ -4449,7 +4449,7 @@
     <string name="poi_socket_type3a_voltage_medium">Mittel</string>
     <string name="poi_socket_type2_cable_voltage_high">Hoch</string>
     <string name="poi_socket_type2_cable_output_filter">Typ 2-Stecker Kabelausgang</string>
-    <string name="poi_socket_type3c_output_filter">Type 3c-Stecker Ausgang</string>
+    <string name="poi_socket_type3c_output_filter">Typ 3c-Stecker Ausgang</string>
     <string name="poi_socket_type2_cable_voltage_medium">Mittel</string>
     <string name="poi_socket_type2_cable_voltage_low">Niedrig</string>
     <string name="poi_socket_chademo_voltage_high">Hoch</string>
@@ -4469,8 +4469,8 @@
     <string name="poi_hiking_yes">ja</string>
     <string name="poi_socket_type2_voltage_filter">Typ2-Anschluss Spannung</string>
     <string name="poi_socket_type2_combo_voltage_filter">Typ2 Combo-Anschluss Spannung</string>
-    <string name="poi_socket_type3a_voltage_filter">Type 3a-Anschluss Spannung</string>
-    <string name="poi_socket_type3c_voltage_filter">Type 3c-Anschluss Spannung</string>
+    <string name="poi_socket_type3a_voltage_filter">Typ 3a-Anschluss Spannung</string>
+    <string name="poi_socket_type3c_voltage_filter">Typ 3c-Anschluss Spannung</string>
     <string name="poi_socket_cee_blue_voltage_filter">CEE blue-Anschluss Spannung</string>
     <string name="poi_socket_type2_cable_output_high">Hoch</string>
     <string name="poi_socket_type2_cable_output_medium">Mittel</string>
@@ -4738,7 +4738,7 @@
     <string name="poi_padus_area">US-Naturschutzgebiete</string>
     <string name="poi_padus_category_fee">Kategorie: Gebühr</string>
     <string name="poi_nfs_recreation_area_activity_day_hiking">Wandern</string>
-    <string name="poi_nfs_recreation_area_activity_disc_golf">Disc Golf</string>
+    <string name="poi_nfs_recreation_area_activity_disc_golf">Discgolf</string>
     <string name="poi_nfs_recreation_area_activity_fishing">Angeln</string>
     <string name="poi_nfs_recreation_area_activity_horse_riding">Reiten</string>
     <string name="poi_nfs_recreation_area_activity_hunting">Jagen</string>
@@ -4791,7 +4791,7 @@
     <string name="poi_nfs_recreation_area_activity_metal_detecting">Metalldetektion</string>
     <string name="poi_nfs_recreation_area_activity_mushing_skijoring">Schlittenhundesport und Skijöring</string>
     <string name="poi_nfs_recreation_area_activity_ohv_riding_and_camping">OHV-Fahren und Camping</string>
-    <string name="poi_nfs_recreation_area_activity_ohv_road_riding">OHV-Straßenfahrten</string>
+    <string name="poi_nfs_recreation_area_activity_ohv_road_riding">OHV-Straßenfahren</string>
     <string name="poi_nfs_recreation_area_activity_ohv_trail_riding">OHV-Trailsfahren</string>
     <string name="poi_nfs_recreation_area_activity_river_and_stream_fishing">Flussfischerei</string>
     <string name="poi_nfs_recreation_area_activity_rockhounding">Felsensuche</string>
@@ -4814,7 +4814,7 @@
     <string name="poi_nfs_recreation_area_activity_fossil_collecting">Fossilien sammeln</string>
     <string name="poi_nfs_recreation_area_activity_game_bird_waterfowl">Wildvogel Wasservogel</string>
     <string name="poi_nfs_recreation_area_activity_geocaching_and_letterboxing">Geocaching und Briefkastensuchen</string>
-    <string name="poi_nfs_recreation_area_activity_group_picnicking">Gruppen-Picknick</string>
+    <string name="poi_nfs_recreation_area_activity_group_picnicking">Gruppenpicknick</string>
     <string name="poi_nfs_recreation_area_activity_lake_and_pond_fishing">See- und Teichfischerei</string>
     <string name="poi_nfs_recreation_area_activity_nature_viewing">Naturbeobachtung</string>
     <string name="poi_nfs_recreation_area_activity_ohv_camping">Geländewagen-Camping</string>
