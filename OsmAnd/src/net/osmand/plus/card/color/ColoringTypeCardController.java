@@ -17,23 +17,23 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
-public class ColorTypeCardController implements IColorTypeCardController {
+public class ColoringTypeCardController implements IColoringTypeCardController {
 
 	protected final OsmandApplication app;
 	protected final GPXTrackAnalysis trackAnalysis;
 	protected ColoringInfo coloringInfo;
-	protected ColorTypeCard card;
+	protected ColoringTypeCard card;
 
-	public ColorTypeCardController(@NonNull OsmandApplication app,
-	                               @NonNull ColoringInfo coloringInfo,
-	                               @Nullable GPXTrackAnalysis trackAnalysis) {
+	public ColoringTypeCardController(@NonNull OsmandApplication app,
+	                                  @NonNull ColoringInfo coloringInfo,
+	                                  @Nullable GPXTrackAnalysis trackAnalysis) {
 		this.app = app;
 		this.coloringInfo = coloringInfo;
 		this.trackAnalysis = trackAnalysis;
 	}
 
 	@Override
-	public void bindCard(@NonNull ColorTypeCard card) {
+	public void bindCard(@NonNull ColoringTypeCard card) {
 		this.card = card;
 	}
 

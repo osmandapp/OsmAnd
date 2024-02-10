@@ -8,12 +8,12 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
-public class ColorTypeCard extends BaseCard {
+public class ColoringTypeCard extends BaseCard {
 
-	private final IColorTypeCardController controller;
+	private final IColoringTypeCardController controller;
 
-	public ColorTypeCard(@NonNull FragmentActivity activity,
-	                     @NonNull IColorTypeCardController controller) {
+	public ColoringTypeCard(@NonNull FragmentActivity activity,
+	                        @NonNull IColoringTypeCardController controller) {
 		super(activity);
 		this.controller = controller;
 		controller.bindCard(this);
