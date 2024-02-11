@@ -5606,4 +5606,10 @@
     <string name="max_sensor_temperature">Temperaturo (maksimuma)</string>
     <string name="max_sensor_speed">Rapido (laŭ sentilo, maksimuma)</string>
     <string name="avg_sensor_speed">Rapido (laŭ sentilo, mezuma)</string>
+    <string name="shared_string_activity">Aktiveco</string>
+    <string name="shared_string_keywords">Ŝlosilvortoj</string>
+    <string name="shared_string_additional">Pliaj</string>
+    <string name="sort_subfolders">Ordigi subdosierujojn</string>
+    <string name="sorted_sufolders_toast">Ordigis subdosierujojn en “%1$s” laŭ %2$s</string>
+    <string name="special_routing_cpp">Speciala speco de navigilo</string>
 </resources>
