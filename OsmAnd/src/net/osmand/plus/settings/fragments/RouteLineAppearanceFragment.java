@@ -504,8 +504,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
-	public void onApplyColorSelection(Integer oldColor, int newColor) {
-		colorCard.onApplyColorSelection(oldColor, newColor);
+	public void onApplyColorPickerSelection(Integer oldColor, int newColor) {
+		colorCard.onApplyColorPickerSelection(oldColor, newColor);
 	}
 
 	public void onSelectedColorChanged() {

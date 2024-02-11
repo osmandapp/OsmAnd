@@ -300,8 +300,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	@Override
-	public void onApplyColorSelection(Integer oldColor, int newColor) {
-		colorsCard.onApplyColorSelection(oldColor, newColor);
+	public void onApplyColorPickerSelection(Integer oldColor, int newColor) {
+		colorsCard.onApplyColorPickerSelection(oldColor, newColor);
 		setColor(colorsCard.getSelectedColor());
 		updateContent();
 	}

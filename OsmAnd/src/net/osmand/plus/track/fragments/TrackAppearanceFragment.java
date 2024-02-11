@@ -445,7 +445,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onApplyColorSelection(Integer oldColor, int newColor) {
+	public void onApplyColorPickerSelection(Integer oldColor, int newColor) {
 		if (oldColor != null) {
 			List<Integer> customColors = ColorsCard.getCustomColors(settings.CUSTOM_TRACK_COLORS);
 			int index = customColors.indexOf(oldColor);
@@ -454,7 +454,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 		}
 		trackDrawInfo.setColor(newColor);
-		colorsCard.onApplyColorSelection(oldColor, newColor);
+		colorsCard.onApplyColorPickerSelection(oldColor, newColor);
 		updateColorItems();
 	}
 

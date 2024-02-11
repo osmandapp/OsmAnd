@@ -51,7 +51,7 @@ public class ColorPickerDialogController extends BaseDialogController implements
 
 	@Override
 	public void onApplyColorSelection() {
-		listener.onApplyColorSelection(initialColor, selectedColor);
+		listener.onApplyColorPickerSelection(initialColor, selectedColor);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
@@ -68,6 +68,6 @@ public class ColorPickerDialogController extends BaseDialogController implements
 	}
 
 	public interface ColorPickerListener {
-		void onApplyColorSelection(@ColorInt Integer oldColor, @ColorInt int newColor);
+		void onApplyColorPickerSelection(@ColorInt Integer oldColor, @ColorInt int newColor);
 	}
 }

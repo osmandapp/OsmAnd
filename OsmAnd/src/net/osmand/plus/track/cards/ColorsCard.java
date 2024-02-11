@@ -22,7 +22,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController;
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
-import net.osmand.plus.track.fragments.controller.IColorPickerDialogController;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
@@ -93,7 +92,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 	}
 
 	@Override
-	public void onApplyColorSelection(Integer oldColor, int newColor) {
+	public void onApplyColorPickerSelection(Integer oldColor, int newColor) {
 		if (oldColor != null) {
 			int index = customColors.indexOf(oldColor);
 			if (index != INVALID_VALUE) {

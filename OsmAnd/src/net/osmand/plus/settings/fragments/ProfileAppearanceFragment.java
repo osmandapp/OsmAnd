@@ -914,8 +914,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	}
 
 	@Override
-	public void onApplyColorSelection(Integer oldColor, int newColor) {
-		colorsCard.onApplyColorSelection(oldColor, newColor);
+	public void onApplyColorPickerSelection(Integer oldColor, int newColor) {
+		colorsCard.onApplyColorPickerSelection(oldColor, newColor);
 		this.onCardPressed(colorsCard);
 	}
 

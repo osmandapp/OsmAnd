@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_sting_all_colors">All colors</string>
     <string name="sorted_sufolders_toast">Subfolders in “%1$s” is sorted by: “%2$s”</string>
     <string name="sort_subfolders">Sort subfolders</string>
     <string name="shared_string_activity">Activity</string>

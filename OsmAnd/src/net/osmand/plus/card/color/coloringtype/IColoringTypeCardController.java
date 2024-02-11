@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color;
+package net.osmand.plus.card.color.coloringtype;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

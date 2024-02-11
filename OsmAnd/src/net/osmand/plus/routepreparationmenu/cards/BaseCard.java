@@ -127,6 +127,10 @@ public abstract class BaseCard {
 		return app;
 	}
 
+	public boolean isNightMode() {
+		return nightMode;
+	}
+
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
 		return ContextCompat.getColor(app, colorId);
