@@ -14,12 +14,12 @@ import net.osmand.plus.utils.UiUtilities;
 
 public class ColorsPaletteCard extends BaseCard {
 
-	private final IColorsPaletteCardController controller;
+	private final IColorsPaletteUIController controller;
 	private final ColorsPaletteElements paletteElements;
 	private final ColorsPaletteAdapter paletteAdapter;
 
 	public ColorsPaletteCard(@NonNull FragmentActivity activity,
-	                         @NonNull IColorsPaletteCardController controller) {
+	                         @NonNull IColorsPaletteUIController controller) {
 		super(activity);
 		this.controller = controller;
 		controller.bindCard(this);
@@ -48,7 +48,7 @@ public class ColorsPaletteCard extends BaseCard {
 
 	private void setupButtonAddCustomColor() {
 		ViewGroup container = view.findViewById(R.id.add_button_container);
-		container.addView(paletteElements.createButtonAddColorView(container));
+		container.addView(paletteElements.createButtonAddColorView(container, true));
 		container.setOnClickListener(v -> controller.onAddColorButtonClicked(activity));
 	}
 

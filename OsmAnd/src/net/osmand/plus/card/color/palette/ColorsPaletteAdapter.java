@@ -13,12 +13,12 @@ import java.util.List;
 class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 
 	private final FragmentActivity activity;
-	private final IColorsPaletteCardController controller;
+	private final IColorsPaletteUIController controller;
 	private final ColorsPaletteElements paletteElements;
 	private List<Integer> colors;
 
 	public ColorsPaletteAdapter(@NonNull FragmentActivity activity,
-	                            @NonNull IColorsPaletteCardController controller,
+	                            @NonNull IColorsPaletteUIController controller,
 	                            boolean nightMode) {
 		this.activity = activity;
 		this.controller = controller;

@@ -19,7 +19,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ColorsPaletteCardController implements IColorsPaletteCardController {
+public abstract class ColorsPaletteCardController implements IColorsPaletteUIController {
 
 	private static final Log LOG = PlatformUtil.getLog(ColorsPaletteCardController.class);
 
@@ -117,7 +117,7 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteCardC
 
 	@Override
 	public void onAllColorsButtonClicked(@NonNull FragmentActivity activity) {
-		// TODO show "All colors" screen
+		ColorsPaletteFragment.showInstance(activity, this);
 	}
 
 	private void showColorPickerDialog(@NonNull FragmentActivity activity, @Nullable Integer initialColor) {
@@ -129,7 +129,8 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteCardC
 		return selectedColor;
 	}
 
-	private boolean isCustomColor(@ColorInt int color) {
+	@Override
+	public boolean isCustomColor(@ColorInt int color) {
 		return !defaultColors.contains(color);
 	}
 

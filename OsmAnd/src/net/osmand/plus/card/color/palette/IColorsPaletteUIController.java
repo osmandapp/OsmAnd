@@ -4,11 +4,14 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
 
 import java.util.List;
 
-public interface IColorsPaletteCardController extends ColorPickerListener {
+public interface IColorsPaletteUIController extends IDialogController, ColorPickerListener {
+
+	String ALL_COLORS_PROCESS_ID = "show_all_colors_palette";
 
 	void bindCard(@NonNull ColorsPaletteCard card);
 
@@ -29,4 +32,7 @@ public interface IColorsPaletteCardController extends ColorPickerListener {
 	List<Integer> getAllColors();
 
 	int getSelectedColor();
+
+	boolean isCustomColor(@ColorInt int color);
+
 }

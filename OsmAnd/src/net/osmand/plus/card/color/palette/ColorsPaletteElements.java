@@ -61,7 +61,7 @@ public class ColorsPaletteElements {
 	}
 
 	@NonNull
-	public View createButtonAddColorView(@NonNull ViewGroup rootView) {
+	public View createButtonAddColorView(@NonNull ViewGroup rootView, boolean outlineGone) {
 		View itemView = createCircleView(rootView);
 		ImageView icon = itemView.findViewById(R.id.icon);
 		View outline = itemView.findViewById(R.id.outline);
@@ -74,7 +74,7 @@ public class ColorsPaletteElements {
 		int activeColorResId = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_plus, activeColorResId));
 		icon.setVisibility(View.VISIBLE);
-		outline.setVisibility(View.GONE);
+		outline.setVisibility(outlineGone ? View.GONE : View.INVISIBLE);
 		return itemView;
 	}
 
