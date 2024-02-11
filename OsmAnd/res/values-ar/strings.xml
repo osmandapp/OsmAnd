@@ -5659,4 +5659,17 @@
     <string name="shared_string_next_event">التالي</string>
     <string name="map_widget_sun_position">موقع الشمس</string>
     <string name="map_widget_sun_position_desc">يعرض هذا الويدجت الوقت حتى شروق الشمس أو غروبها، اعتمادا على الوقت الحالي.</string>
+    <string name="sort_subfolders">فرز المجلدات الفرعية</string>
+    <string name="shared_string_activity">النشاط</string>
+    <string name="shared_string_keywords">الكلمات الدلالية</string>
+    <string name="shared_string_additional">إضافي</string>
+    <string name="sorted_sufolders_toast">تُفرز المجلدات الفرعية في \"%1$s\" بحسب: \"%2$s\"</string>
+    <string name="battery_optimization_banner_content">يمكن أن يؤدي تحسين بطارية أندرويد إلى حدوث فجوات وعدم دقة في المسارات المسجلة.</string>
+    <string name="dont_ask_anymore">لا تسأل مرة أخرى</string>
+    <string name="battery_optimization_settings">إعدادات تحسين البطارية</string>
+    <string name="battery_optimization">تحسين البطارية</string>
+    <string name="shared_string_extensions">الملحقات</string>
+    <string name="shared_string_license">الرخصة</string>
+    <string name="shared_string_link">الرابط</string>
+    <string name="shared_string_copyright">حقوق النشر</string>
 </resources>
