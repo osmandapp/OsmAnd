@@ -1788,7 +1788,7 @@
     <string name="app_mode_offroad">오프로드</string>
     <string name="shared_string_widgets">위젯</string>
     <string name="download_maps_travel">여행안내가이드</string>
-    <string name="shared_string_travel_guides">여행안내가이드</string>
+    <string name="shared_string_travel_guides">여행 가이드</string>
     <string name="routeInfo_tracktype_description">노면 구성에 따라 도로의 상태에 따라 노선이나 선로를 색칠한다. 일반적으로 간선도로망이 비포장도로로 구성된 도로에 적용된다.</string>
     <string name="set_working_days_to_continue">계속하도록 근무일 설정</string>
     <string name="plan_route_last_edited">마지막 편집</string>
@@ -2376,7 +2376,7 @@
     <string name="saved_articles">저장된 가이드</string>
     <string name="sort_by_category">‎범주‎‎별로 정렬‎</string>
     <string name="backup_into_file">‎파일로‎‎ 백업‎</string>
-    <string name="shared_string_explore">‎탐색</string>
+    <string name="shared_string_explore">탐험</string>
     <string name="location_source">‎위치 ‎‎소스‎</string>
     <string name="import_profile">‎프로파일‎‎ 가져오기‎</string>
     <string name="osmand_cloud">‎오스엠앤‎‎드 클라우드‎</string>
@@ -4099,9 +4099,9 @@
     <string name="battery_optimization_banner_content">안드로이드 배터리 최적화는 기록된 트랙의 간격과 부정확성을 유발할 수 있습니다.</string>
     <string name="dont_ask_anymore">다시 묻지 않음</string>
     <string name="battery_optimization_settings">배터리 최적화 설정</string>
-    <string name="battery_optimization_desc">Android의 배터리 최적화는 기록 된 트랙의 격차와 inaccuracies를 일으킬 수 있습니다.
+    <string name="battery_optimization_desc">Android의 배터리 최적화는 기록된 트랙의 간격과 부정확성을 유발할 수 있습니다.
 \n
-\n이 문제의 어떤 경험을 쌓으면 배터리 사용을 제한할 수 있습니다. 이름 *</string>
+\n이러한 문제가 발생하면, 배터리 사용량을 \'제한 없음.\'으로 변경해 볼 수 있음</string>
     <string name="battery_optimization">배터리 최적화</string>
     <string name="share_geo">위치:</string>
     <string name="simulate_initial_startup_descr">첫 번째 앱 시작을 나타내는 플래그를 설정하고 다른 설정을 변경하지 마십시오.</string>
@@ -4904,4 +4904,42 @@
     <string name="mappilary_no_internet_desc">사진에서 Mapillary는 온라인에서만 가능합니다.</string>
     <string name="app_mode_inline_skates">인라인 스케이트</string>
     <string name="expire_time">유효 기간</string>
+    <string name="next_billing_date">다음 청구일: %1$s</string>
+    <string name="last_time_checked">체크인 시간: %s</string>
+    <string name="srtm_unit_format">Contour 라인 단위 변종</string>
+    <string name="shared_string_max_height">최대. 고도</string>
+    <string name="rendering_attr_piste_type_sled_name">썰매</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">자유난이도</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">중급자</string>
+    <string name="shared_string_min_height">Min. 고도</string>
+    <string name="download_detailed_map">자세한 %s지도를 다운로드하여이 지역을 볼 수 있습니다.</string>
+    <string name="verification_code_missing">인증 코드를받지 못했습니다</string>
+    <string name="fold_unfold">접기/펼치기</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="updated">업데이트: %s</string>
+    <string name="on_pause">정지를 켜기</string>
+    <string name="contact_support_description">질문이 있으시면 %1$s로 문의하십시오.</string>
+    <string name="specify_color_for_map_mode">지도 모드의 색상 지정 %1$s.</string>
+    <string name="live_update_delete_updates_msg">모든 %s 라이브 업데이트 삭제?</string>
+    <string name="manage_subscription">구독갱신 관리</string>
+    <string name="message_graph_will_be_available_after_recalculation">기다려 주세요.
+\n경로 재계산 후 그래프를 사용할 수 있습니다.</string>
+    <string name="swap_two_places">전환 %1$s 과 %2$s</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">고급</string>
+    <string name="map_marker">지도 marker</string>
+    <string name="storage_found_files_size">%1$s 파일 %2$s 찾음</string>
+    <string name="verify_email_address_descr">%1$s로 전송되는 검증 코드. 아래 필드에 입력하십시오.</string>
+    <string name="verify_email_address">이메일 주소 확인</string>
+    <string name="add_custom_category">사용자 정의 카테고리</string>
+    <string name="storage_copying_files_size">복사 %1$s 파일 %2$s</string>
+    <string name="storage_copied_files_size">%1$s 파일 처리, %2$s</string>
+    <string name="contour_lines_thanks">\'Topology\'를 구매해 주셔서 감사합니다</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">전문가</string>
+    <string name="routeInfo_piste_type_name">Piste 유형</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">극강</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">쉬움</string>
+    <string name="custom_routing">사용자 정의 라우팅 프로파일</string>
+    <string name="shared_string_wikivoyage">Wikivoyage</string>
+    <string name="create_custom_poi">사용자 정의 필터</string>
+    <string name="from_to_with_params">%1$s에서 %2$s에게</string>
 </resources>
