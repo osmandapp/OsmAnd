@@ -16,6 +16,7 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 	private final IColorsPaletteUIController controller;
 	private final ColorsPaletteElements paletteElements;
 	private List<Integer> colors;
+	private boolean nightMode;
 
 	public ColorsPaletteAdapter(@NonNull FragmentActivity activity,
 	                            @NonNull IColorsPaletteUIController controller,
@@ -23,6 +24,7 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 		this.activity = activity;
 		this.controller = controller;
 		this.colors = controller.getAllColors();
+		this.nightMode = nightMode;
 		paletteElements = new ColorsPaletteElements(activity, nightMode);
 		setHasStableIds(true);
 	}
@@ -49,7 +51,7 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 			controller.onSelectColorFromPalette(color);
 		});
 		holder.background.setOnLongClickListener(v -> {
-			controller.onColorItemLongClicked(activity, color);
+			controller.onColorItemLongClicked(activity, holder.background, color, nightMode);
 			return false;
 		});
 	}

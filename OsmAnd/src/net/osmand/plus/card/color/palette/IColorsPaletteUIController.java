@@ -1,5 +1,7 @@
 package net.osmand.plus.card.color.palette;
 
+import android.view.View;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -24,7 +26,7 @@ public interface IColorsPaletteUIController extends IDialogController, ColorPick
 
 	void onSelectColorFromPalette(@ColorInt int color);
 
-	void onColorItemLongClicked(@NonNull FragmentActivity activity, @ColorInt int color);
+	void onColorItemLongClicked(@NonNull FragmentActivity activity, @NonNull View view, @ColorInt int color, boolean nightMode);
 
 	void onAllColorsButtonClicked(@NonNull FragmentActivity activity);
 

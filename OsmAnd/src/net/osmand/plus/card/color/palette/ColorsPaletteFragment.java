@@ -119,7 +119,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		background.setOnClickListener(v -> controller.onSelectColorFromPalette(color));
 		if (customColor) {
 			background.setOnLongClickListener(v -> {
-				controller.onColorItemLongClicked(requireActivity(), color);
+				controller.onColorItemLongClicked(requireActivity(), v, color, nightMode);
 				return false;
 			});
 		}

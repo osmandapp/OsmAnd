@@ -1,16 +1,24 @@
 package net.osmand.plus.card.color.palette;
 
+import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -22,9 +30,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ColorsPaletteCardController implements IColorsPaletteUIController {
+public abstract class BaseColorsPaletteController implements IColorsPaletteUIController {
 
-	private static final Log LOG = PlatformUtil.getLog(ColorsPaletteCardController.class);
+	private static final Log LOG = PlatformUtil.getLog(BaseColorsPaletteController.class);
 
 	private static final int INVALID_VALUE = -1;
 
@@ -39,11 +47,11 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 	@ColorInt
 	private int selectedColor;
 
-	public ColorsPaletteCardController(@NonNull OsmandApplication app,
+	public BaseColorsPaletteController(@NonNull OsmandApplication app,
 	                                   @NonNull List<Integer> defaultColors,
 	                                   @NonNull ListStringPreference customColorsPreference,
 	                                   @Nullable ApplicationMode appMode,
-									   @ColorInt int selectedColor) {
+	                                   @ColorInt int selectedColor) {
 		this.app = app;
 		this.customColorsPreference = customColorsPreference;
 		this.defaultColors = defaultColors;
@@ -132,10 +140,10 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 	}
 
 	@Override
-	public void onColorItemLongClicked(@NonNull FragmentActivity activity, @ColorInt int color) {
-		// TODO show pop-up menu for custom colors
+	public void onColorItemLongClicked(@NonNull FragmentActivity activity, @NonNull View view,
+	                                   @ColorInt int color, boolean nightMode) {
 		if (isCustomColor(color)) {
-			showColorPickerDialog(activity, color);
+			showItemPopUpMenu(activity, view, color, nightMode);
 		}
 	}
 
@@ -149,8 +157,68 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 		ColorsPaletteFragment.showInstance(activity, this);
 	}
 
+	private void showItemPopUpMenu(@NonNull FragmentActivity activity, @NonNull View view,
+	                               @ColorInt int color, boolean nightMode) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_edit)
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
+				.setOnClickListener(v -> {
+					showColorPickerDialog(activity, color);
+				})
+				.create()
+		);
+
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_duplicate)
+				.setIcon(getContentIcon(R.drawable.ic_action_copy))
+				.setOnClickListener(v -> {
+					duplicateCustomColor(color);
+				})
+				.create()
+		);
+
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_remove)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.showTopDivider(true)
+				.setOnClickListener(v -> {
+					deleteCustomColor(color);
+				})
+				.create()
+		);
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
+	}
+
 	private void showColorPickerDialog(@NonNull FragmentActivity activity, @Nullable Integer initialColor) {
 		ColorPickerDialogController.showDialog(activity, this, initialColor);
+	}
+
+	private void duplicateCustomColor(@ColorInt int color) { // TODO fix duplicates may cause the same color selection
+		if (isCustomColor(color)) {
+			int index = customColors.indexOf(color);
+			if (index < customColors.size()) {
+				customColors.set(index + 1, color);
+			} else {
+				customColors.add(color);
+			}
+			saveCustomColors();
+			notifyUpdatePalette();
+		}
+	}
+
+	private void deleteCustomColor(@ColorInt int color) {
+		if (isCustomColor(color)) { // TODO fix possible problem if we remove selected color
+			customColors.remove((Integer) color);
+			saveCustomColors();
+			notifyUpdatePalette();
+		}
 	}
 
 	@Override
@@ -195,6 +263,10 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 		} else {
 			customColorsPreference.setStringsListForProfile(appMode, colorNames);
 		}
+	}
+
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return app.getUIUtilities().getThemedIcon(id);
 	}
 
 	public static List<Integer> collectCustomColors(@NonNull ListStringPreference colorsListPreference, ApplicationMode appMode) {
