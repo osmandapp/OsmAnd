@@ -116,7 +116,10 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		paletteElements.updateColorItemView(view, color, isSelected);
 
 		ImageView background = view.findViewById(R.id.background);
-		background.setOnClickListener(v -> controller.onSelectColorFromPalette(color));
+		background.setOnClickListener(v -> {
+			controller.onSelectColorFromPalette(color);
+			dismiss();
+		});
 		if (customColor) {
 			background.setOnLongClickListener(v -> {
 				controller.onColorItemLongClicked(requireActivity(), v, color, nightMode);
