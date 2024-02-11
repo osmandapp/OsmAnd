@@ -34,7 +34,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.FlowLayout.LayoutParams;
 
-public class ColorsPaletteFragment extends BaseOsmAndDialogFragment {
+public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements IColorsPalette {
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
 
@@ -44,9 +44,11 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		DialogManager dialogManager = app.getDialogManager();
 		controller = (IColorsPaletteUIController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		if (controller != null) {
+			controller.bindPalette(this);
+		}
 	}
 
 	@NonNull
@@ -114,12 +116,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment {
 		paletteElements.updateColorItemView(view, color, isSelected);
 
 		ImageView background = view.findViewById(R.id.background);
-		background.setOnClickListener(v -> {
-			int previous = controller.getSelectedColor();
-			if (controller.onSelectColorFromPalette(color)) {
-				updateSelectionOnPalette(previous, color);
-			}
-		});
+		background.setOnClickListener(v -> controller.onSelectColorFromPalette(color));
 		if (customColor) {
 			background.setOnLongClickListener(v -> {
 				controller.onColorItemLongClicked(requireActivity(), color);
@@ -130,8 +127,21 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment {
 		return view;
 	}
 
-	private void updateSelectionOnPalette(@ColorInt Integer oldColor, @ColorInt int newColor) {
-		View view = requireView();
+
+	@Override
+	public void updatePalette() {
+		View view = getView();
+		if (view != null) {
+			setupColorsPalette(view);
+		}
+	}
+
+	@Override
+	public void updatePaletteSelection(Integer oldColor, int newColor) {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
 		View oldColorContainer = view.findViewWithTag(oldColor);
 		if (oldColorContainer != null) {
 			oldColorContainer.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
@@ -158,6 +168,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		controller.unbindPalette(this);
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
 			// Automatically unregister controller when close the dialog

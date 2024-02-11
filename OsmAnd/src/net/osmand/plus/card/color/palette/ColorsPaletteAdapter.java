@@ -46,11 +46,7 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 		boolean isSelected = controller.getSelectedColor() == color;
 		paletteElements.updateColorItemView(holder.itemView, color, isSelected);
 		holder.background.setOnClickListener(v -> {
-			int previous = controller.getSelectedColor();
-			if (controller.onSelectColorFromPalette(color)) {
-				notifyItemChanged(colors.indexOf(previous));
-				notifyItemChanged(colors.indexOf(color));
-			}
+			controller.onSelectColorFromPalette(color);
 		});
 		holder.background.setOnLongClickListener(v -> {
 			controller.onColorItemLongClicked(activity, color);

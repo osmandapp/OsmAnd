@@ -12,17 +12,20 @@ import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
 
-public class ColorsPaletteCard extends BaseCard {
+import java.util.List;
+
+public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
 	private final IColorsPaletteUIController controller;
 	private final ColorsPaletteElements paletteElements;
 	private final ColorsPaletteAdapter paletteAdapter;
+	private RecyclerView rvColors;
 
 	public ColorsPaletteCard(@NonNull FragmentActivity activity,
 	                         @NonNull IColorsPaletteUIController controller) {
 		super(activity);
 		this.controller = controller;
-		controller.bindCard(this);
+		controller.bindPalette(this);
 		paletteElements = new ColorsPaletteElements(activity, nightMode);
 		paletteAdapter = new ColorsPaletteAdapter(activity, controller, nightMode);
 	}
@@ -40,7 +43,7 @@ public class ColorsPaletteCard extends BaseCard {
 	}
 
 	private void setupColorsPalette() {
-		RecyclerView rvColors = view.findViewById(R.id.colors_list);
+		rvColors = view.findViewById(R.id.colors_list);
 		rvColors.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
 		rvColors.setClipToPadding(false);
 		rvColors.setAdapter(paletteAdapter);
@@ -54,16 +57,24 @@ public class ColorsPaletteCard extends BaseCard {
 
 	private void setupButtonShowAllColors() {
 		View buttonAllColors = view.findViewById(R.id.button_all_colors);
-		int controlsAccentColor = controller.getControlsAccentColor();
+		int controlsAccentColor = controller.getControlsAccentColor(nightMode);
 		UiUtilities.setupSelectableBackground(activity, buttonAllColors, controlsAccentColor);
 		buttonAllColors.setOnClickListener(v -> controller.onAllColorsButtonClicked(activity));
 	}
 
-	public void updateColorsPalette() {
-		RecyclerView rvColors = view.findViewById(R.id.colors_list);
+	public void updatePalette() {
 		paletteAdapter.updateColorsList();
 		int index = controller.getAllColors().indexOf(controller.getSelectedColor());
 		rvColors.scrollToPosition(index);
+	}
+
+	@Override
+	public void updatePaletteSelection(Integer oldColor, int newColor) {
+		List<Integer> colors = controller.getAllColors();
+		int selectedColorIndex = colors.indexOf(newColor);
+		paletteAdapter.notifyItemChanged(colors.indexOf(oldColor));
+		paletteAdapter.notifyItemChanged(selectedColorIndex);
+		rvColors.scrollToPosition(selectedColorIndex);
 	}
 
 }

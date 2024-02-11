@@ -13,14 +13,16 @@ public interface IColorsPaletteUIController extends IDialogController, ColorPick
 
 	String ALL_COLORS_PROCESS_ID = "show_all_colors_palette";
 
-	void bindCard(@NonNull ColorsPaletteCard card);
+	void bindPalette(@NonNull IColorsPalette palette);
 
-	void setColorsPaletteListener(@NonNull OnColorsPaletteListener onColorsPaletteListener);
+	void unbindPalette(@NonNull IColorsPalette palette);
+
+	void setPaletteListener(@NonNull OnColorsPaletteListener onColorsPaletteListener);
 
 	@ColorInt
-	int getControlsAccentColor();
+	int getControlsAccentColor(boolean nightMode);
 
-	boolean onSelectColorFromPalette(@ColorInt int color);
+	void onSelectColorFromPalette(@ColorInt int color);
 
 	void onColorItemLongClicked(@NonNull FragmentActivity activity, @ColorInt int color);
 

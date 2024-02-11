@@ -16,8 +16,11 @@ import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class ColorsPaletteCardController implements IColorsPaletteUIController {
 
@@ -31,8 +34,8 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 	protected final List<Integer> customColors;
 	protected ApplicationMode appMode;
 
-	protected OnColorsPaletteListener onColorsPaletteListener;
-	protected ColorsPaletteCard card;
+	protected OnColorsPaletteListener externalPaletteListener;
+	protected List<WeakReference<IColorsPalette>> palettes = new ArrayList<>();
 	@ColorInt
 	private int selectedColor;
 
@@ -50,28 +53,54 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 	}
 
 	@Override
-	public void bindCard(@NonNull ColorsPaletteCard card) {
-		this.card = card;
+	public void bindPalette(@NonNull IColorsPalette palette) {
+		this.palettes.add(new WeakReference<>(palette));
 	}
 
 	@Override
-	public void setColorsPaletteListener(@NonNull OnColorsPaletteListener onColorsPaletteListener) {
-		this.onColorsPaletteListener = onColorsPaletteListener;
+	public void unbindPalette(@NonNull IColorsPalette palette) {
+		WeakReference<IColorsPalette> referenceToRemove = null;
+		for (WeakReference<IColorsPalette> reference : palettes) {
+			if (Objects.equals(palette, reference.get())) {
+				referenceToRemove = reference;
+				break;
+			}
+		}
+		if (referenceToRemove != null) {
+			palettes.remove(referenceToRemove);
+		}
+	}
+
+	private void notifyUpdatePaletteSelection(@ColorInt int oldColor, @ColorInt int newColor) {
+		for (IColorsPalette palette : collectActivePalettes()) {
+			palette.updatePaletteSelection(oldColor, newColor);
+		}
+	}
+
+	private void notifyUpdatePalette() {
+		for (IColorsPalette palette : collectActivePalettes()) {
+			palette.updatePalette();
+		}
+	}
+
+	@Override
+	public void setPaletteListener(@NonNull OnColorsPaletteListener onColorsPaletteListener) {
+		this.externalPaletteListener = onColorsPaletteListener;
 	}
 
 	@Override
 	@ColorInt
-	public int getControlsAccentColor() {
-		return ColorUtilities.getActiveColor(app, isNightMode());
+	public int getControlsAccentColor(boolean nightMode) {
+		return ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@Override
-	public boolean onSelectColorFromPalette(@ColorInt int color) {
+	public void onSelectColorFromPalette(@ColorInt int color) {
 		if (selectedColor != color) {
+			int oldColor = selectedColor;
 			selectedColor = color;
-			return true;
+			notifyUpdatePaletteSelection(oldColor, selectedColor);
 		}
-		return false;
 	}
 
 	@Override
@@ -89,16 +118,16 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 			selectColor(newColor);
 		}
 		saveCustomColors();
-		card.updateColorsPalette();
-		if (onColorsPaletteListener != null) {
-			onColorsPaletteListener.onColorAddedToPalette(oldColor, newColor);
+		notifyUpdatePalette();
+		if (externalPaletteListener != null) {
+			externalPaletteListener.onColorAddedToPalette(oldColor, newColor);
 		}
 	}
 
 	public void selectColor(@ColorInt int color) {
 		selectedColor = color;
-		if (onColorsPaletteListener != null) {
-			onColorsPaletteListener.onColorSelectedFromPalette(color);
+		if (externalPaletteListener != null) {
+			externalPaletteListener.onColorSelectedFromPalette(color);
 		}
 	}
 
@@ -134,14 +163,25 @@ public abstract class ColorsPaletteCardController implements IColorsPaletteUICon
 		return !defaultColors.contains(color);
 	}
 
-	private boolean isNightMode() {
-		return card.isNightMode();
-	}
-
 	@NonNull
 	@Override
 	public List<Integer> getAllColors() {
 		return CollectionUtils.asOneList(defaultColors, customColors);
+	}
+
+	@NonNull
+	private List<IColorsPalette> collectActivePalettes() {
+		List<IColorsPalette> result = new ArrayList<>();
+		Iterator<WeakReference<IColorsPalette>> it = palettes.iterator();
+		while (it.hasNext()) {
+			IColorsPalette palette = it.next().get();
+			if (palette != null) {
+				result.add(palette);
+			} else {
+				it.remove();
+			}
+		}
+		return result;
 	}
 
 	private void saveCustomColors() {
