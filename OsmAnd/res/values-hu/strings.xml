@@ -5615,4 +5615,8 @@
     <string name="sort_subfolders">Almappák sorba rendezése</string>
     <string name="sorted_sufolders_toast">A „%1$s” mappában lévő almappák %2$s szerint vannak sorba rendezve</string>
     <string name="special_routing_cpp">Speciális útvonaltervezési típus</string>
+    <string name="add_button">Gomb hozzáadása</string>
+    <string name="custom_buttons">Egyéni gombok</string>
+    <string name="default_buttons">Alapértelmezett gombok</string>
+    <string name="custom_map_button_name_present">Ilyen gomb már van</string>
 </resources>

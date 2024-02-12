@@ -237,8 +237,8 @@
     <string name="local_index_transport_data">Podaci javnog prevoza</string>
     <string name="local_index_map_data">Podaci mape</string>
     <string name="local_indexes_cat_backup">Isključeno</string>
-    <string name="local_indexes_cat_tts">Glasovna navođenja (TTS)</string>
-    <string name="local_indexes_cat_voice">Glasovna navođenja (snimljena)</string>
+    <string name="local_indexes_cat_tts">glasovno navođenje (TTS)</string>
+    <string name="local_indexes_cat_voice">glasovno navođenje (snimljeno)</string>
     <string name="local_indexes_cat_poi">TOI podaci</string>
     <string name="ttsvoice">Glas TTS-a</string>
     <string name="search_offline_clear_search">Nova pretraga</string>
@@ -742,7 +742,7 @@
     <string name="rotate_map_compass_opt">Pravac kompasa</string>
     <string name="transport_context_menu">Pretraži stanice prevoza</string>
     <string name="vector_data">Vektorske mape bez interneta</string>
-    <string name="voices">Glasovna navođenja</string>
+    <string name="voices">glasovno navođenja</string>
     <string name="transport_search_again">Poništi pretragu prevoza</string>
     <string name="transport_searching_route">Rezultati prevoza ({0} do odredišta):</string>
     <string name="transport_searching_transport">Rezultati prevoza (bez odredišta):</string>
@@ -1522,8 +1522,8 @@
     <string name="fav_export_confirmation">Fajl sa izvezenim favoritima već postoji. Menjaš ga?</string>
     <string name="amenity_type_user_defined">Korisnički određeno</string>
     <string name="amenity_type_osmwiki">Vikipedija (bez interneta)</string>
-    <string name="index_name_tts_voice">Glasovna navođenja TTS</string>
-    <string name="index_name_voice">Glasovna navođenja (snimljena, ograničene mogućnosti)</string>
+    <string name="index_name_tts_voice">glasovno navođenje (TTS)</string>
+    <string name="index_name_voice">glasovno navođenje (snimljeno, ograničene mogućnosti)</string>
     <string name="index_name_wiki">TOI Wikipedia širom sveta</string>
     <string name="index_name_other">Svetske i tematske mape</string>
     <string name="index_name_antarctica">Antarktik</string>
@@ -5642,4 +5642,8 @@
     <string name="lang_zh_hant">Tradicionalni kineski</string>
     <string name="error_calculate">Rezultat kalkulacije je prazan</string>
     <string name="special_routing_cpp">Specijalni tip rutiranja</string>
+    <string name="add_button">Dodaj dugme</string>
+    <string name="custom_buttons">Prilagođeno dugme</string>
+    <string name="default_buttons">Zadano dugme</string>
+    <string name="custom_map_button_name_present">Takvo dugme već postoji</string>
 </resources>
