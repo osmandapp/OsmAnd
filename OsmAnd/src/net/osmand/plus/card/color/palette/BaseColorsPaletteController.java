@@ -163,7 +163,7 @@ public abstract class BaseColorsPaletteController implements IColorsPaletteUICon
 
 		menuItems.add(new PopUpMenuItem.Builder(activity)
 				.setTitleId(R.string.shared_string_edit)
-				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
+				.setIcon(getContentIcon(R.drawable.ic_action_appearance_outlined))
 				.setOnClickListener(v -> {
 					showColorPickerDialog(activity, color);
 				})
