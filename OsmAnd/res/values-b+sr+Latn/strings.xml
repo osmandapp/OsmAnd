@@ -101,7 +101,7 @@
     <string name="pref_vector_map">Podešavanja vektorske mapa</string>
     <string name="city_type_suburb">Predgrađe</string>
     <string name="city_type_village">Selo</string>
-    <string name="city_type_town">Grad</string>
+    <string name="city_type_town">Naseljeno mesto</string>
     <string name="animate_route_off">Zaustavi simulaciju</string>
     <string name="animate_route">Započni simulaciju</string>
     <string name="file_can_not_be_renamed">Ne mogu da preimenujem datoteku.</string>
@@ -2051,7 +2051,7 @@
     <string name="select_city">Izaberi grad</string>
     <string name="nearest_cities">Najbliži gradovi</string>
     <string name="type_postcode">Ukucaj poštanski broj</string>
-    <string name="type_city_town">Ukucaj grad/naselje/lokalitet</string>
+    <string name="type_city_town">Ukucaj grad/ mesto</string>
     <string name="type_address">Ukucaj adresu</string>
     <string name="shared_string_in_name">u %1$s</string>
     <string name="select_street">Izaberi ulicu</string>
@@ -3272,7 +3272,7 @@
     <string name="keep_passed_markers">Zadrži odobrene oznake na mapi</string>
     <string name="keep_passed_markers_descr">Oznake dodati kao grupa omiljenih ili GPX prolaznih tačaka označeni kao odobreni ostaće na mapi. Ako grupa nije uključena, oznake će se izgubiće sa mape.</string>
     <string name="shared_string_restore">Vrati</string>
-    <string name="start_search_from_city">Prvo odaberi grad/ naselje/ mesto</string>
+    <string name="start_search_from_city">Prvo odaberi grad/ mesto</string>
     <string name="search_street">Traži ulicu</string>
     <string name="third_party_application">Program treće strane</string>
     <string name="edit_map_marker">Izmeni oznaku mape</string>
