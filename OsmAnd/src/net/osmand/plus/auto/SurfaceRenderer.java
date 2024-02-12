@@ -383,6 +383,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		return surface != null && surface.isValid();
 	}
 
+	public boolean hasOffscreenRenderer() {
+		return offscreenMapRendererView != null;
+	}
+
 	public void renderFrame() {
 		if (mapView == null || surface == null || !surface.isValid()) {
 			// Surface is not available, or has been destroyed, skip this frame.

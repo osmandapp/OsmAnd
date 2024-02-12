@@ -54,6 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.TripltekPromoFragment;
@@ -987,6 +988,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onPause() {
 		super.onPause();
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
+		boolean blockAnimations = true;
+		NavigationSession navigationSession = app.getCarNavigationSession();
+		if (navigationSession != null) {
+			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+			if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer())
+				blockAnimations = false;
+		}
+		if (blockAnimations)
+			getMapView().getAnimatedDraggingThread().blockAnimations();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;
 		} else {
@@ -996,10 +1006,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
-		if (app.getCarNavigationSession() == null) {
-			getMapView().getAnimatedDraggingThread().blockAnimations();
-		}
-
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
