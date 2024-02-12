@@ -294,17 +294,11 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) { }
-
-	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
 		if (card instanceof ColorsCard) {
 			updateSelectedCustomColor();
 		}
 	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) { }
 
 	public void saveToBundle(@NonNull Bundle outState) {
 		outState.putBoolean(IS_NIGHT_MAP_THEME, isNightMapTheme);
