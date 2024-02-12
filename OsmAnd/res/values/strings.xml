@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="custom_map_button_name_present">Such button already present</string>
+    <string name="add_button">Add button</string>
+    <string name="custom_buttons">Custom buttons</string>
+    <string name="default_buttons">Default buttons</string>
     <string name="shared_sting_all_colors">All colors</string>
     <string name="sorted_sufolders_toast">Subfolders in “%1$s” is sorted by: “%2$s”</string>
     <string name="sort_subfolders">Sort subfolders</string>

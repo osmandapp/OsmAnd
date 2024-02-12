@@ -537,8 +537,8 @@
     <string name="poi_place_farm">Gård</string>
     <string name="poi_pharmacy">Apotek</string>
     <string name="poi_hospital">Sjukhus</string>
-    <string name="poi_doctors">Läkare</string>
-    <string name="poi_clinic">Klinik</string>
+    <string name="poi_doctors">Läkarmottagning</string>
+    <string name="poi_clinic">Vårdcentral</string>
     <string name="poi_first_aid">Första hjälpen</string>
     <string name="poi_dentist">Tandläkare</string>
     <string name="poi_nursing_home">Vårdhem</string>
@@ -1303,7 +1303,7 @@
     <string name="poi_enforcement_mindistance">Kontroll: minimumavstånd</string>
     <string name="poi_enforcement_check">Kontroll: check</string>
     <string name="poi_enforcement_access">Kontroll: åtkomst</string>
-    <string name="poi_enforcement_toll">Kontroll: tull</string>
+    <string name="poi_enforcement_toll">Kontroll: betalväg</string>
     <string name="poi_animal_shelter">Djurhem</string>
     <string name="poi_animal_shelter_dog">Hundar</string>
     <string name="poi_animal_shelter_cat">Katter</string>
@@ -1372,9 +1372,9 @@
     <string name="poi_smoking_separated">I ett separat rum</string>
     <string name="poi_smoking_isolated">I ett isolerat rum</string>
     <string name="poi_smoking_dedicated">Tillägnad rökare</string>
-    <string name="poi_toll_yes">Tull</string>
-    <string name="poi_toll_no">Ingen tull</string>
-    <string name="poi_toll_hgv_yes">Vägavgift för tung lastbil</string>
+    <string name="poi_toll_yes">Betalväg</string>
+    <string name="poi_toll_no">Ingen betalväg</string>
+    <string name="poi_toll_hgv_yes">Betalväg för tung lastbil</string>
     <string name="poi_tactile_paving_yes">Ja;Taktila ledstråk</string>
     <string name="poi_tactile_paving_no">Utan taktil beläggning</string>
     <string name="poi_traffic_signals_sound_yes">Ja;Ljudsignal vid övergångsställe</string>
@@ -1713,7 +1713,7 @@
     <string name="poi_vending_chewing_gums">Tuggummin</string>
     <string name="poi_vending_parking_tickets_public_transport_tickets">Parkeringsbiljetter; biljetter till kollektivtrafiken</string>
     <string name="poi_vending_coffee">Kaffe</string>
-    <string name="poi_vending_toll">Tullförsäljning</string>
+    <string name="poi_vending_toll">Betalvägsautomat</string>
     <string name="poi_vending_tickets">Biljettmaskin</string>
     <string name="poi_vending_water">Vattenautomat</string>
     <string name="poi_vending_telephone_vouchers">Telefonkort</string>
@@ -2643,7 +2643,7 @@
     <string name="poi_health_person_type_therapist">Roll för hälso- och sjukvårdspersonal: terapeut</string>
     <string name="poi_health_person_type_physician_assitant">Roll för hälso- och sjukvårdspersonal: läkarassistent</string>
     <string name="poi_health_person_type_technician">Roll för hälso- och sjukvårdspersonal: tekniker</string>
-    <string name="poi_health_person_type_witchdoctor">Roll för hälso- och sjukvårdspersonal: witchdoctor</string>
+    <string name="poi_health_person_type_witchdoctor">Roll för hälso- och sjukvårdspersonal: häxdoktor</string>
     <string name="poi_counselling_type_addiction_yes">Rådgivning (missbruk): Ja</string>
     <string name="poi_counselling_type_addiction_no">Rådgivning (missbruk): nej</string>
     <string name="poi_counselling_type_antenatal_yes">Rådgivning (mödravårdscentralen): Ja</string>
@@ -3714,7 +3714,7 @@
     <string name="poi_denotation_landmark">Landmärke</string>
     <string name="poi_denotation_natural_monument">Naturligt monument</string>
     <string name="poi_childcare">Barnomsorg</string>
-    <string name="poi_toll_gantry">Vägtull</string>
+    <string name="poi_toll_gantry">Automatisk betalstation</string>
     <string name="poi_atoll">Korallö</string>
     <string name="poi_books_children">Barn</string>
     <string name="poi_books_academic">Akademisk</string>
@@ -4597,4 +4597,5 @@
     <string name="poi_healthcare_speciality_first_aid_training">Första hjälpen utbildning</string>
     <string name="poi_healthcare_speciality_sleep">Sömn</string>
     <string name="poi_healthcare_speciality_physical_therapy">Fysioterapi</string>
+    <string name="poi_healthcare_speciality_clinic">Vårdcentral</string>
 </resources>

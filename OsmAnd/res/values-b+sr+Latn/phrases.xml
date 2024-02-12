@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Vrsta goriva</string>
     <string name="poi_payment_type">Način plaćanja</string>
@@ -149,7 +149,6 @@
     <string name="poi_fabric">Prodavnica tkanine</string>
     <string name="poi_doors">Vrata</string>
     <string name="poi_erotic">Seks šop</string>
-    
     <string name="poi_florist">Cvećara</string>
     <string name="poi_frame">Prodavnica ramova</string>
     <string name="poi_gift">Prodavnica poklona</string>
@@ -445,7 +444,7 @@
     <string name="poi_country">Država</string>
     <string name="poi_city">Grad</string>
     <string name="poi_capital">Da</string>
-    <string name="poi_town">Varošica</string>
+    <string name="poi_town">Grad</string>
     <string name="poi_village">Selo</string>
     <string name="poi_hamlet">Zaseok</string>
     <string name="poi_suburb">Predgrađe</string>
@@ -471,7 +470,7 @@
     <string name="poi_estate_agent">Agent za nekretnine</string>
     <string name="poi_lawyer">Advokat</string>
     <string name="poi_ngo">NVO</string>
-    <string name="poi_townhall">Gradska većnica</string>
+    <string name="poi_townhall">Gradska skupština</string>
     <string name="poi_it">IT kancelarija</string>
     <string name="poi_advertising_agency">Marketinška agencija</string>
     <string name="poi_educational_institution">Obrazovna ustanova</string>
@@ -516,7 +515,6 @@
     <string name="poi_bailiff">Sudski izvršitelj</string>
     <string name="poi_migration">Migraciono</string>
     <string name="poi_tax_inspection">Poreska inspekcija</string>
-    
     <string name="poi_isolated_dwelling">Izolovano mesto stanovanja</string>
     <string name="poi_quarter">Četvrt</string>
     <string name="poi_neighbourhood">Komšiluk</string>
@@ -1466,7 +1464,6 @@
     <string name="poi_radiotechnics">Radiotehnička prodavnica</string>
     <string name="poi_ship_chandler">Brodska oprema</string>
     <string name="poi_stationery">Prodavnica kancelarijske opreme</string>
-    
     <string name="poi_trade">Trgovački terminal</string>
     <string name="poi_variety_store">Prodavnica mešane robe</string>
     <string name="poi_window_blind">Prodavnica prozorskih zastora</string>
@@ -1510,7 +1507,6 @@
     <string name="poi_weir">Niska brana</string>
     <string name="poi_groyne">Sedimentna brana</string>
     <string name="poi_power_substation">Podstanica</string>
-    
     <string name="poi_power_tower">Električni toranj</string>
     <string name="poi_power_pole">Električni stub</string>
     <string name="poi_bell_tower">Telefonski toranj</string>
@@ -3096,7 +3092,6 @@
     <string name="poi_organic_no">Ne</string>
     <string name="poi_organic_yes">Da</string>
     <string name="poi_min_age">Minimalna starost</string>
-    
     <string name="poi_aquaculture_mussels">Akvakultura: dagnje</string>
     <string name="poi_aquaculture_fish">Akvakultura: riba</string>
     <string name="poi_aquaculture_shrimp">Akvakultura: škampi</string>

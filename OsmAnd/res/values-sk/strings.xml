@@ -5605,4 +5605,10 @@
     <string name="avg_sensor_temperature">Teplota, priemer</string>
     <string name="max_sensor_speed">Rýchlosť snímača, max</string>
     <string name="avg_sensor_speed">Rýchlosť snímača, priemer</string>
+    <string name="sort_subfolders">Zoradiť podpriečinky</string>
+    <string name="shared_string_activity">Aktivita</string>
+    <string name="shared_string_keywords">Kľúčové slová</string>
+    <string name="shared_string_additional">Doplňujúce</string>
+    <string name="special_routing_cpp">Typ špeciálnej navigácie</string>
+    <string name="sorted_sufolders_toast">Podpriečinky v “%1$s” sú zoradené podľa: “%2$s”</string>
 </resources>

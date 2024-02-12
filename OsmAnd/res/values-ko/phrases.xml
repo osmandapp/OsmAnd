@@ -798,4 +798,7 @@
     <string name="poi_vending_parking_tickets_public_transport_tickets">주차권; 대중교통권</string>
     <string name="poi_traffic_signals_sound">소리</string>
     <string name="poi_highway_crossing_type">속성 보기</string>
+    <string name="poi_nfs_recreation_area_restrictions">제한사항 정보</string>
+    <string name="poi_nfs_recreation_area_accessibility_info">접근성 정보</string>
+    <string name="poi_nfs_recreation_area_activity_description">활동 설명</string>
 </resources>

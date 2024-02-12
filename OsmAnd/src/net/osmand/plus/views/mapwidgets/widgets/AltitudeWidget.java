@@ -59,7 +59,7 @@ public class AltitudeWidget extends SimpleWidget {
 			case ALTITUDE_MY_LOCATION: {
 				Location location = locationProvider.getLastKnownLocation();
 				if (location != null && location.hasAltitude()) {
-					callback.onResult(location.getLatitude());
+					callback.onResult(location.getAltitude());
 				} else {
 					callback.onResult(null);
 				}

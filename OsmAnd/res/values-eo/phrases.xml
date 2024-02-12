@@ -473,7 +473,7 @@
     <string name="poi_pier">Marponto</string>
     <string name="poi_surveillance">Supergardo</string>
     <string name="poi_observatory">Observejo</string>
-    <string name="poi_astronomical_observatory">Astroscienca</string>
+    <string name="poi_astronomical_observatory">astroscienca</string>
     <string name="poi_mast">Masto</string>
     <string name="poi_monitoring_station">Kontrol-stacio</string>
     <string name="poi_radar">Radaro</string>
@@ -2506,8 +2506,8 @@
     <string name="poi_telescope_usage_espionage">Uzado: spionado</string>
     <string name="poi_telescope_usage_research">Uzado: esplorado</string>
     <string name="poi_observatory_type_espionage">Speco: spionada</string>
-    <string name="poi_observatory_type_meteorological">Veteroscienca</string>
-    <string name="poi_observatory_type_gravitational">Gravit-onda</string>
+    <string name="poi_observatory_type_meteorological">veteroscienca</string>
+    <string name="poi_observatory_type_gravitational">gravit-onda</string>
     <string name="poi_greenhouse_horticulture">Tereno de kultivdomoj</string>
     <string name="poi_voltage">Tensio</string>
     <string name="poi_generator_output_electricity">Povumo</string>
@@ -2766,7 +2766,7 @@
     <string name="poi_aerialway_bicycle">Transporto de bicikloj</string>
     <string name="poi_aerialway_heating">Hejtado</string>
     <string name="poi_pump">Pumpilo</string>
-    <string name="poi_observatory_designation">Apliko</string>
+    <string name="poi_observatory_designation">Apliko de observejo</string>
     <string name="poi_telescope_type">Speco de teleskopo</string>
     <string name="poi_animal_training_type">Dresado de</string>
     <string name="poi_diplomatic_filter">Speco de diplomata oficejo</string>
@@ -2796,7 +2796,7 @@
     <string name="poi_takeaway">Forporti manĝaĵon</string>
     <string name="poi_cocktails">Kokteloj</string>
     <string name="poi_microbrewery">Metia bierfarejeto</string>
-    <string name="poi_beauty_salon_service">Servo</string>
+    <string name="poi_beauty_salon_service">Servo de beligejo</string>
     <string name="poi_recycling_type">Speco de recikligejo</string>
     <string name="poi_recycling_accepted_waste">Akceptataj ruboj</string>
     <string name="poi_shelter_type">Speco de ŝirmejo</string>
@@ -2907,7 +2907,7 @@
     <string name="poi_cuisine_suki">suki (taja varmega poto)</string>
     <string name="poi_cuisine_udon">udonoj (japanaj nudeloj)</string>
     <string name="poi_cuisine_brasserie">brasserie (steko kun terpomfingroj)</string>
-    <string name="poi_cuisine_bubble_tea">bobelteo/boba (tajvana teo-trinnkaĵo)</string>
+    <string name="poi_cuisine_bubble_tea">bobelteo/boba (tajvana teo)</string>
     <string name="poi_cuisine_yakitori">jakitorio (rostita birdaĵo)</string>
     <string name="poi_cuisine_sagardotegia">cidroj (pomvinoj)</string>
     <string name="poi_cuisine_meat">viando</string>
@@ -2977,7 +2977,7 @@
     <string name="poi_cuisine_latin_american">latinamerika</string>
     <string name="poi_cuisine_nepalese">nepala</string>
     <string name="poi_cuisine_mongolian">mongola</string>
-    <string name="poi_cuisine_middle_eastern">Proksim-orienta</string>
+    <string name="poi_cuisine_middle_eastern">proksim-orienta</string>
     <string name="poi_cuisine_ukrainian">ukrajna</string>
     <string name="poi_cuisine_afghan">afgana</string>
     <string name="poi_cuisine_belgian">belga</string>
@@ -4282,7 +4282,7 @@
     <string name="poi_avalanche_transceiver">Loktrovilo de lavanga viktimo;lavango;lokalizilo lavanga;detektilo lavanga;Pieps</string>
     <string name="poi_avalanche_transceiver_training">Ekzercejo pri loktrovilo de lavanga viktimo</string>
     <string name="poi_avalanche_transceiver_checkpoint">Kontrolilo de loktrovilo de lavanga viktimo</string>
-    <string name="poi_access_permit">Paspermeso postulata</string>
+    <string name="poi_access_permit">paspermeso postulata</string>
     <string name="poi_parcel_locker">Poŝt-aŭtomato</string>
     <string name="poi_board_type_art">arto</string>
     <string name="poi_board_type_planet_walk">modelo de Suna sistemo</string>
@@ -4375,7 +4375,7 @@
     <string name="poi_playground_horizontal_bar">Horizontala stango (infana)</string>
     <string name="poi_playground_activitypanel">Panelo de ludoj (infanludejo)</string>
     <string name="poi_playground_exercise">Ekzerc-parko infana</string>
-    <string name="poi_access_yes">Aliro permesata</string>
+    <string name="poi_access_yes">jes</string>
     <string name="poi_climbing_rock_basalt">Grimpada roko: bazalto</string>
     <string name="poi_climbing_grade_french_mean">Meza malfacileco (franca skalo)</string>
     <string name="poi_climbing_grade_saxon_mean">Meza malfacileco (saksa skalo)</string>
@@ -4803,4 +4803,32 @@
     <string name="poi_nfs_recreation_area_activity_swimming">naĝado</string>
     <string name="poi_nfs_recreation_area_activity_tidepooling">admirado de vadmaro</string>
     <string name="poi_nfs_recreation_area_activity_trapping">ĉasado per kaptiloj</string>
+    <string name="poi_nfs_recreation_area_activity_tubing">akvodeglitado</string>
+    <string name="poi_nfs_recreation_area_activity_viewing_plants">rigardado de kreskaĵoj</string>
+    <string name="poi_nfs_recreation_area_activity_viewing_scenery">rigardado de pejzaĝoj</string>
+    <string name="poi_nfs_recreation_area_activity_viewing_wildlife">rigardado de sovaĝbestoj</string>
+    <string name="poi_nfs_recreation_area_activity_visitor_centers">turisma centro</string>
+    <string name="poi_nfs_recreation_area_activity_visitor_programs">turismaj programoj</string>
+    <string name="poi_nfs_recreation_area_activity_water_activities">akvosportoj</string>
+    <string name="poi_nfs_recreation_area_activity_waterskiing">akvoskiado</string>
+    <string name="poi_nfs_recreation_area_activity_windsurfing">ondorajdado</string>
+    <string name="poi_nfs_recreation_area_activity_xc_skiing_snowshoeing">skikurado kaj skimarŝado</string>
+    <string name="poi_nfs_recreation_area_activity_winter_sports">vintraj sportoj</string>
+    <string name="poi_nfs_recreation_area_open_status_open">malfermita</string>
+    <string name="poi_nfs_recreation_area_open_status_closed">fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_temporarily_closed">provizore fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_unreachable">nealirebla</string>
+    <string name="poi_nfs_recreation_area_open_status_open_2">Aliro al ripoza tereno (2): malfermita</string>
+    <string name="poi_nfs_recreation_area_open_status_closed_2">Aliro al ripoza tereno (2): fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_temporarily_closed_2">Aliro al ripoza tereno (2): provizore fermita</string>
+    <string name="poi_nfs_recreation_area_open_status_unreachable_2">Aliro al ripoza tereno (2): nealirebla</string>
+    <string name="poi_nfs_recreation_area_fee_description">Priskribo de pago</string>
+    <string name="poi_nfs_recreation_area_open_season_start">Komenco de malferma sezono</string>
+    <string name="poi_nfs_recreation_area_open_season_end">Fino de malferma sezono</string>
+    <string name="poi_nfs_recreation_area_operational_hours">Malfermaj horoj</string>
+    <string name="poi_nfs_recreation_area_forest_name">Nomo de arbaro</string>
+    <string name="poi_nfs_recreation_area_reservation_info">Informoj pri rezervado</string>
+    <string name="poi_nfs_recreation_area_restrictions">Informoj pri malpermesoj</string>
+    <string name="poi_nfs_recreation_area_activity_description">Priskribo de aktiveco</string>
+    <string name="poi_nfs_recreation_area_accessibility_info">Informoj pri aliro</string>
 </resources>

@@ -5622,4 +5622,8 @@
     <string name="sort_subfolders">Sortér undermapper</string>
     <string name="shared_string_keywords">Nøgleord</string>
     <string name="special_routing_cpp">Speciel type ruteberegning</string>
+    <string name="custom_buttons">Tilpassede knapper</string>
+    <string name="default_buttons">Standardknapper</string>
+    <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
+    <string name="add_button">Tilføj knap</string>
 </resources>

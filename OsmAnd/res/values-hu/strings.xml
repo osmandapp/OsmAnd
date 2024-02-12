@@ -3080,7 +3080,7 @@
     <string name="app_mode_utv">UTV (kis terepautó)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Kötélpályás felvonó</string>
     <string name="switch_profile">Profil váltás</string>
-    <string name="application_profile_changed">Alkalmazás profi módosítva erre: %s</string>
+    <string name="application_profile_changed">Alkalmazásprofil módosítva erre: %s</string>
     <string name="change_data_storage_full_description">Áthelyezi az OsmAnd fájlokat az új helyre\?
 \n%1$s &gt; %2$s</string>
     <string name="rendering_value_white_name">Fehér</string>
@@ -5614,4 +5614,9 @@
     <string name="shared_string_additional">További</string>
     <string name="sort_subfolders">Almappák sorba rendezése</string>
     <string name="sorted_sufolders_toast">A „%1$s” mappában lévő almappák %2$s szerint vannak sorba rendezve</string>
+    <string name="special_routing_cpp">Speciális útvonaltervezési típus</string>
+    <string name="add_button">Gomb hozzáadása</string>
+    <string name="custom_buttons">Egyéni gombok</string>
+    <string name="default_buttons">Alapértelmezett gombok</string>
+    <string name="custom_map_button_name_present">Ilyen gomb már van</string>
 </resources>

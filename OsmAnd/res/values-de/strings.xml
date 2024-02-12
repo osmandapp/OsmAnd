@@ -5619,5 +5619,10 @@
     <string name="shared_string_additional">Zusätzlich</string>
     <string name="shared_string_activity">Aktivität</string>
     <string name="sort_subfolders">Unterordner sortieren</string>
-    <string name="sorted_sufolders_toast">Unterordner in “%1$s” werden sortiert nach: “%2$s”</string>
+    <string name="sorted_sufolders_toast">Unterordner in „%1$s“ werden sortiert nach: „%2$s“</string>
+    <string name="special_routing_cpp">Spezieller Navigationstyp</string>
+    <string name="add_button">Schaltfläche hinzufügen</string>
+    <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
+    <string name="custom_map_button_name_present">Solche Schaltfläche bereits vorhanden</string>
+    <string name="default_buttons">Standard-Schaltfläche</string>
 </resources>

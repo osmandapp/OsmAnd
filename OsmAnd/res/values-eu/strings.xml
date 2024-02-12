@@ -5585,4 +5585,39 @@
     <string name="searching_matching_tracks">Bilatu bat datozen arrasto guztiak</string>
     <string name="maps_and_resources">Mapa eta baliabideak</string>
     <string name="any_connected_with_device">Konektatutako edozein: %s</string>
+    <string name="sorted_sufolders_toast">\"%1$s\"-ko azpikarpetak honela ordenatu dira: \"%2$s\"</string>
+    <string name="max_sensor_heartrate">Bihotz-taupadak, altuena</string>
+    <string name="max_sensor_cadence">Bizikletaren kadentzia, altuena</string>
+    <string name="avg_sensor_heartrate">Bihotz-taupadak, batez beste</string>
+    <string name="avg_sensor_cadence">Bizikletaren kadentzia, batez beste</string>
+    <string name="max_sensor_bycicle_power">Bizikleta potentzia, altuena</string>
+    <string name="max_sensor_temperature">Tenperatura, altuena</string>
+    <string name="avg_sensor_temperature">Tenperatura, batez beste</string>
+    <string name="max_sensor_speed">Sentsorearen abiadura, altuena</string>
+    <string name="avg_sensor_speed">Sentsorearen abiadura, batez beste</string>
+    <string name="shared_string_road_maps">Errepide mapak</string>
+    <string name="add_button">Gehitu botoia</string>
+    <string name="custom_buttons">Botoi pertsonalizatuak</string>
+    <string name="default_buttons">Berezko botoiak</string>
+    <string name="sort_subfolders">Ordenatu azpikarpetak</string>
+    <string name="shared_string_activity">Aktibitatea</string>
+    <string name="shared_string_keywords">Gako-hitzak</string>
+    <string name="shared_string_additional">Gehigarria</string>
+    <string name="battery_optimization_banner_content">Android bateriaren optimizazioak hutsuneak eta zehaztasun ezak sor ditzake grabatutako arrastoetan.</string>
+    <string name="dont_ask_anymore">Ez galdetu gehiago</string>
+    <string name="shared_string_license">Lizentzia</string>
+    <string name="avg_sensor_bycicle_power">Bizikleta potentzia, batez beste</string>
+    <string name="special_routing_cpp">Bideratze mota berezia</string>
+    <string name="battery_optimization_desc">Android-en bateriaren optimizazioak hutsuneak eta zehaztasun ezak sor ditzake grabatutako pistetan.
+\n
+\nArazo hauetakoren bat jasaten baduzu, saia zaitezke bateriaren erabilera \"Murriztapenik gabe\" aukerara aldatzen.</string>
+    <string name="custom_map_button_name_present">Botoi hori dagoeneko badago</string>
+    <string name="battery_optimization">Bateria optimizatzea</string>
+    <string name="shared_string_link">Esteka</string>
+    <string name="shared_string_copyright">Copyright</string>
+    <string name="shared_string_extensions">Gehigarriak</string>
+    <string name="shared_string_author">Egilea</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Arrasto guztiak</string>
+    <string name="battery_optimization_settings">Bateria optimizatzeko ezarpenak</string>
 </resources>

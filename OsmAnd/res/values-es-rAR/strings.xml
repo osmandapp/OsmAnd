@@ -5632,4 +5632,5 @@
     <string name="shared_string_activity">Actividad</string>
     <string name="shared_string_keywords">Palabras clave</string>
     <string name="shared_string_additional">Adicional</string>
+    <string name="special_routing_cpp">Tipo de navegación especial</string>
 </resources>

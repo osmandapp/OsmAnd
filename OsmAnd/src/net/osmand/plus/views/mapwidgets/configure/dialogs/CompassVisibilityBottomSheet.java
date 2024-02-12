@@ -27,6 +27,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 
 public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -35,12 +36,14 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
+	private CompassButtonState buttonState;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		settings = app.getSettings();
+		buttonState = app.getMapButtonsHelper().getCompassButtonState();
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
@@ -73,19 +76,19 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 		return view;
 	}
 
-	private void setupVisibilityItem(@NonNull CompassVisibility itemVisibility, @NonNull View view) {
-		boolean selected = itemVisibility == settings.COMPASS_VISIBILITY.getModeValue(appMode);
+	private void setupVisibilityItem(@NonNull CompassVisibility visibility, @NonNull View view) {
+		boolean selected = visibility == buttonState.getModeVisibility(appMode);
 
-		View container = view.findViewById(itemVisibility.containerId);
+		View container = view.findViewById(visibility.containerId);
 		ImageView ivIcon = container.findViewById(R.id.icon);
 		TextView tvTitle = container.findViewById(R.id.title);
 		TextView tvDesc = container.findViewById(R.id.desc);
 		CompoundButton compoundButton = container.findViewById(R.id.compound_button);
 
-		ivIcon.setImageDrawable(getIconForVisibility(itemVisibility));
-		tvTitle.setText(itemVisibility.titleId);
-		if (itemVisibility.descId != 0) {
-			tvDesc.setText(itemVisibility.descId);
+		ivIcon.setImageDrawable(getIconForVisibility(visibility));
+		tvTitle.setText(visibility.titleId);
+		if (visibility.descId != 0) {
+			tvDesc.setText(visibility.descId);
 			AndroidUiHelper.updateVisibility(tvDesc, true);
 		}
 
@@ -93,10 +96,10 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 		compoundButton.setChecked(selected);
 
 		container.setOnClickListener(v -> {
-			settings.COMPASS_VISIBILITY.setModeValue(appMode, itemVisibility);
+			buttonState.setVisibility(visibility, appMode);
 			Fragment target = getTargetFragment();
 			if (target instanceof CompassVisibilityUpdateListener) {
-				((CompassVisibilityUpdateListener) target).onCompassVisibilityUpdated(itemVisibility);
+				((CompassVisibilityUpdateListener) target).onCompassVisibilityUpdated(visibility);
 			}
 			dismiss();
 		});
@@ -105,7 +108,7 @@ public class CompassVisibilityBottomSheet extends MenuBottomSheetDialogFragment 
 
 	@Nullable
 	private Drawable getIconForVisibility(@NonNull CompassVisibility visibility) {
-		boolean selected = visibility == settings.COMPASS_VISIBILITY.getModeValue(appMode);
+		boolean selected = visibility == buttonState.getModeVisibility(appMode);
 		int iconColorId = selected
 				? ColorUtilities.getActiveIconColorId(nightMode)
 				: ColorUtilities.getDefaultIconColorId(nightMode);

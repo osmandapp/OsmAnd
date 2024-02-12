@@ -1033,8 +1033,8 @@
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
     <string name="routing_attr_prefer_motorway_description">Föredra motorvägar</string>
-    <string name="routing_attr_avoid_toll_name">Inga vägtullar</string>
-    <string name="routing_attr_avoid_toll_description">Undviker vägtullar</string>
+    <string name="routing_attr_avoid_toll_name">Inga betalvägar</string>
+    <string name="routing_attr_avoid_toll_description">Undviker betalvägar</string>
     <string name="routing_attr_avoid_unpaved_name">Inga oasfalterade vägar</string>
     <string name="routing_attr_avoid_unpaved_description">Undvik oasfalterade vägar</string>
     <string name="routing_attr_avoid_ferries_name">Inga färjor</string>
@@ -1237,7 +1237,7 @@
     <string name="save_global_track_interval">Allmänt loggningsintervall</string>
     <string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
-    <string name="traffic_warning_payment">Vägtullshytt</string>
+    <string name="traffic_warning_payment">Betalstation</string>
     <string name="traffic_warning_stop">Stopptecken</string>
     <string name="traffic_warning">Trafikskylt</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
@@ -5500,4 +5500,10 @@
 \n
 \nOm du upplever liknande problem, prova att ändra batterianvändningen till \'Obegränsad\'.</string>
     <string name="shared_string_extensions">Tillägg</string>
+    <string name="shared_string_activity">Aktivitet</string>
+    <string name="sorted_sufolders_toast">Undermappar i “%1$s” sorteras efter: “%2$s”</string>
+    <string name="sort_subfolders">Sortera undermappar</string>
+    <string name="shared_string_keywords">Nyckelord</string>
+    <string name="shared_string_additional">Ytterligare</string>
+    <string name="app_mode_baby_transport">Barnvagn</string>
 </resources>

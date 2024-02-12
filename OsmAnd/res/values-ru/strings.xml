@@ -4161,7 +4161,7 @@
     <string name="send_logcat_log">Отправить logcat</string>
     <string name="backup_promocode">Промокод</string>
     <string name="purchases_feature_desc_nautical">Информация о морских глубинах</string>
-    <string name="purchases_feature_desc_terrain">Контурные линии, карты затенения рельефа (отмывка) и карты уклонов с цветовой визуализацией, вершины и низменности.</string>
+    <string name="purchases_feature_desc_terrain">Контурные линии, затенение рельефа (отмывка) и цветовая шкала уклонов для отображения вершин и низменностей.</string>
     <string name="purchases_feature_desc_wikivoyage">Изучайте Викигид офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_wikipedia">Статьи офлайн-Википедии. Разделены по регионам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_combined_wiki">Читайте статьи Википедии и Викигида на ходу, без подключения к интернету. Данные разделены по странам и доступны на всех языках.</string>
@@ -5219,13 +5219,13 @@
     <string name="revolutions_per_minute_unit">об/мин</string>
     <string name="calculate_offline">По карте высот</string>
     <string name="device_disconnected">Устройство [%1$s] отключено</string>
-    <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты высот. Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
+    <string name="calculate_offline_altitude_descr">Офлайн-расчёт высоты на основе карты рельефа (3D). Разница с высотой, записанной устройством, может использоваться для коррекции высоты.</string>
     <string name="running_scds_device_name">Бег</string>
     <string name="device_connected">Устройство [%1$s] подключено</string>
     <string name="error_calculate">Результат вычислений пуст</string>
     <string name="shared_string_close_the_dialog">Закрыть диалог</string>
     <string name="relief_3d">3D-рельеф</string>
-    <string name="terrain_map">Карта рельефа</string>
+    <string name="terrain_map">Карта рельефа (3D)</string>
     <string name="free_favorites_backup_description">Зарегистрируйтесь в OsmAnd Cloud, чтобы получить возможность бесплатного резервного копирования избранных и настроек.</string>
     <string name="free_favorites_backup">Резервное копирование избранных</string>
     <string name="folder_export_empty_error">Экспорт невозможен, так как папка пуста.</string>
@@ -5235,7 +5235,7 @@
     <string name="osmand_cloud_deletion_account_warning">Ваш аккаунт и все данные аккаунта будут %1$s</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Это действие не отменит вашу подписку OsmAnd Pro.</string>
     <string name="manage_subscriptions">Управление подписками.</string>
-    <string name="delete_account_warning">Вы уверены, что хотите удалить аккаунт %1$s?</string>
+    <string name="delete_account_warning">Удалить аккаунт %1$s?</string>
     <string name="deleting_complete">Удаление завершено</string>
     <string name="delete_account">Удалить аккаунт</string>
     <string name="backup_error_delete_account_email_match">Адрес электронной почты не соответствует имени пользователя для входа.</string>
@@ -5323,7 +5323,7 @@
     <string name="shared_string_class">Класс</string>
     <string name="dangerous_goods_description">На некоторых дорогах и в тоннелях перевозка опасных материалов запрещена.</string>
     <string name="routing_attr_allow_via_ferrata_description">Горный маршрут, оборудованный стационарными тросами, скобами, лестницами и мостами.</string>
-    <string name="terrain_category_description">Линии контуров рельефа, карты затенения рельефа (отмывки) и карты уклонов с цветами для отображения вершин и низменностей.</string>
+    <string name="terrain_category_description">Линии контуров рельефа, карты затенения рельефа (отмывки) и цветные карты уклонов для отображения вершин и низменностей.</string>
     <string name="slope_legend_description">Уклон использует цвета для визуализации крутизны рельефа. Подробнее об уклоне можно прочитать на сайте %1$s.</string>
     <string name="routing_attr_allow_via_ferrata_name">Горный маршрут (Via ferrata)</string>
     <string name="feature_available_as_part_of_plan">%1$s доступно в рамках плана %2$s</string>
@@ -5607,4 +5607,8 @@
     <string name="battery_optimization_desc">Оптимизация батареи в Android может привести к появлению пропусков и неточностей в записанных треках.
 \n
 \nЕсли вы столкнулись с подобными проблемами, попробуйте изменить расход батареи на «Неограниченный».</string>
+    <string name="sort_subfolders">Сортировать подпапки</string>
+    <string name="sorted_sufolders_toast">Подпапки в «%1$s» сортируются по: «%2$s»</string>
+    <string name="precise_distance_numbers">Точное значение расстояния</string>
+    <string name="key_event_action_activity_back_pressed">Нажато действие назад</string>
 </resources>

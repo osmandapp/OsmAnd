@@ -5325,7 +5325,7 @@
     <string name="shared_string_not_checked">Sin revisar</string>
     <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificación de la facilidad</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de la dificultad</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_attr_alpineHiking_description">Tipos de la clasificación de la dificultad de las rutas.</string>
@@ -5617,4 +5617,5 @@
 \nSi experimentas alguno de estos problemas, puedes probar a cambiar el uso de la batería a \'Sin restricciones\'</string>
     <string name="sort_subfolders">Clasificar las subcarpetas</string>
     <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
+    <string name="special_routing_cpp">Tipo de ruta especial</string>
 </resources>
