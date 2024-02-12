@@ -202,15 +202,13 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public QuickActionButtonState generateUniqueButtonName(@NonNull QuickActionButtonState buttonState) {
+	public String generateUniqueButtonName(@NonNull String name) {
 		int number = 0;
-		String name = buttonState.getName();
 		while (true) {
 			number++;
 			String newName = name + " (" + number + ")";
 			if (isActionButtonNameUnique(newName)) {
-				buttonState.setName(newName);
-				return buttonState;
+				return newName;
 			}
 		}
 	}
@@ -373,7 +371,7 @@ public class MapButtonsHelper {
 	}
 
 	public boolean isActionButtonNameUnique(@NonNull String name) {
-		return getButtonStateByName(name) != null;
+		return getButtonStateByName(name) == null;
 	}
 
 	@Nullable
