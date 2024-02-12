@@ -64,7 +64,7 @@ public class ListStringPreference extends StringPreference {
 		if (vl != null) {
 			String r = res + delimiter;
 			if (vl.equals(res)) {
-				vl = null;
+				vl = "";
 			} else if (vl.startsWith(r)) {
 				vl = vl.substring(r.length());
 			} else {

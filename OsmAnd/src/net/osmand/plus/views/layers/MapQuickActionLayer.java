@@ -26,10 +26,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.QuickActionsWidget;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MapPosition;
@@ -151,9 +151,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 		boolean visible = button != null;
 		MapActivity mapActivity = getMapActivity();
 		// check if state change is needed
+		boolean buttonChanged = selectedButton != button;
 		boolean modeEnabled = currentWidgetState != null && currentWidgetState || isWidgetVisible();
 		boolean modeDisabled = currentWidgetState == null || !currentWidgetState || !isWidgetVisible();
-		if (mapActivity == null || modeEnabled == visible && modeDisabled == !visible) {
+		if (mapActivity == null || modeEnabled == visible && modeDisabled == !visible && !buttonChanged) {
 			return false;
 		}
 		selectedButton = button;
@@ -297,7 +298,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 			contextMarker.draw(canvas);
 		}
 		if (mapButtonStates != mapButtonsHelper.getButtonsStates()) {
-			updateButtons();
+			app.runInUIThread(this::updateButtons);
 		}
 		boolean nightMode = app.getDaynightHelper().isNightMode();
 		for (QuickActionButton button : actionButtons) {

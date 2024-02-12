@@ -335,12 +335,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	private void setWidgetVisibilityOnMap(boolean visible) {
 		mapButtonsHelper.setQuickActionFabState(buttonState, visible);
 
-		MapActivity activity = getMapActivity();
-		if (activity != null) {
-			MapQuickActionLayer mil = activity.getMapLayers().getMapQuickActionLayer();
-			if (mil != null) {
-				mil.refreshLayer();
-			}
+		MapQuickActionLayer layer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
+		if (layer != null) {
+			layer.refreshLayer();
 		}
 	}
 
