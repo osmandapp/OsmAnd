@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_ACTION_HUD_ID;
+import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -398,7 +398,7 @@ public class MapButtonsHelper {
 
 	@NonNull
 	public QuickActionButtonState createNewButtonState() {
-		String id = QUICK_ACTION_HUD_ID + "__" + System.currentTimeMillis();
+		String id = DEFAULT_BUTTON_ID + "_" + System.currentTimeMillis();
 		return new QuickActionButtonState(app, id);
 	}
 

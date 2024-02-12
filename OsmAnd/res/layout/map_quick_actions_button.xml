@@ -6,6 +6,4 @@
 	android:layout_height="@dimen/map_button_size"
 	android:layout_gravity="bottom|end"
 	android:contentDescription="@string/configure_screen_quick_action"
-	android:visibility="gone"
-	tools:src="@drawable/ic_action_remove_dark"
-	tools:visibility="visible" />
+	tools:src="@drawable/ic_action_remove_dark" />
