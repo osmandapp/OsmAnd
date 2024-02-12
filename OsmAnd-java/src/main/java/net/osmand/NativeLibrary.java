@@ -5,6 +5,7 @@ import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 import static net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import static net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
+import com.google.gson.JsonObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
@@ -25,6 +26,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,11 +50,40 @@ public class NativeLibrary {
 	}
 
 	public static class RenderingGenerationResult {
+		private ByteBuffer bitmapBuffer;
+		private BufferedImage img;
+		private JsonObject info;
 		public RenderingGenerationResult(ByteBuffer bitmap) {
-			bitmapBuffer = bitmap;
+			this.bitmapBuffer = bitmap;
 		}
-
-		public final ByteBuffer bitmapBuffer;
+		public RenderingGenerationResult(ByteBuffer bitmap, JsonObject info) {
+			this.bitmapBuffer = bitmap;
+			this.info = info;
+		}
+		
+		public ByteBuffer getBitmapBuffer() {
+			return bitmapBuffer;
+		}
+		
+		public void setBitmapBuffer(ByteBuffer bitmapBuffer) {
+			this.bitmapBuffer = bitmapBuffer;
+		}
+		
+		public JsonObject getInfo() {
+			return info;
+		}
+		
+		public void setInfo(JsonObject info) {
+			this.info = info;
+		}
+		
+		public BufferedImage getImg() {
+			return img;
+		}
+		
+		public void setImg(BufferedImage img) {
+			this.img = img;
+		}
 	}
 
 	public static class NativeSearchResult {
