@@ -275,4 +275,8 @@
     <string name="shared_string_error">Errore</string>
     <string name="send_live_location_error">Invia errore posizione live: %1$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="location_source_summary">Per impostazione predefinita, OsmAnd installato da Google Play per determinare la posizione utilizza Google Play Services.
+\n
+\nSe ricevi informazioni sulla posizione imprecise o utilizzi il dispositivo senza Google Play Services, prova a passare all\'API Android</string>
+    <string name="location_source">Origine della posizione</string>
 </resources>
