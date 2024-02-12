@@ -37,8 +37,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.actions.NewAction;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +58,7 @@ public class QuickActionsWidget extends LinearLayout {
 	private QuickActionSelectionListener selectionListener;
 
 	private List<QuickAction> actions;
+	private QuickActionButton selectedButton;
 
 	private ImageButton next;
 	private ImageButton prev;
@@ -77,8 +81,17 @@ public class QuickActionsWidget extends LinearLayout {
 		uiUtilities = app.getUIUtilities();
 	}
 
-	public void setActions(List<QuickAction> actions) {
+	public void setSelectedButton(@NonNull QuickActionButton selectedButton) {
+		this.selectedButton = selectedButton;
+		updateActions();
+	}
 
+	public void updateActions() {
+		QuickActionButtonState buttonState = selectedButton.getButtonState();
+		setActions(new ArrayList<>(buttonState.getQuickActions()));
+	}
+
+	public void setActions(@NonNull List<QuickAction> actions) {
 		this.actions = actions;
 		this.actions.add(new NewAction());
 
@@ -186,6 +199,7 @@ public class QuickActionsWidget extends LinearLayout {
 		View page = inflater.inflate(R.layout.quick_action_widget_page, container, false);
 		GridLayout gridLayout = page.findViewById(R.id.grid);
 
+		QuickActionButtonState buttonState = selectedButton.getButtonState();
 		boolean land = !AndroidUiHelper.isOrientationPortrait((Activity) getContext());
 		int maxItems = actions.size() == 1 ? 1 : ACTIONS_PER_PAGE;
 
@@ -193,7 +207,7 @@ public class QuickActionsWidget extends LinearLayout {
 			View view = inflater.inflate(R.layout.quick_action_widget_item, gridLayout, false);
 
 			if (i + (position * ACTIONS_PER_PAGE) < actions.size()) {
-				QuickAction action = QuickActionRegistry.produceAction(
+				QuickAction action = MapButtonsHelper.produceAction(
 						actions.get(i + (position * ACTIONS_PER_PAGE)));
 
 				((ImageView) view.findViewById(imageView))
@@ -211,7 +225,7 @@ public class QuickActionsWidget extends LinearLayout {
 
 				view.setOnClickListener(v -> {
 					if (selectionListener != null) {
-						selectionListener.onActionSelected(action);
+						selectionListener.onActionSelected(buttonState, action);
 					}
 				});
 //				if (action.isActionEditable()) {
@@ -219,9 +233,9 @@ public class QuickActionsWidget extends LinearLayout {
 					FragmentActivity activity = (AppCompatActivity) getContext();
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (action instanceof NewAction) {
-						QuickActionListFragment.showInstance(activity);
+						QuickActionListFragment.showInstance(activity, buttonState);
 					} else {
-						CreateEditActionDialog.showInstance(fragmentManager, action);
+						CreateEditActionDialog.showInstance(fragmentManager, buttonState, action);
 					}
 					return true;
 				});
@@ -276,9 +290,11 @@ public class QuickActionsWidget extends LinearLayout {
 		return (int) Math.ceil((actions.size()) / (double) 6);
 	}
 
-	public void animateWidget(boolean show, int[] coordinates) {
+	public void animateWidget(boolean show) {
 		AnimatorSet set = new AnimatorSet();
 		List<Animator> animators = new ArrayList<>();
+
+		int[] coordinates = AndroidUtils.getCenterViewCoordinates(selectedButton.getView());
 
 		int centerX = getWidth() / 2;
 		int centerY = getHeight() / 2;

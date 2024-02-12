@@ -4,7 +4,6 @@ import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,11 +28,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
+import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -159,12 +159,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract String getNextSelectedItem(OsmandApplication app);
 
-	protected void showChooseDialog(FragmentManager fm) {
-		SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
-		Bundle args = new Bundle();
-		args.putLong(KEY_ID, id);
-		fragment.setArguments(args);
-		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
+	protected void showChooseDialog(@NonNull MapActivity mapActivity) {
+		MapLayers mapLayers = mapActivity.getMapLayers();
+		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
+		if (selectedButton != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			SelectMapViewQuickActionsBottomSheet.showInstance(manager, selectedButton.getButtonState(), id);
+		}
 	}
 
 	public String getNextItemFromSources(@NonNull OsmandApplication app,

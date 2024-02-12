@@ -83,7 +83,7 @@ import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
@@ -192,7 +192,7 @@ public class OsmandApplication extends MultiDexApplication {
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
-	QuickActionRegistry quickActionRegistry;
+	MapButtonsHelper mapButtonsHelper;
 	OsmOAuthHelper osmOAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
@@ -339,8 +339,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return appCustomization;
 	}
 
-	public QuickActionRegistry getQuickActionRegistry() {
-		return quickActionRegistry;
+	public MapButtonsHelper getMapButtonsHelper() {
+		return mapButtonsHelper;
 	}
 
 	public LocationServiceHelper createLocationServiceHelper() {

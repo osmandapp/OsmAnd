@@ -5,22 +5,11 @@
 	android:layout_height="match_parent">
 
 	<FrameLayout
+		android:id="@+id/quick_actions_container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:clipToPadding="false"
-		android:padding="@dimen/map_button_margin">
-
-		<ImageButton
-			android:id="@+id/map_quick_actions_button"
-			android:layout_width="@dimen/map_button_size"
-			android:layout_height="@dimen/map_button_size"
-			android:layout_gravity="bottom|end"
-			android:contentDescription="@string/configure_screen_quick_action"
-			android:visibility="gone"
-			tools:src="@drawable/ic_action_remove_dark"
-			tools:visibility="visible" />
-
-	</FrameLayout>
+		android:padding="@dimen/map_button_margin" />
 
 	<net.osmand.plus.quickaction.QuickActionsWidget
 		android:id="@+id/quick_action_widget"

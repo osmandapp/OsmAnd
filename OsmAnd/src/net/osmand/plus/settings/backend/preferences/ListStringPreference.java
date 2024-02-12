@@ -61,9 +61,11 @@ public class ListStringPreference extends StringPreference {
 
 	public boolean removeValueForProfile(ApplicationMode appMode, String res) {
 		String vl = getModeValue(appMode);
-		String r = res + delimiter;
 		if (vl != null) {
-			if (vl.startsWith(r)) {
+			String r = res + delimiter;
+			if (vl.equals(res)) {
+				vl = null;
+			} else if (vl.startsWith(r)) {
 				vl = vl.substring(r.length());
 			} else {
 				int it = vl.indexOf(delimiter + r);

@@ -1,6 +1,8 @@
 package net.osmand.plus.views.controls.maphudbuttons;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.plus.settings.enums.CompassVisibility.ALWAYS_VISIBLE;
+import static net.osmand.plus.settings.enums.CompassVisibility.VISIBLE_IF_MAP_ROTATED;
 import static net.osmand.plus.views.layers.base.OsmandMapLayer.setMapButtonIcon;
 
 import android.graphics.Canvas;
@@ -21,14 +23,15 @@ import androidx.core.view.ViewPropertyAnimatorListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.controllers.CompassModeWidgetDialogController;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.CompassVisibility;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 
 public class CompassButton extends MapButton {
 
 	private static final int HIDE_DELAY_MS = 5000;
 
+	private final CompassButtonState buttonState;
 	private ViewPropertyAnimatorCompat hideAnimator;
 
 	private boolean forceHideCompass;
@@ -37,6 +40,8 @@ public class CompassButton extends MapButton {
 
 	public CompassButton(@NonNull MapActivity mapActivity) {
 		super(mapActivity, mapActivity.findViewById(R.id.map_compass_button), COMPASS_HUD_ID, false);
+		buttonState = app.getMapButtonsHelper().getCompassButtonState();
+
 		setIconColorId(0);
 		setBackground(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
 		setOnClickListener(v -> app.getMapViewTrackingUtilities().requestSwitchCompassToNextMode());
@@ -94,11 +99,8 @@ public class CompassButton extends MapButton {
 		if (forceHideCompass) {
 			return false;
 		} else if (!specialPosition) {
-			ApplicationMode appMode = settings.getApplicationMode();
-			CompassVisibility compassVisibility = settings.COMPASS_VISIBILITY.getModeValue(appMode);
-			return compassVisibility == CompassVisibility.VISIBLE_IF_MAP_ROTATED
-					? mapActivity.getMapRotate() != 0
-					: compassVisibility == CompassVisibility.ALWAYS_VISIBLE;
+			CompassVisibility visibility = buttonState.getVisibility();
+			return visibility == VISIBLE_IF_MAP_ROTATED ? mapActivity.getMapRotate() != 0 : visibility == ALWAYS_VISIBLE;
 		}
 		return true;
 	}

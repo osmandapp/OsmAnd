@@ -47,13 +47,12 @@ import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.data.RoutingProfilesResources;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.GpxAppearanceInfo;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
@@ -63,8 +62,10 @@ import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -198,12 +199,14 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
 
 		String description;
+		String allItemsSize = String.valueOf(allItems.size());
+		String selectedItemsSize = String.valueOf(selectedItems.size());
 		if (type != null && type.isMap() && !selectedItems.isEmpty()) {
 			String size = AndroidUtils.formatSize(app, calculateSelectedItemsSize());
-			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
+			String selected = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItemsSize, allItemsSize);
 			description = getString(R.string.ltr_or_rtl_combine_via_comma, selected, size);
 		} else {
-			description = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItems.size(), allItems.size());
+			description = getString(R.string.ltr_or_rtl_combine_via_slash, selectedItemsSize, allItemsSize);
 		}
 		selectedSize.setText(description);
 	}
@@ -268,14 +271,13 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	private String setupDescription(View view) {
+	private void setupDescription(@NonNull View view) {
 		TextView description = view.findViewById(R.id.title_description);
 		if (type == ExportType.FAVORITES) {
 			description.setText(R.string.select_groups_for_import);
 		} else {
 			description.setText(R.string.select_items_for_import);
 		}
-		return null;
 	}
 
 	private void setupBottomSheetItem(BottomSheetItemWithCompoundButton item, Object object) {
@@ -319,10 +321,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int iconRes = profileIconRes != 0 ? profileIconRes : R.drawable.ic_world_globe_dark;
 			item.setIcon(uiUtilities.getPaintedIcon(iconRes, actualIconColor));
-		} else if (object instanceof QuickAction) {
-			QuickAction quickAction = (QuickAction) object;
-			item.setTitle(quickAction.getName(app));
-			item.setIcon(uiUtilities.getIcon(quickAction.getIconRes(), getItemIconColor(object)));
+		} else if (object instanceof QuickActionButtonState) {
+			QuickActionButtonState buttonState = (QuickActionButtonState) object;
+			item.setTitle(buttonState.getName());
+			item.setIcon(buttonState.getIcon(nightMode, false, ColorUtilities.getColor(app, getItemIconColor(object))));
 		} else if (object instanceof PoiUIFilter) {
 			PoiUIFilter poiUIFilter = (PoiUIFilter) object;
 			item.setTitle(poiUIFilter.getName());
@@ -364,7 +366,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setIcon(uiUtilities.getPaintedIcon(R.drawable.ic_action_folder, color));
 			int points = group.getPoints().size();
 			String itemsDescr = getString(R.string.shared_string_gpx_points);
-			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, points));
+			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(points)));
 		} else if (object instanceof GlobalSettingsItem) {
 			GlobalSettingsItem globalSettingsItem = (GlobalSettingsItem) object;
 			item.setTitle(globalSettingsItem.getPublicName(app));
@@ -391,7 +393,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 			int selectedMarkers = markersGroup.getMarkers().size();
 			String itemsDescr = getString(R.string.shared_string_items);
-			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, selectedMarkers));
+			item.setDescription(getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(selectedMarkers)));
 		} else if (object instanceof HistoryEntry) {
 			HistoryEntry historyEntry = (HistoryEntry) object;
 			item.setTitle(historyEntry.getName().getName());

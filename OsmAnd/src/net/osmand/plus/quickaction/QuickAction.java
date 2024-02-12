@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class QuickAction {
 
     public interface QuickActionSelectionListener {
 
-        void onActionSelected(@NonNull QuickAction action);
+        void onActionSelected(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action);
     }
     private static int SEQ;
 
@@ -35,7 +36,7 @@ public class QuickAction {
     private QuickActionType actionType;
 
     protected QuickAction() {
-        this(QuickActionRegistry.TYPE_ADD_ITEMS);
+        this(MapButtonsHelper.TYPE_ADD_ITEMS);
     }
 
     public QuickAction(QuickActionType type) {

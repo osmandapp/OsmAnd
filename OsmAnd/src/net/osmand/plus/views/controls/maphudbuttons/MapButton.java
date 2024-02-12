@@ -146,12 +146,17 @@ public abstract class MapButton {
 			if (iconColor != null) {
 				drawable = iconsCache.getPaintedIcon(iconId, iconColor);
 			} else {
-				drawable = iconsCache.getIcon(iconId, nightMode ? nightIconColorId : dayIconColorId);
+				drawable = iconsCache.getIcon(iconId, getIconColorId());
 			}
 		}
 		if (drawable != null) {
 			setDrawable(drawable);
 		}
+	}
+
+	@ColorRes
+	protected int getIconColorId() {
+		return nightMode ? nightIconColorId : dayIconColorId;
 	}
 
 	protected void setIconColor(@ColorInt int iconColor) {
@@ -188,7 +193,7 @@ public abstract class MapButton {
 		// Not implemented
 	}
 
-	protected void setDrawable(@NonNull Drawable drawable) {
+	protected void setDrawable(@Nullable Drawable drawable) {
 		setMapButtonIcon(view, drawable);
 	}
 
@@ -224,7 +229,11 @@ public abstract class MapButton {
 	}
 
 	protected void setContentDesc(@StringRes int descId) {
-		view.setContentDescription(app.getString(descId));
+		setContentDesc(app.getString(descId));
+	}
+
+	protected void setContentDesc(@Nullable String description) {
+		view.setContentDescription(description);
 	}
 
 	public void onDestroyButton() {
