@@ -992,7 +992,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null) {
 			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
-			if (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer())
+			if (!app.useOpenGlRenderer() || (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()))
 				blockAnimations = false;
 		}
 		if (blockAnimations)
