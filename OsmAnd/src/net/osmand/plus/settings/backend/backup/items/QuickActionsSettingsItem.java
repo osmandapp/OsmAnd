@@ -100,7 +100,11 @@ public class QuickActionsSettingsItem extends SettingsItem {
 	}
 
 	private void renameButton() {
-		buttonState = mapButtonsHelper.generateUniqueButtonName(buttonState);
+		String name = buttonState.getName();
+		QuickActionButtonState newButtonState = mapButtonsHelper.createNewButtonState();
+		newButtonState.setName(mapButtonsHelper.generateUniqueButtonName(name));
+		newButtonState.setEnabled(buttonState.isEnabled());
+		buttonState = newButtonState;
 	}
 
 	@NonNull

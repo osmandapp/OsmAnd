@@ -80,7 +80,6 @@ import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.backend.preferences.FloatPreference;
 import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -2743,7 +2742,7 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
-	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID, ";").makeProfile();
+	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeProfile();
 
 
 	/**

@@ -104,7 +104,7 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 				String name = ((EditText) extra).getText().toString();
 				if (Algorithms.isBlank(name)) {
 					app.showToastMessage(R.string.empty_name);
-				} else if (mapButtonsHelper.isActionButtonNameUnique(name)) {
+				} else if (!mapButtonsHelper.isActionButtonNameUnique(name)) {
 					app.showToastMessage(R.string.custom_map_button_name_present);
 				} else {
 					QuickActionButtonState buttonState = mapButtonsHelper.createNewButtonState();
