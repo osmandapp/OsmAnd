@@ -986,7 +986,7 @@ public class RoutePlannerFrontEnd {
 				makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
 				return res;
 			}
-			ctx.calculationProgress.hhIteration(null);
+			ctx.calculationProgress.hhIteration(HHIteration.HH_NOT_STARTED);
 		} catch (SQLException e) {
 			throw new IOException(e.getMessage(), e);
 		} catch (IOException | RuntimeException e) {
