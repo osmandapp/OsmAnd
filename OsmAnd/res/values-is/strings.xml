@@ -9,7 +9,7 @@
     <string name="gpx_logging_no_data">Engin gögn</string>
     <string name="rendering_value_light_brown_name">Ljósbrúnt</string>
     <string name="rendering_value_dark_brown_name">Dökkbrúnt</string>
-    <string name="edit_filter">Breyta flokkum</string>
+    <string name="edit_filter">Breyta síu</string>
     <string name="subcategories">Undirflokkar</string>
     <string name="selected_categories">Valdir flokkar</string>
     <string name="create_custom_poi">Búa til sérsniðna síu</string>
@@ -1026,7 +1026,7 @@
     <string name="reports_for">Skýrsla fyrir</string>
     <string name="file_name_containes_illegal_char">Skráarheitið inniheldur ógildan staf</string>
     <string name="srtm_paid_version_title">Viðbót fyrir landslag</string>
-    <string name="rendering_attr_showAccess_name">Sýna aðgangstakmarkanir og gjald</string>
+    <string name="rendering_attr_showAccess_name">Sýna aðgangstakmarkanir</string>
     <string name="index_item_world_basemap">Heims-yfirlitskort</string>
     <string name="index_item_world_ski">Heims-skíðakort</string>
     <string name="select_gpx">Veldu GPX…</string>
@@ -2053,9 +2053,9 @@
     <string name="type_city_town">Settu inn borg, bæ eða sveitarfélag</string>
     <string name="type_postcode">Settu inn póstnúmer</string>
     <string name="select_postcode">Leita eftir póstnúmeri</string>
-    <string name="quick_action_auto_zoom">Sjálfvirkur aðdráttur korts af/á</string>
-    <string name="quick_action_auto_zoom_on">Kveikja á sjálfvirkum aðdrætti korts</string>
-    <string name="quick_action_auto_zoom_off">Slökkva á sjálfvirkum aðdrætti korts</string>
+    <string name="quick_action_auto_zoom">Sjálfvirkur aðdráttur korts</string>
+    <string name="quick_action_auto_zoom_on">Kveikja á sjálfvirkum aðdrætti</string>
+    <string name="quick_action_auto_zoom_off">Slökkva á sjálfvirkum aðdrætti</string>
     <string name="quick_action_add_destination">Settu inn áfangastað</string>
     <string name="quick_action_replace_destination">Skipta út áfangastað</string>
     <string name="quick_action_add_first_intermediate">Bæta við fyrsta milliáfanga</string>
@@ -5305,4 +5305,26 @@
     <string name="help_article_map_legend_ski_map_name">Skíðakortastíll</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Um leiðagerð OsmAnd</string>
     <string name="shared_string_setup">Uppsetning</string>
+    <string name="root_folder">Rótarmappa</string>
+    <string name="shared_string_activity">Virkni</string>
+    <string name="shared_string_copyright">Höfundarréttur</string>
+    <string name="shared_string_author">Höfundur</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="key_event_category_actions">Aðgerðir</string>
+    <string name="key_event_action_zoom_out">Renna frá</string>
+    <string name="key_event_action_zoom_in">Renna að</string>
+    <string name="sort_country_name_descending">Landsheiti: Ö-A</string>
+    <string name="shared_string_cache">Skyndiminni</string>
+    <string name="widget_available_ram">Tiltækt vinnsluminni</string>
+    <string name="track_filter_range_selected_format">%s - %s, %s</string>
+    <string name="row_number">Röð %1$s</string>
+    <string name="shared_string_additional">Viðbótar</string>
+    <string name="shared_string_rows">Raðir</string>
+    <string name="shared_string_button">Hnappur</string>
+    <string name="shared_string_action">Aðgerð</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
+    <string name="sort_country_name_ascending">Landsheiti: A-Ö</string>
+    <string name="battery_optimization">Bestun rafhlöðu</string>
+    <string name="map_widget_sun_position">Sólstaða</string>
+    <string name="shared_string_trash">Rusl</string>
 </resources>
