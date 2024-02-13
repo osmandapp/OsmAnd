@@ -4514,9 +4514,9 @@
     <string name="rendering_attr_showFitnessTrails_name">Стазе за трчање</string>
     <string name="rendering_attr_showFitnessTrails_description">Приказ стаза за трчање</string>
     <string name="routeInfo_horse_scale_name">Тежина коњских стаза</string>
-    <string name="simulation_real_mode_desc">На правим деоницама пута брзина ће бити приближена највећој дозвољеној брзини.
+    <string name="simulation_real_mode_desc">На правим деоницама пута брзина биће приближена највећој дозвољеној брзини.
 \nНа раскрсницама, опонашање ће се успорити.
-\nДодатне казне ће бити примењиване на саобраћајне знаке, знаке за заустављање, итд.</string>
+\nДодатни пенали биће примењивани на саобраћајне знаке, знаке за заустављање, итд.</string>
     <string name="shared_string_item">Ставка</string>
     <string name="bottom_widgets_panel">Доња полица</string>
     <string name="configure_screen_widgets_descr">Изаберите страну заслона ради додавања или преуређења справица.</string>
@@ -5315,7 +5315,7 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">Наводи помоћу трага</string>
     <string name="help_article_navigation_routing_online_routing_name">Путања мрежна</string>
-    <string name="help_article_map_map_context_menu_name">Приручни изборник карте</string>
+    <string name="help_article_map_map_context_menu_name">Приручни мени мапе</string>
     <string name="map_widget_glide_average_desc">Приказује просечну размеру једрења за постављено време.</string>
     <string name="copy_build_version">Умножи број издања</string>
     <string name="help_article_navigation_car_play_name">КарПлеј</string>
@@ -5323,7 +5323,7 @@
     <string name="cache_size">Величина захвата</string>
     <string name="help_article_widgets_radius_ruler_name">Мерач пречника и лењир</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Снимање трага</string>
-    <string name="help_article_map_legend_nautical_map_name">Начин приказа пловне миље</string>
+    <string name="help_article_map_legend_nautical_map_name">Стил Поморске мапе</string>
     <string name="map_widget_group_glide_ratio">Размера једрења</string>
     <string name="folder_export_empty_error">Нема ничег за извоз, фасцикла је празна</string>
     <string name="help_article_plan_route_name">Планирање путање</string>
@@ -5332,7 +5332,7 @@
     <string name="help_article_map_track_context_menu_name">Приручни изборник трагова</string>
     <string name="osmand_cloud_deleted_account_descr">Налог и сви подаци су избрисани из Облака ОсмАнда.</string>
     <string name="free_settings_backup">Складиштење бесплатних поставки</string>
-    <string name="help_article_map_legend_osmand_name">Начин приказа карте ОсмАнда</string>
+    <string name="help_article_map_legend_osmand_name">Стил ОсмАнд мапе</string>
     <string name="verify_account">Потврдите свој налог</string>
     <string name="slope_legend_description">Падине користе боје за приказ нагиба тла. Можете читати више о падинама у %1$s.</string>
     <string name="routing_attr_hazmat_category_usa_8_name">Нагризајуће твари</string>
@@ -5382,14 +5382,14 @@
     <string name="routing_attr_hazmat_category_usa_2_name">Плинови</string>
     <string name="dangerous_goods">Опасна роба</string>
     <string name="help_article_widgets_nav_widgets_name">Справице навођења</string>
-    <string name="help_article_map_interact_with_map_name">Међудејство са картом</string>
+    <string name="help_article_map_interact_with_map_name">Међудејство са мапом</string>
     <string name="help_article_map_raster_maps_name">Растерске карте (мрежне / ванмрежне)</string>
     <string name="help_article_search_search_all_name">Претражи све</string>
     <string name="help_article_troubleshooting_crash_logs_name">Дневник рушења програма</string>
     <string name="shared_string_temperature">Топлота</string>
     <string name="help_article_personal_storage_name">Складиште</string>
     <string name="delete_account_warning">Избрисати налог %1$s?</string>
-    <string name="help_article_map_legend_ski_map_name">Начин приказа скијашке карте</string>
+    <string name="help_article_map_legend_ski_map_name">Стил Скијашке мапе</string>
     <string name="use_raster_sqlitedb_for_slope_hillshade">Користи растер скулитедб сенчења брда / падина</string>
     <string name="help_article_navigation_routing_osmand_routing_name">О путањи османда</string>
     <string name="shared_string_setup">Подешавања</string>
