@@ -285,7 +285,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		boolean parameterExisting = false;
 		Map<String, RoutingParameter> parameters = vr.getParameters();
 		for (String e : vr.getParameterValues().keySet()) {
-			if (parameters.containsKey(e) && !e.equals(GeneralRouter.USE_SHORTEST_WAY)) {
+			if (parameters.containsKey(e) && !e.equals(GeneralRouter.USE_SHORTEST_WAY)
+					&& !e.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)) {
 				parameterExisting = true;
 			}
 		}
@@ -594,8 +595,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.pointsById = hctx.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
 		hctx.pointsByGeo = new TLongObjectHashMap<T>();
-		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
-		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		if (c.PRELOAD_SEGMENTS) {
 			time = System.nanoTime();
 			System.out.printf("Loading segments...");
@@ -623,6 +622,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}		
 		hctx.pointsRect.printStatsDistribution("  Points distributed");
 		hctx.initialized = true;
+		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
+		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		return hctx;
 	}
 

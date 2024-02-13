@@ -14,7 +14,7 @@ public abstract class BinaryIndexPart {
 		return length;
 	}
 	
-	public void setLength(int length) {
+	public void setLength(long length) {
 		this.length = length;
 	}
 	
