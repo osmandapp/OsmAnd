@@ -524,36 +524,36 @@ public class BinaryMapIndexReader {
 	}
 
 
-	public TIntObjectHashMap<TransportRoute> getTransportRoutes(int[] filePointers) throws IOException {
-		TIntObjectHashMap<TransportRoute> result = new TIntObjectHashMap<TransportRoute>();
+	public TLongObjectHashMap<TransportRoute> getTransportRoutes(long[] filePointers) throws IOException {
+		TLongObjectHashMap<TransportRoute> result = new TLongObjectHashMap<TransportRoute>();
 		loadTransportRoutes(filePointers, result);
 		return result;
 	}
 	/**
 	 * Transport public methods
 	 */
-	public void loadTransportRoutes(int[] filePointers, TIntObjectHashMap<TransportRoute> result) throws IOException {
-		Map<TransportIndex, TIntArrayList> groupPoints = new HashMap<TransportIndex, TIntArrayList>();
-		for (int filePointer : filePointers) {
+	public void loadTransportRoutes(long[] filePointers, TLongObjectHashMap<TransportRoute> result) throws IOException {
+		Map<TransportIndex, TLongArrayList> groupPoints = new HashMap<TransportIndex, TLongArrayList>();
+		for (long filePointer : filePointers) {
 			TransportIndex ind = getTransportIndex(filePointer);
 			if (ind != null) {
 				if (!groupPoints.containsKey(ind)) {
-					groupPoints.put(ind, new TIntArrayList());
+					groupPoints.put(ind, new TLongArrayList());
 				}
 				groupPoints.get(ind).add(filePointer);
 			}
 		}
-		Iterator<Entry<TransportIndex, TIntArrayList>> it = groupPoints.entrySet().iterator();
+		Iterator<Entry<TransportIndex, TLongArrayList>> it = groupPoints.entrySet().iterator();
 		while (it.hasNext()) {
-			Entry<TransportIndex, TIntArrayList> e = it.next();
+			Entry<TransportIndex, TLongArrayList> e = it.next();
 			TransportIndex ind = e.getKey();
-			TIntArrayList pointers = e.getValue();
+			TLongArrayList pointers = e.getValue();
 			pointers.sort();
 			TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
 			List<TransportRoute> finishInit = new ArrayList<TransportRoute>();
 			
 			for (int i = 0; i < pointers.size(); i++) {
-				int filePointer = pointers.get(i);
+				long filePointer = pointers.get(i);
 				TransportRoute transportRoute = transportAdapter.getTransportRoute(filePointer, stringTable, false);
 				result.put(filePointer, transportRoute);
 				finishInit.add(transportRoute);	
@@ -1762,6 +1762,7 @@ public class BinaryMapIndexReader {
 		TIntArrayList cacheTypes = new TIntArrayList();
 		TLongArrayList cacheIdsA = new TLongArrayList();
 		TLongArrayList cacheIdsB = new TLongArrayList();
+		TLongArrayList cacheIdsC = new TLongArrayList();
 
 		MapObjectStat stat = new MapObjectStat();
 
@@ -1889,6 +1890,9 @@ public class BinaryMapIndexReader {
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
+			cacheIdsA.clear();
+			cacheIdsB.clear();
+			cacheIdsC.clear();
 			land = false;
 			ocean = false;
 			numberOfVisitedObjects = 0;
@@ -2420,7 +2424,7 @@ public class BinaryMapIndexReader {
 		for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom,
 				-1, null))) {
 			println(s.getName());
-			TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
+			TLongObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
 			for (net.osmand.data.TransportRoute route : routes.valueCollection()) {
 				println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 						+ route.getAvgBothDistance());

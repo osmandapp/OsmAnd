@@ -327,7 +327,7 @@ public class BinaryMapTransportReaderAdapter {
 		return dataObject;
 	}
 	
-	public net.osmand.data.TransportRoute getTransportRoute(int filePointer, TIntObjectHashMap<String> stringTable,
+	public net.osmand.data.TransportRoute getTransportRoute(long filePointer, TIntObjectHashMap<String> stringTable,
 			boolean onlyDescription) throws IOException {
 		codedIS.seek(filePointer);
 		int routeLength = codedIS.readRawVarint32();
@@ -589,10 +589,10 @@ public class BinaryMapTransportReaderAdapter {
 	}
 	
 	private TransportStop readTransportRouteStop(int[] dx, int[] dy, long did, TIntObjectHashMap<String> stringTable, 
-			int filePointer) throws IOException {
+			long filePointer) throws IOException {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setFileOffset(codedIS.getTotalBytesRead());
-		dataObject.setReferencesToRoutes(new int[] {filePointer});
+		dataObject.setReferencesToRoutes(new long[] {filePointer});
 		boolean end = false;
 		while(!end){
 			int t = codedIS.readTag();
@@ -645,9 +645,9 @@ public class BinaryMapTransportReaderAdapter {
 		}
 		
 		req.numberOfAcceptedObjects++;
-		req.cacheTypes.clear();
 		req.cacheIdsA.clear();
 		req.cacheIdsB.clear();
+		req.cacheIdsC.clear();
 
 		TransportStop dataObject = new TransportStop();
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
@@ -657,7 +657,7 @@ public class BinaryMapTransportReaderAdapter {
 			tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				dataObject.setReferencesToRoutes(req.cacheTypes.toArray());
+				dataObject.setReferencesToRoutes(req.cacheIdsC.toArray());
 				dataObject.setDeletedRoutesIds(req.cacheIdsA.toArray());
 				dataObject.setRoutesIds(req.cacheIdsB.toArray());
 				if(dataObject.getName("en").length() == 0){
@@ -665,7 +665,7 @@ public class BinaryMapTransportReaderAdapter {
 				}
 				return dataObject;
 			case OsmandOdb.TransportStop.ROUTES_FIELD_NUMBER :
-				req.cacheTypes.add((int) (shift - codedIS.readUInt32()));
+				req.cacheIdsC.add(shift - codedIS.readUInt32());
 				break;
 			case OsmandOdb.TransportStop.DELETEDROUTESIDS_FIELD_NUMBER :
 				req.cacheIdsA.add(codedIS.readUInt64());
