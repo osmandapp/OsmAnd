@@ -171,7 +171,7 @@ public class BinaryMapPoiReaderAdapter {
 
 	protected void readPoiIndex(PoiRegion region, boolean readCategories) throws IOException {
 		int length;
-		int oldLimit;
+		long oldLimit;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -249,7 +249,7 @@ public class BinaryMapPoiReaderAdapter {
 				return;
 			case OsmandOdb.OsmAndSubtypesTable.SUBTYPES_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				PoiSubType st = new PoiSubType();
 				cycle: while(true){
 					int inT = codedIS.readTag();
@@ -287,7 +287,7 @@ public class BinaryMapPoiReaderAdapter {
 	public void initCategories(PoiRegion region) throws IOException {
 		if (region.categories.isEmpty()) {
 			codedIS.seek(region.filePointer);
-			int oldLimit = codedIS.pushLimit(region.length);
+			long oldLimit = codedIS.pushLimit(region.length);
 			readPoiIndex(region, true);
 			codedIS.popLimit(oldLimit);
 		}
@@ -303,7 +303,7 @@ public class BinaryMapPoiReaderAdapter {
 		CollatorStringMatcher matcher = new CollatorStringMatcher(query,
 				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		long time = System.currentTimeMillis();
-		int indexOffset = codedIS.getTotalBytesRead();
+		long indexOffset = codedIS.getTotalBytesRead();
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -315,7 +315,7 @@ public class BinaryMapPoiReaderAdapter {
 				return;
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
 				int length = readInt();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req);
 				codedIS.popLimit(oldLimit);
@@ -354,7 +354,7 @@ public class BinaryMapPoiReaderAdapter {
 				for (int j = 0; j < offKeys.length; j++) {
 					codedIS.seek(offKeys[j] + indexOffset);
 					int len = readInt();
-					int oldLim = codedIS.pushLimit(len);
+					long oldLim = codedIS.pushLimit(len);
 					readPoiData(matcher, req, region);
 					codedIS.popLimit(oldLim);
 					if (req.isCancelled() || req.limitExceeded()) {
@@ -376,7 +376,7 @@ public class BinaryMapPoiReaderAdapter {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		List<TIntArrayList> listOffsets = null;
 		List<TIntLongHashMap> listOfSepOffsets = new ArrayList<TIntLongHashMap>();
-		int offset = 0;
+		long offset = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -385,7 +385,7 @@ public class BinaryMapPoiReaderAdapter {
 				return offsets;
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
 				int length = readInt();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				offset = codedIS.getTotalBytesRead();
 				List<String> queries = Algorithms.splitByWordsLowercase(query);
 				TIntArrayList charsList = new TIntArrayList(queries.size());
@@ -407,7 +407,7 @@ public class BinaryMapPoiReaderAdapter {
 						for (int i = 0; i < dataOffsets.size(); i++) {
 							codedIS.seek(dataOffsets.get(i) + offset);
 							int len = codedIS.readRawVarint32();
-							int oldLim = codedIS.pushLimit(len);
+							long oldLim = codedIS.pushLimit(len);
 							readPoiNameIndexData(offsetMap, req);
 							codedIS.popLimit(oldLim);
 							if (req.isCancelled()) {
@@ -449,12 +449,12 @@ public class BinaryMapPoiReaderAdapter {
 					return;
 				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
 					int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
-				readPoiNameIndexDataAtom(offsets, req);
-				codedIS.popLimit(oldLim);
-				break;
-			default:
-				skipUnknownField(t);
+					long oldLim = codedIS.pushLimit(len);
+					readPoiNameIndexDataAtom(offsets, req);
+					codedIS.popLimit(oldLim);
+					break;
+				default:
+					skipUnknownField(t);
 				break;
 			}
 		}
@@ -497,14 +497,14 @@ public class BinaryMapPoiReaderAdapter {
 
 	protected void searchPoiIndex(int left31, int right31, int top31, int bottom31,
 			SearchRequest<Amenity> req, PoiRegion region) throws IOException {
-		int indexOffset = codedIS.getTotalBytesRead();
+		long indexOffset = codedIS.getTotalBytesRead();
 		long time = System.currentTimeMillis();
 		TLongHashSet skipTiles = null;
 		if (req.zoom >= 0 && req.zoom < 16) {
 			skipTiles = new TLongHashSet();
 		}
 		int length;
-		int oldLimit;
+		long oldLimit;
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		while (true) {
 			if (req.isCancelled()) {
@@ -543,7 +543,7 @@ public class BinaryMapPoiReaderAdapter {
 					}
 					codedIS.seek(offsets[j] + indexOffset);
 					int len = readInt();
-					int oldLim = codedIS.pushLimit(len);
+					long oldLim = codedIS.pushLimit(len);
 					boolean read = readPoiData(left31, right31, top31, bottom31, req, region, skipTiles,
 							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER);
 					if (read && skipVal != -1 && skipTiles != null) {
@@ -587,7 +587,7 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
+				long oldLim = codedIS.pushLimit(len);
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
@@ -652,7 +652,7 @@ public class BinaryMapPoiReaderAdapter {
 				break;
 			case OsmandOdb.OsmAndPoiBoxData.POIDATA_FIELD_NUMBER:
 				int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
+				long oldLim = codedIS.pushLimit(len);
 				Amenity am = readPoiPoint(left31, right31, top31, bottom31, x, y, zoom, req, region, true);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
@@ -932,7 +932,7 @@ public class BinaryMapPoiReaderAdapter {
 					skipUnknownField(t);
 				} else {
 					int length = codedIS.readRawVarint32();
-					int oldLimit = codedIS.pushLimit(length);
+					long oldLimit = codedIS.pushLimit(length);
 					boolean check = checkCategories(req, region);
 					codedIS.popLimit(oldLimit);
 					if (!check) {
@@ -960,7 +960,7 @@ public class BinaryMapPoiReaderAdapter {
 				}
 
 				int length = readInt();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				boolean exists = readBoxField(left31, right31, top31, bottom31, x, y, zoom, offsetsMap, skipTiles, req, region);
 				codedIS.popLimit(oldLimit);
 

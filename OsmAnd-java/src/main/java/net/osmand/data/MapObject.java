@@ -39,7 +39,7 @@ public abstract class MapObject implements Comparable<MapObject> {
 	 */
 	protected Map<String, String> names = null;
 	protected LatLon location = null;
-	protected int fileOffset = 0;
+	protected long fileOffset = 0;
 	protected Long id = null;
 	private Object referenceFile = null;
 
@@ -219,11 +219,11 @@ public abstract class MapObject implements Comparable<MapObject> {
 		return OsmAndCollator.primaryCollator().compare(getName(), o.getName());
 	}
 
-	public int getFileOffset() {
+	public long getFileOffset() {
 		return fileOffset;
 	}
 
-	public void setFileOffset(int fileOffset) {
+	public void setFileOffset(long fileOffset) {
 		this.fileOffset = fileOffset;
 	}
 

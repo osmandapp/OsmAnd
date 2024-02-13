@@ -30,7 +30,7 @@ public class BinaryHHRouteReaderAdapter {
 		int idRangeLength;
 		int profileId;
 		int length;
-		int filePointer;
+		long filePointer;
 		
 		List<HHRouteBlockSegments> sublist;
 	}
@@ -38,7 +38,7 @@ public class BinaryHHRouteReaderAdapter {
 	
 	public static class HHRoutePointsBox {
 		int length;
-		int filePointer;
+		long filePointer;
 		int left, right, bottom, top;
 
 		public QuadRect getLatLonBox() {
@@ -100,7 +100,7 @@ public class BinaryHHRouteReaderAdapter {
 	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initRegionAndLoadPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
 		codedIS.seek(reg.filePointer);
-		int oldLimit = codedIS.pushLimit(reg.length);
+		long oldLimit = codedIS.pushLimit(reg.length);
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
 		reg.segments = new ArrayList<>();
 		while (true) {
@@ -189,7 +189,7 @@ public class BinaryHHRouteReaderAdapter {
 		HHRoutePointsBox box = new HHRoutePointsBox();
 		box.length = readInt();
 		box.filePointer = codedIS.getTotalBytesRead();
-		int oldLimit = codedIS.pushLimit(box.length);
+		long oldLimit = codedIS.pushLimit(box.length);
 		while (true) {
 			if (mp == null && box.bottom != 0 && box.top != 0 && box.right != 0 && box.left != 0) {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -242,7 +242,7 @@ public class BinaryHHRouteReaderAdapter {
 		}		
 		pnt.mapId = mapId;
 		int size = codedIS.readRawVarint32();
-		int oldLimit = codedIS.pushLimit(size);
+		long oldLimit = codedIS.pushLimit(size);
 		int dualIdPoint = -1;
 		while (true) {
 			int t = codedIS.readTag();
@@ -274,7 +274,7 @@ public class BinaryHHRouteReaderAdapter {
 				break;
 			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.TAGVALUEIDS_FIELD_NUMBER:
 				int sz = codedIS.readRawVarint32();
-				int old = codedIS.pushLimit(sz);
+				long old = codedIS.pushLimit(sz);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int tvId = codedIS.readInt32();
 					if (tvId < reg.encodingRules.size()) {
@@ -320,7 +320,7 @@ public class BinaryHHRouteReaderAdapter {
 		HHRouteBlockSegments block = new HHRouteBlockSegments();
 		block.length = readInt();
 		block.filePointer = codedIS.getTotalBytesRead();
-		int oldLimit = codedIS.pushLimit(block.length);
+		long oldLimit = codedIS.pushLimit(block.length);
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -365,7 +365,7 @@ public class BinaryHHRouteReaderAdapter {
 			codedIS.seek(block.filePointer);
 		}
 		int loaded = 0;
-		int oldLimit = codedIS.pushLimit(block.length);
+		long oldLimit = codedIS.pushLimit(block.length);
 		int ind = 0;
 		try {
 			while (true) {
@@ -395,7 +395,7 @@ public class BinaryHHRouteReaderAdapter {
 						HHRouteBlockSegments child = new HHRouteBlockSegments();
 						child.length = readInt();
 						child.filePointer = codedIS.getTotalBytesRead();
-						int olLimit = codedIS.pushLimit(child.length);
+						long olLimit = codedIS.pushLimit(child.length);
 						loaded += loadNetworkSegmentPoint(ctx, reg, child, searchInd, reverse);
 						codedIS.popLimit(olLimit);
 						block.sublist.add(child);

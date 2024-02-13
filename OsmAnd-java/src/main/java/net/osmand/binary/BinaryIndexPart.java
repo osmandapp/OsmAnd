@@ -4,7 +4,7 @@ public abstract class BinaryIndexPart {
 
 	String name;
 	int length;
-	int filePointer;
+	long filePointer;
 	
 	abstract public String getPartName();
 
@@ -18,11 +18,11 @@ public abstract class BinaryIndexPart {
 		this.length = length;
 	}
 	
-	public int getFilePointer() {
+	public long getFilePointer() {
 		return filePointer;
 	}
 	
-	public void setFilePointer(int filePointer) {
+	public void setFilePointer(long filePointer) {
 		this.filePointer = filePointer;
 	}
 	

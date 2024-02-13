@@ -293,7 +293,7 @@ public final class CodedInputStream {
     if (recursionDepth >= recursionLimit) {
       throw InvalidProtocolBufferException.recursionLimitExceeded();
     }
-    final int oldLimit = pushLimit(length);
+    final long oldLimit = pushLimit(length);
     ++recursionDepth;
     builder.mergeFrom(this, extensionRegistry);
     checkLastTagWas(0);
@@ -310,7 +310,7 @@ public final class CodedInputStream {
     if (recursionDepth >= recursionLimit) {
       throw InvalidProtocolBufferException.recursionLimitExceeded();
     }
-    final int oldLimit = pushLimit(length);
+    final long oldLimit = pushLimit(length);
     ++recursionDepth;
     T result = parser.parsePartialFrom(this, extensionRegistry);
     checkLastTagWas(0);
@@ -552,10 +552,10 @@ public final class CodedInputStream {
    * reading started in the middle of the current buffer (e.g. if the
    * constructor that takes a byte array and an offset was used).
    */
-  private int totalBytesRetired;
+  private long totalBytesRetired;
 
   /** The absolute position of the end of the current message. */
-  private int currentLimit = Integer.MAX_VALUE;
+  private long currentLimit = 4l * Integer.MAX_VALUE; // 8 GB
 
   /** See setRecursionLimit() */
   private int recursionDepth;
@@ -576,8 +576,8 @@ public final class CodedInputStream {
     input = null;
   }
 
-  // osmand change
-	private CodedInputStream(final RandomAccessFile raf) {
+   // osmand change
+   private CodedInputStream(final RandomAccessFile raf) {
 		buffer = new byte[BUFFER_SIZE];
 		this.bufferSize = 0;
 		bufferPos = 0;
@@ -644,6 +644,13 @@ public final class CodedInputStream {
     totalBytesRetired = -bufferPos;
   }
 
+  public int pushLimit(int byteLimit) throws InvalidProtocolBufferException {
+	  long lm = pushLimit((long)byteLimit);
+	  if(lm > Integer.MAX_VALUE) {
+	      throw InvalidProtocolBufferException.truncatedMessage();
+	  }
+	  return (int) lm;
+  }
   /**
    * Sets {@code currentLimit} to (current position) + {@code byteLimit}.  This
    * is called when descending into a length-delimited embedded message.
@@ -658,12 +665,12 @@ public final class CodedInputStream {
    *
    * @return the old limit.
    */
-  public int pushLimit(int byteLimit) throws InvalidProtocolBufferException {
+  public long pushLimit(long byteLimit) throws InvalidProtocolBufferException {
     if (byteLimit < 0) {
       throw InvalidProtocolBufferException.negativeSize();
     }
     byteLimit += totalBytesRetired + bufferPos;
-    final int oldLimit = currentLimit;
+    final long oldLimit = currentLimit;
     if (byteLimit > oldLimit) {
       throw InvalidProtocolBufferException.truncatedMessage();
     }
@@ -676,10 +683,13 @@ public final class CodedInputStream {
 
   private void recomputeBufferSizeAfterLimit() {
     bufferSize += bufferSizeAfterLimit;
-    final int bufferEnd = totalBytesRetired + bufferSize;
+    final long bufferEnd = totalBytesRetired + bufferSize;
     if (bufferEnd > currentLimit) {
       // Limit is in current buffer.
-      bufferSizeAfterLimit = bufferEnd - currentLimit;
+      if (bufferEnd - currentLimit > Integer.MAX_VALUE) {
+    	  throw new IllegalStateException("Limit exceeds integer: " + (bufferEnd - currentLimit));
+      }
+      bufferSizeAfterLimit = (int) (bufferEnd - currentLimit);
       bufferSize -= bufferSizeAfterLimit;
     } else {
       bufferSizeAfterLimit = 0;
@@ -691,7 +701,7 @@ public final class CodedInputStream {
    *
    * @param oldLimit The old limit, as returned by {@code pushLimit}.
    */
-  public void popLimit(final int oldLimit) {
+  public void popLimit(final long oldLimit) {
     currentLimit = oldLimit;
     recomputeBufferSizeAfterLimit();
   }
@@ -700,12 +710,12 @@ public final class CodedInputStream {
    * Returns the number of bytes to be read before the current limit.
    * If no limit is set, returns -1.
    */
-  public int getBytesUntilLimit() {
+  public long getBytesUntilLimit() {
     if (currentLimit == Integer.MAX_VALUE) {
       return -1;
     }
 
-    final int currentAbsolutePosition = totalBytesRetired + bufferPos;
+    final long currentAbsolutePosition = totalBytesRetired + bufferPos;
     return currentLimit - currentAbsolutePosition;
   }
 
@@ -722,7 +732,7 @@ public final class CodedInputStream {
    * The total bytes read up to the current position. Calling
    * {@link #resetSizeCounter()} resets this value to zero.
    */
-  public int getTotalBytesRead() {
+  public long getTotalBytesRead() {
       return totalBytesRetired + bufferPos;
   }
 
@@ -753,7 +763,7 @@ public final class CodedInputStream {
     bufferPos = 0;
     if (raf != null) {
     	// osmand change
-     totalBytesRetired = (int) raf.getFilePointer();
+    	totalBytesRetired = (int) raf.getFilePointer();
     	long remain = raf.length() - raf.getFilePointer();
     	bufferSize = (int) Math.min(remain, buffer.length);
     	if(bufferSize > 0) {
@@ -778,7 +788,7 @@ public final class CodedInputStream {
       }
     } else {
       recomputeBufferSizeAfterLimit();
-      final int totalBytesRead =
+      final long totalBytesRead =
         totalBytesRetired + bufferSize + bufferSizeAfterLimit;
       if (totalBytesRead > sizeLimit || totalBytesRead < 0) {
         throw InvalidProtocolBufferException.sizeLimitExceeded();
@@ -920,7 +930,7 @@ public final class CodedInputStream {
    * @throws InvalidProtocolBufferException The end of the stream or the current
    *                                        limit was reached.
    */
-  public void skipRawBytes(final int size) throws IOException {
+  public void skipRawBytes(final long size) throws IOException {
     if (size < 0) {
       throw InvalidProtocolBufferException.negativeSize();
     }
@@ -937,30 +947,30 @@ public final class CodedInputStream {
       bufferPos += size;
     } else {
       // Skipping more bytes than are in the buffer.  First skip what we have.
-      int pos = bufferSize - bufferPos;
+      long pos = bufferSize - bufferPos;
       bufferPos = bufferSize;
 
       // osmand change
       if(raf != null) {
          bufferPos = 0;
          bufferSize = 0;
-      	 int n = raf.skipBytes(size - pos);
-        totalBytesRetired = (int) raf.getFilePointer();
-      	 if (n <= 0) {
-             throw InvalidProtocolBufferException.truncatedMessage();
-         }
+         raf.seek(raf.getFilePointer() + (size - pos));
+//         int n = raf.skipBytes(size - pos);
+         totalBytesRetired = (int) raf.getFilePointer();
+//      	 if (n <= 0) {
+//             throw InvalidProtocolBufferException.truncatedMessage();
+//         }
       } else {
-      // Keep refilling the buffer until we get to the point we wanted to skip
-      // to.  This has the side effect of ensuring the limits are updated
-      // correctly.
-      refillBuffer(true);
-      while (size - pos > bufferSize) {
-        pos += bufferSize;
-        bufferPos = bufferSize;
+        // Keep refilling the buffer until we get to the point we wanted to skip
+        // to.  This has the side effect of ensuring the limits are updated
+        // correctly.
         refillBuffer(true);
-      }
-
-      bufferPos = size - pos;
+        while (size - pos > bufferSize) {
+          pos += bufferSize;
+          bufferPos = bufferSize;
+          refillBuffer(true);
+        }
+        bufferPos = (int) (size - pos);
       }
     }
   }

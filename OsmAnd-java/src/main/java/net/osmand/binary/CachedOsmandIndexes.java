@@ -95,7 +95,8 @@ public class CachedOsmandIndexes {
 			if (index.getEnName() != null) {
 				addr.setNameEn(index.getEnName());
 			}
-			addr.setIndexNameOffset(index.getIndexNameOffset());
+			// FIXME 
+			addr.setIndexNameOffset((int) index.getIndexNameOffset());
 			for (CitiesBlock mr : index.getCities()) {
 				CityBlock.Builder cblock = OsmandIndex.CityBlock.newBuilder();
 				cblock.setSize(mr.length);
@@ -135,13 +136,16 @@ public class CachedOsmandIndexes {
 			transport.setTop(index.getTop());
 			transport.setBottom(index.getBottom());
 			transport.setStopsTableLength(index.stopsFileLength);
-			transport.setStopsTableOffset(index.stopsFileOffset);
+			// FIXME
+			transport.setStopsTableOffset((int) index.stopsFileOffset);
 			// if(index.incompleteRoutesLength > 0) {
 			transport.setIncompleteRoutesLength(index.incompleteRoutesLength);
-			transport.setIncompleteRoutesOffset(index.incompleteRoutesOffset);
+			// FIXME
+			transport.setIncompleteRoutesOffset((int) index.incompleteRoutesOffset);
 			// }
 			transport.setStringTableLength(index.stringTable.length);
-			transport.setStringTableOffset(index.stringTable.fileOffset);
+			// FIXME
+			transport.setStringTableOffset((int) index.stringTable.fileOffset);
 			fileIndex.addTransportIndex(transport);
 		}
 
@@ -170,7 +174,8 @@ public class CachedOsmandIndexes {
 			routing.setProfile(index.profile);
 			
 			routing.setPointsLength(index.top.length);
-			routing.setPointsOffset(index.top.filePointer);
+			// FIXME
+			routing.setPointsOffset((int) index.top.filePointer);
 			routing.setBottom(index.top.bottom);
 			routing.setTop(index.top.top);
 			routing.setLeft(index.top.left);

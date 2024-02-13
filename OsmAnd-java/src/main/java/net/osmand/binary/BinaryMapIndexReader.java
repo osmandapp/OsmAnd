@@ -211,7 +211,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndStructure.OWNER_FIELD_NUMBER:
 				int len = codedIS.readInt32();
-				int oldLimit = codedIS.pushLimit(len);
+				long oldLimit = codedIS.pushLimit(len);
 				owner = new OsmAndOwner();
 				readOsmAndOwner();
 				codedIS.popLimit(oldLimit);
@@ -576,7 +576,7 @@ public class BinaryMapIndexReader {
 		return transportIndexes;
 	}
 
-	private TransportIndex getTransportIndex(int filePointer) {
+	private TransportIndex getTransportIndex(long filePointer) {
 		TransportIndex ind = null;
 		for (TransportIndex i : transportIndexes) {
 			if (i.filePointer <= filePointer && (filePointer - i.filePointer) < i.length) {
@@ -617,7 +617,7 @@ public class BinaryMapIndexReader {
 			return req.getSearchResults();
 		}
 		codedIS.seek(index.stopsFileOffset);
-		int oldLimit = codedIS.pushLimit(index.stopsFileLength);
+		long oldLimit = codedIS.pushLimit(index.stopsFileLength);
 		int offset = req.searchResults.size();
 		TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
 		transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req, stringTable);
@@ -673,7 +673,7 @@ public class BinaryMapIndexReader {
 			for (CitiesBlock block : r.cities) {
 				if (block.type == cityType) {
 					codedIS.seek(block.filePointer);
-					int old = codedIS.pushLimit(block.length);
+					long old = codedIS.pushLimit(block.length);
 					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
 					codedIS.popLimit(old);
 				}
@@ -693,7 +693,7 @@ public class BinaryMapIndexReader {
 		for (CitiesBlock block : region.cities) {
 			if (block.type == cityType) {
 				codedIS.seek(block.filePointer);
-				int old = codedIS.pushLimit(block.length);
+				long old = codedIS.pushLimit(block.length);
 				addressAdapter.readCities(cities, resultMatcher, matcher, region.attributeTagsTable);
 				codedIS.popLimit(old);
 			}
@@ -710,13 +710,13 @@ public class BinaryMapIndexReader {
 		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
+		long old = codedIS.pushLimit(size);
 		addressAdapter.readCityStreets(resultMatcher, c, reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		return size;
 	}
 
-	private AddressRegion checkAddressIndex(int offset) {
+	private AddressRegion checkAddressIndex(long offset) {
 		for (AddressRegion r : addressIndexes) {
 			if (offset >= r.filePointer && offset <= (r.length + r.filePointer)) {
 				return r;
@@ -730,7 +730,7 @@ public class BinaryMapIndexReader {
 		AddressRegion reg = checkAddressIndex(s.getFileOffset());
 		codedIS.seek(s.getFileOffset());
 		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
+		long old = codedIS.pushLimit(size);
 		City city = s.getCity();
 		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, city != null && city.isPostcode() ? city.getName() : null,
 				reg.attributeTagsTable);
@@ -744,8 +744,8 @@ public class BinaryMapIndexReader {
 
 	private void readMapIndex(MapIndex index, boolean onlyInitEncodingRules) throws IOException {
 		int defaultId = 1;
-		int oldLimit;
-		int encodingRulesSize = 0;
+		long oldLimit;
+		long encodingRulesSize = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -762,21 +762,21 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
 				if (onlyInitEncodingRules) {
-					if(encodingRulesSize == 0) {
+					if (encodingRulesSize == 0) {
 						encodingRulesSize = codedIS.getTotalBytesRead();
 					}
 					int len = codedIS.readInt32();
 					oldLimit = codedIS.pushLimit(len);
 					readMapEncodingRule(index, defaultId++);
 					codedIS.popLimit(oldLimit);
-					index.encodingRulesSizeBytes = (codedIS.getTotalBytesRead() - encodingRulesSize);
+					index.encodingRulesSizeBytes = (int) (codedIS.getTotalBytesRead() - encodingRulesSize);
 				} else {
 					skipUnknownField(t);
 				}
 				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
 				int length = readInt();
-				int filePointer = codedIS.getTotalBytesRead();
+				long  filePointer = codedIS.getTotalBytesRead();
 				if (!onlyInitEncodingRules) {
 					oldLimit = codedIS.pushLimit(length);
 					MapRoot mapRoot = readMapLevel(new MapRoot());
@@ -853,13 +853,13 @@ public class BinaryMapIndexReader {
 				break;
 			case MapRootLevel.BOXES_FIELD_NUMBER :
 				int length = readInt();
-				int filePointer = codedIS.getTotalBytesRead();
+				long filePointer = codedIS.getTotalBytesRead();
 				if (root.trees != null) {
 					MapTree r = new MapTree();
 					// left, ... already initialized
 					r.length = length;
 					r.filePointer = filePointer;
-					int oldLimit = codedIS.pushLimit(r.length);
+					long oldLimit = codedIS.pushLimit(r.length);
 					readMapTreeBounds(r, root.left, root.right, root.top, root.bottom);
 					root.trees.add(r);
 					codedIS.popLimit(oldLimit);
@@ -931,7 +931,7 @@ public class BinaryMapIndexReader {
 			// lazy initializing rules
 			if (mapIndex.encodingRules.isEmpty()) {
 				codedIS.seek(mapIndex.filePointer);
-				int oldLimit = codedIS.pushLimit(mapIndex.length);
+				long oldLimit = codedIS.pushLimit(mapIndex.length);
 				readMapIndex(mapIndex, true);
 				codedIS.popLimit(oldLimit);
 			}
@@ -947,7 +947,7 @@ public class BinaryMapIndexReader {
 					if (index.trees == null) {
 						index.trees = new ArrayList<MapTree>();
 						codedIS.seek(index.filePointer);
-						int oldLimit = codedIS.pushLimit(index.length);
+						long oldLimit = codedIS.pushLimit(index.length);
 						readMapLevel(index);
 						codedIS.popLimit(oldLimit);
 					}
@@ -957,7 +957,7 @@ public class BinaryMapIndexReader {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
-						int oldLimit = codedIS.pushLimit(tree.length);
+						long oldLimit = codedIS.pushLimit(tree.length);
 						searchMapTreeBounds(tree, index, req, foundSubtrees);
 						codedIS.popLimit(oldLimit);
 					}
@@ -972,7 +972,7 @@ public class BinaryMapIndexReader {
 						if (!req.isCancelled()) {
 							codedIS.seek(tree.mapDataBlock);
 							int length = codedIS.readRawVarint32();
-							int oldLimit = codedIS.pushLimit(length);
+							long oldLimit = codedIS.pushLimit(length);
 							readMapDataBlocks(req, tree, mapIndex);
 							codedIS.popLimit(oldLimit);
 						}
@@ -1016,7 +1016,7 @@ public class BinaryMapIndexReader {
 				break;
 			case MapDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				if(READ_STATS) {
 					req.stat.lastObjectSize += length;
 					req.stat.addBlockHeader(MapDataBlock.DATAOBJECTS_FIELD_NUMBER, length);
@@ -1121,7 +1121,7 @@ public class BinaryMapIndexReader {
 				MapTree child = new MapTree();
 				child.length = readInt();
 				child.filePointer = codedIS.getTotalBytesRead();
-				int oldLimit = codedIS.pushLimit(child.length);
+				long oldLimit = codedIS.pushLimit(child.length);
 				if(current.ocean != null ){
 					child.ocean = current.ocean;
 				}
@@ -1151,7 +1151,7 @@ public class BinaryMapIndexReader {
 			req.stat.addTagHeader(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER,
 					size);
 		}
-		int old = codedIS.pushLimit(size);
+		long old = codedIS.pushLimit(size);
 		int px = tree.left & MASK_TO_READ;
 		int py = tree.top & MASK_TO_READ;
 		boolean contains = false;
@@ -1351,7 +1351,7 @@ public class BinaryMapIndexReader {
 			if (reg.indexNameOffset != -1) {
 				codedIS.seek(reg.indexNameOffset);
 				int len = readInt();
-				int old = codedIS.pushLimit(len);
+				long old = codedIS.pushLimit(len);
 				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
 				codedIS.popLimit(old);
 			}
@@ -1380,7 +1380,7 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
-			int old = codedIS.pushLimit(poiIndex.length);
+			long old = codedIS.pushLimit(poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
 		}
@@ -1443,7 +1443,7 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
-			int old = codedIS.pushLimit(poiIndex.length);
+			long old = codedIS.pushLimit(poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 		}
@@ -1461,7 +1461,7 @@ public class BinaryMapIndexReader {
 
 		poiAdapter.initCategories(poiIndex);
 		codedIS.seek(poiIndex.filePointer);
-		int old = codedIS.pushLimit(poiIndex.length);
+		long old = codedIS.pushLimit(poiIndex.length);
 		poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 		codedIS.popLimit(old);
 
@@ -2173,7 +2173,7 @@ public class BinaryMapIndexReader {
 	}
 
 	private static class MapTree {
-		int filePointer = 0;
+		long filePointer = 0;
 		int length = 0;
 
 		long mapDataBlock = 0;
@@ -2204,7 +2204,7 @@ public class BinaryMapIndexReader {
 			return length;
 		}
 
-		public int getFilePointer() {
+		public long getFilePointer() {
 			return filePointer;
 		}
 
@@ -2501,7 +2501,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
 				int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
+				long oldLim = codedIS.pushLimit(len);
 				if (shouldWeReadSubtable && key != null) {
 					List<String> subqueries = new ArrayList<>(queries);
 					// reset query so we don't search what was not matched
@@ -2768,7 +2768,7 @@ public class BinaryMapIndexReader {
 			for (TransportIndex ti : transportIndexes) {
 				if (ti.incompleteRoutesLength > 0) {
 					codedIS.seek(ti.incompleteRoutesOffset);
-					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
+					long oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
 					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
 					codedIS.popLimit(oldLimit);
 				}

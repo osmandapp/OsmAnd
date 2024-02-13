@@ -11,6 +11,7 @@ import java.util.Map;
 
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -389,7 +390,8 @@ public class TransportStopsRouteReader {
 			if (ptr != null) {
 				TIntArrayList lst = new TIntArrayList();
 				while (ptr != null) {
-					lst.add(ptr.getRouteOffset());
+					// FIXME correct int 
+					lst.add((int) ptr.getRouteOffset());
 					ptr = ptr.getNextLinkedRoute();
 				}
 				if (lst.size() > 0) {

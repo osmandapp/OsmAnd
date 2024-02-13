@@ -50,7 +50,7 @@ public class BinaryMapAddressReaderAdapter {
 
 	public static class AddressRegion extends BinaryIndexPart {
 		String enName;
-		int indexNameOffset = -1;
+		long indexNameOffset = -1;
 		List<String> attributeTagsTable = new ArrayList<String>();
 		List<CitiesBlock> cities = new ArrayList<BinaryMapAddressReaderAdapter.CitiesBlock>();
 
@@ -72,7 +72,7 @@ public class BinaryMapAddressReaderAdapter {
 			return attributeTagsTable;
 		}
 
-		public int getIndexNameOffset() {
+		public long getIndexNameOffset() {
 			return indexNameOffset;
 		}
 
@@ -149,7 +149,7 @@ public class BinaryMapAddressReaderAdapter {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			int length;
-			int oldLimit;
+			long oldLimit;
 			switch (tag) {
 			case 0:
 				if (region.enName == null || region.enName.length() == 0) {
@@ -219,9 +219,9 @@ public class BinaryMapAddressReaderAdapter {
 			case 0:
 				return;
 			case CitiesIndex.CITIES_FIELD_NUMBER:
-				int fp = codedIS.getTotalBytesRead();
+				long fp = codedIS.getTotalBytesRead();
 				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				City c = readCityHeader(resultMatcher, new DefaultCityMatcher(matcher), fp, additionalTagsTable);
 				if (c != null) {
 					if (resultMatcher == null || resultMatcher.publish(c)) {
@@ -254,7 +254,7 @@ public class BinaryMapAddressReaderAdapter {
 				Street s = new Street(city);
 				s.setFileOffset(codedIS.getTotalBytesRead());
 				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				readStreet(s, null, false, x >> 7, y >> 7, city.isPostcode() ? city.getName() : null,
 						attributeTagsTable);
 				publishRawData(resultMatcher, s);
@@ -305,7 +305,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	protected City readCityHeader(SearchRequest<? super City> resultMatcher, CityMatcher matcher, int filePointer, List<String> additionalTagsTable) throws IOException {
+	protected City readCityHeader(SearchRequest<? super City> resultMatcher, CityMatcher matcher, long filePointer, List<String> additionalTagsTable) throws IOException {
 		int x = 0;
 		int y = 0;
 		City c = null;
@@ -434,7 +434,7 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmandOdb.StreetIndex.INTERSECTIONS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
 				if (loadBuildingsAndIntersected) {
-					int oldLimit = codedIS.pushLimit(length);
+					long oldLimit = codedIS.pushLimit(length);
 					Street si = readIntersectedStreet(s.getCity(), x, y, additionalTagsTable);
 					s.addIntersectedStreet(si);
 					codedIS.popLimit(oldLimit);
@@ -443,10 +443,10 @@ public class BinaryMapAddressReaderAdapter {
 				}
 				break;
 			case OsmandOdb.StreetIndex.BUILDINGS_FIELD_NUMBER:
-				int offset = codedIS.getTotalBytesRead();
+				long offset = codedIS.getTotalBytesRead();
 				length = codedIS.readRawVarint32();
 				if (loadBuildingsAndIntersected) {
-					int oldLimit = codedIS.pushLimit(length);
+					long oldLimit = codedIS.pushLimit(length);
 					Building b = readBuilding(offset, x, y, additionalTagsTable);
 					publishRawData(buildingsMatcher, b);
 					if (postcodeFilter == null || postcodeFilter.equalsIgnoreCase(b.getPostcode())) {
@@ -518,7 +518,7 @@ public class BinaryMapAddressReaderAdapter {
 		}
 	}
 
-	protected Building readBuilding(int fileOffset, int street24X, int street24Y, List<String> additionalTagsTable) throws IOException {
+	protected Building readBuilding(long fileOffset, int street24X, int street24Y, List<String> additionalTagsTable) throws IOException {
 		int x = 0;
 		int y = 0;
 		int x2 = 0;
@@ -613,7 +613,7 @@ public class BinaryMapAddressReaderAdapter {
 			}
 		};
 		long time = System.currentTimeMillis();
-		int indexOffset = 0;
+		long indexOffset = 0;
 		while (true) {
 			if (req.isCancelled()) {
 				return;
@@ -626,7 +626,7 @@ public class BinaryMapAddressReaderAdapter {
 			case OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER:
 				int length = readInt();
 				indexOffset = codedIS.getTotalBytesRead();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
 				TIntArrayList charsList = new TIntArrayList();
 				charsList.add(0);
@@ -647,17 +647,17 @@ public class BinaryMapAddressReaderAdapter {
 				LOG.info("Searched address structure in " + (System.currentTimeMillis() - time) + "ms. Found " + loffsets.size()
 						+ " subtress");
 				for (int j = 0; j < loffsets.size(); j++) {
-					int fp = indexOffset + loffsets.get(j);
+					long fp = indexOffset + loffsets.get(j);
 					codedIS.seek(fp);
 					int len = codedIS.readRawVarint32();
-					int oldLim = codedIS.pushLimit(len);
+					long oldLim = codedIS.pushLimit(len);
 					int stag = 0;
 					do {
 						int st = codedIS.readTag();
 						stag = WireFormat.getTagFieldNumber(st);
 						if (stag == AddressNameIndexData.ATOM_FIELD_NUMBER) {
 							int slen = codedIS.readRawVarint32();
-							int soldLim = codedIS.pushLimit(slen);
+							long soldLim = codedIS.pushLimit(slen);
 							readAddressNameData(req, refs, refsContainer, fp);
 							codedIS.popLimit(soldLim);
 						} else if (stag != 0) {
@@ -693,14 +693,14 @@ public class BinaryMapAddressReaderAdapter {
 								int contOffset = (int) mp.get(offset);
 								codedIS.seek(contOffset);
 								int len = codedIS.readRawVarint32();
-								int old = codedIS.pushLimit(len);
+								long old = codedIS.pushLimit(len);
 								obj = readCityHeader(req, null, contOffset, reg.attributeTagsTable);
 								codedIS.popLimit(old);
 							}
 							if (obj != null) {
 								codedIS.seek(offset);
 								int len = codedIS.readRawVarint32();
-								int old = codedIS.pushLimit(len);
+								long old = codedIS.pushLimit(len);
 								LatLon l = obj.getLocation();
 								Street s = new Street(obj);
 								s.setFileOffset(offset);
@@ -733,7 +733,7 @@ public class BinaryMapAddressReaderAdapter {
 							}
 							codedIS.seek(offset);
 							int len = codedIS.readRawVarint32();
-							int old = codedIS.pushLimit(len);
+							long old = codedIS.pushLimit(len);
 							City obj = readCityHeader(req, cityPostcodeMatcher, list.get(j), reg.attributeTagsTable);
 							publishRawData(req, obj);
 							if (obj != null && !published.contains(offset)) {
@@ -756,7 +756,7 @@ public class BinaryMapAddressReaderAdapter {
 	}
 
 	private void readAddressNameData(SearchRequest<MapObject> req, TIntArrayList[] refs,
-			TIntArrayList[] refsContainer, int fp) throws IOException {
+			TIntArrayList[] refsContainer, long fp) throws IOException {
 		TIntArrayList toAdd = null;
 		TIntArrayList toAddCity = null;
 		int shiftindex = 0;
@@ -789,7 +789,7 @@ public class BinaryMapAddressReaderAdapter {
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOCITYINDEX_FIELD_NUMBER:
 				if (toAddCity != null) {
-					shiftcityindex = fp - codedIS.readInt32();
+					shiftcityindex = (int) (fp - codedIS.readInt32());
 				}
 				break;
 			case AddressNameIndexDataAtom.XY16_FIELD_NUMBER:
@@ -799,7 +799,7 @@ public class BinaryMapAddressReaderAdapter {
 				add = !req.isBboxSpecified() || req.contains(x16, y16, x16, y16);
 				break;
 			case AddressNameIndexDataAtom.SHIFTTOINDEX_FIELD_NUMBER:
-				shiftindex = fp - codedIS.readInt32();
+				shiftindex = (int) (fp - codedIS.readInt32());
 				break;
 			case AddressNameIndexDataAtom.TYPE_FIELD_NUMBER:
 				int type = codedIS.readInt32();
