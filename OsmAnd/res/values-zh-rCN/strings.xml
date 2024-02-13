@@ -3769,7 +3769,7 @@
     <string name="storage_migration_wrong_folder_warning">在选定的文件夹中找不到 OsmAnd 数据。请再试一次。</string>
     <string name="exit_without_saving_warning">不保存更改就退出？</string>
     <string name="migration_files_present">%1$d 文件 (%2$s) 已存在于目标 \'%3$s\' 中，且未被覆盖。</string>
-    <string name="memory_allocated_for_routing_ds">更高的内存分配将加速长途线路(超过500公里)的计算，但可能会影响其他应用的性能。
+    <string name="memory_allocated_for_routing_ds">更高的内存分配将加速长途线路(超过500千米)的计算，但可能会影响其他应用的性能。
 \n对短途线路的计算速度没有影响。</string>
     <string name="use_routing_fallback">离线后备路线规划</string>
     <string name="shared_string_statistics">统计数字</string>
