@@ -139,7 +139,7 @@ public class BinaryMapPoiReaderAdapter {
 		map.skipUnknownField(t);
 	}
 
-	private int readInt() throws IOException {
+	private long readInt() throws IOException {
 		return map.readInt();
 	}
 
@@ -314,7 +314,7 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndPoiIndex.NAMEINDEX_FIELD_NUMBER:
-				int length = readInt();
+				long length = readInt();
 				long oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance
 				offsets = readPoiNameIndex(matcher.getCollator(), query, req);
@@ -353,7 +353,7 @@ public class BinaryMapPoiReaderAdapter {
 						"ms. Found " + offKeys.length + " subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
 					codedIS.seek(offKeys[j] + indexOffset);
-					int len = readInt();
+					long len = readInt();
 					long oldLim = codedIS.pushLimit(len);
 					readPoiData(matcher, req, region);
 					codedIS.popLimit(oldLim);
@@ -384,7 +384,7 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return offsets;
 			case OsmandOdb.OsmAndPoiNameIndex.TABLE_FIELD_NUMBER: {
-				int length = readInt();
+				long length = readInt();
 				long oldLimit = codedIS.pushLimit(length);
 				offset = codedIS.getTotalBytesRead();
 				List<String> queries = Algorithms.splitByWordsLowercase(query);
@@ -482,7 +482,7 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				int x31 = (x << (31 - zoom));
 				int y31 = (y << (31 - zoom));
-				int shift = readInt();
+				int shift = (int) readInt(); // FIXME
 				if (req.contains(x31, y31, x31, y31)) {
 					long d = Math.abs(req.x - x31) + Math.abs(req.y - y31);
 					offsets.put(shift, d);
@@ -503,7 +503,7 @@ public class BinaryMapPoiReaderAdapter {
 		if (req.zoom >= 0 && req.zoom < 16) {
 			skipTiles = new TLongHashSet();
 		}
-		int length;
+		long length;
 		long oldLimit;
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		while (true) {
@@ -542,7 +542,7 @@ public class BinaryMapPoiReaderAdapter {
 						}
 					}
 					codedIS.seek(offsets[j] + indexOffset);
-					int len = readInt();
+					long len = readInt();
 					long oldLim = codedIS.pushLimit(len);
 					boolean read = readPoiData(left31, right31, top31, bottom31, req, region, skipTiles,
 							req.zoom == -1 ? 31 : req.zoom + ZOOM_TO_SKIP_FILTER);
@@ -959,7 +959,7 @@ public class BinaryMapPoiReaderAdapter {
 					checkBox = false;
 				}
 
-				int length = readInt();
+				long length = readInt();
 				long oldLimit = codedIS.pushLimit(length);
 				boolean exists = readBoxField(left31, right31, top31, bottom31, x, y, zoom, offsetsMap, skipTiles, req, region);
 				codedIS.popLimit(oldLimit);
@@ -982,7 +982,7 @@ public class BinaryMapPoiReaderAdapter {
 					long zy = y << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
 					read = req.tiles.contains((zx << SearchRequest.ZOOM_TO_SEARCH_POI) + zy);
 				}
-				int offset = readInt();
+				int offset = (int) readInt(); // FIXME
 				if (read) {
 					if (skipTiles != null && zoom >= zoomToSkip) {
 						long valSkip = ((((long) x) >> (zoom - zoomToSkip)) << zoomToSkip)

@@ -589,13 +589,13 @@ public class BinaryMapRouteReaderAdapter {
 		public RouteSubregion(RouteRegion routeReg) {
 			this.routeReg = routeReg;
 		}
-		public int length;
+		public long length;
 		public long filePointer;
 		public int left;
 		public int right;
 		public int top;
 		public int bottom;
-		public int shiftToData;
+		public long shiftToData;
 		public List<RouteSubregion> subregions = null;
 		public List<RouteDataObject> dataObjects = null;
 
@@ -633,7 +633,7 @@ public class BinaryMapRouteReaderAdapter {
 		map.skipUnknownField(t);
 	}
 	
-	private int readInt() throws IOException {
+	private long readInt() throws IOException {
 		return map.readInt();
 	}
 	

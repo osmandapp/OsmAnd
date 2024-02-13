@@ -34,7 +34,7 @@ public class BinaryMapTransportReaderAdapter {
 		map.skipUnknownField(t);
 	}
 	
-	private int readInt() throws IOException {
+	private long readInt() throws IOException {
 		return map.readInt();
 	}
 
@@ -45,7 +45,7 @@ public class BinaryMapTransportReaderAdapter {
 		int bottom = 0;
 
 		long stopsFileOffset = 0;
-		int stopsFileLength = 0;
+		long stopsFileLength = 0;
 		long incompleteRoutesOffset = 0;
 		int incompleteRoutesLength = 0;
 		
@@ -198,7 +198,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER :
 				long stopOffset = codedIS.getTotalBytesRead();
-				int length = codedIS.readRawVarint32();
+				long length = codedIS.readRawVarint32();
 				long oldLimit = codedIS.pushLimit(length);
 				if(lastIndexResult == -1){
 					lastIndexResult = req.getSearchResults().size();

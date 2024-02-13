@@ -76,7 +76,7 @@ public class GeocodingUtilities {
 		// 1st step
 		public LatLon connectionPoint;
 		public long regionFP;
-		public int regionLen;
+		public long regionLen;
 		public RouteSegmentPoint point;
 		public String streetName;
 		// justification

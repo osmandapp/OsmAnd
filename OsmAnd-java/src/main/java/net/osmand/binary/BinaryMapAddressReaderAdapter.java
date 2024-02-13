@@ -113,7 +113,7 @@ public class BinaryMapAddressReaderAdapter {
 		map.skipUnknownField(t);
 	}
 
-	private int readInt() throws IOException {
+	private long readInt() throws IOException {
 		return map.readInt();
 	}
 	
@@ -148,7 +148,7 @@ public class BinaryMapAddressReaderAdapter {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
-			int length;
+			long length;
 			long oldLimit;
 			switch (tag) {
 			case 0:
@@ -361,7 +361,7 @@ public class BinaryMapAddressReaderAdapter {
 				c.setLocation(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x));
 				break;
 			case OsmandOdb.CityIndex.SHIFTTOCITYBLOCKINDEX_FIELD_NUMBER:
-				int offset = readInt();
+				long offset = readInt();
 				offset += filePointer;
 				c.setFileOffset(offset);
 				break;
@@ -624,7 +624,7 @@ public class BinaryMapAddressReaderAdapter {
 			case 0:
 				return;
 			case OsmAndAddressNameIndexData.TABLE_FIELD_NUMBER:
-				int length = readInt();
+				long length = readInt();
 				indexOffset = codedIS.getTotalBytesRead();
 				long oldLimit = codedIS.pushLimit(length);
 				// here offsets are sorted by distance

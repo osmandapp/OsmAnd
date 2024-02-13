@@ -3,14 +3,14 @@ package net.osmand.binary;
 public abstract class BinaryIndexPart {
 
 	String name;
-	int length;
+	long length;
 	long filePointer;
 	
 	abstract public String getPartName();
 
 	abstract public int getFieldNumber();
 	
-	public int getLength() {
+	public long getLength() {
 		return length;
 	}
 	

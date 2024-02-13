@@ -29,7 +29,7 @@ public class BinaryHHRouteReaderAdapter {
 		int idRangeStart;
 		int idRangeLength;
 		int profileId;
-		int length;
+		long length;
 		long filePointer;
 		
 		List<HHRouteBlockSegments> sublist;
@@ -37,7 +37,7 @@ public class BinaryHHRouteReaderAdapter {
 	
 	
 	public static class HHRoutePointsBox {
-		int length;
+		long length;
 		long filePointer;
 		int left, right, bottom, top;
 
@@ -94,7 +94,7 @@ public class BinaryHHRouteReaderAdapter {
 		map.skipUnknownField(t);
 	}
 
-	protected int readInt() throws IOException {
+	protected long readInt() throws IOException {
 		return map.readInt();
 	}
 	

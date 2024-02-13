@@ -499,12 +499,12 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-	public final int readInt() throws IOException {
-		int ch1 = readByte();
-		int ch2 = readByte();
-		int ch3 = readByte();
-		int ch4 = readByte();
-		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
+	public final long readInt() throws IOException {
+		long l = readByte();
+		l = (l << 8) + readByte();
+		l = (l << 8) + readByte();
+		l = (l << 8) + readByte();
+		return l;
 	}
 
 
@@ -516,7 +516,7 @@ public class BinaryMapIndexReader {
 	protected void skipUnknownField(int tag) throws IOException {
 		int wireType = WireFormat.getTagWireType(tag);
 		if (wireType == WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED) {
-			int length = readInt();
+			long length = readInt();
 			codedIS.skipRawBytes(length);
 		} else {
 			codedIS.skipField(tag);
@@ -775,8 +775,8 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
-				int length = readInt();
-				long  filePointer = codedIS.getTotalBytesRead();
+				long length = readInt();
+				long filePointer = codedIS.getTotalBytesRead();
 				if (!onlyInitEncodingRules) {
 					oldLimit = codedIS.pushLimit(length);
 					MapRoot mapRoot = readMapLevel(new MapRoot());
@@ -852,7 +852,7 @@ public class BinaryMapIndexReader {
 				root.minZoom = codedIS.readInt32();
 				break;
 			case MapRootLevel.BOXES_FIELD_NUMBER :
-				int length = readInt();
+				long length = readInt();
 				long filePointer = codedIS.getTotalBytesRead();
 				if (root.trees != null) {
 					MapTree r = new MapTree();
@@ -1350,7 +1350,7 @@ public class BinaryMapIndexReader {
 		for (AddressRegion reg : addressIndexes) {
 			if (reg.indexNameOffset != -1) {
 				codedIS.seek(reg.indexNameOffset);
-				int len = readInt();
+				long len = readInt();
 				long old = codedIS.pushLimit(len);
 				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
 				codedIS.popLimit(old);
@@ -2174,7 +2174,7 @@ public class BinaryMapIndexReader {
 
 	private static class MapTree {
 		long filePointer = 0;
-		int length = 0;
+		long length = 0;
 
 		long mapDataBlock = 0;
 		Boolean ocean = null;
@@ -2200,7 +2200,7 @@ public class BinaryMapIndexReader {
 			return bottom;
 		}
 
-		public int getLength() {
+		public long getLength() {
 			return length;
 		}
 
@@ -2492,7 +2492,7 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = readInt();
+				int val = (int) readInt(); // FIXME
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i]) {
 						listOffsets.get(i).add(val);

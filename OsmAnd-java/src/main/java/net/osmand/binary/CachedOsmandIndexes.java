@@ -135,7 +135,8 @@ public class CachedOsmandIndexes {
 			transport.setRight(index.getRight());
 			transport.setTop(index.getTop());
 			transport.setBottom(index.getBottom());
-			transport.setStopsTableLength(index.stopsFileLength);
+			// FIXME
+			transport.setStopsTableLength((int) index.stopsFileLength);
 			// FIXME
 			transport.setStopsTableOffset((int) index.stopsFileOffset);
 			// if(index.incompleteRoutesLength > 0) {
@@ -172,8 +173,8 @@ public class CachedOsmandIndexes {
 			routing.setEdition(index.edition);
 			routing.addAllProfileParams(index.profileParams);
 			routing.setProfile(index.profile);
-			
-			routing.setPointsLength(index.top.length);
+			// FIXME			
+			routing.setPointsLength((int) index.top.length);
 			// FIXME
 			routing.setPointsOffset((int) index.top.filePointer);
 			routing.setBottom(index.top.bottom);
@@ -197,7 +198,8 @@ public class CachedOsmandIndexes {
 		rpart.setTop(sub.top);
 		rpart.setBasemap(base);
 		rpart.setBottom(sub.bottom);
-		rpart.setShifToData(sub.shiftToData);
+		// FIXME
+		rpart.setShifToData((int) sub.shiftToData);
 		routing.addSubregions(rpart);
 	}
 
