@@ -2530,7 +2530,7 @@
     <string name="default_screen_timeout">기본 화면 시간 초과</string>
     <string name="time_to_navigation_point_widget_settings_desc">위젯을 탭하여 모드를 전환합니다.</string>
     <string name="map_widget_time_to_destination">목적지까지의 시간</string>
-    <string name="map_widget_distance_to_intermediate">중간까지의 거리</string>
+    <string name="map_widget_distance_to_intermediate">중간에 거리</string>
     <string name="reset_deafult_order">기본 항목 순서 복원</string>
     <string name="lang_ckb">중부 쿠르드족</string>
     <string name="co2_mission">CO2 배출</string>
@@ -4942,4 +4942,21 @@
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="create_custom_poi">사용자 정의 필터</string>
     <string name="from_to_with_params">%1$s에서 %2$s에게</string>
+    <string name="width_limit_description">차량 폭 일부 노선 제한은 넓은 차량에 적용 할 수 있습니다.</string>
+    <string name="legend_item_description">지도의 상징에 대한 가이드.</string>
+    <string name="index_item_world_basemap_detailed">세계 개요 맵 (detailed)</string>
+    <string name="complex_routing_descr">차 항법을 위한 2 단계 여정.</string>
+    <string name="height_limit_description">차량 높이를 제공, 일부 노선 제한은 높은 차량에 적용 할 수 있습니다.</string>
+    <string name="unsupported_type_error">지원되는 유형</string>
+    <string name="create_edit_poi">POI 생성 또는 편집</string>
+    <string name="quick_action_transport_descr">지도에서 대중 교통을 보여주는 버튼.</string>
+    <string name="back_to_editing">편집으로 돌아가기</string>
+    <string name="parking_positions">주차 위치</string>
+    <string name="app_mode_go_cart">고-카트</string>
+    <string name="add_button">버튼 추가</string>
+    <string name="custom_buttons">사용자지정 버튼</string>
+    <string name="default_buttons">기본값 버튼</string>
+    <string name="custom_map_button_name_present">해당 버튼이 이미 있음</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s 도로에서만 사용할 수있는 데이터는 그래프를 볼 수있는 \"점간\"을 사용하여 루트를 계산합니다.</string>
+    <string name="weight_limit_description">차량 무게를 제공, 일부 노선 제한 무거운 차량에 적용 할 수 있습니다.</string>
 </resources>
