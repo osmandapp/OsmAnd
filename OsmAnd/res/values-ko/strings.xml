@@ -3128,7 +3128,7 @@
     <string name="zoom_non_animated">비-애니메이션 줌</string>
     <string name="add_row">더 보기</string>
     <string name="change_button">변경 버튼</string>
-    <string name="download_to_device">다운로드</string>
+    <string name="download_to_device">장치로 다운로드</string>
     <string name="output">출력선택</string>
     <string name="language_and_output">언어 및 출력</string>
     <string name="add_start_point">시작점 설정</string>
@@ -3288,9 +3288,9 @@
     <string name="add_to_a_track">트랙에 추가</string>
     <string name="whole_track">전체 트랙</string>
     <string name="shared_string_is_deleted">%1$s 삭제됩니다.</string>
-    <string name="shared_string_delete_item">관련 상품</string>
+    <string name="shared_string_delete_item">삭제 항목</string>
     <string name="shared_string_delete_immediately">즉시 삭제</string>
-    <string name="restore_from_trash">Trash에서 복원</string>
+    <string name="restore_from_trash">휴지통에서 복원</string>
     <string name="wikipedia_and_travel_maps">Wikipedia 및 여행지도</string>
     <string name="smart_folder_name_present">그런 스마트 폴더 이미 현재</string>
     <string name="save_as_smart_folder">스마트 폴더로 저장</string>
@@ -3436,7 +3436,7 @@
 \n• 배경 모드에서도 옵션 여행 기록 (위험 장치는 수면 모드에서)
 \nOsmAnd는 적극적으로 오픈 소스 소프트웨어 개발. 누구나 버그 보고, 번역 개선, 새로운 기능을 코딩하여 앱에 기여할 수 있습니다. 또한 프로젝트는 새로운 기능의 코딩 및 테스트에 대한 금융 기여에 의존합니다.
 \n</string>
-    <string name="trash_is_empty">Trash는 비어 있습니다</string>
+    <string name="trash_is_empty">휴지통은 비어 있습니다</string>
     <string name="snap_to_road_descr">현재 위치 아이콘이 현재 내비게이션 경로로 스냅하기</string>
     <string name="shared_string_reassign">재할당</string>
     <string name="shared_string_rows">행</string>
@@ -4458,7 +4458,7 @@
     <string name="routing_attr_allow_intermediate_name">중간 노선을 허용</string>
     <string name="faq_item">질문과 답변</string>
     <string name="routing_attr_allow_expert_description">극단적으로 어려운 경로, 위험한 장애물과 주변.</string>
-    <string name="subscribe_email_error">에러</string>
+    <string name="subscribe_email_error">오류</string>
     <string name="recently_visible">최근에 표시됨 %1$s</string>
     <string name="si_nm_ft">해리/피트</string>
     <string name="hourly">시간별</string>
@@ -4959,4 +4959,19 @@
     <string name="custom_map_button_name_present">해당 버튼이 이미 있음</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s 도로에서만 사용할 수있는 데이터는 그래프를 볼 수있는 \"점간\"을 사용하여 루트를 계산합니다.</string>
     <string name="weight_limit_description">차량 무게를 제공, 일부 노선 제한 무거운 차량에 적용 할 수 있습니다.</string>
+    <string name="measure_distance_item">측정 거리</string>
+    <string name="custom_color">사용자지정 색깔</string>
+    <string name="extra_maps_menu_group">추가 지도</string>
+    <string name="osmand_purchases_item">OsmAnd 구매</string>
+    <string name="lang_zhyue">광둥어</string>
+    <string name="favorites_item">즐겨찾기</string>
+    <string name="settings_item_write_error">\'%1$s\'로 쓸 수 없습니다.</string>
+    <string name="add_edit_favorite">즐겨찾기 추가 또는 편집</string>
+    <string name="subscription_osmandlive_item">구독 - OsmAnd 라이브</string>
+    <string name="travel_item">여행 (Wikivoyage 및 Wikipedia)</string>
+    <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
+    <string name="search_poi_types">POI 유형에 대한 검색</string>
+    <string name="download_unsupported_action">지원되지 않는 동작 %1$s</string>
+    <string name="shared_string_deleted">삭제됨</string>
+    <string name="special_routing_cpp">특수 라우팅 유형</string>
 </resources>
