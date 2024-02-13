@@ -5506,4 +5506,8 @@
     <string name="shared_string_keywords">Nyckelord</string>
     <string name="shared_string_additional">Ytterligare</string>
     <string name="app_mode_baby_transport">Barnvagn</string>
+    <string name="default_buttons">Förinställda knappar</string>
+    <string name="custom_buttons">Anpassade knappar</string>
+    <string name="custom_map_button_name_present">En sådan knapp finns redan</string>
+    <string name="add_button">Lägg till knapp</string>
 </resources>
