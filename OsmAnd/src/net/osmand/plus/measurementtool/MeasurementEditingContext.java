@@ -344,6 +344,14 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return getBeforePoints();
 	}
 
+	public List<WptPt> getAllBeforePoints() {
+		List<WptPt> points = new ArrayList<>();
+		for (TrkSegment segment : getBeforeTrkSegmentLine()) {
+			points.addAll(segment.points);
+		}
+		return points;
+	}
+
 	public List<List<WptPt>> getSegmentsPoints() {
 		return getSegmentsPoints(true, true);
 	}
@@ -351,7 +359,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	@NonNull
 	public List<List<WptPt>> getSegmentsPoints(boolean plain, boolean route) {
 		List<List<WptPt>> res = new ArrayList<>();
-		List<WptPt> allPoints = getPoints();
+		List<WptPt> allPoints = getAllBeforePoints();
 		List<WptPt> segment = new ArrayList<>();
 		String prevProfileType = null;
 		for (WptPt point : allPoints) {
