@@ -482,7 +482,11 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiNameIndexDataAtom.SHIFTTO_FIELD_NUMBER:
 				int x31 = (x << (31 - zoom));
 				int y31 = (y << (31 - zoom));
-				int shift = (int) readInt(); // FIXME
+				long l = readInt();
+				if(l > Integer.MAX_VALUE) {
+					throw new IllegalStateException();
+				}
+				int shift = (int) l;
 				if (req.contains(x31, y31, x31, y31)) {
 					long d = Math.abs(req.x - x31) + Math.abs(req.y - y31);
 					offsets.put(shift, d);
@@ -982,7 +986,11 @@ public class BinaryMapPoiReaderAdapter {
 					long zy = y << (SearchRequest.ZOOM_TO_SEARCH_POI - zoom);
 					read = req.tiles.contains((zx << SearchRequest.ZOOM_TO_SEARCH_POI) + zy);
 				}
-				int offset = (int) readInt(); // FIXME
+				long l = readInt();
+				if(l > Integer.MAX_VALUE) {
+					throw new IllegalStateException();
+				}
+				int offset = (int) l;
 				if (read) {
 					if (skipTiles != null && zoom >= zoomToSkip) {
 						long valSkip = ((((long) x) >> (zoom - zoomToSkip)) << zoomToSkip)
