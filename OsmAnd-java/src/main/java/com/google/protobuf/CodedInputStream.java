@@ -555,17 +555,17 @@ public final class CodedInputStream {
   private long totalBytesRetired;
 
   /** The absolute position of the end of the current message. */
-  private long currentLimit = 4l * Integer.MAX_VALUE; // 8 GB
+  private long currentLimit = DEFAULT_SIZE_LIMIT; // 8 GB
 
   /** See setRecursionLimit() */
   private int recursionDepth;
   private int recursionLimit = DEFAULT_RECURSION_LIMIT;
 
   /** See setSizeLimit() */
-  private int sizeLimit = DEFAULT_SIZE_LIMIT;
+  private long sizeLimit = DEFAULT_SIZE_LIMIT;
 
   private static final int DEFAULT_RECURSION_LIMIT = 64;
-  private static final int DEFAULT_SIZE_LIMIT = 64 << 20;  // 64MB
+  private static final long DEFAULT_SIZE_LIMIT = 4l * Integer.MAX_VALUE;// 64 << 20;  // 64MB
   private static final int BUFFER_SIZE = 5 * 1024;
 
   private CodedInputStream(final byte[] buffer, final int off, final int len) {
@@ -627,12 +627,12 @@ public final class CodedInputStream {
    *
    * @return the old limit.
    */
-  public int setSizeLimit(final int limit) {
+  public long setSizeLimit(final long limit) {
     if (limit < 0) {
       throw new IllegalArgumentException(
         "Size limit cannot be negative: " + limit);
     }
-    final int oldLimit = sizeLimit;
+    final long oldLimit = sizeLimit;
     sizeLimit = limit;
     return oldLimit;
   }
@@ -646,7 +646,7 @@ public final class CodedInputStream {
 
   public int pushLimit(int byteLimit) throws InvalidProtocolBufferException {
 	  long lm = pushLimit((long)byteLimit);
-	  if(lm > Integer.MAX_VALUE) {
+	  if (lm > DEFAULT_SIZE_LIMIT) {
 	      throw InvalidProtocolBufferException.truncatedMessage();
 	  }
 	  return (int) lm;
@@ -711,7 +711,7 @@ public final class CodedInputStream {
    * If no limit is set, returns -1.
    */
   public long getBytesUntilLimit() {
-    if (currentLimit == Integer.MAX_VALUE) {
+    if (currentLimit == DEFAULT_SIZE_LIMIT) {
       return -1;
     }
 
@@ -757,13 +757,12 @@ public final class CodedInputStream {
         return false;
       }
     }
-
     totalBytesRetired += bufferSize;
 
     bufferPos = 0;
     if (raf != null) {
     	// osmand change
-    	totalBytesRetired = (int) raf.getFilePointer();
+    	totalBytesRetired = raf.getFilePointer();
     	long remain = raf.length() - raf.getFilePointer();
     	bufferSize = (int) Math.min(remain, buffer.length);
     	if(bufferSize > 0) {
@@ -956,7 +955,7 @@ public final class CodedInputStream {
          bufferSize = 0;
          raf.seek(raf.getFilePointer() + (size - pos));
 //         int n = raf.skipBytes(size - pos);
-         totalBytesRetired = (int) raf.getFilePointer();
+         totalBytesRetired = raf.getFilePointer();
 //      	 if (n <= 0) {
 //             throw InvalidProtocolBufferException.truncatedMessage();
 //         }
@@ -983,7 +982,7 @@ public final class CodedInputStream {
 		  }
 		  bufferPos = (int) (pointer - totalBytesRetired);
 	  } else {
-		  totalBytesRetired = (int) pointer;
+		  totalBytesRetired = pointer;
 		  bufferSizeAfterLimit = 0;
 		  raf.seek(pointer);
 		  bufferPos = 0;

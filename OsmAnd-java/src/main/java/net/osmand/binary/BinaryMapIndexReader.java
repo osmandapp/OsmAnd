@@ -135,7 +135,7 @@ public class BinaryMapIndexReader {
 		this.raf = raf;
 		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+//		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
@@ -148,7 +148,7 @@ public class BinaryMapIndexReader {
 		this.raf = raf;
 		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+//		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
@@ -163,7 +163,7 @@ public class BinaryMapIndexReader {
 		this.raf = raf;
 		this.file = referenceToSameFile.file;
 		codedIS = CodedInputStream.newInstance(raf);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+//		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
 		version = referenceToSameFile.version;
 		dateCreated = referenceToSameFile.dateCreated;
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
