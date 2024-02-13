@@ -664,7 +664,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 		public boolean contains(LatLon p) throws IOException {
 			int zoomToLoad = 14;
-			int x = MapUtils.get31TileNumberX(p.getLongitude()) >> zoomToLoad;
+			int x31 = MapUtils.get31TileNumberX(p.getLongitude());
+			int x = x31 >> zoomToLoad;
+			int y31 = MapUtils.get31TileNumberY(p.getLatitude());
 			int y = MapUtils.get31TileNumberY(p.getLatitude()) >> zoomToLoad;
 			boolean contains = false;
 			SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
@@ -685,7 +687,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					}
 				} else {
 					HHRouteRegion reg = regions.get(i);
-					if (reg.top.contains(x, y)) {
+					if (reg.top.contains(x31, y31)) {
 						contains = true;
 					}
 				}

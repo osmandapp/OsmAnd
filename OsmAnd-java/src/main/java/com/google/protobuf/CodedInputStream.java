@@ -565,7 +565,8 @@ public final class CodedInputStream {
   private long sizeLimit = DEFAULT_SIZE_LIMIT;
 
   private static final int DEFAULT_RECURSION_LIMIT = 64;
-  private static final long DEFAULT_SIZE_LIMIT = 4l * Integer.MAX_VALUE;// 64 << 20;  // 64MB
+  public static final long DEFAULT_SIZE_LIMIT = Integer.MAX_VALUE;// 64 << 20;  // 64MB
+  public static final long MAX_DEFAULT_SIZE_LIMIT = 4l * Integer.MAX_VALUE; // 8 GB
   private static final int BUFFER_SIZE = 5 * 1024;
 
   private CodedInputStream(final byte[] buffer, final int off, final int len) {
@@ -634,6 +635,7 @@ public final class CodedInputStream {
     }
     final long oldLimit = sizeLimit;
     sizeLimit = limit;
+    currentLimit = Math.max(limit, currentLimit);
     return oldLimit;
   }
 
@@ -645,8 +647,8 @@ public final class CodedInputStream {
   }
 
   public int pushLimit(int byteLimit) throws InvalidProtocolBufferException {
-	  long lm = pushLimit((long)byteLimit);
-	  if (lm > DEFAULT_SIZE_LIMIT) {
+	  long lm = pushLimitLong((long)byteLimit);
+	  if (lm > Integer.MAX_VALUE) {
 	      throw InvalidProtocolBufferException.truncatedMessage();
 	  }
 	  return (int) lm;
@@ -665,7 +667,7 @@ public final class CodedInputStream {
    *
    * @return the old limit.
    */
-  public long pushLimit(long byteLimit) throws InvalidProtocolBufferException {
+  public long pushLimitLong(long byteLimit) throws InvalidProtocolBufferException {
     if (byteLimit < 0) {
       throw InvalidProtocolBufferException.negativeSize();
     }
@@ -711,7 +713,7 @@ public final class CodedInputStream {
    * If no limit is set, returns -1.
    */
   public long getBytesUntilLimit() {
-    if (currentLimit == DEFAULT_SIZE_LIMIT) {
+    if (currentLimit == sizeLimit) {
       return -1;
     }
 

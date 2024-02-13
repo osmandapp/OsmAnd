@@ -100,7 +100,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.OsmAndTransportIndex.STOPS_FIELD_NUMBER :
 				ind.stopsFileLength = readInt();
 				ind.stopsFileOffset = codedIS.getTotalBytesRead();
-				long old = codedIS.pushLimit(ind.stopsFileLength);
+				long old = codedIS.pushLimitLong((long) ind.stopsFileLength);
 				readTransportBounds(ind);
 				codedIS.popLimit(old);
 				break;
@@ -199,7 +199,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportStopsTree.LEAFS_FIELD_NUMBER :
 				long stopOffset = codedIS.getTotalBytesRead();
 				long length = codedIS.readRawVarint32();
-				long oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimitLong((long) length);
 				if(lastIndexResult == -1){
 					lastIndexResult = req.getSearchResults().size();
 				}
@@ -215,7 +215,7 @@ public class BinaryMapTransportReaderAdapter {
 				length = readInt();
 				long filePointer = codedIS.getTotalBytesRead();
 				if (req.limit == -1 || req.limit >= req.getSearchResults().size()) {
-					oldLimit = codedIS.pushLimit(length);
+					oldLimit = codedIS.pushLimitLong((long) length);
 					searchTransportTreeBounds(cleft, cright, ctop, cbottom, req, stringTable);
 					codedIS.popLimit(oldLimit);
 				}
@@ -263,7 +263,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.IncompleteTransportRoutes.ROUTES_FIELD_NUMBER:
 				int l = codedIS.readRawVarint32();
-				long olds = codedIS.pushLimit(l);
+				long olds = codedIS.pushLimitLong((long) l);
 				net.osmand.data.IncompleteTransportRoute ir = readIncompleteRoute(transportIndexStart);
 				net.osmand.data.IncompleteTransportRoute itr = incompleteRoutes.get(ir.getRouteId());
 				if(itr != null) {
@@ -331,7 +331,7 @@ public class BinaryMapTransportReaderAdapter {
 			boolean onlyDescription) throws IOException {
 		codedIS.seek(filePointer);
 		int routeLength = codedIS.readRawVarint32();
-		long old = codedIS.pushLimit(routeLength);
+		long old = codedIS.pushLimitLong((long) routeLength);
 		net.osmand.data.TransportRoute dataObject = new net.osmand.data.TransportRoute();
 		dataObject.setFileOffset(filePointer);
 		boolean end = false;
@@ -371,7 +371,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportRoute.GEOMETRY_FIELD_NUMBER:
 				int sizeL = codedIS.readRawVarint32();
-				long pold = codedIS.pushLimit(sizeL);
+				long pold = codedIS.pushLimitLong((long) sizeL);
 				int px = 0; 
 				int py = 0;
 				Way w = new Way(-1);
@@ -401,7 +401,7 @@ public class BinaryMapTransportReaderAdapter {
 //				break;
 			case OsmandOdb.TransportRoute.SCHEDULETRIP_FIELD_NUMBER:
 				sizeL = codedIS.readRawVarint32();
-				pold = codedIS.pushLimit(sizeL);
+				pold = codedIS.pushLimitLong((long) sizeL);
 				readTransportSchedule(dataObject.getOrCreateSchedule());
 				codedIS.popLimit(pold);
 				break;
@@ -412,7 +412,7 @@ public class BinaryMapTransportReaderAdapter {
 					break;
 				}
 				int length = codedIS.readRawVarint32();
-				long olds = codedIS.pushLimit(length);
+				long olds = codedIS.pushLimitLong((long) length);
 				TransportStop stop = readTransportRouteStop(rx, ry, rid, stringTable, filePointer);
 				dataObject.getForwardStops().add(stop);
 				rid = stop.getId();
@@ -425,7 +425,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportRoute.ATTRIBUTETEXTTAGVALUES_FIELD_NUMBER:
 				TByteArrayList buf = new TByteArrayList();
 				sizeL = codedIS.readRawVarint32();
-				olds = codedIS.pushLimit(sizeL);
+				olds = codedIS.pushLimitLong((long) sizeL);
 				String key = regStr(stringTable);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					buf.add(codedIS.readRawByte());
@@ -455,7 +455,7 @@ public class BinaryMapTransportReaderAdapter {
 				return;
 			case OsmandOdb.TransportRouteSchedule.TRIPINTERVALS_FIELD_NUMBER:
 				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					interval = codedIS.readRawVarint32();
 					schedule.tripIntervals.add(interval);
@@ -464,7 +464,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportRouteSchedule.AVGSTOPINTERVALS_FIELD_NUMBER:
 				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					interval = codedIS.readRawVarint32();
 					schedule.avgStopIntervals.add(interval);
@@ -473,7 +473,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportRouteSchedule.AVGWAITINTERVALS_FIELD_NUMBER:
 				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					interval = codedIS.readRawVarint32();
 					schedule.avgWaitIntervals.add(interval);
@@ -495,7 +495,7 @@ public class BinaryMapTransportReaderAdapter {
 		if (ind.stringTable.stringTable == null) {
 			ind.stringTable.stringTable = new TIntObjectHashMap<>();
 			codedIS.seek(ind.stringTable.fileOffset);
-			long oldLimit = codedIS.pushLimit(ind.stringTable.length);
+			long oldLimit = codedIS.pushLimitLong((long) ind.stringTable.length);
 			int current = 0;
 			while (codedIS.getBytesUntilLimit() > 0) {
 				int t = codedIS.readTag();
@@ -690,7 +690,7 @@ public class BinaryMapTransportReaderAdapter {
 			case OsmandOdb.TransportStop.ADDITIONALNAMEPAIRS_FIELD_NUMBER :
 				if (stringTable != null) {
 					int sizeL = codedIS.readRawVarint32();
-					long oldRef = codedIS.pushLimit(sizeL);
+					long oldRef = codedIS.pushLimitLong((long) sizeL);
 					while (codedIS.getBytesUntilLimit() > 0) {
 						dataObject.setName(regStr(stringTable,codedIS.readRawVarint32()),
 								regStr(stringTable,codedIS.readRawVarint32()));
@@ -705,7 +705,7 @@ public class BinaryMapTransportReaderAdapter {
 				break;
 			case OsmandOdb.TransportStop.EXITS_FIELD_NUMBER :
 				int length = codedIS.readRawVarint32();
-				long oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimitLong((long) length);
 
 				TransportStopExit transportStopExit = readTransportStopExit(cleft, ctop, req, stringTable);
 				dataObject.addExit(transportStopExit);
