@@ -47,7 +47,7 @@ public class BinaryMapTransportReaderAdapter {
 		long stopsFileOffset = 0;
 		long stopsFileLength = 0;
 		long incompleteRoutesOffset = 0;
-		int incompleteRoutesLength = 0;
+		long incompleteRoutesLength = 0;
 		
 		public String getPartName() {
 			return "Transport";

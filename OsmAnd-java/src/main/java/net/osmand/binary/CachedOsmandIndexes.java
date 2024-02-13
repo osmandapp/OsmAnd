@@ -95,8 +95,7 @@ public class CachedOsmandIndexes {
 			if (index.getEnName() != null) {
 				addr.setNameEn(index.getEnName());
 			}
-			// FIXME 
-			addr.setIndexNameOffset((int) index.getIndexNameOffset());
+			addr.setIndexNameOffset(index.getIndexNameOffset());
 			for (CitiesBlock mr : index.getCities()) {
 				CityBlock.Builder cblock = OsmandIndex.CityBlock.newBuilder();
 				cblock.setSize(mr.length);
@@ -135,18 +134,14 @@ public class CachedOsmandIndexes {
 			transport.setRight(index.getRight());
 			transport.setTop(index.getTop());
 			transport.setBottom(index.getBottom());
-			// FIXME
-			transport.setStopsTableLength((int) index.stopsFileLength);
-			// FIXME
-			transport.setStopsTableOffset((int) index.stopsFileOffset);
+			transport.setStopsTableLength(index.stopsFileLength);
+			transport.setStopsTableOffset(index.stopsFileOffset);
 			// if(index.incompleteRoutesLength > 0) {
 			transport.setIncompleteRoutesLength(index.incompleteRoutesLength);
-			// FIXME
-			transport.setIncompleteRoutesOffset((int) index.incompleteRoutesOffset);
+			transport.setIncompleteRoutesOffset(index.incompleteRoutesOffset);
 			// }
 			transport.setStringTableLength(index.stringTable.length);
-			// FIXME
-			transport.setStringTableOffset((int) index.stringTable.fileOffset);
+			transport.setStringTableOffset(index.stringTable.fileOffset);
 			fileIndex.addTransportIndex(transport);
 		}
 
@@ -173,10 +168,8 @@ public class CachedOsmandIndexes {
 			routing.setEdition(index.edition);
 			routing.addAllProfileParams(index.profileParams);
 			routing.setProfile(index.profile);
-			// FIXME			
-			routing.setPointsLength((int) index.top.length);
-			// FIXME
-			routing.setPointsOffset((int) index.top.filePointer);
+			routing.setPointsLength(index.top.length);
+			routing.setPointsOffset(index.top.filePointer);
 			routing.setBottom(index.top.bottom);
 			routing.setTop(index.top.top);
 			routing.setLeft(index.top.left);
@@ -198,8 +191,7 @@ public class CachedOsmandIndexes {
 		rpart.setTop(sub.top);
 		rpart.setBasemap(base);
 		rpart.setBottom(sub.bottom);
-		// FIXME
-		rpart.setShifToData((int) sub.shiftToData);
+		rpart.setShifToData(sub.shiftToData);
 		routing.addSubregions(rpart);
 	}
 
