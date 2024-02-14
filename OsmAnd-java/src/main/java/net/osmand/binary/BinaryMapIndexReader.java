@@ -501,9 +501,20 @@ public class BinaryMapIndexReader {
 
 	public final long readInt() throws IOException {
 		long l = readByte();
+		boolean _8byte = l > 0x7f;
+		if (_8byte) {
+			l = l & 0x7f;
+		}
 		l = (l << 8) + readByte();
 		l = (l << 8) + readByte();
 		l = (l << 8) + readByte();
+		if (_8byte) {
+			l = (l << 8) + readByte();
+			l = (l << 8) + readByte();
+			l = (l << 8) + readByte();
+			l = (l << 8) + readByte();
+			
+		}
 		return l;
 	}
 
