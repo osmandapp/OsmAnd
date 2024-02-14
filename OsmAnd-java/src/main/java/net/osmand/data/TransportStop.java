@@ -14,7 +14,7 @@ public class TransportStop extends MapObject {
 	private static final int DELETED_STOP = -1;
 	public static final String MISSING_STOP_NAME = "#Missing Stop";
 
-	private int[] referencesToRoutes = null;
+	private long[] referencesToRoutes = null;
 	private long[] deletedRoutesIds;
 	private long[] routesIds;
 	public int distance;
@@ -45,11 +45,11 @@ public class TransportStop extends MapObject {
 		this.routes.add(rt);
 	}
 
-	public int[] getReferencesToRoutes() {
+	public long[] getReferencesToRoutes() {
 		return referencesToRoutes;
 	}
 
-	public void setReferencesToRoutes(int[] referencesToRoutes) {
+	public void setReferencesToRoutes(long[] referencesToRoutes) {
 		this.referencesToRoutes = referencesToRoutes;
 	}
 
@@ -72,7 +72,7 @@ public class TransportStop extends MapObject {
 	}
 
 	public void setDeleted() {
-		this.referencesToRoutes = new int[] { DELETED_STOP };
+		this.referencesToRoutes = new long[] { DELETED_STOP };
 	}
 
 	public long[] getDeletedRoutesIds() {

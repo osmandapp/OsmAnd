@@ -2774,15 +2774,15 @@ public final class OsmandIndex {
     com.google.protobuf.ByteString
         getNameEnBytes();
 
-    // optional int32 indexNameOffset = 5;
+    // optional int64 indexNameOffset = 5;
     /**
-     * <code>optional int32 indexNameOffset = 5;</code>
+     * <code>optional int64 indexNameOffset = 5;</code>
      */
     boolean hasIndexNameOffset();
     /**
-     * <code>optional int32 indexNameOffset = 5;</code>
+     * <code>optional int64 indexNameOffset = 5;</code>
      */
-    int getIndexNameOffset();
+    long getIndexNameOffset();
 
     // repeated .OsmAnd.OBF.CityBlock cities = 8;
     /**
@@ -2884,7 +2884,7 @@ public final class OsmandIndex {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              indexNameOffset_ = input.readInt32();
+              indexNameOffset_ = input.readInt64();
               break;
             }
             case 66: {
@@ -3054,19 +3054,19 @@ public final class OsmandIndex {
       }
     }
 
-    // optional int32 indexNameOffset = 5;
+    // optional int64 indexNameOffset = 5;
     public static final int INDEXNAMEOFFSET_FIELD_NUMBER = 5;
-    private int indexNameOffset_;
+    private long indexNameOffset_;
     /**
-     * <code>optional int32 indexNameOffset = 5;</code>
+     * <code>optional int64 indexNameOffset = 5;</code>
      */
     public boolean hasIndexNameOffset() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>optional int32 indexNameOffset = 5;</code>
+     * <code>optional int64 indexNameOffset = 5;</code>
      */
-    public int getIndexNameOffset() {
+    public long getIndexNameOffset() {
       return indexNameOffset_;
     }
 
@@ -3141,7 +3141,7 @@ public final class OsmandIndex {
       offset_ = 0L;
       name_ = "";
       nameEn_ = "";
-      indexNameOffset_ = 0;
+      indexNameOffset_ = 0L;
       cities_ = java.util.Collections.emptyList();
       additionalTags_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
@@ -3184,7 +3184,7 @@ public final class OsmandIndex {
         output.writeBytes(4, getNameEnBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, indexNameOffset_);
+        output.writeInt64(5, indexNameOffset_);
       }
       for (int i = 0; i < cities_.size(); i++) {
         output.writeMessage(8, cities_.get(i));
@@ -3218,7 +3218,7 @@ public final class OsmandIndex {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, indexNameOffset_);
+          .computeInt64Size(5, indexNameOffset_);
       }
       for (int i = 0; i < cities_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -3332,7 +3332,7 @@ public final class OsmandIndex {
         bitField0_ = (bitField0_ & ~0x00000004);
         nameEn_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        indexNameOffset_ = 0;
+        indexNameOffset_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
         cities_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -3691,35 +3691,35 @@ public final class OsmandIndex {
         return this;
       }
 
-      // optional int32 indexNameOffset = 5;
-      private int indexNameOffset_ ;
+      // optional int64 indexNameOffset = 5;
+      private long indexNameOffset_ ;
       /**
-       * <code>optional int32 indexNameOffset = 5;</code>
+       * <code>optional int64 indexNameOffset = 5;</code>
        */
       public boolean hasIndexNameOffset() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>optional int32 indexNameOffset = 5;</code>
+       * <code>optional int64 indexNameOffset = 5;</code>
        */
-      public int getIndexNameOffset() {
+      public long getIndexNameOffset() {
         return indexNameOffset_;
       }
       /**
-       * <code>optional int32 indexNameOffset = 5;</code>
+       * <code>optional int64 indexNameOffset = 5;</code>
        */
-      public Builder setIndexNameOffset(int value) {
+      public Builder setIndexNameOffset(long value) {
         bitField0_ |= 0x00000010;
         indexNameOffset_ = value;
         
         return this;
       }
       /**
-       * <code>optional int32 indexNameOffset = 5;</code>
+       * <code>optional int64 indexNameOffset = 5;</code>
        */
       public Builder clearIndexNameOffset() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        indexNameOffset_ = 0;
+        indexNameOffset_ = 0L;
         
         return this;
       }
@@ -7245,15 +7245,15 @@ public final class OsmandIndex {
      */
     int getBottom();
 
-    // required uint32 shifToData = 8;
+    // required int64 shifToData = 8;
     /**
-     * <code>required uint32 shifToData = 8;</code>
+     * <code>required int64 shifToData = 8;</code>
      */
     boolean hasShifToData();
     /**
-     * <code>required uint32 shifToData = 8;</code>
+     * <code>required int64 shifToData = 8;</code>
      */
-    int getShifToData();
+    long getShifToData();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.RoutingSubregion}
@@ -7335,7 +7335,7 @@ public final class OsmandIndex {
             }
             case 64: {
               bitField0_ |= 0x00000080;
-              shifToData_ = input.readUInt32();
+              shifToData_ = input.readInt64();
               break;
             }
           }
@@ -7477,19 +7477,19 @@ public final class OsmandIndex {
       return bottom_;
     }
 
-    // required uint32 shifToData = 8;
+    // required int64 shifToData = 8;
     public static final int SHIFTODATA_FIELD_NUMBER = 8;
-    private int shifToData_;
+    private long shifToData_;
     /**
-     * <code>required uint32 shifToData = 8;</code>
+     * <code>required int64 shifToData = 8;</code>
      */
     public boolean hasShifToData() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>required uint32 shifToData = 8;</code>
+     * <code>required int64 shifToData = 8;</code>
      */
-    public int getShifToData() {
+    public long getShifToData() {
       return shifToData_;
     }
 
@@ -7501,7 +7501,7 @@ public final class OsmandIndex {
       right_ = 0;
       top_ = 0;
       bottom_ = 0;
-      shifToData_ = 0;
+      shifToData_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7565,7 +7565,7 @@ public final class OsmandIndex {
         output.writeInt32(7, bottom_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeUInt32(8, shifToData_);
+        output.writeInt64(8, shifToData_);
       }
     }
 
@@ -7605,7 +7605,7 @@ public final class OsmandIndex {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, shifToData_);
+          .computeInt64Size(8, shifToData_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -7712,7 +7712,7 @@ public final class OsmandIndex {
         bitField0_ = (bitField0_ & ~0x00000020);
         bottom_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        shifToData_ = 0;
+        shifToData_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -8084,35 +8084,35 @@ public final class OsmandIndex {
         return this;
       }
 
-      // required uint32 shifToData = 8;
-      private int shifToData_ ;
+      // required int64 shifToData = 8;
+      private long shifToData_ ;
       /**
-       * <code>required uint32 shifToData = 8;</code>
+       * <code>required int64 shifToData = 8;</code>
        */
       public boolean hasShifToData() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>required uint32 shifToData = 8;</code>
+       * <code>required int64 shifToData = 8;</code>
        */
-      public int getShifToData() {
+      public long getShifToData() {
         return shifToData_;
       }
       /**
-       * <code>required uint32 shifToData = 8;</code>
+       * <code>required int64 shifToData = 8;</code>
        */
-      public Builder setShifToData(int value) {
+      public Builder setShifToData(long value) {
         bitField0_ |= 0x00000080;
         shifToData_ = value;
         
         return this;
       }
       /**
-       * <code>required uint32 shifToData = 8;</code>
+       * <code>required int64 shifToData = 8;</code>
        */
       public Builder clearShifToData() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        shifToData_ = 0;
+        shifToData_ = 0L;
         
         return this;
       }
@@ -9006,25 +9006,25 @@ public final class OsmandIndex {
     com.google.protobuf.ByteString
         getProfileParamsBytes(int index);
 
-    // required int32 pointsOffset = 7;
+    // required int64 pointsOffset = 7;
     /**
-     * <code>required int32 pointsOffset = 7;</code>
+     * <code>required int64 pointsOffset = 7;</code>
      */
     boolean hasPointsOffset();
     /**
-     * <code>required int32 pointsOffset = 7;</code>
+     * <code>required int64 pointsOffset = 7;</code>
      */
-    int getPointsOffset();
+    long getPointsOffset();
 
-    // required int32 pointsLength = 8;
+    // required int64 pointsLength = 8;
     /**
-     * <code>required int32 pointsLength = 8;</code>
+     * <code>required int64 pointsLength = 8;</code>
      */
     boolean hasPointsLength();
     /**
-     * <code>required int32 pointsLength = 8;</code>
+     * <code>required int64 pointsLength = 8;</code>
      */
-    int getPointsLength();
+    long getPointsLength();
 
     // required int32 left = 9;
     /**
@@ -9139,12 +9139,12 @@ public final class OsmandIndex {
             }
             case 56: {
               bitField0_ |= 0x00000010;
-              pointsOffset_ = input.readInt32();
+              pointsOffset_ = input.readInt64();
               break;
             }
             case 64: {
               bitField0_ |= 0x00000020;
-              pointsLength_ = input.readInt32();
+              pointsLength_ = input.readInt64();
               break;
             }
             case 72: {
@@ -9318,35 +9318,35 @@ public final class OsmandIndex {
       return profileParams_.getByteString(index);
     }
 
-    // required int32 pointsOffset = 7;
+    // required int64 pointsOffset = 7;
     public static final int POINTSOFFSET_FIELD_NUMBER = 7;
-    private int pointsOffset_;
+    private long pointsOffset_;
     /**
-     * <code>required int32 pointsOffset = 7;</code>
+     * <code>required int64 pointsOffset = 7;</code>
      */
     public boolean hasPointsOffset() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required int32 pointsOffset = 7;</code>
+     * <code>required int64 pointsOffset = 7;</code>
      */
-    public int getPointsOffset() {
+    public long getPointsOffset() {
       return pointsOffset_;
     }
 
-    // required int32 pointsLength = 8;
+    // required int64 pointsLength = 8;
     public static final int POINTSLENGTH_FIELD_NUMBER = 8;
-    private int pointsLength_;
+    private long pointsLength_;
     /**
-     * <code>required int32 pointsLength = 8;</code>
+     * <code>required int64 pointsLength = 8;</code>
      */
     public boolean hasPointsLength() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int32 pointsLength = 8;</code>
+     * <code>required int64 pointsLength = 8;</code>
      */
-    public int getPointsLength() {
+    public long getPointsLength() {
       return pointsLength_;
     }
 
@@ -9420,8 +9420,8 @@ public final class OsmandIndex {
       edition_ = 0L;
       profile_ = "";
       profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      pointsOffset_ = 0;
-      pointsLength_ = 0;
+      pointsOffset_ = 0L;
+      pointsLength_ = 0L;
       left_ = 0;
       right_ = 0;
       top_ = 0;
@@ -9495,10 +9495,10 @@ public final class OsmandIndex {
         output.writeBytes(5, profileParams_.getByteString(i));
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(7, pointsOffset_);
+        output.writeInt64(7, pointsOffset_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(8, pointsLength_);
+        output.writeInt64(8, pointsLength_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(9, left_);
@@ -9547,11 +9547,11 @@ public final class OsmandIndex {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, pointsOffset_);
+          .computeInt64Size(7, pointsOffset_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, pointsLength_);
+          .computeInt64Size(8, pointsLength_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9670,9 +9670,9 @@ public final class OsmandIndex {
         bitField0_ = (bitField0_ & ~0x00000008);
         profileParams_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
-        pointsOffset_ = 0;
+        pointsOffset_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000020);
-        pointsLength_ = 0;
+        pointsLength_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
         left_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -10131,68 +10131,68 @@ public final class OsmandIndex {
         return this;
       }
 
-      // required int32 pointsOffset = 7;
-      private int pointsOffset_ ;
+      // required int64 pointsOffset = 7;
+      private long pointsOffset_ ;
       /**
-       * <code>required int32 pointsOffset = 7;</code>
+       * <code>required int64 pointsOffset = 7;</code>
        */
       public boolean hasPointsOffset() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required int32 pointsOffset = 7;</code>
+       * <code>required int64 pointsOffset = 7;</code>
        */
-      public int getPointsOffset() {
+      public long getPointsOffset() {
         return pointsOffset_;
       }
       /**
-       * <code>required int32 pointsOffset = 7;</code>
+       * <code>required int64 pointsOffset = 7;</code>
        */
-      public Builder setPointsOffset(int value) {
+      public Builder setPointsOffset(long value) {
         bitField0_ |= 0x00000020;
         pointsOffset_ = value;
         
         return this;
       }
       /**
-       * <code>required int32 pointsOffset = 7;</code>
+       * <code>required int64 pointsOffset = 7;</code>
        */
       public Builder clearPointsOffset() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        pointsOffset_ = 0;
+        pointsOffset_ = 0L;
         
         return this;
       }
 
-      // required int32 pointsLength = 8;
-      private int pointsLength_ ;
+      // required int64 pointsLength = 8;
+      private long pointsLength_ ;
       /**
-       * <code>required int32 pointsLength = 8;</code>
+       * <code>required int64 pointsLength = 8;</code>
        */
       public boolean hasPointsLength() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required int32 pointsLength = 8;</code>
+       * <code>required int64 pointsLength = 8;</code>
        */
-      public int getPointsLength() {
+      public long getPointsLength() {
         return pointsLength_;
       }
       /**
-       * <code>required int32 pointsLength = 8;</code>
+       * <code>required int64 pointsLength = 8;</code>
        */
-      public Builder setPointsLength(int value) {
+      public Builder setPointsLength(long value) {
         bitField0_ |= 0x00000040;
         pointsLength_ = value;
         
         return this;
       }
       /**
-       * <code>required int32 pointsLength = 8;</code>
+       * <code>required int64 pointsLength = 8;</code>
        */
       public Builder clearPointsLength() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        pointsLength_ = 0;
+        pointsLength_ = 0L;
         
         return this;
       }
@@ -10418,65 +10418,65 @@ public final class OsmandIndex {
      */
     int getBottom();
 
-    // optional uint32 stringTableOffset = 8;
+    // optional int64 stringTableOffset = 8;
     /**
-     * <code>optional uint32 stringTableOffset = 8;</code>
+     * <code>optional int64 stringTableOffset = 8;</code>
      */
     boolean hasStringTableOffset();
     /**
-     * <code>optional uint32 stringTableOffset = 8;</code>
+     * <code>optional int64 stringTableOffset = 8;</code>
      */
-    int getStringTableOffset();
+    long getStringTableOffset();
 
-    // optional uint32 stringTableLength = 9;
+    // optional int32 stringTableLength = 9;
     /**
-     * <code>optional uint32 stringTableLength = 9;</code>
+     * <code>optional int32 stringTableLength = 9;</code>
      */
     boolean hasStringTableLength();
     /**
-     * <code>optional uint32 stringTableLength = 9;</code>
+     * <code>optional int32 stringTableLength = 9;</code>
      */
     int getStringTableLength();
 
-    // optional uint32 stopsTableOffset = 10;
+    // optional int64 stopsTableOffset = 10;
     /**
-     * <code>optional uint32 stopsTableOffset = 10;</code>
+     * <code>optional int64 stopsTableOffset = 10;</code>
      */
     boolean hasStopsTableOffset();
     /**
-     * <code>optional uint32 stopsTableOffset = 10;</code>
+     * <code>optional int64 stopsTableOffset = 10;</code>
      */
-    int getStopsTableOffset();
+    long getStopsTableOffset();
 
-    // optional uint32 stopsTableLength = 11;
+    // optional int64 stopsTableLength = 11;
     /**
-     * <code>optional uint32 stopsTableLength = 11;</code>
+     * <code>optional int64 stopsTableLength = 11;</code>
      */
     boolean hasStopsTableLength();
     /**
-     * <code>optional uint32 stopsTableLength = 11;</code>
+     * <code>optional int64 stopsTableLength = 11;</code>
      */
-    int getStopsTableLength();
+    long getStopsTableLength();
 
-    // optional uint32 incompleteRoutesOffset = 12;
+    // optional int64 incompleteRoutesOffset = 12;
     /**
-     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     * <code>optional int64 incompleteRoutesOffset = 12;</code>
      */
     boolean hasIncompleteRoutesOffset();
     /**
-     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     * <code>optional int64 incompleteRoutesOffset = 12;</code>
      */
-    int getIncompleteRoutesOffset();
+    long getIncompleteRoutesOffset();
 
-    // optional uint32 incompleteRoutesLength = 13;
+    // optional int64 incompleteRoutesLength = 13;
     /**
-     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     * <code>optional int64 incompleteRoutesLength = 13;</code>
      */
     boolean hasIncompleteRoutesLength();
     /**
-     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     * <code>optional int64 incompleteRoutesLength = 13;</code>
      */
-    int getIncompleteRoutesLength();
+    long getIncompleteRoutesLength();
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportPart}
@@ -10558,32 +10558,32 @@ public final class OsmandIndex {
             }
             case 64: {
               bitField0_ |= 0x00000080;
-              stringTableOffset_ = input.readUInt32();
+              stringTableOffset_ = input.readInt64();
               break;
             }
             case 72: {
               bitField0_ |= 0x00000100;
-              stringTableLength_ = input.readUInt32();
+              stringTableLength_ = input.readInt32();
               break;
             }
             case 80: {
               bitField0_ |= 0x00000200;
-              stopsTableOffset_ = input.readUInt32();
+              stopsTableOffset_ = input.readInt64();
               break;
             }
             case 88: {
               bitField0_ |= 0x00000400;
-              stopsTableLength_ = input.readUInt32();
+              stopsTableLength_ = input.readInt64();
               break;
             }
             case 96: {
               bitField0_ |= 0x00000800;
-              incompleteRoutesOffset_ = input.readUInt32();
+              incompleteRoutesOffset_ = input.readInt64();
               break;
             }
             case 104: {
               bitField0_ |= 0x00001000;
-              incompleteRoutesLength_ = input.readUInt32();
+              incompleteRoutesLength_ = input.readInt64();
               break;
             }
           }
@@ -10752,99 +10752,99 @@ public final class OsmandIndex {
       return bottom_;
     }
 
-    // optional uint32 stringTableOffset = 8;
+    // optional int64 stringTableOffset = 8;
     public static final int STRINGTABLEOFFSET_FIELD_NUMBER = 8;
-    private int stringTableOffset_;
+    private long stringTableOffset_;
     /**
-     * <code>optional uint32 stringTableOffset = 8;</code>
+     * <code>optional int64 stringTableOffset = 8;</code>
      */
     public boolean hasStringTableOffset() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional uint32 stringTableOffset = 8;</code>
+     * <code>optional int64 stringTableOffset = 8;</code>
      */
-    public int getStringTableOffset() {
+    public long getStringTableOffset() {
       return stringTableOffset_;
     }
 
-    // optional uint32 stringTableLength = 9;
+    // optional int32 stringTableLength = 9;
     public static final int STRINGTABLELENGTH_FIELD_NUMBER = 9;
     private int stringTableLength_;
     /**
-     * <code>optional uint32 stringTableLength = 9;</code>
+     * <code>optional int32 stringTableLength = 9;</code>
      */
     public boolean hasStringTableLength() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     /**
-     * <code>optional uint32 stringTableLength = 9;</code>
+     * <code>optional int32 stringTableLength = 9;</code>
      */
     public int getStringTableLength() {
       return stringTableLength_;
     }
 
-    // optional uint32 stopsTableOffset = 10;
+    // optional int64 stopsTableOffset = 10;
     public static final int STOPSTABLEOFFSET_FIELD_NUMBER = 10;
-    private int stopsTableOffset_;
+    private long stopsTableOffset_;
     /**
-     * <code>optional uint32 stopsTableOffset = 10;</code>
+     * <code>optional int64 stopsTableOffset = 10;</code>
      */
     public boolean hasStopsTableOffset() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     /**
-     * <code>optional uint32 stopsTableOffset = 10;</code>
+     * <code>optional int64 stopsTableOffset = 10;</code>
      */
-    public int getStopsTableOffset() {
+    public long getStopsTableOffset() {
       return stopsTableOffset_;
     }
 
-    // optional uint32 stopsTableLength = 11;
+    // optional int64 stopsTableLength = 11;
     public static final int STOPSTABLELENGTH_FIELD_NUMBER = 11;
-    private int stopsTableLength_;
+    private long stopsTableLength_;
     /**
-     * <code>optional uint32 stopsTableLength = 11;</code>
+     * <code>optional int64 stopsTableLength = 11;</code>
      */
     public boolean hasStopsTableLength() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     /**
-     * <code>optional uint32 stopsTableLength = 11;</code>
+     * <code>optional int64 stopsTableLength = 11;</code>
      */
-    public int getStopsTableLength() {
+    public long getStopsTableLength() {
       return stopsTableLength_;
     }
 
-    // optional uint32 incompleteRoutesOffset = 12;
+    // optional int64 incompleteRoutesOffset = 12;
     public static final int INCOMPLETEROUTESOFFSET_FIELD_NUMBER = 12;
-    private int incompleteRoutesOffset_;
+    private long incompleteRoutesOffset_;
     /**
-     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     * <code>optional int64 incompleteRoutesOffset = 12;</code>
      */
     public boolean hasIncompleteRoutesOffset() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+     * <code>optional int64 incompleteRoutesOffset = 12;</code>
      */
-    public int getIncompleteRoutesOffset() {
+    public long getIncompleteRoutesOffset() {
       return incompleteRoutesOffset_;
     }
 
-    // optional uint32 incompleteRoutesLength = 13;
+    // optional int64 incompleteRoutesLength = 13;
     public static final int INCOMPLETEROUTESLENGTH_FIELD_NUMBER = 13;
-    private int incompleteRoutesLength_;
+    private long incompleteRoutesLength_;
     /**
-     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     * <code>optional int64 incompleteRoutesLength = 13;</code>
      */
     public boolean hasIncompleteRoutesLength() {
       return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
-     * <code>optional uint32 incompleteRoutesLength = 13;</code>
+     * <code>optional int64 incompleteRoutesLength = 13;</code>
      */
-    public int getIncompleteRoutesLength() {
+    public long getIncompleteRoutesLength() {
       return incompleteRoutesLength_;
     }
 
@@ -10856,12 +10856,12 @@ public final class OsmandIndex {
       right_ = 0;
       top_ = 0;
       bottom_ = 0;
-      stringTableOffset_ = 0;
+      stringTableOffset_ = 0L;
       stringTableLength_ = 0;
-      stopsTableOffset_ = 0;
-      stopsTableLength_ = 0;
-      incompleteRoutesOffset_ = 0;
-      incompleteRoutesLength_ = 0;
+      stopsTableOffset_ = 0L;
+      stopsTableLength_ = 0L;
+      incompleteRoutesOffset_ = 0L;
+      incompleteRoutesLength_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10905,22 +10905,22 @@ public final class OsmandIndex {
         output.writeInt32(7, bottom_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeUInt32(8, stringTableOffset_);
+        output.writeInt64(8, stringTableOffset_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeUInt32(9, stringTableLength_);
+        output.writeInt32(9, stringTableLength_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeUInt32(10, stopsTableOffset_);
+        output.writeInt64(10, stopsTableOffset_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeUInt32(11, stopsTableLength_);
+        output.writeInt64(11, stopsTableLength_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeUInt32(12, incompleteRoutesOffset_);
+        output.writeInt64(12, incompleteRoutesOffset_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeUInt32(13, incompleteRoutesLength_);
+        output.writeInt64(13, incompleteRoutesLength_);
       }
     }
 
@@ -10960,27 +10960,27 @@ public final class OsmandIndex {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(8, stringTableOffset_);
+          .computeInt64Size(8, stringTableOffset_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(9, stringTableLength_);
+          .computeInt32Size(9, stringTableLength_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(10, stopsTableOffset_);
+          .computeInt64Size(10, stopsTableOffset_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(11, stopsTableLength_);
+          .computeInt64Size(11, stopsTableLength_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(12, incompleteRoutesOffset_);
+          .computeInt64Size(12, incompleteRoutesOffset_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(13, incompleteRoutesLength_);
+          .computeInt64Size(13, incompleteRoutesLength_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -11087,17 +11087,17 @@ public final class OsmandIndex {
         bitField0_ = (bitField0_ & ~0x00000020);
         bottom_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        stringTableOffset_ = 0;
+        stringTableOffset_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000080);
         stringTableLength_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        stopsTableOffset_ = 0;
+        stopsTableOffset_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000200);
-        stopsTableLength_ = 0;
+        stopsTableLength_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000400);
-        incompleteRoutesOffset_ = 0;
+        incompleteRoutesOffset_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000800);
-        incompleteRoutesLength_ = 0;
+        incompleteRoutesLength_ = 0L;
         bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
@@ -11527,55 +11527,55 @@ public final class OsmandIndex {
         return this;
       }
 
-      // optional uint32 stringTableOffset = 8;
-      private int stringTableOffset_ ;
+      // optional int64 stringTableOffset = 8;
+      private long stringTableOffset_ ;
       /**
-       * <code>optional uint32 stringTableOffset = 8;</code>
+       * <code>optional int64 stringTableOffset = 8;</code>
        */
       public boolean hasStringTableOffset() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       /**
-       * <code>optional uint32 stringTableOffset = 8;</code>
+       * <code>optional int64 stringTableOffset = 8;</code>
        */
-      public int getStringTableOffset() {
+      public long getStringTableOffset() {
         return stringTableOffset_;
       }
       /**
-       * <code>optional uint32 stringTableOffset = 8;</code>
+       * <code>optional int64 stringTableOffset = 8;</code>
        */
-      public Builder setStringTableOffset(int value) {
+      public Builder setStringTableOffset(long value) {
         bitField0_ |= 0x00000080;
         stringTableOffset_ = value;
         
         return this;
       }
       /**
-       * <code>optional uint32 stringTableOffset = 8;</code>
+       * <code>optional int64 stringTableOffset = 8;</code>
        */
       public Builder clearStringTableOffset() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        stringTableOffset_ = 0;
+        stringTableOffset_ = 0L;
         
         return this;
       }
 
-      // optional uint32 stringTableLength = 9;
+      // optional int32 stringTableLength = 9;
       private int stringTableLength_ ;
       /**
-       * <code>optional uint32 stringTableLength = 9;</code>
+       * <code>optional int32 stringTableLength = 9;</code>
        */
       public boolean hasStringTableLength() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional uint32 stringTableLength = 9;</code>
+       * <code>optional int32 stringTableLength = 9;</code>
        */
       public int getStringTableLength() {
         return stringTableLength_;
       }
       /**
-       * <code>optional uint32 stringTableLength = 9;</code>
+       * <code>optional int32 stringTableLength = 9;</code>
        */
       public Builder setStringTableLength(int value) {
         bitField0_ |= 0x00000100;
@@ -11584,7 +11584,7 @@ public final class OsmandIndex {
         return this;
       }
       /**
-       * <code>optional uint32 stringTableLength = 9;</code>
+       * <code>optional int32 stringTableLength = 9;</code>
        */
       public Builder clearStringTableLength() {
         bitField0_ = (bitField0_ & ~0x00000100);
@@ -11593,134 +11593,134 @@ public final class OsmandIndex {
         return this;
       }
 
-      // optional uint32 stopsTableOffset = 10;
-      private int stopsTableOffset_ ;
+      // optional int64 stopsTableOffset = 10;
+      private long stopsTableOffset_ ;
       /**
-       * <code>optional uint32 stopsTableOffset = 10;</code>
+       * <code>optional int64 stopsTableOffset = 10;</code>
        */
       public boolean hasStopsTableOffset() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
-       * <code>optional uint32 stopsTableOffset = 10;</code>
+       * <code>optional int64 stopsTableOffset = 10;</code>
        */
-      public int getStopsTableOffset() {
+      public long getStopsTableOffset() {
         return stopsTableOffset_;
       }
       /**
-       * <code>optional uint32 stopsTableOffset = 10;</code>
+       * <code>optional int64 stopsTableOffset = 10;</code>
        */
-      public Builder setStopsTableOffset(int value) {
+      public Builder setStopsTableOffset(long value) {
         bitField0_ |= 0x00000200;
         stopsTableOffset_ = value;
         
         return this;
       }
       /**
-       * <code>optional uint32 stopsTableOffset = 10;</code>
+       * <code>optional int64 stopsTableOffset = 10;</code>
        */
       public Builder clearStopsTableOffset() {
         bitField0_ = (bitField0_ & ~0x00000200);
-        stopsTableOffset_ = 0;
+        stopsTableOffset_ = 0L;
         
         return this;
       }
 
-      // optional uint32 stopsTableLength = 11;
-      private int stopsTableLength_ ;
+      // optional int64 stopsTableLength = 11;
+      private long stopsTableLength_ ;
       /**
-       * <code>optional uint32 stopsTableLength = 11;</code>
+       * <code>optional int64 stopsTableLength = 11;</code>
        */
       public boolean hasStopsTableLength() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
-       * <code>optional uint32 stopsTableLength = 11;</code>
+       * <code>optional int64 stopsTableLength = 11;</code>
        */
-      public int getStopsTableLength() {
+      public long getStopsTableLength() {
         return stopsTableLength_;
       }
       /**
-       * <code>optional uint32 stopsTableLength = 11;</code>
+       * <code>optional int64 stopsTableLength = 11;</code>
        */
-      public Builder setStopsTableLength(int value) {
+      public Builder setStopsTableLength(long value) {
         bitField0_ |= 0x00000400;
         stopsTableLength_ = value;
         
         return this;
       }
       /**
-       * <code>optional uint32 stopsTableLength = 11;</code>
+       * <code>optional int64 stopsTableLength = 11;</code>
        */
       public Builder clearStopsTableLength() {
         bitField0_ = (bitField0_ & ~0x00000400);
-        stopsTableLength_ = 0;
+        stopsTableLength_ = 0L;
         
         return this;
       }
 
-      // optional uint32 incompleteRoutesOffset = 12;
-      private int incompleteRoutesOffset_ ;
+      // optional int64 incompleteRoutesOffset = 12;
+      private long incompleteRoutesOffset_ ;
       /**
-       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       * <code>optional int64 incompleteRoutesOffset = 12;</code>
        */
       public boolean hasIncompleteRoutesOffset() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       * <code>optional int64 incompleteRoutesOffset = 12;</code>
        */
-      public int getIncompleteRoutesOffset() {
+      public long getIncompleteRoutesOffset() {
         return incompleteRoutesOffset_;
       }
       /**
-       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       * <code>optional int64 incompleteRoutesOffset = 12;</code>
        */
-      public Builder setIncompleteRoutesOffset(int value) {
+      public Builder setIncompleteRoutesOffset(long value) {
         bitField0_ |= 0x00000800;
         incompleteRoutesOffset_ = value;
         
         return this;
       }
       /**
-       * <code>optional uint32 incompleteRoutesOffset = 12;</code>
+       * <code>optional int64 incompleteRoutesOffset = 12;</code>
        */
       public Builder clearIncompleteRoutesOffset() {
         bitField0_ = (bitField0_ & ~0x00000800);
-        incompleteRoutesOffset_ = 0;
+        incompleteRoutesOffset_ = 0L;
         
         return this;
       }
 
-      // optional uint32 incompleteRoutesLength = 13;
-      private int incompleteRoutesLength_ ;
+      // optional int64 incompleteRoutesLength = 13;
+      private long incompleteRoutesLength_ ;
       /**
-       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       * <code>optional int64 incompleteRoutesLength = 13;</code>
        */
       public boolean hasIncompleteRoutesLength() {
         return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
-       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       * <code>optional int64 incompleteRoutesLength = 13;</code>
        */
-      public int getIncompleteRoutesLength() {
+      public long getIncompleteRoutesLength() {
         return incompleteRoutesLength_;
       }
       /**
-       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       * <code>optional int64 incompleteRoutesLength = 13;</code>
        */
-      public Builder setIncompleteRoutesLength(int value) {
+      public Builder setIncompleteRoutesLength(long value) {
         bitField0_ |= 0x00001000;
         incompleteRoutesLength_ = value;
         
         return this;
       }
       /**
-       * <code>optional uint32 incompleteRoutesLength = 13;</code>
+       * <code>optional int64 incompleteRoutesLength = 13;</code>
        */
       public Builder clearIncompleteRoutesLength() {
         bitField0_ = (bitField0_ & ~0x00001000);
-        incompleteRoutesLength_ = 0;
+        incompleteRoutesLength_ = 0L;
         
         return this;
       }

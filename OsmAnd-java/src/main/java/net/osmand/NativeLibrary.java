@@ -264,7 +264,10 @@ public class NativeLibrary {
 	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
-		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), sub.routeReg.getFilePointer(), sub, loadObjects);
+		if (sub.routeReg.getFilePointer() > Integer.MAX_VALUE) {
+			throw new IllegalStateException("C++ doesn't support files > 2 GB");
+		}
+		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), (int) sub.routeReg.getFilePointer(), sub, loadObjects);
 		if (lr != null && lr.nativeHandler != 0) {
 			lr.region = sub;
 		}
