@@ -185,6 +185,8 @@
 	<color name="map_window_outer_color">#99000000</color>
 	<color name="map_window_stroke_dark">#3F3F3F</color>
 
+	<color name="map_alert_stroke_light">#1a000000</color>
+
 	<color name="map_progress_bar_bg_light">#f0f0f0</color>
 	<color name="map_progress_bar_bg_dark">#1b1d1f</color>
 
