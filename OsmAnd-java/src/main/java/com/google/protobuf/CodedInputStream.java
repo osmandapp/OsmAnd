@@ -562,9 +562,11 @@ public final class CodedInputStream {
   private int recursionLimit = DEFAULT_RECURSION_LIMIT;
 
   /** See setSizeLimit() */
+  // ! osmand change !
   private long sizeLimit = DEFAULT_SIZE_LIMIT;
 
   private static final int DEFAULT_RECURSION_LIMIT = 64;
+  // ! osmand change !
   public static final long DEFAULT_SIZE_LIMIT = Integer.MAX_VALUE;// 64 << 20;  // 64MB
   public static final long MAX_DEFAULT_SIZE_LIMIT = 4l * Integer.MAX_VALUE; // 8 GB
   private static final int BUFFER_SIZE = 5 * 1024;
@@ -668,6 +670,7 @@ public final class CodedInputStream {
    * @return the old limit.
    */
   public long pushLimitLong(long byteLimit) throws InvalidProtocolBufferException {
+    // ! osmand change !	  
     if (byteLimit < 0) {
       throw InvalidProtocolBufferException.negativeSize();
     }
@@ -704,6 +707,7 @@ public final class CodedInputStream {
    * @param oldLimit The old limit, as returned by {@code pushLimit}.
    */
   public void popLimit(final long oldLimit) {
+    // ! osmand change !
     currentLimit = oldLimit;
     recomputeBufferSizeAfterLimit();
   }
@@ -713,6 +717,7 @@ public final class CodedInputStream {
    * If no limit is set, returns -1.
    */
   public long getBytesUntilLimit() {
+    // ! osmand change !
     if (currentLimit == sizeLimit) {
       return -1;
     }
@@ -947,20 +952,16 @@ public final class CodedInputStream {
       // We have all the bytes we need already.
       bufferPos += size;
     } else {
+      // ! osmand change !
       // Skipping more bytes than are in the buffer.  First skip what we have.
       long pos = bufferSize - bufferPos;
       bufferPos = bufferSize;
 
-      // osmand change
       if(raf != null) {
          bufferPos = 0;
          bufferSize = 0;
          raf.seek(raf.getFilePointer() + (size - pos));
-//         int n = raf.skipBytes(size - pos);
          totalBytesRetired = raf.getFilePointer();
-//      	 if (n <= 0) {
-//             throw InvalidProtocolBufferException.truncatedMessage();
-//         }
       } else {
         // Keep refilling the buffer until we get to the point we wanted to skip
         // to.  This has the side effect of ensuring the limits are updated
