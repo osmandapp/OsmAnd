@@ -2344,11 +2344,11 @@
     <string name="poi_healthcare_speciality_traditional_chinese_medicine">Medicină tradițională chineză</string>
     <string name="poi_healthcare_speciality_homeopathy">Homeopatie</string>
     <string name="poi_healthcare_speciality_acupuncture">Acupunctură</string>
-    <string name="poi_healthcare_speciality_adult_psychiatry">Psihiatrie pentru adulți</string>
+    <string name="poi_healthcare_speciality_adult_psychiatry">Psihiatrie adulți</string>
     <string name="poi_healthcare_speciality_podiatry">Podologie</string>
     <string name="poi_healthcare_speciality_sports">Medicină sportivă</string>
-    <string name="poi_healthcare_speciality_manual_therapy">Terapia manuală</string>
-    <string name="poi_healthcare_speciality_speech_therapy">Terapia prin vorbire</string>
+    <string name="poi_healthcare_speciality_manual_therapy">Terapie manuală</string>
+    <string name="poi_healthcare_speciality_speech_therapy">Terapie de limbaj</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologie clinică</string>
     <string name="poi_healthcare_speciality_optometry">Optometrie</string>
     <string name="poi_healthcare_speciality_addiction">Medicina dependenței</string>
