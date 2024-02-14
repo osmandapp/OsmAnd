@@ -2065,7 +2065,7 @@
     <string name="osm_live_thanks">Takk fyrir stuðning þinn við OsmAnd!
 \nTil að virkja alla nýja eiginleika þarftu að endurræsa OsmAnd.</string>
     <string name="delay_to_start_navigation">Hefja beygju-fyrir-beygju leiðsögn eftir…</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-viðbót fyrir hæðarlínur án nettengingar</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-viðbót fyrir landslagseiginleika án nettengingar, eins og t.d. hæðarlínur, hæðaskyggingar, brekkur</string>
     <string name="index_item_nation_addresses">heimilisföng á landsvísu</string>
     <string name="gpx_option_calculate_first_last_segment">Reikna OsmAnd-leið fyrir fyrsta og síðasta leiðarbút</string>
     <string name="app_modes_choose">Forritssnið</string>
@@ -2114,7 +2114,7 @@
     <string name="hillshade_menu_download_descr">Sæktu hæðaskyggingakortið af þessu svæði til að sjá lóðréttar hæðaskyggingar.</string>
     <string name="hillshade_purchase_header">Settu upp landslagsviðbótina til að sjá lóðrétta hæðafleti.</string>
     <string name="srtm_menu_download_descr">Sæktu hæðarlínukortið af þessu svæði.</string>
-    <string name="srtm_purchase_header">Til að sjá hæðarlínur á kortinu, þarftu að kaupa og setja inn hæðarlínuviðbótina.</string>
+    <string name="srtm_purchase_header">Kauptu og settu upp \'Topography\'-landslagsviðbótina til að sjá skyggða lóðrétta hæðafleti.</string>
     <string name="show_from_zoom_level">Birting hefst við aðdráttarstigið</string>
     <string name="subscribe_email_desc">Gerstu áskrifandi að póstlistanum um forritaafslætti og fáðu ókeypis 3 niðurhöl á kortum til viðbótar!</string>
     <string name="depth_contour_descr">Kort með dýptarlínum og sjómerkjum.</string>
@@ -2458,7 +2458,7 @@
 \n
 \n• Val á milli heildargagna svæðis eða einungis vegakerfis (dæmi: öll gögn fyrir Japan eru 700 MB en 200 MB fyrir vegakerfið eingöngu)</string>
     <string name="will_open_tomorrow_at">Opnar á morgun klukkan</string>
-    <string name="animate_my_location_desc">Virkja hreyfingu við hliðrun staðsetningar minnar á meðan leiðsögn stendur.</string>
+    <string name="animate_my_location_desc">Mýkt hliðrun við hreyfingu. Veldur örlítilli töf.</string>
     <string name="storage_permission_restart_is_required">Núna hefur forritið heimild til að skrifa í ytri gagnageymslur, en það þarf að endurræsa forritið handvirkt til að geta nýtt sér það.</string>
     <string name="show_transparency_seekbar">Birta gegnsæis-sleða</string>
     <string name="shared_string_gpx_file">GPX-skrá</string>
@@ -2497,13 +2497,13 @@
 \nLeiðsagnarþjónustu hefur verið skipt tímabundið yfir á hina netlægu CloudMade.</string>
     <string name="dashboard_or_drawer_description">Nú er nýtt val um að stýra forritinu með sveigjanlegu stjórnborði eða með fastri valmynd. Þú getur alltaf breytt þessu vali í stillingum stjórnborðsins.</string>
     <string name="make_as_start_point">Gera að þetta að upphafspunkti</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er landakorta- og leiðsagnarforrit með aðgangi að gögnum frjálsa, hágæða, OpenStreetMap (OSM) heimskortins. 
-\n 
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er landakorta- og leiðsagnarforrit með aðgangi að gögnum frjálsa, hágæða, OpenStreetMap (OSM) heimskortins.
+\n
 \n Nýttu þér leiðsögn með talskilaboðum eða myndrænum ábendingum, skoðaðu merkisstaði (e: POI - points of interest), útbúðu og sýslaðu með GPX-ferla, nýttu þér hæðarlínur og hæðarupplýsingar (með hjálp viðbótar), veldu á milli aksturs-, hjólreiða- og göngustillinga, breyttu OSM beint í forritinu, og margt fleira.</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er landakorta- og leiðsagnarforrit með aðgangi að gögnum frjálsa, hágæða, OpenStreetMap (OSM) heimskortins. 
-\n Nýttu þér leiðsögn með talskilaboðum eða myndrænum ábendingum, skoðaðu merkisstaði (e: POI - points of interest), útbúðu og sýslaðu með GPX-ferla, nýttu þér hæðarlínur og hæðarupplýsingar (með hjálp viðbótar), veldu á milli aksturs-, hjólreiða- og göngustillinga, breyttu OSM beint í forritinu, og margt fleira. 
-\n 
-\n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur. 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er landakorta- og leiðsagnarforrit með aðgangi að gögnum frjálsa, hágæða, OpenStreetMap (OSM) heimskortins.
+\n Nýttu þér leiðsögn með talskilaboðum eða myndrænum ábendingum, skoðaðu merkisstaði (e: POI - points of interest), útbúðu og sýslaðu með GPX-ferla, nýttu þér hæðarlínur og hæðarupplýsingar (með hjálp viðbótar), veldu á milli aksturs-, hjólreiða- og göngustillinga, breyttu OSM beint í forritinu, og margt fleira.
+\n
+\n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur.
 \n
 \n Nokkrir af helstu eiginleikunum:</string>
     <string name="osmand_plus_extended_description_part5">Öryggiseiginleikar
@@ -2527,27 +2527,27 @@
 \n • Birtu sérstakar kortaflísar af netinu, gervihnattasýn (frá Bing), mismunandi þekjur á borð við GPX-ferla fyrir leiðsögn/ferðamennsku og viðbótarlög með sérsníðanlegu gegnsæi 
 \n • Hægt er að birta staðaheiti á ensku, tungumáli heimamanna eða með hljóðframburði
 \n</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\n OsmAnd leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn. 
-\n 
-\n Nokkrir kjarnaeiginleikar: 
-\n - Fullkomin virkni án nettengingar (hægt að sækja og geyma vektorkort eða kortaflísar í tækinu) 
-\n - Þjöppuð ónettengd vektorkort tiltæk fyrir allan heiminn 
-\n - Hægt er að sækja lands- eða svæðiskort beint úr forritinu 
-\n - Hægt að leggja nokkrar yfirlagsþekjur yfir kort, eins og GPX- eða leiðsagnarferla, merkisstaði, eftirlæti, hæðarlínur, biðstöðvar í almenningssamgöngum, viðbótarkort með sérsniðnu gegnsæi 
-\n - Ónettengd leit að heimilisföngum og stöðum (POI) 
-\n - Ónettengd vegvísun á meðalvegalengdum 
-\n - Stillingar fyrir akandi, hjólandi og gangandi með vali um: 
-\n - sjálfvirka skiptingu milli dag-/næturhams 
-\n - hraðaháða birtingu korta 
-\n - að stefna korta miðist við áttavita eða hreyfingarstefnu 
-\n - leiðbeiningar fyrir akreinaskipti, hraðatakmarkanir; ýmist upptökur eða talgervilsraddir. 
-\n 
-\n Takmarkanir á þessari ókeypis útgáfu OsmAnd: 
-\n - Takmarkaður fjöldi niðurhalaðra korta 
-\n - Enginn aðgangur að ónettengdum Wikipedia-merkisstöðum. 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\n
+\n OsmAnd leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn.
+\n
+\n Nokkrir kjarnaeiginleikar:
+\n - Fullkomin virkni án nettengingar (hægt að sækja og geyma vektorkort eða kortaflísar í tækinu)
+\n - Þjöppuð ónettengd vektorkort tiltæk fyrir allan heiminn
+\n - Hægt er að sækja lands- eða svæðiskort beint úr forritinu
+\n - Hægt að leggja nokkrar yfirlagsþekjur yfir kort, eins og GPX- eða leiðsagnarferla, merkisstaði, eftirlæti, hæðarlínur, biðstöðvar í almenningssamgöngum, viðbótarkort með sérsniðnu gegnsæi
+\n - Ónettengd leit að heimilisföngum og stöðum (POI)
+\n - Ónettengd vegvísun á meðalvegalengdum
+\n - Stillingar fyrir akandi, hjólandi og gangandi með vali um:
+\n - sjálfvirka skiptingu milli dag-/næturhams
+\n - hraðaháða birtingu korta
+\n - að stefna korta miðist við áttavita eða hreyfingarstefnu
+\n - leiðbeiningar fyrir akreinaskipti, hraðatakmarkanir; ýmist upptökur eða talgervilsraddir.
+\n
+\n Takmarkanir á þessari ókeypis útgáfu OsmAnd:
+\n - Takmarkaður fjöldi niðurhalaðra korta
+\n - Enginn aðgangur að ónettengdum Wikipedia-merkisstöðum.
+\n
 \n OsmAnd er í virkri þróun, verkefnið okkar og frekari framfarir byggjast á fjárframlögum til að fjármagna þróun og prófanir á nýjum eiginleikum. Vinsamlega íhugaðu að kaupa OsmAnd+, fjármagna sérstakar nýjar aðgerðir eða gefa almennt framlag á https://osmand.net.</string>
     <string name="osmand_extended_description_part2">GPS-leiðsögn
 \n • Þú getur valið leiðsögn með nettengingu (hraðvirkt) eða án nettengingar (engin aukagjöld þegar þú ert erlendis) 
@@ -2583,25 +2583,25 @@
 \n • GPS-leiðsögn í gönguham getur sett saman ferðina þína með því að nýta sér göngustíga
 \n • Þú getur sent inn og fylgt GPX-ferlum eða skráð og deilt þínum eigin
 \n</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
-\n OsmAnd+ leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn. 
-\n 
-\n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur. 
-\n 
-\n Nokkrir kjarnaeiginleikar: 
-\n - Fullkomin virkni án nettengingar (hægt að sækja og geyma vektorkort eða kortaflísar í tækinu) 
-\n - Þjöppuð ónettengd vektorkort tiltæk fyrir allan heiminn 
-\n - Hægt er að sækja ótakmörkuð lands- eða svæðiskort beint úr forritinu 
-\n - aðgangur að ónettengdum Wikipedia-merkisstöðum (sækja) 
-\n - Hægt að leggja nokkrar yfirlagsþekjur yfir kort, eins og GPX- eða leiðsagnarferla, merkisstaði, eftirlæti, hæðarlínur, biðstöðvar í almenningssamgöngum, viðbótarkort með sérsniðnu gegnsæi 
-\n 
-\n - Ónettengd leit að heimilisföngum og stöðum (POI) 
-\n - Ónettengd vegvísun á meðalvegalengdum 
-\n - Stillingar fyrir akandi, hjólandi og gangandi með: 
-\n - val um sjálfvirka skiptingu milli dag-/næturhams 
-\n - val um hraðaháða birtingu korta 
-\n - val um að stefna korta miðist við áttavita eða hreyfingarstefnu 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
+\n
+\n OsmAnd+ leiðsöguforritið er opinn og frjáls hugbúnaður með aðgang að fjölbreyttum alþjóðlegum gögnum frá OpenStreetMap(OSM). Hægt er að vista öll kortagögn (vektor eða flísar) á minniskort síma fyrir notkun án nettengingar. OsmAnd býður einnig upp á leiðargerð, annað hvort ónettengda eða með nettengingu, með möguleika á raddleiðsögn.
+\n
+\n OsmAnd+ er sú útgáfa forritsins sem þú borgar fyrir. Með því að kaupa hana, ertu að styðja við verkefnið, fjármagna þróun nýrra eiginleika, og færð í kaupbæti allar nýjustu uppfærslur.
+\n
+\n Nokkrir kjarnaeiginleikar:
+\n - Fullkomin virkni án nettengingar (hægt að sækja og geyma vektorkort eða kortaflísar í tækinu)
+\n - Þjöppuð ónettengd vektorkort tiltæk fyrir allan heiminn
+\n - Hægt er að sækja ótakmörkuð lands- eða svæðiskort beint úr forritinu
+\n - aðgangur að ónettengdum Wikipedia-merkisstöðum (sækja)
+\n - Hægt að leggja nokkrar yfirlagsþekjur yfir kort, eins og GPX- eða leiðsagnarferla, merkisstaði, eftirlæti, hæðarlínur, biðstöðvar í almenningssamgöngum, viðbótarkort með sérsniðnu gegnsæi
+\n
+\n - Ónettengd leit að heimilisföngum og stöðum (POI)
+\n - Ónettengd vegvísun á meðalvegalengdum
+\n - Stillingar fyrir akandi, hjólandi og gangandi með:
+\n - val um sjálfvirka skiptingu milli dag-/næturhams
+\n - val um hraðaháða birtingu korta
+\n - val um að stefna korta miðist við áttavita eða hreyfingarstefnu
 \n - val um leiðbeiningar fyrir akreinaskipti, hraðatakmarkanir, upptökur eða TTS-talgervilsraddir
 \n</string>
     <string name="osmand_plus_extended_description_part2">Leiðsögn
@@ -2718,8 +2718,8 @@
     <string name="off_road_render_descr">Hentar til notkunar við akstur utan vega. Hentar til notkunar með grænar gervihnattamyndir sem undirlagskort. Helstu eiginleikar: minni línusverleiki aðalvega, aukin línusverleiki gangstíga, slóða, reiðhjólaleiða og annarra leiða. Byggt á \' Topo\' stíl.</string>
     <string name="nautical_render_descr">Leiðsagnarstíll fyrir sjó og vötn. Helstu eiginleikar: baujur, siglingamerki, siglingaleiðir og merkingar, hafnir, þjónustur við sæfarendur, dýptarlínur.</string>
     <string name="ski_map_render_descr">Stíll fyrir skíði og vetraríþróttir. Helstu eiginleikar: myndgerir skíðaleiðir, skíðalyftur og aðra skíðaeiginleika á þægilegan hátt. Minni sjónræn truflun af völdum annarra kortahluta.</string>
-    <string name="light_rs_render_descr">Einfaldur stíll fyrir leiðsögn við akstur. Fer vel með augun í næturham. Helstu eiginleikar: hæðarlínur, skýrar appelsínugular götur, litlar sjónrænar truflanir af völdum annarra kortafyrirbæra.</string>
-    <string name="default_render_descr">Stíll til almennrar notkunar. Einfölduð skýr framsetning fyrir þétta byggð. Helstu eiginleikar: hæðarlínur, leiðir, gæði yfirborðs, aðgangstakmarkanir, vegmerkingar, stígar skilgreindir skv. SAC/CAI-kvarða, eigindi fyrir vatnasport.</string>
+    <string name="light_rs_render_descr">Einfaldur stíll fyrir leiðsögn við akstur. Fer vel með augun í næturham, hæðarlínur, skýrar appelsínugular götur, o.fl.</string>
+    <string name="default_render_descr">Stíll til almennrar notkunar. Einfölduð skýr framsetning fyrir þétta byggð. Birtir hæðarlínur, leiðir, gæði yfirborðs, aðgangstakmarkanir, vegmerkingar, stígar skilgreindir skv. SAC/CAI-kvarða, eigindi fyrir vatnasport o.fl.</string>
     <string name="topo_render_descr">Stíll með góðum birtuskilum hugsaður fyrir gönguferðir, fjallaferðir og hjólreiðar úti í náttúrunni. Læsilegt í erfiðum birtuskilyrðum utanhúss. Helstu eiginleikar: skýr munur á götum og náttúrufyrirbærum, hæðarlínur með ítarlegum stillingum, fleiri smáatriði á hverju aðdráttarstigi en í sjálfgefna stílnum. Stillingar á yfirborðseiginleikum gerir kleift að aðgreina leiðir eftir gæðum yfirborðs. Enginn næturhamur.</string>
     <string name="touring_view_render_descr">Stíll með nákvæmum smáatriðum til ferðalaga. Er með öllum þeim stillingum sem fylgja sjálfgefna stílnum, en að auki: eins mörg smáatriði og mögulegt er, sérstaklega hvað varðar vegi, stíga og aðrar leiðir til umferðar. Skýr aðgreining allra gerða leiða, minnir á gamlar landakortabækur. Litastef með góðum birtuskilum til notkunar utanhúss, með dags- og næturham.</string>
     <string name="shared_string_bookmark">Bókamerki</string>
@@ -3450,7 +3450,7 @@
     <string name="shared_string_transparency">Gegnsæi</string>
     <string name="shared_string_zoom_levels">Aðdráttarstig</string>
     <string name="shared_string_legend">Skýring</string>
-    <string name="terrain_empty_state_text">Birtu hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
+    <string name="terrain_empty_state_text">Birtir hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
     <string name="shared_string_hillshade">Hæðaskygging</string>
     <string name="download_slope_maps">Brekka</string>
     <string name="quick_action_terrain_descr">Hnappur til að birta eða fela yfirborðslag á kortinu.</string>
@@ -4137,7 +4137,7 @@
     <string name="send_logcat_log">Senda logcat-atvikaskrá</string>
     <string name="backup_delete_all_data_descr">Öllum gögnum á OsmAnd Cloud tölvuskýi verður eytt. Útgáfur á tækinu haldast óbreyttar.</string>
     <string name="purchases_feature_desc_nautical">Fáðu aðgang að upplýsingum um dýpt sjávar</string>
-    <string name="purchases_feature_desc_terrain">Hæðarlínur og hæðaskyggingakort sem styðjast við dökka skugga til að sýna brekkur, tinda og láglendi.</string>
+    <string name="purchases_feature_desc_terrain">Hæðarlínur, hæðaskyggingakort og litakvarðaðir hallavísar til að sýna brekkur, tinda og láglendi.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Fáðu mánaðarlegar uppfærslur á ónettengdum kortum.</string>
     <string name="unlimited_map_downloads">Ótakmörkuð niðurhöl korta</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage ónettengt</string>
@@ -4797,7 +4797,7 @@
     <string name="map_widget_ant_bicycle_speed">Hraði hjólandi</string>
     <string name="map_widget_ant_bicycle_speed_desc">Sýnir ferðahraðann</string>
     <string name="map_markers_desc">Viðmótshlutinn sýnir vegalengd eða áætlaðan komutíma (ETA) fyrir fyrstu tvö kortamerkin í kortamerkjalistanum.</string>
-    <string name="favorite_confirm_delete_group">Ertu viss um að þú viljir eyða ”%1$s” hópnum og öllum inniföldum punktum (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Eyða ”%1$s” hópnum og öllum inniföldum punktum (%2$d)?</string>
     <string name="ant_missing_dependency_descr">Nauðsynlega þjónustan \"%1$s\" fannst ekki.
 \nÞú þarft að setja upp ANT+ Plugins þjónustuna.
 \nViltu ræsa Play Store hugbúnaðarsafnið til að ná í þetta\?</string>
@@ -5135,7 +5135,7 @@
     <string name="number_of_tracks">%1$s ferlar</string>
     <string name="search_track_by_name">Leita að ferli eftir heiti</string>
     <string name="no_search_results">Engar niðurstöður</string>
-    <string name="nav_profile_confirm_delete">Ertu viss um að þú viljir eyða \"%1$s\"?</string>
+    <string name="nav_profile_confirm_delete">Eyða \"%1$s\"?</string>
     <string name="device_disconnected">%1$s aftengt</string>
     <string name="device_connected">%1$s tengt</string>
     <string name="external_device_blood_pressure">Blóðþrýstingur</string>
@@ -5269,7 +5269,7 @@
     <string name="help_article_widgets_name">Viðmótshlutar korts</string>
     <string name="help_article_personal_name">Gögnin mín</string>
     <string name="help_article_purchases_android_name">Innkaup í Android</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Ertu viss um að þú viljir eyða aðgangnum af OsmAnd-tölvuskýinu.
+    <string name="osmand_cloud_delete_account_confirmation_descr">Eyða aðgangnum af OsmAnd-tölvuskýinu.
 \n
 \nÞessi aðgerð er ekki afturkræf.</string>
     <string name="free_account">Ókeypis aðgangur</string>
@@ -5301,7 +5301,7 @@
     <string name="help_article_troubleshooting_crash_logs_name">Hrunskrár</string>
     <string name="shared_string_temperature">Hitastig</string>
     <string name="help_article_personal_storage_name">Geymsla</string>
-    <string name="delete_account_warning">Ertu viss um að þú viljir eyða %1$s aðgangnum?</string>
+    <string name="delete_account_warning">Eyða %1$s aðgangnum?</string>
     <string name="help_article_map_legend_ski_map_name">Skíðakortastíll</string>
     <string name="help_article_navigation_routing_osmand_routing_name">Um leiðagerð OsmAnd</string>
     <string name="shared_string_setup">Uppsetning</string>
@@ -5327,4 +5327,139 @@
     <string name="battery_optimization">Bestun rafhlöðu</string>
     <string name="map_widget_sun_position">Sólstaða</string>
     <string name="shared_string_trash">Rusl</string>
+    <string name="filter_tracks_count">Sía: %d</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Raddleiðsögn / Tilkynningar</string>
+    <string name="change_button">Breyta hnappi</string>
+    <string name="download_to_device">Sækja á tæki</string>
+    <string name="all_folders">Allar möppur</string>
+    <string name="discard_filter_changes_prompt">Frumstilla allar síur?</string>
+    <string name="sort_distance_descending">Lengsta vegalengd fyrst</string>
+    <string name="sorted_sufolders_toast">Undirmöppum í “%1$s” er raðað eftir: “%2$s”</string>
+    <string name="sort_subfolders">Raða undirmöppum</string>
+    <string name="max_sensor_temperature">Hitastig, hámark</string>
+    <string name="add_new_button">Bæta við nýjum hnappi</string>
+    <string name="loading_tracks">Endurles ferla</string>
+    <string name="searching_matching_tracks">Leita að öllum samsvarandi ferlum</string>
+    <string name="smart_folder_name_present">Slík snjallmappa er þegar til staðar</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">Leiðagerð fyrir báta</string>
+    <string name="empty_tracks_description">Þú getur flutt inn ferilskrár, útbúið eða skráð niður ferla með því að nota OsmAnd.</string>
+    <string name="shared_string_all_tracks">Allir ferlar</string>
+    <string name="shared_string_road_maps">Vegakort</string>
+    <string name="topography_maps">Landslagskort</string>
+    <string name="tripltek_promo">Tripltek Promo kynningaráskrift í %1$s mánuði</string>
+    <string name="key_event_action_toggle_drower">Birta eða fela hliðarvalmynd</string>
+    <string name="key_event_action_emit_navigation_hint">Gefa ábendingu við leiðsögn</string>
+    <string name="key_event_action_move_right">Færa til hægri</string>
+    <string name="trash_is_empty">Ruslið er tómt</string>
+    <string name="configure_filter">Stilla síu</string>
+    <string name="no_config_smart_folder_title">Ekki stillt</string>
+    <string name="smart_folder_saved">Snjallmappa vistuð</string>
+    <string name="weather_online">Veðrið á netinu</string>
+    <string name="maps_and_resources">Kort &amp; tilföng</string>
+    <string name="shared_string_created">Búið til þann</string>
+    <string name="sort_size_descending">Stærsta fyrst</string>
+    <string name="delete_map_description">Eyða %1$s landakortinu?</string>
+    <string name="delete_map">Eyða landakorti</string>
+    <string name="rendering_styles">Myndgerðarstílar</string>
+    <string name="wikipedia_and_travel_maps">Wikipedia- og ferðakort</string>
+    <string name="standard_maps">Stöðluð kort</string>
+    <string name="filter_screen_title">Sía</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">Leiðagerð fyrir fótgangandi</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">Leiðagerð fyrir almenningssamgöngur</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">Leiðagerð í beinum línum (flugvélar)</string>
+    <string name="help_article_navigation_routing_train_routing_name">Leiðagerð fyrir lestir</string>
+    <string name="sort_date_descending">Elsta dagsetning fyrst</string>
+    <string name="change_default_tracks_appearance_confirmation_description">Breyta útliti %1$s ferla?</string>
+    <string name="terrain_maps">Yfirborðskort</string>
+    <string name="lang_zh_hans">Einfölduð kínverska</string>
+    <string name="lang_zh_hant">Hefðbundin kínverska</string>
+    <string name="sort_duration_ascending">Stysta tímalengd fyrst</string>
+    <string name="sort_date_ascending">Nýjasta dagsetning fyrst</string>
+    <string name="local_version_do_not_exist">Engin útgáfa til staðar á tækinu.</string>
+    <string name="help_article_navigation_routing_car_based_routing_name">Leiðagerð fyrir bíla (trukka, mótorhjól)</string>
+    <string name="help_article_navigation_routing_horse_routing_name">Leiðagerð fyrir hestaferðir</string>
+    <string name="help_article_navigation_routing_direct_to_point_routing_name">Leiðagerð beint-á-punkt (bátar)</string>
+    <string name="shared_string_empty_trash">Tæma ruslið</string>
+    <string name="trash_alert_card_desc">Atriðum í ruslinu verður eytt út eftir %1$s daga.</string>
+    <string name="empty_smart_folder_description">Samsvarandi ferlar munu birtast hér</string>
+    <string name="target_elevation">Hæð áfangastaðar</string>
+    <string name="add_row">Bæta við röð</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d ferill)</item>
+        <item quantity="other">%1$d (%2$d ferlar)</item>
+    </plurals>
+    <string name="shared_string_show_less">Sýna minna</string>
+    <string name="folder">Mappa</string>
+    <string name="shared_string_loading">Hleð inn</string>
+    <string name="empty_smart_folder_title">Enginn samsvarandi ferill</string>
+    <string name="discard_filter_changes">Henda breytingum síu</string>
+    <string name="delete_smart_folder_dialog_message">Þetta mun eyða snjallmöppunni \"%1$s\".</string>
+    <string name="date_of_creation">Búið til þann</string>
+    <string name="help_article_navigation_routing_moped_routing_name">Leiðagerð fyrir skellinöðrur</string>
+    <string name="sort_distance_ascending">Stysta vegalengd fyrst</string>
+    <string name="rendering_attr_showToll_name">Sýna gjaldtökutakmarkanir</string>
+    <string name="rendering_attr_showToll_description">Sýna gjaldtökutakmarkanir á vegum</string>
+    <string name="shared_string_reassign">Endurúthluta</string>
+    <string name="shared_string_eta">Áætlaður komutími</string>
+    <string name="key_event_action_open_navigation_view">Opna leiðsagnarsýn</string>
+    <string name="key_event_action_change_map_orientation">Breyta stefnu kortsins</string>
+    <string name="filter_by_name">Sía eftir nafni</string>
+    <string name="map_widget_sun_position_desc">Birtir tímann fram að sólarupprás eða sólsetri.</string>
+    <string name="key_event_action_open_search_view">Opna leitarsýn</string>
+    <string name="key_event_action_move_to_my_location">Færa í Staðsetning mín</string>
+    <string name="delete_trash_item_confirmation_desc">Eyða \"%1$s\" endanlega?</string>
+    <string name="add_smart_folder">Bæta við snjallmöppu</string>
+    <string name="save_as_smart_folder">Vista sem snjallmöppu</string>
+    <string name="map_is_up_to_date">%1$s kortið er uppfært.</string>
+    <string name="precise_distance_numbers">Nákvæmar vegalengdatölur</string>
+    <string name="zoom_non_animated">Aðdráttur ekki með hreyfingu</string>
+    <string name="see_all_plans">Skoða allar áskriftarleiðir</string>
+    <string name="discard_changes_prompt">Henda breytingum?</string>
+    <string name="key_event_action_move_left">Færa til vinstri</string>
+    <string name="app_mode_paragliding">Svifvængjaflug</string>
+    <string name="help_article_map_vector_maps_name">Vektorkort (Stílar landakorta)</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">Kortaskjár á meðan leiðsögn stendur</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">Leiðagerð fyrir fjallahjólreiðar</string>
+    <string name="add_button">Bæta við hnappi</string>
+    <string name="custom_map_button_name_present">Slíkur hnappur er þegar til staðar</string>
+    <string name="shared_string_is_deleted">%1$s var eytt.</string>
+    <string name="delete_all_items">Eyða öllum atriðum</string>
+    <string name="with_waypoints">Með ferilpunktum</string>
+    <string name="shared_string_reset_all">Frumstilla allt</string>
+    <string name="help_article_map_track_context_menu_name">Samhengisvalmynd ferla</string>
+    <string name="sort_duration_descending">Lengsta tímalengd fyrst</string>
+    <string name="special_routing_cpp">Sérstök tegund leiðagerðar</string>
+    <string name="sort_size_ascending">Minnsta fyrst</string>
+    <string name="dont_ask_anymore">Ekki spyrja aftur</string>
+    <string name="battery_optimization_settings">Stillingar vegna bestunar á rafhlöðunotkun</string>
+    <string name="shared_string_license">Notkunarleyfi</string>
+    <string name="shared_string_link">Tengill</string>
+    <string name="shared_string_next_event">Næsti atburður</string>
+    <string name="custom_buttons">Sérsniðnir hnappar</string>
+    <string name="default_buttons">Sjálfgefnir hnappar</string>
+    <string name="shared_string_keywords">Stikkorð</string>
+    <string name="max_sensor_heartrate">Hjartsláttur, hámark</string>
+    <string name="avg_sensor_heartrate">Hjartsláttur, meðaltal</string>
+    <string name="max_sensor_cadence">Taktur hjólandi, hámark</string>
+    <string name="avg_sensor_cadence">Taktur hjólandi, meðaltal</string>
+    <string name="max_sensor_bycicle_power">Afköst hjólandi, hámark</string>
+    <string name="avg_sensor_bycicle_power">Afköst hjólandi, meðaltal</string>
+    <string name="avg_sensor_temperature">Hitastig, meðaltal</string>
+    <string name="max_sensor_speed">Hraði skynjara, hámark</string>
+    <string name="avg_sensor_speed">Hraði skynjara, meðaltal</string>
+    <string name="zoom_animated">Aðdráttur með hreyfingu</string>
+    <string name="deletion_error">Villa við eyðingu</string>
+    <string name="key_event_category_map_interactions">Gagnvirkni korts</string>
+    <string name="key_event_action_move_down">Færa niður</string>
+    <string name="key_event_action_move_up">Færa upp</string>
+    <string name="key_event_action_previous_app_profile">Fyrra forritssnið</string>
+    <string name="key_event_action_next_app_profile">Næsta forritssnið</string>
+    <string name="not_specified">Ekki skilgreint</string>
+    <string name="shared_string_delete_item">Eyða atriði</string>
+    <string name="shared_string_delete_immediately">Eyða strax</string>
+    <string name="restore_from_trash">Endurheimta úr rusli</string>
+    <string name="empty_name">Autt heiti</string>
+    <string name="shared_string_show_icon">Birta táknmynd</string>
+    <string name="max_altitude">Hámarkshæð</string>
+    <string name="help_article_navigation_routing_ski_routing_name">Leiðagerð fyrir skíði</string>
 </resources>
