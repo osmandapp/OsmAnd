@@ -5166,7 +5166,7 @@
     <string name="send_logcat_log_descr">Ítarleg atvikaskrá</string>
     <string name="average_glide_time_interval_desc">Skilgreindu tímabilin sem notuð verða til að reikna meðalrennsli.</string>
     <string name="help_article_search_search_coordinates_name">Leita að hnitum</string>
-    <string name="get_osmand_cloud">Fáðu OsmAnd Cloud-tölvuský</string>
+    <string name="get_osmand_cloud">Fáðu þér OsmAnd Cloud-tölvuský</string>
     <string name="verify_account_deletion_descr">Við þurfum að sannreyna aðganginn þinn áður en við eyðum honum.
 \n
 \nSettu inn tölvupóstfangið sem þú notaðir við skráningu. Eins-skiptis lykilorð til að nota í næsta skrefi verður sent á það.</string>
@@ -5274,7 +5274,7 @@
 \nÞessi aðgerð er ekki afturkræf.</string>
     <string name="free_account">Ókeypis aðgangur</string>
     <string name="report_an_issues">Tilkynntu vandamál</string>
-    <string name="telegram_chats">Telegram-spjöll</string>
+    <string name="telegram_chats">Telegram-spjallrásir</string>
     <string name="routing_attr_hazmat_category_usa_9_name">Ýmislegt</string>
     <string name="help_article_plan_route_web_name">Leiðagerð á vefnum</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
@@ -5462,4 +5462,76 @@
     <string name="shared_string_show_icon">Birta táknmynd</string>
     <string name="max_altitude">Hámarkshæð</string>
     <string name="help_article_navigation_routing_ski_routing_name">Leiðagerð fyrir skíði</string>
+    <string name="any_connected_with_device">Allt sem er tengt: %s</string>
+    <string name="rendering_attr_lightDetail_description">Sjálfgefið: heiti sjómerkis (skammstöfun ljósmerkis.hópur.tímalengd), veldu viðbótarupplýsingar á geirum 1 til 3 eða skammstafanir á geirum 1,2,3,4,5</string>
+    <string name="simulation_position_description">Veldu ferilskrá sem verður notuð sem grunnur fyrir hreyfingu staðsetningar.</string>
+    <string name="calculate_offline_altitude_descr">Reiknaðu hæð án nettengingar, út frá gögnum stafræns hæðarlíkans í þrívídd. Mismunur miðað við hæð mældri af tækinu getur nýst sem leiðrétting á hæð.</string>
+    <string name="osmand_cloud_deletion_account_warning">Notandaaðgangurinn þinn og allar nánari upplýsingar á honum verður %1$s</string>
+    <string name="key_assignments_already_cleared_message">Allar úthlutanir lykla hafa þegar verið hreinsaðar</string>
+    <string name="enable_to_use_external_input_device">Virkja notkun á utanáliggjandi inntakstæki með OsmAnd</string>
+    <string name="key_bindings">Lyklasamsetningar</string>
+    <string name="trash_is_empty_banner_desc">Skrár sem fjarlægðar eru úr OsmAnd Cloud-tölvuskýi verða tiltækar hér í %1$s daga á eftir.</string>
+    <string name="widget_available_ram_desc">Birtir tiltækt minni úthlutað fyrir OsmAnd.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Aukatæki verða skráð út úr OsmAnd Cloud-tölvuskýi og missa aðgang að greiddum eiginleikum.</string>
+    <string name="shared_string_extensions">Viðaukar</string>
+    <string name="clear_key_assignment_desc">Lyklasamsetning fyrir völdu aðgerðina verður hreinsuð og stillt á \"Ekkert\".</string>
+    <string name="clear_key_assignment">Hreinsa úthlutun lykils</string>
+    <string name="key_assignments">Úthlutanir lykla</string>
+    <string name="remove_widget_first">Fjarlægðu fyrst viðmótshlutann</string>
+    <string name="key_event_action_take_media_note">Taka margmiðlunar-minnispunkt</string>
+    <string name="key_event_action_activity_back_pressed">Ýtt á aðgerð til baka</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Opna WunderLINQ-gagnareiti</string>
+    <string name="app_mode_baby_transport">Flutningur barna</string>
+    <string name="telegram_chats_descr">Taktu þátt í einni af Telegram-spjallrásunum okkar.</string>
+    <string name="slope_legend_description">Til að sýna brekkur eru notaðir mismunandi litir við framsetningu yfirborðsins. Þú getur lesið meira um halla á %1$s.</string>
+    <string name="terrain_category_description">Hæðarlínur, hæðaskyggingakort og litakvarðaðir hallavísar til að sýna brekkur, tinda og láglendi.</string>
+    <string name="write_data_from_sensor_to_track">Skrifa gögn frá utanáliggjandi skynjurum í GPX-skrá á meðan skráning ferðar fer fram.</string>
+    <string name="rssi_widget_desc">Sýnir styrk RSSI á utanáliggjandi tækinu þínu.</string>
+    <string name="rendering_value_sector1_name">Geiri 1</string>
+    <string name="rendering_value_sector2_name">Geiri 2</string>
+    <string name="rendering_value_sector5_name">Geiri 5</string>
+    <string name="no_visible_tracks_description">Veldu ferla til birtingar á kortinu.</string>
+    <string name="delete_track_folder_dialog_message">Þetta mun eyða möppunni \"%1$s\" að meðtöldum öllum ferlum (%2$s).</string>
+    <string name="ant_plus_searching_text_description">Haltu tækinu nálægt skynjaranum. Þú þarft að virkja skynjarann til að OsmAnd geti fundið hann.</string>
+    <string name="rendering_value_sectors_name">Geirar</string>
+    <string name="reset_key_assignments">Frumstilla úthlutanir lykla</string>
+    <string name="reset_key_assignments_desc">Allar úthlutanir lykla fyrir valda tegund verða fjarlægðar.</string>
+    <string name="remove_type_q">Fjarlægja \"%1$s\" tegundina?</string>
+    <string name="no_config_smart_folder_description">Snjallmöppur gera kleift að flokka ferla eftir virkjuðum síum</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Það eru engir tengdir skynjarar af þessari gerð</string>
+    <string name="rendering_attr_lightDetail_name">Nánar um kenniljós</string>
+    <string name="use_v1_auto_zoom">Óáberandi sjálfvirkur aðdráttur (eldri útgáfa)</string>
+    <string name="file_already_exists_description">\"%1$s\". Skrá með sama heiti er þegar til. Útskipting mun skrifa yfir allar breytingar gerðar í fyrirliggjandi útgáfu.</string>
+    <string name="previous_row_has_complex_widget">Fyrri röð er með flókinn viðmótshluta</string>
+    <string name="app_mode_hang_gliding">Svifdrekaflug</string>
+    <string name="free_favorites_backup_description">Skráðu þig á OsmAnd Cloud-tölvuskýið til að fá ókeypis öryggisafrit eftirlæta og stillinga.</string>
+    <string name="any_connected">Allt sem er tengt</string>
+    <string name="complex_widget_alert">%1$s viðmótshluta er einvörðungu hægt að setja á sína eigin röð.</string>
+    <string name="key_is_already_assigned_error">\"%1$s\" lyklinum er þegar úthlutað á aðgerðina: \"%2$s\"</string>
+    <string name="press_button_to_link_with_action">Ýttu á hnappinn á tækinu þínu til að úthluta honum á aðgerðina: %1$s</string>
+    <string name="free_ride">Ókeypis ferð</string>
+    <string name="add_new_type">Bæta við nýrri tegund</string>
+    <string name="button_already_assigned_to_this_action">Hnappi er þegar úthlutað á þessa aðgerð.</string>
+    <string name="show_toast_about_key_pressed">Sýna ábendingu um lykilinn sem ýtt er á</string>
+    <string name="change_key_binding">Skipta um lyklasamsetningu</string>
+    <string name="external_input_device_title">Utanáliggjandi inntakstæki</string>
+    <string name="tripltek_promo_description">Ókeypis aðgangur að eiginleikum á borð við ótakmörkuð niðurhöl korta, þrívíddarlandslag, o.fl. fyrir %1$s á mánuði</string>
+    <string name="cloud_item_restored">%1$s er endurheimt í OsmAnd Cloud-tölvuskýið.</string>
+    <string name="cloud_trash_clear_confirmation">Eyða öllum atriðum í ruslinu varanlega?</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">Nota rastað sqlitedb fyrir hæðaskyggingar / brekkur</string>
+    <string name="may_be_used_if_there_is_shortcut">Gæti verið notað ef það er styttri leið</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Þetta mun ekki segja upp OsmAnd Pro áskriftinni þinni.</string>
+    <string name="map_3d_mode_description">Strjúktu kortið með tveimur fingrum og hreyfðu þá upp/niður til að aðlaga halla kortsins.</string>
+    <string name="rendering_value_sector3_name">Geiri 3</string>
+    <string name="rendering_value_sector4_name">Geiri 4</string>
+    <string name="rendering_value_small_name">Smátt</string>
+    <string name="relief_3d_description">Eigðu og skoðaðu kvarðað líkan af hverfinu þínu eða heilli heimsálfu.</string>
+    <string name="free_maps_updates">Ókeypis uppfærslur (neyðartilfelli)</string>
+    <string name="display_position_automatic_descr">Fer eftir stefnu korts: neðst fyrir stefnu hreyfingar, á miðju fyrir allt annað.</string>
+    <string name="battery_optimization_banner_content">Bestun rafhlöðu í Android getur valdið ónákvæmni og bilum í skráðum ferlum.</string>
+    <string name="battery_optimization_desc">Bestun rafhlöðu í Android getur valdið ónákvæmni og bilum í skráðum ferlum.
+\n
+\nEf þú sérð slíkt gerast, gætirðu reynt að stilla notkun rafhlöðunnar á \'Ótakmarkað\'.</string>
+    <string name="osmand_cloud_deletion_all_data_warning">Öllum gögnum af OsmAnd-tölvuskýinu verður %1$s. Ekki verður átt við gögn á tækinu.</string>
+    <string name="recently_visible">Nýlega sýnilegt %1$s</string>
 </resources>
