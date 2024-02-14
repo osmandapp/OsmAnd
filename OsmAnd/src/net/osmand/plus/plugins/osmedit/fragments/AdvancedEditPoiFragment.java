@@ -236,16 +236,13 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			View convertView = LayoutInflater.from(linearLayout.getContext())
 					.inflate(R.layout.list_item_poi_tag, null, false);
 
-			LOG.info("Corwin addTagView");
 			OsmandTextFieldBoxes tagFB = convertView.findViewById(R.id.tag_fb);
 			tagFB.setClearButton(deleteDrawable);
-//			tagFB.hideClearButton();
 			tagFB.post(tagFB::hideClearButton);
 
 			OsmandTextFieldBoxes valueFB = convertView.findViewById(R.id.value_fb);
 			valueFB.setClearButton(deleteDrawable);
 			valueFB.post(valueFB::hideClearButton);
-//			valueFB.hideClearButton();
 
 			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
 			AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);

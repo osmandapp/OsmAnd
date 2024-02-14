@@ -79,12 +79,10 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
 
 	public void hideClearButton() {
-		LOG.info("Corwin hideClearButton " + this);
 		AndroidUiHelper.updateVisibility(clearButton, false);
 	}
 
 	public void showClearButton() {
-		LOG.info("Corwin showClearButton " + this);
 		AndroidUiHelper.updateVisibility(clearButton, true);
 	}
 }
