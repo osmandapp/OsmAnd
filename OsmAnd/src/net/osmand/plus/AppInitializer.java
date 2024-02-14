@@ -690,7 +690,12 @@ public class AppInitializer implements IProgress {
 				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
+				if (storage == null) {
+					LOG.info("Current renderer could not be used!");
+					osmandSettings.SAFE_MODE.set(true);
+					warnings.add(app.getString(R.string.native_library_not_supported));
+				}
+				NativeOsmandLibrary lib = storage != null ? NativeOsmandLibrary.getLibrary(storage, app) : null;
 				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (initialized) {
