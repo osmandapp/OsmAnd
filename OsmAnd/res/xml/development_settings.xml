@@ -62,6 +62,13 @@
 		android:title="@string/special_routing_type" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="hh_routing_cpp"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="Java"
+		android:summaryOn="C++"
+		android:title="@string/special_routing_cpp" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_v1_auto_zoom"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"

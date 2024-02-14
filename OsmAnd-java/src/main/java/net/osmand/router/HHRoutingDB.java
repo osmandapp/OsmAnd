@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -79,7 +80,7 @@ public class HHRoutingDB {
 		}
 		ResultSet rs = st.executeQuery("SELECT profile, id, params from profiles");
 		while (rs.next()) {
-			routingProfile = rs.getString(1);
+			routingProfile = rs.getString(1); // only 1 profile supported for now
 			routingProfiles.put(rs.getInt(2), rs.getString(3));
 		}
 		st.close();
@@ -166,6 +167,10 @@ public class HHRoutingDB {
 			}
 			String[] arr = Algorithms.deserializeStringArray(tagValues);
 			if (arr != null && arr.length > 0) {
+				if (arr.length % 2 == 1) {
+					throw new IllegalArgumentException(
+							String.format("Illegal tag/values %s - %s ", pnt, Arrays.toString(arr)));
+				}
 				pnt.tagValues = new ArrayList<>();
 				for (int i = 0; i < arr.length; i += 2) {
 					pnt.tagValues.add(new TagValuePair(arr[i], arr[i + 1], -1));
@@ -203,6 +208,20 @@ public class HHRoutingDB {
 			byte[] outs = rs.getBytes(3);
 			res[1] = outs;
 		}
+		rs.close();
+	}
+	
+	public synchronized void loadSegmentPointInternalSync(int id, int profile, byte[][] res) throws SQLException {
+		loadSegmentStart.setInt(1, id);
+		loadSegmentStart.setInt(2, profile);
+		ResultSet rs = loadSegmentStart.executeQuery();
+		if (rs.next()) {
+			byte[] ins = rs.getBytes(2);
+			res[0] = ins;
+			byte[] outs = rs.getBytes(3);
+			res[1] = outs;
+		}
+		rs.close();
 	}
 	
 	

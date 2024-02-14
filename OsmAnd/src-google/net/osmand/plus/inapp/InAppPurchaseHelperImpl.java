@@ -12,10 +12,11 @@ import androidx.annotation.Nullable;
 import com.android.billingclient.api.AccountIdentifiers;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ProductDetails;
+import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
-import com.android.billingclient.api.SkuDetails;
-import com.android.billingclient.api.SkuDetailsResponseListener;
 
+import net.osmand.Period;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
@@ -43,7 +44,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	// The helper object
 	private BillingManager billingManager;
-	private List<SkuDetails> skuDetailsList;
+	private List<ProductDetails> productDetailsList;
 
 	/* base64EncodedPublicKey should be YOUR APPLICATION'S PUBLIC KEY
 	 * (that you got from the Google Play developer console). This is not your
@@ -124,54 +125,49 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						skuInApps.add(purchase.getSku());
 					}
 					for (Purchase p : purchases) {
-						skuInApps.addAll(p.getSkus());
+						skuInApps.addAll(p.getProducts());
 					}
-					billingManager.querySkuDetailsAsync(BillingClient.SkuType.INAPP, skuInApps, new SkuDetailsResponseListener() {
-						@Override
-						public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsListInApps) {
-							// Is it a failure?
-							if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
-								logError("Failed to query inapps sku details: " + billingResult.getResponseCode());
-								notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, billingResult.getDebugMessage());
-								stop(true);
-								return;
-							}
-
-							List<String> skuSubscriptions = new ArrayList<>();
-							for (InAppSubscription subscription : getInAppPurchases().getAllInAppSubscriptions()) {
-								skuSubscriptions.add(subscription.getSku());
-							}
-							for (Purchase p : purchases) {
-								skuSubscriptions.addAll(p.getSkus());
-							}
-							skuSubscriptions.addAll(subscriptionStateMap.keySet());
-
-							BillingManager billingManager = getBillingManager();
-							// Have we been disposed of in the meantime? If so, quit.
-							if (billingManager == null) {
-								stop(true);
-								return;
-							}
-
-							billingManager.querySkuDetailsAsync(BillingClient.SkuType.SUBS, skuSubscriptions, new SkuDetailsResponseListener() {
-								@Override
-								public void onSkuDetailsResponse(@NonNull BillingResult billingResult, final List<SkuDetails> skuDetailsListSubscriptions) {
-									// Is it a failure?
-									if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
-										logError("Failed to query subscriptipons sku details: " + billingResult.getResponseCode());
-										notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, billingResult.getDebugMessage());
-										stop(true);
-										return;
-									}
-
-									List<SkuDetails> skuDetailsList = new ArrayList<>(skuDetailsListInApps);
-									skuDetailsList.addAll(skuDetailsListSubscriptions);
-									InAppPurchaseHelperImpl.this.skuDetailsList = skuDetailsList;
-
-									getSkuDetailsResponseListener(runnable.userRequested()).onSkuDetailsResponse(billingResult, skuDetailsList);
-								}
-							});
+					billingManager.queryProductDetailsAsync(BillingClient.ProductType.INAPP, skuInApps, (billingResult, productDetailsListInApps) -> {
+						// Is it a failure?
+						if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+							logError("Failed to query inapps product details: " + billingResult.getResponseCode());
+							notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, billingResult.getDebugMessage());
+							stop(true);
+							return;
 						}
+
+						List<String> skuSubscriptions = new ArrayList<>();
+						for (InAppSubscription subscription : getInAppPurchases().getAllInAppSubscriptions()) {
+							skuSubscriptions.add(subscription.getSku());
+						}
+						for (Purchase p : purchases) {
+							skuSubscriptions.addAll(p.getProducts());
+						}
+						skuSubscriptions.addAll(subscriptionStateMap.keySet());
+
+						BillingManager manager = getBillingManager();
+						// Have we been disposed of in the meantime? If so, quit.
+						if (manager == null) {
+							stop(true);
+							return;
+						}
+						manager.queryProductDetailsAsync(BillingClient.ProductType.SUBS, skuSubscriptions, new ProductDetailsResponseListener() {
+							@Override
+							public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsListSubs) {
+								// Is it a failure?
+								if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+									logError("Failed to query subscriptipons sku details: " + billingResult.getResponseCode());
+									notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, billingResult.getDebugMessage());
+									stop(true);
+									return;
+								}
+
+								List<ProductDetails> productDetailsList = new ArrayList<>(productDetailsListInApps);
+								productDetailsList.addAll(productDetailsListSubs);
+								InAppPurchaseHelperImpl.this.productDetailsList = productDetailsList;
+								getProductDetailsResponseListener(runnable.userRequested()).onProductDetailsResponse(billingResult, productDetailsList);
+							}
+						});
 					});
 				}
 				for (Purchase purchase : purchases) {
@@ -199,14 +195,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			@Override
 			public void run(InAppPurchaseHelper helper) {
 				try {
-					SkuDetails skuDetails = getSkuDetails(getFullVersion().getSku());
-					if (skuDetails == null) {
+					ProductDetails productDetails = getProductDetails(getFullVersion().getSku());
+					if (productDetails == null) {
 						throw new IllegalArgumentException("Cannot find sku details");
 					}
 
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						billingManager.initiatePurchaseFlow(activity, skuDetails);
+						billingManager.initiatePurchaseFlow(activity, productDetails, 0);
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
@@ -227,13 +223,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			@Override
 			public void run(InAppPurchaseHelper helper) {
 				try {
-					SkuDetails skuDetails = getSkuDetails(getDepthContours().getSku());
-					if (skuDetails == null) {
+					ProductDetails productDetails = getProductDetails(getDepthContours().getSku());
+					if (productDetails == null) {
 						throw new IllegalArgumentException("Cannot find sku details");
 					}
 					BillingManager billingManager = getBillingManager();
 					if (billingManager != null) {
-						billingManager.initiatePurchaseFlow(activity, skuDetails);
+						billingManager.initiatePurchaseFlow(activity, productDetails, 0);
 					} else {
 						throw new IllegalStateException("BillingManager disposed");
 					}
@@ -270,11 +266,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Nullable
-	private SkuDetails getSkuDetails(@NonNull String sku) {
-		List<SkuDetails> skuDetailsList = this.skuDetailsList;
-		if (skuDetailsList != null) {
-			for (SkuDetails details : skuDetailsList) {
-				if (details.getSku().equals(sku)) {
+	private ProductDetails getProductDetails(@NonNull String productId) {
+		List<ProductDetails> productDetailsList = this.productDetailsList;
+		if (productDetailsList != null) {
+			for (ProductDetails details : productDetailsList) {
+				if (details.getProductId().equals(productId)) {
 					return details;
 				}
 			}
@@ -282,8 +278,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		return null;
 	}
 
-	private boolean hasDetails(@NonNull String sku) {
-		return getSkuDetails(sku) != null;
+	private boolean hasDetails(@NonNull String productId) {
+		return getProductDetails(productId) != null;
 	}
 
 	@Nullable
@@ -303,18 +299,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
-	private SkuDetailsResponseListener getSkuDetailsResponseListener(boolean userRequested) {
-		return new SkuDetailsResponseListener() {
+	private ProductDetailsResponseListener getProductDetailsResponseListener(boolean userRequested) {
+		return new ProductDetailsResponseListener() {
 
 			@NonNull
-			private List<String> getAllOwnedSubscriptionSkus() {
+			private List<String> getAllOwnedSubscriptionProducts() {
 				List<String> result = new ArrayList<>();
 				BillingManager billingManager = getBillingManager();
 				if (billingManager != null) {
 					for (Purchase p : billingManager.getPurchases()) {
-						List<String> skus = p.getSkus();
-						if (!Algorithms.isEmpty(skus) && getInAppPurchases().getInAppSubscriptionBySku(skus.get(0)) != null) {
-							result.add(skus.get(0));
+						List<String> products = p.getProducts();
+						if (!Algorithms.isEmpty(products) && getInAppPurchases().getInAppSubscriptionBySku(products.get(0)) != null) {
+							result.add(products.get(0));
 						}
 					}
 				}
@@ -331,9 +327,9 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 
 			@Override
-			public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsList) {
+			public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
 
-				logDebug("Query sku details finished.");
+				logDebug("Query product details finished.");
 
 				// Have we been disposed of in the meantime? If so, quit.
 				if (getBillingManager() == null) {
@@ -349,7 +345,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					return;
 				}
 
-				logDebug("Query sku details was successful.");
+				logDebug("Query product details was successful.");
 
 				/*
 				 * Check for items we own. Notice that for each purchase, we check
@@ -357,22 +353,22 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				 * verifyDeveloperPayload().
 				 */
 
-				List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
+				List<String> allOwnedSubscriptionProducts = getAllOwnedSubscriptionProducts();
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					if (hasDetails(s.getSku())) {
 						Purchase purchase = getPurchase(s.getSku());
-						SkuDetails liveUpdatesDetails = getSkuDetails(s.getSku());
+						ProductDetails liveUpdatesDetails = getProductDetails(s.getSku());
 						if (liveUpdatesDetails != null) {
 							fetchInAppPurchase(s, liveUpdatesDetails, purchase);
 						}
-						allOwnedSubscriptionSkus.remove(s.getSku());
+						allOwnedSubscriptionProducts.remove(s.getSku());
 					}
 				}
-				for (String sku : allOwnedSubscriptionSkus) {
-					Purchase purchase = getPurchase(sku);
-					SkuDetails liveUpdatesDetails = getSkuDetails(sku);
+				for (String products : allOwnedSubscriptionProducts) {
+					Purchase purchase = getPurchase(products);
+					ProductDetails liveUpdatesDetails = getProductDetails(products);
 					if (liveUpdatesDetails != null) {
-						InAppSubscription s = getSubscriptions().upgradeSubscription(sku);
+						InAppSubscription s = getSubscriptions().upgradeSubscription(products);
 						if (s == null) {
 							s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
 						}
@@ -383,7 +379,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				InAppPurchase fullVersion = getFullVersion();
 				if (hasDetails(fullVersion.getSku())) {
 					Purchase purchase = getPurchase(fullVersion.getSku());
-					SkuDetails fullPriceDetails = getSkuDetails(fullVersion.getSku());
+					ProductDetails fullPriceDetails = getProductDetails(fullVersion.getSku());
 					if (fullPriceDetails != null) {
 						fetchInAppPurchase(fullVersion, fullPriceDetails, purchase);
 					}
@@ -392,7 +388,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				InAppPurchase depthContours = getDepthContours();
 				if (hasDetails(depthContours.getSku())) {
 					Purchase purchase = getPurchase(depthContours.getSku());
-					SkuDetails depthContoursDetails = getSkuDetails(depthContours.getSku());
+					ProductDetails depthContoursDetails = getProductDetails(depthContours.getSku());
 					if (depthContoursDetails != null) {
 						fetchInAppPurchase(depthContours, depthContoursDetails, purchase);
 					}
@@ -401,7 +397,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				InAppPurchase contourLines = getContourLines();
 				if (hasDetails(contourLines.getSku())) {
 					Purchase purchase = getPurchase(contourLines.getSku());
-					SkuDetails contourLinesDetails = getSkuDetails(contourLines.getSku());
+					ProductDetails contourLinesDetails = getProductDetails(contourLines.getSku());
 					if (contourLinesDetails != null) {
 						fetchInAppPurchase(contourLines, contourLinesDetails, purchase);
 					}
@@ -485,7 +481,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (Purchase purchase : tokensToSend) {
 					purchaseInfoList.add(getPurchaseInfo(purchase));
 				}
-				onSkuDetailsResponseDone(purchaseInfoList, userRequested);
+				onProductDetailsResponseDone(purchaseInfoList, userRequested);
 			}
 
 			private void onSubscriptionExpired() {
@@ -532,7 +528,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				purchase.getPurchaseTime(), purchase.getPurchaseState(), purchase.isAcknowledged(), purchase.isAutoRenewing());
 	}
 
-	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull SkuDetails skuDetails, @Nullable Purchase purchase) {
+	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull ProductDetails productDetails, @Nullable Purchase purchase) {
 		if (purchase != null) {
 			inAppPurchase.setPurchaseState(PurchaseState.PURCHASED);
 			inAppPurchase.setPurchaseInfo(ctx, getPurchaseInfo(purchase));
@@ -540,51 +536,102 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			inAppPurchase.setPurchaseState(PurchaseState.NOT_PURCHASED);
 			inAppPurchase.restorePurchaseInfo(ctx);
 		}
-		inAppPurchase.setPrice(skuDetails.getPrice());
-		inAppPurchase.setOriginalPrice(skuDetails.getOriginalPrice());
-		inAppPurchase.setPriceCurrencyCode(skuDetails.getPriceCurrencyCode());
-		if (skuDetails.getPriceAmountMicros() > 0) {
-			inAppPurchase.setPriceValue(skuDetails.getPriceAmountMicros() / 1000000d);
-		}
-		if (skuDetails.getOriginalPriceAmountMicros() > 0) {
-			inAppPurchase.setOriginalPriceValue(skuDetails.getOriginalPriceAmountMicros() / 1000000d);
-		}
-		String subscriptionPeriod = skuDetails.getSubscriptionPeriod();
-		if (!Algorithms.isEmpty(subscriptionPeriod)) {
-			if (inAppPurchase instanceof InAppSubscription) {
-				try {
-					((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
-				} catch (ParseException e) {
-					LOG.error(e);
+		if (BillingClient.ProductType.SUBS.equals(productDetails.getProductType())) {
+			List<ProductDetails.SubscriptionOfferDetails> basePlans = getBasePlans(productDetails);
+			if (!Algorithms.isEmpty(basePlans)) {
+				ProductDetails.SubscriptionOfferDetails basePlan = basePlans.get(0);
+				List<ProductDetails.SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
+				ProductDetails.SubscriptionOfferDetails offer = basePlanOffers == null ? basePlan : basePlanOffers.get(0);
+				ProductDetails.PricingPhase pricingPhrase = offer.getPricingPhases().getPricingPhaseList().get(0);
+				if (pricingPhrase != null) {
+					inAppPurchase.setPrice(pricingPhrase.getFormattedPrice());
+					inAppPurchase.setOriginalPrice(basePlan.getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice());
+					inAppPurchase.setPriceCurrencyCode(pricingPhrase.getPriceCurrencyCode());
+					if (pricingPhrase.getPriceAmountMicros() > 0) {
+						inAppPurchase.setPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
+						inAppPurchase.setOriginalPriceValue(pricingPhrase.getPriceAmountMicros() / 1000000d);
+					}
+					String subscriptionPeriod = pricingPhrase.getBillingPeriod();
+					if (!Algorithms.isEmpty(subscriptionPeriod)) {
+						if (inAppPurchase instanceof InAppSubscription) {
+							try {
+								((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
+							} catch (ParseException e) {
+								LOG.error(e);
+							}
+						}
+					}
+					if (inAppPurchase instanceof InAppSubscription) {
+						InAppSubscription s = (InAppSubscription) inAppPurchase;
+						s.restoreState(ctx);
+						s.restoreExpireTime(ctx);
+						SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
+						if (stateHolder != null) {
+							s.setState(ctx, stateHolder.state);
+							s.setExpireTime(ctx, stateHolder.expireTime);
+						}
+						if (s.getState().isGone() && s.hasStateChanged()) {
+							ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
+							ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
+						}
+						if (basePlanOffers != null) {
+							ProductDetails.PricingPhase introPricingPhase = basePlanOffers.get(0).getPricingPhases().getPricingPhaseList().get(0);
+							if (introPricingPhase != null) {
+								String introductoryPrice = introPricingPhase.getFormattedPrice();
+								String introductoryPricePeriod = introPricingPhase.getBillingPeriod();
+								int introductoryPriceCycles = introPricingPhase.getBillingCycleCount();
+								long introductoryPriceAmountMicros = introPricingPhase.getPriceAmountMicros();
+								if (!Algorithms.isEmpty(introductoryPrice)) {
+									try {
+										s.setIntroductoryInfo(new InAppPurchases.InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
+												introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
+									} catch (ParseException e) {
+										LOG.error(e);
+									}
+								}
+							}
+						}
+					}
 				}
 			}
-		}
-		if (inAppPurchase instanceof InAppSubscription) {
-			InAppSubscription s = (InAppSubscription) inAppPurchase;
-			s.restoreState(ctx);
-			s.restoreExpireTime(ctx);
-			SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
-			if (stateHolder != null) {
-				s.setState(ctx, stateHolder.state);
-				s.setExpireTime(ctx, stateHolder.expireTime);
-			}
-			if (s.getState().isGone() && s.hasStateChanged()) {
-				ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
-				ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
-			}
-			String introductoryPrice = skuDetails.getIntroductoryPrice();
-			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
-			int introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
-			long introductoryPriceAmountMicros = skuDetails.getIntroductoryPriceAmountMicros();
-			if (!Algorithms.isEmpty(introductoryPrice)) {
-				try {
-					s.setIntroductoryInfo(new InAppPurchases.InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
-							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
-				} catch (ParseException e) {
-					LOG.error(e);
-				}
+		} else {
+			ProductDetails.OneTimePurchaseOfferDetails purchaseOfferDetails = productDetails.getOneTimePurchaseOfferDetails();
+			if (purchaseOfferDetails != null) {
+				inAppPurchase.setPrice(purchaseOfferDetails.getFormattedPrice());
+				inAppPurchase.setOriginalPrice(purchaseOfferDetails.getFormattedPrice());
+				inAppPurchase.setPriceCurrencyCode(purchaseOfferDetails.getPriceCurrencyCode());
 			}
 		}
+	}
+
+	@Nullable
+	private List<ProductDetails.SubscriptionOfferDetails> getBasePlans(@NonNull ProductDetails productDetails) {
+		List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
+		if (Algorithms.isEmpty(offerDetails)) {
+			return null;
+		}
+		ArrayList<ProductDetails.SubscriptionOfferDetails> basePlans = new ArrayList<>();
+		for (ProductDetails.SubscriptionOfferDetails offer : offerDetails) {
+			if (offer.getOfferId() == null) {
+				basePlans.add(offer);
+			}
+		}
+		return basePlans;
+	}
+
+	@Nullable
+	private List<ProductDetails.SubscriptionOfferDetails> getBasePlanOffers(@NonNull ProductDetails productDetails, @NonNull String basePlanId) {
+		List<ProductDetails.SubscriptionOfferDetails> offerDetails = productDetails.getSubscriptionOfferDetails();
+		if (Algorithms.isEmpty(offerDetails)) {
+			return null;
+		}
+		ArrayList<ProductDetails.SubscriptionOfferDetails> offers = new ArrayList<>();
+		for (ProductDetails.SubscriptionOfferDetails offer : offerDetails) {
+			if (basePlanId.equals(offer.getBasePlanId()) && offer.getOfferId() != null) {
+				offers.add(offer);
+			}
+		}
+		return offers;
 	}
 
 	@Override
@@ -594,12 +641,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			public void run(InAppPurchaseHelper helper) {
 				try {
 					Activity a = activity.get();
-					SkuDetails skuDetails = getSkuDetails(sku);
-					if (AndroidUtils.isActivityNotDestroyed(a) && skuDetails != null) {
+					ProductDetails productDetails = getProductDetails(sku);
+					if (AndroidUtils.isActivityNotDestroyed(a) && productDetails != null) {
 						BillingManager billingManager = getBillingManager();
 						if (billingManager != null) {
 							billingManager.setObfuscatedAccountId(userInfo);
-							billingManager.initiatePurchaseFlow(a, skuDetails);
+							billingManager.initiatePurchaseFlow(a, productDetails, 0);
 						} else {
 							throw new IllegalStateException("BillingManager disposed");
 						}

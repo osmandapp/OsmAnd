@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="coord_input_add_point">పాయింట్ జోడించండి</string>
     <string name="shared_string_bookmark">ఇష్టాంశం</string>
@@ -71,4 +71,17 @@
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">రూటింగ్</string>
     <string name="shared_string_include_data">అదనపు డేటాని చేర్చు</string>
+    <string name="map_widget_sun_position">సూర్య స్థానం</string>
+    <string name="precise_distance_numbers">ఖచ్చితమైన దూర సంఖ్యలు</string>
+    <string name="map_widget_sun_position_desc">సూర్యోదయం లేదా సూర్యాస్తమయం వరకు సమయాన్ని చూపుతుంది.</string>
+    <string name="shared_string_road_maps">రోడ్ మ్యాప్‌లు</string>
+    <string name="shared_string_next_event">తదుపరి ఈవెంట్</string>
+    <string name="any_connected">ఏదైనా కనెక్ట్ చేయబడింది</string>
+    <string name="shared_string_license">లైసెన్స్</string>
+    <string name="shared_string_link">లింక్</string>
+    <string name="shared_string_copyright">కాపీరైట్</string>
+    <string name="shared_string_author">రచయిత</string>
+    <string name="shared_string_all_tracks">అన్ని ట్రాక్‌లు</string>
+    <string name="complex_widget_alert">విడ్జెట్ దాని స్వంత వరుసలో మాత్రమే ఉంచబడుతుంది.</string>
+    <string name="previous_row_has_complex_widget">మునుపటి అడ్డు వరుసలో క్లిష్టమైన విడ్జెట్ ఉంది</string>
 </resources>

@@ -613,7 +613,7 @@
 \n
 \n Descargue los mosaicos de los mapas directamente, o cópielos como archivos de base de datos SQLite a la carpeta de datos de OsmAnd utilizando una de las muchas herramientas de preparación de mapas de terceros.</string>
     <string name="osmand_background_plugin_description">Muestra los ajustes para activar en modo reposo el seguimiento y la navegación, activando periódicamente el dispositivo GPS (con la pantalla apagada).</string>
-    <string name="osmand_accessibility_description">Hace que las funciones de accesibilidad del dispositivo estén disponibles directamente en OsmAnd. Esto facilita, por ejemplo, el ajuste de la velocidad del habla para las voces de texto a voz, la configuración de la navegación con el D-pad, el uso de un trackball para el control del zoom, o la retroalimentación de texto a voz, por ejemplo para anunciar automáticamente su posición.</string>
+    <string name="osmand_accessibility_description">Hace que las funciones de accesibilidad del dispositivo estén directamente disponibles en OsmAnd. Esto facilita, por ejemplo, el ajuste de la velocidad de voz para las voces de texto a voz, la configuración de la navegación con el D-pad, el uso de un trackball para controlar el zoom o la retroalimentación de texto a voz, por ejemplo para anunciar automáticamente tu posición.</string>
     <string name="osmand_development_plugin_description">Proporciona funcionalidad para probar y depurar OsmAnd: simular rutas de navegación, monitorizar el renderizado de la pantalla, comprobar el rendimiento, etc. Este plugin no es necesario para el uso normal de la app.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="prefs_plugins_descr">Los complementos activan ajustes avanzados y funcionalidades adicionales.</string>
@@ -2252,10 +2252,10 @@
 \n • Antártida: * 
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
-    <string name="quick_action_auto_zoom">Alternar zoom automático del mapa</string>
-    <string name="quick_action_auto_zoom_desc">Un botón que alterna el zoom automático de acuerdo a la velocidad.</string>
-    <string name="quick_action_auto_zoom_on">Activa zoom automático</string>
-    <string name="quick_action_auto_zoom_off">Desactivar zoom automático</string>
+    <string name="quick_action_auto_zoom">Mapa con zoom automático</string>
+    <string name="quick_action_auto_zoom_desc">Botón para activar o desactivar el zoom automático controlado por velocidad.</string>
+    <string name="quick_action_auto_zoom_on">Activar el zoom automático</string>
+    <string name="quick_action_auto_zoom_off">Desactivar el zoom automático</string>
     <string name="quick_action_add_destination">Definir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
@@ -4078,7 +4078,7 @@
 \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
 \n</string>
-    <string name="duration_moment_ago">hace instantes</string>
+    <string name="duration_moment_ago">hace un momento</string>
     <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
 \nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
@@ -4500,7 +4500,7 @@
     <string name="location_source_descr">Si se instala OsmAnd desde Google Play, de forma predefinida se usa «%1$s» para definir la ubicación.
 \n
 \nSi obtienes información inexacta de la ubicación o usas un dispositivo sin «%2$s», intenta cambiar a «%3$s»</string>
-    <string name="location_source">Proveedor de ubicación</string>
+    <string name="location_source">Fuente de la ubicación</string>
     <string name="shared_string_shape">Forma</string>
     <string name="default_appearance_desc">El color, el icono y la forma predeterminados se aplicarán a los puntos favoritos añadidos al grupo.</string>
     <string name="default_appearance">Aspecto predefinido</string>
@@ -5325,7 +5325,7 @@
     <string name="shared_string_not_checked">Sin revisar</string>
     <string name="rendering_value_sacScale_description">Club Alpino Suizo</string>
     <string name="rendering_value_caiScale_description">Club Alpino Italiano</string>
-    <string name="rendering_attr_alpineHiking_name">Clasificación de la facilidad</string>
+    <string name="rendering_attr_alpineHiking_name">Clasificación de la dificultad</string>
     <string name="rendering_value_caiScale_name">CAI</string>
     <string name="rendering_value_sacScale_name">SAC</string>
     <string name="rendering_attr_alpineHiking_description">Tipos de la clasificación de la dificultad de las rutas.</string>
@@ -5409,7 +5409,7 @@
     <string name="help_article_widgets_nav_widgets_name">Complementos de navegación</string>
     <string name="shared_string_setup">Configurar</string>
     <string name="user_guide">Manual del usuario</string>
-    <string name="telegram_chats_descr">Únete a uno de nuestros chats en telegram.</string>
+    <string name="telegram_chats_descr">Únete a uno de nuestros chats locales de Telegram.</string>
     <string name="telegram_chats">Chats de Telegram</string>
     <string name="github_discussion">Debates en GitHub</string>
     <string name="free_versions_descr">Descargar e instalar la versión gratuita de OsmAnd</string>
@@ -5502,18 +5502,18 @@
         <item quantity="other">%1$d (%2$d pistas)</item>
     </plurals>
     <string name="cloud_trash_clear_confirmation">¿Borrar todos los elementos de la papelera de forma permanente?</string>
-    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="restore_from_trash">Restaurar de la papelera</string>
     <string name="delete_all_items">Borrar todos los elementos</string>
     <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
     <string name="delete_trash_item_confirmation_desc">¿Borrar \"%1$s\" permanentemente?</string>
     <string name="shared_string_empty_trash">Vaciar la papelera</string>
-    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_delete_immediately">Borrar inmediatamente</string>
     <string name="shared_string_is_deleted">%1$s está borrado.</string>
     <string name="cloud_item_restored">%1$s se restaura desde Cloud.</string>
     <string name="trash_alert_card_desc">Los artículos de la papelera se borrarán después de %1$s días.</string>
-    <string name="trash_is_empty">La papelera está vacía</string>
+    <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
-    <string name="shared_string_delete_item">Elemento borrado</string>
+    <string name="shared_string_delete_item">Borrar elemento</string>
     <string name="root_folder">Directorio raíz</string>
     <string name="shared_string_rows">Filas</string>
     <string name="all_folders">Todas las carpetas</string>
@@ -5609,4 +5609,17 @@
     <string name="max_sensor_cadence">Cadencia de bicicleta, máx</string>
     <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
     <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
+    <string name="shared_string_keywords">Palabras clave</string>
+    <string name="shared_string_additional">Adicionales</string>
+    <string name="shared_string_activity">Actividad</string>
+    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar lagunas e imprecisiones en las pistas grabadas.
+\n
+\nSi experimentas alguno de estos problemas, puedes probar a cambiar el uso de la batería a \'Sin restricciones\'</string>
+    <string name="sort_subfolders">Clasificar las subcarpetas</string>
+    <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
+    <string name="special_routing_cpp">Tipo de ruta especial</string>
+    <string name="add_button">Añadir un botón</string>
+    <string name="custom_buttons">Botones personalizados</string>
+    <string name="default_buttons">Botones por defecto</string>
+    <string name="custom_map_button_name_present">Este botón ya existe</string>
 </resources>

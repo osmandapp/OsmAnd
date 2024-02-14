@@ -16,12 +16,12 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 import static net.osmand.gpx.GpxParameter.API_IMPORTED;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
+import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -93,16 +93,16 @@ import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
-import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.development.LogcatAsyncTask;
 import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -880,9 +880,9 @@ public class OsmandAidlApi {
 				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
 				MapActivity mapActivity = mapActivityRef.get();
 				if (actionNumber != -1 && mapActivity != null) {
-					List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
+					List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 					if (actionNumber < actionsList.size()) {
-						QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
 					}
 				}
 			}
@@ -2354,10 +2354,9 @@ public class OsmandAidlApi {
 
 	public boolean getQuickActionsInfo(List<QuickActionInfoParams> quickActions) {
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, String>>() {
-		}.getType();
+		Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-		List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
+		List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 		for (int i = 0; i < actionsList.size(); i++) {
 			QuickAction action = actionsList.get(i);
 			String name = action.getName(app);
@@ -2371,10 +2370,9 @@ public class OsmandAidlApi {
 
 	public boolean getQuickActionsInfoV2(List<net.osmand.aidlapi.quickaction.QuickActionInfoParams> quickActions) {
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, String>>() {
-		}.getType();
+		Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-		List<QuickAction> actionsList = app.getQuickActionRegistry().getQuickActions();
+		List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 		for (int i = 0; i < actionsList.size(); i++) {
 			QuickAction action = actionsList.get(i);
 			String name = action.getName(app);

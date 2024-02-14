@@ -5601,4 +5601,9 @@
     <string name="avg_sensor_speed">平均感應器速度</string>
     <string name="max_sensor_temperature">最大溫度</string>
     <string name="avg_sensor_temperature">平均溫度</string>
+    <string name="shared_string_keywords">關鍵字</string>
+    <string name="sort_subfolders">排序子資料夾</string>
+    <string name="shared_string_activity">活動</string>
+    <string name="shared_string_additional">附加</string>
+    <string name="sorted_sufolders_toast">「%1$s」中的子資料夾排序依據：「%2$s」</string>
 </resources>

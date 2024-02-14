@@ -28,6 +28,7 @@ import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.Map3DButtonState;
 
 public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -36,12 +37,14 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private ApplicationMode appMode;
+	private Map3DButtonState buttonState;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
 		settings = app.getSettings();
+		buttonState = app.getMapButtonsHelper().getMap3DButtonState();
 
 		Bundle args = getArguments();
 		if (savedInstanceState != null) {
@@ -81,14 +84,14 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 		TextView tvTitle = item.findViewById(R.id.title);
 		CompoundButton compoundButton = item.findViewById(R.id.compound_button);
 
-		boolean selected = itemVisibility == settings.MAP_3D_MODE_VISIBILITY.getModeValue(appMode);
+		boolean selected = itemVisibility == buttonState.getVisibilityPref().getModeValue(appMode);
 		UiUtilities.setupCompoundButton(compoundButton, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 		compoundButton.setChecked(selected);
 		ivIcon.setImageDrawable(getIconForVisibility(itemVisibility));
 		tvTitle.setText(itemVisibility.titleId);
 
 		item.setOnClickListener(v -> {
-			settings.MAP_3D_MODE_VISIBILITY.setModeValue(appMode, itemVisibility);
+			buttonState.getVisibilityPref().setModeValue(appMode, itemVisibility);
 			Fragment targetFragment = getTargetFragment();
 			if (targetFragment instanceof Map3DModeUpdateListener) {
 				((Map3DModeUpdateListener) targetFragment).onMap3DModeUpdated(itemVisibility);
@@ -107,7 +110,7 @@ public class Map3DModeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Nullable
 	private Drawable getIconForVisibility(@NonNull Map3DModeVisibility visibility) {
-		boolean selected = visibility == settings.MAP_3D_MODE_VISIBILITY.getModeValue(appMode);
+		boolean selected = visibility == buttonState.getVisibilityPref().getModeValue(appMode);
 		int iconColorId = selected
 				? ColorUtilities.getActiveIconColorId(nightMode)
 				: ColorUtilities.getDefaultIconColorId(nightMode);

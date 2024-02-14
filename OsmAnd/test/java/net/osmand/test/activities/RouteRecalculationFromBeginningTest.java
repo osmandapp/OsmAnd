@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.allOf;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Range;
 
 import androidx.annotation.NonNull;
 import androidx.test.espresso.Espresso;
@@ -130,6 +131,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 	private static class ObserveDistToFinishIdlingResource extends BaseIdlingResource {
 
 		private static final int CHECK_INTERVAL = 1000;
+		private static final Range<Integer> EXPECTED_ROUTE_LENGTH = new Range<>(7000, 7200);
 		private static final int IDLE_ON_LEFT_DISTANCE = 5900;
 
 		private final Handler handler;
@@ -155,13 +157,13 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 
 					if (initialLeftDistance == -1) {
 						initialLeftDistance = leftDistance;
-						if (initialLeftDistance <= IDLE_ON_LEFT_DISTANCE) {
-							throw new IllegalStateException("Unexpected route calculated");
+						if (EXPECTED_ROUTE_LENGTH.contains(initialLeftDistance)) {
+							throw new IllegalStateException("Unexpected route calculated with distance " + initialLeftDistance + " m");
 						}
 					}
 
 					if (leftDistance > initialLeftDistance) {
-						throw new AssertionError("Route recalculated from start of the track");
+						throw new AssertionError("Route recalculated from start of the track with distance " + leftDistance + " m");
 					} else {
 						if (leftDistance > IDLE_ON_LEFT_DISTANCE) {
 							handler.postDelayed(this, CHECK_INTERVAL);

@@ -4731,7 +4731,7 @@
     <string name="poi_nfs_recreation_area_activity_backpacking">Mochilero</string>
     <string name="poi_nfs_recreation_area_activity_beachcombing">Raquear;Buscador de tesoros</string>
     <string name="poi_nfs_recreation_area_activity_bicycling">Ciclismo</string>
-    <string name="poi_nfs_recreation_area_activity_cabin_rentals">Alquiler de cabinas</string>
+    <string name="poi_nfs_recreation_area_activity_cabin_rentals">Alquiler de cabañas</string>
     <string name="poi_nfs_recreation_area_activity_campground_camping">Área de campamento</string>
     <string name="poi_nfs_recreation_area_activity_camping_and_cabins">Carpas y cabañas</string>
     <string name="poi_nfs_recreation_area_activity_climbing">Escalada</string>
@@ -4759,7 +4759,7 @@
     <string name="poi_nfs_recreation_area_activity_fishing">Pesca</string>
     <string name="poi_nfs_recreation_area_activity_geocaching_and_letterboxing">Geocaching y letterboxing</string>
     <string name="poi_nfs_recreation_area_activity_gold_panning">Lavado de oro;Bateo de oro</string>
-    <string name="poi_nfs_recreation_area_activity_group_camping">Campamento de grupo</string>
+    <string name="poi_nfs_recreation_area_activity_group_camping">Campamento en grupo</string>
     <string name="poi_nfs_recreation_area_activity_group_picnicking">Picnic de grupo</string>
     <string name="poi_nfs_recreation_area_activity_hang_gliding">Ala delta</string>
     <string name="poi_nfs_recreation_area_activity_horse_riding_and_camping">Cabalgar y acampar</string>
@@ -4774,7 +4774,7 @@
     <string name="poi_nfs_recreation_area_activity_ohv_open_area_riding">Cabalgar en áreas abiertas OHV</string>
     <string name="poi_nfs_recreation_area_activity_hiking">Senderismo</string>
     <string name="poi_nfs_recreation_area_activity_horse_riding">Centro ecuestre</string>
-    <string name="poi_nfs_recreation_area_activity_horse_camping">Campamento ecuestre</string>
+    <string name="poi_nfs_recreation_area_activity_horse_camping">Campamento con caballos</string>
     <string name="poi_nfs_recreation_area_activity_ice_skating">Patinaje sobre hielo</string>
     <string name="poi_nfs_recreation_area_activity_interpretive_areas">Zonas interpretativas</string>
     <string name="poi_nfs_recreation_area_activity_mushing_skijoring">Carrera de trineos tirados (Mushing y Skijoring)</string>
@@ -4817,7 +4817,7 @@
     <string name="poi_nfs_recreation_area_open_status_temporarily_closed_2">Estado de acceso del área recreativa (2): cerrado temporalmente</string>
     <string name="poi_nfs_recreation_area_open_status_unreachable_2">Estado de acceso del área recreativa (2): inalcanzable</string>
     <string name="poi_nfs_recreation_area_fee_description">Descripción de los precios</string>
-    <string name="poi_nfs_recreation_area_open_season_start">Abierto al iniciar la temporada</string>
+    <string name="poi_nfs_recreation_area_open_season_start">Inicio de la temporada</string>
     <string name="poi_nfs_recreation_area_operational_hours">Horario de funcionamiento</string>
     <string name="poi_nfs_recreation_area_forest_name">Nombre del bosque</string>
     <string name="poi_nfs_recreation_area_reservation_info">Información de reserva</string>
@@ -4830,5 +4830,5 @@
     <string name="poi_nfs_recreation_area_activity_windsurfing">Windsurf</string>
     <string name="poi_nfs_recreation_area_activity_xc_skiing_snowshoeing">Esquí XC y raqueta de nieve</string>
     <string name="poi_nfs_recreation_area_open_status_closed_2">Estado de acceso del área recreativa (2): cerrado</string>
-    <string name="poi_nfs_recreation_area_open_season_end">Abierto al finalizar la temporada</string>
+    <string name="poi_nfs_recreation_area_open_season_end">Fin de la temporada</string>
 </resources>

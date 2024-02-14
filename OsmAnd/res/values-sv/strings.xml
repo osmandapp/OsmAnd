@@ -1033,8 +1033,8 @@
     <string name="app_mode_truck">Lastbil</string>
     <string name="routing_attr_prefer_motorway_name">Föredra motorvägar</string>
     <string name="routing_attr_prefer_motorway_description">Föredra motorvägar</string>
-    <string name="routing_attr_avoid_toll_name">Inga vägtullar</string>
-    <string name="routing_attr_avoid_toll_description">Undviker vägtullar</string>
+    <string name="routing_attr_avoid_toll_name">Inga betalvägar</string>
+    <string name="routing_attr_avoid_toll_description">Undviker betalvägar</string>
     <string name="routing_attr_avoid_unpaved_name">Inga oasfalterade vägar</string>
     <string name="routing_attr_avoid_unpaved_description">Undvik oasfalterade vägar</string>
     <string name="routing_attr_avoid_ferries_name">Inga färjor</string>
@@ -1237,7 +1237,7 @@
     <string name="save_global_track_interval">Allmänt loggningsintervall</string>
     <string name="traffic_warning_speed_limit">Hastighetsbegränsning</string>
     <string name="traffic_warning_border_control">Gränskontroll</string>
-    <string name="traffic_warning_payment">Vägtullshytt</string>
+    <string name="traffic_warning_payment">Betalstation</string>
     <string name="traffic_warning_stop">Stopptecken</string>
     <string name="traffic_warning">Trafikskylt</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
@@ -4412,7 +4412,7 @@
     <string name="selected_value">Valt värde</string>
     <string name="sort_duration_descending">Längsta tid först</string>
     <string name="sort_distance_descending">Längsta distans först</string>
-    <string name="shared_string_nearest">Närmaste</string>
+    <string name="shared_string_nearest">Närmsta</string>
     <string name="shared_string_add_manually">Lägg till manuellt…</string>
     <string name="shared_string_inches">tum</string>
     <string name="change_default_tracks_appearance_confirmation_description">Ändra utseendet för %1$s spår\?</string>
@@ -5452,7 +5452,7 @@
     <string name="android_auto_map_placeholder_descr">Koppla ifrån enheten från Android Auto för att visa kartan i appen.</string>
     <string name="complex_widget_alert">%1$s widgeten kan bara placeras på sin egen rad.</string>
     <string name="distance_by_tap_use_description">Klicka i kartan för att se avståndet mellan aktuell position och klickad punkt.
-\nKlicka på två punkter samtidigt för att se avståndet mellan de två punkterna.</string>
+\nKlicka på två punkter samtidigt för att se avståndet mellan de två punkterna</string>
     <string name="online_direct_line_maps_link">Kontrollera nödvändiga kartor.</string>
     <string name="remove_group_from_markers">Ta bort grupp från markörlista</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Färglägg leder utifrån deras nätverkstyp (internationell, regional, lokal).</string>
@@ -5500,4 +5500,14 @@
 \n
 \nOm du upplever liknande problem, prova att ändra batterianvändningen till \'Obegränsad\'.</string>
     <string name="shared_string_extensions">Tillägg</string>
+    <string name="shared_string_activity">Aktivitet</string>
+    <string name="sorted_sufolders_toast">Undermappar i “%1$s” sorteras efter: “%2$s”</string>
+    <string name="sort_subfolders">Sortera undermappar</string>
+    <string name="shared_string_keywords">Nyckelord</string>
+    <string name="shared_string_additional">Ytterligare</string>
+    <string name="app_mode_baby_transport">Barnvagn</string>
+    <string name="default_buttons">Förinställda knappar</string>
+    <string name="custom_buttons">Anpassade knappar</string>
+    <string name="custom_map_button_name_present">En sådan knapp finns redan</string>
+    <string name="add_button">Lägg till knapp</string>
 </resources>

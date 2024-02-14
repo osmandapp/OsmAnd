@@ -1328,7 +1328,7 @@ public class Algorithms {
 	}
 
 	public static String[] deserializeStringArray(String serialized, String delimiter) {
-		if (serialized == null || serialized.length() == 0) {
+		if (serialized == null || serialized.trim().length() == 0) {
 			return new String[0];
 		}
 		List<String> resultList = new ArrayList<>();

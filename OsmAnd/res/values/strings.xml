@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="custom_map_button_name_present">Such button already present</string>
+    <string name="add_button">Add button</string>
+    <string name="custom_buttons">Custom buttons</string>
+    <string name="default_buttons">Default buttons</string>
+    <string name="sorted_sufolders_toast">Subfolders in “%1$s” is sorted by: “%2$s”</string>
+    <string name="sort_subfolders">Sort subfolders</string>
     <string name="shared_string_activity">Activity</string>
     <string name="shared_string_keywords">Keywords</string>
     <string name="shared_string_additional">Additional</string>
@@ -2433,6 +2439,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
+    <string name="special_routing_cpp">Special routing type</string>
     <string name="third_party_routing_type">Third-party routing</string>
     <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
     <string name="application_profiles">App profiles</string>

@@ -9,26 +9,29 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.quickaction.QuickActionListFragment;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.enums.CompassVisibility;
-import net.osmand.plus.settings.enums.Map3DModeVisibility;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.CompassVisibilityBottomSheet;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.Map3DModeBottomSheet;
+import net.osmand.plus.views.mapwidgets.configure.buttons.CustomMapButtonsFragment;
+import net.osmand.plus.views.mapwidgets.configure.buttons.DefaultMapButtonsFragment;
+import net.osmand.plus.views.mapwidgets.configure.buttons.MapButtonState;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigureButtonsCard extends MapBaseCard {
 
 	private final Fragment target;
+	private final MapButtonsHelper mapButtonsHelper;
 
 	@Override
 	public int getCardLayoutId() {
@@ -38,55 +41,70 @@ public class ConfigureButtonsCard extends MapBaseCard {
 	public ConfigureButtonsCard(@NonNull MapActivity activity, @NonNull Fragment target) {
 		super(activity, false);
 		this.target = target;
+		this.mapButtonsHelper = app.getMapButtonsHelper();
 	}
 
 	@Override
 	protected void updateContent() {
 		TextView title = view.findViewById(R.id.title);
 		title.setText(R.string.shared_string_buttons);
+
+		setupCustomWidgetsButton();
+		setupDefaultWidgetsButton();
+
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
-
-		ApplicationMode appMode = settings.getApplicationMode();
-
-		setupCompassVisibilityButton(appMode);
-		setupMap3DModeVisibilityButton(appMode);
-		setupQuickActionsButton(appMode);
-
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), false);
 	}
 
-	private void setupQuickActionsButton(@NonNull ApplicationMode appMode) {
-		String actions = getString(R.string.shared_string_actions);
-		int actionsCount = app.getQuickActionRegistry().getQuickActions().size();
+	private void setupCustomWidgetsButton() {
+		List<QuickActionButtonState> buttons = mapButtonsHelper.getButtonsStates();
+		List<QuickActionButtonState> enabledButtons = mapButtonsHelper.getEnabledButtonsStates();
 
-		View button = view.findViewById(R.id.quick_actions_button);
-		button.setOnClickListener(v -> QuickActionListFragment.showInstance(getMapActivity()));
-		setupButton(button, getString(R.string.configure_screen_quick_action), getString(R.string.ltr_or_rtl_combine_via_colon, actions, String.valueOf(actionsCount)), R.drawable.ic_quick_action, settings.QUICK_ACTION.getModeValue(appMode), nightMode);
+		boolean enabled = !enabledButtons.isEmpty();
+		String title = getString(R.string.custom_buttons);
+
+		View button = view.findViewById(R.id.custom_buttons);
+		setupButton(button, title, null, R.drawable.ic_quick_action, enabled, nightMode);
+
+		TextView count = button.findViewById(R.id.items_count_descr);
+		count.setText(getString(R.string.ltr_or_rtl_combine_via_slash, enabledButtons.size(), buttons.size()));
+
+		button.setOnClickListener(v -> CustomMapButtonsFragment.showInstance(mapActivity.getSupportFragmentManager(), target));
+
+		AndroidUiHelper.updateVisibility(count, true);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.short_divider), true);
 	}
 
-	private void setupMap3DModeVisibilityButton(@NonNull ApplicationMode appMode) {
-		View button = view.findViewById(R.id.map_3d_mode_button);
-		button.setOnClickListener(v -> {
-			FragmentManager fragmentManager = getMapActivity().getSupportFragmentManager();
-			Map3DModeBottomSheet.showInstance(fragmentManager, target, appMode);
-		});
-		Map3DModeVisibility visibility = settings.MAP_3D_MODE_VISIBILITY.getModeValue(appMode);
-		setupButton(button, getString(R.string.map_3d_mode_action), getString(visibility.getTitleId()), visibility.iconId, true, nightMode);
+	private void setupDefaultWidgetsButton() {
+		int enabledButtons = 0;
+		List<MapButtonState> buttonStates = getDefaultButtonsStates();
+		for (MapButtonState buttonState : buttonStates) {
+			if (buttonState.isEnabled()) {
+				enabledButtons++;
+			}
+		}
+		boolean enabled = enabledButtons > 0;
+		String title = getString(R.string.default_buttons);
 
-		AndroidUiHelper.updateVisibility(button, app.useOpenGlRenderer());
-		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
+		View button = view.findViewById(R.id.default_buttons);
+		setupButton(button, title, null, R.drawable.ic_action_button_default, enabled, nightMode);
+
+		TextView count = button.findViewById(R.id.items_count_descr);
+		count.setText(getString(R.string.ltr_or_rtl_combine_via_slash, enabledButtons, buttonStates.size()));
+
+		button.setOnClickListener(v -> DefaultMapButtonsFragment.showInstance(mapActivity.getSupportFragmentManager(), target));
+
+		AndroidUiHelper.updateVisibility(count, true);
 	}
 
-	private void setupCompassVisibilityButton(@NonNull ApplicationMode appMode) {
-		View button = view.findViewById(R.id.compass_button);
-		button.setOnClickListener(v -> {
-			FragmentManager fragmentManager = getMapActivity().getSupportFragmentManager();
-			CompassVisibilityBottomSheet.showInstance(fragmentManager, target, appMode);
-		});
-		CompassVisibility visibility = settings.COMPASS_VISIBILITY.getModeValue(appMode);
-		setupButton(button, getString(R.string.map_widget_compass), getString(visibility.getTitleId()), visibility.iconId, true, nightMode);
+	@NonNull
+	public List<MapButtonState> getDefaultButtonsStates() {
+		List<MapButtonState> list = new ArrayList<>();
 
-		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
+		list.add(mapButtonsHelper.getMap3DButtonState());
+		list.add(mapButtonsHelper.getCompassButtonState());
+
+		return list;
 	}
 
 	public static void setupButton(@NonNull View view, @NonNull String title, @Nullable String description,
