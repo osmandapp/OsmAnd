@@ -5614,4 +5614,5 @@
 \n
 \nЯкщо у вас виникли такі проблеми, спробуйте змінити використання батареї на \'Unrestricted.\'</string>
     <string name="battery_optimization">Оптимізація батареї</string>
+    <string name="special_routing_cpp">Тип спеціального маршрутизатора</string>
 </resources>
