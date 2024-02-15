@@ -4421,4 +4421,5 @@
     <string name="live_update_frequency_week_variant">Kaardiuuendusi kontrollitakse kord nädalas.</string>
     <string name="live_update_frequency_day_variant">Kaardiuuendusi kontrollitakse kord päevas.</string>
     <string name="live_update_frequency_hour_variant">Kaardiuuendusi kontrollitakse kord tunnis.</string>
+    <string name="location_source">Liidestus asukoha tuvastamiseks</string>
 </resources>
