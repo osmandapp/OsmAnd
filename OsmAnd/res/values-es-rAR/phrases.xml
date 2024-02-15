@@ -4740,7 +4740,7 @@
     <string name="poi_nfs_recreation_area_activity_dog_sledding">Perro de trineo</string>
     <string name="poi_nfs_recreation_area_activity_estuary_fishing">Pesca de estuario</string>
     <string name="poi_nfs_recreation_area_activity_fossil_collecting">Coleccionismo de fósiles</string>
-    <string name="poi_nfs_recreation_area_activity_game_bird_waterfowl">Juego de aves acuáticas</string>
+    <string name="poi_nfs_recreation_area_activity_game_bird_waterfowl">Caza de aves acuáticas</string>
     <string name="poi_nfs_recreation_area_activity">Actividad del área recreativa</string>
     <string name="poi_hang_gliding">Ala delta</string>
     <string name="poi_padus_category_proclamation">Categoría: proclamación</string>
@@ -4760,7 +4760,7 @@
     <string name="poi_nfs_recreation_area_activity_geocaching_and_letterboxing">Geocaching y letterboxing</string>
     <string name="poi_nfs_recreation_area_activity_gold_panning">Lavado de oro;Bateo de oro</string>
     <string name="poi_nfs_recreation_area_activity_group_camping">Campamento en grupo</string>
-    <string name="poi_nfs_recreation_area_activity_group_picnicking">Picnic de grupo</string>
+    <string name="poi_nfs_recreation_area_activity_group_picnicking">Picnic en grupo</string>
     <string name="poi_nfs_recreation_area_activity_hang_gliding">Ala delta</string>
     <string name="poi_nfs_recreation_area_activity_horse_riding_and_camping">Cabalgar y acampar</string>
     <string name="poi_nfs_recreation_area_activity_hunting">Cazería</string>
@@ -4797,7 +4797,7 @@
     <string name="poi_nfs_recreation_area_activity_small_game_hunting">Caza menor</string>
     <string name="poi_nfs_recreation_area_activity_snowmobiling">Motos de nieve</string>
     <string name="poi_nfs_recreation_area_activity_surfing">Surf</string>
-    <string name="poi_nfs_recreation_area_activity_target_shooting">Disparos al blanco</string>
+    <string name="poi_nfs_recreation_area_activity_target_shooting">Tiro al blanco</string>
     <string name="poi_nfs_recreation_area_activity_tidepooling">Tosqueras;Pozas de marea</string>
     <string name="poi_nfs_recreation_area_activity_trapping">Caza con trampas</string>
     <string name="poi_nfs_recreation_area_activity_tubing">Tubing</string>

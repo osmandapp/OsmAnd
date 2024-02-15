@@ -992,7 +992,7 @@
     <string name="distance_measurement_start_editing">Começar edição</string>
     <string name="distance_measurement_finish_editing">Finalizar edição</string>
     <string name="distance_measurement_finish_subtrack">Começar uma nova sub-rota</string>
-    <string name="distance_measurement_clear_route">Apagar todos os pontos</string>
+    <string name="distance_measurement_clear_route">Eliminar todos os pontos</string>
     <string name="distance_measurement_load_gpx">Abrir ficheiro GPX existente</string>
     <string name="wait_current_task_finished">Aguarde até que a tarefa esteja concluída</string>
     <string name="use_kalman_filter_compass_descr">Reduz o ruído nas leituras da bússola, mas acrescenta inércia.</string>
@@ -5230,7 +5230,7 @@
     <string name="shared_string_close_the_dialog">Fechar o ecrã</string>
     <string name="terrain_map">Mapa de terreno (3D)</string>
     <string name="relief_3d">Relevo 3D</string>
-    <string name="relief_3d_description">Possua e observe o modelo do seu bairro ou de todo o continente.</string>
+    <string name="relief_3d_description">Obtenha e observe o modelo do seu bairro ou de todo o continente.</string>
     <string name="verify_account_deletion_descr">Temos de verificar a sua conta antes de a eliminar.
 \n
 \nPor favor, introduza o endereço de e-mail com que se registou. Ser-lhe-á enviada uma palavra-passe única para o passo seguinte.</string>
@@ -5243,7 +5243,7 @@
     <string name="osmand_cloud_delete_account_confirmation_descr">Eliminar a conta OsmAnd Cloud?
 \n
 \nEsta ação não pode ser desfeita.</string>
-    <string name="action_cannot_be_undone">Essa ação não pode ser desfeita.</string>
+    <string name="action_cannot_be_undone">Esta ação não pode ser desfeita.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Os dispositivos secundários serão desconectados do OsmAnd Cloud e perderão o acesso às funcionalidades pagas.</string>
     <string name="osmand_cloud_deletion_account_warning">A sua conta e todos os detalhes da conta serão %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Todos os dados do OsmAnd Cloud serão %1$s. Os dados no dispositivo permanecem inalterados.</string>
@@ -5255,7 +5255,7 @@
     <string name="verify_account">Verifique a sua conta</string>
     <string name="slope_legend_description">O declive utiliza cores para visualizar a inclinação do terreno. Pode ler mais sobre declives em %1$s.</string>
     <string name="terrain_category_description">Curvas de nível do terreno, sombras de relevo a cinzento e indicação do declive a cores, para mostrar picos e planícies.</string>
-    <string name="osmand_cloud_delete_account_confirmation">Apagar a conta\?</string>
+    <string name="osmand_cloud_delete_account_confirmation">Eliminar a conta?</string>
     <string name="free_favorites_backup">Cópia de segurança gratuita de favoritos</string>
     <string name="get_osmand_cloud">Obter o OsmAnd Cloud</string>
     <string name="free_account">Conta gratuita</string>
@@ -5570,7 +5570,7 @@
     <string name="complex_widget_alert">O widget %1$s só pode ser colocado na sua própria linha.</string>
     <string name="rendering_attr_showToll_description">Mostrar restrições de portagens nas estradas</string>
     <string name="zoom_non_animated">Ampliação não animada</string>
-    <string name="key_assignments_already_cleared_message">Já foram apagadas todas as atribuições de teclas</string>
+    <string name="key_assignments_already_cleared_message">Já foram eliminadas todas as atribuições de teclas</string>
     <string name="target_elevation">Elevação do alvo</string>
     <string name="remove_widget_first">Remova o widget primeiro</string>
     <string name="lang_zh_hant">Chinês tradicional</string>
@@ -5622,4 +5622,8 @@
     <string name="sort_subfolders">Ordenar subpastas</string>
     <string name="sorted_sufolders_toast">As subpastas em \"%1$s\" são ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de roteamento especial</string>
+    <string name="default_buttons">Botões predefinidos</string>
+    <string name="custom_map_button_name_present">Este botão já está presente</string>
+    <string name="add_button">Adicionar botão</string>
+    <string name="custom_buttons">Botões personalizados</string>
 </resources>
