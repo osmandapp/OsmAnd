@@ -4831,4 +4831,6 @@
     <string name="poi_nfs_recreation_area_open_status_temporarily_closed_2">遊樂區通行狀態 (2)：暫時關閉</string>
     <string name="poi_nfs_recreation_area_open_season_start">開放季節開始</string>
     <string name="poi_nfs_recreation_area_open_season_end">開放季節結束</string>
+    <string name="poi_via">經由</string>
+    <string name="poi_photo_booth">照相按鈕</string>
 </resources>
