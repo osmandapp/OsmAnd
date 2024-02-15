@@ -41,6 +41,7 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -242,8 +243,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 			Uri uri = Uri.parse("http://" + intent.getDataString());
 			screenManager.popToRoot();
 			String query = uri.getQueryParameter("q");
-			if (query == null) {
-				query = "";
+			if(Algorithms.isEmpty(query)) {
+				query = intent.getDataString();
 			}
 			screenManager.pushForResult(
 					new SearchResultsScreen(
