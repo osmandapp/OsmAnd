@@ -379,8 +379,8 @@ dependencies {
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
 	implementation 'com.google.android.play:core:1.9.1'
 
-	implementation "androidx.car.app:app:1.2.0"
-	implementation "androidx.car.app:app-projected:1.2.0"
+	implementation "androidx.car.app:app:1.3.0-rc01"
+	implementation "androidx.car.app:app-projected:1.3.0-rc01"
 
 	implementation 'com.google.android.gms:play-services-location:21.0.1'
 
