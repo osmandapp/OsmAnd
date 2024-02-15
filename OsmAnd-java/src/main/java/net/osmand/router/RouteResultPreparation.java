@@ -1719,8 +1719,16 @@ public class RouteResultPreparation {
 			for (int i = 0; i < lanes; i++) {
 				rs.attachedAngles.add(deviation);
 			}
-
 		}
+		double currentDeviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+		rs.attachedAngles.add(currentDeviation);
+		//sorted from left to right
+		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
+			@Override
+			public int compare(Double c1, Double c2) {
+				return Double.compare(c2, c1);
+			}
+		});
 		return rs;
 	}
 	
@@ -1808,21 +1816,13 @@ public class RouteResultPreparation {
 
 
 	private int[] createCombinedTurnTypeForSingleLane(RoadSplitStructure rs, double currentDeviation) {
-		rs.attachedAngles.add(currentDeviation);
-		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
-			@Override
-			public int compare(Double c1, Double c2) {
-				return Double.compare(c1, c2);
-			}
-		});
-
 		int size = rs.attachedAngles.size();
 		boolean allStraight = rs.allAreStraight();
 		int[] lanes = new int[1];
 		int extraLanes = 0;
 		double prevAngle = Double.NaN;
 		// iterate from left to right turns
-		for (int i = size - 1; i >= 0; i--) {
+		for (int i = 0; i < size; i++) {
 			double angle = rs.attachedAngles.get(i);
 			if (!Double.isNaN(prevAngle) && angle == prevAngle) {
 				continue;
