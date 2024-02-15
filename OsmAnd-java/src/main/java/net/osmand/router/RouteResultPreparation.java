@@ -1521,6 +1521,9 @@ public class RouteResultPreparation {
 		// Maybe going straight at a 90-degree intersection
 		TurnType t = TurnType.valueOf(TurnType.C, leftSide);
 		int[] rawLanes = calculateRawTurnLanes(turnLanes, TurnType.C);
+
+		// "left||", "left|||", "||right", "left|none|none", "none|none|slight_right"
+		turnLanes = calculateUnknownLanes(rs, turnLanes, rawLanes, leftSide);
 		boolean possiblyLeftTurn = rs.roadsOnLeft == 0;
 		boolean possiblyRightTurn = rs.roadsOnRight == 0;
 		for (int k = 0; k < rawLanes.length; k++) {
@@ -1713,14 +1716,22 @@ public class RouteResultPreparation {
 							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
-					for (int i = 0; i < lanes; i++) {
-						rs.attachedAngles.add(deviation);
-					}
 					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
 				}
 			}
-			
+			for (int i = 0; i < lanes; i++) {
+				rs.attachedAngles.add(deviation);
+			}
 		}
+		double currentDeviation = MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin());
+		rs.attachedAngles.add(currentDeviation);
+		//sorted from left to right
+		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
+			@Override
+			public int compare(Double c1, Double c2) {
+				return Double.compare(c2, c1);
+			}
+		});
 		return rs;
 	}
 	
@@ -1808,21 +1819,13 @@ public class RouteResultPreparation {
 
 
 	private int[] createCombinedTurnTypeForSingleLane(RoadSplitStructure rs, double currentDeviation) {
-		rs.attachedAngles.add(currentDeviation);
-		Collections.sort(rs.attachedAngles, new Comparator<Double>() {
-			@Override
-			public int compare(Double c1, Double c2) {
-				return Double.compare(c1, c2);
-			}
-		});
-
 		int size = rs.attachedAngles.size();
 		boolean allStraight = rs.allAreStraight();
 		int[] lanes = new int[1];
 		int extraLanes = 0;
 		double prevAngle = Double.NaN;
 		// iterate from left to right turns
-		for (int i = size - 1; i >= 0; i--) {
+		for (int i = 0; i < size; i++) {
 			double angle = rs.attachedAngles.get(i);
 			if (!Double.isNaN(prevAngle) && angle == prevAngle) {
 				continue;
@@ -1979,6 +1982,60 @@ public class RouteResultPreparation {
 		} catch (NumberFormatException e) {
 		}
 		return null;
+	}
+
+	private String calculateUnknownLanes(RoadSplitStructure rs, String turnLanes, int[] rawLanes, boolean leftSide) {
+		String[] splitLaneOptions = turnLanes.split("\\|", -1);
+		int l = splitLaneOptions.length;
+		boolean leftUnknown = (splitLaneOptions[0].isEmpty() || splitLaneOptions[0].equals("none")) && rs.roadsOnLeft > 0;
+		boolean rightUnknown = (splitLaneOptions[l -1].isEmpty() || splitLaneOptions[l -1].equals("none")) && rs.roadsOnRight > 0;
+		if (leftUnknown) {
+			TurnType.setPrimaryTurnAndReset(rawLanes, 0, TurnType.C);
+			splitLaneOptions[0] = "through";
+			for (int i = rs.roadsOnLeft - 1; i >= 0; i--) {
+				if (rs.attachedAngles.size() <= i) {
+					System.out.println("Wrong unknown turn lanes calculating");
+					return turnLanes;
+				}
+				int t = getTurnByAngle(rs.attachedAngles.get(i));
+				splitLaneOptions[0] = TurnType.valueOf(t, leftSide).toOsmString() + ";" + splitLaneOptions[0];
+				if (TurnType.getSecondaryTurn(rawLanes[0]) == 0) {
+					TurnType.setSecondaryTurn(rawLanes, 0, t);
+				} else if (TurnType.getTertiaryTurn(rawLanes[0]) == 0) {
+					TurnType.setTertiaryTurn(rawLanes, 0, t);
+				} else {
+					//ignore
+				}
+			}
+		}
+		if (rightUnknown) {
+			int last = rawLanes.length - 1;
+			int s = rs.roadsOnLeft + rs.roadsOnRight;
+			TurnType.setPrimaryTurnAndReset(rawLanes, last, TurnType.C);
+			splitLaneOptions[l -1] = "through";
+			for (int i = rs.roadsOnLeft + 1; i <= s; i++) {
+				if (rs.attachedAngles.size() <= i) {
+					System.out.println("Wrong unknown turn lanes calculating");
+					return turnLanes;
+				}
+				int t = getTurnByAngle(rs.attachedAngles.get(i));
+				splitLaneOptions[l -1] += ";" + TurnType.valueOf(t, leftSide).toOsmString();
+				if (TurnType.getSecondaryTurn(rawLanes[last]) == 0) {
+					TurnType.setSecondaryTurn(rawLanes, last, t);
+				} else if (TurnType.getTertiaryTurn(rawLanes[last]) == 0) {
+					TurnType.setTertiaryTurn(rawLanes, last, t);
+				} else {
+					//ignore
+				}
+			}
+		}
+		if (leftUnknown || rightUnknown) {
+			turnLanes = "";
+			for (int i = 0; i < splitLaneOptions.length; i++) {
+				turnLanes += (i == 0 ? "" : "|") + splitLaneOptions[i];
+			}
+		}
+		return turnLanes;
 	}
 	
 	public static int[] calculateRawTurnLanes(String turnLanes, int calcTurnType) {
