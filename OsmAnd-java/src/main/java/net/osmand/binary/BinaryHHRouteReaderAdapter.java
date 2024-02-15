@@ -66,7 +66,12 @@ public class BinaryHHRouteReaderAdapter {
 
 		@Override
 		public String getPartName() {
-			return "Highway routing";
+			return "Highway routing ";
+		}
+		
+		@Override
+		public String getName() {
+			return profile;
 		}
 
 		@Override
@@ -75,7 +80,7 @@ public class BinaryHHRouteReaderAdapter {
 		}
 
 		public QuadRect getLatLonBbox() {
-			if(top == null) {
+			if (top == null) {
 				return new QuadRect();
 			}
 			return top.getLatLonBox();
