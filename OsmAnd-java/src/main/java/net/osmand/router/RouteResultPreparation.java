@@ -1998,6 +1998,9 @@ public class RouteResultPreparation {
 					return turnLanes;
 				}
 				int t = getTurnByAngle(rs.attachedAngles.get(i));
+				if (t == TurnType.C) {
+					continue;
+				}
 				splitLaneOptions[0] = TurnType.valueOf(t, leftSide).toOsmString() + ";" + splitLaneOptions[0];
 				if (TurnType.getSecondaryTurn(rawLanes[0]) == 0) {
 					TurnType.setSecondaryTurn(rawLanes, 0, t);
@@ -2019,6 +2022,9 @@ public class RouteResultPreparation {
 					return turnLanes;
 				}
 				int t = getTurnByAngle(rs.attachedAngles.get(i));
+				if (t == TurnType.C) {
+					continue;
+				}
 				splitLaneOptions[l -1] += ";" + TurnType.valueOf(t, leftSide).toOsmString();
 				if (TurnType.getSecondaryTurn(rawLanes[last]) == 0) {
 					TurnType.setSecondaryTurn(rawLanes, last, t);
