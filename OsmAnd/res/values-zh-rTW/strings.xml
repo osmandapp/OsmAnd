@@ -4491,7 +4491,7 @@
     <string name="location_source_descr">預設情況下，從 Google Play 安裝的 OsmAnd 會使用 %1$s 來確認位置。
 \n
 \n若您得到了不準確的位置資訊，或是使用沒有 %2$s 的裝置，請嘗試切換至「%3$s」</string>
-    <string name="location_source">位置來源</string>
+    <string name="location_source">定位服務</string>
     <string name="shared_string_shape">形狀</string>
     <string name="default_appearance_desc">預設色彩、圖示與形狀將會套用到新增至群組中的收藏點。</string>
     <string name="default_appearance">預設外觀</string>
@@ -5606,4 +5606,9 @@
     <string name="shared_string_activity">活動</string>
     <string name="shared_string_additional">附加</string>
     <string name="sorted_sufolders_toast">「%1$s」中的子資料夾排序依據：「%2$s」</string>
+    <string name="custom_buttons">自訂按鈕</string>
+    <string name="custom_map_button_name_present">如此按鈕已存在</string>
+    <string name="add_button">新增按鈕</string>
+    <string name="special_routing_cpp">特殊路線規劃類型</string>
+    <string name="default_buttons">預設按鈕</string>
 </resources>

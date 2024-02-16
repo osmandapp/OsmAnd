@@ -285,7 +285,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		boolean parameterExisting = false;
 		Map<String, RoutingParameter> parameters = vr.getParameters();
 		for (String e : vr.getParameterValues().keySet()) {
-			if (parameters.containsKey(e) && !e.equals(GeneralRouter.USE_SHORTEST_WAY)) {
+			if (parameters.containsKey(e) && !e.equals(GeneralRouter.USE_SHORTEST_WAY)
+					&& !e.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)) {
 				parameterExisting = true;
 			}
 		}
@@ -594,8 +595,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.pointsById = hctx.loadNetworkPoints(pointClass);
 		hctx.boundaries = new TLongObjectHashMap<RouteSegment>();
 		hctx.pointsByGeo = new TLongObjectHashMap<T>();
-		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
-		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		if (c.PRELOAD_SEGMENTS) {
 			time = System.nanoTime();
 			System.out.printf("Loading segments...");
@@ -623,6 +622,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}		
 		hctx.pointsRect.printStatsDistribution("  Points distributed");
 		hctx.initialized = true;
+		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
+		System.out.printf(" %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
 		return hctx;
 	}
 
@@ -664,7 +665,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 		public boolean contains(LatLon p) throws IOException {
 			int zoomToLoad = 14;
-			int x = MapUtils.get31TileNumberX(p.getLongitude()) >> zoomToLoad;
+			int x31 = MapUtils.get31TileNumberX(p.getLongitude());
+			int x = x31 >> zoomToLoad;
+			int y31 = MapUtils.get31TileNumberY(p.getLatitude());
 			int y = MapUtils.get31TileNumberY(p.getLatitude()) >> zoomToLoad;
 			boolean contains = false;
 			SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
@@ -685,7 +688,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					}
 				} else {
 					HHRouteRegion reg = regions.get(i);
-					if (reg.top.contains(x, y)) {
+					if (reg.top.contains(x31, y31)) {
 						contains = true;
 					}
 				}

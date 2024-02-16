@@ -40,7 +40,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRendererViewListener {
 	private static final String TAG = "SurfaceRenderer";
 
-	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.25;
+	private static final double VISIBLE_AREA_MIN_DETECTION_SIZE = 1.025;
 	private static final int MAP_RENDER_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 7;
 
 	private final CarContext carContext;
@@ -381,6 +381,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	public boolean hasSurface() {
 		return surface != null && surface.isValid();
+	}
+
+	public boolean hasOffscreenRenderer() {
+		return offscreenMapRendererView != null;
 	}
 
 	public void renderFrame() {

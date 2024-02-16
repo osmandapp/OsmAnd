@@ -4078,7 +4078,7 @@
 \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
 \n</string>
-    <string name="duration_moment_ago">hace instantes</string>
+    <string name="duration_moment_ago">hace un momento</string>
     <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
 \nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
@@ -5307,7 +5307,7 @@
     <string name="free_settings_backup">Copia de seguridad gratuita de la configuración</string>
     <string name="routing_attr_allow_via_ferrata_description">Recorrido de montaña equipado con cables fijos, piñones, escaleras y puentes.</string>
     <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
-    <string name="free_ride">Viaje gratuito</string>
+    <string name="free_ride">Viaje libre</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamables</string>
@@ -5502,18 +5502,18 @@
         <item quantity="other">%1$d (%2$d pistas)</item>
     </plurals>
     <string name="cloud_trash_clear_confirmation">¿Borrar todos los elementos de la papelera de forma permanente?</string>
-    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="restore_from_trash">Restaurar de la papelera</string>
     <string name="delete_all_items">Borrar todos los elementos</string>
     <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
     <string name="delete_trash_item_confirmation_desc">¿Borrar \"%1$s\" permanentemente?</string>
     <string name="shared_string_empty_trash">Vaciar la papelera</string>
-    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_delete_immediately">Borrar inmediatamente</string>
     <string name="shared_string_is_deleted">%1$s está borrado.</string>
     <string name="cloud_item_restored">%1$s se restaura desde Cloud.</string>
     <string name="trash_alert_card_desc">Los artículos de la papelera se borrarán después de %1$s días.</string>
-    <string name="trash_is_empty">La papelera está vacía</string>
+    <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
-    <string name="shared_string_delete_item">Elemento borrado</string>
+    <string name="shared_string_delete_item">Borrar elemento</string>
     <string name="root_folder">Directorio raíz</string>
     <string name="shared_string_rows">Filas</string>
     <string name="all_folders">Todas las carpetas</string>
@@ -5618,4 +5618,8 @@
     <string name="sort_subfolders">Clasificar las subcarpetas</string>
     <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de ruta especial</string>
+    <string name="add_button">Añadir un botón</string>
+    <string name="custom_buttons">Botones personalizados</string>
+    <string name="default_buttons">Botones por defecto</string>
+    <string name="custom_map_button_name_present">Este botón ya existe</string>
 </resources>

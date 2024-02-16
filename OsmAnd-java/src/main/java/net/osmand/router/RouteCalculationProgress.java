@@ -51,9 +51,9 @@ public class RouteCalculationProgress {
 	public long routeCalculationStartTime;
 	public List<WorldRegion> missingMaps;
 
-	private HHIteration hhIterationStep;
-	private double hhCurrentStepProgress;
+	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
 	private int hhTargetsDone, hhTargetsTotal;
+	private double hhCurrentStepProgress;
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;
@@ -129,23 +129,27 @@ public class RouteCalculationProgress {
 	}
 
 	public float getLinearProgressHH() {
-		double progress = 0;
+		float progress = 0;
 		for (HHIteration i : HHIteration.values()) {
-			if (i == hhIterationStep) {
+			if (i.ordinal() == hhIterationStep) {
+				progress += hhCurrentStepProgress * (float) i.approxStepPercent; // current step
 				break;
+			} else {
+				progress += (float) i.approxStepPercent; // passed step
 			}
-			progress += i.approxStepLength;
 		}
+
 		// 1. implement 2-3 reiterations progress
 
-		progress += hhCurrentStepProgress * hhIterationStep.approxStepLength; // current step
-		progress = (1.0 * hhTargetsDone + progress) / hhTargetsTotal; // intermediate points
+		if (hhTargetsTotal > 0) {
+			progress = (100f * hhTargetsDone + progress) / hhTargetsTotal; // intermediate points
+		}
 
-		return (float) Math.min(progress * 100f, 99);
+		return Math.min(progress, 99);
 	}
 
 	public float getLinearProgress() {
-		if(hhIterationStep != null) {
+		if(hhIterationStep != HHIteration.HH_NOT_STARTED.ordinal()) {
 			return getLinearProgressHH();
 		}
 		float p = Math.max(distanceFromBegin, distanceFromEnd);
@@ -184,22 +188,24 @@ public class RouteCalculationProgress {
 	}
 
 	public enum HHIteration {
-		SELECT_REGIONS(0.05),  // +0.05 = 0.05
-		LOAD_POINTS(0.05),     // +0.05 = 0.10
-		START_END_POINT(0.15), // +0.15 = 0.25
-		ROUTING(0.25),         // +0.25 = 0.50
-		DETAILED(0.50),        // +0.50 = 1.00
-		ALTERNATIVES(0.00),    // disabled
-		DONE(0);
+		HH_NOT_STARTED(0), // hhIteration is not filled
+		SELECT_REGIONS(5),
+		LOAD_POINTS(5),
+		START_END_POINT(15),
+		ROUTING(25),
+		DETAILED(50),
+		ALTERNATIVES(0), // disabled
+		DONE(0); // success
 
-		public final double approxStepLength;
-		
-		HHIteration(double approximate) {
-			this.approxStepLength = approximate;
+		public final int approxStepPercent;
+
+		HHIteration(int approximate) {
+			this.approxStepPercent = approximate;
 		}
 	}
+
 	public void hhIteration(HHIteration step) {
-		this.hhIterationStep = step;
+		this.hhIterationStep = step.ordinal();
 		this.hhCurrentStepProgress = 0;
 	}
 
