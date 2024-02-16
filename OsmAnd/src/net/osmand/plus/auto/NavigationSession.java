@@ -46,6 +46,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Session class for the Navigation sample app.
@@ -70,7 +72,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 * Zoom-out scale factor, used for the zoom-out button.
 	 */
 	public static final float ZOOM_OUT_BUTTON_SCALE_FACTOR = 0.9f;
-
+	private static final Pattern ACTION_NAVIGATE_PATTERN = Pattern.compile("^(?<geo>geo:[\\.0-9]+,[\\.0-9]+)(\\?q=(?<q>.*))?$");
 
 	NavigationScreen navigationScreen;
 	LandingScreen landingScreen;
@@ -241,17 +243,27 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onNewIntent(@NonNull Intent intent) {
 		Log.i(TAG, "In onNewIntent() " + intent);
 		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
-		Uri uri;
 		if (ACTION_NAVIGATE.equals(intent.getAction())) {
-			uri = Uri.parse("http://" + intent.getDataString());
+			String data = intent.getDataString();
+			if (data == null)
+				return;
+
+			Matcher matcher = ACTION_NAVIGATE_PATTERN.matcher(data);
+			if (!matcher.matches())
+				return;
+			String geo = matcher.group("geo");
+			String query;
+			if (!Algorithms.isEmpty(geo) && !geo.equals("geo:0,0")) {
+				query = geo;
+			} else {
+				String q = matcher.group("q");
+				if (!Algorithms.isEmpty(q)) {
+					query = Uri.decode(q.replace('+', ' '));
+				} else {
+					return;
+				}
+			}
 			screenManager.popToRoot();
-			String query = uri.getQueryParameter("q");
-			if (Algorithms.isEmpty(query)) {
-				query = intent.getDataString();
-			}
-			if (query == null) {
-				query = "";
-			}
 			screenManager.pushForResult(
 					new SearchResultsScreen(
 							getCarContext(),
@@ -259,17 +271,16 @@ public class NavigationSession extends Session implements NavigationListener, Os
 							query),
 					(obj) -> {
 					});
+			return;
+		}
 
-			return;
-		} else {
-			uri = intent.getData();
-		}
-		if(uri == null) {
-			return;
-		}
 		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
 		// the
 		// top if any other screens were pushed onto it.
+		Uri uri = intent.getData();
+		if (uri == null) {
+			return;
+		}
 		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())) {
 			Screen top = screenManager.getTop();
 			if (DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment()) && !(top instanceof LandingScreen)) {
