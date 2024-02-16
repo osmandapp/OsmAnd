@@ -4767,4 +4767,11 @@
     <string name="poi_nfs_recreation_area_fee_description">Lýsing á gjaldi</string>
     <string name="poi_nfs_recreation_area_activity_description">Lýsing á afþreyingu</string>
     <string name="poi_nfs_recreation_area_accessibility_info">Upplýsingar um aðgengi</string>
+    <string name="poi_checkpoint_cycling">Eftirlitsstöð á hjólaleið</string>
+    <string name="poi_healthcare_speciality_reflexology">Svæðanudd</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Mannspeki</string>
+    <string name="poi_healthcare_speciality_aromatherapy">Ilmkjarnameðferð</string>
+    <string name="poi_healthcare_speciality_hydrotherapy">Vatnsþjálfun</string>
+    <string name="poi_healthcare_speciality_neonatology">Fyrirburalækningar</string>
+    <string name="poi_emergency_bay">Neyðarútskot</string>
 </resources>

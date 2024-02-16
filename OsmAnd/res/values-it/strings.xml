@@ -2497,7 +2497,7 @@
     <string name="shared_string_more_without_dots">Altro</string>
     <string name="empty_state_osm_edits">Crea o modifica oggetti OSM</string>
     <string name="empty_state_osm_edits_descr">Crea o modifica PDI OSM, apri o commenta note OSM, e invia tracce GPX registrate.</string>
-    <string name="shared_string_deleted">Eliminato</string>
+    <string name="shared_string_deleted">Cancellato</string>
     <string name="shared_string_edited">Modificato</string>
     <string name="shared_string_added">Aggiunto</string>
     <string name="marker_activated">Marcatore %s attivato.</string>
@@ -4182,7 +4182,7 @@
 \n • OsmAnd Live spostato in \"Scarica mappe &gt; Aggiornamenti\"
 \n
 \n</string>
-    <string name="duration_moment_ago">poco fa</string>
+    <string name="duration_moment_ago">un attimo fa</string>
     <string name="logout_from_osmand_cloud">Disconnettiti da OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Disconnettersi\?
 \nDovrai ricollegarti nuovamente per fare il backup o ripristinare i tuoi dati.</string>
@@ -5486,7 +5486,7 @@
     <string name="searching_matching_tracks">Cerca tutte le tracce corrispondenti</string>
     <string name="cloud_trash_clear_confirmation">Eliminare definitivamente tutti gli elementi nel cestino?</string>
     <string name="with_waypoints">Con punti intermedi</string>
-    <string name="restore_from_trash">Recupera dal cestino</string>
+    <string name="restore_from_trash">Ripristina dal cestino</string>
     <string name="delete_all_items">Elimina tutti gli elementi</string>
     <string name="trash_is_empty_banner_desc">I file rimossi da OsmAnd Cloud saranno disponibili qui per altri %1$s giorni.</string>
     <plurals name="tracks">
@@ -5504,7 +5504,7 @@
     <string name="trash_alert_card_desc">Gli elementi nel cestino verranno eliminati dopo %1$s giorni.</string>
     <string name="trash_is_empty">Il cestino è vuoto</string>
     <string name="shared_string_trash">Cestino</string>
-    <string name="shared_string_delete_item">Cancella elemento</string>
+    <string name="shared_string_delete_item">Cancella l\'oggetto</string>
     <string name="help_article_personal_storage_name">Archiviazione</string>
     <string name="key_event_action_zoom_in">Ingrandisci</string>
     <string name="enable_to_use_external_input_device">Abilita l\'uso del dispositivo di input esterno con OsmAnd</string>
@@ -5613,4 +5613,5 @@
     <string name="any_connected_with_device">Qualsiasi connesso: %s</string>
     <string name="custom_map_button_name_present">Tale pulsante è già presente</string>
     <string name="special_routing_cpp">Tipo di percorso speciale</string>
+    <string name="target_elevation">Elevazione del bersaglio</string>
 </resources>

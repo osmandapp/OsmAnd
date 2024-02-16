@@ -268,7 +268,7 @@
     <string name="last_update_from_telegram_date">Poslednje ažuriranje iz Telegrama: %1$</string>
     <string name="shared_string_error_short">Greška</string>
     <string name="shared_string_export">Izvezi</string>
-    <string name="logcat_buffer">Skladišete dnevnika</string>
+    <string name="logcat_buffer">Logcat bufer</string>
     <string name="logcat_buffer_descr">Pregled i zajedničko korišćenje dnevnika o aplikacijama</string>
     <string name="send_report">Pošalji izveštaj</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
