@@ -222,3 +222,7 @@ dependencies {
 	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 }
+
+// Fix Android Studio problem when `android` and `tools` projects are open at the same time.
+// Error: Task 'prepareKotlinBuildScriptModel' not found in project ':OsmAnd'.
+task prepareKotlinBuildScriptModel { }
