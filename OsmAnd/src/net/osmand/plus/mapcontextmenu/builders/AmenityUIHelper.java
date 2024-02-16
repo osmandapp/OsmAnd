@@ -186,6 +186,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
+			boolean isArchitect = false;
 			boolean needLinks = !(CollectionUtils.equalsToAny(key, Amenity.OPENING_HOURS, "population", "height"));
 			boolean needIntFormatting = "population".equals(key);
 			boolean isPhoneNumber = false;
@@ -349,12 +350,13 @@ public class AmenityUIHelper extends MenuBuilder {
 					} else {
 						isText = true;
 						isDescription = iconId == R.drawable.ic_action_note_dark;
+						isArchitect = iconId == R.drawable.mx_architect;
 						textPrefix = pType.getTranslation();
 						if (needIntFormatting) {
 							vl = getFormattedInt(vl);
 						}
 					}
-					if (!isDescription && icon == null) {
+					if (!isDescription && !isArchitect && icon == null) {
 						icon = getRowIcon(view.getContext(), pType.getIconKeyName());
 						if (isText && icon != null) {
 							textPrefix = "";
