@@ -4831,4 +4831,6 @@
     <string name="poi_nfs_recreation_area_open_status_temporarily_closed_2">Estado del acceso al área recreativa (2): cerrado temporalmente</string>
     <string name="poi_nfs_recreation_area_open_status_unreachable_2">Estado del acceso al área recreativa (2): inaccesible</string>
     <string name="poi_nfs_recreation_area_operational_hours">Horario de apertura</string>
+    <string name="poi_via">Vía</string>
+    <string name="poi_photo_booth">Fotomatón</string>
 </resources>
