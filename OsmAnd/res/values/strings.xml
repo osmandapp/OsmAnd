@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="speed_limit_warning">Speed limit warning</string>
+    <string name="shared_string_limit">Limit</string>
+    <string name="when_exceeded">When exceeded</string>
+    <string name="speedometer_description">Shows your current speed as reported via GPS</string>
+    <string name="shared_string_speedometer">Speedometer</string>
     <string name="custom_map_button_name_present">Such button already present</string>
     <string name="add_button">Add button</string>
     <string name="custom_buttons">Custom buttons</string>

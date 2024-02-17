@@ -394,4 +394,24 @@ public class ColorUtilities {
 	public static int getWarningColorId(boolean nightMode) {
 		return R.color.deletion_color_warning;
 	}
+
+	@ColorInt
+	public static int getWidgetBackgroundColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getWidgetBackgroundColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getWidgetBackgroundColorId(boolean nightMode) {
+		return nightMode ? R.color.widget_background_color_dark : R.color.widget_background_color_light;
+	}
+
+	@ColorInt
+	public static int getWidgetSecondaryBackgroundColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getWidgetSecondaryBackgroundColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getWidgetSecondaryBackgroundColorId(boolean nightMode) {
+		return nightMode ? R.color.widget_secondary_background_color_dark : R.color.widget_secondary_background_color_light;
+	}
 }

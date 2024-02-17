@@ -2,9 +2,8 @@ package net.osmand.data;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 
-/**
- */
 public interface LocationPoint {
 
 	double getLatitude();
@@ -15,7 +14,5 @@ public interface LocationPoint {
 
 	boolean isVisible();
 
-	PointDescription getPointDescription(Context ctx);
-
-
+	PointDescription getPointDescription(@NonNull Context ctx);
 }

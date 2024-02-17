@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:orientation="horizontal"
+	android:padding="@dimen/content_padding_medium">
+
+	<LinearLayout
+		android:id="@+id/speedometer_container"
+		android:layout_width="88dp"
+		android:layout_height="72dp"
+		android:layout_gravity="center"
+		android:layout_marginHorizontal="6dp"
+		android:layout_marginVertical="9dp"
+		android:background="@drawable/speedometer_shape"
+		android:elevation="2dp"
+		android:orientation="vertical"
+		android:paddingHorizontal="9dp">
+
+		<TextView
+			android:id="@+id/speedometer_value"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_gravity="start|top"
+			android:layout_weight="1"
+			android:ellipsize="none"
+			android:textColor="@color/widgettext_day"
+			android:textSize="36sp"
+			tools:text="85" />
+
+		<net.osmand.plus.widgets.TextViewEx
+			android:id="@+id/speedometer_units"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="start|bottom"
+			android:paddingBottom="9dp"
+			android:textAllCaps="true"
+			android:textColor="?android:textColorSecondary"
+			android:textSize="11sp"
+			tools:text="KM/H" />
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:id="@+id/speed_limit_container"
+		android:layout_width="72dp"
+		android:layout_height="72dp"
+		android:layout_gravity="center"
+		android:layout_marginVertical="9dp"
+		android:layout_marginStart="-14dp"
+		android:layout_marginEnd="6dp"
+		android:background="@drawable/speed_limit_shape"
+		android:elevation="2dp"
+		android:orientation="vertical"
+		android:translationZ="2dp">
+
+		<TextView
+			android:id="@+id/limit_description"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:gravity="top|center_horizontal"
+			android:text="@string/shared_string_limit"
+			android:textAllCaps="true"
+			android:textColor="@color/widgettext_day"
+			android:textSize="11sp" />
+
+		<TextView
+			android:id="@+id/speed_limit_value"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:ellipsize="none"
+			android:gravity="center"
+			android:textColor="@color/widgettext_day"
+			android:textSize="24sp"
+			tools:text="85" />
+
+	</FrameLayout>
+
+</LinearLayout>

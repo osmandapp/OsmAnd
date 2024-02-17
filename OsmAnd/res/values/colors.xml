@@ -9,6 +9,8 @@
 	<color name="list_background_color_dark">#1E1F20</color>
 	<color name="widget_background_color_light">#FFFFFF</color>
 	<color name="widget_background_color_dark">#000000</color>
+	<color name="widget_secondary_background_color_light">#FFFFFF</color>
+	<color name="widget_secondary_background_color_dark">#F2F2F2</color>
 
 	<!-- Text -->
 	<color name="text_color_primary_light">#212121</color>
@@ -179,8 +181,11 @@
 	<color name="map_widget_light_trans">#80ffffff</color>
 	<color name="map_widget_light_pressed">#e5e5e5</color>
 	<color name="map_widget_blue">#536dfe</color>
+	<color name="map_widget_red">#FF1717</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>
 	<color name="map_window_outer_color">#99000000</color>
+	<color name="map_window_stroke_dark">#3F3F3F</color>
+	<color name="map_alert_stroke_light">#1a000000</color>
 
 	<color name="map_progress_bar_bg_light">#f0f0f0</color>
 	<color name="map_progress_bar_bg_dark">#1b1d1f</color>

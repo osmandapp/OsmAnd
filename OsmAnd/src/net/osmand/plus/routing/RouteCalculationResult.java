@@ -18,7 +18,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RoutePlannerFrontEnd;
