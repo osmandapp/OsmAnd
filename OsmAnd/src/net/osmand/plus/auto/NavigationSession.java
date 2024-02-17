@@ -26,6 +26,7 @@ import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -36,6 +37,7 @@ import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.auto.screens.RequestPermissionScreen;
 import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCheckCallback;
 import net.osmand.plus.auto.screens.RequestPurchaseScreen;
+import net.osmand.plus.auto.screens.RoutePreviewScreen;
 import net.osmand.plus.auto.screens.SearchResultsScreen;
 import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -43,6 +45,8 @@ import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -57,6 +61,8 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	static final String TAG = NavigationSession.class.getSimpleName();
 	static final String URI_SCHEME = "osmand";
 	static final String URI_HOST = "car_navigation";
+	static final String URI_SCHEME_GEO = "geo";
+	private static final Pattern URI_PATTERN_GEO = Pattern.compile("^(?<lat>\\d+(\\.\\d+)?),(?<lon>\\d+(\\.\\d+)?)(?<query>\\?+.*)?$");
 
 	/**
 	 * Invalid zoom focal point value, used for the zoom buttons.
@@ -72,7 +78,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 * Zoom-out scale factor, used for the zoom-out button.
 	 */
 	public static final float ZOOM_OUT_BUTTON_SCALE_FACTOR = 0.9f;
-	private static final Pattern ACTION_NAVIGATE_PATTERN = Pattern.compile("^(?<geo>geo:[\\.0-9]+,[\\.0-9]+)(\\?q=(?<q>.*))?$");
 
 	NavigationScreen navigationScreen;
 	LandingScreen landingScreen;
@@ -242,51 +247,67 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onNewIntent(@NonNull Intent intent) {
 		Log.i(TAG, "In onNewIntent() " + intent);
-		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
-		if (ACTION_NAVIGATE.equals(intent.getAction())) {
-			String data = intent.getDataString();
-			if (data == null)
-				return;
-
-			Matcher matcher = ACTION_NAVIGATE_PATTERN.matcher(data);
-			if (!matcher.matches())
-				return;
-			String geo = matcher.group("geo");
-			String query;
-			if (!Algorithms.isEmpty(geo) && !geo.equals("geo:0,0")) {
-				query = geo;
-			} else {
-				String q = matcher.group("q");
-				if (!Algorithms.isEmpty(q)) {
-					query = Uri.decode(q.replace('+', ' '));
-				} else {
-					return;
-				}
-			}
-			screenManager.popToRoot();
-			screenManager.pushForResult(
-					new SearchResultsScreen(
-							getCarContext(),
-							settingsAction,
-							query),
-					(obj) -> {
-					});
-			return;
-		}
-
-		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
-		// the
-		// top if any other screens were pushed onto it.
 		Uri uri = intent.getData();
 		if (uri == null) {
 			return;
 		}
+		if (ACTION_NAVIGATE.equals(intent.getAction()) && handleIntentActionNavigate(uri))
+			return;
+		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
+		// the
+		// top if any other screens were pushed onto it.
 		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())) {
+			ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
 			Screen top = screenManager.getTop();
 			if (DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment()) && !(top instanceof LandingScreen)) {
 				screenManager.popToRoot();
 			}
 		}
+	}
+
+	private boolean handleIntentActionNavigate(@NonNull Uri uri) {
+		if (!URI_SCHEME_GEO.equals(uri.getScheme()))
+			return false;
+		Matcher matcher = URI_PATTERN_GEO.matcher(uri.getSchemeSpecificPart());
+		if (!matcher.matches())
+			return false;
+		String lat = matcher.group("lat");
+		String lon = matcher.group("lon");
+		if(lat.equals("0") && lon.equals("0")) {
+			String query = matcher.group("query");
+			if (Algorithms.isEmpty(query))
+				return false;
+			String q = Uri.parse("http://host" + query).getQueryParameter("q");
+			if (Algorithms.isEmpty(q))
+				return false;
+			ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+			screenManager.popToRoot();
+			screenManager.pushForResult(
+					new SearchResultsScreen(
+							getCarContext(),
+							settingsAction,
+							Uri.decode(q.replace('+', ' '))),
+					(obj) -> {
+					});
+		} else {
+			SearchResult sr = new SearchResult();
+			sr.objectType = ObjectType.LOCATION;
+			sr.location = new LatLon(Double.parseDouble(lat), Double.parseDouble(lon));
+			ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+			screenManager.popToRoot();
+			screenManager.pushForResult(
+					new RoutePreviewScreen(
+							getCarContext(),
+							settingsAction,
+							sr),
+					(obj) -> {
+						getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+						if (hasStarted()) {
+							startNavigation();
+						}
+					});
+		}
+		return true;
 	}
 
 	@Override
