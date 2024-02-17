@@ -4063,7 +4063,7 @@
     <string name="poi_wine_region">Weinanbaugebiet</string>
     <string name="poi_service_fleurop_filter">Fleurop-Service</string>
     <string name="poi_sports_hall">Sporthalle</string>
-    <string name="poi_reusable_packaging_offer_only">Wiederverwendbare Verpackungen anbietend: ausschließlich</string>
+    <string name="poi_reusable_packaging_offer_only">bietet ausschließlich wiederverwendbare Verpackungen an</string>
     <string name="poi_butcher_horse">Pferd</string>
     <string name="poi_zero_waste_only">Unverpackt: ausschließlich</string>
     <string name="poi_butcher_beef">Rind</string>
@@ -4077,7 +4077,7 @@
     <string name="poi_butcher_poultry">Geflügel</string>
     <string name="poi_reusable_packaging_accept_only">Wiederverwendbare Verpackungen akzeptiert: ausschließlich</string>
     <string name="poi_reusable_packaging_offer_yes">bietet wiederverwendbare Verpackungen an</string>
-    <string name="poi_reusable_packaging_offer_no">Wiederverwendbare Verpackungen anbietend: nein</string>
+    <string name="poi_reusable_packaging_offer_no">bietet keine wiederverwendbaren Verpackungen an</string>
     <string name="poi_beauty_salon_eyelash">Wimpern</string>
     <string name="poi_massage_chiropractic">Chiropraktik</string>
     <string name="poi_massage_shiatsu">Shiatsu</string>
