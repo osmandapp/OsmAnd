@@ -28,8 +28,10 @@ public class GeneralRouter implements VehicleRouter {
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
 	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
 	public static int IMPASSABLE_ROAD_SHIFT = 0; // 6 is better
+	
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
+	public static final String GROUP_RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
 	public static final String AVOID_MOTORWAY = "avoid_motorway";

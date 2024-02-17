@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments;
-import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder;
 import net.osmand.data.QuadRect;
 import net.osmand.router.HHRouteDataStructure;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
@@ -412,9 +411,14 @@ public class BinaryHHRouteReaderAdapter {
 					} else {
 						int pntFileId = (ind++) + block.idRangeStart;
 						T point = reg.getPoint(pntFileId);
-						Builder bld = HHRoutePointSegments.newBuilder();
-						codedIS.readMessage(bld, null);
-						HHRoutePointSegments s = bld.buildPartial();
+						// doesn't work with large files popLimit pases int internally
+//						Builder bld = HHRoutePointSegments.newBuilder();
+//						codedIS.readMessage(bld, null);
+//						HHRoutePointSegments s = bld.buildPartial();
+						int len = codedIS.readRawVarint32();
+						long olLimit = codedIS.pushLimitLong(len);
+						HHRoutePointSegments s = readSegments();
+						codedIS.popLimit(olLimit);
 						if (point != null) {
 							// not used from this file
 							HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(),
@@ -431,6 +435,24 @@ public class BinaryHHRouteReaderAdapter {
 			}
 		} finally {
 			codedIS.popLimit(oldLimit);
+		}
+	}
+
+	private HHRoutePointSegments readSegments() throws IOException {
+		HHRoutePointSegments.Builder bld = HHRoutePointSegments.newBuilder();
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return bld.buildPartial();
+			case OsmAndHHRoutingIndex.HHRoutePointSegments.SEGMENTSIN_FIELD_NUMBER:
+				bld.setSegmentsIn(codedIS.readBytes());
+				break;
+			case OsmAndHHRoutingIndex.HHRoutePointSegments.SEGMENTSOUT_FIELD_NUMBER:
+				bld.setSegmentsOut(codedIS.readBytes());
+				break;
+			}
 		}
 	}
 

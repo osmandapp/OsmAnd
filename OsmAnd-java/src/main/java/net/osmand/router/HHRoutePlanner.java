@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeMap;
@@ -158,12 +159,20 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HHNetworkRouteRes runRouting(LatLon start, LatLon end, HHRoutingConfig config) throws SQLException, IOException, InterruptedException {
 		RouteCalculationProgress progress = currentCtx.rctx.calculationProgress;
+		// important assumption that routing context match!
+		if (config.cacheCtx != null && config.cacheCtx.rctx  == currentCtx.rctx) {
+			currentCtx = (HHRoutingContext<T>) config.cacheCtx;
+		}
 
 		long startTime = System.nanoTime();
 		config = prepareDefaultRoutingConfig(config);
 		HHRoutingContext<T> hctx = initHCtx(config, start, end);
+		if (config.CACHE_CALCULATION_CONTEXT) {
+			config.cacheCtx = (HHRoutingContext<NetworkDBPoint>) hctx;
+		}
 		if (hctx == null) {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
@@ -282,16 +291,27 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 	private void filterPointsBasedOnConfiguration(HHRoutingContext<T> hctx) {
 		GeneralRouter vr = (GeneralRouter) hctx.rctx.getRouter();
-		boolean parameterExisting = false;
 		Map<String, RoutingParameter> parameters = vr.getParameters();
-		for (String e : vr.getParameterValues().keySet()) {
-			if (parameters.containsKey(e) && !e.equals(GeneralRouter.USE_SHORTEST_WAY)
-					&& !e.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)) {
-				parameterExisting = true;
+		TreeMap<String, String> tm = new TreeMap<String, String>();
+		for (Entry<String, String> es : vr.getParameterValues().entrySet()) {
+			String paramId = es.getKey();
+			// These parameters don't affect the routing filters 
+			// This assumption probably shouldn't be used in general and only for popular parameters)
+			if (parameters.containsKey(paramId) && !paramId.equals(GeneralRouter.USE_SHORTEST_WAY)
+					&& !paramId.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)
+					&& !paramId.startsWith(GeneralRouter.GROUP_RELIEF_SMOOTHNESS_FACTOR)) {
+				tm.put(paramId, es.getValue());
 			}
 		}
-		if (!parameterExisting) {
+		if (hctx.filterRoutingParameters.equals(tm)) {
+			return;
+		}
+		for (T pnt : hctx.pointsById.valueCollection()) {
+			pnt.rtExclude = false;
+		}
+		if (tm.isEmpty()) {
 			// no parameters
+			hctx.filterRoutingParameters = tm;
 			return;
 		}
 		
@@ -334,6 +354,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				}
 			}
 		}
+		hctx.filterRoutingParameters = tm;
 		System.out.printf("%d excluded from %d, %.2f ms\n", filtered, hctx.pointsById.size(),
 				(System.nanoTime() - nt) / 1e6);
 	}
