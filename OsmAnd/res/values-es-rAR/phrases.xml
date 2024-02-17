@@ -4831,4 +4831,8 @@
     <string name="poi_us_maps_recreation_area_activity_xc_skiing_snowshoeing">Esquí XC y raqueta de nieve</string>
     <string name="poi_us_maps_recreation_area_open_status_closed_2">Estado de acceso del área recreativa (2): cerrado</string>
     <string name="poi_us_maps_recreation_area_open_season_end">Fin de la temporada</string>
+    <string name="poi_blm_yes">Gestionado por la Oficina de Administración de Tierras</string>
+    <string name="poi_via">Vía</string>
+    <string name="poi_photo_booth">Cabina fotográfica;Fotomatón</string>
+    <string name="poi_nfs_yes">Gestionado por el Servicio Forestal de los Estados Unidos</string>
 </resources>
