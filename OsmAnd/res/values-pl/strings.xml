@@ -5544,8 +5544,17 @@
     <string name="battery_optimization_banner_content">Optymalizacja baterii systemu Android może powodować luki i niedokładności w nagranych ścieżkach.</string>
     <string name="dont_ask_anymore">Nie pytaj więcej</string>
     <string name="battery_optimization_settings">Ustawienia optymalizacji baterii</string>
-    <string name="battery_optimization_desc">Optymalizacja baterii w systemie Android może powodować luki i niedokładności w nagranych ścieżkach.
+    <string name="battery_optimization_desc">Optymalizacja baterii w systemie Android może powodować luki i niedokładności w nagranych ścieżkach
 \n
 \nJeśli wystąpi którykolwiek z tych problemów, możesz spróbować zmienić zużycie baterii na \"Nieograniczone\".</string>
     <string name="battery_optimization">Optymalizacja baterii</string>
+    <string name="shared_string_activity">Aktywność</string>
+    <string name="shared_string_additional">Dodatkowe</string>
+    <string name="custom_map_button_name_present">Taki przycisk już istnieje</string>
+    <string name="shared_string_keywords">Słowa kluczowe</string>
+    <string name="add_button">Dodaj przycisk</string>
+    <string name="custom_buttons">Przyciski niestandardowe</string>
+    <string name="default_buttons">Przyciski domyślne</string>
+    <string name="sorted_sufolders_toast">Podfoldery w \"%1$s\" sortowane są według: \"%2$s\"</string>
+    <string name="sort_subfolders">Sortuj podfoldery</string>
 </resources>

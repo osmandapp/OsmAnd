@@ -5611,4 +5611,8 @@
     <string name="sorted_sufolders_toast">Подпапки в «%1$s» сортируются по: «%2$s»</string>
     <string name="precise_distance_numbers">Точное значение расстояния</string>
     <string name="key_event_action_activity_back_pressed">Нажато действие назад</string>
+    <string name="custom_map_button_name_present">Такая кнопка уже есть</string>
+    <string name="add_button">Добавить кнопку</string>
+    <string name="default_buttons">Кнопки по умолчанию</string>
+    <string name="custom_buttons">Пользовательские кнопки</string>
 </resources>

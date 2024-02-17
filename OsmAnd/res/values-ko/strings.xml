@@ -4974,4 +4974,6 @@
     <string name="download_unsupported_action">지원되지 않는 동작 %1$s</string>
     <string name="shared_string_deleted">삭제됨</string>
     <string name="special_routing_cpp">특수 라우팅 유형</string>
+    <string name="empty_state_markers_history_desc">합격으로 표시된 마커가 이 화면에 나타납니다.</string>
+    <string name="quick_action_bug_descr">이 메시지는 댓글 필드에 포함되어 있습니다.</string>
 </resources>

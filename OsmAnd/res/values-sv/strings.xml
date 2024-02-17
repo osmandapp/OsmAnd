@@ -5510,4 +5510,5 @@
     <string name="custom_buttons">Anpassade knappar</string>
     <string name="custom_map_button_name_present">En sådan knapp finns redan</string>
     <string name="add_button">Lägg till knapp</string>
+    <string name="special_routing_cpp">Typ av särskild ruttberäkning</string>
 </resources>
