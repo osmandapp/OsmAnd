@@ -194,7 +194,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 		private final ArrayAdapter<String> valueAdapter;
 
 		public TagAdapterLinearLayoutHack(LinearLayout linearLayout,
-										  EditPoiData editPoiData) {
+		                                  EditPoiData editPoiData) {
 			this.linearLayout = linearLayout;
 			this.editPoiData = editPoiData;
 
@@ -219,6 +219,13 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 				}
 				addTagView(tag.getKey(), tag.getValue());
 			}
+			if (linearLayout.getChildCount() != 0) {
+				View v = linearLayout.getChildAt(0);
+				View tagEditText = v.findViewById(R.id.tagEditText);
+				if (tagEditText != null) {
+					tagEditText.post(() -> showKeyboard(tagEditText));
+				}
+			}
 			if (editPoiData.hasEmptyValue() && linearLayout.findViewById(R.id.valueEditText) != null) {
 				linearLayout.findViewById(R.id.valueEditText).requestFocus();
 			}
@@ -231,11 +238,11 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 
 			OsmandTextFieldBoxes tagFB = convertView.findViewById(R.id.tag_fb);
 			tagFB.setClearButton(deleteDrawable);
-			tagFB.hideClearButton();
+			tagFB.post(tagFB::hideClearButton);
 
 			OsmandTextFieldBoxes valueFB = convertView.findViewById(R.id.value_fb);
 			valueFB.setClearButton(deleteDrawable);
-			valueFB.hideClearButton();
+			valueFB.post(valueFB::hideClearButton);
 
 			ExtendedEditText tagEditText = convertView.findViewById(R.id.tagEditText);
 			AutoCompleteTextView valueEditText = convertView.findViewById(R.id.valueEditText);
@@ -243,7 +250,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 			tagEditText.setText(tag);
 			tagEditText.setAdapter(tagAdapter);
 			tagEditText.setThreshold(1);
-			showKeyboard(tagEditText);
+//			showKeyboard(tagEditText);
 
 			String[] previousTag = {tag};
 			tagEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -323,7 +330,7 @@ public class AdvancedEditPoiFragment extends BaseOsmAndFragment implements OnFra
 	}
 
 	public static void addPoiToStringSet(AbstractPoiType abstractPoiType, Set<String> stringSet,
-										  Set<String> values) {
+	                                     Set<String> values) {
 		if (abstractPoiType instanceof PoiType) {
 			PoiType poiType = (PoiType) abstractPoiType;
 			if (poiType.isNotEditableOsm() || poiType.getBaseLangType() != null) {

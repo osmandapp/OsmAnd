@@ -39,6 +39,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
+import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.NavigationInfo;
@@ -170,7 +171,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			LocationManager locationService = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
 			registerGpsStatusListener(locationService);
 			try {
-				locationServiceHelper.requestLocationUpdates(new LocationServiceHelper.LocationCallback() {
+				locationServiceHelper.requestLocationUpdates(new LocationCallback() {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						net.osmand.Location location = null;
@@ -190,7 +191,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 			// try to always ask for network provide : it is faster way to find location
 			if (locationServiceHelper.isNetworkLocationUpdatesSupported()) {
-				locationServiceHelper.requestNetworkLocationUpdates(new LocationServiceHelper.LocationCallback() {
+				locationServiceHelper.requestNetworkLocationUpdates(new LocationCallback() {
 					@Override
 					public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 						if (!locations.isEmpty() && !useOnlyGPS() && !locationSimulation.isRouteAnimating()) {
@@ -327,13 +328,16 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	@Nullable
 	public net.osmand.Location getFirstTimeRunDefaultLocation(@Nullable OsmAndLocationListener locationListener) {
-		return isLocationPermissionAvailable(app)
-				? locationServiceHelper.getFirstTimeRunDefaultLocation(locationListener != null ? new LocationServiceHelper.LocationCallback() {
-			@Override
-			public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
-				locationListener.updateLocation(locations.isEmpty() ? null : locations.get(0));
-			}
-		} : null) : null;
+		if (isLocationPermissionAvailable(app)) {
+			LocationCallback callback = locationListener == null ? null : new LocationCallback() {
+				@Override
+				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
+					locationListener.updateLocation(locations.isEmpty() ? null : locations.get(0));
+				}
+			};
+			return locationServiceHelper.getFirstTimeRunDefaultLocation(callback);
+		}
+		return null;
 	}
 
 	public boolean hasOrientationSensor() {

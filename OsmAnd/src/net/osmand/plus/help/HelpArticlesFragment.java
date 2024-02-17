@@ -34,7 +34,7 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 
 	private static final String TAG = HelpArticlesFragment.class.getSimpleName();
 
-	private HelpArticleNode articleNode;
+	private HelpArticle article;
 	private ContextMenuListAdapter adapter;
 
 	@Override
@@ -73,60 +73,25 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 
 		HelpActivity activity = (HelpActivity) requireActivity();
 		ActionBar actionBar = activity.getSupportActionBar();
-		if (actionBar != null && articleNode != null) {
-			actionBar.setTitle(HelpArticleUtils.getArticleName(app, articleNode.url));
+		if (actionBar != null && article != null) {
+			actionBar.setTitle(HelpArticleUtils.getArticleName(app, article));
 		}
 	}
 
 	@NonNull
 	public List<ContextMenuItem> createItems() {
 		List<ContextMenuItem> items = new ArrayList<>();
+		HelpActivity activity = (HelpActivity) requireActivity();
 
-		if (articleNode != null) {
-			for (HelpArticleNode node : articleNode.articles.values()) {
-				String title = HelpArticleUtils.getArticleName(app, node.url);
-
-				if (Algorithms.isEmpty(node.articles)) {
-					items.add(createArticleItem(title, node.url));
-				} else {
-					items.add(createGroupItem(title, node));
-				}
+		if (article != null) {
+			for (HelpArticle article : article.articles.values()) {
+				items.add(HelpArticleUtils.createArticleItem(activity, article));
 			}
 		}
 		if (!Algorithms.isEmpty(items)) {
 			items.add(new ContextMenuItem(null).setLayout(R.layout.simple_divider_item));
 		}
 		return items;
-	}
-
-	@NonNull
-	private ContextMenuItem createGroupItem(@NonNull String title, @NonNull HelpArticleNode node) {
-		return new ContextMenuItem(null)
-				.setTitle(title)
-				.setIcon(R.drawable.ic_action_book_info)
-				.setListener((uiAdapter, view, item, isChecked) -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager manager = activity.getSupportFragmentManager();
-						HelpArticlesFragment.showInstance(manager, node);
-					}
-					return false;
-				});
-	}
-
-	@NonNull
-	private ContextMenuItem createArticleItem(@NonNull String title, @NonNull String url) {
-		return new ContextMenuItem(null)
-				.setTitle(title)
-				.setIcon(R.drawable.ic_action_book_info)
-				.setListener((uiAdapter, view, item, isChecked) -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FragmentManager manager = activity.getSupportFragmentManager();
-						HelpArticleDialogFragment.showInstance(manager, url, title);
-					}
-					return false;
-				});
 	}
 
 	@Override
@@ -156,11 +121,11 @@ public class HelpArticlesFragment extends BaseOsmAndFragment implements OnItemCl
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull HelpArticleNode articleNode) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull HelpArticle article) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			HelpArticlesFragment fragment = new HelpArticlesFragment();
 			fragment.setRetainInstance(true);
-			fragment.articleNode = articleNode;
+			fragment.article = article;
 
 			manager.beginTransaction()
 					.addToBackStack(null)

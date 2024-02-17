@@ -47,6 +47,7 @@ public class RoutePlannerFrontEnd {
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
+	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
 	
 
 	public RoutePlannerFrontEnd() {
@@ -56,6 +57,19 @@ public class RoutePlannerFrontEnd {
 		BASE,
 		NORMAL,
 		COMPLEX
+	}
+
+	private enum HHRoutingType {
+		JAVA,
+		CPP
+	}
+
+	public void setHHRouteCpp(boolean cpp) {
+		if (cpp) {
+			hhRoutingType = HHRoutingType.CPP;
+		} else {
+			hhRoutingType = HHRoutingType.JAVA;
+		}
 	}
 	
 	
@@ -481,6 +495,7 @@ public class RoutePlannerFrontEnd {
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
 					lastStraightLine.add(startPoint);
+					System.out.println(startPoint);
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 					lastStraightLine = null;
 				}
@@ -836,33 +851,21 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
 		if (hhRoutingConfig != null) {
-			HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx);
-			HHNetworkRouteRes r = null;
-			Double dir = ctx.config.initialDirection ;
-			for (int i = 0; i < targets.size(); i++) {
-				float previousTime = ctx.routingTime;
-				double initialPenalty = ctx.config.penaltyForReverseDirection;
-				if (i > 0) {
-					ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty (only for inter-points)
+			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
+				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
+				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
+					return r;
 				}
-				HHNetworkRouteRes res = calculateHHRoute(routePlanner, ctx, i == 0 ? start : targets.get(i - 1),
-						targets.get(i), dir);
-				ctx.config.penaltyForReverseDirection = initialPenalty;
-				if (r == null) {
-					r = res;
-				} else {
-					r.append(res);
+			} else {
+				setStartEndToCtx(ctx, start, end, intermediates);
+				ctx.calculationProgress.nextIteration();
+				RouteCalcResult r = runNativeRouting(ctx, null, hhRoutingConfig);
+				ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
+				//makeStartEndPointsPrecise no need, C++ does it
+				RouteResultPreparation.printResults(ctx, start, end, r.detailed);
+				if ((!r.detailed.isEmpty() && r.isCorrect()) || useOnlyHHRouting) {
+					return r;
 				}
-				if (r == null || !r.isCorrect()) {
-					break;
-				}
-				if (r.detailed.size() > 0) {
-					dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
-				}
-				ctx.routingTime += previousTime;
-			}
-			if (r != null && r.isCorrect() || useOnlyHHRouting) {
-				return r;
 			}
 		}
 		
@@ -885,10 +888,7 @@ public class RoutePlannerFrontEnd {
 		}
 		RouteCalcResult res ;
 		if (intermediatesEmpty && ctx.nativeLib != null) {
-			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
-			ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
-			ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
-			ctx.targetY = MapUtils.get31TileNumberY(end.getLatitude());
+			setStartEndToCtx(ctx, start, end, intermediates);
 			RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 			if (recalculationEnd != null) {
 				ctx.initTargetPoint(recalculationEnd);
@@ -897,7 +897,7 @@ public class RoutePlannerFrontEnd {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 			}
 			ctx.calculationProgress.nextIteration();
-			res = runNativeRouting(ctx, recalculationEnd);
+			res = runNativeRouting(ctx, recalculationEnd, null);
 			makeStartEndPointsPrecise(res, start, end, intermediates);
 		} else {
 			int indexNotFound = 0;
@@ -908,6 +908,7 @@ public class RoutePlannerFrontEnd {
 			if (intermediates != null) {
 				for (LatLon l : intermediates) {
 					if (!addSegment(l, ctx, indexNotFound++, points, false)) {
+						System.out.println(points.get(points.size() - 1).getRoad().toString());
 						return new RouteCalcResult("Intermediate point is not located");
 					}
 				}
@@ -923,6 +924,55 @@ public class RoutePlannerFrontEnd {
 		return res;
 	}
 
+	private void setStartEndToCtx(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates) {
+		boolean intermediatesEmpty = intermediates == null || intermediates.isEmpty();
+		ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
+		ctx.startY = MapUtils.get31TileNumberY(start.getLatitude());
+		ctx.targetX = MapUtils.get31TileNumberX(end.getLongitude());
+		ctx.targetY = MapUtils.get31TileNumberY(end.getLatitude());
+		if (!intermediatesEmpty) {
+			ctx.intermediatesX = new int[intermediates.size()];
+			ctx.intermediatesY = new int[intermediates.size()];
+			for (int i = 0; i < intermediates.size(); i++) {
+				LatLon l = intermediates.get(i);
+				ctx.intermediatesX[i] = MapUtils.get31TileNumberX(l.getLongitude());
+				ctx.intermediatesY[i] = MapUtils.get31TileNumberY(l.getLatitude());
+			}
+		} else {
+			ctx.intermediatesX = new int[0];
+			ctx.intermediatesY = new int[0];
+		}
+	}
+
+	private HHNetworkRouteRes runHHRoute(RoutingContext ctx, LatLon start, List<LatLon> targets)
+			throws IOException, InterruptedException {
+		HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx);
+		HHNetworkRouteRes r = null;
+		Double dir = ctx.config.initialDirection;
+		for (int i = 0; i < targets.size(); i++) {
+			double initialPenalty = ctx.config.penaltyForReverseDirection;
+			if (i > 0) {
+				ctx.config.penaltyForReverseDirection /= 2; // relax reverse-penalty (only for inter-points)
+			}
+			ctx.calculationProgress.hhTargetsProgress(i, targets.size());
+			HHNetworkRouteRes res = calculateHHRoute(routePlanner, ctx, i == 0 ? start : targets.get(i - 1),
+					targets.get(i), dir);
+			ctx.config.penaltyForReverseDirection = initialPenalty;
+			if (r == null) {
+				r = res;
+			} else {
+				r.append(res);
+			}
+			if (r == null || !r.isCorrect()) {
+				break;
+			}
+			if (r.detailed.size() > 0) {
+				dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
+			}
+		}
+		return r;
+	}
+
 	private HHNetworkRouteRes calculateHHRoute(HHRoutePlanner<NetworkDBPoint> routePlanner, RoutingContext ctx,
 			LatLon start, LatLon end, Double dir) throws InterruptedException, IOException {
 		NativeLibrary nativeLib = ctx.nativeLib;
@@ -936,7 +986,7 @@ public class RoutePlannerFrontEnd {
 				makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
 				return res;
 			}
-			ctx.calculationProgress.hhIteration(null);
+			ctx.calculationProgress.hhIteration(HHIteration.HH_NOT_STARTED);
 		} catch (SQLException e) {
 			throw new IOException(e.getMessage(), e);
 		} catch (IOException | RuntimeException e) {
@@ -1064,7 +1114,7 @@ public class RoutePlannerFrontEnd {
 			ctx.targetY = end.preciseY;
 			ctx.targetRoadId = end.road.id;
 			ctx.targetSegmentInd  = end.segStart;
-			return runNativeRouting(ctx, recalculationEnd);
+			return runNativeRouting(ctx, recalculationEnd, null);
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
@@ -1130,7 +1180,7 @@ public class RoutePlannerFrontEnd {
 
 	}
 
-	private RouteCalcResult runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd) throws IOException {
+	private RouteCalcResult runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd, HHRoutingConfig hhConfig) throws IOException {
 		refreshProgressDistance(ctx);
 		if (recalculationEnd != null) {
 			if (TRACE_ROUTING) {
@@ -1139,7 +1189,11 @@ public class RoutePlannerFrontEnd {
 		}
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		// long time = System.currentTimeMillis();
-		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, regions, ctx.calculationMode == RouteCalculationMode.BASE);
+		if (ctx.intermediatesX == null || ctx.intermediatesY == null) {
+			ctx.intermediatesX = new int[0];
+			ctx.intermediatesY = new int[0];
+		}
+		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx, hhConfig, regions, ctx.calculationMode == RouteCalculationMode.BASE);
 		if (TRACE_ROUTING) {
 			log.info("Native routing result!");
 			for (RouteSegmentResult r : res) {
@@ -1153,7 +1207,11 @@ public class RoutePlannerFrontEnd {
 		}
 		addPrecalculatedToResult(recalculationEnd, result);
 		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
-		return new RouteResultPreparation().prepareResult(ctx, result);
+		if (hhConfig != null) {
+			return new RouteCalcResult(result); // HH: avoid double call prepareResult() (already done in C++)
+		} else {
+			return new RouteResultPreparation().prepareResult(ctx, result);
+		}
 	}
 
 	private void addPrecalculatedToResult(RouteSegment recalculationEnd, List<RouteSegmentResult> result) {

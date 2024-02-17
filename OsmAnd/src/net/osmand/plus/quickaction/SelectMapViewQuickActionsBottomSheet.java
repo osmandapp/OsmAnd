@@ -1,5 +1,8 @@
-package net.osmand.plus.dialogs;
+package net.osmand.plus.quickaction;
 
+
+import static net.osmand.plus.quickaction.AddQuickActionDialog.QUICK_ACTION_BUTTON_KEY;
+import static net.osmand.plus.quickaction.SwitchableAction.KEY_ID;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,15 +32,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.quickaction.CreateEditActionDialog;
-import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 
 import java.util.List;
 
@@ -53,6 +53,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 
 	private String selectedItem;
 	private QuickAction action;
+	private QuickActionButtonState buttonState;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -61,10 +62,15 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		if (args == null || mapActivity == null) {
 			return;
 		}
-		long id = args.getLong(SwitchableAction.KEY_ID);
 		OsmandApplication app = mapActivity.getMyApplication();
-		QuickActionRegistry quickActionRegistry = app.getQuickActionRegistry();
-		action = QuickActionRegistry.produceAction(quickActionRegistry.getQuickAction(id));
+		MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
+
+		String key = args.getString(QUICK_ACTION_BUTTON_KEY);
+		if (key != null) {
+			buttonState = mapButtonsHelper.getButtonStateById(key);
+		}
+		long actionId = args.getLong(KEY_ID);
+		action = MapButtonsHelper.produceAction(buttonState.getQuickAction(actionId));
 
 		if (savedInstanceState != null) {
 			selectedItem = savedInstanceState.getString(SELECTED_ITEM_KEY);
@@ -85,8 +91,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 		int itemsSize = 0;
 		if (action instanceof SwitchableAction) {
 			SwitchableAction switchableAction = (SwitchableAction) action;
-			List sources = switchableAction.loadListFromParams();
-			itemsSize = sources.size();
+			itemsSize = switchableAction.loadListFromParams().size();
 		}
 		for (int i = 0; i < itemsSize; i++) {
 			LayoutInflater.from(new ContextThemeWrapper(app, themeRes))
@@ -124,7 +129,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	protected void onDismissButtonClickAction() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			CreateEditActionDialog.showInstance(manager, action);
+			CreateEditActionDialog.showInstance(manager, buttonState, action);
 		}
 	}
 
@@ -222,5 +227,18 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 			};
 		}
 		return onClickListener;
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull QuickActionButtonState buttonState, long actionId) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle args = new Bundle();
+			args.putLong(KEY_ID, actionId);
+			args.putString(QUICK_ACTION_BUTTON_KEY, buttonState.getId());
+
+			SelectMapViewQuickActionsBottomSheet fragment = new SelectMapViewQuickActionsBottomSheet();
+			fragment.setArguments(args);
+			fragment.show(manager, TAG);
+		}
 	}
 }

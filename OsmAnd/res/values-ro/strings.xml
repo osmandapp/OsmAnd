@@ -644,12 +644,12 @@
     <string name="sd_mounted_ro">Cartela de memorie se poate doar citi.
 \nAcum este posibilă doar vizualizarea hărții preîncărcate, nu și descărcarea de noi zone.</string>
     <string name="unzipping_file">Se decomprimă fișierul…</string>
-    <string name="route_tr">Virați la dreapta și continuați</string>
-    <string name="route_tshr">Virați puternic la dreapta și continuați</string>
-    <string name="route_tslr">Virați ușor la dreapta și continuați</string>
-    <string name="route_tl">Virați la stânga și continuați</string>
-    <string name="route_tshl">Virați puternic la stânga și continuați</string>
-    <string name="route_tsll">Virați ușor la stânga și continuați</string>
+    <string name="route_tr">Virați la dreapta și continuați drumul</string>
+    <string name="route_tshr">Virați strâns la dreapta și continuați drumul</string>
+    <string name="route_tslr">Virați ușor la dreapta și continuați drumul</string>
+    <string name="route_tl">Virați la stânga și continuați drumul</string>
+    <string name="route_tshl">Virați strâns la stânga și continuați drumul</string>
+    <string name="route_tsll">Virați ușor la stânga și continuați drumul</string>
     <string name="route_tu">Întoarceți și continuați</string>
     <string name="route_head">Mergeți înainte</string>
     <string name="first_time_continue">Apoi</string>
@@ -2830,7 +2830,7 @@
     <string name="track_show_start_finish_icons">Arată iconurile de început și de sfârșit</string>
     <string name="select_track_width">Selectare lățime</string>
     <string name="keep_screen_on">Menține ecranul pornit</string>
-    <string name="keep_screen_off">Țineți ecranul oprit</string>
+    <string name="keep_screen_off">Păstrează ecranul oprit</string>
     <string name="pseudo_mercator_projection">Proiecție pseudo-Mercator</string>
     <string name="sqlite_db_file">Fișier SQLiteDB</string>
     <string name="expire_time">Timp expirare</string>
@@ -2838,7 +2838,7 @@
     <string name="shared_string_delete_all_q">Șterg tot\?</string>
     <string name="uninstall_speed_cameras">Dezinstalare camere radar</string>
     <string name="shared_string_legal">Legal</string>
-    <string name="keep_active">Mențineți activ</string>
+    <string name="keep_active">Păstrează activ</string>
     <string name="shared_string_uninstall">Dezinstalare</string>
     <string name="shared_string_tones">tone</string>
     <string name="shared_string_meters">metri</string>

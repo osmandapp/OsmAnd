@@ -20,34 +20,61 @@ import com.getkeepsafe.taptargetview.TapTargetView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+
+import java.util.List;
 
 public class QuickActionButton extends MapButton {
 
 	private final MapQuickActionLayer layer;
+	private final QuickActionButtonState buttonState;
 
-	public QuickActionButton(@NonNull MapActivity mapActivity, @NonNull ImageView fabButton, @NonNull String id) {
-		super(mapActivity, fabButton, id, false);
-
-		layer = mapActivity.getMapLayers().getMapQuickActionLayer();
+	public QuickActionButton(@NonNull MapActivity activity, @NonNull ImageView view,
+	                         @NonNull QuickActionButtonState buttonState) {
+		super(activity, view, buttonState.getId(), false);
+		this.buttonState = buttonState;
+		this.layer = app.getOsmandMap().getMapLayers().getMapQuickActionLayer();
 
 		setOnClickListener(getOnCLickListener());
 		setOnLongClickListener(getLongClickListener());
 
-		updateButton(layer.getCurrentWidgetState());
 		setBackground(R.drawable.btn_circle_trans, R.drawable.btn_circle_night);
 		setIconColorId(R.color.map_button_icon_color_light, R.color.map_button_icon_color_dark);
+		update(app.getDaynightHelper().isNightMode(), isRouteDialogOpened(), isShowBottomButtons());
 		setQuickActionButtonMargin();
 	}
 
-	@Override
-	protected void updateState(boolean nightMode) {
-		updateButton(layer.getCurrentWidgetState());
+	@NonNull
+	public QuickActionButtonState getButtonState() {
+		return buttonState;
 	}
 
-	public void updateButton(boolean widgetVisible) {
-		setIconId(!widgetVisible ? R.drawable.ic_quick_action : R.drawable.ic_action_close);
-		setContentDesc(!widgetVisible ? R.string.configure_screen_quick_action : R.string.shared_string_cancel);
+	@Override
+	public void update(boolean nightMode, boolean routeDialogOpened, boolean bottomButtonsAllowed) {
+		super.update(nightMode, routeDialogOpened, bottomButtonsAllowed);
+
+		boolean visible = layer.isWidgetVisibleForButton(this);
+		if (visible) {
+			setIconId(R.drawable.ic_action_close);
+			setContentDesc(R.string.shared_string_cancel);
+		} else if (buttonState.isSingleAction()) {
+			setupSingleAction(nightMode);
+		} else {
+			setIconId(R.drawable.ic_quick_action);
+			setContentDesc(R.string.configure_screen_quick_action);
+		}
+	}
+
+	private void setupSingleAction(boolean nightMode) {
+		List<QuickAction> actions = buttonState.getQuickActions();
+		QuickAction action = MapButtonsHelper.produceAction(actions.get(0));
+
+		setContentDesc(action.getActionText(app));
+		setDrawable(buttonState.getIcon(nightMode, true, ColorUtilities.getColor(app, getIconColorId())));
 	}
 
 	@Override
@@ -65,8 +92,12 @@ public class QuickActionButton extends MapButton {
 	private View.OnClickListener getOnCLickListener() {
 		return v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			if (!showTutorialIfNeeded()) {
-				layer.updateWidgetVisibility(!layer.isWidgetVisible());
+			if (buttonState.isSingleAction()) {
+				List<QuickAction> actions = buttonState.getQuickActions();
+				layer.onActionSelected(buttonState, actions.get(0));
+			} else if (!showTutorialIfNeeded()) {
+				boolean visible = layer.isWidgetVisibleForButton(this);
+				layer.setSelectedButton(visible ? null : this);
 			}
 		};
 	}
@@ -79,7 +110,7 @@ public class QuickActionButton extends MapButton {
 			view.setScaleX(1.5f);
 			view.setScaleY(1.5f);
 			view.setAlpha(0.95f);
-			view.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, view, settings.QUICK_ACTION_FAB_MARGIN));
+			view.setOnTouchListener(getMoveFabOnTouchListener(app, mapActivity, view, buttonState.getFabMarginPref()));
 			return true;
 		};
 	}
@@ -88,11 +119,11 @@ public class QuickActionButton extends MapButton {
 		if (mapActivity != null) {
 			FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) view.getLayoutParams();
 			if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-				Pair<Integer, Integer> fabMargin = settings.QUICK_ACTION_FAB_MARGIN.getPortraitFabMargin();
+				Pair<Integer, Integer> fabMargin = buttonState.getFabMarginPref().getPortraitFabMargin();
 				int defBottomMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing) * 2;
 				setFabButtonMargin(mapActivity, view, params, fabMargin, 0, defBottomMargin);
 			} else {
-				Pair<Integer, Integer> fabMargin = settings.QUICK_ACTION_FAB_MARGIN.getLandscapeFabMargin();
+				Pair<Integer, Integer> fabMargin = buttonState.getFabMarginPref().getLandscapeFabMargin();
 				int defRightMargin = calculateTotalSizePx(app, R.dimen.map_button_size, R.dimen.map_button_spacing_land) * 2;
 				setFabButtonMargin(mapActivity, view, params, fabMargin, defRightMargin, 0);
 			}

@@ -756,6 +756,7 @@ public class RouteProvider {
 		OsmandSettings settings = params.ctx.getSettings();
 		if (settings.USE_HH_ROUTING.get()) {
 			router.setDefaultHHRoutingConfig();
+			router.setHHRouteCpp(settings.HH_ROUTING_CPP.get());
 		} else {
 			router.setHHRoutingConfig(null);
 		}

@@ -2,7 +2,7 @@ package net.osmand.data;
 
 public class IncompleteTransportRoute {
 	private long routeId;
-	private int routeOffset = -1;
+	private long routeOffset = -1;
 	private String operator;
 	private String type;
 	private String ref;
@@ -28,11 +28,11 @@ public class IncompleteTransportRoute {
 		this.routeId = routeId;
 	}
 
-	public int getRouteOffset() {
+	public long getRouteOffset() {
 		return routeOffset;
 	}
 
-	public void setRouteOffset(int routeOffset) {
+	public void setRouteOffset(long routeOffset) {
 		this.routeOffset = routeOffset;
 	}
 

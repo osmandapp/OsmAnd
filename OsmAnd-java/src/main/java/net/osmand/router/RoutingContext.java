@@ -66,6 +66,8 @@ public class RoutingContext {
 	public boolean startTransportStop;
 	public int targetX;
 	public int targetY;
+	public int[] intermediatesX;
+	public int[] intermediatesY;
 	public long targetRoadId;
 	public int targetSegmentInd;
 	public boolean targetTransportStop;
@@ -135,6 +137,8 @@ public class RoutingContext {
 		}
 		this.config = config;
 		this.nativeLib = nativeLibrary;
+		this.intermediatesX = new int[0];
+		this.intermediatesY = new int[0];
 	}
 	
 	

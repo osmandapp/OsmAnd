@@ -33,14 +33,12 @@ public class CopyrightCard extends BaseMetadataCard {
 
 		if (visible) {
 			if (!Algorithms.isEmpty(copyright.author)) {
-				createItemRow(getString(R.string.shared_string_name), copyright.author, getContentIcon(R.drawable.ic_action_copyright));
+				createItemRow(getString(R.string.shared_string_author), copyright.author, getContentIcon(R.drawable.ic_action_copyright));
 			}
 			if (!Algorithms.isEmpty(copyright.year)) {
 				createItemRow(getString(R.string.year), copyright.year, getContentIcon(R.drawable.ic_action_calendar_month));
 			}
-			if (!Algorithms.isEmpty(copyright.license)) {
-				createItemRow(getString(R.string.shared_string_license), copyright.license, getContentIcon(R.drawable.ic_action_link));
-			}
+			createLinkItemRow(getString(R.string.shared_string_license), copyright.license, R.drawable.ic_action_link);
 		}
 	}
 }

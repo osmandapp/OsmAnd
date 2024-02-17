@@ -1,7 +1,6 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_3D_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
@@ -150,11 +149,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initFabButtons(@NonNull MapActivity mapActivity) {
-		ImageView map3DButtonView = mapActivity.findViewById(R.id.map_3d_button);
+		ImageView buttonView = mapActivity.findViewById(R.id.map_3d_button);
 		if (map3DButton != null) {
 			map3DButton.onDestroyButton();
 		}
-		map3DButton = new Map3DButton(mapActivity, map3DButtonView, MAP_3D_HUD_ID);
+		map3DButton = new Map3DButton(mapActivity, buttonView);
 		mapButtons.add(map3DButton);
 	}
 

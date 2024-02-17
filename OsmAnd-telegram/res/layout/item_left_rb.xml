@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/list_item_height"
+	android:background="?attr/selectableItemBackground"
+	android:gravity="center_vertical"
+	android:paddingLeft="@dimen/content_padding_standard"
+	android:paddingRight="@dimen/content_padding_standard"
+	tools:background="@color/card_bg_light">
+
+	<RadioButton
+		android:id="@+id/radio_button"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="@null"
+		android:clickable="false"
+		android:focusable="false"
+		android:saveEnabled="false"/>
+
+	<net.osmand.telegram.ui.views.TextViewEx
+		android:id="@+id/title"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="@dimen/content_padding_big"
+		android:layout_marginLeft="@dimen/content_padding_big"
+		android:layout_marginEnd="@dimen/content_padding_standard"
+		android:layout_marginRight="@dimen/content_padding_standard"
+		android:layout_weight="1"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/list_item_title_text_size"
+		app:typeface="@string/font_roboto_regular"
+		tools:text="Some title"/>
+
+</LinearLayout>

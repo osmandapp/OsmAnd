@@ -15,6 +15,7 @@ import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
+import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
@@ -79,7 +80,6 @@ import net.osmand.plus.settings.backend.preferences.BooleanStringPreference;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.preferences.EnumStringPreference;
-import net.osmand.plus.settings.backend.preferences.FabMarginPreference;
 import net.osmand.plus.settings.backend.preferences.FloatPreference;
 import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
@@ -833,15 +833,6 @@ public class OsmandSettings {
 	}
 
 	public final CommonPreference<Boolean> ENABLE_3D_MAPS = registerBooleanPreference("enable_3d_maps", true).makeProfile().makeShared().cache();
-
-	public final CommonPreference<CompassVisibility> COMPASS_VISIBILITY = new EnumStringPreference<CompassVisibility>(this, "compass_visibility", CompassVisibility.VISIBLE_IF_MAP_ROTATED, CompassVisibility.values()) {
-
-		@Override
-		public CompassVisibility getModeValue(ApplicationMode mode) {
-			CompassVisibility customizationValue = CompassVisibility.getFromCustomization(ctx, mode);
-			return isSetForMode(mode) || customizationValue == null ? super.getModeValue(mode) : customizationValue;
-		}
-	}.makeProfile().cache();
 
 	public final CommonPreference<Integer> SIMULATE_POSITION_SPEED = new IntPreference(this, "simulate_position_movement_speed", 1).makeGlobal().makeShared();
 
@@ -1814,6 +1805,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> USE_HH_ROUTING = new BooleanPreference(this, "use_hh_routing", false).makeGlobal().makeShared().cache();
+	public final OsmandPreference<Boolean> HH_ROUTING_CPP = new BooleanPreference(this, "hh_routing_cpp", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> USE_V1_AUTO_ZOOM = new BooleanPreference(this, "use_v1_auto_zoom", false).makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
@@ -2754,26 +2746,9 @@ public class OsmandSettings {
 		return impassableRoadsStorage.movePoint(latLonEx, latLonNew);
 	}
 
-	/**
-	 * quick actions prefs
-	 */
-
-	public final CommonPreference<Boolean> QUICK_ACTION = new BooleanPreference(this, "quick_action_state", false).makeProfile();
-
-	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference(this, "quick_action_list", "").makeGlobal().storeLastModifiedTime();
-
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference(this, "quick_action_tutorial", false).makeGlobal().makeShared();
-	public final FabMarginPreference QUICK_ACTION_FAB_MARGIN = new FabMarginPreference(this, "quick_fab_margin");
+	public final ListStringPreference QUICK_ACTION_BUTTONS = (ListStringPreference) new ListStringPreference(this, "quick_action_buttons", DEFAULT_BUTTON_ID + ";", ";").makeProfile();
 
-	/**
-	 * map 3d mode
-	 */
-
-	public final CommonPreference<Map3DModeVisibility> MAP_3D_MODE_VISIBILITY = new EnumStringPreference<>(this, "map_3d_mode_visibility", Map3DModeVisibility.VISIBLE, Map3DModeVisibility.values()).makeProfile().cache();
-
-	public final FabMarginPreference MAP_3D_MODE_FAB_MARGIN = new FabMarginPreference(this, "map_3d_mode_margin");
-
-	public final CommonPreference<Float> MAP_3D_MODE_ELEVATION_ANGLE = new FloatPreference(this, "map_3d_mode_elevation_angle", 90).makeProfile();
 
 	/**
 	 * the location of a parked car
@@ -3241,16 +3216,6 @@ public class OsmandSettings {
 			res.add(toks.nextToken());
 		}
 		return res;
-	}
-
-	public void setQuickActions(HashMap<String, Boolean> quickActions, ApplicationMode mode) {
-		if (!QUICK_ACTION.isSetForMode(mode)) {
-			Boolean actionState = quickActions.get(mode.getStringKey());
-			if (actionState == null) {
-				actionState = QUICK_ACTION.getDefaultValue();
-			}
-			setPreference(QUICK_ACTION.getId(), actionState, mode);
-		}
 	}
 
 	public final OsmandPreference<Boolean> FAVORITES_FREE_ACCOUNT_CARD_DISMISSED =

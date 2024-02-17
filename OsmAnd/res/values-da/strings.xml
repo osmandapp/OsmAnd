@@ -5616,4 +5616,14 @@
     <string name="max_sensor_temperature">Temperatur, maks.</string>
     <string name="avg_sensor_temperature">Temperatur, gennemsnit</string>
     <string name="max_sensor_speed">Sensorhastighed, maks.</string>
+    <string name="shared_string_activity">Aktivitet</string>
+    <string name="shared_string_additional">Yderligere</string>
+    <string name="sorted_sufolders_toast">Undermapper i “%1$s” sorteres efter: “%2$s”</string>
+    <string name="sort_subfolders">Sortér undermapper</string>
+    <string name="shared_string_keywords">Nøgleord</string>
+    <string name="special_routing_cpp">Speciel type ruteberegning</string>
+    <string name="custom_buttons">Tilpassede knapper</string>
+    <string name="default_buttons">Standardknapper</string>
+    <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
+    <string name="add_button">Tilføj knap</string>
 </resources>

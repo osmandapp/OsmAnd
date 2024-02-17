@@ -65,7 +65,7 @@
     <string name="poi_washing_machine">Mașină de spălat</string>
     <string name="poi_tents">Corturi</string>
     <string name="poi_massage_type">Tip de masaj</string>
-    <string name="poi_healthcare_speciality">Specialitate de sănătate</string>
+    <string name="poi_healthcare_speciality">Specialitate medicală</string>
     <string name="poi_diet">Dietă</string>
     <string name="poi_nudism">Nudism</string>
     <string name="poi_beach_surface_type">Suprafață</string>
@@ -170,7 +170,7 @@
     <string name="poi_tourism">Turism</string>
     <string name="poi_sport">Sport</string>
     <string name="poi_office">Birou</string>
-    <string name="poi_healthcare">Asistență medicală</string>
+    <string name="poi_healthcare">Servicii medicale</string>
     <string name="poi_administrative">Administrativ</string>
     <string name="poi_education">Educație</string>
     <string name="poi_landuse">Utilizare terenuri</string>
@@ -805,7 +805,7 @@
     <string name="poi_traffic_signals">Semafor</string>
     <string name="poi_traffic_calming_island">Insulă de trafic</string>
     <string name="poi_traffic_calming_choker">Guler</string>
-    <string name="poi_traffic_calming_table">Tabel de viteză</string>
+    <string name="poi_traffic_calming_table">Înălțare pentru limitarea vitezei</string>
     <string name="poi_traffic_calming_rumble_strip">Marcaj rezonator</string>
     <string name="poi_traffic_calming_chicane">Șicană</string>
     <string name="poi_traffic_calming_cushion">Pernă de viteză</string>
@@ -1541,7 +1541,7 @@
     <string name="poi_information_trail_blaze">Traseu blaze</string>
     <string name="poi_information_office">Birou</string>
     <string name="poi_information_map">Hartă</string>
-    <string name="poi_information_board">Bord</string>
+    <string name="poi_information_board">Panou</string>
     <string name="poi_information_guidepost">Stâlp indicator</string>
     <string name="poi_water_point">Loc de adăpare</string>
     <string name="poi_water_characteristic_sulfuric">Sulfuric</string>
@@ -2344,11 +2344,11 @@
     <string name="poi_healthcare_speciality_traditional_chinese_medicine">Medicină tradițională chineză</string>
     <string name="poi_healthcare_speciality_homeopathy">Homeopatie</string>
     <string name="poi_healthcare_speciality_acupuncture">Acupunctură</string>
-    <string name="poi_healthcare_speciality_adult_psychiatry">Psihiatrie pentru adulți</string>
+    <string name="poi_healthcare_speciality_adult_psychiatry">Psihiatrie adulți</string>
     <string name="poi_healthcare_speciality_podiatry">Podologie</string>
     <string name="poi_healthcare_speciality_sports">Medicină sportivă</string>
-    <string name="poi_healthcare_speciality_manual_therapy">Terapia manuală</string>
-    <string name="poi_healthcare_speciality_speech_therapy">Terapia prin vorbire</string>
+    <string name="poi_healthcare_speciality_manual_therapy">Terapie manuală</string>
+    <string name="poi_healthcare_speciality_speech_therapy">Terapie de limbaj</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Patologie clinică</string>
     <string name="poi_healthcare_speciality_optometry">Optometrie</string>
     <string name="poi_healthcare_speciality_addiction">Medicina dependenței</string>
@@ -2371,10 +2371,10 @@
     <string name="poi_healthcare_speciality_nephrology">Nefrologie (boli renale)</string>
     <string name="poi_healthcare_speciality_stomatology">Stomatologie</string>
     <string name="poi_healthcare_speciality_gastroenterology">Gastroenterologie</string>
-    <string name="poi_healthcare_speciality_diagnostic_radiology">Radiologie de diagnosticare</string>
+    <string name="poi_healthcare_speciality_diagnostic_radiology">Radiologie de diagnostic</string>
     <string name="poi_healthcare_speciality_maxillofacial_surgery">Chirurgie maxilo-facială</string>
     <string name="poi_healthcare_speciality_physiatry">Medicină fizică și reabilitare</string>
-    <string name="poi_healthcare_speciality_child_psychiatry">Psihiatrie infantilă</string>
+    <string name="poi_healthcare_speciality_child_psychiatry">Psihiatrie pediatrică</string>
     <string name="poi_healthcare_speciality_occupational">Terapie ocupațională</string>
     <string name="poi_healthcare_speciality_biochemistry">Chimie biologică</string>
     <string name="poi_healthcare_speciality_physiotherapy">Fizioterapie</string>
@@ -2392,7 +2392,7 @@
     <string name="poi_healthcare_speciality_cardiology">Cardiologie</string>
     <string name="poi_healthcare_speciality_dermatovenereology">Dermato-venerologie</string>
     <string name="poi_healthcare_speciality_neurology">Neurologie</string>
-    <string name="poi_healthcare_speciality_psychiatry">Psihiatru</string>
+    <string name="poi_healthcare_speciality_psychiatry">Psihiatrie</string>
     <string name="poi_healthcare_speciality_radiotherapy">Radioterapie</string>
     <string name="poi_healthcare_speciality_radiology">Radiologie</string>
     <string name="poi_healthcare_speciality_surgery">Chirurgie generală</string>
@@ -4635,4 +4635,7 @@
     <string name="poi_socket_typee_output">Mufă: Type E: ieșire</string>
     <string name="poi_dressing_room">Vestiar</string>
     <string name="poi_emergency_bay">Refugiu de urgență</string>
+    <string name="poi_healthcare_speciality_clinic">Specialitate medicală: clinică</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Specialitate medicală: psihoterapeut</string>
+    <string name="poi_healthcare_speciality_laboratory">Specialitate medicală: laborator</string>
 </resources>

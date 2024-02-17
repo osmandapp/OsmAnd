@@ -2497,7 +2497,7 @@
     <string name="shared_string_more_without_dots">Altro</string>
     <string name="empty_state_osm_edits">Crea o modifica oggetti OSM</string>
     <string name="empty_state_osm_edits_descr">Crea o modifica PDI OSM, apri o commenta note OSM, e invia tracce GPX registrate.</string>
-    <string name="shared_string_deleted">Eliminato</string>
+    <string name="shared_string_deleted">Cancellato</string>
     <string name="shared_string_edited">Modificato</string>
     <string name="shared_string_added">Aggiunto</string>
     <string name="marker_activated">Marcatore %s attivato.</string>
@@ -4182,7 +4182,7 @@
 \n • OsmAnd Live spostato in \"Scarica mappe &gt; Aggiornamenti\"
 \n
 \n</string>
-    <string name="duration_moment_ago">poco fa</string>
+    <string name="duration_moment_ago">un attimo fa</string>
     <string name="logout_from_osmand_cloud">Disconnettiti da OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Disconnettersi\?
 \nDovrai ricollegarti nuovamente per fare il backup o ripristinare i tuoi dati.</string>
@@ -4530,7 +4530,7 @@
     <string name="location_source_descr">Come preimpostazione, OsmAnd installato da Google Play usa %1$s per determinare la posizione.
 \n
 \nSe tu ottieni posizioni non accurate, oppure usi un dispositivo senza %2$s, prova a passare a \"%3$s\"</string>
-    <string name="location_source">Origine posizione</string>
+    <string name="location_source">Origine della posizione</string>
     <string name="apply_to_existing">Applica agli esistenti</string>
     <string name="osm_carto_render_descr">Simile allo stile cartografico di OpenStreetMap sul sito principale OSM</string>
     <string name="simulation_real_mode_title">Simulazione realistica</string>
@@ -5069,12 +5069,12 @@
 \n
 \n</string>
     <string name="sort_duration_ascending">Prima la durata più breve</string>
-    <string name="sort_duration_descending">Prima la durata più lunga</string>
-    <string name="sort_distance_ascending">Prima la distanza più breve</string>
-    <string name="sort_distance_descending">Prima la distanza più lunga</string>
+    <string name="sort_duration_descending">Prima la durata maggiore</string>
+    <string name="sort_distance_ascending">Prima la distanza minore</string>
+    <string name="sort_distance_descending">Prima la distanza maggiore</string>
     <string name="sort_date_ascending">Prima la data più recente</string>
     <string name="sort_date_descending">Prima la data meno recente</string>
-    <string name="shared_string_nearest">Più vicino</string>
+    <string name="shared_string_nearest">Il più vicino</string>
     <string name="selected_value">Valore selezionato</string>
     <string name="app_mode_moped">Ciclomotore</string>
     <string name="offline_cache">Cache offline</string>
@@ -5486,7 +5486,7 @@
     <string name="searching_matching_tracks">Cerca tutte le tracce corrispondenti</string>
     <string name="cloud_trash_clear_confirmation">Eliminare definitivamente tutti gli elementi nel cestino?</string>
     <string name="with_waypoints">Con punti intermedi</string>
-    <string name="restore_from_trash">Recupera dal cestino</string>
+    <string name="restore_from_trash">Ripristina dal cestino</string>
     <string name="delete_all_items">Elimina tutti gli elementi</string>
     <string name="trash_is_empty_banner_desc">I file rimossi da OsmAnd Cloud saranno disponibili qui per altri %1$s giorni.</string>
     <plurals name="tracks">
@@ -5504,7 +5504,7 @@
     <string name="trash_alert_card_desc">Gli elementi nel cestino verranno eliminati dopo %1$s giorni.</string>
     <string name="trash_is_empty">Il cestino è vuoto</string>
     <string name="shared_string_trash">Cestino</string>
-    <string name="shared_string_delete_item">Cancella elemento</string>
+    <string name="shared_string_delete_item">Cancella l\'oggetto</string>
     <string name="help_article_personal_storage_name">Archiviazione</string>
     <string name="key_event_action_zoom_in">Ingrandisci</string>
     <string name="enable_to_use_external_input_device">Abilita l\'uso del dispositivo di input esterno con OsmAnd</string>
@@ -5601,4 +5601,17 @@
     <string name="avg_sensor_temperature">Temperatura, media</string>
     <string name="max_sensor_speed">Velocità del sensore, massima</string>
     <string name="avg_sensor_speed">Velocità del sensore, media</string>
+    <string name="shared_string_activity">Attività</string>
+    <string name="sort_subfolders">Ordina le sottocartelle</string>
+    <string name="shared_string_additional">Ulteriori</string>
+    <string name="shared_string_keywords">Parole chiave</string>
+    <string name="sorted_sufolders_toast">Le sottocartelle in “%1$s” sono ordinate per: “%2$s”</string>
+    <string name="add_button">Aggiungi pulsante</string>
+    <string name="custom_buttons">Pulsanti personalizzati</string>
+    <string name="default_buttons">Pulsanti predefiniti</string>
+    <string name="any_connected">Qualsiasi connesso</string>
+    <string name="any_connected_with_device">Qualsiasi connesso: %s</string>
+    <string name="custom_map_button_name_present">Tale pulsante è già presente</string>
+    <string name="special_routing_cpp">Tipo di percorso speciale</string>
+    <string name="target_elevation">Elevazione del bersaglio</string>
 </resources>
