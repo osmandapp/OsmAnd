@@ -115,15 +115,26 @@ public class ConfigureScreenFragment extends BaseOsmAndFragment implements Quick
 		super.onResume();
 		updateCard(widgetsCard);
 		updateCard(buttonsCard);
-		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
+
 		settings.SHOW_DISTANCE_RULER.addListener(getDistanceByTapListener());
+		settings.POSITION_PLACEMENT_ON_MAP.addListener(getDisplayPositionListener());
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
 		settings.SHOW_DISTANCE_RULER.removeListener(getDistanceByTapListener());
+		settings.POSITION_PLACEMENT_ON_MAP.removeListener(getDisplayPositionListener());
+
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	@Override

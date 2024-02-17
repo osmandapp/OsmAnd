@@ -43,7 +43,7 @@
 
 	</LinearLayout>
 
-	<LinearLayout
+	<FrameLayout
 		android:id="@+id/speed_limit_container"
 		android:layout_width="72dp"
 		android:layout_height="72dp"
@@ -56,34 +56,27 @@
 		android:orientation="vertical"
 		android:translationZ="2dp">
 
-		<FrameLayout
+		<TextView
+			android:id="@+id/limit_description"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:gravity="top|center_horizontal"
+			android:text="@string/shared_string_limit"
+			android:textAllCaps="true"
+			android:textColor="@color/widgettext_day"
+			android:textSize="11sp" />
 
-			<TextView
-				android:id="@+id/limit_description"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="10dp"
-				android:gravity="top|center_horizontal"
-				android:text="@string/shared_string_limit"
-				android:textAllCaps="true"
-				android:textColor="@color/widgettext_day"
-				android:textSize="11sp" />
+		<TextView
+			android:id="@+id/speed_limit_value"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:ellipsize="none"
+			android:gravity="center"
+			android:textColor="@color/widgettext_day"
+			android:textSize="24sp"
+			tools:text="85" />
 
-			<TextView
-				android:id="@+id/speed_limit_value"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:ellipsize="none"
-				android:gravity="center"
-				android:textColor="@color/widgettext_day"
-				android:textSize="24sp"
-				tools:text="85" />
-
-		</FrameLayout>
-
-	</LinearLayout>
+	</FrameLayout>
 
 </LinearLayout>
-

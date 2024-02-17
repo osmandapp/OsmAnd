@@ -43,7 +43,7 @@ import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper.TargetOptionsBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;

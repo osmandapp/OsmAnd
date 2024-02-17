@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets.configure.settings;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
-import static net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState.*;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -83,7 +83,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 			widgetSizeContainer.setOnClickListener(v -> showPreferenceDialog(container));
 			widgetSizeContainer.setBackground(getPressedStateDrawable());
 			TextView widgetSizeDescription = container.findViewById(R.id.widget_size_description);
-			widgetSizeDescription.setText(selectedWidgetSize.descriptionId);
+			widgetSizeDescription.setText(selectedWidgetSize.titleId);
 
 			SwitchCompat switchCompat = container.findViewById(R.id.show_icon_toggle);
 			switchCompat.setChecked(showIcon);
@@ -97,7 +97,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		int selected = selectedWidgetSize.ordinal();
 		String[] items = new String[WidgetSize.values().length];
 		for (int i = 0; i < items.length; i++) {
-			items[i] = WidgetSize.values()[i].getTitle(app);
+			items[i] = app.getString(WidgetSize.values()[i].getTitleId());
 		}
 
 		AlertDialogData dialogData = new AlertDialogData(requireContext(), nightMode)
@@ -107,7 +107,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		CustomAlert.showSingleSelection(dialogData, items, selected, v -> {
 			int which = (int) v.getTag();
 			selectedWidgetSize = WidgetSize.values()[which];
-			((TextView) container.findViewById(R.id.widget_size_description)).setText(selectedWidgetSize.getTitle(app));
+			((TextView) container.findViewById(R.id.widget_size_description)).setText(selectedWidgetSize.getTitleId());
 		});
 
 	}

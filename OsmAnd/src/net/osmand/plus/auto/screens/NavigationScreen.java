@@ -17,6 +17,7 @@ import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.CarText;
 import androidx.car.app.model.Distance;
 import androidx.car.app.model.Template;
+import androidx.car.app.navigation.model.Destination;
 import androidx.car.app.navigation.model.Lane;
 import androidx.car.app.navigation.model.Maneuver;
 import androidx.car.app.navigation.model.MessageInfo;
@@ -31,7 +32,6 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.NavigationListener;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
@@ -74,7 +74,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	CarIcon junctionImage;
 
 	private final AlarmWidget alarmWidget;
-	private SpeedometerWidget speedometerWidget;
+	private final SpeedometerWidget speedometerWidget;
 	@DrawableRes
 	private int compassResId = R.drawable.ic_compass_niu;
 
@@ -87,15 +87,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		super(carContext);
 		this.listener = listener;
 		this.settingsAction = settingsAction;
-		alarmWidget = new AlarmWidget(getApp(), null);
 
-		NavigationSession session = getSession();
-		if (session != null) {
-			MapActivity activity = session.getMapView().getMapActivity();
-			if (activity != null) {
-				speedometerWidget = new SpeedometerWidget(getApp());
-			}
-		}
+		OsmandApplication app = getApp();
+		alarmWidget = new AlarmWidget(app, null);
+		speedometerWidget = new SpeedometerWidget(app, null);
+
 		getLifecycle().addObserver(this);
 	}
 
@@ -116,19 +112,19 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
 			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+
 			alarmWidget.updateInfo(drawSettings, true);
-			Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
-			int widgetOffset = 0;
-			if (speedometerWidget != null) {
-				speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
-				Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
-				if (speedometerBitmap != null) {
-					canvas.drawBitmap(speedometerBitmap, visibleArea.right - speedometerBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
-					widgetOffset = speedometerBitmap.getWidth();
-				}
+			speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
+
+			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
+			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
+
+			if (speedometerBitmap != null) {
+				canvas.drawBitmap(speedometerBitmap, visibleArea.right - speedometerBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
 			}
-			if (widgetBitmap != null) {
-				canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10 - widgetOffset, visibleArea.top + 10, new Paint());
+			if (alarmBitmap != null) {
+				int offset = speedometerBitmap != null ? speedometerBitmap.getWidth() : 0;
+				canvas.drawBitmap(alarmBitmap, visibleArea.right - alarmBitmap.getWidth() - 10 - offset, visibleArea.top + 10, new Paint());
 			}
 		}
 	}

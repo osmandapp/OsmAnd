@@ -69,14 +69,19 @@ public class ConfigureOtherCard extends MapBaseCard {
 
 		AndroidUiHelper.updateVisibility(description, true);
 	}
+
 	private void setupSpeedometerButton(@NonNull ApplicationMode appMode) {
 		boolean enabled = settings.SHOW_SPEEDOMETER.getModeValue(appMode);
 
+		String title = getString(R.string.shared_string_speedometer);
+		int iconId = nightMode ? R.drawable.widget_speed_night : R.drawable.widget_speed_day;
+
 		View button = view.findViewById(R.id.speedometer);
+		ConfigureButtonsCard.setupButton(button, title, null, 0, enabled, nightMode);
 		button.setOnClickListener(v -> SpeedometerSettingsFragment.showInstance(getMapActivity()));
-		ConfigureButtonsCard.setupButton(button, getString(R.string.shared_string_speedometer), null, 0, enabled, nightMode);
-		ImageView ivIcon = button.findViewById(R.id.icon);
-		ivIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.widget_speed_day));
+
+		ImageView imageView = button.findViewById(R.id.icon);
+		imageView.setImageDrawable(getIcon(iconId));
 
 		TextView description = button.findViewById(R.id.items_count_descr);
 		description.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);

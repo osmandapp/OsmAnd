@@ -1,17 +1,13 @@
 package net.osmand.plus.views.mapwidgets.widgetstates;
 
-import android.content.Context;
-
-import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
@@ -78,24 +74,5 @@ public class SimpleWidgetState extends WidgetState {
 	public void copyPrefs(@NonNull ApplicationMode appMode, @Nullable String customId) {
 		registerWidgetSizePref(customId, widgetType).setModeValue(appMode, widgetSizePref.getModeValue(appMode));
 		registerShowIconPref(customId, widgetType).setModeValue(appMode, showIconPref.getModeValue(appMode));
-	}
-
-	public enum WidgetSize {
-		SMALL(R.string.rendering_value_small_name, R.drawable.ic_action_item_size_s),
-		MEDIUM(R.string.rendering_value_medium_w_name, R.drawable.ic_action_item_size_m),
-		LARGE(R.string.shared_string_large, R.drawable.ic_action_item_size_l);
-
-		public final int descriptionId;
-		public final int iconId;
-
-		WidgetSize(@StringRes int descriptionId, int iconId) {
-			this.descriptionId = descriptionId;
-			this.iconId = iconId;
-		}
-
-		@NonNull
-		public String getTitle(@NonNull Context context) {
-			return context.getString(descriptionId);
-		}
 	}
 }

@@ -13,9 +13,11 @@ import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYG
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.settings.enums.WidgetSize.MEDIUM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
+import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
 import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
 import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
 
@@ -95,8 +97,7 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget.SpeedLimitWarningState;
-import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
+import net.osmand.plus.settings.enums.SpeedLimitWarningState;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -843,8 +844,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
 	public final OsmandPreference<Boolean> SHOW_SPEEDOMETER = new BooleanPreference(this, "show_speedometer", false).makeProfile();
-	public final CommonPreference<SpeedLimitWarningState> SHOW_SPEED_LIMIT_WARNING = new EnumStringPreference<>(this, "show_speed_limit_warning", SpeedLimitWarningState.WHEN_EXCEEDED, SpeedLimitWarningState.values()).makeProfile();
-	public final OsmandPreference<SimpleWidgetState.WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", SimpleWidgetState.WidgetSize.MEDIUM, SimpleWidgetState.WidgetSize.values()).makeProfile();
+	public final CommonPreference<SpeedLimitWarningState> SHOW_SPEED_LIMIT_WARNING = new EnumStringPreference<>(this, "show_speed_limit_warning", WHEN_EXCEEDED, SpeedLimitWarningState.values()).makeProfile();
+	public final OsmandPreference<WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", MEDIUM, WidgetSize.values()).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
