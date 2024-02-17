@@ -568,7 +568,7 @@ public final class CodedInputStream {
   private static final int DEFAULT_RECURSION_LIMIT = 64;
   // ! osmand change !
   public static final long DEFAULT_SIZE_LIMIT = Integer.MAX_VALUE;// 64 << 20;  // 64MB
-  public static final long MAX_DEFAULT_SIZE_LIMIT = 4l * Integer.MAX_VALUE; // 8 GB
+  public static final long MAX_DEFAULT_SIZE_LIMIT = 8 << 30; // 8 TB
   private static final int BUFFER_SIZE = 5 * 1024;
 
   private CodedInputStream(final byte[] buffer, final int off, final int len) {
