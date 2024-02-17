@@ -370,18 +370,6 @@ public class SpeedometerWidget {
 			y = alertRect.top + (float) alertRect.height() / 2 + (float) textBounds.height() / 2;
 		}
 		canvas.drawText(cachedSpeedLimit, x, y, textPaint);
-		Paint ppp = new Paint();
-		ppp.setColor(Color.BLUE);
-		canvas.drawRect(alertRect.left,
-				alertRect.top + (float) alertRect.height() / 2 - 1,
-				alertRect.right,
-				alertRect.top + (float) alertRect.height() / 2 + 1,
-				ppp);
-		canvas.drawRect(alertRect.left + (float) alertRect.width() / 2 - 1,
-				alertRect.top,
-				alertRect.left + (float) alertRect.width() / 2 + 1,
-				alertRect.bottom,
-				ppp);
 	}
 
 	private void drawCurrentSpeed(Canvas canvas, boolean isLarge, float density) {
