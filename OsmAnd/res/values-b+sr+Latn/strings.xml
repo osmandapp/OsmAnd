@@ -150,8 +150,8 @@
     <string name="none_region_found">Preuzete mape na memorijsku karticu nisu nađene.</string>
     <string name="any_poi">Bilo koji</string>
     <string name="layer_route">Rute</string>
-    <string name="auto_follow_route_navigation_descr">Auto centriranje</string>
-    <string name="auto_follow_location_enabled">Auto centriranje mape</string>
+    <string name="auto_follow_route_navigation_descr">Auto centriranje.</string>
+    <string name="auto_follow_location_enabled">Auto centriranje mape.</string>
     <string name="day_night_info_description">Izlazak sunca: %1$s 
 \nZalazak sunca: %2$s</string>
     <string name="day_night_info">Dan/noć info</string>
@@ -598,7 +598,7 @@
     <string name="show_poi_over_map">TOI vidljivi na mapi</string>
     <string name="show_poi_over_map_description">Prikaži poslednji korišćeni nivo TOI.</string>
     <string name="map_view_3d">3D mapa</string>
-    <string name="map_view_3d_descr">Uključi 3D</string>
+    <string name="map_view_3d_descr">Omogućite 3D prikaz karte.</string>
     <string name="show_view_angle">Prikaži smer kretanja</string>
     <string name="ChooseCountry">Izaberi državu</string>
     <string name="choose_city">Izaberi grad ili poštanski broj</string>
@@ -624,7 +624,7 @@
     <string name="loading_data">Učitavanje podataka…</string>
     <string name="go_back_to_osmand">Vrati se na mapu</string>
     <string name="invalid_locations">Neispravne koordinate</string>
-    <string name="arrived_at_destination">Stigao si na odredište</string>
+    <string name="arrived_at_destination">Stigao si na odredište.</string>
     <string name="new_route_calculated_dist_dbg">Ruta: udaljenost %1$s, vreme puta %2$s
 \nRačunica: %3$.1f sek %4$d puta, %5$d sličica mape)</string>
     <string name="empty_route_calculated">Izračunata ruta je prazna.</string>
@@ -852,7 +852,7 @@
     <string name="layer_overlay">Vidljivo na mapi…</string>
     <string name="map_underlay_descr">Izaberi mapu sloja ispod</string>
     <string name="map_underlay">Mapa ispod</string>
-    <string name="layer_underlay">Mapa u pozadini</string>
+    <string name="layer_underlay">Mapa u pozadini…</string>
     <string name="map_transparency">Prozirnost osnovne mape</string>
     <string name="map_transparency_descr">Podesi prozirnost osnovne mape.</string>
     <string name="overlay_transparency">Transparetnost sloja iznad</string>
@@ -953,7 +953,7 @@
     <string name="favorite_delete_multiple">Obrisati %1$d favorite i %2$d grupe favorita?</string>
     <string name="show_more_map_detail_descr">Prikazuj neke detalje vektorskih mapa (putevi itd.) već na manjim zumovima.</string>
     <string name="route_successfully_saved_at">Ruta je sačuvana kao \'%1$s\'.</string>
-    <string name="send_files_to_osm">Poslati GPX fajl na OsmAnd</string>
+    <string name="send_files_to_osm">Šalješ GPX fajl u OsmAnd?</string>
     <string name="switch_to_raster_map_to_see">Preuzmi vektorske mape za ovu lokaciju iz „Podešavanja“ („Preuzimanje mapa“) ili se prebaci na dodatak „Online mape“.</string>
     <string name="test_voice_prompts">Probaj glasovno navođenje</string>
     <string name="native_rendering">Izvorni rendering</string>
@@ -974,7 +974,7 @@
     <string name="confirm_interrupt_download">Otkaži preuzimanje?</string>
     <string name="modify_transparency">Postavi prozirnost (0 - skroz prozirno, 255 - potpuno neprovidno)</string>
     <string name="unknown_location">Pozicija još nije poznata.</string>
-    <string name="unknown_from_location">Početna tačka nije određena</string>
+    <string name="unknown_from_location">Polazna tačka još nije određena.</string>
     <string name="local_index_description">Tapni na postojeću stavku da vidiš više detalja, dugo drži da je isključiš ili obrišeš. Trenutno podataka na uređaju (%1$s slobodno):</string>
     <string name="left_side_navigation_descr">Za zemlje u kojima se vozi levom stranom.</string>
     <string name="left_side_navigation">Vožnja levom trakom</string>
@@ -5627,4 +5627,9 @@
     <string name="custom_buttons">Prilagođeno dugme</string>
     <string name="default_buttons">Zadano dugme</string>
     <string name="custom_map_button_name_present">Takvo dugme već postoji</string>
+    <string name="shared_string_limit">Ograničenje</string>
+    <string name="when_exceeded">Kada se prekorači</string>
+    <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
+    <string name="shared_string_speedometer">Brzinomer</string>
+    <string name="speed_limit_warning">Upozorenje na ograničenje brzine</string>
 </resources>

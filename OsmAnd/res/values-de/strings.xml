@@ -5625,4 +5625,9 @@
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
     <string name="custom_map_button_name_present">Solche Schaltfläche bereits vorhanden</string>
     <string name="default_buttons">Standard-Schaltfläche</string>
+    <string name="speed_limit_warning">Warnung vor Tempolimit</string>
+    <string name="shared_string_limit">Limit</string>
+    <string name="when_exceeded">Bei Überschreitung</string>
+    <string name="speedometer_description">Zeigt deine aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
+    <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
 </resources>

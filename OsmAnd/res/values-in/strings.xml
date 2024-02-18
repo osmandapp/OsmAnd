@@ -258,7 +258,7 @@
     <string name="nearest_cities">Kota terdekat</string>
     <string name="select_city">Pilih kota</string>
     <string name="select_postcode">Pencarian kode pos</string>
-    <string name="quick_action_auto_zoom">Perbesar otomatis peta nyala/mati</string>
+    <string name="quick_action_auto_zoom">Perbesaran peta otomatis</string>
     <string name="quick_action_auto_zoom_desc">Tombol untuk menyalakan atau mematikan pembesaran yang diatur oleh kecepatan.</string>
     <string name="quick_action_auto_zoom_on">Aktifkan pembesaran otomatis</string>
     <string name="quick_action_auto_zoom_off">Nonaktifkan pembesaran otomatis</string>
@@ -4522,7 +4522,7 @@
     <string name="routing_attr_piste_type_skitour_description">Rute untuk tur ski.</string>
     <string name="routing_attr_allow_advanced_name">Perbolehkan rute lanjutan</string>
     <string name="routing_attr_allow_advanced_description">Rute yang sulit, dengan hambatan berbahaya dan bagian yang curam.</string>
-    <string name="rendering_attr_showAccess_name">Tampilkan pembatasan akses dan tol</string>
+    <string name="rendering_attr_showAccess_name">Tampilkan pembatasan akses</string>
     <string name="save_as_favorites_points">Simpan sebagai grup Favorit</string>
     <string name="vector_data_missing">Unduh data (\'luring\') untuk menggunakan peta secara luring.</string>
     <string name="local_index_action_do">Anda akan %1$s %2$s item. Lanjutkan\?</string>
@@ -5136,7 +5136,7 @@
     <string name="external_device_characteristic_temperature">Suhu</string>
     <string name="external_device_forget_sensor">Abaikan sensor</string>
     <string name="external_device_low_battery">Baterai lemah</string>
-    <string name="nav_profile_confirm_delete">Apakah Anda yakin ingin menghapus \"%1$s\"?</string>
+    <string name="nav_profile_confirm_delete">Hapus \"%1$s\"?</string>
     <string name="external_device_details_information">Informasi</string>
     <string name="external_device_details_connection">Koneksi</string>
     <string name="is_imported">%1$s telah diimpor.</string>
@@ -5237,7 +5237,7 @@
     <string name="deleting_complete">Penghapusan selesai</string>
     <string name="osmand_cloud_deletion_account_warning">Akun dan semua detail akun Anda akan %1$s</string>
     <string name="shared_string_deleting">Menghapus</string>
-    <string name="delete_account_warning">Apakah Anda ingin menghapus akun %1$s?</string>
+    <string name="delete_account_warning">Hapus akun %1$s?</string>
     <string name="slope_legend_description">Lereng menggunakan warna untuk menampilkan kecuraman medan. Anda dapat mempelajari lebih lanjut tentang Lereng di %1$s.</string>
     <string name="terrain_category_description">Garis kontur medan, bukit berskala abu-abu dan indikasi lereng skala warna, untuk menunjukkan puncak dan dataran rendah.</string>
     <string name="osmand_cloud_deleting_account_descr">Dalam beberapa detik, semua data dan akun Anda akan dihapus dari OsmAnd Cloud.
@@ -5429,21 +5429,27 @@
     <string name="open_issue_on_github">Buka isu baru di GitHub</string>
     <string name="report_an_issues">Laporkan isu</string>
     <string name="live_monitoring_adress_descr">Tentukan alamat web dengan sintaks parameter: lintang={0}, bujur={1}, stempel waktu={2}, hdop={3}, ketinggian={4}, kecepatan={5}, bantalan={6}, pwt={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="release_4_6">• Menambahkan widget \"Rasio Luncur\".
+    <string name="release_4_6">• Android Auto: Menambahkan mode 3D
 \n
-\n • Menambahkan filter dan folder pintar untuk trek
+\n • Trek: Memperkenalkan filter dan folder cerdas, memori yang dioptimalkan untuk file yang lebih besar
 \n
-\n • Menambahkan baris untuk panel widget atas dan bawah dengan dukungan untuk semua widget
+\n • Panel widget atas dan bawah yang ditingkatkan untuk mengakomodasi semua widget
+\n
+\n • Peningkatan pengelolaan sumber daya lokal
+\n
+\n • Pemetaan tombol yang dapat disesuaikan untuk pengontrol eksternal
+\n
+\n • Widget baru: \"Rasio Luncur\" dan \"Posisi Matahari\"
+\n
+\n • OsmAnd Cloud: Sekarang akses file yang dihapus
+\n
+\n • Pewarnaan trek yang ditingkatkan dalam mode Kemiringan dengan gradien simetris baru
+\n
+\n • Menyelesaikan masalah dengan bilah status transparan
 \n
 \n • Menambahkan dukungan untuk widget suhu ANT+
 \n
-\n • Peningkatan manajemen memori untuk trek GPX besar
-\n
-\n • Manajemen sumber daya lokal yang diperbarui di Unduhan
-\n
-\n • Menambahkan widget \"RAM yang Tersedia\"
-\n
-\n • Memperbaiki masalah dengan bilah status transparan
+\n • Memperkenalkan widget \"RAM yang Tersedia\".
 \n
 \n</string>
     <string name="shared_string_temperature">Suhu</string>
@@ -5475,7 +5481,7 @@
     <string name="widget_available_ram">RAM yang tersedia</string>
     <string name="terrain_maps">Peta medan</string>
     <string name="sort_country_name_descending">Nama negara: Z–A</string>
-    <string name="delete_map_description">Apakah Anda yakin ingin menghapus peta %1$s?</string>
+    <string name="delete_map_description">Hapus peta %1$s?</string>
     <string name="maps_and_resources">Peta &amp; Sumber Daya</string>
     <string name="shared_string_show_icon">Tampilkan ikon</string>
     <string name="smart_folder_name_present">Folder pintar sudah ada</string>
@@ -5491,8 +5497,73 @@
     <string name="no_config_smart_folder_title">Tidak ada yang diatur</string>
     <string name="discard_filter_changes">Abaikan perubahan penyaring</string>
     <string name="shared_string_loading">Memuat</string>
-    <string name="discard_filter_changes_prompt">Apakah Anda yakin ingin mengatur ulang semua saringan?</string>
+    <string name="discard_filter_changes_prompt">Atur ulang semua saringan?</string>
     <string name="no_config_smart_folder_description">Folder pintar memungkinkan untuk mengelompokkan trek berdasarkan saringan yang diterapkan</string>
     <string name="loading_tracks">Memuat ulang trek</string>
     <string name="searching_matching_tracks">Cari semua trek yang cocok</string>
+    <string name="key_event_category_actions">Tindakan</string>
+    <string name="key_event_category_map_interactions">Interaksi peta</string>
+    <string name="shared_string_limit">Batas</string>
+    <string name="shared_string_speedometer">Speedometer</string>
+    <string name="add_button">Tambahkan tombol</string>
+    <string name="default_buttons">Tombol bawaan</string>
+    <string name="when_exceeded">Ketika melebihi</string>
+    <string name="shared_string_reassign">Asosiasikan ulang</string>
+    <string name="shared_string_author">Pembuat</string>
+    <string name="deletion_error">Kesalahan penghapusan</string>
+    <string name="key_event_action_zoom_out">Perkecil</string>
+    <string name="key_bindings">Ikatan tombol</string>
+    <string name="all_folders">Semua folder</string>
+    <string name="lang_zh_hans">Cina Sederhana</string>
+    <string name="custom_buttons">Tombol khusus</string>
+    <string name="delete_trash_item_confirmation_desc">Hapus \"%1$s\" secara permanen?</string>
+    <string name="delete_all_items">Hapus semua item</string>
+    <string name="shared_string_is_deleted">%1$s telah dihapus.</string>
+    <string name="trash_is_empty">Sampah sudah kosong</string>
+    <string name="shared_string_activity">Aktivitas</string>
+    <string name="shared_string_keywords">Kata kunci</string>
+    <string name="shared_string_additional">Tambahan</string>
+    <string name="avg_sensor_temperature">Suhu, rata-rata</string>
+    <string name="shared_string_action">Tindakan</string>
+    <string name="sort_subfolders">Urutkan subfolder</string>
+    <string name="battery_optimization">Optimalisasi baterai</string>
+    <string name="any_connected">Apa pun terhubung</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="max_sensor_temperature">Suhu, maks</string>
+    <string name="change_key_binding">Ubah ikatan tombol</string>
+    <string name="shared_string_extensions">Ekstensi</string>
+    <string name="shared_string_license">Lisensi</string>
+    <string name="shared_string_link">Tautan</string>
+    <string name="shared_string_copyright">Hak cipta</string>
+    <string name="shared_string_next_event">Peristiwa berikutnya</string>
+    <string name="shared_string_road_maps">Peta jalan</string>
+    <string name="shared_string_all_tracks">Semua trek</string>
+    <string name="map_widget_sun_position">Posisi matahari</string>
+    <string name="change_button">Ubah tombol</string>
+    <string name="discard_changes_prompt">Abaikan perubahan?</string>
+    <string name="key_event_action_zoom_in">Perbesar</string>
+    <string name="key_event_action_move_right">Pindah ke kanan</string>
+    <string name="key_event_action_move_down">Pindah ke bawah</string>
+    <string name="key_event_action_move_up">Pindah ke atas</string>
+    <string name="shared_string_empty_trash">Kosongkan sampah</string>
+    <string name="folder">Folder</string>
+    <string name="root_folder">Folder akar</string>
+    <string name="zoom_animated">Perbesaran beranimasi</string>
+    <string name="zoom_non_animated">Perbesaran tidak beranimasi</string>
+    <string name="lang_zh_hant">Cina Tradisional</string>
+    <string name="add_row">Tambahkan baris</string>
+    <string name="not_specified">Tidak dispesifikasikan</string>
+    <string name="shared_string_show_less">Tampilkan lebih sedikit</string>
+    <string name="shared_string_eta">Perkiraan Waktu Tiba</string>
+    <string name="topography_maps">Peta topografi</string>
+    <string name="target_elevation">Target ketinggian</string>
+    <string name="shared_string_trash">Sampah</string>
+    <string name="shared_string_rows">Baris</string>
+    <string name="row_number">Baris %1$s</string>
+    <string name="shared_string_delete_item">Hapus item</string>
+    <string name="shared_string_delete_immediately">Hapus segera</string>
+    <string name="key_event_action_move_left">Pindah ke kiri</string>
+    <string name="restore_from_trash">Pulihkan dari sampah</string>
+    <string name="shared_string_button">Tombol</string>
+    <string name="key_assignments">Penetapan kunci</string>
 </resources>

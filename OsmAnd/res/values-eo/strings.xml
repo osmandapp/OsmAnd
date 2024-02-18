@@ -5616,4 +5616,9 @@
     <string name="custom_buttons">Propraj butonoj</string>
     <string name="default_buttons">Normaj butonoj</string>
     <string name="custom_map_button_name_present">Butono kun la sama nomo jam ekzistas</string>
+    <string name="shared_string_limit">Limigo</string>
+    <string name="when_exceeded">Kiam superigita</string>
+    <string name="speedometer_description">Montri vian nunan rapidon raportatan de GPS</string>
+    <string name="shared_string_speedometer">Rapidmezurilo</string>
+    <string name="speed_limit_warning">Averto pri rapidlimo</string>
 </resources>

@@ -5622,4 +5622,9 @@
     <string name="custom_buttons">Botones personalizados</string>
     <string name="default_buttons">Botones por defecto</string>
     <string name="custom_map_button_name_present">Este botón ya existe</string>
+    <string name="shared_string_limit">Límite</string>
+    <string name="when_exceeded">Cuando se supere</string>
+    <string name="speedometer_description">Muestra tu velocidad actual a través del GPS</string>
+    <string name="shared_string_speedometer">Velocímetro</string>
+    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
 </resources>

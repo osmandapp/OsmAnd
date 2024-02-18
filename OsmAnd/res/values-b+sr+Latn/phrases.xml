@@ -2,7 +2,7 @@
 <resources>
     <string name="poi_fuel_type">Vrsta goriva</string>
     <string name="poi_payment_type">Način plaćanja</string>
-    <string name="poi_payment_fuel_type">Platežne kartice za gorivo</string>
+    <string name="poi_payment_fuel_type">Kartica za gorivo</string>
     <string name="poi_additional_type">Dodatno</string>
     <string name="poi_internet_access_type">Vrsta pristupa internetu</string>
     <string name="poi_vending_type">Način prodaje</string>
@@ -15,7 +15,7 @@
     <string name="poi_payment_toll_type">Način plaćanja</string>
     <string name="poi_traffic_signals_sound">Zvuk</string>
     <string name="poi_highway_crossing_type">Vrsta</string>
-    <string name="poi_service_general">Održavanje</string>
+    <string name="poi_service_general">Servis</string>
     <string name="poi_information_contents">Sadržaj</string>
     <string name="poi_clock_option">Dodatno</string>
     <string name="poi_scout_camp">Kamp izviđača</string>
@@ -61,13 +61,13 @@
     <string name="poi_pump">Pumpa</string>
     <string name="poi_telescope_type">Vrsta</string>
     <string name="poi_animal_training_type">Vrsta</string>
-    <string name="poi_diplomatic_filter">TipVrsta</string>
+    <string name="poi_diplomatic_filter">Diplomatska institucija</string>
     <string name="poi_city_capital">Glavni grad</string>
-    <string name="poi_healthcare_alternative_types">Specijalizacija</string>
-    <string name="poi_free_flying_characteristics">Osobina</string>
+    <string name="poi_healthcare_alternative_types">Specijalnost</string>
+    <string name="poi_free_flying_characteristics">Karakteristika</string>
     <string name="poi_archaeological_site_type">Vrsta</string>
     <string name="poi_star_rating">Broj zvezdica</string>
-    <string name="poi_religion_type">Veroispovest</string>
+    <string name="poi_religion_type">Religija</string>
     <string name="poi_information_type">Vrsta</string>
     <string name="poi_drive_through">Drajv tru</string>
     <string name="poi_dish">Jelo</string>
@@ -1406,7 +1406,7 @@
     <string name="poi_denomination_apostolic">Apostolska crkva</string>
     <string name="poi_denomination_reform">Reformisti</string>
     <string name="poi_fuel_avia_type">Vrsta goriva (avia)</string>
-    <string name="poi_tactile_paving">Vođice za slabovide</string>
+    <string name="poi_tactile_paving">Taktilno popločavanje</string>
     <string name="poi_brushless">Bez četkica</string>
     <string name="poi_observatory_designation">Odredište</string>
     <string name="poi_pharmacy_dispensing">Apoteka (na recept)</string>
