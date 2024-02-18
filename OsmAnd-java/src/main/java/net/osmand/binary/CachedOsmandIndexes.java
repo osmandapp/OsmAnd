@@ -31,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.List;
 
 public class CachedOsmandIndexes {
 
@@ -54,6 +55,18 @@ public class CachedOsmandIndexes {
 						storedIndexBuilder.addFileIndex(ex);
 					}
 				}
+			}
+		} else {
+			int found = -1;
+			List<FileIndex> fileIndexList = storedIndexBuilder.getFileIndexList();
+			for (int i = 0; i < fileIndexList.size(); i++) {
+				if (fileIndexList.get(i).getFileName().equals(f.getName())) {
+					found = i;
+					break;
+				}
+			}
+			if (found >= 0) {
+				storedIndexBuilder.removeFileIndex(found);
 			}
 		}
 
