@@ -1995,7 +1995,7 @@
     <string name="give_permission">Engedélyezés</string>
     <string name="allow_access_location">Hozzáférés a pozíciódhoz engedélyezése</string>
     <string name="search_my_location">Pozícióm meghatározása</string>
-    <string name="update_all_maps_now">Frissíted most az összes térképet?</string>
+    <string name="update_all_maps_now">Frissíti most az összes térképet?</string>
     <string name="clear_tile_data">Összes csempe törlése</string>
     <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
     <string name="replace_favorite_confirmation">Lecseréli ezt a kedvencet: %1$s\?</string>
