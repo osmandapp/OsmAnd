@@ -5619,4 +5619,9 @@
     <string name="custom_buttons">Egyéni gombok</string>
     <string name="default_buttons">Alapértelmezett gombok</string>
     <string name="custom_map_button_name_present">Ilyen gomb már van</string>
+    <string name="speedometer_description">A jármű GPS-alapú sebességét mutatja</string>
+    <string name="when_exceeded">Ha túllépve</string>
+    <string name="shared_string_limit">Korlátozás</string>
+    <string name="shared_string_speedometer">Sebességmérő</string>
+    <string name="speed_limit_warning">Figyelmeztetés sebességkorlátozásra</string>
 </resources>
