@@ -5623,5 +5623,5 @@
     <string name="when_exceeded">Ha túllépve</string>
     <string name="shared_string_limit">Korlátozás</string>
     <string name="shared_string_speedometer">Sebességmérő</string>
-    <string name="speed_limit_warning">Figyelmeztetés sebességkorlátozásra</string>
+    <string name="speed_limit_warning">Sebességkorlátozási figyelmeztetés</string>
 </resources>
