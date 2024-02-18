@@ -285,7 +285,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				(System.nanoTime() - startTime) / 1e6, hctx.stats.searchPointsTime,
 				hctx.stats.loadEdgesTime + hctx.stats.loadPointsTime, hctx.stats.loadEdgesCnt, hctx.stats.routingTime, 
 				hctx.stats.addQueueTime, hctx.stats.pollQueueTime, hctx.stats.prepTime);
-		printGCInformation();
 		return route;
 	}
 
