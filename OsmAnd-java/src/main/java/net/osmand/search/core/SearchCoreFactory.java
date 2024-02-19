@@ -63,6 +63,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SearchCoreFactory {
 
+	public static final int PREFERRED_STREET_ZOOM = 17;
+	public static final int PREFERRED_INDEX_ITEM_ZOOM = 17;
+	public static final int PREFERRED_BUILDING_ZOOM = 16;
+	public static final int PREFERRED_COUNTRY_ZOOM = 7;
+	public static final int PREFERRED_CITY_ZOOM = 13;
+	public static final int PREFERRED_POI_ZOOM = 16;
+	public static final int PREFERRED_WPT_ZOOM = 16;
+	public static final int PREFERRED_GPX_FILE_ZOOM = 17;
+	public static final int PREFERRED_DEFAULT_RECENT_ZOOM = 17;
+	public static final int PREFERRED_FAVORITES_GROUP_ZOOM = 17;
+	public static final int PREFERRED_FAVORITE_ZOOM = 16;
+	public static final int PREFERRED_STREET_INTERSECTION_ZOOM = 16;
+	public static final int PREFERRED_REGION_ZOOM = 6;
+	public static final int PREFERRED_DEFAULT_ZOOM = 15;
 	public static boolean DISPLAY_DEFAULT_POI_TYPES = false;
 	public static final int MAX_DEFAULT_SEARCH_RADIUS = 7;
 	public static final int SEARCH_MAX_PRIORITY = Integer.MAX_VALUE;
@@ -255,7 +269,7 @@ public class SearchCoreFactory {
 					sr.priority = SEARCH_REGION_OBJECT_PRIORITY;
 					sr.objectType = ObjectType.REGION;
 					sr.location = bmir.getRegionCenter();
-					sr.preferredZoom = 6;
+					sr.preferredZoom = PREFERRED_REGION_ZOOM;
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
@@ -634,12 +648,12 @@ public class SearchCoreFactory {
 								return false;
 							}
 							sr.object = object;
-							sr.preferredZoom = 17;
+							sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
 							sr.file = currentFile[0];
 							sr.location = object.getLocation();
 							if (object.getSubType().equals("city") || object.getSubType().equals("country")) {
 								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
-								sr.preferredZoom = object.getSubType().equals("country") ? 7 : 13;
+								sr.preferredZoom = object.getSubType().equals("country") ? PREFERRED_COUNTRY_ZOOM : PREFERRED_CITY_ZOOM;
 							} else if (object.getSubType().equals("town")) {
 								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
 							} else {
@@ -1189,7 +1203,7 @@ public class SearchCoreFactory {
 					}
 
 					res.object = object;
-					res.preferredZoom = 17;
+					res.preferredZoom = PREFERRED_POI_ZOOM;
 					res.file = selected;
 					res.location = object.getLocation();
 					res.priority = SEARCH_AMENITY_BY_TYPE_PRIORITY;
@@ -1302,7 +1316,7 @@ public class SearchCoreFactory {
 					}
 					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.object = object;
-					res.preferredZoom = 17;
+					res.preferredZoom = PREFERRED_STREET_ZOOM;
 					res.file = sw.getResult().file;
 					res.location = object.getLocation();
 					res.priority = SEARCH_STREET_BY_CITY_PRIORITY;
@@ -1427,7 +1441,7 @@ public class SearchCoreFactory {
 					res.relatedObject = s;
 					res.localeRelatedObjectName = s.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.objectType = ObjectType.HOUSE;
-					res.preferredZoom = 17;
+					res.preferredZoom = PREFERRED_BUILDING_ZOOM;
 
 					resultMatcher.publish(res);
 				}
@@ -1452,7 +1466,7 @@ public class SearchCoreFactory {
 						res.priorityDistance = 0;
 						res.objectType = ObjectType.STREET_INTERSECTION;
 						res.location = street.getLocation();
-						res.preferredZoom = 16;
+						res.preferredZoom = PREFERRED_STREET_INTERSECTION_ZOOM;
 						phrase.countUnknownWordsMatchMainResult(res);
 						resultMatcher.publish(res);
 					}
