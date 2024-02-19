@@ -49,7 +49,6 @@ import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFra
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -154,8 +153,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		view.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				ReorderWidgetsFragment.showInstance(activity.getSupportFragmentManager(), selectedPanel,
-						selectedAppMode, getParentFragment());
+				FragmentManager manager = activity.getSupportFragmentManager();
+				ReorderWidgetsFragment.showInstance(manager, selectedPanel, selectedAppMode, getParentFragment());
 			}
 		});
 		setupListItemBackground(view);
@@ -178,14 +177,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		if (mapActivity == null) {
 			return;
 		}
-
-		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, MATCHING_PANELS_MODE, Arrays.asList(WidgetsPanel.values()));
-		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, null, false);
-		}
-		settings.MAP_INFO_CONTROLS.resetModeToDefault(selectedAppMode);
-		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(selectedAppMode);
-		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
 		widgetsSettingsHelper.resetWidgetsForPanel(selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
