@@ -5611,4 +5611,9 @@
     <string name="add_button">新增按鈕</string>
     <string name="special_routing_cpp">特殊路線規劃類型</string>
     <string name="default_buttons">預設按鈕</string>
+    <string name="speed_limit_warning">速限警告</string>
+    <string name="when_exceeded">當超過時</string>
+    <string name="speedometer_description">透過 GPS 回報顯示您目前的速度</string>
+    <string name="shared_string_speedometer">速度表</string>
+    <string name="shared_string_limit">限制</string>
 </resources>
