@@ -240,12 +240,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onNewIntent(@NonNull Intent intent) {
 		Log.i(TAG, "In onNewIntent() " + intent);
-		Uri uri = intent.getData();
-		if (uri == null) {
-			return;
-		}
 		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
+		Uri uri;
 		if (ACTION_NAVIGATE.equals(intent.getAction())) {
+			uri = Uri.parse("http://" + intent.getDataString());
 			screenManager.popToRoot();
 			String query = uri.getQueryParameter("q");
 			if (Algorithms.isEmpty(query)) {
@@ -263,8 +261,12 @@ public class NavigationSession extends Session implements NavigationListener, Os
 					});
 
 			return;
+		} else {
+			uri = intent.getData();
 		}
-
+		if(uri == null) {
+			return;
+		}
 		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
 		// the
 		// top if any other screens were pushed onto it.
