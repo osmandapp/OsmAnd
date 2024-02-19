@@ -5592,4 +5592,9 @@
     <string name="shared_string_road_maps">Hărți rutiere</string>
     <string name="lang_zh_hans">Chineză simplificată</string>
     <string name="lang_zh_hant">Chineză tradițională</string>
+    <string name="speedometer_description">Afișează viteza curentă raportată prin GPS</string>
+    <string name="custom_map_button_name_present">Acest buton este deja prezent</string>
+    <string name="add_button">Adaugă butonul</string>
+    <string name="speed_limit_warning">Avertizare privind limita de viteză</string>
+    <string name="shared_string_speedometer">Vitezometru</string>
 </resources>

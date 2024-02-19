@@ -5626,4 +5626,9 @@
     <string name="default_buttons">Standardknapper</string>
     <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
     <string name="add_button">Tilføj knap</string>
+    <string name="shared_string_speedometer">Hastighedsmåler</string>
+    <string name="speed_limit_warning">Advarsel om fartgrænse</string>
+    <string name="shared_string_limit">Begrænsning</string>
+    <string name="when_exceeded">Når overskredet</string>
+    <string name="speedometer_description">Viser din aktuelle hastighed som rapporteret via GPS</string>
 </resources>
