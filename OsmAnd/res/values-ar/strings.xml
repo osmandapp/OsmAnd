@@ -606,7 +606,7 @@
 \n</string>
     <string name="local_openstreetmap_were_uploaded">{0} POI/الملاحظات تم رفعها</string>
     <string name="live_monitoring_url_descr">تحديد عنوان ويب مع بناء جملة المعلمة: اللات = {0}، خط الطول = {1}، والطابع الزمني = {2}، HDOP = {3}، {4 ارتفاع =}، والسرعة = {5}، واضعة = {6}.</string>
-    <string name="gpx_monitoring_disabled_warn">سجل المسار عن طريق ويدجت GPX أو عن طريق إعدادات \'تسجيل المسار\'.</string>
+    <string name="gpx_monitoring_disabled_warn">سجل المسار عن طريق ودجت GPX أو عن طريق إعدادات \'تسجيل المسار\'.</string>
     <string name="free_version_message">%1$s خريطة لتنزيلها أو تحديثها.</string>
     <string name="poi_context_menu_showdescription">إظهار وصف POI.</string>
     <string name="index_name_other">خرائط عالمية حسب الموضوع</string>
@@ -2246,7 +2246,7 @@
     <string name="shared_string_add_photos">إضافة صور</string>
     <string name="no_photos_descr">لا يوجد صور.</string>
     <string name="mapillary_action_descr">ساهم بصور الشوارع الخاصة بك لهذا الموقع عن طريق مابيلاري.</string>
-    <string name="mapillary_widget">ويدجت مابيلاري</string>
+    <string name="mapillary_widget">ودجت مابيلاري</string>
     <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري.</string>
     <string name="mapillary_descr">صور على مستوى الشارع عبر الإنترنت متاحة للجميع. اكتشف الأماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="mapillary">مابيلاري</string>
@@ -2522,12 +2522,12 @@
     <string name="import_as_gpx">استيراد كملف GPX</string>
     <string name="import_as_favorites">استيراد كمفضلة</string>
     <string name="import_file">استيراد ملف</string>
-    <string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والويدجت.</string>
+    <string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والودجت.</string>
     <string name="tap_on_map_to_hide_interface">شاشة كاملة</string>
     <string name="mark_passed">توجيه مباشر مجتاز</string>
     <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر OSM</string>
     <string name="empty_state_osm_edits_descr">قم بإنشاء أو تعديل نقاط الاهتمام OSM ، وفتح ملاحظات OSM أو التعليق عليها ، والمساهمة في ملفات GPX المسجلة.</string>
-    <string name="shared_string_deleted">حذف</string>
+    <string name="shared_string_deleted">تم الحذف</string>
     <string name="shared_string_edited">مُعدلة</string>
     <string name="shared_string_added">تمت الإضافة</string>
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
@@ -4636,8 +4636,8 @@
     <string name="routing_attr_freeride_policy_allow_name">السماح</string>
     <string name="routing_attr_difficulty_preference_no_preference_name">بدون تفضيل</string>
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">تفضيل الطرق الزلقة</string>
-    <string name="no_widgets_here_yet">لا يوجد ويدجت هنا حتى الان</string>
-    <string name="available_widgets">الويدجت المتاح</string>
+    <string name="no_widgets_here_yet">لا يوجد ودجت هنا حتى الان</string>
+    <string name="available_widgets">الودجت المتاح</string>
     <string name="routing_attr_difficulty_preference_expert_name">خبير</string>
     <string name="routing_attr_difficulty_preference_beginner_name">مبتدئ</string>
     <string name="shared_string_symbol">رمز</string>
@@ -4646,7 +4646,7 @@
     <string name="snackbar_page_removed">تمت إزالة \"الصفحة %1$s\".</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">لاتذهب للطرق الزلقة</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">متوسط</string>
-    <string name="release_4_2">• إعادة تصميم الويدجت: الشكل والمظهر الجديد ، والمجموعة حسب الصفحات ، وتغيير الترتيب والجمع بينهما كما تريد.
+    <string name="release_4_2">• إعادة تصميم الودجت: الشكل والمظهر الجديد ، والمجموعة حسب الصفحات ، وتغيير الترتيب والجمع بينهما كما تريد.
 \n
 \n• مسارات المشي لمسافات طويلة / ركوب الدراجات / السفر: اضغط على رمز الطريق واحصل على معلومات كاملة حول الطريق.
 \n
@@ -4658,18 +4658,18 @@
     <string name="turn_on_public_transport_description">قم بالتفعيل لعرض طرق النقل العام على الخريطة.</string>
     <string name="coordinates_widget_secondary_desc">يمكن تغيير تنسيق الإحداثيات في %1$s – %2$s – %3$s.</string>
     <string name="widget_secondary_desc_part_of">جزء من المكون الإضافي %1$s.</string>
-    <string name="mapillary_widget_desc">ويدجت الوصول السريع إلى تطبيق مابيلاري لإضافة صور على مستوى الشارع.</string>
-    <string name="current_time_widget_desc">ويدجت عرض الوقت الحالي من جهازك.</string>
-    <string name="battery_widget_desc">ويدجت عرض مستوى بطارية جهازك.</string>
-    <string name="gps_info_widget_desc">ويدجت عرض الأقمار الصناعية المستخدمة في هذه اللحظة.</string>
-    <string name="altitude_widget_desc">ويدجت عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
+    <string name="mapillary_widget_desc">ودجت الوصول السريع إلى تطبيق مابيلاري لإضافة صور على مستوى الشارع.</string>
+    <string name="current_time_widget_desc">ودجت عرض الوقت الحالي من جهازك.</string>
+    <string name="battery_widget_desc">ودجت عرض مستوى بطارية جهازك.</string>
+    <string name="gps_info_widget_desc">ودجت عرض الأقمار الصناعية المستخدمة في هذه اللحظة.</string>
+    <string name="altitude_widget_desc">ودجت عرض الارتفاع فوق مستوى سطح البحر للموقع الجغرافي الحالي.</string>
     <string name="time_to_go_desc">الوقت بالدقائق أو الساعات المتوقعة للوصول إلى وجهتك.</string>
     <string name="arrival_time_widget_desc">وقت الوصول إلى وجهتك.</string>
-    <string name="map_markers_bar_widget_desc">ويدجت الشريط العلوي ، يمكنك رؤية المسافة والاتجاه المباشر من الموقع الحالي. كما يمكنك رؤية أكثر من توجيه مباشر في الأداة.</string>
+    <string name="map_markers_bar_widget_desc">ودجت الشريط العلوي ، يمكنك رؤية المسافة والاتجاه المباشر من الموقع الحالي. كما يمكنك رؤية أكثر من توجيه مباشر في الأداة.</string>
     <string name="coordinates_widget_desc">يعرض الإحداثيات الجغرافية للموقع الجغرافي الحالي.</string>
-    <string name="shared_string_widget">ويدجت</string>
-    <string name="audio_video_notes_desc">ويدجت الوصول السريع لبدء / إيقاف تسجيل (صوت أو فيديو أو صورة).</string>
-    <string name="bearing_desc">ويدجت عرض الاتجاه المطلق أو النسبي للهدف بالوحدات الزاويّة (درجات 180 ، درجات 360 ، ملي راديان).</string>
+    <string name="shared_string_widget">ودجت</string>
+    <string name="audio_video_notes_desc">ودجت الوصول السريع لبدء / إيقاف تسجيل (صوت أو فيديو أو صورة).</string>
+    <string name="bearing_desc">ودجت عرض الاتجاه المطلق أو النسبي للهدف بالوحدات الزاويّة (درجات 180 ، درجات 360 ، ملي راديان).</string>
     <string name="navigation_points">نقاط الملاحة</string>
     <string name="route_maneuvers_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
     <string name="route_maneuvers">نقاط الملاحة</string>
@@ -4682,16 +4682,16 @@
     <string name="shared_string_speed">السرعة</string>
     <string name="app_mode_mountain_bicycle">دراجة جبلية</string>
     <string name="av_def_action_choose">تحت الطلب</string>
-    <string name="elevation_profile_widget_desc">ويدجت عرض ملف تعريف الارتفاع والمنحدر للمسار الحالي.</string>
+    <string name="elevation_profile_widget_desc">ودجت عرض ملف تعريف الارتفاع والمنحدر للمسار الحالي.</string>
     <string name="bearing_secondary_desc">يمكنك تغيير تنسيق البيانات المستخدمة في: %1$s – %2$s – %3$s.</string>
-    <string name="parking_widget_desc">ويدجت عرض المسافة من مركز الشاشة إلى مكان وقوف السيارات.</string>
+    <string name="parking_widget_desc">ودجت عرض المسافة من مركز الشاشة إلى مكان وقوف السيارات.</string>
     <string name="av_notes_choose_action_widget_desc">اختر إجراء.</string>
     <string name="radius_rules_widget_desc">تساعد أداة مسطرة نصف القطر على تحديد نصف القطر حول النقطة المحددة على الخريطة من خلال عرض دوائر القياس على الخريطة.</string>
-    <string name="max_speed_widget_desc">ويدجت عرض الحد الأقصى للسرعة للطريق الحالي.</string>
-    <string name="current_speed_widget_desc">ويدجت عرض سرعتك الحالية التي تم الكشف عنها بواسطة مستشعر GPS.</string>
+    <string name="max_speed_widget_desc">ودجت عرض الحد الأقصى للسرعة للطريق الحالي.</string>
+    <string name="current_speed_widget_desc">ودجت عرض سرعتك الحالية التي تم الكشف عنها بواسطة مستشعر GPS.</string>
     <string name="magnetic_bearing_widget_desc">الزاوية بين الشمال المغناطيسي ونقطة الهدف التي تم ملاحظتها من موقعك.</string>
-    <string name="lanes_widgets_desc">ويدجت عرض أداة ممرات الطريق الحالي وكشف الممرات عند القيادة باستخدام الملاحة النشطة.</string>
-    <string name="street_name_widget_desc">ويدجت عرض اسم الشارع الحالي مع سهم الموقع المستقيم أو اسم الشارع التالي مع الاتجاهات التي يجب إكمالها.</string>
+    <string name="lanes_widgets_desc">ودجت عرض أداة ممرات الطريق الحالي وكشف الممرات عند القيادة باستخدام الملاحة النشطة.</string>
+    <string name="street_name_widget_desc">ودجت عرض اسم الشارع الحالي مع سهم الموقع المستقيم أو اسم الشارع التالي مع الاتجاهات التي يجب إكمالها.</string>
     <string name="navigation_points_desc">يتم تمكين أدوات التنقل أثناء التنقل لعرض المعلومات مثل المسافة أو الوصول أو الوقت الأقل، والانعطافات التالية ، والاتجاه ، واسم الشارع الحالي ، ومعلومات الممرات ، والسرعة القصوى ، وتنبيهات الاقتراب ، ونقاط الاهتمام ، ونقاط الطريق.</string>
     <string name="get_altitude_data">الحصول على بيانات الارتفاع</string>
     <string name="routing_attr_avoid_4wd_only_name">تجنب طرق الدفع الرباعي</string>
@@ -4723,9 +4723,9 @@
     <string name="map_widget_time_to_destination">وقت الوصول</string>
     <string name="map_widget_time_to_intermediate">متوسط وقت الوصول</string>
     <string name="map_widget_distance_to_intermediate">مسافة متوسط وقت الوصول</string>
-    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الويدجت.</string>
+    <string name="radius_ruler_mode_desc">يمكنك تبديل وضع مسطرة نصف القطر عن طريق النقر على الودجت.</string>
     <string name="shared_string_mode">نمط</string>
-    <string name="time_to_navigation_point_widget_settings_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">انقر على الودجت لتبديل الأوضاع.</string>
     <string name="lang_sat">السنتالية</string>
     <string name="average_speed_skip_stops">خذ أماكن التوقف في الحسبان</string>
     <string name="average_speed_time_interval_desc">حدد الفاصل الزمني لمتوسط السرعة.</string>
@@ -4747,7 +4747,7 @@
     <string name="kg">كلم</string>
     <string name="routing_attr_motor_type_diesel_name">الديزل</string>
     <string name="co2_mission">انبعاث CO2</string>
-    <string name="switch_widget_mode_desc">يمكنك تبديل الوضع عن طريق النقر على الويدجت.</string>
+    <string name="switch_widget_mode_desc">يمكنك تبديل الوضع عن طريق النقر على الودجت.</string>
     <string name="side_marker_eta">الوقت المقدر للوصول</string>
     <string name="goods_delivery_desc_4">إذا كان وزن سيارتك أكثر من 3.5 طن، فأنت بحاجة إلى استخدام وضع الشاحنة.</string>
     <string name="goods_delivery_desc_2">سيتم تجنب الطرق التي أغلقت لتسليم البضائع.</string>
@@ -4781,15 +4781,15 @@
     <string name="auto_backup_preference_desc">بشكل افتراضي ، يحفظ النظام نسخا احتياطية من المفضلة ورموز الخريطة وإعدادات أوسماند لاستعادتها على الجهاز أو أجهزة جديدة . تقتصر هذه النسخة الاحتياطية على 25 ميغابايت.
 \nإذا كنت تستخدم أوسماند كلاود ، فقد يؤدي ذلك إلى خطأ بعد إعادة التثبيت.</string>
     <string name="trip_recording_duration_widget_desc">يعرض وقت الرحلة المسجل حاليا.</string>
-    <string name="second_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الثانية.</string>
-    <string name="time_to_intermediate_widget_desc">يعرض الويدجت وقت الوصول أو وقت الذهاب إلى النقطة الوسيطة الأولى. يتم تحديث الوقت باستمرار أثناء التنقل ، بمجرد تمرير النقاط الوسيطة ، سيتم تحديث الوقت إلى النقطة الوسيطة التالية.</string>
-    <string name="first_marker_widget_desc">يمكنك تكوين الويدجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الأولى.</string>
-    <string name="second_next_turn_widget_desc">يعرض الويدجت معلومات حول المنعطف التالي الثاني الذي يتم تمكينه إذا انعطف ضمن مسافة قريبة.</string>
-    <string name="time_to_destination_widget_desc">يعرض الويدجت وقت الوصول أو وقت الذهاب إلى نقطة الوجهة الأخيرة. يتم تحديث الوقت باستمرار أثناء التنقل وهو يساوي وقت الطريق من الموقع الحالي.</string>
-    <string name="distance_to_intermediate_widget_desc">يعرض الويدجت المسافة المتبقية إلى أول نقطة وسيطة. بمجرد تجاوز النقاط الوسيطة ، سيتم تحديث المسافة إلى النقطة الوسيطة التالية.</string>
-    <string name="distance_to_destination_widget_desc">يعرض الويدجت المسافة المتبقية إلى نقطة الوجهة الأخيرة.</string>
-    <string name="next_turn_widget_desc">يعرض الويدجت معلومات حول المنعطف التالي مع الرجوع والمسافة إليه.</string>
-    <string name="widget_with_dot">ويدجت.</string>
+    <string name="second_marker_widget_desc">يمكنك تكوين الودجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الثانية.</string>
+    <string name="time_to_intermediate_widget_desc">يعرض الودجت وقت الوصول أو وقت الذهاب إلى النقطة الوسيطة الأولى. يتم تحديث الوقت باستمرار أثناء التنقل ، بمجرد تمرير النقاط الوسيطة ، سيتم تحديث الوقت إلى النقطة الوسيطة التالية.</string>
+    <string name="first_marker_widget_desc">يمكنك تكوين الودجت لإظهار المسافة أو الوقت المقدر للوصول المتبقي للتوجيه المباشر للخريطة الأولى.</string>
+    <string name="second_next_turn_widget_desc">يعرض الودجت معلومات حول المنعطف التالي الثاني الذي يتم تمكينه إذا انعطف ضمن مسافة قريبة.</string>
+    <string name="time_to_destination_widget_desc">يعرض الودجت وقت الوصول أو وقت الذهاب إلى نقطة الوجهة الأخيرة. يتم تحديث الوقت باستمرار أثناء التنقل وهو يساوي وقت الطريق من الموقع الحالي.</string>
+    <string name="distance_to_intermediate_widget_desc">يعرض الودجت المسافة المتبقية إلى أول نقطة وسيطة. بمجرد تجاوز النقاط الوسيطة ، سيتم تحديث المسافة إلى النقطة الوسيطة التالية.</string>
+    <string name="distance_to_destination_widget_desc">يعرض الودجت المسافة المتبقية إلى نقطة الوجهة الأخيرة.</string>
+    <string name="next_turn_widget_desc">يعرض الودجت معلومات حول المنعطف التالي مع الرجوع والمسافة إليه.</string>
+    <string name="widget_with_dot">ودجت.</string>
     <string name="compass_visible_if_map_rotated_desc">يختفي مع تنشيط الشمال</string>
     <string name="compass_visible_if_map_rotated">مرئي إذا تم تدوير الخريطة</string>
     <string name="compass_always_hidden">مخفي دائما</string>
@@ -4801,11 +4801,11 @@
     <string name="rendering_attr_depthContourColorScheme_description">نظام ألوان عمق خطوط الخطوط المحيطية</string>
     <string name="auto_25_chars_route_roundabout_kr">خذ %1$d مخرجا واحتفظ باليمين</string>
     <string name="auto_backup_title">النسخ الاحتياطي التلقائي</string>
-    <string name="duplacate_widget_added_snackbar">تتم إضافة الويدجت بعد ذلك في القائمة.</string>
+    <string name="duplacate_widget_added_snackbar">تتم إضافة الودجت بعد ذلك في القائمة.</string>
     <string name="shared_string_duplicate">نسخ</string>
-    <string name="av_notes_photo_widget_desc">النقرعلى الويدجت يسمح لك بالتقاط صورة.</string>
-    <string name="av_notes_video_widget_desc">النقرعلى الويدجت يسمح لك بالتقاط الفيديو.</string>
-    <string name="av_notes_audio_widget_desc">النقرعلى الويدجت يسمح لك بتدوين الملاحظات الصوتية.</string>
+    <string name="av_notes_photo_widget_desc">النقرعلى الودجت يسمح لك بالتقاط صورة.</string>
+    <string name="av_notes_video_widget_desc">النقرعلى الودجت يسمح لك بالتقاط الفيديو.</string>
+    <string name="av_notes_audio_widget_desc">النقرعلى الودجت يسمح لك بتدوين الملاحظات الصوتية.</string>
     <string name="trip_recording_downhill_widget_desc">عرض مجموعة الرحلات المسجلة الحالية.</string>
     <string name="trip_recording_uphill_widget_desc">عرض مجموع عمليات التسلق المسجلة حاليا.</string>
     <string name="trip_recording_distance_widget_desc">يظهر مسافة الرحلة المسجلة حاليا.</string>
@@ -4845,11 +4845,11 @@
     <string name="how_to_use">طريقة الاستخدام:</string>
     <string name="map_markers_desc">ويدجن عرض المسافة أو الوقت المقدر للوصول (ETA) لأول علامتين في قائمة علامات الخريطة.</string>
     <string name="coordinates_widget_map_center_desc">يبين الإحداثيات الجغرافية لمركز الخريطة الحالي</string>
-    <string name="coordinates_widget_current_location_desc">ويدجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
+    <string name="coordinates_widget_current_location_desc">ودجت عرض الإحداثيات الجغرافية للموقع الجغرافي الحالي</string>
     <string name="map_widget_target_distance_desc">تظهر المسافة بين الكاميرا والموقع المستهدف.</string>
     <string name="rotate_map_manual_opt">تدوير يدوي</string>
     <string name="map_widget_camera_tilt_desc">تعرض زاوية إمالة الكاميرا في وضع المنظور. الافتراضي هو 90 درجة (بدون إمالة).</string>
-    <string name="click_on_widget">انقر على الأداة (الويدجت)</string>
+    <string name="click_on_widget">انقر على الأداة (الودجت)</string>
     <string name="ant_missing_dependency_descr">تعذر العثور على الخدمة المطلوبة \"%1$s\".
 \nتحتاج إلى تثبيت خدمة ملحق مستشعر ANT + أو قد تحتاج إلى تحديث الإصدار الحالي إذا كان لديك بالفعل.
 \nهل تريد تشغيل متجر قوقل بلي للحصول عليه؟</string>
@@ -4866,7 +4866,7 @@
     <string name="map_widget_ant_heart_rate_desc">يعرض معدل ضربات قلب المستخدم أثناء نشاط معين في الوقت الفعلي</string>
     <string name="map_widget_ant_heart_rate">معدل ضربات القلب</string>
     <string name="ant_read_data">قراءة البيانات</string>
-    <string name="external_sensor_widgets">ويدجت مستشعر ANT+</string>
+    <string name="external_sensor_widgets">ودجت مستشعر ANT+</string>
     <string name="ant_write_to_gpx">كتابة البيانات للمسار</string>
     <string name="ant_heart_rate_write_gpx_desc">تضمين معدل نبضات القلب للمسار</string>
     <string name="nautical_depth_points">نقاط العمق البحري</string>
@@ -4903,7 +4903,7 @@
 \n
 \n • تمت إضافة خيار حجم النص \"مسافة بالنقر\"
 \n
-\n • إضافة خيار ويدجت \"علامة الخريطة\" لتغيير سلوك النقر
+\n • إضافة خيار ودجت \"علامة الخريطة\" لتغيير سلوك النقر
 \n
 \n • خيار \"وضع العرض\" ثابت
 \n
@@ -4960,7 +4960,7 @@
     <string name="weather_widgets_secondary_desc">يمكن تغيير وحدات القياس في إعدادات الاداة الخاصة بالطقس.</string>
     <string name="weather_plugin_description">يوفر الملحق المساعد الطقس
 \n- 5 طبقات... توقعات على مدار 24 ساعة و 7 أيام توقعات كل 3 ساعات
-\n- ويدجت يعتمد على الموقع
+\n- ودجت يعتمد على الموقع
 \n- خطوط متساوية لدرجة الحرارة / الضغط
 \n
 \nيتم توفير بيانات الطقس من قبل (GFS، %1$s).</string>
@@ -5334,7 +5334,7 @@
 \n
 \n • أندرويد أوتو: قائمة بدء جديدة للوصول إلى المفضلة والمسارات وفئات النقاط
 \n
-\n • قائمة واحدة من عناصرالويدجت للوحة العلوية / السفلية
+\n • قائمة واحدة من عناصرالودجت للوحة العلوية / السفلية
 \n
 \n • ملف تعريف \"قطار\" جديد ، يسمح لحساب طرق السكك الحديدية
 \n
@@ -5407,7 +5407,7 @@
     <string name="hillshade_slope">التضاريس، الانحدار</string>
     <string name="glide_ratio_to_target">نسبة الانحدار إلى الهدف</string>
     <string name="map_widget_group_glide_ratio">نسبة الانحدار</string>
-    <string name="map_widget_group_glide_desc">ويدجت عرض نسبة الانحدار أو متوسطه إلى الهدف للرحلة الحالية.</string>
+    <string name="map_widget_group_glide_desc">ودجت عرض نسبة الانحدار أو متوسطه إلى الهدف للرحلة الحالية.</string>
     <string name="map_widget_glide_average_desc">يعرض متوسط معدل الانحدار للفترة المحددة.</string>
     <string name="map_widget_glide_target_desc">يعرض نسبة الانحدار المطلوبة للوصول إلى النقطة المستهدفة.</string>
     <string name="average_glide_time_interval_desc">حدد الفاصل الزمني لحساب متوسط الانحدار.</string>
@@ -5450,10 +5450,10 @@
     <string name="help_article_plan_route_web_name">مخطط مسار الانترنت</string>
     <string name="help_article_purchases_giveaway_name">تبرع</string>
     <string name="help_article_troubleshooting_general_name">عام</string>
-    <string name="help_article_widgets_name">ويدجت الخريطة</string>
-    <string name="help_article_widgets_info_widgets_name">ويدجت المعلومات</string>
-    <string name="help_article_widgets_markers_name">ويدجت التوجيه المباشر</string>
-    <string name="help_article_widgets_nav_widgets_name">ويدجت التنقل</string>
+    <string name="help_article_widgets_name">ودجت الخريطة</string>
+    <string name="help_article_widgets_info_widgets_name">ودجت المعلومات</string>
+    <string name="help_article_widgets_markers_name">ودجت التوجيه المباشر</string>
+    <string name="help_article_widgets_nav_widgets_name">ودجت التنقل</string>
     <string name="help_article_widgets_radius_ruler_name">دوائر القياس والمسطرة</string>
     <string name="shared_string_setup">إعداد</string>
     <string name="user_guide">دليل المستخدم</string>
@@ -5493,11 +5493,11 @@
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
     <string name="release_4_6">"• أندررويد أوتو: تمت إضافة الوضع ثلاثي الأبعاد
 \n
-\n  • المسارات: خيارات المرشحات والمجلدات الذكية، والذاكرة المحسنة للملفات الأكبر حجمًا
+\n • المسارات: خيارات المرشحات والمجلدات الذكية، والذاكرة المحسنة للملفات الأكبر حجمًا
 \n
-\n  • تعزيز الويدجت العلوي والسفلي لاستيعاب كافة الإضافات
+\n • تعزيز الويدجت العلوي والسفلي لاستيعاب كافة الإضافات
 \n
-\n  • تحسين إدارة الموارد المحلية
+\n • تحسين إدارة الموارد المحلية
 \n
 \n  • تعيين زر قابل للتخصيص لوحدات التحكم الخارجية
 \n
@@ -5511,7 +5511,7 @@
 \n
 \n  • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
 \n
-\n  • خيار ويدجت \"ذاكرة الوصول العشوائي المتوفرة\".
+\n  • خيار ودجت \"ذاكرة الوصول العشوائي المتوفرة\".
 \n
 \n"</string>
     <string name="app_mode_baby_transport">عربة الطفل</string>
@@ -5571,20 +5571,18 @@
         <item quantity="many">%1$d (%2$d مسار)</item>
         <item quantity="other">%1$d (%2$d مسار)</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">هل أنت متأكد من أنك تريد أن تحذف كل الأشياء في سلة المهملات؟ لا يمكن إلغاء هذا الإجراء.</string>
+    <string name="cloud_trash_clear_confirmation">هل تريد حذف جميع العناصر الموجودة في سلة المهملات نهائيًا؟</string>
     <string name="restore_from_trash">استرجاع من سلة المهملات</string>
     <string name="delete_all_items">احذف كل العناصر</string>
-    <string name="trash_is_empty_banner_desc">الملفات المزالة من التطبيق و الكلود ستكون متاحة هنا لمدة %1$s أيام بعد الحذف.</string>
-    <string name="delete_trash_item_confirmation_desc">سيتم حذف %1$s بشكل دائم. هل أنت متأكد؟
-\n
-\nلا يمكن إلغاء هذا الاجراء.</string>
+    <string name="trash_is_empty_banner_desc">الملفات المزالة من التطبيق و الكلاود ستكون متاحة هنا لمدة %1$s أيام بعد الحذف.</string>
+    <string name="delete_trash_item_confirmation_desc">هل تريد حذف \"%1$s\" نهائيًا؟</string>
     <string name="shared_string_empty_trash">إفراغ سلة المهملات</string>
     <string name="shared_string_delete_immediately">احذف فورا</string>
     <string name="shared_string_is_deleted">%1$s تم حذفه.</string>
     <string name="cloud_item_restored">%1$s تم استعادته إلى الكلاود.</string>
     <string name="trash_alert_card_desc">العناصر في سلة المهملات ستمحى بعد %1$s يوماً.</string>
     <string name="trash_is_empty">سلة المهملات فارغة</string>
-    <string name="shared_string_trash">سلة المهملات</string>
+    <string name="shared_string_trash">المهملات</string>
     <string name="shared_string_delete_item">حذف العنصر</string>
     <string name="rendering_attr_showToll_name">عرض قيود الرسوم</string>
     <string name="rendering_attr_showToll_description">عرض القيود المفروضة على الطرق</string>
@@ -5622,7 +5620,7 @@
     <string name="key_event_action_move_up">حرك للأعلى</string>
     <string name="key_event_action_open_search_view">فتح عرض البحث</string>
     <string name="target_elevation">حد الارتفاع</string>
-    <string name="remove_widget_first">يرجى إزالة الويدجت أولا</string>
+    <string name="remove_widget_first">يرجى إزالة الودجت أولا</string>
     <string name="key_event_action_zoom_out">تصغير</string>
     <string name="key_event_action_toggle_drower">إظهار/إخفاء القائمة الجانبية</string>
     <string name="key_is_already_assigned_error">تم بالفعل تعيين المفتاح \"%1$s\" للإجراء: \"%2$s\"</string>
@@ -5654,11 +5652,11 @@
     <string name="precise_distance_numbers">أرقام المسافة الصحيحة</string>
     <string name="any_connected">أي صلة</string>
     <string name="any_connected_with_device">أي صلة: %s</string>
-    <string name="complex_widget_alert">%1$s لا يمكن وضع ويدجت إلا في الصف المخصص.</string>
-    <string name="previous_row_has_complex_widget">يحتوي الصف السابق على حيارات ويدجت مستخدم</string>
+    <string name="complex_widget_alert">%1$s لا يمكن وضع ودجت إلا في الصف المخصص.</string>
+    <string name="previous_row_has_complex_widget">يحتوي الصف السابق على خيارات ودجت مستخدم</string>
     <string name="shared_string_next_event">التالي</string>
     <string name="map_widget_sun_position">موقع الشمس</string>
-    <string name="map_widget_sun_position_desc">يعرض هذا الويدجت الوقت حتى شروق الشمس أو غروبها، اعتمادا على الوقت الحالي.</string>
+    <string name="map_widget_sun_position_desc">يعرض هذا الودجت الوقت حتى شروق الشمس أو غروبها، اعتمادا على الوقت الحالي.</string>
     <string name="sort_subfolders">فرز المجلدات الفرعية</string>
     <string name="shared_string_activity">النشاط</string>
     <string name="shared_string_keywords">الكلمات الدلالية</string>
@@ -5672,4 +5670,31 @@
     <string name="shared_string_license">الرخصة</string>
     <string name="shared_string_link">الرابط</string>
     <string name="shared_string_copyright">حقوق النشر</string>
+    <string name="shared_string_limit">حد</string>
+    <string name="when_exceeded">عند تجاوز</string>
+    <string name="speedometer_description">عرض سرعتك الحالية بواسطة GPS</string>
+    <string name="add_button">إضافة زر</string>
+    <string name="custom_buttons">أزرار مخصصة</string>
+    <string name="default_buttons">الأزرار الافتراضية</string>
+    <string name="max_sensor_heartrate">معدل ضربات القلب، الحد الأقصى</string>
+    <string name="max_sensor_cadence">مستشعر الدراجة، الحد الأقصى</string>
+    <string name="max_sensor_bycicle_power">طاقة الدراجة، كحد أقصى</string>
+    <string name="max_sensor_temperature">درجة الحرارة القصوى</string>
+    <string name="special_routing_cpp">نوع التوجيه الخاص</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">كل المسارات</string>
+    <string name="speed_limit_warning">تحذير السرعة</string>
+    <string name="shared_string_speedometer">عداد السرعة</string>
+    <string name="custom_map_button_name_present">هذا الزر موجود بالفعل</string>
+    <string name="avg_sensor_heartrate">معدل ضربات القلب، متوسط</string>
+    <string name="avg_sensor_bycicle_power">طاقة الدراجة، متوسطة</string>
+    <string name="avg_sensor_cadence">مستشعرالدراجة، متوسط</string>
+    <string name="max_sensor_speed">مستشعر السرعة، الحد الأقصى</string>
+    <string name="avg_sensor_speed">مستشعر السرعة، متوسط</string>
+    <string name="avg_sensor_temperature">درجة الحرارة، متوسط</string>
+    <string name="shared_string_author">المؤلف</string>
+    <string name="shared_string_road_maps">خرائط الطرق</string>
+    <string name="battery_optimization_desc">يمكن أن يؤدي تحسين البطارية في أندرويد إلى حدوث فجوات وعدم دقة في المسارات المسجلة.
+\n
+\nإذا واجهت أيا من هذه المشكلات، فيمكنك محاولة تغيير استخدام البطارية إلى \'غير مقيد.\'</string>
 </resources>
