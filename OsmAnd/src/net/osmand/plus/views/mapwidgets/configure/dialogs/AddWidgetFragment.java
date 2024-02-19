@@ -328,8 +328,8 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 	 *                                  of added widgets ids of this group; null if in view mode
 	 *                                  ({@link WidgetsListFragment})
 	 */
-	public static void showGroupDialog(@NonNull FragmentManager fragmentManager,
-									   @NonNull Fragment target,
+	public static void showGroupDialog(@NonNull FragmentManager manager,
+									   @Nullable Fragment target,
 									   @NonNull ApplicationMode appMode,
 									   @NonNull WidgetsPanel widgetsPanel,
 									   @NonNull WidgetGroup widgetGroup,
@@ -342,14 +342,14 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(fragmentManager, fragment);
+		showFragment(manager, fragment);
 	}
 
 	/**
 	 * @see AddWidgetListener#showGroupDialog
 	 */
-	public static void showWidgetDialog(@NonNull FragmentManager fragmentManager,
-										@NonNull Fragment target,
+	public static void showWidgetDialog(@NonNull FragmentManager manager,
+										@Nullable Fragment target,
 										@NonNull ApplicationMode appMode,
 										@NonNull WidgetsPanel widgetsPanel,
 										@NonNull WidgetType widgetType,
@@ -362,14 +362,14 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(fragmentManager, fragment);
+		showFragment(manager, fragment);
 	}
 
 	/**
 	 * @see AddWidgetListener#showGroupDialog
 	 */
-	public static void showExternalWidgetDialog(@NonNull FragmentManager fragmentManager,
-												@NonNull Fragment target,
+	public static void showExternalWidgetDialog(@NonNull FragmentManager manager,
+												@Nullable Fragment target,
 												@NonNull ApplicationMode appMode,
 												@NonNull WidgetsPanel widgetsPanel,
 												@NonNull String widgetId,
@@ -384,12 +384,12 @@ public class AddWidgetFragment extends BaseWidgetFragment {
 		AddWidgetFragment fragment = new AddWidgetFragment();
 		fragment.setArguments(args);
 		fragment.setTargetFragment(target, 0);
-		showFragment(fragmentManager, fragment);
+		showFragment(manager, fragment);
 	}
 
-	private static void showFragment(@NonNull FragmentManager fragmentManager, @NonNull AddWidgetFragment fragment) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			fragmentManager.beginTransaction()
+	private static void showFragment(@NonNull FragmentManager manager, @NonNull AddWidgetFragment fragment) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();

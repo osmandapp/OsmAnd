@@ -499,7 +499,7 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	public static void showInstance(@NonNull FragmentManager manager,
 									@NonNull WidgetsPanel panel,
 									@NonNull ApplicationMode appMode,
-									@NonNull Fragment target) {
+									@Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ReorderWidgetsFragment fragment = new ReorderWidgetsFragment();
 			fragment.setTargetFragment(target, 0);
