@@ -5511,4 +5511,9 @@
     <string name="custom_map_button_name_present">En sådan knapp finns redan</string>
     <string name="add_button">Lägg till knapp</string>
     <string name="special_routing_cpp">Typ av särskild ruttberäkning</string>
+    <string name="shared_string_speedometer">Hastighetsmätare</string>
+    <string name="when_exceeded">Om överskrider</string>
+    <string name="speedometer_description">Visar din nuvarande hastighet enligt GPS</string>
+    <string name="shared_string_limit">Gräns</string>
+    <string name="speed_limit_warning">Hastighetsgränsvarning</string>
 </resources>
