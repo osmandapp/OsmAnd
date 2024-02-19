@@ -4976,4 +4976,14 @@
     <string name="special_routing_cpp">특수 라우팅 유형</string>
     <string name="empty_state_markers_history_desc">합격으로 표시된 마커가 이 화면에 나타납니다.</string>
     <string name="quick_action_bug_descr">이 메시지는 댓글 필드에 포함되어 있습니다.</string>
+    <string name="shared_string_limit">한계</string>
+    <string name="when_exceeded">초과 시</string>
+    <string name="speed_limit_warning">속도 제한 경고</string>
+    <string name="speedometer_description">GPS를 통해보고 된 현재 속도를 표시</string>
+    <string name="shared_string_speedometer">속도계</string>
+    <string name="settings_item_read_error">\'%1$s\'에서 읽을 수 없습니다.</string>
+    <string name="custom_osmand_plugin">사용자 정의 OsmAnd 플러그인</string>
+    <string name="move_inside_category">아이템은 이 범주 내에서만 이동할 수 있습니다.</string>
+    <string name="shared_string_items">항목</string>
+    <string name="lang_zhminnan">남부 분</string>
 </resources>
