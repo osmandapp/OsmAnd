@@ -129,7 +129,7 @@
     <string name="map_widget_reset">Vrati na podrazumevano</string>
     <string name="map_widget_next_turn">Sledeće skretanje</string>
     <string name="map_widget_next_turn_small">Sledeće skretanje (malo)</string>
-    <string name="map_widget_next_next_turn">Drugo sledeće skretanje</string>
+    <string name="map_widget_next_next_turn">Drugo skretanje</string>
     <string name="bg_service_screen_lock">Zaključaj</string>
     <string name="bg_service_screen_unlock">Otključaj</string>
     <string name="bg_service_screen_lock_toast">Ekran je zaključan</string>
@@ -5628,8 +5628,8 @@
     <string name="default_buttons">Zadano dugme</string>
     <string name="custom_map_button_name_present">Takvo dugme već postoji</string>
     <string name="shared_string_limit">Ograničenje</string>
-    <string name="when_exceeded">Kada se prekorači</string>
+    <string name="when_exceeded">Kad se prekorači</string>
     <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
     <string name="shared_string_speedometer">Brzinomer</string>
-    <string name="speed_limit_warning">Upozorenje na ograničenje brzine</string>
+    <string name="speed_limit_warning">Upozorenje na ograničenu brzinu</string>
 </resources>
