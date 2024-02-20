@@ -375,16 +375,23 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	@NonNull
 	private List<ListItem> getPagedWidgetItems(@NonNull List<ListItem> widgetsItems) {
 		List<ListItem> pagedWidgetsItems = new ArrayList<>();
-		for (int page : dataHolder.getPages().keySet()) {
-
-			pagedWidgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
-
+		if (dataHolder.getSelectedPanel().isPanelVertical()) {
+			int rowIndex = 0;
 			for (ListItem widgetItem : widgetsItems) {
-				int widgetPage = widgetItem.value instanceof AddedWidgetUiInfo
-						? ((AddedWidgetUiInfo) widgetItem.value).page
-						: -1;
-				if (widgetPage == page) {
-					pagedWidgetsItems.add(widgetItem);
+				pagedWidgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(rowIndex)));
+				rowIndex++;
+				pagedWidgetsItems.add(widgetItem);
+			}
+		} else {
+			for (int page : dataHolder.getPages().keySet()) {
+				pagedWidgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
+				for (ListItem widgetItem : widgetsItems) {
+					int widgetPage = widgetItem.value instanceof AddedWidgetUiInfo
+							? ((AddedWidgetUiInfo) widgetItem.value).page
+							: -1;
+					if (widgetPage == page) {
+						pagedWidgetsItems.add(widgetItem);
+					}
 				}
 			}
 		}
