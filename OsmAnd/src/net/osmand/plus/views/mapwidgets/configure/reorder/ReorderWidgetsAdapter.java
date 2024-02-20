@@ -402,9 +402,9 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 			for (int index = 0; index < items.size(); index++) {
 				ListItem item = items.get(index);
 				if (item.type == ItemType.PAGE && rowHasComplexWidget(index) && getRowWidgetIds(index).size() > 1) {
+					app.showToastMessage(app.getString(R.string.complex_widget_alert, getComplexWidgetName(index)));
 					items.clear();
 					items.addAll(itemsBeforeMove);
-					app.showToastMessage(app.getString(R.string.complex_widget_alert, getComplexWidgetName(index)));
 					break;
 				}
 			}
