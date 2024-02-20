@@ -104,7 +104,7 @@ public class BinaryHHRouteReaderAdapter {
 	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initRegionAndLoadPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
 		codedIS.seek(reg.filePointer);
-		long oldLimit = codedIS.pushLimitLong((long) reg.length);
+		final long oldLimit = codedIS.pushLimitLong((long) reg.length);
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
 		reg.segments = new ArrayList<>();
 		while (true) {
@@ -116,7 +116,7 @@ public class BinaryHHRouteReaderAdapter {
 				return mp;
 			case OsmandOdb.OsmAndHHRoutingIndex.TAGVALUESTABLE_FIELD_NUMBER:
 				long length = codedIS.readRawVarint32();
-				oldLimit = codedIS.pushLimitLong((long) length);
+				final long internalOldLimit = codedIS.pushLimitLong((long) length);
 				List<String> st = readStringTable();
 				for (String s : st) {
 					int i = s.indexOf('=');
@@ -124,7 +124,7 @@ public class BinaryHHRouteReaderAdapter {
 						reg.encodingRules.add(new TagValuePair(s.substring(0, i), s.substring(i + 1), -1));
 					}
 				}
-				codedIS.popLimit(oldLimit);
+				codedIS.popLimit(internalOldLimit);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
 				readPointBox(reg, cl, mapId, mp, null);
