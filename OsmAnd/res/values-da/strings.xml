@@ -5366,7 +5366,7 @@
     <string name="help_article_map_vector_maps_name">Vektorkort (kortstilarter)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Vejledning</string>
+    <string name="help_article_navigation_guidance_name">Navigationsvejledning</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kortvisning under navigation</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Stemmemeddelelser / notifikationer</string>
     <string name="help_article_navigation_routing_name">Ruteparametre</string>
@@ -5631,4 +5631,5 @@
     <string name="shared_string_limit">Begrænsning</string>
     <string name="when_exceeded">Når overskredet</string>
     <string name="speedometer_description">Viser din aktuelle hastighed som rapporteret via GPS</string>
+    <string name="help_article_setup_a_route_name">Opret en rute</string>
 </resources>
