@@ -5534,4 +5534,9 @@
 \nEf þú sérð slíkt gerast, gætirðu reynt að stilla notkun rafhlöðunnar á \'Ótakmarkað\'.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Öllum gögnum af OsmAnd-tölvuskýinu verður %1$s. Ekki verður átt við gögn á tækinu.</string>
     <string name="recently_visible">Nýlega sýnilegt %1$s</string>
+    <string name="shared_string_limit">Takmörk</string>
+    <string name="speedometer_description">Sýnir núverandi hraða þinn mældan með GPS</string>
+    <string name="speed_limit_warning">Aðvörun um hraðatakmarkanir</string>
+    <string name="when_exceeded">Þegar yfir</string>
+    <string name="shared_string_speedometer">Hraðamælir</string>
 </resources>
