@@ -116,7 +116,7 @@ public class BinaryHHRouteReaderAdapter {
 				return mp;
 			case OsmandOdb.OsmAndHHRoutingIndex.TAGVALUESTABLE_FIELD_NUMBER:
 				long length = codedIS.readRawVarint32();
-				final long internalOldLimit = codedIS.pushLimitLong((long) length);
+				final long old = codedIS.pushLimitLong((long) length);
 				List<String> st = readStringTable();
 				for (String s : st) {
 					int i = s.indexOf('=');
@@ -124,7 +124,7 @@ public class BinaryHHRouteReaderAdapter {
 						reg.encodingRules.add(new TagValuePair(s.substring(0, i), s.substring(i + 1), -1));
 					}
 				}
-				codedIS.popLimit(internalOldLimit);
+				codedIS.popLimit(old);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
 				readPointBox(reg, cl, mapId, mp, null);
