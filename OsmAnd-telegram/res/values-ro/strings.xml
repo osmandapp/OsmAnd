@@ -278,4 +278,5 @@
     <string name="location_source_summary">În mod implicit, OsmAnd instalat din Google Play utilizează Serviciile Google Play pentru a determina locația.
 \n
 \nDacă obțineți informații inexacte despre locație sau dacă utilizați un dispozitiv fără Google Play Services, încercați să treceți la Android API</string>
+    <string name="location_source">Sursa locației</string>
 </resources>
