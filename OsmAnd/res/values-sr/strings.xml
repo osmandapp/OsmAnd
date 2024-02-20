@@ -5301,7 +5301,7 @@
     <string name="help_article_navigation_routing_direct_to_point_routing_name">Путања непосредно-у-тачку (пловилом)</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Заслон карте приликом навођења</string>
     <string name="app_mode_baby_transport">Превоз беба</string>
-    <string name="help_article_navigation_guidance_name">Вођење</string>
+    <string name="help_article_navigation_guidance_name">Навигационо вођење</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Експлозиви</string>
     <string name="help_article_personal_profiles_name">Пресеци (поставке)</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Путања колима (теретњаком, мотоциклом)</string>
@@ -5619,4 +5619,10 @@
     <string name="custom_buttons">Прилагођена дугмад</string>
     <string name="default_buttons">Подразумевана дугмад</string>
     <string name="custom_map_button_name_present">Такво дугме већ постоји</string>
+    <string name="when_exceeded">Када је прекорачење</string>
+    <string name="shared_string_speedometer">Брзиномер</string>
+    <string name="speed_limit_warning">Упозорење ограничења брзине</string>
+    <string name="shared_string_limit">Ограничење</string>
+    <string name="speedometer_description">Приказ ваше тренутне брзине по подацима ГПС</string>
+    <string name="help_article_setup_a_route_name">Постави руту</string>
 </resources>
