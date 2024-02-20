@@ -4500,7 +4500,7 @@
     <string name="select_suggested_points">Selectează punctele propuse</string>
     <string name="import_tracks_descr">%1$s, conține %2$s trasee separate. Alegeți traseele de importat.</string>
     <string name="google_play_services">Servicii Google Play</string>
-    <string name="location_source">Sursa pentru localizare</string>
+    <string name="location_source">Sursa locației</string>
     <string name="location_source_descr">În mod implicit, OsmAnd instalat din Google Play utilizează %1$s pentru a determina poziția.
 \n
 \nDacă obțineți o poziționare inexactă sau dacă utilizați un dispozitiv fără %2$s, încercați să folosiți \"%3$s\"</string>
@@ -5601,4 +5601,7 @@
     <string name="when_exceeded">Când e depășită</string>
     <string name="custom_buttons">Butoane personalizate</string>
     <string name="default_buttons">Butoane implicite</string>
+    <string name="sorted_sufolders_toast">Subfolderele din \"%1$s\" sunt sortate după: \"%2$s\"</string>
+    <string name="shared_string_additional">Adițional</string>
+    <string name="sort_subfolders">Sortarea subfolderelor</string>
 </resources>
