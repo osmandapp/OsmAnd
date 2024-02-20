@@ -4865,4 +4865,12 @@
     <string name="poi_us_maps_recreation_area_activity_sledding_tubing">Sleða og slöngubrun</string>
     <string name="poi_us_maps_recreation_area_activity_tubing">Slöngubrun</string>
     <string name="poi_border_zone">Jaðarsvæði</string>
+    <string name="poi_healthcare_speciality_applied_kinesiology">Hreyfingameðferð</string>
+    <string name="poi_healthcare_speciality_pharmacology">Lyfjafræði</string>
+    <string name="poi_healthcare_speciality_cosmetic">Lýtalækningar</string>
+    <string name="poi_healthcare_speciality_kinesitherapy">Sjúkraþjálfun (kinesitherapy)</string>
+    <string name="poi_healthcare_speciality_primary_care">Heilsugæsla</string>
+    <string name="poi_healthcare_speciality_denturist">Gervigómar</string>
+    <string name="poi_healthcare_speciality_pediatric">Barnalækningar</string>
+    <string name="poi_healthcare_speciality_audiology">Heyrnarlækningar</string>
 </resources>
