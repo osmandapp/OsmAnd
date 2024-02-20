@@ -1,5 +1,7 @@
 package net.osmand.plus.help;
 
+import static net.osmand.plus.help.LoadArticlesTask.DOCS_LINKS_URL;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,28 +41,28 @@ public class HelpArticleUtils {
 
 	@NonNull
 	public static String getArticleName(@NonNull Context ctx, @NonNull HelpArticle article) {
-		String key = Algorithms.isEmpty(article.url) ? article.label : article.url;
-		return getArticleName(ctx, key);
+		return getArticleName(ctx, article.url, article.label);
 	}
 
 	@NonNull
-	public static String getArticleName(@NonNull Context ctx, @NonNull String key) {
+	public static String getArticleName(@NonNull Context ctx, @NonNull String url, @NonNull String defaultName) {
+		String key = url.isEmpty() ? defaultName.toLowerCase(Locale.US) : url;
 		String propertyName = getArticlePropertyName(key);
 
 		String name = getArticlePairedName(ctx, propertyName);
 		if (name == null) {
 			name = AndroidUtils.getStringByProperty(ctx, "help_article_" + propertyName + "_name");
 		}
-		return name != null ? name : Algorithms.capitalizeFirstLetterAndLowercase(propertyName.replace("_", " "));
+		return name != null ? name : defaultName;
 	}
 
 	@NonNull
-	private static String getArticlePropertyName(@NonNull String url) {
-		if (url.endsWith("/")) {
-			url = url.substring(0, url.length() - 1);
+	public static String getArticlePropertyName(@NonNull String key) {
+		if (key.endsWith("/")) {
+			key = key.substring(0, key.length() - 1);
 		}
-		String name = Algorithms.getFileWithoutDirs(url.toLowerCase(Locale.US));
-		name = name.replace("-", "_").replace("/", "_");
+		String name = key.replace(DOCS_LINKS_URL, "").replace("-", "_")
+				.replace("/", "_").replace(" ", "_");
 
 		if (!Algorithms.isEmpty(name) && name.charAt(name.length() - 1) == '_') {
 			name = name.substring(0, name.length() - 1);
@@ -103,6 +105,8 @@ public class HelpArticleUtils {
 				return ctx.getString(R.string.plugin_nautical_name);
 			case "plugins_contour_lines":
 				return ctx.getString(R.string.srtm_plugin_name);
+			case "plugins_custom":
+				return ctx.getString(R.string.custom_osmand_plugin);
 			case "search":
 				return ctx.getString(R.string.shared_string_search);
 			case "map_legend":
@@ -162,8 +166,8 @@ public class HelpArticleUtils {
 	}
 
 	@DrawableRes
-	public static int getArticleIconId(@NonNull String url) {
-		String key = getArticlePropertyName(url);
+	public static int getArticleIconId(@NonNull HelpArticle article) {
+		String key = getArticlePropertyName(article.url);
 		switch (key) {
 			case "track-recording-issues":
 				return R.drawable.ic_action_track_recordable;
