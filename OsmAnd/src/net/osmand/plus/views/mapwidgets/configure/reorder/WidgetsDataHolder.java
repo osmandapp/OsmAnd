@@ -94,11 +94,17 @@ public class WidgetsDataHolder {
 		orders.clear();
 
 		List<String> originalOrder = selectedPanel.getOriginalOrder();
-		for (int i = 0; i < originalOrder.size(); i++) {
+		for (int addedWRowIndex = 0, i = 0; i < originalOrder.size(); i++) {
 			String widgetId = originalOrder.get(i);
 			if (WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetId, appMode)) {
-				addWidgetToPage(widgetId, 0);
-				orders.put(widgetId, i);
+				if (selectedPanel.isPanelVertical()) {
+					addWidgetToPage(widgetId, addedWRowIndex);
+					addedWRowIndex++;
+					orders.put(widgetId, 0);
+				} else {
+					addWidgetToPage(widgetId, 0);
+					orders.put(widgetId, i);
+				}
 			}
 		}
 	}

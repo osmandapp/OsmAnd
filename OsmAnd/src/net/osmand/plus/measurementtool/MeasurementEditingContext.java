@@ -724,14 +724,22 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return false;
 	}
 
+	@NonNull
 	public ApplicationMode getSelectedPointAppMode() {
 		return getPointAppMode(selectedPointPosition);
 	}
 
+	@NonNull
 	public ApplicationMode getBeforeSelectedPointAppMode() {
 		return getPointAppMode(Math.max(selectedPointPosition - 1, 0));
 	}
 
+	@NonNull
+	public ApplicationMode getLastPointAppMode() {
+		return getPointAppMode(getPointsCount() - 1);
+	}
+
+	@NonNull
 	private ApplicationMode getPointAppMode(int pointPosition) {
 		String profileType = getPoints().get(pointPosition).getProfileType();
 		return ApplicationMode.valueOfStringKey(profileType, DEFAULT_APP_MODE);

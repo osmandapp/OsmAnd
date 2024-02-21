@@ -219,7 +219,7 @@
     <string name="help_article_map_vector_maps_name">Vector maps (Map styles)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Guidance</string>
+    <string name="help_article_navigation_guidance_name">Navigation Guidance</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Map screen during navigation</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Voice prompts / Notifications</string>
     <string name="help_article_navigation_routing_name">Route parameters</string>
@@ -261,6 +261,7 @@
     <string name="help_article_troubleshooting_general_name">General</string>
     <string name="help_article_troubleshooting_maps_data_name">Maps &amp; Data</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Track recording</string>
+    <string name="help_article_setup_a_route_name">Setup a route</string>
     <string name="help_article_widgets_name">Map Widgets</string>
     <string name="help_article_widgets_info_widgets_name">Informational widgets</string>
     <string name="help_article_widgets_map_buttons_name">Map buttons</string>

@@ -1060,7 +1060,7 @@
     <string name="route_updated_loc_found">Ожидание позиции для расчёта маршрута</string>
     <string name="continue_follow_previous_route_auto">Продолжить неоконченный маршрут\?  [ %1$s ]</string>
     <string name="show_cameras">Камеры контроля скорости</string>
-    <string name="show_traffic_warnings">Ограничения скорости</string>
+    <string name="show_traffic_warnings">Traffic warnings</string>
     <string name="avoid_toll_roads">Без платных дорог</string>
     <string name="screen_is_locked">Коснитесь значка замка для разблокировки</string>
     <string name="map_widget_top_text">Название улицы</string>
@@ -1559,7 +1559,7 @@
     <string name="traffic_warning_border_control">Пограничный контроль</string>
     <string name="traffic_warning_payment">Платный проезд</string>
     <string name="traffic_warning_stop">Знак остановки</string>
-    <string name="traffic_warning_calming">Снизьте скорость</string>
+    <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Камера скорости</string>
     <string name="traffic_warning">Дорожные предупреждения</string>
     <string name="speed_limit_exceed_message">Значение, при превышении которого прозвучит голосовое предупреждение.</string>

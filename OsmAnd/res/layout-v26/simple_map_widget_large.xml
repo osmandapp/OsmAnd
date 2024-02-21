@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/simple_widget_large_height"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/simple_widget_large_height"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -33,13 +33,13 @@
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
 
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toStartOf="@+id/widget_text_small"
-				app:layout_constraintHorizontal_bias="0.0"
-				app:layout_constraintHorizontal_chainStyle="packed"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
-				app:layout_constrainedWidth="true"
+				osmand:layout_constrainedWidth="true"
+				osmand:layout_constraintBottom_toBottomOf="parent"
+				osmand:layout_constraintEnd_toStartOf="@+id/widget_text_small"
+				osmand:layout_constraintHorizontal_bias="0.0"
+				osmand:layout_constraintHorizontal_chainStyle="packed"
+				osmand:layout_constraintStart_toStartOf="parent"
+				osmand:layout_constraintTop_toTopOf="parent"
 				tools:text="Widget name" />
 
 			<TextView
@@ -53,9 +53,9 @@
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
 
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
+				osmand:layout_constraintBottom_toBottomOf="parent"
+				osmand:layout_constraintEnd_toEndOf="parent"
+				osmand:layout_constraintTop_toTopOf="parent"
 				tools:text="Unit" />
 
 		</androidx.constraintlayout.widget.ConstraintLayout>

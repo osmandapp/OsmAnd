@@ -5359,7 +5359,7 @@
     <string name="help_article_map_vector_maps_name">Mapas vectoriales (Estilos de mapas)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Guía</string>
+    <string name="help_article_navigation_guidance_name">Orientación de la navegación</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Pantalla del mapa durante la navegación</string>
     <string name="help_article_navigation_routing_name">Parámetros de la ruta</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutas en bicicleta (BTT)</string>
@@ -5627,4 +5627,5 @@
     <string name="speedometer_description">Muestra tu velocidad actual a través del GPS</string>
     <string name="shared_string_speedometer">Velocímetro</string>
     <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="help_article_setup_a_route_name">Crear una ruta</string>
 </resources>

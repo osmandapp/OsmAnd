@@ -5363,7 +5363,7 @@
     <string name="help_article_map_vector_maps_name">Vektorkarten (Kartenstile)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Leitfaden</string>
+    <string name="help_article_navigation_guidance_name">Navigationshilfe</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartenbildschirm während der Navigation</string>
     <string name="help_article_navigation_setup_route_details_name">Routendetails</string>
     <string name="help_article_navigation_setup_route_navigation_name">Routenvorbereitung</string>
@@ -5630,4 +5630,5 @@
     <string name="when_exceeded">Bei Überschreitung</string>
     <string name="speedometer_description">Zeigt deine aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
     <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
+    <string name="help_article_setup_a_route_name">Route einrichten</string>
 </resources>
