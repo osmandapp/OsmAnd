@@ -74,13 +74,11 @@ public class RoutingContext {
 	public int dijkstraMode;
 	public boolean publicTransport;
 	
-	
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgress calculationProgressFirstPhase;
 	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
-	
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();

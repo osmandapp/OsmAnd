@@ -71,8 +71,7 @@ public class RoutePlannerFrontEnd {
 			hhRoutingType = HHRoutingType.JAVA;
 		}
 	}
-	
-	
+
 	public static class GpxRouteApproximation {
 		// ! MAIN parameter to approximate (35m good for custom recorded tracks) 
 		public double MINIMUM_POINT_APPROXIMATION = 200; // 35 m good for small deviations
@@ -719,7 +718,7 @@ public class RoutePlannerFrontEnd {
 			gctx.routeDistCalculations += (target.cumDist - start.cumDist);
 			gctx.routeCalculations++;
 			RoutingContext local = new RoutingContext(gctx.ctx);
-			res = searchRouteInternalPrepare(local, start.pnt, target.pnt, null);
+			res = searchRouteInternalPrepare(local, start.pnt, target.pnt, null, false);
 			//BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 			routeIsCorrect = res != null && res.isCorrect();
 			for (int k = start.ind + 1; routeIsCorrect && k < target.ind; k++) {
@@ -857,11 +856,11 @@ public class RoutePlannerFrontEnd {
 					return r;
 				}
 			} else {
-				setStartEndToCtx(ctx, start, end, intermediates);
 				ctx.calculationProgress.nextIteration();
-				RouteCalcResult r = runNativeRouting(ctx, null, hhRoutingConfig);
+				setStartEndToCtx(ctx, start, end, intermediates);
+				RouteCalcResult r = runNativeRouting(ctx, null, hhRoutingConfig,
+						true, start, end, intermediates); // HH-cpp
 				ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
-				//makeStartEndPointsPrecise no need, C++ does it
 				RouteResultPreparation.printResults(ctx, start, end, r.detailed);
 				if ((!r.detailed.isEmpty() && r.isCorrect()) || useOnlyHHRouting) {
 					return r;
@@ -888,7 +887,6 @@ public class RoutePlannerFrontEnd {
 		}
 		RouteCalcResult res ;
 		if (intermediatesEmpty && ctx.nativeLib != null) {
-			setStartEndToCtx(ctx, start, end, intermediates);
 			RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 			if (recalculationEnd != null) {
 				ctx.initTargetPoint(recalculationEnd);
@@ -897,8 +895,8 @@ public class RoutePlannerFrontEnd {
 				ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 			}
 			ctx.calculationProgress.nextIteration();
-			res = runNativeRouting(ctx, recalculationEnd, null);
-			makeStartEndPointsPrecise(res, start, end, intermediates);
+			setStartEndToCtx(ctx, start, end, intermediates);
+			res = runNativeRouting(ctx, recalculationEnd, null, true, start, end, intermediates); // BRP-cpp (no-intermediates)
 		} else {
 			int indexNotFound = 0;
 			List<RouteSegmentPoint> points = new ArrayList<RouteSegmentPoint>();
@@ -917,7 +915,7 @@ public class RoutePlannerFrontEnd {
 				return new RouteCalcResult("End point is not located");
 			}
 			ctx.calculationProgress.nextIteration();
-			res = searchRouteImpl(ctx, points, routeDirection);
+			res = searchRouteImpl(ctx, points, routeDirection); // BRP-java
 		}
 		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		RouteResultPreparation.printResults(ctx, start, end, res.detailed);
@@ -980,10 +978,9 @@ public class RoutePlannerFrontEnd {
 		try {
 			HHRoutingConfig cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
 			cfg.INITIAL_DIRECTION = dir;
-			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
+			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg); // HH-java
 			if (res != null && res.error == null) {
 				ctx.calculationProgress.hhIteration(HHIteration.DONE);
-				makeStartEndPointsPrecise(res, start, end, new ArrayList<LatLon>());
 				return res;
 			}
 			ctx.calculationProgress.hhIteration(HHIteration.HH_NOT_STARTED);
@@ -1095,7 +1092,7 @@ public class RoutePlannerFrontEnd {
 	}
 
 	private RouteCalcResult searchRouteInternalPrepare(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
-	                                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+	                                                            PrecalculatedRouteDirection routeDirection, boolean makePrecise) throws IOException, InterruptedException {
 		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
 			ctx.initStartAndTargetPoints(start, recalculationEnd);
@@ -1106,24 +1103,27 @@ public class RoutePlannerFrontEnd {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
 		}
 		if (ctx.nativeLib != null) {
-			ctx.startX = start.preciseX;
-			ctx.startY = start.preciseY;
 			ctx.startRoadId = start.road.id;
 			ctx.startSegmentInd  = start.segStart;
-			ctx.targetX = end.preciseX;
-			ctx.targetY = end.preciseY;
 			ctx.targetRoadId = end.road.id;
-			ctx.targetSegmentInd  = end.segStart;
-			return runNativeRouting(ctx, recalculationEnd, null);
+			ctx.targetSegmentInd = end.segStart;
+			LatLon startLatLon = start.getPreciseLatLon();
+			LatLon endLatLon = start.getPreciseLatLon();
+			setStartEndToCtx(ctx, startLatLon, endLatLon, null);
+			return runNativeRouting(ctx, recalculationEnd, null, makePrecise, startLatLon, endLatLon, null); // BRP-cpp
 		} else {
 			refreshProgressDistance(ctx);
 			// Split into 2 methods to let GC work in between
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, start, recalculationEnd != null ? recalculationEnd : end, null);
 			RouteResultPreparation rrp = new RouteResultPreparation();
 			// 4. Route is found : collect all segments and prepare result
-			List<RouteSegmentResult> result  = rrp.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
-			addPrecalculatedToResult(recalculationEnd, result);
-			return rrp.prepareResult(ctx, result);
+			RouteCalcResult res = new RouteCalcResult(rrp.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment));
+			if (makePrecise) {
+				// true from searchRouteImpl() and false from findGpxRouteSegment()
+				makeStartEndPointsPrecise(res, start.getPreciseLatLon(), end.getPreciseLatLon(), null);
+			}
+			addPrecalculatedToResult(recalculationEnd, res.detailed);
+			return rrp.prepareResult(ctx, res.detailed);
 		}
 	}
 
@@ -1177,10 +1177,10 @@ public class RoutePlannerFrontEnd {
 			float speed = 0.9f * ctx.config.router.getMaxSpeed();
 			ctx.calculationProgress.totalEstimatedDistance = (float) (rd / speed);
 		}
-
 	}
 
-	private RouteCalcResult runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd, HHRoutingConfig hhConfig) throws IOException {
+	private RouteCalcResult runNativeRouting(final RoutingContext ctx, RouteSegment recalculationEnd, HHRoutingConfig hhConfig,
+											 boolean makePrecise, LatLon start, LatLon end, List<LatLon> intermediates) throws IOException {
 		refreshProgressDistance(ctx);
 		if (recalculationEnd != null) {
 			if (TRACE_ROUTING) {
@@ -1206,8 +1206,13 @@ public class RoutePlannerFrontEnd {
 			log.info("RecalculationEnd result!");
 		}
 		addPrecalculatedToResult(recalculationEnd, result);
+		RouteCalcResult calcResult = new RouteCalcResult(result);
+		if (makePrecise) {
+			// true from searchRouteImpl() and false from findGpxRouteSegment() - segments from native lib
+			makeStartEndPointsPrecise(calcResult, start, end, intermediates);
+		}
 		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
-		return new RouteResultPreparation().prepareResult(ctx, result);
+		return new RouteResultPreparation().prepareResult(ctx, calcResult.detailed);
 	}
 
 	private void addPrecalculatedToResult(RouteSegment recalculationEnd, List<RouteSegmentResult> result) {
@@ -1250,9 +1255,8 @@ public class RoutePlannerFrontEnd {
 				ctx.previouslyCalculatedRoute = null;
 			}
 			pringGC(ctx, true);
-			RouteCalcResult res = searchRouteInternalPrepare(ctx, points.get(0), points.get(1), routeDirection);
+			RouteCalcResult res = searchRouteInternalPrepare(ctx, points.get(0), points.get(1), routeDirection, true); // BRP-java (no-interpoints)
 			pringGC(ctx, false);
-			makeStartEndPointsPrecise(res, points.get(0).getPreciseLatLon(), points.get(1).getPreciseLatLon(), null);
 			return res;
 		}
 
@@ -1292,8 +1296,7 @@ public class RoutePlannerFrontEnd {
 					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
 				}
 			}
-			RouteCalcResult res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection);
-			makeStartEndPointsPrecise(res, points.get(i).getPreciseLatLon(), points.get(i + 1).getPreciseLatLon(), null);
+			RouteCalcResult res = searchRouteInternalPrepare(local, points.get(i), points.get(i + 1), routeDirection, true); // BRP-java (interpoints)
 			results.detailed.addAll(res.detailed);
 			ctx.routingTime += local.routingTime;
 //			local.unloadAllData(ctx);

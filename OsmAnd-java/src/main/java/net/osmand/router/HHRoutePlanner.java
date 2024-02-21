@@ -270,6 +270,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			return cancelledStatus();
 		}
 		if (hctx.config.ROUTE_ALL_SEGMENTS && route.detailed != null) {
+			new RoutePlannerFrontEnd().makeStartEndPointsPrecise(route, start, end, Collections.<LatLon>emptyList());
 			route.detailed = rrp.prepareResult(hctx.rctx, route.detailed).detailed;
 		}
 		hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
