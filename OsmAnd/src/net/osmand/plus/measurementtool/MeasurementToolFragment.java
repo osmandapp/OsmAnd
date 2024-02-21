@@ -5,6 +5,8 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.plus.backup.BackupHelper.SERVER_URL;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.DEFAULT_APP_MODE;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.NEXT_ROUTE_CALCULATION;
+import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.PREV_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogType.WHOLE_ROUTE_CALCULATION;
 import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
@@ -1306,7 +1308,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					this, RouteBetweenPointsDialogType.PREV_ROUTE_CALCULATION,
+					this, PREV_ROUTE_CALCULATION,
 					RouteBetweenPointsDialogMode.SINGLE,
 					editingCtx.getBeforeSelectedPointAppMode());
 		}
@@ -1317,7 +1319,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			RouteBetweenPointsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					this, RouteBetweenPointsDialogType.NEXT_ROUTE_CALCULATION,
+					this, NEXT_ROUTE_CALCULATION,
 					RouteBetweenPointsDialogMode.SINGLE,
 					editingCtx.getSelectedPointAppMode());
 		}
@@ -1366,6 +1368,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 						? ChangeRouteType.PREV_SEGMENT : ChangeRouteType.ALL_PREV_SEGMENTS;
 				break;
 		}
+		changeApplicationMode(mode, changeRouteType);
+	}
+
+	public void changeApplicationMode(@NonNull ApplicationMode mode, @NonNull ChangeRouteType changeRouteType) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		editingCtx.getCommandManager().execute(new ChangeRouteModeCommand(measurementLayer, mode, changeRouteType, editingCtx.getSelectedPointPosition()));
 		updateUndoRedoButton(false, redoBtn);
@@ -1671,6 +1677,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
 		editingCtx.setInAddPointMode(false, false);
+		useLastPointAppMode();
 		getMeasurementLayer().refreshMap();
 		updateDistancePointsText();
 	}
@@ -1680,7 +1687,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
 		editingCtx.setInAddPointMode(false, false);
+		useLastPointAppMode();
 		getMeasurementLayer().refreshMap();
+	}
+
+	private void useLastPointAppMode() {
+		ApplicationMode appMode = editingCtx.getAppMode();
+		ApplicationMode lastPointAppMode = editingCtx.getLastPointAppMode();
+		if (appMode != lastPointAppMode) {
+			changeApplicationMode(lastPointAppMode, ChangeRouteType.LAST_SEGMENT);
+		}
 	}
 
 	private void switchMovePointMode(boolean enable) {
@@ -1752,9 +1768,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private boolean addCenterPoint() {
-		boolean added = false;
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		added = editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, true));
+		MeasurementToolLayer layer = getMeasurementLayer();
+		boolean added = editingCtx.getCommandManager().execute(new AddPointCommand(layer, true));
 		doAddOrMovePointCommonStuff();
 		return added;
 	}
