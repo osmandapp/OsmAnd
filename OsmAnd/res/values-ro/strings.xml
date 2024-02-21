@@ -3711,7 +3711,7 @@
     <string name="shared_string_resume">Reia</string>
     <string name="trip_rec_notification_settings_desc">Afișarea unei notificări de sistem care permite începerea înregistrării călătoriei.</string>
     <string name="trip_rec_notification_settings">Activați înregistrarea rapidă</string>
-    <string name="gpx_no_tracks_title_folder">De asemenea, puteți adăuga fișiere de piese în folderul</string>
+    <string name="gpx_no_tracks_title_folder">De asemenea, puteți adăuga fișiere de traseu în folder</string>
     <string name="gpx_no_tracks_title">Nu aveți încă niciun fișier track</string>
     <string name="route_roundabout_short">Alegeți ieșirea %1$d și continuați</string>
     <string name="wiki_around">Articole Wikipedia din apropiere</string>
@@ -4023,13 +4023,13 @@
     <string name="live_monitoring_time_buffer">Buffer de timp</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomandare: Setați o deplasare de 5 metri dacă nu doriți să înregistrați detalii minore ale traseului dumneavoastră și nu aveți nevoie de date suplimentare despre perioada de odihnă.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efecte secundare: Perioadele de repaus nu sunt înregistrate deloc sau doar câte un punct fiecare. Mișcările minore (de exemplu, pe marginea drumului pentru a marca o posibilă cotitură în timpul călătoriei) pot fi filtrate. Rețineți că fișierul dumneavoastră va conține mai puține informații pentru postprocesare și, în același timp, poate salva potențial artefactele GPS cauzate de recepția proastă sau de efectele chipsetului.</string>
-    <string name="monitoring_min_distance_descr">Activarea acestui filtru vă permite să evitați înregistrarea de date suplimentare atunci când aproape că nu se detectează mișcare. De asemenea, acesta îmbunătățește aspectul spațial al pieselor fără procesare suplimentară.</string>
+    <string name="monitoring_min_distance_descr">Activarea acestui filtru vă permite să evitați înregistrarea de date suplimentare atunci când aproape că nu se detectează mișcare. De asemenea, acesta îmbunătățește aspectul spațial al traseelor fără procesare suplimentară.</string>
     <string name="monitoring_min_accuracy_descr_remark">Observație: Dacă GPS-ul a fost oprit imediat înainte de o înregistrare, primul punct măsurat ar putea avea o acuratețe redusă, astfel încât în codul nostru am putea dori să așteptăm o secundă sau două înainte de a înregistra un punct (sau să înregistrăm cel mai bun din 3 puncte consecutive etc.), dar acest lucru nu este încă implementat.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recomandare: Este greu de prezis ce va fi înregistrat și ce nu, poate fi mai bine să dezactivați acest filtru.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Efect secundar: Ca urmare a filtrării în funcție de precizie, este posibil ca punctele să lipsească în întregime, de exemplu, sub poduri, sub copaci, între clădiri înalte sau în anumite condiții meteorologice.</string>
     <string name="monitoring_min_accuracy_descr">Aceasta va înregistra numai punctele măsurate cu o indicație de precizie minimă (în metri/pietri, așa cum este raportat de Android pentru chipset-ul dumneavoastră). Acuratețea reprezintă proximitatea măsurătorilor față de poziția reală și nu este direct legată de precizie, care reprezintă dispersia măsurătorilor repetate.</string>
     <string name="monitoring_min_speed_descr_remark">Observație: verificarea vitezei &gt; 0: Majoritatea chipseturilor GPS raportează o valoare a vitezei numai dacă algoritmul determină că sunteți în mișcare, iar dacă nu sunteți în mișcare, nu raportează nicio valoare. Prin urmare, utilizarea setării &gt; 0 în acest filtru utilizează într-un fel detectarea mișcării de către chipset-ul GPS. Dar, chiar dacă nu este filtrată aici în momentul înregistrării, folosim în continuare această funcție în analiza GPX pentru a determina Distanța corectată, adică valoarea afișată în acest câmp este distanța înregistrată în timpul mișcării.</string>
-    <string name="monitoring_min_speed_descr_recommendation">Recomandare: Încercați să utilizați mai întâi detectarea mișcării prin intermediul filtrului de înregistrare a deplasării minime (B), deoarece poate produce rezultate mai bune și veți pierde mai puține date. Dacă piesele dvs. rămân zgomotoase la viteze mici, încercați valori diferite de zero aici. Rețineți că este posibil ca unele măsurători să nu raporteze nicio valoare a vitezei (unele metode bazate pe rețea), caz în care nu veți înregistra nimic.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recomandare: Încercați să utilizați mai întâi detectarea mișcării prin intermediul filtrului de înregistrare a deplasării minime (B), deoarece poate produce rezultate mai bune și veți pierde mai puține date. Dacă traseele dvs. rămân zgomotoase la viteze mici, încercați valori diferite de zero aici. Rețineți că este posibil ca unele măsurători să nu raporteze nicio valoare a vitezei (unele metode bazate pe rețea), caz în care nu veți înregistra nimic.</string>
     <string name="monitoring_min_speed_descr_side_effect">Efect secundar: Pe traseul dvs. vor lipsi toate secțiunile în care nu a fost respectat criteriul de viteză minimă (de exemplu, atunci când împingeți bicicleta pe un deal abrupt). De asemenea, nu vor exista informații despre perioadele de repaus, cum ar fi pauzele. Acest lucru are efecte asupra oricărei analize sau post-procesări, cum ar fi atunci când încercați să determinați lungimea totală a călătoriei, timpul petrecut în mișcare sau viteza dvs. medie.</string>
     <string name="monitoring_min_speed_descr">Acesta este un filtru pentru viteze mici, ca să nu se înregistreze puncte sub o anumită viteză. Acest lucru poate face ca traseele înregistrate să pară mai netede atunci când sunt vizualizate pe hartă.</string>
     <string name="not_support_file_type_with_ext">Selectați în schimb un fișier cu extensia %1$s acceptat.</string>
@@ -5609,7 +5609,7 @@
     <string name="shared_string_keywords">Cuvinte cheie</string>
     <string name="shared_string_license">Licență</string>
     <string name="shared_string_extensions">Extensii</string>
-    <string name="battery_optimization_desc">Optimizarea bateriei în Android poate cauza goluri și inexactități în piesele înregistrate.
+    <string name="battery_optimization_desc">Optimizarea bateriei în Android poate cauza goluri și inexactități în traseele înregistrate.
 \n
 \nDacă vă confruntați cu oricare dintre aceste probleme, puteți încerca să modificați utilizarea bateriei la \' Fără restricții \'.</string>
     <string name="dont_ask_anymore">Nu mai întrebați</string>
