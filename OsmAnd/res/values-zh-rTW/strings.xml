@@ -5349,7 +5349,7 @@
     <string name="help_article_map_vector_maps_name">向量地圖（地圖樣式）</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_navigation_guidance_name">導引</string>
+    <string name="help_article_navigation_guidance_name">導航指引</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">導航期間的地圖畫面</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">語音提示/通知</string>
     <string name="help_article_navigation_setup_gpx_navigation_name">按軌跡導航</string>
@@ -5616,4 +5616,5 @@
     <string name="speedometer_description">透過 GPS 回報顯示您目前的速度</string>
     <string name="shared_string_speedometer">速度表</string>
     <string name="shared_string_limit">限制</string>
+    <string name="help_article_setup_a_route_name">設定路線</string>
 </resources>
