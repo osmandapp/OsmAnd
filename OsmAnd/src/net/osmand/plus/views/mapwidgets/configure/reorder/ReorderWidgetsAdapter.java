@@ -234,6 +234,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.moveIcon.setOnTouchListener((v, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 				if (panel.isPanelVertical()) {
+					itemsBeforeMove.clear();
 					itemsBeforeMove.addAll(items);
 				}
 				dragListener.onDragStarted(viewHolder);
@@ -309,6 +310,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.moveIcon.setOnTouchListener((view, event) -> {
 			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
 				if (panel.isPanelVertical()) {
+					itemsBeforeMove.clear();
 					itemsBeforeMove.addAll(items);
 				}
 				dragListener.onDragStarted(viewHolder);
