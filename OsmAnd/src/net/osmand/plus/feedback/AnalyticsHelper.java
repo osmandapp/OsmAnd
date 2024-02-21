@@ -129,12 +129,14 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 			if (db != null && db.isOpen()) {
 				try {
 					res = DatabaseUtils.queryNumEntries(db, TABLE_NAME);
+				} catch (Exception e) {
+					LOG.error(e);
 				} finally {
 					db.close();
 				}
 			}
-		} catch (RuntimeException e) {
-			// ignore
+		} catch (Exception e) {
+			LOG.error(e);
 		}
 		return res;
 	}
@@ -145,8 +147,8 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 			try {
 				String types = formatAllowedTypes(allowedTypes);
 				db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " + COL_DATE + " <= ?" + " AND " + COL_TYPE + " IN " + types, new Object[] {finishDate});
-			} catch (RuntimeException e) {
-				// ignore
+			} catch (Exception e) {
+				LOG.error(e);
 			} finally {
 				db.close();
 			}
@@ -257,6 +259,8 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		if (db != null && db.isOpen()) {
 			try {
 				collectDBData(db, data, allowedTypes);
+			} catch (Exception e) {
+				LOG.error(e);
 			} finally {
 				db.close();
 			}
@@ -320,6 +324,8 @@ public class AnalyticsHelper extends SQLiteOpenHelper {
 		if (db != null && db.isOpen()) {
 			try {
 				db.execSQL(insertEventScript, new Object[] {System.currentTimeMillis(), type, event});
+			} catch (Exception e) {
+				LOG.error(e);
 			} finally {
 				db.close();
 			}
