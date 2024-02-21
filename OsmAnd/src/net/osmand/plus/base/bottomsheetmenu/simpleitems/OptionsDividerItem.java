@@ -1,9 +1,8 @@
-package net.osmand.plus.measurementtool;
+package net.osmand.plus.base.bottomsheetmenu.simpleitems;
 
 import android.content.Context;
 
 import net.osmand.plus.R;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 
 public class OptionsDividerItem extends DividerItem {
 
