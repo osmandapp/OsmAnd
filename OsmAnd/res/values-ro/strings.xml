@@ -5612,6 +5612,6 @@
     <string name="battery_optimization_desc">Optimizarea bateriei în Android poate cauza goluri și inexactități în traseele înregistrate.
 \n
 \nDacă vă confruntați cu oricare dintre aceste probleme, puteți încerca să modificați utilizarea bateriei la \' Fără restricții \'.</string>
-    <string name="dont_ask_anymore">Nu mai întrebați</string>
-    <string name="battery_optimization">Optimizarea bateriei</string>
+    <string name="dont_ask_anymore">Nu mai întreba</string>
+    <string name="battery_optimization">Optimizare baterie</string>
 </resources>
