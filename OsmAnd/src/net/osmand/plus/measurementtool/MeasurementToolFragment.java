@@ -70,7 +70,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.IMapDisplayPositionProvider;
 import net.osmand.plus.helpers.TargetPointsHelper;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.RouteBetweenPointsBottomSheetDialogFragment.RouteBetweenPointsDialogMode;
@@ -224,23 +223,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		GRAPH
 	}
 
-	private class GraphDetailsMenu extends TrackDetailsMenu {
-
-		@Override
-		protected int getFragmentWidth() {
-			return mainView.getWidth();
-		}
-
-		@Override
-		protected int getFragmentHeight() {
-			return mainView.getHeight();
-		}
-
-		public boolean shouldShowXAxisPoints() {
-			return false;
-		}
-	}
-
 	private void setEditingCtx(MeasurementEditingContext editingCtx) {
 		this.editingCtx = editingCtx;
 	}
@@ -359,7 +341,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		View view = themedInflater.inflate(R.layout.fragment_measurement_tool, container, false);
 
 		mainView = view.findViewById(R.id.main_view);
-		detailsMenu = new GraphDetailsMenu();
+		detailsMenu = new GraphDetailsMenu(mainView);
 		LinearLayout infoButtonsContainer = mainView.findViewById(R.id.custom_radio_buttons);
 		if (portrait) {
 			cardsContainer = mainView.findViewById(R.id.cards_container);
@@ -380,7 +362,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			pointsBtn = new IconRadioItem(R.drawable.ic_action_plan_route_point_colored, true);
 			graphBtn = new IconRadioItem(R.drawable.ic_action_analyze_intervals);
 
-			ScrollUtils.addOnGlobalLayoutListener(mainView, () -> updateInfoViewAppearance());
+			ScrollUtils.addOnGlobalLayoutListener(mainView, this::updateInfoViewAppearance);
 		}
 		pointsBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.POINTS));
 		graphBtn.setOnClickListener(getInfoTypeBtnListener(InfoType.GRAPH));
