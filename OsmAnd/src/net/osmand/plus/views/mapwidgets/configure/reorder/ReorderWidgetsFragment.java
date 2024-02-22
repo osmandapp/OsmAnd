@@ -280,35 +280,37 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 
 		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode,
-				AVAILABLE_MODE | MATCHING_PANELS_MODE, Collections.singletonList(selectedPanel));
-		for (MapWidgetInfo widgetInfo : widgets) {
-			boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
-			if (!enabled) {
-				continue;
-			}
+		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, appMode, selectedPanel, AVAILABLE_MODE | MATCHING_PANELS_MODE);
+		for (int pageIndex = 0; pageIndex < widgets.size(); pageIndex++) {
+			for (MapWidgetInfo widgetInfo : widgets.get(pageIndex)) {
+				boolean enabled = dataHolder.getOrders().containsKey(widgetInfo.key);
+				if (!enabled) {
+					continue;
+				}
 
-			Map<String, Integer> orders = dataHolder.getOrders();
-			int page = dataHolder.getWidgetPage(widgetInfo.key);
-			Integer order = orders.get(widgetInfo.key);
-			if (page == -1) {
-				page = widgetInfo.pageIndex;
-				dataHolder.addWidgetToPage(widgetInfo.key, page);
+				Map<String, Integer> orders = dataHolder.getOrders();
+				int page = dataHolder.getWidgetPage(widgetInfo.key);
+				Integer order = orders.get(widgetInfo.key);
+				if (page == -1) {
+					page = pageIndex;
+					dataHolder.addWidgetToPage(widgetInfo.key, page);
+				}
+				if (order == null) {
+					order = widgetInfo.priority;
+					orders.put(widgetInfo.key, order);
+				}
+				AddedWidgetUiInfo info = new AddedWidgetUiInfo();
+				info.key = widgetInfo.key;
+				info.title = widgetInfo.getTitle(app);
+				info.iconId = widgetInfo.getMapIconId(nightMode);
+				info.page = page;
+				info.order = order;
+				info.info = widgetInfo;
+				info.newWidgetToCreate = newWidgetsToCreate;
+				widgetsItems.add(new ListItem(ItemType.ADDED_WIDGET, info));
 			}
-			if (order == null) {
-				order = widgetInfo.priority;
-				orders.put(widgetInfo.key, order);
-			}
-			AddedWidgetUiInfo info = new AddedWidgetUiInfo();
-			info.key = widgetInfo.key;
-			info.title = widgetInfo.getTitle(app);
-			info.iconId = widgetInfo.getMapIconId(nightMode);
-			info.page = page;
-			info.order = order;
-			info.info = widgetInfo;
-			info.newWidgetToCreate = newWidgetsToCreate;
-			widgetsItems.add(new ListItem(ItemType.ADDED_WIDGET, info));
 		}
+
 		Collections.sort(widgetsItems, (o1, o2) -> {
 			AddedWidgetUiInfo info1 = ((AddedWidgetUiInfo) o1.value);
 			AddedWidgetUiInfo info2 = ((AddedWidgetUiInfo) o2.value);
@@ -375,14 +377,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	@NonNull
 	private List<ListItem> getPagedWidgetItems(@NonNull List<ListItem> widgetsItems) {
 		List<ListItem> pagedWidgetsItems = new ArrayList<>();
-		if (dataHolder.getSelectedPanel().isPanelVertical()) {
-			int rowIndex = 0;
-			for (ListItem widgetItem : widgetsItems) {
-				pagedWidgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(rowIndex)));
-				rowIndex++;
-				pagedWidgetsItems.add(widgetItem);
-			}
-		} else {
 			for (int page : dataHolder.getPages().keySet()) {
 				pagedWidgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(page)));
 				for (ListItem widgetItem : widgetsItems) {
@@ -394,7 +388,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 					}
 				}
 			}
-		}
 		return pagedWidgetsItems;
 	}
 
