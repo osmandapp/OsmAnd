@@ -362,7 +362,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	                                   TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints,
 	                                   RouteCalculationProgress progress) throws IOException, InterruptedException {
 		long time = System.nanoTime();
-		System.out.println(" Finding first / last segments...");
+		printf(hctx.config.STATS_VERBOSE_LEVEL > 0, " Finding first / last segments...\n");
 		RoutePlannerFrontEnd planner = new RoutePlannerFrontEnd();
 		int startReiterate = -1, endReiterate = -1;
 		boolean found = false;
@@ -413,7 +413,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			initStart(hctx, startP, false, stPoints);
 			hctx.rctx.config.initialDirection = prev;
 			if (stPoints.isEmpty()) {
-				System.out.println("   Reiterate with next start point: " + startP);
+				printf(hctx.config.STATS_VERBOSE_LEVEL > 0, "   Reiterate with next start point: " + startP + "\n");
 				startReiterate++;
 				found = false;
 				continue;
@@ -427,7 +427,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			progress.hhIterationProgress(0.75); // %
 			initStart(hctx, endP, true, endPoints);
 			if (endPoints.isEmpty()) {
-				System.out.println("   Reiterate with next end point: " + endP);
+				printf(hctx.config.STATS_VERBOSE_LEVEL > 0, "   Reiterate with next end point: " + endP + "\n");
 				endReiterate++;
 				found = false;
 				continue;
@@ -598,10 +598,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx = selectBestRoutingFiles(start, end, hctx);
 		}
 		if (hctx == null) {
-			printf(true, "No files found for routing");
+			System.out.println("No files found for routing");
 			return hctx;
 		}
-		printf(c.STATS_VERBOSE_LEVEL > 0, "Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
+		if (c.STATS_VERBOSE_LEVEL > 0) {
+			System.out.println("Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
+		}
 		hctx.stats = new RoutingStats();
 		hctx.config = c;
 		hctx.setStartEnd(start, end);
@@ -884,7 +886,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
 		hctx.rctx.config.MAX_VISITED = -1;
-		System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));		
+		if (hctx.config.STATS_VERBOSE_LEVEL > 0) {
+			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
+		}
 		if (frs != null) {
 			TLongSet set = new TLongHashSet();
 			for (FinalRouteSegment o : frs.all) {
