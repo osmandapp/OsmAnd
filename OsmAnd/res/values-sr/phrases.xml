@@ -4657,4 +4657,17 @@
     <string name="poi_checkpoint_cycling">Бициклистичко место провере</string>
     <string name="poi_emergency_bay">Одсек за хитне случајеве</string>
     <string name="poi_dressing_room">Гардероба</string>
+    <string name="poi_healthcare_speciality_reflexology">Рефлексологија</string>
+    <string name="poi_healthcare_speciality_anthroposophical">Антропософски</string>
+    <string name="poi_healthcare_speciality_applied_kinesiology">Примењена кинезиологија</string>
+    <string name="poi_healthcare_speciality_aromatherapy">Ароматерапија</string>
+    <string name="poi_healthcare_speciality_unani">Унани</string>
+    <string name="poi_healthcare_speciality_hypnosis">Хипноза</string>
+    <string name="poi_healthcare_speciality_neonatology">Неонатологија</string>
+    <string name="poi_healthcare_speciality_family_medicine">Породична медицина</string>
+    <string name="poi_healthcare_speciality_psychology">Психологија</string>
+    <string name="poi_healthcare_speciality_kinesitherapy">Кинезитерапија</string>
+    <string name="poi_healthcare_speciality_hydrotherapy">Хидротерапија</string>
+    <string name="poi_healthcare_speciality_shiatsu">Шиацу</string>
+    <string name="poi_healthcare_speciality_tuina">Туина</string>
 </resources>
