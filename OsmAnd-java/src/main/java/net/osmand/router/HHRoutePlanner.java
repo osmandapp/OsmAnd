@@ -643,7 +643,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.pointsByGeo.put(pos, pnt);
 			hctx.regions.get(pnt.mapId).pntsByFileId.put(pnt.fileId, pnt);
 		}		
-		hctx.pointsRect.printStatsDistribution("  Points distributed");
+		if (DEBUG_VERBOSE_LEVEL > 0) {
+			hctx.pointsRect.printStatsDistribution("  Points distributed");
+		}
 		hctx.initialized = true;
 		hctx.stats.loadPointsTime = (System.nanoTime() - time) / 1e6;
 		printf(hctx.config.STATS_VERBOSE_LEVEL > 0, " %,d - %.2fms\n", hctx.pointsById.size(), hctx.stats.loadPointsTime);
