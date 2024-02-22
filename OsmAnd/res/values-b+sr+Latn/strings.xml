@@ -5101,7 +5101,7 @@
     <string name="help_article_navigation_routing_boat_navigation_name">Rutiranje plovilom</string>
     <string name="help_article_personal_import_export_name">Uvoz / izvoz</string>
     <string name="help_article_personal_profiles_name">Profili (podešavanja)</string>
-    <string name="help_article_navigation_guidance_name">Uputstva</string>
+    <string name="help_article_navigation_guidance_name">Navigacijsko vođenje</string>
     <string name="help_article_plan_route_web_name">WEB planer rute</string>
     <string name="help_article_search_search_all_name">Pretraži sve</string>
     <string name="help_article_purchases_giveaway_name">Poklon</string>
@@ -5632,4 +5632,5 @@
     <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
     <string name="shared_string_speedometer">Brzinomer</string>
     <string name="speed_limit_warning">Upozorenje na ograničenu brzinu</string>
+    <string name="help_article_setup_a_route_name">Podešavanje rute</string>
 </resources>
