@@ -601,7 +601,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printf(true, "No files found for routing");
 			return hctx;
 		}
-		printf(hctx.config.STATS_VERBOSE_LEVEL > 0, "Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
+		printf(c.STATS_VERBOSE_LEVEL > 0, "Selected files: " + (hctx == null ? " NULL " : hctx.getRoutingInfo()));
 		hctx.stats = new RoutingStats();
 		hctx.config = c;
 		hctx.setStartEnd(start, end);
