@@ -5615,4 +5615,5 @@
     <string name="add_button">Добавить кнопку</string>
     <string name="default_buttons">Кнопки по умолчанию</string>
     <string name="custom_buttons">Пользовательские кнопки</string>
+    <string name="speed_limit_warning">Предупреждение об ограничении скорости</string>
 </resources>

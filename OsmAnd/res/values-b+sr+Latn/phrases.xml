@@ -2034,7 +2034,7 @@
     <string name="poi_service_bicycle_chaintool_no">Alat lanca za bicikl: ne</string>
     <string name="poi_service_bicycle_second_hand_yes">Prodaja polovnih bicikli;Polovni bicikli;Polovni bicikli</string>
     <string name="poi_service_bicycle_second_hand_no">Maloprodaja polovnih bicikla: ne</string>
-    <string name="poi_service_bicycle_charging_yes">Naplata: da</string>
+    <string name="poi_service_bicycle_charging_yes">Punjenje: da;Punjenje bicikla;Punjenje bajk bicikla;Punjenje električnog bicikla;Punjenje električnog bajk bicikla</string>
     <string name="poi_service_bicycle_charging_no">Naplata: ne</string>
     <string name="poi_bicycle_repair_station">Stanica za popravku bicikala;Stanica za samo-popravku bicikala</string>
     <string name="poi_wildlife_hide">Mesto pogleda divljeg sveta</string>
@@ -2149,7 +2149,7 @@
     <string name="poi_tents_no">Šatori nisu dozvoljeni</string>
     <string name="poi_openfire_yes">Otvorena vatra dozvoljena</string>
     <string name="poi_openfire_no">Otvorena vatra nedozvoljena</string>
-    <string name="poi_backcountry_yes">Da</string>
+    <string name="poi_backcountry_yes">Da;Priroda iza</string>
     <string name="poi_backcountry_no">Ne</string>
     <string name="poi_scout_yes">Da</string>
     <string name="poi_scout_no">Izviđački kamp: ne</string>
