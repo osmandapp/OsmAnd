@@ -32,9 +32,9 @@ public class HHRouteDataStructure {
 	
 	public static class HHRoutingConfig {
 		public final static int CALCULATE_ALL_DETAILED = 3;
+		public int STATS_VERBOSE_LEVEL = 1; // 0 less verbose
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
-		
 		public HHRoutingContext<NetworkDBPoint> cacheCtx;
 		
 		// tweaks for route recalculations
@@ -55,6 +55,7 @@ public class HHRouteDataStructure {
 		boolean CACHE_CALCULATION_CONTEXT = false;
 		boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
+		
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
 		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
