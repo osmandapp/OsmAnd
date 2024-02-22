@@ -5616,4 +5616,9 @@
     <string name="default_buttons">Кнопки по умолчанию</string>
     <string name="custom_buttons">Пользовательские кнопки</string>
     <string name="speed_limit_warning">Предупреждение об ограничении скорости</string>
+    <string name="when_exceeded">При превышении</string>
+    <string name="shared_string_limit">Ограничение</string>
+    <string name="shared_string_speedometer">Спидометр</string>
+    <string name="help_article_setup_a_route_name">Настройка маршрута</string>
+    <string name="speedometer_description">Показывает вашу текущую скорость, определенную по GPS</string>
 </resources>
