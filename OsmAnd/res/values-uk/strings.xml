@@ -5615,4 +5615,13 @@
 \nЯкщо у вас виникли такі проблеми, спробуйте змінити використання батареї на \'Unrestricted.\'</string>
     <string name="battery_optimization">Оптимізація батареї</string>
     <string name="special_routing_cpp">Тип спеціального маршрутизатора</string>
+    <string name="shared_string_limit">Обмеження</string>
+    <string name="when_exceeded">Коли перевищено</string>
+    <string name="custom_map_button_name_present">Така кнопка вже присутня</string>
+    <string name="add_button">Додати кнопку</string>
+    <string name="default_buttons">Типові кнопки</string>
+    <string name="speed_limit_warning">Попередження що до обмежень швидкості</string>
+    <string name="speedometer_description">Показує вашу поточну швидкість згідно даних GPS</string>
+    <string name="shared_string_speedometer">Спідометр</string>
+    <string name="custom_buttons">Користувацькі кнопки</string>
 </resources>
