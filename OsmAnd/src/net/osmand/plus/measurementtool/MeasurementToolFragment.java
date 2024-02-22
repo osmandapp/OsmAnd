@@ -900,11 +900,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return calculateSrtmTask != null && calculateSrtmTask.getStatus() == Status.RUNNING;
 	}
 
-	public void stopUploadFileTask() {
+	public void stopUploadFileTask(boolean quit) {
 		if (isCalculatingSrtmData()) {
 			calculateSrtmTask.cancel(false);
+			calculateSrtmTask = null;
 		}
-		quit(false);
+		if (quit) {
+			quit(false);
+		}
 	}
 
 	private void calculateHeightmapTrack() {
@@ -926,11 +929,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return calculateHeightmapTask != null && calculateHeightmapTask.getStatus() == Status.RUNNING;
 	}
 
-	public void stopCalculatingHeightMapTask() {
+	public void stopCalculatingHeightMapTask(boolean quit) {
 		if (isCalculatingHeightmapData()) {
 			calculateHeightmapTask.cancel(false);
+			calculateHeightmapTask = null;
 		}
-		quit(false);
+		if (quit) {
+			quit(false);
+		}
 	}
 
 	public void saveChanges(FinalSaveAction finalSaveAction, boolean showDialog) {
@@ -1760,6 +1766,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void doAddOrMovePointCommonStuff() {
+		if (isCalculateSrtmMode()) {
+			stopUploadFileTask(false);
+			calculateSrtmTrack();
+		} else if (isCalculateHeightmapMode()) {
+			stopCalculatingHeightMapTask(false);
+			calculateHeightmapTrack();
+		}
+
 		enable(upDownBtn);
 		updateUndoRedoButton(true, undoBtn);
 		updateUndoRedoButton(false, redoBtn);
