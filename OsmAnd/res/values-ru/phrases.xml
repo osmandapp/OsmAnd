@@ -4377,4 +4377,6 @@
     <string name="poi_sac_scale">Шкала SAC</string>
     <string name="poi_climbing_grade_filter">Класс восхождения</string>
     <string name="poi_climbing_bolts_filter">Болты для альпинизма</string>
+    <string name="poi_socket_chademo_voltage_filter">Напряжение в розетке CHAdeMO</string>
+    <string name="poi_socket_type2_voltage_filter">Напряжение в евроразъёме типа 2</string>
 </resources>
