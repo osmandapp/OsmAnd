@@ -5620,7 +5620,7 @@
     <string name="custom_map_button_name_present">Така кнопка вже присутня</string>
     <string name="add_button">Додати кнопку</string>
     <string name="default_buttons">Типові кнопки</string>
-    <string name="speed_limit_warning">Попередження що до обмежень швидкості</string>
+    <string name="speed_limit_warning">Попередження про обмеження швидкості</string>
     <string name="speedometer_description">Показує вашу поточну швидкість згідно даних GPS</string>
     <string name="shared_string_speedometer">Спідометр</string>
     <string name="custom_buttons">Користувацькі кнопки</string>
