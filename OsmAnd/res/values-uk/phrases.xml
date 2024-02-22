@@ -4720,4 +4720,7 @@
     <string name="poi_state_proposed">Стан: запропоновано</string>
     <string name="poi_state_main">Стан: основний</string>
     <string name="poi_border_zone">Прикордонна смуга</string>
+    <string name="poi_hang_gliding">Дельтапланеризм</string>
+    <string name="poi_us_maps_recreation_area_activity">Відпочинкова зона</string>
+    <string name="poi_us_maps_recreation_area_open_status">Доступність відпочинкової зони</string>
 </resources>
