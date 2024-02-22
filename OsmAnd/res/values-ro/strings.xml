@@ -5624,4 +5624,6 @@
     <string name="shared_string_all_tracks">Toate piesele</string>
     <string name="max_sensor_bycicle_power">Puterea bicicletei, max</string>
     <string name="avg_sensor_speed">Viteza senzorului, medie</string>
+    <string name="max_sensor_heartrate">Ritmul cardiac, max</string>
+    <string name="avg_sensor_heartrate">Frecvența cardiacă, medie</string>
 </resources>
