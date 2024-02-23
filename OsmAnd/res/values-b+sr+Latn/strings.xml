@@ -2353,7 +2353,7 @@
     <string name="routing_attr_avoid_shuttle_train_name">Izbegavati autovoz</string>
     <string name="plugin_settings">Dodaci</string>
     <string name="av_locations">Lokacije</string>
-    <string name="av_locations_descr">GPX fajl sa lokacijama</string>
+    <string name="av_locations_descr">GPX fajl sa lokacijama.</string>
     <string name="looking_up_address">Traženje adrese</string>
     <string name="simulate_your_location_gpx_descr">Simuliraj svoj lokaciju koristeću snimljenu putanje GPX-a.</string>
     <string name="simulate_your_location_descr">Simuliraj upotrebom proračunate rute ili snimka GPX-a.</string>
@@ -2665,7 +2665,7 @@
     <string name="quick_action_transport_descr">Dugme za prikazivanje javnog prevoza.</string>
     <string name="create_edit_poi">Napravi ili izmeni TOI</string>
     <string name="parking_positions">Lokacija parkinga</string>
-    <string name="osmand_distance_planning_plugin_description">Napravi rute tapkanjem na mapu, ili upotrebom i izmenom postojećih GPX fajlova, radi planiranja puta i merenja rastojanja između tačaka. Rezultat može biti snimljen GPX fajlova za kasnije vođenje</string>
+    <string name="osmand_distance_planning_plugin_description">Napravi rute tapkanjem na mapu, ili upotrebom i izmenom postojećih GPX fajlova, radi planiranja puta i merenja rastojanja između tačaka. Rezultat može biti snimljen GPX fajlova za kasnije vođenje.</string>
     <string name="shared_string_favorites">Favoriti</string>
     <string name="shared_string_favorite">Favorit</string>
     <string name="shared_string_map">Mapa</string>
@@ -4334,7 +4334,7 @@
     <string name="sample_wikivoyage">Primer Wikivoyage</string>
     <string name="no_items_of_type_message">Nemaš ni jednu stavku ove vrste</string>
     <string name="amz_manage_subscription_descr">Upravljaj svojom pretplatom koristeći program Amazon ili web stranu Amazona.</string>
-    <string name="map_updates_are_unavailable_yet">Ažuriranje mapa još nisu dostupna.</string>
+    <string name="map_updates_are_unavailable_yet">Ažuriranja mapa još nisu dostupna.</string>
     <string name="map_updates_for_mappers">Ažuriranje mapa za kartografe</string>
     <string name="option_available_only_in_osmand_pro">Dostupno je samo kao deo pretplate za OsmAnd Pro.</string>
     <string name="track_has_no_needed_data">Trasa ne sadrži potrebne podatke.</string>
@@ -5631,6 +5631,6 @@
     <string name="when_exceeded">Kad se prekorači</string>
     <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
     <string name="shared_string_speedometer">Brzinomer</string>
-    <string name="speed_limit_warning">Upozorenje na ograničenu brzinu</string>
+    <string name="speed_limit_warning">Upozorenje na ograničenje brzine</string>
     <string name="help_article_setup_a_route_name">Podešavanje rute</string>
 </resources>

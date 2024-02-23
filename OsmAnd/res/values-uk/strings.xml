@@ -3831,7 +3831,7 @@
 \nВикористовуйте метод OAuth або ваші імʼя користувача та пароль OSM.</string>
     <string name="use_login_password">Ввести ім\'я користувача та пароль</string>
     <string name="login_account">Обліковий запис</string>
-    <string name="user_login">Ім\'я користувача</string>
+    <string name="user_login">Увійти</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
     <string name="markers_history">Історія позначок</string>
     <string name="send_files_to_openstreetmap">Надіслати файл GPX до OpenStreetMap</string>
