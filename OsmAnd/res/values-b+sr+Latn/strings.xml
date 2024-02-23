@@ -1814,8 +1814,8 @@
     <string name="access_shared_string_navigate_up">Idi gore</string>
     <string name="access_widget_expand">Proširi</string>
     <string name="access_shared_string_not_installed">Nije instalirano</string>
-    <string name="access_tree_list">Razgranat spisak</string>
-    <string name="access_empty_list">Prazan spisak</string>
+    <string name="access_tree_list">Razgranata lista</string>
+    <string name="access_empty_list">Prazana lista</string>
     <string name="access_expanded_list">Proširena lista</string>
     <string name="access_collapsed_list">Skupljena lista</string>
     <string name="access_map_linked_to_location">Mapa vezana za lokaciju</string>
@@ -1999,9 +1999,9 @@
     <string name="lang_he">Hebrejski</string>
     <string name="access_direction_haptic_feedback_descr">Odredi pravac odredišta uz pomoć vibracije.</string>
     <string name="access_direction_haptic_feedback">Uputstva vibracijom</string>
-    <string name="access_direction_audio_feedback_descr">Ukazuj na pravac ciljne tačke zvukom.</string>
+    <string name="access_direction_audio_feedback_descr">Odredi smer do odredišta pomoću zvuka.</string>
     <string name="access_direction_audio_feedback">Usmeravanje glasom</string>
-    <string name="follow_us">Pratite nas</string>
+    <string name="follow_us">Prati nas</string>
     <string name="move_marker_bottom_sheet_title">Pomeri mapu radi izmena markera lokacije</string>
     <string name="change_markers_position">Izmeni marker lokacije</string>
     <string name="map_widget_battery">Popunjenost baterije</string>
