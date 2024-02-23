@@ -1,12 +1,15 @@
 package net.osmand.plus.card.color.palette;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import net.osmand.plus.card.color.palette.data.PaletteColor;
 
 public interface OnColorsPaletteListener {
 
-	void onColorSelectedFromPalette(@ColorInt int color);
+	void onColorSelectedFromPalette(@Nullable PaletteColor paletteColor);
 
-	void onColorAddedToPalette(@Nullable Integer oldColor, @ColorInt int newColor);
+	void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor);
 
 }

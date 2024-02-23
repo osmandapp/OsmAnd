@@ -4,11 +4,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -16,13 +19,13 @@ import java.util.List;
 
 public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
-	private final IColorsPaletteUIController controller;
+	private final IColorsPaletteController controller;
 	private final ColorsPaletteElements paletteElements;
 	private final ColorsPaletteAdapter paletteAdapter;
 	private RecyclerView rvColors;
 
 	public ColorsPaletteCard(@NonNull FragmentActivity activity,
-	                         @NonNull IColorsPaletteUIController controller) {
+	                         @NonNull IColorsPaletteController controller) {
 		super(activity);
 		this.controller = controller;
 		controller.bindPalette(this);
@@ -62,19 +65,22 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 		buttonAllColors.setOnClickListener(v -> controller.onAllColorsButtonClicked(activity));
 	}
 
-	public void updatePalette() {
+	@Override
+	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
 		paletteAdapter.updateColorsList();
-		int index = controller.getAllColors().indexOf(controller.getSelectedColor());
-		rvColors.scrollToPosition(index);
+		if (targetPaletteColor != null) {
+			List<PaletteColor> colors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
+			int index = colors.indexOf(targetPaletteColor);
+			rvColors.smoothScrollToPosition(index);
+		}
 	}
 
 	@Override
-	public void updatePaletteSelection(Integer oldColor, int newColor) {
-		List<Integer> colors = controller.getAllColors();
-		int selectedColorIndex = colors.indexOf(newColor);
-		paletteAdapter.notifyItemChanged(colors.indexOf(oldColor));
+	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+		List<PaletteColor> paletteColors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
+		int selectedColorIndex = paletteColors.indexOf(newColor);
+		paletteAdapter.notifyItemChanged(paletteColors.indexOf(oldColor));
 		paletteAdapter.notifyItemChanged(selectedColorIndex);
 		rvColors.scrollToPosition(selectedColorIndex);
 	}
-
 }

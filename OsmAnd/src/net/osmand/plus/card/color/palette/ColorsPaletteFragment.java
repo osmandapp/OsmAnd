@@ -1,6 +1,6 @@
 package net.osmand.plus.card.color.palette;
 
-import static net.osmand.plus.card.color.palette.IColorsPaletteUIController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.card.color.palette.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -27,6 +27,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -38,14 +40,14 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 
 	public static final String TAG = ColorsPaletteFragment.class.getSimpleName();
 
-	private IColorsPaletteUIController controller;
+	private IColorsPaletteController controller;
 	private ColorsPaletteElements paletteElements;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		DialogManager dialogManager = app.getDialogManager();
-		controller = (IColorsPaletteUIController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
+		controller = (IColorsPaletteController) dialogManager.findController(ALL_COLORS_PROCESS_ID);
 		if (controller != null) {
 			controller.bindPalette(this);
 		}
@@ -101,38 +103,36 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		FlowLayout flowLayout = view.findViewById(R.id.colors_palette);
 		flowLayout.removeAllViews();
 		flowLayout.setHorizontalAutoSpacing(true);
-		int minimalPaddingBetweenIcon = getDimen(R.dimen.favorites_select_icon_button_right_padding);
+		int minimalPaddingBetweenIcon = getDimension(R.dimen.favorites_select_icon_button_right_padding);
 
-		for (int color : controller.getAllColors()) {
-			flowLayout.addView(createColorItemView(color, flowLayout, controller.isCustomColor(color)), new LayoutParams(minimalPaddingBetweenIcon, 0));
+		for (PaletteColor paletteColor : controller.getColors(PaletteSortingMode.ORIGINAL)) {
+			flowLayout.addView(createColorItemView(paletteColor, flowLayout), new LayoutParams(minimalPaddingBetweenIcon, 0));
 		}
 		flowLayout.addView(createAddCustomColorItemView(flowLayout), new LayoutParams(minimalPaddingBetweenIcon, 0));
 	}
 
 	@NonNull
-	private View createColorItemView(@ColorInt int color, FlowLayout rootView, boolean customColor) {
+	private View createColorItemView(@NonNull PaletteColor paletteColor, FlowLayout rootView) {
 		View view = paletteElements.createCircleView(rootView);
-		boolean isSelected = controller.getSelectedColor() == color;
-		paletteElements.updateColorItemView(view, color, isSelected);
+		boolean isSelected = controller.isSelectedColor(paletteColor);
+		paletteElements.updateColorItemView(view, paletteColor.getColor(), isSelected);
 
 		ImageView background = view.findViewById(R.id.background);
 		background.setOnClickListener(v -> {
-			controller.onSelectColorFromPalette(color);
+			controller.onSelectColorFromPalette(paletteColor);
 			dismiss();
 		});
-		if (customColor) {
-			background.setOnLongClickListener(v -> {
-				controller.onColorItemLongClicked(requireActivity(), v, color, nightMode);
-				return false;
-			});
-		}
-		view.setTag(color);
+		background.setOnLongClickListener(v -> {
+			controller.onColorLongClick(requireActivity(), v, paletteColor, nightMode);
+			return false;
+		});
+		view.setTag(paletteColor);
 		return view;
 	}
 
 
 	@Override
-	public void updatePalette() {
+	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
 		View view = getView();
 		if (view != null) {
 			setupColorsPalette(view);
@@ -140,7 +140,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 	}
 
 	@Override
-	public void updatePaletteSelection(Integer oldColor, int newColor) {
+	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
 		View view = getView();
 		if (view == null) {
 			return;
@@ -155,7 +155,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		View newColorContainer = view.findViewWithTag(newColor);
 		if (newColorContainer != null) {
 			AppCompatImageView outline = newColorContainer.findViewById(R.id.outline);
-			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, newColor);
+			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, newColor.getColor());
 			outline.setImageDrawable(border);
 			outline.setVisibility(View.VISIBLE);
 		}
@@ -185,12 +185,8 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		return ColorUtilities.getStatusBarColorId(nightMode);
 	}
 
-	private int getDimen(int id) {
-		return app.getResources().getDimensionPixelSize(id);
-	}
-
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @NonNull IColorsPaletteUIController controller) {
+	                                @NonNull IColorsPaletteController controller) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();

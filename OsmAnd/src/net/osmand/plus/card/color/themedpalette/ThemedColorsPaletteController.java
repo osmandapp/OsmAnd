@@ -1,27 +1,23 @@
 package net.osmand.plus.card.color.themedpalette;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.BaseColorsPaletteController;
+import net.osmand.plus.card.color.palette.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.data.PaletteColor;
 import net.osmand.plus.helpers.DayNightHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 
-import java.util.List;
-
-public abstract class ThemedColorsPaletteController extends BaseColorsPaletteController {
+public abstract class ThemedColorsPaletteController extends ColorsPaletteController {
 
 	private OnMapThemeChangeListener mapThemeChangeListener;
 	private boolean useNightMap;
 
 	public ThemedColorsPaletteController(@NonNull OsmandApplication app,
-	                                     @NonNull List<Integer> defaultColors,
-	                                     @NonNull ListStringPreference customColorsPreference,
-	                                     @Nullable ApplicationMode appMode, int selectedColor) {
-		super(app, defaultColors, customColorsPreference, appMode, selectedColor);
+	                                     @NonNull ColorsCollection colorsCollection,
+	                                     int selectedColor) {
+		super(app, colorsCollection, selectedColor);
 		DayNightHelper dayNightHelper = app.getDaynightHelper();
 		useNightMap = dayNightHelper.isNightModeForMapControls();
 	}
@@ -48,8 +44,8 @@ public abstract class ThemedColorsPaletteController extends BaseColorsPaletteCon
 		selectColor(getSelectedColor(useNightMap));
 	}
 
-	@ColorInt
-	protected abstract int getSelectedColor(boolean nightMode);
+	@Nullable
+	protected abstract PaletteColor getSelectedColor(boolean nightMode);
 
 	public interface OnMapThemeChangeListener {
 		void onMapThemeChanged();

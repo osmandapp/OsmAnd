@@ -7,11 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController.ColorPickerListener;
 
 import java.util.List;
 
-public interface IColorsPaletteUIController extends IDialogController, ColorPickerListener {
+public interface IColorsPaletteController extends IDialogController, ColorPickerListener {
 
 	String ALL_COLORS_PROCESS_ID = "show_all_colors_palette";
 
@@ -24,19 +26,19 @@ public interface IColorsPaletteUIController extends IDialogController, ColorPick
 	@ColorInt
 	int getControlsAccentColor(boolean nightMode);
 
-	void onSelectColorFromPalette(@ColorInt int color);
+	void onSelectColorFromPalette(@NonNull PaletteColor color);
 
-	void onColorItemLongClicked(@NonNull FragmentActivity activity, @NonNull View view, @ColorInt int color, boolean nightMode);
+	void onColorLongClick(@NonNull FragmentActivity activity, @NonNull View view, @NonNull PaletteColor color, boolean nightMode);
 
 	void onAllColorsButtonClicked(@NonNull FragmentActivity activity);
 
 	void onAddColorButtonClicked(@NonNull FragmentActivity activity);
 
 	@NonNull
-	List<Integer> getAllColors();
+	List<PaletteColor> getColors(@NonNull PaletteSortingMode sortingMode);
 
-	int getSelectedColor();
+	PaletteColor getSelectedColor();
 
-	boolean isCustomColor(@ColorInt int color);
+	boolean isSelectedColor(@NonNull PaletteColor paletteColor);
 
 }

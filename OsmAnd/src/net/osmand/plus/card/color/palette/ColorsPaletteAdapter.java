@@ -8,22 +8,25 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
+
 import java.util.List;
 
 class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 
 	private final FragmentActivity activity;
-	private final IColorsPaletteUIController controller;
+	private final IColorsPaletteController controller;
 	private final ColorsPaletteElements paletteElements;
-	private List<Integer> colors;
-	private boolean nightMode;
+	private final boolean nightMode;
+	private List<PaletteColor> colors;
 
 	public ColorsPaletteAdapter(@NonNull FragmentActivity activity,
-	                            @NonNull IColorsPaletteUIController controller,
+	                            @NonNull IColorsPaletteController controller,
 	                            boolean nightMode) {
 		this.activity = activity;
 		this.controller = controller;
-		this.colors = controller.getAllColors();
+		this.colors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
 		this.nightMode = nightMode;
 		paletteElements = new ColorsPaletteElements(activity, nightMode);
 		setHasStableIds(true);
@@ -31,7 +34,7 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 
 	@SuppressLint("NotifyDataSetChanged")
 	public void updateColorsList() {
-		this.colors = controller.getAllColors();
+		this.colors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
 		notifyDataSetChanged();
 	}
 
@@ -44,14 +47,14 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull ColorViewHolder holder, int position) {
-		int color = colors.get(position);
-		boolean isSelected = controller.getSelectedColor() == color;
-		paletteElements.updateColorItemView(holder.itemView, color, isSelected);
+		PaletteColor paletteColor = colors.get(position);
+		boolean isSelected = controller.isSelectedColor(paletteColor);
+		paletteElements.updateColorItemView(holder.itemView, paletteColor.getColor(), isSelected);
 		holder.background.setOnClickListener(v -> {
-			controller.onSelectColorFromPalette(color);
+			controller.onSelectColorFromPalette(paletteColor);
 		});
 		holder.background.setOnLongClickListener(v -> {
-			controller.onColorItemLongClicked(activity, holder.background, color, nightMode);
+			controller.onColorLongClick(activity, holder.background, paletteColor, nightMode);
 			return false;
 		});
 	}
@@ -63,7 +66,8 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 
 	@Override
 	public long getItemId(int position) {
-		return colors.get(position);
+		PaletteColor paletteColor = colors.get(position);
+		return paletteColor.isDefault() ? paletteColor.getId().hashCode() : paletteColor.getCreationTime();
 	}
 
 }

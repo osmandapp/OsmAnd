@@ -1,8 +1,11 @@
 package net.osmand.plus.card.color.palette;
 
-import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import net.osmand.plus.card.color.palette.data.PaletteColor;
 
 public interface IColorsPalette {
-	void updatePalette();
-	void updatePaletteSelection(@ColorInt Integer oldColor, @ColorInt int newColor);
+	void updatePaletteColors(@Nullable PaletteColor targetPaletteColor);
+	void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor);
 }

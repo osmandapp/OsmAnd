@@ -13,7 +13,8 @@
 			android:id="@+id/colors_list"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:paddingHorizontal="@dimen/content_padding"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="0dp"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1" />
 
@@ -21,7 +22,7 @@
 			android:id="@+id/add_button_container"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginEnd="@dimen/content_padding"
+			android:layout_marginHorizontal="@dimen/content_padding"
 			android:layout_gravity="center_vertical|end" />
 
 	</LinearLayout>
