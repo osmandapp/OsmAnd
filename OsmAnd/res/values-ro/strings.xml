@@ -133,7 +133,7 @@
     <string name="show_cameras">Radare de viteză</string>
     <string name="show_traffic_warnings">Avertismente de trafic</string>
     <string name="avoid_toll_roads">Fără drumuri cu taxă</string>
-    <string name="continue_follow_previous_route_auto">Continuați să urmați navigarea anterioară neterminată\? (%1$s seconds)</string>
+    <string name="continue_follow_previous_route_auto">Continuați navigarea anterioară neterminată? (%1$s secunde)</string>
     <string name="route_updated_loc_found">Se așteaptă poziționarea pentru a calcula traseul</string>
     <string name="osmand_parking_hours">Ore</string>
     <string name="osmand_parking_minutes">Minute</string>
