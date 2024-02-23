@@ -176,9 +176,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (hctx == null) {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
-		if (hctx.config.USE_GC_MORE_OFTEN) {
-			printGCInformation();
-		}
 		filterPointsBasedOnConfiguration(hctx);
 		
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
@@ -258,7 +255,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			hctx.unloadAllConnections();
-			printGCInformation();
+			printGCInformation(true);
 		}
 		
 		prepareRouteResults(hctx, route, start, end, rrp);
@@ -280,6 +277,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		if (SL > 0) {
 			RouteResultPreparation.printResults(hctx.rctx, start, end, route.detailed);
 		}
+		printGCInformation(false);
 		printf(SL >= 0,
 				"Routing %.1f ms (selected %s): last mile %.1f ms, load data %.1f ms (%,d edges), routing %.1f ms (queue  - %.1f add ms + %.1f poll ms), prep result %.1f ms - %s \n",
 				(System.nanoTime() - startTime) / 1e6, hctx.getRoutingInfo(), hctx.stats.searchPointsTime,
@@ -935,7 +933,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 		if (hctx.config.USE_GC_MORE_OFTEN) {
 			hctx.rctx.unloadAllData();
-			printGCInformation();
+			printGCInformation(true);
 		}
 		return pnts;
 	}
@@ -1475,8 +1473,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 	
-	public static void printGCInformation() {
-		System.gc();
+	public static void printGCInformation(boolean gc) {
+		if (gc) {
+			System.gc();
+		}
 		long MEMORY_LAST_USED_MB = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) >> 20;
 		System.out.printf("***** Memory used %d MB *****\n", MEMORY_LAST_USED_MB);		
 	}
