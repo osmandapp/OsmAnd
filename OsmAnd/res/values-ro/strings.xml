@@ -5626,4 +5626,10 @@
     <string name="avg_sensor_speed">Viteza senzorului, medie</string>
     <string name="max_sensor_heartrate">Ritmul cardiac, max</string>
     <string name="avg_sensor_heartrate">Frecvența cardiacă, medie</string>
+    <string name="max_sensor_temperature">Temperatură, maxim</string>
+    <string name="avg_sensor_temperature">Temperatură, medie</string>
+    <string name="max_sensor_cadence">Cadență bicicletă, maxim</string>
+    <string name="avg_sensor_cadence">Cadență bicicletă, medie</string>
+    <string name="special_routing_cpp">Tip rutare specială</string>
+    <string name="help_article_setup_a_route_name">Configurează o rută</string>
 </resources>
