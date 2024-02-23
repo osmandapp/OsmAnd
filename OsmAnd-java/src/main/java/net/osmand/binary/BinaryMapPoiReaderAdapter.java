@@ -349,8 +349,8 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 
-				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
-						"ms. Found " + offKeys.length + " subtrees");
+//				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) +
+//						"ms. Found " + offKeys.length + " subtrees");
 				for (int j = 0; j < offKeys.length; j++) {
 					codedIS.seek(offKeys[j] + indexOffset);
 					long len = readInt();
@@ -361,8 +361,8 @@ public class BinaryMapPoiReaderAdapter {
 						return;
 					}
 				}
-				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
-						"ms. Found " + req.getSearchResults().size());
+//				LOG.info("Whole poi by name search is done in " + (System.currentTimeMillis() - time) +
+//						"ms. Found " + req.getSearchResults().size());
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return;
 			default:
@@ -532,8 +532,8 @@ public class BinaryMapPoiReaderAdapter {
 				if (skipTiles != null) {
 					skipTiles.clear();
 				}
-				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) + " ms. Found "
-						+ offsets.length + " subtrees");
+//				LOG.info("Searched poi structure in " + (System.currentTimeMillis() - time) + " ms. Found "
+//						+ offsets.length + " subtrees");
 				for (int j = 0; j < offsets.length; j++) {
 					long skipVal = offsetsMap.get(offsets[j]);
 					if (skipTiles != null && skipVal != -1) {

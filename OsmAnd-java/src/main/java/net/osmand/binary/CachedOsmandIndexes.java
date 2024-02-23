@@ -389,7 +389,7 @@ public class CachedOsmandIndexes {
 		} finally {
 			is.close();
 		}
-		log.info("Initialize cache " + (System.currentTimeMillis() - time));
+		log.info("Initialize cache " + f.getName() + " " + (System.currentTimeMillis() - time) + " ms");
 	}
 
 	public void writeToFile(File f) throws IOException {

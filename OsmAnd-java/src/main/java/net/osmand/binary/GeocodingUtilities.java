@@ -231,7 +231,7 @@ public class GeocodingUtilities {
 		final boolean addCommonWordsFinal = addCommonWords;
 		final List<String> streetNamesUsedFinal = streetNamesUsed;
 		if (streetNamesUsedFinal.size() > 0) {
-			log.info("Search street by name " + road.streetName + " " + streetNamesUsedFinal);
+//			log.info("Search street by name " + road.streetName + " " + streetNamesUsedFinal);
 			String mainWord = "";
 			for (int i = 0; i < streetNamesUsedFinal.size(); i++) {
 				String s = streetNamesUsedFinal.get(i);
@@ -360,7 +360,7 @@ public class GeocodingUtilities {
 			GeocodingResult street) throws IOException {
 		final List<GeocodingResult> streetBuildings = new ArrayList<GeocodingResult>();
 		reader.preloadBuildings(street.street, null);
-		log.info("Preload buildings " + street.street.getName() + " " + street.city.getName() + " " + street.street.getId());
+//		log.info("Preload buildings " + street.street.getName() + " " + street.city.getName() + " " + street.street.getId());
 		for (Building b : street.street.getBuildings()) {
 			if (b.getLatLon2() != null) {
 				double slat = b.getLocation().getLatitude();
