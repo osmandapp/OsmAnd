@@ -4986,4 +4986,5 @@
     <string name="move_inside_category">아이템은 이 범주 내에서만 이동할 수 있습니다.</string>
     <string name="shared_string_items">항목</string>
     <string name="lang_zhminnan">남부 분</string>
+    <string name="help_article_setup_a_route_name">경로 설정</string>
 </resources>
