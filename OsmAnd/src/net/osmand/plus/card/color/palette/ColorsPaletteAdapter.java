@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +58,19 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 			controller.onColorLongClick(activity, holder.background, paletteColor, nightMode);
 			return false;
 		});
+	}
+
+	public void askNotifyItemChanged(@Nullable PaletteColor paletteColor) {
+		if (paletteColor != null) {
+			int index = indexOf(paletteColor);
+			if (index >= 0) {
+				notifyItemChanged(index);
+			}
+		}
+	}
+
+	public int indexOf(@NonNull PaletteColor paletteColor) {
+		return colors.indexOf(paletteColor);
 	}
 
 	@Override

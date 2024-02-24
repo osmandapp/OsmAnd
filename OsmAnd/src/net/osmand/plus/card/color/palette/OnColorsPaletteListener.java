@@ -8,8 +8,10 @@ import net.osmand.plus.card.color.palette.data.PaletteColor;
 
 public interface OnColorsPaletteListener {
 
-	void onColorSelectedFromPalette(@Nullable PaletteColor paletteColor);
+	default void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
+	}
 
-	void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor);
+	default void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+	}
 
 }

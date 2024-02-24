@@ -4,6 +4,7 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -26,6 +27,8 @@ public interface IColorsPaletteController extends IDialogController, ColorPicker
 	@ColorInt
 	int getControlsAccentColor(boolean nightMode);
 
+	boolean isAccentColorCanBeChanged();
+
 	void onSelectColorFromPalette(@NonNull PaletteColor color);
 
 	void onColorLongClick(@NonNull FragmentActivity activity, @NonNull View view, @NonNull PaletteColor color, boolean nightMode);
@@ -37,6 +40,7 @@ public interface IColorsPaletteController extends IDialogController, ColorPicker
 	@NonNull
 	List<PaletteColor> getColors(@NonNull PaletteSortingMode sortingMode);
 
+	@Nullable
 	PaletteColor getSelectedColor();
 
 	boolean isSelectedColor(@NonNull PaletteColor paletteColor);

@@ -89,8 +89,10 @@ public class ColorsCollection {
 	public PaletteColor addOrUpdateColor(@Nullable PaletteColor paletteColor, @ColorInt int newColor) {
 		if (paletteColor == null) {
 			return addNewColor(newColor);
-		} else if (paletteColor.isCustom()) {
-			return updateColor(paletteColor, newColor);
+		}
+		if (paletteColor.isCustom()) {
+			updateColor(paletteColor, newColor);
+			return paletteColor;
 		}
 		return null;
 	}
@@ -105,11 +107,9 @@ public class ColorsCollection {
 		return paletteColor;
 	}
 
-	@NonNull
-	private PaletteColor updateColor(@NonNull PaletteColor paletteColor, @ColorInt int newColor) {
+	private void updateColor(@NonNull PaletteColor paletteColor, @ColorInt int newColor) {
 		paletteColor.setColor(newColor);
 		syncSettings();
-		return paletteColor;
 	}
 
 	@NonNull

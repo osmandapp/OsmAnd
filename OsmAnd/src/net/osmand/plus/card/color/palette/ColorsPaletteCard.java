@@ -11,11 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.data.PaletteColor;
-import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.List;
 
 public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
@@ -41,8 +38,9 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 	@Override
 	protected void updateContent() {
 		setupColorsPalette();
-		setupButtonAddCustomColor();
-		setupButtonShowAllColors();
+		setupAddCustomColorButton();
+		setupAllColorsButton();
+		askScrollToTargetColorPosition(controller.getSelectedColor(), false);
 	}
 
 	private void setupColorsPalette() {
@@ -52,35 +50,60 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 		rvColors.setAdapter(paletteAdapter);
 	}
 
-	private void setupButtonAddCustomColor() {
+	private void setupAddCustomColorButton() {
 		ViewGroup container = view.findViewById(R.id.add_button_container);
 		container.addView(paletteElements.createButtonAddColorView(container, true));
 		container.setOnClickListener(v -> controller.onAddColorButtonClicked(activity));
 	}
 
-	private void setupButtonShowAllColors() {
+	private void setupAllColorsButton() {
 		View buttonAllColors = view.findViewById(R.id.button_all_colors);
-		int controlsAccentColor = controller.getControlsAccentColor(nightMode);
-		UiUtilities.setupSelectableBackground(activity, buttonAllColors, controlsAccentColor);
 		buttonAllColors.setOnClickListener(v -> controller.onAllColorsButtonClicked(activity));
+		updateAllColorsButton();
 	}
 
 	@Override
 	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
 		paletteAdapter.updateColorsList();
 		if (targetPaletteColor != null) {
-			List<PaletteColor> colors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
-			int index = colors.indexOf(targetPaletteColor);
-			rvColors.smoothScrollToPosition(index);
+			askScrollToTargetColorPosition(targetPaletteColor, true);
+		}
+		if (controller.isAccentColorCanBeChanged()) {
+			updateAllColorsButton();
 		}
 	}
 
 	@Override
 	public void updatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
-		List<PaletteColor> paletteColors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
-		int selectedColorIndex = paletteColors.indexOf(newColor);
-		paletteAdapter.notifyItemChanged(paletteColors.indexOf(oldColor));
-		paletteAdapter.notifyItemChanged(selectedColorIndex);
-		rvColors.scrollToPosition(selectedColorIndex);
+		paletteAdapter.askNotifyItemChanged(oldColor);
+		paletteAdapter.askNotifyItemChanged(newColor);
+		askScrollToTargetColorPosition(newColor, true);
+		if (controller.isAccentColorCanBeChanged()) {
+			updateAllColorsButton();
+		}
+	}
+
+	private void updateAllColorsButton() {
+		View buttonAllColors = view.findViewById(R.id.button_all_colors);
+		int controlsAccentColor = controller.getControlsAccentColor(nightMode);
+		UiUtilities.setupSelectableBackground(activity, buttonAllColors, controlsAccentColor);
+	}
+
+	private void askScrollToTargetColorPosition(@Nullable PaletteColor targetPaletteColor,
+	                                            boolean useSmoothScroll) {
+		if (targetPaletteColor == null) {
+			return;
+		}
+		int targetPosition = paletteAdapter.indexOf(targetPaletteColor);
+		LinearLayoutManager lm = (LinearLayoutManager) rvColors.getLayoutManager();
+		int firstVisiblePosition = lm != null ? lm.findFirstCompletelyVisibleItemPosition() : 0;
+		int lastVisiblePosition = lm != null ? lm.findLastCompletelyVisibleItemPosition() : paletteAdapter.getItemCount();
+		if (targetPosition < firstVisiblePosition || targetPosition > lastVisiblePosition) {
+			if (useSmoothScroll) {
+				rvColors.smoothScrollToPosition(targetPosition);
+			} else {
+				rvColors.scrollToPosition(targetPosition);
+			}
+		}
 	}
 }

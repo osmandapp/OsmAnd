@@ -87,8 +87,13 @@ public abstract class ColorsPaletteController implements IColorsPaletteControlle
 	}
 
 	@Override
+	public boolean isAccentColorCanBeChanged() {
+		return false;
+	}
+
+	@Override
 	public void onSelectColorFromPalette(@NonNull PaletteColor color) {
-		if (selectedPaletteColor != color) {
+		if (!Objects.equals(selectedPaletteColor, color)) {
 			PaletteColor oldSelectedColor = selectedPaletteColor;
 			selectColor(color);
 			notifyUpdatePaletteSelection(oldSelectedColor, selectedPaletteColor);
@@ -103,7 +108,7 @@ public abstract class ColorsPaletteController implements IColorsPaletteControlle
 			if (externalListener != null) {
 				externalListener.onColorAddedToPalette(editedPaletteColor, paletteColor);
 			}
-			if (Objects.equals(editedPaletteColor, selectedPaletteColor)) {
+			if (oldColor == null || Objects.equals(editedPaletteColor, selectedPaletteColor)) {
 				selectColor(paletteColor);
 			}
 		}
@@ -112,12 +117,12 @@ public abstract class ColorsPaletteController implements IColorsPaletteControlle
 
 	public void selectColor(@Nullable PaletteColor paletteColor) {
 		selectedPaletteColor = paletteColor;
-		if (externalListener != null) {
+		if (externalListener != null && paletteColor != null) {
 			externalListener.onColorSelectedFromPalette(paletteColor);
 		}
 	}
 
-	public void notifyRefreshLastUsedTime() {
+	public void refreshLastUsedTime() {
 		long now = System.currentTimeMillis();
 		selectedPaletteColor.setLastUsedTime(now);
 		colorsCollection.syncSettings();
@@ -182,7 +187,7 @@ public abstract class ColorsPaletteController implements IColorsPaletteControlle
 
 	private void duplicateColor(@NonNull PaletteColor paletteColor) {
 		PaletteColor duplicate = colorsCollection.duplicateColor(paletteColor);
-		notifyUpdatePaletteColors(paletteColor.isDefault() ? duplicate : null);
+		notifyUpdatePaletteColors(duplicate);
 	}
 
 	private void removeCustomColor(@NonNull PaletteColor paletteColor) {

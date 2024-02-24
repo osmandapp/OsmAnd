@@ -18,9 +18,9 @@ public class PaletteColorsComparator implements Comparator<PaletteColor> {
 	@Override
 	public int compare(PaletteColor o1, PaletteColor o2) {
 		if (sortingMode == PaletteSortingMode.LAST_USED_TIME) {
-			return Long.compare(o1.getLastUsedTime(), o2.getLastUsedTime());
+			return Long.compare(o2.getLastUsedTime(), o1.getLastUsedTime());
 		}
-		// Otherwise, leave the order unchanged
+		// Otherwise, use original order
 		return 0;
 	}
 
