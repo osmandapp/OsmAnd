@@ -2508,7 +2508,7 @@
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="wrong_input">Entrada incorrecta</string>
-    <string name="enter_new_name">Ingresar nuevo nombre</string>
+    <string name="enter_new_name">Introduzca el nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="shared_string_view">Ver</string>
     <string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
@@ -3069,7 +3069,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Suave (con rodaduras apenas visibles entre la vegetación)</string>
     <string name="routeInfo_tracktype_name">Firmeza de la superficie</string>
     <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
-    <string name="shared_string_open_track">Abrir traza</string>
+    <string name="shared_string_open_track">Abrir pista</string>
     <string name="shared_string_track_is_saved">Traza «%s» guardada</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
@@ -3956,7 +3956,7 @@
     <string name="rename_track">Renombrar traza</string>
     <string name="shared_string_sec">seg</string>
     <string name="shared_string_turn">Giro</string>
-    <string name="start_recording">Iniciar grabación</string>
+    <string name="start_recording">Iniciar la grabación</string>
     <string name="show_track_on_map">Mostrar traza en el mapa</string>
     <string name="routing_engine_vehicle_type_wheelchair">Silla de ruedas</string>
     <string name="routing_engine_vehicle_type_hiking">Senderismo</string>
