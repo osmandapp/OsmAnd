@@ -236,7 +236,7 @@
     <string name="default_buttons_support">Susțineri</string>
     <string name="support_new_features">Susțineți noi funcționalități</string>
     <string name="show_ruler_level">Afișează scara hărții</string>
-    <string name="info_button">Info</string>
+    <string name="info_button">Informații</string>
     <string name="back_to_location">Revenire la poziție</string>
     <string name="shared_string_help">Ajutor</string>
     <string name="accessibility_mode">Mod de accesibilitate</string>
@@ -276,7 +276,7 @@
     <string name="towards">către</string>
     <string name="accuracy">Acuratețe</string>
     <string name="altitude">Altitudine</string>
-    <string name="no_info">Fără info</string>
+    <string name="no_info">Nicio informație</string>
     <string name="direction_style_sidewise">În lateral (8 sectoare)</string>
     <string name="direction_style_clockwise">De jur împrejur (12 sectoare)</string>
     <string name="settings_direction_style">Stil de direcții</string>
@@ -415,7 +415,7 @@
     <string name="local_index_action_do">Sunteți pe cale de a %1$s %2$s element(e). Continuați?</string>
     <string name="local_index_descr_title">Organizați fișierele cu hărți.</string>
     <string name="local_index_mi_restore">Activați</string>
-    <string name="local_index_mi_backup">Dezactivați</string>
+    <string name="local_index_mi_backup">Dezactivează</string>
     <string name="shared_string_download">Descarcă</string>
     <string name="local_index_poi_data">Date despre POI</string>
     <string name="local_index_address_data">Date despre Adrese</string>
@@ -552,7 +552,7 @@
     <string name="items_were_selected">{0} element(e) selectate</string>
     <string name="filter_existing_indexes">Filtru descărcat</string>
     <string name="shared_string_select_all">Selectează tot</string>
-    <string name="shared_string_refresh">Reîmprospătare</string>
+    <string name="shared_string_refresh">Reîmprospătează</string>
     <string name="fast_route_mode">Cea mai rapidă rută</string>
     <string name="fast_route_mode_descr">Activați pentru a calcula cel mai rapid traseu sau dezactivați pentru un traseu de economisire a combustibilului.</string>
     <string name="tiles_to_download_estimated_size">La nivelul de zoom {0} se descarcă {1} porțiuni ({2} MB)</string>
@@ -685,7 +685,7 @@
     <string name="update_poi_error_loading">Nu se pot încărca datele de pe server.</string>
     <string name="update_poi_no_offline_poi_index">Nu sunt disponibile POI offline în această regiune</string>
     <string name="update_poi_is_not_available_for_zoom">Zoomul înainte vă permite să actualizați POI-urile</string>
-    <string name="context_menu_item_update_poi">Actualizare POI</string>
+    <string name="context_menu_item_update_poi">Actualizează POI</string>
     <string name="context_menu_item_update_map_confirm">Actualizați datele locale de pe Internet\?</string>
     <string name="search_history_city">Oraș: {0}</string>
     <string name="search_history_street">Stradă: {0}, {1}</string>
@@ -897,7 +897,7 @@
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Note audio/video</string>
-    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd pentru funcții topo offline, cum ar fi linii de contur, deal, pantă</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd pentru funcții topografice offline, cum ar fi linii de contur, relief umbrit, pantă</string>
     <string name="map_widget_distancemeasurement">Măsurarea distanței</string>
     <string name="recording_context_menu_play">Redă</string>
     <string name="srtm_paid_version_msg">Luați în considerare posibilitatea de a plăti pentru extensia \'Topografie\' pentru a sprijini continuarea dezvoltării ei.</string>
@@ -1416,7 +1416,7 @@
     <string name="read_more">Citește mai multe</string>
     <string name="whats_new">Ce-i nou în</string>
     <string name="rendering_attr_showProposed_name">Obiecte propuse</string>
-    <string name="shared_string_update">Actualizare</string>
+    <string name="shared_string_update">Actualizează</string>
     <string name="shared_string_upload">Încarcă</string>
     <string name="osm_edit_created_poi">Punct de interes OSM creat</string>
     <string name="world_map_download_descr">Harta de bază mondială (care acoperă întreaga lume la un nivel de zoom redus) lipsește sau este depășită. Luați în considerare posibilitatea de a o descărca pentru o imagine de ansamblu la nivel mondial.</string>
@@ -1434,7 +1434,7 @@
     <string name="regions">Regiuni</string>
     <string name="region_maps">Hărțile regiunilor</string>
     <string name="world_maps">Hărțile lumii</string>
-    <string name="hillshade_layer_disabled">Vizualizarea umbrelor de relief e dezactivată</string>
+    <string name="hillshade_layer_disabled">Stratul de umbrire relief dezactivat</string>
     <string name="favorite_category_add_new">Adaugă nou</string>
     <string name="favorite_category_select">Alegeți categorie</string>
     <string name="default_speed_system_descr">Definiți unitatea de viteză.</string>
@@ -1516,7 +1516,7 @@
     <string name="search_poi_category_hint">Tastați pentru a căuta tot</string>
     <string name="shared_string_is_open">Deschise acum</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM maper asistent</string>
-    <string name="agps_info">Info A-GPS</string>
+    <string name="agps_info">Informații A-GPS</string>
     <string name="shared_string_manage">Administrare</string>
     <string name="shared_string_edit">Editează</string>
     <string name="shared_string_places">Locații</string>
@@ -1623,7 +1623,7 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_do_not_use">Nu folosiți</string>
     <string name="shared_string_enable">Activează</string>
-    <string name="shared_string_disable">Dezactivați</string>
+    <string name="shared_string_disable">Dezactivează</string>
     <string name="shared_string_enabled">Activ</string>
     <string name="shared_string_disabled">Inactiv</string>
     <string name="shared_string_deselect">Deselectați</string>
@@ -1839,7 +1839,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Buton pentru a afișa sau ascunde notele OSM pe hartă.</string>
     <string name="sorted_by_distance">Sortat după distanță</string>
     <string name="search_favorites">Căutare în favorite</string>
-    <string name="hillshade_menu_download_descr">Descărcați harta de suprapunere \"Hillshade\" pentru a arăta umbrirea verticală.</string>
+    <string name="hillshade_menu_download_descr">Descărcați harta de suprapunere \"Relief umbrit\" pentru a arăta umbrirea verticală.</string>
     <string name="hillshade_purchase_header">Instalați pluginul \'Topografie\' pentru a arăta zone verticale gradate.</string>
     <string name="hide_from_zoom_level">Ascundeți începând de la nivelul de zoom</string>
     <string name="shared_string_plugin">Extensie</string>
@@ -2406,7 +2406,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferați drumurile neasfaltate în locul celor asfaltate pentru traseu.</string>
     <string name="layer_osm_edits">editare OSM</string>
     <string name="quick_action_contour_lines_descr">Buton ce arată sau ascunde liniile de contur de pe hartă.</string>
-    <string name="quick_action_hillshade_descr">Un buton ca să afișeze sau ascundă nuanțele de deal pe hartă.</string>
+    <string name="quick_action_hillshade_descr">Un buton care să afișeze sau ascundă umbrirea reliefului pe hartă.</string>
     <string name="tts_initialization_error">Motorul text-to-speech nu porneste.</string>
     <string name="export_profile">Exportă profilul</string>
     <string name="exported_osmand_profile">Profil osmand exportat %1$s</string>
@@ -2971,7 +2971,7 @@
     <string name="send_crash_log">Trimite jurnalul de eroare</string>
     <string name="send_logcat_log">Trimite jurnalul logcat</string>
     <string name="purchases_feature_desc_nautical">Obțineți acces la informații privind adâncimea nautică</string>
-    <string name="purchases_feature_desc_terrain">Linii de contur ale terenului, umbre de relief în nuanțe de gri și indicarea pantei prin gradient de culori pentru a arăta vârfurile și zonele joase.</string>
+    <string name="purchases_feature_desc_terrain">Linii de contur ale terenului, relief umbrit în nuanțe de gri și indicare pantă prin gradient de culori, pentru a arăta vârfurile și zonele joase.</string>
     <string name="purchases_feature_desc_wikivoyage">Explorați Wikivoyage offline. Articole împărțite pe țări și regiuni, disponibile în toate limbile.</string>
     <string name="purchases_feature_desc_wikipedia">Oferă toate articolele Wikipedia legate de locuri în mod offline, ajutându-vă să aflați mai multe despre locurile vizitate în timpul călătoriei prin simple atingeri pe hartă. Nu uitați să descărcați fișierele cu hărțile Wikipedia pentru regiunile respective.</string>
     <string name="purchases_feature_desc_combined_wiki">Explorați articolele din Wikipedia în deplasare, fără conexiune la internet. Datele offline împărțite pe țări și disponibile în toate limbile.</string>
@@ -3014,7 +3014,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token invalid sau expirat</string>
     <string name="backup_error_user_is_not_registered">Nu există niciun utilizator înregistrat cu această adresă de e-mail</string>
     <string name="backup_error_no_valid_subscription">Nu există un abonament valabil</string>
-    <string name="contour_lines_hillshade_slope">Curbe de nivel, umbrire relief, pante</string>
+    <string name="contour_lines_hillshade_slope">Curbe de nivel, relief umbrit, pantă</string>
     <string name="release_4_0">• Backup în cloud
 \n
 \n • A fost adăugat modul de noapte pentru stilul de redare \"Topo\"
@@ -3071,8 +3071,8 @@
     <string name="turn_screen_on_wake_time_descr">Selectați timeout-ul ecranului după trezire. (\"%1$s\" nu aplică niciun timeout.)</string>
     <string name="one_image_per_tile">Un fișier de imagine per segment</string>
     <string name="online_map_name_helper_text">Furnizați un nume pentru sursa hărții online.</string>
-    <string name="online_map_url_helper_text">Introduceți sau inserați URL-ul pentru sursa online.</string>
-    <string name="map_source_zoom_levels">Setați un nivel de zoom minim și maxim pentru a afișa sau încărca harta online.</string>
+    <string name="online_map_url_helper_text">Introduceți sau lipiți URL-ul pentru sursa online.</string>
+    <string name="map_source_zoom_levels">Setați un nivel de zoom minim și unul maxim pentru a arăra sau încărca harta online.</string>
     <string name="map_source_zoom_levels_descr">Afectează ecranul atunci când este utilizat ca hartă sau suprapunere/subpunere.
 \n
 \n%1$s: Harta este limitată la intervalul de nivel de zoom selectat.
@@ -3209,7 +3209,7 @@
     <string name="icon_group_transport">Transporturi</string>
     <string name="icon_group_service">Servicii</string>
     <string name="icon_group_symbols">Simboluri</string>
-    <string name="hillshade_slope_contour_lines">Linii de contur / Umbră de randare / Pantă</string>
+    <string name="hillshade_slope_contour_lines">Linii de contur / Relief umbrit / Pantă</string>
     <string name="open_place_reviews_plugin_description">Contribuiți la proiectul OpenPlaceReviews, cum ar fi fotografii, recenzii sau linkuri pentru locuri publice, cum ar fi restaurante, hoteluri sau muzee.
 \n
 \nGăsiți instrucțiuni despre cum să contribuiți pe site-ul nostru %1$s.</string>
@@ -3250,10 +3250,10 @@
     <string name="routing_attr_height_obstacles_description">Timpul de deplasare calculat va reflecta impactul înălțimii. Preferințele de rutare pot ajuta la evitarea ascensiunilor abrupte:</string>
     <string name="quick_action_coordinates_widget_descr">Un comutator pentru a arătasau ascunde de pe hartă widgetul Coordonate.</string>
     <string name="map_widget_distance_by_tap">Distanța prin atingere</string>
-    <string name="latest_openstreetmap_update">Cea mai recentă actualizare OpenStreetMap disponibilă:</string>
+    <string name="latest_openstreetmap_update">Ultima actualizare OpenStreetMap disponibilă:</string>
     <string name="updated">Actualizat: %s</string>
     <string name="last_time_checked">Ultima dată când a fost verificat: %s</string>
-    <string name="update_frequency">Frecvența de actualizare</string>
+    <string name="update_frequency">Frecvență de actualizare</string>
     <string name="delete_updates">Șterge actualizările</string>
     <string name="live_update_delete_updates_msg">Ștergeți toate actualizările live %s\?</string>
     <string name="purchases">Achiziții</string>
@@ -3544,8 +3544,8 @@
     <string name="rendering_attr_hikingRoutesOSMC_description">Redă traseele în funcție de urmele OSMC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Rute de drumeție</string>
     <string name="precise_routing_mode_descr">Calculați rute precise fără erori. În continuare limitat de distanță și lent.</string>
-    <string name="download_hillshade_maps">Nuanță de deal</string>
-    <string name="layer_hillshade">Strat randare prin umbrire</string>
+    <string name="download_hillshade_maps">Relief umbrit</string>
+    <string name="layer_hillshade">Strat relief umbrit</string>
     <string name="sett_parrot_ext_input">Papagal</string>
     <string name="sett_wunderlinq_ext_input">MiracolLINQ</string>
     <string name="external_input_device_descr">Selectați un dispozitiv de control extern, cum ar fi o tastatură sau WunderLINQ.</string>
@@ -3763,17 +3763,17 @@
     <string name="map_import_error">Eroare de import al hărții</string>
     <string name="import_rendering_file">Importați fișierul de randare</string>
     <string name="shared_string_terrain">Teren</string>
-    <string name="hillshade_description">Harta Hillshade utilizează nuanțe întunecate pentru a arăta panta, vârfurile și zonele joase.</string>
+    <string name="hillshade_description">Harta cu relief umbrit utilizează nuanțe întunecate pentru a arăta pante, vârfuri și zone joase.</string>
     <string name="slope_description">Panta folosește culori pentru a vizualiza cât de abrupt este terenul.</string>
     <string name="terrain_slider_description">Setați nivelurile de zoom minim și maxim la care va fi afișat stratul.</string>
-    <string name="hillshade_download_description">Sunt necesare hărți suplimentare pentru a vizualiza colinele de pe hartă.</string>
+    <string name="hillshade_download_description">Sunt necesare hărți suplimentare pentru a vizualiza relieful umbrit pe hartă.</string>
     <string name="slope_download_description">Sunt necesare hărți suplimentare pentru a vizualiza panta pe hartă.</string>
     <string name="slope_read_more">Citiți mai multe despre pantă în %1$s.</string>
     <string name="shared_string_transparency">Transparență</string>
     <string name="shared_string_zoom_levels">Niveluri de zoom</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Arată umbra dealurilor sau panta pe hartă. Citiți mai multe despre aceste tipuri de hărți pe site-ul nostru.</string>
-    <string name="shared_string_hillshade">Umbra dealului</string>
+    <string name="terrain_empty_state_text">Arată relieful umbrit sau panta pe hartă. Citiți mai multe despre aceste tipuri de hărți pe site-ul nostru.</string>
+    <string name="shared_string_hillshade">Relief umbrit</string>
     <string name="import_complete_description">Ați importat toate datele din %1$s. Utilizați butoanele de mai jos pentru a deschide orice parte a aplicației pentru a o gestiona.</string>
     <string name="checking_for_duplicate_description">OsmAnd verifică %1$s pentru duplicate cu elemente existente în aplicație.
 \n
@@ -4211,7 +4211,7 @@
     <string name="quick_action_new_action">Adăugă acțiune</string>
     <string name="quick_action_add_parking">Adaugă loc de parcare</string>
     <string name="quick_action_navigation_voice_on">Dezactivare voce</string>
-    <string name="quick_action_navigation_voice_off">Dezactivați Vocea</string>
+    <string name="quick_action_navigation_voice_off">Activează Voce</string>
     <string name="quick_action_navigation_voice">Pornire/oprire voce</string>
     <string name="quick_action_add_osm_bug">Adaugă o notă OSM</string>
     <string name="quick_action_take_photo_note">Notă foto nouă</string>
@@ -5102,8 +5102,8 @@
     <string name="shared_string_pounds">lbs</string>
     <string name="metric_lbs">lbs</string>
     <string name="shared_string_all_world">Toată lumea</string>
-    <string name="generate_hillshade_from_3d_maps">Generarea de hărți raster hillshade din hărți 3D</string>
-    <string name="disable_vertex_hillshade_3d">Dezactivare umbră vertexuri în 3D</string>
+    <string name="generate_hillshade_from_3d_maps">Generare de hărți raster cu relief umbrit, din hărți 3D</string>
+    <string name="disable_vertex_hillshade_3d">Dezactivare vertexuri relief umbrit în 3D</string>
     <string name="common_weight_limit_error">Valoarea minimă este \"%1$s\" %2$s. Utilizați profilul \"%3$s\" dacă greutatea vehiculului este mai mică decât valoarea minimă.</string>
     <string name="weather_forecast_is_outdated">Prognoza este veche.</string>
     <string name="weather_forecast">Prognoza meteo</string>
@@ -5231,7 +5231,7 @@
     <string name="terrain_map">Hartă de teren (3D)</string>
     <string name="relief_3d">Relief 3D</string>
     <string name="relief_3d_description">Dețineți și observați macheta la scară a cartierului dumneavoastră sau a întregului continent.</string>
-    <string name="terrain_category_description">Linii de contur ale terenului, nuanțe de gri și indicarea pantei cu scară de culori, pentru a arăta vârfurile și zonele joase.</string>
+    <string name="terrain_category_description">Linii de contur ale terenului, relief umbrit cu nuanțe de gri și indicarea pantei cu scară de culori, pentru a arăta vârfurile și zonele joase.</string>
     <string name="slope_legend_description">Panta folosește culori pentru a vizualiza înclinarea terenului. Puteți citi mai multe despre Pantă în %1$s.</string>
     <string name="osmand_cloud_deleting_account_descr">Toate datele și contul dumneavoastră vor fi șterse din OsmAnd Cloud în câteva momente.
 \n
@@ -5340,7 +5340,7 @@
     <string name="shared_string_included">Inclus</string>
     <string name="local_indexes_category_terrain">Hărți de teren (3D)</string>
     <string name="map_widget_group_glide_desc">Widgeturile arată raportul de planare față de țintă sau raportul de planare mediu pentru cursa curentă.</string>
-    <string name="hillshade_slope">Umbre relief, Pantă</string>
+    <string name="hillshade_slope">Relief umbrit, Pantă</string>
     <string name="map_widget_glide_average_desc">Arată raportul mediu de planare pentru intervalul setat.</string>
     <string name="map_widget_glide_target_desc">Arată raportul de planare necesar pentru a ajunge la punctul țintă.</string>
     <string name="glide_ratio_to_target">Raport de planare până la țintă</string>
@@ -5466,7 +5466,7 @@
     <string name="shared_string_cache">Cache</string>
     <string name="widget_available_ram_desc">Afișează memoria disponibilă alocată pentru OsmAnd.</string>
     <string name="sort_size_descending">Mărimea mare întâi</string>
-    <string name="delete_map">Șterge harta</string>
+    <string name="delete_map">Ștergere hartă</string>
     <string name="standard_maps">Hărți standard</string>
     <string name="shared_string_created">Creat</string>
     <string name="wikipedia_and_travel_maps">Wikipedia și hărți de călătorie</string>
@@ -5478,7 +5478,7 @@
     <string name="widget_available_ram">RAM disponibil</string>
     <string name="terrain_maps">Hărți de teren</string>
     <string name="sort_country_name_descending">Nume țară: Z – A</string>
-    <string name="delete_map_description">Sunteți sigur că vreți să ștergeți harta %1$s?</string>
+    <string name="delete_map_description">Ștergeți harta %1$s?</string>
     <string name="maps_and_resources">Hărți și resurse</string>
     <string name="shared_string_show_icon">Arată icon</string>
     <string name="smart_folder_name_present">Există deja un asemenea folder inteligent</string>
@@ -5583,7 +5583,7 @@
     <string name="map_widget_sun_position_desc">Afișează timpul până la răsăritul sau apusul soarelui.</string>
     <string name="tripltek_promo">Promoție Tripltek pentru %1$s luni</string>
     <string name="tripltek_promo_description">Acces gratis la funcționalități, incluzând descărcări nelimitate de hărți, relief 3D, etc. timp de %1$s luni</string>
-    <string name="discard_changes_prompt">Aruncați modificările?</string>
+    <string name="discard_changes_prompt">Abandonați modificările?</string>
     <string name="remove_widget_first">Stergeți întâi widgetul</string>
     <string name="row_number">Rând %1$s</string>
     <string name="add_row">Adaugă rând</string>
