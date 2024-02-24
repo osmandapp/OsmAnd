@@ -278,12 +278,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			RouteResultPreparation.printResults(hctx.rctx, start, end, route.detailed);
 		}
 		printGCInformation(false);
+		hctx.clearAll(stPoints, endPoints);
 		printf(SL >= 0,
 				"Routing %.1f ms (selected %s): last mile %.1f ms, load data %.1f ms (%,d edges), routing %.1f ms (queue  - %.1f add ms + %.1f poll ms), prep result %.1f ms - %s \n",
 				(System.nanoTime() - startTime) / 1e6, hctx.getRoutingInfo(), hctx.stats.searchPointsTime,
 				hctx.stats.loadEdgesTime + hctx.stats.loadPointsTime, hctx.stats.loadEdgesCnt, hctx.stats.routingTime,
 				hctx.stats.addQueueTime, hctx.stats.pollQueueTime, hctx.stats.prepTime, hctx.config.toString(start, end));
-		
 		return route;
 	}
 
