@@ -2125,7 +2125,7 @@
     <string name="quick_action_map_source_action">Aldoni map-fonton</string>
     <string name="quick_action_map_source_switch">Map‑fonto ŝanĝita al \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ŝanĝi pozicion de butono</string>
-    <string name="quick_action_btn_tutorial_descr">Premtenu kaj ŝovu la butonon por ŝanĝi ĝian pozicion sur la ekrano.</string>
+    <string name="quick_action_btn_tutorial_descr">Frapetadu kaj ŝovu la butonon por ŝanĝi ĝian pozicion sur la ekrano.</string>
     <string name="shared_string_action_name">Nomo de ago</string>
     <string name="quick_action_interim_dialog">Montri transiran fenestron</string>
     <string name="quick_action_map_overlay_switch">Surtavolo de mapo ŝanĝita al \"%s\".</string>
@@ -5621,4 +5621,5 @@
     <string name="speedometer_description">Montri vian nunan rapidon raportatan de GPS</string>
     <string name="shared_string_speedometer">Rapidmezurilo</string>
     <string name="speed_limit_warning">Averto pri rapidlimo</string>
+    <string name="help_article_setup_a_route_name">Difini kurson</string>
 </resources>
