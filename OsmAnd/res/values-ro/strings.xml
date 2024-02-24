@@ -5531,9 +5531,7 @@
     <string name="key_event_action_open_search_view">Deschide fereastra de căutare</string>
     <string name="key_event_action_open_navigation_view">Deschide fereastra de navigație</string>
     <string name="key_event_action_move_to_my_location">Mută la \"Locația mea\"</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" va fi șters definitiv. Sunteți sigur?
-\n
-\nAceastă acțiune nu poate fi anulată.</string>
+    <string name="delete_trash_item_confirmation_desc">Ștergeți \"%1$s\" definitiv?</string>
     <string name="shared_string_is_deleted">%1$s este șters.</string>
     <string name="cloud_item_restored">%1$s s-a restaurat în Cloud.</string>
     <string name="external_input_device_title">Dispozitiv de intrare extern</string>
@@ -5559,7 +5557,7 @@
     <string name="add_new_type">Adăugă tip nou</string>
     <string name="reset_key_assignments_desc">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
     <string name="rendering_attr_showToll_name">Arată restricțiile de taxare</string>
-    <string name="button_already_assigned_to_this_action">Butonul este deja asignat acestei acțiuni.</string>
+    <string name="button_already_assigned_to_this_action">Buton deja atribuit acestei acțiuni.</string>
     <string name="reset_key_assignments">Resetează asignările de taste</string>
     <string name="rendering_attr_showToll_description">Arată restricțiile de taxare pe drumuri</string>
     <string name="zoom_non_animated">Zoom neanimat</string>
@@ -5581,11 +5579,11 @@
     <string name="clear_key_assignment">Șterge asignarea tastelor</string>
     <string name="map_widget_sun_position">Poziția soarelui</string>
     <string name="see_all_plans">Vezi toate planurile</string>
-    <string name="clear_key_assignment_desc">Asocierea tastei pentru acțiunea selectată va fi ștearsă și setată la Niciuna.</string>
+    <string name="clear_key_assignment_desc">Asocierea tastei pentru acțiunea selectată va fi ștearsă și setată la \"None\".</string>
     <string name="map_widget_sun_position_desc">Afișează timpul până la răsăritul sau apusul soarelui.</string>
     <string name="tripltek_promo">Promoție Tripltek pentru %1$s luni</string>
     <string name="tripltek_promo_description">Acces gratis la funcționalități, incluzând descărcări nelimitate de hărți, relief 3D, etc. timp de %1$s luni</string>
-    <string name="discard_changes_prompt">Sigur doriți să abandonați modificările?</string>
+    <string name="discard_changes_prompt">Aruncați modificările?</string>
     <string name="remove_widget_first">Stergeți întâi widgetul</string>
     <string name="row_number">Rând %1$s</string>
     <string name="add_row">Adaugă rând</string>
