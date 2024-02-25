@@ -5495,7 +5495,7 @@
     <string name="discard_filter_changes">Renunță la modificările filtrelor</string>
     <string name="shared_string_loading">Se încarcă</string>
     <string name="discard_filter_changes_prompt">Resetați toate filtrele?</string>
-    <string name="no_config_smart_folder_description">Folderele inteligente permit gruparea pieselor în funcție de filtrele aplicate</string>
+    <string name="no_config_smart_folder_description">Folderele inteligente permit gruparea traseelor în funcție de filtrele aplicate</string>
     <string name="loading_tracks">Se reîncarcă traseele</string>
     <string name="searching_matching_tracks">Caută toate traseele ce se potrivesc</string>
     <plurals name="tracks">
