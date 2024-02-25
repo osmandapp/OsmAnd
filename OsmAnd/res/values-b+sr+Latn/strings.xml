@@ -116,8 +116,8 @@
     <string name="shared_string_undefined">Neodređeno</string>
     <string name="layer_map_appearance">Podešavanja prikaza</string>
     <string name="show_lanes">Trake</string>
-    <string name="avoid_unpaved">Izbegavati makadame</string>
-    <string name="avoid_ferries">aIzbgavati prelaze splavom</string>
+    <string name="avoid_unpaved">Makadame</string>
+    <string name="avoid_ferries">Izbgavati trajekte</string>
     <string name="map_widget_fluorescent">Fluroscentne rute</string>
     <string name="bg_service_sleep_mode_off">Pokreći 
 \n program u pozadini</string>
@@ -283,7 +283,7 @@
     <string name="traffic_warning_stop">Znak stop</string>
     <string name="speak_pedestrian">Pešački prelazi</string>
     <string name="rendering_attr_roadStyle_name">Tip puta</string>
-    <string name="avoid_roads_msg">Izabere alternativnu rutu izborom puteva za izbegavanje</string>
+    <string name="avoid_roads_msg">Odabir alternativne rute izborom puteva za izbegavanje</string>
     <string name="navigation_over_track">Da započnem navođenje duž trase?</string>
     <string name="rendering_value_orange_name">Narandžasta</string>
     <string name="traffic_warning_railways">Pružni prelaz</string>
@@ -375,7 +375,7 @@
     <string name="routing_attr_piste_type_downhill_description">Padine alpskog skijanja ili spuštanja i pristup skijaškim žičarama.</string>
     <string name="routing_attr_piste_type_downhill_name">Alpsko skijanje</string>
     <string name="quick_action_need_to_add_item_to_list">Dodaj bar jednu stavku u podešavanjima na „Brzim radnjama“</string>
-    <string name="routing_attr_avoid_sett_description">Izbegavati kaldrme</string>
+    <string name="routing_attr_avoid_sett_description">Kaldrme</string>
     <string name="routing_attr_avoid_sett_name">Bez kaldrme</string>
     <string name="run_full_osmand_header">Pokrećeš OsmAnd?</string>
     <string name="run_full_osmand_msg">Koristi mapu {0} koju je omogućio OsmAnd. Da li želiš da pokreneš puno izdanje OsmAnda?</string>
@@ -1226,7 +1226,7 @@
     <string name="snap_to_road">Vođica uvek na putu</string>
     <string name="auto_zoom_map">Auto zumiranje mape</string>
     <string name="auto_zoom_map_descr">Nivo zumiranja u skladu sa brzinom (dok je mapa sinhronizovana sa trenutnom pozicijom).</string>
-    <string name="avoid_motorway">Izbegavati magistrale</string>
+    <string name="avoid_motorway">Magistrale</string>
     <string name="use_compass_navigation">Koristi kompas</string>
     <string name="use_compass_navigation_descr">Koristi kompas kada pravac nije prepoznat na drugi način.</string>
     <string name="show_warnings_descr">Podesi upozorenja u saobraćaju (ograničenja brzine, prisilna zaustavljanja, ležeći policajci, tuneli), radare i podatke o traci.</string>
@@ -1938,17 +1938,17 @@
     <string name="routing_attr_weight_description">Odredi dozvoljenu težinu vozila na putanji.</string>
     <string name="routing_attr_weight_name">Težina</string>
     <string name="routing_attr_avoid_borders_description">Državne granice</string>
-    <string name="routing_attr_avoid_borders_name">Izbegavati granične prelaze</string>
-    <string name="routing_attr_avoid_stairs_description">Izbegavati stepenice</string>
+    <string name="routing_attr_avoid_borders_name">Granične prelaze</string>
+    <string name="routing_attr_avoid_stairs_description">Stepenice</string>
     <string name="routing_attr_avoid_stairs_name">Stepenice</string>
-    <string name="routing_attr_avoid_motorway_description">Izbegavati magistrale</string>
-    <string name="routing_attr_avoid_motorway_name">Izbegavati magistrale</string>
-    <string name="routing_attr_avoid_ferries_description">Izbegavati trajekte</string>
-    <string name="routing_attr_avoid_ferries_name">Izbegavati trajekte</string>
-    <string name="routing_attr_avoid_unpaved_description">Izbegavati makadame</string>
-    <string name="routing_attr_avoid_unpaved_name">Izbegavati makadame</string>
-    <string name="routing_attr_avoid_toll_description">Izbegavati puteve sa putarinom</string>
-    <string name="routing_attr_avoid_toll_name">Izbegavati putarine</string>
+    <string name="routing_attr_avoid_motorway_description">Magistrale</string>
+    <string name="routing_attr_avoid_motorway_name">Magistrale</string>
+    <string name="routing_attr_avoid_ferries_description">Trajekte</string>
+    <string name="routing_attr_avoid_ferries_name">Trajekte</string>
+    <string name="routing_attr_avoid_unpaved_description">Makadame</string>
+    <string name="routing_attr_avoid_unpaved_name">Makadame</string>
+    <string name="routing_attr_avoid_toll_description">Puteve sa putarinom</string>
+    <string name="routing_attr_avoid_toll_name">Putarine</string>
     <string name="routing_attr_prefer_motorway_description">Prednost magistralama</string>
     <string name="routing_attr_prefer_motorway_name">Prednost magistralama</string>
     <string name="route_info">Info rute</string>
@@ -2164,8 +2164,8 @@
     <string name="my_location">Moja pozicija</string>
     <string name="add_location_as_first_point_descr">Dodaj svoj lokaciju kao tačku polaska da isplaniraš savršeno putovanje.</string>
     <string name="use_location">Koristi lokaciju</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Izbegavati puteva sa poledicama i plićacima.</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Izbegavati puteve sa barama ili poledicama</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Puteva sa poledicama i plićacima.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Puteve sa plićacima ili poledicama</string>
     <string name="fast_coordinates_input">Brzi unos koordinata</string>
     <string name="fast_coordinates_input_descr">Izaberi format unosa koordinata. Promeni je tapkanjem na \"Opcije\".</string>
     <string name="use_system_keyboard">Koristi sistemsku tastaturu</string>
@@ -2349,8 +2349,8 @@
     <string name="no_updates_available">Nema dostupnog ažuriranja</string>
     <string name="rendering_value_boldOutline_name">Zadebljaj obrisne linije</string>
     <string name="traffic_warning_hazard">Opasnost</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Izbegavati autovozove</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Izbegavati autovoz</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Autovozove</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Autovoz</string>
     <string name="plugin_settings">Dodaci</string>
     <string name="av_locations">Lokacije</string>
     <string name="av_locations_descr">GPX fajl sa lokacijama.</string>
@@ -3051,8 +3051,8 @@
 \nČlanarina se samostalno obnavlja ukoliko nije otkazana pre dana obnove.
 \n
 \nČlanarinama možeš upravljati i otkazati ih tako što ćeš otići u podešavanja programa AppGallery.</string>
-    <string name="routing_attr_avoid_footways_description">Izbegavati pešačke staze</string>
-    <string name="routing_attr_avoid_footways_name">Izbegavati pešačke staze</string>
+    <string name="routing_attr_avoid_footways_description">Pešačke staze</string>
+    <string name="routing_attr_avoid_footways_name">Pešačke staze</string>
     <string name="development">Razvoj</string>
     <string name="use_live_public_transport">Podaci OsmAnda Live</string>
     <string name="use_live_routing">Podaci OsmAnda Live</string>
@@ -3354,17 +3354,17 @@
     <string name="angular_measeurement">Merna jedinica za uglove</string>
     <string name="shared_string_milliradians">Miliradijani</string>
     <string name="shared_string_degrees">Stepeni</string>
-    <string name="routing_attr_avoid_ferry_description">Izbegavati trajekte</string>
-    <string name="routing_attr_avoid_ferry_name">Izbegavati trajekte</string>
-    <string name="routing_attr_avoid_subway_description">Izbegavati podzemne i lake železnice</string>
+    <string name="routing_attr_avoid_ferry_description">Trajekte</string>
+    <string name="routing_attr_avoid_ferry_name">Trajekte</string>
+    <string name="routing_attr_avoid_subway_description">Podzemne i lake železnice</string>
     <string name="routing_attr_avoid_subway_name">Bez podzemne železnice</string>
-    <string name="routing_attr_avoid_train_description">Izbegavati vozove</string>
+    <string name="routing_attr_avoid_train_description">Vozove</string>
     <string name="routing_attr_avoid_train_name">Bez vozova</string>
-    <string name="routing_attr_avoid_share_taxi_description">Izbegavati deljenje taksija</string>
+    <string name="routing_attr_avoid_share_taxi_description">Deljenje taksija</string>
     <string name="routing_attr_avoid_share_taxi_name">Bez deljenja taksija</string>
     <string name="routing_attr_avoid_bus_description">Bez autobusa i trolejbusa</string>
     <string name="routing_attr_avoid_bus_name">Bez autobusa</string>
-    <string name="routing_attr_avoid_tram_description">Izbegavati tramvaj</string>
+    <string name="routing_attr_avoid_tram_description">Tramvaje</string>
     <string name="routing_attr_avoid_tram_name">Bez tramvaja</string>
     <string name="send_log">Pošalji dnevnik</string>
     <string name="public_transport_type">Tip prevoza</string>
@@ -4098,7 +4098,7 @@
     <string name="srtm_unit_format">Varijanta mernih jedinica za izohipse</string>
     <string name="shared_string_feet">stope</string>
     <string name="osmand_pro_tagline">Dobavi maksimum funkcija</string>
-    <string name="routing_attr_avoid_tunnels_name">Izbegavati tunele</string>
+    <string name="routing_attr_avoid_tunnels_name">Tunele</string>
     <string name="backup_storage_taken">Zauzeto skladište</string>
     <string name="restore_complete">Vraćeno</string>
     <string name="rendering_attr_natureReserves_name">Rezervat</string>
@@ -4143,10 +4143,10 @@
     <string name="loading_list_of_routing_services">Učitava se lista dostupnih usluga rutiranja</string>
     <string name="backup_and_restore">Rezervna kopija i vraćanje</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="routing_attr_avoid_low_emission_zone_name">Izbegavati zone niskih emisija</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Zone niskih emisija</string>
     <string name="rendering_attr_horseScale_name">Težina konjskih staza</string>
-    <string name="routing_attr_avoid_highway_name">Izbegavati autoputeve</string>
-    <string name="routing_attr_avoid_highway_description">Izbegavati autoputeve</string>
+    <string name="routing_attr_avoid_highway_name">Autoputeve</string>
+    <string name="routing_attr_avoid_highway_description">Autoputeve</string>
     <string name="map_widget_trip_recording_downhill">Nizbrdo</string>
     <string name="simulation_real_mode_desc">Na pravim deonicama puta brzina će biti približena najvećoj dozvoljenoj brzini.
 \nNa raskrsnicama, simuliranje će se usporiti.
@@ -4193,7 +4193,7 @@
     <string name="backup_delete_all_data_descr">Svi podaci na OsmAnd Cloud će biti izbrisani. Lokalne verzije ostaće netaknute.</string>
     <string name="backup_no_internet_descr">Proveri internet i preuzmi ponovo.</string>
     <string name="backup_view_conflicts">Pogledaj konflikte</string>
-    <string name="routing_attr_avoid_low_emission_zone_description">Izbegavati zone niskih emisija</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Zone niskih emisija</string>
     <string name="route_line_use_map_style_color">Koristite zadanu boju za stil mape (%1$s).</string>
     <string name="map_widget_time_to_intermediate">Vreme do međuodredišta</string>
     <string name="map_widget_distance_to_intermediate">Udaljenost do međuodredišta</string>
@@ -4248,7 +4248,7 @@
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
     <string name="rendering_attr_hideMilitaryAreas_name">Sakrij vojna područja</string>
-    <string name="routing_attr_avoid_4wd_only_description">Izbegavati puteve za 4WD vozila</string>
+    <string name="routing_attr_avoid_4wd_only_description">Puteve za 4WD vozila</string>
     <string name="lanes_widgets_desc">Prikazuje trenutni raspored kolovozne trake i ističe trake za prestrojavanje prilikom navođenja.</string>
     <string name="route_maneuvers">Manevri rute</string>
     <string name="map_widget_altitude">Nadmorska visina trenutne lokacije</string>
@@ -4302,8 +4302,8 @@
     <string name="average_speed_time_interval_desc">Navedi vremensko razdoblje za prosečnu brzinu.</string>
     <string name="average_speed_widget_desc">Prikazuje prosečnu brzinu trenutnog puta.</string>
     <string name="map_widget_average_speed">Prosečna brzina</string>
-    <string name="routing_attr_avoid_fords_name">Izbegavati plićake</string>
-    <string name="routing_attr_avoid_fords_description">Izbegavati plićake</string>
+    <string name="routing_attr_avoid_fords_name">Plićake</string>
+    <string name="routing_attr_avoid_fords_description">Plićake</string>
     <string name="colour_of_circles">Boja krugova</string>
     <string name="current_speed_widget_desc">Prikazuje trenutnu brzinu prijavljenu GPS-om.</string>
     <string name="navigation_points">Tačke navođenja</string>
@@ -4411,7 +4411,7 @@
     <string name="routing_attr_hazmat_category_description">Vrsta opasnih materije / razmotri dozvole za pristup sa opasnim materijema</string>
     <string name="distance_circles">Krugovi rastojanja</string>
     <string name="circle_settings">Podešavanja kruga</string>
-    <string name="routing_attr_avoid_4wd_only_name">Izbegavati puteve za 4WD vozila</string>
+    <string name="routing_attr_avoid_4wd_only_name">Puteve za 4WD vozila</string>
     <string name="bearing_secondary_desc">Možeš promeniti u: %1$s – %2$s – %3$s.</string>
     <string name="radius_rules_widget_desc">Alat radijus lenjir prikazuje krugove udaljenosti oko odabrane tačke na mapi.</string>
     <string name="current_time_widget_desc">Prikazuje trenutno vreme tvog uređaja.</string>
@@ -4657,7 +4657,7 @@
     <string name="backup_deleting_all_data">Brišem sve podatke…</string>
     <string name="logout_from_osmand_cloud_decsr">Odjavljuješ se?
 \nMoraćeš da se prijaviš ponovo da napraviš kopiju ili da povratiš podatke.</string>
-    <string name="routing_attr_avoid_tunnels_description">Izbegavati tunele</string>
+    <string name="routing_attr_avoid_tunnels_description">Tunele</string>
     <string name="make_backup">Napravi rezervnu kopiju</string>
     <string name="backup_now">Napravi rezervnu kopija sada</string>
     <string name="backup_complete">Sačuvana rezervna kopija</string>
