@@ -27,7 +27,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -183,6 +183,25 @@ public class RoutingContext {
 
 	public int getPlanRoadDirection() {
 		return config.planRoadDirection;
+	}
+	
+	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> targets) {
+		startX = MapUtils.get31TileNumberX(start.getLongitude());
+		startY = MapUtils.get31TileNumberY(start.getLatitude());
+		targetX = MapUtils.get31TileNumberX(end.getLongitude());
+		targetY = MapUtils.get31TileNumberY(end.getLatitude());
+		if (targets != null && targets.size() > 0) {
+			intermediatesX = new int[targets.size()];
+			intermediatesY = new int[targets.size()];
+			for (int i = 0; i < targets.size(); i++) {
+				LatLon l = targets.get(i);
+				intermediatesX[i] = MapUtils.get31TileNumberX(l.getLongitude());
+				intermediatesY[i] = MapUtils.get31TileNumberY(l.getLatitude());
+			}
+		} else {
+			intermediatesX = new int[0];
+			intermediatesY = new int[0];
+		}
 	}
 
 	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {

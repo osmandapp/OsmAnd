@@ -1,13 +1,11 @@
 package net.osmand.router;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import gnu.trove.list.array.TIntArrayList;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -167,7 +165,7 @@ public class PrecalculatedRouteDirection {
 		int x31;
 		int y31;
 		boolean start;
-		if(l1 == startPoint || l1 == endPoint) {
+		if (l1 == startPoint || l1 == endPoint) {
 			start = l1 == startPoint;
 			x31 = ex31;
 			y31 = ey31;
@@ -249,15 +247,7 @@ public class PrecalculatedRouteDirection {
 		return ((long) x31) << 32l + ((long)y31);
 	}
 	
-	public void setFollowNext(boolean followNext) {
-		this.followNext = followNext;
-	}
-	
-	public boolean isFollowNext() {
-		return followNext;
-	}
-	
-	
+
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
 		int ind2 = getIndex(ctx.targetX, ctx.targetY);
@@ -272,18 +262,11 @@ public class PrecalculatedRouteDirection {
 		PrecalculatedRouteDirection routeDirection = new PrecalculatedRouteDirection(this, ind1, ind2);
 		routeDirection.startPoint = calc(ctx.startX, ctx.startY);
 		routeDirection.startFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind1], pointsY[ind1], ctx.startX, ctx.startY) / maxSpeed;
-//		routeDirection.startX31 = ctx.startX;
-//		routeDirection.startY31 = ctx.startY;
 		routeDirection.endPoint = calc(ctx.targetX, ctx.targetY);
 		routeDirection.endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind2], pointsY[ind2], ctx.targetX, ctx.targetY) / maxSpeed;
 		routeDirection.followNext = followNext;
-		
-//		routeDirection.endX31 = ctx.targetX;
-//		routeDirection.endY31 = ctx.targetY;
 		return routeDirection;
 	}
-
-
 	
 
 }
