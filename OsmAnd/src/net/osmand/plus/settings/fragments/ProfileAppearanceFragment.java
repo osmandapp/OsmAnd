@@ -449,7 +449,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			ViewGroup container = (ViewGroup) holder.itemView;
-//			LinearLayout container = (LinearLayout) holder.findViewById(R.id.color_items_container);
 			container.removeAllViews();
 			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsPaletteController());
 			container.addView(colorsPaletteCard.build(app));
