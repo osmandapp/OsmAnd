@@ -1725,7 +1725,7 @@
     <string name="item_removed">Stavka je uklonjena</string>
     <string name="rendering_attr_hideIcons_name">TOI ikone</string>
     <string name="switch_start_finish">Zameni polaznu i odredišnu tačku</string>
-    <string name="shared_string_select">Označi</string>
+    <string name="shared_string_select">Odabrati</string>
     <string name="road_blocked">Blokiran put</string>
     <string name="add_time_span">Dodaj vremenski razmak</string>
     <string name="clear_updates_proposition_message">Ukloni preuzeta aćuriranja i vratiti se na izvornu mapu</string>
