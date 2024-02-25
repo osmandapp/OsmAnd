@@ -5179,7 +5179,7 @@
     <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
     <string name="shared_string_finger">Палец</string>
     <string name="external_device_characteristic_cuff_pressure">Давление в манжете</string>
-    <string name="visible_in_3d_mode">На экране, когда 3D включён</string>
+    <string name="visible_in_3d_mode">Виден, когда карта наклонена</string>
     <string name="poi_categories">Категории POI</string>
     <string name="shared_string_ear_lobe">Мочка уха</string>
     <string name="map_3d_mode_hint">Удерживайте кнопку для изменения положения.</string>
