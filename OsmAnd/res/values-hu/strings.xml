@@ -5624,5 +5624,5 @@
     <string name="shared_string_limit">Korlátozás</string>
     <string name="shared_string_speedometer">Sebességmérő</string>
     <string name="speed_limit_warning">Sebességkorlátozási figyelmeztetés</string>
-    <string name="help_article_setup_a_route_name">Egy útvonal beállítása</string>
+    <string name="help_article_setup_a_route_name">Útvonal beállítása</string>
 </resources>
