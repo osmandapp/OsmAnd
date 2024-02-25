@@ -5489,13 +5489,13 @@
     <string name="save_as_smart_folder">Salvează ca folder inteligent</string>
     <string name="delete_smart_folder_dialog_message">Aceasta va șterge folderul inteligent \"%1$s\".</string>
     <string name="empty_smart_folder_title">Niciun traseu găsit</string>
-    <string name="empty_smart_folder_description">Toate traseele ce se potrivesc vor apărea aici</string>
+    <string name="empty_smart_folder_description">Track-uri corespunzătoare apar aici</string>
     <string name="configure_filter">Configurare filtru</string>
     <string name="no_config_smart_folder_title">Neconfigurat</string>
     <string name="discard_filter_changes">Renunță la modificările filtrelor</string>
     <string name="shared_string_loading">Se încarcă</string>
-    <string name="discard_filter_changes_prompt">Sigur doriți să resetați toate filtrele?</string>
-    <string name="no_config_smart_folder_description">Folderele inteligente vă permit să grupați trasee în funcție de filtrele aplicate</string>
+    <string name="discard_filter_changes_prompt">Resetați toate filtrele?</string>
+    <string name="no_config_smart_folder_description">Folderele inteligente permit gruparea pieselor în funcție de filtrele aplicate</string>
     <string name="loading_tracks">Se reîncarcă traseele</string>
     <string name="searching_matching_tracks">Caută toate traseele ce se potrivesc</string>
     <plurals name="tracks">
@@ -5538,7 +5538,7 @@
     <string name="key_bindings">Asignări de taste</string>
     <string name="not_specified">Nespecificat</string>
     <string name="shared_string_delete_item">Șterge elementul</string>
-    <string name="cloud_trash_clear_confirmation">Sunteți sigur că doriți să ștergeți definitiv toate elementele din Coșul de gunoi? Această acțiune nu poate fi anulată.</string>
+    <string name="cloud_trash_clear_confirmation">Ștergeți definitiv toate elementele din coșul de gunoi?</string>
     <string name="restore_from_trash">Restaurare din coșul de gunoi</string>
     <string name="delete_all_items">Șterge toate elementele</string>
     <string name="trash_is_empty_banner_desc">Fișierele eliminate din OsmAnd Cloud vor fi disponibile aici timp de %1$s zile.</string>
@@ -5553,7 +5553,7 @@
     <string name="folder">Folder</string>
     <string name="change_button">Comută butonul</string>
     <string name="enable_to_use_external_input_device">Activați utilizarea dispozitivului de intrare extern cu OsmAnd</string>
-    <string name="remove_type_q">Sunteți sigur că doriți să eliminați tipul \"%1$s\"?</string>
+    <string name="remove_type_q">Eliminați tipul \"%1$s\"?</string>
     <string name="add_new_type">Adăugă tip nou</string>
     <string name="reset_key_assignments_desc">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
     <string name="rendering_attr_showToll_name">Arată restricțiile de taxare</string>
