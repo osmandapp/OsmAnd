@@ -67,6 +67,7 @@ public class ProfileColorController extends ColorsPaletteController implements I
 					appMode, predefinedColors, settings.PROFILE_COLORS_PALETTE
 			);
 			controller = new ProfileColorController(app, colorsCollection, selectedColor);
+			dialogManager.register(PROCESS_ID, controller);
 		}
 		controller.setPaletteListener(listener);
 		return controller;

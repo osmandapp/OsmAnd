@@ -42,6 +42,7 @@ public class EditorColorController extends ColorsPaletteController implements ID
 			List<PaletteColor> predefinedColors = Arrays.asList(PaletteColors.values());
 			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.TRACK_COLORS_PALETTE);
 			controller = new EditorColorController(app, colorsCollection, selectedColor);
+			dialogManager.register(PROCESS_ID, controller);
 		}
 		controller.setPaletteListener(listener);
 		return controller;
