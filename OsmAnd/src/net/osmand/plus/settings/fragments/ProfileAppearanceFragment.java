@@ -26,6 +26,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -440,23 +441,24 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
-			ProfileColorController.destroyInstance(app);
+			ProfileColorController.onDestroy(app);
 		}
 	}
 
 	private void createColorsCard(PreferenceViewHolder holder) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
+		if (mapActivity != null) {
+			ViewGroup container = (ViewGroup) holder.itemView;
+//			LinearLayout container = (LinearLayout) holder.findViewById(R.id.color_items_container);
+			container.removeAllViews();
+			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsPaletteController());
+			container.addView(colorsPaletteCard.build(app));
+			updateColorName();
 		}
-		FlowLayout colorsCardContainer = (FlowLayout) holder.findViewById(R.id.color_items);
-		colorsCardContainer.removeAllViews();
-		ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsCardController());
-		colorsCardContainer.addView(colorsPaletteCard.build(app));
-		updateColorName();
 	}
 
-	private ColorsPaletteController getColorsCardController() {
+	@NonNull
+	private ColorsPaletteController getColorsPaletteController() {
 		return ProfileColorController.getOrCreateInstance(
 				app, getSelectedAppMode(), this, changedProfile.getActualColor(), isNightMode()
 		);
@@ -691,7 +693,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 		if (getActivity() != null) {
 			hideKeyboard();
 			if (isChanged() && checkProfileName()) {
-				getColorsCardController().refreshLastUsedTime();
+				getColorsPaletteController().refreshLastUsedTime();
 				saveProfile();
 			}
 		}
@@ -869,7 +871,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	}
 
 	private void updateColorName() {
-		PaletteColor selectedColor = getColorsCardController().getSelectedColor();
+		PaletteColor selectedColor = getColorsPaletteController().getSelectedColor();
 		if (selectedColor != null && colorName != null) {
 			colorName.setText(selectedColor.toHumanString(app));
 		}

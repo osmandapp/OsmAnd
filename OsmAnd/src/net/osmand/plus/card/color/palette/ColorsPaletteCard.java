@@ -23,7 +23,13 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
 	public ColorsPaletteCard(@NonNull FragmentActivity activity,
 	                         @NonNull IColorsPaletteController controller) {
-		super(activity);
+		this(activity, controller, true);
+	}
+
+	public ColorsPaletteCard(@NonNull FragmentActivity activity,
+	                         @NonNull IColorsPaletteController controller,
+	                         boolean usedOnMap) {
+		super(activity, usedOnMap);
 		this.controller = controller;
 		controller.bindPalette(this);
 		paletteElements = new ColorsPaletteElements(activity, nightMode);
@@ -52,7 +58,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 
 	private void setupAddCustomColorButton() {
 		ViewGroup container = view.findViewById(R.id.add_button_container);
-		container.addView(paletteElements.createButtonAddColorView(container, true));
+		container.addView(paletteElements.createButtonAddColorView(container));
 		container.setOnClickListener(v -> controller.onAddColorButtonClicked(activity));
 	}
 

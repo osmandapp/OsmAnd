@@ -439,16 +439,14 @@
 						android:textColor="?android:textColorSecondary"
 						android:textSize="@dimen/default_desc_text_size"
 						osmand:typeface="@string/font_roboto_medium"
-						android:paddingStart="@dimen/content_padding"
-						android:paddingEnd="@dimen/content_padding" />
+						android:paddingHorizontal="@dimen/content_padding" />
+
 				</LinearLayout>
 
 				<FrameLayout
 					android:id="@+id/colors_card_container"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
-					android:layout_marginBottom="@dimen/content_padding_half" />
+					android:layout_height="wrap_content" />
 
 				<View
 					android:layout_width="match_parent"

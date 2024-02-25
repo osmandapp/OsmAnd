@@ -25,7 +25,7 @@ public class ProfileColorController extends ColorsPaletteController implements I
 
 	private ProfileColorController(@NonNull OsmandApplication app,
 	                               @NonNull ColorsCollection colorsCollection,
-	                               int selectedColor) {
+	                               @ColorInt int selectedColor) {
 		super(app, colorsCollection, selectedColor);
 	}
 
@@ -42,11 +42,12 @@ public class ProfileColorController extends ColorsPaletteController implements I
 		return true;
 	}
 
-	public static void destroyInstance(@NonNull OsmandApplication app) {
+	public static void onDestroy(@NonNull OsmandApplication app) {
 		DialogManager manager = app.getDialogManager();
 		manager.unregister(PROCESS_ID);
 	}
 
+	@NonNull
 	public static ProfileColorController getOrCreateInstance(@NonNull OsmandApplication app,
 	                                                         @NonNull ApplicationMode appMode,
 	                                                         @NonNull OnColorsPaletteListener listener,

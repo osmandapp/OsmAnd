@@ -6,7 +6,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/setting_list_item_large_height"
+		android:layout_height="wrap_content"
 		android:orientation="horizontal">
 
 		<androidx.recyclerview.widget.RecyclerView
@@ -15,7 +15,8 @@
 			android:layout_height="wrap_content"
 			android:paddingStart="@dimen/content_padding"
 			android:paddingEnd="0dp"
-			android:layout_gravity="center_vertical"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_gravity="top"
 			android:layout_weight="1" />
 
 		<FrameLayout
@@ -23,7 +24,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_gravity="center_vertical|end" />
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_gravity="top|end" />
 
 	</LinearLayout>
 

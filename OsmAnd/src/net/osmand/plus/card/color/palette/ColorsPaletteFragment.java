@@ -163,7 +163,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 
 	@NonNull
 	private View createAddCustomColorItemView(FlowLayout rootView) {
-		View view = paletteElements.createButtonAddColorView(rootView, false);
+		View view = paletteElements.createButtonAddColorView(rootView);
 		view.setOnClickListener(v -> controller.onAddColorButtonClicked(requireActivity()));
 		return view;
 	}
