@@ -51,12 +51,16 @@ public class OsmOAuthAuthorizationAdapter {
 		String secret;
 		if (plugin.OSM_USE_DEV_URL.get()) {
 			api20 = new OsmOAuthAuthorizationClient.OsmDevApi();
+			key = app.getString(R.string.osm_oauth2_dev_id);
+			secret = app.getString(R.string.osm_oauth2_dev_secret);
 		} else {
 			api20 = new OsmOAuthAuthorizationClient.OsmApi();
+			key = app.getString(R.string.osm_oauth2_client_id);
+			secret = app.getString(R.string.osm_oauth2_client_secret);
 		}
-		key = app.getString(R.string.osm_oauth2_client_id);
-		secret = app.getString(R.string.osm_oauth2_client_secret);
-		client = new OsmOAuthAuthorizationClient(key, secret, api20);
+		String redirectUri = app.getString(R.string.oauth2_redirect_uri);
+		String scope = app.getString(R.string.oauth2_scope);
+		client = new OsmOAuthAuthorizationClient(key, secret, api20, redirectUri, scope);
 		restoreToken();
 	}
 
@@ -74,7 +78,7 @@ public class OsmOAuthAuthorizationAdapter {
 
 	public void restoreToken() {
 		String token = plugin.OSM_USER_ACCESS_TOKEN.get();
-		String tokenSecret = plugin.OSM_USER_ACCESS_TOKEN_SECRET.get();
+		String tokenSecret = client.getApiSecret();
 		if (!(token.isEmpty() || tokenSecret.isEmpty())) {
 			client.setAccessToken(new OAuth2AccessToken(token, tokenSecret));
 		} else {

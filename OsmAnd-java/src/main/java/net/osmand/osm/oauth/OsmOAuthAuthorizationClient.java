@@ -25,18 +25,18 @@ import java.util.concurrent.ExecutionException;
  */
 public class OsmOAuthAuthorizationClient {
     private OAuth2AccessToken accessToken;
+    private String apiSecret;
     private final OAuth20Service service;
     private final OsmAndJDKHttpClient httpClient;
     public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationClient.class);
-    // pJp6-B.EMQ#YXw@
-    public OsmOAuthAuthorizationClient(String key, String secret, DefaultApi20 api) {
+    public OsmOAuthAuthorizationClient(String key, String apiSecret, DefaultApi20 api, String redirectUri, String scope) {
+        this.apiSecret = apiSecret;
         httpClient = new OsmAndJDKHttpClient(JDKHttpClientConfig.defaultConfig());
         service = new ServiceBuilder(key)
-                .apiKey(key)
-                .apiSecret(secret)
+                .apiSecret(apiSecret)
                 .httpClient(httpClient)
-                .defaultScope("read_prefs write_api write_gpx write_notes write_redactions")
-                .callback("https://osmand.net/redirect-url")
+                .defaultScope(scope)
+                .callback(redirectUri)
                 .build(api);
     }
 
@@ -78,6 +78,10 @@ public class OsmOAuthAuthorizationClient {
 
     public OAuth2AccessToken getAccessToken() {
         return accessToken;
+    }
+
+    public String getApiSecret() {
+        return apiSecret;
     }
 
     public Response performRequestWithoutAuth(String url, String requestMethod, String requestBody)
