@@ -337,6 +337,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				progressBarVisible = false;
 				updateInfoView();
 				updateInfoViewAppearance();
+				recalculateSrtmOrHeightmapIfNeeded();
 			}
 
 			@Override
@@ -916,10 +917,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			calculateHeightmapTask = new HeightsResolverTask(gpxFile, gpx -> {
 				calculateHeightmapTask = null;
 
-				updateInfoView();
 				if (gpx == null) {
 					app.showToastMessage(R.string.error_calculate);
+				} else {
+					List<WptPt> sourcePoints = gpxFile.getAllSegmentsPoints();
+					List<WptPt> targetPoints = editingCtx.getAllBeforePoints();
+					if (sourcePoints.size() == targetPoints.size()) {
+						for (int i = 0; i < sourcePoints.size(); i++) {
+							targetPoints.get(i).ele = sourcePoints.get(i).ele;
+						}
+					}
 				}
+
+				updateInfoView();
 			});
 			calculateHeightmapTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
@@ -1204,6 +1214,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void calculateOnlineSelected(int segmentIndex) {
 		setMode(CALCULATE_SRTM_MODE, true);
+		editingCtx.setInsertIntermediates(true);
 		calculateSrtmTrack();
 		setInfoType(InfoType.GRAPH);
 		infoTypeBtn.setSelectedItem(graphBtn);
@@ -1213,6 +1224,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void calculateOfflineSelected(int segmentIndex) {
 		setMode(CALCULATE_HEIGHTMAP_MODE, true);
+		editingCtx.setInsertIntermediates(true);
 		calculateHeightmapTrack();
 		setInfoType(InfoType.GRAPH);
 		infoTypeBtn.setSelectedItem(graphBtn);
@@ -1766,19 +1778,24 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void doAddOrMovePointCommonStuff() {
-		if (isCalculateSrtmMode()) {
-			stopUploadFileTask(false);
-			calculateSrtmTrack();
-		} else if (isCalculateHeightmapMode()) {
-			stopCalculatingHeightMapTask(false);
-			calculateHeightmapTrack();
-		}
-
+		recalculateSrtmOrHeightmapIfNeeded();
 		enable(upDownBtn);
 		updateUndoRedoButton(true, undoBtn);
 		updateUndoRedoButton(false, redoBtn);
 		updateDistancePointsText();
 		updateInfoView();
+	}
+
+	private void recalculateSrtmOrHeightmapIfNeeded() {
+		if (!isProgressBarVisible()) {
+			if (isCalculateSrtmMode()) {
+				stopUploadFileTask(false);
+				calculateSrtmTrack();
+			} else if (isCalculateHeightmapMode()) {
+				stopCalculatingHeightMapTask(false);
+				calculateHeightmapTrack();
+			}
+		}
 	}
 
 	private void updateMapDisplayPosition() {
@@ -2367,7 +2384,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			InputStream inputStream = new ByteArrayInputStream(response.getBytes());
 			GpxFileLoaderTask.loadGpxFile(inputStream, getActivity(), gpxFile -> {
 				if (gpxFile.error == null) {
-					List<WptPt> points = editingCtx.getPoints();
+					List<WptPt> points = editingCtx.getAllBeforePoints();
 					List<WptPt> segmentsPoints = gpxFile.getAllSegmentsPoints();
 					if (points.size() == segmentsPoints.size()) {
 						for (int i = 0; i < points.size(); i++) {
