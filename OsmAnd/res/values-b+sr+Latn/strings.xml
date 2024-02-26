@@ -1472,7 +1472,7 @@
     <string name="traffic_warning_payment">Naplata putarine</string>
     <string name="traffic_warning_border_control">Granična kontrola</string>
     <string name="print_route">Štampaj rutu</string>
-    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_routes">Rute</string>
     <string name="rendering_attr_busRoutes_name">Autobuski rute</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rute trolejbusa</string>
@@ -2205,7 +2205,7 @@
     <string name="distance_indication_descr">Odaberite kako prikazati udaljenost do aktivnih markera.</string>
     <string name="shared_string_do_not_use">Nemoj koristiti</string>
     <string name="shared_string_yes">Da</string>
-    <string name="shared_string_cancel">Odustani</string>
+    <string name="shared_string_cancel">Otkazati</string>
     <string name="shared_string_ok">U redu</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="general_settings_2">Opšta podešavanja</string>
@@ -3299,7 +3299,7 @@
     <string name="simulate_navigation">Simulacija rute</string>
     <string name="show_along_the_route">Prikazati duž rute</string>
     <string name="avoid_roads_descr">Na ruti izbegavati:</string>
-    <string name="app_mode_public_transport">Javni saobraćaj</string>
+    <string name="app_mode_public_transport">Javni prevoz</string>
     <string name="waiting_for_route_calculation">Izračunavanje rute…</string>
     <string name="points_of_interests">Tačke od interesa (TOI)</string>
     <string name="route_way">Put</string>
