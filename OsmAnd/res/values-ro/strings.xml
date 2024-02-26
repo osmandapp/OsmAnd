@@ -1894,7 +1894,7 @@
     <string name="shared_string_color">Culoare</string>
     <string name="select_gpx_folder">Selectați folderul fișierului GPX</string>
     <string name="file_can_not_be_moved">Nu s-a putut muta fișierul.</string>
-    <string name="shared_string_move">Mută</string>
+    <string name="shared_string_move">Mutați</string>
     <string name="shared_string_gpx_tracks">Trasee</string>
     <string name="routing_attr_driving_style_name">Stil de mers</string>
     <string name="shared_string_time">Timp</string>
@@ -4886,7 +4886,7 @@
     <string name="shared_string_switch_mode">Schimbă modul</string>
     <string name="click_on_widget">Atingeți widgetul</string>
     <string name="shared_string_shows">Arată</string>
-    <string name="favorite_confirm_delete_group">Sunteți sigur că doriți să ștergeți grupul \"%1$s\" și toate punctele incluse (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Ștergeți grupul \"%1$s\" și toate punctele incluse (%2$d)?</string>
     <string name="how_to_use">Cum se utilizează:</string>
     <string name="distance_by_tap_use_description">Atingeți harta pentru a vizualiza distanța dintre locația dumneavoastră curentă și punctul atins.
 \nAtingeți cu 2 degete pentru a vizualiza distanța dintre punctele atinse</string>
@@ -5537,13 +5537,13 @@
     <string name="external_input_device_title">Dispozitiv de intrare extern</string>
     <string name="key_bindings">Asignări de taste</string>
     <string name="not_specified">Nespecificat</string>
-    <string name="shared_string_delete_item">Șterge elementul</string>
+    <string name="shared_string_delete_item">Ștergeți elementul</string>
     <string name="cloud_trash_clear_confirmation">Ștergeți definitiv toate elementele din coșul de gunoi?</string>
     <string name="restore_from_trash">Restaurare din coșul de gunoi</string>
     <string name="delete_all_items">Șterge toate elementele</string>
     <string name="trash_is_empty_banner_desc">Fișierele eliminate din OsmAnd Cloud vor fi disponibile aici timp de %1$s zile.</string>
     <string name="shared_string_empty_trash">Golește coșul de gunoi</string>
-    <string name="shared_string_delete_immediately">Șterge imediat</string>
+    <string name="shared_string_delete_immediately">Ștergeți imediat</string>
     <string name="trash_alert_card_desc">Elementele din coșul de gunoi vor fi șterse după %1$s zile.</string>
     <string name="trash_is_empty">Coșul de gunoi este gol</string>
     <string name="shared_string_trash">Coș de gunoi</string>
