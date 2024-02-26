@@ -1692,7 +1692,7 @@
     <string name="pick_up_till">Ridică până</string>
     <string name="without_time_limit">Fără limită de timp</string>
     <string name="context_menu_read_full_article">Citește tot articolul</string>
-    <string name="context_menu_read_article">Citește articolul</string>
+    <string name="context_menu_read_article">Citiți articolul</string>
     <string name="context_menu_points_of_group">Toate punctele grupului</string>
     <string name="open_from">Deschide de la</string>
     <string name="open_till">Deschis până la</string>
@@ -1860,9 +1860,9 @@
     <string name="nearest_cities">Orașe apropiate</string>
     <string name="select_city">Selectați orașul</string>
     <string name="select_postcode">Cautare cod poștal</string>
-    <string name="quick_action_auto_zoom">Pornește/oprește zoom automat hartă</string>
-    <string name="quick_action_auto_zoom_on">Pornește zoomul automat</string>
-    <string name="quick_action_auto_zoom_off">Oprește zoomul automat</string>
+    <string name="quick_action_auto_zoom">Hartă cu zoom automat</string>
+    <string name="quick_action_auto_zoom_on">Activați auto-zoom</string>
+    <string name="quick_action_auto_zoom_off">Oprește auto-zoom</string>
     <string name="quick_action_add_destination">Setează destinație</string>
     <string name="quick_action_replace_destination">Înlocuiește destinația</string>
     <string name="quick_action_add_first_intermediate">Adaugă primul punct intermediar</string>
@@ -3745,7 +3745,7 @@
     <string name="quick_action_replace_destination_desc">Un buton pentru a face ca ecranul să centreze noua destinație a traseului, înlocuind destinația selectată anterior (dacă este cazul).</string>
     <string name="quick_action_directions_from_desc">Un buton pentru a face din centrul ecranului punctul de plecare. Va cere apoi să setați destinația sau să declanșați calculul traseului.</string>
     <string name="quick_action_add_destination_desc">Un buton pentru a face ca destinația traseului să fie centrată pe ecran, o destinație selectată anterior va deveni ultima destinație intermediară.</string>
-    <string name="quick_action_auto_zoom_desc">Buton pentru a activa sau dezactiva zoomul automat controlat de viteză.</string>
+    <string name="quick_action_auto_zoom_desc">Buton pentru a activa sau dezactiva zoom-ul automat control-viteză.</string>
     <string name="animate_my_location_desc">Panoramare uniformă a hărții în timpul mișcării. Introduce o ușoară întârziere.</string>
     <string name="replace_all_desc">Elementele curente vor fi înlocuite cu elemente din fișierul</string>
     <string name="show_from_zoom_level">Afișarea începe la nivelul de zoom</string>
