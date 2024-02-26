@@ -5537,7 +5537,7 @@
     <string name="external_input_device_title">Dispozitiv de intrare extern</string>
     <string name="key_bindings">Asignări de taste</string>
     <string name="not_specified">Nespecificat</string>
-    <string name="shared_string_delete_item">Ștergeți elementul</string>
+    <string name="shared_string_delete_item">Șterge elementul</string>
     <string name="cloud_trash_clear_confirmation">Ștergeți definitiv toate elementele din coșul de gunoi?</string>
     <string name="restore_from_trash">Restaurare din coșul de gunoi</string>
     <string name="delete_all_items">Șterge toate elementele</string>
