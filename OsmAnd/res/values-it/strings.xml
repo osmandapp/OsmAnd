@@ -3058,7 +3058,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Morbido</string>
     <string name="routeInfo_tracktype_name">Rigidità della superficie</string>
     <string name="shared_string_file_is_saved">%s è salvato</string>
-    <string name="shared_string_open_track">Apri traccia</string>
+    <string name="shared_string_open_track">Apri la traccia</string>
     <string name="shared_string_track_is_saved">Traccia %s salvata</string>
     <string name="turn_on_profile_desc">Per favore attiva almeno un profilo dell\'app da utilizzare con questa impostazione.</string>
     <string name="app_mode_campervan">Camper (RV)</string>
@@ -3872,7 +3872,7 @@
     <string name="plan_route_split_before">Spezza</string>
     <string name="announcement_time_arrive">Arrivo a destinazione</string>
     <string name="shared_string_turn">Svolta</string>
-    <string name="start_recording">Avvia registrazione</string>
+    <string name="start_recording">Inizia registrazione</string>
     <string name="show_track_on_map">Mostra il percorso sulla mappa</string>
     <string name="routing_engine_vehicle_type_wheelchair">Sedia a rotelle</string>
     <string name="routing_engine_vehicle_type_hiking">Escursionismo</string>
@@ -4874,7 +4874,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">inHg</string>
+    <string name="weather_pressure_inhg">mmHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5143,7 +5143,7 @@
     <string name="external_device_characteristic_distance">Distanza</string>
     <string name="save_track_external_sensors_data">Dati</string>
     <string name="delete_folder_question">Eliminare la cartella\?</string>
-    <string name="delete_folder">Eliminare la cartella</string>
+    <string name="delete_folder">Elimina la cartella</string>
     <string name="map_widget_rssi">RSSI</string>
     <string name="tracks_empty_folder_description">Questa cartella non ha ancora alcuna traccia.</string>
     <string name="external_device_characteristic_speed">Velocità</string>
@@ -5335,7 +5335,7 @@
     <string name="local_indexes_category_terrain">Mappe del terreno (3D)</string>
     <string name="contact_us">Contattaci</string>
     <string name="help_article_map_legend_nautical_map_name">Stile mappa nautica</string>
-    <string name="help_article_navigation_guidance_name">Norma</string>
+    <string name="help_article_navigation_guidance_name">Guida alla navigazione</string>
     <string name="help_article_navigation_routing_horse_routing_name">Itinerario a cavallo</string>
     <string name="help_article_navigation_routing_pedestrian_routing_name">Percorso a piedi</string>
     <string name="help_article_navigation_routing_ski_routing_name">Percorsi sciistici</string>
@@ -5614,4 +5614,10 @@
     <string name="custom_map_button_name_present">Tale pulsante è già presente</string>
     <string name="special_routing_cpp">Tipo di percorso speciale</string>
     <string name="target_elevation">Elevazione del bersaglio</string>
+    <string name="shared_string_limit">Limite</string>
+    <string name="when_exceeded">Quando superato</string>
+    <string name="shared_string_speedometer">Tachimetro</string>
+    <string name="help_article_setup_a_route_name">Imposta un percorso</string>
+    <string name="speed_limit_warning">Avviso limite di velocità</string>
+    <string name="speedometer_description">Mostra la velocità attuale come riportata dal GPS</string>
 </resources>
