@@ -1894,7 +1894,7 @@
     <string name="shared_string_color">Culoare</string>
     <string name="select_gpx_folder">Selectați folderul fișierului GPX</string>
     <string name="file_can_not_be_moved">Nu s-a putut muta fișierul.</string>
-    <string name="shared_string_move">Mutați</string>
+    <string name="shared_string_move">Mută</string>
     <string name="shared_string_gpx_tracks">Trasee</string>
     <string name="routing_attr_driving_style_name">Stil de mers</string>
     <string name="shared_string_time">Timp</string>
@@ -5543,7 +5543,7 @@
     <string name="delete_all_items">Șterge toate elementele</string>
     <string name="trash_is_empty_banner_desc">Fișierele eliminate din OsmAnd Cloud vor fi disponibile aici timp de %1$s zile.</string>
     <string name="shared_string_empty_trash">Golește coșul de gunoi</string>
-    <string name="shared_string_delete_immediately">Ștergeți imediat</string>
+    <string name="shared_string_delete_immediately">Șterge imediat</string>
     <string name="trash_alert_card_desc">Elementele din coșul de gunoi vor fi șterse după %1$s zile.</string>
     <string name="trash_is_empty">Coșul de gunoi este gol</string>
     <string name="shared_string_trash">Coș de gunoi</string>
