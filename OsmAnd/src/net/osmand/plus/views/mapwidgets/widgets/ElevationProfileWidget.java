@@ -38,6 +38,7 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.GPXHighlight;
@@ -70,7 +71,7 @@ public class ElevationProfileWidget extends MapWidget {
 	private View uphillView;
 	private View downhillView;
 	private View gradeView;
-	private LineChart chart;
+	private ElevationChart chart;
 
 	private GpxDisplayItem gpxItem;
 	private TrkSegment segment;
@@ -233,7 +234,7 @@ public class ElevationProfileWidget extends MapWidget {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		int profileColor = appMode.getProfileColor(isNightMode());
 		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
-		ChartUtils.setupGPXChart(chart, 24f, 16f, true, markerIcon);
+		chart.setupGPXChart(24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);

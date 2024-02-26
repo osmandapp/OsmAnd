@@ -24,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
@@ -195,8 +196,8 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
-		LineChart mChart = view.findViewById(R.id.chart);
-		ChartUtils.setupGPXChart(mChart, 24f, 16f, true);
+		ElevationChart mChart = view.findViewById(R.id.chart);
+		mChart.setupGPXChart(24f, 16f, true);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData()) {

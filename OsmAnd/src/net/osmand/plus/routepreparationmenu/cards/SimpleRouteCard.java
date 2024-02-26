@@ -31,6 +31,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper;
@@ -109,11 +110,11 @@ public class SimpleRouteCard extends MapBaseCard {
 	}
 
 	private void setupChart() {
-		LineChart chart = view.findViewById(R.id.chart);
+		ElevationChart chart = view.findViewById(R.id.chart);
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		if (analysis.hasElevationData()) {
-			ChartUtils.setupGPXChart(chart, 10f, 4f, false);
+			chart.setupGPXChart(10f, 4f, false);
 
 			LineData data = lineData;
 			if (data == null) {

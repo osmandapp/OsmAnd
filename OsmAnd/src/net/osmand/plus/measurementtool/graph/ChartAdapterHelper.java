@@ -15,6 +15,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.graph.BaseChartAdapter.ExternalValueSelectedListener;
 import net.osmand.plus.measurementtool.graph.BaseChartAdapter.ExternalGestureListener;
@@ -36,7 +37,7 @@ public class ChartAdapterHelper {
 			return;
 		}
 
-		LineChart mainChart = mainGraphAdapter.getChart();
+		ElevationChart mainChart = mainGraphAdapter.getChart();
 		@SuppressLint("ClickableViewAccessibility")
 		View.OnTouchListener mainChartTouchListener = (v, ev) -> {
 			if (mainView != null) {
@@ -102,7 +103,7 @@ public class ChartAdapterHelper {
 	                                           @NonNull MapActivity mapActivity,
 	                                           @NonNull TrackDetailsMenu detailsMenu) {
 		RefreshMapCallback refreshMapCallback = (fitTrackOnMap, forceFit, recalculateXAxis) -> {
-			LineChart chart = graphAdapter.getChart();
+			ElevationChart chart = graphAdapter.getChart();
 			OsmandApplication app = mapActivity.getMyApplication();
 			if (!app.getRoutingHelper().isFollowingMode()) {
 				detailsMenu.refreshChart(chart, fitTrackOnMap, forceFit, recalculateXAxis);

@@ -112,7 +112,7 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
-		<com.github.mikephil.charting.charts.LineChart
+		<net.osmand.plus.charts.ElevationChart
 			android:id="@+id/chart"
 			android:layout_width="match_parent"
 			android:layout_height="120dp"

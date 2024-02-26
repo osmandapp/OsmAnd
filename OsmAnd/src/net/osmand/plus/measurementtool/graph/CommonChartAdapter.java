@@ -19,6 +19,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.dialogs.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
@@ -28,7 +29,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
+public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineData, GpxDisplayItem> {
 
 	private Highlight highlight;
 	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
@@ -36,7 +37,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 
 	private GPXTabItemType gpxGraphType;
 
-	public CommonChartAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
+	public CommonChartAdapter(OsmandApplication app, ElevationChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 

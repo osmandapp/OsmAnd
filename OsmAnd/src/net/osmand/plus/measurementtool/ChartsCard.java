@@ -33,6 +33,7 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -104,7 +105,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		setupScrollListener();
 
-		LineChart lineChart = view.findViewById(R.id.line_chart);
+		ElevationChart lineChart = view.findViewById(R.id.line_chart);
 		HorizontalBarChart barChart = view.findViewById(R.id.horizontal_chart);
 		commonGraphAdapter = new CommonChartAdapter(app, lineChart, true);
 		customGraphAdapter = new CustomChartAdapter(app, barChart, true);
@@ -499,7 +500,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public LineData getChartData() {
-			ChartUtils.setupGPXChart(commonGraphAdapter.getChart(), 24f, 16f, true);
+			commonGraphAdapter.getChart().setupGPXChart(24f, 16f, true);
 			List<ILineDataSet> dataSets = ChartUtils.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);

@@ -1,7 +1,6 @@
 package net.osmand.plus.charts;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
@@ -11,14 +10,11 @@ import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -46,7 +42,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
@@ -61,94 +56,6 @@ public class ChartUtils {
 
 	public static final int CHART_LABEL_COUNT = 3;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
-
-	public static void setupGPXChart(@NonNull LineChart mChart) {
-		setupGPXChart(mChart, 24f, 16f, true);
-	}
-
-	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
-	                                 boolean useGesturesAndScale) {
-		setupGPXChart(mChart, topOffset, bottomOffset, useGesturesAndScale, null);
-	}
-
-	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
-	                                 boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
-		GpxMarkerView markerView = new GpxMarkerView(mChart.getContext(), markerIcon);
-		setupGPXChart(mChart, markerView, topOffset, bottomOffset, useGesturesAndScale);
-	}
-
-	public static void setupGPXChart(@NonNull LineChart mChart, @NonNull GpxMarkerView markerView,
-	                                 float topOffset, float bottomOffset, boolean useGesturesAndScale) {
-		Context context = mChart.getContext();
-
-		mChart.setHardwareAccelerationEnabled(true);
-		mChart.setTouchEnabled(useGesturesAndScale);
-		mChart.setDragEnabled(useGesturesAndScale);
-		mChart.setScaleEnabled(useGesturesAndScale);
-		mChart.setPinchZoom(useGesturesAndScale);
-		mChart.setScaleYEnabled(false);
-		mChart.setAutoScaleMinMaxEnabled(true);
-		mChart.setDrawBorders(false);
-		mChart.getDescription().setEnabled(false);
-		mChart.setMaxVisibleValueCount(10);
-		mChart.setMinOffset(0f);
-		mChart.setDragDecelerationEnabled(false);
-
-		mChart.setExtraTopOffset(topOffset);
-		mChart.setExtraBottomOffset(bottomOffset);
-
-		// create a custom MarkerView (extend MarkerView) and specify the layout
-		// to use for it
-		markerView.setChartView(mChart); // For bounds control
-		mChart.setMarker(markerView); // Set the marker to the chart
-		mChart.setDrawMarkers(true);
-
-		ChartLabel chartLabel = new ChartLabel(context, R.layout.chart_label);
-		chartLabel.setChart(mChart);
-		mChart.setYAxisLabelView(chartLabel);
-
-		int xAxisRulerColor = ContextCompat.getColor(context, R.color.gpx_chart_black_grid);
-		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
-		XAxis xAxis = mChart.getXAxis();
-		xAxis.setDrawAxisLine(true);
-		xAxis.setDrawAxisLineBehindData(false);
-		xAxis.setAxisLineWidth(1);
-		xAxis.setAxisLineColor(xAxisRulerColor);
-		xAxis.setDrawGridLines(true);
-		xAxis.setDrawGridLinesBehindData(false);
-		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(xAxisRulerColor);
-		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
-		xAxis.setPosition(BOTTOM);
-		xAxis.setTextColor(labelsColor);
-
-		int dp4 = AndroidUtils.dpToPx(context, 4);
-		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_grid_line_color);
-
-		YAxis leftYAxis = mChart.getAxisLeft();
-		leftYAxis.enableGridDashedLine(dp4, dp4, 0f);
-		leftYAxis.setGridColor(yAxisGridColor);
-		leftYAxis.setGridLineWidth(1f);
-		leftYAxis.setDrawBottomYGridLine(false);
-		leftYAxis.setDrawAxisLine(false);
-		leftYAxis.setDrawGridLinesBehindData(false);
-		leftYAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		leftYAxis.setXOffset(16f);
-		leftYAxis.setYOffset(-6f);
-		leftYAxis.setLabelCount(CHART_LABEL_COUNT, true);
-
-		YAxis rightYAxis = mChart.getAxisRight();
-		rightYAxis.setDrawAxisLine(false);
-		rightYAxis.setDrawGridLines(false);
-		rightYAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		rightYAxis.setXOffset(16f);
-		rightYAxis.setYOffset(-6f);
-		rightYAxis.setLabelCount(CHART_LABEL_COUNT, true);
-		rightYAxis.setEnabled(false);
-
-		Legend legend = mChart.getLegend();
-		legend.setEnabled(false);
-	}
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {
 		OsmandSettings settings = ctx.getSettings();
@@ -367,7 +274,7 @@ public class ChartUtils {
 		XAxis xAxis = chart.getXAxis();
 		xAxis.setEnabled(false);
 
-		YAxis yAxis = getYAxis(chart, null, useRightAxis);
+		YAxis yAxis = getAndEnableYAxis(chart, null, useRightAxis);
 		float divX = setupAxisDistance(app, yAxis, analysis.getTotalDistance());
 
 		List<RouteSegmentAttribute> segments = routeStatistics.elements;
@@ -666,9 +573,15 @@ public class ChartUtils {
 		return values;
 	}
 
+
+	public static YAxis getAndEnableYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
+		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
+		yAxis.setEnabled(true);
+		return yAxis;
+	}
+
 	public static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
 		YAxis yAxis = useRightAxis ? chart.getAxisRight() : chart.getAxisLeft();
-		yAxis.setEnabled(true);
 		if (textColor != null) {
 			yAxis.setTextColor(textColor);
 		}
