@@ -5623,12 +5623,12 @@
     <string name="special_routing_cpp">Spezieller Navigationstyp</string>
     <string name="add_button">Schaltfläche hinzufügen</string>
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
-    <string name="custom_map_button_name_present">Solche Schaltfläche bereits vorhanden</string>
+    <string name="custom_map_button_name_present">Solch eine Schaltfläche ist bereits vorhanden</string>
     <string name="default_buttons">Standard-Schaltfläche</string>
     <string name="speed_limit_warning">Warnung vor Tempolimit</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">Bei Überschreitung</string>
-    <string name="speedometer_description">Zeigt deine aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
+    <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
     <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
     <string name="help_article_setup_a_route_name">Route einrichten</string>
 </resources>
