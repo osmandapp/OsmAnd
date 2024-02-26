@@ -843,7 +843,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > zoom - MAX_ZOOM_OUT_STEPS) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
-				mapContextMenu.setMapZoom(tb.getZoom());
+				if (tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude())) {
+					mapContextMenu.setMapZoom(tb.getZoom());
+				} else {
+					mapContextMenu.setMapZoom(zoom);
+				}
 				if (toShow instanceof GpxDisplayItem) {
 					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
 					trackDetailsMenu.show();
