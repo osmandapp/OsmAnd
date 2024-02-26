@@ -318,7 +318,7 @@ public class NavigationService extends Service {
 							false/*routingHelper.isRouteWasFinished()*/,
 							destinations, trip.getSteps(), destinationTravelEstimate,
 							lastStepTravelEstimate != null ? lastStepTravelEstimate.getRemainingDistance() : null,
-							false, true, null);
+							true, true, null);
 				}
 			}
 		}

@@ -150,18 +150,12 @@ public class TripHelper {
 				turnBuilder = new Maneuver.Builder(Maneuver.TYPE_UNKNOWN);
 			}
 			Maneuver maneuver = turnBuilder.build();
-			AnnounceTimeDistances atd = app.getRoutingHelper().getVoiceRouter().getAnnounceTimeDistances();
-			if (nextDirInfo != null && atd != null) {
-				float speed = atd.getSpeed(currentLocation);
+			if (nextDirInfo != null) {
 				int dist = nextDirInfo.distanceTo;
-				if (atd.isTurnStateActive(speed, dist, STATE_TURN_IN)) {
-					NextDirectionInfo nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
-					if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null &&
-							(atd.isTurnStateActive(speed, nextNextDirInfo.distanceTo, STATE_TURN_NOW)
-							|| !atd.isTurnStateNotPassed(speed, nextNextDirInfo.distanceTo, STATE_TURN_IN))) {
-						nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
-					}
-				}
+                                NextDirectionInfo nextNextDirInfo = routingHelper.getNextRouteDirectionInfoAfter(nextDirInfo, new NextDirectionInfo(), true);
+                                if (nextNextDirInfo != null && nextNextDirInfo.directionInfo != null) {
+                                  nextTurnType = nextNextDirInfo.directionInfo.getTurnType();
+                                }
 			}
 			String cue = turnType != null ? nextTurnsToString(app, turnType, nextTurnType) : "";
 			stepBuilder.setManeuver(maneuver);

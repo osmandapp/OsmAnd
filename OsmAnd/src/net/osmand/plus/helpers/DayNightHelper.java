@@ -141,7 +141,7 @@ public class DayNightHelper implements SensorEventListener {
 			dayNightMode = providedTheme != null ? providedTheme : dayNightMode;
 		}
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
+		if (false && carNavigationSession != null && carNavigationSession.isStateAtLeast(State.CREATED)) {
 			boolean carDarkMode = carNavigationSession.getCarContext().isDarkMode();
 			dayNightMode = carDarkMode ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}

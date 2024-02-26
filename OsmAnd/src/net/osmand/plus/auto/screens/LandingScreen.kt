@@ -7,6 +7,7 @@ import androidx.car.app.model.*
 import androidx.car.app.navigation.model.PlaceListNavigationTemplate
 import androidx.core.graphics.drawable.IconCompat
 import net.osmand.plus.R
+import net.osmand.plus.helpers.DayNightHelper
 import net.osmand.plus.auto.NavigationSession
 
 class LandingScreen(
@@ -14,6 +15,8 @@ class LandingScreen(
     private val settingsAction: Action) : BaseAndroidAutoScreen(carContext) {
     @DrawableRes
     private var compassResId = R.drawable.ic_compass_niu
+
+    private var daynight = DayNightHelper(app)
 
     override fun onGetTemplate(): Template {
         val listBuilder = ItemList.Builder()
@@ -93,7 +96,7 @@ class LandingScreen(
 
     private fun updateCompass() {
         val settings = app.settings
-        val nightMode = carContext.isDarkMode
+        val nightMode = daynight.isNightMode()
         val compassMode = settings.compassMode
         compassResId = compassMode.getIconId(nightMode)
     }

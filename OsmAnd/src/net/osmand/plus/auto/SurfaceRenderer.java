@@ -29,6 +29,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -64,6 +65,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 
 	private SurfaceRendererCallback callback;
 
+        private DayNightHelper daynight;
+
 	public void setCallback(@Nullable SurfaceRendererCallback callback) {
 		this.callback = callback;
 	}
@@ -83,7 +86,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 				SurfaceRenderer.this.surfaceContainer = surfaceContainer;
 				surface = surfaceContainer.getSurface();
 				surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
-				darkMode = carContext.isDarkMode();
+				darkMode = daynight.isNightMode();
 				OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 				if (mapView != null) {
 					mapView.setupRenderingView();
@@ -178,6 +181,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		this.handler = new Handler();
 		this.carContext = carContext;
 		this.surfaceView = new CarSurfaceView(carContext, this);
+                this.daynight = new DayNightHelper(getApp());
 		lifecycle.addObserver(this);
 	}
 
@@ -392,7 +396,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		DrawSettings drawSettings = new DrawSettings(carContext.isDarkMode(), false);
+		DrawSettings drawSettings = new DrawSettings(daynight.isNightMode(), false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		try {
 			renderFrame(tileBox, drawSettings);
@@ -408,7 +412,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 		}
 		Canvas canvas = surface.lockCanvas(null);
 		try {
-			boolean newDarkMode = carContext.isDarkMode();
+			boolean newDarkMode = daynight.isNightMode();
 			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);

@@ -36,6 +36,7 @@ import net.osmand.plus.auto.NavigationListener;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
+import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -80,6 +81,8 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private boolean panMode;
 
+        private DayNightHelper daynight;
+
 	public NavigationScreen(
 			@NonNull CarContext carContext,
 			@NonNull Action settingsAction,
@@ -89,6 +92,8 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		this.settingsAction = settingsAction;
 
 		OsmandApplication app = getApp();
+                this.daynight = new DayNightHelper(app);
+
 		alarmWidget = new AlarmWidget(app, null);
 		speedometerWidget = new SpeedometerWidget(app, null);
 
@@ -111,7 +116,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
-			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+			DrawSettings drawSettings = new DrawSettings(daynight.isNightMode(), false, surfaceRenderer.getDensity());
 
 			alarmWidget.updateInfo(drawSettings, true);
 			speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
@@ -362,7 +367,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 	private void updateCompass() {
 		OsmandSettings settings = getApp().getSettings();
-		boolean nightMode = getCarContext().isDarkMode();
+		boolean nightMode = daynight.isNightMode();
 		CompassMode compassMode = settings.getCompassMode();
 		compassResId = compassMode.getIconId(nightMode);
 	}
