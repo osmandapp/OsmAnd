@@ -2,9 +2,7 @@ package net.osmand.router;
 
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 
 import gnu.trove.set.hash.TIntHashSet;
 
