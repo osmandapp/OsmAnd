@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces.favorites.dialogs;
 
 import static android.view.Gravity.CENTER;
+import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
@@ -75,6 +76,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FragmentStateHolder,
@@ -93,6 +96,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	private FavouritesHelper helper;
 	private FavouritesAdapter favouritesAdapter;
 	private ImportHelper importHelper;
+	private final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private boolean selectionMode;
 	private final LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
@@ -167,7 +171,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				return null;
 			}
 
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}.executeOnExecutor(singleThreadExecutor);
 
 	}
 
@@ -337,6 +341,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		return count;
 	}
 
+	@NonNull
 	private Set<FavouritePoint> getSelectedFavorites() {
 		Set<FavouritePoint> result = new LinkedHashSet<>();
 		for (Set<FavouritePoint> set : favoritesSelected.values()) {
@@ -363,29 +368,32 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+		FavouritePoint point = favouritesAdapter.getChild(groupPosition, childPosition);
+		if (point == null) {
+			return true;
+		}
 		if (selectionMode) {
-			CheckBox ch = v.findViewById(R.id.toggle_item);
-			FavouritePoint model = favouritesAdapter.getChild(groupPosition, childPosition);
 			FavoriteGroup group = favouritesAdapter.getGroup(groupPosition);
-			ch.setChecked(!ch.isChecked());
-			if (ch.isChecked()) {
+
+			CheckBox checkBox = v.findViewById(R.id.toggle_item);
+			checkBox.setChecked(!checkBox.isChecked());
+			if (checkBox.isChecked()) {
 				Set<FavouritePoint> set = favoritesSelected.get(group.getName());
 				if (set != null) {
-					set.add(model);
+					set.add(point);
 				} else {
 					set = new LinkedHashSet<>();
-					set.add(model);
+					set.add(point);
 					favoritesSelected.put(group.getName(), set);
 				}
 			} else {
 				Set<FavouritePoint> set = favoritesSelected.get(group.getName());
 				if (set != null) {
-					set.remove(model);
+					set.remove(point);
 				}
 			}
 			updateSelectionMode(actionMode);
 		} else {
-			FavouritePoint point = favouritesAdapter.getChild(groupPosition, childPosition);
 			showOnMap(point, groupPosition, childPosition);
 		}
 		return true;
@@ -506,9 +514,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				if (group != null && entry.getValue().size() == group.getPoints().size()) {
 					markersHelper.addOrEnableGroup(group);
 				} else {
-					for (FavouritePoint fp : entry.getValue()) {
-						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
-						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
+					for (FavouritePoint point : entry.getValue()) {
+						points.add(new LatLon(point.getLatitude(), point.getLongitude()));
+						names.add(new PointDescription(POINT_TYPE_MAP_MARKER, point.getName()));
 					}
 					markersHelper.addMapMarkers(points, names, null);
 					points.clear();
