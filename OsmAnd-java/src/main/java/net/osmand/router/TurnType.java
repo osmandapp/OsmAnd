@@ -2,7 +2,9 @@ package net.osmand.router;
 
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import gnu.trove.set.hash.TIntHashSet;
 
@@ -659,5 +661,20 @@ public class TurnType {
 			}
 		}
 		return turn;
+	}
+
+	public static String removeTurnString(String oldTL, String removedTurn) {
+		oldTL = oldTL.replace(removedTurn, "");
+		oldTL = oldTL.replace(";;", ";");
+		oldTL = oldTL.replace("||", "|");
+		oldTL = oldTL.replace(";|", "|");
+		oldTL = oldTL.replace("|;", "|");
+		if (oldTL.startsWith("|") || oldTL.startsWith(";")) {
+			oldTL = oldTL.substring(1);
+		}
+		if (oldTL.endsWith("|") || oldTL.endsWith(";")) {
+			oldTL = oldTL.substring(0, oldTL.length() - 1);
+		}
+		return oldTL;
 	}
 }

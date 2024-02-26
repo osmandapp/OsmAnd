@@ -2288,46 +2288,51 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		return leftOnlyOneActive(pair, rawLanes, currentSegm, turnLanes);
-	}
-
-	private int[] leftOnlyOneActive(int[] pair, int[] rawLanes, RouteSegmentResult currentSegm, String turnLanes) {
-		if (pair[0] != -1 && pair[1] != -1 && pair[0] != pair[1]) {
-			HashSet<Integer> activeTurns = new HashSet<>();
-			for (int k = pair[0]; k <= pair[1]; k++) {
-				activeTurns.add(rawLanes[k]);
-			}
-			if (activeTurns.size() > 1) {
-				// if we detect more than one active turn
-				// need to check continue of lanes of intersection in the attached roads
-				// and remove the active turn if we find it on attached road
-				List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
-				if(!Algorithms.isEmpty(attachedRoutes)) {
-					for (RouteSegmentResult a : attachedRoutes) {
-						String aTL = getTurnLanesString(a);
-						if (!Algorithms.isEmpty(aTL) && turnLanes.contains(aTL)) {
-							int[] aRL = calculateRawTurnLanes(aTL, TurnType.C);
-							for (int rl : aRL) {
-								activeTurns.remove(rl);
-							}
-						}
-					}
-				}
-				if (activeTurns.size() == 1) {
-					int[] newPair = {-1, -1};
-					for (int k = pair[0]; k <= pair[1]; k++) {
-						if (activeTurns.contains(rawLanes[k])) {
-							if (newPair[0] == -1) {
-								newPair[0] = k;
-							}
-							newPair[1] = k;
-						}
-					}
-					return newPair;
+		if (isMoreOneActiveTurn(pair, rawLanes)) {
+			String replacedTurnLanes = removeAttachedTurnLanes(currentSegm, turnLanes);
+			if (!replacedTurnLanes.equals(turnLanes)) {
+				int[] pair2 = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, replacedTurnLanes);
+				if (pair2[0] != -1 && pair2[1] != 0) {
+					return pair2;
 				}
 			}
 		}
 		return pair;
+	}
+
+	private boolean isMoreOneActiveTurn(int[] pair, int[] rawLanes) {
+		if (pair[0] == -1 || pair[1] == -1) {
+			return false;
+		}
+		HashSet<Integer> activeTurns = new HashSet<>();
+		for (int k = pair[0]; k <= pair[1]; k++) {
+			activeTurns.add(rawLanes[k]);
+		}
+		return activeTurns.size() > 1;
+	}
+
+	private String removeAttachedTurnLanes(RouteSegmentResult currentSegm, String turnLanes) {
+		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
+		if(!Algorithms.isEmpty(attachedRoutes)) {
+			String replacedTurnLanes = turnLanes;
+			for (RouteSegmentResult a : attachedRoutes) {
+				String aTL = getTurnLanesString(a);
+				if (!Algorithms.isEmpty(aTL) && replacedTurnLanes.contains(aTL)) {
+					String[] splitLaneOptions = aTL.split("\\|", -1);
+					for (int i = 0; i < splitLaneOptions.length; i++) {
+						String[] laneOptions = splitLaneOptions[i].split(";");
+						for (int j = 0; j < laneOptions.length; j++) {
+							int turn = TurnType.convertType(laneOptions[j]);
+							if (turn != TurnType.C) {
+								replacedTurnLanes = TurnType.removeTurnString(replacedTurnLanes, laneOptions[j]);
+							}
+						}
+					}
+				}
+			}
+			return replacedTurnLanes;
+		}
+		return turnLanes;
 	}
 
 	private boolean hasTurn(String turnLanes, int turnType) {
