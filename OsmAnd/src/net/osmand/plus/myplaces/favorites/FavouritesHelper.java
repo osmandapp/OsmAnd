@@ -493,7 +493,7 @@ public class FavouritesHelper {
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group, boolean saveImmediately) {
-		ArrayList<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
+		List<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
 		boolean remove = tmpFavoriteGroups.remove(group);
 		if (remove) {
 			favoriteGroups = tmpFavoriteGroups;
