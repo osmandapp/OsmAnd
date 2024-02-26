@@ -12,6 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
@@ -22,17 +28,12 @@ import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.MapDisplayPositionManager.BoundsChangeListener;
 import net.osmand.plus.helpers.MapDisplayPositionManager.ICoveredScreenRectProvider;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 		implements OsmAndLocationListener, ICoveredScreenRectProvider {
@@ -79,7 +80,12 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment
 							&& contextMenu.getPointDescription().isGpxPoint()) {
 						contextMenu.show();
 					} else {
-						mapActivity.launchPrevActivityIntent();
+						TrackMenuFragment fragment = mapActivity.getFragmentsHelper().getTrackMenuFragment();
+						if (fragment != null) {
+							fragment.show();
+						} else {
+							mapActivity.launchPrevActivityIntent();
+						}
 					}
 				}
 			}
