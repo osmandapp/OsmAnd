@@ -102,7 +102,9 @@ public class MapActions {
 			}
 		}
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
-		app.getSettings().setApplicationMode(mode, false);
+		if (app.getSettings().getApplicationMode() != ApplicationMode.DEFAULT) {
+			app.getSettings().setApplicationMode(mode, false);
+		}
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routingHelper.setAppMode(mode);
 		initVoiceCommandPlayer(mode, showMenu);
