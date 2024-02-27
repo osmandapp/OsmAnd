@@ -455,7 +455,10 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			boolean isDefaultMode = modeKey.equals(DEFAULT_APP_MODE.getStringKey());
 			for (Pair<WptPt, WptPt> pair : getOrderedRoadSegmentDataKeys()) {
 				String pointModeKey = pair.first.getProfileType();
-				if (isDefaultMode && (pointModeKey == null || modeKey.equals(pointModeKey))) {
+				boolean recalculateStraightSegment = isDefaultMode
+						&& (pointModeKey == null || modeKey.equals(pointModeKey))
+						&& shouldAddIntermediates(pair.first, pair.second);
+				if (recalculateStraightSegment) {
 					roadSegmentData.remove(pair);
 					changed = true;
 				} else if (modeKey.equals(pointModeKey)) {
