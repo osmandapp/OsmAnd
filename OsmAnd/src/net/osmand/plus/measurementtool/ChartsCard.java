@@ -283,7 +283,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
 			String buttonText = app.getString(R.string.shared_string_cancel);
 			showMessage(null, desc, INVALID_ID, progressSize);
-			showButton(buttonText, v -> fragment.stopUploadFileTask(true), true);
+			showButton(buttonText, v -> fragment.stopUploadFileTask(), true);
 		} else if (visibleType.canBeCalculated() && fragment.isCalculatingHeightmapData()) {
 			String desc = app.getString(R.string.calculating_altitude);
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
