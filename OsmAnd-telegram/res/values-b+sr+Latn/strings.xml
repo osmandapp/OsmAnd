@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="shared_string_select">Označi</string>
+    <string name="shared_string_select">Odabrati</string>
     <string name="shared_string_enable">Omogući</string>
     <string name="altitude">Visina</string>
     <string name="shared_string_search">Traži</string>
@@ -24,7 +24,7 @@
     <string name="shared_string_share">Deli</string>
     <string name="shared_string_back">Nazad</string>
     <string name="shared_string_continue">Nastavi</string>
-    <string name="shared_string_cancel">Prekid</string>
+    <string name="shared_string_cancel">Odustani</string>
     <string name="shared_string_settings">Podešavanja</string>
     <string name="osmand_service">Rad u pozadini</string>
     <string name="yard">yd</string>
@@ -248,14 +248,14 @@
     <string name="timeline_no_data">Nema podataka</string>
     <string name="timeline_no_data_descr">Nemamo prikupljene podatke za izabrani dan</string>
     <string name="start_end_date">Početni — Krajnji datum</string>
-    <string name="set_time_timeline_descr">Izaberite vreme za prikaz</string>
+    <string name="set_time_timeline_descr">Izaberi vreme za prikaz</string>
     <string name="shared_string_start">Početak</string>
     <string name="shared_string_end">Kraj</string>
     <string name="saved_messages">Sačuvane poruke</string>
     <string name="unit_of_speed_system">Jedinica brzine</string>
-    <string name="unit_of_speed_system_descr">Definišite jedinicu brzine.</string>
+    <string name="unit_of_speed_system_descr">Definiši jedinicu brzine.</string>
     <string name="time_zone">Vremenska zona</string>
-    <string name="time_zone_descr">Izaberite vremensku zonu koja će se prikazati u porukama lokacije.</string>
+    <string name="time_zone_descr">Izaberi vremensku zonu koja će se prikazati u porukama lokacije.</string>
     <string name="buffer_time">Vreme isteka bafera</string>
     <string name="buffer_time_descr">Maksimalno vreme za skladištenje tačaka u bafer</string>
     <string name="status_widget_title">Status Tragača OsmAnda</string>

@@ -252,6 +252,20 @@ public class HHRouteDataStructure {
 			});
 		}
 		
+		public void clearAll(TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
+			clearVisited();
+			if (stPoints != null) {
+				for (NetworkDBPoint p : stPoints.valueCollection()) {
+					p.clearRouting();
+				}
+			}
+			if (endPoints != null) {
+				for (NetworkDBPoint p : endPoints.valueCollection()) {
+					p.clearRouting();
+				}
+			}
+		}
+		
 		public void clearVisited() {
 			queue(false).clear();
 			queue(true).clear();
