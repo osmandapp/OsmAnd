@@ -59,8 +59,8 @@
     <string name="markers">Markers</string>
     <string name="oauth2_redirect_uri" translatable="false">https://osmand.net/osmand-oauth-redirect-url</string>
     <string name="oauth2_scope" translatable="false">read_prefs write_api write_gpx write_notes write_redactions</string>
-    <string name="osm_oauth2_dev_id" translatable="false">7idscq7HXzZ2HcldnDqC6vf_CG36PDq47nlc6ZPaXYY</string>
-    <string name="osm_oauth2_dev_secret" translatable="false">xA0uc-i9_NtH7tHtzHr02LUb1YqezZHOhwf_Yk5M528</string>
+    <string name="osm_oauth2_dev_id" translatable="false">uF18mTh1eRL67xS8wND9Oi7WqKqHcWLQP4ORtAfUwAs</string>
+    <string name="osm_oauth2_dev_secret" translatable="false">Zujj3e_vQEUPGCbbbCGX-xUqbx1h0MQspUkIkT0sA8g</string>
     <string name="osm_oauth2_client_id" translatable="false">P-byvAHx1s3qB7cc8VsYikaVBUnMhimeE1VQ0rYot0k</string>
     <string name="osm_oauth2_client_secret" translatable="false">xegLrDp73nwh2IumrfhWnrRw0P615T-ZSmIhbsJD1sg</string>
 </resources>
