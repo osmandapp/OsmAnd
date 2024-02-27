@@ -648,10 +648,10 @@ public class IntentHelper {
 		if (intent != null && intent.getData() != null) {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
-				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
-				if (oauthVerifier != null) {
+				String code = uri.getQueryParameter("code");
+				if (code != null) {
 					app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
-					app.getOsmOAuthHelper().authorize(oauthVerifier);
+					app.getOsmOAuthHelper().authorize(code);
 					clearIntent(intent);
 					return true;
 				}

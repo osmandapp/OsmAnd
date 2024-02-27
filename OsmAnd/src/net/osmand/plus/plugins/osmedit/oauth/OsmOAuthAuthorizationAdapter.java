@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.github.scribejava.core.builder.api.DefaultApi10a;
+import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.exceptions.OAuthException;
-import com.github.scribejava.core.model.OAuth1AccessToken;
-import com.github.scribejava.core.model.OAuth1RequestToken;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
@@ -29,6 +28,8 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class OsmOAuthAuthorizationAdapter {
@@ -45,21 +46,23 @@ public class OsmOAuthAuthorizationAdapter {
         this.app = app;
         this.plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
 
-        DefaultApi10a api10a;
-        String key;
-        String secret;
-        if (plugin.OSM_USE_DEV_URL.get()) {
-            api10a = new OsmOAuthAuthorizationClient.OsmDevApi();
-            key = app.getString(R.string.osm_oauth_developer_key);
-            secret = app.getString(R.string.osm_oauth_developer_secret);
-        } else {
-            api10a = new OsmOAuthAuthorizationClient.OsmApi();
-            key = app.getString(R.string.osm_oauth_consumer_key);
-            secret = app.getString(R.string.osm_oauth_consumer_secret);
-        }
-        client = new OsmOAuthAuthorizationClient(key, secret, api10a);
-        restoreToken();
-    }
+		DefaultApi20 api20;
+		String key;
+		String secret;
+		if (plugin.OSM_USE_DEV_URL.get()) {
+			api20 = new OsmOAuthAuthorizationClient.OsmDevApi();
+			key = app.getString(R.string.osm_oauth2_dev_id);
+			secret = app.getString(R.string.osm_oauth2_dev_secret);
+		} else {
+			api20 = new OsmOAuthAuthorizationClient.OsmApi();
+			key = app.getString(R.string.osm_oauth2_client_id);
+			secret = app.getString(R.string.osm_oauth2_client_secret);
+		}
+		String redirectUri = app.getString(R.string.oauth2_redirect_uri);
+		String scope = app.getString(R.string.oauth2_scope);
+		client = new OsmOAuthAuthorizationClient(key, secret, api20, redirectUri, scope);
+		restoreToken();
+	}
 
     public OsmOAuthAuthorizationClient getClient() {
         return client;
@@ -73,25 +76,24 @@ public class OsmOAuthAuthorizationAdapter {
         client.setAccessToken(null);
     }
 
-    public void restoreToken() {
-        String token = plugin.OSM_USER_ACCESS_TOKEN.get();
-        String tokenSecret = plugin.OSM_USER_ACCESS_TOKEN_SECRET.get();
-        if (!(token.isEmpty() || tokenSecret.isEmpty())) {
-            client.setAccessToken(new OAuth1AccessToken(token, tokenSecret));
-        } else {
-            client.setAccessToken(null);
-        }
-    }
+	public void restoreToken() {
+		String token = plugin.OSM_USER_ACCESS_TOKEN.get();
+		String tokenSecret = client.getApiSecret();
+		if (!(token.isEmpty() || tokenSecret.isEmpty())) {
+			client.setAccessToken(new OAuth2AccessToken(token, tokenSecret));
+		} else {
+			client.setAccessToken(null);
+		}
+	}
 
-    public void startOAuth(ViewGroup rootLayout, boolean nightMode) {
-        new StartOAuthAsyncTask(rootLayout, nightMode).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
-    }
+	public void startOAuth(ViewGroup rootLayout, boolean nightMode) {
+		loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl());
+	}
 
-    private void saveToken() {
-        OAuth1AccessToken accessToken = client.getAccessToken();
-        plugin.OSM_USER_ACCESS_TOKEN.set(accessToken.getToken());
-        plugin.OSM_USER_ACCESS_TOKEN_SECRET.set(accessToken.getTokenSecret());
-    }
+	private void saveToken() {
+		OAuth2AccessToken accessToken = client.getAccessToken();
+		plugin.OSM_USER_ACCESS_TOKEN.set(accessToken.getAccessToken());
+	}
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
         Uri uri = Uri.parse(url);
@@ -117,50 +119,24 @@ public class OsmOAuthAuthorizationAdapter {
         new AuthorizeAsyncTask(helper).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, oauthVerifier);
     }
 
-    private class StartOAuthAsyncTask extends AsyncTask<Void, Void, OAuth1RequestToken> {
 
-        private final ViewGroup rootLayout;
-        boolean nightMode;
+	private class AuthorizeAsyncTask extends AsyncTask<String, Void, Void> {
 
-        public StartOAuthAsyncTask(ViewGroup rootLayout, boolean nightMode) {
-            this.rootLayout = rootLayout;
-            this.nightMode = nightMode;
-        }
+		private final OsmOAuthHelper helper;
 
-        @Override
-        protected OAuth1RequestToken doInBackground(Void... params) {
-            return client.startOAuth();
-        }
+		public AuthorizeAsyncTask(OsmOAuthHelper helper) {
+			this.helper = helper;
+		}
 
-        @Override
-        protected void onPostExecute(OAuth1RequestToken requestToken) {
-            if (requestToken != null) {
-                loadWebView(rootLayout, nightMode, client.getService().getAuthorizationUrl(requestToken));
-            } else {
-                app.showShortToastMessage(app.getString(R.string.internet_not_available));
-            }
-        }
-    }
-
-    private class AuthorizeAsyncTask extends AsyncTask<String, Void, Void> {
-
-        private final OsmOAuthHelper helper;
-
-        public AuthorizeAsyncTask(OsmOAuthHelper helper) {
-            this.helper = helper;
-        }
-
-        @Override
-        protected Void doInBackground(String... oauthVerifier) {
-            if (client.getRequestToken() != null) {
-                client.authorize(oauthVerifier[0]);
-                if (isValidToken()) {
-                    saveToken();
-                    updateUserName();
-                }
-            }
-            return null;
-        }
+		@Override
+		protected Void doInBackground(String... oauthVerifier) {
+				client.authorize(oauthVerifier[0]);
+				if (isValidToken()) {
+					saveToken();
+					updateUserName();
+				}
+			return null;
+		}
 
         @Override
         protected void onPostExecute(Void result) {
