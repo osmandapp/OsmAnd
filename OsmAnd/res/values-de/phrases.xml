@@ -4810,7 +4810,7 @@
     <string name="poi_padus_local_manager">Lokaler Manager</string>
     <string name="poi_via">Über</string>
     <string name="poi_photo_booth">Fotokabine</string>
-    <string name="poi_us_maps_recreation_area_activity_cabin_rentals">Vermietung von Ferienhütten</string>
+    <string name="poi_us_maps_recreation_area_facility_cabin_rentals">Vermietung von Ferienhütten</string>
     <string name="poi_us_maps_recreation_area_activity_campground_camping">Zeltplatz-Camping</string>
     <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Verteilter Campingplatz</string>
     <string name="poi_us_maps_recreation_area_activity_fossil_collecting">Fossilien sammeln</string>
