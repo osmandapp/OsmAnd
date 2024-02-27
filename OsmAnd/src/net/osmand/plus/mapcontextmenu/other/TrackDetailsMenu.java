@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -150,7 +151,7 @@ public class TrackDetailsMenu {
 	public void updateMyLocation(@NonNull View mainView, @NonNull Location location) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			LineChart chart = mainView.findViewById(R.id.chart);
+			ElevationChart chart = mainView.findViewById(R.id.chart);
 			GpxDisplayItem gpxItem = getGpxItem();
 			TrkSegment segment = getTrackSegment(chart);
 			LineData lineData = chart.getLineData();
@@ -579,7 +580,8 @@ public class TrackDetailsMenu {
 			return;
 		}
 
-		LineChart chart = parentView.findViewById(R.id.chart);
+		ElevationChart chart = parentView.findViewById(R.id.chart);
+
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
@@ -664,7 +666,7 @@ public class TrackDetailsMenu {
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		boolean useHours = analysis.getTimeSpan() != 0 && analysis.getTimeSpan() / HOUR_IN_MILLIS > 0;
 		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.getStartTime(), useHours);
-		ChartUtils.setupGPXChart(chart, markerView, 24, 16, true);
+		ChartUtils.setupElevationChart(chart, markerView, 24, 16,true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
