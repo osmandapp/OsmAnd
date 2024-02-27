@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -45,7 +46,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
@@ -315,10 +315,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return view;
 	}
 
-	private void setupSpeedTab(View view, ElevationChart chart, int position) {
+	private void setupSpeedTab(View view, com.github.mikephil.charting.charts.ElevationChart chart, int position) {
 		if (analysis != null && analysis.isSpeedSpecified()) {
 			if (analysis.hasSpeedData()) {
-				chart.setupGPXChart();
+				ChartUtils.setupElevationChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_SPEED, SPEED, null)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -370,7 +370,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupAltitudeTab(View view, ElevationChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData()) {
-				chart.setupGPXChart();
+				ChartUtils.setupElevationChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPX_TAB_ITEM_ALTITUDE, ALTITUDE, SLOPE)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -407,7 +407,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void setupGeneralTab(View view, ElevationChart chart, int position) {
 		if (analysis != null) {
 			if (analysis.hasElevationData() || analysis.hasSpeedData()) {
-				chart.setupGPXChart();
+				ChartUtils.setupElevationChart(chart);
 				chart.setData(new LineData(getDataSets(chart, GPXTabItemType.GPX_TAB_ITEM_GENERAL, ALTITUDE, SPEED)));
 				updateChart(chart);
 				chart.setVisibility(View.VISIBLE);
@@ -829,7 +829,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 		if (chart.getAxisRight().getLabelCount() != CHART_LABEL_COUNT
 				|| chart.getAxisLeft().getLabelCount() != CHART_LABEL_COUNT) {
-			chart.setupGPXChart();
+			ChartUtils.setupElevationChart(chart);
 		}
 		updateChart(chart);
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -38,7 +39,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.GpxMarkerView;
@@ -666,7 +666,7 @@ public class TrackDetailsMenu {
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
 		boolean useHours = analysis.getTimeSpan() != 0 && analysis.getTimeSpan() / HOUR_IN_MILLIS > 0;
 		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.getStartTime(), useHours);
-		chart.setupGPXChart(markerView, 24, 16,true);
+		ChartUtils.setupElevationChart(chart, markerView, 24, 16,true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {

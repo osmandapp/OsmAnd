@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.DataSet;
@@ -38,7 +39,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.GPXHighlight;
@@ -234,7 +234,7 @@ public class ElevationProfileWidget extends MapWidget {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		int profileColor = appMode.getProfileColor(isNightMode());
 		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
-		chart.setupGPXChart(24f, 16f, true, markerIcon);
+		ChartUtils.setupElevationChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);

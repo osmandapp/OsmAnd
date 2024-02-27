@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -24,7 +25,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.charts.ElevationChart;
 import net.osmand.plus.charts.GPXDataSetAxisType;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.charts.OrderedLineDataSet;
@@ -197,7 +197,7 @@ public class RouteStatisticCard extends MapBaseCard {
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		ElevationChart mChart = view.findViewById(R.id.chart);
-		mChart.setupGPXChart(24f, 16f, true);
+		ChartUtils.setupElevationChart(mChart, 24f, 16f, true);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData()) {

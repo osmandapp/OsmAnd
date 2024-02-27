@@ -1,6 +1,7 @@
 package net.osmand.plus.charts;
 
 import static android.text.format.DateUtils.HOUR_IN_MILLIS;
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
 import static net.osmand.plus.charts.GPXDataSetAxisType.DISTANCE;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME;
 import static net.osmand.plus.charts.GPXDataSetAxisType.TIME_OF_DAY;
@@ -10,13 +11,18 @@ import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
+import android.content.Context;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -38,10 +44,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
@@ -56,6 +64,29 @@ public class ChartUtils {
 
 	public static final int CHART_LABEL_COUNT = 3;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
+
+	public static void setupElevationChart(ElevationChart chart) {
+		setupElevationChart(chart, 24f, 16f, true);
+	}
+
+	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
+									boolean useGesturesAndScale) {
+		setupElevationChart(chart, topOffset, bottomOffset, useGesturesAndScale, null);
+	}
+
+	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
+									boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+		GpxMarkerView markerView = new GpxMarkerView(chart.getContext(), markerIcon);
+		setupElevationChart(chart, markerView, topOffset, bottomOffset, useGesturesAndScale);
+	}
+
+	public static void setupElevationChart(@NonNull ElevationChart chart, @NonNull GpxMarkerView markerView, float topOffset, float bottomOffset, boolean useGesturesAndScale) {
+		Context context = chart.getContext();
+		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
+		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_grid_line_color);
+		Typeface typeface = FontCache.getFont(context, context.getString(R.string.font_roboto_medium));
+		chart.setupGPXChart(markerView, topOffset, bottomOffset, labelsColor, yAxisGridColor, typeface, useGesturesAndScale);
+	}
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {
 		OsmandSettings settings = ctx.getSettings();
