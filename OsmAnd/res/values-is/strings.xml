@@ -5211,7 +5211,7 @@
     <string name="deleting_complete">Eyðingu lokið</string>
     <string name="help_article_map_tracks_on_map_name">Ferlar og leiðir</string>
     <string name="most_viewed">Oftast skoðað</string>
-    <string name="help_article_navigation_guidance_name">Leiðsögn</string>
+    <string name="help_article_navigation_guidance_name">Stýrð leiðsögn</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Sprengiefni</string>
     <string name="help_article_personal_profiles_name">Notkunarsnið (Stillingar)</string>
     <string name="help_article_troubleshooting_maps_data_name">Landakort og gögn</string>

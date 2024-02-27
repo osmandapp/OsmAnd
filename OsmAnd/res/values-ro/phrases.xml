@@ -1997,7 +1997,7 @@
     <string name="poi_tomb_war_grave">Tip: mormânt de război</string>
     <string name="poi_defibrillator_yes">Defibrilator: da</string>
     <string name="poi_defibrillator">Defibrilator</string>
-    <string name="poi_cairn">Cairn</string>
+    <string name="poi_cairn">Colină de piatră</string>
     <string name="poi_step_condition_rough">Starea pasului: dur</string>
     <string name="poi_step_condition_uneven">Starea pasului: neuniformă</string>
     <string name="poi_step_condition_even">Condiția de etapă: chiar</string>
@@ -4638,4 +4638,5 @@
     <string name="poi_healthcare_speciality_clinic">Specialitate medicală: clinică</string>
     <string name="poi_healthcare_speciality_psychotherapist">Specialitate medicală: psihoterapeut</string>
     <string name="poi_healthcare_speciality_laboratory">Specialitate medicală: laborator</string>
+    <string name="poi_us_maps_recreation_area_activity">Activitatea zonei de agrement</string>
 </resources>

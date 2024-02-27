@@ -83,7 +83,7 @@
     <string name="recording_context_menu_delete">Obriši zapis</string>
     <string name="recording_context_menu_play">Reprodukcija</string>
     <string name="recording_default_name">Snimanje</string>
-    <string name="shared_string_control_start">Počni</string>
+    <string name="shared_string_control_start">Kreni</string>
     <string name="map_widget_av_notes">Zvučne/video beleške</string>
     <string name="map_widget_distancemeasurement">Merenje udaljenosti</string>
     <string name="map_widget_audionotes">Zvučne beleške</string>
@@ -1472,7 +1472,7 @@
     <string name="traffic_warning_payment">Naplata putarine</string>
     <string name="traffic_warning_border_control">Granična kontrola</string>
     <string name="print_route">Štampaj rutu</string>
-    <string name="rendering_category_transport">Transport</string>
+    <string name="rendering_category_transport">Prevoz</string>
     <string name="rendering_category_routes">Rute</string>
     <string name="rendering_attr_busRoutes_name">Autobuski rute</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rute trolejbusa</string>
@@ -2205,7 +2205,7 @@
     <string name="distance_indication_descr">Odaberite kako prikazati udaljenost do aktivnih markera.</string>
     <string name="shared_string_do_not_use">Nemoj koristiti</string>
     <string name="shared_string_yes">Da</string>
-    <string name="shared_string_cancel">Odustani</string>
+    <string name="shared_string_cancel">Otkazati</string>
     <string name="shared_string_ok">U redu</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="general_settings_2">Opšta podešavanja</string>
@@ -2710,7 +2710,7 @@
     <string name="advanced_coords_search">Napredna pretraga koordinata</string>
     <string name="coords_search">Pretraga koordinata</string>
     <string name="route_stops_before">%1$s stajanja pre</string>
-    <string name="get_started">Počnimo</string>
+    <string name="get_started">Započni</string>
     <string name="shared_string_change">Izmeni</string>
     <string name="rendering_attr_hideOverground_name">Nadzemne građevine</string>
     <string name="replace_favorite_confirmation">Menjaš %1$s favorite?</string>
@@ -2790,7 +2790,7 @@
     <string name="wiki_around">Članci Vikipedije o okolini</string>
     <string name="upload_osm_note_description">Učitaj svoju OSM belešku anonimno ili korišćenjem svog profila na OpenStreetMap.org.</string>
     <string name="routing_attr_allow_motorway_description">Omogući magistrale.</string>
-    <string name="auto_split_recording_descr">Počni novi odsečak posle razmaka od 6 minuta, novu putanju posle razmaka od 2 sata, ili novu datoteku posle dužeg razmaka ako je dan izmenjen.</string>
+    <string name="auto_split_recording_descr">Počni novi segment posle razmaka od 6 minuta, novu putanju posle razmaka od 2 sata, ili novu fajl posle dužeg razmaka ako je dan izmenjen.</string>
     <string name="auto_split_recording_title">Sam podeli snimke posle razmaka</string>
     <string name="rendering_attr_depthContours_name">Nautičke izobate</string>
     <string name="rendering_attr_depthContours_description">Prikazuj tačke i izobate.</string>
@@ -3229,7 +3229,7 @@
     <string name="purchase_cancelled_dialog_descr">Obnovi članarinu radi mogućnosti nastavka korišćenja svih ovih mogućnosti:</string>
     <string name="purchase_cancelled_dialog_title">Otkazao si pretplatu OsmAnd Live</string>
     <string name="show_images">Prikaži slike</string>
-    <string name="shared_string_restart">Ponovo pokreni program</string>
+    <string name="shared_string_restart">Restartovanje</string>
     <string name="download_all">Preuzmi sve</string>
     <string name="read_wikipedia_offline">Čitaj Vikipediju bez interneta</string>
     <string name="how_to_open_link">Kako da otvorim link?</string>
@@ -3299,7 +3299,7 @@
     <string name="simulate_navigation">Simulacija rute</string>
     <string name="show_along_the_route">Prikazati duž rute</string>
     <string name="avoid_roads_descr">Na ruti izbegavati:</string>
-    <string name="app_mode_public_transport">Javni saobraćaj</string>
+    <string name="app_mode_public_transport">Javni prevoz</string>
     <string name="waiting_for_route_calculation">Izračunavanje rute…</string>
     <string name="points_of_interests">Tačke od interesa (TOI)</string>
     <string name="route_way">Put</string>

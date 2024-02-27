@@ -4731,7 +4731,7 @@
     <string name="poi_us_maps_recreation_area_activity_backpacking">Mochilero</string>
     <string name="poi_us_maps_recreation_area_activity_beachcombing">Raquear;Buscador de tesoros</string>
     <string name="poi_us_maps_recreation_area_activity_bicycling">Ciclismo</string>
-    <string name="poi_us_maps_recreation_area_activity_cabin_rentals">Alquiler de cabañas</string>
+    <string name="poi_us_maps_recreation_area_facility_cabin_rentals">Alquiler de cabañas</string>
     <string name="poi_us_maps_recreation_area_activity_campground_camping">Área de campamento</string>
     <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Carpas y cabañas</string>
     <string name="poi_us_maps_recreation_area_activity_climbing">Escalada</string>

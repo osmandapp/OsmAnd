@@ -1405,7 +1405,7 @@
     <string name="context_menu_item_modify_note">Измените белешку ОСМ-а</string>
     <string name="make_round_trip_descr">Додајте умножак тачке почетка као одредиште.</string>
     <string name="shared_string_markers">Маркери</string>
-    <string name="coordinates_format">Облик координате</string>
+    <string name="coordinates_format">Облик координата</string>
     <string name="use_system_keyboard">Користи системску тастатуру</string>
     <string name="fast_coordinates_input_descr">Изаберите облик уноса координата. Промените ге тапкањем на \"Могућности\".</string>
     <string name="fast_coordinates_input">Брзи унос координата</string>
@@ -1773,7 +1773,7 @@
     <string name="amenity_type_osmwiki">Википедија (ван мреже)</string>
     <string name="routing_settings">Навођење</string>
     <string name="global_settings">Опште поставке</string>
-    <string name="general_settings">Опште</string>
+    <string name="general_settings">Генерално</string>
     <string name="global_app_settings">Опште поставке програма</string>
     <string name="user_name">Корисничко име ОСМ-а</string>
     <string name="user_password">Лозинка</string>
@@ -3124,7 +3124,7 @@
     <string name="general_settings_profile_descr">Тема програма, јединице,област</string>
     <string name="configure_profile">Подеси налог</string>
     <string name="screen_alerts_descr">Упозорења се приказују у доњем левом углу заслона за време навођења.</string>
-    <string name="switch_profile">Замени налог</string>
+    <string name="switch_profile">Замени профил</string>
     <string name="language_and_output">Језик и улаз</string>
     <string name="reset_to_default">Поврати на подразумевано</string>
     <string name="manage_profiles_descr">Направи, увези, измени налоге</string>
@@ -4518,7 +4518,7 @@
 \nНа раскрсницама, опонашање ће се успорити.
 \nДодатни пенали биће примењивани на саобраћајне знаке, знаке за заустављање, итд.</string>
     <string name="shared_string_item">Ставка</string>
-    <string name="bottom_widgets_panel">Доња полица</string>
+    <string name="bottom_widgets_panel">Доњи панел</string>
     <string name="configure_screen_widgets_descr">Изаберите страну заслона ради додавања или преуређења справица.</string>
     <string name="routeInfo_horse_scale_description">Приказ стаза према тежини коњских стаза</string>
     <string name="rendering_attr_horse_scale_common_name">Заједнички</string>
@@ -4539,7 +4539,7 @@
     <string name="rendering_attr_showShareTaxiRoutes_name">Таксистичке путање</string>
     <string name="map_markers_bar">Трака ознака на карти</string>
     <string name="shared_string_visible_widgets">Видљиве справице</string>
-    <string name="top_widgets_panel">Горња полица</string>
+    <string name="top_widgets_panel">Горњи панел</string>
     <string name="shared_string_buttons">Дугмад</string>
     <string name="osm_carto_render_descr">Слично начину приказа карата ОпенСтритМапа који се користи на главним страницама ОСМ-а</string>
     <string name="simulation_real_mode_title">Стварно опонашање</string>
@@ -4587,7 +4587,7 @@
     <string name="routing_attr_avoid_highway_description">Избегавање аутопутева</string>
     <string name="routing_attr_hazmat_category_description">Врста опасних твари / Размотрите дозволе за приступ са опасним тварима</string>
     <string name="routing_attr_avoid_4wd_only_description">Избегавање путева који су погодни за возила са погоном на сва четири точка</string>
-    <string name="av_notes_choose_action_widget_desc">Изаберите дејство.</string>
+    <string name="av_notes_choose_action_widget_desc">Изаберите акцију.</string>
     <string name="radius_rules_widget_desc">Алатка за мерни шестар приказује кружнице растојања око изабране тачке на карти.</string>
     <string name="bearing_secondary_desc">Облик приказаних података можете променити у: %1$s – %2$s – %3$s.</string>
     <string name="coordinates_widget_secondary_desc">Облик координата се можете променити у %1$s – %2$s – %3$s.</string>
@@ -4595,7 +4595,7 @@
     <string name="elevation_profile_widget_desc">Справица приказује висину и пресек нагиба тренутне путање.</string>
     <string name="parking_widget_desc">Приказује удаљеност од средишта заслона до места паркирања.</string>
     <string name="mapillary_widget_desc">Омогућава брзи приступ програму Мапилари за додавање слика улица.</string>
-    <string name="current_time_widget_desc">Приказује тренутно време Вашег уређаја.</string>
+    <string name="current_time_widget_desc">Приказује тренутно време вашег уређаја.</string>
     <string name="battery_widget_desc">Приказује попуњеност батерије Вашег уређаја.</string>
     <string name="gps_info_widget_desc">Приказује број сателита тренутно видљивих и коришћених.</string>
     <string name="altitude_widget_desc">Приказује висину изнад нивоа мора тренутне геолокације.</string>
@@ -4605,7 +4605,7 @@
     <string name="time_to_go_desc">Време у минутима или сатима потребно да стигнете на одредиште.</string>
     <string name="arrival_time_widget_desc">Време доласка на одредишну тачку.</string>
     <string name="lanes_widgets_desc">Приказује тренутни распоред коловозне траке и истиче траке за престројавање приликом навођења.</string>
-    <string name="map_markers_bar_widget_desc">Справица горње траке приказује растојање и правац до ознака тренутне тренутног положаја. Могуће је подесити справицу за приказ 1 или 2 горње ознаке.</string>
+    <string name="map_markers_bar_widget_desc">Справица горње траке приказује растојање и правац до ознака тренутног положаја. Могуће је подесити справицу за приказ 1 или 2 горње ознаке.</string>
     <string name="time_to_navigation_point_widget_settings_desc">Додирните справицу ради промене начина рада.</string>
     <string name="map_widget_time_to_destination">Време до одредишта</string>
     <string name="map_widget_time_to_intermediate">Време до посредне тачке</string>
@@ -4615,7 +4615,7 @@
     <string name="routing_attr_avoid_4wd_only_name">Избегавај путеве за погон на четири точка</string>
     <string name="shared_string_speed">Брзина</string>
     <string name="shared_string_widget">Справица</string>
-    <string name="navigation_points">Тачке навођења</string>
+    <string name="navigation_points">Навигационе тачке</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Не иди ван стазе</string>
     <string name="routing_attr_freeride_policy_only_if_necessary_name">Само ако је неопходно</string>
     <string name="coordinates_widget_desc">Приказује земљописне координате тренутног земаљског положаја.</string>
@@ -4623,7 +4623,7 @@
     <string name="on_with_params">%1$s на %2$s</string>
     <string name="no_widgets_descr">Додајте једну или више справица са списка доступних справица.</string>
     <string name="lang_sat">Санталски</string>
-    <string name="route_maneuvers_desc">Справице навођења су омогућене током навођења за приказ података као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, подаци о тракама, највећа дозвољена брзина, упозорења о приближавању, тачке занимања, тачке пута.</string>
+    <string name="route_maneuvers_desc">Навигациони видгети су омогућени током навигације за приказ информација као што су растојање, време доласка или преостало време, следећа скретања, смер, тренутни назив улице, информације о тракама, максимална брзина, упозорења о приближавању, ТОИ, тачке пута.</string>
     <string name="audio_video_notes_desc">Омогућава брзи приступ за почетак/заустављање снимања звука, видеа или сликовне белешке.</string>
     <string name="routing_attr_difficulty_preference_intermediate_name">Средњи</string>
     <string name="calculate_online">Рачунање на мрежи</string>
@@ -4641,7 +4641,7 @@
     <string name="routing_attr_difficulty_preference_no_preference_name">Без тежњи</string>
     <string name="street_name_widget_desc">Справица назива улице приказује тренутни назив улице са правом стрелицом положаја или следећи назив улице стрелицом указивачем на долазно скретање.</string>
     <string name="get_altitude_information">Добави податке о надморској висини</string>
-    <string name="route_maneuvers">Скретања путање</string>
+    <string name="route_maneuvers">Маневри руте</string>
     <string name="calculating_altitude">Израчунавам надморску висину</string>
     <string name="no_widgets_here_yet">Овде још нема справица</string>
     <string name="available_widgets">Доступне справице</string>
@@ -4655,7 +4655,7 @@
 \n • Исправке: самостално освежавање плочица карата на мрежи
 \n
 \n</string>
-    <string name="shared_string_symbol">Знак</string>
+    <string name="shared_string_symbol">Симбол</string>
     <string name="routing_attr_difficulty_preference_expert_name">Стручњак</string>
     <string name="average_speed_skip_stops">Узми у обзир заустављања</string>
     <string name="average_speed_time_interval_desc">Наведите временско раздобље за просечну брзину.</string>
@@ -4717,7 +4717,7 @@
     <string name="developer_widgets">Програмерске справице</string>
     <string name="shared_string_shows">Приказује</string>
     <string name="map_widget_target_distance">Удаљеност камере од циља</string>
-    <string name="map_widget_zoom_level">Разина увећања</string>
+    <string name="map_widget_zoom_level">Ниво зума</string>
     <string name="map_widget_camera_distance">Висина камере</string>
     <string name="map_widget_camera_tilt">Нагнутост камере</string>
     <string name="shared_string_large">Увећано</string>
@@ -4781,7 +4781,7 @@
     <string name="pressure_layer">Слој притиска</string>
     <string name="temperature_layer">Слој топлоте</string>
     <string name="wind_layer">Слој ветра</string>
-    <string name="shared_string_next_sunrise">Следећи залазак Сунца</string>
+    <string name="shared_string_next_sunrise">Следећи излазак Сунца</string>
     <string name="shared_string_time_left">Преостало време</string>
     <string name="shared_string_sunset">Залазак Сунца</string>
     <string name="shared_string_sunrise">Излазак Сунца</string>

@@ -22,6 +22,7 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -278,7 +279,8 @@ public class MapButtonsHelper {
 		List<QuickActionButtonState> list = new ArrayList<>();
 		List<String> actionsKeys = settings.QUICK_ACTION_BUTTONS.getStringsListForProfile(appMode);
 		if (!Algorithms.isEmpty(actionsKeys)) {
-			for (String key : actionsKeys) {
+			Set<String> uniqueKeys = new LinkedHashSet<>(actionsKeys);
+			for (String key : uniqueKeys) {
 				if (!Algorithms.isEmpty(key)) {
 					QuickActionButtonState buttonState = new QuickActionButtonState(app, key);
 					buttonState.parseQuickActions(gson);
