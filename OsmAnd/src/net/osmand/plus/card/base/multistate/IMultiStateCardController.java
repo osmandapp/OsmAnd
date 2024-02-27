@@ -1,7 +1,9 @@
 package net.osmand.plus.card.base.multistate;
 
+import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
@@ -12,17 +14,19 @@ import java.util.List;
 public interface IMultiStateCardController {
 
 	@NonNull
-	String getCardTitle();
+	String getMultiStateCardTitle();
 
 	@NonNull
-	String getMenuButtonTitle();
+	String getMultiStateSelectorTitle();
 
-	boolean shouldShowMenuButton();
+	@ColorInt
+	int getMultiStateSelectorAccentColor(boolean nightMode);
 
 	@NonNull
-	List<PopUpMenuItem> getMenuItems();
+	List<PopUpMenuItem> getMultiSateMenuItems();
 
-	boolean onMenuItemSelected(@NonNull PopUpMenuItem item);
+	boolean onMultiStateMenuItemSelected(@NonNull FragmentActivity activity, @NonNull View view,
+	                                     @NonNull PopUpMenuItem item);
 
-	void onBindContentView(@NonNull FragmentActivity activity, @NonNull ViewGroup container);
+	void onBindMultiStateCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode);
 }

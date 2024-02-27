@@ -3,9 +3,13 @@ package net.osmand.plus.card.color.coloringtype;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public interface IColoringTypeCardController {
+import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
 
-	void bindCard(@NonNull ColoringTypeCard card);
+public interface IColoringStyleDetailsController {
+
+	void bindCard(@NonNull ColoringStyleDetailsCard card);
+
+	void setColoringStyle(@NonNull ColoringStyle coloringStyle);
 
 	boolean shouldHideCard();
 

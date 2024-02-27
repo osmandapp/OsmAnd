@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.ColoringInfo;
+import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -18,28 +18,29 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
-public class ColoringTypeCardController implements IColoringTypeCardController {
+public class ColoringStyleDetailsCardController implements IColoringStyleDetailsController {
 
 	protected final OsmandApplication app;
-	protected final GPXTrackAnalysis trackAnalysis;
-	protected ColoringInfo coloringInfo;
-	protected ColoringTypeCard card;
+	protected final GPXTrackAnalysis analysis;
+	protected ColoringStyle coloringStyle;
+	protected ColoringStyleDetailsCard card;
 
-	public ColoringTypeCardController(@NonNull OsmandApplication app,
-	                                  @NonNull ColoringInfo coloringInfo,
-	                                  @Nullable GPXTrackAnalysis trackAnalysis) {
+	public ColoringStyleDetailsCardController(@NonNull OsmandApplication app,
+	                                          @NonNull ColoringStyle coloringStyle,
+	                                          @Nullable GPXTrackAnalysis analysis) {
 		this.app = app;
-		this.coloringInfo = coloringInfo;
-		this.trackAnalysis = trackAnalysis;
+		this.coloringStyle = coloringStyle;
+		this.analysis = analysis;
 	}
 
 	@Override
-	public void bindCard(@NonNull ColoringTypeCard card) {
+	public void bindCard(@NonNull ColoringStyleDetailsCard card) {
 		this.card = card;
 	}
 
-	public void setColoringInfo(@NonNull ColoringInfo coloringInfo) {
-		this.coloringInfo = coloringInfo;
+	@Override
+	public void setColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		this.coloringStyle = coloringStyle;
 		if (card != null) {
 			card.updateContent();
 		}
@@ -47,29 +48,29 @@ public class ColoringTypeCardController implements IColoringTypeCardController {
 
 	@Override
 	public boolean shouldHideCard() {
-		return coloringInfo.getColoringType().isSolidSingleColor();
+		return coloringStyle.getType().isSolidSingleColor();
 	}
 
 	@Override
 	public boolean shouldShowUpperSpace() {
-		ColoringType coloringType = coloringInfo.getColoringType();
-		return trackAnalysis == null || !coloringType.isRouteInfoAttribute() || coloringType == ColoringType.ALTITUDE;
+		ColoringType coloringType = coloringStyle.getType();
+		return analysis == null || !coloringType.isRouteInfoAttribute() || coloringType == ColoringType.ALTITUDE;
 	}
 
 	@Override
 	public boolean shouldShowBottomSpace() {
-		return trackAnalysis != null;
+		return analysis != null;
 	}
 
 	@Override
 	public boolean shouldShowSpeedAltitudeLegend() {
-		ColoringType coloringType = coloringInfo.getColoringType();
+		ColoringType coloringType = coloringStyle.getType();
 		return coloringType == ColoringType.ALTITUDE || coloringType == ColoringType.SPEED;
 	}
 
 	@Override
 	public boolean shouldShowSlopeLegend() {
-		return coloringInfo.getColoringType() == ColoringType.SLOPE;
+		return coloringStyle.getType() == ColoringType.SLOPE;
 	}
 
 	@Nullable
@@ -81,12 +82,12 @@ public class ColoringTypeCardController implements IColoringTypeCardController {
 	@Nullable
 	@Override
 	public CharSequence[] getLegendHeadlines() {
-		ColoringType coloringType = coloringInfo.getColoringType();
+		ColoringType coloringType = coloringStyle.getType();
 		if (isLegendDataSpecified() && coloringType.toGradientScaleType() != null) {
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
-			double min = RouteColorize.getMinValue(colorizationType, trackAnalysis);
-			double max = RouteColorize.getMaxValue(colorizationType, trackAnalysis, min, appMode.getMaxSpeed());
+			double min = RouteColorize.getMinValue(colorizationType, analysis);
+			double max = RouteColorize.getMaxValue(colorizationType, analysis, min, appMode.getMaxSpeed());
 			return new CharSequence[] { formatValue(min), formatValue(max) };
 		} else if (coloringType == ColoringType.SPEED) {
 			return new CharSequence[] {
@@ -103,10 +104,10 @@ public class ColoringTypeCardController implements IColoringTypeCardController {
 	}
 
 	private boolean isLegendDataSpecified() {
-		ColoringType coloringType = coloringInfo.getColoringType();
-		if (trackAnalysis != null) {
-			boolean useElevationData = coloringType == ColoringType.ALTITUDE && trackAnalysis.isElevationSpecified();
-			boolean useSpeedData = coloringType == ColoringType.SPEED && trackAnalysis.isSpeedSpecified();
+		ColoringType coloringType = coloringStyle.getType();
+		if (analysis != null) {
+			boolean useElevationData = coloringType == ColoringType.ALTITUDE && analysis.isElevationSpecified();
+			boolean useSpeedData = coloringType == ColoringType.SPEED && analysis.isSpeedSpecified();
 			return useElevationData || useSpeedData;
 		}
 		return false;
@@ -114,7 +115,7 @@ public class ColoringTypeCardController implements IColoringTypeCardController {
 
 	@NonNull
 	private CharSequence formatValue(double value) {
-		ColoringType coloringType = coloringInfo.getColoringType();
+		ColoringType coloringType = coloringStyle.getType();
 		if (coloringType == ColoringType.ALTITUDE) {
 			return OsmAndFormatter.getFormattedAlt(value, app);
 		} else if (coloringType == ColoringType.SLOPE) {

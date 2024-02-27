@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ColorsPaletteController implements IColorsPaletteController {
+public class ColorsPaletteController implements IColorsPaletteController {
 
 	protected final OsmandApplication app;
 	protected OnColorsPaletteListener externalListener;
@@ -115,8 +115,18 @@ public abstract class ColorsPaletteController implements IColorsPaletteControlle
 		editedPaletteColor = null;
 	}
 
+	@Override
+	public void selectColor(@ColorInt int colorInt) {
+		selectColor(colorsCollection.findPaletteColor(colorInt));
+	}
+
+	@Override
 	public void selectColor(@Nullable PaletteColor paletteColor) {
 		selectedPaletteColor = paletteColor;
+		onColorSelected(paletteColor);
+	}
+
+	protected void onColorSelected(@Nullable PaletteColor paletteColor) {
 		if (externalListener != null && paletteColor != null) {
 			externalListener.onColorSelectedFromPalette(paletteColor);
 		}

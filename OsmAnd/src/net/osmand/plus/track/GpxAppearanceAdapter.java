@@ -122,6 +122,18 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 		return colors;
 	}
 
+	@NonNull
+	public static List<AppearanceListItem> getUniqueTrackColorItems(@NonNull OsmandApplication app) {
+		List<Integer> colors = new ArrayList<>();
+		List<AppearanceListItem> result = new ArrayList<>();
+		for (AppearanceListItem item : getAppearanceItems(app, TRACK_COLOR)) {
+			if (!colors.contains(item.getColor())) {
+				colors.add(item.getColor());
+				result.add(item);
+			}
+		}
+		return result;
+	}
 
 	public static List<AppearanceListItem> getAppearanceItems(@NonNull OsmandApplication app, GpxAppearanceAdapterType adapterType) {
 		return getAppearanceItems(app, adapterType, false);

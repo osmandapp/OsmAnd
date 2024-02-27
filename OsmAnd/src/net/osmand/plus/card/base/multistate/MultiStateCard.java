@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -21,12 +20,17 @@ import java.util.List;
 
 public class MultiStateCard extends BaseCard {
 
-	private final IMultiStateCardController cardController;
+	private final IMultiStateCardController controller;
 
 	public MultiStateCard(@NonNull FragmentActivity activity,
 	                      @NonNull IMultiStateCardController cardController) {
-		super(activity);
-		this.cardController = cardController;
+		this(activity, cardController, true);
+	}
+
+	public MultiStateCard(@NonNull FragmentActivity activity,
+	                      @NonNull IMultiStateCardController controller, boolean usedOnMap) {
+		super(activity, usedOnMap);
+		this.controller = controller;
 	}
 
 	@Override
@@ -36,52 +40,51 @@ public class MultiStateCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		updateTitle();
+		updateCardTitle();
 		updateStateSelector();
-		updateStateRelatedContent();
+		bindSelectedStateContent();
 	}
 
-	private void updateTitle() {
+	private void updateCardTitle() {
 		TextView tvTitle = view.findViewById(R.id.card_title);
-		tvTitle.setText(cardController.getCardTitle());
+		tvTitle.setText(controller.getMultiStateCardTitle());
 	}
 
 	private void updateStateSelector() {
 		View selector = view.findViewById(R.id.card_selector);
-		if (!cardController.shouldShowMenuButton()) {
-			selector.setVisibility(View.GONE);
-			return;
-		}
-		selector.setVisibility(View.VISIBLE);
-		selector.setOnClickListener(v -> showStateSelectionMenu());
-
-		int colorId = ColorUtilities.getActiveColor(app, nightMode);
-		Drawable selectableBackground = UiUtilities.getColoredSelectableDrawable(app, colorId);
-		selector.setBackground(selectableBackground);
-
+		selector.setOnClickListener(v -> showPopUpMenu());
+		updateStateSelectorAccentColor();
 		updateStateSelectorTitle();
 	}
 
 	private void updateStateSelectorTitle() {
 		View selector = view.findViewById(R.id.card_selector);
 		TextView tvTitle = selector.findViewById(R.id.title);
-		tvTitle.setText(cardController.getMenuButtonTitle());
+		tvTitle.setText(controller.getMultiStateSelectorTitle());
+		selector.invalidate();
 	}
 
-	private void updateStateRelatedContent() {
-		ViewGroup contentContainer = view.findViewById(R.id.content);
-		contentContainer.removeAllViews();
-		cardController.onBindContentView(activity, contentContainer);
-	}
-
-	private void showStateSelectionMenu() {
+	private void updateStateSelectorAccentColor() {
 		View selector = view.findViewById(R.id.card_selector);
-		List<PopUpMenuItem> menuItems = cardController.getMenuItems();
+		int colorInt = controller.getMultiStateSelectorAccentColor(nightMode);
+		UiUtilities.setupSelectableBackground(app, selector, colorInt);
+	}
+
+	private void bindSelectedStateContent() {
+		ViewGroup contentContainer = view.findViewById(R.id.content);
+		controller.onBindMultiStateCardContent(activity, contentContainer, nightMode);
+	}
+
+	private void showPopUpMenu() {
+		View selector = view.findViewById(R.id.card_selector);
+		List<PopUpMenuItem> menuItems = controller.getMultiSateMenuItems();
 
 		OnPopUpMenuItemClickListener onItemClickListener = item -> {
-			if (cardController.onMenuItemSelected(item)) {
+			if (controller.onMultiStateMenuItemSelected(activity, selector, item)) {
+				// Update selected state only if controller
+				// has processed user's selection and returned 'true'
 				updateStateSelector();
-				updateStateRelatedContent();
+				bindSelectedStateContent();
 			}
 		};
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();

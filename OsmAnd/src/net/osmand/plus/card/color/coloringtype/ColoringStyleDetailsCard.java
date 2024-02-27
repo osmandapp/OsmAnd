@@ -8,20 +8,21 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
-public class ColoringTypeCard extends BaseCard {
+public class ColoringStyleDetailsCard extends BaseCard {
 
-	private final IColoringTypeCardController controller;
+	private final IColoringStyleDetailsController controller;
 
-	public ColoringTypeCard(@NonNull FragmentActivity activity,
-	                        @NonNull IColoringTypeCardController controller) {
-		super(activity);
+	public ColoringStyleDetailsCard(@NonNull FragmentActivity activity,
+	                                @NonNull IColoringStyleDetailsController controller,
+	                                boolean usedOnMap) {
+		super(activity, usedOnMap);
 		this.controller = controller;
 		controller.bindCard(this);
 	}
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.card_coloring_type;
+		return R.layout.card_coloring_style_details;
 	}
 
 	@Override

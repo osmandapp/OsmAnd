@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color;
+package net.osmand.plus.card.color.coloringstyle;
 
 import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
@@ -9,25 +9,43 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import java.util.Objects;
 
-public class ColoringInfo {
+/**
+ * The coloring style can be determined by its coloring type.
+ * In the cases when we use ATTRIBUTE coloring type, we also take into account
+ * the name of the routing info attribute.
+ */
+public class ColoringStyle {
 
 	private final ColoringType coloringType;
 	private final String routeInfoAttribute;
 
-	public ColoringInfo(@NonNull ColoringType coloringType) {
+	public ColoringStyle(@NonNull ColoringType coloringType) {
 		this(coloringType, null);
 	}
 
-	public ColoringInfo(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
+	public ColoringStyle(@NonNull String routeInfoAttribute) {
+		this(ColoringType.ATTRIBUTE, routeInfoAttribute);
+	}
+
+	public ColoringStyle(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
+	@Nullable
+	public String getId() {
+		if (coloringType.isRouteInfoAttribute()) {
+			return Algorithms.isEmpty(routeInfoAttribute) ? null : routeInfoAttribute;
+		}
+		return coloringType.name();
+	}
+
 	@NonNull
-	public ColoringType getColoringType() {
+	public ColoringType getType() {
 		return coloringType;
 	}
 
@@ -55,17 +73,16 @@ public class ColoringInfo {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (!(o instanceof ColoringInfo)) return false;
-
-		ColoringInfo that = (ColoringInfo) o;
-		if (coloringType != that.coloringType) return false;
-		return Objects.equals(routeInfoAttribute, that.routeInfoAttribute);
+		if (o instanceof ColoringStyle) {
+			ColoringStyle that = (ColoringStyle) o;
+			return Objects.equals(getId(), that.getId());
+		}
+		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = coloringType != null ? coloringType.hashCode() : 0;
-		result = 31 * result + (routeInfoAttribute != null ? routeInfoAttribute.hashCode() : 0);
-		return result;
+		String id = getId();
+		return id != null ? id.hashCode() : 0;
 	}
 }

@@ -10,7 +10,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.palette.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.data.DefaultPaletteColor;
+import net.osmand.plus.card.color.palette.data.PredefinedPaletteColor;
 import net.osmand.plus.card.color.palette.data.PaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -61,7 +61,7 @@ public class ProfileColorController extends ColorsPaletteController implements I
 			for (ProfileIconColors predefinedColor : ProfileIconColors.values()) {
 				String id = predefinedColor.name().toLowerCase();
 				int colorInt = ContextCompat.getColor(app, predefinedColor.getColor(nightMode));
-				predefinedColors.add(new DefaultPaletteColor(id, colorInt, predefinedColor.getName()));
+				predefinedColors.add(new PredefinedPaletteColor(id, colorInt, predefinedColor.getName()));
 			}
 			ColorsCollection colorsCollection = new ColorsCollection(
 					appMode, predefinedColors, settings.PROFILE_COLORS_PALETTE

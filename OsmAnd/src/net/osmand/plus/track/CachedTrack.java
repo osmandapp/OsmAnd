@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 import static net.osmand.router.RouteColorize.LIGHT_GREY;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
@@ -211,7 +213,7 @@ public class CachedTrack {
 		Set<String> availableStaticTypes = new HashSet<>();
 		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
 			if (!coloringType.isRouteInfoAttribute()
-					&& coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null)) {
+					&& isAvailableForDrawingTrack(app, new ColoringStyle(coloringType), selectedGpxFile)) {
 				availableStaticTypes.add(coloringType.getName(null));
 			}
 		}
@@ -227,7 +229,8 @@ public class CachedTrack {
 				RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
 
 		for (String routeInfoAttribute : rendererRouteInfoAttribute) {
-			if (ColoringType.ALTITUDE.isAvailableForDrawingTrack(app, selectedGpxFile, routeInfoAttribute)) {
+			ColoringStyle coloringStyle = new ColoringStyle(ColoringType.ALTITUDE, routeInfoAttribute);
+			if (isAvailableForDrawingTrack(app, coloringStyle, selectedGpxFile)) {
 				availableRouteInfoAttributes.add(routeInfoAttribute);
 			}
 		}

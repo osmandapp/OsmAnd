@@ -1,5 +1,7 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAttributeAvailableForDrawing;
+
 import android.content.Context;
 
 import androidx.annotation.DrawableRes;
@@ -9,21 +11,11 @@ import androidx.annotation.StringRes;
 
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.Location;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteExporter;
-import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -66,7 +58,7 @@ public enum ColoringType {
 	@DrawableRes
 	private final int iconId;
 
-	ColoringType(String name, int titleId, int iconId) {
+	ColoringType(@NonNull String name, int titleId, int iconId) {
 		this.name = name;
 		this.titleId = titleId;
 		this.iconId = iconId;
@@ -153,27 +145,6 @@ public enum ColoringType {
 		return true;
 	}
 
-	public boolean isAvailableForDrawingTrack(@NonNull OsmandApplication app,
-	                                          @NonNull SelectedGpxFile selectedGpxFile,
-	                                          @Nullable String attributeName) {
-		if (isGradient()) {
-			GradientScaleType scaleType = toGradientScaleType();
-			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
-			if (analysis != null && scaleType != null) {
-				return analysis.isColorizationTypeAvailable(scaleType.toColorizationType());
-			}
-		}
-		if (isRouteInfoAttribute()) {
-			List<RouteSegmentResult> routeSegments = getRouteSegmentsInTrack(selectedGpxFile.getGpxFile());
-			if (Algorithms.isEmpty(routeSegments)) {
-				return false;
-			}
-			return isAttributeAvailableForDrawing(app, routeSegments, attributeName);
-		}
-
-		return true;
-	}
-
 	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
 	                                         @Nullable String attributeName, boolean route) {
 		if ((isRouteInfoAttribute() && route) || this == SLOPE) {
@@ -181,51 +152,6 @@ public enum ColoringType {
 		}
 		return true;
 	}
-
-	@Nullable
-	private List<RouteSegmentResult> getRouteSegmentsInTrack(@NonNull GPXFile gpxFile) {
-		if (!RouteExporter.OSMAND_ROUTER_V2.equals(gpxFile.author)) {
-			return null;
-		}
-		List<RouteSegmentResult> routeSegments = new ArrayList<>();
-		for (int i = 0; i < gpxFile.getNonEmptyTrkSegments(false).size(); i++) {
-			TrkSegment segment = gpxFile.getNonEmptyTrkSegments(false).get(i);
-			if (segment.hasRoute()) {
-				routeSegments.addAll(RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(), gpxFile, new ArrayList<>(), i));
-			}
-		}
-		return routeSegments;
-	}
-
-	private boolean isAttributeAvailableForDrawing(@NonNull OsmandApplication app,
-	                                               @NonNull List<RouteSegmentResult> routeSegments,
-	                                               @Nullable String attributeName) {
-		if (Algorithms.isEmpty(routeSegments) || Algorithms.isEmpty(attributeName)) {
-			return false;
-		}
-
-		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
-		List<String> rendererAttrs = RouteStatisticsHelper
-				.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
-		if (Algorithms.isEmpty(rendererAttrs) || !rendererAttrs.contains(attributeName)) {
-			return false;
-		}
-
-		boolean night = app.getDaynightHelper().isNightModeForMapControls();
-		MapRenderRepositories maps = app.getResourceManager().getRenderer();
-		RenderingRuleSearchRequest currentSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
-		RenderingRuleSearchRequest defaultSearchRequest =
-				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
-
-		List<RouteStatistics> routeStatisticsList =
-				RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
-						Collections.singletonList(attributeName), currentRenderer,
-						defaultRenderer, currentSearchRequest, defaultSearchRequest);
-		return !Algorithms.isEmpty(routeStatisticsList);
-	}
-
 	@Nullable
 	public GradientScaleType toGradientScaleType() {
 		if (this == SPEED) {

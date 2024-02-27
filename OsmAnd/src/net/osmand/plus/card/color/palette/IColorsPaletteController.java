@@ -31,6 +31,10 @@ public interface IColorsPaletteController extends IDialogController, ColorPicker
 
 	void onSelectColorFromPalette(@NonNull PaletteColor color);
 
+	void selectColor(@ColorInt int colorInt);
+
+	void selectColor(@Nullable PaletteColor paletteColor);
+
 	void onColorLongClick(@NonNull FragmentActivity activity, @NonNull View view, @NonNull PaletteColor color, boolean nightMode);
 
 	void onAllColorsButtonClicked(@NonNull FragmentActivity activity);
