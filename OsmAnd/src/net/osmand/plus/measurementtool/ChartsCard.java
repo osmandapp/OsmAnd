@@ -290,7 +290,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
 			String buttonText = app.getString(R.string.shared_string_cancel);
 			showMessage(null, desc, INVALID_ID, progressSize);
-			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(), true);
+			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(true), true);
 		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
 			String title = app.getString(R.string.no_altitude_data);
 			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());

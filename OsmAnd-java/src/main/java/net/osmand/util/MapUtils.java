@@ -128,6 +128,28 @@ public class MapUtils {
 				MapUtils.checkLongitude(lonMid * 180 / Math.PI)};
 	}
 
+	public static LatLon calculateIntermediatePoint(double fromLat, double fromLon, double toLat, double toLon, double coeff) {
+		double lat1 = toRadians(fromLat);
+		double lon1 = toRadians(fromLon);
+		double lat2 = toRadians(toLat);
+		double lon2 = toRadians(toLon);
+
+		double lat1Cos = Math.cos(lat1);
+		double lat2Cos = Math.cos(lat2);
+
+		double d = 2 * Math.asin(Math.sqrt(Math.pow((Math.sin((lat1 - lat2) / 2)), 2)
+					+ lat1Cos * lat2Cos * Math.pow(Math.sin((lon1 - lon2) / 2), 2)));
+		double A = Math.sin((1 - coeff) * d) / Math.sin(d);
+		double B = Math.sin(coeff * d) / Math.sin(d);
+		double x = A * lat1Cos * Math.cos(lon1) + B * lat2Cos * Math.cos(lon2);
+		double y = A * lat1Cos * Math.sin(lon1) + B * lat2Cos * Math.sin(lon2);
+		double z = A * Math.sin(lat1) + B * Math.sin(lat2);
+
+		double lat = Math.atan2(z, Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+		double lon = Math.atan2(y, x);
+		return new LatLon(checkLatitude(lat * 180 / Math.PI), checkLongitude(lon * 180 / Math.PI));
+	}
+
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
 		return getDistance(getProjection(lat, lon, fromLat, fromLon, toLat, toLon), lat, lon);
 	}
