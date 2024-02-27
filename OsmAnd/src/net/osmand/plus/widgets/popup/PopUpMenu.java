@@ -30,7 +30,8 @@ public class PopUpMenu {
 		this.displayData = displayData;
 	}
 
-	private ListPopupWindow createListPopupWindow() {
+	@NonNull
+	private ListPopupWindow createCustomListPopUpWindow() {
 		View anchorView = displayData.anchorView;
 		boolean nightMode = displayData.nightMode;
 		PopUpMenuWidthMode widthMode = displayData.widthMode;
@@ -123,40 +124,36 @@ public class PopUpMenu {
 		}
 	}
 
-	public static void show(@NonNull PopUpMenuDisplayData displayData) {
-		boolean useCustomPopUp = false;
-		for (PopUpMenuItem item : displayData.menuItems) {
-			if (item.isShowCompoundBtn()) {
-				useCustomPopUp = true;
-				break;
+	private static void showNativePopUpMenu(@NonNull PopUpMenuDisplayData displayData) {
+		View view = displayData.anchorView;
+		PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+		MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
+		menuBuilder.setOptionalIconsVisible(true);
+		MenuCompat.setGroupDividerEnabled(menuBuilder, true);
+
+		int groupId = 1;
+		for (int i = 0; i < displayData.menuItems.size(); i++) {
+			PopUpMenuItem popupMenuItem = displayData.menuItems.get(i);
+			if (popupMenuItem.shouldShowTopDivider()) {
+				groupId++;
 			}
+			MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
+			menuItem.setIcon(popupMenuItem.getIcon());
+			menuItem.setOnMenuItemClickListener(item -> {
+				notifyItemClicked(displayData, popupMenuItem);
+				popupMenu.dismiss();
+				return true;
+			});
 		}
+		popupMenu.show();
+	}
 
-		if (useCustomPopUp) {
+	public static void show(@NonNull PopUpMenuDisplayData displayData) {
+		if (displayData.hasCustomizations()) {
 			PopUpMenu popUpMenu = new PopUpMenu(displayData);
-			popUpMenu.createListPopupWindow().show();
+			popUpMenu.createCustomListPopUpWindow().show();
 		} else {
-			View view = displayData.anchorView;
-			PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-			MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
-			menuBuilder.setOptionalIconsVisible(true);
-			MenuCompat.setGroupDividerEnabled(menuBuilder, true);
-
-			int groupId = 1;
-			for (int i = 0; i < displayData.menuItems.size(); i++) {
-				PopUpMenuItem popupMenuItem = displayData.menuItems.get(i);
-				if (popupMenuItem.shouldShowTopDivider()) {
-					groupId++;
-				}
-				MenuItem menuItem = popupMenu.getMenu().add(groupId, i, Menu.NONE, popupMenuItem.getTitle());
-				menuItem.setIcon(popupMenuItem.getIcon());
-				menuItem.setOnMenuItemClickListener(item -> {
-					notifyItemClicked(displayData, popupMenuItem);
-					popupMenu.dismiss();
-					return true;
-				});
-			}
-			popupMenu.show();
+			showNativePopUpMenu(displayData);
 		}
 	}
 }

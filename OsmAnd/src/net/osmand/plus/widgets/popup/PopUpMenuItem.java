@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 public class PopUpMenuItem {
 
 	private final CharSequence title;
+	@ColorInt
+	private final Integer titleColor;
 	private final Drawable icon;
 	private final OnPopUpMenuItemClickListener onClickListener;
 	@ColorInt
@@ -18,6 +20,7 @@ public class PopUpMenuItem {
 	private final Object tag;
 
 	private PopUpMenuItem(CharSequence title,
+						  @ColorInt @Nullable Integer titleColor,
 	                      Drawable icon,
 	                      OnPopUpMenuItemClickListener onClickListener,
 	                      Integer compoundBtnColor,
@@ -25,6 +28,7 @@ public class PopUpMenuItem {
 	                      boolean showTopDivider,
 	                      Object tag) {
 		this.title = title;
+		this.titleColor = titleColor;
 		this.icon = icon;
 		this.onClickListener = onClickListener;
 		this.compoundBtnColor = compoundBtnColor;
@@ -35,6 +39,12 @@ public class PopUpMenuItem {
 
 	public CharSequence getTitle() {
 		return title;
+	}
+
+	@ColorInt
+	@Nullable
+	public Integer getTitleColor() {
+		return titleColor;
 	}
 
 	public Drawable getIcon() {
@@ -66,9 +76,15 @@ public class PopUpMenuItem {
 		return tag;
 	}
 
+	public boolean hasCustomization() {
+		return isShowCompoundBtn() || getTitleColor() != null;
+	}
+
 	public static class Builder {
 		private final Context ctx;
 		private CharSequence title;
+		@ColorInt
+		private Integer titleColor;
 		private Drawable icon;
 		private OnPopUpMenuItemClickListener onClickListener;
 		@ColorInt
@@ -88,6 +104,11 @@ public class PopUpMenuItem {
 
 		public Builder setTitle(CharSequence title) {
 			this.title = title;
+			return this;
+		}
+
+		public Builder setTitleColor(@ColorInt Integer titleColor) {
+			this.titleColor = titleColor;
 			return this;
 		}
 
@@ -122,8 +143,8 @@ public class PopUpMenuItem {
 		}
 
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, icon, onClickListener,
-					compoundBtnColor, selected, showTopDivider, tag);
+			return new PopUpMenuItem(title, titleColor, icon,
+					onClickListener, compoundBtnColor, selected, showTopDivider, tag);
 		}
 	}
 }
