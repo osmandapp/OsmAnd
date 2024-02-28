@@ -259,7 +259,10 @@ public class MapSelectionHelper {
 				} else {
 					if (isRoute && !selectedRoutes) {
 						selectedRoutes = true;
-						addRoute(result, tileBox, point, createRouteFilter());
+						NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+						if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+							addRoute(result, tileBox, point, routeFilter);
+						}
 					}
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
 					if (!amenityAdded && !isRoute) {
@@ -337,7 +340,10 @@ public class MapSelectionHelper {
 							boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
 							if (isRoute && !selectedRoutes) {
 								selectedRoutes = true;
-								addRoute(result, tileBox, point, createRouteFilter());
+								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+								if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+									addRoute(result, tileBox, point, routeFilter);
+								}
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
