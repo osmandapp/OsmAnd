@@ -4835,4 +4835,6 @@
     <string name="poi_us_maps_recreation_area_accessibility_info">Informoj pri aliro</string>
     <string name="poi_nfs_yes">Administrata de Usona Arbara Agentejo (USFS)</string>
     <string name="poi_blm_yes">Administrata de Usona Ofico de Tera Administrado (US BLM)</string>
+    <string name="poi_impromptu">Neformala</string>
+    <string name="poi_reservation">Rezervado</string>
 </resources>
