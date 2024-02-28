@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.IMultiStateCardController;
+import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringStyleAlgorithms;
 import net.osmand.plus.routing.ColoringType;
@@ -28,6 +29,8 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 
 	protected final OsmandApplication app;
 	private final List<ColoringStyle> supportedColoringStyles;
+
+	private MultiStateCard card;
 	private ColoringStyle selectedColoringStyle;
 	protected boolean nightMode;
 
@@ -36,6 +39,11 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 		this.app = app;
 		this.supportedColoringStyles = collectSupportedColoringStyles();
 		this.selectedColoringStyle = selectedColoringStyle;
+	}
+
+	@Override
+	public void bindCard(@NonNull MultiStateCard card) {
+		this.card = card;
 	}
 
 	@NonNull
@@ -69,16 +77,14 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 	}
 
 	@Override
-	public boolean onMultiStateMenuItemSelected(@NonNull FragmentActivity activity,
+	public void onMultiStateMenuItemSelected(@NonNull FragmentActivity activity,
 	                                            @NonNull View view, @NonNull PopUpMenuItem item) {
 		ColoringStyle newColoringStyle = (ColoringStyle) item.getTag();
 		if (!isAvailableColoringStyle(newColoringStyle)) {
 			showUnavailableColoringStyleSnackbar(activity, newColoringStyle, view);
-		} else if (!Objects.equals(selectedColoringStyle, newColoringStyle)) {
-			selectColoringStyle(newColoringStyle);
-			return true;
+		} else {
+			askSelectColoringStyle(newColoringStyle);
 		}
-		return false;
 	}
 
 	private void showUnavailableColoringStyleSnackbar(@NonNull FragmentActivity activity,
@@ -112,12 +118,16 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 		return selectedColoringStyle;
 	}
 
-	protected void selectColoringStyle(@NonNull ColoringStyle coloringStyle) {
-		this.selectedColoringStyle = coloringStyle;
-		onColoringStyleSelected(coloringStyle);
+	public void askSelectColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		if (!Objects.equals(selectedColoringStyle, coloringStyle)) {
+			this.selectedColoringStyle = coloringStyle;
+			onColoringStyleSelected(coloringStyle);
+		}
 	}
 
-	protected abstract void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle);
+	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+		card.onStateChanged();
+	}
 
 	@NonNull
 	public List<ColoringStyle> getSupportedColoringStyles() {

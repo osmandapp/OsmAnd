@@ -43,6 +43,7 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
+import net.osmand.plus.card.color.palette.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
@@ -336,6 +337,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		exitTrackAppearanceMode();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getColorCardController().onDestroy(getActivity());
+	}
+
 	private void enterTrackAppearanceMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -412,7 +419,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (buttonIndex == RESET_BUTTON_INDEX) {
 				trackDrawInfo.resetParams(app, selectedGpxFile.getGpxFile());
 				TrackColorController colorController = getColorCardController();
-				colorController.getColorsPaletteController().selectColor(trackDrawInfo.getColor()); // TODO do we really need this ??
+				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
+				IColorsPaletteController paletteController = colorController.getColorsPaletteController();
+				paletteController.selectColor(trackDrawInfo.getColor());
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
 				refreshMap();
@@ -559,10 +568,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_apply);
-		saveButton.setOnClickListener(v -> {
-			saveTrackInfo();
-			dismiss();
-		});
+		saveButton.setOnClickListener(v -> onSaveButtonClicked());
 
 		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setButtonType(DialogButtonType.SECONDARY);
@@ -578,6 +584,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
+	}
+
+	private void onSaveButtonClicked() {
+		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		saveTrackInfo();
+		dismiss();
 	}
 
 	private void setupScrollShadow() {

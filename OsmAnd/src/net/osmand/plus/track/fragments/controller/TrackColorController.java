@@ -106,10 +106,8 @@ public class TrackColorController extends ColoringStyleCardController implements
 	private IColoringStyleDetailsController getColoringStyleDetailsController() {
 		if (coloringStyleDetailsController == null) {
 			GPXTrackAnalysis analysis = selectedGpx.getTrackAnalysis(app);
-			ColoringStyle coloringStyle = new ColoringStyle(
-					drawInfo.getColoringType(), drawInfo.getRouteInfoAttribute()
-			);
-			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, coloringStyle, analysis);
+			ColoringStyle selectedColoringStyle = drawInfo.getColoringStyle();
+			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedColoringStyle, analysis);
 		}
 		return coloringStyleDetailsController;
 	}
@@ -125,7 +123,6 @@ public class TrackColorController extends ColoringStyleCardController implements
 			menuItems.add(new PopUpMenuItem.Builder(app)
 					.setTitle(coloringStyle.toHumanString(app))
 					.setTitleColor(titleColor)
-					.showTopDivider(coloringStyle.getType() == ColoringType.SPEED)
 					.setTag(coloringStyle)
 					.create()
 			);
@@ -135,6 +132,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 
 	@Override
 	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+		super.onColoringStyleSelected(coloringStyle);
 		IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
 		styleDetailsController.setColoringStyle(coloringStyle);
 		if (listener != null) {
@@ -168,6 +166,13 @@ public class TrackColorController extends ColoringStyleCardController implements
 			return true;
 		}
 		return isAvailableForDrawingTrack(app, coloringStyle, selectedGpx);
+	}
+
+	public void onDestroy(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			DialogManager manager = app.getDialogManager();
+			manager.unregister(PROCESS_ID);
+		}
 	}
 
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {

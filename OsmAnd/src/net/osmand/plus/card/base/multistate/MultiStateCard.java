@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -30,6 +29,7 @@ public class MultiStateCard extends BaseCard {
 	                      @NonNull IMultiStateCardController controller, boolean usedOnMap) {
 		super(activity, usedOnMap);
 		this.controller = controller;
+		controller.bindCard(this);
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class MultiStateCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		updateCardTitle();
+		updateStateSelector();
+		bindSelectedStateContent();
+	}
+
+	public void onStateChanged() {
 		updateStateSelector();
 		bindSelectedStateContent();
 	}
@@ -71,12 +76,7 @@ public class MultiStateCard extends BaseCard {
 		List<PopUpMenuItem> menuItems = controller.getMultiSateMenuItems();
 
 		OnPopUpMenuItemClickListener onItemClickListener = item -> {
-			if (controller.onMultiStateMenuItemSelected(activity, selector, item)) {
-				// Update selected state only if controller
-				// has processed user's selection and returned 'true'
-				updateStateSelector();
-				bindSelectedStateContent();
-			}
+			controller.onMultiStateMenuItemSelected(activity, selector, item);
 		};
 		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
 		displayData.anchorView = selector;

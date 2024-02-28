@@ -49,4 +49,6 @@ public interface IColorsPaletteController extends IDialogController, ColorPicker
 
 	boolean isSelectedColor(@NonNull PaletteColor paletteColor);
 
+	void refreshLastUsedTime();
+
 }

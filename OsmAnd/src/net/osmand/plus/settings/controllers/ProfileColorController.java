@@ -2,7 +2,9 @@ package net.osmand.plus.settings.controllers;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
@@ -42,9 +44,11 @@ public class ProfileColorController extends ColorsPaletteController implements I
 		return true;
 	}
 
-	public static void onDestroy(@NonNull OsmandApplication app) {
-		DialogManager manager = app.getDialogManager();
-		manager.unregister(PROCESS_ID);
+	public void onDestroy(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			DialogManager manager = app.getDialogManager();
+			manager.unregister(PROCESS_ID);
+		}
 	}
 
 	@NonNull

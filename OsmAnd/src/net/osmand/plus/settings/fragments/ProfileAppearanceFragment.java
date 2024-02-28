@@ -439,10 +439,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			ProfileColorController.onDestroy(app);
-		}
+		getColorsPaletteController().onDestroy(getActivity());
 	}
 
 	private void createColorsCard(PreferenceViewHolder holder) {
@@ -457,7 +454,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	}
 
 	@NonNull
-	private ColorsPaletteController getColorsPaletteController() {
+	private ProfileColorController getColorsPaletteController() {
 		return ProfileColorController.getOrCreateInstance(
 				app, getSelectedAppMode(), this, changedProfile.getActualColor(), isNightMode()
 		);

@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface IMultiStateCardController {
 
+	void bindCard(@NonNull MultiStateCard card);
+
 	@NonNull
 	String getMultiStateCardTitle();
 
@@ -25,8 +27,8 @@ public interface IMultiStateCardController {
 	@NonNull
 	List<PopUpMenuItem> getMultiSateMenuItems();
 
-	boolean onMultiStateMenuItemSelected(@NonNull FragmentActivity activity, @NonNull View view,
-	                                     @NonNull PopUpMenuItem item);
+	void onMultiStateMenuItemSelected(@NonNull FragmentActivity activity,
+	                                  @NonNull View view, @NonNull PopUpMenuItem item);
 
 	void onBindMultiStateCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode);
 }

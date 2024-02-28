@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -181,6 +182,11 @@ public class TrackDrawInfo {
 
 	public void setWidth(String width) {
 		this.width = width;
+	}
+
+	@NonNull
+	public ColoringStyle getColoringStyle() {
+		return new ColoringStyle(getColoringType(), getRouteInfoAttribute());
 	}
 
 	@NonNull

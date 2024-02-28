@@ -132,6 +132,7 @@ public class ColorsPaletteController implements IColorsPaletteController {
 		}
 	}
 
+	@Override
 	public void refreshLastUsedTime() {
 		long now = System.currentTimeMillis();
 		selectedPaletteColor.setLastUsedTime(now);
