@@ -105,7 +105,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	@NonNull
 	private IColoringStyleDetailsController getColoringStyleDetailsController() {
 		if (coloringStyleDetailsController == null) {
-			GPXTrackAnalysis analysis = selectedGpx.getTrackAnalysis(app);
+			GPXTrackAnalysis analysis = selectedGpx != null ? selectedGpx.getTrackAnalysis(app) : null;
 			ColoringStyle selectedColoringStyle = drawInfo.getColoringStyle();
 			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedColoringStyle, analysis);
 		}

@@ -212,10 +212,6 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
 	}
 
-	public static List<Integer> getCustomColors(ListStringPreference colorsListPreference) {
-		return getCustomColors(colorsListPreference, null);
-	}
-
 	public static List<Integer> getCustomColors(ListStringPreference colorsListPreference, ApplicationMode appMode) {
 		List<Integer> colors = new ArrayList<>();
 		List<String> colorNames;
