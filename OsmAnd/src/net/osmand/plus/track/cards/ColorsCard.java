@@ -235,10 +235,6 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return colors;
 	}
 
-	public boolean isBaseColor(int color) {
-		return colors.contains(color);
-	}
-
 	private void saveCustomColors() {
 		List<String> colorNames = new ArrayList<>();
 		for (Integer color : customColors) {

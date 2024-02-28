@@ -56,7 +56,6 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.ActionsCard;
-import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
