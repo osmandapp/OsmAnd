@@ -175,7 +175,7 @@
     <string name="int_seconds">sekundi</string>
     <string name="int_min">min.</string>
     <string name="max_speed_none">nijedan</string>
-    <string name="stop_routing_confirm">Zaustavi navođenje?</string>
+    <string name="stop_routing_confirm">Zaustavljaš navođenje?</string>
     <string name="recording_context_menu_show">Prikaži</string>
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Slikanje</string>
@@ -3994,7 +3994,7 @@
     <string name="track_recording_stop_without_saving">Zaustavi bez snimanja</string>
     <string name="track_recording_save_and_stop">Sačuvaj i zaustavi snimanje</string>
     <string name="track_recording_title">Snimanje trase zaustavljeno</string>
-    <string name="track_recording_description">Zaustaviti snimanje? 
+    <string name="track_recording_description">Zaustavljaš snimanje?
 \nSve nesačuvani podaci će biti izgubljeni.</string>
     <string name="on_pause">Na pauzi</string>
     <string name="app_restart_required">Potrebno je ponovno pokretanje programa radi primene nekih podešavanja.</string>
