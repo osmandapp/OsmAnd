@@ -66,7 +66,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ColorPickerListener, InAppPurchaseListener {
+public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ITrackColorControllerListener, InAppPurchaseListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
