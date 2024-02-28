@@ -1,4 +1,4 @@
-package net.osmand.plus.helpers;
+package net.osmand.plus.avoidroads;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -22,7 +22,6 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -38,7 +37,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -95,7 +93,7 @@ public class AvoidSpecificRoads {
 	}
 
 	private ArrayAdapter<AvoidRoadInfo> createAdapter(MapActivity mapActivity, boolean nightMode) {
-		ArrayList<AvoidRoadInfo> points = new ArrayList<>(impassableRoads.values());
+		List<AvoidRoadInfo> points = new ArrayList<>(impassableRoads.values());
 		LatLon mapLocation = mapActivity.getMapLocation();
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
@@ -387,6 +385,7 @@ public class AvoidSpecificRoads {
 		boolean isCancelled();
 	}
 
+	@NonNull
 	private AvoidRoadInfo getAvoidRoadInfoForDataObject(@Nullable RouteDataObject object, double lat, double lon, String appModeKey) {
 		AvoidRoadInfo avoidRoadInfo = impassableRoads.get(new LatLon(lat, lon));
 		if (avoidRoadInfo == null) {
@@ -395,41 +394,15 @@ public class AvoidSpecificRoads {
 		if (object != null) {
 			avoidRoadInfo.id = object.id;
 //			avoidRoadInfo.direction = object.directionRoute(0, true);
-			avoidRoadInfo.direction = Double.NaN;
 		} else {
 			avoidRoadInfo.id = 0;
-			avoidRoadInfo.direction = Double.NaN;
 		}
+		avoidRoadInfo.direction = Double.NaN;
 		avoidRoadInfo.latitude = lat;
 		avoidRoadInfo.longitude = lon;
 		avoidRoadInfo.appModeKey = appModeKey;
 		avoidRoadInfo.name = getRoadName(object);
+
 		return avoidRoadInfo;
-	}
-
-	public static class AvoidRoadInfo {
-		public long id;
-		public double direction = Double.NaN;
-		public double latitude;
-		public double longitude;
-		public String name;
-		public String appModeKey;
-
-		@Override
-		public boolean equals(@Nullable Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-
-			AvoidRoadInfo other = (AvoidRoadInfo) obj;
-			return Math.abs(latitude - other.latitude) < 0.00001
-					&& Math.abs(longitude - other.longitude) < 0.00001
-					&& Algorithms.objectEquals(name, other.name)
-					&& Algorithms.objectEquals(appModeKey, other.appModeKey)
-					&& id == other.id;
-		}
 	}
 }

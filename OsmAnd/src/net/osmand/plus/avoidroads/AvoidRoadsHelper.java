@@ -1,4 +1,4 @@
-package net.osmand.plus.routing;
+package net.osmand.plus.avoidroads;
 
 import static net.osmand.IndexConstants.AVOID_ROADS_FILE_EXT;
 import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;

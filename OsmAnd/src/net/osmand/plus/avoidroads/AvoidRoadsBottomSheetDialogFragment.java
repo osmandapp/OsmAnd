@@ -1,4 +1,4 @@
-package net.osmand.plus.routepreparationmenu;
+package net.osmand.plus.avoidroads;
 
 import static net.osmand.IndexConstants.AVOID_ROADS_FILE_EXT;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
@@ -32,8 +32,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.routing.AvoidRoadsHelper;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
