@@ -1,6 +1,5 @@
 package net.osmand.plus.card.base.multistate;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -53,7 +52,6 @@ public class MultiStateCard extends BaseCard {
 	private void updateStateSelector() {
 		View selector = view.findViewById(R.id.card_selector);
 		selector.setOnClickListener(v -> showPopUpMenu());
-		updateStateSelectorAccentColor();
 		updateStateSelectorTitle();
 	}
 
@@ -61,13 +59,6 @@ public class MultiStateCard extends BaseCard {
 		View selector = view.findViewById(R.id.card_selector);
 		TextView tvTitle = selector.findViewById(R.id.title);
 		tvTitle.setText(controller.getMultiStateSelectorTitle());
-		selector.invalidate();
-	}
-
-	private void updateStateSelectorAccentColor() {
-		View selector = view.findViewById(R.id.card_selector);
-		int colorInt = controller.getMultiStateSelectorAccentColor(nightMode);
-		UiUtilities.setupSelectableBackground(app, selector, colorInt);
 	}
 
 	private void bindSelectedStateContent() {
