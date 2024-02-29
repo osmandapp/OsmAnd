@@ -217,7 +217,7 @@ public class MapSelectionHelper {
 		if (renderedObjects != null) {
 			double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 			double sinRotateTileSize = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-			NetworkRouteSelectorFilter routeSelectorFilter = null;
+			boolean selectedRoutes = false;
 			for (RenderedObject renderedObject : renderedObjects) {
 				String routeID = renderedObject.getRouteID();
 				String fileName = renderedObject.getGpxFileName();
@@ -257,11 +257,12 @@ public class MapSelectionHelper {
 				if (isTravelGpx) {
 					addTravelGpx(result, renderedObject, filter);
 				} else {
-					if (isRoute) {
-						if (routeSelectorFilter == null) {
-							routeSelectorFilter = createRouteFilter();
+					if (isRoute && !selectedRoutes) {
+						selectedRoutes = true;
+						NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+						if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+							addRoute(result, tileBox, point, routeFilter);
 						}
-						addRoute(result, tileBox, point, routeSelectorFilter);
 					}
 					boolean amenityAdded = addAmenity(result, renderedObject, searchLatLon);
 					if (!amenityAdded && !isRoute) {
@@ -279,7 +280,7 @@ public class MapSelectionHelper {
 			int delta = 20;
 			PointI tl = new PointI((int) point.x - delta, (int) point.y - delta);
 			PointI br = new PointI((int) point.x + delta, (int) point.y + delta);
-			NetworkRouteSelectorFilter routeSelectorFilter = null;
+			boolean selectedRoutes = false;
 			MapSymbolInformationList symbols = rendererView.getSymbolsIn(new AreaI(tl, br), false);
 			for (int i = 0; i < symbols.size(); i++) {
 				MapSymbolInformation symbolInfo = symbols.get(i);
@@ -337,11 +338,12 @@ public class MapSelectionHelper {
 						if (obfMapObject != null) {
 							Map<String, String> tags = getTags(obfMapObject.getResolvedAttributes());
 							boolean isRoute = !Algorithms.isEmpty(OsmRouteType.getRouteKeys(tags));
-							if (isRoute) {
-								if (routeSelectorFilter == null) {
-									routeSelectorFilter = createRouteFilter();
+							if (isRoute && !selectedRoutes) {
+								selectedRoutes = true;
+								NetworkRouteSelectorFilter routeFilter = createRouteFilter();
+								if (!Algorithms.isEmpty(routeFilter.typeFilter)) {
+									addRoute(result, tileBox, point, routeFilter);
 								}
-								addRoute(result, tileBox, point, routeSelectorFilter);
 							}
 							IOnPathMapSymbol onPathMapSymbol = getOnPathMapSymbol(symbolInfo);
 							if (onPathMapSymbol == null) {
