@@ -66,6 +66,9 @@ public class AvoidSpecificRoads {
 	}
 
 	public void loadImpassableRoads() {
+		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+			builder.clearImpassableRoadLocations();
+		}
 		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
 			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);
 		}
