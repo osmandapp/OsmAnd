@@ -120,6 +120,7 @@ import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDataItem;
@@ -2446,9 +2447,9 @@ public class OsmandAidlApi {
 	}
 
 	public boolean getBlockedRoads(@NonNull List<ABlockedRoad> blockedRoads) {
-		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
-		for (AvoidRoadInfo info : impassableRoads.values()) {
-			blockedRoads.add(new ABlockedRoad(info.id, info.latitude, info.longitude, info.direction, info.name, info.appModeKey));
+		for (AvoidRoadInfo info : app.getAvoidSpecificRoads().getImpassableRoads()) {
+			blockedRoads.add(new ABlockedRoad(info.getId(), info.getLatitude(), info.getLongitude(),
+					info.getDirection(), info.getName(app), info.getAppModeKey()));
 		}
 		return true;
 	}
@@ -2502,8 +2503,12 @@ public class OsmandAidlApi {
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
 
 			boolean success = settings.setPreference(prefId, value, appMode);
-			if (success && settings.isRenderProperty(prefId) && mapActivity != null) {
-				mapActivity.refreshMapComplete();
+			if (success) {
+				if (settings.isRenderProperty(prefId) && mapActivity != null) {
+					mapActivity.refreshMapComplete();
+				} else if (ImpassableRoadsStorage.isAvoidRoadsPref(prefId)) {
+					app.getAvoidSpecificRoads().loadImpassableRoads();
+				}
 			}
 			return success;
 		}

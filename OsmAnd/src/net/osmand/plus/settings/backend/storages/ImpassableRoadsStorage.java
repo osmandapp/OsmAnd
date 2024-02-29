@@ -8,6 +8,7 @@ import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +16,12 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
+
+	private static final String POINTS_KEY = "impassable_road_points";
+	private static final String ROADS_IDS_KEY = "impassable_roads_ids";
+	private static final String DIRECTIONS_KEY = "impassable_roads_directions";
+	private static final String DESCRIPTIONS_KEY = "impassable_roads_descriptions";
+	private static final String APP_MODES_KEY = "impassable_roads_app_mode_keys";
 
 	protected final CommonPreference<String> ROADS_IDS;
 	protected final CommonPreference<String> DIRECTIONS;
@@ -24,21 +31,21 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 		super(settings);
 		POINTS.storeLastModifiedTime();
 
-		ROADS_IDS = new StringPreference(settings, "impassable_roads_ids", "").makeGlobal().makeShared();
-		DIRECTIONS = new StringPreference(settings, "impassable_roads_directions", "").makeGlobal().makeShared();
-		APP_MODES = new StringPreference(settings, "impassable_roads_app_mode_keys", "").makeGlobal().makeShared();
+		ROADS_IDS = new StringPreference(settings, ROADS_IDS_KEY, "").makeGlobal().makeShared();
+		DIRECTIONS = new StringPreference(settings, DIRECTIONS_KEY, "").makeGlobal().makeShared();
+		APP_MODES = new StringPreference(settings, APP_MODES_KEY, "").makeGlobal().makeShared();
 	}
 
 	@NonNull
 	@Override
 	protected String getPointsKey() {
-		return "impassable_road_points";
+		return POINTS_KEY;
 	}
 
 	@NonNull
 	@Override
 	protected String getDescriptionsKey() {
-		return "impassable_roads_descriptions";
+		return DESCRIPTIONS_KEY;
 	}
 
 	@NonNull
@@ -103,14 +110,9 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 			LatLon latLon = points.get(i);
 			PointDescription description = PointDescription.deserializeFromString(descriptions.get(i), null);
 
-			AvoidRoadInfo avoidRoadInfo = new AvoidRoadInfo();
-			avoidRoadInfo.id = roadIds.get(i);
-			avoidRoadInfo.latitude = latLon.getLatitude();
-			avoidRoadInfo.longitude = latLon.getLongitude();
-			avoidRoadInfo.direction = directions.get(i);
-			avoidRoadInfo.name = description.getName();
-			avoidRoadInfo.appModeKey = appModeKeys.get(i);
-			avoidRoadsInfo.add(avoidRoadInfo);
+			AvoidRoadInfo info = new AvoidRoadInfo(roadIds.get(i), directions.get(i), latLon.getLatitude(),
+					latLon.getLongitude(), description.getName(), appModeKeys.get(i));
+			avoidRoadsInfo.add(info);
 		}
 
 		return avoidRoadsInfo;
@@ -123,11 +125,11 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 		List<String> appModeKeys = getAppModeKeys(points.size());
 		List<String> descriptions = getPointDescriptions(points.size());
 
-		roadIds.add(0, avoidRoadInfo.id);
-		directions.add(0, avoidRoadInfo.direction);
-		points.add(0, new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude));
-		appModeKeys.add(0, avoidRoadInfo.appModeKey);
-		descriptions.add(0, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
+		roadIds.add(0, avoidRoadInfo.getId());
+		directions.add(0, avoidRoadInfo.getDirection());
+		points.add(0, avoidRoadInfo.getLatLon());
+		appModeKeys.add(0, avoidRoadInfo.getAppModeKey());
+		descriptions.add(0, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.getName(settings.getContext()))));
 
 		return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys, directions);
 	}
@@ -135,17 +137,17 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 	public boolean updateImpassableRoadInfo(@NonNull AvoidRoadInfo avoidRoadInfo) {
 		List<LatLon> points = getPoints();
 
-		int index = points.indexOf(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude));
+		int index = points.indexOf(avoidRoadInfo.getLatLon());
 		if (index != -1) {
 			List<Long> roadIds = getRoadIds(points.size());
 			List<Double> directions = getDirections(points.size());
 			List<String> appModeKeys = getAppModeKeys(points.size());
 			List<String> descriptions = getPointDescriptions(points.size());
 
-			roadIds.set(index, avoidRoadInfo.id);
-			directions.set(index, avoidRoadInfo.direction);
-			appModeKeys.set(index, avoidRoadInfo.appModeKey);
-			descriptions.set(index, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.name)));
+			roadIds.set(index, avoidRoadInfo.getId());
+			directions.set(index, avoidRoadInfo.getDirection());
+			appModeKeys.set(index, avoidRoadInfo.getAppModeKey());
+			descriptions.set(index, PointDescription.serializeToString(new PointDescription("", avoidRoadInfo.getName(settings.getContext()))));
 			return saveAvoidRoadData(points, descriptions, roadIds, appModeKeys, directions);
 		}
 		return false;
@@ -248,5 +250,9 @@ public class ImpassableRoadsStorage extends SettingsMapPointsStorage {
 			}
 		}
 		return APP_MODES.set(builder.toString());
+	}
+
+	public static boolean isAvoidRoadsPref(@NonNull String id) {
+		return CollectionUtils.equalsToAny(id, ROADS_IDS_KEY, POINTS_KEY, DIRECTIONS_KEY, DESCRIPTIONS_KEY, APP_MODES_KEY);
 	}
 }

@@ -1,17 +1,66 @@
 package net.osmand.plus.avoidroads;
 
+import android.content.Context;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.data.LatLon;
+import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
-public class AvoidRoadInfo {
+import java.io.Serializable;
 
-	public long id;
-	public double direction = Double.NaN;
-	public double latitude;
-	public double longitude;
-	public String name;
-	public String appModeKey;
+public class AvoidRoadInfo implements Serializable {
+
+	private final long id;
+	private final double direction;
+	private final double latitude;
+	private final double longitude;
+	private final String name;
+	private final String appModeKey;
+
+	public AvoidRoadInfo(long id, double direction, double latitude, double longitude, String name, String appModeKey) {
+		this.id = id;
+		this.direction = direction;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.name = name;
+		this.appModeKey = appModeKey;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public double getDirection() {
+		return direction;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	@NonNull
+	public LatLon getLatLon() {
+		return new LatLon(latitude, longitude);
+	}
+
+	@NonNull
+	public String getName(@NonNull Context context) {
+		if (!Algorithms.isEmpty(name)) {
+			return name;
+		}
+		return context.getString(R.string.shared_string_road);
+	}
+
+	public String getAppModeKey() {
+		return appModeKey;
+	}
 
 	@Override
 	public int hashCode() {

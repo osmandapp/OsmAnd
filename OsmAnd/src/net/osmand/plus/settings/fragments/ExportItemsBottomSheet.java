@@ -344,7 +344,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			setupBottomSheetItemForFile(item, settingsItem.getFile());
 		} else if (object instanceof AvoidRoadInfo) {
 			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) object;
-			item.setTitle(avoidRoadInfo.name);
+			item.setTitle(avoidRoadInfo.getName(app));
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_alert, getItemIconColor(object)));
 		} else if (object instanceof OsmNotesPoint) {
 			OsmNotesPoint osmNotesPoint = (OsmNotesPoint) object;

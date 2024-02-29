@@ -168,7 +168,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
 				}
 			} else if (currentItem instanceof AvoidRoadInfo) {
-				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
+				itemHolder.title.setText(((AvoidRoadInfo) currentItem).getName(app));
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
 			} else if (currentItem instanceof FavoriteGroup) {
 				itemHolder.title.setText(((FavoriteGroup) currentItem).getDisplayName(app));

@@ -25,16 +25,16 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 public class AvoidSpecificRoads {
 
 	private static final float MAX_AVOID_ROUTE_SEARCH_RADIUS_DP = 32f;
 
 	private final OsmandApplication app;
-	private final Map<LatLon, AvoidRoadInfo> impassableRoads = new LinkedHashMap<>();
+	private final List<AvoidRoadInfo> impassableRoads = new ArrayList<>();
 
 	public AvoidSpecificRoads(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -50,48 +50,40 @@ public class AvoidSpecificRoads {
 	}
 
 	public void loadImpassableRoads() {
-		for (AvoidRoadInfo avoidRoadInfo : app.getSettings().getImpassableRoadPoints()) {
-			impassableRoads.put(new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude), avoidRoadInfo);
-		}
+		impassableRoads.clear();
+		impassableRoads.addAll(app.getSettings().getImpassableRoadPoints());
 	}
 
-	public Map<LatLon, AvoidRoadInfo> getImpassableRoads() {
+	@NonNull
+	public List<AvoidRoadInfo> getImpassableRoads() {
 		return impassableRoads;
 	}
 
+	@NonNull
+	public Set<LatLon> getImpassableRoadsCoordinates() {
+		Set<LatLon> list = new HashSet<>();
+		for (AvoidRoadInfo info : impassableRoads) {
+			list.add(info.getLatLon());
+		}
+		return list;
+	}
+
 	public void initRouteObjects(boolean force) {
-		for (Map.Entry<LatLon, AvoidRoadInfo> entry : impassableRoads.entrySet()) {
-			AvoidRoadInfo roadInfo = entry.getValue();
-			if (roadInfo.id != 0) {
+		for (AvoidRoadInfo roadInfo : impassableRoads) {
+			long id = roadInfo.getId();
+			if (id != 0) {
 				for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
 					if (force) {
-						builder.removeImpassableRoad(roadInfo.id);
+						builder.removeImpassableRoad(id);
 					} else {
-						builder.addImpassableRoad(roadInfo.id);
+						builder.addImpassableRoad(id);
 					}
 				}
 			}
-			if (force || roadInfo.id == 0) {
-				addImpassableRoad(null, entry.getKey(), false, true, roadInfo.appModeKey);
+			if (force || id == 0) {
+				addImpassableRoad(null, roadInfo.getLatLon(), false, true, roadInfo.getAppModeKey());
 			}
 		}
-	}
-
-	public String getRoadName(@Nullable RouteDataObject obj) {
-		if (obj != null) {
-			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
-			String name = RoutingHelperUtils.formatStreetName(
-					obj.getName(locale, transliterate),
-					obj.getRef(locale, transliterate, true),
-					obj.getDestinationName(locale, transliterate, true),
-					app.getString(R.string.towards)
-			);
-			if (!TextUtils.isEmpty(name)) {
-				return name;
-			}
-		}
-		return app.getString(R.string.shared_string_road);
 	}
 
 	protected void recalculateRoute(@Nullable String appModeKey) {
@@ -101,16 +93,24 @@ public class AvoidSpecificRoads {
 
 	public void removeImpassableRoad(@NonNull LatLon latLon) {
 		app.getSettings().removeImpassableRoad(latLon);
-		AvoidRoadInfo obj = impassableRoads.remove(latLon);
-		if (obj != null) {
+
+		AvoidRoadInfo roadInfo = getAvoidRoadInfo(latLon);
+		if (roadInfo != null) {
+			impassableRoads.remove(roadInfo);
+
 			for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-				builder.removeImpassableRoad(obj.id);
+				builder.removeImpassableRoad(roadInfo.getId());
 			}
 		}
 	}
 
-	public void removeImpassableRoad(@NonNull AvoidRoadInfo info) {
-		removeImpassableRoad(new LatLon(info.latitude, info.longitude));
+	public void removeImpassableRoad(@NonNull AvoidRoadInfo roadInfo) {
+		app.getSettings().removeImpassableRoad(roadInfo.getLatLon());
+		impassableRoads.remove(roadInfo);
+
+		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+			builder.removeImpassableRoad(roadInfo.getId());
+		}
 	}
 
 	public void selectFromMap(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {
@@ -133,11 +133,12 @@ public class AvoidSpecificRoads {
 		List<RouteSegmentResult> roads = app.getMeasurementEditingContext() != null
 				? app.getMeasurementEditingContext().getRoadSegmentData(appMode)
 				: app.getRoutingHelper().getRoute().getOriginalRoute();
+
 		if (mapActivity != null && roads != null) {
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 			float maxDistPx = MAX_AVOID_ROUTE_SEARCH_RADIUS_DP * tb.getDensity();
-			RouteSegmentSearchResult searchResult =
-					RouteSegmentSearchResult.searchRouteSegment(loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);
+			RouteSegmentSearchResult searchResult = RouteSegmentSearchResult.searchRouteSegment(
+					loc.getLatitude(), loc.getLongitude(), maxDistPx / tb.getPixDensity(), roads);
 			if (searchResult != null) {
 				QuadPointDouble point = searchResult.getPoint();
 				LatLon newLoc = new LatLon(MapUtils.get31LatitudeY((int) point.y), MapUtils.get31LongitudeX((int) point.x));
@@ -145,8 +146,8 @@ public class AvoidSpecificRoads {
 				ll.setLongitude(newLoc.getLongitude());
 
 				RouteDataObject object = roads.get(searchResult.getRoadIndex()).getObject();
-				AvoidRoadInfo avoidRoadInfo = getAvoidRoadInfoForDataObject(object, newLoc.getLatitude(), newLoc.getLongitude(), appMode.getStringKey());
-				addImpassableRoadInternal(avoidRoadInfo, showDialog, mapActivity, newLoc);
+				AvoidRoadInfo avoidRoadInfo = getOrCreateAvoidRoadInfo(object, newLoc.getLatitude(), newLoc.getLongitude(), appMode.getStringKey());
+				addImpassableRoadInternal(avoidRoadInfo, showDialog, mapActivity);
 				if (!skipWritingSettings) {
 					app.getSettings().addImpassableRoad(avoidRoadInfo);
 				}
@@ -162,8 +163,8 @@ public class AvoidSpecificRoads {
 						Toast.makeText(mapActivity, R.string.error_avoid_specific_road, Toast.LENGTH_LONG).show();
 					}
 				} else {
-					AvoidRoadInfo avoidRoadInfo = getAvoidRoadInfoForDataObject(object, ll.getLatitude(), ll.getLongitude(), appMode.getStringKey());
-					addImpassableRoadInternal(avoidRoadInfo, showDialog, mapActivity, loc);
+					AvoidRoadInfo avoidRoadInfo = getOrCreateAvoidRoadInfo(object, ll.getLatitude(), ll.getLongitude(), appMode.getStringKey());
+					addImpassableRoadInternal(avoidRoadInfo, showDialog, mapActivity);
 				}
 				return true;
 			}
@@ -175,7 +176,7 @@ public class AvoidSpecificRoads {
 
 		});
 		if (!skipWritingSettings) {
-			AvoidRoadInfo avoidRoadInfo = getAvoidRoadInfoForDataObject(null, loc.getLatitude(), loc.getLongitude(), appMode.getStringKey());
+			AvoidRoadInfo avoidRoadInfo = getOrCreateAvoidRoadInfo(null, loc.getLatitude(), loc.getLongitude(), appMode.getStringKey());
 			app.getSettings().addImpassableRoad(avoidRoadInfo);
 		}
 	}
@@ -190,7 +191,7 @@ public class AvoidSpecificRoads {
 		ll.setLongitude(newLoc.getLongitude());
 
 		ApplicationMode defaultAppMode = app.getRoutingHelper().getAppMode();
-		ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentObject.appModeKey, defaultAppMode);
+		ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentObject.getAppModeKey(), defaultAppMode);
 
 		app.getLocationProvider().getRouteSegment(ll, appMode, false, new ResultMatcher<RouteDataObject>() {
 
@@ -203,14 +204,16 @@ public class AvoidSpecificRoads {
 					}
 				} else {
 					LatLon oldLoc = getLocation(currentObject);
-					app.getSettings().moveImpassableRoad(oldLoc, newLoc);
-					impassableRoads.remove(oldLoc);
-					for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-						builder.removeImpassableRoad(currentObject.id);
+					if (oldLoc != null) {
+						app.getSettings().moveImpassableRoad(oldLoc, newLoc);
 					}
-					AvoidRoadInfo avoidRoadInfo = getAvoidRoadInfoForDataObject(object, newLoc.getLatitude(), newLoc.getLongitude(), appMode.getStringKey());
+					impassableRoads.remove(currentObject);
+					for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+						builder.removeImpassableRoad(currentObject.getId());
+					}
 
-					addImpassableRoadInternal(avoidRoadInfo, showDialog, activity, newLoc);
+					AvoidRoadInfo avoidRoadInfo = getOrCreateAvoidRoadInfo(object, newLoc.getLatitude(), newLoc.getLongitude(), appMode.getStringKey());
+					addImpassableRoadInternal(avoidRoadInfo, showDialog, activity);
 					if (callback != null) {
 						callback.onAddImpassableRoad(true, avoidRoadInfo);
 					}
@@ -225,27 +228,24 @@ public class AvoidSpecificRoads {
 		});
 	}
 
-	private void addImpassableRoadInternal(@NonNull AvoidRoadInfo avoidRoadInfo,
-	                                       boolean showDialog,
-	                                       @Nullable MapActivity activity,
-	                                       @NonNull LatLon loc) {
+	private void addImpassableRoadInternal(@NonNull AvoidRoadInfo roadInfo, boolean showDialog, @Nullable MapActivity activity) {
 		boolean roadAdded = false;
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-			if (!builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
-				builder.addImpassableRoad(avoidRoadInfo.id);
+			if (!builder.getImpassableRoadLocations().contains(roadInfo.getId())) {
+				builder.addImpassableRoad(roadInfo.getId());
 				roadAdded = true;
 			}
 		}
 		if (roadAdded) {
-			app.getSettings().updateImpassableRoadInfo(avoidRoadInfo);
-			impassableRoads.put(loc, avoidRoadInfo);
+			app.getSettings().updateImpassableRoadInfo(roadInfo);
+			impassableRoads.add(roadInfo);
 		} else {
-			LatLon location = getLocation(avoidRoadInfo);
+			LatLon location = getLocation(roadInfo);
 			if (location != null) {
 				app.getSettings().removeImpassableRoad(location);
 			}
 		}
-		recalculateRoute(avoidRoadInfo.appModeKey);
+		recalculateRoute(roadInfo.getAppModeKey());
 		if (activity != null) {
 			if (showDialog) {
 				AvoidRoadsDialog.showDialog(activity, ApplicationMode.valueOfStringKey(roadInfo.getAppModeKey(), null));
@@ -261,8 +261,8 @@ public class AvoidSpecificRoads {
 	@Nullable
 	public LatLon getLocation(@NonNull AvoidRoadInfo avoidRoadInfo) {
 		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
-			if (builder.getImpassableRoadLocations().contains(avoidRoadInfo.id)) {
-				return new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude);
+			if (builder.getImpassableRoadLocations().contains(avoidRoadInfo.getId())) {
+				return avoidRoadInfo.getLatLon();
 			}
 		}
 		return null;
@@ -276,23 +276,43 @@ public class AvoidSpecificRoads {
 	}
 
 	@NonNull
-	private AvoidRoadInfo getAvoidRoadInfoForDataObject(@Nullable RouteDataObject object, double lat, double lon, String appModeKey) {
-		AvoidRoadInfo avoidRoadInfo = impassableRoads.get(new LatLon(lat, lon));
-		if (avoidRoadInfo == null) {
-			avoidRoadInfo = new AvoidRoadInfo();
-		}
-		if (object != null) {
-			avoidRoadInfo.id = object.id;
-//			avoidRoadInfo.direction = object.directionRoute(0, true);
-		} else {
-			avoidRoadInfo.id = 0;
-		}
-		avoidRoadInfo.direction = Double.NaN;
-		avoidRoadInfo.latitude = lat;
-		avoidRoadInfo.longitude = lon;
-		avoidRoadInfo.appModeKey = appModeKey;
-		avoidRoadInfo.name = getRoadName(object);
+	private AvoidRoadInfo getOrCreateAvoidRoadInfo(@Nullable RouteDataObject object, double lat, double lon, @NonNull String appModeKey) {
+		AvoidRoadInfo roadInfo = getAvoidRoadInfo(new LatLon(lat, lon));
+		return roadInfo != null ? roadInfo : createAvoidRoadInfo(object, lat, lon, appModeKey);
+	}
 
-		return avoidRoadInfo;
+	@Nullable
+	private AvoidRoadInfo getAvoidRoadInfo(@NonNull LatLon latLon) {
+		for (AvoidRoadInfo info : impassableRoads) {
+			if (latLon.equals(info.getLatLon())) {
+				return info;
+			}
+		}
+		return null;
+	}
+
+	@NonNull
+	private AvoidRoadInfo createAvoidRoadInfo(@Nullable RouteDataObject object, double lat, double lon, @NonNull String appModeKey) {
+		long id = object != null ? object.getId() : 0;
+//		double direction = object != null ? object.directionRoute(0, true) : Double.NaN;
+		return new AvoidRoadInfo(id, Double.NaN, lat, lon, getRoadName(object), appModeKey);
+	}
+
+	@NonNull
+	private String getRoadName(@Nullable RouteDataObject obj) {
+		if (obj != null) {
+			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			boolean transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+			String name = RoutingHelperUtils.formatStreetName(
+					obj.getName(locale, transliterate),
+					obj.getRef(locale, transliterate, true),
+					obj.getDestinationName(locale, transliterate, true),
+					app.getString(R.string.towards)
+			);
+			if (!TextUtils.isEmpty(name)) {
+				return name;
+			}
+		}
+		return app.getString(R.string.shared_string_road);
 	}
 }
