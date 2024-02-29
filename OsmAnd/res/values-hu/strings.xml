@@ -5629,4 +5629,6 @@
     <string name="rendering_attr_padusDisplayMode_description">A hozzáférés típusa vagy a kezelője szerint</string>
     <string name="rendering_value_access_name">hozzáférés típusa szerint</string>
     <string name="rendering_value_managerName_name">kezelője szerint</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Közterülethatárok elrejtése</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Közterülethatárok elrejtése, de a területek meghagyása</string>
 </resources>
