@@ -2154,7 +2154,7 @@
     <string name="shared_string_color">Colore</string>
     <string name="select_gpx_folder">Seleziona cartella dei file GPX</string>
     <string name="file_can_not_be_moved">Il file non può essere spostato.</string>
-    <string name="shared_string_move">Sposta</string>
+    <string name="shared_string_move">Muovi</string>
     <string name="shared_string_gpx_tracks">Tracce</string>
     <string name="average_speed">Velocità media</string>
     <string name="shared_string_time_moving">In movimento</string>
@@ -5215,8 +5215,8 @@
     <string name="rendering_attr_lightDetail_name">Dettagli chiari</string>
     <string name="deleting_complete">Eliminazione completata</string>
     <string name="verify_account">Verifica il tuo account</string>
-    <string name="manage_subscriptions">Gestisci le sottoscrizioni.</string>
-    <string name="shared_string_deleting">Eliminazione</string>
+    <string name="manage_subscriptions">Gestisci le iscrizioni.</string>
+    <string name="shared_string_deleting">Elimina</string>
     <string name="delete_account">Elimina l\'account</string>
     <string name="shared_string_close_the_dialog">Chiudi la finestra di dialogo</string>
     <string name="terrain_map">Mappa del terreno (3D)</string>
@@ -5225,9 +5225,9 @@
     <string name="power_watts_unit">Watt</string>
     <string name="revolutions_per_minute_unit">RPM</string>
     <string name="terrain_category_description">Linee di contorno del terreno, ombreggiatura in scala di grigi e indicazione della pendenza in scala di colori, per mostrare picchi e pianure.</string>
-    <string name="osmand_cloud_deleting_account_descr">Tra pochi istanti tutti i tuoi dati e il tuo account verranno cancellati da OsmAnd Cloud.
+    <string name="osmand_cloud_deleting_account_descr">In pochi istanti tutti i tuoi dati e il tuo account verranno eliminati da OsmAnd Cloud.
 \n
-\nTutti i dati sul dispositivo rimarranno intatti.</string>
+\nTutti i dati sul dispositivo rimangono intatti.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">Eliminare l\'account OsmAnd Cloud?
 \n
 \nQuesta azione non può essere annullata.</string>
@@ -5236,13 +5236,13 @@
     <string name="osmand_cloud_deletion_secondary_devices_warning">I dispositivi secondari verranno disconnessi da OsmAnd Cloud e perderanno l\'accesso alle funzionalità a pagamento.</string>
     <string name="osmand_cloud_deletion_account_warning">Il tuo account e tutti i dettagli dell\'account saranno %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Tutti i dati di OsmAnd Cloud saranno %1$s. I dati sul dispositivo rimarranno intatti.</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non cancellerà il tuo abbonamento a OsmAnd Pro.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Questo non eliminerà il tuo abbonamento OsmAnd Pro.</string>
     <string name="osmand_cloud_deleted_account_descr">L\'account e tutti i dati sono stati eliminati da OsmAnd Cloud.</string>
     <string name="delete_account_warning">Eliminare l\'account %1$s?</string>
     <string name="backup_error_delete_account_email_match">L\' email non corrisponde al nome utente di accesso</string>
     <string name="verify_account_deletion_descr">Dobbiamo verificare il tuo account prima di eliminarlo.
 \n
-\nInserisci l\'indirizzo email con cui ti sei registrato. Ti verrà inviata una password monouso per il passaggio successivo.</string>
+\nInserisci l\'indirizzo email con cui ti sei registrato. Verrà inviata una password monouso per il passaggio successivo.</string>
     <string name="free_favorites_backup_description">Registrati in OsmAnd Cloud per ottenere il backup gratuito dei preferiti e delle impostazioni.</string>
     <string name="free_favorites_backup">Backup gratuito dei preferiti</string>
     <string name="get_osmand_cloud">Ottieni OsmAnd Cloud</string>
@@ -5620,4 +5620,10 @@
     <string name="help_article_setup_a_route_name">Imposta un percorso</string>
     <string name="speed_limit_warning">Avviso limite di velocità</string>
     <string name="speedometer_description">Mostra la velocità attuale come riportata dal GPS</string>
+    <string name="rendering_attr_padusDisplayMode_description">Per tipo di accesso o nome del gestore</string>
+    <string name="rendering_value_access_name">Per tipo di accesso</string>
+    <string name="rendering_value_managerName_name">Per nome del gestore</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Nascondi i confini del territorio pubblico</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Nascondere i confini del territorio pubblico ma lascia le aree</string>
+    <string name="rendering_attr_padusDisplayMode_name">Modalità di visualizzazione dei terreni pubblici</string>
 </resources>
