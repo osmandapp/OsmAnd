@@ -5631,4 +5631,10 @@
     <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
     <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
     <string name="help_article_setup_a_route_name">Route einrichten</string>
+    <string name="rendering_value_access_name">Nach Zugangsart</string>
+    <string name="rendering_value_managerName_name">Nach Name der Verwaltung</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Grenzen von öffentlichem Land ausblenden</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Grenzen von öffentlichem Land ausblenden, aber Gebiete belassen</string>
+    <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
+    <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
 </resources>

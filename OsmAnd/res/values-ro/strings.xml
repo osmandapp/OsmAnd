@@ -5246,7 +5246,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Toate datele din OsmAnd Cloud vor fi %1$s. Datele de pe dispozitiv rămân neatinse.</string>
     <string name="manage_subscriptions">Gestionare abonamente.</string>
     <string name="delete_account_warning">Ștergeți contul %1$s?</string>
-    <string name="shared_string_deleting">Ștergere</string>
+    <string name="shared_string_deleting">Se șterge</string>
     <string name="deleting_complete">Ștergere finalizată</string>
     <string name="delete_account">Șterge contul</string>
     <string name="backup_error_delete_account_email_match">E-mail-ul nu se potrivește cu numele de utilizator folosit la conectare</string>

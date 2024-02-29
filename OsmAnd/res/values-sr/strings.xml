@@ -5625,4 +5625,10 @@
     <string name="shared_string_limit">Ограничење</string>
     <string name="speedometer_description">Приказ ваше тренутне брзине по подацима ГПС</string>
     <string name="help_article_setup_a_route_name">Постави руту</string>
+    <string name="rendering_attr_padusDisplayMode_name">Начин приказа јавних површина</string>
+    <string name="rendering_attr_padusDisplayMode_description">По типу приступа или имену менаџера</string>
+    <string name="rendering_value_access_name">По типу приступа</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Сакриј границе јавних површина</string>
+    <string name="rendering_value_managerName_name">По имену менаџера</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Сакривање граница јавних површина али области остају</string>
 </resources>
