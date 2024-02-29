@@ -5625,4 +5625,8 @@
     <string name="shared_string_speedometer">Sebességmérő</string>
     <string name="speed_limit_warning">Sebességkorlátozási figyelmeztetés</string>
     <string name="help_article_setup_a_route_name">Útvonal beállítása</string>
+    <string name="rendering_attr_padusDisplayMode_name">Közterületek megjelenítési módja</string>
+    <string name="rendering_attr_padusDisplayMode_description">A hozzáférés típusa vagy a kezelője szerint</string>
+    <string name="rendering_value_access_name">hozzáférés típusa szerint</string>
+    <string name="rendering_value_managerName_name">kezelője szerint</string>
 </resources>
