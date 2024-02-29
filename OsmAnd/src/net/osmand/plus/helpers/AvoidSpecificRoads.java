@@ -181,8 +181,8 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	public void removeImpassableRoad(AvoidRoadInfo obj) {
-		removeImpassableRoad(getLocation(obj));
+	public void removeImpassableRoad(@NonNull AvoidRoadInfo info) {
+		removeImpassableRoad(new LatLon(info.latitude, info.longitude));
 	}
 
 	public void showDialog(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {

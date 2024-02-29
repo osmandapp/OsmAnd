@@ -11,6 +11,8 @@ import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedT
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS;
+import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS_DESCRIPTION;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
@@ -2464,8 +2466,6 @@ public class OsmandSettings {
 	public static final String START_POINT_LON = "start_point_lon";
 	public static final String START_POINT_DESCRIPTION = "start_point_description";
 
-	public static final String INTERMEDIATE_POINTS = "intermediate_points";
-	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description";
 
 	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup";
 	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup";
@@ -2479,11 +2479,6 @@ public class OsmandSettings {
 	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
-	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
-	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
-	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
-	public static final String IMPASSABLE_ROADS_DIRECTIONS = "impassable_roads_directions";
-	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {
 		settingsAPI.edit(globalPreferences)
@@ -3013,6 +3008,14 @@ public class OsmandSettings {
 	{
 		getCustomRenderProperty("appMode");
 		getCustomRenderProperty("defAppMode");
+	}
+
+	public boolean isRenderProperty(@NonNull String prefId) {
+		return prefId.startsWith(RENDERER_PREFERENCE_PREFIX);
+	}
+
+	public boolean isRoutingProperty(@NonNull String prefId) {
+		return prefId.startsWith(ROUTING_PREFERENCE_PREFIX);
 	}
 
 	public CommonPreference<Boolean> getCustomRenderBooleanProperty(@NonNull String attrName) {
