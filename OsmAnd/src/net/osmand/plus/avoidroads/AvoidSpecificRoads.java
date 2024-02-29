@@ -1,27 +1,15 @@
 package net.osmand.plus.avoidroads;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
@@ -31,9 +19,6 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
@@ -51,7 +36,7 @@ public class AvoidSpecificRoads {
 	private final OsmandApplication app;
 	private final Map<LatLon, AvoidRoadInfo> impassableRoads = new LinkedHashMap<>();
 
-	public AvoidSpecificRoads(OsmandApplication app) {
+	public AvoidSpecificRoads(@NonNull OsmandApplication app) {
 		this.app = app;
 		loadImpassableRoads();
 	}
@@ -92,62 +77,6 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	private ArrayAdapter<AvoidRoadInfo> createAdapter(MapActivity mapActivity, boolean nightMode) {
-		List<AvoidRoadInfo> points = new ArrayList<>(impassableRoads.values());
-		LatLon mapLocation = mapActivity.getMapLocation();
-		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
-		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
-
-		return new ArrayAdapter<AvoidRoadInfo>(themedContext, R.layout.waypoint_reached, R.id.title, points) {
-			@NonNull
-			@Override
-			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-				View v = convertView;
-				if (v == null || v.findViewById(R.id.info_close) == null) {
-					v = inflater.inflate(R.layout.waypoint_reached, parent, false);
-				}
-				AvoidRoadInfo item = getItem(position);
-				v.findViewById(R.id.all_points).setVisibility(View.GONE);
-				((ImageView) v.findViewById(R.id.waypoint_icon))
-						.setImageDrawable(getIcon(R.drawable.ic_action_road_works_dark));
-
-				LatLon latLon = item != null ? new LatLon(item.latitude, item.longitude) : null;
-				String name = item != null ? item.name : app.getString(R.string.shared_string_road);
-				((TextView) v.findViewById(R.id.waypoint_dist)).setText(getDist(mapLocation, latLon));
-				((TextView) v.findViewById(R.id.waypoint_text)).setText(name);
-				ImageButton remove = v.findViewById(R.id.info_close);
-				remove.setVisibility(View.VISIBLE);
-				remove.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark));
-				remove.setOnClickListener(view -> {
-					remove(item);
-					removeImpassableRoad(item);
-					notifyDataSetChanged();
-					recalculateRoute(item != null ? item.appModeKey : null);
-				});
-				return v;
-			}
-		};
-	}
-
-	private Drawable getIcon(@DrawableRes int iconId) {
-		return app.getUIUtilities().getThemedIcon(iconId);
-	}
-
-	private String getDist(@NonNull LatLon loc, @Nullable LatLon point) {
-		double dist = point == null ? 0 : MapUtils.getDistance(loc, point);
-		return OsmAndFormatter.getFormattedDistance((float) dist, app);
-	}
-
-	public String getText(@Nullable LatLon point) {
-		if (point != null) {
-			AvoidRoadInfo obj = impassableRoads.get(point);
-			if (obj != null && !TextUtils.isEmpty(obj.name)) {
-				return obj.name;
-			}
-		}
-		return app.getString(R.string.shared_string_road);
-	}
-
 	public String getRoadName(@Nullable RouteDataObject obj) {
 		if (obj != null) {
 			String locale = app.getSettings().MAP_PREFERRED_LOCALE.get();
@@ -165,7 +94,7 @@ public class AvoidSpecificRoads {
 		return app.getString(R.string.shared_string_road);
 	}
 
-	private void recalculateRoute(@Nullable String appModeKey) {
+	protected void recalculateRoute(@Nullable String appModeKey) {
 		ApplicationMode mode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		app.getRoutingHelper().onSettingsChanged(mode);
 	}
@@ -184,35 +113,6 @@ public class AvoidSpecificRoads {
 		removeImpassableRoad(new LatLon(info.latitude, info.longitude));
 	}
 
-	public void showDialog(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {
-		if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-			Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			builder.setTitle(R.string.impassable_road);
-			if (impassableRoads.isEmpty()) {
-				builder.setMessage(R.string.avoid_roads_msg);
-			} else {
-				ArrayAdapter<AvoidRoadInfo> listAdapter = createAdapter(mapActivity, nightMode);
-				builder.setAdapter(listAdapter, (dialog, which) -> {
-					AvoidRoadInfo point = listAdapter.getItem(which);
-					if (point != null) {
-						showOnMap(mapActivity, point.latitude, point.longitude, point.name);
-					}
-					dialog.dismiss();
-				});
-			}
-			builder.setPositiveButton(R.string.shared_string_select_on_map, (dialogInterface, i) -> selectFromMap(mapActivity, mode));
-			builder.setNegativeButton(R.string.shared_string_close, null);
-			builder.show();
-		}
-	}
-
-	public void selectFromMap(@NonNull MapActivity mapActivity) {
-		selectFromMap(mapActivity, null);
-	}
-
 	public void selectFromMap(@NonNull MapActivity mapActivity, @Nullable ApplicationMode mode) {
 		ContextMenuLayer menuLayer = mapActivity.getMapLayers().getContextMenuLayer();
 		menuLayer.setSelectOnMap(result -> {
@@ -221,11 +121,8 @@ public class AvoidSpecificRoads {
 		});
 	}
 
-	public void addImpassableRoad(@Nullable MapActivity mapActivity,
-	                              @NonNull LatLon loc,
-	                              boolean showDialog,
-	                              boolean skipWritingSettings,
-	                              @Nullable String appModeKey) {
+	public void addImpassableRoad(@Nullable MapActivity mapActivity, @NonNull LatLon loc,
+	                              boolean showDialog, boolean skipWritingSettings, @Nullable String appModeKey) {
 		Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
@@ -351,7 +248,7 @@ public class AvoidSpecificRoads {
 		recalculateRoute(avoidRoadInfo.appModeKey);
 		if (activity != null) {
 			if (showDialog) {
-				showDialog(activity, ApplicationMode.valueOfStringKey(avoidRoadInfo.appModeKey, null));
+				AvoidRoadsDialog.showDialog(activity, ApplicationMode.valueOfStringKey(roadInfo.getAppModeKey(), null));
 			}
 			MapContextMenu menu = activity.getContextMenu();
 			if (menu.isActive()) {
@@ -359,13 +256,6 @@ public class AvoidSpecificRoads {
 			}
 			activity.refreshMap();
 		}
-	}
-
-	private void showOnMap(MapActivity ctx, double lat, double lon, String name) {
-		int zoom = Math.max(ctx.getMapView().getZoom(), 15);
-		PointDescription pd = new PointDescription("", name);
-		ctx.getMyApplication().getSettings().setMapLocationToShow(lat, lon, zoom, pd, false, null);
-		MapActivity.launchMapActivityMoveToTop(ctx);
 	}
 
 	@Nullable
