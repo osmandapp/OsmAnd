@@ -50,6 +50,9 @@ public class AvoidSpecificRoads {
 	}
 
 	public void loadImpassableRoads() {
+		for (RoutingConfiguration.Builder builder : app.getAllRoutingConfigs()) {
+			builder.clearImpassableRoadLocations();
+		}
 		impassableRoads.clear();
 		impassableRoads.addAll(app.getSettings().getImpassableRoadPoints());
 	}
