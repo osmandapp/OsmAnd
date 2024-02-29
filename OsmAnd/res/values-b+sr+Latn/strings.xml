@@ -5634,9 +5634,9 @@
     <string name="speed_limit_warning">Upozorenje na ograničenje brzine</string>
     <string name="help_article_setup_a_route_name">Podešavanje rute</string>
     <string name="rendering_attr_padusDisplayMode_name">Način prikaza javnih površina</string>
-    <string name="rendering_attr_padusDisplayMode_description">Prema načinu pristupa ili imenu upravnika</string>
-    <string name="rendering_value_access_name">Prema vrsti pristupa</string>
+    <string name="rendering_attr_padusDisplayMode_description">Po načinu pristupa ili imenu upravnika</string>
+    <string name="rendering_value_access_name">Po tipu pristupa</string>
     <string name="rendering_value_managerName_name">Po imenu upravnika</string>
     <string name="rendering_attr_padusHideBoundaries_name">Sakriti granice javnog zemljišta</string>
-    <string name="rendering_attr_padusHideBoundaries_description">Sakrivanje granice javnog zemljišta, ali napusti područja</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Sakriti granice javnog zemljišta ali oblasti ostaju</string>
 </resources>
