@@ -142,6 +142,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
