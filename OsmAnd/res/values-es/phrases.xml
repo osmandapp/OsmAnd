@@ -4857,4 +4857,7 @@
     <string name="poi_us_maps_recreation_area_facility_rapid">Rápido</string>
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Área de uso diurno;Sitio de uso diurno;Área de uso diurno;Sitio de uso diurno;Área recreativa de uso diurno;Sitio recreativo de uso diurno</string>
     <string name="poi_us_maps_recreation_area_facility_lighthouse">Faro</string>
+    <string name="poi_live_music">Música en vivo</string>
+    <string name="poi_music_venue">Local de música</string>
+    <string name="poi_live_music_yes">Sí</string>
 </resources>
