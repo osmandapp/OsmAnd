@@ -1,6 +1,6 @@
 package net.osmand.plus.views.mapwidgets.configure.reorder;
 
-import static net.osmand.plus.views.mapwidgets.WidgetType.getDuplicateWidgetId;
+import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ItemType;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.ListItem;
@@ -181,7 +182,7 @@ public class ReorderWidgetsAdapterHelper {
 
 	public void addWidget(@NonNull MapWidgetInfo widgetInfo) {
 		WidgetsPanel panel = dataHolder.getSelectedPanel();
-		String widgetId = getDuplicateWidgetId(widgetInfo.key);
+		String widgetId = widgetInfo.key.contains(DELIMITER) ? widgetInfo.key : WidgetType.getDuplicateWidgetId(widgetInfo.key);
 
 		int page = getLastPage();
 		if (panel.isPanelVertical()) {

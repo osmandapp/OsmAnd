@@ -14,16 +14,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 
 public class WidgetsDataHolder {
@@ -49,29 +44,6 @@ public class WidgetsDataHolder {
 
 	public void setPages(@NonNull TreeMap<Integer, List<String>> newPageOrder) {
 		this.pages = newPageOrder;
-	}
-
-	@NonNull
-	public List<List<MapWidgetInfo>> getRestoredWidgets(@NonNull OsmandApplication app, @NonNull MapActivity mapActivity,
-														@NonNull ApplicationMode appMode,
-														@NonNull WidgetsPanel panel) {
-		Map<Integer, List<MapWidgetInfo>> widgetsByPages = new TreeMap<>();
-		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		for (Integer pageIndex : pages.keySet()) {
-			List<String> widgetsInPage = pages.get(pageIndex);
-			if (!Algorithms.isEmpty(widgetsInPage)) {
-				List<MapWidgetInfo> mapWidgetInfos = new ArrayList<>();
-				widgetsByPages.put(pageIndex, mapWidgetInfos);
-				for (String widgetsKey : widgetsInPage) {
-					MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetsKey);
-					if (widgetInfo == null) {
-						widgetInfo = createDuplicateWidget(app, widgetsKey, panel, new MapWidgetsFactory(mapActivity), appMode);
-					}
-					mapWidgetInfos.add(widgetInfo);
-				}
-			}
-		}
-		return new ArrayList<>(widgetsByPages.values());
 	}
 
 	public void copyAppModePrefs(@NonNull MapActivity activity, @NonNull ApplicationMode modeTo, @NonNull ApplicationMode modeFrom) {

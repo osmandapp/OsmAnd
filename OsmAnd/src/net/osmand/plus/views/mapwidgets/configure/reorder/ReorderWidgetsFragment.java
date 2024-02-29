@@ -275,11 +275,38 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 	}
 
 	private List<ListItem> createEnabledWidgetsList(@NonNull ApplicationMode appMode, boolean restoreFromDataHolder) {
-		List<ListItem> widgetsItems = new ArrayList<>();
-
 		MapActivity mapActivity = requireMapActivity();
 		WidgetsPanel selectedPanel = dataHolder.getSelectedPanel();
-		List<List<MapWidgetInfo>> widgets = getMapWidgetInfos(mapActivity, appMode, selectedPanel, restoreFromDataHolder);
+		return restoreFromDataHolder ? getWidgetsFromDataHolder() : getWidgetsFromRegistry(mapActivity, appMode, selectedPanel);
+	}
+
+	private List<ListItem> getWidgetsFromDataHolder() {
+		List<ListItem> widgetsItems = new ArrayList<>();
+		TreeMap<Integer, List<String>> pages = dataHolder.getPages();
+		for (Integer pageIndex : pages.keySet()) {
+			List<String> widgetsInPage = pages.get(pageIndex);
+			if (Algorithms.isEmpty(widgetsInPage)) {
+				break;
+			}
+
+			widgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(pageIndex)));
+			for (String widgetId : widgetsInPage) {
+				MapWidgetInfo widgetInfo = widgetRegistry.getWidgetInfoById(widgetId);
+				if (widgetInfo == null) {
+					widgetInfo = widgetRegistry.getWidgetInfoById(WidgetType.getDefaultWidgetId(widgetId));
+				}
+				if (widgetInfo != null) {
+					AddedWidgetUiInfo info = new AddedWidgetUiInfo(widgetId, widgetInfo.getTitle(app), widgetInfo, widgetInfo.getMapIconId(nightMode));
+					widgetsItems.add(new ListItem(ItemType.ADDED_WIDGET, info));
+				}
+			}
+		}
+		return widgetsItems;
+	}
+
+	private List<ListItem> getWidgetsFromRegistry(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, @NonNull WidgetsPanel selectedPanel) {
+		List<ListItem> widgetsItems = new ArrayList<>();
+		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, appMode, selectedPanel, AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
 		for (int pageIndex = 0; pageIndex < widgets.size(); pageIndex++) {
 			widgetsItems.add(new ListItem(ItemType.PAGE, new PageUiInfo(pageIndex)));
 			for (MapWidgetInfo widgetInfo : widgets.get(pageIndex)) {
@@ -288,20 +315,6 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 			}
 		}
 		return widgetsItems;
-	}
-
-	private List<List<MapWidgetInfo>> getMapWidgetInfos(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode, @NonNull WidgetsPanel selectedPanel, boolean restoreFromDataHolder) {
-		List<List<MapWidgetInfo>> widgets = new ArrayList<>();
-		if (restoreFromDataHolder) {
-			widgets = dataHolder.getRestoredWidgets(app, mapActivity, appMode, selectedPanel);
-		} else {
-			List<Set<MapWidgetInfo>> setWidgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, appMode, selectedPanel, AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE);
-			for (Set<MapWidgetInfo> widgetInfoList : setWidgets) {
-				List<MapWidgetInfo> list = new ArrayList<>(widgetInfoList);
-				widgets.add(list);
-			}
-		}
-		return widgets;
 	}
 
 	@NonNull
