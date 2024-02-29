@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
 import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
@@ -15,7 +16,6 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
@@ -45,10 +45,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.aidlapi.navigation.NavigateGpxParams;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -69,9 +65,13 @@ import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
+import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
@@ -83,7 +83,6 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.helpers.NavigateGpxHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
@@ -135,8 +134,8 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -2510,10 +2509,16 @@ public class OsmandAidlApi {
 
 			boolean success = settings.setPreference(prefId, value, appMode);
 			if (success) {
-				if (settings.isRenderProperty(prefId) && mapActivity != null) {
-					mapActivity.refreshMapComplete();
+				if (settings.isRenderProperty(prefId)) {
+					if (mapActivity != null) {
+						mapActivity.refreshMapComplete();
+					}
 				} else if (ImpassableRoadsStorage.isAvoidRoadsPref(prefId)) {
 					app.getAvoidSpecificRoads().loadImpassableRoads();
+					app.getRoutingHelper().onSettingsChanged(null);
+					if (mapActivity != null) {
+						mapActivity.refreshMap();
+					}
 				}
 			}
 			return success;
