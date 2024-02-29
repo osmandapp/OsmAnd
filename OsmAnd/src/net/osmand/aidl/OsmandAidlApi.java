@@ -2511,6 +2511,7 @@ public class OsmandAidlApi {
 					}
 				} else if (ImpassableRoadsStorage.isAvoidRoadsPref(prefId)) {
 					app.getAvoidSpecificRoads().loadImpassableRoads();
+					app.getAvoidSpecificRoads().initRouteObjects(true);
 					app.getRoutingHelper().onSettingsChanged(null);
 					if (mapActivity != null) {
 						mapActivity.refreshMap();
