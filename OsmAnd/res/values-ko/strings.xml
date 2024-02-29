@@ -50,7 +50,7 @@
     <string name="live_monitoring_interval">온라인 트래킹 시간 간격</string>
     <string name="live_monitoring_url_descr">온라인 트래킹할 웹 주소를 지정합니다. 매개변수 형식 : 위도={0}, 경도={1}, 시간={2}, hdop={3}, 고도={4}, 속도={5}, bearing={6}</string>
     <string name="live_monitoring_url">온라인 트래킹 웹 주소</string>
-    <string name="gpx_monitoring_disabled_warn">"GPX 위젯을 사용하거나  \'여행 레코딩\' 설정을 통해서 트랙을 기록하세요."</string>
+    <string name="gpx_monitoring_disabled_warn">GPX 위젯을 사용하거나 \'여행 레코딩\' 설정을 통해서 트랙을 기록하세요.</string>
     <string name="show_current_gpx_title">현재의 GPX 경로를 표시합니다</string>
     <string name="free_version_message">무료 OsmAnd 버전은 다운로드를 %1$s 번으로 제한되고 오프라인 위키피디아 기사를 제공하지 않습니다.</string>
     <string name="free_version_title">무료 버전</string>
@@ -284,7 +284,7 @@
     <string name="items_were_selected">{0} 아이템목이 선택되었습니다</string>
     <string name="filter_existing_indexes">다운로드된 것들로 필터링</string>
     <string name="fast_route_mode">가장 빠른 경로</string>
-    <string name="fast_route_mode_descr">"가장 빠른 경로를 활성화하거나 or 가장 짧은 경로를 비활성화합니다 "</string>
+    <string name="fast_route_mode_descr">가장 빠른 경로를 활성화하거나 가장 짧은 경로를 비활성화합니다.</string>
     <string name="tiles_to_download_estimated_size">줌에서 {0} 다운로드 {1} 타일 ({2} MB)</string>
     <string name="shared_string_download_map">맵 다운로드</string>
     <string name="select_max_zoom_preload_area">가시 영역을 미리 로드하기 위한 최대 줌 선택</string>
@@ -344,7 +344,7 @@
     <string name="use_trackball">트랙볼 사용</string>
     <string name="background_service_wait_int_descr">위치를 찾는 최대 대기시간을 설정합니다</string>
     <string name="background_service_wait_int">최대 대기시간</string>
-    <string name="where_am_i">GPS 위치</string>
+    <string name="where_am_i">제가 있는 곳은 어디입니까?</string>
     <string name="process_navigation_service">OsmAnd 내비게이션 서비스</string>
     <string name="network_provider">네트워크</string>
     <string name="gps_provider">GPS</string>
@@ -467,7 +467,7 @@
     <string name="error_calculating_route_occured">경로를 찾는 도중 오류가 발생하였습니다</string>
     <string name="empty_route_calculated">탐색한 경로를 찾지 못하였습니다</string>
     <string name="arrived_at_destination">도착지에 도착하였습니다</string>
-    <string name="invalid_locations">좌표가 유효하지 않습니다!</string>
+    <string name="invalid_locations">좌표가 유효하지 않음</string>
     <string name="go_back_to_osmand">OsmAnd 맵으로 되돌아감</string>
     <string name="loading_data">데이터 로딩…</string>
     <string name="reading_indexes">로컬 데이터 읽기…</string>
@@ -654,7 +654,7 @@
     <string name="app_mode_boat">배</string>
     <string name="app_mode_aircraft">비행기</string>
     <string name="animate_routing_route_not_calculated">먼저 경로를 계산하세요</string>
-    <string name="animate_routing_route">"탐색한 경로를 이용하여 모의주행 "</string>
+    <string name="animate_routing_route">탐색한 경로를 이용하여 모의주행</string>
     <string name="animate_routing_gpx">GPX경로를 이용하여 모의주행하기</string>
     <string name="auto_zoom_none">자동 줌 안됨</string>
     <string name="map_magnifier">지도 확대경</string>
@@ -750,7 +750,7 @@
     <string name="other_location">기타</string>
     <string name="files_limit">%1$d 파일 남음</string>
     <string name="install_paid">정식 버전</string>
-    <string name="cancel_route">경로 해제</string>
+    <string name="cancel_route">경로를 끝내시겠습니까?</string>
     <string name="cancel_navigation">운행 중지</string>
     <string name="clear_destination">도착지 지우기</string>
     <string name="download_using_mobile_internet">현재 와이파이(WiFi)가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
@@ -765,7 +765,7 @@
     <string name="select_address_activity">주소 선택</string>
     <string name="favourites_list_activity">즐겨찾기 선택</string>
     <string name="local_openstreetmap_act_title">OSM 대량수정</string>
-    <string name="available_downloads_left">"다운로드 할 파일  %1$d 가능"</string>
+    <string name="available_downloads_left">다운로드 할 파일 %1$d 남음</string>
     <string name="layer_hillshade">음영기복 레이어</string>
     <string name="map_widget_gps_info">GPS 정보</string>
     <string name="access_arrival_time">도착 시간</string>
@@ -801,8 +801,8 @@
     <string name="av_use_external_camera_descr">사진에 대한 시스템 앱을 사용</string>
     <string name="av_use_external_camera">카메라 앱을 사용</string>
     <string name="av_settings_descr">소리 및 영상 설정을 구성합니다</string>
-    <string name="av_settings">"소리/영상 설정 "</string>
-    <string name="recording_error">"기록하는 동안 오류가 발생했습니다 "</string>
+    <string name="av_settings">소리/영상 설정</string>
+    <string name="recording_error">기록하는 동안 오류가 발생됨</string>
     <string name="recording_camera_not_available">카메라는 사용할 수 없습니다</string>
     <string name="recording_is_recorded">소리/영상은 기록되고 있습니다. 정지하려면 AV 위젯을 누르면 됩니다.</string>
     <string name="recording_playing">지정된 녹음기에서 소리가 재생되고 있습니다.\n%1$s</string>
@@ -1118,7 +1118,7 @@
     <string name="rendering_value_brown_name">갈색</string>
     <string name="osmo_edit_color">디스플레이 색상</string>
     <string name="gpx_file_is_empty">GPX 경로가 비어있습니다</string>
-    <string name="gpx_info_subtracks">"하위 트랙 : %1$s "</string>
+    <string name="gpx_info_subtracks">하위트랙 : %1$s</string>
     <string name="gpx_info_distance">거리: %1$s (%2$s points) </string>
     <string name="gpx_info_start_time">시작 시간: %1$tF,  %1$tR </string>
     <string name="gpx_info_end_time">종료 시간: %1$tF,  %1$tR </string>
@@ -1141,7 +1141,7 @@
     <string name="selected_gpx_info_show">\n\n지도를 보려면 누르고 계십시요</string>
     <string name="delay_navigation_start">순차적인 안내를 시작합니다</string>
     <string name="gpx_split_interval">분할 간격</string>
-    <string name="gpx_info_waypoints">"경유지: %1$s "</string>
+    <string name="gpx_info_waypoints">경유지: %1$s</string>
     <string name="gpx_info_asc_altitude">하강/상승: %1$s</string>
     <string name="save_as_favorites_points">즐겨찾기 그룹으로 저장</string>
     <string name="select_destination_and_intermediate_points">경유지 선택</string>
@@ -1329,7 +1329,7 @@
     <string name="nautical_maps_missing">항해 지도 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming (손질)</string>
     <string name="rendering_attr_pisteRoutes_name">스키 슬로프</string>
-    <string name="free">"무료 %1$s "</string>
+    <string name="free">무료 %1$s</string>
     <string name="device_memory">장치 메모리</string>
     <string name="roads_only">도로 전용</string>
     <string name="watch">보기(Watch)</string>
@@ -1400,7 +1400,7 @@
     <string name="shared_string_remember_my_choice">내 선택을 기억하기</string>
     <string name="shared_string_refresh">새로고침</string>
     <string name="shared_string_download">다운로드</string>
-    <string name="shared_string_downloading">다운로드 중</string>
+    <string name="shared_string_downloading">다운로드 중…</string>
     <string name="shared_string_download_successful">성공적인 다운로드</string>
     <string name="shared_string_io_error">입출력 오류가 발생하였습니다</string>
     <string name="shared_string_unexpected_error">예기치 않은 오류가 발생 했습니다</string>
@@ -1455,7 +1455,7 @@
     <string name="confirm_usage_speed_cameras">(독일, 프랑스, 이탈리아, 등) 많은 국가에서 속도 카메라 경고를 사용하는 것은 법률에 의해 허용 되지 않습니다. OsmAnd은 법률을 위반할 경우 어떤 책임도 지지 않습니다. 이 기능을 이해하는 경우에 [예] 를 클릭 하십시오.</string>
     <string name="welmode_download_maps">지도 다운로드</string>
     <string name="welcome_select_region">교통 표지판 및 규정을 제대로 반영 하기 위해 , 운전 지역을 선택 하십시오:</string>
-    <string name="welcome_text">OsmAnd는 전세계 오프라인 지도 보기 및 전세계 오프라인 운행을 제공합니다!</string>
+    <string name="welcome_text">OsmAnd는 전세계 오프라인 지도 보기 및 전세계 오프라인 운행을 제공합니다.</string>
     <string name="welcome_header">환영 합니다</string>
     <string name="current_route">현재 루트</string>
     <string name="shared_string_do_not_use">사용 하지 마십시오</string>
@@ -1636,7 +1636,7 @@
     <string name="unsaved_changes_will_be_lost">저장되지 않은 변경 내용이 손실 됩니다. 계속 하시겠습니까?</string>
     <string name="downloads_left_template">%1$s 다운로드 남았습니다</string>
     <string name="roads">경로</string>
-    <string name="downloading_number_of_files">다운로드중-%1$d 파일</string>
+    <string name="downloading_number_of_files">다운로드중%1$d 파일…</string>
     <string name="show_free_version_banner">무료 버전 배너를 표시</string>
     <string name="show_free_version_banner_description">유로버전을 구입해도 여전히 무료 버전 배너를 볼 수 있습니다</string>
     <string name="buy">구입</string>
@@ -1657,7 +1657,7 @@
     <string name="use_osm_live_routing_description">OsmAnd Live 변경사항에 대한 탐색을 활성화합니다.</string>
     <string name="use_osm_live_routing">OsmAnd Live 탐색</string>
     <string name="access_no_destination">접근성 플러그인: 대상 없음</string>
-    <string name="map_widget_magnetic_bearing"/>
+    <string name="map_widget_magnetic_bearing">마그네틱 베어링</string>
     <string name="map_widget_bearing">관계되는 방위</string>
     <string name="access_disable_offroute_recalc"/>
     <string name="access_disable_offroute_recalc_descr"/>
@@ -3219,7 +3219,7 @@
     <string name="key_event_action_open_search_view">본문 바로가기</string>
     <string name="key_event_action_open_navigation_view">본문 바로가기</string>
     <string name="not_specified">지정하지 않음</string>
-    <string name="cloud_trash_clear_confirmation">당신은 영구적으로 Trash에서 모든 항목을 삭제하시겠습니까? 이 동작은 undone일 수 없습니다.</string>
+    <string name="cloud_trash_clear_confirmation">휴지통에 있는 모든 항목을 영구적으로 삭제하시겠습니까?</string>
     <string name="delete_all_items">모든 항목 삭제</string>
     <string name="shared_string_loading">로딩 중</string>
     <string name="loading_tracks">Reloading 트랙</string>
@@ -3481,7 +3481,7 @@
     <string name="help_article_map_point_layers_on_map_name">지도의 포인트</string>
     <string name="sensor_temperature_desc">센서의 온도를 표시함</string>
     <string name="shared_string_reset_all">모두 재설정</string>
-    <string name="track_filter_date_selected_format">[</string>
+    <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="filter_screen_title">검색 필터</string>
     <string name="help_article_widgets_info_widgets_name">정보 위젯</string>
     <string name="tripltek_promo">Tripltek 프로모션에 대한 %1$s 달</string>
@@ -3495,9 +3495,7 @@
     <string name="routing_attr_hazmat_category_usa_6_name">독성 및 전염성 물질</string>
     <string name="perform_oauth_authorization">OAuth를 통해 로그인</string>
     <string name="cloud_item_restored">%1$s Cloud로 복원됩니다.</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\"은 영구적으로 삭제됩니다. 견적 요청
-\n
-\n이 동작은 undone일 수 없습니다.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\"를 영구적으로 삭제할까요?</string>
     <string name="with_waypoints">경유지 포함</string>
     <string name="help_article_plan_route_name">계획경로</string>
     <string name="use_native_pt">토종 대중교통 개발</string>
@@ -3519,7 +3517,7 @@
     <string name="shared_string_temperature">온도</string>
     <string name="date_of_creation">생성 날짜</string>
     <string name="filter_by_name">이름으로 필터링</string>
-    <string name="filter_tracks_count">필</string>
+    <string name="filter_tracks_count">필터: %d</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">직선 라우팅(항공기)</string>
     <string name="help_article_personal_name">내 데이터</string>
     <string name="help_article_personal_profiles_name">프로필(설정)</string>
@@ -4789,7 +4787,7 @@
     <string name="routing_attr_freeride_policy_prefer_offpiste_name">프리퍼 offpiste</string>
     <string name="routing_attr_carriage_restrictions_description">Horse-drawn 차량에 대한 액세스 권한을 고려</string>
     <string name="routing_attr_avoid_subway_description">지하철 및 경량 철도 수송 우회</string>
-    <string name="avoid_pt_types">수송 유형을 피하십시오..</string>
+    <string name="avoid_pt_types">대중교통 유형을 우회…</string>
     <string name="gps_filter_smoothing_desc">포인트 사이의 임계값 거리를 설정합니다.
 \n마지막 가시점에서 적어도 이 거리는 숨겨지지지 않습니다.
 \n높은 임계 값이 트랙 형상을 oversimplify 할 수 있다는 것을 알고 있습니다.</string>
@@ -5015,4 +5013,71 @@
     <string name="shared_string_legend">레전드</string>
     <string name="copy_coordinates">복사 좌표</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
+    <string name="update_all_maps">모든 맵 업데이트</string>
+    <string name="rendering_attr_streetLightingNight_name">밤에만 표시</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\'에 대한 규칙 없음. 다른 파일을 선택하십시오.</string>
+    <string name="not_support_file_type_with_ext">지원된 %1$s 확장 파일 선택됨.</string>
+    <string name="accessibility_prefs_descr">아이콘, 색상 및 이름을 선택</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="empty_filename">빈 파일명</string>
+    <string name="multimedia_use_system_camera">시스템 앱 사용</string>
+    <string name="rendering_value_white_name">흰색</string>
+    <string name="multimedia_rec_split_title">기록 분할</string>
+    <string name="osm_authorization_success">권한 부여에 성공함</string>
+    <string name="route_recalculation">노선 recalculation</string>
+    <string name="select_map_icon_descr">나머지에 표시된 아이콘.</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="layer_osm_edits">OSM 편집</string>
+    <string name="overwrite_profile_q">\'%1$s 이미 존재합니다. 덮어쓰기?</string>
+    <string name="profile_import_descr">OsmAnd 파일 열기에 의해 프로필을 추가합니다.</string>
+    <string name="shared_string_memory_used_mb_desc">사용 %1$s MB</string>
+    <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
+    <string name="sunset_at">일몰시각 %1$s</string>
+    <string name="shared_string_include_data">추가 데이터 포함</string>
+    <string name="osm_editing">OSM 편집</string>
+    <string name="select_nav_icon_descr">나선 또는 이동 중에 표시된 아이콘.</string>
+    <string name="master_profile">마스터 프로파일</string>
+    <string name="rendering_value_thick_name">두껍게</string>
+    <string name="shared_string_downloading_formatted">다운로드중 %s</string>
+    <string name="join_segments">세그먼트 결합</string>
+    <string name="new_plugin_added">새로운 플러그인 추가</string>
+    <string name="clear_confirmation_msg">클리어 %1$s?</string>
+    <string name="shared_preference">공유됨</string>
+    <string name="update_all_maps_q">모든 업데이트 (%1$d) 지도?</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="rendering_attr_piste_type_hike_name">인기있는</string>
+    <string name="rendering_attr_piste_type_nordic_name">북유럽</string>
+    <string name="reset_confirmation_descr">Tapping %1$s 모든 변경 사항을 삭제합니다.</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="sunrise_at">일출시각 %1$s</string>
+    <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
+    <string name="tts_initialization_error">Text-to-speech 엔진을 시작할 수 없습니다.</string>
+    <string name="file_import_error">%1$s 가져오기 오류: %2$s</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">초보자</string>
+    <string name="routeInfo_piste_difficulty_name">피스트 난이도</string>
+    <string name="shared_string_memory_used_gb_desc">사용 %1$s GB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="suggested_maps">추천 지도</string>
+    <string name="suggested_maps_descr">이 맵은 플러그인에 필요합니다.</string>
+    <string name="apply_preference_to_all_profiles">이 변경을 모든 또는 선택한 프로필에 적용하십시오.</string>
+    <string name="shared_string_memory_used_tb_desc">사용 %1$s TB</string>
+    <string name="file_imported_successfully">%1$s 가져옴.</string>
+    <string name="live_monitoring_time_buffer">시간 버퍼</string>
+    <string name="edit_profiles">프로필 편집</string>
+    <string name="shared_string_memory_used_kb_desc">사용 %1$s kB</string>
+    <string name="multimedia_photo_play_sound">카메라 셔터 소리</string>
+    <string name="permission_is_required">제출은이 옵션을 사용해야합니다.</string>
+    <string name="routing_profile_direct_to">다이렉트-투-포인트</string>
+    <string name="live_monitoring_adress">웹 주소</string>
+    <string name="multimedia_notes_prefs_descr">그림 크기, 오디오 및 영상 품질</string>
+    <string name="multimedia_notes_view_descr">OSM 노트는 %1$s입니다.</string>
+    <string name="login_and_pass">사용자명과 암호</string>
+    <string name="desert_render_descr">사막과 다른 sparsely 대중적인 지역을 위해. 더 자세히.</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
+    <string name="add_new_profile_q">새 프로필 추가 \'%1$s\'?</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="rendering_attr_piste_type_sleigh_name">슬리밍</string>
+    <string name="rendering_attr_piste_type_connection_name">연결</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">정의되지 않음</string>
 </resources>
