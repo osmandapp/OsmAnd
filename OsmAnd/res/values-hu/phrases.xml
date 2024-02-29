@@ -2788,8 +2788,8 @@
     <string name="poi_crossing_supervision_no">Nem felügyelt vasúti átjáró</string>
     <string name="poi_crossing_supervision_attendant">Vasútiájáró-felügyelet: jelzőőr</string>
     <string name="poi_crossing_supervision_camera">Vasútiátjáró-felügyelet: kamera</string>
-    <string name="poi_impromptu_yes">Vadkempinghely</string>
-    <string name="poi_impromptu_no">Nem vadkempinghely</string>
+    <string name="poi_impromptu_yes">Van</string>
+    <string name="poi_impromptu_no">Nincs</string>
     <string name="poi_sanitary_dump_station_yes">Szaniterürítő hely</string>
     <string name="poi_sanitary_dump_station_no">Szaniterürítő hely nincs</string>
     <string name="poi_sanitary_dump_station">Szaniterürítő hely</string>
@@ -2849,7 +2849,7 @@
     <string name="poi_free_flying_guest_guidelines_yes">Vendégeknek szóló iránymutatás</string>
     <string name="poi_free_flying_guest_guidelines_no">Vendégeknek szóló iránymutatás nincs</string>
     <string name="poi_emergency_no">Sürgősségi ellátás nincs</string>
-    <string name="poi_bridge_ref">Híd száma</string>
+    <string name="poi_bridge_ref">Híd azonosítója</string>
     <string name="poi_cafeteria">Menza</string>
     <string name="poi_forestry_compartment">Útirányjelző tábla: erdőtag (RU)</string>
     <string name="poi_forestry_allotment">Útirányjelző tábla: erdőrészlet (RU)</string>
@@ -2875,7 +2875,7 @@
     <string name="poi_payment_ep_cash_no">Készpénzkártyát (Geldkarte) nem fogad el</string>
     <string name="poi_payment_ep_minicash_no">MiniCasht nem fogad el</string>
     <string name="poi_spoil_heap">Meddőhányó</string>
-    <string name="poi_tunnel_ref">Alagút száma</string>
+    <string name="poi_tunnel_ref">Alagút azonosítója</string>
     <string name="poi_drink_wine_yes">Bor</string>
     <string name="poi_drink_wine_retail">Boreladás</string>
     <string name="poi_drink_wine_served">Borfelszolgálás</string>
@@ -3129,11 +3129,11 @@
     <string name="poi_winter_room_yes">Mindig nyitott téli helyiség van</string>
     <string name="poi_winter_room_no">Mindig nyitott téli helyiség nincs</string>
     <string name="poi_beds">Ágyak</string>
-    <string name="poi_reservation_required">Előzetes foglalás szükséges</string>
-    <string name="poi_reservation_recommended">Előzetes foglalás ajánlott</string>
-    <string name="poi_reservation_yes">Előzetes foglalás van</string>
-    <string name="poi_reservation_no">Előzetes foglalás nincs</string>
-    <string name="poi_reservation_members_only">Előzetes foglalás csak tagoknak</string>
+    <string name="poi_reservation_required">Szükséges</string>
+    <string name="poi_reservation_recommended">Ajánlott</string>
+    <string name="poi_reservation_yes">Van</string>
+    <string name="poi_reservation_no">Nincs</string>
+    <string name="poi_reservation_members_only">Csak tagoknak</string>
     <string name="poi_boat_rental_type">Bérelt hajók</string>
     <string name="poi_boat_rental">Csónakkölcsönző</string>
     <string name="poi_boat_motorboat_rental_yes">Motorcsónak</string>
@@ -3882,7 +3882,7 @@
     <string name="poi_piste_status_open">Pálya állapota: nyitva</string>
     <string name="poi_piste_name">Pálya neve</string>
     <string name="poi_piste_ski_jump">Síugrósánc</string>
-    <string name="poi_local_ref">Vágány / kocsiállás</string>
+    <string name="poi_local_ref">Vágány vagy kocsiállás száma</string>
     <string name="poi_geodesist">Földmérő</string>
     <string name="poi_conference_centre">Konferencia-központ</string>
     <string name="poi_camp_pitch">Sátorhely</string>
@@ -4536,7 +4536,7 @@
     <string name="poi_sinkhole_doline">Víznyelő: vakvölgy (dolina)</string>
     <string name="poi_sinkhole_bluehole">Víznyelő: víz alatti (bluehole)</string>
     <string name="poi_wicket_gate">Személybejáró</string>
-    <string name="poi_barrier_bar">Rúd</string>
+    <string name="poi_barrier_bar">Útelzáró gerenda</string>
     <string name="poi_spikes">Tüskék</string>
     <string name="poi_sump_buster">Autócsapda</string>
     <string name="poi_wedge">Ék</string>
