@@ -5632,4 +5632,10 @@
     <string name="when_exceeded">Når overskredet</string>
     <string name="speedometer_description">Viser din aktuelle hastighed som rapporteret via GPS</string>
     <string name="help_article_setup_a_route_name">Opret en rute</string>
+    <string name="rendering_attr_padusDisplayMode_description">Efter adgangstype eller forvalternavn</string>
+    <string name="rendering_value_access_name">Efter adgangstype</string>
+    <string name="rendering_value_managerName_name">Efter forvalternavn</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Skjul grænser for offentlige arealer</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Skjul grænserne for offentlige arealer, men bevar områderne</string>
+    <string name="rendering_attr_padusDisplayMode_name">Visning af offentlige arealer</string>
 </resources>
