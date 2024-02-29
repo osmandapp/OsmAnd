@@ -4642,4 +4642,5 @@
     <string name="poi_us_maps_recreation_area_open_status">Statutul de acces la zona de recreere</string>
     <string name="poi_impromptu">Improvizat</string>
     <string name="poi_reservation">Rezervare</string>
+    <string name="poi_us_maps_recreation_area_facility">Facilitatea zonei de recreere</string>
 </resources>
