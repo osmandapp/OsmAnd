@@ -83,7 +83,6 @@ import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
-import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.helpers.NavigateGpxHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
@@ -144,6 +143,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -2505,10 +2505,16 @@ public class OsmandAidlApi {
 
 			boolean success = settings.setPreference(prefId, value, appMode);
 			if (success) {
-				if (settings.isRenderProperty(prefId) && mapActivity != null) {
-					mapActivity.refreshMapComplete();
+				if (settings.isRenderProperty(prefId)) {
+					if (mapActivity != null) {
+						mapActivity.refreshMapComplete();
+					}
 				} else if (ImpassableRoadsStorage.isAvoidRoadsPref(prefId)) {
 					app.getAvoidSpecificRoads().loadImpassableRoads();
+					app.getRoutingHelper().onSettingsChanged(null);
+					if (mapActivity != null) {
+						mapActivity.refreshMap();
+					}
 				}
 			}
 			return success;
