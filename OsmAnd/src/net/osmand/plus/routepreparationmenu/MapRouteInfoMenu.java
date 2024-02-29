@@ -60,10 +60,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -85,24 +86,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutin
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
-import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.*;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
-import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
-import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
-import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportBetaWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
-import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -142,11 +127,9 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -1352,9 +1335,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		LinearLayout item = createToolbarOptionView(false, null, -1, -1, null);
 		if (item != null) {
 			item.findViewById(R.id.route_option_container).setVisibility(View.GONE);
-			Map<LatLon, AvoidRoadInfo> impassableRoads = new HashMap<>();
+			List<AvoidRoadInfo> impassableRoads = new ArrayList<>();
 			if (parameter instanceof AvoidRoadsRoutingParameter) {
-				impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
+				impassableRoads.addAll(app.getAvoidSpecificRoads().getImpassableRoads());
 			}
 
 			List<RoutingParameter> avoidedParameters = getAvoidedParameters(app);
@@ -1366,42 +1349,44 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private List<RoutingParameter> getAvoidedParameters(OsmandApplication app) {
+	@NonNull
+	private List<RoutingParameter> getAvoidedParameters(@NonNull OsmandApplication app) {
 		ApplicationMode applicationMode = app.getRoutingHelper().getAppMode();
 		List<RoutingParameter> avoidParameters = app.getRoutingOptionsHelper().getAvoidRoutingPrefsForAppMode(applicationMode);
 		List<RoutingParameter> avoidedParameters = new ArrayList<>();
 		for (int i = 0; i < avoidParameters.size(); i++) {
 			RoutingParameter p = avoidParameters.get(i);
 			CommonPreference<Boolean> preference = app.getSettings().getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-			if (preference != null && preference.getModeValue(app.getRoutingHelper().getAppMode())) {
+			if (preference.getModeValue(app.getRoutingHelper().getAppMode())) {
 				avoidedParameters.add(p);
 			}
 		}
 		return avoidedParameters;
 	}
 
-	private void createImpassableRoadsItems(MapActivity mapActivity, Map<LatLon, AvoidRoadInfo> impassableRoads,
+	private void createImpassableRoadsItems(MapActivity mapActivity, List<AvoidRoadInfo> impassableRoads,
 	                                        LocalRoutingParameter parameter, RouteMenuAppModes mode, LinearLayout item) {
-		Iterator<AvoidRoadInfo> it = impassableRoads.values().iterator();
-		while (it.hasNext()) {
-			AvoidRoadInfo avoidRoadInfo = it.next();
-			View container = createToolbarSubOptionView(false, avoidRoadInfo.name, R.drawable.ic_action_remove_dark, !it.hasNext(), v -> {
-				MapActivity mapActivity1 = getMapActivity();
-				if (mapActivity1 != null) {
-					OsmandApplication app = mapActivity1.getMyApplication();
-					app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoadInfo);
-					app.getRoutingHelper().onSettingsChanged(true);
-					if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
-						mode.parameters.remove(parameter);
-					}
-					mapActivity1.refreshMap();
-					if (mode.parameters.size() > 2) {
-						item.removeView(v);
-					} else {
-						updateOptionsButtons();
-					}
-				}
-			});
+		Iterator<AvoidRoadInfo> iterator = impassableRoads.iterator();
+		while (iterator.hasNext()) {
+			AvoidRoadInfo avoidRoadInfo = iterator.next();
+			View container = createToolbarSubOptionView(false, avoidRoadInfo.getName(mapActivity),
+					R.drawable.ic_action_remove_dark, !iterator.hasNext(), v -> {
+						MapActivity activity = getMapActivity();
+						if (activity != null) {
+							OsmandApplication app = activity.getMyApplication();
+							app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoadInfo);
+							app.getRoutingHelper().onSettingsChanged(true);
+							if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
+								mode.parameters.remove(parameter);
+							}
+							activity.refreshMap();
+							if (mode.parameters.size() > 2) {
+								item.removeView(v);
+							} else {
+								updateOptionsButtons();
+							}
+						}
+					});
 			if (container != null) {
 				item.addView(container, getContainerButtonLayoutParams(mapActivity, false));
 			}
