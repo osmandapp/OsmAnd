@@ -5243,20 +5243,20 @@
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar la cuenta\?</string>
     <string name="action_cannot_be_undone">Esta acción no se puede deshacer.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos del dispositivo permanecen intactos.</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará tu suscripción a OsmAnd Pro.</string>
-    <string name="manage_subscriptions">Gestiona las suscripciones.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará su suscripción a OsmAnd Pro.</string>
+    <string name="manage_subscriptions">Gestionar las suscripciones.</string>
     <string name="delete_account_warning">¿Borrar la cuenta %1$s?</string>
     <string name="shared_string_deleting">Borrando</string>
-    <string name="deleting_complete">Eliminación completa</string>
-    <string name="delete_account">Eliminar la cuenta</string>
+    <string name="deleting_complete">Borrado completo</string>
+    <string name="delete_account">Eliminar cuenta</string>
     <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
-    <string name="verify_account">Verifica tu cuenta</string>
+    <string name="verify_account">Verifique su cuenta</string>
     <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes obtener más información sobre la pendiente en %1$s.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios se desconectarán de OsmAnd Cloud y perderán el acceso a las funciones de pago.</string>
     <string name="terrain_category_description">Líneas del contorno del terreno, sombra de colinas en escala de grises e indicación de la pendiente en escala de colores, para mostrar las cumbres y las tierras bajas.</string>
-    <string name="verify_account_deletion_descr">Necesitamos verificar tu cuenta antes de eliminarla.
+    <string name="verify_account_deletion_descr">Necesitamos verificar su cuenta antes de eliminarla.
 \n
-\nIntroduce la dirección de correo electrónico con la que te registraste. Se te enviará una contraseña de un solo uso para el siguiente paso.</string>
+\nPor favor, introduzca la dirección de correo electrónico con la que se registró. Se le enviará una contraseña de un solo uso para el siguiente paso.</string>
     <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX.
 \n
 \n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»
@@ -5628,4 +5628,10 @@
     <string name="shared_string_speedometer">Velocímetro</string>
     <string name="speed_limit_warning">Aviso del límite de velocidad</string>
     <string name="help_article_setup_a_route_name">Crear una ruta</string>
+    <string name="rendering_attr_padusDisplayMode_description">Por tipo de acceso o nombre del gestor</string>
+    <string name="rendering_value_access_name">Por tipo de acceso</string>
+    <string name="rendering_value_managerName_name">Por nombre de gestor</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ocultar los límites de los terrenos públicos</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ocultar los límites de los terrenos públicos pero dejar las zonas</string>
+    <string name="rendering_attr_padusDisplayMode_name">Modo de visualización de terrenos públicos</string>
 </resources>
