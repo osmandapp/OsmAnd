@@ -2445,7 +2445,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean getBlockedRoads(List<ABlockedRoad> blockedRoads) {
+	public boolean getBlockedRoads(@NonNull List<ABlockedRoad> blockedRoads) {
 		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
 		for (AvoidRoadInfo info : impassableRoads.values()) {
 			blockedRoads.add(new ABlockedRoad(info.id, info.latitude, info.longitude, info.direction, info.name, info.appModeKey));
@@ -2453,13 +2453,13 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean addRoadBlock(ABlockedRoad road) {
+	public boolean addRoadBlock(@NonNull ABlockedRoad road) {
 		LatLon latLon = new LatLon(road.getLatitude(), road.getLongitude());
 		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, road.getAppModeKey());
 		return true;
 	}
 
-	public boolean removeRoadBlock(ABlockedRoad road) {
+	public boolean removeRoadBlock(@NonNull ABlockedRoad road) {
 		app.getAvoidSpecificRoads().removeImpassableRoad(new LatLon(road.getLatitude(), road.getLongitude()));
 		return true;
 	}
