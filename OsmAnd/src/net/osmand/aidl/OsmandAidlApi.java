@@ -83,6 +83,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.helpers.NavigateGpxHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
@@ -2506,7 +2507,16 @@ public class OsmandAidlApi {
 		if (pref != null && settings.isExportAvailableForPref(pref)) {
 			String value = params.getValue();
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
-			return settings.setPreference(prefId, value, appMode);
+
+			boolean success = settings.setPreference(prefId, value, appMode);
+			if (success) {
+				if (settings.isRenderProperty(prefId) && mapActivity != null) {
+					mapActivity.refreshMapComplete();
+				} else if (ImpassableRoadsStorage.isAvoidRoadsPref(prefId)) {
+					app.getAvoidSpecificRoads().loadImpassableRoads();
+				}
+			}
+			return success;
 		}
 		return false;
 	}
