@@ -5634,4 +5634,6 @@
     <string name="rendering_attr_padusDisplayMode_description">După tipul de acces sau numele managerului</string>
     <string name="rendering_attr_padusHideBoundaries_name">Ascunderea limitelor terenurilor publice</string>
     <string name="rendering_attr_padusHideBoundaries_description">Ascundeți limitele terenurilor publice, dar lăsați zone</string>
+    <string name="rendering_value_access_name">După tipul de acces</string>
+    <string name="rendering_value_managerName_name">După numele managerului</string>
 </resources>
