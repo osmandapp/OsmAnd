@@ -5589,7 +5589,7 @@
     <string name="avg_sensor_heartrate">Rythme cardiaque, moyenne</string>
     <string name="dont_ask_anymore">Ne plus demander</string>
     <string name="battery_optimization_banner_content">La gestion de l\'optimisation de la batterie par Android peut entraîner des erreurs ou pertes de données à l\'enregistrement des traces.</string>
-    <string name="battery_optimization_settings">Paramètres d \' optimisation de la batterie</string>
+    <string name="battery_optimization_settings">Paramètres d’optimisation de la batterie</string>
     <string name="shared_string_keywords">Mots-clés</string>
     <string name="add_button">Ajouter un bouton</string>
     <string name="custom_map_button_name_present">Un tel bouton est déjà présent</string>
