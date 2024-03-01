@@ -5197,7 +5197,7 @@
     <string name="ant_plus_searching">Căutare</string>
     <string name="learn_more_about_sensors_link">Învățați mai multe despre senzori.</string>
     <string name="calculate_offline">Calculează offline</string>
-    <string name="there_are_no_connected_sensors_of_this_type">Nu există sensori conectați de acest tip</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nu există senzori de acest tip conectați</string>
     <string name="external_sensors_not_found">Senzori negăsiți</string>
     <string name="write_data_from_sensor_to_track">Scrieți date de la senzorii externi pe GPX în timpul înregistrării traseului.</string>
     <string name="save_track_external_sensors_data">Date</string>
