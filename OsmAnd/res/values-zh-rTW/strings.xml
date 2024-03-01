@@ -5617,4 +5617,10 @@
     <string name="shared_string_speedometer">速度表</string>
     <string name="shared_string_limit">限制</string>
     <string name="help_article_setup_a_route_name">設定路線</string>
+    <string name="rendering_attr_padusDisplayMode_description">按進入類型或管理者名稱</string>
+    <string name="rendering_value_access_name">按進入類型</string>
+    <string name="rendering_value_managerName_name">按管理者名稱</string>
+    <string name="rendering_attr_padusHideBoundaries_name">隱藏公有地邊界</string>
+    <string name="rendering_attr_padusHideBoundaries_description">隱藏公有地邊界但保留區域</string>
+    <string name="rendering_attr_padusDisplayMode_name">公有地顯示模式</string>
 </resources>
