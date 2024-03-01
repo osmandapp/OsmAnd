@@ -5626,9 +5626,9 @@
     <string name="speed_limit_warning">Sebességkorlátozási figyelmeztetés</string>
     <string name="help_article_setup_a_route_name">Útvonal beállítása</string>
     <string name="rendering_attr_padusDisplayMode_name">Közterületek megjelenítési módja</string>
-    <string name="rendering_attr_padusDisplayMode_description">A hozzáférés típusa vagy a kezelője szerint</string>
-    <string name="rendering_value_access_name">hozzáférés típusa szerint</string>
-    <string name="rendering_value_managerName_name">kezelője szerint</string>
+    <string name="rendering_attr_padusDisplayMode_description">Használhatóság vagy a kezelő neve szerint</string>
+    <string name="rendering_value_access_name">Használhatóság szerint</string>
+    <string name="rendering_value_managerName_name">Kezelő neve szerint</string>
     <string name="rendering_attr_padusHideBoundaries_name">Közterülethatárok elrejtése</string>
     <string name="rendering_attr_padusHideBoundaries_description">Közterülethatárok elrejtése, de a területek meghagyása</string>
 </resources>
