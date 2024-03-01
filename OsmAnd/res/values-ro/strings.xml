@@ -657,10 +657,10 @@
     <string name="search_poi_location">Așteptând semnalul…</string>
     <string name="search_near_map">Căutare în apropierea centrului actual al hărții</string>
     <string name="search_nearby">Caută în împrejurimi</string>
-    <string name="map_orientation_default">La fel ca și dispozitivul</string>
+    <string name="map_orientation_default">La fel ca cea a dispozitivului</string>
     <string name="map_orientation_portrait">Portret</string>
-    <string name="map_orientation_landscape">Peisaj</string>
-    <string name="map_screen_orientation">Orientare ecran</string>
+    <string name="map_orientation_landscape">Orizontal</string>
+    <string name="map_screen_orientation">Orientarea ecranului</string>
     <string name="map_screen_orientation_descr">Portret, peisaj sau dispozitiv.</string>
     <string name="opening_hours_not_supported">Nu se poate modifica formatul orelor de funcționare.</string>
     <string name="add_new_rule">Adaugă o nouă regulă</string>
@@ -4767,8 +4767,8 @@
     <string name="map_widget_altitude_current_location">Altitudine: locația curentă</string>
     <string name="map_widget_altitude_current_location_desc">Arată altitudinea deasupra nivelului mării a geolocației curente.</string>
     <string name="simulate_location_by_gpx">Simulează poziția folosind GPX</string>
-    <string name="purchases_feature_desc_external_sensors">Afișează și înregistrează datele de la senzori externi: viteza bicicletei, puterea bicicletei, cadența și ritmul cardiac.</string>
-    <string name="external_sensors_support">Suport pentru senzori externi</string>
+    <string name="purchases_feature_desc_external_sensors">Afișați și înregistrați date de la senzorii externi: viteza bicicletei, puterea exercitată, cadența pedalării și pulsul.</string>
+    <string name="external_sensors_support">Suport senzori externi</string>
     <string name="release_4_3">• Motor de redare a hărților nou, mai rapid, versiunea 2 (OpenGL), cu vedere 2.5D
 \n
 \n • Animație lină a schimbărilor de locație în timpul mișcării
@@ -5115,7 +5115,7 @@
     <string name="file_already_exists_description">\"%1$s\". Există deja un fișier cu acest nume. Înlocuiește va suprascrie toate modificările efectuate cu versiunea curentă.</string>
     <string name="external_device_characteristic_speed">Viteză</string>
     <string name="external_device_characteristic_distance">Distanță</string>
-    <string name="external_device_characteristic_total_distance">Distanța totală</string>
+    <string name="external_device_characteristic_total_distance">Distanță totală</string>
     <string name="external_device_characteristic_battery_level">Baterie</string>
     <string name="external_device_characteristic_gear_ratio">Raportul de transmisie</string>
     <string name="external_device_characteristic_cadence">Cadență</string>
@@ -5125,7 +5125,7 @@
     <string name="external_device_details_battery">Baterie</string>
     <string name="external_device_details_speed">Viteză</string>
     <string name="external_device_characteristic_temperature">Temperatură</string>
-    <string name="external_device_details_information">Informații</string>
+    <string name="external_device_details_information">Informație</string>
     <string name="external_device_details_received_data">Date primite</string>
     <string name="external_device_details_connection">Conexiune</string>
     <string name="external_device_details_total_distance">Distanța totală</string>
@@ -5139,8 +5139,8 @@
     <string name="rendering_value_small_name">Mic</string>
     <string name="rendering_value_name_only_name">Doar numele</string>
     <string name="device_connected">%1$s conectat</string>
-    <string name="running_scds_device_name">Dispozitiv pentru alergare</string>
-    <string name="bicycle_scd_device_name">Dispozitiv pentru bicicletă</string>
+    <string name="running_scds_device_name">Dispozitiv de alergat</string>
+    <string name="bicycle_scd_device_name">Dispozitiv bicicletă</string>
     <string name="external_device_blood_pressure">Tensiune arterială</string>
     <string name="beats_per_minute_short">bpm</string>
     <string name="shared_string_chest">Piept</string>
@@ -5156,7 +5156,7 @@
     <string name="search_track_by_name">Caută traseu după nume</string>
     <string name="no_search_results">Nu s-au găsit rezultate</string>
     <string name="rendering_attr_lightDetail_name">Detaliu de lumină</string>
-    <string name="no_bt_permission">Permisiunea pentru Bluetooth nu este acordată</string>
+    <string name="no_bt_permission">Permisiunile bluetooth nu sunt acordate</string>
     <string name="bluetooth_not_supported">Bluetooth nu este acceptat</string>
     <string name="bluetooth_found_title">Găsit: %d</string>
     <string name="device_disconnected">%1$s deconectat</string>
@@ -5167,22 +5167,22 @@
     <string name="external_device_details_connect">Conectați-vă</string>
     <string name="external_device_details_pair">Perechea</string>
     <string name="external_device_details_disconnect">Deconectează</string>
-    <string name="external_device_characteristic_stride_length">Lungimea pasului</string>
-    <string name="ant_plus_pair_new_sensor">Asociază senzor nou</string>
+    <string name="external_device_characteristic_stride_length">Distanță pas</string>
+    <string name="ant_plus_pair_new_sensor">Împerecheați un nou senzor</string>
     <string name="ant_plus_pair_new_sensor_ble">Asociază senzor Bluetooth LE</string>
     <string name="ant_plus_pair_new_sensor_ant_plus">Asociază senzor ANT+</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puteți asocia senzori Bluetooth LE și ANT+ cu OsmAnd.</string>
     <string name="speak_route_deviation">Abatere de la traseu</string>
-    <string name="ble_search_again">Caută iar</string>
-    <string name="ant_plus_nothing_found_text">Nu s-a putut găsi niciun senzor</string>
+    <string name="ble_search_again">Căutați din nou</string>
+    <string name="ant_plus_nothing_found_text">Nu se pot găsi senzori</string>
     <string name="ant_plus_nothing_found_description">Asigurați-vă că:
-\n- Bluetooth este pornit
-\n- Senzorul este activat
-\n- Acest dispozitiv se află în apropierea senzorului</string>
+\n– Bluetooth e pornit
+\n– Senzorul e activ
+\n– Acest dispozitiv se află lângă senzor</string>
     <string name="shutter_sound">Sunet de obturator</string>
     <string name="no_poi_for_category">Nu s-au găsit puncte de interes</string>
     <string name="error_calculate">Rezultatul calculului este gol</string>
-    <string name="external_sensors_source_of_data">Sursa de date</string>
+    <string name="external_sensors_source_of_data">Sursa datelor</string>
     <string name="delete_track_folder_dialog_message">Aceasta va șterge folderul \"%1$s\" și toate traseele (%2$s) incluse.</string>
     <string name="delete_folder_question">Ștergeți folderul\?</string>
     <string name="calculate_offline_altitude_descr">Calculează altitudinea offline, pe baza datelor de pe harta terenului (3D). Diferențele față de altitudinea înregistrată de dispozitiv pot fi utilizate ca corecție a altitudinii.</string>
@@ -5194,24 +5194,24 @@
     <string name="nav_profile_confirm_delete">Ștergeți \"%1$s\"?</string>
     <string name="external_device_connected">Conectat</string>
     <string name="external_device_menu_forget">Uită</string>
-    <string name="ant_plus_searching">Se caută</string>
-    <string name="learn_more_about_sensors_link">Aflați mai multe despre senzori.</string>
+    <string name="ant_plus_searching">Căutare</string>
+    <string name="learn_more_about_sensors_link">Învățați mai multe despre senzori.</string>
     <string name="calculate_offline">Calculează offline</string>
     <string name="there_are_no_connected_sensors_of_this_type">Nu există sensori conectați de acest tip</string>
     <string name="external_sensors_not_found">Senzori negăsiți</string>
     <string name="write_data_from_sensor_to_track">Scrieți date de la senzorii externi pe GPX în timpul înregistrării traseului.</string>
     <string name="save_track_external_sensors_data">Date</string>
-    <string name="external_device_forget_sensor_description">Senzorul va fi șters din listă. Veți putea să-l reconectați nou în orice moment.</string>
+    <string name="external_device_forget_sensor_description">Senzorul va fi șters din listă. Poți împerechea din nou senzorul oricând.</string>
     <string name="external_device_disconnected">Deconectat</string>
     <string name="ant_plus_searching_text">Se caută senzori</string>
     <string name="map_3d_mode_description">Atingeți harta cu două degete și deplasați-le în sus și în jos pentru a regla înclinarea hărții.</string>
     <string name="external_device_characteristic_pulse_rate">Frecvența pulsului</string>
     <string name="ant_plus_help_title">Nu știu ce tip de senzor am</string>
     <string name="ant_plus_searching_text_description">Țineți dispozitivul aproape de senzor. Trebuie să activați senzorul pentru ca OsmAnd să îl poată găsi.</string>
-    <string name="ant_plus_open_settings">Deschide setările</string>
+    <string name="ant_plus_open_settings">Deschideți setările</string>
     <string name="external_device_characteristic_cuff_pressure">Presiunea manșetei</string>
-    <string name="ant_plus_bluetooth_off_description">Pornește găsirea și asocierea de senzori Bluetooth.</string>
-    <string name="ant_plus_bluetooth_off">Bluetooth este dezactivat</string>
+    <string name="ant_plus_bluetooth_off_description">Porniți Bluetooth, găsiți și împerecheați senzorii.</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth este oprit</string>
     <string name="map_3d_mode_action">Mod 3D</string>
     <string name="map_3d_mode_hint">Apăsați lung butonul pentru a-i schimba poziția.</string>
     <string name="tracks_empty_folder">Folder gol</string>
@@ -5224,7 +5224,7 @@
     <string name="tracks_empty_folder_description">Acest folder nu are niciun traseu încă.</string>
     <string name="map_2d_mode_action">mod 2D</string>
     <string name="external_device_low_battery">Baterie descărcată</string>
-    <string name="external_device_forget_sensor">Uită senzorul</string>
+    <string name="external_device_forget_sensor">Uită senzor</string>
     <string name="shared_string_close_the_dialog">Închide dialogul</string>
     <string name="power_watts_unit">Wați</string>
     <string name="revolutions_per_minute_unit">RPM</string>
