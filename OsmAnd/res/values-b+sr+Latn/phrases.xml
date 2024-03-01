@@ -86,7 +86,7 @@
     <string name="poi_glacier_type">Tip glečera</string>
     <string name="poi_transportation">Prevoz</string>
     <string name="poi_road_obstacle">Prepreka na putu</string>
-    <string name="poi_filling_station">Benzinska stanica</string>
+    <string name="poi_filling_station">Benzinske stanice</string>
     <string name="poi_personal_transport">Lični prevoz</string>
     <string name="poi_public_transport">Javni prevoz</string>
     <string name="poi_air_transport">Vazdušni prevoz</string>
@@ -117,7 +117,7 @@
     <string name="poi_bakery">Pekara</string>
     <string name="poi_alcohol">Podrum pića</string>
     <string name="poi_cheese">Prodavnica sira</string>
-    <string name="poi_chocolate">Prodavnica čokolade</string>
+    <string name="poi_chocolate">Prodavnica čokolada</string>
     <string name="poi_coffee">Prodaja kafe</string>
     <string name="poi_mall">Tržni centar</string>
     <string name="poi_beverages">Prodavnica pića</string>
@@ -3460,7 +3460,7 @@
     <string name="poi_post_street">Ulica</string>
     <string name="poi_letter_box">Kutija pisma</string>
     <string name="poi_depot">Depo</string>
-    <string name="poi_charging_station">Punjači za električna vozila</string>
+    <string name="poi_charging_station">Punjači za EV</string>
     <string name="poi_map_size_region">Veličina mape: regija</string>
     <string name="poi_map_size_city">Veličina mape: grad</string>
     <string name="poi_map_size_site">Veličina mape: sajt</string>
