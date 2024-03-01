@@ -186,8 +186,7 @@ public class WidgetsSettingsHelper {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, MATCHING_PANELS_MODE, panels);
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			String defaultWidgetId = WidgetType.getDefaultWidgetId(widgetInfo.key);
-			if (WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, defaultWidgetId, appMode)) {
+			if (WidgetType.isOriginalWidget(widgetInfo.key) && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetInfo.key, appMode)) {
 				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, false);
 			} else {
 				// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
