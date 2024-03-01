@@ -1126,8 +1126,8 @@
     <string name="routing_attr_avoid_motorway_description">Evita autoestradas</string>
     <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Especifique o limite de peso permitido do veículo em rotas.</string>
-    <string name="android_19_location_disabled">Desde a versão Android 4.4 (KitKat) que não se pode descarregar e atualizar mapas no local de armazenamento anterior (%s). Quer alterar para um local com permissão e copiar todos os ficheiros do OsmAnd para lá\?
-\n Nota 1: os ficheiros antigos permanecerão intocados (mas podem ser eliminados manualmente).
+    <string name="android_19_location_disabled">Desde a versão Android 4.4 (KitKat) que não se pode descarregar e atualizar mapas no local de armazenamento anterior (%s). Quer alterar para um local com permissão e copiar todos os ficheiros do OsmAnd para lá?
+\n Nota 1: os ficheiros antigos permanecerão intactos (mas podem ser eliminados manualmente)
 \n Nota 2: não será possível partilhar ficheiros entre o OsmAnd e o OsmAnd+ no novo armazenamento.</string>
     <string name="copying_osmand_one_file_descr">A copiar o ficheiro (%s) para novo destino…</string>
     <string name="copying_osmand_files_descr">A copiar os ficheiros OsmAnd para o novo destino (%s)…</string>
@@ -5440,7 +5440,7 @@
     <string name="shared_string_reset_all">Repor tudo</string>
     <string name="remove_type_q">Remover o tipo \"%1$s\"?</string>
     <string name="no_config_smart_folder_title">Não configurado</string>
-    <string name="help_article_navigation_guidance_name">Guia</string>
+    <string name="help_article_navigation_guidance_name">Orientação de navegação</string>
     <string name="shared_string_action">Ação</string>
     <string name="help_article_personal_profiles_name">Perfis (configurações)</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Roteamento de carro (camião, motocicleta)</string>
@@ -5626,4 +5626,16 @@
     <string name="custom_map_button_name_present">Este botão já está presente</string>
     <string name="add_button">Adicionar botão</string>
     <string name="custom_buttons">Botões personalizados</string>
+    <string name="speed_limit_warning">Aviso de limite de velocidade</string>
+    <string name="shared_string_limit">Limite</string>
+    <string name="when_exceeded">Quando excedido</string>
+    <string name="speedometer_description">Mostra a velocidade atual detetada pelo GPS</string>
+    <string name="help_article_setup_a_route_name">Configurar uma rota</string>
+    <string name="rendering_attr_padusDisplayMode_description">Por tipo de acesso ou nome do gestor</string>
+    <string name="rendering_value_access_name">Por tipo de acesso</string>
+    <string name="rendering_value_managerName_name">Por nome do gestor</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ocultar limites dos terrenos públicos</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ocultar fronteiras dos terrenos públicos, mas deixar áreas</string>
+    <string name="shared_string_speedometer">Velocímetro</string>
+    <string name="rendering_attr_padusDisplayMode_name">Modo de visualização de terrenos públicos</string>
 </resources>
