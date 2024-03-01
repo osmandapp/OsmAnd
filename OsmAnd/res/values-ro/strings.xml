@@ -2605,7 +2605,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Moale</string>
     <string name="routeInfo_tracktype_name">Rezistența suprafeței</string>
     <string name="shared_string_file_is_saved">%s este salvat</string>
-    <string name="shared_string_open_track">Deschide traseu</string>
+    <string name="shared_string_open_track">Înregistrare deschisă</string>
     <string name="shared_string_track_is_saved">Traseul %s este salvat</string>
     <string name="app_mode_camper">Camping</string>
     <string name="app_mode_campervan">Rulota</string>
@@ -4798,7 +4798,7 @@
     <string name="speak_route_recalculation">Recalculare rută</string>
     <string name="map_center_widget">Coordonate: Centrul hărții</string>
     <string name="external_sensors_plugin_name">Senzori externi</string>
-    <string name="external_sensors_plugin_description">Accesează senzori externi pentru a citi, de exemplu, ritmul cardiac, viteza bicicletei, puterea de pedalare sau cadența. Necesită ca dispozitivul dvs. să fie conectat la senzorii respectivi prin intermediul protocolului ANT+.</string>
+    <string name="external_sensors_plugin_description">Accesați senzori externi pentru a citi, spre exemplu, pulsul, viteza biciclete, puterea produsă sau cadența pedalatului. Necesită ca dispozitivul d-voastră să fie conectat la respectivii senzori prin protocolul de rețea personală wireless ANT+.</string>
     <string name="map_widget_altitude_map_center">Elevație: centrul hărții</string>
     <string name="map_widget_altitude_map_center_desc">Arată altitudinea deasupra nivelului mării a centrului actual al hărții.</string>
     <string name="map_widget_altitude_desc">Arată altitudinea geolocației curente sau altitudinea centrului actual al hărții</string>
@@ -4868,11 +4868,11 @@
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="action_not_supported_with_map_style">Această acțiune nu este compatibilă cu stilul de hartă selectat.</string>
     <string name="ant_write_to_gpx">Scrie date în traseu</string>
-    <string name="map_widget_ant_bicycle_power">Putere bicicletă</string>
-    <string name="map_widget_ant_bicycle_cadence">Cadență bicicletă</string>
+    <string name="map_widget_ant_bicycle_power">Putere exercitată</string>
+    <string name="map_widget_ant_bicycle_cadence">Cadența pedalatului</string>
     <string name="map_widget_ant_bicycle_speed">Viteza bicicletei</string>
-    <string name="map_widget_ant_bicycle_speed_desc">Arată viteza de deplasare</string>
-    <string name="map_widget_ant_bicycle_dist">Distanța pe bicicletă</string>
+    <string name="map_widget_ant_bicycle_speed_desc">Arată viteza de mișcare</string>
+    <string name="map_widget_ant_bicycle_dist">Distanța parcursă</string>
     <string name="map_widget_target_distance_desc">Arată distanța dintre cameră și locația țintă.</string>
     <string name="map_widget_camera_distance_desc">Arată altitudinea camerei deasupra nivelului suprafeței.</string>
     <string name="map_widget_camera_tilt_desc">Arată unghiul de înclinare al camerei în modul perspectivă. Implicit este 90° (fără înclinare).</string>
@@ -4890,8 +4890,8 @@
     <string name="how_to_use">Cum se utilizează:</string>
     <string name="distance_by_tap_use_description">Atingeți harta pentru a vizualiza distanța dintre locația dumneavoastră curentă și punctul atins.
 \nAtingeți cu 2 degete pentru a vizualiza distanța dintre punctele atinse</string>
-    <string name="map_widget_ant_heart_rate">Ritm cardiac</string>
-    <string name="map_widget_ant_heart_rate_desc">Arată în timp real ritmul cardiac al utilizatorului în timpul unei anumite activități</string>
+    <string name="map_widget_ant_heart_rate">Puls</string>
+    <string name="map_widget_ant_heart_rate_desc">Afișați pulsul utilizatorului în timpul unei activități în timp real</string>
     <string name="map_widget_zoom_level">Nivel de zoom</string>
     <string name="favorite_delete_group">Ștergere grup</string>
     <string name="download_heightmap_maps">Hartă înălțimi</string>
@@ -4915,7 +4915,7 @@
     <string name="weather_prefs_descr">Prognoză pe 24 de ore și 7 zile, actualizată la fiecare 3 ore</string>
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="ant_heart_rate_write_gpx_desc">Include ritm cardiac în traseu</string>
-    <string name="map_widget_ant_bicycle_cadence_desc">Arată viteza cu care pedalează utilizatorul</string>
+    <string name="map_widget_ant_bicycle_cadence_desc">Afișați viteza la care pedalează utilizatorul</string>
     <string name="map_marker_interval_dialog_desc">Specificați intervalul de timp în care viteza medie va fi măsurată pentru a putea estimara ora de sosire.</string>
     <string name="quick_action_map_center_widget_descr">Un comutator pentru a afișa sau a ascunde widgetul de centru al hărții pe hartă.</string>
     <string name="coordinates_widget_map_center">Coordonate: centrul hărții</string>
@@ -4923,12 +4923,12 @@
     <string name="shared_string_large">Mare</string>
     <string name="rotate_map_manual_opt">Rotită manual</string>
     <string name="map_markers_desc">Widgetul arată distanța sau ora estimată de sosire (ETA) pentru primele două marcaje din lista marcajelor de pe hartă.</string>
-    <string name="map_widget_ant_bicycle_dist_desc">Arată distanța parcursă</string>
+    <string name="map_widget_ant_bicycle_dist_desc">Afișați distanța parcursă</string>
     <string name="nautical_depth_points">Puncte de adâncime nautică</string>
     <string name="depth_contours">Curbe de adâncime</string>
     <string name="worldwide_maps">Hărți lume</string>
     <string name="map_widget_zoom_level_desc">Arată nivelul actual de zoom al hărții.</string>
-    <string name="map_widget_ant_bicycle_power_desc">Arată puterea debitată de biciclist, care este folosită pentru a mișca bicicleta înainte</string>
+    <string name="map_widget_ant_bicycle_power_desc">Afișați puterea exercită a ciclistului care este folosită pentru a propulsa bicicleta</string>
     <string name="rendering_attr_depthContourColorScheme_name">Schemă de culori pentru linii</string>
     <string name="rendering_attr_depthContourWidth_name">Lățime curbe de adâncime</string>
     <string name="switch_mode_by_tapping_on_widget">Schimbați modul prin apăsarea pe widget.</string>
@@ -5197,9 +5197,9 @@
     <string name="ant_plus_searching">Se caută</string>
     <string name="learn_more_about_sensors_link">Aflați mai multe despre senzori.</string>
     <string name="calculate_offline">Calculează offline</string>
-    <string name="there_are_no_connected_sensors_of_this_type">Nu sunt conectați senzori de acest tip</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Nu există sensori conectați de acest tip</string>
     <string name="external_sensors_not_found">Nu s-au găsit senzori</string>
-    <string name="write_data_from_sensor_to_track">Scrierea datelor de la senzori externi în GPX, în timpul înregistrării călătoriei.</string>
+    <string name="write_data_from_sensor_to_track">Scrieți date de la senzorii externi pe GPX în timpul înregistrării traseului.</string>
     <string name="save_track_external_sensors_data">Date</string>
     <string name="external_device_forget_sensor_description">Senzorul va fi șters din listă. Veți putea să-l reconectați nou în orice moment.</string>
     <string name="external_device_disconnected">Deconectat</string>
@@ -5375,7 +5375,7 @@
 \n</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
     <string name="live_monitoring_adress_descr">Specificați adresa web cu sintaxa parametrilor: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
-    <string name="shared_string_temperature">Temperatură</string>
+    <string name="shared_string_temperature">Temperatura</string>
     <string name="help_article_navigation_routing_straight_line_routing_name">Rutare în linie dreaptă (aeronave)</string>
     <string name="help_article_navigation_routing_train_routing_name">Rutare folosind trenuri</string>
     <string name="help_article_navigation_routing_public_transport_navigation_name">Navigație transport public</string>
@@ -5397,7 +5397,7 @@
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_map_track_context_menu_name">Meniul contextual pentru trasee</string>
     <string name="help_article_map_legend_osmand_name">Stil de hartă OsmAnd</string>
-    <string name="sensor_temperature_desc">Arată temperatura de la senzor</string>
+    <string name="sensor_temperature_desc">Afișează temperatura de la senzor</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_routing_horse_routing_name">Rutare pentru călărie</string>
     <string name="help_article_navigation_routing_ski_routing_name">Rutare pentru schiat</string>
