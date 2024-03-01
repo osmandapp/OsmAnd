@@ -203,7 +203,8 @@ public class WidgetsVisibilityHelper {
 				&& !isInWaypointsChoosingMode()
 				&& !isInPlanRouteMode()
 				&& !isSelectingTilesZone()
-				&& !isTrackDetailsMenuOpened();
+				&& !isTrackDetailsMenuOpened()
+				&& !isInWeatherForecastMode();
 		/*
 				&& !isDashboardVisible()
 				&& !isInGpxDetailsMode()
