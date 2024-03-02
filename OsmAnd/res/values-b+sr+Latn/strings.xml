@@ -42,9 +42,9 @@
     <string name="context_menu_item_directions_from">Navigacija od</string>
     <string name="route_descr_map_location">Mapa :</string>
     <string name="route_descr_lat_lon">Šir %1$.3f, duž %2$.3f</string>
-    <string name="route_to">Do:</string>
+    <string name="route_to">Početak:</string>
     <string name="route_via">Preko:</string>
-    <string name="route_from">Od:</string>
+    <string name="route_from">Početak:</string>
     <string name="app_mode_default">Pretraga mape</string>
     <string name="settings_preset">Osnovni profil</string>
     <string name="destination_point">Destinacija %1$s</string>
