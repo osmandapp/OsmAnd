@@ -1392,7 +1392,7 @@
     <string name="wrong_input">Погрешан унос</string>
     <string name="enter_new_name">Унесите ново име</string>
     <string name="shared_string_back">Назад</string>
-    <string name="shared_string_view">Преглед</string>
+    <string name="shared_string_view">Приказ</string>
     <string name="waypoints_added_to_map_markers">Пролазне тачке додате ознакама на карти</string>
     <string name="wrong_format">Погрешан облик</string>
     <string name="shared_string_road">Пут</string>
@@ -2298,11 +2298,11 @@
     <string name="download_files_not_enough_space">Нема довољно слободног простора за преузимање %1$s MB (слободно: %2$s).</string>
     <string name="keep_informing">Понови упут навођења</string>
     <string name="auto_follow_route_navigation">Самостално центрирање само за време навођења</string>
-    <string name="popular_destinations">Омиљена одредишта</string>
+    <string name="popular_destinations">Популарна одредишта</string>
     <string name="paid_app">Плаћени програм</string>
     <string name="paid_plugin">Плаћени додатак</string>
     <string name="update_is_available">Надоградња је доступна</string>
-    <string name="download_file">Преузми датотеку</string>
+    <string name="download_file">Преузми фајл</string>
     <string name="start_editing">Започни уређивање</string>
     <string name="get_unlimited_access">Добави неограничени приступ</string>
     <string name="welcome_to_open_beta">Добродошли у отворену бету</string>
@@ -2334,9 +2334,9 @@
     <string name="shared_string_read">Читај</string>
     <string name="saved_articles">Забележени чланци</string>
     <string name="shared_string_explore">Истражи</string>
-    <string name="shared_string_contents">Садржаји</string>
+    <string name="shared_string_contents">Садржај</string>
     <string name="shared_string_result">Резултат</string>
-    <string name="shared_string_travel_guides">Путовање</string>
+    <string name="shared_string_travel_guides">Путнички водичи</string>
     <string name="layer_map">Извор карте…</string>
     <string name="route_general_information">Укупна удаљеност %1$s, време путовања %2$d h %3$d min.</string>
     <string name="position_on_map_center">На средини</string>
@@ -2403,7 +2403,7 @@
     <string name="maps_you_need">Карте које Вам требају</string>
     <string name="osmand_team">Дружба ОсмАнд-а</string>
     <string name="travel_card_update_descr">Доступни су нови подаци Викибојажа, освежите их ради уживања.</string>
-    <string name="travel_card_download_descr">Преузмите туристичке водиче Викивојажаради читања чланака о местима по целом свету без везе са интернетом.</string>
+    <string name="travel_card_download_descr">Преузмите туристичке водиче Викивојажа ради читања чланака о местима по целом свету без везе са интернетом.</string>
     <string name="start_editing_card_image_text">Бесплатни светски туристички водич који свако може да уређује.</string>
     <string name="wikivoyage_travel_guide">Туристички водичи</string>
     <string name="wikivoyage_travel_guide_descr">Водичи за најзанимљивија места на планети, унутар ОсмАнд-а, без потребе за везом са интернетом.</string>
@@ -2585,7 +2585,7 @@
     <string name="send_location_email_pattern">Да видите положај, пратите везу ка веб локацији %1$s или Андроид intent везу %2$s</string>
     <string name="voice_is_not_available_msg">Нема доступног гласовног навођења, идите у „Поставке“ → „Поставке навођења“ → „Гласовно навођење“ и одаберите или скините пакет са гласовима.</string>
     <string name="number_of_rows_in_dash">Број редова на табли %1$s</string>
-    <string name="shared_string_bookmark">Забележи</string>
+    <string name="shared_string_bookmark">Обележивач</string>
     <string name="switch_to_vector_map_to_see">Постојеће векторске карте за овај положај. 
 \n\t
 \n\tДа бисте их користили, идите на \'Мени\' → \'Подеси карту\' → \'Извор карте…\' → \'Векторске карте ван мреже\'.</string>
@@ -3749,7 +3749,7 @@
     <string name="register_on_openplacereviews_desc">Фотографије пружају пројекат отворених података OpenPlaceReviews.org. Ради постављања своје слике, морате се пријавити на странницу веба.</string>
     <string name="register_opr_create_new_account">Направите нови налог</string>
     <string name="register_opr_have_account">Већ имам</string>
-    <string name="shared_string_search_history">Претрага</string>
+    <string name="shared_string_search_history">Претрага историје</string>
     <string name="app_mode_kayak">Кајак</string>
     <string name="app_mode_motorboat">Моторни чамац</string>
     <string name="add_to_mapillary">Додај у Мапилари</string>
