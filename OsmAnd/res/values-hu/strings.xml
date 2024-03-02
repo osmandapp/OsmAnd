@@ -5613,7 +5613,7 @@
     <string name="shared_string_activity">tevékenység</string>
     <string name="shared_string_additional">További</string>
     <string name="sort_subfolders">Almappák sorba rendezése</string>
-    <string name="sorted_sufolders_toast">A „%1$s” mappában lévő almappák %2$s szerint vannak sorba rendezve</string>
+    <string name="sorted_sufolders_toast">„%1$s” mappa almappái \"%2$s\" szerint vannak sorba rendezve</string>
     <string name="special_routing_cpp">Speciális útvonaltervezési típus</string>
     <string name="add_button">Gomb hozzáadása</string>
     <string name="custom_buttons">Egyéni gombok</string>
