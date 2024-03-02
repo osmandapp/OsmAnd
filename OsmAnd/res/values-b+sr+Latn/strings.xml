@@ -5624,7 +5624,7 @@
     <string name="error_calculate">Rezultat kalkulacije je prazan</string>
     <string name="special_routing_cpp">Specijalni tip rutiranja</string>
     <string name="add_button">Dodaj dugme</string>
-    <string name="custom_buttons">Prilagođeno dugme</string>
+    <string name="custom_buttons">Sopstveno dugme</string>
     <string name="default_buttons">Zadano dugme</string>
     <string name="custom_map_button_name_present">Takvo dugme već postoji</string>
     <string name="shared_string_limit">Ograničenje</string>
