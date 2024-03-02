@@ -5626,4 +5626,6 @@
     <string name="rendering_attr_padusDisplayMode_description">Laŭ aliro aŭ laŭ nomo de administranto</string>
     <string name="rendering_value_access_name">Laŭ aliro</string>
     <string name="rendering_value_managerName_name">Laŭ nomo de administranto</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Kaŝi limojn de publikaj terenoj</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Kaŝi limojn de publikaj terenoj sed ne kaŝi areojn</string>
 </resources>
