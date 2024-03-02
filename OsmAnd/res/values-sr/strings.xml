@@ -948,7 +948,7 @@
     <string name="wiki_around">Чланци Википедије о околини</string>
     <string name="search_map_hint">Град или област</string>
     <string name="route_roundabout_short">Одреди излаз %1$d и иди</string>
-    <string name="upload_poi">Отпреми тачку занимања</string>
+    <string name="upload_poi">Отпреми ТОИ</string>
     <string name="route_calculation">Прорачун путање</string>
     <string name="gpx_no_tracks_title">Још увек немате ни једну датотеку трагова</string>
     <string name="gpx_no_tracks_title_folder">Такође, можете додати датотеке трагова у фасциклу</string>
@@ -1619,7 +1619,7 @@
     <string name="lang_lt">Литвански</string>
     <string name="lang_mr">Марати</string>
     <string name="lang_sc">Сардинијски</string>
-    <string name="lang_sr_latn">Српски није (латиница)</string>
+    <string name="lang_sr_latn">Српски (латиница)</string>
     <string name="lang_zh_cn">Кинески (појадностављени)</string>
     <string name="lang_zh_hk">Кинески (хонгконшки)</string>
     <string name="lang_zh_tw">Кинески (традиционални)</string>
@@ -5087,7 +5087,7 @@
     <string name="app_mode_climbing">Пентрање</string>
     <string name="generate_hillshade_from_3d_maps">Образуј оквирне карте сенчених падина из просторних, 3Д карата</string>
     <string name="generate_slope_from_3d_maps">Образуј оквире карата нагиба из просторних, 3Д карата</string>
-    <string name="disable_vertex_hillshade_3d">Онемогући вртложно сенчење у просторном прегледу 3Д</string>
+    <string name="disable_vertex_hillshade_3d">Онемогући вртложно сенчење у 3Д</string>
     <string name="metric_lbs">lbs</string>
     <string name="rendering_value_small_name">Мали</string>
     <string name="rendering_value_name_only_name">Само име</string>
