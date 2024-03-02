@@ -1855,8 +1855,8 @@
     <string name="osm_live_subscribe_btn">S\'abonner</string>
     <string name="osm_live_month_cost">Coût mensuel</string>
     <string name="osm_live_month_cost_desc">Règlement mensuel</string>
-    <string name="osm_live_active">Activer</string>
-    <string name="osm_live_not_active">Désactiver</string>
+    <string name="osm_live_active">Actif</string>
+    <string name="osm_live_not_active">Inactif</string>
     <string name="osm_live_enter_email">Veuillez saisir une adresse courriel valide</string>
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
@@ -1893,7 +1893,7 @@
     <string name="add_points_to_map_markers_q">Ajouter tous les points comme marques ?</string>
     <string name="shared_string_add_to_map_markers">Ajouter comme marque</string>
     <string name="select_map_markers">Sélectionner les marques</string>
-    <string name="show_map_markers_description">Activer la fonction marques</string>
+    <string name="show_map_markers_description">Activer la fonction marqueurs.</string>
     <string name="clear_active_markers_q">Supprimer toutes les marques actives ?</string>
     <string name="clear_markers_history_q">Effacer l\'Historique des marques ?</string>
     <string name="active_markers">Marques actives</string>
