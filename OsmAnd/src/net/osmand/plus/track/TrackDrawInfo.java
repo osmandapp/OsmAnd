@@ -204,11 +204,16 @@ public class TrackDrawInfo {
 		return routeInfoAttribute;
 	}
 
-	public void setColoringType(ColoringType coloringType) {
+	public void setColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		setColoringType(coloringStyle.getType());
+		setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+	}
+
+	public void setColoringType(@NonNull ColoringType coloringType) {
 		this.coloringType = coloringType;
 	}
 
-	public void setRouteInfoAttribute(String routeInfoAttribute) {
+	public void setRouteInfoAttribute(@Nullable String routeInfoAttribute) {
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
 

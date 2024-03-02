@@ -1,10 +1,13 @@
 package net.osmand.plus.card.color.palette.main.data;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 
-public interface PaletteColors {
+import java.util.Objects;
+
+public interface DefaultColors {
 
 	PaletteColor DARK_YELLOW = new PredefinedPaletteColor("darkyellow", 0xffeecc22, R.string.rendering_value_darkyellow_name);
 	PaletteColor RED = new PredefinedPaletteColor("red", 0xffd00d0d, R.string.rendering_value_red_name);
@@ -18,6 +21,16 @@ public interface PaletteColors {
 	PaletteColor PINK = new PredefinedPaletteColor("pink", 0xffe044bb, R.string.rendering_value_pink_name);
 	PaletteColor BROWN = new PredefinedPaletteColor("brown", 0xff8e2512, R.string.rendering_value_brown_name);
 	PaletteColor BLACK = new PredefinedPaletteColor("black", 0xff000001, R.string.rendering_value_black_name);
+
+	@ColorInt
+	static int valueOf(@NonNull String id) {
+		for (PaletteColor paletteColor : values()) {
+			if (Objects.equals(paletteColor.getId(), id)) {
+				return paletteColor.getColor();
+			}
+		}
+		return 0;
+	}
 
 	@NonNull
 	static PaletteColor[] values() {

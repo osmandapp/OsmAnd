@@ -18,7 +18,7 @@ import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteColors;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
@@ -59,7 +59,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 	public ModedColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
 			OsmandSettings settings = app.getSettings();
-			List<PaletteColor> predefinedColors = Arrays.asList(PaletteColors.values());
+			List<PaletteColor> predefinedColors = Arrays.asList(DefaultColors.values());
 			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.ROUTE_LINE_COLORS_PALETTE);
 			colorsPaletteController = new ModedColorsPaletteController(app, colorsCollection) {
 

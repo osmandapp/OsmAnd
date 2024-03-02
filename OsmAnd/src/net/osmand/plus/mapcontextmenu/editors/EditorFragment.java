@@ -303,7 +303,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements CardL
 
 	@NonNull
 	private ColorsPaletteController getColorsPaletteController() {
-		return EditorColorController.getOrCreateInstance(app, this, getColor());
+		return EditorColorController.getInstance(app, this, getColor());
 	}
 
 	protected void updateContent() {
@@ -317,7 +317,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements CardL
 	}
 
 	protected void updateSelectedColorText() {
-		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
+		ColorsPaletteController controller = getColorsPaletteController();
+		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
 	}
 
 	@DrawableRes

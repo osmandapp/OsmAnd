@@ -242,4 +242,12 @@ public class ColorsPaletteController implements IColorsPaletteController {
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return app.getUIUtilities().getThemedIcon(id);
 	}
+
+	@NonNull
+	public String getColorName(@ColorInt int colorInt) {
+		PaletteColor paletteColor = colorsCollection.findPaletteColor(colorInt);
+		return paletteColor != null
+				? paletteColor.toHumanString(app)
+				: app.getString(R.string.shared_string_custom);
+	}
 }

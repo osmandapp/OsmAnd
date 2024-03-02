@@ -41,6 +41,7 @@ import net.osmand.data.ValueHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -284,7 +285,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 			String colorStr = amenity.getColor();
 			if (colorStr != null) {
-				color = ColorDialogs.getColorByTag(colorStr);
+				color = DefaultColors.valueOf(colorStr);
 			}
 		}
 		return color != 0 ? color : ContextCompat.getColor(app, R.color.osmand_orange);

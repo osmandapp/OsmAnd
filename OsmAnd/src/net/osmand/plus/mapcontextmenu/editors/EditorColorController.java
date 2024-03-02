@@ -10,7 +10,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteColors;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Arrays;
@@ -32,14 +32,14 @@ public class EditorColorController extends ColorsPaletteController implements ID
 	}
 
 	@NonNull
-	public static EditorColorController getOrCreateInstance(@NonNull OsmandApplication app,
-	                                                        @NonNull OnColorsPaletteListener listener,
-	                                                        @ColorInt int selectedColor) {
+	public static EditorColorController getInstance(@NonNull OsmandApplication app,
+	                                                @NonNull OnColorsPaletteListener listener,
+	                                                @ColorInt int selectedColor) {
 		OsmandSettings settings = app.getSettings();
 		DialogManager dialogManager = app.getDialogManager();
 		EditorColorController controller = (EditorColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			List<PaletteColor> predefinedColors = Arrays.asList(PaletteColors.values());
+			List<PaletteColor> predefinedColors = Arrays.asList(DefaultColors.values());
 			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.TRACK_COLORS_PALETTE);
 			controller = new EditorColorController(app, colorsCollection, selectedColor);
 			dialogManager.register(PROCESS_ID, controller);

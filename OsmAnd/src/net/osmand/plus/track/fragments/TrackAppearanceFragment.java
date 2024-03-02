@@ -430,8 +430,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		trackDrawInfo.setColoringType(coloringStyle.getType());
-		trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+		trackDrawInfo.setColoringStyle(coloringStyle);
 		refreshMap();
 
 		View saveButton = view.findViewById(R.id.right_bottom_button);
