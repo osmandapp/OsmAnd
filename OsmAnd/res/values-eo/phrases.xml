@@ -4850,4 +4850,16 @@
     <string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">aviadila surteriĝejo</string>
     <string name="poi_us_maps_recreation_area_facility_boat_launch">boat-lanĉejo</string>
     <string name="poi_us_maps_recreation_area_facility_group_shelter">ŝirmejo plurpersona</string>
+    <string name="poi_cuisine_fish">fiŝaĵoj</string>
+    <string name="poi_us_maps_recreation_area_facility_natural_endangered_area">natura/endanĝerigita tereno</string>
+    <string name="poi_us_maps_recreation_area_facility_rapid">akvofalo</string>
+    <string name="poi_us_maps_recreation_area_facility_rv_dump_station">kampadveturila stacio de forigo de fekaĵoj</string>
+    <string name="poi_us_maps_recreation_area_facility_warming_hut">sovaĝeja kabano</string>
+    <string name="poi_us_maps_recreation_area_facility_parking">parkumejo</string>
+    <string name="poi_music_venue">Koncertejo</string>
+    <string name="poi_live_music_yes">jes</string>
+    <string name="poi_shop_general">Ĝenerala vendejo</string>
+    <string name="poi_us_maps_recreation_area_facility_horse_stanchion">ĉevala stalfako</string>
+    <string name="poi_us_maps_recreation_area_facility_horse_corral">ĉevalejo</string>
+    <string name="poi_us_maps_recreation_area_facility_lighthouse">lumturo</string>
 </resources>
