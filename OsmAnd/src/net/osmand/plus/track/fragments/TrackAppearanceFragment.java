@@ -42,9 +42,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
-import net.osmand.plus.card.color.palette.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
@@ -61,7 +61,7 @@ import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
-import net.osmand.plus.track.fragments.controller.TrackColorController.ITrackColorControllerListener;
+import net.osmand.plus.card.color.ColoringCardController.IColorCardControllerListener;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -80,7 +80,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ITrackColorControllerListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 
@@ -747,7 +747,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private TrackColorController getColorCardController() {
-		return TrackColorController.getOrCreateInstance(app, selectedGpxFile, trackDrawInfo, this);
+		return TrackColorController.getInstance(app, selectedGpxFile, trackDrawInfo, this);
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

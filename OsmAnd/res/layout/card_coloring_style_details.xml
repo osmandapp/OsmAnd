@@ -13,7 +13,6 @@
 		android:layout_height="wrap_content"
 		android:gravity="start"
 		android:letterSpacing="@dimen/description_letter_spacing"
-		android:paddingTop="@dimen/content_padding_small"
 		android:paddingBottom="@dimen/content_padding_half"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_desc_text_size"
@@ -93,6 +92,6 @@
 	<View
 		android:id="@+id/bottom_space"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/gpx_small_text_margin" />
+		android:layout_height="@dimen/content_padding_small" />
 
 </LinearLayout>

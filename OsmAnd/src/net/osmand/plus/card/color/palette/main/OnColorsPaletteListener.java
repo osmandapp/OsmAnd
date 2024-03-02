@@ -1,10 +1,9 @@
-package net.osmand.plus.card.color.palette;
+package net.osmand.plus.card.color.palette.main;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 
 public interface OnColorsPaletteListener {
 

@@ -9,11 +9,11 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.data.PredefinedPaletteColor;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -52,11 +52,11 @@ public class ProfileColorController extends ColorsPaletteController implements I
 	}
 
 	@NonNull
-	public static ProfileColorController getOrCreateInstance(@NonNull OsmandApplication app,
-	                                                         @NonNull ApplicationMode appMode,
-	                                                         @NonNull OnColorsPaletteListener listener,
-	                                                         @ColorInt int selectedColor,
-	                                                         boolean nightMode) {
+	public static ProfileColorController getInstance(
+			@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
+			@NonNull OnColorsPaletteListener listener, @ColorInt int selectedColor,
+			boolean nightMode
+	) {
 		OsmandSettings settings = app.getSettings();
 		DialogManager dialogManager = app.getDialogManager();
 		ProfileColorController controller = (ProfileColorController) dialogManager.findController(PROCESS_ID);

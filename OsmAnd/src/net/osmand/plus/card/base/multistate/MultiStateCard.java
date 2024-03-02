@@ -8,17 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
-
-import java.util.List;
 
 public class MultiStateCard extends BaseCard {
 
-	private final IMultiStateCardController controller;
+	protected final IMultiStateCardController controller;
 
 	public MultiStateCard(@NonNull FragmentActivity activity,
 	                      @NonNull IMultiStateCardController cardController) {
@@ -39,13 +34,20 @@ public class MultiStateCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		updateCardTitle();
-		updateStateSelector();
+		if(controller.shouldShowMultiStateCardHeader()) {
+			updateCardTitle();
+			updateStateSelector();
+		} else {
+			View headerView = view.findViewById(R.id.header);
+			AndroidUiHelper.updateVisibility(headerView, false);
+		}
 		bindSelectedStateContent();
 	}
 
-	public void onStateChanged() {
-		updateStateSelector();
+	public void updateSelectedCardState() {
+		if (controller.shouldShowMultiStateCardHeader()) {
+			updateStateSelector();
+		}
 		bindSelectedStateContent();
 	}
 
@@ -73,16 +75,6 @@ public class MultiStateCard extends BaseCard {
 
 	private void showPopUpMenu() {
 		View selector = view.findViewById(R.id.card_selector);
-		List<PopUpMenuItem> menuItems = controller.getMultiSateMenuItems();
-
-		OnPopUpMenuItemClickListener onItemClickListener = item -> {
-			controller.onMultiStateMenuItemSelected(activity, selector, item);
-		};
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = selector;
-		displayData.menuItems = menuItems;
-		displayData.nightMode = nightMode;
-		displayData.onItemClickListener = onItemClickListener;
-		PopUpMenu.show(displayData);
+		controller.showPopUpMenu(activity, selector, nightMode);
 	}
 }

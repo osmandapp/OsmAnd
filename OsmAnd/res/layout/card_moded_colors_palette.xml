@@ -7,7 +7,8 @@
 	<FrameLayout
 		android:id="@+id/theme_toggle_container"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content" >
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding">
 
 		<include layout="@layout/custom_radio_buttons" />
 

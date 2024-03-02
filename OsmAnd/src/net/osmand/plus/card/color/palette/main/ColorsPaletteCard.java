@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette;
+package net.osmand.plus.card.color.palette.main;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
 

@@ -1,9 +1,9 @@
-package net.osmand.plus.card.color.coloringtype;
+package net.osmand.plus.card.color.cstyle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
+import net.osmand.plus.card.color.ColoringStyle;
 
 public interface IColoringStyleDetailsController {
 

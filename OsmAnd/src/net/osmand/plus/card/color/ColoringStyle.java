@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.coloringstyle;
+package net.osmand.plus.card.color;
 
 import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
@@ -41,7 +41,7 @@ public class ColoringStyle {
 		if (coloringType.isRouteInfoAttribute()) {
 			return Algorithms.isEmpty(routeInfoAttribute) ? null : routeInfoAttribute;
 		}
-		return coloringType.name();
+		return coloringType.getId();
 	}
 
 	@NonNull

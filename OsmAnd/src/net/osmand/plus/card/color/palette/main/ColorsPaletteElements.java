@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette;
+package net.osmand.plus.card.color.palette.main;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -55,7 +55,7 @@ public class ColorsPaletteElements {
 			outline.setVisibility(View.VISIBLE);
 		} else {
 			outline.setVisibility(View.INVISIBLE);
-			icon.setImageDrawable(UiUtilities.tintDrawable( // TODO do we really need this ??
+			icon.setImageDrawable(UiUtilities.tintDrawable(
 					icon.getDrawable(), ColorUtilities.getDefaultIconColor(app, nightMode)));
 		}
 	}

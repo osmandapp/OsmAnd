@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.palette.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
-import net.osmand.plus.card.color.palette.data.PaletteColors;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColors;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Arrays;

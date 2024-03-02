@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.coloringtype;
+package net.osmand.plus.card.color.cstyle;
 
 import android.widget.TextView;
 

@@ -12,19 +12,18 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyleCardController;
-import net.osmand.plus.card.color.coloringstyle.OnSelectColoringStyleListener;
-import net.osmand.plus.card.color.coloringtype.ColoringStyleDetailsCard;
-import net.osmand.plus.card.color.coloringtype.ColoringStyleDetailsCardController;
-import net.osmand.plus.card.color.coloringtype.IColoringStyleDetailsController;
-import net.osmand.plus.card.color.palette.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.data.PredefinedPaletteColor;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.ColoringCardController;
+import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
+import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
+import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
@@ -35,13 +34,11 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackColorController extends ColoringStyleCardController implements IDialogController {
+public class TrackColorController extends ColoringCardController implements IDialogController {
 
 	private static final String PROCESS_ID = "select_track_color";
 
@@ -50,18 +47,13 @@ public class TrackColorController extends ColoringStyleCardController implements
 
 	private IColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
-	private ITrackColorControllerListener listener;
 
 	public TrackColorController(@NonNull OsmandApplication app,
 	                            @Nullable SelectedGpxFile selectedGpx,
 	                            @NonNull TrackDrawInfo drawInfo) {
-		super(app, new ColoringStyle(drawInfo.getColoringType(), drawInfo.getRouteInfoAttribute()));
+		super(app, drawInfo.getColoringStyle());
 		this.selectedGpx = selectedGpx;
 		this.drawInfo = drawInfo;
-	}
-
-	public void setListener(ITrackColorControllerListener listener) {
-		this.listener = listener;
 	}
 
 	@NonNull
@@ -90,15 +82,9 @@ public class TrackColorController extends ColoringStyleCardController implements
 			}
 			OsmandSettings settings = app.getSettings();
 			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.TRACK_COLORS_PALETTE);
-			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor()) {
-				@Override
-				protected void onColorSelected(@Nullable PaletteColor paletteColor) {
-					if (listener != null && paletteColor != null) {
-						listener.onColorSelectedFromPalette(paletteColor);
-					}
-				}
-			};
+			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor());
 		}
+		colorsPaletteController.setPaletteListener(getControllerListener());
 		return colorsPaletteController;
 	}
 
@@ -112,32 +98,11 @@ public class TrackColorController extends ColoringStyleCardController implements
 		return coloringStyleDetailsController;
 	}
 
-	@NonNull
-	@Override
-	public List<PopUpMenuItem> getMultiSateMenuItems() {
-		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		for (ColoringStyle coloringStyle : getSupportedColoringStyles()) {
-			int titleColor = isAvailableColoringStyle(coloringStyle)
-					? ColorUtilities.getPrimaryTextColor(app, nightMode)
-					: ColorUtilities.getDisabledTextColor(app, nightMode);
-			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitle(coloringStyle.toHumanString(app))
-					.setTitleColor(titleColor)
-					.setTag(coloringStyle)
-					.create()
-			);
-		}
-		return menuItems;
-	}
-
 	@Override
 	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
 		super.onColoringStyleSelected(coloringStyle);
 		IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
 		styleDetailsController.setColoringStyle(coloringStyle);
-		if (listener != null) {
-			listener.onColoringStyleSelected(coloringStyle);
-		}
 	}
 
 	@Override
@@ -145,27 +110,17 @@ public class TrackColorController extends ColoringStyleCardController implements
 		return true;
 	}
 
-	@NonNull
 	@Override
-	protected List<ColoringStyle> collectSupportedColoringStyles() {
-		List<ColoringStyle> result = new ArrayList<>();
-		for (ColoringType coloringType : getColoringTypes()) {
-			if (!coloringType.isRouteInfoAttribute()) {
-				result.add(new ColoringStyle(coloringType));
-			}
-		}
-		for (String routeInfoAttribute : collectRouteInfoAttributes()) {
-			result.add(new ColoringStyle(routeInfoAttribute));
-		}
-		return result;
-	}
-
-	@Override
-	protected boolean isAvailableColoringStyle(@NonNull ColoringStyle coloringStyle) {
+	protected boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle) {
 		if (selectedGpx == null || coloringStyle.getType() != ATTRIBUTE && drawInfo.isCurrentRecording()) {
 			return true;
 		}
 		return isAvailableForDrawingTrack(app, coloringStyle, selectedGpx);
+	}
+
+	@Override
+	protected ColoringType[] getSupportedColoringTypes() {
+		return ColoringType.valuesOf(ColoringPurpose.TRACK);
 	}
 
 	public void onDestroy(@Nullable FragmentActivity activity) {
@@ -193,9 +148,9 @@ public class TrackColorController extends ColoringStyleCardController implements
 		}
 	}
 
-	public static TrackColorController getOrCreateInstance(
+	public static TrackColorController getInstance(
 			@NonNull OsmandApplication app, @Nullable SelectedGpxFile selectedGpx,
-			@NonNull TrackDrawInfo drawInfo, @NonNull ITrackColorControllerListener listener
+			@NonNull TrackDrawInfo drawInfo, @NonNull IColorCardControllerListener listener
 	) {
 		DialogManager dialogManager = app.getDialogManager();
 		TrackColorController controller = (TrackColorController) dialogManager.findController(PROCESS_ID);
@@ -207,14 +162,4 @@ public class TrackColorController extends ColoringStyleCardController implements
 		return controller;
 	}
 
-	@NonNull
-	public static ColoringType[] getColoringTypes() {
-		return new ColoringType[] {
-				ColoringType.TRACK_SOLID, ColoringType.SPEED,
-				ColoringType.ALTITUDE, ColoringType.SLOPE, ColoringType.ATTRIBUTE
-		};
-	}
-
-	public interface ITrackColorControllerListener
-			extends OnSelectColoringStyleListener, OnColorsPaletteListener { }
 }

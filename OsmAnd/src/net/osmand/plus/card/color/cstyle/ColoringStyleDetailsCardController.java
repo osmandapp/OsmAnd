@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.coloringtype;
+package net.osmand.plus.card.color.cstyle;
 
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -48,7 +48,8 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 
 	@Override
 	public boolean shouldHideCard() {
-		return coloringStyle.getType().isSolidSingleColor();
+		ColoringType coloringType = coloringStyle.getType();
+		return !coloringType.isDefault() && coloringType.isSolidSingleColor();
 	}
 
 	@Override

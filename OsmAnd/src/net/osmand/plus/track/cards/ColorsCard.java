@@ -38,7 +38,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 	public static final int MAX_CUSTOM_COLORS = 6;
 	public static final double MINIMUM_CONTRAST_RATIO = 1.5;
 
-	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
+	private static final Log log = PlatformUtil.getLog(ColorsCard.class);
 
 	public static final int INVALID_VALUE = -1;
 

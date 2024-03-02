@@ -30,9 +30,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
-import net.osmand.plus.card.color.palette.IColorsPaletteController;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -49,7 +49,7 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
-import net.osmand.plus.track.fragments.controller.TrackColorController.ITrackColorControllerListener;
+import net.osmand.plus.card.color.ColoringCardController.IColorCardControllerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, ITrackColorControllerListener, InAppPurchaseListener {
+public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, IColorCardControllerListener, InAppPurchaseListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -339,7 +339,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private TrackColorController getColorCardController() {
-		return TrackColorController.getOrCreateInstance(app, null, trackDrawInfo, this);
+		return TrackColorController.getInstance(app, null, trackDrawInfo, this);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target) {

@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette;
+package net.osmand.plus.card.color.palette.main;
 
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -11,9 +11,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
-import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.track.fragments.controller.ColorPickerDialogController;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenu;
@@ -63,7 +63,7 @@ public class ColorsPaletteController implements IColorsPaletteController {
 		}
 	}
 
-	private void notifyUpdatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+	protected void notifyUpdatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
 		for (IColorsPalette palette : collectActivePalettes()) {
 			palette.updatePaletteSelection(oldColor, newColor);
 		}

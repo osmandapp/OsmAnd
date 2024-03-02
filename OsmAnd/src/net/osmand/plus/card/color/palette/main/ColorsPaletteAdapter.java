@@ -1,16 +1,19 @@
-package net.osmand.plus.card.color.palette;
+package net.osmand.plus.card.color.palette.main;
 
 import android.annotation.SuppressLint;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.card.color.palette.data.PaletteColor;
-import net.osmand.plus.card.color.palette.data.PaletteSortingMode;
+import net.osmand.plus.R;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteAdapter.ColorViewHolder;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 
 import java.util.List;
 
@@ -84,4 +87,15 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 		return paletteColor.isDefault() ? paletteColor.getId().hashCode() : paletteColor.getCreationTime();
 	}
 
+	static class ColorViewHolder extends RecyclerView.ViewHolder {
+
+		public final ImageView outline;
+		public final ImageView background;
+
+		public ColorViewHolder(@NonNull View itemView) {
+			super(itemView);
+			outline = itemView.findViewById(R.id.outline);
+			background = itemView.findViewById(R.id.background);
+		}
+	}
 }

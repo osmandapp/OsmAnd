@@ -8,7 +8,7 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;

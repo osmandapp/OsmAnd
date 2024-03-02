@@ -26,7 +26,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -48,10 +47,9 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.card.color.palette.ColorsPaletteCard;
-import net.osmand.plus.card.color.palette.ColorsPaletteController;
-import net.osmand.plus.card.color.palette.OnColorsPaletteListener;
-import net.osmand.plus.card.color.palette.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -455,7 +453,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 
 	@NonNull
 	private ProfileColorController getColorsPaletteController() {
-		return ProfileColorController.getOrCreateInstance(
+		return ProfileColorController.getInstance(
 				app, getSelectedAppMode(), this, changedProfile.getActualColor(), isNightMode()
 		);
 	}
