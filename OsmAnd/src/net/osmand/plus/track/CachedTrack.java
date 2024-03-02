@@ -11,7 +11,8 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.coloringstyle.ColoringStyle;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
@@ -211,7 +212,7 @@ public class CachedTrack {
 	@NonNull
 	private Set<String> listAvailableStaticColoringTypes() {
 		Set<String> availableStaticTypes = new HashSet<>();
-		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
+		for (ColoringType coloringType : ColoringType.valuesOf(ColoringPurpose.TRACK)) {
 			if (!coloringType.isRouteInfoAttribute()
 					&& isAvailableForDrawingTrack(app, new ColoringStyle(coloringType), selectedGpxFile)) {
 				availableStaticTypes.add(coloringType.getName(null));

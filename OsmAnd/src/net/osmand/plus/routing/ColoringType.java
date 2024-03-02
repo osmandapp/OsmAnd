@@ -1,26 +1,15 @@
 package net.osmand.plus.routing;
 
-import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAttributeAvailableForDrawing;
-
-import android.content.Context;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.inapp.InAppPurchaseUtils;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.Location;
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.R;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public enum ColoringType {
 
@@ -35,39 +24,34 @@ public enum ColoringType {
 	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
 	ATTRIBUTE("attribute", R.string.attribute, R.drawable.ic_action_hillshade_dark);
 
-	private static final List<ColoringType> ROUTE_COLORING_TYPES = new ArrayList<>();
-	private static final List<ColoringType> TRACK_COLORING_TYPES = new ArrayList<>();
+	private static final ColoringType[] ROUTE_TYPES = new ColoringType[] {
+			DEFAULT, CUSTOM_COLOR, ALTITUDE, SLOPE, ATTRIBUTE
+	};
+	private static final ColoringType[] TRACK_TYPES = new ColoringType[] {
+			TRACK_SOLID, SPEED, ALTITUDE, SLOPE, ATTRIBUTE
+	};
 
-	static {
-		ROUTE_COLORING_TYPES.add(DEFAULT);
-		ROUTE_COLORING_TYPES.add(CUSTOM_COLOR);
-		ROUTE_COLORING_TYPES.add(ALTITUDE);
-		ROUTE_COLORING_TYPES.add(SLOPE);
-		ROUTE_COLORING_TYPES.add(ATTRIBUTE);
-
-		TRACK_COLORING_TYPES.add(TRACK_SOLID);
-		TRACK_COLORING_TYPES.add(SPEED);
-		TRACK_COLORING_TYPES.add(ALTITUDE);
-		TRACK_COLORING_TYPES.add(SLOPE);
-		TRACK_COLORING_TYPES.add(ATTRIBUTE);
-	}
-
-	private final String name;
+	private final String id;
 	@StringRes
 	private final int titleId;
 	@DrawableRes
 	private final int iconId;
 
-	ColoringType(@NonNull String name, int titleId, int iconId) {
-		this.name = name;
+	ColoringType(@NonNull String id, int titleId, int iconId) {
+		this.id = id;
 		this.titleId = titleId;
 		this.iconId = iconId;
+	}
+
+	@NonNull
+	public String getId() {
+		return id;
 	}
 
 	@Nullable
 	public String getName(@Nullable String routeInfoAttribute) {
 		if (!isRouteInfoAttribute()) {
-			return name;
+			return id;
 		} else {
 			return Algorithms.isEmpty(routeInfoAttribute) ? null : routeInfoAttribute;
 		}
@@ -81,23 +65,6 @@ public enum ColoringType {
 	@DrawableRes
 	public int getIconId() {
 		return iconId;
-	}
-
-	@NonNull
-	public String getHumanString(@NonNull Context context, @Nullable String routeInfoAttribute) {
-		return isRouteInfoAttribute()
-				? getHumanStringRouteInfoAttribute(context, routeInfoAttribute)
-				: context.getString(titleId);
-	}
-
-	@NonNull
-	private String getHumanStringRouteInfoAttribute(@NonNull Context context, @Nullable String routeInfoAttribute) {
-		String routeInfoPrefix = RouteStatisticsHelper.ROUTE_INFO_PREFIX;
-		if (!isRouteInfoAttribute() || routeInfoAttribute == null
-				|| !routeInfoAttribute.startsWith(routeInfoPrefix)) {
-			return "";
-		}
-		return AndroidUtils.getStringRouteInfoPropertyValue(context, routeInfoAttribute.replace(routeInfoPrefix, ""));
 	}
 
 	public boolean isDefault() {
@@ -124,34 +91,6 @@ public enum ColoringType {
 		return this == ATTRIBUTE;
 	}
 
-	public boolean isAvailableForDrawingRoute(@NonNull OsmandApplication app,
-											  @NonNull RouteCalculationResult route,
-	                                          @Nullable String attributeName) {
-		if (isGradient()) {
-			List<Location> locations = route.getImmutableAllLocations();
-			for (Location location : locations) {
-				if (location.hasAltitude()) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		if (isRouteInfoAttribute()) {
-			return !Algorithms.isEmpty(route.getOriginalRoute())
-					&& isAttributeAvailableForDrawing(app, route.getOriginalRoute(), attributeName);
-		}
-
-		return true;
-	}
-
-	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
-	                                         @Nullable String attributeName, boolean route) {
-		if ((isRouteInfoAttribute() && route) || this == SLOPE) {
-			return InAppPurchaseUtils.isColoringTypeAvailable(app);
-		}
-		return true;
-	}
 	@Nullable
 	public GradientScaleType toGradientScaleType() {
 		if (this == SPEED) {
@@ -166,7 +105,13 @@ public enum ColoringType {
 	}
 
 	@Nullable
-	public static ColoringType fromGradientScaleType(@Nullable GradientScaleType scaleType) {
+	public static String getRouteInfoAttribute(@Nullable String name) {
+		return !Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX) ?
+				name : null;
+	}
+
+	@Nullable
+	public static ColoringType valueOf(@Nullable GradientScaleType scaleType) {
 		if (scaleType == GradientScaleType.SPEED) {
 			return SPEED;
 		} else if (scaleType == GradientScaleType.ALTITUDE) {
@@ -177,47 +122,39 @@ public enum ColoringType {
 		return null;
 	}
 
-	@Nullable
-	public static String getRouteInfoAttribute(@Nullable String name) {
-		return !Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX) ?
-				name : null;
+	@NonNull
+	public static ColoringType requireValueOf(@NonNull ColoringPurpose purpose) {
+		return requireValueOf(purpose, null);
 	}
 
 	@NonNull
-	public static ColoringType getRouteColoringTypeByName(@Nullable String name) {
-		ColoringType defined = getColoringTypeByName(ROUTE_COLORING_TYPES, name);
-		return defined == null ? DEFAULT : defined;
+	public static ColoringType requireValueOf(@NonNull ColoringPurpose purpose, @Nullable String name) {
+		ColoringType defaultValue = purpose == ColoringPurpose.ROUTE_LINE ? DEFAULT : TRACK_SOLID;
+		return valueOf(purpose, name, defaultValue);
 	}
 
 	@NonNull
-	public static ColoringType getNonNullTrackColoringTypeByName(@Nullable String name) {
-		ColoringType defined = getColoringTypeByName(TRACK_COLORING_TYPES, name);
-		return defined == null ? TRACK_SOLID : defined;
+	public static ColoringType valueOf(@NonNull ColoringPurpose purpose, @Nullable String name,
+	                                   @NonNull ColoringType defaultValue) {
+		ColoringType value = valueOf(purpose, name);
+		return value != null ? value : defaultValue;
 	}
 
 	@Nullable
-	public static ColoringType getNullableTrackColoringTypeByName(@Nullable String name) {
-		return getColoringTypeByName(TRACK_COLORING_TYPES, name);
-	}
-
-	@Nullable
-	private static ColoringType getColoringTypeByName(List<ColoringType> from, @Nullable String name) {
+	public static ColoringType valueOf(@NonNull ColoringPurpose purpose, @Nullable String name) {
 		if (!Algorithms.isEmpty(getRouteInfoAttribute(name))) {
 			return ATTRIBUTE;
 		}
-		for (ColoringType coloringType : from) {
-			if (coloringType.name.equalsIgnoreCase(name) && coloringType != ATTRIBUTE) {
+		for (ColoringType coloringType : valuesOf(purpose)) {
+			if (coloringType.id.equalsIgnoreCase(name) && coloringType != ATTRIBUTE) {
 				return coloringType;
 			}
 		}
 		return null;
 	}
 
-	public static List<ColoringType> getRouteColoringTypes() {
-		return Collections.unmodifiableList(ROUTE_COLORING_TYPES);
-	}
-
-	public static List<ColoringType> getTrackColoringTypes() {
-		return Collections.unmodifiableList(TRACK_COLORING_TYPES);
+	@NonNull
+	public static ColoringType[] valuesOf(@NonNull ColoringPurpose purpose) {
+		return purpose == ColoringPurpose.ROUTE_LINE ? ROUTE_TYPES : TRACK_TYPES;
 	}
 }

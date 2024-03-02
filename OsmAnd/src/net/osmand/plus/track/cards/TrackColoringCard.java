@@ -86,11 +86,6 @@ public class TrackColoringCard extends BaseCard {
 		}
 	}
 
-	@NonNull
-	public ColoringType getSelectedColoringType() {
-		return ColoringType.getNonNullTrackColoringTypeByName(selectedAppearanceItem.getAttrName());
-	}
-
 	@Nullable
 	public String getRouteInfoAttribute() {
 		return ColoringType.getRouteInfoAttribute(selectedAppearanceItem.getAttrName());
@@ -105,13 +100,13 @@ public class TrackColoringCard extends BaseCard {
 
 	private List<TrackAppearanceItem> listStaticAppearanceItems() {
 		List<TrackAppearanceItem> staticItems = new ArrayList<>();
-		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
+		for (ColoringType coloringType : ColoringType.valuesOf(ColoringPurpose.TRACK)) {
 			if (coloringType.isRouteInfoAttribute()) {
 				continue;
 			}
 			boolean isAvailable = selectedGpxFile == null || coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null);
 			staticItems.add(new TrackAppearanceItem(coloringType.getName(null),
-					coloringType.getHumanString(app, null),
+					coloringStyle.toHumanString(app),
 					coloringType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
 		}
 		return staticItems;
@@ -131,12 +126,7 @@ public class TrackColoringCard extends BaseCard {
 					AndroidUtils.getStringRouteInfoPropertyValue(app, property),
 					ATTRIBUTE.getIconId(), isAvailable));
 		}
-
 		return routeInfoAttributes;
-	}
-
-	public void resetSelectedAppearanceItem() {
-		selectedAppearanceItem = null;
 	}
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {
@@ -168,7 +158,7 @@ public class TrackColoringCard extends BaseCard {
 
 	public void setColoringType(TrackAppearanceItem item) {
 		selectedAppearanceItem = item;
-		trackDrawInfo.setColoringType(ColoringType.getNonNullTrackColoringTypeByName(item.getAttrName()));
+		trackDrawInfo.setColoringType(ColoringType.requireValueOf(ColoringPurpose.TRACK, item.getAttrName()));
 		trackDrawInfo.setRouteInfoAttribute(ColoringType.getRouteInfoAttribute(item.getAttrName()));
 
 		if (activity instanceof MapActivity) {
