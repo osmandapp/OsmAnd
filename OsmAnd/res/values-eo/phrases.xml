@@ -4837,4 +4837,8 @@
     <string name="poi_blm_yes">Administrata de Usona Ofico de Tera Administrado (US BLM)</string>
     <string name="poi_impromptu">Neformala</string>
     <string name="poi_reservation">Rezervado</string>
+    <string name="poi_live_music">Koncerta muziko</string>
+    <string name="poi_us_maps_recreation_area_activity_poi">interesejo</string>
+    <string name="poi_us_maps_recreation_area_activity_scenic_overlook">belvidejo</string>
+    <string name="poi_us_maps_recreation_area_facility">Objekto en ripoza tereno</string>
 </resources>
