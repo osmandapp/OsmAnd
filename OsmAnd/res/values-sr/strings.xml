@@ -1301,7 +1301,7 @@
     <string name="shared_string_end_time">Време доласка</string>
     <string name="select_gpx_folder">Изаберите фасциклу датотека ГПИкса</string>
     <string name="file_can_not_be_moved">Нисам успео да преместим датотеку.</string>
-    <string name="shared_string_move">Премести</string>
+    <string name="shared_string_move">Помери</string>
     <string name="shared_string_gpx_tracks">Трагови</string>
     <string name="routing_attr_driving_style_name">Начин вожње</string>
     <string name="route_altitude">Успон пута</string>
@@ -2335,7 +2335,7 @@
     <string name="saved_articles">Забележени чланци</string>
     <string name="shared_string_explore">Истражи</string>
     <string name="shared_string_contents">Садржаји</string>
-    <string name="shared_string_result">Налаз</string>
+    <string name="shared_string_result">Резултат</string>
     <string name="shared_string_travel_guides">Путовање</string>
     <string name="layer_map">Извор карте…</string>
     <string name="route_general_information">Укупна удаљеност %1$s, време путовања %2$d h %3$d min.</string>
@@ -3587,7 +3587,7 @@
     <string name="reorder_or_hide_from">Преуреди или сакриј ставке са %1$s.</string>
     <string name="shared_string_divider">Разделник</string>
     <string name="divider_descr">Јединице испод ове тачке су одвојени разделником.</string>
-    <string name="shared_string_hidden">Сакривена</string>
+    <string name="shared_string_hidden">Скривено</string>
     <string name="hidden_items_descr">Иако су ове ставке сакривене из главног изборника, могућности или додаци које они представљају и даље раде.</string>
     <string name="reset_items_descr">Сакривање поставки их враћа на почетно стање.</string>
     <string name="main_actions_descr">Има само четири дугмета.</string>
@@ -4167,7 +4167,7 @@
     <string name="shared_string_learn_more">Сазнајте више</string>
     <string name="cancel_anytime_in_huawei_appgallery">Откажите било када у Хуавеи АпГалерији</string>
     <string name="cancel_anytime_in_gplay">Откажите било када на Гугл Плеју.</string>
-    <string name="shared_string_not_included">Не укључује</string>
+    <string name="shared_string_not_included">Не укључено</string>
     <string name="shared_string_includes">Укључује</string>
     <string name="complete_purchase">Комплетна куповина</string>
     <string name="regular_price">Регуларна цена</string>
@@ -5207,7 +5207,7 @@
     <string name="track_not_recorded">Није снимљено</string>
     <string name="shared_string_new_track">Нови траг</string>
     <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
-    <string name="visible_in_3d_mode">Видљиво у просторном приказу (3д)</string>
+    <string name="visible_in_3d_mode">Видљиво у 3Д начину</string>
     <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>
     <string name="map_3d_mode_hint">Дуги тап дугмета омогућава промену положаја дугмета.</string>
     <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
@@ -5349,7 +5349,7 @@
     <string name="external_sensor_name_property_description">Име пријемника</string>
     <string name="help_article_navigation_routing_ski_routing_name">Путања скијања</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Отровне и заразне твари</string>
-    <string name="shared_string_deleting">Бришем</string>
+    <string name="shared_string_deleting">Брисање</string>
     <string name="help_article_widgets_name">Справице карте</string>
     <string name="help_article_personal_name">Моји подаци</string>
     <string name="help_article_purchases_android_name">Куповине Андроидом</string>
@@ -5511,7 +5511,7 @@
     <string name="shared_string_delete_item">Обриши ставку</string>
     <string name="shared_string_delete_immediately">Обриши одмах</string>
     <string name="restore_from_trash">Поврати из канте отпада</string>
-    <string name="shared_string_trash">Канта отпада</string>
+    <string name="shared_string_trash">Отпад</string>
     <string name="shared_string_show_less">Прикажи мање</string>
     <string name="empty_smart_folder_description">Подударајуће путање овде се јављају</string>
     <string name="discard_filter_changes">Одбаци промене филтера</string>
@@ -5526,7 +5526,7 @@
     <string name="terrain_map">Теренска мапа (3Д)</string>
     <string name="save_track_external_sensors_data">Подаци</string>
     <string name="hillshade_slope">Осенчен рељеф, Нагиб</string>
-    <string name="sorted_sufolders_toast">Подфолдери у “%1$s” су разврстани по: “%2$s”</string>
+    <string name="sorted_sufolders_toast">Подфолдери у “%1$s” разврстани су по: “%2$s”</string>
     <string name="sort_subfolders">Разврставање подфолдера</string>
     <string name="shared_string_additional">Додатно</string>
     <string name="smart_folder_saved">Паметан фолдер је сачуван</string>
