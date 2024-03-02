@@ -60,12 +60,14 @@ public class WidgetsDataHolder {
 
 		int filter = AVAILABLE_MODE | ENABLED_MODE | MATCHING_PANELS_MODE;
 		MapWidgetRegistry widgetRegistry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
-		Set<MapWidgetInfo> widgets = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, filter, Collections.singletonList(selectedPanel));
-		for (MapWidgetInfo widgetInfo : widgets) {
-			int page = selectedPanel.getWidgetPage(appMode, widgetInfo.key, app.getSettings());
-			int order = selectedPanel.getWidgetOrder(appMode, widgetInfo.key, app.getSettings());
-			addWidgetToPage(widgetInfo.key, page);
-			orders.put(widgetInfo.key, order);
+		List<Set<MapWidgetInfo>> widgets = widgetRegistry.getPagedWidgetsForPanel(mapActivity, appMode, selectedPanel, filter);
+
+		for (int pageIndex = 0; pageIndex < widgets.size(); pageIndex++) {
+			for (MapWidgetInfo widgetInfo : widgets.get(pageIndex)) {
+				int order = selectedPanel.getWidgetOrder(appMode, widgetInfo.key, app.getSettings());
+				addWidgetToPage(widgetInfo.key, pageIndex);
+				orders.put(widgetInfo.key, order);
+			}
 		}
 	}
 
@@ -94,11 +96,17 @@ public class WidgetsDataHolder {
 		orders.clear();
 
 		List<String> originalOrder = selectedPanel.getOriginalOrder();
-		for (int i = 0; i < originalOrder.size(); i++) {
+		for (int addedWRowIndex = 0, i = 0; i < originalOrder.size(); i++) {
 			String widgetId = originalOrder.get(i);
 			if (WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetId, appMode)) {
-				addWidgetToPage(widgetId, 0);
-				orders.put(widgetId, i);
+				if (selectedPanel.isPanelVertical()) {
+					addWidgetToPage(widgetId, addedWRowIndex);
+					addedWRowIndex++;
+					orders.put(widgetId, 0);
+				} else {
+					addWidgetToPage(widgetId, 0);
+					orders.put(widgetId, i);
+				}
 			}
 		}
 	}

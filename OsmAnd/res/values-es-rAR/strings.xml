@@ -5363,7 +5363,7 @@
     <string name="wheel_circumference">Circunferencia de la rueda</string>
     <string name="external_sensor_name_property_description">Nombre del sensor</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo del mapa náutico</string>
-    <string name="help_article_navigation_guidance_name">Guía</string>
+    <string name="help_article_navigation_guidance_name">Guía de navegación</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Pantalla del mapa al navegar</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Avisos por voz / Notificaciones</string>
     <string name="help_article_navigation_routing_name">Parámetros de la ruta</string>
@@ -5633,4 +5633,14 @@
     <string name="shared_string_keywords">Palabras clave</string>
     <string name="shared_string_additional">Adicional</string>
     <string name="special_routing_cpp">Tipo de navegación especial</string>
+    <string name="custom_map_button_name_present">Ese botón ya existe</string>
+    <string name="add_button">Añadir botón</string>
+    <string name="custom_buttons">Botones personalizados</string>
+    <string name="default_buttons">Botones predefinidos</string>
+    <string name="shared_string_limit">Límite</string>
+    <string name="help_article_setup_a_route_name">Configurar una ruta</string>
+    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="when_exceeded">Al excederse</string>
+    <string name="speedometer_description">Muestra la velocidad actual detectada por el GPS</string>
+    <string name="shared_string_speedometer">Velocímetro</string>
 </resources>

@@ -11,8 +11,12 @@ import static net.osmand.plus.download.DownloadOsmandIndexesHelper.getSupportedT
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.HIDE_WATER_POLYGONS_ATTR;
 import static net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin.NO_POLYGONS_ATTR;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS;
+import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS_DESCRIPTION;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
+import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
+import static net.osmand.plus.settings.enums.WidgetSize.MEDIUM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
@@ -51,11 +55,13 @@ import net.osmand.plus.Version;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
@@ -841,6 +847,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
+	public final OsmandPreference<Boolean> SHOW_SPEEDOMETER = new BooleanPreference(this, "show_speedometer", false).makeProfile();
+	public final CommonPreference<SpeedLimitWarningState> SHOW_SPEED_LIMIT_WARNING = new EnumStringPreference<>(this, "show_speed_limit_warning", WHEN_EXCEEDED, SpeedLimitWarningState.values()).makeProfile();
+	public final OsmandPreference<WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", MEDIUM, WidgetSize.values()).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -2468,8 +2477,6 @@ public class OsmandSettings {
 	public static final String START_POINT_LON = "start_point_lon";
 	public static final String START_POINT_DESCRIPTION = "start_point_description";
 
-	public static final String INTERMEDIATE_POINTS = "intermediate_points";
-	public static final String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description";
 
 	public static final String POINT_NAVIGATE_LAT_BACKUP = "point_navigate_lat_backup";
 	public static final String POINT_NAVIGATE_LON_BACKUP = "point_navigate_lon_backup";
@@ -2483,11 +2490,6 @@ public class OsmandSettings {
 	public static final String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public static final String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
-	public static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
-	public static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
-	public static final String IMPASSABLE_ROADS_IDS = "impassable_roads_ids";
-	public static final String IMPASSABLE_ROADS_DIRECTIONS = "impassable_roads_directions";
-	public static final String IMPASSABLE_ROADS_APP_MODE_KEYS = "impassable_roads_app_mode_keys";
 
 	public void backupPointToStart() {
 		settingsAPI.edit(globalPreferences)
@@ -2736,11 +2738,11 @@ public class OsmandSettings {
 		return impassableRoadsStorage.deletePoint(index);
 	}
 
-	public boolean removeImpassableRoad(LatLon latLon) {
+	public boolean removeImpassableRoad(@NonNull LatLon latLon) {
 		return impassableRoadsStorage.deletePoint(latLon);
 	}
 
-	public boolean moveImpassableRoad(LatLon latLonEx, LatLon latLonNew) {
+	public boolean moveImpassableRoad(@NonNull LatLon latLonEx, @NonNull LatLon latLonNew) {
 		return impassableRoadsStorage.movePoint(latLonEx, latLonNew);
 	}
 

@@ -2508,7 +2508,7 @@
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     <string name="wrong_input">Entrada incorrecta</string>
-    <string name="enter_new_name">Ingresar nuevo nombre</string>
+    <string name="enter_new_name">Introduzca el nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="shared_string_view">Ver</string>
     <string name="waypoints_added_to_map_markers">Puntos de referencia añadidos en «Marcadores del mapa»</string>
@@ -3069,7 +3069,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Suave (con rodaduras apenas visibles entre la vegetación)</string>
     <string name="routeInfo_tracktype_name">Firmeza de la superficie</string>
     <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
-    <string name="shared_string_open_track">Abrir traza</string>
+    <string name="shared_string_open_track">Abrir pista</string>
     <string name="shared_string_track_is_saved">Traza «%s» guardada</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
@@ -3956,7 +3956,7 @@
     <string name="rename_track">Renombrar traza</string>
     <string name="shared_string_sec">seg</string>
     <string name="shared_string_turn">Giro</string>
-    <string name="start_recording">Iniciar grabación</string>
+    <string name="start_recording">Iniciar la grabación</string>
     <string name="show_track_on_map">Mostrar traza en el mapa</string>
     <string name="routing_engine_vehicle_type_wheelchair">Silla de ruedas</string>
     <string name="routing_engine_vehicle_type_hiking">Senderismo</string>
@@ -4078,7 +4078,7 @@
 \n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
 \n</string>
-    <string name="duration_moment_ago">hace instantes</string>
+    <string name="duration_moment_ago">hace un momento</string>
     <string name="logout_from_osmand_cloud">Salir de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
 \nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
@@ -5243,20 +5243,20 @@
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar la cuenta\?</string>
     <string name="action_cannot_be_undone">Esta acción no se puede deshacer.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos del dispositivo permanecen intactos.</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará tu suscripción a OsmAnd Pro.</string>
-    <string name="manage_subscriptions">Gestiona las suscripciones.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará su suscripción a OsmAnd Pro.</string>
+    <string name="manage_subscriptions">Gestionar las suscripciones.</string>
     <string name="delete_account_warning">¿Borrar la cuenta %1$s?</string>
     <string name="shared_string_deleting">Borrando</string>
-    <string name="deleting_complete">Eliminación completa</string>
-    <string name="delete_account">Eliminar la cuenta</string>
+    <string name="deleting_complete">Borrado completo</string>
+    <string name="delete_account">Eliminar cuenta</string>
     <string name="backup_error_delete_account_email_match">El correo electrónico no coincide con el nombre de usuario</string>
-    <string name="verify_account">Verifica tu cuenta</string>
+    <string name="verify_account">Verifique su cuenta</string>
     <string name="slope_legend_description">La pendiente utiliza colores para visualizar la inclinación del terreno. Puedes obtener más información sobre la pendiente en %1$s.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Los dispositivos secundarios se desconectarán de OsmAnd Cloud y perderán el acceso a las funciones de pago.</string>
     <string name="terrain_category_description">Líneas del contorno del terreno, sombra de colinas en escala de grises e indicación de la pendiente en escala de colores, para mostrar las cumbres y las tierras bajas.</string>
-    <string name="verify_account_deletion_descr">Necesitamos verificar tu cuenta antes de eliminarla.
+    <string name="verify_account_deletion_descr">Necesitamos verificar su cuenta antes de eliminarla.
 \n
-\nIntroduce la dirección de correo electrónico con la que te registraste. Se te enviará una contraseña de un solo uso para el siguiente paso.</string>
+\nPor favor, introduzca la dirección de correo electrónico con la que se registró. Se le enviará una contraseña de un solo uso para el siguiente paso.</string>
     <string name="release_4_5">• Sensores BLE/ANT+: Se ha mejorado la conexión, escritura y visualización de los datos recibidos en GPX.
 \n
 \n• Copia de seguridad gratuita de los favoritos y los ajustes básicos en «OsmAnd Cloud»
@@ -5307,7 +5307,7 @@
     <string name="free_settings_backup">Copia de seguridad gratuita de la configuración</string>
     <string name="routing_attr_allow_via_ferrata_description">Recorrido de montaña equipado con cables fijos, piñones, escaleras y puentes.</string>
     <string name="routing_attr_allow_via_ferrata_name">Ruta de montaña (Vía ferrata)</string>
-    <string name="free_ride">Viaje gratuito</string>
+    <string name="free_ride">Viaje libre</string>
     <string name="routing_attr_hazmat_category_usa_1_name">Explosivos</string>
     <string name="routing_attr_hazmat_category_usa_2_name">Gases</string>
     <string name="routing_attr_hazmat_category_usa_3_name">Líquidos inflamables</string>
@@ -5359,7 +5359,7 @@
     <string name="help_article_map_vector_maps_name">Mapas vectoriales (Estilos de mapas)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Guía</string>
+    <string name="help_article_navigation_guidance_name">Orientación de la navegación</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Pantalla del mapa durante la navegación</string>
     <string name="help_article_navigation_routing_name">Parámetros de la ruta</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Rutas en bicicleta (BTT)</string>
@@ -5502,18 +5502,18 @@
         <item quantity="other">%1$d (%2$d pistas)</item>
     </plurals>
     <string name="cloud_trash_clear_confirmation">¿Borrar todos los elementos de la papelera de forma permanente?</string>
-    <string name="restore_from_trash">Restaurar desde la papelera</string>
+    <string name="restore_from_trash">Restaurar de la papelera</string>
     <string name="delete_all_items">Borrar todos los elementos</string>
     <string name="trash_is_empty_banner_desc">Los archivos eliminados de OsmAnd Cloud estarán disponibles aquí durante %1$s días.</string>
     <string name="delete_trash_item_confirmation_desc">¿Borrar \"%1$s\" permanentemente?</string>
     <string name="shared_string_empty_trash">Vaciar la papelera</string>
-    <string name="shared_string_delete_immediately">Borrar de inmediato</string>
+    <string name="shared_string_delete_immediately">Borrar inmediatamente</string>
     <string name="shared_string_is_deleted">%1$s está borrado.</string>
     <string name="cloud_item_restored">%1$s se restaura desde Cloud.</string>
     <string name="trash_alert_card_desc">Los artículos de la papelera se borrarán después de %1$s días.</string>
-    <string name="trash_is_empty">La papelera está vacía</string>
+    <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
-    <string name="shared_string_delete_item">Elemento borrado</string>
+    <string name="shared_string_delete_item">Borrar elemento</string>
     <string name="root_folder">Directorio raíz</string>
     <string name="shared_string_rows">Filas</string>
     <string name="all_folders">Todas las carpetas</string>
@@ -5618,4 +5618,20 @@
     <string name="sort_subfolders">Clasificar las subcarpetas</string>
     <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de ruta especial</string>
+    <string name="add_button">Añadir un botón</string>
+    <string name="custom_buttons">Botones personalizados</string>
+    <string name="default_buttons">Botones por defecto</string>
+    <string name="custom_map_button_name_present">Este botón ya existe</string>
+    <string name="shared_string_limit">Límite</string>
+    <string name="when_exceeded">Cuando se supere</string>
+    <string name="speedometer_description">Muestra tu velocidad actual a través del GPS</string>
+    <string name="shared_string_speedometer">Velocímetro</string>
+    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="help_article_setup_a_route_name">Crear una ruta</string>
+    <string name="rendering_attr_padusDisplayMode_description">Por tipo de acceso o nombre del gestor</string>
+    <string name="rendering_value_access_name">Por tipo de acceso</string>
+    <string name="rendering_value_managerName_name">Por nombre de gestor</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ocultar los límites de los terrenos públicos</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ocultar los límites de los terrenos públicos pero dejar las zonas</string>
+    <string name="rendering_attr_padusDisplayMode_name">Modo de visualización de terrenos públicos</string>
 </resources>

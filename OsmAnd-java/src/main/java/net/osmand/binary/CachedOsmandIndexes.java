@@ -31,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.List;
 
 public class CachedOsmandIndexes {
 
@@ -54,6 +55,18 @@ public class CachedOsmandIndexes {
 						storedIndexBuilder.addFileIndex(ex);
 					}
 				}
+			}
+		} else {
+			int found = -1;
+			List<FileIndex> fileIndexList = storedIndexBuilder.getFileIndexList();
+			for (int i = 0; i < fileIndexList.size(); i++) {
+				if (fileIndexList.get(i).getFileName().equals(f.getName())) {
+					found = i;
+					break;
+				}
+			}
+			if (found >= 0) {
+				storedIndexBuilder.removeFileIndex(found);
 			}
 		}
 
@@ -168,7 +181,6 @@ public class CachedOsmandIndexes {
 			routing.setEdition(index.edition);
 			routing.addAllProfileParams(index.profileParams);
 			routing.setProfile(index.profile);
-			
 			routing.setPointsLength(index.top.length);
 			routing.setPointsOffset(index.top.filePointer);
 			routing.setBottom(index.top.bottom);
@@ -247,14 +259,14 @@ public class CachedOsmandIndexes {
 
 		for (MapPart index : found.getMapIndexList()) {
 			MapIndex mi = new MapIndex();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 
 			for (MapLevel mr : index.getLevelsList()) {
 				MapRoot root = new MapRoot();
-				root.length = (int) mr.getSize();
-				root.filePointer = (int) mr.getOffset();
+				root.length = mr.getSize();
+				root.filePointer = mr.getOffset();
 				root.left = mr.getLeft();
 				root.right = mr.getRight();
 				root.top = mr.getTop();
@@ -270,15 +282,15 @@ public class CachedOsmandIndexes {
 
 		for (AddressPart index : found.getAddressIndexList()) {
 			AddressRegion mi = new AddressRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 			mi.enName = index.getNameEn();
 			mi.indexNameOffset = index.getIndexNameOffset();
 			for (CityBlock mr : index.getCitiesList()) {
 				CitiesBlock cblock = new CitiesBlock();
-				cblock.length = (int) mr.getSize();
-				cblock.filePointer = (int) mr.getOffset();
+				cblock.length = mr.getSize();
+				cblock.filePointer = mr.getOffset();
 				cblock.type = mr.getType();
 				mi.cities.add(cblock);
 			}
@@ -289,8 +301,8 @@ public class CachedOsmandIndexes {
 
 		for (PoiPart index : found.getPoiIndexList()) {
 			PoiRegion mi = new PoiRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 			mi.left31 = index.getLeft();
 			mi.right31 = index.getRight();
@@ -302,8 +314,8 @@ public class CachedOsmandIndexes {
 
 		for (TransportPart index : found.getTransportIndexList()) {
 			TransportIndex mi = new TransportIndex();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 			mi.left = index.getLeft();
 			mi.right = index.getRight();
@@ -322,14 +334,14 @@ public class CachedOsmandIndexes {
 
 		for (RoutingPart index : found.getRoutingIndexList()) {
 			RouteRegion mi = new RouteRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 
 			for (RoutingSubregion mr : index.getSubregionsList()) {
 				RouteSubregion sub = new RouteSubregion(mi);
-				sub.length = (int) mr.getSize();
-				sub.filePointer = (int) mr.getOffset();
+				sub.length = mr.getSize();
+				sub.filePointer = mr.getOffset();
 				sub.left = mr.getLeft();
 				sub.right = mr.getRight();
 				sub.top = mr.getTop();
@@ -347,8 +359,8 @@ public class CachedOsmandIndexes {
 		
 		for (HHRoutingPart index : found.getHhRoutingIndexList()) {
 			HHRouteRegion mi = new HHRouteRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.edition = index.getEdition();
 			mi.profile = index.getProfile();
 			mi.profileParams = index.getProfileParamsList();
@@ -377,7 +389,7 @@ public class CachedOsmandIndexes {
 		} finally {
 			is.close();
 		}
-		log.info("Initialize cache " + (System.currentTimeMillis() - time));
+		log.info("Initialize cache " + f.getName() + " " + (System.currentTimeMillis() - time) + " ms");
 	}
 
 	public void writeToFile(File f) throws IOException {

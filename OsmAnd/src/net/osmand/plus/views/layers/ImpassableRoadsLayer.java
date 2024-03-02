@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.data.PointDescription.POINT_TYPE_BLOCKED_ROAD;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +11,9 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.Rect;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarker;
@@ -22,9 +27,9 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -33,10 +38,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
-import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		ContextMenuLayer.IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
@@ -77,7 +78,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			drawPoint(canvas, pf.x, pf.y, true);
 			AvoidRoadInfo movableRoad = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
-			setMovableObject(movableRoad.latitude, movableRoad.longitude);
+			setMovableObject(movableRoad.getLatitude(), movableRoad.getLongitude());
 		}
 		if (movableObject != null && !contextMenuLayer.isInChangeMarkerPositionMode()) {
 			cancelMovableObject();
@@ -98,19 +99,15 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				mapActivityInvalidated = false;
 				return;
 			}
-			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
-				LatLon location = entry.getKey();
-				AvoidRoadInfo road = entry.getValue();
-				if (road != null && contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
+			for (AvoidRoadInfo road : avoidSpecificRoads.getImpassableRoads()) {
+				if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 					AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
-					if (object.id == road.id) {
+					if (object.getId() == road.getId()) {
 						continue;
 					}
 				}
-				double latitude = location.getLatitude();
-				double longitude = location.getLongitude();
-				if (tileBox.containsLatLon(latitude, longitude)) {
-					drawPoint(canvas, tileBox, latitude, longitude, road != null);
+				if (tileBox.containsLatLon(road.getLatLon())) {
+					drawPoint(canvas, tileBox, road.getLatitude(), road.getLongitude(), true);
 				}
 			}
 		} else {
@@ -149,7 +146,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		Map<LatLon, AvoidRoadInfo> impassableRoads = avoidSpecificRoads.getImpassableRoads();
+		List<AvoidRoadInfo> impassableRoads = avoidSpecificRoads.getImpassableRoads();
 		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects && !Algorithms.isEmpty(impassableRoads)) {
 			MapRendererView mapRenderer = getMapRenderer();
 			float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
@@ -167,16 +164,13 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				}
 			}
 
-			for (Map.Entry<LatLon, AvoidRoadInfo> entry : impassableRoads.entrySet()) {
-				LatLon location = entry.getKey();
-				AvoidRoadInfo road = entry.getValue();
-				if (location != null && road != null) {
-					boolean add = mapRenderer != null
-							? NativeUtilities.isPointInsidePolygon(location, touchPolygon31)
-							: tileBox.isLatLonInsidePixelArea(location, screenArea);
-					if (add) {
-						o.add(road);
-					}
+			for (AvoidRoadInfo road : impassableRoads) {
+				LatLon latLon = road.getLatLon();
+				boolean add = mapRenderer != null
+						? NativeUtilities.isPointInsidePolygon(latLon, touchPolygon31)
+						: tileBox.isLatLonInsidePixelArea(latLon, screenArea);
+				if (add) {
+					o.add(road);
 				}
 			}
 		}
@@ -185,8 +179,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public LatLon getObjectLocation(Object o) {
 		if (o instanceof AvoidRoadInfo) {
-			AvoidRoadInfo avoidRoadInfo = (AvoidRoadInfo) o;
-			return new LatLon(avoidRoadInfo.latitude, avoidRoadInfo.longitude);
+			return ((AvoidRoadInfo) o).getLatLon();
 		}
 		return null;
 	}
@@ -195,7 +188,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof AvoidRoadInfo) {
 			AvoidRoadInfo route = (AvoidRoadInfo) o;
-			return new PointDescription(PointDescription.POINT_TYPE_BLOCKED_ROAD, route.name);
+			return new PointDescription(POINT_TYPE_BLOCKED_ROAD, route.getName(getContext()));
 		}
 		return null;
 	}
@@ -206,14 +199,13 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void applyNewObjectPosition(@NonNull Object o,
-									   @NonNull LatLon position,
-									   @Nullable ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon latLon,
+	                                   @Nullable ApplyMovedObjectCallback callback) {
 		MapActivity mapActivity = getMapActivity();
 		if (o instanceof AvoidRoadInfo && mapActivity != null) {
 			AvoidRoadInfo object = (AvoidRoadInfo) o;
 			OsmandApplication application = getApplication();
-			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, position, false, new AvoidSpecificRoadsCallback() {
+			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, latLon, false, new AvoidSpecificRoadsCallback() {
 				@Override
 				public void onAddImpassableRoad(boolean success, AvoidRoadInfo newObject) {
 					if (callback != null) {
@@ -226,7 +218,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					return callback != null && callback.isCancelled();
 				}
 			});
-			applyMovableObject(position);
+			applyMovableObject(latLon);
 		}
 	}
 
@@ -237,23 +229,22 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			return;
 		}
 		mapMarkersCollection = new MapMarkersCollection();
-		for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
-			LatLon location = entry.getKey();
-			AvoidRoadInfo road = entry.getValue();
+		for (AvoidRoadInfo road : avoidSpecificRoads.getImpassableRoads()) {
 			boolean isMoveable = false;
-			if (road != null && contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
+			if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 				AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
-				if (object.id == road.id) {
+				if (object.getId() == road.getId()) {
 					isMoveable = true;
 				}
 			}
-			Bitmap bitmap = getMergedBitmap(road != null);
+			Bitmap bitmap = getMergedBitmap(true);
+			LatLon latLon = road.getLatLon();
+			int x = MapUtils.get31TileNumberX(latLon.getLongitude());
+			int y = MapUtils.get31TileNumberY(latLon.getLatitude());
+
 			MapMarkerBuilder mapMarkerBuilder = new MapMarkerBuilder();
-			int x = MapUtils.get31TileNumberX(location.getLongitude());
-			int y = MapUtils.get31TileNumberY(location.getLatitude());
-			PointI pointI = new PointI(x, y);
 			mapMarkerBuilder
-					.setPosition(pointI)
+					.setPosition(new PointI(x, y))
 					.setIsHidden(isMoveable)
 					.setBaseOrder(getPointsOrder())
 					.setIsAccuracyCircleSupported(false)

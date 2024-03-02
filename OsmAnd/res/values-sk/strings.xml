@@ -5194,7 +5194,7 @@
     <string name="not_specified">Neurčené</string>
     <string name="shared_string_is_deleted">%1$s je vymazaný.</string>
     <string name="help_article_map_raster_maps_name">Rastrové mapy (Online / Offline)</string>
-    <string name="help_article_navigation_guidance_name">Sprievodca</string>
+    <string name="help_article_navigation_guidance_name">Navigačný sprievodca</string>
     <string name="help_article_navigation_routing_horse_routing_name">Navigácia pre jazdu na koni</string>
     <string name="lang_zh_hant">Tradičná Čínština</string>
     <string name="cloud_trash_clear_confirmation">Natrvalo odstrániť všetky položky v koši?</string>
@@ -5611,4 +5611,14 @@
     <string name="shared_string_additional">Doplňujúce</string>
     <string name="special_routing_cpp">Typ špeciálnej navigácie</string>
     <string name="sorted_sufolders_toast">Podpriečinky v “%1$s” sú zoradené podľa: “%2$s”</string>
+    <string name="custom_map_button_name_present">Také tlačidlo už existuje</string>
+    <string name="add_button">Pridať tlačidlo</string>
+    <string name="custom_buttons">Vlastné tlačidlá</string>
+    <string name="default_buttons">Predvolené tlačidlá</string>
+    <string name="shared_string_limit">Hranica</string>
+    <string name="when_exceeded">Keď prekročené</string>
+    <string name="speedometer_description">Zobrazí vašu rýchlosť podľa GPS</string>
+    <string name="shared_string_speedometer">Tachometer</string>
+    <string name="help_article_setup_a_route_name">Nastaviť trasu</string>
+    <string name="speed_limit_warning">Varovanie pri prekročení rýchlosti</string>
 </resources>

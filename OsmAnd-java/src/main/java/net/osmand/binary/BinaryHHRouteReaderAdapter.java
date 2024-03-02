@@ -14,7 +14,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex;
 import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments;
-import net.osmand.binary.OsmandOdb.OsmAndHHRoutingIndex.HHRoutePointSegments.Builder;
 import net.osmand.data.QuadRect;
 import net.osmand.router.HHRouteDataStructure;
 import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
@@ -29,16 +28,16 @@ public class BinaryHHRouteReaderAdapter {
 		int idRangeStart;
 		int idRangeLength;
 		int profileId;
-		int length;
-		int filePointer;
+		long length;
+		long filePointer;
 		
 		List<HHRouteBlockSegments> sublist;
 	}
 	
 	
 	public static class HHRoutePointsBox {
-		int length;
-		int filePointer;
+		long length;
+		long filePointer;
 		int left, right, bottom, top;
 
 		public QuadRect getLatLonBox() {
@@ -66,7 +65,12 @@ public class BinaryHHRouteReaderAdapter {
 
 		@Override
 		public String getPartName() {
-			return "Highway routing";
+			return "Highway routing ";
+		}
+		
+		@Override
+		public String getName() {
+			return profile;
 		}
 
 		@Override
@@ -75,7 +79,7 @@ public class BinaryHHRouteReaderAdapter {
 		}
 
 		public QuadRect getLatLonBbox() {
-			if(top == null) {
+			if (top == null) {
 				return new QuadRect();
 			}
 			return top.getLatLonBox();
@@ -94,13 +98,13 @@ public class BinaryHHRouteReaderAdapter {
 		map.skipUnknownField(t);
 	}
 
-	protected int readInt() throws IOException {
+	protected long readInt() throws IOException {
 		return map.readInt();
 	}
 	
 	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initRegionAndLoadPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
 		codedIS.seek(reg.filePointer);
-		int oldLimit = codedIS.pushLimit(reg.length);
+		final long oldLimit = codedIS.pushLimitLong((long) reg.length);
 		TLongObjectHashMap<T> mp = new TLongObjectHashMap<>();
 		reg.segments = new ArrayList<>();
 		while (true) {
@@ -111,8 +115,8 @@ public class BinaryHHRouteReaderAdapter {
 				codedIS.popLimit(oldLimit);
 				return mp;
 			case OsmandOdb.OsmAndHHRoutingIndex.TAGVALUESTABLE_FIELD_NUMBER:
-				int length = codedIS.readRawVarint32();
-				oldLimit = codedIS.pushLimit(length);
+				long length = codedIS.readRawVarint32();
+				final long old = codedIS.pushLimitLong((long) length);
 				List<String> st = readStringTable();
 				for (String s : st) {
 					int i = s.indexOf('=');
@@ -120,7 +124,7 @@ public class BinaryHHRouteReaderAdapter {
 						reg.encodingRules.add(new TagValuePair(s.substring(0, i), s.substring(i + 1), -1));
 					}
 				}
-				codedIS.popLimit(oldLimit);
+				codedIS.popLimit(old);
 				break;
 			case OsmandOdb.OsmAndHHRoutingIndex.POINTBOXES_FIELD_NUMBER:
 				readPointBox(reg, cl, mapId, mp, null);
@@ -189,7 +193,7 @@ public class BinaryHHRouteReaderAdapter {
 		HHRoutePointsBox box = new HHRoutePointsBox();
 		box.length = readInt();
 		box.filePointer = codedIS.getTotalBytesRead();
-		int oldLimit = codedIS.pushLimit(box.length);
+		long oldLimit = codedIS.pushLimitLong((long) box.length);
 		while (true) {
 			if (mp == null && box.bottom != 0 && box.top != 0 && box.right != 0 && box.left != 0) {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
@@ -241,8 +245,8 @@ public class BinaryHHRouteReaderAdapter {
 			throw new IllegalStateException(e);
 		}		
 		pnt.mapId = mapId;
-		int size = codedIS.readRawVarint32();
-		int oldLimit = codedIS.pushLimit(size);
+		long size = codedIS.readRawVarint32();
+		long oldLimit = codedIS.pushLimitLong((long) size);
 		int dualIdPoint = -1;
 		while (true) {
 			int t = codedIS.readTag();
@@ -273,8 +277,8 @@ public class BinaryHHRouteReaderAdapter {
 				pnt.index = codedIS.readInt32();
 				break;
 			case OsmAndHHRoutingIndex.HHRouteNetworkPoint.TAGVALUEIDS_FIELD_NUMBER:
-				int sz = codedIS.readRawVarint32();
-				int old = codedIS.pushLimit(sz);
+				long sz = codedIS.readRawVarint32();
+				long old = codedIS.pushLimitLong((long) sz);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int tvId = codedIS.readInt32();
 					if (tvId < reg.encodingRules.size()) {
@@ -320,7 +324,7 @@ public class BinaryHHRouteReaderAdapter {
 		HHRouteBlockSegments block = new HHRouteBlockSegments();
 		block.length = readInt();
 		block.filePointer = codedIS.getTotalBytesRead();
-		int oldLimit = codedIS.pushLimit(block.length);
+		long oldLimit = codedIS.pushLimitLong((long) block.length);
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -365,7 +369,7 @@ public class BinaryHHRouteReaderAdapter {
 			codedIS.seek(block.filePointer);
 		}
 		int loaded = 0;
-		int oldLimit = codedIS.pushLimit(block.length);
+		long oldLimit = codedIS.pushLimitLong((long) block.length);
 		int ind = 0;
 		try {
 			while (true) {
@@ -395,7 +399,7 @@ public class BinaryHHRouteReaderAdapter {
 						HHRouteBlockSegments child = new HHRouteBlockSegments();
 						child.length = readInt();
 						child.filePointer = codedIS.getTotalBytesRead();
-						int olLimit = codedIS.pushLimit(child.length);
+						long olLimit = codedIS.pushLimitLong((long) child.length);
 						loaded += loadNetworkSegmentPoint(ctx, reg, child, searchInd, reverse);
 						codedIS.popLimit(olLimit);
 						block.sublist.add(child);
@@ -407,9 +411,14 @@ public class BinaryHHRouteReaderAdapter {
 					} else {
 						int pntFileId = (ind++) + block.idRangeStart;
 						T point = reg.getPoint(pntFileId);
-						Builder bld = HHRoutePointSegments.newBuilder();
-						codedIS.readMessage(bld, null);
-						HHRoutePointSegments s = bld.buildPartial();
+						// doesn't work with large files popLimit pases int internally
+//						Builder bld = HHRoutePointSegments.newBuilder();
+//						codedIS.readMessage(bld, null);
+//						HHRoutePointSegments s = bld.buildPartial();
+						int len = codedIS.readRawVarint32();
+						long olLimit = codedIS.pushLimitLong(len);
+						HHRoutePointSegments s = readSegments();
+						codedIS.popLimit(olLimit);
 						if (point != null) {
 							// not used from this file
 							HHRouteDataStructure.setSegments(ctx, point, s.getSegmentsIn().toByteArray(),
@@ -426,6 +435,24 @@ public class BinaryHHRouteReaderAdapter {
 			}
 		} finally {
 			codedIS.popLimit(oldLimit);
+		}
+	}
+
+	private HHRoutePointSegments readSegments() throws IOException {
+		HHRoutePointSegments.Builder bld = HHRoutePointSegments.newBuilder();
+		while (true) {
+			int t = codedIS.readTag();
+			int tag = WireFormat.getTagFieldNumber(t);
+			switch (tag) {
+			case 0:
+				return bld.buildPartial();
+			case OsmAndHHRoutingIndex.HHRoutePointSegments.SEGMENTSIN_FIELD_NUMBER:
+				bld.setSegmentsIn(codedIS.readBytes());
+				break;
+			case OsmAndHHRoutingIndex.HHRoutePointSegments.SEGMENTSOUT_FIELD_NUMBER:
+				bld.setSegmentsOut(codedIS.readBytes());
+				break;
+			}
 		}
 	}
 

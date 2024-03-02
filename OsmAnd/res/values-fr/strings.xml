@@ -320,7 +320,7 @@
     <string name="fav_file_to_load_not_found">Le fichier GPX contenant les favoris est introuvable dans {0}</string>
     <string name="fav_saved_sucessfully">Favoris enregistrés dans {0}</string>
     <string name="no_fav_to_save">Aucun point favori à enregistrer</string>
-    <string name="shared_string_import">Importer le profil</string>
+    <string name="shared_string_import">Importer</string>
     <string name="error_occurred_loading_gpx">Impossible de charger le fichier GPX.</string>
     <string name="send_report">Envoyer le rapport</string>
     <string name="none_region_found">Aucun carte n\'a été téléchargée.</string>
@@ -4191,7 +4191,6 @@
     <string name="logout_from_osmand_cloud">Se déconnecter de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Êtes-vous certain de vouloir vous déconnecter \?
 \nVous devrez vous reconnecter pour sauvegarder ou restaurer vos données.</string>
-=======
     <string name="backup_welcome_back_descr">Restaurer des données sur cet appareil en utilisant OsmAnd Cloud.</string>
     <string name="backup_error_subscription_was_expired_descr">Votre abonnement OsmAnd Pro a expiré, renouvelez-le pour utiliser la sauvegarde. Vous pouvez toujours restaurer des données à partir du Cloud.</string>
     <string name="contour_lines_hillshade_slope">Courbes de niveau, ombres, pentes</string>
@@ -5589,6 +5588,31 @@
     <string name="max_sensor_heartrate">Rythme cardiaque, max</string>
     <string name="avg_sensor_heartrate">Rythme cardiaque, moyenne</string>
     <string name="dont_ask_anymore">Ne plus demander</string>
-    <string name="battery_optimization_banner_content">La gestion de l\'optimisation de la batterie par Android peut entraîner des erreurs ou pertes de données à l\'enregistrement des traces</string>
-    <string name="battery_optimization_settings">Options d\'optimisation de la batterie</string>
+    <string name="battery_optimization_banner_content">La gestion de l\'optimisation de la batterie par Android peut entraîner des erreurs ou pertes de données à l\'enregistrement des traces.</string>
+    <string name="battery_optimization_settings">Paramètres d’optimisation de la batterie</string>
+    <string name="shared_string_keywords">Mots-clés</string>
+    <string name="add_button">Ajouter un bouton</string>
+    <string name="custom_map_button_name_present">Ce bouton est déjà présent</string>
+    <string name="shared_string_activity">Activité</string>
+    <string name="shared_string_additional">Additionnel</string>
+    <string name="max_sensor_bycicle_power">Puissance du cycle, max</string>
+    <string name="avg_sensor_speed">Vitesse du capteur, moyenne</string>
+    <string name="speed_limit_warning">Avertissement de limitation de vitesse</string>
+    <string name="when_exceeded">En cas de dépassement</string>
+    <string name="speedometer_description">Affiche votre vitesse actuelle calculée par GPS</string>
+    <string name="shared_string_speedometer">Compteur de vitesse</string>
+    <string name="shared_string_limit">Limite</string>
+    <string name="custom_buttons">Boutons personnalisés</string>
+    <string name="default_buttons">Boutons par défaut</string>
+    <string name="sort_subfolders">Trier les sous-dossiers</string>
+    <string name="battery_optimization">Optimisation de la batterie</string>
+    <string name="avg_sensor_temperature">Température moyenne</string>
+    <string name="max_sensor_speed">Vitesse du capteur, max</string>
+    <string name="max_sensor_temperature">Température, max</string>
+    <string name="avg_sensor_bycicle_power">Puissance du cycle, moyenne</string>
+    <string name="battery_optimization_desc">La gestion de l\'optimisation de la batterie par Android peut causer des erreurs ou pertes de données à l\'enregistrement des traces.
+\n
+\nSi vous rencontrez l\'un de ces problèmes, essayez de définir l\'utilisation de la batterie à « Sans restriction ».</string>
+    <string name="rendering_value_access_name">Par type d\'accès</string>
+    <string name="sorted_sufolders_toast">Les sous-dossiers dans “%1$s” sont triés par : “%2$s”</string>
 </resources>

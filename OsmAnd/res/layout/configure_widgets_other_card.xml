@@ -24,6 +24,10 @@
 			android:id="@+id/distance_by_tap_button"
 			layout="@layout/configure_screen_list_item" />
 
+		<include
+			android:id="@+id/speedometer"
+			layout="@layout/configure_screen_list_item" />
+
 	</LinearLayout>
 
 	<include

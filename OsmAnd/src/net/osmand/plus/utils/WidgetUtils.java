@@ -104,7 +104,7 @@ public class WidgetUtils {
 				List<String> newPage = new ArrayList<>();
 				newPage.add(targetWidget.key);
 				orders.add(newPage);
-				targetWidget.pageIndex = orders.size() - 1;
+				targetWidget.pageIndex = getNewNextPageIndex(pages) + 1;
 				targetWidget.priority = 0;
 			} else {
 				lastPageOrder.add(targetWidget.key);
@@ -127,5 +127,15 @@ public class WidgetUtils {
 			widgetRegistry.getWidgetsForPanel(widgetsPanel).add(targetWidget);
 			widgetsPanel.setWidgetsOrder(selectedAppMode, orders, settings);
 		}
+	}
+
+	private static int getNewNextPageIndex(List<Integer> pages) {
+		int maxPage = 0;
+		for (Integer integer : pages) {
+			if (integer > maxPage) {
+				maxPage = integer;
+			}
+		}
+		return maxPage;
 	}
 }

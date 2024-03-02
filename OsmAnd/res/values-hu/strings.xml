@@ -1995,7 +1995,7 @@
     <string name="give_permission">Engedélyezés</string>
     <string name="allow_access_location">Hozzáférés a pozíciódhoz engedélyezése</string>
     <string name="search_my_location">Pozícióm meghatározása</string>
-    <string name="update_all_maps_now">Frissíted most az összes térképet?</string>
+    <string name="update_all_maps_now">Frissíti most az összes térképet?</string>
     <string name="clear_tile_data">Összes csempe törlése</string>
     <string name="routing_attr_short_way_name">Üzemanyag-takarékos útvonal</string>
     <string name="replace_favorite_confirmation">Lecseréli ezt a kedvencet: %1$s\?</string>
@@ -5355,7 +5355,7 @@
     <string name="help_article_map_interact_with_map_name">Műveletek a térképpel</string>
     <string name="help_article_map_tracks_on_map_name">Nyomvonalak és útvonalak</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_navigation_guidance_name">Útmutató</string>
+    <string name="help_article_navigation_guidance_name">Navigáció útmutató</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Hangutasítások / Értesítések</string>
     <string name="help_article_plan_route_name">Útvonal megtervezése</string>
     <string name="help_article_purchases_giveaway_name">Ajándékozás</string>
@@ -5619,4 +5619,16 @@
     <string name="custom_buttons">Egyéni gombok</string>
     <string name="default_buttons">Alapértelmezett gombok</string>
     <string name="custom_map_button_name_present">Ilyen gomb már van</string>
+    <string name="speedometer_description">A jármű GPS-alapú sebességét mutatja</string>
+    <string name="when_exceeded">Túllépésnél</string>
+    <string name="shared_string_limit">Korlátozás</string>
+    <string name="shared_string_speedometer">Sebességmérő</string>
+    <string name="speed_limit_warning">Sebességkorlátozási figyelmeztetés</string>
+    <string name="help_article_setup_a_route_name">Útvonal beállítása</string>
+    <string name="rendering_attr_padusDisplayMode_name">Közterületek megjelenítési módja</string>
+    <string name="rendering_attr_padusDisplayMode_description">Használhatóság vagy a kezelő neve szerint</string>
+    <string name="rendering_value_access_name">Használhatóság szerint</string>
+    <string name="rendering_value_managerName_name">Kezelő neve szerint</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Közterülethatárok elrejtése</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Közterülethatárok elrejtése, de a területek meghagyása</string>
 </resources>

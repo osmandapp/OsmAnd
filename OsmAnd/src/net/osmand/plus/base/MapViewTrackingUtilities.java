@@ -1,8 +1,15 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
+import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
@@ -41,13 +48,6 @@ import net.osmand.util.MapUtils;
 
 import java.text.SimpleDateFormat;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
-
-import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
-import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
-
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
 
@@ -79,6 +79,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean showViewAngle;
 	private String locationProvider;
 	private Location myLocation;
+	private long myLocationTime;
 	private Float heading;
 	private boolean drivingRegionUpdated;
 	private long compassRequest;
@@ -214,8 +215,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	@Override
 	public void updateLocation(Location location) {
 		Location prevLocation = myLocation;
-		long movingTime = prevLocation != null && location != null ? location.getTime() - prevLocation.getTime() : 0;
+		long prevLocationTime = myLocationTime;
+
+		long locationTime = System.currentTimeMillis();
+		long movingTime = locationTime - prevLocationTime;
 		myLocation = location;
+		myLocationTime = locationTime;
+
 		boolean showViewAngle = false;
 		if (location != null) {
 			locationProvider = location.getProvider();

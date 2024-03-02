@@ -43,6 +43,7 @@ import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -73,6 +74,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 	CarIcon junctionImage;
 
 	private final AlarmWidget alarmWidget;
+	private final SpeedometerWidget speedometerWidget;
 	@DrawableRes
 	private int compassResId = R.drawable.ic_compass_niu;
 
@@ -85,7 +87,11 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		super(carContext);
 		this.listener = listener;
 		this.settingsAction = settingsAction;
-		alarmWidget = new AlarmWidget(getApp(), null);
+
+		OsmandApplication app = getApp();
+		alarmWidget = new AlarmWidget(app, null);
+		speedometerWidget = new SpeedometerWidget(app, null);
+
 		getLifecycle().addObserver(this);
 	}
 
@@ -106,10 +112,19 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		SurfaceRenderer surfaceRenderer = getSurfaceRenderer();
 		if (surfaceRenderer != null) {
 			DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, surfaceRenderer.getDensity());
+
 			alarmWidget.updateInfo(drawSettings, true);
-			Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
-			if (widgetBitmap != null) {
-				canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
+			speedometerWidget.updateInfo(drawSettings, true, drawSettings.isNightMode());
+
+			Bitmap alarmBitmap = alarmWidget.getWidgetBitmap();
+			Bitmap speedometerBitmap = speedometerWidget.getWidgetBitmap();
+
+			if (speedometerBitmap != null) {
+				canvas.drawBitmap(speedometerBitmap, visibleArea.right - speedometerBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
+			}
+			if (alarmBitmap != null) {
+				int offset = speedometerBitmap != null ? speedometerBitmap.getWidth() : 0;
+				canvas.drawBitmap(alarmBitmap, visibleArea.right - alarmBitmap.getWidth() - 10 - offset, visibleArea.top + 10, new Paint());
 			}
 		}
 	}

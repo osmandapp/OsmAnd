@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.utils.ColorUtilities;
@@ -36,7 +35,6 @@ import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
 
@@ -141,7 +139,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 	private ContentItem getAdapterContentItems() {
 		ContentItem contentItem = new ContentItem();
 		for (int i = 2; i < WaypointHelper.MAX; i++) {
-			List<WaypointHelper.LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
+			List<LocationPointWrapper> tp = waypointHelper.getWaypoints(i);
 			ContentItem headerItem = new PointItem(i);
 			contentItem.subItems.add(headerItem);
 			headerItem.type = i;
@@ -153,7 +151,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				}
 				if (tp != null && tp.size() > 0) {
 					for (int j = 0; j < tp.size(); j++) {
-						WaypointHelper.LocationPointWrapper pointWrapper = tp.get(j);
+						LocationPointWrapper pointWrapper = tp.get(j);
 						if (!waypointHelper.isPointPassed(pointWrapper)) {
 							PointItem subheaderItem = new PointItem(pointWrapper.type);
 							subheaderItem.point = pointWrapper;
@@ -581,7 +579,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private static class PointItem extends ContentItem {
 
-		private WaypointHelper.LocationPointWrapper point;
+		private LocationPointWrapper point;
 
 		private PointItem(int type) {
 			super(type);

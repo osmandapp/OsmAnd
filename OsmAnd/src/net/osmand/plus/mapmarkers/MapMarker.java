@@ -48,7 +48,7 @@ public class MapMarker implements LocationPoint {
 				ItineraryType.FAVOURITES;
 	}
 
-	public PointDescription getPointDescription(Context ctx) {
+	public PointDescription getPointDescription(@NonNull Context ctx) {
 		return new PointDescription(POINT_TYPE_MAP_MARKER, ctx.getString(R.string.map_marker), getOnlyName());
 	}
 

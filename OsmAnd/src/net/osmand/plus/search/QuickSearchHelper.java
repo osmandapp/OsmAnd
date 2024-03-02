@@ -48,6 +48,7 @@ import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchCoreFactory;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
@@ -221,7 +222,7 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.location = new LatLon(point.getLatitude(), point.getLongitude());
 					//sr.localeRelatedObjectName = app.getRegions().getCountryName(sr.location);
 					sr.relatedObject = selectedGpx.getGpxFile();
-					sr.preferredZoom = 17;
+					sr.preferredZoom = SearchCoreFactory.PREFERRED_WPT_ZOOM;
 					if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 						resultMatcher.publish(sr);
 					} else {
@@ -272,7 +273,7 @@ public class QuickSearchHelper implements ResourceListener {
 					sr.object = group;
 					sr.priority = SEARCH_FAVORITE_CATEGORY_PRIORITY;
 					sr.objectType = ObjectType.FAVORITE_GROUP;
-					sr.preferredZoom = 17;
+					sr.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITES_GROUP_ZOOM;
 					if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
 						if (group.getPoints().size() < 5) {
 							for (FavouritePoint point : group.getPoints()) {
@@ -282,7 +283,7 @@ public class QuickSearchHelper implements ResourceListener {
 								srp.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 								srp.objectType = ObjectType.FAVORITE;
 								srp.location = new LatLon(point.getLatitude(), point.getLongitude());
-								srp.preferredZoom = 17;
+								srp.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITE_ZOOM;
 								resultMatcher.publish(srp);
 							}
 						} else {
@@ -330,7 +331,7 @@ public class QuickSearchHelper implements ResourceListener {
 				sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 				sr.objectType = ObjectType.FAVORITE;
 				sr.location = new LatLon(point.getLatitude(), point.getLongitude());
-				sr.preferredZoom = 17;
+				sr.preferredZoom = SearchCoreFactory.PREFERRED_FAVORITE_ZOOM;
 				if (phrase.isLastWord(ObjectType.FAVORITE_GROUP)) {
 					FavoriteGroup group = (FavoriteGroup) phrase.getLastSelectedWord().getResult().object;
 					if (group != null && !point.getCategory().equals(group.getName())) {
@@ -417,7 +418,7 @@ public class QuickSearchHelper implements ResourceListener {
 			sr.priority = SEARCH_ONLINE_AMENITY_PRIORITY;
 			sr.objectType = ObjectType.POI;
 			sr.location = amenity.getLocation();
-			sr.preferredZoom = 17;
+			sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
 			return sr;
 		}
 
@@ -512,7 +513,7 @@ public class QuickSearchHelper implements ResourceListener {
 				result.object = entry;
 				result.objectType = ObjectType.RECENT_OBJ;
 				result.location = new LatLon(entry.getLat(), entry.getLon());
-				result.preferredZoom = 17;
+				result.preferredZoom = SearchCoreFactory.PREFERRED_DEFAULT_RECENT_ZOOM;
 			}
 			return result;
 		}
@@ -546,7 +547,7 @@ public class QuickSearchHelper implements ResourceListener {
 				searchResult.localeName = GpxUiHelper.getGpxFileRelativePath(app, gpxInfo.getFileName());
 				searchResult.relatedObject = gpxInfo;
 				searchResult.priority = SEARCH_TRACK_OBJECT_PRIORITY;
-				searchResult.preferredZoom = 17;
+				searchResult.preferredZoom = SearchCoreFactory.PREFERRED_GPX_FILE_ZOOM;
 				if (phrase.getFullSearchPhrase().length() <= 1 && phrase.isNoSelectedType()) {
 					resultMatcher.publish(searchResult);
 				} else {
@@ -639,7 +640,7 @@ public class QuickSearchHelper implements ResourceListener {
 				searchResult.localeName = name;
 				searchResult.relatedObject = indexItem;
 				searchResult.priority = SEARCH_INDEX_ITEM_PRIORITY;
-				searchResult.preferredZoom = 17;
+				searchResult.preferredZoom = SearchCoreFactory.PREFERRED_INDEX_ITEM_ZOOM;
 				resultMatcher.publish(searchResult);
 			}
 

@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="shared_string_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Visible</string>
+    <string name="shared_string_visible">Виден</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -1060,7 +1060,7 @@
     <string name="route_updated_loc_found">Ожидание позиции для расчёта маршрута</string>
     <string name="continue_follow_previous_route_auto">Продолжить неоконченный маршрут\?  [ %1$s ]</string>
     <string name="show_cameras">Камеры контроля скорости</string>
-    <string name="show_traffic_warnings">Ограничения скорости</string>
+    <string name="show_traffic_warnings">Traffic warnings</string>
     <string name="avoid_toll_roads">Без платных дорог</string>
     <string name="screen_is_locked">Коснитесь значка замка для разблокировки</string>
     <string name="map_widget_top_text">Название улицы</string>
@@ -1559,7 +1559,7 @@
     <string name="traffic_warning_border_control">Пограничный контроль</string>
     <string name="traffic_warning_payment">Платный проезд</string>
     <string name="traffic_warning_stop">Знак остановки</string>
-    <string name="traffic_warning_calming">Снизьте скорость</string>
+    <string name="traffic_warning_calming">Traffic calming</string>
     <string name="traffic_warning_speed_camera">Камера скорости</string>
     <string name="traffic_warning">Дорожные предупреждения</string>
     <string name="speed_limit_exceed_message">Значение, при превышении которого прозвучит голосовое предупреждение.</string>
@@ -3499,7 +3499,7 @@
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы: 
 \n%1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
-    <string name="shared_string_hidden">Скрыто</string>
+    <string name="shared_string_hidden">Скрыт</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
     <string name="main_actions_descr">Только четыре кнопки.</string>
@@ -4742,8 +4742,8 @@
     <string name="av_notes_video_widget_desc">Нажатие на виджет позволяет начать видеозапись.</string>
     <string name="av_notes_audio_widget_desc">Нажатие на виджет позволяет сделать аудиозаметку.</string>
     <string name="compass_visible_if_map_rotated_desc">Скрывать, когда север сверху</string>
-    <string name="compass_visible_if_map_rotated">Visible if map is rotated</string>
-    <string name="compass_always_hidden">Всегда скрыто</string>
+    <string name="compass_visible_if_map_rotated">Виден, если карта повернута</string>
+    <string name="compass_always_hidden">Всегда скрыт</string>
     <string name="compass_always_visible">Всегда виден</string>
     <string name="compass_click_desc">Нажатие на компас переключает режим ориентации.</string>
     <string name="compass_desc">Кнопка с указателем севера.</string>
@@ -5179,7 +5179,7 @@
     <string name="map_3d_mode_description">Для изменения перспективы коснитесь карты двумя пальцами и двигайте вверх или вниз.</string>
     <string name="shared_string_finger">Палец</string>
     <string name="external_device_characteristic_cuff_pressure">Давление в манжете</string>
-    <string name="visible_in_3d_mode">На экране, когда 3D включён</string>
+    <string name="visible_in_3d_mode">Виден, когда карта наклонена</string>
     <string name="poi_categories">Категории POI</string>
     <string name="shared_string_ear_lobe">Мочка уха</string>
     <string name="map_3d_mode_hint">Удерживайте кнопку для изменения положения.</string>
@@ -5611,4 +5611,22 @@
     <string name="sorted_sufolders_toast">Подпапки в «%1$s» сортируются по: «%2$s»</string>
     <string name="precise_distance_numbers">Точное значение расстояния</string>
     <string name="key_event_action_activity_back_pressed">Нажато действие назад</string>
+    <string name="custom_map_button_name_present">Такая кнопка уже есть</string>
+    <string name="add_button">Добавить кнопку</string>
+    <string name="default_buttons">Кнопки по умолчанию</string>
+    <string name="custom_buttons">Пользовательские кнопки</string>
+    <string name="speed_limit_warning">Предупреждение об ограничении скорости</string>
+    <string name="when_exceeded">При превышении</string>
+    <string name="shared_string_limit">Ограничение</string>
+    <string name="shared_string_speedometer">Спидометр</string>
+    <string name="help_article_setup_a_route_name">Настройка маршрута</string>
+    <string name="speedometer_description">Показывает вашу текущую скорость, определенную по GPS</string>
+    <string name="rendering_value_small_name">Малый</string>
+    <string name="shared_string_checked">Проверено</string>
+    <string name="shared_string_additional">Дополнительно</string>
+    <string name="shared_string_copyright">Авторское право</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Открыть WunderLINQ Datagrid</string>
+    <string name="shared_string_not_checked">Не проверено</string>
+    <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению планирования для текущего полета.</string>
+    <string name="special_routing_cpp">Специальный тип маршрутизации</string>
 </resources>

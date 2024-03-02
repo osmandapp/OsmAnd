@@ -1,46 +1,37 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
+import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
+import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
+import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
 import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import androidx.appcompat.content.res.AppCompatResources;
-
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
-import net.osmand.data.PointDescription;
-import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
-import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.plus.routing.AlarmInfoType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.settings.enums.SpeedConstants;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -48,17 +39,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
 
-//	import android.widget.Toast;
-
-/**
- *
- */
 public class WaypointHelper {
+
 	private static final int NOT_ANNOUNCED = 0;
 	private static final int ANNOUNCED_ONCE = 1;
 	private static final int ANNOUNCED_DONE = 2;
@@ -84,8 +70,8 @@ public class WaypointHelper {
 
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private final ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
-	private final ConcurrentHashMap<AlarmInfo.AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<AlarmInfoType, AlarmInfo> lastAnnouncedAlarms = new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<AlarmInfoType, Long> lastAnnouncedAlarmsTime = new ConcurrentHashMap<>();
 	private static final int SAME_ALARM_INTERVAL = 30;//in seconds
 	private TIntArrayList pointsProgress = new TIntArrayList();
 	private RouteCalculationResult route;
@@ -101,7 +87,7 @@ public class WaypointHelper {
 
 	public List<LocationPointWrapper> getWaypoints(int type) {
 		if (type == TARGETS) {
-			return getTargets(new ArrayList<WaypointHelper.LocationPointWrapper>());
+			return getTargets(new ArrayList<>());
 		}
 		if (type >= locationPoints.size()) {
 			return Collections.emptyList();
@@ -109,26 +95,25 @@ public class WaypointHelper {
 		return locationPoints.get(type);
 	}
 
-
 	public void locationChanged(Location location) {
 		app.getAppCustomization();
 		announceVisibleLocations();
 	}
 
-	public int getRouteDistance(LocationPointWrapper point) {
+	public int getRouteDistance(@NonNull LocationPointWrapper point) {
 		return route.getDistanceToPoint(point.routeIndex);
 	}
 
-	public boolean isPointPassed(LocationPointWrapper point) {
+	public boolean isPointPassed(@NonNull LocationPointWrapper point) {
 		return route.isPointPassed(point.routeIndex);
 	}
 
-	public boolean isAmenityNoPassed(Amenity a) {
-		if (a != null) {
+	public boolean isAmenityNoPassed(@Nullable Amenity amenity) {
+		if (amenity != null) {
 			List<LocationPointWrapper> points = locationPoints.get(POI);
 			for (LocationPointWrapper point : points) {
 				if (point.point instanceof AmenityLocationPoint) {
-					if (a.equals(((AmenityLocationPoint) point.point).a)) {
+					if (amenity.equals(((AmenityLocationPoint) point.point).getAmenity())) {
 						return !isPointPassed(point);
 					}
 				}
@@ -262,7 +247,7 @@ public class WaypointHelper {
 					}
 					float time = speed > 0 ? distanceByRoute / speed : Integer.MAX_VALUE;
 					int priority = inf.updateDistanceAndGetPriority(time, distanceByRoute);
-					if (priority < mostPriority && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
+					if (priority < mostPriority && (showCameras || inf.getType() != SPEED_CAMERA)) {
 						mostImportant = inf;
 						mostPriority = priority;
 					}
@@ -327,11 +312,30 @@ public class WaypointHelper {
 		return true;
 	}
 
+	@Nullable
+	public AlarmInfo getSpeedLimitAlarm(@NonNull SpeedConstants constants, boolean whenExceeded) {
+		Location lastProjection = app.getRoutingHelper().getLastProjection();
+		if (route != null) {
+			float maxSpeed = route.getCurrentMaxSpeed(appMode.getRouteTypeProfile());
+			float delta = whenExceeded ? app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
+			return createSpeedAlarm(constants, maxSpeed, lastProjection, delta);
+		}
+		return null;
+	}
+
+	@Nullable
+	public AlarmInfo calculateSpeedLimitAlarm(@NonNull RouteDataObject object, @NonNull Location location, @NonNull SpeedConstants constants, boolean whenExceeded) {
+		float maxSpeed = object.getMaximumSpeed(object.bearingVsRouteDirection(location), appMode.getRouteTypeProfile());
+		float delta = whenExceeded ? app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f : maxSpeed * -1;
+		return createSpeedAlarm(constants, maxSpeed, location, delta);
+	}
+
+	@Nullable
 	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
 	                                             SpeedConstants sc, boolean showCameras) {
-		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
+		float maxSpeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc), appMode.getRouteTypeProfile());
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED_KMH.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(sc, mxspeed, loc, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(sc, maxSpeed, loc, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
 			return speedAlarm;
@@ -340,11 +344,11 @@ public class WaypointHelper {
 			int[] pointTypes = ro.getPointTypes(i);
 			RouteRegion reg = ro.region;
 			if (pointTypes != null) {
-				for (int r = 0; r < pointTypes.length; r++) {
-					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
+				for (int pointType : pointTypes) {
+					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointType);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 					if (info != null) {
-						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
+						if (info.getType() != SPEED_CAMERA || showCameras) {
 							return info;
 						}
 					}
@@ -354,12 +358,13 @@ public class WaypointHelper {
 		return null;
 	}
 
-	private static AlarmInfo createSpeedAlarm(SpeedConstants sc, float mxspeed, Location loc, float delta) {
+	@Nullable
+	private static AlarmInfo createSpeedAlarm(@NonNull SpeedConstants constants, float mxspeed, Location loc, float delta) {
 		AlarmInfo speedAlarm = null;
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
 			if (loc.getSpeed() > mxspeed + delta) {
 				int speed;
-				if (sc.imperial) {
+				if (constants.imperial) {
 					speed = Math.round(mxspeed * 3.6f / 1.6f);
 				} else {
 					speed = Math.round(mxspeed * 3.6f);
@@ -370,14 +375,13 @@ public class WaypointHelper {
 		return speedAlarm;
 	}
 
-
 	public void announceVisibleLocations() {
 		Location lastKnownLocation = app.getRoutingHelper().getLastProjection();
 		if (lastKnownLocation != null && app.getRoutingHelper().isFollowingMode()) {
 			for (int type = 0; type < locationPoints.size(); type++) {
 				int currentRoute = route.getCurrentRoute();
-				List<LocationPointWrapper> approachPoints = new ArrayList<LocationPointWrapper>();
-				List<LocationPointWrapper> announcePoints = new ArrayList<LocationPointWrapper>();
+				List<LocationPointWrapper> approachPoints = new ArrayList<>();
+				List<LocationPointWrapper> announcePoints = new ArrayList<>();
 				List<LocationPointWrapper> lp = locationPoints.get(type);
 				if (lp != null) {
 					int kIterator = pointsProgress.get(type);
@@ -518,8 +522,9 @@ public class WaypointHelper {
 		return route != null && !route.isEmpty();
 	}
 
+	@NonNull
 	public List<LocationPointWrapper> getAllPoints() {
-		List<LocationPointWrapper> points = new ArrayList<WaypointHelper.LocationPointWrapper>();
+		List<LocationPointWrapper> points = new ArrayList<>();
 		List<List<LocationPointWrapper>> local = locationPoints;
 		TIntArrayList ps = pointsProgress;
 		for (int i = 0; i < local.size(); i++) {
@@ -533,8 +538,8 @@ public class WaypointHelper {
 		return points;
 	}
 
-
-	protected List<LocationPointWrapper> getTargets(List<LocationPointWrapper> points) {
+	@NonNull
+	protected List<LocationPointWrapper> getTargets(@NonNull List<LocationPointWrapper> points) {
 		List<TargetPoint> wts = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
 		for (int k = 0; k < wts.size(); k++) {
 			int index = wts.size() - k - 1;
@@ -555,16 +560,14 @@ public class WaypointHelper {
 		this.locationPointsStates.clear();
 		this.lastAnnouncedAlarms.clear();
 		this.lastAnnouncedAlarmsTime.clear();
-		this.locationPoints = new ArrayList<List<LocationPointWrapper>>();
+		this.locationPoints = new ArrayList<>();
 	}
 
-
 	public void setNewRoute(RouteCalculationResult route) {
-		List<List<LocationPointWrapper>> locationPoints = new ArrayList<List<LocationPointWrapper>>();
+		List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 		recalculatePoints(route, -1, locationPoints);
 		setLocationPoints(locationPoints, route);
 	}
-
 
 	protected void recalculatePoints(RouteCalculationResult route, int type, List<List<LocationPointWrapper>> locationPoints) {
 		boolean all = type == -1;
@@ -675,16 +678,16 @@ public class WaypointHelper {
 			for (PoiUIFilter pf : app.getPoiFilters().getSelectedPoiFilters()) {
 				amenities.addAll(pf.searchAmenitiesOnThePath(locs, poiSearchDeviationRadius));
 			}
-			for (Amenity a : amenities) {
-				AmenityRoutePoint routePoint = a.getRoutePoint();
+			for (Amenity amenity : amenities) {
+				AmenityRoutePoint routePoint = amenity.getRoutePoint();
 				if (routePoint != null) {
 					int i = locs.indexOf(routePoint.pointA);
 					if (i >= 0) {
-						LocationPointWrapper lwp = new LocationPointWrapper(POI, new AmenityLocationPoint(a),
-								(float) routePoint.deviateDistance, i);
-						lwp.deviationDirectionRight = routePoint.deviationDirectionRight;
-						lwp.setAnnounce(announcePOI);
-						locationPoints.add(lwp);
+						AmenityLocationPoint point = new AmenityLocationPoint(amenity);
+						LocationPointWrapper wrapper = new LocationPointWrapper(POI, point, (float) routePoint.deviateDistance, i);
+						wrapper.deviationDirectionRight = routePoint.deviationDirectionRight;
+						wrapper.setAnnounce(announcePOI);
+						locationPoints.add(wrapper);
 					}
 				}
 			}
@@ -700,7 +703,7 @@ public class WaypointHelper {
 		AlarmInfo prevRailway = null;
 		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
 			AlarmInfoType type = alarmInfo.getType();
-			if (type == AlarmInfoType.SPEED_CAMERA) {
+			if (type == SPEED_CAMERA) {
 				if (settings.SHOW_CAMERAS.getModeValue(mode) || settings.SPEAK_SPEED_CAMERA.getModeValue(mode)) {
 					// ignore double speed cams
 					if (prevSpeedCam == null || MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(),
@@ -709,15 +712,15 @@ public class WaypointHelper {
 						prevSpeedCam = alarmInfo;
 					}
 				}
-			} else if (type == AlarmInfoType.TUNNEL) {
+			} else if (type == TUNNEL) {
 				if (settings.SHOW_TUNNELS.getModeValue(mode) || settings.SPEAK_TUNNELS.getModeValue(mode)) {
 					addPointWrapper(alarmInfo, array, settings.SPEAK_TUNNELS.getModeValue(mode));
 				}
-			} else if (type == AlarmInfoType.PEDESTRIAN) {
+			} else if (type == PEDESTRIAN) {
 				if (settings.SHOW_PEDESTRIAN.getModeValue(mode) || settings.SPEAK_PEDESTRIAN.getModeValue(mode)) {
 					addPointWrapper(alarmInfo, array, settings.SPEAK_PEDESTRIAN.getModeValue(mode));
 				}
-			} else if (type == AlarmInfoType.RAILWAY) {
+			} else if (type == RAILWAY) {
 				if (prevRailway == null || MapUtils.getDistance(prevRailway.getLatitude(), prevRailway.getLongitude(),
 						alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_RAILWAYS) {
 					addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
@@ -735,15 +738,13 @@ public class WaypointHelper {
 		array.add(pointWrapper);
 	}
 
-	private List<LocationPointWrapper> clearAndGetArray(List<List<LocationPointWrapper>> array,
-	                                                    int ind) {
-		while (array.size() <= ind) {
-			array.add(new ArrayList<WaypointHelper.LocationPointWrapper>());
+	private List<LocationPointWrapper> clearAndGetArray(List<List<LocationPointWrapper>> array, int index) {
+		while (array.size() <= index) {
+			array.add(new ArrayList<>());
 		}
-		array.get(ind).clear();
-		return array.get(ind);
+		array.get(index).clear();
+		return array.get(index);
 	}
-
 
 	private void findLocationPoints(RouteCalculationResult rt, int type, List<LocationPointWrapper> locationPoints,
 	                                List<? extends LocationPoint> points, boolean announce) {
@@ -762,150 +763,6 @@ public class WaypointHelper {
 		}
 	}
 
-
-	/// 
-	public Set<PoiUIFilter> getPoiFilters() {
-		return app.getPoiFilters().getSelectedPoiFilters();
-	}
-
-	public static class LocationPointWrapper {
-
-		public LocationPoint point;
-		public float deviationDistance;
-		public boolean deviationDirectionRight;
-		public int type;
-
-		int routeIndex;
-		boolean announce = true;
-
-		public LocationPointWrapper() {
-		}
-
-		public LocationPointWrapper(int type, LocationPoint point, float deviationDistance, int routeIndex) {
-			this.type = type;
-			this.point = point;
-			this.deviationDistance = deviationDistance;
-			this.routeIndex = routeIndex;
-		}
-
-		public void setAnnounce(boolean announce) {
-			this.announce = announce;
-		}
-
-		public float getDeviationDistance() {
-			return deviationDistance;
-		}
-
-		public boolean isDeviationDirectionRight() {
-			return deviationDirectionRight;
-		}
-
-		public LocationPoint getPoint() {
-			return point;
-		}
-
-
-		public Drawable getDrawable(Context uiCtx, OsmandApplication app, boolean nightMode) {
-			if (type == POI) {
-				Amenity amenity = ((AmenityLocationPoint) point).a;
-				String iconName = RenderingIcons.getBigIconNameForAmenity(amenity);
-				return iconName == null ? null : AppCompatResources.getDrawable(uiCtx,
-						RenderingIcons.getBigIconResourceId(iconName));
-			} else if (type == TARGETS) {
-				UiUtilities iconsCache = app.getUIUtilities();
-				if (((TargetPoint) point).start) {
-					if (app.getTargetPointsHelper().getPointToStart() == null) {
-						return iconsCache.getIcon(R.drawable.ic_action_location_color, 0);
-					} else {
-						return iconsCache.getIcon(R.drawable.list_startpoint, 0);
-					}
-				} else if (((TargetPoint) point).intermediate) {
-					return iconsCache.getIcon(R.drawable.list_intermediate, 0);
-				} else {
-					return iconsCache.getIcon(R.drawable.list_destination, 0);
-				}
-
-			} else if (type == FAVORITES) {
-				int color = ColorUtilities.getColor(app, R.color.color_favorite);
-				return PointImageDrawable.getFromFavorite(uiCtx,
-						app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point, color), false, (FavouritePoint) point);
-			} else if (type == WAYPOINTS) {
-				if (point instanceof WptLocationPoint) {
-					return PointImageDrawable.getFromWpt(uiCtx, point.getColor(), false, ((WptLocationPoint) point).getPt());
-				} else if (point instanceof GPXUtilities.WptPt) {
-					return PointImageDrawable.getFromWpt(uiCtx, point.getColor(), false, (GPXUtilities.WptPt) point);
-				} else {
-					return null;
-				}
-			} else if (type == ALARMS) {
-				//assign alarm list icons manually for now
-				String typeString = ((AlarmInfo) point).getType().toString();
-				DrivingRegion region = app.getSettings().DRIVING_REGION.get();
-				if (typeString.equals("SPEED_CAMERA")) {
-					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_highway_speed_camera);
-				} else if (typeString.equals("BORDER_CONTROL")) {
-					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_barrier_border_control);
-				} else if (typeString.equals("RAILWAY")) {
-					if (region.isAmericanTypeSigns()) {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_railways_us);
-					} else {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_railways);
-					}
-				} else if (typeString.equals("TRAFFIC_CALMING")) {
-					if (region.isAmericanTypeSigns()) {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_traffic_calming_us);
-					} else {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_traffic_calming);
-					}
-				} else if (typeString.equals("TOLL_BOOTH")) {
-					return AppCompatResources.getDrawable(uiCtx, R.drawable.mx_toll_booth);
-				} else if (typeString.equals("STOP")) {
-					return AppCompatResources.getDrawable(uiCtx, R.drawable.list_stop);
-				} else if (typeString.equals("PEDESTRIAN")) {
-					if (region.isAmericanTypeSigns()) {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_pedestrian_us);
-					} else {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_pedestrian);
-					}
-				} else if (typeString.equals("TUNNEL")) {
-					if (region.isAmericanTypeSigns()) {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_tunnel_us);
-					} else {
-						return AppCompatResources.getDrawable(uiCtx, R.drawable.list_warnings_tunnel);
-					}
-				} else {
-					return null;
-				}
-
-			} else {
-				return null;
-			}
-		}
-
-		@Override
-		public int hashCode() {
-			return ((point == null) ? 0 : point.hashCode());
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
-				return false;
-			}
-			LocationPointWrapper other = (LocationPointWrapper) obj;
-			if (point == null) {
-				return other.point == null;
-			} else return point.equals(other.point);
-		}
-
-	}
-
 	public int getSearchDeviationRadius(int type) {
 		return type == POI ? poiSearchDeviationRadius : searchDeviationRadius;
 	}
@@ -917,45 +774,4 @@ public class WaypointHelper {
 			this.searchDeviationRadius = radius;
 		}
 	}
-
-	public class AmenityLocationPoint implements LocationPoint {
-
-		Amenity a;
-
-		public AmenityLocationPoint(Amenity a) {
-			this.a = a;
-		}
-
-		@Override
-		public double getLatitude() {
-			return a.getLocation().getLatitude();
-		}
-
-		@Override
-		public double getLongitude() {
-			return a.getLocation().getLongitude();
-		}
-
-
-		@Override
-		public PointDescription getPointDescription(Context ctx) {
-			return new PointDescription(PointDescription.POINT_TYPE_POI,
-					OsmAndFormatter.getPoiStringWithoutType(a, app.getSettings().MAP_PREFERRED_LOCALE.get(),
-							app.getSettings().MAP_TRANSLITERATE_NAMES.get()));
-		}
-
-		@Override
-		public int getColor() {
-			return 0;
-		}
-
-		@Override
-		public boolean isVisible() {
-			return true;
-		}
-
-	}
-
 }
-
-

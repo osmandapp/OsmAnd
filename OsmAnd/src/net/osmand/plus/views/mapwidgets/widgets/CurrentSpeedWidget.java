@@ -14,9 +14,9 @@ import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 public class CurrentSpeedWidget extends SimpleWidget {
 
-	private static final float LOW_SPEED_THRESHOLD_MPS = 6;
-	private static final float UPDATE_THRESHOLD_MPS = .1f;
-	private static final float LOW_SPEED_UPDATE_THRESHOLD_MPS = .015f; // Update more often while walking/running
+	public static final float LOW_SPEED_THRESHOLD_MPS = 6;
+	public static final float UPDATE_THRESHOLD_MPS = .1f;
+	public static final float LOW_SPEED_UPDATE_THRESHOLD_MPS = .015f; // Update more often while walking/running
 
 	private float cachedSpeed;
 

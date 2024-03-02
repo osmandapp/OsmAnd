@@ -38,7 +38,8 @@
 			osmand:layout_constraintBottom_toBottomOf="parent"
 			osmand:layout_constraintEnd_toEndOf="parent"
 			osmand:layout_constraintStart_toStartOf="parent"
-			osmand:layout_constraintTop_toTopOf="parent" />
+			osmand:layout_constraintTop_toTopOf="parent"
+			tools:text="Value" />
 
 		<LinearLayout
 			android:id="@+id/linearLayout"

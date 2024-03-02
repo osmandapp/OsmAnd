@@ -42,7 +42,7 @@ import net.osmand.plus.download.local.LocalIndexHelper;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.feedback.AnalyticsHelper;
 import net.osmand.plus.feedback.FeedbackHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
@@ -74,7 +74,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
-import net.osmand.plus.routing.AvoidRoadsHelper;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
@@ -690,7 +690,12 @@ public class AppInitializer implements IProgress {
 				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
+				if (storage == null) {
+					LOG.info("Current renderer could not be used!");
+					osmandSettings.SAFE_MODE.set(true);
+					warnings.add(app.getString(R.string.native_library_not_supported));
+				}
+				NativeOsmandLibrary lib = storage != null ? NativeOsmandLibrary.getLibrary(storage, app) : null;
 				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (initialized) {

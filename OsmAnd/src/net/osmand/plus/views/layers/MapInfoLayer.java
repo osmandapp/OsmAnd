@@ -35,6 +35,7 @@ import net.osmand.plus.views.mapwidgets.TopToolbarView;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.RulerWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SpeedometerWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -45,6 +46,7 @@ import java.util.List;
 public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectProvider {
 
 	private final RouteLayer routeLayer;
+	private final OsmandApplication app;
 	private final OsmandSettings settings;
 	private final MapWidgetRegistry widgetRegistry;
 	private final MapDisplayPositionManager mapDisplayPositionManager;
@@ -55,7 +57,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private VerticalWidgetPanel bottomWidgetsPanel;
 
 	private View mapRulerLayout;
-	private AlarmWidget alarmControl;
+	private AlarmWidget alarmWidget;
+	private SpeedometerWidget speedometerWidget;
 	private List<RulerWidget> rulerWidgets;
 	private List<SideWidgetsPanel> sideWidgetsPanels;
 
@@ -73,7 +76,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		super(context);
 		this.routeLayer = layer;
 
-		OsmandApplication app = getApplication();
+		app = getApplication();
 		settings = app.getSettings();
 		MapLayers mapLayers = app.getOsmandMap().getMapLayers();
 		widgetRegistry = mapLayers.getMapWidgetRegistry();
@@ -121,7 +124,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			androidAutoMapPlaceholderView = null;
 
 			drawSettings = null;
-			alarmControl = null;
+			alarmWidget = null;
+			speedometerWidget = null;
 			rulerWidgets = null;
 			sideWidgetsPanels = null;
 			topToolbarView = null;
@@ -193,8 +197,12 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		topToolbarView = new TopToolbarView(mapActivity);
 		updateTopToolbar(false);
 
-		alarmControl = new AlarmWidget(mapActivity.getMyApplication(), mapActivity);
-		alarmControl.setVisibility(false);
+		alarmWidget = new AlarmWidget(app, mapActivity);
+		alarmWidget.setVisibility(false);
+
+		View speedometerView = mapActivity.findViewById(R.id.speedometer_widget);
+		speedometerWidget = new SpeedometerWidget(app, speedometerView);
+		speedometerWidget.setVisibility(false);
 
 		setupRulerWidget(mapRulerLayout);
 		widgetRegistry.registerAllControls(mapActivity);
@@ -229,19 +237,20 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		bottomWidgetsPanel.updateRow(widget);
 	}
 
+	@Nullable
 	public RulerWidget setupRulerWidget(@NonNull View mapRulerView) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			RulerWidget rulerWidget = new RulerWidget(mapActivity.getMyApplication(), mapRulerView);
-			rulerWidget.setVisibility(false);
+			RulerWidget widget = new RulerWidget(app, mapRulerView);
+			widget.setVisibility(false);
 
-			TextState ts = calculateTextState(false);
+			TextState state = calculateTextState(false);
 			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
+			widget.updateTextSize(nightMode, state.textColor, state.textShadowColor, (int) (2 * view.getDensity()));
 
-			rulerWidgets = CollectionUtils.addToList(rulerWidgets, rulerWidget);
+			rulerWidgets = CollectionUtils.addToList(rulerWidgets, widget);
 
-			return rulerWidget;
+			return widget;
 		} else {
 			return null;
 		}
@@ -379,7 +388,8 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			leftWidgetsPanel.update(drawSettings);
 			rightWidgetsPanel.update(drawSettings);
 			topToolbarView.updateInfo();
-			alarmControl.updateInfo(drawSettings, false);
+			alarmWidget.updateInfo(drawSettings, false);
+			speedometerWidget.updateInfo(drawSettings);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateInfo(tileBox);

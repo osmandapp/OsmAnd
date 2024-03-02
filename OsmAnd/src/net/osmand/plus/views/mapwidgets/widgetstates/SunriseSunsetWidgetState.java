@@ -1,13 +1,14 @@
 package net.osmand.plus.views.mapwidgets.widgetstates;
 
+import static net.osmand.plus.settings.enums.SunPositionMode.SUN_POSITION_MODE;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.SunPositionMode;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.util.Algorithms;
 
@@ -70,8 +71,9 @@ public class SunriseSunsetWidgetState extends WidgetState {
 		return settings.registerBooleanPreference(prefId, true).makeProfile();
 	}
 
-	private String getPrefId(){
-		switch (widgetType){
+	@NonNull
+	private String getPrefId() {
+		switch (widgetType) {
 			case SUNSET:
 				return "show_sunset_info";
 			case SUNRISE:
@@ -88,25 +90,7 @@ public class SunriseSunsetWidgetState extends WidgetState {
 		if (!Algorithms.isEmpty(customId)) {
 			prefId += customId;
 		}
-		return settings.registerEnumStringPreference(prefId, SunPositionMode.SUN_POSITION_MODE, SunPositionMode.values(), SunPositionMode.class)
-				.makeProfile();
-	}
-
-	public enum SunPositionMode {
-		SUN_POSITION_MODE(R.string.shared_string_next_event),
-		SUNSET_MODE(R.string.shared_string_sunset),
-		SUNRISE_MODE(R.string.shared_string_sunrise);
-
-		@StringRes
-		final int prefId;
-
-		SunPositionMode(int prefId) {
-			this.prefId = prefId;
-		}
-
-		@StringRes
-		public int getPrefId() {
-			return prefId;
-		}
+		return settings.registerEnumStringPreference(prefId, SUN_POSITION_MODE,
+				SunPositionMode.values(), SunPositionMode.class).makeProfile();
 	}
 }

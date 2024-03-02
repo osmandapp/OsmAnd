@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.TreeMap;
 
 import com.google.protobuf.CodedInputStream;
 
@@ -30,8 +31,11 @@ import net.osmand.util.MapUtils;
 public class HHRouteDataStructure {
 	
 	public static class HHRoutingConfig {
+		public final static int CALCULATE_ALL_DETAILED = 3;
+		public int STATS_VERBOSE_LEVEL = 1; // 0 less verbose
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
+		public HHRoutingContext<NetworkDBPoint> cacheCtx;
 		
 		// tweaks for route recalculations
 		int FULL_DIJKSTRA_NETWORK_RECALC = 10;
@@ -41,7 +45,6 @@ public class HHRouteDataStructure {
 		
 		///////////
 		Double INITIAL_DIRECTION = null;
-		public final static int CALCULATE_ALL_DETAILED = 3;
 		
 		
 		boolean ROUTE_LAST_MILE = false;
@@ -49,8 +52,10 @@ public class HHRouteDataStructure {
 		boolean ROUTE_ALL_ALT_SEGMENTS = false;
 		boolean PRELOAD_SEGMENTS = false;
 		
+		boolean CACHE_CALCULATION_CONTEXT = false;
 		boolean CALC_ALTERNATIVES = false;
 		boolean USE_GC_MORE_OFTEN = false;
+		
 		double ALT_EXCLUDE_RAD_MULT = 0.3; // radius multiplier to exclude points
 		double ALT_EXCLUDE_RAD_MULT_IN = 3; // skip some points to speed up calculation
 		double ALT_NON_UNIQUENESS = 0.7; // 0.7 - 30% of points must be unique
@@ -100,6 +105,12 @@ public class HHRouteDataStructure {
 		
 		public HHRoutingConfig preloadSegments() {
 			this.PRELOAD_SEGMENTS = true;
+			return this;
+		}
+		
+		public HHRoutingConfig cacheContext(HHRoutingContext<NetworkDBPoint> toCache) {
+			this.CACHE_CALCULATION_CONTEXT = true;
+			this.cacheCtx = toCache;
 			return this;
 		}
 		
@@ -202,6 +213,7 @@ public class HHRouteDataStructure {
 		// Initial data structure
 		RoutingContext rctx; 
 		List<HHRouteRegionPointsCtx<T>> regions = new ArrayList<>();
+		TreeMap<String, String> filterRoutingParameters = new TreeMap<>();
 		
 		TLongObjectHashMap<T> pointsById; 
 		TLongObjectHashMap<T> pointsByGeo;
@@ -230,6 +242,7 @@ public class HHRouteDataStructure {
 		Queue<NetworkDBPointCost<T>> queueRev = createQueue();
 
 
+
 		private PriorityQueue<NetworkDBPointCost<T>> createQueue() {
 			return new PriorityQueue<>(new Comparator<NetworkDBPointCost<T>>() {
 				@Override
@@ -237,6 +250,20 @@ public class HHRouteDataStructure {
 					return Double.compare(o1.cost, o2.cost);
 				}
 			});
+		}
+		
+		public void clearAll(TLongObjectHashMap<T> stPoints, TLongObjectHashMap<T> endPoints) {
+			clearVisited();
+			if (stPoints != null) {
+				for (NetworkDBPoint p : stPoints.valueCollection()) {
+					p.clearRouting();
+				}
+			}
+			if (endPoints != null) {
+				for (NetworkDBPoint p : endPoints.valueCollection()) {
+					p.clearRouting();
+				}
+			}
 		}
 		
 		public void clearVisited() {

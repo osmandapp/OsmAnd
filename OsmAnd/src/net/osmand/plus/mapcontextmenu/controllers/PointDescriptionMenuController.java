@@ -10,7 +10,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidSpecificRoads;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.routing.RoutingHelper;

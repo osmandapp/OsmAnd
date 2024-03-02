@@ -54,6 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.chooseplan.TripltekPromoFragment;
@@ -842,7 +843,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				while (!tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude()) && tb.getZoom() > zoom - MAX_ZOOM_OUT_STEPS) {
 					tb.setZoom(tb.getZoom() - 1);
 				}
-				mapContextMenu.setMapZoom(tb.getZoom());
+				boolean containsPrevious = tb.containsLatLon(prevCenter.getLatitude(), prevCenter.getLongitude());
+				mapContextMenu.setMapZoom(containsPrevious ? tb.getZoom() : zoom);
+
 				if (toShow instanceof GpxDisplayItem) {
 					trackDetailsMenu.setGpxItem((GpxDisplayItem) toShow);
 					trackDetailsMenu.show();
@@ -987,6 +990,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onPause() {
 		super.onPause();
 		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
+		boolean blockAnimations = true;
+		NavigationSession navigationSession = app.getCarNavigationSession();
+		if (navigationSession != null) {
+			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+			if (!app.useOpenGlRenderer() || (surfaceRenderer != null && surfaceRenderer.hasOffscreenRenderer()))
+				blockAnimations = false;
+		}
+		if (blockAnimations)
+			getMapView().getAnimatedDraggingThread().blockAnimations();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;
 		} else {
@@ -996,10 +1008,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
-		if (app.getCarNavigationSession() == null) {
-			getMapView().getAnimatedDraggingThread().blockAnimations();
-		}
-
 		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		settings.USE_SYSTEM_SCREEN_TIMEOUT.removeListener(useSystemScreenTimeoutListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
@@ -1045,7 +1053,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void updateApplicationModeSettings() {
 		changeKeyguardFlags();
-		updateMapSettings();
+		updateMapSettings(false);
 		app.getPoiFilters().loadSelectedPoiFilters();
 		app.getSearchUICore().refreshCustomPoiFilters();
 		app.getMapButtonsHelper().updateActiveActions();
@@ -1088,14 +1096,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public void updateMapSettings() {
+	public void updateMapSettings(boolean updateMapRenderer) {
 		if (!app.isApplicationInitializing()) {
-			UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(app, changed -> {
+			UpdateVectorRendererAsyncTask task = new UpdateVectorRendererAsyncTask(app, updateMapRenderer, changed -> {
 				if (changed) {
-					PluginsHelper.registerRenderingPreferences(app);
-					ConfigureMapFragment cm = ConfigureMapFragment.getVisibleInstance(this);
-					if (cm != null) {
-						cm.onRefreshItem(MAP_STYLE_ID);
+					ConfigureMapFragment fragment = ConfigureMapFragment.getVisibleInstance(this);
+					if (fragment != null) {
+						fragment.onRefreshItem(MAP_STYLE_ID);
 					}
 				}
 				return true;
@@ -1258,7 +1265,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void refreshMapComplete() {
 		getMyApplication().getResourceManager().getRenderer().clearCache();
-		updateMapSettings();
+		updateMapSettings(true);
 		getMapView().refreshMap(true);
 	}
 

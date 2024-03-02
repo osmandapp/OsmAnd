@@ -5233,27 +5233,27 @@
     <string name="relief_3d">3D-Relief</string>
     <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
     <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Ihr OsmAnd Pro-Abonnement wird dadurch nicht gekündigt.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Dadurch wird dein OsmAnd Pro-Abonnement nicht gekündigt.</string>
     <string name="manage_subscriptions">Abonnements verwalten.</string>
     <string name="delete_account_warning">Konto %1$s löschen?</string>
     <string name="shared_string_deleting">Wird gelöscht</string>
-    <string name="deleting_complete">Löschen abgeschlossen</string>
-    <string name="delete_account">Konto löschen</string>
+    <string name="deleting_complete">Löschung vollständig</string>
+    <string name="delete_account">Account löschen</string>
     <string name="backup_error_delete_account_email_match">E-Mail-Adresse stimmt nicht mit Anmelde-Benutzernamen überein</string>
-    <string name="osmand_cloud_deleted_account_descr">Konto und alle Daten wurden aus der OsmAnd Cloud gelöscht.</string>
+    <string name="osmand_cloud_deleted_account_descr">Das Konto und alle Daten wurden aus der OsmAnd Cloud gelöscht.</string>
     <string name="action_cannot_be_undone">Diese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
     <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodaten werden %1$s</string>
-    <string name="osmand_cloud_deleting_account_descr">In Kürze werden alle Ihre Daten und Ihr Konto von OsmAnd Cloud gelöscht.
+    <string name="osmand_cloud_deleting_account_descr">In wenigen Augenblicken werden alle deine Daten und dein Konto aus der OsmAnd Cloud gelöscht.
 \n
 \nAlle Daten auf dem Gerät bleiben unangetastet.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud-Konto löschen?
 \n
 \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Alle Daten von OsmAnd Cloud werden %1$s. Daten auf dem Gerät bleiben unangetastet.</string>
-    <string name="verify_account_deletion_descr">Wir müssen Ihr Konto verifizieren, bevor wir es löschen können.
+    <string name="verify_account_deletion_descr">Wir müssen dein Konto verifizieren, bevor wir es löschen können.
 \n
-\nBitte geben Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
+\nBitte gib die E-Mail-Adresse ein, mit der du dich registriert hast. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Reliefschattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
@@ -5363,7 +5363,7 @@
     <string name="help_article_map_vector_maps_name">Vektorkarten (Kartenstile)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Leitfaden</string>
+    <string name="help_article_navigation_guidance_name">Navigationshilfe</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Kartenbildschirm während der Navigation</string>
     <string name="help_article_navigation_setup_route_details_name">Routendetails</string>
     <string name="help_article_navigation_setup_route_navigation_name">Routenvorbereitung</string>
@@ -5623,6 +5623,18 @@
     <string name="special_routing_cpp">Spezieller Navigationstyp</string>
     <string name="add_button">Schaltfläche hinzufügen</string>
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
-    <string name="custom_map_button_name_present">Solche Schaltfläche bereits vorhanden</string>
+    <string name="custom_map_button_name_present">Solch eine Schaltfläche ist bereits vorhanden</string>
     <string name="default_buttons">Standard-Schaltfläche</string>
+    <string name="speed_limit_warning">Warnung vor Tempolimit</string>
+    <string name="shared_string_limit">Limit</string>
+    <string name="when_exceeded">Bei Überschreitung</string>
+    <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
+    <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
+    <string name="help_article_setup_a_route_name">Route einrichten</string>
+    <string name="rendering_value_access_name">Nach Zugangsart</string>
+    <string name="rendering_value_managerName_name">Nach Name der Verwaltung</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Grenzen von öffentlichem Land ausblenden</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Grenzen von öffentlichem Land ausblenden, aber Gebiete belassen</string>
+    <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
+    <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
 </resources>

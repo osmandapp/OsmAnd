@@ -3831,7 +3831,7 @@
 \nВикористовуйте метод OAuth або ваші імʼя користувача та пароль OSM.</string>
     <string name="use_login_password">Ввести ім\'я користувача та пароль</string>
     <string name="login_account">Обліковий запис</string>
-    <string name="user_login">Ім\'я користувача</string>
+    <string name="user_login">Увійти</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
     <string name="markers_history">Історія позначок</string>
     <string name="send_files_to_openstreetmap">Надіслати файл GPX до OpenStreetMap</string>
@@ -5614,4 +5614,14 @@
 \n
 \nЯкщо у вас виникли такі проблеми, спробуйте змінити використання батареї на \'Unrestricted.\'</string>
     <string name="battery_optimization">Оптимізація батареї</string>
+    <string name="special_routing_cpp">Тип спеціального маршрутизатора</string>
+    <string name="shared_string_limit">Обмеження</string>
+    <string name="when_exceeded">Коли перевищено</string>
+    <string name="custom_map_button_name_present">Така кнопка вже присутня</string>
+    <string name="add_button">Додати кнопку</string>
+    <string name="default_buttons">Типові кнопки</string>
+    <string name="speed_limit_warning">Попередження про обмеження швидкості</string>
+    <string name="speedometer_description">Показує вашу поточну швидкість згідно даних GPS</string>
+    <string name="shared_string_speedometer">Спідометр</string>
+    <string name="custom_buttons">Користувацькі кнопки</string>
 </resources>

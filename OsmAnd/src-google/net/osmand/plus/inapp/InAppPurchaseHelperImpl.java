@@ -541,7 +541,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			if (!Algorithms.isEmpty(basePlans)) {
 				ProductDetails.SubscriptionOfferDetails basePlan = basePlans.get(0);
 				List<ProductDetails.SubscriptionOfferDetails> basePlanOffers = getBasePlanOffers(productDetails, basePlan.getBasePlanId());
-				ProductDetails.SubscriptionOfferDetails offer = basePlanOffers == null ? basePlan : basePlanOffers.get(0);
+				ProductDetails.SubscriptionOfferDetails offer = Algorithms.isEmpty(basePlanOffers) ? basePlan : basePlanOffers.get(0);
 				ProductDetails.PricingPhase pricingPhrase = offer.getPricingPhases().getPricingPhaseList().get(0);
 				if (pricingPhrase != null) {
 					inAppPurchase.setPrice(pricingPhrase.getFormattedPrice());
@@ -574,7 +574,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							ctx.getSettings().LIVE_UPDATES_EXPIRED_FIRST_DLG_SHOWN_TIME.set(0L);
 							ctx.getSettings().LIVE_UPDATES_EXPIRED_SECOND_DLG_SHOWN_TIME.set(0L);
 						}
-						if (basePlanOffers != null) {
+						if (!Algorithms.isEmpty(basePlanOffers)) {
 							ProductDetails.PricingPhase introPricingPhase = basePlanOffers.get(0).getPricingPhases().getPricingPhaseList().get(0);
 							if (introPricingPhase != null) {
 								String introductoryPrice = introPricingPhase.getFormattedPrice();

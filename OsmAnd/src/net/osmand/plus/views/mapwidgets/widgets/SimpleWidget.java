@@ -29,7 +29,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
-import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState.WidgetSize;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.util.Algorithms;
 
 public abstract class SimpleWidget extends TextInfoWidget {
@@ -144,7 +144,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	@NonNull
-	public OsmandPreference<SimpleWidgetState.WidgetSize> getWidgetSizePref() {
+	public OsmandPreference<WidgetSize> getWidgetSizePref() {
 		return widgetState.getWidgetSizePref();
 	}
 
