@@ -4694,7 +4694,7 @@
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
     <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
     <string name="rotate_map_manual_opt">Ручно окретање</string>
-    <string name="coordinates_widget_map_center">Координате: средиште карте</string>
+    <string name="coordinates_widget_map_center">Координате: средиште мапе</string>
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
 \nТапније на карту са 2 прста ради прегледа размака између кликнутих тачака</string>
     <string name="coordinates_widget_current_location">Координате: тренутни положај</string>
