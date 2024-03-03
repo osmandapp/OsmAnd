@@ -3401,7 +3401,7 @@
     <string name="announcement_time_intervals">Intervale de timp și distanță</string>
     <string name="announcement_time_descr">Momentul anunțării diferitelor mesaje vocale depinde de tipul de mesaj, de viteza de navigație curentă și de viteza de navigație implicită.</string>
     <string name="announcement_time_title">Momentul anunțului</string>
-    <string name="start_recording">Pornește înregistrarea</string>
+    <string name="start_recording">Începeți înregistrarea</string>
     <string name="show_track_on_map">Arată traseul pe hartă</string>
     <string name="routing_engine_vehicle_type_wheelchair">Scaun cu rotile</string>
     <string name="routing_engine_vehicle_type_hiking">Drumeție</string>
@@ -4507,7 +4507,7 @@
     <string name="android_api">API Android</string>
     <string name="shared_string_shape">Formă</string>
     <string name="edit_category">Editează categoria</string>
-    <string name="default_appearance_desc">Culoarea, iconul și forma implicite se vor aplica punctelor favorite din grup.</string>
+    <string name="default_appearance_desc">Culoarea, pictograma și forma implicite se vor aplica punctelor favorite adăugate în grup.</string>
     <string name="shared_string_complete">complet</string>
     <string name="stop_download">Oprește descărcarea</string>
     <string name="stop_and_exit">Oprește și ieși</string>
@@ -4519,7 +4519,7 @@
     <string name="number_of_tiles">Număr de segmente de hartă</string>
     <string name="rendering_attr_showFitnessTrails_description">Arată trasee de fitness</string>
     <string name="rendering_attr_showFitnessTrails_name">Trasee de fitness</string>
-    <string name="apply_to_existing_favorites_descr">Aplicați schimbările punctelor favorite existente în grup sau doar celor noi\?</string>
+    <string name="apply_to_existing_favorites_descr">Aplicați modificările la punctele favorite existente ale grupului sau numai la cele noi?</string>
     <string name="apply_to_existing_points_descr">Aplicați schimbările punctelor existente în grup sau doar celor noi\?</string>
     <string name="apply_only_to_new_favorites">Aplică doar favoritelor noi</string>
     <string name="change_default_appearance">Schimbare aspect implicit</string>
@@ -4539,8 +4539,8 @@
     <string name="simulation_preview_mode_title">Mod previzualizare rapidă</string>
     <string name="simulation_real_mode_title">Simulare realistă</string>
     <string name="simulation_constant_mode_desc">Simularea se va efectua cu o viteză constantă selectată.</string>
-    <string name="apply_to_existing">Aplică celor existente</string>
-    <string name="apply_only_to_new_points">Aplică doar punctelor noi</string>
+    <string name="apply_to_existing">Se aplică la cele existente</string>
+    <string name="apply_only_to_new_points">Se aplică numai la punctele noi</string>
     <string name="rendering_attr_horse_scale_common_name">Obișnuit</string>
     <string name="rendering_attr_horse_scale_demanding_name">Solicitant</string>
     <string name="rendering_attr_horse_scale_difficult_name">Dificil</string>
@@ -5029,7 +5029,7 @@
     <string name="show_all_tracks">Afișați toate traseele</string>
     <string name="shared_string_on_map">Pe hartă</string>
     <string name="empty_tracks_description">Puteți importa, crea sau înregistra trasee folosind OsmAnd.</string>
-    <string name="change_appearance">Modifică aspect</string>
+    <string name="change_appearance">Modificarea aspectului</string>
     <string name="shared_string_kilograms">kilograme</string>
     <string name="shared_string_yards">yarzi</string>
     <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul a %1$s trasee\?</string>
