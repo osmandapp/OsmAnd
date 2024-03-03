@@ -3401,7 +3401,7 @@
     <string name="announcement_time_intervals">Intervale de timp și distanță</string>
     <string name="announcement_time_descr">Momentul anunțării diferitelor mesaje vocale depinde de tipul de mesaj, de viteza de navigație curentă și de viteza de navigație implicită.</string>
     <string name="announcement_time_title">Momentul anunțului</string>
-    <string name="start_recording">Începeți înregistrarea</string>
+    <string name="start_recording">Pornește înregistrarea</string>
     <string name="show_track_on_map">Arată traseul pe hartă</string>
     <string name="routing_engine_vehicle_type_wheelchair">Scaun cu rotile</string>
     <string name="routing_engine_vehicle_type_hiking">Drumeție</string>
@@ -4539,8 +4539,8 @@
     <string name="simulation_preview_mode_title">Mod previzualizare rapidă</string>
     <string name="simulation_real_mode_title">Simulare realistă</string>
     <string name="simulation_constant_mode_desc">Simularea se va efectua cu o viteză constantă selectată.</string>
-    <string name="apply_to_existing">Se aplică la cele existente</string>
-    <string name="apply_only_to_new_points">Se aplică numai la punctele noi</string>
+    <string name="apply_to_existing">Aplică celor existente</string>
+    <string name="apply_only_to_new_points">Aplică doar punctelor noi</string>
     <string name="rendering_attr_horse_scale_common_name">Obișnuit</string>
     <string name="rendering_attr_horse_scale_demanding_name">Solicitant</string>
     <string name="rendering_attr_horse_scale_difficult_name">Dificil</string>
@@ -5029,7 +5029,7 @@
     <string name="show_all_tracks">Afișați toate traseele</string>
     <string name="shared_string_on_map">Pe hartă</string>
     <string name="empty_tracks_description">Puteți importa, crea sau înregistra trasee folosind OsmAnd.</string>
-    <string name="change_appearance">Modificarea aspectului</string>
+    <string name="change_appearance">Modifică aspect</string>
     <string name="shared_string_kilograms">kilograme</string>
     <string name="shared_string_yards">yarzi</string>
     <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul a %1$s trasee\?</string>
