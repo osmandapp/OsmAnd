@@ -1481,8 +1481,8 @@
     <string name="store_tracks_in_monthly_directories_descrp">Сачувај снимљене путање у подфасциклама према месецима снимања (нпр. 2018-01).</string>
     <string name="shared_string_reset">Врати на подразумевано</string>
     <string name="shared_string_reload">Поново учитај</string>
-    <string name="mapillary_menu_descr_tile_cache">Поново учитај плочице ради постављања података дана.</string>
-    <string name="mapillary_menu_title_tile_cache">Оставка плочица</string>
+    <string name="mapillary_menu_descr_tile_cache">Поново учитај плочице да видиш најсвежије податке.</string>
+    <string name="mapillary_menu_title_tile_cache">Захват плочица</string>
     <string name="wrong_user_name">Погрешно корисничко име</string>
     <string name="shared_string_to">Ка</string>
     <string name="mapillary_menu_date_from">Од</string>
@@ -1813,7 +1813,7 @@
     <string name="amenity_type_emergency">Хитна помоћ</string>
     <string name="amenity_type_entertainment">Забава</string>
     <string name="amenity_type_finance">Новац</string>
-    <string name="amenity_type_geocache">Захват положаја</string>
+    <string name="amenity_type_geocache">Геокеш</string>
     <string name="amenity_type_healthcare">Здравство</string>
     <string name="amenity_type_historic">Историјско место</string>
     <string name="amenity_type_landuse">Земља у употреби</string>
@@ -2170,7 +2170,7 @@
     <string name="missing_write_external_storage_permission">ОсмАнд нема дозволе да користи меморијску картицу</string>
     <string name="last_update">Последње освежавање: %s</string>
     <string name="update_time">Освежи време</string>
-    <string name="updates_size">Освежи величину</string>
+    <string name="updates_size">Величина освежења</string>
     <string name="hourly">На сваких сат времена</string>
     <string name="daily">Дневно</string>
     <string name="morning">Јутром</string>
@@ -2324,7 +2324,7 @@
     <string name="select_travel_book">Одаберите књигу путовања</string>
     <string name="shared_string_travel_book">Књига путовања</string>
     <string name="online_webpage_warning">Страна је доступна само на мрежи. Отворити је у читачу веба\?</string>
-    <string name="images_cache">Складишна слика</string>
+    <string name="images_cache">Захват слика</string>
     <string name="delete_search_history">Обриши историјат претрага</string>
     <string name="download_images">Преузимај слике</string>
     <string name="download_maps_travel">Туристички водичи</string>
@@ -3496,7 +3496,7 @@
     <string name="expire_time_descr">Захваћене сличице ће бити поново преузете после задатог броја минута. Оставите празно да се никад не освежавају сличице из овог извора.
 \n
 \nЈедан дан је 1440 минута.
-\nНедељу дана је 10 080 минута.
+\nНедељу дана је 10080 минута.
 \nМесец дана је 43829 минута.</string>
     <string name="tiles_storage_descr">Одаберите како да складиштите преузете сличице.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Извозите или увозите брзе радње применљивим налозима.</string>
@@ -5110,7 +5110,7 @@
     <string name="external_device_details_information">Податак</string>
     <string name="external_device_details_received_data">Примљени подаци</string>
     <string name="shutter_sound">Звук окидача</string>
-    <string name="offline_cache">Ванмрежни захват</string>
+    <string name="offline_cache">Очисти ванмрежни захват</string>
     <string name="shared_string_all_world">Цели свет</string>
     <string name="external_device_characteristic_diastolic">Дијастолички</string>
     <string name="external_device_characteristic_systolic">Систолички</string>
