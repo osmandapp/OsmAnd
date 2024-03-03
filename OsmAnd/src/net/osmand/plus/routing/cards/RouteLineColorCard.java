@@ -56,8 +56,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private static final String IS_NIGHT_MAP_THEME = "is_night_map_theme";
 
-	private static final int DAY_TITLE_ID = R.string.day;
-	private static final int NIGHT_TITLE_ID = R.string.night;
+	private static final int DAY_TITLE_ID = R.string.daynight_mode_day;
+	private static final int NIGHT_TITLE_ID = R.string.daynight_mode_night;
 
 	private final Fragment targetFragment;
 	private final HeaderUiAdapter headerUiAdapter;
