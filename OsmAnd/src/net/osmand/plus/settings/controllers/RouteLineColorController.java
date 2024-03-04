@@ -46,16 +46,15 @@ public class RouteLineColorController extends ColoringCardController implements 
 	private static final int PALETTE_MODE_ID_NIGHT = 1;
 
 	private final PreviewRouteLineInfo routeLinePreview;
-	private final boolean initialNightMode;
 
 	private ModedColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
+	private boolean initialNightMode;
 
 	private RouteLineColorController(@NonNull OsmandApplication app,
 	                                 @NonNull PreviewRouteLineInfo routeLinePreview) {
 		super(app, routeLinePreview.getRouteColoringStyle());
 		this.routeLinePreview = routeLinePreview;
-		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
 	}
 
 	@NonNull
@@ -204,6 +203,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 	}
 
 	public void onResume() {
+		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
 		setMapThemeProvider(this);
 	}
 
