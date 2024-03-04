@@ -9,7 +9,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
@@ -39,8 +39,11 @@ public class EditorColorController extends ColorsPaletteController implements ID
 		DialogManager dialogManager = app.getDialogManager();
 		EditorColorController controller = (EditorColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			List<PaletteColor> predefinedColors = Arrays.asList(DefaultColors.values());
-			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.TRACK_COLORS_PALETTE);
+			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
+			bundle.predefinedColors = Arrays.asList(DefaultColors.values());
+			bundle.palettePreference = settings.POINT_COLORS_PALETTE;
+			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
+			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			controller = new EditorColorController(app, colorsCollection, selectedColor);
 			dialogManager.register(PROCESS_ID, controller);
 		}

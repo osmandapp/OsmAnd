@@ -22,6 +22,7 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
@@ -73,15 +74,12 @@ public class TrackColorController extends ColoringCardController implements IDia
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			List<PaletteColor> predefinedColors = new ArrayList<>();
-			for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {
-				String id = item.getValue();
-				int colorInt = item.getColor();
-				String name = item.getLocalizedValue();
-				predefinedColors.add(new PredefinedPaletteColor(id, colorInt, name));
-			}
 			OsmandSettings settings = app.getSettings();
-			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.TRACK_COLORS_PALETTE);
+			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
+			bundle.predefinedColors = getPredefinedColors(app);
+			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
+			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
+			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor());
 		}
 		colorsPaletteController.setPaletteListener(getControllerListener());
@@ -128,6 +126,18 @@ public class TrackColorController extends ColoringCardController implements IDia
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(PROCESS_ID);
 		}
+	}
+
+	@NonNull
+	public static List<PaletteColor> getPredefinedColors(@NonNull OsmandApplication app) {
+		List<PaletteColor> predefinedColors = new ArrayList<>();
+		for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {
+			String id = item.getValue();
+			int colorInt = item.getColor();
+			String name = item.getLocalizedValue();
+			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, name));
+		}
+		return predefinedColors;
 	}
 
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {

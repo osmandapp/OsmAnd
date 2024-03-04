@@ -92,7 +92,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 	private void updateAllColorsButton() {
 		View buttonAllColors = view.findViewById(R.id.button_all_colors);
 		int controlsAccentColor = controller.getControlsAccentColor(nightMode);
-		UiUtilities.setupSelectableBackground(activity, buttonAllColors, controlsAccentColor);
+		UiUtilities.setupListItemBackground(activity, buttonAllColors, controlsAccentColor);
 	}
 
 	private void askScrollToTargetColorPosition(@Nullable PaletteColor targetPaletteColor,

@@ -9,6 +9,7 @@ import net.osmand.plus.card.color.palette.main.PaletteColorsComparator;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -27,19 +28,14 @@ public class ColorsCollection {
 
 	private final ApplicationMode appMode;
 	private final List<PaletteColor> paletteColors;
-	private final CommonPreference<String> preference;
+	private final CommonPreference<String> palettePreference;
+	private final CommonPreference<String> customColorsPreference;
 
-	public ColorsCollection(@Nullable List<PaletteColor> predefinedColors,
-	                        @NonNull CommonPreference<String> paletteColorsPreference) {
-		this(null, predefinedColors, paletteColorsPreference);
-	}
-
-	public ColorsCollection(@Nullable ApplicationMode appMode,
-	                        @Nullable List<PaletteColor> predefinedColors,
-	                        @NonNull CommonPreference<String> paletteColorsPreference) {
-		this.appMode = appMode;
-		this.preference = paletteColorsPreference;
-		this.paletteColors = loadPaletteColors(predefinedColors);
+	public ColorsCollection(@NonNull ColorsCollectionBundle bundle) {
+		this.appMode = bundle.appMode;
+		this.palettePreference = bundle.palettePreference;
+		this.customColorsPreference = bundle.customColorsPreference;
+		this.paletteColors = loadPaletteColors(bundle);
 	}
 
 	@Nullable
@@ -113,39 +109,64 @@ public class ColorsCollection {
 	}
 
 	@NonNull
+	private List<PaletteColor> loadPaletteColors(@NonNull ColorsCollectionBundle bundle) {
+		List<PaletteColor> paletteColors = bundle.paletteColors;
+		if (paletteColors == null) {
+			paletteColors = loadPaletteColors(bundle.predefinedColors);
+		}
+		return paletteColors;
+	}
+
+	@NonNull
 	private List<PaletteColor> loadPaletteColors(@Nullable List<PaletteColor> predefinedColors) {
+		List<PaletteColor> paletteColors;
+		if (customColorsPreference != null) {
+			List<PaletteColor> savedPredefinedColors = readPaletteColors(palettePreference);
+			List<PaletteColor> savedCustomColors = readPaletteColors(customColorsPreference);
+			paletteColors = CollectionUtils.asOneList(savedPredefinedColors, savedCustomColors);
+		} else {
+			paletteColors = readPaletteColors(palettePreference);
+		}
+		predefinedColors = predefinedColors != null ? new ArrayList<>(predefinedColors) : new ArrayList<>();
+		return mergePredefinedAndSavedColors(predefinedColors, paletteColors);
+	}
+
+	@NonNull
+	private List<PaletteColor> readPaletteColors(@NonNull CommonPreference<String> preference) {
 		String jsonAsString;
 		if (appMode == null) {
 			jsonAsString = preference.get();
 		} else {
 			jsonAsString = preference.getModeValue(appMode);
 		}
-		List<PaletteColor> allColors = predefinedColors != null
-				? new ArrayList<>(predefinedColors) : new ArrayList<>();
+		List<PaletteColor> paletteColors = new ArrayList<>();
 		if (!Algorithms.isEmpty(jsonAsString)) {
 			try {
-				List<PaletteColor> savedColors = readFromJson(new JSONObject(jsonAsString));
-				return mergePredefinedAndSavedColors(allColors, savedColors);
+				paletteColors = readFromJson(new JSONObject(jsonAsString));
 			} catch (JSONException e) {
 				LOG.debug("Error while reading palette colors from JSON ", e);
 			}
 		}
-		return allColors;
+		return paletteColors;
 	}
 
-	public void syncSettings() {
-		JSONObject json = new JSONObject();
-		try {
-			writeToJson(json, paletteColors);
-			String jsonAsString = json.toString();
-			if (appMode == null) {
-				preference.set(jsonAsString);
-			} else {
-				preference.setModeValue(appMode, jsonAsString);
-			}
-		} catch (JSONException e) {
-			LOG.debug("Error while writing palette colors into JSON ", e);
+	@NonNull
+	private static List<PaletteColor> readFromJson(@NonNull JSONObject json) throws JSONException {
+		if (!json.has("colors")) {
+			return new ArrayList<>();
 		}
+		List<PaletteColor> res = new ArrayList<>();
+		JSONArray jsonArray = json.getJSONArray("colors");
+		for (int i = 0; i < jsonArray.length(); i++) {
+			try {
+				res.add(new PaletteColor(jsonArray.getJSONObject(i)));
+			} catch (JSONException e) {
+				LOG.debug("Error while reading a palette color from JSON ", e);
+			} catch (IllegalArgumentException e) {
+				LOG.error("Error while trying to parse color from its HEX value ", e);
+			}
+		}
+		return res;
 	}
 
 	@NonNull
@@ -168,23 +189,40 @@ public class ColorsCollection {
 		return allColors;
 	}
 
-	@NonNull
-	private static List<PaletteColor> readFromJson(@NonNull JSONObject json) throws JSONException {
-		if (!json.has("colors")) {
-			return new ArrayList<>();
-		}
-		List<PaletteColor> res = new ArrayList<>();
-		JSONArray jsonArray = json.getJSONArray("colors");
-		for (int i = 0; i < jsonArray.length(); i++) {
-			try {
-				res.add(new PaletteColor(jsonArray.getJSONObject(i)));
-			} catch (JSONException e) {
-				LOG.debug("Error while reading a palette color from JSON ", e);
-			} catch (IllegalArgumentException e) {
-				LOG.error("Error while trying to parse color from its HEX value ", e);
+	public void syncSettings() {
+		if (customColorsPreference != null) {
+			// Save custom and predefined colors separately
+			List<PaletteColor> predefinedColors = new ArrayList<>();
+			List<PaletteColor> customColors = new ArrayList<>();
+			for (PaletteColor paletteColor : paletteColors) {
+				if (paletteColor.isDefault()) {
+					predefinedColors.add(paletteColor);
+				} else {
+					customColors.add(paletteColor);
+				}
 			}
+			syncSettings(palettePreference, predefinedColors);
+			syncSettings(customColorsPreference, customColors);
+		} else {
+			// Save custom and predefined colors into the same preference
+			syncSettings(palettePreference, paletteColors);
 		}
-		return res;
+	}
+
+	public void syncSettings(@NonNull CommonPreference<String> preference,
+	                         List<PaletteColor> paletteColors) {
+		JSONObject json = new JSONObject();
+		try {
+			writeToJson(json, paletteColors);
+			String jsonAsString = json.toString();
+			if (appMode == null) {
+				preference.set(jsonAsString);
+			} else {
+				preference.setModeValue(appMode, jsonAsString);
+			}
+		} catch (JSONException e) {
+			LOG.debug("Error while writing palette colors into JSON ", e);
+		}
 	}
 
 	private static void writeToJson(@NonNull JSONObject jsonObject,

@@ -1,9 +1,12 @@
 package net.osmand.plus.settings.controllers;
 
+import static net.osmand.plus.utils.ColorUtilities.getColor;
+
+import android.content.Context;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -12,6 +15,8 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
@@ -19,6 +24,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProfileColorController extends ColorsPaletteController implements IDialogController {
@@ -51,6 +57,18 @@ public class ProfileColorController extends ColorsPaletteController implements I
 		}
 	}
 
+
+	@NonNull
+	public static List<PaletteColor> getPredefinedColors(@NonNull Context context, boolean nightMode) {
+		List<PaletteColor> predefinedColors = new ArrayList<>();
+		for (ProfileIconColors predefinedColor : ProfileIconColors.values()) {
+			String id = predefinedColor.name().toLowerCase();
+			int colorInt = getColor(context, predefinedColor.getColor(nightMode));
+			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, predefinedColor.getName()));
+		}
+		return predefinedColors;
+	}
+
 	@NonNull
 	public static ProfileColorController getInstance(
 			@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
@@ -61,15 +79,11 @@ public class ProfileColorController extends ColorsPaletteController implements I
 		DialogManager dialogManager = app.getDialogManager();
 		ProfileColorController controller = (ProfileColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			List<PaletteColor> predefinedColors = new ArrayList<>();
-			for (ProfileIconColors predefinedColor : ProfileIconColors.values()) {
-				String id = predefinedColor.name().toLowerCase();
-				int colorInt = ContextCompat.getColor(app, predefinedColor.getColor(nightMode));
-				predefinedColors.add(new PredefinedPaletteColor(id, colorInt, predefinedColor.getName()));
-			}
-			ColorsCollection colorsCollection = new ColorsCollection(
-					appMode, predefinedColors, settings.PROFILE_COLORS_PALETTE
-			);
+			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
+			bundle.appMode = appMode;
+			bundle.predefinedColors = getPredefinedColors(app, nightMode);
+			bundle.palettePreference = settings.PROFILE_COLORS_PALETTE;
+			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			controller = new ProfileColorController(app, colorsCollection, selectedColor);
 			dialogManager.register(PROCESS_ID, controller);
 		}
