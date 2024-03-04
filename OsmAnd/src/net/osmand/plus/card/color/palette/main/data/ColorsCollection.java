@@ -209,8 +209,8 @@ public class ColorsCollection {
 		}
 	}
 
-	public void syncSettings(@NonNull CommonPreference<String> preference,
-	                         List<PaletteColor> paletteColors) {
+	private void syncSettings(@NonNull CommonPreference<String> preference,
+	                          @NonNull List<PaletteColor> paletteColors) {
 		JSONObject json = new JSONObject();
 		try {
 			writeToJson(json, paletteColors);

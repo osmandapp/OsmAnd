@@ -48,6 +48,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
@@ -136,8 +137,10 @@ public class AppVersionUpgradeOnInit {
 	// 4608 - 4.6-08 (Expand the list of export types by dividing the general offline maps' type into subtypes)
 	public static final int VERSION_4_6_08 = 4608;
 	public static final int VERSION_4_6_09 = 4609;
+	// 4701 - 4.7-01 (Migrate from simple color ints to using of wrapper with additional information PaletteColor)
+	public static final int VERSION_4_7_01 = 4701;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_09;
+	public static final int LAST_APP_VERSION = VERSION_4_7_01;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -253,6 +256,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_6_09) {
 					migrateQuickActionButtons();
+				}
+				if (prevAppVersion < VERSION_4_7_01) {
+					ColorsMigrationAlgorithm.doMigration(app);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
