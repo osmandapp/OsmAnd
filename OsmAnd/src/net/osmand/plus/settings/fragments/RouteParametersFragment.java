@@ -136,7 +136,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
@@ -240,7 +240,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			straightAngle.setPersistent(false);
 			straightAngle.setKey(settings.ROUTE_STRAIGHT_ANGLE.getId());
 			straightAngle.setTitle(getString(R.string.recalc_angle_dialog_title));
-			straightAngle.setSummary(String.format(getString(R.string.shared_string_angle_param), (int) am.getStrAngle()));
+			straightAngle.setSummary(getString(R.string.shared_string_angle_param, String.valueOf((int) am.getStrAngle())));
 			straightAngle.setLayoutResource(R.layout.preference_with_descr);
 			straightAngle.setIcon(getRoutingPrefIcon(ROUTING_RECALC_DISTANCE));
 			getPreferenceScreen().addPreference(straightAngle);
@@ -954,28 +954,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				return getPersistentPrefIcon(R.drawable.ic_action_reverse_direction);
 			default:
 				return null;
-		}
-	}
-
-	public static class ListParameters {
-
-		public final String[] names;
-		public final Object[] values;
-
-		public ListParameters(String[] names, Object[] values) {
-			this.names = names;
-			this.values = values;
-		}
-
-		public int findIndexOfValue(Object value) {
-			if (value != null && values != null) {
-				for (int i = 0; i < values.length; i++) {
-					if (values[i].equals(value)) {
-						return i;
-					}
-				}
-			}
-			return -1;
 		}
 	}
 }
