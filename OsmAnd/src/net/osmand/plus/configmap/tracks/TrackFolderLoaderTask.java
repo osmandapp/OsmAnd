@@ -65,7 +65,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 		folder.clearData();
 		List<TrackItem> progress = new ArrayList<>();
-		loadGPXFolder(folder, null, progress, smartFolderHelper.areSmartFoldersPresent());
+		loadGPXFolder(folder, null, progress, true);
 		if (!progress.isEmpty()) {
 			publishProgress(progress.toArray(new TrackItem[0]));
 		}
