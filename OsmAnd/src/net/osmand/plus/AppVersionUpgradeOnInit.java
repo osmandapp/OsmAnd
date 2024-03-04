@@ -6,6 +6,10 @@ import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAUL
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
+import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
+import static net.osmand.plus.settings.enums.RoutingType.A_STAR_CLASSIC;
+import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
+import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.COLLAPSED_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.HIDE_PREFIX;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.SETTINGS_SEPARATOR;
@@ -66,6 +70,7 @@ import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
@@ -136,8 +141,9 @@ public class AppVersionUpgradeOnInit {
 	// 4608 - 4.6-08 (Expand the list of export types by dividing the general offline maps' type into subtypes)
 	public static final int VERSION_4_6_08 = 4608;
 	public static final int VERSION_4_6_09 = 4609;
+	public static final int VERSION_4_6_10 = 4610;
 
-	public static final int LAST_APP_VERSION = VERSION_4_6_09;
+	public static final int LAST_APP_VERSION = VERSION_4_6_10;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -253,6 +259,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_6_09) {
 					migrateQuickActionButtons();
+				}
+				if (prevAppVersion < VERSION_4_6_10) {
+					migrateRoutingTypePrefs();
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -827,6 +836,23 @@ public class AppVersionUpgradeOnInit {
 
 			fabMarginPref.setPortraitFabMargin(appMode, portrait.first, portrait.second);
 			fabMarginPref.setLandscapeFabMargin(appMode, landscape.first, landscape.second);
+		}
+	}
+
+	private void migrateRoutingTypePrefs() {
+		OsmandSettings settings = app.getSettings();
+		boolean hhRouting = new BooleanPreference(settings, "use_hh_routing", false).makeGlobal().get();
+		boolean hhRoutingCpp = new BooleanPreference(settings, "hh_routing_cpp", false).makeGlobal().get();
+		CommonPreference<Boolean> disableComplexRouting = new BooleanPreference(settings, "disable_complex_routing", false).makeProfile();
+
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			RoutingType routingType;
+			if (hhRouting) {
+				routingType = hhRoutingCpp ? HH_CPP : HH_JAVA;
+			} else {
+				routingType = disableComplexRouting.getModeValue(mode) ? A_STAR_CLASSIC : A_STAR_2_PHASE;
+			}
+			settings.ROUTING_TYPE.setModeValue(mode, routingType);
 		}
 	}
 }

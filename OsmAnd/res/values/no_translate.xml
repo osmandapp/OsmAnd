@@ -57,6 +57,9 @@
     <string name="items_modified">items modified</string>
     <string name="osmand_unlimited">OsmAnd Unlimited</string>
     <string name="markers">Markers</string>
+    <string name="cpp">C++</string>
+    <string name="routing_type_hh_java">HH x Java</string>
+    <string name="routing_type_hh_cpp">HH x C++</string>
     <string name="oauth2_redirect_uri" translatable="false">https://osmand.net/osmand-oauth-redirect-url</string>
     <string name="oauth2_scope" translatable="false">read_prefs write_api write_gpx write_notes write_redactions</string>
     <string name="osm_oauth2_dev_id" translatable="false">uF18mTh1eRL67xS8wND9Oi7WqKqHcWLQP4ORtAfUwAs</string>
