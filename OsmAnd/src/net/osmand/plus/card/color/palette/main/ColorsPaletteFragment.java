@@ -1,6 +1,7 @@
 package net.osmand.plus.card.color.palette.main;
 
 import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
+import static net.osmand.plus.utils.ColorUtilities.getColor;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -57,7 +58,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		updateNightMode();
 		Activity ctx = requireActivity();
-		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		int themeId = nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar;
 		paletteElements = new ColorsPaletteElements(requireActivity(), nightMode);
 		Dialog dialog = new Dialog(ctx, themeId);
 		Window window = dialog.getWindow();
@@ -65,7 +66,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColorId()));
+			window.setStatusBarColor(getColor(ctx, getStatusBarColorId()));
 		}
 		return dialog;
 	}
