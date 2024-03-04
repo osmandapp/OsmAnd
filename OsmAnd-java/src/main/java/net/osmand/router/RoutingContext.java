@@ -185,16 +185,20 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 	
-	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> targets) {
+	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
 		startX = MapUtils.get31TileNumberX(start.getLongitude());
 		startY = MapUtils.get31TileNumberY(start.getLatitude());
 		targetX = MapUtils.get31TileNumberX(end.getLongitude());
 		targetY = MapUtils.get31TileNumberY(end.getLatitude());
-		if (targets != null && targets.size() > 0) {
-			intermediatesX = new int[targets.size()];
-			intermediatesY = new int[targets.size()];
-			for (int i = 0; i < targets.size(); i++) {
-				LatLon l = targets.get(i);
+		initIntermediates(inters);
+	}
+
+	private void initIntermediates(List<LatLon> inters) {
+		if (inters != null && inters.size() > 0) {
+			intermediatesX = new int[inters.size()];
+			intermediatesY = new int[inters.size()];
+			for (int i = 0; i < inters.size(); i++) {
+				LatLon l = inters.get(i);
 				intermediatesX[i] = MapUtils.get31TileNumberX(l.getLongitude());
 				intermediatesY[i] = MapUtils.get31TileNumberY(l.getLatitude());
 			}
@@ -204,19 +208,18 @@ public class RoutingContext {
 		}
 	}
 
-	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
-		initTargetPoint(end);
-		startX = start.preciseX;
-		startY = start.preciseY;
-		startRoadId = start.road.getId();
-		startSegmentInd = start.getSegmentStart();
-	}
-
-	public void initTargetPoint(RouteSegmentPoint end) {
+	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end, List<LatLon> inters) {
 		targetX = end.preciseX;
 		targetY = end.preciseY;
 		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
+		
+		startX = start.preciseX;
+		startY = start.preciseY;
+		startRoadId = start.road.getId();
+		startSegmentInd = start.getSegmentStart();
+		
+		initIntermediates(inters);
 	}
 	
 	public void unloadAllData() {

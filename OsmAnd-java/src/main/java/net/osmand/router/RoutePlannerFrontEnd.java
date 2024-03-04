@@ -876,8 +876,9 @@ public class RoutePlannerFrontEnd {
 					r = new HHNetworkRouteRes();
 					r.detailed.addAll(Arrays.asList(nr));
 				}
+			} else {
+				r = runJavaHHRoute(ctx, start, targets);
 			}
-			r = runJavaHHRoute(ctx, start, targets);
 			if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
 				res = new RouteResultPreparation().prepareResult(ctx, r.detailed);
 			}
@@ -913,7 +914,7 @@ public class RoutePlannerFrontEnd {
 			if (ctx.previouslyCalculatedRoute == null || intermediatesEmpty) {
 				List<RouteSegmentPoint> points = new ArrayList<>();
 				for (int i = 0; i < targets.size() - 1; i++) {
-					RouteCalcResult lr = searchRouteAndPrepareTurns(ctx, targets.get(i), targets.get(i + 1), points, i, routeDirection);
+					RouteCalcResult lr = searchRouteAndPrepareTurns(ctx, targets.get(i), null, targets.get(i + 1), null, points, i, routeDirection);
 					if (res == null) {
 						res = lr;
 					} else if (lr == null || !lr.isCorrect()) {
@@ -1091,20 +1092,24 @@ public class RoutePlannerFrontEnd {
 		List<RouteSegmentPoint> ls = new ArrayList<>();
 		ls.add(s);
 		ls.add(e);
-		return searchRouteAndPrepareTurns(ctx, s.getPreciseLatLon(), e.getPreciseLatLon(), ls, 0, routeDirection);
+		return searchRouteAndPrepareTurns(ctx, s.getPreciseLatLon(), s, e.getPreciseLatLon(), e, ls, 0, routeDirection);
 	}
 
-	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, LatLon start, LatLon end,
-			List<RouteSegmentPoint> points, int i, PrecalculatedRouteDirection routeDirection)
+	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, LatLon start, RouteSegmentPoint s,
+			LatLon end, RouteSegmentPoint e, List<RouteSegmentPoint> points, int i,
+			PrecalculatedRouteDirection routeDirection)
 			throws IOException, InterruptedException {
 		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
-		RouteSegmentPoint s = null; // null for native
-		RouteSegmentPoint e = null; // null for native
 		if (recalculationEnd != null) {
 			e = recalculationEnd;
 		}
 		if (ctx.nativeLib != null) {
-			ctx.initStartEndPoints(s != null ? s.getPreciseLatLon() : start, e != null ? e.getPreciseLatLon() : end, null);
+			if (s != null && e != null) {
+				ctx.initStartAndTargetPoints(s, e, null);
+			} else { 
+				ctx.initStartEndPoints(start, end, null);
+			}
+			
 		} else {
 			RouteCalcResult err = findSegmentPnt(ctx, start, i, points);
 			if (err != null) {
@@ -1118,7 +1123,7 @@ public class RoutePlannerFrontEnd {
 			} else {
 				e = points.get(i + 1);
 			}
-			ctx.initStartAndTargetPoints(s, e);
+			ctx.initStartAndTargetPoints(s, e, null);
 		}
 		if (routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
