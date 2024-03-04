@@ -91,6 +91,7 @@
 	<asset source="voice/sr/sr_tts.js" destination="voice/sr/sr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sv/sv_tts.js" destination="voice/sv/sv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/sw/sw_tts.js" destination="voice/sw/sw_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/ta-in/ta-in_tts.js" destination="voice/ta-in/ta-in_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/tr/tr_tts.js" destination="voice/tr/tr_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/uk/uk_tts.js" destination="voice/uk/uk_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/zh_tts.js" destination="voice/zh/zh_tts.js" mode="overwriteOnlyIfExists" />
