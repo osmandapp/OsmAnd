@@ -3910,7 +3910,7 @@
     <string name="please_provide_group_name_message">Per favor, anomena el grup.</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="files_with_route_restrictions">Arxius amb restriccions de ruta</string>
-    <string name="location_source">Font de la ubicació</string>
+    <string name="location_source">Sistema d\'ubicació</string>
     <string name="estimated_download_size">Tamany de baixada estimat</string>
     <string name="always_ask_waypoint_appearance_description">Al prémer aquesta acció s’obrirà la pantalla \"Afegir punt de ruta\", en la qual podrà canviar el nom i l’aparença.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualització esquemàtica de les icones en els zooms baixos</string>
@@ -4466,4 +4466,27 @@
     <string name="external_device_details_information">Informació</string>
     <string name="shared_string_nearest">Més proper</string>
     <string name="shared_string_setup">Configuració</string>
+    <string name="speed_limit_warning">Avís de límit de velocitat</string>
+    <string name="shared_string_limit">Límit</string>
+    <string name="when_exceeded">Si es supera</string>
+    <string name="speedometer_description">Mostra la velocitat actual segons indica el GPS</string>
+    <string name="shared_string_speedometer">Velocímetre</string>
+    <string name="custom_map_button_name_present">Aquest botó ja hi és</string>
+    <string name="add_button">Afegeix botó</string>
+    <string name="custom_buttons">Botons personalitzats</string>
+    <string name="default_buttons">Botons predeterminats</string>
+    <string name="sort_subfolders">Ordena les subcarpetes</string>
+    <string name="shared_string_activity">Activitat</string>
+    <string name="shared_string_keywords">Mots clau</string>
+    <string name="shared_string_additional">Altres</string>
+    <string name="dont_ask_anymore">No m\'ho demanis més</string>
+    <string name="rendering_attr_padusDisplayMode_name">Mode de visualització de terrenys públics</string>
+    <string name="sorted_sufolders_toast">Les subcarpetes de “%1$s” estan ordenades per: “%2$s”</string>
+    <string name="battery_optimization_settings">Configuració de l\'optimització de la bateria</string>
+    <string name="rendering_attr_padusDisplayMode_description">Per tipus d\'accés o nom del gestor</string>
+    <string name="rendering_value_access_name">Per tipus d\'accés</string>
+    <string name="rendering_value_managerName_name">Per nom del gestor</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Amaga la delimitació dels terrenys públics</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Amaga la delimitació dels terrenys públics però mostra les àrees</string>
+    <string name="battery_optimization_banner_content">L\'optimització de la bateria que fa Android pot originar que les dades de les traces enregistrades no siguin complertes ni prou acurades.</string>
 </resources>
