@@ -46,6 +46,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 	private static final int PALETTE_MODE_ID_NIGHT = 1;
 
 	private final PreviewRouteLineInfo routeLinePreview;
+	private final boolean initialNightMode;
 
 	private ModedColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
@@ -54,6 +55,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 	                                 @NonNull PreviewRouteLineInfo routeLinePreview) {
 		super(app, routeLinePreview.getRouteColoringStyle());
 		this.routeLinePreview = routeLinePreview;
+		initialNightMode = app.getDaynightHelper().isNightModeForMapControls();
 	}
 
 	@NonNull
@@ -80,8 +82,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 				@NonNull
 				@Override
 				protected PaletteMode getInitialPaletteMode() {
-					boolean useNightMapMode = app.getDaynightHelper().isNightModeForMapControls();
-					return useNightMapMode ? paletteModeNight : paletteModeDay;
+					return initialNightMode ? paletteModeNight : paletteModeDay;
 				}
 
 				@Override
@@ -171,7 +172,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 
 	@Override
 	protected boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle) {
-		// We can use any types of available map data to draw route line
+		// We can use any of available map data types to draw route line
 		return true;
 	}
 
