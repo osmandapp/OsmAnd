@@ -304,7 +304,7 @@
     <string name="download_type_to_filter">필터 종류</string>
     <string name="use_high_res_maps">고해상도 지도 표시</string>
     <string name="use_high_res_maps_descr">고해상도 장치를 위해 고해상도 지도를 사용합니다</string>
-    <string name="unknown_location">위치는 아직 알 수 없음</string>
+    <string name="unknown_location">위치를 아직 알 수 없습니다.</string>
     <string name="context_menu_item_search_transport">대중교통 검색</string>
     <string name="transport_searching_transport">대중교통 검색결과 (도착지 없음):</string>
     <string name="transport_searching_route">대중교통 검색결과 (도착지에 {0}):</string>
@@ -678,7 +678,7 @@
     <string name="driving_region_canada">캐나다</string>
     <string name="driving_region_europe_asia">한국 &amp; 유럽</string>
     <string name="driving_region_uk">영국, 인도, 호주 및 기타</string>
-    <string name="speak_title">발표…</string>
+    <string name="speak_title">안내…</string>
     <string name="speak_descr">거리 이름, 교통 경고(강제 정지, 속도 범프), 속도 카메라 경고, 제한 속도를 알리기 위해  구성합니다</string>
     <string name="speak_street_names">도로명 (TTS)</string>
     <string name="speak_speed_limit">속도 제한</string>
@@ -2866,13 +2866,13 @@
     <string name="show_map_symbols_desc">텍스트, 도로 표지판 등.</string>
     <string name="show_map_symbols">지도 기호 표시</string>
     <string name="available_as_part_of_subscription_plan">%1$s 구독의 일부로 사용할 수 있습니다.</string>
-    <string name="speak_gps_signal_status">GPS 신호 손실 및 복구 발표</string>
+    <string name="speak_gps_signal_status">GPS 신호 손실 및 복구 안내</string>
     <string name="connect_with_straight_line">직선으로 연결</string>
     <string name="shared_string_only_missing">누락 된 항목 만</string>
     <string name="auto_backup_preference_desc">기본적으로 Android는 즐겨찾기, 지도 토큰 및 OsmAnd 설정의 백업을 저장하여 새 기기에서 또는 재설치 후 복원합니다. 이 백업은 25MB로 제한됩니다.
 \nOsmAnd Cloud를 사용할 때 재설치 후 오해가 생길 수 있습니다.</string>
     <string name="av_notes_video_widget_desc">위젯을 탭하면 비디오를 녹화할 수 있습니다.</string>
-    <string name="speak_route_recalculation">경로 재계산 발표</string>
+    <string name="speak_route_recalculation">경로 재탐색 안내</string>
     <string name="release_4_3">• 새롭고 빠른 버전 2 (OpenGL)지도 렌더링 엔진, 2.5D보기
 \n
 \n• 움직이는 동안 위치 변경의 부드러운 애니메이션
