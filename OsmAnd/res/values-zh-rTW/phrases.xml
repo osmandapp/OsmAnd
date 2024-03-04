@@ -4860,4 +4860,6 @@
     <string name="poi_music_venue">音樂場地</string>
     <string name="poi_live_music">現場音樂</string>
     <string name="poi_live_music_yes">是</string>
+    <string name="poi_shop_general">雜貨店</string>
+    <string name="poi_cuisine_fish">魚</string>
 </resources>
