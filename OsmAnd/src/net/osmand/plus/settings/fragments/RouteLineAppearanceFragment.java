@@ -423,12 +423,14 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public void onResume() {
 		super.onResume();
 		setDrawInfoOnRouteLayer(previewRouteLineInfo);
+		getColorCardController().onResume();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		setDrawInfoOnRouteLayer(null);
+		getColorCardController().onPause();
 	}
 
 	private void setDrawInfoOnRouteLayer(@Nullable PreviewRouteLineInfo drawInfo) {

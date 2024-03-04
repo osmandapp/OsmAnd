@@ -59,7 +59,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 	public ModedColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
 			OsmandSettings settings = app.getSettings();
-			List<PaletteColor> predefinedColors = Arrays.asList(DefaultColors.values());
+			List<PaletteColor> predefinedColors = getPredefinedColors();
 			ColorsCollection colorsCollection = new ColorsCollection(predefinedColors, settings.ROUTE_LINE_COLORS_PALETTE);
 			colorsPaletteController = new ModedColorsPaletteController(app, colorsCollection) {
 
@@ -97,7 +97,6 @@ public class RouteLineColorController extends ColoringCardController implements 
 		}
 		colorsPaletteController.setPaletteListener(getControllerListener());
 		colorsPaletteController.setPaletteModeSelectedListener((OnPaletteModeSelectedListener) getControllerListener());
-		setMapThemeProvider(this);
 		return colorsPaletteController;
 	}
 
@@ -198,6 +197,13 @@ public class RouteLineColorController extends ColoringCardController implements 
 			DialogManager manager = app.getDialogManager();
 			manager.unregister(PROCESS_ID);
 		}
+	}
+
+	public void onResume() {
+		setMapThemeProvider(this);
+	}
+
+	public void onPause() {
 		setMapThemeProvider(null);
 	}
 
@@ -206,8 +212,10 @@ public class RouteLineColorController extends ColoringCardController implements 
 		helper.setMapThemeProvider(provider);
 	}
 
-	public interface IRouteLineColorControllerListener
-			extends IColorCardControllerListener, OnPaletteModeSelectedListener { }
+	@NonNull
+	public static List<PaletteColor> getPredefinedColors() {
+		return Arrays.asList(DefaultColors.values());
+	}
 
 	@NonNull
 	public static RouteLineColorController getInstance(@NonNull OsmandApplication app,
@@ -222,4 +230,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 		controller.setListener(listener);
 		return controller;
 	}
+
+	public interface IRouteLineColorControllerListener
+			extends IColorCardControllerListener, OnPaletteModeSelectedListener { }
 }
