@@ -5523,7 +5523,7 @@
     <string name="key_event_category_actions">Acțiuni</string>
     <string name="key_event_action_move_left">Mută la stânga</string>
     <string name="key_event_action_move_up">Mută în sus</string>
-    <string name="download_to_device">Descărcați pe dispozitiv</string>
+    <string name="download_to_device">Descarcă pe dispozitiv</string>
     <string name="key_event_action_move_down">Mută în jos</string>
     <string name="key_event_action_change_map_orientation">Schimbă orientare hartă</string>
     <string name="key_event_action_previous_app_profile">Profil de aplicație anterior</string>
@@ -5539,8 +5539,8 @@
     <string name="not_specified">Nespecificat</string>
     <string name="shared_string_delete_item">Șterge elementul</string>
     <string name="cloud_trash_clear_confirmation">Ștergeți definitiv toate elementele din coșul de gunoi?</string>
-    <string name="restore_from_trash">Restaurați din coșul de gunoi</string>
-    <string name="delete_all_items">Ștergeți toate elementele</string>
+    <string name="restore_from_trash">Restaurare din coșul de gunoi</string>
+    <string name="delete_all_items">Șterge toate elementele</string>
     <string name="trash_is_empty_banner_desc">Fișierele eliminate din OsmAnd Cloud vor fi disponibile aici timp de %1$s zile.</string>
     <string name="shared_string_empty_trash">Golește coșul de gunoi</string>
     <string name="shared_string_delete_immediately">Șterge imediat</string>
