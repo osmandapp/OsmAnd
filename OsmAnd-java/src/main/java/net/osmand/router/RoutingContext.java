@@ -209,16 +209,16 @@ public class RoutingContext {
 	}
 
 	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end, List<LatLon> inters) {
-		targetX = end.preciseX;
-		targetY = end.preciseY;
-		targetRoadId = end.road.getId();
-		targetSegmentInd = end.getSegmentStart();
-		
 		startX = start.preciseX;
 		startY = start.preciseY;
 		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
-		
+
+		targetX = end.preciseX;
+		targetY = end.preciseY;
+		targetRoadId = end.road.getId();
+		targetSegmentInd = end.getSegmentStart();
+
 		initIntermediates(inters);
 	}
 	

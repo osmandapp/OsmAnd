@@ -1109,7 +1109,6 @@ public class RoutePlannerFrontEnd {
 			} else { 
 				ctx.initStartEndPoints(start, end, null);
 			}
-			
 		} else {
 			RouteCalcResult err = findSegmentPnt(ctx, start, i, points);
 			if (err != null) {
