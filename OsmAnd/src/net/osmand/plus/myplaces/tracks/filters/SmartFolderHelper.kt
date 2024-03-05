@@ -200,6 +200,13 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		addTracksToSmartFolders(arrayListOf(item), smartFolderCollection)
 	}
 
+	fun addTrackItemsToSmartFolder(items: List<TrackItem>) {
+		val newSet = allAvailableTrackItems
+		newSet.addAll(items)
+		allAvailableTrackItems = newSet
+		addTracksToSmartFolders(items, smartFolderCollection)
+	}
+
 	private fun addTracksToSmartFolders(items: List<TrackItem>, smartFolders: List<SmartFolder>) {
 		for (item in items) {
 			for (smartFolder in smartFolders) {
