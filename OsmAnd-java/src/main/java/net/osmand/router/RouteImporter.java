@@ -138,7 +138,18 @@ public class RouteImporter {
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object, leftSide);
 			try {
 				segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
-				route.add(segmentResult);
+				boolean addSegment = true;
+				if (object.nameIds != null) {
+					for (int i = 0; i < object.nameIds.length; i++) {
+						if (object.nameIds[i] >= object.region.routeEncodingRules.size()) {
+							addSegment = false;
+							break;
+						}
+					}
+				}
+				if (addSegment) {
+					route.add(segmentResult);
+				}
 			} catch (IllegalStateException e) {
 				log.error(e.getMessage());
 				break;

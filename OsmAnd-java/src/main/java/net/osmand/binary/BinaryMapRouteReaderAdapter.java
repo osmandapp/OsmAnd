@@ -362,11 +362,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 
 		public RouteTypeRule quickGetEncodingRule(int id) {
-			if (routeEncodingRules.size() > id) {
-				return routeEncodingRules.get(id);
-			} else {
-				return null;
-			}
+			return routeEncodingRules.get(id);
 		}
 
 		public void initRouteEncodingRule(int id, String tags, String val) {
