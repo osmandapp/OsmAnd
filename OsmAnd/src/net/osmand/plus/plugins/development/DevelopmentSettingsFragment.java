@@ -62,15 +62,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference safeCategory = findPreference("safe");
 		safeCategory.setIconSpaceReserved(false);
 		setupSafeModePref();
-		setupApproximationSafeModePref();
 
 		Preference routingCategory = findPreference("routing");
 		routingCategory.setIconSpaceReserved(false);
 
 		setupSimulateYourLocationPref();
-		setupUseV1AutoZoom();
-		setupUseHHRoutingPref();
-		setupHHRoutingCppPref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
@@ -110,28 +106,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 			safeMode.setEnabled(false);
 			safeMode.setChecked(true);
 		}
-	}
-
-	private void setupApproximationSafeModePref() {
-		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
-		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
-		safeMode.setIconSpaceReserved(false);
-	}
-
-	private void setupUseHHRoutingPref() {
-		SwitchPreferenceEx preference = findPreference(settings.USE_HH_ROUTING.getId());
-		findPreference(settings.HH_ROUTING_CPP.getId()).setEnabled(preference.isChecked());
-		preference.setIconSpaceReserved(false);
-	}
-
-	private void setupHHRoutingCppPref() {
-		SwitchPreferenceEx preference = findPreference(settings.HH_ROUTING_CPP.getId());
-		preference.setIconSpaceReserved(false);
-	}
-
-	private void setupUseV1AutoZoom() {
-		SwitchPreferenceEx preference = findPreference(settings.USE_V1_AUTO_ZOOM.getId());
-		preference.setIconSpaceReserved(false);
 	}
 
 	private void setupHeightmapRelatedPrefs() {
@@ -367,9 +341,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			restartActivity();
 			return true;
-		} else if (settings.USE_HH_ROUTING.getId().equals(prefId)) {
-			boolean checked = (Boolean) newValue;
-			findPreference(settings.HH_ROUTING_CPP.getId()).setEnabled(checked);
 		}
 		return super.onPreferenceChange(preference, newValue);
 	}

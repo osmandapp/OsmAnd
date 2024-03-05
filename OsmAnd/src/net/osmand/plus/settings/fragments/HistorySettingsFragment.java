@@ -126,7 +126,7 @@ public class HistorySettingsFragment extends BaseSettingsFragment implements OnC
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		String prefId = preference.getKey();
 		if (HISTORY_INFO.equals(prefId)) {
 			TextView title = holder.itemView.findViewById(android.R.id.title);

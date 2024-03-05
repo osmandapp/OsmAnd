@@ -1,6 +1,9 @@
 package net.osmand.plus.routing;
 
 
+import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
+import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
+
 import android.os.Bundle;
 import android.util.Base64;
 
@@ -32,6 +35,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
@@ -756,13 +760,13 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 
 		OsmandSettings settings = params.ctx.getSettings();
-		if (settings.USE_HH_ROUTING.get()) {
+		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
+		if (routingType.isHHRouting()) {
 			router.setDefaultHHRoutingConfig();
-			router.setHHRouteCpp(settings.HH_ROUTING_CPP.get());
+			router.setHHRouteCpp(routingType == HH_CPP);
 		} else {
 			router.setHHRoutingConfig(null);
 		}
-		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		router.setUseNativeApproximation(!settings.APPROX_SAFE_MODE.get());
 
 		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
@@ -810,10 +814,6 @@ public class RouteProvider {
 		params.ctx.getResourceManager().getRenderer().checkInitialized(15, lib, leftX, rightX, bottomY, topY);
 
 		RoutingContext ctx = router.buildRoutingContext(cf, lib, files, RouteCalculationMode.NORMAL);
-
-		RoutingContext complexCtx = null;
-		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR) && !settings.DISABLE_COMPLEX_ROUTING.get()
-				&& precalculated == null;
 		ctx.leftSideNavigation = params.leftSide;
 		ctx.calculationProgress = params.calculationProgress;
 		ctx.publicTransport = params.inPublicTransportMode;
@@ -826,9 +826,10 @@ public class RouteProvider {
 				ctx.previouslyCalculatedRoute = originalRoute.subList(currentRoute, originalRoute.size());
 			}
 		}
-		if (complex && router.getRecalculationEnd(ctx) != null) {
-			complex = false;
-		}
+		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)
+				&& routingType == A_STAR_2_PHASE && precalculated == null && router.getRecalculationEnd(ctx) == null;
+
+		RoutingContext complexCtx = null;
 		if (complex) {
 			complexCtx = router.buildRoutingContext(cf, lib, files, RouteCalculationMode.COMPLEX);
 			complexCtx.calculationProgress = params.calculationProgress;
