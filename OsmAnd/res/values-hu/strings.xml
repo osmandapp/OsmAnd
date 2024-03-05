@@ -5631,4 +5631,12 @@
     <string name="rendering_value_managerName_name">Kezelő neve szerint</string>
     <string name="rendering_attr_padusHideBoundaries_name">Közterülethatárok elrejtése</string>
     <string name="rendering_attr_padusHideBoundaries_description">Közterülethatárok elrejtése, de a területek meghagyása</string>
+    <string name="routing_type_a_star_classic">A* klasszikus</string>
+    <string name="auto_zoom_discrete">Lépcsőzetes</string>
+    <string name="auto_zoom">Automatikus nagyítás</string>
+    <string name="gpx_approximation">GPX közelítés</string>
+    <string name="routing_type">Úttervezési típus</string>
+    <string name="auto_zoom_smooth">Fokozatmentes</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fázisú</string>
+    <string name="java_safe">Java (biztonságos)</string>
 </resources>
