@@ -5637,4 +5637,12 @@
     <string name="rendering_attr_padusHideBoundaries_description">Grenzen von öffentlichem Land ausblenden, aber Gebiete belassen</string>
     <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
+    <string name="auto_zoom_smooth">Sanft</string>
+    <string name="auto_zoom_discrete">Diskret</string>
+    <string name="auto_zoom">Autozoom</string>
+    <string name="java_safe">Java (Sicher)</string>
+    <string name="gpx_approximation">GPX Annäherung</string>
+    <string name="routing_type">Routing-Typ</string>
+    <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
+    <string name="routing_type_a_star_classic">A* classic</string>
 </resources>
