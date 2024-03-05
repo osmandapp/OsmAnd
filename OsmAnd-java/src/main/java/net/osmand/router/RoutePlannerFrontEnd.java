@@ -655,7 +655,7 @@ public class RoutePlannerFrontEnd {
 		strPnt.routeToTarget.add(new RouteSegmentResult(rdo, 0, rdo.getPointsLength() - 1));
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		try {
-			preparation.prepareResult(gctx.ctx, strPnt.routeToTarget);
+			preparation.prepareResult(gctx.ctx, strPnt.routeToTarget); // line
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
@@ -927,6 +927,7 @@ public class RoutePlannerFrontEnd {
 				res = searchRouteWithInterSmartRecalc(ctx, targets, routeDirection);
 			}
 		}
+		new RouteResultPreparation().prepareResult(ctx, res.detailed);
 		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
 		if (res != null) {
 			RouteResultPreparation.printResults(ctx, start, end, res.detailed);
@@ -1131,15 +1132,16 @@ public class RoutePlannerFrontEnd {
 		if (ctx.nativeLib != null) {
 			RouteSegmentResult[] res = runNativeRouting(ctx, null);
 			result = new ArrayList<>(Arrays.asList(res));
+			addPrecalculatedToResult(recalculationEnd, result);
 		} else {
 			refreshProgressDistance(ctx);
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, s, e, null);
 			result = RouteResultPreparation.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
+			addPrecalculatedToResult(recalculationEnd, result);
+			makeStartEndPointsPrecise(result, s != null ? s.getPreciseLatLon() : start,
+					e != null && recalculationEnd == null ? e.getPreciseLatLon() : end);
 		}
-		addPrecalculatedToResult(recalculationEnd, result);
-		makeStartEndPointsPrecise(result, s != null ? s.getPreciseLatLon() : start,
-				e != null && recalculationEnd == null ? e.getPreciseLatLon() : end);
-		return new RouteResultPreparation().prepareResult(ctx, result);
+		return new RouteCalcResult(result); // prepareResult() should be called finally (not between interpoints)
 	}
 
 	public RouteSegmentPoint getRecalculationEnd(final RoutingContext ctx) {
