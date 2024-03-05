@@ -869,7 +869,7 @@ public class RoutePlannerFrontEnd {
 		if (hhRoutingConfig != null) {
 			ctx.calculationProgress.nextIteration();
 			HHNetworkRouteRes r = null;
-			if (ctx.nativeLib != null && hhRoutingType != HHRoutingType.JAVA) {
+			if (hhRoutingType == HHRoutingType.CPP && ctx.nativeLib != null) {
 				ctx.initStartEndPoints(start, end, intermediates);
 				RouteSegmentResult[] nr = runNativeRouting(ctx, hhRoutingConfig);
 				if (nr.length > 0) {
