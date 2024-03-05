@@ -19,7 +19,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.avoidroads.AvoidRoadsHelper;
+import net.osmand.plus.avoidroads.DirectionPointsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -34,7 +34,7 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 	private static final String ENABLED_FILES_IDS = "enabled_files_ids";
 
 	private OsmandApplication app;
-	private AvoidRoadsHelper avoidRoadsHelper;
+	private DirectionPointsHelper pointsHelper;
 
 	private final List<String> enabledFiles = new ArrayList<>();
 
@@ -42,13 +42,13 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		avoidRoadsHelper = app.getAvoidRoadsHelper();
+		pointsHelper = app.getAvoidSpecificRoads().getPointsHelper();
 
 		List<String> selectedFileNames;
 		if (savedInstanceState != null) {
 			selectedFileNames = savedInstanceState.getStringArrayList(ENABLED_FILES_IDS);
 		} else {
-			selectedFileNames = avoidRoadsHelper.getSelectedFilesForMode(getAppMode());
+			selectedFileNames = pointsHelper.getSelectedFilesForMode(getAppMode());
 		}
 		if (!Algorithms.isEmpty(selectedFileNames)) {
 			enabledFiles.addAll(selectedFileNames);
@@ -62,7 +62,7 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 	}
 
 	private void createAvoidRoadsFilesItems() {
-		List<File> avoidRoadsFiles = avoidRoadsHelper.collectAvoidRoadsFiles();
+		List<File> avoidRoadsFiles = pointsHelper.collectAvoidRoadsFiles();
 		if (!Algorithms.isEmpty(avoidRoadsFiles)) {
 			items.add(new SubtitleDividerItem(app));
 			items.add(new TitleItem(getString(R.string.files_with_route_restrictions)));
@@ -94,7 +94,7 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 						})
 						.create();
 
-				avoidRoadsHelper.getDirectionPointsForFileAsync(file, result -> {
+				pointsHelper.getDirectionPointsForFileAsync(file, result -> {
 					int size = result.queryInBox(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE), new ArrayList<>()).size();
 
 					String roads = getString(R.string.roads);
@@ -118,7 +118,7 @@ public class AvoidRoadsPreferencesBottomSheet extends MultiSelectPreferencesBott
 	@Override
 	protected void onRightBottomButtonClick() {
 		super.onRightBottomButtonClick();
-		avoidRoadsHelper.setSelectedFilesForMode(getAppMode(), enabledFiles);
+		pointsHelper.setSelectedFilesForMode(getAppMode(), enabledFiles);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager,

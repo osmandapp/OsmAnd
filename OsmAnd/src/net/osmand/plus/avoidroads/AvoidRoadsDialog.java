@@ -35,13 +35,13 @@ public class AvoidRoadsDialog {
 	public static void showDialog(@NonNull MapActivity activity, @Nullable ApplicationMode mode) {
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			OsmandApplication app = activity.getMyApplication();
-			AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
+			AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setTitle(R.string.impassable_road);
 
-			List<AvoidRoadInfo> roadInfos = new ArrayList<>(avoidSpecificRoads.getImpassableRoads());
+			List<AvoidRoadInfo> roadInfos = new ArrayList<>(avoidRoadsHelper.getImpassableRoads());
 			if (roadInfos.isEmpty()) {
 				builder.setMessage(R.string.avoid_roads_msg);
 			} else {
@@ -54,7 +54,7 @@ public class AvoidRoadsDialog {
 					dialog.dismiss();
 				});
 			}
-			builder.setPositiveButton(R.string.shared_string_select_on_map, (dialogInterface, i) -> avoidSpecificRoads.selectFromMap(activity, mode));
+			builder.setPositiveButton(R.string.shared_string_select_on_map, (dialogInterface, i) -> avoidRoadsHelper.selectFromMap(activity, mode));
 			builder.setNegativeButton(R.string.shared_string_close, null);
 			builder.show();
 		}
@@ -63,7 +63,7 @@ public class AvoidRoadsDialog {
 	@NonNull
 	private static ArrayAdapter<AvoidRoadInfo> createAdapter(@NonNull MapActivity activity, @NonNull List<AvoidRoadInfo> roadInfos, boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
-		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 
 		LatLon mapLocation = activity.getMapLocation();
 		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
@@ -92,9 +92,9 @@ public class AvoidRoadsDialog {
 					removeButton.setImageDrawable(getIcon(R.drawable.ic_action_remove_dark));
 					removeButton.setOnClickListener(v -> {
 						remove(item);
-						avoidSpecificRoads.removeImpassableRoad(item);
+						avoidRoadsHelper.removeImpassableRoad(item);
 						notifyDataSetChanged();
-						avoidSpecificRoads.recalculateRoute(item.getAppModeKey());
+						avoidRoadsHelper.recalculateRoute(item.getAppModeKey());
 					});
 					AndroidUiHelper.updateVisibility(removeButton, true);
 					AndroidUiHelper.updateVisibility(view.findViewById(R.id.all_points), false);
