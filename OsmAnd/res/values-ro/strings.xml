@@ -5217,7 +5217,7 @@
     <string name="tracks_empty_folder">Folder gol</string>
     <string name="track_not_recorded">Neînregistrat</string>
     <string name="shared_string_new_track">Traseu nou</string>
-    <string name="delete_folder">Ștergeți folderul</string>
+    <string name="delete_folder">Șterge folderul</string>
     <string name="show_all_tracks_on_the_map">Arată toate traseele pe hartă</string>
     <string name="rssi_widget_desc">Arată nivelul RSSI al dispozitivului extern.</string>
     <string name="map_widget_rssi">RSSI</string>
@@ -5602,7 +5602,7 @@
     <string name="sorted_sufolders_toast">Subfolderele din \"%1$s\" sunt sortate după: \"%2$s\"</string>
     <string name="shared_string_additional">Adițional</string>
     <string name="sort_subfolders">Sortarea subfolderelor</string>
-    <string name="battery_optimization_settings">Setări de optimizare a bateriei</string>
+    <string name="battery_optimization_settings">Setări de optimizare ale bateriei</string>
     <string name="shared_string_activity">Activitate</string>
     <string name="shared_string_keywords">Cuvinte cheie</string>
     <string name="shared_string_license">Licență</string>
@@ -5641,6 +5641,6 @@
     <string name="auto_zoom">Zoom automat</string>
     <string name="routing_type_a_star_classic">A* clasic</string>
     <string name="gpx_approximation">Aproximare GPX</string>
-    <string name="routing_type">Tipul de rută</string>
+    <string name="routing_type">Tip de rutare</string>
     <string name="routing_type_a_star_2_phase">A* bi-fazică</string>
 </resources>
