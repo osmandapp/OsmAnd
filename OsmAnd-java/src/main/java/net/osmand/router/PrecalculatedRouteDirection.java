@@ -246,7 +246,14 @@ public class PrecalculatedRouteDirection {
 	private long calc(int x31, int y31) {
 		return ((long) x31) << 32l + ((long)y31);
 	}
-	
+
+	public void setFollowNext(boolean followNext) {
+		this.followNext = followNext;
+	}
+
+	public boolean isFollowNext() {
+		return followNext;
+	}
 
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
