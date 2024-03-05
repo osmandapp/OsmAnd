@@ -102,7 +102,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		trackFolder.setTrackItems(trackItems);
 		trackFolder.resetCashedData();
 		if (updateSmartFolder) {
-			smartFolderHelper.aaddTrackItemsToSmartFolder(trackItems);
+			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
 	}
 
