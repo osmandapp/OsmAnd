@@ -197,7 +197,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		val newSet = allAvailableTrackItems
 		newSet.add(item)
 		allAvailableTrackItems = newSet
-//		allAvailableTrackItems.add(item)
 		addTracksToSmartFolders(arrayListOf(item), smartFolderCollection)
 	}
 
@@ -242,7 +241,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun getAllAvailableTrackItems(): HashSet<TrackItem> {
-//		return HashSet(allAvailableTrackItems)
 		return allAvailableTrackItems
 	}
 
