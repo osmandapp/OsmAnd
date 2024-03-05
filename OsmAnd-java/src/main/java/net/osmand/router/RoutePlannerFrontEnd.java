@@ -1090,10 +1090,10 @@ public class RoutePlannerFrontEnd {
 
 	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, RouteSegmentPoint s,
 			RouteSegmentPoint e, PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
-		List<RouteSegmentPoint> ls = new ArrayList<>();
-		ls.add(s);
-		ls.add(e);
-		return searchRouteAndPrepareTurns(ctx, s.getPreciseLatLon(), s, e.getPreciseLatLon(), e, ls, 0, routeDirection);
+		List<RouteSegmentPoint> points = new ArrayList<>();
+		points.add(s);
+		points.add(e);
+		return searchRouteAndPrepareTurns(ctx, s.getPreciseLatLon(), s, e.getPreciseLatLon(), e, points, 0, routeDirection);
 	}
 
 	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, LatLon start, RouteSegmentPoint s,
