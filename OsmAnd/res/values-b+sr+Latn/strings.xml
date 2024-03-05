@@ -5639,4 +5639,12 @@
     <string name="rendering_value_managerName_name">Po imenu upravitelja</string>
     <string name="rendering_attr_padusHideBoundaries_name">Sakriti granice javnog zemljišta</string>
     <string name="rendering_attr_padusHideBoundaries_description">Sakriti granice javnog zemljišta ali oblasti ostaju</string>
+    <string name="routing_type_a_star_classic">A* klasičan</string>
+    <string name="auto_zoom_smooth">Glatko</string>
+    <string name="auto_zoom_discrete">Diskretno</string>
+    <string name="java_safe">Java (Sigurno)</string>
+    <string name="gpx_approximation">GPX aproksimacija</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fazni</string>
+    <string name="auto_zoom">Autozum</string>
+    <string name="routing_type">Tip rutiranja</string>
 </resources>
