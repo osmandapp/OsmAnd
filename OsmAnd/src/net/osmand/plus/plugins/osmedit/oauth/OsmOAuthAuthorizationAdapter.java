@@ -23,6 +23,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.helpers.OsmBugsRemoteUtil;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
@@ -78,8 +79,9 @@ public class OsmOAuthAuthorizationAdapter {
 
 	public void restoreToken() {
 		String token = plugin.OSM_USER_ACCESS_TOKEN.get();
+		String savedSecret = plugin.OSM_USER_ACCESS_TOKEN_SECRET.get();
 		String tokenSecret = client.getApiSecret();
-		if (!(token.isEmpty() || tokenSecret.isEmpty())) {
+		if (!(token.isEmpty() || tokenSecret.isEmpty()) && Algorithms.stringsEqual(savedSecret, tokenSecret)) {
 			client.setAccessToken(new OAuth2AccessToken(token, tokenSecret));
 		} else {
 			client.setAccessToken(null);
@@ -93,6 +95,7 @@ public class OsmOAuthAuthorizationAdapter {
 	private void saveToken() {
 		OAuth2AccessToken accessToken = client.getAccessToken();
 		plugin.OSM_USER_ACCESS_TOKEN.set(accessToken.getAccessToken());
+		plugin.OSM_USER_ACCESS_TOKEN_SECRET.set(client.getApiSecret());
 	}
 
     private void loadWebView(ViewGroup root, boolean nightMode, String url) {
