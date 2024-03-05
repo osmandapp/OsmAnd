@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.settings.backend.ExportCategory;
@@ -34,8 +34,8 @@ class AvoidRoadsExportType extends AbstractExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
-		return new ArrayList<>(avoidSpecificRoads.getImpassableRoads());
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
+		return new ArrayList<>(avoidRoadsHelper.getImpassableRoads());
 	}
 
 	@NonNull

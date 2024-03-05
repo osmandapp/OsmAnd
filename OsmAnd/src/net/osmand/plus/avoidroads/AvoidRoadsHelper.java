@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class AvoidSpecificRoads {
+public class AvoidRoadsHelper {
 
 	private static final float MAX_AVOID_ROUTE_SEARCH_RADIUS_DP = 32f;
 
@@ -37,7 +37,7 @@ public class AvoidSpecificRoads {
 	private final DirectionPointsHelper pointsHelper;
 	private final List<AvoidRoadInfo> impassableRoads = new ArrayList<>();
 
-	public AvoidSpecificRoads(@NonNull OsmandApplication app) {
+	public AvoidRoadsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.pointsHelper = new DirectionPointsHelper(app);
 		loadImpassableRoads();
@@ -195,7 +195,7 @@ public class AvoidSpecificRoads {
 	                                  AvoidRoadInfo currentObject,
 	                                  LatLon newLoc,
 	                                  boolean showDialog,
-	                                  AvoidSpecificRoadsCallback callback) {
+	                                  AvoidRoadsCallback callback) {
 		Location ll = new Location("");
 		ll.setLatitude(newLoc.getLatitude());
 		ll.setLongitude(newLoc.getLongitude());
@@ -276,13 +276,6 @@ public class AvoidSpecificRoads {
 			}
 		}
 		return null;
-	}
-
-	public interface AvoidSpecificRoadsCallback {
-
-		void onAddImpassableRoad(boolean success, AvoidRoadInfo avoidRoadInfo);
-
-		boolean isCancelled();
 	}
 
 	@NonNull

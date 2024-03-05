@@ -24,7 +24,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.DirectionPointsHelper;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
@@ -1271,8 +1271,8 @@ public class RouteProvider {
 		lats[index] = params.end.getLatitude();
 		lons[index] = params.end.getLongitude();
 
-		AvoidSpecificRoads avoidSpecificRoads = params.ctx.getAvoidSpecificRoads();
-		Set<LatLon> impassableRoads = avoidSpecificRoads.getImpassableRoadsCoordinates();
+		AvoidRoadsHelper avoidRoadsHelper = params.ctx.getAvoidSpecificRoads();
+		Set<LatLon> impassableRoads = avoidRoadsHelper.getImpassableRoadsCoordinates();
 		double[] nogoLats = new double[impassableRoads.size()];
 		double[] nogoLons = new double[impassableRoads.size()];
 		double[] nogoRadi = new double[impassableRoads.size()];

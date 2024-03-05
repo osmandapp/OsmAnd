@@ -41,7 +41,7 @@ import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.screens.NavigationScreen;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -175,7 +175,7 @@ public class OsmandApplication extends MultiDexApplication {
 	WaypointHelper waypointHelper;
 	RoutingOptionsHelper routingOptionsHelper;
 	DownloadIndexesThread downloadIndexesThread;
-	AvoidSpecificRoads avoidSpecificRoads;
+	AvoidRoadsHelper avoidRoadsHelper;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
 	GeocodingLookupService geocodingLookupService;
@@ -321,8 +321,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return taskManager;
 	}
 
-	public AvoidSpecificRoads getAvoidSpecificRoads() {
-		return avoidSpecificRoads;
+	public AvoidRoadsHelper getAvoidSpecificRoads() {
+		return avoidRoadsHelper;
 	}
 
 	public OsmAndLocationProvider getLocationProvider() {

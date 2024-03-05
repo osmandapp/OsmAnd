@@ -191,10 +191,10 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private void populateImpassableRoadsObjects() {
 		Context context = requireContext();
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
-		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 
 		int counter = 0;
-		for (AvoidRoadInfo roadInfo : avoidSpecificRoads.getImpassableRoads()) {
+		for (AvoidRoadInfo roadInfo : avoidRoadsHelper.getImpassableRoads()) {
 			if (removedImpassableRoads.contains(roadInfo)) {
 				continue;
 			}
@@ -335,9 +335,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 		}
 
-		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 		for (AvoidRoadInfo avoidRoadInfo : removedImpassableRoads) {
-			avoidSpecificRoads.removeImpassableRoad(avoidRoadInfo);
+			avoidRoadsHelper.removeImpassableRoad(avoidRoadInfo);
 		}
 
 		app.getRoutingHelper().onSettingsChanged(true);
