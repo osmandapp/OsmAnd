@@ -5217,7 +5217,7 @@
     <string name="tracks_empty_folder">Folder gol</string>
     <string name="track_not_recorded">Neînregistrat</string>
     <string name="shared_string_new_track">Traseu nou</string>
-    <string name="delete_folder">Șterge folderul</string>
+    <string name="delete_folder">Ștergeți folderul</string>
     <string name="show_all_tracks_on_the_map">Arată toate traseele pe hartă</string>
     <string name="rssi_widget_desc">Arată nivelul RSSI al dispozitivului extern.</string>
     <string name="map_widget_rssi">RSSI</string>
@@ -5636,4 +5636,11 @@
     <string name="rendering_attr_padusHideBoundaries_description">Ascundeți limitele terenurilor publice, dar lăsați zone</string>
     <string name="rendering_value_access_name">După tipul de acces</string>
     <string name="rendering_value_managerName_name">După numele managerului</string>
+    <string name="auto_zoom_smooth">Neted</string>
+    <string name="auto_zoom_discrete">Discret</string>
+    <string name="auto_zoom">Zoom automat</string>
+    <string name="routing_type_a_star_classic">A* clasic</string>
+    <string name="gpx_approximation">Aproximare GPX</string>
+    <string name="routing_type">Tipul de rută</string>
+    <string name="routing_type_a_star_2_phase">A* bi-fazică</string>
 </resources>
