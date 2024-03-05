@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="rendering_attr_padusDisplayMode_name">Public lands display mode</string>
+    <string name="rendering_attr_padusDisplayMode_description">By access type or manager name</string>
+    <string name="rendering_value_access_name">By access type</string>
+    <string name="rendering_value_managerName_name">By manager name</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Hide public land boundaries</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Hide public land boundaries but leave areas</string>
     <string name="speed_limit_warning">Speed limit warning</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">When exceeded</string>
@@ -20,7 +26,7 @@
     <string name="add_button">Add button</string>
     <string name="custom_buttons">Custom buttons</string>
     <string name="default_buttons">Default buttons</string>
-    <string name="sorted_sufolders_toast">Subfolders in “%1$s” is sorted by: “%2$s”</string>
+    <string name="sorted_sufolders_toast">Subfolders in “%1$s” are sorted by: “%2$s”</string>
     <string name="sort_subfolders">Sort subfolders</string>
     <string name="shared_string_activity">Activity</string>
     <string name="shared_string_keywords">Keywords</string>

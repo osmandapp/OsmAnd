@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_palaeontological_site">Xacemento paleontolóxico</string>
     <string name="poi_bakery">Panadaría</string>
@@ -127,7 +127,6 @@
     <string name="poi_prosecutor">Fiscal</string>
     <string name="poi_migration">Emigración</string>
     <string name="poi_tax_inspection">Inspección de Facenda</string>
-    
     <string name="poi_customs">Alfándega</string>
     <string name="poi_city">Cidade</string>
     <string name="poi_town">Vila</string>
@@ -400,7 +399,6 @@
     <string name="poi_coffee">Tenda de café</string>
     <string name="poi_pasta">Tenda de pasta</string>
     <string name="poi_camera">Cámaras e lentes</string>
-    
     <string name="poi_music">Tenda de música</string>
     <string name="poi_optician">Óptica</string>
     <string name="poi_tyres">Tenda de rodas</string>
@@ -769,7 +767,6 @@
     <string name="poi_baby_goods">Produtos de bebés</string>
     <string name="poi_garden_furniture">Mobiliario do xardín</string>
     <string name="poi_glaziery">Tenda de vidro</string>
-    
     <string name="poi_ticket">Portelo</string>
     <string name="poi_window_blind">Tenda de persianas</string>
     <string name="poi_car">Venda de automóbiles</string>
@@ -1849,7 +1846,6 @@
     <string name="poi_weir">Vertedoiro</string>
     <string name="poi_breakwater">Dique</string>
     <string name="poi_groyne">Espigo</string>
-    
     <string name="poi_recycling_scrap_metal">Ferralla</string>
     <string name="poi_recycling_hydrargyrum">Mercurio</string>
     <string name="poi_recycling_waste_oil">Aceite usado</string>
@@ -3506,7 +3502,6 @@
     <string name="poi_aquaculture_shrimp">Acuicultura: camarón</string>
     <string name="poi_aquaculture_fish">Acuicultura: peixes</string>
     <string name="poi_aquaculture_mussels">Acuicultura: mexillóns</string>
-    
     <string name="poi_min_age">Idade mínima</string>
     <string name="poi_organic_no">Non</string>
     <string name="poi_organic_only">Soamente</string>

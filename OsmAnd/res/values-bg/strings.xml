@@ -3903,4 +3903,36 @@
     <string name="shared_string_temperature">Температура</string>
     <string name="help_article_personal_storage_name">Хранилище</string>
     <string name="shared_string_setup">Настройки</string>
+    <string name="shared_string_limit">Ограничение</string>
+    <string name="when_exceeded">При превишаване</string>
+    <string name="speedometer_description">Показва текущата скорост според GPS</string>
+    <string name="shared_string_speedometer">Скоростомер</string>
+    <string name="custom_map_button_name_present">Такъв бутон вече съществува</string>
+    <string name="add_button">Добавяне на бутон</string>
+    <string name="custom_buttons">Потребителски бутони</string>
+    <string name="default_buttons">Подразбирани бутони</string>
+    <string name="shared_string_keywords">Ключови думи</string>
+    <string name="downloaded_maps_collect_descr">Помага ни да разберем популярността на картите по държави и региони.</string>
+    <string name="visited_screens_collect_descr">Помага ни да разберем кои възможности на OsmAnd са популярни.</string>
+    <string name="settings_privacy_and_security_desc">Изберете какви данни да споделяте</string>
+    <string name="shared_string_no_thank_you">Не, благодаря</string>
+    <string name="collected_data_descr">Определете каква информация да споделяте с OsmAnd.</string>
+    <string name="sorted_sufolders_toast">Папките в „%1$s“ са сортирани по: „%2$s“</string>
+    <string name="shared_string_activity">Активност</string>
+    <string name="sort_subfolders">Сортиране на подпапки</string>
+    <string name="shared_string_additional">Допълнителни</string>
+    <string name="settings_privacy_and_security">Поверителност и защита</string>
+    <string name="privacy_and_security_change_descr">Докоснете „Разрешаване“ ако сте съгласни с нашата %1$s</string>
+    <string name="shared_string_privacy_policy">Политика за поверителност</string>
+    <string name="help_us_make_osmand_better">Помогнете ни да направим OsmAnd по-добър</string>
+    <string name="choose_data_to_share">Изберете вида на информацията, която сте склонни да споделите:</string>
+    <string name="downloaded_maps">Изтеглени карти</string>
+    <string name="visited_screens">Посетени екрани</string>
+    <string name="collected_data">Събрана информация</string>
+    <string name="shared_string_allow">Разрешаване</string>
+    <string name="profile_name_hint">Име на профила</string>
+    <string name="make_osmand_better_descr">Разрешете на OsmAnd да събира и обработва анонимни данни за използването на приложението. Не събираме и не съхраняваме информация за местоположението или разглежданите от вас места на картата.
+\n
+\nМожете да промените избора си в „Настройки“ → „Поверителност и защита“.</string>
+    <string name="speed_limit_warning">Предупреждение за ограничения на скоростта</string>
 </resources>

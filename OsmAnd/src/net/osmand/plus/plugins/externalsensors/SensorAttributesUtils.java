@@ -148,7 +148,7 @@ public class SensorAttributesUtils {
 
 		boolean speedInTrack = analysis.hasSpeedInTrack();
 		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));
-		YAxis yAxis = ChartUtils.getYAxis(chart, textColor, useRightAxis);
+		YAxis yAxis = ChartUtils.getAndEnableYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
 		List<Entry> values = ChartUtils.getPointAttributeValues(graphType.getDataKey(), analysis.pointAttributes, axisType, divX, mulY, divY, calcWithoutGaps);

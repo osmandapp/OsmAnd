@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
@@ -31,14 +31,13 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper;
 import net.osmand.plus.routepreparationmenu.EmissionHelper.MotorType;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
@@ -109,11 +108,11 @@ public class SimpleRouteCard extends MapBaseCard {
 	}
 
 	private void setupChart() {
-		LineChart chart = view.findViewById(R.id.chart);
+		ElevationChart chart = view.findViewById(R.id.chart);
 		GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 		if (analysis.hasElevationData()) {
-			ChartUtils.setupGPXChart(chart, 10f, 4f, false);
+			ChartUtils.setupElevationChart(chart, 10f, 4f, false);
 
 			LineData data = lineData;
 			if (data == null) {

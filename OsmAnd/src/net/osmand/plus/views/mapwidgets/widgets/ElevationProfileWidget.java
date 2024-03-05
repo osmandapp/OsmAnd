@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.DataSet;
@@ -70,7 +71,7 @@ public class ElevationProfileWidget extends MapWidget {
 	private View uphillView;
 	private View downhillView;
 	private View gradeView;
-	private LineChart chart;
+	private ElevationChart chart;
 
 	private GpxDisplayItem gpxItem;
 	private TrkSegment segment;
@@ -233,7 +234,7 @@ public class ElevationProfileWidget extends MapWidget {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		int profileColor = appMode.getProfileColor(isNightMode());
 		Drawable markerIcon = iconsCache.getPaintedIcon(R.drawable.ic_action_location_color, profileColor);
-		ChartUtils.setupGPXChart(chart, 24f, 16f, true, markerIcon);
+		ChartUtils.setupElevationChart(chart, 24f, 16f, true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
 		BaseCommonChartAdapter chartAdapter = new BaseCommonChartAdapter(app, chart, true);

@@ -1,26 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<dimen name="first_usage_title_margin">400dp</dimen>
-
-	<dimen name="map_widget_icon">36dp</dimen>
-	<dimen name="map_widget_height">48dp</dimen>
-	<dimen name="map_widget_image">120dp</dimen>
-	<dimen name="map_widget_text_size">35sp</dimen>
-	<dimen name="map_widget_text_size_small">23sp</dimen>
-	<dimen name="map_minwidth_widget">160dp</dimen>
-	<dimen name="map_widget_icon_margin">3dp</dimen>
-
-	<dimen name="map_button_text_size">23sp</dimen>
-	<dimen name="map_button_size">78dp</dimen>
-	<dimen name="map_button_shadow_height">120dp</dimen>
-	<dimen name="map_button_shadow_margin">6dp</dimen>
-	<dimen name="map_button_shadow_width">84dp</dimen>
-	<dimen name="map_button_spacing">17dp</dimen>
-	<dimen name="map_button_spacing_land">9dp</dimen>
-	<dimen name="map_button_margin">9dp</dimen>
-	<dimen name="map_button_inset_shadow">3dp</dimen>
-	<dimen name="map_button_inset">3dp</dimen>
-	<dimen name="map_button_rect_rad">3dp</dimen>
-	<dimen name="map_small_button_size">66dp</dimen>
-	<dimen name="map_small_button_margin">9dp</dimen>
 </resources>
