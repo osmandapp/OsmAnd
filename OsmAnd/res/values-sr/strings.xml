@@ -3882,12 +3882,12 @@
     <string name="activity_type_riding_name">Јахање</string>
     <string name="activity_type_racing_name">Тркање</string>
     <string name="activity_type_mountainbike_name">Планински бицикл</string>
-    <string name="activity_type_cycling_name">Бицикл</string>
+    <string name="activity_type_cycling_name">Бициклизам</string>
     <string name="activity_type_hiking_name">Планинарење</string>
     <string name="activity_type_running_name">Трчање</string>
     <string name="activity_type_walking_name">Пешачење</string>
     <string name="activity_type_motorbike_name">Мотоцикл</string>
-    <string name="activity_type_car_name">Аутомобил</string>
+    <string name="activity_type_car_name">Ауто</string>
     <string name="restart">Поново покрени</string>
     <string name="shared_strings_all_regions">Све области</string>
     <string name="delete_number_files_question">Обриши %1$d датотека\?</string>
@@ -5631,4 +5631,12 @@
     <string name="rendering_attr_padusHideBoundaries_name">Сакриј границе јавних површина</string>
     <string name="rendering_value_managerName_name">По имену менаџера</string>
     <string name="rendering_attr_padusHideBoundaries_description">Сакривање граница јавних површина али области остају</string>
+    <string name="routing_type_a_star_classic">A* класично</string>
+    <string name="auto_zoom_smooth">Гладко</string>
+    <string name="auto_zoom_discrete">Дискретно</string>
+    <string name="auto_zoom">Аутозум</string>
+    <string name="gpx_approximation">ГПС апроксимирано</string>
+    <string name="routing_type">Тип рутирања</string>
+    <string name="routing_type_a_star_2_phase">A* 2-фаза</string>
+    <string name="java_safe">Јава (Сигурно)</string>
 </resources>
