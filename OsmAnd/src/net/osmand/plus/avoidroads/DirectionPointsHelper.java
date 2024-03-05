@@ -26,14 +26,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AvoidRoadsHelper {
+public class DirectionPointsHelper {
 
-	private static final Log log = PlatformUtil.getLog(AvoidRoadsHelper.class);
+	private static final Log log = PlatformUtil.getLog(DirectionPointsHelper.class);
 
 	private final OsmandApplication app;
 	private final ListStringPreference preference;
 
-	public AvoidRoadsHelper(@NonNull OsmandApplication app) {
+	public DirectionPointsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 
 		preference = app.getSettings().registerStringListPreference("avoid_roads_files", null, ",");

@@ -23,7 +23,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.avoidroads.AvoidRoadsHelper;
+import net.osmand.plus.avoidroads.DirectionPointsHelper;
 import net.osmand.plus.avoidroads.AvoidSpecificRoads;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -887,8 +887,8 @@ public class RouteProvider {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
 		OsmandApplication app = settings.getContext();
-		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidRoadsHelper();
-		config.setDirectionPoints(avoidRoadsHelper.getDirectionPoints(params.mode));
+		DirectionPointsHelper helper = app.getAvoidSpecificRoads().getPointsHelper();
+		config.setDirectionPoints(helper.getDirectionPoints(params.mode));
 
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();

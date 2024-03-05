@@ -25,7 +25,7 @@ import java.util.Iterator;
 
 public class DirectionPointsTask extends AsyncTask<Void, Void, QuadTree<Node>> {
 
-	private static final Log log = PlatformUtil.getLog(AvoidRoadsHelper.class);
+	private static final Log log = PlatformUtil.getLog(DirectionPointsHelper.class);
 
 	private final File file;
 	private final CallbackWithObject<QuadTree<Node>> callback;

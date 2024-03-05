@@ -60,7 +60,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private static final String AVOID_ROADS_APP_MODE_KEY = "avoid_roads_app_mode";
 
 	private OsmandApplication app;
-	private AvoidRoadsHelper avoidRoadsHelper;
+	private DirectionPointsHelper pointsHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 
 	private HashMap<String, Boolean> routingParametersMap;
@@ -84,7 +84,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		avoidRoadsHelper = app.getAvoidRoadsHelper();
+		pointsHelper = app.getAvoidSpecificRoads().getPointsHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 
 		ApplicationMode mode = appMode != null ? appMode : app.getSettings().getApplicationMode();
@@ -105,7 +105,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (savedInstanceState != null) {
 			selectedFileNames = savedInstanceState.getStringArrayList(ENABLED_FILES_IDS);
 		} else {
-			selectedFileNames = avoidRoadsHelper.getSelectedFilesForMode(mode);
+			selectedFileNames = pointsHelper.getSelectedFilesForMode(mode);
 		}
 		if (!Algorithms.isEmpty(selectedFileNames)) {
 			enabledFiles.addAll(selectedFileNames);
@@ -244,7 +244,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsFiles() {
-		List<File> avoidRoadsFiles = avoidRoadsHelper.collectAvoidRoadsFiles();
+		List<File> avoidRoadsFiles = pointsHelper.collectAvoidRoadsFiles();
 		if (!Algorithms.isEmpty(avoidRoadsFiles)) {
 			items.add(new SubtitleDividerItem(app));
 			items.add(new TitleItem(getString(R.string.files_with_route_restrictions)));
@@ -276,7 +276,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 						})
 						.create();
 
-				avoidRoadsHelper.getDirectionPointsForFileAsync(file, result -> {
+				pointsHelper.getDirectionPointsForFileAsync(file, result -> {
 					int size = result.queryInBox(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE), new ArrayList<>()).size();
 
 					String roads = getString(R.string.roads);
@@ -345,7 +345,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
-		avoidRoadsHelper.setSelectedFilesForMode(mode, enabledFiles);
+		pointsHelper.setSelectedFilesForMode(mode, enabledFiles);
 
 		dismiss();
 	}

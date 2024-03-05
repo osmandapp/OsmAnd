@@ -34,11 +34,18 @@ public class AvoidSpecificRoads {
 	private static final float MAX_AVOID_ROUTE_SEARCH_RADIUS_DP = 32f;
 
 	private final OsmandApplication app;
+	private final DirectionPointsHelper pointsHelper;
 	private final List<AvoidRoadInfo> impassableRoads = new ArrayList<>();
 
 	public AvoidSpecificRoads(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.pointsHelper = new DirectionPointsHelper(app);
 		loadImpassableRoads();
+	}
+
+	@NonNull
+	public DirectionPointsHelper getPointsHelper() {
+		return pointsHelper;
 	}
 
 	public long getLastModifiedTime() {
