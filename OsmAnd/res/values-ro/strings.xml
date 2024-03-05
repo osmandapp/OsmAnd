@@ -5248,14 +5248,14 @@
     <string name="delete_account_warning">Ștergeți contul %1$s?</string>
     <string name="shared_string_deleting">Se șterge</string>
     <string name="deleting_complete">Ștergere finalizată</string>
-    <string name="delete_account">Șterge contul</string>
+    <string name="delete_account">Ștergeți contul</string>
     <string name="backup_error_delete_account_email_match">E-mail-ul nu se potrivește cu numele de utilizator folosit la conectare</string>
     <string name="verify_account">Verificați-vă contul</string>
     <string name="osmand_cloud_deleted_account_descr">Contul și toate datele au fost șterse din OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Acesta nu vă va anula abonamentul OsmAnd Pro.</string>
     <string name="verify_account_deletion_descr">Trebuie să vă verificăm contul înainte de a-l șterge.
 \n
-\nIntroduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
+\nVă rugăm să introduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
     <string name="free_favorites_backup_description">Înregistrați-vă în OsmAnd Cloud pentru a obține backup gratuit pentru favorite și setări.</string>
     <string name="get_osmand_cloud">Obține OsmAnd Cloud</string>
     <string name="free_account">Cont gratuit</string>
