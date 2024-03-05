@@ -91,9 +91,6 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				TrackItem item = new TrackItem(file);
 				item.setDataItem(getDataItem(item, file));
 				trackItems.add(item);
-				if (updateSmartFolder) {
-					smartFolderHelper.addTrackItemToSmartFolder(item);
-				}
 				progress.add(item);
 				if (progress.size() > 7) {
 					publishProgress(progress.toArray(new TrackItem[0]));
@@ -104,6 +101,9 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		trackFolder.setSubFolders(subFolders);
 		trackFolder.setTrackItems(trackItems);
 		trackFolder.resetCashedData();
+		if (updateSmartFolder) {
+			smartFolderHelper.aaddTrackItemsToSmartFolder(trackItems);
+		}
 	}
 
 	@Nullable
