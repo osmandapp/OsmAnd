@@ -1707,7 +1707,7 @@
     <string name="shared_string_marker">Marcaj</string>
     <string name="empty_state_osm_edits">Creați sau modificați obiecte OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Creați sau modificați puncre de interes OpenStreetMap, deschideți sau comentați la note OSM și contribuiți cu fișiere GPX înregistrate.</string>
-    <string name="shared_string_deleted">Șters</string>
+    <string name="shared_string_deleted">Eliminat</string>
     <string name="shared_string_edited">Editat</string>
     <string name="shared_string_added">Adăugat</string>
     <string name="marker_activated">Marcaj %s activat.</string>
@@ -3036,7 +3036,7 @@
 \n • Actualizările OsmAnd Live au fost mutate în \"Descărcări &gt; Actualizări\"
 \n
 \n</string>
-    <string name="duration_moment_ago">acum o clipă</string>
+    <string name="duration_moment_ago">cu un moment în urmă</string>
     <string name="logout_from_osmand_cloud">Deconectați-vă de la OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Vă deconectați\?
 \nVa trebui să vă conectați din nou pentru a face backup sau a restaura date.</string>

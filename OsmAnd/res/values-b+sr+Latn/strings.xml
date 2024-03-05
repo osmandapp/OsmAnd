@@ -197,7 +197,7 @@
     <string name="download_tab_local">Preuzeto</string>
     <string name="no_internet_connection">Preuzimanje je nemoguće, proveri vezu sa internetom.</string>
     <string name="shared_string_dismiss">Otkaži</string>
-    <string name="everything_up_to_date">Svi fajlovi su sveže</string>
+    <string name="everything_up_to_date">Svi fajlovi su ažurirani</string>
     <string name="use_opengl_render">Koristi OpenGL za prikaz</string>
     <string name="use_opengl_render_descr">Koristi hardversko ubrzanje OpenGL-a za prikaz (može da koristi više baterije, a može i da ne radi na nekim uređajima).</string>
     <string name="map_update">Dostupna su ažuriranja %1$s mapa</string>
