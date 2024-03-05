@@ -23,13 +23,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SimpleWidgetState;
-import net.osmand.plus.settings.enums.WidgetSize;
 import net.osmand.util.Algorithms;
 
 public abstract class SimpleWidget extends TextInfoWidget {
@@ -117,6 +117,17 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		}
 	}
 
+	public int getWidgetMinHeight() {
+		switch (widgetState.getWidgetSizePref().get()) {
+			case SMALL:
+				return (int)app.getResources().getDimension(R.dimen.simple_widget_small_height);
+			case LARGE:
+				return (int)app.getResources().getDimension(R.dimen.simple_widget_large_height);
+			default:
+				return (int)app.getResources().getDimension(R.dimen.simple_widget_medium_height);
+		}
+	}
+
 	public void setVerticalWidget(@NonNull WidgetsPanel panel) {
 		verticalWidget = panel.isPanelVertical();
 	}
@@ -193,6 +204,9 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		updateVisibility(visible);
 		if (typeAllowed && (!shouldHideTopWidgets || emptyValueTextView)) {
 			updateSimpleWidgetInfo(drawSettings);
+		}
+		if (verticalWidget) {
+			app.getOsmandMap().getMapLayers().getMapInfoLayer().updateRow(this);
 		}
 	}
 
