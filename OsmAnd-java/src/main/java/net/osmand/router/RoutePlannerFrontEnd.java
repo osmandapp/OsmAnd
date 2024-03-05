@@ -910,7 +910,7 @@ public class RoutePlannerFrontEnd {
 			if (!useSmartRouteRecalculation && intermediatesEmpty) {
 				ctx.previouslyCalculatedRoute = null;
 			}
-			targets.add(0, start);
+			targets.add(0, start); // insert as 1st
 			if (ctx.previouslyCalculatedRoute == null || intermediatesEmpty) {
 				List<RouteSegmentPoint> points = new ArrayList<>();
 				for (int i = 0; i < targets.size() - 1; i++) {
@@ -1130,7 +1130,7 @@ public class RoutePlannerFrontEnd {
 		List<RouteSegmentResult> result;
 		if (ctx.nativeLib != null) {
 			RouteSegmentResult[] res = runNativeRouting(ctx, null);
-			result = Arrays.asList(res);
+			result = new ArrayList<>(Arrays.asList(res));
 		} else {
 			refreshProgressDistance(ctx);
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, s, e, null);
