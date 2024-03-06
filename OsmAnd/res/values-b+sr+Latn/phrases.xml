@@ -254,9 +254,9 @@
     <string name="poi_parking_entrance">Ulaz u parking</string>
     <string name="poi_garages">Garaže</string>
     <string name="poi_public_transport_platform">Stanica javnog prevoza</string>
-    <string name="poi_public_transport_platform_bus">Autobuska stanica</string>
+    <string name="poi_public_transport_platform_bus">Autobusko stajalište</string>
     <string name="poi_public_transport_platform_trolleybus">Stanica trolejbusa</string>
-    <string name="poi_bus_stop">Autobuska stanica</string>
+    <string name="poi_bus_stop">Autobusko stajalište</string>
     <string name="poi_public_transport_platform_tram">Tramvajska stanica</string>
     <string name="poi_tram_stop">Tramvajska stanica</string>
     <string name="poi_public_transport_station">Stanica javnog prevoza</string>
@@ -404,7 +404,7 @@
     <string name="poi_landfill_waste_nuclear">Nuklearni otpad</string>
     <string name="poi_waste_disposal">Odlaganje smeća</string>
     <string name="poi_waste_basket">Kanta za smeće</string>
-    <string name="poi_residential">Stambena oblast</string>
+    <string name="poi_residential">Stambena zona</string>
     <string name="poi_industrial">Industrijska oblast</string>
     <string name="poi_landuse_railway">Železnička oblast</string>
     <string name="poi_commercial">Trgovinsko zemljište</string>
@@ -444,7 +444,7 @@
     <string name="poi_country">Država</string>
     <string name="poi_city">Grad</string>
     <string name="poi_capital">Da;Glavni grad</string>
-    <string name="poi_town">Grad</string>
+    <string name="poi_town">Gradsko naselje</string>
     <string name="poi_village">Selo</string>
     <string name="poi_hamlet">Zaseok</string>
     <string name="poi_suburb">Predgrađe</string>
@@ -467,12 +467,12 @@
     <string name="poi_paediatrics">Pedijatrija</string>
     <string name="poi_company">Kompanija</string>
     <string name="poi_insurance">Osiguranje</string>
-    <string name="poi_estate_agent">Agent za nekretnine</string>
+    <string name="poi_estate_agent">Agencija za nekretnine</string>
     <string name="poi_lawyer">Advokat</string>
     <string name="poi_ngo">NVO</string>
     <string name="poi_townhall">Gradska skupština</string>
     <string name="poi_it">IT kancelarija</string>
-    <string name="poi_advertising_agency">Marketinška agencija</string>
+    <string name="poi_advertising_agency">Marketing</string>
     <string name="poi_educational_institution">Obrazovna ustanova</string>
     <string name="poi_studio">Studio</string>
     <string name="poi_political_party">Prostorije stranke</string>
@@ -515,7 +515,7 @@
     <string name="poi_bailiff">Sudski izvršitelj</string>
     <string name="poi_migration">Migraciono</string>
     <string name="poi_tax_inspection">Poreska inspekcija</string>
-    <string name="poi_isolated_dwelling">Izolovano mesto stanovanja</string>
+    <string name="poi_isolated_dwelling">Salaš</string>
     <string name="poi_quarter">Četvrt</string>
     <string name="poi_neighbourhood">Komšiluk</string>
     <string name="poi_nursing_home">Dom za stare</string>
@@ -643,7 +643,7 @@
     <string name="poi_monastery">Manastir</string>
     <string name="poi_information">Informacije</string>
     <string name="poi_clock">Sat</string>
-    <string name="poi_travel_agent">Turistički agent</string>
+    <string name="poi_travel_agent">Turistički agencija</string>
     <string name="poi_viewpoint">Vidikovac</string>
     <string name="poi_picnic_site">Mesto za piknik</string>
     <string name="poi_picnic_table">Sto za piknik</string>
@@ -721,7 +721,7 @@
     <string name="poi_barbecue">Roštilj</string>
     <string name="poi_craft_basket_maker">Korpar</string>
     <string name="poi_craft_brewery">Pivnica</string>
-    <string name="poi_craft_boatbuilder">Brodogradioc</string>
+    <string name="poi_craft_boatbuilder">Brodogradilište</string>
     <string name="poi_craft_carpenter">Ćilimar</string>
     <string name="poi_craft_clockmaker">Sajdžija</string>
     <string name="poi_craft_electrician">Električar</string>
@@ -1524,18 +1524,18 @@
     <string name="poi_register_office">Kancelarija za građane</string>
     <string name="poi_place_allotments">Vrtlarstvo</string>
     <string name="poi_baby_hatch">Prihvatilište beba</string>
-    <string name="poi_occupational_therapist">Terapeut profesija</string>
+    <string name="poi_occupational_therapist">Radni terapeut</string>
     <string name="poi_podiatrist">Ortoped donjih ekstremiteta</string>
     <string name="poi_speech_therapist">Logoped</string>
     <string name="poi_office_telecommunication">Telekomunikaciona kancelarija</string>
-    <string name="poi_employment_agency">Kancelarija biroa rada</string>
-    <string name="poi_research">Istraživačka kancelarija</string>
+    <string name="poi_employment_agency">Biro rada</string>
+    <string name="poi_research">Istraživački centar</string>
     <string name="poi_newspaper">Novinarska kancelarija</string>
-    <string name="poi_architect">Kancelarija arhitekta</string>
+    <string name="poi_architect">Arhitektonska kancelarija</string>
     <string name="poi_bookmaker">Kladionica</string>
     <string name="poi_office_religion">Kancelarija za religije</string>
     <string name="poi_association">Kancelarija udruženja</string>
-    <string name="poi_financial">Finansijska kancelarija</string>
+    <string name="poi_financial">Finansijski kancelarija</string>
     <string name="poi_foundation">Osnivačka kancelarija</string>
     <string name="poi_tax_advisor">Kancelarija poreskog savetnika</string>
     <string name="poi_ice_rink">Klizalište</string>
@@ -1658,7 +1658,7 @@
     <string name="poi_beacon_safe_water">Svetionik bezbednih voda</string>
     <string name="poi_beacon_special_purpose">Svetionik posebne namene</string>
     <string name="poi_berth">Dok</string>
-    <string name="poi_seamark_building">Nautička zgrada</string>
+    <string name="poi_seamark_building">Zgrada (navigacijski orijentir)</string>
     <string name="poi_seamark_bridge">Nautički most</string>
     <string name="poi_buoy_cardinal">Navigaciona bova</string>
     <string name="poi_daymark">Dnevna oznaka</string>
@@ -2079,8 +2079,8 @@
     <string name="poi_technical_monument">Tehnički spomenik</string>
     <string name="poi_office_camping">Kamp kancelarija</string>
     <string name="poi_model_aerodrome">Model aerodroma</string>
-    <string name="poi_guide">Kancelarija vodiča</string>
-    <string name="poi_quango">KANVO</string>
+    <string name="poi_guide">Vodič</string>
+    <string name="poi_quango">Quango</string>
     <string name="poi_consulting">Savetodavna kancelarija</string>
     <string name="poi_cooperative">Kooperativna kancelarija</string>
     <string name="poi_office_forestry">Šumarska kancelarija</string>
@@ -2141,7 +2141,7 @@
     <string name="poi_massage_thai">Tajlandska</string>
     <string name="poi_massage_sexual">Seksualna</string>
     <string name="poi_massage_chinese">Kineska</string>
-    <string name="poi_massage_therapeutic">Terapeutska</string>
+    <string name="poi_massage_therapeutic">Terapeutski</string>
     <string name="poi_massage_yes">Usluge masaže</string>
     <string name="poi_sauna_yes">Usluge saune</string>
     <string name="poi_solarium_yes">Usluge solarijuma</string>
@@ -2315,7 +2315,7 @@
     <string name="poi_historic_stone">Istorijski kamen</string>
     <string name="poi_stone_type_conciliation_cross">Tip: krst pomirenja</string>
     <string name="poi_stone_type_coat_of_arms">Tip: grb</string>
-    <string name="poi_atm">ATM</string>
+    <string name="poi_atm">Bankomat</string>
     <string name="poi_material_wood">Materijal: drvo</string>
     <string name="poi_material_metal">Materijal: metal</string>
     <string name="poi_material_reinforced_concrete">Materijal: ojačani beton</string>
@@ -2339,7 +2339,7 @@
     <string name="poi_site_type_tumulus">Humka</string>
     <string name="poi_site_type_fortification">Utvrđenje</string>
     <string name="poi_site_type_settlement">Naselje</string>
-    <string name="poi_site_type_city">Velegrad</string>
+    <string name="poi_site_type_city">Grad</string>
     <string name="poi_site_type_hut_circle">Krug kućišta</string>
     <string name="poi_site_type_petroglyph">Petroglif</string>
     <string name="poi_site_type_earthwork">Zemljana barijera</string>
@@ -2581,7 +2581,7 @@
     <string name="poi_megalith_type_nuraghe">Tip megalita: nuragi</string>
     <string name="poi_megalith_type_stone_circle">Tip megalita: kameni krugovi</string>
     <string name="poi_megalith_type_passage_grave">Tip megalita: koridorna grobnica</string>
-    <string name="poi_fortification_type_hill_fort">Tip utvrđenja: gradina</string>
+    <string name="poi_fortification_type_hill_fort">Tip utvrđenja: tvđava</string>
     <string name="poi_fortification_type_limes">Tip utvrđenja: limes</string>
     <string name="poi_fortification_type_sconce">Tip utvrđenja: šanac</string>
     <string name="poi_fortification_type_ring_ditch">Tip utvrđenja: ukopani kružni šanac</string>
@@ -2787,8 +2787,8 @@
     <string name="poi_fair_trade_no">Sajamska trgovina: ne</string>
     <string name="poi_fair_trade_yes">Sajamska trgovina: da</string>
     <string name="poi_street_cabinet">Ulični orman</string>
-    <string name="poi_atm_no">ATM: ne</string>
-    <string name="poi_atm_yes">ATM: da</string>
+    <string name="poi_atm_no">Bankomat: ne</string>
+    <string name="poi_atm_yes">Bankomat: da</string>
     <string name="poi_inscription_ne">Natpis:NE</string>
     <string name="poi_inscription_e">Natpis:E</string>
     <string name="poi_inscription_se">Natpis:SE</string>
@@ -2940,7 +2940,7 @@
     <string name="poi_zoo_enclosure">Kućište</string>
     <string name="poi_zoo_wildlife_park">Park divljih životinja</string>
     <string name="poi_zoo_petting_zoo">Zoološki vrt sa maženjem životinja</string>
-    <string name="poi_life_ring">Životni prsten</string>
+    <string name="poi_life_ring">Spasilačka bova</string>
     <string name="poi_language_school">Škola stranih jezika</string>
     <string name="poi_music_school">Muzička škola</string>
     <string name="poi_resort_kids_camp">Dečiji kamp</string>
@@ -3222,7 +3222,7 @@
     <string name="poi_office_psychologist">Kancelarija psihologa</string>
     <string name="poi_office_healer">Kancelarija iscelitelja</string>
     <string name="poi_office_podologist">Kancelarija podologa</string>
-    <string name="poi_office_therapist">Kancelarija terapeuta</string>
+    <string name="poi_office_therapist">Terapeutska ordinacija</string>
     <string name="poi_office_physician">Lekarska ordinacija</string>
     <string name="poi_disease_aids_no">SIDA: ne</string>
     <string name="poi_disease_aids_yes">SIDA: da</string>
@@ -3752,7 +3752,7 @@
     <string name="poi_park_ride_bus">Autobus</string>
     <string name="poi_park_ride_train">Voz</string>
     <string name="poi_city_block">Gradski blok</string>
-    <string name="poi_borough">Gradić</string>
+    <string name="poi_borough">Gradska opština</string>
     <string name="poi_give_box">Poklon kutija</string>
     <string name="poi_traffic_signals_arrow_yes">Da</string>
     <string name="poi_traffic_signals_vibration_yes">Da</string>
@@ -3791,7 +3791,7 @@
     <string name="poi_piste_ref">Referentni broj staze</string>
     <string name="poi_bowling_alley">Centar za kuglanje</string>
     <string name="poi_shop_security">Prodavnica zaštite i bezbednosti</string>
-    <string name="poi_mountain_rescue">Planinska spasilačka</string>
+    <string name="poi_mountain_rescue">Gorska služba</string>
     <string name="poi_paintball">Paintbol</string>
     <string name="poi_memorial_ghost_bike">Bicikl duh</string>
     <string name="poi_volcano_number_of_eruptions">Broj erupcija</string>
@@ -4032,4 +4032,5 @@
     <string name="poi_socket_type3a_current">Utičnica:Kabel tipa3a: struja</string>
     <string name="poi_socket_type1_voltage">Utičnica: Tip 1: napon</string>
     <string name="poi_socket_type1_combo_voltage">Utičnica: tip 1 kombinovana: napon</string>
+    <string name="poi_geodesist">Geodez</string>
 </resources>
