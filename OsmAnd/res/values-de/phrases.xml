@@ -4860,4 +4860,6 @@
     <string name="poi_music_venue">Veranstaltungsort</string>
     <string name="poi_live_music">Live-Musik</string>
     <string name="poi_live_music_yes">Ja</string>
+    <string name="poi_cuisine_fish">Fisch</string>
+    <string name="poi_shop_general">Allgemeines Geschäft</string>
 </resources>

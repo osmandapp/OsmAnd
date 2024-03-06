@@ -12,6 +12,14 @@
 -->
 
     <string name="shared_sting_all_colors">All colors</string>
+    <string name="routing_type_a_star_2_phase">A* 2-phase</string>
+    <string name="routing_type_a_star_classic">A* classic</string>
+    <string name="auto_zoom_smooth">Smooth</string>
+    <string name="auto_zoom_discrete">Discrete</string>
+    <string name="auto_zoom">Autozoom</string>
+    <string name="java_safe">Java (Safe)</string>
+    <string name="gpx_approximation">GPX approximation</string>
+    <string name="routing_type">Routing type</string>
     <string name="rendering_attr_padusDisplayMode_name">Public lands display mode</string>
     <string name="rendering_attr_padusDisplayMode_description">By access type or manager name</string>
     <string name="rendering_value_access_name">By access type</string>

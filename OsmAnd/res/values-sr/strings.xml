@@ -948,7 +948,7 @@
     <string name="wiki_around">Чланци Википедије о околини</string>
     <string name="search_map_hint">Град или област</string>
     <string name="route_roundabout_short">Одреди излаз %1$d и иди</string>
-    <string name="upload_poi">Отпреми тачку занимања</string>
+    <string name="upload_poi">Отпреми ТОИ</string>
     <string name="route_calculation">Прорачун путање</string>
     <string name="gpx_no_tracks_title">Још увек немате ни једну датотеку трагова</string>
     <string name="gpx_no_tracks_title_folder">Такође, можете додати датотеке трагова у фасциклу</string>
@@ -1301,7 +1301,7 @@
     <string name="shared_string_end_time">Време доласка</string>
     <string name="select_gpx_folder">Изаберите фасциклу датотека ГПИкса</string>
     <string name="file_can_not_be_moved">Нисам успео да преместим датотеку.</string>
-    <string name="shared_string_move">Премести</string>
+    <string name="shared_string_move">Помери</string>
     <string name="shared_string_gpx_tracks">Трагови</string>
     <string name="routing_attr_driving_style_name">Начин вожње</string>
     <string name="route_altitude">Успон пута</string>
@@ -1392,7 +1392,7 @@
     <string name="wrong_input">Погрешан унос</string>
     <string name="enter_new_name">Унесите ново име</string>
     <string name="shared_string_back">Назад</string>
-    <string name="shared_string_view">Преглед</string>
+    <string name="shared_string_view">Приказ</string>
     <string name="waypoints_added_to_map_markers">Пролазне тачке додате ознакама на карти</string>
     <string name="wrong_format">Погрешан облик</string>
     <string name="shared_string_road">Пут</string>
@@ -1481,8 +1481,8 @@
     <string name="store_tracks_in_monthly_directories_descrp">Сачувај снимљене путање у подфасциклама према месецима снимања (нпр. 2018-01).</string>
     <string name="shared_string_reset">Врати на подразумевано</string>
     <string name="shared_string_reload">Поново учитај</string>
-    <string name="mapillary_menu_descr_tile_cache">Поново учитај плочице ради постављања података дана.</string>
-    <string name="mapillary_menu_title_tile_cache">Оставка плочица</string>
+    <string name="mapillary_menu_descr_tile_cache">Поново учитај плочице да видиш најсвежије податке.</string>
+    <string name="mapillary_menu_title_tile_cache">Захват плочица</string>
     <string name="wrong_user_name">Погрешно корисничко име</string>
     <string name="shared_string_to">Ка</string>
     <string name="mapillary_menu_date_from">Од</string>
@@ -1619,7 +1619,7 @@
     <string name="lang_lt">Литвански</string>
     <string name="lang_mr">Марати</string>
     <string name="lang_sc">Сардинијски</string>
-    <string name="lang_sr_latn">Српски није (латиница)</string>
+    <string name="lang_sr_latn">Српски (латиница)</string>
     <string name="lang_zh_cn">Кинески (појадностављени)</string>
     <string name="lang_zh_hk">Кинески (хонгконшки)</string>
     <string name="lang_zh_tw">Кинески (традиционални)</string>
@@ -1813,7 +1813,7 @@
     <string name="amenity_type_emergency">Хитна помоћ</string>
     <string name="amenity_type_entertainment">Забава</string>
     <string name="amenity_type_finance">Новац</string>
-    <string name="amenity_type_geocache">Захват положаја</string>
+    <string name="amenity_type_geocache">Геокеш</string>
     <string name="amenity_type_healthcare">Здравство</string>
     <string name="amenity_type_historic">Историјско место</string>
     <string name="amenity_type_landuse">Земља у употреби</string>
@@ -2170,7 +2170,7 @@
     <string name="missing_write_external_storage_permission">ОсмАнд нема дозволе да користи меморијску картицу</string>
     <string name="last_update">Последње освежавање: %s</string>
     <string name="update_time">Освежи време</string>
-    <string name="updates_size">Освежи величину</string>
+    <string name="updates_size">Величина освежења</string>
     <string name="hourly">На сваких сат времена</string>
     <string name="daily">Дневно</string>
     <string name="morning">Јутром</string>
@@ -2298,11 +2298,11 @@
     <string name="download_files_not_enough_space">Нема довољно слободног простора за преузимање %1$s MB (слободно: %2$s).</string>
     <string name="keep_informing">Понови упут навођења</string>
     <string name="auto_follow_route_navigation">Самостално центрирање само за време навођења</string>
-    <string name="popular_destinations">Омиљена одредишта</string>
+    <string name="popular_destinations">Популарна одредишта</string>
     <string name="paid_app">Плаћени програм</string>
     <string name="paid_plugin">Плаћени додатак</string>
     <string name="update_is_available">Надоградња је доступна</string>
-    <string name="download_file">Преузми датотеку</string>
+    <string name="download_file">Преузми фајл</string>
     <string name="start_editing">Започни уређивање</string>
     <string name="get_unlimited_access">Добави неограничени приступ</string>
     <string name="welcome_to_open_beta">Добродошли у отворену бету</string>
@@ -2324,7 +2324,7 @@
     <string name="select_travel_book">Одаберите књигу путовања</string>
     <string name="shared_string_travel_book">Књига путовања</string>
     <string name="online_webpage_warning">Страна је доступна само на мрежи. Отворити је у читачу веба\?</string>
-    <string name="images_cache">Складишна слика</string>
+    <string name="images_cache">Захват слика</string>
     <string name="delete_search_history">Обриши историјат претрага</string>
     <string name="download_images">Преузимај слике</string>
     <string name="download_maps_travel">Туристички водичи</string>
@@ -2334,9 +2334,9 @@
     <string name="shared_string_read">Читај</string>
     <string name="saved_articles">Забележени чланци</string>
     <string name="shared_string_explore">Истражи</string>
-    <string name="shared_string_contents">Садржаји</string>
-    <string name="shared_string_result">Налаз</string>
-    <string name="shared_string_travel_guides">Путовање</string>
+    <string name="shared_string_contents">Садржај</string>
+    <string name="shared_string_result">Резултат</string>
+    <string name="shared_string_travel_guides">Путнички водичи</string>
     <string name="layer_map">Извор карте…</string>
     <string name="route_general_information">Укупна удаљеност %1$s, време путовања %2$d h %3$d min.</string>
     <string name="position_on_map_center">На средини</string>
@@ -2403,7 +2403,7 @@
     <string name="maps_you_need">Карте које Вам требају</string>
     <string name="osmand_team">Дружба ОсмАнд-а</string>
     <string name="travel_card_update_descr">Доступни су нови подаци Викибојажа, освежите их ради уживања.</string>
-    <string name="travel_card_download_descr">Преузмите туристичке водиче Викивојажаради читања чланака о местима по целом свету без везе са интернетом.</string>
+    <string name="travel_card_download_descr">Преузмите туристичке водиче Викивојажа ради читања чланака о местима по целом свету без везе са интернетом.</string>
     <string name="start_editing_card_image_text">Бесплатни светски туристички водич који свако може да уређује.</string>
     <string name="wikivoyage_travel_guide">Туристички водичи</string>
     <string name="wikivoyage_travel_guide_descr">Водичи за најзанимљивија места на планети, унутар ОсмАнд-а, без потребе за везом са интернетом.</string>
@@ -2585,7 +2585,7 @@
     <string name="send_location_email_pattern">Да видите положај, пратите везу ка веб локацији %1$s или Андроид intent везу %2$s</string>
     <string name="voice_is_not_available_msg">Нема доступног гласовног навођења, идите у „Поставке“ → „Поставке навођења“ → „Гласовно навођење“ и одаберите или скините пакет са гласовима.</string>
     <string name="number_of_rows_in_dash">Број редова на табли %1$s</string>
-    <string name="shared_string_bookmark">Забележи</string>
+    <string name="shared_string_bookmark">Обележивач</string>
     <string name="switch_to_vector_map_to_see">Постојеће векторске карте за овај положај. 
 \n\t
 \n\tДа бисте их користили, идите на \'Мени\' → \'Подеси карту\' → \'Извор карте…\' → \'Векторске карте ван мреже\'.</string>
@@ -3496,7 +3496,7 @@
     <string name="expire_time_descr">Захваћене сличице ће бити поново преузете после задатог броја минута. Оставите празно да се никад не освежавају сличице из овог извора.
 \n
 \nЈедан дан је 1440 минута.
-\nНедељу дана је 10 080 минута.
+\nНедељу дана је 10080 минута.
 \nМесец дана је 43829 минута.</string>
     <string name="tiles_storage_descr">Одаберите како да складиштите преузете сличице.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Извозите или увозите брзе радње применљивим налозима.</string>
@@ -3587,7 +3587,7 @@
     <string name="reorder_or_hide_from">Преуреди или сакриј ставке са %1$s.</string>
     <string name="shared_string_divider">Разделник</string>
     <string name="divider_descr">Јединице испод ове тачке су одвојени разделником.</string>
-    <string name="shared_string_hidden">Сакривена</string>
+    <string name="shared_string_hidden">Скривено</string>
     <string name="hidden_items_descr">Иако су ове ставке сакривене из главног изборника, могућности или додаци које они представљају и даље раде.</string>
     <string name="reset_items_descr">Сакривање поставки их враћа на почетно стање.</string>
     <string name="main_actions_descr">Има само четири дугмета.</string>
@@ -3749,7 +3749,7 @@
     <string name="register_on_openplacereviews_desc">Фотографије пружају пројекат отворених података OpenPlaceReviews.org. Ради постављања своје слике, морате се пријавити на странницу веба.</string>
     <string name="register_opr_create_new_account">Направите нови налог</string>
     <string name="register_opr_have_account">Већ имам</string>
-    <string name="shared_string_search_history">Претрага</string>
+    <string name="shared_string_search_history">Претрага историје</string>
     <string name="app_mode_kayak">Кајак</string>
     <string name="app_mode_motorboat">Моторни чамац</string>
     <string name="add_to_mapillary">Додај у Мапилари</string>
@@ -3882,12 +3882,12 @@
     <string name="activity_type_riding_name">Јахање</string>
     <string name="activity_type_racing_name">Тркање</string>
     <string name="activity_type_mountainbike_name">Планински бицикл</string>
-    <string name="activity_type_cycling_name">Бицикл</string>
+    <string name="activity_type_cycling_name">Бициклизам</string>
     <string name="activity_type_hiking_name">Планинарење</string>
     <string name="activity_type_running_name">Трчање</string>
     <string name="activity_type_walking_name">Пешачење</string>
     <string name="activity_type_motorbike_name">Мотоцикл</string>
-    <string name="activity_type_car_name">Аутомобил</string>
+    <string name="activity_type_car_name">Ауто</string>
     <string name="restart">Поново покрени</string>
     <string name="shared_strings_all_regions">Све области</string>
     <string name="delete_number_files_question">Обриши %1$d датотека\?</string>
@@ -4167,7 +4167,7 @@
     <string name="shared_string_learn_more">Сазнајте више</string>
     <string name="cancel_anytime_in_huawei_appgallery">Откажите било када у Хуавеи АпГалерији</string>
     <string name="cancel_anytime_in_gplay">Откажите било када на Гугл Плеју.</string>
-    <string name="shared_string_not_included">Не укључује</string>
+    <string name="shared_string_not_included">Не укључено</string>
     <string name="shared_string_includes">Укључује</string>
     <string name="complete_purchase">Комплетна куповина</string>
     <string name="regular_price">Регуларна цена</string>
@@ -4694,7 +4694,7 @@
     <string name="auto_25_chars_route_tu_kl">Направите полукружно и држите лево</string>
     <string name="av_notes_video_widget_desc">Тап по справици ће снимити видео.</string>
     <string name="rotate_map_manual_opt">Ручно окретање</string>
-    <string name="coordinates_widget_map_center">Координате: средиште карте</string>
+    <string name="coordinates_widget_map_center">Координате: средиште мапе</string>
     <string name="distance_by_tap_use_description">Тапните на карту ради прегледа свог тренутног положаја и кликнуте тачке.
 \nТапније на карту са 2 прста ради прегледа размака између кликнутих тачака</string>
     <string name="coordinates_widget_current_location">Координате: тренутни положај</string>
@@ -5087,7 +5087,7 @@
     <string name="app_mode_climbing">Пентрање</string>
     <string name="generate_hillshade_from_3d_maps">Образуј оквирне карте сенчених падина из просторних, 3Д карата</string>
     <string name="generate_slope_from_3d_maps">Образуј оквире карата нагиба из просторних, 3Д карата</string>
-    <string name="disable_vertex_hillshade_3d">Онемогући вртложно сенчење у просторном прегледу 3Д</string>
+    <string name="disable_vertex_hillshade_3d">Онемогући вртложно сенчење у 3Д</string>
     <string name="metric_lbs">lbs</string>
     <string name="rendering_value_small_name">Мали</string>
     <string name="rendering_value_name_only_name">Само име</string>
@@ -5110,7 +5110,7 @@
     <string name="external_device_details_information">Податак</string>
     <string name="external_device_details_received_data">Примљени подаци</string>
     <string name="shutter_sound">Звук окидача</string>
-    <string name="offline_cache">Ванмрежни захват</string>
+    <string name="offline_cache">Очисти ванмрежни захват</string>
     <string name="shared_string_all_world">Цели свет</string>
     <string name="external_device_characteristic_diastolic">Дијастолички</string>
     <string name="external_device_characteristic_systolic">Систолички</string>
@@ -5207,7 +5207,7 @@
     <string name="track_not_recorded">Није снимљено</string>
     <string name="shared_string_new_track">Нови траг</string>
     <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
-    <string name="visible_in_3d_mode">Видљиво у просторном приказу (3д)</string>
+    <string name="visible_in_3d_mode">Видљиво у 3Д начину</string>
     <string name="map_3d_mode_action">Просторни начин приказа (3д)</string>
     <string name="map_3d_mode_hint">Дуги тап дугмета омогућава промену положаја дугмета.</string>
     <string name="proxy_port_max_warning">Највиша вредност прикључника је %1$s</string>
@@ -5349,7 +5349,7 @@
     <string name="external_sensor_name_property_description">Име пријемника</string>
     <string name="help_article_navigation_routing_ski_routing_name">Путања скијања</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Отровне и заразне твари</string>
-    <string name="shared_string_deleting">Бришем</string>
+    <string name="shared_string_deleting">Брисање</string>
     <string name="help_article_widgets_name">Справице карте</string>
     <string name="help_article_personal_name">Моји подаци</string>
     <string name="help_article_purchases_android_name">Куповине Андроидом</string>
@@ -5511,7 +5511,7 @@
     <string name="shared_string_delete_item">Обриши ставку</string>
     <string name="shared_string_delete_immediately">Обриши одмах</string>
     <string name="restore_from_trash">Поврати из канте отпада</string>
-    <string name="shared_string_trash">Канта отпада</string>
+    <string name="shared_string_trash">Отпад</string>
     <string name="shared_string_show_less">Прикажи мање</string>
     <string name="empty_smart_folder_description">Подударајуће путање овде се јављају</string>
     <string name="discard_filter_changes">Одбаци промене филтера</string>
@@ -5526,7 +5526,7 @@
     <string name="terrain_map">Теренска мапа (3Д)</string>
     <string name="save_track_external_sensors_data">Подаци</string>
     <string name="hillshade_slope">Осенчен рељеф, Нагиб</string>
-    <string name="sorted_sufolders_toast">Подфолдери у “%1$s” су разврстани по: “%2$s”</string>
+    <string name="sorted_sufolders_toast">Подфолдери у “%1$s” разврстани су по: “%2$s”</string>
     <string name="sort_subfolders">Разврставање подфолдера</string>
     <string name="shared_string_additional">Додатно</string>
     <string name="smart_folder_saved">Паметан фолдер је сачуван</string>
@@ -5631,4 +5631,12 @@
     <string name="rendering_attr_padusHideBoundaries_name">Сакриј границе јавних површина</string>
     <string name="rendering_value_managerName_name">По имену менаџера</string>
     <string name="rendering_attr_padusHideBoundaries_description">Сакривање граница јавних површина али области остају</string>
+    <string name="routing_type_a_star_classic">A* класично</string>
+    <string name="auto_zoom_smooth">Гладко</string>
+    <string name="auto_zoom_discrete">Дискретно</string>
+    <string name="auto_zoom">Аутозум</string>
+    <string name="gpx_approximation">ГПС апроксимирано</string>
+    <string name="routing_type">Тип рутирања</string>
+    <string name="routing_type_a_star_2_phase">A* 2-фаза</string>
+    <string name="java_safe">Јава (Сигурно)</string>
 </resources>

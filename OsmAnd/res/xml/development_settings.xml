@@ -35,13 +35,6 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/safe_mode" />
 
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="approx_safe_mode"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/approx_safe_mode" />
-
 	<PreferenceCategory
 		android:key="routing"
 		android:layout="@layout/preference_category_with_descr"
@@ -53,27 +46,6 @@
 		android:persistent="false"
 		android:title="@string/simulate_your_location"
 		tools:summary="@string/simulate_your_location_stop_descr" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="use_hh_routing"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/special_routing_type" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="hh_routing_cpp"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="Java"
-		android:summaryOn="C++"
-		android:title="@string/special_routing_cpp" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="use_v1_auto_zoom"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/use_v1_auto_zoom" />
 
 	<PreferenceCategory
 		android:key="debugging_and_development"

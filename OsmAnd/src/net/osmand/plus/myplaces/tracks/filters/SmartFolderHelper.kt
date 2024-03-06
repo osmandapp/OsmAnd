@@ -167,6 +167,10 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return getSmartFolderByName(name) != null
 	}
 
+	fun areSmartFoldersPresent(): Boolean {
+		return !smartFolderCollection.isEmpty() 
+	}
+
 	private fun getSmartFolderByName(name: String): SmartFolder? {
 		for (folder in smartFolderCollection) {
 			if (Algorithms.stringsEqual(folder.folderName, name)) {

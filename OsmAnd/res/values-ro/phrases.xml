@@ -4783,9 +4783,9 @@
     <string name="poi_us_maps_recreation_area_activity_sledding_tubing">Săniuș tubing</string>
     <string name="poi_us_maps_recreation_area_activity_small_game_hunting">Vânătoare vânat mic</string>
     <string name="poi_us_maps_recreation_area_activity_snowmobiling">Snowmobiling</string>
-    <string name="poi_us_maps_recreation_area_activity_surfing">Surfing</string>
-    <string name="poi_us_maps_recreation_area_activity_swimming">Înotat</string>
-    <string name="poi_us_maps_recreation_area_activity_target_shooting">Tras la țință</string>
+    <string name="poi_us_maps_recreation_area_activity_surfing">Surf</string>
+    <string name="poi_us_maps_recreation_area_activity_swimming">Înot</string>
+    <string name="poi_us_maps_recreation_area_activity_target_shooting">Tras la țintă</string>
     <string name="poi_us_maps_recreation_area_activity_tidepooling">Tidepooling</string>
     <string name="poi_us_maps_recreation_area_activity_trapping">Vânat cu capcane</string>
     <string name="poi_us_maps_recreation_area_activity_tubing">Tubing</string>
@@ -4796,7 +4796,7 @@
     <string name="poi_healthcare_speciality_abortion">Avort</string>
     <string name="poi_healthcare_speciality_systemic">Terapie sistemică</string>
     <string name="poi_us_maps_recreation_area_activity_rock_climbing">Cățărare pe pietre</string>
-    <string name="poi_us_maps_recreation_area_activity_rockhounding">Geologie</string>
+    <string name="poi_us_maps_recreation_area_activity_rockhounding">Colecționare roci</string>
     <string name="poi_us_maps_recreation_area_activity_rocks_and_minerals">Pietre și minerale</string>
     <string name="poi_us_maps_recreation_area_activity_rv_camping">Camping RV</string>
     <string name="poi_us_maps_recreation_area_activity_picnicking">Picnic</string>
@@ -4805,7 +4805,7 @@
     <string name="poi_us_maps_recreation_area_activity_hunting">Vânătoare</string>
     <string name="poi_us_maps_recreation_area_activity_ice_fishing">Pescuit la copcă</string>
     <string name="poi_healthcare_speciality_nutrition">Nutriție</string>
-    <string name="poi_us_maps_recreation_area_activity_salt_water_fishing">Pescuit apă sărată</string>
+    <string name="poi_us_maps_recreation_area_activity_salt_water_fishing">Pescuit în apă sărată</string>
     <string name="poi_us_maps_recreation_area_activity_river_and_stream_fishing">Pescuit în râuri și pâraie</string>
     <string name="poi_us_maps_recreation_area_activity_sand_play">Joc în nisip</string>
     <string name="poi_us_maps_recreation_area_activity_road_cycling">Ciclism rutier</string>

@@ -10,7 +10,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.routing.RoutingHelper;
@@ -37,8 +36,7 @@ public class PointDescriptionMenuController extends MenuController {
 				public void buttonPressed() {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
-						AvoidSpecificRoads roads = app.getAvoidSpecificRoads();
-						roads.addImpassableRoad(activity, getLatLon(), false, false, null);
+						app.getAvoidSpecificRoads().addImpassableRoad(activity, getLatLon(), false, false, null);
 					}
 				}
 			};

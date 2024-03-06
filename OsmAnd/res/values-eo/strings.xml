@@ -5622,4 +5622,10 @@
     <string name="shared_string_speedometer">Rapidmezurilo</string>
     <string name="speed_limit_warning">Averto pri rapidlimo</string>
     <string name="help_article_setup_a_route_name">Difini kurson</string>
+    <string name="rendering_attr_padusDisplayMode_name">Maniero montri publikaj terenoj</string>
+    <string name="rendering_attr_padusDisplayMode_description">Laŭ aliro aŭ laŭ nomo de administranto</string>
+    <string name="rendering_value_access_name">Laŭ aliro</string>
+    <string name="rendering_value_managerName_name">Laŭ nomo de administranto</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Kaŝi limojn de publikaj terenoj</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Kaŝi limojn de publikaj terenoj sed ne kaŝi areojn</string>
 </resources>

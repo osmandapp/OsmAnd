@@ -1707,7 +1707,7 @@
     <string name="shared_string_marker">Marcaj</string>
     <string name="empty_state_osm_edits">Creați sau modificați obiecte OpenStreetMap</string>
     <string name="empty_state_osm_edits_descr">Creați sau modificați puncre de interes OpenStreetMap, deschideți sau comentați la note OSM și contribuiți cu fișiere GPX înregistrate.</string>
-    <string name="shared_string_deleted">Șters</string>
+    <string name="shared_string_deleted">Eliminat</string>
     <string name="shared_string_edited">Editat</string>
     <string name="shared_string_added">Adăugat</string>
     <string name="marker_activated">Marcaj %s activat.</string>
@@ -3036,7 +3036,7 @@
 \n • Actualizările OsmAnd Live au fost mutate în \"Descărcări &gt; Actualizări\"
 \n
 \n</string>
-    <string name="duration_moment_ago">acum o clipă</string>
+    <string name="duration_moment_ago">cu un moment în urmă</string>
     <string name="logout_from_osmand_cloud">Deconectați-vă de la OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Vă deconectați\?
 \nVa trebui să vă conectați din nou pentru a face backup sau a restaura date.</string>
@@ -4507,7 +4507,7 @@
     <string name="android_api">API Android</string>
     <string name="shared_string_shape">Formă</string>
     <string name="edit_category">Editează categoria</string>
-    <string name="default_appearance_desc">Culoarea, iconul și forma implicite se vor aplica punctelor favorite din grup.</string>
+    <string name="default_appearance_desc">Culoarea, pictograma și forma implicite se vor aplica punctelor favorite adăugate în grup.</string>
     <string name="shared_string_complete">complet</string>
     <string name="stop_download">Oprește descărcarea</string>
     <string name="stop_and_exit">Oprește și ieși</string>
@@ -4519,7 +4519,7 @@
     <string name="number_of_tiles">Număr de segmente de hartă</string>
     <string name="rendering_attr_showFitnessTrails_description">Arată trasee de fitness</string>
     <string name="rendering_attr_showFitnessTrails_name">Trasee de fitness</string>
-    <string name="apply_to_existing_favorites_descr">Aplicați schimbările punctelor favorite existente în grup sau doar celor noi\?</string>
+    <string name="apply_to_existing_favorites_descr">Aplicați modificările la punctele favorite existente ale grupului sau numai la cele noi?</string>
     <string name="apply_to_existing_points_descr">Aplicați schimbările punctelor existente în grup sau doar celor noi\?</string>
     <string name="apply_only_to_new_favorites">Aplică doar favoritelor noi</string>
     <string name="change_default_appearance">Schimbare aspect implicit</string>
@@ -5248,7 +5248,7 @@
     <string name="delete_account_warning">Ștergeți contul %1$s?</string>
     <string name="shared_string_deleting">Se șterge</string>
     <string name="deleting_complete">Ștergere finalizată</string>
-    <string name="delete_account">Șterge contul</string>
+    <string name="delete_account">Ștergeți contul</string>
     <string name="backup_error_delete_account_email_match">E-mail-ul nu se potrivește cu numele de utilizator folosit la conectare</string>
     <string name="verify_account">Verificați-vă contul</string>
     <string name="osmand_cloud_deleted_account_descr">Contul și toate datele au fost șterse din OsmAnd Cloud.</string>
@@ -5602,7 +5602,7 @@
     <string name="sorted_sufolders_toast">Subfolderele din \"%1$s\" sunt sortate după: \"%2$s\"</string>
     <string name="shared_string_additional">Adițional</string>
     <string name="sort_subfolders">Sortarea subfolderelor</string>
-    <string name="battery_optimization_settings">Setări de optimizare a bateriei</string>
+    <string name="battery_optimization_settings">Setări de optimizare ale bateriei</string>
     <string name="shared_string_activity">Activitate</string>
     <string name="shared_string_keywords">Cuvinte cheie</string>
     <string name="shared_string_license">Licență</string>
@@ -5636,4 +5636,11 @@
     <string name="rendering_attr_padusHideBoundaries_description">Ascundeți limitele terenurilor publice, dar lăsați zone</string>
     <string name="rendering_value_access_name">După tipul de acces</string>
     <string name="rendering_value_managerName_name">După numele managerului</string>
+    <string name="auto_zoom_smooth">Neted</string>
+    <string name="auto_zoom_discrete">Discret</string>
+    <string name="auto_zoom">Zoom automat</string>
+    <string name="routing_type_a_star_classic">A* clasic</string>
+    <string name="gpx_approximation">Aproximare GPX</string>
+    <string name="routing_type">Tip de rutare</string>
+    <string name="routing_type_a_star_2_phase">A* bi-fazică</string>
 </resources>

@@ -5623,4 +5623,12 @@
     <string name="rendering_attr_padusHideBoundaries_name">隱藏公有地邊界</string>
     <string name="rendering_attr_padusHideBoundaries_description">隱藏公有地邊界但保留區域</string>
     <string name="rendering_attr_padusDisplayMode_name">公有地顯示模式</string>
+    <string name="routing_type_a_star_classic">A* 經典</string>
+    <string name="auto_zoom_smooth">平順</string>
+    <string name="auto_zoom_discrete">分離</string>
+    <string name="auto_zoom">自動縮放</string>
+    <string name="java_safe">Java（安全）</string>
+    <string name="gpx_approximation">GPX 近似</string>
+    <string name="routing_type">路線規劃類型</string>
+    <string name="routing_type_a_star_2_phase">A* 2-相</string>
 </resources>

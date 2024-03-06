@@ -42,9 +42,9 @@
     <string name="context_menu_item_directions_from">Navigacija od</string>
     <string name="route_descr_map_location">Mapa :</string>
     <string name="route_descr_lat_lon">Šir %1$.3f, duž %2$.3f</string>
-    <string name="route_to">Do:</string>
+    <string name="route_to">Početak:</string>
     <string name="route_via">Preko:</string>
-    <string name="route_from">Od:</string>
+    <string name="route_from">Početak:</string>
     <string name="app_mode_default">Pretraga mape</string>
     <string name="settings_preset">Osnovni profil</string>
     <string name="destination_point">Destinacija %1$s</string>
@@ -197,7 +197,7 @@
     <string name="download_tab_local">Preuzeto</string>
     <string name="no_internet_connection">Preuzimanje je nemoguće, proveri vezu sa internetom.</string>
     <string name="shared_string_dismiss">Otkaži</string>
-    <string name="everything_up_to_date">Svi fajlovi su sveže</string>
+    <string name="everything_up_to_date">Svi fajlovi su ažurirani</string>
     <string name="use_opengl_render">Koristi OpenGL za prikaz</string>
     <string name="use_opengl_render_descr">Koristi hardversko ubrzanje OpenGL-a za prikaz (može da koristi više baterije, a može i da ne radi na nekim uređajima).</string>
     <string name="map_update">Dostupna su ažuriranja %1$s mapa</string>
@@ -5624,7 +5624,7 @@
     <string name="error_calculate">Rezultat kalkulacije je prazan</string>
     <string name="special_routing_cpp">Specijalni tip rutiranja</string>
     <string name="add_button">Dodaj dugme</string>
-    <string name="custom_buttons">Prilagođeno dugme</string>
+    <string name="custom_buttons">Sopstveno dugme</string>
     <string name="default_buttons">Zadano dugme</string>
     <string name="custom_map_button_name_present">Takvo dugme već postoji</string>
     <string name="shared_string_limit">Ograničenje</string>
@@ -5639,4 +5639,12 @@
     <string name="rendering_value_managerName_name">Po imenu upravitelja</string>
     <string name="rendering_attr_padusHideBoundaries_name">Sakriti granice javnog zemljišta</string>
     <string name="rendering_attr_padusHideBoundaries_description">Sakriti granice javnog zemljišta ali oblasti ostaju</string>
+    <string name="routing_type_a_star_classic">A* klasičan</string>
+    <string name="auto_zoom_smooth">Glatko</string>
+    <string name="auto_zoom_discrete">Diskretno</string>
+    <string name="java_safe">Java (Sigurno)</string>
+    <string name="gpx_approximation">GPX aproksimacija</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fazni</string>
+    <string name="auto_zoom">Autozum</string>
+    <string name="routing_type">Tip rutiranja</string>
 </resources>

@@ -9,7 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -29,7 +29,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	private static final int APPROXIMATE_AVOID_ROAD_SIZE_BYTES = 185;
 
 	private OsmandSettings settings;
-	private AvoidSpecificRoads specificRoads;
+	private AvoidRoadsHelper avoidRoadsHelper;
 
 	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
 		super(app, null, items);
@@ -47,8 +47,8 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	protected void init() {
 		super.init();
 		settings = app.getSettings();
-		specificRoads = app.getAvoidSpecificRoads();
-		existingItems = new ArrayList<>(specificRoads.getImpassableRoads());
+		avoidRoadsHelper = app.getAvoidSpecificRoads();
+		existingItems = new ArrayList<>(avoidRoadsHelper.getImpassableRoads());
 	}
 
 	@NonNull
@@ -59,12 +59,12 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 
 	@Override
 	public long getLocalModifiedTime() {
-		return specificRoads.getLastModifiedTime();
+		return avoidRoadsHelper.getLastModifiedTime();
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		specificRoads.setLastModifiedTime(lastModifiedTime);
+		avoidRoadsHelper.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@NonNull
@@ -93,14 +93,14 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 			for (AvoidRoadInfo avoidRoad : appliedItems) {
 				settings.addImpassableRoad(avoidRoad);
 			}
-			specificRoads.loadImpassableRoads();
-			specificRoads.initRouteObjects(true);
+			avoidRoadsHelper.loadImpassableRoads();
+			avoidRoadsHelper.initRouteObjects(true);
 		}
 	}
 
 	@Override
 	protected void deleteItem(AvoidRoadInfo item) {
-		specificRoads.removeImpassableRoad(item);
+		avoidRoadsHelper.removeImpassableRoad(item);
 	}
 
 	@Override

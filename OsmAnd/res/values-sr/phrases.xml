@@ -4541,7 +4541,7 @@
     <string name="poi_socket_type3a_output_high">Висок</string>
     <string name="poi_socket_type3c_output_low">Низак</string>
     <string name="poi_self_checkout_no">Само плаћање: не</string>
-    <string name="poi_self_checkout_yes">Не</string>
+    <string name="poi_self_checkout_yes">Да</string>
     <string name="poi_self_checkout_only">Само</string>
     <string name="poi_recycling_pallets">Палете</string>
     <string name="poi_recycling_plastic_bottle_tops">Врхови пластичних флаша</string>
@@ -4860,4 +4860,9 @@
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">RV станица отпада</string>
     <string name="poi_us_maps_recreation_area_facility_warming_hut">Барака за угрејавање</string>
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Област у свакодневној употреби;Место у свакодневној употреби;Дневна употреба области;Дневна употреба места;Дневна употреба области рекреације;Дневна употреба места рекреације</string>
+    <string name="poi_music_venue">Музички скуп</string>
+    <string name="poi_shop_general">Општа продавница</string>
+    <string name="poi_cuisine_fish">Риба</string>
+    <string name="poi_live_music">Музика уживо</string>
+    <string name="poi_live_music_yes">Да</string>
 </resources>

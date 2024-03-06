@@ -28,8 +28,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads;
-import net.osmand.plus.avoidroads.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
+import net.osmand.plus.avoidroads.AvoidRoadsCallback;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -44,7 +44,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	private static final int START_ZOOM = 10;
 
-	private AvoidSpecificRoads avoidSpecificRoads;
+	private AvoidRoadsHelper avoidRoadsHelper;
 	private ContextMenuLayer contextMenuLayer;
 
 	private Bitmap roadWorkIcon;
@@ -62,7 +62,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
-		avoidSpecificRoads = getApplication().getAvoidSpecificRoads();
+		avoidRoadsHelper = getApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
 		activePaint = new Paint();
@@ -91,15 +91,15 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= START_ZOOM) {
 			MapRendererView mapRenderer = getMapRenderer();
 			if (mapRenderer != null) {
-				if (impassibleRoadsCount != avoidSpecificRoads.getImpassableRoads().size() || mapActivityInvalidated) {
+				if (impassibleRoadsCount != avoidRoadsHelper.getImpassableRoads().size() || mapActivityInvalidated) {
 					clearMapMarkersCollections();
 				}
 				initMarkersCollection();
-				impassibleRoadsCount = avoidSpecificRoads.getImpassableRoads().size();
+				impassibleRoadsCount = avoidRoadsHelper.getImpassableRoads().size();
 				mapActivityInvalidated = false;
 				return;
 			}
-			for (AvoidRoadInfo road : avoidSpecificRoads.getImpassableRoads()) {
+			for (AvoidRoadInfo road : avoidRoadsHelper.getImpassableRoads()) {
 				if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 					AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();
 					if (object.getId() == road.getId()) {
@@ -146,7 +146,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o,
 	                                    boolean unknownLocation, boolean excludeUntouchableObjects) {
-		List<AvoidRoadInfo> impassableRoads = avoidSpecificRoads.getImpassableRoads();
+		List<AvoidRoadInfo> impassableRoads = avoidRoadsHelper.getImpassableRoads();
 		if (tileBox.getZoom() >= START_ZOOM && !excludeUntouchableObjects && !Algorithms.isEmpty(impassableRoads)) {
 			MapRendererView mapRenderer = getMapRenderer();
 			float radius = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox)) * TOUCH_RADIUS_MULTIPLIER;
@@ -205,11 +205,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (o instanceof AvoidRoadInfo && mapActivity != null) {
 			AvoidRoadInfo object = (AvoidRoadInfo) o;
 			OsmandApplication application = getApplication();
-			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, latLon, false, new AvoidSpecificRoadsCallback() {
+			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, latLon, false, new AvoidRoadsCallback() {
 				@Override
-				public void onAddImpassableRoad(boolean success, AvoidRoadInfo newObject) {
+				public void onAddImpassableRoad(boolean success, @Nullable AvoidRoadInfo roadInfo) {
 					if (callback != null) {
-						callback.onApplyMovedObject(success, newObject);
+						callback.onApplyMovedObject(success, roadInfo);
 					}
 				}
 
@@ -229,7 +229,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 			return;
 		}
 		mapMarkersCollection = new MapMarkersCollection();
-		for (AvoidRoadInfo road : avoidSpecificRoads.getImpassableRoads()) {
+		for (AvoidRoadInfo road : avoidRoadsHelper.getImpassableRoads()) {
 			boolean isMoveable = false;
 			if (contextMenuLayer.getMoveableObject() instanceof AvoidRoadInfo) {
 				AvoidRoadInfo object = (AvoidRoadInfo) contextMenuLayer.getMoveableObject();

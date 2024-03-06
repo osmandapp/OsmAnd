@@ -5613,7 +5613,7 @@
     <string name="shared_string_activity">tevékenység</string>
     <string name="shared_string_additional">További</string>
     <string name="sort_subfolders">Almappák sorba rendezése</string>
-    <string name="sorted_sufolders_toast">A „%1$s” mappában lévő almappák %2$s szerint vannak sorba rendezve</string>
+    <string name="sorted_sufolders_toast">%1$s mappa almappái %2$s szerint vannak sorba rendezve</string>
     <string name="special_routing_cpp">Speciális útvonaltervezési típus</string>
     <string name="add_button">Gomb hozzáadása</string>
     <string name="custom_buttons">Egyéni gombok</string>
@@ -5631,4 +5631,12 @@
     <string name="rendering_value_managerName_name">Kezelő neve szerint</string>
     <string name="rendering_attr_padusHideBoundaries_name">Közterülethatárok elrejtése</string>
     <string name="rendering_attr_padusHideBoundaries_description">Közterülethatárok elrejtése, de a területek meghagyása</string>
+    <string name="routing_type_a_star_classic">A* klasszikus</string>
+    <string name="auto_zoom_discrete">Lépcsőzetes</string>
+    <string name="auto_zoom">Automatikus nagyítás</string>
+    <string name="gpx_approximation">GPX közelítés</string>
+    <string name="routing_type">Úttervezési típus</string>
+    <string name="auto_zoom_smooth">Fokozatmentes</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fázisú</string>
+    <string name="java_safe">Java (biztonságos)</string>
 </resources>
