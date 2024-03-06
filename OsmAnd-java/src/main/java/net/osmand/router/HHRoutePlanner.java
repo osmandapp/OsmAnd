@@ -182,7 +182,6 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		progress.hhIteration(HHIteration.START_END_POINT);
 		findFirstLastSegments(hctx, start, end, stPoints, endPoints, progress);
 
-		RouteResultPreparation rrp = new RouteResultPreparation();
 		HHNetworkRouteRes route = null;
 		boolean recalc = false;
 		double firstIterationTime = 0; 
@@ -208,7 +207,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			progress.hhIteration(HHIteration.DETAILED);
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Parse detailed route segments...");
 			time = System.nanoTime();
-			recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
+			recalc = retrieveSegmentsGeometry(hctx, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
 			if (progress.isCancelled) {
 				return cancelledStatus();
 			}
@@ -241,7 +240,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 
 			time = System.nanoTime();
 			for (HHNetworkRouteRes alt : route.altRoutes) {
-				retrieveSegmentsGeometry(hctx, rrp, alt, hctx.config.ROUTE_ALL_ALT_SEGMENTS, progress);
+				retrieveSegmentsGeometry(hctx, alt, hctx.config.ROUTE_ALL_ALT_SEGMENTS, progress);
 				if (progress.isCancelled) {
 					return cancelledStatus();
 				}
@@ -258,15 +257,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printGCInformation(true);
 		}
 		
-		prepareRouteResults(hctx, route, start, end, rrp);
+		prepareRouteResults(hctx, route, start, end);
 		if (DEBUG_VERBOSE_LEVEL >= 1) {
 			System.out.println("  Detailed progress: " + hctx.rctx.calculationProgress.getInfo(null));
 		}
 		if (progress.isCancelled) {
 			return cancelledStatus();
-		}
-		if (hctx.config.ROUTE_ALL_SEGMENTS && route.detailed != null) {
-			route.detailed = rrp.prepareResult(hctx.rctx, route.detailed).detailed;
 		}
 		hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
 		printf(SL > 0, "%.2f ms\n", hctx.stats.prepTime);
@@ -1214,7 +1210,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		
 	}
 	
-	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, RouteResultPreparation rrp, HHNetworkRouteRes route,
+	private boolean retrieveSegmentsGeometry(HHRoutingContext<T> hctx, HHNetworkRouteRes route,
 			boolean routeSegments, RouteCalculationProgress progress) throws SQLException, InterruptedException, IOException {
 		for (int i = 0; i < route.segments.size(); i++) {
 			progress.hhIterationProgress((double) i / route.segments.size());
@@ -1251,7 +1247,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 					return true;
 				}
 				s.rtTimeDetailed = f.distanceFromStart;
-				s.list = rrp.convertFinalSegmentToResults(hctx.rctx, f);
+				s.list = RouteResultPreparation.convertFinalSegmentToResults(hctx.rctx, f);
 			} else {
 				// load segment geometry from db
 				if (!hctx.loadGeometry(s.segment, false)) {
@@ -1323,9 +1319,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 	}
 
-	private HHNetworkRouteRes prepareRouteResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route, LatLon start, LatLon end, 
-			RouteResultPreparation rrp) throws SQLException, InterruptedException, IOException {
-		hctx.rctx.routingTime = 0;
+	private HHNetworkRouteRes prepareRouteResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route, LatLon start, LatLon end) throws SQLException, InterruptedException, IOException {
+		// hctx.rctx.routingTime = 0; // do not reset between interpoints
 		route.stats = hctx.stats;
 		RouteSegmentResult straightLine = null;
 		for(int routeSegmentInd = 0; routeSegmentInd < route.segments.size(); routeSegmentInd++ ) {
@@ -1359,7 +1354,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				straightLine = new RouteSegmentResult(sh, 0, 1);
 				route.detailed.add(new RouteSegmentResult(rdo, 0, 1));
 			}
-			hctx.rctx.routingTime += routeSegment.rtTimeDetailed;
+			// hctx.rctx.routingTime += routeSegment.rtTimeDetailed; // already done by convertFinalSegmentToResults()
 
 			if (DEBUG_VERBOSE_LEVEL >= 1) {
 				int segments = routeSegment.list == null ? 0 : routeSegment.list.size();
@@ -1395,7 +1390,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			if (itPnt.rt(true).rtDetailedRoute != null) {
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(null);
-				res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, itPnt.rt(true).rtDetailedRoute);
+				res.list = RouteResultPreparation.convertFinalSegmentToResults(hctx.rctx, itPnt.rt(true).rtDetailedRoute);
 				res.rtTimeDetailed = res.rtTimeHHSegments = itPnt.rt(true).rtDetailedRoute.distanceFromStart;
 				route.segments.add(res);
 			}
@@ -1412,7 +1407,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			}
 			if (itPnt.rt(false).rtDetailedRoute != null) {
 				HHNetworkSegmentRes res = new HHNetworkSegmentRes(null);
-				res.list = new RouteResultPreparation().convertFinalSegmentToResults(hctx.rctx, itPnt.rt(false).rtDetailedRoute);
+				res.list = RouteResultPreparation.convertFinalSegmentToResults(hctx.rctx, itPnt.rt(false).rtDetailedRoute);
 				res.rtTimeDetailed = res.rtTimeHHSegments = itPnt.rt(false).rtDetailedRoute.distanceFromStart;
 				route.segments.add(res);
 			}
