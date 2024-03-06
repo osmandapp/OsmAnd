@@ -5626,4 +5626,9 @@
     <string name="rendering_attr_padusHideBoundaries_name">Nascondi i confini del territorio pubblico</string>
     <string name="rendering_attr_padusHideBoundaries_description">Nascondere i confini del territorio pubblico ma lascia le aree</string>
     <string name="rendering_attr_padusDisplayMode_name">Modalità di visualizzazione dei terreni pubblici</string>
+    <string name="routing_type_a_star_classic">A* classic</string>
+    <string name="java_safe">Java (Sicuro)</string>
+    <string name="routing_type_a_star_2_phase">A* 2-phase</string>
+    <string name="auto_zoom">Autozoom</string>
+    <string name="gpx_approximation">Approssimazione GPX</string>
 </resources>
