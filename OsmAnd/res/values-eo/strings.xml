@@ -419,7 +419,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Ŝlosiloj “Riparu min!”</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
-    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
+    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Elektu “Jes” nur se vi rajtas uzi tiun ĉi eblon.</string>
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon sen interreta konekto.</string>
     <string name="current_route">Nuna kurso</string>
@@ -856,7 +856,7 @@
     <string name="driving_region">Trafika regiono</string>
     <string name="driving_region_descr">Elekti trafikan regionon: Usono, Eŭropo, Britujo, Azio kaj aliaj.</string>
     <string name="speak_title">Anoncado…</string>
-    <string name="speak_descr">Agordi anoncojn pri strataj nomoj, trafikaj avertoj (devigaj haltejoj, strat‑ĝiboj), rapid‑kontroliloj kaj rapidlimoj.</string>
+    <string name="speak_descr">Agordi voĉajn sciigojn pri nomoj de stratoj, trafikaj avertoj (devigaj haltejoj, strat‑ĝiboj), rapid‑kontroliloj kaj rapidlimoj.</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
     <string name="speak_speed_limit">Rapidlimoj</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
@@ -1049,7 +1049,7 @@
     <string name="auto_zoom_map_descr">Skali mapon depende de via rapido (kiam mapo estas samtempigita kun aktuala pozicio).</string>
     <string name="snap_to_road">Proksimumigi al vojo</string>
     <string name="interrupt_music">Paŭzigi muzikon</string>
-    <string name="interrupt_music_descr">Voĉaj anoncoj paǔzigas ludadon de muziko.</string>
+    <string name="interrupt_music_descr">Voĉaj sciigoj paǔzigas ludadon de muziko.</string>
     <string name="osmand_short_description_80_chars">Tuttera mapfoliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
     <string name="osmand_plus_short_description_80_chars">Tuttera mapfoliumilo kaj navigilo uzanta OSM‑mapojn (vektorajn aŭ enretajn)</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Aŭtomata Navigado Direkte al la celo)
@@ -1197,9 +1197,9 @@
     <string name="prefs_plugins">Kromprogramoj</string>
     <string name="prefs_plugins_descr">Kromprogramoj aktivigas spertajn agordojn kaj pliajn eblojn.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoraj mapoj verŝajne funkcias pli rapide. Estas eble, ke tio ne funkcias en kelkaj aparatoj.</string>
-    <string name="play_commands_of_currently_selected_voice">Elektu voĉon kaj provi ĝin per ludi anoncojn:</string>
+    <string name="play_commands_of_currently_selected_voice">Elektu voĉon kaj provi ĝin per ludi sciigojn:</string>
     <string name="native_rendering">Indiĝena blldigo</string>
-    <string name="test_voice_prompts">Testi voĉajn anoncojn</string>
+    <string name="test_voice_prompts">Testi voĉajn sciigojn</string>
     <string name="switch_to_raster_map_to_see">Elŝutu malkonektan vektoran mapon por tiu ĉi loko per la menuo “Elŝuti mapojn”, aŭ aktivigu la kromprogramon “Enretaj mapoj”.</string>
     <string name="send_files_to_osm">Ĉu alŝuti GPX-dosierojn al OSM?</string>
     <string name="gpx_tags_txt">Etikedoj</string>
@@ -1262,8 +1262,8 @@
     <string name="arrival_distance_factor_normally">Norme</string>
     <string name="arrival_distance_factor_late">Malfrue</string>
     <string name="arrival_distance_factor_at_last">Tre malfrue</string>
-    <string name="arrival_distance">Anonco pri alveno</string>
-    <string name="arrival_distance_descr">Kiafrue vi volas anoncon pri alveno?</string>
+    <string name="arrival_distance">Sciigo pri alveno</string>
+    <string name="arrival_distance_descr">Kiafrue vi volas akiri sciigon pri alveno?</string>
     <string name="rendering_out_of_memory">Mankas memoro por montri elektitan regionon</string>
     <string name="use_fluorescent_overlays">Rebrilaj surtavoloj</string>
     <string name="use_fluorescent_overlays_descr">Uzi rebrilajn kolorojn por montri kursojn kaj vojojn.</string>
@@ -1296,8 +1296,8 @@
     <string name="free_version_message">%1$s mapo(j) por elŝuti aŭ ĝisdatigi.</string>
     <string name="poi_context_menu_showdescription">Montri priskribon de la interesejo.</string>
     <string name="index_name_wiki">Tutmondaj Vikipediaj interesejoj</string>
-    <string name="index_name_voice">Voĉaj anoncoj (antaŭregistritaj, limigitaj ebloj)</string>
-    <string name="index_name_tts_voice">Voĉaj anoncoj (parolsintezitaj, konsilindaj)</string>
+    <string name="index_name_voice">Voĉaj sciigoj (antaŭregistritaj, limigitaj ebloj)</string>
+    <string name="index_name_tts_voice">Voĉaj sciigoj (parolsintezitaj, konsilindaj)</string>
     <string name="amenity_type_osmwiki">Vikipedio (malkonekte)</string>
     <string name="amenity_type_user_defined">Propra</string>
     <string name="fav_export_confirmation">Dosiero enhavanta antaŭelportitajn ŝatatajn punktojn jam ekzistas. Ĉu anstataŭigi ĝin?</string>
@@ -1323,8 +1323,8 @@
     <string name="choose_auto_follow_route">Aŭtomate centrigi mapon</string>
     <string name="choose_auto_follow_route_descr">Tempo antaŭ la map-vido samtempigos kun la aktuala pozicio.</string>
     <string name="keep_informing_never">Nur permane (tuŝu sageton)</string>
-    <string name="keep_informing_descr">Reanonci sciigojn pri navigado je regulaj temp-intervaloj.</string>
-    <string name="keep_informing">Reanonci navigadajn sciigojn</string>
+    <string name="keep_informing_descr">Ripeti sciigojn pri navigado je regulaj temp-intervaloj.</string>
+    <string name="keep_informing">Ripeti navigadajn sciigojn</string>
     <string name="auto_follow_route_navigation">Aŭtomate centrigi nur navigade</string>
     <string name="auto_follow_route_navigation_descr">Aŭtomate centrigas map-vidon nur dum navigado.</string>
     <string name="auto_follow_location_enabled">Aŭtomate centrigi map-vidon aktiva.</string>
@@ -1388,8 +1388,8 @@
     <string name="local_index_transport_data">Transport-publik-datumoj</string>
     <string name="local_index_map_data">Map-datumoj</string>
     <string name="local_indexes_cat_backup">Malaktivaj</string>
-    <string name="local_indexes_cat_tts">Voĉaj anoncoj (parolsintezitaj)</string>
-    <string name="local_indexes_cat_voice">Voĉaj anoncoj (antaŭregistritaj)</string>
+    <string name="local_indexes_cat_tts">Voĉaj sciigoj (parolsintezitaj)</string>
+    <string name="local_indexes_cat_voice">Voĉaj sciigoj (antaŭregistritaj)</string>
     <string name="local_indexes_cat_poi">Interesej-datumoj</string>
     <string name="ttsvoice">Parolsintezita voĉo</string>
     <string name="search_offline_clear_search">Nova serĉo</string>
@@ -1410,7 +1410,7 @@
 \n\t\n\tPor uzi ĝin, elektu \'Menuo\' → \'Agordi mapon\' → \'Map-fontoj…\' → \'Eksterretaj vektoraj mapoj\'.</string>
     <string name="choose_audio_stream">Eligo de gvidada voĉo</string>
     <string name="voice_stream_voice_call">Voĉa aŭd-kanalo (paŭzas muzikon de laŭtparoliloj de aŭto)</string>
-    <string name="choose_audio_stream_descr">Elekti laŭtparolilon por ludi voĉajn anoncojn.</string>
+    <string name="choose_audio_stream_descr">Elekti laŭtparolilon por ludi voĉajn sciigojn.</string>
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/navigada kanalo</string>
     <string name="warning_tile_layer_not_downloadable">La aplikaĵo ne povas elŝuti la map-tavolon %1$s, reinstali ĝin povas helpi.</string>
@@ -1565,7 +1565,7 @@
     <string name="gps_status_app_not_found">Aplikaĵo por stato de GPS ne estas instalita. Ĉu serĉi ĝin en la vendejo?</string>
     <string name="unzipping_file">Elarĥivigado de dosiero…</string>
     <string name="voice_is_not_available_title">Elektu pakaĵon de voĉaj sciigoj</string>
-    <string name="voice_is_not_available_msg">Neniu gvidanta voĉo elektita, iru al “agordoj” → profilo → “navigadaj agordoj” → “voĉaj anoncoj” kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
+    <string name="voice_is_not_available_msg">Neniu gvidanta voĉo elektita, iru al “Agordoj” → profilo → “Navigadaj agordoj” → “Voĉaj sciigoj” kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
     <string name="tiles_to_download_estimated_size">Elŝuti {1} kahelojn je skal-nivelo {0} ({2} MB)</string>
     <string name="select_max_zoom_preload_area">Maksimuma skal‑nivelo por elŝuti</string>
     <string name="maps_could_not_be_downloaded">Tiu ĉi mapo ne povas esti elŝutita</string>
@@ -1587,7 +1587,7 @@
     <string name="transport_searching_route">Serĉrezultoj pri transporto ({0} al celo):</string>
     <string name="transport_search_again">Rekomencigi serĉadon de transporto</string>
     <string name="voice">Registrita voĉo</string>
-    <string name="voices">Voĉaj anoncoj</string>
+    <string name="voices">Voĉaj sciigoj</string>
     <string name="no_vector_map_loaded">Ne ŝargis vektorajn mapojn</string>
     <string name="vector_data">Malkonektaj vektoraj mapoj</string>
     <string name="transport_context_menu">Serĉi transporton ĉe haltejo</string>
@@ -1662,7 +1662,7 @@
     <string name="voice_data_initializing">Inicado de voĉaj datumoj…</string>
     <string name="voice_data_not_supported">Nesubtenata versio de voĉ-datumoj</string>
     <string name="voice_data_corrupted">Elektitaj voĉ-datumoj estas damaĝitaj</string>
-    <string name="voice_data_unavailable">Elektita pakaĵo de voĉaj anoncoj ne estas disponebla</string>
+    <string name="voice_data_unavailable">Elektita pakaĵo de voĉaj sciigoj ne estas disponebla</string>
     <string name="sd_unmounted">Memorkarto ne alirebla.\nVi ne povos vidi mapojn kaj serĉi ejojn.</string>
     <string name="sd_mounted_ro">Memorkarto estas nurlega.
 \nNun nur eblas foliumi jam-instalitajn mapojn, sed ne elŝuti novajn regionojn.</string>
@@ -2785,7 +2785,7 @@
     <string name="show_along_the_route">Montri laŭlonge de kurso</string>
     <string name="simulate_navigation">Simuli navigadon</string>
     <string name="choose_track_file_to_follow">Elektu dosieron de kurso por sekvi</string>
-    <string name="voice_announcements">Voĉaj anoncoj</string>
+    <string name="voice_announcements">Voĉaj sciigoj</string>
     <string name="intermediate_destinations">Interceloj</string>
     <string name="arrive_at_time">Alveno je %1$s</string>
     <string name="cubic_m">m³</string>
@@ -3135,9 +3135,9 @@
     <string name="shared_string_other">Aliaj</string>
     <string name="vehicle_parameters_descr">Pezo, alto, longo, rapido</string>
     <string name="vehicle_parameters">Parametroj de veturilo</string>
-    <string name="voice_announces_info">Voĉaj anoncoj estas ludataj nur dum navigi.</string>
+    <string name="voice_announces_info">Voĉaj sciigoj estas ludataj nur dum navigi.</string>
     <string name="voice_announces_descr">Navigaj gvidiloj kaj anoncoj</string>
-    <string name="voice_announces">Voĉaj anoncoj</string>
+    <string name="voice_announces">Voĉaj sciigoj</string>
     <string name="screen_alerts">Ekranaj avertoj</string>
     <string name="route_parameters_descr">Agordi parametrojn de navigo</string>
     <string name="route_parameters">Parametroj de navigo</string>
@@ -3299,7 +3299,7 @@
     <string name="photo_notes">Fotaj notoj</string>
     <string name="route_recalculation">Rekalkuli kurson</string>
     <string name="button_rate">Taksi</string>
-    <string name="accessibility_announce">Anonco</string>
+    <string name="accessibility_announce">Sciigo</string>
     <string name="login_and_pass">Uzantnomo kaj pasvorto</string>
     <string name="plugin_global_prefs_info">Agordoj pri tiu ĉi kromprogramo aplikiĝos al ĉiuj profiloj</string>
     <string name="osm_editing">OSM‑redaktilo</string>
@@ -3631,26 +3631,26 @@
     <string name="vessel_height_limit_description">Enigu alton de akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_width_limit_description">Enigu larĝon de akvoveturilo por eviti mallarĝajn pontojn</string>
     <string name="quick_action_showhide_mapillary_descr">Ŝaltilo por montri aŭ kaŝi tavolon de Mapillary sur la mapo.</string>
-    <string name="uninstall_speed_cameras">Malinstali informojn pri rapidkontroliloj</string>
+    <string name="uninstall_speed_cameras">Malinstali informojn pri rapid-kontroliloj</string>
     <string name="shared_string_legal">Leĝaj</string>
-    <string name="speed_camera_pois">Pozicioj de rapidkontroliloj</string>
-    <string name="speed_cameras_legal_descr">En iuj landoj kaj regionoj uzado de aplikaĵoj avertantaj pri rapidkontroliloj estas kontraŭleĝa.
+    <string name="speed_camera_pois">Pozicioj de rapid-kontroliloj</string>
+    <string name="speed_cameras_legal_descr">En iuj landoj kaj regionoj uzado de aplikaĵoj avertantaj pri rapid-kontroliloj estas kontraŭleĝa.
 \n
 \nVi devas elekti laŭleĝe de via lando.
 \n
-\nElektu “%1$s” por pluigi ricevi avertojn pri rapidkontroliloj.
+\nElektu “%1$s” por pluigi ricevi avertojn pri rapid-kontroliloj.
 \n
-\nElektu “%2$s” por forigi (ĝis la reinstalo de OsmAnd) ĉiujn datumojn pri rapidkontrolilojn: avertojn, sciigojn, poziciojn.</string>
+\nElektu “%2$s” por forigi (ĝis la reinstalo de OsmAnd) ĉiujn datumojn pri rapid-kontrolilojn: avertojn, sciigojn, poziciojn.</string>
     <string name="keep_active">Plue uzi</string>
     <string name="shared_string_uninstall">Malinstali</string>
-    <string name="speed_cameras_alert">Avertoj pri rapidkontroliloj estas kontraŭleĝaj en iuj landoj.</string>
+    <string name="speed_cameras_alert">Avertoj pri rapid-kontroliloj estas kontraŭleĝaj en iuj landoj.</string>
     <string name="shared_string_bearing">Direkto</string>
     <string name="item_deleted">%1$s forigita</string>
-    <string name="speed_cameras_restart_descr">Restartigu la aplikaĵon por forigi ĉiujn datumojn pri rapidkontroliloj.</string>
+    <string name="speed_cameras_restart_descr">Restartigu la aplikaĵon por forigi ĉiujn datumojn pri rapid-kontroliloj.</string>
     <string name="shared_string_uninstall_and_restart">Malinstali kaj restartigi</string>
     <string name="routing_attr_length_description">Difini permesatan longon de veturilo.</string>
     <string name="routing_attr_length_name">Longo</string>
-    <string name="speed_cameras_removed_descr">Tiu ĉi aplikaĵo ne liveras informojn pri rapidkontrolliloj.</string>
+    <string name="speed_cameras_removed_descr">Tiu ĉi aplikaĵo ne liveras informojn pri rapid-kontrolliloj.</string>
     <string name="app_mode_inline_skates">Rulglitiloj</string>
     <string name="use_volume_buttons_as_zoom">Skali per sonfortecaj butonoj</string>
     <string name="use_volume_buttons_as_zoom_descr">Pligrandigi/malgrandigi la mapon per butonoj de sonforteco.</string>
@@ -3885,7 +3885,7 @@
     <string name="routing_attr_allow_streams_name">Permesi riveretojn kaj fosaĵojn</string>
     <string name="routing_attr_allow_intermittent_description">Permesi navigi per periode sekiĝantaj akvovojoj</string>
     <string name="routing_attr_allow_intermittent_name">Permesi sezonajn akvovojojn</string>
-    <string name="voice_prompts_timetable">Tempoj de voĉaj anoncoj</string>
+    <string name="voice_prompts_timetable">Tempoj de voĉaj sciigoj</string>
     <string name="add_online_routing_engine">Aldoni enretan navigilon</string>
     <string name="edit_online_routing_engine">Redakti enretan navigilon</string>
     <string name="shared_string_subtype">Subspeco</string>
@@ -4045,7 +4045,7 @@
     <string name="annual_subscription">Jara abono</string>
     <string name="monthly_subscription">Monata abono</string>
     <string name="update_all_maps_added">Ĉu ĝisdatigi ĉiujn mapojn aldonitajn al %1$s\?</string>
-    <string name="announce_when_exceeded">Anonci kiam superita</string>
+    <string name="announce_when_exceeded">Sciigi kiam superita</string>
     <string name="exit_number">Numero de elirejo</string>
     <string name="user_points">Poentoj de uzanto</string>
     <string name="output">Eligo</string>
@@ -4059,7 +4059,7 @@
     <string name="language_description">Elektu preferatan lingvon kaj specon de voĉo por navigaj gvidiloj.</string>
     <string name="tts_description">Uzante parolsintezitajn voĉojn la aplikaĵo povas elparoli ĉiujn specojn de instrukcioj: gvidiloj pri turnoj, nomoj de stratoj kaj interesejoj, ktp.</string>
     <string name="tts_title">Parolsintezita</string>
-    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
+    <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas elparoli nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
     <string name="shared_string_itinerary">Kurso</string>
     <string name="route_line_use_map_style_width">Uzi implicitan larĝon de la map‑stilo %1$s.</string>
@@ -4822,8 +4822,8 @@
     <string name="map_widget_ant_bicycle_speed">Rapido de biciklo</string>
     <string name="depth_contours">Profundec-kurboj</string>
     <string name="worldwide_maps">Tutteraj mapoj</string>
-    <string name="speak_gps_signal_status">Anonci perdon aŭ akiron de GPS-signalon</string>
-    <string name="speak_route_recalculation">Anonci rekalkulon de kurso</string>
+    <string name="speak_gps_signal_status">Sciigi pri perdo aŭ akiro de signalo GPS</string>
+    <string name="speak_route_recalculation">Sciigi pri rekalkulo de kurso</string>
     <string name="purchases_feature_desc_external_sensors">Havigu vidon kaj registru datumojn de eksteraj sentiloj: rapidon de pedalado, rapidon kaj povumon de biciklado, kaj koran pulson.</string>
     <string name="external_sensors_support">Subteno por eksteraj sentiloj</string>
     <string name="release_4_3">• nova , pli rapida map-bildigilo kun 2,5-dimensia vido
@@ -5101,7 +5101,7 @@
     <string name="select_layer">Elekti tavolon</string>
     <string name="weather_forecast_is_outdated">Veterprognozo estas malaktuala.</string>
     <string name="rendering_value_defaultMedium_name">Implicita (meza)</string>
-    <string name="speak_route_deviation">Anonci devojiĝon de la kurso</string>
+    <string name="speak_route_deviation">Sciigi pri devojiĝo de la kurso</string>
     <string name="shutter_sound">Sono dum fari foton</string>
     <string name="camera_app">Aplikaĵo de fotilo</string>
     <string name="proxy_port_max_warning">La maksimuma numero de pordo estas %1$s</string>
@@ -5361,7 +5361,7 @@
     <string name="send_logcat_log_descr">Detala erar-protokolo</string>
     <string name="contact_us">Kontakti</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Ekrano de mapo dum navigi</string>
-    <string name="help_article_navigation_guidance_voice_navigation_name">Voĉaj anoncoj</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">Voĉaj kaj surekranaj sciigoj</string>
     <string name="help_article_start_with_main_menu_name">Ĉefmenuo</string>
     <string name="help_article_map_legend_nautical_map_name">Map-stilo marnavigada</string>
     <string name="help_article_map_legend_osmand_name">Map-stilo OsmAnd</string>
@@ -5375,7 +5375,7 @@
     <string name="help_article_map_vector_maps_name">Vektoraj mapoj kaj map-stiloj</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Anoncoj</string>
+    <string name="help_article_navigation_guidance_name">Navigaj sciigoj</string>
     <string name="help_article_navigation_routing_name">Parametroj de navigo</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Biciklo / montbiciklo</string>
     <string name="help_article_navigation_routing_boat_navigation_name">Boato</string>
@@ -5622,4 +5622,10 @@
     <string name="shared_string_speedometer">Rapidmezurilo</string>
     <string name="speed_limit_warning">Averto pri rapidlimo</string>
     <string name="help_article_setup_a_route_name">Difini kurson</string>
+    <string name="rendering_attr_padusDisplayMode_name">Maniero montri publikaj terenoj</string>
+    <string name="rendering_attr_padusDisplayMode_description">Laŭ aliro aŭ laŭ nomo de administranto</string>
+    <string name="rendering_value_access_name">Laŭ aliro</string>
+    <string name="rendering_value_managerName_name">Laŭ nomo de administranto</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Kaŝi limojn de publikaj terenoj</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Kaŝi limojn de publikaj terenoj sed ne kaŝi areojn</string>
 </resources>

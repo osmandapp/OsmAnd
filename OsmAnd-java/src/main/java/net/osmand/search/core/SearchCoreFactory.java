@@ -641,8 +641,11 @@ public class SearchCoreFactory {
 							}
 							SearchResult sr = new SearchResult(phrase);
 							sr.otherNames = object.getOtherNames(true);
-							sr.localeName = object.getName(phrase.getSettings().getLang(),
-									phrase.getSettings().isTransliterate());
+							sr.localeName = object.getName(phrase.getSettings().getLang());
+							if (!nm.matches(sr.localeName)) {
+								sr.localeName = object.getName(phrase.getSettings().getLang(),
+										phrase.getSettings().isTransliterate());
+							}
 							if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
 									&& !nm.matches(object.getAdditionalInfoValues(false))) {
 								return false;

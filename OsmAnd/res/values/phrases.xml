@@ -187,6 +187,11 @@
 	<string name="poi_healthcare_speciality_laboratory">Healthcare speciality: laboratory</string>
 	<string name="poi_us_maps_recreation_area_activity">Recreation area activity</string>
 	<string name="poi_us_maps_recreation_area_open_status">Recreation area access status</string>
+	<string name="poi_impromptu">Impromptu</string>
+	<string name="poi_reservation">Reservation</string>
+	<string name="poi_us_maps_recreation_area_facility">Recreation area facility</string>
+	<string name="poi_live_music">Live music</string>
+
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -2391,8 +2396,8 @@
 	<string name="poi_shower_indoor">Shower: indoor</string>
 	<string name="poi_caravans_yes">Yes;Caravans</string>
 	<string name="poi_caravans_no">Caravans: no</string>
-	<string name="poi_impromptu_yes">Impromptu: yes</string>
-	<string name="poi_impromptu_no">Impromptu: no</string>
+	<string name="poi_impromptu_yes">Yes</string>
+	<string name="poi_impromptu_no">No</string>
 	<string name="poi_sanitary_dump_station_yes">Sanitary dump station: yes</string>
 	<string name="poi_sanitary_dump_station_no">Sanitary dump station: no</string>
 	<string name="poi_power_supply_yes">Yes;Power supply</string>
@@ -3536,11 +3541,11 @@
 
 	<string name="poi_winter_room_yes">Winter room: yes</string>
 	<string name="poi_winter_room_no">Winter room: no</string>
-	<string name="poi_reservation_required">Reservation: required</string>
-	<string name="poi_reservation_recommended">Reservation: recommended</string>
-	<string name="poi_reservation_yes">Reservation: yes</string>
-	<string name="poi_reservation_no">Reservation: no</string>
-	<string name="poi_reservation_members_only">Reservation: members only</string>
+	<string name="poi_reservation_required">Required</string>
+	<string name="poi_reservation_recommended">Recommended</string>
+	<string name="poi_reservation_yes">Yes</string>
+	<string name="poi_reservation_no">No</string>
+	<string name="poi_reservation_members_only">Members only</string>
 
 	<string name="poi_beds">Beds</string>
 
@@ -5320,7 +5325,7 @@
 	<string name="poi_us_maps_recreation_area_activity_big_game_hunting">Big Game Hunting</string>
 	<string name="poi_us_maps_recreation_area_activity_boating_motorized">Motorized boating</string>
 	<string name="poi_us_maps_recreation_area_activity_boating_non_motorized">Non-motorized boating</string>
-	<string name="poi_us_maps_recreation_area_activity_cabin_rentals">Cabin rentals</string>
+	<string name="poi_us_maps_recreation_area_facility_cabin_rentals">Cabin rentals</string>
 	<string name="poi_us_maps_recreation_area_activity_campground_camping">Campground camping</string>
 	<string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Camping and cabins</string>
 	<string name="poi_us_maps_recreation_area_activity_caving">Caving</string>
@@ -5414,5 +5419,33 @@
 	<string name="poi_via">Via</string>
 
 	<string name="poi_photo_booth">Photo booth</string>
+
+	<string name="poi_us_maps_recreation_area_activity_poi">Point Of Interest</string>
+	<string name="poi_us_maps_recreation_area_activity_scenic_overlook">Scenic overlook</string>
+	<string name="poi_us_maps_recreation_area_activity_day_use_site">Day use area;Day use site;Day-use area;Day-use site;Day-use recreation area;Day-use recreation site</string>
+	<string name="poi_us_maps_recreation_area_facility_cabin">Cabin</string>
+	<string name="poi_us_maps_recreation_area_facility_airplane_landing_strip">Airplane landing strip</string>
+	<string name="poi_us_maps_recreation_area_facility_ranger_station_office">Ranger Station/Field Office</string>
+	<string name="poi_us_maps_recreation_area_facility_boat_launch">Boat launch</string>
+	<string name="poi_us_maps_recreation_area_facility_boat_ramp">Boat ramp</string>
+	<string name="poi_us_maps_recreation_area_facility_boat_takeout">Boat takeout</string>
+	<string name="poi_us_maps_recreation_area_facility_fire_lookout">Fire lookout</string>
+	<string name="poi_us_maps_recreation_area_facility_group_shelter">Group shelter</string>
+	<string name="poi_us_maps_recreation_area_facility_horse_stanchion">Horse stanchion</string>
+	<string name="poi_us_maps_recreation_area_facility_horse_corral">Horse corral</string>
+	<string name="poi_us_maps_recreation_area_facility_lighthouse">Lighthouse</string>
+	<string name="poi_us_maps_recreation_area_facility_natural_endangered_area">Natural/Endangered Area</string>
+	<string name="poi_us_maps_recreation_area_facility_rapid">Rapid</string>
+	<string name="poi_us_maps_recreation_area_facility_rv_dump_station">RV dump station</string>
+	<string name="poi_us_maps_recreation_area_facility_warming_hut">Warming hut</string>
+	<string name="poi_us_maps_recreation_area_facility_parking">Parking area</string>
+
+	<string name="poi_music_venue">Music venue</string>
+	<string name="poi_live_music_yes">Yes</string>
+
+	<string name="poi_shop_general">General shop</string>
+
+	<string name="poi_cuisine_fish">Fish</string>
+
 
 </resources>

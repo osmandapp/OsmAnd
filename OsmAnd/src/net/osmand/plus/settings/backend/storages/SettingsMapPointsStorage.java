@@ -1,10 +1,13 @@
 package net.osmand.plus.settings.backend.storages;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.settings.enums.HistorySource;
 
 import java.util.ArrayList;
@@ -14,46 +17,48 @@ import java.util.StringTokenizer;
 
 abstract class SettingsMapPointsStorage {
 
-	private final OsmandSettings osmandSettings;
-	private final boolean lastModifiedTimeStored;
-	protected String pointsKey;
-	protected String descriptionsKey;
+	protected final OsmandSettings settings;
 
-	public SettingsMapPointsStorage(OsmandSettings osmandSettings, boolean storeLastModifiedTime) {
-		this.osmandSettings = osmandSettings;
-		this.lastModifiedTimeStored = storeLastModifiedTime;
+	protected final CommonPreference<String> POINTS;
+	protected final CommonPreference<String> DESCRIPTIONS;
+
+
+	public SettingsMapPointsStorage(@NonNull OsmandSettings settings) {
+		this.settings = settings;
+
+		POINTS = new StringPreference(settings, getPointsKey(), "").makeGlobal().makeShared();
+		DESCRIPTIONS = new StringPreference(settings, getDescriptionsKey(), "").makeGlobal().makeShared();
 	}
 
-	protected SettingsAPI getSettingsAPI() {
-		return osmandSettings.getSettingsAPI();
-	}
+	@NonNull
+	protected abstract String getPointsKey();
 
-	protected OsmandSettings getOsmandSettings() {
-		return osmandSettings;
-	}
+	@NonNull
+	protected abstract String getDescriptionsKey();
 
-	public boolean isLastModifiedTimeStored() {
-		return lastModifiedTimeStored;
+	@NonNull
+	protected OsmandSettings getSettings() {
+		return settings;
 	}
 
 	public long getLastModifiedTime() {
-		if (!lastModifiedTimeStored) {
-			throw new IllegalStateException(pointsKey + " is not granted to store last modified time");
+		if (!POINTS.isLastModifiedTimeStored()) {
+			throw new IllegalStateException(getPointsKey() + " is not granted to store last modified time");
 		}
-		return getSettingsAPI().getLong(osmandSettings.getGlobalPreferences(), pointsKey + "_last_modified", 0);
+		return POINTS.getLastModifiedTime();
 	}
 
 	public void setLastModifiedTime(long lastModifiedTime) {
-		if (!lastModifiedTimeStored) {
-			throw new IllegalStateException(pointsKey + " is not granted to store last modified time");
+		if (!POINTS.isLastModifiedTimeStored()) {
+			throw new IllegalStateException(getPointsKey() + " is not granted to store last modified time");
 		}
-		getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
-				.putLong(pointsKey + "_last_modified", lastModifiedTime).commit();
+		POINTS.setLastModifiedTime(lastModifiedTime);
 	}
 
+	@NonNull
 	public List<String> getPointDescriptions(int sz) {
 		List<String> list = new ArrayList<>();
-		String ip = getSettingsAPI().getString(osmandSettings.getGlobalPreferences(), descriptionsKey, "");
+		String ip = DESCRIPTIONS.get();
 		if (ip.trim().length() > 0) {
 			list.addAll(Arrays.asList(ip.split("--")));
 		}
@@ -66,9 +71,10 @@ abstract class SettingsMapPointsStorage {
 		return list;
 	}
 
+	@NonNull
 	public List<LatLon> getPoints() {
 		List<LatLon> list = new ArrayList<>();
-		String ip = getSettingsAPI().getString(osmandSettings.getGlobalPreferences(), pointsKey, "");
+		String ip = POINTS.get();
 		if (ip.trim().length() > 0) {
 			StringTokenizer tok = new StringTokenizer(ip, ",");
 			while (tok.hasMoreTokens()) {
@@ -88,8 +94,8 @@ abstract class SettingsMapPointsStorage {
 		List<String> ds = getPointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, PointDescription.serializeToString(historyDescription));
-		if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.getContext())) {
-			SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
+		if (historyDescription != null && !historyDescription.isSearchingAddress(settings.getContext())) {
+			SearchHistoryHelper.getInstance(settings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
 		}
 		return savePoints(ps, ds);
 	}
@@ -100,8 +106,8 @@ abstract class SettingsMapPointsStorage {
 		int i = ps.indexOf(new LatLon(latitude, longitude));
 		if (i != -1) {
 			ds.set(i, PointDescription.serializeToString(historyDescription));
-			if (historyDescription != null && !historyDescription.isSearchingAddress(osmandSettings.getContext())) {
-				SearchHistoryHelper.getInstance(osmandSettings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
+			if (historyDescription != null && !historyDescription.isSearchingAddress(settings.getContext())) {
+				SearchHistoryHelper.getInstance(settings.getContext()).addNewItemToHistory(latitude, longitude, historyDescription, HistorySource.NAVIGATION);
 			}
 			return savePoints(ps, ds);
 		} else {
@@ -121,7 +127,7 @@ abstract class SettingsMapPointsStorage {
 		}
 	}
 
-	public boolean deletePoint(LatLon latLon) {
+	public boolean deletePoint(@NonNull LatLon latLon) {
 		List<LatLon> ps = getPoints();
 		List<String> ds = getPointDescriptions(ps.size());
 		int index = ps.indexOf(latLon);
@@ -134,33 +140,26 @@ abstract class SettingsMapPointsStorage {
 		}
 	}
 
-	public boolean savePoints(List<LatLon> ps, List<String> ds) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < ps.size(); i++) {
+	public boolean savePoints(@NonNull List<LatLon> points, @NonNull List<String> descriptions) {
+		StringBuilder pointsBuilder = new StringBuilder();
+		for (int i = 0; i < points.size(); i++) {
 			if (i > 0) {
-				sb.append(",");
+				pointsBuilder.append(",");
 			}
-			sb.append(((float) ps.get(i).getLatitude() + "")).append(",").append(((float) ps.get(i).getLongitude() + ""));
+			pointsBuilder.append(((float) points.get(i).getLatitude() + "")).append(",").append(((float) points.get(i).getLongitude() + ""));
 		}
-		StringBuilder tb = new StringBuilder();
-		for (int i = 0; i < ds.size(); i++) {
+		StringBuilder descriptionsBuilder = new StringBuilder();
+		for (int i = 0; i < descriptions.size(); i++) {
 			if (i > 0) {
-				tb.append("--");
+				descriptionsBuilder.append("--");
 			}
-			if (ds.get(i) == null) {
-				tb.append("");
+			if (descriptions.get(i) == null) {
+				descriptionsBuilder.append("");
 			} else {
-				tb.append(ds.get(i));
+				descriptionsBuilder.append(descriptions.get(i));
 			}
 		}
-		if (lastModifiedTimeStored) {
-			getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
-					.putLong(pointsKey + "_last_modified", System.currentTimeMillis()).commit();
-		}
-		return getSettingsAPI().edit(osmandSettings.getGlobalPreferences())
-				.putString(pointsKey, sb.toString())
-				.putString(descriptionsKey, tb.toString())
-				.commit();
+		return POINTS.set(pointsBuilder.toString()) && DESCRIPTIONS.set(descriptionsBuilder.toString());
 	}
 
 	public boolean movePoint(LatLon latLonEx, LatLon latLonNew) {

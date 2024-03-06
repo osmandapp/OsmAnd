@@ -784,7 +784,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 
 		if (shouldReattachCards && infoCard != null && infoCard.getView() != null) {
-			reattachCard(cardsContainer, authorCard);
+			reattachCard(cardsContainer, infoCard);
 		} else {
 			infoCard = new InfoCard(getMapActivity(), selectedGpxFile.getGpxFile().metadata, routeKey);
 			cardsContainer.addView(infoCard.build(mapActivity));
@@ -1141,7 +1141,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == ANALYZE_ON_MAP_BUTTON_INDEX) {
 				OpenGpxDetailsTask detailsTask = new OpenGpxDetailsTask(mapActivity, gpxFile, null);
 				detailsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				dismiss();
+				hide();
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
 				TrkSegment segment = gpxFile.getGeneralSegment();
 				if (segment == null) {

@@ -1,11 +1,10 @@
-package net.osmand.plus.routepreparationmenu;
+package net.osmand.plus.avoidroads;
 
 import static net.osmand.IndexConstants.AVOID_ROADS_FILE_EXT;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,8 +30,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.routing.AvoidRoadsHelper;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -63,11 +60,11 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private static final String AVOID_ROADS_APP_MODE_KEY = "avoid_roads_app_mode";
 
 	private OsmandApplication app;
-	private AvoidRoadsHelper avoidRoadsHelper;
+	private DirectionPointsHelper pointsHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 
 	private HashMap<String, Boolean> routingParametersMap;
-	private List<LatLon> removedImpassableRoads;
+	private List<AvoidRoadInfo> removedImpassableRoads;
 	private final List<String> enabledFiles = new ArrayList<>();
 	private LinearLayout stylesContainer;
 
@@ -87,7 +84,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
-		avoidRoadsHelper = app.getAvoidRoadsHelper();
+		pointsHelper = app.getAvoidSpecificRoads().getPointsHelper();
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 
 		ApplicationMode mode = appMode != null ? appMode : app.getSettings().getApplicationMode();
@@ -98,7 +95,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 				routingParametersMap = (HashMap<String, Boolean>) AndroidUtils.getSerializable(savedInstanceState, AVOID_ROADS_TYPES_KEY, HashMap.class);
 			}
 			if (savedInstanceState.containsKey(AVOID_ROADS_OBJECTS_KEY)) {
-				removedImpassableRoads = (List<LatLon>) AndroidUtils.getSerializable(savedInstanceState, AVOID_ROADS_OBJECTS_KEY, ArrayList.class);
+				removedImpassableRoads = (List<AvoidRoadInfo>) AndroidUtils.getSerializable(savedInstanceState, AVOID_ROADS_OBJECTS_KEY, ArrayList.class);
 			}
 			if (savedInstanceState.containsKey(AVOID_ROADS_APP_MODE_KEY)) {
 				appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(AVOID_ROADS_APP_MODE_KEY), null);
@@ -108,7 +105,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (savedInstanceState != null) {
 			selectedFileNames = savedInstanceState.getStringArrayList(ENABLED_FILES_IDS);
 		} else {
-			selectedFileNames = avoidRoadsHelper.getSelectedFilesForMode(mode);
+			selectedFileNames = pointsHelper.getSelectedFilesForMode(mode);
 		}
 		if (!Algorithms.isEmpty(selectedFileNames)) {
 			enabledFiles.addAll(selectedFileNames);
@@ -150,8 +147,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(stylesContainer).create());
 
 		if (!hideImpassableRoads) {
-			for (LatLon routeDataObject : app.getAvoidSpecificRoads().getImpassableRoads().keySet()) {
-				if (removedImpassableRoads.contains(routeDataObject)) {
+			for (AvoidRoadInfo roadInfo : app.getAvoidSpecificRoads().getImpassableRoads()) {
+				if (removedImpassableRoads.contains(roadInfo)) {
 					continue;
 				}
 				themedInflater.inflate(R.layout.bottom_sheet_item_simple_right_icon, stylesContainer, true);
@@ -164,12 +161,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			buttonDescription.setTextColor(ColorUtilities.getActiveColor(app, nightMode));
 
 			FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
-				AndroidUtils.setBackground(app, buttonDescription, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
-			} else {
-				AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
-			}
+			AndroidUtils.setBackground(app, buttonContainer, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
+			AndroidUtils.setBackground(app, buttonDescription, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 
 			buttonContainer.setOnClickListener(v -> {
 				MapActivity mapActivity = getMapActivity();
@@ -198,23 +191,22 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private void populateImpassableRoadsObjects() {
 		Context context = requireContext();
 		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
-		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
 
 		int counter = 0;
-		for (LatLon routeDataObject : avoidSpecificRoads.getImpassableRoads().keySet()) {
-			if (removedImpassableRoads.contains(routeDataObject)) {
+		for (AvoidRoadInfo roadInfo : avoidRoadsHelper.getImpassableRoads()) {
+			if (removedImpassableRoads.contains(roadInfo)) {
 				continue;
 			}
-			String name = avoidSpecificRoads.getText(routeDataObject);
 
 			View view = stylesContainer.getChildAt(counter);
 			view.setOnClickListener(v -> {
-				removedImpassableRoads.add(routeDataObject);
+				removedImpassableRoads.add(roadInfo);
 				stylesContainer.removeView(v);
 			});
 
 			TextView titleTv = view.findViewById(R.id.title);
-			titleTv.setText(name);
+			titleTv.setText(roadInfo.getName(app));
 			titleTv.setTextColor(activeColor);
 
 			ImageView icon = view.findViewById(R.id.icon);
@@ -252,7 +244,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsFiles() {
-		List<File> avoidRoadsFiles = avoidRoadsHelper.collectAvoidRoadsFiles();
+		List<File> avoidRoadsFiles = pointsHelper.collectAvoidRoadsFiles();
 		if (!Algorithms.isEmpty(avoidRoadsFiles)) {
 			items.add(new SubtitleDividerItem(app));
 			items.add(new TitleItem(getString(R.string.files_with_route_restrictions)));
@@ -284,7 +276,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 						})
 						.create();
 
-				avoidRoadsHelper.getDirectionPointsForFileAsync(file, result -> {
+				pointsHelper.getDirectionPointsForFileAsync(file, result -> {
 					int size = result.queryInBox(new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE), new ArrayList<>()).size();
 
 					String roads = getString(R.string.roads);
@@ -343,9 +335,9 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			}
 		}
 
-		AvoidSpecificRoads avoidSpecificRoads = app.getAvoidSpecificRoads();
-		for (LatLon routeLocation : removedImpassableRoads) {
-			avoidSpecificRoads.removeImpassableRoad(routeLocation);
+		AvoidRoadsHelper avoidRoadsHelper = app.getAvoidSpecificRoads();
+		for (AvoidRoadInfo avoidRoadInfo : removedImpassableRoads) {
+			avoidRoadsHelper.removeImpassableRoad(avoidRoadInfo);
 		}
 
 		app.getRoutingHelper().onSettingsChanged(true);
@@ -353,7 +345,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 		if (mapActivity != null) {
 			mapActivity.getMapRouteInfoMenu().updateMenu();
 		}
-		avoidRoadsHelper.setSelectedFilesForMode(mode, enabledFiles);
+		pointsHelper.setSelectedFilesForMode(mode, enabledFiles);
 
 		dismiss();
 	}

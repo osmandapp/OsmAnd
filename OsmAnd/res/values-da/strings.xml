@@ -5234,7 +5234,7 @@
     <string name="relief_3d_description">Ej og se skalamodellen af dit nabolag eller hele kontinentet.</string>
     <string name="terrain_category_description">Terrænkonturlinjer, gråtonede terrænskygger og hældningsangivelse med farveskala for at vise toppe og lavland.</string>
     <string name="slope_legend_description">Hældning bruger farver til at visualisere terrænets stejlhed. Du kan læse mere om hældning i %1$s.</string>
-    <string name="osmand_cloud_deleting_account_descr">Om få øjeblikke vil alle dine data og konto blive slettet fra OsmAnd Cloud.
+    <string name="osmand_cloud_deleting_account_descr">I løbet af få øjeblikke vil alle dine data og din konto blive slettet fra OsmAnd Cloud.
 \n
 \nAlle data på enheden forbliver uberørte.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">Slet OsmAnd Cloud-konto?
@@ -5254,9 +5254,9 @@
     <string name="verify_account">Bekræft din konto</string>
     <string name="osmand_cloud_deleted_account_descr">Konto og alle data blev slettet fra OsmAnd Cloud.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Dette vil ikke annullere dit OsmAnd Pro-abonnement.</string>
-    <string name="verify_account_deletion_descr">Vi er nødt til at verificere din konto, før vi sletter den.
+    <string name="verify_account_deletion_descr">Vi skal bekræfte din konto, før du sletter den.
 \n
-\nIndtast venligst den e-mailadresse, du registrerede dig med. En engangskode til næste trin vil blive sendt til den.</string>
+\nIndtast den e-mail-adresse, du registrerede dig med. En engangskode til næste trin vil blive sendt til den.</string>
     <string name="release_4_5">• BLE/ANT+ sensors: omarbejdet forbindelse, skrivning og visning af modtagne data til GPX
 \n
 \n • Gratis backup af favoritter og indstillinger til \"OsmAnd Cloud\"
@@ -5632,4 +5632,10 @@
     <string name="when_exceeded">Når overskredet</string>
     <string name="speedometer_description">Viser din aktuelle hastighed som rapporteret via GPS</string>
     <string name="help_article_setup_a_route_name">Opret en rute</string>
+    <string name="rendering_attr_padusDisplayMode_description">Efter adgangstype eller forvalternavn</string>
+    <string name="rendering_value_access_name">Efter adgangstype</string>
+    <string name="rendering_value_managerName_name">Efter forvalternavn</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Skjul grænser for offentlige arealer</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Skjul grænserne for offentlige arealer, men bevar områderne</string>
+    <string name="rendering_attr_padusDisplayMode_name">Visning af offentlige arealer</string>
 </resources>

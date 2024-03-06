@@ -409,7 +409,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 		dataSet.setAxisValueFormatter((app1, value) -> OsmAndFormatter.formatValue(value, "", true, 2, app1).value);
 
 		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(false));
-		YAxis yAxis = ChartUtils.getYAxis(chart, textColor, useRightAxis);
+		YAxis yAxis = ChartUtils.getAndEnableYAxis(chart, textColor, useRightAxis);
 		yAxis.resetAxisMinimum();
 		String mainUnitY = graphType.getMainUnitY(app);
 		yAxis.setValueFormatter((value, axis) ->

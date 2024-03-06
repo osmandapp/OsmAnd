@@ -21,8 +21,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.LineData;
@@ -104,7 +104,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		setupScrollListener();
 
-		LineChart lineChart = view.findViewById(R.id.line_chart);
+		ElevationChart lineChart = view.findViewById(R.id.line_chart);
 		HorizontalBarChart barChart = view.findViewById(R.id.horizontal_chart);
 		commonGraphAdapter = new CommonChartAdapter(app, lineChart, true);
 		customGraphAdapter = new CustomChartAdapter(app, barChart, true);
@@ -289,7 +289,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			int progressSize = app.getResources().getDimensionPixelSize(R.dimen.icon_size_double);
 			String buttonText = app.getString(R.string.shared_string_cancel);
 			showMessage(null, desc, INVALID_ID, progressSize);
-			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(), true);
+			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(true), true);
 		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
 			String title = app.getString(R.string.no_altitude_data);
 			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
@@ -499,7 +499,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		@Override
 		public LineData getChartData() {
-			ChartUtils.setupGPXChart(commonGraphAdapter.getChart(), 24f, 16f, true);
+			ChartUtils.setupElevationChart(commonGraphAdapter.getChart(), 24f, 16f, true);
 			List<ILineDataSet> dataSets = ChartUtils.getDataSets(commonGraphAdapter.getChart(),
 					app, analysis, firstType, secondType, false);
 			return new LineData(dataSets);

@@ -8,8 +8,8 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -29,7 +29,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	private static final int APPROXIMATE_AVOID_ROAD_SIZE_BYTES = 185;
 
 	private OsmandSettings settings;
-	private AvoidSpecificRoads specificRoads;
+	private AvoidRoadsHelper avoidRoadsHelper;
 
 	public AvoidRoadsSettingsItem(@NonNull OsmandApplication app, @NonNull List<AvoidRoadInfo> items) {
 		super(app, null, items);
@@ -47,8 +47,8 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	protected void init() {
 		super.init();
 		settings = app.getSettings();
-		specificRoads = app.getAvoidSpecificRoads();
-		existingItems = new ArrayList<>(specificRoads.getImpassableRoads().values());
+		avoidRoadsHelper = app.getAvoidSpecificRoads();
+		existingItems = new ArrayList<>(avoidRoadsHelper.getImpassableRoads());
 	}
 
 	@NonNull
@@ -59,12 +59,12 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 
 	@Override
 	public long getLocalModifiedTime() {
-		return specificRoads.getLastModifiedTime();
+		return avoidRoadsHelper.getLastModifiedTime();
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		specificRoads.setLastModifiedTime(lastModifiedTime);
+		avoidRoadsHelper.setLastModifiedTime(lastModifiedTime);
 	}
 
 	@NonNull
@@ -85,7 +85,7 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
 			for (AvoidRoadInfo duplicate : duplicateItems) {
-				LatLon latLon = new LatLon(duplicate.latitude, duplicate.longitude);
+				LatLon latLon = duplicate.getLatLon();
 				if (settings.removeImpassableRoad(latLon)) {
 					settings.addImpassableRoad(duplicate);
 				}
@@ -93,20 +93,20 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 			for (AvoidRoadInfo avoidRoad : appliedItems) {
 				settings.addImpassableRoad(avoidRoad);
 			}
-			specificRoads.loadImpassableRoads();
-			specificRoads.initRouteObjects(true);
+			avoidRoadsHelper.loadImpassableRoads();
+			avoidRoadsHelper.initRouteObjects(true);
 		}
 	}
 
 	@Override
 	protected void deleteItem(AvoidRoadInfo item) {
-		specificRoads.removeImpassableRoad(item);
+		avoidRoadsHelper.removeImpassableRoad(item);
 	}
 
 	@Override
 	public boolean isDuplicate(@NonNull AvoidRoadInfo item) {
 		for (AvoidRoadInfo roadInfo : existingItems) {
-			if (roadInfo.id == item.id) {
+			if (roadInfo.getId() == item.getId()) {
 				return true;
 			}
 		}
@@ -144,18 +144,11 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 				String name = object.optString("name");
 				String appModeKey = object.optString("appModeKey");
 				long id = object.optLong("roadId");
-				AvoidRoadInfo roadInfo = new AvoidRoadInfo();
-				roadInfo.id = id;
-				roadInfo.latitude = latitude;
-				roadInfo.longitude = longitude;
-				roadInfo.direction = direction;
-				roadInfo.name = name;
-				if (ApplicationMode.valueOfStringKey(appModeKey, null) != null) {
-					roadInfo.appModeKey = appModeKey;
-				} else {
-					roadInfo.appModeKey = app.getRoutingHelper().getAppMode().getStringKey();
-				}
-				items.add(roadInfo);
+
+				String modeKey = ApplicationMode.valueOfStringKey(appModeKey, null) != null
+						? appModeKey : app.getRoutingHelper().getAppMode().getStringKey();
+
+				items.add(new AvoidRoadInfo(id, direction, latitude, longitude, name, modeKey));
 			}
 		} catch (JSONException e) {
 			warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
@@ -171,13 +164,13 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 			try {
 				for (AvoidRoadInfo avoidRoad : items) {
 					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("latitude", avoidRoad.latitude);
-					jsonObject.put("longitude", avoidRoad.longitude);
-					jsonObject.put("name", avoidRoad.name);
-					jsonObject.put("appModeKey", avoidRoad.appModeKey);
-					jsonObject.put("roadId", avoidRoad.id);
-					if (!Double.isNaN(avoidRoad.direction)) {
-						jsonObject.put("direction", avoidRoad.direction);
+					jsonObject.put("latitude", avoidRoad.getLatitude());
+					jsonObject.put("longitude", avoidRoad.getLongitude());
+					jsonObject.put("name", avoidRoad.getName(app));
+					jsonObject.put("appModeKey", avoidRoad.getAppModeKey());
+					jsonObject.put("roadId", avoidRoad.getId());
+					if (!Double.isNaN(avoidRoad.getDirection())) {
+						jsonObject.put("direction", avoidRoad.getDirection());
 					}
 					jsonArray.put(jsonObject);
 				}

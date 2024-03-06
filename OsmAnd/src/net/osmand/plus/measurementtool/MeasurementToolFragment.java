@@ -321,6 +321,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				progressBarVisible = false;
 				updateInfoView();
 				updateInfoViewAppearance();
+				recalculateHeightmapIfNeeded();
 			}
 
 			@Override
@@ -897,10 +898,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			calculateHeightmapTask = new HeightsResolverTask(gpxFile, gpx -> {
 				calculateHeightmapTask = null;
 
-				updateInfoView();
 				if (gpx == null) {
 					app.showToastMessage(R.string.error_calculate);
+				} else {
+					List<WptPt> sourcePoints = gpxFile.getAllSegmentsPoints();
+					List<WptPt> targetPoints = editingCtx.getAllBeforePoints();
+					if (sourcePoints.size() == targetPoints.size()) {
+						for (int i = 0; i < sourcePoints.size(); i++) {
+							targetPoints.get(i).ele = sourcePoints.get(i).ele;
+						}
+					}
 				}
+
+				updateInfoView();
 			});
 			calculateHeightmapTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
@@ -910,11 +920,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return calculateHeightmapTask != null && calculateHeightmapTask.getStatus() == Status.RUNNING;
 	}
 
-	public void stopCalculatingHeightMapTask() {
+	public void stopCalculatingHeightMapTask(boolean quit) {
 		if (isCalculatingHeightmapData()) {
 			calculateHeightmapTask.cancel(false);
+			calculateHeightmapTask = null;
 		}
-		quit(false);
+		if (quit) {
+			quit(false);
+		}
 	}
 
 	public void saveChanges(FinalSaveAction finalSaveAction, boolean showDialog) {
@@ -1191,6 +1204,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void calculateOfflineSelected(int segmentIndex) {
 		setMode(CALCULATE_HEIGHTMAP_MODE, true);
+		editingCtx.setInsertIntermediates(true);
 		calculateHeightmapTrack();
 		setInfoType(InfoType.GRAPH);
 		infoTypeBtn.setSelectedItem(graphBtn);
@@ -1757,11 +1771,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void doAddOrMovePointCommonStuff() {
+		recalculateHeightmapIfNeeded();
 		enable(upDownBtn);
 		updateUndoRedoButton(true, undoBtn);
 		updateUndoRedoButton(false, redoBtn);
 		updateDistancePointsText();
 		updateInfoView();
+	}
+
+	private void recalculateHeightmapIfNeeded() {
+		if (!isProgressBarVisible() && isCalculateHeightmapMode()) {
+			stopCalculatingHeightMapTask(false);
+			calculateHeightmapTrack();
+		}
 	}
 
 	private void updateMapDisplayPosition() {

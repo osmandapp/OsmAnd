@@ -4352,7 +4352,7 @@
     <string name="map_widget_ant_heart_rate">Detak Jantung</string>
     <string name="worldwide_maps">Peta dunia</string>
     <string name="map_widget_camera_distance">Ketinggian kamera</string>
-    <string name="favorite_confirm_delete_group">Apakah Anda yakin ingin menghapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)?</string>
+    <string name="favorite_confirm_delete_group">Hapus grup \"%1$s\" dan semua titik yang disertakan (%2$d)?</string>
     <string name="map_widget_ant_bicycle_dist">Jarak Sepeda</string>
     <string name="nautical_depth_points">Titik kedalaman bahari</string>
     <string name="map_widget_camera_distance_desc">Menampilkan ketinggian kamera di atas tingkat permukaan.</string>
@@ -5243,7 +5243,7 @@
     <string name="osmand_cloud_deleting_account_descr">Dalam beberapa detik, semua data dan akun Anda akan dihapus dari OsmAnd Cloud.
 \n
 \nSemua data di perangkat tidak akan disentuh.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Apakah Anda yakin ingin menghapus akun OsmAnd Cloud?
+    <string name="osmand_cloud_delete_account_confirmation_descr">Hapus akun OsmAnd Cloud?
 \n
 \nTindakan ini tidak dapat diurungkan.</string>
     <string name="osmand_cloud_delete_account_confirmation">Hapus akun\?</string>
@@ -5392,7 +5392,7 @@
     <string name="help_article_map_tracks_on_map_name">Trek dan Rute</string>
     <string name="help_article_map_vector_maps_name">Peta vektor (Gaya peta)</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_navigation_guidance_name">Panduan</string>
+    <string name="help_article_navigation_guidance_name">Panduan Navigasi</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Perintah / Notifikasi suara</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Layar peta saat navigasi</string>
     <string name="help_article_navigation_routing_name">Parameter rute</string>
@@ -5492,7 +5492,7 @@
     <string name="save_as_smart_folder">Simpan sebagai folder pintar</string>
     <string name="delete_smart_folder_dialog_message">Ini akan menghapus folder pintar \"%1$s\".</string>
     <string name="empty_smart_folder_title">Tidak ada trek yang cocok</string>
-    <string name="empty_smart_folder_description">Semua trek yang cocok akan muncul secara otomatis di sini</string>
+    <string name="empty_smart_folder_description">Trek yang cocok akan muncul di sini</string>
     <string name="configure_filter">Atur saringan</string>
     <string name="no_config_smart_folder_title">Tidak ada yang diatur</string>
     <string name="discard_filter_changes">Abaikan perubahan penyaring</string>
@@ -5631,4 +5631,10 @@
     <string name="remove_widget_first">Silakan hapus widget terlebih dahulu</string>
     <string name="clear_key_assignment">Hapus penetapan kunci</string>
     <string name="special_routing_cpp">Jenis perutean khusus</string>
+    <string name="rendering_attr_padusDisplayMode_name">Mode penampilan lahan umum</string>
+    <string name="rendering_attr_padusDisplayMode_description">Berdasarkan jenis akses atau nama pengelola</string>
+    <string name="rendering_value_access_name">Berdasarkan jenis akses</string>
+    <string name="rendering_value_managerName_name">Berdasarkan nama pengelola</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Sembunyikan batasan lahan umum</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Sembunyikan batasan lahan umum tetapi tetapkan area</string>
 </resources>
