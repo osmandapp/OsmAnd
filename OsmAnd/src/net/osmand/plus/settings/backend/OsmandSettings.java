@@ -15,7 +15,7 @@ import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorag
 import static net.osmand.plus.settings.backend.storages.IntermediatePointsStorage.INTERMEDIATE_POINTS_DESCRIPTION;
 import static net.osmand.plus.settings.enums.LocationSource.ANDROID_API;
 import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES;
-import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
+import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
 import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
 import static net.osmand.plus.settings.enums.WidgetSize.MEDIUM;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
@@ -1458,7 +1458,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 
-	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_type", A_STAR_2_PHASE, RoutingType.values()).makeProfile().cache();
+	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_type", HH_CPP, RoutingType.values()).makeProfile().cache();
 
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
