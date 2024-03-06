@@ -34,7 +34,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	companion object {
-		private val LOG = PlatformUtil.getLog(SmartFolderHelper::class.java)
+//		private val LOG = PlatformUtil.getLog(SmartFolderHelper::class.java)
 		private const val TRACK_FILTERS_SETTINGS_PREF = "track_filters_settings_pref"
 	}
 
@@ -167,10 +167,6 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		return getSmartFolderByName(name) != null
 	}
 
-	fun areSmartFoldersPresent(): Boolean {
-		return !smartFolderCollection.isEmpty() 
-	}
-
 	private fun getSmartFolderByName(name: String): SmartFolder? {
 		for (folder in smartFolderCollection) {
 			if (Algorithms.stringsEqual(folder.folderName, name)) {
@@ -197,11 +193,18 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun addTrackItemToSmartFolder(item: TrackItem) {
-		LOG.debug("addTrackItemToSmartFolder " + item.name)
-		val newSet = HashSet(allAvailableTrackItems)
+//		LOG.debug("addTrackItemToSmartFolder " + item.name)
+		val newSet = allAvailableTrackItems
 		newSet.add(item)
 		allAvailableTrackItems = newSet
 		addTracksToSmartFolders(arrayListOf(item), smartFolderCollection)
+	}
+
+	fun addTrackItemsToSmartFolder(items: List<TrackItem>) {
+		val newSet = allAvailableTrackItems
+		newSet.addAll(items)
+		allAvailableTrackItems = newSet
+		addTracksToSmartFolders(items, smartFolderCollection)
 	}
 
 	private fun addTracksToSmartFolders(items: List<TrackItem>, smartFolders: List<SmartFolder>) {
@@ -225,7 +228,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 
 	@WorkerThread
 	fun updateSmartFolderItems(smartFolder: SmartFolder) {
-		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
+//		LOG.debug("updateSmartFolderItems ${smartFolder.folderName}")
 		smartFolder.resetItems()
 		addTracksToSmartFolders(ArrayList(allAvailableTrackItems), arrayListOf(smartFolder))
 		notifyFolderUpdatedListeners(smartFolder)
@@ -245,7 +248,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun getAllAvailableTrackItems(): HashSet<TrackItem> {
-		return HashSet(allAvailableTrackItems)
+		return allAvailableTrackItems
 	}
 
 	private inner class SmartFoldersUpdateTask(
