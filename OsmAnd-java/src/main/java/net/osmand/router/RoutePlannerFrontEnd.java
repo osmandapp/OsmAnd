@@ -1071,7 +1071,7 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	private RouteCalcResult findSegmentPnt(final RoutingContext ctx, LatLon pnt, int i, List<RouteSegmentPoint> st)
+	private RouteCalcResult initSegmentPnt(final RoutingContext ctx, LatLon pnt, int i, List<RouteSegmentPoint> st)
 			throws IOException {
 		while (i >= st.size()) {
 			st.add(null);
@@ -1085,7 +1085,7 @@ public class RoutePlannerFrontEnd {
 			}
 			st.set(i, s);
 		}
-		return null;
+		return null; // success
 	}
 
 	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, RouteSegmentPoint s,
@@ -1111,17 +1111,17 @@ public class RoutePlannerFrontEnd {
 				ctx.initLatLonStartEndPoints(start, end, null);
 			}
 		} else {
-			RouteCalcResult err = findSegmentPnt(ctx, start, i, points);
-			if (err != null) {
-				return err;
-			} else {
+			RouteCalcResult err = initSegmentPnt(ctx, start, i, points);
+			if (err == null) {
 				s = points.get(i);
-			}
-			err = findSegmentPnt(ctx, end, i + 1, points);
-			if (err != null) {
-				return err;
 			} else {
+				return err;
+			}
+			err = initSegmentPnt(ctx, end, i + 1, points);
+			if (err == null) {
 				e = points.get(i + 1);
+			} else {
+				return err;
 			}
 			ctx.initPreciseStartEndPoints(s, e);
 		}
@@ -1259,7 +1259,7 @@ public class RoutePlannerFrontEnd {
 		assert ps.size() > 2 && ctx.previouslyCalculatedRoute != null;
 		List<RouteSegmentPoint> pnts = new ArrayList<RouteSegmentPoint>();
 		for (int i = 0; i < ps.size(); i++) {
-			RouteCalcResult err = findSegmentPnt(ctx, ps.get(i), i, pnts);
+			RouteCalcResult err = initSegmentPnt(ctx, ps.get(i), i, pnts);
 			if (err != null) {
 				return err;
 			}
