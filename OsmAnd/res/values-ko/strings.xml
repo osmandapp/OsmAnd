@@ -92,11 +92,11 @@
     <string name="use_transparent_map_theme">투명 테마</string>
     <string name="native_library_not_supported">이 장치는 기본 라이브러리를 지원하지 않습니다.</string>
     <string name="init_native_library">기본 라이브러리 초기화중…</string>
-    <string name="choose_auto_follow_route">자동 중앙 지도 보기</string>
+    <string name="choose_auto_follow_route">자동-현위치 지도 보기</string>
     <string name="choose_auto_follow_route_descr">지도 보기가 현재 위치와 동기화하여 복귀할 때까지 걸리는 시간입니다</string>
-    <string name="auto_follow_route_navigation">자동-센터 운행 전용</string>
-    <string name="auto_follow_route_navigation_descr">운행 중에만 자동-센터 지도 보기를 사용합니다.</string>
-    <string name="auto_follow_location_enabled">자동-센터 지도 보기 사용 중입니다.</string>
+    <string name="auto_follow_route_navigation">자동-현위치 운행 전용</string>
+    <string name="auto_follow_route_navigation_descr">운행 중에만 자동-현위치 지도 보기를 사용합니다.</string>
+    <string name="auto_follow_location_enabled">자동-현위치 지도 보기 사용 중입니다.</string>
     <string name="pref_vector_rendering">벡터 렌더러(renderer) 특정 옵션들</string>
     <string name="pref_overlay">오버레이/언더레이</string>
     <string name="pref_raster_map">지도 소스 설정</string>
@@ -431,7 +431,7 @@
     <string name="search_online_address">온라인 검색</string>
     <string name="max_level_download_tile">최대 온라인 줌</string>
     <string name="max_level_download_tile_descr">다운로드할 최대 줌 레벨을 선택하세요</string>
-    <string name="route_general_information">전체거리 %1$s, 여행시간 %2$d h %3$d m.</string>
+    <string name="route_general_information">전체 거리는 %1$s, 이동 시간은 %2$d 시간 %3$d 분입니다.</string>
     <string name="router_service_descr">온라인 또는 오프라인 라우팅 서비스를 선택합니다</string>
     <string name="router_service">운행 서비스</string>
     <string name="sd_dir_not_accessible">SD 카드에 있는 데이터 저장 폴더에 접근할 수 없습니다!</string>
@@ -466,7 +466,7 @@
     <string name="error_calculating_route">경로 탐색 도중 오류</string>
     <string name="error_calculating_route_occured">경로를 찾는 도중 오류가 발생하였습니다</string>
     <string name="empty_route_calculated">탐색한 경로를 찾지 못하였습니다</string>
-    <string name="arrived_at_destination">도착지에 도착하였습니다</string>
+    <string name="arrived_at_destination">목적지에 도착하였습니다.</string>
     <string name="invalid_locations">좌표가 유효하지 않음</string>
     <string name="go_back_to_osmand">OsmAnd 맵으로 되돌아감</string>
     <string name="loading_data">데이터 로딩…</string>
@@ -500,7 +500,7 @@
     <string name="choose_city">도시를 선택하세요</string>
     <string name="ChooseCountry">국가를 선택하세요</string>
     <string name="show_view_angle">시야각 표시</string>
-    <string name="map_view_3d_descr">맵의 3D 뷰 활성화</string>
+    <string name="map_view_3d_descr">맵의 3D 뷰 활성화합니다.</string>
     <string name="map_view_3d">맵 3D 뷰</string>
     <string name="show_poi_over_map_description">POI를 지도에 표시합니다 (최근에 선택된 필터 사용)</string>
     <string name="show_poi_over_map">POI 표시</string>
@@ -1105,9 +1105,9 @@
     <string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
     <string name="arrival_distance">도착고지</string>
     <string name="arrival_distance_descr">도착 안내방송은 언제까지 해드릴까요\?</string>
-    <string name="keep_informing_never">수동으로 (화살표를 누르세요)</string>
+    <string name="keep_informing_never">수동으로만 (화살표를 탭)</string>
     <string name="keep_informing_descr">정기적인 간격으로 운행 명령을 다시 알리기</string>
-    <string name="keep_informing">탐색 지침을 반복</string>
+    <string name="keep_informing">운행 지시를 반복</string>
     <string name="navigation_intent_invalid">잘못된 포맷 : %s</string>
     <string name="share_fav_subject">OsmAnd를 통해 공유된 즐겨찾기</string>
     <string name="use_points_as_intermediates">포인트 사이의 경로를 계산</string>
@@ -1216,7 +1216,7 @@
     <string name="index_tours">여행</string>
     <string name="shared_string_all">모두</string>
     <string name="shared_string_waypoints">경유지</string>
-    <string name="way_alarms">교통 경고</string>
+    <string name="way_alarms">교통 정보</string>
     <string name="speak_favorites">주변의 즐겨찾기</string>
     <string name="speak_poi">인근 POI</string>
     <string name="rendering_attr_publicTransportMode_name">버스, 무궤도전차, 셔틀 노선</string>
@@ -1261,7 +1261,7 @@
     <string name="rendering_attr_shareTaxiRoutes_name">택시 노선 공유</string>
     <string name="rendering_attr_trolleybusRoutes_name">무궤도 전차 노선</string>
     <string name="rendering_attr_busRoutes_name">버스 노선</string>
-    <string name="impassable_road">도로 회피…</string>
+    <string name="impassable_road">다음 도로 우회…</string>
     <string name="rendering_attr_tramTrainRoutes_name">전차 및 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
@@ -3155,7 +3155,7 @@
     <string name="button_already_assigned_to_this_action">이 버튼은 이미이 동작에 할당됩니다.</string>
     <string name="all_folders">모든 폴더</string>
     <string name="folder">폴더</string>
-    <string name="announcement_time_title">공지시간</string>
+    <string name="announcement_time_title">안내 시점</string>
     <string name="nav_type_hint">네비게이션 종류</string>
     <string name="empty_state_favourites">즐겨찾기에 추가</string>
     <string name="get_osmand_cloud">OsmAnd Cloud 획득</string>
@@ -3751,7 +3751,7 @@
     <string name="shared_string_select_recent">최근 항목 선택</string>
     <string name="change_appearance">모양 변경</string>
     <string name="switch_folder">폴더 전환</string>
-    <string name="accessibility_announce">발표</string>
+    <string name="accessibility_announce">안내</string>
     <string name="osmand_default_routing">OsmAnd 라우팅</string>
     <string name="calculate_offline">오프라인 계산</string>
     <string name="key_is_already_assigned_error">이 \"%1$s\" 키가 이미 작업에 할당되어 있음: \"%2$s\"</string>
@@ -5080,4 +5080,19 @@
     <string name="rendering_attr_piste_type_sleigh_name">슬리밍</string>
     <string name="rendering_attr_piste_type_connection_name">연결</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">정의되지 않음</string>
+    <string name="mapillary_menu_descr_username">에 의해 추가된 이미지만 보기</string>
+    <string name="mapillary_menu_descr_dates">추가된 이미지만 보기</string>
+    <string name="auto_zoom_discrete">분리</string>
+    <string name="gpx_approximation">GPX 근사치</string>
+    <string name="routing_type">Routing 유형</string>
+    <string name="rendering_attr_padusDisplayMode_name">공공 토지 표시 모드</string>
+    <string name="rendering_value_access_name">접속 유형</string>
+    <string name="rendering_value_managerName_name">By 관리자 이름</string>
+    <string name="routing_type_a_star_classic">A* 클래식</string>
+    <string name="auto_zoom_smooth">매끄러운</string>
+    <string name="auto_zoom">자동축척</string>
+    <string name="java_safe">Java (안전)</string>
+    <string name="rendering_attr_padusDisplayMode_description">액세스 유형 또는 관리자 이름</string>
+    <string name="rendering_attr_padusHideBoundaries_name">공공 토지 경계</string>
+    <string name="routing_type_a_star_2_phase">A* 2-단계</string>
 </resources>
