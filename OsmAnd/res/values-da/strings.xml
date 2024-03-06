@@ -5638,4 +5638,12 @@
     <string name="rendering_attr_padusHideBoundaries_name">Skjul grænser for offentlige arealer</string>
     <string name="rendering_attr_padusHideBoundaries_description">Skjul grænserne for offentlige arealer, men bevar områderne</string>
     <string name="rendering_attr_padusDisplayMode_name">Visning af offentlige arealer</string>
+    <string name="java_safe">Java (Sikker)</string>
+    <string name="gpx_approximation">GPX tilnærmelse</string>
+    <string name="routing_type_a_star_classic">A* klassisk</string>
+    <string name="auto_zoom_smooth">Jævn</string>
+    <string name="auto_zoom_discrete">Diskret</string>
+    <string name="auto_zoom">Autozoom</string>
+    <string name="routing_type">Ruteberegningstype</string>
+    <string name="routing_type_a_star_2_phase">A* 2-faset</string>
 </resources>
