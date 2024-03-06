@@ -5637,4 +5637,12 @@
     <string name="rendering_value_managerName_name">Berdasarkan nama pengelola</string>
     <string name="rendering_attr_padusHideBoundaries_name">Sembunyikan batasan lahan umum</string>
     <string name="rendering_attr_padusHideBoundaries_description">Sembunyikan batasan lahan umum tetapi tetapkan area</string>
+    <string name="gpx_approximation">Perkiraan GPX</string>
+    <string name="routing_type">Jenis perutean</string>
+    <string name="java_safe">Java (aman)</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fase</string>
+    <string name="auto_zoom_smooth">Lembut</string>
+    <string name="routing_type_a_star_classic">A* klasik</string>
+    <string name="auto_zoom_discrete">Langsung</string>
+    <string name="auto_zoom">Perbesaran otomatis</string>
 </resources>
