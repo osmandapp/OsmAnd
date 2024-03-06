@@ -36,6 +36,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.routing.AlarmInfo;
@@ -50,6 +51,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
 import net.osmand.util.Algorithms;
 
 public class SpeedometerWidget {
@@ -88,6 +90,8 @@ public class SpeedometerWidget {
 	private final RoutingHelper routingHelper;
 	private final WaypointHelper waypointHelper;
 	private final OsmAndLocationProvider provider;
+	@Nullable
+	private final WidgetsVisibilityHelper visibilityHelper;
 
 	private final View view;
 	private final View speedLimitContainer;
@@ -107,12 +111,13 @@ public class SpeedometerWidget {
 	@Nullable
 	private Bitmap widgetBitmap;
 
-	public SpeedometerWidget(@NonNull OsmandApplication app, @Nullable View view) {
+	public SpeedometerWidget(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity, @Nullable View view) {
 		this.app = app;
 		settings = app.getSettings();
 		provider = app.getLocationProvider();
 		routingHelper = app.getRoutingHelper();
 		waypointHelper = app.getWaypointHelper();
+		visibilityHelper = mapActivity != null ? mapActivity.getWidgetsVisibilityHelper() : null;
 
 		this.view = view;
 		boolean hasView = view != null;
@@ -199,7 +204,7 @@ public class SpeedometerWidget {
 		if (view != null) {
 			updateColor(drawSettings != null ? drawSettings.isNightMode() : nightMode);
 		}
-		boolean show = settings.SHOW_SPEEDOMETER.getModeValue(mode);
+		boolean show = shouldShowWidget();
 		if (routingHelper.isFollowingMode() && show) {
 			boolean isChanged = false;
 			if (lastNightMode != nightMode) {
@@ -279,6 +284,14 @@ public class SpeedometerWidget {
 			widgetBitmap = null;
 			AndroidUiHelper.updateVisibility(view, false);
 		}
+	}
+
+	private boolean shouldShowWidget() {
+		boolean showSpeedometerSetting = settings.SHOW_SPEEDOMETER.getModeValue(mode);
+		if (visibilityHelper != null) {
+			return showSpeedometerSetting && visibilityHelper.shouldShowSpeedometer();
+		}
+		return showSpeedometerSetting;
 	}
 
 	private float drawSpeedometerPart(boolean nightMode, float density, Paint paint, int shadowColor,

@@ -70,7 +70,7 @@ public class SpeedometerSettingsFragment extends BaseOsmAndFragment {
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 
 		View speedometerView = view.findViewById(R.id.speedometer_widget);
-		widget = new SpeedometerWidget(app, speedometerView);
+		widget = new SpeedometerWidget(app, getMapActivity(), speedometerView);
 		widget.updatePreviewInfo(nightMode);
 
 		setupToolbar(view);

@@ -201,7 +201,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		alarmWidget.setVisibility(false);
 
 		View speedometerView = mapActivity.findViewById(R.id.speedometer_widget);
-		speedometerWidget = new SpeedometerWidget(app, speedometerView);
+		speedometerWidget = new SpeedometerWidget(app, mapActivity, speedometerView);
 		speedometerWidget.setVisibility(false);
 
 		setupRulerWidget(mapRulerLayout);
