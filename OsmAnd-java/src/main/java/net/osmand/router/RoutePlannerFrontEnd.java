@@ -1117,11 +1117,13 @@ public class RoutePlannerFrontEnd {
 			} else {
 				return err;
 			}
-			err = initSegmentPnt(ctx, end, i + 1, points);
-			if (err == null) {
-				e = points.get(i + 1);
-			} else {
-				return err;
+			if (e == null) {
+				err = initSegmentPnt(ctx, end, i + 1, points);
+				if (err == null) {
+					e = points.get(i + 1);
+				} else {
+					return err;
+				}
 			}
 			ctx.initPreciseStartEndPoints(s, e);
 		}
