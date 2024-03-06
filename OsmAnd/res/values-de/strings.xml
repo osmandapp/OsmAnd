@@ -5645,4 +5645,5 @@
     <string name="routing_type">Routing-Typ</string>
     <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
     <string name="routing_type_a_star_classic">A* classic</string>
+    <string name="shared_sting_all_colors">Alle Farben</string>
 </resources>
