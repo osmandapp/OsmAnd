@@ -5248,7 +5248,7 @@
     <string name="delete_account_warning">Ștergeți contul %1$s?</string>
     <string name="shared_string_deleting">Se șterge</string>
     <string name="deleting_complete">Ștergere finalizată</string>
-    <string name="delete_account">Ștergeți contul</string>
+    <string name="delete_account">Șterge contul</string>
     <string name="backup_error_delete_account_email_match">E-mail-ul nu se potrivește cu numele de utilizator folosit la conectare</string>
     <string name="verify_account">Verificați-vă contul</string>
     <string name="osmand_cloud_deleted_account_descr">Contul și toate datele au fost șterse din OsmAnd Cloud.</string>

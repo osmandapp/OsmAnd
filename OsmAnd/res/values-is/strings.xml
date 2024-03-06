@@ -5539,4 +5539,12 @@
     <string name="speed_limit_warning">Aðvörun um hraðatakmarkanir</string>
     <string name="when_exceeded">Þegar yfir</string>
     <string name="shared_string_speedometer">Hraðamælir</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fasa</string>
+    <string name="routing_type_a_star_classic">A* klassískt</string>
+    <string name="auto_zoom">Sjálfvirkur aðdráttur</string>
+    <string name="java_safe">Java (öruggt)</string>
+    <string name="gpx_approximation">GPX nálgun</string>
+    <string name="routing_type">Tegund leiðargerðar</string>
+    <string name="rendering_attr_padusDisplayMode_name">Birtingarhamur almenningslands</string>
+    <string name="help_article_setup_a_route_name">Útbúa leið</string>
 </resources>
