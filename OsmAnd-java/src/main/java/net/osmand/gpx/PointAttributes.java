@@ -12,7 +12,7 @@ public class PointAttributes {
 	public static final String SENSOR_TAG_SPEED = OSMAND_EXTENSIONS_PREFIX + "speed_sensor";
 	public static final String SENSOR_TAG_CADENCE = GPXTPX_PREFIX + "cad" ;
 	public static final String SENSOR_TAG_BIKE_POWER = GPXTPX_PREFIX + "power";
-	public static final String SENSOR_TAG_TEMPERATURE = "temperature";
+	public static final String SENSOR_TAG_TEMPERATURE = "temp_sensor";
 	public static final String SENSOR_TAG_TEMPERATURE_W = GPXTPX_PREFIX + "wtemp";
 	public static final String SENSOR_TAG_TEMPERATURE_A = GPXTPX_PREFIX + "atemp";
 	public static final String SENSOR_TAG_DISTANCE = OSMAND_EXTENSIONS_PREFIX + "bike_distance_sensor";
