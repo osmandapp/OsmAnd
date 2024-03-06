@@ -185,7 +185,7 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 	
-	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
+	public void initLatLonStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
 		startX = MapUtils.get31TileNumberX(start.getLongitude());
 		startY = MapUtils.get31TileNumberY(start.getLatitude());
 		targetX = MapUtils.get31TileNumberX(end.getLongitude());
@@ -208,7 +208,7 @@ public class RoutingContext {
 		}
 	}
 
-	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end, List<LatLon> inters) {
+	public void initPreciseStartEndPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
 		startX = start.preciseX;
 		startY = start.preciseY;
 		startRoadId = start.road.getId();
@@ -219,7 +219,7 @@ public class RoutingContext {
 		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
 
-		initIntermediates(inters);
+		initIntermediates(null);
 	}
 	
 	public void unloadAllData() {

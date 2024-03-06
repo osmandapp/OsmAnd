@@ -870,7 +870,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.nextIteration();
 			HHNetworkRouteRes r = null;
 			if (hhRoutingType == HHRoutingType.CPP && ctx.nativeLib != null) {
-				ctx.initStartEndPoints(start, end, intermediates);
+				ctx.initLatLonStartEndPoints(start, end, intermediates);
 				RouteSegmentResult[] nr = runNativeRouting(ctx, hhRoutingConfig);
 				if (nr.length > 0) {
 					r = new HHNetworkRouteRes();
@@ -1106,9 +1106,9 @@ public class RoutePlannerFrontEnd {
 		}
 		if (ctx.nativeLib != null) {
 			if (s != null && e != null) {
-				ctx.initStartAndTargetPoints(s, e, null);
+				ctx.initPreciseStartEndPoints(s, e);
 			} else { 
-				ctx.initStartEndPoints(start, end, null);
+				ctx.initLatLonStartEndPoints(start, end, null);
 			}
 		} else {
 			RouteCalcResult err = findSegmentPnt(ctx, start, i, points);
@@ -1123,7 +1123,7 @@ public class RoutePlannerFrontEnd {
 			} else {
 				e = points.get(i + 1);
 			}
-			ctx.initStartAndTargetPoints(s, e, null);
+			ctx.initPreciseStartEndPoints(s, e);
 		}
 		if (routeDirection != null) {
 			ctx.precalculatedRouteDirection = routeDirection.adopt(ctx);
