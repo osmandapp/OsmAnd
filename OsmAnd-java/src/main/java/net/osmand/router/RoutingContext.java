@@ -118,6 +118,7 @@ public class RoutingContext {
 		this.nativeLib = cp.nativeLib;
 		this.visitor = cp.visitor;
 		this.calculationProgress = cp.calculationProgress;
+		this.precalculatedRouteDirection = cp.precalculatedRouteDirection;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
