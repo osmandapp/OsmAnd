@@ -25,6 +25,7 @@ agconnect-services.json
 OsmAndHms.jks
 
 # Android Studio
+.attach_pid*
 /.idea
 *.iml
 

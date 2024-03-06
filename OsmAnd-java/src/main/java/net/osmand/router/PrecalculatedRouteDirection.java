@@ -246,7 +246,14 @@ public class PrecalculatedRouteDirection {
 	private long calc(int x31, int y31) {
 		return ((long) x31) << 32l + ((long)y31);
 	}
-	
+
+	public void setFollowNext(boolean followNext) {
+		this.followNext = followNext;
+	}
+
+	public boolean isFollowNext() {
+		return followNext;
+	}
 
 	public PrecalculatedRouteDirection adopt(RoutingContext ctx) {
 		int ind1 = getIndex(ctx.startX, ctx.startY);
@@ -267,6 +274,21 @@ public class PrecalculatedRouteDirection {
 		routeDirection.followNext = followNext;
 		return routeDirection;
 	}
-	
 
+	public void updatePreciseStartEnd(int sx, int sy, int ex, int ey) {
+		if (sx > 0 && sy > 0) {
+			int ind = getIndex(sx, sy);
+			if (ind != -1) {
+				startPoint = calc(sx, sy);
+				startFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind], pointsY[ind], sx, sy) / maxSpeed;
+			}
+		}
+		if (ex > 0 && ey > 0) {
+			int ind = getIndex(ex, ey);
+			if (ind != -1) {
+				endPoint = calc(ex, ey);
+				endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind], pointsY[ind], ex, ey) / maxSpeed;
+			}
+		}
+	}
 }

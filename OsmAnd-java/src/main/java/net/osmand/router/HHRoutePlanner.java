@@ -1320,7 +1320,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 	}
 
 	private HHNetworkRouteRes prepareRouteResults(HHRoutingContext<T> hctx, HHNetworkRouteRes route, LatLon start, LatLon end) throws SQLException, InterruptedException, IOException {
-		hctx.rctx.routingTime = 0;
+		// hctx.rctx.routingTime = 0; // do not reset between interpoints
 		route.stats = hctx.stats;
 		RouteSegmentResult straightLine = null;
 		for(int routeSegmentInd = 0; routeSegmentInd < route.segments.size(); routeSegmentInd++ ) {
@@ -1354,7 +1354,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				straightLine = new RouteSegmentResult(sh, 0, 1);
 				route.detailed.add(new RouteSegmentResult(rdo, 0, 1));
 			}
-			hctx.rctx.routingTime += routeSegment.rtTimeDetailed;
+			// hctx.rctx.routingTime += routeSegment.rtTimeDetailed; // already done by convertFinalSegmentToResults()
 
 			if (DEBUG_VERBOSE_LEVEL >= 1) {
 				int segments = routeSegment.list == null ? 0 : routeSegment.list.size();

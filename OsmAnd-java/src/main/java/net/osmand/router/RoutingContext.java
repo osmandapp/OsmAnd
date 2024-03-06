@@ -118,6 +118,7 @@ public class RoutingContext {
 		this.nativeLib = cp.nativeLib;
 		this.visitor = cp.visitor;
 		this.calculationProgress = cp.calculationProgress;
+		this.precalculatedRouteDirection = cp.precalculatedRouteDirection;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
@@ -185,7 +186,7 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 	
-	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
+	public void initLatLonStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
 		startX = MapUtils.get31TileNumberX(start.getLongitude());
 		startY = MapUtils.get31TileNumberY(start.getLatitude());
 		targetX = MapUtils.get31TileNumberX(end.getLongitude());
@@ -208,18 +209,18 @@ public class RoutingContext {
 		}
 	}
 
-	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end, List<LatLon> inters) {
-		targetX = end.preciseX;
-		targetY = end.preciseY;
-		targetRoadId = end.road.getId();
-		targetSegmentInd = end.getSegmentStart();
-		
+	public void initPreciseStartEndPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
 		startX = start.preciseX;
 		startY = start.preciseY;
 		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
-		
-		initIntermediates(inters);
+
+		targetX = end.preciseX;
+		targetY = end.preciseY;
+		targetRoadId = end.road.getId();
+		targetSegmentInd = end.getSegmentStart();
+
+		initIntermediates(null);
 	}
 	
 	public void unloadAllData() {
