@@ -5628,4 +5628,12 @@
     <string name="rendering_value_managerName_name">Laŭ nomo de administranto</string>
     <string name="rendering_attr_padusHideBoundaries_name">Kaŝi limojn de publikaj terenoj</string>
     <string name="rendering_attr_padusHideBoundaries_description">Kaŝi limojn de publikaj terenoj sed ne kaŝi areojn</string>
+    <string name="routing_type_a_star_classic">A* klasika</string>
+    <string name="auto_zoom">Aŭtomata pligrandigo</string>
+    <string name="auto_zoom_smooth">Kontinua</string>
+    <string name="auto_zoom_discrete">Diskreta</string>
+    <string name="java_safe">Java (malpli panea)</string>
+    <string name="gpx_approximation">Alproksimigo al GPX</string>
+    <string name="routing_type">Speco de kurs-difinado</string>
+    <string name="routing_type_a_star_2_phase">A* 2-faza</string>
 </resources>
