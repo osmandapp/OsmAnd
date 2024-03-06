@@ -215,11 +215,11 @@
     <string name="poi_toll_booth">Telefonska govornica</string>
     <string name="poi_border_control">Pasoška kontrola</string>
     <string name="poi_traffic_calming_bump">Ležeći policajac</string>
-    <string name="poi_traffic_calming_cushion">Jastuče (brzinsko)</string>
+    <string name="poi_traffic_calming_cushion">Ležeći policajac (platforma)</string>
     <string name="poi_traffic_calming_chicane">Šikana</string>
     <string name="poi_traffic_calming_island">Saobraćajno ostrvo</string>
     <string name="poi_traffic_signals">Stop svetlo</string>
-    <string name="poi_car_repair">Popravka kola</string>
+    <string name="poi_car_repair">Automehaničar</string>
     <string name="poi_service_tyres">Gume</string>
     <string name="poi_vehicle_inspection">Pregled vozila</string>
     <string name="poi_car_wash">Auto perionica</string>
@@ -254,7 +254,7 @@
     <string name="poi_parking_entrance">Ulaz u parking</string>
     <string name="poi_garages">Garaže</string>
     <string name="poi_public_transport_platform">Stanica javnog prevoza</string>
-    <string name="poi_public_transport_platform_bus">Autobusko stajalište</string>
+    <string name="poi_public_transport_platform_bus">Autobuska stajalište</string>
     <string name="poi_public_transport_platform_trolleybus">Stanica trolejbusa</string>
     <string name="poi_bus_stop">Autobusko stajalište</string>
     <string name="poi_public_transport_platform_tram">Tramvajska stanica</string>
@@ -747,8 +747,8 @@
     <string name="poi_massage">Salon za masažu</string>
     <string name="poi_tattoo">Tetovaže</string>
     <string name="poi_laundry">Pranje veša</string>
-    <string name="poi_car_rental">Iznajmljivanje kola</string>
-    <string name="poi_car_sharing">Deljenje kola</string>
+    <string name="poi_car_rental">Rent a Car</string>
+    <string name="poi_car_sharing">Deljenje auta</string>
     <string name="poi_boat_sharing">Deljenje brodova</string>
     <string name="poi_dock">Dok</string>
     <string name="poi_shower">Tuš</string>
@@ -767,7 +767,7 @@
     <string name="poi_saddle">Sedlo</string>
     <string name="poi_volcano">Vulkan</string>
     <string name="poi_crater">Krater</string>
-    <string name="poi_ridge">Greben</string>
+    <string name="poi_ridge">Planinski greben</string>
     <string name="poi_glacier">Glečer</string>
     <string name="poi_sinkhole">Vrtača</string>
     <string name="poi_waterfall">Vodopad</string>
@@ -1160,7 +1160,7 @@
     <string name="poi_payment_mastercard_no">MasterCard kartice se ne prihvataju</string>
     <string name="poi_payment_maestro_yes">Maestro kartice</string>
     <string name="poi_payment_maestro_no">Maestro kartice se ne prihvataju</string>
-    <string name="poi_aerialway_occupancy">Kapacitet kabine/klupe/kola</string>
+    <string name="poi_aerialway_occupancy">Kapacitet kabine/klupe/auta</string>
     <string name="poi_stars_1">1 (turistički)</string>
     <string name="poi_stars_1s">1S (turistički superior)</string>
     <string name="poi_stars_2">2 (standard)</string>
@@ -1480,7 +1480,7 @@
     <string name="poi_fire_water_pond">Protivpožarni bazen</string>
     <string name="poi_grit_bin">Sanduk soli</string>
     <string name="poi_ford_stepping_stones">Pešački kameni most</string>
-    <string name="poi_traffic_calming_hump">Ispupčenje (brzinsko)</string>
+    <string name="poi_traffic_calming_hump">Ležeći policajac</string>
     <string name="poi_traffic_calming_rumble_strip">Traka neravnine</string>
     <string name="poi_traffic_calming_table">Usporivački prelaz</string>
     <string name="poi_traffic_calming_choker">Potiskivač</string>
@@ -1488,12 +1488,12 @@
     <string name="poi_railway_platform">Železnička platforma;Peron</string>
     <string name="poi_halt">Železnička stanica;Železnički peron;Železnička stanica;Železnički peron;Stanica</string>
     <string name="poi_railway_buffer_stop">Pružni predzaustavljač</string>
-    <string name="poi_slipway">Brodogradilišna pruga</string>
+    <string name="poi_slipway">Navoz</string>
     <string name="poi_aerialway_station">Stanica žičare</string>
     <string name="poi_aerialway_chair_lift">Sedišta žičare</string>
     <string name="poi_aerialway_t_bar">Sedišta sa t-prečkom</string>
     <string name="poi_aerialway_j_bar">Sedišta sa j-prečkom</string>
-    <string name="poi_aerialway_platter">Prevozna prečka žičare</string>
+    <string name="poi_aerialway_platter">Žičara s prečkom</string>
     <string name="poi_aerialway_mixed_lift">Žičara sa gondolama i sedištima</string>
     <string name="poi_aerialway_drag_lift">Vučna žičara</string>
     <string name="poi_aerialway_rope_tow">Žičara sa vučnim konopcem</string>
@@ -1649,7 +1649,7 @@
     <string name="poi_brothel">Javna kuća</string>
     <string name="poi_smoking_area">Pušački deo</string>
     <string name="poi_pawnbroker">Zalagaoničar</string>
-    <string name="poi_stone">Mesto kamena</string>
+    <string name="poi_stone">Poseban kamen</string>
     <string name="poi_anchorage">Sidrište</string>
     <string name="poi_anchor_berth">Sidrišna bova</string>
     <string name="poi_beacon">Svetionik</string>
@@ -1772,7 +1772,7 @@
     <string name="poi_services">Uslužni prostor</string>
     <string name="poi_railway_level_crossing">Pružni prelaz u nivou</string>
     <string name="poi_leisure_common">Zajednički prostor odmora</string>
-    <string name="poi_heath">Vres</string>
+    <string name="poi_heath">Vriština/ niska šikara</string>
     <string name="poi_grassland">Travnata zemlja</string>
     <string name="poi_scrub">Žbun</string>
     <string name="poi_farmland">Zemlja farme</string>
@@ -1989,7 +1989,7 @@
     <string name="poi_surface_cobblestone">Površina: okrugla kaldrma</string>
     <string name="poi_surface_paving_stones">Površina: obrađena kocka</string>
     <string name="poi_surface_pebblestone">Površina: okrugla rizla</string>
-    <string name="poi_surface_stone">Površina: kamena</string>
+    <string name="poi_surface_stone">Površina: kamen</string>
     <string name="poi_surface_metal">Površina: metalna</string>
     <string name="poi_surface_wood">Površina: drvena</string>
     <string name="poi_surface_gravel">Površina: rizlana</string>
@@ -2933,7 +2933,7 @@
     <string name="poi_motorcycle_sales_yes">Prodaja</string>
     <string name="poi_stands">Štandovi</string>
     <string name="poi_zoo_reptile">Reptili</string>
-    <string name="poi_zoo_falconry">Sokolarnik</string>
+    <string name="poi_zoo_falconry">Lov na sokola</string>
     <string name="poi_zoo_aviary">Ptičnik</string>
     <string name="poi_zoo_birds">Ptice</string>
     <string name="poi_zoo_safari_park">Safari park</string>
@@ -2985,7 +2985,7 @@
     <string name="poi_surface_tartan">Tartan</string>
     <string name="poi_surface_clay">Glina</string>
     <string name="poi_mountain_area">Planinsko područje</string>
-    <string name="poi_couloir">Kuluar</string>
+    <string name="poi_couloir">Kuloar</string>
     <string name="poi_gorge">Klisura</string>
     <string name="poi_vhf">VHF kanal</string>
     <string name="poi_government_legislative">Zakonodavna institucija</string>
@@ -3029,7 +3029,7 @@
     <string name="poi_gambling_lottery">Lutrija</string>
     <string name="poi_gambling_type">Vrsta</string>
     <string name="poi_gambling">Mesto kockanja</string>
-    <string name="poi_lottery">Loto srećke</string>
+    <string name="poi_lottery">Igre na sreću</string>
     <string name="poi_lighting">Oprema za rasvetu</string>
     <string name="poi_locksmith">Bravarska prodavnica</string>
     <string name="poi_electrical">Elektro prodavnica</string>
@@ -3360,7 +3360,7 @@
     <string name="poi_adult_gaming_centre">Igrački centar za odrasle</string>
     <string name="poi_amusement_arcade">Zabavna arkadna igra</string>
     <string name="poi_water_utility">Kancelarija za vodosnabdevanje</string>
-    <string name="poi_outpost">Mesto isporuke prodavnice</string>
+    <string name="poi_outpost">Mesto isporuke u trgovini</string>
     <string name="poi_whitewater_rapid_name">Ime rečnih brzaka</string>
     <string name="poi_pottery">Keramika</string>
     <string name="poi_flooring">Prodavnica podova</string>
@@ -3611,7 +3611,7 @@
     <string name="poi_motorcycle_tyres_no">Gume: ne</string>
     <string name="poi_motorcycle_tyres_yes">Gume</string>
     <string name="poi_motorcycle_parts_no">Delovi: ne</string>
-    <string name="poi_motorcycle_parts_yes">Delovi</string>
+    <string name="poi_motorcycle_parts_yes">Delovi za motocikle</string>
     <string name="poi_motorcycle_repair_no">Popravaka: ne</string>
     <string name="poi_motorcycle_repair_yes">Popravka</string>
     <string name="poi_motorcycle_rental_no">Iznajmljivanje: ne</string>
@@ -3764,7 +3764,7 @@
     <string name="poi_fire_hydrant_type_pipe">Cev</string>
     <string name="poi_drinking_water_refill_network">Mreža za ponovno dolivanje pitke vode</string>
     <string name="poi_drinking_water_refill_no">Dolivanje vode za piće: ne</string>
-    <string name="poi_drinking_water_refill_yes">Da</string>
+    <string name="poi_drinking_water_refill_yes">Da;Dopuna vode za piće;Dopuna</string>
     <string name="poi_seamark_obstruction">Opstrukcija</string>
     <string name="poi_seamark_water_level_below_mwl">Nivo vode: ispod srednjeg nivoa</string>
     <string name="poi_seamark_water_level_above_mwl">Nivo vode: iznad srednjeg nivoa</string>
@@ -4033,4 +4033,27 @@
     <string name="poi_socket_type1_voltage">Utičnica: Tip 1: napon</string>
     <string name="poi_socket_type1_combo_voltage">Utičnica: tip 1 kombinovana: napon</string>
     <string name="poi_geodesist">Geodez</string>
+    <string name="poi_anthill">Mravinjak</string>
+    <string name="poi_checkpoint_cycling">Kontrolna točka za bicikliste</string>
+    <string name="poi_pest_control">Trgovina sredstavima protiv štetočina</string>
+    <string name="poi_dune">Dina</string>
+    <string name="poi_termite_mound">Termitnjak</string>
+    <string name="poi_aboriginal_lands">Aboridžinska zemlja</string>
+    <string name="poi_emergency_bay">Uvala za hitne slučajeve</string>
+    <string name="poi_border_zone">Granični pojas</string>
+    <string name="poi_blowhole">Morski gejzir</string>
+    <string name="poi_recycling_printer_inkjet_cartridges">Trgovina ketridžima</string>
+    <string name="poi_groundskeeping">Vrtlarstvo trgovina</string>
+    <string name="poi_post_office_collection_times">Vreme preuzimanja u poštama</string>
+    <string name="poi_shop_water">Trgovina pitke vode</string>
+    <string name="poi_shrub">Grm</string>
+    <string name="poi_country_store">Seoski dućan</string>
+    <string name="poi_fumarole">Fumarole</string>
+    <string name="poi_collector">Kolekcionar</string>
+    <string name="poi_printer_ink">Trgovina bojom za štapač</string>
+    <string name="poi_us_maps_recreation_area_activity_game_bird_waterfowl">Provne divlje ptice</string>
+    <string name="poi_us_maps_recreation_area_activity_fossil_collecting">Sakupljanje fosila</string>
+    <string name="poi_birds_nest">Gnezdo</string>
+    <string name="poi_avalanche_transceiver_checkpoint">Radio odašiljač za kontrolu lavina</string>
+    <string name="poi_shop_fuel">Skladište goriva</string>
 </resources>

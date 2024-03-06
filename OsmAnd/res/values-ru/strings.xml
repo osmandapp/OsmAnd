@@ -5629,4 +5629,13 @@
     <string name="shared_string_not_checked">Не проверено</string>
     <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению планирования для текущего полета.</string>
     <string name="special_routing_cpp">Специальный тип маршрутизации</string>
+    <string name="auto_zoom_discrete">Дискретное</string>
+    <string name="auto_zoom">Автомасштабирование</string>
+    <string name="auto_zoom_smooth">Гладкое</string>
+    <string name="routing_type_a_star_classic">A* классический</string>
+    <string name="java_safe">Java (безопасно)</string>
+    <string name="gpx_approximation">Аппроксимация gpx</string>
+    <string name="routing_type">Тип маршрутизации</string>
+    <string name="shared_sting_all_colors">Все цвета</string>
+    <string name="routing_type_a_star_2_phase">A* 2-фазный</string>
 </resources>
