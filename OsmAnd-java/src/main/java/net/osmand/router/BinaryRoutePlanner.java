@@ -345,6 +345,12 @@ public class BinaryRoutePlanner {
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			PriorityQueue<RouteSegmentCost> graphDirectSegments, PriorityQueue<RouteSegmentCost> graphReverseSegments) {
+		if (ctx.precalculatedRouteDirection != null) {
+			ctx.precalculatedRouteDirection.updatePreciseStartEnd(
+					(start != null) ? start.preciseX : 0, (start != null) ? start.preciseY : 0,
+					(end != null) ? end.preciseX : 0, (end != null) ? end.preciseY : 0
+			);
+		}
 		if (start != null) {
 			ctx.startX = start.preciseX;
 			ctx.startY = start.preciseY;
@@ -423,17 +429,16 @@ public class BinaryRoutePlanner {
 		if (ctx.dijkstraMode != 0) {
 			return 0;
 		}
-		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
-		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {
 			float te = ctx.precalculatedRouteDirection.timeEstimate(begX, begY, endX, endY);
 			if (te > 0) {
 				return te;
 			}
 		}
+		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
+		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		return (float) result;
 	}
-
 
 	private static void println(String logMsg) {
 //		log.info(logMsg);
