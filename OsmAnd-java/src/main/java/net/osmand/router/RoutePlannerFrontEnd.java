@@ -1134,14 +1134,14 @@ public class RoutePlannerFrontEnd {
 		if (ctx.nativeLib != null) {
 			RouteSegmentResult[] res = runNativeRouting(ctx, null);
 			result = new ArrayList<>(Arrays.asList(res));
-			addPrecalculatedToResult(recalculationEnd, result);
+			// addPrecalculatedToResult() makeStartEndPointsPrecise() should be done by C++
 		} else {
 			refreshProgressDistance(ctx);
-			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(ctx, s, e, null);
+			RoutingContext local = new RoutingContext(ctx);
+			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(local, s, e, null);
 			result = RouteResultPreparation.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
 			addPrecalculatedToResult(recalculationEnd, result);
-			makeStartEndPointsPrecise(result, s != null ? s.getPreciseLatLon() : start,
-					e != null && recalculationEnd == null ? e.getPreciseLatLon() : end);
+			makeStartEndPointsPrecise(result, s.getPreciseLatLon(), e.getPreciseLatLon());
 		}
 		return new RouteCalcResult(result); // prepareResult() should be called finally (not between interpoints)
 	}
