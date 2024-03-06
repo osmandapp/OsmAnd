@@ -80,6 +80,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
@@ -987,7 +988,7 @@ public class OsmandAidlApi {
 		}
 		int color = 0;
 		if (!Algorithms.isEmpty(colorTag)) {
-			color = ColorDialogs.getColorByTag(colorTag);
+			color = DefaultColors.valueOf(colorTag);
 		}
 		FavoriteGroup group = favoritesHelper.addFavoriteGroup(name, color);
 		group.setVisible(visible);
@@ -1011,7 +1012,7 @@ public class OsmandAidlApi {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		FavoriteGroup group = favoritesHelper.getGroup(prevGroupName);
 		if (group != null) {
-			int color = Algorithms.isEmpty(colorTag) ? 0 : ColorDialogs.getColorByTag(colorTag);
+			int color = Algorithms.isEmpty(colorTag) ? 0 : DefaultColors.valueOf(colorTag);
 
 			favoritesHelper.updateGroupColor(group, color, true, false);
 			favoritesHelper.updateGroupVisibility(group, visible, false);
@@ -1029,7 +1030,7 @@ public class OsmandAidlApi {
 		point.setDescription(description);
 		int color = 0;
 		if (!Algorithms.isEmpty(colorTag)) {
-			color = ColorDialogs.getColorByTag(colorTag);
+			color = DefaultColors.valueOf(colorTag);
 		}
 		point.setColor(color);
 		point.setVisible(visible);

@@ -8,6 +8,9 @@
 				android:centerColor="@color/track_gradient_center"
 				android:endColor="@color/track_gradient_end"
 				android:type="linear" />
+
+			<corners android:radius="@dimen/radius_small" />
+
 		</shape>
 	</item>
 </selector>

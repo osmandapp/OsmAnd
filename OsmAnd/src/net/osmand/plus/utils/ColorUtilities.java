@@ -184,6 +184,16 @@ public class ColorUtilities {
 	}
 
 	@ColorInt
+	public static int getDisabledTextColor(@NonNull Context ctx, boolean nightMode) {
+		return getColor(ctx, getDisabledTextColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getDisabledTextColorId(boolean nightMode) {
+		return nightMode ? R.color.ctx_menu_controller_disabled_text_color_dark : R.color.ctx_menu_controller_disabled_text_color_light;
+	}
+
+	@ColorInt
 	public static int getActiveIconColor(@NonNull Context ctx, boolean nightMode) {
 		return getColor(ctx, getActiveIconColorId(nightMode));
 	}

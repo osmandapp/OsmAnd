@@ -30,7 +30,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
@@ -76,7 +76,7 @@ public class POITileProvider extends interface_MapTiledCollectionProvider {
 			if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
 				String colorStr = amenity.getColor();
 				if (colorStr != null) {
-					color = ColorDialogs.getColorByTag(colorStr);
+					color = DefaultColors.valueOf(colorStr);
 				}
 			}
 			return color != 0 ? color : ContextCompat.getColor(ctx, R.color.osmand_orange);

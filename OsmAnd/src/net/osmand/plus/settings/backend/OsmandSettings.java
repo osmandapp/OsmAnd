@@ -57,9 +57,10 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.feedback.RateUsState;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.OsmandBackupAgent;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseOrigin;
@@ -1158,9 +1159,9 @@ public class OsmandSettings {
 	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumStringPreference<>(this,
 			"app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
 
-	public final ListStringPreference CUSTOM_ICON_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_icon_colors", null, ",").makeProfile().cache();
-
 	public final CommonPreference<String> CUSTOM_ICON_COLOR = new StringPreference(this, "custom_icon_color", null).makeProfile().cache();
+
+	public final CommonPreference<String> PROFILE_COLORS_PALETTE = new StringPreference(this, "profile_colors_palette", null).makeProfile().cache();
 
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference(this, "user_profile_name", "").makeProfile().cache();
 
@@ -1571,14 +1572,15 @@ public class OsmandSettings {
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
-			"current_track_coloring_type", ColoringType.TRACK_SOLID,
-			ColoringType.getTrackColoringTypes().toArray(new ColoringType[0])).makeGlobal().makeShared().cache();
+			"current_track_coloring_type", ColoringType.TRACK_SOLID, ColoringType.valuesOf(ColoringPurpose.TRACK)).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE = new StringPreference(this,
 			"current_track_route_info_attribute", null);
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
-	public final ListStringPreference CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_track_colors", null, ",").makeShared().makeGlobal();
+	public final CommonPreference<String> TRACK_COLORS_PALETTE = new StringPreference(this, "track_colors_palette", null).makeGlobal().makeShared();
+	public final CommonPreference<String> POINT_COLORS_PALETTE = new StringPreference(this, "point_colors_palette", null).makeGlobal().makeShared();
+	public final CommonPreference<String> CUSTOM_TRACK_PALETTE_COLORS = new StringPreference(this, "custom_track_paletee_colors", null).makeGlobal().makeShared();
 	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
 
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
@@ -3045,14 +3047,13 @@ public class OsmandSettings {
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
 
-	public final ListStringPreference CUSTOM_ROUTE_LINE_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_route_line_colors", null, ",").makeShared().makeGlobal();
+	public final CommonPreference<String> ROUTE_LINE_COLORS_PALETTE = new StringPreference(this, "route_line_colors_palette", null).makeGlobal().makeShared();
 	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_DAY = new IntPreference(this,
-			"route_line_color", ColorDialogs.pallette[0]).cache().makeProfile();
+			"route_line_color", DefaultColors.values()[0].getColor()).cache().makeProfile();
 	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_NIGHT = new IntPreference(this,
-			"route_line_color_night", ColorDialogs.pallette[0]).cache().makeProfile();
+			"route_line_color_night", DefaultColors.values()[0].getColor()).cache().makeProfile();
 	public final CommonPreference<ColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
-			"route_line_coloring_type", ColoringType.DEFAULT,
-			ColoringType.getRouteColoringTypes().toArray(new ColoringType[0])).cache().makeProfile();
+			"route_line_coloring_type", ColoringType.DEFAULT, ColoringType.valuesOf(ColoringPurpose.ROUTE_LINE)).cache().makeProfile();
 	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)
 			.cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();

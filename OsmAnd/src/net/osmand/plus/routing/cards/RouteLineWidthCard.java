@@ -229,7 +229,7 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 		return WidthMode.DEFAULT;
 	}
 
-	private boolean isNightMode() {
+	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightModeForMapControls();
 	}
 

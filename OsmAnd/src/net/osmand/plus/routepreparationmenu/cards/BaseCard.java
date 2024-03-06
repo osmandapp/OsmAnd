@@ -127,6 +127,10 @@ public abstract class BaseCard {
 		return app;
 	}
 
+	public boolean isNightMode() {
+		return nightMode;
+	}
+
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
 		return ContextCompat.getColor(app, colorId);
@@ -195,7 +199,17 @@ public abstract class BaseCard {
 		this.transparentBackground = transparentBackground;
 	}
 
+	public void updateVisibility(int viewId, boolean show) {
+		if (view != null) {
+			updateVisibility(view.findViewById(viewId), show);
+		}
+	}
+
 	public void updateVisibility(boolean show) {
+		updateVisibility(view, show);
+	}
+
+	public void updateVisibility(@Nullable View view, boolean show) {
 		AndroidUiHelper.updateVisibility(view, show);
 	}
 

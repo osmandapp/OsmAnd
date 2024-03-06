@@ -87,13 +87,10 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
 				getRadioItemLayoutId(), container, false);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				OnRadioItemClickListener l = item.getListener();
-				if (l != null && l.onRadioItemClick(item, container)) {
-					setSelectedItem(item);
-				}
+		button.setOnClickListener(v -> {
+			OnRadioItemClickListener l = item.getListener();
+			if (l != null && l.onRadioItemClick(item, container)) {
+				setSelectedItem(item);
 			}
 		});
 		initItemView(button, item);

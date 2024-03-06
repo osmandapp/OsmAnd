@@ -20,7 +20,7 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
@@ -196,9 +196,9 @@ public class TravelArticle {
 		wptPt.lon = amenity.getLocation().getLongitude();
 		wptPt.desc = amenity.getDescription(lang);
 		wptPt.link = amenity.getSite();
-		String color = amenity.getColor();
-		if (color != null) {
-			wptPt.setColor(ColorDialogs.getColorByTag(color));
+		String colorId = amenity.getColor();
+		if (colorId != null) {
+			wptPt.setColor(DefaultColors.valueOf(colorId));
 		}
 		String iconName = amenity.getGpxIcon();
 		if (iconName != null) {

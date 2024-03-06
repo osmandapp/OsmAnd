@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -117,7 +119,7 @@ public class TrackDrawInfo {
 		color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getModeValue(mode));
 		width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
 
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
@@ -139,7 +141,7 @@ public class TrackDrawInfo {
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getParameter(COLORING_TYPE));
+		coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, dataItem.getParameter(COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getParameter(COLORING_TYPE));
 		splitType = dataItem.getParameter(SPLIT_TYPE);
 		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
@@ -184,6 +186,11 @@ public class TrackDrawInfo {
 	}
 
 	@NonNull
+	public ColoringStyle getColoringStyle() {
+		return new ColoringStyle(getColoringType(), getRouteInfoAttribute());
+	}
+
+	@NonNull
 	public ColoringType getColoringType() {
 		return coloringType == null ? ColoringType.TRACK_SOLID : coloringType;
 	}
@@ -197,11 +204,16 @@ public class TrackDrawInfo {
 		return routeInfoAttribute;
 	}
 
-	public void setColoringType(ColoringType coloringType) {
+	public void setColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		setColoringType(coloringStyle.getType());
+		setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+	}
+
+	public void setColoringType(@NonNull ColoringType coloringType) {
 		this.coloringType = coloringType;
 	}
 
-	public void setRouteInfoAttribute(String routeInfoAttribute) {
+	public void setRouteInfoAttribute(@Nullable String routeInfoAttribute) {
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
@@ -273,7 +285,7 @@ public class TrackDrawInfo {
 			width = getRenderDefaultTrackWidth(renderer);
 			showArrows = false;
 			showStartFinish = true;
-			coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+			coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK);
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 		} else if (gpxFile != null) {
 			color = gpxFile.getColor(getRenderDefaultTrackColor(renderer));
@@ -282,7 +294,7 @@ public class TrackDrawInfo {
 			showStartFinish = gpxFile.isShowStartFinish();
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
-			coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxFile.getColoringType());
+			coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, gpxFile.getColoringType());
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxFile.getColoringType());
 		}
 	}
@@ -290,7 +302,7 @@ public class TrackDrawInfo {
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(bundle.getString(TRACK_COLORING_TYPE));
+		coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, bundle.getString(TRACK_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
 		color = bundle.getInt(TRACK_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);

@@ -39,6 +39,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -489,7 +490,7 @@ public class ExternalApiHelper {
 
 				int color = 0;
 				if (!Algorithms.isEmpty(colorTag)) {
-					color = ColorDialogs.getColorByTag(colorTag);
+					color = DefaultColors.valueOf(colorTag);
 					if (color == 0) {
 						LOG.error("Wrong color tag: " + colorTag);
 					}

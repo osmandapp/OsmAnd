@@ -33,8 +33,8 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
@@ -452,7 +452,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	@ColorInt
 	private int getWaypointColorFromParams() {
-		return getColorFromParams(KEY_WPT_COLOR, ColorDialogs.pallette[0]);
+		return getColorFromParams(KEY_WPT_COLOR, DefaultColors.values()[0].getColor());
 	}
 
 	@NonNull

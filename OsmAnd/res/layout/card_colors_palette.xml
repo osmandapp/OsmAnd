@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/colors_list"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingEnd="0dp"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_gravity="top"
+			android:layout_weight="1" />
+
+		<FrameLayout
+			android:id="@+id/add_button_container"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:layout_gravity="top|end" />
+
+	</LinearLayout>
+
+	<include
+		layout="@layout/simple_divider_item"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:layout_marginStart="@dimen/list_content_padding" />
+
+	<FrameLayout
+		android:id="@+id/button_all_colors"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_list_item_height">
+
+		<net.osmand.plus.widgets.TextViewEx
+			style="@style/TitleStyle.Medium"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="?attr/active_color_basic"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			android:layout_gravity="center_vertical"
+			android:text="@string/shared_sting_all_colors"/>
+
+	</FrameLayout>
+
+</LinearLayout>
