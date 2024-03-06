@@ -97,8 +97,8 @@ public class RouteImporter {
 
 		collectLocations(resources, segment);
 		collectRoutePointIndexes(resources, segmentRoutePoints);
-		List<RouteSegmentResult> route = collectRouteSegments(region, resources, segment);
 		collectRouteTypes(region, segment);
+		List<RouteSegmentResult> route = collectRouteSegments(region, resources, segment);
 		for (RouteSegmentResult routeSegment : route) {
 			routeSegment.fillNames(resources);
 		}
@@ -138,18 +138,7 @@ public class RouteImporter {
 			RouteSegmentResult segmentResult = new RouteSegmentResult(object, leftSide);
 			try {
 				segmentResult.readFromBundle(new RouteDataBundle(resources, routeSegment.toStringBundle()));
-				boolean addSegment = true;
-				if (object.nameIds != null) {
-					for (int i = 0; i < object.nameIds.length; i++) {
-						if (object.nameIds[i] >= object.region.routeEncodingRules.size()) {
-							addSegment = false;
-							break;
-						}
-					}
-				}
-				if (addSegment) {
-					route.add(segmentResult);
-				}
+				route.add(segmentResult);
 			} catch (IllegalStateException e) {
 				log.error(e.getMessage());
 				break;
