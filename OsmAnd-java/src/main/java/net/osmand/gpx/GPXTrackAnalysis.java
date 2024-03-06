@@ -10,6 +10,7 @@ import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class GPXTrackAnalysis {
@@ -384,6 +386,12 @@ public class GPXTrackAnalysis {
 	}
 
 	public boolean hasData(String tag) {
+		if (Objects.equals(tag, PointAttributes.SENSOR_TAG_TEMPERATURE)) {
+			return CollectionUtils.containsAny(availableAttributes,
+					PointAttributes.SENSOR_TAG_TEMPERATURE_W,
+					PointAttributes.SENSOR_TAG_TEMPERATURE_A
+			);
+		}
 		return availableAttributes.contains(tag);
 	}
 
@@ -595,10 +603,11 @@ public class GPXTrackAnalysis {
 					totalSensorHrSum += attribute.heartRate;
 				}
 
-				if (attribute.temperature > 0) {
-					setMaxSensorTemperature(Math.max((int) attribute.temperature, getMaxSensorTemperature()));
+				float temperature = attribute.getTemperature();
+				if (temperature > 0) {
+					setMaxSensorTemperature(Math.max((int) temperature, getMaxSensorTemperature()));
 					sensorTemperatureCount++;
-					totalSensorTemperatureSum += attribute.temperature;
+					totalSensorTemperatureSum += temperature;
 				}
 
 				if (attribute.bikePower > 0) {

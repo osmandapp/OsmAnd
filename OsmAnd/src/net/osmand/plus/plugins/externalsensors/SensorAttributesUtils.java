@@ -5,6 +5,9 @@ import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
 import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
 import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
 import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
+import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
+import static net.osmand.util.CollectionUtils.equalsToAny;
 
 import android.util.Pair;
 
@@ -33,8 +36,10 @@ import java.util.List;
 
 public class SensorAttributesUtils {
 
-	private static final String[] SENSOR_GPX_TAGS = {SENSOR_TAG_HEART_RATE, SENSOR_TAG_SPEED,
-			SENSOR_TAG_CADENCE, SENSOR_TAG_BIKE_POWER, SENSOR_TAG_TEMPERATURE};
+	private static final String[] SENSOR_GPX_TAGS = {
+			SENSOR_TAG_HEART_RATE, SENSOR_TAG_SPEED, SENSOR_TAG_CADENCE, SENSOR_TAG_BIKE_POWER,
+			SENSOR_TAG_TEMPERATURE_W, SENSOR_TAG_TEMPERATURE_A
+	};
 
 	public static boolean hasHeartRateData(@NonNull GPXTrackAnalysis analysis) {
 		return analysis.hasData(SENSOR_TAG_HEART_RATE);
@@ -80,7 +85,7 @@ public class SensorAttributesUtils {
 
 	public static void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
 		for (String tag : SENSOR_GPX_TAGS) {
-			float defaultValue = SENSOR_TAG_TEMPERATURE.equals(tag) ? Float.NaN : 0;
+			float defaultValue = equalsToAny(tag, SENSOR_TAG_TEMPERATURE_W, SENSOR_TAG_TEMPERATURE_A) ? Float.NaN : 0;
 			float value = getPointAttribute(point, tag, defaultValue);
 
 			attribute.setAttributeValue(tag, value);
