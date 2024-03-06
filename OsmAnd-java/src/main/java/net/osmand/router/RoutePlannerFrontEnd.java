@@ -1255,6 +1255,7 @@ public class RoutePlannerFrontEnd {
 
 	private RouteCalcResult searchRouteWithInterSmartRecalc(final RoutingContext ctx, List<LatLon> ps,
 			PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+		// this method will be deleted as deprecated and we don't use smart recalculation for hh routing
 		assert ps.size() > 2 && ctx.previouslyCalculatedRoute != null;
 		List<RouteSegmentPoint> pnts = new ArrayList<RouteSegmentPoint>();
 		for (int i = 0; i < ps.size(); i++) {
