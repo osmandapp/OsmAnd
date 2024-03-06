@@ -5255,7 +5255,7 @@
     <string name="osmand_cloud_deletion_subscriptions_warning">Acesta nu vă va anula abonamentul OsmAnd Pro.</string>
     <string name="verify_account_deletion_descr">Trebuie să vă verificăm contul înainte de a-l șterge.
 \n
-\nVă rugăm să introduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
+\nIntroduceți adresa de e-mail cu care v-ați înregistrat. O parolă unică pentru următorul pas va fi trimisă la aceasta.</string>
     <string name="free_favorites_backup_description">Înregistrați-vă în OsmAnd Cloud pentru a obține backup gratuit pentru favorite și setări.</string>
     <string name="get_osmand_cloud">Obține OsmAnd Cloud</string>
     <string name="free_account">Cont gratuit</string>
