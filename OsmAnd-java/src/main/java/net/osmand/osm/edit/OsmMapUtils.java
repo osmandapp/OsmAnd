@@ -1,11 +1,6 @@
 package net.osmand.osm.edit;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.Multipolygon;
@@ -33,6 +28,14 @@ public class OsmMapUtils {
 		return MapUtils.getDistance(e1.getLatitude(), e1.getLongitude(), point.getLatitude(), point.getLongitude());
 	}
 
+	public static boolean isMultipolygon(Map<String, String> tags) {
+		return "multipolygon".equals(tags.get(OSMSettings.OSMTagKey.TYPE.getValue())) ||
+				"protected_area".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
+				"low_emission_zone".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
+				"national_park".equals(tags.get(OSMSettings.OSMTagKey.BOUNDARY.getValue())) ||
+				"danger_area".equals(tags.get(OSMSettings.OSMTagKey.MILITARY.getValue()));
+	}
+
 	public static LatLon getCenter(Entity e) {
 		if (e instanceof Node) {
 			return ((Node) e).getLatLon();
@@ -40,7 +43,7 @@ public class OsmMapUtils {
 			return getWeightCenterForWay(((Way) e));
 		} else if (e instanceof Relation) {
 			List<LatLon> list = new ArrayList<LatLon>();
-			if (e.getTag("type") != null && e.getTag("type").equals("multipolygon")) {
+			if (isMultipolygon(e.getTags())) {
 				MultipolygonBuilder original = new MultipolygonBuilder();
 				original.setId(e.getId());
 
