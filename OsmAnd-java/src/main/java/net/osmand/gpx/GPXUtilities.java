@@ -95,7 +95,9 @@ public class GPXUtilities {
 		put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
 		put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
 		put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
-		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE);
+		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);
 	}};
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
