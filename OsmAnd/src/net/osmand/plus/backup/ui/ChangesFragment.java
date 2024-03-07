@@ -230,21 +230,37 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 
 	@Override
 	public void onBackupPreparing() {
-		app.runInUIThread(this::setupBottomButtons);
+		app.runInUIThread(() -> {
+			if (isResumed()) {
+				setupBottomButtons();
+			}
+		});
 	}
 
 	@Override
 	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
-		app.runInUIThread(this::setupBottomButtons);
+		app.runInUIThread(() -> {
+			if (isResumed()) {
+				setupBottomButtons();
+			}
+		});
 	}
 
 	@Override
 	public void onBackupSyncStarted() {
-		app.runInUIThread(this::setupBottomButtons);
+		app.runInUIThread(() -> {
+			if (isResumed()) {
+				setupBottomButtons();
+			}
+		});
 	}
 
 	public void onBackupSyncTasksUpdated() {
-		app.runInUIThread(this::setupBottomButtons);
+		app.runInUIThread(() -> {
+			if (isResumed()) {
+				setupBottomButtons();
+			}
+		});
 	}
 
 	@Override
