@@ -205,7 +205,7 @@
     <string name="shared_string_show_all">Prikazati sve</string>
     <string name="coordinates">Koordinate</string>
     <string name="shared_string_never">Nikad</string>
-    <string name="rendering_category_hide">Sakrij</string>
+    <string name="rendering_category_hide">Sakriti</string>
     <string name="rendering_category_details">Detalji</string>
     <string name="search_position_current_location_search">Traženje lokacije…</string>
     <string name="search_position_current_location_found">Moja lokacija (pronađena)</string>
@@ -338,11 +338,11 @@
     <string name="rendering_attr_contourWidth_description">Debljina linije izohipse</string>
     <string name="rendering_attr_contourWidth_name">Debljina linije izohipsi</string>
     <string name="rendering_attr_hideWaterPolygons_description">Voda</string>
-    <string name="rendering_attr_hideWaterPolygons_name">Sakrij vodu</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Sakriti vodu</string>
     <string name="routing_attr_allow_motorway_name">Koristi magistrale</string>
     <string name="quick_action_add_configure_map">Podesite mapu</string>
     <string name="quick_action_poi_show">Prikazati %1$s</string>
-    <string name="quick_action_poi_hide">Sakrij %1$s</string>
+    <string name="quick_action_poi_hide">Sakriti %1$s</string>
     <string name="none_point_error">Dodaj bar jednu tačku.</string>
     <string name="enter_gpx_name">Ime GPX fajla:</string>
     <string name="show_on_map_after_saving">Prikazati na mapi posle čuvanja</string>
@@ -534,7 +534,7 @@
     <string name="filter_current_poiButton">Filter</string>
     <string name="default_buttons_commit">Predaj</string>
     <string name="poi_dialog_other_tags_message">Sve druge oznake su očuvane</string>
-    <string name="poi_dialog_comment_default">TOI se menja</string>
+    <string name="poi_dialog_comment_default">TOI promena</string>
     <string name="poi_dialog_reopen">Ponovo otvori</string>
     <string name="poi_dialog_comment">Komentar</string>
     <string name="poi_dialog_opening_hours">Otvoreno</string>
@@ -716,7 +716,7 @@
     <string name="menu_mute_off">Zvuk je uključen</string>
     <string name="search_poi_filter">Filter</string>
     <string name="show_poi_filter">Prikazati filter</string>
-    <string name="hide_poi_filter">Sakrij filter</string>
+    <string name="hide_poi_filter">Sakriti filter</string>
     <string name="off_router_service_no_gps_available">Servis navođenja iz pozadine je potrebno da dostavljač lokacija bude uključen.</string>
     <string name="background_router_service">Drži OsmAnd pokrenutim u pozadini</string>
     <string name="background_router_service_descr">Prati tvoju lokaciju dok je ekran isključen.</string>
@@ -992,7 +992,7 @@
     <string name="rendering_attr_contourLines_description">Prikaz od kog nivoa zumiranja (zahteva podatke o izohipsama):</string>
     <string name="rendering_attr_appMode_description">Prilagodi mapu za</string>
     <string name="rendering_attr_appMode_name">Način iscrtavanja</string>
-    <string name="rendering_attr_noPolygons_name">Poligoni</string>
+    <string name="rendering_attr_noPolygons_name">Poligone</string>
     <string name="rendering_attr_noPolygons_description">Učini sve mogućnosti područja tla transparentnima na mapi.</string>
     <string name="route_kr">Drži desno i nastavi</string>
     <string name="route_kl">Drži levo i nastavi</string>
@@ -1667,7 +1667,7 @@
     <string name="osb_author_dialog_password">OSM lozinka (opciono)</string>
     <string name="osn_close_dialog_error">Beleška ne može da se zatvori.</string>
     <string name="osn_close_dialog_success">Beleška je zatvorena</string>
-    <string name="osn_add_dialog_error">Nije uspelo da se napravi beleška.</string>
+    <string name="osn_add_dialog_error">Nije uspela da se kreira beleška.</string>
     <string name="osn_add_dialog_success">Beleška je napravljena</string>
     <string name="osn_close_dialog_title">Zatvori belešku</string>
     <string name="osn_reopen_dialog_title">Ponovo otvori belešku</string>
@@ -1695,7 +1695,7 @@
     <string name="av_video_quality">Kvalitet izlaza slike</string>
     <string name="av_video_quality_high">Dobar kvalitet</string>
     <string name="av_video_quality_low">Lošiji kvalitet</string>
-    <string name="shared_string_hide">Sakrij</string>
+    <string name="shared_string_hide">Sakriti</string>
     <string name="shared_string_near">Blizu</string>
     <string name="no_address_found">Nije određena adresa</string>
     <string name="rendering_attr_horseRoutes_name">Konjske staze</string>
@@ -1732,7 +1732,7 @@
     <string name="shared_string_read_more">Čitaj više</string>
     <string name="shared_string_remove">Ukloni</string>
     <string name="data_is_not_available">Nema dostupnih podataka</string>
-    <string name="rendering_attr_hideUnderground_name">Podzemni objekti</string>
+    <string name="rendering_attr_hideUnderground_name">Podzemne objekte</string>
     <string name="shared_string_email_address">E-majl</string>
     <string name="shared_string_save_changes">Sačuvaj izmene</string>
     <string name="shared_string_status">Status</string>
@@ -1880,10 +1880,10 @@
     <string name="use_magnetic_sensor_descr">Za čitanje kompasa, koristi magnetni senzor umesto senzora lokacije.</string>
     <string name="use_kalman_filter_compass_descr">Smanjuje greške u čitavanju kompasa ali i unosi kašnjenje.</string>
     <string name="distance_measurement_finish_subtrack">Započni novu podputanju</string>
-    <string name="use_distance_measurement_help">* Tapnite radi označavanja tačke. 
-\n * Dugo držite da obrišete prethodnu tačku. 
-\n * Dugo držite na tačku da pogledate i dodate opis. 
-\n * Tapnite na widget za merenje da vIdi još radnji.</string>
+    <string name="use_distance_measurement_help">* Tapni radi označavanja tačke.
+\n * Dugo drži da obrišeš prethodnu tačku.
+\n * Dugo drži na tačku da pogledaš i dodaš opis.
+\n * Tapni na widžet za merenje da vidiš još radnji.</string>
     <string name="local_osm_changes_backup">Napravi sigurnosnu kopiju kako se OSM menja</string>
     <string name="local_osm_changes_backup_failed">Nemoguće sigurnosno kopirati OSM promene.</string>
     <string name="local_osm_changes_backup_successful">OSM je promenio generisan fajl %1$s</string>
@@ -1909,7 +1909,7 @@
     <string name="route_is_too_long_v2">Za duža odredišta: Dodaj usputna odredišta ako nijedna ruta nije nađena za ovu dugačku rutu ni posle 10 minuta.</string>
     <string name="local_osm_changes_delete_all_confirm">Izbrisaćeš %1$d OSM promene. Jes li sigurni?</string>
     <string name="app_mode_aircraft">Avion</string>
-    <string name="app_mode_boat">Barka</string>
+    <string name="app_mode_boat">Čamac</string>
     <string name="app_mode_motorcycle">Motocikl</string>
     <string name="app_mode_hiking">Pešačenje</string>
     <string name="map_widget_map_rendering">Prikaz mape</string>
@@ -2150,7 +2150,7 @@
     <string name="ascendingly">A-Š</string>
     <string name="descendingly">Š-A</string>
     <string name="remove_from_map_markers">Ukloni iz \'Markeri na mapi’</string>
-    <string name="hide_passed">Sakrij pređeno</string>
+    <string name="hide_passed">Sakriti pređeno</string>
     <string name="show_passed">Prikazati pređeno</string>
     <string name="show_arrows_on_the_map">Prikazuj strelice na mapi</string>
     <string name="show_guide_line">Prikazati smer linije</string>
@@ -2252,7 +2252,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">Pomoćnik za OSM mapiranje</string>
     <string name="shared_string_is_open">Otvoreno sad</string>
     <string name="search_poi_category_hint">Kucaj za pretragu</string>
-    <string name="filter_poi_hint">Filtriraj po imenu</string>
+    <string name="filter_poi_hint">Pretraga po karakteristici</string>
     <string name="shared_string_copy">Kopiranje</string>
     <string name="storage_directory">Skladište mapa</string>
     <string name="application_dir">Folder za čuvanje podataka</string>
@@ -2264,7 +2264,7 @@
     <string name="copying_osmand_file_failed">Premeštanje fajlova nije uspelo</string>
     <string name="specified_directiory_not_writeable">Nisam uspeo obrazovati mape u određenoj fascikli</string>
     <string name="application_dir_change_warning3">Premestaš OsmAnd fajlove podataka na novo odredište?</string>
-    <string name="rendering_attr_hideHouseNumbers_name">Kućni brojevi</string>
+    <string name="rendering_attr_hideHouseNumbers_name">Kućne brojeve</string>
     <string name="shared_string_logoff">Odjavi se</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Bojenje prema pripadnosti mreži puteva</string>
@@ -2628,7 +2628,7 @@
 \n
 \nPretplatama možeš upravljati i otkazati ih tako što ćeš otići na svoja Google Play podešavanja.</string>
     <string name="search_poi_types">Pretraga TOI vrsta</string>
-    <string name="search_poi_types_descr">Kombinuj TOI različitih kategorija. Tapni prekidač radi odabira svih, tapnite na levu stranu da odaberete kategorije.</string>
+    <string name="search_poi_types_descr">Kombinuj TOI različitih kategorija. Tapni prekidač za odaabir svih, tapnite na levu stranu da odabereš kategoriju.</string>
     <string name="extra_maps_menu_group">Dodatne mape</string>
     <string name="download_unsupported_action">Nepodržana radnja %1$s</string>
     <string name="tracker_item">OsmAnd monitor</string>
@@ -2665,7 +2665,7 @@
     <string name="quick_action_transport_descr">Dugme za prikazivanje javnog prevoza.</string>
     <string name="create_edit_poi">Napravi ili izmeni TOI</string>
     <string name="parking_positions">Lokacija parkinga</string>
-    <string name="osmand_distance_planning_plugin_description">Napravi rute tapkanjem na mapu, ili upotrebom i izmenom postojećih GPX fajlova, radi planiranja puta i merenja rastojanja između tačaka. Rezultat može biti snimljen GPX fajlova za kasnije vođenje.</string>
+    <string name="osmand_distance_planning_plugin_description">Napravi rute tapkanjem na mapu ili upotrebom i izmenom postojećih GPX fajlova, radi planiranja puta i merenja rastojanja između tačaka. Rezultat može biti snimljen GPX fajlova za kasnije vođenje.</string>
     <string name="shared_string_favorites">Favoriti</string>
     <string name="shared_string_favorite">Favorit</string>
     <string name="shared_string_map">Mapa</string>
@@ -2747,8 +2747,8 @@
     <string name="save_filter">Sačuvaj filter</string>
     <string name="apply_filters">Primeni filtere</string>
     <string name="shared_string_filters">Filteri</string>
-    <string name="custom_search">Prilagođena pretraga</string>
-    <string name="create_custom_poi">Napravi proizvoljni filter</string>
+    <string name="custom_search">Opširnija pretraga</string>
+    <string name="create_custom_poi">Odabir TOI kategorije za pretragu</string>
     <string name="selected_categories">Izabrane kategorije</string>
     <string name="subcategories">Potkategorije</string>
     <string name="edit_filter">Uredi filter</string>
@@ -3245,7 +3245,7 @@
     <string name="off_road_render_descr">Za vožnju van puta, zasnovanu na izledu „Topo“ i pogodno za upotrebu sa zelenim satelitskim slikama kao donji nivo. Smanjena je debljina glavnog puta, povećana debljina putanja, ruta, biciklističkih i drugih puteva.</string>
     <string name="snowmobile_render_descr">Za vožnju motornih sanki sa namenskim putevima i putanjama.</string>
     <string name="show_full_description">Prikazati ceo opis</string>
-    <string name="hide_full_description">Sakrij ceo opis</string>
+    <string name="hide_full_description">Sakriti ceo opis</string>
     <string name="shared_string_bookmark">Beleške</string>
     <string name="unirs_render_descr">Modifikacija osnovnog stila za povećanje kontrasta pešačkih i biciklističkih puteva. Koristi stare obrasce boja Mapnika.</string>
     <string name="get_osmand_live">Nabavi OsmAnd Live radi korišćenja ovih mogućnosti: dnevna ažuriranja mapa sa neograničenim brojem preuzimanja, svi plaćeni i besplatni dodaci, Wikipedia, Wikivoyage i još mnogo toga.</string>
@@ -3416,7 +3416,7 @@
     <string name="settings_derived_routing_mode_string">Korisnički način rada, izveden iz: %s</string>
     <string name="settings_routing_mode_string">Način rada: %s</string>
     <string name="select_icon_profile_dialog_title">Odaberi ikonu</string>
-    <string name="hide_compass_ruler">Sakrij lenjir kompas</string>
+    <string name="hide_compass_ruler">Sakriti lenjir kompas</string>
     <string name="show_compass_ruler">Prikazati lenjir kompas</string>
     <string name="base_profile_descr_ski">Skijanje</string>
     <string name="app_mode_skiing">Skijanje</string>
@@ -4243,11 +4243,11 @@
     <string name="shared_string_learn_more">Saznaj više</string>
     <string name="regular_price">Regularna cena</string>
     <string name="send_crash_log">Pošalji log pada</string>
-    <string name="shared_string_hide_slope">Sakrij nagib</string>
+    <string name="shared_string_hide_slope">Sakriti nagib</string>
     <string name="poi_routes">Rute</string>
     <string name="shared_string_includes">Uključuje</string>
     <string name="shared_string_grade">Stepen</string>
-    <string name="rendering_attr_hideMilitaryAreas_name">Sakrij vojna područja</string>
+    <string name="rendering_attr_hideMilitaryAreas_name">Sakriti vojna područja</string>
     <string name="routing_attr_avoid_4wd_only_description">Puteve za 4WD vozila</string>
     <string name="lanes_widgets_desc">Prikazuje trenutni raspored kolovozne trake i ističe trake za prestrojavanje prilikom navođenja.</string>
     <string name="route_maneuvers">Manevri rute</string>
@@ -4684,7 +4684,7 @@
     <string name="rendering_attr_showTrainRoutes_name">Železničke rute</string>
     <string name="shared_string_buttons">Dugmad</string>
     <string name="show_parameter_seekbar">Prikazati traku za traženje odrednica</string>
-    <string name="shared_string_hide_all">Sakrij sve</string>
+    <string name="shared_string_hide_all">Sakriti sve</string>
     <string name="start_point">Početak</string>
     <string name="any_connected_with_device">Sve konekcije: %s</string>
     <string name="any_connected">Sve konekcije</string>
@@ -5041,8 +5041,8 @@
     <string name="map_widget_target_distance_desc">Prikazuje rastojanje između kamere i odredišta.</string>
     <string name="developer_widgets">Programerski vidžet</string>
     <string name="map_markers_desc">Vidžet pokazuje rastojanje ili predviđeno vreme dolaska (ETA) prve dve oznake na spisku oznaka.</string>
-    <string name="distance_by_tap_use_description">Tapnite na mapu radi pregleda svog trenutnog lokacija i kliknute tačke. 
-\nTapnije na mapu sa 2 prsta radi pregleda razmaka između kliknutih tačaka</string>
+    <string name="distance_by_tap_use_description">Tapni na mapu da bi video distancu od lokacije i odabrane tačke.
+\nTapni na mapu sa 2 prstada bi video distancu od između kliknutih tačaka</string>
     <string name="auto_25_chars_route_tu_kl">Uradi polukružno i drži levo</string>
     <string name="auto_25_chars_route_tl_kr">Skreni levo i drži desno</string>
     <string name="auto_25_chars_route_roundabout_kl">Izađi na izlaz %1$d i drži levo</string>
