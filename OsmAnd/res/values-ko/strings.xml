@@ -88,7 +88,8 @@
     <string name="osmand_service">절전 모드</string>
     <string name="osmand_service_descr">화면이 꺼져 있는 동안에도 OsmAnd 를 실행하기 위해 사용합니다</string>
     <string name="download_files_not_enough_space">%1$s MB 를 다운로드할 충분한 공간이 없습니다 (빈 공간: %2$s).</string>
-    <string name="download_files_question_space">빈 공간이 이제 {2} MB 입니다! {0} 개의 파일 ({1} MB) 을 다운로드하시겠습니까?</string>
+    <string name="download_files_question_space">{0} 파일 다운로드(s)?
+\n{1} MB (의 {2} MB)는 사용됩니다.</string>
     <string name="use_transparent_map_theme">투명 테마</string>
     <string name="native_library_not_supported">이 장치는 기본 라이브러리를 지원하지 않습니다.</string>
     <string name="init_native_library">기본 라이브러리 초기화중…</string>
@@ -755,7 +756,7 @@
     <string name="clear_destination">도착지 지우기</string>
     <string name="download_using_mobile_internet">현재 와이파이(WiFi)가 연결되어 있지 않습니다. 현재의 인터넷 연결(3G)을 통해서 계속 다운로드 하시겠습니까?</string>
     <string name="street_name">거리 이름</string>
-    <string name="hno">주택 수</string>
+    <string name="hno">주택 번호</string>
     <string name="monitoring_settings">여행 레코딩</string>
     <string name="monitoring_settings_descr">여행을 기록하는 방법을 구성합니다</string>
     <string name="osmand_background_plugin_description">주기적으로 GPS 장치를 On 시켜 절전모드(스크린 끄기)에서 트래킹 및 운행을 가능하게 합니다.</string>
@@ -1275,7 +1276,7 @@
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>
     <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
     <string name="everything_up_to_date">모든 파일 업데이트</string>
-    <string name="no_internet_connection">다운로드가 불가능 합니다. 인터넷 연결을 체크해 주세요.</string>
+    <string name="no_internet_connection">다운로드가 불가능 합니다, 인터넷 연결을 체크해 주세요.</string>
     <string name="navigate_point_zone">존(지역)</string>
     <string name="navigate_point_northing">북향</string>
     <string name="navigate_point_easting">동향</string>
@@ -1491,7 +1492,7 @@
     <string name="routing_attr_height_name">높이 제한</string>
     <string name="routing_attr_height_description">도로에 통행가능한 차량중량을 지정</string>
     <string name="use_fast_recalculation">스마트한 경로 재계산</string>
-    <string name="use_fast_recalculation_desc">긴 여행인 경우 경로 다시 계산</string>
+    <string name="use_fast_recalculation_desc">경로의 초기 부분만 다시 계산하므로, 장거리 여행에 유용합니다.</string>
     <string name="gps_network_not_enabled">위치 서비스는 사용할 수 없습니다. 위치 서비스를 켜시겠습니까?</string>
     <string name="disable_recording_once_app_killed">단독 로깅 방지</string>
     <string name="shared_string_import2osmand">OsmAnd로 가져오기</string>
@@ -1732,7 +1733,7 @@
     <string name="shared_string_update">갱신</string>
     <string name="shared_string_upload">업로드</string>
     <string name="looking_up_address">주소 조회 중</string>
-    <string name="exit_pan_mode_descr">팬 모드를 종료하려면 선택을 누르십시오.</string>
+    <string name="exit_pan_mode_descr">팬 모드를 종료하려면 선택 누르시오</string>
     <string name="srtm_download_single_help_message">변형을 선택하십시오. 형식을 변경하려면 파일을 다시 다운로드해야 한다.</string>
     <string name="srtm_download_list_help_message">osmand는 미터와 피트 단위로 윤곽선 데이터를 제공한다. 형식을 변경하려면 파일을 다시 다운로드해야 한다.</string>
     <string name="safe_settings">안전</string>
@@ -1757,13 +1758,13 @@
     <string name="markers_history_is_disabled_descr">방문한 지도 마커 목록을 가져오려면 기록을 활성화하십시오.</string>
     <string name="history_preferences_descr">각 기록 유형에 대해 개별적으로 기록 기록을 비활성화할 수 있다.</string>
     <string name="android_auto_map_placeholder_title">지도는 차량 화면에 표시된다.</string>
-    <string name="search_history_is_disabled_descr">설정에서 검색 기록을 활성화할 수 있음</string>
+    <string name="search_history_is_disabled_descr">설정에서 검색 기록을 활성화할 수 있습니다.</string>
     <string name="history_actions_descr">기록을 파일로 내보낼 수 있다.</string>
     <string name="transparent_status_bar_descr">상태 표시줄 아래에 지도 표시</string>
     <string name="approx_safe_mode">안전 gpx 근사치</string>
     <string name="approx_safe_mode_description">네이티브 코드 대신 느린 Android를 사용하여 gpx 근사치를 수행하십시오.</string>
     <string name="use_external_timestamps">외부 타임스탬프 사용</string>
-    <string name="location_access_request_title">OsmAnd를 탐색하려면 위치에 대한 액세스 권한이 필요함</string>
+    <string name="location_access_request_title">OsmAnd를 탐색하려면 위치에 대한 액세스 권한이 필요합니다.</string>
     <string name="purchases_feature_desc_hourly_map_updates">지도 업데이트에 더 자주 액세스하십시오. 매시간, 매일 또는 매주 업데이트. 업데이트는 변경된 영역에 대해서만 점진적으로 다운로드된다.</string>
     <string name="purchases_feature_desc_unlimited_map_download">모든 대륙 및 지역의 오프라인 지도를 무제한 다운로드하십시오.</string>
     <string name="shared_string_details">세부 사항</string>
@@ -1777,7 +1778,7 @@
     <string name="shared_storage_warning_title">스토리지 액세스 규칙 변경</string>
     <string name="tiles_storage_descr">다운로드한 타일을 저장하는 방법을 선택하십시오.</string>
     <string name="download_map_dialog">지도 다운로드 대화상자</string>
-    <string name="maps_you_need_descr">북마크한 기사를 바탕으로 다음 맵을 다운로드하는 것이 좋다.</string>
+    <string name="maps_you_need_descr">북마크한 기사를 바탕으로 다음 맵을 다운로드하는 것이 좋음:</string>
     <string name="download_all">모두 다운로드</string>
     <string name="travel_card_download_descr">Wikivoyage 여행 가이드를 다운로드하여 인터넷 연결 없이 전 세계 장소에 대한 기사를 확인하십시오.</string>
     <string name="shared_string_width">폭</string>
@@ -2329,7 +2330,7 @@
     <string name="online_maps_searching_descr">온라인으로 검색 중…</string>
     <string name="travel_routes">이동 경로</string>
     <string name="backup_dont_have_any_descr">자동 백업 예약 및 데이터 손실 방지를 합니다.</string>
-    <string name="backup_do_not_have_any">아직 온라인 백업이 없습니다.</string>
+    <string name="backup_do_not_have_any">아직 온라인 백업이 없음</string>
     <string name="backup_deleted_all_data_descr">귀하의 모든 데이터가 OsmAnd Cloud에서 성공적으로 삭제되었습니다.</string>
     <string name="backup_deleting_all_data_descr">OsmAnd가 클라우드에서 데이터를 삭제할 때까지 기다려 주십시오. 장치의 모든 데이터는 변경되지 않은 상태로 유지됩니다.</string>
     <string name="backup_data">데이터 백업</string>
@@ -2388,7 +2389,7 @@
     <string name="reorder_profiles">‎프로파일‎‎ 목록 편집‎</string>
     <string name="sort_by">‎정렬 기준‎</string>
     <string name="restore_from_file">‎파일에서 복원‎</string>
-    <string name="osmand_cloud_authorize_descr">‎데이터를 ‎‎잃지‎‎ 마십시오. 모든 정보를 쉽게 백업하고 복원하십시오.‎</string>
+    <string name="osmand_cloud_authorize_descr">‎데이터를 ‎‎잃지‎‎ 마십시오. 모든 정보를 쉽게 백업하고 복원하세요.‎</string>
     <string name="restore_purchases">‎구매 ‎‎항목 복원‎</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">메모 태그</string>
     <string name="rendering_attr_showWaterwayTunnels_description">수로 터널을 숨기지 않기</string>
@@ -2660,7 +2661,7 @@
     <string name="export_profile_failed">프로파일을 내보낼 수 없습니다.</string>
     <string name="plugin_prefs_reset_successful">모든 플러그인 설정이 기본값으로 복원되었습니다.</string>
     <string name="start_editing_card_image_text">누구나 편집 할 수있는 무료 전세계 여행 가이드.</string>
-    <string name="profile_alert_cant_delete_base">OsmAnd의 기본 프로필은 삭제할 수 없습니다.</string>
+    <string name="profile_alert_cant_delete_base">OsmAnd의 기본 프로필은 삭제할 수 없음</string>
     <string name="profile_alert_delete_title">프로필 삭제</string>
     <string name="profile_alert_delete_msg">\"%s\" 프로파일 삭제</string>
     <string name="osmand_extended_description_part5">사이클링
@@ -2725,7 +2726,7 @@
     <string name="no_widgets_here_yet">아직 위젯 없음</string>
     <string name="backup_view_conflicts">충돌 보기</string>
     <string name="shared_string_symbol">상징</string>
-    <string name="osmand_cloud_help_descr">도움이 필요하신가요\? %1$s로 문의하시기 바랍니다.</string>
+    <string name="osmand_cloud_help_descr">도움이 필요하신가요? %1$s로 문의주십시오</string>
     <string name="routing_attr_avoid_tunnels_description">터널 피하기</string>
     <string name="loading_list_of_routing_services">사용 가능한 라우팅 서비스 목록 로드 중</string>
     <string name="navigation_points">탐색 지점</string>
@@ -2746,7 +2747,7 @@
     <string name="apply_to_existing_points_descr">변경 사항을 그룹의 기존 점에 적용하거나 새 점에만 적용합니까\?</string>
     <string name="make_backup_descr">이 장치에는 많은 변경 사항이 있으므로 손실되지 않도록이 데이터를 백업하십시오.</string>
     <string name="shared_string_uphill">오르막길</string>
-    <string name="coordinates_widget_desc">현재 위치의 지리적 좌표 표시</string>
+    <string name="coordinates_widget_desc">현재 위치의 지리적 좌표 표시합니다.</string>
     <string name="osmand_cloud_login_descr">등록한 이메일 주소를 입력하십시오. 다음 단계를 위한 일회용 암호가 전송됩니다.</string>
     <string name="poi_routes">경로</string>
     <string name="cloud_email_already_registered">해당 이메일 주소는 이미 등록되었습니다.</string>
@@ -2834,7 +2835,7 @@
     <string name="storage_directory_shared">공유 메모리</string>
     <string name="external_sensors_plugin_name">외부 센서</string>
     <string name="terms_of_service_desc">지도를 다운로드하면 %1$s 및 %2$s에 동의하는 것입니다.</string>
-    <string name="no_purchases">구매한 항목이 없습니다.</string>
+    <string name="no_purchases">구매한 항목이 없음</string>
     <string name="speed_cameras_restart_descr">앱을 다시 시작하여 모든 과속 단속 카메라 데이터를 삭제합니다.</string>
     <string name="speed_cameras_removed_descr">이 기기에는 과속 단속 카메라가 없습니다.</string>
     <string name="get_unlimited_access">무제한 액세스</string>
@@ -2911,7 +2912,7 @@
 \n
 \n\'설정\' → \'개인 정보 및 보안\'에서 언제든지 구성할 수 있습니다.</string>
     <string name="shared_string_legal">법적고지</string>
-    <string name="privacy_and_security_change_descr">%1$s에 동의하면 \"허용\"을 누릅니다.</string>
+    <string name="privacy_and_security_change_descr">%1$s에 동의하면 \"허용\"을 누르시오</string>
     <string name="settings_privacy_and_security">개인 정보 보호 및 보안</string>
     <string name="shared_string_nearest">가장 가까운</string>
     <string name="shared_string_original">원본</string>
@@ -3876,7 +3877,7 @@
     <string name="year">연도</string>
     <string name="months_3">3개월</string>
     <string name="rendering_value_sector1_name">섹터 1</string>
-    <string name="provided_by">%1$s 제공.</string>
+    <string name="provided_by">%1$s 제공</string>
     <string name="weeks_2_4">주간</string>
     <string name="weeks_5">주간</string>
     <string name="external_device_characteristic_heart_rate">심박수</string>
