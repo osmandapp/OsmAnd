@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -14,8 +12,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.track.data.GPXInfo;
-import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.plus.track.helpers.GpxDataItem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,10 +35,10 @@ class TracksExportType extends AbstractFileExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		List<File> files = new ArrayList<>();
-		List<GPXInfo> infos = GpxUiHelper.getGPXFiles(app.getAppPath(GPX_INDEX_DIR), true);
-		for (GPXInfo info : infos) {
-			File file = info.getFile();
-			if (file != null && file.exists() && !file.isDirectory()) {
+		List<GpxDataItem> gpxItems = app.getGpxDbHelper().getItems();
+		for (GpxDataItem item : gpxItems) {
+			File file = item.getFile();
+			if (file.exists() && !file.isDirectory()) {
 				files.add(file);
 			}
 		}
