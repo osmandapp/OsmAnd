@@ -5631,7 +5631,7 @@
     <string name="special_routing_cpp">Специальный тип маршрутизации</string>
     <string name="auto_zoom_discrete">Дискретное</string>
     <string name="auto_zoom">Автомасштабирование</string>
-    <string name="auto_zoom_smooth">Гладкое</string>
+    <string name="auto_zoom_smooth">Плавное</string>
     <string name="routing_type_a_star_classic">A* классический</string>
     <string name="java_safe">Java (безопасно)</string>
     <string name="gpx_approximation">Аппроксимация gpx</string>
