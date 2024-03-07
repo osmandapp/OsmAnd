@@ -553,7 +553,7 @@
     <string name="osb_comment_dialog_message">메세지</string>
     <string name="osb_comment_dialog_author">작성자 이름</string>
     <string name="osb_comment_dialog_success">설명이 성공적으로 추가되었습니다</string>
-    <string name="osb_comment_dialog_error">예외발생: 설명이 추가되지 않았습니다</string>
+    <string name="osb_comment_dialog_error">댓글을 추가 할 수 없습니다.</string>
     <string name="poi_edit_title">POI 편집</string>
     <string name="poi_create_title">POI 생성</string>
     <string name="poi_remove_confirm_template">{0}를 삭제할까요(정보를 입력하세요)?</string>
@@ -1266,7 +1266,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">전차 및 기차 노선</string>
     <string name="rendering_category_hide">숨기기</string>
     <string name="wake_on_voice">화면 켜기</string>
-    <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켜기</string>
+    <string name="wake_on_voice_descr">교차로에 접근할 때 화면 켭니다.</string>
     <string name="lock_screen_request_explanation">%1$s 의 절전 기능에 대한 화면을 해제 하려면 이 권한이 필요 합니다.</string>
     <string name="home_button">집</string>
     <string name="map_update">업데이트할 %1$s 지도가 있습니다</string>
@@ -1274,7 +1274,7 @@
     <string name="coordinates">좌표</string>
     <string name="error_avoid_specific_road">우회로 없음</string>
     <string name="use_opengl_render">OpenGL 렌더링 사용</string>
-    <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다)</string>
+    <string name="use_opengl_render_descr">하드웨어로 가속된 OpenGL 렌더링 사용 (일부 장치에는 작동 하지 않을 수 있습니다).</string>
     <string name="everything_up_to_date">모든 파일 업데이트</string>
     <string name="no_internet_connection">다운로드가 불가능 합니다, 인터넷 연결을 체크해 주세요.</string>
     <string name="navigate_point_zone">존(지역)</string>
@@ -1296,7 +1296,7 @@
     <string name="rendering_value_germanRoadAtlas_name">독일 도로 지도</string>
     <string name="rendering_value_americanRoadAtlas_name">미국 도로 지도</string>
     <string name="routing_attr_no_new_routing_name">No v1.9 라우팅 규칙</string>
-    <string name="routing_attr_no_new_routing_description">v1.9에서 도입된 라우팅 룰을 사용하지 마십시오</string>
+    <string name="routing_attr_no_new_routing_description">v1.9에서 도입된 라우팅 룰을 사용하지 마십시오.</string>
     <string name="traffic_warning_railways">철도 건널목</string>
     <string name="traffic_warning_pedestrian">보행자 횡단보도</string>
     <string name="show_railway_warnings">철도 교차로 표시</string>
@@ -1307,7 +1307,7 @@
     <string name="save_track_to_gpx_globally_headline">요구시 트랙을 기록</string>
     <string name="rendering_attr_streetLighting_name">거리 조명</string>
     <string name="proxy_pref_title">프록시</string>
-    <string name="proxy_pref_descr">프록시 인터넷 통신 설정</string>
+    <string name="proxy_pref_descr">프록시 인터넷 통신 설정합니다.</string>
     <string name="settings_privacy">프라이버시</string>
     <string name="enable_proxy_title">HTTP 프록시 사용</string>
     <string name="enable_proxy_descr">모든 네트워크 요청에 대해 HTTP 프록시 구성</string>
@@ -1315,7 +1315,7 @@
     <string name="proxy_host_descr">프록시 호스트 이름 구성 (예: 127.0.0.1)</string>
     <string name="proxy_port_title">프록시 포트</string>
     <string name="proxy_port_descr">당신의 프록시 포트 번호 구성 (예: 8118)</string>
-    <string name="version_settings_descr">야간 빌드를 다운로드</string>
+    <string name="version_settings_descr">야간 빌드를 다운로드합니다.</string>
     <string name="version_settings">빌드</string>
     <string name="shared_string_gpx_points">장소</string>
     <string name="gps_status">GPS status 앱</string>
@@ -1326,8 +1326,8 @@
     <string name="shared_string_get">가져오기</string>
     <string name="plugin_ski_name">스키 지도 보기</string>
     <string name="plugin_nautical_name">항해 지도 보기</string>
-    <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
-    <string name="nautical_maps_missing">항해 지도 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다</string>
+    <string name="world_ski_missing">스키 지도를 표시 하려면, 특정 오프라인 지도를 다운로드 해야 합니다.</string>
+    <string name="nautical_maps_missing">항해 지도 표시 하려면 특정 오프라인 지도를 다운로드 해야 합니다</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming (손질)</string>
     <string name="rendering_attr_pisteRoutes_name">스키 슬로프</string>
     <string name="free">무료 %1$s</string>
@@ -1422,7 +1422,7 @@
     <string name="simulate_your_location">모의 주행</string>
     <string name="drawer">플랫 목록</string>
     <string name="short_location_on_map">위도 %1$s\n경도 %2$s</string>
-    <string name="tips_and_tricks_descr">자주 묻는 질문, 최근 변경 사항 등</string>
+    <string name="tips_and_tricks_descr">자주 묻는 질문, 최근 변경 사항 등 기타 여러가지가 있습니다.</string>
     <string name="routing_settings_2">운행 설정</string>
     <string name="general_settings_2">일반 설정</string>
     <string name="shared_string_clear_all">모두 지우기</string>
@@ -1443,7 +1443,7 @@
     <string name="parking_place_limited">주차 시간 제한</string>
     <string name="your_edits">편집</string>
     <string name="osmand_parking_overdue">시간 초과</string>
-    <string name="delay_to_start_navigation_descr">지정된 시간 경과후 자동으로 운행 시작</string>
+    <string name="delay_to_start_navigation_descr">지정된 시간 경과후 자동으로 운행 시작합니다.</string>
     <string name="delay_to_start_navigation">~ 이후 턴-바이-턴 운행을 시작…</string>
     <string name="shared_string_go">실행</string>
     <string name="local_osm_changes_upload_all_confirm">OSM에 %1$d 변경 사항을 업로드 하려고 합니다. 확실합니까?</string>
@@ -1461,7 +1461,7 @@
     <string name="current_route">현재 루트</string>
     <string name="shared_string_do_not_use">사용 하지 마십시오</string>
     <string name="shared_string_address">주소</string>
-    <string name="shared_string_show_description">설명 표시</string>
+    <string name="shared_string_show_description">설명 표시합니다.</string>
     <string name="shared_string_is_open">열기</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM 지도작성 도우미</string>
     <string name="shared_string_manage">관리</string>
@@ -1582,7 +1582,7 @@
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">오프 라인 지도 및 내비게이션</string>
     <string name="commit_poi">POI 커밋</string>
-    <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다</string>
+    <string name="av_locations_descr">Gpx 파일에 위치와 관련된 메모를 첨부합니다.</string>
     <string name="av_locations">위치</string>
     <string name="poi_action_delete">삭제</string>
     <string name="show_on_start">시작할 때 보여주기</string>
@@ -1612,7 +1612,7 @@
     <string name="hillshade_layer_disabled">Hillshade 레이어 비활성화</string>
     <string name="favorite_category_add_new">새로 추가</string>
     <string name="favorite_category_select">범주 선택</string>
-    <string name="default_speed_system_descr">이동속도 표시형식을 지정합니다</string>
+    <string name="default_speed_system_descr">이동속도 표시형식을 지정합니다.</string>
     <string name="default_speed_system">속도 단위</string>
     <string name="nm">nm</string>
     <string name="si_nm">항해 마일</string>
@@ -1630,8 +1630,8 @@
     <string name="shared_string_navigation">내비게이션</string>
     <string name="osmand_running_in_background">백그라운드에서 실행</string>
     <string name="favourites_edit_dialog_title">즐겨 찾는 정보</string>
-    <string name="simulate_your_location_stop_descr">위치 시뮬레이션 중지</string>
-    <string name="simulate_your_location_descr">기록된 GPX 또는 계산된 경로를 사용하여 시뮬레이션합니다</string>
+    <string name="simulate_your_location_stop_descr">위치 시뮬레이션 중지합니다.</string>
+    <string name="simulate_your_location_descr">기록된 GPX 또는 계산된 경로를 사용하여 시뮬레이션합니다.</string>
     <string name="favourites_context_menu_add">즐겨찾기 추가</string>
     <string name="are_you_sure">확실한가요?</string>
     <string name="unsaved_changes_will_be_lost">저장되지 않은 변경 내용이 손실 됩니다. 계속 하시겠습니까?</string>
@@ -5096,4 +5096,5 @@
     <string name="rendering_attr_padusDisplayMode_description">액세스 유형 또는 관리자 이름</string>
     <string name="rendering_attr_padusHideBoundaries_name">공공 토지 경계</string>
     <string name="routing_type_a_star_2_phase">A* 2-단계</string>
+    <string name="voice_announces_info">음성 발표는 내비게이션 중에 만 발생합니다.</string>
 </resources>
