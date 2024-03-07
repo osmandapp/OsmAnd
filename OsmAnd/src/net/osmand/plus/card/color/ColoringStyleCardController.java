@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ColoringCardController implements IMultiStateCardController {
+public abstract class ColoringStyleCardController implements IMultiStateCardController {
 
 	protected final OsmandApplication app;
 	private final List<ColoringStyle> supportedColoringStyles;
@@ -38,8 +38,8 @@ public abstract class ColoringCardController implements IMultiStateCardControlle
 	private IColorCardControllerListener controllerListener;
 	private boolean nightMode;
 
-	public ColoringCardController(@NonNull OsmandApplication app,
-	                              @NonNull ColoringStyle selectedColoringStyle) {
+	public ColoringStyleCardController(@NonNull OsmandApplication app,
+	                                   @NonNull ColoringStyle selectedColoringStyle) {
 		this.app = app;
 		this.supportedColoringStyles = collectSupportedColoringStyles();
 		this.selectedColoringStyle = selectedColoringStyle;

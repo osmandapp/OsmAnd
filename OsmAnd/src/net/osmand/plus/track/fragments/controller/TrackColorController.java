@@ -14,7 +14,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.ColoringCardController;
+import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
@@ -39,7 +39,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackColorController extends ColoringCardController implements IDialogController {
+public class TrackColorController extends ColoringStyleCardController implements IDialogController {
 
 	private static final String PROCESS_ID = "select_track_color";
 

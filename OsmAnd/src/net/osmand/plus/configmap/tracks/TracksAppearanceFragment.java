@@ -49,7 +49,7 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
-import net.osmand.plus.card.color.ColoringCardController.IColorCardControllerListener;
+import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;

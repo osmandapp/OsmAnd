@@ -13,7 +13,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.ColoringCardController;
+import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
@@ -38,7 +38,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class RouteLineColorController extends ColoringCardController implements MapThemeProvider, IDialogController {
+public class RouteLineColorController extends ColoringStyleCardController implements MapThemeProvider, IDialogController {
 
 	public static final String PROCESS_ID = "select_route_line_color";
 
