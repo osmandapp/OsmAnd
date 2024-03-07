@@ -5639,4 +5639,5 @@
     <string name="routing_type">Тип рутирања</string>
     <string name="routing_type_a_star_2_phase">A* 2-фаза</string>
     <string name="java_safe">Јава (Сигурно)</string>
+    <string name="shared_sting_all_colors">Све боје</string>
 </resources>
