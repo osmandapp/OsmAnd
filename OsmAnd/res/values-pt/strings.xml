@@ -5638,4 +5638,12 @@
     <string name="rendering_attr_padusHideBoundaries_description">Ocultar fronteiras dos terrenos públicos, mas deixar áreas</string>
     <string name="shared_string_speedometer">Velocímetro</string>
     <string name="rendering_attr_padusDisplayMode_name">Modo de visualização de terrenos públicos</string>
+    <string name="auto_zoom_smooth">Suave</string>
+    <string name="gpx_approximation">Aproximação ao GPX</string>
+    <string name="routing_type">Tipo de roteamento</string>
+    <string name="shared_sting_all_colors">Todas as cores</string>
+    <string name="routing_type_a_star_classic">A* clássico</string>
+    <string name="auto_zoom_discrete">Discreto</string>
+    <string name="auto_zoom">Amplificação automática</string>
+    <string name="java_safe">Java (Seguro)</string>
 </resources>
