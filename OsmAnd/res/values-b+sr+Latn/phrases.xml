@@ -205,7 +205,7 @@
     <string name="poi_fire_hydrant">Hidrant</string>
     <string name="poi_fire_hose">Vatrogasno crevo</string>
     <string name="poi_ambulance_station">Ambulanta</string>
-    <string name="poi_ses_station">SES stanica</string>
+    <string name="poi_ses_station">Sanitarna stanica</string>
     <string name="poi_emergency_access_point">Tačka za okupljanje u slučaju nužde</string>
     <string name="poi_ford">Zaliv</string>
     <string name="poi_mountain_pass">Planinski prolaz</string>
@@ -325,7 +325,7 @@
     <string name="poi_speed_camera">Prekršajna kamera</string>
     <string name="poi_junction">Raskrsnica</string>
     <string name="poi_rest_area">Odmorište</string>
-    <string name="poi_water_well">Bunar sa vodom</string>
+    <string name="poi_water_well">Bunar za vodu</string>
     <string name="poi_water_works">Radovi na vodi</string>
     <string name="poi_water_tower">Vodeni toranj</string>
     <string name="poi_lock_gate">Kapija sa zaključavanjem</string>
@@ -502,7 +502,7 @@
     <string name="poi_recycling_white_goods">Bela tehnika</string>
     <string name="poi_recycling_sheet_metal">Lim</string>
     <string name="poi_recycling_foil">Folija</string>
-    <string name="poi_forest">Ljudski održavana šuma</string>
+    <string name="poi_forest">Šuma (održavana)</string>
     <string name="poi_monitoring_station">Stanica za nadgledanje</string>
     <string name="poi_construction">Građevina</string>
     <string name="poi_mineshaft">Šaht</string>
@@ -941,7 +941,7 @@
     <string name="poi_wheelchair_accessibility">Pristup invalidskim kolicima</string>
     <string name="poi_wheelchair_yes">Da;Invalidska kolica</string>
     <string name="poi_wheelchair_no">Ne</string>
-    <string name="poi_wheelchair_limited">Ograničen</string>
+    <string name="poi_wheelchair_limited">Ograničeno</string>
     <string name="poi_wholesale">Market prodaja</string>
     <string name="poi_access_private">Privatni posed</string>
     <string name="poi_access_no">Bez pristupa</string>
@@ -962,7 +962,7 @@
     <string name="poi_nudism_yes">Dozvoljen</string>
     <string name="poi_nudism_no">Zabranjen</string>
     <string name="poi_nudism_obligatory">Obavezan</string>
-    <string name="poi_nudism_permissive">Ograničen</string>
+    <string name="poi_nudism_permissive">Dopušteno</string>
     <string name="poi_population">Naseljenost</string>
     <string name="poi_parking_underground">Podzemni</string>
     <string name="poi_parking_multi_storey">Na više nivoa</string>
@@ -1291,9 +1291,9 @@
     <string name="poi_diet_kosher_only">Isključivo košer</string>
     <string name="poi_diet_kosher_yes">Košer</string>
     <string name="poi_diaper_table_count">Oslonac za prepovijanje pelena</string>
-    <string name="poi_diaper_yes">Sto za prepovijanje pelena</string>
-    <string name="poi_diaper_no">Nema stola za prepovijanje pelena</string>
-    <string name="poi_diaper_room">Soba za prepovijanje pelena</string>
+    <string name="poi_diaper_yes">Sto za presvlačenje pelena</string>
+    <string name="poi_diaper_no">Nema stola za presvlačenje pelena</string>
+    <string name="poi_diaper_room">Soba za presvlačenje pelena</string>
     <string name="poi_maxstay">Ograničeno vreme parkiranja</string>
     <string name="poi_vending_parking_tickets">Karte za parkiranje</string>
     <string name="poi_vending_cigarettes">Cigarete</string>
@@ -1427,7 +1427,7 @@
     <string name="poi_emergency_infrastructure">Služba hitne pomoći</string>
     <string name="poi_node_networks">Pešački/biciklistički mrežni čvorovi</string>
     <string name="poi_traffic_enforcement">Ograničenje saobraćaja</string>
-    <string name="poi_man_made">Napravljeno ručno</string>
+    <string name="poi_man_made">Građevine</string>
     <string name="poi_transport_construction">Saobraćajna konstrukcija</string>
     <string name="poi_water_supply">Dostava vode</string>
     <string name="poi_landuse">Korišćenje zemljišta</string>
@@ -1515,8 +1515,8 @@
     <string name="poi_recycling_chipboard">Iverica</string>
     <string name="poi_recycling_plasterboard">Suvi malter</string>
     <string name="poi_landfill">Deponija</string>
-    <string name="poi_brownfield">Pretgrađevinski teren</string>
-    <string name="poi_greenfield">Novograđevinski teren</string>
+    <string name="poi_brownfield">Pripremljeno građevinsko zemljište</string>
+    <string name="poi_greenfield">Gradilište</string>
     <string name="poi_adit">Podzemni ulaz</string>
     <string name="poi_petroleum_well">Izvor nafte</string>
     <string name="poi_survey_point">Nadzorna tačka</string>
@@ -1614,7 +1614,7 @@
     <string name="poi_hunting_stand">Lovačka čeka</string>
     <string name="poi_village_green">Centar sela</string>
     <string name="poi_trail_riding_station">Konjička stanica</string>
-    <string name="poi_food_court">Samoposlužna kuhinja</string>
+    <string name="poi_food_court">Ekspres restoran</string>
     <string name="poi_craft_agricultural_engines">Poljoprivredne mašine</string>
     <string name="poi_craft_beekeeper">Pčelar</string>
     <string name="poi_craft_blacksmith">Kovač</string>
@@ -1854,7 +1854,7 @@
     <string name="poi_female_yes">Žene</string>
     <string name="poi_female_no">Zabranjeno za žene</string>
     <string name="poi_indoor_yes">Unutar</string>
-    <string name="poi_indoor_no">Spolja</string>
+    <string name="poi_indoor_no">Spoljašnji</string>
     <string name="poi_toilets_yes">Da;Toaleti</string>
     <string name="poi_toilets_no">Bez toaleta</string>
     <string name="poi_toilets_wheelchair_yes">Pristup toaletu za invalidska kolica: da</string>
@@ -2062,8 +2062,8 @@
     <string name="poi_industrial_brewery">Tip: pivara</string>
     <string name="poi_industrial_brickyard">Tip: ciglana</string>
     <string name="poi_industrial_intermodal_freight_terminal">Tip: međumodalni teretni terminal</string>
-    <string name="poi_industrial_sawmill">Tip: pilana</string>
-    <string name="poi_industrial_water_purification">Tip: prečišćenje vode</string>
+    <string name="poi_industrial_sawmill">Tip: strugara</string>
+    <string name="poi_industrial_water_purification">Tip: prečišćavanje vode</string>
     <string name="poi_industrial_port">Tip: luka</string>
     <string name="poi_industrial_depot">Tip: depo</string>
     <string name="poi_note">Beleška</string>
@@ -2495,7 +2495,7 @@
     <string name="poi_barbecue_grill">Roštilj: da</string>
     <string name="poi_bulk_purchase">Prodavnica na veliko</string>
     <string name="poi_books_type">Knjige</string>
-    <string name="poi_park_ride">Park i vožnja</string>
+    <string name="poi_park_ride">Parkiraj i vozi (P+R)</string>
     <string name="poi_climbing_crag">Da</string>
     <string name="poi_snowmobile_filter">Pristup vozilima za sneg</string>
     <string name="poi_water_place_access_community">Komunalni</string>
@@ -2918,7 +2918,7 @@
     <string name="poi_vacuum_cleaner_yes">Da; Usisivač</string>
     <string name="poi_compressed_air_no">Komprimovani vazduh: ne</string>
     <string name="poi_compressed_air_yes">Da;Komprimovani vazduh</string>
-    <string name="poi_plant_nursery">Rasadnik biljaka</string>
+    <string name="poi_plant_nursery">Rasadnik</string>
     <string name="poi_addr_housename">Ime kuće</string>
     <string name="poi_nuclear_explosion_device">Eksplozija: uređaj</string>
     <string name="poi_nuclear_explosion_warhead">Eksplozija: bojeva glava</string>
@@ -3058,7 +3058,7 @@
     <string name="poi_public_bookcase_type_metal_cabinet">Tip: metalni orman</string>
     <string name="poi_public_bookcase_type_wooden_cabinet">Tip: drveni ormar</string>
     <string name="poi_public_bookcase_type_reading_box">Tip: kutija za čitanje</string>
-    <string name="poi_public_bookcase_type_phone_box">Tip: telefonska kutija</string>
+    <string name="poi_public_bookcase_type_phone_box">Tip: telefonska govornica</string>
     <string name="poi_public_bookcase">Javna polica za knjige</string>
     <string name="poi_xmas_url">Božić: vebsajt</string>
     <string name="poi_xmas_location">Božić: lokacija</string>
@@ -3185,7 +3185,7 @@
     <string name="poi_crossing_activation_automatic">Aktiviranje prelaza: automatsko</string>
     <string name="poi_recreation_center">Rekreacioni centar</string>
     <string name="poi_summer_camp">Letnji kamp</string>
-    <string name="poi_spoil_heap">Pokvarena gomila</string>
+    <string name="poi_spoil_heap">Deponija kamena</string>
     <string name="poi_wheelchair_designated">Određeno</string>
     <string name="poi_salt_no">So: ne</string>
     <string name="poi_salt_yes">So</string>
@@ -3558,7 +3558,7 @@
     <string name="poi_water_place_durability_durable">Trajnost vodenog mesta: izdržljiva</string>
     <string name="poi_operational_status_needs_maintenance">Potrebno održavanje</string>
     <string name="poi_operational_status_broken">Prekinuto</string>
-    <string name="poi_operational_status_restricted">Ograničen</string>
+    <string name="poi_operational_status_restricted">Ograničeno</string>
     <string name="poi_location_kiosk">Lokacija: kiosk</string>
     <string name="poi_boat_rental">Iznajmljivanje čamaca</string>
     <string name="poi_beds">Kreveti</string>
@@ -3713,13 +3713,13 @@
     <string name="poi_changing_table_fee_no">Naknada promene stola: ne</string>
     <string name="poi_changing_table_fee_yes">Naknada promene stola: da</string>
     <string name="poi_changing_table_count">Broj promena stola</string>
-    <string name="poi_changing_table_location_unisex_toilet">Lokacija promene stola: uniseks toalet</string>
-    <string name="poi_changing_table_location_female_toilet">Lokacija promene stola: ženski toalet</string>
-    <string name="poi_changing_table_location_male_toilet">Lokacija promene stola: muški toalet</string>
-    <string name="poi_changing_table_location_room">Lokacija promene stola: soba</string>
-    <string name="poi_changing_table_limited">Promena stola: ograničena</string>
-    <string name="poi_changing_table_no">Promena stola: ne</string>
-    <string name="poi_changing_table_yes">Promena stola: da</string>
+    <string name="poi_changing_table_location_unisex_toilet">Promene lokacije stola: uniseks toalet</string>
+    <string name="poi_changing_table_location_female_toilet">Promene lokacije stola: ženski toalet</string>
+    <string name="poi_changing_table_location_male_toilet">Promene lokacije stola: muški toalet</string>
+    <string name="poi_changing_table_location_room">Promene lokacije stola: soba</string>
+    <string name="poi_changing_table_limited">Limitirano;Promena stola: limitirano</string>
+    <string name="poi_changing_table_no">Ne;Promena stola: ne</string>
+    <string name="poi_changing_table_yes">Da;Promena stola: da</string>
     <string name="poi_defibrillator_location">Lokacija</string>
     <string name="poi_hazard_additional_contamination">Opasnost: kontaminacija</string>
     <string name="poi_hazard_additional_minefield">Opasnost: minsko polje</string>
@@ -3728,7 +3728,7 @@
     <string name="poi_hazard_additional_nuclear">Opasnost: nuklearna</string>
     <string name="poi_hazard_additional_rockfall">Opasnost: odron stena</string>
     <string name="poi_hazard_additional_erosion">Opasnost: erozija</string>
-    <string name="poi_rescue_box">Spasilačka kutija</string>
+    <string name="poi_rescue_box">Ormarić za prvu pomoć</string>
     <string name="poi_change_delete">Izbrisani objekt</string>
     <string name="poi_flare">Gasna baklja;Gomila baklji</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
@@ -3762,8 +3762,8 @@
     <string name="poi_fire_hydrant_pressure_pressurized">Pod pritiskom</string>
     <string name="poi_water_source_groundwater">Podzemna voda</string>
     <string name="poi_fire_hydrant_type_pipe">Cev</string>
-    <string name="poi_drinking_water_refill_network">Mreža za ponovno dolivanje pitke vode</string>
-    <string name="poi_drinking_water_refill_no">Dolivanje vode za piće: ne</string>
+    <string name="poi_drinking_water_refill_network">Mreža za dopunu pitke vode</string>
+    <string name="poi_drinking_water_refill_no">Dopuna vode za piće: ne</string>
     <string name="poi_drinking_water_refill_yes">Da;Dopuna vode za piće;Dopuna</string>
     <string name="poi_seamark_obstruction">Opstrukcija</string>
     <string name="poi_seamark_water_level_below_mwl">Nivo vode: ispod srednjeg nivoa</string>
@@ -3851,8 +3851,8 @@
     <string name="poi_consulate_filter">Konzulat</string>
     <string name="poi_embassy_filter">Ambasada</string>
     <string name="poi_departures_board">Tabla</string>
-    <string name="poi_drinking_water_refill">Dolivanje vode za piće</string>
-    <string name="poi_lifeguard_base">Baza spasioca</string>
+    <string name="poi_drinking_water_refill">Dopuna vode za piće</string>
+    <string name="poi_lifeguard_base">Baza spasilaca</string>
     <string name="poi_siren">Sirena</string>
     <string name="poi_nurse">Medicinska sestra</string>
     <string name="poi_mobile_money_agent">Mobilni agent za novac</string>
@@ -3978,7 +3978,7 @@
     <string name="poi_shelter_yes">Da;Sklonište</string>
     <string name="poi_telecom_medium_fibre">Srednji: vlakna</string>
     <string name="poi_telecom_medium_coaxial">Srednji: koaksijalni</string>
-    <string name="poi_telecom_exchange">Telefonska centrala</string>
+    <string name="poi_telecom_exchange">Automatska telefonska centrala</string>
     <string name="poi_telecom_medium_copper">Srednji: bakar</string>
     <string name="poi_telecommunication">Telekomunikacije</string>
     <string name="poi_socket_type2_cable">Utičnica: Kabal tipa 2</string>
@@ -4032,7 +4032,7 @@
     <string name="poi_socket_type3a_current">Utičnica:Kabel tipa3a: struja</string>
     <string name="poi_socket_type1_voltage">Utičnica: Tip 1: napon</string>
     <string name="poi_socket_type1_combo_voltage">Utičnica: tip 1 kombinovana: napon</string>
-    <string name="poi_geodesist">Geodez</string>
+    <string name="poi_geodesist">Geometar</string>
     <string name="poi_anthill">Mravinjak</string>
     <string name="poi_checkpoint_cycling">Kontrolna točka za bicikliste</string>
     <string name="poi_pest_control">Trgovina sredstavima protiv štetočina</string>
@@ -4056,4 +4056,12 @@
     <string name="poi_birds_nest">Gnezdo</string>
     <string name="poi_avalanche_transceiver_checkpoint">Radio odašiljač za kontrolu lavina</string>
     <string name="poi_shop_fuel">Skladište goriva</string>
+    <string name="poi_changing_table_filter">Promena stola</string>
+    <string name="poi_outdoor_seating_poi">Sedenje na otvorenom</string>
+    <string name="poi_lifeguard">Spacilac</string>
+    <string name="poi_lifeguard_tower">Toranj spasilaca</string>
+    <string name="poi_first_aid_kit">Pribor za prvu pomoć</string>
+    <string name="poi_us_maps_recreation_area_activity_outdoor_learning">Učenje na otvorenom</string>
+    <string name="poi_playground_exercise">Teretana na otvorenom</string>
+    <string name="poi_healthcare_speciality_first_aid_training">Obuka za prvu pomoć</string>
 </resources>
