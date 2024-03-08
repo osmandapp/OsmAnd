@@ -5638,4 +5638,11 @@
     <string name="routing_type">Тип маршрутизации</string>
     <string name="shared_sting_all_colors">Все цвета</string>
     <string name="routing_type_a_star_2_phase">A* 2-фазный</string>
+    <string name="rendering_attr_padusDisplayMode_name">Режим отображения общественных земель</string>
+    <string name="rendering_attr_padusDisplayMode_description">По типу доступа или имени менеджера</string>
+    <string name="rendering_value_access_name">По типу доступа</string>
+    <string name="rendering_value_managerName_name">По имени менеджера</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Скрыть границы общественных земель</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Скрыть границы общественных земель, но оставить территории</string>
+    <string name="lang_ta_in">Тамильский (Индия)</string>
 </resources>
