@@ -732,7 +732,7 @@ public class RoutePlannerFrontEnd {
 			gctx.routeDistCalculations += (target.cumDist - start.cumDist);
 			gctx.routeCalculations++;
 			RoutingContext local = new RoutingContext(gctx.ctx);
-			res = searchRouteAndPrepareTurns(local, start.pnt, target.pnt, null);
+			res = searchRouteAndPrepareTurns(local, start.pnt, target.pnt, null, false);
 			// BinaryRoutePlanner.printDebugMemoryInformation(gctx.ctx);
 			routeIsCorrect = res != null && res.isCorrect();
 			for (int k = start.ind + 1; routeIsCorrect && k < target.ind; k++) {
@@ -918,7 +918,8 @@ public class RoutePlannerFrontEnd {
 			if (ctx.previouslyCalculatedRoute == null || intermediatesEmpty) {
 				List<RouteSegmentPoint> points = new ArrayList<>();
 				for (int i = 0; i < targets.size() - 1; i++) {
-					RouteCalcResult lr = searchRouteAndPrepareTurns(ctx, targets.get(i), null, targets.get(i + 1), null, points, i, routeDirection);
+					RouteCalcResult lr = searchRouteAndPrepareTurns(
+							ctx, targets.get(i), null, targets.get(i + 1), null, points, i, routeDirection, true);
 					if (res == null) {
 						res = lr;
 					} else if (lr == null || !lr.isCorrect()) {
@@ -1093,16 +1094,18 @@ public class RoutePlannerFrontEnd {
 	}
 
 	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, RouteSegmentPoint s,
-			RouteSegmentPoint e, PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+			RouteSegmentPoint e, PrecalculatedRouteDirection routeDirection, boolean makePrecise)
+			throws IOException, InterruptedException {
 		List<RouteSegmentPoint> points = new ArrayList<>();
 		points.add(s);
 		points.add(e);
-		return searchRouteAndPrepareTurns(ctx, s.getPreciseLatLon(), s, e.getPreciseLatLon(), e, points, 0, routeDirection);
+		return searchRouteAndPrepareTurns(
+				ctx, s.getPreciseLatLon(), s, e.getPreciseLatLon(), e, points, 0, routeDirection, makePrecise);
 	}
 
 	private RouteCalcResult searchRouteAndPrepareTurns(final RoutingContext ctx, LatLon start, RouteSegmentPoint s,
 			LatLon end, RouteSegmentPoint e, List<RouteSegmentPoint> points, int i,
-			PrecalculatedRouteDirection routeDirection)
+			PrecalculatedRouteDirection routeDirection, boolean makePrecise)
 			throws IOException, InterruptedException {
 		RouteSegmentPoint recalculationEnd = getRecalculationEnd(ctx);
 		if (recalculationEnd != null) {
@@ -1145,7 +1148,7 @@ public class RoutePlannerFrontEnd {
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(local, s, e, null);
 			result = RouteResultPreparation.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
 			addPrecalculatedToResult(recalculationEnd, result);
-			if (ctx.calculationProgress.totalApproximateDistance == 0) {
+			if (makePrecise) {
 				// makePrecise points segments to modified RouteDataObject which will be reset in findGpxRouteSegment()
 				// avoid makePrecise for GPX-approximation (fixes Out-of-bounds and NPE in initEdgeSegment later)
 				makeStartEndPointsPrecise(result, s.getPreciseLatLon(), e.getPreciseLatLon());
@@ -1304,7 +1307,7 @@ public class RoutePlannerFrontEnd {
 					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
 				}
 			}
-			RouteCalcResult res = searchRouteAndPrepareTurns(local, pnts.get(i), pnts.get(i + 1), routeDirection);
+			RouteCalcResult res = searchRouteAndPrepareTurns(local, pnts.get(i), pnts.get(i + 1), routeDirection, true);
 			results.detailed.addAll(res.detailed);
 			ctx.routingTime += local.routingTime;
 //			local.unloadAllData(ctx);
