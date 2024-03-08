@@ -747,9 +747,13 @@ public class RoutePlannerFrontEnd {
 				if (prevRouteCalculated) {
 					if (firstSegment.getObject().getId() == start.pnt.getRoad().getId()) {
 						// start point is end point of prev route
-						firstSegment.setStartPointIndex(start.pnt.getSegmentEnd());
-						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
-							firstSegment.setObject(start.pnt.road);
+						// avoid creation of points with startPointIndex==endPointIndex
+						// this kind of points leads to Out-of-bounds and NPE in initEdgeSegment
+						if (firstSegment.getEndPointIndex() != start.pnt.getSegmentEnd()) {
+							firstSegment.setStartPointIndex(start.pnt.getSegmentEnd());
+							if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
+								firstSegment.setObject(start.pnt.road);
+							}
 						}
 					} else {
 						// for native routing this is possible when point lies on intersection of 2
@@ -1141,7 +1145,11 @@ public class RoutePlannerFrontEnd {
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(local, s, e, null);
 			result = RouteResultPreparation.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
 			addPrecalculatedToResult(recalculationEnd, result);
-			makeStartEndPointsPrecise(result, s.getPreciseLatLon(), e.getPreciseLatLon());
+			if (ctx.calculationProgress.totalApproximateDistance == 0) {
+				// makePrecise points segments to modified RouteDataObject which will be reset in findGpxRouteSegment()
+				// avoid makePrecise for GPX-approximation (fixes Out-of-bounds and NPE in initEdgeSegment later)
+				makeStartEndPointsPrecise(result, s.getPreciseLatLon(), e.getPreciseLatLon());
+			}
 		}
 		return new RouteCalcResult(result); // prepareResult() should be called finally (not between interpoints)
 	}
