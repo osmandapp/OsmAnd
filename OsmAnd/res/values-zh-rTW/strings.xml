@@ -5632,4 +5632,5 @@
     <string name="routing_type">路線規劃類型</string>
     <string name="routing_type_a_star_2_phase">A* 2-相</string>
     <string name="shared_sting_all_colors">所有顏色</string>
+    <string name="lang_ta_in">泰米爾語（印度）</string>
 </resources>
