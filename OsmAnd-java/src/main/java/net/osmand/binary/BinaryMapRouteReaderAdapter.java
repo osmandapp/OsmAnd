@@ -948,6 +948,9 @@ public class BinaryMapRouteReaderAdapter {
 				}
 				RestrictionInfo prev = restrictions.get(from);
 				if(prev != null) {
+					while (prev.next != null) {
+						prev = prev.next;
+					}
 					prev.next = ri;
 				} else {
 					restrictions.put(from, ri);
