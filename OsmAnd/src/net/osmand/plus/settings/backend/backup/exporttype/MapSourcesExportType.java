@@ -1,11 +1,13 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
+import static net.osmand.IndexConstants.TILES_INDEX_DIR;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
@@ -16,14 +18,17 @@ import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 class MapSourcesExportType extends AbstractExportType {
+
+	private final List<TileSourceTemplate> defaultTemplates = TileSourceManager.getKnownSourceTemplates();
 
 	@Override
 	public int getTitleId() {
@@ -39,16 +44,16 @@ class MapSourcesExportType extends AbstractExportType {
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
 		List<ITileSource> iTileSources = new ArrayList<>();
-		Set<String> tileSourceNames = app.getSettings().getTileSourceEntries(true).keySet();
-		for (String name : tileSourceNames) {
-			File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + name);
+		Map<String, String> entries = app.getSettings().getTileSourceEntries(true);
+		for (String name : entries.keySet()) {
+			File file = app.getAppPath(TILES_INDEX_DIR + name);
 			ITileSource template;
 			if (file.getName().endsWith(SQLiteTileSource.EXT)) {
 				template = new SQLiteTileSource(app, file, TileSourceManager.getKnownSourceTemplates());
 			} else {
 				template = TileSourceManager.createTileSourceTemplate(file);
 			}
-			if (template.getUrlTemplate() != null) {
+			if (!shouldSkipMapSource(template)) {
 				iTileSources.add(template);
 			}
 		}
@@ -103,5 +108,17 @@ class MapSourcesExportType extends AbstractExportType {
 	@Override
 	public Class<? extends OsmandPlugin> getRelatedPluginClass() {
 		return null;
+	}
+
+	private boolean shouldSkipMapSource(@NonNull ITileSource source) {
+		if (source instanceof TileSourceTemplate) {
+			TileSourceTemplate sourceTemplate = (TileSourceTemplate) source;
+			for (TileSourceTemplate template : defaultTemplates) {
+				if (Algorithms.objectEquals(template.getProperties(), sourceTemplate.getProperties())) {
+					return true;
+				}
+			}
+		}
+		return source.getUrlTemplate() == null;
 	}
 }
