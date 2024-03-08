@@ -4858,8 +4858,8 @@
     <string name="poi_us_maps_recreation_area_facility_boat_takeout">Scoatere cu barca</string>
     <string name="poi_us_maps_recreation_area_facility_group_shelter">Adăpost pentru grup</string>
     <string name="poi_us_maps_recreation_area_facility_horse_stanchion">Stâlp de cai</string>
-    <string name="poi_music_venue">Loc de concert</string>
+    <string name="poi_music_venue">Loc de concerte</string>
     <string name="poi_live_music_yes">Da</string>
-    <string name="poi_shop_general">Magazin general</string>
+    <string name="poi_shop_general">Magazin universal</string>
     <string name="poi_cuisine_fish">Pește</string>
 </resources>
