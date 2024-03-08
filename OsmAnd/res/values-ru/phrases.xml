@@ -4379,4 +4379,10 @@
     <string name="poi_climbing_bolts_filter">Болты для альпинизма</string>
     <string name="poi_socket_chademo_voltage_filter">Напряжение в розетке CHAdeMO</string>
     <string name="poi_socket_type2_voltage_filter">Напряжение в евроразъёме типа 2</string>
+    <string name="poi_live_music">Живая музыка</string>
+    <string name="poi_live_music_yes">Есть</string>
+    <string name="poi_cuisine_fish">Рыба</string>
+    <string name="poi_healthcare_speciality_laboratory">Специализация здравоохранения: лаборатория</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Специализация здравоохранения: психотерапевт</string>
+    <string name="poi_healthcare_speciality_clinic">Специализация здравоохранения: клиника</string>
 </resources>
