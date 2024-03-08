@@ -849,10 +849,10 @@
     <string name="tile_source_already_installed">Mapa je instalirana, „Podešavanja“ će se osvežiti.</string>
     <string name="map_overlay_descr">Izaberi mapu sloja iznad</string>
     <string name="map_overlay">Mapa sloja iznad</string>
-    <string name="layer_overlay">Vidljivo na mapi…</string>
+    <string name="layer_overlay">Pomoćna mapa iznad osnovne</string>
     <string name="map_underlay_descr">Izaberi mapu sloja ispod</string>
     <string name="map_underlay">Mapa ispod</string>
-    <string name="layer_underlay">Mapa u pozadini…</string>
+    <string name="layer_underlay">Pomoćna mapa u pozadini</string>
     <string name="map_transparency">Prozirnost osnovne mape</string>
     <string name="map_transparency_descr">Podesi prozirnost osnovne mape.</string>
     <string name="overlay_transparency">Transparetnost sloja iznad</string>
@@ -1374,11 +1374,11 @@
     <string name="gpx_info_subtracks">Podtrase: %1$s</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPritisni i drži za mogućnosti"</string>
+\nZadrži radi prikaza opcija"</string>
     <string name="delay_navigation_start">Automatski pokreni vodiča za skretanje</string>
     <string name="selected_gpx_info_show">"
 \n
-\nPritisni i drži radi prikaza mape"</string>
+\nZadrži radi prikaza mape"</string>
     <string name="shared_string_waypoint">Međuodredište</string>
     <string name="map_widget_plain_time">Trenutno vreme</string>
     <string name="loading_smth">Učitavanje %1$s…</string>
@@ -2748,7 +2748,7 @@
     <string name="apply_filters">Primeni filtere</string>
     <string name="shared_string_filters">Filteri</string>
     <string name="custom_search">Opširnija pretraga</string>
-    <string name="create_custom_poi">Odabir TOI kategorije za pretragu</string>
+    <string name="create_custom_poi">TOI kategorije za pretragu</string>
     <string name="selected_categories">Izabrane kategorije</string>
     <string name="subcategories">Potkategorije</string>
     <string name="edit_filter">Uredi filter</string>
@@ -4174,7 +4174,7 @@
     <string name="not_enough_contributions_descr">Najmanje od %1$s izmena kroz vreme od poslednja dva meseca %2$s je potrebno radi dobavljanja pristupa neograničenim osveženjima mape svakih sat vremena.</string>
     <string name="enough_contributions_descr">Čestitamo, stekao si dovoljno doprinosa u uređivanji OpenStreetMap i sada možeš uživati neograničeno u ažuriranju mapa!</string>
     <string name="benefits_for_contributors_primary_descr">Trenutni doprinosioci OpenStreetMap.org mogu imati pravo na neograničena ažuriranje mape svakih sat vremena.</string>
-    <string name="travel_routes">Rute putovanja</string>
+    <string name="travel_routes">Turističke rute</string>
     <string name="online_maps_required_descr">Nažalost, OsmAnd nije uspeo da odredi rutu po podešavanjima.
 \n
 \nMožda neke mape nisu učitane, možeš pokrenuti online proveru za potrebnim mapama.</string>
@@ -4506,7 +4506,7 @@
     <string name="android_auto_purchase_request_title">Kupi OsmAnd Pro ili Maps+ radi upotrebe OsmAnda sa Android Autom</string>
     <string name="continue_on_phone">Nastavi na mobilnom uređaju</string>
     <string name="location_access_request_title">OsmAndu je potrebna dozvola za lokaciju radi navođenja.</string>
-    <string name="shared_string_articles">Artikli</string>
+    <string name="shared_string_articles">Članci</string>
     <string name="release_4_1">• Dodata početna podrška za Android Auto
 \n
 \n • Osvežavanje korisničkog interfejsa za pretragu koordinata UTM
@@ -5648,4 +5648,5 @@
     <string name="auto_zoom">Autozum</string>
     <string name="routing_type">Tip rutiranja</string>
     <string name="shared_sting_all_colors">Sve boje</string>
+    <string name="lang_ta_in">Tamilski (Indija)</string>
 </resources>
