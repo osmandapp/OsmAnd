@@ -880,7 +880,11 @@ public class RoutePlannerFrontEnd {
 				r = runJavaHHRoute(ctx, start, targets);
 			}
 			if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
-				res = new RouteResultPreparation().prepareResult(ctx, r.detailed);
+				if (r !=null && r.detailed != null) {
+					res = new RouteResultPreparation().prepareResult(ctx, r.detailed);
+				} else {
+					res = new HHNetworkRouteRes();
+				}
 			}
 		}
 		if (res == null) {
