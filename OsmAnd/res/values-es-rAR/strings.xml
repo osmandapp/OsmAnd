@@ -5649,4 +5649,14 @@
     <string name="rendering_value_managerName_name">Por nombre del administrador</string>
     <string name="rendering_attr_padusHideBoundaries_name">Ocultar límites de tierras públicas</string>
     <string name="rendering_attr_padusHideBoundaries_description">Ocultar límites de tierras públicas pero mantener sus áreas</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="routing_type_a_star_classic">A* clásico</string>
+    <string name="auto_zoom_discrete">Discreto</string>
+    <string name="auto_zoom_smooth">Suave</string>
+    <string name="auto_zoom">Zum automático</string>
+    <string name="java_safe">Java (Seguro)</string>
+    <string name="gpx_approximation">Aproximación GPX</string>
+    <string name="routing_type">Tipo de navegación</string>
+    <string name="lang_ta_in">Tamil (India)</string>
+    <string name="shared_sting_all_colors">Todos los colores</string>
 </resources>
