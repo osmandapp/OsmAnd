@@ -101,7 +101,7 @@
     <string name="pref_vector_map">Podešavanja vektorske mapa</string>
     <string name="city_type_suburb">Predgrađe</string>
     <string name="city_type_village">Selo</string>
-    <string name="city_type_town">Naseljeno mesto</string>
+    <string name="city_type_town">Gradsko naselje</string>
     <string name="animate_route_off">Zaustavi simulaciju</string>
     <string name="animate_route">Započni simulaciju</string>
     <string name="file_can_not_be_renamed">Ne mogu da preimenujem fajl.</string>
