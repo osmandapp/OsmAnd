@@ -161,7 +161,7 @@
     <string name="poi_music">Muzička radnja</string>
     <string name="poi_musical_instrument">Muzički instrumenti</string>
     <string name="poi_newsagent">Novinarnica</string>
-    <string name="poi_optician">Optometrija</string>
+    <string name="poi_optician">Optičarska radnja</string>
     <string name="poi_organic">Organski proizvod</string>
     <string name="poi_paint">Prodavnica boja</string>
     <string name="poi_pet">Prodavnica kućnih ljubimaca</string>
@@ -328,10 +328,10 @@
     <string name="poi_water_well">Bunar za vodu</string>
     <string name="poi_water_works">Radovi na vodi</string>
     <string name="poi_water_tower">Vodeni toranj</string>
-    <string name="poi_lock_gate">Kapija sa zaključavanjem</string>
+    <string name="poi_lock_gate">Prevodnica</string>
     <string name="poi_dam">Brana</string>
     <string name="poi_watermill">Vodenica</string>
-    <string name="poi_breakwater">Razbijač talasa</string>
+    <string name="poi_breakwater">Lukobran</string>
     <string name="poi_power_transformer">Transformator</string>
     <string name="poi_power_plant">Elektrana</string>
     <string name="poi_power_generator">Strujni generator</string>
@@ -352,7 +352,7 @@
     <string name="poi_recycling_scrap_metal">Metalni otpaci</string>
     <string name="poi_recycling_batteries">Baterije</string>
     <string name="poi_recycling_plastic_bottles">Plastične flaše</string>
-    <string name="poi_recycling_green_waste">Zelenilo</string>
+    <string name="poi_recycling_green_waste">Zeleni otpad</string>
     <string name="poi_recycling_waste">Otpad (crne kese)</string>
     <string name="poi_recycling_plastic_packaging">Plastične ambalaže</string>
     <string name="poi_recycling_newspaper">Novine</string>
@@ -405,7 +405,7 @@
     <string name="poi_waste_disposal">Deponija smeća</string>
     <string name="poi_waste_basket">Kanta za smeće</string>
     <string name="poi_residential">Stambena zona</string>
-    <string name="poi_industrial">Industrijska oblast</string>
+    <string name="poi_industrial">Industrijska zona</string>
     <string name="poi_landuse_railway">Železnička oblast</string>
     <string name="poi_commercial">Trgovinsko zemljište</string>
     <string name="poi_retail">Zemljište namenjeno za maloprodaju</string>
@@ -452,14 +452,14 @@
     <string name="poi_place_farm">Farma</string>
     <string name="poi_pharmacy">Apoteka</string>
     <string name="poi_hospital">Bolnica</string>
-    <string name="poi_doctors">Zdravstvena stanica</string>
+    <string name="poi_doctors">Lekari</string>
     <string name="poi_clinic">Klinika</string>
     <string name="poi_first_aid">Prva pomoć</string>
     <string name="poi_dentist">Stomatolog</string>
     <string name="poi_veterinary">Veterinar</string>
     <string name="poi_healthcare_alternative">Alternativna medicina</string>
     <string name="poi_blood_bank">Banka krvi</string>
-    <string name="poi_optometrist">Optometrist</string>
+    <string name="poi_optometrist">Oftamolog</string>
     <string name="poi_physiotherapist">Fizioterapeut</string>
     <string name="poi_psychotherapist">Psihoterapeut</string>
     <string name="poi_healthcare_rehabilitation">Rehabilitacija</string>
@@ -508,7 +508,7 @@
     <string name="poi_mineshaft">Šaht</string>
     <string name="poi_salt_pond">Slana bara</string>
     <string name="poi_gasometer">Gaosmetar</string>
-    <string name="poi_bunker_silo">Bunker silos</string>
+    <string name="poi_bunker_silo">Silo objekt</string>
     <string name="poi_storage_tank">Tank za skladištenje</string>
     <string name="poi_social_facility">Socijalna ustanova</string>
     <string name="poi_government">Državna uprava</string>
@@ -520,7 +520,7 @@
     <string name="poi_neighbourhood">Komšiluk</string>
     <string name="poi_nursing_home">Dom za stare</string>
     <string name="poi_sanatorium">Sanatorijum</string>
-    <string name="poi_audiologist">Audolog</string>
+    <string name="poi_audiologist">Audiolog</string>
     <string name="poi_midwife">Babica</string>
     <string name="poi_bmx">BMX</string>
     <string name="poi_canoe">Kanu</string>
@@ -1433,7 +1433,7 @@
     <string name="poi_landuse">Korišćenje zemljišta</string>
     <string name="poi_accomodation">Smeštaj</string>
     <string name="poi_entertainment">Slobodno vreme</string>
-    <string name="poi_service">Usluga</string>
+    <string name="poi_service">Servisi</string>
     <string name="poi_craft">Radionica</string>
     <string name="poi_convenience">Dućan</string>
     <string name="poi_deli">Prodavnica delikatesa</string>
@@ -1517,13 +1517,13 @@
     <string name="poi_landfill">Deponija</string>
     <string name="poi_brownfield">Pripremljeno građevinsko zemljište</string>
     <string name="poi_greenfield">Gradilište</string>
-    <string name="poi_adit">Podzemni ulaz</string>
+    <string name="poi_adit">Štolna</string>
     <string name="poi_petroleum_well">Izvor nafte</string>
     <string name="poi_survey_point">Nadzorna tačka</string>
     <string name="poi_cricket_nets">Kriket mreže</string>
     <string name="poi_register_office">Kancelarija za građane</string>
     <string name="poi_place_allotments">Vrtlarstvo</string>
-    <string name="poi_baby_hatch">Prihvatilište beba</string>
+    <string name="poi_baby_hatch">Prihvatilište za bebe</string>
     <string name="poi_occupational_therapist">Radni terapeut</string>
     <string name="poi_podiatrist">Ortoped donjih ekstremiteta</string>
     <string name="poi_speech_therapist">Logoped</string>
@@ -1599,7 +1599,7 @@
     <string name="poi_wayside_cross">Krst krajputaš</string>
     <string name="poi_wayside_shrine">Hram sputa</string>
     <string name="poi_caravan_site">Karavan lokacija</string>
-    <string name="poi_grave_yard">Groblje</string>
+    <string name="poi_grave_yard">Crkveno groblje</string>
     <string name="poi_funicular">Tranvaj usponski</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_club_art">Umetnički klub</string>
@@ -1624,10 +1624,10 @@
     <string name="poi_craft_dressmaker">Krojač</string>
     <string name="poi_craft_glaziery">Staklorezac</string>
     <string name="poi_craft_jeweller">Zlatar</string>
-    <string name="poi_craft_locksmith">Kovač</string>
+    <string name="poi_craft_locksmith">Bravar</string>
     <string name="poi_craft_key_cutter">Ključar</string>
     <string name="poi_craft_metal_construction">Metalorezac</string>
-    <string name="poi_craft_photographic_laboratory">Foto-tamna soba</string>
+    <string name="poi_craft_photographic_laboratory">Fotografska laboratorija</string>
     <string name="poi_craft_plasterer">Moler</string>
     <string name="poi_craft_pottery">Grnčar</string>
     <string name="poi_craft_rigger">Konopčar</string>
@@ -1640,7 +1640,7 @@
     <string name="poi_craft_sun_protection">Konstruktor suncobrana</string>
     <string name="poi_craft_sweep">Čistač</string>
     <string name="poi_craft_tiler">Keramičar</string>
-    <string name="poi_craft_tinsmith">Kovač posuđa</string>
+    <string name="poi_craft_tinsmith">Limar</string>
     <string name="poi_craft_upholsterer">Tapetar</string>
     <string name="poi_craft_computer">Tehničar računara</string>
     <string name="poi_dry_cleaning">Hemijsko čišćenje</string>
@@ -1777,7 +1777,7 @@
     <string name="poi_scrub">Žbun</string>
     <string name="poi_farmland">Zemlja farme</string>
     <string name="poi_logging">Seča drveta</string>
-    <string name="poi_windfall">Opalo voće</string>
+    <string name="poi_windfall">Vetrobran</string>
     <string name="poi_passing_place">Prolazno mesto</string>
     <string name="poi_rtsa_scale">RTSA skala</string>
     <string name="poi_piste_grooming_backcountry">Ruralni deo</string>
@@ -2786,7 +2786,7 @@
     <string name="poi_fair_trade_only">Samo proizvodi sajamske trgovine</string>
     <string name="poi_fair_trade_no">Sajamska trgovina: ne</string>
     <string name="poi_fair_trade_yes">Sajamska trgovina: da</string>
-    <string name="poi_street_cabinet">Ulični orman</string>
+    <string name="poi_street_cabinet">Strujni orman</string>
     <string name="poi_atm_no">Bankomat: ne</string>
     <string name="poi_atm_yes">Bankomat: da</string>
     <string name="poi_inscription_ne">Natpis:NE</string>
@@ -2797,7 +2797,7 @@
     <string name="poi_inscription_w">Natpis:W</string>
     <string name="poi_inscription_nw">Natpis:NW</string>
     <string name="poi_inscription_n">Natpis:N</string>
-    <string name="poi_forestry_allotment">Pokazivač: šumarsko odeljenje</string>
+    <string name="poi_forestry_allotment">Pokazivač: šumarska parcela</string>
     <string name="poi_forestry_compartment">Pokazivač: šumarsko odeljenje</string>
     <string name="poi_disc_golf">Leteći disk</string>
     <string name="poi_healthcare_speciality_adult_psychiatry">Psihijatrija za odrasle</string>
@@ -3092,10 +3092,10 @@
     <string name="poi_organic_no">Ne</string>
     <string name="poi_organic_yes">Da;Organsko</string>
     <string name="poi_min_age">Minimalna starost</string>
-    <string name="poi_aquaculture_mussels">Akvakultura: dagnje</string>
-    <string name="poi_aquaculture_fish">Akvakultura: riba</string>
-    <string name="poi_aquaculture_shrimp">Akvakultura: škampi</string>
-    <string name="poi_aquaculture">Akvakultura</string>
+    <string name="poi_aquaculture_mussels">Ribnjak: dagnje</string>
+    <string name="poi_aquaculture_fish">Ribnjak: riba</string>
+    <string name="poi_aquaculture_shrimp">Ribnjak: škampi</string>
+    <string name="poi_aquaculture">Ribnjak</string>
     <string name="poi_passenger_information_display_no">Prikaz informacija putnicima: ne</string>
     <string name="poi_passenger_information_display_yes">Prikaz informacija putnicima: da</string>
     <string name="poi_support_tower">Podrška: kula</string>
@@ -3132,7 +3132,7 @@
     <string name="poi_generator_output_electricity_no">Izlaz (struja): ne</string>
     <string name="poi_generator_output_electricity_yes">Izlaz: struja</string>
     <string name="poi_voltage">Napon</string>
-    <string name="poi_greenhouse_horticulture">Staklenička hortikultura</string>
+    <string name="poi_greenhouse_horticulture">Staklenik</string>
     <string name="poi_observatory_type_gravitational">Gravitaciona</string>
     <string name="poi_observatory_type_meteorological">Meteorološka</string>
     <string name="poi_observatory_type_espionage">Upotreba: špijunaža</string>
@@ -3272,7 +3272,7 @@
     <string name="poi_counselling_type_nutrition_nfire_hydo">Savetovanje (ishrana): ne</string>
     <string name="poi_counselling_type_nutrition_yes">Savetovanje (ishrana): da</string>
     <string name="poi_atoll">Koralna obala</string>
-    <string name="poi_blood_donation">Donacija krvi</string>
+    <string name="poi_blood_donation">Transfuzija krvi</string>
     <string name="poi_laboratory">Medicinska laboratorija</string>
     <string name="poi_shop_wholesale">Veleprodaja</string>
     <string name="poi_craft_confectionery">Proizvodnja konditorskih proizvoda</string>
@@ -3939,7 +3939,7 @@
     <string name="poi_us_maps_recreation_area_activity">Rekreativna oblast</string>
     <string name="poi_healthcare_speciality_clinic">Klinika</string>
     <string name="poi_healthcare_speciality_psychotherapist">Psihoterapija</string>
-    <string name="poi_healthcare_speciality_laboratory">Laboratorija</string>
+    <string name="poi_healthcare_speciality_laboratory">Specijalnost u zdravstvu: laborant</string>
     <string name="poi_water_filter">Voda; Pijaća voda</string>
     <string name="poi_socket_schuko_voltage">Utičnica: Šuko: napon</string>
     <string name="poi_socket_schuko_voltage_medium">Srednji</string>
@@ -4120,4 +4120,16 @@
     <string name="poi_music_venue">Koncertni prostor</string>
     <string name="poi_us_maps_recreation_area_activity_waterskiing">Skijanje na vodi</string>
     <string name="poi_us_maps_recreation_area_activity_water_activities">Vodene aktivnosti</string>
+    <string name="poi_playground_youth_bench">Benč klupa</string>
+    <string name="poi_power_terminal">Trafo stanica</string>
+    <string name="poi_fish_pass">Riblje stepenice</string>
+    <string name="poi_satellite_dish">Satelitska antena</string>
+    <string name="poi_hospice">Hospicijum</string>
+    <string name="poi_club_youth_movement">Omladinski pokret</string>
+    <string name="poi_lock_name">Naziv vodene prevodnice</string>
+    <string name="poi_health_post">Medicinski punkt</string>
+    <string name="poi_greenery">Zelenilo</string>
+    <string name="poi_hairdresser_supply">Trgovina frizerskim priborom</string>
+    <string name="poi_lock_height">Visina prevodnice</string>
+    <string name="poi_lock_ref">Referenca prevodnice</string>
 </resources>
