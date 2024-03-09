@@ -5642,4 +5642,6 @@
     <string name="gpx_approximation">Aproximación GPX</string>
     <string name="routing_type">Tipo de ruta</string>
     <string name="lang_ta_in">Tamil (India)</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="routing_type_a_star_classic">A* clásico</string>
 </resources>
