@@ -868,22 +868,18 @@ public class RoutePlannerFrontEnd {
 		}
 		if (hhRoutingConfig != null) {
 			ctx.calculationProgress.nextIteration();
-			HHNetworkRouteRes r = null;
 			if (hhRoutingType == HHRoutingType.CPP && ctx.nativeLib != null) {
 				ctx.initLatLonStartEndPoints(start, end, intermediates);
 				RouteSegmentResult[] nr = runNativeRouting(ctx, hhRoutingConfig);
 				if (nr.length > 0) {
-					r = new HHNetworkRouteRes();
-					r.detailed.addAll(Arrays.asList(nr));
+					res = new HHNetworkRouteRes();
+					res.detailed.addAll(Arrays.asList(nr));
 				}
 			} else {
-				r = runJavaHHRoute(ctx, start, targets);
-			}
-			if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
-				res = new RouteResultPreparation().prepareResult(ctx, r.detailed);
+				res = runJavaHHRoute(ctx, start, targets);
 			}
 		}
-		if (res == null) {
+		if ((res == null || !res.isCorrect()) && !useOnlyHHRouting) {
 			double maxDistance = MapUtils.getDistance(start, end);
 			if (!intermediatesEmpty) {
 				LatLon prev = start;
@@ -926,12 +922,15 @@ public class RoutePlannerFrontEnd {
 			} else {
 				res = searchRouteWithInterSmartRecalc(ctx, targets, routeDirection);
 			}
+			
 		}
-		new RouteResultPreparation().prepareResult(ctx, res.detailed);
+		if (res != null && res.isCorrect()) {
+			res = new RouteResultPreparation().prepareResult(ctx, res.detailed);
+			if (RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION) {
+				RouteResultPreparation.printResults(ctx, start, end, res.detailed);
+			}
+		}
 		ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
-		if (res != null) {
-			RouteResultPreparation.printResults(ctx, start, end, res.detailed);
-		}
 		return res;
 	}
 
