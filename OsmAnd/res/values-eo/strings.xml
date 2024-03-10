@@ -5636,4 +5636,6 @@
     <string name="gpx_approximation">Alproksimigo al GPX</string>
     <string name="routing_type">Speco de kurs-difinado</string>
     <string name="routing_type_a_star_2_phase">A* 2-faza</string>
+    <string name="shared_sting_all_colors">Ĉiuj koloroj</string>
+    <string name="lang_ta_in">Tamila (Hinda)</string>
 </resources>

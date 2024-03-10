@@ -4513,9 +4513,9 @@
     <string name="save_as_copy">حفظ كنسخة</string>
     <string name="gps_filter_actions_description">التطبيق سيطبق التغييرات على المسار دون تحديث الملف. يمكنك حفظ التغييرات يدويا.</string>
     <string name="gps_filter_speed_altitude_desc">ستكون نقاط المسار المطابقة للفاصل الزمني المحدد ظاهرة على الرسم البياني والخريطة ، الباقي سيكون مخفيا.</string>
-    <string name="gps_filter_smoothing_desc">اضبط عتبة المسافة الفاصلة بين النقاط.
-\nسيتم إخفاء نقاط التعقب التي ليست بعيدة بقدر هذه المسافة على الأقل عن آخر نقطة مرئية.
-\nاعلم أن العتبات العالية قد تبالغ في تبسيط هندسة المسار.</string>
+    <string name="gps_filter_smoothing_desc">اضبط بداية المسافة الفاصلة بين النقاط.
+\nسيتم إخفاء النقاط المتتابعة التي ليست بعيدة بقدر هذه المسافة على الأقل عن آخر نقطة مرئية.
+\nاعلم أن الحدود المرتفعة قد تبالغ في تقريب هندسة المسار.</string>
     <string name="shared_string_gps_filter">مرشح GPS</string>
     <string name="gps_filter_smoothing">التنعيم</string>
     <string name="gps_filter_precision">دقة تحديد المواقع</string>
@@ -5295,15 +5295,15 @@
     <string name="terrain_map">خريطة التضاريس (3D)</string>
     <string name="relief_3d_description">امتلك وراقب نموذج مقياس لمنطقتك أو القارة بأكملها.</string>
     <string name="relief_3d">تضاريس 3D</string>
-    <string name="osmand_cloud_deleted_account_descr">تم حذف الحساب وجميع البيانات من OsmAnd Cloud.</string>
-    <string name="osmand_cloud_deleting_account_descr">في غضون لحظات قليلة ، سيتم حذف جميع بياناتك وحسابك من OsmAnd Cloud.
+    <string name="osmand_cloud_deleted_account_descr">تم حذف الحساب وجميع البيانات من أوسماند آيكلاود.</string>
+    <string name="osmand_cloud_deleting_account_descr">في غضون لحظات قليلة ، سيتم حذف جميع بياناتك وحسابك من أوسماند آيكلاود.
 \n
 \nتظل جميع البيانات الموجودة على الجهاز كما هي.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">هل أنت متأكد من أنك تريد حذف حساب OsmAnd Cloud؟
 \n
 \nلا يمكن التراجع عن هذا الإجراء.</string>
     <string name="osmand_cloud_delete_account_confirmation">حذف الحساب؟</string>
-    <string name="osmand_cloud_deletion_secondary_devices_warning">سيتم تسجيل خروج الأجهزة الثانوية من OsmAnd Cloud وستفقد الوصول إلى الميزات المدفوعة.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">سيتم تسجيل خروج الأجهزة الثانوية من أوسماند آيكلاود وستفقد الوصول إلى الميزات المدفوعة.</string>
     <string name="folder_export_empty_error">لا شيء للتصدير ، المجلد فارغ</string>
     <string name="delete_account">حذف الحساب</string>
     <string name="verify_account">تحقق من حسابك</string>
@@ -5311,7 +5311,7 @@
     <string name="free_favorites_backup">نسخ احتياطي مجاني للمفضلة</string>
     <string name="get_osmand_cloud">احصل على سحابة أوسماند</string>
     <string name="free_account">حساب مجاني</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">لن يؤدي هذا إلى إلغاء اشتراكك في OsmAnd Pro.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">لن يؤدي هذا إلى إلغاء اشتراكك في أوسماند برو.</string>
     <string name="manage_subscriptions">إدارة الاشتراكات.</string>
     <string name="delete_account_warning">هل أنت متأكد من أنك تريد حذف حساب %1$s؟</string>
     <string name="shared_string_deleting">جار الحذف</string>
@@ -5321,7 +5321,7 @@
     <string name="osmand_cloud_deletion_account_warning">سيكون حسابك وجميع تفاصيله %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">جميع البيانات من OsmAnd Cloud ستكون %1$s. ستظل البيانات الموجودة على الجهاز كما هي.</string>
     <string name="terrain_category_description">الخطوط الكنتورية وخريطة التضاريس الكاملة مع الظلال الداكنة وخرائط المنحدرات بالألوان لإظهار القمم والأراضي المنخفضة.</string>
-    <string name="verify_account_deletion_descr">نحن بحاجة للتحقق من حسابك قبل حذفه. 
+    <string name="verify_account_deletion_descr">نحن بحاجة للتحقق من حسابك قبل حذفه.
 \n
 \nالرجاء إدخال عنوان البريد الإلكتروني الذي قمت بالتسجيل به. سيتم إرسال كلمة مرور لمرة واحدة للخطوة التالية.</string>
     <string name="release_4_5">• مستشعرات BLE / ANT +: إعادة الاتصال وكتابة وعرض البيانات المستلمة إلى GPX
@@ -5491,7 +5491,7 @@
     <string name="help_article_start_with_name">ابدأ مع أوسماند</string>
     <string name="help_article_plan_route_name">تخطيط الطريق</string>
     <string name="help_article_plan_route_coordinate_input_name">إدخال إحداثية</string>
-    <string name="release_4_6">"• أندررويد أوتو: تمت إضافة الوضع ثلاثي الأبعاد
+    <string name="release_4_6">• أندررويد أوتو: تمت إضافة الوضع ثلاثي الأبعاد
 \n
 \n • المسارات: خيارات المرشحات والمجلدات الذكية، والذاكرة المحسنة للملفات الأكبر حجمًا
 \n
@@ -5499,21 +5499,21 @@
 \n
 \n • تحسين إدارة الموارد المحلية
 \n
-\n  • تعيين زر قابل للتخصيص لوحدات التحكم الخارجية
+\n • تعيين زر قابل للتخصيص لوحدات التحكم الخارجية
 \n
-\n  • أدوات جديدة: \"نسبة الانحدار\" و\"موضع الشمس\"
+\n • أدوات جديدة: \"نسبة الانحدار\" و\"موضع الشمس\"
 \n
-\n  • أوسماند كلاود: يمكنك الآن الوصول إلى الملفات المحذوفة
+\n • أوسماند كلاود: يمكنك الآن الوصول إلى الملفات المحذوفة
 \n
-\n  • تحسين تلوين المسار في وضع المنحدر مع تدرج متماثل جديد
+\n • تحسين تلوين المسار في وضع المنحدر مع تدرج متماثل جديد
 \n
-\n  • حل المشكلات المتعلقة بشريط الحالة الشفاف
+\n • حل المشكلات المتعلقة بشريط الحالة الشفاف
 \n
-\n  • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
+\n • تمت إضافة الدعم لعنصر درجة الحرارة ANT+
 \n
-\n  • خيار ودجت \"ذاكرة الوصول العشوائي المتوفرة\".
+\n • خيار ودجت \"ذاكرة الوصول العشوائي المتوفرة\".
 \n
-\n"</string>
+\n</string>
     <string name="app_mode_baby_transport">عربة الطفل</string>
     <string name="live_monitoring_adress_descr">حدد عنوان الويب مع بناء جملة المعيار: lat = {0} ، lon = {1} ، الطابع الزمني = {2} ، hdop = {3} ، الارتفاع = {4} ، السرعة = {5} ، التحمل = {6}.</string>
     <string name="sensor_temperature_desc">درجة الحرارة من جهاز الاستشعار</string>
@@ -5697,4 +5697,19 @@
     <string name="battery_optimization_desc">يمكن أن يؤدي تحسين البطارية في أندرويد إلى حدوث فجوات وعدم دقة في المسارات المسجلة.
 \n
 \nإذا واجهت أيا من هذه المشكلات، فيمكنك محاولة تغيير استخدام البطارية إلى \'غير مقيد.\'</string>
+    <string name="shared_sting_all_colors">كل الألوان</string>
+    <string name="auto_zoom_smooth">سلس</string>
+    <string name="auto_zoom_discrete">منفصلة</string>
+    <string name="routing_type">نوع التوجيه</string>
+    <string name="java_safe">جافا (آمنة)</string>
+    <string name="rendering_attr_padusDisplayMode_name">وضع عرض الأراضي العامة</string>
+    <string name="rendering_attr_padusDisplayMode_description">حسب نوع الوصول أو اسم المدير</string>
+    <string name="gpx_approximation">تقريب GPX</string>
+    <string name="auto_zoom">تكبير تلقائي</string>
+    <string name="rendering_value_access_name">حسب نوع الوصول</string>
+    <string name="rendering_attr_padusHideBoundaries_name">إخفاء حدود الأراضي العامة</string>
+    <string name="rendering_attr_padusHideBoundaries_description">إخفاء حدود الأراضي العامة دون المناطق</string>
+    <string name="rendering_value_managerName_name">حسب اسم المدير</string>
+    <string name="help_article_setup_a_route_name">إعداد الطريق</string>
+    <string name="lang_ta_in">تاميل (الهند)</string>
 </resources>

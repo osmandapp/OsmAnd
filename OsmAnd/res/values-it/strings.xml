@@ -5631,4 +5631,7 @@
     <string name="routing_type_a_star_2_phase">A* 2-phase</string>
     <string name="auto_zoom">Autozoom</string>
     <string name="gpx_approximation">Approssimazione GPX</string>
+    <string name="shared_sting_all_colors">Tutti i colori</string>
+    <string name="routing_type">Tipo di percorso</string>
+    <string name="lang_ta_in">Tamil (India)</string>
 </resources>
