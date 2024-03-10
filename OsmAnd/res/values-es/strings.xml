@@ -5007,7 +5007,7 @@
     <string name="y_axis">Eje Y</string>
     <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Omitir la descarga</string>
-    <string name="determine_location">Permita que se determine su ubicación</string>
+    <string name="determine_location">Permítanos determinar su ubicación</string>
     <string name="share_link">Compartir el enlace</string>
     <string name="share_as_file">Compartir como un archivo</string>
     <string name="sound_beep_complex">Bip: complejo</string>
