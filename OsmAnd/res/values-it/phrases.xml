@@ -2827,8 +2827,8 @@
     <string name="poi_refugee_no">Rifugiati: no</string>
     <string name="poi_refugee_yes">Servizi per i rifugiati</string>
     <string name="poi_capacity_tents">Tende massime</string>
-    <string name="poi_impromptu_no">Improvviso: no</string>
-    <string name="poi_impromptu_yes">Improvviso: sì</string>
+    <string name="poi_impromptu_no">No</string>
+    <string name="poi_impromptu_yes">Sì</string>
     <string name="poi_castle_type_castrum">Tipo di castello: castrum</string>
     <string name="poi_castle_type_defensive_stately">Tipo di castello: difensivo, maestoso</string>
     <string name="poi_castle_type_kremlin">Tipo di castello: cremlino</string>
@@ -3977,4 +3977,6 @@
     <string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo di esplosione: atmosferica, mongolfiera</string>
     <string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Scopo dell\'esplosione: correlato alle armi nucleari</string>
     <string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Scopo dell\'esplosione: ricerca per applicazioni pacifiche</string>
+    <string name="poi_live_music_yes">Sì</string>
+    <string name="poi_cuisine_fish">Pesce</string>
 </resources>
