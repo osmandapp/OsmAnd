@@ -266,6 +266,12 @@ public class HHRouteDataStructure {
 			}
 		}
 		
+		public void clearSegments() {
+			for (T p : pointsById.valueCollection()) {
+				p.markSegmentsNotLoaded();
+			}
+		}
+		
 		public void clearVisited() {
 			queue(false).clear();
 			queue(true).clear();
