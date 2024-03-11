@@ -173,16 +173,16 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 
 	@NonNull
 	protected List<ColoringStyle> collectSupportedColoringStyles() {
-		List<ColoringStyle> coloringTypes = new ArrayList<>();
+		List<ColoringStyle> coloringStyles = new ArrayList<>();
 		for (ColoringType coloringType : getSupportedColoringTypes()) {
 			if (!coloringType.isRouteInfoAttribute()) {
-				coloringTypes.add(new ColoringStyle(coloringType));
+				coloringStyles.add(new ColoringStyle(coloringType));
 			}
 		}
 		for (String routeInfoAttribute : collectRouteInfoAttributes()) {
-			coloringTypes.add(new ColoringStyle(routeInfoAttribute));
+			coloringStyles.add(new ColoringStyle(routeInfoAttribute));
 		}
-		return coloringTypes;
+		return coloringStyles;
 	}
 
 	protected abstract ColoringType[] getSupportedColoringTypes();
