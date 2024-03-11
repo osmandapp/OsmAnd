@@ -942,7 +942,6 @@ public class RoutePlannerFrontEnd {
 		HHNetworkRouteRes r = null;
 		HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx);
 		Double dir = ctx.config.initialDirection;
-		float routingTime = 0;
 		for (int i = 0; i < targets.size(); i++) {
 			double initialPenalty = ctx.config.penaltyForReverseDirection;
 			if (i > 0) {
@@ -960,12 +959,11 @@ public class RoutePlannerFrontEnd {
 			if (r == null || !r.isCorrect()) {
 				break;
 			}
-			routingTime += r.getHHRoutingDetailed();
 			if (r.detailed.size() > 0) {
 				dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 			}
 		}
-		ctx.routingTime = routingTime;
+		ctx.routingTime = r != null ? (float) r.getHHRoutingDetailed() : 0;
 		return r;
 	}
 
