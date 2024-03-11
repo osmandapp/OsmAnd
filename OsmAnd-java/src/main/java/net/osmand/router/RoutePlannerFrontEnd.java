@@ -912,10 +912,12 @@ public class RoutePlannerFrontEnd {
 				List<RouteSegmentPoint> points = new ArrayList<>();
 				for (int i = 0; i < targets.size() - 1; i++) {
 					RouteCalcResult lr = searchRouteAndPrepareTurns(ctx, targets.get(i), null, targets.get(i + 1), null, points, i, routeDirection);
+					if (lr == null || !lr.isCorrect()) {
+						return lr;
+					} 
+					makeStartEndPointsPrecise(lr.detailed, targets.get(i), targets.get(i + 1));
 					if (res == null) {
 						res = lr;
-					} else if (lr == null || !lr.isCorrect()) {
-						return lr;
 					} else {
 						res.detailed.addAll(lr.detailed);
 					}
@@ -1144,9 +1146,8 @@ public class RoutePlannerFrontEnd {
 			ctx.finalRouteSegment = new BinaryRoutePlanner().searchRouteInternal(local, s, e, null);
 			result = RouteResultPreparation.convertFinalSegmentToResults(ctx, ctx.finalRouteSegment);
 			addPrecalculatedToResult(recalculationEnd, result);
-			makeStartEndPointsPrecise(result, s.getPreciseLatLon(), e.getPreciseLatLon());
 		}
-		return new RouteCalcResult(result); // prepareResult() should be called finally (not between interpoints)
+		return new RouteCalcResult(result); 
 	}
 
 	public RouteSegmentPoint getRecalculationEnd(final RoutingContext ctx) {
@@ -1300,6 +1301,9 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 			RouteCalcResult res = searchRouteAndPrepareTurns(local, pnts.get(i), pnts.get(i + 1), routeDirection);
+			if (res != null && res.detailed != null) {
+				makeStartEndPointsPrecise(res.detailed, pnts.get(i).getPreciseLatLon(), pnts.get(i + 1).getPreciseLatLon());
+			}
 			results.detailed.addAll(res.detailed);
 			ctx.routingTime += local.routingTime;
 //			local.unloadAllData(ctx);
