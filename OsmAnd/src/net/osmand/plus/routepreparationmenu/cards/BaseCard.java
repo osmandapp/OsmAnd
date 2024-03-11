@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
@@ -35,6 +36,7 @@ public abstract class BaseCard {
 	boolean showBottomShadow;
 	boolean showDivider = true;
 	boolean transparentBackground;
+	protected boolean usedOnMap;
 	protected boolean nightMode;
 
 	private CardListener listener;
@@ -58,6 +60,7 @@ public abstract class BaseCard {
 		this.activity = activity;
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.settings = app.getSettings();
+		this.usedOnMap = usedOnMap;
 		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !settings.isLightContent();
 	}
 
@@ -197,6 +200,15 @@ public abstract class BaseCard {
 
 	public void setTransparentBackground(boolean transparentBackground) {
 		this.transparentBackground = transparentBackground;
+	}
+
+	public void setText(int viewId, @NonNull String text) {
+		if (view != null) {
+			View textView = view.findViewById(viewId);
+			if (textView instanceof TextView) {
+				((TextView) textView).setText(text);
+			}
+		}
 	}
 
 	public void updateVisibility(int viewId, boolean show) {
