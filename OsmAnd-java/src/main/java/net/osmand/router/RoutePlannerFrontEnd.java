@@ -39,9 +39,6 @@ public class RoutePlannerFrontEnd {
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	static boolean TRACE_ROUTING = false;
 
-	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.astar(0)
-			.calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-//	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
@@ -49,6 +46,10 @@ public class RoutePlannerFrontEnd {
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
 
 	public RoutePlannerFrontEnd() {
+	}
+	
+	public static HHRoutingConfig defaultHHConfig() {
+		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 	}
 
 	public enum RouteCalculationMode {
@@ -289,13 +290,13 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public void setDefaultHHRoutingConfig() {
-		this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+		this.hhRoutingConfig = defaultHHConfig();
 	}
 
 	public RoutePlannerFrontEnd setUseOnlyHHRouting(boolean useOnlyHHRouting) {
 		this.useOnlyHHRouting = useOnlyHHRouting;
 		if (useOnlyHHRouting && hhRoutingConfig == null) {
-			this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+			this.hhRoutingConfig = defaultHHConfig();
 		}
 		return this;
 	}
@@ -939,6 +940,7 @@ public class RoutePlannerFrontEnd {
 		HHNetworkRouteRes r = null;
 		HHRoutePlanner<NetworkDBPoint> routePlanner = HHRoutePlanner.create(ctx);
 		Double dir = ctx.config.initialDirection;
+		float routingTime = 0;
 		for (int i = 0; i < targets.size(); i++) {
 			double initialPenalty = ctx.config.penaltyForReverseDirection;
 			if (i > 0) {
@@ -956,10 +958,12 @@ public class RoutePlannerFrontEnd {
 			if (r == null || !r.isCorrect()) {
 				break;
 			}
+			routingTime += r.getHHRoutingDetailed();
 			if (r.detailed.size() > 0) {
 				dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 			}
 		}
+		ctx.routingTime = routingTime;
 		return r;
 	}
 
@@ -968,7 +972,7 @@ public class RoutePlannerFrontEnd {
 		NativeLibrary nativeLib = ctx.nativeLib;
 		ctx.nativeLib = null; // keep null to interfere with detailed
 		try {
-			HHRoutingConfig cfg = HHRoutePlanner.prepareDefaultRoutingConfig(hhRoutingConfig);
+			HHRoutingConfig cfg = defaultHHConfig();
 			cfg.INITIAL_DIRECTION = dir;
 			HHNetworkRouteRes res = routePlanner.runRouting(start, end, cfg);
 			if (res != null && res.error == null) {

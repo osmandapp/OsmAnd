@@ -32,7 +32,7 @@ public class HHRouteDataStructure {
 	
 	public static class HHRoutingConfig {
 		public final static int CALCULATE_ALL_DETAILED = 3;
-		public int STATS_VERBOSE_LEVEL = 1; // 0 less verbose
+		public static int STATS_VERBOSE_LEVEL = 1; // 0 less verbose
 		float HEURISTIC_COEFFICIENT = 0; // A* - 1, Dijkstra - 0
 		float DIJKSTRA_DIRECTION = 0; // 0 - 2 directions, 1 - positive, -1 - reverse
 		public HHRoutingContext<NetworkDBPoint> cacheCtx;
