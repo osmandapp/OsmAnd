@@ -3,7 +3,6 @@ package net.osmand.plus.myplaces.tracks;
 import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 
 public class PointBitmapDrawer extends MapBitmapDrawer {
@@ -15,13 +14,10 @@ public class PointBitmapDrawer extends MapBitmapDrawer {
 		this.latLon = latLon;
 	}
 
-	@NonNull
 	@Override
-	protected RotatedTileBox createTileBox() {
-		RotatedTileBox tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
+	protected void createTileBox() {
+		tileBox = app.getOsmandMap().getMapView().getRotatedTileBox();
 		tileBox.setLatLonCenter(latLon.getLatitude(), latLon.getLongitude());
 		tileBox.setPixelDimensions(params.widthPixels, params.heightPixels);
-
-		return tileBox;
 	}
 }

@@ -68,7 +68,7 @@ public abstract class MapBitmapDrawer {
 
 	public void initAndDraw() {
 		notifyDrawing();
-		tileBox = createTileBox();
+		createTileBox();
 
 		DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
 		ResourceManager resourceManager = app.getResourceManager();
@@ -83,6 +83,5 @@ public abstract class MapBitmapDrawer {
 		}
 	}
 
-	@NonNull
-	protected abstract RotatedTileBox createTileBox();
+	protected abstract void createTileBox();
 }

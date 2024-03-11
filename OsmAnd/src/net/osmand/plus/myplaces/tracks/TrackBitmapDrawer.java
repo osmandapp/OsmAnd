@@ -91,10 +91,9 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 		return tileBox == null || mapBitmap == null || trackBitmap == null;
 	}
 
-	@NonNull
-	protected RotatedTileBox createTileBox() {
+	protected void createTileBox() {
 		QuadRect rect = gpxFile.getRect();
-		RotatedTileBox tileBox = new RotatedTileBox.RotatedTileBoxBuilder()
+		tileBox = new RotatedTileBox.RotatedTileBoxBuilder()
 				.setLocation(rect.centerY(), rect.centerX())
 				.setZoom(15)
 				.density(params.density)
@@ -107,7 +106,6 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 		while (tileBox.getZoom() >= 7 && (!tileBox.containsLatLon(rect.top, rect.left) || !tileBox.containsLatLon(rect.bottom, rect.right))) {
 			tileBox.setZoom(tileBox.getZoom() - 1);
 		}
-		return tileBox;
 	}
 
 	public void refreshTrackBitmap() {

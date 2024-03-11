@@ -368,6 +368,12 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return pointsGroups;
 	}
 
+	@NonNull
+	@Override
+	protected LatLon getPointCoordinates() {
+		return new LatLon(favorite.getLatitude(), favorite.getLongitude());
+	}
+
 	@Override
 	public boolean isCategoryVisible(@NonNull String name) {
 		return favouritesHelper.isGroupVisible(name);

@@ -389,6 +389,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return new LinkedHashMap<>();
 	}
 
+	@NonNull
+	@Override
+	protected LatLon getPointCoordinates() {
+		return new LatLon(wpt.getLatitude(), wpt.getLongitude());
+	}
+
 	@Override
 	protected boolean isCategoryVisible(String categoryName) {
 		WptPtEditor editor = getWptPtEditor();
