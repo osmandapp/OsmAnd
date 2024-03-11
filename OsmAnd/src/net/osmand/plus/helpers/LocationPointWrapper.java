@@ -13,14 +13,14 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 
 public class LocationPointWrapper {
 
@@ -81,13 +81,13 @@ public class LocationPointWrapper {
 
 		} else if (type == WaypointHelper.FAVORITES) {
 			int color = ColorUtilities.getColor(app, R.color.color_favorite);
-			return PointImageDrawable.getFromFavorite(context,
+			return PointImageUtils.getFromPoint(context,
 					app.getFavoritesHelper().getColorWithCategory((FavouritePoint) point, color), false, (FavouritePoint) point);
 		} else if (type == WaypointHelper.WAYPOINTS) {
 			if (point instanceof WptLocationPoint) {
-				return PointImageDrawable.getFromWpt(context, point.getColor(), false, ((WptLocationPoint) point).getPt());
+				return PointImageUtils.getFromPoint(context, point.getColor(), false, ((WptLocationPoint) point).getPt());
 			} else if (point instanceof GPXUtilities.WptPt) {
-				return PointImageDrawable.getFromWpt(context, point.getColor(), false, (GPXUtilities.WptPt) point);
+				return PointImageUtils.getFromPoint(context, point.getColor(), false, (GPXUtilities.WptPt) point);
 			} else {
 				return null;
 			}

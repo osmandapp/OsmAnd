@@ -9,7 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -17,225 +17,139 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.Renderable.CurrentTrack;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
-import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 
-import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class TrackBitmapDrawer {
-
-	private static final Log log = PlatformUtil.getLog(TrackBitmapDrawer.class);
-
-	private final OsmandApplication app;
-
-	private final TracksDrawParams drawParams;
-
-	private boolean drawEnabled;
-	private RotatedTileBox rotatedTileBox;
-	private Bitmap mapBitmap;
-	private Bitmap mapTrackBitmap;
+public class TrackBitmapDrawer extends MapBitmapDrawer {
 
 	private final GPXFile gpxFile;
-	private final GpxDataItem gpxDataItem;
-	private LatLon selectedPointLatLon;
+	private final GpxDataItem dataItem;
 
 	private final Paint paint = new Paint();
 	private final Paint paintIcon = new Paint();
 	private final Bitmap pointSmall;
-	private final LayerDrawable selectedPoint;
+	private final Drawable locationIcon;
 
-	private int currentTrackColor;
-	private final int defPointColor;
+	private Bitmap trackBitmap;
+	private LatLon selectedLocation;
 
-	private final List<TrackBitmapDrawerListener> listeners = new ArrayList<>();
+	@ColorInt
+	public int defaultTrackColor;
+	@ColorInt
+	public int currentTrackColor;
 
-	public interface TrackBitmapDrawerListener {
-		void onTrackBitmapDrawing();
-
-		void onTrackBitmapDrawn(boolean success);
-
-		boolean isTrackBitmapSelectionSupported();
-
-		void drawTrackBitmap(Bitmap bitmap);
-	}
-
-	public TrackBitmapDrawer(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                         @NonNull TracksDrawParams drawParams, @Nullable GpxDataItem gpxDataItem) {
-		this.app = app;
+	public TrackBitmapDrawer(@NonNull OsmandApplication app, @NonNull MapDrawParams params,
+	                         @NonNull GPXFile gpxFile, @Nullable GpxDataItem dataItem) {
+		super(app, params);
 		this.gpxFile = gpxFile;
-		this.drawParams = drawParams;
-		this.gpxDataItem = gpxDataItem;
+		this.dataItem = dataItem;
 
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setAntiAlias(true);
 		paint.setStrokeWidth(AndroidUtils.dpToPx(app, 4f));
 
-		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
+		currentTrackColor = app.getSettings().CURRENT_TRACK_COLOR.get();
 		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.ic_white_shield_small);
-		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(app, R.drawable.map_location_default);
+		locationIcon = AppCompatResources.getDrawable(app, R.drawable.map_location_default);
+
+		addListener(new MapBitmapDrawerListener() {
+			@Override
+			public void onBitmapDrawn(boolean success) {
+				if (success) {
+					refreshTrackBitmap();
+				}
+			}
+		});
 	}
 
-	public void addListener(TrackBitmapDrawerListener l) {
-		if (!listeners.contains(l)) {
-			listeners.add(l);
-		}
+	public void setDefaultTrackColor(@ColorInt int defaultTrackColor) {
+		this.defaultTrackColor = defaultTrackColor;
 	}
 
-	public void removeListener(TrackBitmapDrawerListener l) {
-		listeners.remove(l);
+	@Nullable
+	public LatLon getSelectedLocation() {
+		return selectedLocation;
 	}
 
-	public void clearListeners() {
-		listeners.clear();
-	}
-
-	public void notifyDrawing() {
-		for (TrackBitmapDrawerListener l : listeners) {
-			l.onTrackBitmapDrawing();
-		}
-	}
-
-	public void notifyDrawn(boolean success) {
-		for (TrackBitmapDrawerListener l : listeners) {
-			l.onTrackBitmapDrawn(success);
-		}
-	}
-
-	public boolean isDrawEnabled() {
-		return drawEnabled;
-	}
-
-	public void setDrawEnabled(boolean drawEnabled) {
-		this.drawEnabled = drawEnabled;
-	}
-
-	public GPXFile getGpx() {
-		return gpxFile;
-	}
-
-	public GpxDataItem getGpxDataItem() {
-		return gpxDataItem;
-	}
-
-	public LatLon getSelectedPointLatLon() {
-		return selectedPointLatLon;
-	}
-
-	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
-		this.selectedPointLatLon = selectedPointLatLon;
+	public void setSelectedLocation(@Nullable LatLon selectedLocation) {
+		this.selectedLocation = selectedLocation;
 	}
 
 	public boolean isNonInitialized() {
-		return rotatedTileBox == null || mapBitmap == null || mapTrackBitmap == null;
+		return tileBox == null || mapBitmap == null || trackBitmap == null;
 	}
 
-	public boolean initAndDraw() {
+	protected void createTileBox() {
 		QuadRect rect = gpxFile.getRect();
-		if (rect != null && rect.left != 0 && rect.top != 0) {
-			notifyDrawing();
+		tileBox = new RotatedTileBox.RotatedTileBoxBuilder()
+				.setLocation(rect.centerY(), rect.centerX())
+				.setZoom(15)
+				.density(params.density)
+				.setMapDensity(params.density)
+				.setPixelDimensions(params.widthPixels, params.heightPixels, 0.5f, 0.5f).build();
 
-			double clat = rect.bottom / 2 + rect.top / 2;
-			double clon = rect.left / 2 + rect.right / 2;
-			RotatedTileBoxBuilder boxBuilder = new RotatedTileBoxBuilder()
-					.setLocation(clat, clon)
-					.setZoom(15)
-					.density(drawParams.density)
-					.setMapDensity(drawParams.density)
-					.setPixelDimensions(drawParams.widthPixels, drawParams.heightPixels, 0.5f, 0.5f);
-
-			rotatedTileBox = boxBuilder.build();
-			while (rotatedTileBox.getZoom() < 17 && rotatedTileBox.containsLatLon(rect.top, rect.left) && rotatedTileBox.containsLatLon(rect.bottom, rect.right)) {
-				rotatedTileBox.setZoom(rotatedTileBox.getZoom() + 1);
-			}
-			while (rotatedTileBox.getZoom() >= 7 && (!rotatedTileBox.containsLatLon(rect.top, rect.left) || !rotatedTileBox.containsLatLon(rect.bottom, rect.right))) {
-				rotatedTileBox.setZoom(rotatedTileBox.getZoom() - 1);
-			}
-
-			DrawSettings drawSettings = new DrawSettings(!app.getSettings().isLightContent(), true);
-			ResourceManager resourceManager = app.getResourceManager();
-			MapRenderRepositories renderer = resourceManager.getRenderer();
-			if (resourceManager.updateRenderedMapNeeded(rotatedTileBox, drawSettings)) {
-				resourceManager.updateRendererMap(rotatedTileBox, interrupted -> app.runInUIThread(() -> {
-					if (isDrawEnabled()) {
-						mapBitmap = renderer.getBitmap();
-						boolean success = mapBitmap != null;
-						notifyDrawn(success);
-
-						if (success) {
-							refreshTrackBitmap();
-						}
-					}
-				}), true);
-			}
-			return true;
+		while (tileBox.getZoom() < 17 && tileBox.containsLatLon(rect.top, rect.left) && tileBox.containsLatLon(rect.bottom, rect.right)) {
+			tileBox.setZoom(tileBox.getZoom() + 1);
 		}
-		return false;
+		while (tileBox.getZoom() >= 7 && (!tileBox.containsLatLon(rect.top, rect.left) || !tileBox.containsLatLon(rect.bottom, rect.right))) {
+			tileBox.setZoom(tileBox.getZoom() - 1);
+		}
 	}
 
 	public void refreshTrackBitmap() {
-		currentTrackColor = app.getSettings().CURRENT_TRACK_COLOR.get();
-		if (mapBitmap != null && !mapBitmap.isRecycled() && isDrawEnabled()) {
-			SelectedGpxFile sf;
-			GPXFile gpxFile = getGpx();
-			if (gpxFile != null) {
-				if (gpxFile.showCurrentTrack) {
-					sf = app.getSavingTrackHelper().getCurrentTrack();
+		if (mapBitmap != null && !mapBitmap.isRecycled() && isDrawingAllowed()) {
+			SelectedGpxFile selectedGpxFile = getSelectedGpxFile();
+
+			Bitmap bitmap = mapBitmap.copy(mapBitmap.getConfig(), true);
+			Canvas canvas = new Canvas(bitmap);
+			drawTrack(canvas, selectedGpxFile);
+			drawPoints(canvas, selectedGpxFile);
+			trackBitmap = bitmap;
+
+			Bitmap pointBitmap = drawSelectedPoint();
+			for (MapBitmapDrawerListener listener : listeners) {
+				if (pointBitmap != null && listener.isBitmapSelectionSupported()) {
+					listener.onBitmapDrawn(pointBitmap);
 				} else {
-					sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
-					if (sf == null) {
-						sf = new SelectedGpxFile();
-						GpxDataItem gpxDataItem = getGpxDataItem();
-						if (gpxDataItem != null) {
-							sf.setJoinSegments(gpxDataItem.getParameter(JOIN_SEGMENTS));
-						}
-					}
-					sf.setGpxFile(gpxFile, app);
-				}
-				Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
-				Canvas canvas = new Canvas(bmp);
-				drawTrack(canvas, rotatedTileBox, sf);
-				drawPoints(canvas, rotatedTileBox, sf);
-				mapTrackBitmap = bmp;
-				Bitmap selectedPointBitmap = drawSelectedPoint();
-				for (TrackBitmapDrawerListener l : listeners) {
-					if (selectedPointBitmap != null && l.isTrackBitmapSelectionSupported()) {
-						l.drawTrackBitmap(selectedPointBitmap);
-					} else {
-						l.drawTrackBitmap(mapTrackBitmap);
-					}
+					listener.onBitmapDrawn(trackBitmap);
 				}
 			}
 		}
 	}
 
-	private void drawTrack(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile selectedGpxFile) {
-		GpxDataItem gpxDataItem = null;
-		if (!selectedGpxFile.isShowCurrentTrack()) {
-			gpxDataItem = getGpxDataItem();
+	@NonNull
+	private SelectedGpxFile getSelectedGpxFile() {
+		if (gpxFile.showCurrentTrack) {
+			return app.getSavingTrackHelper().getCurrentTrack();
+		} else {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			if (selectedGpxFile == null) {
+				selectedGpxFile = new SelectedGpxFile();
+				if (dataItem != null) {
+					selectedGpxFile.setJoinSegments(dataItem.getParameter(JOIN_SEGMENTS));
+				}
+			}
+			selectedGpxFile.setGpxFile(gpxFile, app);
+			return selectedGpxFile;
 		}
-		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
-		for (TrkSegment segment : segments) {
-			int color = getTrackColor(selectedGpxFile, segment, gpxDataItem);
+	}
+
+	private void drawTrack(@NonNull Canvas canvas, @NonNull SelectedGpxFile selectedGpxFile) {
+		GpxDataItem item = !selectedGpxFile.isShowCurrentTrack() ? dataItem : null;
+		for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
+			int color = getTrackColor(selectedGpxFile, segment, item);
 			if (segment.renderer == null && !segment.points.isEmpty()) {
 				if (selectedGpxFile.isShowCurrentTrack()) {
 					segment.renderer = new CurrentTrack(segment.points);
@@ -256,68 +170,53 @@ public class TrackBitmapDrawer {
 			color = currentTrackColor;
 		}
 		if (color == 0) {
-			color = segment.getColor(drawParams.trackColor);
+			color = segment.getColor(defaultTrackColor);
 		}
 		if (color == 0) {
-			color = gpxFile.getColor(drawParams.trackColor);
+			color = gpxFile.getColor(defaultTrackColor);
 		}
-		return color == 0 ? drawParams.trackColor : color;
+		return color == 0 ? defaultTrackColor : color;
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile g) {
-		List<WptPt> pts = g.getGpxFile().getPoints();
-		@ColorInt
-		int fileColor = g.getColor() == 0 ? defPointColor : g.getColor();
-		for (WptPt o : pts) {
-			float x = tileBox.getPixXFromLatLon(o.lat, o.lon);
-			float y = tileBox.getPixYFromLatLon(o.lat, o.lon);
+	private void drawPoints(@NonNull Canvas canvas, @NonNull SelectedGpxFile selectedGpxFile) {
+		int color = selectedGpxFile.getColor();
+		int pointsColor = color == 0 ? ContextCompat.getColor(app, R.color.gpx_color_point) : color;
+		for (WptPt point : selectedGpxFile.getGpxFile().getPoints()) {
+			float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
+			float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
 
-			int pointColor = o.getColor(fileColor) | 0xff000000;
+			int pointColor = point.getColor(pointsColor) | 0xff000000;
 			paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
-			canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+			canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2f, y - pointSmall.getHeight() / 2f, paintIcon);
 		}
 	}
 
+	@Nullable
 	private Bitmap drawSelectedPoint() {
-		if (mapTrackBitmap != null && rotatedTileBox != null && selectedPointLatLon != null) {
-			float x = rotatedTileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-			float y = rotatedTileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+		if (trackBitmap != null && tileBox != null && selectedLocation != null) {
 			paintIcon.setColorFilter(null);
-			Bitmap bmp = mapTrackBitmap.copy(mapTrackBitmap.getConfig(), true);
-			Canvas canvas = new Canvas(bmp);
-			selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
-					(int) y - selectedPoint.getIntrinsicHeight() / 2,
-					(int) x + selectedPoint.getIntrinsicWidth() / 2,
-					(int) y + selectedPoint.getIntrinsicHeight() / 2);
-			selectedPoint.draw(canvas);
-			return bmp;
-		} else {
-			return null;
+
+			float x = tileBox.getPixXFromLatLon(selectedLocation.getLatitude(), selectedLocation.getLongitude());
+			float y = tileBox.getPixYFromLatLon(selectedLocation.getLatitude(), selectedLocation.getLongitude());
+
+			Bitmap bitmap = trackBitmap.copy(trackBitmap.getConfig(), true);
+			locationIcon.setBounds((int) x - locationIcon.getIntrinsicWidth() / 2,
+					(int) y - locationIcon.getIntrinsicHeight() / 2,
+					(int) x + locationIcon.getIntrinsicWidth() / 2,
+					(int) y + locationIcon.getIntrinsicHeight() / 2);
+			locationIcon.draw(new Canvas(bitmap));
+			return bitmap;
 		}
+		return null;
 	}
 
 	public void updateSelectedPoint(double lat, double lon) {
-		selectedPointLatLon = new LatLon(lat, lon);
-		Bitmap bmp = drawSelectedPoint();
-		for (TrackBitmapDrawerListener l : listeners) {
-			if (bmp != null && l.isTrackBitmapSelectionSupported() && isDrawEnabled()) {
-				l.drawTrackBitmap(bmp);
+		selectedLocation = new LatLon(lat, lon);
+		Bitmap bitmap = drawSelectedPoint();
+		for (MapBitmapDrawerListener listener : listeners) {
+			if (bitmap != null && listener.isBitmapSelectionSupported() && isDrawingAllowed()) {
+				listener.onBitmapDrawn(bitmap);
 			}
-		}
-	}
-
-	public static class TracksDrawParams {
-
-		private final float density;
-		private final int widthPixels;
-		private final int heightPixels;
-		private final int trackColor;
-
-		public TracksDrawParams(float density, int widthPixels, int heightPixels, int trackColor) {
-			this.density = density;
-			this.widthPixels = widthPixels;
-			this.heightPixels = heightPixels;
-			this.trackColor = trackColor;
 		}
 	}
 }

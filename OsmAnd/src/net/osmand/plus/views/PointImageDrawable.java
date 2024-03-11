@@ -1,9 +1,7 @@
 package net.osmand.plus.views;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -14,23 +12,23 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.BackgroundType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-
-import java.util.TreeMap;
+import net.osmand.plus.views.PointImageUtils.PointImageInfo;
+import net.osmand.plus.views.layers.base.OsmandMapLayer;
 
 public class PointImageDrawable extends Drawable {
+
+	public static final int ICON_SIZE_VECTOR_PX = 12;
+	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
 
 	private final int dp_12_px;
 	private final boolean withShadow;
@@ -54,44 +52,47 @@ public class PointImageDrawable extends Drawable {
 	private int mapIconSize;
 	private int backSize;
 
-	public static final int DEFAULT_SIZE_ON_MAP_DP = 16;
-	public static final int ICON_SIZE_VECTOR_PX = 12;
-
-	private PointImageDrawable(PointInfo pointInfo) {
+	protected PointImageDrawable(@NonNull Context context, @NonNull PointImageInfo pointInfo) {
 		paintForeground.setAntiAlias(true);
 		paintBackground.setAntiAlias(true);
 		withShadow = pointInfo.withShadow;
-		Context ctx = pointInfo.ctx;
-		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
-		int overlayIconId = pointInfo.overlayIconId;
-		mapIcon = uiUtilities.getIcon(pointInfo.synced
-						? R.drawable.ic_action_flag
-						: getMapIconId(ctx, overlayIconId),
-				R.color.card_and_list_background_light);
-		int col = pointInfo.color == 0 ? ContextCompat.getColor(ctx, R.color.color_favorite) : pointInfo.color;
-		uiListIcon = uiUtilities.getIcon(overlayIconId, R.color.card_and_list_background_light);
-		BackgroundType backgroundType = pointInfo.backgroundType;
-		int uiBackgroundIconId = backgroundType.getIconId();
-		uiBackgroundIcon = uiUtilities.getPaintedIcon(uiBackgroundIconId, col);
-		mapIconBackgroundTop = backgroundType.getMapBackgroundIconId(ctx, "top", false);
-		mapIconBackgroundCenter = backgroundType.getMapBackgroundIconId(ctx, "center", false);
-		mapIconBackgroundBottom = backgroundType.getMapBackgroundIconId(ctx, "bottom", false);
-		mapIconBackgroundTopSmall = backgroundType.getMapBackgroundIconId(ctx, "top", true);
-		mapIconBackgroundCenterSmall = backgroundType.getMapBackgroundIconId(ctx, "center", true);
-		mapIconBackgroundBottomSmall = backgroundType.getMapBackgroundIconId(ctx, "bottom", true);
-		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
-		grayFilter = new PorterDuffColorFilter(ContextCompat.getColor(ctx, R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
-		dp_12_px = AndroidUtils.dpToPx(pointInfo.ctx, 12);
+
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		UiUtilities utilities = app.getUIUtilities();
+
+		int iconId = pointInfo.synced ? R.drawable.ic_action_flag : getMapIconId(context, pointInfo.iconId);
+		mapIcon = utilities.getIcon(iconId, R.color.card_and_list_background_light);
+
+		int color = pointInfo.color == 0 ? ContextCompat.getColor(context, R.color.color_favorite) : pointInfo.color;
+		uiListIcon = utilities.getIcon(pointInfo.iconId, R.color.card_and_list_background_light);
+
+		BackgroundType type = pointInfo.type;
+		uiBackgroundIcon = utilities.getPaintedIcon(type.getIconId(), color);
+		mapIconBackgroundTop = type.getMapBackgroundIconId(context, "top", false);
+		mapIconBackgroundCenter = type.getMapBackgroundIconId(context, "center", false);
+		mapIconBackgroundBottom = type.getMapBackgroundIconId(context, "bottom", false);
+		mapIconBackgroundTopSmall = type.getMapBackgroundIconId(context, "top", true);
+		mapIconBackgroundCenterSmall = type.getMapBackgroundIconId(context, "center", true);
+		mapIconBackgroundBottomSmall = type.getMapBackgroundIconId(context, "bottom", true);
+
+		colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN);
+		grayFilter = new PorterDuffColorFilter(ContextCompat.getColor(context, R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
+		dp_12_px = AndroidUtils.dpToPx(context, 12);
+
+		if (withShadow) {
+			setScale(OsmandMapLayer.getTextScale(app));
+		}
 	}
 
-	private int getMapIconId(Context ctx, int iconId) {
-		String iconName = ctx.getResources().getResourceEntryName(iconId);
-		return ctx.getResources().getIdentifier(iconName
-				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
+	@DrawableRes
+	private int getMapIconId(@NonNull Context context, @DrawableRes int iconId) {
+		Resources resources = context.getResources();
+		String iconName = resources.getResourceEntryName(iconId).replaceFirst("mx_", "mm_");
+		return resources.getIdentifier(iconName, "drawable", context.getPackageName());
 	}
 
 	@Override
-	protected void onBoundsChange(Rect bounds) {
+	protected void onBoundsChange(@NonNull Rect bounds) {
 		super.onBoundsChange(bounds);
 		if (!withShadow) {
 			uiBackgroundIcon.setBounds(0, 0,
@@ -142,7 +143,7 @@ public class PointImageDrawable extends Drawable {
 		canvas.drawBitmap(bitmap, null, bs, paintBackground);
 	}
 
-	public void drawPoint(Canvas canvas, float x, float y, float scale, boolean history) {
+	public void drawPoint(@NonNull Canvas canvas, float x, float y, float scale, boolean history) {
 		setScale(scale);
 		this.history = history;
 		Rect rect = new Rect(0, 0, backSize, backSize);
@@ -161,7 +162,8 @@ public class PointImageDrawable extends Drawable {
 		}
 	}
 
-	public Bitmap getBitmapFromVectorDrawable(Drawable drawable) {
+	@NonNull
+	public Bitmap getBitmapFromVectorDrawable(@NonNull Drawable drawable) {
 		Bitmap bitmap = Bitmap.createBitmap(mapIconSize, mapIconSize, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -169,7 +171,7 @@ public class PointImageDrawable extends Drawable {
 		return bitmap;
 	}
 
-	public void drawSmallPoint(Canvas canvas, float x, float y, float scale) {
+	public void drawSmallPoint(@NonNull Canvas canvas, float x, float y, float scale) {
 		setScale(scale);
 		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
 		int scaledWidth = mapIconBackgroundBottomSmall.getWidth();
@@ -202,99 +204,6 @@ public class PointImageDrawable extends Drawable {
 	@Override
 	public void setColorFilter(ColorFilter cf) {
 		paintIcon.setColorFilter(cf);
-	}
-
-	private static final TreeMap<String, PointImageDrawable> cache = new TreeMap<>();
-
-	private static PointImageDrawable getOrCreate(@NonNull PointInfo pointInfo) {
-
-		String uniqueId = pointInfo.ctx.getResources().getResourceEntryName(pointInfo.overlayIconId);
-		uniqueId += pointInfo.backgroundType.name();
-		int color = pointInfo.color | 0xff000000;
-		int hash = (color << 4) + ((pointInfo.withShadow ? 1 : 0) << 2) + ((pointInfo.synced ? 3 : 0) << 2);
-		uniqueId = hash + uniqueId;
-		PointImageDrawable drawable = cache.get(uniqueId);
-		if (drawable == null) {
-			drawable = new PointImageDrawable(pointInfo);
-			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-			cache.put(uniqueId, drawable);
-		}
-		return drawable;
-	}
-
-	public static PointImageDrawable getOrCreateSyncedIcon(Context ctx, @ColorInt int color, FavouritePoint point) {
-		return getFromFavorite(ctx, color, true, true, point);
-	}
-
-	public static PointImageDrawable getOrCreateSyncedIcon(Context ctx, @ColorInt int color, GPXUtilities.WptPt wpt) {
-		return getFromWpt(ctx, color, true, true, wpt);
-	}
-
-	public static PointImageDrawable getFromWpt(Context ctx, @ColorInt int color, boolean withShadow,
-	                                            GPXUtilities.WptPt wpt) {
-		return getFromWpt(ctx, color, withShadow, false, wpt);
-	}
-
-	public static PointImageDrawable getFromWpt(Context ctx, @ColorInt int color, boolean withShadow, boolean synced,
-	                                            GPXUtilities.WptPt wpt) {
-		if (wpt != null) {
-			int overlayIconId = ctx.getResources().getIdentifier("mx_" + wpt.getIconNameOrDefault(),
-					"drawable", ctx.getPackageName());
-			return getOrCreate(ctx, color, withShadow, synced, overlayIconId,
-					BackgroundType.getByTypeName(wpt.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-		} else {
-			return getOrCreate(ctx, color, withShadow);
-		}
-	}
-
-	public static PointImageDrawable getFromFavorite(Context ctx, @ColorInt int color, boolean withShadow,
-	                                                 FavouritePoint favoritePoint) {
-		return getFromFavorite(ctx, color, withShadow, false, favoritePoint);
-	}
-
-	public static PointImageDrawable getFromFavorite(Context ctx, @ColorInt int color, boolean withShadow,
-	                                                 boolean synced, FavouritePoint favoritePoint) {
-		if (favoritePoint != null) {
-			return getOrCreate(ctx, color, withShadow, synced, favoritePoint.getOverlayIconId(ctx),
-					favoritePoint.getBackgroundType());
-		} else {
-			return getOrCreate(ctx, color, withShadow);
-		}
-	}
-
-	public static PointImageDrawable getOrCreate(Context ctx, @ColorInt int color, boolean withShadow) {
-		return getOrCreate(ctx, color, withShadow, DEFAULT_UI_ICON_ID);
-	}
-
-	public static PointImageDrawable getOrCreate(Context ctx, @ColorInt int color, boolean withShadow, int overlayIconId) {
-		return getOrCreate(ctx, color, withShadow, false, overlayIconId, BackgroundType.CIRCLE);
-	}
-
-	public static PointImageDrawable getOrCreate(Context ctx, @ColorInt int color, boolean withShadow, boolean synced,
-	                                             int overlayIconId, @NonNull BackgroundType backgroundType) {
-		overlayIconId = overlayIconId == 0 ? DEFAULT_UI_ICON_ID : overlayIconId;
-		PointInfo pointInfo = new PointInfo(ctx, color, withShadow, overlayIconId, backgroundType);
-		pointInfo.synced = synced;
-		return getOrCreate(pointInfo);
-	}
-
-	private static class PointInfo {
-		Context ctx;
-		@ColorInt
-		int color;
-		boolean withShadow;
-		boolean synced;
-		@DrawableRes
-		int overlayIconId;
-		BackgroundType backgroundType;
-
-		private PointInfo(Context ctx, int color, boolean withShadow, int overlayIconId, BackgroundType backgroundType) {
-			this.ctx = ctx;
-			this.color = color;
-			this.withShadow = withShadow;
-			this.overlayIconId = overlayIconId;
-			this.backgroundType = backgroundType;
-		}
 	}
 
 	@Nullable

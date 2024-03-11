@@ -32,7 +32,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -355,7 +355,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			point.setBackgroundType(getBackgroundType().getTypeName());
 			point.setIconName(getIconName());
 		}
-		return PointImageDrawable.getFromWpt(getMapActivity(), getColor(), false, point);
+		return PointImageUtils.getFromPoint(app, getColor(), false, point);
 	}
 
 	@ColorInt
@@ -387,6 +387,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			return editor.getPointsGroups();
 		}
 		return new LinkedHashMap<>();
+	}
+
+	@NonNull
+	@Override
+	protected LatLon getPointCoordinates() {
+		return new LatLon(wpt.getLatitude(), wpt.getLongitude());
 	}
 
 	@Override
