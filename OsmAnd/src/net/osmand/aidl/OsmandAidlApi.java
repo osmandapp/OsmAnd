@@ -81,7 +81,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.NavigateGpxHelper;
@@ -91,9 +90,9 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
@@ -144,7 +143,6 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -2261,48 +2259,33 @@ public class OsmandAidlApi {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
-		TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawerListener() {
+		MapBitmapDrawerListener listener = new MapBitmapDrawerListener() {
 			@Override
-			public void onTrackBitmapDrawing() {
-			}
-
-			@Override
-			public void onTrackBitmapDrawn(boolean success) {
-
-			}
-
-			@Override
-			public boolean isTrackBitmapSelectionSupported() {
-				return false;
-			}
-
-			@Override
-			public void drawTrackBitmap(Bitmap bitmap) {
+			public void onBitmapDrawn(@NonNull Bitmap bitmap) {
 				callback.onGpxBitmapCreatedComplete(bitmap);
 			}
 		};
 
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
-					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, listener);
 				}
 			});
 		} else {
-			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, listener);
 		}
 		return true;
 	}
 
 	private void createGpxBitmapFromUri(Uri gpxUri, float density, int widthPixels,
-	                                    int heightPixels, int color, TrackBitmapDrawerListener drawerListener) {
+	                                    int heightPixels, int color, MapBitmapDrawerListener listener) {
 		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, result -> {
-			TracksDrawParams drawParams = new TracksDrawParams(density, widthPixels, heightPixels, color);
-			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, drawParams, null);
-			trackBitmapDrawer.addListener(drawerListener);
-			trackBitmapDrawer.setDrawEnabled(true);
+			MapDrawParams params = new MapDrawParams(density, widthPixels, heightPixels);
+			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, params, result, null);
+			trackBitmapDrawer.addListener(listener);
+			trackBitmapDrawer.setDefaultTrackColor(color);
 			trackBitmapDrawer.initAndDraw();
 			return false;
 		});

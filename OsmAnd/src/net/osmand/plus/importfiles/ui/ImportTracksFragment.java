@@ -40,8 +40,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.importfiles.tasks.CollectTracksTask;
 import net.osmand.plus.importfiles.tasks.CollectTracksTask.CollectTracksListener;
@@ -52,14 +52,13 @@ import net.osmand.plus.importfiles.ui.ImportTracksAdapter.ImportTracksListener;
 import net.osmand.plus.importfiles.ui.SelectPointsFragment.PointsSelectionListener;
 import net.osmand.plus.importfiles.ui.SelectTrackDirectoryBottomSheet.FolderSelectionListener;
 import net.osmand.plus.myplaces.MyPlacesActivity;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.AddNewTrackFolderBottomSheet.OnTrackFolderAddListener;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -278,7 +277,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 		super.onDestroyView();
 		for (ImportTrackItem item : trackItems) {
 			if (item.bitmapDrawer != null) {
-				item.bitmapDrawer.setDrawEnabled(false);
+				item.bitmapDrawer.setDrawingAllowed(false);
 			}
 			item.bitmap = null;
 			item.bitmapDrawer = null;
@@ -308,16 +307,15 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	@NonNull
-	private TracksDrawParams getTracksDrawParams() {
+	private MapDrawParams getTracksDrawParams() {
 		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics metrics = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(metrics);
 
-		int color = GpxAppearanceAdapter.getTrackColor(app);
 		int width = metrics.widthPixels - AndroidUtils.dpToPx(app, 32);
 		int height = getResources().getDimensionPixelSize(R.dimen.track_image_height);
 
-		return new TracksDrawParams(metrics.density, width, height, color);
+		return new MapDrawParams(metrics.density, width, height);
 	}
 
 	@Override
