@@ -1325,10 +1325,8 @@ public class RoutePlannerFrontEnd {
 		} else if (RoutingContext.SHOW_GC_SIZE && !before) {
 			int sz = ctx.global.size;
 			log.warn("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.indexedSubregions.size());
-			RoutingContext.runGCUsedMemory();
 			long h1 = RoutingContext.runGCUsedMemory();
 			ctx.unloadAllData();
-			RoutingContext.runGCUsedMemory();
 			long h2 = RoutingContext.runGCUsedMemory();
 			float mb = (1 << 20);
 			log.warn("Unload context :  estimated " + sz / mb + " ?= " + (h1 - h2) / mb + " actual");
