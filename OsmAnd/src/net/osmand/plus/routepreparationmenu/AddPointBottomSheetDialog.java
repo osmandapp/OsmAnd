@@ -49,11 +49,11 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
-import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.search.ShowQuickSearchMode;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
@@ -677,7 +677,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						? BackgroundType.CIRCLE
 						: point.getBackgroundType();
 
-				Drawable pointIcon = PointImageDrawable.getOrCreate(app, pointColor, false,
+				Drawable pointIcon = PointImageUtils.getOrCreate(app, pointColor, false,
 						false, pointIconRes, backgroundType);
 				favoriteViewHolder.icon.setImageDrawable(pointIcon);
 

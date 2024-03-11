@@ -50,7 +50,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -349,7 +349,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 			WptPt waypoint = createWaypoint();
 
 			ImageView predefinedIcon = container.findViewById(R.id.predefined_icon);
-			Drawable icon = PointImageDrawable.getFromWpt(context, waypoint.getColor(),
+			Drawable icon = PointImageUtils.getFromPoint(context, waypoint.getColor(),
 					false, waypoint);
 			predefinedIcon.setImageDrawable(icon);
 

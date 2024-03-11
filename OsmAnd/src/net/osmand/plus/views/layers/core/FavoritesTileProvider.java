@@ -23,6 +23,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -121,10 +122,10 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			if (bitmap == null) {
 				PointImageDrawable pointImageDrawable;
 				if (data.hasMarker) {
-					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.color,
+					pointImageDrawable = PointImageUtils.getOrCreate(ctx, data.color,
 							data.withShadow, true, data.overlayIconId, data.backgroundType);
 				} else {
-					pointImageDrawable = PointImageDrawable.getOrCreate(ctx, data.color,
+					pointImageDrawable = PointImageUtils.getOrCreate(ctx, data.color,
 							data.withShadow, false, data.overlayIconId, data.backgroundType);
 				}
 				bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, false);
@@ -134,7 +135,7 @@ public class FavoritesTileProvider extends interface_MapTiledCollectionProvider 
 			int smallBitmapKey = data.getKey();
 			bitmap = smallBitmapCache.get(smallBitmapKey);
 			if (bitmap == null) {
-				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 						data.color, data.withShadow, false, data.overlayIconId, data.backgroundType);
 				bitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);
 				smallBitmapCache.put(smallBitmapKey, bitmap);

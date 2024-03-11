@@ -40,6 +40,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -185,7 +186,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {
 			backgroundType = BackgroundType.COMMENT;
 		}
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
 				iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
@@ -402,7 +403,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvide
 		int x = MapUtils.get31TileNumberX(osmPoint.getLongitude());
 		int y = MapUtils.get31TileNumberY(osmPoint.getLatitude());
 		PointI position = new PointI(x, y);
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 				ContextCompat.getColor(ctx, R.color.created_poi_icon_color), true, false,
 				iconId, backgroundType);
 		pointImageDrawable.setAlpha(0.8f);
