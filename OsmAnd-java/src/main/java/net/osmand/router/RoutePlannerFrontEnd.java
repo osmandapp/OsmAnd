@@ -324,8 +324,7 @@ public class RoutePlannerFrontEnd {
 			GpxPoint start = null;
 			GpxPoint prev = null;
 			if (gpxPoints.size() > 0) {
-				gctx.ctx.calculationProgress.totalApproximateDistance = (float) gpxPoints
-						.get(gpxPoints.size() - 1).cumDist;
+				gctx.ctx.calculationProgress.totalApproximateDistance = (float) gpxPoints.get(gpxPoints.size() - 1).cumDist;
 				start = gpxPoints.get(0);
 			}
 			float minPointApproximation = gctx.ctx.config.minPointApproximation;
@@ -351,14 +350,12 @@ public class RoutePlannerFrontEnd {
 								boolean stepBack = stepBackAndFindPrevPointInRoute(gctx, gpxPoints, start, next);
 								if (!stepBack) {
 									// not supported case (workaround increase routing.xml maxStepApproximation)
-									log.info("Consider to increase routing.xml maxStepApproximation to: "
-											+ routeDist * 2);
+									log.info("Consider to increase routing.xml maxStepApproximation to: " + routeDist * 2);
 									start.routeToTarget = null;
 									routeFound = false;
 								} else {
 									if (gctx.ctx.getVisitor() != null) {
-										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start,
-												next);
+										gctx.ctx.getVisitor().visitApproximatedSegments(start.routeToTarget, start, next);
 									}
 								}
 							}
@@ -476,7 +473,6 @@ public class RoutePlannerFrontEnd {
 			// here all route segments - 1 is longer than needed distance to step back
 			return false;
 		}
-
 		while (start.routeToTarget.size() > segmendInd + 1) {
 			RouteSegmentResult removed = start.routeToTarget.remove(segmendInd + 1);
 			start.stepBackRoute.add(removed);
@@ -507,7 +503,6 @@ public class RoutePlannerFrontEnd {
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
 					lastStraightLine.add(startPoint);
-					System.out.println(startPoint);
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 					lastStraightLine = null;
 				}
@@ -752,11 +747,12 @@ public class RoutePlannerFrontEnd {
 						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
 							firstSegment.setObject(start.pnt.road);
 						}
+						if (firstSegment.getStartPointIndex() == firstSegment.getEndPointIndex()) {
+							res.detailed.remove(0);
+						}
 					} else {
-						// for native routing this is possible when point lies on intersection of 2
-						// lines
+						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
-						// though it should not create any issue
 						System.out.println("??? not found " + start.pnt.getRoad().getId() + " instead "
 								+ firstSegment.getObject().getId());
 					}
@@ -1137,7 +1133,6 @@ public class RoutePlannerFrontEnd {
 		if (ctx.nativeLib != null) {
 			RouteSegmentResult[] res = runNativeRouting(ctx, null);
 			result = new ArrayList<>(Arrays.asList(res));
-			// addPrecalculatedToResult() makeStartEndPointsPrecise() should be done by C++
 		} else {
 			refreshProgressDistance(ctx);
 			RoutingContext local = new RoutingContext(ctx);
