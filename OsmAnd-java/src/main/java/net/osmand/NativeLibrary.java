@@ -45,7 +45,7 @@ public class NativeLibrary {
 	}
 
 	public static class RenderingGenerationResult {
-		private ByteBuffer bitmapBuffer;
+		public ByteBuffer bitmapBuffer;
 		private JsonObject info;
 		public RenderingGenerationResult(ByteBuffer bitmap) {
 			this.bitmapBuffer = bitmap;
@@ -53,14 +53,6 @@ public class NativeLibrary {
 		public RenderingGenerationResult(ByteBuffer bitmap, JsonObject info) {
 			this.bitmapBuffer = bitmap;
 			this.info = info;
-		}
-		
-		public ByteBuffer getBitmapBuffer() {
-			return bitmapBuffer;
-		}
-		
-		public void setBitmapBuffer(ByteBuffer bitmapBuffer) {
-			this.bitmapBuffer = bitmapBuffer;
 		}
 		
 		public JsonObject getInfo() {
