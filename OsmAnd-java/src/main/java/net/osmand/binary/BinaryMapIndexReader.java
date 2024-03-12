@@ -1458,8 +1458,6 @@ public class BinaryMapIndexReader {
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 		}
-		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		return req.getSearchResults();
 	}
@@ -1475,10 +1473,6 @@ public class BinaryMapIndexReader {
 		long old = codedIS.pushLimitLong((long) poiIndex.length);
 		poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 		codedIS.popLimit(old);
-
-		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-
 		return req.getSearchResults();
 	}
 

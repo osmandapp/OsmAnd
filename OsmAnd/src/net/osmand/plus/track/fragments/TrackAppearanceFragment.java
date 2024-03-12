@@ -8,6 +8,7 @@ import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
 import static net.osmand.plus.track.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
 import static net.osmand.plus.track.cards.ActionsCard.RESET_BUTTON_INDEX;
@@ -35,33 +36,32 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
-import net.osmand.plus.chooseplan.PromoBannerCard;
+import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.ActionsCard;
-import net.osmand.plus.track.cards.ColoringTypeCard;
-import net.osmand.plus.track.cards.ColorsCard;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
-import net.osmand.plus.track.cards.TrackColoringCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
+import net.osmand.plus.track.fragments.controller.TrackColorController;
+import net.osmand.plus.card.color.ColoringCardController.IColorCardControllerListener;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -80,7 +80,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 
@@ -99,10 +99,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private TrackWidthCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
-	private TrackColoringCard trackColoringCard;
-	private ColorsCard colorsCard;
-	private ColoringTypeCard coloringTypeCard;
-	private PromoBannerCard promoCard;
 	private boolean showStartFinishIconsInitialValue;
 
 	private final List<BaseCard> cards = new ArrayList<>();
@@ -340,6 +336,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		exitTrackAppearanceMode();
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getColorCardController().onDestroy(getActivity());
+	}
+
 	private void enterTrackAppearanceMode() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -399,24 +401,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (mapActivity != null) {
 			if (card instanceof SplitIntervalCard) {
 				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
-			} else if (card instanceof TrackColoringCard) {
-				TrackColoringCard trackColoringCard = ((TrackColoringCard) card);
-				ColoringType currentColoringType = trackColoringCard.getSelectedColoringType();
-				String routeInfoAttribute = trackColoringCard.getRouteInfoAttribute();
-				trackDrawInfo.setColoringType(currentColoringType);
-				trackDrawInfo.setRouteInfoAttribute(routeInfoAttribute);
-				refreshMap();
-				if (coloringTypeCard != null) {
-					coloringTypeCard.setColoringType(currentColoringType);
-				}
-				if (colorsCard != null) {
-					AndroidUiHelper.updateVisibility(colorsCard.getView(), currentColoringType.isTrackSolid());
-				}
-				updatePromoCardVisibility();
-			} else if (card instanceof ColorsCard) {
-				int color = ((ColorsCard) card).getSelectedColor();
-				trackDrawInfo.setColor(color);
-				updateColorItems();
 			} else if (card instanceof TrackWidthCard) {
 				updateAppearanceIcon();
 			} else if (card instanceof DirectionArrowsCard) {
@@ -433,9 +417,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (card instanceof ActionsCard) {
 			if (buttonIndex == RESET_BUTTON_INDEX) {
 				trackDrawInfo.resetParams(app, selectedGpxFile.getGpxFile());
-				if (colorsCard != null) {
-					colorsCard.setSelectedColor(trackDrawInfo.getColor());
-				}
+				TrackColorController colorController = getColorCardController();
+				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
+				IColorsPaletteController paletteController = colorController.getColorsPaletteController();
+				paletteController.selectColor(trackDrawInfo.getColor());
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
 				refreshMap();
@@ -444,16 +429,25 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		if (prevColor != null) {
-			List<Integer> customColors = ColorsCard.getCustomColors(settings.CUSTOM_TRACK_COLORS);
-			int index = customColors.indexOf(prevColor);
-			if (index != ColorsCard.INVALID_VALUE) {
-				CustomColorBottomSheet.saveCustomColorsToTracks(app, prevColor, newColor);
-			}
+	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+		trackDrawInfo.setColoringStyle(coloringStyle);
+		refreshMap();
+
+		View saveButton = view.findViewById(R.id.right_bottom_button);
+		saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+	}
+
+	@Override
+	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
+		trackDrawInfo.setColor(paletteColor.getColor());
+		updateColorItems();
+	}
+
+	@Override
+	public void onColorAddedToPalette(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+		if (oldColor != null && oldColor.isCustom()) {
+			TrackColorController.saveCustomColorsToTracks(app, oldColor.getColor(), newColor.getColor());
 		}
-		trackDrawInfo.setColor(newColor);
-		colorsCard.onColorSelected(prevColor, newColor);
 		updateColorItems();
 	}
 
@@ -562,38 +556,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 	}
 
-	private void updatePromoCardVisibility() {
-		boolean available = isAvailableColoringType();
-		if (!available) {
-			promoCard.updateVisibility(true);
-			coloringTypeCard.updateVisibility(false);
-			colorsCard.updateVisibility(false);
-		} else {
-			promoCard.updateVisibility(false);
-		}
-		View saveButton = view.findViewById(R.id.right_bottom_button);
-		saveButton.setEnabled(available);
-	}
-
-	private boolean isAvailableColoringType() {
-		if (trackColoringCard != null) {
-			ColoringType currentColoringType = trackColoringCard.getSelectedColoringType();
-			String routeInfoAttribute = trackColoringCard.getRouteInfoAttribute();
-			return currentColoringType.isAvailableInSubscription(app, routeInfoAttribute, false);
-		}
-		return false;
-	}
-
 	private void setupButtons() {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
 		DialogButton saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setButtonType(DialogButtonType.PRIMARY);
 		saveButton.setTitleId(R.string.shared_string_apply);
-		saveButton.setOnClickListener(v -> {
-			saveTrackInfo();
-			dismiss();
-		});
+		saveButton.setOnClickListener(v -> onSaveButtonClicked());
 
 		DialogButton cancelButton = view.findViewById(R.id.dismiss_button);
 		cancelButton.setButtonType(DialogButtonType.SECONDARY);
@@ -609,6 +578,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 		AndroidUiHelper.updateVisibility(saveButton, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
+	}
+
+	private void onSaveButtonClicked() {
+		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		saveTrackInfo();
+		dismiss();
 	}
 
 	private void setupScrollShadow() {
@@ -658,9 +633,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		updateAppearanceIcon();
 		if (trackWidthCard != null) {
 			trackWidthCard.updateItems();
-		}
-		if (trackColoringCard != null) {
-			trackColoringCard.updateColor();
 		}
 		refreshMap();
 	}
@@ -748,19 +720,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
-
-			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
-			addCard(container, trackColoringCard);
-
-			setupColorsCard(container);
-
-			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
-			ColoringType coloringType = trackDrawInfo.getColoringType();
-			coloringTypeCard = new ColoringTypeCard(mapActivity, analysis, coloringType);
-			addCard(container, coloringTypeCard);
-
-			promoCard = new PromoBannerCard(mapActivity, true);
-			addCard(container, promoCard);
+			inflate(R.layout.list_item_divider_basic, container, true);
+			addCard(container, new MultiStateCard(mapActivity, getColorCardController()));
 
 			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, y -> {
 				View view = trackWidthCard.getView();
@@ -775,8 +736,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			});
 			addCard(container, trackWidthCard);
 			addCard(container, new ActionsCard(mapActivity));
-
-			updatePromoCardVisibility();
 		}
 	}
 
@@ -786,18 +745,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		container.addView(card.build(container.getContext()));
 	}
 
-	private void setupColorsCard(@NonNull ViewGroup container) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			List<Integer> colors = GpxAppearanceAdapter.getTrackColors(app);
-			colorsCard = new ColorsCard(mapActivity, null, this,
-					trackDrawInfo.getColor(), colors, settings.CUSTOM_TRACK_COLORS, true);
-			addCard(container, colorsCard);
-			int dp12 = getResources().getDimensionPixelSize(R.dimen.card_padding);
-			AndroidUtils.setPadding(colorsCard.getView(), 0, dp12, 0, dp12);
-			boolean shouldShowColorsCard = trackDrawInfo.getColoringType().isTrackSolid();
-			AndroidUiHelper.updateVisibility(colorsCard.getView(), shouldShowColorsCard);
-		}
+	private TrackColorController getColorCardController() {
+		return TrackColorController.getInstance(app, selectedGpxFile, trackDrawInfo, this);
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

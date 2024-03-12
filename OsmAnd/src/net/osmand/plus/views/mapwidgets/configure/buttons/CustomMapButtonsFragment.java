@@ -101,7 +101,7 @@ public class CustomMapButtonsFragment extends BaseMapButtonsFragment implements 
 		dialogData.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
 			Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
 			if (extra instanceof EditText) {
-				String name = ((EditText) extra).getText().toString();
+				String name = ((EditText) extra).getText().toString().trim();
 				if (Algorithms.isBlank(name)) {
 					app.showToastMessage(R.string.empty_name);
 				} else if (!mapButtonsHelper.isActionButtonNameUnique(name)) {

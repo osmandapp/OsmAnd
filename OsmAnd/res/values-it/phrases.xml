@@ -2827,8 +2827,8 @@
     <string name="poi_refugee_no">Rifugiati: no</string>
     <string name="poi_refugee_yes">Servizi per i rifugiati</string>
     <string name="poi_capacity_tents">Tende massime</string>
-    <string name="poi_impromptu_no">Improvviso: no</string>
-    <string name="poi_impromptu_yes">Improvviso: sì</string>
+    <string name="poi_impromptu_no">No</string>
+    <string name="poi_impromptu_yes">Sì</string>
     <string name="poi_castle_type_castrum">Tipo di castello: castrum</string>
     <string name="poi_castle_type_defensive_stately">Tipo di castello: difensivo, maestoso</string>
     <string name="poi_castle_type_kremlin">Tipo di castello: cremlino</string>
@@ -3962,4 +3962,21 @@
     <string name="poi_free_flying_site_towing">Traino</string>
     <string name="poi_free_flying_hanggliding_no">Deltaplano: no</string>
     <string name="poi_free_flying_hanggliding_yes">Deltaplano</string>
+    <string name="poi_nuclear_explosion_type_underground_shaft">Tipo di esplosione: sotterraneo, pozzo</string>
+    <string name="poi_nuclear_explosion_type_cratering_burst">Tipo di esplosione: scoppio di crateri (sottosuolo poco profondo)</string>
+    <string name="poi_nuclear_explosion_shot_name_en">Nome dello scatto (it)</string>
+    <string name="poi_nuclear_explosion_purpose_weapons_effects">Scopo dell\'esplosione: effetti delle armi</string>
+    <string name="poi_nuclear_explosion_purpose_fundamental_science">Scopo dell\'esplosione: scienza fondamentale</string>
+    <string name="poi_live_music">Musica dal vivo</string>
+    <string name="poi_protection_object_habitat">Oggetto di protezione: habitat</string>
+    <string name="poi_us_maps_recreation_area_activity">Attività dell\'area ricreativa</string>
+    <string name="poi_us_maps_recreation_area_open_status">Stato di accesso all\'area ricreativa</string>
+    <string name="poi_us_maps_recreation_area_facility">Struttura dell\'area ricreativa</string>
+    <string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Tipo di esplosione: atmosferica, superficiale dell\'acqua, chiatta</string>
+    <string name="poi_reservation">Prenotazione</string>
+    <string name="poi_nuclear_explosion_type_atmospheric_balloon">Tipo di esplosione: atmosferica, mongolfiera</string>
+    <string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Scopo dell\'esplosione: correlato alle armi nucleari</string>
+    <string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Scopo dell\'esplosione: ricerca per applicazioni pacifiche</string>
+    <string name="poi_live_music_yes">Sì</string>
+    <string name="poi_cuisine_fish">Pesce</string>
 </resources>

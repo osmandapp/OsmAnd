@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -128,7 +129,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
                 } else {
                     iconId = R.drawable.mx_special_video_camera;
                 }
-                PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+                PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
                         ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true, iconId);
                 pointImageDrawable.setAlpha(0.8f);
                 bitmap = pointImageDrawable.getBigMergedBitmap(data.textScale, false);
@@ -136,7 +137,7 @@ public class AudioNotesTileProvider extends interface_MapTiledCollectionProvider
             }
         } else {
             if (smallBitmap == null) {
-                PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+                PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
                         ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
                 pointImageDrawable.setAlpha(0.8f);
                 smallBitmap = pointImageDrawable.getSmallMergedBitmap(data.textScale);

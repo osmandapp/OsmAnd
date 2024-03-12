@@ -89,11 +89,8 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				loadGPXFolder(subFold, GPXFolderUtils.getSubfolderTitle(file, subfolder), progress, updateSmartFolder);
 			} else if (GpxUiHelper.isGpxFile(file)) {
 				TrackItem item = new TrackItem(file);
-				item.setDataItem(getDataItem(item));
+				item.setDataItem(getDataItem(item, file));
 				trackItems.add(item);
-				if (updateSmartFolder) {
-					smartFolderHelper.addTrackItemToSmartFolder(item);
-				}
 				progress.add(item);
 				if (progress.size() > 7) {
 					publishProgress(progress.toArray(new TrackItem[0]));
@@ -104,11 +101,14 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		trackFolder.setSubFolders(subFolders);
 		trackFolder.setTrackItems(trackItems);
 		trackFolder.resetCashedData();
+		if (updateSmartFolder) {
+			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
+		}
 	}
 
 	@Nullable
-	private GpxDataItem getDataItem(@NonNull TrackItem trackItem) {
-		File file = trackItem.getFile();
+	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
+//		File file = trackItem.getFile();
 		if (file != null) {
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override

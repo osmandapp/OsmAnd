@@ -203,7 +203,7 @@
                     android:background="?attr/bg_color"
                     android:paddingTop="8dp">
 
-                    <com.github.mikephil.charting.charts.LineChart
+                    <com.github.mikephil.charting.charts.ElevationChart
                         android:id="@+id/chart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -332,6 +332,10 @@ task appStart(type: Exec) {
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation project(':OsmAnd-api')
+
+	implementation project(':OsmAnd-shared')
+	implementation("androidx.sqlite:sqlite-framework:2.3.1")
+
 	implementation 'androidx.multidex:multidex:2.0.1'
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'
@@ -372,9 +376,7 @@ dependencies {
 	implementation("com.github.HITGIF:TextFieldBoxes:1.4.5") {
 		exclude group: 'com.android.support'
 	}
-	implementation('com.github.scribejava:scribejava-apis:7.1.1') {
-		exclude group: "com.fasterxml.jackson.core"
-	}
+	implementation('com.github.scribejava:scribejava-apis:7.1.1')
 	implementation 'com.jaredrummler:colorpicker:1.1.0'
 	implementation 'org.bouncycastle:bcpkix-jdk15on:1.56'
 	implementation 'com.google.android.play:core:1.9.1'

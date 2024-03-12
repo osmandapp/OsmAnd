@@ -1661,7 +1661,7 @@
     <string name="poi_bin_no">Sans poubelle</string>
     <string name="poi_internet_access_type_yes">Avec accès Internet</string>
     <string name="poi_fitness_centre">Salle de sport</string>
-    <string name="poi_billiards">Billards</string>
+    <string name="poi_billiards">Billard</string>
     <string name="poi_microwave_oven_yes">Four micro-ondes : oui</string>
     <string name="poi_microwave_oven_no">Four micro-ondes : non</string>
     <string name="poi_parking_carports">Abri pour véhicules</string>
@@ -3903,7 +3903,7 @@
     <string name="poi_wakeboarding">Wakeboard</string>
     <string name="poi_table_soccer">Babyfoot</string>
     <string name="poi_sumo">Sumo</string>
-    <string name="poi_snooker">Billard</string>
+    <string name="poi_snooker">Snooker</string>
     <string name="poi_shot_put">Lancer de poids</string>
     <string name="poi_pilates">Pilates</string>
     <string name="poi_jiu_jitsu">Ju-jitsu</string>

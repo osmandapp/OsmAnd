@@ -384,7 +384,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected abstract void setupPreferences();
 
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectableView != null) {

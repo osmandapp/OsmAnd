@@ -3811,4 +3811,5 @@
     <string name="poi_socket_chademo_voltage_filter">CHAdeMO konektorearen tentsioa</string>
     <string name="poi_socket_type2_voltage_filter">2 motako konektorearen tentsioa</string>
     <string name="poi_socket_type2_combo_voltage_filter">2 motako konbinazio-konektore-tentsioa</string>
+    <string name="poi_barrier_planter">-</string>
 </resources>

@@ -24,7 +24,6 @@
 
 	<uses-permission android:name="androidx.car.app.NAVIGATION_TEMPLATES"/>
 	<uses-permission android:name="androidx.car.app.ACCESS_SURFACE"/>
-	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
 	<uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
 	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -560,6 +559,15 @@
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
 				<data android:scheme="osmand-oauth" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" android:pathPrefix="/redirect-url"/>
+
 			</intent-filter>
 
 			<intent-filter>

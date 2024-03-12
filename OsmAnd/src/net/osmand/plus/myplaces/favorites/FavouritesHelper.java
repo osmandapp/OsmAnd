@@ -259,24 +259,24 @@ public class FavouritesHelper {
 	}
 
 	public void delete(@Nullable Set<FavoriteGroup> groupsToDelete, @Nullable Set<FavouritePoint> favoritesSelected) {
-		if (favoritesSelected != null) {
+		if (!Algorithms.isEmpty(favoritesSelected)) {
 			Set<FavoriteGroup> groupsToSync = new HashSet<>();
-			for (FavouritePoint p : favoritesSelected) {
-				FavoriteGroup group = flatGroups.get(p.getCategory());
+			for (FavouritePoint point : favoritesSelected) {
+				FavoriteGroup group = flatGroups.get(point.getCategory());
 				if (group != null) {
-					group.getPoints().remove(p);
+					group.getPoints().remove(point);
 					groupsToSync.add(group);
 				}
-				if (p.isHomeOrWork()) {
+				if (point.isHomeOrWork()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 				}
-				removeFavouritePoint(p);
+				removeFavouritePoint(point);
 			}
-			for (FavoriteGroup gr : groupsToSync) {
-				runSyncWithMarkers(gr);
+			for (FavoriteGroup group : groupsToSync) {
+				runSyncWithMarkers(group);
 			}
 		}
-		if (groupsToDelete != null) {
+		if (!Algorithms.isEmpty(groupsToDelete)) {
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 			ArrayList<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
 			for (FavoriteGroup g : groupsToDelete) {
@@ -493,7 +493,7 @@ public class FavouritesHelper {
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group, boolean saveImmediately) {
-		ArrayList<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
+		List<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
 		boolean remove = tmpFavoriteGroups.remove(group);
 		if (remove) {
 			favoriteGroups = tmpFavoriteGroups;

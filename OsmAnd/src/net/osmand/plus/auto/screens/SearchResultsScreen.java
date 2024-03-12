@@ -68,6 +68,8 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 			builder.setLoading(false);
 			if (itemList != null) {
 				builder.setItemList(itemList);
+			} else {
+				builder.setItemList(new ItemList.Builder().setNoItemsMessage(getApp().getString(R.string.location_not_found)).build());
 			}
 		}
 		return builder.build();
@@ -122,7 +124,7 @@ public final class SearchResultsScreen extends BaseSearchScreen implements Defau
 
 	@Override
 	public void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
-							 @Nullable ItemList itemList, int resultsCount) {
+	                         @Nullable ItemList itemList, int resultsCount) {
 		SearchWord lastSelectedWord = phrase.getLastSelectedWord();
 		if (showResult && resultsCount == 0 && lastSelectedWord != null) {
 			showResult(lastSelectedWord.getResult());

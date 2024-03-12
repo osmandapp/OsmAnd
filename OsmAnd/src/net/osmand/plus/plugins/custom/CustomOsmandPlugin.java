@@ -23,7 +23,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
@@ -326,8 +326,8 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 						app.getSearchUICore().refreshCustomPoiFilters();
 					} else if (item instanceof AvoidRoadsSettingsItem) {
 						AvoidRoadsSettingsItem avoidRoadsSettingsItem = (AvoidRoadsSettingsItem) item;
-						List<AvoidSpecificRoads.AvoidRoadInfo> avoidRoadInfos = avoidRoadsSettingsItem.getItems();
-						for (AvoidSpecificRoads.AvoidRoadInfo avoidRoad : avoidRoadInfos) {
+						List<AvoidRoadInfo> avoidRoadInfos = avoidRoadsSettingsItem.getItems();
+						for (AvoidRoadInfo avoidRoad : avoidRoadInfos) {
 							app.getAvoidSpecificRoads().removeImpassableRoad(avoidRoad);
 						}
 					} else if (item instanceof ProfileSettingsItem) {

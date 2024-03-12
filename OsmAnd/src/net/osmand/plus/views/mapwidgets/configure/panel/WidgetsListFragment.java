@@ -1,7 +1,12 @@
 package net.osmand.plus.views.mapwidgets.configure.panel;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +15,13 @@ import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -17,6 +29,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer;
@@ -25,39 +38,22 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
-import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
-import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.WidgetIconsHelper;
+import net.osmand.plus.views.mapwidgets.configure.WidgetsSettingsHelper;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.AddWidgetFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetInfoFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
-import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
 public class WidgetsListFragment extends Fragment implements OnScrollChangedListener,
 		ConfirmationDialogListener, CopyAppModePrefsListener {
@@ -157,8 +153,8 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		view.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				ReorderWidgetsFragment.showInstance(activity.getSupportFragmentManager(), selectedPanel,
-						selectedAppMode, getParentFragment());
+				FragmentManager manager = activity.getSupportFragmentManager();
+				ReorderWidgetsFragment.showInstance(manager, selectedPanel, selectedAppMode, getParentFragment());
 			}
 		});
 		setupListItemBackground(view);
@@ -181,14 +177,6 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		if (mapActivity == null) {
 			return;
 		}
-
-		Set<MapWidgetInfo> allWidgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, MATCHING_PANELS_MODE, Arrays.asList(WidgetsPanel.values()));
-		for (MapWidgetInfo widgetInfo : allWidgetInfos) {
-			widgetRegistry.enableDisableWidgetForMode(selectedAppMode, widgetInfo, null, false);
-		}
-		settings.MAP_INFO_CONTROLS.resetModeToDefault(selectedAppMode);
-		settings.CUSTOM_WIDGETS_KEYS.resetModeToDefault(selectedAppMode);
-		selectedPanel.getOrderPreference(settings).resetModeToDefault(selectedAppMode);
 		widgetsSettingsHelper.resetWidgetsForPanel(selectedPanel);
 
 		MapInfoLayer mapInfoLayer = app.getOsmandMap().getMapLayers().getMapInfoLayer();
@@ -297,7 +285,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 						WidgetSettingsBaseFragment.showFragment(manager, args, target, fragment);
 					}
 				});
-				setupListItemBackground(app, settingsButton, selectedAppMode.getProfileColor(nightMode));
+				UiUtilities.setupListItemBackground(app, settingsButton, selectedAppMode.getProfileColor(nightMode));
 			}
 
 			View infoButton = view.findViewById(R.id.info_button);
@@ -483,12 +471,7 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 
 	private void setupListItemBackground(@NonNull View view) {
 		View container = view.findViewById(R.id.container);
-		setupListItemBackground(app, container, selectedAppMode.getProfileColor(nightMode));
-	}
-
-	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
-		Drawable background = UiUtilities.getColoredSelectableDrawable(context, color, 0.3f);
-		AndroidUtils.setBackground(view, background);
+		UiUtilities.setupListItemBackground(app, container, selectedAppMode.getProfileColor(nightMode));
 	}
 
 	private boolean isVerticalPanel() {

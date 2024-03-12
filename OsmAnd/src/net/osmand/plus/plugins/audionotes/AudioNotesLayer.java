@@ -22,6 +22,7 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -132,7 +133,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 						float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 						float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 						if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+							PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 									ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
 							pointImageDrawable.setAlpha(0.8f);
 							pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
@@ -163,7 +164,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		} else {
 			iconId = R.drawable.mx_special_video_camera;
 		}
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 				ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true, iconId);
 		pointImageDrawable.setAlpha(0.8f);
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);

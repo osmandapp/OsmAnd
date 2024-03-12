@@ -4,6 +4,7 @@ import static net.osmand.gpx.GPXUtilities.GPXTPX_PREFIX;
 import static net.osmand.gpx.GPXUtilities.OSMAND_EXTENSIONS_PREFIX;
 import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
 import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
+import static net.osmand.util.CollectionUtils.equalsToAny;
 
 public class PointAttributes {
 
@@ -11,7 +12,9 @@ public class PointAttributes {
 	public static final String SENSOR_TAG_SPEED = OSMAND_EXTENSIONS_PREFIX + "speed_sensor";
 	public static final String SENSOR_TAG_CADENCE = GPXTPX_PREFIX + "cad" ;
 	public static final String SENSOR_TAG_BIKE_POWER = GPXTPX_PREFIX + "power";
-	public static final String SENSOR_TAG_TEMPERATURE = GPXTPX_PREFIX + "wtemp";
+	public static final String SENSOR_TAG_TEMPERATURE = "temp_sensor";
+	public static final String SENSOR_TAG_TEMPERATURE_W = GPXTPX_PREFIX + "wtemp";
+	public static final String SENSOR_TAG_TEMPERATURE_A = GPXTPX_PREFIX + "atemp";
 	public static final String SENSOR_TAG_DISTANCE = OSMAND_EXTENSIONS_PREFIX + "bike_distance_sensor";
 
 	public static final String DEV_RAW_ZOOM = "raw_zoom";
@@ -29,7 +32,8 @@ public class PointAttributes {
 	public float sensorSpeed;
 	public float bikeCadence;
 	public float bikePower;
-	public float temperature;
+	public float waterTemperature;
+	public float airTemperature;
 
 	public float rawZoom;
 	public float animatedZoom;
@@ -57,7 +61,11 @@ public class PointAttributes {
 			case SENSOR_TAG_BIKE_POWER:
 				return bikePower;
 			case SENSOR_TAG_TEMPERATURE:
-				return temperature;
+				return getTemperature();
+			case SENSOR_TAG_TEMPERATURE_W:
+				return waterTemperature;
+			case SENSOR_TAG_TEMPERATURE_A:
+				return airTemperature;
 			case DEV_RAW_ZOOM:
 				return rawZoom;
 			case DEV_ANIMATED_ZOOM:
@@ -88,8 +96,11 @@ public class PointAttributes {
 			case SENSOR_TAG_BIKE_POWER:
 				bikePower = value;
 				break;
-			case SENSOR_TAG_TEMPERATURE:
-				temperature = value;
+			case SENSOR_TAG_TEMPERATURE_W:
+				waterTemperature = value;
+				break;
+			case SENSOR_TAG_TEMPERATURE_A:
+				airTemperature = value;
 				break;
 			case DEV_RAW_ZOOM:
 				rawZoom = value;
@@ -103,9 +114,16 @@ public class PointAttributes {
 		}
 	}
 
+	public float getTemperature() {
+		if (!Float.isNaN(airTemperature)) {
+			return !Float.isNaN(waterTemperature) ? Math.max(waterTemperature, airTemperature) : airTemperature;
+		}
+		return waterTemperature;
+	}
+
 	public boolean hasValidValue(String tag) {
 		float value = getAttributeValue(tag);
-		if (SENSOR_TAG_TEMPERATURE.equals(tag) || POINT_ELEVATION.equals(tag)) {
+		if (equalsToAny(tag, SENSOR_TAG_TEMPERATURE, SENSOR_TAG_TEMPERATURE_W, SENSOR_TAG_TEMPERATURE_A, POINT_ELEVATION)) {
 			return !Float.isNaN(value);
 		}
 		return value > 0;

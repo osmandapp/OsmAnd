@@ -180,4 +180,25 @@
     <string name="rendering_value_sector5_name">सेक्टर ५</string>
     <string name="rendering_value_small_name">छोटा</string>
     <string name="rendering_value_name_only_name">सिर्फ़ नाम</string>
+    <string name="when_exceeded">जब पार हो जाए</string>
+    <string name="sort_subfolders">सब - फ़ोल्डर सॉर्ट करें</string>
+    <string name="shared_string_keywords">कीवर्ड</string>
+    <string name="shared_string_additional">अतिरिक्त</string>
+    <string name="shared_string_activity">गतिविधि</string>
+    <string name="shared_string_limit">सीमा</string>
+    <string name="speedometer_description">जीपीएस (GPS) के ज़रिए रिपोर्ट की गई अपनी वर्तमान गति दिखाता है</string>
+    <string name="custom_map_button_name_present">ऐसा बटन पहले से मौजूद है</string>
+    <string name="shared_string_speedometer">स्पीडोमीटर</string>
+    <string name="add_button">बटन जोड़ें</string>
+    <string name="custom_buttons">कस्टम बटन</string>
+    <string name="default_buttons">डिफ़ॉल्ट बटन</string>
+    <string name="shared_string_extensions">एक्सटेंशन</string>
+    <string name="shared_string_author">लेखक</string>
+    <string name="battery_optimization_banner_content">एंड्रॉइड बैटरी ऑप्टिमाइज़ेशन रिकॉर्ड किए गए ट्रैक में अंतराल और अशुद्धियों का कारण बन सकता है।</string>
+    <string name="dont_ask_anymore">अब और न पूछें</string>
+    <string name="battery_optimization_settings">बैटरी ऑप्टिमाइज़ेशन सेटिंग</string>
+    <string name="battery_optimization">बैटरी ऑप्टिमाइज़ेशन</string>
+    <string name="shared_string_license">लाइसेंस</string>
+    <string name="shared_string_link">लिंक</string>
+    <string name="shared_string_copyright">कॉपीराइट</string>
 </resources>

@@ -4480,4 +4480,13 @@
     <string name="poi_cemt_0">0</string>
     <string name="poi_cemt_vib">VIb</string>
     <string name="poi_cemt_vic">VIc</string>
+    <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+    <string name="poi_playground_tunnel_tube">Tunelová rúra</string>
+    <string name="poi_climbing_bolt_abseil">Zlaňovanie</string>
+    <string name="poi_climbing_bolts">Lezecké úchyty</string>
+    <string name="poi_playground_speaking_tube">Rúra na hovorenie</string>
+    <string name="poi_socket_bs1363_yes">BS 1363</string>
+    <string name="poi_socket_schuko_yes">Schuko</string>
+    <string name="poi_flow_rate">Prietok</string>
+    <string name="poi_climbing_bolt_anchor">Kotva</string>
 </resources>

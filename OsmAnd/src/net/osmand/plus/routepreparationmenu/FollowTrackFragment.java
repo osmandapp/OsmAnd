@@ -507,7 +507,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(mode.getNameId())
 						.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-						.setOnClickListener(itemView -> {
+						.setOnClickListener(menuItem -> {
 							sortByMode = mode;
 							sortButton.setImageResource(mode.getIconId());
 							if (tracksCard != null) {

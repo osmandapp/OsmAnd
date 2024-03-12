@@ -1671,11 +1671,11 @@
     <string name="poi_ascent">Nousu</string>
     <string name="poi_descent">Lasku</string>
     <string name="poi_direction">Suunta</string>
-    <string name="poi_nfs_recreation_area_activity_fishing">Kalastus</string>
-    <string name="poi_nfs_recreation_area_activity_ice_fishing">Pilkkiminen</string>
-    <string name="poi_nfs_recreation_area_activity_lake_and_pond_fishing">Järvi ja lampi kalastus</string>
-    <string name="poi_nfs_recreation_area_activity_river_and_stream_fishing">Joki- ja purokalastus</string>
-    <string name="poi_nfs_recreation_area_activity_salt_water_fishing">Kalastus suolavedessä</string>
+    <string name="poi_us_maps_recreation_area_activity_fishing">Kalastus</string>
+    <string name="poi_us_maps_recreation_area_activity_ice_fishing">Pilkkiminen</string>
+    <string name="poi_us_maps_recreation_area_activity_lake_and_pond_fishing">Järvi ja lampi kalastus</string>
+    <string name="poi_us_maps_recreation_area_activity_river_and_stream_fishing">Joki- ja purokalastus</string>
+    <string name="poi_us_maps_recreation_area_activity_salt_water_fishing">Kalastus suolavedessä</string>
     <string name="poi_parking_fee_no">Ei</string>
     <string name="poi_recreation_center">Virkistyskeskus</string>
     <string name="poi_counselling_type_rehabilitation_no">Neuvonta (kuntoutus): ei</string>

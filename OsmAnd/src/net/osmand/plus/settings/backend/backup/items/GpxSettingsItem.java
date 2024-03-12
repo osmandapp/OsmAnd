@@ -153,6 +153,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile, @Nullable String entryName) throws IOException, IllegalArgumentException {
 				super.readFromStream(inputStream, inputFile, entryName);
+
 				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 				if (selectedGpxFile != null) {
@@ -160,6 +161,10 @@ public class GpxSettingsItem extends FileSettingsItem {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
 					gpxHelper.selectGpxFile(gpxFile, params);
+				}
+				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
+				if (!gpxDbHelper.hasItem(file)) {
+					gpxDbHelper.add(new GpxDataItem(app, file));
 				}
 			}
 		};

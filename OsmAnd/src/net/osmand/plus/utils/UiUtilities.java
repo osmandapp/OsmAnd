@@ -169,6 +169,11 @@ public class UiUtilities {
 		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
+	public static void setupListItemBackground(@NonNull Context context, @NonNull View view, @ColorInt int color) {
+		Drawable background = getColoredSelectableDrawable(context, color, 0.3f);
+		AndroidUtils.setBackground(view, background);
+	}
+
 	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
 		int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, alpha);
 		return getColoredSelectableDrawable(ctx, colorWithAlpha);

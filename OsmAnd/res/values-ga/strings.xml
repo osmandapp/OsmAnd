@@ -10,7 +10,7 @@
     <string name="free_favorites_backup_description">Cláraigh ar Scamall OsmAnd chun cúltaca do na ceanáin agus na socruithe a fháil saor in aisce.</string>
     <string name="weather_wind_kilimeters_per_hour">Ciliméadair san uair</string>
     <string name="lang_pnb">Puinseáibis</string>
-    <string name="cloud_trash_clear_confirmation">An bhfuil tú cinnte gach rud sa bhosca bruscair a scriosadh go buan? Ní féidir dul siar air.</string>
+    <string name="cloud_trash_clear_confirmation">Scrios gach rud sa bhosca bruscair go buan?</string>
     <string name="north">tuaisceart</string>
     <string name="info_button">Eolas</string>
     <string name="new_file">Comhad nua</string>
@@ -565,9 +565,7 @@
     <string name="expired">As feidhm</string>
     <string name="shared_string_search">Cuardaigh</string>
     <string name="shared_string_complete">déanta</string>
-    <string name="delete_trash_item_confirmation_desc">Scriosfar \"%1$s\" go buan. An bhfuil tú cinnte?
-\n
-\nNí féidir leat dul siar ar an ngníomh seo.</string>
+    <string name="delete_trash_item_confirmation_desc">Scrios \"%1$s\" go buan?</string>
     <string name="external_device_details_battery">Cadhnra</string>
     <string name="map_widget_ant_bicycle_power">Cumhacht rothar</string>
     <string name="daily">Laethúil</string>
@@ -829,7 +827,7 @@
     <string name="shared_string_purchased">Ceannaithe</string>
     <string name="rendering_attr_noPolygons_name">Polagáin</string>
     <string name="shared_string_next">Ar aghaidh</string>
-    <string name="discard_filter_changes_prompt">An bhfuil tú cinnte gur mian leat gach scagaire a athshocrú?</string>
+    <string name="discard_filter_changes_prompt">Athshocraigh gach scagaire?</string>
     <string name="rendering_attr_horse_scale_difficult_name">An-deacair</string>
     <string name="show_lanes">Lánaí</string>
     <string name="icon_group_amenity">Áis</string>
@@ -1038,7 +1036,7 @@
     <string name="sort_country_name_descending">Ainm tíre: Z – A</string>
     <string name="icon_group_service">Seirbhís</string>
     <string name="foot">ft</string>
-    <string name="delete_map_description">An bhfuil tú cinnte gur mian leat an léarscáil %1$s a scriosadh?</string>
+    <string name="delete_map_description">Scrios an léarscáil %1$s?</string>
     <string name="user_password">Pasfhocal</string>
     <string name="shared_string_used">Úsáidte</string>
     <string name="app_mode_moped">Móipéid</string>
@@ -1774,7 +1772,7 @@
     <string name="group_deleted">Scriosadh an grúpa</string>
     <string name="route_calculation">Ríomh an bhealaigh</string>
     <string name="rendering_attr_showLightRailRoutes_name">Línte iarnróid éadroma</string>
-    <string name="edit_filter">Cuir catagóirí in eagar</string>
+    <string name="edit_filter">Cuir scagaire in eagar</string>
     <string name="free_settings_backup">Cúltaca na socruithe saor in aisce</string>
     <string name="altitude_range">Raon na hairde</string>
     <string name="map_widget_intermediate_distance">Ceann scríbe idirmheánach</string>
@@ -1971,7 +1969,7 @@
     <string name="wikivoyage_travel_guide">Treoirleabhair thaistil</string>
     <string name="shared_string_add_photo">Cuir grianghraf leis</string>
     <string name="register_opr_create_new_account">Cruthaigh cuntas nua</string>
-    <string name="remove_type_q">An bhfuil tú cinnte gur mian leat an cineál \"%1$s\" a bhaint?</string>
+    <string name="remove_type_q">Bain an cineál \"%1$s\"?</string>
     <string name="shared_string_search_history">Stair chuardaigh</string>
     <string name="shared_string_action">Gníomh</string>
     <string name="rendering_attr_weatherTempContours_name">Isilínte teochta</string>
@@ -2008,7 +2006,7 @@
     <string name="on_pause">Ar sos</string>
     <string name="verification_code_missing_description">Tá seans go dtógfaidh sé 10 nóiméad. Bain úsáid as an gcnaipe thíos muna bhfuil sé i d\'fhillteán turscair.</string>
     <string name="routing_engine_vehicle_type_racingbike">Rothar rásaíochta</string>
-    <string name="key_is_already_assigned_error">Tá an eochair \"%1$s\" sannta go gníomh eile cheana: \"%2$s\"</string>
+    <string name="key_is_already_assigned_error">Tá an eochair \"%1$s\" sannta cheana don ghníomh: \"%2$s\"</string>
     <string name="select_folder">Roghnaigh fillteán</string>
     <string name="cloud_email_not_registered">Níor an seoladh r-phoist cláraithe do Scamall OsmAnd</string>
     <string name="track_has_no_altitude">Níl aon sonraí airde ag an gconair seo.</string>
@@ -2096,4 +2094,127 @@
     <string name="no_purchases">Níl aon cheannacháin agat</string>
     <string name="unlimited_downloads">Íoslódálacha gan teorainn</string>
     <string name="upload_to_openstreetmap">Uaslódáil go hOpenStreetMap</string>
+    <string name="rendering_attr_padusDisplayMode_description">De réir cineál rochtana nó ainm an bhainisteora</string>
+    <string name="rendering_value_access_name">De réir cineál rochtana</string>
+    <string name="rendering_value_managerName_name">De réir ainm an bhainisteora</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Folaigh teorainneacha na talún poiblí</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Folaigh teorainneacha na talún poiblí ach fág na limistéir</string>
+    <string name="shared_string_speedometer">Luasmhéadar</string>
+    <string name="custom_map_button_name_present">Tá an cnaipe seo ann cheana féin</string>
+    <string name="dont_ask_anymore">Ná fiafraigh níos mó</string>
+    <string name="complex_widget_alert">Ní féidir an ghiuirléid %1$s a chur ach ina ró féin.</string>
+    <string name="shared_string_road_maps">Léarscáileanna bóithre</string>
+    <string name="map_widget_sun_position_desc">Taispeánann sé an t-am go dtí an chéad éirí nó luí na gréine eile.</string>
+    <string name="map_widget_sun_position">Suíomh na gréine</string>
+    <string name="max_sensor_heartrate">Ráta an chroí, uasta</string>
+    <string name="max_sensor_bycicle_power">Cumhachta rothair, uasta</string>
+    <string name="avg_sensor_bycicle_power">Cumhacht rothair, meán</string>
+    <string name="max_sensor_temperature">Teocht, uasta</string>
+    <string name="zoom_non_animated">Zúm neamhbheochana</string>
+    <string name="target_elevation">Airde na sprice</string>
+    <string name="shared_string_eta">Am teachta measta</string>
+    <string name="add_row">Cuir ró leis</string>
+    <string name="help_article_setup_a_route_name">Cruthaigh bealach</string>
+    <string name="wheel_circumference">Imlíne an rotha</string>
+    <string name="rendering_value_caiScale_description">Club Alpino Italiano (Club Iodálach na nAlp)</string>
+    <string name="routing_attr_hazmat_category_usa_3_name">Leachtanna Inlasta</string>
+    <string name="routing_attr_hazmat_category_usa_4_name">Leachtanna Soladacha</string>
+    <string name="routing_attr_hazmat_category_usa_8_name">Substaint Chreimneach</string>
+    <string name="dangerous_goods_description">Ar bóithre agus tolláin éagsúla, ní cheadaítear ábhar contúirteach a iompar.</string>
+    <string name="routing_attr_allow_via_ferrata_name">Bealach sléibhe (Via ferrata)</string>
+    <string name="osmand_cloud_delete_account_confirmation">Scrios an cuntas?</string>
+    <string name="delete_account">Scrios an cuntas</string>
+    <string name="delete_track_folder_dialog_message">Scriosfar an fillteán \"%1$s\" agus gach bealach (%2$s) atá san áireamh.</string>
+    <string name="ant_plus_nothing_found_description">Déan cinnte go bhfuil:
+\n– Bluetooth casta ann
+\n– An braiteoir cumasaithe
+\n– An gléas seo in aice leis an mbraiteoir</string>
+    <string name="ant_plus_bluetooth_off">Tá Bluetooth casta as</string>
+    <string name="ant_plus_bluetooth_off_description">Cas ar Bluetooth chun braiteoirí a aimsiú agus a phéireáil.</string>
+    <string name="ant_plus_searching_text_description">Le do thoil, cuir an gléas in aice leis an mbraiteoir. Caithfidh tú an braiteoir a chumasú sa chaoi is go mbeidh OsmAnd in ann é a aimsiú.</string>
+    <string name="local_version_do_not_exist">Níl aon leagan áitiúil ann.</string>
+    <string name="shared_string_link">Nasc</string>
+    <string name="shared_string_author">Údar</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="avg_sensor_temperature">Teocht, meán</string>
+    <string name="max_sensor_speed">Luas an bhraiteora, uasta</string>
+    <string name="battery_optimization_settings">Socruithe optamú an chadhnra</string>
+    <string name="battery_optimization">Optamú an chadhnra</string>
+    <string name="rendering_attr_showToll_name">Taispeáin srianta dola</string>
+    <string name="rendering_attr_showToll_description">Taispeáin srianta dola ar na bóithre</string>
+    <string name="discard_changes_prompt">Faigh réidh leis na hathruithe?</string>
+    <string name="speed_limit_warning">Rabhadh luasteorann</string>
+    <string name="shared_string_limit">Teorainn</string>
+    <string name="speedometer_description">Taispeánann sé do luas reatha de réir an GPS</string>
+    <string name="add_button">Cuir cnaipe leis</string>
+    <string name="custom_buttons">Cnaipí saincheaptha</string>
+    <string name="default_buttons">Cnaipí réamhshocraithe</string>
+    <string name="sorted_sufolders_toast">Sórtáiltear na fo-fhillteáin i \"%1$s\" de réir: \"%2$s\"</string>
+    <string name="shared_string_activity">Gníomhaíocht</string>
+    <string name="shared_string_keywords">Eochairfhocail</string>
+    <string name="shared_string_additional">Breise</string>
+    <string name="previous_row_has_complex_widget">Tá giuirléid chasta sa ró roimhe seo</string>
+    <string name="shared_string_next_event">An chéad imeacht eile</string>
+    <string name="avg_sensor_heartrate">Ráta an chroí, meán</string>
+    <string name="avg_sensor_speed">Luas an bhraiteora, meán</string>
+    <string name="shared_string_reassign">Athshann</string>
+    <string name="topography_maps">Léarscáileanna topagrafaíochta</string>
+    <string name="see_all_plans">Féach ar gach plean</string>
+    <string name="remove_widget_first">Le do thoil, bain an ghiuirléid ar dtús</string>
+    <string name="row_number">Ró a %1$s</string>
+    <string name="routing_attr_hazmat_category_usa_7_name">Substaint Radaighníomhach</string>
+    <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
+    <string name="routing_attr_hazmat_category_usa_6_name">Substaint Thocsaineach agus Tógálach</string>
+    <string name="calculate_offline">Áirigh as líne</string>
+    <string name="there_are_no_connected_sensors_of_this_type">Níl aon bhraiteoir den chineál seo ceangailte</string>
+    <string name="search_track_by_name">Cuardaigh bealach de réir an ainm</string>
+    <string name="file_already_exists_description">\"%1$s\". Tá comhad ann cheana leis an t-ainm sin. Athscríobhfar gach athrú a rinneadh leis an leagan reatha.</string>
+    <string name="nav_profile_confirm_delete">Scrios \"%1$s\"?</string>
+    <string name="cloud_version_confirm_delete">Scrios \"%1$s\" ó Scamall OsmAnd?</string>
+    <string name="add_new_button">Cuir cnaipe nua leis</string>
+    <string name="zoom_animated">Zúm beochana</string>
+    <string name="free_ride">Aistear saor</string>
+    <string name="osmand_cloud_deleted_account_descr">Scriosadh an cuntas agus gach sonraí ó Scamall OsmAnd.</string>
+    <string name="osmand_cloud_deleting_account_descr">I gceann cúpla nóiméad, scriosfar do chuntas agus na sonraí uilig ó Scamall OsmAnd.
+\n
+\nBeidh na sonraí atá ar an ngléas fós ann.</string>
+    <string name="osmand_cloud_delete_account_confirmation_descr">Scrios an cuntas Scamall OsmAnd?
+\n
+\nNí féidir dul ar ais ar an ngníomh seo.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Ní chuirfear do shíntiús OsmAnd Pro ar ceal.</string>
+    <string name="manage_subscriptions">Bainistigh na síntiúis.</string>
+    <string name="deleting_complete">Tá an scrios críocnaithe</string>
+    <string name="delete_account_warning">Scrios an cuntas %1$s?</string>
+    <string name="backup_error_delete_account_email_match">Ní an r-phost agus an t-ainm úsáideora ag teacht le chéile</string>
+    <string name="verify_account_deletion_descr">Caithfidh muid do chuntas a dheimhnigh sula scriosfar é.
+\n
+\nLe do thoil, cuir isteach an seoladh r-phoist a d\'úsáid tú chun clárú. Seolfar chugat pasfhocal aonuaire leis an gcéad céim eile.</string>
+    <string name="delete_folder_question">Scrios an fillteán?</string>
+    <string name="delete_folder">Scrios an fillteán</string>
+    <string name="show_all_tracks_on_the_map">Taispeáin gach bealach ar an léarscáil</string>
+    <string name="tracks_empty_folder_description">Níl aon bhealach san fhillteán seo go fóill.</string>
+    <string name="tracks_empty_folder">Fillteán folamh</string>
+    <string name="visible_in_3d_mode">Infheicthe sa mhodh 3T</string>
+    <string name="map_3d_mode_description">Cuir dhá mhéar ar an léarscáil agus bog iad suas agus síos chun claonadh na léarscáil a athrú.</string>
+    <string name="no_bt_permission">Níor tugadh cead Bluetooth a úsáid</string>
+    <string name="ant_plus_help_title">Níl a fhios agam cén cineál braiteoir atá agam</string>
+    <string name="sort_subfolders">Sórtáil fo-fhillteáin</string>
+    <string name="download_to_device">Íoslódáil ar an ngléas</string>
+    <string name="shared_string_extensions">Breiseáin</string>
+    <string name="shared_string_license">Ceadúnas</string>
+    <string name="with_waypoints">Le treoirphointí</string>
+    <string name="routing_attr_hazmat_category_usa_5_name">Ocsaídeoirí agus Sárocsaídí Orgánacha</string>
+    <string name="folder_export_empty_error">Níl aon rud le heaspórtáil, tá an fillteán folamh</string>
+    <string name="action_cannot_be_undone">Ní féidir dul ar ais ar an ngníomh seo.</string>
+    <string name="error_calculate">Tá toradh an áirimh folamh</string>
+    <string name="app_mode_baby_transport">Naíchóiste</string>
+    <string name="copy_build_version">Cóipeáil an leagan</string>
+    <string name="learn_more_about_sensors_link">Foghlaim tuilleadh faoi braiteoirí.</string>
+    <string name="telegram_chats_descr">Glac páirt inár gcomhráite áitiúla ar Telegram.</string>
+    <string name="common_weight_limit_error">Is é \"%1$s\" %2$s an t-íosluach. Bain úsáid as an bpróifíl \"%3$s\" má tá meachán na feithicle níos lú ná an t-íosluach.</string>
+    <string name="write_bearing">Scríobh an treo-uillinn</string>
+    <string name="free_account">Cuntas saor in aisce</string>
+    <string name="dangerous_goods">Earraí contúirteacha</string>
+    <string name="may_be_used_if_there_is_shortcut">Is féidir a úsáid má tá aicearra ann</string>
+    <string name="shared_string_copyright">Cóipcheart</string>
 </resources>

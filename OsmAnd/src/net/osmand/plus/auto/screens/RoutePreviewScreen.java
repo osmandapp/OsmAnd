@@ -1,6 +1,7 @@
 package net.osmand.plus.auto.screens;
 
-import android.os.AsyncTask;
+import static net.osmand.search.core.ObjectType.GPX_TRACK;
+
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,6 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
-import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
@@ -55,7 +55,6 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	@Nullable
 	private GPXFile routeGpxFile;
 
-	private LoadTracksTask loadTracksTask;
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
 		@Override
@@ -80,22 +79,8 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		calculating = true;
 	}
 
-	private class LoadTracksTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... voids) {
-			prepareRoute();
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void unused) {
-			super.onPostExecute(unused);
-			invalidate();
-		}
-	}
-
-	private void prepareRoute(){
-		if (searchResult.objectType == ObjectType.GPX_TRACK) {
+	private void prepareRoute() {
+		if (searchResult.objectType == GPX_TRACK) {
 			GPXInfo gpxInfo = ((GPXInfo) searchResult.relatedObject);
 			File file = gpxInfo.getFile();
 			SelectedGpxFile selectedGpxFile = getApp().getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath());
@@ -110,20 +95,21 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		} else {
 			getApp().getOsmandMap().getMapLayers().getMapActionsHelper().replaceDestination(
 					searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
+			invalidate();
 		}
 	}
 
 	private void buildRouteByGivenGpx(@NonNull GPXFile gpxFile) {
 		routeGpxFile = gpxFile;
 		getApp().getOsmandMap().getMapLayers().getMapActionsHelper().buildRouteByGivenGpx(gpxFile);
+		invalidate();
 	}
 
 	@Override
 	public void onCreate(@NonNull LifecycleOwner owner) {
 		getApp().getRoutingHelper().addListener(this);
 		getApp().getTargetPointsHelper().addListener(stateChangedListener);
-		loadTracksTask = new LoadTracksTask();
-		loadTracksTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		prepareRoute();
 	}
 
 	@Override

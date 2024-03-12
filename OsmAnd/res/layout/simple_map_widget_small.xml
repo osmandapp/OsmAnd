@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
+	android:layout_height="match_parent"
 	android:minHeight="@dimen/simple_widget_small_height"
 	android:orientation="vertical">
 
@@ -38,7 +38,8 @@
 			osmand:layout_constraintBottom_toBottomOf="parent"
 			osmand:layout_constraintEnd_toEndOf="parent"
 			osmand:layout_constraintStart_toStartOf="parent"
-			osmand:layout_constraintTop_toTopOf="parent" />
+			osmand:layout_constraintTop_toTopOf="parent"
+			tools:text="Value" />
 
 		<LinearLayout
 			android:id="@+id/linearLayout"

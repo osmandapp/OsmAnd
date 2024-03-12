@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/stroke">
+		<shape android:shape="rectangle">
+			<solid android:color="@color/map_alert_stroke_light" />
+			<corners android:radius="8dp" />
+		</shape>
+	</item>
+	<item
+		android:id="@+id/background"
+		android:bottom="3dp"
+		android:left="3dp"
+		android:right="3dp"
+		android:top="3dp">
+		<shape android:shape="rectangle">
+			<solid android:color="@color/widget_background_color_light" />
+			<corners android:radius="7dp" />
+		</shape>
+	</item>
+</layer-list>

@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.configure.dialogs.cards;
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.controllers.MapFocusDialogController;
 import net.osmand.plus.settings.enums.MapFocus;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.DistanceByTapFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.SpeedometerSettingsFragment;
 
 public class ConfigureOtherCard extends MapBaseCard {
 
@@ -35,6 +37,7 @@ public class ConfigureOtherCard extends MapBaseCard {
 		ApplicationMode appMode = settings.getApplicationMode();
 		setupDisplayPositionButton(appMode);
 		setupDistanceRulerButton(appMode);
+		setupSpeedometerButton(appMode);
 
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.description), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_divider), false);
@@ -59,6 +62,26 @@ public class ConfigureOtherCard extends MapBaseCard {
 		View button = view.findViewById(R.id.distance_by_tap_button);
 		button.setOnClickListener(v -> DistanceByTapFragment.showInstance(getMapActivity()));
 		ConfigureButtonsCard.setupButton(button, getString(R.string.map_widget_distance_by_tap), null, R.drawable.ic_action_ruler_line, enabled, nightMode);
+
+		TextView description = button.findViewById(R.id.items_count_descr);
+		description.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);
+		description.setTextSize(COMPLEX_UNIT_PX, app.getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
+
+		AndroidUiHelper.updateVisibility(description, true);
+	}
+
+	private void setupSpeedometerButton(@NonNull ApplicationMode appMode) {
+		boolean enabled = settings.SHOW_SPEEDOMETER.getModeValue(appMode);
+
+		String title = getString(R.string.shared_string_speedometer);
+		int iconId = nightMode ? R.drawable.widget_speed_night : R.drawable.widget_speed_day;
+
+		View button = view.findViewById(R.id.speedometer);
+		ConfigureButtonsCard.setupButton(button, title, null, 0, enabled, nightMode);
+		button.setOnClickListener(v -> SpeedometerSettingsFragment.showInstance(getMapActivity()));
+
+		ImageView imageView = button.findViewById(R.id.icon);
+		imageView.setImageDrawable(getIcon(iconId));
 
 		TextView description = button.findViewById(R.id.items_count_descr);
 		description.setText(enabled ? R.string.shared_string_on : R.string.shared_string_off);

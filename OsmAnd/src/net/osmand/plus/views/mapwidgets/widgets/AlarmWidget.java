@@ -1,6 +1,16 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import static android.util.TypedValue.COMPLEX_UNIT_PX;
+import static net.osmand.plus.routing.AlarmInfoType.BORDER_CONTROL;
+import static net.osmand.plus.routing.AlarmInfoType.HAZARD;
+import static net.osmand.plus.routing.AlarmInfoType.PEDESTRIAN;
+import static net.osmand.plus.routing.AlarmInfoType.RAILWAY;
+import static net.osmand.plus.routing.AlarmInfoType.SPEED_CAMERA;
+import static net.osmand.plus.routing.AlarmInfoType.SPEED_LIMIT;
+import static net.osmand.plus.routing.AlarmInfoType.STOP;
+import static net.osmand.plus.routing.AlarmInfoType.TOLL_BOOTH;
+import static net.osmand.plus.routing.AlarmInfoType.TRAFFIC_CALMING;
+import static net.osmand.plus.routing.AlarmInfoType.TUNNEL;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -20,7 +30,6 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -28,11 +37,12 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.util.Algorithms;
 
@@ -148,7 +158,7 @@ public class AlarmWidget {
 						if (layout != null && widgetText != null) {
 							widgetText.setText(cachedText);
 							Resources res = layout.getContext().getResources();
-							if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
+							if (alarm.getType() == SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
 								int topPadding = res.getDimensionPixelSize(R.dimen.map_alarm_text_top_padding);
 								widgetText.setPadding(0, topPadding, 0, 0);
 							} else {
@@ -163,7 +173,7 @@ public class AlarmWidget {
 						if (layout != null && widgetBottomText != null) {
 							widgetBottomText.setText(cachedBottomText);
 							Resources res = layout.getContext().getResources();
-							if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.isCanadianRegion) {
+							if (alarm.getType() == SPEED_LIMIT && info.isCanadianRegion) {
 								int bottomPadding = res.getDimensionPixelSize(R.dimen.map_button_margin);
 								widgetBottomText.setPadding(0, 0, 0, bottomPadding);
 								widgetBottomText.setTextSize(COMPLEX_UNIT_PX, res.getDimensionPixelSize(R.dimen.map_alarm_bottom_si_text_size));
@@ -221,7 +231,7 @@ public class AlarmWidget {
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() / 2f - ((textPaint.descent() + textPaint.ascent()) / 2);
-			if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
+			if (info.alarm.getType() == SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
 				y += WIDGET_BITMAP_TEXT_AMERICAN_SPEED_LIMIT_SHIFT_DP * density;
 			}
 			canvas.drawText(info.text, x, y, textPaint);
@@ -238,7 +248,7 @@ public class AlarmWidget {
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() - (textPaint.descent() - textPaint.ascent());
-			if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.isCanadianRegion) {
+			if (info.alarm.getType() == SPEED_LIMIT && info.isCanadianRegion) {
 				textPaint.setTextSize(WIDGET_BITMAP_BOTTOM_TEXT_SIZE_SMALL * density);
 			}
 			canvas.drawText(info.bottomText, x, y, textPaint);
@@ -258,7 +268,7 @@ public class AlarmWidget {
 		String text = "";
 		String bottomText = "";
 		boolean isCanadianRegion = region == DrivingRegion.CANADA;
-		if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT) {
+		if (alarm.getType() == SPEED_LIMIT) {
 			if (isCanadianRegion) {
 				locImgId = R.drawable.warnings_speed_limit_ca;
 				bottomText = settings.SPEED_SYSTEM.get().toShortString(settings.getContext());
@@ -266,29 +276,29 @@ public class AlarmWidget {
 				locImgId = R.drawable.warnings_speed_limit_us;
 				//else case is done by drawing red ring
 			}
-			text = alarm.getIntValue() + "";
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_CAMERA) {
+			text = String.valueOf(alarm.getIntValue());
+		} else if (alarm.getType() == SPEED_CAMERA) {
 			locImgId = R.drawable.warnings_speed_camera;
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.BORDER_CONTROL) {
+		} else if (alarm.getType() == BORDER_CONTROL) {
 			locImgId = R.drawable.warnings_border_control;
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.HAZARD) {
+		} else if (alarm.getType() == HAZARD) {
 			if (americanType) {
 				locImgId = R.drawable.warnings_hazard_us;
 			} else {
 				locImgId = R.drawable.warnings_hazard;
 			}
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.TOLL_BOOTH) {
+		} else if (alarm.getType() == TOLL_BOOTH) {
 			//image done by drawing red ring
 			text = "$";
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.TRAFFIC_CALMING) {
+		} else if (alarm.getType() == TRAFFIC_CALMING) {
 			if (americanType) {
 				locImgId = R.drawable.warnings_traffic_calming_us;
 			} else {
 				locImgId = R.drawable.warnings_traffic_calming;
 			}
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.STOP) {
+		} else if (alarm.getType() == STOP) {
 			locImgId = R.drawable.warnings_stop;
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.RAILWAY) {
+		} else if (alarm.getType() == RAILWAY) {
 			if (isCanadianRegion) {
 				locImgId = R.drawable.warnings_railways_ca;
 			} else if (americanType) {
@@ -296,13 +306,13 @@ public class AlarmWidget {
 			} else {
 				locImgId = R.drawable.warnings_railways;
 			}
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.PEDESTRIAN) {
+		} else if (alarm.getType() == PEDESTRIAN) {
 			if (americanType) {
 				locImgId = R.drawable.warnings_pedestrian_us;
 			} else {
 				locImgId = R.drawable.warnings_pedestrian;
 			}
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.TUNNEL) {
+		} else if (alarm.getType() == TUNNEL) {
 			if (americanType) {
 				locImgId = R.drawable.warnings_tunnel_us;
 			} else {
@@ -314,11 +324,11 @@ public class AlarmWidget {
 			bottomText = null;
 		}
 		boolean visible;
-		if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_CAMERA) {
+		if (alarm.getType() == SPEED_CAMERA) {
 			visible = cams;
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.PEDESTRIAN) {
+		} else if (alarm.getType() == PEDESTRIAN) {
 			visible = peds;
-		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.TUNNEL) {
+		} else if (alarm.getType() == TUNNEL) {
 			visible = tunnels;
 		} else {
 			visible = trafficWarnings;

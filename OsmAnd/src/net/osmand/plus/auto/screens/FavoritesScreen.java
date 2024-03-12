@@ -34,7 +34,7 @@ import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.search.core.ObjectType;
@@ -127,7 +127,7 @@ public final class FavoritesScreen extends BaseAndroidAutoScreen {
 			String title = point.getDisplayName(getApp());
 			int color = getApp().getFavoritesHelper().getColorWithCategory(point, ContextCompat.getColor(getApp(), R.color.color_favorite));
 			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
-					AndroidUtils.drawableToBitmap(PointImageDrawable.getFromFavorite(getApp(), color, false, point)))).build();
+					AndroidUtils.drawableToBitmap(PointImageUtils.getFromPoint(getApp(), color, false, point)))).build();
 			String description = point.getSpecialPointType() != null ? point.getDescription() : point.getCategory();
 			double dist = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					location.getLatitude(), location.getLongitude());

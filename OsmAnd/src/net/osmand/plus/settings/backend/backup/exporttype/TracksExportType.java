@@ -34,10 +34,10 @@ class TracksExportType extends AbstractFileExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		List<GpxDataItem> gpxItems = app.getGpxDbHelper().getItems();
 		List<File> files = new ArrayList<>();
-		for (GpxDataItem gpxItem : gpxItems) {
-			File file = gpxItem.getFile();
+		List<GpxDataItem> gpxItems = app.getGpxDbHelper().getItems();
+		for (GpxDataItem item : gpxItems) {
+			File file = item.getFile();
 			if (file.exists() && !file.isDirectory()) {
 				files.add(file);
 			}

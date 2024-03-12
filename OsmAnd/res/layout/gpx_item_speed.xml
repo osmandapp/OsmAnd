@@ -6,7 +6,7 @@
 	android:background="?attr/bg_color"
 	android:orientation="vertical">
 
-	<com.github.mikephil.charting.charts.LineChart
+	<com.github.mikephil.charting.charts.ElevationChart
 		android:id="@+id/chart"
 		android:layout_width="match_parent"
 		android:layout_height="150dp"

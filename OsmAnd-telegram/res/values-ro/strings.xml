@@ -124,7 +124,7 @@
     <string name="shared_string_map">Hartă</string>
     <string name="average_speed">Viteză medie</string>
     <string name="average_altitude">Altitudine medie</string>
-    <string name="shared_string_update">Actualizare</string>
+    <string name="shared_string_update">Actualizează</string>
     <string name="shared_string_appearance">Aspect</string>
     <string name="shared_string_ok">OK</string>
     <string name="altitude">Altitudine</string>
@@ -263,7 +263,7 @@
     <string name="share_location_as">Partajați locația ca</string>
     <string name="add_device">Adăugați un dispozitiv</string>
     <string name="shared_string_save">Salvează</string>
-    <string name="shared_string_disable">Dezactivați</string>
+    <string name="shared_string_disable">Dezactivează</string>
     <string name="no_internet_connection">Fără conectare la internet</string>
     <string name="no_gps_connection">Fără conexiune GPS</string>
     <string name="shared_string_status">Stare</string>
@@ -275,4 +275,8 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Eroare</string>
     <string name="send_live_location_error">Trimiteți o eroare de locație live: %1$s</string>
+    <string name="location_source_summary">În mod implicit, OsmAnd instalat din Google Play utilizează Serviciile Google Play pentru a determina locația.
+\n
+\nDacă obțineți informații inexacte despre locație sau dacă utilizați un dispozitiv fără Google Play Services, încercați să treceți la Android API</string>
+    <string name="location_source">Sursa locației</string>
 </resources>

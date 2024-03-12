@@ -28,7 +28,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		String prefId = preference.getKey();
 		if (settings.TURN_SCREEN_ON_TIME_INT.getId().equals(prefId) && preference instanceof ListPreferenceEx) {

@@ -55,7 +55,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		ROUNDED_SMALL(R.drawable.rectangle_rounded_small),
 		ROUNDED_LARGE(R.drawable.rectangle_rounded_large);
 
-		public int drawableId;
+		public final int drawableId;
 
 		ButtonBackground(int drawableId) {
 			this.drawableId = drawableId;

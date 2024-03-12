@@ -6,9 +6,13 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.plugins.osmedit.fragments.AdvancedEditPoiFragment;
 import net.osmand.plus.utils.UiUtilities;
+
+import org.apache.commons.logging.Log;
 
 import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 
@@ -71,6 +75,8 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 		clearButton.setImageDrawable(clearIcon);
 		clearButton.setContentDescription(getContext().getString(R.string.shared_string_clear));
 	}
+
+	private static final Log LOG = PlatformUtil.getLog(AdvancedEditPoiFragment.class);
 
 	public void hideClearButton() {
 		AndroidUiHelper.updateVisibility(clearButton, false);

@@ -2,6 +2,8 @@ package net.osmand.data;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.gpx.GPXUtilities;
 
 public class WptLocationPoint implements LocationPoint {
@@ -32,7 +34,7 @@ public class WptLocationPoint implements LocationPoint {
 		return pt.isVisible();
 	}
 
-	public PointDescription getPointDescription(Context ctx) {
+	public PointDescription getPointDescription(@NonNull Context ctx) {
 		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.name);
 	}
 

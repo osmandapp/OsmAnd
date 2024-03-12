@@ -91,7 +91,7 @@ public class ListStringPreference extends StringPreference {
 			if (listAsString.contains(delimiter)) {
 				return Arrays.asList(listAsString.split(delimiter));
 			} else {
-				return new ArrayList<String>(Collections.singleton(listAsString));
+				return new ArrayList<>(Collections.singleton(listAsString));
 			}
 		}
 		return null;

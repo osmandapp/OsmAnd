@@ -28,8 +28,10 @@ public class GeneralRouter implements VehicleRouter {
 	private static final float CAR_SHORTEST_DEFAULT_SPEED = 55/3.6f;
 	private static final float BICYCLE_SHORTEST_DEFAULT_SPEED = 15/3.6f;
 	public static int IMPASSABLE_ROAD_SHIFT = 0; // 6 is better
+	
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String USE_HEIGHT_OBSTACLES = "height_obstacles";
+	public static final String GROUP_RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
 	public static final String AVOID_MOTORWAY = "avoid_motorway";
@@ -54,6 +56,7 @@ public class GeneralRouter implements VehicleRouter {
 	private static boolean USE_CACHE = true;
 	public static long TIMER = 0;
 
+	private final GeneralRouter root; 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters;
@@ -135,7 +138,9 @@ public class GeneralRouter implements VehicleRouter {
 		SYMBOLIC
 	}
 	
-	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
+	public GeneralRouter(GeneralRouter copy, Map<String, String> params) {
+		this.root = copy.root;
+		GeneralRouter parent = root;
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
@@ -186,6 +191,7 @@ public class GeneralRouter implements VehicleRouter {
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
 		this.profile = profile;
+		this.root = this;
 		this.attributes = new LinkedHashMap<String, String>();
 		this.parameterValues = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();

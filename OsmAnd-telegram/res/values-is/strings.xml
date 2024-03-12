@@ -275,4 +275,8 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s - %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">Villa</string>
+    <string name="location_source">Uppruni staðsetningar</string>
+    <string name="location_source_summary">Sjálfgefið mun OsmAnd sem sett er upp úr Google Play nota Google Play þjónustur til að ákvarða staðsetningu.
+\n
+\nEf þú færð ónákvæmar upplýsingar um staðsetningu eða ert að nota tæki án Google Play þjónustna, skaltu prófa að skipta yfir í Android API</string>
 </resources>

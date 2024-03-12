@@ -412,14 +412,6 @@ public class ApplicationMode {
 		}
 	}
 
-	public List<String> getCustomIconColors() {
-		return app.getSettings().CUSTOM_ICON_COLORS.getStringsListForProfile(this);
-	}
-
-	public void setCustomIconColors(List<String> customColors) {
-		app.getSettings().CUSTOM_ICON_COLORS.setModeValues(this, customColors);
-	}
-
 	public Integer getCustomIconColor() {
 		try {
 			String customColor = app.getSettings().CUSTOM_ICON_COLOR.getModeValue(this);
@@ -525,7 +517,10 @@ public class ApplicationMode {
 
 	private static void updateAppModesOrder() {
 		for (int i = 0; i < values.size(); i++) {
-			values.get(i).setOrder(i);
+			ApplicationMode mode = values.get(i);
+			if (mode.getOrder() != i) {
+				mode.setOrder(i);
+			}
 		}
 	}
 

@@ -2527,7 +2527,7 @@
     <string name="min_km">min/km</string>
     <string name="shared_string_contents">Innhold</string>
     <string name="share_geo">geo:</string>
-    <string name="nm">nmi</string>
+    <string name="nm">sjømil</string>
     <string name="nm_h">kn</string>
     <string name="min_mile">min/m</string>
     <string name="poi_filter_nominatim">Nettbasert Nominatim</string>
@@ -4412,7 +4412,7 @@
     <string name="import_tracks_descr">%1$s, inneholder %2$s separate spor. Velg spor å importere.</string>
     <string name="android_api">Android-API</string>
     <string name="google_play_services">Google Play-tjenester</string>
-    <string name="location_source">Posisjoneringskilde</string>
+    <string name="location_source">Stedsplasseringskilde</string>
     <string name="location_source_descr">Som forvalg bruker OsmAnd installert fra Google Play, %1$s for å fastsette posisjon.
 \n
 \nHvis du får upresis posisjonsinfo eller bruker en enhet uten %2$s, kan du prøve å bytte til «%3$s».</string>

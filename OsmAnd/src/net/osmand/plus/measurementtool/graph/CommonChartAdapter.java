@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -28,7 +28,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
+public class CommonChartAdapter extends BaseChartAdapter<ElevationChart, LineData, GpxDisplayItem> {
 
 	private Highlight highlight;
 	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
@@ -36,7 +36,7 @@ public class CommonChartAdapter extends BaseChartAdapter<LineChart, LineData, Gp
 
 	private GPXTabItemType gpxGraphType;
 
-	public CommonChartAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
+	public CommonChartAdapter(OsmandApplication app, ElevationChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 

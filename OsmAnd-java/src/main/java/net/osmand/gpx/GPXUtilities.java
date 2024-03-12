@@ -95,7 +95,9 @@ public class GPXUtilities {
 		put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
 		put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
 		put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
-		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE);
+		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);
 	}};
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
@@ -1155,11 +1157,7 @@ public class GPXUtilities {
 			serializer.startTag(null, "extensions");
 			if (hasExtensions) {
 				for (Entry<String, String> entry : extensions.entrySet()) {
-					String key = entry.getKey().replace(":", "_-_");
-					if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
-						key = OSMAND_EXTENSIONS_PREFIX + key;
-					}
-					writeNotNullText(serializer, key, entry.getValue());
+					writeNotNullText(serializer, getOsmandTagKey(entry), entry.getValue());
 				}
 			}
 			if (additionalExtensionsWriter != null) {
@@ -1233,24 +1231,34 @@ public class GPXUtilities {
 					regularExtensions.put(entry.getKey(), entry.getValue());
 				}
 			}
-			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions));
-			wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions));
+			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions, true));
+			if (!Algorithms.isEmpty(gpxtpxExtensions)) {
+				wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions, false));
+			}
 		}
 	}
 
-	private static GPXUtilities.GPXExtensionsWriter createExtensionsWriter(final Map<String, String> extensions) {
+	private static GPXUtilities.GPXExtensionsWriter createExtensionsWriter(final Map<String, String> extensions, final boolean addOsmandPrefix) {
 		return new GPXExtensionsWriter() {
 			@Override
 			public void writeExtensions(XmlSerializer serializer) {
 				for (Entry<String, String> entry : extensions.entrySet()) {
 					try {
-						GPXUtilities.writeNotNullText(serializer, entry.getKey(), entry.getValue());
+						GPXUtilities.writeNotNullText(serializer, addOsmandPrefix ? getOsmandTagKey(entry) : entry.getKey(), entry.getValue());
 					} catch (IOException e) {
 						log.error(e);
 					}
 				}
 			}
 		};
+	}
+
+	private static String getOsmandTagKey(final Entry<String, String> entry) {
+		String key = entry.getKey().replace(":", "_-_");
+		if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
+			key = OSMAND_EXTENSIONS_PREFIX + key;
+		}
+		return key;
 	}
 
 	private static void writeAuthor(XmlSerializer serializer, Author author) throws IOException {
@@ -1268,7 +1276,7 @@ public class GPXUtilities {
 	}
 
 	private static void writeCopyright(XmlSerializer serializer, Copyright copyright) throws IOException {
-		if(copyright.author != null) {
+		if (copyright.author != null) {
 			serializer.attribute(null, "author", copyright.author);
 		}
 		writeNotNullText(serializer, "year", copyright.year);

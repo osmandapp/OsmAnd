@@ -30,7 +30,7 @@
                 android:background="?attr/bg_dash_line" />
 
             <include android:id="@+id/header_container"
-                layout="@layout/bottom_sheet_item_with_two_text" />
+                layout="@layout/bottom_sheet_sticky_header_with_selector" />
 
         </LinearLayout>
 

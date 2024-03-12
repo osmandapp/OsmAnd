@@ -94,7 +94,7 @@ public class TargetPointsHelper {
 		}
 
 		@SuppressLint("StringFormatInvalid")
-		public PointDescription getPointDescription(Context ctx) {
+		public PointDescription getPointDescription(@NonNull Context ctx) {
 			if (!intermediate) {
 				return new PointDescription(PointDescription.POINT_TYPE_TARGET, ctx.getString(R.string.destination_point, ""),
 						getOnlyName());

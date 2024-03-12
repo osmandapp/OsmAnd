@@ -275,4 +275,8 @@
     <string name="si_nm_h">Mil bahari per jam (knot)</string>
     <string name="live_now">Langsung sekarang</string>
     <string name="timeline">Linimasa</string>
+    <string name="location_source">Sumber lokasi</string>
+    <string name="location_source_summary">Secara bawaan, OsmAnd terpasang dari Google Play menggunakan Layanan Google Play untuk menentukan lokasi.
+\n
+\nJika Anda mendapatkan informasi lokasi yang tidak akurat atau menggunakan perangkat tanpa Layanan Google Play, cobalah ganti ke API Android</string>
 </resources>

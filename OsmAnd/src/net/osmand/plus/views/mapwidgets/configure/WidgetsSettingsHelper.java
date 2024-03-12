@@ -20,7 +20,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
-import net.osmand.plus.views.mapwidgets.configure.buttons.CompassButtonState;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.util.Algorithms;
 
@@ -187,9 +186,13 @@ public class WidgetsSettingsHelper {
 		List<WidgetsPanel> panels = Collections.singletonList(panel);
 		Set<MapWidgetInfo> widgetInfos = widgetRegistry.getWidgetsForPanel(mapActivity, appMode, MATCHING_PANELS_MODE, panels);
 		for (MapWidgetInfo widgetInfo : widgetInfos) {
-			// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
-			Boolean enabled = isOriginalWidgetOnAnotherPanel(widgetInfo) ? false : null;
-			widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, enabled, false);
+			if (WidgetType.isOriginalWidget(widgetInfo.key) && WidgetsAvailabilityHelper.isWidgetVisibleByDefault(app, widgetInfo.key, appMode)) {
+				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, true, false);
+			} else {
+				// Disable "false" (not reset "null"), because visible by default widget should be disabled in non-default panel
+				Boolean enabled = isOriginalWidgetOnAnotherPanel(widgetInfo) ? false : null;
+				widgetRegistry.enableDisableWidgetForMode(appMode, widgetInfo, enabled, false);
+			}
 		}
 		panel.getOrderPreference(settings).resetModeToDefault(appMode);
 	}

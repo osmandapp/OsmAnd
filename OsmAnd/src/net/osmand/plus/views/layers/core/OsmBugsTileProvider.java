@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers.core;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 
@@ -29,14 +31,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.plugins.osmedit.OsmBugsLayer;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.TileBoxRequest;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
-
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 
@@ -93,7 +94,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 					iconId = R.drawable.mx_special_symbol_check_mark;
 					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
-				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, backgroundColorRes), true, false, iconId,
 						BACKGROUND_TYPE);
 				bitmap = pointImageDrawable.getBigMergedBitmap(textScale, false);
@@ -104,7 +105,7 @@ public class OsmBugsTileProvider extends interface_MapTiledCollectionProvider {
 				} else {
 					backgroundColorRes = R.color.osm_bug_resolved_icon_color;
 				}
-				PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+				PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 						ContextCompat.getColor(ctx, backgroundColorRes), true,
 						false, DEFAULT_UI_ICON_ID, BACKGROUND_TYPE);
 				bitmap = pointImageDrawable.getSmallMergedBitmap(textScale);

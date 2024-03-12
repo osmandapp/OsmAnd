@@ -27,7 +27,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -158,7 +158,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 			color = ContextCompat.getColor(app, R.color.gpx_color_point);
 		}
 		ImageView icon = view.findViewById(R.id.icon);
-		icon.setImageDrawable(PointImageDrawable.getFromWpt(app, color, false, point));
+		icon.setImageDrawable(PointImageUtils.getFromPoint(app, color, false, point));
 
 		setupLocationData(viewCache, view, point);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.list_divider), childPosition != 0);

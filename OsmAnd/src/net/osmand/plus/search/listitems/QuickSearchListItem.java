@@ -36,7 +36,7 @@ import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -373,7 +373,7 @@ public class QuickSearchListItem {
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				int color = app.getFavoritesHelper().getColorWithCategory(fav, ContextCompat.getColor(app, R.color.color_favorite));
-				return PointImageDrawable.getFromFavorite(app, color, false, fav);
+				return PointImageUtils.getFromPoint(app, color, false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
 				color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
@@ -390,7 +390,7 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
-				return PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt);
+				return PointImageUtils.getFromPoint(app, wpt.getColor(), false, wpt);
 			case MAP_MARKER:
 				MapMarker marker = (MapMarker) searchResult.object;
 				if (!marker.history) {
