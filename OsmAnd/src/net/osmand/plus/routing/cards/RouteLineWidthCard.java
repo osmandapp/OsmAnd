@@ -173,14 +173,11 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 			tvCustomWidth.setText(widthKey);
 			slider.setValue(width);
 
-			slider.addOnChangeListener(new Slider.OnChangeListener() {
-				@Override
-				public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
-					if (fromUser) {
-						String newWidth = String.valueOf((int) value);
-						setRouteLineWidth(newWidth);
-						tvCustomWidth.setText(newWidth);
-					}
+			slider.addOnChangeListener((_slider, value, fromUser) -> {
+				if (fromUser) {
+					String newWidth = String.valueOf((int) value);
+					setRouteLineWidth(newWidth);
+					tvCustomWidth.setText(newWidth);
 				}
 			});
 
@@ -258,20 +255,17 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 			updateButtonBg(holder, item);
 			updateTextAndIconColor(holder, item);
 
-			holder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					int prevSelectedPosition = getItemPosition(selectedMode);
-					selectedMode = items.get(holder.getAdapterPosition());
-					notifyItemChanged(holder.getAdapterPosition());
-					notifyItemChanged(prevSelectedPosition);
+			holder.itemView.setOnClickListener(view -> {
+				int prevSelectedPosition = getItemPosition(selectedMode);
+				selectedMode = items.get(holder.getAdapterPosition());
+				notifyItemChanged(holder.getAdapterPosition());
+				notifyItemChanged(prevSelectedPosition);
 
-					if (selectedMode != WidthMode.CUSTOM) {
-						setRouteLineWidth(selectedMode.widthKey);
-					}
-					modeChanged();
-					notifyCardPressed();
+				if (selectedMode != WidthMode.CUSTOM) {
+					setRouteLineWidth(selectedMode.widthKey);
 				}
+				modeChanged();
+				notifyCardPressed();
 			});
 		}
 
