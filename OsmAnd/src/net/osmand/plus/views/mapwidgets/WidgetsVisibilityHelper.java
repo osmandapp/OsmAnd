@@ -1,7 +1,17 @@
 package net.osmand.plus.views.mapwidgets;
 
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
-import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.*;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.BACK_TO_LOCATION_BUTTON;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.BOTTOM_MENU_BUTTONS;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.COMPASS;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.DOWNLOAD_MAP_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.ELEVATION_PROFILE_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.FAB_BUTTON;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.SPEEDOMETER;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.TOP_BUTTONS;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.TOP_COORDINATES_WIDGET;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.VERTICAL_WIDGETS;
+import static net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper.VisibleElements.ZOOM_BUTTONS;
 
 import android.view.View;
 
@@ -28,6 +38,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 public class WidgetsVisibilityHelper {
@@ -186,7 +197,7 @@ public class WidgetsVisibilityHelper {
 				&& shouldShowElementOnActiveScreen(DOWNLOAD_MAP_WIDGET);
 	}
 
-	public boolean shouldShowSpeedometer(){
+	public boolean shouldShowSpeedometer() {
 		return shouldShowElementOnActiveScreen(SPEEDOMETER);
 	}
 
@@ -364,15 +375,14 @@ public class WidgetsVisibilityHelper {
 
 	private boolean shouldShowElementOnActiveScreen(VisibleElements element) {
 		for (VisibilityScreens screen : VisibilityScreens.values()) {
-			if (screen.isInMode(this)) {
-				boolean screenContainsElement = screen.elements.contains(element);
-				return screen.whiteList == screenContainsElement;
+			if (screen.isVisibleInMode(this)) {
+				return screen.elements.contains(element);
 			}
 		}
 		return true;
 	}
 
-	public enum VisibleElements{
+	public enum VisibleElements {
 		QUICK_ACTION_BUTTONS,
 		MAP_3D_BUTTON,
 		TOP_COORDINATES_WIDGET,
@@ -388,55 +398,38 @@ public class WidgetsVisibilityHelper {
 		SPEEDOMETER
 	}
 
-	public enum VisibilityScreens{
+	public enum VisibilityScreens {
 
-		WEATHER_FORECAST(true, ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON){
-			@Override
-			boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper) {
-				return visibilityHelper.isInWeatherForecastMode();
-			}
-		},
-		MEASUREMENT_MODE(true, ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, DOWNLOAD_MAP_WIDGET, TOP_BUTTONS, COMPASS){
-			@Override
-			boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper) {
-				return visibilityHelper.isInMeasurementToolMode();
-			}
-		},
-		PLAN_ROUTE_MODE(true, TOP_COORDINATES_WIDGET, DOWNLOAD_MAP_WIDGET){
-			@Override
-			boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper) {
-				return visibilityHelper.isInPlanRouteMode();
-			}
-		},
-		TRACK_APPEARANCE_MODE(true, DOWNLOAD_MAP_WIDGET){
-			@Override
-			boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper) {
-				return visibilityHelper.isInTrackAppearanceMode();
-			}
-		},
-		SELECTING_TILES_ZONE_MODE(true){
-			@Override
-			boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper) {
-				return visibilityHelper.isSelectingTilesZone();
-			}
-		},
-		GPS_FILTERING_MODE(true){
-			@Override
-			boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper) {
-				return visibilityHelper.isInGpsFilteringMode();
-			}
-		};
+		WEATHER_FORECAST(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON),
+		MEASUREMENT_MODE(ZOOM_BUTTONS, BACK_TO_LOCATION_BUTTON, DOWNLOAD_MAP_WIDGET, TOP_BUTTONS, COMPASS),
+		PLAN_ROUTE_MODE(TOP_COORDINATES_WIDGET, DOWNLOAD_MAP_WIDGET),
+		TRACK_APPEARANCE_MODE(DOWNLOAD_MAP_WIDGET),
+		SELECTING_TILES_ZONE_MODE(),
+		GPS_FILTERING_MODE();
 
 
-		public final boolean whiteList;
-		public final ArrayList<VisibleElements> elements = new ArrayList<>();
+		public final List<VisibleElements> elements = new ArrayList<>();
 
-		VisibilityScreens(boolean whiteList, VisibleElements... elements){
-			this.whiteList = whiteList;
+		VisibilityScreens(VisibleElements... elements) {
 			this.elements.addAll(Arrays.asList(elements));
 		}
 
-		abstract boolean isInMode(@NonNull WidgetsVisibilityHelper visibilityHelper);
+		boolean isVisibleInMode(@NonNull WidgetsVisibilityHelper helper) {
+			switch (this) {
+				case WEATHER_FORECAST:
+					return helper.isInWeatherForecastMode();
+				case MEASUREMENT_MODE:
+					return helper.isInMeasurementToolMode();
+				case PLAN_ROUTE_MODE:
+					return helper.isInPlanRouteMode();
+				case TRACK_APPEARANCE_MODE:
+					return helper.isInTrackAppearanceMode();
+				case SELECTING_TILES_ZONE_MODE:
+					return helper.isSelectingTilesZone();
+				case GPS_FILTERING_MODE:
+					return helper.isInGpsFilteringMode();
+			}
+			return true;
+		}
 	}
-
 }
