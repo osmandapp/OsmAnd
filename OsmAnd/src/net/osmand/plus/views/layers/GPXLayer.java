@@ -8,6 +8,7 @@ import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -53,6 +54,8 @@ import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.charts.TrackChartPoints;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -89,6 +92,7 @@ import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.Renderable;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -729,7 +733,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
 				String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
-				ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
+				ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, coloringTypeName);
 
 				if (!showArrows || coloringType.isRouteInfoAttribute()
 						|| !QuadRect.trivialOverlap(correctedQuadRect, calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
@@ -843,7 +847,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							} else {
 								color = disabledColor;
 							}
-							PointImageDrawable pointImageDrawable = PointImageDrawable.getFromWpt(getContext(), color,
+							PointImageDrawable pointImageDrawable = PointImageUtils.getFromPoint(getContext(), color,
 									true, wpt);
 							pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 							smallObjectsLatLon.add(new LatLon(wpt.lat, wpt.lon));
@@ -1065,10 +1069,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		PointImageDrawable pointImageDrawable;
 		boolean history = false;
 		if (marker != null) {
-			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(getContext(), pointColor, wpt);
+			pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(getContext(), pointColor, wpt);
 			history = marker.history;
 		} else {
-			pointImageDrawable = PointImageDrawable.getFromWpt(getContext(), pointColor, true, wpt);
+			pointImageDrawable = PointImageUtils.getFromPoint(getContext(), pointColor, true, wpt);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
@@ -1113,7 +1117,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		String gpxFilePath = selectedGpxFile.getGpxFile().path;
 		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
-		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
+		ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, coloringTypeName);
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
 
 		boolean visible = isGpxFileVisible(selectedGpxFile, tileBox);
@@ -1251,14 +1255,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		} else {
 			dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {
-				coloringType = ColoringType.getNonNullTrackColoringTypeByName(dataItem.getParameter(COLORING_TYPE));
+				coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, dataItem.getParameter(COLORING_TYPE));
 				routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getParameter(COLORING_TYPE));
 			}
 		}
 
 		if (coloringType == null) {
 			return defaultColoringType;
-		} else if (!coloringType.isAvailableInSubscription(app, routeInfoAttribute, false)) {
+		} else if (!isAvailableInSubscription(app, new ColoringStyle(coloringType, routeInfoAttribute))) {
 			return defaultColoringType;
 		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
 			return coloringType.getName(routeInfoAttribute);

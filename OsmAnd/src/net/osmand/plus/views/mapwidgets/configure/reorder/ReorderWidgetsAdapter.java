@@ -48,6 +48,8 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItemMoveCallback, ItemMovableCallback {
 
@@ -114,8 +116,23 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		this.actionsListener = actionsListener;
 	}
 
-	public void restorePage(int page, int position) {
-		reorderHelper.restorePage(page, position);
+	public void savePagedOrderInDataHolder(){
+		reorderHelper.savePagedOrderInDataHolder();
+	}
+
+	public TreeMap<Integer, List<String>> getPagedOrderFromAdapterItems() {
+		return reorderHelper.getPagedOrderFromAdapterItems();
+	}
+
+	public List<String> getFlatWidgetsList(Map<Integer, List<String>> pagedOrder) {
+		List<String> flatWidgetsList = new ArrayList<>();
+		for (Integer pageIndex : pagedOrder.keySet()) {
+			List<String> widgetsInPage = pagedOrder.get(pageIndex);
+			if (!Algorithms.isEmpty(widgetsInPage)) {
+				flatWidgetsList.addAll(widgetsInPage);
+			}
+		}
+		return flatWidgetsList;
 	}
 
 	@NonNull
@@ -290,7 +307,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 	}
 
 	private void deletePage(int position, int pageToDelete) {
-		reorderHelper.deletePage(position, pageToDelete);
+		reorderHelper.deletePage(position);
 		if (actionsListener != null) {
 			actionsListener.onPageDeleted(pageToDelete, position);
 		}
@@ -303,7 +320,7 @@ public class ReorderWidgetsAdapter extends Adapter<ViewHolder> implements OnItem
 		viewHolder.deleteWidgetButton.setImageDrawable(getDeleteIcon(false));
 		viewHolder.deleteWidgetButton.setOnClickListener(v -> {
 			int pos = viewHolder.getAdapterPosition();
-			reorderHelper.deleteWidget(widgetInfo, pos);
+			reorderHelper.deleteWidget(pos);
 		});
 
 		viewHolder.title.setText(widgetInfo.title);

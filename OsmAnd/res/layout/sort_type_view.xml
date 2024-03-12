@@ -16,7 +16,7 @@
 		<LinearLayout
 			android:id="@+id/sort_button"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:orientation="horizontal"
 			android:paddingTop="@dimen/content_padding_small"
 			android:paddingBottom="@dimen/content_padding_small">

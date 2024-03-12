@@ -166,7 +166,9 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		Calendar calendar = getDefaultCalendar();
 		timeSlider.addOnChangeListener((slider, value, fromUser) -> {
 			calendar.setTime(selectedDate.getTime());
-			calendar.set(Calendar.HOUR_OF_DAY, (int) value);
+			int hour = (int) value;
+			calendar.set(Calendar.HOUR_OF_DAY, hour);
+			calendar.set(Calendar.MINUTE, (int) ((value - (float) hour) * 60.0f));
 
 			updateSelectedDate(calendar.getTime());
 		});

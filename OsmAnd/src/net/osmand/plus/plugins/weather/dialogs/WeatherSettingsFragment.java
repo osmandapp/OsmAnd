@@ -156,7 +156,7 @@ public class WeatherSettingsFragment extends BaseSettingsFragment implements Wea
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		String key = preference.getKey();
 		if (CollectionUtils.equalsToAny(key, WEATHER_ONLINE_CACHE, WEATHER_OFFLINE_CACHE)) {
 			boolean forLocal = key.equals(WEATHER_OFFLINE_CACHE);

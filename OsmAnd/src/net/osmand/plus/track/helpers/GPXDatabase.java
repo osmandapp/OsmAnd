@@ -20,6 +20,7 @@ import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.AndroidDbUtils;
@@ -192,10 +193,10 @@ public class GPXDatabase {
 					value = GPXUtilities.parseColor((String) value, 0);
 				} else if (parameter == COLORING_TYPE) {
 					String coloringTypeName = (String) value;
-					if (ColoringType.getNullableTrackColoringTypeByName(coloringTypeName) == null &&
+					if (ColoringType.valueOf(ColoringPurpose.TRACK, coloringTypeName) == null &&
 							GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
 						GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);
-						ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+						ColoringType coloringType = ColoringType.valueOf(scaleType);
 						value = coloringType == null ? null : coloringType.getName(null);
 					} else {
 						continue;

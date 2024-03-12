@@ -27,6 +27,7 @@ import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
@@ -45,7 +46,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
@@ -59,7 +59,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -286,12 +285,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private void saveTrackAppearance(@NonNull GpxDataItem item) {
 		ColoringType coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
 		String routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
+		ColoringStyle coloringStyle = new ColoringStyle(coloringType, routeInfoAttribute);
 
 		item.setParameter(COLOR, settings.CURRENT_TRACK_COLOR.get());
 		item.setParameter(WIDTH, settings.CURRENT_TRACK_WIDTH.get());
 		item.setParameter(SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
-		item.setParameter(COLORING_TYPE, coloringType.getName(routeInfoAttribute));
+		item.setParameter(COLORING_TYPE, coloringStyle.getId());
 
 		app.getGpxDbHelper().updateDataItem(item);
 	}

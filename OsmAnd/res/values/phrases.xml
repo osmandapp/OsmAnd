@@ -190,6 +190,7 @@
 	<string name="poi_impromptu">Impromptu</string>
 	<string name="poi_reservation">Reservation</string>
 	<string name="poi_us_maps_recreation_area_facility">Recreation area facility</string>
+	<string name="poi_live_music">Live music</string>
 
 
 <!--  categories -->
@@ -5438,6 +5439,13 @@
 	<string name="poi_us_maps_recreation_area_facility_rv_dump_station">RV dump station</string>
 	<string name="poi_us_maps_recreation_area_facility_warming_hut">Warming hut</string>
 	<string name="poi_us_maps_recreation_area_facility_parking">Parking area</string>
+
+	<string name="poi_music_venue">Music venue</string>
+	<string name="poi_live_music_yes">Yes</string>
+
+	<string name="poi_shop_general">General shop</string>
+
+	<string name="poi_cuisine_fish">Fish</string>
 
 
 </resources>

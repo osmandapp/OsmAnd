@@ -20,12 +20,11 @@ import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 
-import android.graphics.Color;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
@@ -119,10 +118,10 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
 		hasAnyParam |= json.has("coloring_type");
 		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
-		if (ColoringType.getNullableTrackColoringTypeByName(gpxAppearanceInfo.coloringType) == null) {
+		if (ColoringType.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
 			hasAnyParam |= json.has("gradient_scale_type");
 			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
-			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+			ColoringType coloringType = ColoringType.valueOf(scaleType);
 			gpxAppearanceInfo.coloringType = coloringType == null
 					? null : coloringType.getName(null);
 		}

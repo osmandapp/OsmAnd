@@ -1604,7 +1604,7 @@
     <string name="app_mode_motorcycle">Motorra</string>
     <string name="app_mode_boat">Itsasontzia</string>
     <string name="app_mode_aircraft">Hegazkina</string>
-    <string name="auto_zoom_none">Auto zoomik ez</string>
+    <string name="auto_zoom_none">Zoom automatikorik gabe</string>
     <string name="auto_zoom_close">Gerturatu</string>
     <string name="auto_zoom_farthest">Aldendu</string>
     <string name="map_magnifier">Mapa handitzailea</string>
@@ -1784,7 +1784,7 @@
     <string name="rendering_value_bicycle_name">Bizikleta</string>
     <string name="rendering_value_pedestrian_name">Oinez</string>
     <string name="rendering_attr_hideAccess_name">Sarbide murrizketak</string>
-    <string name="rendering_attr_showAccess_name">Erakutsi sarbide murrizketak eta bidesariak</string>
+    <string name="rendering_attr_showAccess_name">Erakutsi sarbide murrizketak</string>
     <string name="local_index_select_gpx_file">Hautatu arrastoa</string>
     <string name="sort_by_distance">Ordenatu distantziaren arabera</string>
     <string name="sort_by_name">Ordenatu izenaren arabera</string>
@@ -2012,7 +2012,7 @@
     <string name="delete_filter">Ezabatu iragazkia</string>
     <string name="new_filter">Iragazki berria</string>
     <string name="new_filter_desc">Idatzi iragazki berriaren izena, zure \'Kategoriak\' fitxara gehituko da.</string>
-    <string name="edit_filter">Editatu kategoriak</string>
+    <string name="edit_filter">Editatu iragazkia</string>
     <string name="subcategories">Azpikategoriak</string>
     <string name="translit_names">Transliteratu izenak</string>
     <string name="search_hint">Idatzi hiria, helbidea, interesgunearen izena</string>
@@ -2193,7 +2193,7 @@
     <string name="nearest_cities">Inguruko hiriak</string>
     <string name="select_city">Aukeratu hiria</string>
     <string name="select_postcode">Posta-kode bidezko bilaketa</string>
-    <string name="quick_action_auto_zoom">Maparen zoom automatikoa bai/ez</string>
+    <string name="quick_action_auto_zoom">Zoom automatikoa duen mapa</string>
     <string name="quick_action_auto_zoom_desc">Abiaduraren araberako zoom automatikoa gaitu edo desgaitzeko botoia.</string>
     <string name="quick_action_auto_zoom_on">Gaitu zoom automatikoa</string>
     <string name="quick_action_auto_zoom_off">Desgaitu zoom automatikoa</string>
@@ -4673,7 +4673,7 @@
     <string name="coordinates_widget_map_center_desc">Uneko maparen erdigunearen koordenatu geografikoak erakusten ditu</string>
     <string name="coordinates_widget_current_location">Koordenatuak: uneko kokapena</string>
     <string name="available_as_part_of_subscription_plan">%1$s harpidetzaren barruan eskuragarri.</string>
-    <string name="favorite_confirm_delete_group">Ziur \"%1$s\" taldea eta sartutako puntu guztiak (%2$d) ezabatu nahi dituzula?</string>
+    <string name="favorite_confirm_delete_group">\"%1$s\" taldea eta sartutako puntu guztiak (%2$d) ezabatu?</string>
     <string name="weather_pressure_hectopascals">Hektopascalak</string>
     <string name="weather_pressure_inches_of_mercury">Hazbete merkurio</string>
     <string name="show_map_symbols_desc">Testua, bide seinaleak eta beste.</string>
@@ -5164,7 +5164,7 @@
     <string name="ant_plus_pair_bluetooth_prompt">Bluetooth LE eta ANT+ sentsoreak OsmAnd-ekin parekatu ditzakezu.</string>
     <string name="external_device_forget_sensor">Ahaztu sentsorea</string>
     <string name="rendering_attr_lightDetail_name">Argitasuna</string>
-    <string name="nav_profile_confirm_delete">Ziur \"%1$s\" ezabatu nahi duzula?</string>
+    <string name="nav_profile_confirm_delete">\"%1$s\" ezabatu?</string>
     <string name="no_bt_permission">Ez da Bluetooth baimenik eman</string>
     <string name="beats_per_minute_short">Taupadak minutuko</string>
     <string name="shared_string_chest">Bularra</string>
@@ -5227,7 +5227,7 @@
 \n
 \nGailuko datu guztiak ukitu gabe geratuko dira.</string>
     <string name="relief_3d_description">Eduki eta behatu zure auzoko edo kontinente osoko maketa.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">Ziur OsmAnd Cloud kontua ezabatu nahi duzula?
+    <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud kontua ezabatu?
 \n
 \nEkintza hau ezin da desegin.</string>
     <string name="osmand_cloud_delete_account_confirmation">Kontua ezabatu\?</string>
@@ -5237,7 +5237,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">OsmAnd Cloud-en datu guztiak %1$s izango dira. Gailuko datuak ukitu gabe geratuko dira.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Horrek ez du zure OsmAnd Pro harpidetza bertan behera utziko.</string>
     <string name="manage_subscriptions">Kudeatu harpidetzak.</string>
-    <string name="delete_account_warning">Ziur %1$s kontua ezabatu nahi duzula?</string>
+    <string name="delete_account_warning">%1$s kontua ezabatu?</string>
     <string name="shared_string_deleting">Ezabatzen</string>
     <string name="deleting_complete">Ezabatzea osatu da</string>
     <string name="delete_account">Ezabatu kontua</string>
@@ -5348,7 +5348,7 @@
     <string name="shared_string_temperature">Tenperatura</string>
     <string name="help_article_map_legend_osmand_name">OsmAnd mapa estiloa</string>
     <string name="help_article_map_legend_ski_map_name">Eski mapa estiloa</string>
-    <string name="help_article_navigation_guidance_name">Gida</string>
+    <string name="help_article_navigation_guidance_name">Orientazioa</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Ahots-abisuak / Jakinarazpenak</string>
     <string name="help_article_navigation_routing_name">Ibilbidearen parametroak</string>
     <string name="release_4_6">• Android Auto: 3D modua gehitu da
@@ -5486,7 +5486,7 @@
     <string name="shared_string_reassign">Berrezarri</string>
     <string name="reset_key_assignments">Berrezarri laster-teklak</string>
     <string name="key_event_action_emit_navigation_hint">Igorri nabigazio-iradokizuna</string>
-    <string name="remove_type_q">Ziur \"%1$s\" mota kendu nahi duzula?</string>
+    <string name="remove_type_q">\"%1$s\" mota kendu nahi duzu?</string>
     <string name="shared_string_action">Ekintza</string>
     <string name="complex_widget_alert">%1$s trepeta bere errenkadan bakarrik jar daiteke.</string>
     <string name="rendering_attr_showToll_description">Erakutsi bidesari murrizketak errepideetan</string>
@@ -5503,7 +5503,7 @@
     <string name="key_event_action_open_navigation_view">Ireki Nabigazio ikuspegia</string>
     <string name="add_row">Gehitu errenkada</string>
     <string name="shared_string_next_event">Hurrengo ekitaldia</string>
-    <string name="discard_changes_prompt">Ziur aldaketak baztertu nahi dituzula?</string>
+    <string name="discard_changes_prompt">Baztertu aldaketak?</string>
     <string name="precise_distance_numbers">Distantzia zenbaki zehatzak</string>
     <string name="use_v1_auto_zoom">Zoom automatiko diskretua (bertsio zaharra)</string>
     <string name="zoom_animated">Zoom animatua</string>
@@ -5523,13 +5523,11 @@
     <string name="key_event_action_open_wunderlinq_datagrid">Ireki WunderLINQ datu-sarea</string>
     <string name="see_all_plans">Ikusi plan guztiak</string>
     <string name="key_event_category_actions">Ekintzak</string>
-    <string name="clear_key_assignment_desc">Hautatutako ekintzarako laster-tekla garbituko da eta Bat ere ez bezala ezarriko da.</string>
-    <string name="map_widget_sun_position_desc">Trepeta honek eguzkia atera edo ilunabarrera arte falta den denbora erakusten du, uneko orduaren arabera.</string>
-    <string name="cloud_trash_clear_confirmation">Ziur betiko ezabatu nahi dituzula Zaborrontziko elementu guztiak? Ekintza hau ezin da desegin.</string>
+    <string name="clear_key_assignment_desc">Hautatutako ekintzarako laster-tekla garbituko da eta \"Bat ere ez\" bezala ezarriko da.</string>
+    <string name="map_widget_sun_position_desc">Eguzkia atera edo ilunabarrera arte falta den denbora erakusten du.</string>
+    <string name="cloud_trash_clear_confirmation">Betiko ezabatu Zaborrontziko elementu guztiak?</string>
     <string name="restore_from_trash">Leheneratu zaborrontzitik</string>
-    <string name="delete_trash_item_confirmation_desc">\"%1$s\" betiko ezabatuko da. Ziur zaude?
-\n
-\nEkintza hau ezin da desegin.</string>
+    <string name="delete_trash_item_confirmation_desc">\"%1$s\" betiko ezabatu?</string>
     <string name="shared_string_delete_immediately">Ezabatu berehala</string>
     <string name="shared_string_is_deleted">%1$s ezabatu da.</string>
     <string name="cloud_item_restored">%1$s hodeitik leheneratu da.</string>
@@ -5538,7 +5536,7 @@
     <string name="smart_folder_name_present">Karpeta adimenduna dagoeneko badago</string>
     <string name="root_folder">Erro karpeta</string>
     <string name="shared_string_cache">Cache</string>
-    <string name="empty_smart_folder_description">Bat datozen arrasto guztiak automatikoki agertuko dira hemen</string>
+    <string name="empty_smart_folder_description">Bat datozen arrasto guztiak hemen agertzen dira</string>
     <string name="lang_zh_hans">Txinera sinplifikatua</string>
     <string name="configure_filter">Iragazkia konfiguratu</string>
     <string name="all_folders">Karpeta guztiak</string>
@@ -5573,7 +5571,7 @@
     <string name="delete_smart_folder_dialog_message">Honek \"%1$s\" karpeta adimenduna ezabatuko du.</string>
     <string name="sort_size_ascending">Tamaina txikikoa lehenik</string>
     <string name="trash_alert_card_desc">Zakarrontziko elementuak %1$s egun igaro ondoren ezabatuko dira.</string>
-    <string name="discard_filter_changes_prompt">Ziur iragazki guztiak berrezarri nahi dituzula?</string>
+    <string name="discard_filter_changes_prompt">Iragazki guztiak berrezarri?</string>
     <string name="no_config_smart_folder_description">Karpeta adimendunek arrastoak iragazkien arabera taldekatzeko aukera ematen dute</string>
     <string name="widget_available_ram">RAM erabilgarria</string>
     <string name="trash_is_empty">Zakarrontzia hutsa dago</string>
@@ -5581,7 +5579,7 @@
     <string name="shared_string_trash">Zakarrontzia</string>
     <string name="loading_tracks">Arrastoak birkargatzen</string>
     <string name="sort_country_name_descending">Herrialdearen izena: Z - A</string>
-    <string name="delete_map_description">Ziur %1$s mapa ezabatu nahi duzula?</string>
+    <string name="delete_map_description">%1$s mapa ezabatu?</string>
     <string name="searching_matching_tracks">Bilatu bat datozen arrasto guztiak</string>
     <string name="maps_and_resources">Mapa eta baliabideak</string>
     <string name="any_connected_with_device">Konektatutako edozein: %s</string>
@@ -5620,4 +5618,24 @@
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
     <string name="shared_string_all_tracks">Arrasto guztiak</string>
     <string name="battery_optimization_settings">Bateria optimizatzeko ezarpenak</string>
+    <string name="speedometer_description">Zure uneko abiadura erakusten du GPS bidez jakinarazi bezala</string>
+    <string name="shared_string_speedometer">Abiadura-neurgailua</string>
+    <string name="help_article_setup_a_route_name">Zehaztu ibilbide bat</string>
+    <string name="shared_sting_all_colors">Kolore guztiak</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fasea</string>
+    <string name="routing_type_a_star_classic">A* klasikoa</string>
+    <string name="java_safe">Java (segurua)</string>
+    <string name="routing_type">Bideratze mota</string>
+    <string name="rendering_attr_padusDisplayMode_name">Lur publikoak bistaratzeko modua</string>
+    <string name="rendering_attr_padusDisplayMode_description">Sarbide motaren edo kudeatzailearen izenaren arabera</string>
+    <string name="rendering_value_access_name">Sarbide motaren arabera</string>
+    <string name="rendering_value_managerName_name">Kudeatzailearen izenaren arabera</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ezkutatu lurzoru publikoen mugak</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ezkutatu lurzoru publikoen mugak baina utzi eremuak</string>
+    <string name="speed_limit_warning">Abiadura mugaren abisua</string>
+    <string name="shared_string_limit">Muga</string>
+    <string name="when_exceeded">Gainditzean</string>
+    <string name="auto_zoom_smooth">Leuna</string>
+    <string name="auto_zoom">Zoom automatikoa</string>
+    <string name="gpx_approximation">GPX hurbilketa</string>
 </resources>

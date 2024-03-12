@@ -36,7 +36,7 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
@@ -232,8 +232,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				if (pointDescription.isMyLocation()) {
 					menuController = new MyLocationMenuController(mapActivity, pointDescription);
 				}
-			} else if (object instanceof AvoidSpecificRoads.AvoidRoadInfo) {
-				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (AvoidSpecificRoads.AvoidRoadInfo) object);
+			} else if (object instanceof AvoidRoadInfo) {
+				menuController = new ImpassibleRoadsMenuController(mapActivity, pointDescription, (AvoidRoadInfo) object);
 			} else if (object instanceof RenderedObject) {
 				menuController = new RenderedObjectMenuController(mapActivity, pointDescription, (RenderedObject) object);
 			} else if (object instanceof MapillaryImage) {

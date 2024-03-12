@@ -1,7 +1,6 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.gpx.GpxParameter.*;
-import static net.osmand.gpx.GpxParameter.AVG_SENSOR_SPEED;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -111,7 +110,7 @@ public class GpxDataItem {
 			setParameter(COLORING_TYPE, gpxFile.getColoringType());
 		} else if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
 			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
-			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+			ColoringType coloringType = ColoringType.valueOf(scaleType);
 			setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
 		}
 

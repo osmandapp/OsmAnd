@@ -8,6 +8,8 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.util.Algorithms;
 
 public class PreviewRouteLineInfo {
@@ -71,6 +73,11 @@ public class PreviewRouteLineInfo {
 		}
 	}
 
+	public void setRouteColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		setRouteColoringType(coloringStyle.getType());
+		setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+	}
+
 	public void setRouteColoringType(@NonNull ColoringType coloringType) {
 		this.coloringType = coloringType;
 	}
@@ -117,6 +124,11 @@ public class PreviewRouteLineInfo {
 
 	public int getCustomColor(boolean nightMode) {
 		return nightMode ? customColorNight : customColorDay;
+	}
+
+	@NonNull
+	public ColoringStyle getRouteColoringStyle() {
+		return new ColoringStyle(getRouteColoringType(), getRouteInfoAttribute());
 	}
 
 	@NonNull
@@ -174,7 +186,7 @@ public class PreviewRouteLineInfo {
 		if (bundle.containsKey(CUSTOM_COLOR_NIGHT)) {
 			customColorNight = bundle.getInt(CUSTOM_COLOR_NIGHT);
 		}
-		coloringType = ColoringType.getRouteColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
+		coloringType = ColoringType.requireValueOf(ColoringPurpose.ROUTE_LINE, bundle.getString(ROUTE_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(ROUTE_COLORING_TYPE));
 		width = bundle.getString(LINE_WIDTH);
 		showTurnArrows = bundle.getBoolean(SHOW_TURN_ARROWS);

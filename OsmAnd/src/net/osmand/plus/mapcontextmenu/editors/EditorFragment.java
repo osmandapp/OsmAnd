@@ -34,6 +34,10 @@ import net.osmand.data.BackgroundType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
+import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
@@ -43,19 +47,15 @@ import net.osmand.plus.measurementtool.ExitBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.util.Algorithms;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EditorFragment extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
+public abstract class EditorFragment extends BaseOsmAndFragment implements CardListener, OnColorsPaletteListener {
 
 	protected IconsCard iconsCard;
-	protected ColorsCard colorsCard;
 	protected ShapesCard shapesCard;
 
 	protected View view;
@@ -172,6 +172,15 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 		view.getViewTreeObserver().removeOnGlobalLayoutListener(getOnGlobalLayoutListener());
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			EditorColorController.onDestroy(app);
+		}
+	}
+
 	private void setupToolbar() {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setTitle(getToolbarTitle());
@@ -259,19 +268,9 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	private void createColorSelector() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			List<Integer> colors = new ArrayList<>();
-			for (int color : ColorDialogs.pallette) {
-				colors.add(color);
-			}
-			int customColor = getColor();
-			if (!ColorDialogs.isPaletteColor(customColor)) {
-				colors.add(customColor);
-			}
-			colorsCard = new ColorsCard(mapActivity, null, this, getColor(),
-					colors, app.getSettings().CUSTOM_TRACK_COLORS, true);
-			colorsCard.setListener(this);
+			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsPaletteController());
 			ViewGroup colorsCardContainer = view.findViewById(R.id.colors_card_container);
-			colorsCardContainer.addView(colorsCard.build(view.getContext()));
+			colorsCardContainer.addView(colorsPaletteCard.build(view.getContext()));
 		}
 	}
 
@@ -290,9 +289,6 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	public void onCardPressed(@NonNull BaseCard card) {
 		if (card instanceof IconsCard) {
 			setIcon(iconsCard.getSelectedIconId());
-		} else if (card instanceof ColorsCard) {
-			setColor(colorsCard.getSelectedColor());
-			updateContent();
 		} else if (card instanceof ShapesCard) {
 			setBackgroundType(shapesCard.getSelectedShape());
 			updateSelectedShapeText();
@@ -300,16 +296,18 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
-		setColor(colorsCard.getSelectedColor());
+	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
+		setColor(paletteColor.getColor());
 		updateContent();
+	}
+
+	@NonNull
+	private ColorsPaletteController getColorsPaletteController() {
+		return EditorColorController.getInstance(app, this, getColor());
 	}
 
 	protected void updateContent() {
 		updateSelectedColorText();
-
-		colorsCard.setSelectedColor(color);
 		iconsCard.updateSelectedIcon(color, iconName);
 		shapesCard.updateSelectedShape(color, backgroundType);
 	}
@@ -319,15 +317,8 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	protected void updateSelectedColorText() {
-		((TextView) view.findViewById(R.id.color_name)).setText(ColorDialogs.getColorName(color));
-	}
-
-	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		ColorsPaletteController controller = getColorsPaletteController();
+		((TextView) view.findViewById(R.id.color_name)).setText(controller.getColorName(color));
 	}
 
 	@DrawableRes
@@ -388,6 +379,7 @@ public abstract class EditorFragment extends BaseOsmAndFragment implements Color
 	}
 
 	protected void savePressed() {
+		getColorsPaletteController().refreshLastUsedTime();
 		save(true);
 	}
 

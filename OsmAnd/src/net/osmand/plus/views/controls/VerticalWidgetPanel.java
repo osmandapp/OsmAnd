@@ -22,7 +22,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
@@ -115,8 +114,8 @@ public class VerticalWidgetPanel extends LinearLayout {
 		ViewCompat.setElevation(this, isAnyRowVisible() ? 5f : 0);
 	}
 
-	private void updateVisibility(){
-			AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
+	private void updateVisibility() {
+		AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
 	}
 
 	public void update(@Nullable DrawSettings drawSettings) {
@@ -194,7 +193,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateRow(@NonNull MapWidget widget) {
 		Iterator<Row> rowIterator = visibleRows.values().iterator();
-		while (rowIterator.hasNext()){
+		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
 				if (Algorithms.objectEquals(widget, widgetInfo.widget)) {
@@ -214,7 +213,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateRows() {
 		Iterator<Row> rowIterator = visibleRows.values().iterator();
-		while (rowIterator.hasNext()){
+		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			row.updateRow(!rowIterator.hasNext());
 		}
@@ -323,18 +322,44 @@ public class VerticalWidgetPanel extends LinearLayout {
 		public void updateRow(boolean lastRow) {
 			int visibleViewsInRowCount = 0;
 			boolean showBottomDivider = true;
-
+			int maxWidgetHeight = 0;
+			boolean needHeightCorrections = false;
+			int widgetMinHeight = 0;
 			for (int i = 0; i < enabledMapWidgets.size(); i++) {
 				MapWidget widget = enabledMapWidgets.get(i).widget;
 				if (widget.isViewVisible()) {
+					if (widget instanceof SimpleWidget && widgetMinHeight == 0) {
+						widgetMinHeight = ((SimpleWidget) widget).getWidgetMinHeight();
+					}
 					visibleViewsInRowCount++;
 					int nextWidgetIndex = i + 1;
 					showHideVerticalDivider(i, nextWidgetIndex < enabledMapWidgets.size() && enabledMapWidgets.get(nextWidgetIndex).widget.isViewVisible());
+					int height = widget.getView().getMeasuredHeight();
+					if (height > maxWidgetHeight) {
+						maxWidgetHeight = height;
+					}
+					if (height != maxWidgetHeight) {
+						needHeightCorrections = true;
+					}
 				} else {
 					showHideVerticalDivider(i, false);
 				}
 				if (widget instanceof MapMarkersBarWidget || widget instanceof LanesWidget) {
 					showBottomDivider = false;
+				}
+			}
+			if (maxWidgetHeight < widgetMinHeight) {
+				maxWidgetHeight = widgetMinHeight;
+				needHeightCorrections = true;
+			}
+			if (needHeightCorrections) {
+				for (int i = 0; i < enabledMapWidgets.size(); i++) {
+					MapWidget widget = enabledMapWidgets.get(i).widget;
+					if (widget.isViewVisible()) {
+						ViewGroup.LayoutParams lp = widget.getView().getLayoutParams();
+						lp.height = maxWidgetHeight;
+						widget.getView().setLayoutParams(lp);
+					}
 				}
 			}
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);

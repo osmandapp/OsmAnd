@@ -43,7 +43,11 @@ public class BackupTypesFragment extends BaseBackupTypesFragment {
 	protected Map<ExportType, List<?>> getSelectedItems() {
 		Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 		for (ExportType exportType : ExportType.values()) {
-			if (backupHelper.getBackupTypePref(exportType).get() && InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+			boolean enabled = backupHelper.getBackupTypePref(exportType).get();
+			boolean available = InAppPurchaseUtils.isExportTypeAvailable(app, exportType);
+			boolean cloudRestore = requireMapActivity().getFragmentsHelper().isFirstScreenShowing();
+
+			if (enabled && (available || cloudRestore)) {
 				selectedItemsMap.put(exportType, getItemsForType(exportType));
 			}
 		}

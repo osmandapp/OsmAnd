@@ -145,7 +145,7 @@
     <string name="osmand_parking_position_description_add_time">Avto je bil parkiran ob</string>
     <string name="global_app_allocated_memory_descr">Uporabljenih je %1$s MB pomnilnika (Omejitev na androidu je %2$s MB, na dalviku %3$s MB).</string>
     <string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
-    <string name="starting_point_too_far">Štartna točka je predaleč od najbližje ceste.</string>
+    <string name="starting_point_too_far">Začetna točka je predaleč od najbližje ceste.</string>
     <string name="rendering_attr_noPolygons_description">Nastavi vse ploskve zemljevida kot prosojne.</string>
     <string name="rendering_attr_noPolygons_name">Ne izriši ploskev</string>
     <string name="rendering_attr_appMode_name">Način izrisa</string>
@@ -2475,7 +2475,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_name">Brez zaledenelih cest in plitvin</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Izogibanje zaledenelih cest in plitvin.</string>
     <string name="use_location">Uporabi položaj</string>
-    <string name="add_location_as_first_point_descr">Dodaj svoj položaj kot štartno točko, za načrtovanje popolne poti.</string>
+    <string name="add_location_as_first_point_descr">Dodaj trenutni položaj kot začetno točko načrtovanja poti.</string>
     <string name="my_location">Moja trenutna točka</string>
     <string name="shared_string_finish">Cilj</string>
     <string name="plan_route">Načrtuj pot</string>
@@ -2488,7 +2488,7 @@
     <string name="osn_modify_dialog_error">Sporočila ni mogoče spremeniti.</string>
     <string name="osn_modify_dialog_title">Spremeni sporočilo</string>
     <string name="context_menu_item_modify_note">Spremeni sporočilo OSM</string>
-    <string name="make_round_trip_descr">Dodaj kopijo štartne točke kot cilj.</string>
+    <string name="make_round_trip_descr">Dodaj kopijo začetne točke kot cilj.</string>
     <string name="make_round_trip">Ustvari krožno potovanje</string>
     <string name="marker_save_as_track_descr">Izvozi označbe v datoteko GPX:</string>
     <string name="make_active">Označi kot dejavno</string>
@@ -2597,7 +2597,7 @@
     <string name="optional_point_name">Izbirno ime točke</string>
     <string name="transport_nearby_routes_within">Bližnje poti v</string>
     <string name="transport_nearby_routes">Blizu</string>
-    <string name="make_as_start_point">Naj bo to štartna točka</string>
+    <string name="make_as_start_point">Ta točka naj bo začetna točka</string>
     <string name="shared_string_current">Trenutno</string>
     <string name="last_intermediate_dest_description">Doda vmesni postanek na poti</string>
     <string name="first_intermediate_dest_description">Doda začetni postanek na poti</string>
@@ -2763,7 +2763,7 @@
     <string name="osm_live_subscriptions">Naročnine</string>
     <string name="add_destination_point">Nastavi cilj</string>
     <string name="add_intermediate_point">Dodaj vmesni cilj</string>
-    <string name="add_start_point">Nastavi štartno točko</string>
+    <string name="add_start_point">Dodaj začetno točko</string>
     <string name="intermediate_waypoint">Vmesna točka</string>
     <string name="transfers">prevozi</string>
     <string name="on_foot">hoja</string>
@@ -2791,8 +2791,8 @@
     <string name="public_transport_warning_descr_blog">Preberi več o usmerjanju OsmAnd v našem spletnem dnevniku.</string>
     <string name="public_transport_warning_title">Možnost navigacije z javnim prevozom je še preizkusna, zato je pričakovati netočnosti in napake.</string>
     <string name="add_intermediate">Dodaj vmesno točko</string>
-    <string name="add_start_and_end_points">Dodaj štartno in ciljno točko</string>
-    <string name="route_add_start_point">Dodaj štartno točko</string>
+    <string name="add_start_and_end_points">Dodaj začetno in končnotočko</string>
+    <string name="route_add_start_point">Dodaj začetno točko</string>
     <string name="route_descr_select_start_point">Dodaj začetno točko</string>
     <string name="rendering_attr_surface_unpaved_name">Netlakovano</string>
     <string name="rendering_attr_surface_sand_name">Pesek</string>
@@ -4588,7 +4588,7 @@
     <string name="routeInfo_piste_difficulty_name">Težavnostna stopnja proge</string>
     <string name="shared_string_by_default">Privzeto</string>
     <string name="navigate_point_format_swiss_grid">Švicarska mreža (CH1903)</string>
-    <string name="quick_action_directions_from_desc">Gumb za dodajanje sredine zaslona kot novo štartno točko. Nato bo zahtevana nastavitev cilja ali pa izračunana pot.</string>
+    <string name="quick_action_directions_from_desc">Gumb za dodajanje sredinske točke zaslona kot nove začetne točke. To sproži določitev končne točke oziroma izračuna pot.</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Napredna</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremna</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Nedoločena</string>

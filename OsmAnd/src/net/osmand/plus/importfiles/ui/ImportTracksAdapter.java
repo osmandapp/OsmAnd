@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
+import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	private Set<ImportTrackItem> selectedTracks;
 	private ImportTracksListener listener;
-	private TracksDrawParams drawParams;
+	private MapDrawParams drawParams;
 
 	private String selectedFolder;
 	private final String fileName;
@@ -57,7 +57,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.listener = listener;
 	}
 
-	public void setDrawParams(@NonNull TracksDrawParams drawParams) {
+	public void setDrawParams(@NonNull MapDrawParams drawParams) {
 		this.drawParams = drawParams;
 	}
 
@@ -102,7 +102,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 			ImportTrackItem item = (ImportTrackItem) getItem(position);
 			boolean checked = selectedTracks.contains(item);
-			TrackBitmapDrawerListener listener = getBitmapDrawerListener(item, viewHolder);
+			MapBitmapDrawerListener listener = getBitmapDrawerListener(item, viewHolder);
 
 			viewHolder.bindView(item, gpxFile.getPoints(), checked, listener);
 		} else if (holder instanceof FoldersViewHolder) {
@@ -140,27 +140,18 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 		throw new IllegalArgumentException("Unsupported view type");
 	}
 
-	private TrackBitmapDrawerListener getBitmapDrawerListener(@NonNull ImportTrackItem item, @NonNull ImportTrackViewHolder holder) {
-		return new TrackBitmapDrawerListener() {
-			@Override
-			public void onTrackBitmapDrawing() {
-
-			}
+	private MapBitmapDrawerListener getBitmapDrawerListener(@NonNull ImportTrackItem item, @NonNull ImportTrackViewHolder holder) {
+		return new MapBitmapDrawerListener() {
 
 			@Override
-			public void onTrackBitmapDrawn(boolean success) {
+			public void onBitmapDrawn(boolean success) {
 				if (!success) {
 					item.bitmapDrawer.initAndDraw();
 				}
 			}
 
 			@Override
-			public boolean isTrackBitmapSelectionSupported() {
-				return false;
-			}
-
-			@Override
-			public void drawTrackBitmap(Bitmap bitmap) {
+			public void onBitmapDrawn(@NonNull Bitmap bitmap) {
 				item.bitmap = bitmap;
 				notifyItemChanged(holder.getAdapterPosition());
 			}

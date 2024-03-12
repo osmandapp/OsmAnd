@@ -44,6 +44,10 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 		return false;
 	}
 
+	protected int getDimension(int id) {
+		return app.getResources().getDimensionPixelSize(id);
+	}
+
 	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
 		return iconsCache.getPaintedIcon(id, color);
 	}

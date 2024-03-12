@@ -167,6 +167,10 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return defaultValue;
 	}
 
+	public void setDefaultValue(T defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
 	public final boolean hasDefaultValues() {
 		return defaultValues != null && !defaultValues.isEmpty();
 	}

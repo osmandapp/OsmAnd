@@ -497,13 +497,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_as_file))
 					.setIcon(getContentIcon(R.drawable.ic_action_file_routing))
-					.setOnClickListener(_view -> shareFile(app))
+					.setOnClickListener(menuItem -> shareFile(app))
 					.create());
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_link))
 					.setIcon(getContentIcon(R.drawable.ic_action_link))
-					.setOnClickListener(_view -> shareLink(app))
+					.setOnClickListener(menuItem -> shareLink(app))
 					.create());
 
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();

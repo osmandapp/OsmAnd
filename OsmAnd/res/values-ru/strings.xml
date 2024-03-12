@@ -5629,4 +5629,20 @@
     <string name="shared_string_not_checked">Не проверено</string>
     <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению планирования для текущего полета.</string>
     <string name="special_routing_cpp">Специальный тип маршрутизации</string>
+    <string name="auto_zoom_discrete">Дискретное</string>
+    <string name="auto_zoom">Автомасштабирование</string>
+    <string name="auto_zoom_smooth">Плавное</string>
+    <string name="routing_type_a_star_classic">A* классический</string>
+    <string name="java_safe">Java (безопасно)</string>
+    <string name="gpx_approximation">Аппроксимация gpx</string>
+    <string name="routing_type">Тип маршрутизации</string>
+    <string name="shared_sting_all_colors">Все цвета</string>
+    <string name="routing_type_a_star_2_phase">A* 2-фазный</string>
+    <string name="rendering_attr_padusDisplayMode_name">Режим отображения общественных земель</string>
+    <string name="rendering_attr_padusDisplayMode_description">По типу доступа или имени менеджера</string>
+    <string name="rendering_value_access_name">По типу доступа</string>
+    <string name="rendering_value_managerName_name">По имени менеджера</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Скрыть границы общественных земель</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Скрыть границы общественных земель, но оставить территории</string>
+    <string name="lang_ta_in">Тамильский (Индия)</string>
 </resources>

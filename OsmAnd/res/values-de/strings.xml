@@ -5014,7 +5014,7 @@
     <string name="share_as_file">Als Datei teilen</string>
     <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Download überspringen</string>
-    <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
+    <string name="determine_location">Erlaube Sie uns, Ihnren Standort zu ermitteln</string>
     <string name="share_link">Link teilen</string>
     <string name="sound_beep_simple">Signalton: einfach</string>
     <string name="sound_beep_minimal">Signalton: minimal</string>
@@ -5619,7 +5619,7 @@
     <string name="shared_string_additional">Zusätzlich</string>
     <string name="shared_string_activity">Aktivität</string>
     <string name="sort_subfolders">Unterordner sortieren</string>
-    <string name="sorted_sufolders_toast">Unterordner in „%1$s“ werden sortiert nach: „%2$s“</string>
+    <string name="sorted_sufolders_toast">Unterordner in „%1$s“ sind sortiert nach: „%2$s“</string>
     <string name="special_routing_cpp">Spezieller Navigationstyp</string>
     <string name="add_button">Schaltfläche hinzufügen</string>
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
@@ -5631,4 +5631,20 @@
     <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
     <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
     <string name="help_article_setup_a_route_name">Route einrichten</string>
+    <string name="rendering_value_access_name">Nach Zugangsart</string>
+    <string name="rendering_value_managerName_name">Nach Name der Verwaltung</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Grenzen von öffentlichem Land ausblenden</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Grenzen von öffentlichem Land ausblenden, aber Gebiete belassen</string>
+    <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
+    <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
+    <string name="auto_zoom_smooth">Sanft</string>
+    <string name="auto_zoom_discrete">Diskret</string>
+    <string name="auto_zoom">Autozoom</string>
+    <string name="java_safe">Java (Sicher)</string>
+    <string name="gpx_approximation">GPX Annäherung</string>
+    <string name="routing_type">Routing-Typ</string>
+    <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
+    <string name="routing_type_a_star_classic">A* classic</string>
+    <string name="shared_sting_all_colors">Alle Farben</string>
+    <string name="lang_ta_in">Tamilisch (Indien)</string>
 </resources>

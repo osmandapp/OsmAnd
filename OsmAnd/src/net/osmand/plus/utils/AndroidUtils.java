@@ -1207,7 +1207,8 @@ public class AndroidUtils {
 	}
 
 	public static String getLangTranslation(@NonNull Context context, @NonNull String lang) {
-		String value = getStringByProperty(context, "lang_" + lang);
+		String property = lang.replace("-", "_").toLowerCase();
+		String value = getStringByProperty(context, "lang_" + property);
 		return value != null ? value : lang;
 	}
 

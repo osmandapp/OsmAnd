@@ -25,21 +25,19 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 	}
 
 	@NonNull
-	private List<LocalItem> collectLocalItems(@NonNull OsmandApplication app,
-	                                          @NonNull LocalItemType localItemType) {
+	private List<LocalItem> collectLocalItems(@NonNull OsmandApplication app, @NonNull LocalItemType type) {
 		boolean readFiles = true;
 		boolean shouldUpdate = false;
 		LocalIndexHelper indexHelper = new LocalIndexHelper(app);
-		return indexHelper.getLocalIndexItems(readFiles, shouldUpdate, null, localItemType);
+		return indexHelper.getLocalIndexItems(readFiles, shouldUpdate, null, type);
 	}
 
 	@NonNull
-	private List<File> collectFilesFromLocalItems(@NonNull List<LocalItem> localItems,
-	                                              @NonNull LocalItemType localItemType) {
+	private List<File> collectFilesFromLocalItems(@NonNull List<LocalItem> items, @NonNull LocalItemType type) {
 		List<File> result = new ArrayList<>();
-		for (LocalItem localItem : localItems) {
-			File file = new File(localItem.getPath());
-			if (file.exists() && localItemType == localItem.getType() && !shouldSkipLocalItem(localItem)) {
+		for (LocalItem item : items) {
+			File file = new File(item.getPath());
+			if (file.exists() && type == item.getType() && !shouldSkipLocalItem(item)) {
 				result.add(file);
 			}
 		}
@@ -49,5 +47,4 @@ abstract class LocalResourcesExportType extends AbstractFileExportType {
 	protected boolean shouldSkipLocalItem(@NonNull LocalItem localItem) {
 		return false;
 	}
-
 }

@@ -1855,8 +1855,8 @@
     <string name="osm_live_subscribe_btn">S\'abonner</string>
     <string name="osm_live_month_cost">Coût mensuel</string>
     <string name="osm_live_month_cost_desc">Règlement mensuel</string>
-    <string name="osm_live_active">Activer</string>
-    <string name="osm_live_not_active">Désactiver</string>
+    <string name="osm_live_active">Actif</string>
+    <string name="osm_live_not_active">Inactif</string>
     <string name="osm_live_enter_email">Veuillez saisir une adresse courriel valide</string>
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
@@ -1893,7 +1893,7 @@
     <string name="add_points_to_map_markers_q">Ajouter tous les points comme marques ?</string>
     <string name="shared_string_add_to_map_markers">Ajouter comme marque</string>
     <string name="select_map_markers">Sélectionner les marques</string>
-    <string name="show_map_markers_description">Activer la fonction marques</string>
+    <string name="show_map_markers_description">Activer la fonction marqueurs.</string>
     <string name="clear_active_markers_q">Supprimer toutes les marques actives ?</string>
     <string name="clear_markers_history_q">Effacer l\'Historique des marques ?</string>
     <string name="active_markers">Marques actives</string>
@@ -5588,6 +5588,31 @@
     <string name="max_sensor_heartrate">Rythme cardiaque, max</string>
     <string name="avg_sensor_heartrate">Rythme cardiaque, moyenne</string>
     <string name="dont_ask_anymore">Ne plus demander</string>
-    <string name="battery_optimization_banner_content">La gestion de l\'optimisation de la batterie par Android peut entraîner des erreurs ou pertes de données à l\'enregistrement des traces</string>
-    <string name="battery_optimization_settings">Options d\'optimisation de la batterie</string>
+    <string name="battery_optimization_banner_content">La gestion de l\'optimisation de la batterie par Android peut entraîner des erreurs ou pertes de données à l\'enregistrement des traces.</string>
+    <string name="battery_optimization_settings">Paramètres d’optimisation de la batterie</string>
+    <string name="shared_string_keywords">Mots-clés</string>
+    <string name="add_button">Ajouter un bouton</string>
+    <string name="custom_map_button_name_present">Ce bouton est déjà présent</string>
+    <string name="shared_string_activity">Activité</string>
+    <string name="shared_string_additional">Additionnel</string>
+    <string name="max_sensor_bycicle_power">Puissance du cycle, max</string>
+    <string name="avg_sensor_speed">Vitesse du capteur, moyenne</string>
+    <string name="speed_limit_warning">Avertissement de limitation de vitesse</string>
+    <string name="when_exceeded">En cas de dépassement</string>
+    <string name="speedometer_description">Affiche votre vitesse actuelle calculée par GPS</string>
+    <string name="shared_string_speedometer">Compteur de vitesse</string>
+    <string name="shared_string_limit">Limite</string>
+    <string name="custom_buttons">Boutons personnalisés</string>
+    <string name="default_buttons">Boutons par défaut</string>
+    <string name="sort_subfolders">Trier les sous-dossiers</string>
+    <string name="battery_optimization">Optimisation de la batterie</string>
+    <string name="avg_sensor_temperature">Température moyenne</string>
+    <string name="max_sensor_speed">Vitesse du capteur, max</string>
+    <string name="max_sensor_temperature">Température, max</string>
+    <string name="avg_sensor_bycicle_power">Puissance du cycle, moyenne</string>
+    <string name="battery_optimization_desc">La gestion de l\'optimisation de la batterie par Android peut causer des erreurs ou pertes de données à l\'enregistrement des traces.
+\n
+\nSi vous rencontrez l\'un de ces problèmes, essayez de définir l\'utilisation de la batterie à « Sans restriction ».</string>
+    <string name="rendering_value_access_name">Par type d\'accès</string>
+    <string name="sorted_sufolders_toast">Les sous-dossiers dans “%1$s” sont triés par : “%2$s”</string>
 </resources>

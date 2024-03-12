@@ -27,7 +27,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.QuadPoint;
+import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -118,6 +118,7 @@ public class RoutingContext {
 		this.nativeLib = cp.nativeLib;
 		this.visitor = cp.visitor;
 		this.calculationProgress = cp.calculationProgress;
+		this.precalculatedRouteDirection = cp.precalculatedRouteDirection;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
@@ -184,20 +185,42 @@ public class RoutingContext {
 	public int getPlanRoadDirection() {
 		return config.planRoadDirection;
 	}
+	
+	public void initLatLonStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
+		startX = MapUtils.get31TileNumberX(start.getLongitude());
+		startY = MapUtils.get31TileNumberY(start.getLatitude());
+		targetX = MapUtils.get31TileNumberX(end.getLongitude());
+		targetY = MapUtils.get31TileNumberY(end.getLatitude());
+		initIntermediates(inters);
+	}
 
-	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
-		initTargetPoint(end);
+	private void initIntermediates(List<LatLon> inters) {
+		if (inters != null && inters.size() > 0) {
+			intermediatesX = new int[inters.size()];
+			intermediatesY = new int[inters.size()];
+			for (int i = 0; i < inters.size(); i++) {
+				LatLon l = inters.get(i);
+				intermediatesX[i] = MapUtils.get31TileNumberX(l.getLongitude());
+				intermediatesY[i] = MapUtils.get31TileNumberY(l.getLatitude());
+			}
+		} else {
+			intermediatesX = new int[0];
+			intermediatesY = new int[0];
+		}
+	}
+
+	public void initPreciseStartEndPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
 		startX = start.preciseX;
 		startY = start.preciseY;
 		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
-	}
 
-	public void initTargetPoint(RouteSegmentPoint end) {
 		targetX = end.preciseX;
 		targetY = end.preciseY;
 		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
+
+		initIntermediates(null);
 	}
 	
 	public void unloadAllData() {
@@ -459,11 +482,10 @@ public class RoutingContext {
 		if (memoryLimit == 0) {
 			memoryLimit = config.memoryLimitation;
 		}
-		if (getCurrentEstimatedSize() > 0.9 * memoryLimit) {
+		if (getCurrentEstimatedSize() > 0.85 * memoryLimit) {
 			int sz1 = getCurrentEstimatedSize();
 			long h1 = 0;
 			if (SHOW_GC_SIZE && sz1 > 0.7 * memoryLimit) {
-				runGCUsedMemory();
 				h1 = runGCUsedMemory();
 			}
 			int clt = getCurrentlyLoadedTiles();
@@ -471,7 +493,6 @@ public class RoutingContext {
 			unloadUnusedTiles(memoryLimit);
 			if (h1 != 0 && getCurrentlyLoadedTiles() != clt) {
 				int sz2 = getCurrentEstimatedSize();
-				runGCUsedMemory();
 				long h2 = runGCUsedMemory();
 				float mb = (1 << 20);
 				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual");
@@ -706,17 +727,11 @@ public class RoutingContext {
 	protected static long runGCUsedMemory()  {
 		Runtime runtime = Runtime.getRuntime();
 		long usedMem1 = runtime.totalMemory() - runtime.freeMemory();
-		long usedMem2 = Long.MAX_VALUE;
-		int cnt = 4;
+		int cnt = 1;
 		while (cnt-- >= 0) {
-			for (int i = 0; (usedMem1 < usedMem2) && (i < 1000); ++i) {
-				runtime.runFinalization();
-				runtime.gc();
-				Thread.yield();
-
-				usedMem2 = usedMem1;
-				usedMem1 = runtime.totalMemory() - runtime.freeMemory();
-			}
+			runtime.runFinalization();
+			runtime.gc();
+			usedMem1 = runtime.totalMemory() - runtime.freeMemory();
 		}
 		return usedMem1;
 	}
