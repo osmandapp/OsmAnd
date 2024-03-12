@@ -159,6 +159,13 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		app.getOsmandMap().getMapView().refreshMap();
 	}
 
+	public void onDestroy(@Nullable FragmentActivity activity) {
+		if (activity != null && !activity.isChangingConfigurations()) {
+			DialogManager manager = app.getDialogManager();
+			manager.unregister(PROCESS_ID);
+		}
+	}
+
 	public interface OnTrackWidthSelectedListener {
 		void onTrackWidthSelected(@NonNull String width);
 	}

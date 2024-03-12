@@ -3,6 +3,7 @@ package net.osmand.plus.card.width;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.slider.ISliderCard;
@@ -57,6 +58,10 @@ public class WidthComponentController implements IModedSliderController {
 			sliderModes.add(new SliderMode(widthMode.getIconId(), widthMode));
 		}
 		return sliderModes;
+	}
+
+	public void askSelectWidthMode(@Nullable String width) {
+		askSelectWidthMode(WidthMode.valueOfKey(width));
 	}
 
 	public void askSelectWidthMode(@NonNull WidthMode widthMode) {

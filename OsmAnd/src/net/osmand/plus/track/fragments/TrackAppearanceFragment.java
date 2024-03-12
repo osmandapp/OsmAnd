@@ -343,7 +343,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getColorCardController().onDestroy(getActivity());
+		FragmentActivity activity = getActivity();
+		getColorCardController().onDestroy(activity);
+		getWidthCardController().onDestroy(activity);
 	}
 
 	private void enterTrackAppearanceMode() {
@@ -427,7 +429,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				paletteController.selectColor(trackDrawInfo.getColor());
 
 				WidthComponentController widthComponentController = getWidthCardController().getWidthComponentController();
-				widthComponentController.askSelectWidthMode(WidthMode.valueOfKey(trackDrawInfo.getWidth()));
+				widthComponentController.askSelectWidthMode(trackDrawInfo.getWidth());
 
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();

@@ -29,10 +29,12 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -46,10 +48,12 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
-import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -59,7 +63,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, IColorCardControllerListener, InAppPurchaseListener {
+public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
+		implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener, InAppPurchaseListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -68,7 +73,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private TrackDrawInfo trackDrawInfo;
 	private final List<BaseCard> cards = new ArrayList<>();
 
-	private TrackWidthCard trackWidthCard;
+	private HeadedContentCard trackWidthCard;
 	private DialogButton applyButton;
 
 	@ColorRes
@@ -175,16 +180,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			inflater.inflate(R.layout.list_item_divider_basic, container, true);
 			addCard(container, new MultiStateCard(activity, getColorCardController()));
 
-			trackWidthCard = new TrackWidthCard(activity, trackDrawInfo, y -> {
-				View cardView = trackWidthCard.getView();
-				if (cardView != null) {
-					ScrollView scrollView = view.findViewById(R.id.scroll_view);
-					int height = scrollView.getHeight();
-					int bottom = scrollView.getChildAt(0).getBottom();
-					int maxScrollY = Math.max(0, bottom - height);
-					scrollView.smoothScrollTo(0, maxScrollY);
-				}
-			});
+			inflater.inflate(R.layout.list_item_divider_basic, container, true);
+			trackWidthCard = new HeadedContentCard(activity, getWidthCardController());
 			addCard(container, trackWidthCard);
 		}
 	}
@@ -270,9 +267,12 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void updateColorItems() {
-		if (trackWidthCard != null) {
-			trackWidthCard.updateItems();
-		}
+		getWidthCardController().updateControlsColor();
+	}
+
+	@Override
+	public void onTrackWidthSelected(@NonNull String width) {
+
 	}
 
 	@Nullable
@@ -333,6 +333,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		IColorsPaletteController paletteController = colorController.getColorsPaletteController();
 		paletteController.selectColor(trackDrawInfo.getColor());
 
+		TrackWidthController widthController = getWidthCardController();
+		WidthComponentController widthComponentController = widthController.getWidthComponentController();
+		widthComponentController.askSelectWidthMode(trackDrawInfo.getWidth());
+
 		for (BaseCard card : cards) {
 			card.update();
 		}
@@ -340,6 +344,29 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private TrackColorController getColorCardController() {
 		return TrackColorController.getInstance(app, null, trackDrawInfo, this);
+	}
+
+	private TrackWidthController getWidthCardController() {
+		OnNeedScrollListener onNeedScrollListener = y -> {
+			View view = getView();
+			View cardView = trackWidthCard.getView();
+			if (view != null && cardView != null) {
+				ScrollView scrollView = view.findViewById(R.id.scroll_view);
+				int height = scrollView.getHeight();
+				int bottom = scrollView.getChildAt(0).getBottom();
+				int maxScrollY = Math.max(0, bottom - height);
+				scrollView.smoothScrollTo(0, maxScrollY);
+			}
+		};
+		return TrackWidthController.getInstance(app, trackDrawInfo, onNeedScrollListener, this);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		getColorCardController().onDestroy(activity);
+		getWidthCardController().onDestroy(activity);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target) {
