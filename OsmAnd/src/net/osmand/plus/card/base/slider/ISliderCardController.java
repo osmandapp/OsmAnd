@@ -1,4 +1,4 @@
-package net.osmand.plus.card.base.slider.limited;
+package net.osmand.plus.card.base.slider;
 
 import android.content.Context;
 
@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.utils.ColorUtilities;
 
-public interface ILimitedSliderController {
+public interface ISliderCardController {
 
-	void bindComponent(@NonNull ILimitedSliderCard card);
+	void bindComponent(@NonNull ISliderCard cardInstance);
 
 	@NonNull
 	default Limits getSliderLimits() {

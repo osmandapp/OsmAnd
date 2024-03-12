@@ -1,4 +1,4 @@
-package net.osmand.plus.card.base.slider.limited;
+package net.osmand.plus.card.base.slider;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -10,14 +10,14 @@ import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.UiUtilities;
 
-public class LimitedSliderCard extends BaseCard implements ILimitedSliderCard {
+public class SliderCard extends BaseCard implements ISliderCard {
 
-	private final ILimitedSliderController controller;
+	private final ISliderCardController controller;
 
 	private Slider slider;
 
-	public LimitedSliderCard(@NonNull FragmentActivity activity,
-	                         @NonNull ILimitedSliderController controller, boolean usedOnMap) {
+	public SliderCard(@NonNull FragmentActivity activity,
+	                  @NonNull ISliderCardController controller, boolean usedOnMap) {
 		super(activity, usedOnMap);
 		this.controller = controller;
 		controller.bindComponent(this);

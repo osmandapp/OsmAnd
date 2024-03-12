@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.base.slider.limited.ILimitedSliderCard;
+import net.osmand.plus.card.base.slider.ISliderCard;
 import net.osmand.plus.card.base.slider.moded.IModedSliderComponent;
 import net.osmand.plus.card.base.slider.moded.IModedSliderController;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
@@ -30,7 +30,7 @@ public class WidthComponentController implements IModedSliderController {
 	}
 
 	@Override
-	public void bindComponent(@NonNull ILimitedSliderCard cardInstance) {
+	public void bindComponent(@NonNull ISliderCard cardInstance) {
 		this.cardInstance = (IModedSliderComponent) cardInstance;
 	}
 

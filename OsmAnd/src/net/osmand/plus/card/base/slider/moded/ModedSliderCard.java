@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
-import net.osmand.plus.card.base.slider.limited.LimitedSliderCard;
+import net.osmand.plus.card.base.slider.SliderCard;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
@@ -15,7 +15,7 @@ import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModedSliderCard extends LimitedSliderCard implements IModedSliderComponent {
+public class ModedSliderCard extends SliderCard implements IModedSliderComponent {
 
 	private final IModedSliderController controller;
 
