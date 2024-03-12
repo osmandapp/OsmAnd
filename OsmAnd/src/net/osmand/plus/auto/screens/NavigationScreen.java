@@ -90,7 +90,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 
 		OsmandApplication app = getApp();
 		alarmWidget = new AlarmWidget(app, null);
-		speedometerWidget = new SpeedometerWidget(app, null);
+		speedometerWidget = new SpeedometerWidget(app, null, null);
 
 		getLifecycle().addObserver(this);
 	}
