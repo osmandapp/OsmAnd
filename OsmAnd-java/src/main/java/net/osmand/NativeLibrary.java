@@ -22,7 +22,6 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 
 import org.apache.commons.logging.Log;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,7 +46,6 @@ public class NativeLibrary {
 
 	public static class RenderingGenerationResult {
 		private ByteBuffer bitmapBuffer;
-		private BufferedImage img;
 		private JsonObject info;
 		public RenderingGenerationResult(ByteBuffer bitmap) {
 			this.bitmapBuffer = bitmap;
@@ -71,14 +69,6 @@ public class NativeLibrary {
 		
 		public void setInfo(JsonObject info) {
 			this.info = info;
-		}
-		
-		public BufferedImage getImg() {
-			return img;
-		}
-		
-		public void setImg(BufferedImage img) {
-			this.img = img;
 		}
 	}
 
