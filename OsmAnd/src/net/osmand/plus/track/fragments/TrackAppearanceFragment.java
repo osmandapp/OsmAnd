@@ -41,10 +41,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
+import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.width.WidthComponentController;
+import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
@@ -59,9 +62,10 @@ import net.osmand.plus.track.cards.ActionsCard;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
-import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -80,7 +84,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 
@@ -97,7 +101,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private int menuTitleHeight;
 	private long modifiedTime = -1;
 
-	private TrackWidthCard trackWidthCard;
+	private HeadedContentCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
 	private boolean showStartFinishIconsInitialValue;
 
@@ -401,8 +405,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (mapActivity != null) {
 			if (card instanceof SplitIntervalCard) {
 				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
-			} else if (card instanceof TrackWidthCard) {
-				updateAppearanceIcon();
 			} else if (card instanceof DirectionArrowsCard) {
 				refreshMap();
 				updateAppearanceIcon();
@@ -417,10 +419,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (card instanceof ActionsCard) {
 			if (buttonIndex == RESET_BUTTON_INDEX) {
 				trackDrawInfo.resetParams(app, selectedGpxFile.getGpxFile());
+
 				TrackColorController colorController = getColorCardController();
 				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
+
 				IColorsPaletteController paletteController = colorController.getColorsPaletteController();
 				paletteController.selectColor(trackDrawInfo.getColor());
+
+				WidthComponentController widthComponentController = getWidthCardController().getWidthComponentController();
+				widthComponentController.askSelectWidthMode(WidthMode.valueOfKey(trackDrawInfo.getWidth()));
+
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
 				refreshMap();
@@ -449,6 +457,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			TrackColorController.saveCustomColorsToTracks(app, oldColor.getColor(), newColor.getColor());
 		}
 		updateColorItems();
+	}
+
+	@Override
+	public void onTrackWidthSelected(@NonNull String width) {
+		updateAppearanceIcon();
 	}
 
 	@Override
@@ -631,9 +644,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void updateColorItems() {
 		updateAppearanceIcon();
-		if (trackWidthCard != null) {
-			trackWidthCard.updateItems();
-		}
+		getWidthCardController().updateControlsColor();
 		refreshMap();
 	}
 
@@ -722,18 +733,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 			inflate(R.layout.list_item_divider_basic, container, true);
 			addCard(container, new MultiStateCard(mapActivity, getColorCardController()));
-
-			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, y -> {
-				View view = trackWidthCard.getView();
-				if (view != null) {
-					int resultYPosition = view.getTop() + y;
-					int dialogHeight = getInnerScrollableHeight();
-					ScrollView scrollView = (ScrollView) getBottomScrollView();
-					if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
-						scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
-					}
-				}
-			});
+			inflate(R.layout.list_item_divider_basic, container, true);
+			trackWidthCard = new HeadedContentCard(mapActivity, getWidthCardController());
 			addCard(container, trackWidthCard);
 			addCard(container, new ActionsCard(mapActivity));
 		}
@@ -747,6 +748,21 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private TrackColorController getColorCardController() {
 		return TrackColorController.getInstance(app, selectedGpxFile, trackDrawInfo, this);
+	}
+
+	private TrackWidthController getWidthCardController() {
+		OnNeedScrollListener onNeedScrollListener = y -> {
+			View view = trackWidthCard.getView();
+			if (view != null) {
+				int resultYPosition = view.getTop() + y;
+				int dialogHeight = getInnerScrollableHeight();
+				ScrollView scrollView = (ScrollView) getBottomScrollView();
+				if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
+					scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
+				}
+			}
+		};
+		return TrackWidthController.getInstance(app, trackDrawInfo, onNeedScrollListener, this);
 	}
 
 	public List<GpxDisplayGroup> getGpxDisplayGroups() {

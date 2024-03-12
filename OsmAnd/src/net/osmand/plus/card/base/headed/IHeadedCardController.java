@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 public interface IHeadedCardController {
 
-	void bindComponent(@NonNull IHeadedContentCard card);
+	void bindComponent(@NonNull IHeadedContentCard cardInstance);
 
 	@NonNull
 	String getCardTitle();
