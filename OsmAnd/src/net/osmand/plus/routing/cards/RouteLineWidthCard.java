@@ -66,9 +66,9 @@ public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 			this.widthKey = widthKey;
 		}
 
-		int titleId;
-		int iconId;
-		String widthKey;
+		final int titleId;
+		final int iconId;
+		final String widthKey;
 
 		public String getWidthKey() {
 			return widthKey;
