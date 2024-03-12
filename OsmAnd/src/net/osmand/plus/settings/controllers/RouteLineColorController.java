@@ -92,7 +92,7 @@ public class RouteLineColorController extends ColoringCardController implements 
 
 				@NonNull
 				private PaletteMode createPaletteMode(boolean night) {
-					String title = app.getString(night ? R.string.night : R.string.day);
+					String title = app.getString(night ? R.string.daynight_mode_night : R.string.daynight_mode_day);
 					int tag = night ? PALETTE_MODE_ID_NIGHT : PALETTE_MODE_ID_DAY;
 					return new PaletteMode(title, tag);
 				}
