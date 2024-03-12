@@ -404,7 +404,7 @@
     <string name="poi_landfill_waste_nuclear">Nuklearni otpad</string>
     <string name="poi_waste_disposal">Deponija smeća</string>
     <string name="poi_waste_basket">Kanta za smeće</string>
-    <string name="poi_residential">Stambena zona</string>
+    <string name="poi_residential">Stambeni prostor</string>
     <string name="poi_industrial">Industrijska zona</string>
     <string name="poi_landuse_railway">Železnička oblast</string>
     <string name="poi_commercial">Trgovinsko zemljište</string>
@@ -516,7 +516,7 @@
     <string name="poi_migration">Migraciono</string>
     <string name="poi_tax_inspection">Poreska inspekcija</string>
     <string name="poi_isolated_dwelling">Salaš</string>
-    <string name="poi_quarter">Četvrt</string>
+    <string name="poi_quarter">Gradski četvrt</string>
     <string name="poi_neighbourhood">Mesna zajednica</string>
     <string name="poi_nursing_home">Dom za stare</string>
     <string name="poi_sanatorium">Sanatorijum</string>
@@ -2591,7 +2591,7 @@
     <string name="poi_historic_threshing_floor">Istorijsko gumno</string>
     <string name="poi_historic_gallows">Istorijska vešala</string>
     <string name="poi_historic_railway">Istorijske šine</string>
-    <string name="poi_square">Trg</string>
+    <string name="poi_square">Skver</string>
     <string name="poi_artist_name">Umetnik</string>
     <string name="poi_sculptor">Vajar</string>
     <string name="poi_building_type_church">Tip zgrade: crkva</string>
@@ -3751,7 +3751,7 @@
     <string name="poi_park_ride_metro">Metro</string>
     <string name="poi_park_ride_bus">Autobus</string>
     <string name="poi_park_ride_train">Voz</string>
-    <string name="poi_city_block">Gradski blok</string>
+    <string name="poi_city_block">Blok zgrada</string>
     <string name="poi_borough">Gradska opština</string>
     <string name="poi_give_box">Poklon kutija</string>
     <string name="poi_traffic_signals_arrow_yes">Da;Strelica semafora</string>
@@ -4472,4 +4472,27 @@
     <string name="poi_computer_parts_no">Delovi kompjutera: ne</string>
     <string name="poi_museum_technology">Tahnologija</string>
     <string name="poi_museum_agriculture">Poljoprivreda</string>
+    <string name="poi_handwashing_soap_no">Sapun: ne</string>
+    <string name="poi_handwashing_hand_disinfection_yes">Dezinfekcija ruku: da</string>
+    <string name="poi_gender_segregated_yes">Odvojeno po polu: da</string>
+    <string name="poi_gender_segregated_no">Odvojeno po polu: ne</string>
+    <string name="poi_handwashing_hand_disinfection_no">Dezinfekcija ruku: ne</string>
+    <string name="poi_post_office_service_provider">Pružalac poštanskih usluga</string>
+    <string name="poi_toilets_paper_supplied_yes">Toaletni papir: da</string>
+    <string name="poi_post_office_post_partner">Poštanski partner</string>
+    <string name="poi_books_adults">Odrasli</string>
+    <string name="poi_toilets_paper_supplied_no">Toaletni papir: ne</string>
+    <string name="poi_toilets_hands_drying_no">Sušenje ruku: ne</string>
+    <string name="poi_handwashing_soap_yes">Sapun: da</string>
+    <string name="poi_toilets_hands_drying_yes">Sušenje ruku: da</string>
+    <string name="poi_toilets_handwashing_no">Pranje ruku: ne</string>
+    <string name="poi_toilets_handwashing_yes">Pranje ruku: da</string>
+    <string name="poi_handwashing_hand_cleaning_paste_no">Pasta za čišćenje ruku: ne</string>
+    <string name="poi_handwashing_hand_cleaning_paste_yes">Pasta za čišćenje ruku: da</string>
+    <string name="poi_handwashing_creme_yes">Krema: da</string>
+    <string name="poi_handwashing_creme_no">Krema: ne</string>
+    <string name="poi_post_office_post_annex">Post aneks</string>
+    <string name="poi_post_office_bureau">Biro</string>
+    <string name="poi_post_office_service_brand">Brend pošte</string>
+    <string name="poi_post_office_opening_hours">Radno vreme pošte</string>
 </resources>
