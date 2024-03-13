@@ -5505,4 +5505,14 @@
     <string name="telegram_chats_descr">Ta del i en av våre lokale Telegram-sludringer.</string>
     <string name="telegram_chats">Telegram-sludringer</string>
     <string name="shared_string_eta">ETA</string>
+    <string name="all_folders">Alle mapper</string>
+    <string name="battery_optimization">Batterioptimalisering</string>
+    <string name="dont_ask_anymore">Ikke spør igjen</string>
+    <string name="max_sensor_speed">Sensorhastighet, maks.</string>
+    <string name="avg_sensor_bycicle_power">Sykkeleffekt, gjen.</string>
+    <string name="max_sensor_bycicle_power">Sykkeleffekt, maks.</string>
+    <string name="default_buttons">Forvalgte knapper</string>
+    <string name="avg_sensor_temperature">Temperatur, gjen.</string>
+    <string name="max_sensor_temperature">Temperatur, maks.</string>
+    <string name="shared_sting_all_colors">Alle farger</string>
 </resources>
