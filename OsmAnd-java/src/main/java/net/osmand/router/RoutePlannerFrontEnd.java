@@ -425,7 +425,7 @@ public class RoutePlannerFrontEnd {
 			while (st != end) {
 				LatLon point = r.getPoint(st);
 				boolean pointIsClosed = false;
-				int delta = 0, startInd = Math.max(0, start.ind - delta),
+				int delta = 3, startInd = Math.max(0, start.ind - delta),
 						nextInd = Math.min(gpxPoints.size(), next.ind + delta);
 				for (int k = startInd; !pointIsClosed && k < nextInd; k++) {
 					pointIsClosed = pointCloseEnough(minPointApproximation, point, gpxPoints.get(k),
@@ -773,11 +773,15 @@ public class RoutePlannerFrontEnd {
 
 	private boolean pointCloseEnough(float minPointApproximation, LatLon point, GpxPoint gpxPoint,
 			GpxPoint gpxPointNext) {
-		LatLon gpxPointLL = gpxPoint.pnt != null ? gpxPoint.pnt.getPreciseLatLon() : gpxPoint.loc;
-		LatLon gpxPointNextLL = gpxPointNext.pnt != null ? gpxPointNext.pnt.getPreciseLatLon() : gpxPointNext.loc;
+		LatLon gpxPointLL = gpxPoint.loc; //gpxPoint.pnt != null ? gpxPoint.pnt.getPreciseLatLon() : gpxPoint.loc;
+		LatLon gpxPointNextLL = gpxPointNext.loc; // gpxPointNext.pnt != null ? gpxPointNext.pnt.getPreciseLatLon() : gpxPointNext.loc;
+//		LatLon gpxPointLL = gpxPoint.pnt != null ? gpxPoint.pnt.getPreciseLatLon() : gpxPoint.loc;
+//		LatLon gpxPointNextLL = gpxPointNext.pnt != null ? gpxPointNext.pnt.getPreciseLatLon() : gpxPointNext.loc;
 		double orthogonalDistance = MapUtils.getOrthogonalDistance(point.getLatitude(), point.getLongitude(),
 				gpxPointLL.getLatitude(), gpxPointLL.getLongitude(), gpxPointNextLL.getLatitude(),
 				gpxPointNextLL.getLongitude());
+//		System.out.printf("%.1f %s (%d-%d) - %s %s \n", orthogonalDistance, point, 
+//				gpxPoint.ind, gpxPointNext.ind, gpxPointLL, gpxPointNextLL);
 		return orthogonalDistance <= minPointApproximation;
 	}
 
