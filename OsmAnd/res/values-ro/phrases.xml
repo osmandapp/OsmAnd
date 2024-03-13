@@ -4811,7 +4811,7 @@
     <string name="poi_us_maps_recreation_area_activity_road_cycling">Ciclism rutier</string>
     <string name="poi_us_maps_recreation_area_activity_scenic_driving">Condus scenic</string>
     <string name="poi_us_maps_recreation_area_activity_xc_skiing_snowshoeing">Schi XC și rachete de zăpadă</string>
-    <string name="poi_us_maps_recreation_area_open_status_open">Deschideți</string>
+    <string name="poi_us_maps_recreation_area_open_status_open">Deschis</string>
     <string name="poi_us_maps_recreation_area_open_status_closed">Închis</string>
     <string name="poi_us_maps_recreation_area_open_status_temporarily_closed">Temporar închis</string>
     <string name="poi_us_maps_recreation_area_open_season_end">Sfârșitul sezonului deschis</string>
@@ -4820,7 +4820,7 @@
     <string name="poi_us_maps_recreation_area_activity_visitor_programs">Programe pentru vizitatori</string>
     <string name="poi_us_maps_recreation_area_activity_water_activities">Activități acvatice</string>
     <string name="poi_us_maps_recreation_area_activity_waterskiing">Schi nautic</string>
-    <string name="poi_us_maps_recreation_area_activity_windsurfing">Surfing pe vânt</string>
+    <string name="poi_us_maps_recreation_area_activity_windsurfing">Windsurfing</string>
     <string name="poi_us_maps_recreation_area_activity_winter_sports">Sporturi de iarnă</string>
     <string name="poi_us_maps_recreation_area_open_status_unreachable">Inaccesibil</string>
     <string name="poi_us_maps_recreation_area_open_status_open_2">Starea accesului la zona de recreere (2): deschis</string>
