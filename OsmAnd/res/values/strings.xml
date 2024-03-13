@@ -10,7 +10,16 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="release_4_7">
+        • New \"Speedometer\" widget compatible with Android Auto\n\n
+        • Configure the map screen by adding multiple \"Quick Action\" buttons\n\n
+        • Improved readability of data in graphs\n\n
+        • Added filters by sensor data for tracks\n\n
+        • Added support for additional GPX tags\n\n
+        • Customize \"Distance during navigation\": choose between precise or round up numbers\n\n
+        • Unified UI for track selection\n\n
+        • OpenStreetMap login switched to OAuth 2.0\n\n
+    </string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="shared_sting_all_colors">All colors</string>
     <string name="routing_type_a_star_2_phase">A* 2-phase</string>
