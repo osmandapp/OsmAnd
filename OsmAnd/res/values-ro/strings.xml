@@ -4971,8 +4971,8 @@
     <string name="rendering_attr_weatherPrecipitationContours_name">Izolinii precipitații</string>
     <string name="y_axis">Axa Y</string>
     <string name="value_downloaded_of_mb">Se descarcă %1$.1f/%2$.1f MO</string>
-    <string name="skip_download">Sări peste descărcare</string>
-    <string name="determine_location">Permite determinarea locației</string>
+    <string name="skip_download">Săriți descărcarea</string>
+    <string name="determine_location">Permiteți-ne să vă determinăm locația</string>
     <string name="set_up_backup">Configurează backup</string>
     <string name="choose_what_to_sync">Alegeți ce se va sincroniza</string>
     <string name="res_unknown">Necunoscut</string>
