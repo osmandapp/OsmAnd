@@ -84,7 +84,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	@Override
 	public View getCardContentView(@NonNull FragmentActivity activity, boolean nightMode) {
 		WidthComponentController controller = getWidthComponentController();
-		ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller, true);
+		ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller);
 		View view = widthComponentCard.build(activity);
 
 		View widthSliderContainer = widthComponentCard.getSliderContainer();

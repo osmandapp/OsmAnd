@@ -46,13 +46,18 @@ public class WidthComponentController implements IModedSliderController {
 		return widthMode == WidthMode.CUSTOM;
 	}
 
+	@NonNull
+	public String getSelectedCustomValue() {
+		return String.valueOf(getSelectedSliderValue());
+	}
+
 	@Override
 	public int getSelectedSliderValue() {
 		return customValue;
 	}
 
 	@Override
-	public List<SliderMode> getSliderModes() {
+	public @NonNull List<SliderMode> getSliderModes() {
 		List<SliderMode> sliderModes = new ArrayList<>();
 		for (WidthMode widthMode : WidthMode.values()) {
 			sliderModes.add(new SliderMode(widthMode.getIconId(), widthMode));
@@ -68,14 +73,21 @@ public class WidthComponentController implements IModedSliderController {
 		askSelectSliderMode(new SliderMode(widthMode.getIconId(), widthMode));
 	}
 
-	public boolean askSelectSliderMode(@NonNull SliderMode sliderMode) {
+	@Nullable
+	@Override
+	public SliderMode getSelectedSliderMode() {
+		return new SliderMode(widthMode.getIconId(), widthMode);
+	}
+
+	public void askSelectSliderMode(@NonNull SliderMode sliderMode) {
 		if (!isSelectedSliderMode(sliderMode)) {
 			widthMode = (WidthMode) sliderMode.getTag();
-			cardInstance.updateSliderVisibility();
+			if (cardInstance != null) {
+				cardInstance.updateSegmentedButtonSelection();
+				cardInstance.updateSliderVisibility();
+			}
 			notifyWidthSelected();
-			return true;
 		}
-		return false;
 	}
 
 	@Override
@@ -87,18 +99,25 @@ public class WidthComponentController implements IModedSliderController {
 	public String getSummary(@NonNull Context context) {
 		if (widthMode == WidthMode.CUSTOM) {
 			String custom = context.getString(R.string.shared_string_custom);
-			String value = String.valueOf(getSelectedSliderValue());
+			String value = getSelectedCustomValue();
 			return context.getString(R.string.ltr_or_rtl_combine_via_comma, custom, value);
 		}
 		return context.getString(widthMode.getTitleId());
 	}
 
 	public void updateControlsColor() {
-		cardInstance.updateControlsColor();
+		if (cardInstance != null) {
+			cardInstance.updateControlsColor();
+		}
+	}
+
+	@NonNull
+	public String getSelectedWidthValue() {
+		return widthMode == WidthMode.CUSTOM ? String.valueOf(customValue) : widthMode.getKey();
 	}
 
 	private void notifyWidthSelected() {
-		String width = widthMode == WidthMode.CUSTOM ? String.valueOf(customValue) : widthMode.getKey();
+		String width = getSelectedWidthValue();
 		listener.onWidthSelected(width);
 	}
 }

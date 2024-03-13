@@ -24,7 +24,7 @@ public class MultiStateCard extends BaseCard {
 	                      @NonNull IMultiStateCardController controller, boolean usedOnMap) {
 		super(activity, usedOnMap);
 		this.controller = controller;
-		controller.bindCard(this);
+		controller.bindComponent(this);
 	}
 
 	@Override

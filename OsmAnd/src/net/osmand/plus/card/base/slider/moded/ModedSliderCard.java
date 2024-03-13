@@ -18,6 +18,11 @@ import java.util.List;
 public class ModedSliderCard extends SliderCard implements IModedSliderComponent {
 
 	private final IModedSliderController controller;
+	private IconToggleButton segmentedButton;
+
+	public ModedSliderCard(@NonNull FragmentActivity activity, @NonNull IModedSliderController controller) {
+		this(activity, controller, true);
+	}
 
 	public ModedSliderCard(@NonNull FragmentActivity activity,
 	                       @NonNull IModedSliderController controller, boolean usedOnMap) {
@@ -44,21 +49,28 @@ public class ModedSliderCard extends SliderCard implements IModedSliderComponent
 
 	private void setupSegmentedButton() {
 		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
-		IconToggleButton segmentedButton = new IconToggleButton(app, container, nightMode);
+		segmentedButton = new IconToggleButton(app, container, nightMode);
 
-		IconRadioItem selectedRadioItem = null;
 		List<IconRadioItem> radioItems = new ArrayList<>();
 		for (SliderMode sliderMode : controller.getSliderModes()) {
 			int iconId = sliderMode.getIconId();
 			IconRadioItem radioItem = new IconRadioItem(iconId);
-			radioItem.setOnClickListener((r, v) -> controller.askSelectSliderMode(sliderMode));
+			radioItem.setOnClickListener((r, v) -> {
+				controller.askSelectSliderMode(sliderMode);
+				return false;
+			});
+			radioItem.setTag(sliderMode);
 			radioItems.add(radioItem);
-			if (controller.isSelectedSliderMode(sliderMode)) {
-				selectedRadioItem = radioItem;
-			}
+
 		}
 		segmentedButton.setItems(radioItems);
-		segmentedButton.setSelectedItem(selectedRadioItem);
+		updateSegmentedButtonSelection();
+	}
+
+	@Override
+	public void updateSegmentedButtonSelection() {
+		SliderMode selectedMode = controller.getSelectedSliderMode();
+		segmentedButton.setSelectedItemByTag(selectedMode);
 	}
 
 	@Override

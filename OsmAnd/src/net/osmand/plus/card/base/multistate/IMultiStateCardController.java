@@ -28,7 +28,7 @@ public interface IMultiStateCardController {
 		PopUpMenu.show(displayData);
 	}
 
-	void bindCard(@NonNull MultiStateCard card);
+	void bindComponent(@NonNull MultiStateCard cardInstance);
 
 	@NonNull
 	String getMultiStateCardTitle();

@@ -37,6 +37,8 @@ import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.controllers.RouteLineColorController;
 import net.osmand.plus.settings.controllers.RouteLineColorController.IRouteLineColorControllerListener;
+import net.osmand.plus.settings.controllers.RouteLineWidthController;
+import net.osmand.plus.settings.controllers.RouteLineWidthController.OnRouteLineWidthSelectedListener;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -44,7 +46,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
-		implements IRouteLineColorControllerListener, HeaderUiAdapter {
+		implements IRouteLineColorControllerListener, OnRouteLineWidthSelectedListener, HeaderUiAdapter {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -198,7 +200,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		colorsCard = new RouteLineColorCard(mapActivity, getColorCardController(), this);
 		cardsContainer.addView(colorsCard.build(mapActivity));
 
-		widthCard = new RouteLineWidthCard(mapActivity, previewRouteLineInfo, createScrollListener(), this);
+		inflate(R.layout.list_item_divider_basic, cardsContainer, true);
+		widthCard = new RouteLineWidthCard(mapActivity, getWidthCardController(), this);
 		cardsContainer.addView(widthCard.build(mapActivity));
 
 		RouteTurnArrowsCard turnArrowCard = new RouteTurnArrowsCard(mapActivity, previewRouteLineInfo);
@@ -459,6 +462,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public void onDestroy() {
 		super.onDestroy();
 		getColorCardController().onDestroy(getActivity());
+		getWidthCardController().onDestroy(getActivity());
 	}
 
 	private void enterAppearanceMode() {
@@ -537,10 +541,13 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		updateColorItems();
 	}
 
+	@Override
+	public void onRouteLineWidthSelected(@Nullable String width) {
+
+	}
+
 	private void updateColorItems() {
-		if (widthCard != null) {
-			widthCard.updateItems();
-		}
+		getWidthCardController().getWidthComponentController().updateControlsColor();
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
 		}
@@ -553,6 +560,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@NonNull
 	private RouteLineColorController getColorCardController() {
 		return RouteLineColorController.getInstance(app, previewRouteLineInfo, this);
+	}
+
+	@NonNull
+	private RouteLineWidthController getWidthCardController() {
+		return RouteLineWidthController.getInstance(app, previewRouteLineInfo, createScrollListener(), this);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,

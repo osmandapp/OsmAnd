@@ -33,7 +33,7 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 	protected final OsmandApplication app;
 	private final List<ColoringStyle> supportedColoringStyles;
 
-	private MultiStateCard card;
+	private MultiStateCard cardInstance;
 	private ColoringStyle selectedColoringStyle;
 	private IColorCardControllerListener controllerListener;
 	private boolean nightMode;
@@ -46,8 +46,8 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 	}
 
 	@Override
-	public void bindCard(@NonNull MultiStateCard card) {
-		this.card = card;
+	public void bindComponent(@NonNull MultiStateCard cardInstance) {
+		this.cardInstance = cardInstance;
 	}
 
 	public void setListener(@NonNull IColorCardControllerListener controllerListener) {
@@ -158,7 +158,7 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 	}
 
 	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		card.updateSelectedCardState();
+		cardInstance.updateSelectedCardState();
 		controllerListener.onColoringStyleSelected(coloringStyle);
 	}
 

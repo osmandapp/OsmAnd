@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
@@ -61,6 +62,11 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		setSelectedItem(selectedItem);
 	}
 
+	public final void setSelectedItemByTag(@Nullable Object tag) {
+		_Radio selectedItem = findItemByTag(tag);
+		setSelectedItem(selectedItem);
+	}
+
 	public final void setSelectedItem(@Nullable _Radio selectedItem) {
 		this.selectedItem = selectedItem;
 		updateView();
@@ -68,6 +74,16 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 	public int getSelectedItemIndex() {
 		return items.indexOf(selectedItem);
+	}
+
+	@Nullable
+	public _Radio findItemByTag(@Nullable Object tag) {
+		for (_Radio item : items) {
+			if (Objects.equals(item.getTag(), tag)) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 	private void initView() {
