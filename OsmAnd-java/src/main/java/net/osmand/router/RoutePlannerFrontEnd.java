@@ -167,9 +167,8 @@ public class RoutePlannerFrontEnd {
 		return new RoutingContext(config, nativeLibrary, map, rm);
 	}
 
-	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary,
-			BinaryMapIndexReader[] map) {
-		return buildRoutingContext(config, nativeLibrary, map);
+	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
+		return buildRoutingContext(config, nativeLibrary, map, null);
 	}
 
 	private static double squareDist(int x1, int y1, int x2, int y2) {
