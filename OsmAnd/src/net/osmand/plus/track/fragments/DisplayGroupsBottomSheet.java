@@ -1,5 +1,6 @@
 package net.osmand.plus.track.fragments;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -11,25 +12,30 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.track.helpers.GpxDisplayGroup;
-import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper;
 import net.osmand.plus.track.helpers.DisplayPointsGroupsHelper.DisplayGroupsHolder;
+import net.osmand.plus.track.helpers.GpxDisplayGroup;
+import net.osmand.plus.track.helpers.GpxDisplayItem;
+import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.track.helpers.TrackDisplayHelper;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.utils.UiUtilities.CompoundButtonType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -160,11 +166,11 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 	}
 
-	private void updateGroupVisibility(String groupName, boolean isVisible) {
-		if (isVisible) {
-			selectedGpxFile.removeHiddenGroups(groupName);
-		} else {
-			selectedGpxFile.addHiddenGroups(groupName);
+	private void updateGroupVisibility(String groupName, boolean visible) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(groupName);
+		if (pointsGroup != null) {
+			pointsGroup.setHidden(!visible);
 		}
 	}
 
@@ -236,15 +242,32 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		return R.string.shared_string_close;
 	}
 
-	public static DisplayGroupsBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                    @NonNull Fragment targetFragment,
-	                                                    boolean usedOnMap) {
-		DisplayGroupsBottomSheet fragment = new DisplayGroupsBottomSheet();
-		fragment.setUsedOnMap(usedOnMap);
-		fragment.setTargetFragment(targetFragment, 0);
-		FragmentManager fm = activity.getSupportFragmentManager();
-		fragment.show(fm, TAG);
-		return fragment;
+	@Override
+	public void onDestroy() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			updateGroupsVisibility();
+		}
+		super.onDestroy();
+	}
+
+	private void updateGroupsVisibility() {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		MapActivity activity = (MapActivity) getActivity();
+		if (activity != null) {
+			Map<String, PointsGroup> groups = new HashMap<>(gpxFile.getPointsGroups());
+			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target, boolean usedOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			DisplayGroupsBottomSheet fragment = new DisplayGroupsBottomSheet();
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 
 	public interface DisplayPointGroupsCallback {

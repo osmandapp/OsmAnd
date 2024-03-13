@@ -44,7 +44,6 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 	                               @Nullable GpxDataItem dataItem) {
 		this.sourceSelectedGpxFile = sourceSelectedGpxFile;
 		this.joinSegments = sourceSelectedGpxFile.joinSegments;
-		this.hiddenGroups = sourceSelectedGpxFile.getHiddenGroups();
 
 		setGpxFile(GpsFilterHelper.copyGpxFile(app, sourceSelectedGpxFile.gpxFile), app);
 		if (joinSegments) {
