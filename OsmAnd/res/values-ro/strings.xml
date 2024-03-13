@@ -5241,13 +5241,13 @@
 \nAceastă acțiune nu poate fi anulată.</string>
     <string name="osmand_cloud_delete_account_confirmation">Ștergeți contul\?</string>
     <string name="action_cannot_be_undone">Această acțiune nu poate fi anulată.</string>
-    <string name="osmand_cloud_deletion_secondary_devices_warning">Dispozitivele secundare vor fi deconectate de la OsmAnd Cloud și vor pierde accesul la funcțiile plătite.</string>
+    <string name="osmand_cloud_deletion_secondary_devices_warning">Dispozitivele secundare vor fi deconectate de la OsmAnd Cloud și vor pierde accesul la funcționalitățile plătite.</string>
     <string name="osmand_cloud_deletion_account_warning">Contul dumneavoastră și toate detaliile contului vor fi %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Toate datele din OsmAnd Cloud vor fi %1$s. Datele de pe dispozitiv rămân neatinse.</string>
-    <string name="manage_subscriptions">Gestionați abonamentele.</string>
+    <string name="manage_subscriptions">Gestionare abonamente.</string>
     <string name="delete_account_warning">Ștergeți contul %1$s?</string>
     <string name="shared_string_deleting">Se șterge</string>
-    <string name="deleting_complete">Ștergere completă</string>
+    <string name="deleting_complete">Ștergere finalizată</string>
     <string name="delete_account">Șterge contul</string>
     <string name="backup_error_delete_account_email_match">E-mail-ul nu se potrivește cu numele de utilizator folosit la conectare</string>
     <string name="verify_account">Verificați-vă contul</string>
