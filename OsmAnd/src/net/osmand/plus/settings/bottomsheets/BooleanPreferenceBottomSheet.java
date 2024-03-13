@@ -5,7 +5,6 @@ import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.getSec
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -155,18 +154,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		}
 
 		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			int selectableResId = isLayoutRtl ?
-					R.drawable.ripple_rectangle_rounded_left :
-					R.drawable.ripple_rectangle_rounded_right;
-			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
-			Drawable selectable = app.getUIUtilities().getPaintedIcon(selectableResId, selectedColor);
-			Drawable[] layers = {bgDrawable, selectable};
-			AndroidUtils.setBackground(buttonView, new LayerDrawable(layers));
-		} else {
-			Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
-			AndroidUtils.setBackground(buttonView, bgDrawable);
-		}
+		int selectableResId = isLayoutRtl ? R.drawable.ripple_rectangle_rounded_left : R.drawable.ripple_rectangle_rounded_right;
+		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
+		Drawable selectable = app.getUIUtilities().getPaintedIcon(selectableResId, selectedColor);
+		Drawable[] layers = {bgDrawable, selectable};
+		AndroidUtils.setBackground(buttonView, new LayerDrawable(layers));
 	}
 
 	protected SwitchPreferenceEx getSwitchPreferenceEx() {

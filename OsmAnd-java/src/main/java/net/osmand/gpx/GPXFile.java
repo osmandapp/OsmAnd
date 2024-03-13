@@ -1,5 +1,7 @@
 package net.osmand.gpx;
 
+import static net.osmand.gpx.GPXUtilities.PointsGroup.DEFAULT_WPT_GROUP_NAME;
+
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.gpx.GPXUtilities.Route;
@@ -19,8 +21,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class GPXFile extends GPXUtilities.GPXExtensions {
-
-	private static final String DEFAULT_WPT_GROUP_NAME = "";
 
 	public String author;
 	public GPXUtilities.Metadata metadata = new GPXUtilities.Metadata();

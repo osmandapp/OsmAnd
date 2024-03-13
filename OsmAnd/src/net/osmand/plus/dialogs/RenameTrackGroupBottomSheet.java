@@ -9,15 +9,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.PointsGroup;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.myplaces.tracks.tasks.UpdateGpxCategoryTask;
-import net.osmand.plus.myplaces.tracks.tasks.UpdateGpxCategoryTask.UpdateGpxListener;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask.UpdateGpxListener;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.utils.AndroidUtils;
@@ -25,6 +25,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.Map;
 
 public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 
@@ -65,15 +67,14 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 		dismiss();
 	}
 
-	private void updateGpx(@NonNull GPXFile gpxFile, @NonNull PointsGroup pointsGroup) {
+	private void updateGpx(@NonNull GPXFile gpxFile, @NonNull PointsGroup group) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
-			PointsGroup newGroup = new PointsGroup(groupName, pointsGroup.iconName,
-					pointsGroup.backgroundType, pointsGroup.color);
+			PointsGroup newGroup = new PointsGroup(groupName, group.iconName, group.backgroundType, group.color);
+			Map<String, PointsGroup> groups = Collections.singletonMap(group.name, newGroup);
 
-			UpdateGpxCategoryTask task = new UpdateGpxCategoryTask(mapActivity, gpxFile, pointsGroup.name,
-					newGroup, listener, false);
+			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}

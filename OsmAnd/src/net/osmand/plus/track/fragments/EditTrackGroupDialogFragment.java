@@ -7,9 +7,9 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -35,8 +35,10 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask.OnPointsDeleteListener;
+import net.osmand.plus.myplaces.tracks.tasks.UpdatePointsGroupsTask;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.fragments.DisplayGroupsBottomSheet.DisplayPointGroupsCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
@@ -46,40 +48,53 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener, OnGroupNameChangeListener {
 
+
 	public static final String TAG = EditTrackGroupDialogFragment.class.getSimpleName();
 
 	private OsmandApplication app;
-	private GpxSelectionHelper selectedGpxHelper;
 	private MapMarkersHelper mapMarkersHelper;
+	private GpxSelectionHelper selectedGpxHelper;
 
-	private GpxDisplayGroup group;
+	private GPXFile gpxFile;
+	private PointsGroup pointsGroup;
+	private GpxDisplayGroup displayGroup;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		app = requiredMyApplication();
+		mapMarkersHelper = app.getMapMarkersHelper();
+		selectedGpxHelper = app.getSelectedGpxHelper();
+
+		if (displayGroup != null) {
+			gpxFile = displayGroup.getGpxFile();
+			pointsGroup = gpxFile.getPointsGroups().get(displayGroup.getName());
+		}
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		if (group == null) {
+		if (displayGroup == null) {
 			return;
 		}
-		app = requiredMyApplication();
-		selectedGpxHelper = app.getSelectedGpxHelper();
-		mapMarkersHelper = app.getMapMarkersHelper();
-		items.add(new TitleItem(getCategoryName(app, group.getName())));
 
-		GPXFile gpxFile = group.getGpxFile();
-
-		boolean currentTrack = group.getGpxFile().showCurrentTrack;
+		items.add(new TitleItem(getCategoryName(app, displayGroup.getName())));
 
 		SelectedGpxFile selectedGpxFile;
-		if (currentTrack) {
+		if (gpxFile.showCurrentTrack) {
 			selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 		} else {
 			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 		}
-		boolean trackPoints = group.getType() == GpxDisplayItemType.TRACK_POINTS;
+		boolean trackPoints = displayGroup.getType() == GpxDisplayItemType.TRACK_POINTS;
 		if (trackPoints && selectedGpxFile != null) {
 			items.add(createShowOnMapItem(selectedGpxFile));
 		}
@@ -89,8 +104,8 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		items.add(new OptionsDividerItem(app));
 
-		if (!currentTrack) {
-			items.add(createCopyToMarkersItem(gpxFile));
+		if (!gpxFile.showCurrentTrack) {
+			items.add(createCopyToMarkersItem());
 		}
 		items.add(createCopyToFavoritesItem());
 		items.add(new OptionsDividerItem(app));
@@ -98,8 +113,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		items.add(createDeleteGroupItem());
 	}
 
-	private BaseBottomSheetItem createShowOnMapItem(SelectedGpxFile selectedGpxFile) {
-		boolean checked = !selectedGpxFile.isGroupHidden(group.getName());
+	@NonNull
+	private BaseBottomSheetItem createShowOnMapItem(@NonNull SelectedGpxFile selectedGpxFile) {
+		boolean checked = !selectedGpxFile.isGroupHidden(displayGroup.getName());
 		ApplicationMode mode = app.getSettings().getApplicationMode();
 		BottomSheetItemWithCompoundButton[] showOnMapItem = new BottomSheetItemWithCompoundButton[1];
 		showOnMapItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
@@ -107,72 +123,66 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setChecked(checked)
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setCustomView(getCustomButtonView(app, mode, checked, nightMode))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						boolean checked = !showOnMapItem[0].isChecked();
-						if (checked) {
-							selectedGpxFile.removeHiddenGroups(group.getName());
-						} else {
-							selectedGpxFile.addHiddenGroups(group.getName());
-						}
-						app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
+				.setOnClickListener(v -> {
+					boolean visible = !showOnMapItem[0].isChecked();
+					if (pointsGroup != null) {
+						pointsGroup.setHidden(!visible);
+					}
+					showOnMapItem[0].setChecked(visible);
+					updateCustomButtonView(app, mode, v, visible, nightMode);
 
-						showOnMapItem[0].setChecked(checked);
-						updateCustomButtonView(app, mode, v, checked, nightMode);
-
-						FragmentActivity activity = getActivity();
-						if (activity instanceof MapActivity) {
-							((MapActivity) activity).refreshMap();
-						}
-						Fragment fragment = getTargetFragment();
-						if (fragment instanceof TrackMenuFragment) {
-							((TrackMenuFragment) fragment).updateContent();
-						}
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof DisplayPointGroupsCallback) {
+						((DisplayPointGroupsCallback) fragment).onPointGroupsVisibilityChanged();
 					}
 				})
 				.create();
 		return showOnMapItem[0];
 	}
 
+	private void updateGroupVisibility() {
+		MapActivity activity = (MapActivity) getActivity();
+		if (activity != null) {
+			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.name, pointsGroup);
+			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	@NonNull
 	private BaseBottomSheetItem createEditNameItem() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_name_field))
 				.setTitle(getString(R.string.shared_string_rename))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							FragmentManager fragmentManager = activity.getSupportFragmentManager();
-							RenameTrackGroupBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group);
-						}
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						RenameTrackGroupBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
 					}
 				})
 				.create();
 	}
 
-	private BaseBottomSheetItem createCopyToMarkersItem(GPXFile gpxFile) {
+	@NonNull
+	private BaseBottomSheetItem createCopyToMarkersItem() {
 		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(gpxFile);
 		boolean synced = markersGroup != null && (Algorithms.isEmpty(markersGroup.getWptCategories())
-				|| markersGroup.getWptCategories().contains(group.getName()));
+				|| markersGroup.getWptCategories().contains(displayGroup.getName()));
 
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_copy))
 				.setTitle(getString(synced ? R.string.remove_group_from_markers : R.string.add_group_to_markers))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						updateGroupWptCategory(gpxFile, synced);
-						dismiss();
-					}
+				.setOnClickListener(v -> {
+					updateGroupWptCategory(synced);
+					dismiss();
 				})
 				.create();
 	}
 
-	private void updateGroupWptCategory(GPXFile gpxFile, boolean synced) {
+	private void updateGroupWptCategory(boolean synced) {
 		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
 		if (selectedGpxFile == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
@@ -191,9 +201,9 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			selectedCategories.addAll(categories);
 		}
 		if (synced) {
-			selectedCategories.remove(group.getName());
+			selectedCategories.remove(displayGroup.getName());
 		} else {
-			selectedCategories.add(group.getName());
+			selectedCategories.add(displayGroup.getName());
 		}
 		if (Algorithms.isEmpty(selectedCategories)) {
 			mapMarkersHelper.removeMarkersGroup(markersGroup);
@@ -205,24 +215,23 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createCopyToFavoritesItem() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_copy))
 				.setTitle(getString(R.string.copy_to_map_favorites))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							FragmentManager fragmentManager = activity.getSupportFragmentManager();
-							CopyTrackGroupToFavoritesBottomSheet.showInstance(fragmentManager, EditTrackGroupDialogFragment.this, group);
-						}
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager manager = activity.getSupportFragmentManager();
+						CopyTrackGroupToFavoritesBottomSheet.showInstance(manager, EditTrackGroupDialogFragment.this, displayGroup);
 					}
 				})
 				.create();
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createDeleteGroupItem() {
 		String delete = app.getString(R.string.shared_string_delete);
 		Typeface typeface = FontCache.getRobotoMedium(app);
@@ -250,10 +259,11 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void deleteGroupItems() {
-		Set<GpxDisplayItem> items = new HashSet<>(group.getDisplayItems());
-		new DeletePointsTask(app, group.getGpxFile(), items, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		Set<GpxDisplayItem> items = new HashSet<>(displayGroup.getDisplayItems());
+		new DeletePointsTask(app, gpxFile, items, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	@NonNull
 	private BaseBottomSheetItem createChangeColorItem() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_appearance))
@@ -262,8 +272,6 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						GPXFile gpxFile = group.getGpxFile();
-						PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
 						FragmentManager manager = activity.getSupportFragmentManager();
 						GpxGroupEditorFragment.showInstance(manager, gpxFile, pointsGroup, null);
 					}
@@ -274,28 +282,18 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (group == null) {
+		if (displayGroup == null) {
 			dismiss();
 		}
 	}
 
-	public static String getCategoryName(@NonNull Context ctx, String category) {
-		return Algorithms.isEmpty(category) ? ctx.getString(R.string.shared_string_waypoints) : category;
-	}
-
-	public static void showInstance(FragmentManager fragmentManager, GpxDisplayGroup group, Fragment target) {
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			EditTrackGroupDialogFragment fragment = new EditTrackGroupDialogFragment();
-			fragment.group = group;
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(fragmentManager, TAG);
-		}
-	}
-
 	@Override
-	public void onPointsDeletionStarted() {
-
+	public void onDestroy() {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			updateGroupVisibility();
+		}
+		super.onDestroy();
 	}
 
 	@Override
@@ -310,5 +308,20 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	@Override
 	public void onTrackGroupChanged() {
 		dismiss();
+	}
+
+	@NonNull
+	public static String getCategoryName(@NonNull Context ctx, @Nullable String category) {
+		return Algorithms.isEmpty(category) ? ctx.getString(R.string.shared_string_waypoints) : category;
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull GpxDisplayGroup displayGroup, @Nullable Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			EditTrackGroupDialogFragment fragment = new EditTrackGroupDialogFragment();
+			fragment.displayGroup = displayGroup;
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(manager, TAG);
+		}
 	}
 }
