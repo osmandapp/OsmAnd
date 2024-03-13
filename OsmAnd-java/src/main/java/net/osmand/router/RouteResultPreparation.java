@@ -2147,12 +2147,12 @@ public class RouteResultPreparation {
 				public void remove() {
 				}
 			};	
-		} else if (ctx.nativeLib == null) {
+		} else /*if (ctx.nativeLib == null)*/ {
 			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
 			it = rt == null ? null : rt.getIterator();
-		} else {
+		/*} else {
 			// Here we assume that all segments should be attached by native
-			it = null;
+			it = null;*/
 		}
 		// try to attach all segments except with current id
 		while (it != null && it.hasNext()) {

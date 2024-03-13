@@ -454,7 +454,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	}
 
 	public void copyPreattachedRoutes(RouteSegmentResult toCopy, int shift) {
-		if (toCopy.preAttachedRoutes != null) {
+		if (toCopy.preAttachedRoutes != null && toCopy.preAttachedRoutes.length > 0) {
 			int l = toCopy.preAttachedRoutes.length - shift;
 			preAttachedRoutes = new RouteSegmentResult[l][];
 			System.arraycopy(toCopy.preAttachedRoutes, shift, preAttachedRoutes, 0, l);
