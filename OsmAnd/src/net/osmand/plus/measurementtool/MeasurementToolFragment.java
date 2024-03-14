@@ -124,7 +124,7 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
 import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
@@ -2239,7 +2239,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
-	public void onGpxApproximationDone(List<GpxRouteApproximation> gpxApproximations, List<List<WptPt>> pointsList, ApplicationMode mode) {
+	public void onGpxApproximationDone(List<GpxApproximationContext> gpxApproximations, List<List<WptPt>> pointsList, ApplicationMode mode) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		boolean approximationMode = editingCtx.isInApproximationMode();
 		editingCtx.setInApproximationMode(true);

@@ -43,8 +43,9 @@ import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd;
-import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
+import net.osmand.router.GpxRoutingApproximation.GpxPoint;
+import net.osmand.router.GpxRoutingApproximation;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
@@ -232,7 +233,7 @@ public class RouteProvider {
 						endLoc.setLongitude(end.getLongitude());
 						locations = Arrays.asList(start, endLoc);
 					}
-					route = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
+					route = Collections.singletonList(GpxRoutingApproximation.generateStraightLineSegment(
 							routeParams.mode.getDefaultSpeed(), new LocationsHolder(locations).getLatLonList()));
 				}
 				gpxRouteLocations.addAll(locations);
@@ -748,11 +749,11 @@ public class RouteProvider {
 		return calculateRoutingEnvironment(params, false, true);
 	}
 
-	public List<GpxPoint> generateGpxPoints(RoutingEnvironment env, GpxRouteApproximation gctx, LocationsHolder locationsHolder) {
+	public List<GpxPoint> generateGpxPoints(RoutingEnvironment env, GpxApproximationContext gctx, LocationsHolder locationsHolder) {
 		return env.getRouter().generateGpxPoints(gctx, locationsHolder);
 	}
 
-	public GpxRouteApproximation calculateGpxPointsApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+	public GpxApproximationContext calculateGpxPointsApproximation(RoutingEnvironment env, GpxApproximationContext gctx, List<GpxPoint> points, ResultMatcher<GpxApproximationContext> resultMatcher) throws IOException, InterruptedException {
 		return env.getRouter().searchGpxRoute(gctx, points, resultMatcher);
 	}
 

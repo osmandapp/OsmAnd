@@ -14,7 +14,7 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -33,7 +33,7 @@ public class GpxApproximationHelper {
 	private GpxApproximator approximator;
 	@NonNull
 	private final GpxApproximationParams params;
-	private final Map<LocationsHolder, GpxRouteApproximation> resultMap = new HashMap<>();
+	private final Map<LocationsHolder, GpxApproximationContext> resultMap = new HashMap<>();
 	private GpxApproximationListener listener;
 
 
@@ -75,9 +75,9 @@ public class GpxApproximationHelper {
 
 	private void approximateGpx(@NonNull GpxApproximator gpxApproximator) {
 		notifyOnApproximationStarted();
-		gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxRouteApproximation>() {
+		gpxApproximator.calculateGpxApproximation(new ResultMatcher<GpxApproximationContext>() {
 			@Override
-			public boolean publish(GpxRouteApproximation gpxApproximation) {
+			public boolean publish(GpxApproximationContext gpxApproximation) {
 				app.runInUIThread(() -> {
 					if (!gpxApproximator.isCancelled()) {
 						if (gpxApproximation != null) {
@@ -132,10 +132,10 @@ public class GpxApproximationHelper {
 	}
 
 	private void processApproximationResults() {
-		List<GpxRouteApproximation> approximations = new ArrayList<>();
+		List<GpxApproximationContext> approximations = new ArrayList<>();
 		List<List<WptPt>> points = new ArrayList<>();
 		for (LocationsHolder locationsHolder : params.getLocationsHolders()) {
-			GpxRouteApproximation approximation = resultMap.get(locationsHolder);
+			GpxApproximationContext approximation = resultMap.get(locationsHolder);
 			if (approximation != null) {
 				approximations.add(approximation);
 				points.add(locationsHolder.getWptPtList());
@@ -199,10 +199,10 @@ public class GpxApproximationHelper {
 		GpxApproximationHelper helper = new GpxApproximationHelper(app, params);
 		helper.setListener(new GpxApproximationListener() {
 			@Override
-			public void processApproximationResults(@NonNull List<GpxRouteApproximation> approximations,
+			public void processApproximationResults(@NonNull List<GpxApproximationContext> approximations,
 			                                        @NonNull List<List<WptPt>> points) {
 				for (int i = 0; i < approximations.size(); i++) {
-					GpxRouteApproximation approximation = approximations.get(i);
+					GpxApproximationContext approximation = approximations.get(i);
 					List<WptPt> segment = points.get(i);
 					ctx.setPoints(approximation, segment, params.getAppMode(), false);
 				}
