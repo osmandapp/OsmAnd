@@ -41,8 +41,6 @@ public class RoutePlannerFrontEnd {
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	static boolean TRACE_ROUTING = false;
 	
-	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
-//	private static final HHRoutingConfig DEFAULT_ROUTING_CONFIG = HHRoutingConfig.dijkstra(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
@@ -51,6 +49,10 @@ public class RoutePlannerFrontEnd {
 	
 
 	public RoutePlannerFrontEnd() {
+	}
+	
+	public static HHRoutingConfig defaultHHConfig() {
+		return HHRoutingConfig.astar(0).calcDetailed(HHRoutingConfig.CALCULATE_ALL_DETAILED);
 	}
 	
 	public enum RouteCalculationMode {
@@ -287,13 +289,13 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public void setDefaultHHRoutingConfig() {
-		this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+		this.hhRoutingConfig = defaultHHConfig();
 	}
 	
 	public RoutePlannerFrontEnd setUseOnlyHHRouting(boolean useOnlyHHRouting) {
 		this.useOnlyHHRouting = useOnlyHHRouting;
 		if (useOnlyHHRouting && hhRoutingConfig == null) {
-			this.hhRoutingConfig = DEFAULT_ROUTING_CONFIG;
+			this.hhRoutingConfig = defaultHHConfig();
 		}
 		return this;
 	}
