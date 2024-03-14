@@ -381,7 +381,7 @@
     <string name="run_full_osmand_msg">Koristi mapu {0} koju je omogućio OsmAnd. Da li želiš da pokreneš puno izdanje OsmAnda?</string>
     <string name="routeInfo_steepness_name">Nagib</string>
     <string name="routeInfo_smoothness_name">Uravnatost</string>
-    <string name="routeInfo_surface_name">Podloga</string>
+    <string name="routeInfo_surface_name">Površina</string>
     <string name="routeInfo_roadClass_name">Vrsta puta</string>
     <string name="test_voice_desrc">Tapni dugme i slušaj odgovarajuće glasovno navođenje da čuješ da li mu nešto nedostaje ili je pogrešno</string>
     <string name="how_to_open_wiki_title">Kako da otvoriš članke sa Vikipedije?</string>
@@ -5649,4 +5649,21 @@
     <string name="routing_type">Tip rutiranja</string>
     <string name="shared_sting_all_colors">Sve boje</string>
     <string name="lang_ta_in">Tamilski (Indija)</string>
+    <string name="release_4_7">• Novi widget \"brzinometar\" kompatibilan s Android Autom
+\n
+\n• Konfiguriši interfejs mape dodavanjem višestrukih dugmadi \"Brza radnja\".
+\n
+\n• Poboljšana čitljivost podataka u grafikonima
+\n
+\n• Dodani filteri prema podacima senzora za tragove
+\n
+\n• Dodata podrška za dodatne GPX oznake
+\n
+\n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva
+\n
+\n• Jedinstven korisnički interfejs za odabir trasa
+\n
+\n• Prijava na OpenStreetMap prebačena je na OAuth 2.0
+\n
+\n</string>
 </resources>
