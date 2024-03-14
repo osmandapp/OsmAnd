@@ -37,7 +37,7 @@
     <string name="poi_fireplace">Kamin</string>
     <string name="poi_seasonal">Sezonski</string>
     <string name="poi_water_characteristic">Osobine vode</string>
-    <string name="poi_beach_surface_type">Podloga</string>
+    <string name="poi_beach_surface_type">Površina</string>
     <string name="poi_nudism">Nudizam</string>
     <string name="poi_massage_type">Tip masaže</string>
     <string name="poi_tents">Šatori</string>
@@ -402,7 +402,7 @@
     <string name="poi_recycling_cars">Automobili</string>
     <string name="poi_recycling_bicycles">Bicikli</string>
     <string name="poi_landfill_waste_nuclear">Nuklearni otpad</string>
-    <string name="poi_waste_disposal">Deponija smeća</string>
+    <string name="poi_waste_disposal">Odlaganje smeća</string>
     <string name="poi_waste_basket">Kanta za smeće</string>
     <string name="poi_residential">Stambeni prostor</string>
     <string name="poi_industrial">Industrijska zona</string>
@@ -429,7 +429,7 @@
     <string name="poi_windmill">Vetrenjača</string>
     <string name="poi_reservoir">Rezervoar</string>
     <string name="poi_silo">Silos</string>
-    <string name="poi_college">Koledž</string>
+    <string name="poi_college">Više škole</string>
     <string name="poi_driving_school">Auto škola</string>
     <string name="poi_kindergarten">Vrtić</string>
     <string name="poi_school">Škola</string>
@@ -583,7 +583,7 @@
     <string name="poi_attraction_carousel">Vrteška</string>
     <string name="poi_attraction_maze">Lavirint</string>
     <string name="poi_attraction_roller_coaster">Rolerkoster</string>
-    <string name="poi_attraction_slide">Spust</string>
+    <string name="poi_attraction_slide">Dečji tobogan</string>
     <string name="poi_attraction_summer_toboggan">Letnji tobogan</string>
     <string name="poi_attraction_swing_carousel">Ringišpil</string>
     <string name="poi_attraction_train">Voz (atrakcija)</string>
@@ -4862,4 +4862,7 @@
     <string name="poi_shop_general">Opšta trgovina</string>
     <string name="poi_cuisine_fish">Riba</string>
     <string name="poi_us_maps_recreation_area_activity_description">Opis aktivnosti</string>
+    <string name="poi_indoor_seating_yes">Sedenje unutra: Da</string>
+    <string name="poi_indoor_seating_no">Nema sedećih mesta</string>
+    <string name="poi_indoor_seating_bar_table">Barski sto</string>
 </resources>
