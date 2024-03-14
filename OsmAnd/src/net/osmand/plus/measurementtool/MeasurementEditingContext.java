@@ -27,12 +27,12 @@ import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.GpxRoutingApproximation;
-import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
-import net.osmand.router.GpxRoutingApproximation.GpxPoint;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
+import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
@@ -965,7 +965,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return routePoints;
 	}
 
-	public List<WptPt> setPoints(GpxApproximationContext gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
+	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return null;
 		}
@@ -1255,7 +1255,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				if (pts.size() >= 2 && insertIntermediates) {
 					pts = insertIntermediatePoints(pts);
 				}
-				originalRoute = Collections.singletonList(GpxRoutingApproximation.generateStraightLineSegment(
+				originalRoute = Collections.singletonList(RoutePlannerFrontEnd.generateStraightLineSegment(
 						DEFAULT_APP_MODE.getDefaultSpeed(), new LocationsHolder(pts).getLatLonList()));
 			}
 			roadSegmentData.put(currentPair, new RoadSegmentData(route.getAppMode(), currentPair.first, currentPair.second, pts, originalRoute));
@@ -1406,7 +1406,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 
 		List<WptPt> points = new ArrayList<>(intermediatePointsCount);
 		for (int i = 0; i < intermediatePointsCount; i++) {
-			double coeff = (double) (i + 1) / (intermediatePointsCount + 1);
+			double coeff = (double) (i + 1) / ( intermediatePointsCount + 1);
 			LatLon intermediateLatLon = MapUtils.calculateIntermediatePoint(start.lat, start.lon, end.lat, end.lon, coeff);
 			WptPt intermediatePoint = new WptPt();
 			intermediatePoint.lat = intermediateLatLon.getLatitude();

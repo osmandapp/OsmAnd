@@ -20,7 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
-import net.osmand.router.GpxRoutingApproximation;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
@@ -143,7 +143,7 @@ public class RouteCalculationResult {
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end,
 	                              List<LatLon> intermediates, OsmandApplication ctx, boolean leftSide,
 	                              RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode,
-	                              boolean calculateFirstAndLastPoint, boolean initialCalculation) {
+								  boolean calculateFirstAndLastPoint, boolean initialCalculation) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -857,7 +857,7 @@ public class RouteCalculationResult {
 	}
 
 	private static boolean introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions,
-	                                           List<RouteSegmentResult> segs, Location start) {
+											   List<RouteSegmentResult> segs, Location start) {
 		Location firstLocation = Algorithms.isEmpty(locations) ? null : locations.get(0);
 		if (firstLocation != null && firstLocation.distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
 			// Start location can have wrong altitude
@@ -949,7 +949,7 @@ public class RouteCalculationResult {
 		LatLon startLatLon = new LatLon(start.getLatitude(), start.getLongitude());
 		LatLon endLatLon = new LatLon(end.getLatitude(), end.getLongitude());
 		List<LatLon> straightSegment = Arrays.asList(startLatLon, endLatLon);
-		return GpxRoutingApproximation.generateStraightLineSegment(averageSpeed, straightSegment);
+		return RoutePlannerFrontEnd.generateStraightLineSegment(averageSpeed, straightSegment);
 	}
 
 	/**
@@ -1297,7 +1297,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 
-	public int getDistanceToPoint(Location lastKnownLocation, int locationIndex) {
+	public int getDistanceToPoint(Location lastKnownLocation, int locationIndex ) {
 		int dist = getDistanceToPoint(locationIndex);
 		Location next = getNextRouteLocation();
 		if (lastKnownLocation != null && next != null) {

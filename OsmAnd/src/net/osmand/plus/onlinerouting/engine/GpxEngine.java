@@ -5,11 +5,12 @@ import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.LocationsHolder;
-import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.LocationsHolder;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.onlinerouting.EngineParameter;
@@ -19,14 +20,16 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingEnvironment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
-import net.osmand.router.GpxRoutingApproximation.GpxPoint;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -125,7 +128,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
 	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
-		boolean[] calculatedTimeSpeed = new boolean[] {useExternalTimestamps()};
+		boolean[] calculatedTimeSpeed = new boolean[]{useExternalTimestamps()};
 		if (shouldApproximateRoute() && !initialCalculation) {
 			GPXFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);
 			if (approximated != null) {
@@ -155,10 +158,10 @@ public class GpxEngine extends OnlineRoutingEngine {
 				LatLon start = holder.getLatLon(0);
 				LatLon end = holder.getLatLon(holder.getSize() - 1);
 				RoutingEnvironment env = routingHelper.getRoutingEnvironment(app, appMode, start, end);
-				GpxApproximationContext gctx = new GpxApproximationContext(env.getCtx());
+				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				gctx.ctx.calculationProgress = calculationProgress;
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
-				GpxApproximationContext gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
+				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
 				calculatedTimeSpeed[0] = ctx.hasCalculatedTimeSpeed();
@@ -175,7 +178,8 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 
 	@Override
-	public boolean isResultOk(@NonNull StringBuilder errorMessage, @NonNull String content) {
+	public boolean isResultOk(@NonNull StringBuilder errorMessage,
+	                          @NonNull String content) {
 		return parseGpx(content) != null;
 	}
 

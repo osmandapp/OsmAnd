@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.routing.GpxApproximator;
-import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import java.util.List;
 
@@ -19,6 +19,6 @@ public interface GpxApproximationListener {
 
 	default void updateApproximationProgress(@NonNull GpxApproximator approximator, int progress) { }
 
-	default void processApproximationResults(@NonNull List<GpxApproximationContext> approximations,
+	default void processApproximationResults(@NonNull List<GpxRouteApproximation> approximations,
 	                                         @NonNull List<List<WptPt>> points) { }
 }

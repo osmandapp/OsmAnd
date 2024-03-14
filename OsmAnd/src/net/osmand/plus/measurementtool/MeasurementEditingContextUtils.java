@@ -1,8 +1,8 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.router.GpxRoutingApproximation.GpxPoint;
+import net.osmand.data.LatLon;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;
 
@@ -10,12 +10,12 @@ import java.util.List;
 
 public class MeasurementEditingContextUtils {
 
-	static boolean isLastGpxPoint(List<GpxPoint> gpxPoints, int index) {
+	static boolean isLastGpxPoint(List<RoutePlannerFrontEnd.GpxPoint> gpxPoints, int index) {
 		if (index == gpxPoints.size() - 1) {
 			return true;
 		} else {
 			for (int i = index + 1; i < gpxPoints.size(); i++) {
-				GpxPoint gp = gpxPoints.get(i);
+				RoutePlannerFrontEnd.GpxPoint gp = gpxPoints.get(i);
 				for (int k = 0; k < gp.routeToTarget.size(); k++) {
 					RouteSegmentResult seg = gp.routeToTarget.get(k);
 					if (seg.getStartPointIndex() != seg.getEndPointIndex()) {

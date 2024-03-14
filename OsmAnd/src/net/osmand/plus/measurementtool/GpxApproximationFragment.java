@@ -33,7 +33,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
 
@@ -219,7 +219,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment implemen
 	}
 
 	@Override
-	public void processApproximationResults(@NonNull List<GpxApproximationContext> approximations,
+	public void processApproximationResults(@NonNull List<GpxRouteApproximation> approximations,
 	                                        @NonNull List<List<WptPt>> points) {
 		finishProgress();
 		Fragment fragment = getTargetFragment();

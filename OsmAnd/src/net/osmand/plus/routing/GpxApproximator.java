@@ -10,9 +10,9 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.GpxApproximationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
-import net.osmand.router.GpxRoutingApproximation.GpxPoint;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import org.apache.commons.logging.Log;
 
@@ -33,7 +33,7 @@ public class GpxApproximator {
 	private final RoutingHelper routingHelper;
 
 	private RoutingEnvironment env;
-	private GpxApproximationContext gctx;
+	private GpxRouteApproximation gctx;
 	private ApplicationMode mode;
 	private final LocationsHolder locationsHolder;
 	private List<GpxPoint> points;
@@ -75,8 +75,8 @@ public class GpxApproximator {
 		this.env = routingHelper.getRoutingEnvironment(ctx, mode, start, end);
 	}
 
-	private GpxApproximationContext getNewGpxApproximationContext() {
-		GpxApproximationContext newContext = new GpxApproximationContext(env.getCtx());
+	private GpxRouteApproximation getNewGpxApproximationContext() {
+		GpxRouteApproximation newContext = new GpxRouteApproximation(env.getCtx());
 		newContext.ctx.calculationProgress = new RouteCalculationProgress();
 		newContext.ctx.config.minPointApproximation = pointApproximation;
 		return newContext;
@@ -126,11 +126,11 @@ public class GpxApproximator {
 		}
 	}
 
-	public void calculateGpxApproximation(@NonNull ResultMatcher<GpxApproximationContext> resultMatcher) {
+	public void calculateGpxApproximation(@NonNull ResultMatcher<GpxRouteApproximation> resultMatcher) {
 		if (gctx != null) {
 			gctx.ctx.calculationProgress.isCancelled = true;
 		}
-		GpxApproximationContext gctx = getNewGpxApproximationContext();
+		GpxRouteApproximation gctx = getNewGpxApproximationContext();
 		this.gctx = gctx;
 		notifyOnStart();
 		notifyUpdateProgress(gctx);
@@ -164,7 +164,7 @@ public class GpxApproximator {
 		}
 	}
 
-	private void notifyUpdateProgress(@NonNull GpxApproximationContext gctx) {
+	private void notifyUpdateProgress(@NonNull GpxRouteApproximation gctx) {
 		if (listener != null) {
 			ctx.runInUIThread(() -> {
 				RouteCalculationProgress progressInfo = gctx.ctx.calculationProgress;
