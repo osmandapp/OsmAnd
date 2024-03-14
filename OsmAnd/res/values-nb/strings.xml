@@ -5515,4 +5515,5 @@
     <string name="avg_sensor_temperature">Temperatur, gjen.</string>
     <string name="max_sensor_temperature">Temperatur, maks.</string>
     <string name="shared_sting_all_colors">Alle farger</string>
+    <string name="routing_type">Ruteberegningstype</string>
 </resources>
