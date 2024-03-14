@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -82,7 +83,9 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	@NonNull
 	@Override
 	public String getSelectorTitle() {
-		return selectedWidthStyle.toHumanString(app);
+		return isMapStyle(selectedWidthStyle)
+				? selectedWidthStyle.toHumanString(app)
+				: getWidthComponentController().getSummary(app);
 	}
 
 	@NonNull
@@ -114,8 +117,8 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 		this.nightMode = nightMode;
 		if (isMapStyle(selectedWidthStyle)) {
 			bindSummaryCard(activity, container, nightMode);
-		} else {
-			bindWidthComponentCardIfNeeded(activity, container);
+		} else if (shouldBindWidthComponentCard(container)) {
+			bindWidthComponentCard(activity, container);
 		}
 	}
 
@@ -133,41 +136,45 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 		container.setTag(DEFAULT_STYLE_CARD_ID);
 	}
 
-	private void bindWidthComponentCardIfNeeded(@NonNull FragmentActivity activity, @NonNull ViewGroup container) {
+	private void bindWidthComponentCard(@NonNull FragmentActivity activity,
+	                                    @NonNull ViewGroup container) {
 		WidthComponentController controller = getWidthComponentController();
+		container.removeAllViews();
+		ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller);
+		container.addView(widthComponentCard.build(activity));
+
+		View widthSliderContainer = widthComponentCard.getSliderContainer();
+		ScrollUtils.addOnGlobalLayoutListener(widthSliderContainer, () -> {
+			if (widthSliderContainer.getVisibility() == View.VISIBLE) {
+				onNeedScrollListener.onVerticalScrollNeeded(widthSliderContainer.getBottom());
+			}
+		});
+
+		// Hide direction arrows in OpenGL while slider is touched
+		Slider widthSlider = widthComponentCard.getSlider();
+		widthSlider.addOnSliderTouchListener(new OnSliderTouchListener() {
+
+			@Override
+			public void onStartTrackingTouch(@NonNull Slider slider) {
+				boolean hasMapRenderer = app.getOsmandMap().getMapView().hasMapRenderer();
+				routeLinePreview.setShowDirectionArrows(!hasMapRenderer);
+			}
+
+			@Override
+			public void onStopTrackingTouch(@NonNull Slider slider) {
+				routeLinePreview.setShowDirectionArrows(true);
+			}
+		});
+		updateColorItems();
+		controller.askSelectWidthMode(getWidthValueOfStyle(selectedWidthStyle));
+		container.setTag(WIDTH_COMPONENT_CARD_ID);
+	}
+
+	private boolean shouldBindWidthComponentCard(@NonNull ViewGroup container) {
 		// We only create and bind "Width Component" card only if it wasn't attached before
 		// or if there is other card visible at the moment.
 		Integer cardId = (Integer) container.getTag();
-		if (cardId == null || cardId == DEFAULT_STYLE_CARD_ID) {
-			container.removeAllViews();
-			ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller);
-			container.addView(widthComponentCard.build(activity));
-
-			View widthSliderContainer = widthComponentCard.getSliderContainer();
-			ScrollUtils.addOnGlobalLayoutListener(widthSliderContainer, () -> {
-				if (widthSliderContainer.getVisibility() == View.VISIBLE) {
-					onNeedScrollListener.onVerticalScrollNeeded(widthSliderContainer.getBottom());
-				}
-			});
-
-			// Hide direction arrows in OpenGL while slider is touched
-			Slider widthSlider = widthComponentCard.getSlider();
-			widthSlider.addOnSliderTouchListener(new OnSliderTouchListener() {
-
-				@Override
-				public void onStartTrackingTouch(@NonNull Slider slider) {
-					boolean hasMapRenderer = app.getOsmandMap().getMapView().hasMapRenderer();
-					routeLinePreview.setShowDirectionArrows(!hasMapRenderer);
-				}
-
-				@Override
-				public void onStopTrackingTouch(@NonNull Slider slider) {
-					routeLinePreview.setShowDirectionArrows(true);
-				}
-			});
-		}
-		controller.askSelectWidthMode(getWidthValueOfStyle(selectedWidthStyle));
-		container.setTag(WIDTH_COMPONENT_CARD_ID);
+		return cardId == null || cardId == DEFAULT_STYLE_CARD_ID;
 	}
 
 	@Override
@@ -187,8 +194,19 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 		app.getOsmandMap().getMapView().refreshMap();
 	}
 
+	public void updateColorItems() {
+		WidthComponentController controller = getWidthComponentController();
+		controller.updateColorItems(getRouteLinePreviewColor());
+	}
+
+	@ColorInt
+	private int getRouteLinePreviewColor() {
+		RouteLineColorController controller = RouteLineColorController.getInstance(app);
+		return controller != null ? controller.getRouteLinePreviewColor() : 0;
+	}
+
 	@NonNull
-	public WidthComponentController getWidthComponentController() {
+	private WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
 			String selectedWidth = routeLinePreview.getWidth();
 			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);

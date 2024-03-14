@@ -185,6 +185,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		enterAppearanceMode();
 		openMenuHalfScreen();
 		calculateLayout();
+		updateColorItems();
 	}
 
 	private void calculateLayout() {
@@ -539,7 +540,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void updateColorItems() {
-		getWidthCardController().getWidthComponentController().updateControlsColor();
+		RouteLineWidthController widthController = getWidthCardController();
+		widthController.updateColorItems();
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
 		}
@@ -551,7 +553,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	@NonNull
 	private RouteLineColorController getColorCardController() {
-		return RouteLineColorController.getInstance(app, previewRouteLineInfo, this);
+		RouteLineColorController colorController = RouteLineColorController.getInstance(app, previewRouteLineInfo);
+		colorController.setListener(this);
+		return colorController;
 	}
 
 	@NonNull

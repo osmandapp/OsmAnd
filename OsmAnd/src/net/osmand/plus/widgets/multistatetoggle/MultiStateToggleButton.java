@@ -57,6 +57,11 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		initView();
 	}
 
+	@NonNull
+	public List<_Radio> getItems() {
+		return items;
+	}
+
 	public final void setSelectedItem(int itemIndex) {
 		_Radio selectedItem = itemIndex < 0 || itemIndex >= items.size() ? null : items.get(itemIndex);
 		setSelectedItem(selectedItem);
@@ -131,7 +136,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView();
 	}
 
-	private void updateView() {
+	public void updateView() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -152,6 +157,8 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 			button.setEnabled(enabled);
 			int textColor = enabled ? textColorPrimary : textColorSecondary;
 			int selectedBgColor = enabled ? activeColor : defaultColor;
+			int contentColor = item.getCustomColor() != null ? item.getCustomColor() : activeColor;
+			int itemColor = enabled ? contentColor : defaultColor;
 			GradientDrawable background = new GradientDrawable();
 			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
 			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
@@ -171,7 +178,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 				updateItemView(button, item, textColor);
 			} else {
 				button.setBackgroundColor(Color.TRANSPARENT);
-				updateItemView(button, item, selectedBgColor);
+				updateItemView(button, item, itemColor);
 			}
 		}
 	}

@@ -11,6 +11,7 @@ import net.osmand.plus.card.base.slider.SliderCard;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
+import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,11 +77,17 @@ public class ModedSliderCard extends SliderCard implements IModedSliderComponent
 	@Override
 	public void updateControlsColor() {
 		super.updateControlsColor();
-		updateSegmentedButtonColor();
+		updateSegmentedButtonContentColor();
 	}
 
-	private void updateSegmentedButtonColor() {
-
+	private void updateSegmentedButtonContentColor() {
+		for (RadioItem radioItem : segmentedButton.getItems()) {
+			SliderMode sliderMode = (SliderMode) radioItem.getTag();
+			if (sliderMode != null) {
+				radioItem.setCustomColor(controller.getSliderModeColor(sliderMode));
+			}
+		}
+		segmentedButton.updateView();
 	}
 
 	@Override

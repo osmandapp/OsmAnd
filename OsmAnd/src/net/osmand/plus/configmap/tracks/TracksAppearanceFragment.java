@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,6 +45,7 @@ import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
@@ -136,6 +138,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		setupButtons(view);
 		setupActions(view);
 		setupCards(view);
+		updateColorItems();
 
 		return view;
 	}
@@ -267,7 +270,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void updateColorItems() {
-		getWidthCardController().updateControlsColor();
+		TrackWidthController widthController = getWidthCardController();
+		widthController.updateColorItems();
 	}
 
 	@Override

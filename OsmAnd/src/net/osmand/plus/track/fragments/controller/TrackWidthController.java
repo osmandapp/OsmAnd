@@ -4,6 +4,7 @@ import static net.osmand.util.Algorithms.parseIntSilently;
 
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -22,8 +23,10 @@ import net.osmand.plus.card.base.headed.IHeadedContentCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
+import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.plus.utils.ColorUtilities;
 
 public class TrackWidthController implements IHeadedCardController, IDialogController {
 
@@ -132,9 +135,18 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		return view;
 	}
 
-	public void updateControlsColor() {
+	public void updateColorItems() {
+		int color = getTrackPreviewColor();
 		WidthComponentController controller = getWidthComponentController();
-		controller.updateControlsColor();
+		controller.updateColorItems(color);
+	}
+
+	@ColorInt
+	private int getTrackPreviewColor() {
+		TrackColorController colorController = TrackColorController.getInstance(app);
+		return colorController != null
+				? colorController.getTrackPreviewColor()
+				: GpxAppearanceAdapter.getTrackColor(app);
 	}
 
 	@NonNull

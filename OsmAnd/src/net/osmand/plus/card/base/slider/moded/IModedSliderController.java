@@ -1,5 +1,6 @@
 package net.osmand.plus.card.base.slider.moded;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -21,5 +22,9 @@ public interface IModedSliderController extends ISliderCardController {
 	SliderMode getSelectedSliderMode();
 
 	boolean isSelectedSliderMode(@NonNull SliderMode sliderMode);
+
+	@ColorInt
+	@Nullable
+	Integer getSliderModeColor(@NonNull SliderMode sliderMode);
 
 }

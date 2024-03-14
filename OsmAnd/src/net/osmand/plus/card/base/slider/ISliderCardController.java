@@ -18,7 +18,7 @@ public interface ISliderCardController {
 	}
 
 	@ColorInt
-	default int getControlsColor(@NonNull Context context, boolean nightMode) {
+	default int getSliderColor(@NonNull Context context, boolean nightMode) {
 		return ColorUtilities.getActiveColor(context, nightMode);
 	}
 

@@ -47,13 +47,11 @@ import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
-import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -247,9 +245,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		setupCards();
 		setupButtons();
 		setupScrollShadow();
-		updateAppearanceIcon();
 		enterTrackAppearanceMode();
 		runLayoutListener();
+		updateColorItems();
 	}
 
 	private void updateContent() {
@@ -441,10 +439,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
 		trackDrawInfo.setColoringStyle(coloringStyle);
-		refreshMap();
-
 		View saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+		updateColorItems();
 	}
 
 	@Override
@@ -486,10 +483,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void updateAppearanceIcon() {
-		int color = trackDrawInfo.getColor();
-		if (color == 0) {
-			color = GpxAppearanceAdapter.getTrackColor(app);
-		}
+		int color = getColorCardController().getTrackPreviewColor();
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color);
 		trackIcon.setImageDrawable(icon);
 	}
@@ -646,7 +640,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void updateColorItems() {
 		updateAppearanceIcon();
-		getWidthCardController().updateControlsColor();
+		TrackWidthController widthController = getWidthCardController();
+		widthController.updateColorItems();
 		refreshMap();
 	}
 

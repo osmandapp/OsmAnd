@@ -66,7 +66,7 @@ public class SliderCard extends BaseCard implements ISliderCard {
 	}
 
 	protected void updateSliderColor() {
-		int accentColor = controller.getControlsColor(app, nightMode);
+		int accentColor = controller.getSliderColor(app, nightMode);
 		UiUtilities.setupSlider(slider, nightMode, accentColor, true);
 	}
 }

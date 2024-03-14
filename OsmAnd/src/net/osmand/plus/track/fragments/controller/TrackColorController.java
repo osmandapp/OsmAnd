@@ -3,6 +3,7 @@ package net.osmand.plus.track.fragments.controller;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
+import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -128,6 +129,20 @@ public class TrackColorController extends ColoringStyleCardController implements
 		}
 	}
 
+	public int getTrackPreviewColor() {
+		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringType coloringType = coloringStyle.getType();
+
+		int color = 0;
+		if (coloringType == TRACK_SOLID) {
+			color = drawInfo.getColor();
+		}
+		if (color == 0) {
+			color = GpxAppearanceAdapter.getTrackColor(app);
+		}
+		return color;
+	}
+
 	@NonNull
 	public static List<PaletteColor> getPredefinedColors(@NonNull OsmandApplication app) {
 		List<PaletteColor> predefinedColors = new ArrayList<>();
@@ -158,6 +173,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 		}
 	}
 
+	@NonNull
 	public static TrackColorController getInstance(
 			@NonNull OsmandApplication app, @Nullable SelectedGpxFile selectedGpx,
 			@NonNull TrackDrawInfo drawInfo, @NonNull IColorCardControllerListener listener
@@ -170,6 +186,12 @@ public class TrackColorController extends ColoringStyleCardController implements
 		}
 		controller.setListener(listener);
 		return controller;
+	}
+
+	@Nullable
+	public static TrackColorController getInstance(@NonNull OsmandApplication app) {
+		DialogManager dialogManager = app.getDialogManager();
+		return  (TrackColorController) dialogManager.findController(PROCESS_ID);
 	}
 
 }

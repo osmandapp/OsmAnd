@@ -2,6 +2,7 @@ package net.osmand.plus.settings.controllers;
 
 import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -33,6 +34,8 @@ import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.views.layers.PreviewRouteLineLayer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -216,6 +219,17 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		helper.setMapThemeProvider(provider);
 	}
 
+	@ColorInt
+	public int getRouteLinePreviewColor() {
+		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringType coloringType = coloringStyle.getType();
+		if (coloringType == ColoringType.CUSTOM_COLOR || coloringType == ColoringType.DEFAULT) {
+			PreviewRouteLineLayer layer = app.getOsmandMap().getMapLayers().getPreviewRouteLineLayer();
+			return layer.getRouteLineColor(isNightMap());
+		}
+		return ColorUtilities.getActiveColor(app, isNightMap());
+	}
+
 	@NonNull
 	public static List<PaletteColor> getPredefinedColors() {
 		return Arrays.asList(DefaultColors.values());
@@ -223,16 +237,20 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 
 	@NonNull
 	public static RouteLineColorController getInstance(@NonNull OsmandApplication app,
-	                                                   @NonNull PreviewRouteLineInfo routeLinePreview,
-	                                                   @NonNull IColorCardControllerListener listener) {
+	                                                   @NonNull PreviewRouteLineInfo routeLinePreview) {
 		DialogManager dialogManager = app.getDialogManager();
 		RouteLineColorController controller = (RouteLineColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
 			controller = new RouteLineColorController(app, routeLinePreview);
 			dialogManager.register(PROCESS_ID, controller);
 		}
-		controller.setListener(listener);
 		return controller;
+	}
+
+	@Nullable
+	public static RouteLineColorController getInstance(@NonNull OsmandApplication app) {
+		DialogManager dialogManager = app.getDialogManager();
+		return  (RouteLineColorController) dialogManager.findController(PROCESS_ID);
 	}
 
 	public interface IRouteLineColorControllerListener
