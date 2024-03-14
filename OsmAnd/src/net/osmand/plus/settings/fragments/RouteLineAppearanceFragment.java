@@ -536,7 +536,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	@Override
 	public void onRouteLineWidthSelected(@Nullable String width) {
-
+		updateHeaderContent(RouteLineWidthController.PROCESS_ID);
 	}
 
 	private void updateColorItems() {
