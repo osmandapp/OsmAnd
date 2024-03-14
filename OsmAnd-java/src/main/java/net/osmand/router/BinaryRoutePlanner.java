@@ -1,8 +1,5 @@
 package net.osmand.router;
 
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -11,15 +8,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
+import org.apache.commons.logging.Log;
+
+import gnu.trove.map.TLongObjectMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.router.GpxRoutingApproximation.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-
-import static net.osmand.router.RoutePlannerFrontEnd.*;
 
 public class BinaryRoutePlanner {
 
