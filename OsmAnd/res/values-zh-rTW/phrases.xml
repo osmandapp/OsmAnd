@@ -4862,4 +4862,7 @@
     <string name="poi_live_music_yes">是</string>
     <string name="poi_shop_general">雜貨店</string>
     <string name="poi_cuisine_fish">魚</string>
+    <string name="poi_indoor_seating_yes">室內座位：是</string>
+    <string name="poi_indoor_seating_no">沒有室內座位</string>
+    <string name="poi_indoor_seating_bar_table">室內座位：吧臺</string>
 </resources>
