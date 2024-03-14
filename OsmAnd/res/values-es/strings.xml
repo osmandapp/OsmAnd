@@ -5644,4 +5644,21 @@
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="routing_type_a_star_2_phase">A* 2 fases</string>
     <string name="routing_type_a_star_classic">A* clásico</string>
+    <string name="release_4_7">• Nuevo widget \"Velocímetro\" compatible con Android Auto
+\n
+\n • Configuración de la pantalla del mapa añadiendo varios botones de \"Acción rápida\".
+\n
+\n • Mejorada la lectura de los datos en los gráficos
+\n
+\n • Añadidos filtros por datos de sensor para los tracks
+\n
+\n • Añadido soporte para etiquetas GPX adicionales
+\n
+\n • Personalización de \"Distancia durante la navegación\": elige entre números precisos o redondeados
+\n
+\n • Interfaz de usuario unificada para la selección de tracks
+\n
+\n • El inicio de sesión en OpenStreetMap ha cambiado a OAuth 2.0
+\n
+\n</string>
 </resources>
