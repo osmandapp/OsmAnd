@@ -870,7 +870,7 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
-		if (hhRoutingConfig != null) {
+		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
 			ctx.calculationProgress.nextIteration();
 			if (hhRoutingType == HHRoutingType.CPP && ctx.nativeLib != null) {
 				ctx.initLatLonStartEndPoints(start, end, intermediates);
