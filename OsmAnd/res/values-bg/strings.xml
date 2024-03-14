@@ -3935,4 +3935,13 @@
 \n
 \nМожете да промените избора си в „Настройки“ → „Поверителност и защита“.</string>
     <string name="speed_limit_warning">Предупреждение за ограничения на скоростта</string>
+    <string name="empty_smart_folder_title">Няма подходящо трасе</string>
+    <string name="battery_optimization_banner_content">Оптималното използване на батерията от Андроид може да допринесе за появата на пропуски и неточности в записаните трасета.</string>
+    <plurals name="tracks">
+        <item quantity="one">%1$d (%2$d трасе)</item>
+        <item quantity="other">%1$d (%2$d трасета)</item>
+    </plurals>
+    <string name="battery_optimization_settings">Настройки за оптимизиране на батерията</string>
+    <string name="dont_ask_anymore">Без повторно питане</string>
+    <string name="shared_string_all_tracks">Всички трасета</string>
 </resources>
