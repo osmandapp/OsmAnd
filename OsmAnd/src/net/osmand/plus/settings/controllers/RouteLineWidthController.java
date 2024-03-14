@@ -37,7 +37,7 @@ import java.util.Objects;
 
 public class RouteLineWidthController extends BaseMultiStateCardController implements IDialogController {
 
-	private static final String PROCESS_ID = "select_route_line_width";
+	public static final String PROCESS_ID = "select_route_line_width";
 
 	private final WidthStyle DEFAULT_STYLE = new WidthStyle(null, R.string.map_widget_renderer);
 
@@ -54,7 +54,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
-	private OnRouteLineWidthSelectedListener listener;
+	private IRouteLineWidthControllerListener listener;
 	private boolean nightMode;
 
 	public RouteLineWidthController(@NonNull OsmandApplication app,
@@ -65,7 +65,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 		this.selectedWidthStyle = findWidthStyle(routeLinePreview.getWidth());
 	}
 
-	public void setListener(@NonNull OnRouteLineWidthSelectedListener listener) {
+	public void setListener(@NonNull IRouteLineWidthControllerListener listener) {
 		this.listener = listener;
 	}
 
@@ -248,7 +248,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 		}
 	}
 
-	public interface OnRouteLineWidthSelectedListener {
+	public interface IRouteLineWidthControllerListener {
 		void onRouteLineWidthSelected(@Nullable String width);
 	}
 
@@ -257,7 +257,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 			@NonNull OsmandApplication app,
 			@NonNull PreviewRouteLineInfo routeLinePreview,
 			@NonNull OnNeedScrollListener onNeedScrollListener,
-			@NonNull OnRouteLineWidthSelectedListener listener
+			@NonNull IRouteLineWidthControllerListener listener
 	) {
 		DialogManager dialogManager = app.getDialogManager();
 		RouteLineWidthController controller = (RouteLineWidthController) dialogManager.findController(PROCESS_ID);

@@ -24,6 +24,8 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
+import net.osmand.plus.card.base.multistate.IMultiStateCardController;
+import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -31,22 +33,22 @@ import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.cards.RouteLineColorCard;
-import net.osmand.plus.routing.cards.RouteLineWidthCard;
 import net.osmand.plus.routing.cards.RouteTurnArrowsCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.controllers.RouteLineColorController;
 import net.osmand.plus.settings.controllers.RouteLineColorController.IRouteLineColorControllerListener;
 import net.osmand.plus.settings.controllers.RouteLineWidthController;
-import net.osmand.plus.settings.controllers.RouteLineWidthController.OnRouteLineWidthSelectedListener;
+import net.osmand.plus.settings.controllers.RouteLineWidthController.IRouteLineWidthControllerListener;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
+import java.util.Objects;
+
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
-		implements IRouteLineColorControllerListener, OnRouteLineWidthSelectedListener, HeaderUiAdapter {
+		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -55,7 +57,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private ApplicationMode appMode;
 
 	private int toolbarHeightPx;
-	private HeaderInfo selectedHeader;
+	private String currentHeaderSourceId;
 
 	private View buttonsShadow;
 	private View controlButtons;
@@ -64,8 +66,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private DialogButton saveButton;
 	private TextView headerTitle;
 
-	private RouteLineColorCard colorsCard;
-	private RouteLineWidthCard widthCard;
+	private MultiStateCard colorsCard;
+	private MultiStateCard widthCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -197,46 +199,36 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		ViewGroup cardsContainer = getCardsContainer();
 		cardsContainer.removeAllViews();
 
-		colorsCard = new RouteLineColorCard(mapActivity, getColorCardController(), this);
+		colorsCard = new MultiStateCard(mapActivity, getColorCardController());
 		cardsContainer.addView(colorsCard.build(mapActivity));
 
 		inflate(R.layout.list_item_divider_basic, cardsContainer, true);
-		widthCard = new RouteLineWidthCard(mapActivity, getWidthCardController(), this);
+		widthCard = new MultiStateCard(mapActivity, getWidthCardController());
 		cardsContainer.addView(widthCard.build(mapActivity));
 
 		RouteTurnArrowsCard turnArrowCard = new RouteTurnArrowsCard(mapActivity, previewRouteLineInfo);
 		cardsContainer.addView(turnArrowCard.build(mapActivity));
 	}
 
-	@Override
-	public void onUpdateHeader(@NonNull HeaderInfo headerInfo,
-	                           @NonNull String title,
-	                           @NonNull String description) {
-		if (selectedHeader == null) {
-			selectedHeader = headerInfo;
+	private void updateHeaderContent(@NonNull String headerSourceId) {
+		if (currentHeaderSourceId == null) {
+			currentHeaderSourceId = headerSourceId;
 		}
-		if (objectEquals(selectedHeader, headerInfo)) {
-			headerTitle.setText(title);
+		if (objectEquals(currentHeaderSourceId, headerSourceId)) {
+			IMultiStateCardController controller = getHeaderSourceController();
+			headerTitle.setText(controller.getCardTitle());
 
 			TextView headerDescr = headerContainer.findViewById(R.id.descr);
-			headerDescr.setText(description);
+			headerDescr.setText(controller.getSelectorTitle());
 
 			View selector = headerContainer.findViewById(R.id.selector);
-			View selectorIcon = headerContainer.findViewById(R.id.selector_button);
-			if (headerInfo instanceof RouteLineColorCard) {
-				selector.setOnClickListener(v -> {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						RouteLineColorController colorController = getColorCardController();
-						colorController.onSelectorButtonClicked(v);
-					}
-				});
-				AndroidUiHelper.updateVisibility(selectorIcon, true);
-			} else {
-				selector.setOnClickListener(null);
-				AndroidUiHelper.updateVisibility(selectorIcon, false);
-			}
+			selector.setOnClickListener(controller::onSelectorButtonClicked);
 		}
+	}
+
+	private IMultiStateCardController getHeaderSourceController() {
+		boolean color = Objects.equals(currentHeaderSourceId, RouteLineColorController.PROCESS_ID);
+		return color ? getColorCardController() : getWidthCardController();
 	}
 
 	@Override
@@ -376,15 +368,15 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void updateHeaderState(boolean forceUpdate) {
-		HeaderInfo header;
+		String headerSourceId;
 		if (getBottomScrollView().getScrollY() > colorsCard.getViewHeight() + headerTitle.getBottom()) {
-			header = widthCard;
+			headerSourceId = RouteLineWidthController.PROCESS_ID;
 		} else {
-			header = colorsCard;
+			headerSourceId = RouteLineColorController.PROCESS_ID;
 		}
-		if (header != selectedHeader || forceUpdate) {
-			selectedHeader = header;
-			selectedHeader.onNeedUpdateHeader();
+		if (!Objects.equals(currentHeaderSourceId, headerSourceId) || forceUpdate) {
+			currentHeaderSourceId = headerSourceId;
+			updateHeaderContent(headerSourceId);
 		}
 	}
 
