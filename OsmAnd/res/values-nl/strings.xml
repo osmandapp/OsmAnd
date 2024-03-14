@@ -94,7 +94,7 @@
     <string name="live_monitoring_url">Webadres voor online tracking</string>
     <string name="gpx_monitoring_disabled_warn">GPX-track opnemen met GPX-widget of via de \'GPX-track\'-instellingen.</string>
     <string name="show_current_gpx_title">Toon huidige GPX-track</string>
-    <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads en ondersteunt geen offline Wikipedia artikelen.</string>
+    <string name="free_version_message">%1$s kaarten te downloaden of updaten.</string>
     <string name="free_version_title">Gratis versie</string>
     <string name="poi_context_menu_showdescription">Toon POI-beschrijving.</string>
     <string name="index_name_north_america">Noord-Amerika</string>
@@ -1683,7 +1683,7 @@
     <string name="downloads_left_template">%1$s downloads over</string>
     <string name="roads">Wegen</string>
     <string name="downloading_number_of_files">Downloaden %1$d bestand…</string>
-    <string name="show_free_version_banner">Toon de balk \"Gratis Versie\"</string>
+    <string name="show_free_version_banner">Toon \"Gratis Versie\" balk</string>
     <string name="show_free_version_banner_description">In de betaalde versie toch de balk \"Gratis Versie\" tonen.</string>
     <string name="buy">Kopen</string>
     <string name="later">Later</string>
@@ -2240,7 +2240,7 @@
     <string name="route_is_too_long_v2">Voor grote afstanden: voeg tussenpunten toe als binnen 10 minuten geen route berekend is.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) is een kaart- en navigatie-app die gebruik maakt van de gratis, wereldwijde en hoogwaardige OSM-gegevens.
 \n
-\n Gebruik visuele en gesproken navigatie, toon POI\'s (point of interest), maak en volg GPX-tracks, toon hoogtelijnen en hoogte-informatie (via plug-in), kies tussen autorijden, fietsen of wandelen, bewerk de OSM-kaart en nog veel meer.</string>
+\n Gebruik visuele en gesproken navigatie, toon POI\'s (point of interest), maak en volg GPX-tracks, toon hoogtelijnen en topografische informatie (via plug-in), kies tussen autorijden, fietsen of wandelen, bewerk de OSM-kaart en nog veel meer.</string>
     <string name="osmand_extended_description_part2">GPS-navigatie
 \n • Offline (geen datakosten) of online (snellere) routeberekening
 \n • Stap-voor-stap navigatie met opgenomen stem of gesproken straatnamen
@@ -2335,11 +2335,11 @@
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">Kan bestand niet importeren. Controleer of OsmAnd rechten heeft om het bestand te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatie-app die de gratis, wereldwijde en hoogwaardige OSM-gegevens gebruikt. 
-\n Gebruik gesproken en visuele navigatie, toon POI‘S (points of interest), maak en beheer GPX-tracks, toon hoogtelijnen en hoogtegegevens, kies tussen autorijden, fietsen en wandelen, bewerk OSM en nog veel meer. 
-\n 
-\n OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteun je het project, het ontwikkelen van nieuwe functies, en ontvang je de laatste updates. 
-\n 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatie-app die de gratis, wereldwijde en hoogwaardige OSM-gegevens gebruikt.
+\n Gebruik gesproken en visuele navigatie, toon POI‘S (points of interest), maak en beheer GPX-tracks, toon hoogtelijnen en topografische informatie, kies tussen autorijden, fietsen en wandelen, bewerk OSM en nog veel meer.
+\n
+\n OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteun je het project, het ontwikkelen van nieuwe functies, en ontvang je de laatste updates.
+\n
 \n Een paar van de belangrijkste functies:</string>
     <string name="osmand_plus_extended_description_part2">" Navigatie
 \n • Online (snel) of offline (zonder roamingkosten in het buitenland)
@@ -3190,7 +3190,7 @@
     <string name="rendering_attr_piste_difficulty_intermediate_name">Middelmatig</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Gevorderd</string>
     <string name="rendering_attr_piste_difficulty_expert_name">Expert</string>
-    <string name="rendering_attr_piste_difficulty_freeride_name">Gratis rit</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Vrij rijden</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extreem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Ongedefinieerd</string>
     <string name="routeInfo_piste_difficulty_name">Moeilijkheidsgraad piste</string>
@@ -5193,7 +5193,7 @@
     <string name="routing_attr_hazmat_category_usa_5_name">Oxiderende stoffen en organische peroxiden</string>
     <string name="routing_attr_hazmat_category_usa_6_name">Giftige en infectueuze stoffen</string>
     <string name="dangerous_goods">Gevaarlijke goederen</string>
-    <string name="free_ride">Gratis rit</string>
+    <string name="free_ride">Vrij rijden</string>
     <string name="write_bearing_description">Peiling opslaan voor elk spoor tijdens het opnemen</string>
     <string name="write_bearing">Schrijf peiling (richting)</string>
     <string name="rendering_attr_alpineHiking_name">Moeilijkheidsgraad classificatie</string>
