@@ -25,6 +25,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
+import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.HHRouteDataStructure.HHNetworkRouteRes;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
@@ -161,11 +162,15 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, RouteCalculationMode rm) {
+		if (rm == null) {
+			rm = config.router.getProfile() == GeneralRouterProfile.CAR ? RouteCalculationMode.COMPLEX
+					: RouteCalculationMode.NORMAL;
+		}
 		return new RoutingContext(config, nativeLibrary, map, rm);
 	}
 
 	public RoutingContext buildRoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
-		return new RoutingContext(config, nativeLibrary, map, RouteCalculationMode.NORMAL);
+		return buildRoutingContext(config, nativeLibrary, map, null);
 	}
 
 
@@ -418,7 +423,8 @@ public class RoutePlannerFrontEnd {
 			while (st != end) {
 				LatLon point = r.getPoint(st);
 				boolean pointIsClosed = false;
-				int delta = 0, startInd = Math.max(0, start.ind - delta), nextInd = Math.min(gpxPoints.size(), next.ind + delta);
+				int delta = 5, startInd = Math.max(0, start.ind - delta),
+						nextInd = Math.min(gpxPoints.size() - 1, next.ind + delta);
 				for (int k = startInd; !pointIsClosed && k < nextInd; k++) {
 					pointIsClosed = pointCloseEnough(minPointApproximation, point, gpxPoints.get(k), gpxPoints.get(k + 1));
 				}
@@ -740,6 +746,10 @@ public class RoutePlannerFrontEnd {
 						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
 							firstSegment.setObject(start.pnt.road);
 						}
+//						// BUG fix: avoid empty segments but creates another issue and gaps
+//						if (firstSegment.getStartPointIndex() == firstSegment.getEndPointIndex()) {
+//							res.detailed.remove(0);
+//						}
 					} else {
 						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
@@ -1321,10 +1331,8 @@ public class RoutePlannerFrontEnd {
 		} else if (RoutingContext.SHOW_GC_SIZE && !before) {
 			int sz = ctx.global.size;
 			log.warn("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.indexedSubregions.size());
-			RoutingContext.runGCUsedMemory();
 			long h1 = RoutingContext.runGCUsedMemory();
 			ctx.unloadAllData();
-			RoutingContext.runGCUsedMemory();
 			long h2 = RoutingContext.runGCUsedMemory();
 			float mb = (1 << 20);
 			log.warn("Unload context :  estimated " + sz / mb + " ?= " + (h1 - h2) / mb + " actual");
