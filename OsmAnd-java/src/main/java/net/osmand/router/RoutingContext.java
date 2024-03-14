@@ -118,7 +118,6 @@ public class RoutingContext {
 		this.nativeLib = cp.nativeLib;
 		this.visitor = cp.visitor;
 		this.calculationProgress = cp.calculationProgress;
-		this.precalculatedRouteDirection = cp.precalculatedRouteDirection;
 	}
 	
 	RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] list, RouteCalculationMode calcMode) {
@@ -186,7 +185,7 @@ public class RoutingContext {
 		return config.planRoadDirection;
 	}
 	
-	public void initLatLonStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
+	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
 		startX = MapUtils.get31TileNumberX(start.getLongitude());
 		startY = MapUtils.get31TileNumberY(start.getLatitude());
 		targetX = MapUtils.get31TileNumberX(end.getLongitude());
@@ -209,18 +208,18 @@ public class RoutingContext {
 		}
 	}
 
-	public void initPreciseStartEndPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
-		startX = start.preciseX;
-		startY = start.preciseY;
-		startRoadId = start.road.getId();
-		startSegmentInd = start.getSegmentStart();
-
+	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end, List<LatLon> inters) {
 		targetX = end.preciseX;
 		targetY = end.preciseY;
 		targetRoadId = end.road.getId();
 		targetSegmentInd = end.getSegmentStart();
-
-		initIntermediates(null);
+		
+		startX = start.preciseX;
+		startY = start.preciseY;
+		startRoadId = start.road.getId();
+		startSegmentInd = start.getSegmentStart();
+		
+		initIntermediates(inters);
 	}
 	
 	public void unloadAllData() {
@@ -482,10 +481,11 @@ public class RoutingContext {
 		if (memoryLimit == 0) {
 			memoryLimit = config.memoryLimitation;
 		}
-		if (getCurrentEstimatedSize() > 0.85 * memoryLimit) {
+		if (getCurrentEstimatedSize() > 0.9 * memoryLimit) {
 			int sz1 = getCurrentEstimatedSize();
 			long h1 = 0;
 			if (SHOW_GC_SIZE && sz1 > 0.7 * memoryLimit) {
+				runGCUsedMemory();
 				h1 = runGCUsedMemory();
 			}
 			int clt = getCurrentlyLoadedTiles();
@@ -493,6 +493,7 @@ public class RoutingContext {
 			unloadUnusedTiles(memoryLimit);
 			if (h1 != 0 && getCurrentlyLoadedTiles() != clt) {
 				int sz2 = getCurrentEstimatedSize();
+				runGCUsedMemory();
 				long h2 = runGCUsedMemory();
 				float mb = (1 << 20);
 				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb + " actual");
@@ -727,11 +728,17 @@ public class RoutingContext {
 	protected static long runGCUsedMemory()  {
 		Runtime runtime = Runtime.getRuntime();
 		long usedMem1 = runtime.totalMemory() - runtime.freeMemory();
-		int cnt = 1;
+		long usedMem2 = Long.MAX_VALUE;
+		int cnt = 4;
 		while (cnt-- >= 0) {
-			runtime.runFinalization();
-			runtime.gc();
-			usedMem1 = runtime.totalMemory() - runtime.freeMemory();
+			for (int i = 0; (usedMem1 < usedMem2) && (i < 1000); ++i) {
+				runtime.runFinalization();
+				runtime.gc();
+				Thread.yield();
+
+				usedMem2 = usedMem1;
+				usedMem1 = runtime.totalMemory() - runtime.freeMemory();
+			}
 		}
 		return usedMem1;
 	}

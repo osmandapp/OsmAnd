@@ -159,12 +159,16 @@ public class RoutingConfiguration {
 			return build(router, null, memoryLimits, new LinkedHashMap<String, String>());
 		}
 		
-		public RoutingConfiguration build(String router, RoutingMemoryLimits memoryLimits, Map<String, String> params) {
+		public RoutingConfiguration build(String router,
+		                                  RoutingMemoryLimits memoryLimits,
+		                                  Map<String, String> params) {
 			return build(router, null, memoryLimits, params);
 		}
 		
-		public RoutingConfiguration build(String router, Double direction, RoutingMemoryLimits memoryLimits,
-				Map<String, String> params) {
+		public RoutingConfiguration build(String router,
+		                                  Double direction,
+		                                  RoutingMemoryLimits memoryLimits,
+		                                  Map<String, String> params) {
 			String derivedProfile = null;
 			if (!routers.containsKey(router)) {
 				for (Map.Entry<String, GeneralRouter> r : routers.entrySet()) {

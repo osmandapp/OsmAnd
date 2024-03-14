@@ -31,11 +31,11 @@ import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.GpxRoutingApproximation.GpxApproximationContext;
-import net.osmand.router.GpxRoutingApproximation.GpxPoint;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
@@ -250,7 +250,7 @@ public class NativeLibrary {
 				regions, basemap);
 	}
 
-	public GpxApproximationContext runNativeSearchGpxRoute(GpxApproximationContext gCtx, List<GpxPoint> gpxPoints) {
+	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
 		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		int pointsSize = gpxPoints.size();
 		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[pointsSize];
@@ -269,7 +269,7 @@ public class NativeLibrary {
 		return gCtx;
 	}
 
-	private void initRouteRegion(GpxApproximationContext gCtx, RouteSegmentResult rsr) {
+	private void initRouteRegion(GpxRouteApproximation gCtx, RouteSegmentResult rsr) {
 		RouteRegion region = rsr.getObject().region;
 		BinaryMapIndexReader reader = gCtx.ctx.reverseMap.get(region);
 		if (reader != null) {

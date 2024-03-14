@@ -42,7 +42,6 @@ import net.osmand.util.MapUtils;
 
 public class RouteResultPreparation {
 
-	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION = true;
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 	public static String PRINT_TO_GPX_FILE = null;
 	private static final float TURN_DEGREE_MIN = 45;

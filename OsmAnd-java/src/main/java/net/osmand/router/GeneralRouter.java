@@ -56,7 +56,6 @@ public class GeneralRouter implements VehicleRouter {
 	private static boolean USE_CACHE = true;
 	public static long TIMER = 0;
 
-	private final GeneralRouter root; 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters;
@@ -138,9 +137,7 @@ public class GeneralRouter implements VehicleRouter {
 		SYMBOLIC
 	}
 	
-	public GeneralRouter(GeneralRouter copy, Map<String, String> params) {
-		this.root = copy.root;
-		GeneralRouter parent = root;
+	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
@@ -191,7 +188,6 @@ public class GeneralRouter implements VehicleRouter {
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
 		this.profile = profile;
-		this.root = this;
 		this.attributes = new LinkedHashMap<String, String>();
 		this.parameterValues = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();

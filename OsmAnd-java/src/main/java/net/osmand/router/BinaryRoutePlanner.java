@@ -1,5 +1,8 @@
 package net.osmand.router;
 
+import gnu.trove.map.TLongObjectMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
+
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -8,17 +11,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import org.apache.commons.logging.Log;
-
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.router.GpxRoutingApproximation.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
+
+import static net.osmand.router.RoutePlannerFrontEnd.*;
 
 public class BinaryRoutePlanner {
 
@@ -143,15 +144,11 @@ public class BinaryRoutePlanner {
 				}
 			}
 			
-			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.9 && RoutingContext.SHOW_GC_SIZE) {
+			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95 && RoutingContext.SHOW_GC_SIZE) {
 				printMemoryConsumption("Memory occupied before exception : ");
 			}
-			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.9) {
-				throw new IllegalStateException(
-						String.format("There is not enough memory %.5f, %.5f -> %.5f, %.5f - limit  %d  MB",
-								MapUtils.get31LatitudeY(ctx.startY), MapUtils.get31LongitudeX(ctx.startX),
-								MapUtils.get31LatitudeY(ctx.targetY), MapUtils.get31LongitudeX(ctx.targetX),
-								ctx.config.memoryLimitation / (1 << 20)));
+			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
+				throw new IllegalStateException("There is not enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
 			}
 			if (ctx.calculationProgress != null) {
 				ctx.calculationProgress.visitedSegments++;
@@ -348,12 +345,6 @@ public class BinaryRoutePlanner {
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
 			PriorityQueue<RouteSegmentCost> graphDirectSegments, PriorityQueue<RouteSegmentCost> graphReverseSegments) {
-		if (ctx.precalculatedRouteDirection != null) {
-			ctx.precalculatedRouteDirection.updatePreciseStartEnd(
-					(start != null) ? start.preciseX : 0, (start != null) ? start.preciseY : 0,
-					(end != null) ? end.preciseX : 0, (end != null) ? end.preciseY : 0
-			);
-		}
 		if (start != null) {
 			ctx.startX = start.preciseX;
 			ctx.startY = start.preciseY;
@@ -432,16 +423,17 @@ public class BinaryRoutePlanner {
 		if (ctx.dijkstraMode != 0) {
 			return 0;
 		}
+		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
+		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		if (ctx.precalculatedRouteDirection != null) {
 			float te = ctx.precalculatedRouteDirection.timeEstimate(begX, begY, endX, endY);
 			if (te > 0) {
 				return te;
 			}
 		}
-		double distToFinalPoint = squareRootDist(begX, begY, endX, endY);
-		double result = distToFinalPoint / ctx.getRouter().getMaxSpeed();
 		return (float) result;
 	}
+
 
 	private static void println(String logMsg) {
 //		log.info(logMsg);
