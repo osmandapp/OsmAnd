@@ -241,9 +241,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateSelectedDate(@Nullable Date date) {
-		//checkDateOffset(date);
-		widgetsPanel.setSelectedDate(date);
 		plugin.setForecastDate(date);
+		if (date != null)
+			date.setTime(WeatherUtils.roundForecastTimeToHour(date.getTime()));
+		checkDateOffset(date);
+		widgetsPanel.setSelectedDate(date);
 		requireMapActivity().refreshMap();
 	}
 
@@ -257,6 +259,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			} else if (offset == 1) {
 				utcCalendar.set(Calendar.HOUR_OF_DAY, hours - 1);
 			}
+			date.setTime(utcCalendar.getTimeInMillis());
 		}
 	}
 

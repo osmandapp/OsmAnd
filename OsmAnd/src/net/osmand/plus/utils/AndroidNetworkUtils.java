@@ -646,11 +646,11 @@ public class AndroidNetworkUtils {
 					stream = new FileOutputStream(fileToSave);
 					Algorithms.streamCopy(inputStream, stream, progress, 1024);
 					stream.flush();
+					result = lastModified > 0 ? lastModified : 1;
 				} finally {
 					Algorithms.closeStream(inputStream);
 					Algorithms.closeStream(stream);
 				}
-				result = lastModified > 0 ? lastModified : 1;
 			}
 		} catch (UnknownHostException e) {
 			LOG.error("UnknownHostException, cannot download file " + url + " " + e.getMessage());
