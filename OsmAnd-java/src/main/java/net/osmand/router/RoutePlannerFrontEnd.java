@@ -173,7 +173,6 @@ public class RoutePlannerFrontEnd {
 		return buildRoutingContext(config, nativeLibrary, map, null);
 	}
 
-
 	private static double squareDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.squareDist31TileMetric(x1, y1, x2, y2);
 	}
