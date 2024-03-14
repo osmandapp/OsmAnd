@@ -15,6 +15,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
@@ -78,25 +79,31 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-// Dynamic texture switching is disabled in the current version
-		this.dateTime = WeatherUtils.roundForecastTimeToHour(dateTime);
-		timePeriodStep = HOUR_IN_MILLISECONDS;
-		timePeriodStart = this.dateTime;
-		timePeriodEnd = this.dateTime;
-/*
-		long hour = WeatherUtils.roundForecastTimeToHour(dateTime);
-		long currentTime = WeatherUtils.roundForecastTimeToHour(System.currentTimeMillis());
-		long step = HOUR_IN_MILLISECONDS;
-		if (hour / DAY_IN_MILLISECONDS > currentTime / DAY_IN_MILLISECONDS)
-			step *= 3;
-		this.dateTime = dateTime;
-		if (this.dateTime <= timePeriodStart + timePeriodStep ||  this.dateTime >= timePeriodEnd - timePeriodStep || timePeriodStep != step) {
-			timePeriodStart = this.dateTime - step - step - step;
-			timePeriodEnd = this.dateTime + step + step + step;
+		long dayStart = OsmAndFormatter.getStartOfToday();
+		long dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		long step = timePeriodStep;
+		if (dateTime > dayEnd)
+			step = HOUR_IN_MILLISECONDS * 3;
+		else if (dateTime < dayEnd || step < HOUR_IN_MILLISECONDS)
+			step = HOUR_IN_MILLISECONDS;
+		dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
+		dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		if (dateTime < dayStart || dateTime > dayEnd) {
+			dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
+			dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		}
+		long prevTime = (dateTime - dayStart) / step * step + dayStart;
+		long nextTime = prevTime + step;
+		long nearestTime = dateTime - prevTime < nextTime - dateTime ? prevTime : nextTime;
+		if (timePeriodStep != step
+				|| (timePeriodStart > dayStart && nearestTime <= timePeriodStart)
+				|| (timePeriodEnd < dayEnd && nearestTime >= timePeriodEnd)) {
+			timePeriodStart = Math.max(nearestTime - step * 2, dayStart);
+			timePeriodEnd = Math.min(nearestTime + step * 2, dayEnd);
 			timePeriodStep = step;
 			requireTimePeriodChange = true;
 		}
- */
+		this.dateTime = dateTime;
 	}
 
 	@Override
@@ -149,22 +156,20 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		if (!bands.isEmpty()) {
 			net.osmand.core.jni.WeatherLayer weatherLayer = this.weatherLayer == WeatherLayer.LOW
 					? net.osmand.core.jni.WeatherLayer.Low : net.osmand.core.jni.WeatherLayer.High;
-
-			// Dynamic texture switching is disabled in the current version
-			//if (provider == null) {
-			//	requireTimePeriodChange = false;
+			if (provider == null) {
+				requireTimePeriodChange = false;
 				provider = new WeatherRasterLayerProvider(resourcesManager, weatherLayer,
 						timePeriodStart, timePeriodEnd, timePeriodStep, bands, false);
 				mapRenderer.setMapLayerProvider(view.getLayerIndex(this), provider);
 				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 				mapLayerConfiguration.setOpacityFactor(1.0f);
 				mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
-			//}
-			//if (requireTimePeriodChange) {
-			//	requireTimePeriodChange = false;
-			//	provider.setDateTime(timePeriodStart, timePeriodEnd, timePeriodStep);
-			//	mapRenderer.changeTimePeriod();
-			//}
+			}
+			if (requireTimePeriodChange) {
+				requireTimePeriodChange = false;
+				provider.setDateTime(timePeriodStart, timePeriodEnd, timePeriodStep);
+				mapRenderer.changeTimePeriod();
+			}
 			mapRenderer.setDateTime(dateTime);
 		}
 	}
