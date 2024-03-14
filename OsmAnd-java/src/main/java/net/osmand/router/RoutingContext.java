@@ -27,7 +27,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
@@ -184,42 +184,20 @@ public class RoutingContext {
 	public int getPlanRoadDirection() {
 		return config.planRoadDirection;
 	}
-	
-	public void initStartEndPoints(LatLon start, LatLon end, List<LatLon> inters) {
-		startX = MapUtils.get31TileNumberX(start.getLongitude());
-		startY = MapUtils.get31TileNumberY(start.getLatitude());
-		targetX = MapUtils.get31TileNumberX(end.getLongitude());
-		targetY = MapUtils.get31TileNumberY(end.getLatitude());
-		initIntermediates(inters);
-	}
 
-	private void initIntermediates(List<LatLon> inters) {
-		if (inters != null && inters.size() > 0) {
-			intermediatesX = new int[inters.size()];
-			intermediatesY = new int[inters.size()];
-			for (int i = 0; i < inters.size(); i++) {
-				LatLon l = inters.get(i);
-				intermediatesX[i] = MapUtils.get31TileNumberX(l.getLongitude());
-				intermediatesY[i] = MapUtils.get31TileNumberY(l.getLatitude());
-			}
-		} else {
-			intermediatesX = new int[0];
-			intermediatesY = new int[0];
-		}
-	}
-
-	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end, List<LatLon> inters) {
-		targetX = end.preciseX;
-		targetY = end.preciseY;
-		targetRoadId = end.road.getId();
-		targetSegmentInd = end.getSegmentStart();
-		
+	public void initStartAndTargetPoints(RouteSegmentPoint start, RouteSegmentPoint end) {
+		initTargetPoint(end);
 		startX = start.preciseX;
 		startY = start.preciseY;
 		startRoadId = start.road.getId();
 		startSegmentInd = start.getSegmentStart();
-		
-		initIntermediates(inters);
+	}
+
+	public void initTargetPoint(RouteSegmentPoint end) {
+		targetX = end.preciseX;
+		targetY = end.preciseY;
+		targetRoadId = end.road.getId();
+		targetSegmentInd = end.getSegmentStart();
 	}
 	
 	public void unloadAllData() {
