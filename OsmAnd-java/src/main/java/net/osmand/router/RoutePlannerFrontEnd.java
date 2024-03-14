@@ -493,7 +493,7 @@ public class RoutePlannerFrontEnd {
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
-				makeSegmentPointPrecise(pnt.getFirstRouteRes(), pnt.loc, true);
+//				makeSegmentPointPrecise(pnt.getFirstRouteRes(), pnt.loc, true);
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
 					lastStraightLine.add(startPoint);
@@ -509,7 +509,7 @@ public class RoutePlannerFrontEnd {
 				gctx.finalPoints.add(pnt);
 				gctx.result.addAll(pnt.routeToTarget);
 				i = pnt.targetInd;
-				makeSegmentPointPrecise(pnt.getLastRouteRes(), gpxPoints.get(i).loc, false);
+//				makeSegmentPointPrecise(pnt.getLastRouteRes(), gpxPoints.get(i).loc, false);
 			} else {
 				// add straight line from i -> i+1
 				LatLon lastPoint = null;
