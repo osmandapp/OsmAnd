@@ -21,8 +21,8 @@ public class RouteLineColorCard extends MultiStateCard implements HeaderInfo {
 
 	@Override
 	public void onNeedUpdateHeader() {
-		String title = controller.getMultiStateCardTitle();
-		String description = controller.getMultiStateSelectorTitle();
+		String title = controller.getCardTitle();
+		String description = controller.getSelectorTitle();
 		headerUiAdapter.onUpdateHeader(this, title, description);
 	}
 

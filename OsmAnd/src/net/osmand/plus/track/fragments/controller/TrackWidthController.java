@@ -59,11 +59,11 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		this.listener = listener;
 	}
 
-	private void onWidthSelected(@Nullable String width) {
-		if (width != null) {
-			setGpxWidth(width);
+	private void onWidthValueSelected(@Nullable String widthValue) {
+		if (widthValue != null) {
+			setGpxWidth(widthValue);
 			cardInstance.updateCardSummary();
-			listener.onTrackWidthSelected(width);
+			listener.onTrackWidthSelected(widthValue);
 		}
 	}
 
@@ -143,7 +143,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 			String selectedWidth = drawInfo.getWidth();
 			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
 			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
-			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthSelected) {
+			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull
 				@Override
 				public Limits getSliderLimits() {

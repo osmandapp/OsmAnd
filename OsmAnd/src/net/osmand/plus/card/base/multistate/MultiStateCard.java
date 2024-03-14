@@ -11,7 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
-public class MultiStateCard extends BaseCard {
+public class MultiStateCard extends BaseCard implements IMultiStateCard {
 
 	protected final IMultiStateCardController controller;
 
@@ -34,7 +34,7 @@ public class MultiStateCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		if(controller.shouldShowMultiStateCardHeader()) {
+		if(controller.shouldShowCardHeader()) {
 			updateCardTitle();
 			updateStateSelector();
 		} else {
@@ -44,8 +44,9 @@ public class MultiStateCard extends BaseCard {
 		bindSelectedStateContent();
 	}
 
+	@Override
 	public void updateSelectedCardState() {
-		if (controller.shouldShowMultiStateCardHeader()) {
+		if (controller.shouldShowCardHeader()) {
 			updateStateSelector();
 		}
 		bindSelectedStateContent();
@@ -53,28 +54,28 @@ public class MultiStateCard extends BaseCard {
 
 	private void updateCardTitle() {
 		TextView tvTitle = view.findViewById(R.id.card_title);
-		tvTitle.setText(controller.getMultiStateCardTitle());
+		tvTitle.setText(controller.getCardTitle());
 	}
 
 	private void updateStateSelector() {
 		View selector = view.findViewById(R.id.card_selector);
-		selector.setOnClickListener(v -> showPopUpMenu());
+		selector.setOnClickListener(v -> controller.onSelectorButtonClicked(selector));
 		updateStateSelectorTitle();
 	}
 
 	private void updateStateSelectorTitle() {
 		View selector = view.findViewById(R.id.card_selector);
 		TextView tvTitle = selector.findViewById(R.id.title);
-		tvTitle.setText(controller.getMultiStateSelectorTitle());
+		tvTitle.setText(controller.getSelectorTitle());
 	}
 
 	private void bindSelectedStateContent() {
 		ViewGroup contentContainer = view.findViewById(R.id.content);
-		controller.onBindMultiStateCardContent(activity, contentContainer, nightMode);
+		controller.onBindCardContent(activity, contentContainer, nightMode);
 	}
 
-	private void showPopUpMenu() {
-		View selector = view.findViewById(R.id.card_selector);
-		controller.showPopUpMenu(activity, selector, nightMode);
+	@Override
+	public FragmentActivity getActivity() {
+		return activity;
 	}
 }

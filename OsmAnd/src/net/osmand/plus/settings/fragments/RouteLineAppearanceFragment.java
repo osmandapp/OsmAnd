@@ -228,7 +228,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						RouteLineColorController colorController = getColorCardController();
-						colorController.showPopUpMenu(activity, v, nightMode);
+						colorController.onSelectorButtonClicked(v);
 					}
 				});
 				AndroidUiHelper.updateVisibility(selectorIcon, true);

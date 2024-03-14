@@ -156,7 +156,7 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 	}
 
 	@Override
-	public boolean shouldShowMultiStateCardHeader() {
+	public boolean shouldShowCardHeader() {
 		return false;
 	}
 

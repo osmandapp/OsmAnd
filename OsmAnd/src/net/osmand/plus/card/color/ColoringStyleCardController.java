@@ -10,8 +10,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.card.base.multistate.IMultiStateCardController;
-import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.color.cstyle.OnSelectColoringStyleListener;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
@@ -28,12 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class ColoringStyleCardController implements IMultiStateCardController {
+public abstract class ColoringStyleCardController extends BaseMultiStateCardController {
 
 	protected final OsmandApplication app;
 	private final List<ColoringStyle> supportedColoringStyles;
 
-	private MultiStateCard cardInstance;
 	private ColoringStyle selectedColoringStyle;
 	private IColorCardControllerListener controllerListener;
 	private boolean nightMode;
@@ -43,11 +41,6 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 		this.app = app;
 		this.supportedColoringStyles = collectSupportedColoringStyles();
 		this.selectedColoringStyle = selectedColoringStyle;
-	}
-
-	@Override
-	public void bindComponent(@NonNull MultiStateCard cardInstance) {
-		this.cardInstance = cardInstance;
 	}
 
 	public void setListener(@NonNull IColorCardControllerListener controllerListener) {
@@ -61,24 +54,19 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 
 	@NonNull
 	@Override
-	public String getMultiStateCardTitle() {
+	public String getCardTitle() {
 		return app.getString(R.string.shared_string_color);
 	}
 
 	@NonNull
 	@Override
-	public String getMultiStateSelectorTitle() {
+	public String getSelectorTitle() {
 		return selectedColoringStyle.toHumanString(app);
-	}
-
-	@Override
-	public int getMultiStateSelectorAccentColor(boolean nightMode) {
-		return ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@NonNull
 	@Override
-	public List<PopUpMenuItem> getMultiSateMenuItems() {
+	public List<PopUpMenuItem> getPopUpMenuItems() {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
 		for (ColoringStyle coloringStyle : getSupportedColoringStyles()) {
 			int titleColor = isDataAvailableForColoringStyle(coloringStyle)
@@ -95,7 +83,7 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 	}
 
 	@Override
-	public void onBindMultiStateCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
 		this.nightMode = nightMode;
 		container.removeAllViews();
 		BaseCard card = getContentCardForSelectedState(activity);
@@ -104,13 +92,13 @@ public abstract class ColoringStyleCardController implements IMultiStateCardCont
 	}
 
 	@Override
-	public boolean shouldShowMultiStateCardHeader() {
+	public boolean shouldShowCardHeader() {
 		return true;
 	}
 
 	@Override
-	public void onMultiStateMenuItemSelected(@NonNull FragmentActivity activity,
-	                                            @NonNull View view, @NonNull PopUpMenuItem item) {
+	public void onPopUpMenuItemSelected(@NonNull FragmentActivity activity,
+	                                    @NonNull View view, @NonNull PopUpMenuItem item) {
 		ColoringStyle newColoringStyle = (ColoringStyle) item.getTag();
 		if (!isDataAvailableForColoringStyle(newColoringStyle)) {
 			showUnavailableColoringStyleSnackbar(activity, newColoringStyle, view);

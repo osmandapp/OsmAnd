@@ -20,8 +20,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
-import net.osmand.plus.card.base.multistate.IMultiStateCardController;
-import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.width.WidthComponentController;
@@ -29,7 +28,6 @@ import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.card.width.data.WidthStyle;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
-import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
@@ -37,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class RouteLineWidthController implements IMultiStateCardController, IDialogController {
+public class RouteLineWidthController extends BaseMultiStateCardController implements IDialogController {
 
 	private static final String PROCESS_ID = "select_route_line_width";
 
@@ -54,7 +52,6 @@ public class RouteLineWidthController implements IMultiStateCardController, IDia
 	private final List<WidthStyle> supportedWidthStyles;
 	private WidthStyle selectedWidthStyle;
 
-	private MultiStateCard cardInstance;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
 	private OnRouteLineWidthSelectedListener listener;
@@ -68,11 +65,6 @@ public class RouteLineWidthController implements IMultiStateCardController, IDia
 		this.selectedWidthStyle = findWidthStyle(routeLinePreview.getWidth());
 	}
 
-	@Override
-	public void bindComponent(@NonNull MultiStateCard cardInstance) {
-		this.cardInstance = cardInstance;
-	}
-
 	public void setListener(@NonNull OnRouteLineWidthSelectedListener listener) {
 		this.listener = listener;
 	}
@@ -83,24 +75,19 @@ public class RouteLineWidthController implements IMultiStateCardController, IDia
 
 	@NonNull
 	@Override
-	public String getMultiStateCardTitle() {
+	public String getCardTitle() {
 		return app.getString(R.string.shared_string_width);
 	}
 
 	@NonNull
 	@Override
-	public String getMultiStateSelectorTitle() {
+	public String getSelectorTitle() {
 		return selectedWidthStyle.toHumanString(app);
-	}
-
-	@Override
-	public int getMultiStateSelectorAccentColor(boolean nightMode) {
-		return ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@NonNull
 	@Override
-	public List<PopUpMenuItem> getMultiSateMenuItems() {
+	public List<PopUpMenuItem> getPopUpMenuItems() {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
 		for (WidthStyle widthStyle : supportedWidthStyles) {
 			menuItems.add(new PopUpMenuItem.Builder(app)
@@ -114,16 +101,16 @@ public class RouteLineWidthController implements IMultiStateCardController, IDia
 	}
 
 	@Override
-	public void onMultiStateMenuItemSelected(@NonNull FragmentActivity activity,
-	                                         @NonNull View view, @NonNull PopUpMenuItem item) {
+	public void onPopUpMenuItemSelected(@NonNull FragmentActivity activity,
+	                                    @NonNull View view, @NonNull PopUpMenuItem item) {
 		WidthStyle widthStyle = (WidthStyle) item.getTag();
 		String widthValue = getWidthValueOfStyle(widthStyle);
-		onWidthSelected(widthValue);
+		onWidthValueSelected(widthValue);
 	}
 
 	@Override
-	public void onBindMultiStateCardContent(@NonNull FragmentActivity activity,
-	                                        @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity,
+	                              @NonNull ViewGroup container, boolean nightMode) {
 		this.nightMode = nightMode;
 		if (isMapStyle(selectedWidthStyle)) {
 			bindSummaryCard(activity, container, nightMode);
@@ -184,15 +171,15 @@ public class RouteLineWidthController implements IMultiStateCardController, IDia
 	}
 
 	@Override
-	public boolean shouldShowMultiStateCardHeader() {
+	public boolean shouldShowCardHeader() {
 		return true;
 	}
 
-	private void onWidthSelected(@Nullable String width) {
-		setRouteLineWidth(width);
-		selectedWidthStyle = findWidthStyle(width);
+	private void onWidthValueSelected(@Nullable String widthValue) {
+		setRouteLineWidth(widthValue);
+		selectedWidthStyle = findWidthStyle(widthValue);
 		cardInstance.updateSelectedCardState();
-		listener.onRouteLineWidthSelected(width);
+		listener.onRouteLineWidthSelected(widthValue);
 	}
 
 	private void setRouteLineWidth(String width) {
@@ -206,7 +193,7 @@ public class RouteLineWidthController implements IMultiStateCardController, IDia
 			String selectedWidth = routeLinePreview.getWidth();
 			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
 			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
-			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthSelected) {
+			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
 				@NonNull
 				@Override
 				public Limits getSliderLimits() {
