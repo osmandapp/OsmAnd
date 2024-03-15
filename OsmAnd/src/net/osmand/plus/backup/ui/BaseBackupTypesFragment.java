@@ -27,6 +27,7 @@ import net.osmand.plus.backup.ui.ClearTypesBottomSheet.OnClearTypesListener;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportCategory;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -44,8 +45,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
-		implements OnItemSelectedListener, OnClearTypesListener, OnDeleteFilesListener {
+public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment implements OnItemSelectedListener,
+		OnClearTypesListener, OnDeleteFilesListener, InAppPurchaseListener {
 
 	protected BackupHelper backupHelper;
 
@@ -53,6 +54,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	protected Map<ExportType, List<?>> selectedItemsMap = new EnumMap<>(ExportType.class);
 
 	protected ProgressBar progressBar;
+	protected BackupTypesAdapter adapter;
 	protected BackupClearType clearType;
 
 	protected boolean cloudRestore;
@@ -91,7 +93,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		BackupTypesAdapter adapter = new BackupTypesAdapter(app, this, cloudRestore, nightMode);
+		adapter = new BackupTypesAdapter(app, this, cloudRestore, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 
 		ExpandableListView expandableList = view.findViewById(R.id.list);
@@ -226,6 +228,16 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	public void onFilesDeleteError(int status, @NonNull String message) {
 		updateProgressVisibility(false);
 		backupHelper.prepareBackup();
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		dataList = getDataList();
+		selectedItemsMap = getSelectedItems();
+
+		if (isResumed() && adapter != null) {
+			adapter.updateSettingsItems(dataList, selectedItemsMap);
+		}
 	}
 
 	protected void updateProgressVisibility(boolean visible) {
