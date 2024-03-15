@@ -111,6 +111,12 @@ public class BackupDbHelper {
 		public int hashCode() {
 			return Algorithms.hash(type, name);
 		}
+
+		@NonNull
+		@Override
+		public String toString() {
+			return "UploadedFileInfo{type=" + type + ", name=" + name + ", uploadTime=" + uploadTime + '}';
+		}
 	}
 
 	public BackupDbHelper(@NonNull OsmandApplication app) {
@@ -162,7 +168,7 @@ public class BackupDbHelper {
 			try {
 				db.execSQL("DELETE FROM " + UPLOADED_FILES_TABLE_NAME + " WHERE " +
 								UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-						new Object[]{info.type, info.name});
+						new Object[] {info.type, info.name});
 			} finally {
 				db.close();
 			}
@@ -190,7 +196,7 @@ public class BackupDbHelper {
 						+ UPLOADED_FILE_COL_UPLOAD_TIME + " = ?, "
 						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ? "
 						+ "WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-				new Object[]{info.uploadTime, info.md5Digest, info.type, info.name});
+				new Object[] {info.uploadTime, info.md5Digest, info.type, info.name});
 	}
 
 	private void addUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
@@ -199,7 +205,7 @@ public class BackupDbHelper {
 						+ UPLOADED_FILE_COL_NAME + ", " + UPLOADED_FILE_COL_UPLOAD_TIME + ", "
 						+ UPLOADED_FILE_COL_MD5_DIGEST
 						+ ") VALUES (?, ?, ?, ?)",
-				new Object[]{info.type, info.name, info.uploadTime, info.md5Digest});
+				new Object[] {info.type, info.name, info.uploadTime, info.md5Digest});
 	}
 
 	@NonNull
@@ -283,7 +289,7 @@ public class BackupDbHelper {
 						" FROM " + UPLOADED_FILES_TABLE_NAME +
 						" WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " +
 						UPLOADED_FILE_COL_NAME + " = ?",
-				new String[]{type, name});
+				new String[] {type, name});
 		if (query != null && query.moveToFirst()) {
 			info = readUploadedFileInfo(query);
 		}
@@ -343,10 +349,10 @@ public class BackupDbHelper {
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + LAST_MODIFIED_TABLE_NAME +
-						" WHERE " + LAST_MODIFIED_COL_NAME + " = ?", new Object[]{name});
+						" WHERE " + LAST_MODIFIED_COL_NAME + " = ?", new Object[] {name});
 				db.execSQL("INSERT INTO " + LAST_MODIFIED_TABLE_NAME + "(" + LAST_MODIFIED_COL_NAME + ", "
 								+ LAST_MODIFIED_COL_MODIFIED_TIME + ") VALUES (?, ?)",
-						new Object[]{name, lastModifiedTime});
+						new Object[] {name, lastModifiedTime});
 			} finally {
 				db.close();
 			}
@@ -362,7 +368,7 @@ public class BackupDbHelper {
 						"SELECT " + LAST_MODIFIED_COL_MODIFIED_TIME +
 								" FROM " + LAST_MODIFIED_TABLE_NAME +
 								" WHERE " + LAST_MODIFIED_COL_NAME + " = ?",
-						new String[]{name});
+						new String[] {name});
 				if (query != null && query.moveToFirst()) {
 					res = query.getLong(0);
 				}
