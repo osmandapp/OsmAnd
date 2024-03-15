@@ -287,13 +287,12 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		return route;
 	}
 
-	private void filterPointsBasedOnConfiguration(HHRoutingContext<T> hctx) {
-		GeneralRouter vr = (GeneralRouter) hctx.rctx.getRouter();
-		Map<String, RoutingParameter> parameters = vr.getParameters();
+	public static TreeMap<String, String> getFilteredTags(GeneralRouter generalRouter) {
+		Map<String, RoutingParameter> parameters = generalRouter.getParameters();
 		TreeMap<String, String> tm = new TreeMap<String, String>();
-		for (Entry<String, String> es : vr.getParameterValues().entrySet()) {
+		for (Entry<String, String> es : generalRouter.getParameterValues().entrySet()) {
 			String paramId = es.getKey();
-			// These parameters don't affect the routing filters 
+			// These parameters don't affect the routing filters
 			// This assumption probably shouldn't be used in general and only for popular parameters)
 			if (parameters.containsKey(paramId) && !paramId.equals(GeneralRouter.USE_SHORTEST_WAY)
 					&& !paramId.equals(GeneralRouter.USE_HEIGHT_OBSTACLES)
@@ -301,6 +300,11 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				tm.put(paramId, es.getValue());
 			}
 		}
+		return tm;
+	}
+
+	private void filterPointsBasedOnConfiguration(HHRoutingContext<T> hctx) {
+		TreeMap<String, String> tm = getFilteredTags((GeneralRouter) hctx.rctx.getRouter());
 		if (hctx.filterRoutingParameters.equals(tm)) {
 			return;
 		}
