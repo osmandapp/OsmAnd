@@ -261,6 +261,7 @@ public class AlarmWidget {
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 		boolean cams = settings.SHOW_CAMERAS.get();
 		boolean peds = settings.SHOW_PEDESTRIAN.get();
+		boolean speedLimitExceed = settings.SHOW_SPEED_LIMIT_WARNINGS.get();
 		boolean tunnels = settings.SHOW_TUNNELS.get();
 		boolean americanType = region.isAmericanTypeSigns();
 
@@ -328,6 +329,8 @@ public class AlarmWidget {
 			visible = cams;
 		} else if (alarm.getType() == PEDESTRIAN) {
 			visible = peds;
+		} else if (alarm.getType() == SPEED_LIMIT) {
+			visible = speedLimitExceed;
 		} else if (alarm.getType() == TUNNEL) {
 			visible = tunnels;
 		} else {
