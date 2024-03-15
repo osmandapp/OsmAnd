@@ -384,7 +384,6 @@ public class RoutePlannerFrontEnd {
 					next = findNextGpxPointWithin(gpxPoints, start, gctx.ctx.config.minStepApproximation);
 					if (prev != null) {
 						prev.routeToTarget.addAll(prev.stepBackRoute);
-//						makeSegmentPointPrecise(prev.routeToTarget.get(prev.routeToTarget.size() - 1), start.loc, false);
 						if (next != null) {
 							log.warn("NOT found route from: " + start.pnt.getRoad() + " at " + start.pnt.getSegmentStart());
 						}
@@ -499,11 +498,11 @@ public class RoutePlannerFrontEnd {
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
 			GpxPoint pnt = gpxPoints.get(i);
 			if (pnt.routeToTarget != null && !pnt.routeToTarget.isEmpty()) {
-				makeSegmentPointPrecise(pnt.getFirstRouteRes(), pnt.loc, true);
 				LatLon startPoint = pnt.getFirstRouteRes().getStartPoint();
 				if (lastStraightLine != null) {
+					makeSegmentPointPrecise(pnt.getFirstRouteRes(), pnt.loc, true);
+					startPoint = pnt.getFirstRouteRes().getStartPoint();
 					lastStraightLine.add(startPoint);
-					System.out.println(startPoint);
 					addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 					lastStraightLine = null;
 				}
@@ -515,18 +514,16 @@ public class RoutePlannerFrontEnd {
 				gctx.finalPoints.add(pnt);
 				gctx.result.addAll(pnt.routeToTarget);
 				i = pnt.targetInd;
-				makeSegmentPointPrecise(pnt.getLastRouteRes(), gpxPoints.get(i).loc, false);
 			} else {
 				// add straight line from i -> i+1
-				LatLon lastPoint = null;
 				if (lastStraightLine == null) {
 					lastStraightLine = new ArrayList<LatLon>();
+					if (gctx.getLastPoint() != null && gctx.finalPoints.size() > 0) {
+						GpxPoint prev = gctx.finalPoints.get(gctx.finalPoints.size() - 1);
+						makeSegmentPointPrecise(prev.getLastRouteRes(), prev.loc, false);
+						lastStraightLine.add(gctx.getLastPoint());
+					}
 					straightPointStart = pnt;
-					// make smooth connection
-					lastPoint = gctx.getLastPoint();
-				}
-				if (lastPoint == null) {
-					lastPoint = pnt.loc;
 				}
 				lastStraightLine.add(pnt.loc);
 				i++;
