@@ -38,6 +38,7 @@ import net.osmand.plus.backup.commands.SendCodeCommand;
 import net.osmand.plus.base.ProgressHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
@@ -1004,6 +1005,12 @@ public class BackupHelper {
 								info.localFilesToDelete.add(localFile);
 							} else {
 								info.filesToDownload.add(remoteFile);
+							}
+						}
+						if (PluginsHelper.isDevelopment()) {
+							if (fileChangedRemotely || fileChangedLocally) {
+								LOG.debug("file to backup " + localFile + " " + remoteFile
+										+ " " + fileChangedRemotely + " fileChangedRemotely " + fileChangedLocally + "fileChangedLocally");
 							}
 						}
 					} else if (!remoteFile.isDeleted()) {
