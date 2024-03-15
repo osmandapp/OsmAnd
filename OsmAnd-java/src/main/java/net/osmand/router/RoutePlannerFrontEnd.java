@@ -592,16 +592,23 @@ public class RoutePlannerFrontEnd {
 	private void cleanupResultAndAddTurns(GpxRouteApproximation gctx) {
 		// cleanup double joints
 		int LOOK_AHEAD = 4;
-		for(int i = 0; i < gctx.result.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
+		List<RouteSegmentResult> deleted = new ArrayList<>();
+		for (int i = 0; i < gctx.result.size() && !gctx.ctx.calculationProgress.isCancelled; i++) {
 			RouteSegmentResult s = gctx.result.get(i);
-			for(int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.result.size(); j++) {
+			for (int j = i + 2; j <= i + LOOK_AHEAD && j < gctx.result.size(); j++) {
 				RouteSegmentResult e = gctx.result.get(j);
 				if (e.getStartPoint().equals(s.getEndPoint())) {
 					while ((--j) != i) {
-						gctx.result.remove(j);
+						RouteSegmentResult del = gctx.result.remove(j);
+						deleted.add(del);
 					}
 					break;
 				}
+			}
+		}
+		for (GpxPoint gpx : gctx.finalPoints) {
+			if (gpx.routeToTarget != null) {
+				gpx.routeToTarget.removeAll(deleted);
 			}
 		}
 		RouteResultPreparation preparation = new RouteResultPreparation();
@@ -743,10 +750,9 @@ public class RoutePlannerFrontEnd {
 						if (firstSegment.getObject().getPointsLength() != start.pnt.getRoad().getPointsLength()) {
 							firstSegment.setObject(start.pnt.road);
 						}
-//						// BUG fix: avoid empty segments but creates another issue and gaps
-//						if (firstSegment.getStartPointIndex() == firstSegment.getEndPointIndex()) {
-//							res.detailed.remove(0);
-//						}
+						if (firstSegment.getStartPointIndex() == firstSegment.getEndPointIndex()) {
+							res.detailed.remove(0);
+						}
 					} else {
 						// for native routing this is possible when point lies on intersection of 2 lines
 						// solution here could be to pass to native routing id of the route
