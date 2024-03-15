@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemsFactory;
@@ -163,6 +164,9 @@ class BackupImporter {
 				File tempFile = new File(tempDir, fileName);
 				String errorStr = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
 				boolean error = !Algorithms.isEmpty(errorStr);
+				if (PluginsHelper.isDevelopment()) {
+					LOG.debug("Temp file downloaded " + errorStr + " " + tempFile.getAbsolutePath());
+				}
 				if (!error) {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, tempFile, remoteFile.getName());
@@ -179,6 +183,10 @@ class BackupImporter {
 							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
 									remoteFile.getUpdatetimems());
 						}
+					}
+					if (PluginsHelper.isDevelopment()) {
+						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+						LOG.debug(" importItemFile file info " + info);
 					}
 				}
 				if (tempFile.exists()) {

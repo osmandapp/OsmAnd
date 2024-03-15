@@ -28,6 +28,7 @@ import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.util.Collections;
 import java.util.List;
 
 public abstract class ChangesTabFragment extends BaseOsmAndFragment implements OnPrepareBackupListener,
@@ -127,7 +128,9 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	private void updateAdapter() {
 		if (adapter != null) {
-			adapter.setCloudChangeItems(generateData());
+			List<CloudChangeItem> items = generateData();
+			Collections.sort(items, (o1, o2) -> -Long.compare(o1.time, o2.time));
+			adapter.setCloudChangeItems(items);
 		}
 	}
 
@@ -162,7 +165,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		public SettingsItem settingsItem;
 		public SyncOperationType operation;
 		public String summary;
-		public String time;
+		public long time;
 		public boolean synced;
 
 		@NonNull
@@ -178,13 +181,12 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		boolean local = tabType == RECENT_CHANGES_LOCAL;
 		SettingsItem settingsItem = getSettingsItem(local, localFile, remoteFile);
 		if (settingsItem != null) {
-			long time = getTime(operationType, localFile, remoteFile);
 
 			CloudChangeItem item = new CloudChangeItem();
 			item.title = BackupUiUtils.getItemName(app, settingsItem);
 			item.summary = localizedSummaryForOperation(operationType, localFile, remoteFile);
-			item.description = BackupUiUtils.generateTimeString(app, item.summary, time);
-			item.time = BackupUiUtils.getTimeString(app, time);
+			item.time = getTime(operationType, localFile, remoteFile);
+			item.description = BackupUiUtils.generateTimeString(app, item.summary, item.time);
 			item.iconId = BackupUiUtils.getIconId(settingsItem);
 			item.settingsItem = settingsItem;
 			item.operation = operationType;
