@@ -144,11 +144,15 @@ public class BinaryRoutePlanner {
 				}
 			}
 			
-			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95 && RoutingContext.SHOW_GC_SIZE) {
+			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.9 && RoutingContext.SHOW_GC_SIZE) {
 				printMemoryConsumption("Memory occupied before exception : ");
 			}
-			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
-				throw new IllegalStateException("There is not enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
+			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.9) {
+				throw new IllegalStateException(
+						String.format("There is not enough memory %.5f, %.5f -> %.5f, %.5f - limit  %d  MB",
+								MapUtils.get31LatitudeY(ctx.startY), MapUtils.get31LongitudeX(ctx.startX),
+								MapUtils.get31LatitudeY(ctx.targetY), MapUtils.get31LongitudeX(ctx.targetX),
+								ctx.config.memoryLimitation / (1 << 20)));
 			}
 			if (ctx.calculationProgress != null) {
 				ctx.calculationProgress.visitedSegments++;

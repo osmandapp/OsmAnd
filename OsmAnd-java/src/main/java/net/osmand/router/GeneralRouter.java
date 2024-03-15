@@ -91,6 +91,8 @@ public class GeneralRouter implements VehicleRouter {
 	private GeneralRouterProfile profile;
 	
 	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;
+	
+	private final GeneralRouter root; 
 		
 	
 	public enum RouteDataObjectAttribute {
@@ -137,7 +139,9 @@ public class GeneralRouter implements VehicleRouter {
 		SYMBOLIC
 	}
 	
-	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
+	public GeneralRouter(GeneralRouter copy, Map<String, String> params) {
+		this.root = copy.root;
+		GeneralRouter parent = root;
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
@@ -187,6 +191,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
+		this.root = this;
 		this.profile = profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		this.parameterValues = new LinkedHashMap<String, String>();
