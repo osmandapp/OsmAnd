@@ -23,6 +23,7 @@ public class TestEntry {
     private Map<String, String> params;
     private int planRoadDirection;
     private boolean shortWay;
+    private boolean leftSideNavigation;
 
     
     public void setShortWay(boolean shortWay) {
@@ -115,5 +116,13 @@ public class TestEntry {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.expectedResults = expectedResults;
+    }
+
+    public boolean isLeftSideNavigation() {
+        return leftSideNavigation;
+    }
+
+    public void setLeftSideNavigation(boolean leftSideNavigation) {
+        this.leftSideNavigation = leftSideNavigation;
     }
 }

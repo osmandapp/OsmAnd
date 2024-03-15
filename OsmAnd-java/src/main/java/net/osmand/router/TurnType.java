@@ -614,7 +614,7 @@ public class TurnType {
 		return null;
 	}
 
-	private String toOsmString() {
+	public String toOsmString() {
 		switch (value) {
 			case KL:
 			case KR:
