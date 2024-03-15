@@ -2669,8 +2669,8 @@
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipédia hors-ligne</string>
     <string name="unlock_all_features">Débloquer toutes les fonctionnalités d\'OsmAnd</string>
-    <string name="monthly_map_updates">Mise à jour des cartes mensuelle</string>
-    <string name="daily_map_updates">Mise à jour des cartes horaire</string>
+    <string name="monthly_map_updates">Mise à jour des cartes : mensuelle</string>
+    <string name="daily_map_updates">Mise à jour des cartes : chaque heure</string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
     <string name="travel_card_update_descr">Mise à jour disponible, téléchargez les données Wikivoyage et profitez.</string>
     <string name="travel_card_download_descr">Téléchargez les guides Wikivoyage pour consulter des articles sur les lieux sans connexion Internet.</string>
