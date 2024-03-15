@@ -876,9 +876,9 @@ public class RoutePlannerFrontEnd {
 				ctx.calculationProgress.nextIteration();
 				RouteCalcResult r = runNativeRouting(ctx, null, hhRoutingConfig);
 				ctx.calculationProgress.timeToCalculate = (System.nanoTime() - timeToCalculate);
-				//makeStartEndPointsPrecise no need, C++ does it
 				RouteResultPreparation.printResults(ctx, start, end, r.detailed);
 				if ((!r.detailed.isEmpty() && r.isCorrect()) || useOnlyHHRouting) {
+					makeStartEndPointsPrecise(r, start, end, intermediates);
 					return r;
 				}
 			}
@@ -1222,11 +1222,7 @@ public class RoutePlannerFrontEnd {
 		}
 		addPrecalculatedToResult(recalculationEnd, result);
 		ctx.routingTime += ctx.calculationProgress.routingCalculatedTime;
-		if (hhConfig != null) {
-			return new RouteCalcResult(result); // HH: avoid double call prepareResult() (already done in C++)
-		} else {
-			return new RouteResultPreparation().prepareResult(ctx, result);
-		}
+		return new RouteResultPreparation().prepareResult(ctx, result);
 	}
 
 	private void addPrecalculatedToResult(RouteSegment recalculationEnd, List<RouteSegmentResult> result) {
