@@ -865,7 +865,7 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
-		if (hhRoutingConfig != null) {
+		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
 			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
@@ -985,6 +985,7 @@ public class RoutePlannerFrontEnd {
 				dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 			}
 		}
+		ctx.routingTime = r != null ? (float) r.getHHRoutingDetailed() : 0;
 		return r;
 	}
 
