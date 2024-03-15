@@ -5634,4 +5634,21 @@
     <string name="shared_sting_all_colors">Tutti i colori</string>
     <string name="routing_type">Tipo di percorso</string>
     <string name="lang_ta_in">Tamil (India)</string>
+    <string name="release_4_7">• Nuovo widget \"Tachimetro\" compatibile con Android Auto
+\n
+\n• Configura la schermata della mappa aggiungendo i pulsanti \"Azione rapida\".
+\n
+\n• Migliorata la leggibilità dei dati nei grafici
+\n
+\n• Aggiunta dei filtri in base ai dati dei sensori per le tracce
+\n
+\n• Aggiunto il supporto per tag GPX aggiuntivi
+\n
+\n• Personalizza la \"Distanza durante la navigazione\": scegli tra numeri precisi o arrotondati per eccesso
+\n
+\n• L\'interfaccia utente per la selezione delle tracce è stata unificata
+\n
+\n• L\'accesso a OpenStreetMap è passato a OAuth 2.0
+\n
+\n</string>
 </resources>
