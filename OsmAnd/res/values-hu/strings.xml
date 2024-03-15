@@ -5641,4 +5641,21 @@
     <string name="java_safe">Java (biztonságos)</string>
     <string name="shared_sting_all_colors">Összes szín</string>
     <string name="lang_ta_in">Tamil (India)</string>
+    <string name="release_4_7">• Új „Sebességmérő” widget, amely kompatibilis az Android Auto-val
+\n
+\n • Konfigurálja a térkép képernyőt több \"Gyors művelet\" gombbal
+\n
+\n • Az adatok jobb olvashatósága a grafikonokon
+\n
+\n • Szenzoradat alapú szűrők a nyomvonalakhoz
+\n
+\n • További GPX-címkék támogatása
+\n
+\n • A „Távolság navigáció közben” testreszabása: válasszon pontos vagy felfelé kerekített számok közül
+\n
+\n • Egységes felhasználói felület a nyomvonalválasztásához
+\n
+\n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott
+\n
+\n</string>
 </resources>
