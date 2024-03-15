@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.commons.logging.Log;
 
@@ -31,7 +32,9 @@ import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
+import net.osmand.router.HHRoutePlanner;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
@@ -246,8 +249,24 @@ public class NativeLibrary {
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
 		// if hhRoutingConfig == null - process old routing
+		if (hhRoutingConfig != null) {
+			setHHNativeFilter(c);
+		}
 		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ? -2 * (float) Math.PI : c.config.initialDirection.floatValue(),
 				regions, basemap);
+	}
+
+	private void setHHNativeFilter(RoutingContext ctx) {
+		GeneralRouter gr = (GeneralRouter) ctx.getRouter();
+		TreeMap<String, String> tags =  HHRoutePlanner.getFilteredTags(gr);
+		String[] tm = new String[tags.size() * 2];
+		int index = 0;
+		for (Map.Entry<String, String> entry : tags.entrySet()) {
+			tm[index] = entry.getKey();
+			tm[index + 1] = entry.getValue();
+			index += 2;
+		}
+		gr.hhNativeFilter = tm;
 	}
 
 	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
