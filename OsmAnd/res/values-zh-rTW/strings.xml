@@ -5633,4 +5633,21 @@
     <string name="routing_type_a_star_2_phase">A* 2-相</string>
     <string name="shared_sting_all_colors">所有顏色</string>
     <string name="lang_ta_in">泰米爾語（印度）</string>
+    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具
+\n
+\n • 透過新增多個「快速操作」按鈕來設定地圖畫面
+\n
+\n • 改善圖表中資料的可讀性
+\n
+\n • 新增了按軌跡的感應器資料過濾功能
+\n
+\n • 新增了對其他 GPX 標籤的支援
+\n
+\n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇
+\n
+\n • 用於軌跡選擇的統一使用者介面
+\n
+\n • OpenStreetMap 登入已切換至 OAuth 2.0
+\n
+\n</string>
 </resources>

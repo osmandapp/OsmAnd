@@ -2351,4 +2351,6 @@
     <string name="rotate_map_compass_opt">Segon la bossòla</string>
     <string name="driving_region_descr">Seleccionatz la region guida: EUA, Euròpa, Reiaume Unit, Asia ò autres.</string>
     <string name="max_speed">Velocitat maximala</string>
+    <string name="default_speed_system_descr">Definissètz l\'unitat de velocitat.</string>
+    <string name="speed_limit_exceed_message">Chausissètz la valor de tolerància dau limit de velocitat, partent de laquala recebretz un avís vocau.</string>
 </resources>
