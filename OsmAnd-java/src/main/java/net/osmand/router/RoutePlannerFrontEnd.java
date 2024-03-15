@@ -859,7 +859,7 @@ public class RoutePlannerFrontEnd {
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}
-		if (hhRoutingConfig != null) {
+		if (hhRoutingConfig != null && ctx.calculationMode != RouteCalculationMode.BASE) {
 			if (ctx.nativeLib == null || hhRoutingType == HHRoutingType.JAVA) {
 				HHNetworkRouteRes r = runHHRoute(ctx, start, targets);
 				if ((r != null && r.isCorrect()) || useOnlyHHRouting) {
