@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -61,7 +62,8 @@ public abstract class BaseCard {
 		this.app = (OsmandApplication) activity.getApplicationContext();
 		this.settings = app.getSettings();
 		this.usedOnMap = usedOnMap;
-		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !settings.isLightContent();
+		RequestMapThemeParams requestMapThemeParams = new RequestMapThemeParams().markIgnoreExternalProvider();
+		nightMode = app.getDaynightHelper().isNightMode(usedOnMap, requestMapThemeParams);
 	}
 
 	public abstract int getCardLayoutId();

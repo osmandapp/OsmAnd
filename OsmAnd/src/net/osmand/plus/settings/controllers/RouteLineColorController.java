@@ -216,7 +216,7 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 
 	private void setMapThemeProvider(@Nullable MapThemeProvider provider) {
 		DayNightHelper helper = app.getDaynightHelper();
-		helper.setMapThemeProvider(provider);
+		helper.setExternalMapThemeProvider(provider);
 	}
 
 	@ColorInt
