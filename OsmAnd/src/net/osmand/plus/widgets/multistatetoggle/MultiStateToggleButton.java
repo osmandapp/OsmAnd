@@ -1,5 +1,6 @@
 package net.osmand.plus.widgets.multistatetoggle;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -105,7 +106,8 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	}
 
 	private void createBtn(@NonNull _Radio item) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		Context context = container.getContext();
+		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
 				getRadioItemLayoutId(), container, false);
 		button.setOnClickListener(v -> {

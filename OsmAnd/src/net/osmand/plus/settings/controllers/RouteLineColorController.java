@@ -28,6 +28,7 @@ import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnP
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
+import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -48,15 +49,18 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 	private static final int PALETTE_MODE_ID_DAY = 0;
 	private static final int PALETTE_MODE_ID_NIGHT = 1;
 
-	private final PreviewRouteLineInfo routeLinePreview;
+	private PreviewRouteLineInfo routeLinePreview;
 
 	private ModedColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 	private boolean initialNightMode;
 
 	private RouteLineColorController(@NonNull OsmandApplication app,
-	                                 @NonNull PreviewRouteLineInfo routeLinePreview) {
-		super(app, routeLinePreview.getRouteColoringStyle());
+	                                 @NonNull ColoringStyle selectedColoringStyle) {
+		super(app, selectedColoringStyle);
+	}
+
+	public void setRouteLinePreview(@NonNull PreviewRouteLineInfo routeLinePreview) {
 		this.routeLinePreview = routeLinePreview;
 	}
 
@@ -198,6 +202,11 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		return Objects.equals(paletteMode.getTag(), PALETTE_MODE_ID_NIGHT);
 	}
 
+	private boolean isOriginalNightMode() {
+		RequestMapThemeParams params = new RequestMapThemeParams().markIgnoreExternalProvider();
+		return app.getDaynightHelper().isNightMode(true, params);
+	}
+
 	public void onDestroy(@Nullable FragmentActivity activity) {
 		if (activity != null && !activity.isChangingConfigurations()) {
 			DialogManager manager = app.getDialogManager();
@@ -227,7 +236,7 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 			PreviewRouteLineLayer layer = app.getOsmandMap().getMapLayers().getPreviewRouteLineLayer();
 			return layer.getRouteLineColor(isNightMap());
 		}
-		return ColorUtilities.getActiveColor(app, isNightMap());
+		return ColorUtilities.getActiveColor(app, isOriginalNightMode());
 	}
 
 	@NonNull
@@ -237,13 +246,16 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 
 	@NonNull
 	public static RouteLineColorController getInstance(@NonNull OsmandApplication app,
-	                                                   @NonNull PreviewRouteLineInfo routeLinePreview) {
+	                                                   @NonNull PreviewRouteLineInfo routeLinePreview,
+	                                                   @NonNull IRouteLineColorControllerListener listener) {
 		DialogManager dialogManager = app.getDialogManager();
 		RouteLineColorController controller = (RouteLineColorController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			controller = new RouteLineColorController(app, routeLinePreview);
+			controller = new RouteLineColorController(app, routeLinePreview.getRouteColoringStyle());
 			dialogManager.register(PROCESS_ID, controller);
 		}
+		controller.setRouteLinePreview(routeLinePreview);
+		controller.setListener(listener);
 		return controller;
 	}
 

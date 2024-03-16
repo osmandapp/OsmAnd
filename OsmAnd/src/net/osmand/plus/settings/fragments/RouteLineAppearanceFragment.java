@@ -186,6 +186,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		openMenuHalfScreen();
 		calculateLayout();
 		updateColorItems();
+		updateHeaderState();
+		hideBottomHeaderShadow();
 	}
 
 	private void calculateLayout() {
@@ -338,7 +340,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			} else {
 				hideShadowButton();
 			}
-			updateHeaderState(false);
+			updateHeaderState();
 		});
 	}
 
@@ -368,14 +370,14 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 				.setDuration(200);
 	}
 
-	private void updateHeaderState(boolean forceUpdate) {
+	private void updateHeaderState() {
 		String headerSourceId;
 		if (getBottomScrollView().getScrollY() > colorsCard.getViewHeight() + headerTitle.getBottom()) {
 			headerSourceId = RouteLineWidthController.PROCESS_ID;
 		} else {
 			headerSourceId = RouteLineColorController.PROCESS_ID;
 		}
-		if (!Objects.equals(currentHeaderSourceId, headerSourceId) || forceUpdate) {
+		if (!Objects.equals(currentHeaderSourceId, headerSourceId)) {
 			currentHeaderSourceId = headerSourceId;
 			updateHeaderContent(headerSourceId);
 		}
@@ -519,7 +521,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
 		previewRouteLineInfo.setRouteColoringStyle(coloringStyle);
 		updateColorItems();
-		updateHeaderState(true);
+		updateHeaderContent(RouteLineColorController.PROCESS_ID);
 	}
 
 	@Override
@@ -553,9 +555,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	@NonNull
 	private RouteLineColorController getColorCardController() {
-		RouteLineColorController colorController = RouteLineColorController.getInstance(app, previewRouteLineInfo);
-		colorController.setListener(this);
-		return colorController;
+		return RouteLineColorController.getInstance(app, previewRouteLineInfo, this);
 	}
 
 	@NonNull
