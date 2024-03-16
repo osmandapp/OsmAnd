@@ -5007,7 +5007,7 @@
     <string name="y_axis">Eje Y</string>
     <string name="value_downloaded_of_mb">Descargando %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Omitir la descarga</string>
-    <string name="determine_location">Permita que se determine su ubicación</string>
+    <string name="determine_location">Permítanos determinar su ubicación</string>
     <string name="share_link">Compartir el enlace</string>
     <string name="share_as_file">Compartir como un archivo</string>
     <string name="sound_beep_complex">Bip: complejo</string>
@@ -5634,4 +5634,14 @@
     <string name="rendering_attr_padusHideBoundaries_name">Ocultar los límites de los terrenos públicos</string>
     <string name="rendering_attr_padusHideBoundaries_description">Ocultar los límites de los terrenos públicos pero dejar las zonas</string>
     <string name="rendering_attr_padusDisplayMode_name">Modo de visualización de terrenos públicos</string>
+    <string name="shared_sting_all_colors">Todos los colores</string>
+    <string name="auto_zoom_smooth">Suave</string>
+    <string name="auto_zoom_discrete">Discreto</string>
+    <string name="auto_zoom">Zoom automático</string>
+    <string name="java_safe">Java (seguro)</string>
+    <string name="gpx_approximation">Aproximación GPX</string>
+    <string name="routing_type">Tipo de ruta</string>
+    <string name="lang_ta_in">Tamil (India)</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="routing_type_a_star_classic">A* clásico</string>
 </resources>

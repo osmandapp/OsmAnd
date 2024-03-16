@@ -4,7 +4,7 @@
 	<color name="activity_background_color_light">#f0f0f0</color>
 	<color name="activity_background_color_dark">#0D0D0D</color>
 	<color name="card_and_list_background_light">#ffffff</color>
-	<color name="card_and_list_background_dark">#222526</color>3
+	<color name="card_and_list_background_dark">#222526</color>
 	<color name="list_background_color_light">#ffffff</color>
 	<color name="list_background_color_dark">#1E1F20</color>
 	<color name="widget_background_color_light">#FFFFFF</color>

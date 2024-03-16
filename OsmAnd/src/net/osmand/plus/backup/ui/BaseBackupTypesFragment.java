@@ -29,8 +29,8 @@ import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.settings.backend.ExportCategory;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.fragments.BaseSettingsListFragment;
 import net.osmand.plus.settings.fragments.SettingsCategoryItems;
 import net.osmand.plus.utils.AndroidUtils;
@@ -55,6 +55,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	protected ProgressBar progressBar;
 	protected BackupClearType clearType;
 
+	protected boolean cloudRestore;
 	protected boolean wasDrawerDisabled;
 
 	@Override
@@ -69,6 +70,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		clearType = getClearType();
 		dataList = getDataList();
 		selectedItemsMap = getSelectedItems();
+		cloudRestore = requireMapActivity().getFragmentsHelper().isFirstScreenShowing();
 	}
 
 	protected abstract int getTitleId();
@@ -89,7 +91,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		BackupTypesAdapter adapter = new BackupTypesAdapter(app, this, nightMode);
+		BackupTypesAdapter adapter = new BackupTypesAdapter(app, this, cloudRestore, nightMode);
 		adapter.updateSettingsItems(dataList, selectedItemsMap);
 
 		ExpandableListView expandableList = view.findViewById(R.id.list);
@@ -145,7 +147,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		SettingsCategoryItems categoryItems = dataList.get(exportCategory);
 		List<ExportType> exportTypes = categoryItems.getTypes();
 		for (ExportType exportType : exportTypes) {
-			if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+			if (isExportTypeAvailable(exportType)) {
 				List<?> items = getItemsForType(exportType);
 				hasItemsToDelete |= !Algorithms.isEmpty(items);
 				selectedItemsMap.put(exportType, selected ? items : null);
@@ -158,7 +160,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	@Override
 	public void onTypeSelected(@NonNull ExportType exportType, boolean selected) {
-		if (InAppPurchaseUtils.isExportTypeAvailable(app, exportType)) {
+		if (isExportTypeAvailable(exportType)) {
 			List<?> items = getItemsForType(exportType);
 			selectedItemsMap.put(exportType, selected ? items : null);
 			if (!selected && !Algorithms.isEmpty(items)) {
@@ -167,6 +169,10 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 		} else {
 			OsmAndProPlanFragment.showInstance(requireActivity());
 		}
+	}
+
+	protected boolean isExportTypeAvailable(@NonNull ExportType exportType) {
+		return InAppPurchaseUtils.isExportTypeAvailable(app, exportType) || cloudRestore;
 	}
 
 	protected void showClearTypesBottomSheet(List<ExportType> types) {
@@ -224,6 +230,11 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 
 	protected void updateProgressVisibility(boolean visible) {
 		AndroidUiHelper.updateVisibility(progressBar, visible);
+	}
+
+	@NonNull
+	protected MapActivity requireMapActivity() {
+		return ((MapActivity) requireActivity());
 	}
 
 	@Nullable

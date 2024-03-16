@@ -5014,7 +5014,7 @@
     <string name="share_as_file">Als Datei teilen</string>
     <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Download überspringen</string>
-    <string name="determine_location">Erlauben Sie uns, Ihren Standort zu bestimmen</string>
+    <string name="determine_location">Erlaube Sie uns, Ihnren Standort zu ermitteln</string>
     <string name="share_link">Link teilen</string>
     <string name="sound_beep_simple">Signalton: einfach</string>
     <string name="sound_beep_minimal">Signalton: minimal</string>
@@ -5646,4 +5646,5 @@
     <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
+    <string name="lang_ta_in">Tamilisch (Indien)</string>
 </resources>

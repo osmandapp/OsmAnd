@@ -159,7 +159,7 @@
     <string name="poi_traffic_calming_table">Peatonal elevada;Plataforma elevada</string>
     <string name="poi_traffic_calming_choker">Calzada reducida;Gargantilla</string>
     <string name="poi_traffic_signals">Semáforo</string>
-    <string name="poi_car_repair">Taller mecánico</string>
+    <string name="poi_car_repair">Taller de automóviles;Taller mecánico; Reparación de automotores</string>
     <string name="poi_service_tyres">Neumáticos</string>
     <string name="poi_vehicle_inspection">Inspección de vehículos</string>
     <string name="poi_car_wash">Lavadero de automóviles</string>
@@ -1493,7 +1493,7 @@
     <string name="poi_service_repair">Reparación</string>
     <string name="poi_service_repair_no">Reparación: no</string>
     <string name="poi_service_electrical">Reparación de vehículos eléctricos</string>
-    <string name="poi_motorcycle_repair">Reparación de motocicletas</string>
+    <string name="poi_motorcycle_repair">Taller de motocicletas;Taller mecánico; Reparación de motocicletas</string>
     <string name="poi_self_service_yes">Sí;Autoservicio</string>
     <string name="poi_self_service_no">No;Sin autoservicio</string>
     <string name="poi_automated_yes">Sí;Automatizado</string>
@@ -3420,7 +3420,7 @@
     <string name="poi_amusement_arcade">Salón recreativo</string>
     <string name="poi_adult_gaming_centre">Centro de juegos para adultos</string>
     <string name="poi_service_car">Servicio automotriz</string>
-    <string name="poi_service_vehicle_car_repair_yes">Taller para automóviles</string>
+    <string name="poi_service_vehicle_car_repair_yes">Reparación de automóviles</string>
     <string name="poi_service_vehicle_oil_change_yes">Cambio de aceite</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Venta de autos usados</string>
     <string name="poi_service_vehicle_brakes_yes">Frenos</string>
@@ -3433,7 +3433,7 @@
     <string name="poi_service_vehicle_electrical_yes">Eléctrico</string>
     <string name="poi_service_vehicle_wheels_yes">Ruedas</string>
     <string name="poi_service_vehicle_glass_yes">Vidrios</string>
-    <string name="poi_service_vehicle_truck_repair_yes">Taller para camiones</string>
+    <string name="poi_service_vehicle_truck_repair_yes">Reparación de camiones</string>
     <string name="poi_service_vehicle_muffler_yes">Silenciador</string>
     <string name="poi_service_vehicle_alignment_yes">Alineación</string>
     <string name="poi_service_vehicle_transmission_repair_yes">Reparación de la transmisión</string>

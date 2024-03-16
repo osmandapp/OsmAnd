@@ -39,7 +39,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -48,7 +47,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -434,7 +434,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					int color = visible
 							? app.getFavoritesHelper().getColorWithCategory(point, getColor(R.color.color_favorite))
 							: getColor(disabledIconColor);
-					imageView.setImageDrawable(PointImageDrawable.getFromFavorite(activity, color, false, point));
+					imageView.setImageDrawable(PointImageUtils.getFromPoint(activity, color, false, point));
 					title.setText(point.getDisplayName(app));
 					title.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 					title.setTextColor(getColor(visible ? enabledColor : disabledColor));

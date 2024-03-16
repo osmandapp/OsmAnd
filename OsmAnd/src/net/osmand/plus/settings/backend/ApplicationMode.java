@@ -517,7 +517,10 @@ public class ApplicationMode {
 
 	private static void updateAppModesOrder() {
 		for (int i = 0; i < values.size(); i++) {
-			values.get(i).setOrder(i);
+			ApplicationMode mode = values.get(i);
+			if (mode.getOrder() != i) {
+				mode.setOrder(i);
+			}
 		}
 	}
 

@@ -253,7 +253,8 @@ public class RouteProvider {
 			if (!gpxParams.calculatedRouteTimeSpeed) {
 				calculateGpxRouteTimeSpeed(routeParams, gpxRouteResult);
 			}
-			if (calcWholeRoute && !calculateOsmAndRouteParts) {
+			if ((calcWholeRoute && !calculateOsmAndRouteParts)
+					|| routeParams.mode.getRouteService() == RouteService.ONLINE) {
 				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
 						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
 						gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);

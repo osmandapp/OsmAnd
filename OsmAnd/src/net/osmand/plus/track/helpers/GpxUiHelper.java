@@ -456,7 +456,7 @@ public class GpxUiHelper {
 	}
 
 	public static void readGpxDirectory(@Nullable File dir, @NonNull List<GPXInfo> list,
-	                                    @NonNull String parent, boolean absolutePath, boolean includeSubFolders) {//
+	                                    @NonNull String parent, boolean absolutePath, boolean includeSubFolders) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {

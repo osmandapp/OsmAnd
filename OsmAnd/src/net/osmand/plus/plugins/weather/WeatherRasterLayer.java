@@ -35,7 +35,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	private boolean weatherEnabledCached;
 	private List<WeatherBand> enabledBandsCached;
 	private int bandsSettingsVersionCached;
-	private boolean requireNewProvider;
+	private boolean requireTimePeriodChange;
 	private long timePeriodStart;
 	private long timePeriodEnd;
 	private long timePeriodStep;
@@ -78,18 +78,25 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
+// Dynamic texture switching is disabled in the current version
+		this.dateTime = WeatherUtils.roundForecastTimeToHour(dateTime);
+		timePeriodStep = HOUR_IN_MILLISECONDS;
+		timePeriodStart = this.dateTime;
+		timePeriodEnd = this.dateTime;
+/*
 		long hour = WeatherUtils.roundForecastTimeToHour(dateTime);
 		long currentTime = WeatherUtils.roundForecastTimeToHour(System.currentTimeMillis());
 		long step = HOUR_IN_MILLISECONDS;
 		if (hour / DAY_IN_MILLISECONDS > currentTime / DAY_IN_MILLISECONDS)
 			step *= 3;
 		this.dateTime = dateTime;
-		if (this.dateTime <= timePeriodStart ||  this.dateTime >= timePeriodEnd || timePeriodStep != step) {
+		if (this.dateTime <= timePeriodStart + timePeriodStep ||  this.dateTime >= timePeriodEnd - timePeriodStep || timePeriodStep != step) {
 			timePeriodStart = this.dateTime - step - step - step;
 			timePeriodEnd = this.dateTime + step + step + step;
 			timePeriodStep = step;
-			requireNewProvider = true;
+			requireTimePeriodChange = true;
 		}
+ */
 	}
 
 	@Override
@@ -143,16 +150,22 @@ public class WeatherRasterLayer extends BaseMapLayer {
 			net.osmand.core.jni.WeatherLayer weatherLayer = this.weatherLayer == WeatherLayer.LOW
 					? net.osmand.core.jni.WeatherLayer.Low : net.osmand.core.jni.WeatherLayer.High;
 
-			mapRenderer.setDateTime(dateTime);
-			if (requireNewProvider) {
-				requireNewProvider = false;
+			// Dynamic texture switching is disabled in the current version
+			//if (provider == null) {
+			//	requireTimePeriodChange = false;
 				provider = new WeatherRasterLayerProvider(resourcesManager, weatherLayer,
 						timePeriodStart, timePeriodEnd, timePeriodStep, bands, false);
 				mapRenderer.setMapLayerProvider(view.getLayerIndex(this), provider);
-			}
-			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-			mapLayerConfiguration.setOpacityFactor(1.0f);
-			mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+				mapLayerConfiguration.setOpacityFactor(1.0f);
+				mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+			//}
+			//if (requireTimePeriodChange) {
+			//	requireTimePeriodChange = false;
+			//	provider.setDateTime(timePeriodStart, timePeriodEnd, timePeriodStep);
+			//	mapRenderer.changeTimePeriod();
+			//}
+			mapRenderer.setDateTime(dateTime);
 		}
 	}
 
@@ -209,7 +222,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		cachedDateTime = dateTime;
 
 		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged)
-			requireNewProvider = true;
+			requireTimePeriodChange = true;
 
 		return weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged;
 	}

@@ -69,7 +69,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -907,7 +907,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int color = visible
 					? app.getFavoritesHelper().getColorWithCategory(model, getColor(R.color.color_favorite))
 					: ContextCompat.getColor(app, disabledIconColor);
-			icon.setImageDrawable(PointImageDrawable.getFromFavorite(getActivity(), color, false, model));
+			icon.setImageDrawable(PointImageUtils.getFromPoint(getActivity(), color, false, model));
 			int iconSize = (int) getResources().getDimension(R.dimen.favorites_my_places_icon_size);
 			FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(iconSize, iconSize, CENTER);
 			icon.setLayoutParams(lp);

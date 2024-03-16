@@ -1425,7 +1425,7 @@
     <string name="poi_delivery_yes">Lieferung</string>
     <string name="poi_delivery_no">Kein Lieferservice</string>
     <string name="poi_delivery_only">Nur Lieferung</string>
-    <string name="poi_cocktails_yes">Ja;Cocktails</string>
+    <string name="poi_cocktails_yes">ja;Cocktails</string>
     <string name="poi_service_dealer">Händler</string>
     <string name="poi_service_repair">Reparatur</string>
     <string name="poi_service_repair_no">Keine Reparatur</string>
@@ -2100,7 +2100,7 @@
     <string name="poi_scout_no">Pfadfinderlager: nein</string>
     <string name="poi_group_only_yes">Nur Gruppen: ja</string>
     <string name="poi_group_only_no">Nur Gruppen: nein</string>
-    <string name="poi_impromptu_yes">Improvisiert: Ja</string>
+    <string name="poi_impromptu_yes">ja</string>
     <string name="poi_impromptu_no">Improvisiert: Nein</string>
     <string name="poi_sanitary_dump_station_yes">Sanitäre Entsorgungsstation: ja</string>
     <string name="poi_sanitary_dump_station_no">Sanitäre Entsorgungsstation: nein</string>
@@ -3137,7 +3137,7 @@
     <string name="poi_winter_room_no">Winterschutzraum: nein</string>
     <string name="poi_reservation_required">Erforderlich</string>
     <string name="poi_reservation_recommended">Empfohlen</string>
-    <string name="poi_reservation_yes">Ja</string>
+    <string name="poi_reservation_yes">ja</string>
     <string name="poi_reservation_no">Nein</string>
     <string name="poi_reservation_members_only">Nur für Mitglieder</string>
     <string name="poi_boat_rental_type">Mietboote</string>
@@ -3420,7 +3420,7 @@
     <string name="poi_outpost">Anlieferungsstelle des Geschäftes</string>
     <string name="poi_barbecue_grill">Barbecue-Grill: ja</string>
     <string name="poi_amusement_arcade">Spielhalle</string>
-    <string name="poi_adult_gaming_centre">Spielkasino für Erwachsene</string>
+    <string name="poi_adult_gaming_centre">Spielezentrum für Erwachsene</string>
     <string name="poi_water_utility">Büro der Wasserversorgung</string>
     <string name="poi_service_car">Autodienst</string>
     <string name="poi_service_vehicle_car_repair_yes">Autoreparatur</string>
@@ -3431,7 +3431,7 @@
     <string name="poi_service_vehicle_diagnostics_yes">Fehlerdiagnose</string>
     <string name="poi_service_vehicle_car_parts_yes">Autoteile</string>
     <string name="poi_service_vehicle_batteries_yes">Batterien</string>
-    <string name="poi_service_vehicle_air_conditioning_yes">Klimatisierung</string>
+    <string name="poi_service_vehicle_air_conditioning_yes">Klimaanlage</string>
     <string name="poi_service_vehicle_body_repair_yes">Karosseriereparatur</string>
     <string name="poi_service_vehicle_electrical_yes">Elektrik</string>
     <string name="poi_service_vehicle_wheels_yes">Räder</string>
@@ -3934,7 +3934,7 @@
     <string name="poi_telecom_medium_copper">Medium: Kupfer</string>
     <string name="poi_windsock">Windsack</string>
     <string name="poi_refugee_site">Flüchtlingslager</string>
-    <string name="poi_trolley_bay">Wagenbucht</string>
+    <string name="poi_trolley_bay">Einkaufswagenstellplatz</string>
     <string name="poi_planetarium">Planetarium</string>
     <string name="poi_service_vehicle_rental_yes">Autovermietung</string>
     <string name="poi_service_vehicle_inspection_yes">Fahrzeuginspektion</string>
@@ -4102,7 +4102,7 @@
     <string name="poi_beauty_salon_aesthetic">Behandlungen der ästhetischen Medizin</string>
     <string name="poi_beauty_salon_massage">Massage</string>
     <string name="poi_beauty_salon_pedicure">Pediküre</string>
-    <string name="poi_agrarian_yes">Ja;Landhandel</string>
+    <string name="poi_agrarian_yes">ja;Landhandel</string>
     <string name="poi_agrarian_pesticide">Schädlingsbekämpfungsmittel</string>
     <string name="poi_agrarian_fertilizer">Dünger</string>
     <string name="poi_agrarian_seed">Saatgut</string>
@@ -4315,7 +4315,7 @@
     <string name="poi_dovecote">Taubenschlag</string>
     <string name="poi_fish_pass">Fischtreppe</string>
     <string name="poi_laundry_service_yes">ja</string>
-    <string name="poi_laundry_service_no">Nein</string>
+    <string name="poi_laundry_service_no">nein</string>
     <string name="poi_dry_cleaning_yes">ja</string>
     <string name="poi_dry_cleaning_no">nein</string>
     <string name="poi_termite_mound">Termitenhügel</string>
@@ -4585,7 +4585,7 @@
     <string name="poi_cemt_vii">VII</string>
     <string name="poi_tunnel_name">Name des Tunnels</string>
     <string name="poi_bridge_name">Name der Brücke</string>
-    <string name="poi_vending_machine_fuel">Ja</string>
+    <string name="poi_vending_machine_fuel">ja</string>
     <string name="poi_vending_machine_fuel_filter">Automatische Zapfsäulen; Kraftstoffautomat</string>
     <string name="poi_second_hand_filter">Gebrauchtwaren</string>
     <string name="poi_surface_acrylic">Oberfläche: Acryl</string>
@@ -4859,7 +4859,7 @@
     <string name="poi_us_maps_recreation_area_facility_warming_hut">Wärmehütte</string>
     <string name="poi_music_venue">Veranstaltungsort</string>
     <string name="poi_live_music">Live-Musik</string>
-    <string name="poi_live_music_yes">Ja</string>
+    <string name="poi_live_music_yes">ja</string>
     <string name="poi_cuisine_fish">Fisch</string>
     <string name="poi_shop_general">Allgemeines Geschäft</string>
 </resources>

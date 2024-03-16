@@ -5013,7 +5013,7 @@
     <string name="share_as_file">Del som fil</string>
     <string name="value_downloaded_of_mb">Downloader %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Spring download over</string>
-    <string name="determine_location">Tillad os at fastslå din placering</string>
+    <string name="determine_location">Tillad os at bestemme din placering</string>
     <string name="share_link">Del link</string>
     <string name="weight_limit_error">Minimumsværdi er \"%1$s\" tons. Brug profilen \"%2$s\", hvis køretøjets vægt er mindre end minimumsværdien.</string>
     <string name="sound_beep_simple">Bip: simpelt</string>
@@ -5646,4 +5646,6 @@
     <string name="auto_zoom">Autozoom</string>
     <string name="routing_type">Ruteberegningstype</string>
     <string name="routing_type_a_star_2_phase">A* 2-faset</string>
+    <string name="shared_sting_all_colors">Alle farver</string>
+    <string name="lang_ta_in">Tamilsk (Indien)</string>
 </resources>

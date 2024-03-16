@@ -9,7 +9,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
@@ -42,6 +41,7 @@ import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
@@ -303,7 +303,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 							ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
 							true, false, 0, BackgroundType.SQUARE);
 					pointImageDrawable.setAlpha(0.9f);
@@ -329,7 +329,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	private void drawPoint(Canvas canvas, float textScale, float x, float y, @DrawableRes int iconId) {
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(getContext(),
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(getContext(),
 				ContextCompat.getColor(getContext(), R.color.transport_stop_icon_background),
 				true,false ,iconId, BackgroundType.SQUARE);
 		pointImageDrawable.setAlpha(0.9f);

@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.8.22'
+    ext.kotlin_version = '1.9.22'
     repositories {
         google()
         mavenCentral()
@@ -12,6 +12,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:7.4.2'
         classpath 'com.google.gms:google-services:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.squareup.sqldelight:gradle-plugin:1.5.5")
         if (gradle.startParameter.taskNames.toString().toLowerCase().contains("huawei")) {
             classpath 'com.huawei.agconnect:agcp:1.8.0.300'
         }

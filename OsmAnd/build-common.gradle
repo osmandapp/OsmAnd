@@ -332,6 +332,10 @@ task appStart(type: Exec) {
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation project(':OsmAnd-api')
+
+	implementation project(':OsmAnd-shared')
+	implementation("androidx.sqlite:sqlite-framework:2.3.1")
+
 	implementation 'androidx.multidex:multidex:2.0.1'
 	implementation 'androidx.gridlayout:gridlayout:1.0.0'
 	implementation 'androidx.cardview:cardview:1.0.0'

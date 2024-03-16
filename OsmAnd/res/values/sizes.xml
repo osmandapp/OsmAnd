@@ -110,6 +110,7 @@
 	<dimen name="chart_marker_horizontal_padding">6dp</dimen>
 	<dimen name="chart_marker_vertical_padding">2dp</dimen>
 	<dimen name="track_image_height">96dp</dimen>
+	<dimen name="point_image_height">72dp</dimen>
 
 	<dimen name="simple_widget_small_height">48dp</dimen>
 	<dimen name="simple_widget_medium_height">72dp</dimen>
