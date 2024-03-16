@@ -12,7 +12,6 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.graphics.ColorUtils;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -42,11 +41,6 @@ public class ColorsPaletteElements {
 		Drawable transparencyIcon = getTransparencyIcon(color);
 		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
 		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
-		int listBgColor = ColorUtilities.getCardAndListBackgroundColor(app, nightMode);
-		double contrastRatio = ColorUtils.calculateContrast(color, listBgColor);
-		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
-			background.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
-		}
 		background.setImageDrawable(layeredIcon);
 
 		if (showOutline) {
