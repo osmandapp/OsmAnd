@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -34,7 +33,6 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
-import net.osmand.plus.widgets.FlowLayout.LayoutParams;
 
 public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements IColorsPalette {
 
@@ -103,12 +101,10 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 		FlowLayout flowLayout = view.findViewById(R.id.colors_palette);
 		flowLayout.removeAllViews();
 		flowLayout.setHorizontalAutoSpacing(true);
-		int minimalPaddingBetweenIcon = getDimension(R.dimen.favorites_select_icon_button_right_padding);
-
 		for (PaletteColor paletteColor : controller.getColors(PaletteSortingMode.ORIGINAL)) {
-			flowLayout.addView(createColorItemView(paletteColor, flowLayout), new LayoutParams(minimalPaddingBetweenIcon, 0));
+			flowLayout.addView(createColorItemView(paletteColor, flowLayout));
 		}
-		flowLayout.addView(createAddCustomColorItemView(flowLayout), new LayoutParams(minimalPaddingBetweenIcon, 0));
+		flowLayout.addView(createAddCustomColorItemView(flowLayout));
 	}
 
 	@NonNull
