@@ -161,6 +161,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	@ColorInt
 	public int getRouteLineColor(boolean night) {
+		updateRouteColoringType();
 		updateRouteColors(night);
 		return routeLineColor;
 	}
