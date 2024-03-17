@@ -2682,7 +2682,7 @@
     <string name="cannot_upload_image">Kuvaa ei voitu lähettää, yritä uudelleen myöhemmin</string>
     <string name="select_picture">Valitse kuva</string>
     <string name="shared_string_resources">Resurssit</string>
-    <string name="approximate_file_size">Likimääräinen tiedostonkoko</string>
+    <string name="approximate_file_size">Likimääräinen tiedostokoko</string>
     <string name="select_data_to_export">Valitse data joka viedään tiedostoon.</string>
     <string name="file_size_needed_for_import">Tarvitaan tuontiin</string>
     <string name="export_not_enough_space_descr">Laitteellasi on vain %1$s vapaata tallennustilaa. Vapauta tilaa tai valitse vähemmän vietäviä kohteita.</string>
@@ -2716,7 +2716,7 @@
     <string name="temporary_conditional_routing">Harkitse väliaikaisia rajoituksia</string>
     <string name="start_recording">Aloita nauhoittaminen</string>
     <string name="track_recording_save_and_stop">Tallenna ja lopeta nauhoitus</string>
-    <string name="track_recording_description">Haluatko varmasti lopettaa nauhoituksen\?
+    <string name="track_recording_description">Lopetetaanko tallennus?
 \nKaikki tallentamattomat tiedot menetetään.</string>
     <string name="track_recording_will_be_continued">Nauhoitusta jatketaan.</string>
     <string name="added_profiles_descr">Laajennuksen lisäämät profiilit</string>
@@ -2761,7 +2761,7 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Jäljitettävissä\" tarkoittaa sitä, että jälki ei näy missään julkisissa listoissa, mutta siitä prosessoidut jälkipisteet ja niiden aikaleimat (joita ei voida yhdistää suoraan sinuun), näkyvät julkisesta GPS-API:stä tehtyjen latausten kautta.</string>
     <string name="gpx_upload_public_visibility_descr">\"Julkinen\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa sekä julkisessa jälkiluettelossa, jossa aikaleimat on raakamuodossa. API:n kautta toimitetut tiedot eivät viittaa jälkisivuusi. Jälkipisteiden aikaleimat eivät ole saatavilla julkisen GPS-API:n kautta, eikä jälkipisteita ole laitettu aikajärjestykseen.</string>
     <string name="gpx_upload_identifiable_visibility_descr">\"Tunnistettavissa\" tarkoittaa sitä, että jälki näkyy julkisesti GPS-jäljissäsi ja julkisissa GPS-jälkilistauksissa, eli muut käyttäjät voivat ladata raakajäljen ja yhdistää sen käyttäjätunnukseesi. GPS-API:n julkiset aikaleimalla varustetut jälkipistetiedot, jotka toimitetaan jälkipiste API:n kautta, viittaavat alkuperäiseen jälkisivuusi.</string>
-    <string name="app_restart_required">Joidenkin asetusten käyttäminen edellyttää sovelluksen uudelleenkäynnistystä.</string>
+    <string name="app_restart_required">Joidenkin asetusten voimaantulo edellyttää sovelluksen uudelleenkäynnistystä.</string>
     <string name="osm_live_payment_subscription_management">Maksu veloitetaan Google Play -tililtäsi oston vahvistuksen yhteydessä.
 \n
 \nTilaus uusiutuu automaattisesti, ellei sitä peruuteta ennen uusiutumispäivää. Tililtäsi veloitetaan uusimisjakso (kuukausi/kolme kuukautta/vuosi) vasta uusiutumispäivänä.
@@ -3047,11 +3047,11 @@
     <string name="provided_by">Toimittanut %1$s</string>
     <string name="wikivoyage_travel_guide_descr">Oppaita planeetan mielenkiintoisimpiin paikkoihin OsmAndin sisällä, ilman Internet-yhteyttä.</string>
     <string name="travel_card_download_descr">Lataa Wikivoyagen matkaoppaita ja tutustu artikkeleihin paikoista eri puolilla maailmaa ilman Internet-yhteyttä.</string>
-    <string name="backup_no_internet_descr">Tarkista Internet-yhteytesi ja lataa uudelleen.</string>
+    <string name="backup_no_internet_descr">Tarkista internet-yhteys ja lataa uudelleen.</string>
     <string name="failed_loading_predefined_engines">Ennalta määritettyjen mallien luettelon lataaminen epäonnistui.
 \nTarkista Internet-yhteytesi.</string>
     <string name="backup_delete_all_data_descr">Kaikki OsmAnd Cloudissa olevat tiedot poistetaan. Paikallisiin versioihin ei kosketa.</string>
-    <string name="backup_delete_all_data_warning">Olet poistamalla kaikki OsmAnd Cloudiin aiemmin ladatut tiedot, mukaan lukien versiohistorian.
+    <string name="backup_delete_all_data_warning">Olet poistamassa kaikki OsmAnd Cloudiin aiemmin ladatut tiedot, mukaan lukien versiohistorian.
 \n
 \nEt voi palauttaa poistettuja tietoja.</string>
     <string name="backup_delete_old_data_descr">Tietojesi nykyiset versiot säilyvät OsmAnd Cloudissa</string>
@@ -3069,7 +3069,7 @@
     <string name="backup_conflicts">Ristiriidat</string>
     <string name="backup_confilcts_descr">Joitain tiedostoja ei voitu lähettää palvelimelle, koska siellä on uudempi versio.</string>
     <string name="backup_view_conflicts">Näytä ristiriidat</string>
-    <string name="backup_pause_all">Tauota kaikki</string>
+    <string name="backup_pause_all">Keskeytä kaikki</string>
     <string name="upload_local_version">Lähetä paikallinen versio</string>
     <string name="download_server_version">Lataa palvelinversio</string>
     <string name="shared_string_logout">Kirjaudu ulos</string>
@@ -3701,7 +3701,7 @@
     <string name="save_track_to_gpx_globally_descr">Yleinen sijainnin kirjaaminen GPX-tiedostoon voidaan kytkeä päälle tai pois päältä kartalla olevan GPX-lokitusvidgetin avulla.</string>
     <string name="fav_point_dublicate_message">Suosikki nimettiin uudelleen %1$s, jotta vältyttäisiin päällekkäisyyksiltä.</string>
     <string name="attribute">Ominaisuus</string>
-    <string name="shared_string_relation">Suhde</string>
+    <string name="shared_string_relation">Relaatio</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Väritä reitit niiden yksilöllisen paikallisen värin (jos se on OpenStreetMapissa) ja vaellussymbolin mukaan.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Väritä reitit niiden solmuvälin tyypin mukaan (kansainvälinen, alueellinen, paikallinen).</string>
     <string name="walking_route_osmc_description">Värireitit niiden yksilöllisen paikallisen värin mukaan (jos ne ovat OpenStreetMapissa) ja tyypin (kansainvälinen, alueellinen, paikallinen).</string>
@@ -3741,7 +3741,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Virheellinen tai vanhentunut tunniste</string>
     <string name="backup_error_user_is_not_registered">Tällä sähköpostiosoitteella ei ole rekisteröitynyttä käyttäjää</string>
     <string name="backup_error_no_valid_subscription">Ei voimassa olevaa tilausta</string>
-    <string name="contour_lines_hillshade_slope">Ääriviivat, kukkulat, rinne</string>
+    <string name="contour_lines_hillshade_slope">Korkeuskäyrät, rinnevarjostus, kaltevuus</string>
     <string name="release_4_0">- Pilvivarmistus
 \n
 \n - Lisätty yötila Topo-karttatyyliin
@@ -3768,16 +3768,16 @@
     <string name="logout_from_osmand_cloud_decsr">Kirjaudu ulos\?
 \nSinun on kirjauduttava uudelleen sisään tietojen varmuuskopiointia tai palauttamista varten.</string>
     <string name="backup_deleting_all_data">Poistetaan kaikkia tietoja…</string>
-    <string name="backup_deleted_all_data">Poistin kaikki tiedot.</string>
+    <string name="backup_deleted_all_data">Kaikki tiedot poistettu.</string>
     <string name="backup_deleting_all_data_descr">Odota, kunnes OsmAnd poistaa tietosi pilvestä. Kaikki laitteessa olevat tiedot säilyvät koskemattomina.</string>
     <string name="backup_deleted_all_data_descr">Kaikki tietosi on onnistuneesti poistettu OsmAnd Cloudista.</string>
     <string name="backup_version_history_removed">Kaikki versiohistoria on poistettu.</string>
     <string name="backup_data_removed">Kaikki tiedot on poistettu.</string>
     <string name="shared_string_progress">Edistyminen</string>
     <string name="backup_do_not_have_any">Sinulla ei ole vielä online -varmuuskopiota.</string>
-    <string name="backup_dont_have_any_descr">Ajoita automaattiset varmuuskopioinnit äläkä koskaan menetä tietojasi.</string>
+    <string name="backup_dont_have_any_descr">Määritä automaattinen varmuuskopiointi, jottet koskaan menetä tietojasi.</string>
     <string name="backup_welcome_back">Tervetuloa takaisin!</string>
-    <string name="backup_welcome_back_descr">Palauta tämän laitteen tiedot käyttämällä olemassa olevia varmuuskopioita tai varmuuskopioi tiedot OsmAnd Cloudiin.</string>
+    <string name="backup_welcome_back_descr">Palauta data tällä laitteella käyttämällä OsmAnd Cloudia.</string>
     <string name="backup_setup">Aseta varmuuskopiointi</string>
     <string name="backup_restore_now">Palauta nyt</string>
     <string name="explore_wikipedia_offline">Tutustu Wikipediaan offline-tilassa.</string>
@@ -3805,11 +3805,11 @@
     <string name="amz_manage_subscription_descr">Voit hallita tilaustasi käyttämällä laitteessa olevaa Amazon-sovellusta tai avaamalla Amazon.com-sivuston profiilissasi.</string>
     <string name="routing_attr_avoid_tunnels_description">Vältä tunneleita</string>
     <string name="routing_attr_avoid_tunnels_name">Vältä tunneleita</string>
-    <string name="send_crash_log">Lähetä virheloki</string>
+    <string name="send_crash_log">Lähetä kaatumisloki</string>
     <string name="direct_line_maps_required_descr">Reitin laskenta kestää tavallista pidempään.
 \n
 \nMahdollisesti kaikkia karttoja ei ole ladattu.</string>
-    <string name="online_maps_required_descr">Valitettavasti, OsmAnd ei voi päätellä reittiä asetuksillesi.
+    <string name="online_maps_required_descr">Valitettavasti OsmAnd ei voi päätellä reittiä asetuksillesi.
 \n
 \nMahdollisesti jotkut kartat ovat lataamatta, voit ajaa tarkistuksen tarvittaville kartoille.</string>
     <string name="pro_features">Pro ominaisuus</string>
@@ -3818,7 +3818,7 @@
     <string name="backup_error_no_subscription">Ei voimassa olevaa tilausta</string>
     <string name="online_direct_line_maps_link">Tarkista vaadittavat kartat.</string>
     <string name="offline_maps_required_descr">Osa reitin vaatimista offline kartoista puuttuu.</string>
-    <string name="online_maps_searching_descr">Haetaan yhteydessä…</string>
+    <string name="online_maps_searching_descr">Haetaan internetistä…</string>
     <string name="reset_to_original">Palauta alkuperäiseen</string>
     <string name="use_login_and_password">Käytä käyttäjänimeä ja salasanaa</string>
     <string name="map_updates_are_unavailable_yet">Karttapäivityksiä ei vielä saatavilla. :-(</string>
@@ -3826,7 +3826,7 @@
     <string name="purchases_restored">Ostokset palautettu</string>
     <string name="cancel_anytime_in_amazon_app">Peruuta se milloin tahansa Amazon-sovelluksen kautta</string>
     <string name="empty_category_name">Tyhjä kategorian nimi</string>
-    <string name="no_activity_for_intent">Tarvittavaa sovellusta ei löytynyt.</string>
+    <string name="no_activity_for_intent">Asenna sovellus, joka voi suorittaa tämän toiminnon.</string>
     <string name="indexing_transport">Indeksoidaan liikennettä…</string>
     <string name="increase_search_radius_to">Laajenna hakusädettä %1$s:iin</string>
     <string name="powered_by_osmand">Käyttäen OsmAndia</string>
@@ -3879,7 +3879,7 @@
     <string name="shared_storage_last_step">Voit määrittää uuden tiedostokansion jälkikäteen.</string>
     <string name="shared_storage_migration">Jaetun kansion migraatio</string>
     <string name="use_external_timestamps">Käytä ulkoisia aikaleimoja</string>
-    <string name="save_track_to_gpx_descrp">Aloita reitin nauhoitus automaattisesti navigoinnin alkaessa. Navigoinnin päättyessä nauhoitus tallennetaan automaattisesti.</string>
+    <string name="save_track_to_gpx_descrp">Aloita reitin tallennus automaattisesti navigoinnin alkaessa ja tallenna automaattisesti jälkeenpäin.</string>
     <string name="please_provide_group_name_message">Nimeä ryhmä.</string>
     <string name="shared_string_used">Käytössä</string>
     <string name="shared_string_not_used">Ei käytössä</string>
@@ -3901,12 +3901,12 @@
     <string name="save_changes_into_file">Talleta muutokset tiedostoon</string>
     <string name="save_as_copy">Tallenna kopio</string>
     <string name="gps_filter_actions_description">OsmAnd lisää muutokset reittiin tallentamatta tiedostoa. Voit tallentaa muutokset manuaalisesti.</string>
-    <string name="shared_string_gps_filter">GPS suodatin</string>
+    <string name="shared_string_gps_filter">GPS-suodatin</string>
     <string name="shared_string_hide_all">Piilota kaikki</string>
     <string name="shared_string_statistics">Tilastot</string>
     <string name="rendering_value_all_name">Kaikki</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
-    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonit matalalla tarkkuudella</string>
+    <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Kuvakkeet matalilla zoomaustasoilla</string>
     <string name="copying_file">Kopioidaan tiedostoa %1$s…</string>
     <string name="from_to_with_params">Sijainnista %1$s sijaintiin %2$s</string>
     <string name="progress_complete">%1$s valmis</string>
@@ -3917,12 +3917,12 @@
     <string name="folder_access_denied">Oikeus valittuun kansioon pääsemiseen vaaditaan.</string>
     <string name="copying_completed">Kopioitu</string>
     <string name="shared_string_migration">Migraatio</string>
-    <string name="icon_group_industrial">Teollinen</string>
+    <string name="icon_group_industrial">Teollisuus</string>
     <string name="display_route_tracks">Näytä reitit</string>
     <string name="shared_string_travelbooks">Matkakirjat</string>
     <string name="approx_safe_mode">Turvallinen GPX tarkkuus</string>
-    <string name="map_marker_options">Karttamerkkien ominaisuudet</string>
-    <string name="gps_filter_precision">GPS tarkkuus</string>
+    <string name="map_marker_options">Karttamerkkien asetukset</string>
+    <string name="gps_filter_precision">GPS-tarkkuus</string>
     <string name="safe_settings">Turvassa</string>
     <string name="rendering_value_category_name">Kategoria</string>
     <string name="shared_string_skip_warning">Ohitetaanko migraatio\? OsmAndilla ei ole enää pääsyä tiedostoihisi jaetussa tallennuskansiossa.
@@ -3932,25 +3932,25 @@
     <string name="delete_history_items_descr">Poistetaanko valitut historiasta\?</string>
     <string name="delete_history_items">Poistetaanko %1$s kohtia historiasta\?</string>
     <string name="display_route_tracks_as_poi">Näytä reitit kuten KP</string>
-    <string name="exit_import_descr">Poistu tallentamatta muutoksia\?</string>
+    <string name="exit_import_descr">Haluatko poistua tallentamatta muutoksia?</string>
     <string name="list_of_groups">Lista ryhmistä</string>
-    <string name="exit_import">Poistu\?</string>
+    <string name="exit_import">Poistutaanko?</string>
     <string name="shared_string_reading_file">Luetaan tiedostoa…</string>
     <string name="all_groups">Kaikki ryhmät</string>
-    <string name="points_selection_descr">Sulje ja menetä tekemäsi muutokset\?</string>
+    <string name="points_selection_descr">Haluatko sulkea ja menettää kaikki muutokset?</string>
     <string name="import_tracks">Tuo jäljet</string>
     <string name="import_tracks_descr">%1$s, sisältää %2$s erillistä jälkeä. Valitse tuotavat jäljet.</string>
     <string name="quick_action_add_route_descr">Painike reitin lisäämiseksi keskeltä ruutua.</string>
-    <string name="location_source_descr">Google Play kaupasta asennettu OsmAnd käyttää oletuksena %1$s päätelläkseen sijainnin.
+    <string name="location_source_descr">Google Play -kaupasta asennettu OsmAnd käyttää oletuksena %1$s sijainnin määrittämiseen.
 \n
 \nJos saat epätarkan sijainnin tai käytät laitetta ilman %2$s, yritä vaihtaa \"%3$s\"</string>
     <string name="location_source">Sijainnin lähde</string>
     <string name="select_suggested_points">Valitse ehdotetut pisteet</string>
     <string name="selected_waypoints_descr">Valitut väyläpisteet lisätään \"%1$s\" jäljelle</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonien yksinkertaistettu esittäminen matalilla tarkkuuksilla</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme tunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-tunnisteet</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Näytä huomautustunnisteet</string>
-    <string name="rendering_attr_OSMMapperAssistantFixme_description">Näytä fixme tunnisteet</string>
+    <string name="rendering_attr_OSMMapperAssistantFixme_description">Näytä fixme-tunnisteet</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Huomautustunnisteet</string>
     <string name="rendering_attr_showRunningRoutes_description">Näytä juoksureitit</string>
     <string name="live_update_frequency_week_variant">Karttapäivitykset tarkistetaan viikoittain.</string>
@@ -3971,7 +3971,7 @@
     <string name="shared_string_buttons">Painikkeet</string>
     <string name="rendering_attr_showFitnessTrails_name">Kuntopolut</string>
     <string name="stop_download">Lopeta lataaminen</string>
-    <string name="default_appearance">Oletusulkonäkö</string>
+    <string name="default_appearance">Oletusulkoasu</string>
     <string name="rendering_attr_showFitnessTrails_description">Näytä kuntopolut</string>
     <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan päivittäin.</string>
     <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan tunnin välein.</string>
@@ -4260,4 +4260,52 @@
     <string name="routing_attr_avoid_4wd_only_description">Vältä vain nelivetoajoneuvoille tarkoitettuja teitä</string>
     <string name="speak_gps_signal_status">Kuuluta GPS-signaalin menetys ja palautus</string>
     <string name="map_rendering_engine_v1">Versio 1</string>
+    <string name="shared_string_speed">Nopeus</string>
+    <string name="app_mode_mountain_bicycle">Maastopyörä</string>
+    <string name="transparent_status_bar">Läpinäkyvä tilapalkki</string>
+    <string name="elevation_profile">Korkeusprofiili</string>
+    <string name="routing_attr_difficulty_preference_advanced_name">Haastava</string>
+    <string name="battery_widget_desc">Näyttää laitteesi akun varaustason.</string>
+    <string name="apply_to_existing">Käytä olemassa oleviin</string>
+    <string name="move_map_to_select_area">Siirrä karttaa valitaksesi tarvittavan alueen.</string>
+    <string name="edit_category">Muokkaa kategoriaa</string>
+    <string name="included_categories">Sisällytetyt kategoriat</string>
+    <string name="current_time_widget_desc">Näyttää tämänhetkisen ajan otettuna laitteeltasi.</string>
+    <string name="apply_only_to_new_points">Käytä vain uusiin pisteisiin</string>
+    <string name="number_of_tiles">Tiilien lukumäärä</string>
+    <string name="icon_group_education">Koulutus</string>
+    <string name="navigation_history">Navigointihistoria</string>
+    <string name="shortcut_navigate_to">Navigoi kohteeseen…</string>
+    <string name="map_markers_history">Karttamerkkihistoria</string>
+    <string name="shortcut_start_recording">Aloita tallennus</string>
+    <string name="location_access_request_action">Salli pääsy</string>
+    <string name="travel_route_types">Reittityypit</string>
+    <string name="horseback_riding">Ratsastus</string>
+    <string name="service_is_not_available_please_try_later">Palvelu ei ole saatavilla. Yritä myöhemmin uudelleen.</string>
+    <string name="no_items_of_type_message">Sinulla ei ole tätä tyyppiä olevia kohteita</string>
+    <string name="hillshade_slope">Rinnevarjostus, Kaltevuus</string>
+    <string name="clear_all_history">Tyhjennä kaikki historia</string>
+    <string name="rendering_attr_showLightRailRoutes_name">Pikaraitiovaunureitit</string>
+    <string name="max_speed_widget_desc">Näyttää ajettavan tien nopeusrajoituksen.</string>
+    <string name="rendering_attr_natureReserves_description">Näytä luonnonsuojelualueet, suojellut alueet ja kansallispuistot.</string>
+    <string name="shared_string_symbol">Symboli</string>
+    <string name="rendering_attr_horse_scale_demanding_name">Haastava</string>
+    <string name="rendering_attr_showBusRoutes_name">Bussireitit</string>
+    <string name="routing_attr_prefer_horse_routes_name">Suosi ratsastusreittejä</string>
+    <string name="rendering_attr_natureReserves_name">Luonnonsuojelualue</string>
+    <string name="routing_attr_difficulty_preference_beginner_name">Aloittelija</string>
+    <string name="routing_attr_difficulty_preference_intermediate_name">Keskitaso</string>
+    <string name="apply_only_to_new_favorites">Käytä vain uusiin suosikkeihin</string>
+    <string name="change_default_appearance">Vaihda oletusulkoasua</string>
+    <string name="rendering_attr_horse_scale_dangerous_name">Vaarallinen</string>
+    <string name="shared_string_item">Kohde</string>
+    <string name="stop_download_desc">Lataus ei ole valmis. Jos keskeytät nyt latauksen vain osa tiilistä on katseltavissa.</string>
+    <string name="shared_string_articles">Artikkelit</string>
+    <string name="gps_info_widget_desc">Näyttää näkyvien ja käytettyjen satelliittien lukumäärän.</string>
+    <string name="routing_attr_allow_gate_name">Salli portin käyttö</string>
+    <string name="routing_attr_allow_gate_description">Salli porttien käyttö</string>
+    <string name="rendering_attr_horse_scale_impossible_name">Mahdoton</string>
+    <string name="rendering_attr_horse_scale_difficult_name">Vaikea</string>
+    <string name="altitude_widget_desc">Näyttää nykyisen sijainnin korkeuden merenpinnasta.</string>
+    <string name="current_speed_widget_desc">Näyttää satelliittipaikannuksen ilmoittaman nopeuden.</string>
 </resources>
