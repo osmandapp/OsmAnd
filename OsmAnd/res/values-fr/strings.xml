@@ -927,7 +927,7 @@
     <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Prendre une photo</string>
     <string name="recording_context_menu_precord">Prendre une photo</string>
-    <string name="stop_routing_confirm">Arrêter le guidage \?</string>
+    <string name="stop_routing_confirm">Souhaitez-vous arrêter le guidage ?</string>
     <string name="clear_dest_confirm">Souhaitez-vous supprimer votre destination (et vos étapes) \?</string>
     <string name="precise_routing_mode">Routage précis (alpha)</string>
     <string name="precise_routing_mode_descr">Calculer des itinéraires précis et sans surprise. Actuellement fonctionne sur des distances réduites et reste lent.</string>
@@ -2505,7 +2505,7 @@
     <string name="shared_string_road">Route</string>
     <string name="wrong_format">Format incorrect</string>
     <string name="wrong_input">Saisie erronée</string>
-    <string name="enter_new_name">Entrer un nouveau nom</string>
+    <string name="enter_new_name">Entrez un nouveau nom</string>
     <string name="shared_string_back">Retour</string>
     <string name="shared_string_view">Afficher</string>
     <string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
@@ -3922,7 +3922,7 @@
     <string name="rename_track">Renommer la trace</string>
     <string name="change_folder">Modifier le dossier</string>
     <string name="shared_string_sec">sec</string>
-    <string name="start_recording">Commencer l’enregistrement</string>
+    <string name="start_recording">Démarrer l’enregistrement</string>
     <string name="routing_engine_vehicle_type_wheelchair">Fauteuil roulant</string>
     <string name="routing_engine_vehicle_type_hiking">Randonnée</string>
     <string name="routing_engine_vehicle_type_walking">Marche</string>
@@ -5034,7 +5034,7 @@
     <string name="sort_distance_ascending">Distance plus courte en premier</string>
     <string name="sort_distance_descending">Distance plus longue en premier</string>
     <string name="sort_date_ascending">Date plus récente en premier</string>
-    <string name="shared_string_nearest"></string>
+    <string name="shared_string_nearest">Le plus proche</string>
     <string name="selected_value">Valeur sélectionnée</string>
     <string name="sort_date_descending">Date plus ancienne en premier</string>
     <string name="shared_string_delete_file">Supprimer le fichier</string>
