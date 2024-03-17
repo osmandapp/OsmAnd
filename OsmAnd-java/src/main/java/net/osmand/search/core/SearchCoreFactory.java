@@ -579,7 +579,6 @@ public class SearchCoreFactory {
 	public static class SearchAmenityByNameAPI extends SearchBaseAPI {
 		private static final int LIMIT = 10000;
 		private static final int BBOX_RADIUS = 500 * 1000;
-		private static final int BBOX_RADIUS_INSIDE = 20000 * 1000; // to support city search for basemap
 		private static final int BBOX_RADIUS_POI_IN_CITY = 25 * 1000;
 		private static final int FIRST_WORD_MIN_LENGTH = 3;
 
@@ -604,7 +603,13 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			QuadRect bbox = phrase.getFileRequest() != null ? phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY) : phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY);
+			int centerX = (int) bbox.centerX();
+			int centerY = (int) bbox.centerY();
+			if (phrase.getFileRequest() == null) {
+				// expand bbox to cover Earth for basemap search
+				bbox.expand(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
+			}
 			final Set<String> ids = new HashSet<String>();
 
 			ResultMatcher<Amenity> rawDataCollector = null;
@@ -622,8 +627,8 @@ public class SearchCoreFactory {
 					}
 				};
 			}
-			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.centerX(),
-					(int) bbox.centerY(), searchWord, (int) bbox.left, (int) bbox.right, (int) bbox.top,
+			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(centerX, centerY,
+					searchWord, (int) bbox.left, (int) bbox.right, (int) bbox.top,
 					(int) bbox.bottom, new ResultMatcher<Amenity>() {
 						int limit = 0;
 
