@@ -1178,7 +1178,7 @@
     <string name="keep_informing">Répéter les instructions de guidage</string>
     <string name="navigation_intent_invalid">Format invalide : %s</string>
     <string name="arrival_distance">Annonce d\'arrivée</string>
-    <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\\\'arrivée à destination?</string>
+    <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination?</string>
     <string name="shared_string_share">Partager</string>
     <string name="share_fav_subject">Favoris partagés grâce à OsmAnd</string>
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
@@ -2505,7 +2505,7 @@
     <string name="shared_string_road">Route</string>
     <string name="wrong_format">Format incorrect</string>
     <string name="wrong_input">Saisie erronée</string>
-    <string name="enter_new_name">Saisissez un nouveau nom</string>
+    <string name="enter_new_name">Entrer un nouveau nom</string>
     <string name="shared_string_back">Retour</string>
     <string name="shared_string_view">Afficher</string>
     <string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
@@ -2992,7 +2992,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Non-compact</string>
     <string name="routeInfo_tracktype_name">Dureté de la surface</string>
     <string name="shared_string_file_is_saved">%s enregistré</string>
-    <string name="shared_string_open_track">Ouvrir la trace</string>
+    <string name="shared_string_open_track">Ouvrir trace</string>
     <string name="shared_string_track_is_saved">Trace %s enregistrée</string>
     <string name="shared_string_crash">Oups</string>
     <string name="last_launch_crashed">La dernière utilisation d\'OsmAnd a planté. Aidez-nous à améliorer OsmAnd en nous envoyant le message d\'erreur.</string>
@@ -3922,7 +3922,7 @@
     <string name="rename_track">Renommer la trace</string>
     <string name="change_folder">Modifier le dossier</string>
     <string name="shared_string_sec">sec</string>
-    <string name="start_recording">Démarrer l\'enregistrement</string>
+    <string name="start_recording">Commencer l’enregistrement</string>
     <string name="routing_engine_vehicle_type_wheelchair">Fauteuil roulant</string>
     <string name="routing_engine_vehicle_type_hiking">Randonnée</string>
     <string name="routing_engine_vehicle_type_walking">Marche</string>
@@ -5034,7 +5034,7 @@
     <string name="sort_distance_ascending">Distance plus courte en premier</string>
     <string name="sort_distance_descending">Distance plus longue en premier</string>
     <string name="sort_date_ascending">Date plus récente en premier</string>
-    <string name="shared_string_nearest">Le plus proche</string>
+    <string name="shared_string_nearest"></string>
     <string name="selected_value">Valeur sélectionnée</string>
     <string name="sort_date_descending">Date plus ancienne en premier</string>
     <string name="shared_string_delete_file">Supprimer le fichier</string>
@@ -5193,7 +5193,7 @@
     <string name="map_3d_mode_action">Mode 3D</string>
     <string name="visible_in_3d_mode">Visible en mode 3D</string>
     <string name="delete_folder_question">Supprimer le dossier \?</string>
-    <string name="delete_folder">Supprimer le dossier</string>
+    <string name="delete_folder">Supprimer dossier</string>
     <string name="show_all_tracks_on_the_map">Afficher toutes les traces sur la carte</string>
     <string name="rssi_widget_desc">Affiche le niveau RSSI de votre appareil externe.</string>
     <string name="map_widget_rssi">RSSI</string>
@@ -5226,7 +5226,7 @@
 \n
 \nCette action est irréversible.</string>
     <string name="osmand_cloud_delete_account_confirmation">Supprimer le compte \?</string>
-    <string name="action_cannot_be_undone">Cette action est irréversible.</string>
+    <string name="action_cannot_be_undone">Cette action ne peut être annulée.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Les autres appareils seront déconnectés du cloud OsmAnd et perdront accès aux fonctionnalités payantes.</string>
     <string name="osmand_cloud_deletion_account_warning">Votre compte et tous ses détails seront %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">Toutes les données du cloud OsmAnd seront %1$s. Les données de l\'appareil ne seront pas affectées.</string>
@@ -5492,18 +5492,18 @@
         <item quantity="other">%1$d (%2$d traces)</item>
     </plurals>
     <string name="cloud_trash_clear_confirmation">Supprimer définitivement tous les éléments présents dans la corbeille ?</string>
-    <string name="restore_from_trash">Restaurer depuis la corbeille</string>
+    <string name="restore_from_trash">Restaurer depuis la poubelle</string>
     <string name="delete_all_items">Supprimer tous les éléments</string>
     <string name="trash_is_empty_banner_desc">Les fichiers supprimés d\'OsmAnd Cloud seront disponibles ici pendant %1$s jours.</string>
     <string name="delete_trash_item_confirmation_desc">Supprimer \"%1$s\" de manière définitive ?</string>
     <string name="shared_string_empty_trash">Vider la corbeille</string>
-    <string name="shared_string_delete_immediately">Supprimer définitivement</string>
+    <string name="shared_string_delete_immediately">Supprimer immédiatement</string>
     <string name="shared_string_is_deleted">%1$s a été supprimé.</string>
     <string name="cloud_item_restored">%1$s a été restauré dans le Cloud.</string>
     <string name="trash_alert_card_desc">Les éléments de la corbeille seront supprimés après %1$s jours.</string>
-    <string name="trash_is_empty">La corbeille est vide</string>
-    <string name="shared_string_trash">Corbeille</string>
-    <string name="shared_string_delete_item">Supprimer l\'élément</string>
+    <string name="trash_is_empty">La poubelle est vide</string>
+    <string name="shared_string_trash">Poubelle</string>
+    <string name="shared_string_delete_item">Supprimer</string>
     <string name="key_event_action_zoom_in">Zoomer</string>
     <string name="key_event_action_change_map_orientation">Modifier l\'orientation de la carte</string>
     <string name="root_folder">Dossier racine</string>
@@ -5540,7 +5540,7 @@
     <string name="key_bindings">Affectation des touches</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Ouvrir la grille de données WunderLINQ</string>
     <string name="change_button">Modifier le bouton</string>
-    <string name="download_to_device">Télécharger sur l\'appareil</string>
+    <string name="download_to_device">Télécharger sur l’appareil</string>
     <string name="add_row">Ajouter une ligne</string>
     <string name="row_number">Ligne %1$s</string>
     <string name="remove_widget_first">Veuillez d\'abord supprimer le gadget</string>
@@ -5569,7 +5569,7 @@
     <string name="key_assignments_already_cleared_message">Toutes les assignations de touches ont déjà été effacées</string>
     <string name="add_new_button">Ajouter un nouveau bouton</string>
     <string name="use_v1_auto_zoom">Auto-zoom discret (ancienne version)</string>
-    <string name="shared_string_next_event">Prochain évènement</string>
+    <string name="shared_string_next_event">Événement suivant</string>
     <string name="map_widget_sun_position">Position du soleil</string>
     <string name="map_widget_sun_position_desc">Indique le temps restant avant le lever ou le coucher du soleil.</string>
     <string name="previous_row_has_complex_widget">La ligne précédente possède un gadget complexe</string>
