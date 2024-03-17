@@ -5638,4 +5638,21 @@
     <string name="routing_type_a_star_2_phase">A* 2-faza</string>
     <string name="shared_sting_all_colors">Ĉiuj koloroj</string>
     <string name="lang_ta_in">Tamila (Hinda)</string>
+    <string name="release_4_7">• nova fenestraĵo “Rapidmezurilo” kongrua kun Android Auto
+\n
+\n • eblo alĝustigi ekranon de mapo per aldoni plurajn butonojn “Rapida ago”
+\n
+\n • plibonigita legeblo de datumoj sur diagramoj
+\n
+\n • eblo filtri suprojn laŭ datumoj de eksteraj sentiloj
+\n
+\n• subteno por pliajn etikedojn por GPX
+\n
+\n • elekto inter precizaj kaj rondigitaj valoroj por distancoj
+\n
+\n • samaspektigita ekrano de elekto de spuro
+\n
+\n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0
+\n
+\n</string>
 </resources>
