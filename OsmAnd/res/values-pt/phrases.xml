@@ -4862,4 +4862,7 @@
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Estação de descarga sanitária</string>
     <string name="poi_live_music">Música ao vivo</string>
     <string name="poi_shop_general">Loja geral</string>
+    <string name="poi_indoor_seating_bar_table">Bancos no interior: balcão de bar</string>
+    <string name="poi_indoor_seating_yes">Bancos no interior: sim</string>
+    <string name="poi_indoor_seating_no">Sem bancos no interior</string>
 </resources>
