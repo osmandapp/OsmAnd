@@ -115,7 +115,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 
 		ImageView background = view.findViewById(R.id.background);
 		background.setOnClickListener(v -> {
-			controller.onSelectColorFromPalette(paletteColor);
+			controller.onSelectColorFromPalette(paletteColor, true);
 			dismiss();
 		});
 		background.setOnLongClickListener(v -> {

@@ -92,11 +92,16 @@ public class ColorsPaletteController implements IColorsPaletteController {
 	}
 
 	@Override
-	public void onSelectColorFromPalette(@NonNull PaletteColor color) {
+	public void onSelectColorFromPalette(@NonNull PaletteColor color, boolean renewLastUsedTime) {
 		if (!Objects.equals(selectedPaletteColor, color)) {
 			PaletteColor oldSelectedColor = selectedPaletteColor;
 			selectColor(color);
-			notifyUpdatePaletteSelection(oldSelectedColor, selectedPaletteColor);
+			if (renewLastUsedTime) {
+				color.renewLastUsedTime();
+				notifyUpdatePaletteColors(color);
+			} else {
+				notifyUpdatePaletteSelection(oldSelectedColor, selectedPaletteColor);
+			}
 		}
 	}
 
@@ -134,11 +139,7 @@ public class ColorsPaletteController implements IColorsPaletteController {
 
 	@Override
 	public void refreshLastUsedTime() {
-		long now = System.currentTimeMillis();
-		if (selectedPaletteColor != null) {
-			selectedPaletteColor.setLastUsedTime(now);
-			colorsCollection.syncSettings();
-		}
+		colorsCollection.askRenewLastUsedTime(selectedPaletteColor);
 	}
 
 	@Override

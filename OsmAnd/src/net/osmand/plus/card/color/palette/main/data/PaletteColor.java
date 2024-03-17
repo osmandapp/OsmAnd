@@ -68,6 +68,10 @@ public class PaletteColor {
 		return lastUsedTime;
 	}
 
+	public void renewLastUsedTime() {
+		setLastUsedTime(System.currentTimeMillis());
+	}
+
 	public void setLastUsedTime(long lastUsedTime) {
 		this.lastUsedTime = lastUsedTime;
 	}
