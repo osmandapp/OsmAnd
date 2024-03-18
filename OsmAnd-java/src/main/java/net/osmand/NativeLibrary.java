@@ -252,7 +252,9 @@ public class NativeLibrary {
 		if (hhRoutingConfig != null) {
 			setHHNativeFilter(c);
 		}
-		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ? -2 * (float) Math.PI : c.config.initialDirection.floatValue(),
+		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
+		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
+				CPP_NO_DIRECTION : c.config.initialDirection.floatValue(),
 				regions, basemap);
 	}
 
