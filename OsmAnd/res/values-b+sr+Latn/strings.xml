@@ -2402,7 +2402,7 @@
     <string name="empty_state_markers_groups">Uvezi grupe</string>
     <string name="empty_state_markers_active_desc">Dugo ili kratko pritisni na „Moja mesta“, onda pritisni zastavicu kad se pojavi.</string>
     <string name="empty_state_markers_active">Napravi oznake na mapi!</string>
-    <string name="add_group_descr">Uvezi grupe izfavorita ili iz GPX međuodredišnih tačaka.</string>
+    <string name="add_group_descr">Uvezi grupe iz favorita ili iz GPX međuodredišnih tačaka.</string>
     <string name="add_group">Dodaj skup</string>
     <string name="favourites_group">Kategorija favorita</string>
     <string name="shared_string_gpx_waypoints">Međuodredišta</string>
