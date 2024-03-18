@@ -5,8 +5,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:paddingBottom="@dimen/bottom_sheet_exit_button_margin">
+	android:orientation="vertical">
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:layout_width="wrap_content"
