@@ -114,7 +114,9 @@ public class ColorsPaletteController implements IColorsPaletteController {
 				externalListener.onColorAddedToPalette(editedPaletteColor, paletteColor);
 			}
 			if (oldColor == null || Objects.equals(editedPaletteColor, selectedPaletteColor)) {
+				PaletteColor oldSelectedColor = selectedPaletteColor;
 				selectColor(paletteColor);
+				notifyUpdatePaletteSelection(oldSelectedColor, selectedPaletteColor);
 			}
 		}
 		editedPaletteColor = null;
