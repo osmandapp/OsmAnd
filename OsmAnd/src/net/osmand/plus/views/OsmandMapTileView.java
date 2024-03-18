@@ -827,14 +827,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setMainLayer(BaseMapLayer mainLayer) {
 		this.mainLayer = mainLayer;
 		int zoom = currentViewport.getZoom();
-
+		double floatZoomPart = currentViewport.getZoomFloatPart();
 		if (getMaxZoom() < zoom) {
 			zoom = getMaxZoom();
+			floatZoomPart = 0;
 		}
 		if (getMinZoom() > zoom) {
 			zoom = getMinZoom();
+			floatZoomPart = 0;
 		}
-		setZoomAndAnimationImpl(zoom, 0, 0);
+		setZoomAndAnimationImpl(zoom, 0, floatZoomPart);
 		refreshMap();
 	}
 
