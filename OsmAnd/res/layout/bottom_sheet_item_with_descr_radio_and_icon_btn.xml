@@ -79,6 +79,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/vertical_end_button_divider"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/content_padding"

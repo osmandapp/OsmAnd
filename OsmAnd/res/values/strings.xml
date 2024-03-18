@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="distance_during_navigation_description">Choose how distance information is displayed in navigation widgets (distance to point, next turn, lanes).\n\nChoose “Precise” for exact numbers, or “Round up” for easier readability.</string>
+    <string name="distance_during_navigation">Distance during navigation</string>
+    <string name="precise">Precise</string>
+    <string name="round_up">Round up</string>
     <string name="release_4_7">
         • New \"Speedometer\" widget compatible with Android Auto\n\n
         • Configure the map screen by adding multiple \"Quick Action\" buttons\n\n
