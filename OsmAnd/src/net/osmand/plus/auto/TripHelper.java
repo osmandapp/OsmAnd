@@ -45,6 +45,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -218,7 +219,7 @@ public class TripHelper {
 
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
-			Distance stepDistance = getDistance(app, nextTurnDistance);
+			Distance stepDistance = getFormattedDistance(app, nextTurnDistance);
 			DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
 			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec);
@@ -325,6 +326,36 @@ public class TripHelper {
 		drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
 		drawable.draw(canvas);
 		return bitmap;
+	}
+
+	private static Distance getFormattedDistance(@NonNull OsmandApplication app, double meters) {
+		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS, mc);
+
+		return Distance.create(formattedValue.valueSrc, stringToUnit(app, formattedValue.unit));
+	}
+
+	@Distance.Unit
+	private static int stringToUnit(@NonNull OsmandApplication app, String unitInString) {
+		final String m = app.getString(R.string.m);
+		final String yard = app.getString(R.string.yard);
+		final String foot = app.getString(R.string.foot);
+		final String mile = app.getString(R.string.mile);
+		final String km = app.getString(R.string.km);
+		final String nm = app.getString(R.string.nm);
+
+		if (unitInString.equals(m)) {
+			return Distance.UNIT_METERS;
+		} else if (unitInString.equals(yard)) {
+			return Distance.UNIT_YARDS;
+		} else if (unitInString.equals(foot)) {
+			return Distance.UNIT_FEET;
+		} else if (unitInString.equals(mile) || unitInString.equals(nm)) {
+			return Distance.UNIT_MILES;
+		} else if (unitInString.equals(km)) {
+			return Distance.UNIT_KILOMETERS;
+		}
+		return Distance.UNIT_METERS;
 	}
 
 	public static Distance getDistance(@NonNull OsmandApplication app, double meters) {
