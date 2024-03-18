@@ -109,7 +109,7 @@
     <string name="poi_sustenance">Ugostiteljski objekti</string>
     <string name="poi_cafe_and_restaurant">Kafić i restoran</string>
     <string name="poi_finance">Finansije</string>
-    <string name="poi_natural">Prirodno</string>
+    <string name="poi_natural">Priroda</string>
     <string name="poi_seamark">Nautika</string>
     <string name="poi_military">Vojska</string>
     <string name="poi_osmwiki">Vikipedija</string>
@@ -325,7 +325,7 @@
     <string name="poi_speed_camera">Prekršajna kamera</string>
     <string name="poi_junction">Raskrsnica</string>
     <string name="poi_rest_area">Odmorište</string>
-    <string name="poi_water_well">Bunar za vodu</string>
+    <string name="poi_water_well">Bunar</string>
     <string name="poi_water_works">Radovi na vodi</string>
     <string name="poi_water_tower">Vodeni toranj</string>
     <string name="poi_lock_gate">Prevodnica</string>
@@ -470,7 +470,7 @@
     <string name="poi_estate_agent">Agencija za nekretnine</string>
     <string name="poi_lawyer">Advokat</string>
     <string name="poi_ngo">NVO</string>
-    <string name="poi_townhall">Administracija naseljenog mesta</string>
+    <string name="poi_townhall">Lokalne administracije</string>
     <string name="poi_it">IT</string>
     <string name="poi_advertising_agency">Marketing</string>
     <string name="poi_educational_institution">Obrazovna ustanova</string>
@@ -580,7 +580,7 @@
     <string name="poi_attraction">Turistička atrakcija</string>
     <string name="poi_tourism_yes">Turistički objekat</string>
     <string name="poi_attraction_animal">Životinja (atrakcija)</string>
-    <string name="poi_attraction_carousel">Vrteška</string>
+    <string name="poi_attraction_carousel">Karusel</string>
     <string name="poi_attraction_maze">Lavirint</string>
     <string name="poi_attraction_roller_coaster">Rolerkoster</string>
     <string name="poi_attraction_slide">Dečji tobogan</string>
@@ -667,7 +667,7 @@
     <string name="poi_club_linux">Linux klub</string>
     <string name="poi_camp_site">Mesto za kamp</string>
     <string name="poi_resort">Odmaralište</string>
-    <string name="poi_club_fan">Klub ljubitelja</string>
+    <string name="poi_club_fan">Fan klub</string>
     <string name="poi_club_theatre">Pozorišni klub</string>
     <string name="poi_club_history">Klub istoričara</string>
     <string name="poi_club_music">Muzički klub</string>
@@ -1518,7 +1518,7 @@
     <string name="poi_brownfield">Pripremljeno građevinsko zemljište</string>
     <string name="poi_greenfield">Gradilište</string>
     <string name="poi_adit">Štolna</string>
-    <string name="poi_petroleum_well">Izvor nafte</string>
+    <string name="poi_petroleum_well">Naftna bušotina</string>
     <string name="poi_survey_point">Triangulacijska tačka</string>
     <string name="poi_cricket_nets">Kriket mreže</string>
     <string name="poi_register_office">Kancelarija za građane</string>
@@ -1607,7 +1607,7 @@
     <string name="poi_club_cinema">Kinematografski klub</string>
     <string name="poi_club_charity">Donatorski klub</string>
     <string name="poi_piste_skitour">Skijaška staza</string>
-    <string name="poi_piste_sleigh">Staza za sanke</string>
+    <string name="poi_piste_sleigh">Staza za saonice</string>
     <string name="poi_piste_sled">Staza za sanke</string>
     <string name="poi_arts_centre">Umetnički centar</string>
     <string name="poi_community_centre">Saborni centar</string>
@@ -3028,7 +3028,7 @@
     <string name="poi_gambling_pachinko">Pacinko</string>
     <string name="poi_gambling_lottery">Lutrija</string>
     <string name="poi_gambling_type">Vrsta</string>
-    <string name="poi_gambling">Mesto kockanja</string>
+    <string name="poi_gambling">Kockarnica</string>
     <string name="poi_lottery">Igre na sreću</string>
     <string name="poi_lighting">Oprema za rasvetu</string>
     <string name="poi_locksmith">Bravarija</string>
@@ -3730,7 +3730,7 @@
     <string name="poi_hazard_additional_erosion">Opasnost: erozija</string>
     <string name="poi_rescue_box">Ormarić za prvu pomoć</string>
     <string name="poi_change_delete">Izbrisani objekt</string>
-    <string name="poi_flare">Gasna baklja;Gomila baklji</string>
+    <string name="poi_flare">Gasna baklja;Gasni toranj</string>
     <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
     <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3a_asterisk">3A*</string>
@@ -3893,7 +3893,7 @@
     <string name="poi_swimming_area">Deo za plivanje</string>
     <string name="poi_lavoir">Pojilo</string>
     <string name="poi_waste_transfer_station">Stanica za prenos otpada</string>
-    <string name="poi_weighbridge">Kolska vaga</string>
+    <string name="poi_weighbridge">Auto vaga;Kamionska vaga</string>
     <string name="poi_ranger_station">Šumarska stanica</string>
     <string name="poi_water_source_tube_well">Bunar sa cevima</string>
     <string name="poi_water_source_well">Bunar</string>
@@ -4107,7 +4107,7 @@
     <string name="poi_playground_seesaw">Klackalica</string>
     <string name="poi_playground_water">Voda</string>
     <string name="poi_playground_activitypanel">Panel aktivnosti</string>
-    <string name="poi_playground_roundabout">Kružni tok</string>
+    <string name="poi_playground_roundabout">Vrteška</string>
     <string name="poi_playground_hopscotch">Teren za igru školice</string>
     <string name="poi_us_maps_recreation_area_activity_salt_water_fishing">Morski ribolov</string>
     <string name="poi_photo_booth">Kabina za fotografisanje</string>
