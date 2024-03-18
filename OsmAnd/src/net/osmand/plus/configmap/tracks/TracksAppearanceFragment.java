@@ -353,13 +353,14 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	private TrackWidthController getWidthCardController() {
 		OnNeedScrollListener onNeedScrollListener = y -> {
 			View view = getView();
-			View cardView = trackWidthCard.getView();
-			if (view != null && cardView != null) {
-				ScrollView scrollView = view.findViewById(R.id.scroll_view);
-				int height = scrollView.getHeight();
-				int bottom = scrollView.getChildAt(0).getBottom();
-				int maxScrollY = Math.max(0, bottom - height);
-				scrollView.smoothScrollTo(0, maxScrollY);
+			if (view != null) {
+				int bottomVisibleY = view.findViewById(R.id.control_buttons).getTop();
+				if (y > bottomVisibleY) {
+					ScrollView scrollView = view.findViewById(R.id.scroll_view);
+					int diff = y - bottomVisibleY;
+					int scrollY = scrollView.getScrollY();
+					scrollView.smoothScrollTo(0, scrollY + diff);
+				}
 			}
 		};
 		return TrackWidthController.getInstance(app, trackDrawInfo, onNeedScrollListener, this);

@@ -141,6 +141,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	private void bindWidthComponentCardIfNeeded(@NonNull FragmentActivity activity,
 	                                            @NonNull ViewGroup container) {
 		WidthComponentController controller = getWidthComponentController();
+		controller.setOnNeedScrollListener(onNeedScrollListener);
 		// We only create and bind "Width Component" card only if it wasn't attached before
 		// or if there is other card visible at the moment.
 		Integer cardId = (Integer) container.getTag();
@@ -148,13 +149,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 			container.removeAllViews();
 			ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller);
 			container.addView(widthComponentCard.build(activity));
-
-			View widthSliderContainer = widthComponentCard.getSliderContainer();
-			ScrollUtils.addOnGlobalLayoutListener(widthSliderContainer, () -> {
-				if (widthSliderContainer.getVisibility() == View.VISIBLE) {
-					onNeedScrollListener.onVerticalScrollNeeded(widthSliderContainer.getBottom());
-				}
-			});
 
 			// Hide direction arrows in OpenGL while slider is touched
 			Slider widthSlider = widthComponentCard.getSlider();

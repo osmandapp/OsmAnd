@@ -1,16 +1,21 @@
 package net.osmand.plus.card.width;
 
 import android.content.Context;
+import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.slider.ISliderCard;
 import net.osmand.plus.card.base.slider.moded.IModedSliderComponent;
 import net.osmand.plus.card.base.slider.moded.IModedSliderController;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +26,7 @@ public class WidthComponentController implements IModedSliderController {
 	private final WidthComponentListener listener;
 
 	private IModedSliderComponent cardInstance;
+	private OnNeedScrollListener onNeedScrollListener;
 	@ColorInt
 	private Integer iconsColor;
 	private WidthMode widthMode;
@@ -36,6 +42,10 @@ public class WidthComponentController implements IModedSliderController {
 	@Override
 	public void bindComponent(@NonNull ISliderCard cardInstance) {
 		this.cardInstance = (IModedSliderComponent) cardInstance;
+	}
+
+	public void setOnNeedScrollListener(@NonNull OnNeedScrollListener onNeedScrollListener) {
+		this.onNeedScrollListener = onNeedScrollListener;
 	}
 
 	@Override
@@ -72,7 +82,7 @@ public class WidthComponentController implements IModedSliderController {
 		askSelectWidthMode(WidthMode.valueOfKey(width));
 	}
 
-	public void askSelectWidthMode(@NonNull WidthMode widthMode) {
+	private void askSelectWidthMode(@NonNull WidthMode widthMode) {
 		askSelectSliderMode(new SliderMode(widthMode.getIconId(), widthMode));
 	}
 
@@ -91,6 +101,7 @@ public class WidthComponentController implements IModedSliderController {
 			}
 			notifyWidthSelected();
 		}
+		requestVerticalScrollIfNeeded();
 	}
 
 	@Override
@@ -128,5 +139,18 @@ public class WidthComponentController implements IModedSliderController {
 	private void notifyWidthSelected() {
 		String width = getSelectedWidthValue();
 		listener.onWidthSelected(width);
+	}
+
+	private void requestVerticalScrollIfNeeded() {
+		if (widthMode == WidthMode.CUSTOM && cardInstance != null) {
+			View sliderContainer = cardInstance.getSliderContainer();
+			ScrollUtils.addOnGlobalLayoutListener(sliderContainer, () -> {
+				if (sliderContainer.getVisibility() == View.VISIBLE && onNeedScrollListener != null) {
+					int y = AndroidUtils.getViewOnScreenY(sliderContainer);
+					int viewHeight = sliderContainer.getHeight();
+					onNeedScrollListener.onVerticalScrollNeeded(y + viewHeight);
+				}
+			});
+		}
 	}
 }

@@ -244,21 +244,17 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 			@Override
 			public void onVerticalScrollNeeded(int y) {
-				View view = widthCard.getView();
-				if (view != null) {
-					int resultYPosition = view.getTop() + y;
-					int dialogHeight = getInnerScrollableHeight();
+				int bottomVisibleY = getBottomVisibleY();
+				if (y > bottomVisibleY) {
 					ScrollView scrollView = (ScrollView) getBottomScrollView();
-					if (resultYPosition > (scrollView.getScrollY() + dialogHeight)) {
-						scrollView.smoothScrollTo(0, resultYPosition - dialogHeight);
-					}
+					int diff = y - bottomVisibleY;
+					int scrollY = scrollView.getScrollY();
+					scrollView.smoothScrollTo(0, scrollY + diff);
 				}
 			}
 
-			private int getInnerScrollableHeight() {
-				int totalScreenHeight = getViewHeight() - getMenuStatePosY(getCurrentMenuState());
-				int frameTotalHeight = controlButtons.getHeight() + buttonsShadow.getHeight();
-				return totalScreenHeight - frameTotalHeight;
+			private int getBottomVisibleY() {
+				return controlButtons.getTop();
 			}
 		};
 	}

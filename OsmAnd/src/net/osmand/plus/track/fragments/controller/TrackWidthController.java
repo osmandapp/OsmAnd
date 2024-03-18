@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.slider.Slider.OnSliderTouchListener;
 
@@ -26,7 +25,6 @@ import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
-import net.osmand.plus.utils.ColorUtilities;
 
 public class TrackWidthController implements IHeadedCardController, IDialogController {
 
@@ -87,15 +85,10 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	@Override
 	public View getCardContentView(@NonNull FragmentActivity activity, boolean nightMode) {
 		WidthComponentController controller = getWidthComponentController();
+		controller.setOnNeedScrollListener(onNeedScrollListener);
+
 		ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller);
 		View view = widthComponentCard.build(activity);
-
-		View widthSliderContainer = widthComponentCard.getSliderContainer();
-		ScrollUtils.addOnGlobalLayoutListener(widthSliderContainer, () -> {
-			if (widthSliderContainer.getVisibility() == View.VISIBLE) {
-				onNeedScrollListener.onVerticalScrollNeeded(widthSliderContainer.getBottom());
-			}
-		});
 
 		// Disable arrows in OpenGL while touching slider, to prevent arrows blinking
 		Slider widthSlider = widthComponentCard.getSlider();

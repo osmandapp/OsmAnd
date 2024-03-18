@@ -37,6 +37,7 @@ public class ModedSliderCard extends SliderCard implements IModedSliderComponent
 	}
 
 	@NonNull
+	@Override
 	public View getSliderContainer() {
 		return view.findViewById(R.id.slider_component_container);
 	}
