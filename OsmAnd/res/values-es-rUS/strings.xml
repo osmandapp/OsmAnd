@@ -354,11 +354,11 @@
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
     <string name="routing_attr_avoid_toll_name">Sin peajes</string>
-    <string name="routing_attr_avoid_toll_description">Evitar caminos con peajes</string>
+    <string name="routing_attr_avoid_toll_description">Evita caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Sólo caminos pavimentados</string>
-    <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_description">Evita caminos sin pavimentar</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
-    <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
+    <string name="routing_attr_avoid_motorway_description">Evita tomar autopistas</string>
     <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="lang_sw">Suajili</string>
@@ -482,7 +482,7 @@
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Usar la traza mostrada para la navegación?</string>
     <string name="routing_attr_avoid_ferries_name">Sin ferris o transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evitar ferris o transbordadores</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris o transbordadores</string>
     <string name="android_19_location_disabled">Desde Android 4.4 (KitKat), la carpeta de almacenamiento antigua (%s) se encuentra en desuso. ¿Copiar todos los archivos de OsmAnd a la nueva ubicación de almacenamiento\?
 \n Nota 1: Los archivos antiguos permanecerán intactos (pero pueden borrarse manualmente).
 \n Nota 2: En la nueva ubicación de almacenamiento será imposible compartir archivos entre OsmAnd y OsmAnd+.</string>
@@ -1517,7 +1517,7 @@
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
-    <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
+    <string name="routing_attr_avoid_borders_description">Evita cruzar las fronteras nacionales</string>
     <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
@@ -1614,7 +1614,7 @@
 \nsin conexión</string>
     <string name="commit_poi">Enviar PDI</string>
     <string name="routing_attr_avoid_shuttle_train_name">Sin trenes de enlace</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Evitar trenes de enlace</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Evita usar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
     <string name="tab_title_advanced">Avanzado</string>
@@ -1765,7 +1765,7 @@
     <string name="access_from_map">Acceso desde el mapa</string>
     <string name="please_specify_poi_type_only_from_list">Indica el tipo de PDI correcto u omítelo.</string>
     <string name="routing_attr_avoid_stairs_name">Sin escaleras</string>
-    <string name="routing_attr_avoid_stairs_description">Evitar escaleras</string>
+    <string name="routing_attr_avoid_stairs_description">Evita ir por escaleras</string>
     <string name="routing_attr_avoid_borders_name">Sin cruces fronterizos</string>
     <string name="shared_string_near">Cerca de</string>
     <string name="shared_string_hide">Ocultar</string>
@@ -2492,7 +2492,7 @@
     <string name="fast_coordinates_input_descr">Elige el formato de ingreso de las coordenadas. Pulsa en «Opciones» para cambiarlo.</string>
     <string name="fast_coordinates_input">Ingreso rápido de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Sin caminos de hielo ni vados</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar caminos con hielo y vados.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita caminos con hielo y vados.</string>
     <string name="make_round_trip_descr">Duplica el punto de partida y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="osn_modify_dialog_error">No se pudo modificar la nota.</string>
@@ -2874,23 +2874,23 @@
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="quick_action_day_night_mode">modo %s</string>
     <string name="routing_attr_avoid_sett_name">Sin adoquinado natural</string>
-    <string name="routing_attr_avoid_sett_description">Evitar calles con adoquines naturales</string>
+    <string name="routing_attr_avoid_sett_description">Evita calles con adoquines naturales</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Sin tranvías</string>
-    <string name="routing_attr_avoid_tram_description">Evitar tranvías</string>
+    <string name="routing_attr_avoid_tram_description">Evita usar tranvías</string>
     <string name="routing_attr_avoid_bus_name">Sin autobuses</string>
-    <string name="routing_attr_avoid_bus_description">Evitar autobuses y trolebuses</string>
+    <string name="routing_attr_avoid_bus_description">Evita usar autobuses y trolebuses</string>
     <string name="routing_attr_avoid_share_taxi_name">Sin taxis compartidos</string>
-    <string name="routing_attr_avoid_share_taxi_description">Evitar taxis compartidos</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evita usar taxis compartidos</string>
     <string name="routing_attr_avoid_train_name">Sin trenes</string>
-    <string name="routing_attr_avoid_train_description">Evitar trenes</string>
+    <string name="routing_attr_avoid_train_description">Evita usar trenes</string>
     <string name="routing_attr_avoid_subway_name">Sin metros</string>
-    <string name="routing_attr_avoid_subway_description">Evitar metros y trenes ligeros</string>
+    <string name="routing_attr_avoid_subway_description">Evita usar metros y trenes ligeros</string>
     <string name="routing_attr_avoid_ferry_name">Sin ferris o transbordadores</string>
-    <string name="routing_attr_avoid_ferry_description">Evitar ferris o transbordadores</string>
+    <string name="routing_attr_avoid_ferry_description">Evita usar ferris o transbordadores</string>
     <string name="send_log">Enviar registro del problema</string>
     <string name="files_moved">Se movieron %1$d archivos (%2$s).</string>
     <string name="files_copied">Se copiaron %1$d archivos (%2$s).</string>
@@ -4664,11 +4664,11 @@
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
-    <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
+    <string name="routing_attr_avoid_fords_description">Evita pasar por vados</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="radius_ruler_mode_desc">Pulsa el widget para alternar el modo de «Regla radial».</string>
-    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al punto intermedio</string>
     <string name="shared_string_mode">Modo</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
@@ -5374,7 +5374,7 @@
     <string name="help_article_map_tracks_on_map_name">Trazas y rutas</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Guía</string>
+    <string name="help_article_navigation_guidance_name">Guía de navegación</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Pantalla del mapa al navegar</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Avisos por voz / Notificaciones</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Navegación en bicicleta (MTB)</string>
@@ -5619,7 +5619,7 @@
     <string name="max_sensor_temperature">Temperatura, máx</string>
     <string name="avg_sensor_temperature">Temperatura, promedio</string>
     <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
-    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s», ordenadas por: «%2$s»</string>
+    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» están ordenadas por: «%2$s»</string>
     <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="shared_string_keywords">Palabras clave</string>
     <string name="shared_string_additional">Adicional</string>
@@ -5636,4 +5636,43 @@
     <string name="avg_sensor_heartrate">Ritmo cardíaco, promedio</string>
     <string name="max_sensor_cadence">Cadencia de la bicicleta, máx</string>
     <string name="dont_ask_anymore">No preguntar más</string>
+    <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto
+\n
+\n• Configura la pantalla añadiendo varios botones de «Acción rápida»
+\n
+\n• Mejora de legibilidad de los datos en los gráficos
+\n
+\n• Se añadieron filtros de datos del sensor para las trazas
+\n
+\n• Ahora se admiten etiquetas GPX adicionales
+\n
+\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados
+\n
+\n• Interfaz de usuario unificada para la selección de trazas
+\n
+\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2
+\n
+\n</string>
+    <string name="auto_zoom_discrete">Discreto</string>
+    <string name="auto_zoom">Zum automático</string>
+    <string name="java_safe">Java (Seguro)</string>
+    <string name="rendering_attr_padusDisplayMode_name">Modo de visualización de tierras públicas</string>
+    <string name="rendering_attr_padusDisplayMode_description">Por tipo de acceso o nombre del administrador</string>
+    <string name="rendering_value_managerName_name">Por nombre del administrador</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ocultar límites de tierras públicas</string>
+    <string name="speedometer_description">Muestra la velocidad actual detectada por el GPS</string>
+    <string name="shared_string_speedometer">Velocímetro</string>
+    <string name="shared_sting_all_colors">Todos los colores</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="auto_zoom_smooth">Suave</string>
+    <string name="gpx_approximation">Aproximación GPX</string>
+    <string name="routing_type">Tipo de navegación</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ocultar límites de tierras públicas pero mantener sus áreas</string>
+    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="when_exceeded">Al excederse</string>
+    <string name="shared_string_limit">Límite</string>
+    <string name="rendering_value_access_name">Por tipo de acceso</string>
+    <string name="help_article_setup_a_route_name">Configurar una ruta</string>
+    <string name="routing_type_a_star_classic">A* clásico</string>
+    <string name="lang_ta_in">Tamil (India)</string>
 </resources>
