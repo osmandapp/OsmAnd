@@ -4671,7 +4671,7 @@
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="shared_string_mode">Modo</string>
     <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
-    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al punto intermedio</string>
     <string name="radius_ruler_mode_desc">Pulsa el widget para alternar el modo de «Regla radial».</string>
     <string name="lang_sat">Santalí</string>
     <string name="average_speed_skip_stops">Tener en cuenta las paradas</string>
