@@ -53,8 +53,6 @@
 
 	</LinearLayout>
 
-	<include
-		android:id="@+id/control_buttons"
-		layout="@layout/bottom_buttons" />
+	<include layout="@layout/bottom_buttons" />
 
 </FrameLayout>

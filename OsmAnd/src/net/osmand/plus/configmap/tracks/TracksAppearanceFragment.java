@@ -354,7 +354,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		OnNeedScrollListener onNeedScrollListener = y -> {
 			View view = getView();
 			if (view != null) {
-				int bottomVisibleY = view.findViewById(R.id.control_buttons).getTop();
+				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
 				if (y > bottomVisibleY) {
 					ScrollView scrollView = view.findViewById(R.id.scroll_view);
 					int diff = y - bottomVisibleY;
