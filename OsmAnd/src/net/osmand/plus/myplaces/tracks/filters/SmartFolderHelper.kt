@@ -13,6 +13,7 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference
 import net.osmand.plus.track.data.SmartFolder
 import net.osmand.util.Algorithms
 import net.osmand.util.CollectionUtils
+import java.io.File
 import java.util.Date
 
 class SmartFolderHelper(val app: OsmandApplication) {
@@ -224,6 +225,17 @@ class SmartFolderHelper(val app: OsmandApplication) {
 				}
 			}
 		}
+	}
+
+	fun onTrackRenamed(srcTrackFile: File, destTrackFile: File) {
+		for (trackItem in allAvailableTrackItems) {
+			if (trackItem.path == srcTrackFile.path) {
+				allAvailableTrackItems.remove(trackItem)
+				allAvailableTrackItems.add(TrackItem(destTrackFile))
+				break
+			}
+		}
+		notifyUpdateListeners()
 	}
 
 	@WorkerThread

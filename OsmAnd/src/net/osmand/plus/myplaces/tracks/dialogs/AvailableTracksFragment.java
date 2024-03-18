@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -461,7 +462,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			@Override
 			public void loadTracksProgress(@NonNull TrackItem[] items) {
 				updateContent();
-				updateFragmentsFolders();
+				updateFragmentsFolders(false);
 			}
 
 			@Override
@@ -470,13 +471,13 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				setSelectedFolder(folder);
 
 				updateContent();
-				updateFragmentsFolders();
+				updateFragmentsFolders(true);
 				updateProgressVisibility(false);
 
 				restoreState(getArguments());
 			}
 
-			public void updateFragmentsFolders() {
+			public void updateFragmentsFolders(boolean loadTracksFinished) {
 				List<TrackFolder> folders = new ArrayList<>(rootFolder.getFlattenedSubFolders());
 				folders.add(rootFolder);
 
@@ -484,16 +485,16 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				if (activity != null) {
 					TrackFolderFragment folderFragment = activity.getFragment(TrackFolderFragment.TAG);
 					if (folderFragment != null) {
-						updateFragmentFolders(folderFragment, folders);
+						updateFragmentFolders(folderFragment, folders, loadTracksFinished);
 					}
 					TracksSelectionFragment selectionFragment = activity.getFragment(TracksSelectionFragment.TAG);
 					if (selectionFragment != null) {
-						updateFragmentFolders(selectionFragment, folders);
+						updateFragmentFolders(selectionFragment, folders, loadTracksFinished);
 					}
 				}
 			}
 
-			public void updateFragmentFolders(@NonNull BaseTrackFolderFragment fragment, @NonNull List<TrackFolder> folders) {
+			public void updateFragmentFolders(@NonNull BaseTrackFolderFragment fragment, @NonNull List<TrackFolder> folders, boolean loadTracksFinished) {
 				TrackFolder rootFolder = fragment.getRootFolder();
 				TrackFolder selectedFolder = fragment.getSelectedFolder();
 
@@ -514,7 +515,11 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						}
 					}
 				}
-				fragment.updateContent();
+				if (fragment instanceof SmartFolderFragment) {
+					((SmartFolderFragment) fragment).updateContent(loadTracksFinished);
+				} else {
+					fragment.updateContent();
+				}
 			}
 		};
 	}
