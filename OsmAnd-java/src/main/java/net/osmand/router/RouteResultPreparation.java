@@ -64,7 +64,7 @@ public class RouteResultPreparation {
 		String error = null;
 		
 		public RouteCalcResult(List<RouteSegmentResult> list) {
-			if (list == null) {
+			if(list == null) {
 				error = "Result is empty";
 			} else {
 				this.detailed = list;
@@ -499,7 +499,7 @@ public class RouteResultPreparation {
 		}
 	}
 
-	public static List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
+	public List<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext ctx, FinalRouteSegment finalSegment) {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		if (finalSegment != null) {
 			ctx.routingTime += finalSegment.distanceFromStart;
@@ -536,11 +536,11 @@ public class RouteResultPreparation {
 		return result;
 	}
 
-	private static float distanceFromStart(RouteSegment s) {
+	private float distanceFromStart(RouteSegment s) {
 		return s == null ? 0 : s.distanceFromStart;
 	}
 
-	protected static void checkTotalRoutingTime(List<RouteSegmentResult> result, float cmp) {
+	protected void checkTotalRoutingTime(List<RouteSegmentResult> result, float cmp) {
 		float totalRoutingTime = 0;
 		for (RouteSegmentResult r : result) {
 			totalRoutingTime += r.getRoutingTime();
@@ -550,7 +550,7 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private static void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
+	private void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
 		if (res.getStartPointIndex() != res.getEndPointIndex()) {
 			if (result.size() > 0) {
 				RouteSegmentResult last = result.get(result.size() - 1);
@@ -564,7 +564,7 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private static boolean combineTwoSegmentResult(RouteSegmentResult toAdd, RouteSegmentResult previous, 
+	private boolean combineTwoSegmentResult(RouteSegmentResult toAdd, RouteSegmentResult previous, 
 			boolean reverse) {
 		boolean ld = previous.getEndPointIndex() > previous.getStartPointIndex();
 		boolean rd = toAdd.getEndPointIndex() > toAdd.getStartPointIndex();

@@ -5648,4 +5648,21 @@
     <string name="routing_type_a_star_2_phase">A* 2-faset</string>
     <string name="shared_sting_all_colors">Alle farver</string>
     <string name="lang_ta_in">Tamilsk (Indien)</string>
+    <string name="release_4_7">• Nyt \"Speedometer\"-modul kompatibelt med Android Auto
+\n
+\n • Konfigurér kortskærmen ved at tilføje flere \"Hurtig handling\"-knapper
+\n
+\n • Forbedret læsbarhed af data i grafer
+\n
+\n • Tilføjet filtre efter sensordata til spor
+\n
+\n • Tilføjet understøttelse af yderligere GPX-tags
+\n
+\n • Tilpas \"Afstand under navigation\": Vælg mellem præcise eller afrundede tal.
+\n
+\n • Samlet brugergrænseflade til valg af spor
+\n
+\n • OpenStreetMap-login ændret til OAuth 2.0
+\n
+\n</string>
 </resources>

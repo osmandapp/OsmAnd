@@ -271,7 +271,7 @@ public class HHRouteDataStructure {
 				p.markSegmentsNotLoaded();
 			}
 		}
-		
+
 		public void clearVisited() {
 			queue(false).clear();
 			queue(true).clear();

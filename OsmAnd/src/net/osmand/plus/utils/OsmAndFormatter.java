@@ -170,23 +170,18 @@ public class OsmAndFormatter {
 				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
 	}
 
-	public static Date getStartOfToday() {
-		return getStartOfToday("GMT");
+	public static long getStartOfToday() {
+		return getStartOfDayForTime(System.currentTimeMillis());
 	}
 
-	public static Date getStartOfToday(@NonNull String timeZoneStr) {
-		return getStartOfDayForDate(new Date(), timeZoneStr);
-	}
-
-	public static Date getStartOfDayForDate(@NonNull Date date, @NonNull String timeZoneStr) {
+	public static long getStartOfDayForTime(long time) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(date.getTime());
+		calendar.setTimeInMillis(time);
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.setTimeZone(TimeZone.getTimeZone(timeZoneStr));
-		return new Date(calendar.getTimeInMillis());
+		return calendar.getTimeInMillis();
 	}
 
 	public static Date getTimeForTimeZone(long time, @NonNull String timeZone) {

@@ -530,6 +530,7 @@ public class GPXUtilities {
 			this.desc = pt.desc;
 			this.name = pt.name;
 			this.category = pt.category;
+
 			String color = pt.extensions.get(COLOR_NAME_EXTENSION);
 			if (color != null) {
 				setColor(color);
@@ -770,14 +771,17 @@ public class GPXUtilities {
 
 	public static class PointsGroup {
 
+		public static final String DEFAULT_WPT_GROUP_NAME = "";
+
 		public String name;
 		public String iconName;
 		public String backgroundType;
 		public List<WptPt> points = new ArrayList<>();
 		public int color;
+		public boolean hidden;
 
 		public PointsGroup(String name) {
-			this.name = name != null ? name : "";
+			this.name = name != null ? name : DEFAULT_WPT_GROUP_NAME;
 		}
 
 		public PointsGroup(String name, String iconName, String backgroundType, int color) {
@@ -794,13 +798,21 @@ public class GPXUtilities {
 			this.backgroundType = point.getBackgroundType();
 		}
 
-		@Override
-		public int hashCode() {
-			return Algorithms.hash(name, iconName, backgroundType, color, points);
-		}
-
 		public void setName(String name) {
 			this.name = name;
+		}
+
+		public boolean isHidden() {
+			return hidden;
+		}
+
+		public void setHidden(boolean hidden) {
+			this.hidden = hidden;
+		}
+
+		@Override
+		public int hashCode() {
+			return Algorithms.hash(name, iconName, backgroundType, color, points, hidden);
 		}
 
 		@Override
@@ -817,7 +829,8 @@ public class GPXUtilities {
 					&& Algorithms.objectEquals(points, that.points)
 					&& Algorithms.stringsEqual(name, that.name)
 					&& Algorithms.stringsEqual(iconName, that.iconName)
-					&& Algorithms.stringsEqual(backgroundType, that.backgroundType);
+					&& Algorithms.stringsEqual(backgroundType, that.backgroundType)
+					&& Algorithms.objectEquals(hidden, that.hidden);
 		}
 
 		public StringBundle toStringBundle() {
@@ -833,6 +846,9 @@ public class GPXUtilities {
 			if (!Algorithms.isEmpty(backgroundType)) {
 				bundle.putString(BACKGROUND_TYPE_EXTENSION, backgroundType);
 			}
+			if (isHidden()) {
+				bundle.putBoolean(HIDDEN_EXTENSION, true);
+			}
 			return bundle;
 		}
 
@@ -842,6 +858,7 @@ public class GPXUtilities {
 			category.color = parseColor(parser.getAttributeValue("", "color"), 0);
 			category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION);
 			category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION);
+			category.hidden = Boolean.valueOf(parser.getAttributeValue("", HIDDEN_EXTENSION));
 			return category;
 		}
 	}

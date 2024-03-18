@@ -73,7 +73,8 @@ public class PointsGroupsCard extends MapBaseCard {
 			item.contentDescription = categoryDisplayName;
 			item.tag = group;
 			item.onAfterViewBoundCallback = (chip, holder) -> {
-				if (selectedGpxFile.isGroupHidden(chip.id)) {
+				GpxDisplayGroup displayGroup = (GpxDisplayGroup) chip.tag;
+				if (selectedGpxFile.isGroupHidden(displayGroup.getName())) {
 					Drawable image = getColoredIcon(R.drawable.ic_action_hide_16, iconColorId);
 					holder.image.setImageDrawable(image);
 					holder.image.setVisibility(View.VISIBLE);

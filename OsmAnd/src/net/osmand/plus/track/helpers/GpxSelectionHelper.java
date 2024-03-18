@@ -18,6 +18,7 @@ import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -41,14 +42,11 @@ import org.json.JSONObject;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GpxSelectionHelper {
@@ -254,9 +252,9 @@ public class GpxSelectionHelper {
 							save = true;
 							GpxSelectionParams params = GpxSelectionParams.newInstance()
 									.showOnMap().syncGroup().setSelectedByUser(selectedByUser);
-							SelectedGpxFile file = selectGpxFile(gpx, params);
+							selectGpxFile(gpx, params);
 							if (obj.has(HIDDEN_GROUPS)) {
-								readHiddenGroups(file, obj.getString(HIDDEN_GROUPS));
+								readHiddenGroups(gpx, obj.getString(HIDDEN_GROUPS));
 							}
 						}
 						gpx.addGeneralTrack();
@@ -276,31 +274,27 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	private String saveHiddenGroups(SelectedGpxFile selectedGpxFile) {
-		StringBuilder stringBuilder = new StringBuilder();
-		Iterator<String> it = selectedGpxFile.hiddenGroups.iterator();
-		while (it.hasNext()) {
-			String name = it.next();
-			stringBuilder.append(name != null ? name : " ");
-			if (it.hasNext()) {
-				stringBuilder.append(",");
+	@NonNull
+	private String saveHiddenGroups(@NonNull GPXFile gpxFile) {
+		StringBuilder builder = new StringBuilder();
+		for (PointsGroup group : gpxFile.getPointsGroups().values()) {
+			if (group.isHidden()) {
+				if (builder.length() > 0) {
+					builder.append(",");
+				}
+				builder.append(Algorithms.isEmpty(group.name) ? " " : group.name);
 			}
 		}
-		return stringBuilder.toString();
+		return builder.toString();
 	}
 
-	public void readHiddenGroups(SelectedGpxFile selectedGpxFile, String text) {
-		StringTokenizer toks = new StringTokenizer(text, ",");
-		Set<String> res = new HashSet<>();
-		while (toks.hasMoreTokens()) {
-			String token = toks.nextToken();
-			if (!Algorithms.isBlank(token)) {
-				res.add(token);
-			} else {
-				res.add(null);
-			}
+	public void readHiddenGroups(@NonNull GPXFile gpxFile, @NonNull String text) {
+		List<String> names = Arrays.asList(text.split(","));
+
+		for (PointsGroup group : gpxFile.getPointsGroups().values()) {
+			String key = Algorithms.isEmpty(group.name) ? " " : group.name;
+			group.setHidden(names.contains(key));
 		}
-		selectedGpxFile.hiddenGroups = res;
 	}
 
 	private void saveGpxToHistory(@NonNull GPXFile gpx) {
@@ -312,25 +306,26 @@ public class GpxSelectionHelper {
 	}
 
 	private void saveCurrentSelections() {
-		JSONArray ar = new JSONArray();
-		for (SelectedGpxFile s : selectedGPXFiles) {
-			if (s.gpxFile != null && !s.notShowNavigationDialog) {
+		JSONArray array = new JSONArray();
+		for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+			if (!selectedGpxFile.notShowNavigationDialog) {
 				JSONObject obj = new JSONObject();
 				try {
-					if (s.isShowCurrentTrack()) {
+					if (selectedGpxFile.isShowCurrentTrack()) {
 						obj.put(CURRENT_TRACK, true);
-					} else if (!Algorithms.isEmpty(s.gpxFile.path)) {
-						obj.put(FILE, s.gpxFile.path);
-						if (s.gpxFile.getColor(0) != 0) {
-							obj.put(COLOR, Algorithms.colorToString(s.gpxFile.getColor(0)));
+					} else if (!Algorithms.isEmpty(gpxFile.path)) {
+						obj.put(FILE, gpxFile.path);
+						if (gpxFile.getColor(0) != 0) {
+							obj.put(COLOR, Algorithms.colorToString(gpxFile.getColor(0)));
 						}
-						obj.put(HIDDEN_GROUPS, saveHiddenGroups(s));
+						obj.put(HIDDEN_GROUPS, saveHiddenGroups(gpxFile));
 					}
-					obj.put(SELECTED_BY_USER, s.selectedByUser);
+					obj.put(SELECTED_BY_USER, selectedGpxFile.selectedByUser);
 				} catch (JSONException e) {
 					log.error(e);
 				}
-				ar.put(obj);
+				array.put(obj);
 			}
 		}
 		for (Map.Entry<GPXFile, Long> entry : selectedGpxFilesBackUp.entrySet()) {
@@ -345,13 +340,13 @@ public class GpxSelectionHelper {
 					obj.put(SELECTED_BY_USER, true);
 					obj.put(BACKUP, true);
 					obj.put(BACKUP_MODIFIED_TIME, entry.getValue());
-					ar.put(obj);
+					array.put(obj);
 				} catch (JSONException e) {
 					log.error(e);
 				}
 			}
 		}
-		app.getSettings().SELECTED_GPX.set(ar.toString());
+		app.getSettings().SELECTED_GPX.set(array.toString());
 	}
 
 	public SelectedGpxFile selectGpxFile(@NonNull GPXFile gpx, @NonNull GpxSelectionParams params) {

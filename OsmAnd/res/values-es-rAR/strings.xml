@@ -5659,4 +5659,21 @@
     <string name="routing_type">Tipo de navegación</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="shared_sting_all_colors">Todos los colores</string>
+    <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto
+\n
+\n• Configura la pantalla añadiendo varios botones de «Acción rápida»
+\n
+\n• Mejora de legibilidad de los datos en los gráficos
+\n
+\n• Se añadieron filtros de datos del sensor para las trazas
+\n
+\n• Ahora se admiten etiquetas GPX adicionales
+\n
+\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados
+\n
+\n• Interfaz de usuario unificada para la selección de trazas
+\n
+\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2
+\n
+\n</string>
 </resources>

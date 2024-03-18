@@ -102,9 +102,9 @@
     <string name="set_time">Podesite vreme</string>
     <string name="set_time_description">Podesite vreme za koji će izabrani kontakti i grupe videti vašu lokaciju u realnom vremenu.</string>
     <string name="visible_time_for_all">Vidljivo vreme za sve</string>
-    <string name="hours_format">%1$ č</string>
-    <string name="minutes_format">%1$ m</string>
-    <string name="hours_and_minutes_format">%1$ č %2$ m</string>
+    <string name="hours_format">%1$d č\'</string>
+    <string name="minutes_format">%1$d m\'</string>
+    <string name="hours_and_minutes_format">%1$d č %2$d m\'</string>
     <string name="set_visible_time_for_all">Podesite vidljivo vreme za sve</string>
     <string name="enter_authentication_code">Unesite kod za validaciju</string>
     <string name="enter_phone_number">Unesite broj telefona</string>
@@ -130,7 +130,7 @@
     <string name="location_history_desc">Sakrijte kontakte koji se nisu pomerili u datom vremenu.</string>
     <string name="osmand_connect">Osmand veza</string>
     <string name="osmand_connect_desc">Odaberite verziju OsmAnda koju OsmAnd pratioc koristi za prikazivanje pozicija.</string>
-    <string name="in_time">u %1$</string>
+    <string name="in_time">u %1$s</string>
     <string name="shared_string_account">Nalog</string>
     <string name="connected_account">Povezani nalog</string>
     <string name="logout_help_desc">Kako isključiti OsmAnd pratioca iz Telegrama</string>
@@ -142,7 +142,7 @@
     <string name="time_ago">pre</string>
     <string name="turn_off_all">Isključi sve</string>
     <string name="disable_all_sharing">Onemogući svako deljenje</string>
-    <string name="disable_all_sharing_desc">Isključuje deljenje lokacije prema svim izabranim čatovima (%1$).</string>
+    <string name="disable_all_sharing_desc">Isključuje deljenje lokacije prema svim izabranim čatovima (%1$d).</string>
     <string name="choose_osmand">Izaberite verziju OsmAnda koju želite da koristite</string>
     <string name="choose_osmand_desc">Izaberite verziju OsmAnda gde će se kontakti prikazati na mapi.</string>
     <string name="shared_string_sort_by">Sortiraj po</string>
@@ -156,7 +156,7 @@
     <string name="add_device">Dodajte uređaj</string>
     <string name="no_internet_connection">Nema internet konekcije</string>
     <string name="no_gps_connection">Nema GPS veze</string>
-    <string name="location_sharing_status">Deljenje: %1$</string>
+    <string name="location_sharing_status">Deljenje: %1$s</string>
     <string name="sharing_status">Deljenje statusa</string>
     <string name="last_available_location">Poslednja dostupna lokacija</string>
     <string name="re_send_location">Ponovo pošalji lokaciju</string>
@@ -177,13 +177,13 @@
     <string name="successfully_sent_and_updated">Uspešno poslato i ažurirano</string>
     <string name="last_updated_location">Poslednja ažurirana lokacija:</string>
     <string name="share_location_as_description">Ako želite da povežete više uređaja sa jednim nalogom telegrama, trebate koristiti drugi uređaj da bi delili vašu lokaciju.</string>
-    <string name="share_location_as_description_second_line">Možete da kreirate i vidite ID uređaja u telegram klijentu koristeći %1$ čat bot. %2$</string>
+    <string name="share_location_as_description_second_line">Možete da kreirate i vidite ID uređaja u telegram klijentu koristeći %1$s čat bot. %2$s</string>
     <string name="device_name">Ime uređaja</string>
     <string name="device_name_cannot_be_empty">Ime uređaja ne može biti prazno</string>
     <string name="device_name_is_too_long">Ime uređaja predugo</string>
     <string name="enter_device_name_description">Imenujte vaš novi uređaj sa maksimalno 200 simbola.</string>
     <string name="error_adding_new_device">Nije moguće dodati novi uređaj</string>
-    <string name="device_added_successfully">%1$ dodato.</string>
+    <string name="device_added_successfully">%1$s dodato.</string>
     <string name="enter_another_device_name">Izaberite ime koje niste već koristili</string>
     <string name="last_update_from_telegram">Poslednje ažuriranje od Telegrama</string>
     <string name="map_and_text">Mapa i tekst</string>
@@ -200,12 +200,12 @@
     <string name="gps_points">GPS tačke</string>
     <string name="shared_string_collected">Prikupljeno</string>
     <string name="shared_string_date">Datum</string>
-    <string name="points_size">%1$ tačaka</string>
-    <string name="gps_points_in_buffer">poslato (%1$ u baferu)</string>
+    <string name="points_size">%1$d tačaka\'</string>
+    <string name="gps_points_in_buffer">poslato (%1$d u baferu)</string>
     <string name="please_update_osmand">Ažurirajte OsmAnd da biste videli podatke na mapi</string>
     <string name="show_gps_points_descr">Prikaži količinu prikupljenih i poslatih GPS tačaka.</string>
     <string name="show_gps_points">Pokaži GPS tačke</string>
-    <string name="received_gps_points">Primljene GPKS tačke: %1$</string>
+    <string name="received_gps_points">Primljene GPKS tačke: %1$s</string>
     <string name="how_it_works">Kako radi</string>
     <string name="osmand_privacy_policy">OsmAnd politika privatnosti</string>
     <string name="telegram_privacy_policy">Politika privatnosti Telegrama</string>
@@ -262,10 +262,10 @@
     <string name="shared_string_suggested">Predloženo</string>
     <string name="back_to_osmand">Povratak na OsmAnd</string>
     <string name="duration_ago">Pre %1$s</string>
-    <string name="last_response_duration">Poslednji odgovor: pre %1$</string>
-    <string name="last_update_from_telegram_duration">Poslednje ažuriranje iz Telegrama: pre %1$</string>
-    <string name="last_response_date">Poslednji odgovor: %1$</string>
-    <string name="last_update_from_telegram_date">Poslednje ažuriranje iz Telegrama: %1$</string>
+    <string name="last_response_duration">Poslednji odgovor: pre %1$s</string>
+    <string name="last_update_from_telegram_duration">Poslednje ažuriranje iz Telegrama: pre %1$s</string>
+    <string name="last_response_date">Poslednji odgovor: %1$s</string>
+    <string name="last_update_from_telegram_date">Poslednje ažuriranje iz Telegrama: %1$s</string>
     <string name="shared_string_error_short">Greška</string>
     <string name="shared_string_export">Izvezi</string>
     <string name="logcat_buffer">Logcat bufer</string>
@@ -274,4 +274,9 @@
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="location_source">Izvor dobavljanja lokacija</string>
+    <string name="location_source_summary">OsmAnd instaliran iz Gugl Pleja podrazumevano upotrebljava Gugl Plej servise da bi odredio lokaciju.
+\n
+\nAko dobijete netačnu informaciju lokacije ili upotrebom uređaja bez Gugl Plej servisa, probajte da prebacite na API androida</string>
+    <string name="send_live_location_error">Pošalji grešku lokacije uživo: %1$s</string>
+    <string name="shared_string_error">Greška</string>
 </resources>

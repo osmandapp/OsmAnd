@@ -191,7 +191,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
-		timeSlider.setStepSize(today ? 1 : 3);
+		timeSlider.setStepSize(today ? 0.2f : 0.6f);
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
@@ -241,9 +241,11 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	public void updateSelectedDate(@Nullable Date date) {
+		plugin.setForecastDate(date);
+		if (date != null)
+			date.setTime(WeatherUtils.roundForecastTimeToHour(date.getTime()));
 		checkDateOffset(date);
 		widgetsPanel.setSelectedDate(date);
-		plugin.setForecastDate(date);
 		requireMapActivity().refreshMap();
 	}
 

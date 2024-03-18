@@ -4656,7 +4656,7 @@
     <string name="rendering_attr_hideMilitaryAreas_name">Ocultar áreas militares</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ocultar áreas militares, normalmente de acesso proibido a civis</string>
     <string name="explore_plans">Explorar planos</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Toque no widget para alterar o modo.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Toque no widget para mudar de modo.</string>
     <string name="map_widget_time_to_destination">Tempo até ao destino</string>
     <string name="map_widget_time_to_intermediate">Tempo até ao ponto intermédio</string>
     <string name="map_widget_distance_to_intermediate">Distância até ao ponto intermédio</string>
@@ -5011,7 +5011,7 @@
     <string name="x_axis">Eixo X</string>
     <string name="share_as_file">Partilhar como ficheiro</string>
     <string name="value_downloaded_of_mb">A descarregar %1$.1f/%2$.1f MB</string>
-    <string name="skip_download">Ignorar descarregamento</string>
+    <string name="skip_download">Ignorar descarga</string>
     <string name="determine_location">Permita-nos determinar a sua localização</string>
     <string name="share_link">Partilhar a ligação</string>
     <string name="sound_beep_complex">Bipe: complexo</string>
@@ -5356,7 +5356,7 @@
     <string name="help_article_navigation_routing_public_transport_navigation_name">Roteamento de transporte público</string>
     <string name="send_logcat_log_descr">Ficheiro de registo detalhado</string>
     <string name="shared_string_cache">Cache</string>
-    <string name="average_glide_time_interval_desc">Especifique o intervalo de tempo para cálculo da média do planar.</string>
+    <string name="average_glide_time_interval_desc">Especificar o intervalo de tempo para o cálculo da média do deslizamento.</string>
     <string name="key_event_action_previous_app_profile">Perfil da aplicação anterior</string>
     <string name="show_toast_about_key_pressed">Mostrar notificação do sistema sobre a tecla pressionada</string>
     <string name="help_article_search_search_coordinates_name">Pesquisar coordenadas</string>
@@ -5376,7 +5376,7 @@
     <string name="widget_available_ram_desc">Mostra a memória disponível atribuída ao OsmAnd.</string>
     <string name="press_button_to_link_with_action">Pressione o botão no seu dispositivo para vinculá-lo à ação: %1$s</string>
     <string name="contact_us">Contacte-nos</string>
-    <string name="glide_ratio_to_target">Rácio de planar para o alvo</string>
+    <string name="glide_ratio_to_target">Rácio de deslizamento até ao objetivo</string>
     <string name="deletion_error">Erro ao eliminar</string>
     <string name="sort_size_descending">Tamanho grande primeiro</string>
     <string name="smart_folder_saved">Pasta inteligente guardada</string>
@@ -5399,7 +5399,7 @@
     <string name="folder">Pasta</string>
     <string name="delete_all_items">Eliminar todos os itens</string>
     <string name="change_key_binding">Alterar vinculação das teclas</string>
-    <string name="average_glide_ratio">Rácio médio de planar</string>
+    <string name="average_glide_ratio">Rácio de deslizamento médio</string>
     <string name="shared_string_created">Criado</string>
     <string name="free_versions">Versões gratuitas</string>
     <string name="open_issue_on_github_descr">Faça perguntas, sugira funcionalidades</string>
@@ -5451,7 +5451,7 @@
     <string name="add_new_type">Adicionar novo tipo</string>
     <string name="wikipedia_and_travel_maps">Wikipédia e mapas de viagens</string>
     <string name="key_event_action_move_up">Mover para cima</string>
-    <string name="map_widget_group_glide_desc">Os widgets mostram o rácio de planar em relação ao alvo ou o rácio de planar médio para a viagem atual.</string>
+    <string name="map_widget_group_glide_desc">Os widgets mostram a relação de deslizamento para o objetivo ou a relação de deslizamento média para a viagem atual.</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d trilho)</item>
         <item quantity="many">%1$d (%2$d trilhos)</item>
@@ -5462,7 +5462,7 @@
     <string name="help_article_navigation_setup_gpx_navigation_name">Navegar por trilho</string>
     <string name="help_article_navigation_routing_online_routing_name">Roteamento online</string>
     <string name="help_article_map_map_context_menu_name">Menu de contexto do mapa</string>
-    <string name="map_widget_glide_average_desc">Mostra o rácio de planar médio para o intervalo definido.</string>
+    <string name="map_widget_glide_average_desc">Mostra o rácio de deslizamento médio para o intervalo definido.</string>
     <string name="add_smart_folder">Adicionar pasta inteligente</string>
     <string name="empty_name">Nome vazio</string>
     <string name="edit_filter">Editar filtro</string>
@@ -5479,14 +5479,14 @@
     <string name="live_monitoring_adress_descr">Especificar o endereço web com a sintaxe de parâmetros lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="help_article_map_legend_nautical_map_name">Estilo de mapa náutico</string>
     <string name="discard_filter_changes">Descartar alterações do filtro</string>
-    <string name="map_widget_group_glide_ratio">Rácio de planar</string>
+    <string name="map_widget_group_glide_ratio">Rácio de deslizamento</string>
     <string name="app_mode_hang_gliding">Asa-delta</string>
     <string name="key_event_action_zoom_out">Afastar</string>
     <string name="key_event_action_toggle_drower">Mostrar / ocultar menu lateral</string>
     <string name="help_article_plan_route_name">Planear rota</string>
     <string name="save_as_smart_folder">Guardar como pasta inteligente</string>
     <string name="help_article_widgets_map_buttons_name">Botões do mapa</string>
-    <string name="map_widget_glide_target_desc">Mostra o rácio de planar necessário para atingir o ponto alvo.</string>
+    <string name="map_widget_glide_target_desc">Mostra a razão de planeio necessária para atingir o objetivo.</string>
     <string name="weather_online">Previsão meteorológica online</string>
     <string name="help_article_map_track_context_menu_name">Menu de contexto de trilhos</string>
     <string name="date_of_creation">Data da criação</string>
@@ -5571,7 +5571,7 @@
     <string name="rendering_attr_showToll_description">Mostrar restrições de portagens nas estradas</string>
     <string name="zoom_non_animated">Ampliação não animada</string>
     <string name="key_assignments_already_cleared_message">Já foram eliminadas todas as atribuições de teclas</string>
-    <string name="target_elevation">Elevação do alvo</string>
+    <string name="target_elevation">Elevação do objetivo</string>
     <string name="remove_widget_first">Remova o widget primeiro</string>
     <string name="lang_zh_hant">Chinês tradicional</string>
     <string name="add_row">Adicionar linha</string>
@@ -5644,6 +5644,25 @@
     <string name="shared_sting_all_colors">Todas as cores</string>
     <string name="routing_type_a_star_classic">A* clássico</string>
     <string name="auto_zoom_discrete">Discreto</string>
-    <string name="auto_zoom">Amplificação automática</string>
-    <string name="java_safe">Java (Seguro)</string>
+    <string name="auto_zoom">Ampliação automática</string>
+    <string name="java_safe">Java (seguro)</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="lang_ta_in">Tâmil (Índia)</string>
+    <string name="release_4_7">- Novo widget \"Velocímetro\" compatível com Android Auto
+\n
+\n - Configuração do ecrã do mapa adicionando vários botões de \"Ação rápida\"
+\n
+\n - Melhoria da legibilidade dos dados nos gráficos
+\n
+\n - Adicionados filtros por dados do sensor para trilhos
+\n
+\n - Adicionado suporte para etiquetas GPX adicionais
+\n
+\n - Personalização da \"Distância durante a navegação\": escolha entre números exatos ou arredondados
+\n
+\n - Interface unificada para seleção de trilhos
+\n
+\n - Início de sessão do OpenStreetMap alterado para OAuth 2.0
+\n
+\n</string>
 </resources>

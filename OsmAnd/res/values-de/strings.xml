@@ -4612,7 +4612,7 @@
     <string name="average_speed_time_interval_desc">Gib das Zeitintervall für die Durchschnittsberechnung der Geschwindigkeit an.</string>
     <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Reise an.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tippe auf das Widget, um die Modi zu wechseln.</string>
     <string name="rendering_attr_weatherPressureContours_name">Isobaren</string>
     <string name="routing_attr_avoid_fords_description">Furten vermeiden</string>
     <string name="distance_circles">Entfernungskreise</string>
@@ -5014,7 +5014,7 @@
     <string name="share_as_file">Als Datei teilen</string>
     <string name="value_downloaded_of_mb">Herunterladen von %1$.1f/%2$.1f MB</string>
     <string name="skip_download">Download überspringen</string>
-    <string name="determine_location">Erlaube Sie uns, Ihnren Standort zu ermitteln</string>
+    <string name="determine_location">Erlauben Sie uns, Ihren Standort zu ermitteln</string>
     <string name="share_link">Link teilen</string>
     <string name="sound_beep_simple">Signalton: einfach</string>
     <string name="sound_beep_minimal">Signalton: minimal</string>
@@ -5647,4 +5647,21 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
+    <string name="release_4_7">• Neues \"Tachometer\"-Widget, kompatibel mit Android Auto
+\n
+\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer \"Schnellaktions\"-Tasten
+\n
+\n• Verbesserte Lesbarkeit der Daten in Diagrammen
+\n
+\n• Hinzugefügte Filter nach Sensordaten für Strecken
+\n
+\n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
+\n
+\n• Anpassen der \"Distanz während der Navigation\": Wahl zwischen präzisen oder gerundeten Zahlen
+\n
+\n• Vereinheitlichte Benutzeroberfläche für die Streckenauswahl
+\n
+\n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
+\n
+\n</string>
 </resources>

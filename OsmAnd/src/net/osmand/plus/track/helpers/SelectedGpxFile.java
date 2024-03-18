@@ -3,13 +3,14 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -21,9 +22,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class SelectedGpxFile {
@@ -34,7 +33,6 @@ public class SelectedGpxFile {
 	protected GPXFile gpxFile;
 	protected GPXTrackAnalysis trackAnalysis;
 
-	protected Set<String> hiddenGroups = new HashSet<>();
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 	protected List<GpxDisplayGroup> displayGroups;
 
@@ -233,24 +231,19 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public Set<String> getHiddenGroups() {
-		return Collections.unmodifiableSet(hiddenGroups);
-	}
-
 	public int getHiddenGroupsCount() {
-		return hiddenGroups.size();
+		int counter = 0;
+		for (PointsGroup group : new ArrayList<>(gpxFile.getPointsGroups().values())) {
+			if (group.isHidden()) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
-	public void addHiddenGroups(@Nullable String group) {
-		hiddenGroups.add(Algorithms.isBlank(group) ? null : group);
-	}
-
-	public void removeHiddenGroups(@Nullable String group) {
-		hiddenGroups.remove(Algorithms.isBlank(group) ? null : group);
-	}
-
-	public boolean isGroupHidden(@Nullable String group) {
-		return hiddenGroups.contains(Algorithms.isBlank(group) ? null : group);
+	public boolean isGroupHidden(@Nullable String name) {
+		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(name != null ? name : "");
+		return pointsGroup != null && pointsGroup.isHidden();
 	}
 
 	@NonNull

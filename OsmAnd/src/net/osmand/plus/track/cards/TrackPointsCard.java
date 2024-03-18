@@ -318,11 +318,6 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	}
 
 	@Override
-	public void onPointsDeletionStarted() {
-
-	}
-
-	@Override
 	public void onPointsDeleted() {
 		updateGroups();
 		update();

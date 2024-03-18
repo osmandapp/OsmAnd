@@ -303,6 +303,12 @@
 	<color name="white_50_transparent">#8FFF</color>
 	<color name="white_80_transparent">#CFFF</color>
 
+	<!-- Chart -->
+	<color name="chart_axis_grid_line_light">#D8D7DB</color>
+	<color name="chart_axis_grid_line_dark">#3F3D43</color>
+	<color name="chart_axis_x_grid_line_light">#BEBCC2</color>
+	<color name="chart_axis_x_grid_line_dark">#595959</color>
+
 	<color name="gpx_chart_blue">#2f7af5</color>
 	<color name="gpx_chart_orange">#ff8800</color>
 	<color name="gpx_chart_red">#ff0000</color>

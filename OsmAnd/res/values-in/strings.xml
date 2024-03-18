@@ -5647,4 +5647,21 @@
     <string name="auto_zoom">Perbesaran otomatis</string>
     <string name="shared_sting_all_colors">Semua warna</string>
     <string name="lang_ta_in">Tamil (India)</string>
+    <string name="release_4_7">• Widget \"Speedometer\" baru kompatibel dengan Android Auto
+\n
+\n• Atur layar peta dengan menambahkan beberapa tombol \"Tindakan Cepat\"
+\n
+\n• Peningkatan keterbacaan data dalam grafik
+\n
+\n• Menambahkan filter berdasarkan data sensor untuk trek
+\n
+\n• Menambahkan dukungan untuk tag GPX tambahan
+\n
+\n• Sesuaikan \"Jarak selama navigasi\": pilih antara angka yang tepat atau angka yang dibulatkan
+\n
+\n• UI terpadu untuk pemilihan trek
+\n
+\n• Login OpenStreetMap dialihkan ke OAuth 2.0
+\n
+\n</string>
 </resources>

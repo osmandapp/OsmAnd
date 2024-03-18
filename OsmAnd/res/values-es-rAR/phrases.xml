@@ -4862,4 +4862,7 @@
     <string name="poi_music_venue">Sala de música;Sala de conciertos</string>
     <string name="poi_live_music_yes">Sí</string>
     <string name="poi_cuisine_fish">Pescado</string>
+    <string name="poi_indoor_seating_bar_table">Asientos en interior: mesa del bar</string>
+    <string name="poi_indoor_seating_yes">Asientos en interior: sí</string>
+    <string name="poi_indoor_seating_no">Asientos en interior: No</string>
 </resources>
