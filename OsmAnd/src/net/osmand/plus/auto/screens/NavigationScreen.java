@@ -105,8 +105,10 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		DefaultLifecycleObserver.super.onResume(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
 		if(navigationSession != null) {
-			SurfaceRenderer surfaceRenderer = getApp().getCarNavigationSession().getNavigationCarSurface();
-			surfaceRenderer.setCallback(this);
+			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+			if(surfaceRenderer != null) {
+				surfaceRenderer.setCallback(this);
+			}
 		}
 	}
 
@@ -115,8 +117,10 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		DefaultLifecycleObserver.super.onPause(owner);
 		NavigationSession navigationSession = getApp().getCarNavigationSession();
 		if(navigationSession != null) {
-			SurfaceRenderer surfaceRenderer = getApp().getCarNavigationSession().getNavigationCarSurface();
-			surfaceRenderer.setCallback(null);
+			SurfaceRenderer surfaceRenderer = navigationSession.getNavigationCarSurface();
+			if(surfaceRenderer != null) {
+				surfaceRenderer.setCallback(null);
+			}
 		}
 	}
 

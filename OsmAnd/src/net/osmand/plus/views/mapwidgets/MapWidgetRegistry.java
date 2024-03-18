@@ -53,7 +53,7 @@ public class MapWidgetRegistry {
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
 	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
-	private Map<WidgetsPanel, List<WidgetType>> bannedPanelWidgets = new HashMap<WidgetsPanel, List<WidgetType>>() {{
+	private final Map<WidgetsPanel, List<WidgetType>> bannedPanelWidgets = new HashMap<WidgetsPanel, List<WidgetType>>() {{
 		put(WidgetsPanel.RIGHT, Arrays.asList(WidgetType.CURRENT_SPEED));
 	}};
 
@@ -302,7 +302,8 @@ public class MapWidgetRegistry {
 	}
 
 	private boolean isWidgetBannedForPanel(@NonNull WidgetsPanel panel, @NonNull WidgetType widgetType) {
-		return bannedPanelWidgets.containsKey(panel) && bannedPanelWidgets.get(panel).contains(widgetType);
+		List<WidgetType> types = bannedPanelWidgets.get(panel);
+		return types != null && types.contains(widgetType);
 	}
 
 	@NonNull

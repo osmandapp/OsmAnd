@@ -99,9 +99,9 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
 		regWidgetVisibility(TIME_TO_DESTINATION, all);
-		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
+		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
 				TRUCK, MOTORCYCLE, HORSE, MOPED, TRAIN);
-		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE, MOPED);
+		regWidgetVisibility(MAX_SPEED, TRUCK, MOTORCYCLE, MOPED);
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
 		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);
