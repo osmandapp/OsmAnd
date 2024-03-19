@@ -1764,7 +1764,7 @@
     <string name="poi_diet_lactose_free_no">Laktosefrei: nein</string>
     <string name="poi_diet_pescetarian_yes">Pescetarismus</string>
     <string name="poi_outdoor_seating_yes">Sitzplätze im Freien: ja</string>
-    <string name="poi_outdoor_seating_no">Keine Sitzgelegenheiten im Freien</string>
+    <string name="poi_outdoor_seating_no">Keine Sitzplätze im Freien</string>
     <string name="poi_outdoor_seating_terrace">Sitzplätze im Freien: Terrasse</string>
     <string name="poi_outdoor_seating_sidewalk">Sitzplätze im Freien: Bürgersteig</string>
     <string name="poi_outdoor_seating_pedestrian_zone">Sitzplätze im Freien: Fußgängerzone</string>
@@ -2781,7 +2781,7 @@
     <string name="poi_backcountry">Wildnis-Campingplatz</string>
     <string name="poi_piste_difficulty">Pisten-Schwierigkeitsgrad</string>
     <string name="poi_theatre_genre">Genre</string>
-    <string name="poi_outdoor_seating">Sitzgelegenheiten im Freien</string>
+    <string name="poi_outdoor_seating">Sitzplätze im Freien</string>
     <string name="poi_fee">Gebühr</string>
     <string name="poi_smoking">Rauchen</string>
     <string name="poi_delivery">Lieferung</string>
@@ -3968,7 +3968,7 @@
     <string name="poi_contact_vhf">VHF</string>
     <string name="poi_contact_webcam">Webcam</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
-    <string name="poi_outdoor_seating_poi">Sitzgelegenheiten im Freien</string>
+    <string name="poi_outdoor_seating_poi">Sitzplätze im Freien</string>
     <string name="poi_authentication_none_yes">ja;Keine Authentifizierung</string>
     <string name="poi_authentication_none_no">Authentifizierung nicht erforderlich: nein</string>
     <string name="poi_authentication_short_message_text">Zur Authentifizierung verwendeter SMS Text</string>
