@@ -214,10 +214,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private void setupPreciseDistanceNumbersPref() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference preference = findPreference(settings.PRECISE_DISTANCE_NUMBERS.getId());
-		boolean isPreciseModeEnabled = settings.PRECISE_DISTANCE_NUMBERS.getModeValue(selectedMode);
-		preference.setTitle(getString(R.string.distance_during_navigation));
-		preference.setSummary(getString(isPreciseModeEnabled ? R.string.precise : R.string.round_up));
-		preference.setIcon(getActiveIcon(isPreciseModeEnabled ? DistanceDuringNavigationMode.PRECISE.iconId : DistanceDuringNavigationMode.ROUND_UP.iconId));
+		DistanceDuringNavigationMode enabledMode = settings.PRECISE_DISTANCE_NUMBERS.getModeValue(selectedMode) ? DistanceDuringNavigationMode.PRECISE : DistanceDuringNavigationMode.ROUND_UP;
+		preference.setSummary(getString(enabledMode.nameId));
+		preference.setIcon(getActiveIcon(enabledMode.iconId));
 	}
 
 	private void setupVolumeButtonsAsZoom() {

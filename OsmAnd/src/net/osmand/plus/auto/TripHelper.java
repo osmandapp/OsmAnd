@@ -22,6 +22,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
@@ -332,72 +333,30 @@ public class TripHelper {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS, mc);
 
-		return Distance.create(formattedValue.valueSrc, stringToUnit(app, formattedValue.unit));
-	}
-
-	@Distance.Unit
-	private static int stringToUnit(@NonNull OsmandApplication app, String unitInString) {
-		final String m = app.getString(R.string.m);
-		final String yard = app.getString(R.string.yard);
-		final String foot = app.getString(R.string.foot);
-		final String mile = app.getString(R.string.mile);
-		final String km = app.getString(R.string.km);
-		final String nm = app.getString(R.string.nm);
-
-		if (unitInString.equals(m)) {
-			return Distance.UNIT_METERS;
-		} else if (unitInString.equals(yard)) {
-			return Distance.UNIT_YARDS;
-		} else if (unitInString.equals(foot)) {
-			return Distance.UNIT_FEET;
-		} else if (unitInString.equals(mile) || unitInString.equals(nm)) {
-			return Distance.UNIT_MILES;
-		} else if (unitInString.equals(km)) {
-			return Distance.UNIT_KILOMETERS;
-		}
-		return Distance.UNIT_METERS;
+		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
 	}
 
 	public static Distance getDistance(@NonNull OsmandApplication app, double meters) {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		int displayUnit;
-		float mainUnitInMeters;
-		if (mc == KILOMETERS_AND_METERS) {
-			displayUnit = Distance.UNIT_KILOMETERS;
-			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			displayUnit = Distance.UNIT_MILES;
-			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
-		} else {
-			displayUnit = Distance.UNIT_MILES;
-			mainUnitInMeters = METERS_IN_ONE_MILE;
+		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.DEFAULT, mc);
+
+		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
+	}
+
+	@Distance.Unit
+	private static int getDistanceUnit(@StringRes int unitId) {
+		if (unitId == R.string.m) {
+			return Distance.UNIT_METERS;
+		} else if (unitId == R.string.yard) {
+			return Distance.UNIT_YARDS;
+		} else if (unitId == R.string.foot) {
+			return Distance.UNIT_FEET;
+		} else if (unitId == R.string.mile || unitId == R.string.nm) {
+			return Distance.UNIT_MILES;
+		} else if (unitId == R.string.km) {
+			return Distance.UNIT_KILOMETERS;
 		}
-		if (meters >= 100 * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (meters > 9.99f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (meters > 0.999f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else {
-			if (mc == KILOMETERS_AND_METERS || mc == MILES_AND_METERS) {
-				return Distance.create(meters,  Distance.UNIT_METERS);
-			} else if (mc == MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-				return Distance.create(meters * FEET_IN_ONE_METER, Distance.UNIT_FEET);
-			} else if (mc == MILES_AND_YARDS) {
-				return Distance.create(meters * YARDS_IN_ONE_METER, Distance.UNIT_YARDS);
-			}
-			return Distance.create(meters,  Distance.UNIT_METERS);
-		}
+		return Distance.UNIT_METERS;
 	}
 
 	private int getManeuverType(@NonNull TurnType turnType) {

@@ -657,12 +657,19 @@ public class OsmAndFormatter {
 	@NonNull
 	public static FormattedValue formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
 	                                         int decimalPlacesNumber, @NonNull OsmandApplication app) {
-		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
+
+		return formatValue(value, app.getString(unitId), unitId, forceTrailingZeroes, decimalPlacesNumber, app);
 	}
 
 	@NonNull
 	public static FormattedValue formatValue(float value, @NonNull String unit, boolean forceTrailingZeroes,
 	                                         int decimalPlacesNumber, @NonNull OsmandApplication app) {
+		return formatValue(value, unit, -1, forceTrailingZeroes, decimalPlacesNumber, app);
+	}
+
+	@NonNull
+	public static FormattedValue formatValue(float value, @NonNull String unit, @StringRes int unitId, boolean forceTrailingZeroes,
+											 int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		String pattern = "0";
 		if (decimalPlacesNumber > 0) {
 			char fractionDigitPattern = forceTrailingZeroes ? '0' : '#';
@@ -690,7 +697,7 @@ public class OsmAndFormatter {
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
 		String formattedValue = messageFormat.format(new Object[] {value})
 				.replace('\n', ' ');
-		return new FormattedValue(value, formattedValue, unit);
+		return new FormattedValue(value, formattedValue, unit, unitId, true);
 	}
 
 	public static boolean isSameDay(long firstTime, long secondTime) {
@@ -940,6 +947,7 @@ public class OsmAndFormatter {
 		public final String value;
 		public final String unit;
 		public final float valueSrc;
+		public final int unitId;
 
 		private final boolean separateWithSpace;
 
@@ -948,10 +956,15 @@ public class OsmAndFormatter {
 		}
 
 		public FormattedValue(float valueSrc, String value, String unit, boolean separateWithSpace) {
+			this(valueSrc, value, unit, -1, separateWithSpace);
+		}
+
+		public FormattedValue(float valueSrc, String value, String unit, @StringRes int unitId, boolean separateWithSpace) {
 			this.value = value;
 			this.valueSrc = valueSrc;
 			this.unit = unit;
 			this.separateWithSpace = separateWithSpace;
+			this.unitId = unitId;
 		}
 
 		@NonNull

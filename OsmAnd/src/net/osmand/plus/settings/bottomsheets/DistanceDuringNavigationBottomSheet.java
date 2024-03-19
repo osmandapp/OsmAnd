@@ -55,6 +55,8 @@ public class DistanceDuringNavigationBottomSheet extends BasePreferenceBottomShe
 		boolean isPreciseMode = preference.getModeValue(getAppMode());
 		ImageView previewIcon = rootView.findViewById(R.id.preview_icon);
 		previewIcon.setImageDrawable(uiUtilities.getActiveIcon(isPreciseMode ? R.drawable.ic_action_distance_number_precise : R.drawable.ic_action_distance_number_rounded, nightMode));
+		TextView descriptionView = rootView.findViewById(R.id.description);
+		descriptionView.setText(getString(R.string.distance_during_navigation_description, getString(R.string.precise), getString(R.string.round_up)));
 
 		setupModes(rootView);
 
