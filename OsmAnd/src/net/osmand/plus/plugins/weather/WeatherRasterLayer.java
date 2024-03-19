@@ -226,7 +226,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		cachedDateTime = dateTime;
 
 		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged)
-			requireTimePeriodChange = true;
+			provider = null;
 
 		return weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged;
 	}
