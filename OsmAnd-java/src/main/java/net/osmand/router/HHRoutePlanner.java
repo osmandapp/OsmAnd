@@ -23,11 +23,9 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -691,39 +689,23 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		}
 
 		public boolean contains(LatLon p) throws IOException {
-			int zoomToLoad = 14;
 			int x31 = MapUtils.get31TileNumberX(p.getLongitude());
-			int x = x31 >> zoomToLoad;
 			int y31 = MapUtils.get31TileNumberY(p.getLatitude());
-			int y = MapUtils.get31TileNumberY(p.getLatitude()) >> zoomToLoad;
-			boolean contains = false;
-			SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
-					(x + 1) << zoomToLoad, y << zoomToLoad, (y + 1) << zoomToLoad, null);
 			Set<String> checked = new HashSet<>();
 			for (int i = 0; i < regions.size(); i++) {
 				BinaryMapIndexReader rd = readers.get(i);
 				if (rd.containsRouteData()) {
-					for (RouteRegion reg : rd.getRoutingIndexes()) {
-						if (checked.contains(reg.getName())) {
-							continue;
-						}
-						checked.add(reg.getName());
-						List<RouteSubregion> res = rd.searchRouteIndexTree(request, reg.getSubregions());
-						if (!res.isEmpty()) {
-							contains = true;
-						}
+					if (rd.containsActualRouteData(x31, y31, checked)) {
+						return true;
 					}
 				} else {
 					HHRouteRegion reg = regions.get(i);
 					if (reg.top.contains(x31, y31)) {
-						contains = true;
+						return true;
 					}
 				}
-				if (contains) {
-					break;
-				}
 			}
-			return contains;
+			return false;
 		}
 	}
 

@@ -132,7 +132,11 @@ public class GeneralRouter implements VehicleRouter {
 		MOPED,
 		TRAIN,
 		PUBLIC_TRANSPORT,
-		HORSEBACKRIDING
+		HORSEBACKRIDING;
+		
+		public String getBaseProfile() {
+			return this.toString().toLowerCase();
+		}
 	}
 	
 	public enum RoutingParameterType {

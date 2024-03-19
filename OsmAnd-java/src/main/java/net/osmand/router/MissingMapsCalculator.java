@@ -15,10 +15,10 @@ import org.apache.commons.logging.Log;
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class MissingMapsCalculator {
@@ -27,13 +27,19 @@ public class MissingMapsCalculator {
 	public static final double DISTANCE_SPLIT = 50000;
 	private OsmandRegions or;
 	private BinaryMapIndexReader reader;
-	private List<String> keyNamesLocal = new ArrayList<String>();
+	private List<String> lastKeyNames ;
 
 	private static class Point {
 		List<String> regions;
 		long[] timestamps;
 		TreeSet<Long> timestampsUnique;
-
+	}
+	
+	private static class RegisteredMap {
+		BinaryMapIndexReader reader;
+		boolean standard;
+		long edition;
+		String downloadName;
 	}
 
 	public MissingMapsCalculator() throws IOException {
@@ -41,19 +47,24 @@ public class MissingMapsCalculator {
 		or = new OsmandRegions();
 		reader = or.prepareFile();
 	}
-
+	
 	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets)
 			throws IOException {
 		long tm = System.nanoTime();
+		lastKeyNames = new ArrayList<String>();
 		List<Point> pointsToCheck = new ArrayList<>();
-		String profile = ctx.getRouter().getProfile().toString().toLowerCase(); // use base profile
-		Map<String, Long> knownMaps = new TreeMap<>();
+		String profile = ctx.getRouter().getProfile().getBaseProfile(); // use base profile
+		Map<String, RegisteredMap> knownMaps = new TreeMap<>();
+		
 		for (BinaryMapIndexReader r : ctx.map.keySet()) {
+			RegisteredMap rmap = new RegisteredMap();
+			rmap.downloadName = Algorithms.getRegionName(r.getFile().getName());
+			rmap.reader = r;
+			rmap.standard = or.getRegionDataByDownloadName(rmap.downloadName) != null;
+			knownMaps.put(rmap.downloadName, rmap);
 			for (HHRouteRegion rt : r.getHHRoutingIndexes()) {
 				if (rt.profile.equals(profile)) {
-					for (RouteRegion p : r.getRoutingIndexes()) {
-						knownMaps.put(p.getName().toLowerCase(), rt.edition);
-					}
+					rmap.edition = rt.edition;
 				}
 			}
 		}
@@ -61,10 +72,10 @@ public class MissingMapsCalculator {
 		for (int i = 0; i < targets.size(); i++) {
 			LatLon s = i == 0 ? start : targets.get(i - 1);
 			end = targets.get(i);
-			split(knownMaps, s, end, pointsToCheck);
+			split(ctx, knownMaps, s, end, pointsToCheck);
 		}
 		if (end != null) {
-			addPoint(knownMaps, pointsToCheck, end);
+			addPoint(ctx, knownMaps, pointsToCheck, end);
 		}
 		Set<String> mapsToDownload = new TreeSet<String>();
 		Set<String> mapsToUpdate = new TreeSet<String>();
@@ -132,41 +143,60 @@ public class MissingMapsCalculator {
 		return l;
 	}
 
-	private void addPoint(Map<String, Long> knownMaps, List<Point> pointsToCheck, LatLon s) throws IOException {
-		or.getRegionsToDownload(s.getLatitude(), s.getLongitude(), keyNamesLocal);
-		Collections.sort(keyNamesLocal, new Comparator<String>() {
+	private void addPoint(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon s) throws IOException {
+		List<String> regions = new ArrayList<String>();
+		or.getRegionsToDownload(s.getLatitude(), s.getLongitude(), regions);
+		Collections.sort(regions, new Comparator<String>() {
 
 			@Override
 			public int compare(String o1, String o2) {
 				return -Integer.compare(o1.length(), o2.length());
 			}
 		});
-		if (pointsToCheck.size() == 0 || !pointsToCheck.get(pointsToCheck.size() - 1).regions.equals(keyNamesLocal)) {
+		if (pointsToCheck.size() == 0 || !regions.equals(lastKeyNames)) {
 			Point pnt = new Point();
-			pnt.regions = new ArrayList<String>(keyNamesLocal);
-			for (int i = 0; i < pnt.regions.size(); i++) {
-				String regionName = pnt.regions.get(i);
-				if (knownMaps.containsKey(regionName)) {
-					if (pnt.timestamps == null) {
-						pnt.timestamps = new long[pnt.regions.size()];
-						pnt.timestampsUnique = new TreeSet<Long>();
+			lastKeyNames = regions;
+			pnt.regions = new ArrayList<String>(regions);
+			addTimestamps(knownMaps, pnt);
+			if (pnt.timestamps == null) {
+				// check non-standard maps
+				int x31 = MapUtils.get31TileNumberX(s.getLongitude());
+				int y31 = MapUtils.get31TileNumberY(s.getLatitude());
+				for (RegisteredMap r : knownMaps.values()) {
+					if (!r.standard && r.edition > 0) {
+						if (r.reader.containsRouteData() && r.reader.containsActualRouteData(x31, y31, null)) {
+							pnt.regions.add(0, r.downloadName);
+						}
 					}
-					pnt.timestamps[i] = knownMaps.get(regionName);
-					pnt.timestampsUnique.add(pnt.timestamps[i]);
 				}
+				addTimestamps(knownMaps, pnt);
 			}
 			pointsToCheck.add(pnt);
 		}
 	}
+	
+	private void addTimestamps(Map<String, RegisteredMap> knownMaps, Point pnt) {
+		for (int i = 0; i < pnt.regions.size(); i++) {
+			String regionName = pnt.regions.get(i);
+			if (knownMaps.containsKey(regionName)) {
+				if (pnt.timestamps == null) {
+					pnt.timestamps = new long[pnt.regions.size()];
+					pnt.timestampsUnique = new TreeSet<Long>();
+				}
+				pnt.timestamps[i] = knownMaps.get(regionName).edition;
+				pnt.timestampsUnique.add(pnt.timestamps[i]);
+			}
+		}
+	}
 
-	private void split(Map<String, Long> knownMaps, LatLon s, LatLon e, List<Point> pointsToCheck) throws IOException {
+	private void split(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, LatLon s, LatLon e, List<Point> pointsToCheck) throws IOException {
 		if (MapUtils.getDistance(s, e) < DISTANCE_SPLIT) {
-			addPoint(knownMaps, pointsToCheck, s);
+			addPoint(ctx, knownMaps, pointsToCheck, s);
 			// pointsToCheck.add(e); // add only start end is separate
 		} else {
 			LatLon mid = MapUtils.calculateMidPoint(s, e);
-			split(knownMaps, s, mid, pointsToCheck);
-			split(knownMaps, mid, e, pointsToCheck);
+			split(ctx, knownMaps, s, mid, pointsToCheck);
+			split(ctx, knownMaps, mid, e, pointsToCheck);
 		}
 	}
 
