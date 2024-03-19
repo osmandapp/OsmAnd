@@ -40,13 +40,14 @@ public class RoutePlannerFrontEnd {
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
+	public static boolean CALCULATE_MISSING_MAPS = true;
 	static boolean TRACE_ROUTING = false;
-	
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
+	private static MissingMapsCalculator missingMapsCalculator;
 	
 
 	public RoutePlannerFrontEnd() {
@@ -862,6 +863,14 @@ public class RoutePlannerFrontEnd {
 			targets.addAll(intermediates);
 		}
 		targets.add(end);
+		if (CALCULATE_MISSING_MAPS) {
+			if (missingMapsCalculator == null) {
+				missingMapsCalculator = new MissingMapsCalculator();
+			}
+			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets)) {
+				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
+			}
+		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}

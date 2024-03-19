@@ -49,6 +49,7 @@ public class RouteCalculationProgress {
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
+	public List<WorldRegion> mapsToUpdate;
 	public List<WorldRegion> missingMaps;
 
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
