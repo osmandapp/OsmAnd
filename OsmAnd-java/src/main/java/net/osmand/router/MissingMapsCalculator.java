@@ -31,8 +31,8 @@ public class MissingMapsCalculator {
 
 	private static class Point {
 		List<String> regions;
-		long[] timestamps;
-		TreeSet<Long> timestampsUnique;
+		long[] hhEditions; // 0 means routing data present but no HH data, null means no data at all
+		TreeSet<Long> editionsUnique;
 	}
 	
 	private static class RegisteredMap {
@@ -48,7 +48,7 @@ public class MissingMapsCalculator {
 		reader = or.prepareFile();
 	}
 	
-	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets)
+	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
 			throws IOException {
 		long tm = System.nanoTime();
 		lastKeyNames = new ArrayList<String>();
@@ -72,7 +72,7 @@ public class MissingMapsCalculator {
 		for (int i = 0; i < targets.size(); i++) {
 			LatLon s = i == 0 ? start : targets.get(i - 1);
 			end = targets.get(i);
-			split(ctx, knownMaps, s, end, pointsToCheck);
+			split(ctx, knownMaps, pointsToCheck, s, end);
 		}
 		if (end != null) {
 			addPoint(ctx, knownMaps, pointsToCheck, end);
@@ -81,15 +81,15 @@ public class MissingMapsCalculator {
 		Set<String> mapsToUpdate = new TreeSet<String>();
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
-			if (p.timestamps == null) {
+			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
 					mapsToDownload.add(p.regions.get(0));
 				}
-			} else {
+			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
-					presentTimestamps = new TreeSet<Long>(p.timestampsUnique);
+					presentTimestamps = new TreeSet<Long>(p.editionsUnique);
 				} else if (!presentTimestamps.isEmpty()) {
-					presentTimestamps.retainAll(p.timestampsUnique);
+					presentTimestamps.retainAll(p.editionsUnique);
 				}
 			}
 		}
@@ -97,15 +97,15 @@ public class MissingMapsCalculator {
 		if (presentTimestamps != null && presentTimestamps.isEmpty()) {
 			long max = 0;
 			for (Point p : pointsToCheck) {
-				if (p.timestampsUnique != null) {
-					max = Math.max(p.timestampsUnique.last(), max);
+				if (p.editionsUnique != null) {
+					max = Math.max(p.editionsUnique.last(), max);
 				}
 			}
 			for (Point p : pointsToCheck) {
 				String region = null;
-				for (int i = 0; p.timestamps != null && i < p.timestamps.length; i++) {
-					if (p.timestamps[i] > 0) {
-						if (p.timestamps[i] != max) {
+				for (int i = 0; p.hhEditions != null && i < p.hhEditions.length; i++) {
+					if (p.hhEditions[i] > 0) {
+						if (p.hhEditions[i] != max) {
 							region = p.regions.get(i);
 						} else {
 							region = null;
@@ -121,6 +121,7 @@ public class MissingMapsCalculator {
 		if (mapsToDownload.isEmpty() && mapsToUpdate.isEmpty()) {
 			return false;
 		}
+		ctx.calculationProgress.requestMapsToUpdate = true;
 		ctx.calculationProgress.missingMaps = convert(mapsToDownload);
 		ctx.calculationProgress.mapsToUpdate = convert(mapsToUpdate);
 
@@ -157,46 +158,50 @@ public class MissingMapsCalculator {
 			Point pnt = new Point();
 			lastKeyNames = regions;
 			pnt.regions = new ArrayList<String>(regions);
-			addTimestamps(knownMaps, pnt);
-			if (pnt.timestamps == null) {
+			boolean hasHHEdition = addMapEditions(knownMaps, pnt);
+			if (!hasHHEdition) {
+				pnt.hhEditions = null; // recreate
 				// check non-standard maps
 				int x31 = MapUtils.get31TileNumberX(s.getLongitude());
 				int y31 = MapUtils.get31TileNumberY(s.getLatitude());
 				for (RegisteredMap r : knownMaps.values()) {
-					if (!r.standard && r.edition > 0) {
+					if (!r.standard) {
 						if (r.reader.containsRouteData() && r.reader.containsActualRouteData(x31, y31, null)) {
 							pnt.regions.add(0, r.downloadName);
 						}
 					}
 				}
-				addTimestamps(knownMaps, pnt);
+				addMapEditions(knownMaps, pnt);
 			}
 			pointsToCheck.add(pnt);
 		}
 	}
 	
-	private void addTimestamps(Map<String, RegisteredMap> knownMaps, Point pnt) {
+	private boolean addMapEditions(Map<String, RegisteredMap> knownMaps, Point pnt) {
+		boolean hhEditionPresent = false;
 		for (int i = 0; i < pnt.regions.size(); i++) {
 			String regionName = pnt.regions.get(i);
 			if (knownMaps.containsKey(regionName)) {
-				if (pnt.timestamps == null) {
-					pnt.timestamps = new long[pnt.regions.size()];
-					pnt.timestampsUnique = new TreeSet<Long>();
+				if (pnt.hhEditions == null) {
+					pnt.hhEditions = new long[pnt.regions.size()];
+					pnt.editionsUnique = new TreeSet<Long>();
 				}
-				pnt.timestamps[i] = knownMaps.get(regionName).edition;
-				pnt.timestampsUnique.add(pnt.timestamps[i]);
+				pnt.hhEditions[i] = knownMaps.get(regionName).edition;
+				hhEditionPresent |= pnt.hhEditions[i] > 0;
+				pnt.editionsUnique.add(pnt.hhEditions[i]);
 			}
 		}
+		return hhEditionPresent;
 	}
 
-	private void split(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, LatLon s, LatLon e, List<Point> pointsToCheck) throws IOException {
+	private void split(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon s, LatLon e) throws IOException {
 		if (MapUtils.getDistance(s, e) < DISTANCE_SPLIT) {
 			addPoint(ctx, knownMaps, pointsToCheck, s);
 			// pointsToCheck.add(e); // add only start end is separate
 		} else {
 			LatLon mid = MapUtils.calculateMidPoint(s, e);
-			split(ctx, knownMaps, s, mid, pointsToCheck);
-			split(ctx, knownMaps, mid, e, pointsToCheck);
+			split(ctx, knownMaps, pointsToCheck, s, mid);
+			split(ctx, knownMaps, pointsToCheck, mid, e);
 		}
 	}
 

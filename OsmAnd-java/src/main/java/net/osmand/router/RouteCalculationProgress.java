@@ -49,6 +49,7 @@ public class RouteCalculationProgress {
 	public boolean requestPrivateAccessRouting;
 
 	public long routeCalculationStartTime;
+	public boolean requestMapsToUpdate;
 	public List<WorldRegion> mapsToUpdate;
 	public List<WorldRegion> missingMaps;
 
