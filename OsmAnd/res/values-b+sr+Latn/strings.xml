@@ -2017,7 +2017,7 @@
     <string name="city_type_district">Distrikt</string>
     <string name="shared_string_from">iz</string>
     <string name="postcode">Poštanski broj</string>
-    <string name="search_categories">Kategorije</string>
+    <string name="search_categories">TOI kategorije</string>
     <string name="share_history_subject">deljeno preko OsmAnd-a</string>
     <string name="dist_away_from_my_location">Traži %1$s udaljeno</string>
     <string name="show_something_on_map">Prikazati na mapi %1$s</string>
@@ -2385,7 +2385,7 @@
     <string name="regions">Oblasti</string>
     <string name="favorite_category_add_new_title">Dodaj novu kategoriju</string>
     <string name="favorite_category_name">Naziv kategorije</string>
-    <string name="favorite_category_dublicate_message">Upotrebi ime kategorije koja već ne postoji.</string>
+    <string name="favorite_category_dublicate_message">Ime već postoji.</string>
     <string name="shared_string_send">Šalji</string>
     <string name="share_menu_location">Deli poziciju</string>
     <string name="share_geo">geo:</string>
