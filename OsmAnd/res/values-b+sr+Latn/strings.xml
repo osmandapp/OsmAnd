@@ -5666,4 +5666,10 @@
 \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation_description">Odaberi način prikaza informacija o udaljenosti u vidžetima (udaljenost do tačke, sledeći skretanje, trake).
+\n
+\nOdaberi “%1$s”za tačne brojeve ili “%2$s” za lakšu čitljivost.</string>
+    <string name="precise">Preciznije</string>
+    <string name="round_up">Zaokružiti</string>
+    <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
 </resources>
