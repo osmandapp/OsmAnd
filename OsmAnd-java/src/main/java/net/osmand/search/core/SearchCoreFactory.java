@@ -600,16 +600,18 @@ public class SearchCoreFactory {
 
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
-					SearchPhraseDataType.POI);
+					SearchPhraseDataType.POI); // WORLD obf(s) always + other obf(s) by radius
 			String searchWord = phrase.getUnknownWordToSearch();
 			final NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
+
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_POI_IN_CITY);
+			boolean worldWideSearch = phrase.getFileRequest() == null;
 			int centerX = (int) bbox.centerX();
 			int centerY = (int) bbox.centerY();
-			if (phrase.getFileRequest() == null) {
-				// expand bbox to cover Earth for basemap search
+			if (worldWideSearch) {
 				bbox.expand(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
 			}
+
 			final Set<String> ids = new HashSet<String>();
 
 			ResultMatcher<Amenity> rawDataCollector = null;
