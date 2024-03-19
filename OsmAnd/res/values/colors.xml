@@ -308,6 +308,8 @@
 	<color name="chart_axis_grid_line_dark">#3F3D43</color>
 	<color name="chart_axis_x_grid_line_light">#BEBCC2</color>
 	<color name="chart_axis_x_grid_line_dark">#595959</color>
+	<color name="chart_axis_x_text_light">#7D738C</color>
+	<color name="chart_axis_x_text_dark">#98989E</color>
 
 	<color name="gpx_chart_blue">#2f7af5</color>
 	<color name="gpx_chart_orange">#ff8800</color>
