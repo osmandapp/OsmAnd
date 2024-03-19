@@ -315,6 +315,13 @@ public class RouteResultPreparation {
 	private static final double SLOW_DOWN_SPEED = 2;
 	
 	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
+		for (int i = 0; i < result.size(); i++) {
+			RouteSegmentResult rr = result.get(i);
+			calculateTimeSpeed(ctx, rr);
+		}
+	}
+
+	public static void calculateTimeSpeed(RoutingContext ctx, RouteSegmentResult rr) {
 		// Naismith's/Scarf rules add additional travel time when moving uphill
 		boolean useNaismithRule = false;
 		double scarfSeconds = 0; // Additional time as per Naismith/Scarf
@@ -328,66 +335,63 @@ public class RouteResultPreparation {
 			scarfSeconds = 8.2f / currentRouter.getDefaultSpeed();
 			useNaismithRule = true;
 		}
-
-		for (int i = 0; i < result.size(); i++) {
-			RouteSegmentResult rr = result.get(i);
-			RouteDataObject road = rr.getObject();
-			double distOnRoadToPass = 0;
-			double speed = ctx.getRouter().defineVehicleSpeed(road, rr.isForwardDirection());
-			if (speed == 0) {
-				speed = ctx.getRouter().getDefaultSpeed();
-			} else {
-				if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
-					speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;
-				}
+		
+		RouteDataObject road = rr.getObject();
+		double distOnRoadToPass = 0;
+		double speed = ctx.getRouter().defineVehicleSpeed(road, rr.isForwardDirection());
+		if (speed == 0) {
+			speed = ctx.getRouter().getDefaultSpeed();
+		} else {
+			if (speed > SLOW_DOWN_SPEED_THRESHOLD) {
+				speed = speed - (speed / SLOW_DOWN_SPEED_THRESHOLD - 1) * SLOW_DOWN_SPEED;
 			}
-			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
-			int next;
-			double distance = 0;
+		}
+		boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
+		int next;
+		double distance = 0;
+
+		//for Naismith/Scarf
+		float[] heightDistanceArray = null;
+		if (useNaismithRule) {
+			road.calculateHeightArray();
+			heightDistanceArray = road.heightDistanceArray;
+		}
+
+		for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
+			next = plus ? j + 1 : j - 1;
+			double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
+					road.getPoint31YTile(next));
+			distance += d;
+			double obstacle = ctx.getRouter().defineObstacle(road, j, plus);
+			if (obstacle < 0) {
+				obstacle = 0;
+			}
+			distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
 
 			//for Naismith/Scarf
-			float[] heightDistanceArray = null;
 			if (useNaismithRule) {
-				road.calculateHeightArray();
-				heightDistanceArray = road.heightDistanceArray;
-			}
-
-			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
-				next = plus ? j + 1 : j - 1;
-				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
-						road.getPoint31YTile(next));
-				distance += d;
-				double obstacle = ctx.getRouter().defineObstacle(road, j, plus);
-				if (obstacle < 0) {
-					obstacle = 0;
-				}
-				distOnRoadToPass += d / speed + obstacle;  //this is time in seconds
-
-				//for Naismith/Scarf
-				if (useNaismithRule) {
-					int heightIndex = 2 * j + 1;
-					int nextHeightIndex = 2 * next + 1;
-					if (heightDistanceArray != null && heightIndex < heightDistanceArray.length && nextHeightIndex < heightDistanceArray.length) {
-						float heightDiff = heightDistanceArray[nextHeightIndex] - heightDistanceArray[heightIndex];
-						if (heightDiff > 0) { // ascent only
-							// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
-							//   (- Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph)
-							//   (- Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h)
-							distOnRoadToPass += heightDiff * scarfSeconds;
-						}
+				int heightIndex = 2 * j + 1;
+				int nextHeightIndex = 2 * next + 1;
+				if (heightDistanceArray != null && heightIndex < heightDistanceArray.length && nextHeightIndex < heightDistanceArray.length) {
+					float heightDiff = heightDistanceArray[nextHeightIndex] - heightDistanceArray[heightIndex];
+					if (heightDiff > 0) { // ascent only
+						// Naismith/Scarf rule: An ascent adds 7.92 times the hiking time its vertical elevation gain takes to cover horizontally
+						//   (- Naismith original: Add 1 hour per vertical 2000ft (600m) at assumed horizontal speed 3mph)
+						//   (- Swiss Alpine Club: Uses conservative 1 hour per 400m at 4km/h)
+						distOnRoadToPass += heightDiff * scarfSeconds;
 					}
 				}
 			}
+		}
 
-			// last point turn time can be added
-			// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
-			rr.setDistance((float) distance);
-			rr.setSegmentTime((float) distOnRoadToPass);
-			if (distOnRoadToPass != 0) {
-				rr.setSegmentSpeed((float) (distance / distOnRoadToPass));  //effective segment speed incl. obstacle and height effects
-			} else {
-				rr.setSegmentSpeed((float) speed);
-			}
+		// last point turn time can be added
+		// if(i + 1 < result.size()) { distOnRoadToPass += ctx.getRouter().calculateTurnTime(); }
+		rr.setDistance((float) distance);
+		rr.setSegmentTime((float) distOnRoadToPass);
+		if (distOnRoadToPass != 0) {
+			rr.setSegmentSpeed((float) (distance / distOnRoadToPass));  //effective segment speed incl. obstacle and height effects
+		} else {
+			rr.setSegmentSpeed((float) speed);
 		}
 	}
 
