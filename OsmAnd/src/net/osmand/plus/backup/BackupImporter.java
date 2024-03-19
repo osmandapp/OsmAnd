@@ -137,7 +137,7 @@ class BackupImporter {
 				if (forceReadData) {
 					tasks.add(new ItemFileImportTask(remoteFile, item, true));
 				} else {
-					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+					updateFileUploadTime(remoteFile, item);
 				}
 			}
 		}
@@ -176,14 +176,7 @@ class BackupImporter {
 						}
 						item.apply();
 					}
-					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getUpdatetimems());
-					if (item instanceof FileSettingsItem) {
-						String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
-						if (app.getAppPath(itemFileName).isDirectory()) {
-							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
-									remoteFile.getUpdatetimems());
-						}
-					}
+					updateFileUploadTime(remoteFile, item);
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
 						LOG.debug(" importItemFile file info " + info);
@@ -204,6 +197,19 @@ class BackupImporter {
 			LOG.error("Error reading item: " + item.getName(), err);
 		} finally {
 			Algorithms.closeStream(is);
+		}
+	}
+
+	private void updateFileUploadTime(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
+		long updateTime = remoteFile.getClienttimems();
+		backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), updateTime);
+
+		if (item instanceof FileSettingsItem) {
+			OsmandApplication app = backupHelper.getApp();
+			String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+			if (app.getAppPath(itemFileName).isDirectory()) {
+				backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, updateTime);
+			}
 		}
 	}
 
