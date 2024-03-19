@@ -5201,7 +5201,7 @@
     <string name="rendering_value_name_only_name">Nur Name</string>
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
-    <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_3d_mode_description">Berühre die Karte mit zwei Fingern und bewege sie nach oben und unten, um die Kartenneigung anzupassen.</string>
     <string name="map_2d_mode_action">2D-Modus</string>
     <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
@@ -5257,7 +5257,7 @@
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Reliefschattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
-    <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
+    <string name="free_favorites_backup_description">Registriere dich in OsmAnd Cloud, um ein kostenloses Backup deiner Favoriten und Einstellungen zu erhalten.</string>
     <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
@@ -5664,4 +5664,7 @@
 \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
 \n
 \n</string>
+    <string name="round_up">Abrunden</string>
+    <string name="precise">Präzise</string>
+    <string name="distance_during_navigation">Distanz während der Navigation</string>
 </resources>
