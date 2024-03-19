@@ -205,7 +205,7 @@
     <string name="poi_fire_hydrant">Hidrant</string>
     <string name="poi_fire_hose">Vatrogasno crevo</string>
     <string name="poi_ambulance_station">Ambulanta</string>
-    <string name="poi_ses_station">Sanitarna stanica</string>
+    <string name="poi_ses_station">SES stanica</string>
     <string name="poi_emergency_access_point">Tačka za okupljanje u slučaju nužde</string>
     <string name="poi_ford">Zaliv</string>
     <string name="poi_mountain_pass">Planinski prolaz</string>
@@ -505,11 +505,11 @@
     <string name="poi_forest">Šuma (održavana)</string>
     <string name="poi_monitoring_station">Merna stanica</string>
     <string name="poi_construction">Građevina</string>
-    <string name="poi_mineshaft">Šaht</string>
+    <string name="poi_mineshaft">Rudničko okno</string>
     <string name="poi_salt_pond">Slana bara</string>
     <string name="poi_gasometer">Gaosmetar</string>
     <string name="poi_bunker_silo">Bunker silos</string>
-    <string name="poi_storage_tank">Tank za skladištenje</string>
+    <string name="poi_storage_tank">Tank za naftu i derivate</string>
     <string name="poi_social_facility">Socijalna ustanova</string>
     <string name="poi_government">Državna uprava</string>
     <string name="poi_bailiff">Sudski izvršitelj</string>
@@ -1612,7 +1612,7 @@
     <string name="poi_arts_centre">Umetnički centar</string>
     <string name="poi_community_centre">Saborni centar</string>
     <string name="poi_hunting_stand">Lovačka čeka</string>
-    <string name="poi_village_green">Centar sela</string>
+    <string name="poi_village_green">Seosko zelenilo</string>
     <string name="poi_trail_riding_station">Konjička stanica</string>
     <string name="poi_food_court">Ekspres restoran</string>
     <string name="poi_craft_agricultural_engines">Poljoprivredne mašine</string>
@@ -2161,8 +2161,8 @@
     <string name="poi_caravans_no">Karavani: ne</string>
     <string name="poi_impromptu_yes">Da</string>
     <string name="poi_impromptu_no">Ne</string>
-    <string name="poi_sanitary_dump_station_yes">Sanitarna otpadna stanica: da</string>
-    <string name="poi_sanitary_dump_station_no">Sanitarna otpadna stanica: ne</string>
+    <string name="poi_sanitary_dump_station_yes">Mesto septičkog istakanja: da</string>
+    <string name="poi_sanitary_dump_station_no">Mesto septičkog istakanja: ne</string>
     <string name="poi_power_supply_no">Izvor napajanja: ne</string>
     <string name="poi_power_supply_cee_17_blue">Izvor napajanja (utičnica): CEE 17 plava</string>
     <string name="poi_power_supply_cee_7_4">Izvor napajanja (utičnica): CEE 7/4</string>
@@ -2883,7 +2883,7 @@
     <string name="poi_medical_system_ayurveeda_yes">Ajurveda</string>
     <string name="poi_medical_system_chinese_yes">Tradicionalno Kineski</string>
     <string name="poi_medical_system_western_yes">Zapadni</string>
-    <string name="poi_sanitary_dump_station">Sanitarna otpadna stanica</string>
+    <string name="poi_sanitary_dump_station">Mesto septičkog istakanja</string>
     <string name="poi_tanning_salon">Solarijum</string>
     <string name="poi_free_flying_guest_guidelines_no">Smernice za goste: ne</string>
     <string name="poi_free_flying_guest_guidelines_yes">Smernice za goste: da</string>
