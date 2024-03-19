@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/bottom_sheet_large_list_item_height"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
     android:orientation="vertical">
@@ -79,6 +79,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/vertical_end_button_divider"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/content_padding"
