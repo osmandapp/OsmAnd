@@ -238,4 +238,6 @@
     <string name="calculate_offline">คํานวณแบบออฟไลน์</string>
     <string name="power_watts_unit">วัตต์</string>
     <string name="revolutions_per_minute_unit">รอบต่อนาที</string>
+    <string name="lang_ta_in">ทมิฬ (อินเดีย)</string>
+    <string name="shared_sting_all_colors">สีทั้งหมด</string>
 </resources>

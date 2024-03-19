@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -82,24 +83,22 @@ public class SpeedometerSettingsFragment extends BaseOsmAndFragment {
 
 	private void setupToolbar(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(app), ColorUtilities.getPrimaryIconColorId(nightMode)));
-		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(v -> {
+		TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
+		tvTitle.setText(R.string.shared_string_speedometer);
+		ImageView navigationIcon = toolbar.findViewById(R.id.close_button);
+		navigationIcon.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				activity.onBackPressed();
 			}
 		});
-
-		CollapsingToolbarLayout collapsingToolbar = view.findViewById(R.id.toolbar_layout);
-		collapsingToolbar.setExpandedTitleColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
-		collapsingToolbar.setCollapsedTitleTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
-		collapsingToolbar.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
-		ViewCompat.setElevation(collapsingToolbar, 5);
+		navigationIcon.setContentDescription(app.getString(R.string.access_shared_string_navigate_up));
+		ViewCompat.setElevation(toolbar, 5);
 
 		updateToolbarSwitch(view);
 
 		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_subtitle), false);
+		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.action_button), false);
 	}
 
 	private void updateToolbarSwitch(@NonNull View view) {
@@ -127,11 +126,12 @@ public class SpeedometerSettingsFragment extends BaseOsmAndFragment {
 	private void setupToggleButtons(@NonNull View view) {
 		IconRadioItem large = createToggleButton(view, WidgetSize.LARGE);
 		IconRadioItem medium = createToggleButton(view, WidgetSize.MEDIUM);
+		IconRadioItem small = createToggleButton(view, WidgetSize.SMALL);
 
 		LinearLayout container = view.findViewById(R.id.custom_radio_buttons);
 		IconToggleButton toggleButton = new IconToggleButton(app, container, nightMode);
-		toggleButton.setItems(medium, large);
-		toggleButton.setSelectedItem(isMediumHeight() ? medium : large);
+		toggleButton.setItems(small, medium, large);
+		toggleButton.setSelectedItem(isMediumHeight() ? medium : isSmallHeight() ? small : large);
 	}
 
 	@NonNull
@@ -149,6 +149,10 @@ public class SpeedometerSettingsFragment extends BaseOsmAndFragment {
 
 	private boolean isMediumHeight() {
 		return settings.SPEEDOMETER_SIZE.getModeValue(appMode) == WidgetSize.MEDIUM;
+	}
+
+	private boolean isSmallHeight() {
+		return settings.SPEEDOMETER_SIZE.getModeValue(appMode) == WidgetSize.SMALL;
 	}
 
 	private void setupSettingsCard(@NonNull View view) {

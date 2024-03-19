@@ -18,6 +18,7 @@ import static net.osmand.plus.settings.enums.LocationSource.GOOGLE_PLAY_SERVICES
 import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
 import static net.osmand.plus.settings.enums.SpeedLimitWarningState.WHEN_EXCEEDED;
 import static net.osmand.plus.settings.enums.WidgetSize.MEDIUM;
+import static net.osmand.plus.settings.enums.WidgetSize.SMALL;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.PAGE_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.WidgetsPanel.WIDGET_SEPARATOR;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
@@ -846,9 +847,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_COMPASS_ON_RADIUS_RULER = new BooleanPreference(this, "show_compass_ruler", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_DISTANCE_RULER = new BooleanPreference(this, "show_distance_ruler", false).makeProfile();
-	public final OsmandPreference<Boolean> SHOW_SPEEDOMETER = new BooleanPreference(this, "show_speedometer", false).makeProfile();
+
 	public final CommonPreference<SpeedLimitWarningState> SHOW_SPEED_LIMIT_WARNING = new EnumStringPreference<>(this, "show_speed_limit_warning", WHEN_EXCEEDED, SpeedLimitWarningState.values()).makeProfile();
-	public final OsmandPreference<WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", MEDIUM, WidgetSize.values()).makeProfile();
 
 	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference(this, "show_lines_to_first_markers", false).makeProfile();
 	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference(this, "show_arrows_to_first_markers", false).makeProfile();
@@ -1491,6 +1491,20 @@ public class OsmandSettings {
 	{
 		SHOW_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
 	}
+
+	public final CommonPreference<Boolean> SHOW_SPEEDOMETER = new BooleanPreference(this, "show_speedometer", false).makeProfile().cache();
+
+	{
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.CAR, true);
+	}
+
+	public final CommonPreference<WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", MEDIUM, WidgetSize.values()).makeProfile();
+
+	{
+		SPEEDOMETER_SIZE.setModeDefaultValue(ApplicationMode.CAR, SMALL);
+	}
+
+	public final CommonPreference<Boolean> SHOW_SPEED_LIMIT_WARNINGS = new BooleanPreference(this, "show_speed_limit_warnings", false).makeProfile().cache();
 
 	public final CommonPreference<Boolean> SHOW_PEDESTRIAN = new BooleanPreference(this, "show_pedestrian", false).makeProfile().cache();
 

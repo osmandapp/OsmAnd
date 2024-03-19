@@ -74,6 +74,9 @@
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="chart_label_background">@drawable/chart_label_background_light</item>
         <item name="chart_grid_line_color">@color/gpx_chart_grid_light</item>
+        <item name="chart_x_grid_line_axis_color">@color/chart_axis_x_grid_line_light</item>
+        <item name="chart_y_grid_line_axis_color">@color/chart_axis_grid_line_light</item>
+        <item name="chart_axis_x_text_color">@color/chart_axis_x_text_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/divider_color_light</item>
         <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_light</item>
@@ -420,6 +423,9 @@
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="chart_label_background">@drawable/chart_label_background_dark</item>
         <item name="chart_grid_line_color">@color/gpx_chart_grid_dark</item>
+        <item name="chart_x_grid_line_axis_color">@color/chart_axis_x_grid_line_dark</item>
+        <item name="chart_y_grid_line_axis_color">@color/chart_axis_grid_line_dark</item>
+        <item name="chart_axis_x_text_color">@color/chart_axis_x_text_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/divider_color_dark</item>
         <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_dark</item>

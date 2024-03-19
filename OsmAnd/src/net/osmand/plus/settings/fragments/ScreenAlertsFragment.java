@@ -15,6 +15,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
+import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -36,11 +37,14 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		Preference showRoutingAlarmsInfo = findPreference(SHOW_ROUTING_ALARMS_INFO);
 		SwitchPreferenceCompat showTrafficWarnings = findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
+		SwitchPreferenceCompat showSpeedLimitWarnings = findPreference(settings.SHOW_SPEED_LIMIT_WARNINGS.getId());
 		SwitchPreferenceCompat showPedestrian = findPreference(settings.SHOW_PEDESTRIAN.getId());
 		SwitchPreferenceCompat showTunnels = findPreference(settings.SHOW_TUNNELS.getId());
 
 		showRoutingAlarmsInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		showTrafficWarnings.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
+		int speedLimitIcon = getSpeedLimitIcon();
+		showSpeedLimitWarnings.setIcon(speedLimitIcon);
 		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 
@@ -48,6 +52,28 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		setupShowCamerasPref();
 		setupSpeedCamerasAlert();
 		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
+	}
+
+	private int getSpeedLimitIcon() {
+		int speedLimitIcon;
+		if (isUsaRegion()) {
+			speedLimitIcon = R.drawable.list_warnings_speed_limit_us;
+		} else if (isCanadaRegion()) {
+			speedLimitIcon = R.drawable.list_warnings_speed_limit_ca;
+		} else {
+			speedLimitIcon = R.drawable.list_warnings_limit;
+		}
+		return speedLimitIcon;
+	}
+
+	private boolean isUsaRegion() {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		return settings.DRIVING_REGION.getModeValue(mode) == DrivingRegion.US;
+	}
+
+	private boolean isCanadaRegion() {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		return settings.DRIVING_REGION.getModeValue(mode) == DrivingRegion.CANADA;
 	}
 
 	@Override

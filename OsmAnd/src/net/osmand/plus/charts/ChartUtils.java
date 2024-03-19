@@ -83,9 +83,10 @@ public class ChartUtils {
 	public static void setupElevationChart(@NonNull ElevationChart chart, @NonNull GpxMarkerView markerView, float topOffset, float bottomOffset, boolean useGesturesAndScale) {
 		Context context = chart.getContext();
 		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
-		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_grid_line_color);
+		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_y_grid_line_axis_color);
+		int xAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_x_grid_line_axis_color);
 		Typeface typeface = FontCache.getFont(context, context.getString(R.string.font_roboto_medium));
-		chart.setupGPXChart(markerView, topOffset, bottomOffset, labelsColor, yAxisGridColor, typeface, useGesturesAndScale);
+		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor, yAxisGridColor, typeface, useGesturesAndScale);
 	}
 
 	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {
