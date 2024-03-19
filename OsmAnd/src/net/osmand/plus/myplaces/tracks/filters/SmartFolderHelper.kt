@@ -228,10 +228,12 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun onTrackRenamed(srcTrackFile: File, destTrackFile: File) {
-		for (trackItem in allAvailableTrackItems) {
+		val newAllTracks = HashSet<TrackItem>(allAvailableTrackItems)
+		for (trackItem in newAllTracks) {
 			if (trackItem.path == srcTrackFile.path) {
-				allAvailableTrackItems.remove(trackItem)
-				allAvailableTrackItems.add(TrackItem(destTrackFile))
+				newAllTracks.remove(trackItem)
+				newAllTracks.add(TrackItem(destTrackFile))
+				allAvailableTrackItems = newAllTracks
 				break
 			}
 		}
