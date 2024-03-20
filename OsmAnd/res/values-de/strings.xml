@@ -5667,4 +5667,7 @@
     <string name="round_up">Abrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Distanz während der Navigation</string>
+    <string name="distance_during_navigation_description">Wähle, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zum Punkt, nächste Abbiegung, Spuren).
+\n
+\nWähle „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
 </resources>
