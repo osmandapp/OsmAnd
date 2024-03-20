@@ -487,7 +487,7 @@ public class BinaryMapPoiReaderAdapter {
 					throw new IllegalStateException();
 				}
 				int shift = (int) l;
-				if (req.contains(x31, y31, x31, y31)) {
+				if (req.contains(x31, y31, x31, y31) || map.isBasemap()) {
 					long d = Math.abs(req.x - x31) + Math.abs(req.y - y31);
 					offsets.put(shift, d);
 				}
