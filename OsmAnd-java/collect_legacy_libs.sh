@@ -3,7 +3,7 @@
 set -e
 BUILD_FOLDER=Release
 BUILD_VARIANT=release
-if $DEBUG; then
+if [[ ! -z "$DEBUG_CPP" ]]; then
 	BUILD_FOLDER=Debug
 	BUILD_VARIANT=debug
 fi
