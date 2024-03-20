@@ -751,9 +751,9 @@
     <string name="routing_attr_avoid_motorway_description">Избегавање аутопутева</string>
     <string name="routing_attr_avoid_borders_name">Без граничних прелаза</string>
     <string name="routing_attr_avoid_borders_description">Избегавање прелажења државних граница</string>
-    <string name="routing_attr_weight_name">Ограничење тежине</string>
+    <string name="routing_attr_weight_name">Тежина</string>
     <string name="routing_attr_weight_description">Одреди дозвољену тежину возила на путањи.</string>
-    <string name="routing_attr_height_name">Ограничење висине</string>
+    <string name="routing_attr_height_name">Висина</string>
     <string name="routing_attr_height_description">Одреди висину возила која је дозвољена на путевима.</string>
     <string name="copying_osmand_one_file_descr">Умножавам датотеку (%s) на ново одредиште…</string>
     <string name="copying_osmand_files_descr">Умножавам податке ОСМ-а на ново одредиште (%s)…</string>
@@ -2888,8 +2888,8 @@
     <string name="rendering_attr_highway_class_steps_name">Степенице</string>
     <string name="rendering_attr_highway_class_path_name">Стаза</string>
     <string name="rendering_attr_highway_class_cycleway_name">Бициклистичка стаза</string>
-    <string name="routing_attr_avoid_sett_name">Без калдрма</string>
-    <string name="routing_attr_avoid_sett_description">Избегавај калдрме</string>
+    <string name="routing_attr_avoid_sett_name">Без калдрме</string>
+    <string name="routing_attr_avoid_sett_description">Избегавај калдрму</string>
     <string name="send_log">Пошаљи дневник</string>
     <string name="files_moved">Премештено је %1$d датотека (%2$s).</string>
     <string name="files_copied">Умножено је %1$d датотека (%2$s).</string>
@@ -3176,7 +3176,7 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Крајње сложена</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Неодређено</string>
     <string name="routeInfo_piste_difficulty_name">Тежина стазе</string>
-    <string name="routing_attr_width_name">Ограничење ширине</string>
+    <string name="routing_attr_width_name">Ширина</string>
     <string name="routing_attr_width_description">Назначите дозвољену ширину возила на путу.</string>
     <string name="avoid_in_routing_descr_">Избегавај одређене путеве и врсте путева</string>
     <string name="app_mode_utv">Упоредно</string>
@@ -3520,7 +3520,7 @@
     <string name="app_mode_inline_skates">Котураљке</string>
     <string name="speed_cameras_restart_descr">Поново покрените програм ради брисања свих података брзинских камера.</string>
     <string name="item_deleted">%1$s обрисано</string>
-    <string name="routing_attr_length_name">Ограничење дужине</string>
+    <string name="routing_attr_length_name">Дужина</string>
     <string name="shared_string_bearing">Правац</string>
     <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј слој Мапиларија на карти.</string>
     <string name="routing_attr_length_description">Одаберите дужину возила која је дозвољена на путевима.</string>
@@ -4664,7 +4664,7 @@
     <string name="use_latin_name_if_missing">Користи латинично име ако недостаје</string>
     <string name="import_as_one_track">Увези као једну путању</string>
     <string name="routing_attr_motor_type_electric_name">Електрична</string>
-    <string name="routing_attr_motor_type_name">Мотор возила</string>
+    <string name="routing_attr_motor_type_name">Гориво коришћено мотором</string>
     <string name="routing_attr_motor_type_lpg_name">Плин</string>
     <string name="routing_attr_motor_type_gas_name">Метан (CNG)</string>
     <string name="transport_hazmat_no_desc">На неким путевима и тунелима може бити забрањен превоз опасних твари.</string>
@@ -5657,4 +5657,10 @@
 \n • ОпенСтритМап пријављивање је пребачено на ОАут 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Растојање током навигације</string>
+    <string name="precise">Прецизно</string>
+    <string name="distance_during_navigation_description">Одаберите како се информације о удаљености приказују у навигационим виџетима (удаљеност до тачке, следеће скретање, траке).
+\n
+\nИзаберите „%1$s“ за тачне бројеве или „%2$s“ за лакшу читљивост.</string>
+    <string name="round_up">Заокружено</string>
 </resources>
