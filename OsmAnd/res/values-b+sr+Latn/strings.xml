@@ -833,7 +833,7 @@
     <string name="si_mi_feet">Milje/stope</string>
     <string name="unit_of_length">Jedinice dužine</string>
     <string name="unit_of_length_descr">Promeni jedinice za dužinu.</string>
-    <string name="incomplete_locale">nepotpun</string>
+    <string name="incomplete_locale"></string>
     <string name="preferred_locale">Jezik</string>
     <string name="preferred_locale_descr">Jezik za prikaz programa (koristi posle OsmAnd restart).</string>
     <string name="system_locale">Sistem</string>
