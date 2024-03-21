@@ -86,7 +86,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 		PrepareBackupResult backup = backupHelper.getBackup();
 		BackupInfo info = backup.getBackupInfo();
 
-		List<SettingsItem> settingsItems = BackupHelper.getItemsForRestore(info, backup.getSettingsItems());
+		List<SettingsItem> settingsItems = BackupUtils.getItemsForRestore(info, backup.getSettingsItems());
 
 		if (operation != SYNC_OPERATION_DOWNLOAD) {
 			maxProgress += calculateExportMaxProgress() / 1024;
@@ -108,24 +108,24 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 
 	public void uploadLocalItem(@NonNull SettingsItem item) {
 		networkSettingsHelper.exportSettings(
-				BackupHelper.getItemFileName(item), Collections.singletonList(item),
+				BackupUtils.getItemFileName(item), Collections.singletonList(item),
 				Collections.emptyList(), Collections.emptyList(), this);
 	}
 
 	public void deleteItem(@NonNull SettingsItem item) {
-		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(),
+		networkSettingsHelper.exportSettings(BackupUtils.getItemFileName(item), Collections.emptyList(),
 				Collections.singletonList(item), Collections.emptyList(), this);
 	}
 
 	public void deleteLocalItem(@NonNull SettingsItem item) {
-		networkSettingsHelper.exportSettings(BackupHelper.getItemFileName(item), Collections.emptyList(),
+		networkSettingsHelper.exportSettings(BackupUtils.getItemFileName(item), Collections.emptyList(),
 				Collections.emptyList(), Collections.singletonList(item), this);
 	}
 
 	public void downloadRemoteVersion(@NonNull SettingsItem item, @NonNull RemoteFilesType filesType,
 	                                  boolean shouldReplace, boolean restoreDeleted) {
 		item.setShouldReplace(shouldReplace);
-		String name = BackupHelper.getItemFileName(item);
+		String name = BackupUtils.getItemFileName(item);
 		networkSettingsHelper.importSettings(name, Collections.singletonList(item), filesType, true, shouldReplace, restoreDeleted, this);
 	}
 
