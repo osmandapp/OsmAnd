@@ -178,6 +178,7 @@ class BackupImporter {
 						}
 						item.apply();
 					}
+					updateFileM5Digest(remoteFile, item);
 					updateFileUploadTime(remoteFile, item);
 					if (PluginsHelper.isDevelopment()) {
 						UploadedFileInfo info = backupHelper.getDbHelper().getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
@@ -199,6 +200,33 @@ class BackupImporter {
 			LOG.error("Error reading item: " + item.getName(), err);
 		} finally {
 			Algorithms.closeStream(is);
+		}
+	}
+
+	private void updateFileM5Digest(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
+		if (!(item instanceof FileSettingsItem)) {
+			return;
+		}
+		FileSettingsItem settingsItem = (FileSettingsItem) item;
+		if (settingsItem.needMd5Digest()) {
+			BackupDbHelper dbHelper = backupHelper.getDbHelper();
+			UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+			String lastMd5 = fileInfo != null ? fileInfo.getMd5Digest() : null;
+
+			if (Algorithms.isEmpty(lastMd5)) {
+				FileInputStream is = null;
+				try {
+					is = new FileInputStream(settingsItem.getFile());
+					String md5Digest = new String(Hex.encodeHex(DigestUtils.md5(is)));
+					if (!Algorithms.isEmpty(md5Digest)) {
+						backupHelper.updateFileMd5Digest(item.getType().name(), remoteFile.getName(), md5Digest);
+					}
+				} catch (IOException e) {
+					LOG.error(e.getMessage(), e);
+				} finally {
+					Algorithms.closeStream(is);
+				}
+			}
 		}
 	}
 
