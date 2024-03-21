@@ -32,6 +32,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class BackupUtils {
 
 	@NonNull
 	public static List<SettingsItem> getItemsForRestore(@Nullable BackupInfo info, @NonNull List<SettingsItem> settingsItems) {
-		List<SettingsItem> itemsForRestore = new ArrayList<>();
+		List<SettingsItem> items = new ArrayList<>();
 		if (info != null) {
 			Map<RemoteFile, SettingsItem> restoreItems = getRemoteFilesSettingsItems(settingsItems, info.filteredFilesToDownload, false);
 			for (SettingsItem restoreItem : restoreItems.values()) {
@@ -71,10 +72,12 @@ public class BackupUtils {
 					settingsItem.processDuplicateItems();
 					settingsItem.setShouldReplace(true);
 				}
-				itemsForRestore.add(restoreItem);
+				items.add(restoreItem);
 			}
 		}
-		return itemsForRestore;
+		Collections.sort(items, (o1, o2) -> -Long.compare(o1.getLastModifiedTime(), o2.getLastModifiedTime()));
+
+		return items;
 	}
 
 	@NonNull
