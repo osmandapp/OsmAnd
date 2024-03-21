@@ -622,60 +622,64 @@ public class SearchCoreFactory {
 					}
 				};
 			}
+			ResultMatcher<Amenity> amenityResultMatcher = new ResultMatcher<Amenity>() {
+				int limit = 0;
+
+				@Override
+				public boolean publish(Amenity object) {
+					if (phrase.getSettings().isExportObjects()) {
+						resultMatcher.exportObject(phrase, object);
+					}
+					if (limit++ > LIMIT) {
+						return false;
+					}
+					String poiID = object.getType().getKeyName() + "_" + object.getId();
+					if (ids.contains(poiID)) {
+						return false;
+					}
+					SearchResult sr = new SearchResult(phrase);
+					sr.otherNames = object.getOtherNames(true);
+					sr.localeName = object.getName(phrase.getSettings().getLang());
+					if (!nm.matches(sr.localeName)) {
+						sr.localeName = object.getName(phrase.getSettings().getLang(),
+								phrase.getSettings().isTransliterate());
+					}
+					if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
+							&& !nm.matches(object.getAdditionalInfoValues(false))) {
+						return false;
+					}
+					sr.object = object;
+					sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
+					sr.file = currentFile[0];
+					sr.location = object.getLocation();
+					if (object.getSubType().equals("city") || object.getSubType().equals("country")) {
+						sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
+						sr.preferredZoom = object.getSubType().equals("country") ? PREFERRED_COUNTRY_ZOOM : PREFERRED_CITY_ZOOM;
+					} else if (object.getSubType().equals("town")) {
+						sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
+					} else {
+						sr.priorityDistance = 1;
+					}
+					sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
+					phrase.countUnknownWordsMatchMainResult(sr);
+					sr.objectType = POI;
+					resultMatcher.publish(sr);
+					ids.add(poiID);
+					return false;
+				}
+
+				@Override
+				public boolean isCancelled() {
+					return resultMatcher.isCancelled() && (limit < LIMIT);
+				}
+			};
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.centerX(),
 					(int) bbox.centerY(), searchWord, (int) bbox.left, (int) bbox.right, (int) bbox.top,
-					(int) bbox.bottom, new ResultMatcher<Amenity>() {
-						int limit = 0;
+					(int) bbox.bottom, null, amenityResultMatcher, rawDataCollector);
+			SearchRequest<Amenity> wholeMapReq = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.centerX(),
+					(int) bbox.centerY(), searchWord, 0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, null,
+					amenityResultMatcher, rawDataCollector);
 
-						@Override
-						public boolean publish(Amenity object) {
-							if (phrase.getSettings().isExportObjects()) {
-								resultMatcher.exportObject(phrase, object);
-							}
-							if (limit++ > LIMIT) {
-								return false;
-							}
-							String poiID = object.getType().getKeyName() + "_" + object.getId();
-							if (ids.contains(poiID)) {
-								return false;
-							}
-							SearchResult sr = new SearchResult(phrase);
-							sr.otherNames = object.getOtherNames(true);
-							sr.localeName = object.getName(phrase.getSettings().getLang());
-							if (!nm.matches(sr.localeName)) {
-								sr.localeName = object.getName(phrase.getSettings().getLang(),
-										phrase.getSettings().isTransliterate());
-							}
-							if (!nm.matches(sr.localeName) && !nm.matches(sr.otherNames)
-									&& !nm.matches(object.getAdditionalInfoValues(false))) {
-								return false;
-							}
-							sr.object = object;
-							sr.preferredZoom = SearchCoreFactory.PREFERRED_POI_ZOOM;
-							sr.file = currentFile[0];
-							sr.location = object.getLocation();
-							if (object.getSubType().equals("city") || object.getSubType().equals("country")) {
-								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_CITY_PRIORITY_DISTANCE;
-								sr.preferredZoom = object.getSubType().equals("country") ? PREFERRED_COUNTRY_ZOOM : PREFERRED_CITY_ZOOM;
-							} else if (object.getSubType().equals("town")) {
-								sr.priorityDistance = SEARCH_AMENITY_BY_NAME_TOWN_PRIORITY_DISTANCE;
-							} else {
-								sr.priorityDistance = 1;
-							}
-							sr.priority = SEARCH_AMENITY_BY_NAME_PRIORITY;
-							phrase.countUnknownWordsMatchMainResult(sr);
-							sr.objectType = ObjectType.POI;
-							resultMatcher.publish(sr);
-							ids.add(poiID);
-							return false;
-						}
-
-						@Override
-						public boolean isCancelled() {
-							return resultMatcher.isCancelled() && (limit < LIMIT);
-						}
-					}, rawDataCollector);
-			
 			BinaryMapIndexReader fileRequest = phrase.getFileRequest();
 			if (fileRequest != null) {
 				fileRequest.searchPoiByName(req);
@@ -684,8 +688,7 @@ public class SearchCoreFactory {
 				while (offlineIterator.hasNext()) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
-					r.searchPoiByName(req);
-					
+					r.searchPoiByName(r.isBasemap() ? wholeMapReq : req);
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
 			}
