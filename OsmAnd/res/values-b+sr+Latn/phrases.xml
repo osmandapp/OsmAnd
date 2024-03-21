@@ -1484,7 +1484,7 @@
     <string name="poi_traffic_calming_rumble_strip">Vibro-zvučne trake</string>
     <string name="poi_traffic_calming_table">Usporivački prelaz</string>
     <string name="poi_traffic_calming_choker">Suženje na ulici</string>
-    <string name="poi_public_transport_stop_position">Zaustavno mesto javnog prevoza</string>
+    <string name="poi_public_transport_stop_position">„BUS“ označena površina stajališta</string>
     <string name="poi_railway_platform">Železnička platforma;Peron</string>
     <string name="poi_halt">Železnička stanica</string>
     <string name="poi_railway_buffer_stop">Pružni predzaustavljač</string>
@@ -2123,13 +2123,13 @@
     <string name="poi_clothes_shirts">Košulje</string>
     <string name="poi_clothes_dance">Plesačka</string>
     <string name="poi_clothes_military">Vojna</string>
-    <string name="poi_historic_milestone">Istorijska prekretnica</string>
+    <string name="poi_historic_milestone">Istorijska stup udaljenosti</string>
     <string name="poi_shoes_children">Dečja</string>
     <string name="poi_shoes_women">Ženska</string>
     <string name="poi_shoes_sport">Sportska</string>
     <string name="poi_shoes_men">Muška</string>
     <string name="poi_shoes_orthopedic">Ortopedska</string>
-    <string name="poi_historic_manor">Istorijski posed</string>
+    <string name="poi_historic_manor">Dvorac</string>
     <string name="poi_castle_type_stately">Tip dvorca: izražajan</string>
     <string name="poi_castle_type_defensive">Tip dvorca: odbranbeni</string>
     <string name="poi_castle_type_fortress">Tip dvorca: tvrđava</string>
@@ -2586,7 +2586,7 @@
     <string name="poi_fortification_type_sconce">Tip utvrđenja: šanac</string>
     <string name="poi_fortification_type_ring_ditch">Tip utvrđenja: ukopani kružni šanac</string>
     <string name="poi_pa">Pa (maorska utvrđena naseobina)</string>
-    <string name="poi_historic_farm">Istorijsko imanje</string>
+    <string name="poi_historic_farm">Istorijski salaš</string>
     <string name="poi_historic_railway_station">Istorijska železnička stanica</string>
     <string name="poi_historic_threshing_floor">Istorijsko gumno</string>
     <string name="poi_historic_gallows">Istorijska vešala</string>
@@ -2718,7 +2718,7 @@
     <string name="poi_rtsa_scale_filter">Kategorija težine</string>
     <string name="poi_healthcare_speciality_radiotherapy">Radioterapija</string>
     <string name="reddit">Reddit</string>
-    <string name="poi_historic_tank">Istorijski rezervoar</string>
+    <string name="poi_historic_tank">Istorijski tenk</string>
     <string name="poi_generator_source_biomass">Izvor energije: biomasa</string>
     <string name="poi_cash_withdrawal_bank_card">Podizanje novca</string>
     <string name="poi_bath_type">Tip</string>
@@ -2858,7 +2858,7 @@
     <string name="poi_health_facility_type_laboratory">Tip zdravstvene ustanove: laboratorija</string>
     <string name="poi_health_facility_type_counselling_centre">Tip zdravstvene ustanove: savetovalište</string>
     <string name="poi_health_facility_type_field_hospital">Tip zdravstvene ustanove: terenska bolnica</string>
-    <string name="poi_health_facility_type_office">Medicinska</string>
+    <string name="poi_health_facility_type_office">Ordinacija</string>
     <string name="poi_health_service_test_no">Zdravstvena usluga: test: ne</string>
     <string name="poi_health_service_test_yes">Zdravstvena služba: test: da</string>
     <string name="poi_health_service_support_no">Zdravstvena služba: podrška: ne</string>
@@ -3357,7 +3357,7 @@
     <string name="poi_service_vehicle_used_car_sales_yes">Prodaja polovnih automobila</string>
     <string name="poi_service_vehicle_oil_change_yes">Promena ulja</string>
     <string name="poi_service_vehicle_car_repair_yes">Auto servis</string>
-    <string name="poi_adult_gaming_centre">Igrački centar za odrasle</string>
+    <string name="poi_adult_gaming_centre">Kladionice i kockarnice</string>
     <string name="poi_amusement_arcade">Zabavna arkadna igra</string>
     <string name="poi_water_utility">Vodovod</string>
     <string name="poi_outpost">Mesto isporuke u trgovini</string>
