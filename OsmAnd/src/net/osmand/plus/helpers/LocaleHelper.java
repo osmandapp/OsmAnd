@@ -273,7 +273,7 @@ public class LocaleHelper {
 		languages.put("sk", ctx.getString(R.string.lang_sk));
 		languages.put("sl", ctx.getString(R.string.lang_sl));
 		languages.put("sr", ctx.getString(R.string.lang_sr));
-		languages.put("sr+Latn", ctx.getString(R.string.lang_sr_latn) + incompleteSuffix);
+		languages.put("sr+Latn", ctx.getString(R.string.lang_sr_latn));
 		languages.put("sv", ctx.getString(R.string.lang_sv));
 		languages.put("tr", ctx.getString(R.string.lang_tr));
 		languages.put("uk", ctx.getString(R.string.lang_uk));
