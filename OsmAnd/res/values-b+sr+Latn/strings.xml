@@ -833,7 +833,7 @@
     <string name="si_mi_feet">Milje/stope</string>
     <string name="unit_of_length">Jedinice dužine</string>
     <string name="unit_of_length_descr">Promeni jedinice za dužinu.</string>
-    <string name="incomplete_locale">nepotpun</string>
+    <string name="incomplete_locale"></string>
     <string name="preferred_locale">Jezik</string>
     <string name="preferred_locale_descr">Jezik za prikaz programa (koristi posle OsmAnd restart).</string>
     <string name="system_locale">Sistem</string>
@@ -5283,7 +5283,7 @@
     <string name="number_of_tracks">%1$s trase</string>
     <string name="search_track_by_name">Traži trase po imenu</string>
     <string name="no_search_results">Nema rezultata</string>
-    <string name="poi_categories">TOI kategorije</string>
+    <string name="poi_categories">TOI Kategorije</string>
     <string name="is_imported">%1$s je uvezen.</string>
     <string name="external_device_connected">Povezan</string>
     <string name="proxy_port_max_warning">Maksimalna vrednost priključnika je %1$s</string>
@@ -5666,4 +5666,10 @@
 \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation_description">Odaberi način prikaza informacija o udaljenosti u vidžetima (udaljenost do tačke, sledeći skretanje, trake).
+\n
+\nOdaberi “%1$s”za tačne brojeve ili “%2$s” za lakšu čitljivost.</string>
+    <string name="precise">Preciznije</string>
+    <string name="round_up">Zaokružiti</string>
+    <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
 </resources>
