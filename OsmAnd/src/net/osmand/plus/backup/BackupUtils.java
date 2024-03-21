@@ -1,17 +1,27 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.IProgress.EMPTY_PROGRESS;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.MULTIMEDIA_NOTES;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.RENDERING_STYLE;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype.ROUTING_CONFIG;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OperationLog;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidNetworkUtils;
@@ -221,5 +231,43 @@ public class BackupUtils {
 					operationLog.finishOperation("(" + status + "): " + message);
 				});
 		return exists[0];
+	}
+
+	public static void updateCacheForItems(@NonNull OsmandApplication app, @NonNull List<SettingsItem> items) {
+		boolean updateIndexes = false;
+		boolean updateRouting = false;
+		boolean updateRenderers = false;
+		boolean updatePoiFilters = false;
+		boolean updateMultimedia = false;
+
+		for (SettingsItem item : items) {
+			if (item instanceof FileSettingsItem) {
+				FileSubtype subtype = ((FileSettingsItem) item).getSubtype();
+				updateIndexes |= subtype.isMap();
+				updateRouting |= ROUTING_CONFIG == subtype;
+				updateRenderers |= RENDERING_STYLE == subtype;
+				updateMultimedia |= MULTIMEDIA_NOTES == subtype;
+			} else if (item instanceof PoiUiFiltersSettingsItem || item instanceof ProfileSettingsItem) {
+				updatePoiFilters = true;
+			}
+		}
+		if (updateIndexes) {
+			app.getResourceManager().reloadIndexesAsync(EMPTY_PROGRESS, warnings -> app.getOsmandMap().refreshMap());
+		}
+		if (updateRouting) {
+			AppInitializer.loadRoutingFiles(app, null);
+		}
+		if (updateRenderers) {
+			app.getRendererRegistry().updateExternalRenderers();
+		}
+		if (updatePoiFilters) {
+			app.getPoiFilters().loadSelectedPoiFilters();
+		}
+		if (updateMultimedia) {
+			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
+			if (plugin != null) {
+				plugin.indexingFiles(true, true);
+			}
+		}
 	}
 }

@@ -13,14 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
-import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import org.apache.commons.logging.Log;
@@ -184,14 +183,7 @@ public class SyncBackupTask extends AsyncTask<Void, Void, Void> implements OnPre
 			return;
 		}
 		if (succeed) {
-			app.getRendererRegistry().updateExternalRenderers();
-			app.getPoiFilters().loadSelectedPoiFilters();
-			AppInitializer.loadRoutingFiles(app, null);
-//			app.getResourceManager().reloadIndexesAsync(null, null);
-//			AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-//			if (plugin != null) {
-//				plugin.indexingFiles(true, true);
-//			}
+			BackupUtils.updateCacheForItems(app, items);
 		}
 		if (singleOperation) {
 			onSyncFinished(null);
