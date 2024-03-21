@@ -25,6 +25,8 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -137,7 +139,7 @@ class BackupImporter {
 				if (forceReadData) {
 					tasks.add(new ItemFileImportTask(remoteFile, item, true));
 				} else {
-					updateFileUploadTime(remoteFile, item);
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
 				}
 			}
 		}
@@ -201,14 +203,13 @@ class BackupImporter {
 	}
 
 	private void updateFileUploadTime(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item) {
-		long updateTime = remoteFile.getClienttimems();
-		backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), updateTime);
-
+		long time = remoteFile.getUpdatetimems();
+		backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), time);
 		if (item instanceof FileSettingsItem) {
 			OsmandApplication app = backupHelper.getApp();
 			String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
 			if (app.getAppPath(itemFileName).isDirectory()) {
-				backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, updateTime);
+				backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, time);
 			}
 		}
 	}

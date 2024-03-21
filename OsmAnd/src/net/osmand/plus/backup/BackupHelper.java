@@ -901,30 +901,36 @@ public class BackupHelper {
 					UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
 					if (fileInfo != null) {
 						localFile.uploadTime = fileInfo.getUploadTime();
-						String lastMd5 = fileInfo.getMd5Digest();
-						boolean needM5Digest = item instanceof StreamSettingsItem
-								&& ((StreamSettingsItem) item).needMd5Digest()
-								&& localFile.uploadTime < lastModifiedTime
-								&& !Algorithms.isEmpty(lastMd5);
-						if (needM5Digest && file != null && file.exists()) {
-							FileInputStream is = null;
-							try {
-								is = new FileInputStream(file);
-								String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
-								if (md5.equals(lastMd5)) {
-									item.setLocalModifiedTime(localFile.uploadTime);
-									localFile.localModifiedTime = localFile.uploadTime;
-								}
-							} catch (IOException e) {
-								LOG.error(e.getMessage(), e);
-							} finally {
-								Algorithms.closeStream(is);
-							}
-						}
+						checkM5Digest(localFile, fileInfo, lastModifiedTime);
 					}
 				}
 				result.add(localFile);
 				publishProgress(localFile);
+			}
+
+			private void checkM5Digest(@NonNull LocalFile localFile, @NonNull UploadedFileInfo fileInfo, long lastModifiedTime) {
+				SettingsItem item = localFile.item;
+				String lastMd5 = fileInfo.getMd5Digest();
+				boolean needM5Digest = item instanceof StreamSettingsItem
+						&& ((StreamSettingsItem) item).needMd5Digest()
+						&& localFile.uploadTime < lastModifiedTime
+						&& !Algorithms.isEmpty(lastMd5);
+
+				if (needM5Digest && localFile.file != null && localFile.file.exists()) {
+					FileInputStream is = null;
+					try {
+						is = new FileInputStream(localFile.file);
+						String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
+						if (md5.equals(lastMd5)) {
+							item.setLocalModifiedTime(localFile.uploadTime);
+							localFile.localModifiedTime = localFile.uploadTime;
+						}
+					} catch (IOException e) {
+						LOG.error(e.getMessage(), e);
+					} finally {
+						Algorithms.closeStream(is);
+					}
+				}
 			}
 
 			private List<SettingsItem> getLocalItems() {
