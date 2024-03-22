@@ -907,7 +907,7 @@
     <string name="poi_skype">Skajp</string>
     <string name="poi_youtube">YouTube</string>
     <string name="poi_instagram">Instagram</string>
-    <string name="vk">VKontakte</string>
+    <string name="vk">VKontakt</string>
     <string name="poi_google_plus">Google+</string>
     <string name="poi_mobile">Mobilni</string>
     <string name="poi_service_times">Uslužno vreme</string>
@@ -2345,7 +2345,7 @@
     <string name="poi_site_type_earthwork">Zemljana barijera</string>
     <string name="poi_aerodrome_type_military">Vojni aerodrom</string>
     <string name="poi_aerodrome_type_military_public">Vojni/civilni</string>
-    <string name="poi_fitness_station">Fitnes park</string>
+    <string name="poi_fitness_station">Mesto za vežbanje</string>
     <string name="poi_healthcare_speciality_biochemistry">Biohemija</string>
     <string name="poi_fitness_centre">Teretana/ fitnes</string>
     <string name="poi_fitness">Fitnes</string>
@@ -2717,7 +2717,7 @@
     <string name="poi_denotation">Denotacija</string>
     <string name="poi_rtsa_scale_filter">Kategorija težine</string>
     <string name="poi_healthcare_speciality_radiotherapy">Radioterapija</string>
-    <string name="reddit">Reddit</string>
+    <string name="reddit">Redit</string>
     <string name="poi_historic_tank">Istorijski tenk</string>
     <string name="poi_generator_source_biomass">Izvor energije: biomasa</string>
     <string name="poi_cash_withdrawal_bank_card">Podizanje novca</string>
