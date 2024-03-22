@@ -4,6 +4,7 @@ import static net.osmand.util.CollectionUtils.startsWithAny;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -325,14 +326,31 @@ public class Algorithms {
 		};
 	}
 
-    private static String simplifyFileName(String fn) {
-        String lc = fn.toLowerCase();
+	public static String getRegionName(String filename) {
+		String lc = filename.toLowerCase();
+		int firstPoint = lc.indexOf(".");
+		if (firstPoint != -1) {
+			lc = lc.substring(0, firstPoint);
+		}
+		int ind = lc.length() - 1;
+		for (; ind > 0; ind--) {
+			if ((lc.charAt(ind) >= '0' && lc.charAt(ind) <= '9') || lc.charAt(ind) == '_') {
+				// timestamp ending or version ending
+			} else {
+				break;
+			}
+		}
+		return lc.substring(0, ind + 1);
+	}
+	
+    private static String simplifyFileName(String filename) {
+        String lc = filename.toLowerCase();
         if (lc.contains(".")) {
             lc = lc.substring(0, lc.indexOf("."));
         }
-        if (lc.endsWith("_2")) {
-            lc = lc.substring(0, lc.length() - "_2".length());
-        }
+        if (lc.endsWith("_" + IndexConstants.BINARY_MAP_VERSION)) {
+			lc = lc.substring(0, lc.length() - ("_" + IndexConstants.BINARY_MAP_VERSION).length());
+		}
         boolean hasTimestampEnd = false;
         for (int i = 0; i < lc.length(); i++) {
             if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {

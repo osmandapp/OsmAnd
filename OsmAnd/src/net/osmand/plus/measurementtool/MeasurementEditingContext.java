@@ -1223,10 +1223,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 
 			@Override
-			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-			}
-
-			@Override
 			public void onCalculationFinish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;

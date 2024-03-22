@@ -3,10 +3,8 @@ package net.osmand.plus.helpers;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -98,13 +96,6 @@ public class MapRouteCalculationProgressListener implements RouteCalculationProg
 		CommonPreference<Boolean> allowPrivateForTruck =
 				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE_FOR_TRUCK, false);
 		return Algorithms.objectEquals(derivedProfile, "truck") ? allowPrivateForTruck : allowPrivate;
-	}
-
-	@Override
-	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-		app.runInUIThread(() -> {
-			activity.getMapRouteInfoMenu().updateSuggestedMissingMaps(missingMaps, onlineSearch);
-		});
 	}
 
 	@Override

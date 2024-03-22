@@ -582,10 +582,6 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
-				public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-				}
-
-				@Override
 				public void onCalculationFinish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
 						for (WalkingRouteSegment ws : walkingSegmentsFromCacheOnly) {

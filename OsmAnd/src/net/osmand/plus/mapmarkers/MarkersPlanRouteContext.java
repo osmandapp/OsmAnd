@@ -232,10 +232,6 @@ public class MarkersPlanRouteContext {
 			}
 
 			@Override
-			public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-			}
-
-			@Override
 			public void onCalculationFinish() {
 				calculatedPairs = 0;
 			}

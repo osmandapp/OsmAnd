@@ -108,7 +108,6 @@ public class MapActionsHelper {
 
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
-				mapRouteInfoMenu.clearSuggestedMissingMaps();
 				TargetPointsHelper.TargetPoint start = app.getTargetPointsHelper().getPointToStart();
 				if (start != null) {
 					LatLon latLon = new LatLon(start.getLatitude(), start.getLongitude());

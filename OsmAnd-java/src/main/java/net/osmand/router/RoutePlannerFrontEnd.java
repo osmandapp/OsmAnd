@@ -23,6 +23,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
+import net.osmand.map.OsmandRegions;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -40,13 +41,14 @@ public class RoutePlannerFrontEnd {
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
+	public static boolean CALCULATE_MISSING_MAPS = true;
 	static boolean TRACE_ROUTING = false;
-	
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
+	private static MissingMapsCalculator missingMapsCalculator;
 	
 
 	public RoutePlannerFrontEnd() {
@@ -312,6 +314,12 @@ public class RoutePlannerFrontEnd {
 	
 	public boolean isUseNativeApproximation() {
 		return useNativeApproximation;
+	}
+
+	public static void initMissingMapsCalculator(OsmandRegions osmandRegions) {
+		if (missingMapsCalculator == null) {
+			missingMapsCalculator = new MissingMapsCalculator(osmandRegions);
+		}
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
@@ -862,6 +870,15 @@ public class RoutePlannerFrontEnd {
 			targets.addAll(intermediates);
 		}
 		targets.add(end);
+		if (CALCULATE_MISSING_MAPS) {
+			if (missingMapsCalculator == null) {
+				missingMapsCalculator = new MissingMapsCalculator();
+			}
+			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets,
+					hhRoutingConfig != null)) {
+				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
+			}
+		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
 			ctx.calculationProgress.requestPrivateAccessRouting = true;
 		}

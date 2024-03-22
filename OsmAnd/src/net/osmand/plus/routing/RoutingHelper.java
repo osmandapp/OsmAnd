@@ -228,14 +228,6 @@ public class RoutingHelper {
 		transportRoutingHelper.clearCurrentRoute(newFinalLocation);
 	}
 
-	public synchronized boolean isMissingMapsOnlineSearching() {
-		return routeRecalculationHelper.isMissingMapsSearching();
-	}
-
-	public synchronized boolean startMissingMapsOnlineSearch() {
-		return routeRecalculationHelper.startMissingMapsOnlineSearch();
-	}
-
 	private synchronized void finishCurrentRoute() {
 		app.logRoutingEvent("finishCurrentRoute");
 		routeWasFinished = true;

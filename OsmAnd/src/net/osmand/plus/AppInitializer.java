@@ -94,6 +94,7 @@ import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
@@ -283,7 +284,7 @@ public class AppInitializer implements IProgress {
 							new FileOutputStream(file));
 				}
 				app.regions.prepareFile(file.getAbsolutePath());
-
+				RoutePlannerFrontEnd.initMissingMapsCalculator(app.regions);
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
