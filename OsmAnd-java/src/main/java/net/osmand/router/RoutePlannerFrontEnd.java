@@ -897,8 +897,11 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.totalIterations++;
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
-			RouteCalcResult res = searchRoute(nctx, start, end, intermediates);
-			routeDirection = PrecalculatedRouteDirection.build(res.detailed, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
+			RouteCalcResult baseRes = searchRoute(nctx, start, end, intermediates);
+			if (baseRes == null || !baseRes.isCorrect()) {
+				return baseRes;
+			}
+			routeDirection = PrecalculatedRouteDirection.build(baseRes.detailed, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
 		}
 		RouteCalcResult res ;
