@@ -51,7 +51,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
@@ -809,8 +809,8 @@ public class AppVersionUpgradeOnInit {
 				settings.registerBooleanPreference(prefId, true).makeGlobal().get();
 
 		for (ExportType newExportType : ExportType.mapValues()) {
-			BackupHelper.getVersionHistoryTypePref(app, newExportType).set(oldVersionHistoryPrefValue);
-			BackupHelper.getBackupTypePref(app, newExportType).set(oldBackupTypePrefValue);
+			BackupUtils.getVersionHistoryTypePref(app, newExportType).set(oldVersionHistoryPrefValue);
+			BackupUtils.getBackupTypePref(app, newExportType).set(oldBackupTypePrefValue);
 		}
 	}
 

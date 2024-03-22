@@ -1,7 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
-import static net.osmand.plus.backup.BackupHelper.getRemoteFilesSettingsItems;
+import static net.osmand.plus.backup.BackupUtils.getRemoteFilesSettingsItems;
 import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 import androidx.annotation.NonNull;
@@ -235,7 +235,7 @@ class BackupImporter {
 		backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), time);
 		if (item instanceof FileSettingsItem) {
 			OsmandApplication app = backupHelper.getApp();
-			String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+			String itemFileName = BackupUtils.getFileItemName((FileSettingsItem) item);
 			if (app.getAppPath(itemFileName).isDirectory()) {
 				backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, time);
 			}
@@ -618,7 +618,7 @@ class BackupImporter {
 	}
 
 	private OnDownloadFileListener getOnDownloadItemFileListener(@NonNull SettingsItem item) {
-		String itemFileName = BackupHelper.getItemFileName(item);
+		String itemFileName = BackupUtils.getItemFileName(item);
 		return new OnDownloadFileListener() {
 			@Override
 			public void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work) {

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType;
@@ -192,7 +193,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 			item.operation = operationType;
 			item.localFile = localFile;
 			item.remoteFile = remoteFile;
-			item.fileName = BackupHelper.getItemFileName(settingsItem);
+			item.fileName = BackupUtils.getItemFileName(settingsItem);
 
 			return item;
 		}
