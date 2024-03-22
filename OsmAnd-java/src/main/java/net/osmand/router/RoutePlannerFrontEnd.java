@@ -23,6 +23,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
+import net.osmand.map.OsmandRegions;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -313,6 +314,12 @@ public class RoutePlannerFrontEnd {
 	
 	public boolean isUseNativeApproximation() {
 		return useNativeApproximation;
+	}
+
+	public static void initMissingMapsCalculator(OsmandRegions osmandRegions) {
+		if (missingMapsCalculator == null) {
+			missingMapsCalculator = new MissingMapsCalculator(osmandRegions);
+		}
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {

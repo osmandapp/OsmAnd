@@ -208,10 +208,6 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 	}
 
 	@Override
-	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-	}
-
-	@Override
 	public void onCalculationFinish() {
 	}
 

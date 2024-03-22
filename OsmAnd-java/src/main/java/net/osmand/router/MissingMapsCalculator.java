@@ -47,6 +47,10 @@ public class MissingMapsCalculator {
 		or = new OsmandRegions();
 		reader = or.prepareFile();
 	}
+
+	public MissingMapsCalculator(OsmandRegions osmandRegions) {
+		or = osmandRegions;
+	}
 	
 	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
 			throws IOException {
@@ -206,7 +210,9 @@ public class MissingMapsCalculator {
 	}
 
 	public void close() throws IOException {
-		reader.close();
+		if (reader != null) {
+			reader.close();
+		}
 	}
 
 	public String getErrorMessage(RoutingContext ctx) {
