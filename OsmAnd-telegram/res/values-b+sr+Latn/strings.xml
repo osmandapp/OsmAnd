@@ -38,7 +38,7 @@
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mph</string>
-    <string name="si_kmh">Kilometara na sat</string>
+    <string name="si_kmh">Километара на сат</string>
     <string name="si_mph">Milja na sat</string>
     <string name="si_m_s">Metara u sekundi</string>
     <string name="si_min_km">Minuta po kilometru</string>
@@ -62,7 +62,7 @@
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_hour_short">č</string>
     <string name="si_nm_h">Nautičkih milja na sat (čvorovi)</string>
-    <string name="nm_h">nmi/č</string>
+    <string name="nm_h">nmi/h</string>
     <string name="shared_string_welcome">Dobrodošli</string>
     <string name="shared_string_authorization_descr">Unesite vaš telefonski broj Telegrama u međunarodnom formatu</string>
     <string name="shared_string_authorization">Autorizacija</string>
@@ -278,5 +278,5 @@
 \n
 \nAko dobijete netačnu informaciju lokacije ili upotrebom uređaja bez Gugl Plej servisa, probajte da prebacite na API androida</string>
     <string name="send_live_location_error">Pošalji grešku lokacije uživo: %1$s</string>
-    <string name="shared_string_error">Greška</string>
+    <string name="shared_string_error">Грeшкa</string>
 </resources>
