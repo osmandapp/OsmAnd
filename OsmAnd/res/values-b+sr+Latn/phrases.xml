@@ -517,7 +517,7 @@
     <string name="poi_tax_inspection">Poreska inspekcija</string>
     <string name="poi_isolated_dwelling">Salaš</string>
     <string name="poi_quarter">Gradski četvrt</string>
-    <string name="poi_neighbourhood">Mesna zajednica</string>
+    <string name="poi_neighbourhood">Gradsko naselje</string>
     <string name="poi_nursing_home">Dom za stare</string>
     <string name="poi_sanatorium">Sanatorijum</string>
     <string name="poi_audiologist">Audiolog</string>
@@ -1471,7 +1471,7 @@
     <string name="poi_energy">Energetsko odeljenje</string>
     <string name="poi_car">Auto salon</string>
     <string name="poi_atv">Kvadovi</string>
-    <string name="poi_marketplace">Tržnica</string>
+    <string name="poi_marketplace">Pijaca</string>
     <string name="poi_model">Umanjeni modeli</string>
     <string name="poi_shop_craft">Predmeti umetnosti i zanatstva</string>
     <string name="poi_religion">Religiozna dobra</string>

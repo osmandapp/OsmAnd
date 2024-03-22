@@ -3497,7 +3497,7 @@
     <string name="wiki_menu_download_descr">São necessários mapas adicionais para visualizar os POIs da Wikipédia no mapa.</string>
     <string name="select_wikipedia_article_langs">Selecione os idiomas dos artigos da Wikipédia no mapa. Pode mudar para qualquer idioma disponível enquanto lê um artigo da Wikipédia.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="tracker_item">OsmAnd tracker</string>
     <string name="quick_action_item">Botão de ações rápidas</string>
     <string name="radius_ruler_item">Régua radial</string>
     <string name="measure_distance_item">Medir distância</string>
@@ -4633,7 +4633,7 @@
     <string name="app_mode_mountain_bicycle">Bicicleta de montanha</string>
     <string name="lanes_widgets_desc">Mostra a disposição atual das vias de trânsito na estrada em que se encontra e destaca as vias que deve tomar para seguir a rota.</string>
     <string name="compass_on_circles">Bússola em círculos</string>
-    <string name="distance_circles">Círculos-distância</string>
+    <string name="distance_circles">Círculos de distância</string>
     <string name="circle_settings">Configurações dos círculos</string>
     <string name="colour_of_circles">Cor dos círculos</string>
     <string name="rendering_attr_weatherTempContours_name">Isolinhas de temperatura</string>
@@ -4890,8 +4890,8 @@
     <string name="weather_temperature_celsius">Celsius</string>
     <string name="action_not_supported_with_map_style">Esta ação não é compatível com o estilo de mapa selecionado.</string>
     <string name="rendering_attr_depthContourColorScheme_name">Esquema de cores das linhas</string>
-    <string name="map_widget_sunset_desc">Mostra a hora do próximo pôr do sol ou o tempo que resta até o pôr do sol.</string>
-    <string name="map_widget_sunrise_desc">Mostra a hora do próximo nascer do sol ou o tempo que resta até o nascer do sol.</string>
+    <string name="map_widget_sunset_desc">Mostra a hora do próximo pôr do sol ou o tempo que falta para o pôr do sol.</string>
+    <string name="map_widget_sunrise_desc">Mostra a hora do próximo nascer do sol ou o tempo que falta para o nascer do sol.</string>
     <string name="shared_string_next_sunset">Próximo pôr do sol</string>
     <string name="shared_string_sunrise">Nascer do sol</string>
     <string name="shared_string_next_sunrise">Próximo nascer do sol</string>
@@ -5665,4 +5665,10 @@
 \n - Início de sessão do OpenStreetMap alterado para OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Distância durante a navegação</string>
+    <string name="precise">Preciso</string>
+    <string name="round_up">Arredondado</string>
+    <string name="distance_during_navigation_description">Escolha como as informações de distância são apresentadas nos widgets de navegação (distância até ao ponto, próxima curva, vias).
+\n
+\nEscolha \"%1$s\" para números exatos ou \"%2$s\" para uma leitura mais fácil.</string>
 </resources>

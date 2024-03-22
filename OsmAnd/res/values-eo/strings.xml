@@ -5655,4 +5655,10 @@
 \n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Distanco dum navigi</string>
+    <string name="precise">Preciza</string>
+    <string name="round_up">Rondigita</string>
+    <string name="distance_during_navigation_description">Maniero vidigi distancon sur navigaj fenestraĵoj (Distanco al celo/intercelo, Sekva turniĝo, Vetur-koridoroj).
+\n
+\nElektu “%1$s”-n por vidigi precizajn valorojn aŭ ”%2$s”-n por pli bona legeblo.</string>
 </resources>

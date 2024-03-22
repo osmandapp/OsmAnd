@@ -5640,24 +5640,24 @@
     <string name="auto_zoom_smooth">Sanft</string>
     <string name="auto_zoom_discrete">Diskret</string>
     <string name="auto_zoom">Autozoom</string>
-    <string name="java_safe">Java (Sicher)</string>
-    <string name="gpx_approximation">GPX Annäherung</string>
+    <string name="java_safe">Java (sicher)</string>
+    <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
     <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
-    <string name="release_4_7">• Neues \"Tachometer\"-Widget, kompatibel mit Android Auto
+    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto
 \n
-\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer \"Schnellaktions\"-Tasten
+\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“
 \n
 \n• Verbesserte Lesbarkeit der Daten in Diagrammen
 \n
-\n• Hinzugefügte Filter nach Sensordaten für Strecken
+\n• Filter nach Sensordaten für Strecken hinzugefügt
 \n
 \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
 \n
-\n• Anpassen der \"Distanz während der Navigation\": Wahl zwischen präzisen oder gerundeten Zahlen
+\n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
 \n
 \n• Vereinheitlichte Benutzeroberfläche für die Streckenauswahl
 \n
@@ -5667,7 +5667,7 @@
     <string name="round_up">Abrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Distanz während der Navigation</string>
-    <string name="distance_during_navigation_description">Wähle, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zum Punkt, nächste Abbiegung, Spuren).
+    <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
 \n
-\nWähle „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
+\nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
 </resources>
