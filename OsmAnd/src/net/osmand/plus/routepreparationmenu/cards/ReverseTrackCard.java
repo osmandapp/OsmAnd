@@ -12,7 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 
-public class ReverseTrackCard extends MapBaseCard {
+public class ReverseTrackCard extends BaseCard {
 
 	private final LocalRoutingParameter parameter;
 

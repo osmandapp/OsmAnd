@@ -3,6 +3,7 @@ package net.osmand.plus.views.layers.geometry;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.core.jni.QListFloat;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
@@ -190,6 +191,20 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			points = null;
 			routeSegments = null;
 			super.clearWay();
+		}
+	}
+
+	@Override
+	public void calculatePath(@NonNull List<Integer> indexes, @NonNull List<Integer> xs, @NonNull List<Integer> ys, @Nullable List<GeometryWayStyle<?>> styles, @NonNull List<GeometryWayDrawer.DrawPathData31> pathsData) {
+		super.calculatePath(indexes, xs, ys, styles, pathsData);
+		for (int i = 0; i < pathsData.size(); i++) {
+			GeometryWayDrawer.DrawPathData31 drawPathData = pathsData.get(i);
+			drawPathData.heights = new QListFloat();
+			for (int ii = 0; ii < drawPathData.indexes.size(); ii++) {
+				int index = drawPathData.indexes.get(ii);
+				WptPt point = points.get(index);
+				drawPathData.heights.add((float)point.ele);
+			}
 		}
 	}
 }

@@ -1192,11 +1192,11 @@ public class ResourceManager {
 						break;
 					}
 					if (index != null && index.checkContainsInt(top31, left31, bottom31, right31)) {
-						List<Amenity> r = index.searchAmenities(top31,
-								left31, bottom31, right31, zoom, filter, matcher);
-						if (r != null) {
-							amenities.addAll(r);
-						}
+//						List<Amenity> r = index.searchAmenities(top31,
+//								left31, bottom31, right31, zoom, filter, matcher);
+//						if (r != null) {
+//							amenities.addAll(r);
+//						}
 					}
 				}
 			}

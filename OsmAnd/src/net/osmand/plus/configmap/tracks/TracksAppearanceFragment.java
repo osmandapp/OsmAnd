@@ -46,6 +46,7 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
+import net.osmand.plus.track.cards.Track3DCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
@@ -170,6 +171,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			addCard(container, new SplitIntervalCard(activity, trackDrawInfo));
 			addCard(container, new DirectionArrowsCard(activity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(activity, trackDrawInfo));
+			addCard(container, new Track3DCard(activity, trackDrawInfo));
 
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 			inflater.inflate(R.layout.list_item_divider_basic, container, true);

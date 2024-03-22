@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
@@ -65,6 +66,7 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
+	private boolean use3DTrackVisualization;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -109,6 +111,7 @@ public class TrackDrawInfo {
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
 		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
+//		use3DTrackVisualization = settings.TRACK_3D_VISUALIZATION.get();
 	}
 
 	public void initDefaultTrackParams(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
@@ -148,6 +151,7 @@ public class TrackDrawInfo {
 		joinSegments = dataItem.getParameter(JOIN_SEGMENTS);
 		showArrows = dataItem.getParameter(SHOW_ARROWS);
 		showStartFinish = dataItem.getParameter(SHOW_START_FINISH);
+		use3DTrackVisualization = dataItem.getParameter(USE_3D_TRACK_VISUALIZATION);
 	}
 
 	@Nullable
@@ -251,6 +255,14 @@ public class TrackDrawInfo {
 
 	public void setShowArrows(boolean showArrows) {
 		this.showArrows = showArrows;
+	}
+
+	public boolean isUse3DTrackVisualization() {
+		return use3DTrackVisualization;
+	}
+
+	public void setUse3DTrackVisualization(boolean use3DTrackVisualization) {
+		this.use3DTrackVisualization = use3DTrackVisualization;
 	}
 
 	public void setShowStartFinish(boolean showStartFinish) {

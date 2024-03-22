@@ -59,6 +59,7 @@ import net.osmand.plus.track.cards.ActionsCard;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
+import net.osmand.plus.track.cards.Track3DCard;
 import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.card.color.ColoringCardController.IColorCardControllerListener;
@@ -719,6 +720,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			}
 
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
+			addCard(container, new Track3DCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 			inflate(R.layout.list_item_divider_basic, container, true);
 			addCard(container, new MultiStateCard(mapActivity, getColorCardController()));

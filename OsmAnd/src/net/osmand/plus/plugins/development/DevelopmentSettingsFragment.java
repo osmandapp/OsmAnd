@@ -194,6 +194,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference textsCategory = findPreference("routes");
 		textsCategory.setIconSpaceReserved(false);
 
+		////
 		SwitchPreferenceEx raiseRoutesPref = findPreference(plugin.RAISE_ROUTES_ABOVE_RELIEF.getId());
 		raiseRoutesPref.setIconSpaceReserved(false);
 		raiseRoutesPref.setDescription("Display routes 1000 meters higher above the ground");

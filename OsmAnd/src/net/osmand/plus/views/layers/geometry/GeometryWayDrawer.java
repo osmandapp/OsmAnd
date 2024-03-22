@@ -57,6 +57,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		List<Integer> indexes;
 		List<Integer> tx;
 		List<Integer> ty;
+		QListFloat heights;
 		GeometryWayStyle<?> style;
 
 		public DrawPathData31(@NonNull List<Integer> indexes,
@@ -163,9 +164,13 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float r = 0.2f;
 		float g = 0.6f;
 		float b = 1.0f;
-		boolean showRaised = false;
+		boolean showRaised = true;
 		boolean showTransparentTraces = false;
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
+
+
+
+
 		if (plugin != null) {
 			showRaised = plugin.RAISE_ROUTES_ABOVE_RELIEF.get();
 			showTransparentTraces = plugin.SHOW_TRANSPARENT_TRACES.get();
@@ -178,7 +183,10 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			for (int i = 0; i < data.tx.size(); i++) {
 				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
 				if (showRaised) {
-					heights.add(1000.0f);
+					if(i < data.heights.size()) {
+						data.heights.set(i, data.heights.get(i) + 1000);
+					}
+//					heights.add(1000.0f);
 				}
 			}
 		}

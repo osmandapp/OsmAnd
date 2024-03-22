@@ -6,6 +6,7 @@ import android.graphics.PointF;
 
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.VectorLineArrowsProvider;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
@@ -46,6 +47,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	private final List<GeometryWayStyle<?>> styles = new ArrayList<>();
 
 	//OpenGL
+	private final List<Float> heights = new ArrayList<>();
 	private final List<Integer> tx31 = new ArrayList<>();
 	private final List<Integer> ty31 = new ArrayList<>();
 	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
@@ -413,6 +415,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					List<Integer> ind = new ArrayList<>();
 					List<Integer> tx = new ArrayList<>();
 					List<Integer> ty = new ArrayList<>();
+					QListFloat heights = new QListFloat();
 					List<Integer> indexes = pathData.indexes;
 					for (int i = 0; i < indexes.size(); i++) {
 						Integer index = indexes.get(i);
@@ -423,6 +426,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 							ind.add(index);
 							tx.add(pathData.tx.get(i));
 							ty.add(pathData.ty.get(i));
+							heights.add(pathData.heights.get(i));
 						}
 					}
 					if (previousVisible) {
@@ -431,10 +435,17 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 							ind.add(0, index);
 							tx.add(0, this.tx31.get(0));
 							ty.add(0, this.ty31.get(0));
+							QListFloat newHeights = new QListFloat();
+							newHeights.add(pathData.heights.get(0));
+							for (int i = 0; i < heights.size(); i++){
+								newHeights.add(heights.get(i));
+							}
+							heights = newHeights;
+
 						}
 					}
 					if (tx.size() > 1) {
-						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style);
+						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style/*, heights*/);
 						newPathsDataList.add(newPathData);
 					}
 					drawNext = true;
@@ -575,7 +586,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return cnt;
 	}
 
-	public static void calculatePath(@NonNull List<Integer> indexes,
+	public void calculatePath(@NonNull List<Integer> indexes,
 	                                 @NonNull List<Integer> xs, @NonNull List<Integer> ys,
 	                                 @Nullable List<GeometryWayStyle<?>> styles,
 	                                 @NonNull List<DrawPathData31> pathsData) {
@@ -584,9 +595,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		List<Integer> ind = new ArrayList<>();
 		List<Integer> tx = new ArrayList<>();
 		List<Integer> ty = new ArrayList<>();
+		QListFloat heights = new QListFloat();
 		ind.add(indexes.get(0));
 		tx.add(xs.get(0));
 		ty.add(ys.get(0));
+//		heights.add(points);
 		for (int i = 1; i < xs.size(); i++) {
 			ind.add(indexes.get(i));
 			tx.add(xs.get(i));
@@ -594,10 +607,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (hasStyles) {
 				GeometryWayStyle<?> newStyle = styles.get(i);
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					pathsData.add(new DrawPathData31(ind, tx, ty, style));
+					pathsData.add(new DrawPathData31(ind, tx, ty, style/*, heights*/));
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
+					heights = new QListFloat();
 					ind.add(indexes.get(i));
 					tx.add(xs.get(i));
 					ty.add(ys.get(i));
@@ -606,7 +620,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 		}
 		if (tx.size() > 1) {
-			pathsData.add(new DrawPathData31(ind, tx, ty, style));
+			pathsData.add(new DrawPathData31(ind, tx, ty, style/*, heights*/));
 		}
 	}
 

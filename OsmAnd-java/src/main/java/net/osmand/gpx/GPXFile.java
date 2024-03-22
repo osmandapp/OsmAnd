@@ -753,6 +753,18 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
 	}
 
+	public boolean isUse3DVisualization() {
+		String use3DVisualization = null;
+		if (extensions != null) {
+			use3DVisualization = extensions.get("use_3d_visualization");
+		}
+		return Boolean.parseBoolean(use3DVisualization);
+	}
+
+	public void setUse3DVisualization(boolean use3DVisualization) {
+		getExtensionsToWrite().put("use_3d_visualization", String.valueOf(use3DVisualization));
+	}
+
 	public boolean isShowStartFinishSet() {
 		return extensions != null && extensions.containsKey("show_start_finish");
 	}

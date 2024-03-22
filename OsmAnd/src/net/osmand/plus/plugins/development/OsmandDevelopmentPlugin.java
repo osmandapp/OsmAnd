@@ -68,7 +68,9 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
 	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
 	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
+	//
 	public final OsmandPreference<Boolean> RAISE_ROUTES_ABOVE_RELIEF;
+
 	public final OsmandPreference<Boolean> SHOW_TRANSPARENT_TRACES;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
 	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
@@ -97,6 +99,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
 		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
 		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
+
 		RAISE_ROUTES_ABOVE_RELIEF = registerBooleanPreference("raise_routes_above_relief", false).makeGlobal().makeShared().cache();
 		SHOW_TRANSPARENT_TRACES = registerBooleanPreference("show_transparent_traces", false).makeGlobal().makeShared().cache();
 
@@ -124,6 +127,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			if (mapActivity != null)
 				mapActivity.restart();
 		};
+
 		RAISE_ROUTES_ABOVE_RELIEF.addListener(routesAboveReliefListener);
 		SHOW_TRANSPARENT_TRACES.addListener(routesAboveReliefListener);
 
