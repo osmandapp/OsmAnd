@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -750,11 +751,18 @@ public class Algorithms {
 
 
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
+		streamCopy(in, out, pg, bytesDivisor, null);
+	}
+
+	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor, MessageDigest digest) throws IOException {
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
 		int cp = 0;
 		while ((read = in.read(b)) != -1) {
 			out.write(b, 0, read);
+			if (digest != null) {
+				digest.update(b, 0, read);
+			}
 			cp += read;
 			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);

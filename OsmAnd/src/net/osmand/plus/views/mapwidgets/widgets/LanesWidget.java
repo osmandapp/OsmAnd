@@ -109,7 +109,8 @@ public class LanesWidget extends MapWidget {
 		boolean visible = lanes != null && lanes.length > 0
 				&& !MapRouteInfoMenu.chooseRoutesVisible
 				&& !MapRouteInfoMenu.waypointsVisible
-				&& !MapRouteInfoMenu.followTrackVisible;
+				&& !MapRouteInfoMenu.followTrackVisible
+				&& !mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		if (visible) {
 			updateLanes(lanes, imminent, distance);
 		}

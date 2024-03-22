@@ -4612,7 +4612,7 @@
     <string name="average_speed_time_interval_desc">Gib das Zeitintervall für die Durchschnittsberechnung der Geschwindigkeit an.</string>
     <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Reise an.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tippe auf das Widget, um die Modi zu wechseln.</string>
     <string name="rendering_attr_weatherPressureContours_name">Isobaren</string>
     <string name="routing_attr_avoid_fords_description">Furten vermeiden</string>
     <string name="distance_circles">Entfernungskreise</string>
@@ -5201,7 +5201,7 @@
     <string name="rendering_value_name_only_name">Nur Name</string>
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
-    <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_3d_mode_description">Berühre die Karte mit zwei Fingern und bewege sie nach oben und unten, um die Kartenneigung anzupassen.</string>
     <string name="map_2d_mode_action">2D-Modus</string>
     <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
@@ -5257,7 +5257,7 @@
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Reliefschattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
-    <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
+    <string name="free_favorites_backup_description">Registriere dich in OsmAnd Cloud, um ein kostenloses Backup deiner Favoriten und Einstellungen zu erhalten.</string>
     <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
@@ -5647,4 +5647,27 @@
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
+    <string name="release_4_7">• Neues \"Tachometer\"-Widget, kompatibel mit Android Auto
+\n
+\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer \"Schnellaktions\"-Tasten
+\n
+\n• Verbesserte Lesbarkeit der Daten in Diagrammen
+\n
+\n• Hinzugefügte Filter nach Sensordaten für Strecken
+\n
+\n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
+\n
+\n• Anpassen der \"Distanz während der Navigation\": Wahl zwischen präzisen oder gerundeten Zahlen
+\n
+\n• Vereinheitlichte Benutzeroberfläche für die Streckenauswahl
+\n
+\n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
+\n
+\n</string>
+    <string name="round_up">Abrunden</string>
+    <string name="precise">Präzise</string>
+    <string name="distance_during_navigation">Distanz während der Navigation</string>
+    <string name="distance_during_navigation_description">Wähle, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zum Punkt, nächste Abbiegung, Spuren).
+\n
+\nWähle „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
 </resources>

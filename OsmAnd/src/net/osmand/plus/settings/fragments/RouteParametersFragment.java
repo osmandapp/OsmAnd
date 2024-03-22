@@ -270,6 +270,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
 						&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
 						&& !param.equals(GeneralRouter.MOTOR_TYPE)
+						&& !param.equals(GeneralRouter.MAX_AXLE_LOAD)
+						&& !param.equals(GeneralRouter.WEIGHT_RATING)
 						&& !param.equals(GeneralRouter.VEHICLE_LENGTH)) {
 					otherRoutingParameters.add(routingParameter);
 				}

@@ -20,6 +20,7 @@ import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -259,7 +260,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 	@Override
 	public boolean needMd5Digest() {
-		return subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE;
+		return CollectionUtils.equalsToAny(subtype, FileSubtype.TTS_VOICE, FileSubtype.VOICE, FileSubtype.GPX);
 	}
 
 	public File getPluginPath() {

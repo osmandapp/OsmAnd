@@ -68,13 +68,14 @@ public class ConfigureOtherCard extends MapBaseCard {
 		description.setTextSize(COMPLEX_UNIT_PX, app.getResources().getDimensionPixelSize(R.dimen.default_sub_text_size));
 
 		AndroidUiHelper.updateVisibility(description, true);
+		AndroidUiHelper.updateVisibility(button.findViewById(R.id.short_divider), true);
 	}
 
 	private void setupSpeedometerButton(@NonNull ApplicationMode appMode) {
 		boolean enabled = settings.SHOW_SPEEDOMETER.getModeValue(appMode);
 
 		String title = getString(R.string.shared_string_speedometer);
-		int iconId = nightMode ? R.drawable.widget_speed_night : R.drawable.widget_speed_day;
+		int iconId = enabled ? (nightMode ? R.drawable.widget_speed_night : R.drawable.widget_speed_day) : R.drawable.ic_action_speed_outlined;
 
 		View button = view.findViewById(R.id.speedometer);
 		ConfigureButtonsCard.setupButton(button, title, null, 0, enabled, nightMode);

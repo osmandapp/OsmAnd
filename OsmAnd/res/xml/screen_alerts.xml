@@ -17,6 +17,11 @@
 		tools:icon="@drawable/ic_action_info_dark" />
 
 	<SwitchPreferenceCompat
+		android:key="show_speed_limit_warnings"
+		android:layout="@layout/preference_switch"
+		android:title="@string/traffic_warning_speed_limit" />
+
+	<SwitchPreferenceCompat
 		android:key="show_traffic_warnings"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_traffic_warnings" />
