@@ -5557,4 +5557,8 @@
     <string name="default_buttons">Przyciski domyślne</string>
     <string name="sorted_sufolders_toast">Podfoldery w \"%1$s\" sortowane są według: \"%2$s\"</string>
     <string name="sort_subfolders">Sortuj podfoldery</string>
+    <string name="precise">Precyzyjnie</string>
+    <string name="distance_during_navigation_description">Wybierz sposób wyświetlania informacji o odległości w widżetach nawigacji (odległość do punktu, następny zakręt, pasy ruchu).
+\n
+\nWybierz \"%1$s\" dla dokładnych liczb lub \"%2$s\" dla większej czytelności.</string>
 </resources>
