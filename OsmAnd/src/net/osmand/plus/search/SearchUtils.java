@@ -1,11 +1,14 @@
 package net.osmand.plus.search;
 
+import static net.osmand.plus.poi.PoiUIFilter.STD_PREFIX;
 import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
 import static net.osmand.search.core.ObjectType.CITY;
 import static net.osmand.search.core.ObjectType.HOUSE;
 import static net.osmand.search.core.ObjectType.LOCATION;
 import static net.osmand.search.core.ObjectType.ONLINE_SEARCH;
 import static net.osmand.search.core.ObjectType.PARTIAL_LOCATION;
+import static net.osmand.search.core.ObjectType.POI;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
 import static net.osmand.search.core.ObjectType.POSTCODE;
 import static net.osmand.search.core.ObjectType.STREET;
 import static net.osmand.search.core.ObjectType.STREET_INTERSECTION;
@@ -34,12 +37,13 @@ public class SearchUtils {
 		} else if (result.object instanceof PoiUIFilter) {
 			SearchHistoryHelper.getInstance(app).addNewItemToHistory((PoiUIFilter) result.object, SEARCH);
 		}
+
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		if (result.object instanceof PoiType && ((PoiType) result.object).isAdditional()) {
 			PoiType additional = (PoiType) result.object;
 			AbstractPoiType parent = additional.getParentType();
 			if (parent != null) {
-				PoiUIFilter custom = app.getPoiFilters().getFilterById(PoiUIFilter.STD_PREFIX + parent.getKeyName());
+				PoiUIFilter custom = app.getPoiFilters().getFilterById(STD_PREFIX + parent.getKeyName());
 				if (custom != null) {
 					custom.clearFilter();
 					custom.updateTypesToAccept(parent);
@@ -71,6 +75,38 @@ public class SearchUtils {
 		return settings.setEmptyQueryAllowed(true)
 				.setSortByName(false)
 				.setSearchTypes(CITY, VILLAGE, POSTCODE, HOUSE, STREET_INTERSECTION, STREET, LOCATION, PARTIAL_LOCATION)
+				.setRadiusLevel(1);
+	}
+
+	@NonNull
+	public static SearchSettings setupStreetSearchSettings(@NonNull SearchSettings settings) {
+		return settings.setEmptyQueryAllowed(true)
+				.setSortByName(true)
+				.setSearchTypes(STREET_INTERSECTION, STREET)
+				.setRadiusLevel(1);
+	}
+
+	@NonNull
+	public static SearchSettings setupPOITypeSearchSettings(@NonNull SearchSettings settings) {
+		return settings.setEmptyQueryAllowed(true)
+				.setSortByName(true)
+				.setSearchTypes(POI_TYPE)
+				.setRadiusLevel(1);
+	}
+
+	@NonNull
+	public static SearchSettings setupPOISearchSettings(@NonNull SearchSettings settings) {
+		return settings.setEmptyQueryAllowed(true)
+				.setSortByName(true)
+				.setSearchTypes(POI)
+				.setRadiusLevel(1);
+	}
+
+	@NonNull
+	public static SearchSettings setupHouseSearchSettings(@NonNull SearchSettings settings) {
+		return settings.setEmptyQueryAllowed(true)
+				.setSortByName(true)
+				.setSearchTypes(HOUSE)
 				.setRadiusLevel(1);
 	}
 
