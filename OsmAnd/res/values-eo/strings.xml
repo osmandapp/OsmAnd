@@ -651,7 +651,7 @@
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
     <string name="local_index_select_gpx_file">Elektu kurson</string>
-    <string name="gpx_split_interval">Fragmento</string>
+    <string name="gpx_split_interval">Fragmenti</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
     <string name="sort_by_name">Ordigi laŭ nomo</string>
     <string name="plugin_touringview_name">Turisma map-vido</string>
@@ -5421,7 +5421,7 @@
     <string name="app_mode_baby_transport">Transporto de beboj</string>
     <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo
 \n
-\n• spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por granadj dosieroj
+\n• spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por grandaj dosieroj
 \n
 \n• modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon
 \n
@@ -5431,9 +5431,9 @@
 \n
 \n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno
 \n
-\n• OsmAnd-Nubo: aliro por forigitaj dosieroj
+\n • OsmAnd-Nubo: aliro por forigitaj dosieroj
 \n
-\n• plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento
+\n • plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento
 \n
 \n • riparitaj problemoj pri travideblaj stataj strioj
 \n
