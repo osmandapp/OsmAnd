@@ -26,6 +26,11 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 	protected ColoringStyleDetailsCard card;
 
 	public ColoringStyleDetailsCardController(@NonNull OsmandApplication app,
+	                                          @NonNull ColoringStyle coloringStyle) {
+		this(app, coloringStyle, null);
+	}
+
+	public ColoringStyleDetailsCardController(@NonNull OsmandApplication app,
 	                                          @NonNull ColoringStyle coloringStyle,
 	                                          @Nullable GPXTrackAnalysis analysis) {
 		this.app = app;

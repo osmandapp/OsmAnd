@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,7 +44,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
@@ -75,7 +73,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	private TrackDrawInfo trackDrawInfo;
 	private final List<BaseCard> cards = new ArrayList<>();
 
-	private HeadedContentCard trackWidthCard;
 	private DialogButton applyButton;
 
 	@ColorRes
@@ -184,8 +181,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 			addCard(container, new MultiStateCard(activity, getColorCardController()));
 
 			inflater.inflate(R.layout.list_item_divider_basic, container, true);
-			trackWidthCard = new HeadedContentCard(activity, getWidthCardController());
-			addCard(container, trackWidthCard);
+			addCard(container, new HeadedContentCard(activity, getWidthCardController()));
 		}
 	}
 
@@ -275,7 +271,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	@Override
-	public void onTrackWidthSelected(@NonNull String width) {
+	public void onTrackWidthSelected(@Nullable String width) {
 
 	}
 

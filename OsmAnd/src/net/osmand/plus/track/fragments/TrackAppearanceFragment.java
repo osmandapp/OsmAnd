@@ -99,7 +99,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private int menuTitleHeight;
 	private long modifiedTime = -1;
 
-	private HeadedContentCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
 	private boolean showStartFinishIconsInitialValue;
 
@@ -459,7 +458,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onTrackWidthSelected(@NonNull String width) {
+	public void onTrackWidthSelected(@Nullable String width) {
 		updateAppearanceIcon();
 	}
 
@@ -725,14 +724,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 				addCard(container, splitIntervalCard);
 			}
-
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 			inflate(R.layout.list_item_divider_basic, container, true);
 			addCard(container, new MultiStateCard(mapActivity, getColorCardController()));
 			inflate(R.layout.list_item_divider_basic, container, true);
-			trackWidthCard = new HeadedContentCard(mapActivity, getWidthCardController());
-			addCard(container, trackWidthCard);
+			addCard(container, new HeadedContentCard(mapActivity, getWidthCardController()));
 			addCard(container, new ActionsCard(mapActivity));
 		}
 	}
@@ -783,13 +780,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private int getBottomVisibleY() {
 		return controlButtons.getTop();
-	}
-
-	public int getInnerScrollableHeight() {
-		int totalScreenHeight = getViewHeight() - getMenuStatePosY(getCurrentMenuState());
-		int frameTotalHeight = routeMenuTopShadowAll.getHeight()
-				+ controlButtons.getHeight() + buttonsShadow.getHeight();
-		return totalScreenHeight - frameTotalHeight;
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,

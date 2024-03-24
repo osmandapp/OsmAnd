@@ -4,22 +4,14 @@ import static net.osmand.plus.utils.ColorUtilities.getStatusBarSecondaryColorId;
 
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -39,9 +31,7 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			if (Build.VERSION.SDK_INT >= 21) {
-				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
-			}
+			window.setStatusBarColor(getColor(getStatusBarColor()));
 		}
 		return dialog;
 	}
@@ -67,15 +57,6 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	@ColorRes
 	protected int getStatusBarColor() {
 		return getStatusBarSecondaryColorId(nightMode);
-	}
-
-	@ColorInt
-	protected int getResolvedColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(getContext(), colorId);
-	}
-
-	protected View inflate(@LayoutRes int layoutId, @Nullable ViewGroup container) {
-		return themedInflater.inflate(layoutId, container, false);
 	}
 
 	protected void setupToolbar(Toolbar toolbar) {

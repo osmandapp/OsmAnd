@@ -1,7 +1,6 @@
 package net.osmand.plus.card.color;
 
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -13,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.color.cstyle.OnSelectColoringStyleListener;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringStyleAlgorithms;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.ColorUtilities;
@@ -29,16 +27,14 @@ import java.util.Objects;
 
 public abstract class ColoringStyleCardController extends BaseMultiStateCardController {
 
-	protected final OsmandApplication app;
 	private final List<ColoringStyle> supportedColoringStyles;
 
 	private ColoringStyle selectedColoringStyle;
 	private IColorCardControllerListener controllerListener;
-	private boolean nightMode;
 
 	public ColoringStyleCardController(@NonNull OsmandApplication app,
 	                                   @NonNull ColoringStyle selectedColoringStyle) {
-		this.app = app;
+		super(app);
 		this.supportedColoringStyles = collectSupportedColoringStyles();
 		this.selectedColoringStyle = selectedColoringStyle;
 	}
@@ -68,6 +64,7 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	@Override
 	public List<PopUpMenuItem> getPopUpMenuItems() {
 		List<PopUpMenuItem> menuItems = new ArrayList<>();
+		boolean nightMode = cardInstance.isNightMode();
 		for (ColoringStyle coloringStyle : getSupportedColoringStyles()) {
 			int titleColor = isDataAvailableForColoringStyle(coloringStyle)
 					? ColorUtilities.getPrimaryTextColor(app, nightMode)
@@ -80,20 +77,6 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 			);
 		}
 		return menuItems;
-	}
-
-	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
-		this.nightMode = nightMode;
-		container.removeAllViews();
-		BaseCard card = getContentCardForSelectedState(activity);
-		View cardView = card.getView() != null ? card.getView() : card.build(activity);
-		container.addView(cardView);
-	}
-
-	@Override
-	public boolean shouldShowCardHeader() {
-		return true;
 	}
 
 	@Override
@@ -122,7 +105,7 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 		text += " " + app.getString(R.string.select_another_colorization);
 		Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
 				.setAnchorView(activity.findViewById(R.id.dismiss_button));
-		UiUtilities.setupSnackbar(snackbar, nightMode);
+		UiUtilities.setupSnackbar(snackbar, cardInstance.isNightMode());
 		snackbar.show();
 	}
 
@@ -176,9 +159,6 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	protected abstract ColoringType[] getSupportedColoringTypes();
 
 	protected abstract boolean isUsedOnMap();
-
-	@NonNull
-	protected abstract BaseCard getContentCardForSelectedState(@NonNull FragmentActivity activity);
 
 	protected abstract boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle);
 

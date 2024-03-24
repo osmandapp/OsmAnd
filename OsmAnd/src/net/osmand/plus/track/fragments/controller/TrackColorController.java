@@ -5,6 +5,8 @@ import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDraw
 import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -27,7 +29,6 @@ import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.AppearanceListItem;
@@ -58,17 +59,18 @@ public class TrackColorController extends ColoringStyleCardController implements
 		this.drawInfo = drawInfo;
 	}
 
-	@NonNull
 	@Override
-	protected BaseCard getContentCardForSelectedState(@NonNull FragmentActivity activity) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+		container.removeAllViews();
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
+
 		if (!isAvailableInSubscription(coloringStyle)) {
-			return new PromoBannerCard(activity, isUsedOnMap());
+			container.addView(new PromoBannerCard(activity, isUsedOnMap()).build());
 		} else if (coloringType.isTrackSolid()) {
-			return new ColorsPaletteCard(activity, getColorsPaletteController(), isUsedOnMap());
+			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController(), isUsedOnMap()).build());
 		} else {
-			return new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController(), isUsedOnMap());
+			container.addView(new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController(), isUsedOnMap()).build());
 		}
 	}
 

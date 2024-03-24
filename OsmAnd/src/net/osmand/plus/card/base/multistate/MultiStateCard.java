@@ -34,7 +34,7 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 
 	@Override
 	protected void updateContent() {
-		if(controller.shouldShowCardHeader()) {
+		if (controller.shouldShowCardHeader()) {
 			updateCardTitle();
 			updateStateSelector();
 		} else {

@@ -2,6 +2,9 @@ package net.osmand.plus.settings.controllers;
 
 import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -140,8 +143,15 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		return coloringStyleDetailsController;
 	}
 
-	@NonNull
 	@Override
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+		container.removeAllViews();
+		BaseCard card = getContentCardForSelectedState(activity);
+		View cardView = card.getView() != null ? card.getView() : card.build(activity);
+		container.addView(cardView);
+	}
+
+	@NonNull
 	protected BaseCard getContentCardForSelectedState(@NonNull FragmentActivity activity) {
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();

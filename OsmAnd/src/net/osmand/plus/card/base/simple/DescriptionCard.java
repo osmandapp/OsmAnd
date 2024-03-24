@@ -14,6 +14,14 @@ public class DescriptionCard extends BaseCard {
 	private final CharSequence initialDescription;
 	private TextView textView;
 
+	public DescriptionCard(@NonNull FragmentActivity activity, @StringRes int stringRes) {
+		this(activity, stringRes, true);
+	}
+
+	public DescriptionCard(@NonNull FragmentActivity activity, @StringRes int stringRes, boolean usedOnMap) {
+		this(activity, activity.getString(stringRes), usedOnMap);
+	}
+
 	public DescriptionCard(@NonNull FragmentActivity activity, @NonNull CharSequence initialDescription) {
 		this(activity, initialDescription, true);
 	}

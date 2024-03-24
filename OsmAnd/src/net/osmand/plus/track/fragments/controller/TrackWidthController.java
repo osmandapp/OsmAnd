@@ -172,7 +172,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	}
 
 	public interface OnTrackWidthSelectedListener {
-		void onTrackWidthSelected(@NonNull String width);
+		void onTrackWidthSelected(@Nullable String width);
 	}
 
 	@NonNull
