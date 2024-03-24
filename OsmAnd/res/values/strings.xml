@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="unchanged_parameter_summary">Each track will retain its own parameters.</string>
+    <string name="shared_string_unchanged">Unchanged</string>
     <string name="release_4_7">
         • New \"Speedometer\" widget compatible with Android Auto\n\n
         • Configure the map screen by adding multiple \"Quick Action\" buttons\n\n

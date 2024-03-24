@@ -20,6 +20,7 @@ public enum ColoringType {
 	TRACK_SOLID("solid", R.string.track_coloring_solid, R.drawable.ic_action_circle),
 	SPEED("speed", R.string.shared_string_speed, R.drawable.ic_action_speed),
 	// For both route and gpx file
+	UNCHANGED("unchanged", R.string.shared_string_unchanged, R.drawable.ic_action_info_dark),
 	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
 	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
 	ATTRIBUTE("attribute", R.string.attribute, R.drawable.ic_action_hillshade_dark);
@@ -29,6 +30,9 @@ public enum ColoringType {
 	};
 	private static final ColoringType[] TRACK_TYPES = new ColoringType[] {
 			TRACK_SOLID, SPEED, ALTITUDE, SLOPE, ATTRIBUTE
+	};
+	private static final ColoringType[] TRACKS_GROUP_TYPES = new ColoringType[] {
+			UNCHANGED, TRACK_SOLID, SPEED, ALTITUDE, SLOPE, ATTRIBUTE
 	};
 
 	private final String id;
@@ -155,6 +159,11 @@ public enum ColoringType {
 
 	@NonNull
 	public static ColoringType[] valuesOf(@NonNull ColoringPurpose purpose) {
-		return purpose == ColoringPurpose.ROUTE_LINE ? ROUTE_TYPES : TRACK_TYPES;
+		if (purpose == ColoringPurpose.TRACK) {
+			return TRACK_TYPES;
+		} else if (purpose == ColoringPurpose.TRACKS_GROUP) {
+			return TRACKS_GROUP_TYPES;
+		}
+		return ROUTE_TYPES;
 	}
 }

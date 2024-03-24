@@ -5,6 +5,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
@@ -14,7 +15,12 @@ import java.util.List;
 
 public abstract class BaseMultiStateCardController implements IMultiStateCardController {
 
+	protected final OsmandApplication app;
 	protected IMultiStateCard cardInstance;
+
+	public BaseMultiStateCardController(@NonNull OsmandApplication app) {
+		this.app = app;
+	}
 
 	@Override
 	public void bindComponent(@NonNull IMultiStateCard cardInstance) {
