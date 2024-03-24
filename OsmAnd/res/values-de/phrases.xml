@@ -1412,10 +1412,10 @@
     <string name="poi_payment_diners_club_no">Diners Club-Karten nicht akzeptiert</string>
     <string name="poi_payment_dkv_yes">DKV</string>
     <string name="poi_payment_dkv_no">DKV nicht akzeptiert</string>
-    <string name="poi_drive_in_yes">ja;Drive-in</string>
-    <string name="poi_drive_in_no">Drive-in: nein</string>
-    <string name="poi_drive_through_yes">ja;Durchfahrt</string>
-    <string name="poi_drive_through_no">Durchfahrt: nein</string>
+    <string name="poi_drive_in_yes">ja;Bedienung im Fahrzeug</string>
+    <string name="poi_drive_in_no">Bedienung im Fahrzeug: nein</string>
+    <string name="poi_drive_through_yes">ja;Drive-in</string>
+    <string name="poi_drive_through_no">Drive-in: nein</string>
     <string name="poi_brewery_additional">Brauereiname</string>
     <string name="poi_microbrewery_yes">ja;Mikrobrauerei</string>
     <string name="poi_microbrewery_no">Keine Minibrauerei</string>
@@ -2820,8 +2820,8 @@
     <string name="poi_star_rating">Sterne Bewertung</string>
     <string name="poi_denomination">Konfession</string>
     <string name="poi_information_type">Art</string>
-    <string name="poi_drive_in">Drive-in</string>
-    <string name="poi_drive_through">Durchfahrschalter</string>
+    <string name="poi_drive_in">Bedienung im Fahrzeug</string>
+    <string name="poi_drive_through">Drive-in</string>
     <string name="poi_beauty_salon_service">Dienstleistung</string>
     <string name="poi_public_bookcase">Öffentlicher Bücherschrank</string>
     <string name="poi_public_bookcase_type_phone_box">Art: Telefonzelle</string>
