@@ -751,9 +751,9 @@
     <string name="routing_attr_avoid_motorway_description">Избегавање аутопутева</string>
     <string name="routing_attr_avoid_borders_name">Без граничних прелаза</string>
     <string name="routing_attr_avoid_borders_description">Избегавање прелажења државних граница</string>
-    <string name="routing_attr_weight_name">Тежина</string>
+    <string name="routing_attr_weight_name">Тежина руте</string>
     <string name="routing_attr_weight_description">Одреди дозвољену тежину возила на путањи.</string>
-    <string name="routing_attr_height_name">Висина</string>
+    <string name="routing_attr_height_name">Висина руте</string>
     <string name="routing_attr_height_description">Одреди висину возила која је дозвољена на путевима.</string>
     <string name="copying_osmand_one_file_descr">Умножавам датотеку (%s) на ново одредиште…</string>
     <string name="copying_osmand_files_descr">Умножавам податке ОСМ-а на ново одредиште (%s)…</string>
@@ -1710,7 +1710,7 @@
     <string name="north_west">северозапад</string>
     <string name="north_north_west">север-северозапад</string>
     <string name="accuracy">Тачност</string>
-    <string name="altitude">Висина</string>
+    <string name="altitude">Алтитуда</string>
     <string name="no_info">Нема података</string>
     <string name="i_am_here">Ја сам овде</string>
     <string name="poi_filter_sightseeing">Разгледање знаменитости</string>
@@ -3403,7 +3403,7 @@
     <string name="shared_string_angle">Угао</string>
     <string name="recalc_angle_dialog_descr">Потпуно прави одсечак између мојег положаја и израчунатог пута биће приказан док се пут не израчуна</string>
     <string name="recalc_angle_dialog_title">Најмањи угао између мојег положаја и пута</string>
-    <string name="shared_string_preparing">Препремам</string>
+    <string name="shared_string_preparing">Припремам</string>
     <string name="shared_string_poi_types">Врсте тачака занимања</string>
     <string name="shared_string_nothing_selected">Ништа није означено</string>
     <string name="shared_string_quick_actions">Брзе радње</string>
