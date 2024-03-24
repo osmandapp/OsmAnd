@@ -276,9 +276,4 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	protected Drawable getEmptyCheckmark() {
 		return getIcon(nightMode ? R.drawable.ic_action_radio_button_night : R.drawable.ic_action_radio_button_day);
 	}
-
-	@ColorInt
-	protected int getColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(app, colorId);
-	}
 }
