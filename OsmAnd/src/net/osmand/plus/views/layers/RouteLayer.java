@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.util.MapUtils.HIGH_LATLON_PRECISION;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -903,7 +905,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			this.shouldRebuildRoute = this.coloringType != coloringType
 					|| this.routeColor != routeColor;
 
-			this.shouldUpdateRoute = (!MapUtils.areLatLonEqualPrecise(this.lastProjection, lastProjection)
+			this.shouldUpdateRoute = (!MapUtils.areLatLonEqual(this.lastProjection, lastProjection, HIGH_LATLON_PRECISION)
 					|| this.startLocationIndex != startLocationIndex
 					|| this.routeWidth != routeWidth
 					|| this.shouldShowDirectionArrows != shouldShowDirectionArrows)
