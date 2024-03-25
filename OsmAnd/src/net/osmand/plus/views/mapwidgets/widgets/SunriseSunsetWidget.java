@@ -19,6 +19,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgetstates.SunriseSunsetWidgetState;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -149,24 +150,14 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private void updateCachedLocation() {
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox();
 		LatLon newCenterLatLon = tileBox.getCenterLatLon();
-		if (!isLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
+		if (!areLocationsEqual(cachedCenterLatLon, newCenterLatLon)) {
 			cachedCenterLatLon = newCenterLatLon;
 			isLocationChanged = true;
 		}
 	}
 
-	private boolean isLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
-		return previousLatLon != null && newLatLon != null
-				&& isLatitudesEqual(previousLatLon, newLatLon)
-				&& isLongitudesEqual(previousLatLon, newLatLon);
-	}
-
-	private boolean isLatitudesEqual(@NonNull LatLon previousLatLon, @NonNull LatLon newLatLon) {
-		return Math.abs(previousLatLon.getLatitude() - newLatLon.getLatitude()) <= LOCATION_CHANGE_ACCURACY;
-	}
-
-	private boolean isLongitudesEqual(@NonNull LatLon previousLatLon, @NonNull LatLon newLatLon) {
-		return Math.abs(previousLatLon.getLongitude() - newLatLon.getLongitude()) <= LOCATION_CHANGE_ACCURACY;
+	private boolean areLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
+		return MapUtils.areLatLonEqual(previousLatLon, newLatLon, LOCATION_CHANGE_ACCURACY);
 	}
 
 	public long getTimeLeft() {

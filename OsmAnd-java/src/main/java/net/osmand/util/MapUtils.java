@@ -771,7 +771,16 @@ public class MapUtils {
 	}
 
 	public static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2) {
-		return Math.abs(lat1 - lat2) < DEFAULT_LATLON_PRECISION && Math.abs(lon1 - lon2) < DEFAULT_LATLON_PRECISION;
+		return areLatLonEqual(lat1, lon1, lat2, lon2, DEFAULT_LATLON_PRECISION);
+	}
+
+	public static boolean areLatLonEqual(LatLon l1, LatLon l2, double precise) {
+		return l1 == null && l2 == null || l1 != null && l2 != null
+				&& areLatLonEqual(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude(), precise);
+	}
+
+	public static boolean areLatLonEqual(double lat1, double lon1, double lat2, double lon2, double precise) {
+		return Math.abs(lat1 - lat2) < precise && Math.abs(lon1 - lon2) < precise;
 	}
 
 	public static boolean areLatLonEqualPrecise(Location l, double lat, double lon) {
