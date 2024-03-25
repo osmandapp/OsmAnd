@@ -42,6 +42,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public static boolean CALCULATE_MISSING_MAPS = true;
+	public static boolean APPROXIMATE_GPX_SEGMENTS = true;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
@@ -132,6 +133,7 @@ public class RoutePlannerFrontEnd {
 	public static class GpxPoint {
 		public int ind;
 		public LatLon loc;
+		public int x31, y31;
 		public double cumDist;
 		public RouteSegmentPoint pnt;
 		public List<RouteSegmentResult> routeToTarget;
@@ -323,6 +325,28 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		if (APPROXIMATE_GPX_SEGMENTS && !useNativeApproximation) {
+			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
+		}
+		return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
+	}
+	
+	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		GpxSegmentsApproximation app = new GpxSegmentsApproximation();
+		if (gctx.ctx.calculationProgress == null) {
+			gctx.ctx.calculationProgress = new RouteCalculationProgress();
+		}
+		app.searchGpxApproximation(this, gctx, gpxPoints, resultMatcher);
+		calculateGpxRoute(gctx, gpxPoints);
+		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
+			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
+			log.info(gctx);
+		}
+		return gctx;
+	}
+
+	
+	public GpxRouteApproximation searchGpxRouteByRouting(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && useNativeApproximation) {
@@ -620,6 +644,7 @@ public class RoutePlannerFrontEnd {
 			}
 		}
 		RouteResultPreparation preparation = new RouteResultPreparation();
+		preparation.validateAllPointsConnected(gctx.result);
 		for (RouteSegmentResult r : gctx.result) {
 			r.setTurnType(null);
 			r.clearDescription();

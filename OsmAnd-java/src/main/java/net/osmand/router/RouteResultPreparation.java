@@ -491,13 +491,13 @@ public class RouteResultPreparation {
 		}
 	}
 
-	private void validateAllPointsConnected(List<RouteSegmentResult> result) {
+	public void validateAllPointsConnected(List<RouteSegmentResult> result) {
 		for (int i = 1; i < result.size(); i++) {
 			RouteSegmentResult rr = result.get(i);
 			RouteSegmentResult pr = result.get(i - 1);
 			double d = MapUtils.getDistance(pr.getPoint(pr.getEndPointIndex()), rr.getPoint(rr.getStartPointIndex()));
 			if (d > 0) {
-				System.err.println("Points are not connected : " + pr.getObject() + "(" + pr.getEndPointIndex() + ") -> " + rr.getObject()
+				System.out.println("Points are not connected : " + pr.getObject() + "(" + pr.getEndPointIndex() + ") -> " + rr.getObject()
 						+ "(" + rr.getStartPointIndex() + ") " + d + " meters");
 			}
 		}
