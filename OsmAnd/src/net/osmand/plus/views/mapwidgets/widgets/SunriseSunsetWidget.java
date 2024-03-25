@@ -32,6 +32,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private static final String NEXT_TIME_FORMAT = "HH:mm E";
 
 	private static final int TIME_LEFT_UPDATE_INTERVAL_MS = 60_000; // every minute
+	private static final float LOCATION_CHANGE_ACCURACY = 0.00001f; // approximately 1 meter
 
 	private final OsmandMapTileView mapView;
 	private final DayNightHelper dayNightHelper;
@@ -47,7 +48,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 
 	public SunriseSunsetWidget(@NonNull MapActivity mapActivity, @NonNull SunriseSunsetWidgetState widgetState, @Nullable String customId, @Nullable WidgetsPanel widgetsPanel) {
 		super(mapActivity, widgetState.getWidgetType(), customId, widgetsPanel);
-		dayNightHelper = app.getDaynightHelper();
+		this.dayNightHelper = app.getDaynightHelper();
 		this.widgetState = widgetState;
 		this.mapView = mapActivity.getMapView();
 		setIcons(widgetState.getWidgetType());
@@ -155,12 +156,17 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	}
 
 	private boolean isLocationsEqual(@Nullable LatLon previousLatLon, @Nullable LatLon newLatLon) {
-		if (previousLatLon != null && newLatLon != null) {
-			double lat = previousLatLon.getLatitude();
-			double newLat = newLatLon.getLatitude();
-			return Math.abs(lat - newLat) <= 0.001;
-		}
-		return false;
+		return previousLatLon != null && newLatLon != null
+				&& isLatitudesEqual(previousLatLon, newLatLon)
+				&& isLongitudesEqual(previousLatLon, newLatLon);
+	}
+
+	private boolean isLatitudesEqual(@NonNull LatLon previousLatLon, @NonNull LatLon newLatLon) {
+		return Math.abs(previousLatLon.getLatitude() - newLatLon.getLatitude()) <= LOCATION_CHANGE_ACCURACY;
+	}
+
+	private boolean isLongitudesEqual(@NonNull LatLon previousLatLon, @NonNull LatLon newLatLon) {
+		return Math.abs(previousLatLon.getLongitude() - newLatLon.getLongitude()) <= LOCATION_CHANGE_ACCURACY;
 	}
 
 	public long getTimeLeft() {
