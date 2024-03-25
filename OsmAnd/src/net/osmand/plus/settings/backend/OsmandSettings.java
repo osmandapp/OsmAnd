@@ -1380,6 +1380,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
 	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_LAST_DOWNLOADED_TIME = new LongPreference(this, "backup_last_downloaded_time", 0L).makeGlobal();
 	public final OsmandPreference<String> ITINERARY_LAST_CALCULATED_MD5 = new StringPreference(this, "itinerary_last_calculated_md5", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> AUTO_BACKUP_ENABLED = new BooleanPreference(this, OsmandBackupAgent.AUTO_BACKUP_ENABLED, true).makeGlobal().makeShared();
