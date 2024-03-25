@@ -4594,7 +4594,7 @@
     <string name="routing_attr_hazmat_category_name">Categorie materiale periculoase</string>
     <string name="parking_widget_desc">Arată distanța de la centrul ecranului până la locul de parcare.</string>
     <string name="mapillary_widget_desc">Oferă acces rapid la aplicația Mapillary pentru a adăuga imagini stradale.</string>
-    <string name="turn_on_public_transport_description">Porniți pentru a vedea pe hartă rutele de transport public.</string>
+    <string name="turn_on_public_transport_description">Activați pentru a vedea rutele de transport public pe hartă.</string>
     <string name="routing_attr_difficulty_preference_advanced_name">Avansat</string>
     <string name="routing_attr_difficulty_preference_expert_name">Expert</string>
     <string name="average_speed_widget_desc">Arată viteza medie a călătoriei curente.</string>
