@@ -32,7 +32,7 @@ public class SunriseSunsetWidget extends SimpleWidget {
 	private static final String NEXT_TIME_FORMAT = "HH:mm E";
 
 	private static final int TIME_LEFT_UPDATE_INTERVAL_MS = 60_000; // every minute
-	private static final float LOCATION_CHANGE_ACCURACY = 0.00001f; // approximately 1 meter
+	private static final float LOCATION_CHANGE_ACCURACY = 0.0001f; // approximately 10 meters
 
 	private final OsmandMapTileView mapView;
 	private final DayNightHelper dayNightHelper;
