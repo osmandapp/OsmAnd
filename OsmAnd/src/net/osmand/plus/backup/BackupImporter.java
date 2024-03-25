@@ -152,6 +152,9 @@ class BackupImporter {
 				fileItem.getValue().setLastModifiedTime(fileItem.getKey().getClienttimems());
 			}
 		}
+		if (!isCancelled()) {
+			backupHelper.updateBackupDownloadTime();
+		}
 		operationLog.finishOperation();
 	}
 
