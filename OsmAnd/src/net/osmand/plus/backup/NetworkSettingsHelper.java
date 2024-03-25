@@ -270,7 +270,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
 					if (remoteFile != null) {
-						syncTask.downloadRemoteVersion(remoteFile.item, filesType, shouldReplace, restoreDeleted);
+						syncTask.downloadItem(remoteFile.item, filesType, shouldReplace, restoreDeleted);
 					}
 					break;
 			}
