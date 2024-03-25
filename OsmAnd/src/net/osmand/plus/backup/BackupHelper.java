@@ -867,16 +867,24 @@ public class BackupHelper {
 						boolean shouldIgnoreConflict = exportType == GLOBAL && isFirstSync();
 						boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
 						boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
-						if (fileChangedRemotely && fileChangedLocally && !shouldIgnoreConflict) {
-							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+						if (fileChangedRemotely && fileChangedLocally) {
+							if (shouldIgnoreConflict) {
+								if (remoteFile.isDeleted()) {
+									info.localFilesToDelete.add(localFile);
+								} else {
+									info.filesToDownload.add(remoteFile);
+								}
+							} else {
+								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							}
+						} else if (fileChangedLocally) {
+							info.filesToUpload.add(localFile);
 						} else if (fileChangedRemotely) {
 							if (remoteFile.isDeleted()) {
 								info.localFilesToDelete.add(localFile);
 							} else {
 								info.filesToDownload.add(remoteFile);
 							}
-						} else if (fileChangedLocally) {
-							info.filesToUpload.add(localFile);
 						}
 						if (PluginsHelper.isDevelopment()) {
 							if (fileChangedRemotely || fileChangedLocally) {
