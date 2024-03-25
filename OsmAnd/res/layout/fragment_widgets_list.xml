@@ -132,14 +132,10 @@
 
 			</LinearLayout>
 
-			<include layout="@layout/list_item_divider" />
-
 			<FrameLayout
 				android:id="@+id/configure_screen_actions_container"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content" />
-
-			<include layout="@layout/card_bottom_divider" />
 
 		</LinearLayout>
 

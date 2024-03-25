@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.panel.WidgetsListFragment.sortWidgetsItems;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -349,9 +350,12 @@ public class ReorderWidgetsFragment extends BaseOsmAndFragment implements
 				externalWidgetsItems.add(new ListItem(ItemType.AVAILABLE_WIDGET, availableWidgetInfo));
 			}
 		}
+		List<ListItem> defaultWidgetsList = new ArrayList<>(defaultWidgetsItems.values());
+		sortWidgetsItems(defaultWidgetsList, app, nightMode);
 
-		List<ListItem> widgetItems = new ArrayList<>();
-		widgetItems.addAll(defaultWidgetsItems.values());
+		List<ListItem> widgetItems = new ArrayList<>(defaultWidgetsList);
+		sortWidgetsItems(externalWidgetsItems, app, nightMode);
+
 		widgetItems.addAll(externalWidgetsItems);
 		return widgetItems;
 	}

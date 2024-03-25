@@ -226,7 +226,7 @@ public class SpeedometerWidget {
 			updateColor(drawSettings != null ? drawSettings.isNightMode() : nightMode);
 		}
 		boolean show = shouldShowWidget();
-		if (routingHelper.isFollowingMode() && show || drawBitmap) {
+		if (show) {
 			boolean isChanged = false;
 			if (lastNightMode != nightMode) {
 				lastNightMode = nightMode;

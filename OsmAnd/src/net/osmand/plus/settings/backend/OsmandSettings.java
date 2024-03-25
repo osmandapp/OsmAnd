@@ -1496,6 +1496,9 @@ public class OsmandSettings {
 
 	{
 		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.CAR, true);
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.TRUCK, true);
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.MOTORCYCLE, true);
+		SHOW_SPEEDOMETER.setModeDefaultValue(ApplicationMode.MOPED, true);
 	}
 
 	public final CommonPreference<WidgetSize> SPEEDOMETER_SIZE = new EnumStringPreference<>(this, "speedometer_size", MEDIUM, WidgetSize.values()).makeProfile();
