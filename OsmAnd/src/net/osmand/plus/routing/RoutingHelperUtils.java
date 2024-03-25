@@ -133,7 +133,7 @@ public class RoutingHelperUtils {
 		float approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
 
 		boolean setApproximated = true;
-		if (location.hasBearing()) {
+		if (location.hasBearing() && dist >= maxDist / 2) {
 			float rotationDiff = MapUtils.unifyRotationDiff(location.getBearing(), approximatedBearing);
 			setApproximated = Math.abs(rotationDiff) < MAX_BEARING_DEVIATION;
 		}
