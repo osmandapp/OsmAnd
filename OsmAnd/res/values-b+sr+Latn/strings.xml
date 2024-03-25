@@ -250,7 +250,7 @@
     <string name="internet_connection_required_for_online_route">Navođenje preko interneta ne radi kad niste na internetu.</string>
     <string name="tts_language_not_supported_title">Jezik nije podržan</string>
     <string name="tts_missing_language_data_title">Nedostaju podaci</string>
-    <string name="tts_missing_language_data">Idi do prodavnice radi preuzimanja odabranog jezika?</string>
+    <string name="tts_missing_language_data">Idi do prodavnice radi preuzimanja odabranog glasa?</string>
     <string name="gpx_option_reverse_route">Obrnuti smer trase</string>
     <string name="choose_audio_stream">Izlaz glasovnog navođenja</string>
     <string name="voice_stream_voice_call">Zvuk preko dolaznog poziva (prekida Blutut u kolima)</string>
@@ -865,7 +865,7 @@
 \n\tDa biste ih koristili, Idi na \'Meni\' → \'Podesi mapu\' → \'Izvor mape…\' → \'Vektorske mape bez interneta\'.</string>
     <string name="gpx_option_from_start_point">Postavi duž cele putanje</string>
     <string name="gpx_option_destination_point">Koristi trenutno odredište</string>
-    <string name="tts_language_not_supported">Odabrani jezik nije podržan od strane androidovog TTS, biće korišćen već podešeni jezik. Potraži drugi TTS u prodavnici?</string>
+    <string name="tts_language_not_supported">Odabrani glas nije podržan od strane androidovog TTS, biće korišćen već podešeni jezik. Potraži drugi TTS u prodavnici?</string>
     <string name="local_index_action_do">Treba da %1$s %2$s stavku(e). Nastaviti?</string>
     <string name="local_index_items_restored">%1$d of %2$d stavke(i) uključeno.</string>
     <string name="configure_screen_quick_action">Brze radnje</string>
@@ -2372,7 +2372,7 @@
     <string name="si_min_km">Minuta po kilometru</string>
     <string name="si_m_s">Metara u sekundi</string>
     <string name="si_mph">Milja na sat</string>
-    <string name="si_kmh">Километара на сат</string>
+    <string name="si_kmh">Kilometara na sat</string>
     <string name="si_nm">Nautičke milje</string>
     <string name="nm">nmi</string>
     <string name="default_speed_system">Jedinica brzine</string>
@@ -2587,8 +2587,8 @@
     <string name="settings_item_write_error">Nisam uspeo da upišem %1$s.</string>
     <string name="settings_item_import_error">Nisam uspeo da uvezem iz „%1$s”.</string>
     <string name="select_track_file">Izaberi fajl trase</string>
-    <string name="shared_string_languages">Jezici</string>
-    <string name="shared_string_language">Jezik</string>
+    <string name="shared_string_languages">Glasovi</string>
+    <string name="shared_string_language">Glas</string>
     <string name="shared_string_all_languages">Svi jezici</string>
     <string name="wiki_menu_download_descr">Za prikaz Wikipedia TOI su potrebne dodatne mape.</string>
     <string name="select_wikipedia_article_langs">Odaberi jezik za Vikipedijine članke na mapi. Prebaci na bilo koji drugi dostupni jezik dok čitaš članak.</string>
@@ -3593,7 +3593,7 @@
     <string name="manage_profiles">Upravljanje profilima aplikacije…</string>
     <string name="manage_profiles_descr">Napravi, uvezi, izmeni profile</string>
     <string name="reset_to_default">Vrati na fabrička podešavanja</string>
-    <string name="language_and_output">Jezik i ulaz</string>
+    <string name="language_and_output">Glas i ulaz</string>
     <string name="screen_alerts_descr">Upozorenja se prikazuju u donjem levom uglu ekrana za vreme navođenja.</string>
     <string name="general_settings_profile_descr">Tema programa, jedinice, oblast</string>
     <string name="configure_navigation">Podešavanje navigacije</string>
