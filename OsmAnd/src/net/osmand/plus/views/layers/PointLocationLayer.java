@@ -223,14 +223,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
 		if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
-			OsmandApplication app = getApplication();
-			Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-			Boolean snapToRoad = app.getSettings().SNAP_TO_ROAD.get();
-			boolean followingMode = app.getRoutingHelper().isFollowingMode();
-			Location lastRouteProjection = followingMode && snapToRoad
-					? app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection() : null;
+			Location location = getPointLocation();
 			PointI target31 = mapRenderer.getTarget();
-			Location location = lastRouteProjection != null ? lastRouteProjection : lastKnownLocation;
 			updateMarker(location, target31, 0);
 		}
 		lastMarkerLocation = getCurrentMarkerLocation();
@@ -448,6 +442,16 @@ public class PointLocationLayer extends OsmandMapLayer
 				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated();
 	}
 
+	@Nullable
+	public Location getPointLocation() {
+		Location location = null;
+		OsmandApplication app = getApplication();
+		if (app.getRoutingHelper().isFollowingMode() && app.getSettings().SNAP_TO_ROAD.get()) {
+			location = app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
+		}
+		return location != null ? location : locationProvider.getLastStaleKnownLocation();
+	}
+
 	private boolean isLocationVisible(@NonNull RotatedTileBox tb, @NonNull Location l) {
 		return tb.containsLatLon(l.getLatitude(), l.getLongitude());
 	}
@@ -464,23 +468,11 @@ public class PointLocationLayer extends OsmandMapLayer
 			locationX = box.getPixXFromLonNoRot(lastKnownLocation.getLongitude());
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
-
-		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
-		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
-		if (radius > RADIUS * box.getDensity()) {
-			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
-			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
-			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);
-		}
+		drawLocationAccuracy(canvas, box, lastKnownLocation, locationX, locationY);
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			Float heading = locationProvider.getHeading();
-			if (shouldShowHeading() && heading != null) {
-				canvas.save();
-				canvas.rotate(heading - 180, locationX, locationY);
-				canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2f,
-						locationY - headingIcon.getHeight() / 2f, headingPaint);
-				canvas.restore();
+			if (shouldShowHeading()) {
+				drawLocationHeading(canvas, locationX, locationY);
 			}
 			Float bearing = getBearingToShow(lastKnownLocation);
 			if (bearing != null) {
@@ -492,6 +484,27 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
+	private void drawLocationAccuracy(@NonNull Canvas canvas, @NonNull RotatedTileBox box,
+	                                  @NonNull Location location, int locationX, int locationY) {
+		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
+		int radius = (int) (((double) box.getPixWidth()) / dist * location.getAccuracy());
+		if (radius > RADIUS * box.getDensity()) {
+			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
+			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
+			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);
+		}
+	}
+
+	private void drawLocationHeading(@NonNull Canvas canvas, int locationX, int locationY) {
+		Float heading = locationProvider.getHeading();
+		if (heading != null) {
+			canvas.save();
+			canvas.rotate(heading - 180, locationX, locationY);
+			canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2f,
+					locationY - headingIcon.getHeight() / 2f, headingPaint);
+			canvas.restore();
+		}
+	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
