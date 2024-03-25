@@ -3,50 +3,23 @@ package net.osmand.plus.card.base.multistate;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
-import net.osmand.plus.widgets.popup.PopUpMenu;
-import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
-
-import java.util.List;
-
 public interface IMultiStateCardController {
 
-	default void showPopUpMenu(@NonNull FragmentActivity activity,
-	                           @NonNull View selector, boolean nightMode) {
-		OnPopUpMenuItemClickListener onItemClickListener =
-				item -> onMultiStateMenuItemSelected(activity, selector, item);
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = selector;
-		displayData.menuItems = getMultiSateMenuItems();
-		displayData.nightMode = nightMode;
-		displayData.onItemClickListener = onItemClickListener;
-		PopUpMenu.show(displayData);
-	}
-
-	void bindCard(@NonNull MultiStateCard card);
+	void bindComponent(@NonNull IMultiStateCard cardInstance);
 
 	@NonNull
-	String getMultiStateCardTitle();
+	String getCardTitle();
 
 	@NonNull
-	String getMultiStateSelectorTitle();
+	String getSelectorTitle();
 
-	@ColorInt
-	int getMultiStateSelectorAccentColor(boolean nightMode);
+	void onSelectorButtonClicked(@NonNull View selectorView);
 
-	@NonNull
-	List<PopUpMenuItem> getMultiSateMenuItems();
+	void onBindCardContent(@NonNull FragmentActivity activity,
+	                       @NonNull ViewGroup container, boolean nightMode);
 
-	void onMultiStateMenuItemSelected(@NonNull FragmentActivity activity,
-	                                  @NonNull View view, @NonNull PopUpMenuItem item);
-
-	void onBindMultiStateCardContent(@NonNull FragmentActivity activity,
-	                                 @NonNull ViewGroup container, boolean nightMode);
-
-	boolean shouldShowMultiStateCardHeader();
+	boolean shouldShowCardHeader();
 }

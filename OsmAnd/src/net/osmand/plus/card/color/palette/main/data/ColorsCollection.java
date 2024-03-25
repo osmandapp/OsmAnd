@@ -82,13 +82,13 @@ public class ColorsCollection {
 	}
 
 	@Nullable
-	public PaletteColor addOrUpdateColor(@Nullable PaletteColor paletteColor, @ColorInt int newColor) {
-		if (paletteColor == null) {
+	public PaletteColor addOrUpdateColor(@Nullable PaletteColor oldColor, @ColorInt int newColor) {
+		if (oldColor == null) {
 			return addNewColor(newColor);
 		}
-		if (paletteColor.isCustom()) {
-			updateColor(paletteColor, newColor);
-			return paletteColor;
+		if (oldColor.isCustom()) {
+			updateColor(oldColor, newColor);
+			return oldColor;
 		}
 		return null;
 	}
@@ -99,12 +99,28 @@ public class ColorsCollection {
 		String id = PaletteColor.generateId(now);
 		PaletteColor paletteColor = new PaletteColor(id, newColor, now);
 		paletteColors.add(paletteColor);
+		paletteColor.setLastUsedTime(now);
 		syncSettings();
 		return paletteColor;
 	}
 
 	private void updateColor(@NonNull PaletteColor paletteColor, @ColorInt int newColor) {
 		paletteColor.setColor(newColor);
+		syncSettings();
+	}
+
+
+	public void askRenewLastUsedTime(@Nullable PaletteColor paletteColor) {
+		if (paletteColor != null) {
+			renewLastUsedTime(Collections.singletonList(paletteColor));
+		}
+	}
+
+	public void renewLastUsedTime(@NonNull List<PaletteColor> paletteColors) {
+		long now = System.currentTimeMillis();
+		for (PaletteColor paletteColor : paletteColors) {
+			paletteColor.setLastUsedTime(now++);
+		}
 		syncSettings();
 	}
 
@@ -189,7 +205,11 @@ public class ColorsCollection {
 		return allColors;
 	}
 
-	public void syncSettings() {
+	public void saveToPreferences() {
+		syncSettings();
+	}
+
+	private void syncSettings() {
 		if (customColorsPreference != null) {
 			// Save custom and predefined colors separately
 			List<PaletteColor> predefinedColors = new ArrayList<>();

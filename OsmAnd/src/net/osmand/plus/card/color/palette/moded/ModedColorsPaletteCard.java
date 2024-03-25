@@ -38,7 +38,7 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 		setupToggleButtons(view.findViewById(R.id.custom_radio_buttons));
 	}
 
-	private void setupToggleButtons(LinearLayout buttonsContainer) {
+	private void setupToggleButtons(@NonNull LinearLayout buttonsContainer) {
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		List<TextRadioItem> toggleButtons = collectRadioItems();
 		radioGroup.setItems(toggleButtons);

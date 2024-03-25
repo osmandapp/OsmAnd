@@ -52,6 +52,7 @@ public class ColorsPaletteCard extends BaseCard implements IColorsPalette {
 	private void setupColorsPalette() {
 		rvColors = view.findViewById(R.id.colors_list);
 		rvColors.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+		rvColors.addItemDecoration(new HorizontalSpaceItemDecoration(getDimen(R.dimen.content_padding_small_half)));
 		rvColors.setClipToPadding(false);
 		rvColors.setAdapter(paletteAdapter);
 	}
