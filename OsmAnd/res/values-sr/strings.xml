@@ -5663,4 +5663,6 @@
 \n
 \nИзаберите „%1$s“ за тачне бројеве или „%2$s“ за лакшу читљивост.</string>
     <string name="round_up">Заокружено</string>
+    <string name="upload_local_versions">Отпреми локалне верзије</string>
+    <string name="download_cloud_versions">Преузми верзије облака</string>
 </resources>
