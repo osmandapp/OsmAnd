@@ -21,6 +21,7 @@ import net.osmand.plus.card.color.ISelectedColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.card.width.data.WidthStyle;
+import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
 import net.osmand.plus.utils.UiUtilities;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TracksAppearanceWidthController extends BaseMultiStateCardController {
+public class WidthController extends BaseMultiStateCardController {
 
 	private final WidthStyle DEFAULT_STYLE = new WidthStyle(null, R.string.shared_string_unchanged);
 
@@ -40,6 +41,7 @@ public class TracksAppearanceWidthController extends BaseMultiStateCardControlle
 	private static final int CUSTOM_WIDTH_MIN = 1;
 	private static final int CUSTOM_WIDTH_MAX = 24;
 
+	private final AppearanceData appearanceData;
 	private final List<WidthStyle> supportedWidthStyles;
 	private WidthStyle selectedWidthStyle;
 
@@ -48,11 +50,11 @@ public class TracksAppearanceWidthController extends BaseMultiStateCardControlle
 	private OnNeedScrollListener onNeedScrollListener;
 	private OnTrackWidthSelectedListener listener;
 
-	public TracksAppearanceWidthController(@NonNull OsmandApplication app,
-	                                       @Nullable String widthValue) {
+	public WidthController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
 		super(app);
+		this.appearanceData = appearanceData;
 		supportedWidthStyles = collectSupportedWidthStyles();
-		selectedWidthStyle = findWidthStyle(widthValue);
+		selectedWidthStyle = findWidthStyle(appearanceData.getWidthValue());
 	}
 
 	public void setListener(@NonNull OnTrackWidthSelectedListener listener) {
@@ -146,6 +148,7 @@ public class TracksAppearanceWidthController extends BaseMultiStateCardControlle
 	private void onWidthValueSelected(@Nullable String widthValue) {
 		selectedWidthStyle = findWidthStyle(widthValue);
 		cardInstance.updateSelectedCardState();
+		appearanceData.setWidthValue(widthValue);
 		listener.onTrackWidthSelected(widthValue);
 	}
 
@@ -158,8 +161,7 @@ public class TracksAppearanceWidthController extends BaseMultiStateCardControlle
 	@NonNull
 	private WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
-			// TODO
-			String selectedWidth = null;
+			String selectedWidth = appearanceData.getWidthValue();
 			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
 			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
 			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {

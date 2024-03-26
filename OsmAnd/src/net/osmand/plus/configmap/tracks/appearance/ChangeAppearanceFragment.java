@@ -19,16 +19,31 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet;
+import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
+import net.osmand.plus.configmap.tracks.TrackItem;
+import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
+import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
+import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
+import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog {
+import java.util.Set;
+
+public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog,
+		IAskRefreshDialogCompletely, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
 
 	private static final String TAG = ChangeAppearanceFragment.class.getSimpleName();
 
@@ -58,7 +73,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = ChangeAppearanceController.getInstance(app);
+		controller = ChangeAppearanceController.getInstance(app, getSelectionHelper());
 		app.getDialogManager().register(controller.getProcessId(), this);
 	}
 
@@ -104,29 +119,29 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 			int cardsBackgroundColor = ColorUtilities.getListBgColor(app, nightMode);
 
 			MultiStateCard directionArrowsCard = new MultiStateCard(activity, controller.getDirectionArrowsCardController());
-			cardsContainer.addView(directionArrowsCard.build(activity));
+			cardsContainer.addView(directionArrowsCard.build());
 			directionArrowsCard.setBackgroundColor(cardsBackgroundColor);
 			inflate(R.layout.list_item_divider_with_padding_basic, cardsContainer, true);
 
 			MultiStateCard showStartFinishIconsCard = new MultiStateCard(activity, controller.getShowStartAndFinishIconsCardController());
-			cardsContainer.addView(showStartFinishIconsCard.build(activity));
+			cardsContainer.addView(showStartFinishIconsCard.build());
 			showStartFinishIconsCard.setBackgroundColor(cardsBackgroundColor);
 			inflate(R.layout.list_item_divider, cardsContainer, true);
 
 			MultiStateCard colorsCard = new MultiStateCard(activity, controller.getColorCardController());
-			cardsContainer.addView(colorsCard.build(activity));
+			cardsContainer.addView(colorsCard.build());
 			colorsCard.setBackgroundColor(cardsBackgroundColor);
 			inflate(R.layout.list_item_divider, cardsContainer, true);
 
 			MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController());
-			cardsContainer.addView(widthCard.build(activity));
+			cardsContainer.addView(widthCard.build());
 			widthCard.setBackgroundColor(cardsBackgroundColor);
 		}
 	}
 
 	protected void setupApplyButton(@NonNull View view) {
 		View btnApply = view.findViewById(R.id.apply_button);
-		btnApply.setOnClickListener(v -> controller.onApplyButtonClicked());
+		btnApply.setOnClickListener(v -> onApplyButtonClicked());
 		updateApplyButtonEnabling(view);
 	}
 
@@ -144,8 +159,58 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		}
 	}
 
+	public void onApplyButtonClicked() {
+		AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager());
+	}
+
+	@Override
+	public void onAppearanceChangeConfirmed() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			controller.saveChanges(activity);
+		}
+	}
+
+	private void onAppearanceSaved() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).refreshMapComplete();
+		}
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof TracksTabsFragment) {
+			((TracksTabsFragment) fragment).updateTabsContent();
+		} else if (fragment instanceof TracksSelectionFragment) {
+			((TracksSelectionFragment) fragment).dismiss();
+		} else if (fragment instanceof SearchMyPlacesTracksFragment) {
+			SearchMyPlacesTracksFragment searchTracksFragment = (SearchMyPlacesTracksFragment) fragment;
+			searchTracksFragment.updateTargetFragment();
+			searchTracksFragment.dismiss();
+		}
+	}
+
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof SelectionHelperProvider) {
+			return ((SelectionHelperProvider<TrackItem>) fragment).getSelectionHelper();
+		}
+		return new ItemsSelectionHelper<>();
+	}
+
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		View view = getView();
+		if (view != null) {
+			updateApplyButtonEnabling(view);
+		}
+	}
+
 	@Override
 	public void onAskDismissDialog(@NonNull String processId) {
+		if (controller.isAppearanceSaved()) {
+			onAppearanceSaved();
+		}
 		dismiss();
 	}
 

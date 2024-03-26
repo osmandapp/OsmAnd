@@ -6,27 +6,33 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
+import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-public class ShowStartAndFinishIconsCardController extends BaseMultiStateCardController {
+public class DirectionArrowsController extends BaseMultiStateCardController {
 
 	private final List<CardState> supportedCardStates;
+	private final AppearanceData appearanceData;
 	private CardState selectedState;
 
-	public ShowStartAndFinishIconsCardController(@NonNull OsmandApplication app) {
+	public DirectionArrowsController(@NonNull OsmandApplication app,
+	                                 @NonNull AppearanceData appearanceData) {
 		super(app);
+		this.appearanceData = appearanceData;
 		supportedCardStates = collectSupportedCardStates();
-		selectedState = supportedCardStates.get(0);
+		selectedState = findCardState(appearanceData.shouldShowArrows());
 	}
 
 	@NonNull
@@ -49,13 +55,13 @@ public class ShowStartAndFinishIconsCardController extends BaseMultiStateCardCon
 	public void onPopUpMenuItemSelected(@NonNull FragmentActivity activity, @NonNull View view, @NonNull PopUpMenuItem item) {
 		selectedState = (CardState) item.getTag();
 		cardInstance.updateSelectedCardState();
-		// TODO notify
+		appearanceData.setShowArrows((Boolean) selectedState.getTag());
 	}
 
 	@NonNull
 	@Override
 	public String getCardTitle() {
-		return app.getString(R.string.track_show_start_finish_icons);
+		return app.getString(R.string.gpx_direction_arrows);
 	}
 
 	@NonNull
@@ -76,6 +82,16 @@ public class ShowStartAndFinishIconsCardController extends BaseMultiStateCardCon
 	}
 
 	@NonNull
+	private CardState findCardState(@Nullable Object tag) {
+		for (CardState cardState : supportedCardStates) {
+			if (Objects.equals(tag, cardState.getTag())) {
+				return cardState;
+			}
+		}
+		return supportedCardStates.get(0);
+	}
+
+	@NonNull
 	private List<CardState> collectSupportedCardStates() {
 		return Arrays.asList(
 				new CardState(app.getString(R.string.shared_string_unchanged), null),
@@ -83,5 +99,4 @@ public class ShowStartAndFinishIconsCardController extends BaseMultiStateCardCon
 				new CardState(app.getString(R.string.shared_string_off), false)
 		);
 	}
-
 }

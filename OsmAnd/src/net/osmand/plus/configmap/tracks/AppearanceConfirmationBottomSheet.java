@@ -12,6 +12,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
@@ -37,8 +38,8 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 	@Nullable
 	private ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
 		Fragment fragment = getParentFragment();
-		if (fragment instanceof TracksAppearanceFragment) {
-			return ((TracksAppearanceFragment) fragment).getItemsSelectionHelper();
+		if (fragment instanceof SelectionHelperProvider) {
+			return ((SelectionHelperProvider) fragment).getSelectionHelper();
 		}
 		return null;
 	}
@@ -46,8 +47,8 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment fragment = getParentFragment();
-		if (fragment instanceof TracksAppearanceFragment) {
-			((TracksAppearanceFragment) fragment).saveTracksAppearance();
+		if (fragment instanceof OnAppearanceChangeConfirmedListener) {
+			((OnAppearanceChangeConfirmedListener) fragment).onAppearanceChangeConfirmed();
 		}
 		dismiss();
 	}
@@ -55,6 +56,10 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	protected int getRightBottomButtonTextId() {
 		return R.string.shared_string_apply;
+	}
+
+	public interface OnAppearanceChangeConfirmedListener {
+		void onAppearanceChangeConfirmed();
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {

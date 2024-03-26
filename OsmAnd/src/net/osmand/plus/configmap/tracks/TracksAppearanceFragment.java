@@ -35,6 +35,7 @@ import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
+import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -64,7 +65,8 @@ import java.util.List;
 import java.util.Set;
 
 public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
-		implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener, InAppPurchaseListener {
+		implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener,
+		InAppPurchaseListener, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -88,7 +90,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		selectionHelper = getItemsSelectionHelper();
+		selectionHelper = getSelectionHelper();
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
@@ -280,13 +282,19 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		return trackDrawInfo;
 	}
 
-	@Nullable
-	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof SelectionHelperProvider) {
 			return ((SelectionHelperProvider<TrackItem>) fragment).getSelectionHelper();
 		}
-		return null;
+		return new ItemsSelectionHelper<>();
+	}
+
+	@Override
+	public void onAppearanceChangeConfirmed() {
+		saveTracksAppearance();
 	}
 
 	public void saveTracksAppearance() {

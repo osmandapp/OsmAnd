@@ -26,7 +26,7 @@ import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
-import net.osmand.plus.configmap.tracks.appearance.AppearanceData;
+import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.AppearanceListItem;
@@ -36,15 +36,15 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TracksAppearanceColorController extends ColoringStyleCardController implements ISelectedColorProvider {
+public class ColorController extends ColoringStyleCardController implements ISelectedColorProvider {
 
 	private IColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 	private final AppearanceData appearanceData;
 
-	public TracksAppearanceColorController(@NonNull OsmandApplication app,
-	                                       @NonNull AppearanceData appearanceData,
-	                                       @NonNull ColoringStyle selectedColoringStyle) {
+	public ColorController(@NonNull OsmandApplication app,
+	                       @NonNull AppearanceData appearanceData,
+	                       @NonNull ColoringStyle selectedColoringStyle) {
 		super(app, selectedColoringStyle);
 		this.appearanceData = appearanceData;
 	}
@@ -83,11 +83,12 @@ public class TracksAppearanceColorController extends ColoringStyleCardController
 			bundle.predefinedColors = getPredefinedColors(app);
 			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
 			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
-
-			// todo int selected
-			int selectedColor = bundle.predefinedColors.get(0).getColor();
+			Integer selectedCustomColor = appearanceData.getCustomColor();
+			if (selectedCustomColor == null) {
+				selectedCustomColor = bundle.predefinedColors.get(0).getColor();
+			}
 			ColorsCollection colorsCollection = new ColorsCollection(bundle);
-			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, selectedColor);
+			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, selectedCustomColor);
 		}
 		colorsPaletteController.setPaletteListener(getControllerListener());
 		return colorsPaletteController;
@@ -96,10 +97,16 @@ public class TracksAppearanceColorController extends ColoringStyleCardController
 	@NonNull
 	private IColoringStyleDetailsController getColoringStyleDetailsController() {
 		if (coloringStyleDetailsController == null) {
-			// TODO
-//			ColoringStyle selectedColoringStyle = drawInfo.getColoringStyle();
-			ColoringStyle selectedColoringStyle = new ColoringStyle(ColoringType.ALTITUDE);
-			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedColoringStyle);
+			ColoringStyle selectedColoringStyle = appearanceData.getColoringStyle();
+			if (selectedColoringStyle == null) {
+				selectedColoringStyle = new ColoringStyle(TRACK_SOLID);
+			}
+			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedColoringStyle) {
+				@Override
+				public boolean shouldShowBottomSpace() {
+					return true;
+				}
+			};
 		}
 		return coloringStyleDetailsController;
 	}
@@ -131,11 +138,11 @@ public class TracksAppearanceColorController extends ColoringStyleCardController
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
 
-		int color = 0;
+		Integer color = null;
 		if (coloringType == TRACK_SOLID) {
 			color = appearanceData.getCustomColor();
 		}
-		if (color == 0) {
+		if (color == null) {
 			color = GpxAppearanceAdapter.getTrackColor(app);
 		}
 		return color;
