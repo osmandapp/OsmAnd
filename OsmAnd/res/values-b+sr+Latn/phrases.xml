@@ -444,7 +444,7 @@
     <string name="poi_country">Država</string>
     <string name="poi_city">Grad</string>
     <string name="poi_capital">Da;Glavni grad</string>
-    <string name="poi_town">Grad (mali)</string>
+    <string name="poi_town">Gradsko naselje</string>
     <string name="poi_village">Selo</string>
     <string name="poi_hamlet">Zaseok</string>
     <string name="poi_suburb">Predgrađe</string>
@@ -2345,9 +2345,9 @@
     <string name="poi_site_type_earthwork">Zemljana barijera</string>
     <string name="poi_aerodrome_type_military">Vojni aerodrom</string>
     <string name="poi_aerodrome_type_military_public">Vojni/civilni</string>
-    <string name="poi_fitness_station">Mesto za vežbanje</string>
+    <string name="poi_fitness_station">Fitnes stanica na otvorenom</string>
     <string name="poi_healthcare_speciality_biochemistry">Biohemija</string>
-    <string name="poi_fitness_centre">Teretana/ fitnes</string>
+    <string name="poi_fitness_centre">Teretana/ fitnes centar</string>
     <string name="poi_fitness">Fitnes</string>
     <string name="poi_car_wash_yes">Da;Perionica</string>
     <string name="poi_cuisine">Tip kuhinje</string>
