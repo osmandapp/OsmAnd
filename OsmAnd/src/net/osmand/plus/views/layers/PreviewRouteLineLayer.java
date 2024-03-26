@@ -152,7 +152,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				true, directionArrowsColor, routeColoringType, routeInfoAttribute);
 		fillPreviewLineArrays(tx, ty, indexes, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-		previewLineGeometry.drawRouteSegment(tileBox, canvas, indexes, tx, ty, tx31, ty31, angles, distances, 0, styles);
+		previewLineGeometry.drawRouteSegment(tileBox, canvas, indexes, tx, ty, tx31, ty31, angles, distances, 0, styles, false);
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		if (previewRouteLineInfo.shouldShowTurnArrows()) {

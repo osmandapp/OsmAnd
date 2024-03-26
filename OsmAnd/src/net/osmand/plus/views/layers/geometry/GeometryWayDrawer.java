@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -12,6 +13,7 @@ import android.graphics.PorterDuffColorFilter;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.QListFColorARGB;
@@ -28,6 +30,8 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +39,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 	protected static final int LINE_ID = 1;
 	public static final float VECTOR_LINE_SCALE_COEF = 2.0f;
+	private static final Log log = PlatformUtil.getLog(GeometryWayDrawer.class);
 
 	private final T context;
 
@@ -79,7 +84,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	}
 
 	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<Float> tx, List<Float> ty,
-								   List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
+	                               List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
 		List<PathPoint> arrows = new ArrayList<>();
 
 		int h = tb.getPixHeight();
@@ -155,38 +160,35 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	                               boolean approximationEnabled, boolean showPathBitmaps,
 	                               @Nullable Bitmap pathBitmap, @Nullable Bitmap specialPathBitmap,
 	                               float bitmapStep, float specialBitmapStep, boolean bitmapOnSurface,
-	                               @Nullable  QListFColorARGB colorizationMapping, int colorizationScheme,
-	                               @NonNull List<DrawPathData31> pathsData) {
+	                               @Nullable QListFColorARGB colorizationMapping, int colorizationScheme,
+	                               @NonNull List<DrawPathData31> pathsData,
+	                               boolean use3DVisualization) {
+		long startBuildVectorLineTime = System.currentTimeMillis();
 		boolean hasColorizationMapping = colorizationMapping != null && !colorizationMapping.isEmpty();
 		QVectorPointI points = new QVectorPointI();
 		QListFloat heights = new QListFloat();
 		QListFColorARGB traceColorizationMapping = new QListFColorARGB();
-		float r = 0.2f;
-		float g = 0.6f;
-		float b = 1.0f;
-		boolean showRaised = true;
+		float r = (float) Color.red(color) / 256;
+		float g = (float) Color.green(color) / 256;
+		float b = (float) Color.blue(color) / 256;
+		boolean showRaised = use3DVisualization;
 		boolean showTransparentTraces = false;
 		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-
-
-
-
 		if (plugin != null) {
-			showRaised = plugin.RAISE_ROUTES_ABOVE_RELIEF.get();
 			showTransparentTraces = plugin.SHOW_TRANSPARENT_TRACES.get();
 			if (showRaised) {
 				if (!showTransparentTraces)
 					traceColorizationMapping = colorizationMapping;
 			}
 		}
+		log.info("buildVectorLine showRaised " + showRaised);
 		for (DrawPathData31 data : pathsData) {
 			for (int i = 0; i < data.tx.size(); i++) {
 				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
 				if (showRaised) {
-					if(i < data.heights.size()) {
-						data.heights.set(i, data.heights.get(i) + 1000);
+					if (data.heights != null && i < data.heights.size()) {
+						heights.add(data.heights.get(i));
 					}
-//					heights.add(1000.0f);
 				}
 			}
 		}
@@ -194,7 +196,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			long size = colorizationMapping.size();
 			for (int i = 0; i < size; i++) {
 				float a = (float) i / (float) size;
-				traceColorizationMapping.add(new FColorARGB( a * a * a * a, r, g, b));
+				traceColorizationMapping.add(new FColorARGB(a * a * a * a, r, g, b));
 			}
 		}
 		QListVectorLine lines = collection.getLines();
@@ -216,8 +218,8 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						line.setSpecialPathIconStep(specialBitmapStep);
 					}
 				}
+				line.setHeights(heights);
 				if (showRaised) {
-					line.setHeights(heights);
 					line.setFillColor(new FColorARGB(1.0f, r, g, b));
 					line.setColorizationMapping(new QListFColorARGB());
 					line.setOutlineColorizationMapping(traceColorizationMapping);
@@ -281,6 +283,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				builder.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
 		}
 		builder.buildAndAddToCollection(collection);
+		log.info("buildVectorLine took " + (System.currentTimeMillis() - startBuildVectorLineTime));
 	}
 
 	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style,
@@ -295,38 +298,41 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 	}
 
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
-	                     @NonNull List<DrawPathData31> pathsData) {
+	                     @NonNull List<DrawPathData31> pathsData, boolean use3DVisualization) {
 		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
 		for (DrawPathData31 data : pathsData) {
 			if (prevStyle != null && (!Algorithms.objectEquals(data.style, prevStyle) || data.style.isUnique()
 					|| prevStyle.hasPathLine() != data.style.hasPathLine())) {
-				drawVectorLine(collection, lineId++, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
+				drawVectorLine(collection, lineId++, baseOrder, shouldDrawArrows, true, prevStyle, dataArr, use3DVisualization);
 				dataArr.clear();
 			}
 			prevStyle = data.style;
 			dataArr.add(data);
 		}
 		if (!dataArr.isEmpty() && prevStyle != null) {
-			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
+			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr, use3DVisualization);
 		}
 	}
 
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
-	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
+	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData,
+	                              boolean use3DVisualization) {
 		drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, style,
-				style.getColor(0), style.getWidth(0), 0, 0, style.getDashPattern(), approximationEnabled, pathsData);
+				style.getColor(0), style.getWidth(0), 0, 0, style.getDashPattern(), approximationEnabled, pathsData,
+				use3DVisualization);
 	}
 
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows,
 	                              @NonNull GeometryWayStyle<?> style, int color, float width,
-								  int outlineColor, float outlineWidth,
+	                              int outlineColor, float outlineWidth,
 	                              @Nullable float[] dashPattern,
 	                              boolean approximationEnabled,
-	                              @NonNull List<DrawPathData31> pathsData) {
+	                              @NonNull List<DrawPathData31> pathsData,
+	                              boolean use3DVisualization) {
 		PathPoint pathPoint = getArrowPathPoint(0, 0, style, 0, 0);
 		pathPoint.scaled = false;
 		Bitmap pointBitmap = pathPoint.drawBitmap(getContext());
@@ -334,7 +340,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		buildVectorLine(collection, baseOrder, lineId, color, width, outlineColor, outlineWidth, dashPattern,
 				approximationEnabled, shouldDrawArrows, pointBitmap, null, pxStep,
 				pxStep, true, null, 0,
-				pathsData);
+				pathsData, use3DVisualization);
 	}
 
 	public static class PathPoint {
@@ -374,7 +380,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						scaleCoef = scaleCoef < 1 ? scaleCoef : 1f;
 					}
 				}
-				return new int[]{(int) (bitmap.getWidth() * scaleCoef), (int) (bitmap.getHeight() * scaleCoef)};
+				return new int[] {(int) (bitmap.getWidth() * scaleCoef), (int) (bitmap.getHeight() * scaleCoef)};
 			}
 			return null;
 		}

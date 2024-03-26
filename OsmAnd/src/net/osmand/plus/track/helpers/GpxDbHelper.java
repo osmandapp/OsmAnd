@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -220,10 +219,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@Override
 	public void onGpxDataItemRead(@NonNull GpxDataItem item) {
-		long start = System.currentTimeMillis();
 		putToCache(item);
 		putGpxDataItemToSmartFolder(item);
-		log.info("onGpxDataItemRead took " + (System.currentTimeMillis() - start));
 	}
 
 	private void putGpxDataItemToSmartFolder(@NonNull GpxDataItem item) {

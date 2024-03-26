@@ -111,7 +111,7 @@ public class TrackDrawInfo {
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
 		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
-//		use3DTrackVisualization = settings.TRACK_3D_VISUALIZATION.get();
+		use3DTrackVisualization = settings.CURRENT_TRACK_3D_VISUALIZATION.get();
 	}
 
 	public void initDefaultTrackParams(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {

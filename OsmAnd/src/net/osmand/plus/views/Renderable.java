@@ -203,10 +203,10 @@ public class Renderable {
                 List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
                     geometryWay.setTrackStyleParams(trackColor, trackWidth, dashPattern, drawArrows,
-                            coloringType, routeInfoAttribute);
+                            use3DVisualization, coloringType, routeInfoAttribute);
                     geometryWay.updateSegment(tileBox, points, routeSegments);
                     geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left,
-                            quadRect.bottom, quadRect.right, null, 0);
+                            quadRect.bottom, quadRect.right, null, 0, use3DVisualization);
                 }
             }
         }

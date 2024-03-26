@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.track.TrackDrawInfo;
 
 public abstract class BaseSwitchCard extends BaseCard {
 
@@ -28,24 +27,22 @@ public abstract class BaseSwitchCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
-
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(getTitleId());
-
-		if(getIconRes() != 0) {
+		if (getIconRes() != 0) {
 			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(getIconRes()));
 		}
+		view.setOnClickListener(v -> onCardClicked());
+	}
 
+	protected void onCardClicked() {
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(getChecked());
-
-		view.setOnClickListener(v -> {
-			boolean checked = !compoundButton.isChecked();
-			compoundButton.setChecked(checked);
-			setChecked(checked);
-			notifyCardPressed();
-		});
+		boolean checked = !compoundButton.isChecked();
+		compoundButton.setChecked(checked);
+		setChecked(checked);
+		notifyCardPressed();
 	}
 
 	@StringRes

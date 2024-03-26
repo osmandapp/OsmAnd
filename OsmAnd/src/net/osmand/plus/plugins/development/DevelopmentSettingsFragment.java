@@ -194,11 +194,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference textsCategory = findPreference("routes");
 		textsCategory.setIconSpaceReserved(false);
 
-		////
-		SwitchPreferenceEx raiseRoutesPref = findPreference(plugin.RAISE_ROUTES_ABOVE_RELIEF.getId());
-		raiseRoutesPref.setIconSpaceReserved(false);
-		raiseRoutesPref.setDescription("Display routes 1000 meters higher above the ground");
-
 		SwitchPreferenceEx showTracesPref = findPreference(plugin.SHOW_TRANSPARENT_TRACES.getId());
 		showTracesPref.setIconSpaceReserved(false);
 		showTracesPref.setDescription("Display semi-transparent trace under the route");
