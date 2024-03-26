@@ -4,6 +4,7 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.AVAILABLE_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.DEFAULT_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.ENABLED_MODE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MATCHING_PANELS_MODE;
+import static net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsAdapter.*;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_APP_MODE;
 import static net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment.KEY_WIDGET_ID;
 
@@ -45,6 +46,7 @@ import net.osmand.plus.views.mapwidgets.configure.dialogs.WidgetInfoFragment;
 import net.osmand.plus.views.mapwidgets.configure.dialogs.cards.ConfigureActionsCard;
 import net.osmand.plus.views.mapwidgets.configure.reorder.ReorderWidgetsFragment;
 import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder;
+import net.osmand.plus.views.mapwidgets.configure.reorder.viewholder.AvailableItemViewHolder.AvailableWidgetUiInfo;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
 import net.osmand.util.Algorithms;
 
@@ -333,13 +335,48 @@ public class WidgetsListFragment extends Fragment implements OnScrollChangedList
 		Set<MapWidgetInfo> availableWidgets = widgetRegistry.getWidgetsForPanel(mapActivity, selectedAppMode, filter, Collections.singletonList(selectedPanel));
 		boolean hasAvailableWidgets = !Algorithms.isEmpty(availableWidgets);
 		if (hasAvailableWidgets) {
-			List<WidgetType> disabledDefaultWidgets = listDefaultWidgets(availableWidgets);
-			List<MapWidgetInfo> externalWidgets = listExternalWidgets(availableWidgets);
+			List<WidgetType> defaultWidgets = excludeGroupsDuplicated(listDefaultWidgets(availableWidgets));
+			sortWidgetsItems(defaultWidgets, app, nightMode);
 
-			inflateAvailableDefaultWidgets(excludeGroupsDuplicated(disabledDefaultWidgets), !Algorithms.isEmpty(externalWidgets));
+			List<MapWidgetInfo> externalWidgets = listExternalWidgets(availableWidgets);
+			sortWidgetsItems(externalWidgets, app, nightMode);
+
+			inflateAvailableDefaultWidgets(defaultWidgets, !Algorithms.isEmpty(externalWidgets));
 			inflateAvailableExternalWidgets(externalWidgets);
 		}
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.available_widgets_container), hasAvailableWidgets);
+	}
+
+	public static void sortWidgetsItems(List<?> widgets, @NonNull OsmandApplication app, boolean nightMode) {
+		Collections.sort(widgets, (o1, o2) -> {
+			String firstName = getListItemName(o1, app, nightMode);
+			String secondName = getListItemName(o2, app, nightMode);
+			if (firstName != null && secondName != null) {
+				return firstName.compareTo(secondName);
+			}
+			return 0;
+		});
+	}
+
+	@Nullable
+	public static String getListItemName(Object item, @NonNull OsmandApplication app, boolean nightMode) {
+		if (item instanceof WidgetType) {
+			WidgetType widgetType = (WidgetType) item;
+			WidgetGroup widgetGroup = widgetType.getGroup();
+			return widgetGroup != null
+					? String.valueOf(AvailableItemViewHolder.getGroupTitle(widgetGroup, app, nightMode))
+					: app.getString(widgetType.titleId);
+		} else if (item instanceof MapWidgetInfo) {
+			return ((MapWidgetInfo) item).getTitle(app);
+		} else if (item instanceof ListItem) {
+			Object value = ((ListItem) item).value;
+			if (value instanceof AvailableWidgetUiInfo) {
+				return ((AvailableWidgetUiInfo) value).title;
+			} else if (value instanceof WidgetGroup) {
+				return ((WidgetGroup) value).name();
+			}
+		}
+		return null;
 	}
 
 	@NonNull

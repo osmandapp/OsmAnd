@@ -53,9 +53,6 @@ public class MapWidgetRegistry {
 	private Map<WidgetsPanel, Set<MapWidgetInfo>> allWidgets = new HashMap<>();
 
 	private List<WidgetsRegistryListener> listeners = new ArrayList<>();
-	private final Map<WidgetsPanel, List<WidgetType>> bannedPanelWidgets = new HashMap<WidgetsPanel, List<WidgetType>>() {{
-		put(WidgetsPanel.RIGHT, Arrays.asList(WidgetType.CURRENT_SPEED));
-	}};
 
 	public MapWidgetRegistry(OsmandApplication app) {
 		this.app = app;
@@ -290,8 +287,7 @@ public class MapWidgetRegistry {
 				boolean passAvailable = !availableMode || WidgetsAvailabilityHelper.isWidgetAvailable(app, widget.key, appMode);
 				boolean defaultAvailable = !defaultMode || !widget.isCustomWidget();
 				boolean passMatchedPanels = !matchingPanelsMode || panels.contains(widget.getWidgetPanel());
-				boolean passTypeAllowed = widget.getWidgetType() == null ||
-						(widget.getWidgetType().isAllowed() && !isWidgetBannedForPanel(widget.getWidgetPanel(), widget.getWidgetType()));
+				boolean passTypeAllowed = widget.getWidgetType() == null || widget.getWidgetType().isAllowed();
 
 				if (passDisabled && passEnabled && passAvailable && defaultAvailable && passMatchedPanels && passTypeAllowed) {
 					filteredWidgets.add(widget);
@@ -299,11 +295,6 @@ public class MapWidgetRegistry {
 			}
 		}
 		return filteredWidgets;
-	}
-
-	private boolean isWidgetBannedForPanel(@NonNull WidgetsPanel panel, @NonNull WidgetType widgetType) {
-		List<WidgetType> types = bannedPanelWidgets.get(panel);
-		return types != null && types.contains(widgetType);
 	}
 
 	@NonNull
