@@ -2251,7 +2251,7 @@
     <string name="quick_action_add_first_intermediate_desc">Bouton pour ajouter le centre de la carte comme première étape.</string>
     <string name="quick_action_add_destination_desc">Bouton pour définir le centre de la carte comme nouvelle destination. L\'ancienne destination deviendra la dernière étape.</string>
     <string name="quick_action_replace_destination_desc">Bouton pour définir le centre de la carte comme nouvelle destination en remplacement de la destination précédente (si elle existe).</string>
-    <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
+    <string name="quick_action_auto_zoom">Zoom automatique de la carte</string>
     <string name="quick_action_auto_zoom_desc">Bouton pour activer ou désactiver le zoom automatique selon votre vitesse.</string>
     <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
     <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
@@ -2282,7 +2282,7 @@
     <string name="routing_attr_allow_private_description">Autoriser l\'accès aux zones privées.</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
-    <string name="show_from_zoom_level">L\\\'affichage commence à partir du niveau de zoom</string>
+    <string name="show_from_zoom_level">Affiché à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Pour les longues distances et si l\'itinéraire n\'est pas calculé dans 10 minutes, ajoutez des étapes.</string>
     <string name="srtm_menu_download_descr">Téléchargez la carte \'Topographique\' de cette région.</string>
     <string name="shared_string_plugin">Extension</string>
@@ -2764,7 +2764,7 @@
     <string name="osm_live_payment_renews_annually">Tous les ans</string>
     <string name="powered_by_osmand">Par OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
-    <string name="mapillary_menu_title_pano">N\\\'afficher que les images à 360°</string>
+    <string name="mapillary_menu_title_pano">Afficher uniquement les images à 360°</string>
     <string name="shared_string_launch">Ouvrir</string>
     <string name="run_full_osmand_msg">Vous utilisez la carte {0} qui est proposée par OsmAnd. Souhaitez-vous lancer la version complète d\'OsmAnd \?</string>
     <string name="run_full_osmand_header">Ouvrir OsmAnd \?</string>
@@ -3228,7 +3228,7 @@
     <string name="quick_action_contour_lines_descr">Bouton affichant ou masquant les courbes de niveau sur la carte.</string>
     <string name="quick_action_hillshade_descr">Bouton affichant ou masquant l\'ombrage du relief sur la carte.</string>
     <string name="tts_initialization_error">Impossible de démarrer le moteur de synthèse vocale.</string>
-    <string name="simulate_your_location_gpx_descr">Simulez votre position à l\\\'aide d\\\'une trace GPX enregistrée.</string>
+    <string name="simulate_your_location_gpx_descr">Simulez votre position à partir d\\\'une trace GPX enregistrée.</string>
     <string name="export_profile">Exporter le profil</string>
     <string name="exported_osmand_profile">Profil OsmAnd : %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' existe déjà. Souhaitez-vous le remplacer \?</string>
@@ -4225,7 +4225,7 @@
     <string name="online_direct_line_maps_link">Vérifier les cartes nécessaires.</string>
     <string name="offline_maps_required_descr">Des cartes hors ligne, nécessaires au calcul de l\'itinéraire, sont absentes.</string>
     <string name="online_maps_searching_descr">Recherche en ligne …</string>
-    <string name="reset_to_original">Revenir à l\\\'original</string>
+    <string name="reset_to_original">Restaurer l\\\'original</string>
     <string name="benefits_for_contributors">Avantages pour les contributeurs réguliers à OSM</string>
     <string name="use_login_and_password">Utiliser un identifiant et un mot de passe</string>
     <string name="available_until">Disponible jusqu\'au %1$s</string>
@@ -5398,7 +5398,7 @@
     <string name="help_article_troubleshooting_maps_data_name">Cartes &amp; données</string>
     <string name="help_article_widgets_markers_name">Gadgets de marqueur</string>
     <string name="help_article_widgets_nav_widgets_name">Gadgets de guidage</string>
-    <string name="telegram_chats_descr">Rejoignez l\'une de nos conversations Telegram locales.</string>
+    <string name="telegram_chats_descr">Rejoignez nous sur Telegram.</string>
     <string name="copy_build_version">Copier la version du build</string>
     <string name="help_article_purchases_giveaway_name">Concours</string>
     <string name="help_article_search_search_all_name">Rechercher tout</string>
@@ -5615,4 +5615,11 @@
 \nSi vous rencontrez l\'un de ces problèmes, essayez de définir l\'utilisation de la batterie à « Sans restriction ».</string>
     <string name="rendering_value_access_name">Par type d\'accès</string>
     <string name="sorted_sufolders_toast">Les sous-dossiers dans “%1$s” sont triés par : “%2$s”</string>
+    <string name="round_up">Arrondi</string>
+    <string name="precise">Exact</string>
+    <string name="shared_sting_all_colors">Toutes les couleurs</string>
+    <string name="auto_zoom">Zoom automatique</string>
+    <string name="java_safe">Java (Safe)</string>
+    <string name="auto_zoom_smooth">Progressif</string>
+    <string name="distance_during_navigation">Distance pendant la navigation</string>
 </resources>

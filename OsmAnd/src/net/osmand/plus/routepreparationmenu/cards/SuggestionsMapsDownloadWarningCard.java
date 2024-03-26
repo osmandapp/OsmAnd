@@ -22,7 +22,6 @@ import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.util.Algorithms;
@@ -34,36 +33,13 @@ import java.util.List;
 public class SuggestionsMapsDownloadWarningCard extends WarningCard implements DownloadEvents {
 	private MultipleSelectionBottomSheet<DownloadItem> dialog;
 	private final List<WorldRegion> suggestedMaps;
-	private final boolean hasPrecalculatedMissingMaps;
-	private final boolean suggestedMapsOnlineSearch;
-	private final boolean missingMapsOnlineSearching;
 
 	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
-		List<WorldRegion> precalculatedMissingMaps = mapRouteInfoMenu.getSuggestedMaps();
-		List<WorldRegion> calculatedMissingMaps = app.getRoutingHelper().getRoute().getMissingMaps();
-		hasPrecalculatedMissingMaps = !Algorithms.isEmpty(precalculatedMissingMaps);
-		suggestedMapsOnlineSearch = mapRouteInfoMenu.isSuggestedMapsOnlineSearch();
-		missingMapsOnlineSearching = app.getRoutingHelper().isMissingMapsOnlineSearching();
-		if (missingMapsOnlineSearching) {
-			this.suggestedMaps = null;
-			imageId = R.drawable.ic_action_time_span;
-			title = mapActivity.getString(R.string.online_maps_searching_descr);
-			linkText = "";
-		} else if (suggestedMapsOnlineSearch) {
-			this.suggestedMaps = precalculatedMissingMaps;
-			imageId = R.drawable.ic_action_time_span;
-			title = mapActivity.getString(!hasPrecalculatedMissingMaps
-					? R.string.online_maps_required_descr : R.string.direct_line_maps_required_descr);
-			linkText = mapActivity.getString(!hasPrecalculatedMissingMaps
-					? R.string.online_direct_line_maps_link : R.string.welmode_download_maps);
-		} else {
-			this.suggestedMaps = hasPrecalculatedMissingMaps ? precalculatedMissingMaps : calculatedMissingMaps;
-			imageId = R.drawable.ic_map;
-			title = mapActivity.getString(R.string.offline_maps_required_descr);
-			linkText = mapActivity.getString(R.string.welmode_download_maps);
-		}
+		this.suggestedMaps = app.getRoutingHelper().getRoute().getMissingMaps();
+		imageId = R.drawable.ic_map;
+		title = mapActivity.getString(R.string.offline_maps_required_descr);
+		linkText = mapActivity.getString(R.string.welmode_download_maps);
 	}
 
 	private void showMultipleSelectionDialog() {
@@ -221,16 +197,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 
 	@Override
 	protected void onLinkClicked() {
-		if (suggestedMapsOnlineSearch) {
-			if (!hasPrecalculatedMissingMaps) {
-				app.getRoutingHelper().startMissingMapsOnlineSearch();
-				mapActivity.getMapRouteInfoMenu().updateMenu();
-			} else {
-				showMultipleSelectionDialog();
-			}
-		} else if (!missingMapsOnlineSearching) {
-			showMultipleSelectionDialog();
-		}
+		showMultipleSelectionDialog();
 	}
 
 	@Override

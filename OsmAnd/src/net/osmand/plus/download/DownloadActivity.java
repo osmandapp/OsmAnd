@@ -356,7 +356,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			}
 
 			@Override
-			public void reloadIndexesFinished(List<String> warnings) {
+			public void reloadIndexesFinished(@NonNull List<String> warnings) {
 				setSupportProgressBarIndeterminateVisibility(false);
 				if (!Algorithms.isEmpty(warnings)) {
 					app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());

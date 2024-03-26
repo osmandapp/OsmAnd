@@ -50,6 +50,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_WIDTH = "width";
 	public static final String VEHICLE_LENGTH = "length";
 	public static final String MOTOR_TYPE = "motor_type";
+	public static final String MAX_AXLE_LOAD = "maxaxleload";
+	public static final String WEIGHT_RATING = "weightrating";
 	public static final String ALLOW_VIA_FERRATA = "allow_via_ferrata";
 	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
 
@@ -132,7 +134,11 @@ public class GeneralRouter implements VehicleRouter {
 		MOPED,
 		TRAIN,
 		PUBLIC_TRANSPORT,
-		HORSEBACKRIDING
+		HORSEBACKRIDING;
+		
+		public String getBaseProfile() {
+			return this.toString().toLowerCase();
+		}
 	}
 	
 	public enum RoutingParameterType {

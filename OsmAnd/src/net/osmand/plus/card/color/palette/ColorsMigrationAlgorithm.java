@@ -95,7 +95,7 @@ public class ColorsMigrationAlgorithm {
 		bundle.palettePreference = migrationBundle.newPreference;
 		bundle.customColorsPreference = migrationBundle.customColorsPreference;
 		ColorsCollection colorsCollection = new ColorsCollection(bundle);
-		colorsCollection.syncSettings();
+		colorsCollection.saveToPreferences();
 	}
 
 	public static List<Integer> collectCustomColorInts(@NonNull ListStringPreference colorsPreference,

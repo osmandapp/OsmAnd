@@ -34,6 +34,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.backup.ui.BackupCloudFragment;
@@ -240,7 +241,7 @@ public class IntentHelper {
 		if (fragment != null && fragment.getDialogType() == LoginDialogType.VERIFY_EMAIL) {
 			fragment.setToken(token);
 		} else if (!app.getBackupHelper().isRegistered() && !Algorithms.isEmpty(settings.BACKUP_USER_EMAIL.get())) {
-			if (BackupHelper.isTokenValid(token)) {
+			if (BackupUtils.isTokenValid(token)) {
 				BackupHelper backupHelper = app.getBackupHelper();
 				backupHelper.getBackupListeners().addRegisterDeviceListener(registerDeviceListener);
 				backupHelper.registerDevice(token);

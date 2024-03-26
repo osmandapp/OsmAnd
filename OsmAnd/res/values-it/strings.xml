@@ -4874,7 +4874,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5651,4 +5651,6 @@
 \n• L\'accesso a OpenStreetMap è passato a OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Distanza durante la navigazione</string>
+    <string name="auto_zoom_discrete">Discreto</string>
 </resources>

@@ -1,5 +1,6 @@
 package net.osmand.plus.widgets.multistatetoggle;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
@@ -56,8 +58,18 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		initView();
 	}
 
+	@NonNull
+	public List<_Radio> getItems() {
+		return items;
+	}
+
 	public final void setSelectedItem(int itemIndex) {
 		_Radio selectedItem = itemIndex < 0 || itemIndex >= items.size() ? null : items.get(itemIndex);
+		setSelectedItem(selectedItem);
+	}
+
+	public final void setSelectedItemByTag(@Nullable Object tag) {
+		_Radio selectedItem = findItemByTag(tag);
 		setSelectedItem(selectedItem);
 	}
 
@@ -68,6 +80,16 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 	public int getSelectedItemIndex() {
 		return items.indexOf(selectedItem);
+	}
+
+	@Nullable
+	public _Radio findItemByTag(@Nullable Object tag) {
+		for (_Radio item : items) {
+			if (Objects.equals(item.getTag(), tag)) {
+				return item;
+			}
+		}
+		return null;
 	}
 
 	private void initView() {
@@ -84,7 +106,8 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	}
 
 	private void createBtn(@NonNull _Radio item) {
-		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
+		Context context = container.getContext();
+		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
 				getRadioItemLayoutId(), container, false);
 		button.setOnClickListener(v -> {
@@ -115,7 +138,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView();
 	}
 
-	private void updateView() {
+	public void updateView() {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -136,6 +159,8 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 			button.setEnabled(enabled);
 			int textColor = enabled ? textColorPrimary : textColorSecondary;
 			int selectedBgColor = enabled ? activeColor : defaultColor;
+			int contentColor = item.getCustomColor() != null ? item.getCustomColor() : activeColor;
+			int itemColor = enabled ? contentColor : defaultColor;
 			GradientDrawable background = new GradientDrawable();
 			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
 			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
@@ -155,7 +180,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 				updateItemView(button, item, textColor);
 			} else {
 				button.setBackgroundColor(Color.TRANSPARENT);
-				updateItemView(button, item, selectedBgColor);
+				updateItemView(button, item, itemColor);
 			}
 		}
 	}

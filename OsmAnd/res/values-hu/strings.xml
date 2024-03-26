@@ -5643,9 +5643,9 @@
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="release_4_7">• Új „Sebességmérő” widget, amely kompatibilis az Android Auto-val
 \n
-\n • Konfigurálja a térkép képernyőt több \"Gyors művelet\" gombbal
+\n • Térképképernyő konfigurálása több „Gyorsművelet” gombbal
 \n
-\n • Az adatok jobb olvashatósága a grafikonokon
+\n • Jobban olvasható adatok a grafikonokon
 \n
 \n • Szenzoradat alapú szűrők a nyomvonalakhoz
 \n
@@ -5658,4 +5658,10 @@
 \n • Az OpenStreetMap bejelentkezés OAuth 2.0-ra váltott
 \n
 \n</string>
+    <string name="precise">Pontos</string>
+    <string name="round_up">Kerekítés</string>
+    <string name="distance_during_navigation">Távolságok a navigálás során</string>
+    <string name="distance_during_navigation_description">Válassza ki, hogy a távolságadatok hogyan jelenjenek meg a navigációs widgetekben (pont távolsága, következő kanyarodás, sávok).
+\n
+\n%1$s: pontos értékek vagy %2$s: könnyebb olvashatóság.</string>
 </resources>

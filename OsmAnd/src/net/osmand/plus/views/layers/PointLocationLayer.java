@@ -3,6 +3,7 @@ package net.osmand.plus.views.layers;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static net.osmand.plus.views.AnimateMapMarkersThread.ROTATE_ANIMATION_TIME;
+import static net.osmand.util.MapUtils.HIGH_LATLON_PRECISION;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -125,8 +126,8 @@ public class PointLocationLayer extends OsmandMapLayer
 			myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 			myLocMarkerBuilder.setIsHidden(true);
 
-			int width = (int)(icon.getIntrinsicWidth() * scale);
-			int height = (int)(icon.getIntrinsicHeight() * scale);
+			int width = (int) (icon.getIntrinsicWidth() * scale);
+			int height = (int) (icon.getIntrinsicHeight() * scale);
 			int locationX = width / 2;
 			int locationY = height / 2;
 
@@ -555,7 +556,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && (!isMapLinkedToLocation() || isMovingToMyLocation())) {
-			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(prevLocation, location);
+			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
 				updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);

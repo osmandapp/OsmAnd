@@ -442,7 +442,7 @@ public class TurnType {
 			vl = "Off route";
 		}
 		if(vl != null) {
-			if(lanes != null) {
+			if (lanes != null && lanes.length > 0) {
 				vl += " (" + lanesToString(lanes) +")";
 			}
 			return vl;

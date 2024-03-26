@@ -322,7 +322,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	private boolean isDefaultObfMap(@NonNull FileSettingsItem settingsItem) {
-		String fileName = BackupHelper.getItemFileName(settingsItem);
-		return BackupHelper.isDefaultObfMap(app, settingsItem, fileName);
+		String fileName = BackupUtils.getItemFileName(settingsItem);
+		return BackupUtils.isDefaultObfMap(app, settingsItem, fileName);
 	}
 }

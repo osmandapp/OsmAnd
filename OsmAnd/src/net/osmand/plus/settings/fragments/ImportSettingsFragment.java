@@ -13,18 +13,13 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.resources.ResourceManager.ReloadIndexesListener;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
-import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.views.layers.MapInfoLayer;
 
@@ -95,42 +90,17 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
-					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, null);
-					reloadIndexes(items);
-					AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-					if (plugin != null) {
-						plugin.indexingFiles(true, true);
-					}
+					BackupUtils.updateCacheForItems(app, items);
+
 					MapActivity activity = getMapActivity();
-					if (activity != null) {
-						MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-						if (mapInfoLayer != null) {
-							mapInfoLayer.recreateAllControls(activity);
-						}
+					MapInfoLayer infoLayer = activity != null ? activity.getMapLayers().getMapInfoLayer() : null;
+					if (infoLayer != null) {
+						infoLayer.recreateAllControls(activity);
 					}
 				}
 				importFinished(succeed, needRestart, items);
 			}
 		};
-	}
-
-	protected void reloadIndexes(@NonNull List<SettingsItem> items) {
-		for (SettingsItem item : items) {
-			if (item instanceof FileSettingsItem && ((FileSettingsItem) item).getSubtype().isMap()) {
-				app.getResourceManager().reloadIndexesAsync(IProgress.EMPTY_PROGRESS, new ReloadIndexesListener() {
-					@Override
-					public void reloadIndexesStarted() {
-					}
-
-					@Override
-					public void reloadIndexesFinished(List<String> warnings) {
-						app.getOsmandMap().refreshMap();
-					}
-				});
-				break;
-			}
-		}
 	}
 
 	protected CheckDuplicatesListener getDuplicatesListener() {

@@ -11,14 +11,11 @@ import org.apache.commons.codec.binary.Hex;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class StreamSettingsItemWriter extends SettingsItemWriter<StreamSettingsItem> {
-
-	private static final int BUFFER_SIZE = 1024;
 
 	public StreamSettingsItemWriter(StreamSettingsItem item) {
 		super(item);
@@ -44,36 +41,25 @@ public class StreamSettingsItemWriter extends SettingsItemWriter<StreamSettingsI
 		}
 	}
 
-	private void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
-		byte[] b = new byte[BUFFER_SIZE];
-		int read;
-		int cp = 0;
-		StreamSettingsItem item = getItem();
-		MessageDigest digest = null;
-		if (item.needMd5Digest()) {
+	private void streamCopy(@NonNull InputStream in, @NonNull OutputStream out, @Nullable IProgress pg, int bytesDivisor) throws IOException {
+		MessageDigest digest = getMessageDigest();
+		Algorithms.streamCopy(in, out, pg, bytesDivisor, digest);
+
+		if (digest != null) {
+			byte[] md5sum = digest.digest();
+			getItem().setMd5Digest(new String(Hex.encodeHex(md5sum)));
+		}
+	}
+
+	@Nullable
+	private MessageDigest getMessageDigest() {
+		if (getItem().needMd5Digest()) {
 			try {
-				digest = MessageDigest.getInstance("MD5");
+				return MessageDigest.getInstance("MD5");
 			} catch (NoSuchAlgorithmException e) {
 				// ignore
 			}
 		}
-		while ((read = in.read(b)) != -1) {
-			out.write(b, 0, read);
-			if (digest != null) {
-				digest.update(b, 0, read);
-			}
-			cp += read;
-			if (pg != null && cp > bytesDivisor) {
-				pg.progress(cp / bytesDivisor);
-				cp = cp % bytesDivisor;
-				if (pg.isInterrupted()) {
-					throw new InterruptedIOException();
-				}
-			}
-		}
-		if (digest != null) {
-			byte[] md5sum = digest.digest();
-			item.setMd5Digest(new String(Hex.encodeHex(md5sum)));
-		}
+		return null;
 	}
 }

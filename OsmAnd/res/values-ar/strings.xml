@@ -683,7 +683,7 @@
     <string name="vector_data_missing">البيانات المحلية (التي لا تحتاج إلى ربط بالإنترنت ) غير موجودة على بطاقة الذاكرة. يرجى إعادة تحميلها بغرض استخدام الخرائط من دون اتصال.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nاضغط مطولا للخيارات"</string>
+\nاضغط مطولاً للخيارات"</string>
     <string name="local_index_installed">الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة.</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر.</string>
@@ -836,7 +836,7 @@
     <string name="loading_smth">جار التحميل %1$s …</string>
     <string name="selected_gpx_info_show">"
 \n
-\nاضغط مطولا للرؤية على الخريطة"</string>
+\nاضغط مطولاً للرؤية على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
     <string name="always_center_position_on_map">وضع الموضع في المنتصف دائما</string>
@@ -1182,7 +1182,7 @@
     <string name="delay_navigation_start">بدء التوجيه المفصل تلقائياً</string>
     <string name="gpx_info_subtracks">مسارات فرعية: %1$s</string>
     <string name="gpx_info_waypoints">نقاط الطريق: %1$s</string>
-    <string name="gpx_info_distance">المسافة : %1$s (%2$s نقاط)</string>
+    <string name="gpx_info_distance">المسافة: %1$s (%2$s نقاط)</string>
     <string name="gpx_info_start_time">وقت البداية: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">وقت الانتهاء: %1$tF, %1$tT</string>
     <string name="gpx_info_average_speed">متوسط السرعة: %1$s</string>

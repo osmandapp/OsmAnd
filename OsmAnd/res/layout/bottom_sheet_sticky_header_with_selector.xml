@@ -36,7 +36,7 @@
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/descr"
-				style="@style/TitleStyle.Medium"
+				style="@style/TitleStyle"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"

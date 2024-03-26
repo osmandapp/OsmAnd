@@ -4395,7 +4395,7 @@
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf „%1$s“, um %2$s Dateien von „%3$s“ nach „%4$s“ zu kopieren. Dies kann einige Zeit dauern.</string>
-    <string name="storage_copied_files_size">%1$s Datei(en) (%2$s) verarbeitet</string>
+    <string name="storage_copied_files_size">%1$s Datei(en) %2$s verarbeitet</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
@@ -5201,7 +5201,7 @@
     <string name="rendering_value_name_only_name">Nur Name</string>
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
-    <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_3d_mode_description">Berühre die Karte mit zwei Fingern und bewege sie nach oben und unten, um die Kartenneigung anzupassen.</string>
     <string name="map_2d_mode_action">2D-Modus</string>
     <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
@@ -5257,7 +5257,7 @@
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Reliefschattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
-    <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
+    <string name="free_favorites_backup_description">Registriere dich in OsmAnd Cloud, um ein kostenloses Backup deiner Favoriten und Einstellungen zu erhalten.</string>
     <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
@@ -5640,28 +5640,34 @@
     <string name="auto_zoom_smooth">Sanft</string>
     <string name="auto_zoom_discrete">Diskret</string>
     <string name="auto_zoom">Autozoom</string>
-    <string name="java_safe">Java (Sicher)</string>
-    <string name="gpx_approximation">GPX Annäherung</string>
+    <string name="java_safe">Java (sicher)</string>
+    <string name="gpx_approximation">GPX-Annäherung</string>
     <string name="routing_type">Routing-Typ</string>
     <string name="routing_type_a_star_2_phase">A* 2-Phase</string>
     <string name="routing_type_a_star_classic">A* classic</string>
     <string name="shared_sting_all_colors">Alle Farben</string>
     <string name="lang_ta_in">Tamilisch (Indien)</string>
-    <string name="release_4_7">• Neues \"Tachometer\"-Widget, kompatibel mit Android Auto
+    <string name="release_4_7">• Neues Widget „Geschwindigkeitsmesser“, kompatibel mit Android Auto
 \n
-\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer \"Schnellaktions\"-Tasten
+\n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“
 \n
 \n• Verbesserte Lesbarkeit der Daten in Diagrammen
 \n
-\n• Hinzugefügte Filter nach Sensordaten für Strecken
+\n• Filter nach Sensordaten für Strecken hinzugefügt
 \n
 \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
 \n
-\n• Anpassen der \"Distanz während der Navigation\": Wahl zwischen präzisen oder gerundeten Zahlen
+\n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
 \n
 \n• Vereinheitlichte Benutzeroberfläche für die Streckenauswahl
 \n
 \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
 \n
 \n</string>
+    <string name="round_up">Abrunden</string>
+    <string name="precise">Präzise</string>
+    <string name="distance_during_navigation">Distanz während der Navigation</string>
+    <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
+\n
+\nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
 </resources>
