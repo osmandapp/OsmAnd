@@ -5670,4 +5670,6 @@
     <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
 \n
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
+    <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
+    <string name="upload_local_versions">Lokale Versionen hochladen</string>
 </resources>
