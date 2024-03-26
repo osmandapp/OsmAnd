@@ -5653,4 +5653,10 @@
 \n</string>
     <string name="distance_during_navigation">Distanza durante la navigazione</string>
     <string name="auto_zoom_discrete">Discreto</string>
+    <string name="distance_during_navigation_description">Scegli la modalità di visualizzazione delle informazioni sulla distanza nei widget di navigazione (distanza dal punto, svolta successiva, corsie).
+\n
+\nScegli \"%1$s\" per numeri esatti o \"%2$s\" per una più facile leggibilità.</string>
+    <string name="precise">Preciso</string>
+    <string name="download_cloud_versions">Scarica le versioni dal cloud</string>
+    <string name="upload_local_versions">Carica le versioni locali</string>
 </resources>
