@@ -12,10 +12,10 @@ import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.OnAppearanceModifiedListener;
-import net.osmand.plus.configmap.tracks.appearance.subcontrollers.DirectionArrowsController;
-import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ShowStartFinishController;
-import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorController;
-import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.DirectionArrowsCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ShowStartFinishCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
 import net.osmand.plus.configmap.tracks.appearance.tasks.ChangeAppearanceTask;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.routing.ColoringType;
@@ -31,10 +31,10 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 
 	private final OsmandApplication app;
 
-	private final DirectionArrowsController directionArrowsCardController;
-	private final ShowStartFinishController showStartAndFinishIconsCardController;
-	private final ColorController colorCardController;
-	private final WidthController widthCardController;
+	private final DirectionArrowsCardController directionArrowsCardController;
+	private final ShowStartFinishCardController showStartAndFinishIconsCardController;
+	private final ColorCardController colorCardController;
+	private final WidthCardController widthCardController;
 
 	private final AppearanceData initialAppearanceData;
 	private final AppearanceData appearanceData;
@@ -49,13 +49,13 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 		this.initialAppearanceData = initialAppearanceData;
 		this.appearanceData = new AppearanceData(initialAppearanceData).setModifiedListener(this);
 
-		directionArrowsCardController = new DirectionArrowsController(app, appearanceData);
-		showStartAndFinishIconsCardController = new ShowStartFinishController(app, appearanceData);
+		directionArrowsCardController = new DirectionArrowsCardController(app, appearanceData);
+		showStartAndFinishIconsCardController = new ShowStartFinishCardController(app, appearanceData);
 
-		colorCardController = new ColorController(app, appearanceData, new ColoringStyle(ColoringType.UNCHANGED));
+		colorCardController = new ColorCardController(app, appearanceData, new ColoringStyle(ColoringType.UNCHANGED));
 		colorCardController.setListener(this);
 
-		widthCardController = new WidthController(app, appearanceData);
+		widthCardController = new WidthCardController(app, appearanceData);
 		widthCardController.setListener(this);
 		widthCardController.setColorProvider(colorCardController);
 	}
@@ -83,6 +83,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 
 	@Override
 	public void saveChanges(@NonNull FragmentActivity activity) {
+		colorCardController.getColorsPaletteController().refreshLastUsedTime();
 		Set<TrackItem> selectedItems = selectionHelper.getSelectedItems();
 		ChangeAppearanceTask.execute(activity, appearanceData, selectedItems, result -> {
 			isAppearanceSaved = true;
@@ -112,22 +113,22 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	}
 
 	@NonNull
-	public DirectionArrowsController getDirectionArrowsCardController() {
+	public DirectionArrowsCardController getDirectionArrowsCardController() {
 		return directionArrowsCardController;
 	}
 
 	@NonNull
-	public ShowStartFinishController getShowStartAndFinishIconsCardController() {
+	public ShowStartFinishCardController getShowStartAndFinishIconsCardController() {
 		return showStartAndFinishIconsCardController;
 	}
 
 	@NonNull
-	public ColorController getColorCardController() {
+	public ColorCardController getColorCardController() {
 		return colorCardController;
 	}
 
 	@NonNull
-	public WidthController getWidthCardController() {
+	public WidthCardController getWidthCardController() {
 		return widthCardController;
 	}
 

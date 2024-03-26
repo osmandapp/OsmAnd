@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -19,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -35,12 +35,9 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
-import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
-
-import java.util.Set;
 
 public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog,
 		IAskRefreshDialogCompletely, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
@@ -87,7 +84,6 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		setupToolbar(view);
 		setupCards(view);
 		setupApplyButton(view);
-
 		return view;
 	}
 
@@ -136,6 +132,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 			MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController());
 			cardsContainer.addView(widthCard.build());
 			widthCard.setBackgroundColor(cardsBackgroundColor);
+			setupOnNeedScrollListener();
 		}
 	}
 
@@ -148,15 +145,6 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	protected void updateApplyButtonEnabling(@NonNull View view) {
 		DialogButton dialogButton = view.findViewById(R.id.apply_button);
 		dialogButton.setEnabled(controller.hasAnyChangesToCommit());
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			app.getDialogManager().unregister(controller.getProcessId());
-		}
 	}
 
 	public void onApplyButtonClicked() {
@@ -185,6 +173,30 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 			SearchMyPlacesTracksFragment searchTracksFragment = (SearchMyPlacesTracksFragment) fragment;
 			searchTracksFragment.updateTargetFragment();
 			searchTracksFragment.dismiss();
+		}
+	}
+
+	private void setupOnNeedScrollListener() {
+		controller.getWidthCardController().setOnNeedScrollListener(y -> {
+			View view = getView();
+			if (view != null) {
+				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
+				if (y > bottomVisibleY) {
+					ScrollView scrollView = view.findViewById(R.id.scroll_view);
+					int diff = y - bottomVisibleY;
+					int scrollY = scrollView.getScrollY();
+					scrollView.smoothScrollTo(0, scrollY + diff);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			app.getDialogManager().unregister(controller.getProcessId());
 		}
 	}
 

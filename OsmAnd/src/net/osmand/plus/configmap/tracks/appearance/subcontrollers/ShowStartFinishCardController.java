@@ -21,14 +21,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class ShowStartFinishController extends BaseMultiStateCardController {
+public class ShowStartFinishCardController extends BaseMultiStateCardController {
 
 	private final List<CardState> supportedCardStates;
 	private final AppearanceData appearanceData;
 	private CardState selectedState;
 
-	public ShowStartFinishController(@NonNull OsmandApplication app,
-	                                 @NonNull AppearanceData appearanceData) {
+	public ShowStartFinishCardController(@NonNull OsmandApplication app,
+	                                     @NonNull AppearanceData appearanceData) {
 		super(app);
 		this.appearanceData = appearanceData;
 		supportedCardStates = collectSupportedCardStates();

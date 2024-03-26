@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class WidthController extends BaseMultiStateCardController {
+public class WidthCardController extends BaseMultiStateCardController {
 
 	private final WidthStyle DEFAULT_STYLE = new WidthStyle(null, R.string.shared_string_unchanged);
 
@@ -50,7 +50,7 @@ public class WidthController extends BaseMultiStateCardController {
 	private OnNeedScrollListener onNeedScrollListener;
 	private OnTrackWidthSelectedListener listener;
 
-	public WidthController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
+	public WidthCardController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
 		super(app);
 		this.appearanceData = appearanceData;
 		supportedWidthStyles = collectSupportedWidthStyles();

@@ -36,15 +36,15 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColorController extends ColoringStyleCardController implements ISelectedColorProvider {
+public class ColorCardController extends ColoringStyleCardController implements ISelectedColorProvider {
 
 	private IColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 	private final AppearanceData appearanceData;
 
-	public ColorController(@NonNull OsmandApplication app,
-	                       @NonNull AppearanceData appearanceData,
-	                       @NonNull ColoringStyle selectedColoringStyle) {
+	public ColorCardController(@NonNull OsmandApplication app,
+	                           @NonNull AppearanceData appearanceData,
+	                           @NonNull ColoringStyle selectedColoringStyle) {
 		super(app, selectedColoringStyle);
 		this.appearanceData = appearanceData;
 	}

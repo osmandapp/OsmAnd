@@ -21,14 +21,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class DirectionArrowsController extends BaseMultiStateCardController {
+public class DirectionArrowsCardController extends BaseMultiStateCardController {
 
 	private final List<CardState> supportedCardStates;
 	private final AppearanceData appearanceData;
 	private CardState selectedState;
 
-	public DirectionArrowsController(@NonNull OsmandApplication app,
-	                                 @NonNull AppearanceData appearanceData) {
+	public DirectionArrowsCardController(@NonNull OsmandApplication app,
+	                                     @NonNull AppearanceData appearanceData) {
 		super(app);
 		this.appearanceData = appearanceData;
 		supportedCardStates = collectSupportedCardStates();
