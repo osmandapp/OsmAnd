@@ -5668,4 +5668,6 @@
     <string name="distance_during_navigation_description">Выберите, как информация о расстоянии будет отображаться в виджетах навигации (расстояние до точки, следующий поворот, полосы движения).
 \n
 \nВыберите «%1$s» для точных чисел или «%2$s» для удобства чтения.</string>
+    <string name="download_cloud_versions">Скачать облачные версии</string>
+    <string name="upload_local_versions">Загрузить локальные версии</string>
 </resources>
