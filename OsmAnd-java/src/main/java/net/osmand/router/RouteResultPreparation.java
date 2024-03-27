@@ -2223,7 +2223,7 @@ public class RouteResultPreparation {
 				continue;
 			}
 			int active = turnType.getActiveCommonLaneTurn();
-			if (TurnType.isKeepDirectionTurn(turnType.getValue()) && TurnType.isSlightTurn(active)) {
+			if (TurnType.isKeepDirectionTurn(active)) {
 				turnType.setSkipToSpeak(true);
 				if (turnType.goAhead() && turnType.getLanes() != null) {
 					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
