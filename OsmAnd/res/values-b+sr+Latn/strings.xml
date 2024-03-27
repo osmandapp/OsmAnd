@@ -5672,4 +5672,6 @@
     <string name="precise">Preciznije</string>
     <string name="round_up">Zaokružiti</string>
     <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
+    <string name="upload_local_versions">Otpremi lokalne verzije</string>
+    <string name="download_cloud_versions">Preuzmi verzije oblaka</string>
 </resources>
