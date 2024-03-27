@@ -16,7 +16,7 @@ import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
-import net.osmand.plus.card.color.ISelectedColorProvider;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
@@ -36,7 +36,7 @@ import net.osmand.plus.utils.UiUtilities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColorCardController extends ColoringStyleCardController implements ISelectedColorProvider {
+public class ColorCardController extends ColoringStyleCardController implements IControlsColorProvider {
 
 	private IColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
@@ -132,10 +132,9 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@Override
-	public int getSelectedColorValue() {
+	public int getSelectedControlsColor() {
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle != null ? coloringStyle.getType() : null;
-
 		Integer color = null;
 		if (coloringType == TRACK_SOLID) {
 			color = appearanceData.getCustomColor();

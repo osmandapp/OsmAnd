@@ -484,7 +484,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void updateAppearanceIcon() {
-		int color = getColorCardController().getTrackPreviewColor();
+		TrackColorController trackColorController = getColorCardController();
+		int color = trackColorController.getSelectedControlsColor();
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color);
 		trackIcon.setImageDrawable(icon);
 	}
@@ -729,9 +730,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 			inflate(R.layout.list_item_divider_basic, container, true);
-			addCard(container, new MultiStateCard(mapActivity, getColorCardController()));
+
+			TrackColorController trackColorController = getColorCardController();
+			addCard(container, new MultiStateCard(mapActivity, trackColorController));
 			inflate(R.layout.list_item_divider_basic, container, true);
-			addCard(container, new HeadedContentCard(mapActivity, getWidthCardController()));
+
+			TrackWidthController trackWidthController = getWidthCardController();
+			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
+			trackWidthController.setControlsColorProvider(trackColorController);
 			addCard(container, new ActionsCard(mapActivity));
 		}
 	}

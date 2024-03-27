@@ -5,7 +5,6 @@ import static net.osmand.util.Algorithms.parseIntSilently;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -22,6 +21,7 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -43,6 +43,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	private PreviewRouteLineInfo routeLinePreview;
 
+	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
 	private IRouteLineWidthControllerListener listener;
@@ -53,6 +54,10 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	public void setListener(@NonNull IRouteLineWidthControllerListener listener) {
 		this.listener = listener;
+	}
+
+	public void setControlsColorProvider(@NonNull IControlsColorProvider controlsColorProvider) {
+		this.controlsColorProvider = controlsColorProvider;
 	}
 
 	public void setOnNeedScrollListener(@NonNull OnNeedScrollListener onNeedScrollListener) {
@@ -154,13 +159,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	public void updateColorItems() {
 		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(getRouteLinePreviewColor());
-	}
-
-	@ColorInt
-	private int getRouteLinePreviewColor() {
-		RouteLineColorController controller = RouteLineColorController.getInstance(app);
-		return controller != null ? controller.getRouteLinePreviewColor() : 0;
+		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull

@@ -16,7 +16,7 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
-import net.osmand.plus.card.color.ISelectedColorProvider;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
@@ -37,7 +37,7 @@ public class WidthCardController extends BaseMultiStateCardController {
 
 	private final AppearanceData appearanceData;
 
-	private ISelectedColorProvider colorProvider;
+	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
 	private OnTrackWidthSelectedListener listener;
@@ -55,8 +55,8 @@ public class WidthCardController extends BaseMultiStateCardController {
 		this.onNeedScrollListener = onNeedScrollListener;
 	}
 
-	public void setColorProvider(@NonNull ISelectedColorProvider colorProvider) {
-		this.colorProvider = colorProvider;
+	public void setControlsColorProvider(@NonNull IControlsColorProvider controlsColorProvider) {
+		this.controlsColorProvider = controlsColorProvider;
 	}
 
 	@NonNull
@@ -125,9 +125,8 @@ public class WidthCardController extends BaseMultiStateCardController {
 	}
 
 	public void updateColorItems() {
-		int currentColor = colorProvider.getSelectedColorValue();
 		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(currentColor);
+		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull

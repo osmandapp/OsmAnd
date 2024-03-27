@@ -2,7 +2,7 @@ package net.osmand.plus.card.color;
 
 import androidx.annotation.ColorInt;
 
-public interface ISelectedColorProvider {
+public interface IControlsColorProvider {
 	@ColorInt
-	int getSelectedColorValue();
+	int getSelectedControlsColor();
 }

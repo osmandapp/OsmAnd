@@ -5,7 +5,6 @@ import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -15,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
@@ -43,7 +43,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class RouteLineColorController extends ColoringStyleCardController implements MapThemeProvider, IDialogController {
+public class RouteLineColorController extends ColoringStyleCardController
+		implements MapThemeProvider, IDialogController, IControlsColorProvider {
 
 	public static final String PROCESS_ID = "select_route_line_color";
 
@@ -223,8 +224,8 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		helper.setExternalMapThemeProvider(provider);
 	}
 
-	@ColorInt
-	public int getRouteLinePreviewColor() {
+	@Override
+	public int getSelectedControlsColor() {
 		PreviewRouteLineLayer layer = app.getOsmandMap().getMapLayers().getPreviewRouteLineLayer();
 		return layer.getRouteLineColor(isNightMap());
 	}
@@ -247,12 +248,6 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		controller.setRouteLinePreview(routeLinePreview);
 		controller.setListener(listener);
 		return controller;
-	}
-
-	@Nullable
-	public static RouteLineColorController getInstance(@NonNull OsmandApplication app) {
-		DialogManager dialogManager = app.getDialogManager();
-		return  (RouteLineColorController) dialogManager.findController(PROCESS_ID);
 	}
 
 	public interface IRouteLineColorControllerListener

@@ -23,6 +23,7 @@ import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
@@ -48,7 +49,8 @@ import net.osmand.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackColorController extends ColoringStyleCardController implements IDialogController {
+public class TrackColorController
+		extends ColoringStyleCardController implements IDialogController, IControlsColorProvider {
 
 	private static final String PROCESS_ID = "select_track_color";
 
@@ -131,10 +133,10 @@ public class TrackColorController extends ColoringStyleCardController implements
 		}
 	}
 
-	public int getTrackPreviewColor() {
+	@Override
+	public int getSelectedControlsColor() {
 		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
-
 		int color = 0;
 		if (coloringType == TRACK_SOLID) {
 			color = drawInfo.getColor();
@@ -229,11 +231,4 @@ public class TrackColorController extends ColoringStyleCardController implements
 		controller.setListener(listener);
 		return controller;
 	}
-
-	@Nullable
-	public static TrackColorController getInstance(@NonNull OsmandApplication app) {
-		DialogManager dialogManager = app.getDialogManager();
-		return  (TrackColorController) dialogManager.findController(PROCESS_ID);
-	}
-
 }

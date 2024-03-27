@@ -56,7 +56,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 
 		widthCardController = new WidthCardController(app, appearanceData);
 		widthCardController.setListener(this);
-		widthCardController.setColorProvider(colorCardController);
+		widthCardController.setControlsColorProvider(colorCardController);
 	}
 
 	@Override
