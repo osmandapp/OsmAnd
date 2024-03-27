@@ -831,7 +831,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private boolean isRecordingAutomatically() {
 		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
-				|| lastRoutingApplicationMode == settings.getApplicationMode()
+				&& lastRoutingApplicationMode == settings.getApplicationMode()
 				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get());
 	}
 
