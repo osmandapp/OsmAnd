@@ -16,20 +16,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class DirectionArrowsCardController extends BaseMultiStateCardController {
+public class StartFinishCardController extends BaseMultiStateCardController {
 
 	private final AppearanceData appearanceData;
 
-	public DirectionArrowsCardController(@NonNull OsmandApplication app,
-	                                     @NonNull AppearanceData appearanceData) {
-		super(app, appearanceData.shouldShowArrows());
+	public StartFinishCardController(@NonNull OsmandApplication app,
+	                                 @NonNull AppearanceData appearanceData) {
+		super(app, appearanceData.shouldShowStartFinish());
 		this.appearanceData = appearanceData;
 	}
 
 	@NonNull
 	@Override
 	public String getCardTitle() {
-		return app.getString(R.string.gpx_direction_arrows);
+		return app.getString(R.string.track_show_start_finish_icons);
 	}
 
 	@NonNull
@@ -48,8 +48,8 @@ public class DirectionArrowsCardController extends BaseMultiStateCardController 
 	protected void onSelectCardState(@NonNull CardState cardState) {
 		if (!Objects.equals(selectedCardState.getTag(), cardState.getTag())) {
 			selectedCardState = cardState;
+			appearanceData.setShowStartFinish((Boolean) selectedCardState.getTag());
 			cardInstance.updateSelectedCardState();
-			appearanceData.setShowArrows((Boolean) cardState.getTag());
 		}
 	}
 
@@ -61,4 +61,5 @@ public class DirectionArrowsCardController extends BaseMultiStateCardController 
 				new CardState(R.string.shared_string_off).setTag(false)
 		);
 	}
+
 }

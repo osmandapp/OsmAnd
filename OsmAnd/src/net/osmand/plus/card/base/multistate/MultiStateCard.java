@@ -66,12 +66,17 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 	private void updateStateSelectorTitle() {
 		View selector = view.findViewById(R.id.card_selector);
 		TextView tvTitle = selector.findViewById(R.id.title);
-		tvTitle.setText(controller.getSelectorTitle());
+		tvTitle.setText(controller.getCardStateSelectorTitle());
 	}
 
 	private void bindSelectedStateContent() {
 		ViewGroup contentContainer = view.findViewById(R.id.content);
 		controller.onBindCardContent(activity, contentContainer, nightMode);
+	}
+
+	@Override
+	public View getSelectorView() {
+		return view.findViewById(R.id.card_selector);
 	}
 
 	@Override

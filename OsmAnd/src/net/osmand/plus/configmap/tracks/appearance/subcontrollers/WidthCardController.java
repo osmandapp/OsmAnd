@@ -1,10 +1,8 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.util.Algorithms.parseIntSilently;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,25 +13,21 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.Limits;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
+import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
 import net.osmand.plus.card.color.ISelectedColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
-import net.osmand.plus.card.width.data.WidthStyle;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class WidthCardController extends BaseMultiStateCardController {
-
-	private final WidthStyle DEFAULT_STYLE = new WidthStyle(null, R.string.shared_string_unchanged);
 
 	private static final int UNCHANGED_STYLE_CARD_ID = 0;
 	private static final int WIDTH_COMPONENT_CARD_ID = 1;
@@ -42,8 +36,6 @@ public class WidthCardController extends BaseMultiStateCardController {
 	private static final int CUSTOM_WIDTH_MAX = 24;
 
 	private final AppearanceData appearanceData;
-	private final List<WidthStyle> supportedWidthStyles;
-	private WidthStyle selectedWidthStyle;
 
 	private ISelectedColorProvider colorProvider;
 	private WidthComponentController widthComponentController;
@@ -51,10 +43,8 @@ public class WidthCardController extends BaseMultiStateCardController {
 	private OnTrackWidthSelectedListener listener;
 
 	public WidthCardController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
-		super(app);
+		super(app, appearanceData.getWidthValue());
 		this.appearanceData = appearanceData;
-		supportedWidthStyles = collectSupportedWidthStyles();
-		selectedWidthStyle = findWidthStyle(appearanceData.getWidthValue());
 	}
 
 	public void setListener(@NonNull OnTrackWidthSelectedListener listener) {
@@ -77,36 +67,21 @@ public class WidthCardController extends BaseMultiStateCardController {
 
 	@NonNull
 	@Override
-	public String getSelectorTitle() {
-		return isDefaultStyle(selectedWidthStyle)
-				? selectedWidthStyle.toHumanString(app)
+	public String getCardStateSelectorTitle() {
+		return selectedCardState.getTag() == null
+				? selectedCardState.toHumanString(app)
 				: getWidthComponentController().getSummary(app);
 	}
 
-	@NonNull
 	@Override
-	public List<PopUpMenuItem> getPopUpMenuItems() {
-		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		for (WidthStyle widthStyle : supportedWidthStyles) {
-			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitle(widthStyle.toHumanString(app))
-					.setTitleColor(getPrimaryTextColor(app, cardInstance.isNightMode()))
-					.setTag(widthStyle)
-					.create()
-			);
-		}
-		return menuItems;	}
-
-	@Override
-	public void onPopUpMenuItemSelected(@NonNull FragmentActivity activity, @NonNull View view, @NonNull PopUpMenuItem item) {
-		WidthStyle widthStyle = (WidthStyle) item.getTag();
-		String widthValue = getWidthValueOfStyle(widthStyle);
+	protected void onSelectCardState(@NonNull CardState cardState) {
+		String widthValue = getWidthValue(cardState);
 		onWidthValueSelected(widthValue);
 	}
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
-		if (isDefaultStyle(selectedWidthStyle)) {
+		if (selectedCardState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {
 			bindWidthComponentCardIfNeeded(activity, container);
@@ -119,10 +94,7 @@ public class WidthCardController extends BaseMultiStateCardController {
 		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 		inflater.inflate(R.layout.list_item_divider_with_padding_basic, container, true);
 
-		// TODO use appropriate card summary
-		String pattern = app.getString(R.string.route_line_use_map_style_width);
-		String rendererName = app.getRendererRegistry().getSelectedRendererName();
-		String summary = String.format(pattern, rendererName);
+		String summary = app.getString(R.string.unchanged_parameter_summary);
 		DescriptionCard descriptionCard = new DescriptionCard(activity, summary);
 		container.addView(descriptionCard.build(activity));
 		container.setTag(UNCHANGED_STYLE_CARD_ID);
@@ -141,12 +113,12 @@ public class WidthCardController extends BaseMultiStateCardController {
 			container.addView(widthComponentCard.build(activity));
 			updateColorItems();
 		}
-		controller.askSelectWidthMode(getWidthValueOfStyle(selectedWidthStyle));
+		controller.askSelectWidthMode(getWidthValue(selectedCardState));
 		container.setTag(WIDTH_COMPONENT_CARD_ID);
 	}
 
 	private void onWidthValueSelected(@Nullable String widthValue) {
-		selectedWidthStyle = findWidthStyle(widthValue);
+		selectedCardState = findCardStateByWidthValue(widthValue);
 		cardInstance.updateSelectedCardState();
 		appearanceData.setWidthValue(widthValue);
 		listener.onTrackWidthSelected(widthValue);
@@ -176,39 +148,46 @@ public class WidthCardController extends BaseMultiStateCardController {
 	}
 
 	@NonNull
-	private List<WidthStyle> collectSupportedWidthStyles() {
-		List<WidthStyle> result = new ArrayList<>();
-		result.add(DEFAULT_STYLE);
-		for (WidthMode widthMode : WidthMode.values()) {
-			result.add(new WidthStyle(widthMode.getKey(), widthMode.getTitleId()));
+	@Override
+	protected CardState findCardState(@Nullable Object tag) {
+		if (tag instanceof String) {
+			return findCardStateByWidthValue((String) tag);
 		}
-		return result;
+		return super.findCardState(tag);
 	}
 
 	@NonNull
-	private WidthStyle findWidthStyle(@Nullable String width) {
-		if (width != null) {
-			WidthMode widthMode = WidthMode.valueOfKey(width);
-			for (WidthStyle widthStyle : supportedWidthStyles) {
-				if (Objects.equals(widthStyle.getKey(), widthMode.getKey())) {
-					return widthStyle;
-				}
-			}
-		}
-		return DEFAULT_STYLE;
+	private CardState findCardStateByWidthValue(@Nullable String width) {
+		return findCardState(width != null ? WidthMode.valueOfKey(width) : null);
 	}
 
 	@Nullable
-	private String getWidthValueOfStyle(@NonNull WidthStyle widthStyle) {
-		WidthComponentController controller = getWidthComponentController();
-		return isCustomValue(widthStyle) ? controller.getSelectedCustomValue() : widthStyle.getKey();
+	private String getWidthValue(@NonNull CardState cardState) {
+		if (isCustomValue(cardState)) {
+			WidthComponentController controller = getWidthComponentController();
+			return controller.getSelectedCustomValue();
+		}
+		if (cardState.getTag() instanceof WidthMode) {
+			return ((WidthMode) cardState.getTag()).getKey();
+		}
+		return null;
 	}
 
-	private boolean isDefaultStyle(@NonNull WidthStyle widthStyle) {
-		return Objects.equals(DEFAULT_STYLE, widthStyle);
+	private boolean isCustomValue(@NonNull CardState cardState) {
+		return cardState.getTag() == WidthMode.CUSTOM;
 	}
 
-	private boolean isCustomValue(@NonNull WidthStyle widthStyle) {
-		return Objects.equals(widthStyle.getKey(), WidthMode.CUSTOM.getKey());
+	@NonNull
+	@Override
+	protected List<CardState> collectSupportedCardStates() {
+		List<CardState> result = new ArrayList<>();
+		result.add(new CardState(R.string.shared_string_unchanged));
+		for (WidthMode widthMode : WidthMode.values()) {
+			result.add(new CardState(widthMode.getTitleId())
+					.setShowTopDivider(widthMode.ordinal() == 0)
+					.setTag(widthMode)
+			);
+		}
+		return result;
 	}
 }

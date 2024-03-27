@@ -436,11 +436,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		trackDrawInfo.setColoringStyle(coloringStyle);
-		View saveButton = view.findViewById(R.id.right_bottom_button);
-		saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
-		updateColorItems();
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			trackDrawInfo.setColoringStyle(coloringStyle);
+			View saveButton = view.findViewById(R.id.right_bottom_button);
+			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+			updateColorItems();
+		}
 	}
 
 	@Override

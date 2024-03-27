@@ -222,7 +222,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			headerTitle.setText(controller.getCardTitle());
 
 			TextView headerDescr = headerContainer.findViewById(R.id.descr);
-			headerDescr.setText(controller.getSelectorTitle());
+			headerDescr.setText(controller.getCardStateSelectorTitle());
 
 			View selector = headerContainer.findViewById(R.id.selector);
 			selector.setOnClickListener(controller::onSelectorButtonClicked);
@@ -514,10 +514,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		previewRouteLineInfo.setRouteColoringStyle(coloringStyle);
-		updateColorItems();
-		updateHeaderContent(RouteLineColorController.PROCESS_ID);
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			previewRouteLineInfo.setRouteColoringStyle(coloringStyle);
+			updateColorItems();
+			updateHeaderContent(RouteLineColorController.PROCESS_ID);
+		}
 	}
 
 	@Override

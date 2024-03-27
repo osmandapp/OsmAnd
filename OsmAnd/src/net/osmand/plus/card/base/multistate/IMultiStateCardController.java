@@ -14,7 +14,7 @@ public interface IMultiStateCardController {
 	String getCardTitle();
 
 	@NonNull
-	String getSelectorTitle();
+	String getCardStateSelectorTitle();
 
 	void onSelectorButtonClicked(@NonNull View selectorView);
 

@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.card.color.ColoringStyle;
 
+import java.util.Objects;
+
 public class AppearanceData {
 
 	private Boolean showArrows = null;
@@ -111,15 +113,15 @@ public class AppearanceData {
 
 		AppearanceData that = (AppearanceData) o;
 
-		if (shouldShowArrows() != null ? !shouldShowArrows().equals(that.shouldShowArrows()) : that.shouldShowArrows() != null)
+		if (shouldShowArrows() != null ? !Objects.equals(shouldShowArrows(), that.shouldShowArrows()) : that.shouldShowArrows() != null)
 			return false;
-		if (shouldShowStartFinish() != null ? !shouldShowStartFinish().equals(that.shouldShowStartFinish()) : that.shouldShowStartFinish() != null)
+		if (shouldShowStartFinish() != null ? !Objects.equals(shouldShowStartFinish(), that.shouldShowStartFinish()) : that.shouldShowStartFinish() != null)
 			return false;
-		if (getColoringStyle() != null ? !getColoringStyle().equals(that.getColoringStyle()) : that.getColoringStyle() != null)
+		if (getColoringStyle() != null ? !Objects.equals(getColoringStyle(), that.getColoringStyle()) : that.getColoringStyle() != null)
 			return false;
-		if (getCustomColor() != null ? !getCustomColor().equals(that.getCustomColor()) : that.getCustomColor() != null)
+		if (getCustomColor() != null ? !Objects.equals(getCustomColor(), that.getCustomColor()) : that.getCustomColor() != null)
 			return false;
-		return getWidthValue() != null ? getWidthValue().equals(that.getWidthValue()) : that.getWidthValue() == null;
+		return getWidthValue() != null ? Objects.equals(getWidthValue(), that.getWidthValue()) : that.getWidthValue() == null;
 	}
 
 	@Override

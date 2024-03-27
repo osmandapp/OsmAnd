@@ -1,25 +1,18 @@
 package net.osmand.plus.card.color;
 
-import android.view.View;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
+import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.color.cstyle.OnSelectColoringStyleListener;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.routing.ColoringStyleAlgorithms;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
-import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,25 +20,20 @@ import java.util.Objects;
 
 public abstract class ColoringStyleCardController extends BaseMultiStateCardController {
 
-	private final List<ColoringStyle> supportedColoringStyles;
-
-	private ColoringStyle selectedColoringStyle;
-	private IColorCardControllerListener controllerListener;
+	private IColorCardControllerListener externalListener;
 
 	public ColoringStyleCardController(@NonNull OsmandApplication app,
-	                                   @NonNull ColoringStyle selectedColoringStyle) {
-		super(app);
-		this.supportedColoringStyles = collectSupportedColoringStyles();
-		this.selectedColoringStyle = selectedColoringStyle;
+	                                   @Nullable ColoringStyle selectedColoringStyle) {
+		super(app, selectedColoringStyle);
 	}
 
-	public void setListener(@NonNull IColorCardControllerListener controllerListener) {
-		this.controllerListener = controllerListener;
+	public void setListener(@NonNull IColorCardControllerListener externalListener) {
+		this.externalListener = externalListener;
 	}
 
 	@NonNull
-	public IColorCardControllerListener getControllerListener() {
-		return controllerListener;
+	public IColorCardControllerListener getExternalListener() {
+		return externalListener;
 	}
 
 	@NonNull
@@ -56,86 +44,38 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 
 	@NonNull
 	@Override
-	public String getSelectorTitle() {
-		return selectedColoringStyle.toHumanString(app);
-	}
-
-	@NonNull
-	@Override
-	public List<PopUpMenuItem> getPopUpMenuItems() {
-		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		boolean nightMode = cardInstance.isNightMode();
-		for (ColoringStyle coloringStyle : getSupportedColoringStyles()) {
-			int titleColor = isDataAvailableForColoringStyle(coloringStyle)
-					? ColorUtilities.getPrimaryTextColor(app, nightMode)
-					: ColorUtilities.getDisabledTextColor(app, nightMode);
-			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitle(coloringStyle.toHumanString(app))
-					.setTitleColor(titleColor)
-					.setTag(coloringStyle)
-					.create()
-			);
-		}
-		return menuItems;
+	public String getCardStateSelectorTitle() {
+		return selectedCardState.toHumanString(app);
 	}
 
 	@Override
-	public void onPopUpMenuItemSelected(@NonNull FragmentActivity activity,
-	                                    @NonNull View view, @NonNull PopUpMenuItem item) {
-		ColoringStyle newColoringStyle = (ColoringStyle) item.getTag();
-		if (!isDataAvailableForColoringStyle(newColoringStyle)) {
-			showUnavailableColoringStyleSnackbar(activity, newColoringStyle, view);
-		} else {
-			askSelectColoringStyle(newColoringStyle);
-		}
-	}
-
-	private void showUnavailableColoringStyleSnackbar(@NonNull FragmentActivity activity,
-	                                                  @NonNull ColoringStyle coloringStyle,
-	                                                  @NonNull View view) {
-		ColoringType coloringType = coloringStyle.getType();
-		String text = "";
-		if (coloringType == ColoringType.SPEED) {
-			text = app.getString(R.string.track_has_no_speed);
-		} else if (CollectionUtils.equalsToAny(coloringType, ColoringType.ALTITUDE, ColoringType.SLOPE)) {
-			text = app.getString(R.string.track_has_no_altitude);
-		} else if (coloringType.isRouteInfoAttribute()) {
-			text = app.getString(R.string.track_has_no_needed_data);
-		}
-		text += " " + app.getString(R.string.select_another_colorization);
-		Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
-				.setAnchorView(activity.findViewById(R.id.dismiss_button));
-		UiUtilities.setupSnackbar(snackbar, cardInstance.isNightMode());
-		snackbar.show();
+	protected void onSelectCardState(@NonNull CardState cardState) {
+		askSelectColoringStyle((ColoringStyle) cardState.getTag());
 	}
 
 	@NonNull
-	protected List<String> collectRouteInfoAttributes() {
-		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
-		return RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
+	public ColoringStyle requireSelectedColoringStyle() {
+		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		assert coloringStyle != null;
+		return coloringStyle;
 	}
 
-	@NonNull
+	@Nullable
 	public ColoringStyle getSelectedColoringStyle() {
-		return selectedColoringStyle;
+		return (ColoringStyle) selectedCardState.getTag();
 	}
 
-	public void askSelectColoringStyle(@NonNull ColoringStyle coloringStyle) {
+	public void askSelectColoringStyle(@Nullable ColoringStyle coloringStyle) {
+		ColoringStyle selectedColoringStyle = (ColoringStyle) selectedCardState.getTag();
 		if (!Objects.equals(selectedColoringStyle, coloringStyle)) {
-			this.selectedColoringStyle = coloringStyle;
+			selectedCardState = findCardState(coloringStyle);
 			onColoringStyleSelected(coloringStyle);
 		}
 	}
 
-	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		cardInstance.updateSelectedCardState();
-		controllerListener.onColoringStyleSelected(coloringStyle);
-	}
-
-	@NonNull
-	public List<ColoringStyle> getSupportedColoringStyles() {
-		return supportedColoringStyles;
+		externalListener.onColoringStyleSelected(coloringStyle);
 	}
 
 	protected boolean isAvailableInSubscription(@NonNull ColoringStyle coloringStyle) {
@@ -143,7 +83,17 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	}
 
 	@NonNull
-	protected List<ColoringStyle> collectSupportedColoringStyles() {
+	@Override
+	protected List<CardState> collectSupportedCardStates() {
+		List<CardState> result = new ArrayList<>();
+		for (ColoringStyle coloringStyle : getSupportedColoringStyles()) {
+			result.add(new CardState(coloringStyle.toHumanString(app)).setTag(coloringStyle));
+		}
+		return result;
+	}
+
+	@NonNull
+	protected List<ColoringStyle> getSupportedColoringStyles() {
 		List<ColoringStyle> coloringStyles = new ArrayList<>();
 		for (ColoringType coloringType : getSupportedColoringTypes()) {
 			if (!coloringType.isRouteInfoAttribute()) {
@@ -156,11 +106,15 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 		return coloringStyles;
 	}
 
+	@NonNull
+	protected List<String> collectRouteInfoAttributes() {
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+		return RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
+	}
+
+	@NonNull
 	protected abstract ColoringType[] getSupportedColoringTypes();
-
-	protected abstract boolean isUsedOnMap();
-
-	protected abstract boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle);
 
 	public interface IColorCardControllerListener
 			extends OnSelectColoringStyleListener, OnColorsPaletteListener { }

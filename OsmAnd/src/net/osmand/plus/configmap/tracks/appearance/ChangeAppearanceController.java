@@ -13,12 +13,11 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.OnAppearanceModifiedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.DirectionArrowsCardController;
-import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ShowStartFinishCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
 import net.osmand.plus.configmap.tracks.appearance.tasks.ChangeAppearanceTask;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
 
 import java.util.Objects;
@@ -32,7 +31,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	private final OsmandApplication app;
 
 	private final DirectionArrowsCardController directionArrowsCardController;
-	private final ShowStartFinishCardController showStartAndFinishIconsCardController;
+	private final StartFinishCardController showStartAndFinishIconsCardController;
 	private final ColorCardController colorCardController;
 	private final WidthCardController widthCardController;
 
@@ -50,9 +49,9 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 		this.appearanceData = new AppearanceData(initialAppearanceData).setModifiedListener(this);
 
 		directionArrowsCardController = new DirectionArrowsCardController(app, appearanceData);
-		showStartAndFinishIconsCardController = new ShowStartFinishCardController(app, appearanceData);
+		showStartAndFinishIconsCardController = new StartFinishCardController(app, appearanceData);
 
-		colorCardController = new ColorCardController(app, appearanceData, new ColoringStyle(ColoringType.UNCHANGED));
+		colorCardController = new ColorCardController(app, appearanceData);
 		colorCardController.setListener(this);
 
 		widthCardController = new WidthCardController(app, appearanceData);
@@ -61,7 +60,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		appearanceData.setColoringStyle(coloringStyle);
 		updateColorItems();
 	}
@@ -118,7 +117,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	}
 
 	@NonNull
-	public ShowStartFinishCardController getShowStartAndFinishIconsCardController() {
+	public StartFinishCardController getShowStartAndFinishIconsCardController() {
 		return showStartAndFinishIconsCardController;
 	}
 

@@ -5,16 +5,21 @@ import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDraw
 import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
@@ -37,6 +42,8 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,15 +69,15 @@ public class TrackColorController extends ColoringStyleCardController implements
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
 		container.removeAllViews();
-		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
 
 		if (!isAvailableInSubscription(coloringStyle)) {
-			container.addView(new PromoBannerCard(activity, isUsedOnMap()).build());
+			container.addView(new PromoBannerCard(activity).build());
 		} else if (coloringType.isTrackSolid()) {
-			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController(), isUsedOnMap()).build());
+			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController()).build());
 		} else {
-			container.addView(new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController(), isUsedOnMap()).build());
+			container.addView(new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController()).build());
 		}
 	}
 
@@ -85,7 +92,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor());
 		}
-		colorsPaletteController.setPaletteListener(getControllerListener());
+		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;
 	}
 
@@ -100,28 +107,21 @@ public class TrackColorController extends ColoringStyleCardController implements
 	}
 
 	@Override
-	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		super.onColoringStyleSelected(coloringStyle);
-		IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
-		styleDetailsController.setColoringStyle(coloringStyle);
-	}
-
-	@Override
-	protected boolean isUsedOnMap() {
-		return true;
-	}
-
-	@Override
-	protected boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle) {
-		if (selectedGpx == null || coloringStyle.getType() != ATTRIBUTE && drawInfo.isCurrentRecording()) {
-			return true;
+	public void askSelectColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		if (isDataAvailable(coloringStyle)) {
+			super.askSelectColoringStyle(coloringStyle);
+		} else {
+			showUnavailableColoringStyleSnackBar(cardInstance.getActivity(), coloringStyle, cardInstance.getSelectorView());
 		}
-		return isAvailableForDrawingTrack(app, coloringStyle, selectedGpx);
 	}
 
 	@Override
-	protected ColoringType[] getSupportedColoringTypes() {
-		return ColoringType.valuesOf(ColoringPurpose.TRACK);
+	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		super.onColoringStyleSelected(coloringStyle);
+		if (coloringStyle != null) {
+			IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
+			styleDetailsController.setColoringStyle(coloringStyle);
+		}
 	}
 
 	public void onDestroy(@Nullable FragmentActivity activity) {
@@ -132,7 +132,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	}
 
 	public int getTrackPreviewColor() {
-		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
 
 		int color = 0;
@@ -143,6 +143,46 @@ public class TrackColorController extends ColoringStyleCardController implements
 			color = GpxAppearanceAdapter.getTrackColor(app);
 		}
 		return color;
+	}
+
+	@Override
+	protected boolean isCardStateAvailable(@NonNull CardState cardState) {
+		return isDataAvailable((ColoringStyle) cardState.getTag());
+	}
+
+	protected boolean isDataAvailable(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle == null) {
+			return false;
+		}
+		if (selectedGpx == null || coloringStyle.getType() != ATTRIBUTE && drawInfo.isCurrentRecording()) {
+			return true;
+		}
+		return isAvailableForDrawingTrack(app, coloringStyle, selectedGpx);
+	}
+
+	private void showUnavailableColoringStyleSnackBar(@NonNull FragmentActivity activity,
+	                                                  @NonNull ColoringStyle coloringStyle,
+	                                                  @NonNull View view) {
+		ColoringType coloringType = coloringStyle.getType();
+		String text = "";
+		if (coloringType == ColoringType.SPEED) {
+			text = app.getString(R.string.track_has_no_speed);
+		} else if (CollectionUtils.equalsToAny(coloringType, ColoringType.ALTITUDE, ColoringType.SLOPE)) {
+			text = app.getString(R.string.track_has_no_altitude);
+		} else if (coloringType.isRouteInfoAttribute()) {
+			text = app.getString(R.string.track_has_no_needed_data);
+		}
+		text += " " + app.getString(R.string.select_another_colorization);
+		Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
+				.setAnchorView(activity.findViewById(R.id.dismiss_button));
+		UiUtilities.setupSnackbar(snackbar, cardInstance.isNightMode());
+		snackbar.show();
+	}
+
+	@Override
+	@NonNull
+	protected ColoringType[] getSupportedColoringTypes() {
+		return ColoringType.valuesOf(ColoringPurpose.TRACK);
 	}
 
 	@NonNull

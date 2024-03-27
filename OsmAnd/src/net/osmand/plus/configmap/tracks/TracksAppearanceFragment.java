@@ -255,10 +255,12 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		trackDrawInfo.setColoringType(coloringStyle.getType());
-		trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
-		applyButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			trackDrawInfo.setColoringType(coloringStyle.getType());
+			trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+			applyButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+		}
 	}
 
 	@Override

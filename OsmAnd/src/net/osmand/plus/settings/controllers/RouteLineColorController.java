@@ -31,7 +31,6 @@ import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnP
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
-import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -107,8 +106,8 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 				}
 			};
 		}
-		colorsPaletteController.setPaletteListener(getControllerListener());
-		colorsPaletteController.setPaletteModeSelectedListener((OnPaletteModeSelectedListener) getControllerListener());
+		colorsPaletteController.setPaletteListener(getExternalListener());
+		colorsPaletteController.setPaletteModeSelectedListener((OnPaletteModeSelectedListener) getExternalListener());
 		return colorsPaletteController;
 	}
 
@@ -153,22 +152,24 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 
 	@NonNull
 	protected BaseCard getContentCardForSelectedState(@NonNull FragmentActivity activity) {
-		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
 		if (!isAvailableInSubscription(coloringStyle)) {
-			return new PromoBannerCard(activity, isUsedOnMap());
+			return new PromoBannerCard(activity);
 		} else if (coloringType.isCustomColor()) {
-			return new ModedColorsPaletteCard(activity, getColorsPaletteController(), isUsedOnMap());
+			return new ModedColorsPaletteCard(activity, getColorsPaletteController());
 		} else {
-			return new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController(), isUsedOnMap());
+			return new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController());
 		}
 	}
 
 	@Override
-	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		super.onColoringStyleSelected(coloringStyle);
-		IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
-		styleDetailsController.setColoringStyle(coloringStyle);
+		if (coloringStyle != null) {
+			IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
+			styleDetailsController.setColoringStyle(coloringStyle);
+		}
 	}
 
 	@Override
@@ -176,29 +177,19 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		return false;
 	}
 
-	@Override
-	protected boolean isUsedOnMap() {
-		return true;
-	}
-
 	public boolean isSelectedColoringStyleAvailable() {
-		return isAvailableInSubscription(getSelectedColoringStyle());
+		return isAvailableInSubscription(requireSelectedColoringStyle());
 	}
 
 	@Override
-	protected boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle) {
-		// We can use any of available map data types to draw route line
-		return true;
-	}
-
-	@Override
+	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
 		return ColoringType.valuesOf(ColoringPurpose.ROUTE_LINE);
 	}
 
 	@Override
 	public DayNightMode getMapTheme() {
-		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		if (coloringStyle.getType().isCustomColor()) {
 			return isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}

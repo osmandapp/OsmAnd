@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -23,14 +25,12 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -43,26 +43,27 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	private final AppearanceData appearanceData;
 
 	public ColorCardController(@NonNull OsmandApplication app,
-	                           @NonNull AppearanceData appearanceData,
-	                           @NonNull ColoringStyle selectedColoringStyle) {
-		super(app, selectedColoringStyle);
+	                           @NonNull AppearanceData appearanceData) {
+		super(app, appearanceData.getColoringStyle());
 		this.appearanceData = appearanceData;
 	}
 
 	@Override
-	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		super.onColoringStyleSelected(coloringStyle);
-		IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
-		styleDetailsController.setColoringStyle(coloringStyle);
+		if (coloringStyle != null) {
+			IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
+			styleDetailsController.setColoringStyle(coloringStyle);
+		}
 	}
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
 		container.removeAllViews();
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
-		ColoringType coloringType = coloringStyle.getType();
+		ColoringType coloringType = coloringStyle != null ? coloringStyle.getType() : null;
 
-		if (coloringType == ColoringType.UNCHANGED) {
+		if (coloringStyle == null) {
 			LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 			inflater.inflate(R.layout.list_item_divider_with_padding_basic, container, true);
 			container.addView(new DescriptionCard(activity, R.string.unchanged_parameter_summary).build());
@@ -80,7 +81,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 		if (colorsPaletteController == null) {
 			OsmandSettings settings = app.getSettings();
 			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-			bundle.predefinedColors = getPredefinedColors(app);
+			bundle.predefinedColors = TrackColorController.getPredefinedColors(app);
 			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
 			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
 			Integer selectedCustomColor = appearanceData.getCustomColor();
@@ -90,7 +91,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, selectedCustomColor);
 		}
-		colorsPaletteController.setPaletteListener(getControllerListener());
+		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;
 	}
 
@@ -112,31 +113,28 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	}
 
 	@NonNull
-	public static List<PaletteColor> getPredefinedColors(@NonNull OsmandApplication app) {
-		List<PaletteColor> predefinedColors = new ArrayList<>();
-		for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {
-			String id = item.getValue();
-			int colorInt = item.getColor();
-			String name = item.getLocalizedValue();
-			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, name));
+	@Override
+	protected List<CardState> collectSupportedCardStates() {
+		List<CardState> result = new ArrayList<>();
+		result.add(new CardState(R.string.shared_string_unchanged));
+		List<CardState> other = super.collectSupportedCardStates();
+		if (other.size() > 0) {
+			other.get(0).setShowTopDivider(true);
 		}
-		return predefinedColors;
+		result.addAll(other);
+		return result;
 	}
 
 	@Override
-	protected boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle) {
-		return true;
-	}
-
-	@Override
+	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
-		return ColoringType.valuesOf(ColoringPurpose.TRACKS_GROUP);
+		return ColoringType.valuesOf(ColoringPurpose.TRACK);
 	}
 
 	@Override
 	public int getSelectedColorValue() {
 		ColoringStyle coloringStyle = getSelectedColoringStyle();
-		ColoringType coloringType = coloringStyle.getType();
+		ColoringType coloringType = coloringStyle != null ? coloringStyle.getType() : null;
 
 		Integer color = null;
 		if (coloringType == TRACK_SOLID) {
@@ -146,10 +144,5 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			color = GpxAppearanceAdapter.getTrackColor(app);
 		}
 		return color;
-	}
-
-	@Override
-	protected boolean isUsedOnMap() {
-		return false;
 	}
 }
