@@ -260,7 +260,7 @@ public class RouteResultPreparation {
 		ignorePrecedingStraightsOnSameIntersection(ctx.leftSideNavigation, result);
 		justifyUTurns(ctx.leftSideNavigation, result);
 		avoidKeepForThroughMoving(result);
-		removeMuteGoAhead(result);
+		muteAndRemoveTurns(result);
 		addTurnInfoDescriptions(result);
 	}
 
@@ -1585,10 +1585,6 @@ public class RouteResultPreparation {
 				t = getActiveTurnType(rawLanes, leftSide, t);
 			}
 		}
-		if (TurnType.isKeepDirectionTurn(t.getValue())) {
-			t.setSkipToSpeak(true);
-		}
-		
 		t.setLanes(rawLanes);
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);
@@ -2219,19 +2215,24 @@ public class RouteResultPreparation {
 		}
 	}
 	
-	private void removeMuteGoAhead(List<RouteSegmentResult> result) {
+	private void muteAndRemoveTurns(List<RouteSegmentResult> result) {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
-			if (turnType == null || !turnType.goAhead() || !turnType.isSkipToSpeak() || 
-					turnType.getLanes()  == null) {
+			if (turnType == null) {
 				continue;
 			}
-			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
-			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
-			int lanesCnt = turnType.getLanes().length; 
-			if (cnt > 0 && cnt == cntAll && cnt >= 2 && (lanesCnt - cnt) <= 1) {
-				curr.setTurnType(null);
+			int active = turnType.getActiveCommonLaneTurn();
+			if (TurnType.isKeepDirectionTurn(turnType.getValue()) && TurnType.isSlightTurn(active)) {
+				turnType.setSkipToSpeak(true);
+				if (turnType.goAhead() && turnType.getLanes() != null) {
+					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
+					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
+					int lanesCnt = turnType.getLanes().length;
+					if (cnt == cntAll && cnt >= 2 && (lanesCnt - cnt) <= 1) {
+						curr.setTurnType(null);
+					}
+				}
 			}
 		}
 	}
