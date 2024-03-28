@@ -41,6 +41,7 @@ import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
@@ -202,7 +203,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			case DEV_CAMERA_DISTANCE:
 				return new CameraDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_ZOOM_LEVEL:
-				return new ZoomLevelWidget(mapActivity, customId, widgetsPanel);
+				ZoomLevelWidgetState zoomLevelWidgetState = new ZoomLevelWidgetState(app, customId);
+				return new ZoomLevelWidget(mapActivity, zoomLevelWidgetState, customId, widgetsPanel);
 			case DEV_TARGET_DISTANCE:
 				return new TargetDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_MEMORY:

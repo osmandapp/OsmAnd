@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.mapwidgets.WidgetType;
+import net.osmand.util.Algorithms;
 
 public class TextInfoWidget extends MapWidget {
 
@@ -121,7 +122,7 @@ public class TextInfoWidget extends MapWidget {
 
 	public void setText(String text, String subtext) {
 		setTextNoUpdateVisibility(text, subtext);
-		updateVisibility(text != null);
+		updateVisibility(!Algorithms.isEmpty(subtext));
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {

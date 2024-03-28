@@ -39,6 +39,7 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFr
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.ZoomLevelSettingsFragment;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.util.CollectionUtils;
 
@@ -323,6 +324,8 @@ public enum WidgetType {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetSettingsFragment();
+		} else if (this == DEV_ZOOM_LEVEL) {
+			return new ZoomLevelSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
