@@ -59,7 +59,8 @@ public class RegisterDeviceCommand extends BackupCommand {
 			params.put("deviceid", androidId);
 		}
 		params.put("token", token);
-		params.put("model", Build.BRAND + " " + Build.MODEL);
+		params.put("brand", Build.BRAND);
+		params.put("model", Build.MODEL);
 		params.put("lang", getApp().getLocaleHelper().getLanguage());
 		OperationLog operationLog = createOperationLog("registerDevice");
 		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error, resultCode) -> {
