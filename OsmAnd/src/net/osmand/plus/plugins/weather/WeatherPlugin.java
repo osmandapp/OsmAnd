@@ -3,6 +3,8 @@ package net.osmand.plus.plugins.weather;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_WEATHER_FORECAST_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_WEATHER;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WEATHER_ID;
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
+import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
@@ -33,9 +35,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererContext;
+import net.osmand.plus.AppInitEvents;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -126,15 +128,15 @@ public class WeatherPlugin extends OsmandPlugin {
 
 		app.getAppInitializer().addListener(new AppInitializeListener() {
 			@Override
-			public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-				if (event == InitEvents.NATIVE_OPEN_GL_INITIALIZED) {
+			public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+				if (event == NATIVE_OPEN_GL_INITIALIZED) {
 					updateMapPresentationEnvironment();
 					updateLayers(app, null);
 
 					if (weatherHelper.shouldUpdateForecastCache()) {
 						weatherHelper.updateForecastCache();
 					}
-				} else if (event == InitEvents.INDEX_REGION_BOUNDARIES) {
+				} else if (event == INDEX_REGION_BOUNDARIES) {
 					clearOutdatedCache();
 				}
 			}

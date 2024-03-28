@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
@@ -48,8 +49,6 @@ import com.google.gson.reflect.TypeToken;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
@@ -196,8 +195,8 @@ public class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
 
 						@Override
-						public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
+						public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+							if (event == FAVORITES_INITIALIZED) {
 								migrateHomeWorkParkingToFavorites();
 							}
 						}
@@ -213,8 +212,8 @@ public class AppVersionUpgradeOnInit {
 					app.getAppInitializer().addListener(new AppInitializeListener() {
 
 						@Override
-						public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-							if (event.equals(InitEvents.FAVORITES_INITIALIZED)) {
+						public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+							if (event == FAVORITES_INITIALIZED) {
 								app.getFavoritesHelper().fixBlackBackground();
 							}
 						}
