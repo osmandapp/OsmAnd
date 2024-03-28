@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.AppInitEvents.INDEX_REGION_BOUNDARIES;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -28,8 +30,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.AppInitEvents;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -601,7 +604,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			Iterator<BinaryMapDataObject> it = result.iterator();
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
-				if (!osmandRegions.contain(o, point31x, point31y) ) {
+				if (!osmandRegions.contain(o, point31x, point31y)) {
 					it.remove();
 				}
 			}
@@ -792,10 +795,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private void addMapsInitializedListener() {
 		OsmandApplication app = getApplication();
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-					if (event == AppInitializer.InitEvents.INDEX_REGION_BOUNDARIES) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+					if (event == INDEX_REGION_BOUNDARIES) {
 						indexRegionBoundaries = true;
 					}
 				}

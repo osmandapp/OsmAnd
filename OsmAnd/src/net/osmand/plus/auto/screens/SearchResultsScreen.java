@@ -12,7 +12,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.R;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;

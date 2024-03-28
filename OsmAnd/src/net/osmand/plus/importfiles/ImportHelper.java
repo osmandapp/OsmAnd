@@ -48,7 +48,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
