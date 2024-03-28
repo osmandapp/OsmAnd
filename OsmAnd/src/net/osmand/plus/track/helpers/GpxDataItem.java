@@ -98,6 +98,7 @@ public class GpxDataItem {
 		setParameter(COLOR, gpxFile.getColor(0));
 		setParameter(WIDTH, gpxFile.getWidth(null));
 		setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
+		setParameter(USE_3D_TRACK_VISUALIZATION, gpxFile.isUse3DVisualization());
 		setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
 
 		if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {

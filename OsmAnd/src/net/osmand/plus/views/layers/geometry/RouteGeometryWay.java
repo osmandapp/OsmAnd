@@ -128,9 +128,11 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex) {
+	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude,
+	                         double leftLongitude, double bottomLatitude, double rightLongitude,
+	                         Location lastProjection, int startLocationIndex, boolean use3DVisualization) {
 		cachedSegments.clear();
-		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex);
+		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex, use3DVisualization);
 	}
 
 	@Override
@@ -159,8 +161,10 @@ public class RouteGeometryWay extends
 	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
 	                                                          @NonNull RotatedTileBox tb,
 	                                                          int startLocationIndex,
-	                                                          boolean previousVisible) {
-		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
+	                                                          boolean previousVisible,
+	                                                          boolean use3DVisualization
+	                                                          ) {
+		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible, use3DVisualization);
 		if (croppedPathData31 == null) {
 			return null;
 		}
@@ -202,8 +206,11 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes, List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes,
+	                             List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31,
+	                             List<Double> angles, List<Double> distances, double distToFinish,
+	                             List<GeometryWayStyle<?>> styles, boolean use3DVisualization) {
+		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles, use3DVisualization);
 
 		Segment segment = currentCachedSegment != null ? currentCachedSegment : new Segment();
 		segment.indexes = new ArrayList<>(indexes);

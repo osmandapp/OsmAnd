@@ -9,12 +9,15 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GpxDbHelper implements GpxDbReaderCallback {
-
+	public static final Log log = PlatformUtil.getLog(GpxDbHelper.class);
 	private final OsmandApplication app;
 	private final GPXDatabase database;
 

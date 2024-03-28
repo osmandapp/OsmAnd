@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers;
 
 import static net.osmand.gpx.GPXUtilities.calculateTrackBounds;
+import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.gpx.GpxParameter.COLOR;
@@ -220,6 +221,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private CommonPreference<String> currentTrackRouteInfoAttributePref;
 	private CommonPreference<String> currentTrackWidthPref;
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
+	private CommonPreference<Boolean> currentTrackUse3DVisualizationPref;
 	private OsmandPreference<Boolean> currentTrackShowStartFinishPref;
 
 	public GPXLayer(@NonNull Context ctx) {
@@ -243,6 +245,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		currentTrackRouteInfoAttributePref = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE;
 		currentTrackWidthPref = settings.CURRENT_TRACK_WIDTH;
 		currentTrackShowArrowsPref = settings.CURRENT_TRACK_SHOW_ARROWS;
+		currentTrackUse3DVisualizationPref = settings.CURRENT_TRACK_3D_VISUALIZATION;
 		currentTrackShowStartFinishPref = settings.CURRENT_TRACK_SHOW_START_FINISH;
 
 		defaultColorPref = settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).cache();
@@ -742,13 +745,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultWidthPref.get());
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
+				boolean use3DVisualization = isUse3DTrackVisualization(selectedGpxFile.getGpxFile());
+				log.info("drawDirectionArrows use3DVisualization " + use3DVisualization);
 				List<TrkSegment> segments = coloringType.isGradient()
 						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), false)
 						: selectedGpxFile.getPointsToDisplay();
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof RenderableSegment) {
 						((RenderableSegment) segment.renderer)
-								.drawGeometry(canvas, tileBox, correctedQuadRect, trackColor, trackWidth, null, true);
+								.drawGeometry(canvas, tileBox, correctedQuadRect, trackColor, trackWidth, null, true, use3DVisualization);
 					}
 				}
 			}
@@ -1184,6 +1189,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 					updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
 					updated |= renderableSegment.setDrawArrows(isShowArrowsForTrack(selectedGpxFile.getGpxFile()));
+					updated |= renderableSegment.setUse3DVisualization(isUse3DTrackVisualization(selectedGpxFile.getGpxFile()));
+					log.info("drawSelectedFileSegments track " + selectedGpxFile.getGpxFile().path);
+					log.info("drawSelectedFileSegments Use3DVisualization " + isUse3DTrackVisualization(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
@@ -1292,6 +1300,22 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
+	}
+
+	private boolean isUse3DTrackVisualization(@NonNull GPXFile gpxFile) {
+		if (!isGpxFileSelected(gpxFile)) {
+			return false;
+		} else if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.isUse3DTrackVisualization();
+		} else if (gpxFile.showCurrentTrack) {
+			return currentTrackUse3DVisualizationPref.get();
+		} else {
+			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
+			if (dataItem != null) {
+				return dataItem.getParameter(USE_3D_TRACK_VISUALIZATION);
+			}
+			return gpxFile.isUse3DVisualization();
+		}
 	}
 
 	private boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {

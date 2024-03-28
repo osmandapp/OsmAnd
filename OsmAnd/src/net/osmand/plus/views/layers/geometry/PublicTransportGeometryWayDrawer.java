@@ -56,7 +56,9 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 	}
 
 	@Override
-	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
+	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
+	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData,
+	                     boolean use3DVisualization) {
 		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
@@ -68,9 +70,9 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 				if (prevStyle instanceof GeometryTransportWayStyle) {
 					int outlineColor = prevStyle.getStrokeColor(0);
 					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, prevStyle,
-							prevStyle.getColor(0), width, outlineColor, outlineWidth, null, false, dataArr);
+							prevStyle.getColor(0), width, outlineColor, outlineWidth, null, false, dataArr, use3DVisualization);
 				} else {
-					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
+					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr, use3DVisualization);
 				}
 				dataArr.clear();
 			}
@@ -81,9 +83,9 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 			if (prevStyle instanceof GeometryTransportWayStyle) {
 				int outlineColor = prevStyle.getStrokeColor(0);
 				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, prevStyle,
-						prevStyle.getColor(0), width, outlineColor, outlineWidth, null, false, dataArr);
+						prevStyle.getColor(0), width, outlineColor, outlineWidth, null, false, dataArr, use3DVisualization);
 			} else {
-				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
+				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr, use3DVisualization);
 			}
 		}
 	}

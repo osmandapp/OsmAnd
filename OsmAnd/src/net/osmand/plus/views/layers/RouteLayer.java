@@ -434,7 +434,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				startLocation.setLatitude(start.getLatitude());
 				startLocation.setLongitude(start.getLongitude());
 				publicTransportRouteGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						startLocation, 0);
+						startLocation, 0, false);
 			}
 		} else {
 			routeGeometry.baseOrder = getBaseOrder();
@@ -553,7 +553,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (draw) {
 				routeGeometry.setForceIncludedPointIndexesFromActionPoints(actionPoints);
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						lastProjection, startLocationIndex);
+						lastProjection, startLocationIndex, false);
 			}
 
 			if (actionPoints != null) {

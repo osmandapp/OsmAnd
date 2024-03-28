@@ -172,8 +172,8 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 	                             List<Float> tx, List<Float> ty,
 	                             List<Integer> tx31, List<Integer> ty31,
 								 List<Double> angles, List<Double> distances, double distToFinish,
-								 List<GeometryWayStyle<?>> styles) {
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+								 List<GeometryWayStyle<?>> styles, boolean use3DVisualization) {
+		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles, use3DVisualization);
 
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
