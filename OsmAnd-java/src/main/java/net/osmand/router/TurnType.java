@@ -660,4 +660,19 @@ public class TurnType {
 		}
 		return turn;
 	}
+
+	public static String removeTurnString(String oldTL, String removedTurn) {
+		oldTL = oldTL.replace(removedTurn, "");
+		oldTL = oldTL.replace(";;", ";");
+		oldTL = oldTL.replace("||", "|");
+		oldTL = oldTL.replace(";|", "|");
+		oldTL = oldTL.replace("|;", "|");
+		if (oldTL.startsWith("|") || oldTL.startsWith(";")) {
+			oldTL = oldTL.substring(1);
+		}
+		if (oldTL.endsWith("|") || oldTL.endsWith(";")) {
+			oldTL = oldTL.substring(0, oldTL.length() - 1);
+		}
+		return oldTL;
+	}
 }

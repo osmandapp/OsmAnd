@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -2294,7 +2295,51 @@ public class RouteResultPreparation {
 				}
 			}
 		}
+		if (isMoreOneActiveTurn(pair, rawLanes)) {
+			String replacedTurnLanes = removeAttachedTurnLanes(currentSegm, turnLanes);
+			if (!replacedTurnLanes.equals(turnLanes)) {
+				int[] pair2 = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, replacedTurnLanes);
+				if (pair2[0] != -1 && pair2[1] != 0) {
+					return pair2;
+				}
+			}
+		}
 		return pair;
+	}
+
+	private boolean isMoreOneActiveTurn(int[] pair, int[] rawLanes) {
+		if (pair[0] == -1 || pair[1] == -1) {
+			return false;
+		}
+		HashSet<Integer> activeTurns = new HashSet<>();
+		for (int k = pair[0]; k <= pair[1]; k++) {
+			activeTurns.add(rawLanes[k]);
+		}
+		return activeTurns.size() > 1;
+	}
+
+	private String removeAttachedTurnLanes(RouteSegmentResult currentSegm, String turnLanes) {
+		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
+		if(!Algorithms.isEmpty(attachedRoutes)) {
+			String replacedTurnLanes = turnLanes;
+			for (RouteSegmentResult a : attachedRoutes) {
+				String aTL = getTurnLanesString(a);
+				if (!Algorithms.isEmpty(aTL) && replacedTurnLanes.contains(aTL)) {
+					String[] splitLaneOptions = aTL.split("\\|", -1);
+					for (int i = 0; i < splitLaneOptions.length; i++) {
+						String[] laneOptions = splitLaneOptions[i].split(";");
+						for (int j = 0; j < laneOptions.length; j++) {
+							int turn = TurnType.convertType(laneOptions[j]);
+							if (turn != TurnType.C) {
+								replacedTurnLanes = TurnType.removeTurnString(replacedTurnLanes, laneOptions[j]);
+							}
+						}
+					}
+				}
+			}
+			return replacedTurnLanes;
+		}
+		return turnLanes;
 	}
 
 	private boolean hasTurn(String turnLanes, int turnType) {
