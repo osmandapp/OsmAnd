@@ -510,13 +510,16 @@ public class AppInitializer implements IProgress {
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
+			notifyEvent(INDEXES_RELOADED);
 			app.travelHelper.initializeDataOnAppStartup();
 			app.travelRendererHelper.updateVisibilityPrefs();
+			notifyEvent(TRAVEL_INITIALIZED);
 			// native depends on renderers
 			initNativeCore();
 			app.favoritesHelper.loadFavorites();
 			notifyEvent(FAVORITES_INITIALIZED);
 			app.gpxDbHelper.loadGpxItems();
+			notifyEvent(GPX_DB_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();
 			notifyEvent(POI_FILTERS_INITIALIZED);
@@ -525,7 +528,9 @@ public class AppInitializer implements IProgress {
 			notifyEvent(LOAD_GPX_TRACKS);
 			saveGPXTracks();
 			app.mapMarkersHelper.syncAllGroups();
+			notifyEvent(MARKERS_GROUPS_SYNCED);
 			app.searchUICore.initSearchUICore();
+			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -568,6 +573,7 @@ public class AppInitializer implements IProgress {
 				}
 			}
 		}
+		notifyEvent(LIVE_UPDATES_ALERTS_CHECKED);
 	}
 
 	private void saveGPXTracks() {
