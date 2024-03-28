@@ -5670,4 +5670,6 @@
     <string name="round_up">Dibulatkan</string>
     <string name="distance_during_navigation">Jarak selama navigasi</string>
     <string name="precise">Persis</string>
+    <string name="upload_local_versions">Unggah versi lokal</string>
+    <string name="download_cloud_versions">Unduh versi awan</string>
 </resources>
