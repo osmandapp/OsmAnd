@@ -5622,4 +5622,15 @@
     <string name="java_safe">Java (Safe)</string>
     <string name="auto_zoom_smooth">Progressif</string>
     <string name="distance_during_navigation">Distance pendant la navigation</string>
+    <string name="routing_type">Type de navigation</string>
+    <string name="lang_ta_in">Tamoul (Inde)</string>
+    <string name="upload_local_versions">Envoyer les versions locales</string>
+    <string name="rendering_value_managerName_name">Par nom de gestionnaire</string>
+    <string name="max_sensor_cadence">Cadence vélo, max</string>
+    <string name="download_cloud_versions">Recevoir les versions Cloud</string>
+    <string name="gpx_approximation">Approximation GPX</string>
+    <string name="rendering_attr_padusDisplayMode_description">Par type d\'accès ou nom de gestionnaire</string>
+    <string name="avg_sensor_cadence">Cadence vélo, moyenne</string>
+    <string name="help_article_setup_a_route_name">Définir un itinéraire</string>
+    <string name="special_routing_cpp">Type de navigation spécial</string>
 </resources>
