@@ -59,7 +59,7 @@ public class SpeedometerWidget {
 	private final static int PREVIEW_VALUE = 85;
 
 	private final static int SPEEDOMETER_AA_STROKE = 3;
-	private final static int SPEEDOMETER_WIDTH_M = 72;
+	private final static int SPEEDOMETER_WIDTH_M = 88;
 	private final static int SPEEDOMETER_WIDTH_M_AA = 85 + SPEEDOMETER_AA_STROKE * 2;
 	private final static int SPEEDOMETER_HEIGHT_M = 72;
 	private final static int SPEEDOMETER_HEIGHT_AA_M = 66 + SPEEDOMETER_AA_STROKE * 2;
@@ -226,7 +226,7 @@ public class SpeedometerWidget {
 			updateColor(drawSettings != null ? drawSettings.isNightMode() : nightMode);
 		}
 		boolean show = shouldShowWidget();
-		if (routingHelper.isFollowingMode() && show || drawBitmap) {
+		if (show) {
 			boolean isChanged = false;
 			if (lastNightMode != nightMode) {
 				lastNightMode = nightMode;

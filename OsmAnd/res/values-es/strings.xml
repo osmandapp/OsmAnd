@@ -5667,4 +5667,6 @@
     <string name="distance_during_navigation_description">Elija cómo se muestra la información de la distancia en los widgets de navegación (distancia al punto, próximo giro, carriles).
 \n
 \nElija \"%1$s\" para números exactos, o \"%2$s\" para una legibilidad más fácil.</string>
+    <string name="download_cloud_versions">Descargar versiones en la nube</string>
+    <string name="upload_local_versions">Cargar las versiones locales</string>
 </resources>

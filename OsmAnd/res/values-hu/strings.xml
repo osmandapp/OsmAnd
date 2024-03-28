@@ -5664,4 +5664,6 @@
     <string name="distance_during_navigation_description">Válassza ki, hogy a távolságadatok hogyan jelenjenek meg a navigációs widgetekben (pont távolsága, következő kanyarodás, sávok).
 \n
 \n%1$s: pontos értékek vagy %2$s: könnyebb olvashatóság.</string>
+    <string name="download_cloud_versions">Felhőben lévő verziók letöltése</string>
+    <string name="upload_local_versions">Helyi verziók feltöltése</string>
 </resources>

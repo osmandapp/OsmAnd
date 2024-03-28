@@ -5656,4 +5656,6 @@
 \n選擇「%1$s」以取得準確的數字，或選擇「%2$s」以提高可讀性。</string>
     <string name="distance_during_navigation">導航時的距離</string>
     <string name="round_up">大約</string>
+    <string name="upload_local_versions">上傳本機版本</string>
+    <string name="download_cloud_versions">下載雲端版本</string>
 </resources>

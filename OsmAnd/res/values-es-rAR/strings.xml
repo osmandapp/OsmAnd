@@ -5682,4 +5682,6 @@
 \n
 \nElige «%1$s» para números exactos, o «%2$s» para una legibilidad más fácil.</string>
     <string name="distance_during_navigation">Distancia al navegar</string>
+    <string name="download_cloud_versions">Descargar versiones de la nube</string>
+    <string name="upload_local_versions">Cargar versiones locales</string>
 </resources>

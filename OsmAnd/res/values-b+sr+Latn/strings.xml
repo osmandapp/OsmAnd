@@ -886,7 +886,7 @@
     <string name="missing_write_external_storage_permission">OsmAnd nema dozvole da koristi memorijsku karticu</string>
     <string name="update_now">Ažuriraj sada</string>
     <string name="live_update">Live ažuriranje</string>
-    <string name="only_download_over_wifi">Preuzimaj samo na WiFi</string>
+    <string name="only_download_over_wifi">Preuzimaj preko WiFi</string>
     <string name="dashboard_or_drawer_description">Postoji izbor da li želiš da upravljaš menijem ili upravljačkom tablom. Tvoj izbor uvek možeš promeniti u podešavanjima upravljačke table.</string>
     <string name="dashboard_or_drawer_title">Upravljačka tabla ili meni</string>
     <string name="use_drawer_btn">Koristi meni</string>
@@ -996,7 +996,7 @@
     <string name="rendering_attr_noPolygons_description">Učini sve mogućnosti područja tla transparentnima na mapi.</string>
     <string name="route_kr">Drži desno i nastavi</string>
     <string name="route_kl">Drži levo i nastavi</string>
-    <string name="route_roundabout">Kružni tok: Izađi na izlazu %1$d. i nastavi</string>
+    <string name="route_roundabout">Kružni tok: Izađi na izlaz %1$d. i nastavi</string>
     <string name="share_route_subject">Ruta podeljena preko OsmAnd</string>
     <string name="share_route_as_gpx">Podeli rutu kao GPX fajl</string>
     <string name="asap">Odmah</string>
@@ -3188,11 +3188,11 @@
     <string name="online_webpage_warning">Strana je dostupna samo na internetu. Otvori je u čitaču veba?</string>
     <string name="shared_string_travel_book">Knjiga putovanja</string>
     <string name="select_travel_book">Odaberi knjigu putovanja</string>
-    <string name="shared_string_wifi_only">Samo na Wi-Fi</string>
+    <string name="shared_string_wifi_only">Samo preko Wi-Fi</string>
     <string name="wikivoyage_download_pics_descr">Slike iz članaka mogu biti preuzimane zbog pristupa i bez interneta. 
 \nUvek dostupno iz „Istraži“ → „Mogućnosti“.</string>
     <string name="wikivoyage_download_pics">Preuzimaj slike</string>
-    <string name="shared_string_only_with_wifi">Samo na WiFi</string>
+    <string name="shared_string_only_with_wifi">Samo preko WiFi</string>
     <string name="shared_string_do">Uradi</string>
     <string name="shared_string_dont">Nemoj</string>
     <string name="purchase_dialog_subtitle">Odaberi pogodne stavke</string>
@@ -5672,4 +5672,6 @@
     <string name="precise">Preciznije</string>
     <string name="round_up">Zaokružiti</string>
     <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
+    <string name="upload_local_versions">Preuzimi lokalne verzije</string>
+    <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
 </resources>
