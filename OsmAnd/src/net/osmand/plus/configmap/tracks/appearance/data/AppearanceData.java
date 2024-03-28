@@ -113,15 +113,15 @@ public class AppearanceData {
 
 		AppearanceData that = (AppearanceData) o;
 
-		if (shouldShowArrows() != null ? !Objects.equals(shouldShowArrows(), that.shouldShowArrows()) : that.shouldShowArrows() != null)
+		if (!Objects.equals(shouldShowArrows(), that.shouldShowArrows()))
 			return false;
-		if (shouldShowStartFinish() != null ? !Objects.equals(shouldShowStartFinish(), that.shouldShowStartFinish()) : that.shouldShowStartFinish() != null)
+		if (!Objects.equals(shouldShowStartFinish(), that.shouldShowStartFinish()))
 			return false;
-		if (getColoringStyle() != null ? !Objects.equals(getColoringStyle(), that.getColoringStyle()) : that.getColoringStyle() != null)
+		if (!Objects.equals(getColoringStyle(), that.getColoringStyle()))
 			return false;
-		if (getCustomColor() != null ? !Objects.equals(getCustomColor(), that.getCustomColor()) : that.getCustomColor() != null)
+		if (!Objects.equals(getCustomColor(), that.getCustomColor()))
 			return false;
-		return getWidthValue() != null ? Objects.equals(getWidthValue(), that.getWidthValue()) : that.getWidthValue() == null;
+		return Objects.equals(getWidthValue(), that.getWidthValue());
 	}
 
 	@Override

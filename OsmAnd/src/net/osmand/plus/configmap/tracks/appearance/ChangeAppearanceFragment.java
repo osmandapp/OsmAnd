@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.tracks.appearance;
 
+import static net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceDialogController.PROCESS_ID;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
@@ -44,7 +47,8 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private static final String TAG = ChangeAppearanceFragment.class.getSimpleName();
 
-	private ChangeAppearanceController controller;
+	private DialogManager dialogManager;
+	private ChangeAppearanceDialogController controller;
 
 	@NonNull
 	@Override
@@ -70,8 +74,9 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		controller = ChangeAppearanceController.getInstance(app, getSelectionHelper());
-		app.getDialogManager().register(controller.getProcessId(), this);
+		dialogManager = app.getDialogManager();
+		controller = (ChangeAppearanceDialogController) dialogManager.findController(PROCESS_ID);
+		dialogManager.register(PROCESS_ID, this);
 	}
 
 	@Nullable
@@ -85,6 +90,15 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		setupCards(view);
 		setupApplyButton(view);
 		return view;
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			dialogManager.unregister(PROCESS_ID);
+		}
 	}
 
 	protected void setupToolbar(@NonNull View view) {
@@ -191,23 +205,10 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		});
 	}
 
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			app.getDialogManager().unregister(controller.getProcessId());
-		}
-	}
-
 	@NonNull
 	@Override
 	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
-		Fragment fragment = getTargetFragment();
-		if (fragment instanceof SelectionHelperProvider) {
-			return ((SelectionHelperProvider<TrackItem>) fragment).getSelectionHelper();
-		}
-		return new ItemsSelectionHelper<>();
+		return controller.getSelectionHelper();
 	}
 
 	@Override
@@ -236,12 +237,9 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target) {
+	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			ChangeAppearanceFragment fragment = new ChangeAppearanceFragment();
-			fragment.setRetainInstance(true);
-			fragment.setTargetFragment(target, 0);
-			fragment.show(manager, TAG);
+			new ChangeAppearanceFragment().show(manager, TAG);
 		}
 	}
 }

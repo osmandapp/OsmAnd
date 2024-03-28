@@ -13,8 +13,5 @@ public interface IChangeAppearanceController extends IDialogController {
 
 	int getEditedItemsCount();
 
-	@NonNull
-	String getProcessId();
-
 	boolean isAppearanceSaved();
 }

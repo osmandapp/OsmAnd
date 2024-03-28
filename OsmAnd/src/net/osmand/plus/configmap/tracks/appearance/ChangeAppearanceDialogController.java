@@ -23,10 +23,10 @@ import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWi
 import java.util.Objects;
 import java.util.Set;
 
-public class ChangeAppearanceController implements IChangeAppearanceController,
+public class ChangeAppearanceDialogController implements IChangeAppearanceController,
 		IColorCardControllerListener, OnTrackWidthSelectedListener, OnAppearanceModifiedListener {
 
-	private static final String PROCESS_ID = "change_tracks_appearance";
+	public static final String PROCESS_ID = "change_tracks_appearance";
 
 	private final OsmandApplication app;
 
@@ -40,12 +40,11 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	private final ItemsSelectionHelper<TrackItem> selectionHelper;
 	private boolean isAppearanceSaved = false;
 
-	private ChangeAppearanceController(@NonNull OsmandApplication app,
-									   @NonNull ItemsSelectionHelper<TrackItem> selectionHelper,
-	                                   @NonNull AppearanceData initialAppearanceData) {
+	private ChangeAppearanceDialogController(@NonNull OsmandApplication app,
+	                                         @NonNull ItemsSelectionHelper<TrackItem> selectionHelper) {
 		this.app = app;
 		this.selectionHelper = selectionHelper;
-		this.initialAppearanceData = initialAppearanceData;
+		this.initialAppearanceData = new AppearanceData();
 		this.appearanceData = new AppearanceData(initialAppearanceData).setModifiedListener(this);
 
 		directionArrowsCardController = new DirectionArrowsCardController(app, appearanceData);
@@ -100,12 +99,6 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 		return selectionHelper.getSelectedItemsSize();
 	}
 
-	@NonNull
-	@Override
-	public String getProcessId() {
-		return PROCESS_ID;
-	}
-
 	@Override
 	public boolean isAppearanceSaved() {
 		return isAppearanceSaved;
@@ -136,20 +129,22 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
 	}
 
+
+	@NonNull
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
+		return selectionHelper;
+	}
+
 	@Override
 	public void onTrackWidthSelected(@Nullable String width) {
 
 	}
 
-	@NonNull
-	public static ChangeAppearanceController getInstance(@NonNull OsmandApplication app,
-	                                                     @NonNull ItemsSelectionHelper<TrackItem> selectionHelper) {
+	public static void showDialog(@NonNull FragmentActivity activity,
+	                              @NonNull ItemsSelectionHelper<TrackItem> selectionHelper) {
+		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		ChangeAppearanceController controller = (ChangeAppearanceController) dialogManager.findController(PROCESS_ID);
-		if (controller == null) {
-			controller = new ChangeAppearanceController(app, selectionHelper, new AppearanceData());
-			dialogManager.register(PROCESS_ID, controller);
-		}
-		return controller;
+		dialogManager.register(PROCESS_ID, new ChangeAppearanceDialogController(app, selectionHelper));
+		ChangeAppearanceFragment.showInstance(activity.getSupportFragmentManager());
 	}
 }
