@@ -5075,4 +5075,40 @@
     <string name="key_event_category_actions">Дзеянні</string>
     <string name="about_osmand">Пра OsmAnd</string>
     <string name="free_versions">Бясплатныя версіі</string>
+    <string name="shared_string_all_tracks">Усе сляды</string>
+    <string name="custom_buttons">Адвольныя кнопкі</string>
+    <string name="sorted_sufolders_toast">Укладзеныя папкі ў “%1$s” адсартаваныя паводле: “%2$s”</string>
+    <string name="default_buttons">Стандартныя кнопкі</string>
+    <string name="shared_string_additional">Дадаткова</string>
+    <string name="shared_string_keywords">Ключавыя словы</string>
+    <string name="speed_limit_warning">Папярэджанне аб абмежаванні хуткасці</string>
+    <string name="shared_string_limit">Абмежаванне</string>
+    <string name="speedometer_description">Паказвае вашу бягучую хуткасць, вызначаную праз GPS</string>
+    <string name="shared_string_speedometer">Спідометр</string>
+    <string name="shared_string_extensions">Пашырэнні</string>
+    <string name="shared_string_license">Ліцэнзія</string>
+    <string name="shared_string_copyright">Аўтарскае права</string>
+    <string name="gpx_approximation">Апраксімацыя GPX</string>
+    <string name="routing_type">Тып маршрутызацыі</string>
+    <string name="rendering_attr_padusDisplayMode_name">Рэжым адлюстравання зямель агульнага карыстання</string>
+    <string name="rendering_attr_padusDisplayMode_description">Паводле тыпу доступу або імя кіраўніка</string>
+    <string name="rendering_value_managerName_name">Паводле імя кіраўніка</string>
+    <string name="rendering_value_access_name">Паводле тыпу доступу</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Схаваць межы агульнадаступных зямель</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Схаваць межы агульнадаступных зямель, але пакінуць тэрыторыі</string>
+    <string name="sort_subfolders">Сартаваць укладзеныя папкі</string>
+    <string name="shared_string_activity">Актыўнасць</string>
+    <string name="add_button">Дадаць кнопку</string>
+    <string name="when_exceeded">Пры перавышэнні</string>
+    <string name="custom_map_button_name_present">Такая кнопка ўжо існуе</string>
+    <string name="shared_string_link">Спасылка</string>
+    <string name="shared_string_author">Аўтар</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="battery_optimization_settings">Налады аптымізацыі батарэі</string>
+    <string name="battery_optimization_banner_content">Аптымізацыя батарэі Android можа выклікаць прабелы і недакладнасці ў запісаных слядах.</string>
+    <string name="dont_ask_anymore">Больш не пытацца</string>
+    <string name="battery_optimization_desc">Аптымізацыя батарэі ў Android можа выклікаць прабелы і недакладнасці ў запісаных слядах.
+\n
+\nКалі ў вас узніклі якія-небудзь з гэтых праблем, вы можаце паспрабаваць змяніць выкарыстанне батарэі на \"Без абмежаванняў\".</string>
+    <string name="battery_optimization">Аптымізацыя батарэі</string>
 </resources>
