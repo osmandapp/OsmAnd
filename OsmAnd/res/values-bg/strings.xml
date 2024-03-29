@@ -822,7 +822,7 @@
     <string name="transport_to_go_after">предна дистанция</string>
     <string name="transport_to_go_before">следваща дистанция</string>
     <string name="transport_stops_to_pass">спирки да се пропуснат</string>
-    <string name="transport_route_distance">Изчислена дистанция</string>
+    <string name="transport_route_distance">Дължина на маршрута</string>
     <string name="transport">Обществен транспорт</string>
     <string name="shared_string_ok">OK</string>
     <string name="show_transport_over_map_description">Спирки на обществения транспорт на картата.</string>
@@ -3944,4 +3944,5 @@
     <string name="battery_optimization_settings">Настройки за оптимизиране на батерията</string>
     <string name="dont_ask_anymore">Без повторно питане</string>
     <string name="shared_string_all_tracks">Всички трасета</string>
+    <string name="shared_string_itinerary">Маршрут</string>
 </resources>
