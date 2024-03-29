@@ -5428,7 +5428,7 @@
     <string name="help_article_map_vector_maps_name">خرائط المتجهات (أنماط الخريطة)</string>
     <string name="help_article_navigation_auto_car_name">أندرويد أوتو</string>
     <string name="help_article_navigation_car_play_name">كار بلي</string>
-    <string name="help_article_navigation_guidance_name">توجيه</string>
+    <string name="help_article_navigation_guidance_name">تعليمات الملاحة</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">شاشة الخريطة أثناء التنقل</string>
     <string name="help_article_navigation_routing_brouter_name">التوجيه عبر</string>
     <string name="help_article_navigation_routing_moped_routing_name">توجيه الدراجة</string>
@@ -5712,4 +5712,32 @@
     <string name="rendering_value_managerName_name">حسب اسم المدير</string>
     <string name="help_article_setup_a_route_name">إعداد الطريق</string>
     <string name="lang_ta_in">تاميل (الهند)</string>
+    <string name="distance_during_navigation">المسافة أثناء الملاحة</string>
+    <string name="precise">دقيق</string>
+    <string name="routing_type_a_star_classic">A* قديم</string>
+    <string name="routing_type_a_star_2_phase">A* 2-مرحلتين</string>
+    <string name="upload_local_versions">تحميل الإصدارات المحلية</string>
+    <string name="download_cloud_versions">تنزيل الإصدارات السحابية</string>
+    <string name="distance_during_navigation_description">اختر كيفية عرض معلومات المسافة في أدوات التنقل (المسافة إلى النقطة، المنعطف التالي، الممرات).
+\n
+\nاختر \"%1$s\" للأرقام الدقيقة، أو \"%2$s\" لتسهيل القراءة.</string>
+    <string name="round_up">تقريب</string>
+    <string name="map_widget_map_scale">مقياس الخريطة</string>
+    <string name="release_4_7">• ويدجت\"عداد السرعة\" الجديدة المتوافقة مع أندرويد أوتو
+\n
+\n • تكوين شاشة الخريطة عن طريق إضافة أزرار \"الإجراء السريع\" المتعددة
+\n
+\n • تحسين إمكانية قراءة البيانات في الرسوم البيانية
+\n
+\n • تمت إضافة المرشحات حسب بيانات الاستشعار للمسارات
+\n
+\n • تمت إضافة دعم لعلامات GPX الإضافية
+\n
+\n • تخصيص \"المسافة أثناء التنقل\": اختر بين الأرقام الدقيقة أو التقريبية
+\n
+\n • واجهة مستخدم موحدة لاختيار المسار
+\n
+\n • تم تحويل تسجيل الدخول إلى OpenStreetMap إلى OAuth 2.0
+\n
+\n</string>
 </resources>
