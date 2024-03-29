@@ -1524,12 +1524,12 @@ public class RouteResultPreparation {
 		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes);
 		int activeBeginIndex = act[0];
 		int activeEndIndex = act[1];
+		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
+			// something went wrong
+			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
+		}
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
-			if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
-				// something went wrong
-				return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
-			}
 			for (int k = 0; k < rawLanes.length; k++) {
 				if (k >= activeBeginIndex && k <= activeEndIndex) {
 					rawLanes[k] |= 1;
