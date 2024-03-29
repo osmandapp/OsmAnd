@@ -52,7 +52,6 @@ public class RouteResultPreparation {
 	public static final int SHIFT_ID = 6;
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
-	public static final String TRACK_HIGHWAY_TYPE = "track";
 	
 	private static class CombineAreaRoutePoint {
 		int x31;
@@ -1251,9 +1250,6 @@ public class RouteResultPreparation {
 			float bearingDist = RouteSegmentResult.DIST_BEARING_DETECT;
 			if (UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
 				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED;
-			}
-			if (TRACK_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
-				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_TRACK;
 			}
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)),
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
