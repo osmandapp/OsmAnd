@@ -122,7 +122,7 @@ public class TextInfoWidget extends MapWidget {
 
 	public void setText(String text, String subtext) {
 		setTextNoUpdateVisibility(text, subtext);
-		updateVisibility(!Algorithms.isEmpty(subtext));
+		updateVisibility(text != null);
 	}
 
 	protected void setTextNoUpdateVisibility(String text, String subtext) {

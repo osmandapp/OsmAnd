@@ -98,7 +98,7 @@ public class ZoomLevelWidget extends SimpleWidget {
 				|| newZoom != cachedZoom
 				|| newZoomFloatPart != cachedZoomFloatPart
 				|| newMapDensity != cachedMapDensity
-				|| (newZoomLevelType == ZoomLevelType.MAP_SCALE && newCenterX != cachedCenterX || newCenterY != cachedCenterY);
+				|| newZoomLevelType == ZoomLevelType.MAP_SCALE && (newCenterX != cachedCenterX || newCenterY != cachedCenterY);
 		if (update) {
 			cachedCenterX = newCenterX;
 			cachedCenterY = newCenterY;
@@ -121,6 +121,13 @@ public class ZoomLevelWidget extends SimpleWidget {
 	}
 
 	private void setMapScaleText() {
+		int mapScale = calculateMapScale();
+		FormattedValue formattedMapScale = formatMapScale(mapScale);
+		String mapScaleStr = getString(R.string.ltr_or_rtl_combine_via_colon_with_space, "1", formattedMapScale.value);
+		setText(mapScaleStr, formattedMapScale.unit);
+	}
+
+	private int calculateMapScale() {
 		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
@@ -133,19 +140,19 @@ public class ZoomLevelWidget extends SimpleWidget {
 		float pixelsPerMeter = averageRealDpi * 100 / 2.54f;
 		double realScreenWidthInMeters = (double) pixWidth / pixelsPerMeter;
 		double mapScreenWidthInMeters = tileBox.getDistance(0, pixHeight / 2, pixWidth, pixHeight / 2);
-		int mapScale = (int) (mapScreenWidthInMeters / realScreenWidthInMeters);
+		return (int) (mapScreenWidthInMeters / realScreenWidthInMeters);
+	}
 
-		FormattedValue formattedMapScale;
+	@NonNull
+	private FormattedValue formatMapScale(int mapScale) {
 		int digitsCount = (int) (Math.log10(mapScale) + 1);
 		if (digitsCount >= 7) {
-			formattedMapScale = formatLongNumber(mapScale, digitsCount, 6, "M");
+			return formatLongNumber(mapScale, digitsCount, 6, "M");
 		} else if (digitsCount >= 5) {
-			formattedMapScale = formatLongNumber(mapScale, digitsCount, 3, "K");
+			return formatLongNumber(mapScale, digitsCount, 3, "K");
 		} else {
-			formattedMapScale = new FormattedValue(mapScale, String.valueOf(mapScale), "");
+			return new FormattedValue(mapScale, String.valueOf(mapScale), "");
 		}
-
-		setText(getString(R.string.ltr_or_rtl_combine_via_colon_with_space, "1", formattedMapScale.value) , formattedMapScale.unit);
 	}
 
 	@NonNull
