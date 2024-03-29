@@ -52,6 +52,7 @@ public class RouteResultPreparation {
 	public static final int SHIFT_ID = 6;
 	protected static final Log LOG = PlatformUtil.getLog(RouteResultPreparation.class);
 	public static final String UNMATCHED_HIGHWAY_TYPE = "unmatched";
+	public static final String TRACK_HIGHWAY_TYPE = "track";
 	
 	private static class CombineAreaRoutePoint {
 		int x31;
@@ -1246,14 +1247,15 @@ public class RouteResultPreparation {
 		}
 		TurnType t = null;
 		if (prev != null) {
-			// add description about turn
 			// avoid small zigzags is covered at (search for "zigzags")
 			float bearingDist = RouteSegmentResult.DIST_BEARING_DETECT;
-			// could be || noAttachedRoads, boolean noAttachedRoads = rr.getAttachedRoutes(rr.getStartPointIndex()).size() == 0;
 			if (UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
 				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED;
 			}
-			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)), 
+			if (TRACK_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
+				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_TRACK;
+			}
+			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(prev.getEndPointIndex(), Math.min(prev.getDistance(), bearingDist)),
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
 
 			String turnTag = getTurnString(rr);
@@ -1487,10 +1489,6 @@ public class RouteResultPreparation {
 			return null;
 		}
 
-		if (turnLanesPrevSegm == null) {
-			turnLanesPrevSegm = getVirtualTurnLanes(prevSegm);
-		}
-		
 		// turn lanes exist
 		if (turnLanesPrevSegm != null) {
 			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanesPrevSegm, leftSide);
@@ -1500,23 +1498,6 @@ public class RouteResultPreparation {
 		if (rs.keepLeft || rs.keepRight) {
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
 			
-		}
-		return null;
-	}
-
-	private String getVirtualTurnLanes(RouteSegmentResult segm) {
-		TurnType t = segm.getTurnType();
-		if (t == null) {
-			return null;
-		}
-		int[] lanes = t.getLanes();
-		String turnLanes = TurnType.convertLanesToOsmString(lanes, true, false);
-		if (turnLanes != null) {
-			int[] uniq = getUniqTurnTypes(turnLanes);
-			// if we have 2 and more active directions
-			if (uniq.length >= 2) {
-				return turnLanes;
-			}
 		}
 		return null;
 	}
@@ -2220,13 +2201,13 @@ public class RouteResultPreparation {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
-			if (turnType == null) {
+			if (turnType == null || turnType.getLanes() == null) {
 				continue;
 			}
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
 				turnType.setSkipToSpeak(true);
-				if (turnType.goAhead() && turnType.getLanes() != null) {
+				if (turnType.goAhead()) {
 					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 					int lanesCnt = turnType.getLanes().length;
