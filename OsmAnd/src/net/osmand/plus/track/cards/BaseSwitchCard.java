@@ -29,6 +29,8 @@ public abstract class BaseSwitchCard extends BaseCard {
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), false);
 		TextView titleView = view.findViewById(R.id.title);
 		titleView.setText(getTitleId());
+		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
+		compoundButton.setChecked(getChecked());
 		if (getIconRes() != 0) {
 			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(getIconRes()));
@@ -38,7 +40,6 @@ public abstract class BaseSwitchCard extends BaseCard {
 
 	protected void onCardClicked() {
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
-		compoundButton.setChecked(getChecked());
 		boolean checked = !compoundButton.isChecked();
 		compoundButton.setChecked(checked);
 		setChecked(checked);
