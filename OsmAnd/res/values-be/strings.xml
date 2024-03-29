@@ -5111,4 +5111,25 @@
 \n
 \nКалі ў вас узніклі якія-небудзь з гэтых праблем, вы можаце паспрабаваць змяніць выкарыстанне батарэі на \"Без абмежаванняў\".</string>
     <string name="battery_optimization">Аптымізацыя батарэі</string>
+    <string name="download_to_device">Спампаваць на прыладу</string>
+    <string name="see_all_plans">Глядзець усе тарыфныя планы</string>
+    <string name="remove_widget_first">Калі ласка, спачатку выдаліце віджэт</string>
+    <string name="tripltek_promo_description">Бясплатны доступ да функцый, уключаючы неабмежаваныя спампоўкі карт, 3D-рэльеф і г.д., на працягу %1$s месяца(аў)</string>
+    <string name="row_number">Радок %1$s</string>
+    <string name="discard_changes_prompt">Скасаваць змены?</string>
+    <string name="show_toast_about_key_pressed">Паказваць апавяшчэнне пры націснутай клавішы</string>
+    <string name="key_event_action_toggle_drower">Паказаць/схаваць бакавое меню</string>
+    <string name="change_button">Змяніць кнопку</string>
+    <string name="deletion_error">Памылка выдалення</string>
+    <string name="tripltek_promo">Прома Tripltek на %1$s месяцаў</string>
+    <string name="add_row">Дадаць радок</string>
+    <string name="key_is_already_assigned_error">Клавіша \"%1$s\" ужо прызначана для дзеяння: \"%2$s\"</string>
+    <string name="key_event_category_map_interactions">Узаемадзеянні з картай</string>
+    <string name="key_event_action_take_media_note">Зрабіць мультымедыйную нататку</string>
+    <string name="clear_key_assignment">Ачысціць прызначэнне клавіш</string>
+    <string name="key_assignments">Прызначэнне клавіш</string>
+    <string name="press_button_to_link_with_action">Націсніце кнопку на сваёй прыладзе, каб прызначыць для яе дзеянне: %1$s</string>
+    <string name="key_event_action_activity_back_pressed">Націснута кнопка назад</string>
+    <string name="key_event_action_open_wunderlinq_datagrid">Адкрыць набор даных WunderLINQ</string>
+    <string name="change_key_binding">Змяніць прывязку клавіш</string>
 </resources>

@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.SETTINGS_DIR;
+import static net.osmand.plus.AppInitEvents.*;
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
@@ -22,8 +23,6 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.WorkerThread;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
@@ -107,6 +106,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -138,34 +138,9 @@ public class AppInitializer implements IProgress {
 	private String taskName;
 	private SharedPreferences startPrefs;
 
-	public enum InitEvents {
-		FAVORITES_INITIALIZED, NATIVE_INITIALIZED, NATIVE_OPEN_GL_INITIALIZED, TASK_CHANGED,
-		MAPS_INITIALIZED, POI_TYPES_INITIALIZED, POI_FILTERS_INITIALIZED, ASSETS_COPIED,
-		INIT_RENDERERS, RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS,
-		ROUTING_CONFIG_INITIALIZED
-	}
-
 	static {
 		//Set old time format of GPX for Android 6.0 and lower
 		GPXUtilities.GPX_TIME_OLD_FORMAT = Build.VERSION.SDK_INT <= Build.VERSION_CODES.M;
-	}
-
-	public interface AppInitializeListener {
-
-		@WorkerThread
-		default void onStart(@NonNull AppInitializer init) {
-
-		}
-
-		@UiThread
-		default void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-
-		}
-
-		@UiThread
-		default void onFinish(@NonNull AppInitializer init) {
-
-		}
 	}
 
 	public interface LoadRoutingFilesCallback {
@@ -275,22 +250,21 @@ public class AppInitializer implements IProgress {
 		return false;
 	}
 
-	private void indexRegionsBoundaries(List<String> warnings) {
+	private void indexRegionsBoundaries(@NonNull List<String> warnings) {
 		File file = app.getAppPath("regions.ocbf");
 		try {
-			if (file != null) {
-				if (!file.exists()) {
-					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
-							new FileOutputStream(file));
-				}
-				app.regions.prepareFile(file.getAbsolutePath());
-				RoutePlannerFrontEnd.initMissingMapsCalculator(app.regions);
+			if (!file.exists()) {
+				InputStream stream = OsmandRegions.class.getResourceAsStream("regions.ocbf");
+				Algorithms.streamCopy(stream, new FileOutputStream(file));
 			}
+			app.regions.prepareFile(file.getAbsolutePath());
+			RoutePlannerFrontEnd.initMissingMapsCalculator(app.regions);
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
 			file.delete(); // recreate file
 			LOG.error(e.getMessage(), e);
 		}
+		notifyEvent(INDEX_REGION_BOUNDARIES);
 	}
 
 	private void initPoiTypes() {
@@ -301,18 +275,19 @@ public class AppInitializer implements IProgress {
 			app.poiTypes.init();
 		}
 		app.poiTypes.setPoiTranslator(new MapPoiTypesTranslator(app));
+		notifyEvent(POI_TYPES_INITIALIZED);
 	}
 
 	public void onCreateApplication() {
 		// always update application mode to default
-		OsmandSettings osmandSettings = app.getSettings();
-		if (osmandSettings.FOLLOW_THE_ROUTE.get()) {
-			ApplicationMode savedMode = osmandSettings.readApplicationMode();
-			if (!osmandSettings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
-				osmandSettings.setApplicationMode(savedMode);
+		OsmandSettings settings = app.getSettings();
+		if (settings.FOLLOW_THE_ROUTE.get()) {
+			ApplicationMode savedMode = settings.readApplicationMode();
+			if (!settings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
+				settings.setApplicationMode(savedMode);
 			}
 		} else {
-			osmandSettings.setApplicationMode(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+			settings.setApplicationMode(settings.DEFAULT_APPLICATION_MODE.get());
 		}
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
@@ -431,7 +406,7 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	private void getLazyRoutingConfig() {
-		loadRoutingFiles(app, () -> notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED));
+		loadRoutingFiles(app, () -> notifyEvent(ROUTING_CONFIG_INITIALIZED));
 	}
 
 	public static void loadRoutingFiles(@NonNull OsmandApplication app, @Nullable LoadRoutingFilesCallback callback) {
@@ -529,36 +504,33 @@ public class AppInitializer implements IProgress {
 			notifyStart();
 			startBgTime = System.currentTimeMillis();
 			app.getRendererRegistry().initRenderers();
-			notifyEvent(InitEvents.INIT_RENDERERS);
+			notifyEvent(INIT_RENDERERS);
 			// native depends on renderers
 			initOpenGl();
-
 			// init poi types before indexes and before POI
 			initPoiTypes();
-			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
 			app.resourceManager.reloadIndexesOnStart(this, warnings);
+			notifyEvent(INDEXES_RELOADED);
 			app.travelHelper.initializeDataOnAppStartup();
 			app.travelRendererHelper.updateVisibilityPrefs();
+			notifyEvent(TRAVEL_INITIALIZED);
 			// native depends on renderers
 			initNativeCore();
 			app.favoritesHelper.loadFavorites();
+			notifyEvent(FAVORITES_INITIALIZED);
 			app.gpxDbHelper.loadGpxItems();
-			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
+			notifyEvent(GPX_DB_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();
-			notifyEvent(InitEvents.POI_FILTERS_INITIALIZED);
+			notifyEvent(POI_FILTERS_INITIALIZED);
 			indexRegionsBoundaries(warnings);
-			notifyEvent(InitEvents.INDEX_REGION_BOUNDARIES);
 			app.selectedGpxHelper.loadGPXTracks(this);
-			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
+			notifyEvent(LOAD_GPX_TRACKS);
 			saveGPXTracks();
-			notifyEvent(InitEvents.SAVE_GPX_TRACKS);
-			// restore backuped favorites to normal file -> this is obsolete with new favorite concept
-			//restoreBackupForFavoritesFiles();
-			notifyEvent(InitEvents.RESTORE_BACKUPS);
 			app.mapMarkersHelper.syncAllGroups();
+			notifyEvent(MARKERS_GROUPS_SYNCED);
 			app.searchUICore.initSearchUICore();
-
+			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
@@ -579,29 +551,29 @@ public class AppInitializer implements IProgress {
 
 	private void checkLiveUpdatesAlerts() {
 		OsmandSettings settings = app.getSettings();
-		if (!settings.IS_LIVE_UPDATES_ON.get()) {
-			return;
-		}
-		LocalIndexHelper helper = new LocalIndexHelper(app);
-		List<LocalItem> fullMaps = helper.getLocalFullMaps(null);
-		AlarmManager alarmMgr = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
-		for (LocalItem item : fullMaps) {
-			String fileName = item.getFileName();
-			if (!preferenceForLocalIndex(fileName, settings).get()) {
-				continue;
-			}
-			int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
-			UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
-			long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
+		if (settings.IS_LIVE_UPDATES_ON.get()) {
+			LocalIndexHelper helper = new LocalIndexHelper(app);
+			AlarmManager manager = (AlarmManager) app.getSystemService(Context.ALARM_SERVICE);
 
-			if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
-				runLiveUpdate(app, fileName, false, null);
-				PendingIntent alarmIntent = getPendingIntent(app, fileName);
-				int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
-				TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
-				setAlarmForPendingIntent(alarmIntent, alarmMgr, updateFrequency, timeOfDayToUpdate);
+			for (LocalItem item : helper.getLocalFullMaps(null)) {
+				String fileName = item.getFileName();
+				if (!preferenceForLocalIndex(fileName, settings).get()) {
+					continue;
+				}
+				int updateFrequencyOrd = preferenceUpdateFrequency(fileName, settings).get();
+				UpdateFrequency updateFrequency = UpdateFrequency.values()[updateFrequencyOrd];
+				long lastCheck = preferenceLastSuccessfulUpdateCheck(fileName, settings).get();
+
+				if (System.currentTimeMillis() - lastCheck > updateFrequency.intervalMillis * 2) {
+					runLiveUpdate(app, fileName, false, null);
+					PendingIntent alarmIntent = getPendingIntent(app, fileName);
+					int timeOfDayOrd = preferenceTimeOfDayToUpdate(fileName, settings).get();
+					TimeOfDay timeOfDayToUpdate = TimeOfDay.values()[timeOfDayOrd];
+					setAlarmForPendingIntent(alarmIntent, manager, updateFrequency, timeOfDayToUpdate);
+				}
 			}
 		}
+		notifyEvent(LIVE_UPDATES_ALERTS_CHECKED);
 	}
 
 	private void saveGPXTracks() {
@@ -621,6 +593,7 @@ public class AppInitializer implements IProgress {
 		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
+		notifyEvent(SAVE_GPX_TRACKS);
 	}
 
 	private final ExecutorService initOpenglSingleThreadExecutor = Executors.newSingleThreadExecutor();
@@ -673,7 +646,7 @@ public class AppInitializer implements IProgress {
 				}
 			}
 
-			notifyEvent(InitEvents.NATIVE_OPEN_GL_INITIALIZED);
+			notifyEvent(NATIVE_OPEN_GL_INITIALIZED);
 		}
 	}
 
@@ -707,7 +680,7 @@ public class AppInitializer implements IProgress {
 			}
 			app.getResourceManager().initMapBoundariesCacheNative();
 		}
-		notifyEvent(InitEvents.NATIVE_INITIALIZED);
+		notifyEvent(NATIVE_INITIALIZED);
 	}
 
 	public void notifyStart() {
@@ -724,8 +697,8 @@ public class AppInitializer implements IProgress {
 		});
 	}
 
-	public void notifyEvent(@NonNull InitEvents event) {
-		if (event != InitEvents.TASK_CHANGED) {
+	public void notifyEvent(@NonNull AppInitEvents event) {
+		if (event != TASK_CHANGED) {
 			long time = System.currentTimeMillis();
 			System.out.println("Initialized " + event + " in " + (time - startBgTime) + " ms");
 			startBgTime = time;
@@ -740,7 +713,7 @@ public class AppInitializer implements IProgress {
 	@Override
 	public void startTask(String taskName, int work) {
 		this.taskName = taskName;
-		notifyEvent(InitEvents.TASK_CHANGED);
+		notifyEvent(TASK_CHANGED);
 	}
 
 	@Override
@@ -758,7 +731,7 @@ public class AppInitializer implements IProgress {
 	@Override
 	public void finishTask() {
 		taskName = null;
-		notifyEvent(InitEvents.TASK_CHANGED);
+		notifyEvent(TASK_CHANGED);
 	}
 
 	public String getCurrentInitTaskName() {
