@@ -2400,7 +2400,7 @@
     <string name="empty_state_markers_history_desc">Markeri označeni kao pređene će se pojaviti na ekranu.</string>
     <string name="empty_state_markers_groups_desc">Uvezi grupe favorita ili međuodredišta kao markere.</string>
     <string name="empty_state_markers_groups">Uvezi grupe</string>
-    <string name="empty_state_markers_active_desc">Dugo ili kratko pritisni na „Moja mesta“, onda pritisni zastavicu kad se pojavi.</string>
+    <string name="empty_state_markers_active_desc">Dugo ili kratko pritisni na „Moja mesta i trase“, onda pritisni zastavicu kad se pojavi.</string>
     <string name="empty_state_markers_active">Napravi oznake na mapi!</string>
     <string name="add_group_descr">Uvezi grupe iz favorita ili iz GPX međuodredišnih tačaka.</string>
     <string name="add_group">Dodaj skup</string>
@@ -3099,7 +3099,7 @@
     <string name="shared_string_video">Video</string>
     <string name="shared_string_tracks">Trase</string>
     <string name="shared_string_my_favorites">Favoriti</string>
-    <string name="shared_string_my_places">Moja mesta</string>
+    <string name="shared_string_my_places">Moja mesta i trase</string>
     <string name="shared_string_add_to_favorites">Dodaj u \'Favorite\'</string>
     <string name="shared_string_add">Dodaj</string>
     <string name="shared_string_address">Adrese</string>
@@ -3739,7 +3739,7 @@
     <string name="save_heading_descr">Sačuvaj zaglavlje svakoj tački trase prilikom snimanja.</string>
     <string name="save_heading">Uključi naslov</string>
     <string name="add_new_profile_q">Dodaj novi profil ’%1$s’?</string>
-    <string name="personal_category_name">Lično</string>
+    <string name="personal_category_name">Moji favoriti</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="edit_profiles">Izmeni profile</string>
@@ -5672,6 +5672,6 @@
     <string name="precise">Preciznije</string>
     <string name="round_up">Zaokružiti</string>
     <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
-    <string name="upload_local_versions">Preuzimi lokalne verzije</string>
+    <string name="upload_local_versions">Preuzmi lokalne verzije</string>
     <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
 </resources>

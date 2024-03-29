@@ -11,7 +11,7 @@
     <string name="poi_shoes_type">Vrsta</string>
     <string name="poi_fire_hydrant_type">Vrsta</string>
     <string name="poi_fire_hydrant_position">Pozicija</string>
-    <string name="poi_water_source">Izvor vode</string>
+    <string name="poi_water_source">Poreklo vode</string>
     <string name="poi_payment_toll_type">Način plaćanja</string>
     <string name="poi_traffic_signals_sound">Zvuk</string>
     <string name="poi_highway_crossing_type">Vrsta</string>

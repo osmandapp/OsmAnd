@@ -4813,7 +4813,7 @@
     <string name="map_widget_ant_bicycle_dist_desc">Mostra la distanza percorsa</string>
     <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
     <string name="weather_plugin_description">Fornisce
-\n- previsioni meteo, 24 ore per 7 giorni, con 5 livelli
+\n- previsioni meteo, 24 ore su 24, 7 giorni su 7, con 5 livelli
 \n- widget localizzati
 \n- isoterme / isobare
 \n
@@ -5659,4 +5659,5 @@
     <string name="precise">Preciso</string>
     <string name="download_cloud_versions">Scarica le versioni dal cloud</string>
     <string name="upload_local_versions">Carica le versioni locali</string>
+    <string name="round_up">Arrotondare</string>
 </resources>
