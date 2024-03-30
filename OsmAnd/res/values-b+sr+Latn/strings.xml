@@ -5674,4 +5674,5 @@
     <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
     <string name="upload_local_versions">Preuzmi lokalne verzije</string>
     <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
+    <string name="map_widget_map_scale">Razmera mape</string>
 </resources>
