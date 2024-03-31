@@ -97,8 +97,8 @@ public class PluginsHelper {
 
 	private static final String CUSTOM_PLUGINS_KEY = "custom_plugins";
 	private static final String PLUGINS_PREFERENCES_NAME = "net.osmand.plugins";
-	public static final String ONLINE_PLUGINS_URL = "https://test.osmand.net/api/plugins/list";
-	public static final String OSMAND_URL = "https://test.osmand.net";
+	public static final String ONLINE_PLUGINS_URL = "https://osmand.net/api/plugins/list";
+	public static final String OSMAND_URL = "https://osmand.net";
 
 	private static final List<OsmandPlugin> allPlugins = new ArrayList<>();
 	private static List<OnlineOsmandPlugin> onlinePlugins = new ArrayList<>();
@@ -878,7 +878,7 @@ public class PluginsHelper {
 			plugin.onIndexItemDownloaded(item, updatingFile);
 		}
 	}
-	
+
 	public static void fetchOnlinePlugins(@NonNull OsmandApplication app, @Nullable OnlinePluginsCallback callback) {
 		Map<String, String> params = new HashMap<>();
 		params.put("nightly", Version.isDeveloperBuild(app) ? "true" : "false");
@@ -908,8 +908,8 @@ public class PluginsHelper {
 
 						@Override
 						protected void onPostExecute(List<OnlineOsmandPlugin> plugins) {
+							onlinePlugins = plugins;
 							if (callback != null) {
-								onlinePlugins = plugins;
 								callback.onFetchComplete(plugins);
 							}
 						}
