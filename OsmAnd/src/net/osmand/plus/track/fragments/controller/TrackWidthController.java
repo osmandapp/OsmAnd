@@ -39,7 +39,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
-	private OnTrackWidthSelectedListener listener;
+	private ITrackWidthSelectedListener listener;
 
 	private TrackWidthController(@NonNull OsmandApplication app,
 	                             @NonNull TrackDrawInfo drawInfo) {
@@ -60,7 +60,7 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		this.controlsColorProvider = controlsColorProvider;
 	}
 
-	public void setListener(@NonNull OnTrackWidthSelectedListener listener) {
+	public void setListener(@NonNull ITrackWidthSelectedListener listener) {
 		this.listener = listener;
 	}
 
@@ -166,14 +166,14 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		}
 	}
 
-	public interface OnTrackWidthSelectedListener {
+	public interface ITrackWidthSelectedListener {
 		void onTrackWidthSelected(@Nullable String width);
 	}
 
 	@NonNull
 	public static TrackWidthController getInstance(
 			@NonNull OsmandApplication app, @NonNull TrackDrawInfo drawInfo,
-			@NonNull OnNeedScrollListener onNeedScrollListener, @NonNull OnTrackWidthSelectedListener listener
+			@NonNull OnNeedScrollListener onNeedScrollListener, @NonNull ITrackWidthSelectedListener listener
 	) {
 		DialogManager dialogManager = app.getDialogManager();
 		TrackWidthController controller = (TrackWidthController) dialogManager.findController(PROCESS_ID);

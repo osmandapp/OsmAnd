@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -17,14 +18,13 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCar
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
 import net.osmand.plus.configmap.tracks.appearance.tasks.ChangeAppearanceTask;
-import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 
 import java.util.Objects;
 import java.util.Set;
 
-public class ChangeAppearanceDialogController implements IChangeAppearanceController,
-		IColorCardControllerListener, OnTrackWidthSelectedListener, OnAppearanceModifiedListener {
+public class ChangeAppearanceController implements IChangeAppearanceController,
+		IColorCardControllerListener, ITrackWidthSelectedListener, OnAppearanceModifiedListener {
 
 	public static final String PROCESS_ID = "change_tracks_appearance";
 
@@ -37,13 +37,13 @@ public class ChangeAppearanceDialogController implements IChangeAppearanceContro
 
 	private final AppearanceData initialAppearanceData;
 	private final AppearanceData appearanceData;
-	private final ItemsSelectionHelper<TrackItem> selectionHelper;
+	private final Set<TrackItem> selectedTrackItems;
 	private boolean isAppearanceSaved = false;
 
-	private ChangeAppearanceDialogController(@NonNull OsmandApplication app,
-	                                         @NonNull ItemsSelectionHelper<TrackItem> selectionHelper) {
+	private ChangeAppearanceController(@NonNull OsmandApplication app,
+	                                   @NonNull Set<TrackItem> trackItems) {
 		this.app = app;
-		this.selectionHelper = selectionHelper;
+		this.selectedTrackItems = trackItems;
 		this.initialAppearanceData = new AppearanceData();
 		this.appearanceData = new AppearanceData(initialAppearanceData).setModifiedListener(this);
 
@@ -82,8 +82,7 @@ public class ChangeAppearanceDialogController implements IChangeAppearanceContro
 	@Override
 	public void saveChanges(@NonNull FragmentActivity activity) {
 		colorCardController.getColorsPaletteController().refreshLastUsedTime();
-		Set<TrackItem> selectedItems = selectionHelper.getSelectedItems();
-		ChangeAppearanceTask.execute(activity, appearanceData, selectedItems, result -> {
+		ChangeAppearanceTask.execute(activity, appearanceData, selectedTrackItems, result -> {
 			isAppearanceSaved = true;
 			onAppearanceSaved();
 			return true;
@@ -96,7 +95,7 @@ public class ChangeAppearanceDialogController implements IChangeAppearanceContro
 
 	@Override
 	public int getEditedItemsCount() {
-		return selectionHelper.getSelectedItemsSize();
+		return selectedTrackItems.size();
 	}
 
 	@Override
@@ -129,22 +128,17 @@ public class ChangeAppearanceDialogController implements IChangeAppearanceContro
 		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
 	}
 
-
-	@NonNull
-	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
-		return selectionHelper;
-	}
-
 	@Override
 	public void onTrackWidthSelected(@Nullable String width) {
 
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity,
-	                              @NonNull ItemsSelectionHelper<TrackItem> selectionHelper) {
+	                              @NonNull Fragment targetFragment,
+	                              @NonNull Set<TrackItem> selectedItems) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new ChangeAppearanceDialogController(app, selectionHelper));
-		ChangeAppearanceFragment.showInstance(activity.getSupportFragmentManager());
+		dialogManager.register(PROCESS_ID, new ChangeAppearanceController(app, selectedItems));
+		ChangeAppearanceFragment.showInstance(activity.getSupportFragmentManager(), targetFragment);
 	}
 }

@@ -21,7 +21,7 @@ import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
-import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.utils.UiUtilities;
 
 import java.util.ArrayList;
@@ -40,14 +40,14 @@ public class WidthCardController extends BaseMultiStateCardController {
 	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
-	private OnTrackWidthSelectedListener listener;
+	private ITrackWidthSelectedListener listener;
 
 	public WidthCardController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
 		super(app, appearanceData.getWidthValue());
 		this.appearanceData = appearanceData;
 	}
 
-	public void setListener(@NonNull OnTrackWidthSelectedListener listener) {
+	public void setListener(@NonNull ITrackWidthSelectedListener listener) {
 		this.listener = listener;
 	}
 

@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap.tracks.appearance;
 
-import static net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceDialogController.PROCESS_ID;
+import static net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController.PROCESS_ID;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -31,24 +31,21 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet;
 import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
 import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog,
-		IAskRefreshDialogCompletely, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
+public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment
+		implements IAskDismissDialog, IAskRefreshDialogCompletely, OnAppearanceChangeConfirmedListener {
 
 	private static final String TAG = ChangeAppearanceFragment.class.getSimpleName();
 
 	private DialogManager dialogManager;
-	private ChangeAppearanceDialogController controller;
+	private ChangeAppearanceController controller;
 
 	@NonNull
 	@Override
@@ -75,7 +72,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		dialogManager = app.getDialogManager();
-		controller = (ChangeAppearanceDialogController) dialogManager.findController(PROCESS_ID);
+		controller = (ChangeAppearanceController) dialogManager.findController(PROCESS_ID);
 		dialogManager.register(PROCESS_ID, this);
 	}
 
@@ -162,7 +159,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	public void onApplyButtonClicked() {
-		AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager());
+		AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager(), controller.getEditedItemsCount());
 	}
 
 	@Override
@@ -205,12 +202,6 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		});
 	}
 
-	@NonNull
-	@Override
-	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
-		return controller.getSelectionHelper();
-	}
-
 	@Override
 	public void onAskRefreshDialogCompletely(@NonNull String processId) {
 		View view = getView();
@@ -228,7 +219,9 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	public int getThemeId() {
-		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		return nightMode
+				? R.style.OsmandDarkTheme_DarkActionbar
+				: R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 	}
 
 	@ColorRes
@@ -237,9 +230,12 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implement
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager) {
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @NonNull Fragment targetFragment) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			new ChangeAppearanceFragment().show(manager, TAG);
+			ChangeAppearanceFragment fragment = new ChangeAppearanceFragment();
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.show(manager, TAG);
 		}
 	}
 }

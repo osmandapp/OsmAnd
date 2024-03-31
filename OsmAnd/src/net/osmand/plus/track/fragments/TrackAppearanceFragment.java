@@ -63,7 +63,7 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
-import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -82,7 +82,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 

@@ -28,7 +28,7 @@ import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
+import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.helpers.IntentHelper;
 import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -308,7 +308,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					if (selectedTrackItems.isEmpty()) {
 						showEmptyItemsToast(changeAppearance);
 					} else {
-						TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), fragment);
+						ChangeAppearanceController.showDialog(activity, fragment, items);
 					}
 				})
 				.create()

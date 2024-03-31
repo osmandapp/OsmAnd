@@ -28,10 +28,12 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
+import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.tracks.dialogs.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
@@ -273,7 +275,8 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	public void changeAppearance() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), this);
+			ItemsSelectionHelper<TrackItem> selectionHelper = getSelectionHelper();
+			ChangeAppearanceController.showDialog(activity, this, selectionHelper.getSelectedItems());
 		}
 	}
 
