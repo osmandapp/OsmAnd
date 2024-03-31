@@ -14,6 +14,7 @@ import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.OnAppearanceModifiedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.DirectionArrowsCardController;
+import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitMarksCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
@@ -34,6 +35,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	private final StartFinishCardController showStartAndFinishIconsCardController;
 	private final ColorCardController colorCardController;
 	private final WidthCardController widthCardController;
+	private final SplitMarksCardController splitMarksCardController;
 
 	private final AppearanceData initialAppearanceData;
 	private final AppearanceData appearanceData;
@@ -49,6 +51,7 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 
 		directionArrowsCardController = new DirectionArrowsCardController(app, appearanceData);
 		showStartAndFinishIconsCardController = new StartFinishCardController(app, appearanceData);
+		splitMarksCardController = new SplitMarksCardController(app, appearanceData);
 
 		colorCardController = new ColorCardController(app, appearanceData);
 		colorCardController.setListener(this);
@@ -121,6 +124,11 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	@NonNull
 	public WidthCardController getWidthCardController() {
 		return widthCardController;
+	}
+
+	@NonNull
+	public SplitMarksCardController getSplitMarksCardController() {
+		return splitMarksCardController;
 	}
 
 	@Override

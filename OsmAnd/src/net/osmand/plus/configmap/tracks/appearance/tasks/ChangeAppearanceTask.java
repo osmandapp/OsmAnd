@@ -4,6 +4,8 @@ import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 
 import androidx.annotation.NonNull;
@@ -70,9 +72,8 @@ public class ChangeAppearanceTask extends BaseLoadAsyncTask<Void, File, Void> {
 		setParameterIfEdited(item, WIDTH, appearanceData.getWidthValue());
 		setParameterIfEdited(item, SHOW_ARROWS, appearanceData.shouldShowArrows());
 		setParameterIfEdited(item, SHOW_START_FINISH, appearanceData.shouldShowStartFinish());
-
-//		item.setParameter(SPLIT_TYPE, GpxSplitType.getSplitTypeByTypeId(trackDrawInfo.getSplitType()).getType());
-//		item.setParameter(SPLIT_INTERVAL, trackDrawInfo.getSplitInterval());
+		setParameterIfEdited(item, SPLIT_TYPE, appearanceData.getSplitType());
+		setParameterIfEdited(item, SPLIT_INTERVAL, appearanceData.getSplitInterval());
 		app.getGpxDbHelper().updateDataItem(item);
 
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());

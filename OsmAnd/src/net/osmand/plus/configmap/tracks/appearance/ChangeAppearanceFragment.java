@@ -143,7 +143,12 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment
 			MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController());
 			cardsContainer.addView(widthCard.build());
 			widthCard.setBackgroundColor(cardsBackgroundColor);
+			inflate(R.layout.list_item_divider, cardsContainer, true);
 			setupOnNeedScrollListener();
+
+			MultiStateCard splitMarksCard = new MultiStateCard(activity, controller.getSplitMarksCardController());
+			cardsContainer.addView(splitMarksCard.build());
+			splitMarksCard.setBackgroundColor(cardsBackgroundColor);
 		}
 	}
 

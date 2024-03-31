@@ -308,7 +308,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 					if (selectedTrackItems.isEmpty()) {
 						showEmptyItemsToast(changeAppearance);
 					} else {
-						ChangeAppearanceController.showDialog(activity, fragment, items);
+						ChangeAppearanceController.showDialog(activity, fragment, selectedTrackItems);
 					}
 				})
 				.create()

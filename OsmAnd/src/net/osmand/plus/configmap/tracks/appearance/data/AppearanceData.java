@@ -16,6 +16,8 @@ public class AppearanceData {
 	@ColorInt
 	private Integer customColor = null;
 	private String width = null;
+	private Integer splitType;
+	private Double splitInterval;
 
 
 	private OnAppearanceModifiedListener modifiedListener;
@@ -96,6 +98,24 @@ public class AppearanceData {
 		return this;
 	}
 
+	@Nullable
+	public Integer getSplitType() {
+		return splitType;
+	}
+
+	@Nullable
+	public Double getSplitInterval() {
+		return splitInterval;
+	}
+
+	@NonNull
+	public AppearanceData setSplit(@Nullable Integer splitType, @Nullable Double splitInterval) {
+		this.splitType = splitType;
+		this.splitInterval = splitInterval;
+		notifyOnAppearanceModified();
+		return this;
+	}
+
 	private void notifyOnAppearanceModified() {
 		if (modifiedListener != null) {
 			modifiedListener.onAppearanceModified();
@@ -121,6 +141,10 @@ public class AppearanceData {
 			return false;
 		if (!Objects.equals(getCustomColor(), that.getCustomColor()))
 			return false;
+		if (!Objects.equals(getSplitType(), that.getSplitType()))
+			return false;
+		if (!Objects.equals(getSplitInterval(), that.getSplitInterval()))
+			return false;
 		return Objects.equals(getWidthValue(), that.getWidthValue());
 	}
 
@@ -131,6 +155,8 @@ public class AppearanceData {
 		result = 31 * result + (getColoringStyle() != null ? getColoringStyle().hashCode() : 0);
 		result = 31 * result + (getCustomColor() != null ? getCustomColor().hashCode() : 0);
 		result = 31 * result + (getWidthValue() != null ? getWidthValue().hashCode() : 0);
+		result = 31 * result + (getSplitType() != null ? getSplitType().hashCode() : 0);
+		result = 31 * result + (getSplitInterval() != null ? getSplitInterval().hashCode() : 0);
 		return result;
 	}
 }
