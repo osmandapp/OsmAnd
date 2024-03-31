@@ -5670,4 +5670,5 @@
 \nВыберите «%1$s» для точных чисел или «%2$s» для удобства чтения.</string>
     <string name="download_cloud_versions">Скачать облачные версии</string>
     <string name="upload_local_versions">Загрузить локальные версии</string>
+    <string name="map_widget_map_scale">Масштаб карты</string>
 </resources>

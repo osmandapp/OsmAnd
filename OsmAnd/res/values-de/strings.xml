@@ -5672,4 +5672,5 @@
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
     <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
+    <string name="map_widget_map_scale">Maßstab</string>
 </resources>

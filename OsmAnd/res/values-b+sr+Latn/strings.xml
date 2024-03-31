@@ -42,7 +42,7 @@
     <string name="context_menu_item_directions_from">Navigacija od</string>
     <string name="route_descr_map_location">Mapa :</string>
     <string name="route_descr_lat_lon">Šir %1$.3f, duž %2$.3f</string>
-    <string name="route_to">Početak:</string>
+    <string name="route_to">Odredište:</string>
     <string name="route_via">Preko:</string>
     <string name="route_from">Početak:</string>
     <string name="app_mode_default">Pretraga mape</string>
@@ -5674,4 +5674,5 @@
     <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
     <string name="upload_local_versions">Preuzmi lokalne verzije</string>
     <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
+    <string name="map_widget_map_scale">Razmera mape</string>
 </resources>

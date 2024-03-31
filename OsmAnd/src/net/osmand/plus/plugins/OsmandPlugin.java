@@ -89,6 +89,10 @@ public abstract class OsmandPlugin {
 	private boolean enabled;
 	private String installURL;
 
+	public interface PluginInstallListener {
+		void onPluginInstalled();
+	}
+
 	public OsmandPlugin(@NonNull OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
@@ -130,6 +134,13 @@ public abstract class OsmandPlugin {
 
 	public int getVersion() {
 		return -1;
+	}
+
+	public boolean isOnline() {
+		return false;
+	}
+
+	public void install(@Nullable FragmentActivity activity, @Nullable PluginInstallListener installListener) {
 	}
 
 	/**
