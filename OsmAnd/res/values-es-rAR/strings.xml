@@ -5684,4 +5684,5 @@
     <string name="distance_during_navigation">Distancia al navegar</string>
     <string name="download_cloud_versions">Descargar versiones de la nube</string>
     <string name="upload_local_versions">Cargar versiones locales</string>
+    <string name="map_widget_map_scale">Escala del mapa</string>
 </resources>
