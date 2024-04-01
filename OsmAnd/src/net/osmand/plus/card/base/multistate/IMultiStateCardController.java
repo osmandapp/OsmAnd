@@ -14,12 +14,14 @@ public interface IMultiStateCardController {
 	String getCardTitle();
 
 	@NonNull
-	String getSelectorTitle();
+	String getCardStateSelectorTitle();
 
 	void onSelectorButtonClicked(@NonNull View selectorView);
 
 	void onBindCardContent(@NonNull FragmentActivity activity,
 	                       @NonNull ViewGroup container, boolean nightMode);
 
-	boolean shouldShowCardHeader();
+	default boolean shouldShowCardHeader() {
+		return true;
+	}
 }

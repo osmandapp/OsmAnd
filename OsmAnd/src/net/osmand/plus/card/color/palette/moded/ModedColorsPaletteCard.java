@@ -21,6 +21,11 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 	private final ModedColorsPaletteController controller;
 
 	public ModedColorsPaletteCard(@NonNull FragmentActivity activity,
+	                              @NonNull ModedColorsPaletteController controller) {
+		this(activity, controller, true);
+	}
+
+	public ModedColorsPaletteCard(@NonNull FragmentActivity activity,
 	                              @NonNull ModedColorsPaletteController controller,
 	                              boolean usedOnMap) {
 		super(activity, controller, usedOnMap);

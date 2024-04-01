@@ -202,11 +202,14 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		ViewGroup cardsContainer = getCardsContainer();
 		cardsContainer.removeAllViews();
 
-		colorsCard = new MultiStateCard(mapActivity, getColorCardController());
+		RouteLineColorController colorController = getColorCardController();
+		colorsCard = new MultiStateCard(mapActivity, colorController);
 		cardsContainer.addView(colorsCard.build(mapActivity));
 
+		RouteLineWidthController widthController = getWidthCardController();
 		inflate(R.layout.list_item_divider_basic, cardsContainer, true);
-		widthCard = new MultiStateCard(mapActivity, getWidthCardController());
+		widthCard = new MultiStateCard(mapActivity, widthController);
+		widthController.setControlsColorProvider(colorController);
 		cardsContainer.addView(widthCard.build(mapActivity));
 
 		RouteTurnArrowsCard turnArrowCard = new RouteTurnArrowsCard(mapActivity, previewRouteLineInfo);
@@ -222,7 +225,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			headerTitle.setText(controller.getCardTitle());
 
 			TextView headerDescr = headerContainer.findViewById(R.id.descr);
-			headerDescr.setText(controller.getSelectorTitle());
+			headerDescr.setText(controller.getCardStateSelectorTitle());
 
 			View selector = headerContainer.findViewById(R.id.selector);
 			selector.setOnClickListener(controller::onSelectorButtonClicked);
@@ -514,10 +517,12 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		previewRouteLineInfo.setRouteColoringStyle(coloringStyle);
-		updateColorItems();
-		updateHeaderContent(RouteLineColorController.PROCESS_ID);
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			previewRouteLineInfo.setRouteColoringStyle(coloringStyle);
+			updateColorItems();
+			updateHeaderContent(RouteLineColorController.PROCESS_ID);
+		}
 	}
 
 	@Override

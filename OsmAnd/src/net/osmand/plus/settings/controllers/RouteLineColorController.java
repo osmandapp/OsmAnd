@@ -2,7 +2,9 @@ package net.osmand.plus.settings.controllers;
 
 import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
-import androidx.annotation.ColorInt;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -12,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
@@ -28,7 +31,6 @@ import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController.OnP
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
-import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -41,7 +43,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class RouteLineColorController extends ColoringStyleCardController implements MapThemeProvider, IDialogController {
+public class RouteLineColorController extends ColoringStyleCardController
+		implements MapThemeProvider, IDialogController, IControlsColorProvider {
 
 	public static final String PROCESS_ID = "select_route_line_color";
 
@@ -104,8 +107,8 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 				}
 			};
 		}
-		colorsPaletteController.setPaletteListener(getControllerListener());
-		colorsPaletteController.setPaletteModeSelectedListener((OnPaletteModeSelectedListener) getControllerListener());
+		colorsPaletteController.setPaletteListener(getExternalListener());
+		colorsPaletteController.setPaletteModeSelectedListener((OnPaletteModeSelectedListener) getExternalListener());
 		return colorsPaletteController;
 	}
 
@@ -140,25 +143,34 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		return coloringStyleDetailsController;
 	}
 
-	@NonNull
 	@Override
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
+		container.removeAllViews();
+		BaseCard card = getContentCardForSelectedState(activity);
+		View cardView = card.getView() != null ? card.getView() : card.build(activity);
+		container.addView(cardView);
+	}
+
+	@NonNull
 	protected BaseCard getContentCardForSelectedState(@NonNull FragmentActivity activity) {
-		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		ColoringType coloringType = coloringStyle.getType();
 		if (!isAvailableInSubscription(coloringStyle)) {
-			return new PromoBannerCard(activity, isUsedOnMap());
+			return new PromoBannerCard(activity);
 		} else if (coloringType.isCustomColor()) {
-			return new ModedColorsPaletteCard(activity, getColorsPaletteController(), isUsedOnMap());
+			return new ModedColorsPaletteCard(activity, getColorsPaletteController());
 		} else {
-			return new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController(), isUsedOnMap());
+			return new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController());
 		}
 	}
 
 	@Override
-	protected void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
+	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		super.onColoringStyleSelected(coloringStyle);
-		IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
-		styleDetailsController.setColoringStyle(coloringStyle);
+		if (coloringStyle != null) {
+			IColoringStyleDetailsController styleDetailsController = getColoringStyleDetailsController();
+			styleDetailsController.setColoringStyle(coloringStyle);
+		}
 	}
 
 	@Override
@@ -166,29 +178,19 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		return false;
 	}
 
-	@Override
-	protected boolean isUsedOnMap() {
-		return true;
-	}
-
 	public boolean isSelectedColoringStyleAvailable() {
-		return isAvailableInSubscription(getSelectedColoringStyle());
+		return isAvailableInSubscription(requireSelectedColoringStyle());
 	}
 
 	@Override
-	protected boolean isDataAvailableForColoringStyle(@NonNull ColoringStyle coloringStyle) {
-		// We can use any of available map data types to draw route line
-		return true;
-	}
-
-	@Override
+	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
 		return ColoringType.valuesOf(ColoringPurpose.ROUTE_LINE);
 	}
 
 	@Override
 	public DayNightMode getMapTheme() {
-		ColoringStyle coloringStyle = getSelectedColoringStyle();
+		ColoringStyle coloringStyle = requireSelectedColoringStyle();
 		if (coloringStyle.getType().isCustomColor()) {
 			return isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY;
 		}
@@ -222,8 +224,8 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		helper.setExternalMapThemeProvider(provider);
 	}
 
-	@ColorInt
-	public int getRouteLinePreviewColor() {
+	@Override
+	public int getSelectedControlsColor() {
 		PreviewRouteLineLayer layer = app.getOsmandMap().getMapLayers().getPreviewRouteLineLayer();
 		return layer.getRouteLineColor(isNightMap());
 	}
@@ -246,12 +248,6 @@ public class RouteLineColorController extends ColoringStyleCardController implem
 		controller.setRouteLinePreview(routeLinePreview);
 		controller.setListener(listener);
 		return controller;
-	}
-
-	@Nullable
-	public static RouteLineColorController getInstance(@NonNull OsmandApplication app) {
-		DialogManager dialogManager = app.getDialogManager();
-		return  (RouteLineColorController) dialogManager.findController(PROCESS_ID);
 	}
 
 	public interface IRouteLineColorControllerListener

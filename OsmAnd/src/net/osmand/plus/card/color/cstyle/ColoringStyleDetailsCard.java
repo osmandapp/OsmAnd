@@ -13,6 +13,11 @@ public class ColoringStyleDetailsCard extends BaseCard {
 	private final IColoringStyleDetailsController controller;
 
 	public ColoringStyleDetailsCard(@NonNull FragmentActivity activity,
+	                                @NonNull IColoringStyleDetailsController controller){
+		this(activity, controller, true);
+	}
+
+	public ColoringStyleDetailsCard(@NonNull FragmentActivity activity,
 	                                @NonNull IColoringStyleDetailsController controller,
 	                                boolean usedOnMap) {
 		super(activity, usedOnMap);
