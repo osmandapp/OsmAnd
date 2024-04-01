@@ -54,7 +54,7 @@ public class GpxSegmentsApproximation {
 				break;
 			}
 		}
-		gctx.finalPoints.add(nextPoint);
+//		gctx.finalPoints.add(nextPoint); // finalPoints should be filled by calculateGpxRoute()
 		while (nextPoint != null && nextPoint.pnt != null) {
 			double mindistglobal = 0;
 			RouteSegmentResult fres = null;
@@ -98,8 +98,7 @@ public class GpxSegmentsApproximation {
 				}
 				sg = sg.getNext();
 			}
-			
-			gctx.finalPoints.add(nextPoint);
+//			gctx.finalPoints.add(nextPoint); // finalPoints should be filled by calculateGpxRoute()
 		}
 		if (gctx.ctx.calculationProgress != null) {
 			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;

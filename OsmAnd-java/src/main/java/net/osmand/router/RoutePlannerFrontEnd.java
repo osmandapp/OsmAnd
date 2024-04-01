@@ -522,7 +522,7 @@ public class RoutePlannerFrontEnd {
 		return true;
 	}
 
-	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
+	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) throws IOException {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
@@ -565,7 +565,12 @@ public class RoutePlannerFrontEnd {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
-		// clean turns to recaculate them
+
+		if (APPROXIMATE_GPX_SEGMENTS) {
+			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.result); // not required by classic method
+		}
+
+		// clean turns to recalculate them
 		cleanupResultAndAddTurns(gctx);
 	}
 
