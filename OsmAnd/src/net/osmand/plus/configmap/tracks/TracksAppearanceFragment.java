@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +35,7 @@ import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
+import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -45,7 +45,6 @@ import net.osmand.plus.myplaces.tracks.dialogs.TracksSelectionFragment;
 import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
@@ -56,7 +55,7 @@ import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListe
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
-import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -67,7 +66,8 @@ import java.util.List;
 import java.util.Set;
 
 public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
-		implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener, InAppPurchaseListener {
+		implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener,
+		InAppPurchaseListener, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -76,7 +76,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	private TrackDrawInfo trackDrawInfo;
 	private final List<BaseCard> cards = new ArrayList<>();
 
-	private HeadedContentCard trackWidthCard;
 	private DialogButton applyButton;
 
 	@ColorRes
@@ -92,7 +91,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		selectionHelper = getItemsSelectionHelper();
+		selectionHelper = getSelectionHelper();
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
@@ -186,8 +185,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 			addCard(container, new MultiStateCard(activity, getColorCardController()));
 
 			inflater.inflate(R.layout.list_item_divider_basic, container, true);
-			trackWidthCard = new HeadedContentCard(activity, getWidthCardController());
-			addCard(container, trackWidthCard);
+			addCard(container, new HeadedContentCard(activity, getWidthCardController()));
 		}
 	}
 
@@ -221,7 +219,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		applyButton = view.findViewById(R.id.right_bottom_button);
-		applyButton.setOnClickListener(v -> AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager()));
+		applyButton.setOnClickListener(v -> {
+			ItemsSelectionHelper<TrackItem> helper = getSelectionHelper();
+			AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager(), helper.getSelectedItemsSize());
+		});
 		applyButton.setButtonType(PRIMARY);
 		applyButton.setTitleId(R.string.shared_string_apply);
 
@@ -259,10 +260,12 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		trackDrawInfo.setColoringType(coloringStyle.getType());
-		trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
-		applyButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			trackDrawInfo.setColoringType(coloringStyle.getType());
+			trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+			applyButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+		}
 	}
 
 	@Override
@@ -277,7 +280,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	@Override
-	public void onTrackWidthSelected(@NonNull String width) {
+	public void onTrackWidthSelected(@Nullable String width) {
 
 	}
 
@@ -286,13 +289,19 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		return trackDrawInfo;
 	}
 
-	@Nullable
-	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof SelectionHelperProvider) {
 			return ((SelectionHelperProvider<TrackItem>) fragment).getSelectionHelper();
 		}
-		return null;
+		return new ItemsSelectionHelper<>();
+	}
+
+	@Override
+	public void onAppearanceChangeConfirmed() {
+		saveTracksAppearance();
 	}
 
 	public void saveTracksAppearance() {

@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="unchanged_parameter_summary">Each track will retain its own parameters.</string>
+    <string name="shared_string_unchanged">Unchanged</string>
     <string name="map_widget_map_scale">Map scale</string>
     <string name="upload_local_versions">Upload local versions</string>
     <string name="download_cloud_versions">Download cloud versions</string>

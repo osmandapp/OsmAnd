@@ -65,7 +65,7 @@ import net.osmand.plus.track.cards.Track3DCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
-import net.osmand.plus.track.fragments.controller.TrackWidthController.OnTrackWidthSelectedListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -84,7 +84,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, OnTrackWidthSelectedListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 
@@ -101,7 +101,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private int menuTitleHeight;
 	private long modifiedTime = -1;
 
-	private HeadedContentCard trackWidthCard;
 	private SplitIntervalCard splitIntervalCard;
 	private boolean showStartFinishIconsInitialValue;
 
@@ -439,11 +438,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		trackDrawInfo.setColoringStyle(coloringStyle);
-		View saveButton = view.findViewById(R.id.right_bottom_button);
-		saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
-		updateColorItems();
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			trackDrawInfo.setColoringStyle(coloringStyle);
+			View saveButton = view.findViewById(R.id.right_bottom_button);
+			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+			updateColorItems();
+		}
 	}
 
 	@Override
@@ -461,7 +462,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
-	public void onTrackWidthSelected(@NonNull String width) {
+	public void onTrackWidthSelected(@Nullable String width) {
 		updateAppearanceIcon();
 	}
 
@@ -485,7 +486,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void updateAppearanceIcon() {
-		int color = getColorCardController().getTrackPreviewColor();
+		TrackColorController trackColorController = getColorCardController();
+		int color = trackColorController.getSelectedControlsColor();
 		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color);
 		trackIcon.setImageDrawable(icon);
 	}
@@ -729,15 +731,18 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 				addCard(container, splitIntervalCard);
 			}
-
 			addCard(container, new DirectionArrowsCard(mapActivity, trackDrawInfo));
 			addCard(container, new Track3DCard(mapActivity, trackDrawInfo));
 			addCard(container, new ShowStartFinishCard(mapActivity, trackDrawInfo));
 			inflate(R.layout.list_item_divider_basic, container, true);
-			addCard(container, new MultiStateCard(mapActivity, getColorCardController()));
+
+			TrackColorController trackColorController = getColorCardController();
+			addCard(container, new MultiStateCard(mapActivity, trackColorController));
 			inflate(R.layout.list_item_divider_basic, container, true);
-			trackWidthCard = new HeadedContentCard(mapActivity, getWidthCardController());
-			addCard(container, trackWidthCard);
+
+			TrackWidthController trackWidthController = getWidthCardController();
+			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
+			trackWidthController.setControlsColorProvider(trackColorController);
 			addCard(container, new ActionsCard(mapActivity));
 		}
 	}
@@ -788,13 +793,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private int getBottomVisibleY() {
 		return controlButtons.getTop();
-	}
-
-	public int getInnerScrollableHeight() {
-		int totalScreenHeight = getViewHeight() - getMenuStatePosY(getCurrentMenuState());
-		int frameTotalHeight = routeMenuTopShadowAll.getHeight()
-				+ controlButtons.getHeight() + buttonsShadow.getHeight();
-		return totalScreenHeight - frameTotalHeight;
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,

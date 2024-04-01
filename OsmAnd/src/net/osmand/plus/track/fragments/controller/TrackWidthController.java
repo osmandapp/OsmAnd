@@ -4,7 +4,6 @@ import static net.osmand.util.Algorithms.parseIntSilently;
 
 import android.view.View;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -20,9 +19,9 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.base.headed.IHeadedCardController;
 import net.osmand.plus.card.base.headed.IHeadedContentCard;
 import net.osmand.plus.card.base.slider.moded.ModedSliderCard;
+import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.card.width.WidthMode;
-import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 
@@ -37,9 +36,10 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	private final TrackDrawInfo drawInfo;
 
 	private IHeadedContentCard cardInstance;
+	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
-	private OnTrackWidthSelectedListener listener;
+	private ITrackWidthSelectedListener listener;
 
 	private TrackWidthController(@NonNull OsmandApplication app,
 	                             @NonNull TrackDrawInfo drawInfo) {
@@ -56,7 +56,11 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		this.onNeedScrollListener = onNeedScrollListener;
 	}
 
-	public void setListener(@NonNull OnTrackWidthSelectedListener listener) {
+	public void setControlsColorProvider(@NonNull IControlsColorProvider controlsColorProvider) {
+		this.controlsColorProvider = controlsColorProvider;
+	}
+
+	public void setListener(@NonNull ITrackWidthSelectedListener listener) {
 		this.listener = listener;
 	}
 
@@ -129,17 +133,8 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	}
 
 	public void updateColorItems() {
-		int color = getTrackPreviewColor();
 		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(color);
-	}
-
-	@ColorInt
-	private int getTrackPreviewColor() {
-		TrackColorController colorController = TrackColorController.getInstance(app);
-		return colorController != null
-				? colorController.getTrackPreviewColor()
-				: GpxAppearanceAdapter.getTrackColor(app);
+		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull
@@ -171,14 +166,14 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		}
 	}
 
-	public interface OnTrackWidthSelectedListener {
-		void onTrackWidthSelected(@NonNull String width);
+	public interface ITrackWidthSelectedListener {
+		void onTrackWidthSelected(@Nullable String width);
 	}
 
 	@NonNull
 	public static TrackWidthController getInstance(
 			@NonNull OsmandApplication app, @NonNull TrackDrawInfo drawInfo,
-			@NonNull OnNeedScrollListener onNeedScrollListener, @NonNull OnTrackWidthSelectedListener listener
+			@NonNull OnNeedScrollListener onNeedScrollListener, @NonNull ITrackWidthSelectedListener listener
 	) {
 		DialogManager dialogManager = app.getDialogManager();
 		TrackWidthController controller = (TrackWidthController) dialogManager.findController(PROCESS_ID);

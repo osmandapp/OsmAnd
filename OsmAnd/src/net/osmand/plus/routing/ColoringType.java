@@ -155,6 +155,6 @@ public enum ColoringType {
 
 	@NonNull
 	public static ColoringType[] valuesOf(@NonNull ColoringPurpose purpose) {
-		return purpose == ColoringPurpose.ROUTE_LINE ? ROUTE_TYPES : TRACK_TYPES;
+		return purpose == ColoringPurpose.TRACK ? TRACK_TYPES : ROUTE_TYPES;
 	}
 }
