@@ -5658,4 +5658,5 @@
     <string name="round_up">大約</string>
     <string name="upload_local_versions">上傳本機版本</string>
     <string name="download_cloud_versions">下載雲端版本</string>
+    <string name="map_widget_map_scale">地圖比例尺</string>
 </resources>
