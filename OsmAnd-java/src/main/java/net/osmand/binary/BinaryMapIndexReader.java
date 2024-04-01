@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
@@ -48,6 +49,7 @@ import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
@@ -360,6 +362,27 @@ public class BinaryMapIndexReader {
 	public boolean containsRouteData() {
 		return routingIndexes.size() > 0;
 	}
+	
+	public boolean containsActualRouteData(int x31, int y31, Set<String> checkedRegions) throws IOException {
+		int zoomToLoad = 14;
+		int x = x31 >> zoomToLoad;
+		int y = y31 >> zoomToLoad;
+		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
+				(x + 1) << zoomToLoad, y << zoomToLoad, (y + 1) << zoomToLoad, null);
+		for (RouteRegion reg : getRoutingIndexes()) {
+			if (checkedRegions != null) {
+				if (checkedRegions.contains(reg.getName())) {
+					continue;
+				}
+				checkedRegions.add(reg.getName());
+			}
+			List<RouteSubregion> res = searchRouteIndexTree(request, reg.getSubregions());
+			if (!res.isEmpty()) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public boolean containsRouteData(int left31x, int top31y, int right31x, int bottom31y, int zoom) {
 		for (RouteRegion ri : routingIndexes) {
@@ -476,8 +499,8 @@ public class BinaryMapIndexReader {
 				if (ls.contains(".")) {
 					ls = ls.substring(0, ls.indexOf("."));
 				}
-				if (ls.endsWith("_2")) {
-					ls = ls.substring(0, ls.length() - "_2".length());
+				if (ls.endsWith("_" + IndexConstants.BINARY_MAP_VERSION)) {
+					ls = ls.substring(0, ls.length() - ("_" + IndexConstants.BINARY_MAP_VERSION).length());
 				}
 				if (ls.lastIndexOf('_') != -1) {
 					ls = ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');

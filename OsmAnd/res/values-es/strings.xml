@@ -4666,7 +4666,7 @@
     <string name="includes_osm_changes_until">Incluye cambios de OSM hechos hasta %1$s.</string>
     <string name="next_live_update_date_and_time">Próxima actualización el %1$s a las %2$s.</string>
     <string name="routing_attr_motor_type_description">Elige el tipo de combustible del motor, necesario para estimar las emisiones de CO₂.</string>
-    <string name="routing_attr_motor_type_name">Motor del vehículo</string>
+    <string name="routing_attr_motor_type_name">Combustible del vehículo</string>
     <string name="routing_attr_goods_restrictions_name">Reparto de bienes</string>
     <string name="routing_attr_goods_restrictions_description">Considerar permisos de acceso para vehículos de bienes ligeros (bienes)</string>
     <string name="reset_all_settings_desc">¿Restablecer todos los ajustes por defecto\?</string>
@@ -5661,4 +5661,13 @@
 \n • El inicio de sesión en OpenStreetMap ha cambiado a OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Distancia en la navegación</string>
+    <string name="round_up">Redondeo</string>
+    <string name="precise">Preciso</string>
+    <string name="distance_during_navigation_description">Elija cómo se muestra la información de la distancia en los widgets de navegación (distancia al punto, próximo giro, carriles).
+\n
+\nElija \"%1$s\" para números exactos, o \"%2$s\" para una legibilidad más fácil.</string>
+    <string name="download_cloud_versions">Descargar versiones en la nube</string>
+    <string name="upload_local_versions">Cargar las versiones locales</string>
+    <string name="map_widget_map_scale">Escala de mapa</string>
 </resources>

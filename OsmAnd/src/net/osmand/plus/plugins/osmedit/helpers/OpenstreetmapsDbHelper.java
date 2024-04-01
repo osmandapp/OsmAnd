@@ -5,12 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.util.Algorithms;
@@ -94,21 +94,21 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 	}
 
 	public long getLastModifiedTime() {
-		long lastModifiedTime = BackupHelper.getLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
+		long lastModifiedTime = BackupUtils.getLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
 		if (lastModifiedTime == 0) {
 			File dbFile = context.getDatabasePath(OPENSTREETMAP_DB_NAME);
 			lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
-			BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+			BackupUtils.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
 		}
 		return lastModifiedTime;
 	}
 
 	public void setLastModifiedTime(long lastModifiedTime) {
-		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
+		BackupUtils.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME, lastModifiedTime);
 	}
 
 	private void updateLastModifiedTime() {
-		BackupHelper.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
+		BackupUtils.setLastModifiedTime(context, OPENSTREETMAP_DB_LAST_MODIFIED_NAME);
 	}
 
 	@NonNull

@@ -42,7 +42,7 @@
     <string name="context_menu_item_directions_from">Navigacija od</string>
     <string name="route_descr_map_location">Mapa :</string>
     <string name="route_descr_lat_lon">Šir %1$.3f, duž %2$.3f</string>
-    <string name="route_to">Početak:</string>
+    <string name="route_to">Odredište:</string>
     <string name="route_via">Preko:</string>
     <string name="route_from">Početak:</string>
     <string name="app_mode_default">Pretraga mape</string>
@@ -250,7 +250,7 @@
     <string name="internet_connection_required_for_online_route">Navođenje preko interneta ne radi kad niste na internetu.</string>
     <string name="tts_language_not_supported_title">Jezik nije podržan</string>
     <string name="tts_missing_language_data_title">Nedostaju podaci</string>
-    <string name="tts_missing_language_data">Idi do prodavnice radi preuzimanja odabranog jezika?</string>
+    <string name="tts_missing_language_data">Idi do prodavnice radi preuzimanja odabranog glasa?</string>
     <string name="gpx_option_reverse_route">Obrnuti smer trase</string>
     <string name="choose_audio_stream">Izlaz glasovnog navođenja</string>
     <string name="voice_stream_voice_call">Zvuk preko dolaznog poziva (prekida Blutut u kolima)</string>
@@ -865,7 +865,7 @@
 \n\tDa biste ih koristili, Idi na \'Meni\' → \'Podesi mapu\' → \'Izvor mape…\' → \'Vektorske mape bez interneta\'.</string>
     <string name="gpx_option_from_start_point">Postavi duž cele putanje</string>
     <string name="gpx_option_destination_point">Koristi trenutno odredište</string>
-    <string name="tts_language_not_supported">Odabrani jezik nije podržan od strane androidovog TTS, biće korišćen već podešeni jezik. Potraži drugi TTS u prodavnici?</string>
+    <string name="tts_language_not_supported">Odabrani glas nije podržan od strane androidovog TTS, biće korišćen već podešeni jezik. Potraži drugi TTS u prodavnici?</string>
     <string name="local_index_action_do">Treba da %1$s %2$s stavku(e). Nastaviti?</string>
     <string name="local_index_items_restored">%1$d of %2$d stavke(i) uključeno.</string>
     <string name="configure_screen_quick_action">Brze radnje</string>
@@ -886,7 +886,7 @@
     <string name="missing_write_external_storage_permission">OsmAnd nema dozvole da koristi memorijsku karticu</string>
     <string name="update_now">Ažuriraj sada</string>
     <string name="live_update">Live ažuriranje</string>
-    <string name="only_download_over_wifi">Preuzimaj samo na WiFi</string>
+    <string name="only_download_over_wifi">Preuzimaj preko WiFi</string>
     <string name="dashboard_or_drawer_description">Postoji izbor da li želiš da upravljaš menijem ili upravljačkom tablom. Tvoj izbor uvek možeš promeniti u podešavanjima upravljačke table.</string>
     <string name="dashboard_or_drawer_title">Upravljačka tabla ili meni</string>
     <string name="use_drawer_btn">Koristi meni</string>
@@ -996,7 +996,7 @@
     <string name="rendering_attr_noPolygons_description">Učini sve mogućnosti područja tla transparentnima na mapi.</string>
     <string name="route_kr">Drži desno i nastavi</string>
     <string name="route_kl">Drži levo i nastavi</string>
-    <string name="route_roundabout">Kružni tok: Izađi na izlazu %1$d. i nastavi</string>
+    <string name="route_roundabout">Kružni tok: Izađi na izlaz %1$d. i nastavi</string>
     <string name="share_route_subject">Ruta podeljena preko OsmAnd</string>
     <string name="share_route_as_gpx">Podeli rutu kao GPX fajl</string>
     <string name="asap">Odmah</string>
@@ -1331,7 +1331,7 @@
     <string name="lang_hy">Armenijski</string>
     <string name="lang_ar">Arapski</string>
     <string name="lang_al">Albanski</string>
-    <string name="lang_af">Afrikaans</string>
+    <string name="lang_af">Afrikaanski</string>
     <string name="lang_en_gb">Engleski (britanski)</string>
     <string name="lang_en">Engleski</string>
     <string name="lang_pt_br">Portugalski (brazilski)</string>
@@ -2017,7 +2017,7 @@
     <string name="city_type_district">Distrikt</string>
     <string name="shared_string_from">iz</string>
     <string name="postcode">Poštanski broj</string>
-    <string name="search_categories">Kategorije</string>
+    <string name="search_categories">TOI kategorije</string>
     <string name="share_history_subject">deljeno preko OsmAnd-a</string>
     <string name="dist_away_from_my_location">Traži %1$s udaljeno</string>
     <string name="show_something_on_map">Prikazati na mapi %1$s</string>
@@ -2385,7 +2385,7 @@
     <string name="regions">Oblasti</string>
     <string name="favorite_category_add_new_title">Dodaj novu kategoriju</string>
     <string name="favorite_category_name">Naziv kategorije</string>
-    <string name="favorite_category_dublicate_message">Upotrebi ime kategorije koja već ne postoji.</string>
+    <string name="favorite_category_dublicate_message">Ime već postoji.</string>
     <string name="shared_string_send">Šalji</string>
     <string name="share_menu_location">Deli poziciju</string>
     <string name="share_geo">geo:</string>
@@ -2400,9 +2400,9 @@
     <string name="empty_state_markers_history_desc">Markeri označeni kao pređene će se pojaviti na ekranu.</string>
     <string name="empty_state_markers_groups_desc">Uvezi grupe favorita ili međuodredišta kao markere.</string>
     <string name="empty_state_markers_groups">Uvezi grupe</string>
-    <string name="empty_state_markers_active_desc">Dugo ili kratko pritisni na „Moja mesta“, onda pritisni zastavicu kad se pojavi.</string>
+    <string name="empty_state_markers_active_desc">Dugo ili kratko pritisni na „Moja mesta i trase“, onda pritisni zastavicu kad se pojavi.</string>
     <string name="empty_state_markers_active">Napravi oznake na mapi!</string>
-    <string name="add_group_descr">Uvezi grupe izfavorita ili iz GPX međuodredišnih tačaka.</string>
+    <string name="add_group_descr">Uvezi grupe iz favorita ili iz GPX međuodredišnih tačaka.</string>
     <string name="add_group">Dodaj skup</string>
     <string name="favourites_group">Kategorija favorita</string>
     <string name="shared_string_gpx_waypoints">Međuodredišta</string>
@@ -2587,8 +2587,8 @@
     <string name="settings_item_write_error">Nisam uspeo da upišem %1$s.</string>
     <string name="settings_item_import_error">Nisam uspeo da uvezem iz „%1$s”.</string>
     <string name="select_track_file">Izaberi fajl trase</string>
-    <string name="shared_string_languages">Jezici</string>
-    <string name="shared_string_language">Jezik</string>
+    <string name="shared_string_languages">Glasovi</string>
+    <string name="shared_string_language">Glas</string>
     <string name="shared_string_all_languages">Svi jezici</string>
     <string name="wiki_menu_download_descr">Za prikaz Wikipedia TOI su potrebne dodatne mape.</string>
     <string name="select_wikipedia_article_langs">Odaberi jezik za Vikipedijine članke na mapi. Prebaci na bilo koji drugi dostupni jezik dok čitaš članak.</string>
@@ -2811,7 +2811,7 @@
     <string name="shared_string_color">Kolor</string>
     <string name="shared_string_end_time">Vreme dolaska</string>
     <string name="shared_string_start_time">Vreme polaska</string>
-    <string name="shared_string_max">Max</string>
+    <string name="shared_string_max">Maks</string>
     <string name="shared_string_time_span">Vremenski raspon</string>
     <string name="shared_string_time_moving">Pomeranje vremena</string>
     <string name="average_speed">Prosečna brzina</string>
@@ -3099,7 +3099,7 @@
     <string name="shared_string_video">Video</string>
     <string name="shared_string_tracks">Trase</string>
     <string name="shared_string_my_favorites">Favoriti</string>
-    <string name="shared_string_my_places">Moja mesta</string>
+    <string name="shared_string_my_places">Moja mesta i trase</string>
     <string name="shared_string_add_to_favorites">Dodaj u \'Favorite\'</string>
     <string name="shared_string_add">Dodaj</string>
     <string name="shared_string_address">Adrese</string>
@@ -3188,11 +3188,11 @@
     <string name="online_webpage_warning">Strana je dostupna samo na internetu. Otvori je u čitaču veba?</string>
     <string name="shared_string_travel_book">Knjiga putovanja</string>
     <string name="select_travel_book">Odaberi knjigu putovanja</string>
-    <string name="shared_string_wifi_only">Samo na Wi-Fi</string>
+    <string name="shared_string_wifi_only">Samo preko Wi-Fi</string>
     <string name="wikivoyage_download_pics_descr">Slike iz članaka mogu biti preuzimane zbog pristupa i bez interneta. 
 \nUvek dostupno iz „Istraži“ → „Mogućnosti“.</string>
     <string name="wikivoyage_download_pics">Preuzimaj slike</string>
-    <string name="shared_string_only_with_wifi">Samo na WiFi</string>
+    <string name="shared_string_only_with_wifi">Samo preko WiFi</string>
     <string name="shared_string_do">Uradi</string>
     <string name="shared_string_dont">Nemoj</string>
     <string name="purchase_dialog_subtitle">Odaberi pogodne stavke</string>
@@ -3448,7 +3448,7 @@
     <string name="button_rate">Oceni</string>
     <string name="rate_dialog_descr">Podeli svoje iskustvo sa nama i oceni naš rad na Google Play.</string>
     <string name="shared_string_icon">Ikona</string>
-    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_color_magenta">Madženta</string>
     <string name="process_downloading_service">OsmAnd servis preuzimanja</string>
     <string name="press_again_to_change_the_map_orientation">Tapni ponovo za promenu rotacije mape</string>
     <string name="last_launch_crashed">Poslednje izvršavanje programa nije uspelo. Pomozi nam da poboljšamo OsmAnd tako što ćeš podeliti poruku o grešci sa nama.</string>
@@ -3593,7 +3593,7 @@
     <string name="manage_profiles">Upravljanje profilima aplikacije…</string>
     <string name="manage_profiles_descr">Napravi, uvezi, izmeni profile</string>
     <string name="reset_to_default">Vrati na fabrička podešavanja</string>
-    <string name="language_and_output">Jezik i ulaz</string>
+    <string name="language_and_output">Glas i ulaz</string>
     <string name="screen_alerts_descr">Upozorenja se prikazuju u donjem levom uglu ekrana za vreme navođenja.</string>
     <string name="general_settings_profile_descr">Tema programa, jedinice, oblast</string>
     <string name="configure_navigation">Podešavanje navigacije</string>
@@ -3739,7 +3739,7 @@
     <string name="save_heading_descr">Sačuvaj zaglavlje svakoj tački trase prilikom snimanja.</string>
     <string name="save_heading">Uključi naslov</string>
     <string name="add_new_profile_q">Dodaj novi profil ’%1$s’?</string>
-    <string name="personal_category_name">Lično</string>
+    <string name="personal_category_name">Moji favoriti</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="edit_profiles">Izmeni profile</string>
@@ -4962,10 +4962,10 @@
     <string name="shared_string_new_track">Nova trasa</string>
     <string name="map_2d_mode_action">2D prikaz</string>
     <string name="map_3d_mode_action">3D prikaz</string>
-    <string name="rendering_value_sector3_name">Sector 3</string>
+    <string name="rendering_value_sector3_name">Sektor 3</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
     <string name="rendering_value_sector2_name">Sector 2</string>
-    <string name="rendering_value_sector5_name">Sector 5</string>
+    <string name="rendering_value_sector5_name">Sektor 5</string>
     <string name="rendering_value_small_name">Mali</string>
     <string name="rendering_value_name_only_name">Samo ime</string>
     <string name="device_disconnected">Nepovezan %1$s</string>
@@ -5057,7 +5057,7 @@
 \n- Ovaj uređaj smešten blizu senzora</string>
     <string name="share_link">Deli link</string>
     <string name="shared_string_modified">Izmenjeno</string>
-    <string name="map_settings_weather_cloud">Cloud</string>
+    <string name="map_settings_weather_cloud">Oblak</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linije kolor sheme</string>
     <string name="shared_string_road_maps">Mape puteva</string>
     <string name="add_new_button">Dodaj novo dugme</string>
@@ -5270,7 +5270,7 @@
     <string name="visible_in_3d_mode">Vidljivo u 3D prikazu</string>
     <string name="shared_string_visible_on_map">Prikazati na mapi</string>
     <string name="no_poi_for_category">TOI nije pronađen</string>
-    <string name="rendering_value_sector4_name">Sector 4</string>
+    <string name="rendering_value_sector4_name">Sektor 4</string>
     <string name="device_connected">Nepovezan je %1$s</string>
     <string name="running_scds_device_name">Aktivan uređaj</string>
     <string name="external_device_blood_pressure">Krvni pritisak</string>
@@ -5283,7 +5283,7 @@
     <string name="number_of_tracks">%1$s trase</string>
     <string name="search_track_by_name">Traži trase po imenu</string>
     <string name="no_search_results">Nema rezultata</string>
-    <string name="poi_categories">TOI kategorije</string>
+    <string name="poi_categories">TOI Kategorije</string>
     <string name="is_imported">%1$s je uvezen.</string>
     <string name="external_device_connected">Povezan</string>
     <string name="proxy_port_max_warning">Maksimalna vrednost priključnika je %1$s</string>
@@ -5666,4 +5666,13 @@
 \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation_description">Odaberi način prikaza informacija o udaljenosti u vidžetima (udaljenost do tačke, sledeći skretanje, trake).
+\n
+\nOdaberi “%1$s”za tačne brojeve ili “%2$s” za lakšu čitljivost.</string>
+    <string name="precise">Preciznije</string>
+    <string name="round_up">Zaokružiti</string>
+    <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
+    <string name="upload_local_versions">Preuzmi lokalne verzije</string>
+    <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
+    <string name="map_widget_map_scale">Razmera mape</string>
 </resources>

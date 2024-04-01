@@ -595,8 +595,8 @@ public class BinaryMapPoiReaderAdapter {
 				Amenity am = readPoiPoint(0, Integer.MAX_VALUE, 0, Integer.MAX_VALUE, x, y, zoom, req, region, false);
 				codedIS.popLimit(oldLim);
 				if (am != null) {
-					boolean matches = matcher.matches(am.getName().toLowerCase()) ||
-							matcher.matches(am.getEnName(true).toLowerCase());
+					boolean matches = matcher.matches(am.getName().toLowerCase())
+							|| matcher.matches(am.getEnName(true).toLowerCase());
 					if (!matches) {
 						for (String s : am.getOtherNames()) {
 							matches = matcher.matches(s.toLowerCase());
@@ -606,8 +606,7 @@ public class BinaryMapPoiReaderAdapter {
 						}
 						if (!matches) {
 							for (String key : am.getAdditionalInfoKeys()) {
-								if(!key.contains("_name") && 
-									!key.equals("brand")) {
+								if (!key.contains("_name") && !key.equals("brand")) {
 									continue;
 								}
 								matches = matcher.matches(am.getAdditionalInfo(key));

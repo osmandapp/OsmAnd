@@ -3513,7 +3513,7 @@
     <string name="favorites_item">Favoritter</string>
     <string name="subscription_osmandlive_item">Abonnement - OsmAnd Live</string>
     <string name="navigation_profiles_item">Navigationsprofiler</string>
-    <string name="tracker_item">OsmAnd Tracker</string>
+    <string name="tracker_item">OsmAnd tracker</string>
     <string name="osmand_purchases_item">OsmAnd køb</string>
     <string name="quick_action_transport_descr">En knap til at vise eller skjule offentlig transport på kortet.</string>
     <string name="create_edit_poi">Opret eller rediger IP</string>
@@ -5665,4 +5665,13 @@
 \n • OpenStreetMap-login ændret til OAuth 2.0
 \n
 \n</string>
+    <string name="precise">Præcis</string>
+    <string name="round_up">Rund op</string>
+    <string name="distance_during_navigation_description">Vælg, hvordan afstandsinformation skal vises i navigationsmoduler (afstand til punkt, næste sving, baner).
+\n
+\nVælg “%1$s” for nøjagtige tal eller “%2$s” for bedre læsbarhed.</string>
+    <string name="distance_during_navigation">Afstand under navigation</string>
+    <string name="download_cloud_versions">Download cloud-versioner</string>
+    <string name="upload_local_versions">Upload lokale versioner</string>
+    <string name="map_widget_map_scale">Kortskala</string>
 </resources>

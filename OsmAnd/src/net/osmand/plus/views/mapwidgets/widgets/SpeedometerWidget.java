@@ -59,19 +59,26 @@ public class SpeedometerWidget {
 	private final static int PREVIEW_VALUE = 85;
 
 	private final static int SPEEDOMETER_AA_STROKE = 3;
-	private final static int SPEEDOMETER_WIDTH_M = 72;
-	private final static int SPEEDOMETER_WIDTH_M_AA = 88 + SPEEDOMETER_AA_STROKE;
+	private final static int SPEEDOMETER_WIDTH_M = 88;
+	private final static int SPEEDOMETER_WIDTH_M_AA = 85 + SPEEDOMETER_AA_STROKE * 2;
 	private final static int SPEEDOMETER_HEIGHT_M = 72;
-	private final static int SPEEDOMETER_HEIGHT_AA_M = 72 + SPEEDOMETER_AA_STROKE;
+	private final static int SPEEDOMETER_HEIGHT_AA_M = 66 + SPEEDOMETER_AA_STROKE * 2;
 	private final static int SPEEDOMETER_WIDTH_L = 126;
-	private final static int SPEEDOMETER_WIDTH_AA_L = 126 + SPEEDOMETER_AA_STROKE;
+	private final static int SPEEDOMETER_WIDTH_AA_L = 120 + SPEEDOMETER_AA_STROKE * 2;
+	private final static int SPEEDOMETER_HEIGHT_S = 56;
+	private final static int SPEEDOMETER_HEIGHT_AA_S = 50 + SPEEDOMETER_AA_STROKE * 2;
+	private final static int SPEEDOMETER_WIDTH_S = 72;
+	private final static int SPEEDOMETER_WIDTH_AA_S = 66 + SPEEDOMETER_AA_STROKE * 2;
 	private final static int SPEEDOMETER_HEIGHT_L = 96;
-	private final static int SPEEDOMETER_HEIGHT_AA_L = 96 + SPEEDOMETER_AA_STROKE;
+	private final static int SPEEDOMETER_HEIGHT_AA_L = 93 + SPEEDOMETER_AA_STROKE * 2;
+	private final static int SPEEDOMETER_TEXT_SIZE_S = 24;
 	private final static int SPEEDOMETER_TEXT_SIZE_M = 36;
 	private final static int SPEEDOMETER_UNIT_TEXT_SIZE = 11;
 	private final static int SPEEDOMETER_TEXT_SIZE_L = 60;
+	private final static int SPEED_LIMIT_TEXT_SIZE_S = 24;
 	private final static int SPEED_LIMIT_TEXT_SIZE_M = 24;
 	private final static int SPEED_LIMIT_TEXT_SIZE_L = 36;
+	private final static int SPEED_LIMIT_SIZE_S = 72;
 	private final static int SPEED_LIMIT_SIZE_M = 72;
 	private final static int SPEED_LIMIT_SIZE_L = 94;
 
@@ -82,7 +89,8 @@ public class SpeedometerWidget {
 	private final static int US_SPEED_LIMIT_BOTTOM = 18;
 	private final static int CAN_SPEED_LIMIT_BOTTOM = 20;
 	private final static int SHADOW_SIZE = 4;
-	private static final int SPEED_LIMIT_WIDGET_OVERLAP_MARGIN = 14;
+	private static final int SPEED_LIMIT_WIDGET_OVERLAP_MARGIN = 6;
+	private static final int UNDEFINED_SPEED = -1;
 
 
 	private final OsmandApplication app;
@@ -104,7 +112,7 @@ public class SpeedometerWidget {
 	private ApplicationMode mode;
 	private WidgetSize previousWidgetSize;
 
-	private float cachedSpeed;
+	private float cachedSpeed = UNDEFINED_SPEED;
 	private String cachedSpeedLimit;
 	private boolean lastNightMode;
 
@@ -177,6 +185,19 @@ public class SpeedometerWidget {
 				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_L);
 				speedLimitDescriptionParams.setMargins(0, dpToPx(14), 0, 0);
 				break;
+			case SMALL:
+				speedometerLayoutParams.height = dpToPx(SPEEDOMETER_HEIGHT_S);
+				speedometerLayoutParams.width = dpToPx(SPEEDOMETER_WIDTH_S);
+				speedometerContainer.setLayoutParams(speedometerLayoutParams);
+				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE), dpToPx(SPEEDOMETER_PADDING_TOP_BOTTOM), dpToPx(SPEEDOMETER_PADDING_SIDE), dpToPx(SPEEDOMETER_PADDING_TOP_BOTTOM));
+				speedometerValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEEDOMETER_TEXT_SIZE_S);
+
+				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_S);
+				speedLimitLayoutParams.width = dpToPx(SPEED_LIMIT_SIZE_S);
+				speedLimitContainer.setLayoutParams(speedLimitLayoutParams);
+				speedLimitValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEED_LIMIT_TEXT_SIZE_S);
+				speedLimitDescriptionParams.setMargins(0, dpToPx(14), 0, 0);
+				break;
 		}
 	}
 
@@ -205,7 +226,7 @@ public class SpeedometerWidget {
 			updateColor(drawSettings != null ? drawSettings.isNightMode() : nightMode);
 		}
 		boolean show = shouldShowWidget();
-		if (routingHelper.isFollowingMode() && show) {
+		if (show) {
 			boolean isChanged = false;
 			if (lastNightMode != nightMode) {
 				lastNightMode = nightMode;
@@ -216,7 +237,7 @@ public class SpeedometerWidget {
 				float updateThreshold = cachedSpeed < LOW_SPEED_THRESHOLD_MPS
 						? LOW_SPEED_UPDATE_THRESHOLD_MPS
 						: UPDATE_THRESHOLD_MPS;
-				if (Math.abs(location.getSpeed() - cachedSpeed) > updateThreshold) {
+				if (Math.abs(location.getSpeed() - cachedSpeed) > updateThreshold || cachedSpeed == UNDEFINED_SPEED) {
 					cachedSpeed = location.getSpeed();
 					isChanged = true;
 					OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
@@ -240,7 +261,8 @@ public class SpeedometerWidget {
 				AndroidUiHelper.updateVisibility(speedLimitContainer, alarm != null);
 			} else if (cachedSpeed != 0) {
 				cachedSpeed = 0;
-				setSpeedText(null, null);
+				OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
+				setSpeedText(formattedSpeed.value, formattedSpeed.unit);
 				AndroidUiHelper.updateVisibility(view, true);
 			} else {
 				AndroidUiHelper.updateVisibility(view, false);
@@ -252,15 +274,17 @@ public class SpeedometerWidget {
 					paint.setMaskFilter(new BlurMaskFilter(40, BlurMaskFilter.Blur.NORMAL));
 					int shadowColor = Color.BLACK;
 					WidgetSize newWidgetSize = settings.SPEEDOMETER_SIZE.getModeValue(mode);
-					float speedometerWidth = (newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_WIDTH_AA_L : SPEEDOMETER_WIDTH_M_AA) * density;
-					float speedometerHeight = (newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_HEIGHT_AA_L : SPEEDOMETER_HEIGHT_AA_M) * density;
+					float speedometerWidth = (newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_WIDTH_AA_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_WIDTH_AA_S : SPEEDOMETER_WIDTH_M_AA) * density;
+					float speedometerHeight = (newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_HEIGHT_AA_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_HEIGHT_AA_S : SPEEDOMETER_HEIGHT_AA_M) * density;
 					float speedLimitWidth = 0;
 					float speedLimitHeight = 0;
 					Bitmap speedLimitBitmap = null;
 					if (cachedSpeedLimit != null) {
-						Drawable speedLimitDrawable = getSpeedLimitDrawable(nightMode, density);
-						speedLimitWidth = (newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_SIZE_L : SPEED_LIMIT_SIZE_M) * density;
-						speedLimitHeight = (newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_SIZE_L : SPEED_LIMIT_SIZE_M) * density;
+						Drawable speedLimitDrawable = isUsaOrCanadaRegion() ?
+								AppCompatResources.getDrawable(app, R.drawable.ic_limit_us_canada) : getSpeedLimitDrawable(nightMode, density);
+						float speedLimitSize = (newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_SIZE_L : newWidgetSize == WidgetSize.SMALL ? SPEED_LIMIT_SIZE_S : SPEED_LIMIT_SIZE_M) * density;
+						speedLimitWidth = speedLimitSize;
+						speedLimitHeight = speedLimitSize;
 						if (speedLimitDrawable != null) {
 							speedLimitBitmap = getDrawableBitmap(speedLimitDrawable, (int) speedLimitWidth, (int) speedLimitHeight);
 						}
@@ -269,7 +293,7 @@ public class SpeedometerWidget {
 							(int) (Math.max(speedometerHeight, speedLimitHeight) + SHADOW_SIZE * 2 * density), Bitmap.Config.ARGB_8888);
 
 					Canvas widgetCanvas = new Canvas(widgetBitmap);
-					float speedometerLeft = drawSpeedometerPart(nightMode, density, paint, shadowColor,
+					float speedometerLeft = drawSpeedometerPart(nightMode, density,
 							newWidgetSize, speedometerWidth, speedometerHeight, widgetCanvas);
 
 					if (speedLimitBitmap != null) {
@@ -294,31 +318,31 @@ public class SpeedometerWidget {
 		return showSpeedometerSetting;
 	}
 
-	private float drawSpeedometerPart(boolean nightMode, float density, Paint paint, int shadowColor,
+	private float drawSpeedometerPart(boolean nightMode, float density,
 	                                  WidgetSize newWidgetSize, float speedometerWidth,
 	                                  float speedometerHeight, Canvas widgetCanvas) {
 		LayerDrawable speedometerDrawable = (LayerDrawable) app.getUIUtilities().getIcon(R.drawable.speedometer_aa_shape);
 		setDrawableColor((GradientDrawable) speedometerDrawable.getDrawable(0), nightMode);
 		GradientDrawable bg = ((GradientDrawable) speedometerDrawable.findDrawableByLayerId(R.id.background));
+		GradientDrawable stroke = ((GradientDrawable) speedometerDrawable.findDrawableByLayerId(R.id.stroke));
 		bg.setColor(ColorUtilities.getWidgetBackgroundColor(app, nightMode));
 		speedometerDrawable.setLayerInset(speedometerDrawable.findIndexByLayerId(R.id.background),
 				(int) (SPEEDOMETER_AA_STROKE * density),
 				(int) (SPEEDOMETER_AA_STROKE * density),
 				(int) (SPEEDOMETER_AA_STROKE * density),
 				(int) (SPEEDOMETER_AA_STROKE * density));
+		bg.setCornerRadius(8 * density);
+		stroke.setCornerRadius(10 * density);
 
 		((GradientDrawable) speedometerDrawable.findDrawableByLayerId(R.id.stroke))
 				.setColor(app.getColor(nightMode ? R.color.map_window_stroke_dark : R.color.map_alert_stroke_light));
 		Bitmap speedometerBg = getDrawableBitmap(speedometerDrawable, (int) speedometerWidth, (int) speedometerHeight);
-		float speedometerLeft = widgetBitmap.getWidth() - speedometerWidth - SHADOW_SIZE * density / 2;
+		float speedometerLeft = widgetBitmap.getWidth() - speedometerWidth;
 		float speedometerTop = (float) widgetBitmap.getHeight() / 2 - speedometerHeight / 2;
-		Bitmap speedometerShadowBitmap = getShadowBitmap(density, speedometerBg, shadowColor);
-		widgetCanvas.drawBitmap(speedometerShadowBitmap,
-				speedometerLeft - (float) (speedometerShadowBitmap.getWidth() - speedometerBg.getWidth()) / 2,
-				speedometerTop - (float) (speedometerShadowBitmap.getHeight() - speedometerBg.getHeight()) / 2,
-				paint);
 		widgetCanvas.drawBitmap(speedometerBg, speedometerLeft, speedometerTop, null);
-		drawCurrentSpeed(widgetCanvas, newWidgetSize == WidgetSize.LARGE, density);
+		Rect speedArea = new Rect((int) speedometerLeft, (int) speedometerTop, (int) (speedometerLeft + speedometerBg.getWidth()), (int) (speedometerTop + speedometerBg.getHeight()));
+		int textSize = newWidgetSize == WidgetSize.LARGE ? SPEEDOMETER_TEXT_SIZE_L : newWidgetSize == WidgetSize.SMALL ? SPEEDOMETER_TEXT_SIZE_S : SPEEDOMETER_TEXT_SIZE_M;
+		drawCurrentSpeed(widgetCanvas, textSize, speedArea, density);
 
 		return speedometerLeft;
 	}
@@ -333,12 +357,7 @@ public class SpeedometerWidget {
 		int speedLimitTop = (int) ((float) widgetBitmap.getHeight() / 2 - speedLimitHeight / 2);
 		Rect alertRect = new Rect(speedLimitLeft, speedLimitTop,
 				speedLimitLeft + speedLimitBitmap.getWidth(), speedLimitTop + speedLimitBitmap.getHeight());
-		if (isUsaOrCanadaRegion()) {
-			Bitmap speedLimitShadowBitmap = getShadowBitmap(density, speedLimitBitmap, shadowColor);
-			widgetCanvas.drawBitmap(speedLimitShadowBitmap,
-					alertRect.left - (float) (speedLimitShadowBitmap.getWidth() - speedLimitBitmap.getWidth()) / 2,
-					alertRect.top - (float) (speedLimitShadowBitmap.getHeight() - speedLimitBitmap.getHeight()) / 2, paint);
-		} else {
+		if (!isUsaOrCanadaRegion()) {
 			ShapeDrawable sd = new ShapeDrawable();
 			OvalShape os = new OvalShape();
 			sd.getPaint().setColor(shadowColor);
@@ -353,22 +372,14 @@ public class SpeedometerWidget {
 					alertRect.top - (int) (SHADOW_SIZE * density / 2), null);
 		}
 		widgetCanvas.drawBitmap(speedLimitBitmap, alertRect.left, alertRect.top, null);
-		drawSpeedLimit(widgetCanvas, newWidgetSize == WidgetSize.LARGE, density, alertRect);
+		drawSpeedLimit(widgetCanvas, newWidgetSize == WidgetSize.LARGE ? SPEED_LIMIT_TEXT_SIZE_L : newWidgetSize == WidgetSize.SMALL ? SPEED_LIMIT_TEXT_SIZE_S : SPEED_LIMIT_TEXT_SIZE_M, density, alertRect);
 	}
 
-	@NonNull
-	private Bitmap getShadowBitmap(float density, Bitmap srcBitmap, int shadowColor) {
-		BitmapDrawable shadowDrawable = new BitmapDrawable(app.getResources(), srcBitmap);
-		shadowDrawable.setTint(shadowColor);
-		return getDrawableBitmap(shadowDrawable, srcBitmap.getWidth() + (int) (SHADOW_SIZE * 2 * density),
-				srcBitmap.getHeight() + (int) (SHADOW_SIZE * 2 * density));
-	}
-
-	private void drawSpeedLimit(Canvas canvas, boolean isLarge, float density, Rect alertRect) {
+	private void drawSpeedLimit(Canvas canvas, int textSize, float density, Rect alertRect) {
 		TextPaint textPaint = new TextPaint();
 		textPaint.setAntiAlias(true);
 		textPaint.setColor(app.getColor(R.color.widgettext_day));
-		textPaint.setTextSize((isLarge ? SPEED_LIMIT_TEXT_SIZE_L : SPEED_LIMIT_TEXT_SIZE_M) * density);
+		textPaint.setTextSize(textSize * density);
 		textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
 		Rect textBounds = new Rect();
@@ -385,19 +396,19 @@ public class SpeedometerWidget {
 		canvas.drawText(cachedSpeedLimit, x, y, textPaint);
 	}
 
-	private void drawCurrentSpeed(Canvas canvas, boolean isLarge, float density) {
+	private void drawCurrentSpeed(Canvas canvas, int textSize, Rect speedArea, float density) {
 		TextPaint textPaint = new TextPaint();
 		textPaint.setAntiAlias(true);
 		textPaint.setColor(lastNightMode ? app.getColor(R.color.widgettext_night) : app.getColor(R.color.widgettext_day));
-		textPaint.setTextSize((isLarge ? SPEEDOMETER_TEXT_SIZE_L : SPEEDOMETER_TEXT_SIZE_M) * density);
+		textPaint.setTextSize(textSize * density);
 		textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 
 		OsmAndFormatter.FormattedValue formattedSpeed = OsmAndFormatter.getFormattedSpeedValue(cachedSpeed, app);
 		Rect textBounds = new Rect();
 		textPaint.getTextBounds(formattedSpeed.value, 0, formattedSpeed.value.length(), textBounds);
 		float speedWidth = textPaint.measureText(formattedSpeed.value);
-		float x = canvas.getWidth() - speedWidth - SPEEDOMETER_PADDING_SIDE_AA * density;
-		float y = (isLarge ? SPEEDOMETER_TEXT_SIZE_L : SPEEDOMETER_TEXT_SIZE_M) * density + SPEEDOMETER_PADDING_TOP_BOTTOM_AA * density;
+		float x = canvas.getWidth() - speedWidth - SPEEDOMETER_PADDING_SIDE_AA * density - SPEEDOMETER_AA_STROKE * density;
+		float y = speedArea.top + SPEEDOMETER_PADDING_TOP_BOTTOM_AA * density /*+ SPEEDOMETER_AA_STROKE * density */+ textBounds.height();
 		canvas.drawText(formattedSpeed.value, x, y, textPaint);
 
 		float unitTextSize = SPEEDOMETER_UNIT_TEXT_SIZE * density;
@@ -408,8 +419,8 @@ public class SpeedometerWidget {
 		textPaint.getTextBounds(speedUnitText, 0, speedUnitText.length(), speedUnitRect);
 		float speedUnitWidth = speedUnitRect.width();
 
-		x = canvas.getWidth() - speedUnitWidth - SPEEDOMETER_PADDING_SIDE_AA * density;
-		y = canvas.getHeight() - unitTextSize;
+		x = canvas.getWidth() - speedUnitWidth - SPEEDOMETER_PADDING_SIDE_AA * density /*- SPEEDOMETER_AA_STROKE * density*/;
+		y = speedArea.bottom - SPEEDOMETER_PADDING_TOP_BOTTOM_AA * density/* - SPEEDOMETER_AA_STROKE * density*/;
 		textPaint.setColor(app.getColor(R.color.text_color_secondary_dark));
 		canvas.drawText(speedUnitText, x, y, textPaint);
 	}

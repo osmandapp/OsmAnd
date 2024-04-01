@@ -4813,7 +4813,7 @@
     <string name="map_widget_ant_bicycle_dist_desc">Mostra la distanza percorsa</string>
     <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
     <string name="weather_plugin_description">Fornisce
-\n- previsioni meteo, 24 ore per 7 giorni, con 5 livelli
+\n- previsioni meteo, 24 ore su 24, 7 giorni su 7, con 5 livelli
 \n- widget localizzati
 \n- isoterme / isobare
 \n
@@ -4874,7 +4874,7 @@
     <string name="precipitation_widget_desc">Mostra le precipitazioni del centro attuale della mappa.</string>
     <string name="temperature_widget_desc">Mostra la temperatura del centro attuale della mappa.</string>
     <string name="weather_pressure_hpa">hPa</string>
-    <string name="weather_pressure_inhg">mmHg</string>
+    <string name="weather_pressure_inhg">inHg</string>
     <string name="weather_pressure_mmhg">mmHg</string>
     <string name="location_simulation_speedup">Accelerazione della simulazione</string>
     <string name="map_widget_sunset_desc">Mostra l\'ora del prossimo tramonto o il tempo che manca al prossimo tramonto.</string>
@@ -5651,4 +5651,13 @@
 \n• L\'accesso a OpenStreetMap è passato a OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Distanza durante la navigazione</string>
+    <string name="auto_zoom_discrete">Discreto</string>
+    <string name="distance_during_navigation_description">Scegli la modalità di visualizzazione delle informazioni sulla distanza nei widget di navigazione (distanza dal punto, svolta successiva, corsie).
+\n
+\nScegli \"%1$s\" per numeri esatti o \"%2$s\" per una più facile leggibilità.</string>
+    <string name="precise">Preciso</string>
+    <string name="download_cloud_versions">Scarica le versioni dal cloud</string>
+    <string name="upload_local_versions">Carica le versioni locali</string>
+    <string name="round_up">Arrotondare</string>
 </resources>

@@ -2,7 +2,7 @@
 <resources>
     <string name="shared_string_select">Означи</string>
     <string name="shared_string_enable">Омогући</string>
-    <string name="altitude">Висина</string>
+    <string name="altitude">Алтитуда</string>
     <string name="shared_string_search">Тражи</string>
     <string name="shared_string_ok">У реду</string>
     <string name="shared_string_update">Надгради</string>

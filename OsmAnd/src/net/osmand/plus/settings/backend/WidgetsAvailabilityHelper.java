@@ -90,6 +90,7 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(NEXT_TURN, nextTurnSet);
 		regWidgetVisibility(SMALL_NEXT_TURN, smallNextTurnSet);
 		regWidgetVisibility(SECOND_NEXT_TURN, secondNextTurnSet);
+		
 		regWidgetAvailability(NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SMALL_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(SECOND_NEXT_TURN, exceptDefault);
@@ -99,9 +100,9 @@ public class WidgetsAvailabilityHelper {
 		regWidgetVisibility(DISTANCE_TO_DESTINATION, all);
 		regWidgetVisibility(TIME_TO_INTERMEDIATE, all);
 		regWidgetVisibility(TIME_TO_DESTINATION, all);
-		regWidgetVisibility(CURRENT_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
-				TRUCK, MOTORCYCLE, HORSE, MOPED, TRAIN);
-		regWidgetVisibility(MAX_SPEED, CAR, TRUCK, MOTORCYCLE, MOPED);
+		regWidgetVisibility(CURRENT_SPEED, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT,
+				HORSE, TRAIN);
+		regWidgetVisibility(MAX_SPEED, none);
 		regWidgetVisibility(ALTITUDE_MAP_CENTER, PEDESTRIAN, BICYCLE);
 		regWidgetVisibility(ALTITUDE_MY_LOCATION, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(INTERMEDIATE_DESTINATION, all);

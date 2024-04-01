@@ -179,7 +179,7 @@
     <string name="poi_hifi">Magasin Hi-Fi</string>
     <string name="poi_religion_hindu">Hindouisme</string>
     <string name="poi_hockey">Hockey</string>
-    <string name="poi_horse_track">Courses hippiques</string>
+    <string name="poi_horse_track">Piste hippique</string>
     <string name="poi_hospital">Hôpital</string>
     <string name="poi_hostel">Auberge de jeunesse</string>
     <string name="poi_hotel">Hôtel</string>
@@ -270,7 +270,7 @@
     <string name="poi_public_transport_platform">Transport en commun (attente des voyageurs)</string>
     <string name="poi_public_transport_station">Transport en commun (gare)</string>
     <string name="poi_quarry">Carrière</string>
-    <string name="poi_raceway">Circuit automobile</string>
+    <string name="poi_raceway">Circuit de courses motorisées</string>
     <string name="poi_racquet">Sport de raquette</string>
     <string name="poi_radar_transponder">Transpondeur radar (amer)</string>
     <string name="poi_railway_platform">Quai de gare</string>
@@ -4714,4 +4714,5 @@
     <string name="poi_healthcare_speciality_anthroposophical">Anthroposophique</string>
     <string name="poi_healthcare_speciality_aromatherapy">Aromathérapie</string>
     <string name="poi_border_zone">Zone frontière</string>
+    <string name="poi_reservation">Réservation</string>
 </resources>

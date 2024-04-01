@@ -651,7 +651,7 @@
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu https://osmand.net).</string>
     <string name="none_selected_gpx">Unue elektu GPX‑dosieron per frapetadi.</string>
     <string name="local_index_select_gpx_file">Elektu kurson</string>
-    <string name="gpx_split_interval">Fragmento</string>
+    <string name="gpx_split_interval">Fragmenti</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
     <string name="sort_by_name">Ordigi laŭ nomo</string>
     <string name="plugin_touringview_name">Turisma map-vido</string>
@@ -2156,7 +2156,7 @@
     <string name="file_can_not_be_moved">Ne povas movi dosieron.</string>
     <string name="shared_string_move">Movi</string>
     <string name="shared_string_time_moving">Tempo de movado</string>
-    <string name="shared_string_time_span">Tempa variejo</string>
+    <string name="shared_string_time_span">Variejo de tempo</string>
     <string name="shared_string_max">Maks.</string>
     <string name="shared_string_start_time">Komenca tempo</string>
     <string name="shared_string_end_time">Fina tempo</string>
@@ -5421,19 +5421,19 @@
     <string name="app_mode_baby_transport">Transporto de beboj</string>
     <string name="release_4_6">• Android Auto: aldonita 3D-reĝimo
 \n
-\n• spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por granadj dosieroj
+\n • spuroj: filtriloj kaj inteligentaj dosierujoj, optimumigita memor-uzo por grandaj dosieroj
 \n
-\n• modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon
+\n • modernigitaj supra kaj malsupra paneloj por eblo enmeti ĉiun fenestraĵon
 \n
-\n• plibonigita administrado de lokaj rimedoj
+\n • plibonigita administrado de lokaj rimedoj
 \n
-\n• eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj
+\n • eblo ŝanĝi klav-asignojn por eksteraj enigaj aparatoj
 \n
 \n • novaj fenestraĵoj: Glisrilato kaj Pozicio de Suno
 \n
-\n• OsmAnd-Nubo: aliro por forigitaj dosieroj
+\n • OsmAnd-Nubo: aliro por forigitaj dosieroj
 \n
-\n• plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento
+\n • plibonigita kolorigo de spuro en la reĝimo Dekliveco kun nova simetria gradiento
 \n
 \n • riparitaj problemoj pri travideblaj stataj strioj
 \n
@@ -5646,7 +5646,7 @@
 \n
 \n • eblo filtri suprojn laŭ datumoj de eksteraj sentiloj
 \n
-\n• subteno por pliajn etikedojn por GPX
+\n • subteno por pliajn etikedojn por GPX
 \n
 \n • elekto inter precizaj kaj rondigitaj valoroj por distancoj
 \n
@@ -5655,4 +5655,13 @@
 \n • OpenStreetMap: transigo al ensalut-metodo OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation">Distanco dum navigi</string>
+    <string name="precise">Preciza</string>
+    <string name="round_up">Rondigita</string>
+    <string name="distance_during_navigation_description">Maniero vidigi distancon sur navigaj fenestraĵoj (Distanco al celo/intercelo, Sekva turniĝo, Vetur-koridoroj).
+\n
+\nElektu “%1$s”-n por vidigi precizajn valorojn aŭ ”%2$s”-n por pli bona legeblo.</string>
+    <string name="download_cloud_versions">Elŝuti nubajn versiojn</string>
+    <string name="upload_local_versions">Alŝuti lokajn versiojn</string>
+    <string name="map_widget_map_scale">Skalo de mapo</string>
 </resources>

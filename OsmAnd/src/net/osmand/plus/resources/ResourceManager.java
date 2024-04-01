@@ -4,6 +4,8 @@ package net.osmand.plus.resources;
 import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
+import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -39,7 +41,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -514,9 +515,9 @@ public class ResourceManager {
 		close();
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress, false, true));
-		progress.notifyEvent(InitEvents.ASSETS_COPIED);
+		progress.notifyEvent(ASSETS_COPIED);
 		reloadIndexes(progress, warnings);
-		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
+		progress.notifyEvent(MAPS_INITIALIZED);
 		indexesLoadedOnStart = true;
 		return warnings;
 	}
@@ -581,9 +582,11 @@ public class ResourceManager {
 
 	public interface ReloadIndexesListener {
 
-		void reloadIndexesStarted();
+		default void reloadIndexesStarted() {
 
-		void reloadIndexesFinished(List<String> reloadIndexesWarnings);
+		}
+
+		void reloadIndexesFinished(@NonNull List<String> warnings);
 	}
 
 	public List<String> indexAdditionalMaps(@Nullable IProgress progress) {

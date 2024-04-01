@@ -3,7 +3,7 @@
 	<item android:id="@+id/stroke">
 		<shape android:shape="rectangle">
 			<solid android:color="@color/map_alert_stroke_light" />
-			<corners android:radius="8dp" />
+			<corners android:radius="10dp" />
 		</shape>
 	</item>
 	<item

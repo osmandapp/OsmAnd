@@ -44,7 +44,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -75,7 +75,6 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer.MapGestureType;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
@@ -827,14 +826,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void setMainLayer(BaseMapLayer mainLayer) {
 		this.mainLayer = mainLayer;
 		int zoom = currentViewport.getZoom();
-
+		double zoomFloatPart = currentViewport.getZoomFloatPart();
 		if (getMaxZoom() < zoom) {
 			zoom = getMaxZoom();
+			zoomFloatPart = 0;
 		}
 		if (getMinZoom() > zoom) {
 			zoom = getMinZoom();
+			zoomFloatPart = 0;
 		}
-		setZoomAndAnimationImpl(zoom, 0, 0);
+		setZoomAndAnimationImpl(zoom, 0, zoomFloatPart);
 		refreshMap();
 	}
 

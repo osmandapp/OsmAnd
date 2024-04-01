@@ -5650,4 +5650,13 @@
 \n • OpenStreetMap 登入已切換至 OAuth 2.0
 \n
 \n</string>
+    <string name="precise">精確</string>
+    <string name="distance_during_navigation_description">選擇距離資訊在導航小工具中的顯示方式（到點的距離、下一個轉彎、車道）。
+\n
+\n選擇「%1$s」以取得準確的數字，或選擇「%2$s」以提高可讀性。</string>
+    <string name="distance_during_navigation">導航時的距離</string>
+    <string name="round_up">大約</string>
+    <string name="upload_local_versions">上傳本機版本</string>
+    <string name="download_cloud_versions">下載雲端版本</string>
+    <string name="map_widget_map_scale">地圖比例尺</string>
 </resources>

@@ -5664,4 +5664,13 @@
 \n• Login OpenStreetMap dialihkan ke OAuth 2.0
 \n
 \n</string>
+    <string name="distance_during_navigation_description">Pilih bagaimana informasi jarak ditampilkan dalam widget navigasi (jarak antara titik, belokan berikutnya, lajur).
+\n
+\nPilih “%1$s” untuk angka persis, atau “%2$s” untuk keterbacaan yang lebih mudah.</string>
+    <string name="round_up">Dibulatkan</string>
+    <string name="distance_during_navigation">Jarak selama navigasi</string>
+    <string name="precise">Persis</string>
+    <string name="upload_local_versions">Unggah versi lokal</string>
+    <string name="download_cloud_versions">Unduh versi awan</string>
+    <string name="map_widget_map_scale">Skala peta</string>
 </resources>

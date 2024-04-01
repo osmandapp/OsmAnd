@@ -19,15 +19,15 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.MapButtonsHelper;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
@@ -62,21 +62,21 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(CustomOsmandPlugin.class);
 
-	private final int version;
-	private final String pluginId;
-	private String resourceDirName;
-	private Map<String, String> names = new HashMap<>();
-	private Map<String, String> descriptions = new HashMap<>();
-	private Map<String, String> iconNames = new HashMap<>();
-	private Map<String, String> imageNames = new HashMap<>();
+	protected final int version;
+	protected final String pluginId;
+	protected String resourceDirName;
+	protected Map<String, String> names = new HashMap<>();
+	protected Map<String, String> descriptions = new HashMap<>();
+	protected Map<String, String> iconNames = new HashMap<>();
+	protected Map<String, String> imageNames = new HashMap<>();
 
-	private Drawable icon;
-	private Drawable image;
+	protected Drawable icon;
+	protected Drawable image;
 
-	private List<String> rendererNames = new ArrayList<>();
-	private List<String> routerNames = new ArrayList<>();
-	private List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
-	private List<WorldRegion> customRegions = new ArrayList<>();
+	protected List<String> rendererNames = new ArrayList<>();
+	protected List<String> routerNames = new ArrayList<>();
+	protected List<SuggestedDownloadItem> suggestedDownloadItems = new ArrayList<>();
+	protected List<WorldRegion> customRegions = new ArrayList<>();
 
 	public CustomOsmandPlugin(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app);

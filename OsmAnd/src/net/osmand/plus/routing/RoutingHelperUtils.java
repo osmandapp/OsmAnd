@@ -116,8 +116,9 @@ public class RoutingHelperUtils {
 	                                              @NonNull Location previousRouteLocation,
 	                                              @NonNull Location currentRouteLocation,
 	                                              @NonNull Location nextRouteLocation) {
+		double dist = location.distanceTo(projection);
 		double maxDist = routingHelper.getMaxAllowedProjectDist(currentRouteLocation);
-		if (location.distanceTo(projection) >= maxDist) {
+		if (dist >= maxDist) {
 			return;
 		}
 
@@ -131,12 +132,10 @@ public class RoutingHelperUtils {
 				* projectionOffsetN;
 		float approximatedBearing = MapUtils.normalizeDegrees360(currentSegmentBearing + segmentsBearingDelta);
 
-		boolean setApproximated;
-		if (location.hasBearing()) {
+		boolean setApproximated = true;
+		if (location.hasBearing() && dist >= maxDist / 2) {
 			float rotationDiff = MapUtils.unifyRotationDiff(location.getBearing(), approximatedBearing);
 			setApproximated = Math.abs(rotationDiff) < MAX_BEARING_DEVIATION;
-		} else {
-			setApproximated = true;
 		}
 		if (setApproximated) {
 			projection.setBearing(approximatedBearing);

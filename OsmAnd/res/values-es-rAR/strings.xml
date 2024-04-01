@@ -4670,8 +4670,8 @@
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
     <string name="shared_string_mode">Modo</string>
-    <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
-    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="map_widget_time_to_intermediate">Tiempo al punto intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al punto intermedio</string>
     <string name="radius_ruler_mode_desc">Pulsa el widget para alternar el modo de «Regla radial».</string>
     <string name="lang_sat">Santalí</string>
     <string name="average_speed_skip_stops">Tener en cuenta las paradas</string>
@@ -5676,4 +5676,13 @@
 \n• Inicio de sesión en OpenStreetMap cambiado a OAuth2
 \n
 \n</string>
+    <string name="precise">Preciso</string>
+    <string name="round_up">Redondear</string>
+    <string name="distance_during_navigation_description">Elige cómo se muestra la información de distancia en los widgets de navegación (distancia al punto, próximo giro, carriles).
+\n
+\nElige «%1$s» para números exactos, o «%2$s» para una legibilidad más fácil.</string>
+    <string name="distance_during_navigation">Distancia al navegar</string>
+    <string name="download_cloud_versions">Descargar versiones de la nube</string>
+    <string name="upload_local_versions">Cargar versiones locales</string>
+    <string name="map_widget_map_scale">Escala del mapa</string>
 </resources>

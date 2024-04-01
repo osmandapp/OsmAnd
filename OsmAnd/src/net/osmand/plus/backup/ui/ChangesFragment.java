@@ -19,8 +19,10 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -33,6 +35,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -41,8 +44,12 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -108,6 +115,67 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 				activity.onBackPressed();
 			}
 		});
+
+		ImageView actionButton = toolbar.findViewById(R.id.action_button);
+		actionButton.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white));
+		actionButton.setContentDescription(getString(R.string.shared_string_more));
+		actionButton.setOnClickListener(this::showOptionsMenu);
+		AndroidUiHelper.updateVisibility(actionButton, true);
+	}
+
+	private void showOptionsMenu(@NonNull View view) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.upload_local_versions)
+				.setOnClickListener(item -> showConfirmationDialog(item.getTitle(), this::uploadLocalVersions))
+				.create());
+
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.download_cloud_versions)
+				.setOnClickListener(item -> showConfirmationDialog(item.getTitle(), this::downloadCloudVersions))
+				.create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		PopUpMenu.show(displayData);
+	}
+
+	private void showConfirmationDialog(@NonNull CharSequence title, @NonNull Runnable runnable) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(requireActivity(), nightMode));
+		builder.setTitle(title);
+		builder.setMessage(R.string.are_you_sure);
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> runnable.run());
+		builder.show();
+
+	}
+
+	private void uploadLocalVersions() {
+		ChangesTabFragment fragment = getSelectedFragment();
+		if (fragment != null) {
+			fragment.uploadLocalVersions();
+		}
+	}
+
+	private void downloadCloudVersions() {
+		ChangesTabFragment fragment = getSelectedFragment();
+		if (fragment != null) {
+			fragment.downloadCloudVersions();
+		}
+	}
+
+	@Nullable
+	private ChangesTabFragment getSelectedFragment() {
+		FragmentManager manager = getChildFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment.getClass() == tabType.fragment) {
+				return (ChangesTabFragment) fragment;
+			}
+		}
+		return null;
 	}
 
 	private void setupTabs(@NonNull View view) {
@@ -188,7 +256,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		if (info != null) {
 			switch (tabType) {
 				case RECENT_CHANGES_REMOTE:
-					return BackupHelper.getItemsMapForRestore(info, backup.getSettingsItems()).size() > 0;
+					return BackupUtils.getItemsMapForRestore(info, backup.getSettingsItems()).size() > 0;
 				case RECENT_CHANGES_LOCAL:
 					return info.filteredFilesToDelete.size() + info.filteredFilesToUpload.size() > 0;
 				default:
@@ -291,7 +359,7 @@ public class ChangesFragment extends BaseOsmAndFragment implements OnPrepareBack
 		private final int buttonIconId;
 		private final Class<?> fragment;
 
-		RecentChangesType(@StringRes int titleId, @StringRes int buttonTextId, @StringRes int buttonIconId, @NonNull Class<?> fragment) {
+		RecentChangesType(@StringRes int titleId, @StringRes int buttonTextId, @DrawableRes int buttonIconId, @NonNull Class<?> fragment) {
 			this.titleId = titleId;
 			this.buttonTextId = buttonTextId;
 			this.buttonIconId = buttonIconId;

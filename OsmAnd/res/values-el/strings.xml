@@ -4220,7 +4220,7 @@
     <string name="shutter_sound">Ήχος κλείστρου</string>
     <string name="help_article_purchases_ios_name">Αγορές σε iOS</string>
     <string name="external_device_characteristic_heart_rate">Καρδιακός παλμός</string>
-    <string name="osmand_cloud_deleting_account_descr">Σε λίγες στιγμές όαλ τα δεδομένα σας και ο λογαριασμός θα διαγραφούν από το OsmAnd Cloud.
+    <string name="osmand_cloud_deleting_account_descr">Σε λίγο όλα τα δεδομένα σας και ο λογαριασμός θα διαγραφούν από το OsmAnd Cloud.
 \n
 \nΌλα τα δεδομένα στη συσκευή παραμένουν ανέγγιχτα.</string>
     <string name="shared_string_class">Τάξη</string>
@@ -4316,4 +4316,19 @@
     <string name="activity_type_walking_name">Περίπατος</string>
     <string name="clear_key_assignment_desc">Η ανάθεση κουμπιού για την επιλεγμένη ενέργεια θα καθαριστεί και θα τεθεί σε Καμία.</string>
     <string name="map_widget_sun_position_desc">Αυτό το γραφικό στοιχείο δείχνει την ώρα μέχρι την ανατολή ή τη δύση του ηλίου, ανάλογα με την τρέχουσα ώρα.</string>
+    <string name="shared_sting_all_colors">Όλα τα χρώματα</string>
+    <string name="lang_ta_in">Ταμίλ (Ινδία)</string>
+    <string name="auto_zoom">Αυτόματο ζουμ</string>
+    <string name="map_settings_weather_wind">Άνεμος</string>
+    <string name="purchases_feature_desc_external_sensors">Εμφάνιση και καταγραφή δεδομένων από εξωτερικούς αισθητήρες: ταχύτητα ποδηλάτου, ισχύ ποδηλάτου, ρυθμός, και καρδιακός ρυθμός.</string>
+    <string name="external_sensors_support">Υποστήριξη εξωτερικών αισθητήρων</string>
+    <string name="external_sensors_plugin_name">Εξωτερικοί Αισθητήρες</string>
+    <string name="map_settings_weather_temp">Θερμοκρασία</string>
+    <string name="start_point">Έναρξη</string>
+    <string name="routing_type">Είδος διαδρομής</string>
+    <string name="speed_limit_warning">Προειδοποίηση ορίου ταχύτητας</string>
+    <string name="shared_string_weather">Καιρός</string>
+    <string name="map_3d_mode_description">Αγγίξτε τον χάρτη με δύο δάχτυλα και τα μετακινήσετε τον πάνω και κάτω για να προσαρμόσετε την κλίση του χάρτη.</string>
+    <string name="visible_in_3d_mode">Ορατό σε λειτουργία 3D</string>
+    <string name="map_3d_mode_hint">Με το παρατεταμένο πάτημα του κουμπιού επιτρέπει την αλλαγή της θέσης του κουμπιού.</string>
 </resources>

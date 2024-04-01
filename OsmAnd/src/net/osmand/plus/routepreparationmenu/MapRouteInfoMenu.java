@@ -53,7 +53,6 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -86,8 +85,24 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutin
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
-import net.osmand.plus.routepreparationmenu.cards.*;
+import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
+import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
+import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
+import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportBetaWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
+import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarningCard;
+import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
+import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -192,9 +207,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private boolean editButtonCollapsed;
 	private boolean addButtonCollapsing;
 	private boolean addButtonCollapsed;
-
-	private List<WorldRegion> suggestedMaps;
-	private boolean suggestedMapsOnlineSearch;
 
 	private interface OnButtonCollapsedListener {
 		void onButtonCollapsed(boolean success);
@@ -514,32 +526,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void updateSuggestedMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
-		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
-		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
-		if (fragmentRef != null && fragment.isVisible()) {
-			boolean updated = !Algorithms.objectEquals(missingMaps, suggestedMaps) || suggestedMapsOnlineSearch != onlineSearch;
-			if (updated) {
-				suggestedMaps = missingMaps;
-				suggestedMapsOnlineSearch = onlineSearch;
-				fragment.updateInfo();
-			}
-		}
-	}
-
-	public List<WorldRegion> getSuggestedMaps() {
-		return suggestedMaps;
-	}
-
-	public boolean isSuggestedMapsOnlineSearch() {
-		return suggestedMapsOnlineSearch;
-	}
-
-	public void clearSuggestedMissingMaps() {
-		suggestedMaps = null;
-		suggestedMapsOnlineSearch = false;
-	}
-
 	public void openMenuHeaderOnly() {
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null && fragmentRef.get().isVisible()) {
@@ -632,7 +618,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		boolean hasPrecalculatedMissingMaps = hasPrecalculatedMissingMaps();
 		boolean hasCalculatedMissingMaps = hasCalculatedMissingMaps(app);
 
 		List<BaseCard> menuCards = new ArrayList<>();
@@ -713,8 +698,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (hasPrecalculatedMissingMaps || suggestedMapsOnlineSearch) {
-				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
 			}
@@ -781,10 +764,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		this.menuCards = menuCards;
 		setBottomShadowVisible(bottomShadowVisible);
 		setupCards();
-	}
-
-	private boolean hasPrecalculatedMissingMaps() {
-		return !Algorithms.isEmpty(suggestedMaps);
 	}
 
 	private boolean hasCalculatedMissingMaps(@NonNull OsmandApplication app) {

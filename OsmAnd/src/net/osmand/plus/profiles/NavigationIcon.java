@@ -17,6 +17,7 @@ public enum NavigationIcon {
 	@DrawableRes
 	private final int iconId;
 
+	@DrawableRes
 	public int getIconId() {
 		return iconId;
 	}

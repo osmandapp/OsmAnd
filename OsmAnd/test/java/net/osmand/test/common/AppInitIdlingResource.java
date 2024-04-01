@@ -1,7 +1,7 @@
 package net.osmand.test.common;
 
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 
 import androidx.annotation.NonNull;

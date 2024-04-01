@@ -112,10 +112,9 @@ public class StreetNameWidget extends MapWidget {
 			turnDrawable.setColor(turnArrowColorId);
 		}
 
-		boolean hideStreetName = mapActivity.isTopToolbarActive()
-				|| mapActivity.shouldHideTopControls()
-				|| MapRouteInfoMenu.chooseRoutesVisible
-				|| MapRouteInfoMenu.waypointsVisible;
+		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible
+				|| MapRouteInfoMenu.waypointsVisible
+				|| mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		if (hideStreetName) {
 			updateVisibility(false);
 		} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {

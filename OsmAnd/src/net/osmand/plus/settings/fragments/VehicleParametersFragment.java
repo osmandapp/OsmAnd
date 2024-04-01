@@ -3,12 +3,14 @@ package net.osmand.plus.settings.fragments;
 import static net.osmand.plus.settings.backend.OsmandSettings.ROUTING_PREFERENCE_PREFIX;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.createRoutingParameterPref;
 import static net.osmand.router.GeneralRouter.DEFAULT_SPEED;
+import static net.osmand.router.GeneralRouter.MAX_AXLE_LOAD;
 import static net.osmand.router.GeneralRouter.MOTOR_TYPE;
 import static net.osmand.router.GeneralRouter.RoutingParameter;
 import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
 import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+import static net.osmand.router.GeneralRouter.WEIGHT_RATING;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -73,6 +75,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 				setupVehiclePropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile, derivedProfile);
 
 				setupRoutingParameterPref(parameters.get(MOTOR_TYPE));
+				setupRoutingParameterPref(parameters.get(MAX_AXLE_LOAD));
+				setupRoutingParameterPref(parameters.get(WEIGHT_RATING));
 				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
 				}

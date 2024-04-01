@@ -154,4 +154,10 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 		updateContent()
 	}
 
+	fun updateContent(loadTrackFinished: Boolean) {
+		if (loadTrackFinished){
+			smartFolderHelper.updateSmartFolderItems(smartFolder)
+		}
+		super.updateContent()
+	}
 }

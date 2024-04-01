@@ -24,9 +24,8 @@ import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
-	// this should be bigger (50-80m) but tests need to be fixed first
+
 	public static final float DIST_BEARING_DETECT = 15;
-	
 	public static final float DIST_BEARING_DETECT_UNMATCHED = 50;
 	
 	private RouteDataObject object;
