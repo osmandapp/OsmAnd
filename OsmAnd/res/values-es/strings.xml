@@ -5670,4 +5670,6 @@
     <string name="download_cloud_versions">Descargar versiones en la nube</string>
     <string name="upload_local_versions">Cargar las versiones locales</string>
     <string name="map_widget_map_scale">Escala de mapa</string>
+    <string name="shared_string_unchanged">Sin cambiar</string>
+    <string name="unchanged_parameter_summary">Cada pista conservará sus propios parámetros.</string>
 </resources>
