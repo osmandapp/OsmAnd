@@ -1478,6 +1478,9 @@ public class RouteResultPreparation {
 		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
+		if (prevSegm.getObject().getId() == currentSegm.getObject().getId()) {
+			return null;
+		}
 		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
 		// keep left/right
 		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
