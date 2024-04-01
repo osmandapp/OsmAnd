@@ -5673,4 +5673,6 @@
     <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
     <string name="map_widget_map_scale">Maßstab</string>
+    <string name="shared_string_unchanged">Unverändert</string>
+    <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
 </resources>
