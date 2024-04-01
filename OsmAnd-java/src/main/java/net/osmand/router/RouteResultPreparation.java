@@ -1478,9 +1478,6 @@ public class RouteResultPreparation {
 		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
-		if (prevSegm.getObject().getId() == currentSegm.getObject().getId()) {
-			return null;
-		}
 		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
 		// keep left/right
 		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
@@ -2211,7 +2208,7 @@ public class RouteResultPreparation {
 					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 					int lanesCnt = turnType.getLanes().length;
 					if (cnt == cntAll && cnt >= 2 && (lanesCnt - cnt) <= 1) {
-						curr.setTurnType(null);
+						//curr.setTurnType(null);
 					}
 				}
 			}
