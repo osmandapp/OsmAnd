@@ -99,6 +99,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private final SelectedGpxFile currentTrack;
 
 	private int currentTrackIndex = 1;
+	private int lastFollowedRouteHashCode = -1;
+	private boolean isAutomaticallyRecording = false;
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
@@ -529,7 +531,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+			if ((shouldRecordAutomatically() || isAutomaticallyRecording) && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+				lastFollowedRouteHashCode = getCurrentRouteHashCode();
+				isAutomaticallyRecording = true;
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
@@ -824,6 +828,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 
+	public void onStopRecording(){
+		isAutomaticallyRecording = false;
+		lastFollowedRouteHashCode = getCurrentRouteHashCode();
+	}
+
 	public boolean getIsRecording() {
 		return PluginsHelper.isActive(OsmandMonitoringPlugin.class)
 				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || isRecordingAutomatically();
@@ -832,7 +841,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private boolean isRecordingAutomatically() {
 		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
 				&& lastRoutingApplicationMode == settings.getApplicationMode()
-				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get());
+				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get() &&
+				isAutomaticallyRecording);
+	}
+
+	private boolean shouldRecordAutomatically() {
+		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
+				&& lastRoutingApplicationMode == settings.getApplicationMode()
+				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get()
+				&& lastFollowedRouteHashCode != getCurrentRouteHashCode()
+				&& app.getRoutingHelper().isRouteNew());
+	}
+
+	private int getCurrentRouteHashCode() {
+		return app.getRoutingHelper().getRoute().hashCode();
 	}
 
 	public float getDistance() {

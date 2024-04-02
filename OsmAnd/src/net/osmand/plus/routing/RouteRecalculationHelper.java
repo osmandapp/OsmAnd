@@ -149,6 +149,7 @@ class RouteRecalculationHelper {
 	private void setNewRoute(RouteCalculationResult prevRoute, RouteCalculationResult res, Location start) {
 		routingHelper.setRoute(res);
 		boolean newRoute = !prevRoute.isCalculated();
+		routingHelper.setNewRoute(newRoute);
 		if (isFollowingMode()) {
 			Location lastFixedLocation = getLastFixedLocation();
 			if (lastFixedLocation != null) {

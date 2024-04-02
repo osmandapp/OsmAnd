@@ -68,6 +68,7 @@ public class RoutingHelper {
 	private GPXRouteParamsBuilder currentGPXRoute;
 
 	private RouteCalculationResult route = new RouteCalculationResult("");
+	private boolean isRouteNew;
 
 	private LatLon finalLocation;
 	private List<LatLon> intermediatePoints;
@@ -115,6 +116,14 @@ public class RoutingHelper {
 
 	void setRoute(RouteCalculationResult route) {
 		this.route = route;
+	}
+
+	public void setNewRoute(boolean newRoute) {
+		isRouteNew = newRoute;
+	}
+
+	public boolean isRouteNew() {
+		return isRouteNew;
 	}
 
 	long getDeviateFromRouteDetected() {
