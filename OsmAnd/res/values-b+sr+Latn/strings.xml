@@ -5057,7 +5057,7 @@
 \n- Ovaj uređaj smešten blizu senzora</string>
     <string name="share_link">Deli link</string>
     <string name="shared_string_modified">Izmenjeno</string>
-    <string name="map_settings_weather_cloud">Oblak</string>
+    <string name="map_settings_weather_cloud">Oblačnost</string>
     <string name="rendering_attr_depthContourColorScheme_name">Linije kolor sheme</string>
     <string name="shared_string_road_maps">Mape puteva</string>
     <string name="add_new_button">Dodaj novo dugme</string>
@@ -5675,4 +5675,6 @@
     <string name="upload_local_versions">Preuzmi lokalne verzije</string>
     <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
     <string name="map_widget_map_scale">Razmera mape</string>
+    <string name="shared_string_unchanged">Nepromenjeno</string>
+    <string name="unchanged_parameter_summary">Svaka staza će zadržati svoje vlastite parametre.</string>
 </resources>
