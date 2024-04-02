@@ -531,7 +531,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			if ((shouldRecordAutomatically() || isAutomaticallyRecording) && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+			if ((shouldRecordAutomatically()) && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				lastFollowedRouteHashCode = getCurrentRouteHashCode();
 				isAutomaticallyRecording = true;
 				record = true;
@@ -849,8 +849,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
 				&& lastRoutingApplicationMode == settings.getApplicationMode()
 				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get()
-				&& lastFollowedRouteHashCode != getCurrentRouteHashCode()
-				&& app.getRoutingHelper().isRouteNew());
+				&& ((lastFollowedRouteHashCode != getCurrentRouteHashCode() && app.getRoutingHelper().isRouteNew()) || isAutomaticallyRecording));
 	}
 
 	private int getCurrentRouteHashCode() {
