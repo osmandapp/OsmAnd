@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
@@ -56,6 +57,9 @@ public class MapAppInitializeListener implements AppInitializeListener {
 		}
 		if (event == ROUTING_CONFIG_INITIALIZED) {
 			activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+		}
+		if (event == BROUTER_INITIALIZED) {
+			activity.getMapActions().updateDrawerMenu();
 		}
 	}
 

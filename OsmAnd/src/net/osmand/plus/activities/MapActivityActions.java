@@ -774,7 +774,7 @@ public class MapActivityActions extends MapActions {
 		menu.show();
 	}
 
-	protected void updateDrawerMenu() {
+	public void updateDrawerMenu() {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		ListView menuItemsListView = mapActivity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));

@@ -806,7 +806,8 @@ public class OsmandApplication extends MultiDexApplication {
 		context.setTheme(themeId);
 	}
 
-	public IBRouterService reconnectToBRouter() {
+	@Nullable
+	public synchronized IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
 			// a delay is necessary as the service process needs time to start..
@@ -815,20 +816,21 @@ public class OsmandApplication extends MultiDexApplication {
 				return bRouterServiceConnection.getBrouterService();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}
 
-	public IBRouterService getBRouterService() {
+	@Nullable
+	public synchronized IBRouterService getBRouterService() {
 		if (bRouterServiceConnection == null) {
 			return null;
 		}
-		IBRouterService s = bRouterServiceConnection.getBrouterService();
-		if (s != null && !s.asBinder().isBinderAlive()) {
-			s = reconnectToBRouter();
+		IBRouterService service = bRouterServiceConnection.getBrouterService();
+		if (service != null && !service.asBinder().isBinderAlive()) {
+			service = reconnectToBRouter();
 		}
-		return s;
+		return service;
 	}
 
 	public String getLanguage() {
