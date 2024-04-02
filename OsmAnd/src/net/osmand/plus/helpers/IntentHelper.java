@@ -295,7 +295,7 @@ public class IntentHelper {
 	@Nullable
 	private List<LatLon> parseIntermediatePoints(@Nullable String parameter) {
 		if (!Algorithms.isEmpty(parameter)) {
-			String[] params = parameter.split(",");
+			String[] params = parameter.split("[,;]");
 			List<LatLon> points = new ArrayList<>();
 
 			if (params.length >= 2 && params.length % 2 == 0) {
