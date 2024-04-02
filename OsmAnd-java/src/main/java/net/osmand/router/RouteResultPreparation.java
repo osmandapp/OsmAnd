@@ -2204,6 +2204,10 @@ public class RouteResultPreparation {
 			if (TurnType.isKeepDirectionTurn(active)) {
 				turnType.setSkipToSpeak(true);
 				if (turnType.goAhead()) {
+					int uniqDirections = turnType.countDirections();
+					if (uniqDirections >= 3) {
+						continue;
+					}
 					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 					int lanesCnt = turnType.getLanes().length;

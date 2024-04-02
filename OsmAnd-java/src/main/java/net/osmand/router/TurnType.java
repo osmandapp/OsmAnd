@@ -2,6 +2,7 @@ package net.osmand.router;
 
 import net.osmand.util.Algorithms;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 
 import gnu.trove.set.hash.TIntHashSet;
@@ -328,6 +329,26 @@ public class TurnType {
 			}
 		}
 		return cnt;
+	}
+
+	public int countDirections() {
+		HashSet<Integer> directions = new HashSet<>();
+		for (int h = 0; h < lanes.length; h++) {
+			int primary = TurnType.getPrimaryTurn(lanes[h]);
+			if (primary == 0) {
+				primary = TurnType.C;
+			}
+			directions.add(primary);
+			int secondary = TurnType.getSecondaryTurn(lanes[h]);
+			if (secondary > 0) {
+				directions.add(secondary);
+			}
+			int tertiary = TurnType.getTertiaryTurn(lanes[h]);
+			if (tertiary > 0) {
+				directions.add(tertiary);
+			}
+		}
+		return directions.size();
 	}
 
 	public static int[] lanesFromString(String lanesString) {
