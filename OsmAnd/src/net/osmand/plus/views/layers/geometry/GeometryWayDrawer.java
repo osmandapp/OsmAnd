@@ -175,7 +175,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float b = (float) Color.blue(color) / 256;
 		boolean showRaised = false;
 		boolean showTransparentTraces = false;
-		if(pathsData.size() > 0) {
+		if (pathsData.size() > 0) {
 			showRaised = pathsData.get(0).use3DVisualization;
 		}
 		for (DrawPathData31 data : pathsData) {
@@ -199,9 +199,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		log.info("buildVectorLine showRaised " + showRaised);
 		if (showRaised && hasColorizationMapping && showTransparentTraces) {
 			long size = colorizationMapping.size();
+			traceColorizationMapping = new QListFColorARGB();
 			for (int i = 0; i < size; i++) {
 				float a = (float) i / (float) size;
-				traceColorizationMapping = new QListFColorARGB();
 				FColorARGB colorARGB = colorizationMapping.get(i);
 				traceColorizationMapping.add(new FColorARGB(a * a * a * a, colorARGB.getR(), colorARGB.getG(), colorARGB.getB()));
 			}
@@ -215,7 +215,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				line.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF);
 				line.setPoints(points);
 				if (hasColorizationMapping) {
-					if(showRaised) {
+					if (showRaised) {
 						line.setColorizationMapping(traceColorizationMapping);
 					} else {
 						line.setColorizationMapping(colorizationMapping);
@@ -293,7 +293,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						.setNearOutlineColor(new FColorARGB(0.0f, r, g, b))
 						.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
 			} else
-				builder.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+				builder.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
 		}
 		builder.buildAndAddToCollection(collection);
 		log.info("buildVectorLine took " + (System.currentTimeMillis() - startBuildVectorLineTime));
