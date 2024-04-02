@@ -217,8 +217,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	}
 
 	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude, double leftLongitude,
-	                         double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex,
-	                         boolean use3DVisualization) {
+	                         double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex) {
 		if (locationProvider == null || locationProvider.getSize() == 0) {
 			return;
 		}
@@ -248,7 +247,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 
 		if (hasMapRenderer && !pathsData31Cache.isEmpty()) {
-			cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible, use3DVisualization);
+			cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
 			return;
 		}
 
@@ -292,13 +291,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						distToFinish += odistances.get(ki);
 					}
 				}
-				drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles, use3DVisualization);
+				drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
 				previousVisible = false;
 				clearArrays();
 			}
 			previous = i;
 		}
-		drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, 0, styles, use3DVisualization);
+		drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, 0, styles);
 	}
 
 	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
@@ -400,14 +399,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	protected List<List<DrawPathData31>> cutStartOfCachedPath(@NonNull MapRendererView mapRenderer,
 	                                                          @NonNull RotatedTileBox tb,
 	                                                          int startLocationIndex,
-	                                                          boolean previousVisible,
-	                                                          boolean use3DVisualization) {
+	                                                          boolean previousVisible) {
 		List<List<DrawPathData31>> croppedPathsData31 = new ArrayList<>();
 		boolean drawNext = false;
 		for (List<DrawPathData31> pathsDataList : pathsData31Cache) {
 			if (drawNext) {
 				croppedPathsData31.add(pathsDataList);
-				drawPathLine(tb, pathsDataList, use3DVisualization);
+				drawPathLine(tb, pathsDataList);
 				continue;
 			}
 			List<DrawPathData31> newPathsDataList = new ArrayList<>();
@@ -445,7 +443,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						}
 					}
 					if (tx.size() > 1) {
-						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style);
+						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style, pathData.use3DVisualization);
 						newPathData.heights = pathData.heights;
 						newPathsDataList.add(newPathData);
 					}
@@ -453,7 +451,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				}
 			}
 			croppedPathsData31.add(newPathsDataList);
-			drawPathLine(tb, newPathsDataList, use3DVisualization);
+			drawPathLine(tb, newPathsDataList);
 		}
 
 		if (shouldDrawArrows()) {
@@ -474,6 +472,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	protected boolean shouldDrawArrows() {
 		return true;
+	}
+
+	protected boolean shouldUse3dVisualization() {
+		return false;
 	}
 
 	private void clearArrays() {
@@ -607,7 +609,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (hasStyles) {
 				GeometryWayStyle<?> newStyle = styles.get(i);
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					pathsData.add(new DrawPathData31(ind, tx, ty, style));
+					pathsData.add(new DrawPathData31(ind, tx, ty, style, shouldUse3dVisualization()));
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
@@ -619,7 +621,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 		}
 		if (tx.size() > 1) {
-			pathsData.add(new DrawPathData31(ind, tx, ty, style));
+			pathsData.add(new DrawPathData31(ind, tx, ty, style, shouldUse3dVisualization()));
 		}
 	}
 
@@ -628,8 +630,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	                             List<Float> tx, List<Float> ty,
 	                             List<Integer> tx31, List<Integer> ty31,
 	                             List<Double> angles, List<Double> distances, double distToFinish,
-	                             List<GeometryWayStyle<?>> styles,
-	                             boolean use3DVisualization) {
+	                             List<GeometryWayStyle<?>> styles) {
 		boolean hasMapRenderer = hasMapRenderer();
 		if (hasMapRenderer) {
 			if (tx31.size() < 2) {
@@ -652,7 +653,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					List<DrawPathData31> pathsData = new ArrayList<>();
 					calculatePath(indexes, tx31, ty31, styles, pathsData);
 					if (!Algorithms.isEmpty(pathsData)) {
-						drawPathLine(tb, pathsData, use3DVisualization);
+						drawPathLine(tb, pathsData);
 					}
 					pathsData31Cache.add(pathsData);
 				} else if (canvas != null) {
@@ -718,13 +719,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 	}
 
-	private void drawPathLine(RotatedTileBox tb, List<DrawPathData31> pathsData, boolean use3DVisualization) {
+	private void drawPathLine(RotatedTileBox tb, List<DrawPathData31> pathsData) {
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
 			VectorLinesCollection collection = vectorLinesCollection == null || !mapRenderer.hasSymbolsProvider(vectorLinesCollection)
 					? new VectorLinesCollection() : vectorLinesCollection;
-			drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData, use3DVisualization);
+			drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
 			mapRenderer.addSymbolsProvider(collection);
 			this.vectorLinesCollection = collection;
 		}

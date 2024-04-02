@@ -144,6 +144,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int cachedColor;
 	private float defaultTrackWidth;
 	private final Map<String, Float> cachedTrackWidth = new HashMap<>();
+	private List<String> cachedTracksWith3dVisualization = new ArrayList<>();
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
@@ -570,6 +571,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int startFinishPointsCount = 0;
 			int splitLabelsCount = 0;
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				boolean use3DVisualization = isUse3DTrackVisualization(gpxFile);
+				if (use3DVisualization && !cachedTracksWith3dVisualization.contains(gpxFile.path)) {
+					cachedTracksWith3dVisualization.add(gpxFile.path);
+					changed = true;
+				} else if (!use3DVisualization && cachedTracksWith3dVisualization.contains(gpxFile.path)) {
+					cachedTracksWith3dVisualization.remove(gpxFile.path);
+					changed = true;
+				}
 				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
@@ -608,7 +618,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt finish = segment.points.get(segment.points.size() - 1);
-							if(use3DVisualization) {
+							if (use3DVisualization) {
 								startFinishHeights.add((float) start.ele);
 								startFinishHeights.add((float) finish.ele);
 							}
@@ -631,7 +641,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							}
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.lon), Utilities.get31TileNumberY(point.lat));
 							SplitLabel splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179),
-									use3DVisualization ? (float)point.ele : 0);
+									use3DVisualization ? (float) point.ele : 0);
 							splitLabels.add(splitLabel);
 						}
 					}

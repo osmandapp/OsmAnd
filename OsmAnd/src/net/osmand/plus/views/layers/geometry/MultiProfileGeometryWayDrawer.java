@@ -36,8 +36,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 
 	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder,
-	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData,
-	                     boolean use3DVisualization) {
+	                     boolean shouldDrawArrows, @NonNull List<DrawPathData31> pathsData) {
 		int lineId = LINE_ID;
 		GeometryWayStyle<?> prevStyle = null;
 		List<DrawPathData31> dataArr = new ArrayList<>();
@@ -45,7 +44,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(data.style);
 			if (prevStyle != null && !Algorithms.objectEquals(style, prevStyle) && !dataArr.isEmpty()) {
 				drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows,
-						true, prevStyle, dataArr, use3DVisualization);
+						true, prevStyle, dataArr);
 				dataArr.clear();
 			}
 			prevStyle = style;
@@ -55,15 +54,14 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		}
 		if (!dataArr.isEmpty()) {
 			drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle,
-					dataArr, use3DVisualization);
+					dataArr);
 		}
 	}
 
 	@Override
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
-	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData,
-	                              boolean use3DVisualization) {
+	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
 		int borderColor = style instanceof GeometryMultiProfileWayStyle
 				? ((GeometryMultiProfileWayStyle) style).getPathBorderColor()
 				: 0;
@@ -76,7 +74,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth,
 				style.getDashPattern(), approximationEnabled, shouldDrawArrows,
 				pointBitmap, pointBitmap, pxStep, pxStep, false, null,
-				0, pathsData, use3DVisualization);
+				0, pathsData);
 	}
 
 	@Override

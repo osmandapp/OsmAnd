@@ -62,23 +62,23 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	@Override
 	public void drawPath(@NonNull VectorLinesCollection collection, int baseOrder, boolean shouldDrawArrows,
-	                     @NonNull List<DrawPathData31> pathsData, boolean use3DVisualization) {
+	                     @NonNull List<DrawPathData31> pathsData) {
 		int lineId = LINE_ID;
 		if (coloringType.isDefault() || coloringType.isCustomColor() || coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
-			super.drawPath(collection, baseOrder, shouldDrawArrows, pathsData, use3DVisualization);
+			super.drawPath(collection, baseOrder, shouldDrawArrows, pathsData);
 		} else if (coloringType.isGradient()) {
 			GeometryWayStyle<?> prevStyle = null;
 			List<DrawPathData31> dataArr = new ArrayList<>();
 			for (DrawPathData31 data : pathsData) {
 				if (prevStyle != null && data.style == null) {
-					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr, use3DVisualization);
+					drawVectorLine(collection, lineId++, baseOrder--, shouldDrawArrows, true, prevStyle, dataArr);
 					dataArr.clear();
 				}
 				prevStyle = data.style;
 				dataArr.add(data);
 			}
 			if (!dataArr.isEmpty() && prevStyle != null) {
-				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr, use3DVisualization);
+				drawVectorLine(collection, lineId, baseOrder, shouldDrawArrows, true, prevStyle, dataArr);
 			}
 		}
 	}
@@ -87,7 +87,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
 	                              @NonNull GeometryWayStyle<?> style,
-	                              @NonNull List<DrawPathData31> pathsData, boolean use3DVisualization) {
+	                              @NonNull List<DrawPathData31> pathsData) {
 		Paint borderPaint = getContext().getBorderPaint();
 		int borderColor = coloringType.isGradient() ? borderPaint.getColor() : 0;
 		float borderWidth = coloringType.isGradient() ? borderPaint.getStrokeWidth() : 0;
@@ -107,7 +107,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		buildVectorLine(collection, baseOrder, lineId,
 				style.getColor(0), style.getWidth(0), borderColor, borderWidth, style.getDashPattern(), approximationEnabled, shouldDrawArrows,
 				pointBitmap, specialPointBitmap, bitmapStep, specialBitmapStep, true, colorizationMapping, style.getColorizationScheme(),
-				pathsData, use3DVisualization);
+				pathsData);
 	}
 
 	@NonNull

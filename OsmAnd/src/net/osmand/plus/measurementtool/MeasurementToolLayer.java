@@ -353,10 +353,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				if (hasMapRenderer) {
 					if (changed) {
 						multiProfileGeometry.resetSymbolProviders();
-						multiProfileGeometry.drawSegments(canvas, tb, false);
+						multiProfileGeometry.drawSegments(canvas, tb);
 					}
 				} else {
-					multiProfileGeometry.drawSegments(canvas, tb, false);
+					multiProfileGeometry.drawSegments(canvas, tb);
 				}
 			} else {
 				multiProfileGeometry.clearWay();

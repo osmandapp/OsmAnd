@@ -88,6 +88,9 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
+		if(this.use3dVisualization != use3dVisualization) {
+			resetSymbolProviders();
+		}
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
 
@@ -196,7 +199,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		return drawDirectionArrows;
 	}
 
-	private boolean shouldUse3dVisualization() {
+	protected boolean shouldUse3dVisualization() {
 		return use3dVisualization;
 	}
 
@@ -210,7 +213,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	}
 
 	@Override
-	public void calculatePath(@NonNull List<Integer> indexes, @NonNull List<Integer> xs, @NonNull List<Integer> ys, @Nullable List<GeometryWayStyle<?>> styles, @NonNull List<GeometryWayDrawer.DrawPathData31> pathsData) {
+	public void calculatePath(@NonNull List<Integer> indexes, @NonNull List<Integer> xs, @NonNull List<Integer> ys, @Nullable List<GeometryWayStyle<?>> styles, @NonNull List<GeometryWayDrawer.DrawPathData31> pathsData/*, boolean use3dVisualization*/) {
 		super.calculatePath(indexes, xs, ys, styles, pathsData);
 		for (int i = 0; i < pathsData.size(); i++) {
 			GeometryWayDrawer.DrawPathData31 drawPathData = pathsData.get(i);
@@ -225,8 +228,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	}
 
 	@Override
-	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes, List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles, boolean use3DVisualization) {
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes, List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
 		log.info(" drawRouteSegment use3dVisualization " + shouldUse3dVisualization());
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles, shouldUse3dVisualization());
+		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
 	}
 }

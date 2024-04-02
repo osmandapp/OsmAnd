@@ -34,6 +34,7 @@ public abstract class BaseSwitchCard extends BaseCard {
 		if (getIconRes() != 0) {
 			ImageView icon = view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(getIconRes()));
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.icon), true);
 		}
 		view.setOnClickListener(v -> onCardClicked());
 	}

@@ -206,7 +206,7 @@ public class Renderable {
                             use3DVisualization, coloringType, routeInfoAttribute);
                     geometryWay.updateSegment(tileBox, points, routeSegments);
                     geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left,
-                            quadRect.bottom, quadRect.right, null, 0, use3DVisualization);
+                            quadRect.bottom, quadRect.right, null, 0);
                 }
             }
         }

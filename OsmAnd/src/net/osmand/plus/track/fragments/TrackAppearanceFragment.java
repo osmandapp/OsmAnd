@@ -411,6 +411,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				updateAppearanceIcon();
 			} else if (card instanceof ShowStartFinishCard) {
 				refreshMap();
+			} else if (card instanceof Track3DCard) {
+				refreshMap();
 			}
 		}
 	}

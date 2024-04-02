@@ -45,9 +45,9 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		super(context, new MultiProfileGeometryWayDrawer(context));
 	}
 
-	public void drawSegments(Canvas canvas, RotatedTileBox tileBox, boolean use3DVisualization) {
+	public void drawSegments(Canvas canvas, RotatedTileBox tileBox) {
 		QuadRect bounds = tileBox.getLatLonBounds();
-		drawSegments(tileBox, canvas, bounds.top, bounds.left, bounds.bottom, bounds.right, null, 0, use3DVisualization);
+		drawSegments(tileBox, canvas, bounds.top, bounds.left, bounds.bottom, bounds.right, null, 0);
 	}
 
 	public boolean updateRoute(RotatedTileBox tileBox, Map<Pair<WptPt, WptPt>, RoadSegmentData> segmentData,
