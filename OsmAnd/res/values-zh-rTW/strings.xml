@@ -5659,4 +5659,6 @@
     <string name="upload_local_versions">上傳本機版本</string>
     <string name="download_cloud_versions">下載雲端版本</string>
     <string name="map_widget_map_scale">地圖比例尺</string>
+    <string name="unchanged_parameter_summary">每個軌跡都會保留自己的參數。</string>
+    <string name="shared_string_unchanged">未變更</string>
 </resources>
