@@ -5666,4 +5666,6 @@
     <string name="upload_local_versions">Отпреми локалне верзије</string>
     <string name="download_cloud_versions">Преузми верзије облака</string>
     <string name="map_widget_map_scale">Размера мапе</string>
+    <string name="unchanged_parameter_summary">Свака путања задржаће своје сопствене параметре.</string>
+    <string name="shared_string_unchanged">Непромењено</string>
 </resources>

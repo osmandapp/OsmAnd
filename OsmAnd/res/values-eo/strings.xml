@@ -5664,4 +5664,6 @@
     <string name="download_cloud_versions">Elŝuti nubajn versiojn</string>
     <string name="upload_local_versions">Alŝuti lokajn versiojn</string>
     <string name="map_widget_map_scale">Skalo de mapo</string>
+    <string name="unchanged_parameter_summary">Ĉiu spuro konservos siajn proprajn atributojn.</string>
+    <string name="shared_string_unchanged">Neŝanĝita</string>
 </resources>

@@ -5671,4 +5671,5 @@
     <string name="download_cloud_versions">Скачать облачные версии</string>
     <string name="upload_local_versions">Загрузить локальные версии</string>
     <string name="map_widget_map_scale">Масштаб карты</string>
+    <string name="shared_string_unchanged">Без изменений</string>
 </resources>
