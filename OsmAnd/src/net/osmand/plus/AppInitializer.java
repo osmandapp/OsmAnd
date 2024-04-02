@@ -529,8 +529,7 @@ public class AppInitializer implements IProgress {
 			app.searchUICore.initSearchUICore();
 			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
-			app.reconnectToBRouter();
-			notifyEvent(BROUTER_INITIALIZED);
+			connectToBRouter();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());
@@ -789,5 +788,10 @@ public class AppInitializer implements IProgress {
 			return cls;
 		}
 		return cls.substring(packageLen + 1);
+	}
+
+	private void connectToBRouter() {
+		app.reconnectToBRouter();
+		notifyEvent(BROUTER_INITIALIZED);
 	}
 }

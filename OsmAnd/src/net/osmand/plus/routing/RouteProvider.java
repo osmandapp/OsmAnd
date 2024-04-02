@@ -63,7 +63,6 @@ import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -1244,19 +1243,64 @@ public class RouteProvider {
 		return points;
 	}
 
-	protected RouteCalculationResult findBROUTERRoute(RouteCalculationParams params) throws MalformedURLException,
+	@NonNull
+	protected RouteCalculationResult findBROUTERRoute(@NonNull RouteCalculationParams params) throws
 			IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
+		boolean addMissingTurns = true;
+		Bundle brouterParams = getBRouterParams(params);
+
+		OsmandApplication app = params.ctx;
+		List<Location> res = new ArrayList<>();
+		List<RouteDirectionInfo> infos = new ArrayList<>();
+		List<Location> segmentEndpoints = new ArrayList<>();
+
+		IBRouterService brouterService = app.getBRouterService();
+		if (brouterService == null) {
+			brouterService = app.reconnectToBRouter();
+			if (brouterService == null) {
+				return new RouteCalculationResult("BRouter service is not available");
+			}
+		}
+		try {
+			String gpxMessage = brouterService.getTrackFromParams(brouterParams);
+			if (gpxMessage == null) {
+				gpxMessage = "no result from brouter";
+			}
+			boolean isZ64Encoded = gpxMessage.startsWith("ejY0"); // base-64 version of "z64"
+			if (!(isZ64Encoded || gpxMessage.startsWith("<"))) {
+				return new RouteCalculationResult(gpxMessage);
+			}
+			InputStream gpxStream;
+			if (isZ64Encoded) {
+				ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(gpxMessage, Base64.DEFAULT));
+				bais.read(new byte[3]); // skip prefix
+				gpxStream = new GZIPInputStream(bais);
+			} else {
+				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
+			}
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(gpxStream);
+			infos = parseOsmAndGPXRoute(res, gpxFile, segmentEndpoints, true, params.leftSide, params.mode.getDefaultSpeed(), -1);
+			if (infos != null) {
+				addMissingTurns = false;
+			}
+		} catch (Exception e) {
+			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
+		}
+		return new RouteCalculationResult(res, infos, params, null, addMissingTurns);
+	}
+
+	@NonNull
+	private Bundle getBRouterParams(@NonNull RouteCalculationParams params) {
 		int numpoints = 2 + (params.intermediates != null ? params.intermediates.size() : 0);
 		double[] lats = new double[numpoints];
 		double[] lons = new double[numpoints];
 		int index = 0;
 		String mode;
-		boolean addMissingTurns = true;
 		lats[index] = params.start.getLatitude();
 		lons[index] = params.start.getLongitude();
 		index++;
-		if(params.intermediates != null && params.intermediates.size() > 0) {
-			for(LatLon il : params.intermediates) {
+		if (params.intermediates != null && params.intermediates.size() > 0) {
+			for (LatLon il : params.intermediates) {
 				lats[index] = il.getLatitude();
 				lons[index] = il.getLongitude();
 				index++;
@@ -1271,7 +1315,7 @@ public class RouteProvider {
 		double[] nogoLons = new double[impassableRoads.size()];
 		double[] nogoRadi = new double[impassableRoads.size()];
 
-		if(impassableRoads.size() != 0) {
+		if (impassableRoads.size() != 0) {
 			int nogoindex = 0;
 			for (LatLon nogos : impassableRoads) {
 				nogoLats[nogoindex] = nogos.getLatitude();
@@ -1280,7 +1324,6 @@ public class RouteProvider {
 				nogoindex++;
 			}
 		}
-		
 		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -1288,75 +1331,31 @@ public class RouteProvider {
 		} else {
 			mode = "motorcar"; //$NON-NLS-1$
 		}
-		Bundle bpars = new Bundle();
-		bpars.putDoubleArray("lats", lats);
-		bpars.putDoubleArray("lons", lons);
-		bpars.putDoubleArray("nogoLats", nogoLats);
-		bpars.putDoubleArray("nogoLons", nogoLons);
-		bpars.putDoubleArray("nogoRadi", nogoRadi);
-		bpars.putString("fast", params.fast ? "1" : "0");
-		bpars.putString("v", mode);
-		bpars.putString("trackFormat", "gpx");
-		bpars.putString("turnInstructionFormat", "osmand");
-		bpars.putString("acceptCompressedResult", "true");
+		Bundle bundle = new Bundle();
+		bundle.putDoubleArray("lats", lats);
+		bundle.putDoubleArray("lons", lons);
+		bundle.putDoubleArray("nogoLats", nogoLats);
+		bundle.putDoubleArray("nogoLons", nogoLons);
+		bundle.putDoubleArray("nogoRadi", nogoRadi);
+		bundle.putString("fast", params.fast ? "1" : "0");
+		bundle.putString("v", mode);
+		bundle.putString("trackFormat", "gpx");
+		bundle.putString("turnInstructionFormat", "osmand");
+		bundle.putString("acceptCompressedResult", "true");
 
-		String osmand_Profile_Name = params.mode.getUserProfileName();
-		if ( osmand_Profile_Name.indexOf("Brouter") == 0) { 
-			if ( osmand_Profile_Name .indexOf("[") != -1 && osmand_Profile_Name .indexOf("]") != -1) {
-				String  brouter_Profile_Name = osmand_Profile_Name.substring(osmand_Profile_Name .indexOf("[") + 1, osmand_Profile_Name .indexOf("]"));
+		String osmandProfileName = params.mode.getUserProfileName();
+		if (osmandProfileName.indexOf("Brouter") == 0) {
+			if (osmandProfileName.contains("[") && osmandProfileName.contains("]")) {
+				String brouterProfileName = osmandProfileName.substring(osmandProfileName.indexOf("[") + 1, osmandProfileName.indexOf("]"));
 
-				// log.info (" BROUTER_PROFILE_NAME = " + brouter_Profile_Name );
-				if (brouter_Profile_Name.length() > 0) {
+				// log.info (" BROUTER_PROFILE_NAME = " + brouterProfileName );
+				if (brouterProfileName.length() > 0) {
 					//  set the profile-name in the new parameter "profile" to transmit the profile-name to the brouter
-					bpars.putString("profile", brouter_Profile_Name );
+					bundle.putString("profile", brouterProfileName);
 				}
 			}
 		}
-
-		OsmandApplication ctx = params.ctx;
-		List<Location> res = new ArrayList<Location>();
-		List<RouteDirectionInfo> dir = new ArrayList<>();
-		List<Location> segmentEndpoints = new ArrayList<>();
-
-		IBRouterService brouterService = ctx.getBRouterService();
-		if (brouterService == null) {
-			brouterService = ctx.reconnectToBRouter();
-			if (brouterService == null) {
-				return new RouteCalculationResult("BRouter service is not available");
-			}
-		}
-		try {
-			String gpxMessage = brouterService.getTrackFromParams(bpars);
-			if (gpxMessage == null)
-				gpxMessage = "no result from brouter";
-
-			boolean isZ64Encoded = gpxMessage.startsWith("ejY0"); // base-64 version of "z64"
-
-			if (!(isZ64Encoded || gpxMessage.startsWith("<"))) {
-				return new RouteCalculationResult(gpxMessage);
-			}
-
-			InputStream gpxStream;
-			if (isZ64Encoded) {
-				ByteArrayInputStream bais = new ByteArrayInputStream(Base64.decode(gpxMessage, Base64.DEFAULT));
-				bais.read(new byte[3]); // skip prefix
-				gpxStream = new GZIPInputStream(bais);
-			} else {
-				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
-			}
-
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(gpxStream);
-
-			dir = parseOsmAndGPXRoute(res, gpxFile, segmentEndpoints, true, params.leftSide, params.mode.getDefaultSpeed(), -1);
-
-			if (dir != null) {
-				addMissingTurns = false;
-			}
-
-		} catch (Exception e) {
-			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
-		}
-		return new RouteCalculationResult(res, dir, params, null, addMissingTurns);
+		return bundle;
 	}
 
 	private RouteCalculationResult findStraightRoute(@NonNull RouteCalculationParams params) {
