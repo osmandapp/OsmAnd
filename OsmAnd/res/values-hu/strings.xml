@@ -5666,4 +5666,5 @@
 \n%1$s: pontos értékek vagy %2$s: könnyebb olvashatóság.</string>
     <string name="download_cloud_versions">Felhőben lévő verziók letöltése</string>
     <string name="upload_local_versions">Helyi verziók feltöltése</string>
+    <string name="map_widget_map_scale">Méretarány</string>
 </resources>

@@ -121,6 +121,11 @@ public abstract class BaseCard {
 	protected abstract void updateContent();
 
 	@NonNull
+	public View build() {
+		return build(activity);
+	}
+
+	@NonNull
 	public View build(@NonNull Context ctx) {
 		themedInflater = UiUtilities.getInflater(ctx, nightMode);
 		view = themedInflater.inflate(getCardLayoutId(), null);
@@ -211,6 +216,10 @@ public abstract class BaseCard {
 				((TextView) textView).setText(text);
 			}
 		}
+	}
+
+	public void setBackgroundColor(@ColorInt int backgroundColor) {
+		view.setBackgroundColor(backgroundColor);
 	}
 
 	public void updateVisibility(int viewId, boolean show) {

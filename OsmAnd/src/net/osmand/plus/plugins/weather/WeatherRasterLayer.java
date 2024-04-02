@@ -79,13 +79,17 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		long nextStepTime = (System.currentTimeMillis() + DAY_IN_MILLISECONDS) / HOUR_IN_MILLISECONDS * HOUR_IN_MILLISECONDS;
+		long dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
+		boolean today = dayStart == OsmAndFormatter.getStartOfToday();
+		boolean notToday = !today && dateTime != dayStart;
 		long step = timePeriodStep;
-		if (dateTime > nextStepTime)
-			step = HOUR_IN_MILLISECONDS * 3;
-		else if (dateTime < nextStepTime || step < HOUR_IN_MILLISECONDS)
+		if (today)
 			step = HOUR_IN_MILLISECONDS;
-		long dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
+		else if (notToday)
+			step = HOUR_IN_MILLISECONDS * 3;
+		else if (step < HOUR_IN_MILLISECONDS)
+			step = HOUR_IN_MILLISECONDS;
+		dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
 		long dayEnd = dayStart + DAY_IN_MILLISECONDS;
 		if (dateTime < dayStart || dateTime > dayEnd) {
 			dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);

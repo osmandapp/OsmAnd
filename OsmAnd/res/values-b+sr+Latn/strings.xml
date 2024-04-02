@@ -42,7 +42,7 @@
     <string name="context_menu_item_directions_from">Navigacija od</string>
     <string name="route_descr_map_location">Mapa :</string>
     <string name="route_descr_lat_lon">Šir %1$.3f, duž %2$.3f</string>
-    <string name="route_to">Početak:</string>
+    <string name="route_to">Odredište:</string>
     <string name="route_via">Preko:</string>
     <string name="route_from">Početak:</string>
     <string name="app_mode_default">Pretraga mape</string>
@@ -64,7 +64,7 @@
     <string name="distance_measurement_finish_editing">Završi uređivanje</string>
     <string name="distance_measurement_clear_route">Obriši sve tačke</string>
     <string name="distance_measurement_load_gpx">Otvori postojeću GPX fajla</string>
-    <string name="wait_current_task_finished">Sačekaj dok se ne završi trenutni zadatak</string>
+    <string name="wait_current_task_finished">Sačekaj dok se ne završi trenutna radnja</string>
     <string name="use_kalman_filter_compass">Koristi Kalmanov filter</string>
     <string name="use_magnetic_sensor">Koristi magnetni senzor</string>
     <string name="other_location">Ostalo</string>
@@ -3068,7 +3068,7 @@
     <string name="use_two_phase_routing">Koristite dvofazni algoritam usmeravanja A*</string>
     <string name="shared_string_graph">Grafikon</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s podaci dostupni samo na putevima, izračunajte rutu koristeći „Ruta između tačaka“ da biste videli grafike.</string>
-    <string name="message_graph_will_be_available_after_recalculation">Molimo sačekajte. 
+    <string name="message_graph_will_be_available_after_recalculation">Molimo sačekaj.
 \nGrafikon će biti dostupan nakon ponovnog izračunavanja rute.</string>
     <string name="shared_string_local_maps">Lokalne mape</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
@@ -5674,4 +5674,5 @@
     <string name="distance_during_navigation">Udaljenost tokom navigacije</string>
     <string name="upload_local_versions">Preuzmi lokalne verzije</string>
     <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
+    <string name="map_widget_map_scale">Razmera mape</string>
 </resources>

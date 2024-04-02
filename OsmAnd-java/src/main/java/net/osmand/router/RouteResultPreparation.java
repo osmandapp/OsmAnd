@@ -1246,10 +1246,8 @@ public class RouteResultPreparation {
 		}
 		TurnType t = null;
 		if (prev != null) {
-			// add description about turn
 			// avoid small zigzags is covered at (search for "zigzags")
 			float bearingDist = RouteSegmentResult.DIST_BEARING_DETECT;
-			// could be || noAttachedRoads, boolean noAttachedRoads = rr.getAttachedRoutes(rr.getStartPointIndex()).size() == 0;
 			if (UNMATCHED_HIGHWAY_TYPE.equals(rr.getObject().getHighway())) {
 				bearingDist = RouteSegmentResult.DIST_BEARING_DETECT_UNMATCHED;
 			}
@@ -1487,10 +1485,6 @@ public class RouteResultPreparation {
 			return null;
 		}
 
-		if (turnLanesPrevSegm == null) {
-			turnLanesPrevSegm = getVirtualTurnLanes(prevSegm);
-		}
-		
 		// turn lanes exist
 		if (turnLanesPrevSegm != null) {
 			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanesPrevSegm, leftSide);
@@ -1500,23 +1494,6 @@ public class RouteResultPreparation {
 		if (rs.keepLeft || rs.keepRight) {
 			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
 			
-		}
-		return null;
-	}
-
-	private String getVirtualTurnLanes(RouteSegmentResult segm) {
-		TurnType t = segm.getTurnType();
-		if (t == null) {
-			return null;
-		}
-		int[] lanes = t.getLanes();
-		String turnLanes = TurnType.convertLanesToOsmString(lanes, true, false);
-		if (turnLanes != null) {
-			int[] uniq = getUniqTurnTypes(turnLanes);
-			// if we have 2 and more active directions
-			if (uniq.length >= 2) {
-				return turnLanes;
-			}
 		}
 		return null;
 	}
@@ -1543,12 +1520,12 @@ public class RouteResultPreparation {
 		int[] act = findActiveIndex(prevSegm, currentSegm, rawLanes, rs, turnLanes);
 		int activeBeginIndex = act[0];
 		int activeEndIndex = act[1];
+		if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
+			// something went wrong
+			return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
+		}
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
-			if (activeBeginIndex == -1 || activeEndIndex == -1 || activeBeginIndex > activeEndIndex) {
-				// something went wrong
-				return createSimpleKeepLeftRightTurn(leftSide, prevSegm, currentSegm, rs);
-			}
 			for (int k = 0; k < rawLanes.length; k++) {
 				if (k >= activeBeginIndex && k <= activeEndIndex) {
 					rawLanes[k] |= 1;
@@ -2220,13 +2197,13 @@ public class RouteResultPreparation {
 		for (int i = 0; i < result.size(); i++) {
 			RouteSegmentResult curr = result.get(i);
 			TurnType turnType = curr.getTurnType();
-			if (turnType == null) {
+			if (turnType == null || turnType.getLanes() == null) {
 				continue;
 			}
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
 				turnType.setSkipToSpeak(true);
-				if (turnType.goAhead() && turnType.getLanes() != null) {
+				if (turnType.goAhead()) {
 					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 					int lanesCnt = turnType.getLanes().length;

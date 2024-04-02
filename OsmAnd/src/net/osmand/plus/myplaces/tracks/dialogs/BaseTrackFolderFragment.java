@@ -8,7 +8,6 @@ import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
-import static net.osmand.plus.myplaces.tracks.TrackFoldersHelper.SORT_SUB_FOLDERS_KEY;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_SMART_FOLDER;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
@@ -40,8 +39,8 @@ import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
-import net.osmand.plus.configmap.tracks.TracksAppearanceFragment;
 import net.osmand.plus.configmap.tracks.TracksComparator;
+import net.osmand.plus.configmap.tracks.appearance.ChangeAppearanceController;
 import net.osmand.plus.configmap.tracks.viewholders.EmptyTracksViewHolder.EmptyTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.SortTracksViewHolder.SortTracksListener;
 import net.osmand.plus.configmap.tracks.viewholders.TrackViewHolder.TrackSelectionListener;
@@ -50,6 +49,7 @@ import net.osmand.plus.importfiles.GpxImportListener;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
+import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper.SelectionHelperProvider;
 import net.osmand.plus.myplaces.tracks.TrackFoldersHelper;
 import net.osmand.plus.myplaces.tracks.TracksSearchFilter;
@@ -536,7 +536,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	public void showChangeAppearanceDialog(@NonNull TrackFolder folder) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			TracksAppearanceFragment.showInstance(activity.getSupportFragmentManager(), this);
+			ItemsSelectionHelper<TrackItem> selectionHelper = getSelectionHelper();
+			ChangeAppearanceController.showDialog(activity, this, selectionHelper.getSelectedItems());
 		}
 	}
 

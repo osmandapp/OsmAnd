@@ -5669,4 +5669,5 @@
 \nElija \"%1$s\" para números exactos, o \"%2$s\" para una legibilidad más fácil.</string>
     <string name="download_cloud_versions">Descargar versiones en la nube</string>
     <string name="upload_local_versions">Cargar las versiones locales</string>
+    <string name="map_widget_map_scale">Escala de mapa</string>
 </resources>

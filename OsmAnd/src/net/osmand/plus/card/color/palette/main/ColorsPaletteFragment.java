@@ -1,7 +1,6 @@
 package net.osmand.plus.card.color.palette.main;
 
 import static net.osmand.plus.card.color.palette.main.IColorsPaletteController.ALL_COLORS_PROCESS_ID;
-import static net.osmand.plus.utils.ColorUtilities.getColor;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -64,7 +63,7 @@ public class ColorsPaletteFragment extends BaseOsmAndDialogFragment implements I
 			if (!settings.DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(getColor(ctx, getStatusBarColorId()));
+			window.setStatusBarColor(getColor(getStatusBarColorId()));
 		}
 		return dialog;
 	}

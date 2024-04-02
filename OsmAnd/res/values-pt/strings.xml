@@ -5673,4 +5673,5 @@
 \nEscolha \"%1$s\" para números exatos ou \"%2$s\" para uma leitura mais fácil.</string>
     <string name="download_cloud_versions">Descarregar versões na nuvem</string>
     <string name="upload_local_versions">Enviar versões locais</string>
+    <string name="map_widget_map_scale">Escala do mapa</string>
 </resources>
