@@ -196,7 +196,9 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			long size = colorizationMapping.size();
 			for (int i = 0; i < size; i++) {
 				float a = (float) i / (float) size;
-				traceColorizationMapping.add(new FColorARGB(a * a * a * a, r, g, b));
+				traceColorizationMapping = new QListFColorARGB();
+				FColorARGB colorARGB = colorizationMapping.get(i);
+				traceColorizationMapping.add(new FColorARGB(a * a * a * a, colorARGB.getR(), colorARGB.getG(), colorARGB.getB()));
 			}
 		}
 		QListVectorLine lines = collection.getLines();
@@ -208,7 +210,11 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				line.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF);
 				line.setPoints(points);
 				if (hasColorizationMapping) {
-					line.setColorizationMapping(colorizationMapping);
+					if(showRaised) {
+						line.setColorizationMapping(traceColorizationMapping);
+					} else {
+						line.setColorizationMapping(colorizationMapping);
+					}
 				}
 
 				line.setShowArrows(showPathBitmaps);
@@ -229,7 +235,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 						line.setNearOutlineColor(new FColorARGB(0.0f, r, g, b));
 						line.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
 					} else
-						line.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
+						line.setOutlineColor(new FColorARGB(1.0f, r, g, b));
 				}
 				return;
 			}
@@ -270,17 +276,19 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setColorizationScheme(colorizationScheme);
 		}
 		if (showRaised) {
-			builder.setHeights(heights)
-					.setFillColor(new FColorARGB(1.0f, r, g, b))
-					.setColorizationMapping(new QListFColorARGB())
+			builder.setColorizationMapping(traceColorizationMapping)
 					.setOutlineColorizationMapping(traceColorizationMapping)
-					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
-			if (showTransparentTraces) {
-				builder.setColorizationScheme(1)
+					.setColorizationScheme(colorizationScheme)
+					.setHeights(heights)
+					.setFillColor(new FColorARGB(1.0f, r, g, b))
+					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f)
+					.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+			if (showTransparentTraces && colorizationScheme != 1) {
+				builder
 						.setNearOutlineColor(new FColorARGB(0.0f, r, g, b))
 						.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
 			} else
-				builder.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
+				builder.setOutlineColor(new FColorARGB(1.0f, r, g, b));
 		}
 		builder.buildAndAddToCollection(collection);
 		log.info("buildVectorLine took " + (System.currentTimeMillis() - startBuildVectorLineTime));

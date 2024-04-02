@@ -39,6 +39,7 @@ import net.osmand.core.jni.GpxAdditionalIconsProvider.SplitLabel;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
 import net.osmand.core.jni.PointI;
+import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.QListPointI;
 import net.osmand.core.jni.SplitLabelList;
 import net.osmand.core.jni.TextRasterizer;
@@ -596,15 +597,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			splitLabelsCountCached = splitLabelsCount;
 			clearSelectedFilesSplits();
 
+			QListFloat startFinishHeights = new QListFloat();
 			QListPointI startFinishPoints = new QListPointI();
 			SplitLabelList splitLabels = new SplitLabelList();
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+				boolean use3DVisualization = isUse3DTrackVisualization(selectedGpxFile.getGpxFile());
 				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 					for (TrkSegment segment : segments) {
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt finish = segment.points.get(segment.points.size() - 1);
+							if(use3DVisualization) {
+								startFinishHeights.add((float) start.ele);
+								startFinishHeights.add((float) finish.ele);
+							}
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(start.lon), Utilities.get31TileNumberY(start.lat)));
 							startFinishPoints.add(new PointI(Utilities.get31TileNumberX(finish.lon), Utilities.get31TileNumberY(finish.lat)));
 						}
@@ -623,7 +630,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 								name = name.substring(0, ind);
 							}
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.lon), Utilities.get31TileNumberY(point.lat));
-							splitLabels.add(new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179)));
+							SplitLabel splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179),
+									use3DVisualization ? (float)point.ele : 0);
+							splitLabels.add(splitLabel);
 						}
 					}
 				}
@@ -633,7 +642,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						startFinishPoints, splitLabels,
 						NativeUtilities.createSkImageFromBitmap(startPointImage),
 						NativeUtilities.createSkImageFromBitmap(finishPointImage),
-						NativeUtilities.createSkImageFromBitmap(startAndFinishImage));
+						NativeUtilities.createSkImageFromBitmap(startAndFinishImage),
+						startFinishHeights);
 				mapRenderer.addSymbolsProvider(additionalIconsProvider);
 			}
 		} else {
