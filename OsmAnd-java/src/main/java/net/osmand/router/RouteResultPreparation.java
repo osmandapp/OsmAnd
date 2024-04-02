@@ -2203,15 +2203,18 @@ public class RouteResultPreparation {
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
 				turnType.setSkipToSpeak(true);
-				//Regression
-//				if (turnType.goAhead()) {
-//					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
-//					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
-//					int lanesCnt = turnType.getLanes().length;
-//					if (cnt == cntAll && cnt >= 2 && (lanesCnt - cnt) <= 1) {
-//						curr.setTurnType(null);
-//					}
-//				}
+				if (turnType.goAhead()) {
+					int uniqDirections = turnType.countDirections();
+					if (uniqDirections >= 3) {
+						continue;
+					}
+					int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
+					int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
+					int lanesCnt = turnType.getLanes().length;
+					if (cnt == cntAll && cnt >= 2 && (lanesCnt - cnt) <= 1) {
+						curr.setTurnType(null);
+					}
+				}
 			}
 		}
 	}
