@@ -5674,4 +5674,6 @@
     <string name="download_cloud_versions">Download cloud-versioner</string>
     <string name="upload_local_versions">Upload lokale versioner</string>
     <string name="map_widget_map_scale">Kortskala</string>
+    <string name="unchanged_parameter_summary">Hvert spor beholder sine egne parametre.</string>
+    <string name="shared_string_unchanged">Uændret</string>
 </resources>
