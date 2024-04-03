@@ -5,42 +5,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
+import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
 
-// TODO Use minPointApproximation - to restart after "lost" gpx segments with initRoutingPoint
+// DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
+// TODO think about "bearing" in addition to LOOK_AHEAD to keep sharp/loop-shaped gpx parts
 // TODO loadRouteSegment() results should be validated (by priority?)
-// TODO think about bearing in addition to LOOK_AHEAD
 // TODO Native lib - after performance test
 
 public class GpxSegmentsApproximation {
-	private static int LOOKUP_AHEAD = 10;
+	private final int LOOKUP_AHEAD = 10;
+	private final boolean TEST_SHIFT_GPX_POINTS = true;
 
-	public GpxRouteApproximation searchGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
+	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                                    List<GpxPoint> gpxPoints) throws IOException {
-
 		long timeToCalculate = System.nanoTime();
+
 //		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 //		if (nativeLib != null && useNativeApproximation) {
 //			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
 //		}
+
+		initGpxPointsXY31(gpxPoints);
+
 		float minPointApproximation = gctx.ctx.config.minPointApproximation;
-		GpxPoint currentPoint = null;
-		for(GpxPoint p : gpxPoints) {
-			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
-			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
-		}
-		for (int i = 0; i < gpxPoints.size(); i++) {
-			if (initRoutingPoint(frontEnd, gctx, gpxPoints.get(i), minPointApproximation)) {
-				currentPoint = gpxPoints.get(i);
-				break;
-			}
-		}
+		GpxPoint currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, 0);
+
 		while (currentPoint != null && currentPoint.pnt != null) {
-			double minDistSegment = 0;
+			double minDistSqrSegment = 0;
 			RouteSegmentResult fres = null;
 			int minInd = -1;
 			for (int j = currentPoint.ind + 1; j < Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size()); j++) {
@@ -53,14 +49,19 @@ public class GpxSegmentsApproximation {
 						minDistSqr = minDistResult(res, minDistSqr, oth, ps);
 					}
 				}
-				if (fres == null || minDistSqr <= minDistSegment) {
+				if (fres == null || minDistSqr <= minDistSqrSegment) {
 					fres = res[0];
-					minDistSegment = minDistSqr;
+					minDistSqrSegment = minDistSqr;
 					minInd = j;
 				}
 			}
 			if (minInd < 0) {
 				break;
+			}
+			if (minDistSqrSegment > minPointApproximation * minPointApproximation) {
+				final int nextIndex = currentPoint.ind + 1;
+				currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, nextIndex);
+				continue;
 			}
 			currentPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
 			currentPoint.routeToTarget.add(fres);
@@ -132,5 +133,26 @@ public class GpxSegmentsApproximation {
 			res[0] = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), segmentEnd);
 		}
 		return minDistSqr;
+	}
+
+	private GpxPoint findNextRoutablePoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
+	                                       double distThreshold, List<GpxPoint> gpxPoints, int searchStart) throws IOException {
+		for (int i = searchStart; i < gpxPoints.size(); i++) {
+			if (initRoutingPoint(frontEnd, gctx, gpxPoints.get(i), distThreshold)) {
+				return gpxPoints.get(i);
+			}
+		}
+		return null;
+	}
+
+	private void initGpxPointsXY31(List<GpxPoint> gpxPoints) {
+		for (GpxPoint p : gpxPoints) {
+			if (TEST_SHIFT_GPX_POINTS) {
+				final double shift = 0.00015; // shift ~15 meters to check attached geometry visually
+				p.loc = new LatLon(p.loc.getLatitude() - shift, p.loc.getLongitude() + shift);
+			}
+			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
+			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
+		}
 	}
 }

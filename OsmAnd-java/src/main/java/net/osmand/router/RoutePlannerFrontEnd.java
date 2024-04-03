@@ -336,7 +336,7 @@ public class RoutePlannerFrontEnd {
 		if (gctx.ctx.calculationProgress == null) {
 			gctx.ctx.calculationProgress = new RouteCalculationProgress();
 		}
-		app.searchGpxApproximation(this, gctx, gpxPoints);
+		app.fastGpxApproximation(this, gctx, gpxPoints);
 		calculateGpxRoute(gctx, gpxPoints);
 		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
