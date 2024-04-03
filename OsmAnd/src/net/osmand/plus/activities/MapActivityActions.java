@@ -538,7 +538,7 @@ public class MapActivityActions extends MapActions {
 					return false;
 				}));
 
-		String d = getString(R.string.welmode_download_maps);
+		String d = getString(R.string.maps_and_resources);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
 			List<IndexItem> updt = app.getDownloadThread().getIndexes().getItemsToUpdate();
 			if (updt != null && updt.size() > 0) {
@@ -546,7 +546,7 @@ public class MapActivityActions extends MapActions {
 			}
 		}
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_DOWNLOAD_MAPS_ID)
-				.setTitleId(R.string.welmode_download_maps, null)
+				.setTitleId(R.string.maps_and_resources, null)
 				.setTitle(d).setIcon(R.drawable.ic_type_archive)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_download_maps_open");
