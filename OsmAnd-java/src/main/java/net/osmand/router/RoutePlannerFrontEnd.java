@@ -42,9 +42,9 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public static boolean CALCULATE_MISSING_MAPS = true;
-	public static boolean APPROXIMATE_GPX_SEGMENTS = false;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
+	private boolean useGeometryBasedApproximation = false;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
@@ -313,7 +313,12 @@ public class RoutePlannerFrontEnd {
 		this.useNativeApproximation = useNativeApproximation;
 		return this;
 	}
-	
+
+	public RoutePlannerFrontEnd setUseGeometryBasedApproximation(boolean enabled) {
+		this.useGeometryBasedApproximation = enabled;
+		return this;
+	}
+
 	public boolean isUseNativeApproximation() {
 		return useNativeApproximation;
 	}
@@ -325,7 +330,7 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		if (APPROXIMATE_GPX_SEGMENTS && !useNativeApproximation) {
+		if (useGeometryBasedApproximation && !useNativeApproximation) {
 			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
 		}
 		return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
