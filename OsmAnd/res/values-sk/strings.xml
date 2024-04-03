@@ -5662,4 +5662,7 @@
 \n • Prihlásenie do OpenStreetMap prepnuté na OAuth 2.0
 \n
 \n</string>
+    <string name="shared_string_unchanged">Nezmenené</string>
+    <string name="unchanged_parameter_summary">Každá stopa si zachová vlastné parametre.</string>
+    <string name="map_widget_map_scale">Mierka mapy</string>
 </resources>
