@@ -195,7 +195,7 @@
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
-	<string name="poi_shop_general">General shop</string>
+	<string name="poi_shop_general">General store</string>
 	<string name="poi_shop_food">Convenience store and supermarket</string>
 	<string name="poi_emergency">Emergency</string>
 	<string name="poi_emergency_infrastructure">Emergency infrastructure</string>
