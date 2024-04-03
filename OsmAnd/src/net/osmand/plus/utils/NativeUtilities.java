@@ -1,13 +1,10 @@
 package net.osmand.plus.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.util.Pair;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.OnResultCallback;
 import net.osmand.core.android.MapRendererView;
@@ -15,6 +12,8 @@ import net.osmand.core.jni.AreaI;
 import net.osmand.core.jni.ColorARGB;
 import net.osmand.core.jni.FColorARGB;
 import net.osmand.core.jni.FColorRGB;
+import net.osmand.core.jni.IconData;
+import net.osmand.core.jni.OsmAndCore;
 import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.SingleSkImage;
 import net.osmand.core.jni.SwigUtilities;
@@ -32,6 +31,10 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class NativeUtilities {
 
@@ -524,5 +527,12 @@ public class NativeUtilities {
 					OfflineForecastHelper.getTileY(tileId)));
 		}
 		return qTileIds;
+	}
+
+	@Nullable
+	public static Bitmap createBitmap(@NonNull IconData iconData) {
+		Bitmap bitmap = Bitmap.createBitmap(iconData.getWidth(), iconData.getHeight(), Config.ARGB_8888);
+		boolean ok = OsmAndCore.copyPixels(iconData.getBitmap(), bitmap);
+		return ok ? bitmap : null;
 	}
 }
