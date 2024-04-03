@@ -4495,7 +4495,7 @@
     <string name="import_tracks">Importer des traces</string>
     <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces à importer.</string>
     <string name="select_suggested_points">Sélectionner les points suggérés</string>
-    <string name="location_source">Source pour la localisation</string>
+    <string name="location_source">Source de localisation</string>
     <string name="location_source_descr">Lorsqu\'OsmAnd est installé depuis Google Play, la localisation utilisée par défaut est %1$s .
 \n
 \nSi votre localisation est imprécise ou si vous utilisez un appareil sans %2$s, essayez de basculer vers \"%3$s\".</string>
