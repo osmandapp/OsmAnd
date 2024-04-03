@@ -6,9 +6,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color"
-	android:orientation="vertical"
 	android:clickable="true"
-	android:focusable="true">
+	android:focusable="true"
+	android:orientation="vertical">
 
 	<androidx.appcompat.widget.Toolbar
 		android:id="@+id/toolbar"
@@ -65,6 +65,7 @@
 							android:inputType="textMultiLine|textCapSentences"
 							android:letterSpacing="@dimen/text_button_letter_spacing"
 							android:maxLines="4"
+							android:selectAllOnFocus="true"
 							osmand:lineHeight="@dimen/default_title_line_height" />
 
 					</com.google.android.material.textfield.TextInputLayout>
