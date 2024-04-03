@@ -92,7 +92,7 @@ public class QuickActionButton extends MapButton {
 	private View.OnClickListener getOnCLickListener() {
 		return v -> {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
-			if (buttonState.isSingleAction()) {
+			if (!buttonState.isDefaultButton() && buttonState.isSingleAction()) {
 				List<QuickAction> actions = buttonState.getQuickActions();
 				layer.onActionSelected(buttonState, actions.get(0));
 			} else if (!showTutorialIfNeeded()) {
