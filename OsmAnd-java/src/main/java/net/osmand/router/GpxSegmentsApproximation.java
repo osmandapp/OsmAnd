@@ -13,13 +13,15 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
 
 // DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
+// TODO loadRouteSegment() results should be sorted/validated (by priority/shortest/closest)
 // TODO think about "bearing" in addition to LOOK_AHEAD to keep sharp/loop-shaped gpx parts
-// TODO loadRouteSegment() results should be validated (by priority?)
+// TODO fix minor "Points are not connected"
 // TODO Native lib - after performance test
+// TODO makePrecise for start segment
 
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
-	private final boolean TEST_SHIFT_GPX_POINTS = true;
+	private final boolean TEST_SHIFT_GPX_POINTS = false;
 
 	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                                    List<GpxPoint> gpxPoints) throws IOException {
@@ -60,6 +62,7 @@ public class GpxSegmentsApproximation {
 			}
 			if (minDistSqrSegment > minPointApproximation * minPointApproximation) {
 				final int nextIndex = currentPoint.ind + 1;
+				// System.err.printf("WARN: XXX index (%d) mindist (%f)\n", currentPoint.ind, Math.sqrt(minDistSqrSegment));
 				currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, nextIndex);
 				continue;
 			}

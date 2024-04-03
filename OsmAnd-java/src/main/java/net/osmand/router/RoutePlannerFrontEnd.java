@@ -42,7 +42,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public static boolean CALCULATE_MISSING_MAPS = true;
-	public static boolean APPROXIMATE_GPX_SEGMENTS = false;
+	public static boolean APPROXIMATE_GPX_SEGMENTS = true; // TODO disable
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
 	private boolean useNativeApproximation = true;
