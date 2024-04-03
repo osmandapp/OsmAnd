@@ -1255,6 +1255,7 @@ public class RouteResultPreparation {
 					rr.getBearingBegin(rr.getStartPointIndex(), Math.min(rr.getDistance(), bearingDist)));
 
 			String turnTag = getTurnString(rr);
+			boolean twiceRoadPresent = twiceRoadPresent(result, i);
 			if (turnTag != null) {
 				int fromTag = TurnType.convertType(turnTag);
 				if (!TurnType.isSlightTurn(fromTag)) {
@@ -1263,7 +1264,7 @@ public class RouteResultPreparation {
 					t = getActiveTurnType(lanes, leftSide, t);
 					t.setLanes(lanes);
 				} else if (fromTag != TurnType.C) {
-					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
+					t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent);
 					if (t != null) {
 						TurnType mainTurnType = TurnType.valueOf(fromTag, leftSide);
 						int[] lanes = t.getLanes();
@@ -1305,7 +1306,7 @@ public class RouteResultPreparation {
 				t = getActiveTurnType(lanes, leftSide, t);
 				t.setLanes(lanes);
 			} else {
-				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
+				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr, twiceRoadPresent);
 			}
 			if (t != null) {
 				t.setTurnAngle((float) - mpi);
@@ -1473,12 +1474,12 @@ public class RouteResultPreparation {
 	}
 
 
-	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
+	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm, boolean twiceRoadPresent) {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
 		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
-		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
+		String turnLanesPrevSegm = twiceRoadPresent ? null : getTurnLanesString(prevSegm);
 		// keep left/right
 		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
 		if (rs.roadsOnLeft + rs.roadsOnRight == 0) {
@@ -2182,6 +2183,9 @@ public class RouteResultPreparation {
 			if (!turnType.keepLeft() && !turnType.keepRight()) {
 				continue;
 			}
+			if (isSwitchToMotorwayLink(curr, result.get(i - 1))) {
+				continue;
+			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 			if(cnt > 0 && cnt == cntAll) {
@@ -2202,6 +2206,9 @@ public class RouteResultPreparation {
 			}
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
+				if (i > 0 && isSwitchToMotorwayLink(curr, result.get(i - 1))) {
+					continue;
+				}
 				turnType.setSkipToSpeak(true);
 				if (turnType.goAhead()) {
 					int uniqDirections = turnType.countDirections();
@@ -2379,6 +2386,40 @@ public class RouteResultPreparation {
 			t.setSkipToSpeak(true);
 		}
 		return t;
+	}
+
+	private boolean isSwitchToMotorwayLink(RouteSegmentResult curr, RouteSegmentResult prev) {
+		if (isMotorway(curr) && isMotorway(prev)) {
+			String c = curr.getObject().getHighway();
+			return c != null && c.contains("_link");
+		}
+		return false;
+	}
+
+	private boolean twiceRoadPresent(List<RouteSegmentResult> result, int i) {
+		if (i > 0 && i < result.size() - 1) {
+			RouteSegmentResult prev = result.get(i - 1);
+			String turnLanes = getTurnLanesString(prev);
+			if (turnLanes == null) {
+				return false;
+			}
+			RouteSegmentResult curr = result.get(i);
+			RouteSegmentResult next = result.get(i + 1);
+			if (prev.getObject().getId() == curr.getObject().getId()) {
+				List<RouteSegmentResult> attachedRoutes = next.getAttachedRoutes(next.getStartPointIndex());
+				//check if turn lanes allowed for next segment
+				return !Algorithms.isEmpty(attachedRoutes);
+			} else {
+				List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
+				for (RouteSegmentResult attach : attachedRoutes) {
+					if (attach.getObject().getId() == prev.getObject().getId()) {
+						//check if road the continue in attached roads
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 }
