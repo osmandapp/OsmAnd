@@ -85,7 +85,7 @@ public class QuickActionButton extends MapButton {
 
 	@Override
 	protected boolean shouldShow() {
-		return mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
+		return buttonState.isEnabled() && mapActivity.getWidgetsVisibilityHelper().shouldShowQuickActionButton();
 	}
 
 	@NonNull
