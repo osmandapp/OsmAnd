@@ -11,16 +11,93 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
 
-// TODO null finalPoints.routeToTarget
-// TODO Native lib
-// TODO attached roads
-// TODO Use minPointApproximation
-public class GpxSegmentsApproximation {
+// TODO Use minPointApproximation - to restart after "lost" gpx segments with initRoutingPoint
+// TODO loadRouteSegment() results should be validated (by priority?)
+// TODO think about bearing in addition to LOOK_AHEAD
+// TODO Native lib - after performance test
 
-	private boolean initRoutingPoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, GpxPoint start, double distThreshold) throws IOException {
+public class GpxSegmentsApproximation {
+	private static int LOOKUP_AHEAD = 10;
+
+	public GpxRouteApproximation searchGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
+	                                                    List<GpxPoint> gpxPoints) throws IOException {
+
+		long timeToCalculate = System.nanoTime();
+//		NativeLibrary nativeLib = gctx.ctx.nativeLib;
+//		if (nativeLib != null && useNativeApproximation) {
+//			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
+//		}
+		float minPointApproximation = gctx.ctx.config.minPointApproximation;
+		GpxPoint currentPoint = null;
+		for(GpxPoint p : gpxPoints) {
+			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
+			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
+		}
+		for (int i = 0; i < gpxPoints.size(); i++) {
+			if (initRoutingPoint(frontEnd, gctx, gpxPoints.get(i), minPointApproximation)) {
+				currentPoint = gpxPoints.get(i);
+				break;
+			}
+		}
+		while (currentPoint != null && currentPoint.pnt != null) {
+			double minDistSegment = 0;
+			RouteSegmentResult fres = null;
+			int minInd = -1;
+			for (int j = currentPoint.ind + 1; j < Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size()); j++) {
+				RouteSegmentResult[] res = new RouteSegmentResult[1];
+				double minDistSqr = Double.POSITIVE_INFINITY;
+				GpxPoint ps = gpxPoints.get(j);
+				minDistSqr = minDistResult(res, minDistSqr, currentPoint.pnt, ps);
+				if (currentPoint.pnt.others != null) {
+					for (RouteSegmentPoint oth : currentPoint.pnt.others) {
+						minDistSqr = minDistResult(res, minDistSqr, oth, ps);
+					}
+				}
+				if (fres == null || minDistSqr <= minDistSegment) {
+					fres = res[0];
+					minDistSegment = minDistSqr;
+					minInd = j;
+				}
+			}
+			if (minInd < 0) {
+				break;
+			}
+			currentPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
+			currentPoint.routeToTarget.add(fres);
+			currentPoint.targetInd = minInd;
+			currentPoint = gpxPoints.get(minInd);
+			RouteSegment sg = gctx.ctx.loadRouteSegment(fres.getEndPointX(), fres.getEndPointY(),
+					gctx.ctx.config.memoryLimitation);
+			while (sg != null) {
+				if (sg.getRoad().getId() != fres.getObject().getId() || sg.getSegmentEnd() != fres.getEndPointIndex()) {
+					RouteSegmentPoint p = new RouteSegmentPoint(sg.getRoad(), sg.getSegmentStart(), sg.getSegmentEnd(),
+							0);
+					if (currentPoint.pnt == null) {
+						currentPoint.pnt = p;
+					} else {
+						if (currentPoint.pnt.others == null) {
+							currentPoint.pnt.others = new ArrayList<>();
+						}
+						currentPoint.pnt.others.add(p);
+					}
+				}
+				sg = sg.getNext();
+			}
+		}
+		if (gctx.ctx.calculationProgress != null) {
+			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
+		}
+		System.out.printf("Approximation took %.2f seconds (%d route points searched)\n",
+				(System.nanoTime() - timeToCalculate) / 1.0e9, gctx.routePointsSearched);
+		return gctx;
+	}
+
+	private boolean initRoutingPoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, GpxPoint start,
+	                                 double distThreshold) throws IOException {
 		if (start != null && start.pnt == null) {
 			gctx.routePointsSearched++;
-			RouteSegmentPoint rsp = frontEnd.findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(), gctx.ctx, null, false);
+			RouteSegmentPoint rsp = frontEnd.findRouteSegment(start.loc.getLatitude(), start.loc.getLongitude(),
+					gctx.ctx, null, false);
 			if (rsp != null) {
 				if (MapUtils.getDistance(rsp.getPreciseLatLon(), start.loc) < distThreshold) {
 					start.pnt = rsp;
@@ -32,102 +109,28 @@ public class GpxSegmentsApproximation {
 		}
 		return false;
 	}
-	
-	private static int LOOKUP_AHEAD = 10;
-	public GpxRouteApproximation searchGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
-			ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException {
 
-		long timeToCalculate = System.nanoTime();
-//		NativeLibrary nativeLib = gctx.ctx.nativeLib;
-//		if (nativeLib != null && useNativeApproximation) {
-//			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
-//		}
-		float minPointApproximation = gctx.ctx.config.minPointApproximation;
-		GpxPoint nextPoint = null;
-		for(GpxPoint p : gpxPoints) {
-			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
-			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
-		}
-		for (int i = 0; i < gpxPoints.size(); i++) {
-			if (initRoutingPoint(frontEnd, gctx, gpxPoints.get(i), minPointApproximation)) {
-				nextPoint = gpxPoints.get(i);
-				break;
-			}
-		}
-//		gctx.finalPoints.add(nextPoint); // finalPoints should be filled by calculateGpxRoute()
-		while (nextPoint != null && nextPoint.pnt != null) {
-			double mindistglobal = 0;
-			RouteSegmentResult fres = null;
-			int minInd = -1;
-			for (int j = nextPoint.ind + 1; j < Math.min(nextPoint.ind + LOOKUP_AHEAD, gpxPoints.size()); j++) {
-				RouteSegmentResult[] res = new RouteSegmentResult[1];
-				double mindistsqr = Double.POSITIVE_INFINITY;
-				GpxPoint ps = gpxPoints.get(j);
-				mindistsqr = distance(res, mindistsqr, nextPoint.pnt, ps);
-				if (nextPoint.pnt.others != null) {
-					for (RouteSegmentPoint oth : nextPoint.pnt.others) {
-						mindistsqr = distance(res, mindistsqr, oth, ps);
-					}
-				}
-				if (fres == null || mindistsqr <= mindistglobal) {
-					fres = res[0];
-					mindistglobal = mindistsqr;
-					minInd = j;
-				}
-			}
-			if (minInd < 0) {
-				break;
-			}
-			nextPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
-			nextPoint.routeToTarget.add(fres);
-			nextPoint.targetInd = minInd;
-			nextPoint = gpxPoints.get(minInd);
-			RouteSegment sg = gctx.ctx.loadRouteSegment(fres.getEndPointX(), fres.getEndPointY(), gctx.ctx.config.memoryLimitation);
-			while (sg != null) {
-				if (sg.getRoad().getId() != fres.getObject().getId() || sg.getSegmentEnd() != fres.getEndPointIndex()) {
-					RouteSegmentPoint p = new RouteSegmentPoint(sg.getRoad(), sg.getSegmentStart(), sg.getSegmentEnd(),
-							0);
-					if (nextPoint.pnt == null) {
-						nextPoint.pnt = p;
-					} else {
-						if (nextPoint.pnt.others == null) {
-							nextPoint.pnt.others = new ArrayList<>();
-						}
-						nextPoint.pnt.others.add(p);
-					}
-				}
-				sg = sg.getNext();
-			}
-//			gctx.finalPoints.add(nextPoint); // finalPoints should be filled by calculateGpxRoute()
-		}
-		if (gctx.ctx.calculationProgress != null) {
-			gctx.ctx.calculationProgress.timeToCalculate = System.nanoTime() - timeToCalculate;
-		}
-		System.out.printf("Approximation took %.2f seconds\n", (System.nanoTime() - timeToCalculate) / 1.0e9);
-		return gctx;
-		
-	}
-	
-	private double distance(RouteSegmentResult[] res, double mindistsqr, RouteSegmentPoint pnt, GpxPoint loc) {
+	private double minDistResult(RouteSegmentResult[] res, double minDistSqr, RouteSegmentPoint pnt, GpxPoint loc) {
 		int segmentEnd = -1;
 		double dist = 0;
-		for (int i = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD); i < Math.min(pnt.getRoad().getPointsLength(),
-				pnt.getSegmentStart() + LOOKUP_AHEAD); i++) {
+		int start = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD);
+		int end = Math.min(pnt.getRoad().getPointsLength(), pnt.getSegmentStart() + LOOKUP_AHEAD);
+		for (int i = start; i < end; i++) {
 			if(i == pnt.getSegmentStart()) {
 				continue;
 			}
-			double d = MapUtils.squareDist31TileMetric(loc.x31, loc.y31, pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i));
+			double d = MapUtils.squareDist31TileMetric(loc.x31, loc.y31,
+					pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i));
 			if (segmentEnd < 0 || d < dist) {
 				segmentEnd = i;
 				dist = d;
 			}
 		}
 		dist += pnt.distToProj;
-		if ((res[0] == null || dist < mindistsqr) && segmentEnd >= 0) {
-			mindistsqr = dist;
+		if ((res[0] == null || dist < minDistSqr) && segmentEnd >= 0) {
+			minDistSqr = dist;
 			res[0] = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), segmentEnd);
 		}
-		return mindistsqr;
+		return minDistSqr;
 	}
-
 }
