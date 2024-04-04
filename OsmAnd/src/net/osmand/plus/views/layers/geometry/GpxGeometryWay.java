@@ -213,7 +213,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	}
 
 	@Override
-	public void calculatePath(@NonNull List<Integer> indexes, @NonNull List<Integer> xs, @NonNull List<Integer> ys, @Nullable List<GeometryWayStyle<?>> styles, @NonNull List<GeometryWayDrawer.DrawPathData31> pathsData/*, boolean use3dVisualization*/) {
+	public void calculatePath(@NonNull List<Integer> indexes, @NonNull List<Integer> xs, @NonNull List<Integer> ys, @Nullable List<GeometryWayStyle<?>> styles, @NonNull List<GeometryWayDrawer.DrawPathData31> pathsData) {
 		super.calculatePath(indexes, xs, ys, styles, pathsData);
 		for (int i = 0; i < pathsData.size(); i++) {
 			GeometryWayDrawer.DrawPathData31 drawPathData = pathsData.get(i);

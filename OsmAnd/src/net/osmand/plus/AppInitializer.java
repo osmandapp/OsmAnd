@@ -115,8 +115,6 @@ import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import btools.routingapp.IBRouterService;
-
 public class AppInitializer implements IProgress {
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS";
@@ -292,7 +290,6 @@ public class AppInitializer implements IProgress {
 		startTime = System.currentTimeMillis();
 		getLazyRoutingConfig();
 		app.applyTheme(app);
-		startupInit(app.reconnectToBRouter(), IBRouterService.class);
 		app.importHelper = startupInit(new ImportHelper(app), ImportHelper.class);
 		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
@@ -532,6 +529,7 @@ public class AppInitializer implements IProgress {
 			app.searchUICore.initSearchUICore();
 			notifyEvent(SEARCH_UI_CORE_INITIALIZED);
 			checkLiveUpdatesAlerts();
+			connectToBRouter();
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());
@@ -790,5 +788,10 @@ public class AppInitializer implements IProgress {
 			return cls;
 		}
 		return cls.substring(packageLen + 1);
+	}
+
+	private void connectToBRouter() {
+		app.reconnectToBRouter();
+		notifyEvent(BROUTER_INITIALIZED);
 	}
 }

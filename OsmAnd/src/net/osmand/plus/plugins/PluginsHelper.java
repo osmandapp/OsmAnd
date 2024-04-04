@@ -885,6 +885,11 @@ public class PluginsHelper {
 		params.put("os", "android");
 		params.put("version", Version.getAppVersion(app));
 		params.put("lang", app.getLocaleHelper().getLanguage());
+		params.put("nd", String.valueOf(app.getAppInitializer().getFirstInstalledDays()));
+		params.put("ns", String.valueOf(app.getAppInitializer().getNumberOfStarts()));
+		if (app.isUserAndroidIdAllowed()) {
+			params.put("aid", app.getUserAndroidId());
+		}
 		AndroidNetworkUtils.sendRequestAsync(app, ONLINE_PLUGINS_URL, params, null,
 				false, false, (resultJson, error, resultCode) -> {
 					new AsyncTask<Void, Void, List<OnlineOsmandPlugin>>() {

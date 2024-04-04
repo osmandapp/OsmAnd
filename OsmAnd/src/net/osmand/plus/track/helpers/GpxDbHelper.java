@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GpxDbHelper implements GpxDbReaderCallback {
-	private static final Log log = PlatformUtil.getLog(GpxDbHelper.class);
+	private static final Log LOG = PlatformUtil.getLog(GpxDbHelper.class);
 	private final OsmandApplication app;
 	private final GPXDatabase database;
 
@@ -54,6 +54,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public void loadGpxItems() {
+		long start = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
 		for (GpxDataItem item : items) {
 			File file = item.getFile();
@@ -63,10 +64,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				remove(file);
 			}
 		}
+		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + items.size());
 		loadNewGpxItems();
 	}
 
 	private void loadNewGpxItems() {
+		long start = System.currentTimeMillis();
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
 		List<GPXInfo> gpxInfos = GpxUiHelper.getGPXFiles(gpxDir, true);
 		for (GPXInfo gpxInfo : gpxInfos) {
@@ -75,6 +78,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				add(new GpxDataItem(app, file));
 			}
 		}
+		LOG.info("Time to loadNewGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + gpxInfos.size());
 	}
 
 	private void putToCache(@NonNull GpxDataItem item) {

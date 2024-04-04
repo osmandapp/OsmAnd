@@ -195,6 +195,7 @@
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
+	<string name="poi_shop_general">General store</string>
 	<string name="poi_shop_food">Convenience store and supermarket</string>
 	<string name="poi_emergency">Emergency</string>
 	<string name="poi_emergency_infrastructure">Emergency infrastructure</string>
@@ -819,6 +820,9 @@
 	<string name="poi_aquarium">Aquarium</string>
 	<string name="poi_theme_park">Theme park</string>
 
+	<string name="poi_photo_booth">Photo booth</string>
+	<string name="poi_music_venue">Music venue</string>
+
 	<string name="poi_attraction">Tourist attraction</string>
 <!--	<string name="poi_tourism_attraction">Tourist attraction</string>-->
 	<string name="poi_tourism_yes">Touristic object</string>
@@ -1413,6 +1417,7 @@
 	<string name="poi_wheelchair_limited">Limited</string>
 	<string name="poi_wholesale">Wholesale</string>
 
+	<string name="poi_access_yes">Access is allowed</string>
 	<string name="poi_access_private">Private access</string>
 	<string name="poi_access_no">No access</string>
 	<string name="poi_access_destination">Destination access</string>
@@ -1420,7 +1425,8 @@
 	<string name="poi_access_customers">Customer access</string>
 	<string name="poi_access_delivery">Delivery access</string>
 	<string name="poi_access_agricultural">Agricultural access</string>
-
+	<string name="poi_access_permit">Permit required</string>
+	
 	<string name="poi_content_silage">Content: silage</string>
 	<string name="poi_content_water">Content: water</string>
 	<string name="poi_content_slurry">Content: slurry</string>
@@ -1892,7 +1898,10 @@
 	<string name="poi_outdoor_seating_pedestrian_zone">Outdoor seating: pedestrian zone</string>
 	<string name="poi_outdoor_seating_garden">Outdoor seating: garden</string>
 	<string name="poi_outdoor_seating_patio">Outdoor seating: patio</string>
-
+	<string name="poi_indoor_seating_yes">Indoor seating: yes</string>
+	<string name="poi_indoor_seating_no">No indoor seating</string>
+	<string name="poi_indoor_seating_bar_table">Indoor seating: bar table</string>
+	
 	<string name="poi_cocktails_yes">Yes;Cocktails</string>
 
 	<string name="poi_second_hand_yes">Yes</string>
@@ -3259,6 +3268,7 @@
 	<string name="poi_cuisine_chicken">Chicken</string>
 	<string name="poi_cuisine_ice_cream">Ice cream</string>
 	<string name="poi_cuisine_sushi">Sushi</string>
+	<string name="poi_cuisine_fish">Fish</string>
 	<string name="poi_cuisine_fish_and_chips">Fish and chips</string>
 	<string name="poi_cuisine_seafood">Seafood</string>
 	<string name="poi_cuisine_barbecue">Barbecue</string>
@@ -4908,8 +4918,6 @@
 	<string name="poi_avalanche_transceiver_training">Avalanche transceiver training</string>
 	<string name="poi_avalanche_transceiver_checkpoint">Avalanche transceiver checkpoint</string>
 
-	<string name="poi_access_permit">Permit required</string>
-
 	<string name="poi_parcel_locker">Parcel locker</string>
 
 	<string name="poi_tiles">Tiles store</string>
@@ -5024,8 +5032,6 @@
 	<string name="poi_playground_horizontal_bar">Horizontal bar</string>
 	<string name="poi_playground_activitypanel">Activity panel</string>
 	<string name="poi_playground_exercise">Outdoor gym</string>
-
-	<string name="poi_access_yes">Access is allowed</string>
 
 	<string name="poi_climbing_speed_yes">Speed: yes</string>
 	<string name="poi_climbing_grade_uiaa_max">Hardest route (UIAA grade)</string>
@@ -5276,6 +5282,7 @@
 
 	<string name="poi_from">From</string>
 	<string name="poi_to">To</string>
+	<string name="poi_via">Via</string>
 	<string name="poi_distance">Distance</string>
 	<string name="poi_cycle_network">Cycle network</string>
 	<string name="poi_state_proposed">State: proposed</string>
@@ -5302,6 +5309,8 @@
 	<string name="poi_border_zone">Border zone</string>
 
 	<string name="poi_hang_gliding">Hang gliding</string>
+
+	<string name="poi_live_music_yes">Yes</string>
 
 	<string name="poi_padus_area">PAD-US area</string>
 	<string name="poi_padus_category_proclamation">Category: proclamation</string>
@@ -5413,13 +5422,6 @@
 	<string name="poi_us_maps_recreation_area_activity_description">Activity description</string>
 	<string name="poi_us_maps_recreation_area_accessibility_info">Accessibility info</string>
 
-	<string name="poi_nfs_yes">Managed by United States Forest Service</string>
-	<string name="poi_blm_yes">Managed by Bureau Of Land Management</string>
-
-	<string name="poi_via">Via</string>
-
-	<string name="poi_photo_booth">Photo booth</string>
-
 	<string name="poi_us_maps_recreation_area_activity_poi">Point Of Interest</string>
 	<string name="poi_us_maps_recreation_area_activity_scenic_overlook">Scenic overlook</string>
 	<string name="poi_us_maps_recreation_area_activity_day_use_site">Day use area;Day use site;Day-use area;Day-use site;Day-use recreation area;Day-use recreation site</string>
@@ -5439,17 +5441,8 @@
 	<string name="poi_us_maps_recreation_area_facility_rv_dump_station">RV dump station</string>
 	<string name="poi_us_maps_recreation_area_facility_warming_hut">Warming hut</string>
 	<string name="poi_us_maps_recreation_area_facility_parking">Parking area</string>
-
-	<string name="poi_music_venue">Music venue</string>
-	<string name="poi_live_music_yes">Yes</string>
-
-	<string name="poi_shop_general">General shop</string>
-
-	<string name="poi_cuisine_fish">Fish</string>
-
-	<string name="poi_indoor_seating_yes">Indoor seating: yes</string>
-	<string name="poi_indoor_seating_no">No indoor seating</string>
-	<string name="poi_indoor_seating_bar_table">Indoor seating: bar table</string>
-
+	
+	<string name="poi_nfs_yes">Managed by United States Forest Service</string>
+	<string name="poi_blm_yes">Managed by Bureau Of Land Management</string>
 
 </resources>

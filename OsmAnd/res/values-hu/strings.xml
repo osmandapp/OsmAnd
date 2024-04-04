@@ -5667,4 +5667,6 @@
     <string name="download_cloud_versions">Felhőben lévő verziók letöltése</string>
     <string name="upload_local_versions">Helyi verziók feltöltése</string>
     <string name="map_widget_map_scale">Méretarány</string>
+    <string name="unchanged_parameter_summary">Minden nyomvonal megtartja a saját paramétereit.</string>
+    <string name="shared_string_unchanged">Változatlan</string>
 </resources>

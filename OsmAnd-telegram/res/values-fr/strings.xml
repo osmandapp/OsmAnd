@@ -278,4 +278,5 @@
     <string name="location_source_summary">Par défaut, OsmAnd installé depuis Google Play utilise les Google Play Services pour déterminer la localisation.
 \n
 \nSi vous obtenez des informations de localisation inexactes ou si vous utilisez un appareil sans Google Play Services, essayez de changer par l\'API Android</string>
+    <string name="location_source">Source de localisation</string>
 </resources>

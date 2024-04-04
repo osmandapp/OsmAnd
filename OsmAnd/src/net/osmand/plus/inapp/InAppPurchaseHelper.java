@@ -701,10 +701,12 @@ public abstract class InAppPurchaseHelper {
 
 	protected void addUserInfo(Map<String, String> parameters) {
 		parameters.put("version", Version.getFullVersion(ctx));
-		parameters.put("lang", ctx.getLanguage() + "");
-		parameters.put("nd", ctx.getAppInitializer().getFirstInstalledDays() + "");
-		parameters.put("ns", ctx.getAppInitializer().getNumberOfStarts() + "");
-		parameters.put("aid", ctx.getUserAndroidId());
+		parameters.put("lang", ctx.getLanguage());
+		parameters.put("nd", String.valueOf(ctx.getAppInitializer().getFirstInstalledDays()));
+		parameters.put("ns", String.valueOf(ctx.getAppInitializer().getNumberOfStarts()));
+		if (ctx.isUserAndroidIdAllowed()) {
+			parameters.put("aid", ctx.getUserAndroidId());
+		}
 	}
 
 	protected void onPurchaseDone(PurchaseInfo info) {

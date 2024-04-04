@@ -118,6 +118,7 @@
 								android:paddingEnd="@dimen/content_padding_small"
 								android:paddingRight="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
+								android:selectAllOnFocus="true"
 								android:textSize="@dimen/default_list_text_size" />
 
 						</com.google.android.material.textfield.TextInputLayout>

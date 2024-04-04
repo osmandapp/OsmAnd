@@ -5673,4 +5673,6 @@
     <string name="upload_local_versions">Unggah versi lokal</string>
     <string name="download_cloud_versions">Unduh versi awan</string>
     <string name="map_widget_map_scale">Skala peta</string>
+    <string name="unchanged_parameter_summary">Setiap trek akan menyimpan parameternya sendiri.</string>
+    <string name="shared_string_unchanged">Tidak diubah</string>
 </resources>

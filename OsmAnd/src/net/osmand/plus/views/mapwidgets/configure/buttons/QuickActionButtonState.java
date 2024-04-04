@@ -163,4 +163,8 @@ public class QuickActionButtonState extends MapButtonState {
 		}
 		this.quickActions = resQuickActions;
 	}
+
+	public boolean isDefaultButton() {
+		return Algorithms.stringsEqual(DEFAULT_BUTTON_ID, getId());
+	}
 }
