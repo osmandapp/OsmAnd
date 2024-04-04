@@ -46,6 +46,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
@@ -165,6 +166,10 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		OsmandSettings settings = getApp().getSettings();
 		if(settings.simulateNavigationStartedFromAdb) {
 			settings.simulateNavigation = false;
+			OsmAndLocationSimulation locationSimulation = getApp().getLocationProvider().getLocationSimulation();
+			if (locationSimulation.isRouteAnimating() || locationSimulation.isLoadingRouteLocations()) {
+				locationSimulation.stop();
+			}
 		}
 		getApp().getSettings().simulateNavigationStartedFromAdb = false;
 	}
