@@ -1873,7 +1873,7 @@
     <string name="website">Veb strana</string>
     <string name="hno">Kućni broj</string>
     <string name="street_name">Naziv ulice</string>
-    <string name="download_using_mobile_internet">Nepovezan na mobilni internet. Da li iskoristio trenutni internet za preuzimanje?</string>
+    <string name="download_using_mobile_internet">Nepovezan na Wi-Fi. Koristiš mobilni internet za preuzimanje?</string>
     <string name="clear_destination">Očisti odredište</string>
     <string name="cancel_navigation">Zaustavi navođenje</string>
     <string name="cancel_route">Prekidaš navigaciju?</string>

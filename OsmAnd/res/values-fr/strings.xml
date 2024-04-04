@@ -600,7 +600,7 @@
 \n
 \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et le guidage en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
-    <string name="osmand_accessibility_description">Activez, dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse des voix de synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
+    <string name="osmand_accessibility_description">Active, directement dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse de la synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
     <string name="osmand_development_plugin_description">Permet d\'accéder à des fonctionnalités pour tester et déboguer OsmAnd : simuler des guidages, gérer les rendus, vérifier les performances, etc. Cette extension n\'est pas recommandée pour une utilisation normale de l\'application.</string>
     <string name="plugins_screen">Gestionnaire d\'extensions</string>
     <string name="prefs_plugins_descr">Les extensions ajoutent à l\'application des fonctionnalités supplémentaires et des paramètres avancés.</string>
@@ -5632,5 +5632,12 @@
     <string name="rendering_attr_padusDisplayMode_description">Par type d\'accès ou nom de gestionnaire</string>
     <string name="avg_sensor_cadence">Cadence vélo, moyenne</string>
     <string name="help_article_setup_a_route_name">Définir un itinéraire</string>
-    <string name="special_routing_cpp">Type de navigation spécial</string>
+    <string name="special_routing_cpp">Type de navigation spéciale</string>
+    <string name="distance_during_navigation_description">Sélectionnez comment les informations numériques sont affichées dans les widgets de navigation (distance, bifurcation suivante, voies).
+\n
+\nChoisissez «%1$s» pour des chiffres exacts, ou «%2$s» pour faciliter la lecture.</string>
+    <string name="shared_string_unchanged">Inchangé</string>
+    <string name="unchanged_parameter_summary">Chaque trace conservera ses propres paramètres.</string>
+    <string name="auto_zoom_discrete">Arrondi</string>
+    <string name="map_widget_map_scale">Échelle de la carte</string>
 </resources>
