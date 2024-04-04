@@ -1178,7 +1178,7 @@
     <string name="keep_informing">Répéter les instructions de guidage</string>
     <string name="navigation_intent_invalid">Format invalide : %s</string>
     <string name="arrival_distance">Annonce d\'arrivée</string>
-    <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination?</string>
+    <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination ?</string>
     <string name="shared_string_share">Partager</string>
     <string name="share_fav_subject">Favoris partagés grâce à OsmAnd</string>
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
@@ -5619,7 +5619,7 @@
     <string name="precise">Exact</string>
     <string name="shared_sting_all_colors">Toutes les couleurs</string>
     <string name="auto_zoom">Zoom automatique</string>
-    <string name="java_safe">Java (Safe)</string>
+    <string name="java_safe">Java (sûr)</string>
     <string name="auto_zoom_smooth">Progressif</string>
     <string name="distance_during_navigation">Distance pendant la navigation</string>
     <string name="routing_type">Type de navigation</string>
@@ -5640,4 +5640,9 @@
     <string name="unchanged_parameter_summary">Chaque trace conservera ses propres paramètres.</string>
     <string name="auto_zoom_discrete">Arrondi</string>
     <string name="map_widget_map_scale">Échelle de la carte</string>
+    <string name="routing_type_a_star_2_phase">A* 2 phases</string>
+    <string name="routing_type_a_star_classic">A* classique</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Masquer les limites des terres publiques</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Masquer les limites des terres publiques mais laisser les zones</string>
+    <string name="rendering_attr_padusDisplayMode_name">Mode d\'affichage des terres publiques</string>
 </resources>
