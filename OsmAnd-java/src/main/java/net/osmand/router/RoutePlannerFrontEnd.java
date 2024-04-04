@@ -316,6 +316,9 @@ public class RoutePlannerFrontEnd {
 
 	public RoutePlannerFrontEnd setUseGeometryBasedApproximation(boolean enabled) {
 		this.useGeometryBasedApproximation = enabled;
+		if (enabled) {
+			this.useNativeApproximation = false; // use Java method until C++ implemented
+		}
 		return this;
 	}
 
