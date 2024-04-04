@@ -166,7 +166,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 		if(settings.simulateNavigationStartedFromAdb) {
 			settings.simulateNavigation = false;
 		}
-		getApp().getSettings().simulateNavigationStartedFromAdb = true;
+		getApp().getSettings().simulateNavigationStartedFromAdb = false;
 	}
 
 	public boolean hasStarted() {
