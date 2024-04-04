@@ -18,6 +18,7 @@ import net.osmand.util.MapUtils;
 // TODO fix minor "Points are not connected"
 // TODO Native lib - after performance test
 // TODO makePrecise for start segment
+// TODO fix Map Creator gpx "holes"
 
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
