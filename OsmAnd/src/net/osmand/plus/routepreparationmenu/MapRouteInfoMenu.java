@@ -118,6 +118,7 @@ import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.voice.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.SelectTrackTabsFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment.GpxFileSelectionListener;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -2016,18 +2017,29 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void chooseAndShowFollowTrack() {
 		selectFromTracks = true;
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+		if (mapActivity == null) {
+			return;
+		}
+
+		boolean isFollowTrack = mapActivity.getMyApplication().getRoutingHelper().getCurrentGPXRoute() != null;
+		if (isFollowTrack) {
+			openFollowTrackFragment(mapActivity);
+		} else {
+			GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
 				if (TrackSelectSegmentBottomSheet.shouldShowForGpxFile(gpxFile)) {
 					mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, true, getOnSegmentSelectedListener());
 				} else {
 					mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile, false);
-					FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-					FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
+					openFollowTrackFragment(mapActivity);
 				}
 			};
 			SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 		}
+	}
+
+	private void openFollowTrackFragment(@NonNull MapActivity mapActivity) {
+		FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
+		FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
 	}
 
 	private OnSegmentSelectedListener getOnSegmentSelectedListener() {
