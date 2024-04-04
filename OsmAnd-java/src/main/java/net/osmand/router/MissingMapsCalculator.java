@@ -131,7 +131,7 @@ public class MissingMapsCalculator {
 					}
 				}
 			}
-		} else {
+		} else if (presentTimestamps != null) {
 			long selectedEdition = presentTimestamps.iterator().next();
 			for (Point p : pointsToCheck) {
 				for (int i = 0; p.hhEditions != null && i < p.hhEditions.length; i++) {
