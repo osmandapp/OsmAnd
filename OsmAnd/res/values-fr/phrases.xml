@@ -4715,4 +4715,18 @@
     <string name="poi_healthcare_speciality_aromatherapy">Aromathérapie</string>
     <string name="poi_border_zone">Zone frontière</string>
     <string name="poi_reservation">Réservation</string>
+    <string name="poi_indoor_seating_yes">Places assises à l\'intérieur : oui</string>
+    <string name="poi_indoor_seating_bar_table">Places assises à l\'intérieur : table de bar</string>
+    <string name="poi_photo_booth">Photomaton</string>
+    <string name="poi_indoor_seating_no">Pas de places assises à l\'intérieur</string>
+    <string name="poi_sump_buster">Piège à voitures</string>
+    <string name="poi_live_music">Musique live</string>
+    <string name="poi_music_venue">Salle de musique</string>
+    <string name="poi_us_maps_recreation_area_activity">Activité de la zone de loisirs</string>
+    <string name="poi_us_maps_recreation_area_open_status">Statut d\'accès à la zone de loisirs</string>
+    <string name="poi_shop_general">Magasin général</string>
+    <string name="poi_cuisine_fish">Poisson</string>
+    <string name="poi_impromptu">Impromptu</string>
+    <string name="poi_us_maps_recreation_area_facility">Installation d\'aire de loisirs</string>
+    <string name="poi_barrier_board">Panneau barrière</string>
 </resources>
