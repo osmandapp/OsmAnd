@@ -81,7 +81,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
-				params.gravity = fullRow ? Gravity.CENTER : Gravity.START | Gravity.CENTER_VERTICAL;
+				textView.setGravity(fullRow ? Gravity.CENTER : Gravity.START | Gravity.CENTER_VERTICAL);
 				params.setMarginStart(dpToPx(app, (shouldShowIcon() || fullRow) ? 36 : 0));
 				params.setMarginEnd(dpToPx(app, fullRow ? 36 : 0));
 			}
