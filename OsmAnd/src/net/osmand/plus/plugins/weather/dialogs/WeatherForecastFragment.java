@@ -191,7 +191,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
-		timeSlider.setStepSize(today ? 0.2f : 0.6f);
+		timeSlider.setStepSize(today ? 1.0f / 6.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
