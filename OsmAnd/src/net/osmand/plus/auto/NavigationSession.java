@@ -162,6 +162,11 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
 		getLifecycle().removeObserver(this);
+		OsmandSettings settings = getApp().getSettings();
+		if(settings.simulateNavigationStartedFromAdb) {
+			settings.simulateNavigation = false;
+		}
+		getApp().getSettings().simulateNavigationStartedFromAdb = true;
 	}
 
 	public boolean hasStarted() {
