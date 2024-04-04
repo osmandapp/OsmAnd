@@ -52,6 +52,7 @@ public class RouteCalculationProgress {
 	public boolean requestMapsToUpdate;
 	public List<WorldRegion> mapsToUpdate;
 	public List<WorldRegion> missingMaps;
+	public List<WorldRegion> potentiallyUsedMaps;
 
 	private int hhIterationStep = HHIteration.HH_NOT_STARTED.ordinal();
 	private int hhTargetsDone, hhTargetsTotal;
