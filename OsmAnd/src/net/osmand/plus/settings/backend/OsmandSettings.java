@@ -1482,6 +1482,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
 	public boolean simulateNavigation;
+	public boolean simulateNavigationStartedFromAdb;
 	public String simulateNavigationMode = SimulationMode.PREVIEW.getKey();
 	public float simulateNavigationSpeed = SIM_MIN_SPEED;
 
