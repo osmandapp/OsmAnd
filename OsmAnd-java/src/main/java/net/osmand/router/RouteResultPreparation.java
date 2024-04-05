@@ -497,8 +497,9 @@ public class RouteResultPreparation {
 			RouteSegmentResult pr = result.get(i - 1);
 			double d = MapUtils.getDistance(pr.getPoint(pr.getEndPointIndex()), rr.getPoint(rr.getStartPointIndex()));
 			if (d > 0) {
-				System.out.println("Points are not connected : " + pr.getObject() + "(" + pr.getEndPointIndex() + ") -> " + rr.getObject()
-						+ "(" + rr.getStartPointIndex() + ") " + d + " meters");
+				System.out.printf("Points are not connected: %d-%d of %d %s (%d) -> %s (%d) by %.2f meters\n",
+						i - 1, i, result.size() - 1, pr.getObject(), pr.getEndPointIndex(),
+						rr.getObject(), rr.getStartPointIndex(), d);
 			}
 		}
 	}

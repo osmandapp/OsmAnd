@@ -342,11 +342,14 @@ public class RoutePlannerFrontEnd {
 		if (gctx.ctx.calculationProgress == null) {
 			gctx.ctx.calculationProgress = new RouteCalculationProgress();
 		}
-		app.searchGpxApproximation(this, gctx, gpxPoints, resultMatcher);
+		app.fastGpxApproximation(this, gctx, gpxPoints);
 		calculateGpxRoute(gctx, gpxPoints);
 		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
 			log.info(gctx);
+		}
+		if (resultMatcher != null) {
+			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
 		}
 		return gctx;
 	}
@@ -528,7 +531,7 @@ public class RoutePlannerFrontEnd {
 		return true;
 	}
 
-	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
+	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) throws IOException {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
@@ -571,7 +574,12 @@ public class RoutePlannerFrontEnd {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
-		// clean turns to recaculate them
+
+		if (useGeometryBasedApproximation) {
+			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.result); // not required by classic method
+		}
+
+		// clean turns to recalculate them
 		cleanupResultAndAddTurns(gctx);
 	}
 
