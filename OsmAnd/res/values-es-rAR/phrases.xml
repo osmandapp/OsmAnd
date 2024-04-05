@@ -4857,7 +4857,7 @@
     <string name="poi_us_maps_recreation_area_activity_day_use_site">Zona de uso diurno;Sitio de uso diurno;Área de uso diurno;Área recreativa de uso diurno;Sitio recreativo de uso diurno</string>
     <string name="poi_us_maps_recreation_area_facility_boat_ramp">Rampa náutica</string>
     <string name="poi_us_maps_recreation_area_facility_group_shelter">Refugio para grupos</string>
-    <string name="poi_shop_general">Tienda general</string>
+    <string name="poi_shop_general">Tienda general;Almacén general</string>
     <string name="poi_live_music">Música en vivo</string>
     <string name="poi_music_venue">Sala de música;Sala de conciertos</string>
     <string name="poi_live_music_yes">Sí</string>
