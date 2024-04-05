@@ -316,9 +316,6 @@ public class RoutePlannerFrontEnd {
 
 	public RoutePlannerFrontEnd setUseGeometryBasedApproximation(boolean enabled) {
 		this.useGeometryBasedApproximation = enabled;
-		if (enabled) {
-			this.useNativeApproximation = false; // use Java method until C++ implemented
-		}
 		return this;
 	}
 
@@ -333,10 +330,11 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		if (useGeometryBasedApproximation && !useNativeApproximation) {
-			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
+		if (useGeometryBasedApproximation) {
+			return searchGpxSegments(gctx, gpxPoints, resultMatcher); // use Java-only method until C++ implemented
+		} else {
+			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 		}
-		return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 	}
 	
 	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
