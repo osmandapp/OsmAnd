@@ -4935,7 +4935,7 @@
     <string name="glide_ratio_to_target">Razmera jedrenja do cilja</string>
     <string name="help_article_map_legend_nautical_map_name">Stil pomorske mape</string>
     <string name="map_widget_group_glide_ratio">Koeficijent klizanja</string>
-    <string name="help_article_map_track_context_menu_name">Priručni meni trasa</string>
+    <string name="help_article_map_track_context_menu_name">Priručni meni staza</string>
     <string name="help_article_map_raster_maps_name">Rasterske mape (online/ offline)</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Ekran prilikom navođenja</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Glasovna uputstva / obaveštenja</string>
@@ -5504,7 +5504,7 @@
     <string name="root_folder">Root folder</string>
     <string name="shared_string_loading">Preuzimanje</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne trase</string>
-    <string name="empty_smart_folder_title">Nema odgovarajućeg trasa</string>
+    <string name="empty_smart_folder_title">Nema odgovarajućeg staza</string>
     <string name="empty_smart_folder_description">Odgovarajuće trase automatski će se pojaviti ovde</string>
     <string name="smart_folder_saved">Pametan folder je snimljen</string>
     <string name="track_filter_range_selected_format">%s - %s, %s</string>
@@ -5518,14 +5518,14 @@
     <string name="delete_smart_folder_dialog_message">Ovo će izbrisati \"%1$s\" pametan folder.</string>
     <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
     <string name="empty_name">Prazan naziv</string>
-    <string name="loading_tracks">Ponovno učitavanje trasa</string>
+    <string name="loading_tracks">Ponovno učitavanje staza</string>
     <string name="filter_by_name">Filtriranje po nazivu</string>
     <string name="shared_string_reset_all">Resetuj sve</string>
     <string name="date_of_creation">Datum kreiranja</string>
     <string name="delete_all_items">Obriši sve stavke</string>
     <string name="save_as_smart_folder">Snimi kao pametan folder</string>
     <string name="folder">Folder</string>
-    <string name="no_config_smart_folder_description">Pametni folderi omogućuju grupisanje trasa prema primenjenim filterima</string>
+    <string name="no_config_smart_folder_description">Pametni folderi omogućuju grupisanje staza prema primenjenim filterima</string>
     <string name="discard_filter_changes_prompt">Poništavaš sve filtere?</string>
     <string name="app_mode_paragliding">Paraglajding</string>
     <string name="max_altitude">Maksimalna nadmorska visina</string>
@@ -5533,8 +5533,8 @@
     <string name="trash_is_empty_banner_desc">Fajlovi, izbrisani iz Osmand Cloud, će biti dostupni ovde za %1$s dana.</string>
     <plurals name="tracks">
         <item quantity="one">%1$d (%2$d trasa)</item>
-        <item quantity="few">%1$d (%2$d trase)</item>
-        <item quantity="other">%1$d (%2$d trasa)</item>
+        <item quantity="few">%1$d (%2$d staza)</item>
+        <item quantity="other">%1$d (%2$d staza)</item>
     </plurals>
     <string name="shared_string_all_tracks">Sve trase</string>
     <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
@@ -5661,7 +5661,7 @@
 \n
 \n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva
 \n
-\n• Jedinstven korisnički interfejs za odabir trasa
+\n• Jedinstven korisnički interfejs za odabir staza
 \n
 \n• Prijava na OpenStreetMap prebačena je na OAuth 2.0
 \n
@@ -5676,5 +5676,5 @@
     <string name="download_cloud_versions">Preuzmi Cloud verzije</string>
     <string name="map_widget_map_scale">Razmera mape</string>
     <string name="shared_string_unchanged">Nepromenjeno</string>
-    <string name="unchanged_parameter_summary">Svaka trasa će zadržati svoje vlastite parametre.</string>
+    <string name="unchanged_parameter_summary">Svaka staza će zadržati svoje vlastite parametre.</string>
 </resources>
