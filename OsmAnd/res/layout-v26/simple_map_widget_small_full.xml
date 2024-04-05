@@ -7,25 +7,28 @@
 	android:layout_height="@dimen/simple_widget_small_height"
 	android:orientation="vertical">
 
-	<LinearLayout
+	<RelativeLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
-		android:paddingHorizontal="@dimen/content_padding">
+		android:paddingHorizontal="16dp"
+		android:paddingVertical="6dp">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/widget_icon"
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
-			android:layout_gravity="start|center_vertical"
+			android:layout_alignParentStart="true"
+			android:layout_centerVertical="true"
 			osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<TextView
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_marginStart="@dimen/content_padding_small"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:layout_centerVertical="true"
 			android:autoSizeMaxTextSize="@dimen/simple_widget_value_small_size"
 			android:autoSizeMinTextSize="@dimen/simple_widget_value_minimum_size"
 			android:autoSizeStepGranularity="2sp"
@@ -39,9 +42,10 @@
 		<LinearLayout
 			android:id="@+id/linearLayout"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:layout_marginStart="@dimen/content_padding"
+			android:layout_height="match_parent"
+			android:layout_alignParentEnd="true"
+			android:layout_marginStart="16dp"
+			android:layout_toEndOf="@+id/widget_text"
 			android:orientation="vertical">
 
 			<TextView
@@ -73,6 +77,6 @@
 
 		</LinearLayout>
 
-	</LinearLayout>
+	</RelativeLayout>
 
 </LinearLayout>
