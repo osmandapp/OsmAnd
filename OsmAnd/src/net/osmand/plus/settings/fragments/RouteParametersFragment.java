@@ -57,6 +57,7 @@ import net.osmand.plus.settings.bottomsheets.GoodsRestrictionsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.HazmatCategoryBottomSheet;
 import net.osmand.plus.settings.bottomsheets.RecalculateRouteInDeviationBottomSheet;
 import net.osmand.plus.settings.controllers.ViaFerrataDialogController;
+import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.settings.preferences.ListParameters;
@@ -412,7 +413,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			setupNativePublicTransport();
 		} else {
 			setupRoutingTypePref();
-			setupGpxApproximationPref();
+			setupApproximationTypePref();
 			setupAutoZoomPref();
 			setupOsmLiveForRoutingPref();
 		}
@@ -423,42 +424,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		developmentCategory.setLayoutResource(R.layout.preference_category_with_descr);
 		developmentCategory.setTitle(R.string.development);
 		screen.addPreference(developmentCategory);
-	}
-
-	private void setupGpxApproximationPref() {
-		Preference preference = new Preference(requireContext());
-		preference.setKey(settings.APPROX_SAFE_MODE.getId());
-		preference.setTitle(R.string.gpx_approximation);
-		preference.setLayoutResource(R.layout.preference_with_descr);
-		preference.setIcon(getContentIcon(R.drawable.ic_action_attach_track));
-		preference.setSummary(settings.APPROX_SAFE_MODE.get() ? R.string.java_safe : R.string.cpp);
-		getPreferenceScreen().addPreference(preference);
-	}
-
-	private void showGpxApproximationDialog(@NonNull Preference preference) {
-		boolean selected = settings.APPROX_SAFE_MODE.getModeValue(getSelectedAppMode());
-
-		List<PopUpMenuItem> items = new ArrayList<>();
-		items.add(new PopUpMenuItem.Builder(preference.getContext())
-				.setTitleId(R.string.java_safe)
-				.setSelected(selected)
-				.showCompoundBtn(getActiveProfileColor())
-				.setOnClickListener(itemView -> onPreferenceChange(preference, true))
-				.create());
-
-		items.add(new PopUpMenuItem.Builder(preference.getContext())
-				.setTitleId(R.string.cpp)
-				.setSelected(!selected)
-				.showCompoundBtn(getActiveProfileColor())
-				.setOnClickListener(itemView -> onPreferenceChange(preference, false))
-				.create());
-
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = getListView().findViewWithTag(preference);
-		displayData.menuItems = items;
-		displayData.nightMode = isNightMode();
-		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
-		PopUpMenu.show(displayData);
 	}
 
 	private void setupAutoZoomPref() {
@@ -537,6 +502,45 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		getPreferenceScreen().addPreference(preference);
 	}
 
+	private void showApproximationTypeDialog(@NonNull Preference preference) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+
+		ApproximationType selectedType = settings.APPROXIMATION_TYPE.getModeValue(getSelectedAppMode());
+
+		for (ApproximationType type : ApproximationType.values()) {
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitleId(type.getTitleId())
+					.setSelected(selectedType == type)
+					.showCompoundBtn(getActiveProfileColor())
+					.setOnClickListener(v -> onPreferenceChange(preference, type))
+					.create());
+		}
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = getListView().findViewWithTag(preference);
+		displayData.menuItems = items;
+		displayData.nightMode = isNightMode();
+		displayData.widthMode = PopUpMenuWidthMode.STANDARD;
+		PopUpMenu.show(displayData);
+	}
+
+	private void setupApproximationTypePref() {
+		ApproximationType[] types = ApproximationType.values();
+		String[] names = new String[types.length];
+		Integer[] values = new Integer[types.length];
+
+		for (int i = 0; i < names.length; i++) {
+			ApproximationType type = types[i];
+			values[i] = type.ordinal();
+			names[i] = type.toHumanString(app);
+		}
+
+		ListPreferenceEx preference = createListPreferenceEx(settings.APPROXIMATION_TYPE.getId(), names,
+				values, R.string.gpx_approximation, R.layout.preference_with_descr);
+		preference.setIcon(getContentIcon(R.drawable.ic_action_attach_track));
+		getPreferenceScreen().addPreference(preference);
+	}
+
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
@@ -567,8 +571,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			}
 		} else if (DANGEROUS_GOODS_USA.equals(prefId)) {
 			BaseSettingsFragment.showInstance(requireActivity(), DANGEROUS_GOODS, appMode, new Bundle(), this);
-		} else if (settings.APPROX_SAFE_MODE.getId().equals(prefId)) {
-			showGpxApproximationDialog(preference);
 		} else if (settings.USE_DISCRETE_AUTO_ZOOM.getId().equals(prefId)) {
 			showAutoZoomDialog(preference);
 		}
@@ -595,6 +597,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			}
 		} else if (settings.ROUTING_TYPE.getId().equals(prefId)) {
 			showRoutingTypeDialog(preference);
+		} else if (settings.APPROXIMATION_TYPE.getId().equals(prefId)) {
+			showApproximationTypeDialog(preference);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
