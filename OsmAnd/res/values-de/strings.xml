@@ -5675,4 +5675,7 @@
     <string name="map_widget_map_scale">Maßstab</string>
     <string name="shared_string_unchanged">Unverändert</string>
     <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
+    <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
+    <string name="gpx_approximation_java">Routingbasiert (Java)</string>
+    <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
 </resources>
