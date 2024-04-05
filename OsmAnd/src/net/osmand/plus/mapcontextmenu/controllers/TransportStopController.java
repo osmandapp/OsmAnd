@@ -305,8 +305,8 @@ public class TransportStopController extends MenuController {
 			stop.setTransportStopAggregated(stopAggregated);
 			List<TransportStopExit> stopExits = stop.getExits();
 			boolean stopAddedAsLocal = false;
-			if ("public_transport_station".equals(amenity.getSubType()) && stop.getName().equals(amenity.getName()) ||
-					stop.getEnName(false).equals(amenity.getEnName(false))) {
+			if ("public_transport_station".equals(amenity.getSubType()) && (stop.getName().equals(amenity.getName()) ||
+					stop.getEnName(false).equals(amenity.getEnName(false)))) {
 				stopAggregated.addLocalTransportStop(stop);
 				stopAddedAsLocal = true;
 			} else {
