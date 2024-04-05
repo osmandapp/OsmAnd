@@ -4077,7 +4077,7 @@
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="local_backup">Sauvegarde locale</string>
     <string name="local_backup_descr">Sauvegarder ou restaurer des données grâce à un fichier local.</string>
-    <string name="restore_from_file">Restaurer à partir d\\\'un fichier</string>
+    <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
     <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous %1$s.</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
     <string name="verify_email_address_descr">Code de vérification envoyé sur %1$s. Veuillez le saisir dans le champ ci-dessous.</string>
