@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
@@ -14,11 +13,13 @@ import net.osmand.util.MapUtils;
 
 // DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
-// TODO think about "bearing" in addition to LOOK_AHEAD to keep sharp/loop-shaped gpx parts
 // TODO fix minor "Points are not connected"
-// TODO Native lib - after performance test
-// TODO makePrecise for start segment
 // TODO fix Map Creator gpx "holes"
+// TODO Native lib - required
+
+// TODO ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
+// TODO ? makePrecise for start / end segments (just check how correctly they are calculated)
+
 
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
