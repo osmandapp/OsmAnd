@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -16,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -1528,7 +1528,7 @@ public class RouteResultPreparation {
 		}
 		boolean leftOrRightKeep = (rs.keepLeft && !rs.keepRight) || (!rs.keepLeft && rs.keepRight);
 		if (leftOrRightKeep) {
-			setActiveTurns(rawLanes, activeBeginIndex, activeEndIndex);
+			setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex);
 			int tp = inferSlightTurnFromActiveLanes(rawLanes, rs.keepLeft, rs.keepRight);
 			// Checking to see that there is only one unique turn
 			if (tp != 0) {
@@ -1555,7 +1555,7 @@ public class RouteResultPreparation {
 			}
 		} else {
 			if (activeBeginIndex != -1 && activeEndIndex != -1) {
-				setActiveTurns(rawLanes, activeBeginIndex, activeEndIndex);
+				setActiveLanesRange(rawLanes, activeBeginIndex, activeEndIndex);
 				t = getActiveTurnType(rawLanes, leftSide, t);
 			}
 		}
@@ -1565,55 +1565,44 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private void setActiveTurns(int[] rawLanes, int activeBeginIndex, int activeEndIndex) {
-		ArrayList<Integer> secondaryIndex = new ArrayList<>();
+	private void setActiveLanesRange(int[] rawLanes, int activeBeginIndex, int activeEndIndex) {
+		Set<Integer> possibleTurns = new TreeSet<>();
+		Set<Integer> upossibleTurns = new TreeSet<>();
+		for (int k = activeBeginIndex; k < rawLanes.length && k <= activeEndIndex; k++) {
+			rawLanes[k] |= 1;
+			upossibleTurns.clear();
+			upossibleTurns.add(TurnType.getPrimaryTurn(rawLanes[k]));
+			if (TurnType.getSecondaryTurn(rawLanes[k]) != 0) {
+				upossibleTurns.add(TurnType.getSecondaryTurn(rawLanes[k]));
+			}
+			if (TurnType.getTertiaryTurn(rawLanes[k]) != 0) {
+				upossibleTurns.add(TurnType.getTertiaryTurn(rawLanes[k]));
+			}
+			if (k == activeBeginIndex) {
+				possibleTurns.addAll(upossibleTurns);
+			} else {
+				possibleTurns.retainAll(upossibleTurns);
+			}
+		}
 		int activeTurn = 0;
-		for (int k = 0; k < rawLanes.length; k++) {
-			boolean hasSecondary = false;
-			if (k >= activeBeginIndex && k <= activeEndIndex) {
-				int secondary = TurnType.getSecondaryTurn(rawLanes[k]);
-				if (secondary > 0) {
-					hasSecondary = true;
-				}
-				if (hasSecondary) {
-					secondaryIndex.add(k);
-				} else {
-					activeTurn = TurnType.getPrimaryTurn(rawLanes[k]);
-					rawLanes[k] |= 1;
-				}
-			}
+		// rough guess
+		if(possibleTurns.size() >= 1) {
+			activeTurn = possibleTurns.iterator().next();
+		} else if (activeBeginIndex == 0) {
+			activeTurn = TurnType.getPrimaryTurn(rawLanes[activeBeginIndex]);
+		} else {
+			activeTurn = TurnType.getPrimaryTurn(rawLanes[activeEndIndex]);
 		}
-		if (secondaryIndex.size() > 0) {
-			if (activeTurn == 0) {
-				// rough guess
-				if (activeBeginIndex == 0) {
-					activeTurn = TurnType.getPrimaryTurn(rawLanes[activeBeginIndex]);
-				} else {
-					activeTurn = TurnType.getPrimaryTurn(rawLanes[activeEndIndex]);
-				}
-			}
-			for (int k : secondaryIndex) {
-				int p = TurnType.getPrimaryTurn(rawLanes[k]);
-				if (activeTurn == p) {
-					rawLanes[k] |= 1;
-					continue;
-				}
-				int s = TurnType.getSecondaryTurn(rawLanes[k]);
-				if (activeTurn == s) {
+		for (int k = activeBeginIndex; k < rawLanes.length && k <= activeEndIndex; k++) {
+			if(TurnType.getPrimaryTurn(rawLanes[k]) != activeTurn) {
+				if(TurnType.getSecondaryTurn(rawLanes[k]) == activeTurn) {
 					TurnType.setSecondaryToPrimary(rawLanes, k);
-					rawLanes[k] |= 1;
-					continue;
-				}
-				int t = TurnType.getTertiaryTurn(rawLanes[k]);
-				if (activeTurn == t) {
+				} else if(TurnType.getTertiaryTurn(rawLanes[k]) == activeTurn) {
 					TurnType.setTertiaryToPrimary(rawLanes, k);
-					rawLanes[k] |= 1;
-					continue;
 				}
-				// in any case need to set active
-				rawLanes[k] |= 1;
 			}
 		}
+		
 	}
 
 	private TurnType getTurnByCurrentTurns(List<int[]> otherSideLanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
@@ -2136,12 +2125,6 @@ public class RouteResultPreparation {
 		
 	}
 
-	private boolean isPrimary(RouteSegmentResult s){
-		String h = s.getObject().getHighway();
-		return "primary".equals(h) || "primary_link".equals(h);
-
-	}
-
 	
 	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) throws IOException {
 		RouteSegmentResult rr = result.get(routeInd);
@@ -2245,7 +2228,7 @@ public class RouteResultPreparation {
 			if (!turnType.keepLeft() && !turnType.keepRight()) {
 				continue;
 			}
-			if (isSwitchToMotorwayLink(curr, result.get(i - 1))) {
+			if (isSwitchToLink(curr, result.get(i - 1))) {
 				continue;
 			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
@@ -2268,7 +2251,7 @@ public class RouteResultPreparation {
 			}
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
-				if (i > 0 && isSwitchToMotorwayLink(curr, result.get(i - 1))) {
+				if (i > 0 && isSwitchToLink(curr, result.get(i - 1))) {
 					continue;
 				}
 				turnType.setSkipToSpeak(true);
@@ -2450,12 +2433,9 @@ public class RouteResultPreparation {
 		return t;
 	}
 
-	private boolean isSwitchToMotorwayLink(RouteSegmentResult curr, RouteSegmentResult prev) {
-		if (isMotorway(curr) || isPrimary(curr)) {
-			String c = curr.getObject().getHighway();
-			return c != null && c.contains("_link");
-		}
-		return false;
+	private boolean isSwitchToLink(RouteSegmentResult curr, RouteSegmentResult prev) {
+		String c = curr.getObject().getHighway();
+		return c != null && c.contains("_link");
 	}
 
 	private boolean twiceRoadPresent(List<RouteSegmentResult> result, int i) {
