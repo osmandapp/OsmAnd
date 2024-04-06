@@ -13,7 +13,7 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
 
 // DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
-// TODO loadRouteSegment() results should be sorted/validated (by priority/shortest/closest)
+// DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
 // TODO think about "bearing" in addition to LOOK_AHEAD to keep sharp/loop-shaped gpx parts
 // TODO fix minor "Points are not connected"
 // TODO Native lib - after performance test
@@ -23,6 +23,7 @@ import net.osmand.util.MapUtils;
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
+	private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction 1/1000 of seg dist to pnt-to-gpx dist
 
 	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                                    List<GpxPoint> gpxPoints) throws IOException {
@@ -41,7 +42,7 @@ public class GpxSegmentsApproximation {
 		while (currentPoint != null && currentPoint.pnt != null) {
 			double minDistSqrSegment = 0;
 			RouteSegmentResult fres = null;
-			int minInd = -1;
+			int minNextInd = -1;
 			for (int j = currentPoint.ind + 1; j < Math.min(currentPoint.ind + LOOKUP_AHEAD, gpxPoints.size()); j++) {
 				RouteSegmentResult[] res = new RouteSegmentResult[1];
 				double minDistSqr = Double.POSITIVE_INFINITY;
@@ -55,24 +56,26 @@ public class GpxSegmentsApproximation {
 				if (fres == null || minDistSqr <= minDistSqrSegment) {
 					fres = res[0];
 					minDistSqrSegment = minDistSqr;
-					minInd = j;
+					minNextInd = j;
 				}
 			}
-			if (minInd < 0) {
+			if (minNextInd < 0) {
 				break;
 			}
 			if (minDistSqrSegment > minPointApproximation * minPointApproximation) {
 				final int nextIndex = currentPoint.ind + 1;
-				// System.err.printf("WARN: XXX index (%d) mindist (%f)\n", currentPoint.ind, Math.sqrt(minDistSqrSegment));
 				currentPoint = findNextRoutablePoint(frontEnd, gctx, minPointApproximation, gpxPoints, nextIndex);
 				continue;
 			}
 			currentPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
 			currentPoint.routeToTarget.add(fres);
-			currentPoint.targetInd = minInd;
-			currentPoint = gpxPoints.get(minInd);
+			currentPoint.targetInd = minNextInd;
+
+			currentPoint = gpxPoints.get(minNextInd); // next point
+
 			RouteSegment sg = gctx.ctx.loadRouteSegment(fres.getEndPointX(), fres.getEndPointY(),
 					gctx.ctx.config.memoryLimitation);
+
 			while (sg != null) {
 				if (sg.getRoad().getId() != fres.getObject().getId() || sg.getSegmentEnd() != fres.getEndPointIndex()) {
 					RouteSegmentPoint p = new RouteSegmentPoint(sg.getRoad(), sg.getSegmentStart(), sg.getSegmentEnd(),
@@ -121,7 +124,7 @@ public class GpxSegmentsApproximation {
 		int start = Math.max(0, pnt.getSegmentStart() - LOOKUP_AHEAD);
 		int end = Math.min(pnt.getRoad().getPointsLength(), pnt.getSegmentStart() + LOOKUP_AHEAD);
 		for (int i = start; i < end; i++) {
-			if(i == pnt.getSegmentStart()) {
+			if (i == pnt.getSegmentStart()) {
 				continue;
 			}
 			double d = MapUtils.squareDist31TileMetric(loc.x31, loc.y31,
@@ -131,12 +134,34 @@ public class GpxSegmentsApproximation {
 				dist = d;
 			}
 		}
-		dist += pnt.distToProj;
+		dist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
+
+		// sometimes, more than 1 segment from (pnt+others) to next-gpx-point might have the same distance
+		// to make difference, a small fraction (1/1000) of real-segment-distance is added as "dilution" value
+		// https://test.osmand.net/map/?start=52.481439,13.386036&end=52.483094,13.386060&profile=rescuetrack&params=rescuetrack,geoapproximation#18/52.48234/13.38672
+		dist += sumPntDistanceSqr(pnt, pnt.getSegmentStart(), segmentEnd) * DILUTE_BY_SEGMENT_DISTANCE;
+
 		if ((res[0] == null || dist < minDistSqr) && segmentEnd >= 0) {
 			minDistSqr = dist;
 			res[0] = new RouteSegmentResult(pnt.getRoad(), pnt.getSegmentStart(), segmentEnd);
 		}
 		return minDistSqr;
+	}
+
+	private double sumPntDistanceSqr(RouteSegmentPoint pnt, int start, int end) {
+		if (start == end) return 0;
+		if (start > end) {
+			int swap = start;
+			start = end;
+			end = swap;
+		}
+		double dist = 0;
+		for (int i = start; i < end; i++) {
+			dist += MapUtils.squareDist31TileMetric(
+					pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i),
+					pnt.getRoad().getPoint31XTile(i + 1 ), pnt.getRoad().getPoint31YTile(i + 1));
+		}
+		return dist;
 	}
 
 	private GpxPoint findNextRoutablePoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
