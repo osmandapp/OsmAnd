@@ -5669,4 +5669,7 @@
     <string name="map_widget_map_scale">Méretarány</string>
     <string name="unchanged_parameter_summary">Minden nyomvonal megtartja a saját paramétereit.</string>
     <string name="shared_string_unchanged">Változatlan</string>
+    <string name="gpx_approximation_geo_java">Geometria-alapú (Java, gyors)</string>
+    <string name="gpx_approximation_cpp">Útvonal-alapú (C++)</string>
+    <string name="gpx_approximation_java">Útvonal-alapú (Java)</string>
 </resources>
