@@ -13,18 +13,21 @@ import net.osmand.util.MapUtils;
 
 // DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
+
 // TODO fix minor "Points are not connected"
 // TODO fix Map Creator gpx "holes"
 // TODO Native lib - required
 
-// TODO ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
-// TODO ? makePrecise for start / end segments (just check how correctly they are calculated)
-
+// TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
+// TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
 
 public class GpxSegmentsApproximation {
 	private final int LOOKUP_AHEAD = 10;
 	private final boolean TEST_SHIFT_GPX_POINTS = false;
-	private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction 1/1000 of seg dist to pnt-to-gpx dist
+	private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction of seg dist to pnt-to-gpx dist (0.001)
+
+	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
+	// private List<Integer> DEBUG_IDS = Arrays.asList(42404377, 761104264, 885830973, 260359594, 223519075, 764024738);
 
 	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                                    List<GpxPoint> gpxPoints) throws IOException {
@@ -137,8 +140,9 @@ public class GpxSegmentsApproximation {
 		}
 		dist += pnt.distToProj; // distToProj > 0 is only for pnt(s) after findRouteSegment
 
-		// sometimes, more than 1 segment from (pnt+others) to next-gpx-point might have the same distance
-		// to make difference, a small fraction (1/1000) of real-segment-distance is added as "dilution" value
+		// Sometimes, more than 1 segment from (pnt+others) to next-gpx-point might have the same distance.
+		// To make difference, a small fraction (1/1000) of real-segment-distance is added as "dilution" value.
+		// Such a small dilution prevents from interfering with main searching of minimal distance to gpx-point.
 		// https://test.osmand.net/map/?start=52.481439,13.386036&end=52.483094,13.386060&profile=rescuetrack&params=rescuetrack,geoapproximation#18/52.48234/13.38672
 		dist += sumPntDistanceSqr(pnt, pnt.getSegmentStart(), segmentEnd) * DILUTE_BY_SEGMENT_DISTANCE;
 
@@ -158,11 +162,11 @@ public class GpxSegmentsApproximation {
 		}
 		double dist = 0;
 		for (int i = start; i < end; i++) {
-			dist += MapUtils.squareDist31TileMetric(
+			dist += MapUtils.squareRootDist31(
 					pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i),
 					pnt.getRoad().getPoint31XTile(i + 1 ), pnt.getRoad().getPoint31YTile(i + 1));
 		}
-		return dist;
+		return dist * dist;
 	}
 
 	private GpxPoint findNextRoutablePoint(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
