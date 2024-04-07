@@ -248,7 +248,7 @@
     <string name="poi_fuel_electricity">Struja</string>
     <string name="poi_aeroway_fuel">Benzinska pumpa za letelice</string>
     <string name="poi_waterway_fuel">Benzinska pumpa na vodi</string>
-    <string name="poi_compressed_air">Vazduh pod pritiskom</string>
+    <string name="poi_compressed_air">Pumpa za gume</string>
     <string name="poi_parking">Parking</string>
     <string name="poi_motorcycle_parking">Parking za motore</string>
     <string name="poi_parking_entrance">Ulaz u parking</string>
@@ -311,7 +311,7 @@
     <string name="poi_site_type_necropolis">Nekropola</string>
     <string name="poi_generator_output_electricity">Izlazna snaga</string>
     <string name="poi_generator_output_hot_water">Izlazna snaga tople vode</string>
-    <string name="poi_generator_output_compressed_air">Izlazna snaga vazduha pod pritiskom</string>
+    <string name="poi_generator_output_compressed_air">Izlazna snaga komprinovanog vazduha</string>
     <string name="poi_fire_extinguisher">Protivpožarni aparat</string>
     <string name="poi_fuel_cng">CNG - metan</string>
     <string name="poi_electricity_combined_charging">Stanica za punjenje</string>
@@ -1903,7 +1903,7 @@
     <string name="poi_shelter_type_field_shelter">Poljsko sklonište</string>
     <string name="poi_shelter_type_tent">Tip skloništa: šator</string>
     <string name="poi_shelter_type_abandoned">Tip skloništa: napušteno</string>
-    <string name="poi_internet_access_type_wlan">Vaj-Faj</string>
+    <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_internet_access_type_terminal">Terminal</string>
     <string name="poi_internet_access_type_wired">Kablovski</string>
     <string name="poi_internet_access_type_public">Tip pristupa internetu: javni</string>

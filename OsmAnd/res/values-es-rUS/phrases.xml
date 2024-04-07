@@ -4918,7 +4918,7 @@
     <string name="poi_us_maps_recreation_area_accessibility_info">Información de accesibilidad</string>
     <string name="poi_nfs_yes">Gestionado por el Servicio Forestal de los Estados Unidos</string>
     <string name="poi_blm_yes">Gestionado por la Oficina de Administración de Tierras</string>
-    <string name="poi_shop_general">Tienda general</string>
+    <string name="poi_shop_general">Tienda general;Almacén general</string>
     <string name="poi_cuisine_fish">Pescado</string>
     <string name="poi_impromptu">Impromptu</string>
     <string name="poi_reservation">Reserva</string>

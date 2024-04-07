@@ -2913,7 +2913,7 @@
     <string name="screen_timeout_descr">Ako je „%1$s” uključen, vreme rada će zavisiti od toga.</string>
     <string name="default_screen_timeout">Podrazumevano vreme isključivanja ekrana</string>
     <string name="shared_string_tones">tone</string>
-    <string name="shared_string_meters">metara</string>
+    <string name="shared_string_meters">metri</string>
     <string name="details_dialog_decr">Prikazati ili sakriti dodatne detalje mape</string>
     <string name="shared_string_night_map">Noćna mapa</string>
     <string name="add_online_source">Dodaj internet izvor</string>
@@ -4606,7 +4606,7 @@
     <string name="tts_title">TTS</string>
     <string name="route_line_use_gradient_coloring">Linija puta je obojena visinskim nagibom.</string>
     <string name="rendering_attr_natureReserves_description">Prikazati rezervate, zaštićena područja prirode i nacionalne parkove.</string>
-    <string name="srtm_download_single_help_message">Odaberi vrstu. Moraćeš ponovo da preuzmeš fajlradi promene oblika.</string>
+    <string name="srtm_download_single_help_message">Odaberi varijantu. Moraćeš ponovno preuzeti datoteku kako bi promenio format.</string>
     <string name="navigate_point_format_swiss_grid">Švajcarska mreža (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švajcarska mreža (CH1903+)</string>
     <string name="av_notes_choose_action_widget_desc">Izaberi akciju.</string>
@@ -5502,7 +5502,7 @@
     <string name="all_folders">Svi folderi</string>
     <string name="shared_string_show_less">Prikazati manje</string>
     <string name="root_folder">Root folder</string>
-    <string name="shared_string_loading">Preuzimanje</string>
+    <string name="shared_string_loading">Preuzmi</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne trase</string>
     <string name="empty_smart_folder_title">Nema odgovarajućeg staza</string>
     <string name="empty_smart_folder_description">Odgovarajuće trase automatski će se pojaviti ovde</string>
