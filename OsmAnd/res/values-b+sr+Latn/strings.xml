@@ -2822,7 +2822,7 @@
     <string name="points_delete_multiple">Obrisati %1$d tačku(e)?</string>
     <string name="points_delete_multiple_succesful">Tačka(e) izbrisana(e).</string>
     <string name="add_new_folder">Dodaj novi folder</string>
-    <string name="shared_string_slope">Padina</string>
+    <string name="shared_string_slope">Nagib padine</string>
     <string name="relief_smoothness_factor_descr">Omiljeni teren: ravno ili brdovito.</string>
     <string name="routing_attr_driving_style_safety_name">Radije sporednim putevima</string>
     <string name="routing_attr_driving_style_balance_name">Balansirano</string>
