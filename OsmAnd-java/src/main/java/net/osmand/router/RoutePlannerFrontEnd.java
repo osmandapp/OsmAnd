@@ -336,17 +336,24 @@ public class RoutePlannerFrontEnd {
 			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 		}
 	}
-	
+
 	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		GpxSegmentsApproximation app = new GpxSegmentsApproximation();
-		if (gctx.ctx.calculationProgress == null) {
-			gctx.ctx.calculationProgress = new RouteCalculationProgress();
-		}
-		app.fastGpxApproximation(this, gctx, gpxPoints);
-		calculateGpxRoute(gctx, gpxPoints);
-		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
-			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
-			log.info(gctx);
+		NativeLibrary nativeLib = gctx.ctx.nativeLib;
+		if (nativeLib != null && useNativeApproximation) {
+			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, true);
+//			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.result); // TODO
+//			cleanupResultAndAddTurns(gctx); // TODO
+		} else {
+			GpxSegmentsApproximation app = new GpxSegmentsApproximation();
+			if (gctx.ctx.calculationProgress == null) {
+				gctx.ctx.calculationProgress = new RouteCalculationProgress();
+			}
+			app.fastGpxApproximation(this, gctx, gpxPoints);
+			calculateGpxRoute(gctx, gpxPoints);
+			if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
+				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
+				log.info(gctx);
+			}
 		}
 		if (resultMatcher != null) {
 			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
@@ -359,7 +366,7 @@ public class RoutePlannerFrontEnd {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && useNativeApproximation) {
-			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
+			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, false);
 		} else {
 			gctx.ctx.keepNativeRoutingContext = true;
 			if (gctx.ctx.calculationProgress == null) {

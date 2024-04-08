@@ -271,14 +271,14 @@ public class NativeLibrary {
 		gr.hhNativeFilter = tm;
 	}
 
-	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
+	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints, boolean useGeo) {
 		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		int pointsSize = gpxPoints.size();
 		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[pointsSize];
 		for (int i = 0; i < pointsSize; i++) {
 			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
 		}
-		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions);
+		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions, useGeo);
 		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
 			gCtx.finalPoints.add(point.convertToGpxPoint());
 		}
@@ -320,7 +320,7 @@ public class NativeLibrary {
 	/**/
 	protected static native NativeGpxRouteApproximationResult nativeSearchGpxRoute(RoutingContext c,
 	                                                                               NativeGpxPointApproximation[] gpxPoints,
-	                                                                               RouteRegion[] regions);
+	                                                                               RouteRegion[] regions, boolean useGeo);
 
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
 	                                                                boolean loadObjects);
