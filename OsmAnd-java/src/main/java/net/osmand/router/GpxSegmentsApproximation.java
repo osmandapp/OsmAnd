@@ -13,9 +13,9 @@ import net.osmand.util.MapUtils;
 
 // DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
+// DONE fixed Map Creator gpx "gaps" (the bug was lost results of splitRoadsAndAttachRoadSegments)
 
 // TODO fix minor "Points are not connected"
-// TODO fix Map Creator gpx "holes"
 // TODO Native lib - required
 
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
@@ -27,7 +27,7 @@ public class GpxSegmentsApproximation {
 	private final double DILUTE_BY_SEGMENT_DISTANCE = 0.001; // add a fraction of seg dist to pnt-to-gpx dist (0.001)
 
 	// if (DEBUG_IDS.indexOf((int)(pnt.getRoad().getId() / 64)) >= 0) { ... }
-	// private List<Integer> DEBUG_IDS = Arrays.asList(42404377, 761104264, 885830973, 260359594, 223519075, 764024738);
+	// private List<Integer> DEBUG_IDS = Arrays.asList(499257893, 126338247, 237816930); // good, wrong, turn
 
 	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
 	                                                    List<GpxPoint> gpxPoints) throws IOException {
