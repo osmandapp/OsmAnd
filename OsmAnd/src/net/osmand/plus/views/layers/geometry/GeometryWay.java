@@ -453,6 +453,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					|| !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider);
 			if (vectorLinesCollection != null && updateArrowsProvider) {
 				VectorLineArrowsProvider newArrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
+				newArrowsProvider.setPriority(linesPriority);
 				this.vectorLineArrowsProvider = newArrowsProvider;
 				mapRenderer.addSymbolsProvider(newArrowsProvider);
 			}
@@ -664,6 +665,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					if (mapRenderer != null && vectorLinesCollection != null
 							&& (vectorLineArrowsProvider == null || !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider))) {
 						VectorLineArrowsProvider arrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
+						arrowsProvider.setPriority(linesPriority);
 						this.vectorLineArrowsProvider = arrowsProvider;
 						mapRenderer.addSymbolsProvider(arrowsProvider);
 					}
