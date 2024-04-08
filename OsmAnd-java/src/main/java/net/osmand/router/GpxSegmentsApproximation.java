@@ -15,6 +15,7 @@ import net.osmand.util.MapUtils;
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
 // DONE fixed Map Creator gpx "gaps" (the bug was lost results of splitRoadsAndAttachRoadSegments)
 
+// TODO check/remove usage of finalPoints from Android/iOS
 // TODO fix minor "Points are not connected"
 // TODO Native lib - required
 
