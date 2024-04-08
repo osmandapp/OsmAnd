@@ -165,7 +165,7 @@ public class GpxSegmentsApproximation {
 		for (int i = start; i < end; i++) {
 			dist += MapUtils.squareRootDist31(
 					pnt.getRoad().getPoint31XTile(i), pnt.getRoad().getPoint31YTile(i),
-					pnt.getRoad().getPoint31XTile(i + 1 ), pnt.getRoad().getPoint31YTile(i + 1));
+					pnt.getRoad().getPoint31XTile(i + 1), pnt.getRoad().getPoint31YTile(i + 1));
 		}
 		return dist * dist;
 	}
