@@ -80,6 +80,7 @@
 	<asset source="voice/it/it_tts.js" destination="voice/it/it_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ja/ja_tts.js" destination="voice/ja/ja_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/ko/ko_tts.js" destination="voice/ko/ko_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/lt/lt_tts.js" destination="voice/lt/lt_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/lv/lv_tts.js" destination="voice/lv/lv_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/nl/nl_tts.js" destination="voice/nl/nl_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/pl/pl_tts.js" destination="voice/pl/pl_tts.js" mode="overwriteOnlyIfExists" />
