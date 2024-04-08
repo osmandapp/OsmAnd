@@ -4,16 +4,18 @@ import android.content.Context
 import android.location.LocationListener
 import android.location.LocationManager
 import android.util.Log
+import androidx.core.location.LocationListenerCompat
 import net.osmand.Location
 import net.osmand.PlatformUtil
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.utils.OsmandLocationUtils.convertLocation
 import java.util.LinkedList
 
-class AndroidApiLocationServiceHelper(private val app: TelegramApplication) : LocationServiceHelper(), LocationListener {
+class AndroidApiLocationServiceHelper(private val app: TelegramApplication) :
+	LocationServiceHelper(), LocationListenerCompat {
 
-	private var locationCallback : LocationCallback? = null
-	private var networkLocationCallback : LocationCallback? = null
+	private var locationCallback: LocationCallback? = null
+	private var networkLocationCallback: LocationCallback? = null
 	private val networkListeners = LinkedList<LocationListener>()
 
 	override fun requestLocationUpdates(callback: LocationCallback) {
@@ -109,5 +111,4 @@ class AndroidApiLocationServiceHelper(private val app: TelegramApplication) : Lo
 	override fun onProviderDisabled(provider: String) {
 		locationCallback?.onLocationAvailability(false)
 	}
-
 }
