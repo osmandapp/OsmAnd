@@ -5633,7 +5633,7 @@
     <string name="auto_zoom_smooth">Plynulé</string>
     <string name="auto_zoom_discrete">Skokové</string>
     <string name="java_safe">Java (Bezpečné)</string>
-    <string name="gpx_approximation">aproximácia GPX</string>
+    <string name="gpx_approximation">Aproximácia GPX</string>
     <string name="rendering_attr_padusDisplayMode_description">Podľa typu prístupu alebo názvu správcu</string>
     <string name="rendering_value_access_name">Podľa typu prístupu</string>
     <string name="rendering_value_managerName_name">Podľa názvu správcu</string>
@@ -5665,4 +5665,7 @@
     <string name="shared_string_unchanged">Nezmenené</string>
     <string name="unchanged_parameter_summary">Každá stopa si zachová vlastné parametre.</string>
     <string name="map_widget_map_scale">Mierka mapy</string>
+    <string name="gpx_approximation_cpp">Podľa trasy (C++)</string>
+    <string name="gpx_approximation_java">Podľa trasy (Java)</string>
+    <string name="gpx_approximation_geo_java">Podľa geometrie (Java, rýchle)</string>
 </resources>

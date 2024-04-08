@@ -4006,7 +4006,7 @@
     <string name="last_time_checked">Zadnji put provereno: %s</string>
     <string name="update_frequency">Učestalost ažuriranja</string>
     <string name="delete_updates">Obriši ažuriranja</string>
-    <string name="live_update_delete_updates_msg">Oobrisati svih %s Live ažuriranja?</string>
+    <string name="live_update_delete_updates_msg">Obrisati sva %s Live ažuriranja?</string>
     <string name="purchases">Kupovine</string>
     <string name="select_category_descr">Odaberi kategoriju ili dodaj novu</string>
     <string name="track_recording_will_be_continued">Snimanje će biti nastavljeno.</string>

@@ -611,7 +611,7 @@
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Indicar dirección</string>
     <string name="favourites_list_activity">Elegir favorito</string>
-    <string name="local_openstreetmap_act_title">Cambios OSM</string>
+    <string name="local_openstreetmap_act_title">Cambios de OSM</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="access_arrival_time">Hora de llegada</string>
@@ -974,11 +974,11 @@
     <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
+    <string name="local_openstreetmap_were_uploaded">Se enviaron {0} PDI/notas de OSM</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
-    <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
+    <string name="local_openstreetmap_descr_title">Edición OSM asíncrona:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM en la base de datos del dispositivo.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo del seguimiento en línea.</string>
