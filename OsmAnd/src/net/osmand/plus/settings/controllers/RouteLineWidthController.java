@@ -139,7 +139,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 					routeLinePreview.setShowDirectionArrows(true);
 				}
 			});
-			updateColorItems();
 		}
 		controller.askSelectWidthMode(getWidthValue(selectedCardState));
 		container.setTag(WIDTH_COMPONENT_CARD_ID);
@@ -155,11 +154,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	private void setRouteLineWidth(String width) {
 		routeLinePreview.setWidth(width);
 		app.getOsmandMap().getMapView().refreshMap();
-	}
-
-	public void updateColorItems() {
-		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull

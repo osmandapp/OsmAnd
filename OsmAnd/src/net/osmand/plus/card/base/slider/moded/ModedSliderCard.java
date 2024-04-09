@@ -76,22 +76,6 @@ public class ModedSliderCard extends SliderCard implements IModedSliderComponent
 	}
 
 	@Override
-	public void updateControlsColor() {
-		super.updateControlsColor();
-		updateSegmentedButtonContentColor();
-	}
-
-	private void updateSegmentedButtonContentColor() {
-		for (RadioItem radioItem : segmentedButton.getItems()) {
-			SliderMode sliderMode = (SliderMode) radioItem.getTag();
-			if (sliderMode != null) {
-				radioItem.setCustomColor(controller.getSliderModeColor(sliderMode));
-			}
-		}
-		segmentedButton.updateView();
-	}
-
-	@Override
 	public void updateSliderVisibility() {
 		updateVisibility(R.id.slider_component_container, controller.isSliderVisible());
 	}

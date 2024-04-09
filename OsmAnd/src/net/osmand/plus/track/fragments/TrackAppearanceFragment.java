@@ -642,8 +642,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void updateColorItems() {
 		updateAppearanceIcon();
-		TrackWidthController widthController = getWidthCardController();
-		widthController.updateColorItems();
 		refreshMap();
 	}
 

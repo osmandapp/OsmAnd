@@ -137,7 +137,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		setupButtons(view);
 		setupActions(view);
 		setupCards(view);
-		updateColorItems();
 
 		return view;
 	}
@@ -254,7 +253,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		if (oldColor != null && oldColor.isCustom()) {
 			TrackColorController.saveCustomColorsToTracks(app, oldColor.getColor(), newColor.getColor());
 		}
-		updateColorItems();
 	}
 
 	@Override
@@ -269,12 +267,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
 		trackDrawInfo.setColor(paletteColor.getColor());
-		updateColorItems();
-	}
-
-	private void updateColorItems() {
-		TrackWidthController widthController = getWidthCardController();
-		widthController.updateColorItems();
 	}
 
 	@Override

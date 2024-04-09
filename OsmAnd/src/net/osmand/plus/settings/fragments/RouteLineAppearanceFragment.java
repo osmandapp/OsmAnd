@@ -543,8 +543,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void updateColorItems() {
-		RouteLineWidthController widthController = getWidthCardController();
-		widthController.updateColorItems();
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
 		}

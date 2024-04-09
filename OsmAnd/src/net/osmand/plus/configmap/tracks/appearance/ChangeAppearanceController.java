@@ -64,17 +64,11 @@ public class ChangeAppearanceController implements IChangeAppearanceController,
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		appearanceData.setColoringStyle(coloringStyle);
-		updateColorItems();
 	}
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
 		appearanceData.setCustomColor(paletteColor.getColor());
-		updateColorItems();
-	}
-
-	private void updateColorItems() {
-		widthCardController.updateColorItems();
 	}
 
 	@Override

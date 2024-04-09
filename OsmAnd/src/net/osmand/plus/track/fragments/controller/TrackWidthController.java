@@ -132,11 +132,6 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		return view;
 	}
 
-	public void updateColorItems() {
-		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
-	}
-
 	@NonNull
 	public WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
