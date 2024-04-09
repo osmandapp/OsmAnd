@@ -659,11 +659,20 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
+
+		List<GpxPoint> emptyFinalPoints = new ArrayList<>();
 		for (GpxPoint gpx : gctx.finalPoints) {
 			if (gpx.routeToTarget != null) {
 				gpx.routeToTarget.removeAll(deleted);
+				if (gpx.routeToTarget.size() == 0) {
+					emptyFinalPoints.add(gpx);
+				}
 			}
 		}
+		if (emptyFinalPoints.size() > 0) {
+			gctx.finalPoints.removeAll(emptyFinalPoints);
+		}
+
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		preparation.validateAllPointsConnected(gctx.result);
 		for (RouteSegmentResult r : gctx.result) {

@@ -877,7 +877,7 @@ POIの更新は利用できません</string>
     <string name="local_openstreetmap_uploadall">すべてのアップロード</string>
     <string name="local_openstreetmap_upload">OSMへの変更をアップロード</string>
     <string name="local_openstreetmap_delete">変更を削除</string>
-    <string name="local_openstreetmap_descr_title">非同期OSMの編集:</string>
+    <string name="local_openstreetmap_descr_title">非同期OSM編集:</string>
     <string name="local_openstreetmap_settings">端末内に保存されたOSM POI/メモ</string>
     <string name="animate_routing_route_not_calculated">最初にルート検索をしてください</string>
     <string name="animate_routing_route">"計算されたルートを使用してシミュレーション "</string>
@@ -1426,7 +1426,7 @@ POIの更新は利用できません</string>
     <string name="action_create">アクションの作成</string>
     <string name="action_modify">アクションの変更</string>
     <string name="action_delete">アクションの削除</string>
-    <string name="osm_edits">OSMの編集</string>
+    <string name="osm_edits">OSM編集データ</string>
     <string name="osmand_parking_hour">時間</string>
     <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">駐車可能です</string>
@@ -1535,7 +1535,7 @@ POIの更新は利用できません</string>
     <string name="storage_directory_default">内部メモリ</string>
     <string name="storage_directory">マップストレージ</string>
     <string name="shared_string_copy">コピー</string>
-    <string name="osm_edit_context_menu_delete">OSMの編集を削除</string>
+    <string name="osm_edit_context_menu_delete">OSM編集データを削除</string>
     <string name="rendering_value_disabled_name">無効</string>
     <string name="shared_string_logoff">ログオフ</string>
     <string name="routing_attr_avoid_borders_description">国境を越えて別の国に入るようなルート設定を避けます。</string>
@@ -1732,7 +1732,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>
     <string name="shared_string_location">緯度・経度</string>
-    <string name="share_osm_edits_subject">OSMの編集をOsmAndで共有</string>
+    <string name="share_osm_edits_subject">OSM編集データをOsmAndで共有</string>
     <string name="lang_nds">低地ドイツ語</string>
     <string name="lang_mk">マケドニア語</string>
     <string name="lang_fy">フリジア語</string>
@@ -1804,7 +1804,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_move_up">上に移動</string>
     <string name="shared_string_move_down">下に移動</string>
     <string name="finish_navigation">ナビゲーションの終了</string>
-    <string name="avoid_road">避ける道を指定</string>
+    <string name="avoid_road">避ける道の指定</string>
     <string name="storage_directory_readonly_desc">選択したデータ保存フォルダーが書き込み保護されているため、内部メモリに切り替えました。書き込み可能な保存用ディレクトリを選択してください。</string>
     <string name="storage_directory_shared">共有記憶域</string>
     <string name="full_report">より詳細なレポートは以下サイトにて</string>
@@ -3240,7 +3240,7 @@ POIの更新は利用できません</string>
     <string name="route_way">道</string>
     <string name="sit_on_the_stop">停留所標識</string>
     <string name="lang_oc">オック語</string>
-    <string name="layer_osm_edits">OSMの編集</string>
+    <string name="layer_osm_edits">OSM編集データ</string>
     <string name="quick_action_contour_lines_descr">マップ上の等高線の表示/非表示を切り替えられるボタンです。</string>
     <string name="quick_action_hillshade_descr">マップ上の陰影起伏図の表示/非表示を切り替えられるボタンです。</string>
     <string name="tts_initialization_error">テキスト読み上げエンジンを起動できません。</string>

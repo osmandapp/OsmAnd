@@ -5,7 +5,7 @@
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/simple_widget_large_height"
-	android:paddingVertical="6dp"
+	android:paddingTop="6dp"
 	android:paddingHorizontal="16dp"
 	android:orientation="vertical">
 
@@ -51,8 +51,7 @@
 
 		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="61dp"
-			android:layout_marginTop="3dp">
+			android:layout_height="70dp">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/widget_icon"
@@ -74,6 +73,7 @@
 				android:gravity="center_vertical|start"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
+				android:includeFontPadding="false"
 				android:textColor="@color/text_color_primary_light"
 				android:textSize="@dimen/simple_widget_value_large_size" />
 

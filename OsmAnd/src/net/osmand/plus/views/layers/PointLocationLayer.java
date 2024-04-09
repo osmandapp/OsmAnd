@@ -247,6 +247,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		if (mapMarkersCollection == null) {
 			mapMarkersCollection = new MapMarkersCollection();
+			mapMarkersCollection.setPriority(Long.MAX_VALUE);
 		}
 		return CoreMapMarker.createAndAddToCollection(getContext(), mapMarkersCollection, id,
 				getPointsOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading);

@@ -5384,7 +5384,7 @@
     <string name="help_article_search_search_all_name">Alle suchen</string>
     <string name="help_article_troubleshooting_crash_logs_name">Absturzprotokolle</string>
     <string name="help_article_troubleshooting_general_name">Allgemein</string>
-    <string name="help_article_troubleshooting_maps_data_name">Karten &amp; Daten</string>
+    <string name="help_article_troubleshooting_maps_data_name">Karten und Daten</string>
     <string name="shared_string_setup">Einrichtung</string>
     <string name="user_guide">Benutzeranleitung</string>
     <string name="telegram_chats_descr">Nehmen Sie an einem unserer lokalen Telegram-Chats teil.</string>
@@ -5441,7 +5441,7 @@
     <string name="terrain_maps">Geländekarten</string>
     <string name="sort_country_name_descending">Landesname: Z – A</string>
     <string name="delete_map_description">Karte %1$s löschen?</string>
-    <string name="maps_and_resources">Karten &amp; Ressourcen</string>
+    <string name="maps_and_resources">Karten und Ressourcen</string>
     <string name="app_mode_paragliding">Paragleiten</string>
     <string name="rendering_styles">Darstellungsstile</string>
     <string name="app_mode_hang_gliding">Drachenfliegen</string>

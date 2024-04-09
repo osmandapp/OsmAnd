@@ -224,7 +224,9 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/** Sets the {@link CarContext} to use while the service is running. */
+	/**
+	 * Sets the {@link CarContext} to use while the service is running.
+	 */
 	public void setCarContext(@Nullable CarContext carContext) {
 		this.carContext = carContext;
 		if (carContext != null) {
@@ -240,19 +242,11 @@ public class NavigationService extends Service {
 						@Override
 						public void onAutoDriveEnabled() {
 							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
-							Screen topScreen = carContext.getCarService(ScreenManager.class).getTop();
-							if (topScreen instanceof RoutePreviewScreen) {
-								((RoutePreviewScreen) topScreen).tryToStartNavigation();
-							}
 							if (!settings.simulateNavigation) {
 								OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
-								RoutingHelper helper = getApp().getRoutingHelper();
-								if (!sim.isRouteAnimating() && helper.isFollowingMode()
-										&& helper.isRouteCalculated() && !helper.isRouteBeingCalculated()) {
-									sim.startStopRouteAnimation(null);
-									settings.simulateNavigation = true;
-									settings.simulateNavigationStartedFromAdb = true;
-								}
+								sim.startStopRouteAnimation(null);
+								settings.simulateNavigation = true;
+								settings.simulateNavigationStartedFromAdb = true;
 							}
 						}
 					});
@@ -264,14 +258,18 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/** Clears the currently used {@link CarContext}. */
+	/**
+	 * Clears the currently used {@link CarContext}.
+	 */
 	public void clearCarContext() {
 		carContext = null;
 		navigationManager = null;
 		tripHelper = null;
 	}
 
-	/** Starts navigation. */
+	/**
+	 * Starts navigation.
+	 */
 	public void startCarNavigation() {
 		if (navigationManager != null) {
 			navigationManager.navigationStarted();
@@ -279,7 +277,9 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/** Stops navigation. */
+	/**
+	 * Stops navigation.
+	 */
 	public void stopCarNavigation() {
 		getApp().runInUIThread(() -> {
 					if (navigationManager != null) {

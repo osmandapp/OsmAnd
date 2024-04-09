@@ -368,7 +368,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	@NonNull
 	public List<List<WptPt>> getSegmentsPoints(boolean plain, boolean route) {
 		List<List<WptPt>> res = new ArrayList<>();
-		List<WptPt> allPoints = getAllBeforePoints();
+		List<WptPt> beforePoints = getPoints();
+		List<WptPt> allBeforePoints = getAllBeforePoints();
+		List<WptPt> allPoints = beforePoints.size() > 2 ? beforePoints : allBeforePoints;
 		List<WptPt> segment = new ArrayList<>();
 		String prevProfileType = null;
 		for (WptPt point : allPoints) {

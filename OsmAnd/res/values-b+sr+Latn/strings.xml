@@ -1331,7 +1331,7 @@
     <string name="lang_hy">Armenijski</string>
     <string name="lang_ar">Arapski</string>
     <string name="lang_al">Albanski</string>
-    <string name="lang_af">Afrikaanski</string>
+    <string name="lang_af">Afrički</string>
     <string name="lang_en_gb">Engleski (britanski)</string>
     <string name="lang_en">Engleski</string>
     <string name="lang_pt_br">Portugalski (brazilski)</string>
@@ -2628,7 +2628,7 @@
 \n
 \nPretplatama možeš upravljati i otkazati ih tako što ćeš otići na svoja Google Play podešavanja.</string>
     <string name="search_poi_types">Pretraga TOI vrsta</string>
-    <string name="search_poi_types_descr">Kombinuj TOI različitih kategorija. Tapni prekidač za odaabir svih, tapnite na levu stranu da odabereš kategoriju.</string>
+    <string name="search_poi_types_descr">Kombinuj TOI različitih kategorija. Tapni prekidač za odabir svih, tapni na levu stranu da odabereš kategoriju.</string>
     <string name="extra_maps_menu_group">Dodatne mape</string>
     <string name="download_unsupported_action">Nepodržana radnja %1$s</string>
     <string name="tracker_item">OsmAnd monitor</string>
@@ -2822,7 +2822,7 @@
     <string name="points_delete_multiple">Obrisati %1$d tačku(e)?</string>
     <string name="points_delete_multiple_succesful">Tačka(e) izbrisana(e).</string>
     <string name="add_new_folder">Dodaj novi folder</string>
-    <string name="shared_string_slope">Padina</string>
+    <string name="shared_string_slope">Nagib padine</string>
     <string name="relief_smoothness_factor_descr">Omiljeni teren: ravno ili brdovito.</string>
     <string name="routing_attr_driving_style_safety_name">Radije sporednim putevima</string>
     <string name="routing_attr_driving_style_balance_name">Balansirano</string>
@@ -2913,7 +2913,7 @@
     <string name="screen_timeout_descr">Ako je „%1$s” uključen, vreme rada će zavisiti od toga.</string>
     <string name="default_screen_timeout">Podrazumevano vreme isključivanja ekrana</string>
     <string name="shared_string_tones">tone</string>
-    <string name="shared_string_meters">metara</string>
+    <string name="shared_string_meters">metri</string>
     <string name="details_dialog_decr">Prikazati ili sakriti dodatne detalje mape</string>
     <string name="shared_string_night_map">Noćna mapa</string>
     <string name="add_online_source">Dodaj internet izvor</string>
@@ -4006,7 +4006,7 @@
     <string name="last_time_checked">Zadnji put provereno: %s</string>
     <string name="update_frequency">Učestalost ažuriranja</string>
     <string name="delete_updates">Obriši ažuriranja</string>
-    <string name="live_update_delete_updates_msg">Oobrisati svih %s Live ažuriranja?</string>
+    <string name="live_update_delete_updates_msg">Obrisati sva %s Live ažuriranja?</string>
     <string name="purchases">Kupovine</string>
     <string name="select_category_descr">Odaberi kategoriju ili dodaj novu</string>
     <string name="track_recording_will_be_continued">Snimanje će biti nastavljeno.</string>
@@ -4606,7 +4606,7 @@
     <string name="tts_title">TTS</string>
     <string name="route_line_use_gradient_coloring">Linija puta je obojena visinskim nagibom.</string>
     <string name="rendering_attr_natureReserves_description">Prikazati rezervate, zaštićena područja prirode i nacionalne parkove.</string>
-    <string name="srtm_download_single_help_message">Odaberi vrstu. Moraćeš ponovo da preuzmeš fajlradi promene oblika.</string>
+    <string name="srtm_download_single_help_message">Odaberi varijantu. Moraćeš ponovno preuzeti datoteku kako bi promenio format.</string>
     <string name="navigate_point_format_swiss_grid">Švajcarska mreža (CH1903)</string>
     <string name="navigate_point_format_swiss_grid_plus">Švajcarska mreža (CH1903+)</string>
     <string name="av_notes_choose_action_widget_desc">Izaberi akciju.</string>
@@ -5502,7 +5502,7 @@
     <string name="all_folders">Svi folderi</string>
     <string name="shared_string_show_less">Prikazati manje</string>
     <string name="root_folder">Root folder</string>
-    <string name="shared_string_loading">Preuzimanje</string>
+    <string name="shared_string_loading">Učitavanje</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne trase</string>
     <string name="empty_smart_folder_title">Nema odgovarajućeg staza</string>
     <string name="empty_smart_folder_description">Odgovarajuće trase automatski će se pojaviti ovde</string>

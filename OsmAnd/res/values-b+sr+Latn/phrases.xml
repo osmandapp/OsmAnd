@@ -47,7 +47,7 @@
     <string name="poi_home_visit">Kućna poseta</string>
     <string name="poi_social_facility_type">Tip</string>
     <string name="poi_social_facility_for">Ciljna grupa</string>
-    <string name="poi_compressed_air_filter">Vazduh pod pritiskom</string>
+    <string name="poi_compressed_air_filter">Kompresor za gume</string>
     <string name="poi_vacuum_cleaner_filter">Usisivač</string>
     <string name="poi_self_service">Samousluga</string>
     <string name="poi_automated">Automatizovano</string>
@@ -248,7 +248,7 @@
     <string name="poi_fuel_electricity">Struja</string>
     <string name="poi_aeroway_fuel">Benzinska pumpa za letelice</string>
     <string name="poi_waterway_fuel">Benzinska pumpa na vodi</string>
-    <string name="poi_compressed_air">Vazduh pod pritiskom</string>
+    <string name="poi_compressed_air">Kompresor za gume</string>
     <string name="poi_parking">Parking</string>
     <string name="poi_motorcycle_parking">Parking za motore</string>
     <string name="poi_parking_entrance">Ulaz u parking</string>
@@ -311,7 +311,7 @@
     <string name="poi_site_type_necropolis">Nekropola</string>
     <string name="poi_generator_output_electricity">Izlazna snaga</string>
     <string name="poi_generator_output_hot_water">Izlazna snaga tople vode</string>
-    <string name="poi_generator_output_compressed_air">Izlazna snaga vazduha pod pritiskom</string>
+    <string name="poi_generator_output_compressed_air">Izlazna snaga komprinovanog vazduha</string>
     <string name="poi_fire_extinguisher">Protivpožarni aparat</string>
     <string name="poi_fuel_cng">CNG - metan</string>
     <string name="poi_electricity_combined_charging">Stanica za punjenje</string>
@@ -444,7 +444,7 @@
     <string name="poi_country">Država</string>
     <string name="poi_city">Grad</string>
     <string name="poi_capital">Da;Glavni grad</string>
-    <string name="poi_town">Gradsko naselje</string>
+    <string name="poi_town">Naseljeno mesto</string>
     <string name="poi_village">Selo</string>
     <string name="poi_hamlet">Zaseok</string>
     <string name="poi_suburb">Predgrađe</string>
@@ -516,7 +516,7 @@
     <string name="poi_migration">Migraciono</string>
     <string name="poi_tax_inspection">Poreska inspekcija</string>
     <string name="poi_isolated_dwelling">Salaš</string>
-    <string name="poi_quarter">Gradski četvrt</string>
+    <string name="poi_quarter">Gradska četvrt</string>
     <string name="poi_neighbourhood">Gradsko naselje</string>
     <string name="poi_nursing_home">Dom za stare</string>
     <string name="poi_sanatorium">Sanatorijum</string>
@@ -1903,7 +1903,7 @@
     <string name="poi_shelter_type_field_shelter">Poljsko sklonište</string>
     <string name="poi_shelter_type_tent">Tip skloništa: šator</string>
     <string name="poi_shelter_type_abandoned">Tip skloništa: napušteno</string>
-    <string name="poi_internet_access_type_wlan">Vaj-Faj</string>
+    <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_internet_access_type_terminal">Terminal</string>
     <string name="poi_internet_access_type_wired">Kablovski</string>
     <string name="poi_internet_access_type_public">Tip pristupa internetu: javni</string>
