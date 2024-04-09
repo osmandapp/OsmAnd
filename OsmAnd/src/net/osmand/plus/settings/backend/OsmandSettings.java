@@ -1304,6 +1304,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
 
+	public final OsmandPreference<Boolean> FIXED_NORTH_MAP = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
+
 
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference(this, "text_scale", 1f).makeProfile().cache();
 

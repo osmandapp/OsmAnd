@@ -533,6 +533,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
+		if (type == MapGestureType.TWO_POINTERS_ROTATION &&
+				settings.getCompassMode() == CompassMode.NORTH_IS_UP &&
+				settings.FIXED_NORTH_MAP.get()) {
+			return false;
+		}
 		for (OsmandMapLayer layer : getLayers()) {
 			if (!layer.isMapGestureAllowed(type)) {
 				return false;
