@@ -19,13 +19,13 @@
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
 			android:layout_gravity="start|center_vertical"
+			android:layout_marginEnd="@dimen/content_padding_small"
 			osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<TextView
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
-			android:layout_marginStart="@dimen/content_padding_small"
 			android:autoSizeMaxTextSize="@dimen/simple_widget_value_small_size"
 			android:autoSizeMinTextSize="@dimen/simple_widget_value_minimum_size"
 			android:autoSizeStepGranularity="2sp"
