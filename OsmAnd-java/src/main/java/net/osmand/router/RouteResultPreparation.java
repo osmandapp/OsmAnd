@@ -2126,6 +2126,11 @@ public class RouteResultPreparation {
 		
 	}
 
+	private boolean isMotorwayOrPrimary(RouteSegmentResult s){
+		String h = s.getObject().getHighway();
+		return isMotorway(s) || "primary".equals(h) || "primary_link".equals(h);
+
+	}
 	
 	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) throws IOException {
 		RouteSegmentResult rr = result.get(routeInd);
@@ -2232,6 +2237,9 @@ public class RouteResultPreparation {
 			if (isSwitchToLink(curr, result.get(i - 1))) {
 				continue;
 			}
+			if (isEqualsRoadFork(curr) && isMotorwayOrPrimary(curr)) {
+				continue;
+			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 			if(cnt > 0 && cnt == cntAll) {
@@ -2253,6 +2261,9 @@ public class RouteResultPreparation {
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
 				if (i > 0 && isSwitchToLink(curr, result.get(i - 1))) {
+					continue;
+				}
+				if (isEqualsRoadFork(curr) && isMotorwayOrPrimary(curr)) {
 					continue;
 				}
 				turnType.setSkipToSpeak(true);
@@ -2437,6 +2448,21 @@ public class RouteResultPreparation {
 	private boolean isSwitchToLink(RouteSegmentResult curr, RouteSegmentResult prev) {
 		String c = curr.getObject().getHighway();
 		return c != null && c.contains("_link");
+	}
+
+	private boolean isEqualsRoadFork(RouteSegmentResult curr) {
+		String h = curr.getObject().getHighway();
+		if (Algorithms.isEmpty(h)) {
+			return false;
+		}
+		List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
+		for (RouteSegmentResult a : attachedRoutes) {
+			String ha = a.getObject().getHighway();
+			if (Algorithms.isEmpty(ha) || !h.equals(ha)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private boolean twiceRoadPresent(List<RouteSegmentResult> result, int i) {
