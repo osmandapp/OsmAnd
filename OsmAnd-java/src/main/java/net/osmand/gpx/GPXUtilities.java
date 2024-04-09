@@ -94,6 +94,7 @@ public class GPXUtilities {
 		put("osmand:hr", PointAttributes.SENSOR_TAG_HEART_RATE);
 		put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
 		put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
+		put("cad", PointAttributes.SENSOR_TAG_CADENCE);
 		put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
 		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
 		put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
