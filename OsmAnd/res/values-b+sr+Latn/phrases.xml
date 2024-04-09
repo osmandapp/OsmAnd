@@ -47,7 +47,7 @@
     <string name="poi_home_visit">Kućna poseta</string>
     <string name="poi_social_facility_type">Tip</string>
     <string name="poi_social_facility_for">Ciljna grupa</string>
-    <string name="poi_compressed_air_filter">Vazduh pod pritiskom</string>
+    <string name="poi_compressed_air_filter">Kompresor za gume</string>
     <string name="poi_vacuum_cleaner_filter">Usisivač</string>
     <string name="poi_self_service">Samousluga</string>
     <string name="poi_automated">Automatizovano</string>
@@ -248,7 +248,7 @@
     <string name="poi_fuel_electricity">Struja</string>
     <string name="poi_aeroway_fuel">Benzinska pumpa za letelice</string>
     <string name="poi_waterway_fuel">Benzinska pumpa na vodi</string>
-    <string name="poi_compressed_air">Pumpa za gume</string>
+    <string name="poi_compressed_air">Kompresor za gume</string>
     <string name="poi_parking">Parking</string>
     <string name="poi_motorcycle_parking">Parking za motore</string>
     <string name="poi_parking_entrance">Ulaz u parking</string>
@@ -444,7 +444,7 @@
     <string name="poi_country">Država</string>
     <string name="poi_city">Grad</string>
     <string name="poi_capital">Da;Glavni grad</string>
-    <string name="poi_town">Gradsko naselje</string>
+    <string name="poi_town">Naseljeno mesto</string>
     <string name="poi_village">Selo</string>
     <string name="poi_hamlet">Zaseok</string>
     <string name="poi_suburb">Predgrađe</string>
@@ -516,7 +516,7 @@
     <string name="poi_migration">Migraciono</string>
     <string name="poi_tax_inspection">Poreska inspekcija</string>
     <string name="poi_isolated_dwelling">Salaš</string>
-    <string name="poi_quarter">Gradski četvrt</string>
+    <string name="poi_quarter">Gradska četvrt</string>
     <string name="poi_neighbourhood">Gradsko naselje</string>
     <string name="poi_nursing_home">Dom za stare</string>
     <string name="poi_sanatorium">Sanatorijum</string>

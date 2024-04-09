@@ -1331,7 +1331,7 @@
     <string name="lang_hy">Armenijski</string>
     <string name="lang_ar">Arapski</string>
     <string name="lang_al">Albanski</string>
-    <string name="lang_af">Afrikaanski</string>
+    <string name="lang_af">Afrički</string>
     <string name="lang_en_gb">Engleski (britanski)</string>
     <string name="lang_en">Engleski</string>
     <string name="lang_pt_br">Portugalski (brazilski)</string>
@@ -2628,7 +2628,7 @@
 \n
 \nPretplatama možeš upravljati i otkazati ih tako što ćeš otići na svoja Google Play podešavanja.</string>
     <string name="search_poi_types">Pretraga TOI vrsta</string>
-    <string name="search_poi_types_descr">Kombinuj TOI različitih kategorija. Tapni prekidač za odaabir svih, tapnite na levu stranu da odabereš kategoriju.</string>
+    <string name="search_poi_types_descr">Kombinuj TOI različitih kategorija. Tapni prekidač za odabir svih, tapni na levu stranu da odabereš kategoriju.</string>
     <string name="extra_maps_menu_group">Dodatne mape</string>
     <string name="download_unsupported_action">Nepodržana radnja %1$s</string>
     <string name="tracker_item">OsmAnd monitor</string>
@@ -5502,7 +5502,7 @@
     <string name="all_folders">Svi folderi</string>
     <string name="shared_string_show_less">Prikazati manje</string>
     <string name="root_folder">Root folder</string>
-    <string name="shared_string_loading">Preuzmi</string>
+    <string name="shared_string_loading">Učitavanje</string>
     <string name="searching_matching_tracks">Pretraži sve podudarne trase</string>
     <string name="empty_smart_folder_title">Nema odgovarajućeg staza</string>
     <string name="empty_smart_folder_description">Odgovarajuće trase automatski će se pojaviti ovde</string>
