@@ -5680,6 +5680,6 @@
     <string name="gpx_approximation_cpp">Rutiranje-bazirano (C++)</string>
     <string name="gpx_approximation_java">Rutiranje-bazirano (Java)</string>
     <string name="gpx_approximation_geo_java">Rutiranje-bazirano (Java, brzo)</string>
-    <string name="fix_north_up_descr">Ne rotirajte mapu pokretima u orijentaciji karte Sever Gore</string>
-    <string name="fix_north_up">Omogući Fiksni Sever Gore</string>
+    <string name="fix_north_up_descr">Ne rotirarti mapu pokretima u orijentaciji prema severu</string>
+    <string name="fix_north_up">Fiksirati mapa prema severu</string>
 </resources>
