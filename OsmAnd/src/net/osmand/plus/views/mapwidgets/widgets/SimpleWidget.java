@@ -59,13 +59,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		updateWidgetView();
 	}
 
-	public void updateFullRowState(boolean fullRow) {
-		if(isFullRow != fullRow) {
-			isFullRow = fullRow;
-			recreateView();
-		}
-	}
-
 	public void updateValueAlign(boolean fullRow) {
 		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
 			if(!fullRow) {
