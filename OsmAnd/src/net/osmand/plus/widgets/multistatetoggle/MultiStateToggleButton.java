@@ -26,6 +26,9 @@ import java.util.Objects;
 
 public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
+	protected static final float BACKGROUND_ALPHA = 0.1f;
+	protected static final float BACKGROUND_STROKE_ALPHA = 0.5f;
+
 	protected final OsmandApplication app;
 	protected final UiUtilities uiUtilities;
 
@@ -92,7 +95,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		return null;
 	}
 
-	private void initView() {
+	protected void initView() {
 		buttons.clear();
 		dividers.clear();
 		container.removeAllViews();
@@ -105,7 +108,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		updateView();
 	}
 
-	private void createBtn(@NonNull _Radio item) {
+	protected void createBtn(@NonNull _Radio item) {
 		Context context = container.getContext();
 		LayoutInflater inflater = UiUtilities.getInflater(context, nightMode);
 		ViewGroup button = (ViewGroup) inflater.inflate(
@@ -162,8 +165,8 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 			int contentColor = item.getCustomColor() != null ? item.getCustomColor() : activeColor;
 			int itemColor = enabled ? contentColor : defaultColor;
 			GradientDrawable background = new GradientDrawable();
-			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
-			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
+			background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, BACKGROUND_ALPHA));
+			background.setStroke(AndroidUtils.dpToPx(app, 1.5f), ColorUtilities.getColorWithAlpha(selectedBgColor, BACKGROUND_STROKE_ALPHA));
 
 			if (selectedItem == item) {
 				if (i == 0) {
@@ -206,7 +209,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		}
 	}
 
-	private boolean isLastItem(int index) {
+	protected boolean isLastItem(int index) {
 		return index == items.size() - 1;
 	}
 }
