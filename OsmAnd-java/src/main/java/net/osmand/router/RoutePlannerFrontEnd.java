@@ -42,9 +42,9 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public static boolean CALCULATE_MISSING_MAPS = true;
-	public static boolean APPROXIMATE_GPX_SEGMENTS = false;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
+	private boolean useGeometryBasedApproximation = false;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
@@ -313,7 +313,12 @@ public class RoutePlannerFrontEnd {
 		this.useNativeApproximation = useNativeApproximation;
 		return this;
 	}
-	
+
+	public RoutePlannerFrontEnd setUseGeometryBasedApproximation(boolean enabled) {
+		this.useGeometryBasedApproximation = enabled;
+		return this;
+	}
+
 	public boolean isUseNativeApproximation() {
 		return useNativeApproximation;
 	}
@@ -325,10 +330,11 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		if (APPROXIMATE_GPX_SEGMENTS && !useNativeApproximation) {
-			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
+		if (useGeometryBasedApproximation) {
+			return searchGpxSegments(gctx, gpxPoints, resultMatcher); // use Java-only method until C++ implemented
+		} else {
+			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 		}
-		return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 	}
 	
 	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
@@ -336,11 +342,14 @@ public class RoutePlannerFrontEnd {
 		if (gctx.ctx.calculationProgress == null) {
 			gctx.ctx.calculationProgress = new RouteCalculationProgress();
 		}
-		app.searchGpxApproximation(this, gctx, gpxPoints, resultMatcher);
+		app.fastGpxApproximation(this, gctx, gpxPoints);
 		calculateGpxRoute(gctx, gpxPoints);
 		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
 			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
 			log.info(gctx);
+		}
+		if (resultMatcher != null) {
+			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
 		}
 		return gctx;
 	}
@@ -522,7 +531,7 @@ public class RoutePlannerFrontEnd {
 		return true;
 	}
 
-	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
+	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) throws IOException {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
@@ -565,7 +574,12 @@ public class RoutePlannerFrontEnd {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
-		// clean turns to recaculate them
+
+		if (useGeometryBasedApproximation) {
+			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.result); // not required by classic method
+		}
+
+		// clean turns to recalculate them
 		cleanupResultAndAddTurns(gctx);
 	}
 
@@ -638,11 +652,20 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
+
+		List<GpxPoint> emptyFinalPoints = new ArrayList<>();
 		for (GpxPoint gpx : gctx.finalPoints) {
 			if (gpx.routeToTarget != null) {
 				gpx.routeToTarget.removeAll(deleted);
+				if (gpx.routeToTarget.size() == 0) {
+					emptyFinalPoints.add(gpx);
+				}
 			}
 		}
+		if (emptyFinalPoints.size() > 0) {
+			gctx.finalPoints.removeAll(emptyFinalPoints);
+		}
+
 		RouteResultPreparation preparation = new RouteResultPreparation();
 		preparation.validateAllPointsConnected(gctx.result);
 		for (RouteSegmentResult r : gctx.result) {

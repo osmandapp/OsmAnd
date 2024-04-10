@@ -5675,4 +5675,7 @@
     <string name="map_widget_map_scale">Skala peta</string>
     <string name="unchanged_parameter_summary">Setiap trek akan menyimpan parameternya sendiri.</string>
     <string name="shared_string_unchanged">Tidak diubah</string>
+    <string name="gpx_approximation_cpp">Berbasis perutean (C++)</string>
+    <string name="gpx_approximation_java">Berbasis perutean (Java)</string>
+    <string name="gpx_approximation_geo_java">Berbasis geometri (Java, cepat)</string>
 </resources>

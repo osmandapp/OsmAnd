@@ -5661,4 +5661,7 @@
     <string name="map_widget_map_scale">地圖比例尺</string>
     <string name="unchanged_parameter_summary">每個軌跡都會保留自己的參數。</string>
     <string name="shared_string_unchanged">未變更</string>
+    <string name="gpx_approximation_cpp">以路徑規劃為基礎 (C++)</string>
+    <string name="gpx_approximation_java">以路徑規劃為基礎 (Java)</string>
+    <string name="gpx_approximation_geo_java">以幾何為基礎 (Java，快速)</string>
 </resources>

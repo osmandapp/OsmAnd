@@ -5672,4 +5672,7 @@
     <string name="map_widget_map_scale">Escala de mapa</string>
     <string name="shared_string_unchanged">Sin cambiar</string>
     <string name="unchanged_parameter_summary">Cada pista conservará sus propios parámetros.</string>
+    <string name="gpx_approximation_geo_java">Basado en geometría (Java, rápido)</string>
+    <string name="gpx_approximation_cpp">Basado en enrutamiento (C++)</string>
+    <string name="gpx_approximation_java">Basado en enrutamiento (Java)</string>
 </resources>

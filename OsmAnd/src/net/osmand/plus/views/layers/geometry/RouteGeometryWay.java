@@ -56,6 +56,7 @@ public class RouteGeometryWay extends
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new MultiColoringGeometryWayDrawer<>(context));
 		this.helper = context.getApp().getRoutingHelper();
+		this.linesPriority = Long.MAX_VALUE;
 	}
 
 	public void setRouteStyleParams(int pathColor,

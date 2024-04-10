@@ -56,6 +56,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	private final List<Integer> ty31 = new ArrayList<>();
 	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
 	public int baseOrder = -1;
+	public long linesPriority = Long.MIN_VALUE;
 	public VectorLinesCollection vectorLinesCollection;
 	public VectorLineArrowsProvider vectorLineArrowsProvider;
 
@@ -462,6 +463,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					|| !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider);
 			if (vectorLinesCollection != null && updateArrowsProvider) {
 				VectorLineArrowsProvider newArrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
+				newArrowsProvider.setPriority(linesPriority);
 				this.vectorLineArrowsProvider = newArrowsProvider;
 				mapRenderer.addSymbolsProvider(newArrowsProvider);
 			}
@@ -678,6 +680,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					if (mapRenderer != null && vectorLinesCollection != null
 							&& (vectorLineArrowsProvider == null || !mapRenderer.hasSymbolsProvider(vectorLineArrowsProvider))) {
 						VectorLineArrowsProvider arrowsProvider = new VectorLineArrowsProvider(vectorLinesCollection);
+						arrowsProvider.setPriority(linesPriority);
 						this.vectorLineArrowsProvider = arrowsProvider;
 						mapRenderer.addSymbolsProvider(arrowsProvider);
 					}
@@ -723,8 +726,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
-			VectorLinesCollection collection = vectorLinesCollection == null || !mapRenderer.hasSymbolsProvider(vectorLinesCollection)
-					? new VectorLinesCollection() : vectorLinesCollection;
+			VectorLinesCollection collection;
+			if (vectorLinesCollection == null || !mapRenderer.hasSymbolsProvider(vectorLinesCollection)) {
+				collection = new VectorLinesCollection();
+				collection.setPriority(linesPriority);
+			} else {
+				collection = vectorLinesCollection;
+			}
 			drawer.drawPath(collection, baseOrder, shouldDrawArrows(), pathsData);
 			mapRenderer.addSymbolsProvider(collection);
 			this.vectorLinesCollection = collection;

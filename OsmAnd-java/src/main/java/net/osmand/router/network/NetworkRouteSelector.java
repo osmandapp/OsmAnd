@@ -747,7 +747,14 @@ public class NetworkRouteSelector {
 			if (name.isEmpty()) {
 				name = getValue("ref");
 			}
+			if (name.isEmpty()) {
+				name = getRelationID();
+			}
 			return name;
+		}
+
+		public String getRelationID() {
+			return getValue("relation_id");
 		}
 
 		public String getNetwork() {

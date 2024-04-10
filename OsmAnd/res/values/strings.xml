@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="fix_north_up">Enable Fixed North Up</string>
+    <string name="fix_north_up_descr">Do not rotate map with gestures in North Up map orientation</string>
     <string name="unchanged_parameter_summary">Each track will retain its own parameters.</string>
     <string name="shared_string_unchanged">Unchanged</string>
     <string name="map_widget_map_scale">Map scale</string>
@@ -39,6 +42,9 @@
     <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (Safe)</string>
     <string name="gpx_approximation">GPX approximation</string>
+    <string name="gpx_approximation_cpp">Routing-based (C++)</string>
+    <string name="gpx_approximation_java">Routing-based (Java)</string>
+    <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
     <string name="routing_type">Routing type</string>
     <string name="rendering_attr_padusDisplayMode_name">Public lands display mode</string>
     <string name="rendering_attr_padusDisplayMode_description">By access type or manager name</string>

@@ -179,7 +179,7 @@
     <string name="rendering_attr_noPolygons_name">Poligoane</string>
     <string name="rendering_attr_appMode_name">Mod de randare</string>
     <string name="rendering_attr_appMode_description">Optimizează harta pentru</string>
-    <string name="rendering_attr_contourLines_description">Afișare de la nivelul de zoom (necesită date privind linia de contur):</string>
+    <string name="rendering_attr_contourLines_description">Afișare începând cu nivelul de zoom (necesită date privind liniile de contur):</string>
     <string name="rendering_attr_contourLines_name">Arată linii de contur</string>
     <string name="rendering_attr_hmRendered_description">Creșteți cantitatea de detalii afișate pe hartă.</string>
     <string name="rendering_attr_hmRendered_name">Mai multe detalii pe hartă</string>
@@ -769,7 +769,7 @@
     <string name="use_english_names">Folosiți denumiri în limba engleză pe hărți</string>
     <string name="app_settings">Setările aplicației</string>
     <string name="search_address">Căutare adresă</string>
-    <string name="choose_building">Alegeți numărul</string>
+    <string name="choose_building">Alegeți clădirea</string>
     <string name="choose_street">Alegeți strada</string>
     <string name="choose_city">Alegeți orașul sau codul poștal</string>
     <string name="ChooseCountry">Alegeți țara</string>
@@ -1536,7 +1536,7 @@
     <string name="local_osm_changes_upload_all_confirm">Încărcați %1$d modificare(ări) în OSM\?</string>
     <string name="confirmation_to_clear_history">Sterg istoricul\?</string>
     <string name="donations">Donații</string>
-    <string name="number_of_recipients">Numărul de benecifiari</string>
+    <string name="number_of_recipients">Număr de destinatari</string>
     <string name="osm_user_stat">Modificări %1$s, grad %2$s, toate modificările %3$s</string>
     <string name="osm_editors_ranking">Clasamentul editorului OSM</string>
     <string name="osm_live_subscription">Abonament OsmAnd Live</string>
@@ -1738,7 +1738,7 @@
     <string name="show_arrows_descr">Afișați una sau doua săgeți care să indice direcția către marcajele active.</string>
     <string name="distance_indication_descr">Alegeți cum sa fie afișată distanța către marcajele active.</string>
     <string name="active_markers_descr">Specificați numărul de indicatoare de direcție.</string>
-    <string name="digits_quantity">Numărul digiților zecimali</string>
+    <string name="digits_quantity">Număr de cifre zecimale</string>
     <string name="shared_string_right">Dreapta</string>
     <string name="shared_string_left">Stânga</string>
     <string name="show_number_pad">Arată panoul cu numere</string>
@@ -1841,12 +1841,12 @@
     <string name="search_favorites">Căutare în favorite</string>
     <string name="hillshade_menu_download_descr">Descărcați harta de suprapunere \"Relief umbrit\" pentru a arăta umbrirea verticală.</string>
     <string name="hillshade_purchase_header">Instalați pluginul \'Topografie\' pentru a arăta zone verticale gradate.</string>
-    <string name="hide_from_zoom_level">Ascundeți începând de la nivelul de zoom</string>
+    <string name="hide_from_zoom_level">Ascundere începând cu nivelul de zoom</string>
     <string name="shared_string_plugin">Extensie</string>
     <string name="srtm_color_scheme">Schemă culori</string>
     <string name="routing_attr_allow_private_name">Permite accesul privat</string>
     <string name="routing_attr_allow_private_description">Permite accesul în zonele private.</string>
-    <string name="display_zoom_level">Afisează nivelul de zoom: %1$s</string>
+    <string name="display_zoom_level">Afișare începând cu nivelul de zoom: %1$s</string>
     <string name="favorite_group_name">Numele grupului</string>
     <string name="change_color">Schimbă culoarea</string>
     <string name="edit_name">Modificare nume</string>
@@ -1872,7 +1872,7 @@
     <string name="fonts_header">Fonturi de hartă</string>
     <string name="right_side_navigation">Trafic pe dreapta</string>
     <string name="shared_string_automatic">Automat</string>
-    <string name="do_not_send_anonymous_app_usage">Nu trimite statistici de utilizare anonime ale aplicației</string>
+    <string name="do_not_send_anonymous_app_usage">Nu trimite statistici anonimizate despre utilizarea aplicației</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd colectează informații despre părțile din aplicatie folosite. Locația dumneavoastră și datele introduse în aplicație nu vor fi niciodată trimise, sau detalii despre zona în care vă aflați, căutari sau descărcări.</string>
     <string name="do_not_show_startup_messages">Nu arăta mesaje la pornire</string>
     <string name="parking_options">Opțiuni parcare</string>
@@ -2172,7 +2172,7 @@
     <string name="angular_measeurement_descr">Modificați în ce azimut se măsoară.</string>
     <string name="avoid_pt_types_descr">Selectați tipurile de transport public evitate la navigare:</string>
     <string name="quick_action_day_night_mode">%s mod</string>
-    <string name="avoid_pt_types">Evitați tipurile de transport…</string>
+    <string name="avoid_pt_types">Evitare tipuri de transport…</string>
     <string name="shared_string_walk">Mergeți</string>
     <string name="public_transport_warning_descr_blog">Aflați mai multe despre modul în care OsmAnd calculează rutele în blogul nostru.</string>
     <string name="public_transport_warning_title">În prezent, navigația pentru transportul public este în testare beta, așteptați erori și inexactități.</string>
@@ -2520,8 +2520,8 @@
     <string name="weekly">Săptămânal</string>
     <string name="morning">Dimineața</string>
     <string name="updates_size">Mărimea actualizării</string>
-    <string name="number_of_contributors">Numărul de contribuabili</string>
-    <string name="number_of_edits">Numărul de modificări</string>
+    <string name="number_of_contributors">Număr de contributori</string>
+    <string name="number_of_edits">Număr de editări</string>
     <string name="reports_for">Raport pentru</string>
     <string name="night">Noaptea</string>
     <string name="shared_string_appearance">Aspect</string>
@@ -2591,7 +2591,7 @@
     <string name="edit_profile_setup_map_subtitle">Selectați opțiunile hărții pentru profil</string>
     <string name="edit_profile_nav_settings_subtitle">Selectează setările de navigație ale profilului</string>
     <string name="routing_attr_max_num_changes_description">Specificați un număr maxim de modificări</string>
-    <string name="routing_attr_max_num_changes_name">Numărul de modificări</string>
+    <string name="routing_attr_max_num_changes_name">Număr de modificări</string>
     <string name="turn_screen_on_time_descr">Reglați cât timp ar trebui să fie activat ecranul.</string>
     <string name="turn_screen_on_sensor_descr">Fluturarea mâinii pe ecran îl va porni.</string>
     <string name="turn_on_profile_desc">Activați cel puțin un profil de aplicație pentru a utiliza această setare.</string>
@@ -2683,7 +2683,7 @@
     <string name="edit_profiles_descr">Profilurile implicite ale OsmAnd nu pot fi șterse, ci dezactivate (în ecranul anterior), sau pot fi sortate în partea de jos.</string>
     <string name="edit_profiles">Editează profiluri</string>
     <string name="profile_appearance">Aspect profil</string>
-    <string name="choose_icon_color_name">Pictograma, culoarea și numele</string>
+    <string name="choose_icon_color_name">Pictogramă, culoare și nume</string>
     <string name="reorder_profiles">Editează lista de profiluri</string>
     <string name="selected_profile">Profil selectat</string>
     <string name="nautical_render_descr">Pentru navigație nautică. Afișează geamanduri, faruri, râuri, culoare navigabile și marcaje maritime, porturi, servicii maritime și curbe de adâncime.</string>
@@ -2704,9 +2704,9 @@
     <string name="public_transport_ped_route_title">Traseul pe jos este de aproximativ %1$s, și poate fi mai rapid decât transportul public</string>
     <string name="public_transport_no_route_title">Din păcate OsmAnd nu a găsit un traseu potrivit pentru setările dumneavoastră.</string>
     <string name="coordinates_widget">Widget coordonate</string>
-    <string name="make_osmand_better_descr">Permiteți ca OsmAnd să colecteze și să proceseze date anonime despre utilizarea aplicației. Nu sunt colectate date despre poziția dumneavoastră sau despre locațiile pe care le vizualizați pe hartă.
+    <string name="make_osmand_better_descr">Permiteți ca OsmAnd să colecteze și să proceseze date anonimizate despre utilizarea aplicației. Nu sunt colectate date despre poziția dumneavoastră sau despre locațiile pe care le vizualizați pe hartă.
 \n
-\nConfigurați oricând în \'Setări\' → \'Confidențialitate și securitate\'.</string>
+\nConfigurați oricând în \'Setări OsmAnd\' → \'Confidențialitate și securitate\'.</string>
     <string name="osmand_routing_promo">Adăugați propria versiune modificată a fișierului routing.xml în ..osmand/routing</string>
     <string name="settings_derived_routing_mode_string">Modul utilizator, derivat din: %s</string>
     <string name="profile_alert_need_routing_type_msg">Alegeți un tip de navigație pentru noul profil</string>

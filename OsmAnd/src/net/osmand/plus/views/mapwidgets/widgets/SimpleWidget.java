@@ -38,6 +38,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
+	private boolean isFullRow;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
@@ -58,25 +59,20 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		updateWidgetView();
 	}
 
+	public void updateFullRowState(boolean fullRow) {
+		if(isFullRow != fullRow) {
+			isFullRow = fullRow;
+			recreateView();
+		}
+	}
+
 	public void updateValueAlign(boolean fullRow) {
 		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
-			if (!(container instanceof ConstraintLayout)) {
-				return;
+			if(!fullRow) {
+				textView.setMaxWidth((int) (container.getWidth() - app.getResources().getDimension(R.dimen.content_padding) +
+						app.getResources().getDimension(R.dimen.map_widget_icon) +
+						app.getResources().getDimension(R.dimen.content_padding_small)));
 			}
-			ConstraintSet constraintSet = new ConstraintSet();
-			constraintSet.clone((ConstraintLayout) container);
-			if (fullRow) {
-				constraintSet.connect(R.id.widget_text, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 0);
-				constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 0);
-			} else {
-				constraintSet.clear(R.id.widget_text, ConstraintSet.END);
-				if (shouldShowIcon()) {
-					constraintSet.connect(R.id.widget_text, ConstraintSet.START, R.id.widget_icon, ConstraintSet.END, dpToPx(app, 12));
-				} else {
-					constraintSet.connect(R.id.widget_text, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, dpToPx(app, 0));
-				}
-			}
-			constraintSet.applyTo((ConstraintLayout) container);
 		} else {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
@@ -106,10 +102,10 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	@LayoutRes
-	private static int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
+	private int getProperVerticalLayoutId(@NonNull SimpleWidgetState simpleWidgetState) {
 		switch (simpleWidgetState.getWidgetSizePref().get()) {
 			case SMALL:
-				return R.layout.simple_map_widget_small;
+				return isFullRow ? R.layout.simple_map_widget_small_full : R.layout.simple_map_widget_small;
 			case LARGE:
 				return R.layout.simple_map_widget_large;
 			default:

@@ -1168,6 +1168,7 @@
 
 		<service
 			android:name="net.osmand.plus.auto.NavigationCarAppService"
+			android:foregroundServiceType="location"
 			android:exported="true">
 
 			<intent-filter>

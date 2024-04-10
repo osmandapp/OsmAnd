@@ -34,6 +34,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.ApproximationType;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
@@ -753,6 +754,7 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 
 		OsmandSettings settings = params.ctx.getSettings();
+
 		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
 		if (routingType.isHHRouting()) {
 			router.setDefaultHHRoutingConfig();
@@ -760,7 +762,10 @@ public class RouteProvider {
 		} else {
 			router.setHHRoutingConfig(null);
 		}
-		router.setUseNativeApproximation(!settings.APPROX_SAFE_MODE.get());
+
+		ApproximationType approximationType = settings.APPROXIMATION_TYPE.getModeValue(params.mode);
+		router.setUseNativeApproximation(approximationType.isNativeApproximation());
+		router.setUseGeometryBasedApproximation(approximationType.isGeoApproximation());
 
 		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 		GeneralRouter generalRouter = params.ctx.getRouter(config, params.mode);

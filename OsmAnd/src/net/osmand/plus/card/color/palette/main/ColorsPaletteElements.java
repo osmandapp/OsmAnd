@@ -44,7 +44,7 @@ public class ColorsPaletteElements {
 		background.setImageDrawable(layeredIcon);
 
 		if (showOutline) {
-			Drawable border = getPaintedIcon(R.drawable.bg_point_circle_contour, color);
+			Drawable border = getPaintedIcon(R.drawable.bg_point_circle_contour, ColorUtilities.getActiveIconColor(app, nightMode));
 			outline.setImageDrawable(border);
 			outline.setVisibility(View.VISIBLE);
 		} else {

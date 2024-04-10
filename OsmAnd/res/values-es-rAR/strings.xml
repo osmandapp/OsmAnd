@@ -5492,7 +5492,7 @@
     <string name="terrain_maps">Mapas topográficos</string>
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
     <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
-    <string name="maps_and_resources">Mapas y Recursos</string>
+    <string name="maps_and_resources">Mapas y recursos</string>
     <string name="shared_string_show_icon">Mostrar icono</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
@@ -5685,4 +5685,9 @@
     <string name="download_cloud_versions">Descargar versiones de la nube</string>
     <string name="upload_local_versions">Cargar versiones locales</string>
     <string name="map_widget_map_scale">Escala del mapa</string>
+    <string name="unchanged_parameter_summary">Cada traza conservará sus propios parámetros.</string>
+    <string name="shared_string_unchanged">Sin cambios</string>
+    <string name="gpx_approximation_geo_java">Basado en la geometría (Java, rápido)</string>
+    <string name="gpx_approximation_cpp">Basado en la navegación (C++)</string>
+    <string name="gpx_approximation_java">Basado en la navegación (Java)</string>
 </resources>

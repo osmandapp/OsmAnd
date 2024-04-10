@@ -1651,7 +1651,7 @@
     <string name="poi_payment_routex_no">Routex-Tankkarten nicht akzeptiert</string>
     <string name="poi_payment_bancomat_yes">Bancomat</string>
     <string name="poi_payment_bancomat_no">Bancomat nicht akzeptiert</string>
-    <string name="poi_payment_prepaid_ticket_yes">Vorausbezahlte Fahrkarten</string>
+    <string name="poi_payment_prepaid_ticket_yes">Vorausbezahlte Karten</string>
     <string name="poi_payment_jcb_yes">JCB</string>
     <string name="poi_payment_jcb_no">JCB-Karten nicht akzeptiert</string>
     <string name="poi_payment_eurowag_yes">Eurowag</string>
@@ -3298,11 +3298,11 @@
     <string name="poi_charging_station_output">Ladestation: Ausgang</string>
     <string name="poi_map_type_topo">Kartentyp: Gelände</string>
     <string name="poi_map_type_street">Kartentyp: Straße</string>
-    <string name="poi_map_type_scheme">Kartentyp: Übersicht</string>
+    <string name="poi_map_type_scheme">Kartentyp: Schema</string>
     <string name="poi_map_type_toposcope">Kartentyp: Toposkop</string>
     <string name="poi_charging_station">Ladestation</string>
     <string name="poi_depot">Lager</string>
-    <string name="poi_map_size_site">Kartengröße: Platz</string>
+    <string name="poi_map_size_site">Kartengröße: Standort</string>
     <string name="poi_map_size_city">Kartengröße: Stadt</string>
     <string name="poi_map_size_region">Kartengröße: Region</string>
     <string name="poi_letter_box">Hausbriefkasten</string>
@@ -4323,7 +4323,7 @@
     <string name="poi_board_type_wildlife">Wildtiere</string>
     <string name="poi_board_type_nature">Natur</string>
     <string name="poi_food_no">Speisen: nein</string>
-    <string name="poi_payment_mir_no">Mir Karten nicht akzeptiert</string>
+    <string name="poi_payment_mir_no">Mir-Karten nicht akzeptiert</string>
     <string name="poi_payment_mir_yes">Mir</string>
     <string name="poi_club_amateur_radio">Amateurfunkverein</string>
     <string name="poi_club_religion">Religionsgemeinschaft</string>
@@ -4861,7 +4861,7 @@
     <string name="poi_live_music">Live-Musik</string>
     <string name="poi_live_music_yes">ja</string>
     <string name="poi_cuisine_fish">Fisch</string>
-    <string name="poi_shop_general">Allgemeines Geschäft</string>
+    <string name="poi_shop_general">Gemischtwarenhandlung</string>
     <string name="poi_indoor_seating_no">Keine Sitzplätze innen</string>
     <string name="poi_indoor_seating_yes">Sitzplätze innen: ja</string>
     <string name="poi_indoor_seating_bar_table">Sitzplätze innen: Tresen</string>

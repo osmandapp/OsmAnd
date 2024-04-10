@@ -3843,7 +3843,7 @@
     <string name="app_mode_motorboat">Motorcsónak</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="shared_string_search_history">Keresési előzmények</string>
-    <string name="shared_string_resources">Források</string>
+    <string name="shared_string_resources">Erőforrások</string>
     <string name="add_to_mapillary">Hozzáadás a Mapillaryhez</string>
     <string name="add_to_opr">Hozzáadás az OpenPlaceReviews-hoz</string>
     <string name="add_photos_descr">Az OsmAnd több forrásból jelenít meg fényképeket:
@@ -5647,7 +5647,7 @@
 \n
 \n • Jobban olvasható adatok a grafikonokon
 \n
-\n • Szenzoradat alapú szűrők a nyomvonalakhoz
+\n • Szenzoradatalapú szűrők a nyomvonalakhoz
 \n
 \n • További GPX-címkék támogatása
 \n
@@ -5669,4 +5669,7 @@
     <string name="map_widget_map_scale">Méretarány</string>
     <string name="unchanged_parameter_summary">Minden nyomvonal megtartja a saját paramétereit.</string>
     <string name="shared_string_unchanged">Változatlan</string>
+    <string name="gpx_approximation_geo_java">Geometriaalapú (Java, gyors)</string>
+    <string name="gpx_approximation_cpp">Útvonalalapú (C++)</string>
+    <string name="gpx_approximation_java">Útvonalalapú (Java)</string>
 </resources>
