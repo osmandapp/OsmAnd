@@ -5672,6 +5672,6 @@
     <string name="gpx_approximation_geo_java">Geometriaalapú (Java, gyors)</string>
     <string name="gpx_approximation_cpp">Útvonalalapú (C++)</string>
     <string name="gpx_approximation_java">Útvonalalapú (Java)</string>
-    <string name="fix_north_up">Rögzített észak fent</string>
+    <string name="fix_north_up">Fent rögzített északi irány engedélyezése</string>
     <string name="fix_north_up_descr">Ne forgassa el a térképet gesztusokkal, ha észak fent van beállítva</string>
 </resources>
