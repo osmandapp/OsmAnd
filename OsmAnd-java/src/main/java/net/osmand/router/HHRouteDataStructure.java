@@ -41,7 +41,7 @@ public class HHRouteDataStructure {
 		int FULL_DIJKSTRA_NETWORK_RECALC = 10;
 		int MAX_START_END_REITERATIONS = 50;  
 		double MAX_INC_COST_CF = 1.25;
-		double MAX_TIME_REITERATION_MS = 60000;
+		double MAX_COUNT_REITERATION = 500;
 		
 		///////////
 		Double INITIAL_DIRECTION = null;
