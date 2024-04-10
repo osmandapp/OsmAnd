@@ -334,7 +334,7 @@
     <string name="settings_preset_descr">Setările de vizualizare și navigație ale hărții sunt ținute minte per profil. Setați aici profilul dumneavoastră implicit.</string>
     <string name="routing_settings">Navigare (funcție de profil)</string>
     <string name="routing_settings_descr">Precizați opțiunile de navigare.</string>
-    <string name="global_settings">Setări globale</string>
+    <string name="global_settings">Setări Globale</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configurați afișajul și setările comune pentru aplicație.</string>
     <string name="global_app_settings">Setări globale aplicație</string>
@@ -5647,4 +5647,14 @@
     <string name="shared_sting_all_colors">Toate culorile</string>
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="fix_north_up">Activați North Up fix</string>
+    <string name="gpx_approximation_cpp">Bazat pe rutare (C++)</string>
+    <string name="gpx_approximation_java">Bazat pe rutare (Java)</string>
+    <string name="gpx_approximation_geo_java">Bazat pe geometrie (Java, rapid)</string>
+    <string name="download_cloud_versions">Descărcați versiunile cloud</string>
+    <string name="distance_during_navigation">Distanța în timpul navigației</string>
+    <string name="unchanged_parameter_summary">Fiecare piesă își va păstra parametrii proprii.</string>
+    <string name="shared_string_unchanged">Neschimbat</string>
+    <string name="distance_during_navigation_description">Alegeți modul în care sunt afișate informațiile privind distanța în widgeturile de navigație (distanța până la punct, următoarea curbă, benzi).
+\n
+\nAlegeți \"%1$s\" pentru numere exacte sau \"%2$s\" pentru o citire mai ușoară.</string>
 </resources>
