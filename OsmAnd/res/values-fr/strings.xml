@@ -4225,7 +4225,7 @@
     <string name="online_direct_line_maps_link">Vérifier les cartes nécessaires.</string>
     <string name="offline_maps_required_descr">Des cartes hors ligne, nécessaires au calcul de l\'itinéraire, sont absentes.</string>
     <string name="online_maps_searching_descr">Recherche en ligne …</string>
-    <string name="reset_to_original">Restaurer l\\\'original</string>
+    <string name="reset_to_original">Restaurer l\'original</string>
     <string name="benefits_for_contributors">Avantages pour les contributeurs réguliers à OSM</string>
     <string name="use_login_and_password">Utiliser un identifiant et un mot de passe</string>
     <string name="available_until">Disponible jusqu\'au %1$s</string>
