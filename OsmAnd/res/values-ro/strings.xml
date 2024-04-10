@@ -5646,15 +5646,15 @@
     <string name="java_safe">Java (Sigur)</string>
     <string name="shared_sting_all_colors">Toate culorile</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="fix_north_up">Activați North Up fix</string>
+    <string name="fix_north_up">Activează Nordul sus fixat</string>
     <string name="gpx_approximation_cpp">Bazat pe rutare (C++)</string>
     <string name="gpx_approximation_java">Bazat pe rutare (Java)</string>
     <string name="gpx_approximation_geo_java">Bazat pe geometrie (Java, rapid)</string>
-    <string name="download_cloud_versions">Descărcați versiunile cloud</string>
+    <string name="download_cloud_versions">Descarcă versiunile din cloud</string>
     <string name="distance_during_navigation">Distanța în timpul navigației</string>
-    <string name="unchanged_parameter_summary">Fiecare piesă își va păstra parametrii proprii.</string>
+    <string name="unchanged_parameter_summary">Fiecare traseu își va păstra parametrii proprii.</string>
     <string name="shared_string_unchanged">Neschimbat</string>
-    <string name="distance_during_navigation_description">Alegeți modul în care sunt afișate informațiile privind distanța în widgeturile de navigație (distanța până la punct, următoarea curbă, benzi).
+    <string name="distance_during_navigation_description">Alegeți modul cum sunt afișate informațiile privind distanța în widgeturile de navigație (distanța până la punct, următoarea curbă, benzi).
 \n
 \nAlegeți \"%1$s\" pentru numere exacte sau \"%2$s\" pentru o citire mai ușoară.</string>
 </resources>
