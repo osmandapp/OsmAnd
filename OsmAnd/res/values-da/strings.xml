@@ -5679,4 +5679,6 @@
     <string name="gpx_approximation_cpp">Ruteberegning-baseret (C++)</string>
     <string name="gpx_approximation_java">Ruteberegning-baseret (Java)</string>
     <string name="gpx_approximation_geo_java">Geometri-baseret (Java, hurtig)</string>
+    <string name="fix_north_up_descr">Drej ikke kortet ved berøringer i kortorientering Nord op</string>
+    <string name="fix_north_up">Aktivér fast nord op</string>
 </resources>
