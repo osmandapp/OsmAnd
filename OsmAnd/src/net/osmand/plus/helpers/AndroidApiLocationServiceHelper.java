@@ -6,10 +6,10 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.location.LocationListenerCompat;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListener {
+public class AndroidApiLocationServiceHelper extends LocationServiceHelper implements LocationListenerCompat {
 
 	private static final Log LOG = PlatformUtil.getLog(DayNightHelper.class);
 
@@ -33,7 +33,7 @@ public class AndroidApiLocationServiceHelper extends LocationServiceHelper imple
 	private final LinkedList<LocationListener> networkListeners = new LinkedList<>();
 
 	// Working with location checkListeners
-	private class NetworkListener implements LocationListener {
+	private class NetworkListener implements LocationListenerCompat {
 
 		@Override
 		public void onLocationChanged(@NonNull Location location) {

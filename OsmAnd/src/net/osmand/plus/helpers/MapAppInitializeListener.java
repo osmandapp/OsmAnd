@@ -1,19 +1,20 @@
 package net.osmand.plus.helpers;
 
-import static net.osmand.plus.AppInitializer.InitEvents.FAVORITES_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.MAPS_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.NATIVE_OPEN_GL_INITIALIZED;
-import static net.osmand.plus.AppInitializer.InitEvents.ROUTING_CONFIG_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.BROUTER_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.NATIVE_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
+import static net.osmand.plus.AppInitEvents.ROUTING_CONFIG_INITIALIZED;
 
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.AppInitEvents;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,7 +33,7 @@ public class MapAppInitializeListener implements AppInitializeListener {
 	}
 
 	@Override
-	public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
+	public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
 		String tn = init.getCurrentInitTaskName();
 		if (tn != null) {
 			((TextView) activity.findViewById(R.id.ProgressMessage)).setText(tn);
@@ -56,6 +57,9 @@ public class MapAppInitializeListener implements AppInitializeListener {
 		}
 		if (event == ROUTING_CONFIG_INITIALIZED) {
 			activity.getRestoreNavigationHelper().checkRestoreRoutingMode();
+		}
+		if (event == BROUTER_INITIALIZED) {
+			activity.getMapActions().updateDrawerMenu();
 		}
 	}
 

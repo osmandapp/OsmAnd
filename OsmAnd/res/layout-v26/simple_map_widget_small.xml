@@ -7,52 +7,42 @@
 	android:layout_height="@dimen/simple_widget_small_height"
 	android:orientation="vertical">
 
-	<androidx.constraintlayout.widget.ConstraintLayout
+	<LinearLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="horizontal"
-		android:paddingHorizontal="16dp"
-		android:paddingVertical="10dp">
+		android:paddingHorizontal="@dimen/content_padding">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/widget_icon"
 			android:layout_width="@dimen/map_widget_icon"
 			android:layout_height="@dimen/map_widget_icon"
 			android:layout_gravity="start|center_vertical"
-			osmand:layout_constraintBottom_toBottomOf="parent"
-			osmand:layout_constraintStart_toStartOf="parent"
-			osmand:layout_constraintTop_toTopOf="parent"
 			osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
 		<TextView
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:letterSpacing="0.04"
-			android:maxLines="1"
-			android:textColor="@color/text_color_primary_light"
+			android:layout_height="match_parent"
+			android:layout_marginStart="@dimen/content_padding_small"
 			android:autoSizeMaxTextSize="@dimen/simple_widget_value_small_size"
 			android:autoSizeMinTextSize="@dimen/simple_widget_value_minimum_size"
 			android:autoSizeStepGranularity="2sp"
 			android:autoSizeTextType="uniform"
+			android:gravity="center_vertical|start"
+			android:maxLines="1"
+			android:textColor="@color/text_color_primary_light"
 			android:textSize="@dimen/simple_widget_value_small_size"
-			osmand:layout_constraintBottom_toBottomOf="parent"
-			osmand:layout_constraintEnd_toEndOf="parent"
-			osmand:layout_constraintStart_toStartOf="parent"
-			osmand:layout_constraintTop_toTopOf="parent" />
+			tools:text="155" />
 
 		<LinearLayout
 			android:id="@+id/linearLayout"
-			android:layout_width="0dp"
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="16dp"
-			android:orientation="vertical"
-			osmand:layout_constraintBottom_toBottomOf="parent"
-			osmand:layout_constraintEnd_toEndOf="parent"
-			osmand:layout_constraintStart_toEndOf="@+id/widget_text"
-			osmand:layout_constraintTop_toTopOf="parent">
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/content_padding"
+			android:orientation="vertical">
 
 			<TextView
 				android:id="@+id/widget_name"
@@ -83,6 +73,6 @@
 
 		</LinearLayout>
 
-	</androidx.constraintlayout.widget.ConstraintLayout>
+	</LinearLayout>
 
 </LinearLayout>

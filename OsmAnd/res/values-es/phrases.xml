@@ -4329,7 +4329,7 @@
     <string name="poi_board_title">Título del tablero</string>
     <string name="poi_short_name">Nombre corto</string>
     <string name="poi_club_aviation">Club de aviación</string>
-    <string name="poi_club_bicycle">Club de ciclistas</string>
+    <string name="poi_club_bicycle">Club ciclista</string>
     <string name="poi_club_doityourself">Club de bricolaje</string>
     <string name="poi_payment_mir_no">No se acepta tarjetas Mir</string>
     <string name="poi_club_amateur_radio">Club de radioaficionados</string>
@@ -4860,7 +4860,7 @@
     <string name="poi_live_music">Música en vivo</string>
     <string name="poi_music_venue">Local de música</string>
     <string name="poi_live_music_yes">Sí</string>
-    <string name="poi_shop_general">Tienda</string>
+    <string name="poi_shop_general">Comercios</string>
     <string name="poi_cuisine_fish">Pez</string>
     <string name="poi_indoor_seating_no">No hay plazas en el interior</string>
     <string name="poi_indoor_seating_yes">Plazas en el interior: sí</string>

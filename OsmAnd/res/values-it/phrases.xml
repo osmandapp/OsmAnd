@@ -2579,7 +2579,7 @@
     <string name="poi_motorcycle_designated">Riservato</string>
     <string name="poi_moped_yes">Sì;Ciclomotore</string>
     <string name="poi_moped_designated">Riservato</string>
-    <string name="poi_mofa_yes">Sì;</string>
+    <string name="poi_mofa_yes">Sì;Mofa</string>
     <string name="poi_mofa_designated">Riservato</string>
     <string name="poi_hgv_yes">Sì;HGV;Camion</string>
     <string name="poi_hgv_permissive">permissiva</string>
@@ -3979,4 +3979,18 @@
     <string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Scopo dell\'esplosione: ricerca per applicazioni pacifiche</string>
     <string name="poi_live_music_yes">Sì</string>
     <string name="poi_cuisine_fish">Pesce</string>
+    <string name="poi_healthcare_speciality_autism">Autismo</string>
+    <string name="poi_state_approved">Stato: approvato</string>
+    <string name="poi_healthcare_speciality_sleep">Riposo</string>
+    <string name="poi_healthcare_speciality_chronic">Cronaca</string>
+    <string name="poi_healthcare_speciality_microbiology">Microbiologia</string>
+    <string name="poi_to">A</string>
+    <string name="poi_state_under_construction">Stato: in costruzione</string>
+    <string name="poi_state_main">Stato: principale</string>
+    <string name="poi_ascent">Salita</string>
+    <string name="poi_descent">Discesa</string>
+    <string name="poi_distance">Distanza</string>
+    <string name="poi_state_abandoned">Stato: abbandonato</string>
+    <string name="poi_state_active">Stato: attivo</string>
+    <string name="poi_us_maps_recreation_area_operational_hours">Ore operative</string>
 </resources>

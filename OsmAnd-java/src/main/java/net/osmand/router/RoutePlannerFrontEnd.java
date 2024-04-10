@@ -44,6 +44,7 @@ public class RoutePlannerFrontEnd {
 	public static boolean CALCULATE_MISSING_MAPS = true;
 	static boolean TRACE_ROUTING = false;
 	private boolean useSmartRouteRecalculation = true;
+	private boolean useGeometryBasedApproximation = false;
 	private boolean useNativeApproximation = true;
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
@@ -132,6 +133,7 @@ public class RoutePlannerFrontEnd {
 	public static class GpxPoint {
 		public int ind;
 		public LatLon loc;
+		public int x31, y31;
 		public double cumDist;
 		public RouteSegmentPoint pnt;
 		public List<RouteSegmentResult> routeToTarget;
@@ -311,7 +313,12 @@ public class RoutePlannerFrontEnd {
 		this.useNativeApproximation = useNativeApproximation;
 		return this;
 	}
-	
+
+	public RoutePlannerFrontEnd setUseGeometryBasedApproximation(boolean enabled) {
+		this.useGeometryBasedApproximation = enabled;
+		return this;
+	}
+
 	public boolean isUseNativeApproximation() {
 		return useNativeApproximation;
 	}
@@ -323,6 +330,32 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		if (useGeometryBasedApproximation) {
+			return searchGpxSegments(gctx, gpxPoints, resultMatcher); // use Java-only method until C++ implemented
+		} else {
+			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
+		}
+	}
+	
+	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+		GpxSegmentsApproximation app = new GpxSegmentsApproximation();
+		if (gctx.ctx.calculationProgress == null) {
+			gctx.ctx.calculationProgress = new RouteCalculationProgress();
+		}
+		app.fastGpxApproximation(this, gctx, gpxPoints);
+		calculateGpxRoute(gctx, gpxPoints);
+		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
+			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
+			log.info(gctx);
+		}
+		if (resultMatcher != null) {
+			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
+		}
+		return gctx;
+	}
+
+	
+	public GpxRouteApproximation searchGpxRouteByRouting(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && useNativeApproximation) {
@@ -498,7 +531,7 @@ public class RoutePlannerFrontEnd {
 		return true;
 	}
 
-	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
+	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) throws IOException {
 		RouteRegion reg = new RouteRegion();
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 		List<LatLon> lastStraightLine = null;
@@ -541,7 +574,12 @@ public class RoutePlannerFrontEnd {
 			addStraightLine(gctx, lastStraightLine, straightPointStart, reg);
 			lastStraightLine = null;
 		}
-		// clean turns to recaculate them
+
+		if (useGeometryBasedApproximation) {
+			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.result); // not required by classic method
+		}
+
+		// clean turns to recalculate them
 		cleanupResultAndAddTurns(gctx);
 	}
 
@@ -620,6 +658,7 @@ public class RoutePlannerFrontEnd {
 			}
 		}
 		RouteResultPreparation preparation = new RouteResultPreparation();
+		preparation.validateAllPointsConnected(gctx.result);
 		for (RouteSegmentResult r : gctx.result) {
 			r.setTurnType(null);
 			r.clearDescription();
@@ -914,8 +953,11 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.totalIterations++;
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
-			RouteCalcResult res = searchRoute(nctx, start, end, intermediates);
-			routeDirection = PrecalculatedRouteDirection.build(res.detailed, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
+			RouteCalcResult baseRes = searchRoute(nctx, start, end, intermediates);
+			if (baseRes == null || !baseRes.isCorrect()) {
+				return baseRes;
+			}
+			routeDirection = PrecalculatedRouteDirection.build(baseRes.detailed, RoutingConfiguration.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 			ctx.calculationProgressFirstPhase = RouteCalculationProgress.capture(ctx.calculationProgress);
 		}
 		RouteCalcResult res ;

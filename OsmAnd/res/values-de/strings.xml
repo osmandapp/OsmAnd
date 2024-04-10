@@ -4395,7 +4395,7 @@
     <string name="from_to_with_params">Von %1$s nach %2$s</string>
     <string name="progress_complete">%1$s abgeschlossen</string>
     <string name="storage_found_files_descr">Tippen Sie auf „%1$s“, um %2$s Dateien von „%3$s“ nach „%4$s“ zu kopieren. Dies kann einige Zeit dauern.</string>
-    <string name="storage_copied_files_size">%1$s Datei(en) (%2$s) verarbeitet</string>
+    <string name="storage_copied_files_size">%1$s Datei(en) %2$s verarbeitet</string>
     <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
     <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
     <string name="shared_storage_last_step">Sie können anschließend einen neuen Datenordner angeben.</string>
@@ -5384,7 +5384,7 @@
     <string name="help_article_search_search_all_name">Alle suchen</string>
     <string name="help_article_troubleshooting_crash_logs_name">Absturzprotokolle</string>
     <string name="help_article_troubleshooting_general_name">Allgemein</string>
-    <string name="help_article_troubleshooting_maps_data_name">Karten &amp; Daten</string>
+    <string name="help_article_troubleshooting_maps_data_name">Karten und Daten</string>
     <string name="shared_string_setup">Einrichtung</string>
     <string name="user_guide">Benutzeranleitung</string>
     <string name="telegram_chats_descr">Nehmen Sie an einem unserer lokalen Telegram-Chats teil.</string>
@@ -5441,7 +5441,7 @@
     <string name="terrain_maps">Geländekarten</string>
     <string name="sort_country_name_descending">Landesname: Z – A</string>
     <string name="delete_map_description">Karte %1$s löschen?</string>
-    <string name="maps_and_resources">Karten &amp; Ressourcen</string>
+    <string name="maps_and_resources">Karten und Ressourcen</string>
     <string name="app_mode_paragliding">Paragleiten</string>
     <string name="rendering_styles">Darstellungsstile</string>
     <string name="app_mode_hang_gliding">Drachenfliegen</string>
@@ -5670,4 +5670,12 @@
     <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
 \n
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
+    <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
+    <string name="upload_local_versions">Lokale Versionen hochladen</string>
+    <string name="map_widget_map_scale">Maßstab</string>
+    <string name="shared_string_unchanged">Unverändert</string>
+    <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
+    <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
+    <string name="gpx_approximation_java">Routingbasiert (Java)</string>
+    <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
 </resources>

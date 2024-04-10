@@ -29,10 +29,13 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.width.WidthComponentController;
+import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -46,10 +49,12 @@ import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
-import net.osmand.plus.track.cards.TrackWidthCard;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
+import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
-import net.osmand.plus.card.color.ColoringCardController.IColorCardControllerListener;
+import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
+import net.osmand.plus.track.fragments.controller.TrackWidthController;
+import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -59,7 +64,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implements CardListener, IColorCardControllerListener, InAppPurchaseListener {
+public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
+		implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener,
+		InAppPurchaseListener, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -68,7 +75,6 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	private TrackDrawInfo trackDrawInfo;
 	private final List<BaseCard> cards = new ArrayList<>();
 
-	private TrackWidthCard trackWidthCard;
 	private DialogButton applyButton;
 
 	@ColorRes
@@ -84,7 +90,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		selectionHelper = getItemsSelectionHelper();
+		selectionHelper = getSelectionHelper();
 
 		if (savedInstanceState != null) {
 			trackDrawInfo = new TrackDrawInfo(savedInstanceState);
@@ -131,6 +137,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		setupButtons(view);
 		setupActions(view);
 		setupCards(view);
+		updateColorItems();
 
 		return view;
 	}
@@ -175,17 +182,8 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 			inflater.inflate(R.layout.list_item_divider_basic, container, true);
 			addCard(container, new MultiStateCard(activity, getColorCardController()));
 
-			trackWidthCard = new TrackWidthCard(activity, trackDrawInfo, y -> {
-				View cardView = trackWidthCard.getView();
-				if (cardView != null) {
-					ScrollView scrollView = view.findViewById(R.id.scroll_view);
-					int height = scrollView.getHeight();
-					int bottom = scrollView.getChildAt(0).getBottom();
-					int maxScrollY = Math.max(0, bottom - height);
-					scrollView.smoothScrollTo(0, maxScrollY);
-				}
-			});
-			addCard(container, trackWidthCard);
+			inflater.inflate(R.layout.list_item_divider_basic, container, true);
+			addCard(container, new HeadedContentCard(activity, getWidthCardController()));
 		}
 	}
 
@@ -219,7 +217,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		container.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		applyButton = view.findViewById(R.id.right_bottom_button);
-		applyButton.setOnClickListener(v -> AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager()));
+		applyButton.setOnClickListener(v -> {
+			ItemsSelectionHelper<TrackItem> helper = getSelectionHelper();
+			AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager(), helper.getSelectedItemsSize());
+		});
 		applyButton.setButtonType(PRIMARY);
 		applyButton.setTitleId(R.string.shared_string_apply);
 
@@ -257,10 +258,12 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	@Override
-	public void onColoringStyleSelected(@NonNull ColoringStyle coloringStyle) {
-		trackDrawInfo.setColoringType(coloringStyle.getType());
-		trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
-		applyButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
+		if (coloringStyle != null) {
+			trackDrawInfo.setColoringType(coloringStyle.getType());
+			trackDrawInfo.setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+			applyButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
+		}
 	}
 
 	@Override
@@ -270,9 +273,13 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 	}
 
 	private void updateColorItems() {
-		if (trackWidthCard != null) {
-			trackWidthCard.updateItems();
-		}
+		TrackWidthController widthController = getWidthCardController();
+		widthController.updateColorItems();
+	}
+
+	@Override
+	public void onTrackWidthSelected(@Nullable String width) {
+
 	}
 
 	@Nullable
@@ -280,13 +287,19 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		return trackDrawInfo;
 	}
 
-	@Nullable
-	public ItemsSelectionHelper<TrackItem> getItemsSelectionHelper() {
+	@NonNull
+	@Override
+	public ItemsSelectionHelper<TrackItem> getSelectionHelper() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof SelectionHelperProvider) {
 			return ((SelectionHelperProvider<TrackItem>) fragment).getSelectionHelper();
 		}
-		return null;
+		return new ItemsSelectionHelper<>();
+	}
+
+	@Override
+	public void onAppearanceChangeConfirmed() {
+		saveTracksAppearance();
 	}
 
 	public void saveTracksAppearance() {
@@ -333,6 +346,10 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 		IColorsPaletteController paletteController = colorController.getColorsPaletteController();
 		paletteController.selectColor(trackDrawInfo.getColor());
 
+		TrackWidthController widthController = getWidthCardController();
+		WidthComponentController widthComponentController = widthController.getWidthComponentController();
+		widthComponentController.askSelectWidthMode(trackDrawInfo.getWidth());
+
 		for (BaseCard card : cards) {
 			card.update();
 		}
@@ -340,6 +357,30 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment implement
 
 	private TrackColorController getColorCardController() {
 		return TrackColorController.getInstance(app, null, trackDrawInfo, this);
+	}
+
+	private TrackWidthController getWidthCardController() {
+		OnNeedScrollListener onNeedScrollListener = y -> {
+			View view = getView();
+			if (view != null) {
+				int bottomVisibleY = view.findViewById(R.id.buttons_container).getTop();
+				if (y > bottomVisibleY) {
+					ScrollView scrollView = view.findViewById(R.id.scroll_view);
+					int diff = y - bottomVisibleY;
+					int scrollY = scrollView.getScrollY();
+					scrollView.smoothScrollTo(0, scrollY + diff);
+				}
+			}
+		};
+		return TrackWidthController.getInstance(app, trackDrawInfo, onNeedScrollListener, this);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		getColorCardController().onDestroy(activity);
+		getWidthCardController().onDestroy(activity);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @Nullable Fragment target) {

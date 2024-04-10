@@ -1,6 +1,7 @@
 package net.osmand.plus.backup;
 
 import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+import static net.osmand.plus.settings.backend.backup.exporttype.ExportType.GLOBAL;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
@@ -230,6 +231,14 @@ public class BackupHelper {
 
 	public void updateBackupUploadTime() {
 		settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
+	}
+
+	public void updateBackupDownloadTime() {
+		settings.BACKUP_LAST_DOWNLOADED_TIME.set(System.currentTimeMillis() + 1);
+	}
+
+	public boolean isFirstSync() {
+		return settings.BACKUP_LAST_UPLOADED_TIME.get() == 0 && settings.BACKUP_LAST_DOWNLOADED_TIME.get() == 0;
 	}
 
 	public void logout() {
@@ -855,10 +864,19 @@ public class BackupHelper {
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
 					if (localFile != null) {
+						boolean shouldIgnoreConflict = exportType == GLOBAL && isFirstSync();
 						boolean fileChangedLocally = localFile.localModifiedTime > localFile.uploadTime;
 						boolean fileChangedRemotely = remoteFile.getUpdatetimems() > localFile.uploadTime;
 						if (fileChangedRemotely && fileChangedLocally) {
-							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							if (shouldIgnoreConflict) {
+								if (remoteFile.isDeleted()) {
+									info.localFilesToDelete.add(localFile);
+								} else {
+									info.filesToDownload.add(remoteFile);
+								}
+							} else {
+								info.filesToMerge.add(new Pair<>(localFile, remoteFile));
+							}
 						} else if (fileChangedLocally) {
 							info.filesToUpload.add(localFile);
 						} else if (fileChangedRemotely) {

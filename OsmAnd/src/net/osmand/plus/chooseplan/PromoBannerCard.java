@@ -15,6 +15,10 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class PromoBannerCard extends BaseCard {
 
+	public PromoBannerCard(@NonNull FragmentActivity activity) {
+		this(activity, true);
+	}
+
 	public PromoBannerCard(@NonNull FragmentActivity activity, boolean usedOnMap) {
 		super(activity, usedOnMap);
 	}

@@ -3,6 +3,7 @@ package net.osmand.plus.views.layers;
 import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 import static net.osmand.plus.views.AnimateMapMarkersThread.ROTATE_ANIMATION_TIME;
+import static net.osmand.util.MapUtils.HIGH_LATLON_PRECISION;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -52,6 +53,7 @@ import net.osmand.plus.views.AnimateMapMarkersThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -125,8 +127,8 @@ public class PointLocationLayer extends OsmandMapLayer
 			myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 			myLocMarkerBuilder.setIsHidden(true);
 
-			int width = (int)(icon.getIntrinsicWidth() * scale);
-			int height = (int)(icon.getIntrinsicHeight() * scale);
+			int width = (int) (icon.getIntrinsicWidth() * scale);
+			int height = (int) (icon.getIntrinsicHeight() * scale);
 			int locationX = width / 2;
 			int locationY = height / 2;
 
@@ -222,14 +224,8 @@ public class PointLocationLayer extends OsmandMapLayer
 	public void onUpdateFrame(MapRendererView mapRenderer) {
 		super.onUpdateFrame(mapRenderer);
 		if (isMapLinkedToLocation() && !isMovingToMyLocation()) {
-			OsmandApplication app = getApplication();
-			Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
-			Boolean snapToRoad = app.getSettings().SNAP_TO_ROAD.get();
-			boolean followingMode = app.getRoutingHelper().isFollowingMode();
-			Location lastRouteProjection = followingMode && snapToRoad
-					? app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection() : null;
+			Location location = getPointLocation();
 			PointI target31 = mapRenderer.getTarget();
-			Location location = lastRouteProjection != null ? lastRouteProjection : lastKnownLocation;
 			updateMarker(location, target31, 0);
 		}
 		lastMarkerLocation = getCurrentMarkerLocation();
@@ -251,6 +247,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		if (mapMarkersCollection == null) {
 			mapMarkersCollection = new MapMarkersCollection();
+			mapMarkersCollection.setPriority(Long.MAX_VALUE);
 		}
 		return CoreMapMarker.createAndAddToCollection(getContext(), mapMarkersCollection, id,
 				getPointsOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading);
@@ -364,6 +361,7 @@ public class PointLocationLayer extends OsmandMapLayer
 				locMarker.marker.setPosition(target31);
 			}
 			locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
+			locMarker.marker.setIsAccuracyCircleVisible(!isLocationSnappedToRoad());
 		}
 	}
 
@@ -421,7 +419,7 @@ public class PointLocationLayer extends OsmandMapLayer
 	}
 
 	private boolean shouldShowHeading() {
-		return !locationOutdated && mapViewTrackingUtilities.isShowViewAngle();
+		return !locationOutdated && mapViewTrackingUtilities.isShowViewAngle() && !isLocationSnappedToRoad();
 	}
 
 	private boolean shouldShowBearing(@Nullable Location location) {
@@ -433,8 +431,10 @@ public class PointLocationLayer extends OsmandMapLayer
 		if (!locationOutdated && location != null) {
 			// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
 			boolean hasBearing = location.hasBearing() && location.getBearing() != 0.0f;
-			if ((hasBearing || isUseRouting() && lastBearingCached != null)
-					&& (!location.hasSpeed() || location.getSpeed() > BEARING_SPEED_THRESHOLD)) {
+			boolean bearingValid = hasBearing || isUseRouting() && lastBearingCached != null;
+			boolean speedValid = !location.hasSpeed() || location.getSpeed() > BEARING_SPEED_THRESHOLD;
+
+			if (bearingValid && (speedValid || isLocationSnappedToRoad())) {
 				return hasBearing ? location.getBearing() : lastBearingCached;
 			}
 		}
@@ -445,6 +445,22 @@ public class PointLocationLayer extends OsmandMapLayer
 		RoutingHelper routingHelper = getApplication().getRoutingHelper();
 		return routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()
 				|| routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated();
+	}
+
+	private boolean isLocationSnappedToRoad() {
+		OsmandApplication app = getApplication();
+		Location projection = app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
+		return app.getSettings().SNAP_TO_ROAD.get() && Algorithms.objectEquals(projection, getPointLocation());
+	}
+
+	@Nullable
+	public Location getPointLocation() {
+		Location location = null;
+		OsmandApplication app = getApplication();
+		if (app.getRoutingHelper().isFollowingMode() && app.getSettings().SNAP_TO_ROAD.get()) {
+			location = app.getOsmandMap().getMapLayers().getRouteLayer().getLastRouteProjection();
+		}
+		return location != null ? location : locationProvider.getLastStaleKnownLocation();
 	}
 
 	private boolean isLocationVisible(@NonNull RotatedTileBox tb, @NonNull Location l) {
@@ -463,23 +479,13 @@ public class PointLocationLayer extends OsmandMapLayer
 			locationX = box.getPixXFromLonNoRot(lastKnownLocation.getLongitude());
 			locationY = box.getPixYFromLatNoRot(lastKnownLocation.getLatitude());
 		}
-
-		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
-		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
-		if (radius > RADIUS * box.getDensity()) {
-			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
-			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
-			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);
+		if (!isLocationSnappedToRoad()) {
+			drawLocationAccuracy(canvas, box, lastKnownLocation, locationX, locationY);
 		}
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			Float heading = locationProvider.getHeading();
-			if (shouldShowHeading() && heading != null) {
-				canvas.save();
-				canvas.rotate(heading - 180, locationX, locationY);
-				canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2f,
-						locationY - headingIcon.getHeight() / 2f, headingPaint);
-				canvas.restore();
+			if (shouldShowHeading()) {
+				drawLocationHeading(canvas, locationX, locationY);
 			}
 			Float bearing = getBearingToShow(lastKnownLocation);
 			if (bearing != null) {
@@ -491,6 +497,27 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 	}
 
+	private void drawLocationAccuracy(@NonNull Canvas canvas, @NonNull RotatedTileBox box,
+	                                  @NonNull Location location, int locationX, int locationY) {
+		double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
+		int radius = (int) (((double) box.getPixWidth()) / dist * location.getAccuracy());
+		if (radius > RADIUS * box.getDensity()) {
+			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
+			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
+			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), aroundArea);
+		}
+	}
+
+	private void drawLocationHeading(@NonNull Canvas canvas, int locationX, int locationY) {
+		Float heading = locationProvider.getHeading();
+		if (heading != null) {
+			canvas.save();
+			canvas.rotate(heading - 180, locationX, locationY);
+			canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2f,
+					locationY - headingIcon.getHeight() / 2f, headingPaint);
+			canvas.restore();
+		}
+	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
@@ -555,7 +582,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null && (!isMapLinkedToLocation() || isMovingToMyLocation())) {
-			boolean dataChanged = !MapUtils.areLatLonEqualPrecise(prevLocation, location);
+			boolean dataChanged = !MapUtils.areLatLonEqual(prevLocation, location, HIGH_LATLON_PRECISION);
 			if (dataChanged) {
 				long movingTime = prevLocation != null ? location.getTime() - prevLocation.getTime() : 0;
 				updateMarker(location, null, isAnimateMyLocation() ? movingTime : 0);

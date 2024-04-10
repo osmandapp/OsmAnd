@@ -5663,4 +5663,12 @@
 \n
 \nИзаберите „%1$s“ за тачне бројеве или „%2$s“ за лакшу читљивост.</string>
     <string name="round_up">Заокружено</string>
+    <string name="upload_local_versions">Отпреми локалне верзије</string>
+    <string name="download_cloud_versions">Преузми верзије облака</string>
+    <string name="map_widget_map_scale">Размера мапе</string>
+    <string name="unchanged_parameter_summary">Свака путања задржаће своје сопствене параметре.</string>
+    <string name="shared_string_unchanged">Непромењено</string>
+    <string name="gpx_approximation_cpp">Рутирање-базирано (C++)</string>
+    <string name="gpx_approximation_geo_java">Рутирање-базирано (Јава, брзо)</string>
+    <string name="gpx_approximation_java">Рутирање-базирано (Јава)</string>
 </resources>

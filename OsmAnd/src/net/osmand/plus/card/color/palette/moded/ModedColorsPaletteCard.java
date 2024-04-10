@@ -21,6 +21,11 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 	private final ModedColorsPaletteController controller;
 
 	public ModedColorsPaletteCard(@NonNull FragmentActivity activity,
+	                              @NonNull ModedColorsPaletteController controller) {
+		this(activity, controller, true);
+	}
+
+	public ModedColorsPaletteCard(@NonNull FragmentActivity activity,
 	                              @NonNull ModedColorsPaletteController controller,
 	                              boolean usedOnMap) {
 		super(activity, controller, usedOnMap);
@@ -38,7 +43,7 @@ public class ModedColorsPaletteCard extends ColorsPaletteCard {
 		setupToggleButtons(view.findViewById(R.id.custom_radio_buttons));
 	}
 
-	private void setupToggleButtons(LinearLayout buttonsContainer) {
+	private void setupToggleButtons(@NonNull LinearLayout buttonsContainer) {
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsContainer, nightMode);
 		List<TextRadioItem> toggleButtons = collectRadioItems();
 		radioGroup.setItems(toggleButtons);

@@ -391,7 +391,7 @@
     <string name="poi_quarry">Steinbruch</string>
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
-    <string name="poi_radiotechnics">Funktechnik/Elektronikladen</string>
+    <string name="poi_radiotechnics">Funktechnik</string>
     <string name="poi_halt">Eisenbahnhaltestelle;Eisenbahnhaltepunkt;Bahnhof;Haltepunkt</string>
     <string name="poi_railway_platform">Bahnsteig</string>
     <string name="poi_railway_station">Bahnhof</string>
@@ -1450,7 +1450,7 @@
     <string name="poi_denomination_church_of_england">Kirche von England</string>
     <string name="poi_denomination_episcopal">Episkopalkirche</string>
     <string name="poi_denomination_shia">Schiitisch</string>
-    <string name="poi_denomination_united">Vereinigten</string>
+    <string name="poi_denomination_united">Unierte Kirchen</string>
     <string name="poi_denomination_tibetan">Tibetisch</string>
     <string name="poi_denomination_united_reformed">Vereinigt-reformiert</string>
     <string name="poi_denomination_church_of_scotland">Kirche von Schottland</string>
@@ -1593,7 +1593,7 @@
     <string name="poi_information_trail_blaze">Wegmarkierung</string>
     <string name="poi_information_terminal">Auskunft</string>
     <string name="poi_information_tactile_model">Tastbares Modell</string>
-    <string name="poi_information_tactile_map">Blindengrafik</string>
+    <string name="poi_information_tactile_map">Blindenkarten</string>
     <string name="poi_retail">Einzelhandel</string>
     <string name="poi_smoking_isolated">In einem abgetrennten Raum</string>
     <string name="poi_smoking_dedicated">Nur für Raucher</string>
@@ -1651,7 +1651,7 @@
     <string name="poi_payment_routex_no">Routex-Tankkarten nicht akzeptiert</string>
     <string name="poi_payment_bancomat_yes">Bancomat</string>
     <string name="poi_payment_bancomat_no">Bancomat nicht akzeptiert</string>
-    <string name="poi_payment_prepaid_ticket_yes">Vorausbezahlte Fahrkarten</string>
+    <string name="poi_payment_prepaid_ticket_yes">Vorausbezahlte Karten</string>
     <string name="poi_payment_jcb_yes">JCB</string>
     <string name="poi_payment_jcb_no">JCB-Karten nicht akzeptiert</string>
     <string name="poi_payment_eurowag_yes">Eurowag</string>
@@ -2755,7 +2755,7 @@
     <string name="poi_water_source">Wasserquelle</string>
     <string name="poi_payment_toll_type">Zahlungsart</string>
     <string name="poi_highway_crossing_type">Art</string>
-    <string name="poi_tactile_paving">Ertastbares Pflaster</string>
+    <string name="poi_tactile_paving">Taktiles Bodenleitsystem</string>
     <string name="poi_brushless">Bürstenlos</string>
     <string name="poi_automated">Automatisiert</string>
     <string name="poi_parking_type">Art</string>
@@ -3298,11 +3298,11 @@
     <string name="poi_charging_station_output">Ladestation: Ausgang</string>
     <string name="poi_map_type_topo">Kartentyp: Gelände</string>
     <string name="poi_map_type_street">Kartentyp: Straße</string>
-    <string name="poi_map_type_scheme">Kartentyp: Übersicht</string>
+    <string name="poi_map_type_scheme">Kartentyp: Schema</string>
     <string name="poi_map_type_toposcope">Kartentyp: Toposkop</string>
     <string name="poi_charging_station">Ladestation</string>
     <string name="poi_depot">Lager</string>
-    <string name="poi_map_size_site">Kartengröße: Platz</string>
+    <string name="poi_map_size_site">Kartengröße: Standort</string>
     <string name="poi_map_size_city">Kartengröße: Stadt</string>
     <string name="poi_map_size_region">Kartengröße: Region</string>
     <string name="poi_letter_box">Hausbriefkasten</string>
@@ -3593,7 +3593,7 @@
     <string name="poi_vehicle_yes">Zufahrt Fahrzeuge: ja</string>
     <string name="poi_vehicle_private">Zufahrt Fahrzeuge: privat</string>
     <string name="poi_vehicle_no">Zufahrt Fahrzeuge: nein</string>
-    <string name="poi_vehicle_destination">Zufahrt: Anlieger frei</string>
+    <string name="poi_vehicle_destination">Zufahrt Fahrzeuge: Anlieger frei</string>
     <string name="poi_vehicle_permissive">Zufahrt Fahrzeuge: gestattet</string>
     <string name="poi_vehicle_customers">Zufahrt Fahrzeuge: Kunden</string>
     <string name="poi_vehicle_military">Zufahrt Fahrzeuge: militärisch</string>
@@ -4323,7 +4323,7 @@
     <string name="poi_board_type_wildlife">Wildtiere</string>
     <string name="poi_board_type_nature">Natur</string>
     <string name="poi_food_no">Speisen: nein</string>
-    <string name="poi_payment_mir_no">Mir Karten nicht akzeptiert</string>
+    <string name="poi_payment_mir_no">Mir-Karten nicht akzeptiert</string>
     <string name="poi_payment_mir_yes">Mir</string>
     <string name="poi_club_amateur_radio">Amateurfunkverein</string>
     <string name="poi_club_religion">Religionsgemeinschaft</string>
@@ -4861,7 +4861,7 @@
     <string name="poi_live_music">Live-Musik</string>
     <string name="poi_live_music_yes">ja</string>
     <string name="poi_cuisine_fish">Fisch</string>
-    <string name="poi_shop_general">Allgemeines Geschäft</string>
+    <string name="poi_shop_general">Gemischtwarenhandlung</string>
     <string name="poi_indoor_seating_no">Keine Sitzplätze innen</string>
     <string name="poi_indoor_seating_yes">Sitzplätze innen: ja</string>
     <string name="poi_indoor_seating_bar_table">Sitzplätze innen: Tresen</string>

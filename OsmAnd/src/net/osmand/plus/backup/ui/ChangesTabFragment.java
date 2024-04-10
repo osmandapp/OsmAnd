@@ -1,6 +1,9 @@
 package net.osmand.plus.backup.ui;
 
 import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DELETE;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_DOWNLOAD;
+import static net.osmand.plus.backup.NetworkSettingsHelper.SyncOperationType.SYNC_OPERATION_UPLOAD;
+import static net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType.UNIQUE;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_CONFLICTS;
 import static net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType.RECENT_CHANGES_LOCAL;
 
@@ -29,6 +32,7 @@ import net.osmand.plus.backup.ui.ChangesFragment.RecentChangesType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,6 +44,7 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 
 	protected ChangesAdapter adapter;
 	protected RecentChangesType tabType = getChangesTabType();
+	protected List<CloudChangeItem> items = new ArrayList<>();
 
 	@NonNull
 	public abstract RecentChangesType getChangesTabType();
@@ -127,9 +132,25 @@ public abstract class ChangesTabFragment extends BaseOsmAndFragment implements O
 		app.runInUIThread(() -> adapter.onBackupItemFinished(type, fileName));
 	}
 
+	public void uploadLocalVersions() {
+		for (CloudChangeItem item : items) {
+			if (item.operation != SYNC_OPERATION_DELETE && item.localFile != null && !settingsHelper.isSyncing(item.fileName)) {
+				settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, SYNC_OPERATION_UPLOAD);
+			}
+		}
+	}
+
+	public void downloadCloudVersions() {
+		for (CloudChangeItem item : items) {
+			if (item.operation != SYNC_OPERATION_DELETE && item.remoteFile != null && !settingsHelper.isSyncing(item.fileName)) {
+				settingsHelper.syncSettingsItems(item.fileName, item.localFile, item.remoteFile, UNIQUE, SYNC_OPERATION_DOWNLOAD);
+			}
+		}
+	}
+
 	private void updateAdapter() {
 		if (adapter != null) {
-			List<CloudChangeItem> items = generateData();
+			items = generateData();
 			Collections.sort(items, (o1, o2) -> -Long.compare(o1.time, o2.time));
 			adapter.setCloudChangeItems(items);
 		}

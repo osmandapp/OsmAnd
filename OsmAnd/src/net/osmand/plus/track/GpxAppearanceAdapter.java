@@ -34,6 +34,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 
 	public static final String TRACK_WIDTH_BOLD = "bold";
 	public static final String TRACK_WIDTH_MEDIUM = "medium";
+	public static final String TRACK_WIDTH_THIN = "thin";
 	public static final String SHOW_START_FINISH_ATTR = "show_start_finish_attr";
 
 	private final OsmandApplication app;

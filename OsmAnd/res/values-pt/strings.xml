@@ -5671,4 +5671,7 @@
     <string name="distance_during_navigation_description">Escolha como as informações de distância são apresentadas nos widgets de navegação (distância até ao ponto, próxima curva, vias).
 \n
 \nEscolha \"%1$s\" para números exatos ou \"%2$s\" para uma leitura mais fácil.</string>
+    <string name="download_cloud_versions">Descarregar versões na nuvem</string>
+    <string name="upload_local_versions">Enviar versões locais</string>
+    <string name="map_widget_map_scale">Escala do mapa</string>
 </resources>

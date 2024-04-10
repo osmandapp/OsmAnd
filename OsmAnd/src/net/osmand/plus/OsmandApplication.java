@@ -33,7 +33,6 @@ import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.api.SQLiteAPI;
@@ -218,13 +217,7 @@ public class OsmandApplication extends MultiDexApplication {
 			return;
 		}
 		long timeToStart = System.currentTimeMillis();
-		if (Version.isDeveloperVersion(this)) {
-			try {
-				Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		enableStrictMode();
 		super.onCreate();
 		createInUiThread();
 		uiHandler = new Handler();
@@ -813,7 +806,8 @@ public class OsmandApplication extends MultiDexApplication {
 		context.setTheme(themeId);
 	}
 
-	public IBRouterService reconnectToBRouter() {
+	@Nullable
+	public synchronized IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
 			// a delay is necessary as the service process needs time to start..
@@ -822,20 +816,21 @@ public class OsmandApplication extends MultiDexApplication {
 				return bRouterServiceConnection.getBrouterService();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}
 
-	public IBRouterService getBRouterService() {
+	@Nullable
+	public synchronized IBRouterService getBRouterService() {
 		if (bRouterServiceConnection == null) {
 			return null;
 		}
-		IBRouterService s = bRouterServiceConnection.getBrouterService();
-		if (s != null && !s.asBinder().isBinderAlive()) {
-			s = reconnectToBRouter();
+		IBRouterService service = bRouterServiceConnection.getBrouterService();
+		if (service != null && !service.asBinder().isBinderAlive()) {
+			service = reconnectToBRouter();
 		}
-		return s;
+		return service;
 	}
 
 	public String getLanguage() {
@@ -1027,5 +1022,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean useOpenGlRenderer() {
 		return NativeCoreContext.isInit() && settings.USE_OPENGL_RENDER.get();
+	}
+
+	private void enableStrictMode() {
+		if (Version.isDeveloperVersion(this)) {
+			try {
+				Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+		}
 	}
 }

@@ -283,7 +283,20 @@ public class PrecalculatedRouteDirection {
 		return routeDirection;
 	}
 
-
-	
-
+	public void updatePreciseStartEnd(int sx, int sy, int ex, int ey) {
+		if (sx > 0 && sy > 0) {
+			int ind = getIndex(sx, sy);
+			if (ind != -1) {
+				startPoint = calc(sx, sy);
+				startFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind], pointsY[ind], sx, sy) / maxSpeed;
+			}
+		}
+		if (ex > 0 && ey > 0) {
+			int ind = getIndex(ex, ey);
+			if (ind != -1) {
+				endPoint = calc(ex, ey);
+				endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind], pointsY[ind], ex, ey) / maxSpeed;
+			}
+		}
+	}
 }

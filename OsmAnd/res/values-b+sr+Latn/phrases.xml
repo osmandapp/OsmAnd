@@ -11,7 +11,7 @@
     <string name="poi_shoes_type">Vrsta</string>
     <string name="poi_fire_hydrant_type">Vrsta</string>
     <string name="poi_fire_hydrant_position">Pozicija</string>
-    <string name="poi_water_source">Izvor vode</string>
+    <string name="poi_water_source">Poreklo vode</string>
     <string name="poi_payment_toll_type">Način plaćanja</string>
     <string name="poi_traffic_signals_sound">Zvuk</string>
     <string name="poi_highway_crossing_type">Vrsta</string>
@@ -248,7 +248,7 @@
     <string name="poi_fuel_electricity">Struja</string>
     <string name="poi_aeroway_fuel">Benzinska pumpa za letelice</string>
     <string name="poi_waterway_fuel">Benzinska pumpa na vodi</string>
-    <string name="poi_compressed_air">Vazduh pod pritiskom</string>
+    <string name="poi_compressed_air">Pumpa za gume</string>
     <string name="poi_parking">Parking</string>
     <string name="poi_motorcycle_parking">Parking za motore</string>
     <string name="poi_parking_entrance">Ulaz u parking</string>
@@ -311,7 +311,7 @@
     <string name="poi_site_type_necropolis">Nekropola</string>
     <string name="poi_generator_output_electricity">Izlazna snaga</string>
     <string name="poi_generator_output_hot_water">Izlazna snaga tople vode</string>
-    <string name="poi_generator_output_compressed_air">Izlazna snaga vazduha pod pritiskom</string>
+    <string name="poi_generator_output_compressed_air">Izlazna snaga komprinovanog vazduha</string>
     <string name="poi_fire_extinguisher">Protivpožarni aparat</string>
     <string name="poi_fuel_cng">CNG - metan</string>
     <string name="poi_electricity_combined_charging">Stanica za punjenje</string>
@@ -444,7 +444,7 @@
     <string name="poi_country">Država</string>
     <string name="poi_city">Grad</string>
     <string name="poi_capital">Da;Glavni grad</string>
-    <string name="poi_town">Grad (mali)</string>
+    <string name="poi_town">Gradsko naselje</string>
     <string name="poi_village">Selo</string>
     <string name="poi_hamlet">Zaseok</string>
     <string name="poi_suburb">Predgrađe</string>
@@ -1903,7 +1903,7 @@
     <string name="poi_shelter_type_field_shelter">Poljsko sklonište</string>
     <string name="poi_shelter_type_tent">Tip skloništa: šator</string>
     <string name="poi_shelter_type_abandoned">Tip skloništa: napušteno</string>
-    <string name="poi_internet_access_type_wlan">Vaj-Faj</string>
+    <string name="poi_internet_access_type_wlan">Wi-Fi</string>
     <string name="poi_internet_access_type_terminal">Terminal</string>
     <string name="poi_internet_access_type_wired">Kablovski</string>
     <string name="poi_internet_access_type_public">Tip pristupa internetu: javni</string>
@@ -2345,9 +2345,9 @@
     <string name="poi_site_type_earthwork">Zemljana barijera</string>
     <string name="poi_aerodrome_type_military">Vojni aerodrom</string>
     <string name="poi_aerodrome_type_military_public">Vojni/civilni</string>
-    <string name="poi_fitness_station">Mesto za vežbanje</string>
+    <string name="poi_fitness_station">Fitnes stanica na otvorenom</string>
     <string name="poi_healthcare_speciality_biochemistry">Biohemija</string>
-    <string name="poi_fitness_centre">Teretana/ fitnes</string>
+    <string name="poi_fitness_centre">Teretana/ fitnes centar</string>
     <string name="poi_fitness">Fitnes</string>
     <string name="poi_car_wash_yes">Da;Perionica</string>
     <string name="poi_cuisine">Tip kuhinje</string>

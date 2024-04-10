@@ -5621,4 +5621,51 @@
     <string name="shared_string_speedometer">Tachometer</string>
     <string name="help_article_setup_a_route_name">Nastaviť trasu</string>
     <string name="speed_limit_warning">Varovanie pri prekročení rýchlosti</string>
+    <string name="precise">Presné</string>
+    <string name="round_up">Zaokrúhlené</string>
+    <string name="lang_ta_in">Tamilsky (India)</string>
+    <string name="rendering_attr_padusDisplayMode_name">Režim zobrazovania verejných pozemkov</string>
+    <string name="download_cloud_versions">Stiahnuť verzie z cloudu</string>
+    <string name="distance_during_navigation">Vzdialenosť počas navigácie</string>
+    <string name="shared_sting_all_colors">Všetky farby</string>
+    <string name="routing_type_a_star_2_phase">A* 2-fázový</string>
+    <string name="routing_type_a_star_classic">A* klasický</string>
+    <string name="auto_zoom_smooth">Plynulé</string>
+    <string name="auto_zoom_discrete">Skokové</string>
+    <string name="java_safe">Java (Bezpečné)</string>
+    <string name="gpx_approximation">Aproximácia GPX</string>
+    <string name="rendering_attr_padusDisplayMode_description">Podľa typu prístupu alebo názvu správcu</string>
+    <string name="rendering_value_access_name">Podľa typu prístupu</string>
+    <string name="rendering_value_managerName_name">Podľa názvu správcu</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Skryť hranice verejných pozemkov</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Skryť hranice verejných pozemkov ale ponechať oblasti</string>
+    <string name="auto_zoom">Automatické priblíženie</string>
+    <string name="routing_type">Typ tvorby trasy</string>
+    <string name="upload_local_versions">Odoslať lokálne verzie</string>
+    <string name="distance_during_navigation_description">Zvoľte ako sa bude zobrazovať informácia o vzdialenosti v navigačných nástrojoch (vzdialenosť k bodu, nasledujúce odbočenie, jazdné pruhy).
+\n
+\nZvoľte “%1$s” pre presné čísla alebo “%2$s” pre lepšiu čitateľnosť.</string>
+    <string name="release_4_7">• Nový nástroj \"Tachometer\" kompatibilný s Android Auto
+\n
+\n • Nastavte obrazovku mapy pridaním viacerých tlačidiel \"rýchlej akcie\"
+\n
+\n • Zlepšená čitateľnosť údajov v grafoch
+\n
+\n • Pridané filtre podľa údajov senzorov pre stopy
+\n
+\n • Pridaná podpora ďalších značiek v GPX
+\n
+\n • Nastaviteľná \"Vzdialenosť počas navigácie\": zvoľte medzi presnými a zaokrúhlenými číslami
+\n
+\n • Zjednotené rozhranie pre výber stôp
+\n
+\n • Prihlásenie do OpenStreetMap prepnuté na OAuth 2.0
+\n
+\n</string>
+    <string name="shared_string_unchanged">Nezmenené</string>
+    <string name="unchanged_parameter_summary">Každá stopa si zachová vlastné parametre.</string>
+    <string name="map_widget_map_scale">Mierka mapy</string>
+    <string name="gpx_approximation_cpp">Podľa trasy (C++)</string>
+    <string name="gpx_approximation_java">Podľa trasy (Java)</string>
+    <string name="gpx_approximation_geo_java">Podľa geometrie (Java, rýchle)</string>
 </resources>

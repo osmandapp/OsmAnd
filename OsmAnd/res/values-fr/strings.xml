@@ -600,7 +600,7 @@
 \n
 \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et le guidage en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
-    <string name="osmand_accessibility_description">Activez, dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse des voix de synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
+    <string name="osmand_accessibility_description">Active, directement dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse de la synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
     <string name="osmand_development_plugin_description">Permet d\'accéder à des fonctionnalités pour tester et déboguer OsmAnd : simuler des guidages, gérer les rendus, vérifier les performances, etc. Cette extension n\'est pas recommandée pour une utilisation normale de l\'application.</string>
     <string name="plugins_screen">Gestionnaire d\'extensions</string>
     <string name="prefs_plugins_descr">Les extensions ajoutent à l\'application des fonctionnalités supplémentaires et des paramètres avancés.</string>
@@ -1178,7 +1178,7 @@
     <string name="keep_informing">Répéter les instructions de guidage</string>
     <string name="navigation_intent_invalid">Format invalide : %s</string>
     <string name="arrival_distance">Annonce d\'arrivée</string>
-    <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination?</string>
+    <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination ?</string>
     <string name="shared_string_share">Partager</string>
     <string name="share_fav_subject">Favoris partagés grâce à OsmAnd</string>
     <string name="use_points_as_intermediates">Calculer un itinéraire entre des points</string>
@@ -4077,7 +4077,7 @@
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="local_backup">Sauvegarde locale</string>
     <string name="local_backup_descr">Sauvegarder ou restaurer des données grâce à un fichier local.</string>
-    <string name="restore_from_file">Restaurer à partir d\\\'un fichier</string>
+    <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
     <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous %1$s.</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
     <string name="verify_email_address_descr">Code de vérification envoyé sur %1$s. Veuillez le saisir dans le champ ci-dessous.</string>
@@ -4495,7 +4495,7 @@
     <string name="import_tracks">Importer des traces</string>
     <string name="import_tracks_descr">%1$s contient %2$s traces. Sélectionnez les traces à importer.</string>
     <string name="select_suggested_points">Sélectionner les points suggérés</string>
-    <string name="location_source">Source pour la localisation</string>
+    <string name="location_source">Source de localisation</string>
     <string name="location_source_descr">Lorsqu\'OsmAnd est installé depuis Google Play, la localisation utilisée par défaut est %1$s .
 \n
 \nSi votre localisation est imprécise ou si vous utilisez un appareil sans %2$s, essayez de basculer vers \"%3$s\".</string>
@@ -5619,7 +5619,30 @@
     <string name="precise">Exact</string>
     <string name="shared_sting_all_colors">Toutes les couleurs</string>
     <string name="auto_zoom">Zoom automatique</string>
-    <string name="java_safe">Java (Safe)</string>
+    <string name="java_safe">Java (Sécurisé)</string>
     <string name="auto_zoom_smooth">Progressif</string>
     <string name="distance_during_navigation">Distance pendant la navigation</string>
+    <string name="routing_type">Type de navigation</string>
+    <string name="lang_ta_in">Tamoul (Inde)</string>
+    <string name="upload_local_versions">Envoyer les versions locales</string>
+    <string name="rendering_value_managerName_name">Par nom de gestionnaire</string>
+    <string name="max_sensor_cadence">Cadence vélo, max</string>
+    <string name="download_cloud_versions">Recevoir les versions Cloud</string>
+    <string name="gpx_approximation">Approximation GPX</string>
+    <string name="rendering_attr_padusDisplayMode_description">Par type d\'accès ou nom de gestionnaire</string>
+    <string name="avg_sensor_cadence">Cadence vélo, moyenne</string>
+    <string name="help_article_setup_a_route_name">Définir un itinéraire</string>
+    <string name="special_routing_cpp">Type de navigation spéciale</string>
+    <string name="distance_during_navigation_description">Sélectionnez comment les informations numériques sont affichées dans les widgets de navigation (distance, bifurcation suivante, voies).
+\n
+\nChoisissez «%1$s» pour des chiffres exacts, ou «%2$s» pour faciliter la lecture.</string>
+    <string name="shared_string_unchanged">Inchangé</string>
+    <string name="unchanged_parameter_summary">Chaque trace conservera ses propres paramètres.</string>
+    <string name="auto_zoom_discrete">Arrondi</string>
+    <string name="map_widget_map_scale">Échelle de la carte</string>
+    <string name="routing_type_a_star_2_phase">A* phase 2</string>
+    <string name="routing_type_a_star_classic">A* classique</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Masquer les limites des terrains publiques</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Masquer les limites des terrains publiques mais afficher les surfaces</string>
+    <string name="rendering_attr_padusDisplayMode_name">Mode d\'affichage des terrains publiques</string>
 </resources>

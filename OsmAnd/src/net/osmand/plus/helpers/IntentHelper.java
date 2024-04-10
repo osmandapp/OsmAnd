@@ -29,7 +29,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -92,8 +92,8 @@ public class IntentHelper {
 	private static final String URL_PARAMETER_START = "start";
 	private static final String URL_PARAMETER_END = "end";
 	private static final String URL_PARAMETER_TOKEN = "token";
-	private static final String URL_PARAMETER_MODE = "mode";
-	private static final String URL_PARAMETER_INTERMEDIATE_POINT = "ipoints";
+	private static final String URL_PARAMETER_MODE = "profile";
+	private static final String URL_PARAMETER_INTERMEDIATE_POINTS = "via";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -147,7 +147,7 @@ public class IntentHelper {
 				String startLatLonParam = data.getQueryParameter(URL_PARAMETER_START);
 				String endLatLonParam = data.getQueryParameter(URL_PARAMETER_END);
 				String appModeKeyParam = data.getQueryParameter(URL_PARAMETER_MODE);
-				String intermediatePointsParam = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT);
+				String intermediatePointsParam = data.getQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS);
 
 				if (Algorithms.isEmpty(endLatLonParam)) {
 					LOG.error("Malformed OsmAnd navigation URL: destination location is missing");
@@ -295,7 +295,7 @@ public class IntentHelper {
 	@Nullable
 	private List<LatLon> parseIntermediatePoints(@Nullable String parameter) {
 		if (!Algorithms.isEmpty(parameter)) {
-			String[] params = parameter.split(",");
+			String[] params = parameter.split("[,;]");
 			List<LatLon> points = new ArrayList<>();
 
 			if (params.length >= 2 && params.length % 2 == 0) {
@@ -730,12 +730,12 @@ public class IntentHelper {
 		if (!Algorithms.isEmpty(intermediatePoints)) {
 			StringBuilder stringBuilder = new StringBuilder();
 			for (LatLon latLon : intermediatePoints) {
-				stringBuilder.append(",")
+				stringBuilder.append(";")
 						.append(getFormattedCoordinate(latLon.getLatitude()))
 						.append(",")
 						.append(getFormattedCoordinate(latLon.getLongitude()));
 			}
-			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINT, stringBuilder.substring(1));
+			builder.appendQueryParameter(URL_PARAMETER_INTERMEDIATE_POINTS, stringBuilder.substring(1));
 		}
 
 		if (endPoint != null) {

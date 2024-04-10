@@ -9,6 +9,7 @@ import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,20 +64,20 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 	@Override
 	public void refreshLastUsedTime() {
 		PaletteMode selectedPaletteMode = getSelectedPaletteMode();
-		long now = System.currentTimeMillis();
+		List<PaletteColor> paletteColors = new ArrayList<>();
 		for (PaletteMode paletteMode : getAvailablePaletteModes()) {
 			if (!Objects.equals(selectedPaletteMode.getTag(), paletteMode.getTag())) {
-				setLastUsedTime(paletteMode, now++);
+				addPaletteColor(paletteColors, paletteMode);
 			}
 		}
-		setLastUsedTime(selectedPaletteMode, now);
-		colorsCollection.syncSettings();
+		addPaletteColor(paletteColors, selectedPaletteMode);
+		colorsCollection.renewLastUsedTime(paletteColors);
 	}
 
-	private void setLastUsedTime(@NonNull PaletteMode paletteMode, long lastUsedTime) {
+	private void addPaletteColor(@NonNull List<PaletteColor> paletteColors, @NonNull PaletteMode paletteMode) {
 		PaletteColor paletteColor = provideSelectedColorForPaletteMode(paletteMode);
 		if (paletteColor != null) {
-			paletteColor.setLastUsedTime(lastUsedTime);
+			paletteColors.add(paletteColor);
 		}
 	}
 

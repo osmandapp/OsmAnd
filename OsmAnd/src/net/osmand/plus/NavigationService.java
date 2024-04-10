@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
+import androidx.car.app.Screen;
+import androidx.car.app.ScreenManager;
 import androidx.car.app.navigation.NavigationManager;
 import androidx.car.app.navigation.NavigationManagerCallback;
 import androidx.car.app.navigation.model.Destination;
@@ -23,6 +25,7 @@ import net.osmand.StateChangedListener;
 import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.TripHelper;
+import net.osmand.plus.auto.screens.RoutePreviewScreen;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
@@ -221,7 +224,9 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/** Sets the {@link CarContext} to use while the service is running. */
+	/**
+	 * Sets the {@link CarContext} to use while the service is running.
+	 */
 	public void setCarContext(@Nullable CarContext carContext) {
 		this.carContext = carContext;
 		if (carContext != null) {
@@ -237,11 +242,11 @@ public class NavigationService extends Service {
 						@Override
 						public void onAutoDriveEnabled() {
 							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
-							OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
-							RoutingHelper helper = getApp().getRoutingHelper();
-							if (!sim.isRouteAnimating() && helper.isFollowingMode()
-									&& helper.isRouteCalculated() && !helper.isRouteBeingCalculated()) {
+							if (!settings.simulateNavigation) {
+								OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
 								sim.startStopRouteAnimation(null);
+								settings.simulateNavigation = true;
+								settings.simulateNavigationStartedFromAdb = true;
 							}
 						}
 					});
@@ -253,14 +258,18 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/** Clears the currently used {@link CarContext}. */
+	/**
+	 * Clears the currently used {@link CarContext}.
+	 */
 	public void clearCarContext() {
 		carContext = null;
 		navigationManager = null;
 		tripHelper = null;
 	}
 
-	/** Starts navigation. */
+	/**
+	 * Starts navigation.
+	 */
 	public void startCarNavigation() {
 		if (navigationManager != null) {
 			navigationManager.navigationStarted();
@@ -268,7 +277,9 @@ public class NavigationService extends Service {
 		}
 	}
 
-	/** Stops navigation. */
+	/**
+	 * Stops navigation.
+	 */
 	public void stopCarNavigation() {
 		getApp().runInUIThread(() -> {
 					if (navigationManager != null) {

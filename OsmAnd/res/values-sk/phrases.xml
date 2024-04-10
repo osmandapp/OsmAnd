@@ -2935,8 +2935,8 @@
     <string name="poi_bridge_structure_humpback">Mostná konštrukcia: vlnitá</string>
     <string name="poi_bridge_structure_log">Mostná konštrukcia: brvno</string>
     <string name="poi_bridge_movable_bascule">Typ pohyblivého mostu: sklápací</string>
-    <string name="poi_impromptu_yes">Improvizovaný kemp: áno</string>
-    <string name="poi_impromptu_no">Improvizovaný kemp: nie</string>
+    <string name="poi_impromptu_yes">Áno</string>
+    <string name="poi_impromptu_no">Nie</string>
     <string name="poi_sanitary_dump_station_yes">Zariadenie na vypustenie sanitárneho odpadu: áno</string>
     <string name="poi_sanitary_dump_station_no">Zariadenie na vypustenie sanitárneho odpadu: nie</string>
     <string name="poi_healthcare_speciality_osteopathy">Osteopatia</string>
@@ -3043,11 +3043,11 @@
     <string name="poi_direction_all">Smer: všetky strany</string>
     <string name="poi_winter_room_yes">Zimná miestnosť: áno</string>
     <string name="poi_winter_room_no">Zimná miestnosť: nie</string>
-    <string name="poi_reservation_required">Rezervácia: povinná</string>
-    <string name="poi_reservation_recommended">Rezervácia: odporúčaná</string>
-    <string name="poi_reservation_yes">Rezervácia: áno</string>
-    <string name="poi_reservation_no">Rezervácia: nie</string>
-    <string name="poi_reservation_members_only">Rezervácia: len členovia</string>
+    <string name="poi_reservation_required">Povinná</string>
+    <string name="poi_reservation_recommended">Odporúčaná</string>
+    <string name="poi_reservation_yes">Áno</string>
+    <string name="poi_reservation_no">Nie</string>
+    <string name="poi_reservation_members_only">Len členovia</string>
     <string name="poi_beds">Postele</string>
     <string name="poi_boat_rental">Požičovňa lodí</string>
     <string name="poi_network">Sieť</string>
@@ -4489,4 +4489,14 @@
     <string name="poi_socket_schuko_yes">Schuko</string>
     <string name="poi_flow_rate">Prietok</string>
     <string name="poi_climbing_bolt_anchor">Kotva</string>
+    <string name="poi_indoor_seating_yes">Vnútorné sedenie: áno</string>
+    <string name="poi_indoor_seating_bar_table">Vnútorné sedenie: barový stôl</string>
+    <string name="poi_live_music">Živá hudba</string>
+    <string name="poi_music_venue">Hudobná prevádzka</string>
+    <string name="poi_live_music_yes">Áno</string>
+    <string name="poi_impromptu">Improvizovaný kemp</string>
+    <string name="poi_reservation">Rezervácia</string>
+    <string name="poi_shop_general">Obchod so zmiešaným tovarom</string>
+    <string name="poi_cuisine_fish">Ryby</string>
+    <string name="poi_indoor_seating_no">Žiadne vnútorné sedenie</string>
 </resources>

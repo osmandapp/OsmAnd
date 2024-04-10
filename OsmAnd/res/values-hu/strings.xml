@@ -3843,7 +3843,7 @@
     <string name="app_mode_motorboat">Motorcsónak</string>
     <string name="app_mode_kayak">Kajak</string>
     <string name="shared_string_search_history">Keresési előzmények</string>
-    <string name="shared_string_resources">Források</string>
+    <string name="shared_string_resources">Erőforrások</string>
     <string name="add_to_mapillary">Hozzáadás a Mapillaryhez</string>
     <string name="add_to_opr">Hozzáadás az OpenPlaceReviews-hoz</string>
     <string name="add_photos_descr">Az OsmAnd több forrásból jelenít meg fényképeket:
@@ -5664,4 +5664,12 @@
     <string name="distance_during_navigation_description">Válassza ki, hogy a távolságadatok hogyan jelenjenek meg a navigációs widgetekben (pont távolsága, következő kanyarodás, sávok).
 \n
 \n%1$s: pontos értékek vagy %2$s: könnyebb olvashatóság.</string>
+    <string name="download_cloud_versions">Felhőben lévő verziók letöltése</string>
+    <string name="upload_local_versions">Helyi verziók feltöltése</string>
+    <string name="map_widget_map_scale">Méretarány</string>
+    <string name="unchanged_parameter_summary">Minden nyomvonal megtartja a saját paramétereit.</string>
+    <string name="shared_string_unchanged">Változatlan</string>
+    <string name="gpx_approximation_geo_java">Geometria-alapú (Java, gyors)</string>
+    <string name="gpx_approximation_cpp">Útvonal-alapú (C++)</string>
+    <string name="gpx_approximation_java">Útvonal-alapú (Java)</string>
 </resources>

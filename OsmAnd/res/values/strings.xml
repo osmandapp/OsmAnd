@@ -10,6 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="unchanged_parameter_summary">Each track will retain its own parameters.</string>
+    <string name="shared_string_unchanged">Unchanged</string>
+    <string name="map_widget_map_scale">Map scale</string>
+    <string name="upload_local_versions">Upload local versions</string>
+    <string name="download_cloud_versions">Download cloud versions</string>
     <string name="distance_during_navigation_description">Choose how distance information is displayed in navigation widgets (distance to point, next turn, lanes).\n\nChoose “%1$s” for exact numbers, or “%2$s” for easier readability.</string>
     <string name="distance_during_navigation">Distance during navigation</string>
     <string name="precise">Precise</string>
@@ -33,6 +38,9 @@
     <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (Safe)</string>
     <string name="gpx_approximation">GPX approximation</string>
+    <string name="gpx_approximation_cpp">Routing-based (C++)</string>
+    <string name="gpx_approximation_java">Routing-based (Java)</string>
+    <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
     <string name="routing_type">Routing type</string>
     <string name="rendering_attr_padusDisplayMode_name">Public lands display mode</string>
     <string name="rendering_attr_padusDisplayMode_description">By access type or manager name</string>

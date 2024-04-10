@@ -5671,4 +5671,12 @@
 \n
 \nVælg “%1$s” for nøjagtige tal eller “%2$s” for bedre læsbarhed.</string>
     <string name="distance_during_navigation">Afstand under navigation</string>
+    <string name="download_cloud_versions">Download cloud-versioner</string>
+    <string name="upload_local_versions">Upload lokale versioner</string>
+    <string name="map_widget_map_scale">Kortskala</string>
+    <string name="unchanged_parameter_summary">Hvert spor beholder sine egne parametre.</string>
+    <string name="shared_string_unchanged">Uændret</string>
+    <string name="gpx_approximation_cpp">Ruteberegning-baseret (C++)</string>
+    <string name="gpx_approximation_java">Ruteberegning-baseret (Java)</string>
+    <string name="gpx_approximation_geo_java">Geometri-baseret (Java, hurtig)</string>
 </resources>

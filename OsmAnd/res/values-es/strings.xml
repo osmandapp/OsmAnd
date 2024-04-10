@@ -5667,4 +5667,12 @@
     <string name="distance_during_navigation_description">Elija cómo se muestra la información de la distancia en los widgets de navegación (distancia al punto, próximo giro, carriles).
 \n
 \nElija \"%1$s\" para números exactos, o \"%2$s\" para una legibilidad más fácil.</string>
+    <string name="download_cloud_versions">Descargar versiones en la nube</string>
+    <string name="upload_local_versions">Cargar las versiones locales</string>
+    <string name="map_widget_map_scale">Escala de mapa</string>
+    <string name="shared_string_unchanged">Sin cambiar</string>
+    <string name="unchanged_parameter_summary">Cada pista conservará sus propios parámetros.</string>
+    <string name="gpx_approximation_geo_java">Basado en geometría (Java, rápido)</string>
+    <string name="gpx_approximation_cpp">Basado en enrutamiento (C++)</string>
+    <string name="gpx_approximation_java">Basado en enrutamiento (Java)</string>
 </resources>

@@ -152,7 +152,8 @@ public class ChartUtils {
 		axisBase.setGranularity(granularity);
 		axisBase.setValueFormatter((value, axis) -> {
 			if (!Algorithms.isEmpty(formatX)) {
-				return MessageFormat.format(formatX + mainUnitX, value);
+				boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
+				return MessageFormat.format(shouldShowUnit ? formatX + mainUnitX : formatX, value);
 			} else {
 				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitX, ctx);
 			}
