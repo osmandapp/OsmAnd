@@ -4,9 +4,8 @@ import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,9 +14,9 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.base.BaseLoadAsyncTask;
-import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -32,17 +31,15 @@ public class ChangeAppearanceTask extends BaseLoadAsyncTask<Void, File, Void> {
 	private final GpxDbHelper gpxDbHelper;
 	private final GpxSelectionHelper selectionHelper;
 
+	private final AppearanceData data;
 	private final Set<TrackItem> trackItems;
-	private final AppearanceData appearanceData;
 	private final CallbackWithObject<Void> callback;
 
-	public ChangeAppearanceTask(@NonNull FragmentActivity activity,
-								@NonNull AppearanceData appearanceData,
-	                            @NonNull Set<TrackItem> trackItems,
-	                            @Nullable CallbackWithObject<Void> callback) {
+	public ChangeAppearanceTask(@NonNull FragmentActivity activity, @NonNull AppearanceData data,
+	                            @NonNull Set<TrackItem> trackItems, @Nullable CallbackWithObject<Void> callback) {
 		super(activity);
+		this.data = data;
 		this.trackItems = trackItems;
-		this.appearanceData = appearanceData;
 		this.callback = callback;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.selectionHelper = app.getSelectedGpxHelper();
@@ -66,14 +63,9 @@ public class ChangeAppearanceTask extends BaseLoadAsyncTask<Void, File, Void> {
 	}
 
 	private void updateTrackAppearance(@NonNull GpxDataItem item) {
-		ColoringStyle coloringStyle = appearanceData.getColoringStyle();
-		setParameterIfEdited(item, COLORING_TYPE, coloringStyle != null ? coloringStyle.getId() : null);
-		setParameterIfEdited(item, COLOR, appearanceData.getCustomColor());
-		setParameterIfEdited(item, WIDTH, appearanceData.getWidthValue());
-		setParameterIfEdited(item, SHOW_ARROWS, appearanceData.shouldShowArrows());
-		setParameterIfEdited(item, SHOW_START_FINISH, appearanceData.shouldShowStartFinish());
-		setParameterIfEdited(item, SPLIT_TYPE, appearanceData.getSplitType());
-		setParameterIfEdited(item, SPLIT_INTERVAL, appearanceData.getSplitInterval());
+		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+			setParameterIfEdited(item, parameter, data.getParameter(parameter));
+		}
 		app.getGpxDbHelper().updateDataItem(item);
 
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
@@ -89,26 +81,26 @@ public class ChangeAppearanceTask extends BaseLoadAsyncTask<Void, File, Void> {
 	}
 
 	private void updateCurrentTrackAppearance() {
-		Integer customColor = appearanceData.getCustomColor();
-		if (customColor != null) {
-			settings.CURRENT_TRACK_COLOR.set(customColor);
+		Integer color = data.getParameter(COLOR);
+		if (color != null) {
+			settings.CURRENT_TRACK_COLOR.set(color);
 		}
-		ColoringStyle coloringStyle = appearanceData.getColoringStyle();
-		if (coloringStyle != null) {
-			settings.CURRENT_TRACK_COLORING_TYPE.set(coloringStyle.getType());
-			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(coloringStyle.getRouteInfoAttribute());
+		String coloringType = data.getParameter(COLORING_TYPE);
+		if (coloringType != null) {
+			settings.CURRENT_TRACK_COLORING_TYPE.set(ColoringType.requireValueOf(TRACK, coloringType));
+			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(ColoringType.getRouteInfoAttribute(coloringType));
 		}
-		String widthValue = appearanceData.getWidthValue();
-		if (widthValue != null) {
-			settings.CURRENT_TRACK_WIDTH.set(widthValue);
+		String width = data.getParameter(WIDTH);
+		if (width != null) {
+			settings.CURRENT_TRACK_WIDTH.set(width);
 		}
-		Boolean shouldShowArrows = appearanceData.shouldShowArrows();
-		if (shouldShowArrows != null) {
-			settings.CURRENT_TRACK_SHOW_ARROWS.set(shouldShowArrows);
+		Boolean showArrows = data.getParameter(SHOW_ARROWS);
+		if (showArrows != null) {
+			settings.CURRENT_TRACK_SHOW_ARROWS.set(showArrows);
 		}
-		Boolean shouldShowStartFinish = appearanceData.shouldShowStartFinish();
-		if (shouldShowStartFinish != null) {
-			settings.CURRENT_TRACK_SHOW_START_FINISH.set(shouldShowStartFinish);
+		Boolean showStartFinish = data.getParameter(SHOW_START_FINISH);
+		if (showStartFinish != null) {
+			settings.CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinish);
 		}
 	}
 
@@ -133,12 +125,5 @@ public class ChangeAppearanceTask extends BaseLoadAsyncTask<Void, File, Void> {
 		if (callback != null) {
 			callback.processResult(null);
 		}
-	}
-
-	public static void execute(@NonNull FragmentActivity activity,
-	                           @NonNull AppearanceData appearanceData,
-	                           @NonNull Set<TrackItem> trackItems,
-	                           @Nullable CallbackWithObject<Void> callback) {
-		new ChangeAppearanceTask(activity, appearanceData, trackItems, callback).execute();
 	}
 }

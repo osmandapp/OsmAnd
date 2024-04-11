@@ -32,8 +32,8 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -49,8 +49,7 @@ import net.osmand.util.CollectionUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackColorController
-		extends ColoringStyleCardController implements IDialogController, IControlsColorProvider {
+public class TrackColorController extends ColoringStyleCardController implements IDialogController, IControlsColorProvider {
 
 	private static final String PROCESS_ID = "select_track_color";
 
@@ -63,9 +62,10 @@ public class TrackColorController
 	public TrackColorController(@NonNull OsmandApplication app,
 	                            @Nullable SelectedGpxFile selectedGpx,
 	                            @NonNull TrackDrawInfo drawInfo) {
-		super(app, drawInfo.getColoringStyle());
+		super(app);
 		this.selectedGpx = selectedGpx;
 		this.drawInfo = drawInfo;
+		this.selectedState = findCardState(drawInfo.getColoringStyle());
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class TrackColorController
 		if (isDataAvailable(coloringStyle)) {
 			super.askSelectColoringStyle(coloringStyle);
 		} else {
-			showUnavailableColoringStyleSnackBar(cardInstance.getActivity(), coloringStyle, cardInstance.getSelectorView());
+			showUnavailableColoringStyleSnackBar(card.getActivity(), coloringStyle, card.getSelectorView());
 		}
 	}
 
@@ -177,7 +177,7 @@ public class TrackColorController
 		text += " " + app.getString(R.string.select_another_colorization);
 		Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
 				.setAnchorView(activity.findViewById(R.id.dismiss_button));
-		UiUtilities.setupSnackbar(snackbar, cardInstance.isNightMode());
+		UiUtilities.setupSnackbar(snackbar, card.isNightMode());
 		snackbar.show();
 	}
 

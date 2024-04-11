@@ -1,162 +1,106 @@
 package net.osmand.plus.configmap.tracks.appearance.data;
 
-import androidx.annotation.ColorInt;
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.gpx.GpxParameter;
+import net.osmand.util.Algorithms;
 
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppearanceData {
 
-	private Boolean showArrows = null;
-	private Boolean showStartFinish = null;
-	private ColoringStyle coloringStyle = null;
-	@ColorInt
-	private Integer customColor = null;
-	private String width = null;
-	private Integer splitType;
-	private Double splitInterval;
+	private final Map<GpxParameter, Pair<Boolean, Object>> map = new HashMap<>();
 
+	private AppearanceChangedListener listener;
 
-	private OnAppearanceModifiedListener modifiedListener;
+	public AppearanceData() {
+	}
 
-	public AppearanceData() { }
-
-	public AppearanceData(@NonNull AppearanceData appearanceData) {
-		this.showArrows = appearanceData.shouldShowArrows();
-		this.showStartFinish = appearanceData.shouldShowStartFinish();
-		this.coloringStyle = appearanceData.getColoringStyle();
-		this.customColor = appearanceData.getCustomColor();
-		this.width = appearanceData.getWidthValue();
+	public AppearanceData(@NonNull AppearanceData data) {
+		this.map.putAll(data.map);
+		this.listener = data.listener;
 	}
 
 	@NonNull
-	public AppearanceData setModifiedListener(@NonNull OnAppearanceModifiedListener modifiedListener) {
-		this.modifiedListener = modifiedListener;
+	public AppearanceData setListener(@NonNull AppearanceChangedListener listener) {
+		this.listener = listener;
 		return this;
 	}
 
 	@Nullable
-	public Boolean shouldShowArrows() {
-		return showArrows;
+	@SuppressWarnings("unchecked")
+	public <T> T getParameter(@NonNull GpxParameter parameter) {
+		Pair<Boolean, Object> pair = map.get(parameter);
+		return pair != null ? ((Class<T>) parameter.getTypeClass()).cast(pair.second) : null;
 	}
 
-	@NonNull
-	public AppearanceData setShowArrows(@Nullable Boolean showArrows) {
-		this.showArrows = showArrows;
-		notifyOnAppearanceModified();
-		return this;
+	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {
+		if (isValidValue(parameter, value)) {
+			map.put(parameter, new Pair<>(false, value));
+			notifyAppearanceModified();
+			return true;
+		}
+		return false;
 	}
 
-	@Nullable
-	public Boolean shouldShowStartFinish() {
-		return showStartFinish;
+	public boolean resetParameter(@NonNull GpxParameter parameter) {
+		if (parameter.isAppearanceParameter()) {
+			map.put(parameter, new Pair<>(true, null));
+			notifyAppearanceModified();
+			return true;
+		}
+		return false;
 	}
 
-	@NonNull
-	public AppearanceData setShowStartFinish(@Nullable Boolean showStartFinish) {
-		this.showStartFinish = showStartFinish;
-		notifyOnAppearanceModified();
-		return this;
+	public boolean shouldResetParameter(@NonNull GpxParameter parameter) {
+		if (parameter.isAppearanceParameter()) {
+			Pair<Boolean, Object> pair = map.get(parameter);
+			return pair != null && pair.first;
+		}
+		return false;
 	}
 
-	@Nullable
-	public ColoringStyle getColoringStyle() {
-		return coloringStyle;
+	public boolean shouldResetAnything() {
+		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+			if (shouldResetParameter(parameter)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	@NonNull
-	public AppearanceData setColoringStyle(@Nullable ColoringStyle coloringStyle) {
-		this.coloringStyle = coloringStyle;
-		notifyOnAppearanceModified();
-		return this;
+	public boolean isValidValue(@NonNull GpxParameter parameter, @Nullable Object value) {
+		return parameter.isAppearanceParameter() && (value == null || parameter.getTypeClass() == value.getClass());
 	}
 
-	@Nullable
-	public String getWidthValue() {
-		return width;
-	}
-
-	@NonNull
-	public AppearanceData setWidthValue(@Nullable String width) {
-		this.width = width;
-		notifyOnAppearanceModified();
-		return this;
-	}
-
-	@Nullable
-	public Integer getCustomColor() {
-		return customColor;
-	}
-
-	@NonNull
-	public AppearanceData setCustomColor(@Nullable Integer customColor) {
-		this.customColor = customColor;
-		notifyOnAppearanceModified();
-		return this;
-	}
-
-	@Nullable
-	public Integer getSplitType() {
-		return splitType;
-	}
-
-	@Nullable
-	public Double getSplitInterval() {
-		return splitInterval;
-	}
-
-	@NonNull
-	public AppearanceData setSplit(@Nullable Integer splitType, @Nullable Double splitInterval) {
-		this.splitType = splitType;
-		this.splitInterval = splitInterval;
-		notifyOnAppearanceModified();
-		return this;
-	}
-
-	private void notifyOnAppearanceModified() {
-		if (modifiedListener != null) {
-			modifiedListener.onAppearanceModified();
+	private void notifyAppearanceModified() {
+		if (listener != null) {
+			listener.onAppearanceChanged();
 		}
 	}
 
-	public interface OnAppearanceModifiedListener {
-		void onAppearanceModified();
+	public interface AppearanceChangedListener {
+		void onAppearanceChanged();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof AppearanceData)) return false;
-
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 		AppearanceData that = (AppearanceData) o;
-
-		if (!Objects.equals(shouldShowArrows(), that.shouldShowArrows()))
-			return false;
-		if (!Objects.equals(shouldShowStartFinish(), that.shouldShowStartFinish()))
-			return false;
-		if (!Objects.equals(getColoringStyle(), that.getColoringStyle()))
-			return false;
-		if (!Objects.equals(getCustomColor(), that.getCustomColor()))
-			return false;
-		if (!Objects.equals(getSplitType(), that.getSplitType()))
-			return false;
-		if (!Objects.equals(getSplitInterval(), that.getSplitInterval()))
-			return false;
-		return Objects.equals(getWidthValue(), that.getWidthValue());
+		return Algorithms.objectEquals(map, that.map);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = shouldShowArrows() != null ? shouldShowArrows().hashCode() : 0;
-		result = 31 * result + (shouldShowStartFinish() != null ? shouldShowStartFinish().hashCode() : 0);
-		result = 31 * result + (getColoringStyle() != null ? getColoringStyle().hashCode() : 0);
-		result = 31 * result + (getCustomColor() != null ? getCustomColor().hashCode() : 0);
-		result = 31 * result + (getWidthValue() != null ? getWidthValue().hashCode() : 0);
-		result = 31 * result + (getSplitType() != null ? getSplitType().hashCode() : 0);
-		result = 31 * result + (getSplitInterval() != null ? getSplitInterval().hashCode() : 0);
-		return result;
+		return Algorithms.hash(map);
 	}
 }

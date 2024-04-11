@@ -32,10 +32,11 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
-import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
+import net.osmand.plus.configmap.tracks.ConfirmChangesBottomSheet.ChangesConfirmationListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
@@ -52,7 +53,6 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
-import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
@@ -66,7 +66,7 @@ import java.util.Set;
 
 public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener,
-		InAppPurchaseListener, SelectionHelperProvider<TrackItem>, OnAppearanceChangeConfirmedListener {
+		InAppPurchaseListener, SelectionHelperProvider<TrackItem>, ChangesConfirmationListener {
 
 	private static final String TAG = TracksAppearanceFragment.class.getSimpleName();
 
@@ -219,7 +219,9 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 		applyButton = view.findViewById(R.id.right_bottom_button);
 		applyButton.setOnClickListener(v -> {
 			ItemsSelectionHelper<TrackItem> helper = getSelectionHelper();
-			AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager(), helper.getSelectedItemsSize());
+			String count = String.valueOf(helper.getSelectedItemsSize());
+			String description = getString(R.string.change_default_tracks_appearance_confirmation_description, count);
+			ConfirmChangesBottomSheet.showInstance(getChildFragmentManager(), description);
 		});
 		applyButton.setButtonType(PRIMARY);
 		applyButton.setTitleId(R.string.shared_string_apply);
@@ -298,7 +300,7 @@ public class TracksAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	@Override
-	public void onAppearanceChangeConfirmed() {
+	public void onChangesConfirmed() {
 		saveTracksAppearance();
 	}
 

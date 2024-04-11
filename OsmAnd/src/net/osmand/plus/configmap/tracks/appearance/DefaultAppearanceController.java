@@ -3,11 +3,8 @@ package net.osmand.plus.configmap.tracks.appearance;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 
-import android.os.AsyncTask;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.gpx.GpxParameter;
@@ -17,7 +14,6 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.AppearanceChangedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ArrowsCardController;
@@ -25,45 +21,54 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardContr
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
-import net.osmand.plus.configmap.tracks.appearance.tasks.ChangeAppearanceTask;
+import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.helpers.GpxDbHelper;
+import net.osmand.plus.track.helpers.GpxDirItem;
 import net.osmand.util.Algorithms;
 
-import java.util.Set;
-
-public class ChangeAppearanceController implements IDialogController, IColorCardControllerListener,
+public class DefaultAppearanceController implements IDialogController, IColorCardControllerListener,
 		AppearanceChangedListener {
 
-	public static final String PROCESS_ID = "change_tracks_appearance";
+	public static final String PROCESS_ID = "edit_tracks_folder_default_appearance";
 
 	private final OsmandApplication app;
+	private final GpxDbHelper gpxDbHelper;
 
 	private final ArrowsCardController arrowsCardController;
-	private final StartFinishCardController showStartAndFinishIconsCardController;
+	private final StartFinishCardController iconsCardController;
 	private final ColorCardController colorCardController;
 	private final WidthCardController widthCardController;
 	private final SplitCardController splitCardController;
 
+	private final GpxDirItem dirItem;
+	private final TrackFolder folder;
 	private final AppearanceData data;
 	private final AppearanceData initialData;
-	private final Set<TrackItem> items;
 	private boolean isAppearanceSaved = false;
 
-	private ChangeAppearanceController(@NonNull OsmandApplication app, @NonNull Set<TrackItem> items) {
+	public DefaultAppearanceController(@NonNull OsmandApplication app, @NonNull TrackFolder folder) {
 		this.app = app;
-		this.items = items;
-		this.initialData = buildAppearanceData();
+		this.folder = folder;
+		this.gpxDbHelper = app.getGpxDbHelper();
+		this.dirItem = gpxDbHelper.getGpxDirItem(folder.getDirFile());
+		this.initialData = buildAppearanceData(dirItem);
 		this.data = new AppearanceData(initialData).setListener(this);
 
-		arrowsCardController = new ArrowsCardController(app, data, true);
-		showStartAndFinishIconsCardController = new StartFinishCardController(app, data, true);
+		arrowsCardController = new ArrowsCardController(app, data, false);
+		iconsCardController = new StartFinishCardController(app, data, false);
 
-		colorCardController = new ColorCardController(app, data, true);
+		colorCardController = new ColorCardController(app, data, false);
 		colorCardController.setListener(this);
 
-		widthCardController = new WidthCardController(app, data, true);
+		widthCardController = new WidthCardController(app, data, false);
 		widthCardController.setControlsColorProvider(colorCardController);
 
-		splitCardController = new SplitCardController(app, data, true);
+		splitCardController = new SplitCardController(app, data, false);
+	}
+
+	@NonNull
+	public String getTitle() {
+		return folder.getName(app);
 	}
 
 	@Override
@@ -82,27 +87,23 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 		widthCardController.updateColorItems();
 	}
 
-	public boolean hasAnyChangesToCommit() {
+	public boolean hasAnyChangesToSave() {
 		return !Algorithms.objectEquals(initialData, data);
 	}
 
-	public void saveChanges(@NonNull FragmentActivity activity) {
+	public void saveChanges() {
 		colorCardController.getColorsPaletteController().refreshLastUsedTime();
 
-		ChangeAppearanceTask task = new ChangeAppearanceTask(activity, data, items, result -> {
-			isAppearanceSaved = true;
-			onAppearanceSaved();
-			return true;
-		});
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+			dirItem.setParameter(parameter, data.getParameter(parameter));
+		}
+		gpxDbHelper.updateDataItem(dirItem);
+		onAppearanceSaved();
 	}
 
 	private void onAppearanceSaved() {
+		isAppearanceSaved = true;
 		app.getDialogManager().askDismissDialog(PROCESS_ID);
-	}
-
-	public int getEditedItemsCount() {
-		return items.size();
 	}
 
 	public boolean isAppearanceSaved() {
@@ -115,8 +116,8 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	}
 
 	@NonNull
-	public StartFinishCardController getStartAndFinishIconsCardController() {
-		return showStartAndFinishIconsCardController;
+	public StartFinishCardController getIconsCardController() {
+		return iconsCardController;
 	}
 
 	@NonNull
@@ -140,18 +141,18 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	}
 
 	@NonNull
-	private AppearanceData buildAppearanceData() {
+	private AppearanceData buildAppearanceData(@NonNull GpxDirItem item) {
 		AppearanceData data = new AppearanceData();
 		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
-			data.setParameter(parameter, null);
+			data.setParameter(parameter, item.getParameter(parameter));
 		}
 		return data;
 	}
 
-	public static void showDialog(@NonNull FragmentActivity activity, @NonNull Fragment fragment, @NonNull Set<TrackItem> items) {
+	public static void showDialog(@NonNull FragmentActivity activity, @NonNull TrackFolder folder) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new ChangeAppearanceController(app, items));
-		ChangeAppearanceFragment.showInstance(activity.getSupportFragmentManager(), fragment);
+		dialogManager.register(PROCESS_ID, new DefaultAppearanceController(app, folder));
+		DefaultAppearanceFragment.showInstance(activity.getSupportFragmentManager());
 	}
 }

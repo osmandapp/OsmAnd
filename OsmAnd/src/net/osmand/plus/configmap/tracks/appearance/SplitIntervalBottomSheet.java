@@ -39,7 +39,6 @@ import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -303,9 +302,13 @@ public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 		double splitInterval = GpxSplitType.DISTANCE == selectedSplitType ? distanceSplit : timeSplit;
 
 		DialogManager dialogManager = app.getDialogManager();
-		ChangeAppearanceController controller = (ChangeAppearanceController) dialogManager.findController(ChangeAppearanceController.PROCESS_ID);
-		if (controller != null) {
-			controller.getSplitMarksCardController().onSplitSelected(selectedSplitType.getType(), splitInterval);
+		ChangeAppearanceController changeAppearanceController = (ChangeAppearanceController) dialogManager.findController(ChangeAppearanceController.PROCESS_ID);
+		if (changeAppearanceController != null) {
+			changeAppearanceController.getSplitCardController().onSplitSelected(selectedSplitType.getType(), splitInterval);
+		}
+		DefaultAppearanceController defaultAppearanceController = (DefaultAppearanceController) dialogManager.findController(DefaultAppearanceController.PROCESS_ID);
+		if (defaultAppearanceController != null) {
+			defaultAppearanceController.getSplitCardController().onSplitSelected(selectedSplitType.getType(), splitInterval);
 		}
 	}
 
