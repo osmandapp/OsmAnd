@@ -533,7 +533,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			if ((isRecordingAutomatically()) && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
+			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
