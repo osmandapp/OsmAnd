@@ -212,14 +212,12 @@ public class GPXDatabase {
 				if (parameter == COLOR) {
 					value = GPXUtilities.parseColor((String) value, 0);
 				} else if (parameter == COLORING_TYPE) {
-					String coloringTypeName = (String) value;
-					if (ColoringType.valueOf(TRACK, coloringTypeName) == null &&
-							GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
-						GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);
-						ColoringType coloringType = ColoringType.valueOf(scaleType);
+					String type = (String) value;
+					ColoringType coloringType = ColoringType.valueOf(TRACK, type);
+					GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(type);
+					if (coloringType == null && scaleType != null) {
+						coloringType = ColoringType.valueOf(scaleType);
 						value = coloringType == null ? null : coloringType.getName(null);
-					} else {
-						continue;
 					}
 				}
 				item.setParameter(parameter, value);

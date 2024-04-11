@@ -132,9 +132,9 @@ public class GpxSettingsItem extends FileSettingsItem {
 	}
 
 	private void createGpxAppearanceInfo() {
-		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, item -> appearanceInfo = new GpxAppearanceInfo(item));
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(file, item -> appearanceInfo = new GpxAppearanceInfo(app, item));
 		if (dataItem != null) {
-			appearanceInfo = new GpxAppearanceInfo(dataItem);
+			appearanceInfo = new GpxAppearanceInfo(app, dataItem);
 		}
 	}
 
