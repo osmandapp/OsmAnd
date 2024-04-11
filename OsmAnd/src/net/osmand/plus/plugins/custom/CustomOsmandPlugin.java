@@ -439,7 +439,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	public void loadResources() {
 		File pluginResDir = getPluginResDir();
 		if (pluginResDir.exists() && pluginResDir.isDirectory()) {
-			List<File> files = FileUtils.collectDirFiles(pluginResDir);
+			List<File> files = FileUtils.collectFiles(pluginResDir, false);
 			for (File file : files) {
 				String path = file.getAbsolutePath();
 				if (icon == null) {

@@ -288,18 +288,30 @@ public class FileUtils {
 	}
 
 	@NonNull
-	public static List<File> collectDirFiles(@NonNull File dir) {
-		List<File> files = new ArrayList<>();
-		collectDirFiles(dir, files);
-		return files;
+	public static List<File> collectFiles(@NonNull File dir, boolean includeDirs) {
+		List<File> list = new ArrayList<>();
+		if (dir.isDirectory()) {
+			File[] files = dir.listFiles();
+			if (files != null) {
+				for (File file : files) {
+					collectFiles(file, list, includeDirs);
+				}
+			}
+		} else {
+			list.add(dir);
+		}
+		return list;
 	}
 
-	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {
+	public static void collectFiles(@NonNull File file, @NonNull List<File> list, boolean includeDirs) {
 		if (file.isDirectory()) {
+			if (includeDirs) {
+				list.add(file);
+			}
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (File subfolderFile : files) {
-					collectDirFiles(subfolderFile, list);
+					collectFiles(subfolderFile, list, includeDirs);
 				}
 			}
 		} else {
