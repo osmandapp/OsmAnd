@@ -92,7 +92,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 			}
 			if (savedFile != null) {
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-				boolean readItem = gpxDbHelper.hasItem(savedFile);
+				boolean readItem = gpxDbHelper.hasGpxDataItem(savedFile);
 				GpxDataItem dataItem = null;
 				if (!readItem) {
 					dataItem = new GpxDataItem(app, savedFile);
@@ -163,7 +163,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 					gpxHelper.selectGpxFile(gpxFile, params);
 				}
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-				if (!gpxDbHelper.hasItem(file)) {
+				if (!gpxDbHelper.hasGpxDataItem(file)) {
 					gpxDbHelper.add(new GpxDataItem(app, file));
 				}
 			}

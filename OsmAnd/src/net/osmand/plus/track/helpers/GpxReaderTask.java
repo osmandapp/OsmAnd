@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
+import static net.osmand.gpx.GpxParameter.DATA_VERSION;
 import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
 
@@ -16,10 +18,9 @@ import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GpxParameter;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -76,12 +77,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (GpxDbUtils.isAnalyseNeeded(file, item)) {
+					if (GpxDbUtils.isAnalyseNeeded(item)) {
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified(), null, null, PluginsHelper.getTrackPointsAnalyser());
 						if (item == null) {
 							item = new GpxDataItem(app, file);
-							database.insert(item, conn);
+							database.insertItem(item, conn);
 						}
 						item.setAnalysis(analysis);
 						long creationTime = item.getParameter(FILE_CREATION_TIME);
@@ -89,7 +90,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
 						}
 						setupNearestCityName(item);
-						item.setParameter(GpxParameter.DATA_VERSION, GPXDatabase.createDataVersion(GPXTrackAnalysis.ANALYSIS_VERSION));
+						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
 						gpxDbHelper.updateDataItem(item);
 					}
 					if (listener != null) {
