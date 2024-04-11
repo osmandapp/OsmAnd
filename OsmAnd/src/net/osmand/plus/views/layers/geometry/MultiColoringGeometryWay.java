@@ -72,6 +72,22 @@ public abstract class MultiColoringGeometryWay
 		resetArrowsProvider();
 	}
 
+	protected void updateUse3DVisualization(boolean use3DVisualization) {
+		if (!styleMap.isEmpty()) {
+			for (GeometryWayStyle<?> style : styleMap.values()) {
+				style.use3DVisualization = use3DVisualization;
+			}
+		} else {
+			for (List<DrawPathData31> pathDataList : pathsData31Cache) {
+				for (DrawPathData31 pathData : pathDataList) {
+					if (pathData.style != null) {
+						pathData.style.use3DVisualization = use3DVisualization;
+					}
+				}
+			}
+		}
+	}
+
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.dashPattern = dashPattern;

@@ -444,7 +444,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						}
 					}
 					if (tx.size() > 1) {
-						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style, pathData.use3DVisualization);
+						DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, pathData.style);
 						newPathData.heights = pathData.heights;
 						newPathsDataList.add(newPathData);
 					}
@@ -474,10 +474,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 
 	protected boolean shouldDrawArrows() {
 		return true;
-	}
-
-	protected boolean shouldUse3dVisualization() {
-		return false;
 	}
 
 	private void clearArrays() {
@@ -611,7 +607,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (hasStyles) {
 				GeometryWayStyle<?> newStyle = styles.get(i);
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					pathsData.add(new DrawPathData31(ind, tx, ty, style, shouldUse3dVisualization()));
+					pathsData.add(new DrawPathData31(ind, tx, ty, style));
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
@@ -623,7 +619,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 		}
 		if (tx.size() > 1) {
-			pathsData.add(new DrawPathData31(ind, tx, ty, style, shouldUse3dVisualization()));
+			pathsData.add(new DrawPathData31(ind, tx, ty, style));
 		}
 	}
 

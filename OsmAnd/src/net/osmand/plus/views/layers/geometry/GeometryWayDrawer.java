@@ -63,18 +63,15 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		List<Integer> tx;
 		List<Integer> ty;
 		QListFloat heights;
-		boolean use3DVisualization;
 		GeometryWayStyle<?> style;
 
 		public DrawPathData31(@NonNull List<Integer> indexes,
 		                      @NonNull List<Integer> tx, @NonNull List<Integer> ty,
-		                      @Nullable GeometryWayStyle<?> style,
-		                      boolean use3DVisualization) {
+		                      @Nullable GeometryWayStyle<?> style		) {
 			this.indexes = indexes;
 			this.tx = tx;
 			this.ty = ty;
 			this.style = style;
-			this.use3DVisualization = use3DVisualization;
 		}
 	}
 
@@ -176,7 +173,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		boolean showRaised = false;
 		boolean showTransparentTraces = false;
 		if (pathsData.size() > 0) {
-			showRaised = pathsData.get(0).use3DVisualization;
+			showRaised = pathsData.get(0).style.use3DVisualization;
 		}
 		for (DrawPathData31 data : pathsData) {
 			for (int i = 0; i < data.tx.size(); i++) {

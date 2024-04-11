@@ -91,6 +91,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if(this.use3dVisualization != use3dVisualization) {
 			resetSymbolProviders();
 		}
+		updateUse3DVisualization(use3dVisualization);
 		updatePaints(trackWidth, coloringType);
 		getDrawer().setColoringType(coloringType);
 
@@ -182,6 +183,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		GeometrySolidWayStyle<GpxGeometryWayContext> style = new GeometrySolidWayStyle<>(
 				getContext(), customColor, customWidth, getContrastLineColor(customColor), false);
 		style.dashPattern = dashPattern;
+		style.use3DVisualization = use3dVisualization;
 		return style;
 	}
 
@@ -191,6 +193,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		GeometrySolidWayStyle<GpxGeometryWayContext> style = new GeometrySolidWayStyle<>(
 				getContext(), lineColor, customWidth, getContrastLineColor(lineColor), true);
 		style.dashPattern = dashPattern;
+		style.use3DVisualization = use3dVisualization;
 		return style;
 	}
 
