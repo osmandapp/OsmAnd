@@ -5589,4 +5589,6 @@
 \n</string>
     <string name="shared_sting_all_colors">Wszystkie kolory</string>
     <string name="avg_sensor_heartrate">Średnie tętno</string>
+    <string name="unchanged_parameter_summary">Każda ścieżka zachowa swoje parametry.</string>
+    <string name="map_widget_map_scale">Skala mapy</string>
 </resources>
