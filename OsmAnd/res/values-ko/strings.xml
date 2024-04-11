@@ -2555,7 +2555,7 @@
     <string name="shared_string_profiles">프로필</string>
     <string name="shared_string_quick_actions">빠른 작업</string>
     <string name="shared_string_routing">라우팅</string>
-    <string name="import_duplicates_description">OsmAnd에는 이미 가져온 요소와 동일한 이름의 요소가 있습니다.
+    <string name="import_duplicates_description">OsmAnd 에는 이미 가져온 요소와 동일한 이름의 요소가 있습니다.
 \n
 \n작업을 선택합니다.</string>
     <string name="shared_string_poi_types">POI 유형</string>

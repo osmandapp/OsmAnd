@@ -3432,7 +3432,7 @@ POIの更新は利用できません</string>
     <string name="replace_all">全て置き換える</string>
     <string name="keep_both">両方を維持する</string>
     <string name="keep_both_desc">インポートアイテムはデータ先頭に追加されます</string>
-    <string name="import_duplicates_description">OsmAndには、すでにインポートされたものと同じ名前の項目があります。
+    <string name="import_duplicates_description">OsmAnd には、すでにインポートされたものと同じ名前の項目があります。
 \n
 \n対応を選択してください。</string>
     <string name="import_duplicates_title">一部のアイテムは既に存在します</string>
