@@ -19,6 +19,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
@@ -32,6 +33,7 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.simulation.SimulationProvider;
@@ -60,7 +62,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class SavingTrackHelper extends SQLiteOpenHelper {
+public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInformationListener {
 
 	private static final Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
@@ -99,8 +101,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private final SelectedGpxFile currentTrack;
 
 	private int currentTrackIndex = 1;
-	private int lastFollowedRouteHashCode = -1;
-	private boolean isAutomaticallyRecording = false;
+	private boolean shouldAutomaticallyRecord = true;
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
@@ -122,6 +123,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		gpxFile.showCurrentTrack = true;
 		currentTrack.setGpxFile(gpxFile, app);
 		prepareCurrentTrackForRecording();
+		app.getRoutingHelper().addListener(this);
 	}
 
 	@Override
@@ -531,9 +533,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		boolean record = false;
 		if (location != null && SimulationProvider.isNotSimulatedLocation(location)
 				&& PluginsHelper.isActive(OsmandMonitoringPlugin.class)) {
-			if ((shouldRecordAutomatically()) && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
-				lastFollowedRouteHashCode = getCurrentRouteHashCode();
-				isAutomaticallyRecording = true;
+			if ((isRecordingAutomatically()) && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
 					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
@@ -829,8 +829,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void onStopRecording(){
-		isAutomaticallyRecording = false;
-		lastFollowedRouteHashCode = getCurrentRouteHashCode();
+		shouldAutomaticallyRecord = false;
 	}
 
 	public boolean getIsRecording() {
@@ -842,18 +841,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
 				&& lastRoutingApplicationMode == settings.getApplicationMode()
 				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get() &&
-				isAutomaticallyRecording);
-	}
-
-	private boolean shouldRecordAutomatically() {
-		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
-				&& lastRoutingApplicationMode == settings.getApplicationMode()
-				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get()
-				&& ((lastFollowedRouteHashCode != getCurrentRouteHashCode() && app.getRoutingHelper().isRouteNew()) || isAutomaticallyRecording));
-	}
-
-	private int getCurrentRouteHashCode() {
-		return app.getRoutingHelper().getRoute().hashCode();
+				shouldAutomaticallyRecord);
 	}
 
 	public float getDistance() {
@@ -896,5 +884,19 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	@NonNull
 	public SelectedGpxFile getCurrentTrack() {
 		return currentTrack;
+	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+	}
+
+	@Override
+	public void routeWasCancelled() {
+		shouldAutomaticallyRecord = true;
+	}
+
+	@Override
+	public void routeWasFinished() {
+		shouldAutomaticallyRecord = true;
 	}
 }
