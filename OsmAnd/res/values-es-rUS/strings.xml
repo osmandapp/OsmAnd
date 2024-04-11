@@ -978,7 +978,7 @@
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
-    <string name="local_openstreetmap_descr_title">Edición OSM asíncrona:</string>
+    <string name="local_openstreetmap_descr_title">Edición de OSM asíncrona:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM en la base de datos del dispositivo.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo del seguimiento en línea.</string>
@@ -5689,4 +5689,6 @@
     <string name="unchanged_parameter_summary">Cada traza conservará sus propios parámetros.</string>
     <string name="shared_string_unchanged">Sin cambios</string>
     <string name="map_widget_map_scale">Escala del mapa</string>
+    <string name="fix_north_up">Activar Norte fijo arriba</string>
+    <string name="fix_north_up_descr">No rotar el mapa con gestos, en la orientación «Norte arriba»</string>
 </resources>
