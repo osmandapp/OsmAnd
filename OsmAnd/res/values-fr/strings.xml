@@ -5645,9 +5645,9 @@
     <string name="rendering_attr_padusHideBoundaries_name">Masquer les limites des terrains publiques</string>
     <string name="rendering_attr_padusHideBoundaries_description">Masquer les limites des terrains publiques mais afficher les surfaces</string>
     <string name="rendering_attr_padusDisplayMode_name">Mode d\'affichage des terrains publiques</string>
-    <string name="fix_north_up_descr">Ne pas tourner la carte avec les gestes avec l\'orientation de carte Nord en Haut</string>
-    <string name="fix_north_up">Activer le Nord en Haut fixe</string>
-    <string name="release_4_7">• Nouveau widget \"Conteur de vitesse\" compatible avec Android Auto
+    <string name="fix_north_up_descr">Bloquer la rotation de la carte via les gestes lorsque l\'orientation de la carte est Nord en Haut</string>
+    <string name="fix_north_up">Activer le Nord Fixe en haut</string>
+    <string name="release_4_7">• Nouveau widget \"Compteur de vitesse\" compatible avec Android Auto
 \n
 \n • Configurer l\'écran de la carte en ajoutant plusieurs boutons \"Action rapide\"
 \n
@@ -5657,11 +5657,11 @@
 \n
 \n • Ajout du support pour d\'autres tags GPX
 \n
-\n • Personnalisation \"Distance durant navigation\": choisir entre des nombres précis ou arrondis
+\n • Personnalisation \"Distance durant la navigation\": choisir entre des nombres précis ou arrondis
 \n
 \n • Interface graphique unifiée pour la sélection de traces
 \n
-\n • Authentification à OpenStreetMap changé pour OAuth 2.0
+\n • Authentification à OpenStreetMap changée pour OAuth 2.0
 \n
 \n</string>
 </resources>
