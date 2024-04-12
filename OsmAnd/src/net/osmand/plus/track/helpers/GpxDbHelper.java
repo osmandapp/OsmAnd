@@ -239,9 +239,10 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@NonNull
 	public List<GpxDataItem> getSplitItems() {
+		GpxAppearanceHelper appearanceHelper = new GpxAppearanceHelper(app);
 		List<GpxDataItem> items = new ArrayList<>();
 		for (GpxDataItem item : getItems()) {
-			int splitType = item.getParameter(SPLIT_TYPE);
+			int splitType = appearanceHelper.getParameter(item, SPLIT_TYPE);
 			if (splitType != 0) {
 				items.add(item);
 			}

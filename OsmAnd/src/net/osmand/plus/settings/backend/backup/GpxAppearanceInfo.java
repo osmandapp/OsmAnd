@@ -62,13 +62,13 @@ public class GpxAppearanceInfo {
 
 	public GpxAppearanceInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		color = helper.getAppearanceParameter(item, COLOR);
-		width = helper.getAppearanceParameter(item, WIDTH);
-		showArrows = helper.getAppearanceParameter(item, SHOW_ARROWS);
-		showStartFinish = helper.getAppearanceParameter(item, SHOW_START_FINISH);
-		splitType = helper.getAppearanceParameter(item, SPLIT_TYPE);
-		splitInterval = helper.getAppearanceParameter(item, SPLIT_INTERVAL);
-		coloringType = helper.getAppearanceParameter(item, COLORING_TYPE);
+		color = helper.getParameter(item, COLOR);
+		width = helper.getParameter(item, WIDTH);
+		showArrows = helper.getParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
+		splitType = helper.getParameter(item, SPLIT_TYPE);
+		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
+		coloringType = helper.getParameter(item, COLORING_TYPE);
 
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
