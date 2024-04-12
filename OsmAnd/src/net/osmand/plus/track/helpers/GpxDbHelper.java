@@ -1,6 +1,5 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 
 import android.os.AsyncTask;
@@ -14,7 +13,6 @@ import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -57,7 +55,6 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	public void loadItems() {
 		loadGpxItems();
 		loadGpxDirItems();
-		loadNewGpxItems();
 	}
 
 	public void loadGpxItems() {
@@ -86,25 +83,6 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			}
 		}
 		LOG.info("Time to loadGpxDirItems " + (System.currentTimeMillis() - start) + " ms items count " + dataItems.size());
-	}
-
-	private void loadNewGpxItems() {
-		long start = System.currentTimeMillis();
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		List<File> files = FileUtils.collectFiles(dir, true);
-		for (File file : files) {
-			if (!file.exists()) {
-				continue;
-			}
-			if (GpxUiHelper.isGpxFile(file)) {
-				if (!hasGpxDataItem(file)) {
-					add(new GpxDataItem(app, file));
-				}
-			} else if (file.isDirectory() && !hasGpxDirItem(file)) {
-				add(new GpxDirItem(app, file));
-			}
-		}
-		LOG.info("Time to loadNewGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + files.size());
 	}
 
 	private void putToCache(@NonNull DataItem item) {
