@@ -346,8 +346,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		pnt.index = (initialPoint ? INITIAL_POINT_INDEX_SHIFT : 0) + locationIdx;
 
 		if (hasMapRenderer()) {
-			pnt.tx31= MapUtils.get31TileNumberX(longitude);
-			pnt.ty31=MapUtils.get31TileNumberY(latitude);
+			pnt.tx31 = MapUtils.get31TileNumberX(longitude);
+			pnt.ty31 = MapUtils.get31TileNumberY(latitude);
+			pnt.height = locationProvider.getHeight(locationIdx);
 			pnt.style = style;
 			points.add(pnt);
 			return;
@@ -367,7 +368,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			angle = (angleRad * 180 / Math.PI) + 90f;
 		}
 		double distSegment = dist != 0 ? dist : Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-		pnt.style = style;
 		pnt.tx = x;
 		pnt.ty = y;
 		pnt.angle = angle;
@@ -473,15 +473,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	}
 
 
-	private float getLocationHeight(int index) {
-		GeometryWayProvider locationProvider = getLocationProvider();
-		if(locationProvider != null) {
-			return locationProvider.getHeight(index);
-		} else {
-			return 0;
-		}
-	}
-
 	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
 	                             List<GeometryWayPoint> points, double distToFinish) {
 		boolean hasMapRenderer = hasMapRenderer();
@@ -507,13 +498,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					List<DrawPathData31> pathsData = GeometryWayPathAlgorithms.calculatePath(points);
 					GeometryWayProvider locationProvider = getLocationProvider();
 					if (!Algorithms.isEmpty(pathsData)) {
-						for (DrawPathData31 p : pathsData) {
-							p.heights = new ArrayList<>();
-							for (int i = 0; i < p.indexes.size(); i++) {
-								p.heights.add(locationProvider != null ? 0 :
-										locationProvider.getHeight(p.indexes.get(i)));
-							}
-						}
 						drawPathLine(tb, pathsData);
 					}
 					pathsData31Cache.add(pathsData);

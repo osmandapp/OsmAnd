@@ -267,8 +267,6 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		boolean rtl = AndroidUtils.isLayoutRtl(getContext());
 
 		List<GeometryWayPoint> src = new ArrayList<>(points);
-//		List<Float> srcTx = new ArrayList<>(tx);
-//		List<Float> srcTy = new ArrayList<>(ty);
 		int[] colorsArray = new int[points.size() + lengthRatios.size()];
 		colorsArray[0] = palette.get(0);
 		colorsArray[colorsArray.length - 1] = palette.get(palette.size() - 1);
