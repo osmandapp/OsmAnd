@@ -5657,4 +5657,5 @@
     <string name="distance_during_navigation_description">Alegeți modul cum sunt afișate informațiile privind distanța în widgeturile de navigație (distanța până la punct, următoarea curbă, benzi).
 \n
 \nAlegeți \"%1$s\" pentru numere exacte sau \"%2$s\" pentru o citire mai ușoară.</string>
+    <string name="fix_north_up_descr">Nu rotiți harta cu ajutorul gesturilor în orientarea hărții spre nord în sus</string>
 </resources>
