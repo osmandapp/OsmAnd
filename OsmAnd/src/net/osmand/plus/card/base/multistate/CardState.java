@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.R;
+
 public class CardState {
 
 	private final static int INVALID_ID = -1;
@@ -24,6 +26,11 @@ public class CardState {
 	public CardState(@StringRes int titleId) {
 		this.titleId = titleId;
 		this.title = null;
+	}
+
+	@StringRes
+	public int getTitleId() {
+		return titleId;
 	}
 
 	@NonNull
@@ -50,5 +57,9 @@ public class CardState {
 	public CardState setShowTopDivider(boolean showTopDivider) {
 		this.showTopDivider = showTopDivider;
 		return this;
+	}
+
+	public boolean isOriginal() {
+		return titleId == R.string.shared_string_original;
 	}
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.slider.SliderCard;
 import net.osmand.plus.card.base.slider.moded.data.SliderMode;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.IconToggleButton.IconRadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
@@ -93,6 +94,6 @@ public class ModedSliderCard extends SliderCard implements IModedSliderComponent
 
 	@Override
 	public void updateSliderVisibility() {
-		updateVisibility(R.id.slider_component_container, controller.isSliderVisible());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.slider_component_container), controller.isSliderVisible());
 	}
 }

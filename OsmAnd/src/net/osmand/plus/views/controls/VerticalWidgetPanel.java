@@ -238,14 +238,6 @@ public class VerticalWidgetPanel extends LinearLayout {
 		}
 	}
 
-	private void updateFullRowState(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
-		for (MapWidgetInfo widgetInfo : widgetsInRow) {
-			if (widgetInfo.widget instanceof SimpleWidget) {
-				((SimpleWidget) widgetInfo.widget).updateFullRowState(visibleViewsInRowCount <= 1);
-			}
-		}
-	}
-
 	@NonNull
 	private List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
@@ -345,7 +337,6 @@ public class VerticalWidgetPanel extends LinearLayout {
 					showBottomDivider = false;
 				}
 			}
-			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 			AndroidUiHelper.updateVisibility(bottomDivider, (visibleViewsInRowCount > 0 && showBottomDivider) && !lastRow);
 		}

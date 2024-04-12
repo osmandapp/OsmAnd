@@ -1,6 +1,11 @@
 package net.osmand.gpx;
 
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public enum GpxParameter {
 
@@ -103,29 +108,40 @@ public enum GpxParameter {
 		return analysisParameter;
 	}
 
-	public boolean isValidValue(Object value) {
-		return value == null && isNullSupported() || value != null && getTypeClass() == value.getClass();
-	}
-
 	public Object convertToDbValue(Object value) {
-		if (getTypeClass() == Boolean.class) {
-			return value instanceof Boolean && ((Boolean) value) ? 1 : 0;  // 1 = true, 0 = false
-		} else if (this == COLOR) {
-			if (value instanceof Integer) {
-				int color = (Integer) value;
-				return color == 0 ? "" : Algorithms.colorToString(color);
+		if (value != null) {
+			if (getTypeClass() == Boolean.class) {
+				return value instanceof Boolean && ((Boolean) value) ? 1 : 0;  // 1 = true, 0 = false
+			} else if (this == COLOR) {
+				if (value instanceof Integer) {
+					int color = (Integer) value;
+					return color == 0 ? "" : Algorithms.colorToString(color);
+				}
 			}
 		}
 		return value;
 	}
 
-	public int getSelectColumnIndex() {
-		return ordinal();
-	}
-
-
 	@Override
 	public String toString() {
 		return columnName;
+	}
+
+	public boolean isAppearanceParameter() {
+		return CollectionUtils.containsAny(getAppearanceParameters(), this);
+	}
+
+	public static List<GpxParameter> getAppearanceParameters() {
+		return Arrays.asList(COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS,
+				SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL);
+	}
+
+	public static List<GpxParameter> getGpxDirParameters() {
+		List<GpxParameter> list = new ArrayList<>();
+		list.add(FILE_NAME);
+		list.add(FILE_DIR);
+		list.add(FILE_LAST_MODIFIED_TIME);
+		list.addAll(getAppearanceParameters());
+		return list;
 	}
 }

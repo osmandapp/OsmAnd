@@ -296,7 +296,7 @@ public class BackupHelper {
 				}
 			}
 		} else {
-			FileUtils.collectDirFiles(item.getFile(), filesToUpload);
+			FileUtils.collectFiles(item.getFile(), filesToUpload, false);
 		}
 		return filesToUpload;
 	}

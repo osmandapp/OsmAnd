@@ -592,9 +592,9 @@
     <string name="navigate_point_top_text">Földrajzi szélességi és hosszúsági fok megadása a kijelölt formátumban (F - fok, P - perc, M - másodperc)</string>
     <string name="navigate_point_latitude">Szélességi fok</string>
     <string name="navigate_point_longitude">Hosszúsági fok</string>
-    <string name="navigate_point_format_D">Fok (4 tizedessel)</string>
-    <string name="navigate_point_format_DM">Fok:perc (5 tizedessel)</string>
-    <string name="navigate_point_format_DMS">Fok:perc:mp (5 tizedessel)</string>
+    <string name="navigate_point_format_D">FFF.FFFFF</string>
+    <string name="navigate_point_format_DM">FFF PP.PPP</string>
+    <string name="navigate_point_format_DMS">FFF PP MM.M</string>
     <string name="shared_string_show_on_map">Megjelenítés a térképen</string>
     <string name="search_address_top_text">Cím</string>
     <string name="search_address_region">Régió</string>
@@ -3312,7 +3312,7 @@
     <string name="permission_is_required">A beállítás használatához engedélyre van szükség.</string>
     <string name="rearrange_categories">Kategóriák átrendezése</string>
     <string name="create_custom_categories_list_promo">Lista sorrendjének módosítása és kategóriák elrejtése. Minden módosítás profilként importálható és exportálható.</string>
-    <string name="add_new_custom_category_button_promo">Egyéni kategória hozzáadása egy vagy több kategória kijelölésével.</string>
+    <string name="add_new_custom_category_button_promo">Adjon hozzá új egyéni kategóriát egy vagy több kategória kijelölésével.</string>
     <string name="shared_string_available">Rendelkezésre áll</string>
     <string name="add_custom_category">Egyéni kategória hozzáadása</string>
     <string name="rendering_attr_streetLightingNight_name">Csak éjszaka jelenjék meg</string>
@@ -4056,7 +4056,7 @@
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak egységváltozata</string>
     <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
-    <string name="shared_string_min_height">Legkisebb magasság</string>
+    <string name="shared_string_min_height">Min. magasság</string>
     <string name="shared_string_max_height">Max. magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
     <string name="recorded_description">A felvett hang szebben hangzik, de csak előre rögzített kifejezéseket – bekanyarodási utasításokat – képes kiejteni. Utcaneveket vagy érdekes pontokat nem tud bemondani.</string>
@@ -4562,7 +4562,7 @@
     <string name="page_number">%1$s. oldal</string>
     <string name="map_widget_altitude">Jelenlegi pozíció magassága</string>
     <string name="shared_string_symbol">Szimbólum</string>
-    <string name="no_widgets_descr">Egy vagy több widget hozzáadása a rendelkezésre állók közül.</string>
+    <string name="no_widgets_descr">Adjon hozzá egy vagy több widgetet a rendelkezésre állók közül.</string>
     <string name="no_widgets_here_yet">Itt még nincs widget</string>
     <string name="available_widgets">Elérhető widgetek</string>
     <string name="snackbar_page_removed">A(z) „%1$s oldal” el lett távolítva.</string>
@@ -5672,4 +5672,6 @@
     <string name="gpx_approximation_geo_java">Geometriaalapú (Java, gyors)</string>
     <string name="gpx_approximation_cpp">Útvonalalapú (C++)</string>
     <string name="gpx_approximation_java">Útvonalalapú (Java)</string>
+    <string name="fix_north_up">Fent rögzített északi irány engedélyezése</string>
+    <string name="fix_north_up_descr">Ne forgassa el a térképet gesztusokkal, ha a fent rögzített északi irány be van kapcsolva</string>
 </resources>

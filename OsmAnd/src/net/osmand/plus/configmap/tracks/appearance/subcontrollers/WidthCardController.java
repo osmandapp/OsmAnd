@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.util.Algorithms.parseIntSilently;
+import static net.osmand.gpx.GpxParameter.WIDTH;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -23,6 +23,7 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.fragments.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,18 +37,21 @@ public class WidthCardController extends BaseMultiStateCardController {
 	private static final int CUSTOM_WIDTH_MAX = 24;
 
 	private final AppearanceData appearanceData;
+	private final boolean addUnchanged;
 
 	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
 	private ITrackWidthSelectedListener listener;
 
-	public WidthCardController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
-		super(app, appearanceData.getWidthValue());
-		this.appearanceData = appearanceData;
+	public WidthCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
+		super(app);
+		this.appearanceData = data;
+		this.addUnchanged = addUnchanged;
+		this.selectedState = findCardState(data.getParameter(WIDTH));
 	}
 
-	public void setListener(@NonNull ITrackWidthSelectedListener listener) {
+	public void setListener(@Nullable ITrackWidthSelectedListener listener) {
 		this.listener = listener;
 	}
 
@@ -68,20 +72,25 @@ public class WidthCardController extends BaseMultiStateCardController {
 	@NonNull
 	@Override
 	public String getCardStateSelectorTitle() {
-		return selectedCardState.getTag() == null
-				? selectedCardState.toHumanString(app)
+		return selectedState.getTag() == null
+				? selectedState.toHumanString(app)
 				: getWidthComponentController().getSummary(app);
 	}
 
 	@Override
 	protected void onSelectCardState(@NonNull CardState cardState) {
-		String widthValue = getWidthValue(cardState);
-		onWidthValueSelected(widthValue);
+		if (cardState.isOriginal()) {
+			selectedState = cardState;
+			card.updateSelectedCardState();
+			appearanceData.resetParameter(WIDTH);
+		} else {
+			widthValueSelected(getWidthValue(cardState));
+		}
 	}
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
-		if (selectedCardState.getTag() == null) {
+		if (selectedState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {
 			bindWidthComponentCardIfNeeded(activity, container);
@@ -113,15 +122,18 @@ public class WidthCardController extends BaseMultiStateCardController {
 			container.addView(widthComponentCard.build(activity));
 			updateColorItems();
 		}
-		controller.askSelectWidthMode(getWidthValue(selectedCardState));
+		controller.askSelectWidthMode(getWidthValue(selectedState));
 		container.setTag(WIDTH_COMPONENT_CARD_ID);
 	}
 
-	private void onWidthValueSelected(@Nullable String widthValue) {
-		selectedCardState = findCardStateByWidthValue(widthValue);
-		cardInstance.updateSelectedCardState();
-		appearanceData.setWidthValue(widthValue);
-		listener.onTrackWidthSelected(widthValue);
+	private void widthValueSelected(@Nullable String widthValue) {
+		selectedState = findCardStateByWidthValue(widthValue);
+		card.updateSelectedCardState();
+		appearanceData.setParameter(WIDTH, widthValue);
+
+		if (listener != null) {
+			listener.onTrackWidthSelected(widthValue);
+		}
 	}
 
 	public void updateColorItems() {
@@ -132,10 +144,10 @@ public class WidthCardController extends BaseMultiStateCardController {
 	@NonNull
 	private WidthComponentController getWidthComponentController() {
 		if (widthComponentController == null) {
-			String selectedWidth = appearanceData.getWidthValue();
+			String selectedWidth = appearanceData.getParameter(WIDTH);
 			WidthMode widthMode = WidthMode.valueOfKey(selectedWidth);
-			int customValue = parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
-			widthComponentController = new WidthComponentController(widthMode, customValue, this::onWidthValueSelected) {
+			int customValue = Algorithms.parseIntSilently(selectedWidth, CUSTOM_WIDTH_MIN);
+			widthComponentController = new WidthComponentController(widthMode, customValue, this::widthValueSelected) {
 				@NonNull
 				@Override
 				public Limits getSliderLimits() {
@@ -179,14 +191,17 @@ public class WidthCardController extends BaseMultiStateCardController {
 	@NonNull
 	@Override
 	protected List<CardState> collectSupportedCardStates() {
-		List<CardState> result = new ArrayList<>();
-		result.add(new CardState(R.string.shared_string_unchanged));
-		for (WidthMode widthMode : WidthMode.values()) {
-			result.add(new CardState(widthMode.getTitleId())
-					.setShowTopDivider(widthMode.ordinal() == 0)
-					.setTag(widthMode)
-			);
+		List<CardState> list = new ArrayList<>();
+		if (addUnchanged) {
+			list.add(new CardState(R.string.shared_string_unchanged));
 		}
-		return result;
+		list.add(new CardState(R.string.shared_string_original));
+
+		for (WidthMode widthMode : WidthMode.values()) {
+			list.add(new CardState(widthMode.getTitleId())
+					.setShowTopDivider(widthMode.ordinal() == 0)
+					.setTag(widthMode));
+		}
+		return list;
 	}
 }

@@ -178,9 +178,9 @@ public class AndroidUiHelper {
 				orientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
 	}
 
-	public static void setStatusBarContentColor(@Nullable View view, boolean isNightMode) {
+	public static void setStatusBarContentColor(@Nullable View view, boolean nightMode) {
 		if (view != null) {
-			setStatusBarContentColor(view, view.getSystemUiVisibility(), !isNightMode);
+			setStatusBarContentColor(view, view.getSystemUiVisibility(), !nightMode);
 		}
 	}
 

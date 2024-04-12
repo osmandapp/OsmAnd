@@ -1,11 +1,5 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
@@ -19,15 +13,23 @@ import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
@@ -58,27 +60,28 @@ public class GpxAppearanceInfo {
 	public GpxAppearanceInfo() {
 	}
 
-	public GpxAppearanceInfo(@NonNull GpxDataItem dataItem) {
-		color = dataItem.getParameter(COLOR);
-		width = dataItem.getParameter(WIDTH);
-		showArrows = dataItem.getParameter(SHOW_ARROWS);
-		showStartFinish = dataItem.getParameter(SHOW_START_FINISH);
-		splitType = dataItem.getParameter(SPLIT_TYPE);
-		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
-		coloringType = dataItem.getParameter(COLORING_TYPE);
+	public GpxAppearanceInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
+		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
+		color = helper.getParameter(item, COLOR);
+		width = helper.getParameter(item, WIDTH);
+		showArrows = helper.getParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
+		splitType = helper.getParameter(item, SPLIT_TYPE);
+		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
+		coloringType = helper.getParameter(item, COLORING_TYPE);
 
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
 			timeSpan = analysis.getTimeSpan();
 			wptPoints = analysis.getWptPoints();
 			totalDistance = analysis.getTotalDistance();
 		}
-		smoothingThreshold = dataItem.getParameter(SMOOTHING_THRESHOLD);
-		minFilterSpeed = dataItem.getParameter(MIN_FILTER_SPEED);
-		maxFilterSpeed = dataItem.getParameter(MAX_FILTER_SPEED);
-		minFilterAltitude = dataItem.getParameter(MIN_FILTER_ALTITUDE);
-		maxFilterAltitude = dataItem.getParameter(MAX_FILTER_ALTITUDE);
-		maxFilterHdop = dataItem.getParameter(MAX_FILTER_HDOP);
+		smoothingThreshold = item.getParameter(SMOOTHING_THRESHOLD);
+		minFilterSpeed = item.getParameter(MIN_FILTER_SPEED);
+		maxFilterSpeed = item.getParameter(MAX_FILTER_SPEED);
+		minFilterAltitude = item.getParameter(MIN_FILTER_ALTITUDE);
+		maxFilterAltitude = item.getParameter(MAX_FILTER_ALTITUDE);
+		maxFilterHdop = item.getParameter(MAX_FILTER_HDOP);
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {
@@ -182,7 +185,7 @@ public class GpxAppearanceInfo {
 		}
 	}
 
-	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name, double value) throws JSONException{
+	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name, double value) throws JSONException {
 		if (!Double.isNaN(value)) {
 			json.putOpt(name, value);
 		}

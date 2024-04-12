@@ -15,13 +15,11 @@ public class MultiStateCard extends BaseCard implements IMultiStateCard {
 
 	protected final IMultiStateCardController controller;
 
-	public MultiStateCard(@NonNull FragmentActivity activity,
-	                      @NonNull IMultiStateCardController cardController) {
-		this(activity, cardController, true);
+	public MultiStateCard(@NonNull FragmentActivity activity, @NonNull IMultiStateCardController controller) {
+		this(activity, controller, true);
 	}
 
-	public MultiStateCard(@NonNull FragmentActivity activity,
-	                      @NonNull IMultiStateCardController controller, boolean usedOnMap) {
+	public MultiStateCard(@NonNull FragmentActivity activity, @NonNull IMultiStateCardController controller, boolean usedOnMap) {
 		super(activity, usedOnMap);
 		this.controller = controller;
 		controller.bindComponent(this);

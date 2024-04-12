@@ -5678,4 +5678,6 @@
     <string name="gpx_approximation_cpp">Berbasis perutean (C++)</string>
     <string name="gpx_approximation_java">Berbasis perutean (Java)</string>
     <string name="gpx_approximation_geo_java">Berbasis geometri (Java, cepat)</string>
+    <string name="fix_north_up_descr">Jangan putar peta dengan gestur dalam orientasi peta Utara Atas</string>
+    <string name="fix_north_up">Aktifkan Utara Tetap Atas</string>
 </resources>

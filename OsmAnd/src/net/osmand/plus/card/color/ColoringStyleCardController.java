@@ -22,9 +22,8 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 
 	private IColorCardControllerListener externalListener;
 
-	public ColoringStyleCardController(@NonNull OsmandApplication app,
-	                                   @Nullable ColoringStyle selectedColoringStyle) {
-		super(app, selectedColoringStyle);
+	public ColoringStyleCardController(@NonNull OsmandApplication app) {
+		super(app);
 	}
 
 	public void setListener(@NonNull IColorCardControllerListener externalListener) {
@@ -45,7 +44,7 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	@NonNull
 	@Override
 	public String getCardStateSelectorTitle() {
-		return selectedCardState.toHumanString(app);
+		return selectedState.toHumanString(app);
 	}
 
 	@Override
@@ -62,19 +61,19 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 
 	@Nullable
 	public ColoringStyle getSelectedColoringStyle() {
-		return (ColoringStyle) selectedCardState.getTag();
+		return (ColoringStyle) selectedState.getTag();
 	}
 
 	public void askSelectColoringStyle(@Nullable ColoringStyle coloringStyle) {
-		ColoringStyle selectedColoringStyle = (ColoringStyle) selectedCardState.getTag();
+		ColoringStyle selectedColoringStyle = (ColoringStyle) selectedState.getTag();
 		if (!Objects.equals(selectedColoringStyle, coloringStyle)) {
-			selectedCardState = findCardState(coloringStyle);
+			selectedState = findCardState(coloringStyle);
 			onColoringStyleSelected(coloringStyle);
 		}
 	}
 
 	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
-		cardInstance.updateSelectedCardState();
+		card.updateSelectedCardState();
 		externalListener.onColoringStyleSelected(coloringStyle);
 	}
 
@@ -117,5 +116,5 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	protected abstract ColoringType[] getSupportedColoringTypes();
 
 	public interface IColorCardControllerListener
-			extends OnSelectColoringStyleListener, OnColorsPaletteListener { }
+			extends OnSelectColoringStyleListener, OnColorsPaletteListener {}
 }

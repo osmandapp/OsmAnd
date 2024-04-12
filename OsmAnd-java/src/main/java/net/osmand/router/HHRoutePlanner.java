@@ -185,6 +185,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		boolean recalc = false;
 		double firstIterationTime = 0; 
 		int iteration = 0;
+		int calcCount = 0;
 		while (route == null) {
 			progress.hhIteration(HHIteration.ROUTING);
 			iteration++;
@@ -195,6 +196,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Routing...");
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
+			calcCount++;
 			if (progress.isCancelled) {
 				return cancelledStatus();
 			}
@@ -214,7 +216,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printf((firstIterationTime == 0 || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, "%.2f ms\n", time / 1e6);
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
-				if (hctx.stats.prepTime + hctx.stats.routingTime > hctx.config.MAX_TIME_REITERATION_MS) {
+				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
 					return new HHNetworkRouteRes(" Too many route recalculations (maps are outdated).");
 				}
 				hctx.clearVisited(stPoints, endPoints);

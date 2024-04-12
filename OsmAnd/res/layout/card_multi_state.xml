@@ -3,6 +3,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
 	android:orientation="vertical">
 
 	<LinearLayout
@@ -50,9 +51,9 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_gravity="center_vertical"
 				android:layout_marginStart="@dimen/dashFavIconMargin"
-				android:scaleType="center"
-				android:duplicateParentState="true"
 				android:clickable="false"
+				android:duplicateParentState="true"
+				android:scaleType="center"
 				android:src="@drawable/ic_action_arrow_down"
 				android:tint="?attr/default_icon_color" />
 

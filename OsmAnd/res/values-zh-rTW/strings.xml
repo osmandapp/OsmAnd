@@ -5664,4 +5664,6 @@
     <string name="gpx_approximation_cpp">以路徑規劃為基礎 (C++)</string>
     <string name="gpx_approximation_java">以路徑規劃為基礎 (Java)</string>
     <string name="gpx_approximation_geo_java">以幾何為基礎 (Java，快速)</string>
+    <string name="fix_north_up_descr">請勿在北方向上的地圖中使用手勢旋轉地圖</string>
+    <string name="fix_north_up">啟用固定北方向上</string>
 </resources>

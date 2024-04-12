@@ -375,6 +375,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void stopRecording() {
+		app.getSavingTrackHelper().onStopRecording();
 		settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
 		if (app.getNavigationService() != null) {
 			app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_GPX);

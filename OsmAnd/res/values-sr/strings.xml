@@ -5671,4 +5671,6 @@
     <string name="gpx_approximation_cpp">Рутирање-базирано (C++)</string>
     <string name="gpx_approximation_geo_java">Рутирање-базирано (Јава, брзо)</string>
     <string name="gpx_approximation_java">Рутирање-базирано (Јава)</string>
+    <string name="fix_north_up_descr">Не ротирајте мапу покретима у оријентацији карте Север Горе</string>
+    <string name="fix_north_up">Омогући Фиксни Север Горе</string>
 </resources>
