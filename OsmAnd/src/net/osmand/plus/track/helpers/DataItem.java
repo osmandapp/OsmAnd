@@ -47,7 +47,7 @@ public abstract class DataItem {
 		if (map.containsKey(parameter)) {
 			value = map.get(parameter);
 		}
-		if (!parameter.isAppearanceParameter()) {
+		if (value == null && !parameter.isAppearanceParameter()) {
 			value = parameter.getDefaultValue();
 		}
 		return ((Class<T>) parameter.getTypeClass()).cast(value);
