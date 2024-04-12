@@ -369,7 +369,7 @@ public class GPXDatabase {
 
 	@Nullable
 	public GpxDataItem getGpxDataItem(@NonNull File file) {
-		if (!file.isDirectory()) {
+		if (GpxUiHelper.isGpxFile(file)) {
 			return (GpxDataItem) getDataItem(file);
 		}
 		return null;

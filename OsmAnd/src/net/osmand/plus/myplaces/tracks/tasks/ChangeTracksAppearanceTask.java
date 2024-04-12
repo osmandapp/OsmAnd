@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -23,10 +26,14 @@ import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.Set;
 
 public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Void> {
+
+	private static final Log LOG = PlatformUtil.getLog(ChangeTracksAppearanceTask.class);
 
 	private final GpxDbHelper gpxDbHelper;
 	private final GpxSelectionHelper selectionHelper;
@@ -48,14 +55,11 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	@Override
 	protected Void doInBackground(Void... params) {
 		boolean resetAnything = data.shouldResetAnything();
-		GpxDataItemCallback callback = getGpxDataItemCallback();
 		for (TrackItem item : items) {
 			File file = item.getFile();
 			if (file != null) {
-				GpxDataItem dataItem = gpxDbHelper.getItem(file, callback);
-				if (dataItem != null) {
-					updateTrackAppearance(dataItem);
-				}
+				GPXFile gpxFile = resetAnything ? getGpxFile(file) : null;
+				updateTrackAppearance(file, gpxFile);
 			} else if (item.isShowCurrentTrack()) {
 				updateCurrentTrackAppearance();
 			}
@@ -63,21 +67,42 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		return null;
 	}
 
-	private void updateTrackAppearance(@NonNull GpxDataItem item) {
+	private void updateTrackAppearance(@NonNull File file, @Nullable GPXFile gpxFile) {
+		GpxDataItemCallback callback = getGpxDataItemCallback(gpxFile);
+		GpxDataItem item = gpxDbHelper.getItem(file, callback);
+		if (item != null) {
+			updateTrackAppearance(item, gpxFile);
+		}
+	}
+
+	@Nullable
+	private GPXFile getGpxFile(@NonNull File file) {
+		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(file.getAbsolutePath());
+		GPXFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : GPXUtilities.loadGPXFile(file);
+		if (gpxFile.error != null) {
+			LOG.error("Failed read gpx file", gpxFile.error);
+		}
+		return gpxFile.error == null ? gpxFile : null;
+	}
+
+	private void updateTrackAppearance(@NonNull GpxDataItem item, @Nullable GPXFile gpxFile) {
 		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
-			setParameterIfEdited(item, parameter, data.getParameter(parameter));
+			if (data.shouldResetParameter(parameter)) {
+				if (gpxFile != null) {
+					item.readGpxAppearanceParameter(gpxFile, parameter);
+				}
+			} else {
+				Object value = data.getParameter(parameter);
+				if (value != null) {
+					item.setParameter(parameter, value);
+				}
+			}
 		}
 		app.getGpxDbHelper().updateDataItem(item);
 
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
 		if (selectedGpxFile != null) {
 			selectedGpxFile.resetSplitProcessed();
-		}
-	}
-
-	private void setParameterIfEdited(@NonNull GpxDataItem item, @NonNull GpxParameter parameter, @Nullable Object value) {
-		if (value != null) {
-			item.setParameter(parameter, value);
 		}
 	}
 
@@ -106,7 +131,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	}
 
 	@NonNull
-	private GpxDataItemCallback getGpxDataItemCallback() {
+	private GpxDataItemCallback getGpxDataItemCallback(@Nullable GPXFile gpxFile) {
 		return new GpxDataItemCallback() {
 			@Override
 			public boolean isCancelled() {
@@ -115,7 +140,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 
 			@Override
 			public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-				updateTrackAppearance(item);
+				updateTrackAppearance(item, gpxFile);
 			}
 		};
 	}
