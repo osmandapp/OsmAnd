@@ -67,7 +67,7 @@ public class GeometryWayPathAlgorithms {
 		int width = tb.getPixWidth();
 		int cnt = 0;
 		boolean hasStyles = (styles != null && styles.size() == xs.size());
-		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : first.style;
+		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : (first == null ? null : first.style);
 		Path path = new Path();
 		float prevXorig = prevX;
 		float prevYorig = prevY;
@@ -120,7 +120,7 @@ public class GeometryWayPathAlgorithms {
 			prevX = currX;
 			prevY = currY;
 
-			if (hasStyles || first.style != null) {
+			if (hasStyles || (first != null && first.style != null)) {
 				GeometryWayStyle<?> newStyle = pnt != null ? pnt.style : styles.get(i);
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
 					pathsData.add(new GeometryWayDrawer.DrawPathData(path, new PointF(prevXorig, prevYorig),
