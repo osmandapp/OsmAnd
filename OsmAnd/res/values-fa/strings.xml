@@ -4446,7 +4446,7 @@
     <string name="topography_maps">نقشه توپوگرافی</string>
     <string name="key_event_category_actions">کنش ها</string>
     <string name="add_new_button">افزودن دکمه</string>
-    <string name="use_v1_auto_zoom"></string>
+    <string name="use_v1_auto_zoom"/>
     <string name="zoom_animated">پویانمایی بزرگنمایی</string>
     <string name="discard_changes_prompt">نادیده گرفتن تغییرات؟</string>
     <string name="precise_distance_numbers">اعداد دقیق فواصل</string>
@@ -4507,5 +4507,5 @@
     <string name="shared_string_keywords">کلیدواژه ها</string>
     <string name="avg_sensor_temperature">دما، میانگین</string>
     <string name="lang_ta_in">Tamil (India)</string>
-    <string name="change_key_binding"></string>
+    <string name="change_key_binding"/>
 </resources>
