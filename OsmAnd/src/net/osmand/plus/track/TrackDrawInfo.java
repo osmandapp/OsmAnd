@@ -129,28 +129,28 @@ public class TrackDrawInfo {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		width = helper.getAppearanceParameter(item, WIDTH);
+		width = helper.getParameter(item, WIDTH);
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = helper.getAppearanceParameter(item, COLOR);
+		color = helper.getParameter(item, COLOR);
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		String type = helper.getAppearanceParameter(item, COLORING_TYPE);
+		String type = helper.getParameter(item, COLORING_TYPE);
 		coloringType = ColoringType.requireValueOf(TRACK, type);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(type);
-		splitType = helper.getAppearanceParameter(item, SPLIT_TYPE);
-		splitInterval = helper.getAppearanceParameter(item, SPLIT_INTERVAL);
-		joinSegments = helper.getAppearanceParameter(item, JOIN_SEGMENTS);
-		showArrows = helper.getAppearanceParameter(item, SHOW_ARROWS);
-		showStartFinish = helper.getAppearanceParameter(item, SHOW_START_FINISH);
+		splitType = helper.getParameter(item, SPLIT_TYPE);
+		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
+		joinSegments = helper.getParameter(item, JOIN_SEGMENTS);
+		showArrows = helper.getParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
 	}
 
 	@Nullable

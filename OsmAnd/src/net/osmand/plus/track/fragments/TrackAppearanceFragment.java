@@ -64,6 +64,7 @@ import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
@@ -678,8 +679,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void discardSplitChanges() {
 		if (gpxDataItem != null) {
-			int type = gpxDataItem.getParameter(SPLIT_TYPE);
-			double interval = gpxDataItem.getParameter(SPLIT_INTERVAL);
+			GpxAppearanceHelper appearanceHelper = new GpxAppearanceHelper(app);
+			int type = appearanceHelper.getParameter(gpxDataItem, SPLIT_TYPE);
+			double interval = appearanceHelper.getParameter(gpxDataItem, SPLIT_INTERVAL);
 			if (type != trackDrawInfo.getSplitType() || interval != trackDrawInfo.getSplitInterval()) {
 				applySplit(GpxSplitType.getSplitTypeByTypeId(type), (int) interval, interval);
 			}

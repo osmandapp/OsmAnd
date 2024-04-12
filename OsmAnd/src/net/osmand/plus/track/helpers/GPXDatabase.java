@@ -204,6 +204,9 @@ public class GPXDatabase {
 	                                   @Nullable GPXTrackAnalysis analysis) {
 		for (GpxParameter parameter : parameters) {
 			Object value = GpxDbUtils.queryColumnValue(query, parameter);
+			if (value == null && !parameter.isAppearanceParameter()) {
+				value = parameter.getDefaultValue();
+			}
 			if (parameter.isAnalysisParameter()) {
 				if (analysis != null) {
 					analysis.setGpxParameter(parameter, value);

@@ -44,6 +44,7 @@ import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -203,8 +204,8 @@ public class TrackColorController extends ColoringStyleCardController implements
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 		List<GpxDataItem> gpxDataItems = gpxDbHelper.getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
-			int color = dataItem.getParameter(COLOR);
-			if (prevColor == color) {
+			Integer color = dataItem.getParameter(COLOR);
+			if (Algorithms.objectEquals(prevColor, color)) {
 				dataItem.setParameter(COLOR, newColor);
 				gpxDbHelper.updateDataItem(dataItem);
 			}
