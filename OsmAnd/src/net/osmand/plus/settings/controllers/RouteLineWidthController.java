@@ -49,7 +49,8 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	private IRouteLineWidthControllerListener listener;
 
 	public RouteLineWidthController(@NonNull OsmandApplication app, @Nullable String widthValue) {
-		super(app, widthValue);
+		super(app);
+		this.selectedState = findCardState(widthValue);
 	}
 
 	public void setListener(@NonNull IRouteLineWidthControllerListener listener) {
@@ -77,8 +78,8 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	@NonNull
 	@Override
 	public String getCardStateSelectorTitle() {
-		return selectedCardState.getTag() == null
-				? selectedCardState.toHumanString(app)
+		return selectedState.getTag() == null
+				? selectedState.toHumanString(app)
 				: getWidthComponentController().getSummary(app);
 	}
 
@@ -91,7 +92,7 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity,
 	                              @NonNull ViewGroup container, boolean nightMode) {
-		if (selectedCardState.getTag() == null) {
+		if (selectedState.getTag() == null) {
 			bindSummaryCard(activity, container, nightMode);
 		} else {
 			bindWidthComponentCardIfNeeded(activity, container);
@@ -141,14 +142,14 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 			});
 			updateColorItems();
 		}
-		controller.askSelectWidthMode(getWidthValue(selectedCardState));
+		controller.askSelectWidthMode(getWidthValue(selectedState));
 		container.setTag(WIDTH_COMPONENT_CARD_ID);
 	}
 
 	private void onWidthValueSelected(@Nullable String widthValue) {
 		setRouteLineWidth(widthValue);
-		selectedCardState = findCardStateByWidthValue(widthValue);
-		cardInstance.updateSelectedCardState();
+		selectedState = findCardStateByWidthValue(widthValue);
+		card.updateSelectedCardState();
 		listener.onRouteLineWidthSelected(widthValue);
 	}
 

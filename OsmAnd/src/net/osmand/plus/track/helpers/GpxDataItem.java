@@ -16,32 +16,15 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
 
-public class GpxDataItem {
-
-	@NonNull
-	private final File file;
-	public final Map<GpxParameter, Object> map = new HashMap<>();
+public class GpxDataItem extends DataItem {
 
 	@Nullable
 	private GPXTrackAnalysis analysis;
 
 	public GpxDataItem(@NonNull OsmandApplication app, @NonNull File file) {
-		this.file = file;
-		initFileParameters(app);
-	}
-
-	private void initFileParameters(@NonNull OsmandApplication app) {
-		map.put(FILE_NAME, file.getName());
-		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
-		map.put(FILE_LAST_MODIFIED_TIME, file.lastModified());
-	}
-
-	@NonNull
-	public File getFile() {
-		return file;
+		super(app, file);
 	}
 
 	@Nullable
@@ -54,22 +37,8 @@ public class GpxDataItem {
 		updateAnalysisParameters();
 	}
 
-	public boolean hasData() {
-		return !map.isEmpty();
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T getParameter(@NonNull GpxParameter parameter) {
-		Object value = map.containsKey(parameter) ? map.get(parameter) : parameter.getDefaultValue();
-		return ((Class<T>) parameter.getTypeClass()).cast(value);
-	}
-
-	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {
-		if (parameter.isValidValue(value)) {
-			map.put(parameter, value);
-			return true;
-		}
-		return false;
+	public boolean isValidValue(@NonNull GpxParameter parameter, @Nullable Object value) {
+		return value == null && parameter.isNullSupported() || value != null && parameter.getTypeClass() == value.getClass();
 	}
 
 	public void copyData(@NonNull GpxDataItem item) {
@@ -84,8 +53,8 @@ public class GpxDataItem {
 
 	private void updateAnalysisParameters() {
 		boolean hasAnalysis = analysis != null;
-		for(GpxParameter gpxParameter: values()) {
-			if(gpxParameter.isAnalysisParameter()) {
+		for (GpxParameter gpxParameter : GpxParameter.values()) {
+			if (gpxParameter.isAnalysisParameter()) {
 				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
 			}
 		}
@@ -122,19 +91,5 @@ public class GpxDataItem {
 		setParameter(MAX_FILTER_ALTITUDE, GpsFilterHelper.AltitudeFilter.getMaxFilterAltitude(extensions));
 		setParameter(MAX_FILTER_HDOP, GpsFilterHelper.HdopFilter.getMaxFilterHdop(extensions));
 		setParameter(FILE_CREATION_TIME, gpxFile.metadata.time);
-	}
-
-	@Override
-	public int hashCode() {
-		return file.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof GpxDataItem)) {
-			return false;
-		}
-		GpxDataItem other = (GpxDataItem) obj;
-		return file.equals(other.file);
 	}
 }

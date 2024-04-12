@@ -312,7 +312,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		} else if (file != null) {
 			if (file.isDirectory()) {
 				List<File> filesToUpload = new ArrayList<>();
-				FileUtils.collectDirFiles(file, filesToUpload);
+				FileUtils.collectFiles(file, filesToUpload, false);
 
 				for (File file : filesToUpload) {
 					size += file.length();

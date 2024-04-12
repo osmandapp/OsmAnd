@@ -218,21 +218,7 @@ public abstract class BaseCard {
 		}
 	}
 
-	public void setBackgroundColor(@ColorInt int backgroundColor) {
-		view.setBackgroundColor(backgroundColor);
-	}
-
-	public void updateVisibility(int viewId, boolean show) {
-		if (view != null) {
-			updateVisibility(view.findViewById(viewId), show);
-		}
-	}
-
 	public void updateVisibility(boolean show) {
-		updateVisibility(view, show);
-	}
-
-	public void updateVisibility(@Nullable View view, boolean show) {
 		AndroidUiHelper.updateVisibility(view, show);
 	}
 

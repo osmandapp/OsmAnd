@@ -1,5 +1,8 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
+import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,24 +16,27 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
-import net.osmand.plus.configmap.tracks.appearance.SplitIntervalBottomSheet;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SplitMarksCardController extends BaseMultiStateCardController {
+public class SplitCardController extends BaseMultiStateCardController {
 
 	private static final int CARD_STATE_SELECT_ID = 1;
 
 	private final AppearanceData appearanceData;
+	private final boolean addUnchanged;
 
-	public SplitMarksCardController(@NonNull OsmandApplication app, @NonNull AppearanceData appearanceData) {
-		super(app, appearanceData.getSplitType());
-		this.appearanceData = appearanceData;
+	public SplitCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
+		super(app);
+		this.appearanceData = data;
+		this.addUnchanged = addUnchanged;
+		this.selectedState = findCardState(data.getParameter(SPLIT_TYPE));
 	}
 
 	@NonNull
@@ -42,15 +48,15 @@ public class SplitMarksCardController extends BaseMultiStateCardController {
 	@NonNull
 	@Override
 	public String getCardStateSelectorTitle() {
-		if (selectedCardState.getTag() == null) {
-			return selectedCardState.toHumanString(app);
+		if (selectedState.getTag() == null) {
+			return selectedState.toHumanString(app);
 		}
 		return getSplitIntervalSummary();
 	}
 
 	@Override
 	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
-		if (selectedCardState.getTag() == null) {
+		if (selectedState.getTag() == null) {
 			if (container.getChildCount() == 0) {
 				LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
 				inflater.inflate(R.layout.list_item_divider_with_padding_basic, container, true);
@@ -65,18 +71,28 @@ public class SplitMarksCardController extends BaseMultiStateCardController {
 	@NonNull
 	@Override
 	protected List<CardState> collectSupportedCardStates() {
-		return Arrays.asList(
-				new CardState(R.string.shared_string_unchanged),
-				new CardState(R.string.shared_string_select).setTag(CARD_STATE_SELECT_ID).setShowTopDivider(true)
-		);
+		List<CardState> list = new ArrayList<>();
+		if (addUnchanged) {
+			list.add(new CardState(R.string.shared_string_unchanged));
+		}
+		list.add(new CardState(R.string.shared_string_original));
+		list.add(new CardState(R.string.shared_string_select).setTag(CARD_STATE_SELECT_ID).setShowTopDivider(true));
+
+		return list;
 	}
 
 	@Override
 	protected void onSelectCardState(@NonNull CardState cardState) {
-		if (cardState.getTag() == null) {
+		if (cardState.isOriginal()) {
+			selectedState = cardState;
+			card.updateSelectedCardState();
+			appearanceData.resetParameter(SPLIT_TYPE);
+			appearanceData.resetParameter(SPLIT_INTERVAL);
+		} else if (cardState.getTag() == null) {
 			onSplitSelected(cardState, null, null);
 		} else {
-			SplitIntervalBottomSheet.showInstance(cardInstance.getActivity());
+			FragmentActivity activity = card.getActivity();
+			SplitIntervalBottomSheet.showInstance(activity.getSupportFragmentManager(), null);
 		}
 	}
 
@@ -85,15 +101,17 @@ public class SplitMarksCardController extends BaseMultiStateCardController {
 	}
 
 	private void onSplitSelected(@NonNull CardState cardState, @Nullable Integer splitType, @Nullable Double splitInterval) {
-		selectedCardState = cardState;
-		appearanceData.setSplit(splitType, splitInterval);
-		cardInstance.updateSelectedCardState();
+		selectedState = cardState;
+		appearanceData.setParameter(SPLIT_TYPE, splitType);
+		appearanceData.setParameter(SPLIT_INTERVAL, splitInterval);
+		card.updateSelectedCardState();
 	}
 
+	@NonNull
 	private String getSplitIntervalSummary() {
 		String summary = "";
-		Integer splitType = appearanceData.getSplitType();
-		Double splitInterval = appearanceData.getSplitInterval();
+		Integer splitType = appearanceData.getParameter(SPLIT_TYPE);
+		Double splitInterval = appearanceData.getParameter(SPLIT_INTERVAL);
 		if (splitInterval != null && splitType != null) {
 			if (splitType == GpxSplitType.NO_SPLIT.getType()) {
 				summary = GpxSplitType.NO_SPLIT.getHumanString(app);

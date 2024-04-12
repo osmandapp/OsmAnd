@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,22 +17,22 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartFinishCardController extends BaseMultiStateCardController {
+public class ArrowsCardController extends BaseMultiStateCardController {
 
 	private final AppearanceData data;
 	private final boolean addUnchanged;
 
-	public StartFinishCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
+	public ArrowsCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
 		super(app);
 		this.data = data;
 		this.addUnchanged = addUnchanged;
-		this.selectedState = findCardState(data.getParameter(SHOW_START_FINISH));
+		this.selectedState = findCardState(data.getParameter(SHOW_ARROWS));
 	}
 
 	@NonNull
 	@Override
 	public String getCardTitle() {
-		return app.getString(R.string.track_show_start_finish_icons);
+		return app.getString(R.string.gpx_direction_arrows);
 	}
 
 	@NonNull
@@ -48,15 +48,13 @@ public class StartFinishCardController extends BaseMultiStateCardController {
 
 	@Override
 	protected void onSelectCardState(@NonNull CardState cardState) {
-		if (cardState.getTitleId() != selectedState.getTitleId()) {
-			selectedState = cardState;
-			card.updateSelectedCardState();
+		selectedState = cardState;
+		card.updateSelectedCardState();
 
-			if (cardState.isOriginal()) {
-				data.resetParameter(SHOW_START_FINISH);
-			} else {
-				data.setParameter(SHOW_START_FINISH, cardState.getTag());
-			}
+		if (cardState.isOriginal()) {
+			data.resetParameter(SHOW_ARROWS);
+		} else {
+			data.setParameter(SHOW_ARROWS, cardState.getTag());
 		}
 	}
 

@@ -13,8 +13,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxReaderTask.GpxDbReaderCallback;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -33,6 +33,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	private final OsmandApplication app;
 	private final GPXDatabase database;
 
+	private final Map<File, GpxDirItem> dirItems = new ConcurrentHashMap<>();
 	private final Map<File, GpxDataItem> dataItems = new ConcurrentHashMap<>();
 
 	private final ConcurrentLinkedQueue<File> readingItems = new ConcurrentLinkedQueue<>();
@@ -55,6 +56,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		database = new GPXDatabase(app);
 	}
 
+	public void loadItems() {
+		loadGpxItems();
+		loadGpxDirItems();
+		loadNewGpxItems();
+	}
+
 	public void loadGpxItems() {
 		long start = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
@@ -67,28 +74,56 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			}
 		}
 		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + items.size());
-		loadNewGpxItems();
+	}
+
+	public void loadGpxDirItems() {
+		long start = System.currentTimeMillis();
+		List<GpxDirItem> items = getDirItems();
+		for (GpxDirItem item : items) {
+			File file = item.getFile();
+			if (file.exists()) {
+				putToCache(item);
+			} else {
+				remove(file);
+			}
+		}
+		LOG.info("Time to loadGpxDirItems " + (System.currentTimeMillis() - start) + " ms items count " + dataItems.size());
 	}
 
 	private void loadNewGpxItems() {
 		long start = System.currentTimeMillis();
-		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
-		List<GPXInfo> gpxInfos = GpxUiHelper.getGPXFiles(gpxDir, true);
-		for (GPXInfo gpxInfo : gpxInfos) {
-			File file = new File(gpxInfo.getFileName());
-			if (file.exists() && !file.isDirectory() && !hasItem(file)) {
+		File dir = app.getAppPath(GPX_INDEX_DIR);
+		List<File> files = FileUtils.collectFiles(dir, true);
+		for (File file : files) {
+			if (!file.exists()) {
+				continue;
+			}
+			if (file.isDirectory()) {
+				if (!hasGpxDirItem(file)) {
+					add(new GpxDirItem(app, file));
+				}
+			} else if (!hasGpxDataItem(file)) {
 				add(new GpxDataItem(app, file));
 			}
 		}
-		LOG.info("Time to loadNewGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + gpxInfos.size());
+		LOG.info("Time to loadNewGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + files.size());
 	}
 
-	private void putToCache(@NonNull GpxDataItem item) {
-		dataItems.put(item.getFile(), item);
+	private void putToCache(@NonNull DataItem item) {
+		File file = item.getFile();
+		if (item instanceof GpxDataItem) {
+			dataItems.put(file, (GpxDataItem) item);
+		} else if (item instanceof GpxDirItem) {
+			dirItems.put(file, (GpxDirItem) item);
+		}
 	}
 
 	private void removeFromCache(@NonNull File file) {
-		dataItems.remove(file);
+		if (file.isDirectory()) {
+			dirItems.remove(file);
+		} else {
+			dataItems.remove(file);
+		}
 	}
 
 	public boolean rename(@NonNull File currentFile, @NonNull File newFile) {
@@ -105,7 +140,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return success;
 	}
 
-	public boolean updateDataItem(@NonNull GpxDataItem item) {
+	public boolean updateDataItem(@NonNull DataItem item) {
 		boolean res = database.updateDataItem(item);
 		putToCache(item);
 		return res;
@@ -117,7 +152,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return res;
 	}
 
-	public boolean remove(@NonNull GpxDataItem item) {
+	public boolean remove(@NonNull DataItem item) {
 		File file = item.getFile();
 		boolean res = database.remove(file);
 		removeFromCache(file);
@@ -125,6 +160,13 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean add(@NonNull GpxDataItem item) {
+		checkDefaultAppearance(item);
+		boolean res = database.add(item);
+		putToCache(item);
+		return res;
+	}
+
+	public boolean add(@NonNull GpxDirItem item) {
 		boolean res = database.add(item);
 		putToCache(item);
 		return res;
@@ -132,7 +174,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@NonNull
 	public List<GpxDataItem> getItems() {
-		return database.getItems();
+		return database.getGpxDataItems();
+	}
+
+	@NonNull
+	public List<GpxDirItem> getDirItems() {
+		return database.getGpxDirItems();
 	}
 
 	@NonNull
@@ -160,17 +207,34 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return getItem(file, null);
 	}
 
+	@NonNull
+	public GpxDirItem getGpxDirItem(@NonNull File file) {
+		GpxDirItem item = dirItems.get(file);
+		if (item == null) {
+			item = database.getGpxDirItem(file);
+		}
+		if (item == null) {
+			item = new GpxDirItem(app, file);
+			add(item);
+		}
+		return item;
+	}
+
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = dataItems.get(file);
-		if (GpxDbUtils.isAnalyseNeeded(file, item) && !isGpxReading(file)) {
+		if (GpxDbUtils.isAnalyseNeeded(item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
 	}
 
-	public boolean hasItem(@NonNull File file) {
+	public boolean hasGpxDataItem(@NonNull File file) {
 		return dataItems.containsKey(file);
+	}
+
+	public boolean hasGpxDirItem(@NonNull File file) {
+		return dirItems.containsKey(file);
 	}
 
 	@NonNull
@@ -183,6 +247,21 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			}
 		}
 		return items;
+	}
+
+	private void checkDefaultAppearance(@NonNull GpxDataItem item) {
+		File file = item.getFile();
+		File dir = file.getParentFile();
+		if (dir != null) {
+			GpxDirItem dirItem = getGpxDirItem(dir);
+
+			for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+				Object value = dirItem.getParameter(parameter);
+				if (value != null) {
+					item.setParameter(parameter, value);
+				}
+			}
+		}
 	}
 
 	public boolean isRead() {
