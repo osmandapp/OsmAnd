@@ -5656,6 +5656,8 @@
 \n
 \n • Tilføjet filtre efter sensordata til spor
 \n
+\n • Forbedret tilpasning af udseende for grupper af spor
+\n
 \n • Tilføjet understøttelse af yderligere GPX-tags
 \n
 \n • Tilpas \"Afstand under navigation\": Vælg mellem præcise eller afrundede tal.
@@ -5681,4 +5683,5 @@
     <string name="gpx_approximation_geo_java">Geometri-baseret (Java, hurtig)</string>
     <string name="fix_north_up_descr">Drej ikke kortet ved berøringer i kortorientering Nord op</string>
     <string name="fix_north_up">Aktivér fast nord op</string>
+    <string name="change_default_appearance_confirmation">Skift standardudseende for %1$s?</string>
 </resources>
