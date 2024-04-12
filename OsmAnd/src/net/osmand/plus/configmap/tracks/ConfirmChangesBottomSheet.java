@@ -5,6 +5,7 @@ import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColorId;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -14,19 +15,18 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.utils.AndroidUtils;
 
-public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
+public class ConfirmChangesBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = AppearanceConfirmationBottomSheet.class.getSimpleName();
+	public static final String TAG = ConfirmChangesBottomSheet.class.getSimpleName();
 
-	private static final String ITEMS_COUNT_KEY = "items_count";
+	private static final String DESCRIPTION_KEY = "description_key";
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.shared_string_apply_changes)));
 
-		int count = getItemsCount();
 		items.add(new BottomSheetItemWithDescription.Builder()
-				.setDescription(getString(R.string.change_default_tracks_appearance_confirmation_description, String.valueOf(count)))
+				.setDescription(getDescription())
 				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_descr)
 				.create());
@@ -35,8 +35,8 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 	@Override
 	protected void onRightBottomButtonClick() {
 		Fragment fragment = getParentFragment();
-		if (fragment instanceof OnAppearanceChangeConfirmedListener) {
-			((OnAppearanceChangeConfirmedListener) fragment).onAppearanceChangeConfirmed();
+		if (fragment instanceof ChangesConfirmationListener) {
+			((ChangesConfirmationListener) fragment).onChangesConfirmed();
 		}
 		dismiss();
 	}
@@ -46,21 +46,23 @@ public class AppearanceConfirmationBottomSheet extends MenuBottomSheetDialogFrag
 		return R.string.shared_string_apply;
 	}
 
-	private int getItemsCount() {
-		Bundle arguments = getArguments();
-		return arguments != null ? arguments.getInt(ITEMS_COUNT_KEY, 0) : 0;
+	@Nullable
+	private String getDescription() {
+		Bundle bundle = getArguments();
+		return bundle != null ? bundle.getString(DESCRIPTION_KEY) : null;
 	}
 
-	public interface OnAppearanceChangeConfirmedListener {
-		void onAppearanceChangeConfirmed();
+	public interface ChangesConfirmationListener {
+		void onChangesConfirmed();
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, int itemsCount) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull String description) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			AppearanceConfirmationBottomSheet fragment = new AppearanceConfirmationBottomSheet();
-			Bundle arguments = new Bundle();
-			arguments.putInt(ITEMS_COUNT_KEY, itemsCount);
-			fragment.setArguments(arguments);
+			Bundle bundle = new Bundle();
+			bundle.putString(DESCRIPTION_KEY, description);
+
+			ConfirmChangesBottomSheet fragment = new ConfirmChangesBottomSheet();
+			fragment.setArguments(bundle);
 			fragment.setUsedOnMap(true);
 			fragment.show(manager, TAG);
 		}

@@ -515,7 +515,7 @@ public class AppInitializer implements IProgress {
 			initNativeCore();
 			app.favoritesHelper.loadFavorites();
 			notifyEvent(FAVORITES_INITIALIZED);
-			app.gpxDbHelper.loadGpxItems();
+			app.gpxDbHelper.loadItems();
 			notifyEvent(GPX_DB_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();

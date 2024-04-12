@@ -5668,4 +5668,6 @@
     <string name="gpx_approximation_cpp">Podľa trasy (C++)</string>
     <string name="gpx_approximation_java">Podľa trasy (Java)</string>
     <string name="gpx_approximation_geo_java">Podľa geometrie (Java, rýchle)</string>
+    <string name="fix_north_up">Zapnúť Pevný Sever hore</string>
+    <string name="fix_north_up_descr">Neotáčať mapu gestami pri orientácii mapy Sever hore</string>
 </resources>

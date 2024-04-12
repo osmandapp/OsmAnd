@@ -1508,9 +1508,9 @@ public class OsmandAidlApi {
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
 				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
-				int color = dataItem.getParameter(COLOR);
+				Integer color = dataItem.getParameter(COLOR);
 				String colorName = "";
-				if (color != 0) {
+				if (color != null) {
 					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 				}
 				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
@@ -1553,8 +1553,8 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				if (file.getName().equals(gpxFileName)) {
-					int color = dataItem.getParameter(COLOR);
-					if (color != 0) {
+					Integer color = dataItem.getParameter(COLOR);
+					if (color != null) {
 						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
 				}

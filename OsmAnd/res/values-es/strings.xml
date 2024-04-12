@@ -5675,4 +5675,6 @@
     <string name="gpx_approximation_geo_java">Basado en geometría (Java, rápido)</string>
     <string name="gpx_approximation_cpp">Basado en enrutamiento (C++)</string>
     <string name="gpx_approximation_java">Basado en enrutamiento (Java)</string>
+    <string name="fix_north_up">Activar el norte fijo hacia arriba</string>
+    <string name="fix_north_up_descr">No rotar el mapa con gestos en la orientación Norte Arriba</string>
 </resources>

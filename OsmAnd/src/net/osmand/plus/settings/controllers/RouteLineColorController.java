@@ -14,16 +14,16 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringPurpose;
-import net.osmand.plus.card.color.IControlsColorProvider;
-import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
+import net.osmand.plus.card.color.IControlsColorProvider;
+import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
@@ -57,9 +57,9 @@ public class RouteLineColorController extends ColoringStyleCardController
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 	private boolean initialNightMode;
 
-	private RouteLineColorController(@NonNull OsmandApplication app,
-	                                 @NonNull ColoringStyle selectedColoringStyle) {
-		super(app, selectedColoringStyle);
+	private RouteLineColorController(@NonNull OsmandApplication app, @NonNull ColoringStyle selectedStyle) {
+		super(app);
+		this.selectedState = findCardState(selectedStyle);
 	}
 
 	public void setRouteLinePreview(@NonNull PreviewRouteLineInfo routeLinePreview) {
@@ -250,6 +250,5 @@ public class RouteLineColorController extends ColoringStyleCardController
 		return controller;
 	}
 
-	public interface IRouteLineColorControllerListener
-			extends IColorCardControllerListener, OnPaletteModeSelectedListener { }
+	public interface IRouteLineColorControllerListener extends IColorCardControllerListener, OnPaletteModeSelectedListener {}
 }

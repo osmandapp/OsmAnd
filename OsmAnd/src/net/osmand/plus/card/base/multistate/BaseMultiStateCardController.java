@@ -21,61 +21,59 @@ public abstract class BaseMultiStateCardController implements IMultiStateCardCon
 
 	protected final OsmandApplication app;
 
-	protected IMultiStateCard cardInstance;
-	protected List<CardState> supportedCardStates;
-	protected CardState selectedCardState;
+	protected IMultiStateCard card;
+	protected List<CardState> states;
+	protected CardState selectedState;
 
-	public BaseMultiStateCardController(@NonNull OsmandApplication app,
-	                                    @Nullable Object selectedStateTag) {
+	public BaseMultiStateCardController(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.selectedCardState = findCardState(selectedStateTag);
 	}
 
 	@Override
-	public void bindComponent(@NonNull IMultiStateCard cardInstance) {
-		this.cardInstance = cardInstance;
+	public void bindComponent(@NonNull IMultiStateCard card) {
+		this.card = card;
 	}
 
 	@Override
-	public void onSelectorButtonClicked(@NonNull View selectorView) {
-		boolean nightMode = cardInstance.isNightMode();
-		List<PopUpMenuItem> menuItems = new ArrayList<>();
-		for (CardState cardState : getSupportedCardStates()) {
-			int titleColor = isCardStateAvailable(cardState)
-					? getPrimaryTextColor(app, nightMode)
-					: getDisabledTextColor(app, nightMode);
-			menuItems.add(new PopUpMenuItem.Builder(app)
-					.setTitle(cardState.toHumanString(app))
-					.showTopDivider(cardState.isShowTopDivider())
-					.setTitleColor(titleColor)
-					.setTag(cardState)
+	public void onSelectorButtonClicked(@NonNull View view) {
+		boolean nightMode = card.isNightMode();
+		List<PopUpMenuItem> items = new ArrayList<>();
+		for (CardState state : getCardStates()) {
+			boolean available = isCardStateAvailable(state);
+			int color = available ? getPrimaryTextColor(app, nightMode) : getDisabledTextColor(app, nightMode);
+
+			items.add(new PopUpMenuItem.Builder(app)
+					.setTitle(state.toHumanString(app))
+					.showTopDivider(state.isShowTopDivider())
+					.setTitleColor(color)
+					.setTag(state)
 					.create()
 			);
 		}
-		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
-		displayData.anchorView = selectorView;
-		displayData.menuItems = menuItems;
-		displayData.nightMode = nightMode;
-		displayData.onItemClickListener = item -> onSelectCardState((CardState) item.getTag());
-		PopUpMenu.show(displayData);
+		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
+		data.anchorView = view;
+		data.menuItems = items;
+		data.nightMode = nightMode;
+		data.onItemClickListener = item -> onSelectCardState((CardState) item.getTag());
+		PopUpMenu.show(data);
 	}
 
 	@NonNull
-	protected List<CardState> getSupportedCardStates() {
-		if (supportedCardStates == null) {
-			supportedCardStates = collectSupportedCardStates();
+	protected List<CardState> getCardStates() {
+		if (states == null) {
+			states = collectSupportedCardStates();
 		}
-		return supportedCardStates;
+		return states;
 	}
 
 	@NonNull
 	protected CardState findCardState(@Nullable Object tag) {
-		for (CardState cardState : getSupportedCardStates()) {
+		for (CardState cardState : getCardStates()) {
 			if (Objects.equals(tag, cardState.getTag())) {
 				return cardState;
 			}
 		}
-		return supportedCardStates.get(0);
+		return states.get(0);
 	}
 
 	protected boolean isCardStateAvailable(@NonNull CardState cardState) {

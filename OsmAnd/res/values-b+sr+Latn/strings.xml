@@ -3059,7 +3059,7 @@
     <string name="complex_routing_descr">Dvofazno usmeravanje za auto navigaciju.</string>
     <string name="use_fast_recalculation_desc">Preračunava samo početni deo puta, korisno za duga putovanja.</string>
     <string name="use_native_pt">Razvoj lokalnog javnog prevoza</string>
-    <string name="use_native_pt_desc">Prebaci se na proračun navođenja javnog prevoza Java (bezbedan)</string>
+    <string name="use_native_pt_desc">Prebaci se na Java (bezbedno) izrečunavanje rute javnog prevoza</string>
     <string name="perform_oauth_authorization_description">Prijavi se pomoću OAuth -a radi korišćenja mogućnosti uređivanja OpenStritMapa</string>
     <string name="perform_oauth_authorization">Prijavi se preko OAuth-a</string>
     <string name="clear_osm_token">Obriši OpenStreetMap OAuth token</string>
@@ -4926,7 +4926,7 @@
     <string name="sound_beep_simple">Bip: jednostavan</string>
     <string name="key_assignments_already_cleared_message">Svi ključni zadaci već su očišćeni</string>
     <string name="button_already_assigned_to_this_action">Dugme je već dodeljeno za ovu akciju.</string>
-    <string name="enable_to_use_external_input_device">Omogući korištenje spoljnog uređaja sa OsmAnd</string>
+    <string name="enable_to_use_external_input_device">Omogući korišćenje spoljnog uređaja sa OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Promeni orijentaciju mape</string>
     <string name="sort_size_ascending">Prvo mala veličina</string>
     <string name="standard_maps">Standardne mape</string>
@@ -5680,4 +5680,6 @@
     <string name="gpx_approximation_cpp">Rutiranje-bazirano (C++)</string>
     <string name="gpx_approximation_java">Rutiranje-bazirano (Java)</string>
     <string name="gpx_approximation_geo_java">Rutiranje-bazirano (Java, brzo)</string>
+    <string name="fix_north_up_descr">Ne rotirarti mapu pokretima u orijentaciji prema severu</string>
+    <string name="fix_north_up">Fiksirati mapa prema severu</string>
 </resources>

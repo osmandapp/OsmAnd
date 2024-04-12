@@ -5672,4 +5672,7 @@
     <string name="upload_local_versions">Загрузить локальные версии</string>
     <string name="map_widget_map_scale">Масштаб карты</string>
     <string name="shared_string_unchanged">Без изменений</string>
+    <string name="fix_north_up">Зафиксировать север сверху</string>
+    <string name="fix_north_up_descr">Не поворачивать карту жестами при ориентации карты «Север сверху»</string>
+    <string name="unchanged_parameter_summary">Каждый трек сохраняет свои собственные параметры.</string>
 </resources>

@@ -33,7 +33,7 @@
     <string name="docs_plugin_trip_recording" translatable="false">https://osmand.net/docs/user/plugins/trip-recording</string>
     <string name="docs_plugin_nautical" translatable="false">https://osmand.net/docs/user/plugins/nautical-charts</string>
     <string name="docs_plugin_osm" translatable="false">https://osmand.net/docs/user/plugins/osm-editing</string>
-    <string name="docs_plugin_srtm" translatable="false">http://osmand.net/docs/user/plugins/contour-lines</string>
+    <string name="docs_plugin_srtm" translatable="false">https://osmand.net/docs/user/plugins/contour-lines</string>
     <string name="weather_global_forecast_system" translatable="false">https://www.ncei.noaa.gov/products/weather-climate-models/global-forecast</string>
 
     <string name="docs_purchases" translatable="false">https://docs.osmand.net/docs/user/purchases/</string>

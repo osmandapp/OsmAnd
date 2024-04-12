@@ -3566,7 +3566,7 @@
     <string name="please_provide_profile_name_message">Anna profiilille nimi</string>
     <string name="select_data_to_import">Valitse tuotavat tiedot.</string>
     <string name="import_duplicates_title">Joitakin kohteita on jo olemassa</string>
-    <string name="import_duplicates_description">OsmAndissa on jo elementtejä, joilla on samat nimet kuin tuoduilla elementeillä.
+    <string name="import_duplicates_description">OsmAnd issa on jo elementtejä, joilla on samat nimet kuin tuoduilla elementeillä.
 \n
 \nValitse toiminto.</string>
     <string name="keep_both_desc">Tuodut kohteet lisätään etuliitteen kanssa</string>
