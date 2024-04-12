@@ -98,12 +98,12 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			if (!file.exists()) {
 				continue;
 			}
-			if (file.isDirectory()) {
-				if (!hasGpxDirItem(file)) {
-					add(new GpxDirItem(app, file));
+			if (GpxUiHelper.isGpxFile(file)) {
+				if (!hasGpxDataItem(file)) {
+					add(new GpxDataItem(app, file));
 				}
-			} else if (!hasGpxDataItem(file)) {
-				add(new GpxDataItem(app, file));
+			} else if (file.isDirectory() && !hasGpxDirItem(file)) {
+				add(new GpxDirItem(app, file));
 			}
 		}
 		LOG.info("Time to loadNewGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + files.size());
@@ -119,10 +119,10 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	private void removeFromCache(@NonNull File file) {
-		if (file.isDirectory()) {
-			dirItems.remove(file);
-		} else {
+		if (GpxUiHelper.isGpxFile(file)) {
 			dataItems.remove(file);
+		} else {
+			dirItems.remove(file);
 		}
 	}
 

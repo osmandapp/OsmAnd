@@ -312,7 +312,7 @@ public class GpxDbUtils {
 
 	@NonNull
 	public static String getTableName(@NonNull File file) {
-		return file.isDirectory() ? GPX_DIR_TABLE_NAME : GPX_TABLE_NAME;
+		return GpxUiHelper.isGpxFile(file) ? GPX_TABLE_NAME : GPX_DIR_TABLE_NAME;
 	}
 
 	@Nullable
