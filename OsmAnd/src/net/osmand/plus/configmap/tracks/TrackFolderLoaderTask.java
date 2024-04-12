@@ -32,6 +32,8 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	private final TrackFolder folder;
 	private final LoadTracksListener listener;
+	private long loadingTime = 0;
+	private int tracksCounter = 0;
 
 	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
 		this.folder = folder;
@@ -56,10 +58,12 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		long time = System.currentTimeMillis();
+		long start = System.currentTimeMillis();
 		LOG.info("Start loading tracks in " + folder.getDirName());
 
 		folder.clearData();
+		loadingTime = System.currentTimeMillis();
+
 		List<TrackItem> progress = new ArrayList<>();
 		loadGPXFolder(folder, progress, true);
 		if (!progress.isEmpty()) {
@@ -68,7 +72,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		if (listener != null) {
 			listener.tracksLoaded(folder);
 		}
-		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - time) + "ms");
+		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - start) + "ms");
 		return null;
 	}
 
@@ -94,6 +98,12 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 				if (progress.size() > 7) {
 					publishProgress(progress.toArray(new TrackItem[0]));
 					progress.clear();
+				}
+				tracksCounter++;
+				if (tracksCounter % 10 == 0) {
+					long endTime = System.currentTimeMillis();
+					LOG.info("Loading tracks. took " + (endTime - loadingTime) + "ms");
+					loadingTime = endTime;
 				}
 			}
 		}
