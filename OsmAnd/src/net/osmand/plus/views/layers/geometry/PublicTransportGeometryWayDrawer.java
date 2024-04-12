@@ -151,7 +151,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 				double pdy = (y - py) * percent;
 				float iconx = (float) (px + pdx);
 				float icony = (float) (py + pdy);
-				if (GeometryWay.isIn(iconx, icony, left, top, right, bottom)) {
+				if (GeometryWayPathAlgorithms.isIn(iconx, icony, left, top, right, bottom)) {
 					arrows.add(new PathPoint(iconx, icony, angle, style));
 				}
 				dist -= pxStep;
@@ -170,7 +170,7 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 				double lon = stop.getLocation().getLongitude();
 				float x = tb.getPixXFromLatLon(lat, lon);
 				float y = tb.getPixYFromLatLon(lat, lon);
-				if (GeometryWay.isIn(x, y, left, top, right, bottom)) {
+				if (GeometryWayPathAlgorithms.isIn(x, y, left, top, right, bottom)) {
 					if (i != start && i != end) {
 						stops.add(new PathTransportStop(x, y, style));
 					}

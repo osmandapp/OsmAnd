@@ -31,6 +31,9 @@ import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TByteArrayList;
 
+import static net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms.calculatePath;
+import static net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms.cullRamerDouglasPeucker;
+
 public abstract class GeometryWay<T extends GeometryWayContext, D extends GeometryWayDrawer<T>> {
 
 	protected static final int INITIAL_POINT_INDEX_SHIFT = 1 << 30;
@@ -494,149 +497,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		styles.clear();
 	}
 
-	public static boolean isIn(float x, float y, int lx, int ty, int rx, int by) {
-		return x >= lx && x <= rx && y >= ty && y <= by;
-	}
-
-	public static int calculatePath(@NonNull RotatedTileBox tb,
-	                                @NonNull List<Float> xs, @NonNull List<Float> ys,
-	                                @NonNull Path path) {
-		List<DrawPathData> pathsData = new ArrayList<>();
-		int res = calculatePath(tb, xs, ys, null, pathsData);
-		if (pathsData.size() > 0) {
-			path.addPath(pathsData.get(0).path);
-		}
-		return res;
-	}
-
-	public static int calculatePath(@NonNull RotatedTileBox tb,
-	                                @NonNull List<Float> xs, @NonNull List<Float> ys,
-	                                @Nullable List<GeometryWayStyle<?>> styles,
-	                                @NonNull List<DrawPathData> pathsData) {
-		boolean segmentStarted = false;
-		float prevX = xs.get(0);
-		float prevY = ys.get(0);
-		int height = tb.getPixHeight();
-		int width = tb.getPixWidth();
-		int cnt = 0;
-		boolean hasStyles = styles != null && styles.size() == xs.size();
-		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
-		Path path = new Path();
-		float prevXorig = prevX;
-		float prevYorig = prevY;
-		float currXorig = Float.NaN;
-		float currYorig = Float.NaN;
-		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
-		for (int i = 1; i < xs.size(); i++) {
-			float currX = xs.get(i);
-			float currY = ys.get(i);
-			currXorig = currX;
-			currYorig = currY;
-			boolean currIn = isIn(currX, currY, 0, 0, width, height);
-			boolean draw = false;
-			if (prevIn && currIn) {
-				draw = true;
-			} else {
-				long intersection = MapAlgorithms.calculateIntersection((int) currX, (int) currY,
-						(int) prevX, (int) prevY, 0, width, height, 0);
-				if (intersection != -1) {
-					if (prevIn && (i == 1)) {
-						cnt++;
-						path.moveTo(prevX, prevY);
-						segmentStarted = true;
-					}
-					prevX = (int) (intersection >> 32);
-					prevY = (int) (intersection & 0xffffffff);
-					draw = true;
-				}
-				if (i == xs.size() - 1 && !currIn) {
-					long inter = MapAlgorithms.calculateIntersection((int) prevX, (int) prevY,
-							(int) currX, (int) currY, 0, width, height, 0);
-					if (inter != -1) {
-						currX = (int) (inter >> 32);
-						currY = (int) (inter & 0xffffffff);
-					}
-				}
-			}
-			if (draw) {
-				if (!segmentStarted) {
-					cnt++;
-					path.moveTo(prevX, prevY);
-					segmentStarted = true;
-				}
-				path.lineTo(currX, currY);
-			} else {
-				segmentStarted = false;
-			}
-			prevIn = currIn;
-			prevX = currX;
-			prevY = currY;
-
-			if (hasStyles) {
-				GeometryWayStyle<?> newStyle = styles.get(i);
-				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					pathsData.add(new DrawPathData(path, new PointF(prevXorig, prevYorig),
-							new PointF(currXorig, currYorig), style));
-					prevXorig = currXorig;
-					prevYorig = currYorig;
-					path = new Path();
-					if (segmentStarted) {
-						path.moveTo(currX, currY);
-					}
-					style = newStyle;
-				}
-			}
-		}
-		if (!path.isEmpty() && !Float.isNaN(currXorig)) {
-			pathsData.add(new DrawPathData(path, new PointF(prevXorig, prevYorig),
-					new PointF(currXorig, currYorig), style));
-		}
-		return cnt;
-	}
-
-	public void calculatePath(@NonNull List<Integer> indexes,
-	                          @NonNull List<Integer> xs, @NonNull List<Integer> ys,
-	                          @Nullable List<GeometryWayStyle<?>> styles,
-	                          @NonNull List<DrawPathData31> pathsData) {
-		boolean hasStyles = styles != null && styles.size() == xs.size();
-		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
-		QListFloat heights = new QListFloat();
-		List<Integer> ind = new ArrayList<>();
-		List<Integer> tx = new ArrayList<>();
-		List<Integer> ty = new ArrayList<>();
-		ind.add(indexes.get(0));
-		heights.add(getLocationHeight(0));
-		tx.add(xs.get(0));
-		ty.add(ys.get(0));
-		for (int i = 1; i < xs.size(); i++) {
-			ind.add(indexes.get(i));
-			heights.add(getLocationHeight(i));
-			tx.add(xs.get(i));
-			ty.add(ys.get(i));
-			if (hasStyles) {
-				GeometryWayStyle<?> newStyle = styles.get(i);
-				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
-					newPathData.heights = heights;
-					pathsData.add(newPathData);
-					heights = new QListFloat();
-					ind = new ArrayList<>();
-					tx = new ArrayList<>();
-					ty = new ArrayList<>();
-					ind.add(indexes.get(i));
-					heights.add(getLocationHeight(i));
-					tx.add(xs.get(i));
-					ty.add(ys.get(i));
-					style = newStyle;
-				}
-			}
-		}
-		if (tx.size() > 1) {
-			DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
-			pathsData.add(newPathData);
-			newPathData.heights = heights;
-		}
-	}
 
 	private float getLocationHeight(int index) {
 		GeometryWayProvider locationProvider = getLocationProvider();
@@ -672,22 +532,26 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			if (hasPathLine) {
 				if (hasMapRenderer) {
-					List<DrawPathData31> pathsData = new ArrayList<>();
-					calculatePath(indexes, tx31, ty31, styles, pathsData);
+					List<DrawPathData31> pathsData = calculatePath(indexes, tx31, ty31, styles);
+					GeometryWayProvider locationProvider = getLocationProvider();
 					if (!Algorithms.isEmpty(pathsData)) {
+						for (DrawPathData31 p : pathsData) {
+							p.heights = new QListFloat();
+							for (int i = 0; i < p.indexes.size(); i++) {
+								p.heights.add(locationProvider != null ? 0 :
+										locationProvider.getHeight(p.indexes.get(i)));
+							}
+						}
 						drawPathLine(tb, pathsData);
 					}
 					pathsData31Cache.add(pathsData);
 				} else if (canvas != null) {
-					List<DrawPathData> pathsData = new ArrayList<>();
 					canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 					canvasRotated = true;
-					calculatePath(tb, tx, ty, styles, pathsData);
-
+					List<DrawPathData> pathsData = calculatePath(tb, tx, ty, styles);
 					if (!Algorithms.isEmpty(pathsData)) {
 						drawPathLine(canvas, tb, pathsData);
 					}
-
 					context.clearCustomColor();
 					context.clearCustomShader();
 				}
@@ -762,7 +626,6 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	protected static class PathGeometryZoom {
 
 		private static final float EPSILON_IN_DPI = 2;
-
 		private final TByteArrayList simplifyPoints;
 		private final List<Double> distances;
 		private final List<Double> angles;
@@ -805,7 +668,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 		}
 
-		protected void simplify(RotatedTileBox tb, GeometryWayProvider locationProvider, TByteArrayList simplifyPoints) {
+		public void simplify(RotatedTileBox tb, GeometryWay.GeometryWayProvider locationProvider, TByteArrayList simplifyPoints) {
 			int size = locationProvider.getSize();
 			if (size > 0) {
 				simplifyPoints.set(0, (byte) 1);
@@ -823,26 +686,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			return angles;
 		}
 
-		private void cullRamerDouglasPeucker(TByteArrayList survivor, GeometryWayProvider locationProvider,
-		                                     int start, int end, double epsillon) {
-			double dmax = Double.NEGATIVE_INFINITY;
-			int index = -1;
-			for (int i = start + 1; i < end; i++) {
-				double d = MapUtils.getOrthogonalDistance(locationProvider.getLatitude(i), locationProvider.getLongitude(i),
-						locationProvider.getLatitude(start), locationProvider.getLongitude(start),
-						locationProvider.getLatitude(end), locationProvider.getLongitude(end));
-				if (d > dmax) {
-					dmax = d;
-					index = i;
-				}
-			}
-			if (dmax > epsillon) {
-				cullRamerDouglasPeucker(survivor, locationProvider, start, index, epsillon);
-				cullRamerDouglasPeucker(survivor, locationProvider, index, end, epsillon);
-			} else {
-				survivor.set(end, (byte) 1);
-			}
-		}
+
 
 		public TByteArrayList getSimplifyPoints() {
 			return simplifyPoints;

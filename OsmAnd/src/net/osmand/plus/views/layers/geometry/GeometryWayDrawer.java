@@ -132,7 +132,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				double pdy = (y - py) * percent;
 				float iconX = (float) (px + pdx);
 				float iconY = (float) (py + pdy);
-				if (GeometryWay.isIn(iconX, iconY, left, top, right, bottom)) {
+				if (GeometryWayPathAlgorithms.isIn(iconX, iconY, left, top, right, bottom)) {
 					arrows.add(getArrowPathPoint(iconX, iconY, style, angle, percent));
 				}
 				dist -= pxStep;
