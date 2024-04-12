@@ -1113,8 +1113,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Waterway tunnels</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Increase visibility for waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Increase visibility for waterway tunnels</string>
     <string name="shared_string_not_used">Not used</string>
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>
@@ -3980,7 +3980,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
     <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access and toll restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
