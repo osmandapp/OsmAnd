@@ -62,7 +62,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		List<Integer> indexes;
 		List<Integer> tx;
 		List<Integer> ty;
-		QListFloat heights;
+		List<Float> heights;
 		GeometryWayStyle<?> style;
 
 		public DrawPathData31(@NonNull List<Integer> indexes,

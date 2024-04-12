@@ -429,7 +429,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					List<Integer> ind = new ArrayList<>();
 					List<Integer> tx = new ArrayList<>();
 					List<Integer> ty = new ArrayList<>();
-					QListFloat heights = new QListFloat();
+					List<Float> heights = new ArrayList<>();
 					List<Integer> indexes = pathData.indexes;
 					for (int i = 0; i < indexes.size(); i++) {
 						Integer index = indexes.get(i);
@@ -536,7 +536,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					GeometryWayProvider locationProvider = getLocationProvider();
 					if (!Algorithms.isEmpty(pathsData)) {
 						for (DrawPathData31 p : pathsData) {
-							p.heights = new QListFloat();
+							p.heights = new ArrayList<>();
 							for (int i = 0; i < p.indexes.size(); i++) {
 								p.heights.add(locationProvider != null ? 0 :
 										locationProvider.getHeight(p.indexes.get(i)));
