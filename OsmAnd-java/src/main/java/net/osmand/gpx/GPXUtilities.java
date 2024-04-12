@@ -1272,11 +1272,12 @@ public class GPXUtilities {
 	}
 
 	private static String getOsmandTagKey(final Entry<String, String> entry) {
-		String key = entry.getKey().replace(":", "_-_");
-		if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
-			key = OSMAND_EXTENSIONS_PREFIX + key;
+		String key = entry.getKey();
+		if (key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
+			key = key.replace(OSMAND_EXTENSIONS_PREFIX, "");
 		}
-		return key;
+		key = key.replace(":", "_-_");
+		return OSMAND_EXTENSIONS_PREFIX + key;
 	}
 
 	private static void writeAuthor(XmlSerializer serializer, Author author) throws IOException {
