@@ -93,12 +93,11 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	}
 
 	@Override
-	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<Float> tx, List<Float> ty,
-	                               List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
+	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<GeometryWayPoint> points, double distPixToFinish) {
 		path.reset();
 		GeometryMultiProfileWayStyle prevStyle = null;
-		for (int i = 0; i < styles.size(); i++) {
-			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(styles.get(i));
+		for (int i = 0; i < points.size(); i++) {
+			GeometryMultiProfileWayStyle style = getMultiProfileWayStyle(points.get(i).style);
 			if (style != null && !style.equals(prevStyle) && !style.isGap()) {
 				PointF center = MultiProfileGeometryWay.getIconCenter(tb, style.getRoutePoints(), path, pathMeasure);
 				float profileIconSize = MultiProfileGeometryWayContext.getProfileIconSizePx(getContext().getDensity());

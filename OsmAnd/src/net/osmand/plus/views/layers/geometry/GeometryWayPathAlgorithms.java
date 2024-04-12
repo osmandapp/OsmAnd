@@ -46,7 +46,7 @@ public class GeometryWayPathAlgorithms {
 	public static List<GeometryWayDrawer.DrawPathData> calculatePath(@NonNull RotatedTileBox tb,
 																	 @NonNull List<Float> xs, @NonNull List<Float> ys,
 																	 @NonNull Path path) {
-		List<GeometryWayDrawer.DrawPathData> pathsData = calculatePath(tb, xs, ys, (List<GeometryWayStyle<?>>) null);
+		List<GeometryWayDrawer.DrawPathData> pathsData = calculatePath(tb, null, xs, ys, (List<GeometryWayStyle<?>>) null);
 		if (pathsData.size() > 0) {
 			path.addPath(pathsData.get(0).path);
 		}
@@ -54,26 +54,30 @@ public class GeometryWayPathAlgorithms {
 	}
 
 	public  static List<GeometryWayDrawer.DrawPathData> calculatePath(@NonNull RotatedTileBox tb,
-																	   @NonNull List<Float> xs, @NonNull List<Float> ys,
+																	  @Nullable List<GeometryWayPoint> points,
+																	  @Nullable List<Float> xs, @Nullable List<Float> ys,
 																	   @Nullable List<GeometryWayStyle<?>> styles) {
 		List<GeometryWayDrawer.DrawPathData> pathsData = new ArrayList<>();
 		boolean segmentStarted = false;
-		float prevX = xs.get(0);
-		float prevY = ys.get(0);
+		GeometryWayPoint first = points == null ? null : points.get(0);
+		float prevX = first != null ? first.tx : xs.get(0);
+		float prevY = first != null ? first.ty : ys.get(0);
+		int size = (points != null ? points.size() : xs.size());
 		int height = tb.getPixHeight();
 		int width = tb.getPixWidth();
 		int cnt = 0;
-		boolean hasStyles = styles != null && styles.size() == xs.size();
-		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
+		boolean hasStyles = (styles != null && styles.size() == xs.size());
+		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : first.style;
 		Path path = new Path();
 		float prevXorig = prevX;
 		float prevYorig = prevY;
 		float currXorig = Float.NaN;
 		float currYorig = Float.NaN;
 		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
-		for (int i = 1; i < xs.size(); i++) {
-			float currX = xs.get(i);
-			float currY = ys.get(i);
+		for (int i = 1; i < size; i++) {
+			GeometryWayPoint pnt = points == null ? null : points.get(i);
+			float currX = pnt != null ? pnt.tx : xs.get(i);
+			float currY = pnt != null ? pnt.tx : ys.get(i);
 			currXorig = currX;
 			currYorig = currY;
 			boolean currIn = isIn(currX, currY, 0, 0, width, height);
@@ -93,7 +97,7 @@ public class GeometryWayPathAlgorithms {
 					prevY = (int) (intersection & 0xffffffff);
 					draw = true;
 				}
-				if (i == xs.size() - 1 && !currIn) {
+				if (i == size - 1 && !currIn) {
 					long inter = MapAlgorithms.calculateIntersection((int) prevX, (int) prevY,
 							(int) currX, (int) currY, 0, width, height, 0);
 					if (inter != -1) {
@@ -116,8 +120,8 @@ public class GeometryWayPathAlgorithms {
 			prevX = currX;
 			prevY = currY;
 
-			if (hasStyles) {
-				GeometryWayStyle<?> newStyle = styles.get(i);
+			if (hasStyles || first.style != null) {
+				GeometryWayStyle<?> newStyle = pnt != null ? pnt.style : styles.get(i);
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
 					pathsData.add(new GeometryWayDrawer.DrawPathData(path, new PointF(prevXorig, prevYorig),
 							new PointF(currXorig, currYorig), style));
@@ -138,35 +142,32 @@ public class GeometryWayPathAlgorithms {
 		return pathsData;
 	}
 
-	public static List<GeometryWayDrawer.DrawPathData31> calculatePath(@NonNull List<Integer> indexes,
-																	   @NonNull List<Integer> xs, @NonNull List<Integer> ys,
-																	   @Nullable List<GeometryWayStyle<?>> styles) {
+	public static List<GeometryWayDrawer.DrawPathData31> calculatePath(@NonNull List<GeometryWayPoint> points) {
 		List<GeometryWayDrawer.DrawPathData31> pathsData = new ArrayList<>();
-		boolean hasStyles = styles != null && styles.size() == xs.size();
-		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
-		QListFloat heights = new QListFloat();
+		GeometryWayPoint firstPoint = points.get(0);
+		GeometryWayStyle<?> style = points.get(0).style;
 		List<Integer> ind = new ArrayList<>();
 		List<Integer> tx = new ArrayList<>();
 		List<Integer> ty = new ArrayList<>();
-		ind.add(indexes.get(0));
-		tx.add(xs.get(0));
-		ty.add(ys.get(0));
-		for (int i = 1; i < xs.size(); i++) {
-			ind.add(indexes.get(i));
-			tx.add(xs.get(i));
-			ty.add(ys.get(i));
-			if (hasStyles) {
-				GeometryWayStyle<?> newStyle = styles.get(i);
+		ind.add(firstPoint.index);
+		tx.add(firstPoint.tx31);
+		ty.add(firstPoint.ty31);
+		for (int i = 1; i < points.size(); i++) {
+			GeometryWayPoint pnt = points.get(i);
+			ind.add(pnt.index);
+			tx.add(pnt.tx31);
+			ty.add(pnt.ty31);
+			if (style != null) {
+				GeometryWayStyle<?> newStyle = pnt.style;
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
 					GeometryWayDrawer.DrawPathData31 newPathData = new GeometryWayDrawer.DrawPathData31(ind, tx, ty, style);
 					pathsData.add(newPathData);
-					heights = new QListFloat();
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
-					ind.add(indexes.get(i));
-					tx.add(xs.get(i));
-					ty.add(ys.get(i));
+					ind.add(pnt.index);
+					tx.add(pnt.tx31);
+					ty.add(pnt.ty31);
 					style = newStyle;
 				}
 			}

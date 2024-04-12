@@ -1,13 +1,10 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Canvas;
-import android.graphics.Path;
-import android.graphics.PointF;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
-import net.osmand.core.jni.QListFloat;
 import net.osmand.core.jni.VectorLineArrowsProvider;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
@@ -15,7 +12,6 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -31,7 +27,6 @@ import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TByteArrayList;
 
-import static net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms.calculatePath;
 import static net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms.cullRamerDouglasPeucker;
 
 public abstract class GeometryWay<T extends GeometryWayContext, D extends GeometryWayDrawer<T>> {
@@ -47,16 +42,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	protected TreeMap<Integer, PathGeometryZoom> zooms = new TreeMap<>();
 
 	// cache arrays
-	private final List<Integer> indexes = new ArrayList<>();
-	private final List<Float> tx = new ArrayList<>();
-	private final List<Float> ty = new ArrayList<>();
-	private final List<Double> angles = new ArrayList<>();
-	private final List<Double> distances = new ArrayList<>();
-	private final List<GeometryWayStyle<?>> styles = new ArrayList<>();
-
+	List<GeometryWayPoint> points = new ArrayList<>();
 	//OpenGL
-	private final List<Integer> tx31 = new ArrayList<>();
-	private final List<Integer> ty31 = new ArrayList<>();
 	protected final List<List<DrawPathData31>> pathsData31Cache = new ArrayList<>();
 	public int baseOrder = -1;
 	public long linesPriority = Long.MIN_VALUE;
@@ -277,13 +264,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				double dist = previous == -1 || odistances == null ? 0 : odistances.get(i);
 				if (!previousVisible && !ignorePrevious) {
 					if (previous != -1 && !isPreviousPointFarAway(locationProvider, previous, i)) {
-						addLocation(tb, previous, dist, style, indexes, tx, ty, tx31, ty31, angles, distances, styles);
+						addLocation(tb, previous, dist, style, points);
 					} else if (lastProjection != null) {
 						addLocation(tb, lastProjection.getLatitude(), lastProjection.getLongitude(), i - 1, dist, true,
-								getStyle(i - 1, style), indexes, tx, ty, tx31, ty31, angles, distances, styles); // first point
+								getStyle(i - 1, style), points); // first point
 					}
 				}
-				addLocation(tb, i, dist, style, indexes, tx, ty, tx31, ty31, angles, distances, styles);
+				addLocation(tb, i, dist, style, points);
 				previousVisible = true;
 				previousVisibleIdx = i;
 				ignorePrevious = false;
@@ -293,7 +280,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 					previousVisibleIdx = -1;
 				} else {
 					addLocation(tb, i, previous == -1 || odistances == null ? 0 : odistances.get(i), style,
-							indexes, tx, ty, tx31, ty31, angles, distances, styles);
+							points);
 					ignorePrevious = false;
 				}
 				double distToFinish = 0;
@@ -302,13 +289,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						distToFinish += odistances.get(ki);
 					}
 				}
-				drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+				drawRouteSegment(tb, canvas, points, distToFinish);
 				previousVisible = false;
 				clearArrays();
 			}
 			previous = i;
 		}
-		drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, 0, styles);
+		drawRouteSegment(tb, canvas, points, 0);
 	}
 
 	protected boolean shouldSkipLocation(@Nullable TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
@@ -347,28 +334,22 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	}
 
 	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist,
-	                           GeometryWayStyle<?> style, List<Integer> indexes,
-	                           List<Float> tx, List<Float> ty,
-	                           List<Integer> tx31, List<Integer> ty31,
-	                           List<Double> angles, List<Double> distances,
-	                           List<GeometryWayStyle<?>> styles) {
+	                           GeometryWayStyle<?> style, List<GeometryWayPoint> points) {
 		addLocation(tb, locationProvider.getLatitude(locationIdx), locationProvider.getLongitude(locationIdx),
-				locationIdx, dist, false, style, indexes, tx, ty, tx31, ty31, angles, distances, styles);
+				locationIdx, dist, false, style, points);
 	}
 
 	protected void addLocation(RotatedTileBox tb, double latitude, double longitude, int locationIdx,
 	                           double dist, boolean initialPoint,
-	                           GeometryWayStyle<?> style, List<Integer> indexes,
-	                           List<Float> tx, List<Float> ty,
-	                           List<Integer> tx31, List<Integer> ty31,
-	                           List<Double> angles, List<Double> distances,
-	                           List<GeometryWayStyle<?>> styles) {
-		indexes.add((initialPoint ? INITIAL_POINT_INDEX_SHIFT : 0) + locationIdx);
+	                           GeometryWayStyle<?> style, List<GeometryWayPoint> points) {
+		GeometryWayPoint pnt = new GeometryWayPoint();
+		pnt.index = (initialPoint ? INITIAL_POINT_INDEX_SHIFT : 0) + locationIdx;
 
 		if (hasMapRenderer()) {
-			tx31.add(MapUtils.get31TileNumberX(longitude));
-			ty31.add(MapUtils.get31TileNumberY(latitude));
-			styles.add(style);
+			pnt.tx31= MapUtils.get31TileNumberX(longitude);
+			pnt.ty31=MapUtils.get31TileNumberY(latitude);
+			pnt.style = style;
+			points.add(pnt);
 			return;
 		}
 
@@ -376,10 +357,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		float y = tb.getPixYFromLatLon(latitude, longitude);
 		float px = x;
 		float py = y;
-		int previous = tx.size() - 1;
-		if (previous >= 0) {
-			px = tx.get(previous);
-			py = ty.get(previous);
+		if (points.size() > 0) {
+			px = points.get(points.size() - 1).tx;
+			py = points.get(points.size() - 1).ty;
 		}
 		double angle = 0;
 		if (px != x || py != y) {
@@ -387,11 +367,13 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			angle = (angleRad * 180 / Math.PI) + 90f;
 		}
 		double distSegment = dist != 0 ? dist : Math.sqrt((y - py) * (y - py) + (x - px) * (x - px));
-		tx.add(x);
-		ty.add(y);
-		angles.add(angle);
-		distances.add(distSegment);
-		styles.add(style);
+		pnt.style = style;
+		pnt.tx = x;
+		pnt.ty = y;
+		pnt.angle = angle;
+		pnt.distance = distSegment;
+		pnt.style = style;
+		points.add(pnt);
 	}
 
 	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude,
@@ -400,7 +382,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		if (hasMapRenderer() || (leftLongitude <= lastPoint.getLongitude() && lastPoint.getLongitude() <= rightLongitude
 				&& bottomLatitude <= lastPoint.getLatitude() && lastPoint.getLatitude() <= topLatitude)) {
 			addLocation(tb, lastPoint.getLatitude(), lastPoint.getLongitude(), startLocationIndex, 0, true,
-					style, indexes, tx, ty, tx31, ty31, angles, distances, styles);
+					style, points);
 			return true;
 		}
 		return false;
@@ -446,11 +428,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						}
 					}
 					if (previousVisible) {
-						if (!this.indexes.isEmpty()) {
-							Integer index = this.indexes.get(0);
-							ind.add(0, index);
-							tx.add(0, this.tx31.get(0));
-							ty.add(0, this.ty31.get(0));
+						if (!this.points.isEmpty()) {
+							GeometryWayPoint firstPnt = this.points.get(0);
+							ind.add(0, firstPnt.index);
+							tx.add(0, firstPnt.tx31);
+							ty.add(0, firstPnt.ty31);
 						}
 					}
 					if (tx.size() > 1) {
@@ -487,14 +469,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	}
 
 	private void clearArrays() {
-		indexes.clear();
-		tx.clear();
-		ty.clear();
-		tx31.clear();
-		ty31.clear();
-		distances.clear();
-		angles.clear();
-		styles.clear();
+		points.clear();
 	}
 
 
@@ -508,23 +483,20 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	}
 
 	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas,
-	                             List<Integer> indexes,
-	                             List<Float> tx, List<Float> ty,
-	                             List<Integer> tx31, List<Integer> ty31,
-	                             List<Double> angles, List<Double> distances, double distToFinish,
-	                             List<GeometryWayStyle<?>> styles) {
+	                             List<GeometryWayPoint> points, double distToFinish) {
 		boolean hasMapRenderer = hasMapRenderer();
 		if (hasMapRenderer) {
-			if (tx31.size() < 2) {
+			if (points.size() < 2) {
 				return;
 			}
-		} else if (tx.size() < 2) {
+		} else if (points.size() < 2) {
 			return;
 		}
 		boolean hasPathLine = false;
 		boolean canvasRotated = false;
 		try {
-			for (GeometryWayStyle<?> style : styles) {
+			for (GeometryWayPoint p: points) {
+				GeometryWayStyle<?> style = p.style;
 				if (style.hasPathLine()) {
 					hasPathLine = true;
 					break;
@@ -532,7 +504,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 			if (hasPathLine) {
 				if (hasMapRenderer) {
-					List<DrawPathData31> pathsData = calculatePath(indexes, tx31, ty31, styles);
+					List<DrawPathData31> pathsData = GeometryWayPathAlgorithms.calculatePath(points);
 					GeometryWayProvider locationProvider = getLocationProvider();
 					if (!Algorithms.isEmpty(pathsData)) {
 						for (DrawPathData31 p : pathsData) {
@@ -548,7 +520,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				} else if (canvas != null) {
 					canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 					canvasRotated = true;
-					List<DrawPathData> pathsData = calculatePath(tb, tx, ty, styles);
+					List<DrawPathData> pathsData =  GeometryWayPathAlgorithms.calculatePath(tb, points, null, null, null);
 					if (!Algorithms.isEmpty(pathsData)) {
 						drawPathLine(canvas, tb, pathsData);
 					}
@@ -569,7 +541,7 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 						mapRenderer.addSymbolsProvider(arrowsProvider);
 					}
 				} else if (canvas != null) {
-					drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
+					drawer.drawArrowsOverPath(canvas, tb, points, distToFinish);
 				}
 			} else {
 				if (hasMapRenderer) {

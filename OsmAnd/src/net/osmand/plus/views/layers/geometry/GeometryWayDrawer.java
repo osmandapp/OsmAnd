@@ -83,8 +83,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		return context;
 	}
 
-	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<Float> tx, List<Float> ty,
-	                               List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
+	public void drawArrowsOverPath(@NonNull Canvas canvas, @NonNull RotatedTileBox tb, List<GeometryWayPoint> points, double distPixToFinish) {
 		List<PathPoint> arrows = new ArrayList<>();
 
 		int h = tb.getPixHeight();
@@ -94,13 +93,12 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		int top = -h / 4;
 		int bottom = h + h / 4;
 
-		boolean hasStyles = styles != null && styles.size() == tx.size();
 		double zoomCoef = tb.getZoomAnimation() > 0 ? (Math.pow(2, tb.getZoomAnimation() + tb.getZoomFloatPart())) : 1f;
-
-		int startIndex = tx.size() - 2;
+		int startIndex = points.size() - 2;
+		boolean hasStyles = points.get(startIndex).style != null;
 		double defaultPxStep;
-		if (hasStyles && styles.get(startIndex) != null) {
-			defaultPxStep = styles.get(startIndex).getPointStepPx(zoomCoef);
+		if (hasStyles) {
+			defaultPxStep = points.get(startIndex).style.getPointStepPx(zoomCoef);
 		} else {
 			Bitmap arrow = context.getArrowBitmap();
 			defaultPxStep = arrow.getHeight() * 4f * zoomCoef;
@@ -111,32 +109,28 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			dist = distPixToFinish - pxStep * ((int) (distPixToFinish / pxStep)); // dist < 1
 		}
 		for (int i = startIndex; i >= 0; i--) {
-			GeometryWayStyle<?> style = hasStyles ? styles.get(i) : null;
-			float px = tx.get(i);
-			float py = ty.get(i);
-			float x = tx.get(i + 1);
-			float y = ty.get(i + 1);
-			double distSegment = distances.get(i + 1);
-			double angle = angles.get(i + 1);
-			if (distSegment == 0) {
+			GeometryWayPoint prev = points.get(i);
+			GeometryWayPoint next = points.get(i + 1);
+			GeometryWayStyle<?> style = hasStyles ? prev.style : null;
+			if (next.distance == 0) {
 				continue;
 			}
 			pxStep = style != null ? style.getPointStepPx(zoomCoef) : defaultPxStep;
 			if (dist >= pxStep) {
 				dist = 0;
 			}
-			double percent = 1 - (pxStep - dist) / distSegment;
-			dist += distSegment;
+			double percent = 1 - (pxStep - dist) / next.distance;
+			dist += next.distance;
 			while (dist >= pxStep) {
-				double pdx = (x - px) * percent;
-				double pdy = (y - py) * percent;
-				float iconX = (float) (px + pdx);
-				float iconY = (float) (py + pdy);
+				double pdx = (next.tx - prev.tx) * percent;
+				double pdy = (next.ty - prev.ty) * percent;
+				float iconX = (float) (prev.tx + pdx);
+				float iconY = (float) (prev.ty + pdy);
 				if (GeometryWayPathAlgorithms.isIn(iconX, iconY, left, top, right, bottom)) {
-					arrows.add(getArrowPathPoint(iconX, iconY, style, angle, percent));
+					arrows.add(getArrowPathPoint(iconX, iconY, style, next.angle, percent));
 				}
 				dist -= pxStep;
-				percent -= pxStep / distSegment;
+				percent -= pxStep / next.distance;
 			}
 		}
 		for (int i = arrows.size() - 1; i >= 0; i--) {
