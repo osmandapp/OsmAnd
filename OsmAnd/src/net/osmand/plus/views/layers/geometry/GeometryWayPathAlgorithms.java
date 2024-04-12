@@ -77,7 +77,7 @@ public class GeometryWayPathAlgorithms {
 		for (int i = 1; i < size; i++) {
 			GeometryWayPoint pnt = points == null ? null : points.get(i);
 			float currX = pnt != null ? pnt.tx : xs.get(i);
-			float currY = pnt != null ? pnt.tx : ys.get(i);
+			float currY = pnt != null ? pnt.ty : ys.get(i);
 			currXorig = currX;
 			currYorig = currY;
 			boolean currIn = isIn(currX, currY, 0, 0, width, height);

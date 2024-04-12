@@ -33,6 +33,7 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 

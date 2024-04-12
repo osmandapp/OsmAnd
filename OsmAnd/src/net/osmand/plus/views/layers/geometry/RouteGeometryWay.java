@@ -212,7 +212,7 @@ public class RouteGeometryWay extends
 		Segment segment = currentCachedSegment != null ? currentCachedSegment : new Segment();
 		segment.indexes = new ArrayList<>();
 		segment.styles = new ArrayList<>();
-		for(GeometryWayPoint p : points) {
+		for (GeometryWayPoint p : points) {
 			segment.indexes.add(p.index);
 			segment.styles.add(p.style);
 		}
