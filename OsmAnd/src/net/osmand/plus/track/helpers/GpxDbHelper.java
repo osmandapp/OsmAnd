@@ -27,9 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class GpxDbHelper implements GpxDbReaderCallback {
-
 	private static final Log LOG = PlatformUtil.getLog(GpxDbHelper.class);
-
 	private final OsmandApplication app;
 	private final GPXDatabase database;
 

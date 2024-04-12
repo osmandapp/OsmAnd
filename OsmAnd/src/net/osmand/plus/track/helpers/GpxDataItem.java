@@ -91,8 +91,9 @@ public class GpxDataItem extends DataItem {
 				setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
 				break;
 			case SHOW_START_FINISH:
-				setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
-				break;
+				setParameter(USE_3D_TRACK_VISUALIZATION, gpxFile.isUse3DVisualization());
+		setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
+break;
 			case SPLIT_TYPE:
 				if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
 					GpxSplitType splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());

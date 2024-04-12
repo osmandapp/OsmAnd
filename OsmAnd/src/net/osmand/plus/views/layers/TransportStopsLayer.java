@@ -50,6 +50,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider.StopsCollectionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -280,7 +281,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 								tx.add(x);
 								ty.add(y);
 							}
-							GeometryWay.calculatePath(tb, tx, ty, path);
+							GeometryWayPathAlgorithms.calculatePath(tb, tx, ty, path);
 						}
 					}
 					attrs.drawPath(canvas, path);

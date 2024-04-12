@@ -41,6 +41,7 @@ public enum GpxParameter {
 	JOIN_SEGMENTS("joinSegments", "int", Boolean.class, false, false),
 	SHOW_ARROWS("showArrows", "int", Boolean.class, false, false),
 	SHOW_START_FINISH("showStartFinish", "int", Boolean.class, true, false),
+	USE_3D_TRACK_VISUALIZATION("use3dTrackVisualization", "int", Boolean.class, false, false),
 	WIDTH("width", "TEXT", String.class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String.class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double.class, Double.NaN, false),

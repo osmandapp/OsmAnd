@@ -19,6 +19,7 @@
     <string name="map_widget_map_scale">Map scale</string>
     <string name="upload_local_versions">Upload local versions</string>
     <string name="download_cloud_versions">Download cloud versions</string>
+    <string name="use_3d_track_visualization">3D visualization</string>
     <string name="distance_during_navigation_description">Choose how distance information is displayed in navigation widgets (distance to point, next turn, lanes).\n\nChoose “%1$s” for exact numbers, or “%2$s” for easier readability.</string>
     <string name="distance_during_navigation">Distance during navigation</string>
     <string name="precise">Precise</string>

@@ -86,7 +86,8 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	@Override
 	protected void drawVectorLine(@NonNull VectorLinesCollection collection,
 	                              int lineId, int baseOrder, boolean shouldDrawArrows, boolean approximationEnabled,
-	                              @NonNull GeometryWayStyle<?> style, @NonNull List<DrawPathData31> pathsData) {
+	                              @NonNull GeometryWayStyle<?> style,
+	                              @NonNull List<DrawPathData31> pathsData) {
 		Paint borderPaint = getContext().getBorderPaint();
 		int borderColor = coloringType.isGradient() ? borderPaint.getColor() : 0;
 		float borderWidth = coloringType.isGradient() ? borderPaint.getStrokeWidth() : 0;
