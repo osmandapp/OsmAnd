@@ -25,7 +25,7 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardContr
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
-import net.osmand.plus.configmap.tracks.appearance.tasks.ChangeAppearanceTask;
+import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.util.Algorithms;
 
 import java.util.Set;
@@ -89,7 +89,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	public void saveChanges(@NonNull FragmentActivity activity) {
 		colorCardController.getColorsPaletteController().refreshLastUsedTime();
 
-		ChangeAppearanceTask task = new ChangeAppearanceTask(activity, data, items, result -> {
+		ChangeTracksAppearanceTask task = new ChangeTracksAppearanceTask(activity, data, items, result -> {
 			isAppearanceSaved = true;
 			onAppearanceSaved();
 			return true;

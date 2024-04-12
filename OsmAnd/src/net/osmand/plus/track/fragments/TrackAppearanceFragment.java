@@ -44,6 +44,7 @@ import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
@@ -61,7 +62,6 @@ import net.osmand.plus.track.cards.DirectionArrowsCard;
 import net.osmand.plus.track.cards.ShowStartFinishCard;
 import net.osmand.plus.track.cards.SplitIntervalCard;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
-import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.track.fragments.controller.TrackWidthController;
 import net.osmand.plus.track.fragments.controller.TrackWidthController.ITrackWidthSelectedListener;
 import net.osmand.plus.track.helpers.GpxDataItem;
@@ -400,10 +400,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
 			if (card instanceof SplitIntervalCard) {
-				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
+				FragmentManager manager = activity.getSupportFragmentManager();
+				SplitIntervalBottomSheet.showInstance(manager, this);
 			} else if (card instanceof DirectionArrowsCard) {
 				refreshMap();
 				updateAppearanceIcon();

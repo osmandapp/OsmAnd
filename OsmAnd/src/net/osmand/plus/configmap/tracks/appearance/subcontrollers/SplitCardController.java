@@ -16,9 +16,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
-import net.osmand.plus.configmap.tracks.appearance.SplitIntervalBottomSheet;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.track.GpxSplitType;
+import net.osmand.plus.track.fragments.SplitIntervalBottomSheet;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 
@@ -91,7 +91,8 @@ public class SplitCardController extends BaseMultiStateCardController {
 		} else if (cardState.getTag() == null) {
 			onSplitSelected(cardState, null, null);
 		} else {
-			SplitIntervalBottomSheet.showInstance(card.getActivity());
+			FragmentActivity activity = card.getActivity();
+			SplitIntervalBottomSheet.showInstance(activity.getSupportFragmentManager(), null);
 		}
 	}
 
