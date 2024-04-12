@@ -766,7 +766,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
 				boolean use3DVisualization = isUse3DTrackVisualization(selectedGpxFile.getGpxFile());
-				log.info("drawDirectionArrows use3DVisualization " + use3DVisualization);
 				List<TrkSegment> segments = coloringType.isGradient()
 						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), false)
 						: selectedGpxFile.getPointsToDisplay();
@@ -1210,8 +1209,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
 					updated |= renderableSegment.setDrawArrows(isShowArrowsForTrack(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setUse3DVisualization(isUse3DTrackVisualization(selectedGpxFile.getGpxFile()));
-					log.info("drawSelectedFileSegments track " + selectedGpxFile.getGpxFile().path);
-					log.info("drawSelectedFileSegments Use3DVisualization " + isUse3DTrackVisualization(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();

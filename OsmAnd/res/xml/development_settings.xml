@@ -140,18 +140,6 @@
 		android:title="Allow display on top" />
 
 	<PreferenceCategory
-		android:key="routes"
-		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/rendering_category_routes" />
-
-	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="show_transparent_traces"
-		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_disabled"
-		android:summaryOn="@string/shared_string_enabled"
-		android:title="Show transparent traces" />
-
-	<PreferenceCategory
 		android:key="info"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/info_button" />

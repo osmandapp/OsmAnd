@@ -171,7 +171,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float g = (float) Color.green(color) / 256;
 		float b = (float) Color.blue(color) / 256;
 		boolean showRaised = false;
-		boolean showTransparentTraces = false;
+		boolean showTransparentTraces = true;
 		if (pathsData.size() > 0) {
 			showRaised = pathsData.get(0).style.use3DVisualization;
 		}
@@ -185,15 +185,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				}
 			}
 		}
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null) {
-			showTransparentTraces = plugin.SHOW_TRANSPARENT_TRACES.get();
-			if (showRaised) {
-				if (!showTransparentTraces)
-					traceColorizationMapping = colorizationMapping;
-			}
-		}
-		log.info("buildVectorLine showRaised " + showRaised);
 		if (showRaised && hasColorizationMapping && showTransparentTraces) {
 			long size = colorizationMapping.size();
 			traceColorizationMapping = new QListFColorARGB();
@@ -293,7 +284,6 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				builder.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
 		}
 		builder.buildAndAddToCollection(collection);
-		log.info("buildVectorLine took " + (System.currentTimeMillis() - startBuildVectorLineTime));
 	}
 
 	protected PathPoint getArrowPathPoint(float iconX, float iconY, GeometryWayStyle<?> style,

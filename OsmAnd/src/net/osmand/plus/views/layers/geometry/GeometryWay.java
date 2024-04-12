@@ -66,6 +66,8 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		double getLongitude(int index);
 
 		int getSize();
+
+		float getHeight(int index);
 	}
 
 	private static class GeometryWayLocationProvider implements GeometryWayProvider {
@@ -88,6 +90,11 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		@Override
 		public int getSize() {
 			return locations.size();
+		}
+
+		@Override
+		public float getHeight(int index) {
+			return 0;
 		}
 	}
 
@@ -591,27 +598,33 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 	                          @NonNull List<Integer> xs, @NonNull List<Integer> ys,
 	                          @Nullable List<GeometryWayStyle<?>> styles,
 	                          @NonNull List<DrawPathData31> pathsData) {
-		log.info("calculatePath this " + this);
 		boolean hasStyles = styles != null && styles.size() == xs.size();
 		GeometryWayStyle<?> style = hasStyles ? styles.get(0) : null;
+		QListFloat heights = new QListFloat();
 		List<Integer> ind = new ArrayList<>();
 		List<Integer> tx = new ArrayList<>();
 		List<Integer> ty = new ArrayList<>();
 		ind.add(indexes.get(0));
+		heights.add(getLocationHeight(0));
 		tx.add(xs.get(0));
 		ty.add(ys.get(0));
 		for (int i = 1; i < xs.size(); i++) {
 			ind.add(indexes.get(i));
+			heights.add(getLocationHeight(i));
 			tx.add(xs.get(i));
 			ty.add(ys.get(i));
 			if (hasStyles) {
 				GeometryWayStyle<?> newStyle = styles.get(i);
 				if (!style.equals(newStyle) || newStyle.isUnique()) {
-					pathsData.add(new DrawPathData31(ind, tx, ty, style));
+					DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
+					newPathData.heights = heights;
+					pathsData.add(newPathData);
+					heights = new QListFloat();
 					ind = new ArrayList<>();
 					tx = new ArrayList<>();
 					ty = new ArrayList<>();
 					ind.add(indexes.get(i));
+					heights.add(getLocationHeight(i));
 					tx.add(xs.get(i));
 					ty.add(ys.get(i));
 					style = newStyle;
@@ -619,7 +632,18 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			}
 		}
 		if (tx.size() > 1) {
-			pathsData.add(new DrawPathData31(ind, tx, ty, style));
+			DrawPathData31 newPathData = new DrawPathData31(ind, tx, ty, style);
+			pathsData.add(newPathData);
+			newPathData.heights = heights;
+		}
+	}
+
+	private float getLocationHeight(int index) {
+		GeometryWayProvider locationProvider = getLocationProvider();
+		if(locationProvider != null) {
+			return locationProvider.getHeight(index);
+		} else {
+			return 0;
 		}
 	}
 

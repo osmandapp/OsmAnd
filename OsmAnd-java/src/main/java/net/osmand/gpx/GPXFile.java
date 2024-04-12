@@ -756,13 +756,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	public boolean isUse3DVisualization() {
 		String use3DVisualization = null;
 		if (extensions != null) {
-			use3DVisualization = extensions.get("use_3d_visualization");
+			use3DVisualization = extensions.get("raise_routes_above_relief");
 		}
 		return Boolean.parseBoolean(use3DVisualization);
 	}
 
 	public void setUse3DVisualization(boolean use3DVisualization) {
-		getExtensionsToWrite().put("use_3d_visualization", String.valueOf(use3DVisualization));
+		getExtensionsToWrite().put("raise_routes_above_relief", String.valueOf(use3DVisualization));
 	}
 
 	public boolean isShowStartFinishSet() {

@@ -49,6 +49,7 @@ public abstract class MultiColoringGeometryWay
 	protected String routeInfoAttribute;
 
 	protected boolean coloringChanged;
+	private boolean use3dVisualization;
 
 	public MultiColoringGeometryWay(C context, D drawer) {
 		super(context, drawer);
@@ -108,7 +109,7 @@ public abstract class MultiColoringGeometryWay
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();
 			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, 0);
 			List<RouteColorizationPoint> points = routeColorize.getResult();
-			updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
+			updateWay(new GradientGeometryWayProvider(routeColorize, points, null), createGradientStyles(points), tb);
 		}
 	}
 
@@ -116,6 +117,7 @@ public abstract class MultiColoringGeometryWay
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
 		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle<?> style = getGradientWayStyle();
+			style.use3DVisualization = shouldUse3dVisualization();
 			style.currColor = points.get(i).color;
 			style.nextColor = points.get(i + 1).color;
 			styleMap.put(i, style);
@@ -299,11 +301,14 @@ public abstract class MultiColoringGeometryWay
 
 		private final RouteColorize routeColorize;
 		private final List<RouteColorizationPoint> locations;
+		private final List<Float> pointHeights;
 
 		public GradientGeometryWayProvider(@Nullable RouteColorize routeColorize,
-		                                   @NonNull List<RouteColorizationPoint> locations) {
+		                                   @NonNull List<RouteColorizationPoint> locations,
+		                                   @Nullable List<Float> pointHeights) {
 			this.routeColorize = routeColorize;
 			this.locations = locations;
+			this.pointHeights = pointHeights;
 		}
 
 		@Nullable
@@ -328,6 +333,11 @@ public abstract class MultiColoringGeometryWay
 		@Override
 		public int getSize() {
 			return locations.size();
+		}
+
+		@Override
+		public float getHeight(int index) {
+			return pointHeights == null ? 0 : pointHeights.get(index);
 		}
 	}
 
@@ -475,5 +485,13 @@ public abstract class MultiColoringGeometryWay
 		public int getColorizationScheme() {
 			return COLORIZATION_GRADIENT;
 		}
+	}
+
+	protected boolean shouldUse3dVisualization() {
+		return use3dVisualization;
+	}
+
+	protected void setUse3dVisualization(boolean use3dVisualization) {
+		this.use3dVisualization = use3dVisualization;
 	}
 }

@@ -133,7 +133,7 @@ public class RouteGeometryWay extends
 	                         double leftLongitude, double bottomLatitude, double rightLongitude,
 	                         Location lastProjection, int startLocationIndex) {
 		cachedSegments.clear();
-		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex/*, use3DVisualization*/);
+		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex);
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public class RouteGeometryWay extends
 	                                                          @NonNull RotatedTileBox tb,
 	                                                          int startLocationIndex,
 	                                                          boolean previousVisible) {
-		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible/*, use3DVisualization*/);
+		List<List<DrawPathData31>> croppedPathData31 = super.cutStartOfCachedPath(mapRenderer, tb, startLocationIndex, previousVisible);
 		if (croppedPathData31 == null) {
 			return null;
 		}

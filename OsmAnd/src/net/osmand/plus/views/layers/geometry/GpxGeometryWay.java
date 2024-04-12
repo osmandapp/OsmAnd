@@ -1,12 +1,9 @@
 package net.osmand.plus.views.layers.geometry;
 
-import android.graphics.Canvas;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.core.jni.QListFloat;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.routing.ColoringType;
@@ -34,7 +31,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	private List<RouteSegmentResult> routeSegments;
 
 	private boolean drawDirectionArrows;
-	private boolean use3dVisualization;
 
 	private static class GeometryWayWptPtProvider implements GeometryWayProvider {
 		private final List<WptPt> points;
@@ -51,6 +47,11 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		@Override
 		public double getLongitude(int index) {
 			return points.get(index).getLongitude();
+		}
+
+		@Override
+		public float getHeight(int index) {
+			return (float) points.get(index).ele;
 		}
 
 		@Override
@@ -74,8 +75,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				|| coloringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
-
-		log.info("setTrackStyleParams use3dVisualization " + use3dVisualization);
 		if (coloringTypeChanged) {
 			resetSymbolProviders();
 		}
@@ -88,7 +87,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if(this.use3dVisualization != use3dVisualization) {
+		if (this.shouldUse3dVisualization() != use3dVisualization) {
 			resetSymbolProviders();
 		}
 		updateUse3DVisualization(use3dVisualization);
@@ -99,7 +98,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.customWidth = trackWidth;
 		this.dashPattern = dashPattern;
 		this.drawDirectionArrows = drawDirectionArrows;
-		this.use3dVisualization = use3dVisualization;
+		setUse3dVisualization(use3dVisualization);
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
@@ -145,9 +144,11 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 	protected void updateGpxGradientWay(RotatedTileBox tb, List<WptPt> points) {
 		List<RouteColorizationPoint> colorizationPoints = new ArrayList<>();
+		List<Float> pointHeights = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
 			WptPt point = points.get(i);
 			RouteColorizationPoint cp = new RouteColorizationPoint(i, point.lat, point.lon, 0);
+			pointHeights.add((float) point.ele);
 			switch (coloringType) {
 				case SPEED:
 					cp.color = point.getColor(ColorizationType.SPEED);
@@ -167,7 +168,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			}
 			colorizationPoints.add(cp);
 		}
-		updateWay(new GradientGeometryWayProvider(null, colorizationPoints), createGradientStyles(colorizationPoints), tb);
+		updateWay(new GradientGeometryWayProvider(null, colorizationPoints, pointHeights), createGradientStyles(colorizationPoints), tb);
 	}
 
 	@Override
@@ -183,7 +184,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		GeometrySolidWayStyle<GpxGeometryWayContext> style = new GeometrySolidWayStyle<>(
 				getContext(), customColor, customWidth, getContrastLineColor(customColor), false);
 		style.dashPattern = dashPattern;
-		style.use3DVisualization = use3dVisualization;
+		style.use3DVisualization = shouldUse3dVisualization();
 		return style;
 	}
 
@@ -193,17 +194,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		GeometrySolidWayStyle<GpxGeometryWayContext> style = new GeometrySolidWayStyle<>(
 				getContext(), lineColor, customWidth, getContrastLineColor(lineColor), true);
 		style.dashPattern = dashPattern;
-		style.use3DVisualization = use3dVisualization;
+		style.use3DVisualization = shouldUse3dVisualization();
 		return style;
 	}
 
 	@Override
 	protected boolean shouldDrawArrows() {
 		return drawDirectionArrows;
-	}
-
-	protected boolean shouldUse3dVisualization() {
-		return use3dVisualization;
 	}
 
 	@Override
@@ -213,26 +210,5 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			routeSegments = null;
 			super.clearWay();
 		}
-	}
-
-	@Override
-	public void calculatePath(@NonNull List<Integer> indexes, @NonNull List<Integer> xs, @NonNull List<Integer> ys, @Nullable List<GeometryWayStyle<?>> styles, @NonNull List<GeometryWayDrawer.DrawPathData31> pathsData) {
-		super.calculatePath(indexes, xs, ys, styles, pathsData);
-		for (int i = 0; i < pathsData.size(); i++) {
-			GeometryWayDrawer.DrawPathData31 drawPathData = pathsData.get(i);
-			drawPathData.heights = new QListFloat();
-			for (int ii = 0; ii < drawPathData.indexes.size(); ii++) {
-				int index = drawPathData.indexes.get(ii);
-				WptPt point = points.get(index);
-				log.info("calculatePath addPointHeight " + (float) point.ele);
-				drawPathData.heights.add((float) point.ele);
-			}
-		}
-	}
-
-	@Override
-	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes, List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
-		log.info(" drawRouteSegment use3dVisualization " + shouldUse3dVisualization());
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
 	}
 }
