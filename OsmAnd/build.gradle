@@ -38,7 +38,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion 23
-		versionCode 4799
+		versionCode 478
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		versionName "4.7.N"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
