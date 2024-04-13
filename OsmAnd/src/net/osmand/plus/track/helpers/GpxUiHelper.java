@@ -705,7 +705,7 @@ public class GpxUiHelper {
 	}
 
 	public static boolean isGpxFile(@NonNull File file) {
-		return file.isFile() && file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
+		return file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
 	}
 
 	public static void updateGpxInfoView(@NonNull View view, @NonNull TrackItem trackItem,
