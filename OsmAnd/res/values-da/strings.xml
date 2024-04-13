@@ -5684,4 +5684,5 @@
     <string name="fix_north_up_descr">Drej ikke kortet ved berøringer i kortorientering Nord op</string>
     <string name="fix_north_up">Aktivér fast nord op</string>
     <string name="change_default_appearance_confirmation">Skift standardudseende for %1$s?</string>
+    <string name="use_3d_track_visualization">3D-visualisering</string>
 </resources>
