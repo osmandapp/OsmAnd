@@ -404,14 +404,14 @@ public class GPXDatabase {
 	public DataItem getDataItem(@NonNull File file, @NonNull SQLiteConnection db) {
 		String name = file.getName();
 		String dir = GpxDbUtils.getGpxFileDir(app, file);
-		boolean directory = file.isDirectory();
+		boolean gpxFile = GpxUiHelper.isGpxFile(file);
 
-		String selectQuery = directory ? GpxDbUtils.getSelectGpxDirQuery() : GpxDbUtils.getSelectGpxQuery();
+		String selectQuery = gpxFile ? GpxDbUtils.getSelectGpxQuery() : GpxDbUtils.getSelectGpxDirQuery();
 		SQLiteCursor query = db.rawQuery(selectQuery + GPX_FIND_BY_NAME_AND_DIR, new String[] {name, dir});
 		if (query != null) {
 			try {
 				if (query.moveToFirst()) {
-					return directory ? readGpxDirItem(query) : readGpxDataItem(query);
+					return gpxFile ? readGpxDataItem(query) : readGpxDirItem(query);
 				}
 			} finally {
 				query.close();
