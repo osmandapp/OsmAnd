@@ -146,22 +146,19 @@ public class ZoomLevelWidget extends SimpleWidget {
 	@NonNull
 	private FormattedValue formatMapScale(int mapScale) {
 		int digitsCount = (int) (Math.log10(mapScale) + 1);
+		int div;
+		String unit;
 		if (digitsCount >= 7) {
-			return formatLongNumber(mapScale, digitsCount, 6, "M");
-		} else if (digitsCount >= 5) {
-			return formatLongNumber(mapScale, digitsCount, 3, "K");
+			div = 1_000_000;
+			unit = "M";
+		} else if (digitsCount >= 4) {
+			div = 1_000;
+			unit = "K";
 		} else {
-			return new FormattedValue(mapScale, String.valueOf(mapScale), "");
+			div = 1;
+			unit = "";
 		}
-	}
-
-	@NonNull
-	private FormattedValue formatLongNumber(int number, int digits, int insignificantDigits, @NonNull String unit) {
-		int significantDigits = digits - insignificantDigits;
-		int insignificantDigitsToShow = Math.max(MAX_RATIO_DIGITS - significantDigits, 0);
-		int removeExcessiveDigits = number / (int) Math.pow(10, insignificantDigits - insignificantDigitsToShow);
-		float roundedMapScale = (float) (removeExcessiveDigits / Math.pow(10, insignificantDigitsToShow));
-		return OsmAndFormatter.formatValue(roundedMapScale, unit, false, insignificantDigitsToShow, app);
+		return OsmAndFormatter.formatIntegerValue(mapScale / div, unit, app);
 	}
 
 	private void setZoomLevelText(int zoomBaseWithOffset, int zoomBase, float zoomFraction, float mapDensity) {
