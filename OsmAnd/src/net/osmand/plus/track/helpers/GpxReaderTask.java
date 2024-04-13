@@ -91,7 +91,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						}
 						setupNearestCityName(item);
 						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
-						gpxDbHelper.updateDataItem(item);
+
+						if (database.getDataItem(file, conn) != null) {
+							gpxDbHelper.updateDataItem(item);
+						} else {
+							database.insertItem(item, conn);
+						}
 					}
 					if (listener != null) {
 						listener.onGpxDataItemRead(item);
