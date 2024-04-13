@@ -100,7 +100,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					progress.clear();
 				}
 				tracksCounter++;
-				if (tracksCounter % 10 == 0) {
+				if (tracksCounter % 100 == 0) {
 					long endTime = System.currentTimeMillis();
 					LOG.info("Loading tracks. took " + (endTime - loadingTime) + "ms");
 					loadingTime = endTime;

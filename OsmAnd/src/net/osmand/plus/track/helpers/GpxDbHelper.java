@@ -59,13 +59,22 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public void loadGpxItems() {
 		long start = System.currentTimeMillis();
+		long batchTime = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
+
+		int counter = 0;
 		for (GpxDataItem item : items) {
 			File file = item.getFile();
 			if (file.exists()) {
 				putToCache(item);
 			} else {
 				remove(file);
+			}
+			counter++;
+			if (counter % 100 == 0) {
+				long endTime = System.currentTimeMillis();
+				LOG.info("Loading tracks batch. took " + (endTime - batchTime) + "ms");
+				batchTime = endTime;
 			}
 		}
 		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + items.size());
