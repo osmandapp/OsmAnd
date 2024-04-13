@@ -34,6 +34,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	private final LoadTracksListener listener;
 	private long loadingTime = 0;
 	private int tracksCounter = 0;
+	private static final int LOG_BATCH_SIZE = 100;
 
 	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
 		this.folder = folder;
@@ -100,9 +101,9 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					progress.clear();
 				}
 				tracksCounter++;
-				if (tracksCounter % 100 == 0) {
+				if (tracksCounter % LOG_BATCH_SIZE == 0) {
 					long endTime = System.currentTimeMillis();
-					LOG.info("Loading tracks. took " + (endTime - loadingTime) + "ms");
+					LOG.info("Loading " + LOG_BATCH_SIZE + "tracks. took " + (endTime - loadingTime) + "ms");
 					loadingTime = endTime;
 				}
 			}
