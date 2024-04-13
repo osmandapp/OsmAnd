@@ -243,7 +243,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Restricciones de acceso y peajes</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -4472,8 +4472,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar la visibilidad de los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
@@ -5667,6 +5667,8 @@
 \n
 \n• Se añadieron filtros de datos del sensor para las trazas
 \n
+\n• Se ha mejorado la personalización de la interfaz para los grupos de trazas.
+\n
 \n• Ahora se admiten etiquetas GPX adicionales
 \n
 \n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados
@@ -5690,6 +5692,7 @@
     <string name="gpx_approximation_geo_java">Basado en la geometría (Java, rápido)</string>
     <string name="gpx_approximation_cpp">Basado en la navegación (C++)</string>
     <string name="gpx_approximation_java">Basado en la navegación (Java)</string>
-    <string name="fix_north_up">Activar Norte fijo arriba</string>
-    <string name="fix_north_up_descr">No rotar el mapa con gestos, en la orientación «Norte arriba»</string>
+    <string name="fix_north_up">Bloquear orientación «Norte arriba»</string>
+    <string name="fix_north_up_descr">El mapa no rota al usar gestos, en la orientación «Norte arriba»</string>
+    <string name="change_default_appearance_confirmation">¿Cambiar el aspecto predefinido de %1$s?</string>
 </resources>

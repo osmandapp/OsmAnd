@@ -1220,7 +1220,7 @@
     <string name="rendering_attr_moreDetailed_name">Mehr Details</string>
     <string name="rendering_attr_lessDetailed_name">Weniger Details</string>
     <string name="rendering_attr_hideAccess_name">Zufahrtsbeschränkungen</string>
-    <string name="rendering_attr_showAccess_name">Zufahrtsbeschränkungen anzeigen</string>
+    <string name="rendering_attr_showAccess_name">Zugangs- und Mautbeschränkungen anzeigen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fahrradrouten</string>
@@ -4483,8 +4483,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons bei niedrigen Zoomstufen</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-Tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematische Darstellung von Symbolen bei niedrigen Zoomstufen</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Wasserstraßentunnel</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Meeresbodendetail</string>
     <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinfo zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>
@@ -5655,6 +5655,8 @@
 \n
 \n• Filter nach Sensordaten für Strecken hinzugefügt
 \n
+\n• Verbesserte Anpassung des Aussehens für Trackgruppen
+\n
 \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
 \n
 \n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
@@ -5680,4 +5682,5 @@
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
     <string name="fix_north_up">Festen Norden oben aktivieren</string>
     <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
+    <string name="change_default_appearance_confirmation">Ändern des Standard-Aussehens von %1$s?</string>
 </resources>

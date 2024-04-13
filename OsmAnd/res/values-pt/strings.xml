@@ -1419,7 +1419,7 @@
     <string name="shared_string_waypoints">Pontos de rota</string>
     <string name="shared_string_dismiss">Cancelar</string>
     <string name="rendering_category_others">Outros atributos do mapa</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e portagem</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
@@ -4479,8 +4479,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar observações ou comentários (etiqueta \"note\")</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneis de cursos de água</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar a visibilidade dos túneis de hidrovias</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumentar a visibilidade dos túneis de hidrovias</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omissão</string>
@@ -5656,6 +5656,8 @@
 \n
 \n - Adicionados filtros por dados do sensor para trilhos
 \n
+\n - Personalização melhorada da aparência para o grupo de faixas
+\n
 \n - Adicionado suporte para etiquetas GPX adicionais
 \n
 \n - Personalização da \"Distância durante a navegação\": escolha entre números exatos ou arredondados
@@ -5674,4 +5676,10 @@
     <string name="download_cloud_versions">Descarregar versões na nuvem</string>
     <string name="upload_local_versions">Enviar versões locais</string>
     <string name="map_widget_map_scale">Escala do mapa</string>
+    <string name="gpx_approximation_cpp">Baseado no roteamento (C++)</string>
+    <string name="gpx_approximation_java">Baseado no roteamento (Java)</string>
+    <string name="gpx_approximation_geo_java">Baseado na geometria (Java, rápido)</string>
+    <string name="change_default_appearance_confirmation">Alterar a aparência padrão de %1$s?</string>
+    <string name="unchanged_parameter_summary">Cada trilho irá reter os seus próprios parâmetros.</string>
+    <string name="shared_string_unchanged">Inalterado</string>
 </resources>
