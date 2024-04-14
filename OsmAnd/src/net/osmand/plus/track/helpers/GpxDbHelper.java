@@ -207,6 +207,9 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
+		if (file.getPath().isEmpty()) {
+			return null;
+		}
 		GpxDataItem item = dataItems.get(file);
 		if (GpxDbUtils.isAnalyseNeeded(item) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);

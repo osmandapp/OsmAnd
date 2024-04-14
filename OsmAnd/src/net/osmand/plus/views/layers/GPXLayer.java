@@ -1294,6 +1294,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return false;
 		} else if (gpxAppearanceHelper.hasTrackDrawInfoForTrack(gpxFile)) {
 			return gpxAppearanceHelper.getTrackDrawInfo().isUse3DTrackVisualization();
+		} else if (gpxFile.showCurrentTrack) {
+			// TODO: add setting for current track
+			return false;
 		} else {
 			GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
 			if (dataItem != null) {

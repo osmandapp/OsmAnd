@@ -98,19 +98,9 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
 
 						if (database.getDataItem(file, conn) != null) {
-							String logStr = ">>>> updateDataItem ERROR filePath=" + file.getPath() + " fileName=" + file.getName() + " item=" + item.getClass().getSimpleName();
-							try {
-								gpxDbHelper.updateDataItem(item);
-							} catch (Exception e) {
-								throw new IllegalStateException(logStr);
-							}
+							gpxDbHelper.updateDataItem(item);
 						} else {
-							String logStr = ">>>> insertItem ERROR filePath=" + file.getPath() + " fileName=" + file.getName() + " item=" + item.getClass().getSimpleName();
-							try {
-								database.insertItem(item, conn);
-							} catch (Exception e) {
-								throw new IllegalStateException(logStr);
-							}
+							database.insertItem(item, conn);
 						}
 					}
 					if (listener != null) {
@@ -121,6 +111,8 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 					}
 					file = readingItems.poll();
 				}
+			} catch (Exception e) {
+				LOG.error(e.getMessage());
 			} finally {
 				conn.close();
 			}
