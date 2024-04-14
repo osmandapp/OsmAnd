@@ -4472,7 +4472,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar la visibilidad de los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -5695,4 +5695,5 @@
     <string name="fix_north_up">Bloquear orientación «Norte arriba»</string>
     <string name="fix_north_up_descr">El mapa no rota al usar gestos, en la orientación «Norte arriba»</string>
     <string name="change_default_appearance_confirmation">¿Cambiar el aspecto predefinido de %1$s?</string>
+    <string name="use_3d_track_visualization">Vista 3D</string>
 </resources>

@@ -5677,4 +5677,5 @@
     <string name="fix_north_up">Fent rögzített északi irány engedélyezése</string>
     <string name="fix_north_up_descr">Ne forgassa el a térképet gesztusokkal, ha a fent rögzített északi irány be van kapcsolva</string>
     <string name="change_default_appearance_confirmation">Megváltoztatja %1$s alapértelmezett kinézetét?</string>
+    <string name="use_3d_track_visualization">3D vizualizáció</string>
 </resources>
