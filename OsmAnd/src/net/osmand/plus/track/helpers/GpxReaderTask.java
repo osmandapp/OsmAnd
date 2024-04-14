@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -27,6 +28,8 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -36,6 +39,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
+
+	private static final Log LOG = PlatformUtil.getLog(GpxReaderTask.class);
 
 	private static final int CITY_SEARCH_RADIUS = 50 * 1000;
 
@@ -93,8 +98,10 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
 
 						if (database.getDataItem(file, conn) != null) {
+							LOG.error(">>>> updateDataItem file=" + file.getAbsolutePath() + " item=" + item.getClass().getSimpleName() + " item.file=" + item.getFile().getAbsolutePath());
 							gpxDbHelper.updateDataItem(item);
 						} else {
+							LOG.error(">>>> insertItem file=" + file.getAbsolutePath() + " item=" + item.getClass().getSimpleName() + " item.file=" + item.getFile().getAbsolutePath());
 							database.insertItem(item, conn);
 						}
 					}
