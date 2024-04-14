@@ -98,16 +98,14 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
 
 						if (database.getDataItem(file, conn) != null) {
-							String logStr = ">>>> updateDataItem ERROR file=" + file.getAbsolutePath() + " item=" + item.getClass().getSimpleName() + " item.file=" + item.getFile().getAbsolutePath();
-							LOG.error(logStr);
+							String logStr = ">>>> updateDataItem ERROR filePath=" + file.getPath() + " fileName=" + file.getName() + " item=" + item.getClass().getSimpleName();
 							try {
 								gpxDbHelper.updateDataItem(item);
 							} catch (Exception e) {
 								throw new IllegalStateException(logStr);
 							}
 						} else {
-							String logStr = ">>>> insertItem ERROR file=" + file.getAbsolutePath() + " item=" + item.getClass().getSimpleName() + " item.file=" + item.getFile().getAbsolutePath();
-							LOG.error(logStr);
+							String logStr = ">>>> insertItem ERROR filePath=" + file.getPath() + " fileName=" + file.getName() + " item=" + item.getClass().getSimpleName();
 							try {
 								database.insertItem(item, conn);
 							} catch (Exception e) {
