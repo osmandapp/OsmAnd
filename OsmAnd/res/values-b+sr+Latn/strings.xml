@@ -1582,7 +1582,7 @@
     <string name="no_info">Nema informacija</string>
     <string name="altitude">Visina</string>
     <string name="accuracy">Tačnost</string>
-    <string name="towards">prema</string>
+    <string name="towards">pravac</string>
     <string name="oclock">sati</string>
     <string name="front_left">levo-napred</string>
     <string name="left">na levo</string>
