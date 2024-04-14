@@ -2338,7 +2338,7 @@
     <string name="zoom_levels_difference_description">Perbedaan besar antara tingkat zoom dapat meningkatkan ukuran data yang diunduh.</string>
     <string name="default_appearance_desc">Warna, ikon, dan bentuk bawaan akan diterapkan ke titik favorit yang ditambahkan ke dalam grup.</string>
     <string name="selected_waypoints_descr">Titik jalan yang dipilih akan ditambahkan ke trek \"%1$s\"</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Terowongan jalur air</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Tingkatkan keterlihatan terowongan jalur air</string>
     <string name="shared_string_places">Tempat</string>
     <string name="shared_string_clear">Hapus</string>
     <string name="map_widget_altitude">Ketinggian lokasi saat ini</string>
@@ -2358,7 +2358,7 @@
     <string name="save_track_to_gpx_descrp">Mulai perekaman trek secara otomatis saat menavigasi dan simpan secara otomatis setelahnya.</string>
     <string name="rendering_attr_seabedDetail_description">Info teks tambahan tentang surface_qualification dasar laut, jenis permukaan gabungan, kategori dan takson gulma atau lamun</string>
     <string name="rendering_value_omit_name">Hilangkan</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Jangan sembunyikan terowongan jalur air</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Tingkatkan keterlihatan terowongan jalur air</string>
     <string name="always_ask_waypoint_appearance_description">Mengetuk tindakan ini membuka layar \"Tambahkan titik jalan\" di mana Anda dapat mengubah nama dan tampilan.</string>
     <string name="waypoint_template">Templat titik jalan</string>
     <string name="predefined_waypoint_appearance_description">Mengetuk tindakan ini menyimpan titik jalan secara otomatis dengan parameter yang telah ditetapkan.</string>
@@ -4522,7 +4522,7 @@
     <string name="routing_attr_piste_type_skitour_description">Rute untuk tur ski.</string>
     <string name="routing_attr_allow_advanced_name">Perbolehkan rute lanjutan</string>
     <string name="routing_attr_allow_advanced_description">Rute yang sulit, dengan hambatan berbahaya dan bagian yang curam.</string>
-    <string name="rendering_attr_showAccess_name">Tampilkan pembatasan akses</string>
+    <string name="rendering_attr_showAccess_name">Tampilkan pembatasan akses dan tol</string>
     <string name="save_as_favorites_points">Simpan sebagai grup Favorit</string>
     <string name="vector_data_missing">Unduh data (\'luring\') untuk menggunakan peta secara luring.</string>
     <string name="local_index_action_do">Anda akan %1$s %2$s item. Lanjutkan\?</string>
@@ -5655,6 +5655,8 @@
 \n
 \n• Menambahkan filter berdasarkan data sensor untuk trek
 \n
+\n• Meningkatkan kustomisasi penampilan untuk kelompok trek
+\n
 \n• Menambahkan dukungan untuk tag GPX tambahan
 \n
 \n• Sesuaikan \"Jarak selama navigasi\": pilih antara angka yang tepat atau angka yang dibulatkan
@@ -5680,4 +5682,6 @@
     <string name="gpx_approximation_geo_java">Berbasis geometri (Java, cepat)</string>
     <string name="fix_north_up_descr">Jangan putar peta dengan gestur dalam orientasi peta Utara Atas</string>
     <string name="fix_north_up">Aktifkan Utara Tetap Atas</string>
+    <string name="use_3d_track_visualization">Visualisasi 3D</string>
+    <string name="change_default_appearance_confirmation">Ubah tampilan bawaan dari %1$s?</string>
 </resources>
