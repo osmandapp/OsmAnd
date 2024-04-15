@@ -4,6 +4,7 @@ import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
+import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
 import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
@@ -196,11 +197,9 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 			if (item.isHidden(app)) {
 				parent = app.getAppInternalPath(HIDDEN_DIR);
 			} else if (item.getType() == MAP_DATA) {
-				if (fileName.endsWith(BINARY_ROAD_MAP_INDEX_EXT)) {
-					parent = app.getAppPath(ROADS_INDEX_DIR);
-				} else {
-					parent = app.getAppPath(MAPS_PATH);
-				}
+				parent = app.getAppPath(MAPS_PATH);
+			} else if (item.getType() == ROAD_DATA) {
+				parent = app.getAppPath(ROADS_INDEX_DIR);
 			} else if (item.getType() == TILES_DATA) {
 				if (fileName.endsWith(HEIGHTMAP_SQLITE_EXT)) {
 					parent = app.getAppPath(HEIGHTMAP_INDEX_DIR);
