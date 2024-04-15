@@ -5684,4 +5684,7 @@
     <string name="fix_north_up">Aktivér fast nord op</string>
     <string name="change_default_appearance_confirmation">Skift standardudseende for %1$s?</string>
     <string name="use_3d_track_visualization">3D-visualisering</string>
+    <string name="shared_string_changes">Ændringer</string>
+    <string name="apply_only_to_new">Anvend kun på nye</string>
+    <string name="change_default_tracks_appearance_confirmation">Anvend ændringer på eksisterende spor i mappen eller kun på nye?</string>
 </resources>
