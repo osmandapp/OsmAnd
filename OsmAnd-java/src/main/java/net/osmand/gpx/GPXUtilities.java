@@ -231,12 +231,17 @@ public class GPXUtilities {
 	}
 
 	public static int parseColor(String colorString, int defColor) {
+		Integer color = parseColor(colorString);
+		return color != null ? color : defColor;
+	}
+
+	public static Integer parseColor(String colorString) {
 		if (!Algorithms.isEmpty(colorString)) {
 			if (colorString.charAt(0) == '#') {
 				try {
 					return Algorithms.parseColor(colorString);
 				} catch (IllegalArgumentException e) {
-					return defColor;
+					log.error(e);
 				}
 			} else {
 				GPXColor gpxColor = GPXColor.getColorFromName(colorString);
@@ -245,7 +250,7 @@ public class GPXUtilities {
 				}
 			}
 		}
-		return defColor;
+		return null;
 	}
 
 	public static class WptPt extends GPXExtensions {

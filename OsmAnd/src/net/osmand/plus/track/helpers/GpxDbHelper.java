@@ -121,6 +121,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 			}
 			putToCache(newItem);
 			removeFromCache(currentFile);
+			updateDefaultAppearance(newItem, false);
 		}
 		return success;
 	}
@@ -145,9 +146,9 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean add(@NonNull GpxDataItem item) {
-		checkDefaultAppearance(item);
 		boolean res = database.add(item);
 		putToCache(item);
+		updateDefaultAppearance(item, true);
 		return res;
 	}
 
@@ -238,18 +239,20 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		return items;
 	}
 
-	private void checkDefaultAppearance(@NonNull GpxDataItem item) {
+	private void updateDefaultAppearance(@NonNull GpxDataItem item, boolean updateExistingValues) {
 		File file = item.getFile();
 		File dir = file.getParentFile();
 		if (dir != null) {
 			GpxDirItem dirItem = getGpxDirItem(dir);
 
 			for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
-				Object value = dirItem.getParameter(parameter);
-				if (value != null) {
-					item.setParameter(parameter, value);
+				Object value = item.getParameter(parameter);
+				Object defaultValue = dirItem.getParameter(parameter);
+				if (defaultValue != null && (updateExistingValues || value == null)) {
+					item.setParameter(parameter, defaultValue);
 				}
 			}
+			updateDataItem(item);
 		}
 	}
 
