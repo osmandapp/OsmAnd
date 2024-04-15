@@ -94,6 +94,7 @@ import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
+	public static final float MIN_ALLOWED_ELEVATION_ANGLE = 10;
 	public static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
 	public static final int FOG_DEFAULT_COLOR = 0xffebe7e4;
 	public static final int SKY_DEFAULT_COLOR = 0xffffffff;
@@ -407,6 +408,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		changeZoomManually(1);
 	}
 
+	public void zoomOutAndAdjustTileAngle() {
+		changeZoomManually(-1, true);
+	}
+
+	public void zoomInAndAdjustTiltAngle() {
+		changeZoomManually(1, true);
+	}
+
 	public void scrollMap(float dx, float dy) {
 		moveTo(dx, dy, true);
 	}
@@ -547,6 +556,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void changeZoomManually(int zoomStep) {
+		changeZoomManually(zoomStep, false);
+	}
+
+	public void changeZoomManually(int zoomStep, boolean adjustTiltAngle) {
 		if (animatedDraggingThread.isAnimatingMapZoom()) {
 			animatedDraggingThread.stopAnimatingSync();
 		}
@@ -563,6 +576,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		zoom.changeZoom(zoomStep);
 		animatedDraggingThread.startZooming(zoom.getBaseZoom(), zoom.getZoomFloatPart(), null, false);
+		if (adjustTiltAngle && MultiTouchSupport.isTiltSupportEnabled(application)) {
+			adjustTiltAngle(zoom);
+		}
 
 		mapViewTrackingUtilities.setZoomTime(System.currentTimeMillis());
 		showAndHideMapPosition();
@@ -572,6 +588,33 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		for (ManualZoomListener listener : manualZoomListeners) {
 			listener.onManualZoomChange();
+		}
+	}
+
+	private void adjustTiltAngle(@NonNull Zoom zoom) {
+		float angle = -1;
+		int baseZoom = zoom.getBaseZoom();
+		if (baseZoom == 17) {
+			angle = 15;
+		} else if (baseZoom == 15) {
+			angle = 25;
+		} else if (baseZoom == 13) {
+			angle = 35;
+		} else if (baseZoom == 11) {
+			angle = 45;
+		} else if (baseZoom == 9) {
+			angle = 55;
+		} else if (baseZoom == 7) {
+			angle = 65;
+		} else if (baseZoom == 5) {
+			angle = 75;
+		} else if (baseZoom == 3) {
+			angle = 85;
+		} else if (baseZoom == getMinZoom()) {
+			angle = 90;
+		}
+		if (angle != -1) {
+			animatedDraggingThread.startTilting(angle);
 		}
 	}
 
@@ -1426,22 +1469,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float normalizeElevationAngle(float elevationAngle) {
-		return elevationAngle > 90 ? 90f : Math.max(getMinAllowedElevationAngle(), elevationAngle);
-	}
-
-	public float getMinAllowedElevationAngle() {
-		if (true) {
-			return 10;
-		}
-		int verticalTilesCount = currentViewport.getPixHeight() / OsmandRenderer.TILE_SIZE;
-		if (verticalTilesCount < 8) {
-			return 33;
-		} else if (verticalTilesCount < 9) {
-			return 35;
-		} else if (verticalTilesCount < 10) {
-			return 40;
-		}
-		return 45;
+		return elevationAngle > 90 ? 90f : Math.max(MIN_ALLOWED_ELEVATION_ANGLE, elevationAngle);
 	}
 
 	protected void zoomToAnimate(int zoom, double zoomToAnimate, int centerX, int centerY, boolean notify) {
