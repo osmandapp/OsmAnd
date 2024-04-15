@@ -116,7 +116,8 @@ public class PointLocationLayer extends OsmandMapLayer
 
 		public static CoreMapMarker createAndAddToCollection(@NonNull Context ctx, @NonNull MapMarkersCollection markersCollection,
 		                                                     int id, int baseOrder, @NonNull LayerDrawable icon, @DrawableRes int headingIconId,
-		                                                     float scale, @ColorInt int profileColor, boolean withHeading) {
+		                                                     float scale, @ColorInt int profileColor, boolean withHeading,
+															 MapRendererView mapRenderer) {
 			CoreMapMarker marker = new CoreMapMarker();
 			MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
 			myLocMarkerBuilder.setMarkerId(id);
@@ -150,7 +151,7 @@ public class PointLocationLayer extends OsmandMapLayer
 							NativeUtilities.createSkImageFromBitmap(headingBitmap));
 				}
 			}
-			marker.marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection);
+			marker.marker = myLocMarkerBuilder.buildAndAddToCollection(markersCollection, mapRenderer.getRenderer());
 			return marker.marker != null ? marker : null;
 		}
 
@@ -250,7 +251,7 @@ public class PointLocationLayer extends OsmandMapLayer
 			mapMarkersCollection.setPriority(Long.MAX_VALUE);
 		}
 		return CoreMapMarker.createAndAddToCollection(getContext(), mapMarkersCollection, id,
-				getPointsOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading);
+				getPointsOrder(), icon, headingIconId, getTextScale(), profileColor, withHeading, getMapRenderer());
 	}
 
 	private void setMarkerProvider() {
@@ -297,6 +298,9 @@ public class PointLocationLayer extends OsmandMapLayer
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(false);
 				locationMarkerWithHeading.setVisibility(false);
+				MapRendererView mapRenderer = getMapRenderer();
+				if (mapRenderer != null)
+					mapRenderer.hideMyLocationCircle();
 		}
 	}
 
@@ -360,8 +364,13 @@ public class PointLocationLayer extends OsmandMapLayer
 			} else {
 				locMarker.marker.setPosition(target31);
 			}
-			locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
-			locMarker.marker.setIsAccuracyCircleVisible(!isLocationSnappedToRoad());
+			boolean withAccuracyCircle = !isLocationSnappedToRoad();
+			if (withAccuracyCircle) {
+				locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
+			} else {
+				mapRenderer.hideMyLocationCircle();
+			}
+			locMarker.marker.setIsAccuracyCircleVisible(withAccuracyCircle);
 		}
 	}
 
