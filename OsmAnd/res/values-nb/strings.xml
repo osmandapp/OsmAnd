@@ -4905,7 +4905,6 @@
     <string name="shared_string_duplicate">Dupliser</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_name">Vis IMBA-Terrengsykkelløyper</string>
     <string name="rendering_attr_showMtbScaleIMBATrails_description">Vis løyper ment for terrengsykkel.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Endre utseende for %1$s spor\?</string>
     <string name="shared_string_select_recent">Velg nylige</string>
     <string name="changes">Endringer %1$s</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Nedbørs-isolinjer</string>

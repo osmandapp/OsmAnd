@@ -4415,7 +4415,6 @@
     <string name="shared_string_nearest">Närmsta</string>
     <string name="shared_string_add_manually">Lägg till manuellt…</string>
     <string name="shared_string_inches">tum</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Ändra utseendet för %1$s spår\?</string>
     <string name="no_visible_tracks">Inga spår på kartan</string>
     <string name="x_axis">X-axel</string>
     <string name="what_is_new">Nyheter</string>

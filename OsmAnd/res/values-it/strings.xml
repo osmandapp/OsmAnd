@@ -5013,7 +5013,6 @@
     <string name="shared_string_kilograms">chilogrammi</string>
     <string name="shared_string_yards">iarde</string>
     <string name="no_visible_tracks">Nessuna traccia sulla mappa</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Cambiare l\'aspetto di %1$s tracce\?</string>
     <string name="empty_tracks_description">Puoi importare, creare o registrare file di traccia usando OsmAnd.</string>
     <string name="empty_tracks">Non hai file di traccia.</string>
     <string name="shared_string_select_recent">Seleziona recenti</string>

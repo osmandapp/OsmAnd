@@ -2971,7 +2971,6 @@
 \nДанните за времето се предоставят от Глобалната система за прогнози (GFS, %1$s).</string>
     <string name="empty_screen_weather_clouds_layer">Включете, за да видите слой с облачното покритие на картата.</string>
     <string name="default_appearance">Външен вид по подразбиране</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Променяне на външния вид на %1$s трасета\?</string>
     <string name="determine_location">Позволете ни да определим местоположението ви</string>
     <string name="si_nm_ft">Морски мили/футове</string>
     <string name="share_link">Препратка за споделяне</string>

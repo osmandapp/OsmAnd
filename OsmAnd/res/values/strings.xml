@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="apply_only_to_new">Apply only to new</string>
+    <string name="change_default_tracks_appearance_confirmation">Apply changes to existing tracks in the folder or only to new ones?</string>
     <string name="shared_string_changes">Changes</string>
     <string name="change_default_appearance_confirmation">Change the default appearance of %1$s?</string>
     <string name="fix_north_up">Enable Fixed North Up</string>
@@ -571,7 +573,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>
     <string name="shared_string_yards">yards</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
     <string name="shared_string_apply_changes">Apply changes</string>
     <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
     <string name="no_visible_tracks">No tracks on the map</string>

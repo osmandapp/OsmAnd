@@ -5017,7 +5017,6 @@
     <string name="change_appearance">Zmeniť vzhľad</string>
     <string name="shared_string_yards">yardov</string>
     <string name="shared_string_apply_changes">Použiť zmeny</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Zmeniť vzhľad %1$s stôp\?</string>
     <string name="no_visible_tracks_description">Zvoľte stopy pre zobrazenie na mape.</string>
     <string name="no_visible_tracks">Žiadne stopy na mape</string>
     <string name="recently_visible">Nedávno viditeľné %1$s</string>

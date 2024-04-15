@@ -5369,7 +5369,6 @@
     <string name="help_article_navigation_routing_straight_line_routing_name">Leiðagerð í beinum línum (flugvélar)</string>
     <string name="help_article_navigation_routing_train_routing_name">Leiðagerð fyrir lestir</string>
     <string name="sort_date_descending">Elsta dagsetning fyrst</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Breyta útliti %1$s ferla?</string>
     <string name="terrain_maps">Yfirborðskort</string>
     <string name="lang_zh_hans">Einfölduð kínverska</string>
     <string name="lang_zh_hant">Hefðbundin kínverska</string>

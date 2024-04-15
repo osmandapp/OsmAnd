@@ -5040,7 +5040,6 @@
     <string name="shared_string_inches">cale</string>
     <string name="offline_weather_forecast">Prognoza pogody offline</string>
     <string name="offline_weather_forecast_desc">Możesz pobrać prognozę pogody na 7 dni.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Zmienić wygląd ścieżek %1$s\?</string>
     <string name="no_visible_tracks_description">Wybierz ścieżki, aby wyświetlić je na mapie.</string>
     <string name="shared_string_select_recent">Wybierz ostatnie</string>
     <string name="offline_cache">Pamięć podręczna offline</string>

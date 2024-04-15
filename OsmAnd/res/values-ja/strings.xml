@@ -4887,7 +4887,6 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showTrainRoutes_name">鉄道路線</string>
     <string name="shared_string_item">アイテム</string>
     <string name="simulation_constant_mode_title">定速走行</string>
-    <string name="change_default_tracks_appearance_confirmation_description">%1$s経路の外観を変更しますか？</string>
     <string name="no_visible_tracks_description">マップ上に表示する経路を選択します。</string>
     <string name="no_visible_tracks">マップ上に経路がありません</string>
     <string name="ant_missing_dependency_descr">必要なサービス\"%1$s\"が見つかりませんでした。

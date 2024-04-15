@@ -5016,7 +5016,6 @@
     <string name="shared_string_kilograms">kilogramoj</string>
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuro(j)\?</string>
     <string name="recently_visible">Antaŭe vidigitaj %1$s</string>
     <string name="no_visible_tracks_description">Elektu spurojn por vidigi ilin sur la mapo.</string>
     <string name="no_visible_tracks">Neniu spuro sur la mapo</string>

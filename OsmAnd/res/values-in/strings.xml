@@ -5034,7 +5034,6 @@
     <string name="switch_folder">Ubah folder</string>
     <string name="show_all_tracks">Tampilkan semua trek</string>
     <string name="shared_string_on_map">Di peta</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Ubah tampilan trek %1$s\?</string>
     <string name="shared_string_yards">yard</string>
     <string name="shared_string_kilograms">kilogram</string>
     <string name="approximate_bearing_descr">Dapatkan arah dari rute navigasi yang diikuti.</string>

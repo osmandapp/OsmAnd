@@ -3759,7 +3759,6 @@
     <string name="settings_privacy">الخصوصية</string>
     <string name="monitoring_prefs_descr">الملاحة ، دقة التسجيل</string>
     <string name="backup_welcome_back_descr">قم باستعادة البيانات الموجودة على هذا الجهاز باستخدام OsmAnd Cloud.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">هل تريد تغيير مظهر مسارات %1$s؟</string>
     <string name="shared_string_inches">بوصات</string>
     <string name="auto_announce_off">إيقاف التنبيه التلقائي</string>
     <string name="show_all_tracks">عرض جميع المسارات</string>

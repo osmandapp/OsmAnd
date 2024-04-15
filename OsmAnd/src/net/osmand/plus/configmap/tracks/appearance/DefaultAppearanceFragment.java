@@ -26,14 +26,13 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.configmap.tracks.ConfirmChangesBottomSheet;
-import net.osmand.plus.configmap.tracks.ConfirmChangesBottomSheet.ChangesConfirmationListener;
+import net.osmand.plus.configmap.tracks.ConfirmDefaultAppearanceBottomSheet;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog,
-		IAskRefreshDialogCompletely, ChangesConfirmationListener {
+public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String TAG = DefaultAppearanceFragment.class.getSimpleName();
 
@@ -145,8 +144,8 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.apply_button);
 		applyButton.setOnClickListener(v -> {
-			String description = getString(R.string.change_default_appearance_confirmation, controller.getTitle());
-			ConfirmChangesBottomSheet.showInstance(getChildFragmentManager(), description);
+			TrackFolder folder = controller.getFolder();
+			ConfirmDefaultAppearanceBottomSheet.showInstance(getChildFragmentManager(), folder.getTrackItems().size());
 		});
 		updateApplyButton();
 	}
@@ -172,9 +171,11 @@ public class DefaultAppearanceFragment extends BaseOsmAndDialogFragment implemen
 		});
 	}
 
-	@Override
-	public void onChangesConfirmed() {
-		controller.saveChanges();
+	public void saveChanges(boolean updateExisting) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			controller.saveChanges(activity, updateExisting);
+		}
 	}
 
 	@Override

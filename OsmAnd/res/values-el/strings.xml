@@ -4115,7 +4115,6 @@
     <string name="delete_cloud_version">Διαγραφή cloud έκδοσης</string>
     <string name="no_items_selected_warning">Παρακαλούμε επιλέξτε τουλάχιστον ένα αντικείμενο</string>
     <string name="map_is_up_to_date">Ο χάρτης %1$s είναι ενημερωμένος.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Αλλάξτε την εμφάνιση %1$s ιχνών;</string>
     <string name="shared_string_inches">ίντσες</string>
     <string name="show_all_tracks">Εμφάνιση όλων των ιχνών</string>
     <string name="shared_string_on_map">Στο χάρτη</string>
