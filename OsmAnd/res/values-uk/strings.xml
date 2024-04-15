@@ -5624,4 +5624,6 @@
     <string name="speedometer_description">Показує вашу поточну швидкість згідно даних GPS</string>
     <string name="shared_string_speedometer">Спідометр</string>
     <string name="custom_buttons">Користувацькі кнопки</string>
+    <string name="fix_north_up">Зафіксувати північ угорі</string>
+    <string name="fix_north_up_descr">Не повертати мапу за допомогою жестів в режимі орієнтації мапи \"Північ угорі\"</string>
 </resources>
