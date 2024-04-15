@@ -213,7 +213,7 @@ public class GPXDatabase {
 				}
 			} else {
 				if (parameter == COLOR) {
-					value = GPXUtilities.parseColor((String) value, 0);
+					value = GPXUtilities.parseColor((String) value);
 				} else if (parameter == COLORING_TYPE) {
 					String type = (String) value;
 					ColoringType coloringType = ColoringType.valueOf(TRACK, type);
