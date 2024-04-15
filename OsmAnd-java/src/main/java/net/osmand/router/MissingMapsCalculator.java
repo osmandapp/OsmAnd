@@ -173,7 +173,7 @@ public class MissingMapsCalculator {
 
 	private void addPoint(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon loc) throws IOException {
 		List<String> regions = new ArrayList<String>();
-		or.getRegionsToDownload(loc.getLatitude(), loc.getLongitude(), regions);
+		or.getRegionsToDownload(loc.getLatitude(), loc.getLongitude(), regions, OsmandRegions.MAP_TYPE);
 		Collections.sort(regions, new Comparator<String>() {
 
 			@Override

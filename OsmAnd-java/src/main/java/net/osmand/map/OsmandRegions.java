@@ -923,6 +923,10 @@ public class OsmandRegions {
 	}
 
 	public List<String> getRegionsToDownload(double lat, double lon, List<String> keyNames) throws IOException {
+		return getRegionsToDownload(lat, lon, keyNames, null);
+	}
+	
+	public List<String> getRegionsToDownload(double lat, double lon, List<String> keyNames, String typeValue) throws IOException {
 		keyNames.clear();
 		int x31 = MapUtils.get31TileNumberX(lon);
 		int y31 = MapUtils.get31TileNumberY(lat);
@@ -930,7 +934,8 @@ public class OsmandRegions {
 		for (BinaryMapDataObject b : cs) {
 			if (contain(b, x31, y31)) {
 				String downloadName = getDownloadName(b);
-				if (!Algorithms.isEmpty(downloadName)) {
+				if (!Algorithms.isEmpty(downloadName) && 
+						(typeValue == null || isDownloadOfType(b, typeValue))) {
 					keyNames.add(downloadName);
 				}
 			}
