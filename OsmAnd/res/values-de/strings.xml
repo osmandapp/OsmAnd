@@ -5683,4 +5683,5 @@
     <string name="fix_north_up">Festen Norden oben aktivieren</string>
     <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standard-Aussehens von %1$s?</string>
+    <string name="use_3d_track_visualization">3D-Visualisierung</string>
 </resources>
