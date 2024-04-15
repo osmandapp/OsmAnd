@@ -1197,7 +1197,7 @@
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
     <string name="rendering_attr_hideAccess_name">存取限制</string>
-    <string name="rendering_attr_showAccess_name">顯示進入限制</string>
+    <string name="rendering_attr_showAccess_name">顯示進入與收費限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
     <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
@@ -4464,7 +4464,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">顯示註記標籤</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放程度的圖示</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放程度圖示的示意圖</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">水路隧道</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">不要隱藏水路隧道</string>
     <string name="rendering_attr_showWaterwayTunnels_description">不要隱藏水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -5640,6 +5640,8 @@
 \n
 \n • 新增了按軌跡的感應器資料過濾功能
 \n
+\n • 改善的軌跡群組外觀自訂
+\n
 \n • 新增了對其他 GPX 標籤的支援
 \n
 \n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇
@@ -5665,4 +5667,6 @@
     <string name="gpx_approximation_geo_java">以幾何為基礎 (Java，快速)</string>
     <string name="fix_north_up_descr">請勿在北方向上的地圖中使用手勢旋轉地圖</string>
     <string name="fix_north_up">啟用固定北方向上</string>
+    <string name="change_default_appearance_confirmation">變更 %1$s 的預設外觀？</string>
+    <string name="use_3d_track_visualization">3D 視覺化</string>
 </resources>

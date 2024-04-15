@@ -74,7 +74,7 @@
     <string name="poi_tobacco">Tobak</string>
     <string name="poi_toys">Legetøjsbuttik</string>
     <string name="poi_trade">Handelsplads</string>
-    <string name="poi_vacuum_cleaner">Støvsuger</string>
+    <string name="poi_vacuum_cleaner">Støvsuger-butik</string>
     <string name="poi_variety_store">Fastpris butik</string>
     <string name="poi_video">Video</string>
     <string name="poi_window_blind">Persienner</string>
@@ -1649,7 +1649,7 @@
     <string name="poi_shelter_type_public_transport">Offentlig transport</string>
     <string name="poi_shelter_type_picnic_shelter">Picnic</string>
     <string name="poi_shelter_type_weather_shelter">Tarp</string>
-    <string name="poi_shelter_type_lean_to">Bivuak</string>
+    <string name="poi_shelter_type_lean_to">Shelter</string>
     <string name="poi_shelter_type_basic_hut">Hytte</string>
     <string name="poi_shelter_type_building">Bygning</string>
     <string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
@@ -2422,7 +2422,7 @@
     <string name="poi_compressed_air_yes">Ja</string>
     <string name="poi_compressed_air_no">Trykluft: nej</string>
     <string name="poi_car_wash_yes">Ja</string>
-    <string name="poi_vacuum_cleaner_yes">Ja</string>
+    <string name="poi_vacuum_cleaner_yes">Ja;Støvsuger</string>
     <string name="poi_vacuum_cleaner_no">Støvsuger: nej</string>
     <string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
     <string name="poi_sport_free_flying">Freeflying (sport)</string>
