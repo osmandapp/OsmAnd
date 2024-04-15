@@ -10,7 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="shared_string_changes">Changes</string>
     <string name="change_default_appearance_confirmation">Change the default appearance of %1$s?</string>
     <string name="fix_north_up">Enable Fixed North Up</string>
     <string name="fix_north_up_descr">Do not rotate map with gestures in North Up map orientation</string>
