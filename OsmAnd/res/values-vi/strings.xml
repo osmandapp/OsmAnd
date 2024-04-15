@@ -575,7 +575,6 @@
     <string name="layer_gpx_layer">Theo dõi</string>
     <string name="width_limit_description">Cung cấp chiều rộng của chiếc xe của bạn, một số tuyến đường có thể hạn chế các phương tiện quá rộng.</string>
     <string name="shared_string_yards">yard</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Thay đổi giao diện của %1$s các theo dõi\?</string>
     <string name="recently_visible">Hiển thị gần đây %1$s</string>
     <string name="empty_tracks_description">Bạn có thể nhập, tạo hoặc ghi tệp theo dõi bằng OsmAnd.</string>
     <string name="shared_string_apply_changes">Áp dụng các thay đổi</string>

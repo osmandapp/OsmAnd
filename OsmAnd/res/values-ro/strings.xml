@@ -5032,7 +5032,6 @@
     <string name="change_appearance">Modifică aspect</string>
     <string name="shared_string_kilograms">kilograme</string>
     <string name="shared_string_yards">yarzi</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul a %1$s trasee\?</string>
     <string name="shared_string_apply_changes">Aplică modificările</string>
     <string name="no_visible_tracks">Nu există trasee pe hartă</string>
     <string name="shared_string_select_recent">Selectare recent</string>

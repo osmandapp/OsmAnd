@@ -5039,7 +5039,6 @@
     <string name="app_mode_moped">Мопед</string>
     <string name="inch">инч</string>
     <string name="shared_string_yards">јарди</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Да ли изменити изглед трага %1$s\?</string>
     <string name="shared_string_apply_changes">Примени измене</string>
     <string name="no_visible_tracks_description">Изаберите трагове за приказ на карти.</string>
     <string name="no_visible_tracks">Нема трагова на карти</string>

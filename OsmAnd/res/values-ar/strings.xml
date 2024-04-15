@@ -5090,7 +5090,6 @@
     <string name="no_visible_tracks_description">حدد المسارات لعرضها على الخريطة.</string>
     <string name="no_visible_tracks">لا توجد مسارات على الخريطة</string>
     <string name="recently_visible">المشاهد مؤخرا %1$s</string>
-    <string name="change_default_tracks_appearance_confirmation_description">هل تريد تغيير مظهر مسارات %1$s؟</string>
     <string name="empty_tracks_description">يمكنك استيراد أو إنشاء أو تسجيل ملفات المسار باستخدام أوسماند.</string>
     <string name="show_all_tracks">عرض جميع المسارات</string>
     <string name="change_appearance">تغيير المظهر</string>

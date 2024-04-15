@@ -5025,7 +5025,6 @@
     <string name="shared_string_select_recent">Selecionar recente</string>
     <string name="change_appearance">Alterar aparência</string>
     <string name="shared_string_kilograms">quilogramas</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência dos trilhos %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicar alterações</string>
     <string name="shared_string_yards">jardas</string>
     <string name="no_visible_tracks_description">Selecione os trilhos a mostrar no mapa.</string>

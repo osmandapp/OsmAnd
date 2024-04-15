@@ -5014,7 +5014,6 @@
     <string name="cache_size">Veličina podataka</string>
     <string name="routing_attr_allow_via_ferrata_name">Planinska ruta (Via ferata)</string>
     <string name="routing_attr_allow_via_ferrata_description">Planinarska putanja opremljena postavljenim užadima, gredama, lestvicama i brvnima.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Da li izmeniti izgled trase %1$s?</string>
     <string name="empty_tracks_description">Možeš uvoziti, kreirati ili snimati fajlove trasa korišćenjem OsmAnda.</string>
     <string name="empty_tracks">Nema fajla trase.</string>
     <string name="switch_folder">Promeni folder</string>

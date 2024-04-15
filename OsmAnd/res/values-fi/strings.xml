@@ -4035,7 +4035,6 @@
     <string name="external_device_characteristic_battery_level">Akku</string>
     <string name="external_device_characteristic_gear_ratio">Vaihdesuhde</string>
     <string name="shared_string_inches">tuumaa</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Muuta näkymää %1$s reiteille\?</string>
     <string name="shared_string_apply_changes">Vahvista muutokset</string>
     <string name="app_mode_moped">Mopedi</string>
     <string name="no_visible_tracks">Ei reittejä kartalla</string>

@@ -5032,7 +5032,6 @@
     <string name="shared_string_apply_changes">Применить изменения</string>
     <string name="no_visible_tracks">Нет треков на карте</string>
     <string name="recently_visible">Недавно видимые %1$s</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Изменить внешний вид треков (%1$s шт.)\?</string>
     <string name="inch">дюйм</string>
     <string name="empty_tracks_description">Вы можете импортировать, создавать или записывать файлы треков с помощью OsmAnd.</string>
     <string name="empty_tracks">Файлы треков отсутствуют.</string>

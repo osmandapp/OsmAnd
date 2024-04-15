@@ -5021,7 +5021,6 @@
     <string name="shared_string_yards">jardas</string>
     <string name="no_visible_tracks">Nenhuma trilha no mapa</string>
     <string name="recently_visible">Visível recentemente %1$s</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência das trilhas %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicar mudanças</string>
     <string name="no_visible_tracks_description">Selecione as trilhas para exibi-las no mapa.</string>
     <string name="shared_string_kilograms">quilogramas</string>

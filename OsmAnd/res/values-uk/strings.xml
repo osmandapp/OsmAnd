@@ -5027,7 +5027,6 @@
     <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямком руху, по центру — для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
     <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>
     <string name="no_visible_tracks">Немає треків на мапі</string>
     <string name="recently_visible">Нещодавно переглянуті %1$s</string>

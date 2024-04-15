@@ -5027,7 +5027,6 @@
     <string name="switch_folder">Cambiar de carpeta</string>
     <string name="shared_string_on_map">en el mapa</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
-    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar la apariencia de %1$s pistas\?</string>
     <string name="empty_tracks_description">Puedes importar, crear o grabar archivos con las pistas con OsmAnd.</string>
     <string name="show_all_tracks">Mostrar todas las vías</string>
     <string name="shared_string_kilograms">kilogramos</string>

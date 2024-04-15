@@ -5009,7 +5009,6 @@
     <string name="sound_beep_minimal">蜂鳴器：最小</string>
     <string name="last_synchronized">最後同步</string>
     <string name="display_position_automatic_descr">取決於地圖方向：底部為移動方向，中心為其他所有方向。</string>
-    <string name="change_default_tracks_appearance_confirmation_description">變更 %1$s 軌跡的外觀？</string>
     <string name="empty_tracks">您沒有軌跡檔案。</string>
     <string name="shared_string_apply_changes">套用變更</string>
     <string name="shared_string_select_recent">選取最近</string>

@@ -3,6 +3,8 @@ package net.osmand.plus.configmap.tracks.appearance;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
@@ -14,6 +16,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData.AppearanceChangedListener;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ArrowsCardController;
@@ -21,10 +24,14 @@ import net.osmand.plus.configmap.tracks.appearance.subcontrollers.ColorCardContr
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.SplitCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.StartFinishCardController;
 import net.osmand.plus.configmap.tracks.appearance.subcontrollers.WidthCardController;
+import net.osmand.plus.myplaces.tracks.tasks.ChangeTracksAppearanceTask;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDirItem;
 import net.osmand.util.Algorithms;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class DefaultAppearanceController implements IDialogController, IColorCardControllerListener,
 		AppearanceChangedListener {
@@ -67,8 +74,8 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 	}
 
 	@NonNull
-	public String getTitle() {
-		return folder.getName(app);
+	public TrackFolder getFolder() {
+		return folder;
 	}
 
 	@Override
@@ -91,14 +98,24 @@ public class DefaultAppearanceController implements IDialogController, IColorCar
 		return !Algorithms.objectEquals(initialData, data);
 	}
 
-	public void saveChanges() {
+	public void saveChanges(@NonNull FragmentActivity activity, boolean updateExisting) {
 		colorCardController.getColorsPaletteController().refreshLastUsedTime();
 
 		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
 			dirItem.setParameter(parameter, data.getParameter(parameter));
 		}
 		gpxDbHelper.updateDataItem(dirItem);
-		onAppearanceSaved();
+
+		if (updateExisting) {
+			Set<TrackItem> items = new HashSet<>(folder.getTrackItems());
+			ChangeTracksAppearanceTask task = new ChangeTracksAppearanceTask(activity, data, items, result -> {
+				onAppearanceSaved();
+				return true;
+			});
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		} else {
+			onAppearanceSaved();
+		}
 	}
 
 	private void onAppearanceSaved() {

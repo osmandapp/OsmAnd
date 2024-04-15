@@ -5031,7 +5031,6 @@
     <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
     <string name="sound_beep_complex">Pitido: complejo</string>
-    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>

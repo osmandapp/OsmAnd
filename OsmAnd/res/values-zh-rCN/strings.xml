@@ -5179,7 +5179,6 @@
     <string name="sound_beep_minimal">蜂鸣：最小</string>
     <string name="shared_string_new_track">新轨迹</string>
     <string name="track_not_recorded">未记录</string>
-    <string name="change_default_tracks_appearance_confirmation_description">改变 %1$s 轨迹的外观？</string>
     <string name="shared_string_all_world">全世界</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_2_name">燃气</string>

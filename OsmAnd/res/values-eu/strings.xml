@@ -5025,7 +5025,6 @@
     <string name="empty_tracks_description">OsmAnd erabiliz arrasto-fitxategiak inportatu, sortu edo grabatu ditzakezu.</string>
     <string name="shared_string_kilograms">kilogramoak</string>
     <string name="approximate_bearing">Gutxi gora beherako noranzkoa</string>
-    <string name="change_default_tracks_appearance_confirmation_description">%1$s arrastoen itxura aldatu\?</string>
     <string name="no_visible_tracks">Ez dago arrastorik mapan</string>
     <string name="shared_string_select_recent">Hautatu azkena</string>
     <string name="sort_duration_ascending">Lehenengoa iraupen laburrenekoa</string>

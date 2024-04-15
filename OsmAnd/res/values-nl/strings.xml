@@ -5007,7 +5007,6 @@
     <string name="sound_beep_simple">Beep: simpel</string>
     <string name="sound_beep_simple_loud">Beep: simpel luid</string>
     <string name="lang_ckb">Centraal Koerdisch</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Het uiterlijk van %1$s tracks veranderen\?</string>
     <string name="shared_string_apply_changes">Wijzigingen aanbrengen</string>
     <string name="shared_string_kilograms">kilogram</string>
     <string name="no_visible_tracks_description">Selecteer tracks om ze op de kaart weer te geven.</string>
