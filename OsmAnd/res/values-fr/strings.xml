@@ -2242,7 +2242,7 @@
     <string name="nautical_maps">Cartes marines</string>
     <string name="depth_contour_descr">Lignes de profondeur, balisage maritime.</string>
     <string name="subscribe_email_error">Erreur</string>
-    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\\\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
+    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
     <string name="no_overlay">Aucune sur-couche</string>
     <string name="no_underlay">Sans sous-couche</string>
     <string name="quick_action_add_destination">Définir la destination</string>
