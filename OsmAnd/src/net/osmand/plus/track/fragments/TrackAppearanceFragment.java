@@ -6,7 +6,6 @@ import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
-//import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
 import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
@@ -73,14 +72,12 @@ import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -719,7 +716,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			public void trackSplittingFinished(boolean success) {
 				if (success && selectedGpxFile != null) {
 					List<GpxDisplayGroup> groups = getGpxDisplayGroups();
-					selectedGpxFile.setDisplayGroups(groups, app);
+					selectedGpxFile.setSplitGroups(groups, app);
 					refreshMap();
 				}
 			}
@@ -733,7 +730,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			container.removeAllViews();
 			cards.clear();
 
-			if (!selectedGpxFile.isShowCurrentTrack() && !Algorithms.isEmpty(getDisplaySegmentGroups())) {
+			if (!selectedGpxFile.isShowCurrentTrack()) {
 				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
 				addCard(container, splitIntervalCard);
 			}
@@ -781,20 +778,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (gpxFile.modifiedTime != modifiedTime) {
 			modifiedTime = gpxFile.modifiedTime;
 			GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
-			displayGroups = displayHelper.collectDisplayGroups(selectedGpxFile, gpxFile, true);
+			displayGroups = displayHelper.collectDisplayGroups(selectedGpxFile, gpxFile, true, true);
 		}
 		return displayGroups;
-	}
-
-	@NonNull
-	public List<GpxDisplayGroup> getDisplaySegmentGroups() {
-		List<GpxDisplayGroup> groups = new ArrayList<>();
-		for (GpxDisplayGroup group : getGpxDisplayGroups()) {
-			if (GpxDisplayItemType.TRACK_SEGMENT == group.getType()) {
-				groups.add(group);
-			}
-		}
-		return groups;
 	}
 
 	private int getBottomVisibleY() {
