@@ -5684,4 +5684,7 @@
     <string name="fix_north_up">Ativar o norte fixo para cima</string>
     <string name="fix_north_up_descr">Não rodar o mapa com gestos na orientação do mapa de norte para cima</string>
     <string name="use_3d_track_visualization">Visualização 3D</string>
+    <string name="shared_string_changes">Alterações</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicar alterações às faixas existentes na pasta ou apenas nas novas?</string>
+    <string name="apply_only_to_new">Aplicar apenas a novas</string>
 </resources>
