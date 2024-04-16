@@ -17,7 +17,12 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,15 +32,9 @@ public class Model3dHelper {
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
-	@Nullable
-	private Model3D locationModel;
-	@Nullable
-	private Model3D navigationModel;
-
-	@Nullable
-	private String locationModelName;
-	@Nullable
-	private String navigationModelName;
+	private final Map<String, Model3D> modelsCache = new HashMap<>();
+	private final Set<String> modelsInProgress = new HashSet<>();
+	private final Set<String> failedModels = new HashSet<>();
 
 	private final StateChangedListener<ApplicationMode> appModeListener;
 	private final StateChangedListener<String> locationIconListener;
@@ -56,23 +55,8 @@ public class Model3dHelper {
 	}
 
 	@Nullable
-	public Model3D getLocationModel() {
-		return locationModel;
-	}
-
-	@Nullable
-	public Model3D getNavigationModel() {
-		return navigationModel;
-	}
-
-	@Nullable
-	public String getLocationModelName() {
-		return locationModelName;
-	}
-
-	@Nullable
-	public String getNavigationModelName() {
-		return navigationModelName;
+	public Model3D getModel(@NonNull String modelName) {
+		return modelsCache.get(modelName.replace(IndexConstants.MODEL_NAME_PREFIX, ""));
 	}
 
 	public void parseModels() {
@@ -97,39 +81,46 @@ public class Model3dHelper {
 		}
 
 		ApplicationMode appMode = settings.getApplicationMode();
-		String locationModelName = appMode.getLocationIcon();
-		String navigationModelName = appMode.getNavigationIcon();
-		boolean sameIcon = locationModelName.equals(navigationModelName);
+		Set<String> iconsNames = new HashSet<>();
+		iconsNames.add(appMode.getLocationIcon());
+		iconsNames.add(appMode.getNavigationIcon());
 
-		String locationModelFileName = locationModelName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
-		String navigationModelFileName = navigationModelName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
+		Set<String> dirsPaths = new HashSet<>();
+		for (String iconName : iconsNames) {
+			if (!iconName.startsWith(IndexConstants.MODEL_NAME_PREFIX)) {
+				continue;
+			}
 
-		boolean parsingLocationIcon = false;
-		if (!locationModelName.equals(this.locationModelName) && isModelExist(app, locationModelFileName)) {
-			parsingLocationIcon = true;
-			parseModelInBackground(locationModelFileName, model -> {
-				this.locationModel = model;
-				this.locationModelName = locationModelName;
-				if (sameIcon) {
-					navigationModel = model;
-					this.navigationModelName = locationModelName;
+			String modelName = iconName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
+
+			if (modelsCache.containsKey(modelName)
+					|| modelsInProgress.contains(modelName)
+					|| failedModels.contains(modelName)) {
+				continue;
+			}
+
+			File dir = new File(app.getAppPath(IndexConstants.MODEL_3D_DIR), modelName);
+			if (isModelExist(dir)) {
+				dirsPaths.add(dir.getAbsolutePath());
+				modelsInProgress.add(modelName);
+			}
+		}
+
+		new Parse3dModelTask(dirsPaths, result -> {
+			for (Entry<String, Model3D> entry : result.entrySet()) {
+				String modelName = entry.getKey();
+				Model3D model = entry.getValue();
+
+				if (model == null) {
+					failedModels.add(modelName);
+				} else {
+					modelsCache.put(modelName, model);
 				}
-				return true;
-			});
-		}
+				modelsInProgress.remove(modelName);
+			}
 
-		if ((!sameIcon || parsingLocationIcon) && !navigationModelName.equals(this.navigationModelName) && isModelExist(app, navigationModelFileName)) {
-			parseModelInBackground(navigationModelFileName, model -> {
-				this.navigationModel = model;
-				this.navigationModelName = navigationModelName;
-				return true;
-			});
-		}
-	}
-
-	private void parseModelInBackground(@NonNull String modelName, @NonNull CallbackWithObject<Model3D> callback) {
-		String modelDir = new File(app.getAppPath(IndexConstants.MODEL_3D_DIR), modelName).getAbsolutePath();
-		new Parse3dModelTask(modelDir, callback).executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+			return true;
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@NonNull
@@ -145,10 +136,6 @@ public class Model3dHelper {
 			}
 		}
 		return modelsDirNames;
-	}
-
-	public static boolean isModelExist(@NonNull OsmandApplication app, @NonNull String dirName) {
-		return isModelExist(new File(app.getAppPath(IndexConstants.MODEL_3D_DIR), dirName));
 	}
 
 	public static boolean isModelExist(@NonNull File dir) {
@@ -168,25 +155,31 @@ public class Model3dHelper {
 		return false;
 	}
 
-	private static class Parse3dModelTask extends AsyncTask<Void, Void, Model3D> {
+	private static class Parse3dModelTask extends AsyncTask<Void, Void, Map<String, Model3D>> {
 
-		private final String modelDirPath;
-		private final CallbackWithObject<Model3D> callback;
+		private final Set<String> modelDirPaths;
+		private final CallbackWithObject< Map<String, Model3D> > callback;
 
-		public Parse3dModelTask(@NonNull String modelDirPath, @NonNull CallbackWithObject<Model3D> callback) {
-			this.modelDirPath = modelDirPath;
+		public Parse3dModelTask(@NonNull Set<String> modelDirPaths, @NonNull CallbackWithObject< Map<String, Model3D> > callback) {
+			this.modelDirPaths = modelDirPaths;
 			this.callback = callback;
 		}
 
 		@Override
-		protected Model3D doInBackground(Void... voids) {
-			ObjParser parser = new ObjParser(modelDirPath + "/model.obj", modelDirPath + "/" + "mtl");
-			return parser.parse();
+		protected Map<String, Model3D> doInBackground(Void... voids) {
+			Map<String, Model3D> result = new HashMap<>();
+			for (String modelDirPath : modelDirPaths) {
+				String modelName = new File(modelDirPath).getName();
+				ObjParser parser = new ObjParser(modelDirPath + "/model.obj", modelDirPath + "/" + "mtl");
+				Model3D model = parser.parse();
+				result.put(modelName, model);
+			}
+			return result;
 		}
 
 		@Override
-		protected void onPostExecute(Model3D model3D) {
-			callback.processResult(model3D);
+		protected void onPostExecute(Map<String, Model3D> result) {
+			callback.processResult(result);
 		}
 	}
 }

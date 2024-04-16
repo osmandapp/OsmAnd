@@ -659,7 +659,7 @@ public class PointLocationLayer extends OsmandMapLayer
 			this.carView = carView;
 
 			if (NavigationIcon.isModel(navigationIconName)) {
-				navigationModel = model3dHelper.getNavigationModel();
+				navigationModel = model3dHelper.getModel(navigationIconName);
 			} else {
 				int navigationIconId = NavigationIcon.fromName(navigationIconName).getIconId();
 				navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
@@ -671,7 +671,7 @@ public class PointLocationLayer extends OsmandMapLayer
 
 			LocationIcon locationIconType = LocationIcon.fromName(locationIconName);
 			if (LocationIcon.isModel(locationIconName)) {
-				locationModel = model3dHelper.getLocationModel();
+				locationModel = model3dHelper.getModel(locationIconName);
 			} else {
 				locationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, locationIconType.getIconId());
 				if (locationIcon != null) {
@@ -748,7 +748,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 
 		if (LocationIcon.isModel(newLocationIconName)) {
-			if (newLocationIconName.equals(oldLocationIconName) || !newLocationIconName.equals(model3dHelper.getLocationModelName())) {
+			if (model3dHelper.getModel(newLocationIconName) == null) {
 				return oldLocationIconName == null ? LocationIcon.DEFAULT.name() : oldLocationIconName;
 			} else {
 				return newLocationIconName;
@@ -769,7 +769,7 @@ public class PointLocationLayer extends OsmandMapLayer
 		}
 
 		if (NavigationIcon.isModel(newNavigationIconName)) {
-			if (newNavigationIconName.equals(oldNavigationIconName) || !newNavigationIconName.equals(model3dHelper.getNavigationModelName())) {
+			if (model3dHelper.getModel(newNavigationIconName) == null) {
 				return oldNavigationIconName == null ? NavigationIcon.DEFAULT.name() : oldNavigationIconName;
 			} else {
 				return newNavigationIconName;
