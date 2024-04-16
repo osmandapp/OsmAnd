@@ -32,6 +32,7 @@ import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.JsonUtils;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
@@ -200,8 +201,10 @@ public class OsmAndAppCustomization {
 		return Collections.emptyList();
 	}
 
+	@NonNull
 	public String getIndexesUrl() {
-		return "http://" + INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version.getVersionAsURLParam(app);
+		return AndroidNetworkUtils.getHttpProtocol() + INDEX_DOWNLOAD_DOMAIN
+				+ "/get_indexes?gzip&" + Version.getVersionAsURLParam(app);
 	}
 
 	public boolean showDownloadExtraActions() {
