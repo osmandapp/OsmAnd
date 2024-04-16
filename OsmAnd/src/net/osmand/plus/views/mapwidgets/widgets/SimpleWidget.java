@@ -35,10 +35,12 @@ import net.osmand.util.Algorithms;
 public abstract class SimpleWidget extends TextInfoWidget {
 
 	private final SimpleWidgetState widgetState;
+	private final int HIDE_SMALL_WIDGET_NAME_UNITS_THRESHOLD_DP = 15;
 
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
 	private boolean isFullRow;
+	private MapInfoLayer.TextState textState;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
@@ -61,7 +63,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	public void updateValueAlign(boolean fullRow) {
 		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
-			if(!fullRow) {
+			if (!fullRow) {
 				textView.setMaxWidth((int) (container.getWidth() - app.getResources().getDimension(R.dimen.content_padding) +
 						app.getResources().getDimension(R.dimen.map_widget_icon) +
 						app.getResources().getDimension(R.dimen.content_padding_small)));
@@ -183,6 +185,11 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		if (typeAllowed && (!shouldHideTopWidgets || emptyValueTextView)) {
 			updateSimpleWidgetInfo(drawSettings);
 		}
+		if (widgetState.getWidgetSizePref().get() == WidgetSize.SMALL) {
+			int widthThresholdPx = dpToPx(app, HIDE_SMALL_WIDGET_NAME_UNITS_THRESHOLD_DP);
+			widgetNameTextView.setVisibility(widgetNameTextView.getWidth() > widthThresholdPx ? View.VISIBLE : View.INVISIBLE);
+			smallTextView.setVisibility(smallTextView.getWidth() > widthThresholdPx ? View.VISIBLE : View.INVISIBLE);
+		}
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
@@ -214,7 +221,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	@Nullable
-	protected String getAdditionalWidgetName(){
+	protected String getAdditionalWidgetName() {
 		return null;
 	}
 
@@ -265,6 +272,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 
 	@Override
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
+		this.textState = textState;
 		if (verticalWidget) {
 			nightMode = textState.night;
 			textView.setTextColor(textState.textColor);
@@ -283,5 +291,16 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	@Override
 	protected View getContentView() {
 		return verticalWidget ? view : container;
+	}
+
+	public void updateFullRowState(boolean fullRow) {
+		if (isFullRow != fullRow) {
+			isFullRow = fullRow;
+			recreateView();
+			if (textState != null) {
+				updateColors(textState);
+			}
+			view.requestLayout();
+		}
 	}
 }
