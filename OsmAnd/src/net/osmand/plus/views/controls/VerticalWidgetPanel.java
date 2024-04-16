@@ -115,8 +115,8 @@ public class VerticalWidgetPanel extends LinearLayout {
 		ViewCompat.setElevation(this, isAnyRowVisible() ? 5f : 0);
 	}
 
-	private void updateVisibility(){
-			AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
+	private void updateVisibility() {
+		AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
 	}
 
 	public void update(@Nullable DrawSettings drawSettings) {
@@ -194,7 +194,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateRow(@NonNull MapWidget widget) {
 		Iterator<Row> rowIterator = visibleRows.values().iterator();
-		while (rowIterator.hasNext()){
+		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
 				if (Algorithms.objectEquals(widget, widgetInfo.widget)) {
@@ -214,7 +214,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateRows() {
 		Iterator<Row> rowIterator = visibleRows.values().iterator();
-		while (rowIterator.hasNext()){
+		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			row.updateRow(!rowIterator.hasNext());
 		}
@@ -234,6 +234,14 @@ public class VerticalWidgetPanel extends LinearLayout {
 		for (MapWidgetInfo widgetInfo : widgetsInRow) {
 			if (widgetInfo.widget instanceof SimpleWidget) {
 				((SimpleWidget) widgetInfo.widget).updateValueAlign(visibleViewsInRowCount <= 1);
+			}
+		}
+	}
+
+	private void updateFullRowState(List<MapWidgetInfo> widgetsInRow, int visibleViewsInRowCount) {
+		for (MapWidgetInfo widgetInfo : widgetsInRow) {
+			if (widgetInfo.widget instanceof SimpleWidget) {
+				((SimpleWidget) widgetInfo.widget).updateFullRowState(visibleViewsInRowCount <= 1);
 			}
 		}
 	}
@@ -337,6 +345,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 					showBottomDivider = false;
 				}
 			}
+			updateFullRowState(enabledMapWidgets, visibleViewsInRowCount);
 			updateValueAlign(enabledMapWidgets, visibleViewsInRowCount);
 			AndroidUiHelper.updateVisibility(bottomDivider, (visibleViewsInRowCount > 0 && showBottomDivider) && !lastRow);
 		}
