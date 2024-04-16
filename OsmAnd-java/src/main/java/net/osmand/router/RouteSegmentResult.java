@@ -243,6 +243,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			int refTypeRule = region.getRefTypeRule();
 			object.names = new TIntObjectHashMap<>();
 			for (int nameId : object.nameIds) {
+				if (nameId >= region.quickGetEncodingRulesSize()) {
+					continue;
+				}
 				RouteTypeRule rule = region.quickGetEncodingRule(nameId);
 				if (rule != null) {
 					if (nameTypeRule != -1 && "name".equals(rule.getTag())) {
