@@ -40,10 +40,12 @@
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/speedometer_units"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="13dp"
 			android:layout_gravity="start"
 			android:gravity="top"
+			android:lines="1"
+			android:maxLines="1"
 			android:textAllCaps="true"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="11dp"
