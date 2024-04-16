@@ -59,7 +59,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.AccessibilityActionsProvider;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -408,12 +407,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		changeZoomManually(1);
 	}
 
-	public void zoomOutAndAdjustTileAngle() {
-		changeZoomManually(-1, true);
+	public void zoomOutAndAdjustTiltAngle() {
+		changeZoomManually(-1, is3DMode());
 	}
 
 	public void zoomInAndAdjustTiltAngle() {
-		changeZoomManually(1, true);
+		changeZoomManually(1, is3DMode());
 	}
 
 	public void scrollMap(float dx, float dy) {
@@ -591,6 +590,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	private boolean is3DMode() {
+		return elevationAngle != DEFAULT_ELEVATION_ANGLE;
+	}
+
 	private void adjustTiltAngle(@NonNull Zoom zoom) {
 		float angle = -1;
 		int baseZoom = zoom.getBaseZoom();
@@ -610,8 +613,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			angle = 75;
 		} else if (baseZoom == 3) {
 			angle = 85;
-		} else if (baseZoom == getMinZoom()) {
-			angle = 90;
 		}
 		if (angle != -1) {
 			animatedDraggingThread.startTilting(angle);
