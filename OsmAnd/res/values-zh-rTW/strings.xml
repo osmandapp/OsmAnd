@@ -5669,4 +5669,7 @@
     <string name="fix_north_up">啟用固定北方向上</string>
     <string name="change_default_appearance_confirmation">變更 %1$s 的預設外觀？</string>
     <string name="use_3d_track_visualization">3D 視覺化</string>
+    <string name="change_default_tracks_appearance_confirmation">套用變更到資料夾中既有的軌跡或是僅套用到新的？</string>
+    <string name="shared_string_changes">變更</string>
+    <string name="apply_only_to_new">僅套用到新的</string>
 </resources>
