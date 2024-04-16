@@ -5683,4 +5683,7 @@
     <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standard-Aussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
+    <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Titel im Ordner oder nur auf neue Titel anwenden?</string>
+    <string name="shared_string_changes">Änderungen</string>
+    <string name="apply_only_to_new">Nur für neue</string>
 </resources>
