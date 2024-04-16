@@ -34,7 +34,7 @@ public class SelectedGpxFile {
 	protected GPXTrackAnalysis trackAnalysis;
 
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-	protected List<GpxDisplayGroup> displayGroups;
+	protected List<GpxDisplayGroup> splitGroups;
 
 	@NonNull
 	protected QuadRect bounds = new QuadRect();
@@ -84,8 +84,8 @@ public class SelectedGpxFile {
 		this.trackAnalysis = trackAnalysis;
 	}
 
-	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
-		this.displayGroups = displayGroups;
+	public void setSplitGroups(@Nullable List<GpxDisplayGroup> splitGroups) {
+		this.splitGroups = splitGroups;
 		this.splitProcessed = true;
 	}
 
@@ -106,7 +106,7 @@ public class SelectedGpxFile {
 	}
 
 	private void updateSplit(@NonNull OsmandApplication app) {
-		displayGroups = null;
+		splitGroups = null;
 		if (showCurrentTrack) {
 			splitProcessed = true;
 		} else {
@@ -298,22 +298,22 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public List<GpxDisplayGroup> getDisplayGroups(@NonNull OsmandApplication app) {
+	public List<GpxDisplayGroup> getSplitGroups(@NonNull OsmandApplication app) {
 		if (modifiedTime != gpxFile.modifiedTime) {
 			update(app);
 		}
 		if (!splitProcessed) {
 			updateSplit(app);
 		}
-		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getDisplayGroups(app) : displayGroups;
+		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getSplitGroups(app) : splitGroups;
 	}
 
-	public void setDisplayGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
+	public void setSplitGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
 		if (filteredSelectedGpxFile != null) {
-			filteredSelectedGpxFile.setDisplayGroups(displayGroups, app);
+			filteredSelectedGpxFile.setSplitGroups(displayGroups, app);
 		} else {
 			this.splitProcessed = true;
-			this.displayGroups = displayGroups;
+			this.splitGroups = displayGroups;
 
 			if (modifiedTime != gpxFile.modifiedTime) {
 				update(app);

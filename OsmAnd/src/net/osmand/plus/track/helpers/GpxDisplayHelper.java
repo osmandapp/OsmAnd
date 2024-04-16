@@ -50,7 +50,7 @@ public class GpxDisplayHelper {
 		}
 		List<GpxDisplayGroup> displayGroups = null;
 		if (selectedGpxFile != null) {
-			displayGroups = selectedGpxFile.getDisplayGroups(app);
+			displayGroups = selectedGpxFile.getSplitGroups(app);
 		}
 		if (displayGroups == null) {
 			displayGroups = collectDisplayGroups(gpxFile, processTrack);
@@ -117,7 +117,7 @@ public class GpxDisplayHelper {
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		int i = 0;
 		for (WptPt point : route.points) {
-			GpxDisplayItem item = new GpxDisplayItem();
+			GpxDisplayItem item = new GpxDisplayItem(null);
 			item.group = group;
 			item.description = point.desc;
 			item.expanded = true;
@@ -141,7 +141,7 @@ public class GpxDisplayHelper {
 		List<GpxDisplayItem> displayItems = new ArrayList<>();
 		int k = 0;
 		for (WptPt wptPt : points) {
-			GpxDisplayItem item = new GpxDisplayItem();
+			GpxDisplayItem item = new GpxDisplayItem(null);
 			item.group = group;
 			item.description = wptPt.desc;
 			item.name = wptPt.name;
@@ -160,7 +160,7 @@ public class GpxDisplayHelper {
 
 	public void updateDisplayGroupsNames(@NonNull SelectedGpxFile selectedGpxFile) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		List<GpxDisplayGroup> displayGroups = selectedGpxFile.getDisplayGroups(app);
+		List<GpxDisplayGroup> displayGroups = selectedGpxFile.getSplitGroups(app);
 		if (displayGroups != null) {
 			String name = getGroupName(app, gpxFile);
 			for (GpxDisplayGroup group : displayGroups) {
@@ -272,7 +272,7 @@ public class GpxDisplayHelper {
 			@Override
 			public void trackSplittingFinished(boolean success) {
 				if (success) {
-					selectedGpxFile.setDisplayGroups(groups, app);
+					selectedGpxFile.setSplitGroups(groups, app);
 					app.getOsmandMap().getMapView().refreshMap();
 				}
 				if (callback != null) {
