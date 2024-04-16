@@ -3571,7 +3571,7 @@
     <string name="local_index_tile_data_zooms">Niveluri de mărire descărcate: %1$s</string>
     <string name="auto_zoom_farthest">La apropiere minimă</string>
     <string name="auto_zoom_far">La apropiere medie</string>
-    <string name="auto_zoom_none">Fără zoom automat</string>
+    <string name="auto_zoom_none">Fără focalizare automată</string>
     <string name="route_is_too_long_v2">Pentru distanțe lungi: adăugați destinații intermediare dacă nu se găsește nicio rută în 10 minute.</string>
     <string name="app_modes_choose_descr">Selectați profilurile afișate.</string>
     <string name="complex_route_calculation_failed">Calculul rapid al rutei a eșuat (%s), se revine la calculul lent.</string>
@@ -4603,7 +4603,7 @@
     <string name="average_speed_time_interval_desc">Specificați intervalul de timp pentru calcularea vitezei medii.</string>
     <string name="rendering_attr_hideMilitaryAreas_description">Ascunde zone militare</string>
     <string name="rendering_attr_horseScale_name">Dificultate trasee pentru cai</string>
-    <string name="distance_circles">Cercuri de distanță</string>
+    <string name="distance_circles">Distanța-cercuri</string>
     <string name="circle_settings">Setările cercului</string>
     <string name="navigation_points">Puncte de navigație</string>
     <string name="calculate_online">Calculează online</string>
@@ -5660,4 +5660,30 @@
     <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la piesele existente în dosar sau numai la cele noi?</string>
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">- Pentru a fi pregătit pentru 4.8</string>
+    <string name="precise">Precizie</string>
+    <string name="round_up">Rotunjire în sus</string>
+    <string name="upload_local_versions">Încărcați versiuni locale</string>
+    <string name="change_default_appearance_confirmation">Schimbați aspectul implicit al lui %1$s?</string>
+    <string name="use_3d_track_visualization">Vizualizare 3D</string>
+    <string name="shared_string_changes">Modificări</string>
+    <string name="map_widget_map_scale">Scala hărții</string>
+    <string name="release_4_7">Noul widget \"Speedometru\" compatibil cu Android Auto
+\n
+\n • Configurați ecranul hărții prin adăugarea mai multor butoane \"Acțiuni rapide\"
+\n
+\n • Îmbunătățirea lizibilității datelor din grafice
+\n
+\n • Adăugarea de filtre în funcție de datele senzorilor pentru trasee
+\n
+\n • Personalizare îmbunătățită a aspectului pentru grupuri de piste
+\n
+\n • Adăugat suport pentru etichete GPX suplimentare
+\n
+\n • Personalizarea \"Distanței în timpul navigației\": alegeți între numere precise sau rotunjite în sus
+\n
+\n • Interfață unificată pentru selectarea track-urilor
+\n
+\n • Autentificarea OpenStreetMap a trecut la OAuth 2.0
+\n
+\n</string>
 </resources>
