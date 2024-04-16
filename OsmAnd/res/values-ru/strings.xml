@@ -46,7 +46,7 @@
     <string name="search_favorites">Поиск в избранных</string>
     <string name="hillshade_menu_download_descr">Загрузите карту «Наложение затенения рельефа» для отображения вертикального затенения (отмывки) рельефа.</string>
     <string name="hillshade_purchase_header">Установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
+    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» этого региона.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
@@ -5677,4 +5677,8 @@
     <string name="fix_north_up_descr">Не поворачивать карту жестами при ориентации карты «Север сверху»</string>
     <string name="unchanged_parameter_summary">Каждый трек сохраняет свои собственные параметры.</string>
     <string name="change_default_appearance_confirmation">Изменить внешний вид %1$s по умолчанию?</string>
+    <string name="apply_only_to_new">Применять только к новым</string>
+    <string name="change_default_tracks_appearance_confirmation">Применить изменения к существующим трекам в папке или только к новым?</string>
+    <string name="shared_string_changes">Изменения</string>
+    <string name="use_3d_track_visualization">3D-визуализация</string>
 </resources>
