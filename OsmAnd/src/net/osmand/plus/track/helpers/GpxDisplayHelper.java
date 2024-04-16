@@ -44,12 +44,13 @@ public class GpxDisplayHelper {
 
 	@NonNull
 	public List<GpxDisplayGroup> collectDisplayGroups(@Nullable SelectedGpxFile selectedGpxFile,
-	                                                  @NonNull GPXFile gpxFile, boolean processTrack) {
+	                                                  @NonNull GPXFile gpxFile, boolean processTrack,
+	                                                  boolean useCachedGroups) {
 		if (selectedGpxFile == null) {
 			selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		}
 		List<GpxDisplayGroup> displayGroups = null;
-		if (selectedGpxFile != null) {
+		if (selectedGpxFile != null && useCachedGroups) {
 			displayGroups = selectedGpxFile.getSplitGroups(app);
 		}
 		if (displayGroups == null) {
