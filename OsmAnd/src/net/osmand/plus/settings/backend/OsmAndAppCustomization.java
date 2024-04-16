@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.IndexConstants.INDEX_DOWNLOAD_DOMAIN;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 import android.app.Activity;
@@ -200,7 +201,7 @@ public class OsmAndAppCustomization {
 	}
 
 	public String getIndexesUrl() {
-		return "https://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version.getVersionAsURLParam(app);
+		return "http://" + INDEX_DOWNLOAD_DOMAIN + "/get_indexes?gzip&" + Version.getVersionAsURLParam(app);
 	}
 
 	public boolean showDownloadExtraActions() {
