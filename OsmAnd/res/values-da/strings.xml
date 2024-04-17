@@ -3312,7 +3312,7 @@
     <string name="login_and_pass">Brugernavn og adgangskode</string>
     <string name="plugin_global_prefs_info">Disse indstillinger for udvidelsen er globale og gælder for alle profiler</string>
     <string name="osm_editing">OSM redigering</string>
-    <string name="osm_edits_view_descr">Se alle dine redigeringer eller OSM-fejl i %1$s, der endnu ikke er overført. Allerede overførte ændringer vises ikke længere.</string>
+    <string name="osm_edits_view_descr">Se alle dine redigeringer, der endnu ikke er overført, eller OSM-fejl i %1$s. Allerede overførte ændringer vises ikke længere.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikonet vises under navigation eller bevægelse.</string>
     <string name="select_map_icon_descr">Ikon vist i hvile.</string>
@@ -5687,4 +5687,5 @@
     <string name="shared_string_changes">Ændringer</string>
     <string name="apply_only_to_new">Anvend kun på nye</string>
     <string name="change_default_tracks_appearance_confirmation">Anvend ændringer på eksisterende spor i mappen eller kun på nye?</string>
+    <string name="release_4_8">• For at være forberedt på 4.8</string>
 </resources>
