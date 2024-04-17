@@ -331,7 +331,7 @@ public class RoutePlannerFrontEnd {
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		if (useGeometryBasedApproximation) {
-			return searchGpxSegments(gctx, gpxPoints, resultMatcher); // use Java-only method until C++ implemented
+			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
 		} else {
 			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 		}

@@ -34,11 +34,6 @@ public class GpxSegmentsApproximation {
 	                                                    List<GpxPoint> gpxPoints) throws IOException {
 		long timeToCalculate = System.nanoTime();
 
-//		NativeLibrary nativeLib = gctx.ctx.nativeLib;
-//		if (nativeLib != null && useNativeApproximation) {
-//			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
-//		}
-
 		initGpxPointsXY31(gpxPoints);
 
 		float minPointApproximation = gctx.ctx.config.minPointApproximation;
