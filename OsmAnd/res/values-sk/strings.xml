@@ -1201,7 +1201,7 @@
     <string name="rendering_attr_moreDetailed_name">Viac detailov</string>
     <string name="rendering_attr_lessDetailed_name">Menej detailov</string>
     <string name="rendering_attr_hideAccess_name">Obmedzenia prístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu a mýto</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
     <string name="rendering_attr_showCycleRoutes_name">Cyklotrasy</string>
@@ -4468,8 +4468,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazenie ikon pri nízkom priblížení</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Značky chýb</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony pri nízkom priblížení</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunely vodných ciest</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Neskrývať vodné cesty v tuneloch</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Zvýšiť viditeľnosť tunelov vodných ciest</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Zvýšiť viditeľnosť vodných ciest v tuneloch</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_all_name">Všetky</string>
     <string name="rendering_value_omit_name">Vynechať</string>
@@ -5652,6 +5652,8 @@
 \n
 \n • Pridané filtre podľa údajov senzorov pre stopy
 \n
+\n • Zlepšené upravovanie vzhľadu pre skupiny stôp
+\n
 \n • Pridaná podpora ďalších značiek v GPX
 \n
 \n • Nastaviteľná \"Vzdialenosť počas navigácie\": zvoľte medzi presnými a zaokrúhlenými číslami
@@ -5669,4 +5671,10 @@
     <string name="gpx_approximation_geo_java">Podľa geometrie (Java, rýchle)</string>
     <string name="fix_north_up">Zapnúť Pevný Sever hore</string>
     <string name="fix_north_up_descr">Neotáčať mapu gestami pri orientácii mapy Sever hore</string>
+    <string name="change_default_appearance_confirmation">Zmeniť predvolený vzhľad %1$s?</string>
+    <string name="use_3d_track_visualization">3D vizualizácia</string>
+    <string name="apply_only_to_new">Aplikovať iba na nové</string>
+    <string name="release_4_8">• Byť pripravený pre 4.8</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplikovať zmeny na existujúce stopy v priečinku, alebo iba na nové?</string>
+    <string name="shared_string_changes">Zmeny</string>
 </resources>

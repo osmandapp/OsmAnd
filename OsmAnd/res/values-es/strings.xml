@@ -5676,4 +5676,10 @@
     <string name="gpx_approximation_java">Basado en enrutamiento (Java)</string>
     <string name="fix_north_up">Activar el norte fijo hacia arriba</string>
     <string name="fix_north_up_descr">No rotar el mapa con gestos en la orientación Norte Arriba</string>
+    <string name="change_default_appearance_confirmation">¿Cambiar la apariencia predeterminada de %1$s ?</string>
+    <string name="use_3d_track_visualization">Visualizar en 3D</string>
+    <string name="shared_string_changes">Cambios</string>
+    <string name="apply_only_to_new">Aplicar solo a nuevos</string>
+    <string name="release_4_8">• Preparado para 4.8</string>
+    <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las pistas existentes en la carpeta o solo a las nuevas?</string>
 </resources>
