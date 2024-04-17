@@ -217,7 +217,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
 				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
-					return new HHNetworkRouteRes(" Too many route recalculations (maps are outdated).");
+					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
 				route = null;
