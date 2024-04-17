@@ -23,7 +23,7 @@ public class VerticalExaggerationFragment extends ConfigureMapOptionFragment {
 
 	private SRTMPlugin srtmPlugin;
 
-	public static final int MIN_VERTICAL_EXAGGERATION = 0;
+	public static final int MIN_VERTICAL_EXAGGERATION = 1;
 	public static final int MAX_VERTICAL_EXAGGERATION = 3;
 	public static final String SCALE = "scale";
 

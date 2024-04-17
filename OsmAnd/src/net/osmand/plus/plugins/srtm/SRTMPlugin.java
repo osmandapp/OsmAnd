@@ -9,6 +9,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
+import static net.osmand.plus.plugins.srtm.VerticalExaggerationFragment.MIN_VERTICAL_EXAGGERATION;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
@@ -590,7 +591,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	static public String getFormattedScaleValue(@NonNull OsmandApplication app, float scale) {
 		DecimalFormat decimalFormat = new DecimalFormat("#");
 		String formattedScale = "x" + (scale % 1 == 0 ? decimalFormat.format(scale) : scale);
-		return scale == 0 ? app.getString(R.string.shared_string_none) : formattedScale;
+		return scale == MIN_VERTICAL_EXAGGERATION ? app.getString(R.string.shared_string_none) : formattedScale;
 	}
 
 	@Nullable
