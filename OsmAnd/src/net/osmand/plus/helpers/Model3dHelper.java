@@ -4,14 +4,12 @@ import android.os.AsyncTask;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.StateChangedListener;
 import net.osmand.core.jni.Model3D;
 import net.osmand.core.jni.ObjParser;
 import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -21,7 +19,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
@@ -36,88 +33,66 @@ public class Model3dHelper {
 	private final Set<String> modelsInProgress = new HashSet<>();
 	private final Set<String> failedModels = new HashSet<>();
 
-	private final StateChangedListener<ApplicationMode> appModeListener;
-	private final StateChangedListener<String> locationIconListener;
-	private final StateChangedListener<String> navigationIconListener;
-
 	public Model3dHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.settings = app.getSettings();
-		this.appModeListener = newAppMode -> parseModels();
-		this.locationIconListener = newIcon -> parseModels();
-		this.navigationIconListener = newIcon -> parseModels();
-
-		settings.APPLICATION_MODE.addListener(appModeListener);
-		settings.LOCATION_ICON.addListener(locationIconListener);
-		settings.NAVIGATION_ICON.addListener(navigationIconListener);
-
-		parseModels();
 	}
 
 	@Nullable
 	public Model3D getModel(@NonNull String modelName) {
-		return modelsCache.get(modelName.replace(IndexConstants.MODEL_NAME_PREFIX, ""));
+		if (!modelName.startsWith(IndexConstants.MODEL_NAME_PREFIX)) {
+			return null;
+		}
+
+		String pureModelName = modelName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
+		Model3D model3D = modelsCache.get(pureModelName);
+		if (model3D == null) {
+			loadModel(pureModelName);
+		}
+
+		return model3D;
 	}
 
-	public void parseModels() {
+	private void loadModel(@NonNull String modelName) {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
 					if (event == AppInitEvents.NATIVE_OPEN_GL_INITIALIZED) {
-						parseModelsImpl();
+						loadModelImpl(modelName);
 						init.removeListener(this);
 					}
 				}
 			});
 		} else {
-			parseModelsImpl();
+			loadModelImpl(modelName);
 		}
 	}
 
-	private void parseModelsImpl() {
+	private void loadModelImpl(@NonNull String modelName) {
 		if (!app.useOpenGlRenderer()) {
 			return;
 		}
 
-		ApplicationMode appMode = settings.getApplicationMode();
-		Set<String> iconsNames = new HashSet<>();
-		iconsNames.add(appMode.getLocationIcon());
-		iconsNames.add(appMode.getNavigationIcon());
-
-		Set<String> dirsPaths = new HashSet<>();
-		for (String iconName : iconsNames) {
-			if (!iconName.startsWith(IndexConstants.MODEL_NAME_PREFIX)) {
-				continue;
-			}
-
-			String modelName = iconName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
-
-			if (modelsCache.containsKey(modelName)
-					|| modelsInProgress.contains(modelName)
-					|| failedModels.contains(modelName)) {
-				continue;
-			}
-
-			File dir = new File(app.getAppPath(IndexConstants.MODEL_3D_DIR), modelName);
-			if (isModelExist(dir)) {
-				dirsPaths.add(dir.getAbsolutePath());
-				modelsInProgress.add(modelName);
-			}
+		if (modelsCache.containsKey(modelName)
+				|| modelsInProgress.contains(modelName)
+				|| failedModels.contains(modelName)) {
+			return;
 		}
 
-		new Parse3dModelTask(dirsPaths, result -> {
-			for (Entry<String, Model3D> entry : result.entrySet()) {
-				String modelName = entry.getKey();
-				Model3D model = entry.getValue();
+		File dir = new File(app.getAppPath(IndexConstants.MODEL_3D_DIR), modelName);
+		if (!isModelExist(dir)) {
+			return;
+		}
 
-				if (model == null) {
-					failedModels.add(modelName);
-				} else {
-					modelsCache.put(modelName, model);
-				}
-				modelsInProgress.remove(modelName);
+		modelsInProgress.add(modelName);
+		new Load3dModelTask(dir.getAbsolutePath(), model -> {
+			if (model == null) {
+				failedModels.add(modelName);
+			} else {
+				modelsCache.put(modelName, model);
 			}
+			modelsInProgress.remove(modelName);
 
 			return true;
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -155,30 +130,24 @@ public class Model3dHelper {
 		return false;
 	}
 
-	private static class Parse3dModelTask extends AsyncTask<Void, Void, Map<String, Model3D>> {
+	private static class Load3dModelTask extends AsyncTask<Void, Void, Model3D> {
 
-		private final Set<String> modelDirPaths;
-		private final CallbackWithObject< Map<String, Model3D> > callback;
+		private final String modelDirPath;
+		private final CallbackWithObject<Model3D> callback;
 
-		public Parse3dModelTask(@NonNull Set<String> modelDirPaths, @NonNull CallbackWithObject< Map<String, Model3D> > callback) {
-			this.modelDirPaths = modelDirPaths;
+		public Load3dModelTask(@NonNull String modelDirPath, @NonNull CallbackWithObject<Model3D> callback) {
+			this.modelDirPath = modelDirPath;
 			this.callback = callback;
 		}
 
 		@Override
-		protected Map<String, Model3D> doInBackground(Void... voids) {
-			Map<String, Model3D> result = new HashMap<>();
-			for (String modelDirPath : modelDirPaths) {
-				String modelName = new File(modelDirPath).getName();
-				ObjParser parser = new ObjParser(modelDirPath + "/model.obj", modelDirPath + "/" + "mtl");
-				Model3D model = parser.parse();
-				result.put(modelName, model);
-			}
-			return result;
+		protected Model3D doInBackground(Void... voids) {
+			ObjParser parser = new ObjParser(modelDirPath + "/model.obj", modelDirPath + "/mtl");
+			return parser.parse();
 		}
 
 		@Override
-		protected void onPostExecute(Map<String, Model3D> result) {
+		protected void onPostExecute(Model3D result) {
 			callback.processResult(result);
 		}
 	}
