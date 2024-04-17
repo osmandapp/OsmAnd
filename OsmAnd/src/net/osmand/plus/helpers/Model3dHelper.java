@@ -11,6 +11,7 @@ import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -39,37 +40,40 @@ public class Model3dHelper {
 	}
 
 	@Nullable
-	public Model3D getModel(@NonNull String modelName) {
+	public Model3D getModel(@NonNull String modelName, @Nullable CallbackWithObject<Model3D> callbackOnLoad) {
 		if (!modelName.startsWith(IndexConstants.MODEL_NAME_PREFIX)) {
+			if (callbackOnLoad != null) {
+				callbackOnLoad.processResult(null);
+			}
 			return null;
 		}
 
 		String pureModelName = modelName.replace(IndexConstants.MODEL_NAME_PREFIX, "");
 		Model3D model3D = modelsCache.get(pureModelName);
 		if (model3D == null) {
-			loadModel(pureModelName);
+			loadModel(pureModelName, callbackOnLoad);
 		}
 
 		return model3D;
 	}
 
-	private void loadModel(@NonNull String modelName) {
-		if (app.isApplicationInitializing()) {
+	private void loadModel(@NonNull String modelName, @Nullable CallbackWithObject<Model3D> callback) {
+		if (app.isApplicationInitializing() && !NativeCoreContext.isInit()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
 				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
 					if (event == AppInitEvents.NATIVE_OPEN_GL_INITIALIZED) {
-						loadModelImpl(modelName);
+						loadModelImpl(modelName, callback);
 						init.removeListener(this);
 					}
 				}
 			});
 		} else {
-			loadModelImpl(modelName);
+			loadModelImpl(modelName, callback);
 		}
 	}
 
-	private void loadModelImpl(@NonNull String modelName) {
+	private void loadModelImpl(@NonNull String modelName, @Nullable CallbackWithObject<Model3D> callback) {
 		if (!app.useOpenGlRenderer()) {
 			return;
 		}
@@ -93,7 +97,9 @@ public class Model3dHelper {
 				modelsCache.put(modelName, model);
 			}
 			modelsInProgress.remove(modelName);
-
+			if (callback != null) {
+				callback.processResult(model);
+			}
 			return true;
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

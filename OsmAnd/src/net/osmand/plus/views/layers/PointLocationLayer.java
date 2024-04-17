@@ -65,6 +65,7 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer
 		implements OsmAndLocationListener, OsmAndCompassListener, IContextMenuProvider {
 
+	private static final int MODEL_3D_MAX_SIZE_DP = 48;
 	protected static final float BEARING_SPEED_THRESHOLD = 0.1f;
 	protected static final int MIN_ZOOM = 3;
 	protected static final int RADIUS = 7;
@@ -81,10 +82,12 @@ public class PointLocationLayer extends OsmandMapLayer
 
 	private String navigationIconName;
 	private Model3D navigationModel;
+	private boolean brokenNavigationModel;
 	private LayerDrawable navigationIcon;
 
 	private String locationIconName;
 	private Model3D locationModel;
+	private boolean brokenLocationModel;
 	private LayerDrawable locationIcon;
 	private Bitmap headingIcon;
 	private int headingIconId;
@@ -124,9 +127,13 @@ public class PointLocationLayer extends OsmandMapLayer
 		private SWIGTYPE_p_void onSurfaceIconKey;
 		private SWIGTYPE_p_void onSurfaceHeadingIconKey;
 
-		public static CoreMapMarker createAndAddToCollection(@NonNull Context ctx, @NonNull MapMarkersCollection markersCollection,
-		                                                     int id, int baseOrder, @NonNull LayerDrawable icon, @Nullable Model3D model3D,
+		public static CoreMapMarker createAndAddToCollection(@NonNull Context ctx, @Nullable MapMarkersCollection markersCollection,
+		                                                     int id, int baseOrder, @Nullable LayerDrawable icon, @Nullable Model3D model3D,
 		                                                     @DrawableRes int headingIconId, float scale, @ColorInt int profileColor, boolean withHeading) {
+			if (icon == null && model3D == null) {
+				return null;
+			}
+
 			CoreMapMarker marker = new CoreMapMarker();
 			MapMarkerBuilder myLocMarkerBuilder = new MapMarkerBuilder();
 			myLocMarkerBuilder.setMarkerId(id);
@@ -137,13 +144,12 @@ public class PointLocationLayer extends OsmandMapLayer
 			myLocMarkerBuilder.setPinIconHorisontalAlignment(MapMarker.PinIconHorisontalAlignment.CenterHorizontal);
 			myLocMarkerBuilder.setIsHidden(true);
 
-			int width = (int) (icon.getIntrinsicWidth() * scale);
-			int height = (int) (icon.getIntrinsicHeight() * scale);
-
 			if (model3D != null) {
 				myLocMarkerBuilder.setModel3D(model3D);
-				myLocMarkerBuilder.setModel3DMaxSizeInPixels(Math.max(width, height));
+				myLocMarkerBuilder.setModel3DMaxSizeInPixels(AndroidUtils.dpToPx(ctx, MODEL_3D_MAX_SIZE_DP));
 			} else {
+				int width = (int) (icon.getIntrinsicWidth() * scale);
+				int height = (int) (icon.getIntrinsicHeight() * scale);
 				int locationX = width / 2;
 				int locationY = height / 2;
 
@@ -259,7 +265,7 @@ public class PointLocationLayer extends OsmandMapLayer
 
 	@Nullable
 	private CoreMapMarker recreateMarker(LayerDrawable icon, Model3D model3d, int id, @ColorInt int profileColor, boolean withHeading) {
-		if (view == null || icon == null) {
+		if (view == null || (icon == null && model3d == null)) {
 			return null;
 		}
 		if (mapMarkersCollection == null) {
@@ -643,10 +649,12 @@ public class PointLocationLayer extends OsmandMapLayer
 		String navigationIconName = getNavigationIconName(appMode);
 		float textScale = getTextScale();
 		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
+		boolean locationIconChanged = !locationIconName.equals(this.locationIconName);
+		boolean navigationIconChanged = !navigationIconName.equals(this.navigationIconName);
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
 				|| this.profileColor != profileColor
-				|| !locationIconName.equals(this.locationIconName)
-				|| !navigationIconName.equals(this.navigationIconName)
+				|| locationIconChanged
+				|| navigationIconChanged
 				|| this.textScale != textScale
 				|| this.carView != carView) {
 			this.appMode = appMode;
@@ -658,8 +666,21 @@ public class PointLocationLayer extends OsmandMapLayer
 			this.textScale = textScale;
 			this.carView = carView;
 
+			if (navigationIconChanged && brokenNavigationModel) {
+				brokenNavigationModel = false;
+			}
+			if (locationIconChanged && brokenLocationModel) {
+				brokenLocationModel = false;
+			}
+
 			if (NavigationIcon.isModel(navigationIconName)) {
-				navigationModel = model3dHelper.getModel(navigationIconName);
+				navigationModel = model3dHelper.getModel(navigationIconName, model -> {
+					navigationModel = model;
+					brokenNavigationModel = model == null;
+					markersInvalidated = true;
+					return true;
+				});
+				navigationIcon = null;
 			} else {
 				int navigationIconId = NavigationIcon.fromName(navigationIconName).getIconId();
 				navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
@@ -671,7 +692,13 @@ public class PointLocationLayer extends OsmandMapLayer
 
 			LocationIcon locationIconType = LocationIcon.fromName(locationIconName);
 			if (LocationIcon.isModel(locationIconName)) {
-				locationModel = model3dHelper.getModel(locationIconName);
+				locationModel = model3dHelper.getModel(locationIconName, model -> {
+					locationModel = model;
+					brokenLocationModel = model == null;
+					markersInvalidated = true;
+					return true;
+				});
+				locationIcon = null;
 			} else {
 				locationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, locationIconType.getIconId());
 				if (locationIcon != null) {
@@ -740,42 +767,18 @@ public class PointLocationLayer extends OsmandMapLayer
 	@NonNull
 	private String getLocationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
-		String oldLocationIconName = this.locationIconName;
-		String newLocationIconName = appMode.getLocationIcon();
-
-		if (!hasMapRenderer && LocationIcon.isModel(newLocationIconName)) {
-			newLocationIconName = LocationIcon.DEFAULT.name();
-		}
-
-		if (LocationIcon.isModel(newLocationIconName)) {
-			if (model3dHelper.getModel(newLocationIconName) == null) {
-				return oldLocationIconName == null ? LocationIcon.DEFAULT.name() : oldLocationIconName;
-			} else {
-				return newLocationIconName;
-			}
-		} else {
-			return newLocationIconName;
-		}
+		String locationIconName = appMode.getLocationIcon();
+		boolean forceUseDefault = LocationIcon.isModel(locationIconName)
+				&& (!hasMapRenderer || brokenLocationModel && locationIconName.equals(this.locationIconName));
+		return forceUseDefault ? LocationIcon.DEFAULT.name() : locationIconName;
 	}
 
 	@NonNull
 	private String getNavigationIconName(@NonNull ApplicationMode appMode) {
 		boolean hasMapRenderer = hasMapRenderer();
-		String oldNavigationIconName = this.navigationIconName;
-		String newNavigationIconName = appMode.getNavigationIcon();
-
-		if (!hasMapRenderer && NavigationIcon.isModel(newNavigationIconName)) {
-			newNavigationIconName = NavigationIcon.DEFAULT.name();
-		}
-
-		if (NavigationIcon.isModel(newNavigationIconName)) {
-			if (model3dHelper.getModel(newNavigationIconName) == null) {
-				return oldNavigationIconName == null ? NavigationIcon.DEFAULT.name() : oldNavigationIconName;
-			} else {
-				return newNavigationIconName;
-			}
-		} else {
-			return newNavigationIconName;
-		}
+		String navigationIconName = appMode.getNavigationIcon();
+		boolean forceUseDefault = NavigationIcon.isModel(navigationIconName)
+				&& (!hasMapRenderer || brokenNavigationModel && navigationIconName.equals(this.navigationIconName));
+		return forceUseDefault ? NavigationIcon.DEFAULT.name() : navigationIconName;
 	}
 }
