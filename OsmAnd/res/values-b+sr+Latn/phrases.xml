@@ -1465,7 +1465,7 @@
     <string name="poi_ship_chandler">Nautička oprema</string>
     <string name="poi_stationery">Kancelarijska oprema</string>
     <string name="poi_trade">Stovarište</string>
-    <string name="poi_variety_store">Mešovita roba</string>
+    <string name="poi_variety_store">Diskontna prodavnica</string>
     <string name="poi_window_blind">Žaluzine, roletne i tende</string>
     <string name="poi_department_store">Robna kuća</string>
     <string name="poi_energy">Energetsko odeljenje</string>
@@ -3837,7 +3837,7 @@
     <string name="poi_gpx_point">GPKS tačka</string>
     <string name="poi_fuel_lng">LNG - plin</string>
     <string name="poi_nuts">Orašasti proizvodi</string>
-    <string name="poi_beehive">Košnica</string>
+    <string name="poi_beehive">Pčelinjak</string>
     <string name="poi_departures_board_timetable">Raspored;Tabla s polascima</string>
     <string name="poi_departures_board_realtime">Realno vreme;Tabla s polascima</string>
     <string name="poi_departures_board_delay">Kašnjenje;Tabla s polascima</string>
