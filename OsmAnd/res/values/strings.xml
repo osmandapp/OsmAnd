@@ -10,6 +10,10 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_scale">Scale</string>
+    <string name="relief_3d_download_description">Additional maps are needed to view Terrain on the map.</string>
+    <string name="vertical_exaggeration_description">By changing the scale value, you can emphasise the 3D relief.</string>
+    <string name="vertical_exaggeration">Vertical exaggeration</string>
     <string name="apply_only_to_new">Apply only to new</string>
     <string name="change_default_tracks_appearance_confirmation">Apply changes to existing tracks in the folder or only to new ones?</string>
     <string name="shared_string_changes">Changes</string>

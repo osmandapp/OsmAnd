@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.getFormattedScaleValue;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,52 +19,63 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
-	public static final String VISIBILITY = "visibility";
+public class VerticalExaggerationFragment extends ConfigureMapOptionFragment {
 
 	private SRTMPlugin srtmPlugin;
-	private TextView visibilityTv;
-	private Slider visibilitySlider;
 
-	private int originalVisibilityValue;
+	public static final int MIN_VERTICAL_EXAGGERATION = 0;
+	public static final int MAX_VERTICAL_EXAGGERATION = 3;
+	public static final String SCALE = "scale";
+
+	private TextView scaleTv;
+	private Slider scaleSlider;
+	private float originalScaleValue;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
 
-		if (savedInstanceState != null && savedInstanceState.containsKey(VISIBILITY)) {
-			originalVisibilityValue = savedInstanceState.getInt(VISIBILITY);
-		} else if (srtmPlugin != null) {
-			originalVisibilityValue = srtmPlugin.getTerrainTransparency();
+		if (savedInstanceState != null && savedInstanceState.containsKey(SCALE)) {
+			originalScaleValue = savedInstanceState.getInt(SCALE);
+		} else {
+			originalScaleValue = getElevationScaleFactor();
 		}
 	}
 
 	@Override
 	protected DashboardOnMap.DashboardType getBaseDashboardType() {
-		return DashboardOnMap.DashboardType.TERRAIN;
+		return DashboardOnMap.DashboardType.RELIEF_3D;
+	}
+
+	public float getElevationScaleFactor() {
+		return srtmPlugin.getVerticalExaggerationScale();
+	}
+
+	public void setElevationScaleFactor(float scale) {
+		srtmPlugin.setVerticalExaggerationScale(scale);
 	}
 
 	@Override
 	public void onDestroy() {
-		srtmPlugin.setTerrainTransparency(originalVisibilityValue, srtmPlugin.getTerrainMode());
+		setElevationScaleFactor(originalScaleValue);
 		super.onDestroy();
 	}
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(VISIBILITY, originalVisibilityValue);
+		outState.putFloat(SCALE, originalScaleValue);
 	}
 
 	@Override
 	protected String getToolbarTitle() {
-		return getString(R.string.gpx_visibility_txt);
+		return getString(R.string.vertical_exaggeration);
 	}
 
 	@Override
 	protected void onResetToDefault() {
-		srtmPlugin.resetTransparencyToDefault();
+		srtmPlugin.resetVerticalExaggerationToDefault();
 		updateApplyButton(isChangesMade());
 		setupSlider();
 		refreshMap();
@@ -70,9 +83,9 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void setupMainContent() {
-		View view = themedInflater.inflate(R.layout.terrain_visibility_fragment, null, false);
-		visibilitySlider = view.findViewById(R.id.transparency_slider);
-		visibilityTv = view.findViewById(R.id.transparency_value_tv);
+		View view = themedInflater.inflate(R.layout.vertical_exaggeration_fragment, null, false);
+		scaleSlider = view.findViewById(R.id.scale_slider);
+		scaleTv = view.findViewById(R.id.scale_value_tv);
 
 		setupSlider();
 		contentContainer.addView(view);
@@ -80,43 +93,44 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 
 	@Override
 	protected void onApplyButtonClick() {
-		originalVisibilityValue = srtmPlugin.getTerrainTransparency();
+		originalScaleValue = getElevationScaleFactor();
 	}
 
 	private void setupSlider() {
-		int transparencyValue = (int) (srtmPlugin.getTerrainTransparency() / 2.55);
-		String transparency = transparencyValue + "%";
-		visibilityTv.setText(transparency);
+		float scaleFactor = getElevationScaleFactor();
+		scaleTv.setText(getFormattedScaleValue(app, scaleFactor));
 
-		visibilitySlider.addOnChangeListener(transparencySliderChangeListener);
-		visibilitySlider.setValueTo(100);
-		visibilitySlider.setValueFrom(0);
-		visibilitySlider.setValue(transparencyValue);
+		scaleSlider.addOnChangeListener(transparencySliderChangeListener);
+		scaleSlider.setValueTo(MAX_VERTICAL_EXAGGERATION);
+		scaleSlider.setValueFrom(MIN_VERTICAL_EXAGGERATION);
+		scaleSlider.setValue(scaleFactor);
+		scaleSlider.setStepSize(0.1f);
 		int profileColor = settings.getApplicationMode().getProfileColor(nightMode);
-		UiUtilities.setupSlider(visibilitySlider, nightMode, profileColor);
+		UiUtilities.setupSlider(scaleSlider, nightMode, profileColor);
 	}
 
 	private final Slider.OnChangeListener transparencySliderChangeListener = new Slider.OnChangeListener() {
 		@Override
 		public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 			if (fromUser) {
-				String transparencyStr = (int) value + "%";
-				visibilityTv.setText(transparencyStr);
-				srtmPlugin.setTerrainTransparency((int) Math.ceil(value * 2.55), srtmPlugin.getTerrainMode());
+				scaleTv.setText(getFormattedScaleValue(app, value));
+				setElevationScaleFactor(value);
 				updateApplyButton(isChangesMade());
 				refreshMap();
 			}
 		}
 	};
 
+
+
 	private boolean isChangesMade() {
-		return srtmPlugin.getTerrainTransparency() != originalVisibilityValue;
+		return getElevationScaleFactor() != originalScaleValue;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, new TerrainVisibilityFragment(), TAG)
+					.replace(R.id.fragmentContainer, new VerticalExaggerationFragment(), TAG)
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}
