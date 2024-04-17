@@ -297,7 +297,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				AndroidUiHelper.updateVisibility(progressBar, false);
 				if (success) {
 					List<GpxDisplayGroup> groups = getDisplayGroups();
-					selectedGpxFile.setDisplayGroups(groups, app);
+					selectedGpxFile.setSplitGroups(groups, app);
 				}
 				updateContent();
 			}

@@ -5657,4 +5657,7 @@
 \n
 \nAlegeți \"%1$s\" pentru numere exacte sau \"%2$s\" pentru o citire mai ușoară.</string>
     <string name="fix_north_up_descr">Nu roti harta prin gesturi când este orientată cu nordul în sus</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la piesele existente în dosar sau numai la cele noi?</string>
+    <string name="apply_only_to_new">Aplică doar la cele noi</string>
+    <string name="release_4_8">- Pentru a fi pregătit pentru 4.8</string>
 </resources>

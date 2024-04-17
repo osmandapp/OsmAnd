@@ -537,23 +537,24 @@ public class GPXUtilities {
 			this.name = pt.name;
 			this.category = pt.category;
 
-			String color = pt.extensions.get(COLOR_NAME_EXTENSION);
+			Map<String, String> extensions = getExtensionsToRead();
+			String color = extensions.get(COLOR_NAME_EXTENSION);
 			if (color != null) {
 				setColor(color);
 			}
-			String iconName = pt.extensions.get(ICON_NAME_EXTENSION);
+			String iconName = extensions.get(ICON_NAME_EXTENSION);
 			if (iconName != null) {
 				setIconName(iconName);
 			}
-			String backgroundType = pt.extensions.get(BACKGROUND_TYPE_EXTENSION);
+			String backgroundType = extensions.get(BACKGROUND_TYPE_EXTENSION);
 			if (backgroundType != null) {
 				setBackgroundType(backgroundType);
 			}
-			String address = pt.extensions.get(ADDRESS_EXTENSION);
+			String address = extensions.get(ADDRESS_EXTENSION);
 			if (address != null) {
 				setAddress(address);
 			}
-			String hidden = pt.extensions.get(HIDDEN_EXTENSION);
+			String hidden = extensions.get(HIDDEN_EXTENSION);
 			if (hidden != null) {
 				setHidden(hidden);
 			}

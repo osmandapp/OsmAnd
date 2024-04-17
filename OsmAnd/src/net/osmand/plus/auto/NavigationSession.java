@@ -44,6 +44,7 @@ import net.osmand.plus.auto.screens.SearchResultsScreen;
 import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.simulation.OsmAndLocationSimulation;
@@ -164,7 +165,7 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public void onDestroy(@NonNull LifecycleOwner owner) {
 		getLifecycle().removeObserver(this);
 		OsmandSettings settings = getApp().getSettings();
-		if(settings.simulateNavigationStartedFromAdb) {
+		if (settings.simulateNavigationStartedFromAdb) {
 			settings.simulateNavigation = false;
 			OsmAndLocationSimulation locationSimulation = getApp().getLocationProvider().getLocationSimulation();
 			if (locationSimulation.isRouteAnimating() || locationSimulation.isLoadingRouteLocations()) {
@@ -302,10 +303,18 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	private void processDeepLinkActions(@NonNull Uri uri) {
 		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
 		// the top if any other screens were pushed onto it.
-		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())) {
+		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())
+				&& DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment())) {
 			ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
 			Screen top = screenManager.getTop();
-			if (DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment()) && !(top instanceof LandingScreen)) {
+
+			RoutingHelper routingHelper = getApp().getRoutingHelper();
+			boolean followingMode = routingHelper.isFollowingMode();
+			boolean routeCalculated = routingHelper.isRouteCalculated();
+			boolean pauseNavigation = routingHelper.isPauseNavigation();
+
+			boolean navigation = followingMode || routeCalculated && pauseNavigation;
+			if (navigation && !(top instanceof NavigationScreen) || !navigation && !(top instanceof LandingScreen)) {
 				screenManager.popToRoot();
 			}
 		}

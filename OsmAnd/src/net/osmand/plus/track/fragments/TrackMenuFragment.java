@@ -356,7 +356,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setFile(file);
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
-		displayHelper.setGpx(selectedGpxFile.getGpxFile());
+		displayHelper.setGpx(selectedGpxFile.getGpxFileToDisplay());
 		displayHelper.setSelectedGpxFile(selectedGpxFile);
 		if (selectedGpxFile.getFilteredSelectedGpxFile() != null) {
 			displayHelper.setFilteredGpxFile(selectedGpxFile.getFilteredSelectedGpxFile().getGpxFile());
@@ -1599,7 +1599,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			if (selectedGpxFile != null) {
 				List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
 						new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
-				selectedGpxFile.setDisplayGroups(groups, app);
+				selectedGpxFile.setSplitGroups(groups, app);
 				selectedGpxFile.processPoints(app);
 			}
 			updateContent();
