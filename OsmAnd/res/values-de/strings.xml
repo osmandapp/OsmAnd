@@ -1220,7 +1220,7 @@
     <string name="rendering_attr_moreDetailed_name">Mehr Details</string>
     <string name="rendering_attr_lessDetailed_name">Weniger Details</string>
     <string name="rendering_attr_hideAccess_name">Zufahrtsbeschränkungen</string>
-    <string name="rendering_attr_showAccess_name">Zufahrtsbeschränkungen anzeigen</string>
+    <string name="rendering_attr_showAccess_name">Zugangs- und Mautbeschränkungen anzeigen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
     <string name="rendering_attr_showCycleRoutes_name">Fahrradrouten</string>
@@ -4483,8 +4483,8 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons bei niedrigen Zoomstufen</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme-Tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematische Darstellung von Symbolen bei niedrigen Zoomstufen</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Wasserstraßentunnel</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Wasserstraßentunnel nicht ausblenden</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Erhöhen der Sichtbarkeit von Wasserstraßentunneln</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Meeresbodendetail</string>
     <string name="rendering_attr_seabedDetail_description">Zusätzliche Textinfo zur Oberflächenbeschaffenheit des Meeresbodens, kombinierte Oberflächentypen, Kategorie und Art des Seegrases</string>
@@ -5025,7 +5025,6 @@
     <string name="last_synchronized">Zuletzt synchronisiert</string>
     <string name="display_position_automatic_descr">Abhängig von der Kartenausrichtung: unten für Bewegungsrichtung, mittig für alles andere.</string>
     <string name="shared_string_apply_changes">Änderungen anwenden</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Aussehen von %1$s-Tracks ändern\?</string>
     <string name="shared_string_kilograms">Kilogramm</string>
     <string name="shared_string_yards">Yards</string>
     <string name="recently_visible">Kürzlich sichtbar %1$s</string>
@@ -5655,6 +5654,8 @@
 \n
 \n• Filter nach Sensordaten für Strecken hinzugefügt
 \n
+\n• Verbesserte Anpassung des Aussehens für Trackgruppen
+\n
 \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
 \n
 \n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
@@ -5678,4 +5679,11 @@
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
     <string name="gpx_approximation_java">Routingbasiert (Java)</string>
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
+    <string name="fix_north_up">Festen Norden oben aktivieren</string>
+    <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
+    <string name="change_default_appearance_confirmation">Ändern des Standard-Aussehens von %1$s?</string>
+    <string name="use_3d_track_visualization">3D-Visualisierung</string>
+    <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Titel im Ordner oder nur auf neue Titel anwenden?</string>
+    <string name="shared_string_changes">Änderungen</string>
+    <string name="apply_only_to_new">Nur für neue</string>
 </resources>

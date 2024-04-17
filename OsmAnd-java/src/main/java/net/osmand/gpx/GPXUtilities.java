@@ -231,12 +231,17 @@ public class GPXUtilities {
 	}
 
 	public static int parseColor(String colorString, int defColor) {
+		Integer color = parseColor(colorString);
+		return color != null ? color : defColor;
+	}
+
+	public static Integer parseColor(String colorString) {
 		if (!Algorithms.isEmpty(colorString)) {
 			if (colorString.charAt(0) == '#') {
 				try {
 					return Algorithms.parseColor(colorString);
 				} catch (IllegalArgumentException e) {
-					return defColor;
+					log.error(e);
 				}
 			} else {
 				GPXColor gpxColor = GPXColor.getColorFromName(colorString);
@@ -245,7 +250,7 @@ public class GPXUtilities {
 				}
 			}
 		}
-		return defColor;
+		return null;
 	}
 
 	public static class WptPt extends GPXExtensions {
@@ -532,23 +537,24 @@ public class GPXUtilities {
 			this.name = pt.name;
 			this.category = pt.category;
 
-			String color = pt.extensions.get(COLOR_NAME_EXTENSION);
+			Map<String, String> extensions = getExtensionsToRead();
+			String color = extensions.get(COLOR_NAME_EXTENSION);
 			if (color != null) {
 				setColor(color);
 			}
-			String iconName = pt.extensions.get(ICON_NAME_EXTENSION);
+			String iconName = extensions.get(ICON_NAME_EXTENSION);
 			if (iconName != null) {
 				setIconName(iconName);
 			}
-			String backgroundType = pt.extensions.get(BACKGROUND_TYPE_EXTENSION);
+			String backgroundType = extensions.get(BACKGROUND_TYPE_EXTENSION);
 			if (backgroundType != null) {
 				setBackgroundType(backgroundType);
 			}
-			String address = pt.extensions.get(ADDRESS_EXTENSION);
+			String address = extensions.get(ADDRESS_EXTENSION);
 			if (address != null) {
 				setAddress(address);
 			}
-			String hidden = pt.extensions.get(HIDDEN_EXTENSION);
+			String hidden = extensions.get(HIDDEN_EXTENSION);
 			if (hidden != null) {
 				setHidden(hidden);
 			}
@@ -1272,11 +1278,12 @@ public class GPXUtilities {
 	}
 
 	private static String getOsmandTagKey(final Entry<String, String> entry) {
-		String key = entry.getKey().replace(":", "_-_");
-		if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
-			key = OSMAND_EXTENSIONS_PREFIX + key;
+		String key = entry.getKey();
+		if (key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
+			key = key.replace(OSMAND_EXTENSIONS_PREFIX, "");
 		}
-		return key;
+		key = key.replace(":", "_-_");
+		return OSMAND_EXTENSIONS_PREFIX + key;
 	}
 
 	private static void writeAuthor(XmlSerializer serializer, Author author) throws IOException {

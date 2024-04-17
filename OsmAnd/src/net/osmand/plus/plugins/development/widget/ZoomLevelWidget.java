@@ -28,7 +28,7 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 public class ZoomLevelWidget extends SimpleWidget {
 
 	private static final int ZOOM_OFFSET_FROM_31 = 17;
-	private static final int MAX_RATIO_DIGITS = 4;
+	private static final int MAX_RATIO_DIGITS = 3;
 
 	private final OsmandMap osmandMap;
 	private final OsmandMapTileView mapView;
@@ -147,21 +147,21 @@ public class ZoomLevelWidget extends SimpleWidget {
 	private FormattedValue formatMapScale(int mapScale) {
 		int digitsCount = (int) (Math.log10(mapScale) + 1);
 		if (digitsCount >= 7) {
-			return formatLongNumber(mapScale, digitsCount, 6, "M");
-		} else if (digitsCount >= 5) {
-			return formatLongNumber(mapScale, digitsCount, 3, "K");
+			return formatBigMapScale(mapScale, digitsCount, 6, "M");
+		} else if (digitsCount >= 4) {
+			return formatBigMapScale(mapScale, digitsCount, 3, "K");
 		} else {
-			return new FormattedValue(mapScale, String.valueOf(mapScale), "");
+			return OsmAndFormatter.formatIntegerValue(mapScale, "", app);
 		}
 	}
 
 	@NonNull
-	private FormattedValue formatLongNumber(int number, int digits, int insignificantDigits, @NonNull String unit) {
-		int significantDigits = digits - insignificantDigits;
-		int insignificantDigitsToShow = Math.max(MAX_RATIO_DIGITS - significantDigits, 0);
-		int removeExcessiveDigits = number / (int) Math.pow(10, insignificantDigits - insignificantDigitsToShow);
-		float roundedMapScale = (float) (removeExcessiveDigits / Math.pow(10, insignificantDigitsToShow));
-		return OsmAndFormatter.formatValue(roundedMapScale, unit, false, insignificantDigitsToShow, app);
+	private FormattedValue formatBigMapScale(int mapScale, int digits, int insignificantDigits, @NonNull String unit) {
+		int intDigits = digits - insignificantDigits;
+		int fractionalDigits = Math.max(0, MAX_RATIO_DIGITS - intDigits);
+		int removeExcessiveDigits = mapScale / (int) Math.pow(10, insignificantDigits - fractionalDigits);
+		float roundedMapScale = (float) (removeExcessiveDigits / Math.pow(10, fractionalDigits));
+		return OsmAndFormatter.formatValue(roundedMapScale, unit, true, fractionalDigits, app);
 	}
 
 	private void setZoomLevelText(int zoomBaseWithOffset, int zoomBase, float zoomFraction, float mapDensity) {

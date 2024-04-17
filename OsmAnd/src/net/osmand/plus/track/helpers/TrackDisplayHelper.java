@@ -1,6 +1,8 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.plus.track.GpxSplitType.NO_SPLIT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 
 import java.io.File;
@@ -17,6 +20,7 @@ import java.util.List;
 public class TrackDisplayHelper {
 
 	private final OsmandApplication app;
+	private final GpxAppearanceHelper gpxAppearanceHelper;
 
 	private File file;
 	private GPXFile gpxFile;
@@ -28,8 +32,9 @@ public class TrackDisplayHelper {
 	private List<GpxDisplayGroup> displayGroups;
 	private final List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 
-	public TrackDisplayHelper(OsmandApplication app) {
+	public TrackDisplayHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.gpxAppearanceHelper = new GpxAppearanceHelper(app);
 	}
 
 	@Nullable
@@ -120,13 +125,20 @@ public class TrackDisplayHelper {
 
 	public void updateDisplayGroups() {
 		modifiedTime = gpxFile.modifiedTime;
-		GpxDisplayHelper displayHelper = app.getGpxDisplayHelper();
 		GPXFile gpx = filteredGpxFile != null ? filteredGpxFile : gpxFile;
-		displayGroups = displayHelper.collectDisplayGroups(selectedGpxFile, gpx, true);
+		displayGroups = app.getGpxDisplayHelper().collectDisplayGroups(selectedGpxFile, gpx, true, useCachedGroups());
 		originalGroups.clear();
 		for (GpxDisplayGroup group : displayGroups) {
 			originalGroups.add(group.copy());
 		}
+	}
+
+	private boolean useCachedGroups() {
+		if (gpxDataItem != null) {
+			Integer type = gpxAppearanceHelper.getParameter(gpxDataItem, SPLIT_TYPE);
+			return type == null || GpxSplitType.getSplitTypeByTypeId(type) == NO_SPLIT;
+		}
+		return true;
 	}
 
 	@NonNull

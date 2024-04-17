@@ -691,6 +691,15 @@ public class OsmandSettings {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
+	public void resetLastGlobalPreferencesEditTime() {
+		settingsAPI.edit(globalPreferences).remove(LAST_PREFERENCES_EDIT_TIME).commit();
+	}
+
+	public void resetLastPreferencesEditTime(@NonNull ApplicationMode mode) {
+		Object profilePrefs = getProfilePreferences(mode);
+		settingsAPI.edit(profilePrefs).remove(LAST_PREFERENCES_EDIT_TIME).commit();
+	}
+
 	public void removeFromGlobalPreferences(@NonNull String... prefIds) {
 		SettingsEditor editor = settingsAPI.edit(globalPreferences);
 		for (String prefId : prefIds) {
@@ -1304,7 +1313,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> FIXED_NORTH_MAP = new BooleanPreference(this, "map_empty_state_allowed", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> FIXED_NORTH_MAP = new BooleanPreference(this, "fix_north_map", false).makeProfile().cache();
 
 
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference(this, "text_scale", 1f).makeProfile().cache();
@@ -1618,6 +1627,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> CURRENT_TRACK_WIDTH = new StringPreference(this, "current_track_width", "").makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
+	public final CommonPreference<Boolean> CURRENT_TRACK_3D_VISUALIZATION = new BooleanPreference(this, "current_track_3d_visualization", true).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> TRACK_COLORS_PALETTE = new StringPreference(this, "track_colors_palette", null).makeGlobal().makeShared();
 	public final CommonPreference<String> POINT_COLORS_PALETTE = new StringPreference(this, "point_colors_palette", null).makeGlobal().makeShared();
 	public final CommonPreference<String> CUSTOM_TRACK_PALETTE_COLORS = new StringPreference(this, "custom_track_paletee_colors", null).makeGlobal().makeShared();
@@ -1962,7 +1972,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_MAP_MARKERS = new BooleanPreference(this, "show_map_markers", true).makeProfile();
 
-	public final CommonPreference<TracksSortByMode> TRACKS_SORT_BY_MODE = new EnumStringPreference<>(this, "tracks_sort_by_mode", TracksSortByMode.BY_DATE, TracksSortByMode.values());
 	public final CommonPreference<TracksSortMode> SEARCH_TRACKS_SORT_MODE = new EnumStringPreference<>(this, "search_tracks_sort_mode", TracksSortMode.getDefaultSortMode(), TracksSortMode.values());
 	public final ListStringPreference TRACKS_TABS_SORT_MODES = (ListStringPreference) new ListStringPreference(this, "tracks_tabs_sort_modes", null, ";;").makeGlobal().makeShared().cache();
 

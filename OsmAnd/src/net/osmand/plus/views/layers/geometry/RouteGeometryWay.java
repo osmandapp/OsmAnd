@@ -129,7 +129,9 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, Location lastProjection, int startLocationIndex) {
+	public void drawSegments(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, double topLatitude,
+	                         double leftLongitude, double bottomLatitude, double rightLongitude,
+	                         Location lastProjection, int startLocationIndex) {
 		cachedSegments.clear();
 		super.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lastProjection, startLocationIndex);
 	}
@@ -203,12 +205,17 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
-	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes, List<Float> tx, List<Float> ty, List<Integer> tx31, List<Integer> ty31, List<Double> angles, List<Double> distances, double distToFinish, List<GeometryWayStyle<?>> styles) {
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<GeometryWayPoint> points, double distToFinish) {
+		super.drawRouteSegment(tb, canvas, points, distToFinish);
 
+		// FIXME do we always call on draw?
 		Segment segment = currentCachedSegment != null ? currentCachedSegment : new Segment();
-		segment.indexes = new ArrayList<>(indexes);
-		segment.styles = new ArrayList<>(styles);
+		segment.indexes = new ArrayList<>();
+		segment.styles = new ArrayList<>();
+		for (GeometryWayPoint p : points) {
+			segment.indexes.add(p.index);
+			segment.styles.add(p.style);
+		}
 		cachedSegments.add(segment);
 		currentCachedSegment = null;
 	}

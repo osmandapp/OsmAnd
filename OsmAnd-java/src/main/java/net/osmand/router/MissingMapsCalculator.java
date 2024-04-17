@@ -13,6 +13,7 @@ import java.util.TreeSet;
 import org.apache.commons.logging.Log;
 
 import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
@@ -172,8 +173,16 @@ public class MissingMapsCalculator {
 	}
 
 	private void addPoint(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon loc) throws IOException {
+		List<BinaryMapDataObject> resList = or.getRegionsToDownload(loc.getLatitude(), loc.getLongitude());
+		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
-		or.getRegionsToDownload(loc.getLatitude(), loc.getLongitude(), regions);
+		for (BinaryMapDataObject o : resList) {
+			regions.add(or.getDownloadName(o));
+			if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
+					&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
+				onlyJointMap = false;
+			}
+		}
 		Collections.sort(regions, new Comparator<String>() {
 
 			@Override
@@ -181,7 +190,7 @@ public class MissingMapsCalculator {
 				return -Integer.compare(o1.length(), o2.length());
 			}
 		});
-		if (pointsToCheck.size() == 0 || !regions.equals(lastKeyNames)) {
+		if ((pointsToCheck.size() == 0 || !regions.equals(lastKeyNames)) && !onlyJointMap) {
 			Point pnt = new Point();
 			lastKeyNames = regions;
 			pnt.regions = new ArrayList<String>(regions);

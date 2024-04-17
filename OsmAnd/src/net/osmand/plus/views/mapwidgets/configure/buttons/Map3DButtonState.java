@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets.configure.buttons;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_3D_HUD_ID;
 import static net.osmand.plus.settings.enums.Map3DModeVisibility.HIDDEN;
 import static net.osmand.plus.settings.enums.Map3DModeVisibility.VISIBLE;
+import static net.osmand.plus.views.OsmandMapTileView.DEFAULT_ELEVATION_ANGLE;
 
 import android.graphics.drawable.Drawable;
 
@@ -20,14 +21,13 @@ import net.osmand.plus.settings.enums.Map3DModeVisibility;
 public class Map3DButtonState extends MapButtonState {
 
 	public final FabMarginPreference fabMarginPref;
-	public final CommonPreference<Float> elevationAnglePref;
 	public final CommonPreference<Map3DModeVisibility> visibilityPref;
+	private float elevationAngle = DEFAULT_ELEVATION_ANGLE;
 
 
 	public Map3DButtonState(@NonNull OsmandApplication app) {
 		super(app, MAP_3D_HUD_ID);
 		fabMarginPref = new FabMarginPreference(settings, "map_3d_mode_margin");
-		elevationAnglePref = settings.registerFloatPreference("map_3d_mode_elevation_angle", 90).makeProfile();
 		visibilityPref = settings.registerEnumStringPreference("map_3d_mode_visibility", VISIBLE, Map3DModeVisibility.values(), Map3DModeVisibility.class).makeProfile().cache();
 	}
 
@@ -49,11 +49,11 @@ public class Map3DButtonState extends MapButtonState {
 	}
 
 	public float getElevationAngle() {
-		return elevationAnglePref.get();
+		return elevationAngle;
 	}
 
 	public void setElevationAngle(float angle) {
-		elevationAnglePref.set(angle);
+		elevationAngle = angle;
 	}
 
 	@NonNull
@@ -69,11 +69,6 @@ public class Map3DButtonState extends MapButtonState {
 	@NonNull
 	public FabMarginPreference getFabMarginPref() {
 		return fabMarginPref;
-	}
-
-	@NonNull
-	public CommonPreference<Float> getElevationAnglePref() {
-		return elevationAnglePref;
 	}
 
 	@NonNull

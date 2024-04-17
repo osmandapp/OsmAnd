@@ -250,6 +250,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 		osmandMap.getMapLayers().updateLayers(null);
 
+		if (appInitializer.isFirstTime()) {
+			settings.resetLastGlobalPreferencesEditTime();
+			settings.resetLastPreferencesEditTime(settings.APPLICATION_MODE.get());
+		}
+
 		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
 		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
 	}

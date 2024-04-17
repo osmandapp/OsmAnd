@@ -115,8 +115,8 @@ public class VerticalWidgetPanel extends LinearLayout {
 		ViewCompat.setElevation(this, isAnyRowVisible() ? 5f : 0);
 	}
 
-	private void updateVisibility(){
-			AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
+	private void updateVisibility() {
+		AndroidUiHelper.updateVisibility(this, isAnyRowVisible());
 	}
 
 	public void update(@Nullable DrawSettings drawSettings) {
@@ -194,7 +194,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateRow(@NonNull MapWidget widget) {
 		Iterator<Row> rowIterator = visibleRows.values().iterator();
-		while (rowIterator.hasNext()){
+		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			for (MapWidgetInfo widgetInfo : row.enabledMapWidgets) {
 				if (Algorithms.objectEquals(widget, widgetInfo.widget)) {
@@ -214,7 +214,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 
 	public void updateRows() {
 		Iterator<Row> rowIterator = visibleRows.values().iterator();
-		while (rowIterator.hasNext()){
+		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 			row.updateRow(!rowIterator.hasNext());
 		}

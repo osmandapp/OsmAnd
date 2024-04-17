@@ -1255,7 +1255,7 @@
     <string name="rendering_attr_moreDetailed_name">Plus détaillé</string>
     <string name="rendering_attr_lessDetailed_name">Moins détaillé</string>
     <string name="rendering_attr_hideAccess_name">Accès restreints</string>
-    <string name="rendering_attr_showAccess_name">Afficher les accès restreints</string>
+    <string name="rendering_attr_showAccess_name">Afficher les accès restreints et à péage</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Itinéraires cyclables</string>
@@ -2242,7 +2242,7 @@
     <string name="nautical_maps">Cartes marines</string>
     <string name="depth_contour_descr">Lignes de profondeur, balisage maritime.</string>
     <string name="subscribe_email_error">Erreur</string>
-    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\\\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
+    <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'information et téléchargez 3 cartes supplémentaires gratuitement !</string>
     <string name="no_overlay">Aucune sur-couche</string>
     <string name="no_underlay">Sans sous-couche</string>
     <string name="quick_action_add_destination">Définir la destination</string>
@@ -4225,12 +4225,12 @@
     <string name="online_direct_line_maps_link">Vérifier les cartes nécessaires.</string>
     <string name="offline_maps_required_descr">Des cartes hors ligne, nécessaires au calcul de l\'itinéraire, sont absentes.</string>
     <string name="online_maps_searching_descr">Recherche en ligne …</string>
-    <string name="reset_to_original">Restaurer l\\\'original</string>
+    <string name="reset_to_original">Restaurer l\'original</string>
     <string name="benefits_for_contributors">Avantages pour les contributeurs réguliers à OSM</string>
     <string name="use_login_and_password">Utiliser un identifiant et un mot de passe</string>
     <string name="available_until">Disponible jusqu\'au %1$s</string>
     <string name="shared_string_contributions">Contributions</string>
-    <string name="map_updates_are_unavailable_yet">Les mises à jour de cartes ne sont pas disponibles pour l\'instant . :-(</string>
+    <string name="map_updates_are_unavailable_yet">Les mises à jour de cartes ne sont pas disponibles pour l\'instant . :-(</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Colorer les itinéraires selon leur couleur locale (si elle est connue d’OpenStreetMap) et du marquage des chemins de randonnée.</string>
     <string name="online_maps_required_descr">Malheureusement, OsmAnd n\'a pas trouvé d\'itinéraire avec vos paramètres.
 \n
@@ -4468,8 +4468,8 @@
     <string name="always_ask_waypoint_appearance_description">Appuyer sur cette action ouvre l’écran \"Ajouter un point de passage\" dans lequel vous pourrez définir son nom et son apparence.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icônes à zoom faible</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Représentation schématique des icônes à zoom faible</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ne pas masquer les tunnels sur voie navigable</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Afficher les tunnels sur voie navigable</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Augmenter la visibilité des tunnels sur voie navigable</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Étiquettes note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Afficher les étiquettes fixme</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Afficher les étiquettes note</string>
@@ -5019,7 +5019,6 @@
     <string name="recently_visible">Affiché récemment %1$s</string>
     <string name="shared_string_select_recent">Sélectionner les derniers</string>
     <string name="shared_string_on_map">Sur la carte</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Modifier l\'apparence de %1$s traces \?</string>
     <string name="shared_string_kilograms">kilogrammes</string>
     <string name="shared_string_yards">yards</string>
     <string name="inch">in</string>
@@ -5645,4 +5644,28 @@
     <string name="rendering_attr_padusHideBoundaries_name">Masquer les limites des terrains publiques</string>
     <string name="rendering_attr_padusHideBoundaries_description">Masquer les limites des terrains publiques mais afficher les surfaces</string>
     <string name="rendering_attr_padusDisplayMode_name">Mode d\'affichage des terrains publiques</string>
+    <string name="fix_north_up_descr">Bloquer la rotation de la carte via les gestes lorsque l\'orientation de la carte est Nord en Haut</string>
+    <string name="fix_north_up">Activer le Nord Fixe en haut</string>
+    <string name="release_4_7">• Nouveau widget \"Compteur de vitesse\" compatible avec Android Auto
+\n
+\n • Configurer l\'écran de la carte en ajoutant plusieurs boutons \"Action rapide\"
+\n
+\n • Amélioration de la lisibilité des données dans les graphiques
+\n
+\n • Ajout de filtres par données de capteurs pour les traces
+\n
+\n • Ajout du support pour d\'autres tags GPX
+\n
+\n • Personnalisation \"Distance durant la navigation\": choisir entre des nombres précis ou arrondis
+\n
+\n • Interface graphique unifiée pour la sélection de traces
+\n
+\n • Authentification à OpenStreetMap changée pour OAuth 2.0
+\n
+\n</string>
+    <string name="change_default_appearance_confirmation">Modifier l\'apparence par défaut de %1$s ?</string>
+    <string name="use_3d_track_visualization">Visualisation 3D</string>
+    <string name="shared_string_changes">Modifications</string>
+    <string name="apply_only_to_new">Appliquer seulement aux nouvelles</string>
+    <string name="change_default_tracks_appearance_confirmation">Appliquer les modifications aux traces présentes dans le dossier ou seulement aux nouvelles traces ?</string>
 </resources>

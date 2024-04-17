@@ -1226,7 +1226,13 @@ public class RouteResultPreparation {
 			return MAX_SPEAK_PRIORITY;
 		}
 		if (highway.endsWith("_link")  || highway.endsWith("unclassified") || highway.endsWith("road") 
-				|| highway.endsWith("living_street") || highway.endsWith("residential") || highway.endsWith("tertiary") )  {
+				|| highway.endsWith("living_street") || highway.endsWith("residential"))  {
+			return 3;
+		}
+		if (highway.endsWith("tertiary")) {
+			return 2;
+		}
+		if (highway.endsWith("secondary")) {
 			return 1;
 		}
 		return 0;
@@ -2232,6 +2238,9 @@ public class RouteResultPreparation {
 			if (isSwitchToLink(curr, result.get(i - 1))) {
 				continue;
 			}
+			if (isKeepTurn(turnType) && isHighSpeakPriority(curr)) {
+				continue;
+			}
 			int cnt = turnType.countTurnTypeDirections(TurnType.C, true);
 			int cntAll = turnType.countTurnTypeDirections(TurnType.C, false);
 			if(cnt > 0 && cnt == cntAll) {
@@ -2253,6 +2262,9 @@ public class RouteResultPreparation {
 			int active = turnType.getActiveCommonLaneTurn();
 			if (TurnType.isKeepDirectionTurn(active)) {
 				if (i > 0 && isSwitchToLink(curr, result.get(i - 1))) {
+					continue;
+				}
+				if (isKeepTurn(turnType) && isHighSpeakPriority(curr)) {
 					continue;
 				}
 				turnType.setSkipToSpeak(true);
@@ -2432,6 +2444,22 @@ public class RouteResultPreparation {
 			t.setSkipToSpeak(true);
 		}
 		return t;
+	}
+
+	private boolean isHighSpeakPriority(RouteSegmentResult curr) {
+		List<RouteSegmentResult> attachedRoutes = curr.getAttachedRoutes(curr.getStartPointIndex());
+		String h = curr.getObject().getHighway();
+		for (RouteSegmentResult attach : attachedRoutes) {
+			String c = attach.getObject().getHighway();
+			if( highwaySpeakPriority(h) >= highwaySpeakPriority(c)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean isKeepTurn(TurnType t) {
+		return t.keepRight() || t.keepLeft();
 	}
 
 	private boolean isSwitchToLink(RouteSegmentResult curr, RouteSegmentResult prev) {

@@ -32,6 +32,7 @@ import java.util.Set;
 public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment {
 	private static final String SELECTED_WIDGET_SIZE_ID_KEY = "selected_widget_id_size";
 	private static final String SHOW_ICON_KEY = "show_icon_key";
+	private static final String WIDGET_TYPE_KEY = "widget_type_key";
 	private boolean isWidgetVertical = false;
 
 	public CommonPreference<Boolean> shouldShowIconPref;
@@ -59,6 +60,10 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 			selectedWidgetSize = bundle.containsKey(SELECTED_WIDGET_SIZE_ID_KEY) ? WidgetSize.values()[bundle.getInt(SELECTED_WIDGET_SIZE_ID_KEY)] : widgetSizePref.get();
 			showIcon = bundle.containsKey(SHOW_ICON_KEY) ? bundle.getBoolean(SHOW_ICON_KEY) : shouldShowIconPref.get();
 		}
+		String type = bundle.getString(WIDGET_TYPE_KEY);
+		if (widgetType == null && type != null) {
+			widgetType = WidgetType.getById(type);
+		}
 	}
 
 	@Override
@@ -66,6 +71,7 @@ public class BaseSimpleWidgetSettingsFragment extends WidgetSettingsBaseFragment
 		super.onSaveInstanceState(outState);
 		outState.putInt(SELECTED_WIDGET_SIZE_ID_KEY, selectedWidgetSize.ordinal());
 		outState.putBoolean(SHOW_ICON_KEY, showIcon);
+		outState.putString(WIDGET_TYPE_KEY, getWidget().name());
 	}
 
 	@NonNull

@@ -19,6 +19,7 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	public static final int COLORIZATION_NONE = 0;
 	public static final int COLORIZATION_GRADIENT = 1;
 	public static final int COLORIZATION_SOLID = 2;
+	protected boolean use3DVisualization;
 
 	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
@@ -126,7 +127,8 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
 		return Algorithms.objectEquals(color, o.color)
 				&& Algorithms.objectEquals(width, o.width)
-				&& Arrays.equals(dashPattern, o.dashPattern);
+				&& Arrays.equals(dashPattern, o.dashPattern)
+				&& o.use3DVisualization == ((GeometryWayStyle<?>) other).use3DVisualization;
 	}
 
 	public int getColorizationScheme() {

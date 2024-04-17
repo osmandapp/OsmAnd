@@ -114,7 +114,7 @@ public class BackupUtils {
 	}
 
 	public static CommonPreference<Boolean> getBackupTypePref(@NonNull OsmandApplication app, @NonNull ExportType type) {
-		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal().makeShared();
+		return app.getSettings().registerBooleanPreference(BACKUP_TYPE_PREFIX + type.name(), true).makeGlobal();
 	}
 
 	public static CommonPreference<Boolean> getVersionHistoryTypePref(@NonNull OsmandApplication app, @NonNull ExportType exportType) {

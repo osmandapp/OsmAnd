@@ -625,9 +625,9 @@ public class GpxUiHelper {
 
 	public static void saveAndShareGpxWithAppearance(@NonNull Context context, @NonNull GPXFile gpxFile) {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		GpxDataItem dataItem = getDataItem(app, gpxFile);
-		if (dataItem != null) {
-			addAppearanceToGpx(gpxFile, dataItem);
+		GpxDataItem item = getDataItem(app, gpxFile);
+		if (item != null) {
+			addAppearanceToGpx(app, gpxFile, item);
 			saveAndShareGpx(app, gpxFile);
 		}
 	}
@@ -657,31 +657,32 @@ public class GpxUiHelper {
 
 	private static GpxDataItem getDataItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
 		GpxDataItemCallback callback = item -> {
-			addAppearanceToGpx(gpxFile, item);
+			addAppearanceToGpx(app, gpxFile, item);
 			saveAndShareGpx(app, gpxFile);
 		};
 		return app.getGpxDbHelper().getItem(new File(gpxFile.path), callback);
 	}
 
-	private static void addAppearanceToGpx(@NonNull GPXFile gpxFile, @NonNull GpxDataItem dataItem) {
-		gpxFile.setShowArrows(dataItem.getParameter(SHOW_ARROWS));
-		gpxFile.setShowStartFinish(dataItem.getParameter(SHOW_START_FINISH));
-		gpxFile.setSplitInterval(dataItem.getParameter(SPLIT_INTERVAL));
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(dataItem.getParameter(SPLIT_TYPE)).getTypeName());
+	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @NonNull GpxDataItem item) {
+		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
+		gpxFile.setShowArrows(helper.getParameter(item, SHOW_ARROWS));
+		gpxFile.setShowStartFinish(helper.getParameter(item, SHOW_START_FINISH));
+		gpxFile.setSplitInterval(helper.getParameter(item, SPLIT_INTERVAL));
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.getParameter(item, SPLIT_TYPE)).getTypeName());
 
-		int color = dataItem.getParameter(COLOR);
+		int color = helper.getParameter(item, COLOR);
 		if (color != 0) {
 			gpxFile.setColor(color);
 		}
-		String width = dataItem.getParameter(WIDTH);
+		String width = helper.getParameter(item, WIDTH);
 		if (width != null) {
 			gpxFile.setWidth(width);
 		}
-		String coloringType = dataItem.getParameter(COLORING_TYPE);
+		String coloringType = item.getParameter(COLORING_TYPE);
 		if (coloringType != null) {
 			gpxFile.setColoringType(coloringType);
 		}
-		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), dataItem);
+		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), item);
 	}
 
 	public static void shareGpx(@NonNull Context context, @NonNull File file) {
@@ -704,7 +705,7 @@ public class GpxUiHelper {
 	}
 
 	public static boolean isGpxFile(@NonNull File file) {
-		return file.isFile() && file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
+		return file.getName().toLowerCase().endsWith(GPX_FILE_EXT);
 	}
 
 	public static void updateGpxInfoView(@NonNull View view, @NonNull TrackItem trackItem,

@@ -5027,7 +5027,6 @@
     <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямком руху, по центру — для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Змінити зовнішній вигляд треків %1$s\?</string>
     <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>
     <string name="no_visible_tracks">Немає треків на мапі</string>
     <string name="recently_visible">Нещодавно переглянуті %1$s</string>
@@ -5624,4 +5623,16 @@
     <string name="speedometer_description">Показує вашу поточну швидкість згідно даних GPS</string>
     <string name="shared_string_speedometer">Спідометр</string>
     <string name="custom_buttons">Користувацькі кнопки</string>
+    <string name="fix_north_up">Зафіксувати північ угорі</string>
+    <string name="fix_north_up_descr">Не обертати мапу жестами в режимі орієнтації мапи \"Північ угорі\"</string>
+    <string name="change_default_appearance_confirmation">Змінити усталений вигляд %1$s?</string>
+    <string name="upload_local_versions">Вивантажити локальні версії</string>
+    <string name="download_cloud_versions">Завантажити версії з хмари</string>
+    <string name="use_3d_track_visualization">3D-візуалізація</string>
+    <string name="apply_only_to_new">Застосовувати лише до нових</string>
+    <string name="shared_string_changes">Зміни</string>
+    <string name="change_default_tracks_appearance_confirmation">Застосувати зміни до наявних треків у теці чи лише до нових?</string>
+    <string name="unchanged_parameter_summary">Кожен трек збереже свої параметри.</string>
+    <string name="shared_string_unchanged">Без змін</string>
+    <string name="map_widget_map_scale">Масштаб мапи</string>
 </resources>

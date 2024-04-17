@@ -1419,7 +1419,7 @@
     <string name="shared_string_waypoints">Pontos de rota</string>
     <string name="shared_string_dismiss">Cancelar</string>
     <string name="rendering_category_others">Outros atributos do mapa</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e de portagem</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
@@ -4479,8 +4479,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar observações ou comentários (etiqueta \"note\")</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualização esquemática de ícones em ampliações baixas</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneis de cursos de água</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Não esconder túneis de cursos de água</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar a visibilidade dos túneis fluviais</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumentar a visibilidade dos túneis fluviais</string>
     <string name="rendering_value_category_name">Categoria</string>
     <string name="rendering_value_all_name">Todos</string>
     <string name="rendering_value_omit_name">Omissão</string>
@@ -5025,7 +5025,6 @@
     <string name="shared_string_select_recent">Selecionar recente</string>
     <string name="change_appearance">Alterar aparência</string>
     <string name="shared_string_kilograms">quilogramas</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Alterar a aparência dos trilhos %1$s\?</string>
     <string name="shared_string_apply_changes">Aplicar alterações</string>
     <string name="shared_string_yards">jardas</string>
     <string name="no_visible_tracks_description">Selecione os trilhos a mostrar no mapa.</string>
@@ -5650,11 +5649,13 @@
     <string name="lang_ta_in">Tâmil (Índia)</string>
     <string name="release_4_7">- Novo widget \"Velocímetro\" compatível com Android Auto
 \n
-\n - Configuração do ecrã do mapa adicionando vários botões de \"Ação rápida\"
+\n - Configure o ecrã do mapa adicionando vários botões de \"Ação rápida\"
 \n
-\n - Melhoria da legibilidade dos dados nos gráficos
+\n - Melhorada a legibilidade dos dados nos gráficos
 \n
-\n - Adicionados filtros por dados do sensor para trilhos
+\n - Adicionados filtros por dados do sensor em trilhos
+\n
+\n - Personalização da aparência melhorada para grupos de trilhos
 \n
 \n - Adicionado suporte para etiquetas GPX adicionais
 \n
@@ -5662,7 +5663,7 @@
 \n
 \n - Interface unificada para seleção de trilhos
 \n
-\n - Início de sessão do OpenStreetMap alterado para OAuth 2.0
+\n - Autenticação no OpenStreetMap alterada para OAuth 2.0
 \n
 \n</string>
     <string name="distance_during_navigation">Distância durante a navegação</string>
@@ -5674,4 +5675,16 @@
     <string name="download_cloud_versions">Descarregar versões na nuvem</string>
     <string name="upload_local_versions">Enviar versões locais</string>
     <string name="map_widget_map_scale">Escala do mapa</string>
+    <string name="gpx_approximation_cpp">Baseado no roteamento (C++)</string>
+    <string name="gpx_approximation_java">Baseado no roteamento (Java)</string>
+    <string name="gpx_approximation_geo_java">Baseado na geometria (Java, rápido)</string>
+    <string name="change_default_appearance_confirmation">Alterar a aparência padrão de %1$s?</string>
+    <string name="unchanged_parameter_summary">Cada trilho irá reter os seus próprios parâmetros.</string>
+    <string name="shared_string_unchanged">Inalterado</string>
+    <string name="fix_north_up">Ativar o norte fixo para cima</string>
+    <string name="fix_north_up_descr">Não rodar o mapa com gestos na orientação do mapa de norte para cima</string>
+    <string name="use_3d_track_visualization">Visualização 3D</string>
+    <string name="shared_string_changes">Alterações</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicar alterações às faixas existentes na pasta ou apenas nas novas?</string>
+    <string name="apply_only_to_new">Aplicar apenas a novas</string>
 </resources>

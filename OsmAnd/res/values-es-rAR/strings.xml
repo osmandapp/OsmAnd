@@ -243,7 +243,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Restricciones de acceso y peajes</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -611,7 +611,7 @@
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Indicar dirección</string>
     <string name="favourites_list_activity">Elegir favorito</string>
-    <string name="local_openstreetmap_act_title">Cambios OSM</string>
+    <string name="local_openstreetmap_act_title">Cambios de OSM</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="access_arrival_time">Hora de llegada</string>
@@ -974,11 +974,11 @@
     <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
+    <string name="local_openstreetmap_were_uploaded">Se enviaron {0} PDI/notas de OSM</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
-    <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
+    <string name="local_openstreetmap_descr_title">Edición de OSM asíncrona:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM en la base de datos del dispositivo.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo del seguimiento en línea.</string>
@@ -4472,8 +4472,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etiquetas «fixme» (arréglame)</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Detalle del fondo marino</string>
@@ -5033,7 +5033,6 @@
     <string name="sound_beep_simple_loud">Pitido: simple (alto)</string>
     <string name="last_synchronized">Última sincronización</string>
     <string name="display_position_automatic_descr">Depende de la orientación del mapa: «Abajo» para «Dirección del movimiento», «Centro» para el resto.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
@@ -5667,6 +5666,8 @@
 \n
 \n• Se añadieron filtros de datos del sensor para las trazas
 \n
+\n• Se ha mejorado la personalización de la interfaz para los grupos de trazas.
+\n
 \n• Ahora se admiten etiquetas GPX adicionales
 \n
 \n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados
@@ -5690,4 +5691,8 @@
     <string name="gpx_approximation_geo_java">Basado en la geometría (Java, rápido)</string>
     <string name="gpx_approximation_cpp">Basado en la navegación (C++)</string>
     <string name="gpx_approximation_java">Basado en la navegación (Java)</string>
+    <string name="fix_north_up">Bloquear orientación «Norte arriba»</string>
+    <string name="fix_north_up_descr">El mapa no rota al usar gestos, en la orientación «Norte arriba»</string>
+    <string name="change_default_appearance_confirmation">¿Cambiar el aspecto predefinido de %1$s?</string>
+    <string name="use_3d_track_visualization">Vista 3D</string>
 </resources>

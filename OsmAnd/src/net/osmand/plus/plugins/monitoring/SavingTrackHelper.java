@@ -4,6 +4,7 @@ import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
 
@@ -19,6 +20,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.data.ValueHolder;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
@@ -32,6 +34,7 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.simulation.SimulationProvider;
@@ -60,7 +63,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class SavingTrackHelper extends SQLiteOpenHelper {
+public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInformationListener {
 
 	private static final Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
@@ -99,6 +102,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private final SelectedGpxFile currentTrack;
 
 	private int currentTrackIndex = 1;
+	private boolean shouldAutomaticallyRecord = true;
 	private LatLon lastPoint;
 	private float distance;
 	private long duration;
@@ -120,6 +124,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		gpxFile.showCurrentTrack = true;
 		currentTrack.setGpxFile(gpxFile, app);
 		prepareCurrentTrackForRecording();
+		app.getRoutingHelper().addListener(this);
 	}
 
 	@Override
@@ -290,6 +295,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		item.setParameter(COLOR, settings.CURRENT_TRACK_COLOR.get());
 		item.setParameter(WIDTH, settings.CURRENT_TRACK_WIDTH.get());
 		item.setParameter(SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
+		item.setParameter(USE_3D_TRACK_VISUALIZATION, settings.CURRENT_TRACK_3D_VISUALIZATION.get());
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());
 
@@ -824,6 +830,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 
+	public void onStopRecording(){
+		shouldAutomaticallyRecord = false;
+	}
+
 	public boolean getIsRecording() {
 		return PluginsHelper.isActive(OsmandMonitoringPlugin.class)
 				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || isRecordingAutomatically();
@@ -831,8 +841,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private boolean isRecordingAutomatically() {
 		return settings.SAVE_TRACK_TO_GPX.get() && (app.getRoutingHelper().isFollowingMode()
-				|| lastRoutingApplicationMode == settings.getApplicationMode()
-				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get());
+				&& lastRoutingApplicationMode == settings.getApplicationMode()
+				&& settings.getApplicationMode() != settings.DEFAULT_APPLICATION_MODE.get() &&
+				shouldAutomaticallyRecord);
 	}
 
 	public float getDistance() {
@@ -875,5 +886,19 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	@NonNull
 	public SelectedGpxFile getCurrentTrack() {
 		return currentTrack;
+	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+	}
+
+	@Override
+	public void routeWasCancelled() {
+		shouldAutomaticallyRecord = true;
+	}
+
+	@Override
+	public void routeWasFinished() {
+		shouldAutomaticallyRecord = true;
 	}
 }

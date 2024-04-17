@@ -29,8 +29,6 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
-import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet;
-import net.osmand.plus.configmap.tracks.AppearanceConfirmationBottomSheet.OnAppearanceChangeConfirmedListener;
 import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
@@ -39,8 +37,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
-public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment
-		implements IAskDismissDialog, IAskRefreshDialogCompletely, OnAppearanceChangeConfirmedListener {
+public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment implements IAskDismissDialog, IAskRefreshDialogCompletely {
 
 	private static final String TAG = ChangeAppearanceFragment.class.getSimpleName();
 
@@ -120,59 +117,49 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	protected void setupCards(@NonNull View view) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			ViewGroup cardsContainer = view.findViewById(R.id.cards_container);
-			int cardsBackgroundColor = ColorUtilities.getListBgColor(app, nightMode);
+		FragmentActivity activity = requireActivity();
+		ViewGroup container = view.findViewById(R.id.cards_container);
 
-			MultiStateCard directionArrowsCard = new MultiStateCard(activity, controller.getDirectionArrowsCardController());
-			cardsContainer.addView(directionArrowsCard.build());
-			directionArrowsCard.setBackgroundColor(cardsBackgroundColor);
-			inflate(R.layout.list_item_divider_with_padding_basic, cardsContainer, true);
+		MultiStateCard arrowsCard = new MultiStateCard(activity, controller.getArrowsCardController());
+		container.addView(arrowsCard.build());
 
-			MultiStateCard showStartFinishIconsCard = new MultiStateCard(activity, controller.getShowStartAndFinishIconsCardController());
-			cardsContainer.addView(showStartFinishIconsCard.build());
-			showStartFinishIconsCard.setBackgroundColor(cardsBackgroundColor);
-			inflate(R.layout.list_item_divider, cardsContainer, true);
+		inflate(R.layout.list_item_divider_with_padding_basic, container, true);
 
-			MultiStateCard colorsCard = new MultiStateCard(activity, controller.getColorCardController());
-			cardsContainer.addView(colorsCard.build());
-			colorsCard.setBackgroundColor(cardsBackgroundColor);
-			inflate(R.layout.list_item_divider, cardsContainer, true);
+		MultiStateCard iconsCard = new MultiStateCard(activity, controller.getStartAndFinishIconsCardController());
+		container.addView(iconsCard.build());
 
-			MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController());
-			cardsContainer.addView(widthCard.build());
-			widthCard.setBackgroundColor(cardsBackgroundColor);
-			inflate(R.layout.list_item_divider, cardsContainer, true);
-			setupOnNeedScrollListener();
+		inflate(R.layout.list_item_divider, container, true);
 
-			MultiStateCard splitMarksCard = new MultiStateCard(activity, controller.getSplitMarksCardController());
-			cardsContainer.addView(splitMarksCard.build());
-			splitMarksCard.setBackgroundColor(cardsBackgroundColor);
-		}
+		MultiStateCard colorsCard = new MultiStateCard(activity, controller.getColorCardController());
+		container.addView(colorsCard.build());
+
+		inflate(R.layout.list_item_divider, container, true);
+
+		MultiStateCard widthCard = new MultiStateCard(activity, controller.getWidthCardController());
+		container.addView(widthCard.build());
+
+		inflate(R.layout.list_item_divider, container, true);
+
+		MultiStateCard splitCard = new MultiStateCard(activity, controller.getSplitCardController());
+		container.addView(splitCard.build());
+
+		setupOnNeedScrollListener();
 	}
 
 	protected void setupApplyButton(@NonNull View view) {
 		View btnApply = view.findViewById(R.id.apply_button);
-		btnApply.setOnClickListener(v -> onApplyButtonClicked());
+		btnApply.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				controller.saveChanges(activity);
+			}
+		});
 		updateApplyButtonEnabling(view);
 	}
 
 	protected void updateApplyButtonEnabling(@NonNull View view) {
 		DialogButton dialogButton = view.findViewById(R.id.apply_button);
 		dialogButton.setEnabled(controller.hasAnyChangesToCommit());
-	}
-
-	public void onApplyButtonClicked() {
-		AppearanceConfirmationBottomSheet.showInstance(getChildFragmentManager(), controller.getEditedItemsCount());
-	}
-
-	@Override
-	public void onAppearanceChangeConfirmed() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			controller.saveChanges(activity);
-		}
 	}
 
 	private void onAppearanceSaved() {
@@ -224,9 +211,7 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment
 	}
 
 	public int getThemeId() {
-		return nightMode
-				? R.style.OsmandDarkTheme_DarkActionbar
-				: R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
+		return nightMode ? R.style.OsmandDarkTheme_DarkActionbar : R.style.OsmandLightTheme_DarkActionbar_LightStatusBar;
 	}
 
 	@ColorRes
@@ -235,11 +220,10 @@ public class ChangeAppearanceFragment extends BaseOsmAndDialogFragment
 		return nightMode ? R.color.status_bar_main_dark : R.color.activity_background_color_light;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull Fragment targetFragment) {
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			ChangeAppearanceFragment fragment = new ChangeAppearanceFragment();
-			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(manager, TAG);
 		}
 	}

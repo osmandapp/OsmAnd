@@ -41,6 +41,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -192,7 +193,8 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	private void setupIcon(@NonNull GpxDataItem item) {
-		setupIcon(item.getParameter(COLOR), item.getParameter(WIDTH), item.getParameter(SHOW_ARROWS));
+		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
+		setupIcon(helper.getParameter(item, COLOR), helper.getParameter(item, WIDTH), helper.getParameter(item, SHOW_ARROWS));
 	}
 
 	private void setupIcon(int color, String width, boolean showArrows) {

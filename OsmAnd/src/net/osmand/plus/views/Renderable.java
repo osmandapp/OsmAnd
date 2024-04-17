@@ -87,6 +87,7 @@ public class Renderable {
 
         protected GpxGeometryWay geometryWay;
         protected boolean drawArrows;
+        protected boolean use3DVisualization;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;
@@ -101,6 +102,12 @@ public class Renderable {
         public boolean setDrawArrows(boolean drawArrows) {
             boolean changed = this.drawArrows != drawArrows;
             this.drawArrows = drawArrows;
+            return changed;
+        }
+
+        public boolean setUse3DVisualization(boolean use3DVisualization) {
+            boolean changed = this.use3DVisualization != use3DVisualization;
+            this.use3DVisualization = use3DVisualization;
             return changed;
         }
 
@@ -186,17 +193,17 @@ public class Renderable {
         public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
                                  @NonNull QuadRect quadRect, int trackColor, float trackWidth,
                                  @Nullable float[] dashPattern) {
-            drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, dashPattern, drawArrows);
+            drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, dashPattern, drawArrows, use3DVisualization);
         }
 
         public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
                                  @NonNull QuadRect quadRect, int trackColor, float trackWidth,
-                                 @Nullable float[] dashPattern, boolean drawArrows) {
+                                 @Nullable float[] dashPattern, boolean drawArrows, boolean use3DVisualization) {
             if (geometryWay != null) {
                 List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
                     geometryWay.setTrackStyleParams(trackColor, trackWidth, dashPattern, drawArrows,
-                            coloringType, routeInfoAttribute);
+                            use3DVisualization, coloringType, routeInfoAttribute);
                     geometryWay.updateSegment(tileBox, points, routeSegments);
                     geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left,
                             quadRect.bottom, quadRect.right, null, 0);

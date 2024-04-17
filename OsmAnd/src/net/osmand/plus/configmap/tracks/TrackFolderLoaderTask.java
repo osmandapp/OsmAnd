@@ -10,13 +10,12 @@ import androidx.annotation.WorkerThread;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
-import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.data.TrackFolder;
-import net.osmand.plus.track.helpers.GPXFolderUtils;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -32,16 +31,16 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	private final SmartFolderHelper smartFolderHelper;
 
 	private final TrackFolder folder;
-	private final TracksSortByMode sortByMode;
 	private final LoadTracksListener listener;
+	private long loadingTime = 0;
+	private int tracksCounter = 0;
+	private static final int LOG_BATCH_SIZE = 100;
 
-	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder,
-	                             @NonNull LoadTracksListener listener) {
+	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
 		this.folder = folder;
 		this.listener = listener;
 		this.gpxDbHelper = app.getGpxDbHelper();
 		this.smartFolderHelper = app.getSmartFolderHelper();
-		this.sortByMode = app.getSettings().TRACKS_SORT_BY_MODE.get();
 	}
 
 	@Override
@@ -60,55 +59,67 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		long time = System.currentTimeMillis();
+		long start = System.currentTimeMillis();
 		LOG.info("Start loading tracks in " + folder.getDirName());
 
 		folder.clearData();
+		loadingTime = System.currentTimeMillis();
+
 		List<TrackItem> progress = new ArrayList<>();
-		loadGPXFolder(folder, null, progress, true);
+		loadGPXFolder(folder, progress, true);
 		if (!progress.isEmpty()) {
 			publishProgress(progress.toArray(new TrackItem[0]));
 		}
 		if (listener != null) {
 			listener.tracksLoaded(folder);
 		}
-		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - time) + "ms");
+		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - start) + "ms");
 		return null;
 	}
 
-	private void loadGPXFolder(@NonNull TrackFolder trackFolder, @Nullable String subfolder,
-	                           @NonNull List<TrackItem> progress, boolean updateSmartFolder) {
-		File folderFile = trackFolder.getDirFile();
-		File[] files = GPXFolderUtils.listFilesSorted(sortByMode, folderFile);
-		List<TrackFolder> subFolders = new ArrayList<>();
+	private void loadGPXFolder(@NonNull TrackFolder folder, @NonNull List<TrackItem> progress, boolean updateSmartFolder) {
+		File dir = folder.getDirFile();
+		File[] files = dir.listFiles();
+		if (Algorithms.isEmpty(files)) {
+			return;
+		}
 		List<TrackItem> trackItems = new ArrayList<>();
+		List<TrackFolder> subFolders = new ArrayList<>();
 		for (File file : files) {
 			if (file.isDirectory()) {
-				TrackFolder subFold = new TrackFolder(file, trackFolder);
-				subFolders.add(subFold);
-				loadGPXFolder(subFold, GPXFolderUtils.getSubfolderTitle(file, subfolder), progress, updateSmartFolder);
+				TrackFolder subfolder = new TrackFolder(file, folder);
+				subFolders.add(subfolder);
+				loadGPXFolder(subfolder, progress, updateSmartFolder);
 			} else if (GpxUiHelper.isGpxFile(file)) {
 				TrackItem item = new TrackItem(file);
-				item.setDataItem(getDataItem(item, file));
+				item.setDataItem(getDataItem(item));
 				trackItems.add(item);
+
 				progress.add(item);
 				if (progress.size() > 7) {
 					publishProgress(progress.toArray(new TrackItem[0]));
 					progress.clear();
 				}
+				tracksCounter++;
+				if (tracksCounter % LOG_BATCH_SIZE == 0) {
+					long endTime = System.currentTimeMillis();
+					LOG.info("Loading " + LOG_BATCH_SIZE + "tracks. took " + (endTime - loadingTime) + "ms");
+					loadingTime = endTime;
+				}
 			}
 		}
-		trackFolder.setSubFolders(subFolders);
-		trackFolder.setTrackItems(trackItems);
-		trackFolder.resetCashedData();
+		folder.setTrackItems(trackItems);
+		folder.setSubFolders(subFolders);
+		folder.resetCashedData();
+
 		if (updateSmartFolder) {
 			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
 	}
 
 	@Nullable
-	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
-//		File file = trackItem.getFile();
+	private GpxDataItem getDataItem(@NonNull TrackItem trackItem) {
+		File file = trackItem.getFile();
 		if (file != null) {
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override

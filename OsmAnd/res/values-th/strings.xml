@@ -89,7 +89,6 @@
     <string name="shared_string_uploaded">อัปโหลดแล้ว</string>
     <string name="cloud_changes">การเปลี่ยนแปลงระบบคลาวด์</string>
     <string name="upload_change">อัปโหลดการเปลี่ยนแปลง</string>
-    <string name="change_default_tracks_appearance_confirmation_description">เปลี่ยนรูปลักษณ์ของแทร็ก %1$s หรือไม่\?</string>
     <string name="empty_tracks">คุณไม่มีไฟล์แทร็ก</string>
     <string name="local_changes">การเปลี่ยนแปลงในท้องถิ่น</string>
     <string name="cloud_conflicts">ขัดแย้ง</string>

@@ -1398,7 +1398,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Biciklističke staze</string>
     <string name="rendering_attr_showSurfaces_name">Prikazati površinu puteva</string>
     <string name="rendering_attr_showSurfaceGrade_name">Prikazati kvalitet puteva</string>
-    <string name="rendering_attr_showAccess_name">Prikazuj zabrane pristupa</string>
+    <string name="rendering_attr_showAccess_name">Prikazuj ograničenja pristupa i putarina</string>
     <string name="rendering_attr_hideAccess_name">Zabrane pristupa</string>
     <string name="rendering_attr_lessDetailed_name">Manje detalja</string>
     <string name="rendering_attr_moreDetailed_name">Više detalja</string>
@@ -1582,7 +1582,7 @@
     <string name="no_info">Nema informacija</string>
     <string name="altitude">Visina</string>
     <string name="accuracy">Tačnost</string>
-    <string name="towards">prema</string>
+    <string name="towards">pravac</string>
     <string name="oclock">sati</string>
     <string name="front_left">levo-napred</string>
     <string name="left">na levo</string>
@@ -3059,7 +3059,7 @@
     <string name="complex_routing_descr">Dvofazno usmeravanje za auto navigaciju.</string>
     <string name="use_fast_recalculation_desc">Preračunava samo početni deo puta, korisno za duga putovanja.</string>
     <string name="use_native_pt">Razvoj lokalnog javnog prevoza</string>
-    <string name="use_native_pt_desc">Prebaci se na proračun navođenja javnog prevoza Java (bezbedan)</string>
+    <string name="use_native_pt_desc">Prebaci se na Java (bezbedno) izrečunavanje rute javnog prevoza</string>
     <string name="perform_oauth_authorization_description">Prijavi se pomoću OAuth -a radi korišćenja mogućnosti uređivanja OpenStritMapa</string>
     <string name="perform_oauth_authorization">Prijavi se preko OAuth-a</string>
     <string name="clear_osm_token">Obriši OpenStreetMap OAuth token</string>
@@ -4275,7 +4275,7 @@
     <string name="shared_string_widget">Vidžet</string>
     <string name="calculating_altitude">Izračunavanje nadmorske visine</string>
     <string name="all_groups">Sve grupe</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ne skrivaj tunele za vodene puteve</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Povećanje vidljivosti za tunele plovnih puteva</string>
     <string name="turn_arrows">Strelice skretanja</string>
     <string name="turn_arrows_descr">Izaberi prikazivanje strelica skretanja na ruti.</string>
     <string name="included_categories">Uključene kategorije</string>
@@ -4418,7 +4418,7 @@
     <string name="gps_info_widget_desc">Prikazuje broj satelita trenutno vidljivih i korišćenih.</string>
     <string name="get_altitude_information">Dobavi podatke o nadmorskoj visini</string>
     <string name="calculate_online_altitude_descr">Izračunaj nadmorsku visinu na OsmAnd serverima, zasnovanu na satelitskim slikama i digitalnim modelima nadmorske visine. Različitosti u odnosu na visine snimljene uređajem mogu biti korišćene za ispravku nadmorske visine.</string>
-    <string name="calculate_online">Računanje na internetu</string>
+    <string name="calculate_online">Izračunaj onlajn</string>
     <string name="calculate_altitude">Računaj nadmorsku visinu</string>
     <string name="no_altitude_data">Nema podataka o nadmorskoj visini</string>
     <string name="shared_string_speed">Brzina</string>
@@ -4468,7 +4468,7 @@
     <string name="rendering_value_omit_name">Izostaviti</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Oznake za beleške</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Prikazati oznake beleški</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tuneli plovnih puteva</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Povećaj vidljivost za tunele plovnih puteva</string>
     <string name="files_with_route_restrictions">Fajlovi sa ograničenjima rute</string>
     <string name="waypoint_template">Obrazac za međuodredište</string>
     <string name="use_routing_fallback">Povratak internet navođenja</string>
@@ -4926,7 +4926,7 @@
     <string name="sound_beep_simple">Bip: jednostavan</string>
     <string name="key_assignments_already_cleared_message">Svi ključni zadaci već su očišćeni</string>
     <string name="button_already_assigned_to_this_action">Dugme je već dodeljeno za ovu akciju.</string>
-    <string name="enable_to_use_external_input_device">Omogući korištenje spoljnog uređaja sa OsmAnd</string>
+    <string name="enable_to_use_external_input_device">Omogući korišćenje spoljnog uređaja sa OsmAnd</string>
     <string name="key_event_action_change_map_orientation">Promeni orijentaciju mape</string>
     <string name="sort_size_ascending">Prvo mala veličina</string>
     <string name="standard_maps">Standardne mape</string>
@@ -5014,7 +5014,6 @@
     <string name="cache_size">Veličina podataka</string>
     <string name="routing_attr_allow_via_ferrata_name">Planinska ruta (Via ferata)</string>
     <string name="routing_attr_allow_via_ferrata_description">Planinarska putanja opremljena postavljenim užadima, gredama, lestvicama i brvnima.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Da li izmeniti izgled trase %1$s?</string>
     <string name="empty_tracks_description">Možeš uvoziti, kreirati ili snimati fajlove trasa korišćenjem OsmAnda.</string>
     <string name="empty_tracks">Nema fajla trase.</string>
     <string name="switch_folder">Promeni folder</string>
@@ -5657,6 +5656,8 @@
 \n
 \n• Dodani filteri prema podacima senzora za tragove
 \n
+\n• Poboljšano prilagođavanje izgleda za grupu putanja
+\n
 \n• Dodata podrška za dodatne GPX oznake
 \n
 \n• Prilagodi \"Udaljenost tokom navigacije\": biraj između tačnih ili zaokruženih brojeva
@@ -5680,4 +5681,7 @@
     <string name="gpx_approximation_cpp">Rutiranje-bazirano (C++)</string>
     <string name="gpx_approximation_java">Rutiranje-bazirano (Java)</string>
     <string name="gpx_approximation_geo_java">Rutiranje-bazirano (Java, brzo)</string>
+    <string name="fix_north_up_descr">Ne rotirarti mapu pokretima u orijentaciji prema severu</string>
+    <string name="fix_north_up">Fiksirati mapa prema severu</string>
+    <string name="change_default_appearance_confirmation">Promeni podrazumevani izgled za %1$s?</string>
 </resources>

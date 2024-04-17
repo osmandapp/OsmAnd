@@ -211,7 +211,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private String getDecodedAdditionalInfo(String additionalInfo) {
 		try {
 			return URLDecoder.decode(additionalInfo, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
+		} catch (UnsupportedEncodingException | IllegalArgumentException e) {
 			LOG.error(e);
 		}
 		return additionalInfo;

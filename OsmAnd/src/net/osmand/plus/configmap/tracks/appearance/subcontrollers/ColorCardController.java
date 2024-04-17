@@ -1,5 +1,8 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
 import android.view.LayoutInflater;
@@ -13,7 +16,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
-import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.IControlsColorProvider;
@@ -38,14 +40,29 @@ import java.util.List;
 
 public class ColorCardController extends ColoringStyleCardController implements IControlsColorProvider {
 
+	private final AppearanceData data;
+	private final boolean addUnchanged;
+
 	private IColorsPaletteController colorsPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
-	private final AppearanceData appearanceData;
 
-	public ColorCardController(@NonNull OsmandApplication app,
-	                           @NonNull AppearanceData appearanceData) {
-		super(app, appearanceData.getColoringStyle());
-		this.appearanceData = appearanceData;
+	public ColorCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
+		super(app);
+		this.data = data;
+		this.addUnchanged = addUnchanged;
+		this.selectedState = findCardState(getColoringStyle());
+	}
+
+	@Override
+	protected void onSelectCardState(@NonNull CardState cardState) {
+		if (cardState.isOriginal()) {
+			selectedState = cardState;
+			card.updateSelectedCardState();
+			data.resetParameter(COLOR);
+			data.resetParameter(COLORING_TYPE);
+		} else {
+			askSelectColoringStyle((ColoringStyle) cardState.getTag());
+		}
 	}
 
 	@Override
@@ -84,12 +101,12 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			bundle.predefinedColors = TrackColorController.getPredefinedColors(app);
 			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
 			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
-			Integer selectedCustomColor = appearanceData.getCustomColor();
-			if (selectedCustomColor == null) {
-				selectedCustomColor = bundle.predefinedColors.get(0).getColor();
+			Integer color = data.getParameter(COLOR);
+			if (color == null) {
+				color = bundle.predefinedColors.get(0).getColor();
 			}
 			ColorsCollection colorsCollection = new ColorsCollection(bundle);
-			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, selectedCustomColor);
+			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, color);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
 		return colorsPaletteController;
@@ -98,11 +115,11 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	@NonNull
 	private IColoringStyleDetailsController getColoringStyleDetailsController() {
 		if (coloringStyleDetailsController == null) {
-			ColoringStyle selectedColoringStyle = appearanceData.getColoringStyle();
-			if (selectedColoringStyle == null) {
-				selectedColoringStyle = new ColoringStyle(TRACK_SOLID);
+			ColoringStyle selectedStyle = getColoringStyle();
+			if (selectedStyle == null) {
+				selectedStyle = new ColoringStyle(TRACK_SOLID);
 			}
-			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedColoringStyle) {
+			coloringStyleDetailsController = new ColoringStyleDetailsCardController(app, selectedStyle) {
 				@Override
 				public boolean shouldShowBottomSpace() {
 					return true;
@@ -112,23 +129,40 @@ public class ColorCardController extends ColoringStyleCardController implements 
 		return coloringStyleDetailsController;
 	}
 
+	@Nullable
+	private ColoringStyle getColoringStyle() {
+		String coloringType = data.getParameter(COLORING_TYPE);
+		if (coloringType != null) {
+			ColoringType type = ColoringType.requireValueOf(TRACK, coloringType);
+			String attribute = ColoringType.getRouteInfoAttribute(coloringType);
+			return new ColoringStyle(type, attribute);
+		}
+		return null;
+	}
+
 	@NonNull
 	@Override
 	protected List<CardState> collectSupportedCardStates() {
-		List<CardState> result = new ArrayList<>();
-		result.add(new CardState(R.string.shared_string_unchanged));
+		List<CardState> list = new ArrayList<>();
+
+		if (addUnchanged) {
+			list.add(new CardState(R.string.shared_string_unchanged));
+		}
+		list.add(new CardState(R.string.shared_string_original));
+
 		List<CardState> other = super.collectSupportedCardStates();
 		if (other.size() > 0) {
 			other.get(0).setShowTopDivider(true);
 		}
-		result.addAll(other);
-		return result;
+		list.addAll(other);
+
+		return list;
 	}
 
 	@Override
 	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
-		return ColoringType.valuesOf(ColoringPurpose.TRACK);
+		return ColoringType.valuesOf(TRACK);
 	}
 
 	@Override
@@ -137,7 +171,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 		ColoringType coloringType = coloringStyle != null ? coloringStyle.getType() : null;
 		Integer color = null;
 		if (coloringType == TRACK_SOLID) {
-			color = appearanceData.getCustomColor();
+			color = data.getParameter(COLOR);
 		}
 		if (color == null) {
 			color = GpxAppearanceAdapter.getTrackColor(app);

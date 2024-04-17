@@ -592,9 +592,9 @@
     <string name="navigate_point_top_text">Földrajzi szélességi és hosszúsági fok megadása a kijelölt formátumban (F - fok, P - perc, M - másodperc)</string>
     <string name="navigate_point_latitude">Szélességi fok</string>
     <string name="navigate_point_longitude">Hosszúsági fok</string>
-    <string name="navigate_point_format_D">Fok (4 tizedessel)</string>
-    <string name="navigate_point_format_DM">Fok:perc (5 tizedessel)</string>
-    <string name="navigate_point_format_DMS">Fok:perc:mp (5 tizedessel)</string>
+    <string name="navigate_point_format_D">FFF.FFFFF</string>
+    <string name="navigate_point_format_DM">FFF PP.PPP</string>
+    <string name="navigate_point_format_DMS">FFF PP MM.M</string>
     <string name="shared_string_show_on_map">Megjelenítés a térképen</string>
     <string name="search_address_top_text">Cím</string>
     <string name="search_address_region">Régió</string>
@@ -1251,7 +1251,7 @@
     <string name="rendering_attr_moreDetailed_name">Több részlet</string>
     <string name="rendering_attr_lessDetailed_name">Kevesebb részlet</string>
     <string name="rendering_attr_hideAccess_name">Behajtási korlátozások</string>
-    <string name="rendering_attr_showAccess_name">Behajtási korlátozások megjelenítése</string>
+    <string name="rendering_attr_showAccess_name">Behajtási és útdíjjal kapcsolatos korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
     <string name="rendering_attr_showCycleRoutes_name">Kerékpárutak</string>
@@ -3312,7 +3312,7 @@
     <string name="permission_is_required">A beállítás használatához engedélyre van szükség.</string>
     <string name="rearrange_categories">Kategóriák átrendezése</string>
     <string name="create_custom_categories_list_promo">Lista sorrendjének módosítása és kategóriák elrejtése. Minden módosítás profilként importálható és exportálható.</string>
-    <string name="add_new_custom_category_button_promo">Egyéni kategória hozzáadása egy vagy több kategória kijelölésével.</string>
+    <string name="add_new_custom_category_button_promo">Adjon hozzá új egyéni kategóriát egy vagy több kategória kijelölésével.</string>
     <string name="shared_string_available">Rendelkezésre áll</string>
     <string name="add_custom_category">Egyéni kategória hozzáadása</string>
     <string name="rendering_attr_streetLightingNight_name">Csak éjszaka jelenjék meg</string>
@@ -4056,7 +4056,7 @@
     <string name="shared_string_feet">láb</string>
     <string name="srtm_unit_format">Szintvonalak egységváltozata</string>
     <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
-    <string name="shared_string_min_height">Legkisebb magasság</string>
+    <string name="shared_string_min_height">Min. magasság</string>
     <string name="shared_string_max_height">Max. magasság</string>
     <string name="use_system_language">A rendszer nyelvének használata</string>
     <string name="recorded_description">A felvett hang szebben hangzik, de csak előre rögzített kifejezéseket – bekanyarodási utasításokat – képes kiejteni. Utcaneveket vagy érdekes pontokat nem tud bemondani.</string>
@@ -4459,8 +4459,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Note (térképészeknek szóló megjegyzés) címkék megjelenítése</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikonok kis nagyításnál</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Ikonok sematikus megjelenítése kis nagyításnál</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ne rejtse el a vízi alagutakat</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Vízi alagutak láthatóságának fokozása</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Vízi alagutak láthatóságának fokozása</string>
     <string name="navigate_point_format_swiss_grid_plus">Svájci koordináták (CH1903+)</string>
     <string name="shared_string_not_used">Használaton kívül</string>
     <string name="shared_string_used">Használatban</string>
@@ -4562,7 +4562,7 @@
     <string name="page_number">%1$s. oldal</string>
     <string name="map_widget_altitude">Jelenlegi pozíció magassága</string>
     <string name="shared_string_symbol">Szimbólum</string>
-    <string name="no_widgets_descr">Egy vagy több widget hozzáadása a rendelkezésre állók közül.</string>
+    <string name="no_widgets_descr">Adjon hozzá egy vagy több widgetet a rendelkezésre állók közül.</string>
     <string name="no_widgets_here_yet">Itt még nincs widget</string>
     <string name="available_widgets">Elérhető widgetek</string>
     <string name="snackbar_page_removed">A(z) „%1$s oldal” el lett távolítva.</string>
@@ -5027,7 +5027,6 @@
     <string name="shared_string_apply_changes">Módosítások alkalmazása</string>
     <string name="no_visible_tracks_description">Válassza ki a térképen megjelenítendő nyomvonalakat.</string>
     <string name="empty_tracks_description">Nyomvonal fájlokat az OsmAnd segítségével importálhat, hozhat létre vagy rögzíthet.</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Megváltoztatja a %1$s nyomvonalak kinézetét\?</string>
     <string name="shared_string_kilograms">kilogramm</string>
     <string name="shared_string_yards">yard</string>
     <string name="shared_string_inches">hüvelyk</string>
@@ -5649,6 +5648,8 @@
 \n
 \n • Szenzoradatalapú szűrők a nyomvonalakhoz
 \n
+\n • Nyomvonalcsoportok megjelenésének jobb testreszabhatósága
+\n
 \n • További GPX-címkék támogatása
 \n
 \n • A „Távolság navigáció közben” testreszabása: válasszon pontos vagy felfelé kerekített számok közül
@@ -5672,4 +5673,8 @@
     <string name="gpx_approximation_geo_java">Geometriaalapú (Java, gyors)</string>
     <string name="gpx_approximation_cpp">Útvonalalapú (C++)</string>
     <string name="gpx_approximation_java">Útvonalalapú (Java)</string>
+    <string name="fix_north_up">Fent rögzített északi irány engedélyezése</string>
+    <string name="fix_north_up_descr">Ne forgassa el a térképet gesztusokkal, ha a fent rögzített északi irány be van kapcsolva</string>
+    <string name="change_default_appearance_confirmation">Megváltoztatja %1$s alapértelmezett kinézetét?</string>
+    <string name="use_3d_track_visualization">3D vizualizáció</string>
 </resources>

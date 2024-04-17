@@ -7,9 +7,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
@@ -85,7 +85,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return getSettings().getSavedModePrefsCount(appMode) * APPROXIMATE_PREFERENCE_SIZE_BYTES;
+		return (long) getSettings().getSavedModePrefsCount(appMode) * APPROXIMATE_PREFERENCE_SIZE_BYTES;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -266,7 +266,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return new OsmandSettingsItemReader<ProfileSettingsItem>(this, getSettings()) {
+		return new OsmandSettingsItemReader<ProfileSettingsItem>(this) {
 			@Override
 			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 				if (!appModeBeanPrefsIds.contains(preference.getId())) {
@@ -304,6 +304,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 							SettingsHelper.LOG.warn("No preference while importing settings: " + key);
 						}
 					}
+					settings.setLastModePreferencesEditTime(appMode, lastModifiedTime);
 				});
 			}
 		};

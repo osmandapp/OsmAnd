@@ -49,6 +49,7 @@ public abstract class MultiColoringGeometryWay
 	protected String routeInfoAttribute;
 
 	protected boolean coloringChanged;
+	private boolean use3dVisualization;
 
 	public MultiColoringGeometryWay(C context, D drawer) {
 		super(context, drawer);
@@ -72,6 +73,22 @@ public abstract class MultiColoringGeometryWay
 		resetArrowsProvider();
 	}
 
+	protected void updateUse3DVisualization(boolean use3DVisualization) {
+		if (!styleMap.isEmpty()) {
+			for (GeometryWayStyle<?> style : styleMap.values()) {
+				style.use3DVisualization = use3DVisualization;
+			}
+		} else {
+			for (List<DrawPathData31> pathDataList : pathsData31Cache) {
+				for (DrawPathData31 pathData : pathDataList) {
+					if (pathData.style != null) {
+						pathData.style.use3DVisualization = use3DVisualization;
+					}
+				}
+			}
+		}
+	}
+
 	protected void updateStylesDashPattern(@Nullable float[] dashPattern) {
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.dashPattern = dashPattern;
@@ -92,7 +109,7 @@ public abstract class MultiColoringGeometryWay
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();
 			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, 0);
 			List<RouteColorizationPoint> points = routeColorize.getResult();
-			updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
+			updateWay(new GradientGeometryWayProvider(routeColorize, points, null), createGradientStyles(points), tb);
 		}
 	}
 
@@ -100,6 +117,7 @@ public abstract class MultiColoringGeometryWay
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
 		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle<?> style = getGradientWayStyle();
+			style.use3DVisualization = shouldUse3dVisualization();
 			style.currColor = points.get(i).color;
 			style.nextColor = points.get(i + 1).color;
 			styleMap.put(i, style);
@@ -196,14 +214,10 @@ public abstract class MultiColoringGeometryWay
 
 	@Override
 	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist,
-	                           GeometryWayStyle<?> style, List<Integer> indexes,
-	                           List<Float> tx, List<Float> ty,
-	                           List<Integer> tx31, List<Integer> ty31,
-	                           List<Double> angles, List<Double> distances,
-	                           List<GeometryWayStyle<?>> styles) {
-		super.addLocation(tb, locationIdx, dist, style, indexes, tx, ty, tx31, ty31, angles, distances, styles);
-		if (style instanceof GeometryGradientWayStyle<?> && styles.size() > 1) {
-			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) styles.get(styles.size() - 2);
+	                           GeometryWayStyle<?> style, List<GeometryWayPoint> points) {
+		super.addLocation(tb, locationIdx, dist, style, points);
+		if (style instanceof GeometryGradientWayStyle<?> && points.size() > 1) {
+			GeometryGradientWayStyle<?> prevStyle = (GeometryGradientWayStyle<?>) points.get(points.size() - 2).style;
 			GeometryGradientWayStyle<?> currStyle = (GeometryGradientWayStyle<?>) style;
 			if (!prevStyle.equals(currStyle)) {
 				prevStyle.nextColor = currStyle.currColor;
@@ -283,11 +297,14 @@ public abstract class MultiColoringGeometryWay
 
 		private final RouteColorize routeColorize;
 		private final List<RouteColorizationPoint> locations;
+		private final List<Float> pointHeights;
 
 		public GradientGeometryWayProvider(@Nullable RouteColorize routeColorize,
-		                                   @NonNull List<RouteColorizationPoint> locations) {
+		                                   @NonNull List<RouteColorizationPoint> locations,
+		                                   @Nullable List<Float> pointHeights) {
 			this.routeColorize = routeColorize;
 			this.locations = locations;
+			this.pointHeights = pointHeights;
 		}
 
 		@Nullable
@@ -313,6 +330,11 @@ public abstract class MultiColoringGeometryWay
 		public int getSize() {
 			return locations.size();
 		}
+
+		@Override
+		public float getHeight(int index) {
+			return pointHeights == null ? 0 : pointHeights.get(index);
+		}
 	}
 
 	protected static class GradientPathGeometryZoom extends PathGeometryZoom {
@@ -323,7 +345,7 @@ public abstract class MultiColoringGeometryWay
 		}
 
 		@Override
-		protected void simplify(RotatedTileBox tb, GeometryWayProvider locationProvider, TByteArrayList simplifyPoints) {
+		public void simplify(RotatedTileBox tb, GeometryWayProvider locationProvider, TByteArrayList simplifyPoints) {
 			if (locationProvider instanceof GradientGeometryWayProvider) {
 				GradientGeometryWayProvider provider = (GradientGeometryWayProvider) locationProvider;
 				List<RouteColorizationPoint> simplified = provider.simplify(tb.getZoom());
@@ -459,5 +481,13 @@ public abstract class MultiColoringGeometryWay
 		public int getColorizationScheme() {
 			return COLORIZATION_GRADIENT;
 		}
+	}
+
+	protected boolean shouldUse3dVisualization() {
+		return use3dVisualization;
+	}
+
+	protected void setUse3dVisualization(boolean use3dVisualization) {
+		this.use3dVisualization = use3dVisualization;
 	}
 }

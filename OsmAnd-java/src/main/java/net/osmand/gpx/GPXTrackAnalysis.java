@@ -60,16 +60,16 @@ public class GPXTrackAnalysis {
 
 	public boolean hasSpeedInTrack = false;
 
-	public Object getGpxParameter(GpxParameter gpxParameter) {
-		Object value = gpxParameter.getDefaultValue();
-		if (parameters.containsKey(gpxParameter)) {
-			value = parameters.get(gpxParameter);
+	public Object getGpxParameter(GpxParameter parameter) {
+		Object value = parameter.getDefaultValue();
+		if (parameters.containsKey(parameter)) {
+			value = parameters.get(parameter);
 		}
 		return value;
 	}
 
-	public void setGpxParameter(GpxParameter gpxParameter, Object value) {
-		parameters.put(gpxParameter, value);
+	public void setGpxParameter(GpxParameter parameter, Object value) {
+		parameters.put(parameter, value);
 	}
 
 	public void setStartTime(long startTime) {

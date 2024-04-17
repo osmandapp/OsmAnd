@@ -83,8 +83,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		setupMapTextsPrefs();
 
-		setupRoutesPrefs();
-
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
@@ -188,19 +186,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
 		symtopPref.setDescription("Allow displaying map texts on top of each other");
-	}
-
-	private void setupRoutesPrefs() {
-		Preference textsCategory = findPreference("routes");
-		textsCategory.setIconSpaceReserved(false);
-
-		SwitchPreferenceEx raiseRoutesPref = findPreference(plugin.RAISE_ROUTES_ABOVE_RELIEF.getId());
-		raiseRoutesPref.setIconSpaceReserved(false);
-		raiseRoutesPref.setDescription("Display routes 1000 meters higher above the ground");
-
-		SwitchPreferenceEx showTracesPref = findPreference(plugin.SHOW_TRANSPARENT_TRACES.getId());
-		showTracesPref.setIconSpaceReserved(false);
-		showTracesPref.setDescription("Display semi-transparent trace under the route");
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {

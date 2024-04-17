@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
@@ -11,6 +12,10 @@ import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.os.Bundle;
 
@@ -20,12 +25,12 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
@@ -65,6 +70,7 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
+	private boolean use3DTrackVisualization;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -119,35 +125,38 @@ public class TrackDrawInfo {
 		color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getModeValue(mode));
 		width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
 
-		coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK);
+		coloringType = ColoringType.requireValueOf(TRACK);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
-	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem dataItem) {
+	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
 		OsmandSettings settings = app.getSettings();
+		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		width = dataItem.getParameter(WIDTH);
+		width = helper.getParameter(item, WIDTH);
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = dataItem.getParameter(COLOR);
+		color = helper.getParameter(item, COLOR);
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, dataItem.getParameter(COLORING_TYPE));
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getParameter(COLORING_TYPE));
-		splitType = dataItem.getParameter(SPLIT_TYPE);
-		splitInterval = dataItem.getParameter(SPLIT_INTERVAL);
-		joinSegments = dataItem.getParameter(JOIN_SEGMENTS);
-		showArrows = dataItem.getParameter(SHOW_ARROWS);
-		showStartFinish = dataItem.getParameter(SHOW_START_FINISH);
+		String type = helper.getParameter(item, COLORING_TYPE);
+		coloringType = ColoringType.requireValueOf(TRACK, type);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(type);
+		splitType = helper.getParameter(item, SPLIT_TYPE);
+		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
+		joinSegments = helper.getParameter(item, JOIN_SEGMENTS);
+		showArrows = helper.getParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
+		use3DTrackVisualization = helper.getParameter(item, USE_3D_TRACK_VISUALIZATION);
 	}
 
 	@Nullable
@@ -253,6 +262,14 @@ public class TrackDrawInfo {
 		this.showArrows = showArrows;
 	}
 
+	public boolean isUse3DTrackVisualization() {
+		return use3DTrackVisualization;
+	}
+
+	public void setUse3DTrackVisualization(boolean use3DTrackVisualization) {
+		this.use3DTrackVisualization = use3DTrackVisualization;
+	}
+
 	public void setShowStartFinish(boolean showStartFinish) {
 		this.showStartFinish = showStartFinish;
 	}
@@ -285,7 +302,7 @@ public class TrackDrawInfo {
 			width = getRenderDefaultTrackWidth(renderer);
 			showArrows = false;
 			showStartFinish = true;
-			coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK);
+			coloringType = ColoringType.requireValueOf(TRACK);
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 		} else if (gpxFile != null) {
 			color = gpxFile.getColor(getRenderDefaultTrackColor(renderer));
@@ -294,7 +311,7 @@ public class TrackDrawInfo {
 			showStartFinish = gpxFile.isShowStartFinish();
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
-			coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, gpxFile.getColoringType());
+			coloringType = ColoringType.requireValueOf(TRACK, gpxFile.getColoringType());
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxFile.getColoringType());
 		}
 	}
@@ -302,7 +319,7 @@ public class TrackDrawInfo {
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
-		coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, bundle.getString(TRACK_COLORING_TYPE));
+		coloringType = ColoringType.requireValueOf(TRACK, bundle.getString(TRACK_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
 		color = bundle.getInt(TRACK_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);

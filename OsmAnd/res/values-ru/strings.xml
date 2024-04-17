@@ -46,7 +46,7 @@
     <string name="search_favorites">Поиск в избранных</string>
     <string name="hillshade_menu_download_descr">Загрузите карту «Наложение затенения рельефа» для отображения вертикального затенения (отмывки) рельефа.</string>
     <string name="hillshade_purchase_header">Установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
+    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» этого региона.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
@@ -5032,7 +5032,6 @@
     <string name="shared_string_apply_changes">Применить изменения</string>
     <string name="no_visible_tracks">Нет треков на карте</string>
     <string name="recently_visible">Недавно видимые %1$s</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Изменить внешний вид треков (%1$s шт.)\?</string>
     <string name="inch">дюйм</string>
     <string name="empty_tracks_description">Вы можете импортировать, создавать или записывать файлы треков с помощью OsmAnd.</string>
     <string name="empty_tracks">Файлы треков отсутствуют.</string>
@@ -5653,6 +5652,8 @@
 \n
 \n • Добавлены фильтры по данным датчиков для треков
 \n
+\n • Улучшена настройка внешнего вида группы треков
+\n
 \n • Добавлена поддержка дополнительных тегов GPX
 \n
 \n • Настройте «Расстояние во время навигации»: выбирайте точные или округленные числа
@@ -5672,4 +5673,12 @@
     <string name="upload_local_versions">Загрузить локальные версии</string>
     <string name="map_widget_map_scale">Масштаб карты</string>
     <string name="shared_string_unchanged">Без изменений</string>
+    <string name="fix_north_up">Зафиксировать север сверху</string>
+    <string name="fix_north_up_descr">Не поворачивать карту жестами при ориентации карты «Север сверху»</string>
+    <string name="unchanged_parameter_summary">Каждый трек сохраняет свои собственные параметры.</string>
+    <string name="change_default_appearance_confirmation">Изменить внешний вид %1$s по умолчанию?</string>
+    <string name="apply_only_to_new">Применять только к новым</string>
+    <string name="change_default_tracks_appearance_confirmation">Применить изменения к существующим трекам в папке или только к новым?</string>
+    <string name="shared_string_changes">Изменения</string>
+    <string name="use_3d_track_visualization">3D-визуализация</string>
 </resources>

@@ -5027,7 +5027,6 @@
     <string name="switch_folder">Cambiar de carpeta</string>
     <string name="shared_string_on_map">en el mapa</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
-    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar la apariencia de %1$s pistas\?</string>
     <string name="empty_tracks_description">Puedes importar, crear o grabar archivos con las pistas con OsmAnd.</string>
     <string name="show_all_tracks">Mostrar todas las vías</string>
     <string name="shared_string_kilograms">kilogramos</string>
@@ -5675,4 +5674,6 @@
     <string name="gpx_approximation_geo_java">Basado en geometría (Java, rápido)</string>
     <string name="gpx_approximation_cpp">Basado en enrutamiento (C++)</string>
     <string name="gpx_approximation_java">Basado en enrutamiento (Java)</string>
+    <string name="fix_north_up">Activar el norte fijo hacia arriba</string>
+    <string name="fix_north_up_descr">No rotar el mapa con gestos en la orientación Norte Arriba</string>
 </resources>

@@ -243,7 +243,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Restricciones de acceso y peajes</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -978,7 +978,7 @@
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
-    <string name="local_openstreetmap_descr_title">Edición OSM asíncrona:</string>
+    <string name="local_openstreetmap_descr_title">Edición de OSM asíncrona:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM en la base de datos del dispositivo.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo del seguimiento en línea.</string>
@@ -4455,8 +4455,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
     <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
@@ -5031,7 +5031,6 @@
     <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
     <string name="sound_beep_complex">Pitido: complejo</string>
-    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
@@ -5644,6 +5643,8 @@
 \n
 \n• Se añadieron filtros de datos del sensor para las trazas
 \n
+\n• Se ha mejorado la personalización de la interfaz para los grupos de trazas.
+\n
 \n• Ahora se admiten etiquetas GPX adicionales
 \n
 \n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados
@@ -5689,4 +5690,8 @@
     <string name="unchanged_parameter_summary">Cada traza conservará sus propios parámetros.</string>
     <string name="shared_string_unchanged">Sin cambios</string>
     <string name="map_widget_map_scale">Escala del mapa</string>
+    <string name="fix_north_up">Bloquear orientación «Norte arriba»</string>
+    <string name="fix_north_up_descr">El mapa no rota al usar gestos, en la orientación «Norte arriba»</string>
+    <string name="change_default_appearance_confirmation">¿Cambiar el aspecto predefinido de %1$s?</string>
+    <string name="use_3d_track_visualization">Vista 3D</string>
 </resources>

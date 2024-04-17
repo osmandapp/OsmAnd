@@ -4,6 +4,9 @@
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
 	android:orientation="horizontal"
+	android:padding="@dimen/content_padding_medium"
+	android:clipToPadding="false"
+	android:clipChildren="false"
 	>
 
 	<LinearLayout
@@ -23,7 +26,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			android:layout_gravity="start|top"
-			android:gravity="start|top"
+			android:gravity="start|center_vertical"
 			android:layout_weight="1"
 			android:autoSizeMinTextSize="16sp"
 			android:autoSizeMaxTextSize="80sp"
@@ -37,10 +40,12 @@
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/speedometer_units"
-			android:layout_width="wrap_content"
+			android:layout_width="match_parent"
 			android:layout_height="13dp"
 			android:layout_gravity="start"
 			android:gravity="top"
+			android:lines="1"
+			android:maxLines="1"
 			android:textAllCaps="true"
 			android:textColor="?android:textColorSecondary"
 			android:textSize="11dp"

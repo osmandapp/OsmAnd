@@ -334,7 +334,7 @@
     <string name="settings_preset_descr">Setările de vizualizare și navigație ale hărții sunt ținute minte per profil. Setați aici profilul dumneavoastră implicit.</string>
     <string name="routing_settings">Navigare (funcție de profil)</string>
     <string name="routing_settings_descr">Precizați opțiunile de navigare.</string>
-    <string name="global_settings">Setări globale</string>
+    <string name="global_settings">Setări Globale</string>
     <string name="general_settings">General</string>
     <string name="general_settings_descr">Configurați afișajul și setările comune pentru aplicație.</string>
     <string name="global_app_settings">Setări globale aplicație</string>
@@ -5032,7 +5032,6 @@
     <string name="change_appearance">Modifică aspect</string>
     <string name="shared_string_kilograms">kilograme</string>
     <string name="shared_string_yards">yarzi</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Modificați aspectul a %1$s trasee\?</string>
     <string name="shared_string_apply_changes">Aplică modificările</string>
     <string name="no_visible_tracks">Nu există trasee pe hartă</string>
     <string name="shared_string_select_recent">Selectare recent</string>
@@ -5646,4 +5645,19 @@
     <string name="java_safe">Java (Sigur)</string>
     <string name="shared_sting_all_colors">Toate culorile</string>
     <string name="lang_ta_in">Tamil (India)</string>
+    <string name="fix_north_up">Activează Nordul sus fixat</string>
+    <string name="gpx_approximation_cpp">Bazat pe rutare (C++)</string>
+    <string name="gpx_approximation_java">Bazat pe rutare (Java)</string>
+    <string name="gpx_approximation_geo_java">Bazat pe geometrie (Java, rapid)</string>
+    <string name="download_cloud_versions">Descarcă versiunile din cloud</string>
+    <string name="distance_during_navigation">Distanța în timpul navigației</string>
+    <string name="unchanged_parameter_summary">Fiecare traseu își va păstra parametrii proprii.</string>
+    <string name="shared_string_unchanged">Neschimbat</string>
+    <string name="distance_during_navigation_description">Alegeți modul cum sunt afișate informațiile privind distanța în widgeturile de navigație (distanța până la punct, următoarea curbă, benzi).
+\n
+\nAlegeți \"%1$s\" pentru numere exacte sau \"%2$s\" pentru o citire mai ușoară.</string>
+    <string name="fix_north_up_descr">Nu roti harta prin gesturi când este orientată cu nordul în sus</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la piesele existente în dosar sau numai la cele noi?</string>
+    <string name="apply_only_to_new">Aplică doar la cele noi</string>
+    <string name="release_4_8">- Pentru a fi pregătit pentru 4.8</string>
 </resources>

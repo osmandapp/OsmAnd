@@ -9,6 +9,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.OsmandSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.OsmandSettingsItemWriter;
+import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
@@ -17,6 +18,9 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
+import java.util.Map;
 
 public class GlobalSettingsItem extends OsmandSettingsItem {
 
@@ -46,7 +50,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return getSettings().getSavedGlobalPrefsCount() * APPROXIMATE_PREFERENCE_SIZE_BYTES;
+		return (long) getSettings().getSavedGlobalPrefsCount() * APPROXIMATE_PREFERENCE_SIZE_BYTES;
 	}
 
 	@NonNull
@@ -69,13 +73,36 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return new OsmandSettingsItemReader<OsmandSettingsItem>(this, getSettings()) {
+		return new OsmandSettingsItemReader<OsmandSettingsItem>(this) {
 			@Override
 			protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
 				if ((preference instanceof CommonPreference) && (((CommonPreference<?>) preference).isShared())
 						|| getSettings().APPLICATION_MODE.getId().equals(preference.getId())) {
 					preference.readFromJson(json, null);
 				}
+			}
+
+			@Override
+			public void readPreferencesFromJson(JSONObject json) {
+				getSettings().getContext().runInUIThread(() -> {
+					OsmandSettings settings = getSettings();
+					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
+					Iterator<String> iterator = json.keys();
+					while (iterator.hasNext()) {
+						String key = iterator.next();
+						OsmandPreference<?> p = prefs.get(key);
+						if (p != null) {
+							try {
+								readPreferenceFromJson(p, json);
+							} catch (Exception e) {
+								SettingsHelper.LOG.error("Failed to read preference: " + key, e);
+							}
+						} else {
+							SettingsHelper.LOG.warn("No preference while importing settings: " + key);
+						}
+					}
+					settings.setLastGlobalPreferencesEditTime(lastModifiedTime);
+				});
 			}
 		};
 	}

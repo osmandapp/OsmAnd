@@ -5016,7 +5016,6 @@
     <string name="shared_string_kilograms">kilogramoj</string>
     <string name="shared_string_yards">jardoj</string>
     <string name="shared_string_apply_changes">Apliki ŝanĝojn</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Ĉu ŝanĝi aspekton de %1$s spuro(j)\?</string>
     <string name="recently_visible">Antaŭe vidigitaj %1$s</string>
     <string name="no_visible_tracks_description">Elektu spurojn por vidigi ilin sur la mapo.</string>
     <string name="no_visible_tracks">Neniu spuro sur la mapo</string>
@@ -5666,4 +5665,9 @@
     <string name="map_widget_map_scale">Skalo de mapo</string>
     <string name="unchanged_parameter_summary">Ĉiu spuro konservos siajn proprajn atributojn.</string>
     <string name="shared_string_unchanged">Neŝanĝita</string>
+    <string name="fix_north_up_descr">Ne permesi al turni mapon per gestoj dum la map-orientiĝo “Nordo supre”</string>
+    <string name="fix_north_up">Nordo ĉiam supre</string>
+    <string name="gpx_approximation_cpp">Surbaze de kurso (C++)</string>
+    <string name="gpx_approximation_java">Surbaze de kurso (Java)</string>
+    <string name="gpx_approximation_geo_java">Surbaze de geometrio (Java) (rapide)</string>
 </resources>

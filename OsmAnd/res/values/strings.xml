@@ -10,7 +10,13 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="release_4_8">
+        • To be prepared for 4.8
+    </string>
+    <string name="apply_only_to_new">Apply only to new</string>
+    <string name="change_default_tracks_appearance_confirmation">Apply changes to existing tracks in the folder or only to new ones?</string>
+    <string name="shared_string_changes">Changes</string>
+    <string name="change_default_appearance_confirmation">Change the default appearance of %1$s?</string>
     <string name="fix_north_up">Enable Fixed North Up</string>
     <string name="fix_north_up_descr">Do not rotate map with gestures in North Up map orientation</string>
     <string name="unchanged_parameter_summary">Each track will retain its own parameters.</string>
@@ -18,6 +24,7 @@
     <string name="map_widget_map_scale">Map scale</string>
     <string name="upload_local_versions">Upload local versions</string>
     <string name="download_cloud_versions">Download cloud versions</string>
+    <string name="use_3d_track_visualization">3D visualization</string>
     <string name="distance_during_navigation_description">Choose how distance information is displayed in navigation widgets (distance to point, next turn, lanes).\n\nChoose “%1$s” for exact numbers, or “%2$s” for easier readability.</string>
     <string name="distance_during_navigation">Distance during navigation</string>
     <string name="precise">Precise</string>
@@ -27,6 +34,7 @@
         • Configure the map screen by adding multiple \"Quick Action\" buttons\n\n
         • Improved readability of data in graphs\n\n
         • Added filters by sensor data for tracks\n\n
+        • Improved appearance customization for group of tracks\n\n
         • Added support for additional GPX tags\n\n
         • Customize \"Distance during navigation\": choose between precise or round up numbers\n\n
         • Unified UI for track selection\n\n
@@ -568,7 +576,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="inch">in</string>
     <string name="shared_string_kilograms">kilograms</string>
     <string name="shared_string_yards">yards</string>
-    <string name="change_default_tracks_appearance_confirmation_description">Change the appearance of %1$s tracks?</string>
     <string name="shared_string_apply_changes">Apply changes</string>
     <string name="no_visible_tracks_description">Select tracks to display them on the map.</string>
     <string name="no_visible_tracks">No tracks on the map</string>
@@ -1113,8 +1120,8 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Show note tags</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icons at low zooms</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematic display of icons at low zooms</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Waterway tunnels</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Don\'t hide waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Increase visibility for waterway tunnels</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Increase visibility for waterway tunnels</string>
     <string name="shared_string_not_used">Not used</string>
     <string name="shared_string_used">Used</string>
     <string name="files_with_route_restrictions">Files with route restrictions</string>
@@ -3980,7 +3987,7 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="rendering_attr_moreDetailed_name">More details</string>
     <string name="rendering_attr_lessDetailed_name">Fewer details</string>
     <string name="rendering_attr_hideAccess_name">Access restrictions</string>
-    <string name="rendering_attr_showAccess_name">Show access restrictions</string>
+    <string name="rendering_attr_showAccess_name">Show access and toll restrictions</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
     <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>

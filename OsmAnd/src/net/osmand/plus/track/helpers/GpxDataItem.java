@@ -16,32 +16,15 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
 
-public class GpxDataItem {
-
-	@NonNull
-	private final File file;
-	public final Map<GpxParameter, Object> map = new HashMap<>();
+public class GpxDataItem extends DataItem {
 
 	@Nullable
 	private GPXTrackAnalysis analysis;
 
 	public GpxDataItem(@NonNull OsmandApplication app, @NonNull File file) {
-		this.file = file;
-		initFileParameters(app);
-	}
-
-	private void initFileParameters(@NonNull OsmandApplication app) {
-		map.put(FILE_NAME, file.getName());
-		map.put(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
-		map.put(FILE_LAST_MODIFIED_TIME, file.lastModified());
-	}
-
-	@NonNull
-	public File getFile() {
-		return file;
+		super(app, file);
 	}
 
 	@Nullable
@@ -54,22 +37,8 @@ public class GpxDataItem {
 		updateAnalysisParameters();
 	}
 
-	public boolean hasData() {
-		return !map.isEmpty();
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T getParameter(@NonNull GpxParameter parameter) {
-		Object value = map.containsKey(parameter) ? map.get(parameter) : parameter.getDefaultValue();
-		return ((Class<T>) parameter.getTypeClass()).cast(value);
-	}
-
-	public boolean setParameter(@NonNull GpxParameter parameter, @Nullable Object value) {
-		if (parameter.isValidValue(value)) {
-			map.put(parameter, value);
-			return true;
-		}
-		return false;
+	public boolean isValidValue(@NonNull GpxParameter parameter, @Nullable Object value) {
+		return value == null && parameter.isNullSupported() || value != null && parameter.getTypeClass() == value.getClass();
 	}
 
 	public void copyData(@NonNull GpxDataItem item) {
@@ -84,8 +53,8 @@ public class GpxDataItem {
 
 	private void updateAnalysisParameters() {
 		boolean hasAnalysis = analysis != null;
-		for(GpxParameter gpxParameter: values()) {
-			if(gpxParameter.isAnalysisParameter()) {
+		for (GpxParameter gpxParameter : GpxParameter.values()) {
+			if (gpxParameter.isAnalysisParameter()) {
 				map.put(gpxParameter, hasAnalysis ? analysis.getGpxParameter(gpxParameter) : null);
 			}
 		}
@@ -95,23 +64,9 @@ public class GpxDataItem {
 		setParameter(FILE_NAME, getFile().getName());
 		setParameter(FILE_DIR, GpxDbUtils.getGpxFileDir(app, file));
 		setParameter(FILE_LAST_MODIFIED_TIME, getFile().lastModified());
-		setParameter(COLOR, gpxFile.getColor(0));
-		setParameter(WIDTH, gpxFile.getWidth(null));
-		setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
-		setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
 
-		if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
-			GpxSplitType splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
-			setParameter(SPLIT_TYPE, splitType.getType());
-			setParameter(SPLIT_INTERVAL, gpxFile.getSplitInterval());
-		}
-
-		if (!Algorithms.isEmpty(gpxFile.getColoringType())) {
-			setParameter(COLORING_TYPE, gpxFile.getColoringType());
-		} else if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
-			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
-			ColoringType coloringType = ColoringType.valueOf(scaleType);
-			setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
+		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+			readGpxAppearanceParameter(gpxFile, parameter);
 		}
 
 		Map<String, String> extensions = gpxFile.getExtensionsToRead();
@@ -124,17 +79,41 @@ public class GpxDataItem {
 		setParameter(FILE_CREATION_TIME, gpxFile.metadata.time);
 	}
 
-	@Override
-	public int hashCode() {
-		return file.hashCode();
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof GpxDataItem)) {
-			return false;
+	public void readGpxAppearanceParameter(@NonNull GPXFile gpxFile, @NonNull GpxParameter parameter) {
+		switch (parameter) {
+			case COLOR:
+				setParameter(COLOR, gpxFile.getColor(0));
+				break;
+			case WIDTH:
+				setParameter(WIDTH, gpxFile.getWidth(null));
+				break;
+			case SHOW_ARROWS:
+				setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
+				break;
+			case SHOW_START_FINISH:
+				setParameter(USE_3D_TRACK_VISUALIZATION, gpxFile.isUse3DVisualization());
+		setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
+break;
+			case SPLIT_TYPE:
+				if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
+					GpxSplitType splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
+					setParameter(SPLIT_TYPE, splitType.getType());
+				}
+				break;
+			case SPLIT_INTERVAL:
+				if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
+					setParameter(SPLIT_INTERVAL, gpxFile.getSplitInterval());
+				}
+				break;
+			case COLORING_TYPE:
+				if (!Algorithms.isEmpty(gpxFile.getColoringType())) {
+					setParameter(COLORING_TYPE, gpxFile.getColoringType());
+				} else if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
+					GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
+					ColoringType coloringType = ColoringType.valueOf(scaleType);
+					setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
+				}
+				break;
 		}
-		GpxDataItem other = (GpxDataItem) obj;
-		return file.equals(other.file);
 	}
 }

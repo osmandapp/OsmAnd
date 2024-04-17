@@ -64,6 +64,7 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
@@ -1037,7 +1038,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				ty.add(locY);
 				tx.add(markerX);
 				ty.add(markerY);
-				GeometryWay.calculatePath(tileBox, tx, ty, linePath);
+				GeometryWayPathAlgorithms.calculatePath(tileBox, tx, ty, linePath);
 				cachedPaths.put(i, linePath);
 			} else {
 				linePath = cachedPaths.get(i);

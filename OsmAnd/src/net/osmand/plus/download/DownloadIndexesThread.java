@@ -694,8 +694,10 @@ public class DownloadIndexesThread {
 		Map<String, String> params = new HashMap<>();
 		params.put("file_name", item.fileName);
 		params.put("file_size", item.size);
-		int downloadTimeSec = (int)(downloadTime / 1000L);
+		int downloadTimeSec = (int) (downloadTime / 1000L);
 		params.put("download_time", String.valueOf(downloadTimeSec));
-		AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/check_download", params, "Check download", false, false, null);
+
+		String url = AndroidNetworkUtils.getHttpProtocol() + "osmand.net/api/check_download";
+		AndroidNetworkUtils.sendRequestAsync(app, url, params, "Check download", false, false, null);
 	}
 }

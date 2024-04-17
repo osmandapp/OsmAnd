@@ -1,5 +1,7 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
+import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,18 +14,19 @@ import net.osmand.plus.card.base.multistate.BaseMultiStateCardController;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class StartFinishCardController extends BaseMultiStateCardController {
 
-	private final AppearanceData appearanceData;
+	private final AppearanceData data;
+	private final boolean addUnchanged;
 
-	public StartFinishCardController(@NonNull OsmandApplication app,
-	                                 @NonNull AppearanceData appearanceData) {
-		super(app, appearanceData.shouldShowStartFinish());
-		this.appearanceData = appearanceData;
+	public StartFinishCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
+		super(app);
+		this.data = data;
+		this.addUnchanged = addUnchanged;
+		this.selectedState = findCardState(data.getParameter(SHOW_START_FINISH));
 	}
 
 	@NonNull
@@ -35,31 +38,38 @@ public class StartFinishCardController extends BaseMultiStateCardController {
 	@NonNull
 	@Override
 	public String getCardStateSelectorTitle() {
-		return selectedCardState.toHumanString(app);
+		return selectedState.toHumanString(app);
 	}
 
 	@Override
-	public void onBindCardContent(@NonNull FragmentActivity activity,
-	                              @NonNull ViewGroup container, boolean nightMode) {
+	public void onBindCardContent(@NonNull FragmentActivity activity, @NonNull ViewGroup container, boolean nightMode) {
 		container.setVisibility(View.GONE);
 	}
 
 	@Override
 	protected void onSelectCardState(@NonNull CardState cardState) {
-		if (!Objects.equals(selectedCardState.getTag(), cardState.getTag())) {
-			selectedCardState = cardState;
-			appearanceData.setShowStartFinish((Boolean) selectedCardState.getTag());
-			cardInstance.updateSelectedCardState();
+		if (cardState.getTitleId() != selectedState.getTitleId()) {
+			selectedState = cardState;
+			card.updateSelectedCardState();
+
+			if (cardState.isOriginal()) {
+				data.resetParameter(SHOW_START_FINISH);
+			} else {
+				data.setParameter(SHOW_START_FINISH, cardState.getTag());
+			}
 		}
 	}
 
 	@NonNull
 	protected List<CardState> collectSupportedCardStates() {
-		return Arrays.asList(
-				new CardState(R.string.shared_string_unchanged),
-				new CardState(R.string.shared_string_on).setTag(true).setShowTopDivider(true),
-				new CardState(R.string.shared_string_off).setTag(false)
-		);
-	}
+		List<CardState> states = new ArrayList<>();
+		if (addUnchanged) {
+			states.add(new CardState(R.string.shared_string_unchanged));
+		}
+		states.add(new CardState(R.string.shared_string_original));
+		states.add(new CardState(R.string.shared_string_on).setTag(true).setShowTopDivider(true));
+		states.add(new CardState(R.string.shared_string_off).setTag(false));
 
+		return states;
+	}
 }
