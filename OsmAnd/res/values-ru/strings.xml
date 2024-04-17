@@ -3673,7 +3673,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
     <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
-    <string name="quick_action_remove_next_destination">Удалить ближайший пункт</string>
+    <string name="quick_action_remove_next_destination">Удалить следующий пункт</string>
     <string name="please_provide_point_name_error">Задайте название точки</string>
     <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
     <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии, карманного автономного путеводителя со статьями о местах и направлениях.</string>
@@ -4483,8 +4483,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Не скрывать водные туннели</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Повышение уровня масштабирования видимости водных туннелей</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Повысить видимость водных туннелей</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
     <string name="shared_string_used">Используется</string>
     <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
@@ -5656,7 +5656,7 @@
 \n
 \n • Добавлена поддержка дополнительных тегов GPX
 \n
-\n • Настройте «Расстояние во время навигации»: выбирайте точные или округленные числа
+\n • Настройте «Расстояние во время навигации»: выберите точные или округленные числа
 \n
 \n • Единый пользовательский интерфейс для выбора трека
 \n
