@@ -59,6 +59,7 @@ import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -204,6 +205,8 @@ public class OsmandApplication extends MultiDexApplication {
 	WeatherHelper weatherHelper;
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
+
+	Model3dHelper model3dHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -584,6 +587,11 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public OfflineForecastHelper getOfflineForecastHelper() {
 		return weatherHelper.getOfflineForecastHelper();
+	}
+
+	@NonNull
+	public Model3dHelper getModel3dHelper() {
+		return model3dHelper;
 	}
 
 	public CommandPlayer getPlayer() {
