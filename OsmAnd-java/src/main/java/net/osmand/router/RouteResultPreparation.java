@@ -1779,7 +1779,7 @@ public class RouteResultPreparation {
 			lanes = createCombinedTurnTypeForSingleLane(rs, deviation);
 			t.setLanes(lanes);
 			int active = t.getActiveCommonLaneTurn();
-			if (!TurnType.isKeepDirectionTurn(active)) {
+			if (!TurnType.isKeepDirectionTurn(active) || !TurnType.isKeepDirectionTurn(t.getValue())) {
 				t = TurnType.valueOf(t.getActiveCommonLaneTurn(), leftSide);
 			}
 		} else {
