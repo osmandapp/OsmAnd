@@ -12,6 +12,7 @@ import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -42,6 +43,11 @@ public class TerrainZoomLevelsFragment extends ConfigureMapOptionFragment {
 			originalMaxZoomValue = srtmPlugin.getTerrainMaxZoom();
 			originalMinZoomValue = srtmPlugin.getTerrainMinZoom();
 		}
+	}
+
+	@Override
+	protected DashboardOnMap.DashboardType getBaseDashboardType() {
+		return DashboardOnMap.DashboardType.TERRAIN;
 	}
 
 	@Override

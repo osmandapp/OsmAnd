@@ -74,10 +74,12 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			@Override
 			public void handleOnBackPressed() {
 				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, false);
+				activity.getDashboard().setDashboardVisibility(true, getBaseDashboardType(), false);
 			}
 		});
 	}
+
+	protected abstract DashboardOnMap.DashboardType getBaseDashboardType();
 
 	@Nullable
 	@Override
