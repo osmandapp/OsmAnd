@@ -294,7 +294,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			if (textState != null) {
 				updateColors(textState);
 			}
-			view.requestLayout();
+			updateInfo(null);
 		}
 	}
 }
