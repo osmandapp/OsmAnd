@@ -4483,7 +4483,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Отображение водных туннелей на более низком увеличении</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Отображение водных туннелей на меньших уровнях масштабирования</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Повысить видимость водных туннелей</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
     <string name="shared_string_used">Используется</string>
@@ -5681,4 +5681,12 @@
     <string name="change_default_tracks_appearance_confirmation">Применить изменения к существующим трекам в папке или только к новым?</string>
     <string name="shared_string_changes">Изменения</string>
     <string name="use_3d_track_visualization">3D-визуализация</string>
+    <string name="shared_string_scale">Масштаб</string>
+    <string name="relief_3d_download_description">Для просмотра рельефа местности необходимы дополнительные карты.</string>
+    <string name="vertical_exaggeration_description">Изменяя значение масштаба, можно подчеркнуть 3D-рельеф.</string>
+    <string name="vertical_exaggeration">Вертикальное увеличение</string>
+    <string name="gpx_approximation_geo_java">На основе геометрии (Java, быстрая)</string>
+    <string name="gpx_approximation_cpp">На основе маршрутизации (C++)</string>
+    <string name="gpx_approximation_java">На основе маршрутизации (Java)</string>
+    <string name="release_4_8">• А ты рисковый парень, ночнушку не боишься использовать, не забывай делать бэкап и да пребудет с тобой сила в ожидании описания версии 4.8</string>
 </resources>

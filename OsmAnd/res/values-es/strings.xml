@@ -5643,7 +5643,7 @@
     <string name="lang_ta_in">Tamil (India)</string>
     <string name="routing_type_a_star_2_phase">A* 2 fases</string>
     <string name="routing_type_a_star_classic">A* clásico</string>
-    <string name="release_4_7">• Nuevo widget \"Speedometer\" compatible con Android Auto
+    <string name="release_4_7">• Nuevo widget \"Velocímetro\" compatible con Android Auto
 \n
 \n • Configure la pantalla del mapa mediante la adición de varios botones de \"Acción Rápida\"
 \n
@@ -5684,4 +5684,8 @@
     <string name="apply_only_to_new">Aplicar solo a nuevos</string>
     <string name="release_4_8">• Preparado para 4.8</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las pistas existentes en la carpeta o solo a las nuevas?</string>
+    <string name="shared_string_scale">Escala</string>
+    <string name="vertical_exaggeration_description">Cambiando el valor de la escala, puedes acentuar el relieve 3D.</string>
+    <string name="vertical_exaggeration">Ampliación vertical</string>
+    <string name="relief_3d_download_description">Se necesitan mapas adicionales para ver el terreno en el mapa.</string>
 </resources>

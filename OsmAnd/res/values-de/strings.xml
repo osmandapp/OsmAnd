@@ -5687,4 +5687,8 @@
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
     <string name="release_4_8">• Für 4.8 vorbereitet</string>
+    <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
+    <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Terrain auf der Karte anzuzeigen.</string>
+    <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts kannst du das 3D- Profil hervorheben.</string>
+    <string name="shared_string_scale">Maßstab</string>
 </resources>

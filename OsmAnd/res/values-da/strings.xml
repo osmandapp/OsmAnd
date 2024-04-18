@@ -5688,4 +5688,8 @@
     <string name="apply_only_to_new">Anvend kun på nye</string>
     <string name="change_default_tracks_appearance_confirmation">Anvend ændringer på eksisterende spor i mappen eller kun på nye?</string>
     <string name="release_4_8">• For at være forberedt på 4.8</string>
+    <string name="shared_string_scale">Skala</string>
+    <string name="relief_3d_download_description">Yderligere kort er nødvendige for at se terræn på kortet.</string>
+    <string name="vertical_exaggeration_description">Ved at ændre skalaværdien kan du fremhæve 3D-relieffet.</string>
+    <string name="vertical_exaggeration">Vertikal overdrivelse</string>
 </resources>
