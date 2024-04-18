@@ -5677,4 +5677,8 @@
     <string name="release_4_8">• Byť pripravený pre 4.8</string>
     <string name="change_default_tracks_appearance_confirmation">Aplikovať zmeny na existujúce stopy v priečinku, alebo iba na nové?</string>
     <string name="shared_string_changes">Zmeny</string>
+    <string name="shared_string_scale">Mierka</string>
+    <string name="vertical_exaggeration_description">Zmenou hodnoty mierky môžete zvýrazniť 3D reliéf.</string>
+    <string name="relief_3d_download_description">Pre zobrazenie terénu na mape sú potrebné ďalšie mapy.</string>
+    <string name="vertical_exaggeration">Vertikálne zvýraznenie</string>
 </resources>
