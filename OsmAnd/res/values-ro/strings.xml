@@ -1108,7 +1108,7 @@
     <string name="rendering_attr_moreDetailed_name">Mai multe detalii</string>
     <string name="rendering_attr_lessDetailed_name">Mai puține detalii</string>
     <string name="rendering_attr_hideAccess_name">Restricții de acces</string>
-    <string name="rendering_attr_showAccess_name">Arată restricțiile de acces</string>
+    <string name="rendering_attr_showAccess_name">Afișarea restricțiilor de acces și de taxare</string>
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
     <string name="rendering_attr_showCycleRoutes_name">Rute pentru biciclete</string>
@@ -4474,8 +4474,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Arată etichetele note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconuri la niveluri mici de zoom</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Afișare schematică a iconurilor la niveluri reduse de zoom</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tuneluri navigabile</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Nu ascunde tunelurile căilor navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Creșterea vizibilității pentru tunelurile navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Creșterea vizibilității pentru tunelurile navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichete Fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4606,7 +4606,7 @@
     <string name="distance_circles">Distanța-cercuri</string>
     <string name="circle_settings">Setările cercului</string>
     <string name="navigation_points">Puncte de navigație</string>
-    <string name="calculate_online">Calculează online</string>
+    <string name="calculate_online">Calculați online</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nu merge în afara pârtiei</string>
     <string name="on_with_params">%1$s pe %2$s</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
@@ -5200,13 +5200,13 @@
     <string name="external_sensors_not_found">Senzori negăsiți</string>
     <string name="write_data_from_sensor_to_track">Scrieți date de la senzorii externi pe GPX în timpul înregistrării traseului.</string>
     <string name="save_track_external_sensors_data">Date</string>
-    <string name="external_device_forget_sensor_description">Senzorul va fi șters din listă. Poți împerechea din nou senzorul oricând.</string>
+    <string name="external_device_forget_sensor_description">Senzorul va fi eliminat din listă. Veți putea să împerecheați din nou acest senzor în orice moment.</string>
     <string name="external_device_disconnected">Deconectat</string>
     <string name="ant_plus_searching_text">Se caută senzori</string>
     <string name="map_3d_mode_description">Atingeți harta cu două degete și deplasați-le în sus și în jos pentru a regla înclinarea hărții.</string>
     <string name="external_device_characteristic_pulse_rate">Frecvența pulsului</string>
     <string name="ant_plus_help_title">Nu știu ce tip de senzor am</string>
-    <string name="ant_plus_searching_text_description">Țineți dispozitivul aproape de senzor. Trebuie să activați senzorul pentru ca OsmAnd să îl poată găsi.</string>
+    <string name="ant_plus_searching_text_description">Vă rugăm să țineți dispozitivul aproape de senzor. Trebuie să activați senzorul pentru ca OsmAnd să îl poată găsi.</string>
     <string name="ant_plus_open_settings">Deschideți setările</string>
     <string name="external_device_characteristic_cuff_pressure">Presiunea manșetei</string>
     <string name="ant_plus_bluetooth_off_description">Porniți Bluetooth, găsiți și împerecheați senzorii.</string>
@@ -5351,11 +5351,11 @@
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
     <string name="average_glide_ratio">Rata medie de planare</string>
     <string name="help_article_map_legend_nautical_map_name">Stilul hărții nautice</string>
-    <string name="release_4_6">• Android Auto: A fost adăugat modul 3D
+    <string name="release_4_6">• Android Auto: S-a adăugat modul 3D
 \n
-\n • Tracks: Au fost introduse filtre și foldere inteligente, a fost optimizată memoria pentru fișiere mai mari
+\n • Tracks:S-au introdus filtre și foldere inteligente, s-a optimizat memoria pentru fișiere mai mari
 \n
-\n • Gestionarea îmbunătățită a resurselor locale
+\n • Gestionarea mai bună a resurselor locale
 \n
 \n • Mapare personalizabilă a butoanelor pentru controllere externe
 \n
@@ -5363,13 +5363,13 @@
 \n
 \n • OsmAnd Cloud: Acum accesați fișierele șterse
 \n
-\n • Colorare îmbunătățită a pistei în modul Slope cu un nou gradient simetric
+\n • Colorare mai bună a pistei în modul Slope cu noul gradient simetric
 \n
 \n • Probleme rezolvate cu bara de stare transparentă
 \n
-\n • A fost adăugat suport pentru widget-ul ANT+ pentru temperatură
+\n • S-a adăugat suport la widget-ul ANT+ de temperatură
 \n
-\n• A fost introdus widgetul \"RAM disponibil\"
+\n• S-a introdus widgetul \"RAM disponibil\"
 \n
 \n</string>
     <string name="app_mode_baby_transport">Transportul bebelușilor</string>
@@ -5416,7 +5416,7 @@
     <string name="help_article_personal_storage_name">Stocare</string>
     <string name="help_article_search_search_coordinates_name">Căutare coordinate</string>
     <string name="help_article_start_with_main_menu_name">Meniul principal</string>
-    <string name="help_article_purchases_giveaway_name">Giveaway</string>
+    <string name="help_article_purchases_giveaway_name">Dăruiește</string>
     <string name="help_article_start_with_first_steps_name">Primii pași</string>
     <string name="help_article_troubleshooting_general_name">General</string>
     <string name="help_article_personal_profiles_name">Profile (Setări)</string>

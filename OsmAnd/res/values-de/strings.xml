@@ -5686,4 +5686,5 @@
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Titel im Ordner oder nur auf neue Titel anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
+    <string name="release_4_8">• Für 4.8 vorbereitet</string>
 </resources>

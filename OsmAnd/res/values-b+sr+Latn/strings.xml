@@ -5684,4 +5684,9 @@
     <string name="fix_north_up_descr">Ne rotirarti mapu pokretima u orijentaciji prema severu</string>
     <string name="fix_north_up">Fiksirati mapa prema severu</string>
     <string name="change_default_appearance_confirmation">Promeni podrazumevani izgled za %1$s?</string>
+    <string name="use_3d_track_visualization">3D vizuelizacija</string>
+    <string name="apply_only_to_new">Primenjivati samo na nove</string>
+    <string name="change_default_tracks_appearance_confirmation">Primeniti promene na postojeće trase na mapi ili samo na nove?</string>
+    <string name="shared_string_changes">Promene</string>
+    <string name="release_4_8">• Pripremi se za 4.8 verziju</string>
 </resources>

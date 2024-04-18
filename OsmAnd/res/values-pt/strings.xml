@@ -5687,4 +5687,5 @@
     <string name="shared_string_changes">Alterações</string>
     <string name="change_default_tracks_appearance_confirmation">Aplicar alterações às faixas existentes na pasta ou apenas nas novas?</string>
     <string name="apply_only_to_new">Aplicar apenas a novas</string>
+    <string name="release_4_8">• A ser preparado para 4.8</string>
 </resources>

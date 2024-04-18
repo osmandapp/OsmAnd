@@ -4863,4 +4863,6 @@
     <string name="poi_shop_general">Magazin general</string>
     <string name="poi_cuisine_fish">Pește</string>
     <string name="poi_indoor_seating_yes">Scaune în interior: da</string>
+    <string name="poi_indoor_seating_no">Nu există locuri în interior</string>
+    <string name="poi_indoor_seating_bar_table">Scaune în interior: masă de bar</string>
 </resources>
