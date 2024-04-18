@@ -5690,4 +5690,5 @@
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Terrain auf der Karte anzuzeigen.</string>
     <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts kannst du das 3D- Profil hervorheben.</string>
+    <string name="shared_string_scale">Maßstab</string>
 </resources>
