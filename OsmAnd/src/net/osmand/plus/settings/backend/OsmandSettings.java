@@ -1877,16 +1877,6 @@ public class OsmandSettings {
 				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
 			}
 		}
-
-		@Override
-		public String parseString(String s) {
-			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
-		}
-
-		@Override
-		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
-			return false;
-		}
 	}.makeProfile();
 
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
@@ -1899,16 +1889,6 @@ public class OsmandSettings {
 				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
 				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
 			}
-		}
-
-		@Override
-		public String parseString(String s) {
-			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
-		}
-
-		@Override
-		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
-			return false;
 		}
 	}.makeProfile();
 
