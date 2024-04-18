@@ -5668,4 +5668,8 @@
     <string name="shared_string_changes">Modifications</string>
     <string name="apply_only_to_new">Appliquer seulement aux nouvelles</string>
     <string name="change_default_tracks_appearance_confirmation">Appliquer les modifications aux traces présentes dans le dossier ou seulement aux nouvelles traces ?</string>
+    <string name="gpx_approximation_java">Basé sur le routage (Java)</string>
+    <string name="release_4_8">• Pour être préparé pour la 4.8</string>
+    <string name="gpx_approximation_cpp">Basé sur le routage (C++)</string>
+    <string name="gpx_approximation_geo_java">Basé sur la géométrie (Java, rapide)</string>
 </resources>
