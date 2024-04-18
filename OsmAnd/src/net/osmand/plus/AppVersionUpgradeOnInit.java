@@ -144,8 +144,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_6_10 = 4610;
 	// 4701 - 4.7-01 (Migrate from simple color ints to using of wrapper with additional information PaletteColor)
 	public static final int VERSION_4_7_01 = 4701;
+	public static final int VERSION_4_7_02 = 4702;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_01;
+	public static final int LAST_APP_VERSION = VERSION_4_7_02;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -267,6 +268,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_7_01) {
 					ColorsMigrationAlgorithm.doMigration(app);
+				}
+				if (prevAppVersion < VERSION_4_7_02) {
+					migrateVerticalWidgetPanels(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -706,8 +710,8 @@ public class AppVersionUpgradeOnInit {
 
 	private void updateWidgetPages(@NonNull OsmandSettings settings) {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			updateWidgetPage(mode, settings.TOP_WIDGET_PANEL_ORDER_OLD, settings.TOP_WIDGET_PANEL_ORDER);
-			updateWidgetPage(mode, settings.BOTTOM_WIDGET_PANEL_ORDER_OLD, settings.BOTTOM_WIDGET_PANEL_ORDER);
+			updateWidgetPage(mode, settings.TOP_WIDGET_PANEL_ORDER, settings.WIDGET_TOP_PANEL_ORDER);
+			updateWidgetPage(mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.WIDGET_BOTTOM_PANEL_ORDER);
 		}
 	}
 
@@ -722,10 +726,10 @@ public class AppVersionUpgradeOnInit {
 
 	private void migrateVerticalWidgetToCustomId(@NonNull OsmandSettings settings) {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			updateExistingWidgetIds(settings, mode, settings.TOP_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
-			updateExistingWidgetIds(settings, mode, settings.TOP_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
-			updateExistingWidgetIds(settings, mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
-			updateExistingWidgetIds(settings, mode, settings.BOTTOM_WIDGET_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.WIDGET_TOP_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.WIDGET_TOP_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.WIDGET_BOTTOM_PANEL_ORDER, settings.RIGHT_WIDGET_PANEL_ORDER);
+			updateExistingWidgetIds(settings, mode, settings.WIDGET_BOTTOM_PANEL_ORDER, settings.LEFT_WIDGET_PANEL_ORDER);
 		}
 	}
 
@@ -764,6 +768,22 @@ public class AppVersionUpgradeOnInit {
 					settings.MAP_INFO_CONTROLS.setModeValue(appMode, newVisibilityString.toString());
 				}
 			}
+		}
+	}
+
+	private void migrateVerticalWidgetPanels(@NonNull OsmandSettings settings) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			migrateVerticalWidgetPanel(mode, settings.WIDGET_TOP_PANEL_ORDER, settings.TOP_WIDGET_PANEL_ORDER);
+			migrateVerticalWidgetPanel(mode, settings.WIDGET_BOTTOM_PANEL_ORDER, settings.BOTTOM_WIDGET_PANEL_ORDER);
+		}
+	}
+
+	private void migrateVerticalWidgetPanel(@NonNull ApplicationMode mode,
+	                                        @NonNull ListStringPreference oldPreference,
+	                                        @NonNull ListStringPreference newPreference) {
+		if (oldPreference.isSetForMode(mode)) {
+			String value = oldPreference.getModeValue(mode);
+			newPreference.setModeValue(mode, value);
 		}
 	}
 
