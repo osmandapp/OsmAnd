@@ -5675,4 +5675,9 @@
     <string name="fix_north_up_descr">Не ротирајте мапу покретима у оријентацији карте Север Горе</string>
     <string name="fix_north_up">Омогући Фиксни Север Горе</string>
     <string name="change_default_appearance_confirmation">Променити подразумеван изглед за %1$s?</string>
+    <string name="release_4_8">• Биће урађено за 4.8</string>
+    <string name="use_3d_track_visualization">3Д визуелизација</string>
+    <string name="apply_only_to_new">Примени само на ново</string>
+    <string name="change_default_tracks_appearance_confirmation">Применити промене на постојеће путање у фолдеру или само на нове?</string>
+    <string name="shared_string_changes">Промене</string>
 </resources>
