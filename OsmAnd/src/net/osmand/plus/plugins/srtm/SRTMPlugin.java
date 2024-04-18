@@ -9,7 +9,6 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
-import static net.osmand.plus.plugins.srtm.VerticalExaggerationFragment.MIN_VERTICAL_EXAGGERATION;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
@@ -82,6 +81,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
+
+	public static final int MIN_VERTICAL_EXAGGERATION = 1;
+	public static final int MAX_VERTICAL_EXAGGERATION = 3;
 
 	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM;
@@ -247,9 +249,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		super.setEnabled(enabled);
 		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
 		if (mapRendererContext != null) {
-			mapRendererContext.updateElevationConfiguration();
-			mapRendererContext.recreateHeightmapProvider();
-			mapRendererContext.updateVerticalExaggerationScale();
+			updateMapPresentationEnvironment(mapRendererContext);
 		}
 	}
 
@@ -586,12 +586,6 @@ public class SRTMPlugin extends OsmandPlugin {
 			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
 		}
 		adapter.addItem(item);
-	}
-
-	static public String getFormattedScaleValue(@NonNull OsmandApplication app, float scale) {
-		DecimalFormat decimalFormat = new DecimalFormat("#");
-		String formattedScale = "x" + (scale % 1 == 0 ? decimalFormat.format(scale) : scale);
-		return scale == MIN_VERTICAL_EXAGGERATION ? app.getString(R.string.shared_string_none) : formattedScale;
 	}
 
 	@Nullable

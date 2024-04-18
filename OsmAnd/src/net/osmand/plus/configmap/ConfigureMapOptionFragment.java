@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.plus.dashboard.DashboardOnMap.*;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
@@ -79,7 +80,7 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		});
 	}
 
-	protected abstract DashboardOnMap.DashboardType getBaseDashboardType();
+	protected abstract DashboardType getBaseDashboardType();
 
 	@Nullable
 	@Override

@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.SRTMPlugin.getFormattedScaleValue;
+import static net.osmand.plus.dashboard.DashboardOnMap.*;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.MAX_VERTICAL_EXAGGERATION;
+import static net.osmand.plus.plugins.srtm.SRTMPlugin.MIN_VERTICAL_EXAGGERATION;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,19 +14,19 @@ import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.Slider;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.ConfigureMapOptionFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
+
+import java.text.DecimalFormat;
 
 public class VerticalExaggerationFragment extends ConfigureMapOptionFragment {
 
 	private SRTMPlugin srtmPlugin;
 
-	public static final int MIN_VERTICAL_EXAGGERATION = 1;
-	public static final int MAX_VERTICAL_EXAGGERATION = 3;
 	public static final String SCALE = "scale";
 
 	private TextView scaleTv;
@@ -44,8 +46,8 @@ public class VerticalExaggerationFragment extends ConfigureMapOptionFragment {
 	}
 
 	@Override
-	protected DashboardOnMap.DashboardType getBaseDashboardType() {
-		return DashboardOnMap.DashboardType.RELIEF_3D;
+	protected DashboardType getBaseDashboardType() {
+		return DashboardType.RELIEF_3D;
 	}
 
 	public float getElevationScaleFactor() {
@@ -121,7 +123,11 @@ public class VerticalExaggerationFragment extends ConfigureMapOptionFragment {
 		}
 	};
 
-
+	static public String getFormattedScaleValue(@NonNull OsmandApplication app, float scale) {
+		DecimalFormat decimalFormat = new DecimalFormat("#");
+		String formattedScale = "x" + (scale % 1 == 0 ? decimalFormat.format(scale) : scale);
+		return scale == MIN_VERTICAL_EXAGGERATION ? app.getString(R.string.shared_string_none) : formattedScale;
+	}
 
 	private boolean isChangesMade() {
 		return getElevationScaleFactor() != originalScaleValue;

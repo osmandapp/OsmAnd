@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.plus.dashboard.DashboardOnMap.*;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -39,8 +41,8 @@ public class TerrainVisibilityFragment extends ConfigureMapOptionFragment {
 	}
 
 	@Override
-	protected DashboardOnMap.DashboardType getBaseDashboardType() {
-		return DashboardOnMap.DashboardType.TERRAIN;
+	protected DashboardType getBaseDashboardType() {
+		return DashboardType.TERRAIN;
 	}
 
 	@Override
