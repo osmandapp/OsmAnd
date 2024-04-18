@@ -317,7 +317,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
 	@Override
 	public void onActionsUpdated() {
-		setSelectedButton(selectedButton);
+		if (quickActionsWidget != null) {
+			quickActionsWidget.updateActions();
+		}
 	}
 
 	@Override
