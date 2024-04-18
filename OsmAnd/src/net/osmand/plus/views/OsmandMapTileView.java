@@ -597,17 +597,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private void adjustTiltAngle(@NonNull Zoom zoom) {
 		int baseZoom = zoom.getBaseZoom();
-		float angleToTilt = -1;
-
-		for (int calculatedAngle = 85, i = MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT; i <= MAX_ZOOM_LIMIT; i++) {
-			if (baseZoom == i) {
-				angleToTilt = calculatedAngle;
-				break;
+		if (baseZoom >= MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT && baseZoom <= MAX_ZOOM_LIMIT) {
+			int angle = 90 - (baseZoom - 2) * 5;
+			if (angle >= MIN_ALLOWED_ELEVATION_ANGLE && angle < DEFAULT_ELEVATION_ANGLE) {
+				animatedDraggingThread.startTilting(angle);
 			}
-			calculatedAngle -= 5;
-		}
-		if (angleToTilt >= MIN_ALLOWED_ELEVATION_ANGLE && angleToTilt <= DEFAULT_ELEVATION_ANGLE) {
-			animatedDraggingThread.startTilting(angleToTilt);
 		}
 	}
 
