@@ -153,11 +153,4 @@ class SmartFolderFragment : TrackFolderFragment(), SmartFolderUpdateListener,
 	override fun onDialogClosed() {
 		updateContent()
 	}
-
-	fun updateContent(loadTrackFinished: Boolean) {
-		if (loadTrackFinished){
-			smartFolderHelper.updateSmartFolderItems(smartFolder)
-		}
-		super.updateContent()
-	}
 }

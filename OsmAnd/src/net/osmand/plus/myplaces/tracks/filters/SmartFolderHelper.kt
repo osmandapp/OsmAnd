@@ -237,6 +237,9 @@ class SmartFolderHelper(val app: OsmandApplication) {
 				break
 			}
 		}
+		for (smartFolder in smartFolderCollection) {
+			updateSmartFolderItems(smartFolder)
+		}
 		notifyUpdateListeners()
 	}
 
