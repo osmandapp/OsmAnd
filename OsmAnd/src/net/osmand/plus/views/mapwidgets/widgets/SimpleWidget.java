@@ -62,13 +62,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	public void updateValueAlign(boolean fullRow) {
-		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
-			if (!fullRow) {
-				textView.setMaxWidth((int) (container.getWidth() - app.getResources().getDimension(R.dimen.content_padding) +
-						app.getResources().getDimension(R.dimen.map_widget_icon) +
-						app.getResources().getDimension(R.dimen.content_padding_small)));
-			}
-		} else {
+		if (WidgetSize.SMALL != getWidgetSizePref().get()) {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
@@ -300,7 +294,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			if (textState != null) {
 				updateColors(textState);
 			}
-			view.requestLayout();
+			updateInfo(null);
 		}
 	}
 }

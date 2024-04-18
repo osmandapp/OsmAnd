@@ -275,4 +275,9 @@
 
     <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
     <declare-styleable name="SwitchEx" parent="ButtonEx" />-->
+
+	<declare-styleable name="AutoScaleTextView">
+		<attr name="minTextSize" format="dimension" />
+		<attr name="maxTextSize" format="dimension" />
+	</declare-styleable>
 </resources>
