@@ -49,6 +49,7 @@ public class RoutingHelper {
 	// 3) calculate max allowed deviation before route recalculation * multiplier
 	private static final float POS_TOLERANCE = 60; // 60m or 30m + accuracy
 	private static final float POS_TOLERANCE_DEVIATION_MULTIPLIER = 2;
+	private static final int MAX_POSSIBLE_SPEED = 140;// 504 km/h
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -73,6 +74,7 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
+	private Location lastGoodRouteLocation;
 	private boolean routeWasFinished;
 	private ApplicationMode mode;
 	private boolean deviceHasBearing;
@@ -400,7 +402,7 @@ public class RoutingHelper {
 
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if (route.isEmpty()) {
-				calculateRoute = !route.hasMissingMaps();
+				calculateRoute = !route.hasMissingMaps() || isLocationJumping(currentLocation, targetPointsChanged);
 			} else {
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
@@ -470,6 +472,9 @@ public class RoutingHelper {
 			}
 			lastFixedLocation = currentLocation;
 			lastProjection = locationProjection;
+			if (!route.isEmpty()) {
+				lastGoodRouteLocation = currentLocation;
+			}
 		}
 
 		if (calculateRoute) {
@@ -485,6 +490,18 @@ public class RoutingHelper {
 		} else {
 			return currentLocation;
 		}
+	}
+
+	private boolean isLocationJumping(Location currentLocation, boolean targetPointsChanged) {
+		if (route.hasMissingMaps() && lastGoodRouteLocation != null && !targetPointsChanged) {
+			double time = currentLocation.getTime() - lastGoodRouteLocation.getTime();
+			double dist = currentLocation.distanceTo(lastGoodRouteLocation);
+			if (time > 0) {
+				double speed = dist / (time / 1000);
+				return speed > MAX_POSSIBLE_SPEED;
+			}
+		}
+		return false;
 	}
 
 	public double getMaxAllowedProjectDist(@NonNull Location location) {
