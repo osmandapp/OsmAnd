@@ -105,6 +105,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
 	private static final int MIN_ZOOM_LIMIT = 1;
+	private static final int MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT = 3;
 	private static final int MAX_ZOOM_LIMIT = 17;
 
 	private boolean MEASURE_FPS;
@@ -595,27 +596,18 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void adjustTiltAngle(@NonNull Zoom zoom) {
-		float angle = -1;
 		int baseZoom = zoom.getBaseZoom();
-		if (baseZoom == 17) {
-			angle = 15;
-		} else if (baseZoom == 15) {
-			angle = 25;
-		} else if (baseZoom == 13) {
-			angle = 35;
-		} else if (baseZoom == 11) {
-			angle = 45;
-		} else if (baseZoom == 9) {
-			angle = 55;
-		} else if (baseZoom == 7) {
-			angle = 65;
-		} else if (baseZoom == 5) {
-			angle = 75;
-		} else if (baseZoom == 3) {
-			angle = 85;
+		float angleToTilt = -1;
+
+		for (int calculatedAngle = 85, i = MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT; i <= MAX_ZOOM_LIMIT; i++) {
+			if (baseZoom == i) {
+				angleToTilt = calculatedAngle;
+				break;
+			}
+			calculatedAngle -= 5;
 		}
-		if (angle != -1) {
-			animatedDraggingThread.startTilting(angle);
+		if (angleToTilt >= MIN_ALLOWED_ELEVATION_ANGLE && angleToTilt <= DEFAULT_ELEVATION_ANGLE) {
+			animatedDraggingThread.startTilting(angleToTilt);
 		}
 	}
 
