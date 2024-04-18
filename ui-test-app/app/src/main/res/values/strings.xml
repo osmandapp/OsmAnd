@@ -1,0 +1,8 @@
+<resources>
+	<string name="app_name">test trx</string>
+	<string-array name="gravity">
+		<item>top</item>
+		<item>center</item>
+		<item>bottom</item>
+	</string-array>
+</resources>

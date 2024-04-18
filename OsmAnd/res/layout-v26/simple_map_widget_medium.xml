@@ -75,6 +75,7 @@
 				android:autoSizeMinTextSize="@dimen/simple_widget_value_minimum_size"
 				android:autoSizeStepGranularity="2sp"
 				android:autoSizeTextType="uniform"
+				android:includeFontPadding="false"
 				android:ellipsize="none"
 				android:gravity="center_vertical|start"
 				android:letterSpacing="0.04"

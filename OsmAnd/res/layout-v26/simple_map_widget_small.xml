@@ -22,18 +22,18 @@
 			android:layout_marginEnd="@dimen/content_padding_small"
 			osmand:srcCompat="@drawable/ic_action_remove_dark" />
 
-		<TextView
+		<net.osmand.plus.widgets.AutoScaleTextView
 			android:id="@+id/widget_text"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
-			android:autoSizeMaxTextSize="@dimen/simple_widget_value_small_size"
-			android:autoSizeMinTextSize="@dimen/simple_widget_value_minimum_size"
-			android:autoSizeStepGranularity="2sp"
-			android:autoSizeTextType="uniform"
+			android:layout_gravity="center_vertical|start"
 			android:gravity="center_vertical|start"
+			android:includeFontPadding="false"
+			android:lines="1"
 			android:maxLines="1"
 			android:textColor="@color/text_color_primary_light"
-			android:textSize="@dimen/simple_widget_value_small_size"
+			osmand:maxTextSize="@dimen/simple_widget_value_small_size"
+			osmand:minTextSize="@dimen/simple_widget_value_minimum_size"
 			tools:text="155" />
 
 		<LinearLayout
