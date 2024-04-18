@@ -3,8 +3,8 @@ task printc {
 }
 
 android {
-	compileSdk 33
-	buildToolsVersion = "33.0.2"
+	compileSdk 34
+	buildToolsVersion = "34.0.0"
 	// compileNdkVersion "android-ndk-r17b"
 
 	defaultConfig {
@@ -343,6 +343,7 @@ dependencies {
 	implementation 'com.google.android.material:material:1.9.0'
 	implementation 'androidx.browser:browser:1.0.0'
 	implementation 'androidx.preference:preference:1.1.0'
+	implementation 'androidx.lifecycle:lifecycle-process:2.7.0'
 	implementation fileTree(include: ['gnu-trove-osmand.jar', 'icu4j-49_1_patched.jar'], dir: 'libs')
 
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
