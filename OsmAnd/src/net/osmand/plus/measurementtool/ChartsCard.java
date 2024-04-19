@@ -292,8 +292,8 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 			showButton(buttonText, v -> fragment.stopCalculatingHeightMapTask(true), true);
 		} else if (visibleType.canBeCalculated() && !visibleType.hasData()) {
 			String title = app.getString(R.string.no_altitude_data);
-			String desc = app.getString(R.string.no_altitude_data_desc, visibleType.getTitle());
-			showMessage(title, desc, R.drawable.ic_action_altitude_average, 0);
+			String desc = app.getString(R.string.retrieve_elevation_data_summary);
+			showMessage(title, desc, R.drawable.ic_action_desert, 0);
 			showCalculateAltitudeButton(true);
 		} else if (visibleType.hasData()) {
 			showGraph();
@@ -304,7 +304,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 	}
 
 	private void showCalculateAltitudeButton(boolean addStartPadding) {
-		showButton(app.getString(R.string.calculate_altitude), v -> fragment.getAltitudeClick(), addStartPadding);
+		showButton(app.getString(R.string.get_altitude_data), v -> fragment.getAltitudeClick(), addStartPadding);
 	}
 
 	private void showMessage(@Nullable String title,
@@ -342,7 +342,7 @@ public class ChartsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 		View buttonDivider = buttonContainer.findViewById(R.id.button_divider);
 		MarginLayoutParams layoutParams = (MarginLayoutParams) buttonDivider.getLayoutParams();
-		layoutParams.setMarginStart(addStartPadding ? getDimen(R.dimen.content_padding) : 0);
+		layoutParams.setMarginStart(addStartPadding ? getDimen(R.dimen.list_content_padding_large) : 0);
 		buttonDivider.setLayoutParams(layoutParams);
 
 		TextView title = buttonContainer.findViewById(R.id.btn_text);
