@@ -216,6 +216,7 @@ public class OsmandApplication extends MultiDexApplication {
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 	private boolean appInForeground;
+	private boolean androidAutoInForeground;
 	// Typeface
 
 	@Override
@@ -303,7 +304,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean isAppInForeground() {
-		return appInForeground;
+		return appInForeground || androidAutoInForeground;
 	}
 
 	private void createInUiThread() {
@@ -665,7 +666,9 @@ public class OsmandApplication extends MultiDexApplication {
 			if (navigationService != null) {
 				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
 			}
+			androidAutoInForeground = false;
 		} else {
+			androidAutoInForeground = true;
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
 		this.carNavigationSession = carNavigationSession;
