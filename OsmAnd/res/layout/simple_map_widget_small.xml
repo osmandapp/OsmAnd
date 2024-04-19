@@ -37,6 +37,7 @@
 			osmand:layout_constraintBottom_toBottomOf="parent"
 			osmand:layout_constraintEnd_toEndOf="parent"
 			osmand:layout_constraintStart_toStartOf="parent"
+			android:includeFontPadding="false"
 			osmand:layout_constraintTop_toTopOf="parent"
 			tools:text="Value" />
 
@@ -60,6 +61,7 @@
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
+				android:includeFontPadding="false"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
@@ -73,6 +75,7 @@
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
+				android:includeFontPadding="false"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"

@@ -6,63 +6,57 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/simple_widget_large_height"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:paddingHorizontal="16dp"
+	android:paddingTop="6dp"
+	android:paddingBottom="3dp">
 
 	<LinearLayout
 		android:id="@+id/container"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="vertical"
-		android:paddingHorizontal="16dp"
-		android:paddingVertical="10dp">
+		android:orientation="vertical">
 
-		<androidx.constraintlayout.widget.ConstraintLayout
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-
-			<TextView
-				android:id="@+id/widget_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginEnd="8dp"
-				android:ellipsize="end"
-				android:letterSpacing="0.06"
-				android:lineSpacingExtra="-2sp"
-				android:maxLines="1"
-				android:textAllCaps="true"
-				android:textColor="@color/text_color_secondary_light"
-				android:textSize="@dimen/simple_widget_description_text_size"
-
-				osmand:layout_constrainedWidth="true"
-				osmand:layout_constraintBottom_toBottomOf="parent"
-				osmand:layout_constraintEnd_toStartOf="@+id/widget_text_small"
-				osmand:layout_constraintHorizontal_bias="0.0"
-				osmand:layout_constraintHorizontal_chainStyle="packed"
-				osmand:layout_constraintStart_toStartOf="parent"
-				osmand:layout_constraintTop_toTopOf="parent"
-				tools:text="Widget name" />
+			android:layout_height="17dp"
+			android:layoutDirection="rtl"
+			android:orientation="horizontal">
 
 			<androidx.appcompat.widget.AppCompatTextView
 				android:id="@+id/widget_text_small"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="end|bottom"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
-
-				osmand:layout_constraintBottom_toBottomOf="parent"
-				osmand:layout_constraintEnd_toEndOf="parent"
-				osmand:layout_constraintTop_toTopOf="parent"
 				tools:text="Unit" />
 
-		</androidx.constraintlayout.widget.ConstraintLayout>
+			<TextView
+				android:id="@+id/widget_name"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_marginEnd="8dp"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:gravity="start|bottom"
+				android:letterSpacing="0.06"
+				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
+				android:textAllCaps="true"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="@dimen/simple_widget_description_text_size"
+				tools:text="Widget name" />
+
+		</LinearLayout>
 
 		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="70dp">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/widget_icon"
@@ -79,6 +73,7 @@
 				android:layout_gravity="center"
 				android:layout_marginHorizontal="36dp"
 				android:gravity="center"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
