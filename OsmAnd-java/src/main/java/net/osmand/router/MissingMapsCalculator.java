@@ -58,8 +58,7 @@ public class MissingMapsCalculator {
 		or = osmandRegions;
 	}
 
-	public boolean checkIfThereAreMissingMaps(List<LatLon> targets) throws IOException {
-		boolean oldRouting = true; // store and retrieve it from the settings
+	public boolean checkIfThereAreMissingMaps(List<LatLon> targets, boolean oldRouting) throws IOException {
 		return checkIfThereAreMissingMaps(ctx, startPoint, targets, !oldRouting);
 	}
 

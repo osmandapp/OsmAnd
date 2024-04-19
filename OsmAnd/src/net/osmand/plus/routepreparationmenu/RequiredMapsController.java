@@ -27,6 +27,7 @@ import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.MissingMapsCalculator;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.util.Algorithms;
@@ -133,12 +134,9 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 				LatLon startPoint = missingMapsCalculator.getStartPoint();
 				LatLon endPoint = missingMapsCalculator.getEndPoint();
 				onlineCalculateRequestStartPoint(startPoint, endPoint, locations -> {
-					List<LatLon> latLonList = new ArrayList<>();
-					for (Location location : locations) {
-						latLonList.add(new LatLon(location.getLatitude(), location.getLongitude()));
-					}
 					try {
-						missingMapsCalculator.checkIfThereAreMissingMaps(latLonList);
+						RoutingType routingType = app.getSettings().ROUTING_TYPE.get();
+						missingMapsCalculator.checkIfThereAreMissingMaps(convertLocationsToLatLon(locations), !routingType.isHHRouting());
 						loadingMapsInProgress = false;
 						updateSelectionHelper();
 						askRefreshDialog();
@@ -199,6 +197,15 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 			wpt.lon = coordinate.getDouble(0);
 			locations.add(RouteProvider.createLocation(wpt));
 		}
+	}
+
+	@NonNull
+	private List<LatLon> convertLocationsToLatLon(@NonNull List<Location> locations) {
+		List<LatLon> result = new ArrayList<>();
+		for (Location location : locations) {
+			result.add(new LatLon(location.getLatitude(), location.getLongitude()));
+		}
+		return result;
 	}
 
 	private void onErrorReceived(@Nullable String error) {
