@@ -5688,4 +5688,8 @@
     <string name="change_default_tracks_appearance_confirmation">Aplicar alterações às faixas existentes na pasta ou apenas nas novas?</string>
     <string name="apply_only_to_new">Aplicar apenas a novas</string>
     <string name="release_4_8">• A ser preparado para 4.8</string>
+    <string name="shared_string_scale">Escala</string>
+    <string name="relief_3d_download_description">Mapas adicionais são necessários para visualizar Terrain no mapa.</string>
+    <string name="vertical_exaggeration_description">Ao alterar o valor da escala, pode realçar o relevo 3D.</string>
+    <string name="vertical_exaggeration">Exagero vertical</string>
 </resources>

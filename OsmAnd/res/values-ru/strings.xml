@@ -5626,7 +5626,7 @@
     <string name="shared_string_copyright">Авторское право</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Открыть WunderLINQ Datagrid</string>
     <string name="shared_string_not_checked">Не проверено</string>
-    <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению планирования для текущего полета.</string>
+    <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению для текущего полета.</string>
     <string name="special_routing_cpp">Специальный тип маршрутизации</string>
     <string name="auto_zoom_discrete">Дискретное</string>
     <string name="auto_zoom">Автомасштабирование</string>
@@ -5688,5 +5688,7 @@
     <string name="gpx_approximation_geo_java">На основе геометрии (Java, быстрая)</string>
     <string name="gpx_approximation_cpp">На основе маршрутизации (C++)</string>
     <string name="gpx_approximation_java">На основе маршрутизации (Java)</string>
-    <string name="release_4_8">• А ты рисковый парень, ночнушку не боишься использовать, не забывай делать бэкап и да пребудет с тобой сила в ожидании описания версии 4.8</string>
+    <string name="release_4_8">• To be prepared for 4.8</string>
+    <string name="any_connected">Любой подключенный</string>
+    <string name="any_connected_with_device">Любой подключенный: %s</string>
 </resources>

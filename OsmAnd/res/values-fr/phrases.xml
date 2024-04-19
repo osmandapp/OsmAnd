@@ -4761,4 +4761,11 @@
     <string name="poi_us_maps_recreation_area_activity_mountain_biking">VTT</string>
     <string name="poi_us_maps_recreation_area_activity_hunting">Chasse</string>
     <string name="poi_us_maps_recreation_area_activity_other_activities">Autre activités</string>
+    <string name="poi_padus_local_manager">Responsable local</string>
+    <string name="poi_padus_manager_type_fullname">Type de gestionnaire</string>
+    <string name="poi_padus_manager_fullname">Gestionnaire</string>
+    <string name="poi_padus_category_designation">Catégorie : désignation</string>
+    <string name="poi_padus_local_designation">Désignation locale</string>
+    <string name="poi_via">Via</string>
+    <string name="poi_padus_category_proclamation">Catégorie : proclamation</string>
 </resources>

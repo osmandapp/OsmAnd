@@ -5673,4 +5673,8 @@
     <string name="shared_string_changes">變更</string>
     <string name="apply_only_to_new">僅套用到新的</string>
     <string name="release_4_8">• 為 4.8 準備</string>
+    <string name="shared_string_scale">比例尺</string>
+    <string name="vertical_exaggeration">垂直誇大</string>
+    <string name="relief_3d_download_description">需要額外的地圖才能在地圖上檢視地形。</string>
+    <string name="vertical_exaggeration_description">透過變更比例尺的值，您可以強調 3D 地形。</string>
 </resources>
