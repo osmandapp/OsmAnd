@@ -267,12 +267,11 @@ public class GeneralRouter implements VehicleRouter {
 	public List<String> serializeParameterValues(Map<String, String> vls) {
 		List<String> ls = new ArrayList<String>();
 		for (Entry<String, String> e : vls.entrySet()) {
-			if (parameters.containsKey(e.getKey())) {
-				if (parameters.get(e.getKey()).type == RoutingParameterType.BOOLEAN) {
-					ls.add(e.getKey());
-				} else {
-					ls.add(e.getKey() + "=" + e.getValue());
-				}
+			String val = e.getValue();
+			if (val.isEmpty() || "true".equals(val) || "false".equals(val)) {
+				ls.add(e.getKey());
+			} else {
+				ls.add(e.getKey() + "=" + val);
 			}
 		}
 		return ls;
