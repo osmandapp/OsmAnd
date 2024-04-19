@@ -82,7 +82,7 @@ public abstract class AbstractPoiType {
 	}
 
 	public String getEnTranslation() {
-		if(enTranslation == null) {
+		if (enTranslation == null) {
 			enTranslation = registry.getEnTranslation(this);
 		}
 		return enTranslation;
