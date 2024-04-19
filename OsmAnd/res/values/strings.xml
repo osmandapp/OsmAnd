@@ -13,6 +13,11 @@
     <string name="release_4_8">
         • To be prepared for 4.8
     </string>
+    <string name="use_terrain_maps_summary">Uses terrain maps for elevation data. Track geometry stays unchanged.</string>
+    <string name="use_terrain_maps">Use Terrain maps</string>
+    <string name="use_nearby_roads_summary">Uses offline map to find nearby roads &amp; elevation data. May adjust track geometry.</string>
+    <string name="use_nearby_roads">Use neary roads</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd can retrieve elevation data from nearby roads or terrain maps.</string>
     <string name="shared_string_scale">Scale</string>
     <string name="relief_3d_download_description">Additional maps are needed to view Terrain on the map.</string>
     <string name="vertical_exaggeration_description">By changing the scale value, you can emphasise the 3D relief.</string>
