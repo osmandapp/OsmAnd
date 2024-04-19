@@ -203,7 +203,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		GpxData gpxData = editingCtx.getGpxData();
 		if (gpxData != null && gpxData.getGpxFile() != null && !editingCtx.hasElevationData()) {
 			BaseBottomSheetItem gpsFilter = new Builder()
-					.setTitle(getString(R.string.get_altitude_information))
+					.setIcon(getContentIcon(R.drawable.ic_action_terrain))
+					.setTitle(getString(R.string.get_altitude_data))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(v -> {
 						Fragment fragment = getTargetFragment();
