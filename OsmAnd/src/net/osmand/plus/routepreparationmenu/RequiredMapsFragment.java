@@ -25,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.map.OsmandRegions;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
@@ -171,7 +172,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		icon.setImageResource(downloaded ? R.drawable.ic_action_map_update : R.drawable.ic_action_map_download);
 
 		TextView tvTitle = view.findViewById(R.id.title);
-		tvTitle.setText(downloadItem.getVisibleName(app, app.getRegions(), true, true));
+		tvTitle.setText(getMapTitle(downloadItem));
 
 		TextView tvDescription = view.findViewById(R.id.description);
 		String pattern = getString(R.string.ltr_or_rtl_combine_via_bold_point);
@@ -199,7 +200,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 	private void updateUsedMapsSummary() {
 		List<String> regionNames = new ArrayList<>();
 		for (DownloadItem downloadItem : controller.getUsedMaps()) {
-			String regionName = downloadItem.getVisibleName(app, app.getRegions(), true, true);
+			String regionName = "\"" + getMapTitle(downloadItem) + "\"";
 			regionNames.add(regionName);
 		}
 		if (Algorithms.isEmpty(regionNames)) {
@@ -255,6 +256,13 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 	private void setupSelectableBackground(@NonNull View view) {
 		int activeColor = getActiveColor(app, nightMode);
 		UiUtilities.setupListItemBackground(app, view, activeColor);
+	}
+
+	@NonNull
+	private String getMapTitle(@NonNull DownloadItem downloadItem) {
+		OsmandRegions regions = app.getRegions();
+		String basename = downloadItem.getBasename();
+		return regions.getLocaleName(basename, true, true);
 	}
 
 	public int getThemeId() {
