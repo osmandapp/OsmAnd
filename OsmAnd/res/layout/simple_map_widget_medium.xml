@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:minHeight="@dimen/simple_widget_medium_height"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:paddingHorizontal="16dp"
+	android:paddingTop="6dp"
+	android:paddingBottom="3dp">
 
 	<LinearLayout
 		android:id="@+id/container"
@@ -17,53 +20,48 @@
 		android:paddingHorizontal="16dp"
 		android:paddingVertical="10dp">
 
-		<androidx.constraintlayout.widget.ConstraintLayout
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content">
-
-			<TextView
-				android:id="@+id/widget_name"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:ellipsize="end"
-				android:letterSpacing="0.06"
-				android:lineSpacingExtra="-2sp"
-				android:maxLines="1"
-				android:textAllCaps="true"
-				android:textColor="@color/text_color_secondary_light"
-				android:textSize="@dimen/simple_widget_description_text_size"
-				android:layout_marginEnd="8dp"
-
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toStartOf="@+id/widget_text_small"
-				app:layout_constraintHorizontal_bias="0.0"
-				app:layout_constraintHorizontal_chainStyle="packed"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
-				app:layout_constrainedWidth="true"
-				tools:text="Widget name" />
+			android:layout_height="17dp"
+			android:layoutDirection="rtl"
+			android:orientation="horizontal">
 
 			<TextView
 				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:gravity="bottom|end"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
 				android:textAllCaps="true"
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
-
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintTop_toTopOf="parent"
 				tools:text="Unit" />
 
-		</androidx.constraintlayout.widget.ConstraintLayout>
+			<TextView
+				android:id="@+id/widget_name"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_marginEnd="3dp"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:gravity="bottom|start"
+				android:includeFontPadding="false"
+				android:letterSpacing="0.06"
+				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
+				android:textAllCaps="true"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="@dimen/simple_widget_description_text_size"
+				tools:text="Widget name" />
+
+		</LinearLayout>
 
 		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="46dp">
 
 			<androidx.appcompat.widget.AppCompatImageView
 				android:id="@+id/widget_icon"
@@ -78,8 +76,9 @@
 				android:layout_width="wrap_content"
 				android:layout_height="match_parent"
 				android:layout_gravity="center"
-				android:gravity="center"
 				android:layout_marginHorizontal="36dp"
+				android:gravity="center"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
 				android:textColor="@color/text_color_primary_light"
