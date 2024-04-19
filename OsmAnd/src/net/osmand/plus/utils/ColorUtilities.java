@@ -355,6 +355,11 @@ public class ColorUtilities {
 		return nightMode ? R.color.app_bar_active_dark : R.color.app_bar_active_light;
 	}
 
+	@ColorInt
+	public static int getStatusBarColor(@NonNull Context context, boolean nightMode) {
+		return getColor(context, getStatusBarColorId(nightMode));
+	}
+
 	@ColorRes
 	public static int getStatusBarColorId(boolean nightMode) {
 		return nightMode ? R.color.status_bar_main_dark : R.color.status_bar_main_light;

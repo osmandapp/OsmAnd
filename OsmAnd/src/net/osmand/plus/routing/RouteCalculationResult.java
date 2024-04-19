@@ -60,6 +60,8 @@ public class RouteCalculationResult {
 	protected List<LocationPoint> locationPoints = new ArrayList<>();
 
 	protected List<WorldRegion> missingMaps;
+	protected List<WorldRegion> mapsToUpdate;
+	protected List<WorldRegion> usedMaps;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -204,8 +206,16 @@ public class RouteCalculationResult {
 		return missingMaps;
 	}
 
+	public List<WorldRegion> getMapsToUpdate() {
+		return mapsToUpdate;
+	}
+
+	public List<WorldRegion> getUsedMaps() {
+		return usedMaps;
+	}
+
 	public boolean hasMissingMaps() {
-		return !Algorithms.isEmpty(missingMaps);
+		return !Algorithms.isEmpty(missingMaps) || !Algorithms.isEmpty(mapsToUpdate);
 	}
 
 	public boolean isInitialCalculation() {
