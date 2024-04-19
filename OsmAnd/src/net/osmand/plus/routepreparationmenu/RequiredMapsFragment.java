@@ -181,7 +181,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 			size += " " + addDesc;
 		}
 		DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(app);
-		String date = downloadItem.getDate(dateFormat, false);
+		String date = downloadItem.getDate(dateFormat, true);
 		String fullDescription = String.format(pattern, size, date);
 		tvDescription.setText(fullDescription);
 
