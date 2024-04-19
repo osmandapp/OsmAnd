@@ -94,9 +94,9 @@ public class GeneralRouter implements VehicleRouter {
 	
 	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;
 
-  // "parameters" and "parameterValues" that using in HH isn't parse in JNI
-	public String[] hhNativeFilter = new String[0];
-	private final GeneralRouter root; 
+	public String[] hhNativeFilter = new String[0]; // getFilteredTags() as flat Array (JNI)
+	public String[] hhNativeParameterValues = new String[0]; // parameterValues as flat Array (JNI)
+	private final GeneralRouter root;
 		
 	
 	public enum RouteDataObjectAttribute {
