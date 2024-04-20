@@ -5695,4 +5695,17 @@
     <string name="fix_north_up_descr">El mapa no rota al usar gestos, en la orientación «Norte arriba»</string>
     <string name="change_default_appearance_confirmation">¿Cambiar el aspecto predefinido de %1$s?</string>
     <string name="use_3d_track_visualization">Vista 3D</string>
+    <string name="shared_string_scale">Escala</string>
+    <string name="vertical_exaggeration">Exageración vertical</string>
+    <string name="relief_3d_download_description">Se necesitan mapas adicionales para ver el «Terreno» en el mapa.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd puede recuperar los datos de elevación de caminos cercanos o mapas del terreno.</string>
+    <string name="vertical_exaggeration_description">Al cambiar el valor de la escala, puede enfatizar el relieve en 3D.</string>
+    <string name="apply_only_to_new">Aplicar sólo para nuevos</string>
+    <string name="shared_string_changes">Cambios</string>
+    <string name="use_terrain_maps_summary">Usa mapas del terreno para los datos de elevación. La geometría de la traza se mantiene sin cambios.</string>
+    <string name="use_terrain_maps">Usar mapas del terreno</string>
+    <string name="use_nearby_roads_summary">Usa el mapa sin conexión para encontrar caminos cercanos y datos de elevación. La geometría de la traza puede ajustarse.</string>
+    <string name="use_nearby_roads">Usar caminos cercanos</string>
+    <string name="release_4_8">• Prepárate para la versión 4.8</string>
+    <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
 </resources>
