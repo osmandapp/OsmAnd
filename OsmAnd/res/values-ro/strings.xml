@@ -5686,4 +5686,5 @@
 \n • Autentificarea OpenStreetMap a trecut la OAuth 2.0
 \n
 \n</string>
+    <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
 </resources>
