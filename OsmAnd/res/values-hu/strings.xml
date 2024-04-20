@@ -5685,4 +5685,9 @@
     <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
     <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
     <string name="vertical_exaggeration">Függőleges eltúlzás</string>
+    <string name="use_nearby_roads_summary">Offline térképet használ a közeli utak és magassági adatok megkereséséhez. Módosíthatja a nyomvonal geometriáját.</string>
+    <string name="use_nearby_roads">Közeli utak használata</string>
+    <string name="retrieve_elevation_data_summary">Az OsmAnd le tudja kérni a magassági adatokat a közeli utakról vagy domborzati térképekről.</string>
+    <string name="use_terrain_maps">Domborzati térkép használata</string>
+    <string name="use_terrain_maps_summary">Domborzati térkép használata a magassági adatokhoz. A nyomvonal geometriája változatlan marad.</string>
 </resources>
