@@ -5692,4 +5692,9 @@
     <string name="relief_3d_download_description">Yderligere kort er nødvendige for at se terræn på kortet.</string>
     <string name="vertical_exaggeration_description">Ved at ændre skalaværdien kan du fremhæve 3D-relieffet.</string>
     <string name="vertical_exaggeration">Vertikal overdrivelse</string>
+    <string name="use_terrain_maps">Brug terrænkort</string>
+    <string name="use_nearby_roads_summary">Bruger offline-kort til at finde veje og højdedata i nærheden. Justerer muligvis sporets geometri.</string>
+    <string name="use_nearby_roads">Brug veje i nærheden</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd kan hente højdedata fra nærliggende veje eller terrænkort.</string>
+    <string name="use_terrain_maps_summary">Bruger terrænkort til højdedata. Sporgeometrien forbliver uændret.</string>
 </resources>
