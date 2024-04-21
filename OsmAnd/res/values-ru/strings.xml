@@ -5691,4 +5691,9 @@
     <string name="release_4_8">• To be prepared for 4.8</string>
     <string name="any_connected">Любой подключенный</string>
     <string name="any_connected_with_device">Любой подключенный: %s</string>
+    <string name="use_nearby_roads">Использовать ближайшие дороги</string>
+    <string name="use_terrain_maps">Использовать карты рельефа для получения данных о высоте. Геометрия трека останется неизменной.</string>
+    <string name="use_nearby_roads_summary">"Для данных о высоте используется поиск близлежащих дорог локальной карты.  Возможна корректировка геометрии трека."</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd может получить данные о высоте из данных близлежащих дорог или карт рельефа.</string>
+    <string name="use_terrain_maps_summary">Для данных о высоте используются карты рельефа. Геометрия трека останется неизменной.</string>
 </resources>
