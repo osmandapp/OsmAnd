@@ -5688,4 +5688,9 @@
     <string name="vertical_exaggeration_description">Cambiando el valor de la escala, puedes acentuar el relieve 3D.</string>
     <string name="vertical_exaggeration">Ampliación vertical</string>
     <string name="relief_3d_download_description">Se necesitan mapas adicionales para ver el terreno en el mapa.</string>
+    <string name="use_terrain_maps_summary">Utiliza mapas de terreno para datos de elevación. La geometría de la pista permanece sin cambios.</string>
+    <string name="use_terrain_maps">Usar mapas del terreno</string>
+    <string name="use_nearby_roads">Utilice caminos cercanos</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd puede recuperar datos de elevación de carreteras cercanas o mapas del terreno.</string>
+    <string name="use_nearby_roads_summary">Utiliza un mapa sin conexión para encontrar carreteras cercanas y datos de elevación. Puede ajustar la geometría de la pista.</string>
 </resources>

@@ -5669,7 +5669,14 @@
     <string name="apply_only_to_new">Appliquer seulement aux nouvelles</string>
     <string name="change_default_tracks_appearance_confirmation">Appliquer les modifications aux traces présentes dans le dossier ou seulement aux nouvelles traces ?</string>
     <string name="gpx_approximation_java">Basé sur le routage (Java)</string>
-    <string name="release_4_8">• Pour être préparé pour la 4.8</string>
+    <string name="release_4_8">• A préparer pour la version 4.8</string>
     <string name="gpx_approximation_cpp">Basé sur le routage (C++)</string>
     <string name="gpx_approximation_geo_java">Basé sur la géométrie (Java, rapide)</string>
+    <string name="shared_string_scale">Échelle</string>
+    <string name="vertical_exaggeration_description">En modifiant la valeur de l\'échelle, vous pouvez accentuer le relief 3D.</string>
+    <string name="relief_3d_download_description">Des cartes supplémentaires sont nécessaires pour visualiser le relief sur la carte.</string>
+    <string name="vertical_exaggeration">Accentuation verticale</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd peut obtenir les données d\'altitude à partir des routes voisines ou des cartes de terrain.</string>
+    <string name="use_terrain_maps">Utiliser les cartes de relief</string>
+    <string name="use_nearby_roads">Utiliser les routes à proximité</string>
 </resources>

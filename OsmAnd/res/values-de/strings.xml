@@ -5691,4 +5691,9 @@
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Terrain auf der Karte anzuzeigen.</string>
     <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts kannst du das 3D- Profil hervorheben.</string>
     <string name="shared_string_scale">Maßstab</string>
+    <string name="use_terrain_maps">Terrain Karten verwenden</string>
+    <string name="use_nearby_roads">Nächstgelegene Straße verwenden</string>
+    <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Spurgeometrie bleibt unverändert.</string>
+    <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um in der Nähe Straßen und Höhendaten zu finden. Kann Weggeometrie anpassen.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd kann Höhendaten von nahe gelegenen Straßen oder Geländekarten abrufen.</string>
 </resources>

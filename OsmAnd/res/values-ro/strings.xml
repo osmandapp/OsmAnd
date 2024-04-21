@@ -5660,7 +5660,7 @@
     <string name="change_default_tracks_appearance_confirmation">Aplicați modificările la piesele existente în dosar sau numai la cele noi?</string>
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">- De pregătit pentru 4.8</string>
-    <string name="precise">Precizie</string>
+    <string name="precise">Precis</string>
     <string name="round_up">Rotunjire în sus</string>
     <string name="upload_local_versions">Încărcați versiuni locale</string>
     <string name="change_default_appearance_confirmation">Schimbați aspectul implicit al lui %1$s?</string>
@@ -5686,4 +5686,5 @@
 \n • Autentificarea OpenStreetMap a trecut la OAuth 2.0
 \n
 \n</string>
+    <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
 </resources>
