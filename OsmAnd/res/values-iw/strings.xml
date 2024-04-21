@@ -5023,4 +5023,6 @@
     <string name="unchanged_parameter_summary">כל מסלול ישמור על המשתנים של עצמו.</string>
     <string name="shared_string_unchanged">ללא שינוי</string>
     <string name="map_widget_map_scale">קנה מידה של מפה</string>
+    <string name="custom_buttons">כפתורים מותאמים אישית</string>
+    <string name="default_buttons">כפתורי ברירת מחדל</string>
 </resources>
