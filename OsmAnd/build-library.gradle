@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android'
 android {
 
 	defaultConfig {
-		minSdkVersion 21
+		minSdkVersion 24
 	}
 
 	lintOptions {

@@ -16,7 +16,6 @@ import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 
-import net.osmand.Period;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
@@ -166,10 +165,16 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 								productDetailsList.addAll(productDetailsListSubs);
 								InAppPurchaseHelperImpl.this.productDetailsList = productDetailsList;
 								getProductDetailsResponseListener(runnable.userRequested()).onProductDetailsResponse(billingResult, productDetailsList);
+								processIncompletePurchases(purchases);
 							}
 						});
 					});
+				} else {
+					processIncompletePurchases(purchases);
 				}
+			}
+
+			private void processIncompletePurchases(List<Purchase> purchases) {
 				for (Purchase purchase : purchases) {
 					List<String> skus = purchase.getSkus();
 					if (!Algorithms.isEmpty(skus)) {

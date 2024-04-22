@@ -82,10 +82,12 @@ public class SpeedometerWidget {
 	private final static int SPEED_LIMIT_SIZE_M = 72;
 	private final static int SPEED_LIMIT_SIZE_L = 94;
 
-	private final static int SPEEDOMETER_PADDING_SIDE = 9;
-	private final static int SPEEDOMETER_PADDING_TOP_BOTTOM_S = 9;
-	private final static int SPEEDOMETER_PADDING_TOP_BOTTOM_M = 12;
-	private final static int SPEEDOMETER_PADDING_TOP_BOTTOM_L = 12;
+	private final static int SPEEDOMETER_PADDING_SIDE_S = 9;
+	private final static int SPEEDOMETER_PADDING_SIDE_ML = 12;
+	private final static int SPEEDOMETER_PADDING_TOP = 3;
+	private final static int SPEEDOMETER_PADDING_BOTTOM_S = 6;
+	private final static int SPEEDOMETER_PADDING_BOTTOM_M = 9;
+	private final static int SPEEDOMETER_PADDING_BOTTOM_L = 12;
 	private final static int SPEEDOMETER_PADDING_SIDE_AA = 12;
 	private final static int SPEEDOMETER_PADDING_TOP_BOTTOM_AA = 9;
 	private final static int US_SPEED_LIMIT_BOTTOM = 18;
@@ -165,7 +167,7 @@ public class SpeedometerWidget {
 				speedometerLayoutParams.height = dpToPx(SPEEDOMETER_HEIGHT_M);
 				speedometerLayoutParams.width = dpToPx(SPEEDOMETER_WIDTH_M);
 				speedometerContainer.setLayoutParams(speedometerLayoutParams);
-				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE), SPEEDOMETER_PADDING_TOP_BOTTOM_M, dpToPx(SPEEDOMETER_PADDING_SIDE), SPEEDOMETER_PADDING_TOP_BOTTOM_M);
+				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE_ML), dpToPx(SPEEDOMETER_PADDING_TOP), dpToPx(SPEEDOMETER_PADDING_SIDE_ML), dpToPx(SPEEDOMETER_PADDING_BOTTOM_M));
 				speedometerValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEEDOMETER_TEXT_SIZE_M);
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_M);
@@ -178,7 +180,7 @@ public class SpeedometerWidget {
 				speedometerLayoutParams.height = dpToPx(SPEEDOMETER_HEIGHT_L);
 				speedometerLayoutParams.width = dpToPx(SPEEDOMETER_WIDTH_L);
 				speedometerContainer.setLayoutParams(speedometerLayoutParams);
-				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE), dpToPx(SPEEDOMETER_PADDING_TOP_BOTTOM_L), dpToPx(SPEEDOMETER_PADDING_SIDE), dpToPx(SPEEDOMETER_PADDING_TOP_BOTTOM_L));
+				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE_ML), dpToPx(SPEEDOMETER_PADDING_TOP), dpToPx(SPEEDOMETER_PADDING_SIDE_ML), dpToPx(SPEEDOMETER_PADDING_BOTTOM_L));
 				speedometerValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEEDOMETER_TEXT_SIZE_L);
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_L);
@@ -191,7 +193,7 @@ public class SpeedometerWidget {
 				speedometerLayoutParams.height = dpToPx(SPEEDOMETER_HEIGHT_S);
 				speedometerLayoutParams.width = dpToPx(SPEEDOMETER_WIDTH_S);
 				speedometerContainer.setLayoutParams(speedometerLayoutParams);
-				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE), dpToPx(SPEEDOMETER_PADDING_TOP_BOTTOM_S), dpToPx(SPEEDOMETER_PADDING_SIDE), dpToPx(SPEEDOMETER_PADDING_TOP_BOTTOM_S));
+				speedometerContainer.setPadding(dpToPx(SPEEDOMETER_PADDING_SIDE_S), dpToPx(SPEEDOMETER_PADDING_TOP), dpToPx(SPEEDOMETER_PADDING_SIDE_S), dpToPx(SPEEDOMETER_PADDING_BOTTOM_S));
 				speedometerValueView.setTextSize(TypedValue.COMPLEX_UNIT_SP, SPEEDOMETER_TEXT_SIZE_S);
 
 				speedLimitLayoutParams.height = dpToPx(SPEED_LIMIT_SIZE_S);
@@ -280,7 +282,7 @@ public class SpeedometerWidget {
 			setSpeedTextColor(getSpeedTextColor(speedExceed));
 			if (drawBitmap) {
 				if (isChanged) {
-					float density = (drawSettings == null || drawSettings.getDensity() == 0) ? 1 : drawSettings.getDensity();
+					float density = (drawSettings == null || drawSettings.getDensity() == 0) ? 1 : drawSettings.getDensity() * 0.77f;
 					Paint paint = new Paint();
 					paint.setMaskFilter(new BlurMaskFilter(40, BlurMaskFilter.Blur.NORMAL));
 					int shadowColor = Color.BLACK;
