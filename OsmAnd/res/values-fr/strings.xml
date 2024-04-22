@@ -5654,6 +5654,8 @@
 \n
 \n • Ajout de filtres par données de capteurs pour les traces
 \n
+\n • Amélioration de la personnalisation de l\'apparence pour les groupes de traces
+\n
 \n • Ajout du support pour d\'autres tags GPX
 \n
 \n • Personnalisation \"Distance durant la navigation\": choisir entre des nombres précis ou arrondis
@@ -5679,4 +5681,6 @@
     <string name="retrieve_elevation_data_summary">OsmAnd peut obtenir les données d\'altitude à partir des routes voisines ou des cartes de terrain.</string>
     <string name="use_terrain_maps">Utiliser les cartes de relief</string>
     <string name="use_nearby_roads">Utiliser les routes à proximité</string>
+    <string name="use_terrain_maps_summary">Utilise les cartes de relief pour les données d\'altitude. La géométrie de la trace demeure inchangée.</string>
+    <string name="use_nearby_roads_summary">Utilise les cartes hors-ligne pour trouver les routes à proximité et les données d\'altitude. Peut changer la géométrie de la trace.</string>
 </resources>
