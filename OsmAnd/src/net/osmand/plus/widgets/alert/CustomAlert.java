@@ -126,6 +126,12 @@ public class CustomAlert {
 			builder.setNegativeButton(data.getNegativeButtonTitleId(), data.getNegativeButtonListener());
 		}
 
+		if (data.getNeutralButtonTitle() != null) {
+			builder.setNeutralButton(data.getNeutralButtonTitle(), data.getNeutralButtonListener());
+		} else if (data.getNeutralButtonTitleId() != null) {
+			builder.setNeutralButton(data.getNeutralButtonTitleId(), data.getNeutralButtonListener());
+		}
+
 		if (data.getOnDismissListener() != null) {
 			builder.setOnDismissListener(data.getOnDismissListener());
 		}

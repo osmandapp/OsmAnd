@@ -135,12 +135,12 @@ public class MapButtonsHelper {
 
 	public void addQuickAction(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
 		buttonState.getQuickActions().add(action);
-		onDataChanged(buttonState);
+		onQuickActionsChanged(buttonState);
 	}
 
 	public void deleteQuickAction(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
 		buttonState.getQuickActions().remove(action);
-		onDataChanged(buttonState);
+		onQuickActionsChanged(buttonState);
 	}
 
 	public void updateQuickAction(@NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
@@ -149,14 +149,14 @@ public class MapButtonsHelper {
 		if (index >= 0) {
 			actions.set(index, action);
 		}
-		onDataChanged(buttonState);
+		onQuickActionsChanged(buttonState);
 	}
 
 	public void updateQuickActions(@NonNull QuickActionButtonState buttonState, @NonNull List<QuickAction> actions) {
 		List<QuickAction> quickActions = buttonState.getQuickActions();
 		quickActions.clear();
 		quickActions.addAll(actions);
-		onDataChanged(buttonState);
+		onQuickActionsChanged(buttonState);
 	}
 
 	public void setQuickActionFabState(@NonNull QuickActionButtonState buttonState, boolean enabled) {
@@ -164,8 +164,12 @@ public class MapButtonsHelper {
 		notifyUpdates();
 	}
 
-	private void onDataChanged(@NonNull QuickActionButtonState buttonState) {
+	private void onQuickActionsChanged(@NonNull QuickActionButtonState buttonState) {
 		buttonState.saveActions(gson);
+		notifyUpdates();
+	}
+
+	public void onButtonStateChanged(@NonNull QuickActionButtonState buttonState) {
 		notifyUpdates();
 	}
 
