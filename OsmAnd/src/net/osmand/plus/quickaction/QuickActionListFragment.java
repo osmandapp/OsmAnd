@@ -16,7 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,6 +53,13 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveC
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.AlertDialogExtra;
+import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -146,7 +155,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		View btnSelectAll = bottomPanel.findViewById(R.id.select_all);
 		View btnDelete = bottomPanel.findViewById(R.id.delete);
 
-		btnSelectAll.setOnClickListener(view1 -> {
+		btnSelectAll.setOnClickListener(v -> {
 			actionsToDelete.clear();
 			for (QuickAction action : adapter.getQuickActions()) {
 				actionsToDelete.add(action.id);
@@ -195,7 +204,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
 		updateToolbarTitle();
 		updateToolbarNavigationIcon();
-		updateToolbarActionButton();
+		updateToolbarActions();
 		updateToolbarSwitch(buttonState.isEnabled());
 	}
 
@@ -220,7 +229,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	}
 
 	private void updateListItems() {
-		updateToolbarActionButton();
+		updateToolbarActions();
 		List<ListItem> items = new ArrayList<>();
 		List<QuickAction> actions = buttonState.getQuickActions();
 		if (actions.size() > 0) {
@@ -282,19 +291,96 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		updateVisibility();
 	}
 
-	private void updateToolbarActionButton() {
-		View deleteIconContainer = toolbar.findViewById(R.id.action_button);
-		ImageView deletingModeIcon = toolbar.findViewById(R.id.action_button_icon);
-		int activeButtonsColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-		boolean hasActiveQuickActions = buttonState.getQuickActions().size() > 0;
-		int activeColor = ContextCompat.getColor(app, activeButtonsColorResId);
-		int deleteIconColor = hasActiveQuickActions ? activeColor :
-				ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
-		Drawable deleteIcon = getPaintedContentIcon(
-				R.drawable.ic_action_delete_dark, deleteIconColor);
-		deletingModeIcon.setImageDrawable(deleteIcon);
-		deleteIconContainer.setOnClickListener(view -> changeScreenType(SCREEN_TYPE_DELETE));
-		deleteIconContainer.setEnabled(hasActiveQuickActions);
+	private void updateToolbarActions() {
+		ViewGroup container = toolbar.findViewById(R.id.actions_container);
+		container.removeAllViews();
+
+		LayoutInflater inflater = UiUtilities.getInflater(toolbar.getContext(), nightMode);
+		createDeleteActionsButton(inflater, container);
+		createOptionsButton(inflater, container);
+	}
+
+	private void createDeleteActionsButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
+		boolean hasActions = buttonState.getQuickActions().size() > 0;
+		int activeColor = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
+		int color = hasActions ? activeColor : ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
+
+		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
+		button.setEnabled(hasActions);
+		button.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_delete_dark, color));
+		button.setOnClickListener(view -> changeScreenType(SCREEN_TYPE_DELETE));
+		container.addView(button);
+	}
+
+	private void createOptionsButton(@NonNull LayoutInflater inflater, @NonNull ViewGroup container) {
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+
+		ImageButton button = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
+		button.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, color));
+		button.setOnClickListener(this::showOptionsMenu);
+		button.setContentDescription(getString(R.string.shared_string_more_actions));
+		container.addView(button);
+	}
+
+	private void showOptionsMenu(@NonNull View view) {
+		List<PopUpMenuItem> items = new ArrayList<>();
+		Context context = view.getContext();
+
+		items.add(new PopUpMenuItem.Builder(context)
+				.setTitleId(R.string.shared_string_rename)
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
+				.setOnClickListener(v -> showRenameDialog()).create());
+
+		items.add(new PopUpMenuItem.Builder(context)
+				.showTopDivider(true)
+				.setTitleId(R.string.shared_string_delete)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.setOnClickListener(v -> showDeleteDialog()).create());
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = view;
+		displayData.menuItems = items;
+		displayData.nightMode = nightMode;
+		displayData.layoutId = R.layout.simple_popup_menu_item;
+		PopUpMenu.show(displayData);
+	}
+
+	private void showRenameDialog() {
+		FragmentActivity activity = requireActivity();
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode);
+		dialogData.setTitle(R.string.shared_string_rename);
+		dialogData.setNegativeButton(R.string.shared_string_cancel, null);
+		dialogData.setPositiveButton(R.string.shared_string_save, (dialog, which) -> {
+			Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
+			if (extra instanceof EditText) {
+				String name = ((EditText) extra).getText().toString().trim();
+				if (Algorithms.isBlank(name)) {
+					app.showToastMessage(R.string.empty_name);
+				} else if (!mapButtonsHelper.isActionButtonNameUnique(name)) {
+					app.showToastMessage(R.string.custom_map_button_name_present);
+				} else {
+					buttonState.setName(name);
+					mapButtonsHelper.onButtonStateChanged(buttonState);
+				}
+			}
+		});
+		String caption = getString(R.string.enter_new_name);
+		CustomAlert.showInput(dialogData, activity, buttonState.getName(), caption);
+	}
+
+	private void showDeleteDialog() {
+		FragmentActivity activity = requireActivity();
+		AlertDialogData data = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.delete_actions_button)
+				.setNeutralButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> {
+					mapButtonsHelper.removeQuickActionButtonState(buttonState);
+					activity.onBackPressed();
+				});
+
+		int color = ColorUtilities.getSecondaryTextColor(app, nightMode);
+		String message = getString(R.string.delete_actions_button_confirmation, buttonState.getName());
+		CustomAlert.showSimpleMessage(data, UiUtilities.createColorSpannable(message, color, message));
 	}
 
 	private void updateToolbarTitle() {
@@ -303,12 +389,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			if (screenType == SCREEN_TYPE_REORDER) {
 				tvTitle.setText(buttonState.getName());
 			} else if (screenType == SCREEN_TYPE_DELETE) {
-				int selectedCount = actionsToDelete.size();
-				String title = String.format(
-						getString(R.string.ltr_or_rtl_combine_via_colon),
-						getString(R.string.shared_string_selected),
-						selectedCount);
-				tvTitle.setText(title);
+				String count = String.valueOf(actionsToDelete.size());
+				String selected = getString(R.string.shared_string_selected);
+				tvTitle.setText(getString(R.string.ltr_or_rtl_combine_via_colon, selected, count));
 			}
 		}
 	}
@@ -382,6 +465,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	@Override
 	public void onActionsUpdated() {
 		updateListItems();
+		updateToolbarTitle();
 	}
 
 	@Override
@@ -392,7 +476,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 			if (screenType == SCREEN_TYPE_DELETE) {
 				changeScreenType(SCREEN_TYPE_REORDER);
 			} else if (screenType == SCREEN_TYPE_REORDER) {
-				updateToolbarActionButton();
+				updateToolbarActions();
 			}
 		}
 	}
