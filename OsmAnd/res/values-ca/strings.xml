@@ -4489,4 +4489,8 @@
     <string name="rendering_attr_padusHideBoundaries_name">Amaga la delimitació dels terrenys públics</string>
     <string name="rendering_attr_padusHideBoundaries_description">Amaga la delimitació dels terrenys públics però mostra les àrees</string>
     <string name="battery_optimization_banner_content">L\'optimització de la bateria que fa Android pot originar que les dades de les traces enregistrades no siguin complertes ni prou acurades.</string>
+    <string name="shared_string_scale">Escala</string>
+    <string name="use_terrain_maps">Utilitzar mapes de terreny</string>
+    <string name="use_nearby_roads">Utilitzar carreteres properes</string>
+    <string name="vertical_exaggeration">Accentuació vertical</string>
 </resources>
