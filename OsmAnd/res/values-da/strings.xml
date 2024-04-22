@@ -5697,4 +5697,7 @@
     <string name="use_nearby_roads">Brug veje i nærheden</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kan hente højdedata fra nærliggende veje eller terrænkort.</string>
     <string name="use_terrain_maps_summary">Bruger terrænkort til højdedata. Sporgeometrien forbliver uændret.</string>
+    <string name="delete_actions_button_confirmation">Er du sikker på, at du vil slette \"%1$s\" med alle tilføjede handlinger?</string>
+    <string name="delete_actions_button">Slet knap</string>
+    <string name="shared_string_osm_id">OSM ID</string>
 </resources>
