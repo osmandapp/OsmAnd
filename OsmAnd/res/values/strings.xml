@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_osm_id">OSM ID</string>
     <string name="shared_string_scale">Scale</string>
     <string name="relief_3d_download_description">Additional maps are needed to view Terrain on the map.</string>
     <string name="vertical_exaggeration_description">By changing the scale value, you can emphasise the 3D relief.</string>
