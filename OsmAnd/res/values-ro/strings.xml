@@ -2907,8 +2907,9 @@
     <string name="backup_into_file">Fă backup ca fișier</string>
     <string name="restore_from_file">Restaurează din fișier</string>
     <string name="osmand_cloud_help_descr">Aveți nevoie de ajutor\? Contactați-ne la %1$s</string>
-    <string name="osmand_cloud_create_account_descr">"Introduceți adresa voastră de e-mail, un cod de verificare va fi trimis acolo,
-\nși toate datele  vor fi asociate acesteia."</string>
+    <string name="osmand_cloud_create_account_descr">Vă rugăm să introduceți adresa dumneavoastră de e-mail, un cod de verificare va fi trimis acolo,
+\n
+\nși toate datele dumneavoastră vor fi legate de acesta.</string>
     <string name="osmand_cloud_login_descr">Introduceți adresa de e-mail cu care v-ați înregistrat. O parolă de unică folosință va fi trimisă la aceasta.</string>
     <string name="verify_email_address">Verificați adresa de e-mail</string>
     <string name="verify_email_address_descr">Codul de verificare a fost trimis la %1$s. Introduceți-l în câmpul de mai jos.</string>
@@ -4398,7 +4399,7 @@
     <string name="show_parameter_seekbar">Arată bara de căutare a parametrilor</string>
     <string name="shared_string_hide_all">Ascunde toate</string>
     <string name="files_remaining">Fișiere rămase: %1$s %2$s</string>
-    <string name="from_to_with_params">De la %1$s la %2$s</string>
+    <string name="from_to_with_params">Din %1$s la %2$s</string>
     <string name="progress_complete">%1$s complet</string>
     <string name="storage_copied_files_size">S-au procesat %1$s fișier(e) %2$s</string>
     <string name="storage_copying_files_size">Se copiază %1$s fișiere %2$s</string>
