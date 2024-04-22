@@ -51,12 +51,14 @@ import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class RouteInfoCard extends MapBaseCard {
 
+	private static final String OSM_RELATION_URL = "https://www.openstreetmap.org/relation/";
 	private static final Map<String, Integer> TRANSLATABLE_KEYS = new HashMap<>();
 
 	static {
 		TRANSLATABLE_KEYS.put("name", R.string.shared_string_name);
 		TRANSLATABLE_KEYS.put("alt_name", R.string.shared_string_alt_name);
 		TRANSLATABLE_KEYS.put("symbol", R.string.shared_string_symbol);
+		TRANSLATABLE_KEYS.put("relation_id", R.string.shared_string_osm_id);
 	}
 
 
@@ -174,7 +176,7 @@ public class RouteInfoCard extends MapBaseCard {
 						v -> WikiArticleHelper.askShowArticle(activity, nightMode, collectTrackPoints(), formattedValue));
 			}
 		} else if ("relation_id".equals(tag.key)) {
-			String url = "https://www.openstreetmap.org/relation/" + formattedValue;
+			String url = OSM_RELATION_URL + formattedValue;
 			setupClickableContent(view, v -> AndroidUtils.openUrl(activity, url, nightMode));
 		}
 		return view;
@@ -285,10 +287,9 @@ public class RouteInfoCard extends MapBaseCard {
 					String langId = key.substring(keyStart.length());
 					String displayLanguage = new Locale(langId).getDisplayLanguage();
 					return app.getString(R.string.ltr_or_rtl_combine_via_colon, nameStr, displayLanguage);
+				} else if (key.equals(translatableKey.getKey())) {
+					return app.getString(translatableKey.getValue());
 				}
-			}
-			if ("relation_id".equals(key)) {
-				return app.getString(R.string.shared_string_osm_id);
 			}
 			return poiType != null ? poiType.getTranslation() : capitalizeFirstLetterAndLowercase(key);
 		}
