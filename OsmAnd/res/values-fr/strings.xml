@@ -5648,7 +5648,7 @@
     <string name="fix_north_up">Activer le Nord Fixe en haut</string>
     <string name="release_4_7">• Nouveau widget \"Compteur de vitesse\" compatible avec Android Auto
 \n
-\n • Configurer l\'écran de la carte en ajoutant plusieurs boutons \"Action rapide\"
+\n • Configurer l\'écran affichant la carte avec plusieurs boutons \"Action rapide\"
 \n
 \n • Amélioration de la lisibilité des données dans les graphiques
 \n
@@ -5656,13 +5656,13 @@
 \n
 \n • Amélioration de la personnalisation de l\'apparence pour les groupes de traces
 \n
-\n • Ajout du support pour d\'autres tags GPX
+\n • Prise en charge de tags GPX supplémentaires
 \n
-\n • Personnalisation \"Distance durant la navigation\": choisir entre des nombres précis ou arrondis
+\n • Affichage de \"Distance durant la navigation\": choix entre nombres exacts ou arrondis
 \n
 \n • Interface graphique unifiée pour la sélection de traces
 \n
-\n • Authentification à OpenStreetMap changée pour OAuth 2.0
+\n • Authentification à OpenStreetMap avec OAuth 2.0
 \n
 \n</string>
     <string name="change_default_appearance_confirmation">Modifier l\'apparence par défaut de %1$s ?</string>
@@ -5682,5 +5682,5 @@
     <string name="use_terrain_maps">Utiliser les cartes de relief</string>
     <string name="use_nearby_roads">Utiliser les routes à proximité</string>
     <string name="use_terrain_maps_summary">Utilise les cartes de relief pour les données d\'altitude. La géométrie de la trace demeure inchangée.</string>
-    <string name="use_nearby_roads_summary">Utilise les cartes hors-ligne pour trouver les routes à proximité et les données d\'altitude. Peut changer la géométrie de la trace.</string>
+    <string name="use_nearby_roads_summary">Utilise les cartes hors-ligne pour trouver les routes à proximité et les données d\'altitude. La géométrie de la trace peut être modifiée.</string>
 </resources>
