@@ -5,9 +5,10 @@
 	android:id="@+id/widget_bg"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/simple_widget_large_height"
-	android:paddingTop="6dp"
+	android:orientation="vertical"
 	android:paddingHorizontal="16dp"
-	android:orientation="vertical">
+	android:paddingTop="6dp"
+	android:paddingBottom="3dp">
 
 	<LinearLayout
 		android:id="@+id/container"
@@ -18,28 +19,16 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="17dp"
-			android:orientation="horizontal"
-			android:gravity="bottom">
-
-			<TextView
-				android:id="@+id/widget_name"
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_weight="1"
-				android:layout_marginEnd="8dp"
-				android:ellipsize="end"
-				android:letterSpacing="0.06"
-				android:lineSpacingExtra="-2sp"
-				android:maxLines="1"
-				android:textAllCaps="true"
-				android:textColor="@color/text_color_secondary_light"
-				android:textSize="@dimen/simple_widget_description_text_size"
-				tools:text="Widget name" />
+			android:gravity="bottom"
+			android:layoutDirection="rtl"
+			android:orientation="horizontal">
 
 			<TextView
 				android:id="@+id/widget_text_small"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:gravity="bottom|end"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.06"
 				android:lineSpacingExtra="-2sp"
 				android:maxLines="1"
@@ -47,6 +36,23 @@
 				android:textColor="@color/text_color_secondary_light"
 				android:textSize="@dimen/simple_widget_description_text_size"
 				tools:text="Unit" />
+
+			<TextView
+				android:id="@+id/widget_name"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:gravity="bottom|start"
+				android:layout_marginStart="3dp"
+				android:layout_weight="1"
+				android:ellipsize="end"
+				android:includeFontPadding="false"
+				android:letterSpacing="0.06"
+				android:lineSpacingExtra="-2sp"
+				android:maxLines="1"
+				android:textAllCaps="true"
+				android:textColor="@color/text_color_secondary_light"
+				android:textSize="@dimen/simple_widget_description_text_size"
+				tools:text="Widget name" />
 
 		</LinearLayout>
 
@@ -72,9 +78,9 @@
 				android:autoSizeTextType="uniform"
 				android:ellipsize="none"
 				android:gravity="center_vertical|start"
+				android:includeFontPadding="false"
 				android:letterSpacing="0.04"
 				android:maxLines="1"
-				android:includeFontPadding="false"
 				android:textColor="@color/text_color_primary_light"
 				android:textSize="@dimen/simple_widget_value_large_size" />
 

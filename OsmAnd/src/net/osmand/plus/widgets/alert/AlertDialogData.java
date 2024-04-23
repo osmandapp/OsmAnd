@@ -30,6 +30,10 @@ public class AlertDialogData {
 	@Nullable private Integer negativeButtonTitleId;
 	@Nullable private OnClickListener negativeButtonListener;
 
+	@Nullable private String neutralButtonTitle;
+	@Nullable private Integer neutralButtonTitleId;
+	@Nullable private OnClickListener neutralButtonListener;
+
 	@Nullable private String positiveButtonTitle;
 	@Nullable private Integer positiveButtonTitleId;
 	@Nullable private OnClickListener positiveButtonListener;
@@ -76,6 +80,20 @@ public class AlertDialogData {
 		this.negativeButtonTitleId = titleId;
 		this.negativeButtonTitle = null;
 		this.negativeButtonListener = listener;
+		return this;
+	}
+
+	public AlertDialogData setNeutralButton(@NonNull String title, @Nullable OnClickListener listener) {
+		this.neutralButtonTitle = title;
+		this.neutralButtonTitleId = null;
+		this.neutralButtonListener = listener;
+		return this;
+	}
+
+	public AlertDialogData setNeutralButton(@StringRes int titleId, @Nullable OnClickListener listener) {
+		this.neutralButtonTitleId = titleId;
+		this.neutralButtonTitle = null;
+		this.neutralButtonListener = listener;
 		return this;
 	}
 
@@ -139,6 +157,21 @@ public class AlertDialogData {
 	@Nullable
 	public OnClickListener getNegativeButtonListener() {
 		return negativeButtonListener;
+	}
+
+	@Nullable
+	public String getNeutralButtonTitle() {
+		return neutralButtonTitle;
+	}
+
+	@Nullable
+	public Integer getNeutralButtonTitleId() {
+		return neutralButtonTitleId;
+	}
+
+	@Nullable
+	public OnClickListener getNeutralButtonListener() {
+		return neutralButtonListener;
 	}
 
 	@Nullable
