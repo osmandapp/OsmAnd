@@ -1281,6 +1281,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 				} else {
 					resUnique.put(pntId, o);
 					NetworkDBPoint p = hctx.pointsByGeo.get(calcRPId(o, o.getSegmentStart(), o.getSegmentEnd()));
+					p.startX = o.getStartPointX();
+					p.startY = o.getStartPointY();
+					p.endX = o.getEndPointX();
+					p.endY = o.getEndPointY();
 					if (p == null) {
 						System.err.println("Error calculations new final boundary not found");
 						continue;
