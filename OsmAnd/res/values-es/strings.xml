@@ -5693,4 +5693,7 @@
     <string name="use_nearby_roads">Utilice caminos cercanos</string>
     <string name="retrieve_elevation_data_summary">OsmAnd puede recuperar datos de elevación de carreteras cercanas o mapas del terreno.</string>
     <string name="use_nearby_roads_summary">Utiliza un mapa sin conexión para encontrar carreteras cercanas y datos de elevación. Puede ajustar la geometría de la pista.</string>
+    <string name="delete_actions_button_confirmation">¿Estas seguro que quieres borrarlo \"%1$s\" con todas las acciones agregadas?</string>
+    <string name="delete_actions_button">Botón eliminar</string>
+    <string name="shared_string_osm_id">ID de OSM</string>
 </resources>

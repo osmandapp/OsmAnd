@@ -2287,7 +2287,7 @@
     <string name="poi_protection_object_historic">Obiect de protecție: istoric</string>
     <string name="poi_protection_title">Titlu de protecție</string>
     <string name="poi_protected_area">Zonă protejată</string>
-    <string name="poi_bandy">Bandy</string>
+    <string name="poi_bandy">Bandaj</string>
     <string name="poi_fair_trade_only">Numai produse din comerț echitabil</string>
     <string name="poi_fair_trade_no">Comerț echitabil: nu</string>
     <string name="poi_fair_trade_yes">Comerț echitabil: da</string>
@@ -2776,7 +2776,7 @@
     <string name="poi_tanning_salon">Solar</string>
     <string name="poi_free_flying_guest_guidelines_no">Orientări pentru oaspeți: nu</string>
     <string name="poi_free_flying_guest_guidelines_yes">Orientări pentru oaspeți: da</string>
-    <string name="poi_free_flying_no_flight_time">Fără timp de zbor (zbor liber)</string>
+    <string name="poi_free_flying_no_flight_time">Fără timp de zbor (zborul liber)</string>
     <string name="poi_free_flying_site_orientation_nw">Orientare zonă de zbor liber: NW</string>
     <string name="poi_free_flying_site_orientation_w">Orientare zonă de zbor liber: W</string>
     <string name="poi_free_flying_site_orientation_sw">Orientare zonă de zbor liber: SW</string>

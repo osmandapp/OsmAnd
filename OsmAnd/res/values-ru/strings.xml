@@ -5696,4 +5696,7 @@
     <string name="use_nearby_roads_summary">"Для данных о высоте используется поиск близлежащих дорог локальной карты.  Возможна корректировка геометрии трека."</string>
     <string name="retrieve_elevation_data_summary">OsmAnd может получить данные о высоте из данных близлежащих дорог или карт рельефа.</string>
     <string name="use_terrain_maps_summary">Для данных о высоте используются карты рельефа. Геометрия трека останется неизменной.</string>
+    <string name="delete_actions_button">Удалить кнопку</string>
+    <string name="delete_actions_button_confirmation">Вы уверены, что хотите удалить «%1$s» со всеми добавленными действиями?</string>
+    <string name="shared_string_osm_id">OSM ID</string>
 </resources>

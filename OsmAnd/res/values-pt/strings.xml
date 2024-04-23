@@ -3948,7 +3948,7 @@
     <string name="shared_string_sec">seg</string>
     <string name="announcement_time_approach">Aproximação</string>
     <string name="announcement_time_prepare_long">Prepare longo</string>
-    <string name="announcement_time_prepare">Prepare</string>
+    <string name="announcement_time_prepare">Preparar</string>
     <string name="announcement_time_off_route">Fora da rota</string>
     <string name="announcement_time_arrive">Chegada ao destino</string>
     <string name="shared_string_turn">Virar</string>
@@ -4260,7 +4260,7 @@
     <string name="benefits_for_contributors_secondary_descr">Autentique-se com a sua conta do OpenStreetMap e veja se está qualificado para obter atualizações de mapas mensais e a cada hora ilimitadas.</string>
     <string name="use_login_and_password">Usar nome de utilizador e palavra-passe</string>
     <string name="available_until">Disponível até %1$s</string>
-    <string name="enough_contributions_descr">Parabéns! Fez contribuições suficientes para o OpenStreetMap e pode desfrutar de atualizações ilimitadas de mapas.</string>
+    <string name="enough_contributions_descr">Parabéns! Fez contribuições suficientes para o OpenStreetMap e pode desfrutar de atualizações ilimitadas de mapas OsmAnd!</string>
     <string name="shared_string_contributions">Contribuições</string>
     <string name="contributions_may_calculate_with_delay">O cálculo das contribuições pode demorar algumas horas.</string>
     <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
@@ -5685,11 +5685,19 @@
     <string name="fix_north_up_descr">Não rodar o mapa com gestos na orientação do mapa de norte para cima</string>
     <string name="use_3d_track_visualization">Visualização 3D</string>
     <string name="shared_string_changes">Alterações</string>
-    <string name="change_default_tracks_appearance_confirmation">Aplicar alterações às faixas existentes na pasta ou apenas nas novas?</string>
-    <string name="apply_only_to_new">Aplicar apenas a novas</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicar alterações aos trilhos existentes na pasta ou apenas aos novos?</string>
+    <string name="apply_only_to_new">Aplicar apenas a novos</string>
     <string name="release_4_8">• A ser preparado para 4.8</string>
     <string name="shared_string_scale">Escala</string>
-    <string name="relief_3d_download_description">Mapas adicionais são necessários para visualizar Terrain no mapa.</string>
-    <string name="vertical_exaggeration_description">Ao alterar o valor da escala, pode realçar o relevo 3D.</string>
+    <string name="relief_3d_download_description">São necessários mapas adicionais para visualizar o terreno no mapa.</string>
+    <string name="vertical_exaggeration_description">Ao alterar o valor da escala, o relevo 3D é realçado.</string>
     <string name="vertical_exaggeration">Exagero vertical</string>
+    <string name="delete_actions_button">Botão eliminar</string>
+    <string name="use_nearby_roads_summary">Utiliza o mapa offline para encontrar estradas próximas e dados de elevação. Pode ajustar a geometria da via.</string>
+    <string name="retrieve_elevation_data_summary">O OsmAnd pode obter dados de elevação a partir de estradas ou mapas de terreno próximos.</string>
+    <string name="shared_string_osm_id">ID do OSM</string>
+    <string name="delete_actions_button_confirmation">Quer mesmo eliminar \"%1$s\" com todas as ações adicionadas?</string>
+    <string name="use_terrain_maps_summary">Utiliza mapas de terreno para dados de elevação. A geometria do trilho mantém-se inalterada.</string>
+    <string name="use_terrain_maps">Usar mapas de terreno</string>
+    <string name="use_nearby_roads">Usar estradas nas proximidades</string>
 </resources>

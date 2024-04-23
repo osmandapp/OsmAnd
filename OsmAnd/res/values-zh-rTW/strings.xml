@@ -5677,4 +5677,12 @@
     <string name="vertical_exaggeration">垂直誇大</string>
     <string name="relief_3d_download_description">需要額外的地圖才能在地圖上檢視地形。</string>
     <string name="vertical_exaggeration_description">透過變更比例尺的值，您可以強調 3D 地形。</string>
+    <string name="use_terrain_maps">使用地形圖</string>
+    <string name="use_nearby_roads_summary">使用離線地圖尋找附近的道路與相對高度資料。可以調整軌跡幾何形狀。</string>
+    <string name="use_nearby_roads">使用附近的道路</string>
+    <string name="delete_actions_button_confirmation">您確定要刪除「%1$s」以及所有新增的動作嗎？</string>
+    <string name="delete_actions_button">刪除按鈕</string>
+    <string name="use_terrain_maps_summary">使用地形圖取得相對高度資料。軌跡幾何形狀保持不變。</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd 可以從附近的道路或地形圖擷取相對高度資料。</string>
 </resources>
