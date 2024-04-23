@@ -107,7 +107,7 @@ public class RoutingHelper {
 		app.getAppCustomization().addListener(customizationListener);
 	}
 
-	public RouteProvider getProvider() {
+	RouteProvider getProvider() {
 		return provider;
 	}
 
