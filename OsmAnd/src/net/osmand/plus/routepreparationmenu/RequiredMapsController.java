@@ -1,22 +1,18 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.Location;
-import net.osmand.OnResultCallback;
-import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
@@ -24,24 +20,14 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
-import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.CalculateMissingMapsOnlineListener;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteProvider;
-import net.osmand.plus.settings.enums.RoutingType;
-import net.osmand.router.MissingMapsCalculator;
-import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class RequiredMapsController implements IDialogController, DownloadEvents {
 
@@ -52,10 +38,11 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private List<DownloadItem> missingMaps = new ArrayList<>();
 	private List<DownloadItem> mapsToUpdate = new ArrayList<>();
 	private List<DownloadItem> usedMaps = new ArrayList<>();
-	private ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
+	private final ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
 
 	private boolean loadingMapsInProgress = false;
 	private boolean onlineCalculationRequested = false;
+	private CalculateMissingMapsOnlineTask onlineCalculationTask = null;
 
 	public RequiredMapsController(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -114,7 +101,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		if (!Algorithms.isEmpty(regions)) {
 			for (WorldRegion missingRegion : regions) {
 				for (DownloadItem downloadItem : resources.getDownloadItems(missingRegion)) {
-					if (Objects.equals(downloadItem.getType().getTag(), "map")) {
+					if (downloadItem.getType() == DownloadActivityType.NORMAL_FILE) {
 						result.add(downloadItem);
 					}
 				}
@@ -128,91 +115,24 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		loadingMapsInProgress = true;
 		askRefreshDialog();
 
-		runAsync(() -> {
-			MissingMapsCalculator missingMapsCalculator = RoutePlannerFrontEnd.getMissingMapsCalculator();
-			if (missingMapsCalculator != null) {
-				LatLon startPoint = missingMapsCalculator.getStartPoint();
-				LatLon endPoint = missingMapsCalculator.getEndPoint();
-				onlineCalculateRequestStartPoint(startPoint, endPoint, locations -> {
-					try {
-						RoutingType routingType = app.getSettings().ROUTING_TYPE.get();
-						missingMapsCalculator.checkIfThereAreMissingMaps(convertLocationsToLatLon(locations), !routingType.isHHRouting());
-						loadingMapsInProgress = false;
-						updateSelectionHelper();
-						askRefreshDialog();
-					} catch (IOException e) {
-						onErrorReceived(e.getMessage());
+		onlineCalculationTask = CalculateMissingMapsOnlineTask.execute(app, new CalculateMissingMapsOnlineListener() {
+			@Override
+			public void onSuccess() {
+				loadingMapsInProgress = false;
+				updateSelectionHelper();
+				app.runInUIThread(() -> askRefreshDialog());
+			}
+
+			@Override
+			public void onError(@Nullable String error) {
+				loadingMapsInProgress = false;
+				app.runInUIThread(() -> {
+					if (!Algorithms.isEmpty(error)) {
+						app.showToastMessage(error);
 					}
+					askRefreshDialog();
 				});
 			}
-		});
-	}
-
-	private void onlineCalculateRequestStartPoint(@NonNull LatLon start,
-	                                              @NonNull LatLon finish,
-	                                              @NonNull OnResultCallback<List<Location>> callback) {
-		String baseUrl = "https://maptile.osmand.net/routing/route?routeMode=car";
-		String fullURL = baseUrl + "&" + formatPointString(start) + "&" + formatPointString(finish);
-		try {
-			OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
-			String response = helper.makeRequest(fullURL);
-			callback.onResult(parseOnlineCalculationResponse(response));
-		} catch (Exception e) {
-			onErrorReceived(e.getMessage());
-		}
-	}
-
-	@NonNull
-	private String formatPointString(@NonNull LatLon location) {
-		return "points=" + location.getLatitude() + "," + location.getLongitude();
-	}
-
-	@NonNull
-	private List<Location> parseOnlineCalculationResponse(@NonNull String response) throws JSONException {
-		List<Location> result = new ArrayList<>();
-		JSONObject fullJSON = new JSONObject(response);
-		JSONArray features = fullJSON.getJSONArray("features");
-		for (int i = 0; i < features.length(); i++) {
-			JSONObject feature = features.getJSONObject(i);
-			JSONObject geometry = feature.getJSONObject("geometry");
-			String type = geometry.getString("type");
-			if (Objects.equals(type, "LineString")) {
-				JSONArray coordinates = geometry.getJSONArray("coordinates");
-				for (int j = 0; j < coordinates.length(); j++) {
-					JSONArray coordinate = coordinates.getJSONArray(j);
-					parseAndAddLocation(result, coordinate);
-				}
-			} else if (Objects.equals(type, "Point")) {
-				JSONArray coordinates = geometry.getJSONArray("coordinates");
-				parseAndAddLocation(result, coordinates);
-			}
-		}
-		return result;
-	}
-
-	private void parseAndAddLocation(@NonNull List<Location> locations, @NonNull JSONArray coordinate) throws JSONException {
-		if (coordinate.length() >= 2) {
-			WptPt wpt = new WptPt();
-			wpt.lat = coordinate.getDouble(1);
-			wpt.lon = coordinate.getDouble(0);
-			locations.add(RouteProvider.createLocation(wpt));
-		}
-	}
-
-	@NonNull
-	private List<LatLon> convertLocationsToLatLon(@NonNull List<Location> locations) {
-		List<LatLon> result = new ArrayList<>();
-		for (Location location : locations) {
-			result.add(new LatLon(location.getLatitude(), location.getLongitude()));
-		}
-		return result;
-	}
-
-	private void onErrorReceived(@Nullable String error) {
-		app.runInUIThread(() -> {
-			app.showToastMessage(error);
-			loadingMapsInProgress = false;
-			askRefreshDialog();
 		});
 	}
 
@@ -276,6 +196,13 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return loadingMapsInProgress;
 	}
 
+	public void askCancelOnlineCalculation() {
+		if (onlineCalculationTask != null) {
+			onlineCalculationTask.cancel(false);
+			onlineCalculationTask = null;
+		}
+	}
+
 	@Override
 	public void onUpdatedIndexesList() {
 		loadingMapsInProgress = false;
@@ -284,19 +211,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	public void askRefreshDialog() {
-		app.runInUIThread(() -> {
-			app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
-		});
-	}
-
-	private void runAsync(@NonNull Runnable runnable) {
-		new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... voids) {
-				runnable.run();
-				return null;
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
 	}
 
 	public static void showDialog(@NonNull FragmentActivity activity) {

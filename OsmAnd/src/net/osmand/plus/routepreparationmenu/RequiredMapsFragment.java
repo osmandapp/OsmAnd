@@ -8,6 +8,7 @@ import static net.osmand.plus.utils.ColorUtilities.getSecondaryIconColor;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.map.OsmandRegions;
@@ -94,6 +96,15 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		return view;
 	}
 
+	@Override
+	public void onDismiss(@NonNull DialogInterface dialog) {
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			controller.askCancelOnlineCalculation();
+			app.getDialogManager().unregister(PROCESS_ID);
+		}
+	}
+
 	protected void setupToolbar() {
 		View appbar = view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appbar, 5.0f);
@@ -132,8 +143,9 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 			setupItemsList();
 			updateUsedMapsSummary();
 		}
-		updateVisibility(view.findViewById(R.id.card_calculate_online),
-				!controller.isOnlineCalculationRequested() && !controller.isLoadingInProgress());
+		boolean showOnlineCalculationBanner = !controller.isOnlineCalculationRequested() && !controller.isLoadingInProgress();
+		updateVisibility(view.findViewById(R.id.card_calculate_online), showOnlineCalculationBanner);
+		updateSelectionButtonVisibility();
 		updateDownloadButton();
 	}
 
@@ -141,6 +153,11 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		updateToolbarMenu();
 		updateListSelection();
 		updateDownloadButton();
+	}
+
+	private void updateSelectionButtonVisibility() {
+		ImageView actionButton = view.findViewById(R.id.action_button);
+		updateVisibility(actionButton, !controller.isLoadingInProgress());
 	}
 
 	private void updateToolbarMenu() {
