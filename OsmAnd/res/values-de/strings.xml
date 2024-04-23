@@ -5636,7 +5636,7 @@
     <string name="rendering_attr_padusHideBoundaries_description">Grenzen von öffentlichem Land ausblenden, aber Gebiete belassen</string>
     <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
-    <string name="auto_zoom_smooth">Sanft</string>
+    <string name="auto_zoom_smooth">Glatt</string>
     <string name="auto_zoom_discrete">Diskret</string>
     <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (sicher)</string>
@@ -5696,4 +5696,6 @@
     <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Spurgeometrie bleibt unverändert.</string>
     <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um in der Nähe Straßen und Höhendaten zu finden. Kann Weggeometrie anpassen.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kann Höhendaten von nahe gelegenen Straßen oder Geländekarten abrufen.</string>
+    <string name="delete_actions_button">Löschen Taste</string>
+    <string name="shared_string_osm_id">OSM ID</string>
 </resources>
