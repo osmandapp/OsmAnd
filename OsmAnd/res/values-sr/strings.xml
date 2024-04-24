@@ -5689,4 +5689,7 @@
     <string name="use_terrain_maps_summary">Користе се мапе терена за податке о надморској висини. Геометрија путање остаје непромењена.</string>
     <string name="use_nearby_roads_summary">Користи се ванмрежна мапа ради проналажења оближњих путева и података о надморској висини. Може прилагодити геометрију путање.</string>
     <string name="retrieve_elevation_data_summary">ОсмАнд може да преузме податке о надморској висини са оближњих путева или мапа терена.</string>
+    <string name="delete_actions_button">Дугме за брисање</string>
+    <string name="shared_string_osm_id">ОСМ ИД</string>
+    <string name="delete_actions_button_confirmation">Да ли сте сигурни да желите да избришете „%1$s“ са свим додатим радњама?</string>
 </resources>
