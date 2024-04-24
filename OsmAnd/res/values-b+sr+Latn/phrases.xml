@@ -4865,4 +4865,5 @@
     <string name="poi_indoor_seating_yes">Sedenje unutra: Da</string>
     <string name="poi_indoor_seating_no">Nema sedećih mesta</string>
     <string name="poi_indoor_seating_bar_table">Barski sto</string>
+    <string name="poi_property_management">Upravljanje imovinom</string>
 </resources>
