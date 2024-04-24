@@ -2907,7 +2907,7 @@
     <string name="backup_into_file">Fă backup ca fișier</string>
     <string name="restore_from_file">Restaurează din fișier</string>
     <string name="osmand_cloud_help_descr">Aveți nevoie de ajutor\? Contactați-ne la %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Vă rugăm să introduceți adresa dumneavoastră de e-mail, un cod de verificare va fi trimis acolo,
+    <string name="osmand_cloud_create_account_descr">Vă rugăm să introduceți adresa dumneavoastră de e-mail, un cod de verificare va fi trimis acolo
 \nși toate datele dumneavoastră vor fi legate de acesta.</string>
     <string name="osmand_cloud_login_descr">Introduceți adresa de e-mail cu care v-ați înregistrat. O parolă de unică folosință va fi trimisă la aceasta.</string>
     <string name="verify_email_address">Verificați adresa de e-mail</string>
@@ -3280,7 +3280,7 @@
     <string name="contact_support">Contactează suportul tehnic</string>
     <string name="troubleshooting">Deparare</string>
     <string name="troubleshooting_description">Urmați acest link dacă aveți probleme cu achizițiile.</string>
-    <string name="osmand_live">OsmAnd în direct</string>
+    <string name="osmand_live">OsmAnd Live</string>
     <string name="annual_subscription">Abonament anual</string>
     <string name="monthly_subscription">Abonament lunar</string>
     <string name="three_months_subscription">Abonament pe trei luni</string>
@@ -4411,7 +4411,7 @@
     <string name="shared_storage_migration">Migrarea stocării partajate</string>
     <string name="shared_string_migration">Migrare</string>
     <string name="icon_group_education">Educație</string>
-    <string name="icon_group_industrial">Industrială</string>
+    <string name="icon_group_industrial">Industrie</string>
     <string name="rendering_attr_natureReserves_description">Arată rezervații naturale, zone protejate și parcuri naționale.</string>
     <string name="memory_allocated_for_routing">Memorie alocată pentru rutare</string>
     <string name="shared_string_skip_warning">Săriți peste migrare\? OsmAnd nu mai are acces la fișierele dumneavoastră din stocarea partajată.
@@ -4985,7 +4985,7 @@
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
     <string name="cloud_conflicts">Conflicte</string>
-    <string name="cloud_conflict">Conflictul</string>
+    <string name="cloud_conflict">Conflict</string>
     <string name="upload_all">Încarcă tot</string>
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">S-au încărcat toate modificările</string>

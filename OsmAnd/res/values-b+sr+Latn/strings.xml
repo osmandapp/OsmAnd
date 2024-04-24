@@ -4376,7 +4376,7 @@
     <string name="routeInfo_horse_scale_name">Staze za jahanje</string>
     <string name="start_copying">Početak kopiranja</string>
     <string name="shared_storage_migration">Prenos na deljeno skladište</string>
-    <string name="horseback_riding">Jahanje</string>
+    <string name="horseback_riding">Jahanje konja</string>
     <string name="backup_dont_have_any_descr">Zakaži pravljenje samostalnih kopija za čuvanje i nikada ne gubite podatke.</string>
     <string name="receiving_data_from_server">Prijem podataka sa servera…</string>
     <string name="restore_selected_data">Vrati izabrane podatke</string>
@@ -5693,4 +5693,12 @@
     <string name="shared_string_scale">Skala</string>
     <string name="relief_3d_download_description">Potrebne su dodatne mape za prikaz terena na mapi.</string>
     <string name="vertical_exaggeration_description">Promenom vrednosti skale možeš naglasiti 3D reljef.</string>
+    <string name="delete_actions_button">Dugme za brisanje</string>
+    <string name="use_nearby_roads">Koristite obližnje puteve</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="use_terrain_maps">Koristi Terenske mape</string>
+    <string name="delete_actions_button_confirmation">Da li ste sigurni da želite da izbrišete „%1$s“ sa svim dodatim radnjama?</string>
+    <string name="use_terrain_maps_summary">Koriste se mape terena za podatke o nadmorskoj visini. Geometrija putanje ostaje nepromenjena.</string>
+    <string name="use_nearby_roads_summary">Koristi se vanmrežna mapa radi pronalaženja obližnjih puteva i podataka o nadmorskoj visini. Može prilagoditi geometriju putanje.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd može da preuzme podatke o nadmorskoj visini sa obližnjih puteva ili mapa terena.</string>
 </resources>

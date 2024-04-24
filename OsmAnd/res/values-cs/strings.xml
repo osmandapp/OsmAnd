@@ -5669,4 +5669,11 @@
     <string name="precise">Přesná</string>
     <string name="round_up">Zaokrouhlená</string>
     <string name="lang_ta_in">Tamilština (Indie)</string>
+    <string name="delete_actions_button_confirmation">Opravdu chcete odstranit \"%1$s\" se všemi přidanými akcemi?</string>
+    <string name="delete_actions_button">Tlačítko Smazat</string>
+    <string name="release_4_8">• Připraveno pro 4.8</string>
+    <string name="use_terrain_maps_summary">Používá terénní mapy pro údaje o nadmořské výšce. Geometrie trasy zůstává nezměněna.</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="relief_3d_download_description">Pro zobrazení terénu na mapě jsou potřeba další mapy.</string>
+    <string name="shared_string_scale">Měřítko</string>
 </resources>

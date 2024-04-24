@@ -5025,4 +5025,22 @@
     <string name="map_widget_map_scale">קנה מידה של מפה</string>
     <string name="custom_buttons">כפתורים מותאמים אישית</string>
     <string name="default_buttons">כפתורי ברירת מחדל</string>
+    <string name="precise_distance_numbers">מספרי מרחק מדויקים</string>
+    <string name="shared_string_all_tracks">כל המסלולים</string>
+    <string name="shared_string_keywords">מילות מפתח</string>
+    <string name="shared_string_additional">בנוסף</string>
+    <string name="battery_optimization_banner_content">מיטוב סוללה של Android יכול לגרום לפערים ואי־דיוקים במסלולים המתועדים.</string>
+    <string name="battery_optimization_settings">הגדרות מיטוב סוללה</string>
+    <string name="shared_string_author">יוצר</string>
+    <string name="shared_string_activity">פעילות</string>
+    <string name="shared_string_license">רישיון</string>
+    <string name="shared_string_link">קישור</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_copyright">זכויות יוצרים</string>
+    <string name="add_button">הוספת כפתור</string>
+    <string name="sort_subfolders">מיון תת־תיקיות</string>
+    <string name="battery_optimization">מיטוב סוללה</string>
+    <string name="shared_string_extensions">הרחבות</string>
+    <string name="sorted_sufolders_toast">תת־תיקיות תחת „%1$s” מסודרות לפי: „%2$s”</string>
+    <string name="dont_ask_anymore">לא לשאול שוב</string>
 </resources>
