@@ -13,6 +13,8 @@
     <string name="release_4_8">
         • To be prepared for 4.8
     </string>
+    <string name="route_line_use_coloring_speed">Route line is colored by speed of movement.</string>
+    <string name="route_line_use_coloring_altitude">Route line is colored by elevation altitude.</string>
     <string name="delete_actions_button_confirmation">Are you sure you want to delete \"%1$s\" with all added actions?</string>
     <string name="delete_actions_button">Delete button</string>
     <string name="use_terrain_maps_summary">Uses terrain maps for elevation data. Track geometry stays unchanged.</string>
