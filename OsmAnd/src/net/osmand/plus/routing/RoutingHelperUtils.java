@@ -249,7 +249,8 @@ public class RoutingHelperUtils {
 	}
 
 	public static RoutingParameter getParameterForDerivedProfile(@NonNull String id, @NonNull ApplicationMode appMode, @NonNull GeneralRouter router) {
-		return getParametersForDerivedProfile(appMode, router).get(id);
+		Map<String, RoutingParameter> parameters = getParametersForDerivedProfile(appMode, router);
+		return parameters.get(id);
 	}
 
 	@NonNull
