@@ -5708,4 +5708,15 @@
     <string name="use_nearby_roads">Usar caminos cercanos</string>
     <string name="release_4_8">• Prepárate para la versión 4.8</string>
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
+    <string name="delete_actions_button_confirmation">¿Borrar «%1$s» con todas sus acciones añadidas?</string>
+    <string name="delete_actions_button">Borrar botón</string>
+    <string name="maps_that_also_be_used">Mapas extras usados: %1$s</string>
+    <string name="required_maps_calculate_online_summary">La lista de mapas perdidos se basa en la línea recta de la ruta. Para obtener una lista exacta de mapas, OsmAnd puede pre-calcular la ruta en línea.</string>
+    <string name="route_line_use_coloring_speed">La línea de la ruta se colorea según la velocidad del movimiento.</string>
+    <string name="shared_string_osm_id">ID de OSM</string>
+    <string name="getting_list_of_required_maps">Obteniendo una lista de mapas necesarios…</string>
+    <string name="required_maps">Mapas necesarios</string>
+    <string name="missing_maps_description">Algunos mapas sin conexión necesarios para esta ruta desaparecieron o están desactualizados. Descarga o actualiza estos mapas.</string>
+    <string name="missing_maps_header">Mapas perdidos o desactualizados</string>
+    <string name="route_line_use_coloring_altitude">La línea de la ruta se colorea según la elevación de la altitud.</string>
 </resources>
