@@ -99,7 +99,7 @@ public class EmissionHelper {
 				ListParameters parameters = populateListParameters(app, parameter);
 				int index = parameters.findIndexOfValue(pref.getModeValue(mode));
 				if (index != -1) {
-					return MotorType.getMotorTypeByName(parameters.names[index]);
+					return MotorType.getMotorTypeByName(parameters.originalNames[index]);
 				}
 			}
 		}
