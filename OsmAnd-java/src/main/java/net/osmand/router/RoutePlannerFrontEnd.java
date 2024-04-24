@@ -341,8 +341,6 @@ public class RoutePlannerFrontEnd {
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && useNativeApproximation) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, true);
-//			new RouteResultPreparation().prepareResult(gctx.ctx, gctx.result); // TODO
-//			cleanupResultAndAddTurns(gctx); // TODO
 		} else {
 			GpxSegmentsApproximation app = new GpxSegmentsApproximation();
 			if (gctx.ctx.calculationProgress == null) {
