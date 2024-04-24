@@ -300,6 +300,20 @@ public class NativeLibrary {
 
 	private void initRouteRegion(GpxRouteApproximation gCtx, RouteSegmentResult rsr) {
 		RouteRegion region = rsr.getObject().region;
+		if (region == null) {
+			// gCtx.finalPoints is fixed by fixStraightLineRegion
+			// null region(s) in gCtx.result should be fixed too
+			RouteRegion reg = new RouteRegion();
+			reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+			RouteDataObject newRdo = new RouteDataObject(reg);
+			RouteDataObject rdo = rsr.getObject();
+			newRdo.pointsX = rdo.pointsX;
+			newRdo.pointsY = rdo.pointsY;
+			newRdo.types = rdo.getTypes();
+			newRdo.id = -1;
+			rsr.setObject(newRdo);
+			return;
+		}
 		BinaryMapIndexReader reader = gCtx.ctx.reverseMap.get(region);
 		if (reader != null) {
 			try {
