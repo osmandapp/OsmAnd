@@ -7,11 +7,13 @@ import net.osmand.util.Algorithms;
 
 public class ListParameters {
 
-	public final String[] names;
+	public final String[] originalNames;
+	public final String[] localizedNames;
 	public final Object[] values;
 
-	public ListParameters(@NonNull String[] names, @NonNull Object[] values) {
-		this.names = names;
+	public ListParameters(@NonNull String[] originalNames, @NonNull String[] localizedNames, @NonNull Object[] values) {
+		this.originalNames = originalNames;
+		this.localizedNames = localizedNames;
 		this.values = values;
 	}
 
