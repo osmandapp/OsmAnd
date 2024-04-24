@@ -1285,6 +1285,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 						System.err.println("Error calculations new final boundary not found");
 						continue;
 					}
+					p.startX = o.getStartPointX();
+					p.startY = o.getStartPointY();
+					p.endX = o.getEndPointX();
+					p.endY = o.getEndPointY();
 					float routeTime = o.getDistanceFromStart()
 							+ plan.calcRoutingSegmentTimeOnlyDist(hctx.rctx.getRouter(), o) / 2 + 1;
 					NetworkDBSegment c = start.getSegment(p, true);
