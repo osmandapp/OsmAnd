@@ -5405,4 +5405,9 @@
     <string name="shared_string_unchanged">Değişmedi</string>
     <string name="map_widget_map_scale">Harita ölçeği</string>
     <string name="lang_zh_hans">Basitleştirilmiş Çince</string>
+    <string name="required_maps">Gerekli Haritalar</string>
+    <string name="maps_that_also_be_used">Ayrıca kullanılacak haritalar: %1$s</string>
+    <string name="missing_maps_header">Haritalar eksik veya güncel değil</string>
+    <string name="getting_list_of_required_maps">Gerekli haritaların listesi alınıyor…</string>
+    <string name="use_terrain_maps">Arazi haritalarını kullan</string>
 </resources>
