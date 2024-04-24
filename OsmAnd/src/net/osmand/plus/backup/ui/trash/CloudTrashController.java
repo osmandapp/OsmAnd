@@ -87,12 +87,6 @@ public class CloudTrashController {
 	public List<TrashItem> collectTrashItems() {
 		List<TrashItem> items = new ArrayList<>();
 		PrepareBackupResult backup = backupHelper.getBackup();
-		BackupInfo info = backup.getBackupInfo();
-		if (info != null && !Algorithms.isEmpty(info.filesToDelete)) {
-			for (RemoteFile file : info.filesToDelete) {
-				items.add(new TrashItem(file, null));
-			}
-		}
 		Map<String, RemoteFile> oldFiles = backup.getRemoteFiles(OLD);
 		Map<String, RemoteFile> deletedFiles = backup.getRemoteFiles(DELETED);
 		if (deletedFiles != null && oldFiles != null) {
