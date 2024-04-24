@@ -26,6 +26,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AnimatedValue;
+import net.osmand.core.jni.FColorRGB;
 import net.osmand.core.jni.MapMarker;
 import net.osmand.core.jni.MapMarkerBuilder;
 import net.osmand.core.jni.MapMarkersCollection;
@@ -301,18 +302,42 @@ public class PointLocationLayer extends OsmandMapLayer
 				|| navigationMarkerWithHeading == null || locationMarkerWithHeading == null) {
 			return;
 		}
+		FColorRGB circleColor = new FColorRGB();
+		PointI circleLocation31 = new PointI();
+		float circleRadius = 0.0f;
+		boolean withCircle = false;
 		switch (currentMarkerState) {
 			case Move:
 				navigationMarker.setVisibility(!showHeading);
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(showHeading);
 				locationMarkerWithHeading.setVisibility(false);
+				circleColor = showHeading
+						? navigationMarkerWithHeading.marker.getAccuracyCircleBaseColor()
+						: navigationMarker.marker.getAccuracyCircleBaseColor();
+				circleLocation31 = showHeading
+						? navigationMarkerWithHeading.marker.getPosition()
+						: navigationMarker.marker.getPosition();
+				circleRadius = (float) (showHeading
+						? navigationMarkerWithHeading.marker.getAccuracyCircleRadius()
+						: navigationMarker.marker.getAccuracyCircleRadius());
+				withCircle = true;
 				break;
 			case Stay:
 				navigationMarker.setVisibility(false);
 				locationMarker.setVisibility(!showHeading);
 				navigationMarkerWithHeading.setVisibility(false);
 				locationMarkerWithHeading.setVisibility(showHeading);
+				circleColor = showHeading
+						? locationMarkerWithHeading.marker.getAccuracyCircleBaseColor()
+						: locationMarker.marker.getAccuracyCircleBaseColor();
+				circleLocation31 = showHeading
+						? locationMarkerWithHeading.marker.getPosition()
+						: locationMarker.marker.getPosition();
+				circleRadius = (float) (showHeading
+						? locationMarkerWithHeading.marker.getAccuracyCircleRadius()
+						: locationMarker.marker.getAccuracyCircleRadius());
+				withCircle = true;
 				break;
 			case None:
 			default:
@@ -320,6 +345,16 @@ public class PointLocationLayer extends OsmandMapLayer
 				locationMarker.setVisibility(false);
 				navigationMarkerWithHeading.setVisibility(false);
 				locationMarkerWithHeading.setVisibility(false);
+		}
+		MapRendererView mapRenderer = getMapRenderer();
+		if (mapRenderer != null) {
+			if (withCircle) {
+				mapRenderer.setMyLocationCircleColor(circleColor.withAlpha(0.2f));
+				mapRenderer.setMyLocationCirclePosition(circleLocation31);
+				mapRenderer.setMyLocationCircleRadius(circleRadius);
+			} else {
+				mapRenderer.setMyLocationCircleRadius(0.0f);
+			}
 		}
 	}
 
@@ -382,9 +417,17 @@ public class PointLocationLayer extends OsmandMapLayer
 				animationThread.animatePositionTo(locMarker.marker, target31, animationDuration);
 			} else {
 				locMarker.marker.setPosition(target31);
+				mapRenderer.setMyLocationCirclePosition(locMarker.marker.getPosition());
 			}
-			locMarker.marker.setAccuracyCircleRadius(location.getAccuracy());
-			locMarker.marker.setIsAccuracyCircleVisible(!isLocationSnappedToRoad());
+			float circleRadius = location.getAccuracy();
+			boolean withCircle = !isLocationSnappedToRoad();
+			locMarker.marker.setAccuracyCircleRadius(circleRadius);
+			locMarker.marker.setIsAccuracyCircleVisible(withCircle);
+			if (withCircle) {
+				mapRenderer.setMyLocationCircleRadius(circleRadius);
+			} else {
+				mapRenderer.setMyLocationCircleRadius(0.0f);
+			}
 		}
 	}
 
