@@ -2859,7 +2859,7 @@
     <string name="add_to_a_track">Adaugă la un traseu</string>
     <string name="shared_string_custom">Personalizare</string>
     <string name="gpx_direction_arrows">Săgeți direcționale</string>
-    <string name="track_coloring_solid">Solidă</string>
+    <string name="track_coloring_solid">Solid</string>
     <string name="plan_route_last_edited">Ultima editare</string>
     <string name="plan_route_import_track">Importă traseu</string>
     <string name="plan_route_open_existing_track">Deschide un traseu existent</string>
