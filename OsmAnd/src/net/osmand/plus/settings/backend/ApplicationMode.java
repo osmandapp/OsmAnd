@@ -1,22 +1,11 @@
 package net.osmand.plus.settings.backend;
 
-import static net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
@@ -29,6 +18,15 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 
 public class ApplicationMode {
 
@@ -373,17 +371,19 @@ public class ApplicationMode {
 		}
 	}
 
-	public NavigationIcon getNavigationIcon() {
+	@NonNull
+	public String getNavigationIcon() {
 		return app.getSettings().NAVIGATION_ICON.getModeValue(this);
 	}
 
-	public void setNavigationIcon(NavigationIcon navigationIcon) {
-		if (navigationIcon != null) {
+	public void setNavigationIcon(@Nullable String navigationIcon) {
+		if (!Algorithms.isEmpty(navigationIcon)) {
 			app.getSettings().NAVIGATION_ICON.setModeValue(this, navigationIcon);
 		}
 	}
 
-	public LocationIcon getLocationIcon() {
+	@NonNull
+	public String getLocationIcon() {
 		return app.getSettings().LOCATION_ICON.getModeValue(this);
 	}
 
@@ -396,8 +396,8 @@ public class ApplicationMode {
 		return ContextCompat.getColor(app, getIconColorInfo().getColor(nightMode));
 	}
 
-	public void setLocationIcon(LocationIcon locationIcon) {
-		if (locationIcon != null) {
+	public void setLocationIcon(@Nullable String locationIcon) {
+		if (!Algorithms.isEmpty(locationIcon)) {
 			app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
 		}
 	}
@@ -676,8 +676,8 @@ public class ApplicationMode {
 		private String iconResName;
 		private ProfileIconColors iconColor;
 		private Integer customIconColor;
-		private LocationIcon locationIcon;
-		private NavigationIcon navigationIcon;
+		private String locationIcon;
+		private String navigationIcon;
 		private int order = -1;
 		private int version = -1;
 
@@ -765,12 +765,12 @@ public class ApplicationMode {
 			return this;
 		}
 
-		public ApplicationModeBuilder setLocationIcon(LocationIcon locIcon) {
+		public ApplicationModeBuilder setLocationIcon(String locIcon) {
 			this.locationIcon = locIcon;
 			return this;
 		}
 
-		public ApplicationModeBuilder setNavigationIcon(NavigationIcon navIcon) {
+		public ApplicationModeBuilder setNavigationIcon(String navIcon) {
 			this.navigationIcon = navIcon;
 			return this;
 		}

@@ -5648,19 +5648,21 @@
     <string name="fix_north_up">Activer le Nord Fixe en haut</string>
     <string name="release_4_7">• Nouveau widget \"Compteur de vitesse\" compatible avec Android Auto
 \n
-\n • Configurer l\'écran de la carte en ajoutant plusieurs boutons \"Action rapide\"
+\n • Configurer l\'écran affichant la carte avec plusieurs boutons \"Action rapide\"
 \n
 \n • Amélioration de la lisibilité des données dans les graphiques
 \n
 \n • Ajout de filtres par données de capteurs pour les traces
 \n
-\n • Ajout du support pour d\'autres tags GPX
+\n • Amélioration de la personnalisation de l\'apparence pour les groupes de traces
 \n
-\n • Personnalisation \"Distance durant la navigation\": choisir entre des nombres précis ou arrondis
+\n • Prise en charge de tags GPX supplémentaires
+\n
+\n • Affichage de \"Distance durant la navigation\": choix entre nombres exacts ou arrondis
 \n
 \n • Interface graphique unifiée pour la sélection de traces
 \n
-\n • Authentification à OpenStreetMap changée pour OAuth 2.0
+\n • Authentification à OpenStreetMap avec OAuth 2.0
 \n
 \n</string>
     <string name="change_default_appearance_confirmation">Modifier l\'apparence par défaut de %1$s ?</string>
@@ -5668,4 +5670,17 @@
     <string name="shared_string_changes">Modifications</string>
     <string name="apply_only_to_new">Appliquer seulement aux nouvelles</string>
     <string name="change_default_tracks_appearance_confirmation">Appliquer les modifications aux traces présentes dans le dossier ou seulement aux nouvelles traces ?</string>
+    <string name="gpx_approximation_java">Basé sur le routage (Java)</string>
+    <string name="release_4_8">• A préparer pour la version 4.8</string>
+    <string name="gpx_approximation_cpp">Basé sur le routage (C++)</string>
+    <string name="gpx_approximation_geo_java">Basé sur la géométrie (Java, rapide)</string>
+    <string name="shared_string_scale">Échelle</string>
+    <string name="vertical_exaggeration_description">En modifiant la valeur de l\'échelle, vous pouvez accentuer le relief 3D.</string>
+    <string name="relief_3d_download_description">Des cartes supplémentaires sont nécessaires pour visualiser le relief sur la carte.</string>
+    <string name="vertical_exaggeration">Accentuation verticale</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd peut obtenir les données d\'altitude à partir des routes voisines ou des cartes de terrain.</string>
+    <string name="use_terrain_maps">Utiliser les cartes de relief</string>
+    <string name="use_nearby_roads">Utiliser les routes à proximité</string>
+    <string name="use_terrain_maps_summary">Utilise les cartes de relief pour les données d\'altitude. La géométrie de la trace demeure inchangée.</string>
+    <string name="use_nearby_roads_summary">Utilise les cartes hors-ligne pour trouver les routes à proximité et les données d\'altitude. La géométrie de la trace peut être modifiée.</string>
 </resources>

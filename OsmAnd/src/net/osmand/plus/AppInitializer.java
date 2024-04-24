@@ -45,6 +45,7 @@ import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -345,6 +346,7 @@ public class AppInitializer implements IProgress {
 		app.weatherHelper = startupInit(new WeatherHelper(app), WeatherHelper.class);
 		app.dialogManager = startupInit(new DialogManager(), DialogManager.class);
 		app.smartFolderHelper = startupInit(new SmartFolderHelper(app), SmartFolderHelper.class);
+		app.model3dHelper = startupInit(new Model3dHelper(app), Model3dHelper.class);
 
 		initOpeningHoursParser();
 	}

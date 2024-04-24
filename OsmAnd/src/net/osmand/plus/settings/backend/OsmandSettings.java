@@ -1217,28 +1217,28 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> ONLINE_ROUTING_ENGINES = new StringPreference(this, "online_routing_engines", null).makeGlobal().makeShared().storeLastModifiedTime();
 
-	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumStringPreference<>(this, "navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
+	public final CommonPreference<String> NAVIGATION_ICON = new StringPreference(this, "navigation_icon", NavigationIcon.DEFAULT.name()).makeProfile().cache();
 
 	{
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.CAR, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, NavigationIcon.NAUTICAL);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.SKI, NavigationIcon.DEFAULT);
-		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, NavigationIcon.DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.CAR, NavigationIcon.DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, NavigationIcon.DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, NavigationIcon.NAUTICAL.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, NavigationIcon.DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.SKI, NavigationIcon.DEFAULT.name());
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, NavigationIcon.DEFAULT.name());
 	}
 
-	public final CommonPreference<LocationIcon> LOCATION_ICON = new EnumStringPreference<>(this, "location_icon", LocationIcon.DEFAULT, LocationIcon.values()).makeProfile().cache();
+	public final CommonPreference<String> LOCATION_ICON = new StringPreference(this, "location_icon", LocationIcon.DEFAULT.name()).makeProfile().cache();
 
 	{
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.DEFAULT);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.CAR);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.BICYCLE);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.DEFAULT);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
-		LOCATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.BICYCLE);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.DEFAULT.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.CAR.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.DEFAULT.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE.name());
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.HORSE, LocationIcon.BICYCLE.name());
 	}
 
 	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference(this, "app_mode_order", 0).makeProfile().cache();
@@ -1865,77 +1865,68 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_INFO_ABOUT_PRESSED_KEY = new BooleanPreference(this, "show_info_about_pressed_key", false).makeGlobal().makeShared();
 
-	public final ListStringPreference TOP_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
-			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
-
-		@Override
-		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			if (appMode != null) {
-				String modeValue = json.getString(getId());
-				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
-				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
-				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
-			}
-		}
-
-		@Override
-		public String parseString(String s) {
-			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
-		}
-
-		@Override
-		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
-			return false;
-		}
-	}.makeProfile();
-
-	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER_OLD = (ListStringPreference) new ListStringPreference(this,
-			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
-		@Override
-		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			if (appMode != null) {
-				String modeValue = json.getString(getId());
-				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(modeValue));
-				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
-				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
-			}
-		}
-
-		@Override
-		public String parseString(String s) {
-			return s != null ? s.replace(WIDGET_SEPARATOR, getDelimiter()) : null;
-		}
-
-		@Override
-		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
-			return false;
-		}
-	}.makeProfile();
-
-	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
-
 	public final ListStringPreference TOP_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+			"top_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
 		@Override
 		public String getModeValue(ApplicationMode mode) {
 			String value = super.getModeValue(mode);
 			if (!Algorithms.isEmpty(value)) {
-				return getPagedWidgetIds(Arrays.asList(value.split(PAGE_SEPARATOR)));
+				return getPagedWidgetIds(Arrays.asList(value.split(getDelimiter())));
 			}
 			return value;
 		}
 	}.makeProfile();
 
 	public final ListStringPreference BOTTOM_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
-			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+			"bottom_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
 		@Override
 		public String getModeValue(ApplicationMode mode) {
 			String value = super.getModeValue(mode);
 			if (!Algorithms.isEmpty(value)) {
-				return getPagedWidgetIds(Arrays.asList(value.split(PAGE_SEPARATOR)));
+				return getPagedWidgetIds(Arrays.asList(value.split(getDelimiter())));
 			}
 			return value;
+		}
+	}.makeProfile();
+
+	public final ListStringPreference LEFT_WIDGET_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"left_widget_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.LEFT.getOriginalOrder()), PAGE_SEPARATOR).makeProfile();
+
+	@Deprecated
+	public final ListStringPreference WIDGET_TOP_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"widget_top_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.TOP.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String value = json.getString(getId());
+				TOP_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(value));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, TOP_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
+		}
+	}.makeProfile();
+
+	@Deprecated
+	public final ListStringPreference WIDGET_BOTTOM_PANEL_ORDER = (ListStringPreference) new ListStringPreference(this,
+			"widget_bottom_panel_order", TextUtils.join(WIDGET_SEPARATOR, WidgetsPanel.BOTTOM.getOriginalOrder()), PAGE_SEPARATOR) {
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				String value = json.getString(getId());
+				BOTTOM_WIDGET_PANEL_ORDER.setModeValue(appMode, parseString(value));
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, LEFT_WIDGET_PANEL_ORDER);
+				updateExistingWidgetIds(OsmandSettings.this, appMode, BOTTOM_WIDGET_PANEL_ORDER, RIGHT_WIDGET_PANEL_ORDER);
+			}
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) {
+			return false;
 		}
 	}.makeProfile();
 

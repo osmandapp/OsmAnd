@@ -227,6 +227,18 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		}
 	}
 
+	fun onGpxFileDeleted(gpxFile: File) {
+		val newAllTracks = HashSet<TrackItem>(allAvailableTrackItems)
+		for (trackItem in newAllTracks) {
+			if (trackItem.path == gpxFile.path) {
+				newAllTracks.remove(trackItem)
+				allAvailableTrackItems = newAllTracks
+				break
+			}
+		}
+		updateAllSmartFoldersItems()
+	}
+
 	fun onTrackRenamed(srcTrackFile: File, destTrackFile: File) {
 		val newAllTracks = HashSet<TrackItem>(allAvailableTrackItems)
 		for (trackItem in newAllTracks) {
@@ -237,6 +249,7 @@ class SmartFolderHelper(val app: OsmandApplication) {
 				break
 			}
 		}
+		updateAllSmartFoldersItems()
 		notifyUpdateListeners()
 	}
 
@@ -272,15 +285,19 @@ class SmartFolderHelper(val app: OsmandApplication) {
 		@Deprecated("Deprecated in Java")
 		override fun doInBackground(vararg params: Void): Void? {
 			readSettings()
-			for (folder in smartFolderCollection) {
-				updateSmartFolderItems(folder)
-			}
+			updateAllSmartFoldersItems()
 			return null
 		}
 
 		@Deprecated("Deprecated in Java")
 		override fun onPostExecute(result: Void?) {
 			notifyUpdateListeners()
+		}
+	}
+
+	private fun updateAllSmartFoldersItems() {
+		for (smartFolder in smartFolderCollection) {
+			updateSmartFolderItems(smartFolder)
 		}
 	}
 }

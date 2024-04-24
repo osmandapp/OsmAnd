@@ -180,6 +180,7 @@ public class FileUtils {
 				helper.selectGpxFile(selected.getGpxFile(), params);
 			}
 			app.getGpxDbHelper().remove(file);
+			app.getSmartFolderHelper().onGpxFileDeleted(file);
 			return true;
 		}
 		return false;

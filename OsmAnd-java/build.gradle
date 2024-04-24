@@ -6,11 +6,11 @@ configurations {
 	android
 }
 
-tasks.withType(JavaCompile) {
-	sourceCompatibility = "1.7"
-	targetCompatibility = "1.7"
-	options.encoding = 'UTF-8'
-}
+//tasks.withType(JavaCompile) {
+//	sourceCompatibility = "1.7"
+//	targetCompatibility = "1.7"
+//	options.encoding = 'UTF-8'
+//}
 
 task collectRoutingResources(type: Sync) {
 	from "../../resources/routing"

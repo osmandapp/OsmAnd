@@ -5677,4 +5677,20 @@
     <string name="fix_north_up_descr">Ne forgassa el a térképet gesztusokkal, ha a fent rögzített északi irány be van kapcsolva</string>
     <string name="change_default_appearance_confirmation">Megváltoztatja %1$s alapértelmezett kinézetét?</string>
     <string name="use_3d_track_visualization">3D vizualizáció</string>
+    <string name="shared_string_changes">Módosítások</string>
+    <string name="change_default_tracks_appearance_confirmation">Alkalmazza a módosításokat a mappában meglévő nyomvonalakra vagy csak az újra?</string>
+    <string name="apply_only_to_new">Alkalmazás csak az újra</string>
+    <string name="release_4_8">• Felkészítve a 4.8-ashoz</string>
+    <string name="shared_string_scale">Skála</string>
+    <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
+    <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
+    <string name="vertical_exaggeration">Függőleges eltúlzás</string>
+    <string name="use_nearby_roads_summary">Offline térképet használ a közeli utak és magassági adatok megkereséséhez. Módosíthatja a nyomvonal geometriáját.</string>
+    <string name="use_nearby_roads">Közeli utak használata</string>
+    <string name="retrieve_elevation_data_summary">Az OsmAnd le tudja kérni a magassági adatokat a közeli utakról vagy domborzati térképekről.</string>
+    <string name="use_terrain_maps">Domborzati térkép használata</string>
+    <string name="use_terrain_maps_summary">Domborzati térkép használata a magassági adatokhoz. A nyomvonal geometriája változatlan marad.</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="delete_actions_button">Gomb törlése</string>
+    <string name="delete_actions_button_confirmation">Biztos törölni akarja \"%1$s\"-t az összes hozzáadott művelettel együtt?</string>
 </resources>

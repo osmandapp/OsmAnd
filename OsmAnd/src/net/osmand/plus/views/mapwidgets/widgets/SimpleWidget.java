@@ -15,8 +15,6 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -35,7 +33,6 @@ import net.osmand.util.Algorithms;
 public abstract class SimpleWidget extends TextInfoWidget {
 
 	private final SimpleWidgetState widgetState;
-	private final int HIDE_SMALL_WIDGET_NAME_UNITS_THRESHOLD_DP = 15;
 
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
@@ -62,13 +59,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	}
 
 	public void updateValueAlign(boolean fullRow) {
-		if (WidgetSize.SMALL == getWidgetSizePref().get()) {
-			if (!fullRow) {
-				textView.setMaxWidth((int) (container.getWidth() - app.getResources().getDimension(R.dimen.content_padding) +
-						app.getResources().getDimension(R.dimen.map_widget_icon) +
-						app.getResources().getDimension(R.dimen.content_padding_small)));
-			}
-		} else {
+		if (WidgetSize.SMALL != getWidgetSizePref().get()) {
 			ViewGroup.LayoutParams textViewLayoutParams = textView.getLayoutParams();
 			if (textViewLayoutParams instanceof FrameLayout.LayoutParams) {
 				FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) textView.getLayoutParams();
@@ -185,11 +176,6 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		if (typeAllowed && (!shouldHideTopWidgets || emptyValueTextView)) {
 			updateSimpleWidgetInfo(drawSettings);
 		}
-		if (widgetState.getWidgetSizePref().get() == WidgetSize.SMALL) {
-			int widthThresholdPx = dpToPx(app, HIDE_SMALL_WIDGET_NAME_UNITS_THRESHOLD_DP);
-			widgetNameTextView.setVisibility(widgetNameTextView.getWidth() > widthThresholdPx ? View.VISIBLE : View.INVISIBLE);
-			smallTextView.setVisibility(smallTextView.getWidth() > widthThresholdPx ? View.VISIBLE : View.INVISIBLE);
-		}
 	}
 
 	protected void updateSimpleWidgetInfo(@Nullable OsmandMapLayer.DrawSettings drawSettings) {
@@ -300,7 +286,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 			if (textState != null) {
 				updateColors(textState);
 			}
-			view.requestLayout();
+			updateInfo(null);
 		}
 	}
 }

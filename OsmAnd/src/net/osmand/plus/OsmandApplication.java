@@ -22,6 +22,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarToast;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -59,6 +63,7 @@ import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
@@ -205,10 +210,13 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
 
+	Model3dHelper model3dHelper;
+
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
-
+	private boolean appInForeground;
+	private boolean androidAutoInForeground;
 	// Typeface
 
 	@Override
@@ -219,6 +227,20 @@ public class OsmandApplication extends MultiDexApplication {
 		long timeToStart = System.currentTimeMillis();
 		enableStrictMode();
 		super.onCreate();
+
+		LifecycleObserver appLifecycleObserver = new DefaultLifecycleObserver() {
+			@Override
+			public void onStart(@NonNull LifecycleOwner owner) {
+				appInForeground = true;
+			}
+
+			@Override
+			public void onStop(@NonNull LifecycleOwner owner) {
+				appInForeground = false;
+			}
+		};
+		ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
+
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
@@ -279,6 +301,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
+	}
+
+	public boolean isAppInForeground() {
+		return appInForeground || androidAutoInForeground;
 	}
 
 	private void createInUiThread() {
@@ -586,6 +612,11 @@ public class OsmandApplication extends MultiDexApplication {
 		return weatherHelper.getOfflineForecastHelper();
 	}
 
+	@NonNull
+	public Model3dHelper getModel3dHelper() {
+		return model3dHelper;
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
@@ -635,7 +666,9 @@ public class OsmandApplication extends MultiDexApplication {
 			if (navigationService != null) {
 				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
 			}
+			androidAutoInForeground = false;
 		} else {
+			androidAutoInForeground = true;
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
 		this.carNavigationSession = carNavigationSession;
@@ -939,7 +972,11 @@ public class OsmandApplication extends MultiDexApplication {
 		Intent intent = new Intent(this, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(intent);
+			runInUIThread(() -> {
+				if (isAppInForeground()) {
+					startForegroundService(intent);
+				}
+			});
 		} else {
 			startService(intent);
 		}

@@ -5,10 +5,11 @@ import com.google.gson.annotations.Expose
 import net.osmand.plus.configmap.tracks.TrackItem
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter
 import net.osmand.plus.track.ComparableTracksGroup
+import net.osmand.util.CollectionUtils
 
 class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 
-	private var trackItems: ArrayList<TrackItem> = ArrayList()
+	private var trackItems: MutableList<TrackItem> = ArrayList()
 
 	constructor() : this("") {
 		trackItems = ArrayList()
@@ -35,7 +36,7 @@ class SmartFolder(folderName: String) : TracksGroup, ComparableTracksGroup {
 
 	fun addTrackItem(trackItem: TrackItem) {
 		if (!trackItems.contains(trackItem)) {
-			trackItems.add(trackItem)
+			trackItems = CollectionUtils.addToList(trackItems, trackItem)
 			folderAnalysis = null
 		}
 	}

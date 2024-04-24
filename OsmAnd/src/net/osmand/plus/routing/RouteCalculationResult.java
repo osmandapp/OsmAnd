@@ -60,6 +60,8 @@ public class RouteCalculationResult {
 	protected List<LocationPoint> locationPoints = new ArrayList<>();
 
 	protected List<WorldRegion> missingMaps;
+	protected List<WorldRegion> mapsToUpdate;
+	protected List<WorldRegion> usedMaps;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -204,8 +206,16 @@ public class RouteCalculationResult {
 		return missingMaps;
 	}
 
+	public List<WorldRegion> getMapsToUpdate() {
+		return mapsToUpdate;
+	}
+
+	public List<WorldRegion> getUsedMaps() {
+		return usedMaps;
+	}
+
 	public boolean hasMissingMaps() {
-		return !Algorithms.isEmpty(missingMaps);
+		return !Algorithms.isEmpty(missingMaps) || !Algorithms.isEmpty(mapsToUpdate);
 	}
 
 	public boolean isInitialCalculation() {
@@ -248,7 +258,9 @@ public class RouteCalculationResult {
 					if (locationIndex > interLocations[currentIntermediate]
 							&& getDistanceToLocation(locations, intermediates.get(currentIntermediate), locationIndex) > 50) {
 						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
-						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.straight());
+						// intermediate point should split using average speed from its actual (previous) segment
+						float currentAvgSpeed = localDirections.get(Math.max(0, currentDirection - 1)).getAverageSpeed();
+						RouteDirectionInfo info = new RouteDirectionInfo(currentAvgSpeed, TurnType.straight());
 						info.setRef(toSplit.getRef());
 						info.setStreetName(toSplit.getStreetName());
 						info.setRouteDataObject(toSplit.getRouteDataObject());

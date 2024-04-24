@@ -22,7 +22,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -515,18 +514,14 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 						}
 					}
 				}
-				if (fragment instanceof SmartFolderFragment) {
-					((SmartFolderFragment) fragment).updateContent(loadTracksFinished);
-				} else {
-					fragment.updateContent();
-				}
+				fragment.updateContent();
 			}
 		};
 	}
 
 	@Override
 	public void onSmartFolderUpdated(@NonNull SmartFolder smartFolder) {
-		adapter.updateItem(smartFolder);
+		app.runInUIThread(() -> adapter.updateItem(smartFolder));
 	}
 
 	@Override

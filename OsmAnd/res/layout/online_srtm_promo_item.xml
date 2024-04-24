@@ -26,7 +26,7 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:layout_marginStart="@dimen/content_padding_half"
 				android:layout_marginEnd="@dimen/content_padding"
-				osmand:srcCompat="@drawable/ic_action_world_globe"
+				osmand:srcCompat="@drawable/ic_action_terrain"
 				osmand:tint="?attr/active_color_basic" />
 
 			<LinearLayout
@@ -41,14 +41,14 @@
 					style="@style/TitleStyle.Medium"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="@string/calculate_online"
+					android:text="@string/use_terrain_maps"
 					android:textColor="?attr/active_color_basic" />
 
 				<net.osmand.plus.widgets.TextViewEx
 					style="@style/DescStyle"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="@string/calculate_online_altitude_descr"
+					android:text="@string/use_terrain_maps_summary"
 					android:textColor="?android:attr/textColorSecondary" />
 
 			</LinearLayout>

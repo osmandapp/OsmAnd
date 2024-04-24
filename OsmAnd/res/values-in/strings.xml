@@ -2031,7 +2031,7 @@
     <string name="amenity_type_tourism">Pariwisata</string>
     <string name="amenity_type_transportation">Transportasi</string>
     <string name="any_poi">Apa saja</string>
-    <string name="route_head">Kepala</string>
+    <string name="route_head">Maju di</string>
     <string name="first_time_continue">Nanti</string>
     <string name="map_orientation_portrait">Potret</string>
     <string name="transport_Stop">Stop</string>
@@ -3486,7 +3486,7 @@
     <string name="osm_edits">Suntingan OSM</string>
     <string name="rendering_attr_showRoadMaps_name">Peta hanya jalan</string>
     <string name="map_widget_vector_attributes">Atribut rendering</string>
-    <string name="free">Gratis %1$s</string>
+    <string name="free">Tersisa %1$s</string>
     <string name="rendering_attr_transportStops_name">Perhentian transportasi</string>
     <string name="speak_favorites">Favorit terdekat</string>
     <string name="edit_tilesource_choose_existing">Pilih yang sudah ada…</string>
@@ -5683,4 +5683,8 @@
     <string name="fix_north_up">Aktifkan Utara Tetap Atas</string>
     <string name="use_3d_track_visualization">Visualisasi 3D</string>
     <string name="change_default_appearance_confirmation">Ubah tampilan bawaan dari %1$s?</string>
+    <string name="apply_only_to_new">Terapkan hanya pada baru</string>
+    <string name="change_default_tracks_appearance_confirmation">Terapkan perubahan pada trek yang sudah ada dalam folder atau pada yang baru saja?</string>
+    <string name="shared_string_changes">Perubahan</string>
+    <string name="release_4_8">• Akan dipersiapkan untuk 4.8</string>
 </resources>

@@ -32,13 +32,13 @@ public class ColoringTypeAvailabilityCache {
 		}
 		String key = routeColoringType.getName(routeInfoAttribute);
 		Boolean available = cache.get(key);
-		if (available == null && routeInfoAttribute != null) {
+		if (available == null) {
 			ColoringStyle coloringStyle = new ColoringStyle(routeColoringType, routeInfoAttribute);
 			boolean drawing = isAvailableForDrawingRoute(app, coloringStyle, route);
 			boolean subscription = isAvailableInSubscription(app, coloringStyle, true);
 			available = drawing && subscription;
 			cache.put(key, available);
 		}
-		return available != null ? available : false;
+		return available;
 	}
 }

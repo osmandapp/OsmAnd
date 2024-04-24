@@ -5670,4 +5670,8 @@
     <string name="gpx_approximation_cpp">Surbaze de kurso (C++)</string>
     <string name="gpx_approximation_java">Surbaze de kurso (Java)</string>
     <string name="gpx_approximation_geo_java">Surbaze de geometrio (Java) (rapide)</string>
+    <string name="use_nearby_roads_summary">Uzas malkonektan mapon por akiri proksimajn vojojn kaj iliajn datumojn pri altitudo. Geometrio de la spuro povos ŝanĝiĝi.</string>
+    <string name="use_nearby_roads">Uzi proksimajn vojojn</string>
+    <string name="use_terrain_maps">Uzi terenajn mapojn</string>
+    <string name="use_terrain_maps_summary">Uzas terenajn mapojn por akiri datumojn pri altitudo. Geometrio de la spuro ne ŝanĝiĝos.</string>
 </resources>

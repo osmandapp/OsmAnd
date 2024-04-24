@@ -2422,8 +2422,8 @@ public class OsmandAidlApi {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			ApplicationModeBean bean = mode.toModeBean();
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
-					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
-					bean.navIcon.name(), bean.order);
+					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon,
+					bean.navIcon, bean.order);
 			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);
