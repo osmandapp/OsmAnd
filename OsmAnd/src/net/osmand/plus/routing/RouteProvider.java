@@ -133,11 +133,10 @@ public class RouteProvider {
 						res.missingMaps = params.calculationProgress.missingMaps;
 					}
 					if (!Algorithms.isEmpty(params.calculationProgress.mapsToUpdate)) {
-						if (res.missingMaps == null) {
-							res.missingMaps = params.calculationProgress.mapsToUpdate;
-						} else {
-							res.missingMaps.addAll(params.calculationProgress.mapsToUpdate);
-						}
+						res.mapsToUpdate = params.calculationProgress.mapsToUpdate;
+					}
+					if (!Algorithms.isEmpty(params.calculationProgress.potentiallyUsedMaps)) {
+						res.usedMaps = params.calculationProgress.potentiallyUsedMaps;
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);

@@ -13,6 +13,12 @@
     <string name="release_4_8">
         • To be prepared for 4.8
     </string>
+    <string name="maps_that_also_be_used">Maps that also be used: %1$s</string>
+    <string name="getting_list_of_required_maps">Getting a list of required maps…</string>
+    <string name="required_maps_calculate_online_summary">The list of missing maps is based on the straight line route. To get an accurate list of maps, OsmAnd can pre-calculate your route online.</string>
+    <string name="required_maps">Required Maps</string>
+    <string name="missing_maps_description">Some offline maps required for this route are missing or not up to date. Please download or update these maps.</string>
+    <string name="missing_maps_header">Missing or outdated maps</string>
     <string name="route_line_use_coloring_speed">Route line is colored by speed of movement.</string>
     <string name="route_line_use_coloring_altitude">Route line is colored by elevation altitude.</string>
     <string name="delete_actions_button_confirmation">Are you sure you want to delete \"%1$s\" with all added actions?</string>
