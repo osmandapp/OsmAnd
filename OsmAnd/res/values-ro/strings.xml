@@ -5687,4 +5687,5 @@
 \n
 \n</string>
     <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
+    <string name="maps_that_also_be_used">Hărți care pot fi utilizate și în acest caz: %1$s</string>
 </resources>
