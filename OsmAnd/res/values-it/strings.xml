@@ -5669,4 +5669,21 @@
     <string name="apply_only_to_new">Applicare solo al nuovo</string>
     <string name="change_default_tracks_appearance_confirmation">Applicare le modifiche alle tracce esistenti nella cartella o solo a quelle nuove?</string>
     <string name="shared_string_changes">Cambiamenti</string>
+    <string name="shared_string_scale">Scala</string>
+    <string name="vertical_exaggeration">Esagerazione verticale</string>
+    <string name="vertical_exaggeration_description">Cambiando il valore della scala puoi enfatizzare i rilievi 3D.</string>
+    <string name="gpx_approximation_cpp">Routing-based (C++)</string>
+    <string name="delete_actions_button">Pulsante elimina</string>
+    <string name="use_terrain_maps">Usa le mappe di Elevazione</string>
+    <string name="use_terrain_maps_summary">Utilizza mappe del terreno per i dati di altimetria. Le geometrie delle tracce non verranno modificate.</string>
+    <string name="use_nearby_roads">Usa strade vicine</string>
+    <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
+    <string name="auto_zoom_smooth">Liscio</string>
+    <string name="gpx_approximation_java">Routing-based (Java)</string>
+    <string name="release_4_8">• Predisposto per la 4.8</string>
+    <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" con tutte le azioni aggiunte?</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd può recuperare dati altimetrici da strade nelle vicinanze o dalle mappe altimetriche.</string>
+    <string name="shared_string_osm_id">ID OSM</string>
+    <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il suolo sulla mappa.</string>
+    <string name="use_nearby_roads_summary">Utilizza mappe offline per individuare strade &amp; dati altimetrici. Potrebbe correggere la geometria della traccia.</string>
 </resources>
