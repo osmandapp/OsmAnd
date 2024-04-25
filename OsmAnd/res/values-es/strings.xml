@@ -5696,4 +5696,12 @@
     <string name="delete_actions_button_confirmation">¿Estas seguro que quieres borrarlo \"%1$s\" con todas las acciones agregadas?</string>
     <string name="delete_actions_button">Botón eliminar</string>
     <string name="shared_string_osm_id">ID de OSM</string>
+    <string name="getting_list_of_required_maps">Obteniendo una lista de mapas necesarios…</string>
+    <string name="required_maps_calculate_online_summary">La lista de mapas que faltan se basa en la ruta en línea recta. Para obtener una lista precisa de mapas, OsmAnd puede precalcular su ruta en línea.</string>
+    <string name="maps_that_also_be_used">Mapas que también se utilizarán: %1$s</string>
+    <string name="required_maps">Mapas necesarios</string>
+    <string name="missing_maps_description">Algunos mapas offline necesarios para esta ruta no están disponibles o no están actualizados. Por favor, descargue o actualice estos mapas.</string>
+    <string name="missing_maps_header">Mapas que faltan o anticuados</string>
+    <string name="route_line_use_coloring_speed">La línea de ruta está coloreada según la velocidad de movimiento.</string>
+    <string name="route_line_use_coloring_altitude">La línea de ruta está coloreada según la altitud de elevación.</string>
 </resources>
