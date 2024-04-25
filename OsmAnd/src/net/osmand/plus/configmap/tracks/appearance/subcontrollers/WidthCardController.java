@@ -120,7 +120,6 @@ public class WidthCardController extends BaseMultiStateCardController {
 			container.removeAllViews();
 			ModedSliderCard widthComponentCard = new ModedSliderCard(activity, controller);
 			container.addView(widthComponentCard.build(activity));
-			updateColorItems();
 		}
 		controller.askSelectWidthMode(getWidthValue(selectedState));
 		container.setTag(WIDTH_COMPONENT_CARD_ID);
@@ -134,11 +133,6 @@ public class WidthCardController extends BaseMultiStateCardController {
 		if (listener != null) {
 			listener.onTrackWidthSelected(widthValue);
 		}
-	}
-
-	public void updateColorItems() {
-		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull

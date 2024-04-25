@@ -646,8 +646,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void updateColorItems() {
 		updateAppearanceIcon();
-		TrackWidthController widthController = getWidthCardController();
-		widthController.updateColorItems();
 		refreshMap();
 	}
 
@@ -745,7 +743,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			TrackWidthController trackWidthController = getWidthCardController();
 			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
-			trackWidthController.setControlsColorProvider(trackColorController);
 			addCard(container, new ActionsCard(mapActivity));
 		}
 	}
