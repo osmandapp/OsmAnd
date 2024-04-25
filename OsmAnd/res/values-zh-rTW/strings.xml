@@ -5685,4 +5685,12 @@
     <string name="use_terrain_maps_summary">使用地形圖取得相對高度資料。軌跡幾何形狀保持不變。</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="retrieve_elevation_data_summary">OsmAnd 可以從附近的道路或地形圖擷取相對高度資料。</string>
+    <string name="required_maps">所需的地圖</string>
+    <string name="missing_maps_header">缺少或過時的地圖</string>
+    <string name="maps_that_also_be_used">也可以使用的地圖：%1$s</string>
+    <string name="getting_list_of_required_maps">取得所需地圖的清單……</string>
+    <string name="required_maps_calculate_online_summary">缺少的地圖清單是以直線路線為基礎。為了取得準確的地圖清單，OsmAnd 可以線上預先計算您的路線。</string>
+    <string name="missing_maps_description">此路線所需的一些離線地圖遺失或非最新。請下載貨更新這些地圖。</string>
+    <string name="route_line_use_coloring_speed">路線根據移動速度著色。</string>
+    <string name="route_line_use_coloring_altitude">路線根據海拔高度著色。</string>
 </resources>
