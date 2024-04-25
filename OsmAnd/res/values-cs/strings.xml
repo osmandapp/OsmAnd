@@ -1252,7 +1252,7 @@
     <string name="rendering_attr_moreDetailed_name">Více detailů</string>
     <string name="rendering_attr_lessDetailed_name">Méně detailů</string>
     <string name="rendering_attr_hideAccess_name">Omezení přístupu</string>
-    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu</string>
+    <string name="rendering_attr_showAccess_name">Zobrazit omezení přístupu a mýto</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobrazit kvalitu cesty</string>
     <string name="rendering_attr_subwayMode_name">Trasy metra</string>
     <string name="pause_navigation">Pozastavit navigaci</string>
@@ -4472,8 +4472,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Zobrazit značky poznámek</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ikony při malém přiblížení</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Schematické zobrazení ikon při malém přiblížení</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunely vodních cest</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Neskrývat tunely vodních cest</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Zvýšit viditelnost tunelů vodních cest</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Zvýšit viditelnost tunelů vodních cest</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_name">Detaily mořského dna</string>
     <string name="rendering_value_category_name">Kategorie</string>
@@ -5638,6 +5638,8 @@
 \n• Vylepšená čitelnost dat v grafech
 \n
 \n• Přidané filtry pro stopy podle dat ze snímačů
+\n
+\n• Vylepšené přizpůsobení vzhledu pro skupiny stop
 \n
 \n• Přidaná podpora dalších GPX značek
 \n
