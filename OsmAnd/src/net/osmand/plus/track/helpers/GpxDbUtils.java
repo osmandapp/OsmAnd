@@ -16,6 +16,7 @@ import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Arrays;
@@ -242,6 +243,11 @@ public class GpxDbUtils {
 	public static boolean isAnalyseNeeded(@Nullable GpxDataItem item) {
 		if (item != null) {
 			return !item.hasData() || item.getAnalysis() == null
+					|| Algorithms.isEmpty(item.getAnalysis().getWptCategoryNames())
+					|| item.getAnalysis().getLatLonStart() == null && item.getAnalysis().getPoints() > 0
+					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != item.getFile().lastModified()
+					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
+					|| (long) item.getParameter(EXPECTED_ROUTE_DURATION) < 0
 					|| createDataVersion(ANALYSIS_VERSION) > (int) item.getParameter(DATA_VERSION);
 		}
 		return true;
