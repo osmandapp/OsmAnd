@@ -12,7 +12,6 @@
         style="@style/DescStyle.Medium"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground"
         android:gravity="center"
         android:paddingLeft="@dimen/context_menu_padding_margin_medium"
         android:paddingTop="@dimen/content_padding_half"

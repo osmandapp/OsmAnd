@@ -6,7 +6,7 @@
 	android:layout_height="wrap_content"
 	android:layout_marginStart="@dimen/content_padding"
 	android:layout_marginEnd="@dimen/content_padding"
-	android:background="?attr/btn_bg_border_inactive"
+	tools:background="?attr/btn_bg_border_inactive"
 	android:baselineAligned="false"
 	android:minHeight="@dimen/dialog_button_height"
 	android:orientation="horizontal"

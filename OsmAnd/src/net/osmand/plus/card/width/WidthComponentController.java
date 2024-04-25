@@ -119,18 +119,6 @@ public class WidthComponentController implements IModedSliderController {
 		return context.getString(widthMode.getTitleId());
 	}
 
-	public void updateColorItems(int iconsColor) {
-		this.iconsColor = iconsColor;
-		if (cardInstance != null) {
-			cardInstance.updateControlsColor();
-		}
-	}
-
-	@Override
-	public Integer getSliderModeColor(@NonNull SliderMode sliderMode) {
-		return !Objects.equals(sliderMode.getTag(), WidthMode.CUSTOM) ? iconsColor : null;
-	}
-
 	@NonNull
 	public String getSelectedWidthValue() {
 		return widthMode == WidthMode.CUSTOM ? String.valueOf(customValue) : widthMode.getKey();

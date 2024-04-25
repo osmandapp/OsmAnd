@@ -36,7 +36,6 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 	private final TrackDrawInfo drawInfo;
 
 	private IHeadedContentCard cardInstance;
-	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
 	private ITrackWidthSelectedListener listener;
@@ -54,10 +53,6 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 
 	public void setOnNeedScrollListener(@NonNull OnNeedScrollListener onNeedScrollListener) {
 		this.onNeedScrollListener = onNeedScrollListener;
-	}
-
-	public void setControlsColorProvider(@NonNull IControlsColorProvider controlsColorProvider) {
-		this.controlsColorProvider = controlsColorProvider;
 	}
 
 	public void setListener(@NonNull ITrackWidthSelectedListener listener) {
@@ -130,11 +125,6 @@ public class TrackWidthController implements IHeadedCardController, IDialogContr
 		});
 
 		return view;
-	}
-
-	public void updateColorItems() {
-		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull

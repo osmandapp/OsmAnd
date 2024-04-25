@@ -214,7 +214,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		RouteLineWidthController widthController = getWidthCardController();
 		inflate(R.layout.list_item_divider_basic, cardsContainer, true);
 		widthCard = new MultiStateCard(mapActivity, widthController);
-		widthController.setControlsColorProvider(colorController);
 		cardsContainer.addView(widthCard.build(mapActivity));
 
 		RouteTurnArrowsCard turnArrowCard = new RouteTurnArrowsCard(mapActivity, previewRouteLineInfo);
@@ -548,8 +547,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void updateColorItems() {
-		RouteLineWidthController widthController = getWidthCardController();
-		widthController.updateColorItems();
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
 		}
