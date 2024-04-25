@@ -11,13 +11,13 @@ import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
 
+// DONE Native lib - required
 // DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
 // DONE fixed Map Creator gpx "gaps" (the bug was lost results of splitRoadsAndAttachRoadSegments)
 
-// TODO check/remove usage of finalPoints from Android/iOS
-// TODO fix minor "Points are not connected"
-// TODO Native lib - required
+// TODO fix minor "Points are not connected" (~0.01m)
+// TODO remove usage of finalPoints in Android/iOS (really ?)
 
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
 // TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
