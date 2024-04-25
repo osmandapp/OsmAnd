@@ -31,6 +31,10 @@ public class MissingMapsCalculator {
 	private BinaryMapIndexReader reader;
 	private List<String> lastKeyNames ;
 
+	private RoutingContext ctx;
+	private LatLon startPoint;
+	private LatLon endPoint;
+
 	private static class Point {
 		List<String> regions;
 		long[] hhEditions; // 0 means routing data present but no HH data, null means no data at all
@@ -53,9 +57,19 @@ public class MissingMapsCalculator {
 	public MissingMapsCalculator(OsmandRegions osmandRegions) {
 		or = osmandRegions;
 	}
-	
+
+	public boolean checkIfThereAreMissingMaps(List<LatLon> targets, boolean oldRouting) throws IOException {
+		return checkIfThereAreMissingMaps(ctx, startPoint, targets, !oldRouting);
+	}
+
 	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
 			throws IOException {
+		this.ctx = ctx;
+		this.startPoint = start;
+		if (targets.size() > 0) {
+			this.endPoint = targets.get(targets.size() - 1);
+		}
+
 		long tm = System.nanoTime();
 		lastKeyNames = new ArrayList<String>();
 		List<Point> pointsToCheck = new ArrayList<>();
@@ -156,6 +170,14 @@ public class MissingMapsCalculator {
 		log.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
 				(System.nanoTime() - tm) / 1e9));
 		return true;
+	}
+
+	public LatLon getStartPoint() {
+		return startPoint;
+	}
+
+	public LatLon getEndPoint() {
+		return endPoint;
 	}
 
 	private List<WorldRegion> convert(Set<String> mapsToDownload) {

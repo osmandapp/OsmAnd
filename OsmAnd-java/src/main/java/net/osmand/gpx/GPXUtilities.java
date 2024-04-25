@@ -537,7 +537,7 @@ public class GPXUtilities {
 			this.name = pt.name;
 			this.category = pt.category;
 
-			Map<String, String> extensions = getExtensionsToRead();
+			Map<String, String> extensions = pt.getExtensionsToRead();
 			String color = extensions.get(COLOR_NAME_EXTENSION);
 			if (color != null) {
 				setColor(color);

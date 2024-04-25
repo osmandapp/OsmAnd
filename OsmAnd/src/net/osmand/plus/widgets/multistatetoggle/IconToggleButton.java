@@ -1,6 +1,7 @@
 package net.osmand.plus.widgets.multistatetoggle;
 
 import android.graphics.drawable.Drawable;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +44,11 @@ public class IconToggleButton extends MultiStateToggleButton<IconRadioItem> {
 			Drawable icon = uiUtilities.getPaintedIcon(item.getIconId(), color);
 			ivIcon.setImageDrawable(icon);
 		}
+	}
+
+	@Override
+	protected View getBorderBackgroundView(@NonNull ViewGroup button) {
+		return button.findViewById(R.id.background_border);
 	}
 
 	public static class IconRadioItem extends RadioItem {

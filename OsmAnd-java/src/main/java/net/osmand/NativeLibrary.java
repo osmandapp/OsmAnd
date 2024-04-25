@@ -250,7 +250,7 @@ public class NativeLibrary {
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, HHRoutingConfig hhRoutingConfig, RouteRegion[] regions, boolean basemap) {
 		// if hhRoutingConfig == null - process old routing
 		if (hhRoutingConfig != null) {
-			setHHNativeFilter(c);
+			setHHNativeFilterAndParameters(c);
 		}
 		final float CPP_NO_DIRECTION = -2 * (float) Math.PI;
 		return nativeRouting(c, hhRoutingConfig, c.config.initialDirection == null ?
@@ -258,9 +258,10 @@ public class NativeLibrary {
 				regions, basemap);
 	}
 
-	private void setHHNativeFilter(RoutingContext ctx) {
+	private void setHHNativeFilterAndParameters(RoutingContext ctx) {
 		GeneralRouter gr = (GeneralRouter) ctx.getRouter();
-		TreeMap<String, String> tags =  HHRoutePlanner.getFilteredTags(gr);
+
+		TreeMap<String, String> tags = HHRoutePlanner.getFilteredTags(gr);
 		String[] tm = new String[tags.size() * 2];
 		int index = 0;
 		for (Map.Entry<String, String> entry : tags.entrySet()) {
@@ -269,6 +270,13 @@ public class NativeLibrary {
 			index += 2;
 		}
 		gr.hhNativeFilter = tm;
+
+		int i = 0;
+		gr.hhNativeParameterValues = new String[gr.getParameterValues().size() * 2];
+		for (Map.Entry<String, String> entry : gr.getParameterValues().entrySet()) {
+			gr.hhNativeParameterValues[i++] = entry.getKey();
+			gr.hhNativeParameterValues[i++] = entry.getValue();
+		}
 	}
 
 	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {

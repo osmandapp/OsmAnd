@@ -329,7 +329,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adjustMapPosition(getHeight());
+
+		Fragment fragment = getTargetFragment();
+		if (!(fragment instanceof TrackMenuFragment)) {
+			adjustMapPosition(getHeight());
+		}
 	}
 
 	@Override
@@ -646,8 +650,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void updateColorItems() {
 		updateAppearanceIcon();
-		TrackWidthController widthController = getWidthCardController();
-		widthController.updateColorItems();
 		refreshMap();
 	}
 
@@ -745,7 +747,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			TrackWidthController trackWidthController = getWidthCardController();
 			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
-			trackWidthController.setControlsColorProvider(trackColorController);
 			addCard(container, new ActionsCard(mapActivity));
 		}
 	}

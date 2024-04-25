@@ -92,6 +92,7 @@ import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
 import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
 import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
+import net.osmand.plus.routepreparationmenu.cards.MissingMapsWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
 import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
@@ -100,7 +101,6 @@ import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.SuggestionsMapsDownloadWarningCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -704,7 +704,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		} else {
 			if (hasCalculatedMissingMaps) {
-				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
+				menuCards.add(new MissingMapsWarningCard(mapActivity));
 			} else {
 				// Home/work card
 				HomeWorkCard homeWorkCard = new HomeWorkCard(mapActivity);
@@ -768,7 +768,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private boolean hasCalculatedMissingMaps(@NonNull OsmandApplication app) {
-		return !Algorithms.isEmpty(app.getRoutingHelper().getRoute().getMissingMaps());
+		return app.getRoutingHelper().getRoute().hasMissingMaps();
 	}
 
 	private void setupCards() {

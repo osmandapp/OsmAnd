@@ -50,7 +50,7 @@ public class RoutePlannerFrontEnd {
 	private HHRoutingConfig hhRoutingConfig = null;
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
 	private static MissingMapsCalculator missingMapsCalculator;
-	
+
 
 	public RoutePlannerFrontEnd() {
 	}
@@ -907,7 +907,7 @@ public class RoutePlannerFrontEnd {
 	}
 
 	public RouteCalcResult searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates,
-	                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+	                                   PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		if (ctx.calculationProgress == null) {
 			ctx.calculationProgress = new RouteCalculationProgress();
@@ -1408,6 +1408,8 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	
+	public static MissingMapsCalculator getMissingMapsCalculator() {
+		return missingMapsCalculator;
+	}
 
 }

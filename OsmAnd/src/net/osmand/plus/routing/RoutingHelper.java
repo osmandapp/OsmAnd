@@ -418,8 +418,12 @@ public class RoutingHelper {
 
 				// 2. Analyze if we need to recalculate route
 				// >100m off current route (sideways) or parameter (for Straight line)
-				if (currentRoute > 0 && allowableDeviation > 0) {
-					distOrth = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+				if (allowableDeviation > 0) {
+					if (currentRoute == 0) {
+						distOrth = currentLocation.distanceTo(routeNodes.get(currentRoute)); // deviation at the start
+					} else {
+						distOrth = RoutingHelperUtils.getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+					}
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
@@ -656,7 +660,8 @@ public class RoutingHelper {
 						deviceHasBearing = true;
 					}
 					// lastFixedLocation.bearingTo -  gives artefacts during u-turn, so we avoid for devices with bearing
-					if (currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null)) {
+					if ((currentRoute > 0 || newCurrentRoute > 0) &&
+							(currentLocation.hasBearing() || (!deviceHasBearing && lastFixedLocation != null))) {
 						float bearingToRoute = currentLocation.bearingTo(routeNodes.get(currentRoute));
 						float bearingRouteNext = routeNodes.get(newCurrentRoute).bearingTo(routeNodes.get(newCurrentRoute + 1));
 						float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
