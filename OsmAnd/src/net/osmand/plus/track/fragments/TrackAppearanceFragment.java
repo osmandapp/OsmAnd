@@ -329,7 +329,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		adjustMapPosition(getHeight());
+
+		Fragment fragment = getTargetFragment();
+		if (!(fragment instanceof TrackMenuFragment)) {
+			adjustMapPosition(getHeight());
+		}
 	}
 
 	@Override
