@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public enum TemperatureUnit implements WeatherUnit {
@@ -24,6 +25,12 @@ public enum TemperatureUnit implements WeatherUnit {
 	@StringRes
 	public int getTitleId() {
 		return titleId;
+	}
+
+	@NonNull
+	@Override
+	public String getUnit(@NonNull OsmandApplication app) {
+		return symbol;
 	}
 
 	@NonNull

@@ -117,7 +117,7 @@ public class WeatherWidget extends SimpleWidget {
 	public void updateContent(@Nullable String formattedValue) {
 		app.removeMessagesInUiThread(hideOldDataMessageId);
 		if (!Algorithms.isEmpty(formattedValue)) {
-			setText(formattedValue, weatherBand.getBandUnit().getSymbol());
+			setText(formattedValue, weatherBand.getBandUnit().getUnit(app));
 		} else {
 			setText(NO_VALUE, null);
 		}
