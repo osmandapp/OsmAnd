@@ -5641,6 +5641,8 @@
 \n
 \n• Aggiunta dei filtri in base ai dati dei sensori per le tracce
 \n
+\n• Migliorata la personalizzazione dell\'aspetto di gruppi di tracce
+\n
 \n• Aggiunto il supporto per tag GPX aggiuntivi
 \n
 \n• Personalizza la \"Distanza durante la navigazione\": scegli tra numeri precisi o arrotondati per eccesso
@@ -5686,4 +5688,12 @@
     <string name="shared_string_osm_id">ID OSM</string>
     <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il suolo sulla mappa.</string>
     <string name="use_nearby_roads_summary">Utilizza mappe offline per individuare strade &amp; dati altimetrici. Potrebbe correggere la geometria della traccia.</string>
+    <string name="maps_that_also_be_used">Mappe già utilizzate: %1$s</string>
+    <string name="required_maps_calculate_online_summary">La lista delle mappe mancanti è basata sul base del percorso in linea retta. Per avere una lista accurata delle mappe, OsmAnd può pre-calcolare online il tuo percorso.</string>
+    <string name="missing_maps_description">Alcune mappe offline non aggiornate o mancanti sono richieste. Pregasi di aggiornarle o scaricarle.</string>
+    <string name="getting_list_of_required_maps">Recuperando la lista delle mappe richieste …</string>
+    <string name="required_maps">Mappe richieste</string>
+    <string name="route_line_use_coloring_speed">La linea del percorso è colorata in base alla velocità dello spostamento.</string>
+    <string name="route_line_use_coloring_altitude">La linea del percorso è colorata i base all\'altitudine.</string>
+    <string name="missing_maps_header">Mappe mancanti o da aggiornare</string>
 </resources>
