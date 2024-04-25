@@ -302,7 +302,7 @@ public class NativeLibrary {
 		RouteRegion region = rsr.getObject().region;
 		if (region == null) {
 			// gCtx.finalPoints is fixed by fixStraightLineRegion
-			// null region(s) in gCtx.result should be fixed too
+			// gCtx.result null region(s) should be fixed here
 			RouteRegion reg = new RouteRegion();
 			reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 			RouteDataObject newRdo = new RouteDataObject(reg);
