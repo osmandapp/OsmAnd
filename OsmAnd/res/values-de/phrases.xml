@@ -4865,4 +4865,5 @@
     <string name="poi_indoor_seating_no">Keine Sitzplätze innen</string>
     <string name="poi_indoor_seating_yes">Sitzplätze innen: ja</string>
     <string name="poi_indoor_seating_bar_table">Sitzplätze innen: Tresen</string>
+    <string name="poi_property_management">Immobilienverwaltung</string>
 </resources>
