@@ -30,7 +30,6 @@ class AutoScaleTextView : androidx.appcompat.widget.AppCompatTextView {
 	private var maxTextSize = 30f
 
 	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 		var width = MeasureSpec.getSize(widthMeasureSpec)
 		var height = MeasureSpec.getSize(heightMeasureSpec)
 		val modeW = MeasureSpec.getMode(widthMeasureSpec)
