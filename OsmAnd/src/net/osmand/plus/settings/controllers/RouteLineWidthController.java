@@ -43,7 +43,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	private PreviewRouteLineInfo routeLinePreview;
 
-	private IControlsColorProvider controlsColorProvider;
 	private WidthComponentController widthComponentController;
 	private OnNeedScrollListener onNeedScrollListener;
 	private IRouteLineWidthControllerListener listener;
@@ -55,10 +54,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 
 	public void setListener(@NonNull IRouteLineWidthControllerListener listener) {
 		this.listener = listener;
-	}
-
-	public void setControlsColorProvider(@NonNull IControlsColorProvider controlsColorProvider) {
-		this.controlsColorProvider = controlsColorProvider;
 	}
 
 	public void setOnNeedScrollListener(@NonNull OnNeedScrollListener onNeedScrollListener) {
@@ -140,7 +135,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 					routeLinePreview.setShowDirectionArrows(true);
 				}
 			});
-			updateColorItems();
 		}
 		controller.askSelectWidthMode(getWidthValue(selectedState));
 		container.setTag(WIDTH_COMPONENT_CARD_ID);
@@ -156,11 +150,6 @@ public class RouteLineWidthController extends BaseMultiStateCardController imple
 	private void setRouteLineWidth(String width) {
 		routeLinePreview.setWidth(width);
 		app.getOsmandMap().getMapView().refreshMap();
-	}
-
-	public void updateColorItems() {
-		WidthComponentController controller = getWidthComponentController();
-		controller.updateColorItems(controlsColorProvider.getSelectedControlsColor());
 	}
 
 	@NonNull

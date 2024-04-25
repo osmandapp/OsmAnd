@@ -23,8 +23,4 @@ public interface IModedSliderController extends ISliderCardController {
 
 	boolean isSelectedSliderMode(@NonNull SliderMode sliderMode);
 
-	@ColorInt
-	@Nullable
-	Integer getSliderModeColor(@NonNull SliderMode sliderMode);
-
 }

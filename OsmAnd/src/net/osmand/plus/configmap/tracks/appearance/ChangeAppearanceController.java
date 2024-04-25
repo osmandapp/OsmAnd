@@ -69,17 +69,11 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		data.setParameter(COLORING_TYPE, coloringStyle != null ? coloringStyle.getId() : null);
-		updateColorItems();
 	}
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
 		data.setParameter(COLOR, paletteColor.getColor());
-		updateColorItems();
-	}
-
-	private void updateColorItems() {
-		widthCardController.updateColorItems();
 	}
 
 	public boolean hasAnyChangesToCommit() {
