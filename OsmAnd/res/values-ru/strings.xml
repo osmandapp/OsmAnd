@@ -4072,7 +4072,7 @@
     <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
-    <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от угла подъёма.</string>
+    <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от величины уклона.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
     <string name="language_description">Выберите язык и тип голосовых инструкций.</string>
@@ -5699,4 +5699,12 @@
     <string name="delete_actions_button">Удалить кнопку</string>
     <string name="delete_actions_button_confirmation">Вы уверены, что хотите удалить «%1$s» со всеми добавленными действиями?</string>
     <string name="shared_string_osm_id">OSM ID</string>
+    <string name="maps_that_also_be_used">Карты, которые также можно использовать: %1$s</string>
+    <string name="getting_list_of_required_maps">Получение списка необходимых карт…</string>
+    <string name="route_line_use_coloring_altitude">Линия маршрута окрашена в зависимости от высоты над уровнем моря.</string>
+    <string name="required_maps_calculate_online_summary">Список недостающих карт составлен на основе прямого маршрута. Чтобы получить точный список карт, OsmAnd может заранее рассчитать ваш маршрут онлайн.</string>
+    <string name="required_maps">Требуемые карты</string>
+    <string name="missing_maps_description">Некоторые локальные карты, необходимые для этого маршрута, отсутствуют или устарели. Пожалуйста, загрузите или обновите эти карты.</string>
+    <string name="missing_maps_header">Отсутствующие или устаревшие карты</string>
+    <string name="route_line_use_coloring_speed">Линия маршрута окрашена в зависимости от скорости движения.</string>
 </resources>
