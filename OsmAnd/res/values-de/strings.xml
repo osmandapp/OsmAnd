@@ -5637,7 +5637,7 @@
     <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
     <string name="auto_zoom_smooth">Glatt</string>
-    <string name="auto_zoom_discrete">Diskret</string>
+    <string name="auto_zoom_discrete">Schrittweise</string>
     <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
@@ -5692,10 +5692,19 @@
     <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts kannst du das 3D- Profil hervorheben.</string>
     <string name="shared_string_scale">Maßstab</string>
     <string name="use_terrain_maps">Terrain Karten verwenden</string>
-    <string name="use_nearby_roads">Nächstgelegene Straße verwenden</string>
+    <string name="use_nearby_roads">Nutzung von nahegelegenen Straßen</string>
     <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Spurgeometrie bleibt unverändert.</string>
     <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um in der Nähe Straßen und Höhendaten zu finden. Kann Weggeometrie anpassen.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kann Höhendaten von nahe gelegenen Straßen oder Geländekarten abrufen.</string>
     <string name="delete_actions_button">Löschen Taste</string>
     <string name="shared_string_osm_id">OSM ID</string>
+    <string name="maps_that_also_be_used">Karten, die auch verwendet werden: %1$s</string>
+    <string name="route_line_use_coloring_speed">Die Routenlinie ist nach der Geschwindigkeit der Fortbewegung eingefärbt.</string>
+    <string name="required_maps_calculate_online_summary">Die Liste der fehlenden Karten basiert auf der direkten Streckenroute. Um eine genaue Liste der Karten zu erhalten, kann OsmAnd Ihre Route online vorberechnen.</string>
+    <string name="required_maps">Benötigte Karten</string>
+    <string name="missing_maps_description">Einige Offline-Karten, die für diese Route benötigt werden, fehlen oder sind nicht auf dem neuesten Stand. Bitte lade diese Karten herunter oder aktualisiere diese.</string>
+    <string name="missing_maps_header">Fehlende oder veraltete Karte</string>
+    <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
+    <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage bzw. Höhe gefärbt.</string>
+    <string name="delete_actions_button_confirmation">Bist du sicher, dass du \"%1$s\" mit allen hinzugefügten Aktionen löschen möchtest?</string>
 </resources>
