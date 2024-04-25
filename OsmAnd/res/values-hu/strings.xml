@@ -5693,4 +5693,12 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="delete_actions_button">Gomb törlése</string>
     <string name="delete_actions_button_confirmation">Biztos törölni akarja \"%1$s\"-t az összes hozzáadott művelettel együtt?</string>
+    <string name="required_maps">Szükséges térképek</string>
+    <string name="missing_maps_description">Néhány ehhez az útvonalhoz szükséges offline térkép hiányzik vagy nem naprakész. Kérjük, töltse le vagy frissítse ezeket a térképeket.</string>
+    <string name="maps_that_also_be_used">Szintén használt térképek: %1$s</string>
+    <string name="getting_list_of_required_maps">A szükséges térképek listájának lekérése…</string>
+    <string name="required_maps_calculate_online_summary">A hiányzó térképek listája légvonalú útvonalon alapul. A térképek pontos listájához az OsmAnd online előre ki tudja számítani az útvonalat.</string>
+    <string name="missing_maps_header">Hiányzó vagy nem naprakész térképek</string>
+    <string name="route_line_use_coloring_altitude">Az útvonal a magasság változása szerint színezett.</string>
+    <string name="route_line_use_coloring_speed">Az útvonal a haladás sebessége szerint színezett.</string>
 </resources>

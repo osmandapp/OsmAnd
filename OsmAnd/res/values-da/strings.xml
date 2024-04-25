@@ -5700,4 +5700,12 @@
     <string name="delete_actions_button_confirmation">Er du sikker på, at du vil slette \"%1$s\" med alle tilføjede handlinger?</string>
     <string name="delete_actions_button">Slet knap</string>
     <string name="shared_string_osm_id">OSM ID</string>
+    <string name="getting_list_of_required_maps">Henter en liste over nødvendige kort…</string>
+    <string name="required_maps_calculate_online_summary">Listen over manglende kort er baseret på ruten i lige linje. For at få en nøjagtig liste over kort kan OsmAnd forudberegne din rute online.</string>
+    <string name="maps_that_also_be_used">Kort, der også kan bruges: %1$s</string>
+    <string name="route_line_use_coloring_speed">Rutelinjen er farvet efter bevægelseshastighed.</string>
+    <string name="route_line_use_coloring_altitude">Rutelinjen er farvet efter højde over havet.</string>
+    <string name="required_maps">Nødvendige kort</string>
+    <string name="missing_maps_description">Nogle offline-kort, der er kræves for denne rute, mangler eller er ikke opdaterede. Download eller opdater disse kort.</string>
+    <string name="missing_maps_header">Manglende eller forældede kort</string>
 </resources>
