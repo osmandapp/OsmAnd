@@ -1,48 +1,7 @@
 package net.osmand.plus.download.local;
 
-import static net.osmand.IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.FONT_INDEX_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
-import static net.osmand.IndexConstants.LIVE_INDEX_DIR;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.ROUTING_PROFILES_DIR;
-import static net.osmand.IndexConstants.TIF_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.IndexConstants.WEATHER_EXT;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.IndexConstants.ZIP_EXT;
-import static net.osmand.plus.download.local.LocalItemType.ACTIVE_MARKERS;
-import static net.osmand.plus.download.local.LocalItemType.CACHE;
-import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
-import static net.osmand.plus.download.local.LocalItemType.FAVORITES;
-import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ITINERARY_GROUPS;
-import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
-import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
-import static net.osmand.plus.download.local.LocalItemType.MULTIMEDIA_NOTES;
-import static net.osmand.plus.download.local.LocalItemType.OSM_EDITS;
-import static net.osmand.plus.download.local.LocalItemType.OSM_NOTES;
-import static net.osmand.plus.download.local.LocalItemType.OTHER;
-import static net.osmand.plus.download.local.LocalItemType.PROFILES;
-import static net.osmand.plus.download.local.LocalItemType.RENDERING_STYLES;
-import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
-import static net.osmand.plus.download.local.LocalItemType.ROUTING;
-import static net.osmand.plus.download.local.LocalItemType.TERRAIN_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TILES_DATA;
-import static net.osmand.plus.download.local.LocalItemType.TRACKS;
-import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
-import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.download.local.LocalItemType.*;
 import static net.osmand.plus.mapmarkers.MapMarkersDbHelper.DB_NAME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
@@ -67,6 +26,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
@@ -75,6 +35,8 @@ import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
@@ -87,9 +49,12 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class LocalItemUtils {
 
@@ -292,9 +257,8 @@ public class LocalItemUtils {
 			}
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		OsmandSettings settings = app.getSettings();
 		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
-		boolean reversed = !settings.LOCAL_MAPS_SORT_MODE.get().isCountryMode();
+		boolean reversed = !getSortModePref(app, type).get().isCountryMode();
 
 		String divider = ", ";
 		String name = FileNameTranslationHelper.getFileName(context, regions, fileName, divider, true, reversed);
@@ -318,5 +282,27 @@ public class LocalItemUtils {
 			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);
 		}
+	}
+
+	@NonNull
+	public static List<LocalItem> collectLocalItems(@NonNull Set<BaseLocalItem> items) {
+		List<LocalItem> localItems = new ArrayList<>();
+		for (BaseLocalItem item : items) {
+			if (item instanceof LocalItem) {
+				localItems.add((LocalItem) item);
+			} else if (item instanceof LiveGroupItem) {
+				localItems.addAll(((LiveGroupItem) item).getItems());
+			}
+		}
+		return localItems;
+	}
+
+	@NonNull
+	public static CommonPreference<LocalSortMode> getSortModePref(@NonNull OsmandApplication app, @NonNull LocalItemType type) {
+		OsmandSettings settings = app.getSettings();
+		String prefId = "local_" + type.name().toLowerCase(Locale.US) + "_sort_mode";
+		LocalSortMode defMode = LocalSortMode.getDefaultSortMode(type);
+		LocalSortMode[] supportedModes = LocalSortMode.getSupportedModes(type);
+		return settings.registerEnumStringPreference(prefId, defMode, supportedModes, LocalSortMode.class).makeGlobal().makeShared();
 	}
 }

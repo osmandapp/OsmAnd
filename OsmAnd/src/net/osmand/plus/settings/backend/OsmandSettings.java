@@ -1008,7 +1008,6 @@ public class OsmandSettings {
 	}.makeGlobal();
 
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(this, "first_map_is_downloaded", false);
-	public final CommonPreference<MapsSortMode> LOCAL_MAPS_SORT_MODE = new EnumStringPreference<>(this, "local_maps_sort_mode", MapsSortMode.getDefaultSortMode(), MapsSortMode.values()).makeGlobal().makeShared();
 
 	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference(this, "driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumStringPreference<DrivingRegion>(this,

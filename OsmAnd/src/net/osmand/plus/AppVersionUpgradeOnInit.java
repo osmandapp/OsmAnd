@@ -1,12 +1,15 @@
 package net.osmand.plus;
 
 import static net.osmand.plus.AppInitEvents.FAVORITES_INITIALIZED;
+import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
+import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_AUDIO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_CHOOSE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_TAKEPICTURE;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.AV_DEFAULT_ACTION_VIDEO;
 import static net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.DEFAULT_ACTION_SETTING_ID;
 import static net.osmand.plus.settings.backend.backup.exporttype.AbstractMapExportType.OFFLINE_MAPS_EXPORT_TYPE_KEY;
+import static net.osmand.plus.settings.enums.LocalSortMode.COUNTRY_NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
 import static net.osmand.plus.settings.enums.RoutingType.A_STAR_CLASSIC;
 import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
@@ -52,6 +55,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
@@ -70,6 +74,7 @@ import net.osmand.plus.settings.backend.preferences.IntPreference;
 import net.osmand.plus.settings.backend.preferences.ListStringPreference;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.preferences.StringPreference;
+import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
@@ -145,8 +150,9 @@ public class AppVersionUpgradeOnInit {
 	// 4701 - 4.7-01 (Migrate from simple color ints to using of wrapper with additional information PaletteColor)
 	public static final int VERSION_4_7_01 = 4701;
 	public static final int VERSION_4_7_02 = 4702;
+	public static final int VERSION_4_7_03 = 4703;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_02;
+	public static final int LAST_APP_VERSION = VERSION_4_7_03;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -271,6 +277,9 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_7_02) {
 					migrateVerticalWidgetPanels(settings);
+				}
+				if (prevAppVersion < VERSION_4_7_03) {
+					migrateLocalSorting(settings);
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -878,6 +887,15 @@ public class AppVersionUpgradeOnInit {
 				routingType = disableComplexRouting.getModeValue(mode) ? A_STAR_CLASSIC : A_STAR_2_PHASE;
 			}
 			settings.ROUTING_TYPE.setModeValue(mode, routingType);
+		}
+	}
+
+	private void migrateLocalSorting(@NonNull OsmandSettings settings) {
+		CommonPreference<LocalSortMode> oldPref = settings.registerEnumStringPreference("local_maps_sort_mode", COUNTRY_NAME_ASCENDING, LocalSortMode.values(), LocalSortMode.class).makeGlobal().makeShared();
+		if (oldPref.isSet()) {
+			LocalSortMode sortMode = oldPref.get();
+			LocalItemUtils.getSortModePref(app, MAP_DATA).set(sortMode);
+			LocalItemUtils.getSortModePref(app, ROAD_DATA).set(sortMode);
 		}
 	}
 }
