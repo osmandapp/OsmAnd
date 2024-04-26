@@ -1867,7 +1867,7 @@ public class GPXUtilities {
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;
-			log.error("Error reading gpx", e); //$NON-NLS-1$
+			log.error("Error reading gpx. " + gpxFile.path, e); //$NON-NLS-1$
 		}
 
 		return gpxFile;

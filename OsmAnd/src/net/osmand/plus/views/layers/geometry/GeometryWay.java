@@ -9,6 +9,7 @@ import net.osmand.core.jni.VectorLineArrowsProvider;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.util.Algorithms;
@@ -567,8 +568,16 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		if (mapRenderer != null) {
 			VectorLinesCollection vectorLinesCollection = this.vectorLinesCollection;
 			VectorLinesCollection collection;
-			if (vectorLinesCollection == null || !mapRenderer.hasSymbolsProvider(vectorLinesCollection)) {
-				collection = new VectorLinesCollection();
+			boolean newLine3DState = false;
+			if(!Algorithms.isEmpty(pathsData)) {
+				newLine3DState = pathsData.get(0).style.trackVisualizationType != Gpx3DVisualizationType.NONE;
+			}
+			boolean currentLine3DState = vectorLinesCollection != null &&
+					vectorLinesCollection.getHasVolumetricSymbols();
+			if (vectorLinesCollection == null ||
+					!mapRenderer.hasSymbolsProvider(vectorLinesCollection) ||
+					newLine3DState != currentLine3DState) {
+				collection = new VectorLinesCollection(newLine3DState);
 				collection.setPriority(linesPriority);
 			} else {
 				collection = vectorLinesCollection;

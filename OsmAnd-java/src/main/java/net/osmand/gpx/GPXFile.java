@@ -753,16 +753,40 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
 	}
 
-	public boolean isUse3DVisualization() {
-		String use3DVisualization = null;
-		if (extensions != null) {
-			use3DVisualization = extensions.get("raise_routes_above_relief");
-		}
-		return Boolean.parseBoolean(use3DVisualization);
+	public String get3DVisualizationType() {
+		return extensions == null ? null : extensions.get("line_3d_visualization_by_type");
 	}
 
-	public void setUse3DVisualization(boolean use3DVisualization) {
-		getExtensionsToWrite().put("raise_routes_above_relief", String.valueOf(use3DVisualization));
+	public void set3DVisualizationType(String visualizationType) {
+		getExtensionsToWrite().put("line_3d_visualization_by_type", String.valueOf(visualizationType));
+	}
+
+	public String get3DWallColoringType() {
+		return extensions == null ? null : extensions.get("line_3d_visualization_wall_color_type");
+	}
+
+	public void set3DWallColoringType(String trackWallColoringType) {
+		getExtensionsToWrite().put("line_3d_visualization_wall_color_type", String.valueOf(trackWallColoringType));
+	}
+
+	public String get3DLinePositionType() {
+		return extensions == null ? null : extensions.get("line_3d_visualization_position_type");
+	}
+
+	public void set3DLinePositionType(String trackLinePositionType) {
+		getExtensionsToWrite().put("line_3d_visualization_position_type", String.valueOf(trackLinePositionType));
+	}
+
+	public void setAdditionalExaggeration(int additionalExaggeration) {
+		getExtensionsToWrite().put("additional_exaggeration", String.valueOf(additionalExaggeration));
+	}
+
+	public int getAdditionalExaggeration() {
+		String additionalExaggeration = null;
+		if (extensions != null) {
+			additionalExaggeration = extensions.get("additional_exaggeration");
+		}
+		return Algorithms.parseIntSilently(additionalExaggeration, 1);
 	}
 
 	public boolean isShowStartFinishSet() {

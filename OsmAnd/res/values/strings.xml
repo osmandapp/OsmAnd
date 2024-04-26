@@ -13,6 +13,17 @@
     <string name="release_4_8">
         • To be prepared for 4.8
     </string>
+    <string name="visualized_by">Visualized by</string>
+    <string name="wall_color">Wall color</string>
+    <string name="track_line">Track line</string>
+    <string name="fixed_height">Fixed height</string>
+    <string name="downward_gradient">Downward gradient</string>
+    <string name="upward_gradient">Upward gradient</string>
+    <string name="top">Top</string>
+    <string name="bottom">Bottom</string>
+    <string name="top_and_bottom">Top and bottom</string>
+    <string name="title_3d_track">3D Track</string>
+    <string name="explore_3d_track_description">Explore the track in interactive 3D! Visualize height, speed, and more directly on the map.</string>
     <string name="maps_that_also_be_used">Maps that also be used: %1$s</string>
     <string name="getting_list_of_required_maps">Getting a list of required maps…</string>
     <string name="required_maps_calculate_online_summary">The list of missing maps is based on the straight line route. To get an accurate list of maps, OsmAnd can pre-calculate your route online.</string>
