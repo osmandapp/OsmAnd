@@ -5692,4 +5692,12 @@
     <string name="delete_actions_button">Дугме за брисање</string>
     <string name="shared_string_osm_id">ОСМ ИД</string>
     <string name="delete_actions_button_confirmation">Да ли сте сигурни да желите да избришете „%1$s“ са свим додатим радњама?</string>
+    <string name="route_line_use_coloring_altitude">Линија руте је обојена по надморској висини.</string>
+    <string name="getting_list_of_required_maps">Преузима се листа потребних мапа…</string>
+    <string name="required_maps">Потребне Мапе</string>
+    <string name="missing_maps_description">Неке ванмрежне мапе потребне за ову руту недостају или нису ажуриране. Преузмите или ажурирајте ове мапе.</string>
+    <string name="missing_maps_header">Недостајуће или застареле мапе</string>
+    <string name="route_line_use_coloring_speed">Линија руте је обојена по брзини кретања.</string>
+    <string name="maps_that_also_be_used">Мапе које се такође користе: %1$s</string>
+    <string name="required_maps_calculate_online_summary">Листа мапа које недостају заснива се на праволинијској рути. Да бисте добили тачну листу мапа, ОсмАнд може унапред да израчуна вашу руту на мрежи.</string>
 </resources>
