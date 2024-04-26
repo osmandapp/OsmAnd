@@ -276,7 +276,7 @@
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou Désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
+    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou désactiver pour calculer l\'itinéraire le plus économe en carburant.</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} tuiles ({2} Mb)</string>
     <string name="shared_string_download_map">Télécharger une carte</string>
     <string name="select_max_zoom_preload_area">Zoom maximal à précharger</string>
