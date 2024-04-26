@@ -321,10 +321,10 @@
     <string name="poi_traffic_signals">Stopptuli</string>
     <string name="poi_car_repair">Autoremont</string>
     <string name="poi_service_tyres">Rehvid</string>
-    <string name="poi_vehicle_inspection">Sõiduki tehnoülevaatus</string>
+    <string name="poi_vehicle_inspection">Sõidukite tehnoülevaatus</string>
     <string name="poi_car_wash">Autopesula</string>
     <string name="poi_fuel">Tankla; Bensiinijaam</string>
-    <string name="poi_vehicle_ramp">Sõiduki kaldtee</string>
+    <string name="poi_vehicle_ramp">Sõidukite kaldtee</string>
     <string name="poi_compressed_air">Suruõhk</string>
     <string name="poi_parking">Parkimine</string>
     <string name="poi_motorcycle_parking">Mootorrataste parkimine</string>
@@ -418,7 +418,7 @@
     <string name="poi_kindergarten">Lasteaed</string>
     <string name="poi_college">Kolledž</string>
     <string name="poi_university">Ülikool</string>
-    <string name="poi_social_facility">Sotsiaalne rajatis</string>
+    <string name="poi_social_facility">Sotsiaalkeskus</string>
     <string name="poi_courthouse">Kohtumaja</string>
     <string name="poi_prison">Vangla</string>
     <string name="poi_register_office">Perekonnaseisuamet</string>
@@ -507,7 +507,7 @@
     <string name="poi_watermill">Vesiveski</string>
     <string name="poi_observation_tower">Vaatlustorn</string>
     <string name="poi_bell_tower">Kellatorn</string>
-    <string name="poi_townhall">Raekoda</string>
+    <string name="poi_townhall">Raekoda/vallamaja</string>
     <string name="poi_fuel_diesel">Diisel</string>
     <string name="poi_fuel_gtl_diesel">GTL diisel</string>
     <string name="poi_fuel_hgv_diesel">HGV diisel</string>
@@ -772,7 +772,7 @@
     <string name="poi_cinema">Kino</string>
     <string name="poi_casino">Kasiino</string>
     <string name="poi_community_centre">Kogukonnakeskus</string>
-    <string name="poi_social_centre">Sotsiaalkeskus</string>
+    <string name="poi_social_centre">Seltsingu hoone</string>
     <string name="poi_theatre">Teater</string>
     <string name="poi_dance_floor">Tantsupõrand</string>
     <string name="poi_nightclub">Ööklubi;Disco;Disko</string>
@@ -1955,7 +1955,7 @@
     <string name="poi_industrial_port">Liik: sadam</string>
     <string name="poi_industrial_depot">Liik: depoo</string>
     <string name="poi_note">Märge</string>
-    <string name="poi_watering_place">Kastmiskoht</string>
+    <string name="poi_watering_place">Loomade joogikoht</string>
     <string name="poi_animal_boarding">Loomahotell</string>
     <string name="poi_animal_boarding_dog">Loomahotell koertele</string>
     <string name="poi_animal_boarding_cat">Loomahotell kassidele</string>
@@ -3868,7 +3868,7 @@
     <string name="poi_liaison_filter">Sidepidamine</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_yes">Jah</string>
     <string name="poi_diplomatic_services_non_immigrant_visas_no">Ei</string>
-    <string name="poi_waste_transfer_station">Jäätmejaam</string>
+    <string name="poi_waste_transfer_station">Jäätmetöötlusjaam</string>
     <string name="poi_lavoir">Avalik pesumaja</string>
     <string name="poi_swimming_area">Ujumiskoht</string>
     <string name="poi_wildlife_crossing_bat_tunnel">Tunnel nahkhiirtele</string>
@@ -4675,4 +4675,11 @@
     <string name="poi_us_maps_recreation_area_facility_lighthouse">Tuletorn</string>
     <string name="poi_us_maps_recreation_area_facility_rapid">Kärestik</string>
     <string name="poi_us_maps_recreation_area_facility_parking">Parkla</string>
+    <string name="poi_indoor_seating_no">Istekohad siseruumides: puuduvad</string>
+    <string name="poi_indoor_seating_yes">Istekohad siseruumides: olemas</string>
+    <string name="poi_indoor_seating_bar_table">Istekohad siseruumides: baarileti ääres</string>
+    <string name="poi_photo_booth">Fotokiosk</string>
+    <string name="poi_healthcare_speciality_weight_loss">Kaalukaotus</string>
+    <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Maismaatranspordivahendite heitvee purgimiskoht</string>
+    <string name="poi_property_management">Kinnisvarahaldusfirma kontor</string>
 </resources>
