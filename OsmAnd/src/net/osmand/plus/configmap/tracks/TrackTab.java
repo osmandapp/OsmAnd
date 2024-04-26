@@ -5,16 +5,19 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
+import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackTab {
+public class TrackTab implements TracksGroup {
 	public static final String SMART_FOLDER_TAB_NAME_PREFIX = "SMART_FOLDER___";
 
 	public final TrackTabType type;
@@ -28,6 +31,7 @@ public class TrackTab {
 	private String typeName = null;
 
 	private TracksSortMode sortMode = TracksSortMode.getDefaultSortMode();
+	private TrackFolderAnalysis folderAnalysis;
 
 	public TrackTab(@NonNull File directory) {
 		this.directory = directory;
@@ -114,5 +118,25 @@ public class TrackTab {
 	@Override
 	public String toString() {
 		return "TrackTab{name=" + getTypeName() + "}";
+	}
+
+	@NonNull
+	public TrackFolderAnalysis getFolderAnalysis() {
+		if (folderAnalysis == null) {
+			folderAnalysis = new TrackFolderAnalysis(this);
+		}
+		return folderAnalysis;
+	}
+
+	public long lastModified(@NonNull Context context, @NonNull SmartFolderHelper smartFolderHelper) {
+		if (directory != null) {
+			return directory.lastModified();
+		} else if (type == TrackTabType.SMART_FOLDER) {
+			SmartFolder smartFolder = smartFolderHelper.getSmartFolder(getName(context));
+			if (smartFolder != null) {
+				return smartFolder.lastModified();
+			}
+		}
+		return 0;
 	}
 }
