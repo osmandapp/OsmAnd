@@ -5702,7 +5702,7 @@
     <string name="maps_that_also_be_used">Карты, которые также можно использовать: %1$s</string>
     <string name="getting_list_of_required_maps">Получение списка необходимых карт…</string>
     <string name="route_line_use_coloring_altitude">Линия маршрута окрашена в зависимости от высоты над уровнем моря.</string>
-    <string name="required_maps_calculate_online_summary">Список недостающих карт составлен на основе прямого маршрута. Чтобы получить точный список карт, OsmAnd может заранее рассчитать ваш маршрут онлайн.</string>
+    <string name="required_maps_calculate_online_summary">Список недостающих карт составлен на основе прямолинейного маршрута. Чтобы получить точный список карт, OsmAnd может предварительно рассчитать ваш маршрут онлайн.</string>
     <string name="required_maps">Требуемые карты</string>
     <string name="missing_maps_description">Некоторые локальные карты, необходимые для этого маршрута, отсутствуют или устарели. Пожалуйста, загрузите или обновите эти карты.</string>
     <string name="missing_maps_header">Отсутствующие или устаревшие карты</string>

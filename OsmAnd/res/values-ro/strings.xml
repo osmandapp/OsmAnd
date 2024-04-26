@@ -5704,4 +5704,6 @@
     <string name="retrieve_elevation_data_summary">OsmAnd poate prelua date de altitudine de pe drumurile din apropiere sau de pe hărțile de teren.</string>
     <string name="shared_string_osm_id">ID OSM</string>
     <string name="missing_maps_description">Unele hărți offline necesare pentru acest traseu lipsesc sau nu sunt actualizate. Vă rugăm să descărcați sau să actualizați aceste hărți.</string>
+    <string name="vertical_exaggeration">Exagerare verticală</string>
+    <string name="route_line_use_coloring_speed">Linia de traseu este colorată în funcție de viteza de deplasare.</string>
 </resources>
