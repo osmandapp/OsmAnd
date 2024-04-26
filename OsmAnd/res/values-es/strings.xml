@@ -5614,7 +5614,7 @@
     <string name="battery_optimization_desc">La optimización de la batería en Android puede causar lagunas e imprecisiones en las pistas grabadas.
 \n
 \nSi experimentas alguno de estos problemas, puedes probar a cambiar el uso de la batería a \'Sin restricciones\'</string>
-    <string name="sort_subfolders">Clasificar las subcarpetas</string>
+    <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de ruta especial</string>
     <string name="add_button">Añadir un botón</string>
