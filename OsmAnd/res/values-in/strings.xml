@@ -5687,4 +5687,24 @@
     <string name="change_default_tracks_appearance_confirmation">Terapkan perubahan pada trek yang sudah ada dalam folder atau pada yang baru saja?</string>
     <string name="shared_string_changes">Perubahan</string>
     <string name="release_4_8">• Akan dipersiapkan untuk 4.8</string>
+    <string name="vertical_exaggeration">Pembesaran vertikal</string>
+    <string name="use_terrain_maps">Gunakan peta Medan</string>
+    <string name="maps_that_also_be_used">Peta yang juga dapat digunakan: %1$s</string>
+    <string name="route_line_use_coloring_speed">Garis rute diwarnai oleh kecepatan gerakan.</string>
+    <string name="getting_list_of_required_maps">Mendapatkan daftar peta yang diperlukan…</string>
+    <string name="missing_maps_description">Beberapa peta luring yang diperlukan untuk rute ini hilang atau tidak diperbarui. Silakan unduh atau perbarui petanya.</string>
+    <string name="required_maps_calculate_online_summary">Daftar peta yang hilang berdasarkan rute garis lurus. Untuk mendapatkan daftar peta yang akurat, OsmAnda dapat prakalkulasi rute Anda secara daring.</string>
+    <string name="route_line_use_coloring_altitude">Garis rute diwarnai oleh kenaikan pada ketinggian.</string>
+    <string name="use_terrain_maps_summary">Gunakan peta medan untuk data ketinggian. Geometri trek tidak akan diubah.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnda bisa mendapatkan data ketinggian dari jalan yang dekat atau peta medan.</string>
+    <string name="shared_string_scale">Skala</string>
+    <string name="use_nearby_roads">Gunakan jalan yang dekat</string>
+    <string name="relief_3d_download_description">Peta tambahan diperlukan untuk menampilkan Medan di peta.</string>
+    <string name="required_maps">Peta yang Diperlukan</string>
+    <string name="missing_maps_header">Peta hilang atau kedaluwarsa</string>
+    <string name="delete_actions_button_confirmation">Apakah Anda yakin ingin menghapus \"%1$s\" dengan semua tindakan yang ditambahkan?</string>
+    <string name="delete_actions_button">Hapus tombol</string>
+    <string name="use_nearby_roads_summary">Gunakan peta luring untuk mencari jalan yang dekat &amp; data ketinggian. Dapat mengubah geometri trek.</string>
+    <string name="shared_string_osm_id">ID OSM</string>
+    <string name="vertical_exaggeration_description">Dengan mengubah nilai skala, Anda dapat memperjelas relief 3D.</string>
 </resources>
