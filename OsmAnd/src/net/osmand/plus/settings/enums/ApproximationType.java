@@ -11,6 +11,7 @@ public enum ApproximationType {
 
 	APPROX_CPP(R.string.gpx_approximation_cpp),
 	APPROX_JAVA(R.string.gpx_approximation_java),
+	APPROX_GEO_CPP(R.string.gpx_approximation_geo_cpp),
 	APPROX_GEO_JAVA(R.string.gpx_approximation_geo_java);
 
 	@StringRes
@@ -31,10 +32,10 @@ public enum ApproximationType {
 	}
 
 	public boolean isNativeApproximation() {
-		return this == APPROX_CPP;
+		return this == APPROX_CPP || this == APPROX_GEO_CPP;
 	}
 
 	public boolean isGeoApproximation() {
-		return this == APPROX_GEO_JAVA;
+		return this == APPROX_GEO_JAVA || this == APPROX_GEO_CPP;
 	}
 }
