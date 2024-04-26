@@ -4,6 +4,7 @@ import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 
@@ -127,6 +128,10 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		Boolean showStartFinish = data.getParameter(SHOW_START_FINISH);
 		if (showStartFinish != null) {
 			settings.CURRENT_TRACK_SHOW_START_FINISH.set(showStartFinish);
+		}
+		String trackVisualizationType = data.getParameter(TRACK_VISUALIZATION_TYPE);
+		if(trackVisualizationType != null) {
+			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.set(trackVisualizationType);
 		}
 	}
 

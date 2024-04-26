@@ -91,9 +91,9 @@ public class GpxDataItem extends DataItem {
 				setParameter(SHOW_ARROWS, gpxFile.isShowArrows());
 				break;
 			case SHOW_START_FINISH:
-				setParameter(USE_3D_TRACK_VISUALIZATION, gpxFile.isUse3DVisualization());
-		setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
-break;
+				setParameter(TRACK_VISUALIZATION_TYPE, gpxFile.get3DVisualizationType());
+				setParameter(SHOW_START_FINISH, gpxFile.isShowStartFinish());
+				break;
 			case SPLIT_TYPE:
 				if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
 					GpxSplitType splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
@@ -113,6 +113,15 @@ break;
 					ColoringType coloringType = ColoringType.valueOf(scaleType);
 					setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
 				}
+				break;
+			case TRACK_VISUALIZATION_TYPE:
+				setParameter(TRACK_VISUALIZATION_TYPE, gpxFile.get3DVisualizationType());
+				break;
+			case TRACK_3D_LINE_POSITION_TYPE:
+				setParameter(TRACK_3D_LINE_POSITION_TYPE, gpxFile.get3DLinePositionType());
+				break;
+			case TRACK_3D_WALL_COLORING_TYPE:
+				setParameter(TRACK_3D_WALL_COLORING_TYPE, gpxFile.get3DWallColoringType());
 				break;
 		}
 	}

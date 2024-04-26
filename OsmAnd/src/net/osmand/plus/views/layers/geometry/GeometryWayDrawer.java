@@ -25,8 +25,9 @@ import net.osmand.core.jni.VectorLine;
 import net.osmand.core.jni.VectorLineBuilder;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.track.Gpx3DLinePositionType;
+import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.util.Algorithms;
 
@@ -67,7 +68,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 
 		public DrawPathData31(@NonNull List<Integer> indexes,
 		                      @NonNull List<Integer> tx, @NonNull List<Integer> ty,
-		                      @Nullable GeometryWayStyle<?> style		) {
+		                      @Nullable GeometryWayStyle<?> style) {
 			this.indexes = indexes;
 			this.tx = tx;
 			this.ty = ty;
@@ -165,33 +166,43 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		float g = (float) Color.green(color) / 256;
 		float b = (float) Color.blue(color) / 256;
 		boolean showRaised = false;
-		boolean showTransparentTraces = true;
+		boolean useFixedHeight = false;
+		float fixedHeight = 1000;
+		int additionalExaggeration = 0;
+		Gpx3DWallColorType wallColorType = Gpx3DWallColorType.NONE;
+		Gpx3DLinePositionType linePositionType = null;
 		if (pathsData.size() > 0) {
-			showRaised = pathsData.get(0).style.use3DVisualization;
+			GeometryWayStyle<?> style = pathsData.get(0).style;
+			showRaised = style.trackVisualizationType != Gpx3DVisualizationType.NONE;
+			additionalExaggeration = style.additionalExaggeration;
+			useFixedHeight = style.trackVisualizationType == Gpx3DVisualizationType.FIXED_HEIGHT;
+			wallColorType = style.trackWallColorType;
+			linePositionType = style.trackLinePositionType;
 		}
 		for (DrawPathData31 data : pathsData) {
 			for (int i = 0; i < data.tx.size(); i++) {
 				points.add(new PointI(data.tx.get(i), data.ty.get(i)));
 				if (showRaised) {
 					if (data.heights != null && i < data.heights.size()) {
-						heights.add(data.heights.get(i));
+						heights.add(useFixedHeight ? fixedHeight : data.heights.get(i));
 					}
 				}
 			}
 		}
-		if (showRaised && hasColorizationMapping && showTransparentTraces) {
+		if (showRaised && hasColorizationMapping) {
 			long size = colorizationMapping.size();
 			traceColorizationMapping = new QListFColorARGB();
 			for (int i = 0; i < size; i++) {
 				float a = (float) i / (float) size;
 				FColorARGB colorARGB = colorizationMapping.get(i);
-				traceColorizationMapping.add(new FColorARGB(a * a * a * a, colorARGB.getR(), colorARGB.getG(), colorARGB.getB()));
+				traceColorizationMapping.add(new FColorARGB(1, colorARGB.getR(), colorARGB.getG(), colorARGB.getB()));
 			}
 		}
 		QListVectorLine lines = collection.getLines();
 		for (int i = 0; i < lines.size(); i++) {
 			VectorLine line = lines.get(i);
 			if (line.getLineId() == lineId) {
+				line.setElevationScaleFactor(additionalExaggeration);
 				line.setFillColor(NativeUtilities.createFColorARGB(color));
 				line.setLineWidth(width * VECTOR_LINE_SCALE_COEF);
 				line.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF);
@@ -217,12 +228,17 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 					line.setColorizationMapping(new QListFColorARGB());
 					line.setOutlineColorizationMapping(traceColorizationMapping);
 					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
-					if (showTransparentTraces) {
-						line.setColorizationScheme(1);
-						line.setNearOutlineColor(new FColorARGB(0.0f, r, g, b));
-						line.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
-					} else
-						line.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
+					if (wallColorType != Gpx3DWallColorType.NONE) {
+						if (wallColorType == Gpx3DWallColorType.SOLID) {
+							line.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+						} else {
+							line.setColorizationScheme(1);
+							float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
+							float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
+							line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
+							line.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
+						}
+					}
 				}
 				return;
 			}
@@ -263,19 +279,29 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			builder.setColorizationScheme(colorizationScheme);
 		}
 		if (showRaised) {
+			if (linePositionType != null) {
+				builder.setElevatedLineVisibility(linePositionType == Gpx3DLinePositionType.TOP || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
+				builder.setSurfaceLineVisibility(linePositionType == Gpx3DLinePositionType.BOTTOM || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
+			}
 			builder.setColorizationMapping(traceColorizationMapping)
+					.setElevationScaleFactor(additionalExaggeration)
 					.setOutlineColorizationMapping(traceColorizationMapping)
 					.setColorizationScheme(colorizationScheme)
 					.setHeights(heights)
 					.setFillColor(new FColorARGB(1.0f, r, g, b))
 					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f)
 					.setOutlineColor(new FColorARGB(1.0f, r, g, b));
-			if (showTransparentTraces && colorizationScheme != 1) {
-				builder
-						.setNearOutlineColor(new FColorARGB(0.0f, r, g, b))
-						.setFarOutlineColor(new FColorARGB(1.0f, r, g, b));
-			} else
-				builder.setOutlineColor(new FColorARGB(1.0f, 0.8f, 0.8f, 0.8f));
+			if (wallColorType != Gpx3DWallColorType.NONE) {
+				if (wallColorType == Gpx3DWallColorType.SOLID) {
+					builder.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+				} else {
+					builder.setColorizationScheme(1);
+					float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
+					float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
+					builder.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
+					builder.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
+				}
+			}
 		}
 		builder.buildAndAddToCollection(collection);
 	}

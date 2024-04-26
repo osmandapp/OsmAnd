@@ -4,7 +4,7 @@ import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.USE_3D_TRACK_VISUALIZATION;
+import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask.GPX_FILE_DATE_FORMAT;
 
@@ -295,7 +295,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 		item.setParameter(COLOR, settings.CURRENT_TRACK_COLOR.get());
 		item.setParameter(WIDTH, settings.CURRENT_TRACK_WIDTH.get());
 		item.setParameter(SHOW_ARROWS, settings.CURRENT_TRACK_SHOW_ARROWS.get());
-		item.setParameter(USE_3D_TRACK_VISUALIZATION, settings.CURRENT_TRACK_3D_VISUALIZATION.get());
+		item.setParameter(TRACK_VISUALIZATION_TYPE, settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
 		item.setParameter(SHOW_START_FINISH, settings.CURRENT_TRACK_SHOW_START_FINISH.get());
 		item.setParameter(COLORING_TYPE, coloringStyle.getId());
 

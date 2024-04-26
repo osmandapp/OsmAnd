@@ -1,8 +1,12 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 
 import androidx.annotation.NonNull;
@@ -12,6 +16,9 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.Gpx3DLinePositionType;
+import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
 
 import java.io.File;
@@ -73,6 +80,62 @@ public class GpxAppearanceHelper {
 				return show;
 			}
 			return gpxFile.isShowStartFinish();
+		}
+	}
+
+	public Gpx3DVisualizationType getTrackVisualizationForTrack(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getTrackVisualizationType();
+		} else if (gpxFile.showCurrentTrack) {
+			return Gpx3DVisualizationType.get3DVisualizationType(settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
+		} else {
+			String trackVisualizationType = getAppearanceParameter(new File(gpxFile.path), TRACK_VISUALIZATION_TYPE);
+			if (trackVisualizationType != null) {
+				return Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
+			}
+			return Gpx3DVisualizationType.get3DVisualizationType(gpxFile.get3DVisualizationType());
+		}
+	}
+
+	public Gpx3DWallColorType getTrackWallColorType(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getTrackWallColorType();
+		} else if (gpxFile.showCurrentTrack) {
+			return Gpx3DWallColorType.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
+		} else {
+			String trackWallColorType = getAppearanceParameter(new File(gpxFile.path), TRACK_3D_WALL_COLORING_TYPE);
+			if (trackWallColorType != null) {
+				return Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
+			}
+			return Gpx3DWallColorType.get3DWallColorType(gpxFile.get3DWallColoringType());
+		}
+	}
+
+	public Gpx3DLinePositionType getTrackLinePositionType(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getTrackLinePositionType();
+		} else if (gpxFile.showCurrentTrack) {
+			return Gpx3DLinePositionType.get3DLinePositionType(settings.CURRENT_TRACK_3D_LINE_POSITION_TYPE.get());
+		} else {
+			String trackLinePositionType = getAppearanceParameter(new File(gpxFile.path), TRACK_3D_LINE_POSITION_TYPE);
+			if (trackLinePositionType != null) {
+				return Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
+			}
+			return Gpx3DLinePositionType.get3DLinePositionType(gpxFile.get3DWallColoringType());
+		}
+	}
+
+	public int getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getAdditionalExaggeration();
+		} else if (gpxFile.showCurrentTrack) {
+			return settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
+		} else {
+			Integer exaggeration = getAppearanceParameter(new File(gpxFile.path), ADDITIONAL_EXAGGERATION);
+			if (exaggeration != null) {
+				return exaggeration;
+			}
+			return gpxFile.getAdditionalExaggeration();
 		}
 	}
 
