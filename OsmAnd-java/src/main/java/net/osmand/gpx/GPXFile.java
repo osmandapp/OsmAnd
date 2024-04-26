@@ -786,7 +786,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		if (extensions != null) {
 			additionalExaggeration = extensions.get("additional_exaggeration");
 		}
-		return additionalExaggeration == null ? 0 : Integer.parseInt(additionalExaggeration);
+		return Algorithms.parseIntSilently(additionalExaggeration, 1);
 	}
 
 	public boolean isShowStartFinishSet() {
