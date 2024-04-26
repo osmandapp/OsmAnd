@@ -5707,4 +5707,15 @@
     <string name="missing_maps_description">Некоторые локальные карты, необходимые для этого маршрута, отсутствуют или устарели. Пожалуйста, загрузите или обновите эти карты.</string>
     <string name="missing_maps_header">Отсутствующие или устаревшие карты</string>
     <string name="route_line_use_coloring_speed">Линия маршрута окрашена в зависимости от скорости движения.</string>
+    <string name="visualized_by">Визуализация</string>
+    <string name="wall_color">Цвет стены</string>
+    <string name="track_line">Линия трека</string>
+    <string name="fixed_height">Фиксированная высота</string>
+    <string name="upward_gradient">Восходящий градиент</string>
+    <string name="top">Вверху</string>
+    <string name="bottom">Внизу</string>
+    <string name="top_and_bottom">Вверху и внизу</string>
+    <string name="downward_gradient">Нисходящий градиент</string>
+    <string name="title_3d_track">3D-трек</string>
+    <string name="explore_3d_track_description">Исследуйте трек в интерактивном 3D! Визуализируйте высоту, скорость и многое другое прямо на карте.</string>
 </resources>
