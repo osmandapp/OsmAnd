@@ -4495,7 +4495,7 @@
     <string name="poi_lifeguard">Vízimentő</string>
     <string name="poi_lifeguard_tower">Vízimentőtorony</string>
     <string name="poi_aboriginal_lands">Őslakosok területe</string>
-    <string name="poi_water_filter">van;ivóvíz</string>
+    <string name="poi_water_filter">víz;ivóvíz</string>
     <string name="poi_antenna">Antenna</string>
     <string name="poi_toy_library">Játékkölcsönző</string>
     <string name="poi_vending_machine_fuel_filter">Automatikus üzemanyag-adagolók;Üzemanyag-árusító automaták</string>
@@ -4796,4 +4796,16 @@
     <string name="poi_motorcar_designated">Kifejezetten személygépkocsiknak</string>
     <string name="poi_surface_acrylic">Felszín: akril</string>
     <string name="poi_assembly_point">Gyülekezési pont</string>
+    <string name="poi_indoor_seating_yes">Beltéri ülőhelyek: igen</string>
+    <string name="poi_indoor_seating_no">Nincs beltéri ülőhely</string>
+    <string name="poi_padus_public_access_closed">Belépés: zárva</string>
+    <string name="poi_live_music">Élő zene</string>
+    <string name="poi_padus_public_access_restricted">Belépés: korlátozott</string>
+    <string name="poi_padus_public_access_unknown">Belépés: ismeretlen</string>
+    <string name="poi_live_music_yes">Igen</string>
+    <string name="poi_cuisine_fish">Hal</string>
+    <string name="poi_osmand_foot_no">Gyalogosok: nem</string>
+    <string name="poi_padus_owner_fullname">Tulajdonos</string>
+    <string name="poi_border_zone">Határsáv</string>
+    <string name="poi_padus_public_access_open">Belépés: nyitva</string>
 </resources>
