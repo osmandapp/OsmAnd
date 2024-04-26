@@ -5701,4 +5701,12 @@
     <string name="use_terrain_maps_summary">Koriste se mape terena za podatke o nadmorskoj visini. Geometrija putanje ostaje nepromenjena.</string>
     <string name="use_nearby_roads_summary">Koristi se vanmrežna mapa radi pronalaženja obližnjih puteva i podataka o nadmorskoj visini. Može prilagoditi geometriju putanje.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd može da preuzme podatke o nadmorskoj visini sa obližnjih puteva ili mapa terena.</string>
+    <string name="maps_that_also_be_used">Mape koje se takođe koriste: %1$s</string>
+    <string name="getting_list_of_required_maps">Preuzima se lista potrebnih mapa…</string>
+    <string name="required_maps_calculate_online_summary">Lista mapa koje nedostaju zasniva se na pravolinijskoj ruti. Da biste dobili tačnu listu mapa, OsmAnd može unapred da izračuna vašu rutu na mreži.</string>
+    <string name="required_maps">Potrebne Mape</string>
+    <string name="missing_maps_description">Neke oflajn mape potrebne za ovu rutu nedostaju ili nisu ažurirane. Preuzmite ili ažurirajte ove mape.</string>
+    <string name="missing_maps_header">Nedostajajuće ili zastarele mape</string>
+    <string name="route_line_use_coloring_speed">Linija rute je obojena po brzini kretanja.</string>
+    <string name="route_line_use_coloring_altitude">Linija rute je obojena po nadmorskoj visini.</string>
 </resources>
