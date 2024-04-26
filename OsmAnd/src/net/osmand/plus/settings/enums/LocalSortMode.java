@@ -5,10 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
-public enum MapsSortMode {
+public enum LocalSortMode {
 
 	NAME_ASCENDING(R.string.sort_name_ascending, R.drawable.ic_action_sort_by_name_ascending),
 	NAME_DESCENDING(R.string.sort_name_descending, R.drawable.ic_action_sort_by_name_descending),
@@ -24,7 +25,7 @@ public enum MapsSortMode {
 	@DrawableRes
 	private final int iconId;
 
-	MapsSortMode(@StringRes int nameId, @DrawableRes int iconId) {
+	LocalSortMode(@StringRes int nameId, @DrawableRes int iconId) {
 		this.nameId = nameId;
 		this.iconId = iconId;
 	}
@@ -40,18 +41,33 @@ public enum MapsSortMode {
 	}
 
 	@NonNull
-	public static MapsSortMode getDefaultSortMode() {
-		return COUNTRY_NAME_ASCENDING;
+	public static LocalSortMode getDefaultSortMode(@NonNull LocalItemType type) {
+		if (type.isSortingByCountrySupported()) {
+			return COUNTRY_NAME_ASCENDING;
+		} else if (type == LocalItemType.CACHE) {
+			return SIZE_DESCENDING;
+		}
+		return NAME_ASCENDING;
 	}
 
 	@NonNull
-	public static MapsSortMode getByValue(@NonNull String name) {
-		for (MapsSortMode sortMode : values()) {
+	public static LocalSortMode[] getSupportedModes(@NonNull LocalItemType type) {
+		return type.isSortingByCountrySupported() ? values() : getSimpleModes();
+	}
+
+	@NonNull
+	public static LocalSortMode[] getSimpleModes() {
+		return new LocalSortMode[] {NAME_ASCENDING, NAME_DESCENDING, DATE_ASCENDING, DATE_DESCENDING, SIZE_DESCENDING, SIZE_ASCENDING};
+	}
+
+	@NonNull
+	public static LocalSortMode getByValue(@NonNull String name) {
+		for (LocalSortMode sortMode : values()) {
 			if (Algorithms.stringsEqual(sortMode.name(), name)) {
 				return sortMode;
 			}
 		}
-		return getDefaultSortMode();
+		return NAME_ASCENDING;
 	}
 
 	public boolean isCountryMode() {

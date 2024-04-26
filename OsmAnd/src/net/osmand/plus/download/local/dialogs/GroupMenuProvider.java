@@ -5,9 +5,11 @@ import static net.osmand.plus.download.local.OperationType.BACKUP_OPERATION;
 import static net.osmand.plus.download.local.OperationType.DELETE_OPERATION;
 import static net.osmand.plus.download.local.OperationType.RESTORE_OPERATION;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
+import static net.osmand.plus.settings.fragments.ExportSettingsFragment.SELECTED_TYPES;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,16 +25,19 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalGroup;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.LocalItemType;
+import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.download.local.OperationType;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.settings.enums.MapsSortMode;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
+import net.osmand.plus.settings.enums.LocalSortMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
@@ -41,7 +46,9 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -83,14 +90,14 @@ public class GroupMenuProvider implements MenuProvider {
 			});
 		}
 		LocalItemType type = group.getType();
-		if (type.isMapsSortingSupported()) {
-			MapsSortMode sortMode = app.getSettings().LOCAL_MAPS_SORT_MODE.get();
+		if (type.isSortingSupported()) {
+			LocalSortMode sortMode = LocalItemUtils.getSortModePref(app, type).get();
 			MenuItem sortItem = menu.add(0, R.string.shared_string_sort, 0, R.string.shared_string_sort);
 			sortItem.setIcon(getIcon(sortMode.getIconId(), colorId));
 			sortItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			sortItem.setOnMenuItemClickListener(item -> {
 				FragmentManager manager = activity.getSupportFragmentManager();
-				SortMapsBottomSheet.showInstance(manager, fragment);
+				SortMapsBottomSheet.showInstance(manager, fragment, type);
 				return true;
 			});
 		}
@@ -109,12 +116,16 @@ public class GroupMenuProvider implements MenuProvider {
 		LocalItemType type = group.getType();
 		boolean selectionMode = fragment.isSelectionMode();
 		if (selectionMode) {
-			if (type.isDeletionSupported()) {
-				addOperationItem(items, DELETE_OPERATION);
-			}
 			if (type.isBackupSupported()) {
 				addOperationItem(items, BACKUP_OPERATION);
 				addOperationItem(items, RESTORE_OPERATION);
+			}
+			ExportType exportType = ExportType.findBy(type);
+			if (exportType != null) {
+				addExportItem(items, exportType);
+			}
+			if (type.isDeletionSupported()) {
+				addOperationItem(items, DELETE_OPERATION);
 			}
 		} else {
 			items.add(new PopUpMenuItem.Builder(app)
@@ -152,6 +163,7 @@ public class GroupMenuProvider implements MenuProvider {
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(type.getTitleId())
 				.setIcon(getContentIcon(type.getIconId()))
+				.showTopDivider(type == DELETE_OPERATION)
 				.setOnClickListener(v -> {
 					ItemsSelectionHelper<BaseLocalItem> helper = fragment.getSelectionHelper();
 					if (helper.hasSelectedItems()) {
@@ -161,6 +173,32 @@ public class GroupMenuProvider implements MenuProvider {
 					}
 				})
 				.create());
+	}
+
+	private void addExportItem(@NonNull List<PopUpMenuItem> items, @NonNull ExportType exportType) {
+		items.add(new PopUpMenuItem.Builder(app)
+				.setTitleId(R.string.shared_string_export)
+				.setIcon(getContentIcon(R.drawable.ic_action_upload))
+				.setOnClickListener(v -> {
+					ItemsSelectionHelper<BaseLocalItem> helper = fragment.getSelectionHelper();
+					List<LocalItem> localItems = LocalItemUtils.collectLocalItems(helper.getSelectedItems());
+					List<File> files = collectFilesToExport(localItems);
+					if (!Algorithms.isEmpty(files)) {
+						exportItems(exportType, files);
+					} else {
+						showNoItemsToast(app.getString(R.string.shared_string_export));
+					}
+				})
+				.create());
+	}
+
+	private void exportItems(@NonNull ExportType exportType, @NonNull List<File> files) {
+		HashMap<ExportType, List<?>> selectedTypes = new HashMap<>();
+		selectedTypes.put(exportType, files);
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(SELECTED_TYPES, selectedTypes);
+		MapActivity.launchMapActivityMoveToTop(activity, null, null, bundle);
 	}
 
 	private void showConfirmation(@NonNull OperationType type) {
@@ -181,6 +219,17 @@ public class GroupMenuProvider implements MenuProvider {
 	private void showNoItemsToast(@NonNull String action) {
 		String message = app.getString(R.string.local_index_no_items_to_do, action.toLowerCase());
 		app.showShortToastMessage(Algorithms.capitalizeFirstLetter(message));
+	}
+
+	@NonNull
+	private List<File> collectFilesToExport(@NonNull List<LocalItem> items) {
+		List<File> files = new ArrayList<>();
+		for (LocalItem item : items) {
+			if (!item.isHidden(app)) {
+				files.add(item.getFile());
+			}
+		}
+		return files;
 	}
 
 	@Override

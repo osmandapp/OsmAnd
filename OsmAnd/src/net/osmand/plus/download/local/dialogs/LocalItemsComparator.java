@@ -6,17 +6,17 @@ import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.local.BaseLocalItem;
-import net.osmand.plus.settings.enums.MapsSortMode;
+import net.osmand.plus.settings.enums.LocalSortMode;
 
 import java.util.Comparator;
 
-public class MapsComparator implements Comparator<BaseLocalItem> {
+public class LocalItemsComparator implements Comparator<BaseLocalItem> {
 
 	public final OsmandApplication app;
-	public final MapsSortMode sortMode;
+	public final LocalSortMode sortMode;
 	public final Collator collator = OsmAndCollator.primaryCollator();
 
-	public MapsComparator(@NonNull OsmandApplication app, @NonNull MapsSortMode sortMode) {
+	public LocalItemsComparator(@NonNull OsmandApplication app, @NonNull LocalSortMode sortMode) {
 		this.app = app;
 		this.sortMode = sortMode;
 	}

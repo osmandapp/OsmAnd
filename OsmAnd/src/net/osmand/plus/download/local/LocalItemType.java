@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.util.CollectionUtils;
 
 public enum LocalItemType {
@@ -99,7 +100,8 @@ public enum LocalItemType {
 	}
 
 	public boolean isDeletionSupported() {
-		return isDownloadType() || CollectionUtils.equalsToAny(this, LIVE_UPDATES);
+		return isDownloadType() || this == LIVE_UPDATES || this == CACHE
+				|| ExportType.findBy(this) != null && this != PROFILES;
 	}
 
 	public boolean isBackupSupported() {
@@ -110,7 +112,11 @@ public enum LocalItemType {
 		return this != TILES_DATA && isDownloadType();
 	}
 
-	public boolean isMapsSortingSupported() {
+	public boolean isSortingSupported() {
+		return isMyPlacesCategory() || isResourcesCategory();
+	}
+
+	public boolean isSortingByCountrySupported() {
 		return CollectionUtils.equalsToAny(this, MAP_DATA, ROAD_DATA);
 	}
 }
