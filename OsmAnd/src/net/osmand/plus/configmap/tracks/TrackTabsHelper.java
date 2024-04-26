@@ -109,27 +109,30 @@ public class TrackTabsHelper {
 		updatedTabs.putAll(folderTabs);
 		loadTabsSortModes();
 		if (sortTabsOrder) {
-			sortTabs(updatedTabs);
-		} else {
-			trackTabs.putAll(updatedTabs);
+			updatedTabs = sortTabs(updatedTabs);
 		}
+		trackTabs.putAll(updatedTabs);
 		sortTrackTabsContent();
 	}
 
-	public void sortTabs(@NonNull Map<String, TrackTab> updatedTabs) {
+	public Map<String, TrackTab> sortTabs(@NonNull Map<String, TrackTab> updatedTabs) {
+		Map<String, TrackTab> sortedTabs = new LinkedHashMap<>();
 		TracksSortMode sortMode = getMainTracksFolderSortMode();
 		TrackTabsComparator trackTabsComparator = new TrackTabsComparator(app, sortMode);
 		updatedTabs.entrySet()
 				.stream()
 				.sorted(Map.Entry.comparingByValue(trackTabsComparator))
-				.forEach(stringTrackTabEntry -> trackTabs.put(stringTrackTabEntry.getKey(), stringTrackTabEntry.getValue()));
+				.forEach(stringTrackTabEntry -> sortedTabs.put(stringTrackTabEntry.getKey(), stringTrackTabEntry.getValue()));
+		return sortedTabs;
 	}
 
 	@NonNull
 	public TracksSortMode getMainTracksFolderSortMode() {
 		Map<String, String> tabsSortModes = settings.getTrackSortModes();
+		String mainTrackFolderName = GPX_INDEX_DIR.replace("/", "");
+
 		for (Map.Entry<String, String> entry : tabsSortModes.entrySet()) {
-			if (Algorithms.stringsEqual(entry.getKey(), GPX_INDEX_DIR.replace("/", ""))) {
+			if (Algorithms.stringsEqual(entry.getKey(), mainTrackFolderName)) {
 				return TracksSortMode.getByValue(entry.getValue());
 			}
 		}

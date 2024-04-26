@@ -28,22 +28,19 @@ public class TrackTabsComparator implements Comparator<TrackTab> {
 
 	@Override
 	public int compare(TrackTab o1, TrackTab o2) {
-		int typeComparison = getTypePriority(o1.type) - getTypePriority(o2.type);
-		if (typeComparison != 0) {
-			return typeComparison;
-		} else {
-			return compareTrackFolders(o1, o2);
+		if (o1.type == TrackTabType.ON_MAP) {
+			return o2.type == TrackTabType.ON_MAP ? compareTabNames(o1, o2) : -1;
 		}
-	}
-
-	private int getTypePriority(TrackTabType type) {
-		if (type == TrackTabType.ON_MAP) {
-			return 0;
-		} else if (type == TrackTabType.ALL) {
+		if (o2.type == TrackTabType.ON_MAP) {
 			return 1;
-		} else {
-			return 2;
 		}
+		if (o1.type == TrackTabType.ALL) {
+			return o2.type == TrackTabType.ALL ? compareTabNames(o1, o2) : -1;
+		}
+		if (o2.type == TrackTabType.ALL) {
+			return 1;
+		}
+		return compareTrackFolders(o1, o2);
 	}
 
 	private int compareTrackFolders(@NonNull TrackTab folder1, @NonNull TrackTab folder2) {
@@ -52,9 +49,9 @@ public class TrackTabsComparator implements Comparator<TrackTab> {
 
 		switch (sortMode) {
 			case NAME_ASCENDING:
-				return collator.compare(folder1.getName(app), folder2.getName(app));
+				return compareTabNames(folder1, folder2);
 			case NAME_DESCENDING:
-				return -collator.compare(folder1.getName(app), folder2.getName(app));
+				return -compareTabNames(folder1, folder2);
 			case DATE_ASCENDING:
 				return compareTabsByLastModified(folder1, folder2);
 			case DATE_DESCENDING:
@@ -78,7 +75,7 @@ public class TrackTabsComparator implements Comparator<TrackTab> {
 					return Long.compare(folderAnalysis1.timeSpan, folderAnalysis2.timeSpan);
 				}
 		}
-		return collator.compare(folder1.getName(app), folder2.getName(app));
+		return compareTabNames(folder1, folder2);
 	}
 
 	private int compareTabsByLastModified(@NonNull TrackTab folder1, @NonNull TrackTab folder2) {
@@ -86,8 +83,12 @@ public class TrackTabsComparator implements Comparator<TrackTab> {
 		long lastModified2 = folder2.lastModified(app, smartFolderHelper);
 
 		if (lastModified1 == lastModified2) {
-			return collator.compare(folder1.getName(app), folder2.getName(app));
+			return compareTabNames(folder1, folder2);
 		}
 		return -Long.compare(lastModified1, lastModified2);
+	}
+
+	private int compareTabNames(@NonNull TrackTab folder1, @NonNull TrackTab folder2) {
+		return collator.compare(folder1.getName(app), folder2.getName(app));
 	}
 }
