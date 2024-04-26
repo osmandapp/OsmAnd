@@ -41,7 +41,10 @@ public enum GpxParameter {
 	JOIN_SEGMENTS("joinSegments", "int", Boolean.class, false, false),
 	SHOW_ARROWS("showArrows", "int", Boolean.class, false, false),
 	SHOW_START_FINISH("showStartFinish", "int", Boolean.class, true, false),
-	USE_3D_TRACK_VISUALIZATION("use3dTrackVisualization", "int", Boolean.class, false, false),
+	TRACK_VISUALIZATION_TYPE("track_visualization_type", "TEXT", String.class, "none", false),
+	TRACK_3D_WALL_COLORING_TYPE("track_3d_wall_coloring_type", "TEXT", String.class, "none", false),
+	TRACK_3D_LINE_POSITION_TYPE("track_3d_line_position_type", "TEXT", String.class, "top", false),
+	ADDITIONAL_EXAGGERATION("exaggeration", "int", Integer.class, 0, false),
 	WIDTH("width", "TEXT", String.class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String.class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double.class, Double.NaN, false),
@@ -133,7 +136,7 @@ public enum GpxParameter {
 
 	public static List<GpxParameter> getAppearanceParameters() {
 		return Arrays.asList(COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS,
-				SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL);
+				SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL, TRACK_3D_LINE_POSITION_TYPE, TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE);
 	}
 
 	public static List<GpxParameter> getGpxDirParameters() {

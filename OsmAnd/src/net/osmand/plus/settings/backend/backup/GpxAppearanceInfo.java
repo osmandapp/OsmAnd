@@ -12,6 +12,9 @@ import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
 import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
@@ -27,6 +30,9 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.track.Gpx3DLinePositionType;
+import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
@@ -56,6 +62,10 @@ public class GpxAppearanceInfo {
 	public double minFilterAltitude = Double.NaN;
 	public double maxFilterAltitude = Double.NaN;
 	public double maxFilterHdop = Double.NaN;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+
 
 	public GpxAppearanceInfo() {
 	}
@@ -69,6 +79,9 @@ public class GpxAppearanceInfo {
 		splitType = helper.getParameter(item, SPLIT_TYPE);
 		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
 		coloringType = helper.getParameter(item, COLORING_TYPE);
+		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
+		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
+		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
@@ -92,6 +105,10 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "coloring_type", coloringType);
+		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
+		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
+		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
+//		writeParam(json, "vertical_exaggeration_scale", coloringType);
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
