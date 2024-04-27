@@ -5723,9 +5723,9 @@
     <string name="wall_color">Color del muro</string>
     <string name="fixed_height">Altura fija</string>
     <string name="upward_gradient">Gradiente ascendente</string>
-    <string name="top">Superior</string>
-    <string name="bottom">Inferior</string>
-    <string name="top_and_bottom">Superior e inferior</string>
+    <string name="top">Arriba</string>
+    <string name="bottom">Abajo</string>
+    <string name="top_and_bottom">Arriba y abajo</string>
     <string name="title_3d_track">Traza 3D</string>
     <string name="track_line">Línea de la traza</string>
     <string name="downward_gradient">Gradiente descendente</string>
