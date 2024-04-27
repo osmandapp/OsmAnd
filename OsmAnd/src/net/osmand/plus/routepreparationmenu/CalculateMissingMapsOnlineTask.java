@@ -11,10 +11,15 @@ import net.osmand.data.LatLon;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.enums.RoutingType;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.MissingMapsCalculator;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd;
+import net.osmand.router.RoutingConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +32,7 @@ import java.util.Objects;
 
 public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> {
 
-	private static final String ONLINE_CALCULATION_URL = "https://maptile.osmand.net/routing/route?routeMode=car";
+	private static final String ONLINE_CALCULATION_URL = "https://maptile.osmand.net/routing/route?routeMode=";
 
 	private final OsmandApplication app;
 	private final CalculateMissingMapsOnlineListener listener;
@@ -40,19 +45,34 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 
 	@Override
 	protected Void doInBackground(Void... voids) {
-		MissingMapsCalculator calculator = RoutePlannerFrontEnd.getMissingMapsCalculator();
-		if (calculator != null && calculator.getStartPoint() != null && calculator.getEndPoint() != null) {
-			LatLon startPoint = calculator.getStartPoint();
-			LatLon endPoint = calculator.getEndPoint();
-			onlineCalculateRequestStartPoint(startPoint, endPoint, locations -> {
-				try {
-					RoutingType routingType = app.getSettings().ROUTING_TYPE.get();
-					calculator.checkIfThereAreMissingMaps(convertLocationsToLatLon(locations), !routingType.isHHRouting());
-					listener.onSuccess();
-				} catch (IOException e) {
-					listener.onError(e.getMessage());
-				}
-			});
+		MissingMapsCalculator calculator = new MissingMapsCalculator(app.getRegions());
+		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
+		if (prevRoute != null && prevRoute.getMissingMapsPoints() != null && prevRoute.getMissingMapsRoutingContext() != null)  {
+			RoutingConfiguration config = prevRoute.getMissingMapsRoutingContext().config;
+			String url = ONLINE_CALCULATION_URL + "car";
+			if (config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE) {
+				url = ONLINE_CALCULATION_URL + "bicycle";
+			}
+			// TODO add parameters from config add TO URL
+			for(LatLon l : prevRoute.getMissingMapsPoints()) {
+				url += "&" + formatPointString(l);
+			}
+			try {
+
+				RoutingType routingType = app.getSettings().ROUTING_TYPE.get();
+				OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
+				String response = helper.makeRequest(url);
+				List<LatLon> latLons = convertLocationsToLatLon(parseOnlineCalculationResponse(response));
+				calculator.checkIfThereAreMissingMaps(prevRoute.getMissingMapsRoutingContext(),
+						prevRoute.getMissingMapsPoints().get(0), latLons,
+						routingType.isHHRouting());
+				RouteCalculationProgress progress = prevRoute.getMissingMapsRoutingContext().calculationProgress;
+				prevRoute.setMissingMaps(progress.missingMaps, progress.mapsToUpdate, progress.potentiallyUsedMaps,
+						prevRoute.getMissingMapsRoutingContext(), prevRoute.getMissingMapsPoints());
+				listener.onSuccess();
+			} catch (Exception e) {
+				listener.onError(e.getMessage());
+			}
 		} else {
 			listener.onError(null);
 		}
@@ -62,14 +82,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	private void onlineCalculateRequestStartPoint(@NonNull LatLon start,
 	                                              @NonNull LatLon finish,
 	                                              @NonNull OnResultCallback<List<Location>> callback) {
-		String fullURL = ONLINE_CALCULATION_URL + "&" + formatPointString(start) + "&" + formatPointString(finish);
-		try {
-			OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
-			String response = helper.makeRequest(fullURL);
-			callback.onResult(parseOnlineCalculationResponse(response));
-		} catch (Exception e) {
-			listener.onError(e.getMessage());
-		}
+
+
 	}
 
 	@NonNull

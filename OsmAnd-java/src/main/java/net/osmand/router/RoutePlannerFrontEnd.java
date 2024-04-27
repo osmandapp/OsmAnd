@@ -1408,8 +1408,4 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public static MissingMapsCalculator getMissingMapsCalculator() {
-		return missingMapsCalculator;
-	}
-
 }

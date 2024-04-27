@@ -129,15 +129,7 @@ public class RouteProvider {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
-					if (!Algorithms.isEmpty(params.calculationProgress.missingMaps)) {
-						res.missingMaps = params.calculationProgress.missingMaps;
-					}
-					if (!Algorithms.isEmpty(params.calculationProgress.mapsToUpdate)) {
-						res.mapsToUpdate = params.calculationProgress.mapsToUpdate;
-					}
-					if (!Algorithms.isEmpty(params.calculationProgress.potentiallyUsedMaps)) {
-						res.usedMaps = params.calculationProgress.potentiallyUsedMaps;
-					}
+
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
@@ -847,7 +839,16 @@ public class RouteProvider {
 		if (params.intermediates != null) {
 			inters = new ArrayList<LatLon>(params.intermediates);
 		}
-		return calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
+		RouteCalculationResult result = calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
+		List<LatLon> points  = new ArrayList<>();
+		points.add(st);
+		points.addAll(inters);
+		points.add(en);
+		result.setMissingMaps(params.calculationProgress.missingMaps,
+			 params.calculationProgress.mapsToUpdate,
+			 params.calculationProgress.potentiallyUsedMaps, env.getCtx(), points);
+
+		return result;
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, RouteCalculationParams params, OsmandSettings settings,
@@ -926,8 +927,8 @@ public class RouteProvider {
 			if (result == null) {
 				result = router.searchRoute(ctx, st, en, inters);
 			}
-			
-			if(result == null || result.getList().isEmpty()) {
+
+			if (result == null || result.getList().isEmpty()) {
 				if(ctx.calculationProgress.segmentNotFound == 0) {
 					return new RouteCalculationResult(params.ctx.getString(R.string.starting_point_too_far));
 				} else if(ctx.calculationProgress.segmentNotFound == inters.size() + 1) {
