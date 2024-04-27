@@ -5700,4 +5700,23 @@
     <string name="use_terrain_maps_summary">Utiliza mapas de terreno para dados de elevação. A geometria do trilho mantém-se inalterada.</string>
     <string name="use_terrain_maps">Usar mapas de terreno</string>
     <string name="use_nearby_roads">Usar estradas nas proximidades</string>
+    <string name="visualized_by">Visualizado por</string>
+    <string name="top_and_bottom">Topo e base</string>
+    <string name="required_maps">Mapas necessários</string>
+    <string name="missing_maps_description">Alguns mapas offline necessários para este itinerário estão em falta ou não estão atualizados. Descarregue ou atualize estes mapas.</string>
+    <string name="missing_maps_header">Mapas em falta ou desatualizados</string>
+    <string name="route_line_use_coloring_speed">A linha da rota é colorida de acordo com a velocidade do movimento.</string>
+    <string name="route_line_use_coloring_altitude">A linha do itinerário é colorida por altitude de elevação.</string>
+    <string name="top">Topo</string>
+    <string name="bottom">Base</string>
+    <string name="wall_color">Cor das paredes</string>
+    <string name="track_line">Linha do trilho</string>
+    <string name="upward_gradient">Gradiente ascendente</string>
+    <string name="title_3d_track">Trilho 3D</string>
+    <string name="explore_3d_track_description">Explore a pista em 3D interativo! Visualize a altura, a velocidade e muito mais diretamente no mapa.</string>
+    <string name="maps_that_also_be_used">Mapas que também podem ser utilizados: %1$s</string>
+    <string name="required_maps_calculate_online_summary">A lista de mapas em falta baseia-se no percurso em linha reta. Para obter uma lista exata de mapas, o OsmAnd pode pré-calcular o seu percurso online.</string>
+    <string name="fixed_height">Altura fixa</string>
+    <string name="getting_list_of_required_maps">A obter lista de mapas necessários…</string>
+    <string name="downward_gradient">Gradiente descendente</string>
 </resources>
