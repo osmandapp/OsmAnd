@@ -431,14 +431,14 @@
     <string name="poi_tax_inspection">Maksukontroll</string>
     <string name="poi_customs">Toll</string>
     <string name="poi_city">Linn</string>
-    <string name="poi_town">Linn</string>
+    <string name="poi_town">Väikelinn</string>
     <string name="poi_village">Küla</string>
-    <string name="poi_hamlet">Alevik</string>
-    <string name="poi_isolated_dwelling">Eraldatud eluruum</string>
-    <string name="poi_suburb">Äärelinn</string>
+    <string name="poi_hamlet">Väike küla</string>
+    <string name="poi_isolated_dwelling">Üksik eluhoone</string>
+    <string name="poi_suburb">Linnaosa</string>
     <string name="poi_neighbourhood">Naabruskond</string>
     <string name="poi_locality">Paikkond</string>
-    <string name="poi_place_allotments">Jaotused</string>
+    <string name="poi_place_allotments">Suvilad</string>
     <string name="poi_place_farm">Talu</string>
     <string name="poi_pharmacy">Apteek</string>
     <string name="poi_hospital">Haigla</string>
@@ -482,7 +482,7 @@
     <string name="poi_bicycle_track">Jalgrattarada</string>
     <string name="poi_horse_track">Hobuste rada</string>
     <string name="poi_raceway">Võistlusrada</string>
-    <string name="poi_office_telecommunication">Telekommunikatsioonibüroo</string>
+    <string name="poi_office_telecommunication">Sidefirma kontor</string>
     <string name="poi_research">Uurimisbüroo</string>
     <string name="poi_it">IT-kontor</string>
     <string name="poi_newspaper">Ajalehekontor</string>
@@ -494,7 +494,7 @@
     <string name="poi_gasometer">Gasomeeter</string>
     <string name="poi_silo">Viljakuivati</string>
     <string name="poi_storage_tank">Mahuti</string>
-    <string name="poi_allotments">Jaotused</string>
+    <string name="poi_allotments">Aianduskrundid</string>
     <string name="poi_forest">Inimeste hooldatud mets</string>
     <string name="poi_canal">Kanal</string>
     <string name="poi_farmyard">Taluõu</string>
@@ -605,7 +605,7 @@
     <string name="poi_recycling_car_batteries">Autoakud</string>
     <string name="poi_recycling_cars">Autod</string>
     <string name="poi_recycling_bicycles">Jalgrattad</string>
-    <string name="poi_office_religion">Usuasutus</string>
+    <string name="poi_office_religion">Usuühingu büroo</string>
     <string name="poi_association">Ühingu kontor</string>
     <string name="poi_financial">Finantsasutus</string>
     <string name="poi_political_party">Erakonna büroo</string>
@@ -1067,7 +1067,7 @@
     <string name="poi_entrance_main">Peasissekäik</string>
     <string name="poi_entrance">Sissepääs</string>
     <string name="poi_entrance_exit">Väljapääs</string>
-    <string name="poi_highway_crossing">Maantee ületamine</string>
+    <string name="poi_highway_crossing">Ülekäik</string>
     <string name="poi_full_height_turnstile">Täiskõrguses pöördvärav</string>
     <string name="poi_cutline">Lõikejoon</string>
     <string name="poi_tree">Puu</string>
@@ -1370,7 +1370,7 @@
     <string name="poi_sand">Liiv</string>
     <string name="poi_windfall">Tuuleiil</string>
     <string name="poi_dead_wood">Surnud puit</string>
-    <string name="poi_passing_place">Möödumiskoht</string>
+    <string name="poi_passing_place">Möödasõidukoht</string>
     <string name="poi_level">Tase</string>
     <string name="poi_rtsa_scale">RTSA skaala</string>
     <string name="poi_piste_difficulty_easy">Lihtne</string>
@@ -2131,7 +2131,7 @@
     <string name="poi_wheelchair_description">Kirjeldus ratastooli kasutajatele</string>
     <string name="poi_blind_description">Kirjeldus pimedatele</string>
     <string name="poi_deaf_description">Kirjeldus kurtidele</string>
-    <string name="poi_highway_steps">Trepid</string>
+    <string name="poi_highway_steps">Trepp</string>
     <string name="poi_handrail_yes">Käsipuu: jah</string>
     <string name="poi_handrail_no">Käsipuu: ei</string>
     <string name="poi_ramp_yes">Kaldtee: jah</string>
@@ -3790,7 +3790,7 @@
     <string name="poi_seamark_water_level_floods">Veetase: üleujutatud</string>
     <string name="poi_seamark_water_level_covers">Veetase: kaetud</string>
     <string name="poi_seamark_water_level_awash">Veetase: veega kaetud</string>
-    <string name="poi_city_block">Linnaosa</string>
+    <string name="poi_city_block">Tänavatevaheline kvartal</string>
     <string name="poi_borough">Vald</string>
     <string name="poi_give_box">Annetuskast</string>
     <string name="poi_traffic_signals_arrow">Teeviit</string>
@@ -4682,5 +4682,5 @@
     <string name="poi_healthcare_speciality_weight_loss">Kaalukaotus</string>
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Maismaatranspordivahendite heitvee purgimiskoht</string>
     <string name="poi_property_management">Kinnisvarahaldusfirma kontor</string>
-    <string name="poi_state_under_construction">Ehitamisel</string>
+    <string name="poi_state_under_construction">Olek: ehitamisel</string>
 </resources>
