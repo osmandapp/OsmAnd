@@ -147,7 +147,7 @@
     <string name="poi_traffic_signals_sound">Heli</string>
     <string name="poi_highway_crossing_type">Liik</string>
     <string name="poi_traffic_enforcement">Liikluspiirangud</string>
-    <string name="poi_transport_construction">Transpordi ehitus</string>
+    <string name="poi_transport_construction">Ehitusjärgus tee</string>
     <string name="poi_seamark">Merendus</string>
     <string name="poi_variety_store">Odavkaupade pood</string>
     <string name="poi_department_store">Kaubamaja</string>
@@ -893,7 +893,7 @@
     <string name="poi_craft_jeweller">Juveliir</string>
     <string name="poi_craft_locksmith">Lukuabi</string>
     <string name="poi_craft_key_cutter">Võtmevalmistaja</string>
-    <string name="poi_craft_metal_construction">Metallkonstruktsioonide käsitöö</string>
+    <string name="poi_craft_metal_construction">Metallkonstruktsioonide ehitus</string>
     <string name="poi_craft_optician">Optik</string>
     <string name="poi_craft_painter">Maalikunstnik</string>
     <string name="poi_craft_parquet_layer">Parketipaigaldaja</string>
@@ -906,7 +906,7 @@
     <string name="poi_craft_roofer">Katusepaigaldaja</string>
     <string name="poi_craft_saddler">Sadulsepp</string>
     <string name="poi_craft_sailmaker">Purjetootja</string>
-    <string name="poi_craft_sawmill">Saekaater</string>
+    <string name="poi_craft_sawmill">Saeveski</string>
     <string name="poi_craft_scaffolder">Tellingute valmistaja</string>
     <string name="poi_craft_sculptor">Skulptor</string>
     <string name="poi_craft_shoemaker">Kingsepp</string>
@@ -919,7 +919,7 @@
     <string name="poi_craft_tinsmith">Plekksepp</string>
     <string name="poi_craft_upholsterer">Polsterdaja</string>
     <string name="poi_craft_watchmaker">Kellassepp</string>
-    <string name="poi_craft_window_construction">Akende ehitus</string>
+    <string name="poi_craft_window_construction">Aknameister</string>
     <string name="poi_beauty">Ilusalong</string>
     <string name="poi_anchorage">Kinnituskoht</string>
     <string name="poi_anchor_berth">Ankrukoht</string>
@@ -1407,7 +1407,7 @@
     <string name="poi_capacity_parent_yes">Lapsevanematele mõeldud kohad</string>
     <string name="poi_capacity_parent_no">Lapsevanematele mõeldud kohad puuduvad</string>
     <string name="poi_capacity_parent">Lapsevanematele mõeldud kohad</string>
-    <string name="poi_aerialway_occupancy">Salong/tool/auto maht</string>
+    <string name="poi_aerialway_occupancy">Kohti vagunis/ripptoolis</string>
     <string name="poi_aerialway_capacity">Maht tunnis</string>
     <string name="poi_aerialway_duration">Keskmine sõiduaeg, minutit</string>
     <string name="poi_aerialway_bubble_yes">Mull</string>
@@ -3181,8 +3181,8 @@
     <string name="poi_boat_rental">Paadilaenutus</string>
     <string name="poi_boat_motorboat_rental_yes">Mootorpaadid: jah</string>
     <string name="poi_boat_motorboat_rental_no">Mootorpaadid: ei</string>
-    <string name="poi_boat_houseboat_rental_yes">Majapaadid: jah</string>
-    <string name="poi_boat_houseboat_rental_no">Majapaadid: ei</string>
+    <string name="poi_boat_houseboat_rental_yes">Paatmajad: jah</string>
+    <string name="poi_boat_houseboat_rental_no">Paatmajad: ei</string>
     <string name="poi_boat_pedalboat_rental_yes">Pedaalpaadid: jah</string>
     <string name="poi_boat_pedalboat_rental_no">Pedaalpaadid: ei</string>
     <string name="poi_boat_jetski_rental_yes">Jetid: jah</string>
@@ -4682,4 +4682,5 @@
     <string name="poi_healthcare_speciality_weight_loss">Kaalukaotus</string>
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Maismaatranspordivahendite heitvee purgimiskoht</string>
     <string name="poi_property_management">Kinnisvarahaldusfirma kontor</string>
+    <string name="poi_state_under_construction">Ehitamisel</string>
 </resources>

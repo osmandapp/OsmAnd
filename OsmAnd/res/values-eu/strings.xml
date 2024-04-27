@@ -5648,4 +5648,67 @@
     <string name="top_and_bottom">Goian eta behean</string>
     <string name="title_3d_track">3D arrastoa</string>
     <string name="release_4_8">• 4.8rako prest egon</string>
+    <string name="shared_string_scale">Eskala</string>
+    <string name="upload_local_versions">Kargatu tokiko bertsioak</string>
+    <string name="download_cloud_versions">Deskargatu hodeiko bertsioak</string>
+    <string name="precise">Zehatza</string>
+    <string name="fix_north_up">Gaitu Iparralde finkoa gora</string>
+    <string name="fix_north_up_descr">Ez biratu mapa Iparralde gorako maparen orientazioan keinuekin</string>
+    <string name="change_default_appearance_confirmation">%1$s-ren itxura lehenetsia aldatu?</string>
+    <string name="use_3d_track_visualization">3D bistaratzea</string>
+    <string name="auto_zoom_discrete">Diskretua</string>
+    <string name="gpx_approximation_geo_java">Geometrian oinarrituta (Java, azkarra)</string>
+    <string name="distance_during_navigation_description">Aukeratu nola bistaratzen den distantziaren informazioa nabigazio-trepetetan (punturako distantzia, hurrengo bira, erreiak).
+\n
+\nAukeratu “%1$s” zenbaki zehatzetarako, edo “%2$s” errazago irakurtzeko.</string>
+    <string name="explore_3d_track_description">Ikusi arrastoa 3D interaktiboan! Ikusi altuera, abiadura eta gehiago zuzenean mapan.</string>
+    <string name="maps_that_also_be_used">Mapa hauek ere erabiliko dira: %1$s</string>
+    <string name="use_terrain_maps">Erabili lur-mapak</string>
+    <string name="shared_string_osm_id">OSMaren ID</string>
+    <string name="vertical_exaggeration">Gehitze bertikala</string>
+    <string name="distance_during_navigation">Distantzia nabigazioan zehar</string>
+    <string name="delete_actions_button">Ezabatu botoia</string>
+    <string name="getting_list_of_required_maps">Beharrezko mapen zerrenda eskuratzen…</string>
+    <string name="missing_maps_header">Falta diren edo zaharkituak dauden mapak</string>
+    <string name="required_maps_calculate_online_summary">Falta diren mapen zerrenda lerro zuzeneko ibilbidean oinarritzen da. Mapen zerrenda zehatza lortzeko, OsmAndek zure ibilbidea aurrez kalkula dezake linean.</string>
+    <string name="use_terrain_maps_summary">Lurreko mapak erabiltzen ditu kota datuetarako. Pistaren geometria ez da aldatu.</string>
+    <string name="required_maps">Behar diren mapak</string>
+    <string name="missing_maps_description">Ibilbide honetarako beharrezkoak diren lineaz kanpoko mapa batzuk falta dira edo ez daude eguneratuta. Mesedez, deskargatu edo eguneratu mapa hauek.</string>
+    <string name="route_line_use_coloring_speed">Ibilbidearen marra mugimenduaren abiaduraren arabera margotuta dago.</string>
+    <string name="route_line_use_coloring_altitude">Ibilbide-lerroa kotaren altitudearen arabera margotuta dago.</string>
+    <string name="delete_actions_button_confirmation">Ziur \"%1$s\" ezabatu nahi duzula gehitutako ekintza guztiekin?</string>
+    <string name="use_nearby_roads_summary">Lineaz kanpoko mapa erabiltzen du inguruko errepideak eta kota datuak aurkitzeko. Arrastoaren geometria doi dezake.</string>
+    <string name="use_nearby_roads">Erabili gertuko errepideak</string>
+    <string name="retrieve_elevation_data_summary">OsmAndek inguruko errepideetatik edo lur-mapetatik kota-datuak berreskura ditzake.</string>
+    <string name="relief_3d_download_description">Mapa gehigarriak behar dira lurra mapan ikusteko.</string>
+    <string name="vertical_exaggeration_description">Eskalaren balioa aldatuz, 3D erliebea nabarmendu dezakezu.</string>
+    <string name="apply_only_to_new">Aplikatu berriei soilik</string>
+    <string name="change_default_tracks_appearance_confirmation">Aldaketak karpetako arrastoei aplikatu ala berriei soilik?</string>
+    <string name="shared_string_changes">Aldaketak</string>
+    <string name="gpx_approximation_cpp">Bideratzean oinarrituta (C++)</string>
+    <string name="gpx_approximation_java">Bideratzean oinarrituta (Java)</string>
+    <string name="unchanged_parameter_summary">Arrasto bakoitzak bere parametroak mantenduko ditu.</string>
+    <string name="shared_string_unchanged">Aldaketarik gabe</string>
+    <string name="map_widget_map_scale">Maparen eskala</string>
+    <string name="round_up">Borobildu</string>
+    <string name="release_4_7">Android Auto-rekin bateragarria den \"Abiadura-neurgailua\" trepeta berria
+\n
+\n • Konfiguratu maparen pantaila \"Ekintza bizkorra\" botoi batzuk gehituz
+\n
+\n • Datuen irakurgarritasuna hobetu da grafikoetan
+\n
+\n • Sentsoreen datuen arabera iragazkiak gehitu dira arrastoetan
+\n
+\n • Arrasto taldeen itxuraren pertsonalizazioa hobetu da
+\n
+\n • GPX etiketa gehigarrietarako laguntza gehitu da
+\n
+\n • Pertsonalizatu \"Distantzia nabigazioan zehar\": aukeratu zenbaki zehatzak edo biribilduak
+\n
+\n • UI bateratua arrastoa hautatzeko
+\n
+\n • OpenStreetMap-en saioa OAuth 2.0ra aldatu da
+\n
+\n</string>
+    <string name="lang_ta_in">Tamilera (India)</string>
 </resources>
