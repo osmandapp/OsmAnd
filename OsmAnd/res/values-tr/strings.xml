@@ -5410,4 +5410,8 @@
     <string name="missing_maps_header">Haritalar eksik veya güncel değil</string>
     <string name="getting_list_of_required_maps">Gerekli haritaların listesi alınıyor…</string>
     <string name="use_terrain_maps">Arazi haritalarını kullan</string>
+    <string name="bottom">Alt</string>
+    <string name="top">Üst</string>
+    <string name="wall_color">Duvar rengi</string>
+    <string name="top_and_bottom">Üst ve alt</string>
 </resources>

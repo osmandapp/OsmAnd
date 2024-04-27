@@ -11,7 +11,7 @@
     <string name="poi_sport">Sport</string>
     <string name="poi_tourism">Turism</string>
     <string name="poi_entertainment">Vaba aeg</string>
-    <string name="poi_shop_food">Toidupood või supermarket</string>
+    <string name="poi_shop_food">Lähikauplus või supermarket</string>
     <string name="poi_road_obstacle">Takistustega tee</string>
     <string name="poi_filling_station">Tankla</string>
     <string name="poi_personal_transport">Isiklik transport</string>
@@ -45,9 +45,9 @@
     <string name="poi_butcher">Lihaturg</string>
     <string name="poi_deli">Delikatessid</string>
     <string name="poi_farm">Talupood</string>
-    <string name="poi_greengrocer">Puu-ja köögivili</string>
+    <string name="poi_greengrocer">Puu- ja köögiviljapood</string>
     <string name="poi_seafood">Mereandide pood</string>
-    <string name="poi_confectionery">Maiustuste pood</string>
+    <string name="poi_confectionery">Kommipood</string>
     <string name="poi_node_networks">Matka-/rattamarsruudi punktid</string>
     <string name="poi_hiking_routes">Matkamarsruut</string>
     <string name="poi_craft">Käsitöö</string>
@@ -68,9 +68,9 @@
     <string name="poi_anime">Anime-pood</string>
     <string name="poi_antiques">Antiigiäri</string>
     <string name="poi_art">Kunstiäri</string>
-    <string name="poi_baby_goods">Beebikaubad</string>
+    <string name="poi_baby_goods">Beebikaupade pood</string>
     <string name="poi_bag">Kotipood</string>
-    <string name="poi_bathroom_furnishing">Vannitoasisustus</string>
+    <string name="poi_bathroom_furnishing">Vannitoasisustus ja -tarvikud</string>
     <string name="poi_boutique">Moebutiik</string>
     <string name="poi_camera">Kaamerad ja objektiivid</string>
     <string name="poi_carpet">Vaibapood</string>
@@ -90,7 +90,7 @@
     <string name="poi_erotic">Erootikapood</string>
     <string name="poi_fishing">Kalastustarbed</string>
     <string name="poi_florist">Lillepood</string>
-    <string name="poi_frame">Pildiraamid</string>
+    <string name="poi_frame">Piltide raamimise töökoda</string>
     <string name="poi_free_flying">Vabalangemistarvete pood</string>
     <string name="poi_furniture">Mööblipood</string>
     <string name="poi_garden_centre">Aianduskeskus</string>
@@ -114,7 +114,7 @@
     <string name="poi_mobile_phone">Mobiiliäri</string>
     <string name="poi_motorcycle">Mootorratta pood</string>
     <string name="poi_music">Muusikapood</string>
-    <string name="poi_musical_instrument">Muusikariistad</string>
+    <string name="poi_musical_instrument">Muusikariistade pood</string>
     <string name="poi_newsagent">Lehemüüja</string>
     <string name="poi_optician">Optik</string>
     <string name="poi_organic">Mahetoit</string>
@@ -186,7 +186,7 @@
     <string name="poi_pyrotechnics">Pürotehnika</string>
     <string name="poi_weapons">Relvapood</string>
     <string name="poi_swimming_pool_shop">Basseinikaupade pood</string>
-    <string name="poi_perfumery">Parfümeeriapood</string>
+    <string name="poi_perfumery">Parfümeeriakauplus</string>
     <string name="poi_ford_stepping_stones">Samm-kivisild</string>
     <string name="poi_honey">Meepood</string>
     <string name="poi_religion">Religioossed kaubad</string>
@@ -347,8 +347,8 @@
     <string name="poi_taxi">Takso ootepeatus</string>
     <string name="poi_helipad">Helikopteri maandumiskoht</string>
     <string name="poi_runway">Lennurada</string>
-    <string name="poi_aeroway_terminal">Lennutee terminal</string>
-    <string name="poi_aeroway_gate">Lennutee värav</string>
+    <string name="poi_aeroway_terminal">Lennujaama reisiterminal</string>
+    <string name="poi_aeroway_gate">Reisiterminali värav</string>
     <string name="poi_slipway">Veeskamiskoht</string>
     <string name="poi_ferry_terminal">Parvlaevaterminal</string>
     <string name="poi_lighthouse">Tuletorn</string>
@@ -447,7 +447,7 @@
     <string name="poi_first_aid">Esmaabi</string>
     <string name="poi_dentist">Hambaarst</string>
     <string name="poi_nursing_home">Hooldekodu</string>
-    <string name="poi_baby_hatch">Beebiluuk</string>
+    <string name="poi_baby_hatch">Beebi loovutuskast</string>
     <string name="poi_veterinary">Loomaarst</string>
     <string name="poi_sanatorium">Sanatoorium</string>
     <string name="poi_healthcare_alternative">Alternatiivmeditsiin</string>
@@ -557,7 +557,7 @@
     <string name="poi_recycling_cardboard">Papp</string>
     <string name="poi_recycling_magazines">Ajakirjad</string>
     <string name="poi_recycling_paper_packaging">Paberipakend</string>
-    <string name="poi_recycling_small_appliances">Väikesed seadmed</string>
+    <string name="poi_recycling_small_appliances">Väikesed kodumasinad</string>
     <string name="poi_recycling_wood">Puit</string>
     <string name="poi_recycling_books">Raamatud</string>
     <string name="poi_recycling_shoes">Kingad</string>
@@ -840,7 +840,7 @@
     <string name="poi_strait">Väin</string>
     <string name="poi_island">Saar</string>
     <string name="poi_islet">Laid</string>
-    <string name="poi_seamark_building">Meremärk ehitis</string>
+    <string name="poi_seamark_building">Merendusega seotud ehitis</string>
     <string name="poi_seamark_bridge">Meremärk sild</string>
     <string name="poi_seamark_harbour">Sadam</string>
     <string name="poi_seamark_light">Valgus, meremärk</string>
@@ -872,7 +872,7 @@
     <string name="poi_religion_taoist">Taoism</string>
     <string name="poi_information">Teave</string>
     <string name="poi_leisure_fishing">Kalastuskoht</string>
-    <string name="poi_craft_agricultural_engines">Põllumajanduslikud mootorid</string>
+    <string name="poi_craft_agricultural_engines">Põllumajandustehnika mootorid</string>
     <string name="poi_craft_basket_maker">Korvivalmistaja</string>
     <string name="poi_craft_beekeeper">Mesinik</string>
     <string name="poi_craft_blacksmith">Sepp</string>
@@ -891,7 +891,7 @@
     <string name="poi_craft_hvac">Küte, ventilatsioon, kliimaseade</string>
     <string name="poi_craft_insulation">Isolatsioon</string>
     <string name="poi_craft_jeweller">Juveliir</string>
-    <string name="poi_craft_locksmith">Lukksepp</string>
+    <string name="poi_craft_locksmith">Lukuabi</string>
     <string name="poi_craft_key_cutter">Võtmevalmistaja</string>
     <string name="poi_craft_metal_construction">Metallkonstruktsioonide käsitöö</string>
     <string name="poi_craft_optician">Optik</string>
@@ -1241,7 +1241,7 @@
     <string name="poi_bicycle_parking_stands">Alused</string>
     <string name="poi_bicycle_parking_wall_loops">Seinasilmused</string>
     <string name="poi_bicycle_parking_rack">Riiul</string>
-    <string name="poi_bicycle_parking_building">Erihoone</string>
+    <string name="poi_bicycle_parking_building">Eraldi hoone</string>
     <string name="poi_bicycle_parking_shed">Kuur</string>
     <string name="poi_bicycle_parking_bollard">Pollar</string>
     <string name="poi_bicycle_parking_informal">Mitteametlik</string>
@@ -3062,9 +3062,9 @@
     <string name="poi_feeding_place">Loomade söötmise koht</string>
     <string name="poi_party">Peotarbed</string>
     <string name="poi_electrical">Elektritarvikute pood</string>
-    <string name="poi_locksmith">Lukksepa pood</string>
+    <string name="poi_locksmith">Lukuabi</string>
     <string name="poi_lighting">Valgustusseadmed</string>
-    <string name="poi_lottery">Loteriipiletid</string>
+    <string name="poi_lottery">Lotopood</string>
     <string name="poi_gambling">Hasartmängude toimumiskoht</string>
     <string name="poi_gambling_type">Liik</string>
     <string name="poi_gambling_lottery">Loterii</string>
@@ -3072,7 +3072,7 @@
     <string name="poi_gambling_slot_machines">Mänguautomaadid</string>
     <string name="poi_gambling_betting">Kihlveod</string>
     <string name="poi_gambling_bingo">Bingo</string>
-    <string name="poi_e_cigarette">Elektrooniliste sigarettide pood</string>
+    <string name="poi_e_cigarette">E-sigaretipood</string>
     <string name="poi_locomotive">Vedur</string>
     <string name="poi_nutrition_supplements">Toidulisandid</string>
     <string name="poi_photo_studio">Fotostuudio</string>
@@ -3097,7 +3097,7 @@
     <string name="poi_energy_supplier">Energiatarnija kontor</string>
     <string name="poi_craft_electronics_repair">Elektroonika parandus</string>
     <string name="poi_electronics_repair_computer">Elektroonika remont: arvutid</string>
-    <string name="poi_electronics_repair_appliance">Elektroonika remont: seade</string>
+    <string name="poi_electronics_repair_appliance">Elektroonika remont: kodumasinad</string>
     <string name="poi_electronics_repair_phone">Elektroonika remont: telefon</string>
     <string name="poi_electronics_repair_tv">Elektroonika remont: tv</string>
     <string name="poi_music_school">Muusikakool</string>
@@ -3392,7 +3392,7 @@
     <string name="poi_meadow_transitional">Liik: üleminekuaeg</string>
     <string name="poi_meadow_pasture">Liik: karjamaa</string>
     <string name="poi_frozen_food">Külmutatud toit</string>
-    <string name="poi_agrarian">Põllumajanduskauplus</string>
+    <string name="poi_agrarian">Põllumajandustarvete kauplus</string>
     <string name="poi_shop_fireplace">Kaminapood</string>
     <string name="poi_shop_boat">Paadipood</string>
     <string name="poi_cannabis">Kanepipood</string>
@@ -3493,7 +3493,7 @@
     <string name="poi_course">Kursus</string>
     <string name="poi_rock">Kalju</string>
     <string name="poi_end_date">Lõpu kuupäev</string>
-    <string name="poi_appliance">Seadmete pood</string>
+    <string name="poi_appliance">Kodumasinate pood</string>
     <string name="poi_outcrop">Paljand</string>
     <string name="poi_payment_contactless_yes">Kontaktivaba</string>
     <string name="poi_payment_contactless_no">Kontaktivaba vastu ei võeta</string>
@@ -4482,7 +4482,7 @@
     <string name="poi_recycling_belts">Vööd</string>
     <string name="poi_recycling_boats">Paadid</string>
     <string name="poi_recycling_coffee_capsules">Kohvikapslid</string>
-    <string name="poi_recycling_electrical_appliances">Elektriseadmed</string>
+    <string name="poi_recycling_electrical_appliances">Elektrilised kodumasinad</string>
     <string name="poi_recycling_electronics">Elektroonika</string>
     <string name="poi_recycling_food">Toit</string>
     <string name="poi_recycling_gas_bottles">Gaasipudelid</string>

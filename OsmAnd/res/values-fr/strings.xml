@@ -276,7 +276,7 @@
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou Désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
+    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou désactiver pour calculer l\'itinéraire le plus économe en carburant.</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} tuiles ({2} Mb)</string>
     <string name="shared_string_download_map">Télécharger une carte</string>
     <string name="select_max_zoom_preload_area">Zoom maximal à précharger</string>
@@ -5683,4 +5683,25 @@
     <string name="use_nearby_roads">Utiliser les routes à proximité</string>
     <string name="use_terrain_maps_summary">Utilise les cartes de relief pour les données d\'altitude. La géométrie de la trace demeure inchangée.</string>
     <string name="use_nearby_roads_summary">Utilise les cartes hors-ligne pour trouver les routes à proximité et les données d\'altitude. La géométrie de la trace peut être modifiée.</string>
+    <string name="fixed_height">Hauteur fixe</string>
+    <string name="top">En haut</string>
+    <string name="bottom">En bas</string>
+    <string name="top_and_bottom">En haut et en bas</string>
+    <string name="title_3d_track">Trace 3D</string>
+    <string name="track_line">Ligne de la trace</string>
+    <string name="downward_gradient">Dégradé vers le bas</string>
+    <string name="maps_that_also_be_used">Cartes également utilisées : %1$s</string>
+    <string name="getting_list_of_required_maps">Récupération de la liste des cartes requises…</string>
+    <string name="required_maps">Cartes requises</string>
+    <string name="missing_maps_header">Cartes manquantes ou périmées</string>
+    <string name="missing_maps_description">Pour calculer cet itinéraire, certaines cartes hors ligne sont manquantes ou périmées. Veuillez télécharger ou mettre à jour ces cartes.</string>
+    <string name="shared_string_osm_id">ID OSM</string>
+    <string name="route_line_use_coloring_altitude">La ligne d\'itinéraire est colorée selon l\'altitude.</string>
+    <string name="delete_actions_button_confirmation">Êtes-vous certain de vouloir supprimer \"%1$s\" avec toutes les actions ajoutées ?</string>
+    <string name="visualized_by">Affiché par</string>
+    <string name="upward_gradient">Dégradé vers le haut</string>
+    <string name="explore_3d_track_description">Explorez la trace en 3D interactif ! Visualisez directement sur la carte : hauteur, vitesse et bien plus.</string>
+    <string name="wall_color">Couleur du mur</string>
+    <string name="route_line_use_coloring_speed">La ligne d\'itinéraire est colorée selon la vitesse de déplacement.</string>
+    <string name="delete_actions_button">Supprimer le bouton</string>
 </resources>

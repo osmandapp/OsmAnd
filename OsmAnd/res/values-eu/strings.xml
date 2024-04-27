@@ -5637,4 +5637,15 @@
     <string name="auto_zoom_smooth">Leuna</string>
     <string name="auto_zoom">Zoom automatikoa</string>
     <string name="gpx_approximation">GPX hurbilketa</string>
+    <string name="fixed_height">Altuera finkoa</string>
+    <string name="visualized_by">Ikusita</string>
+    <string name="wall_color">Hormaren kolorea</string>
+    <string name="track_line">Arrastoaren lerroa</string>
+    <string name="downward_gradient">Beheranzko gradientea</string>
+    <string name="bottom">Behean</string>
+    <string name="top">Gaian</string>
+    <string name="upward_gradient">Goranzko gradientea</string>
+    <string name="top_and_bottom">Goian eta behean</string>
+    <string name="title_3d_track">3D arrastoa</string>
+    <string name="release_4_8">• 4.8rako prest egon</string>
 </resources>
