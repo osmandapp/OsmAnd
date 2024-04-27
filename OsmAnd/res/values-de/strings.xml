@@ -5707,4 +5707,6 @@
     <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
     <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage bzw. Höhe gefärbt.</string>
     <string name="delete_actions_button_confirmation">Bist du sicher, dass du \"%1$s\" mit allen hinzugefügten Aktionen löschen möchtest?</string>
+    <string name="visualized_by">Visualisiert von</string>
+    <string name="wall_color">Wandfarbe</string>
 </resources>
