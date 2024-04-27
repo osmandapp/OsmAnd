@@ -2182,7 +2182,7 @@
     <string name="shared_string_trip">트립</string>
     <string name="searching_gps">GPS 검색</string>
     <string name="wiki_article_search_text">해당 Wiki 문서를 검색하는 중</string>
-    <string name="whats_new">의 새로운 기능</string>
+    <string name="whats_new">다음의 새로운 기능</string>
     <string name="backup_delete_all_data_descr">OsmAnd Cloud의 모든 데이터가 삭제됩니다. 로컬 버전은 그대로 유지됩니다.</string>
     <string name="map_viewing_item">지도 보기</string>
     <string name="shared_string_finish">끝내기</string>
@@ -5096,4 +5096,39 @@
     <string name="rendering_attr_padusHideBoundaries_name">공공 토지 경계</string>
     <string name="routing_type_a_star_2_phase">A* 2-단계</string>
     <string name="voice_announces_info">음성 발표는 내비게이션 중에 만 발생합니다.</string>
+    <string name="release_4_7">• Android Auto와 호환되는 새로운 \"Speedometer\" 위젯
+\n
+\n• 여러 \"Quick Action\"버튼을 추가하여 맵 화면 구성
+\n
+\n• 그래프의 데이터의 향상된 읽기성
+\n
+\n• 트랙에 대한 센서 데이터로 필터 추가
+\n
+\n• 트랙 그룹을위한 향상된 외관 사용자 정의
+\n
+\n• 추가 GPX 태그 지원
+\n
+\n• \"내비게이션 중의 인스턴스를 사용자 정의\": 정확한 또는 둥근 숫자로 선택
+\n
+\n• 트랙 선택을위한 통합 UI
+\n
+\n• OpenStreetMap 로그인은 OAuth 2.0으로 전환
+\n
+\n</string>
+    <string name="shared_sting_all_colors">모든 색상</string>
+    <string name="fixed_height">고정 높이</string>
+    <string name="title_3d_track">3차원 트랙</string>
+    <string name="explore_3d_track_description">대화형 3D의 트랙을 탐험하십시오! 지도에 고도, 속도 및 더 직접 시각화하십시오.</string>
+    <string name="maps_that_also_be_used">또한 사용할지도: %1$s</string>
+    <string name="getting_list_of_required_maps">필요한 맵 목록을 얻기 ..</string>
+    <string name="release_4_8">· 4.8 준비</string>
+    <string name="visualized_by">사용자 정의</string>
+    <string name="wall_color">벽 색깔</string>
+    <string name="track_line">트랙 라인</string>
+    <string name="downward_gradient">아래 글래드런</string>
+    <string name="upward_gradient">위쪽 gradient</string>
+    <string name="top">맨 위</string>
+    <string name="bottom">맨 아래</string>
+    <string name="top_and_bottom">상단 및 하단</string>
+    <string name="lang_ta_in">타밀 (India)</string>
 </resources>
