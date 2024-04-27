@@ -1,6 +1,9 @@
 package net.osmand.router;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -57,6 +60,7 @@ public class MissingMapsCalculator {
 
 	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
 			throws IOException {
+//		start = testLatLons(targets);
 		long tm = System.nanoTime();
 		lastKeyNames = new ArrayList<String>();
 		List<Point> pointsToCheck = new ArrayList<>();
@@ -76,10 +80,15 @@ public class MissingMapsCalculator {
 			}
 		}
 		LatLon end = null;
+		LatLon prev = start;
 		for (int i = 0; i < targets.size(); i++) {
-			LatLon prev = i == 0 ? start : targets.get(i - 1);
 			end = targets.get(i);
+			if (MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
+				// skip point they too close
+				continue;
+			}
 			split(ctx, knownMaps, pointsToCheck, prev, end);
+			prev = end;
 		}
 		if (end != null) {
 			addPoint(ctx, knownMaps, pointsToCheck, end);
@@ -159,6 +168,17 @@ public class MissingMapsCalculator {
 		return true;
 	}
 
+	private LatLon testLatLons(List<LatLon> targets) throws IOException {
+		BufferedReader r = new BufferedReader(new InputStreamReader(MissingMapsCalculator.class.getResourceAsStream("/latlons.test.txt")));
+		targets.clear();
+		String s = null;
+		while ((s = r.readLine()) != null) {
+			String[] ls = s.split(",");
+			targets.add(new LatLon(Double.parseDouble(ls[1].trim()), Double.parseDouble(ls[0].trim())));
+		}
+		return targets.get(0);
+	}
+
 	private List<WorldRegion> convert(Set<String> mapsToDownload) {
 		if (mapsToDownload.isEmpty()) {
 			return null;
@@ -233,9 +253,7 @@ public class MissingMapsCalculator {
 
 	private void split(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon pnt, LatLon next) throws IOException {
 		double dist = MapUtils.getDistance(pnt, next);
-		if (dist < DISTANCE_SKIP) {
-			// skip point they too close
-		} else if (dist < DISTANCE_SPLIT) {
+		if (dist < DISTANCE_SPLIT) {
 			addPoint(ctx, knownMaps, pointsToCheck, pnt);
 			// pointsToCheck.add(e); // add only start end is separate
 		} else {
