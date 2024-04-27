@@ -5704,4 +5704,15 @@
     <string name="missing_maps_header">Mapas que faltan o anticuados</string>
     <string name="route_line_use_coloring_speed">La línea de ruta está coloreada según la velocidad de movimiento.</string>
     <string name="route_line_use_coloring_altitude">La línea de ruta está coloreada según la altitud de elevación.</string>
+    <string name="visualized_by">Visualizado por</string>
+    <string name="wall_color">Color de las paredes</string>
+    <string name="track_line">Línea de la vía</string>
+    <string name="downward_gradient">Pendiente descendente</string>
+    <string name="upward_gradient">Pendiente ascendente</string>
+    <string name="top">Arriba</string>
+    <string name="bottom">Abajo</string>
+    <string name="top_and_bottom">Arriba y abajo</string>
+    <string name="title_3d_track">Visualización en 3D</string>
+    <string name="explore_3d_track_description">¡Explora la pista en un 3D interactivo! Visualiza la altura, la velocidad y mucho más directamente en el mapa.</string>
+    <string name="fixed_height">Altura fija</string>
 </resources>
