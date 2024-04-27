@@ -63,6 +63,10 @@ public class RouteCalculationResult {
 	protected List<WorldRegion> mapsToUpdate;
 	protected List<WorldRegion> usedMaps;
 
+	protected List<LatLon> missingMapsPoints;
+
+	protected RoutingContext missingMapsRoutingContext;
+
 	// params
 	protected final ApplicationMode appMode;
 	protected final RouteService routeService;
@@ -204,6 +208,29 @@ public class RouteCalculationResult {
 
 	public List<WorldRegion> getMissingMaps() {
 		return missingMaps;
+	}
+
+	public void setMissingMaps(List<WorldRegion> missingMaps,
+							   List<WorldRegion> mapsToUpdate,List<WorldRegion> usedMaps,
+							   RoutingContext ctx, List<LatLon> points) {
+		this.missingMaps = missingMaps;
+		this.mapsToUpdate = mapsToUpdate;
+		this.usedMaps = usedMaps;
+		if(Algorithms.isEmpty(this.missingMaps) && Algorithms.isEmpty(this.mapsToUpdate)) {
+			this.missingMapsRoutingContext = null;
+			this.missingMapsPoints = null;
+		} else {
+			this.missingMapsPoints = points;
+			this.missingMapsRoutingContext = ctx;
+		}
+	}
+
+	public RoutingContext getMissingMapsRoutingContext() {
+		return missingMapsRoutingContext;
+	}
+
+	public List<LatLon> getMissingMapsPoints() {
+		return missingMapsPoints;
 	}
 
 	public List<WorldRegion> getMapsToUpdate() {
