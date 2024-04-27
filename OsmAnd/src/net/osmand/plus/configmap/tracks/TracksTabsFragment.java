@@ -24,6 +24,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
+import net.osmand.GeoidAltitudeCorrection;
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -240,7 +242,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Override
 	public void tracksLoaded(@NonNull TrackFolder folder) {
-		trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems(), true);
+		trackTabsHelper.updateTrackItems(folder.getFlattenedTrackItems());
 	}
 
 	@Override
