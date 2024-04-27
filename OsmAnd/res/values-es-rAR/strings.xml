@@ -3318,9 +3318,9 @@
     <string name="monitoring_min_speed_descr_recommendation">Recomendación: Prueba primero a usar la detección de movimiento mediante el filtro de desplazamiento mínimo de registro (B), puede producir mejores resultados y perderá menos datos. Si las trazas siguen siendo ruidosas a bajas velocidades, prueba aquí con valores distintos de cero. Tenga en cuenta que algunas mediciones pueden no informar ningún valor de velocidad (algunos métodos basados en la red), en cuyo caso no se registraría nada.</string>
     <string name="monitoring_min_speed_descr_remark">Observación: comprobar velocidad &gt; 0: La mayoría de los chipsets de GPS informan un valor de velocidad sólo si el algoritmo determina que está en movimiento. Por lo tanto, el uso del ajuste &gt; 0 en este filtro, en cierto sentido usa la detección de movimiento del conjunto de chips del GPS. Pero incluso si no se filtra aquí en el momento de la grabación, seguimos usando esta función en nuestro análisis GPX para determinar la distancia corregida, es decir, el valor que se muestra en ese campo es la distancia grabada en movimiento.</string>
     <string name="monitoring_min_accuracy_descr">Esto registrará solo los puntos medidos con una indicación de precisión mínima (en metros o pies, según lo informado por Android para su conjunto de chips). La precisión es la proximidad de las mediciones a la ubicación real y no está directamente relacionada con la precisión, que es la dispersión de las mediciones repetidas.</string>
-    <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones atmosféricas.</string>
-    <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: Es difícil predecir que se grabará y que no, puede ser mejor apagar este filtro.</string>
-    <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS se hubiera apagado de inmediato antes de una grabación, el primer punto medido podría tener una menor precisión, entonces en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">• Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones atmosféricas.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">• Recomendación: Es difícil predecir que se grabará y que no, puede ser mejor apagar este filtro.</string>
+    <string name="monitoring_min_accuracy_descr_remark">• Observación: Si el GPS se hubiera apagado de inmediato antes de una grabación, el primer punto medido podría tener una menor precisión, entonces en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
     <string name="monitoring_min_distance_descr">Activar este filtro, permite evitar grabar datos adicionales al no detectar movimiento. También mejora el aspecto espacial de las trazas sin necesidad de procesarlas.</string>
     <string name="monitoring_min_distance_descr_side_effect">Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto cada uno. Pueden filtrarse los pequeños movimientos (por ejemplo, hacia los lados del camino para marcar un posible desvío en el viaje). Nótese que el archivo contendrá menos información para el post-procesamiento y, al mismo tiempo, podría guardar errores del GPS causados por una mala recepción o por efectos del chipset.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recomendación: Define un desplazamiento de 5 metros si no deseas registrar detalles menores de la ruta y no necesitas datos adicionales sobre el período de descanso.</string>
@@ -5719,4 +5719,15 @@
     <string name="missing_maps_description">Algunos mapas sin conexión necesarios para esta ruta desaparecieron o están desactualizados. Descarga o actualiza estos mapas.</string>
     <string name="missing_maps_header">Mapas perdidos o desactualizados</string>
     <string name="route_line_use_coloring_altitude">La línea de la ruta se colorea según la elevación de la altitud.</string>
+    <string name="visualized_by">Visualizado por</string>
+    <string name="wall_color">Color del muro</string>
+    <string name="fixed_height">Altura fija</string>
+    <string name="upward_gradient">Gradiente ascendente</string>
+    <string name="top">Superior</string>
+    <string name="bottom">Inferior</string>
+    <string name="top_and_bottom">Superior e inferior</string>
+    <string name="title_3d_track">Traza 3D</string>
+    <string name="track_line">Línea de la traza</string>
+    <string name="downward_gradient">Gradiente descendente</string>
+    <string name="explore_3d_track_description">¡Explora la traza en 3D interactivo! Visualiza la altura, la velocidad y más, directamente en el mapa.</string>
 </resources>
