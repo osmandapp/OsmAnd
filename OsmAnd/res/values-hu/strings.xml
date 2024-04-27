@@ -5652,7 +5652,7 @@
 \n
 \n • További GPX-címkék támogatása
 \n
-\n • A „Távolság navigáció közben” testreszabása: válasszon pontos vagy felfelé kerekített számok közül
+\n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között
 \n
 \n • Egységes felhasználói felület a nyomvonalválasztásához
 \n
@@ -5701,4 +5701,15 @@
     <string name="missing_maps_header">Hiányzó vagy nem naprakész térképek</string>
     <string name="route_line_use_coloring_altitude">Az útvonal a magasság változása szerint színezett.</string>
     <string name="route_line_use_coloring_speed">Az útvonal a haladás sebessége szerint színezett.</string>
+    <string name="visualized_by">Vizualizálás:</string>
+    <string name="wall_color">Fal szín</string>
+    <string name="track_line">Nyomvonal csík</string>
+    <string name="fixed_height">Fix magasság</string>
+    <string name="downward_gradient">Lefelé mutató gradiens</string>
+    <string name="upward_gradient">Felfelé mutató gradiens</string>
+    <string name="top">Fent</string>
+    <string name="bottom">Lent</string>
+    <string name="top_and_bottom">Fent és lent</string>
+    <string name="title_3d_track">3D nyomvonal</string>
+    <string name="explore_3d_track_description">Fedezze az interaktív 3D-s nyomvonalat! Lássa közvetlenül a térképen a magasságot, sebességet és egyebeket.</string>
 </resources>
