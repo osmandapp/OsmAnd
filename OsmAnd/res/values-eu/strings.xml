@@ -4127,7 +4127,7 @@
     <string name="gpx_no_routes_descr">\"%1$s\" tresna erabil dezakezu ibilbidea fitxategi gisa gordetzeko.</string>
     <string name="safe_settings">Gorde</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Zoom txikitako ikonoen ikuspegi eskematikoa</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelak</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelen ikusgarritasuna areagotzea</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Zoom txikitako ikonoak</string>
     <string name="icon_group_education">Hezkuntza</string>
     <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko.
@@ -4162,7 +4162,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Konpontzeko eskaera-etiketak (fixme) erakusten ditu</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Ohar etiketak</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Erakutsi ohar etiketak</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ez ezkutatu ubideetako tunelak</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Areagotu ubideetako tunelen ikusgarritasuna</string>
     <string name="files_with_route_restrictions">Ibilbideen murrizketak dituzten fitxategiak</string>
     <string name="waypoint_template">Bide-puntuen txantiloia</string>
     <string name="always_ask_waypoint_appearance_description">Ekintza hau sakatzean \"Gehitu bide-puntua\" pantaila irekiko da, non haren izena eta itxura alda ditzakezun.</string>
@@ -5474,7 +5474,7 @@
     <string name="press_button_to_link_with_action">Sakatu zure gailuko botoia ekintza honi esleitzeko: %1$s</string>
     <string name="tripltek_promo_description">Doako sarbidea eginbideetara, besteak beste, mapa deskarga mugagabea, 3D erliebea eta abar %1$s hilabetez</string>
     <string name="deletion_error">Errorea ezabatzean</string>
-    <string name="button_already_assigned_to_this_action">Botoi hau ekintza honi esleituta dago jada.</string>
+    <string name="button_already_assigned_to_this_action">Botoia ekintza honi esleituta dago jada.</string>
     <string name="key_event_action_move_right">Mugitu eskuinera</string>
     <string name="shared_string_button">Botoia</string>
     <string name="key_event_action_next_app_profile">Aplikazioaren hurrengo profila</string>
@@ -5582,7 +5582,7 @@
     <string name="searching_matching_tracks">Bilatu bat datozen arrasto guztiak</string>
     <string name="maps_and_resources">Mapa eta baliabideak</string>
     <string name="any_connected_with_device">Konektatutako edozein: %s</string>
-    <string name="sorted_sufolders_toast">\"%1$s\"-ko azpikarpetak honela ordenatu dira: \"%2$s\"</string>
+    <string name="sorted_sufolders_toast">\"%1$s\"-ko azpikarpetak honela daude ordenatuta: \"%2$s\"</string>
     <string name="max_sensor_heartrate">Bihotz-taupadak, altuena</string>
     <string name="max_sensor_cadence">Bizikletaren kadentzia, altuena</string>
     <string name="avg_sensor_heartrate">Bihotz-taupadak, batez beste</string>
