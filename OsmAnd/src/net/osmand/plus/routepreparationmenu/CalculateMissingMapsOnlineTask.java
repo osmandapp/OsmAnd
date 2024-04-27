@@ -85,16 +85,12 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		for (int i = 0; i < features.length(); i++) {
 			JSONObject feature = features.getJSONObject(i);
 			JSONObject geometry = feature.getJSONObject("geometry");
-			String type = geometry.getString("type");
-			if (Objects.equals(type, "LineString")) {
+			if (Objects.equals(geometry.getString("type"), "LineString")) {
 				JSONArray coordinates = geometry.getJSONArray("coordinates");
 				for (int j = 0; j < coordinates.length(); j++) {
 					JSONArray coordinate = coordinates.getJSONArray(j);
 					parseAndAddLocation(result, coordinate);
 				}
-			} else if (Objects.equals(type, "Point")) {
-				JSONArray coordinates = geometry.getJSONArray("coordinates");
-				parseAndAddLocation(result, coordinates);
 			}
 		}
 		return result;
