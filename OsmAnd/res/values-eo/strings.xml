@@ -5698,4 +5698,7 @@
     <string name="delete_actions_button">Forigi butonon</string>
     <string name="retrieve_elevation_data_summary">OsmAnd povas akiri datumojn pri altitudo el proksimaj vojoj aŭ el terenaj mapoj.</string>
     <string name="route_line_use_coloring_speed">Kolorigi linion de kurso laŭ rapido de movado.</string>
+    <string name="relief_3d_download_description">Pliaj mapoj necesas por vidi detalojn de tereno sur la mapo.</string>
+    <string name="shared_string_scale">Skali</string>
+    <string name="shared_string_osm_id">OSM-identigilo</string>
 </resources>
