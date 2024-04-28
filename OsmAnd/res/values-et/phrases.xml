@@ -404,7 +404,7 @@
     <string name="poi_construction">Ehitus</string>
     <string name="poi_works">Töökoht</string>
     <string name="poi_mineshaft">Kaevandusšaht</string>
-    <string name="poi_adit">Stoll</string>
+    <string name="poi_adit">Adit</string>
     <string name="poi_petroleum_well">Naftakaev</string>
     <string name="poi_survey_point">Vaatluspunkt</string>
     <string name="poi_windmill">Tuuleveski</string>
@@ -491,7 +491,7 @@
     <string name="poi_quarter">Kvartal</string>
     <string name="poi_rest_area">Puhkeala</string>
     <string name="poi_reservoir">Veehoidla</string>
-    <string name="poi_gasometer">Gasomeeter</string>
+    <string name="poi_gasometer">Gaasimahuti</string>
     <string name="poi_silo">Viljakuivati</string>
     <string name="poi_storage_tank">Mahuti</string>
     <string name="poi_allotments">Aianduskrundid</string>
@@ -532,7 +532,7 @@
     <string name="poi_fuel_lh2">Vedel vesinik</string>
     <string name="poi_fuel_electricity">Elekter</string>
     <string name="poi_breakwater">Lainemurdja</string>
-    <string name="poi_groyne">Groin</string>
+    <string name="poi_groyne">Kaldakaitsetamm</string>
     <string name="poi_basin">Jõgikond</string>
     <string name="poi_crane">Kraana</string>
     <string name="poi_country">Riik</string>
@@ -938,7 +938,7 @@
     <string name="poi_daymark">Päevamärk</string>
     <string name="poi_distance_mark">Kaugusmärk</string>
     <string name="poi_dry_dock">Kuivdokk</string>
-    <string name="poi_dyke">Tamm</string>
+    <string name="poi_dyke">Kaldavall</string>
     <string name="poi_floating_dock">Ujuvdokk</string>
     <string name="poi_fog_signal">Udusignaal</string>
     <string name="poi_harbour_basin">Sadama vesikond</string>
@@ -2120,7 +2120,7 @@
     <string name="poi_theatre_genre_ballet">Ballett</string>
     <string name="poi_theatre_genre_shadow_play">Varjude mäng</string>
     <string name="poi_bandstand">Kõlakoda</string>
-    <string name="poi_kiln">Ahi</string>
+    <string name="poi_kiln">Põletusahi</string>
     <string name="poi_product_brick">Toode: tellis</string>
     <string name="poi_product_quicklime">Toode: kustutamata lubi</string>
     <string name="poi_product_leather">Toode: nahk</string>
@@ -2148,7 +2148,7 @@
     <string name="poi_step_condition_even">Astmete seisund: ühtlane</string>
     <string name="poi_step_condition_uneven">Astmete seisund: ebaühtlane</string>
     <string name="poi_step_condition_rough">Astmete seisund: karm</string>
-    <string name="poi_cairn">Kivihunnik</string>
+    <string name="poi_cairn">Kivikangur</string>
     <string name="poi_memorial_fassade_decoration">Fassaadikaunistus</string>
     <string name="poi_defibrillator">Defibrillaator</string>
     <string name="poi_defibrillator_yes">Defibrillator: Jah</string>
@@ -2472,7 +2472,7 @@
     <string name="poi_boxing">Poks</string>
     <string name="poi_official_name">Ametlik nimi</string>
     <string name="poi_seamark_dyke">Meremärk tamm</string>
-    <string name="poi_dolphin">Delfiin</string>
+    <string name="poi_dolphin">Paal</string>
     <string name="poi_forestry_compartment">Teeviit: metsandus-sektsioon</string>
     <string name="poi_forestry_allotment">Teeviit: metsandusjaotus</string>
     <string name="poi_inscription_n">Kiri:N</string>
@@ -3814,7 +3814,7 @@
     <string name="poi_departures_board">Väljuvate reiside tabloo</string>
     <string name="poi_drinking_water_refill">Joogivee täitmine</string>
     <string name="poi_recycling_small_electrical_appliances">Väikesed elektriseadmed</string>
-    <string name="poi_beehive">Mesitaru</string>
+    <string name="poi_beehive">Mesipuu</string>
     <string name="poi_nuts">Pähklipood</string>
     <string name="poi_fuel_lng">Veeldatud maagaas</string>
     <string name="poi_gpx_point">GPX sõlm</string>
