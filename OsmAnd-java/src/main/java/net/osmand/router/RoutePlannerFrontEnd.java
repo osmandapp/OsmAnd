@@ -33,6 +33,7 @@ import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
 import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.router.RouteCalculationProgress.HHIteration;
 import net.osmand.router.RouteResultPreparation.RouteCalcResult;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 
@@ -922,9 +923,13 @@ public class RoutePlannerFrontEnd {
 			if (missingMapsCalculator == null) {
 				missingMapsCalculator = new MissingMapsCalculator();
 			}
-			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets,
-					hhRoutingConfig != null)) {
-				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
+			boolean checkHHEditions = hhRoutingConfig != null;
+			List<LatLon> routePoints = CollectionUtils.asOneList(Collections.singletonList(start), targets);
+			MissingMapsCalculationResult result =
+					missingMapsCalculator.calculateMissingMaps(ctx, routePoints, checkHHEditions);
+			ctx.calculationProgress.missingMapsCalculationResult = result;
+			if (result.hasMissingMaps()) {
+				return new RouteCalcResult(result.getErrorMessage());
 			}
 		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
@@ -1406,6 +1411,10 @@ public class RoutePlannerFrontEnd {
 			float mb = (1 << 20);
 			log.warn("Unload context :  estimated " + sz / mb + " ?= " + (h1 - h2) / mb + " actual");
 		}
+	}
+
+	public static MissingMapsCalculator getMissingMapsCalculator() {
+		return missingMapsCalculator;
 	}
 
 }

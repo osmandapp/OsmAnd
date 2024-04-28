@@ -612,7 +612,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public List<GeneralRouter.RoutingParameter> getAvoidRoutingPrefsForAppMode(ApplicationMode applicationMode) {
-		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
+		List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<>();
 		GeneralRouter router = app.getRouter(applicationMode);
 		if (router != null) {
 			Map<String, GeneralRouter.RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(applicationMode, router);

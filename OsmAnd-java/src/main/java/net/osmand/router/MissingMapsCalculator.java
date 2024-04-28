@@ -1,9 +1,8 @@
 package net.osmand.router;
 
-import java.io.BufferedReader;
+import static net.osmand.util.CollectionUtils.addIfNotContains;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -26,11 +25,12 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class MissingMapsCalculator {
-	protected static final Log log = PlatformUtil.getLog(MissingMapsCalculator.class);
 
-	public static final double DISTANCE_SPLIT = 50000;
-	public static final double DISTANCE_SKIP = 10000;
-	private OsmandRegions or;
+	protected static final Log LOG = PlatformUtil.getLog(MissingMapsCalculator.class);
+
+	public static final double DISTANCE_TO_SPLIT = 50000;
+	public static final double DISTANCE_TO_SKIP = 10000;
+	private final OsmandRegions osmandRegions;
 	private BinaryMapIndexReader reader;
 	private List<String> lastKeyNames ;
 
@@ -49,58 +49,30 @@ public class MissingMapsCalculator {
 
 	public MissingMapsCalculator() throws IOException {
 		// could be cached
-		or = new OsmandRegions();
-		reader = or.prepareFile();
+		osmandRegions = new OsmandRegions();
+		reader = osmandRegions.prepareFile();
 	}
 
 	public MissingMapsCalculator(OsmandRegions osmandRegions) {
-		or = osmandRegions;
+		this.osmandRegions = osmandRegions;
 	}
 
-
-	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
-			throws IOException {
-//		start = testLatLons(targets);
+	public MissingMapsCalculationResult calculateMissingMaps(RoutingContext ctx, List<LatLon> routePoints, boolean checkHHEditions) throws IOException {
 		long tm = System.nanoTime();
-		lastKeyNames = new ArrayList<String>();
-		List<Point> pointsToCheck = new ArrayList<>();
+		lastKeyNames = new ArrayList<>();
 		String profile = ctx.getRouter().getProfile().getBaseProfile(); // use base profile
-		Map<String, RegisteredMap> knownMaps = new TreeMap<>();
-		
-		for (BinaryMapIndexReader r : ctx.map.keySet()) {
-			RegisteredMap rmap = new RegisteredMap();
-			rmap.downloadName = Algorithms.getRegionName(r.getFile().getName());
-			rmap.reader = r;
-			rmap.standard = or.getRegionDataByDownloadName(rmap.downloadName) != null;
-			knownMaps.put(rmap.downloadName, rmap);
-			for (HHRouteRegion rt : r.getHHRoutingIndexes()) {
-				if (rt.profile.equals(profile)) {
-					rmap.edition = rt.edition;
-				}
-			}
-		}
-		LatLon end = null;
-		LatLon prev = start;
-		for (int i = 0; i < targets.size(); i++) {
-			end = targets.get(i);
-			if (MapUtils.getDistance(prev, end) < DISTANCE_SKIP) {
-				// skip point they too close
-				continue;
-			}
-			split(ctx, knownMaps, pointsToCheck, prev, end);
-			prev = end;
-		}
-		if (end != null) {
-			addPoint(ctx, knownMaps, pointsToCheck, end);
-		}
-		Set<String> usedMaps = new TreeSet<String>();
-		Set<String> mapsToDownload = new TreeSet<String>();
-		Set<String> mapsToUpdate = new TreeSet<String>();
+		Map<String, RegisteredMap> knownMaps = collectKnownMaps(ctx, profile);
+		List<LatLon> filteredRoutePoints = filterTooClosePoints(routePoints);
+		List<Point> pointsToCheck = collectPointsToCheck(filteredRoutePoints, knownMaps);
+
+		List<String> usedMaps = new ArrayList<>();
+		List<String> mapsToDownload = new ArrayList<>();
+		List<String> mapsToUpdate = new ArrayList<>();
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
-					mapsToDownload.add(p.regions.get(0));
+					addIfNotContains(mapsToDownload, p.regions.get(0));
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -136,9 +108,9 @@ public class MissingMapsCalculator {
 				}
 				if (region != null) {
 					if (!fresh) {
-						mapsToUpdate.add(region);
+						addIfNotContains(mapsToUpdate, region);
 					} else {
-						usedMaps.add(region);
+						addIfNotContains(usedMaps, region);
 					}
 				}
 			}
@@ -147,7 +119,7 @@ public class MissingMapsCalculator {
 			for (Point p : pointsToCheck) {
 				for (int i = 0; p.hhEditions != null && i < p.hhEditions.length; i++) {
 					if (p.hhEditions[i] == selectedEdition ) {
-						usedMaps.add(p.regions.get(i));
+						addIfNotContains(usedMaps, p.regions.get(i));
 						break;
 					}
 				}
@@ -155,37 +127,86 @@ public class MissingMapsCalculator {
 		}
 		
 //		System.out.println("Used maps: " + usedMaps);
+		LatLon start = routePoints.get(0);
+		LatLon end = routePoints.get(routePoints.size() - 1);
+		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, start, end);
 		if (mapsToDownload.isEmpty() && mapsToUpdate.isEmpty()) {
-			return false;
+			return result;
 		}
-		ctx.calculationProgress.requestMapsToUpdate = true;
-		ctx.calculationProgress.missingMaps = convert(mapsToDownload);
-		ctx.calculationProgress.mapsToUpdate = convert(mapsToUpdate);
-		ctx.calculationProgress.potentiallyUsedMaps = convert(usedMaps);
+		result.requestMapsToUpdate = true;
+		result.missingMaps = convert(mapsToDownload);
+		result.mapsToUpdate = convert(mapsToUpdate);
+		result.potentiallyUsedMaps = convert(usedMaps);
 
-		log.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
+		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
 				(System.nanoTime() - tm) / 1e9));
-		return true;
+		return result;
 	}
 
-	private LatLon testLatLons(List<LatLon> targets) throws IOException {
-		BufferedReader r = new BufferedReader(new InputStreamReader(MissingMapsCalculator.class.getResourceAsStream("/latlons.test.txt")));
-		targets.clear();
-		String s = null;
-		while ((s = r.readLine()) != null) {
-			String[] ls = s.split(",");
-			targets.add(new LatLon(Double.parseDouble(ls[1].trim()), Double.parseDouble(ls[0].trim())));
+	private Map<String, RegisteredMap> collectKnownMaps(RoutingContext ctx, String profile) {
+		Map<String, RegisteredMap> knownMaps = new TreeMap<>();
+		for (BinaryMapIndexReader r : ctx.map.keySet()) {
+			RegisteredMap rmap = new RegisteredMap();
+			rmap.downloadName = Algorithms.getRegionName(r.getFile().getName());
+			rmap.reader = r;
+			rmap.standard = osmandRegions.getRegionDataByDownloadName(rmap.downloadName) != null;
+			knownMaps.put(rmap.downloadName, rmap);
+			for (HHRouteRegion rt : r.getHHRoutingIndexes()) {
+				if (rt.profile.equals(profile)) {
+					rmap.edition = rt.edition;
+				}
+			}
 		}
-		return targets.get(0);
+		return knownMaps;
 	}
 
-	private List<WorldRegion> convert(Set<String> mapsToDownload) {
+	private List<LatLon> filterTooClosePoints(List<LatLon> route) {
+		List<LatLon> result = new ArrayList<>();
+		LatLon end = null;
+		for (int i = 0; i < route.size() - 1; i++) {
+			int endIndex = i + 1;
+			LatLon start = route.get(i);
+			end = route.get(endIndex);
+			double distance = MapUtils.getDistance(start, end);
+			while (distance < DISTANCE_TO_SKIP) {
+				if (++endIndex >= route.size()) {
+					break;
+				}
+				end = route.get(endIndex);
+				distance = MapUtils.getDistance(start, end);
+			}
+			i = endIndex;
+			result.add(start);
+		}
+		if (end != null) {
+			result.add(end);
+		}
+		return result;
+	}
+
+	private List<Point> collectPointsToCheck(List<LatLon> routePoints, Map<String, RegisteredMap> knownMaps) throws IOException {
+		List<Point> pointsToCheck = new ArrayList<>();
+
+		LatLon end = null;
+		for (int i = 0; i < routePoints.size(); i++) {
+			LatLon prev = i == 0 ? routePoints.get(0) : routePoints.get(i - 1);
+			end = routePoints.get(i);
+			split(knownMaps, pointsToCheck, prev, end);
+		}
+		if (end != null) {
+			addPoint(knownMaps, pointsToCheck, end);
+		}
+
+		return pointsToCheck;
+	}
+
+	private List<WorldRegion> convert(List<String> mapsToDownload) {
 		if (mapsToDownload.isEmpty()) {
 			return null;
 		}
-		List<WorldRegion> l = new ArrayList<WorldRegion>();
+		List<WorldRegion> l = new ArrayList<>();
 		for (String m : mapsToDownload) {
-			WorldRegion wr = or.getRegionDataByDownloadName(m);
+			WorldRegion wr = osmandRegions.getRegionDataByDownloadName(m);
 			if (wr != null) {
 				l.add(wr);
 			}
@@ -193,14 +214,14 @@ public class MissingMapsCalculator {
 		return l;
 	}
 
-	private void addPoint(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon loc) throws IOException {
-		List<BinaryMapDataObject> resList = or.getRegionsToDownload(loc.getLatitude(), loc.getLongitude());
+	private void addPoint(Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon loc) throws IOException {
+		List<BinaryMapDataObject> resList = osmandRegions.getRegionsToDownload(loc.getLatitude(), loc.getLongitude());
 		boolean onlyJointMap = true;
-		List<String> regions = new ArrayList<String>();
+		List<String> regions = new ArrayList<>();
 		for (BinaryMapDataObject o : resList) {
-			regions.add(or.getDownloadName(o));
-			if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-					&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
+			regions.add(osmandRegions.getDownloadName(o));
+			if (!osmandRegions.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
+					&& !osmandRegions.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
 				onlyJointMap = false;
 			}
 		}
@@ -214,7 +235,7 @@ public class MissingMapsCalculator {
 		if ((pointsToCheck.size() == 0 || !regions.equals(lastKeyNames)) && !onlyJointMap) {
 			Point pnt = new Point();
 			lastKeyNames = regions;
-			pnt.regions = new ArrayList<String>(regions);
+			pnt.regions = new ArrayList<>(regions);
 			boolean hasHHEdition = addMapEditions(knownMaps, pnt);
 			if (!hasHHEdition) {
 				pnt.hhEditions = null; // recreate
@@ -251,15 +272,17 @@ public class MissingMapsCalculator {
 		return hhEditionPresent;
 	}
 
-	private void split(RoutingContext ctx, Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon pnt, LatLon next) throws IOException {
+	private void split(Map<String, RegisteredMap> knownMaps, List<Point> pointsToCheck, LatLon pnt, LatLon next) throws IOException {
 		double dist = MapUtils.getDistance(pnt, next);
-		if (dist < DISTANCE_SPLIT) {
-			addPoint(ctx, knownMaps, pointsToCheck, pnt);
+		if (dist < DISTANCE_TO_SKIP) {
+			// skip point they too close
+		} else if (dist < DISTANCE_TO_SPLIT) {
+			addPoint(knownMaps, pointsToCheck, pnt);
 			// pointsToCheck.add(e); // add only start end is separate
 		} else {
 			LatLon mid = MapUtils.calculateMidPoint(pnt, next);
-			split(ctx, knownMaps, pointsToCheck, pnt, mid);
-			split(ctx, knownMaps, pointsToCheck, mid, next);
+			split(knownMaps, pointsToCheck, pnt, mid);
+			split(knownMaps, pointsToCheck, mid, next);
 		}
 	}
 
@@ -268,20 +291,4 @@ public class MissingMapsCalculator {
 			reader.close();
 		}
 	}
-
-	public String getErrorMessage(RoutingContext ctx) {
-		String msg = "";
-		if (ctx.calculationProgress.mapsToUpdate != null) {
-			msg = ctx.calculationProgress.mapsToUpdate + " need to be updated";
-		}
-		if (ctx.calculationProgress.missingMaps != null) {
-			if (msg.length() > 0) {
-				msg += " and ";
-			}
-			msg = ctx.calculationProgress.missingMaps + " need to be downloaded";
-		}
-		msg = "To calculate the route maps " + msg;
-		return msg;
-	}
-
 }

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,7 +22,8 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.CalculateMissingMapsOnlineListener;
-import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.router.MissingMapsCalculationResult;
+import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -43,6 +45,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private boolean loadingMapsInProgress = false;
 	private boolean onlineCalculationRequested = false;
 	private CalculateMissingMapsOnlineTask onlineCalculationTask = null;
+	private MissingMapsCalculationResult onlineCalculationResult;
 
 	public RequiredMapsController(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -63,7 +66,7 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 
 	private void updateSelectionHelper() {
 		if (!loadingMapsInProgress) {
-			updateMapsToDownload();
+			updateMapsForNavigation();
 			itemsSelectionHelper.setAllItems(CollectionUtils.asOneList(missingMaps, mapsToUpdate));
 			itemsSelectionHelper.setSelectedItems(missingMaps);
 		}
@@ -88,11 +91,21 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return itemsSelectionHelper.isItemSelected(downloadItem);
 	}
 
-	private void updateMapsToDownload() {
-		RouteCalculationResult result = app.getRoutingHelper().getRoute();
+	private void updateMapsForNavigation() {
+		MissingMapsCalculationResult result = getMapsForNavigation();
 		this.missingMaps = collectMapsForRegions(result.getMissingMaps());
 		this.mapsToUpdate = collectMapsForRegions(result.getMapsToUpdate());
 		this.usedMaps = collectMapsForRegions(result.getUsedMaps());
+	}
+
+	private MissingMapsCalculationResult getMapsForNavigation() {
+		return onlineCalculationResult != null
+				? onlineCalculationResult
+				: getOfflineCalculationResult();
+	}
+
+	private MissingMapsCalculationResult getOfflineCalculationResult() {
+		return app.getRoutingHelper().getRoute().getMissingMapsCalculationResult();
 	}
 
 	private List<DownloadItem> collectMapsForRegions(@NonNull List<WorldRegion> regions) {
@@ -115,10 +128,16 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		loadingMapsInProgress = true;
 		askRefreshDialog();
 
-		onlineCalculationTask = CalculateMissingMapsOnlineTask.execute(app, new CalculateMissingMapsOnlineListener() {
+		MissingMapsCalculationResult offlineCalculationResult = getOfflineCalculationResult();
+		RoutingContext context = offlineCalculationResult.getRoutingContext();
+		LatLon start = offlineCalculationResult.getStartPoint();
+		LatLon end = offlineCalculationResult.getEndPoint();
+
+		onlineCalculationTask = CalculateMissingMapsOnlineTask.execute(app, context, start, end, new CalculateMissingMapsOnlineListener() {
 			@Override
-			public void onSuccess() {
+			public void onSuccess(@NonNull MissingMapsCalculationResult result) {
 				loadingMapsInProgress = false;
+				onlineCalculationResult = result;
 				updateSelectionHelper();
 				app.runInUIThread(() -> askRefreshDialog());
 			}
