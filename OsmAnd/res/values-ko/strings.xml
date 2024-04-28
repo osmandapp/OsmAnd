@@ -5131,4 +5131,16 @@
     <string name="bottom">맨 아래</string>
     <string name="top_and_bottom">상단 및 하단</string>
     <string name="lang_ta_in">타밀 (India)</string>
+    <string name="change_default_tracks_appearance_confirmation">폴더의 기존 트랙에 변경하거나 새 항목에만 적용?</string>
+    <string name="restart_search">다시 검색</string>
+    <string name="shared_string_restart">앱 다시시작</string>
+    <string name="missing_maps_header">미스 또는 아웃 맵</string>
+    <string name="required_maps_calculate_online_summary">누락된 지도 목록은 직선 노선을 기준으로 합니다. 지도의 정확한 목록을 얻으려면 OsmAnd는 온라인 경로를 사전 계산할 수 있습니다.</string>
+    <string name="required_maps">Required 지도</string>
+    <string name="missing_maps_description">이 루트에 필요한 일부 오프라인지도가 누락되거나 날짜까지. 이 맵을 다운로드하거나 업데이트하십시오.</string>
+    <string name="route_line_use_coloring_speed">노선은 이동 속도에 의해 착색됩니다.</string>
+    <string name="apply_only_to_new">새 소식</string>
+    <string name="route_line_use_coloring_altitude">노선은 고도로 착색됩니다.</string>
+    <string name="delete_actions_button_confirmation">\"%1$s\"를 삭제하시겠습니까?</string>
+    <string name="delete_actions_button">삭제 버튼</string>
 </resources>
