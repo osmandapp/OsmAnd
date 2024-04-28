@@ -395,7 +395,7 @@
     <string name="poi_waste_disposal">Prügi ära andmine</string>
     <string name="poi_waste_basket">Prügikast</string>
     <string name="poi_pier">Kai</string>
-    <string name="poi_surveillance">Valve</string>
+    <string name="poi_surveillance">Valvetehnika</string>
     <string name="poi_observatory">Tähetorn</string>
     <string name="poi_astronomical_observatory">Astronoomiline</string>
     <string name="poi_tower">Torn</string>
@@ -405,8 +405,8 @@
     <string name="poi_works">Töökoht</string>
     <string name="poi_mineshaft">Kaevandusšaht</string>
     <string name="poi_adit">Adit</string>
-    <string name="poi_petroleum_well">Naftakaev</string>
-    <string name="poi_survey_point">Vaatluspunkt</string>
+    <string name="poi_petroleum_well">Naftapuurauk</string>
+    <string name="poi_survey_point">Geodeetiline märk</string>
     <string name="poi_windmill">Tuuleveski</string>
     <string name="poi_quarry">Karjäär</string>
     <string name="poi_vineyard">Viinamarjaistandus</string>
@@ -492,7 +492,7 @@
     <string name="poi_rest_area">Puhkeala</string>
     <string name="poi_reservoir">Veehoidla</string>
     <string name="poi_gasometer">Gaasimahuti</string>
-    <string name="poi_silo">Viljakuivati</string>
+    <string name="poi_silo">Silo</string>
     <string name="poi_storage_tank">Mahuti</string>
     <string name="poi_allotments">Aianduskrundid</string>
     <string name="poi_forest">Inimeste hooldatud mets</string>
@@ -615,7 +615,7 @@
     <string name="poi_landfill_waste_nuclear">Tuumajäätmed</string>
     <string name="poi_brownfield">Tööstusala</string>
     <string name="poi_greenfield">Roheala</string>
-    <string name="poi_bunker_silo">Vilja punkerkuivati</string>
+    <string name="poi_bunker_silo">Siloauk</string>
     <string name="poi_aerialway_pylon">Õhutõstemast</string>
     <string name="poi_power_tower">Jõutorn</string>
     <string name="poi_power_pole">Toitepost</string>
@@ -1903,7 +1903,7 @@
     <string name="poi_route_funicular_ref">Köisraudtee</string>
     <string name="poi_route_railway_ref">Raudtee marsruut</string>
     <string name="poi_historic_yes">Ajalooline objekt</string>
-    <string name="poi_surveillance_yes">Valve: jah</string>
+    <string name="poi_surveillance_yes">Valvetehnika: jah</string>
     <string name="poi_service_bicycle_retail_yes">Jaemüük;Jalgrataste jaemüük;Rataste müük</string>
     <string name="poi_service_bicycle_retail_no">Jalgrataste jaemüük: ei</string>
     <string name="poi_service_bicycle_repair_yes">Remont;Jalgrataste remont;Rattaremont</string>
@@ -2003,9 +2003,9 @@
     <string name="poi_crop_cranberry">Põllukultuur: jõhvikas</string>
     <string name="poi_crop_asparagus">Põllukultuur: spargel</string>
     <string name="poi_crop_flowers">Põllukultuur: lilled</string>
-    <string name="poi_surveillance_indoor">Valve: siseruumides</string>
-    <string name="poi_surveillance_outdoor">Valve: väljas</string>
-    <string name="poi_surveillance_public">Valve: avalik</string>
+    <string name="poi_surveillance_indoor">Valvetehnika: siseruumides</string>
+    <string name="poi_surveillance_outdoor">Valvetehnika: väljas</string>
+    <string name="poi_surveillance_public">Valvetehnika: avalik</string>
     <string name="poi_clothes_women">Naised</string>
     <string name="poi_clothes_underwear">Aluspesu</string>
     <string name="poi_clothes_men">Mehed</string>
@@ -2299,7 +2299,7 @@
     <string name="poi_temperature">Temperatuur</string>
     <string name="poi_bathing_yes">Suplus: jah</string>
     <string name="poi_bathing_no">Suplus: ei</string>
-    <string name="poi_boat_storage">Paatide ladustamine</string>
+    <string name="poi_boat_storage">Staapelplats</string>
     <string name="poi_conveying_yes">Edastamine: jah</string>
     <string name="poi_bridge_ref">Silla viide</string>
     <string name="poi_tunnel_ref">Tunneli viide</string>
@@ -2486,7 +2486,7 @@
     <string name="poi_construction_yes">Ehitamisel</string>
     <string name="poi_atm_no">Pangaautomaat: jah</string>
     <string name="poi_firepit">Tulease</string>
-    <string name="poi_street_cabinet">Elektrikapp tänaval</string>
+    <string name="poi_street_cabinet">Seadmekapp tänaval</string>
     <string name="poi_fair_trade_yes">Õiglane kaubandus: jah</string>
     <string name="poi_fair_trade_no">Õiglane kaubandus: ei</string>
     <string name="poi_fair_trade_only">Ainult õiglase kaubanduse tooted</string>
@@ -2723,14 +2723,14 @@
     <string name="poi_water_source_pond">Tiik</string>
     <string name="poi_water_source_stream">Oja</string>
     <string name="poi_in_service_yes">Kasutuses: jah</string>
-    <string name="poi_street_cabinet_power">Kapi liik: toide</string>
-    <string name="poi_street_cabinet_telecom">Kapi liik: telekommunikatsioon</string>
-    <string name="poi_street_cabinet_cable_tv">Kapi liik: kaabeltelevisioon</string>
-    <string name="poi_street_cabinet_gas">Kapi liik: gaas</string>
-    <string name="poi_street_cabinet_postal_service">Kapi liik: postiteenus</string>
+    <string name="poi_street_cabinet_power">Seadmekapi liik: elektrikapp</string>
+    <string name="poi_street_cabinet_telecom">Seadmekapi liik: telekommunikatsioon</string>
+    <string name="poi_street_cabinet_cable_tv">Seadmekapi liik: kaabeltelevisioon</string>
+    <string name="poi_street_cabinet_gas">Seadmekapi liik: gaas</string>
+    <string name="poi_street_cabinet_postal_service">Seadmekapi liik: postiteenus</string>
     <string name="poi_street_cabinet_waste">Kapi liik: jäätmed</string>
     <string name="poi_street_cabinet_water_management">Kapi liik: veemajandus</string>
-    <string name="poi_street_cabinet_street_lighting">Kapi liik: tänavavalgustus</string>
+    <string name="poi_street_cabinet_street_lighting">Seadmekapi liik: tänavavalgustus</string>
     <string name="facebook">Facebook</string>
     <string name="twitter">Twitter</string>
     <string name="vk">VKontakte</string>
@@ -2813,7 +2813,7 @@
     <string name="poi_generator_output_vacuum_yes">Väljund: vaakum</string>
     <string name="poi_generator_output_biogas">Biogaasi väljundvõimsus</string>
     <string name="poi_generator_output_biogas_yes">Väljund: biogaas</string>
-    <string name="poi_pumping_station">Pumbajaam</string>
+    <string name="poi_pumping_station">Pumpla</string>
     <string name="poi_display_yes">Ekraan: jah</string>
     <string name="poi_display_no">Ekraan: ei</string>
     <string name="poi_display_analog_yes">Analoog ekraan</string>
@@ -2885,8 +2885,8 @@
     <string name="poi_public_bookcase">Avalik raamaturiiul</string>
     <string name="poi_public_bookcase_type_phone_box">Liik: telefonikast</string>
     <string name="poi_public_bookcase_type_reading_box">Liik: lugemiskast</string>
-    <string name="poi_public_bookcase_type_wooden_cabinet">Liik: puidust kabinet</string>
-    <string name="poi_public_bookcase_type_metal_cabinet">Liik: metallist kabinet</string>
+    <string name="poi_public_bookcase_type_wooden_cabinet">Liik: puidust riiul</string>
+    <string name="poi_public_bookcase_type_metal_cabinet">Liik: metallist riiul</string>
     <string name="poi_public_bookcase_type_shelf">Liik: riiul</string>
     <string name="poi_cuisine_pizza">Pitsa</string>
     <string name="poi_cuisine_burger">Burger</string>
@@ -3699,7 +3699,7 @@
     <string name="poi_craft_joiner">Tisler</string>
     <string name="poi_craft_floorer">Põrandapaigaldaja</string>
     <string name="poi_craft_bakery">Pagarihoone</string>
-    <string name="poi_craft_cabinet_maker">Kabinetitootja</string>
+    <string name="poi_craft_cabinet_maker">Mööblimeister</string>
     <string name="poi_charge">Tasu</string>
     <string name="poi_pet_grooming">Lemmikloomade pügamine</string>
     <string name="poi_atm_yes">Pangaautomaat: jah</string>
