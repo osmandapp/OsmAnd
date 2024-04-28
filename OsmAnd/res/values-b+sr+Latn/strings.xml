@@ -5709,4 +5709,15 @@
     <string name="missing_maps_header">Nedostajajuće ili zastarele mape</string>
     <string name="route_line_use_coloring_speed">Linija rute je obojena po brzini kretanja.</string>
     <string name="route_line_use_coloring_altitude">Linija rute je obojena po nadmorskoj visini.</string>
+    <string name="visualized_by">Vizualizirao</string>
+    <string name="wall_color">Boja zidova</string>
+    <string name="track_line">Linija staze</string>
+    <string name="fixed_height">Fiksna visina</string>
+    <string name="downward_gradient">Gradijent na dole</string>
+    <string name="upward_gradient">Gradijent na gore</string>
+    <string name="top">Vrh</string>
+    <string name="bottom">Dno</string>
+    <string name="top_and_bottom">Vrh i dno</string>
+    <string name="title_3d_track">3D staza</string>
+    <string name="explore_3d_track_description">Istraži stazu u interaktivnom 3D! Vizualiziraj visinu, brzinu i još toga direktno na mapi.</string>
 </resources>
