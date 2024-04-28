@@ -635,7 +635,7 @@
     <string name="rendering_attr_moreDetailed_name">Pli detaloj</string>
     <string name="rendering_attr_lessDetailed_name">Malpli detaloj</string>
     <string name="rendering_attr_hideAccess_name">Aliraj baroj</string>
-    <string name="rendering_attr_showAccess_name">Aliraj baroj</string>
+    <string name="rendering_attr_showAccess_name">Aliraj baroj kaj vojpagejoj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
     <string name="rendering_attr_showCycleRoutes_name">Biciklaj kursoj</string>
@@ -4464,8 +4464,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Montri ŝlosilojn «note»</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Bildsimboloj je malgrandigo</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Skiza montrado de bildsimboloj je malaltaj skal-niveloj</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tuneloj de akvovojoj</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ne kaŝi akvovojojn en tuneloj</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Plividebligi akvovojojn en tuneloj</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Plividebligi akvovojojn en tuneloj</string>
     <string name="shared_string_not_used">Neuzata</string>
     <string name="shared_string_used">Uzata</string>
     <string name="files_with_route_restrictions">Dosieroj kun vojaj limigoj</string>
@@ -5645,7 +5645,7 @@
 \n
 \n • eblo filtri spurojn laŭ datumoj de eksteraj sentiloj
 \n
-\n • 
+\n • plibonigita alĝustigeblo de aspekto de grupoj de spuroj
 \n
 \n • subteno por pliajn etikedojn por GPX
 \n
@@ -5701,4 +5701,11 @@
     <string name="relief_3d_download_description">Pliaj mapoj necesas por vidi detalojn de tereno sur la mapo.</string>
     <string name="shared_string_scale">Skali</string>
     <string name="shared_string_osm_id">OSM-identigilo</string>
+    <string name="change_default_appearance_confirmation">Ĉu ŝanĝi la implicitan aspekton de %1$s?</string>
+    <string name="vertical_exaggeration_description">Per ŝanĝi la valoron de skalo vi povas emfazi la 3-dimensian map-reliefon.</string>
+    <string name="vertical_exaggeration">Vertikala troigo</string>
+    <string name="shared_string_changes">Ŝanĝoj</string>
+    <string name="use_3d_track_visualization">3-dimensia bildigo</string>
+    <string name="apply_only_to_new">Apliki nur al novaj</string>
+    <string name="change_default_tracks_appearance_confirmation">Ĉu apliki ŝanĝojn al ekzistaj spuroj en tiu ĉi dosierujo aŭ nur al novaj?</string>
 </resources>
