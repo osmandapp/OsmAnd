@@ -82,6 +82,7 @@
     <string name="gpx_approximation">GPX approximation</string>
     <string name="gpx_approximation_cpp">Routing-based (C++)</string>
     <string name="gpx_approximation_java">Routing-based (Java)</string>
+    <string name="gpx_approximation_geo_cpp">Geometry-based (C++, fast)</string>
     <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
     <string name="routing_type">Routing type</string>
     <string name="rendering_attr_padusDisplayMode_name">Public lands display mode</string>
