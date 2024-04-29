@@ -51,7 +51,7 @@
     <string name="poi_node_networks">Matka-/rattamarsruudi punktid</string>
     <string name="poi_hiking_routes">Matkamarsruut</string>
     <string name="poi_craft">Ametioskus</string>
-    <string name="poi_natural">Looduslik</string>
+    <string name="poi_natural">Loodusobjekt</string>
     <string name="poi_osmwiki">Vikipeedia</string>
     <string name="poi_user_defined_other">Kasutaja määratud</string>
     <string name="poi_convenience">Lähikauplus</string>
@@ -250,7 +250,7 @@
     <string name="poi_massage_type">Massaaži liik</string>
     <string name="poi_tents">Telgid</string>
     <string name="poi_washing_machine">Pesumasin</string>
-    <string name="poi_caravans">Haagissuvilad</string>
+    <string name="poi_caravans">Autokaravanid, matkabussid ja haagissuvilad</string>
     <string name="poi_power_supply">Toiteallikas</string>
     <string name="poi_medical_system">Meditsiinisüsteem</string>
     <string name="poi_home_visit">Koduvisiit</string>
@@ -476,7 +476,7 @@
     <string name="poi_sports_centre">Spordikeskus</string>
     <string name="poi_golf_course">Golfiväljak</string>
     <string name="poi_ice_rink">Liuväli</string>
-    <string name="poi_pitch">Pigi</string>
+    <string name="poi_pitch">Spordiplats</string>
     <string name="poi_leisure_track">Rada mittemootorispordi jaoks</string>
     <string name="poi_running_track">Jooksurada</string>
     <string name="poi_bicycle_track">Jalgrattarada</string>
@@ -733,7 +733,7 @@
     <string name="poi_travel_agent">Reisibüroo</string>
     <string name="poi_viewpoint">Vaatepunkt</string>
     <string name="poi_camp_site">Laagriplats</string>
-    <string name="poi_caravan_site">Haagissuvilate parkla</string>
+    <string name="poi_caravan_site">Karavanipark</string>
     <string name="poi_picnic_site">Piknikuplats</string>
     <string name="poi_spring">Allikas</string>
     <string name="poi_hot_spring">Kuumaveeallikas</string>
@@ -819,10 +819,10 @@
     <string name="poi_accountant">Raamatupidaja</string>
     <string name="poi_cave_entrance">Koopa sissepääs</string>
     <string name="poi_peak">Mäetipp</string>
-    <string name="poi_saddle">Sadul</string>
+    <string name="poi_saddle">Mäekuru</string>
     <string name="poi_volcano">Vulkaan</string>
     <string name="poi_crater">Kraater</string>
-    <string name="poi_ridge">Hari</string>
+    <string name="poi_ridge">Mäeseljak</string>
     <string name="poi_glacier">Liustik</string>
     <string name="poi_sinkhole">Neeluauk</string>
     <string name="poi_waterfall">Kosk</string>
@@ -1268,7 +1268,7 @@
     <string name="poi_trees_meadow_orchard">Viljapuuaed niidul</string>
     <string name="poi_trees_nectorine">Nektariin</string>
     <string name="poi_trees_mango">Mango</string>
-    <string name="poi_trees_rubber">Kumm</string>
+    <string name="poi_trees_rubber">Kummipuu</string>
     <string name="poi_trees_date">Dattel</string>
     <string name="poi_trees_coffea">Kohv</string>
     <string name="poi_trees_pomegranate">Granaatõun</string>
@@ -3491,7 +3491,7 @@
     <string name="poi_checkpoint_type_needler">Augustaja</string>
     <string name="poi_checkpoint_type_electronic">Elektrooniline</string>
     <string name="poi_course">Kursus</string>
-    <string name="poi_rock">Kalju</string>
+    <string name="poi_rock">Kaljurahn</string>
     <string name="poi_end_date">Lõpu kuupäev</string>
     <string name="poi_appliance">Kodumasinate pood</string>
     <string name="poi_outcrop">Paljand</string>
