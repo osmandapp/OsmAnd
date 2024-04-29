@@ -17,13 +17,13 @@ import gnu.trove.list.array.TIntArrayList;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.PlatformResources;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
-import net.osmand.map.OsmandRegions;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -49,7 +49,6 @@ public class RoutePlannerFrontEnd {
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
-	private static MissingMapsCalculator missingMapsCalculator;
 
 
 	public RoutePlannerFrontEnd() {
@@ -321,12 +320,6 @@ public class RoutePlannerFrontEnd {
 
 	public boolean isUseNativeApproximation() {
 		return useNativeApproximation;
-	}
-
-	public static void initMissingMapsCalculator(OsmandRegions osmandRegions) {
-		if (missingMapsCalculator == null) {
-			missingMapsCalculator = new MissingMapsCalculator(osmandRegions);
-		}
 	}
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
@@ -919,9 +912,7 @@ public class RoutePlannerFrontEnd {
 		}
 		targets.add(end);
 		if (CALCULATE_MISSING_MAPS) {
-			if (missingMapsCalculator == null) {
-				missingMapsCalculator = new MissingMapsCalculator();
-			}
+			MissingMapsCalculator missingMapsCalculator = new MissingMapsCalculator(PlatformResources.getInitializedOsmandRegions());
 			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
 				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
 			}

@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.PlatformResources;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.map.OsmandRegions;
@@ -256,7 +257,6 @@ public class AppInitializer implements IProgress {
 				Algorithms.streamCopy(stream, new FileOutputStream(file));
 			}
 			app.regions.prepareFile(file.getAbsolutePath());
-			RoutePlannerFrontEnd.initMissingMapsCalculator(app.regions);
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
 			file.delete(); // recreate file
@@ -313,7 +313,7 @@ public class AppInitializer implements IProgress {
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
-		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
+		app.regions = startupInit(PlatformResources.getOsmandRegions(), OsmandRegions.class);
 		updateRegionVars();
 
 		app.poiFilters = startupInit(new PoiFiltersHelper(app), PoiFiltersHelper.class);
