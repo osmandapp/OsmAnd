@@ -2,7 +2,6 @@ package net.osmand.router;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,10 +22,12 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 public class MissingMapsCalculator {
-	protected static final Log log = PlatformUtil.getLog(MissingMapsCalculator.class);
+
+	protected static final Log LOG = PlatformUtil.getLog(MissingMapsCalculator.class);
 
 	public static final double DISTANCE_SPLIT = 50000;
 	public static final double DISTANCE_SKIP = 10000;
@@ -93,24 +94,24 @@ public class MissingMapsCalculator {
 		if (end != null) {
 			addPoint(ctx, knownMaps, pointsToCheck, end);
 		}
-		Set<String> usedMaps = new TreeSet<String>();
-		Set<String> mapsToDownload = new TreeSet<String>();
-		Set<String> mapsToUpdate = new TreeSet<String>();
+		List<String> usedMaps = new ArrayList<>();
+		List<String> mapsToDownload = new ArrayList<>();
+		List<String> mapsToUpdate = new ArrayList<>();
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
-					mapsToDownload.add(p.regions.get(0));
+					CollectionUtils.addIfNotContains(mapsToDownload, p.regions.get(0));
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
-					presentTimestamps = new TreeSet<Long>(p.editionsUnique);
+					presentTimestamps = new TreeSet<>(p.editionsUnique);
 				} else if (!presentTimestamps.isEmpty()) {
 					presentTimestamps.retainAll(p.editionsUnique);
 				}
 			} else {
 				if (p.regions.size() > 0) {
-					usedMaps.add(p.regions.get(0));
+					CollectionUtils.addIfNotContains(usedMaps, p.regions.get(0));
 				}
 			}
 		}
@@ -136,9 +137,9 @@ public class MissingMapsCalculator {
 				}
 				if (region != null) {
 					if (!fresh) {
-						mapsToUpdate.add(region);
+						CollectionUtils.addIfNotContains(mapsToUpdate, region);
 					} else {
-						usedMaps.add(region);
+						CollectionUtils.addIfNotContains(usedMaps, region);
 					}
 				}
 			}
@@ -147,7 +148,7 @@ public class MissingMapsCalculator {
 			for (Point p : pointsToCheck) {
 				for (int i = 0; p.hhEditions != null && i < p.hhEditions.length; i++) {
 					if (p.hhEditions[i] == selectedEdition ) {
-						usedMaps.add(p.regions.get(i));
+						CollectionUtils.addIfNotContains(usedMaps, p.regions.get(i));
 						break;
 					}
 				}
@@ -163,7 +164,7 @@ public class MissingMapsCalculator {
 		ctx.calculationProgress.mapsToUpdate = convert(mapsToUpdate);
 		ctx.calculationProgress.potentiallyUsedMaps = convert(usedMaps);
 
-		log.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
+		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
 				(System.nanoTime() - tm) / 1e9));
 		return true;
 	}
@@ -179,11 +180,11 @@ public class MissingMapsCalculator {
 		return targets.get(0);
 	}
 
-	private List<WorldRegion> convert(Set<String> mapsToDownload) {
+	private List<WorldRegion> convert(List<String> mapsToDownload) {
 		if (mapsToDownload.isEmpty()) {
 			return null;
 		}
-		List<WorldRegion> l = new ArrayList<WorldRegion>();
+		List<WorldRegion> l = new ArrayList<>();
 		for (String m : mapsToDownload) {
 			WorldRegion wr = or.getRegionDataByDownloadName(m);
 			if (wr != null) {
