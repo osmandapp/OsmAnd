@@ -5702,25 +5702,25 @@
 \n
 \n</string>
     <string name="visualized_by">Візуаліовано</string>
-    <string name="track_line">Лінія доріжки</string>
+    <string name="track_line">Лінія треку</string>
     <string name="fixed_height">Фіксована висота</string>
     <string name="downward_gradient">Спадний градієнт</string>
     <string name="upward_gradient">Висхідний градієнт</string>
-    <string name="bottom">Низ</string>
-    <string name="top_and_bottom">Верх та низ</string>
-    <string name="title_3d_track">3D доріжка</string>
-    <string name="explore_3d_track_description">Досліджуйте трек в інтерактивному 3D! Візуалізуйте висоту, швидкість та багато іншого безпосередньо на карті.</string>
+    <string name="bottom">Внизу</string>
+    <string name="top_and_bottom">Зверху і внизу</string>
+    <string name="title_3d_track">3D-трек</string>
+    <string name="explore_3d_track_description">Досліджуйте трек в інтерактивному 3D! Візуалізуйте висоту, швидкість та багато іншого безпосередньо на мапі.</string>
     <string name="maps_that_also_be_used">Карти, які також були використані: %1$s</string>
-    <string name="getting_list_of_required_maps">Отримання списку необхідних карт…</string>
+    <string name="getting_list_of_required_maps">Отримання списку необхідних мап…</string>
     <string name="required_maps">Необхідні мапи</string>
-    <string name="missing_maps_description">Деякі офлайн-карти, необхідні для прокладання цього маршруту, відсутні або неактуальні. Будь ласка, завантажте або оновіть ці карти.</string>
+    <string name="missing_maps_description">Деякі офлайн-мапи, необхідні для прокладання цього маршруту, відсутні або неактуальні. Будь ласка, завантажте або оновіть їх.</string>
     <string name="route_line_use_coloring_speed">Лінія маршруту зафарбована відповідно до швидкості руху.</string>
     <string name="route_line_use_coloring_altitude">Лінія маршруту зафарбована відповідно до висоти над рівнем моря.</string>
     <string name="delete_actions_button">Кнопка видалення</string>
     <string name="shared_string_osm_id">Ідентифікатор OSM</string>
     <string name="wall_color">Колір стіни</string>
-    <string name="top">Топ</string>
-    <string name="required_maps_calculate_online_summary">Список відсутніх карт базується на прямому маршруті. Щоб отримати точний список карт, OsmAnd може попередньо розрахувати ваш маршрут онлайн.</string>
+    <string name="top">Зверху</string>
+    <string name="required_maps_calculate_online_summary">Список відсутніх мап базується на прямому маршруті. Щоб отримати точний список мап, OsmAnd може попередньо обчислити ваш маршрут онлайн.</string>
     <string name="missing_maps_header">Зниклі або неактуальні мапи</string>
     <string name="delete_actions_button_confirmation">Ви впевнені, що хочете видалити \"%1$s\" з усіма доданими діями?</string>
 </resources>
