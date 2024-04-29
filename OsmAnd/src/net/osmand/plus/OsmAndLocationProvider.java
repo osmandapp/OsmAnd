@@ -502,6 +502,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void stopLocationRequests() {
+		resetGPSInfo();
 		LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		if (gpsStatusListener != null) {
 			service.unregisterGnssStatusCallback(gpsStatusListener);
