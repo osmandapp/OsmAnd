@@ -1069,6 +1069,10 @@ public class RoutePlannerFrontEnd {
 				ctx.calculationProgress.hhIteration(HHIteration.DONE);
 				makeStartEndPointsPrecise(ctx, res, start, end, new ArrayList<LatLon>());
 				return res;
+			} else if (res != null && res.error != null) {
+				System.out.printf("ERROR: HH runRouting error (%s)\n", res.error);
+			} else {
+				System.out.printf("ERROR: HH runRouting failed (null)\n");
 			}
 			ctx.calculationProgress.hhIteration(HHIteration.HH_NOT_STARTED);
 		} catch (SQLException e) {

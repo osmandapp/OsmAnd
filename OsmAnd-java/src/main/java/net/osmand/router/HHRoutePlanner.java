@@ -206,7 +206,8 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			
 			progress.hhIteration(HHIteration.DETAILED);
-			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Parse detailed route segments...");
+			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Parse detailed route segments (%d) ...",
+					route.segments.size());
 			time = System.nanoTime();
 			recalc = retrieveSegmentsGeometry(hctx, rrp, route, hctx.config.ROUTE_ALL_SEGMENTS, progress);
 			if (progress.isCancelled) {
@@ -1193,15 +1194,19 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			long pe = calcRPId(end, end.getSegmentStart(), end.getSegmentEnd());
 			bounds = new ExcludeTLongObjectMap<>(hctx.boundaries, ps, pe);
 		}
-		FinalRouteSegment f = planner.searchRouteInternal(hctx.rctx, start, end, bounds);
+		FinalRouteSegment f = null;
+		try {
+			f = planner.searchRouteInternal(hctx.rctx, start, end, bounds);
+		} finally {
+			// clean up
+			hctx.rctx.config.MAX_VISITED = -1;
+			hctx.rctx.config.initialDirection = null;
+			hctx.rctx.config.targetDirection = null;
+			hctx.rctx.config.penaltyForReverseDirection = oldP;
+		}
 		if (f == null) {
 			System.out.printf("No route found between %s -> %s \n", start, end);
 		}
-		hctx.rctx.config.MAX_VISITED = -1;
-		// clean up
-		hctx.rctx.config.initialDirection = null;
-		hctx.rctx.config.targetDirection = null;
-		hctx.rctx.config.penaltyForReverseDirection = oldP;
 		return f;
 		
 	}
@@ -1214,7 +1219,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			HHNetworkSegmentRes s = route.segments.get(i);
 			if (s.segment == null) {
 				// start / end points
-				if(i > 0 && i < route.segments.size() -1 ) {
+				if(i > 0 && i < route.segments.size() - 1) {
 					throw new IllegalStateException(String.format("Segment ind %d is null.", i));
 				}
 				continue;
