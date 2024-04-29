@@ -39,6 +39,7 @@ import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
@@ -835,19 +836,21 @@ public class RouteProvider {
 		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
-		List<LatLon> inters = new ArrayList<LatLon>();
+		List<LatLon> inters = new ArrayList<>();
 		if (params.intermediates != null) {
-			inters = new ArrayList<LatLon>(params.intermediates);
+			inters = new ArrayList<>(params.intermediates);
 		}
 		RouteCalculationResult result = calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
 		List<LatLon> points  = new ArrayList<>();
 		points.add(st);
 		points.addAll(inters);
 		points.add(en);
-		result.setMissingMaps(params.calculationProgress.missingMaps,
-			 params.calculationProgress.mapsToUpdate,
-			 params.calculationProgress.potentiallyUsedMaps, env.getCtx(), points);
-
+		MissingMapsCalculationResult missingMapsCalculationResult = new MissingMapsCalculationResult(env.getCtx(), points);
+		missingMapsCalculationResult.requestMapsToUpdate = params.calculationProgress.requestMapsToUpdate;
+		missingMapsCalculationResult.missingMaps = params.calculationProgress.missingMaps;
+		missingMapsCalculationResult.mapsToUpdate = params.calculationProgress.mapsToUpdate;
+		missingMapsCalculationResult.potentiallyUsedMaps = params.calculationProgress.potentiallyUsedMaps;
+		result.setMissingMapsCalculationResult(missingMapsCalculationResult);
 		return result;
 	}
 

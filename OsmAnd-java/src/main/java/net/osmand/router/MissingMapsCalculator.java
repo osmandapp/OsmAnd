@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -94,9 +95,9 @@ public class MissingMapsCalculator {
 		if (end != null) {
 			addPoint(ctx, knownMaps, pointsToCheck, end);
 		}
-		List<String> usedMaps = new ArrayList<>();
-		List<String> mapsToDownload = new ArrayList<>();
-		List<String> mapsToUpdate = new ArrayList<>();
+		Set<String> usedMaps = new LinkedHashSet<>();
+		Set<String> mapsToDownload = new LinkedHashSet<>();
+		Set<String> mapsToUpdate = new LinkedHashSet<>();
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
@@ -180,7 +181,7 @@ public class MissingMapsCalculator {
 		return targets.get(0);
 	}
 
-	private List<WorldRegion> convert(List<String> mapsToDownload) {
+	private List<WorldRegion> convert(Set<String> mapsToDownload) {
 		if (mapsToDownload.isEmpty()) {
 			return null;
 		}

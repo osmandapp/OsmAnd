@@ -15,11 +15,11 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.QuadRect;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
@@ -59,13 +59,7 @@ public class RouteCalculationResult {
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<>();
 
-	protected List<WorldRegion> missingMaps;
-	protected List<WorldRegion> mapsToUpdate;
-	protected List<WorldRegion> usedMaps;
-
-	protected List<LatLon> missingMapsPoints;
-
-	protected RoutingContext missingMapsRoutingContext;
+	protected MissingMapsCalculationResult missingMapsCalculationResult;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -206,43 +200,16 @@ public class RouteCalculationResult {
 		return alarmInfo;
 	}
 
-	public List<WorldRegion> getMissingMaps() {
-		return missingMaps;
+	public void setMissingMapsCalculationResult(MissingMapsCalculationResult missingMapsCalculationResult) {
+		this.missingMapsCalculationResult = missingMapsCalculationResult;
 	}
 
-	public void setMissingMaps(List<WorldRegion> missingMaps,
-							   List<WorldRegion> mapsToUpdate,List<WorldRegion> usedMaps,
-							   RoutingContext ctx, List<LatLon> points) {
-		this.missingMaps = missingMaps;
-		this.mapsToUpdate = mapsToUpdate;
-		this.usedMaps = usedMaps;
-		if(Algorithms.isEmpty(this.missingMaps) && Algorithms.isEmpty(this.mapsToUpdate)) {
-			this.missingMapsRoutingContext = null;
-			this.missingMapsPoints = null;
-		} else {
-			this.missingMapsPoints = points;
-			this.missingMapsRoutingContext = ctx;
-		}
-	}
-
-	public RoutingContext getMissingMapsRoutingContext() {
-		return missingMapsRoutingContext;
-	}
-
-	public List<LatLon> getMissingMapsPoints() {
-		return missingMapsPoints;
-	}
-
-	public List<WorldRegion> getMapsToUpdate() {
-		return mapsToUpdate;
-	}
-
-	public List<WorldRegion> getUsedMaps() {
-		return usedMaps;
+	public MissingMapsCalculationResult getMissingMapsCalculationResult() {
+		return missingMapsCalculationResult;
 	}
 
 	public boolean hasMissingMaps() {
-		return !Algorithms.isEmpty(missingMaps) || !Algorithms.isEmpty(mapsToUpdate);
+		return missingMapsCalculationResult != null && missingMapsCalculationResult.hasMissingMaps();
 	}
 
 	public boolean isInitialCalculation() {

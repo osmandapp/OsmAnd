@@ -922,8 +922,7 @@ public class RoutePlannerFrontEnd {
 			if (missingMapsCalculator == null) {
 				missingMapsCalculator = new MissingMapsCalculator();
 			}
-			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets,
-					hhRoutingConfig != null)) {
+			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
 				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
 			}
 		}

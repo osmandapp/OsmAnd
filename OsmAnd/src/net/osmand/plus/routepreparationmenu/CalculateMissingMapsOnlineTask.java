@@ -6,14 +6,10 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.Location;
-import net.osmand.OnResultCallback;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -21,17 +17,17 @@ import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.MissingMapsCalculator;
 import net.osmand.router.RouteCalculationProgress;
-import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingContext;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -53,25 +49,33 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	@Override
 	protected Void doInBackground(Void... voids) {
 		MissingMapsCalculator calculator = new MissingMapsCalculator(app.getRegions());
-		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
-		if (prevRoute.getMissingMapsPoints() != null && prevRoute.getMissingMapsRoutingContext() != null)  {
+		RouteCalculationResult route = app.getRoutingHelper().getRoute();
+		MissingMapsCalculationResult previousResult = route.getMissingMapsCalculationResult();
+		RoutingContext routingContext = previousResult.getMissingMapsRoutingContext();
+		List<LatLon> routePoints = previousResult.getMissingMapsPoints();
+
+		if (routingContext != null && routePoints != null)  {
 			StringBuilder url = new StringBuilder(ONLINE_CALCULATION_URL)
 					.append(getRoutingProfile())
 					.append(getFormattedRoutingParameters());
-			for(LatLon point : prevRoute.getMissingMapsPoints()) {
+			for(LatLon point : routePoints) {
 				url.append("&").append(formatPointString(point));
 			}
 			try {
 				RoutingType routingType = app.getSettings().ROUTING_TYPE.get();
 				OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
 				String response = helper.makeRequest(url.toString());
-				List<LatLon> latLons = convertLocationsToLatLon(parseOnlineCalculationResponse(response));
-				calculator.checkIfThereAreMissingMaps(prevRoute.getMissingMapsRoutingContext(),
-						prevRoute.getMissingMapsPoints().get(0), latLons,
-						routingType.isHHRouting());
-				RouteCalculationProgress progress = prevRoute.getMissingMapsRoutingContext().calculationProgress;
-				prevRoute.setMissingMaps(progress.missingMaps, progress.mapsToUpdate, progress.potentiallyUsedMaps,
-						prevRoute.getMissingMapsRoutingContext(), prevRoute.getMissingMapsPoints());
+				List<LatLon> locations = parseOnlineCalculationResponse(response);
+				calculator.checkIfThereAreMissingMaps(
+						routingContext, routePoints.get(0), locations, routingType.isHHRouting()
+				);
+				RouteCalculationProgress progress = routingContext.calculationProgress;
+				MissingMapsCalculationResult result = new MissingMapsCalculationResult(routingContext, routePoints);
+				result.requestMapsToUpdate = progress.requestMapsToUpdate;
+				result.missingMaps = progress.missingMaps;
+				result.mapsToUpdate = progress.mapsToUpdate;
+				result.potentiallyUsedMaps = progress.potentiallyUsedMaps;
+				route.setMissingMapsCalculationResult(result);
 				listener.onSuccess();
 			} catch (Exception e) {
 				listener.onError(e.getMessage());
@@ -85,7 +89,7 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	@NonNull
 	private String getRoutingProfile() {
 		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
-		RoutingConfiguration config = prevRoute.getMissingMapsRoutingContext().config;
+		RoutingConfiguration config = prevRoute.getMissingMapsCalculationResult().getMissingMapsRoutingContext().config;
 		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE;
 		return useBicycle ? "bicycle" : "car";
 	}
@@ -121,8 +125,8 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	}
 
 	@NonNull
-	private List<Location> parseOnlineCalculationResponse(@NonNull String response) throws JSONException {
-		List<Location> result = new ArrayList<>();
+	private List<LatLon> parseOnlineCalculationResponse(@NonNull String response) throws JSONException {
+		List<LatLon> result = new ArrayList<>();
 		JSONObject fullJSON = new JSONObject(response);
 		JSONArray features = fullJSON.getJSONArray("features");
 		for (int i = 0; i < features.length(); i++) {
@@ -139,22 +143,12 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		return result;
 	}
 
-	private void parseAndAddLocation(@NonNull List<Location> locations, @NonNull JSONArray coordinate) throws JSONException {
+	private void parseAndAddLocation(@NonNull List<LatLon> locations, @NonNull JSONArray coordinate) throws JSONException {
 		if (coordinate.length() >= 2) {
-			WptPt wpt = new WptPt();
-			wpt.lat = coordinate.getDouble(1);
-			wpt.lon = coordinate.getDouble(0);
-			locations.add(RouteProvider.createLocation(wpt));
+			double lat = coordinate.getDouble(1);
+			double lon = coordinate.getDouble(0);
+			locations.add(new LatLon(lat, lon));
 		}
-	}
-
-	@NonNull
-	private List<LatLon> convertLocationsToLatLon(@NonNull List<Location> locations) {
-		List<LatLon> result = new ArrayList<>();
-		for (Location location : locations) {
-			result.add(new LatLon(location.getLatitude(), location.getLongitude()));
-		}
-		return result;
 	}
 
 	@NonNull
