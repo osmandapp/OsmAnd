@@ -246,8 +246,8 @@
     <string name="poi_fuel_biogas">Biogas</string>
     <string name="poi_fuel_lh2">Tečni vodonik</string>
     <string name="poi_fuel_electricity">Struja</string>
-    <string name="poi_aeroway_fuel">Benzinska pumpa za letelice</string>
-    <string name="poi_waterway_fuel">Benzinska pumpa na vodi</string>
+    <string name="poi_aeroway_fuel">Benzinska stanica za letelice</string>
+    <string name="poi_waterway_fuel">Benzinska stanica na vodi</string>
     <string name="poi_compressed_air">Kompresor za gume</string>
     <string name="poi_parking">Parking</string>
     <string name="poi_motorcycle_parking">Parking za motore</string>
@@ -3154,7 +3154,7 @@
     <string name="poi_pump_style_modern">Stil pumpe: moderan</string>
     <string name="poi_pump_type_gravity">Tip pumpe: gravitaciona</string>
     <string name="poi_pump_type_india_mk_2_3">Tip pumpe: Indija Mk II ili III&gt;</string>
-    <string name="poi_pump_type_beam_pump">Tip pumpe: pumpa snopa</string>
+    <string name="poi_pump_type_beam_pump">Tip pumpe: klipna pumpa</string>
     <string name="poi_ventilation_shaft">Ventilacioni otvor</string>
     <string name="poi_valley_balka">Balka</string>
     <string name="poi_aerodrome_type_private">Privatni</string>
