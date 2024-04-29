@@ -5693,4 +5693,9 @@
     <string name="missing_maps_description">此路線所需的一些離線地圖遺失或非最新。請下載貨更新這些地圖。</string>
     <string name="route_line_use_coloring_speed">路線根據移動速度著色。</string>
     <string name="route_line_use_coloring_altitude">路線根據海拔高度著色。</string>
+    <string name="visualized_by">視覺化方式</string>
+    <string name="wall_color">牆壁顏色</string>
+    <string name="track_line">軌跡線</string>
+    <string name="fixed_height">固定高度</string>
+    <string name="downward_gradient">向下斜率</string>
 </resources>
