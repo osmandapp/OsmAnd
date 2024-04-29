@@ -331,22 +331,27 @@ public class RoutePlannerFrontEnd {
 
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		if (useGeometryBasedApproximation) {
-			return searchGpxSegments(gctx, gpxPoints, resultMatcher); // use Java-only method until C++ implemented
+			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
 		} else {
 			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 		}
 	}
-	
+
 	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		GpxSegmentsApproximation app = new GpxSegmentsApproximation();
-		if (gctx.ctx.calculationProgress == null) {
-			gctx.ctx.calculationProgress = new RouteCalculationProgress();
-		}
-		app.fastGpxApproximation(this, gctx, gpxPoints);
-		calculateGpxRoute(gctx, gpxPoints);
-		if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
-			RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
-			log.info(gctx);
+		NativeLibrary nativeLib = gctx.ctx.nativeLib;
+		if (nativeLib != null && useNativeApproximation) {
+			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, true);
+		} else {
+			GpxSegmentsApproximation app = new GpxSegmentsApproximation();
+			if (gctx.ctx.calculationProgress == null) {
+				gctx.ctx.calculationProgress = new RouteCalculationProgress();
+			}
+			app.fastGpxApproximation(this, gctx, gpxPoints);
+			calculateGpxRoute(gctx, gpxPoints);
+			if (!gctx.result.isEmpty() && !gctx.ctx.calculationProgress.isCancelled) {
+				RouteResultPreparation.printResults(gctx.ctx, gpxPoints.get(0).loc, gpxPoints.get(gpxPoints.size() - 1).loc, gctx.result);
+				log.info(gctx);
+			}
 		}
 		if (resultMatcher != null) {
 			resultMatcher.publish(gctx.ctx.calculationProgress.isCancelled ? null : gctx);
@@ -359,7 +364,7 @@ public class RoutePlannerFrontEnd {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null && useNativeApproximation) {
-			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
+			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints, false);
 		} else {
 			gctx.ctx.keepNativeRoutingContext = true;
 			if (gctx.ctx.calculationProgress == null) {
