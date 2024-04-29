@@ -10,7 +10,7 @@
     <string name="poi_office">Büroo</string>
     <string name="poi_sport">Sport</string>
     <string name="poi_tourism">Turism</string>
-    <string name="poi_entertainment">Vaba aeg</string>
+    <string name="poi_entertainment">Jõudeaja tegevused</string>
     <string name="poi_shop_food">Lähikauplus või supermarket</string>
     <string name="poi_road_obstacle">Takistustega tee</string>
     <string name="poi_filling_station">Tankla</string>
@@ -43,7 +43,7 @@
     <string name="poi_mall">Kaubanduskeskus</string>
     <string name="poi_beverages">Joogipood</string>
     <string name="poi_butcher">Lihaturg</string>
-    <string name="poi_deli">Delikatessid</string>
+    <string name="poi_deli">Delikatesstoodete pood</string>
     <string name="poi_farm">Talupood</string>
     <string name="poi_greengrocer">Puu- ja köögiviljapood</string>
     <string name="poi_seafood">Mereandide pood</string>
@@ -95,15 +95,15 @@
     <string name="poi_furniture">Mööblipood</string>
     <string name="poi_garden_centre">Aianduskeskus</string>
     <string name="poi_garden_furniture">Aiamööbli pood</string>
-    <string name="poi_gas">Vedelgaasi pood</string>
+    <string name="poi_gas">Balloongaasi kauplus</string>
     <string name="poi_shop_yes">Kauplus</string>
     <string name="poi_gift">Kingipood</string>
     <string name="poi_glaziery">Klaasija</string>
     <string name="poi_hardware">Tööriista pood</string>
-    <string name="poi_hearing_aids">Kuuldeaparaadid</string>
-    <string name="poi_herbalist">Ürdipood</string>
+    <string name="poi_hearing_aids">Kuuldeaparaatide pood</string>
+    <string name="poi_herbalist">Ravimtaimede pood</string>
     <string name="poi_hifi">HiFi pood</string>
-    <string name="poi_houseware">Majatarvete pood</string>
+    <string name="poi_houseware">Kodutarvete kauplus</string>
     <string name="poi_hunting">Jahivarustus</string>
     <string name="poi_interior_decoration">Sisekujunduspood</string>
     <string name="poi_jewelry">Juveelipood</string>
@@ -128,7 +128,7 @@
     <string name="poi_ship_chandler">Laeva varustaja</string>
     <string name="poi_sports">Spordikaubad</string>
     <string name="poi_stationery">Kirjatarvete pood</string>
-    <string name="poi_ticket">Piletimüük</string>
+    <string name="poi_ticket">Piletikassa</string>
     <string name="poi_tobacco">Tubaka pood</string>
     <string name="poi_toys">Mänguasjapood</string>
     <string name="poi_fuel_avia_type">Lennukikütuse liik</string>
@@ -189,7 +189,7 @@
     <string name="poi_perfumery">Parfümeeriakauplus</string>
     <string name="poi_ford_stepping_stones">Samm-kivisild</string>
     <string name="poi_honey">Meepood</string>
-    <string name="poi_religion">Religioossed kaubad</string>
+    <string name="poi_religion">Usukaubad</string>
     <string name="poi_spices">Vürtsipood</string>
     <string name="poi_fuel_type">Kütuse liik</string>
     <string name="poi_shop_craft">Kunsti- ja käsitöötarvete pood</string>
@@ -477,10 +477,10 @@
     <string name="poi_golf_course">Golfiväljak</string>
     <string name="poi_ice_rink">Liuväli</string>
     <string name="poi_pitch">Pigi</string>
-    <string name="poi_leisure_track">Sport pala</string>
+    <string name="poi_leisure_track">Rada mittemootorispordi jaoks</string>
     <string name="poi_running_track">Jooksurada</string>
     <string name="poi_bicycle_track">Jalgrattarada</string>
-    <string name="poi_horse_track">Hobuste rada</string>
+    <string name="poi_horse_track">Hobuste võidujooksu rada</string>
     <string name="poi_raceway">Võistlusrada</string>
     <string name="poi_office_telecommunication">Sidefirma kontor</string>
     <string name="poi_research">Uurimisbüroo</string>
@@ -498,7 +498,7 @@
     <string name="poi_forest">Inimeste hooldatud mets</string>
     <string name="poi_canal">Kanal</string>
     <string name="poi_farmyard">Taluõu</string>
-    <string name="poi_meadow">Heinamaa</string>
+    <string name="poi_meadow">Niit</string>
     <string name="poi_industrial">Tööstuspiirkond</string>
     <string name="poi_landuse_railway">Raudtee piirkond</string>
     <string name="poi_residential">Elamupiirkond</string>
@@ -533,7 +533,7 @@
     <string name="poi_fuel_electricity">Elekter</string>
     <string name="poi_breakwater">Lainemurdja</string>
     <string name="poi_groyne">Kaldakaitsetamm</string>
-    <string name="poi_basin">Jõgikond</string>
+    <string name="poi_basin">Kogumisbassein</string>
     <string name="poi_crane">Kraana</string>
     <string name="poi_country">Riik</string>
     <string name="poi_monitoring_station">Seirejaam</string>
@@ -613,16 +613,16 @@
     <string name="poi_foundation">Sihtasutuse kontor</string>
     <string name="poi_tax_advisor">Maksunõustaja büroo</string>
     <string name="poi_landfill_waste_nuclear">Tuumajäätmed</string>
-    <string name="poi_brownfield">Tööstusala</string>
-    <string name="poi_greenfield">Roheala</string>
+    <string name="poi_brownfield">Pruunala</string>
+    <string name="poi_greenfield">Ehituseks planeeritud roheala</string>
     <string name="poi_bunker_silo">Siloauk</string>
     <string name="poi_aerialway_pylon">Õhutõstemast</string>
     <string name="poi_power_tower">Elektriülekandeliini mast</string>
     <string name="poi_power_pole">Elektriliini post</string>
     <string name="poi_cooling_tower">Jahutustorn</string>
     <string name="poi_lighting_tower">Piksevarras</string>
-    <string name="poi_commercial">Äriline maakasutus</string>
-    <string name="poi_retail">Jaekaubanduse maakasutus</string>
+    <string name="poi_commercial">Ärimaa</string>
+    <string name="poi_retail">Jaekaubandusala</string>
     <string name="poi_paediatrics">Pediaatria</string>
     <string name="poi_aeroway_fuel">Õhusõiduki tankla</string>
     <string name="poi_route_ferry_ref">Parvlaev</string>
@@ -814,7 +814,7 @@
     <string name="poi_crematorium">Krematoorium</string>
     <string name="poi_internet_cafe">Internetikohvik</string>
     <string name="poi_bank">Pank</string>
-    <string name="poi_money_lender">Raha laenaja</string>
+    <string name="poi_money_lender">Kiirlaenukontor</string>
     <string name="poi_pawnbroker">Pandimaja</string>
     <string name="poi_accountant">Raamatupidaja</string>
     <string name="poi_cave_entrance">Koopa sissepääs</string>
@@ -983,7 +983,7 @@
     <string name="poi_piste_snow_park">Lumepark</string>
     <string name="poi_piste_playground">Mänguväljakunõlv</string>
     <string name="poi_piste_ice_skate">Uisutamine</string>
-    <string name="poi_tomb">Haud</string>
+    <string name="poi_tomb">Hauakamber</string>
     <string name="poi_historic_cannon">Ajalooline kahur</string>
     <string name="poi_wilderness_hut">Kõnnumaa-onn;varjualune</string>
     <string name="poi_payment_terminal">Makseterminal</string>
@@ -1265,7 +1265,7 @@
     <string name="poi_trees_tea">Tee</string>
     <string name="poi_trees_coca">Koka</string>
     <string name="poi_trees_kiwi">Viivi</string>
-    <string name="poi_trees_meadow_orchard">Heinamaa viljapuuaed</string>
+    <string name="poi_trees_meadow_orchard">Viljapuuaed niidul</string>
     <string name="poi_trees_nectorine">Nektariin</string>
     <string name="poi_trees_mango">Mango</string>
     <string name="poi_trees_rubber">Kumm</string>
@@ -1357,9 +1357,9 @@
     <string name="poi_mini_roundabout">Väike ringristmik</string>
     <string name="poi_railway_crossing">Raudtee ülesõit</string>
     <string name="poi_railway_level_crossing">Samatasandiline raudteeülesõit</string>
-    <string name="poi_bird_hide">Linnuvaatluse koht</string>
+    <string name="poi_bird_hide">Linnuvaatlushoone</string>
     <string name="poi_horse_riding">Ratsutamine</string>
-    <string name="poi_leisure_common">Levinud vaba aja veetmise koht</string>
+    <string name="poi_leisure_common">Ühismaakasutusala</string>
     <string name="poi_garden">Aed</string>
     <string name="poi_heath">Nõmm</string>
     <string name="poi_grass">Rohi</string>
@@ -2119,7 +2119,7 @@
     <string name="poi_theatre_genre_marionette">Marionett</string>
     <string name="poi_theatre_genre_ballet">Ballett</string>
     <string name="poi_theatre_genre_shadow_play">Varjude mäng</string>
-    <string name="poi_bandstand">Kõlakoda</string>
+    <string name="poi_bandstand">Väike vabaõhulava</string>
     <string name="poi_kiln">Põletusahi</string>
     <string name="poi_product_brick">Toode: tellis</string>
     <string name="poi_product_quicklime">Toode: kustutamata lubi</string>
@@ -2174,7 +2174,7 @@
     <string name="poi_historic_civilization_celtic">Tsivilisatsioon: keldi</string>
     <string name="poi_historic_civilization_western_roman">Tsivilisatsioon: lääne-rooma (285 pKr - 476 pKr)</string>
     <string name="poi_historic_civilization_mycenaean">Tsivilisatsioon: mükeene</string>
-    <string name="poi_historic_civilization_dacian">Tsivilisatsioon: dacia</string>
+    <string name="poi_historic_civilization_dacian">Tsivilisatsioon: daakia</string>
     <string name="poi_historic_civilization_hernici">Tsivilisatsioon: hernici</string>
     <string name="poi_historic_civilization_greek_egyptian">Tsivilisatsioon: kreeka-egiptuse (332 eKr – 30 eKr)</string>
     <string name="poi_historic_civilization_roman_and_byzantine_egyptian">Tsivilisatsioon: rooma ja bütsantsi egiptuse</string>
@@ -2309,7 +2309,7 @@
     <string name="poi_cargo_bicycle">Jalgrattad</string>
     <string name="poi_cargo_container">Konteinerid</string>
     <string name="poi_cargo_hgv">Raskeveokid</string>
-    <string name="poi_fitness_station">Spordisaal</string>
+    <string name="poi_fitness_station">Jõulinnak</string>
     <string name="poi_hackerspace">Häkkeriruum</string>
     <string name="poi_wiki_lang_af">Afrikaani viki</string>
     <string name="poi_wiki_lang_als">Elsassi viki</string>
@@ -2428,7 +2428,7 @@
     <string name="poi_health_specialty_social_paediatrics_no">Tervise eriala: sotsiaalpediaatria: ei</string>
     <string name="poi_healthcare_speciality_obstetrics_caesarean_section">Sünnitusabi (keisrilõike osa)</string>
     <string name="poi_health_specialty_obstetrics_caesarean_section_no">Tervise eriala: sünnitusabi (keisrilõike osa): ei</string>
-    <string name="poi_healthcare_speciality_addiction">Sõltuvus meditsiin</string>
+    <string name="poi_healthcare_speciality_addiction">Sõltuvuste ravi</string>
     <string name="poi_healthcare_speciality_optometry">Optomeetria</string>
     <string name="poi_healthcare_speciality_clinical_pathology">Kliiniline patoloogia</string>
     <string name="poi_healthcare_speciality_speech_therapy">Logopeed</string>
@@ -2446,7 +2446,7 @@
     <string name="poi_healthcare_speciality_depth">Süvapsühholoogia</string>
     <string name="poi_healthcare_speciality_behavior">Käitumine</string>
     <string name="poi_building_type_pyramid">Ehitise liik: püramiid</string>
-    <string name="poi_fitness_centre">Spordikeskus</string>
+    <string name="poi_fitness_centre">Jõusaal</string>
     <string name="poi_fitness">Fitness</string>
     <string name="poi_billiards">Piljard</string>
     <string name="poi_microwave_oven_yes">Mikrolaineahi: jah</string>
@@ -2491,7 +2491,7 @@
     <string name="poi_fair_trade_no">Õiglane kaubandus: ei</string>
     <string name="poi_fair_trade_only">Ainult õiglase kaubanduse tooted</string>
     <string name="poi_ice_hockey">Jäähoki</string>
-    <string name="poi_bandy">Bandy</string>
+    <string name="poi_bandy">Jääpall</string>
     <string name="poi_protected_area">Kaitseala</string>
     <string name="poi_protection_title">Kaitse pealkiri</string>
     <string name="poi_protection_object_historic">Kaitseobjekt: ajalooline</string>
@@ -2538,7 +2538,7 @@
     <string name="poi_nuclear_explosion_warhead">Plahvatus: lõhkepea</string>
     <string name="poi_nuclear_explosion_device">Plahvatus: seade</string>
     <string name="poi_addr_housename">Maja nimi</string>
-    <string name="poi_plant_nursery">Taimekasvatusala</string>
+    <string name="poi_plant_nursery">Puukool</string>
     <string name="poi_compressed_air_yes">Jah;Suruõhk</string>
     <string name="poi_compressed_air_no">Suruõhk: ei</string>
     <string name="poi_car_wash_yes">Jah;Autopesula</string>
@@ -3387,9 +3387,9 @@
     <string name="poi_climbing_routes">Ronimismarsruudid</string>
     <string name="poi_circumference">Ümbermõõt</string>
     <string name="poi_diameter_crown">Krooni läbimõõt</string>
-    <string name="poi_meadow_agricultural">Liik: põllumajanduslik</string>
-    <string name="poi_meadow_perpetual">Liik: tähtajatu</string>
-    <string name="poi_meadow_transitional">Liik: üleminekuaeg</string>
+    <string name="poi_meadow_agricultural">Liik: heinamaa</string>
+    <string name="poi_meadow_perpetual">Liik: rohumaalaadne</string>
+    <string name="poi_meadow_transitional">Liik: üleminekul niidust looduslikuks rohumaaks</string>
     <string name="poi_meadow_pasture">Liik: karjamaa</string>
     <string name="poi_frozen_food">Külmutatud toit</string>
     <string name="poi_agrarian">Põllumajandustarvete kauplus</string>
@@ -3441,8 +3441,8 @@
     <string name="poi_outpost">Kaupluse tarnepunkt</string>
     <string name="poi_barbecue_grill">Grill: jah</string>
     <string name="poi_water_utility">Vee-kommunaalamet</string>
-    <string name="poi_amusement_arcade">Lõbustuskaar</string>
-    <string name="poi_adult_gaming_centre">Täiskasvanute mängukeskus</string>
+    <string name="poi_amusement_arcade">Mängusaal</string>
+    <string name="poi_adult_gaming_centre">Hasartmängusaal</string>
     <string name="poi_service_vehicle_car_repair_yes">Autoremont</string>
     <string name="poi_service_vehicle_oil_change_yes">Õlivahetus</string>
     <string name="poi_service_vehicle_used_car_sales_yes">Kasutatud autode müük</string>
@@ -3586,7 +3586,7 @@
     <string name="poi_changing_table_count">Mähkimislaudade arv</string>
     <string name="poi_changing_table_fee_yes">Mähkimislaua tasu: jah</string>
     <string name="poi_changing_table_fee_no">Mähkimislaua tasu: ei</string>
-    <string name="poi_charcoal_pile">Puusöe hunnik</string>
+    <string name="poi_charcoal_pile">Miiliahi</string>
     <string name="poi_historic_tank">Ajalooline tank</string>
     <string name="poi_hookah_lounge">Vesipiibu salong</string>
     <string name="poi_generator_source_biomass">Energiaallikas: biomass</string>
@@ -3774,7 +3774,7 @@
     <string name="poi_dive_centre">Sukeldumiskeskus</string>
     <string name="poi_resort_hunting">Jahibaas</string>
     <string name="poi_piste_ref">Raja viitenumber</string>
-    <string name="poi_bowling_alley">Bowlingukeskus</string>
+    <string name="poi_bowling_alley">Keeglisaal</string>
     <string name="poi_shop_security">Turvakauplus</string>
     <string name="poi_mountain_rescue">Mägipääste</string>
     <string name="poi_paintball">Värvisõda</string>
@@ -3831,7 +3831,7 @@
     <string name="poi_diplomatic_services_immigrant_visas_no">Ei</string>
     <string name="poi_diplomatic_services_citizen_services_yes">Jah</string>
     <string name="poi_diplomatic_services_citizen_services_no">Ei</string>
-    <string name="poi_siren">Sireen</string>
+    <string name="poi_siren">Elanikukaitse häiresireen</string>
     <string name="poi_lifeguard_base">Vetelpäästejaam</string>
     <string name="poi_nurse">Õde</string>
     <string name="poi_healthcare_speciality_vaccination">Vaktsineerimine</string>
@@ -4239,7 +4239,7 @@
     <string name="poi_museum_military">Sõjaline</string>
     <string name="poi_museum_archaeological">Arheoloogiline</string>
     <string name="poi_museum_war">Sõda</string>
-    <string name="poi_museum_health">Tervis</string>
+    <string name="poi_museum_health">Tervisemuuseum</string>
     <string name="poi_museum_language">Keel</string>
     <string name="poi_museum_local">Kohalik</string>
     <string name="poi_museum_ethnography">Etnograafia</string>
@@ -4596,7 +4596,7 @@
     <string name="poi_reservation">Broneerimine</string>
     <string name="poi_us_maps_recreation_area_facility">Puhkeala teenus</string>
     <string name="poi_cuisine_fish">Kalaroad</string>
-    <string name="poi_shop_general">Üldkaupade pood</string>
+    <string name="poi_shop_general">Universaalkauplus</string>
     <string name="poi_live_music_yes">Jah</string>
     <string name="poi_us_maps_recreation_area_operational_hours">Tööaeg</string>
     <string name="poi_us_maps_recreation_area_open_season_end">Hooaja lõpp</string>
@@ -4683,4 +4683,9 @@
     <string name="poi_us_maps_recreation_area_facility_rv_dump_station">Maismaatranspordivahendite heitvee purgimiskoht</string>
     <string name="poi_property_management">Kinnisvarahaldusfirma kontor</string>
     <string name="poi_state_under_construction">Olek: ehitamisel</string>
+    <string name="poi_healthcare_speciality_haematology">Hematoloogia</string>
+    <string name="poi_healthcare_speciality_allergology">Allergoloog</string>
+    <string name="poi_healthcare_speciality_cardiac_surgery">Südamekirurgia</string>
+    <string name="poi_healthcare_speciality_geriatrics">Geriaatria</string>
+    <string name="poi_state_abandoned">Olek:mahajäetud</string>
 </resources>
