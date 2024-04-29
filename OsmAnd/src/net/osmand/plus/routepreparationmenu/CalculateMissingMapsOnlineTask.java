@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.os.AsyncTask;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,13 +14,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RoutingHelperUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.MissingMapsCalculator;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,6 +34,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> {
@@ -47,21 +54,17 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 	protected Void doInBackground(Void... voids) {
 		MissingMapsCalculator calculator = new MissingMapsCalculator(app.getRegions());
 		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
-		if (prevRoute != null && prevRoute.getMissingMapsPoints() != null && prevRoute.getMissingMapsRoutingContext() != null)  {
-			RoutingConfiguration config = prevRoute.getMissingMapsRoutingContext().config;
-			String url = ONLINE_CALCULATION_URL + "car";
-			if (config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE) {
-				url = ONLINE_CALCULATION_URL + "bicycle";
-			}
-			// TODO add parameters from config add TO URL
-			for(LatLon l : prevRoute.getMissingMapsPoints()) {
-				url += "&" + formatPointString(l);
+		if (prevRoute.getMissingMapsPoints() != null && prevRoute.getMissingMapsRoutingContext() != null)  {
+			StringBuilder url = new StringBuilder(ONLINE_CALCULATION_URL)
+					.append(getRoutingProfile())
+					.append(getFormattedRoutingParameters());
+			for(LatLon point : prevRoute.getMissingMapsPoints()) {
+				url.append("&").append(formatPointString(point));
 			}
 			try {
-
 				RoutingType routingType = app.getSettings().ROUTING_TYPE.get();
 				OnlineRoutingHelper helper = app.getOnlineRoutingHelper();
-				String response = helper.makeRequest(url);
+				String response = helper.makeRequest(url.toString());
 				List<LatLon> latLons = convertLocationsToLatLon(parseOnlineCalculationResponse(response));
 				calculator.checkIfThereAreMissingMaps(prevRoute.getMissingMapsRoutingContext(),
 						prevRoute.getMissingMapsPoints().get(0), latLons,
@@ -79,16 +82,42 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 		return null;
 	}
 
-	private void onlineCalculateRequestStartPoint(@NonNull LatLon start,
-	                                              @NonNull LatLon finish,
-	                                              @NonNull OnResultCallback<List<Location>> callback) {
-
-
+	@NonNull
+	private String getRoutingProfile() {
+		RouteCalculationResult prevRoute = app.getRoutingHelper().getRoute();
+		RoutingConfiguration config = prevRoute.getMissingMapsRoutingContext().config;
+		boolean useBicycle = config.router.getProfile() == GeneralRouter.GeneralRouterProfile.BICYCLE;
+		return useBicycle ? "bicycle" : "car";
 	}
 
 	@NonNull
 	private String formatPointString(@NonNull LatLon location) {
 		return "points=" + location.getLatitude() + "," + location.getLongitude();
+	}
+
+	@NonNull
+	private String getFormattedRoutingParameters() {
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+		GeneralRouter router = app.getRouter(appMode);
+		List<String> activeParameters = new ArrayList<>();
+		if (router != null) {
+			Map<String, RoutingParameter> parameters = RoutingHelperUtils.getParametersForDerivedProfile(appMode, router);
+			for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
+				if (isParameterEnabled(e.getValue())) {
+					activeParameters.add(e.getKey());
+				}
+			}
+		}
+		return !Algorithms.isEmpty(activeParameters)
+				? "&params=car" + "," + TextUtils.join(",", activeParameters)
+				: "";
+	}
+
+	private boolean isParameterEnabled(@NonNull RoutingParameter parameter) {
+		OsmandSettings settings = app.getSettings();
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+		CommonPreference<Boolean> preference = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+		return preference.getModeValue(appMode);
 	}
 
 	@NonNull
