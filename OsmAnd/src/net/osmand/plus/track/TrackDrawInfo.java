@@ -69,9 +69,9 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
-	private Gpx3DVisualizationType trackVisualizationType;
-	private Gpx3DWallColorType trackWallColorType;
-	private Gpx3DLinePositionType trackLinePositionType;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private int additionalExaggeration;
 
 	@TrackAppearanceType
