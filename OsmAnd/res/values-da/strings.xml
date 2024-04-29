@@ -5708,4 +5708,15 @@
     <string name="required_maps">Nødvendige kort</string>
     <string name="missing_maps_description">Nogle offline-kort, der er kræves for denne rute, mangler eller er ikke opdaterede. Download eller opdater disse kort.</string>
     <string name="missing_maps_header">Manglende eller forældede kort</string>
+    <string name="visualized_by">Visualiseret af</string>
+    <string name="wall_color">Vægfarve</string>
+    <string name="track_line">Sporlinje</string>
+    <string name="fixed_height">Fast højde</string>
+    <string name="top">Top</string>
+    <string name="downward_gradient">Nedadgående gradient</string>
+    <string name="upward_gradient">Opadgående gradient</string>
+    <string name="bottom">Bund</string>
+    <string name="top_and_bottom">Top og bund</string>
+    <string name="title_3d_track">3D-spor</string>
+    <string name="explore_3d_track_description">Udforsk sporet i interaktiv 3D! Visualiser højde, hastighed og meget mere direkte på kortet.</string>
 </resources>
