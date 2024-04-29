@@ -5698,4 +5698,10 @@
     <string name="track_line">軌跡線</string>
     <string name="fixed_height">固定高度</string>
     <string name="downward_gradient">向下斜率</string>
+    <string name="upward_gradient">向上斜率</string>
+    <string name="top">頂部</string>
+    <string name="bottom">底部</string>
+    <string name="top_and_bottom">頂部與底部</string>
+    <string name="title_3d_track">3D 軌跡</string>
+    <string name="explore_3d_track_description">以互動式 3D 方式探索軌跡！在地圖上直接視覺化高度、速度等。</string>
 </resources>
