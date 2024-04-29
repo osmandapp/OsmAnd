@@ -1089,7 +1089,7 @@
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
     <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
-    <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
+    <string name="rendering_attr_showAccess_name">Показати обмеження доступу та плати за проїзд</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показувати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Веломаршрути</string>
@@ -4480,8 +4480,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на загальних масштабах</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на загальних масштабах</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Тунелі на водних шляхах</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Підвищення видимості для водних тунелів</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Підвищення видимості для водних тунелів</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Додаткові текстові відомості про поверхню (surface_qualification) морського дна, комбіновані типи поверхні, категорію та тип рослинності</string>
@@ -5641,7 +5641,7 @@
     <string name="use_terrain_maps">Використовуйте мапи місцевості</string>
     <string name="retrieve_elevation_data_summary">OsmAnd може отримувати дані про висоту з найближчих доріг або карт місцевості.</string>
     <string name="precise">Точно</string>
-    <string name="auto_zoom_discrete">Дискретний</string>
+    <string name="auto_zoom_discrete">Дискретно</string>
     <string name="gpx_approximation_cpp">На основі маршрутизації (C++)</string>
     <string name="gpx_approximation_java">На основі маршрутизації (Java)</string>
     <string name="sorted_sufolders_toast">Вкладені папки в \"%1$s\" відсортовано за: \"%2$s\"</string>
@@ -5655,7 +5655,7 @@
     <string name="lang_ta_in">Тамільська (Індія)</string>
     <string name="shared_sting_all_colors">Всі кольори</string>
     <string name="routing_type_a_star_classic">A* класичний</string>
-    <string name="auto_zoom_smooth">Гладкий</string>
+    <string name="auto_zoom_smooth">Плавно</string>
     <string name="auto_zoom">Автозум</string>
     <string name="java_safe">Java (Безпечно)</string>
     <string name="gpx_approximation">Наближення GPX</string>
