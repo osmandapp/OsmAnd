@@ -5638,15 +5638,15 @@
     <string name="max_sensor_speed">Максимальна швидкість датчика</string>
     <string name="shared_string_scale">масштаб</string>
     <string name="use_terrain_maps_summary">Використовує карти місцевості для даних про висоту. Геометрія треку залишається незмінною.</string>
-    <string name="use_terrain_maps">Використовуйте мапи місцевості</string>
-    <string name="retrieve_elevation_data_summary">OsmAnd може отримувати дані про висоту з найближчих доріг або карт місцевості.</string>
+    <string name="use_terrain_maps">Використовувати мапи місцевості</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd може отримувати дані про висоту з найближчих доріг або мап місцевості.</string>
     <string name="precise">Точно</string>
     <string name="auto_zoom_discrete">Дискретно</string>
     <string name="gpx_approximation_cpp">На основі маршрутизації (C++)</string>
     <string name="gpx_approximation_java">На основі маршрутизації (Java)</string>
-    <string name="sorted_sufolders_toast">Вкладені папки в \"%1$s\" відсортовано за: \"%2$s\"</string>
+    <string name="sorted_sufolders_toast">Підтеки у \"%1$s\" відсортовано за: \"%2$s\"</string>
     <string name="use_nearby_roads_summary">Використовує офлайн-мапу для пошуку найближчих доріг та даних про висоту. Може регулювати геометрію колії.</string>
-    <string name="use_nearby_roads">Використовуйте найближчі дороги</string>
+    <string name="use_nearby_roads">Використовувати найближчі дороги</string>
     <string name="relief_3d_download_description">Для перегляду Місцевість на мапі потрібні додаткові мапи.</string>
     <string name="vertical_exaggeration_description">Змінюючи значення масштабу, ви можете підкреслити 3D-рельєф.</string>
     <string name="vertical_exaggeration">Вертикальне перебільшення</string>
@@ -5670,16 +5670,16 @@
     <string name="help_article_setup_a_route_name">Встановити маршрутизацію</string>
     <string name="rendering_attr_padusHideBoundaries_name">Приховати межі громадських земель</string>
     <string name="sort_subfolders">Сортувати підтеки</string>
-    <string name="rendering_attr_padusDisplayMode_description">За типом доступу або ім\'ям менеджера</string>
+    <string name="rendering_attr_padusDisplayMode_description">За типом доступу або іменем менеджера</string>
     <string name="rendering_value_access_name">За типом доступу</string>
-    <string name="rendering_value_managerName_name">За ім\'ям менеджера</string>
+    <string name="rendering_value_managerName_name">За іменем менеджера</string>
     <string name="max_sensor_bycicle_power">Максимальна потужність велосипеда</string>
     <string name="avg_sensor_speed">Середня швидкість датчика</string>
     <string name="release_4_8">• Бути готовим до 4.8</string>
     <string name="shared_string_additional">Додатково</string>
-    <string name="distance_during_navigation_description">Виберіть спосіб відображення інформації про відстань у віджетах навігації (відстань до пункту, наступного повороту, смуги руху).
+    <string name="distance_during_navigation_description">Виберіть спосіб показу інформації про відстань у віджетах навігації (відстань до точки, наступного повороту, смуги руху).
 \n
-\nВиберіть \"%1$s\" для точних чисел або \"%2$s\" для більш зручного читання.</string>
+\nВиберіть \"%1$s\" для точних чисел або \"%2$s\" для зручнішого читання.</string>
     <string name="distance_during_navigation">Відстань під час навігації</string>
     <string name="round_up">Округлити</string>
     <string name="release_4_7">• Новий віджет \"Спідометр\" сумісний з Android Auto
@@ -5710,14 +5710,14 @@
     <string name="top_and_bottom">Зверху і внизу</string>
     <string name="title_3d_track">3D-трек</string>
     <string name="explore_3d_track_description">Досліджуйте трек в інтерактивному 3D! Візуалізуйте висоту, швидкість та багато іншого безпосередньо на мапі.</string>
-    <string name="maps_that_also_be_used">Карти, які також були використані: %1$s</string>
+    <string name="maps_that_also_be_used">Мапи, які також можна використовувати: %1$s</string>
     <string name="getting_list_of_required_maps">Отримання списку необхідних мап…</string>
     <string name="required_maps">Необхідні мапи</string>
     <string name="missing_maps_description">Деякі офлайн-мапи, необхідні для прокладання цього маршруту, відсутні або неактуальні. Будь ласка, завантажте або оновіть їх.</string>
     <string name="route_line_use_coloring_speed">Лінія маршруту зафарбована відповідно до швидкості руху.</string>
     <string name="route_line_use_coloring_altitude">Лінія маршруту зафарбована відповідно до висоти над рівнем моря.</string>
     <string name="delete_actions_button">Кнопка видалення</string>
-    <string name="shared_string_osm_id">Ідентифікатор OSM</string>
+    <string name="shared_string_osm_id">OSM ID</string>
     <string name="wall_color">Колір стіни</string>
     <string name="top">Зверху</string>
     <string name="required_maps_calculate_online_summary">Список відсутніх мап базується на прямому маршруті. Щоб отримати точний список мап, OsmAnd може попередньо обчислити ваш маршрут онлайн.</string>
