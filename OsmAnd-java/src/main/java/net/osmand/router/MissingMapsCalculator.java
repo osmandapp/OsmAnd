@@ -97,12 +97,13 @@ public class MissingMapsCalculator {
 		}
 		Set<String> usedMaps = new LinkedHashSet<>();
 		Set<String> mapsToDownload = new LinkedHashSet<>();
+		Set<String> missingMaps = new LinkedHashSet<>();
 		Set<String> mapsToUpdate = new LinkedHashSet<>();
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
-					CollectionUtils.addIfNotContains(mapsToDownload, p.regions.get(0));
+					CollectionUtils.addIfNotContains(p.regions.get(0), missingMaps, mapsToDownload);
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -138,7 +139,7 @@ public class MissingMapsCalculator {
 				}
 				if (region != null) {
 					if (!fresh) {
-						CollectionUtils.addIfNotContains(mapsToUpdate, region);
+						CollectionUtils.addIfNotContains(region, mapsToUpdate, mapsToDownload);
 					} else {
 						CollectionUtils.addIfNotContains(usedMaps, region);
 					}
@@ -160,10 +161,12 @@ public class MissingMapsCalculator {
 		if (mapsToDownload.isEmpty() && mapsToUpdate.isEmpty()) {
 			return false;
 		}
-		ctx.calculationProgress.requestMapsToUpdate = true;
-		ctx.calculationProgress.missingMaps = convert(mapsToDownload);
-		ctx.calculationProgress.mapsToUpdate = convert(mapsToUpdate);
-		ctx.calculationProgress.potentiallyUsedMaps = convert(usedMaps);
+		RouteCalculationProgress progress = ctx.calculationProgress;
+		progress.requestMapsToUpdate = true;
+		progress.mapsToDownload = convert(mapsToDownload);
+		progress.missingMaps = convert(missingMaps);
+		progress.mapsToUpdate = convert(mapsToUpdate);
+		progress.potentiallyUsedMaps = convert(usedMaps);
 
 		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
 				(System.nanoTime() - tm) / 1e9));

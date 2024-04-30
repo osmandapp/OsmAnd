@@ -41,6 +41,7 @@ import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.PrecalculatedRouteDirection;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -845,11 +846,13 @@ public class RouteProvider {
 		points.add(st);
 		points.addAll(inters);
 		points.add(en);
+		RouteCalculationProgress progress = params.calculationProgress;
 		MissingMapsCalculationResult missingMapsCalculationResult = new MissingMapsCalculationResult(env.getCtx(), points);
-		missingMapsCalculationResult.requestMapsToUpdate = params.calculationProgress.requestMapsToUpdate;
-		missingMapsCalculationResult.missingMaps = params.calculationProgress.missingMaps;
-		missingMapsCalculationResult.mapsToUpdate = params.calculationProgress.mapsToUpdate;
-		missingMapsCalculationResult.potentiallyUsedMaps = params.calculationProgress.potentiallyUsedMaps;
+		missingMapsCalculationResult.requestMapsToUpdate = progress.requestMapsToUpdate;
+		missingMapsCalculationResult.mapsToDownload = progress.mapsToDownload;
+		missingMapsCalculationResult.missingMaps = progress.missingMaps;
+		missingMapsCalculationResult.mapsToUpdate = progress.mapsToUpdate;
+		missingMapsCalculationResult.potentiallyUsedMaps = progress.potentiallyUsedMaps;
 		result.setMissingMapsCalculationResult(missingMapsCalculationResult);
 		return result;
 	}

@@ -176,10 +176,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 	private void setupItemsList() {
 		ViewGroup container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
-		for (DownloadItem downloadItem : controller.getMissingMaps()) {
-			container.addView(createItemView(downloadItem));
-		}
-		for (DownloadItem downloadItem : controller.getOutdatedMaps()) {
+		for (DownloadItem downloadItem : controller.getMapsToDownload()) {
 			container.addView(createItemView(downloadItem));
 		}
 		updateListSelection();

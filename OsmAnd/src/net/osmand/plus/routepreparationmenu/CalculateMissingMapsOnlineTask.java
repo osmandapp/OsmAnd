@@ -72,6 +72,7 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				RouteCalculationProgress progress = routingContext.calculationProgress;
 				MissingMapsCalculationResult result = new MissingMapsCalculationResult(routingContext, routePoints);
 				result.requestMapsToUpdate = progress.requestMapsToUpdate;
+				result.mapsToDownload = progress.mapsToDownload;
 				result.missingMaps = progress.missingMaps;
 				result.mapsToUpdate = progress.mapsToUpdate;
 				result.potentiallyUsedMaps = progress.potentiallyUsedMaps;

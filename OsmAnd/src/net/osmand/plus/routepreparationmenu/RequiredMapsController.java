@@ -36,8 +36,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 
 	private final OsmandApplication app;
 
+	private List<DownloadItem> mapsToDownload = new ArrayList<>();
 	private List<DownloadItem> missingMaps = new ArrayList<>();
-	private List<DownloadItem> mapsToUpdate = new ArrayList<>();
 	private List<DownloadItem> usedMaps = new ArrayList<>();
 	private final ItemsSelectionHelper<DownloadItem> itemsSelectionHelper = new ItemsSelectionHelper<>();
 
@@ -65,19 +65,14 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private void updateSelectionHelper() {
 		if (!loadingMapsInProgress) {
 			updateMapsToDownload();
-			itemsSelectionHelper.setAllItems(CollectionUtils.asOneList(missingMaps, mapsToUpdate));
+			itemsSelectionHelper.setAllItems(mapsToDownload);
 			itemsSelectionHelper.setSelectedItems(missingMaps);
 		}
 	}
 
 	@NonNull
-	public List<DownloadItem> getMissingMaps() {
-		return missingMaps;
-	}
-
-	@NonNull
-	public List<DownloadItem> getOutdatedMaps() {
-		return mapsToUpdate;
+	public List<DownloadItem> getMapsToDownload() {
+		return mapsToDownload;
 	}
 
 	@NonNull
@@ -92,8 +87,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	private void updateMapsToDownload() {
 		RouteCalculationResult route = app.getRoutingHelper().getRoute();
 		MissingMapsCalculationResult result = route.getMissingMapsCalculationResult();
+		this.mapsToDownload = collectMapsForRegions(result.getMapsToDownload());
 		this.missingMaps = collectMapsForRegions(result.getMissingMaps());
-		this.mapsToUpdate = collectMapsForRegions(result.getMapsToUpdate());
 		this.usedMaps = collectMapsForRegions(result.getUsedMaps());
 	}
 

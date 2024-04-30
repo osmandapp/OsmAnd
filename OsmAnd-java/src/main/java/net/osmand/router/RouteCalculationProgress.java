@@ -50,6 +50,7 @@ public class RouteCalculationProgress {
 
 	public long routeCalculationStartTime;
 	public boolean requestMapsToUpdate;
+	public List<WorldRegion> mapsToDownload;
 	public List<WorldRegion> mapsToUpdate;
 	public List<WorldRegion> missingMaps;
 	public List<WorldRegion> potentiallyUsedMaps;

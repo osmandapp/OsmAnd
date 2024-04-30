@@ -12,6 +12,7 @@ public class MissingMapsCalculationResult {
 	private final List<LatLon> missingMapsPoints;
 
 	public boolean requestMapsToUpdate;
+	public List<WorldRegion> mapsToDownload; // both missing and update
 	public List<WorldRegion> mapsToUpdate;
 	public List<WorldRegion> missingMaps;
 	public List<WorldRegion> potentiallyUsedMaps;
@@ -22,7 +23,11 @@ public class MissingMapsCalculationResult {
 	}
 
 	public boolean hasMissingMaps() {
-		return !Algorithms.isEmpty(missingMaps) || !Algorithms.isEmpty(mapsToUpdate);
+		return !Algorithms.isEmpty(mapsToDownload);
+	}
+
+	public List<WorldRegion> getMapsToDownload() {
+		return mapsToDownload;
 	}
 
 	public List<WorldRegion> getMissingMaps() {
