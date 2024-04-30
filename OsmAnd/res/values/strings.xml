@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+    <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
+    <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
         • To be prepared for 4.8
     </string>
