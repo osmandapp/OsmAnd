@@ -54,6 +54,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private boolean calendarEvent;
 
 	private String amenityOriginName;
+	private String amenityOriginPoiType;
 	private Map<String, String> amenityExtensions = new HashMap<>();
 
 	private boolean visible = true;
@@ -86,6 +87,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = point.description;
 		this.visible = point.visible;
 		this.amenityOriginName = point.amenityOriginName;
+		this.amenityOriginPoiType = point.amenityOriginPoiType;
 		this.address = point.address;
 		this.comment = point.comment;
 		this.iconId = point.iconId;
@@ -269,6 +271,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.amenityOriginName = amenityOriginName;
 	}
 
+	@Nullable
+	public String getAmenityOriginPoiType() {
+		return amenityOriginPoiType;
+	}
+
+	public void setAmenityOriginPoiType(@Nullable String amenityOriginPoiType) {
+		this.amenityOriginPoiType = amenityOriginPoiType;
+	}
+
 	@NonNull
 	public Map<String, String> getAmenityExtensions() {
 		return amenityExtensions;
@@ -350,6 +361,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (!Algorithms.stringsEqual(amenityOriginName, point.amenityOriginName)) {
 			return false;
 		}
+		if (!Algorithms.stringsEqual(amenityOriginPoiType, point.amenityOriginPoiType)) {
+			return false;
+		}
 
 		return Double.compare(this.latitude, point.latitude) == 0
 				&& Double.compare(this.longitude, point.longitude) == 0
@@ -377,6 +391,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((amenityOriginName == null) ? 0 : amenityOriginName.hashCode());
+		result = prime * result + ((amenityOriginPoiType == null) ? 0 : amenityOriginPoiType.hashCode());
 		return result;
 	}
 
@@ -394,6 +409,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		point.setComment(wptPt.comment);
 		point.setAmenityOriginName(wptPt.getAmenityOriginName());
 		point.setAmenityExtensions(wptPt.getExtensionsToRead());
+		point.setAmenityOriginPoiType(wptPt.getAmenityOriginPoiType());
 
 		Map<String, String> extensions = wptPt.getExtensionsToWrite();
 		if (extensions.containsKey(VISITED_DATE)) {
@@ -466,6 +482,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (!Algorithms.isEmpty(amenityOriginName)) {
 			point.setAmenityOriginName(amenityOriginName);
+		}
+		if (!Algorithms.isEmpty(amenityOriginPoiType)) {
+			point.setAmenityOriginPoiType(amenityOriginPoiType);
 		}
 		return point;
 	}

@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.ORIGINAL_POI_TYPE_TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -10,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AmenityExtensionsHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.plugins.osmedit.data.OpenstreetmapPoint;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
@@ -69,6 +72,12 @@ public class FavoritePointEditor extends PointEditor {
 			favorite.setAmenityOriginName(amenity.toStringEn());
 			favorite.setIconId(RenderingIcons.getPreselectedIconId(amenity));
 			favorite.setAmenityExtensions(extensionsHelper.getAmenityExtensions(amenity));
+		}
+
+		if (object instanceof OpenstreetmapPoint) {
+			OpenstreetmapPoint openstreetmapPoint = (OpenstreetmapPoint) object;
+			String originalPoiType = openstreetmapPoint.getEntity().getTag(ORIGINAL_POI_TYPE_TAG);
+			favorite.setAmenityOriginPoiType(originalPoiType);
 		}
 
 		FavoritePointEditorFragment.showInstance(mapActivity);

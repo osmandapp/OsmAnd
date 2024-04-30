@@ -68,6 +68,7 @@ public class GPXUtilities {
 	public static final String OSM_PREFIX = "osm_tag_";
 	public static final String AMENITY_PREFIX = "amenity_";
 	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
+	public static final String AMENITY_ORIGIN_POI_TYPE_EXTENSION = "amenity_origin_poi_type";
 
 	public static final String GAP_PROFILE_TYPE = "gap";
 	public static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
@@ -385,6 +386,15 @@ public class GPXUtilities {
 
 		public void setAmenityOriginName(String originName) {
 			getExtensionsToWrite().put(AMENITY_ORIGIN_EXTENSION, originName);
+		}
+
+		public String getAmenityOriginPoiType() {
+			Map<String, String> extensionsToRead = getExtensionsToRead();
+			return extensionsToRead.get(AMENITY_ORIGIN_POI_TYPE_EXTENSION);
+		}
+
+		public void setAmenityOriginPoiType(String originPoiType) {
+			getExtensionsToWrite().put(AMENITY_ORIGIN_POI_TYPE_EXTENSION, originPoiType);
 		}
 
 		public int getColor(ColorizationType type) {
