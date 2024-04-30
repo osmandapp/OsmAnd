@@ -107,6 +107,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public static final int OSM_EDIT_TAB = R.string.osm_edits;
 	public static final String OSM_MAPPER_PREFIX = "OSMMapper";
 	public static final String RENDERING_CATEGORY_OSM_ASSISTANT = "osm_assistant";
+	public static final String ORIGINAL_POI_TYPE_TAG = "original_poi_type_tag";
 
 	public final OsmandPreference<String> OSM_USER_NAME_OR_EMAIL;
 	public final OsmandPreference<String> OSM_USER_DISPLAY_NAME;
