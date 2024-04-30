@@ -5334,14 +5334,14 @@
     <string name="shared_string_included">Belefoglalva</string>
     <string name="local_indexes_category_terrain">Domborzati térképek (3D)</string>
     <string name="hillshade_slope">Domborzatárnyékolás, lejtés</string>
-    <string name="map_widget_group_glide_ratio">Siklószám</string>
-    <string name="average_glide_ratio">Átlagos siklószám</string>
-    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklószámot.</string>
-    <string name="average_glide_time_interval_desc">Adja meg a siklószám átlagának kiszámításához használt időintervallumot.</string>
+    <string name="map_widget_group_glide_ratio">Siklásszám</string>
+    <string name="average_glide_ratio">Átlagos siklásszám</string>
+    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklásszámot.</string>
+    <string name="average_glide_time_interval_desc">Adja meg a siklásszám átlagának kiszámításához használt időintervallumot.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklószámot mutatják.</string>
-    <string name="glide_ratio_to_target">Siklószám a célig</string>
-    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott intervallumhoz.</string>
+    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklásszámot mutatják.</string>
+    <string name="glide_ratio_to_target">Siklásszám a célig</string>
+    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklásszámot a megadott intervallumhoz.</string>
     <string name="external_sensor_name_property_description">Szenzor neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
@@ -5432,7 +5432,7 @@
 \n
 \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
 \n
-\n • Új widgetek: „Siklószám” és „Nap állása”
+\n • Új widgetek: „Siklásszám” és „Nap állása”
 \n
 \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
 \n
@@ -5712,4 +5712,5 @@
     <string name="top_and_bottom">Fent és lent</string>
     <string name="title_3d_track">3D nyomvonal</string>
     <string name="explore_3d_track_description">Fedezze az interaktív 3D-s nyomvonalat! Lássa közvetlenül a térképen a magasságot, sebességet és egyebeket.</string>
+    <string name="gpx_approximation_geo_cpp">Geometria alapú (C++, gyors)</string>
 </resources>
