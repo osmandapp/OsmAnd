@@ -184,6 +184,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 							setLocation(location);
 						}
 					}
+
+					@Override
+					public void onLocationAvailability(boolean locationAvailable) {
+						if (!locationAvailable) {
+							resetGPSInfo();
+						}
+					}
 				});
 			} catch (SecurityException e) {
 				// Location service permission not granted
