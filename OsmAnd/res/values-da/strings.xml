@@ -5719,4 +5719,5 @@
     <string name="top_and_bottom">Top og bund</string>
     <string name="title_3d_track">3D-spor</string>
     <string name="explore_3d_track_description">Udforsk sporet i interaktiv 3D! Visualiser højde, hastighed og meget mere direkte på kortet.</string>
+    <string name="gpx_approximation_geo_cpp">Geometri-baseret (C++, hurtig)</string>
 </resources>
