@@ -31,7 +31,7 @@ public class WikiCoreHelper {
 	private static final String IMAGE_BASE_URL = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 	public static final String WIKIMEDIA_FILE = "File:";
 	public static final String WIKIMEDIA_CATEGORY = "Category:";
-	private static final int THUMB_SIZE = 500;
+	private static final int THUMB_SIZE = 480;
 	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/wiki_place?";
 	private static final int DEPT_CAT_LIMIT = 1;
 	
@@ -47,8 +47,8 @@ public class WikiCoreHelper {
 		} else if (wikimediaCommons.startsWith(WIKIMEDIA_CATEGORY)) {
 			wikiCategory = wikimediaCommons.replace(WIKIMEDIA_CATEGORY, "");
 		}
-		if(Algorithms.isEmpty(wikiTitle)) {
-			for(String tag : tags.keySet()) {
+		if (Algorithms.isEmpty(wikiTitle)) {
+			for (String tag : tags.keySet()) {
 				if (tag.startsWith(Amenity.WIKIPEDIA + ":")) {
 					wikiTitle = tag.substring((Amenity.WIKIPEDIA + ":").length()) + ":" + tags.get(tag);
 				}
