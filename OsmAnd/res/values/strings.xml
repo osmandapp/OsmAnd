@@ -10,6 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="allow_display_on_top">Allow display on top</string>
+    <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
+    <string name="show_debug_info">Show debug information</string>
+    <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
+    <string name="map_text">Map texts</string>
     <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
     <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
     <string name="release_4_8">
