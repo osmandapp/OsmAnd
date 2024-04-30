@@ -5711,11 +5711,12 @@
     <string name="wall_color">Wandfarbe</string>
     <string name="track_line">Bahnlinie</string>
     <string name="fixed_height">Feste Höhe</string>
-    <string name="downward_gradient">Tiefengradient</string>
-    <string name="upward_gradient">Hochgradient</string>
+    <string name="downward_gradient">Abwärtsneigung</string>
+    <string name="upward_gradient">Aufwärtsneigung</string>
     <string name="bottom">Unten</string>
     <string name="top">Oben</string>
     <string name="top_and_bottom">Oben und unten</string>
     <string name="title_3d_track">3D Track</string>
     <string name="explore_3d_track_description">Entdecke den Track in interaktiver 3D! Visualisiere Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
+    <string name="gpx_approximation_geo_cpp">Geometriebasiert (C++, schnell)</string>
 </resources>
