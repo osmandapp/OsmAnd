@@ -663,9 +663,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 		if (location == null) {
 			resetGPSInfo();
-		}
-		if (location != null) {
-			// // use because there is a bug on some devices with location.getTime()
+		} else {
+			// use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
 			notifyGpsLocationRecovered();
