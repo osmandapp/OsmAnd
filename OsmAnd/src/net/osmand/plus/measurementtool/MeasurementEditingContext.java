@@ -967,7 +967,46 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return routePoints;
 	}
 
-	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
+	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
+								 ApplicationMode mode, boolean useExternalTimestamps) {
+		if (gpxApproximation == null ||
+				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(originalPoints)) {
+			return null;
+		}
+		if (useExternalTimestamps && validateExternalTimestamps(originalPoints)) {
+			// used only with Online Routing profiles with enabled "Use external timestamps" opt
+			return setPointsUsingExternalTimestamps(gpxApproximation.finalPoints, originalPoints, mode);
+		} else {
+			// TODO cleanup modifySegments-related code inside setPointsOld
+			return setPointsOld(gpxApproximation, originalPoints, mode, false);
+		}
+	}
+
+	@NonNull
+	private List<WptPt> setPointsUsingExternalTimestamps(@NonNull List<GpxPoint> gpxPoints,
+														 @NonNull List<WptPt> sourcePoints,
+														 ApplicationMode mode) {
+		List<WptPt> routePoints = new ArrayList<>();
+
+		calculatedTimeSpeed = true;
+		return routePoints;
+	}
+
+	private boolean validateExternalTimestamps(List<WptPt> waypoints) {
+		if (waypoints == null || waypoints.isEmpty()) {
+			return false;
+		}
+		long last = 0;
+		for (WptPt p : waypoints) {
+			if (p.time == 0 || p.time < last) {
+				return false;
+			}
+			last = p.time;
+		}
+		return true;
+	}
+
+	private List<WptPt> setPointsOld(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return null;
 		}
