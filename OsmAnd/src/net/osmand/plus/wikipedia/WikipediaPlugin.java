@@ -36,7 +36,6 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -75,7 +74,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class WikipediaPlugin extends OsmandPlugin {
@@ -553,16 +551,6 @@ public class WikipediaPlugin extends OsmandPlugin {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
-		if (mapActivity != null && additionalParams != null) {
-
-		}
 	}
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {

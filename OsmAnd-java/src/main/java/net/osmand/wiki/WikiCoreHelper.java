@@ -158,7 +158,7 @@ public class WikiCoreHelper {
 		return null;
 	}
 
-	private static WikiImage getImageData(String imageFileName) {
+	public static WikiImage getImageData(String imageFileName) {
 		try {
 			String imageName = URLDecoder.decode(imageFileName, "UTF-8");
 			imageFileName = imageName.replace(" ", "_");

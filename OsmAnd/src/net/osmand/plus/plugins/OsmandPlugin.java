@@ -7,6 +7,13 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.IProgress;
@@ -33,8 +40,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -69,13 +76,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public abstract class OsmandPlugin {
 
@@ -244,7 +244,7 @@ public abstract class OsmandPlugin {
 	}
 
 
-	protected void  collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
 	                                            @NonNull Map<String, String> params,
 	                                            @Nullable Map<String, String> additionalParams,
 	                                            @Nullable GetImageCardsListener listener) {
