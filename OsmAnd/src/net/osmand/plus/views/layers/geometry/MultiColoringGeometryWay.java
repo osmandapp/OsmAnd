@@ -78,40 +78,28 @@ public abstract class MultiColoringGeometryWay
 		resetArrowsProvider();
 	}
 
-	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
-		this.track3DStyle = track3DStyle;
+	protected void updateTrack3DStyle(@NonNull GeometryWayStyle<?> style, @Nullable Track3DStyle track3DStyle) {
 		Gpx3DVisualizationType trackVisualizationType = track3DStyle == null ? Gpx3DVisualizationType.NONE : track3DStyle.getVisualizationType();
 		Gpx3DWallColorType trackWallColorType = track3DStyle == null ? Gpx3DWallColorType.NONE : track3DStyle.getWallColorType();
 		Gpx3DLinePositionType trackLinePositionType = track3DStyle == null ? Gpx3DLinePositionType.TOP : track3DStyle.getLinePositionType();
-		if (!styleMap.isEmpty()) {
-			for (GeometryWayStyle<?> style : styleMap.values()) {
-				style.trackVisualizationType = trackVisualizationType;
-				style.trackWallColorType = trackWallColorType;
-				style.trackLinePositionType = trackLinePositionType;
-			}
-		} else {
-			for (List<DrawPathData31> pathDataList : pathsData31Cache) {
-				for (DrawPathData31 pathData : pathDataList) {
-					if (pathData.style != null) {
-						pathData.style.trackVisualizationType = trackVisualizationType;
-						pathData.style.trackWallColorType = trackWallColorType;
-						pathData.style.trackLinePositionType = trackLinePositionType;
-					}
-				}
-			}
-		}
+		float exaggeration = track3DStyle == null ? 1f : track3DStyle.getAdditionalExaggeration();
+		style.trackVisualizationType = trackVisualizationType;
+		style.trackWallColorType = trackWallColorType;
+		style.trackLinePositionType = trackLinePositionType;
+		style.additionalExaggeration = exaggeration;
 	}
 
-	protected void updateTrackLinePositionType(Gpx3DLinePositionType trackLinePositionType) {
+	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
+		this.track3DStyle = track3DStyle;
 		if (!styleMap.isEmpty()) {
 			for (GeometryWayStyle<?> style : styleMap.values()) {
-				style.trackLinePositionType = trackLinePositionType;
+				updateTrack3DStyle(style, track3DStyle);
 			}
 		} else {
 			for (List<DrawPathData31> pathDataList : pathsData31Cache) {
 				for (DrawPathData31 pathData : pathDataList) {
 					if (pathData.style != null) {
-						pathData.style.trackLinePositionType = trackLinePositionType;
+						updateTrack3DStyle(pathData.style, track3DStyle);
 					}
 				}
 			}
@@ -144,12 +132,14 @@ public abstract class MultiColoringGeometryWay
 
 	protected Map<Integer, GeometryWayStyle<?>> createGradientStyles(List<RouteColorizationPoint> points) {
 		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+		updateTrack3DStyle(getTrack3DStyle());
+		Track3DStyle track3DStyle = getTrack3DStyle();
 		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle<?> style = getGradientWayStyle();
-			updateTrack3DStyle(getTrack3DStyle());
 			style.currColor = points.get(i).color;
 			style.nextColor = points.get(i + 1).color;
 			styleMap.put(i, style);
+			updateTrack3DStyle(style, track3DStyle);
 		}
 		return styleMap;
 	}

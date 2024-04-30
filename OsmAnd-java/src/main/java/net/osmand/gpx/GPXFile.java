@@ -781,12 +781,12 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		getExtensionsToWrite().put("additional_exaggeration", String.valueOf(additionalExaggeration));
 	}
 
-	public int getAdditionalExaggeration() {
+	public float getAdditionalExaggeration() {
 		String additionalExaggeration = null;
 		if (extensions != null) {
 			additionalExaggeration = extensions.get("additional_exaggeration");
 		}
-		return Algorithms.parseIntSilently(additionalExaggeration, 1);
+		return Algorithms.parseFloatSilently(additionalExaggeration, 1f);
 	}
 
 	public boolean isShowStartFinishSet() {

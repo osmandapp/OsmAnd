@@ -94,7 +94,7 @@ public class Renderable {
         protected Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
         protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
         protected Gpx3DLinePositionType trackLinePosition = Gpx3DLinePositionType.TOP;
-        protected int additionalExaggeration;
+        protected float additionalExaggeration;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;
@@ -130,7 +130,7 @@ public class Renderable {
             return changed;
         }
 
-        public boolean setAdditionalExaggeration(int additionalExaggeration) {
+        public boolean setAdditionalExaggeration(float additionalExaggeration) {
             boolean changed = this.additionalExaggeration != additionalExaggeration;
             this.additionalExaggeration = additionalExaggeration;
             return changed;

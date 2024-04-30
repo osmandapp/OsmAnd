@@ -217,6 +217,10 @@ public class GpxDbUtils {
 		if (oldVersion < 19) {
 			db.execSQL(getCreateGpxDirTableQuery());
 		}
+		if(oldVersion < 22) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " MODIFY " +
+					ADDITIONAL_EXAGGERATION.getColumnName() + " " + ADDITIONAL_EXAGGERATION.getColumnType());
+		}
 		SQLiteCursor gpxDirCursor = db.rawQuery("select * from " + GPX_DIR_TABLE_NAME + " limit 0", null);
 		for (GpxParameter parameter : GpxParameter.getGpxDirParameters()) {
 			if (gpxDirCursor.getColumnIndex(parameter.getColumnName()) == -1) {
