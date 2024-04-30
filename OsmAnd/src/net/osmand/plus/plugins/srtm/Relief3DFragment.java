@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.VerticalExaggerationFragment.getFormattedScaleValue;
+import static net.osmand.plus.configmap.VerticalExaggerationFragment.getFormattedScaleValue;
 
 import android.app.Activity;
 import android.os.Bundle;

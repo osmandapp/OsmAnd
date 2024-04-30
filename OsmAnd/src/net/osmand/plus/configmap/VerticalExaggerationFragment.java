@@ -220,12 +220,6 @@ public class VerticalExaggerationFragment extends ContextMenuScrollFragment {
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		if (trackDrawInfo != null) {

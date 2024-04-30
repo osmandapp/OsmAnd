@@ -32,6 +32,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -372,9 +373,9 @@ public class TrackDrawInfo {
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
 		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
 		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
-		trackVisualizationType = Gpx3DVisualizationType.values()[bundle.getInt(TRACK_VISUALIZATION_TYPE_KEY)];
-		trackWallColorType = Gpx3DWallColorType.values()[bundle.getInt(TRACK_WALL_COLOR_TYPE_KEY)];
-		trackLinePositionType = Gpx3DLinePositionType.values()[bundle.getInt(TRACK_LINE_POSITION_TYPE_KEY)];
+		trackVisualizationType = AndroidUtils.getSerializable(bundle, TRACK_VISUALIZATION_TYPE_KEY, Gpx3DVisualizationType.class);
+		trackWallColorType = AndroidUtils.getSerializable(bundle, TRACK_WALL_COLOR_TYPE_KEY, Gpx3DWallColorType.class);
+		trackLinePositionType = AndroidUtils.getSerializable(bundle, TRACK_LINE_POSITION_TYPE_KEY, Gpx3DLinePositionType.class);
 		additionalExaggeration = bundle.getFloat(ADDITIONAL_EXAGGERATION_KEY);
 	}
 
@@ -389,9 +390,9 @@ public class TrackDrawInfo {
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
 		bundle.putInt(TRACK_APPEARANCE_TYPE, appearanceType);
-		bundle.putInt(TRACK_VISUALIZATION_TYPE_KEY, trackVisualizationType == null ? 0 : trackVisualizationType.ordinal());
-		bundle.putInt(TRACK_WALL_COLOR_TYPE_KEY, trackWallColorType == null ? 0 : trackWallColorType.ordinal());
-		bundle.putInt(TRACK_LINE_POSITION_TYPE_KEY, trackLinePositionType == null ? 0 : trackLinePositionType.ordinal());
+		bundle.putSerializable(TRACK_VISUALIZATION_TYPE_KEY, trackVisualizationType);
+		bundle.putSerializable(TRACK_WALL_COLOR_TYPE_KEY, trackWallColorType);
+		bundle.putSerializable(TRACK_LINE_POSITION_TYPE_KEY, trackLinePositionType);
 		bundle.putFloat(ADDITIONAL_EXAGGERATION_KEY, trackVisualizationType == null ? 0 : additionalExaggeration);
 	}
 }
