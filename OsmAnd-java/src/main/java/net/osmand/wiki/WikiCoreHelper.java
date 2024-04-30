@@ -6,6 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.util.Algorithms;
 
@@ -15,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class WikiCoreHelper {
 
@@ -24,72 +26,99 @@ public class WikiCoreHelper {
 	private static final String WIKIDATA_API_ENDPOINT = "https://www.wikidata.org/w/api.php";
 	private static final String WIKIDATA_ACTION = "?action=wbgetclaims&property=P18&entity=";
 	private static final String WIKIMEDIA_ACTION = "?action=query&list=categorymembers&cmtitle=";
-	private static final String CM_LIMIT = "&cmlimit=500";
+	private static final String CM_LIMIT = "&cmlimit=100";
 	private static final String FORMAT_JSON = "&format=json";
 	private static final String IMAGE_BASE_URL = "https://commons.wikimedia.org/wiki/Special:FilePath/";
 	public static final String WIKIMEDIA_FILE = "File:";
 	public static final String WIKIMEDIA_CATEGORY = "Category:";
 	private static final int THUMB_SIZE = 500;
-	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/";
-	private static final String OSMAND_API_WIKIDATA_ARTICLE_ACTION = "wiki_place?article=";
-	private static final String OSMAND_API_WIKIDATA_CATEGORY_ACTION = "wiki_place?category=";
-
-	public static List<WikiImage> getWikimediaImageList(String wikiMediaTagContent, List<WikiImage> wikiImages) {
-
-		if (wikiMediaTagContent.startsWith(WIKIMEDIA_FILE)) {
-			String imageFileName = wikiMediaTagContent.replace(WIKIMEDIA_FILE, "");
-			WikiImage wikiImage = getImageData(imageFileName);
-			if (wikiImage != null) {
-				wikiImages.add(wikiImage);
-			}
-		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
-			if (USE_OSMAND_WIKI_API) {
-				String categoryName = wikiMediaTagContent.replace(WIKIMEDIA_CATEGORY, "");
-				wikiImages.addAll(getOsmandAPIWikidataImageListByCategory(categoryName));
-			} else {
-				String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + wikiMediaTagContent + CM_LIMIT + FORMAT_JSON;
-				WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class);
-				if (response != null) {
-					List<String> subCategories = new ArrayList<>();
-					for (Categorymember cm : response.query.categorymembers) {
-						String memberTitle = cm.title;
-						if (memberTitle != null) {
-							if (memberTitle.startsWith(WIKIMEDIA_CATEGORY)) {
-								subCategories.add(memberTitle);
-							} else {
-								getWikimediaImageList(memberTitle, wikiImages);
-							}
-						}
-					}
-					for (String subCategory : subCategories) {
-						getWikimediaImageList(subCategory, wikiImages);
-					}
+	public static final String OSMAND_API_ENDPOINT = "https://osmand.net/api/wiki_place?";
+	private static final int DEPT_CAT_LIMIT = 1;
+	
+	
+	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
+		List<WikiImage> wikiImages = new ArrayList<WikiImage>();
+		String wikidataId = !tags.containsKey(Amenity.WIKIDATA) ? "" : tags.get(Amenity.WIKIDATA);
+		String wikimediaCommons = tags.get(Amenity.WIKIMEDIA_COMMONS);
+		String wikiTitle = tags.get(Amenity.WIKIPEDIA);
+		String wikiCategory = "";
+		if (wikimediaCommons.startsWith(WIKIMEDIA_FILE)) {
+			addFile(wikiImages, wikimediaCommons);
+		} else if (wikimediaCommons.startsWith(WIKIMEDIA_CATEGORY)) {
+			wikiCategory = wikimediaCommons.replace(WIKIMEDIA_CATEGORY, "");
+		}
+		if(Algorithms.isEmpty(wikiTitle)) {
+			for(String tag : tags.keySet()) {
+				if (tag.startsWith(Amenity.WIKIPEDIA + ":")) {
+					wikiTitle = tag.substring((Amenity.WIKIPEDIA + ":").length()) + ":" + tags.get(tag);
 				}
 			}
-		} else {
-			LOG.error("Wrong Wikimedia category member");
 		}
+		if (USE_OSMAND_WIKI_API) {
+			// article // category
+			String url = null;
+			if(!Algorithms.isEmpty(wikidataId)) {
+				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "article="+wikidataId;
+			}
+			if (!Algorithms.isEmpty(wikiCategory)) {
+				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "category="+wikiCategory;
+			}
+			if (!Algorithms.isEmpty(wikiTitle)) {
+				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "wiki="+wikiTitle;
+			}
+			getImagesOsmAndAPIRequest(url, wikiImages);
+		} else {
+			if (!Algorithms.isEmpty(wikidataId)) {
+				getWikidataImageWikidata(wikidataId, wikiImages);
+			}
+			if (!Algorithms.isEmpty(wikiCategory)) {
+				getWikimediaImageCategory(wikiCategory, wikiImages, 0);
+			}
+		}
+
 		return wikiImages;
 	}
 
-	public static List<WikiImage> getOsmandAPIWikidataImageListByCategory(String categoryName) {
-		String url = OSMAND_API_ENDPOINT + OSMAND_API_WIKIDATA_CATEGORY_ACTION + categoryName;
-		return getImagesOsmandAPIRequest(url);
+	private static void addFile(List<WikiImage> wikiImages, String wikimediaCommons) {
+		String imageFileName = wikimediaCommons.replace(WIKIMEDIA_FILE, "");
+		WikiImage wikiImage = getImageData(imageFileName);
+			wikiImages.add(wikiImage);
 	}
 
-	public static List<WikiImage> getOsmandAPIWikidataImageList(String wikidataId) {
-		String url = OSMAND_API_ENDPOINT + OSMAND_API_WIKIDATA_ARTICLE_ACTION + wikidataId;
-		return getImagesOsmandAPIRequest(url);
+	private static List<WikiImage> getWikimediaImageCategory(String categoryName, List<WikiImage> wikiImages, int depth) {
+		String url = WIKIMEDIA_API_ENDPOINT + WIKIMEDIA_ACTION + WIKIMEDIA_CATEGORY + categoryName + CM_LIMIT
+				+ FORMAT_JSON;
+		WikimediaResponse response = sendWikipediaApiRequest(url, WikimediaResponse.class);
+		if (response != null) {
+			List<String> subCategories = new ArrayList<>();
+			for (Categorymember cm : response.query.categorymembers) {
+				String memberTitle = cm.title;
+				if (memberTitle != null) {
+					if (memberTitle.startsWith(WIKIMEDIA_CATEGORY)) {
+						subCategories.add(memberTitle);
+					} else if (memberTitle.startsWith(WIKIMEDIA_FILE)) {
+						addFile(wikiImages, memberTitle);
+					}
+				}
+			}
+			if (depth < DEPT_CAT_LIMIT) {
+				for (String subCategory : subCategories) {
+					getWikimediaImageCategory(subCategory, wikiImages, depth + 1);
+				}
+			}
+		}
+		return wikiImages;
 	}
+	
 
-	@SuppressWarnings("ConstantConditions")
-	private static List<WikiImage> getImagesOsmandAPIRequest(String url) {
-		List<WikiImage> wikiImages = new ArrayList<>();
-		OsmandAPIResponse response = sendWikipediaApiRequest(url, OsmandAPIResponse.class);
-		if (response != null && !Algorithms.isEmpty(response.images)) {
-			for (String imageUrl : response.images) {
-				if (imageUrl != null) {
-					WikiImage wikiImage = getOsmandApiImageData(imageUrl);
+	protected static List<WikiImage> getWikidataImageWikidata(String wikidataId, List<WikiImage> wikiImages) {
+		String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
+		WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
+		if (response != null && response.claims != null && response.claims.p18 != null) {
+			for (P18 p18 : response.claims.p18) {
+				String imageFileName = p18.mainsnak.datavalue.value;
+				if (imageFileName != null) {
+					WikiImage wikiImage = getImageData(imageFileName);
 					if (wikiImage != null) {
 						wikiImages.add(wikiImage);
 					}
@@ -99,22 +128,15 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
-	@SuppressWarnings("ConstantConditions")
-	public static List<WikiImage> getWikidataImageList(String wikidataId) {
-		List<WikiImage> wikiImages = new ArrayList<>();
-		if (USE_OSMAND_WIKI_API) {
-			wikiImages.addAll(getOsmandAPIWikidataImageList(wikidataId));
-		} else {
-			String url = WIKIDATA_API_ENDPOINT + WIKIDATA_ACTION + wikidataId + FORMAT_JSON;
-			WikidataResponse response = sendWikipediaApiRequest(url, WikidataResponse.class);
-			if (response != null && response.claims != null && response.claims.p18 != null) {
-				for (P18 p18 : response.claims.p18) {
-					String imageFileName = p18.mainsnak.datavalue.value;
-					if (imageFileName != null) {
-						WikiImage wikiImage = getImageData(imageFileName);
-						if (wikiImage != null) {
-							wikiImages.add(wikiImage);
-						}
+
+	private static List<WikiImage> getImagesOsmAndAPIRequest(String url, List<WikiImage> wikiImages) {
+		OsmandAPIResponse response = sendWikipediaApiRequest(url, OsmandAPIResponse.class);
+		if (response != null && !Algorithms.isEmpty(response.images)) {
+			for (String imageUrl : response.images) {
+				if (imageUrl != null) {
+					WikiImage wikiImage = parseImageDataFromFile(imageUrl);
+					if (wikiImage != null) {
+						wikiImages.add(wikiImage);
 					}
 				}
 			}
@@ -122,7 +144,7 @@ public class WikiCoreHelper {
 		return wikiImages;
 	}
 
-	public static WikiImage getOsmandApiImageData(String imageUrl) {
+	private static WikiImage parseImageDataFromFile(String imageUrl) {
 		try {
 			imageUrl = URLDecoder.decode(imageUrl, "UTF-8");
 			String imageHiResUrl = imageUrl.replace(" ", "_");
@@ -136,16 +158,13 @@ public class WikiCoreHelper {
 		return null;
 	}
 
-	public static WikiImage getImageData(String imageFileName) {
+	private static WikiImage getImageData(String imageFileName) {
 		try {
 			String imageName = URLDecoder.decode(imageFileName, "UTF-8");
 			imageFileName = imageName.replace(" ", "_");
 			imageName = imageName.substring(0, imageName.lastIndexOf("."));
-
 			String imageHiResUrl = IMAGE_BASE_URL + imageFileName;
-
 			String imageStubUrl = IMAGE_BASE_URL + imageFileName + "?width=" + THUMB_SIZE;
-
 			return new WikiImage(imageFileName, imageName, imageStubUrl, imageHiResUrl);
 
 		} catch (UnsupportedEncodingException e) {

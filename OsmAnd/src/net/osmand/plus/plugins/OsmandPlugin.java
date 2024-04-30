@@ -244,7 +244,7 @@ public abstract class OsmandPlugin {
 	}
 
 
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	protected void  collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
 	                                            @NonNull Map<String, String> params,
 	                                            @Nullable Map<String, String> additionalParams,
 	                                            @Nullable GetImageCardsListener listener) {
