@@ -38,14 +38,17 @@ public class WikiCoreHelper {
 	
 	public static List<WikiImage> getWikiImageList(Map<String, String> tags) {
 		List<WikiImage> wikiImages = new ArrayList<WikiImage>();
-		String wikidataId = !tags.containsKey(Amenity.WIKIDATA) ? "" : tags.get(Amenity.WIKIDATA);
+		String wikidataId = tags.getOrDefault(Amenity.WIKIDATA, "");
 		String wikimediaCommons = tags.get(Amenity.WIKIMEDIA_COMMONS);
 		String wikiTitle = tags.get(Amenity.WIKIPEDIA);
 		String wikiCategory = "";
-		if (wikimediaCommons.startsWith(WIKIMEDIA_FILE)) {
-			addFile(wikiImages, wikimediaCommons);
-		} else if (wikimediaCommons.startsWith(WIKIMEDIA_CATEGORY)) {
-			wikiCategory = wikimediaCommons.replace(WIKIMEDIA_CATEGORY, "");
+
+		if (!Algorithms.isEmpty(wikimediaCommons)) {
+			if (wikimediaCommons.startsWith(WIKIMEDIA_FILE)) {
+				addFile(wikiImages, wikimediaCommons);
+			} else if (wikimediaCommons.startsWith(WIKIMEDIA_CATEGORY)) {
+				wikiCategory = wikimediaCommons.replace(WIKIMEDIA_CATEGORY, "");
+			}
 		}
 		if (Algorithms.isEmpty(wikiTitle)) {
 			for (String tag : tags.keySet()) {
@@ -57,14 +60,14 @@ public class WikiCoreHelper {
 		if (USE_OSMAND_WIKI_API) {
 			// article // category
 			String url = null;
-			if(!Algorithms.isEmpty(wikidataId)) {
-				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "article="+wikidataId;
+			if (!Algorithms.isEmpty(wikidataId)) {
+				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "article=" + wikidataId;
 			}
 			if (!Algorithms.isEmpty(wikiCategory)) {
-				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "category="+wikiCategory;
+				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "category=" + wikiCategory;
 			}
 			if (!Algorithms.isEmpty(wikiTitle)) {
-				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "wiki="+wikiTitle;
+				url = (url == null ? OSMAND_API_ENDPOINT : "&") + "wiki=" + wikiTitle;
 			}
 			getImagesOsmAndAPIRequest(url, wikiImages);
 		} else {
@@ -82,7 +85,7 @@ public class WikiCoreHelper {
 	private static void addFile(List<WikiImage> wikiImages, String wikimediaCommons) {
 		String imageFileName = wikimediaCommons.replace(WIKIMEDIA_FILE, "");
 		WikiImage wikiImage = getImageData(imageFileName);
-			wikiImages.add(wikiImage);
+		wikiImages.add(wikiImage);
 	}
 
 	private static List<WikiImage> getWikimediaImageCategory(String categoryName, List<WikiImage> wikiImages, int depth) {
