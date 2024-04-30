@@ -5715,4 +5715,12 @@
     <string name="title_3d_track">Visualización en 3D</string>
     <string name="explore_3d_track_description">¡Explora la pista en un 3D interactivo! Visualiza la altura, la velocidad y mucho más directamente en el mapa.</string>
     <string name="fixed_height">Altura fija</string>
+    <string name="allow_display_on_top">Permitir visualización en la parte superior</string>
+    <string name="gpx_approximation_geo_cpp">Basado en geometría (C++, rápido)</string>
+    <string name="allow_display_on_top_description">Permitir mostrar textos de mapas uno encima del otro</string>
+    <string name="show_debug_info">Mostrar información de depuración</string>
+    <string name="show_debug_info_description">Mostrar información gráfica sobre la ubicación de cada texto del mapa</string>
+    <string name="map_text">Textos de los mapas</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evite los adoquines</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evite los adoquines</string>
 </resources>
