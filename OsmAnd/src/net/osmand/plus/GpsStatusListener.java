@@ -20,6 +20,7 @@ public class GpsStatusListener extends GnssStatus.Callback {
 
 	@Override
 	public void onStopped() {
+		gpsInfo.reset();
 	}
 
 	@Override

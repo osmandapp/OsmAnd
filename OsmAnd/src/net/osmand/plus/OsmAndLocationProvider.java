@@ -226,12 +226,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}
 	}
 
-	private void resetGPSInfo() {
-		gpsInfo.fixed = false;
-		gpsInfo.foundSatellites = 0;
-		gpsInfo.usedSatellites = 0;
-	}
-
 	@NonNull
 	public GPSInfo getGPSInfo() {
 		return gpsInfo;
@@ -502,7 +496,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void stopLocationRequests() {
-		resetGPSInfo();
+		gpsInfo.reset();
 		LocationManager service = (LocationManager) app.getSystemService(LOCATION_SERVICE);
 		if (gpsStatusListener != null) {
 			service.unregisterGnssStatusCallback(gpsStatusListener);
@@ -662,10 +656,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return;
 		}
 		if (location == null) {
-			resetGPSInfo();
+			gpsInfo.reset();
 		}
 		if (location != null) {
-			// // use because there is a bug on some devices with location.getTime()
+			// use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
 			notifyGpsLocationRecovered();
@@ -809,6 +803,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		public int foundSatellites;
 		public int usedSatellites;
 		public boolean fixed;
+
+		public void reset() {
+			fixed = false;
+			foundSatellites = 0;
+			usedSatellites = 0;
+		}
 	}
 
 	public boolean checkGPSEnabled(Context context) {

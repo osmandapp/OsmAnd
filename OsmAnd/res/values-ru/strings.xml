@@ -46,7 +46,7 @@
     <string name="search_favorites">Поиск в избранных</string>
     <string name="hillshade_menu_download_descr">Загрузите карту «Наложение затенения рельефа» для отображения вертикального затенения (отмывки) рельефа.</string>
     <string name="hillshade_purchase_header">Установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
-    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
+    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» этого региона.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Приобретите и установите плагин «Ландшафт» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
@@ -3673,7 +3673,7 @@
     <string name="use_volume_buttons_as_zoom_descr">Изменение масштаба карты кнопками громкости.</string>
     <string name="use_volume_buttons_as_zoom">Масштабирование кнопками громкости</string>
     <string name="lenght_limit_description">Укажите длину автомобиля, для длинных транспортных средств могут применяться ограничения на маршруте.</string>
-    <string name="quick_action_remove_next_destination">Удалить ближайший пункт</string>
+    <string name="quick_action_remove_next_destination">Удалить следующий пункт</string>
     <string name="please_provide_point_name_error">Задайте название точки</string>
     <string name="quick_action_remove_next_destination_descr">Следующая точка маршрута будет удалена. Если это конечный пункт, навигация завершится.</string>
     <string name="plugin_wikipedia_description">Информация о достопримечательностях из Википедии, карманного автономного путеводителя со статьями о местах и направлениях.</string>
@@ -4072,7 +4072,7 @@
     <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
     <string name="srtm_download_list_help_message">OsmAnd предоставляет данные изолиний в метрах и футах. Для изменения формата потребуется повторно загрузить файл.</string>
-    <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от угла подъёма.</string>
+    <string name="route_line_use_gradient_coloring">Линия маршрута окрашена в зависимости от величины уклона.</string>
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
     <string name="language_description">Выберите язык и тип голосовых инструкций.</string>
@@ -4483,8 +4483,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показать теги note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Значки на мелком масштабе</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематическое отображение значков на мелком масштабе</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Не скрывать водные туннели</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Водные туннели</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Отображение водных туннелей на меньших уровнях масштабирования</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Повысить видимость водных туннелей</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теги fixme</string>
     <string name="shared_string_used">Используется</string>
     <string name="files_with_route_restrictions">Файлы с ограничениями маршрута</string>
@@ -5626,7 +5626,7 @@
     <string name="shared_string_copyright">Авторское право</string>
     <string name="key_event_action_open_wunderlinq_datagrid">Открыть WunderLINQ Datagrid</string>
     <string name="shared_string_not_checked">Не проверено</string>
-    <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению планирования для текущего полета.</string>
+    <string name="map_widget_group_glide_desc">Виджеты показывают соотношение планирования к целевому значению или среднему значению для текущего полета.</string>
     <string name="special_routing_cpp">Специальный тип маршрутизации</string>
     <string name="auto_zoom_discrete">Дискретное</string>
     <string name="auto_zoom">Автомасштабирование</string>
@@ -5656,7 +5656,7 @@
 \n
 \n • Добавлена поддержка дополнительных тегов GPX
 \n
-\n • Настройте «Расстояние во время навигации»: выбирайте точные или округленные числа
+\n • Настройте «Расстояние во время навигации»: выберите точные или округленные числа
 \n
 \n • Единый пользовательский интерфейс для выбора трека
 \n
@@ -5677,4 +5677,45 @@
     <string name="fix_north_up_descr">Не поворачивать карту жестами при ориентации карты «Север сверху»</string>
     <string name="unchanged_parameter_summary">Каждый трек сохраняет свои собственные параметры.</string>
     <string name="change_default_appearance_confirmation">Изменить внешний вид %1$s по умолчанию?</string>
+    <string name="apply_only_to_new">Применять только к новым</string>
+    <string name="change_default_tracks_appearance_confirmation">Применить изменения к существующим трекам в папке или только к новым?</string>
+    <string name="shared_string_changes">Изменения</string>
+    <string name="use_3d_track_visualization">3D-визуализация</string>
+    <string name="shared_string_scale">Масштаб</string>
+    <string name="relief_3d_download_description">Для просмотра рельефа местности необходимы дополнительные карты.</string>
+    <string name="vertical_exaggeration_description">Изменяя значение масштаба, можно подчеркнуть 3D-рельеф.</string>
+    <string name="vertical_exaggeration">Вертикальное увеличение</string>
+    <string name="gpx_approximation_geo_java">На основе геометрии (Java, быстрая)</string>
+    <string name="gpx_approximation_cpp">На основе маршрутизации (C++)</string>
+    <string name="gpx_approximation_java">На основе маршрутизации (Java)</string>
+    <string name="release_4_8">• To be prepared for 4.8</string>
+    <string name="any_connected">Любой подключенный</string>
+    <string name="any_connected_with_device">Любой подключенный: %s</string>
+    <string name="use_nearby_roads">Использовать ближайшие дороги</string>
+    <string name="use_terrain_maps">Использовать карты рельефа для получения данных о высоте. Геометрия трека останется неизменной.</string>
+    <string name="use_nearby_roads_summary">"Для данных о высоте используется поиск близлежащих дорог локальной карты.  Возможна корректировка геометрии трека."</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd может получить данные о высоте из данных близлежащих дорог или карт рельефа.</string>
+    <string name="use_terrain_maps_summary">Для данных о высоте используются карты рельефа. Геометрия трека останется неизменной.</string>
+    <string name="delete_actions_button">Удалить кнопку</string>
+    <string name="delete_actions_button_confirmation">Вы уверены, что хотите удалить «%1$s» со всеми добавленными действиями?</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="maps_that_also_be_used">Карты, которые также можно использовать: %1$s</string>
+    <string name="getting_list_of_required_maps">Получение списка необходимых карт…</string>
+    <string name="route_line_use_coloring_altitude">Линия маршрута окрашена в зависимости от высоты над уровнем моря.</string>
+    <string name="required_maps_calculate_online_summary">Список недостающих карт составлен на основе прямолинейного маршрута. Чтобы получить точный список карт, OsmAnd может предварительно рассчитать ваш маршрут онлайн.</string>
+    <string name="required_maps">Требуемые карты</string>
+    <string name="missing_maps_description">Некоторые локальные карты, необходимые для этого маршрута, отсутствуют или устарели. Пожалуйста, загрузите или обновите эти карты.</string>
+    <string name="missing_maps_header">Отсутствующие или устаревшие карты</string>
+    <string name="route_line_use_coloring_speed">Линия маршрута окрашена в зависимости от скорости движения.</string>
+    <string name="visualized_by">Визуализация</string>
+    <string name="wall_color">Цвет стены</string>
+    <string name="track_line">Линия трека</string>
+    <string name="fixed_height">Фиксированная высота</string>
+    <string name="upward_gradient">Восходящий градиент</string>
+    <string name="top">Вверху</string>
+    <string name="bottom">Внизу</string>
+    <string name="top_and_bottom">Вверху и внизу</string>
+    <string name="downward_gradient">Нисходящий градиент</string>
+    <string name="title_3d_track">3D-трек</string>
+    <string name="explore_3d_track_description">Исследуйте трек в интерактивном 3D! Визуализируйте высоту, скорость и многое другое прямо на карте.</string>
 </resources>

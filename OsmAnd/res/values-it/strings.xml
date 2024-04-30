@@ -5641,6 +5641,8 @@
 \n
 \n• Aggiunta dei filtri in base ai dati dei sensori per le tracce
 \n
+\n• Migliorata la personalizzazione dell\'aspetto di gruppi di tracce
+\n
 \n• Aggiunto il supporto per tag GPX aggiuntivi
 \n
 \n• Personalizza la \"Distanza durante la navigazione\": scegli tra numeri precisi o arrotondati per eccesso
@@ -5662,4 +5664,36 @@
     <string name="map_widget_map_scale">Scala della mappa</string>
     <string name="unchanged_parameter_summary">Ogni traccia manterrà i propri parametri.</string>
     <string name="shared_string_unchanged">Invariata</string>
+    <string name="use_3d_track_visualization">Visualizzazione 3D</string>
+    <string name="fix_north_up">Abilita il Nord fisso in alto</string>
+    <string name="change_default_appearance_confirmation">Cambiare l\'aspetto predefinito di %1$s?</string>
+    <string name="fix_north_up_descr">Non ruotare la mappa con i gesti nell\'orientamento della mappa con Nord in alto</string>
+    <string name="apply_only_to_new">Applicare solo al nuovo</string>
+    <string name="change_default_tracks_appearance_confirmation">Applicare le modifiche alle tracce esistenti nella cartella o solo a quelle nuove?</string>
+    <string name="shared_string_changes">Cambiamenti</string>
+    <string name="shared_string_scale">Scala</string>
+    <string name="vertical_exaggeration">Esagerazione verticale</string>
+    <string name="vertical_exaggeration_description">Cambiando il valore della scala puoi enfatizzare i rilievi 3D.</string>
+    <string name="gpx_approximation_cpp">Routing-based (C++)</string>
+    <string name="delete_actions_button">Pulsante elimina</string>
+    <string name="use_terrain_maps">Usa le mappe di Elevazione</string>
+    <string name="use_terrain_maps_summary">Utilizza mappe del terreno per i dati di altimetria. Le geometrie delle tracce non verranno modificate.</string>
+    <string name="use_nearby_roads">Usa strade vicine</string>
+    <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
+    <string name="auto_zoom_smooth">Liscio</string>
+    <string name="gpx_approximation_java">Routing-based (Java)</string>
+    <string name="release_4_8">• Predisposto per la 4.8</string>
+    <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" con tutte le azioni aggiunte?</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd può recuperare dati altimetrici da strade nelle vicinanze o dalle mappe altimetriche.</string>
+    <string name="shared_string_osm_id">ID OSM</string>
+    <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il suolo sulla mappa.</string>
+    <string name="use_nearby_roads_summary">Utilizza mappe offline per individuare strade &amp; dati altimetrici. Potrebbe correggere la geometria della traccia.</string>
+    <string name="maps_that_also_be_used">Mappe già utilizzate: %1$s</string>
+    <string name="required_maps_calculate_online_summary">La lista delle mappe mancanti è basata sul base del percorso in linea retta. Per avere una lista accurata delle mappe, OsmAnd può pre-calcolare online il tuo percorso.</string>
+    <string name="missing_maps_description">Alcune mappe offline non aggiornate o mancanti sono richieste. Pregasi di aggiornarle o scaricarle.</string>
+    <string name="getting_list_of_required_maps">Recuperando la lista delle mappe richieste …</string>
+    <string name="required_maps">Mappe richieste</string>
+    <string name="route_line_use_coloring_speed">La linea del percorso è colorata in base alla velocità dello spostamento.</string>
+    <string name="route_line_use_coloring_altitude">La linea del percorso è colorata i base all\'altitudine.</string>
+    <string name="missing_maps_header">Mappe mancanti o da aggiornare</string>
 </resources>

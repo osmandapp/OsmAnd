@@ -8,7 +8,7 @@
     <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, badenes, túneles), radares de velocidad, e información de carriles.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
-    <string name="map_widget_show_ruler">Escala</string>
+    <string name="map_widget_show_ruler">Regla</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>
     <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
@@ -633,7 +633,7 @@
     <string name="validate_gpx_upload_name_pwd">Indica el nombre de usuario y contraseña de OSM para subir archivos GPX.</string>
     <string name="default_buttons_support">Soporte</string>
     <string name="support_new_features">Soporte de nuevas funciones</string>
-    <string name="show_ruler_level">Mostrar escala</string>
+    <string name="show_ruler_level">Mostrar regla</string>
     <string name="info_button">Información</string>
     <string name="back_to_location">Volver a la ubicación</string>
     <string name="shared_string_help">Ayuda</string>
@@ -1238,7 +1238,7 @@
     <string name="rendering_attr_moreDetailed_name">Más detalles</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalles</string>
     <string name="rendering_attr_hideAccess_name">Restricciones de acceso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar las restricciones de acceso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restricciones de acceso y peajes</string>
     <string name="rendering_attr_showSurfaceGrade_name">Calidad de los caminos</string>
     <string name="rendering_attr_showSurfaces_name">Superficie de los caminos</string>
     <string name="rendering_attr_showCycleRoutes_name">Rutas ciclistas</string>
@@ -4472,7 +4472,7 @@
     <string name="save_track_to_gpx_descrp">Inicia la grabación de la traza automáticamente mientras navegas y al finalizar, la traza se guardará automáticamente.</string>
     <string name="gpx_no_routes_descr">Usa la herramienta «%1$s» para añadir la ruta al archivo.</string>
     <string name="rendering_value_omit_name">Omitir</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumentar la visibilidad de los túneles fluviales</string>
     <string name="rendering_attr_seabedDetail_description">Información de texto adicional sobre la calificación de la superficie del fondo marino, los tipos de superficie combinados, la categoría y el taxón de la maleza o la hierba marina</string>
     <string name="rendering_value_category_name">Categoría</string>
     <string name="rendering_value_all_name">Todo</string>
@@ -4493,7 +4493,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etiquetas «note» (nota)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zoom bajo</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de los iconos con zooms bajos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar la visibilidad de los túneles fluviales</string>
     <string name="quick_action_add_route_descr">Un botón que inicia una ruta desde el centro de la pantalla.</string>
     <string name="select_suggested_points">Marcar los puntos sugeridos</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
@@ -5143,7 +5143,7 @@
     <string name="ant_plus_bluetooth_off">Bluetooth desactivado</string>
     <string name="ant_plus_bluetooth_off_description">Active la búsqueda y el emparejamiento de sensores Bluetooth.</string>
     <string name="ant_plus_searching_text">Buscando sensores</string>
-    <string name="ant_plus_searching_text_description">Por favor, mantén el dispositivo cerca del sensor. Debe activar el sensor para que OsmAnd pueda encontrarlo.</string>
+    <string name="ant_plus_searching_text_description">Por favor, acerque el dispositivo al sensor. Debe activar el sensor para que OsmAnd pueda encontrarlo.</string>
     <string name="ant_plus_help_title">No se que tipo de sensor tengo</string>
     <string name="ant_plus_searching">Buscando</string>
     <string name="ant_plus_pair_new_sensor">Emparejar el nuevo sensor</string>
@@ -5614,7 +5614,7 @@
     <string name="battery_optimization_desc">La optimización de la batería en Android puede causar lagunas e imprecisiones en las pistas grabadas.
 \n
 \nSi experimentas alguno de estos problemas, puedes probar a cambiar el uso de la batería a \'Sin restricciones\'</string>
-    <string name="sort_subfolders">Clasificar las subcarpetas</string>
+    <string name="sort_subfolders">Ordenar subcarpetas</string>
     <string name="sorted_sufolders_toast">Las subcarpetas de \"%1$s\" están ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de ruta especial</string>
     <string name="add_button">Añadir un botón</string>
@@ -5645,19 +5645,21 @@
     <string name="routing_type_a_star_classic">A* clásico</string>
     <string name="release_4_7">• Nuevo widget \"Velocímetro\" compatible con Android Auto
 \n
-\n • Configuración de la pantalla del mapa añadiendo varios botones de \"Acción rápida\".
+\n • Configure la pantalla del mapa mediante la adición de varios botones de \"Acción Rápida\"
 \n
-\n • Mejorada la lectura de los datos en los gráficos
+\n • Mejora de la legibilidad de los datos en los gráficos
 \n
-\n • Añadidos filtros por datos de sensor para los tracks
+\n • Filtros añadidos por datos del sensor para pistas
 \n
-\n • Añadido soporte para etiquetas GPX adicionales
+\n • Mejora de la personalización de la apariencia para el grupo de pistas
 \n
-\n • Personalización de \"Distancia durante la navegación\": elige entre números precisos o redondeados
+\n • Se ha añadido soporte para etiquetas GPX adicionales
 \n
-\n • Interfaz de usuario unificada para la selección de tracks
+\n • Personalizar \"Distancia durante la navegación\": elegir entre números precisos o redondear
 \n
-\n • El inicio de sesión en OpenStreetMap ha cambiado a OAuth 2.0
+\n • UI unificada para la selección de pistas
+\n
+\n • Acceso OpenStreetMap cambiado a OAuth 2.0
 \n
 \n</string>
     <string name="distance_during_navigation">Distancia en la navegación</string>
@@ -5676,4 +5678,41 @@
     <string name="gpx_approximation_java">Basado en enrutamiento (Java)</string>
     <string name="fix_north_up">Activar el norte fijo hacia arriba</string>
     <string name="fix_north_up_descr">No rotar el mapa con gestos en la orientación Norte Arriba</string>
+    <string name="change_default_appearance_confirmation">¿Cambiar la apariencia predeterminada de %1$s ?</string>
+    <string name="use_3d_track_visualization">Visualizar en 3D</string>
+    <string name="shared_string_changes">Cambios</string>
+    <string name="apply_only_to_new">Aplicar solo a nuevos</string>
+    <string name="release_4_8">• Preparado para 4.8</string>
+    <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las pistas existentes en la carpeta o solo a las nuevas?</string>
+    <string name="shared_string_scale">Escala</string>
+    <string name="vertical_exaggeration_description">Cambiando el valor de la escala, puedes acentuar el relieve 3D.</string>
+    <string name="vertical_exaggeration">Ampliación vertical</string>
+    <string name="relief_3d_download_description">Se necesitan mapas adicionales para ver el terreno en el mapa.</string>
+    <string name="use_terrain_maps_summary">Utiliza mapas de terreno para datos de elevación. La geometría de la pista permanece sin cambios.</string>
+    <string name="use_terrain_maps">Usar mapas del terreno</string>
+    <string name="use_nearby_roads">Utilice caminos cercanos</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd puede recuperar datos de elevación de carreteras cercanas o mapas del terreno.</string>
+    <string name="use_nearby_roads_summary">Utiliza un mapa sin conexión para encontrar carreteras cercanas y datos de elevación. Puede ajustar la geometría de la pista.</string>
+    <string name="delete_actions_button_confirmation">¿Estas seguro que quieres borrarlo \"%1$s\" con todas las acciones agregadas?</string>
+    <string name="delete_actions_button">Botón eliminar</string>
+    <string name="shared_string_osm_id">ID de OSM</string>
+    <string name="getting_list_of_required_maps">Obteniendo una lista de mapas necesarios…</string>
+    <string name="required_maps_calculate_online_summary">La lista de mapas que faltan se basa en la ruta en línea recta. Para obtener una lista precisa de mapas, OsmAnd puede precalcular su ruta en línea.</string>
+    <string name="maps_that_also_be_used">Mapas que también se utilizarán: %1$s</string>
+    <string name="required_maps">Mapas necesarios</string>
+    <string name="missing_maps_description">Algunos mapas offline necesarios para esta ruta no están disponibles o no están actualizados. Por favor, descargue o actualice estos mapas.</string>
+    <string name="missing_maps_header">Mapas que faltan o anticuados</string>
+    <string name="route_line_use_coloring_speed">La línea de ruta está coloreada según la velocidad de movimiento.</string>
+    <string name="route_line_use_coloring_altitude">La línea de ruta está coloreada según la altitud de elevación.</string>
+    <string name="visualized_by">Visualizado por</string>
+    <string name="wall_color">Color de las paredes</string>
+    <string name="track_line">Línea de la vía</string>
+    <string name="downward_gradient">Pendiente descendente</string>
+    <string name="upward_gradient">Pendiente ascendente</string>
+    <string name="top">Arriba</string>
+    <string name="bottom">Abajo</string>
+    <string name="top_and_bottom">Arriba y abajo</string>
+    <string name="title_3d_track">Visualización en 3D</string>
+    <string name="explore_3d_track_description">¡Explora la pista en un 3D interactivo! Visualiza la altura, la velocidad y mucho más directamente en el mapa.</string>
+    <string name="fixed_height">Altura fija</string>
 </resources>

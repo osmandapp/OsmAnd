@@ -4868,4 +4868,5 @@
     <string name="poi_indoor_seating_yes">Седење унутар: да</string>
     <string name="poi_indoor_seating_bar_table">Седење унутар: барски сто</string>
     <string name="poi_indoor_seating_no">Без седења унутар</string>
+    <string name="poi_property_management">Канцеларија за управљање имовином</string>
 </resources>
