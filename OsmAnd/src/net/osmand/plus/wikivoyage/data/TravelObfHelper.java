@@ -133,6 +133,15 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	public synchronized PopularArticles loadPopularArticles() {
 		String lang = app.getLanguage();
+		PopularArticles popularArticles = loadPopularArticlesForLang(lang);
+		if (popularArticles.isEmpty()) {
+			popularArticles = loadPopularArticlesForLang("en");
+		}
+		this.popularArticles = popularArticles;
+		return popularArticles;
+	}
+
+	private synchronized PopularArticles loadPopularArticlesForLang(String lang) {
 		PopularArticles popularArticles = new PopularArticles(this.popularArticles);
 		if (isAnyTravelBookPresent()) {
 			boolean articlesLimitReached = false;
@@ -183,7 +192,6 @@ public class TravelObfHelper implements TravelHelper {
 				}
 			} while (!articlesLimitReached && searchRadius < MAX_SEARCH_RADIUS);
 		}
-		this.popularArticles = popularArticles;
 		return popularArticles;
 	}
 
@@ -346,9 +354,18 @@ public class TravelObfHelper implements TravelHelper {
 	@NonNull
 	@Override
 	public synchronized List<WikivoyageSearchResult> search(@NonNull String searchQuery) {
+		String appLang = app.getLanguage();
+		List<WikivoyageSearchResult> res = searchWithLang(searchQuery, appLang);
+		if (Algorithms.isEmpty(res)) {
+			res = searchWithLang(searchQuery, "en");
+		}
+		return res;
+	}
+
+	@NonNull
+	private synchronized List<WikivoyageSearchResult> searchWithLang(@NonNull String searchQuery, @NonNull String appLang) {
 		List<WikivoyageSearchResult> res = new ArrayList<>();
 		Map<File, List<Amenity>> amenityMap = new HashMap<>();
-		String appLang = app.getLanguage();
 		SearchUICore searchUICore = app.getSearchUICore().getCore();
 		SearchSettings settings = searchUICore.getSearchSettings();
 		SearchPhrase phrase = searchUICore.getPhrase().generateNewPhrase(searchQuery, settings);
