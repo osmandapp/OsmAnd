@@ -5713,4 +5713,11 @@
     <string name="title_3d_track">3D nyomvonal</string>
     <string name="explore_3d_track_description">Fedezze fel a nyomvonalat interaktív 3D-ben! Lássa közvetlenül a térképen a magasságot, sebességet és egyebeket.</string>
     <string name="gpx_approximation_geo_cpp">Geometria alapú (C++, gyors)</string>
+    <string name="allow_display_on_top_description">A térképszövegek egymás feletti megjelenítésének engedélyezése</string>
+    <string name="allow_display_on_top">Megjelenítés felül engedélyezése</string>
+    <string name="show_debug_info">Hibakeresési információk mutatása</string>
+    <string name="show_debug_info_description">Grafikus információk megjelenítése az egyes térképszövegek elhelyezéséről</string>
+    <string name="map_text">Térképszövegek</string>
+    <string name="routing_attr_avoid_cobblestone_name">Macskakő elkerülése</string>
+    <string name="routing_attr_avoid_cobblestone_description">Macskakő elkerülése</string>
 </resources>
