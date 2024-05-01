@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
@@ -31,7 +32,7 @@ public class GpxSegmentsApproximation {
 	// private List<Integer> DEBUG_IDS = Arrays.asList(499257893, 126338247, 237816930); // good, wrong, turn
 
 	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
-	                                                    List<GpxPoint> gpxPoints) throws IOException {
+	                                                  List<GpxPoint> gpxPoints) throws IOException {
 		long timeToCalculate = System.nanoTime();
 
 		initGpxPointsXY31(gpxPoints);
@@ -184,5 +185,76 @@ public class GpxSegmentsApproximation {
 			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
 			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
 		}
+	}
+
+	public static void updateFinalPointsWithExternalTimestamps(List<GpxPoint> finalPoints,
+	                                                           List<WptPt> sourcePoints) {
+		if (!validateExternalTimestamps(sourcePoints)) {
+			System.out.printf("Error: updateGpxPointsByExternalTimestamps() got invalid sourcePoints");
+			return;
+		}
+		for (GpxPoint gp : finalPoints) {
+			for (RouteSegmentResult seg : gp.routeToTarget) {
+				seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(seg, sourcePoints));
+			}
+			RouteResultPreparation.recalculateTimeDistance(gp.routeToTarget);
+		}
+	}
+
+	private static float calcSegmentSpeedByExternalTimestamps(RouteSegmentResult seg,
+	                                                          List<WptPt> waypoints) {
+		float speed = seg.getSegmentSpeed();
+
+		int sx = seg.getStartPointX(), sy = seg.getStartPointY();
+		int ex = seg.getEndPointX(), ey = seg.getEndPointY();
+		double minDistStart = Double.POSITIVE_INFINITY;
+		double minDistEnd = Double.POSITIVE_INFINITY;
+		int indexStart = -1, indexEnd = -1;
+
+		for (int i = 0; i < waypoints.size(); i++) {
+			int wx = MapUtils.get31TileNumberX(waypoints.get(i).getLongitude());
+			int wy = MapUtils.get31TileNumberY(waypoints.get(i).getLatitude());
+			double distStart = MapUtils.squareRootDist31(sx, sy, wx, wy);
+			double distEnd = MapUtils.squareRootDist31(ex, ey, wx, wy);
+			if (distStart < minDistStart) {
+				minDistStart = distStart;
+				indexStart = i;
+			}
+			if (distEnd < minDistEnd) {
+				minDistEnd = distEnd;
+				indexEnd = i;
+			}
+		}
+
+		if (indexStart != -1 && indexEnd != -1 && indexStart < indexEnd) {
+			long time = waypoints.get(indexEnd).time - waypoints.get(indexStart).time;
+			if (time > 0) {
+				double distance = 0;
+				for (int i = indexStart; i < indexEnd; i++) {
+					distance += MapUtils.getDistance(
+							waypoints.get(i).getLatitude(), waypoints.get(i).getLongitude(),
+							waypoints.get(i + 1).getLatitude(), waypoints.get(i + 1).getLongitude());
+				}
+				if (distance > 0) {
+					speed = (float) distance / ((float) time / 1000); // update based on external timestamps
+				}
+			}
+		}
+
+		return speed;
+	}
+
+	private static boolean validateExternalTimestamps(List<WptPt> waypoints) {
+		if (waypoints == null || waypoints.isEmpty()) {
+			return false;
+		}
+		long last = 0;
+		for (WptPt wpt : waypoints) {
+			if (wpt.time == 0 || wpt.time < last) {
+				return false;
+			}
+			last = wpt.time;
+		}
+		return true;
 	}
 }
