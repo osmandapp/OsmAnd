@@ -978,7 +978,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			updateFinalPointsWithExternalTimestamps(gpxApproximation.finalPoints, originalPoints);
 		}
 
-		List<WptPt> result = setPointsOriginal(gpxApproximation, originalPoints, mode, false);
+		List<WptPt> result = setPointsOriginal(gpxApproximation, originalPoints, mode);
 		calculatedTimeSpeed = useExternalTimestamps;
 
 		return result;
@@ -1054,27 +1054,17 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return true;
 	}
 
-	private List<WptPt> setPointsOriginal(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
-		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
+	private List<WptPt> setPointsOriginal(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
+										  ApplicationMode mode) {
+		if (gpxApproximation == null ||
+				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return null;
 		}
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		WptPt firstOriginalPoint = originalPoints.get(0);
 		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
-		int originalPointIndex = -1;
-		long lastOriginalPointTime = 0;
-		double dist = 0;
-		WptPt originalPoint = null;
-		List<RouteSegmentResult> pendingSegments = new ArrayList<>();
-		boolean modifySegments = useExternalTimestamps && firstOriginalPoint.time > 0 && lastOriginalPoint.time > 0;
-		if (modifySegments) {
-			originalPointIndex = 1;
-			lastOriginalPointTime = firstOriginalPoint.time;
-			originalPoint = originalPoints.get(originalPointIndex);
-		}
 		List<WptPt> routePoints = new ArrayList<>();
 		List<RouteSegmentResult> allSegments = new ArrayList<>();
-		WptPt addedPoint = null;
 		for (int i = 0; i < gpxPoints.size(); i++) {
 			GpxPoint gp1 = gpxPoints.get(i);
 			boolean lastGpxPoint = MeasurementEditingContextUtils.isLastGpxPoint(gpxPoints, i);
@@ -1086,88 +1076,11 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 					segments.add(seg);
 				}
 			}
-			List<RouteSegmentResult> modifiedSegments = new ArrayList<>();
 			boolean duplicatePoint = needDuplicatePoint(gpxPoints, i);
 			for (int k = 0; k < segments.size(); k++) {
 				RouteSegmentResult seg = segments.get(k);
 				boolean includeEndPoint = (duplicatePoint || lastGpxPoint) && k == segments.size() - 1;
-				if (!modifySegments) {
-					MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
-				} else {
-					int ind = seg.getStartPointIndex();
-					boolean plus = seg.isForwardDirection();
-					float[] heightArray = seg.getObject().calculateHeightArray();
-					boolean segmentAdded = false;
-					while (ind != seg.getEndPointIndex()) {
-						WptPt prevAddedPoint = addedPoint;
-						addedPoint = MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
-						if (prevAddedPoint != null) {
-							dist += MapUtils.getDistance(prevAddedPoint.lat, prevAddedPoint.lon, addedPoint.lat, addedPoint.lon);
-						}
-						ind = plus ? ind + 1 : ind - 1;
-						if (originalPoint != null && MapUtils.getDistance(originalPoint.lat, originalPoint.lon, addedPoint.lat, addedPoint.lon) < 20) {
-							if (ind != seg.getEndPointIndex()) {
-							/* Could be used for more precise estimation
-							RouteSegmentResult newSeg = new RouteSegmentResult(seg.getObject(), seg.getStartPointIndex(), ind);
-							modifiedSegments.add(newSeg);
-							pendingSegments.add(newSeg);
-							seg = new RouteSegmentResult(seg.getObject(), ind, seg.getEndPointIndex());
-							*/
-							} else {
-								modifiedSegments.add(seg);
-								pendingSegments.add(seg);
-								segmentAdded = true;
-							}
-							long originalPointTime = originalPoint.time;
-							if (originalPointIndex + 1 < originalPoints.size()) {
-								originalPoint = originalPoints.get(++originalPointIndex);
-							}
-							if (originalPointTime > 0 && originalPointTime > lastOriginalPointTime
-									&& originalPoint != lastOriginalPoint && originalPoint.time > originalPointTime) {
-								double speed = dist / ((originalPointTime - lastOriginalPointTime) / 1000.0);
-								if (speed > 0 && !pendingSegments.isEmpty()) {
-									for (RouteSegmentResult segment : pendingSegments) {
-										segment.setSegmentSpeed((float) speed);
-									}
-									dist = 0;
-									pendingSegments.clear();
-									lastOriginalPointTime = originalPointTime;
-								}
-							}
-						}
-					}
-					if (!segmentAdded) {
-						modifiedSegments.add(seg);
-						pendingSegments.add(seg);
-					}
-					if (lastGpxPoint && k == segments.size() - 1) {
-						WptPt prevAddedPoint = addedPoint;
-						addedPoint = MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
-						if (prevAddedPoint != null) {
-							dist += MapUtils.getDistance(prevAddedPoint.lat, prevAddedPoint.lon, addedPoint.lat, addedPoint.lon);
-						}
-						if (originalPoint != null) {
-							long originalPointTime = lastOriginalPoint.time;
-							if (originalPointTime > 0 && originalPointTime > lastOriginalPointTime) {
-								double speed = dist / ((originalPointTime - lastOriginalPointTime) / 1000.0);
-								if (speed > 0) {
-									for (RouteSegmentResult segment : pendingSegments) {
-										segment.setSegmentSpeed((float) speed);
-									}
-									dist = 0;
-									pendingSegments.clear();
-									lastOriginalPointTime = originalPointTime;
-								}
-							}
-						}
-					}
-					if (duplicatePoint && k == segments.size() - 1) {
-						MeasurementEditingContextUtils.addPointToArray(points, seg, ind, heightArray);
-					}
-				}
-			}
-			if (modifySegments) {
-				segments = modifiedSegments;
+				MeasurementEditingContextUtils.fillPointsArray(points, seg, includeEndPoint);
 			}
 			allSegments.addAll(segments);
 
@@ -1194,21 +1107,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			if (lastGpxPoint) {
 				break;
 			}
-		}
-
-		if (modifySegments) {
-			RouteResultPreparation.recalculateTimeDistance(allSegments);
-			/* Could be used after split segments
-			RouteResultPreparation preparation = new RouteResultPreparation();
-			for (RouteSegmentResult r : allSegments) {
-				r.setTurnType(null);
-				r.setDescription("");
-			}
-			preparation.prepareTurnResults(gpxApproximation.ctx, allSegments);
-			*/
-			calculatedTimeSpeed = true;
-		} else {
-			calculatedTimeSpeed = false;
 		}
 
 		double calculatedDuration = 0;
