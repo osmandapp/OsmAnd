@@ -577,6 +577,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 			if (vectorLinesCollection == null ||
 					!mapRenderer.hasSymbolsProvider(vectorLinesCollection) ||
 					newLine3DState != currentLine3DState) {
+				if(vectorLinesCollection != null &&
+						mapRenderer.hasSymbolsProvider(vectorLinesCollection)) {
+					mapRenderer.removeSymbolsProvider(vectorLinesCollection);
+				}
 				collection = new VectorLinesCollection(newLine3DState);
 				collection.setPriority(linesPriority);
 			} else {
