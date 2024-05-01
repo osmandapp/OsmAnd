@@ -5143,4 +5143,5 @@
     <string name="route_line_use_coloring_altitude">노선은 고도로 착색됩니다.</string>
     <string name="delete_actions_button_confirmation">\"%1$s\"를 삭제하시겠습니까?</string>
     <string name="delete_actions_button">삭제 버튼</string>
+    <string name="give_permission">권한 부여</string>
 </resources>
