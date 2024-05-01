@@ -112,7 +112,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		boolean enabled = parameter.isSelected(app.getSettings());
 		TextToggleButton radioGroup = new TextToggleButton(app, buttonsView, nightMode);
 
-		TextRadioItem relation = createRadioButton(leftButtonTitle, (radioItem, view) -> {
+		TextRadioItem leftButton = createRadioButton(leftButtonTitle, (radioItem, view) -> {
 			if (parameter.isSelected(app.getSettings())) {
 				applyParameter(parameter, false);
 				return true;
@@ -120,7 +120,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 			return false;
 		});
 
-		TextRadioItem nodeNetworks = createRadioButton(rightButtonTitle, (radioItem, view) -> {
+		TextRadioItem rightButton = createRadioButton(rightButtonTitle, (radioItem, view) -> {
 			if (!parameter.isSelected(app.getSettings())) {
 				applyParameter(parameter, true);
 				return true;
@@ -128,8 +128,8 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 			return false;
 		});
 
-		radioGroup.setItems(relation, nodeNetworks);
-		radioGroup.setSelectedItem(enabled ? nodeNetworks : relation);
+		radioGroup.setItems(leftButton, rightButton);
+		radioGroup.setSelectedItem(enabled ? rightButton : leftButton);
 	}
 
 	private void applyParameter(LocalRoutingParameter parameter, boolean isChecked) {
