@@ -26,7 +26,7 @@ public class GPXTrackAnalysis {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXTrackAnalysis.class);
 
-	public static final int ANALYSIS_VERSION = 1;
+	public static final int ANALYSIS_VERSION = 2;
 
 	public String name;
 

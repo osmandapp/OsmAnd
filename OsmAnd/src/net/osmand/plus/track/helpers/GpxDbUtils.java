@@ -8,6 +8,8 @@ import static net.osmand.plus.track.helpers.GPXDatabase.GPX_DIR_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_UPDATE_PARAMETERS_START;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -216,10 +218,6 @@ public class GpxDbUtils {
 		}
 		if (oldVersion < 19) {
 			db.execSQL(getCreateGpxDirTableQuery());
-		}
-		if(oldVersion < 22) {
-			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " MODIFY " +
-					ADDITIONAL_EXAGGERATION.getColumnName() + " " + ADDITIONAL_EXAGGERATION.getColumnType());
 		}
 		SQLiteCursor gpxDirCursor = db.rawQuery("select * from " + GPX_DIR_TABLE_NAME + " limit 0", null);
 		for (GpxParameter parameter : GpxParameter.getGpxDirParameters()) {
