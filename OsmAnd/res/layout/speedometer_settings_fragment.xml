@@ -82,42 +82,16 @@
 						app:typeface="@string/font_roboto_medium" />
 
 					<LinearLayout
-						android:id="@+id/custom_radio_buttons"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_gravity="center|end"
 						android:layout_marginStart="@dimen/content_padding"
 						android:layout_marginEnd="@dimen/content_padding"
-						android:background="?attr/btn_bg_border_inactive"
 						android:baselineAligned="false"
 						android:minHeight="@dimen/dialog_button_height"
 						android:orientation="horizontal">
 
-						<FrameLayout
-							android:id="@+id/left_button_container"
-							android:layout_width="36dp"
-							android:layout_height="match_parent"
-							android:layout_weight="1">
-
-							<androidx.appcompat.widget.AppCompatImageView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_gravity="center" />
-
-						</FrameLayout>
-
-						<FrameLayout
-							android:id="@+id/right_button_container"
-							android:layout_width="36dp"
-							android:layout_height="match_parent"
-							android:layout_weight="1">
-
-							<androidx.appcompat.widget.AppCompatImageView
-								android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_gravity="center" />
-
-						</FrameLayout>
+						<include layout="@layout/custom_icon_radio_buttons" />
 
 					</LinearLayout>
 
