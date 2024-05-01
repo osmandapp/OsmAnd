@@ -29,6 +29,7 @@ import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
@@ -49,7 +50,7 @@ import net.osmand.plus.widgets.dialogbutton.DialogButton;
 import java.util.Objects;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
-		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener {
+		implements IRouteLineColorControllerListener, IRouteLineWidthControllerListener, InAppPurchaseHelper.InAppPurchaseListener {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -564,6 +565,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@NonNull
 	private RouteLineWidthController getWidthCardController() {
 		return RouteLineWidthController.getInstance(app, previewRouteLineInfo, createScrollListener(), this);
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		setupCards();
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,

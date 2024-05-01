@@ -175,7 +175,9 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		return (int) (getReferenceTileSize() * app.getSettings().MAP_DENSITY.get());
+		float mapDensity = app.getSettings().MAP_DENSITY.get();
+		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
+		return (int) (getReferenceTileSize() * mapDensityAligned);
 	}
 
 	private float getReferenceTileSize() {

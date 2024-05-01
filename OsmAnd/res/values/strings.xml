@@ -21,6 +21,7 @@
     <string name="release_4_8">
         • To be prepared for 4.8
     </string>
+    <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>
     <string name="wall_color">Wall color</string>
     <string name="track_line">Track line</string>

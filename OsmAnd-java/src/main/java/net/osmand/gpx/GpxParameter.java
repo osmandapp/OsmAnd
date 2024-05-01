@@ -44,7 +44,7 @@ public enum GpxParameter {
 	TRACK_VISUALIZATION_TYPE("track_visualization_type", "TEXT", String.class, "none", false),
 	TRACK_3D_WALL_COLORING_TYPE("track_3d_wall_coloring_type", "TEXT", String.class, "none", false),
 	TRACK_3D_LINE_POSITION_TYPE("track_3d_line_position_type", "TEXT", String.class, "top", false),
-	ADDITIONAL_EXAGGERATION("exaggeration", "int", Integer.class, 0, false),
+	ADDITIONAL_EXAGGERATION("exaggeration", "double", Double.class, 1d, false),
 	WIDTH("width", "TEXT", String.class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String.class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double.class, Double.NaN, false),

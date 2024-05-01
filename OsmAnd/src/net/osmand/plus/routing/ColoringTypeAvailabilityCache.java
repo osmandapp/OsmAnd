@@ -27,7 +27,7 @@ public class ColoringTypeAvailabilityCache {
 	                                   @NonNull ColoringType routeColoringType,
 	                                   @Nullable String routeInfoAttribute) {
 		if (!route.equals(prevRoute)) {
-			cache.clear();
+			resetCache();
 			prevRoute = route;
 		}
 		String key = routeColoringType.getName(routeInfoAttribute);
@@ -40,5 +40,9 @@ public class ColoringTypeAvailabilityCache {
 			cache.put(key, available);
 		}
 		return available;
+	}
+
+	public void resetCache() {
+		cache.clear();
 	}
 }

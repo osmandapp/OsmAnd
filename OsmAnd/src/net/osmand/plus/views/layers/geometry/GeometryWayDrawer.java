@@ -168,7 +168,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 		boolean showRaised = false;
 		boolean useFixedHeight = false;
 		float fixedHeight = 1000;
-		int additionalExaggeration = 0;
+		float additionalExaggeration = 1f;
 		Gpx3DWallColorType wallColorType = Gpx3DWallColorType.NONE;
 		Gpx3DLinePositionType linePositionType = null;
 		if (pathsData.size() > 0) {
@@ -225,19 +225,21 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				line.setHeights(heights);
 				if (showRaised) {
 					line.setFillColor(new FColorARGB(1.0f, r, g, b));
+					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
 					line.setColorizationMapping(new QListFColorARGB());
 					line.setOutlineColorizationMapping(traceColorizationMapping);
-					line.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
-					if (wallColorType != Gpx3DWallColorType.NONE) {
-						if (wallColorType == Gpx3DWallColorType.SOLID) {
-							line.setOutlineColor(new FColorARGB(1.0f, r, g, b));
-						} else {
-							line.setColorizationScheme(1);
-							float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
-							float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
-							line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
-							line.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
-						}
+					if (wallColorType == Gpx3DWallColorType.NONE) {
+						line.setColorizationScheme(1);
+						line.setNearOutlineColor(new FColorARGB(0, r, g, b));
+						line.setFarOutlineColor(new FColorARGB(0, r, g, b));
+					} else if (wallColorType == Gpx3DWallColorType.SOLID) {
+						line.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+					} else {
+						line.setColorizationScheme(1);
+						float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
+						float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
+						line.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
+						line.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
 					}
 				}
 				return;
@@ -248,9 +250,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				.setIsHidden(false)
 				.setLineId(lineId)
 				.setLineWidth(width * VECTOR_LINE_SCALE_COEF)
-				.setFillColor(NativeUtilities.createFColorARGB(color))
 				.setOutlineWidth(outlineWidth * VECTOR_LINE_SCALE_COEF)
-				.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor))
 				.setApproximationEnabled(approximationEnabled)
 				.setBaseOrder(baseOrder);
 		if (dashPattern != null) {
@@ -275,33 +275,46 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			}
 		}
 		if (hasColorizationMapping) {
-			builder.setColorizationMapping(colorizationMapping);
-			builder.setColorizationScheme(colorizationScheme);
+			builder.setColorizationScheme(colorizationScheme)
+					.setColorizationMapping(colorizationMapping)
+					.setOutlineColorizationMapping(colorizationMapping);
+		} else {
+			builder.setFillColor(NativeUtilities.createFColorARGB(color))
+					.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
+
 		}
 		if (showRaised) {
 			if (linePositionType != null) {
 				builder.setElevatedLineVisibility(linePositionType == Gpx3DLinePositionType.TOP || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
 				builder.setSurfaceLineVisibility(linePositionType == Gpx3DLinePositionType.BOTTOM || linePositionType == Gpx3DLinePositionType.TOP_BOTTOM);
 			}
-			builder.setColorizationMapping(traceColorizationMapping)
-					.setElevationScaleFactor(additionalExaggeration)
-					.setOutlineColorizationMapping(traceColorizationMapping)
+			builder.setElevationScaleFactor(additionalExaggeration)
 					.setColorizationScheme(colorizationScheme)
 					.setHeights(heights)
-					.setFillColor(new FColorARGB(1.0f, r, g, b))
-					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f)
-					.setOutlineColor(new FColorARGB(1.0f, r, g, b));
-			if (wallColorType != Gpx3DWallColorType.NONE) {
-				if (wallColorType == Gpx3DWallColorType.SOLID) {
-					builder.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+					.setOutlineWidth(width * VECTOR_LINE_SCALE_COEF / 2.0f);
+			if (wallColorType == Gpx3DWallColorType.NONE) {
+				builder.setNearOutlineColor(new FColorARGB(0, r, g, b));
+				builder.setFarOutlineColor(new FColorARGB(0, r, g, b));
+			} else if (wallColorType == Gpx3DWallColorType.SOLID) {
+				if (!hasColorizationMapping) {
+					builder.setOutlineColor(new FColorARGB(1.0f, r, g, b))
+							.setFillColor(new FColorARGB(1.0f, r, g, b))
+							.setOutlineColor(new FColorARGB(1.0f, r, g, b));
+				}
+			} else {
+				float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
+				float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
+				if (hasColorizationMapping) {
+					builder.setNearOutlineColor(new FColorARGB(fromAlfa, 1, 1, 1));
+					builder.setFarOutlineColor(new FColorARGB(toAlfa, 1, 1, 1));
 				} else {
-					builder.setColorizationScheme(1);
-					float fromAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 1f : 0f;
-					float toAlfa = wallColorType == Gpx3DWallColorType.UPWARD_GRADIENT ? 0f : 1f;
 					builder.setNearOutlineColor(new FColorARGB(fromAlfa, r, g, b));
 					builder.setFarOutlineColor(new FColorARGB(toAlfa, r, g, b));
 				}
 			}
+		} else {
+			builder.setFillColor(NativeUtilities.createFColorARGB(color))
+					.setOutlineColor(NativeUtilities.createFColorARGB(outlineColor));
 		}
 		builder.buildAndAddToCollection(collection);
 	}
