@@ -5708,4 +5708,12 @@
     <string name="use_3d_track_visualization">3-dimensia bildigo</string>
     <string name="apply_only_to_new">Apliki nur al novaj</string>
     <string name="change_default_tracks_appearance_confirmation">Ĉu apliki ŝanĝojn al ekzistaj spuroj en tiu ĉi dosierujo aŭ nur al novaj?</string>
+    <string name="allow_display_on_top">Permesi kovri tekston per teksto</string>
+    <string name="allow_display_on_top_description">Permesi al etikedoj sur la mapo kovri unu al la alia</string>
+    <string name="show_debug_info">Montri senerarigaj informoj</string>
+    <string name="show_debug_info_description">Montri grafikajn informojn pri lokiĝo de ĉiu teksto sur la mapo</string>
+    <string name="map_text">Etikedoj sur la mapo</string>
+    <string name="routing_attr_avoid_cobblestone_name">Eviti rulŝtonajn kahelojn</string>
+    <string name="routing_attr_avoid_cobblestone_description">Eviti ĝibajn pavimŝtonojn</string>
+    <string name="gpx_approximation_geo_cpp">Surbaze de geometrio (C++) (rapide)</string>
 </resources>
