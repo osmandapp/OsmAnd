@@ -88,7 +88,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (this.getTrack3DStyle() != track3DStyle) {
+		if (Algorithms.objectEquals(this.getTrack3DStyle(), track3DStyle)) {
 			resetSymbolProviders();
 		}
 		updateTrack3DStyle(track3DStyle);
