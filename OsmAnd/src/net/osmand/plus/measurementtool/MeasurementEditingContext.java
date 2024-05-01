@@ -968,7 +968,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public List<WptPt> setPoints(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
-								 ApplicationMode mode, boolean useExternalTimestamps) {
+                                 ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null ||
 				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(originalPoints)) {
 			return null;
@@ -985,7 +985,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	public void updateFinalPointsWithExternalTimestamps(@NonNull List<GpxPoint> finalPoints,
-														@NonNull List<WptPt> sourcePoints) {
+                                                        @NonNull List<WptPt> sourcePoints) {
 		if (!validateExternalTimestamps(sourcePoints)) {
 			LOG.debug("Error: updateGpxPointsByExternalTimestamps() got invalid sourcePoints");
 			return;
@@ -1055,7 +1055,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	}
 
 	private List<WptPt> setPointsOriginal(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
-										  ApplicationMode mode) {
+                                          ApplicationMode mode) {
 		if (gpxApproximation == null ||
 				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return null;
