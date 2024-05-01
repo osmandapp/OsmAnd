@@ -213,13 +213,6 @@ public class VerticalExaggerationFragment extends ContextMenuScrollFragment {
 	}
 
 	@Override
-	protected void calculateLayout(View view, boolean initLayout) {
-		menuTitleHeight = routeMenuTopShadowAll.getHeight()
-				+ controlButtons.getHeight() - buttonsShadow.getHeight();
-		super.calculateLayout(view, initLayout);
-	}
-
-	@Override
 	public void onResume() {
 		super.onResume();
 		if (trackDrawInfo != null) {
