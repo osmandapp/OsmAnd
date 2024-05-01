@@ -96,7 +96,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<Boolean> TERRAIN;
 	public final CommonPreference<TerrainMode> TERRAIN_MODE;
 
-	public final CommonPreference<Float> VERTICAL_EXAGGERATION_SCALE;
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 
@@ -122,8 +121,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		SLOPE_MIN_ZOOM = registerIntPreference("slope_min_zoom", 3).makeProfile();
 		SLOPE_MAX_ZOOM = registerIntPreference("slope_max_zoom", 17).makeProfile();
 		SLOPE_TRANSPARENCY = registerIntPreference("slope_transparency", 80).makeProfile();
-
-		VERTICAL_EXAGGERATION_SCALE = registerFloatPreference("vertical_exaggeration_scale", 1).makeProfile();
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TERRAIN_MODE = registerEnumStringPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
@@ -159,7 +156,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				mapContext.updateVerticalExaggerationScale();
 			}
 		};
-		VERTICAL_EXAGGERATION_SCALE.addListener(verticalExaggerationListener);
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.addListener(verticalExaggerationListener);
 	}
 
 	@Override
@@ -311,7 +308,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void setVerticalExaggerationScale(float scale){
-		VERTICAL_EXAGGERATION_SCALE.set(scale);
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.set(scale);
 	}
 
 	public int getTerrainTransparency() {
@@ -325,7 +322,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public float getVerticalExaggerationScale(){
-		return VERTICAL_EXAGGERATION_SCALE.get();
+		return app.getSettings().VERTICAL_EXAGGERATION_SCALE.get();
 	}
 
 	public void resetZoomLevelsToDefault() {
@@ -353,7 +350,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void resetVerticalExaggerationToDefault(){
-		VERTICAL_EXAGGERATION_SCALE.resetToDefault();
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.resetToDefault();
 	}
 
 	public int getTerrainMinZoom() {

@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
@@ -65,6 +66,7 @@ public class GpxAppearanceInfo {
 	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
 	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	private float verticalExaggeration = 1f;
 
 
 	public GpxAppearanceInfo() {
@@ -82,6 +84,7 @@ public class GpxAppearanceInfo {
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
+		verticalExaggeration = helper.getParameter(item, ADDITIONAL_EXAGGERATION);
 
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
@@ -108,7 +111,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
 		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
 		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
-//		writeParam(json, "vertical_exaggeration_scale", coloringType);
+		writeParam(json, "vertical_exaggeration_scale", verticalExaggeration);
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);

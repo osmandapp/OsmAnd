@@ -687,7 +687,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(TRACK_VISUALIZATION_TYPE, trackDrawInfo.getTrackVisualizationType().getTypeName());
 			gpxDataItem.setParameter(TRACK_3D_WALL_COLORING_TYPE, trackDrawInfo.getTrackWallColorType().getTypeName());
 			gpxDataItem.setParameter(TRACK_3D_LINE_POSITION_TYPE, trackDrawInfo.getTrackLinePositionType().getTypeName());
-			gpxDataItem.setParameter(ADDITIONAL_EXAGGERATION, trackDrawInfo.getAdditionalExaggeration());
+			gpxDataItem.setParameter(ADDITIONAL_EXAGGERATION, (double)trackDrawInfo.getAdditionalExaggeration());
 			gpxDbHelper.updateDataItem(gpxDataItem);
 		}
 	}
