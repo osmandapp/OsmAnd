@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.util.MapUtils.ROUNDING_ERROR;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -27,8 +29,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static net.osmand.util.MapUtils.ROUNDING_ERROR;
-
 public class TransportStopController extends MenuController {
 
 	public static final int SHOW_STOPS_RADIUS_METERS = 150;
@@ -40,8 +40,8 @@ public class TransportStopController extends MenuController {
 	private TransportStopType topType;
 
 	public TransportStopController(@NonNull MapActivity mapActivity,
-								   @NonNull PointDescription pointDescription,
-								   @NonNull TransportStop transportStop) {
+	                               @NonNull PointDescription pointDescription,
+	                               @NonNull TransportStop transportStop) {
 		super(new TransportStopMenuBuilder(mapActivity, transportStop), pointDescription, mapActivity);
 		this.transportStop = transportStop;
 		processRoutes();
@@ -86,7 +86,7 @@ public class TransportStopController extends MenuController {
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
 		return nearby ? routesNearby : routesOnTheSameExit;
 	}
-	
+
 	@Override
 	public boolean needStreetName() {
 		return Algorithms.isEmpty(getNameStr());
@@ -300,18 +300,22 @@ public class TransportStopController extends MenuController {
 	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
+		List<TransportStop> amenityStops = null;
+		if ("subway_entrance".equals(amenity.getSubType())) {
+			amenityStops = findSubwayStopsForSubwayExit(transportStops, amenity);
+		}
 		LatLon amenityLocation = amenity.getLocation();
 		for (TransportStop stop : transportStops) {
 			stop.setTransportStopAggregated(stopAggregated);
-			List<TransportStopExit> stopExits = stop.getExits();
 			boolean stopAddedAsLocal = false;
 			if ("public_transport_station".equals(amenity.getSubType()) && (stop.getName().equals(amenity.getName()) ||
 					stop.getEnName(false).equals(amenity.getEnName(false)))) {
 				stopAggregated.addLocalTransportStop(stop);
 				stopAddedAsLocal = true;
 			} else {
-				for (TransportStopExit exit : stopExits) {
-					if (MapUtils.getDistance(exit.getLocation(), amenityLocation) < ROUNDING_ERROR) {
+				for (TransportStopExit exit : stop.getExits()) {
+					if (MapUtils.getDistance(exit.getLocation(), amenityLocation) < ROUNDING_ERROR
+							|| isEqualsToAnyStopExit(exit.getLocation(), amenityStops)) {
 						stopAddedAsLocal = true;
 						stopAggregated.addLocalTransportStop(stop);
 						break;
@@ -326,6 +330,35 @@ public class TransportStopController extends MenuController {
 		sortTransportStopsExits(amenityLocation, stopAggregated.getLocalTransportStops());
 		sortTransportStopsExits(amenityLocation, stopAggregated.getNearbyTransportStops());
 		return stopAggregated;
+	}
+
+	private static boolean isEqualsToAnyStopExit(LatLon exit, List<TransportStop> amenityStops) {
+		if (amenityStops == null) {
+			return false;
+		}
+		for (TransportStop amenityStop : amenityStops) {
+			for (TransportStopExit amenityExit : amenityStop.getExits()) {
+				if (MapUtils.getDistance(amenityExit.getLocation(), exit) < ROUNDING_ERROR) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private static List<TransportStop> findSubwayStopsForSubwayExit(List<TransportStop> transportStops, Amenity amenity) {
+		List<TransportStop> foundStops = null;
+		for (TransportStop stop : transportStops) {
+			for (TransportStopExit exit : stop.getExits()) {
+				if (MapUtils.getDistance(exit.getLocation(), amenity.getLocation()) < ROUNDING_ERROR) {
+					if (foundStops == null) {
+						foundStops = new ArrayList<>();
+					}
+					foundStops.add(stop);
+				}
+			}
+		}
+		return foundStops;
 	}
 
 	private static boolean checkSameRoute(List<TransportStopRoute> stopRoutes, TransportRoute route) {
