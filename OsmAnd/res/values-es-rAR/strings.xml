@@ -5721,7 +5721,7 @@
     <string name="route_line_use_coloring_altitude">La línea de la ruta se colorea según la elevación de la altitud.</string>
     <string name="visualized_by">Visualizado por</string>
     <string name="wall_color">Color del muro</string>
-    <string name="fixed_height">Altura fija</string>
+    <string name="fixed_height">Altura uniforme</string>
     <string name="upward_gradient">Gradiente ascendente</string>
     <string name="top">Arriba</string>
     <string name="bottom">Abajo</string>
@@ -5730,4 +5730,13 @@
     <string name="track_line">Línea de la traza</string>
     <string name="downward_gradient">Gradiente descendente</string>
     <string name="explore_3d_track_description">¡Explora la traza en 3D interactivo! Visualiza la altura, la velocidad y más, directamente en el mapa.</string>
+    <string name="track_vertical_exaggeration_description">Cambiando el valor de la escala, puedes cambiar la altura de la traza 3D.</string>
+    <string name="gpx_approximation_geo_cpp">Basado en la geometría (C++, rápido)</string>
+    <string name="allow_display_on_top_description">Permite mostrar los textos del mapa encima del otro</string>
+    <string name="allow_display_on_top">Permitir superposición de elementos</string>
+    <string name="show_debug_info">Mostrar información de depuración</string>
+    <string name="show_debug_info_description">Muestra la información gráfica sobre la ubicación de cada texto del mapa</string>
+    <string name="map_text">Textos del mapa</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evitar adoquinado</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evita pasar por caminos adoquinados</string>
 </resources>

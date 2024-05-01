@@ -5704,4 +5704,12 @@
     <string name="wall_color">Couleur du mur</string>
     <string name="route_line_use_coloring_speed">La ligne d\'itinéraire est colorée selon la vitesse de déplacement.</string>
     <string name="delete_actions_button">Supprimer le bouton</string>
+    <string name="required_maps_calculate_online_summary">La liste des cartes manquantes se base sur l’itinéraire le plus direct. Pour obtenir cette liste de cartes, OsmAnd peut pré-calculer votre itinéraire en ligne.</string>
+    <string name="show_debug_info">Afficher les informations de debug</string>
+    <string name="routing_attr_avoid_cobblestone_name">Éviter les pavés</string>
+    <string name="routing_attr_avoid_cobblestone_description">Éviter les routes pavées</string>
+    <string name="map_text">Textes de la carte</string>
+    <string name="allow_display_on_top">Autoriser l\'affichage par dessus</string>
+    <string name="allow_display_on_top_description">Permet d\'afficher les textes de carte les uns par dessus les autres</string>
+    <string name="show_debug_info_description">Affiche les infos graphiques de position pour chaque texte sur la carte</string>
 </resources>

@@ -5723,4 +5723,5 @@
     <string name="map_text">Textos de los mapas</string>
     <string name="routing_attr_avoid_cobblestone_name">Evite los adoquines</string>
     <string name="routing_attr_avoid_cobblestone_description">Evite los adoquines</string>
+    <string name="track_vertical_exaggeration_description">Al cambiar el valor de escala, puede cambiar la altura de la pista 3D.</string>
 </resources>
