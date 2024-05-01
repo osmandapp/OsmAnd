@@ -1,5 +1,6 @@
 package net.osmand.plus.track.fragments;
 
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
@@ -54,6 +55,7 @@ import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
+import net.osmand.plus.configmap.VerticalExaggerationFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.GpxSplitParams;
@@ -85,7 +87,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener {
+public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, IColorCardControllerListener, ITrackWidthSelectedListener, VerticalExaggerationFragment.ExaggerationChangeListener {
 
 	public static final String TAG = TrackAppearanceFragment.class.getName();
 
@@ -112,6 +114,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private View routeMenuTopShadowAll;
 	private View controlButtons;
 	private View view;
+	private Track3DCard track3DCard;
 
 	@Override
 	public int getMainLayoutId() {
@@ -672,6 +675,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.set(trackDrawInfo.getTrackVisualizationType().getTypeName());
 			settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.set(trackDrawInfo.getTrackWallColorType().getTypeName());
 			settings.CURRENT_TRACK_3D_LINE_POSITION_TYPE.set(trackDrawInfo.getTrackLinePositionType().getTypeName());
+			settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.set(trackDrawInfo.getAdditionalExaggeration());
 		} else if (gpxDataItem != null) {
 			gpxDataItem.setParameter(COLOR, trackDrawInfo.getColor());
 			gpxDataItem.setParameter(WIDTH, trackDrawInfo.getWidth());
@@ -683,6 +687,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(TRACK_VISUALIZATION_TYPE, trackDrawInfo.getTrackVisualizationType().getTypeName());
 			gpxDataItem.setParameter(TRACK_3D_WALL_COLORING_TYPE, trackDrawInfo.getTrackWallColorType().getTypeName());
 			gpxDataItem.setParameter(TRACK_3D_LINE_POSITION_TYPE, trackDrawInfo.getTrackLinePositionType().getTypeName());
+			gpxDataItem.setParameter(ADDITIONAL_EXAGGERATION, trackDrawInfo.getAdditionalExaggeration());
 			gpxDbHelper.updateDataItem(gpxDataItem);
 		}
 	}
@@ -737,7 +742,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			cards.clear();
 
 			inflate(R.layout.list_item_divider_with_padding_basic, container, true);
-			addCard(container, new Track3DCard(mapActivity, trackDrawInfo));
+			track3DCard = new Track3DCard(mapActivity, trackDrawInfo);
+			track3DCard.exaggerationChangeListener = this;
+			addCard(container, track3DCard);
 			inflate(R.layout.list_item_divider_with_padding_basic, container, true);
 
 			if (!selectedGpxFile.isShowCurrentTrack()) {
@@ -857,6 +864,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	@Override
 	protected String getThemeInfoProviderTag() {
 		return TAG;
+	}
+
+	@Override
+	public void onExaggerationChanged(float exaggeration, boolean isFinished) {
+		trackDrawInfo.setAdditionalExaggeration(exaggeration);
+		if (track3DCard != null) {
+			track3DCard.update();
+		}
 	}
 
 	public interface OnNeedScrollListener {

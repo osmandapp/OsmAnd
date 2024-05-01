@@ -1213,7 +1213,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					updated |= renderableSegment.setTrackVisualizationType(getTrackVisualizationType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackWallColorType(getTrackWallColorType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackLineColorType(getTrackLinePositionType(selectedGpxFile.getGpxFile()));
-					updated |= renderableSegment.setAdditionalExaggeration(1/*getAdditionalExaggeration(selectedGpxFile.getGpxFile())*/);
+					updated |= renderableSegment.setAdditionalExaggeration(getAdditionalExaggeration(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
@@ -1298,7 +1298,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return customObjectsDelegate != null || GpxSelectionHelper.isGpxFileSelected(app, gpxFile);
 	}
 
-	private int getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
+	private float getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
 		return isGpxFileSelected(gpxFile) ? gpxAppearanceHelper.getAdditionalExaggeration(gpxFile) : 1;
 	}
 
@@ -1326,7 +1326,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	private int getTrackExaggeration(@NonNull GPXFile gpxFile) {
+	private float getTrackExaggeration(@NonNull GPXFile gpxFile) {
 		if(isGpxFileSelected(gpxFile)) {
 			return gpxAppearanceHelper.getAdditionalExaggeration(gpxFile);
 		} else {

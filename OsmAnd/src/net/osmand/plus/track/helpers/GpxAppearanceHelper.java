@@ -125,15 +125,15 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public int getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
+	public float getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getAdditionalExaggeration();
 		} else if (gpxFile.showCurrentTrack) {
 			return settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
 		} else {
-			Integer exaggeration = getAppearanceParameter(new File(gpxFile.path), ADDITIONAL_EXAGGERATION);
+			Double exaggeration = getAppearanceParameter(new File(gpxFile.path), ADDITIONAL_EXAGGERATION);
 			if (exaggeration != null) {
-				return exaggeration;
+				return exaggeration.floatValue();
 			}
 			return gpxFile.getAdditionalExaggeration();
 		}

@@ -5,8 +5,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
@@ -15,6 +17,7 @@ import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
+import net.osmand.plus.configmap.VerticalExaggerationFragment;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
@@ -38,6 +41,10 @@ public class Track3DCard extends BaseCard {
 	private View getButton;
 	private View freeUserCard;
 	private View settingsContainer;
+	private View exaggerationDivider;
+	private View exaggerationContainer;
+	private TextView exaggerationValue;
+	public Fragment exaggerationChangeListener;
 
 	public Track3DCard(@NonNull FragmentActivity activity, @NonNull TrackDrawInfo trackDrawInfo) {
 		super(activity);
@@ -63,6 +70,10 @@ public class Track3DCard extends BaseCard {
 		freeUserCard = cardView.findViewById(R.id.free_user_card);
 		settingsContainer = cardView.findViewById(R.id.settings_container);
 		getButton = cardView.findViewById(R.id.get_btn);
+		exaggerationValue = cardView.findViewById(R.id.exaggeration_value);
+		exaggerationDivider = cardView.findViewById(R.id.exaggeration_divider);
+		exaggerationContainer = cardView.findViewById(R.id.exaggeration_container);
+		exaggerationContainer.setOnClickListener((v)-> openExaggerationChooser());
 		getButton.setOnClickListener((v) -> openChoosePlan());
 
 		List<String> visualizedByItems = new ArrayList<>();
@@ -125,11 +136,14 @@ public class Track3DCard extends BaseCard {
 			visualizedBy.setSelection(visualizationType.ordinal());
 			wallColor.setSelection(trackDrawInfo.getTrackWallColorType().ordinal());
 			trackLine.setSelection(trackDrawInfo.getTrackLinePositionType().ordinal());
+			exaggerationValue.setText(VerticalExaggerationFragment.getFormattedScaleValue(app, trackDrawInfo.getAdditionalExaggeration()));
 			AndroidUiHelper.updateVisibility(wallColor, visualizationType != Gpx3DVisualizationType.NONE);
 			AndroidUiHelper.updateVisibility(trackLine, visualizationType != Gpx3DVisualizationType.NONE);
 			AndroidUiHelper.updateVisibility(wallColorContainer, visualizationType != Gpx3DVisualizationType.NONE);
 			AndroidUiHelper.updateVisibility(trackLineContainer, visualizationType != Gpx3DVisualizationType.NONE);
 			AndroidUiHelper.updateVisibility(wallColorDivider, visualizationType != Gpx3DVisualizationType.NONE);
+			AndroidUiHelper.updateVisibility(exaggerationContainer, visualizationType != Gpx3DVisualizationType.NONE);
+			AndroidUiHelper.updateVisibility(exaggerationDivider, visualizationType != Gpx3DVisualizationType.NONE);
 			AndroidUiHelper.updateVisibility(visualizedByDivider, visualizationType != Gpx3DVisualizationType.NONE);
 			AndroidUiHelper.updateVisibility(freeUserCard, isGetBtnVisible());
 			AndroidUiHelper.updateVisibility(settingsContainer, !isGetBtnVisible());
@@ -144,6 +158,16 @@ public class Track3DCard extends BaseCard {
 	private void openChoosePlan() {
 		if (activity != null) {
 			ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
+		}
+	}
+
+	private void openExaggerationChooser() {
+		if (activity != null) {
+			VerticalExaggerationFragment.showInstance(activity.getSupportFragmentManager(),
+					exaggerationChangeListener,
+					trackDrawInfo.getAdditionalExaggeration(),
+					R.string.track_vertical_exaggeration_description,
+					trackDrawInfo);
 		}
 	}
 

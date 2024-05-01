@@ -881,6 +881,10 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		lastRouteProjection = null;
 	}
 
+	public void resetColorAvailabilityCache() {
+		coloringAvailabilityCache.resetCache();
+	}
+
 	private static class RenderState {
 		private Location lastProjection = null;
 		private int startLocationIndex = -1;

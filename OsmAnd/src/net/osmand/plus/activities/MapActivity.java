@@ -1624,4 +1624,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void onInAppPurchaseGetItems() {
 		DiscountHelper.checkAndDisplay(this);
 	}
+
+	@Override
+	public void onInAppPurchaseItemPurchased(String sku) {
+		getMapLayers().getRouteLayer().resetColorAvailabilityCache();
+	}
 }

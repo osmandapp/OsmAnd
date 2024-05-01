@@ -8,6 +8,8 @@ import static net.osmand.plus.track.helpers.GPXDatabase.GPX_DIR_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_UPDATE_PARAMETERS_START;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
