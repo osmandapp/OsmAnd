@@ -973,23 +973,71 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(originalPoints)) {
 			return null;
 		}
-		if (useExternalTimestamps && validateExternalTimestamps(originalPoints)) {
-			// used only with Online Routing profiles with enabled "Use external timestamps" opt
-			return setPointsUsingExternalTimestamps(gpxApproximation.finalPoints, originalPoints, mode);
-		} else {
-			// TODO cleanup modifySegments-related code inside setPointsOld
-			return setPointsOld(gpxApproximation, originalPoints, mode, false);
+
+		if (useExternalTimestamps) {
+			updateFinalPointsWithExternalTimestamps(gpxApproximation.finalPoints, originalPoints);
+		}
+
+		List<WptPt> result = setPointsOriginal(gpxApproximation, originalPoints, mode, false);
+		calculatedTimeSpeed = useExternalTimestamps;
+
+		return result;
+	}
+
+	public void updateFinalPointsWithExternalTimestamps(@NonNull List<GpxPoint> finalPoints,
+														@NonNull List<WptPt> sourcePoints) {
+		if (!validateExternalTimestamps(sourcePoints)) {
+			LOG.debug("Error: updateGpxPointsByExternalTimestamps() got invalid sourcePoints");
+			return;
+		}
+		for (GpxPoint gp : finalPoints) {
+			for (RouteSegmentResult seg : gp.routeToTarget) {
+				seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(seg, sourcePoints));
+			}
+			RouteResultPreparation.recalculateTimeDistance(gp.routeToTarget);
 		}
 	}
 
-	@NonNull
-	private List<WptPt> setPointsUsingExternalTimestamps(@NonNull List<GpxPoint> gpxPoints,
-														 @NonNull List<WptPt> sourcePoints,
-														 ApplicationMode mode) {
-		List<WptPt> routePoints = new ArrayList<>();
+	private float calcSegmentSpeedByExternalTimestamps(RouteSegmentResult seg, List<WptPt> waypoints) {
+		float speed = seg.getSegmentSpeed();
 
-		calculatedTimeSpeed = true;
-		return routePoints;
+		int sx = seg.getStartPointX(), sy = seg.getStartPointY();
+		int ex = seg.getEndPointX(), ey = seg.getEndPointY();
+		double minDistStart = Double.POSITIVE_INFINITY;
+		double minDistEnd = Double.POSITIVE_INFINITY;
+		int indexStart = -1, indexEnd = -1;
+
+		for (int i = 0; i < waypoints.size(); i++) {
+			int wx = MapUtils.get31TileNumberX(waypoints.get(i).getLongitude());
+			int wy = MapUtils.get31TileNumberY(waypoints.get(i).getLatitude());
+			double distStart = MapUtils.squareRootDist31(sx, sy, wx, wy);
+			double distEnd = MapUtils.squareRootDist31(ex, ey, wx, wy);
+			if (distStart < minDistStart) {
+				minDistStart = distStart;
+				indexStart = i;
+			}
+			if (distEnd < minDistEnd) {
+				minDistEnd = distEnd;
+				indexEnd = i;
+			}
+		}
+
+		if (indexStart != -1 && indexEnd != -1 && indexStart < indexEnd) {
+			long time = waypoints.get(indexEnd).time - waypoints.get(indexStart).time;
+			if (time > 0) {
+				double distance = 0;
+				for (int i = indexStart; i < indexEnd; i++) {
+					distance += MapUtils.getDistance(
+							waypoints.get(i).getLatitude(), waypoints.get(i).getLongitude(),
+							waypoints.get(i + 1).getLatitude(), waypoints.get(i + 1).getLongitude());
+				}
+				if (distance > 0) {
+					speed = (float) distance / ((float) time / 1000); // update based on external timestamps
+				}
+			}
+		}
+
+		return speed;
 	}
 
 	private boolean validateExternalTimestamps(List<WptPt> waypoints) {
@@ -997,16 +1045,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			return false;
 		}
 		long last = 0;
-		for (WptPt p : waypoints) {
-			if (p.time == 0 || p.time < last) {
+		for (WptPt wpt : waypoints) {
+			if (wpt.time == 0 || wpt.time < last) {
 				return false;
 			}
-			last = p.time;
+			last = wpt.time;
 		}
 		return true;
 	}
 
-	private List<WptPt> setPointsOld(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
+	private List<WptPt> setPointsOriginal(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints, ApplicationMode mode, boolean useExternalTimestamps) {
 		if (gpxApproximation == null || Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
 			return null;
 		}
