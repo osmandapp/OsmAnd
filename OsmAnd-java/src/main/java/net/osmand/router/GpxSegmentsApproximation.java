@@ -195,34 +195,36 @@ public class GpxSegmentsApproximation {
 		}
 		for (GpxPoint gp : finalPoints) {
 			for (RouteSegmentResult seg : gp.routeToTarget) {
-				seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(seg, sourcePoints));
+				seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(gp, seg, sourcePoints));
 			}
 			RouteResultPreparation.recalculateTimeDistance(gp.routeToTarget);
 		}
 	}
 
-	private static float calcSegmentSpeedByExternalTimestamps(RouteSegmentResult seg,
+	private static float calcSegmentSpeedByExternalTimestamps(GpxPoint gp, RouteSegmentResult seg,
 	                                                          List<WptPt> waypoints) {
 		float speed = seg.getSegmentSpeed();
+		int indexStart = gp.ind, indexEnd = gp.targetInd;
 
-		int sx = seg.getStartPointX(), sy = seg.getStartPointY();
-		int ex = seg.getEndPointX(), ey = seg.getEndPointY();
-		double minDistStart = Double.POSITIVE_INFINITY;
-		double minDistEnd = Double.POSITIVE_INFINITY;
-		int indexStart = -1, indexEnd = -1;
+		if (indexStart == -1 || indexEnd == -1) {
+			int sx = seg.getStartPointX(), sy = seg.getStartPointY();
+			int ex = seg.getEndPointX(), ey = seg.getEndPointY();
+			double minDistStart = Double.POSITIVE_INFINITY;
+			double minDistEnd = Double.POSITIVE_INFINITY;
 
-		for (int i = 0; i < waypoints.size(); i++) {
-			int wx = MapUtils.get31TileNumberX(waypoints.get(i).getLongitude());
-			int wy = MapUtils.get31TileNumberY(waypoints.get(i).getLatitude());
-			double distStart = MapUtils.squareRootDist31(sx, sy, wx, wy);
-			double distEnd = MapUtils.squareRootDist31(ex, ey, wx, wy);
-			if (distStart < minDistStart) {
-				minDistStart = distStart;
-				indexStart = i;
-			}
-			if (distEnd < minDistEnd) {
-				minDistEnd = distEnd;
-				indexEnd = i;
+			for (int i = 0; i < waypoints.size(); i++) {
+				int wx = MapUtils.get31TileNumberX(waypoints.get(i).getLongitude());
+				int wy = MapUtils.get31TileNumberY(waypoints.get(i).getLatitude());
+				double distStart = MapUtils.squareRootDist31(sx, sy, wx, wy);
+				double distEnd = MapUtils.squareRootDist31(ex, ey, wx, wy);
+				if (distStart < minDistStart) {
+					minDistStart = distStart;
+					indexStart = i;
+				}
+				if (distEnd < minDistEnd) {
+					minDistEnd = distEnd;
+					indexEnd = i;
+				}
 			}
 		}
 
