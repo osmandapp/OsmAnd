@@ -13,7 +13,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,6 @@ public class WikiCoreHelper {
 	private static final String OSMAND_API_WIKIDATA_ARTICLE_ACTION = "wiki_place?article=";
 	private static final String OSMAND_API_WIKIDATA_CATEGORY_ACTION = "wiki_place?category=";
 
-<<<<<<< Updated upstream
 	public static List<WikiImage> getWikimediaImageList(String wikiMediaTagContent, List<WikiImage> wikiImages) {
 
 		if (wikiMediaTagContent.startsWith(WIKIMEDIA_FILE)) {
@@ -43,20 +41,6 @@ public class WikiCoreHelper {
 			WikiImage wikiImage = getImageData(imageFileName);
 			if (wikiImage != null) {
 				wikiImages.add(wikiImage);
-=======
-		int urlInd = wikiTitle == null? 0 : wikiTitle.indexOf(".wikipedia.org/wiki/");
-		if (urlInd > 0) {
-			String prefix = wikiTitle.substring(0, urlInd);
-			String lang = prefix.substring(prefix.lastIndexOf("/") + 1, prefix.length());
-			String title = wikiTitle.substring(urlInd + ".wikipedia.org/wiki/".length());
-			wikiTitle = lang + ":" + title;
-		}
-		if (!Algorithms.isEmpty(wikimediaCommons)) {
-			if (wikimediaCommons.startsWith(WIKIMEDIA_FILE)) {
-				addFile(wikiImages, wikimediaCommons);
-			} else if (wikimediaCommons.startsWith(WIKIMEDIA_CATEGORY)) {
-				wikiCategory = wikimediaCommons.replace(WIKIMEDIA_CATEGORY, "");
->>>>>>> Stashed changes
 			}
 		} else if (wikiMediaTagContent.startsWith(WIKIMEDIA_CATEGORY)) {
 			if (USE_OSMAND_WIKI_API) {
@@ -82,27 +66,6 @@ public class WikiCoreHelper {
 					}
 				}
 			}
-<<<<<<< Updated upstream
-=======
-		}
-		if (USE_OSMAND_WIKI_API) {
-			// article // category
-			String url = null;
-			try {
-				if (!Algorithms.isEmpty(wikidataId)) {
-					url = (url == null ? OSMAND_API_ENDPOINT : "&") + "article=" + URLEncoder.encode(wikiTitle, "UTF-8");
-				}
-				if (!Algorithms.isEmpty(wikiCategory)) {
-					url = (url == null ? OSMAND_API_ENDPOINT : "&") + "category=" + URLEncoder.encode(wikiTitle, "UTF-8");
-				}
-				if (!Algorithms.isEmpty(wikiTitle)) {
-					url = (url == null ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
-				}
-			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException(e);
-			}
-			getImagesOsmAndAPIRequest(url, wikiImages);
->>>>>>> Stashed changes
 		} else {
 			LOG.error("Wrong Wikimedia category member");
 		}
