@@ -192,6 +192,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		String imageValue = amenity.getAdditionalInfo("image");
 		String mapillaryValue = amenity.getAdditionalInfo(MAPILLARY);
 		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
+		String wikipediaValue = amenity.getAdditionalInfo(Amenity.WIKIPEDIA);
 		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", getDecodedAdditionalInfo(imageValue));
@@ -201,6 +202,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 		if (!Algorithms.isEmpty(wikidataValue)) {
 			params.put(Amenity.WIKIDATA, getDecodedAdditionalInfo(wikidataValue));
+		}
+		if (!Algorithms.isEmpty(wikipediaValue)) {
+			params.put(Amenity.WIKIPEDIA, getDecodedAdditionalInfo(wikipediaValue));
 		}
 		if (!Algorithms.isEmpty(wikimediaValue)) {
 			params.put(Amenity.WIKIMEDIA_COMMONS, getDecodedAdditionalInfo(wikimediaValue));

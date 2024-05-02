@@ -61,6 +61,7 @@ import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
 import net.osmand.plus.keyevent.devices.WunderLINQDeviceProfile;
 import net.osmand.plus.mapmarkers.MarkersDb39HelperLegacy;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -80,6 +81,7 @@ import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.WidgetGroup;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsIdsMapper;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -87,6 +89,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -151,8 +154,9 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_01 = 4701;
 	public static final int VERSION_4_7_02 = 4702;
 	public static final int VERSION_4_7_03 = 4703;
+	public static final int VERSION_4_7_04 = 4704;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_03;
+	public static final int LAST_APP_VERSION = VERSION_4_7_04;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -280,6 +284,15 @@ public class AppVersionUpgradeOnInit {
 				}
 				if (prevAppVersion < VERSION_4_7_03) {
 					migrateLocalSorting(settings);
+				}
+				if (prevAppVersion < VERSION_4_7_04) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+
+						@Override
+						public void onStart(@NonNull AppInitializer init) {
+							migrateProfileQuickActionButtons();
+						}
+					});
 				}
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, lastVersion).commit();
 				startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
@@ -871,6 +884,54 @@ public class AppVersionUpgradeOnInit {
 			fabMarginPref.setPortraitFabMargin(appMode, portrait.first, portrait.second);
 			fabMarginPref.setLandscapeFabMargin(appMode, landscape.first, landscape.second);
 		}
+	}
+
+	private void migrateProfileQuickActionButtons() {
+		OsmandSettings settings = app.getSettings();
+		MapButtonsHelper buttonsHelper = app.getMapButtonsHelper();
+		Map<String, QuickActionButtonState> globalButtons = new LinkedHashMap<>();
+
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			SharedPreferences preferences = (SharedPreferences) settings.getProfilePreferences(appMode);
+
+			String ids = preferences.getString("quick_action_buttons", DEFAULT_BUTTON_ID + ";");
+			List<String> actionsKeys = ListStringPreference.getStringsList(ids, ";");
+			if (!Algorithms.isEmpty(actionsKeys)) {
+				Set<String> uniqueKeys = new LinkedHashSet<>(actionsKeys);
+				for (String key : uniqueKeys) {
+					if (!Algorithms.isEmpty(key)) {
+						String name = preferences.getString(key + "_name", "");
+						if (!globalButtons.containsKey(name)) {
+							QuickActionButtonState oldState = new QuickActionButtonState(app, key);
+							QuickActionButtonState newState = buttonsHelper.createNewButtonState();
+
+							newState.getNamePref().set(name);
+							newState.getQuickActionsPref().set(preferences.getString(key + "_list", null));
+							copyPreferenceForAllModes(oldState.getStatePref(), newState.getStatePref());
+							copyFabMarginPreferenceForAllModes(oldState.getFabMarginPref(), newState.getFabMarginPref());
+
+							globalButtons.put(name, newState);
+						}
+					}
+				}
+			}
+		}
+		if (!globalButtons.isEmpty()) {
+			buttonsHelper.setQuickActionButtonStates(globalButtons.values());
+		}
+	}
+
+	private <T> void copyPreferenceForAllModes(@NonNull CommonPreference<T> oldPref, @NonNull CommonPreference<T> newPref) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			newPref.setModeValue(mode, oldPref.getModeValue(mode));
+		}
+	}
+
+	private void copyFabMarginPreferenceForAllModes(@NonNull FabMarginPreference oldPref, @NonNull FabMarginPreference newPref) {
+		copyPreferenceForAllModes(oldPref.getFabMarginXPortrait(), newPref.getFabMarginXPortrait());
+		copyPreferenceForAllModes(oldPref.getFabMarginYPortrait(), newPref.getFabMarginYPortrait());
+		copyPreferenceForAllModes(oldPref.getFabMarginXLandscape(), newPref.getFabMarginXLandscape());
+		copyPreferenceForAllModes(oldPref.getFabMarginYLandscape(), newPref.getFabMarginYLandscape());
 	}
 
 	private void migrateRoutingTypePrefs() {

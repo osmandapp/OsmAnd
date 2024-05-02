@@ -157,7 +157,7 @@ public class Track3DCard extends BaseCard {
 
 	private void openChoosePlan() {
 		if (activity != null) {
-			ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
+			ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
 		}
 	}
 

@@ -147,6 +147,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Map<String, Gpx3DVisualizationType> cachedTracksWith3dVisualization = new HashMap<>();
 	private Map<String, Gpx3DLinePositionType> cachedTracksWith3dLinePosition = new HashMap<>();
 	private Map<String, Float> cachedTracksVerticalExaggeration = new HashMap<>();
+	private Map<String, Integer> cachedTracksColors = new HashMap<>();
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
@@ -579,6 +580,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				Gpx3DVisualizationType cachedTrackVisualizationType = cachedTracksWith3dVisualization.get(gpxFile.path);
 				float trackVerticalExaggeration = getTrackExaggeration(gpxFile);
 				Float cachedTrackVerticalExaggeration = cachedTracksVerticalExaggeration.get(gpxFile.path);
+				int trackColor = getTrackColor(gpxFile, cachedColor);
+				if(!Algorithms.objectEquals(trackColor, cachedTracksColors.get(gpxFile.path))) {
+					cachedTracksColors.put(gpxFile.path, trackColor);
+					changed = true;
+				}
 				if (cachedTrackVisualizationType != trackVisualizationType ||
 						trackVerticalExaggeration != cachedTrackVerticalExaggeration ||
 						trackLinePosition != cachedTrackLinePositionType) {
