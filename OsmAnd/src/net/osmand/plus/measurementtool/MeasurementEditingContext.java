@@ -1,6 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import static net.osmand.router.GpxSegmentsApproximation.updateFinalPointsWithExternalTimestamps;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
@@ -974,22 +973,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			return null;
 		}
 
-		if (useExternalTimestamps) {
-			updateFinalPointsWithExternalTimestamps(gpxApproximation.finalPoints, originalPoints);
-		}
-
-		List<WptPt> result = setPointsOriginal(gpxApproximation, originalPoints, mode);
 		calculatedTimeSpeed = useExternalTimestamps;
 
-		return result;
-	}
-
-	private List<WptPt> setPointsOriginal(GpxRouteApproximation gpxApproximation, List<WptPt> originalPoints,
-                                          ApplicationMode mode) {
-		if (gpxApproximation == null ||
-				Algorithms.isEmpty(gpxApproximation.finalPoints) || Algorithms.isEmpty(gpxApproximation.result)) {
-			return null;
-		}
 		List<GpxPoint> gpxPoints = gpxApproximation.finalPoints;
 		WptPt firstOriginalPoint = originalPoints.get(0);
 		WptPt lastOriginalPoint = originalPoints.get(originalPoints.size() - 1);
