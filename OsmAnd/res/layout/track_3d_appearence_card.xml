@@ -73,7 +73,7 @@
 			android:id="@+id/item_label"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/content_padding"
 			android:gravity="center_vertical|start"
 			android:letterSpacing="0.01"
 			android:lineSpacingExtra="5sp"
