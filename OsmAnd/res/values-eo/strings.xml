@@ -5716,4 +5716,5 @@
     <string name="routing_attr_avoid_cobblestone_name">Eviti rulŝtonajn kahelojn</string>
     <string name="routing_attr_avoid_cobblestone_description">Eviti ĝibajn pavimŝtonojn</string>
     <string name="gpx_approximation_geo_cpp">Surbaze de geometrio (C++) (rapide)</string>
+    <string name="track_vertical_exaggeration_description">Per ŝanĝi la valoron de skalo vi povas ŝanĝi alton de 3-dimensia spuro.</string>
 </resources>
