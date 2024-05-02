@@ -161,12 +161,14 @@ public class MissingMapsCalculator {
 		if (mapsToDownload.isEmpty() && mapsToUpdate.isEmpty()) {
 			return false;
 		}
-		RouteCalculationProgress progress = ctx.calculationProgress;
-		progress.requestMapsToUpdate = true;
-		progress.mapsToDownload = convert(mapsToDownload);
-		progress.missingMaps = convert(missingMaps);
-		progress.mapsToUpdate = convert(mapsToUpdate);
-		progress.potentiallyUsedMaps = convert(usedMaps);
+		List<LatLon> points = CollectionUtils.asOneList(Collections.singletonList(start), targets);
+		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points);
+		result.requestMapsToUpdate = true;
+		result.mapsToDownload = convert(mapsToDownload);
+		result.missingMaps = convert(missingMaps);
+		result.mapsToUpdate = convert(mapsToUpdate);
+		result.potentiallyUsedMaps = convert(usedMaps);
+		ctx.calculationProgress.missingMapsCalculationResult = result;
 
 		LOG.info(String.format("Check missing maps %d points %.2f sec", pointsToCheck.size(),
 				(System.nanoTime() - tm) / 1e9));
@@ -272,21 +274,6 @@ public class MissingMapsCalculator {
 		if (reader != null) {
 			reader.close();
 		}
-	}
-
-	public String getErrorMessage(RoutingContext ctx) {
-		String msg = "";
-		if (ctx.calculationProgress.mapsToUpdate != null) {
-			msg = ctx.calculationProgress.mapsToUpdate + " need to be updated";
-		}
-		if (ctx.calculationProgress.missingMaps != null) {
-			if (msg.length() > 0) {
-				msg += " and ";
-			}
-			msg = ctx.calculationProgress.missingMaps + " need to be downloaded";
-		}
-		msg = "To calculate the route maps " + msg;
-		return msg;
 	}
 
 }

@@ -911,9 +911,9 @@ public class RoutePlannerFrontEnd {
 		}
 		targets.add(end);
 		if (CALCULATE_MISSING_MAPS) {
-			MissingMapsCalculator missingMapsCalculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
-			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
-				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
+			MissingMapsCalculator calculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
+			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
+				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
 			}
 		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {

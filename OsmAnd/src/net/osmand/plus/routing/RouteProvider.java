@@ -131,7 +131,9 @@ public class RouteProvider {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
-
+					if (params.calculationProgress.missingMapsCalculationResult != null) {
+						res.setMissingMapsCalculationResult(params.calculationProgress.missingMapsCalculationResult);
+					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
@@ -841,20 +843,7 @@ public class RouteProvider {
 		if (params.intermediates != null) {
 			inters = new ArrayList<>(params.intermediates);
 		}
-		RouteCalculationResult result = calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
-		List<LatLon> points  = new ArrayList<>();
-		points.add(st);
-		points.addAll(inters);
-		points.add(en);
-		RouteCalculationProgress progress = params.calculationProgress;
-		MissingMapsCalculationResult missingMapsCalculationResult = new MissingMapsCalculationResult(env.getCtx(), points);
-		missingMapsCalculationResult.requestMapsToUpdate = progress.requestMapsToUpdate;
-		missingMapsCalculationResult.mapsToDownload = progress.mapsToDownload;
-		missingMapsCalculationResult.missingMaps = progress.missingMaps;
-		missingMapsCalculationResult.mapsToUpdate = progress.mapsToUpdate;
-		missingMapsCalculationResult.potentiallyUsedMaps = progress.potentiallyUsedMaps;
-		result.setMissingMapsCalculationResult(missingMapsCalculationResult);
-		return result;
+		return calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, RouteCalculationParams params, OsmandSettings settings,

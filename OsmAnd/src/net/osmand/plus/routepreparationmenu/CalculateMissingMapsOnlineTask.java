@@ -69,14 +69,9 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				calculator.checkIfThereAreMissingMaps(
 						routingContext, routePoints.get(0), locations, routingType.isHHRouting()
 				);
-				RouteCalculationProgress progress = routingContext.calculationProgress;
-				MissingMapsCalculationResult result = new MissingMapsCalculationResult(routingContext, routePoints);
-				result.requestMapsToUpdate = progress.requestMapsToUpdate;
-				result.mapsToDownload = progress.mapsToDownload;
-				result.missingMaps = progress.missingMaps;
-				result.mapsToUpdate = progress.mapsToUpdate;
-				result.potentiallyUsedMaps = progress.potentiallyUsedMaps;
-				route.setMissingMapsCalculationResult(result);
+				if (routingContext.calculationProgress.missingMapsCalculationResult != null) {
+					route.setMissingMapsCalculationResult(routingContext.calculationProgress.missingMapsCalculationResult);
+				}
 				listener.onSuccess();
 			} catch (Exception e) {
 				listener.onError(e.getMessage());

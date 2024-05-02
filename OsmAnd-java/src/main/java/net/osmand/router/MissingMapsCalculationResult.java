@@ -49,4 +49,19 @@ public class MissingMapsCalculationResult {
 	public List<LatLon> getMissingMapsPoints() {
 		return missingMapsPoints;
 	}
+
+	public String getErrorMessage() {
+		String msg = "";
+		if (mapsToUpdate != null) {
+			msg = mapsToUpdate + " need to be updated";
+		}
+		if (missingMaps != null) {
+			if (msg.length() > 0) {
+				msg += " and ";
+			}
+			msg = missingMaps + " need to be downloaded";
+		}
+		msg = "To calculate the route maps " + msg;
+		return msg;
+	}
 }
