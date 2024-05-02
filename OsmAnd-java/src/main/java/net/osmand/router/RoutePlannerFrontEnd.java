@@ -17,7 +17,6 @@ import gnu.trove.list.array.TIntArrayList;
 import net.osmand.LocationsHolder;
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
-import net.osmand.PlatformResources;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -912,7 +911,7 @@ public class RoutePlannerFrontEnd {
 		}
 		targets.add(end);
 		if (CALCULATE_MISSING_MAPS) {
-			MissingMapsCalculator missingMapsCalculator = new MissingMapsCalculator(PlatformResources.getInitializedOsmandRegions());
+			MissingMapsCalculator missingMapsCalculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
 			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
 				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
 			}
