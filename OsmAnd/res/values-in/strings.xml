@@ -5719,4 +5719,12 @@
     <string name="title_3d_track">Trek 3D</string>
     <string name="explore_3d_track_description">Jelajahi trek dalam 3D interaktif! Visualisasikan ketinggian, kecepatan, dan masih banyak lagi secara langsung di peta.</string>
     <string name="gpx_approximation_geo_cpp">Berbasis geometri (C++, cepat)</string>
+    <string name="track_vertical_exaggeration_description">Dengan mengubah nilai skala, Anda dapat mengubah ketinggian trek 3D.</string>
+    <string name="allow_display_on_top">Perbolehkan menampilkan di atas</string>
+    <string name="allow_display_on_top_description">Perbolehkan menampilkan teks peta di atas</string>
+    <string name="show_debug_info">Tampilkan informasi pengawakutuan</string>
+    <string name="show_debug_info_description">Tampilkan info grafis tentang penempatan setiap teks peta</string>
+    <string name="map_text">Teks peta</string>
+    <string name="routing_attr_avoid_cobblestone_name">Hindari batu bulat</string>
+    <string name="routing_attr_avoid_cobblestone_description">Hindari batu bulat</string>
 </resources>
