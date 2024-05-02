@@ -1136,7 +1136,7 @@
     <string name="shared_string_places">Kohad</string>
     <string name="shared_string_search">Otsi</string>
     <string name="shared_string_show_description">Kuva kirjeldus.</string>
-    <string name="confirm_usage_speed_cameras">Paljudes riikides (Saksamaal, Prantsusmaal, Itaalias ja mujal) on kiiruskaamera hoiatuste kasutamine ebaseaduslik. OsmAnd ei võta vastutust seaduse rikkumiste korral. Palun vajuta \'Jah\' ainult kui sul on õigus seda funktsiooni kasutada.</string>
+    <string name="confirm_usage_speed_cameras">Paljudes riikides (Saksamaal, Prantsusmaal, Itaalias ja mujal) on kiiruskaamera hoiatuste kasutamine ebaseaduslik. OsmAnd ei võta vastutust seaduse rikkumiste korral. Palun vajuta „Jah“ ainult siis, kui sul on õigus seda funktsioonaalsust kasutada.</string>
     <string name="welcome_select_region">Liiklusmärkide ja reeglite korrektseks kajastamiseks valige oma sõidupiirkond:</string>
     <string name="welcome_text">OsmAnd pakub ülemaailmset võrguühenduseta kaardi sirvimist ja võrguühenduseta navigeerimist.</string>
     <string name="osm_changes_added_to_local_edits">OSM muudatused lisatud kohalike muudatuste hulka</string>
@@ -1381,7 +1381,7 @@
     <string name="osmo_edit_color">Ekraani värv</string>
     <string name="int_days">päeva</string>
     <string name="osmo_connect_menu">Ühenda</string>
-    <string name="always_center_position_on_map">Kuva asukoht alati keskel</string>
+    <string name="always_center_position_on_map">Sinu asukoht on alati keskel</string>
     <string name="voice_pref_title">Hääl</string>
     <string name="misc_pref_title">Mitmesugust</string>
     <string name="localization_pref_title">Tõlge</string>
@@ -2684,7 +2684,7 @@
     <string name="local_osm_changes_delete_all_confirm">Kustutadad %1$d OSM muudatust\?</string>
     <string name="local_index_tile_data_name">Paanide andmed: %1$s</string>
     <string name="edit_tilesource_successfully">Paanide allikas %1$s on salvestatud</string>
-    <string name="driving_region_descr">Vali sõidupiirkond: USA, Euroopa, UK, Aasia ja teised.</string>
+    <string name="driving_region_descr">Vali sõidupiirkond: USA, Euroopa, Suurbritannia, Aasia ja midagi muud.</string>
     <string name="speak_descr">Seadista teavitamine tänavanimede, liiklushoiatuste (sunnitud peatuste, teekünniste), kiiruskaamerate hoiatuste ja kiiruspiirangute osas.</string>
     <string name="settings_preset_descr">Kaardivaate ja navigeerimise sätted jäetakse meelde iga kasutusprofiili kohta eraldi. Seadista siin oma vaikeprofiil.</string>
     <string name="intermediate_items_sort_return">Vahe sihtkohtade optimeeritud järjekord teel sihtkohta.</string>
@@ -3408,7 +3408,7 @@
     <string name="shared_string_circle">Ring</string>
     <string name="shared_string_octagon">Kaheksanurk</string>
     <string name="shared_string_square">Ruut</string>
-    <string name="shared_string_min">Min.</string>
+    <string name="shared_string_min">Min</string>
     <string name="replace_point_descr">Asenda sellega mõni teine punkt.</string>
     <string name="app_mode_ski_touring">Suusasõit</string>
     <string name="app_mode_ski_snowmobile">Mootorsaan</string>
