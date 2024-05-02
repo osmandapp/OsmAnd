@@ -130,7 +130,7 @@ public class MapWidgetsFactory {
 			case ELEVATION_PROFILE:
 				return new ElevationProfileWidget(mapActivity, customId);
 			case AIDL_WIDGET:
-				return app.getAidlApi().askCreateExternalWidget(mapActivity, customId);
+				return app.getAidlApi().askCreateExternalWidget(mapActivity, customId, panel);
 			default:
 				return PluginsHelper.createMapWidget(mapActivity, widgetType, customId, panel);
 		}

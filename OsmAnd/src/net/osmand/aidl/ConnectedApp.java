@@ -26,10 +26,10 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
-import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
@@ -187,74 +187,83 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 			String baseWidgetId = widgetData.getId();
 			String widgetKey = WIDGET_ID_PREFIX + baseWidgetId;
-			TextInfoWidget widget = createWidgetControl(mapActivity, baseWidgetId);
-			MapWidgetInfo widgetInfo = createWidgetInfo(creator, widgetData, widget, widgetKey);
+			WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+			TextInfoWidget widget = createWidgetControl(mapActivity, baseWidgetId, defaultPanel);
+			MapWidgetInfo widgetInfo = createWidgetInfo(creator, widgetData, widget, widgetKey, defaultPanel);
 			widgetsInfos.add(widgetInfo);
 			widgetControls.put(baseWidgetId, widget);
 		}
 	}
 
 	@Nullable
-	public MapWidgetInfo askCreateWidgetInfo(@NonNull WidgetInfoCreator creator, @NonNull MapWidget widget, @NonNull String widgetId) {
+	public MapWidgetInfo askCreateWidgetInfo(@NonNull WidgetInfoCreator creator,
+	                                         @NonNull MapWidget widget,
+	                                         @NonNull String widgetId,
+	                                         @NonNull WidgetsPanel panel) {
 		for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 			String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
 			if (widgetId.startsWith(widgetKey)) {
-				return createWidgetInfo(creator, widgetData, widget, widgetId);
+				return createWidgetInfo(creator, widgetData, widget, widgetId, panel);
 			}
 		}
 		return null;
 	}
 
 	private MapWidgetInfo createWidgetInfo(@NonNull WidgetInfoCreator creator, @NonNull AidlMapWidgetWrapper widgetData,
-	                                       @NonNull MapWidget widget, @NonNull String widgetId) {
+	                                       @NonNull MapWidget widget, @NonNull String widgetId,
+	                                       @NonNull WidgetsPanel widgetsPanel) {
 		int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 		int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
-		WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 
 		String title = widgetData.getMenuTitle();
 		MapWidgetInfo widgetInfo = creator.createExternalWidget(
-				widgetId, widget, menuIconId, title, defaultPanel, widgetData.getOrder()
+				widgetId, widget, menuIconId, title, widgetsPanel, widgetData.getOrder()
 		);
-		((SideWidgetInfo) widgetInfo).setExternalProviderPackage(pack);
+		widgetInfo.setExternalProviderPackage(pack);
 		return widgetInfo;
 	}
 
 	@Nullable
-	public TextInfoWidget askCreateWidgetControl(@NonNull MapActivity mapActivity, @Nullable String widgetId) {
+	public TextInfoWidget askCreateWidgetControl(@NonNull MapActivity mapActivity,
+	                                             @Nullable String widgetId,
+	                                             @Nullable WidgetsPanel panel) {
 		if (widgetId != null) {
 			for (AidlMapWidgetWrapper widgetData : widgets.values()) {
 				String widgetKey = WIDGET_ID_PREFIX + widgetData.getId();
 				if (widgetId.startsWith(widgetKey)) {
-					return createWidgetControl(mapActivity, widgetId);
+					return createWidgetControl(mapActivity, widgetId, panel);
 				}
 			}
 		}
 		return null;
 	}
 
-	public AidlMapWidgetWrapper getWidgetData(@NonNull String widgetId) {
-		String dataId = WidgetType.getDefaultWidgetId(widgetId);
-		dataId = dataId.replace(WIDGET_ID_PREFIX, "");
+	public AidlMapWidgetWrapper getWidgetData(@Nullable String widgetId) {
+		String dataId = null;
+		if (widgetId != null) {
+			dataId = WidgetType.getDefaultWidgetId(widgetId);
+			dataId = dataId.replace(WIDGET_ID_PREFIX, "");
+		}
 		return widgets.get(dataId);
 	}
 
 	@NonNull
-	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
-		return new AidlTextInfoWidget(mapActivity, widgetId);
+	TextInfoWidget createWidgetControl(@NonNull MapActivity mapActivity, @NonNull String widgetId,
+	                                   @Nullable WidgetsPanel widgetsPanel) {
+		return new AidlTextInfoWidget(mapActivity, widgetId, widgetsPanel);
 	}
 
-	class AidlTextInfoWidget extends TextInfoWidget {
+	class AidlTextInfoWidget extends SimpleWidget {
 
 		private final String widgetId;
-
 		private String cachedTxt;
 		private String cachedSubtext;
 		private Boolean cachedNight;
 		private Integer cachedIcon;
 		private boolean init = true;
 
-		public AidlTextInfoWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId) {
-			super(mapActivity, null);
+		public AidlTextInfoWidget(@NonNull MapActivity mapActivity, @NonNull String widgetId, @Nullable WidgetsPanel widgetsPanel) {
+			super(mapActivity, WidgetType.AIDL_WIDGET, widgetId, widgetsPanel);
 			this.widgetId = widgetId;
 
 			updateInfo(null);
@@ -267,7 +276,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		}
 
 		@Override
-		public void updateInfo(@Nullable DrawSettings drawSettings) {
+		public void updateSimpleWidgetInfo(@Nullable DrawSettings drawSettings) {
 			AidlMapWidgetWrapper widget = getWidgetData(widgetId);
 			if (widget != null) {
 				String txt = widget.getText();
@@ -293,6 +302,11 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				setText(null, null);
 				setImageDrawable(null);
 			}
+		}
+
+		@Nullable
+		protected String getWidgetName() {
+			return getName();
 		}
 	}
 

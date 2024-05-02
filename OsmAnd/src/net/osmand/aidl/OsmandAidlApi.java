@@ -399,13 +399,13 @@ public class OsmandAidlApi {
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 						if (widgetData != null && layer != null) {
 							WidgetsAvailabilityHelper.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
-							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId, defaultPanel);
 							connectedApp.getWidgetControls().put(widgetId, widget);
 
 							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
-							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
@@ -414,7 +414,7 @@ public class OsmandAidlApi {
 							MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 							registry.registerWidget(widgetInfo);
 
-							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
+							widgetInfo.setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
 						}
 					}
@@ -502,9 +502,10 @@ public class OsmandAidlApi {
 	}
 
 	public TextInfoWidget askCreateExternalWidget(@NonNull MapActivity mapActivity,
-	                                              @Nullable String widgetId) {
+	                                              @Nullable String widgetId,
+	                                              @Nullable WidgetsPanel panel) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			TextInfoWidget mapWidget = connectedApp.askCreateWidgetControl(mapActivity, widgetId);
+			TextInfoWidget mapWidget = connectedApp.askCreateWidgetControl(mapActivity, widgetId, panel);
 			if (mapWidget != null) {
 				return mapWidget;
 			}
@@ -513,9 +514,12 @@ public class OsmandAidlApi {
 	}
 
 
-	public MapWidgetInfo askCreateExternalWidgetInfo(@NonNull WidgetInfoCreator creator, @NonNull MapWidget widget, @NonNull String widgetId) {
+	public MapWidgetInfo askCreateExternalWidgetInfo(@NonNull WidgetInfoCreator creator,
+	                                                 @NonNull MapWidget widget,
+	                                                 @NonNull String widgetId,
+	                                                 @NonNull WidgetsPanel panel) {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
-			MapWidgetInfo widgetInfo = connectedApp.askCreateWidgetInfo(creator, widget, widgetId);
+			MapWidgetInfo widgetInfo = connectedApp.askCreateWidgetInfo(creator, widget, widgetId, panel);
 			if (widgetInfo != null) {
 				return widgetInfo;
 			}
