@@ -66,21 +66,23 @@ public class WikiCoreHelper {
 		}
 		if (USE_OSMAND_WIKI_API) {
 			// article // category
-			String url = null;
+			String url = "";
 			try {
 				if (!Algorithms.isEmpty(wikidataId)) {
-					url = (url == null ? OSMAND_API_ENDPOINT : "&") + "article=" + URLEncoder.encode(wikiTitle, "UTF-8");
+					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "article=" + URLEncoder.encode(wikidataId, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiCategory)) {
-					url = (url == null ? OSMAND_API_ENDPOINT : "&") + "category=" + URLEncoder.encode(wikiTitle, "UTF-8");
+					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "category=" + URLEncoder.encode(wikiCategory, "UTF-8");
 				}
 				if (!Algorithms.isEmpty(wikiTitle)) {
-					url = (url == null ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
+					url += (url.length() == 0 ? OSMAND_API_ENDPOINT : "&") + "wiki=" + URLEncoder.encode(wikiTitle, "UTF-8");
 				}
 			} catch (UnsupportedEncodingException e) {
 				throw new RuntimeException(e);
 			}
-			getImagesOsmAndAPIRequest(url, wikiImages);
+			if (url.length() > 0) {
+				getImagesOsmAndAPIRequest(url, wikiImages);
+			}
 		} else {
 			if (!Algorithms.isEmpty(wikidataId)) {
 				getWikidataImageWikidata(wikidataId, wikiImages);
