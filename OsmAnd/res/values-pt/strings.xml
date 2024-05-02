@@ -5713,10 +5713,19 @@
     <string name="track_line">Linha do trilho</string>
     <string name="upward_gradient">Gradiente ascendente</string>
     <string name="title_3d_track">Trilho 3D</string>
-    <string name="explore_3d_track_description">Explore a pista em 3D interativo! Visualize a altura, a velocidade e muito mais diretamente no mapa.</string>
+    <string name="explore_3d_track_description">Explore o trilho em 3D interativo! Visualize a altura, a velocidade e muito mais diretamente no mapa.</string>
     <string name="maps_that_also_be_used">Mapas que também podem ser utilizados: %1$s</string>
     <string name="required_maps_calculate_online_summary">A lista de mapas em falta baseia-se no percurso em linha reta. Para obter uma lista exata de mapas, o OsmAnd pode pré-calcular o seu percurso online.</string>
     <string name="fixed_height">Altura fixa</string>
     <string name="getting_list_of_required_maps">A obter lista de mapas necessários…</string>
     <string name="downward_gradient">Gradiente descendente</string>
+    <string name="track_vertical_exaggeration_description">Ao alterar o valor da escala, pode alterar a altura do trilho 3D.</string>
+    <string name="gpx_approximation_geo_cpp">Baseado em geometria (C++, rápido)</string>
+    <string name="allow_display_on_top">Permitir visualização sobreposta</string>
+    <string name="allow_display_on_top_description">Permitir a apresentação de textos de mapas sobrepostos</string>
+    <string name="show_debug_info">Mostrar informação de depuração</string>
+    <string name="show_debug_info_description">Apresentar informações gráficas sobre a colocação de cada texto do mapa</string>
+    <string name="map_text">Textos do mapa</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evitar pedras irregulares</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evitar pedras irregulares</string>
 </resources>
