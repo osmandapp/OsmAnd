@@ -21,6 +21,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -275,13 +276,13 @@ public class MapButtonsHelper {
 	}
 
 	public void updateActiveActions() {
-		mapButtonStates = getButtonsStateForMode(settings.getApplicationMode());
+		mapButtonStates = createButtonsStates();
 	}
 
 	@NonNull
-	public List<QuickActionButtonState> getButtonsStateForMode(@NonNull ApplicationMode appMode) {
+	public List<QuickActionButtonState> createButtonsStates() {
 		List<QuickActionButtonState> list = new ArrayList<>();
-		List<String> actionsKeys = settings.QUICK_ACTION_BUTTONS.getStringsListForProfile(appMode);
+		List<String> actionsKeys = settings.QUICK_ACTION_BUTTONS.getStringsList();
 		if (!Algorithms.isEmpty(actionsKeys)) {
 			Set<String> uniqueKeys = new LinkedHashSet<>(actionsKeys);
 			for (String key : uniqueKeys) {
@@ -296,17 +297,14 @@ public class MapButtonsHelper {
 	}
 
 	public void resetQuickActionsForMode(@NonNull ApplicationMode appMode) {
-		for (QuickActionButtonState buttonState : getButtonsStateForMode(appMode)) {
+		for (QuickActionButtonState buttonState : getButtonsStates()) {
 			buttonState.resetForMode(appMode);
 		}
-		settings.QUICK_ACTION_BUTTONS.resetModeToDefault(appMode);
 		updateActionTypes();
 	}
 
 	public void copyQuickActionsFromMode(@NonNull ApplicationMode toAppMode, @NonNull ApplicationMode fromAppMode) {
-		settings.QUICK_ACTION_BUTTONS.setModeValue(toAppMode, settings.QUICK_ACTION_BUTTONS.getModeValue(fromAppMode));
-
-		for (QuickActionButtonState buttonState : getButtonsStateForMode(fromAppMode)) {
+		for (QuickActionButtonState buttonState : getButtonsStates()) {
 			buttonState.copyForMode(fromAppMode, toAppMode);
 		}
 		updateActionTypes();
@@ -414,6 +412,15 @@ public class MapButtonsHelper {
 
 	public void removeQuickActionButtonState(@NonNull QuickActionButtonState buttonState) {
 		settings.QUICK_ACTION_BUTTONS.removeValue(buttonState.getId());
+		updateActiveActions();
+		notifyUpdates();
+	}
+
+	public void setQuickActionButtonStates(@NonNull Collection<QuickActionButtonState> buttonStates) {
+		settings.QUICK_ACTION_BUTTONS.clearAll();
+		for (QuickActionButtonState state : buttonStates) {
+			settings.QUICK_ACTION_BUTTONS.addValue(state.getId());
+		}
 		updateActiveActions();
 		notifyUpdates();
 	}
