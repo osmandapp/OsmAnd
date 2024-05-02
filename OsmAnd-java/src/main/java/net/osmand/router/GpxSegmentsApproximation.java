@@ -17,9 +17,7 @@ import net.osmand.util.MapUtils;
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
 // DONE fixed Map Creator gpx "gaps" (the bug was lost results of splitRoadsAndAttachRoadSegments)
 
-// TODO fix minor "Points are not connected" (~0.01m)
-// TODO remove usage of finalPoints in Android/iOS (really ?)
-
+// TO-THINK ? fix minor "Points are not connected" (~0.01m)
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
 // TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
 
@@ -185,78 +183,5 @@ public class GpxSegmentsApproximation {
 			p.x31 = MapUtils.get31TileNumberX(p.loc.getLongitude());
 			p.y31 = MapUtils.get31TileNumberY(p.loc.getLatitude());
 		}
-	}
-
-	public static void updateFinalPointsWithExternalTimestamps(List<GpxPoint> finalPoints,
-	                                                           List<WptPt> sourcePoints) {
-		if (!validateExternalTimestamps(sourcePoints)) {
-			System.out.printf("Error: updateGpxPointsByExternalTimestamps() got invalid sourcePoints");
-			return;
-		}
-		for (GpxPoint gp : finalPoints) {
-			for (RouteSegmentResult seg : gp.routeToTarget) {
-				seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(gp, seg, sourcePoints));
-			}
-			RouteResultPreparation.recalculateTimeDistance(gp.routeToTarget);
-		}
-	}
-
-	private static float calcSegmentSpeedByExternalTimestamps(GpxPoint gp, RouteSegmentResult seg,
-	                                                          List<WptPt> waypoints) {
-		float speed = seg.getSegmentSpeed();
-		int indexStart = gp.ind, indexEnd = gp.targetInd;
-
-		if (indexStart == -1 || indexEnd == -1) {
-			int sx = seg.getStartPointX(), sy = seg.getStartPointY();
-			int ex = seg.getEndPointX(), ey = seg.getEndPointY();
-			double minDistStart = Double.POSITIVE_INFINITY;
-			double minDistEnd = Double.POSITIVE_INFINITY;
-
-			for (int i = 0; i < waypoints.size(); i++) {
-				int wx = MapUtils.get31TileNumberX(waypoints.get(i).getLongitude());
-				int wy = MapUtils.get31TileNumberY(waypoints.get(i).getLatitude());
-				double distStart = MapUtils.squareRootDist31(sx, sy, wx, wy);
-				double distEnd = MapUtils.squareRootDist31(ex, ey, wx, wy);
-				if (distStart < minDistStart) {
-					minDistStart = distStart;
-					indexStart = i;
-				}
-				if (distEnd < minDistEnd) {
-					minDistEnd = distEnd;
-					indexEnd = i;
-				}
-			}
-		}
-
-		if (indexStart != -1 && indexEnd != -1 && indexStart < indexEnd) {
-			long time = waypoints.get(indexEnd).time - waypoints.get(indexStart).time;
-			if (time > 0) {
-				double distance = 0;
-				for (int i = indexStart; i < indexEnd; i++) {
-					distance += MapUtils.getDistance(
-							waypoints.get(i).getLatitude(), waypoints.get(i).getLongitude(),
-							waypoints.get(i + 1).getLatitude(), waypoints.get(i + 1).getLongitude());
-				}
-				if (distance > 0) {
-					speed = (float) distance / ((float) time / 1000); // update based on external timestamps
-				}
-			}
-		}
-
-		return speed;
-	}
-
-	private static boolean validateExternalTimestamps(List<WptPt> waypoints) {
-		if (waypoints == null || waypoints.isEmpty()) {
-			return false;
-		}
-		long last = 0;
-		for (WptPt wpt : waypoints) {
-			if (wpt.time == 0 || wpt.time < last) {
-				return false;
-			}
-			last = wpt.time;
-		}
-		return true;
 	}
 }

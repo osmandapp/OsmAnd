@@ -334,6 +334,11 @@ public class GPXUtilities {
 			return heading;
 		}
 
+		public WptPt(double lat, double lon) {
+			this.lat = lat;
+			this.lon = lon;
+		}
+
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
 			this(lat, lon, time, ele, speed, hdop, Float.NaN);
 		}
