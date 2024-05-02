@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -345,8 +346,11 @@ public enum WidgetType {
 
 	@Nullable
 	public static WidgetType getById(@NonNull String id) {
+		String defaultId = getDefaultWidgetId(id);
+		if (defaultId.startsWith(OsmandAidlApi.WIDGET_ID_PREFIX)) {
+			return AIDL_WIDGET;
+		}
 		for (WidgetType widget : values()) {
-			String defaultId = getDefaultWidgetId(id);
 			if (widget.id.equals(defaultId)) {
 				return widget;
 			}

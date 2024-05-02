@@ -138,6 +138,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -498,6 +499,28 @@ public class OsmandAidlApi {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
 			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode);
 		}
+	}
+
+	public TextInfoWidget askCreateExternalWidget(@NonNull MapActivity mapActivity,
+	                                              @Nullable String widgetId) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			TextInfoWidget mapWidget = connectedApp.askCreateWidgetControl(mapActivity, widgetId);
+			if (mapWidget != null) {
+				return mapWidget;
+			}
+		}
+		return null;
+	}
+
+
+	public MapWidgetInfo askCreateExternalWidgetInfo(@NonNull WidgetInfoCreator creator, @NonNull MapWidget widget, @NonNull String widgetId) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			MapWidgetInfo widgetInfo = connectedApp.askCreateWidgetInfo(creator, widget, widgetId);
+			if (widgetInfo != null) {
+				return widgetInfo;
+			}
+		}
+		return null;
 	}
 
 	private void registerAddMapLayerReceiver(@NonNull MapActivity mapActivity) {
