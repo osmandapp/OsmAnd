@@ -5718,4 +5718,6 @@
     <string name="downward_gradient">Нисходящий градиент</string>
     <string name="title_3d_track">3D-трек</string>
     <string name="explore_3d_track_description">Исследуйте трек в интерактивном 3D! Визуализируйте высоту, скорость и многое другое прямо на карте.</string>
+    <string name="routing_attr_avoid_cobblestone_name">Без булыжника</string>
+    <string name="routing_attr_avoid_cobblestone_description">Без булыжника</string>
 </resources>
