@@ -145,6 +145,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private float defaultTrackWidth;
 	private final Map<String, Float> cachedTrackWidth = new HashMap<>();
 	private Map<String, Gpx3DVisualizationType> cachedTracksWith3dVisualization = new HashMap<>();
+	private Map<String, Gpx3DLinePositionType> cachedTracksWith3dLinePosition = new HashMap<>();
 	private Map<String, Float> cachedTracksVerticalExaggeration = new HashMap<>();
 
 	private Drawable startPointIcon;
@@ -572,13 +573,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int splitLabelsCount = 0;
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				Gpx3DLinePositionType trackLinePosition = getTrackLinePositionType(gpxFile);
+				Gpx3DLinePositionType cachedTrackLinePositionType = cachedTracksWith3dLinePosition.get(gpxFile.path);
 				Gpx3DVisualizationType trackVisualizationType = getTrackVisualizationType(gpxFile);
 				Gpx3DVisualizationType cachedTrackVisualizationType = cachedTracksWith3dVisualization.get(gpxFile.path);
 				float trackVerticalExaggeration = getTrackExaggeration(gpxFile);
 				Float cachedTrackVerticalExaggeration = cachedTracksVerticalExaggeration.get(gpxFile.path);
-				if (cachedTrackVisualizationType != trackVisualizationType || trackVerticalExaggeration != cachedTrackVerticalExaggeration) {
+				if (cachedTrackVisualizationType != trackVisualizationType ||
+						trackVerticalExaggeration != cachedTrackVerticalExaggeration ||
+						trackLinePosition != cachedTrackLinePositionType) {
 					cachedTracksWith3dVisualization.put(gpxFile.path, trackVisualizationType);
 					cachedTracksVerticalExaggeration.put(gpxFile.path, trackVerticalExaggeration);
+					cachedTracksWith3dLinePosition.put(gpxFile.path, trackLinePosition);
 					changed = true;
 				}
 				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
@@ -612,6 +618,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				QListPointI startFinishPoints = new QListPointI();
 				SplitLabelList splitLabels = new SplitLabelList();
+				Gpx3DLinePositionType trackLinePosition = getTrackLinePositionType(selectedGpxFile.getGpxFile());
 				Gpx3DVisualizationType trackVisualizationType = getTrackVisualizationType(selectedGpxFile.getGpxFile());
 				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
@@ -619,7 +626,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt finish = segment.points.get(segment.points.size() - 1);
-							if (trackVisualizationType != Gpx3DVisualizationType.NONE) {
+							if (trackVisualizationType != Gpx3DVisualizationType.NONE && trackLinePosition == Gpx3DLinePositionType.TOP) {
 								startFinishHeights.add((float) start.ele);
 								startFinishHeights.add((float) finish.ele);
 							}
@@ -640,9 +647,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							if (ind > 0) {
 								name = name.substring(0, ind);
 							}
+							SplitLabel splitLabel;
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.lon), Utilities.get31TileNumberY(point.lat));
-							SplitLabel splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179),
-									trackVisualizationType != Gpx3DVisualizationType.NONE ? (float) point.ele : 0);
+							if (trackVisualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179));
+							} else {
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), (float) point.ele);
+							}
 							splitLabels.add(splitLabel);
 						}
 					}

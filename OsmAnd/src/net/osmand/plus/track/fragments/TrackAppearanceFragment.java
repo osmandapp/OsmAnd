@@ -742,10 +742,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			cards.clear();
 
 			inflate(R.layout.list_item_divider_with_padding_basic, container, true);
-			track3DCard = new Track3DCard(mapActivity, trackDrawInfo);
-			track3DCard.exaggerationChangeListener = this;
-			addCard(container, track3DCard);
-			inflate(R.layout.list_item_divider_with_padding_basic, container, true);
 
 			if (!selectedGpxFile.isShowCurrentTrack()) {
 				splitIntervalCard = new SplitIntervalCard(mapActivity, trackDrawInfo);
@@ -761,6 +757,12 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			TrackWidthController trackWidthController = getWidthCardController();
 			addCard(container, new HeadedContentCard(mapActivity, trackWidthController));
+
+			inflate(R.layout.list_item_divider_with_padding_basic, container, true);
+			track3DCard = new Track3DCard(mapActivity, trackDrawInfo);
+			track3DCard.exaggerationChangeListener = this;
+			addCard(container, track3DCard);
+
 			addCard(container, new ActionsCard(mapActivity));
 		}
 	}
