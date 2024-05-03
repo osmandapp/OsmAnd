@@ -106,7 +106,7 @@ public abstract class MapWidget {
 	}
 
 	public boolean isExternal() {
-		return getWidgetType() == null;
+		return getWidgetType() == WidgetType.AIDL_WIDGET;
 	}
 
 	public void updateInfo(@Nullable DrawSettings drawSettings) {

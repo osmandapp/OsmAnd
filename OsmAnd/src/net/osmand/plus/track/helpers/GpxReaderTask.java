@@ -92,13 +92,15 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 							database.insertItem(item, conn);
 						}
 						item.setAnalysis(analysis);
-						long creationTime = item.getParameter(FILE_CREATION_TIME);
+						long creationTime = item.requireParameter(FILE_CREATION_TIME);
 						if (creationTime <= 0) {
 							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
 						}
 						setupNearestCityName(item);
-						if((double)item.getParameter(ADDITIONAL_EXAGGERATION) < SRTMPlugin.MIN_VERTICAL_EXAGGERATION){
-							item.setParameter(ADDITIONAL_EXAGGERATION, (double)SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
+						double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);
+						if (additionalExaggeration < SRTMPlugin.MIN_VERTICAL_EXAGGERATION
+								|| additionalExaggeration > SRTMPlugin.MAX_VERTICAL_EXAGGERATION) {
+							item.setParameter(ADDITIONAL_EXAGGERATION, (double) SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
 						}
 						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
 

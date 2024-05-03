@@ -40,6 +40,11 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -87,7 +92,6 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final String GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
-	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
 	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>() {{
@@ -328,6 +332,11 @@ public class GPXUtilities {
 
 		public float getHeading() {
 			return heading;
+		}
+
+		public WptPt(double lat, double lon) {
+			this.lat = lat;
+			this.lon = lon;
 		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
@@ -1406,15 +1415,15 @@ public class GPXUtilities {
 		}
 	}
 
-	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
+	public static long parseTime(String text, SimpleDateFormat format, DateTimeFormatter formatMillis) {
 		long time = 0;
 		if (text != null) {
 			try {
 				time = format.parse(text).getTime();
 			} catch (ParseException e1) {
 				try {
-					time = formatMillis.parse(text).getTime();
-				} catch (ParseException e2) {
+					time = ZonedDateTime.parse(text, formatMillis).toInstant().toEpochMilli();
+				} catch (DateTimeParseException e2) {
 					try {
 						time = getTimeNoTimeZoneFormatter().parse(text).getTime();
 					} catch (ParseException e3) {
@@ -1462,11 +1471,14 @@ public class GPXUtilities {
 		return format;
 	}
 
-	private static SimpleDateFormat getTimeFormatterMills() {
-		String pattern = GPX_TIME_OLD_FORMAT ? GPX_TIME_MILLIS_PATTERN_OLD : GPX_TIME_MILLIS_PATTERN;
-		SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
-		return format;
+	private static DateTimeFormatter getTimeFormatterMills() {
+		if (GPX_TIME_OLD_FORMAT) {
+			// never used
+			DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+			return builder.appendPattern(GPX_TIME_MILLIS_PATTERN_OLD).toFormatter().withZone(ZoneId.of("UTC"));
+		} else {
+			return DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("UTC"));
+		}
 	}
 
 	public static GPXFile loadGPXFile(File file) {

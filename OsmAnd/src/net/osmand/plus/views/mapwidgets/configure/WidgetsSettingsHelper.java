@@ -163,11 +163,14 @@ public class WidgetsSettingsHelper {
 		MapWidget duplicateWidget = widgetsFactory.createMapWidget(duplicateWidgetId, widgetType, panel);
 		if (duplicateWidget != null) {
 			WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-			settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
-			MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
-					duplicateWidgetId, duplicateWidget, widgetType, panel);
-			widgetRegistry.enableDisableWidgetForMode(appMode, duplicateWidgetInfo, true, false);
-			return duplicateWidgetInfo;
+			MapWidgetInfo duplicateWidgetInfo = creator.askCreateWidgetInfo(
+					duplicateWidgetId, duplicateWidget, widgetType, panel
+			);
+			if (duplicateWidgetInfo != null) {
+				settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateWidgetId);
+				widgetRegistry.enableDisableWidgetForMode(appMode, duplicateWidgetInfo, true, false);
+				return duplicateWidgetInfo;
+			}
 		}
 		return null;
 	}
