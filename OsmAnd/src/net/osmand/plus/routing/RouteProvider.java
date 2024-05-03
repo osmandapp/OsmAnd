@@ -124,7 +124,8 @@ public class RouteProvider {
 			try {
 				RouteCalculationResult res;
 				boolean calcGPXRoute = params.gpxRoute != null && (!params.gpxRoute.points.isEmpty()
-						|| (params.gpxRoute.reverse && !params.gpxRoute.routePoints.isEmpty()));
+						|| (params.gpxRoute.reverse && params.gpxRoute.useRoutePointsForReverse
+						&& !params.gpxRoute.routePoints.isEmpty()));
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
@@ -186,7 +187,7 @@ public class RouteProvider {
 		GPXRouteParams gpxParams = routeParams.gpxRoute;
 		boolean calcWholeRoute = routeParams.gpxRoute.passWholeRoute && (routeParams.previousToRecalculate == null || !routeParams.onlyStartPointChanged);
 		boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;
-		boolean reverseRoutePoints = gpxParams.reverse && gpxParams.routePoints.size() > 1;
+		boolean reverseRoutePoints = gpxParams.reverse && gpxParams.useRoutePointsForReverse && gpxParams.routePoints.size() > 1;
 		List<RouteSegmentResult> gpxRouteResult = routeParams.gpxRoute.route;
 		if (reverseRoutePoints) {
 			gpxRouteResult = reverseRoutePoints(routeParams);
