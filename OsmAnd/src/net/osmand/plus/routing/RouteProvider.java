@@ -186,6 +186,7 @@ public class RouteProvider {
 		GPXRouteParams gpxParams = routeParams.gpxRoute;
 		boolean calcWholeRoute = routeParams.gpxRoute.passWholeRoute && (routeParams.previousToRecalculate == null || !routeParams.onlyStartPointChanged);
 		boolean calculateOsmAndRouteParts = gpxParams.calculateOsmAndRouteParts;
+		boolean reverseRoutePoints = gpxParams.reverse && gpxParams.routePoints.size() > 1;
 		List<RouteSegmentResult> gpxRouteResult = routeParams.gpxRoute.route;
 
 		if (!Algorithms.isEmpty(gpxRouteResult)) {
