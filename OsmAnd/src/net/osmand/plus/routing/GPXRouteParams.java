@@ -33,6 +33,7 @@ public class GPXRouteParams {
 	protected List<Location> segmentEndpoints = new ArrayList<>();
 	protected List<WptPt> routePoints = new ArrayList<>();
 	protected boolean reverse;
+	protected boolean useRoutePointsForReverse;
 	protected boolean passWholeRoute;
 	protected boolean calculateOsmAndRoute;
 	protected boolean connectPointsStraightly;
@@ -65,6 +66,7 @@ public class GPXRouteParams {
 	public GPXRouteParams prepareGPXFile(@NonNull GPXRouteParamsBuilder builder) {
 		GPXFile file = builder.file;
 		reverse = builder.reverse;
+		useRoutePointsForReverse = builder.useRoutePointsForReverse;
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 		calculatedRouteTimeSpeed = builder.calculatedRouteTimeSpeed;
@@ -132,6 +134,7 @@ public class GPXRouteParams {
 		private final GPXFile file;
 		private final boolean leftSide;
 		private boolean reverse;
+		private boolean useRoutePointsForReverse;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
 		private boolean calculatedRouteTimeSpeed;
@@ -156,6 +159,10 @@ public class GPXRouteParams {
 
 		public boolean isReverse() {
 			return reverse;
+		}
+
+		public boolean isUseRoutePointsForReverse() {
+			return useRoutePointsForReverse;
 		}
 
 		public boolean isCalculateOsmAndRouteParts() {
@@ -287,6 +294,10 @@ public class GPXRouteParams {
 			this.reverse = reverse;
 		}
 
+		public void setUseRoutePointsForReverse(boolean useRoutePointsForReverse) {
+			this.useRoutePointsForReverse = useRoutePointsForReverse;
+		}
+
 		public GPXFile getFile() {
 			return file;
 		}
@@ -304,6 +315,7 @@ public class GPXRouteParams {
 					", file=" + file.path +
 					", leftSide=" + leftSide +
 					", reverse=" + reverse +
+					", useRoutePointsForReverse=" + useRoutePointsForReverse +
 					", passWholeRoute=" + passWholeRoute +
 					", calculateOsmAndRouteParts=" + calculateOsmAndRouteParts +
 					", calculatedRouteTimeSpeed=" + calculatedRouteTimeSpeed +
