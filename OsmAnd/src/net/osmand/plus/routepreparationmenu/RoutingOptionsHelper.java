@@ -243,7 +243,6 @@ public class RoutingOptionsHelper {
 		if (rp != null) {
 			if (gpxParam.id == R.string.gpx_option_reverse_route) {
 				rp.setReverse(selected);
-				rp.setUseRoutePointsForReverse(false);
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
 				if (ps.size() > 0) {
