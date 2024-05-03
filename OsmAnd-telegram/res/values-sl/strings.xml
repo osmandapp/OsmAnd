@@ -275,4 +275,8 @@
     <string name="timeline_description">Omogoči spremljanje za shranjevanje vseh lokacij v zgodovino.</string>
     <string name="sharing_location">Skupna raba lokacije</string>
     <string name="process_service">Storitev OsmAnd Tracker</string>
+    <string name="location_source_summary">Program OsmAnd, nameščen iz storitve Google Play, privzeto uporablja storitve Google Play za določanje lokacije.
+\n
+\nČe dobiš netočne informacije o lokaciji ali uporabljaš napravo brez storitve Google Play, poskusi preklopiti na programski vmesnik Android API</string>
+    <string name="location_source">Vir lokacije</string>
 </resources>
