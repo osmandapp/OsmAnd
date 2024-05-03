@@ -5682,7 +5682,7 @@
     <string name="gpx_approximation_java">Rutiranje-bazirano (Java)</string>
     <string name="gpx_approximation_geo_java">Rutiranje-bazirano (Java, brzo)</string>
     <string name="fix_north_up_descr">Ne rotirarti mapu pokretima u orijentaciji prema severu</string>
-    <string name="fix_north_up">Fiksirati mapa prema severu</string>
+    <string name="fix_north_up">Fiksirati mapu prema severu</string>
     <string name="change_default_appearance_confirmation">Promeni podrazumevani izgled za %1$s?</string>
     <string name="use_3d_track_visualization">3D vizuelizacija</string>
     <string name="apply_only_to_new">Primenjivati samo na nove</string>
@@ -5720,4 +5720,13 @@
     <string name="top_and_bottom">Vrh i dno</string>
     <string name="title_3d_track">3D staza</string>
     <string name="explore_3d_track_description">Istraži stazu u interaktivnom 3D! Vizualiziraj visinu, brzinu i još toga direktno na mapi.</string>
+    <string name="track_vertical_exaggeration_description">Promenom vrednosti na skali možeš promeniti visinu 3D staze.</string>
+    <string name="gpx_approximation_geo_cpp">Temeljeno na geometriji (C++, fast)</string>
+    <string name="allow_display_on_top">Dopusti prikaz odozgo</string>
+    <string name="allow_display_on_top_description">Omogući prikaz teksta s mape jedan iznad drugog</string>
+    <string name="show_debug_info">Pokaži debug informacije</string>
+    <string name="show_debug_info_description">Prikaži grafičke informacije o položaju svakog teksta mape</string>
+    <string name="map_text">Tekst mape</string>
+    <string name="routing_attr_avoid_cobblestone_name">Izbegavati kaldrmu</string>
+    <string name="routing_attr_avoid_cobblestone_description">Izbegavati kaldrmu</string>
 </resources>
