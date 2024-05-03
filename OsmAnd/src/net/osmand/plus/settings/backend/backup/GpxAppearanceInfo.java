@@ -30,6 +30,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
@@ -68,23 +69,22 @@ public class GpxAppearanceInfo {
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private float verticalExaggeration = 1f;
 
-
 	public GpxAppearanceInfo() {
 	}
 
 	public GpxAppearanceInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		color = helper.getParameter(item, COLOR);
+		color = helper.requireParameter(item, COLOR);
 		width = helper.getParameter(item, WIDTH);
-		showArrows = helper.getParameter(item, SHOW_ARROWS);
-		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
-		splitType = helper.getParameter(item, SPLIT_TYPE);
-		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
+		showArrows = helper.requireParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
+		splitType = helper.requireParameter(item, SPLIT_TYPE);
+		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		coloringType = helper.getParameter(item, COLORING_TYPE);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
-		verticalExaggeration = helper.getParameter(item, ADDITIONAL_EXAGGERATION);
+		verticalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
@@ -92,12 +92,12 @@ public class GpxAppearanceInfo {
 			wptPoints = analysis.getWptPoints();
 			totalDistance = analysis.getTotalDistance();
 		}
-		smoothingThreshold = item.getParameter(SMOOTHING_THRESHOLD);
-		minFilterSpeed = item.getParameter(MIN_FILTER_SPEED);
-		maxFilterSpeed = item.getParameter(MAX_FILTER_SPEED);
-		minFilterAltitude = item.getParameter(MIN_FILTER_ALTITUDE);
-		maxFilterAltitude = item.getParameter(MAX_FILTER_ALTITUDE);
-		maxFilterHdop = item.getParameter(MAX_FILTER_HDOP);
+		smoothingThreshold = item.requireParameter(SMOOTHING_THRESHOLD);
+		minFilterSpeed = item.requireParameter(MIN_FILTER_SPEED);
+		maxFilterSpeed = item.requireParameter(MAX_FILTER_SPEED);
+		minFilterAltitude = item.requireParameter(MIN_FILTER_ALTITUDE);
+		maxFilterAltitude = item.requireParameter(MAX_FILTER_ALTITUDE);
+		maxFilterHdop = item.requireParameter(MAX_FILTER_HDOP);
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {
@@ -148,6 +148,18 @@ public class GpxAppearanceInfo {
 			gpxAppearanceInfo.coloringType = coloringType == null
 					? null : coloringType.getName(null);
 		}
+
+		hasAnyParam |= json.has("line_3d_visualization_by_type");
+		String trackVisualizationType = json.optString("line_3d_visualization_by_type");
+		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
+		hasAnyParam |= json.has("line_3d_visualization_wall_color_type");
+		String trackWallColorType = json.optString("line_3d_visualization_wall_color_type");
+		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
+		hasAnyParam |= json.has("line_3d_visualization_position_type");
+		String trackLinePositionType = json.optString("line_3d_visualization_position_type");
+		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
+		hasAnyParam |= json.has("vertical_exaggeration_scale");
+		gpxAppearanceInfo.verticalExaggeration = (float) json.optDouble("vertical_exaggeration_scale", SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
 
 		hasAnyParam |= json.has("time_span");
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");

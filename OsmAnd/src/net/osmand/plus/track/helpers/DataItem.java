@@ -40,6 +40,17 @@ public abstract class DataItem {
 		return !map.isEmpty();
 	}
 
+	@NonNull
+	@SuppressWarnings("unchecked")
+	public <T> T requireParameter(@NonNull GpxParameter parameter) {
+		Object res = getParameter(parameter);
+		if (res == null) {
+			throw new IllegalStateException("Requested parameter '" + parameter + "' is null.");
+		} else {
+			return ((Class<T>) parameter.getTypeClass()).cast(res);
+		}
+	}
+
 	@Nullable
 	@SuppressWarnings("unchecked")
 	public <T> T getParameter(@NonNull GpxParameter parameter) {

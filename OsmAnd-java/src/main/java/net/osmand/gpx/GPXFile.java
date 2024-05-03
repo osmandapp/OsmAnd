@@ -778,13 +778,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public void setAdditionalExaggeration(int additionalExaggeration) {
-		getExtensionsToWrite().put("additional_exaggeration", String.valueOf(additionalExaggeration));
+		getExtensionsToWrite().put("vertical_exaggeration_scale", String.valueOf(additionalExaggeration));
 	}
 
 	public float getAdditionalExaggeration() {
 		String additionalExaggeration = null;
 		if (extensions != null) {
-			additionalExaggeration = extensions.get("additional_exaggeration");
+			additionalExaggeration = extensions.get("vertical_exaggeration_scale");
 		}
 		return Algorithms.parseFloatSilently(additionalExaggeration, 1f);
 	}

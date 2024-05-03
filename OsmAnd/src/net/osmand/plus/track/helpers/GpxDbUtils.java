@@ -8,8 +8,6 @@ import static net.osmand.plus.track.helpers.GPXDatabase.GPX_DIR_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_UPDATE_PARAMETERS_START;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -247,10 +245,10 @@ public class GpxDbUtils {
 			return !item.hasData() || item.getAnalysis() == null
 					|| Algorithms.isEmpty(item.getAnalysis().getWptCategoryNames())
 					|| item.getAnalysis().getLatLonStart() == null && item.getAnalysis().getPoints() > 0
-					|| (long) item.getParameter(FILE_LAST_MODIFIED_TIME) != item.getFile().lastModified()
-					|| (long) item.getParameter(FILE_CREATION_TIME) <= 0
-					|| (long) item.getParameter(EXPECTED_ROUTE_DURATION) < 0
-					|| createDataVersion(ANALYSIS_VERSION) > (int) item.getParameter(DATA_VERSION);
+					|| (long) item.requireParameter(FILE_LAST_MODIFIED_TIME) != item.getFile().lastModified()
+					|| (long) item.requireParameter(FILE_CREATION_TIME) <= 0
+					|| (long) item.requireParameter(EXPECTED_ROUTE_DURATION) < 0
+					|| createDataVersion(ANALYSIS_VERSION) > (int) item.requireParameter(DATA_VERSION);
 		}
 		return true;
 	}

@@ -26,6 +26,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -163,15 +164,15 @@ public class TrackDrawInfo {
 		String type = helper.getParameter(item, COLORING_TYPE);
 		coloringType = ColoringType.requireValueOf(TRACK, type);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(type);
-		splitType = helper.getParameter(item, SPLIT_TYPE);
-		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
-		joinSegments = helper.getParameter(item, JOIN_SEGMENTS);
-		showArrows = helper.getParameter(item, SHOW_ARROWS);
-		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
+		splitType = helper.requireParameter(item, SPLIT_TYPE);
+		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
+		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
+		showArrows = helper.requireParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
-		additionalExaggeration = ((Double)helper.getParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
+		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 	}
 
 	@Nullable

@@ -172,7 +172,7 @@ public class VerticalExaggerationFragment extends ContextMenuScrollFragment {
 	static public String getFormattedScaleValue(@NonNull OsmandApplication app, float scale) {
 		DecimalFormat decimalFormat = new DecimalFormat("#");
 		String formattedScale = "x" + (scale % 1 == 0 ? decimalFormat.format(scale) : scale);
-		return scale == MIN_VERTICAL_EXAGGERATION ? app.getString(R.string.shared_string_none) : formattedScale;
+		return scale > MIN_VERTICAL_EXAGGERATION ? formattedScale : app.getString(R.string.shared_string_none);
 	}
 
 	private boolean isChangesMade() {
