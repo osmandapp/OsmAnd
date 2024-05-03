@@ -316,10 +316,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		elevationAngle = settings.getLastKnownMapElevation();
 	}
 
-	private float getCurrentDensity() {
-		return isCarView() ? getCarViewDensity() : dm.density;
-	}
-
 	@Nullable
 	public MapActivity getMapActivity() {
 		return mapActivity;
@@ -1174,8 +1170,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	protected void drawMapPosition(Canvas canvas, float x, float y) {
-		canvas.drawCircle(x, y, 3 * getCurrentDensity(), paintCenter);
-		canvas.drawCircle(x, y, 7 * getCurrentDensity(), paintCenter);
+		canvas.drawCircle(x, y, 3 * dm.density, paintCenter);
+		canvas.drawCircle(x, y, 7 * dm.density, paintCenter);
 	}
 
 	private void refreshBufferImage(@NonNull DrawSettings drawSettings) {

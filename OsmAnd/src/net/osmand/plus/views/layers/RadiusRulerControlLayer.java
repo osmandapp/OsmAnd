@@ -13,7 +13,6 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.util.DisplayMetrics;
 import android.view.View;
 
 import androidx.annotation.DrawableRes;
@@ -30,14 +29,12 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.AngularConstants;
 import net.osmand.plus.settings.enums.MetricsConstants;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
@@ -97,7 +94,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	private final int[] arcColors = {Color.parseColor("#00237BFF"), Color.parseColor("#237BFF"), Color.parseColor("#00237BFF")};
 
 	private float cachedHeading;
-	private boolean isCarViewMap = false;
 
 	public RadiusRulerControlLayer(@NonNull Context ctx) {
 		super(ctx);
@@ -115,7 +111,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		cacheCenter = new QuadPoint();
 		maxRadiusInDp = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 
-		initCenterIcon(view);
+		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
@@ -145,23 +142,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void initCenterIcon(@NonNull OsmandMapTileView view) {
-		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-		NavigationSession session = app.getCarNavigationSession();
-		int densityDpi;
-		if (session != null) {
-			densityDpi = session.getNavigationCarSurface().getDpi();
-		} else {
-			DisplayMetrics metrics = app.getResources().getDisplayMetrics();
-			densityDpi = metrics.densityDpi;
-		}
-		bitmapOptions.inScreenDensity = densityDpi;
-		bitmapOptions.inTargetDensity = densityDpi;
-		bitmapOptions.inScaled = true;
-		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day, bitmapOptions);
-		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night, bitmapOptions);
-	}
-
 	@Override
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		super.setMapActivity(mapActivity);
@@ -184,27 +164,13 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings drawSettings) {
-		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
-		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();
-
-		if (mapView.isCarView() != isCarViewMap) {
-			isCarViewMap = mapView.isCarView();
-			initCenterIcon(mapView);
-		}
-		if (isRulerWidgetOn() && !animatedThread.isAnimatingMapZoom()) {
+		if (isRulerWidgetOn() && !tb.isZoomAnimated()) {
 			OsmandApplication app = view.getApplication();
 			OsmandSettings settings = app.getSettings();
 			circleAttrs.updatePaints(app, drawSettings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(app, drawSettings, tb);
 			circleAttrsAlt.paint2.setStyle(Style.FILL);
-
-			float density = isCarViewMap ? mapView.getCarViewDensity() : tb.getDensity();
-			float circleTextSize = TEXT_SIZE * density;
-			circleAttrs.paint2.setTextSize(circleTextSize);
-			circleAttrs.paint3.setTextSize(circleTextSize);
-			circleAttrsAlt.paint2.setTextSize(circleTextSize);
-			circleAttrsAlt.paint3.setTextSize(circleTextSize);
 			QuadPoint center = tb.getCenterPixelPoint();
 			canvas.rotate(-tb.getRotate(), center.x, center.y);
 
