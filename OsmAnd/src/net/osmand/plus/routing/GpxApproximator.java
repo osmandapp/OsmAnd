@@ -136,7 +136,7 @@ public class GpxApproximator {
 		notifyUpdateProgress(gctx);
 		approximationTask = () -> {
 			try {
-				routingHelper.calculateGpxApproximation(env, gctx, getPoints(), resultMatcher);
+				routingHelper.calculateGpxApproximation(env, gctx, getPoints(), resultMatcher, false);
 			} catch (Exception e) {
 				resultMatcher.publish(null);
 				log.error(e.getMessage(), e);

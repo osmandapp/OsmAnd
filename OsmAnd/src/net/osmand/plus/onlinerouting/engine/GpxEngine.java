@@ -161,7 +161,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				gctx.ctx.calculationProgress = calculationProgress;
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
-				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
+				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null, calculatedTimeSpeed[0]);
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode, calculatedTimeSpeed[0]);
 				calculatedTimeSpeed[0] = ctx.hasCalculatedTimeSpeed();

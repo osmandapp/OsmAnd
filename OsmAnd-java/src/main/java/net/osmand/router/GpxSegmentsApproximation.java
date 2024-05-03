@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
@@ -16,9 +17,7 @@ import net.osmand.util.MapUtils;
 // DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
 // DONE fixed Map Creator gpx "gaps" (the bug was lost results of splitRoadsAndAttachRoadSegments)
 
-// TODO fix minor "Points are not connected" (~0.01m)
-// TODO remove usage of finalPoints in Android/iOS (really ?)
-
+// TO-THINK ? fix minor "Points are not connected" (~0.01m)
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
 // TO-THINK ? makePrecise for start / end segments (just check how correctly they are calculated)
 
@@ -31,7 +30,7 @@ public class GpxSegmentsApproximation {
 	// private List<Integer> DEBUG_IDS = Arrays.asList(499257893, 126338247, 237816930); // good, wrong, turn
 
 	public GpxRouteApproximation fastGpxApproximation(RoutePlannerFrontEnd frontEnd, GpxRouteApproximation gctx,
-	                                                    List<GpxPoint> gpxPoints) throws IOException {
+	                                                  List<GpxPoint> gpxPoints) throws IOException {
 		long timeToCalculate = System.nanoTime();
 
 		initGpxPointsXY31(gpxPoints);

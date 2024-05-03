@@ -917,8 +917,8 @@ public class RoutingHelper {
 		return provider.generateGpxPoints(env, gctx, locationsHolder);
 	}
 
-	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher);
+	public GpxRouteApproximation calculateGpxApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher, boolean useExternalTimestamps) throws IOException, InterruptedException {
+		return provider.calculateGpxPointsApproximation(env, gctx, points, resultMatcher, useExternalTimestamps);
 	}
 
 	public void notifyIfRouteIsCalculated() {
