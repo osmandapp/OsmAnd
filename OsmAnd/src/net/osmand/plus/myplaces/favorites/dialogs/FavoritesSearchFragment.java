@@ -56,6 +56,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class FavoritesSearchFragment extends DialogFragment {
@@ -115,11 +116,8 @@ public class FavoritesSearchFragment extends DialogFragment {
 				new SimpleTextWatcher() {
 					@Override
 					public void afterTextChanged(Editable s) {
-						String newQueryText = s.toString();
-						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
-							searchQuery = newQueryText;
-							listAdapter.getFilter().filter(newQueryText);
-						}
+						searchQuery = s.toString();
+						listAdapter.getFilter().filter(searchQuery);
 					}
 				}
 		);
@@ -165,6 +163,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 			listAdapter.setAccessibilityAssistant(accessibilityAssistant);
 			listAdapter.synchronizePoints();
 			listView.setAdapter(listAdapter);
+			searchEditText.setText(searchQuery);
 		}
 		openKeyboard();
 	}
@@ -208,7 +207,17 @@ public class FavoritesSearchFragment extends DialogFragment {
 				new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()),
 				true,
 				point);
-		MapActivity.launchMapActivityMoveToTop(requireActivity());
+        MapActivity.launchMapActivityMoveToTop(requireActivity(), createBundle(searchQuery), null, null);
+	}
+
+	private static Bundle createBundle(final String searchQuery) {
+		final Bundle bundle = new Bundle();
+		bundle.putString(FAV_SEARCH_QUERY_KEY, searchQuery);
+		return bundle;
+	}
+
+	public static Optional<String> getSearchQuery(final Bundle bundle) {
+		return Optional.ofNullable(bundle.getString(FAV_SEARCH_QUERY_KEY));
 	}
 
 	private OsmandApplication getMyApplication() {
