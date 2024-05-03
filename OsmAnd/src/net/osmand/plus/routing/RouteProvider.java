@@ -736,8 +736,8 @@ public class RouteProvider {
 		return env.getRouter().generateGpxPoints(gctx, locationsHolder);
 	}
 
-	public GpxRouteApproximation calculateGpxPointsApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
-		return env.getRouter().searchGpxRoute(gctx, points, resultMatcher);
+	public GpxRouteApproximation calculateGpxPointsApproximation(RoutingEnvironment env, GpxRouteApproximation gctx, List<GpxPoint> points, ResultMatcher<GpxRouteApproximation> resultMatcher, boolean useExternalTimestamps) throws IOException, InterruptedException {
+		return env.getRouter().searchGpxRoute(gctx, points, resultMatcher, useExternalTimestamps);
 	}
 
 	protected RoutingEnvironment calculateRoutingEnvironment(RouteCalculationParams params, boolean calcGPXRoute, boolean skipComplex) throws IOException {

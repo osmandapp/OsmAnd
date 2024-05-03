@@ -11,6 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.gpx.GPXUtilities;
 import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -128,12 +129,65 @@ public class RoutePlannerFrontEnd {
 			}
 			return null;
 		}
+
+		public void applyExternalTimestamps(List<GpxPoint> sourcePoints) {
+			if (!validateExternalTimestamps(sourcePoints)) {
+				log.warn("applyExternalTimestamps() got invalid sourcePoints");
+				return;
+			}
+			for (GpxPoint gp : finalPoints) {
+				for (RouteSegmentResult seg : gp.routeToTarget) {
+					seg.setSegmentSpeed(calcSegmentSpeedByExternalTimestamps(gp, seg, sourcePoints));
+				}
+				RouteResultPreparation.recalculateTimeDistance(gp.routeToTarget);
+			}
+		}
+
+		private float calcSegmentSpeedByExternalTimestamps(GpxPoint gp, RouteSegmentResult seg,
+																  List<GpxPoint> sourcePoints) {
+			float speed = seg.getSegmentSpeed();
+			int indexStart = gp.ind, indexEnd = gp.targetInd;
+
+			if (indexEnd == -1 && indexStart >= 0 && indexStart + 1 < sourcePoints.size()) {
+				indexEnd = indexStart + 1; // this is straight line
+			}
+
+			if (indexStart >=0 && indexEnd > 0 && indexStart < indexEnd) {
+				long time = sourcePoints.get(indexEnd).time - sourcePoints.get(indexStart).time;
+				if (time > 0) {
+					double distance = 0;
+					for (int i = indexStart; i < indexEnd; i++) {
+						distance += MapUtils.getDistance(sourcePoints.get(i).loc, sourcePoints.get(i + 1).loc);
+					}
+					if (distance > 0) {
+						speed = (float) distance / ((float) time / 1000); // update based on external timestamps
+					}
+				}
+			}
+
+			return speed;
+		}
+
+		private boolean validateExternalTimestamps(List<GpxPoint> points) {
+			if (points == null || points.isEmpty()) {
+				return false;
+			}
+			long last = 0;
+			for (GpxPoint p : points) {
+				if (p.time == 0 || p.time < last) {
+					return false;
+				}
+				last = p.time;
+			}
+			return true;
+		}
 	}
 
 	public static class GpxPoint {
 		public int ind;
 		public LatLon loc;
 		public int x31, y31;
+		public long time = 0;
 		public double cumDist;
 		public RouteSegmentPoint pnt;
 		public List<RouteSegmentResult> routeToTarget;
@@ -329,12 +383,21 @@ public class RoutePlannerFrontEnd {
 		}
 	}
 
-	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
+	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
+	                                            ResultMatcher<GpxRouteApproximation> resultMatcher,
+	                                            boolean useExternalTimestamps)
+			throws IOException, InterruptedException {
+		GpxRouteApproximation result;
 		if (useGeometryBasedApproximation) {
-			return searchGpxSegments(gctx, gpxPoints, resultMatcher);
-		} else {
-			return searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
+			result = searchGpxSegments(gctx, gpxPoints, resultMatcher);
 		}
+		else {
+			result = searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
+		}
+		if (useExternalTimestamps) {
+			result.applyExternalTimestamps(gpxPoints);
+		}
+		return result;
 	}
 
 	public GpxRouteApproximation searchGpxSegments(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
@@ -629,6 +692,7 @@ public class RoutePlannerFrontEnd {
 		for(int i = 0; i < locationsHolder.getSize(); i++) {
 			GpxPoint p = new GpxPoint();
 			p.ind = i;
+			p.time = locationsHolder.getTime(i);
 			p.loc = locationsHolder.getLatLon(i);
 			if (prev != null) {
 				p.cumDist = MapUtils.getDistance(p.loc, prev.loc) + prev.cumDist;
