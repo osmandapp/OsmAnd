@@ -295,16 +295,17 @@ public class WidgetInfoFragment extends BaseWidgetFragment implements WidgetsCon
 		}
 
 		String duplicateId = WidgetType.getDuplicateWidgetId(widgetType);
-
+		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, panel);
+		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
+		MapWidgetInfo duplicateWidgetInfo = creator.askCreateWidgetInfo(duplicateId, duplicateWidget, widgetType, panel);
+		if (duplicateWidgetInfo == null) {
+			return null;
+		}
 		settings.CUSTOM_WIDGETS_KEYS.addModeValue(appMode, duplicateId);
 		WidgetState widgetState = widgetInfo.getWidgetState();
 		if (widgetState != null) {
 			widgetState.copyPrefs(appMode, duplicateId);
 		}
-		MapWidget duplicateWidget = new MapWidgetsFactory(mapActivity).createMapWidget(duplicateId, widgetType, panel);
-		WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
-		MapWidgetInfo duplicateWidgetInfo = creator.createCustomWidgetInfo(
-				duplicateId, duplicateWidget, widgetType, panel);
 		duplicateWidgetInfo.enableDisableForMode(appMode, true);
 		widgetInfo.widget.copySettings(appMode, duplicateId);
 
