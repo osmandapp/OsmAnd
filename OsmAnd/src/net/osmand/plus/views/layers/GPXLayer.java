@@ -144,10 +144,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int cachedColor;
 	private float defaultTrackWidth;
 	private final Map<String, Float> cachedTrackWidth = new HashMap<>();
-	private Map<String, Gpx3DVisualizationType> cachedTracksWith3dVisualization = new HashMap<>();
-	private Map<String, Gpx3DLinePositionType> cachedTracksWith3dLinePosition = new HashMap<>();
-	private Map<String, Float> cachedTracksVerticalExaggeration = new HashMap<>();
-	private Map<String, Integer> cachedTracksColors = new HashMap<>();
+	private final Map<String, Gpx3DVisualizationType> cachedTracksWith3dVisualization = new HashMap<>();
+	private final Map<String, Gpx3DLinePositionType> cachedTracksWith3dLinePosition = new HashMap<>();
+	private final Map<String, Float> cachedTracksVerticalExaggeration = new HashMap<>();
+	private final Map<String, Integer> cachedTracksColors = new HashMap<>();
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
@@ -586,7 +586,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					changed = true;
 				}
 				if (cachedTrackVisualizationType != trackVisualizationType ||
-						trackVerticalExaggeration != cachedTrackVerticalExaggeration ||
+						cachedTrackVerticalExaggeration == null || trackVerticalExaggeration != cachedTrackVerticalExaggeration ||
 						trackLinePosition != cachedTrackLinePositionType) {
 					cachedTracksWith3dVisualization.put(gpxFile.path, trackVisualizationType);
 					cachedTracksVerticalExaggeration.put(gpxFile.path, trackVerticalExaggeration);
@@ -794,7 +794,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						getTrackVisualizationType(selectedGpxFile.getGpxFile()),
 						getTrackWallColorType(selectedGpxFile.getGpxFile()),
 						getTrackLinePositionType(selectedGpxFile.getGpxFile()),
-						getAdditionalExaggeration(selectedGpxFile.getGpxFile())
+						getTrackExaggeration(selectedGpxFile.getGpxFile())
 				);
 				List<TrkSegment> segments = coloringType.isGradient()
 						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), false)
@@ -1240,7 +1240,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					updated |= renderableSegment.setTrackVisualizationType(getTrackVisualizationType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackWallColorType(getTrackWallColorType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackLineColorType(getTrackLinePositionType(selectedGpxFile.getGpxFile()));
-					updated |= renderableSegment.setAdditionalExaggeration(getAdditionalExaggeration(selectedGpxFile.getGpxFile()));
+					updated |= renderableSegment.setAdditionalExaggeration(getTrackExaggeration(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
@@ -1325,10 +1325,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return customObjectsDelegate != null || GpxSelectionHelper.isGpxFileSelected(app, gpxFile);
 	}
 
-	private float getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
-		return isGpxFileSelected(gpxFile) ? gpxAppearanceHelper.getAdditionalExaggeration(gpxFile) : 1;
-	}
-
 	private Gpx3DVisualizationType getTrackVisualizationType(@NonNull GPXFile gpxFile) {
 		if (isGpxFileSelected(gpxFile)) {
 			return gpxAppearanceHelper.getTrackVisualizationForTrack(gpxFile);
@@ -1354,11 +1350,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private float getTrackExaggeration(@NonNull GPXFile gpxFile) {
-		if (isGpxFileSelected(gpxFile)) {
-			return gpxAppearanceHelper.getAdditionalExaggeration(gpxFile);
-		} else {
-			return 1;
-		}
+		return isGpxFileSelected(gpxFile) ? gpxAppearanceHelper.getAdditionalExaggeration(gpxFile) : 1f;
 	}
 
 	private boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {

@@ -15,15 +15,15 @@ public enum Gpx3DLinePositionType {
 	private final String typeName;
 	private final int displayNameResId;
 
-	Gpx3DLinePositionType(@NonNull String type, @StringRes int displayNameResId) {
-		this.typeName = type;
+	Gpx3DLinePositionType(@NonNull String typeName, @StringRes int displayNameResId) {
+		this.typeName = typeName;
 		this.displayNameResId = displayNameResId;
 	}
 
 	@NonNull
 	public static Gpx3DLinePositionType get3DLinePositionType(@Nullable String typeName) {
 		for (Gpx3DLinePositionType type : values()) {
-			if (type.name().equalsIgnoreCase(typeName)) {
+			if (type.typeName.equalsIgnoreCase(typeName)) {
 				return type;
 			}
 		}

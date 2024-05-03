@@ -26,7 +26,9 @@ public class GPXTrackAnalysis {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXTrackAnalysis.class);
 
-	public static final int ANALYSIS_VERSION = 2;
+	// Increase carefully if really necessary! This causes the statistics of all tracks to be recalculated.
+	// Next value is 3!
+	public static final int ANALYSIS_VERSION = 1;
 
 	public String name;
 

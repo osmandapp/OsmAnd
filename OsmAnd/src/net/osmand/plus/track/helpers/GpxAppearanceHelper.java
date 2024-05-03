@@ -164,6 +164,20 @@ public class GpxAppearanceHelper {
 		return color != null ? color : gpxFile.getColor(defaultColor);
 	}
 
+	@NonNull
+	@SuppressWarnings("unchecked")
+	public <T> T requireParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
+		Object value = getAppearanceParameter(item, parameter);
+		if (value == null) {
+			value = parameter.getDefaultValue();
+		}
+		if (value == null) {
+			throw new IllegalStateException("Requested parameter '" + parameter + "' is null.");
+		} else {
+			return ((Class<T>) parameter.getTypeClass()).cast(value);
+		}
+	}
+
 	@Nullable
 	@SuppressWarnings("unchecked")
 	public <T> T getParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
