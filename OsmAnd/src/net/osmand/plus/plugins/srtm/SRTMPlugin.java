@@ -82,8 +82,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
 
-	public static final int MIN_VERTICAL_EXAGGERATION = 1;
-	public static final int MAX_VERTICAL_EXAGGERATION = 3;
+	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
+	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
 
 	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM;
@@ -307,8 +307,16 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void setVerticalExaggerationScale(float scale){
-		app.getSettings().VERTICAL_EXAGGERATION_SCALE.set(scale);
+	public static float normalizeVerticalExaggerationScale(float scale) {
+		return Math.max(MIN_VERTICAL_EXAGGERATION, Math.min(MAX_VERTICAL_EXAGGERATION, scale));
+	}
+
+	public float getVerticalExaggerationScale() {
+		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
+	}
+
+	public void setVerticalExaggerationScale(float scale) {
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.set(normalizeVerticalExaggerationScale(scale));
 	}
 
 	public int getTerrainTransparency() {
@@ -319,10 +327,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				return SLOPE_TRANSPARENCY.get();
 		}
 		return 100;
-	}
-
-	public float getVerticalExaggerationScale(){
-		return app.getSettings().VERTICAL_EXAGGERATION_SCALE.get();
 	}
 
 	public void resetZoomLevelsToDefault() {

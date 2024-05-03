@@ -16,15 +16,15 @@ public enum Gpx3DWallColorType {
 	private final String typeName;
 	private final int displayNameResId;
 
-	Gpx3DWallColorType(@NonNull String type, @StringRes int displayNameResId) {
-		this.typeName = type;
+	Gpx3DWallColorType(@NonNull String typeName, @StringRes int displayNameResId) {
+		this.typeName = typeName;
 		this.displayNameResId = displayNameResId;
 	}
 
 	@NonNull
 	public static Gpx3DWallColorType get3DWallColorType(@Nullable String typeName) {
 		for (Gpx3DWallColorType type : values()) {
-			if (type.name().equalsIgnoreCase(typeName)) {
+			if (type.typeName.equalsIgnoreCase(typeName)) {
 				return type;
 			}
 		}
