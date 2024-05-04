@@ -20,6 +20,8 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.Deque;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,49 +79,55 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		return null;
 	}
 
-	private void loadGPXFolder(@NonNull TrackFolder folder, @NonNull List<TrackItem> progress, boolean updateSmartFolder) {
-		File dir = folder.getDirFile();
-		File[] files = dir.listFiles();
-		if (Algorithms.isEmpty(files)) {
-			return;
-		}
-		List<TrackItem> trackItems = new ArrayList<>();
-		List<TrackFolder> subFolders = new ArrayList<>();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				TrackFolder subfolder = new TrackFolder(file, folder);
-				subFolders.add(subfolder);
-				loadGPXFolder(subfolder, progress, updateSmartFolder);
-			} else if (GpxUiHelper.isGpxFile(file)) {
-				TrackItem item = new TrackItem(file);
-				item.setDataItem(getDataItem(item));
-				trackItems.add(item);
+	private void loadGPXFolder(@NonNull TrackFolder rootFolder, @NonNull List<TrackItem> progress, boolean updateSmartFolder) {
+		Deque<TrackFolder> folders = new ArrayDeque<>();
+		folders.push(rootFolder);
 
-				progress.add(item);
-				if (progress.size() > 7) {
-					publishProgress(progress.toArray(new TrackItem[0]));
-					progress.clear();
-				}
-				tracksCounter++;
-				if (tracksCounter % LOG_BATCH_SIZE == 0) {
-					long endTime = System.currentTimeMillis();
-					LOG.info("Loading " + LOG_BATCH_SIZE + "tracks. took " + (endTime - loadingTime) + "ms");
-					loadingTime = endTime;
+		while (!folders.isEmpty()) {
+			TrackFolder folder = folders.pop();
+			File dir = folder.getDirFile();
+			File[] files = dir.listFiles();
+			if (Algorithms.isEmpty(files)) {
+				continue;
+			}
+			List<TrackItem> trackItems = new ArrayList<>();
+			List<TrackFolder> subFolders = new ArrayList<>();
+
+			for (File file : files) {
+				if (file.isDirectory()) {
+					TrackFolder subfolder = new TrackFolder(file, folder);
+					subFolders.add(subfolder);
+					folders.push(subfolder); // Add subfolder to the queue for processing
+				} else if (GpxUiHelper.isGpxFile(file)) {
+					TrackItem item = new TrackItem(file);
+					item.setDataItem(getDataItem(item, file));
+					trackItems.add(item);
+
+					progress.add(item);
+					if (progress.size() > 7) {
+						publishProgress(progress.toArray(new TrackItem[0]));
+						progress.clear();
+					}
+					tracksCounter++;
+					if (tracksCounter % LOG_BATCH_SIZE == 0) {
+						long endTime = System.currentTimeMillis();
+						LOG.info("Loading " + LOG_BATCH_SIZE + "tracks. took " + (endTime - loadingTime) + "ms");
+						loadingTime = endTime;
+					}
 				}
 			}
-		}
-		folder.setTrackItems(trackItems);
-		folder.setSubFolders(subFolders);
-		folder.resetCashedData();
+			folder.setTrackItems(trackItems);
+			folder.setSubFolders(subFolders);
+			folder.resetCashedData();
 
-		if (updateSmartFolder) {
-			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
+			if (updateSmartFolder) {
+				smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
+			}
 		}
 	}
 
 	@Nullable
-	private GpxDataItem getDataItem(@NonNull TrackItem trackItem) {
-		File file = trackItem.getFile();
+	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
 		if (file != null) {
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override
