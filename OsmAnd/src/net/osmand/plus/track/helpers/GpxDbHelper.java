@@ -19,10 +19,12 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.stream.Collectors;
 
 public class GpxDbHelper implements GpxDbReaderCallback {
 	private static final Log LOG = PlatformUtil.getLog(GpxDbHelper.class);
@@ -59,25 +61,34 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public void loadGpxItems() {
 		long start = System.currentTimeMillis();
-		long batchTime = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
 
-		int counter = 0;
-		for (GpxDataItem item : items) {
+		Map<File, Boolean> fileExistenceMap = items.stream().collect(Collectors.toMap(GpxDataItem::getFile, item -> item.getFile().exists()));
+
+		Map<File, GpxDataItem> itemsToCache = new HashMap<>();
+		List<File> filesToRemove = new ArrayList<>();
+		items.forEach(item -> {
 			File file = item.getFile();
-			if (file.exists()) {
-				putToCache(item);
+			if (fileExistenceMap.get(file)) {
+				itemsToCache.put(file, item);
 			} else {
-				remove(file);
+				filesToRemove.add(file);
 			}
-			counter++;
-			if (counter % 100 == 0) {
-				long endTime = System.currentTimeMillis();
-				LOG.info("Loading tracks batch. took " + (endTime - batchTime) + "ms");
-				batchTime = endTime;
-			}
-		}
-		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + items.size());
+		});
+
+		putToCacheBulk(itemsToCache);
+		removeFromCacheBulk(filesToRemove);
+
+		long end = System.currentTimeMillis();
+		LOG.info("Time to loadGpxItems " + (end - start) + " ms items count " + items.size());
+	}
+
+	private void putToCacheBulk(Map<File, GpxDataItem> itemsToCache) {
+		dataItems.putAll(itemsToCache);
+	}
+
+	private void removeFromCacheBulk(List<File> filesToRemove) {
+		dataItems.keySet().removeAll(filesToRemove);
 	}
 
 	public void loadGpxDirItems() {
