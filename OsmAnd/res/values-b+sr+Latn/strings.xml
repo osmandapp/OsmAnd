@@ -1337,7 +1337,7 @@
     <string name="lang_pt_br">Portugalski (brazilski)</string>
     <string name="lang_zh">Kineski</string>
     <string name="index_item_world_ski">Svetska ski mapa</string>
-    <string name="index_item_world_basemap">Pregled svetske mape</string>
+    <string name="index_item_world_basemap">Mapa sveta</string>
     <string name="index_item_world_bitcoin_payments">Plaćanje bitkoinom</string>
     <string name="index_item_world_seamarks">Svetske pomorske oznake</string>
     <string name="index_item_world_altitude_correction">Ispravka svetske geografske visine</string>
