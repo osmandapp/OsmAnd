@@ -243,11 +243,11 @@ public class GpxDbUtils {
 	public static boolean isAnalyseNeeded(@Nullable GpxDataItem item) {
 		if (item != null) {
 			return !item.hasData() || item.getAnalysis() == null
-					|| Algorithms.isEmpty(item.getAnalysis().getWptCategoryNames())
+					|| item.getAnalysis().getWptCategoryNames() == null
 					|| item.getAnalysis().getLatLonStart() == null && item.getAnalysis().getPoints() > 0
 					|| (long) item.requireParameter(FILE_LAST_MODIFIED_TIME) != item.getFile().lastModified()
 					|| (long) item.requireParameter(FILE_CREATION_TIME) <= 0
-					|| (long) item.requireParameter(EXPECTED_ROUTE_DURATION) < 0
+					//|| (long) item.requireParameter(EXPECTED_ROUTE_DURATION) < 0
 					|| createDataVersion(ANALYSIS_VERSION) > (int) item.requireParameter(DATA_VERSION);
 		}
 		return true;
@@ -258,8 +258,12 @@ public class GpxDbUtils {
 		if (file.getParentFile() == null) {
 			return "";
 		}
-		File dir = app.getAppPath(GPX_INDEX_DIR);
-		String fileDir = new File(file.getPath().replace(dir.getPath() + "/", "")).getParent();
+		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
+		if (file.equals(gpxDir)) {
+			return "";
+		}
+		File relativePath = new File(file.getPath().replace(gpxDir.getPath() + "/", ""));
+		String fileDir = file.isDirectory() ? relativePath.getPath() : relativePath.getParent();
 		return fileDir != null ? fileDir : "";
 	}
 

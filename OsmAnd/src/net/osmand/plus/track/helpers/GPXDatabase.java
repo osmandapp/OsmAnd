@@ -195,6 +195,11 @@ public class GPXDatabase {
 		String fileName = query.getString(query.getColumnIndex(FILE_NAME.getColumnName()));
 
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
+		if ((fileName + "/").equalsIgnoreCase(GPX_INDEX_DIR)) {
+			return gpxDir;
+		}
+		fileDir = fileDir.replace(gpxDir.getPath(), "");
+		fileDir = fileDir.replace(app.getAppPath(null).getPath(), "");
 		File dir = Algorithms.isEmpty(fileDir) ? gpxDir : new File(gpxDir, fileDir);
 		return new File(dir, fileName);
 	}
