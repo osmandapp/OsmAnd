@@ -202,6 +202,9 @@ class SmartFolderHelper(val app: OsmandApplication) {
 	}
 
 	fun addTrackItemsToSmartFolder(items: List<TrackItem>) {
+		if (smartFolderCollection.isEmpty()) {
+			return
+		}
 		val newSet = allAvailableTrackItems
 		newSet.addAll(items)
 		allAvailableTrackItems = newSet
