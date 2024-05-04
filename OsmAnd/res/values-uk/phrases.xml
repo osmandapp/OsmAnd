@@ -1819,11 +1819,11 @@
     <string name="poi_office_nursing_service">Кабінет служби догляду за хворими</string>
     <string name="poi_payment_routex_yes">Routex</string>
     <string name="poi_bin_no">Без сміттєвого кошика</string>
-    <string name="poi_impromptu_yes">Імпровізований: так</string>
+    <string name="poi_impromptu_yes">Імпровізація: так</string>
     <string name="poi_office_midwife">Кабінет акушерки</string>
     <string name="poi_shelter_type_public_transport">Зупинка громадського транспорту</string>
     <string name="poi_payment_routex_no">Паливні картки Routex не приймаються</string>
-    <string name="poi_impromptu_no">Імпровізований: ні</string>
+    <string name="poi_impromptu_no">Імпровізація: ні</string>
     <string name="poi_fire_hydrant_diameter">Діаметр гідранта</string>
     <string name="poi_payment_bancomat_yes">Bancomat (італійська мережа)</string>
     <string name="poi_shelter_type_picnic_shelter">Для пікніка</string>
@@ -3139,9 +3139,9 @@
     <string name="poi_winter_room_yes">Зимова кімната: є</string>
     <string name="poi_winter_room_no">Зимова кімната: немає</string>
     <string name="poi_reservation_required">Бронювання: потрібно</string>
-    <string name="poi_reservation_recommended">Бронювання: рекомендується</string>
-    <string name="poi_reservation_yes">Бронювання: можливо</string>
-    <string name="poi_reservation_no">Бронювання: не передбачено</string>
+    <string name="poi_reservation_recommended">Бронювання: рекомендовано</string>
+    <string name="poi_reservation_yes">Бронювання: так</string>
+    <string name="poi_reservation_no">Бронювання: ні</string>
     <string name="poi_reservation_members_only">Бронювання: для вузького кола осіб</string>
     <string name="poi_beds">Ліжка</string>
     <string name="poi_boat_rental_type">Оренда човнів</string>
@@ -4723,4 +4723,15 @@
     <string name="poi_hang_gliding">Дельтапланеризм</string>
     <string name="poi_us_maps_recreation_area_activity">Відпочинкова зона</string>
     <string name="poi_us_maps_recreation_area_open_status">Доступність відпочинкової зони</string>
+    <string name="poi_indoor_seating_no">Сидіння в приміщенні: ні</string>
+    <string name="poi_indoor_seating_yes">Сидіння в приміщенні: так</string>
+    <string name="poi_indoor_seating_bar_table">Сидіння в приміщенні: барна стійка</string>
+    <string name="poi_live_music">Жива музика</string>
+    <string name="poi_music_venue">Музичний майданчик</string>
+    <string name="poi_cuisine_fish">Риба</string>
+    <string name="poi_shop_general">Універсальна крамниця</string>
+    <string name="poi_impromptu">Імпровізація</string>
+    <string name="poi_reservation">Резервування</string>
+    <string name="poi_us_maps_recreation_area_facility">Облаштування зони відпочинку</string>
+    <string name="poi_photo_booth">Фотокабінка</string>
 </resources>
