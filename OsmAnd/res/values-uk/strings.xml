@@ -5723,4 +5723,13 @@
     <string name="required_maps_calculate_online_summary">Список відсутніх мап базується на прямому маршруті. Щоб отримати точний список мап, OsmAnd може попередньо обчислити ваш маршрут онлайн.</string>
     <string name="missing_maps_header">Зниклі або неактуальні мапи</string>
     <string name="delete_actions_button_confirmation">Ви впевнені, що хочете видалити \"%1$s\" з усіма доданими діями?</string>
+    <string name="track_vertical_exaggeration_description">Змінюючи значення масштабу, ви можете змінювати висоту 3D-доріжки.</string>
+    <string name="gpx_approximation_geo_cpp">На основі геометрії (C++, швидко)</string>
+    <string name="allow_display_on_top">Дозволити відображення вгорі</string>
+    <string name="allow_display_on_top_description">Дозволити відображати тексти мап один над одним</string>
+    <string name="show_debug_info">Показати інформацію про налагодження</string>
+    <string name="show_debug_info_description">Відображати графічну інформацію про розміщення кожного тексту на карті</string>
+    <string name="map_text">Тексти мап</string>
+    <string name="routing_attr_avoid_cobblestone_name">Уникайте бруківки</string>
+    <string name="routing_attr_avoid_cobblestone_description">Уникайте бруківки</string>
 </resources>
