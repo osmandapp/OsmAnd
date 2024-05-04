@@ -68,7 +68,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		loadingTime = System.currentTimeMillis();
 
 		List<TrackItem> progress = new ArrayList<>();
-		loadGPXFolder(folder, progress, true);
+		loadGPXFolder(folder, progress);
 		if (!progress.isEmpty()) {
 			publishProgress(progress.toArray(new TrackItem[0]));
 		}
@@ -79,7 +79,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		return null;
 	}
 
-	private void loadGPXFolder(@NonNull TrackFolder rootFolder, @NonNull List<TrackItem> progress, boolean updateSmartFolder) {
+	private void loadGPXFolder(@NonNull TrackFolder rootFolder, @NonNull List<TrackItem> progress) {
 		Deque<TrackFolder> folders = new ArrayDeque<>();
 		folders.push(rootFolder);
 
@@ -104,10 +104,11 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					trackItems.add(item);
 
 					progress.add(item);
-					if (progress.size() > 7) {
-						publishProgress(progress.toArray(new TrackItem[0]));
-						progress.clear();
-					}
+					// Screen refresh issue: Publishing interim progress here causes once published tracks stats never updated on screen
+					//if (progress.size() > 7) {
+					//	publishProgress(progress.toArray(new TrackItem[0]));
+					//	progress.clear();
+					//}
 					tracksCounter++;
 					if (tracksCounter % LOG_BATCH_SIZE == 0) {
 						long endTime = System.currentTimeMillis();
@@ -119,10 +120,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			folder.setTrackItems(trackItems);
 			folder.setSubFolders(subFolders);
 			folder.resetCashedData();
-
-			if (updateSmartFolder) {
-				smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
-			}
+			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
 	}
 
