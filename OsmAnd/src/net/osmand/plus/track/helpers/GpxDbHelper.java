@@ -65,30 +65,17 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 		Map<File, Boolean> fileExistenceMap = items.stream().collect(Collectors.toMap(GpxDataItem::getFile, item -> item.getFile().exists()));
 
-		Map<File, GpxDataItem> itemsToCache = new HashMap<>();
-		List<File> filesToRemove = new ArrayList<>();
 		items.forEach(item -> {
 			File file = item.getFile();
 			if (fileExistenceMap.get(file)) {
-				itemsToCache.put(file, item);
+				putToCache(item);
 			} else {
-				filesToRemove.add(file);
+				remove(file);
 			}
 		});
 
-		putToCacheBulk(itemsToCache);
-		removeFromCacheBulk(filesToRemove);
-
 		long end = System.currentTimeMillis();
 		LOG.info("Time to loadGpxItems " + (end - start) + " ms items count " + items.size());
-	}
-
-	private void putToCacheBulk(Map<File, GpxDataItem> itemsToCache) {
-		dataItems.putAll(itemsToCache);
-	}
-
-	private void removeFromCacheBulk(List<File> filesToRemove) {
-		dataItems.keySet().removeAll(filesToRemove);
 	}
 
 	public void loadGpxDirItems() {
