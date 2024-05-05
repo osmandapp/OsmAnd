@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.plugins.CustomOsmandPlugin.SuggestedDownloadItem;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;

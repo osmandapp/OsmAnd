@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -146,14 +147,14 @@ public class RouteStatisticCard extends MapBaseCard {
 		buildHeader(analysis);
 		boolean hasElevationData = analysis.hasElevationData();
 		if (hasElevationData) {
-			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+			((TextView) view.findViewById(R.id.average_text)).setText(OsmAndFormatter.getFormattedAlt(analysis.getAvgElevation(), app));
 
-			String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-			String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+			String min = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
+			String max = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 			((TextView) view.findViewById(R.id.range_text)).setText(min + " - " + max);
 
-			String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-			String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+			String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
+			String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 			((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 			((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 
@@ -195,8 +196,8 @@ public class RouteStatisticCard extends MapBaseCard {
 	}
 
 	private void buildHeader(GPXTrackAnalysis analysis) {
-		LineChart mChart = view.findViewById(R.id.chart);
-		ChartUtils.setupGPXChart(mChart, 24f, 16f, true);
+		ElevationChart mChart = view.findViewById(R.id.chart);
+		ChartUtils.setupElevationChart(mChart, 24f, 16f, true);
 		graphAdapter = new CommonChartAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData()) {

@@ -24,8 +24,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.gpx.PointAttributes;
+import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -41,8 +40,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexFileList;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
@@ -50,7 +49,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.search.dialogs.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -89,6 +88,10 @@ public abstract class OsmandPlugin {
 
 	private boolean enabled;
 	private String installURL;
+
+	public interface PluginInstallListener {
+		void onPluginInstalled();
+	}
 
 	public OsmandPlugin(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -131,6 +134,13 @@ public abstract class OsmandPlugin {
 
 	public int getVersion() {
 		return -1;
+	}
+
+	public boolean isOnline() {
+		return false;
+	}
+
+	public void install(@Nullable FragmentActivity activity, @Nullable PluginInstallListener installListener) {
 	}
 
 	/**
@@ -403,7 +413,7 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public void bindCommonKeyEventCommands(InputDeviceProfile deviceProfile) {
+	public void addCommonKeyEventAssignments(@NonNull List<KeyAssignment> assignments) {
 	}
 
 	public KeyEventCommand createKeyEventCommand(@NonNull String commandId) {
@@ -499,7 +509,9 @@ public abstract class OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 	}
 
-	protected void onAnalysePoint(@NonNull GPXTrackAnalysis analysis, @NonNull WptPt point, @NonNull PointAttributes attribute) {
+	@Nullable
+	protected TrackPointsAnalyser getTrackPointsAnalyser() {
+		return null;
 	}
 
 	@Nullable

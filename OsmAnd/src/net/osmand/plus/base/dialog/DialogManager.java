@@ -13,6 +13,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.dialog.data.DisplayData;
 import net.osmand.plus.base.dialog.data.DisplayItem;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.base.dialog.interfaces.controller.IOnDialogDismissed;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemClicked;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogItemSelected;
 import net.osmand.plus.base.dialog.interfaces.controller.IDisplayDataProvider;
@@ -65,6 +66,13 @@ public class DialogManager {
 			return ((IDisplayDataProvider) controller).getDisplayData(processId);
 		}
 		return null;
+	}
+
+	public void onDialogDismissed(@NonNull String processId, @NonNull FragmentActivity activity) {
+		IDialogController controller = controllers.get(processId);
+		if (controller instanceof IOnDialogDismissed) {
+			((IOnDialogDismissed) controller).onDialogDismissed(activity);
+		}
 	}
 
 	public void onDialogItemSelected(@NonNull String processId, @NonNull DisplayItem item) {

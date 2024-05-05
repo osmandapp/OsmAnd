@@ -42,6 +42,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer;
+import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -71,6 +72,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private long touchEndTime;
 	private boolean touched;
 	private boolean wasPinchZoomOrRotation;
+	private boolean wasDoubleTapZoom;
 
 	private final Path linePath = new Path();
 
@@ -143,6 +145,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 				singleTouchPointChanged = true;
 				touchStartTime = System.currentTimeMillis();
 				wasPinchZoomOrRotation = false;
+				wasDoubleTapZoom = false;
 			} else if (event.getAction() == MotionEvent.ACTION_MOVE && !touchOutside &&
 					!(touched && showDistBetweenFingerAndLocation)) {
 				double d = Math.sqrt(Math.pow(event.getX() - touchPoint.x, 2) + Math.pow(event.getY() - touchPoint.y, 2));
@@ -152,6 +155,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
 				touched = false;
 				touchEndTime = System.currentTimeMillis();
+				wasDoubleTapZoom = view.isAfterDoubleTap();
 				refreshMapDelayed();
 			}
 		}
@@ -191,6 +195,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 			boolean showDistBetweenFingerAndLocation = !wasPinchZoomOrRotation &&
 					!showTwoFingersDistance &&
 					!view.isMultiTouch() &&
+					!wasDoubleTapZoom &&
 					!touchOutside &&
 					touchStartTime - view.getMultiTouchStartTime() > DELAY_BEFORE_DRAW &&
 					currentTime - touchStartTime > DELAY_BEFORE_DRAW &&
@@ -454,7 +459,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 		ty.add(end.y);
 
 		linePath.reset();
-		GeometryWay.calculatePath(tileBox, tx, ty, linePath);
+		GeometryWayPathAlgorithms.calculatePath(tileBox, tx, ty, linePath);
 	}
 
 	private void hideDistanceRulerOpenGl() {

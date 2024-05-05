@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap;
 
-import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_ATTR;
+import static net.osmand.osm.OsmRouteType.ALPINE;
 import static net.osmand.plus.configmap.ConfigureMapMenu.ALPINE_HIKING_SCALE_SCHEME_ATTR;
 
 import android.graphics.drawable.Drawable;
@@ -52,7 +52,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		alpineHikingPref = settings.getCustomRenderBooleanProperty(ALPINE_HIKING_ATTR);
+		alpineHikingPref = settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr());
 		alpineHikingScaleSchemePref = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR);
 	}
 
@@ -110,7 +110,7 @@ public class DifficultyClassificationFragment extends BaseOsmAndFragment {
 	@Nullable
 	public static String getDifficultyClassificationDescription(@NonNull OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		if (!settings.getCustomRenderBooleanProperty(ALPINE_HIKING_ATTR).get()) {
+		if (!settings.getCustomRenderBooleanProperty(ALPINE.getRenderingPropertyAttr()).get()) {
 			return app.getString(R.string.shared_string_disabled);
 		}
 		String value = settings.getCustomRenderProperty(ALPINE_HIKING_SCALE_SCHEME_ATTR).get();

@@ -669,7 +669,14 @@ public class TransportRoutePlanner {
 				}
 			}
 			s.setFileOffset(ns.fileOffset);
-			s.setReferencesToRoutes(ns.referencesToRoutes);
+			// convert to long as C++ doesn't support int
+			if (ns.referencesToRoutes != null) {
+				long[] r = new long[ns.referencesToRoutes.length];
+				for (int k = 0; k < r.length; k++) {
+					r[k] = ns.referencesToRoutes[k];
+				}
+				s.setReferencesToRoutes(r);
+			}
 			s.setDeletedRoutesIds(ns.deletedRoutesIds);
 			s.setRoutesIds(ns.routesIds);
 			s.distance = ns.distance;

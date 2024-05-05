@@ -9,6 +9,9 @@
         <attr name="chart_marker_background" format="reference" />
         <attr name="chart_label_background" format="reference" />
         <attr name="chart_grid_line_color" format="reference" />
+        <attr name="chart_x_grid_line_axis_color" format="reference" />
+        <attr name="chart_y_grid_line_axis_color" format="reference" />
+        <attr name="chart_axis_x_text_color" format="reference" />
         <attr name="keyboard_controls_divider" format="color"/>
         <!-- list colors -->
         <attr name="ctx_menu_info_divider" format="color"/>
@@ -272,4 +275,9 @@
 
     <!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
     <declare-styleable name="SwitchEx" parent="ButtonEx" />-->
+
+	<declare-styleable name="AutoScaleTextView">
+		<attr name="minTextSize" format="dimension" />
+		<attr name="maxTextSize" format="dimension" />
+	</declare-styleable>
 </resources>

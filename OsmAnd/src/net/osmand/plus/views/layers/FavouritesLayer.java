@@ -30,6 +30,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
@@ -207,7 +208,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 					} else {
 						color = favouritesHelper.getColorWithCategory(favoritePoint, defaultColor);
 					}
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
+					PointImageDrawable pointImageDrawable = PointImageUtils.getFromPoint(
 							getContext(), color, true, favoritePoint);
 					pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 					smallObjectsLatLon.add(new LatLon(lat, lon));
@@ -236,11 +237,11 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		PointImageDrawable pointImageDrawable;
 		boolean history = false;
 		if (marker != null) {
-			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(getContext(),
+			pointImageDrawable = PointImageUtils.getOrCreateSyncedIcon(getContext(),
 					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
 			history = marker.history;
 		} else {
-			pointImageDrawable = PointImageDrawable.getFromFavorite(getContext(),
+			pointImageDrawable = PointImageUtils.getFromPoint(getContext(),
 					favouritesHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);

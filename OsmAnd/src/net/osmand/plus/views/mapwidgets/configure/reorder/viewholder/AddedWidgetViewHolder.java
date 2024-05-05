@@ -47,10 +47,17 @@ public class AddedWidgetViewHolder extends ViewHolder implements UnmovableItem {
 		public String key;
 		public String title;
 		public MapWidgetInfo info;
-		public int page;
-		public int order;
 		public int iconId;
-		public boolean newWidgetToCreate;
+
+		public AddedWidgetUiInfo() {
+		}
+
+		public AddedWidgetUiInfo(@NonNull String key, @NonNull String title, @NonNull MapWidgetInfo info, int iconId) {
+			this.key = key;
+			this.title = title;
+			this.info = info;
+			this.iconId = iconId;
+		}
 	}
 
 	public interface ItemMovableCallback {

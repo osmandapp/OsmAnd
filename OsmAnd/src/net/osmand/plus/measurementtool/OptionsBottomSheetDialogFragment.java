@@ -18,6 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem.Builder;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.OptionsDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
@@ -185,7 +186,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		boolean plainTrack = editingCtx.getPointsCount() > 0 && !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
 		if (plainTrack) {
 			BaseBottomSheetItem gpsFilter = new Builder()
-					.setIcon(getContentIcon(R.drawable.ic_action_filter))
+					.setIcon(getContentIcon(R.drawable.ic_action_filter_dark))
 					.setTitle(getString(R.string.shared_string_gps_filter))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(v -> {
@@ -202,7 +203,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		GpxData gpxData = editingCtx.getGpxData();
 		if (gpxData != null && gpxData.getGpxFile() != null && !editingCtx.hasElevationData()) {
 			BaseBottomSheetItem gpsFilter = new Builder()
-					.setTitle(getString(R.string.get_altitude_information))
+					.setIcon(getContentIcon(R.drawable.ic_action_terrain))
+					.setTitle(getString(R.string.get_altitude_data))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(v -> {
 						Fragment fragment = getTargetFragment();

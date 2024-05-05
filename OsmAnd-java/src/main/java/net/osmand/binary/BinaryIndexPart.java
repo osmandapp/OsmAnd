@@ -3,26 +3,26 @@ package net.osmand.binary;
 public abstract class BinaryIndexPart {
 
 	String name;
-	int length;
-	int filePointer;
+	long length;
+	long filePointer;
 	
 	abstract public String getPartName();
 
 	abstract public int getFieldNumber();
 	
-	public int getLength() {
+	public long getLength() {
 		return length;
 	}
 	
-	public void setLength(int length) {
+	public void setLength(long length) {
 		this.length = length;
 	}
 	
-	public int getFilePointer() {
+	public long getFilePointer() {
 		return filePointer;
 	}
 	
-	public void setFilePointer(int filePointer) {
+	public void setFilePointer(long filePointer) {
 		this.filePointer = filePointer;
 	}
 	

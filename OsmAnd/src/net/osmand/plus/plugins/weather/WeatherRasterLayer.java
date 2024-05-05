@@ -15,6 +15,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.base.BaseMapLayer;
 import net.osmand.util.Algorithms;
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherRasterLayer extends BaseMapLayer {
-
+	private static final long HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
+	private static final long DAY_IN_MILLISECONDS = 24 * HOUR_IN_MILLISECONDS;
 	private final WeatherHelper weatherHelper;
 	private final WeatherSettings weatherSettings;
 	private final WeatherPlugin plugin;
@@ -34,6 +36,10 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	private boolean weatherEnabledCached;
 	private List<WeatherBand> enabledBandsCached;
 	private int bandsSettingsVersionCached;
+	private boolean requireTimePeriodChange;
+	private long timePeriodStart;
+	private long timePeriodEnd;
+	private long timePeriodStep;
 	private long dateTime;
 	private long cachedDateTime;
 
@@ -73,7 +79,36 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		this.dateTime = WeatherUtils.roundForecastTimeToHour(dateTime);
+		long dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
+		long dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		if (dateTime < dayStart || dateTime > dayEnd) {
+			dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
+			dayEnd = dayStart + DAY_IN_MILLISECONDS;
+		}
+		long todayStep = HOUR_IN_MILLISECONDS;
+		long nextStep = todayStep * 3;
+		long startOfToday = OsmAndFormatter.getStartOfToday();
+		long step = dayStart == startOfToday ? todayStep : nextStep;
+		long switchStepTime = (System.currentTimeMillis() + DAY_IN_MILLISECONDS) / nextStep * nextStep;
+		if (switchStepTime > startOfToday && switchStepTime >= dayStart + todayStep && switchStepTime <= dayEnd - nextStep) {
+			if (dateTime < switchStepTime) {
+				dayEnd = switchStepTime;
+				step = todayStep;
+			} else
+				dayStart = switchStepTime;
+		}
+		long prevTime = (dateTime - dayStart) / step * step + dayStart;
+		long nextTime = prevTime + step;
+		long nearestTime = dateTime - prevTime < nextTime - dateTime ? prevTime : nextTime;
+		if (timePeriodStep != step
+				|| (timePeriodStart > dayStart && nearestTime <= timePeriodStart)
+				|| (timePeriodEnd < dayEnd && nearestTime >= timePeriodEnd)) {
+			timePeriodStart = Math.max(nearestTime - step * 2, dayStart);
+			timePeriodEnd = Math.min(nearestTime + step * 2, dayEnd);
+			timePeriodStep = step;
+			requireTimePeriodChange = true;
+		}
+		this.dateTime = dateTime;
 	}
 
 	@Override
@@ -126,13 +161,21 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		if (!bands.isEmpty()) {
 			net.osmand.core.jni.WeatherLayer weatherLayer = this.weatherLayer == WeatherLayer.LOW
 					? net.osmand.core.jni.WeatherLayer.Low : net.osmand.core.jni.WeatherLayer.High;
-
-			provider = new WeatherRasterLayerProvider(resourcesManager, weatherLayer, dateTime, bands, false);
-			mapRenderer.setMapLayerProvider(view.getLayerIndex(this), provider);
-
-			MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-			mapLayerConfiguration.setOpacityFactor(1.0f);
-			mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+			if (provider == null) {
+				requireTimePeriodChange = false;
+				provider = new WeatherRasterLayerProvider(resourcesManager, weatherLayer,
+						timePeriodStart, timePeriodEnd, timePeriodStep, bands, false);
+				mapRenderer.setMapLayerProvider(view.getLayerIndex(this), provider);
+				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+				mapLayerConfiguration.setOpacityFactor(1.0f);
+				mapRenderer.setMapLayerConfiguration(view.getLayerIndex(this), mapLayerConfiguration);
+			}
+			if (requireTimePeriodChange) {
+				requireTimePeriodChange = false;
+				provider.setDateTime(timePeriodStart, timePeriodEnd, timePeriodStep);
+				mapRenderer.changeTimePeriod();
+			}
+			mapRenderer.setDateTime(dateTime);
 		}
 	}
 
@@ -187,6 +230,9 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 		boolean dateTimeChanged = cachedDateTime != dateTime;
 		cachedDateTime = dateTime;
+
+		if (weatherEnabledChanged || layersChanged || bandsSettingsChanged)
+			provider = null;
 
 		return weatherEnabledChanged || layersChanged || bandsSettingsChanged || dateTimeChanged;
 	}

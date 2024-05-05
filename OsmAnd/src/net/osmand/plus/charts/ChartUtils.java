@@ -12,6 +12,7 @@ import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.utils.OsmAndFormatter.YARDS_IN_ONE_METER;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 
@@ -21,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -42,6 +44,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.dialogs.MemoryInfo;
 import net.osmand.plus.download.local.dialogs.MemoryInfo.MemoryItem;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
@@ -62,95 +65,31 @@ public class ChartUtils {
 	public static final int CHART_LABEL_COUNT = 3;
 	private static final int MAX_CHART_DATA_ITEMS = 10000;
 
-	public static void setupGPXChart(@NonNull LineChart mChart) {
-		setupGPXChart(mChart, 24f, 16f, true);
+	public static void setupElevationChart(ElevationChart chart) {
+		setupElevationChart(chart, 24f, 16f, true);
 	}
 
-	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
-	                                 boolean useGesturesAndScale) {
-		setupGPXChart(mChart, topOffset, bottomOffset, useGesturesAndScale, null);
+	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
+									boolean useGesturesAndScale) {
+		setupElevationChart(chart, topOffset, bottomOffset, useGesturesAndScale, null);
 	}
 
-	public static void setupGPXChart(@NonNull LineChart mChart, float topOffset, float bottomOffset,
-	                                 boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
-		GpxMarkerView markerView = new GpxMarkerView(mChart.getContext(), markerIcon);
-		setupGPXChart(mChart, markerView, topOffset, bottomOffset, useGesturesAndScale);
+	public static void setupElevationChart(@NonNull ElevationChart chart, float topOffset, float bottomOffset,
+									boolean useGesturesAndScale, @Nullable Drawable markerIcon) {
+		GpxMarkerView markerView = new GpxMarkerView(chart.getContext(), markerIcon);
+		setupElevationChart(chart, markerView, topOffset, bottomOffset, useGesturesAndScale);
 	}
 
-	public static void setupGPXChart(@NonNull LineChart mChart, @NonNull GpxMarkerView markerView,
-	                                 float topOffset, float bottomOffset, boolean useGesturesAndScale) {
-		Context context = mChart.getContext();
-
-		mChart.setHardwareAccelerationEnabled(true);
-		mChart.setTouchEnabled(useGesturesAndScale);
-		mChart.setDragEnabled(useGesturesAndScale);
-		mChart.setScaleEnabled(useGesturesAndScale);
-		mChart.setPinchZoom(useGesturesAndScale);
-		mChart.setScaleYEnabled(false);
-		mChart.setAutoScaleMinMaxEnabled(true);
-		mChart.setDrawBorders(false);
-		mChart.getDescription().setEnabled(false);
-		mChart.setMaxVisibleValueCount(10);
-		mChart.setMinOffset(0f);
-		mChart.setDragDecelerationEnabled(false);
-
-		mChart.setExtraTopOffset(topOffset);
-		mChart.setExtraBottomOffset(bottomOffset);
-
-		// create a custom MarkerView (extend MarkerView) and specify the layout
-		// to use for it
-		markerView.setChartView(mChart); // For bounds control
-		mChart.setMarker(markerView); // Set the marker to the chart
-		mChart.setDrawMarkers(true);
-
-		ChartLabel chartLabel = new ChartLabel(context, R.layout.chart_label);
-		chartLabel.setChart(mChart);
-		mChart.setYAxisLabelView(chartLabel);
-
-		int xAxisRulerColor = ContextCompat.getColor(context, R.color.gpx_chart_black_grid);
+	public static void setupElevationChart(@NonNull ElevationChart chart, @NonNull GpxMarkerView markerView, float topOffset, float bottomOffset, boolean useGesturesAndScale) {
+		Context context = chart.getContext();
 		int labelsColor = ContextCompat.getColor(context, R.color.text_color_secondary_light);
-		XAxis xAxis = mChart.getXAxis();
-		xAxis.setDrawAxisLine(true);
-		xAxis.setDrawAxisLineBehindData(false);
-		xAxis.setAxisLineWidth(1);
-		xAxis.setAxisLineColor(xAxisRulerColor);
-		xAxis.setDrawGridLines(true);
-		xAxis.setDrawGridLinesBehindData(false);
-		xAxis.setGridLineWidth(1.5f);
-		xAxis.setGridColor(xAxisRulerColor);
-		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
-		xAxis.setPosition(BOTTOM);
-		xAxis.setTextColor(labelsColor);
-
-		int dp4 = AndroidUtils.dpToPx(context, 4);
-		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_grid_line_color);
-
-		YAxis leftYAxis = mChart.getAxisLeft();
-		leftYAxis.enableGridDashedLine(dp4, dp4, 0f);
-		leftYAxis.setGridColor(yAxisGridColor);
-		leftYAxis.setGridLineWidth(1f);
-		leftYAxis.setDrawBottomYGridLine(false);
-		leftYAxis.setDrawAxisLine(false);
-		leftYAxis.setDrawGridLinesBehindData(false);
-		leftYAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		leftYAxis.setXOffset(16f);
-		leftYAxis.setYOffset(-6f);
-		leftYAxis.setLabelCount(CHART_LABEL_COUNT, true);
-
-		YAxis rightYAxis = mChart.getAxisRight();
-		rightYAxis.setDrawAxisLine(false);
-		rightYAxis.setDrawGridLines(false);
-		rightYAxis.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-		rightYAxis.setXOffset(16f);
-		rightYAxis.setYOffset(-6f);
-		rightYAxis.setLabelCount(CHART_LABEL_COUNT, true);
-		rightYAxis.setEnabled(false);
-
-		Legend legend = mChart.getLegend();
-		legend.setEnabled(false);
+		int yAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_y_grid_line_axis_color);
+		int xAxisGridColor = AndroidUtils.getColorFromAttr(context, R.attr.chart_x_grid_line_axis_color);
+		Typeface typeface = FontCache.getFont(context, context.getString(R.string.font_roboto_medium));
+		chart.setupGPXChart(markerView, topOffset, bottomOffset, xAxisGridColor, labelsColor, yAxisGridColor, typeface, useGesturesAndScale);
 	}
 
-	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, float meters) {
+	private static float setupAxisDistance(OsmandApplication ctx, AxisBase axisBase, double meters) {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		float divX;
@@ -213,7 +152,8 @@ public class ChartUtils {
 		axisBase.setGranularity(granularity);
 		axisBase.setValueFormatter((value, axis) -> {
 			if (!Algorithms.isEmpty(formatX)) {
-				return MessageFormat.format(formatX + mainUnitX, value);
+				boolean shouldShowUnit = axis.mEntries.length >= 1 && axis.mEntries[0] == value;
+				return MessageFormat.format(shouldShowUnit ? formatX + mainUnitX : formatX, value);
 			} else {
 				return OsmAndFormatter.formatInteger((int) (value + 0.5), mainUnitX, ctx);
 			}
@@ -367,8 +307,8 @@ public class ChartUtils {
 		XAxis xAxis = chart.getXAxis();
 		xAxis.setEnabled(false);
 
-		YAxis yAxis = getYAxis(chart, null, useRightAxis);
-		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
+		YAxis yAxis = getAndEnableYAxis(chart, null, useRightAxis);
+		float divX = setupAxisDistance(app, yAxis, analysis.getTotalDistance());
 
 		List<RouteSegmentAttribute> segments = routeStatistics.elements;
 		List<BarEntry> entries = new ArrayList<>();
@@ -482,7 +422,7 @@ public class ChartUtils {
 		}
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
-		dataSet.setPriority((float) ((analysis.avgElevation - analysis.minElevation) * convEle));
+		dataSet.setPriority((float) ((analysis.getAvgElevation() - analysis.getMinElevation()) * convEle));
 		dataSet.setDivX(divX);
 		dataSet.setUnits(mainUnitY);
 
@@ -544,6 +484,7 @@ public class ChartUtils {
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType axisType,
 	                                                       boolean useRightAxis,
+	                                                       boolean setYAxisMinimum,
 	                                                       boolean drawFilled,
 	                                                       boolean calcWithoutGaps) {
 		OsmandSettings settings = app.getSettings();
@@ -558,9 +499,13 @@ public class ChartUtils {
 		boolean speedInTrack = analysis.hasSpeedInTrack();
 		int textColor = ColorUtilities.getColor(app, graphType.getTextColorId(!speedInTrack));
 		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
-		yAxis.setAxisMinimum(0f);
+		if (setYAxisMinimum) {
+			yAxis.setAxisMinimum(0f);
+		} else {
+			yAxis.resetAxisMinimum();
+		}
 
-		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
+		List<Entry> values = getPointAttributeValues(graphType.getDataKey(), analysis.pointAttributes, axisType, divX, mulSpeed, divSpeed, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String mainUnitY = graphType.getMainUnitY(app);
@@ -574,9 +519,9 @@ public class ChartUtils {
 		});
 
 		if (Float.isNaN(divSpeed)) {
-			dataSet.setPriority(analysis.avgSpeed * mulSpeed);
+			dataSet.setPriority(analysis.getAvgSpeed() * mulSpeed);
 		} else {
-			dataSet.setPriority(divSpeed / analysis.avgSpeed);
+			dataSet.setPriority(divSpeed / analysis.getAvgSpeed());
 		}
 		dataSet.setDivX(divX);
 		dataSet.setUnits(mainUnitY);
@@ -592,11 +537,11 @@ public class ChartUtils {
 	                            boolean calcWithoutGaps) {
 		XAxis xAxis = lineChart.getXAxis();
 		if (axisType == TIME && analysis.isTimeSpecified()) {
-			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
+			return setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan());
 		} else if (axisType == TIME_OF_DAY && analysis.isTimeSpecified()) {
-			return setupXAxisTimeOfDay(xAxis, analysis.startTime);
+			return setupXAxisTimeOfDay(xAxis, analysis.getStartTime());
 		} else {
-			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
+			return setupAxisDistance(app, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance());
 		}
 	}
 
@@ -626,15 +571,15 @@ public class ChartUtils {
 
 	@NonNull
 	public static List<Entry> getPointAttributeValues(@NonNull String key,
-	                                                  @NonNull GPXTrackAnalysis analysis,
+	                                                  @NonNull List<PointAttributes> pointAttributes,
 	                                                  @NonNull GPXDataSetAxisType axisType,
 	                                                  float divX, float mulY, float divY,
 	                                                  boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		float currentX = 0;
 
-		for (int i = 0; i < analysis.pointAttributes.size(); i++) {
-			PointAttributes attribute = analysis.pointAttributes.get(i);
+		for (int i = 0; i < pointAttributes.size(); i++) {
+			PointAttributes attribute = pointAttributes.get(i);
 
 			float stepX = axisType == TIME || axisType == TIME_OF_DAY ? attribute.timeDiff : attribute.distance;
 
@@ -661,9 +606,15 @@ public class ChartUtils {
 		return values;
 	}
 
+
+	public static YAxis getAndEnableYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
+		YAxis yAxis = getYAxis(chart, textColor, useRightAxis);
+		yAxis.setEnabled(true);
+		return yAxis;
+	}
+
 	public static YAxis getYAxis(BarLineChartBase<?> chart, Integer textColor, boolean useRightAxis) {
 		YAxis yAxis = useRightAxis ? chart.getAxisRight() : chart.getAxisLeft();
-		yAxis.setEnabled(true);
 		if (textColor != null) {
 			yAxis.setTextColor(textColor);
 		}
@@ -684,7 +635,7 @@ public class ChartUtils {
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == MetricsConstants.MILES_AND_FEET) || (mc == MetricsConstants.MILES_AND_YARDS) || (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET);
 		float convEle = useFeet ? 3.28084f : 1.0f;
-		float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+		double totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
 
 		float divX = getDivX(app, chart, analysis, axisType, calcWithoutGaps);
 
@@ -775,7 +726,7 @@ public class ChartUtils {
 		boolean hasSameY = false;
 		Entry lastEntry = null;
 		int lastIndex = calculatedSlopeDist.length - 1;
-		float timeSpanInSeconds = analysis.timeSpan / 1000f;
+		float timeSpanInSeconds = analysis.getTimeSpan() / 1000f;
 		for (int i = 0; i < calculatedSlopeDist.length; i++) {
 			if ((axisType == TIME_OF_DAY || axisType == TIME) && analysis.isTimeSpecified()) {
 				x = (timeSpanInSeconds * i) / calculatedSlopeDist.length;
@@ -829,13 +780,13 @@ public class ChartUtils {
 		}
 		List<ILineDataSet> result = new ArrayList<>();
 		if (secondType == null) {
-			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, calcWithoutGaps, false);
+			ILineDataSet dataSet = getDataSet(app, chart, analysis, firstType, null, calcWithoutGaps, false);
 			if (dataSet != null) {
 				result.add(dataSet);
 			}
 		} else {
-			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, calcWithoutGaps, false);
-			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, calcWithoutGaps, true);
+			OrderedLineDataSet dataSet1 = getDataSet(app, chart, analysis, firstType, secondType, calcWithoutGaps, false);
+			OrderedLineDataSet dataSet2 = getDataSet(app, chart, analysis, secondType, firstType, calcWithoutGaps, true);
 			if (dataSet1 == null && dataSet2 == null) {
 				return new ArrayList<>();
 			} else if (dataSet1 == null) {
@@ -867,6 +818,7 @@ public class ChartUtils {
 	                                            @NonNull LineChart chart,
 	                                            @NonNull GPXTrackAnalysis analysis,
 	                                            @NonNull GPXDataSetType graphType,
+	                                            @Nullable GPXDataSetType otherGraphType,
 	                                            boolean calcWithoutGaps,
 	                                            boolean useRightAxis) {
 		switch (graphType) {
@@ -883,7 +835,9 @@ public class ChartUtils {
 			}
 			case SPEED: {
 				if (analysis.hasSpeedData()) {
-					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, true, calcWithoutGaps);
+					boolean setYAxisMinimum = otherGraphType != GPXDataSetType.ZOOM_ANIMATED
+							&& otherGraphType != GPXDataSetType.ZOOM_NON_ANIMATED;
+					return createGPXSpeedDataSet(app, chart, analysis, graphType, DISTANCE, useRightAxis, setYAxisMinimum, true, calcWithoutGaps);
 				}
 			}
 			default: {

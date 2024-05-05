@@ -94,6 +94,7 @@ public class AverageSpeedWidgetSettingFragment extends BaseSimpleWidgetSettingsF
 
 	@Override
 	protected void applySettings() {
+		super.applySettings();
 		speedWidget.setShouldSkipStops(appMode, !countStops);
 		speedWidget.setMeasuredInterval(appMode, timeIntervalCard.getSelectedIntervalMillis());
 	}

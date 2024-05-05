@@ -200,4 +200,5 @@
     <string name="shared_string_settings">Configuracion</string>
     <string name="si_min_m">Minutes per mile</string>
     <string name="km">km</string>
+    <string name="unit_of_length_descr">Modificar leis unitats de longitud.</string>
 </resources>

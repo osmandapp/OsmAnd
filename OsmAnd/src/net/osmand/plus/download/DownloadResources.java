@@ -16,11 +16,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -431,7 +433,7 @@ public class DownloadResources extends DownloadResourceGroup {
 			} else {
 				String fileName = item.getFileName();
 				if (fileName.contains("World")) {
-					if (Algorithms.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
+					if (CollectionUtils.startsWithAny(fileName.toLowerCase(), WORLD_SEAMARKS_KEY, WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalWorldwideMaps.addItem(item);
 					} else {
 						worldMaps.addItem(item);

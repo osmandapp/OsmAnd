@@ -1,3 +1,4 @@
+*.test.txt
 *.render.xml
 *.render_template.xml
 poi_types.xml
@@ -25,6 +26,7 @@ agconnect-services.json
 OsmAndHms.jks
 
 # Android Studio
+.attach_pid*
 /.idea
 *.iml
 

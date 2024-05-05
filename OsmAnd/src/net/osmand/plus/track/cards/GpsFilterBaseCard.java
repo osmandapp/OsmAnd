@@ -141,9 +141,9 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 	@LayoutRes
 	protected abstract int getMainContentLayoutId();
 
+	@NonNull
 	protected View inflateMainContent() {
-		return UiUtilities.getInflater(mapActivity, nightMode)
-				.inflate(getMainContentLayoutId(), view.findViewById(R.id.main_content));
+		return themedInflater.inflate(getMainContentLayoutId(), view.findViewById(R.id.main_content));
 	}
 
 	protected abstract void updateMainContent();

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<include
+		android:id="@+id/top_divider"
+		layout="@layout/list_item_divider" />
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?attr/list_background_color"
+		android:orientation="vertical">
+
+		<include layout="@layout/configure_widgets_header" />
+
+		<include
+			android:id="@+id/map_display_position_button"
+			layout="@layout/configure_screen_list_item" />
+
+		<include
+			android:id="@+id/distance_by_tap_button"
+			layout="@layout/configure_screen_list_item" />
+
+		<include
+			android:id="@+id/speedometer"
+			layout="@layout/configure_screen_list_item" />
+
+	</LinearLayout>
+
+	<include
+		android:id="@+id/bottom_divider"
+		layout="@layout/card_bottom_divider" />
+
+</LinearLayout>

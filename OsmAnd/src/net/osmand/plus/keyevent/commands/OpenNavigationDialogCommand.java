@@ -6,7 +6,7 @@ import android.view.KeyEvent;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapActionsHelper;
 
 public class OpenNavigationDialogCommand extends KeyEventCommand {
 
@@ -14,9 +14,9 @@ public class OpenNavigationDialogCommand extends KeyEventCommand {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-		MapControlsLayer mapControlsLayer = requireMapActivity().getMapLayers().getMapControlsLayer();
-		if (mapControlsLayer != null) {
-			mapControlsLayer.doRoute();
+		MapActionsHelper controlsHelper = requireMapActivity().getMapLayers().getMapActionsHelper();
+		if (controlsHelper != null) {
+			controlsHelper.doRoute();
 		}
 		return true;
 	}

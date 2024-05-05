@@ -87,8 +87,7 @@ public class ProfileCard extends MapBaseCard {
 
 	private void addProfileView(LinearLayout container, View.OnClickListener onClickListener, Object tag,
 	                            Drawable icon, CharSequence title) {
-		View row = UiUtilities.getInflater(mapActivity, nightMode)
-				.inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
+		View row = themedInflater.inflate(R.layout.bottom_sheet_item_with_radio_btn, container, false);
 		ImageView imageView = row.findViewById(R.id.icon);
 		imageView.setImageDrawable(icon);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) imageView.getLayoutParams();

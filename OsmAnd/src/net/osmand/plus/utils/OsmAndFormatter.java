@@ -66,6 +66,8 @@ public class OsmAndFormatter {
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 
+	private static final int[] ROUNDING_DISTANCE_BOUNDS = Algorithms.generate10BaseRoundingBounds(100, 5);
+
 	private static boolean twelveHoursFormat;
 	private static TimeFormatter fullTimeFormatter;
 	private static TimeFormatter shortTimeFormatter;
@@ -168,23 +170,18 @@ public class OsmAndFormatter {
 				DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
 	}
 
-	public static Date getStartOfToday() {
-		return getStartOfToday("GMT");
+	public static long getStartOfToday() {
+		return getStartOfDayForTime(System.currentTimeMillis());
 	}
 
-	public static Date getStartOfToday(@NonNull String timeZoneStr) {
-		return getStartOfDayForDate(new Date(), timeZoneStr);
-	}
-
-	public static Date getStartOfDayForDate(@NonNull Date date, @NonNull String timeZoneStr) {
+	public static long getStartOfDayForTime(long time) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(date.getTime());
+		calendar.setTimeInMillis(time);
 		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		calendar.set(Calendar.MINUTE, 0);
 		calendar.set(Calendar.SECOND, 0);
 		calendar.set(Calendar.MILLISECOND, 0);
-		calendar.setTimeZone(TimeZone.getTimeZone(timeZoneStr));
-		return new Date(calendar.getTimeInMillis());
+		return calendar.getTimeInMillis();
 	}
 
 	public static Date getTimeForTimeZone(long time, @NonNull String timeZone) {
@@ -213,9 +210,9 @@ public class OsmAndFormatter {
 		return formattedInterval + " " + unitsStr;
 	}
 
-	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, boolean forceTrailingZeros) {
+	public static String getFormattedDistanceInterval(OsmandApplication app, double interval, OsmAndFormatterParams pms) {
 		double roundedDist = calculateRoundedDist(interval, app);
-		return getFormattedDistance((float) roundedDist, app, forceTrailingZeros);
+		return getFormattedDistance((float) roundedDist, app, pms);
 	}
 
 	public static double calculateRoundedDist(double distInMeters, OsmandApplication ctx) {
@@ -324,32 +321,72 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static class OsmAndFormatterParams {
+		public static final boolean DEFAULT_FORCE_TRAILING = true;
+		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
+		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING ;
+		int extraDecimalPrecision =  DEFAULT_EXTRA_DECIMAL_PRECISION;
+
+		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
+		public static final OsmAndFormatterParams NO_TRAILING_ZEROS = new OsmAndFormatterParams().setTrailingZerosForMainUnit(false);
+		public static final OsmAndFormatterParams DEFAULT = new OsmAndFormatterParams();
+
+		boolean useLowerBound = false;
+
+		public boolean isUseLowerBound() {
+			return useLowerBound;
+		}
+
+		private static OsmAndFormatterParams useLowerBoundParam() {
+			OsmAndFormatterParams p = new OsmAndFormatterParams();
+			p.useLowerBound = true;
+			p.extraDecimalPrecision = 0;
+			p.forceTrailingZerosInDecimalMainUnit = true;
+			return p;
+		}
+
+		private OsmAndFormatterParams setTrailingZerosForMainUnit(boolean forceTrailingZeros) {
+			this.forceTrailingZerosInDecimalMainUnit = forceTrailingZeros;
+			return this;
+		}
+
+	}
+
 	@NonNull
 	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx) {
-		return getFormattedDistance(meters, ctx, true);
+		return getFormattedDistance(meters, ctx, null);
 	}
 
 	@NonNull
-	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx, boolean forceTrailingZeros) {
+	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx, OsmAndFormatterParams pms) {
 		MetricsConstants mc = ctx.getSettings().METRIC_SYSTEM.get();
-		return getFormattedDistance(meters, ctx, forceTrailingZeros, mc);
+		return getFormattedDistance(meters, ctx, pms, mc);
 	}
 
 	@NonNull
-	public static String getFormattedDistance(float meters,
-	                                          @NonNull OsmandApplication ctx,
-	                                          boolean forceTrailingZeros,
-	                                          @NonNull MetricsConstants mc) {
-		return getFormattedDistanceValue(meters, ctx, forceTrailingZeros, mc).format(ctx);
+	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx,
+											  OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
+		return getFormattedDistanceValue(meters, ctx, pms, mc).format(ctx);
 	}
 
+	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx) {
+		return getFormattedDistanceValue(meters, ctx, null, ctx.getSettings().METRIC_SYSTEM.get());
+	}
+
+	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx, OsmAndFormatterParams pms) {
+		return getFormattedDistanceValue(meters, ctx, pms, ctx.getSettings().METRIC_SYSTEM.get());
+	}
 	@NonNull
-	public static FormattedValue getFormattedDistanceValue(float meters,
-	                                                       @NonNull OsmandApplication ctx,
-	                                                       boolean forceTrailingZeros,
-	                                                       @NonNull MetricsConstants mc) {
+	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx,
+														   OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
 		int mainUnitStr;
 		float mainUnitInMeters;
+		if (pms == null) {
+			pms = OsmAndFormatterParams.DEFAULT;
+		}
+		if (pms.isUseLowerBound() && ctx.getSettings().PRECISE_DISTANCE_NUMBERS.get()) {
+			pms = OsmAndFormatterParams.DEFAULT;
+		}
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			mainUnitStr = R.string.km;
 			mainUnitInMeters = METERS_IN_KILOMETER;
@@ -362,37 +399,49 @@ public class OsmAndFormatter {
 		}
 
 		float floatDistance = meters / mainUnitInMeters;
-
+		boolean forceTrailingZeros  = pms.forceTrailingZerosInDecimalMainUnit;
+		int decimalPrecision = pms.extraDecimalPrecision;
 		if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
 					0, ctx);
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, decimalPrecision, ctx);
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
-			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 2, ctx);
+			return formatValue(floatDistance, mainUnitStr, forceTrailingZeros, 1 + decimalPrecision, ctx);
 		} else {
-			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
-				return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
-			} else if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
+
+			if (mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
 				int feet = (int) (meters * FEET_IN_ONE_METER + 0.5);
+				if (pms.isUseLowerBound()) {
+					feet = Algorithms.lowerTo10BaseRoundingBounds(feet, ROUNDING_DISTANCE_BOUNDS);
+				}
 				return formatValue(feet, R.string.foot, forceTrailingZeros, 0, ctx);
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 				int yards = (int) (meters * YARDS_IN_ONE_METER + 0.5);
+				if (pms.isUseLowerBound()) {
+					yards = Algorithms.lowerTo10BaseRoundingBounds(yards, ROUNDING_DISTANCE_BOUNDS);
+				}
 				return formatValue(yards, R.string.yard, forceTrailingZeros, 0, ctx);
 			}
-			return formatValue((int) (meters + 0.5), R.string.m, forceTrailingZeros, 0, ctx);
+			// mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
+			int m = (int) (meters + 0.5);
+			if (pms.isUseLowerBound()) {
+				m = Algorithms.lowerTo10BaseRoundingBounds(m, ROUNDING_DISTANCE_BOUNDS);
+			}
+			return formatValue(m, R.string.m, forceTrailingZeros, 0, ctx);
 		}
 	}
+
 
 	@NonNull
 	public static String getFormattedAlt(double alt, OsmandApplication ctx) {
@@ -438,6 +487,38 @@ public class OsmAndFormatter {
 		return getFormattedSpeedValue(metersPerSeconds, app, mode.hasFastSpeed(), app.getSettings().SPEED_SYSTEM.getModeValue(mode));
 	}
 
+	public static float getMpSFromFormattedValue(OsmandApplication app, float value, SpeedConstants speedFormat) {
+		return (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER) / 3.6f;
+	}
+
+	public static float getMetersFromFormattedAltitudeValue(float altitude, MetricsConstants mc) {
+		boolean useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET;
+		if (useFeet) {
+			return altitude / FEET_IN_ONE_METER;
+		} else {
+			return altitude;
+		}
+	}
+
+	public static float convertToMeters(float distance, MetricsConstants mc) {
+		float mainUnitInMeters;
+		switch (mc) {
+			case MILES_AND_FEET:
+			case MILES_AND_METERS:
+				mainUnitInMeters = METERS_IN_ONE_MILE;
+				break;
+			case NAUTICAL_MILES_AND_METERS:
+			case NAUTICAL_MILES_AND_FEET:
+				mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
+				break;
+			default:
+				mainUnitInMeters = METERS_IN_KILOMETER;
+				break;
+		}
+
+		return distance * mainUnitInMeters;
+	}
+
 	@NonNull
 	public static float getMetersInModeUnit(@NonNull OsmandApplication app, @NonNull SpeedConstants speedFormat) {
 		float metersInUnit = 0f;
@@ -460,6 +541,19 @@ public class OsmAndFormatter {
 				break;
 		}
 		return metersInUnit;
+	}
+
+	public static float convertSpeedToMetersPerSecond(float formattedValueSrc, SpeedConstants mc) {
+		switch (mc) {
+			case KILOMETERS_PER_HOUR:
+				return formattedValueSrc / 3.6f;
+			case MILES_PER_HOUR:
+				return (float) (formattedValueSrc * METERS_IN_ONE_MILE / 3.6 * 1000);
+			case NAUTICALMILES_PER_HOUR:
+				return (float) (formattedValueSrc * METERS_IN_ONE_NAUTICALMILE / 3.6 * 1000);
+			default:
+				return formattedValueSrc;
+		}
 	}
 
 	@NonNull
@@ -558,12 +652,19 @@ public class OsmAndFormatter {
 	@NonNull
 	public static FormattedValue formatValue(float value, @StringRes int unitId, boolean forceTrailingZeroes,
 	                                         int decimalPlacesNumber, @NonNull OsmandApplication app) {
-		return formatValue(value, app.getString(unitId), forceTrailingZeroes, decimalPlacesNumber, app);
+
+		return formatValue(value, app.getString(unitId), unitId, forceTrailingZeroes, decimalPlacesNumber, app);
 	}
 
 	@NonNull
 	public static FormattedValue formatValue(float value, @NonNull String unit, boolean forceTrailingZeroes,
 	                                         int decimalPlacesNumber, @NonNull OsmandApplication app) {
+		return formatValue(value, unit, -1, forceTrailingZeroes, decimalPlacesNumber, app);
+	}
+
+	@NonNull
+	public static FormattedValue formatValue(float value, @NonNull String unit, @StringRes int unitId, boolean forceTrailingZeroes,
+											 int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		String pattern = "0";
 		if (decimalPlacesNumber > 0) {
 			char fractionDigitPattern = forceTrailingZeroes ? '0' : '#';
@@ -591,7 +692,7 @@ public class OsmAndFormatter {
 		messageFormat.setFormatByArgumentIndex(0, decimalFormat);
 		String formattedValue = messageFormat.format(new Object[] {value})
 				.replace('\n', ' ');
-		return new FormattedValue(value, formattedValue, unit);
+		return new FormattedValue(value, formattedValue, unit, unitId, true);
 	}
 
 	public static boolean isSameDay(long firstTime, long secondTime) {
@@ -841,6 +942,7 @@ public class OsmAndFormatter {
 		public final String value;
 		public final String unit;
 		public final float valueSrc;
+		public final int unitId;
 
 		private final boolean separateWithSpace;
 
@@ -849,14 +951,25 @@ public class OsmAndFormatter {
 		}
 
 		public FormattedValue(float valueSrc, String value, String unit, boolean separateWithSpace) {
+			this(valueSrc, value, unit, -1, separateWithSpace);
+		}
+
+		public FormattedValue(float valueSrc, String value, String unit, @StringRes int unitId, boolean separateWithSpace) {
 			this.value = value;
 			this.valueSrc = valueSrc;
 			this.unit = unit;
 			this.separateWithSpace = separateWithSpace;
+			this.unitId = unitId;
 		}
 
 		@NonNull
 		public String format(@NonNull Context context) {
+			return format(context, value, unit, separateWithSpace);
+		}
+
+		@NonNull
+		public static String format(@NonNull Context context, @NonNull String value,
+		                            @NonNull String unit, boolean separateWithSpace) {
 			return separateWithSpace
 					? context.getString(R.string.ltr_or_rtl_combine_via_space, value, unit)
 					: new MessageFormat("{0}{1}").format(new Object[] {value, unit});

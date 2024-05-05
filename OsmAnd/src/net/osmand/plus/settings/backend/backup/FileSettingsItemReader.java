@@ -3,9 +3,13 @@ package net.osmand.plus.settings.backend.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +19,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem> {
+
+	private static final Log LOG = PlatformUtil.getLog(FileSettingsItemReader.class);
 
 	private File savedFile;
 
@@ -73,11 +79,16 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 	}
 
 	private void writeTargetFile(@NonNull File tempFile, @NonNull File targetFile, @NonNull FileSettingsItem item) {
-		if (FileUtils.replaceTargetFile(tempFile, targetFile)) {
-			long lastModifiedTime = item.getLastModifiedTime();
+		long lastModifiedTime = item.getLastModifiedTime();
+		boolean replaced = FileUtils.replaceTargetFile(tempFile, targetFile);
+		if (replaced) {
 			if (lastModifiedTime > 0) {
 				targetFile.setLastModified(lastModifiedTime);
 			}
+		}
+		if (PluginsHelper.isDevelopment()) {
+			LOG.debug(" target " + targetFile.getAbsolutePath() + " replaced " + replaced + " temp "
+					+ tempFile.getAbsolutePath() + " itemTime " + lastModifiedTime + " fileTime " + targetFile.lastModified());
 		}
 	}
 }

@@ -3776,8 +3776,8 @@
     <string name="poi_traffic_signals_vibration_yes">Так</string>
     <string name="poi_traffic_signals_vibration_no">Вібрацыя: не</string>
     <string name="poi_pump_status_missing_beam">Стан помпы: адсутнічае рычаг</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Усмоктванне</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Пад ціскам</string>
+    <string name="poi_fire_hydrant_pressure_suction">Усмоктванне</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Пад ціскам</string>
     <string name="poi_water_source_groundwater">Падземныя воды</string>
     <string name="poi_fire_hydrant_type_pipe">Труба</string>
     <string name="poi_drinking_water_refill_network">Сетка папаўнення пітной вадой</string>
@@ -4377,7 +4377,7 @@
     <string name="poi_playground_exercise">Трэнажорная зала на адкрытым паветры</string>
     <string name="poi_dog">Сабакі</string>
     <string name="poi_climbing_grade_super_elite">Узровень для супер элітных альпіністаў</string>
-    <string name="poi_osmand_climbing_bolts_yes">Так</string>
+    <string name="poi_climbing_bolts_yes">Так</string>
     <string name="poi_trampoline_park">Батутны парк</string>
     <string name="poi_climbing_grade_filter">Ступень складанасці ўзыходжання</string>
     <string name="poi_climbing_bolt">Альпінісцкая шруба</string>
@@ -4406,7 +4406,7 @@
     <string name="poi_climbing_grade_aliens">Узровень для прышэльцаў</string>
     <string name="poi_climbing_bolt_abseil">Спуск па канаце</string>
     <string name="poi_climbing_bolt_anchor">Страхоўка</string>
-    <string name="poi_osmand_climbing_bolts_no">Не</string>
+    <string name="poi_climbing_bolts_no">Не</string>
     <string name="poi_climbing_bolts">Альпінісцкія шрубы</string>
     <string name="poi_climbing_quality_medium">Сярэдні</string>
     <string name="poi_socket_type2_voltage_filter">Напружанне раздыма тыпу 2</string>

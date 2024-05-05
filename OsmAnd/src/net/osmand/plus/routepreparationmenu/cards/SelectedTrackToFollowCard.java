@@ -82,7 +82,6 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 	}
 
 	private View buildDividerView(@NonNull ViewGroup view, boolean needMargin) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
 		View divider = themedInflater.inflate(R.layout.simple_divider_item, view, false);
 
 		ViewGroup.LayoutParams params = divider.getLayoutParams();

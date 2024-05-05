@@ -67,6 +67,8 @@ public class IndexConstants {
 
 	public static final String AVOID_ROADS_FILE_EXT = ".geojson";
 
+	public static final String OBJ_FILE_EXT = ".obj";
+
 	public static final String POI_TABLE = "poi";
 
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
@@ -105,6 +107,8 @@ public class IndexConstants {
 	public static final String GEOTIFF_DIR = "geotiff/";
 	public static final String WEATHER_INDEX_DIR = "weather/";
 	public static final String WEATHER_FORECAST_DIR = "weather_forecast/";
+	public static final String MODEL_3D_DIR = "models/";
 
 	public static final String VOICE_PROVIDER_SUFFIX = "-tts";
+	public static final String MODEL_NAME_PREFIX = "model_";
 }

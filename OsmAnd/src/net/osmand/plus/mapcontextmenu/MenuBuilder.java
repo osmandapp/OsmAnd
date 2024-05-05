@@ -65,13 +65,14 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchToolbarController;
+import net.osmand.plus.search.dialogs.QuickSearchToolbarController;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
@@ -1172,14 +1173,15 @@ public class MenuBuilder {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				OsmandMapTileView mapView = getMapActivity().getMapView();
 				MapContextMenu mm = getMapActivity().getContextMenu();
 				PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_ROUTE,
 						r.getDescription(getMapActivity().getMyApplication(), false));
 				mm.show(latLon, pd, r);
 				TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 				stopsLayer.setRoute(r);
-				int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-				app.getOsmandMap().changeZoom(cz - getMapActivity().getMapView().getZoom());
+				int zoom = r.calculateZoom(0, mapView.getCurrentRotatedTileBox());
+				mapView.setIntZoom(zoom);
 			}
 		};
 	}
@@ -1279,7 +1281,7 @@ public class MenuBuilder {
 						mapActivity.refreshMap();
 					}
 				});
-				mapContextMenu.hideMenues();
+				mapContextMenu.hideMenus();
 				mapActivity.showTopToolbar(controller);
 				mapActivity.refreshMap();
 			}

@@ -158,8 +158,7 @@ public class WeatherHelper {
 	public void clearOutdatedCache() {
 		totalCacheSize.reset();
 
-		Date date = OsmAndFormatter.getStartOfToday();
-		long dateTime = date.getTime();
+		long dateTime = OsmAndFormatter.getStartOfToday();
 		weatherTileResourcesManager.clearDbCache(dateTime);
 
 		List<String> downloadedRegionIds = offlineForecastHelper.getTempForecastsWithDownloadStates(FINISHED);

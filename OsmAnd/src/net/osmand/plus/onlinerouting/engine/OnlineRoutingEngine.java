@@ -107,16 +107,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public boolean shouldApproximateRoute() {
 		String value = get(EngineParameter.APPROXIMATION_ROUTING_PROFILE);
-		return !Algorithms.isEmpty(value) || shouldNetworkApproximateRoute();
+		return !Algorithms.isEmpty(value);
 	}
 
-	public boolean shouldNetworkApproximateRoute() {
-		String value = get(EngineParameter.NETWORK_APPROXIMATE_ROUTE);
-		if (!Algorithms.isEmpty(value)) {
-			return Boolean.parseBoolean(value);
-		}
-		return false;
-	}
 
 	@Nullable
 	public String getApproximationRoutingProfile() {

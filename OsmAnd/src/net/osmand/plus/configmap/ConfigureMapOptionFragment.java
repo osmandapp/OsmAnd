@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap;
 
+import static net.osmand.plus.dashboard.DashboardOnMap.*;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.BACK_TO_LOC_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_IN_BUTTON_ID;
 import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_BUTTON_ID;
@@ -61,6 +62,10 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 		return portrait ? ColorUtilities.getListBgColorId(nightMode) : R.color.status_bar_transparent_light;
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,10 +75,12 @@ public abstract class ConfigureMapOptionFragment extends BaseOsmAndFragment {
 			@Override
 			public void handleOnBackPressed() {
 				activity.getSupportFragmentManager().popBackStack();
-				activity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, false);
+				activity.getDashboard().setDashboardVisibility(true, getBaseDashboardType(), false);
 			}
 		});
 	}
+
+	protected abstract DashboardType getBaseDashboardType();
 
 	@Nullable
 	@Override

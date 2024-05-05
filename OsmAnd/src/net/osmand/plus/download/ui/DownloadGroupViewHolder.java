@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.download.CustomRegion;
+import net.osmand.plus.plugins.custom.CustomRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;

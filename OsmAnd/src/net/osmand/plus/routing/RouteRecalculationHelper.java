@@ -1,12 +1,11 @@
 package net.osmand.plus.routing;
 
-import android.os.AsyncTask;
+import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
@@ -29,8 +28,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
 
 class RouteRecalculationHelper {
 
@@ -91,26 +88,6 @@ class RouteRecalculationHelper {
 
 	void resetEvalWaitInterval() {
 		evalWaitInterval = 0;
-	}
-
-	public boolean isMissingMapsSearching() {
-		synchronized (routingHelper) {
-			RouteRecalculationTask lastTask = this.lastTask;
-			if (isRouteBeingCalculated() && lastTask != null) {
-				return lastTask.isMissingMapsSearching();
-			}
-		}
-		return false;
-	}
-
-	boolean startMissingMapsOnlineSearch() {
-		synchronized (routingHelper) {
-			RouteRecalculationTask lastTask = this.lastTask;
-			if (isRouteBeingCalculated() && lastTask != null) {
-				return lastTask.startMissingMapsOnlineSearch();
-			}
-		}
-		return false;
 	}
 
 	void stopCalculationIfParamsNotChanged() {
@@ -248,7 +225,7 @@ class RouteRecalculationHelper {
 			}
 			params.onlyStartPointChanged = onlyStartPointChanged;
 			if (recalculateCountInInterval < RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE
-					|| (gpxRoute != null && gpxRoute.isPassWholeRoute() && isDeviatedFromRoute())) {
+					|| (gpxRoute != null && isDeviatedFromRoute())) {
 				params.previousToRecalculate = previousRoute;
 			} else {
 				recalculateCountInInterval = 0;
@@ -308,20 +285,10 @@ class RouteRecalculationHelper {
 	                                         @NonNull RouteCalculationParams params) {
 		RouteCalculationProgress calculationProgress = params.calculationProgress;
 		if (isRouteBeingCalculated()) {
-			boolean routeCalculationStarted = calculationProgress.routeCalculationStartTime != 0;
 			if (lastTask != null && lastTask.params == params) {
 				progressRoute.onUpdateCalculationProgress((int) calculationProgress.getLinearProgress());
 				if (calculationProgress.requestPrivateAccessRouting) {
 					progressRoute.onRequestPrivateAccessRouting();
-				}
-				if (routeCalculationStarted) {
-					if (lastTask.missingMaps != null) {
-						progressRoute.onUpdateMissingMaps(lastTask.missingMaps, true);
-					} else if (System.currentTimeMillis() > calculationProgress.routeCalculationStartTime + SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME) {
-						progressRoute.onUpdateMissingMaps(null, true);
-					} else if (calculationProgress.missingMaps != null) {
-						progressRoute.onUpdateMissingMaps(calculationProgress.missingMaps, false);
-					}
 				}
 				return true;
 			}
@@ -352,9 +319,6 @@ class RouteRecalculationHelper {
 		private final boolean paramsChanged;
 		private final boolean updateProgress;
 
-		private MissingMapsOnlineSearchTask missingMapsOnlineSearchTask;
-		private List<WorldRegion> missingMaps;
-
 		String routeCalcError;
 		String routeCalcErrorShort;
 		int evalWaitInterval;
@@ -376,22 +340,8 @@ class RouteRecalculationHelper {
 			return paramsChanged;
 		}
 
-		public boolean isMissingMapsSearching() {
-			return missingMapsOnlineSearchTask != null && missingMaps == null;
-		}
-
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
-		}
-
-		public boolean startMissingMapsOnlineSearch() {
-			if (missingMapsOnlineSearchTask == null) {
-				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps ->
-						this.missingMaps = missingMaps);
-				missingMapsOnlineSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				return true;
-			}
-			return false;
 		}
 
 		private OsmandSettings getSettings() {

@@ -31,7 +31,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 	}
 
 	private void showConfirmationDialog(@NonNull FavouritePoint favourite) {
-		boolean nightMode = isNightMode(mApp);
+		boolean nightMode = isNightMode(app);
 		Context themedContext = UiUtilities.getThemedContext(getContext(), nightMode);
 		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		builder.setTitle(R.string.update_existing);
@@ -45,7 +45,7 @@ public class SelectFavouriteToReplaceBottomSheet extends SelectFavouriteBottomSh
 
 	private void onApplyReplacement(@NonNull FavouritePoint favourite) {
 		FavouritePoint point = AndroidUtils.getSerializable(getArguments(), KEY_FAVORITE, FavouritePoint.class);
-		FavouritesHelper helper = mApp.getFavoritesHelper();
+		FavouritesHelper helper = app.getFavoritesHelper();
 		favourite.setAddress(point.getAddress()); // Use address from the new point
 		if (point != null && helper.editFavourite(favourite, point.getLatitude(), point.getLongitude())) {
 			helper.deleteFavourite(point);

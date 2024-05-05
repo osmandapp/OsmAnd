@@ -1,9 +1,6 @@
 package net.osmand.plus.settings.enums;
 
-import android.content.Context;
-
 import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.plus.R;
@@ -24,8 +21,13 @@ public enum Map3DModeVisibility {
 		this.iconId = iconId;
 	}
 
-	@NonNull
-	public String getTitle(@NonNull Context context) {
-		return context.getString(titleId);
+	@StringRes
+	public int getTitleId() {
+		return titleId;
+	}
+
+	@DrawableRes
+	public int getIconId() {
+		return iconId;
 	}
 }

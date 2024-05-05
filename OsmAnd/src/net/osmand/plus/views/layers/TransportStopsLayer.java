@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Path;
@@ -9,7 +11,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.ResultMatcher;
@@ -30,8 +31,9 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.AppInitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.RenderingIcons;
@@ -42,11 +44,13 @@ import net.osmand.plus.transport.TransportStopType;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider;
 import net.osmand.plus.views.layers.core.TransportStopsTileProvider.StopsCollectionPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
+import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -277,7 +281,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 								tx.add(x);
 								ty.add(y);
 							}
-							GeometryWay.calculatePath(tb, tx, ty, path);
+							GeometryWayPathAlgorithms.calculatePath(tb, tx, ty, path);
 						}
 					}
 					attrs.drawPath(canvas, path);
@@ -303,7 +307,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+					PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(ctx,
 							ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
 							true, false, 0, BackgroundType.SQUARE);
 					pointImageDrawable.setAlpha(0.9f);
@@ -329,7 +333,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	private void drawPoint(Canvas canvas, float textScale, float x, float y, @DrawableRes int iconId) {
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(getContext(),
+		PointImageDrawable pointImageDrawable = PointImageUtils.getOrCreate(getContext(),
 				ContextCompat.getColor(getContext(), R.color.transport_stop_icon_background),
 				true,false ,iconId, BackgroundType.SQUARE);
 		pointImageDrawable.setAlpha(0.9f);
@@ -492,10 +496,10 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private void addMapsInitializedListener() {
 		OsmandApplication app = getApplication();
 		if (app.isApplicationInitializing()) {
-			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
-				public void onProgress(@NonNull AppInitializer init, @NonNull InitEvents event) {
-					if (event == AppInitializer.InitEvents.MAPS_INITIALIZED) {
+				public void onProgress(@NonNull AppInitializer init, @NonNull AppInitEvents event) {
+					if (event == MAPS_INITIALIZED) {
 						mapsInitialized = true;
 					}
 				}

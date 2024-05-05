@@ -33,6 +33,10 @@ public class RouteCalculationParams {
 	public RouteCalculationProgressListener calculationProgressListener;
 	public RouteCalculationResultListener alternateResultListener;
 
+	public boolean recheckRouteNearestPoint() {
+		return previousToRecalculate != null && onlyStartPointChanged && start != null && gpxRoute != null;
+	}
+
 	public interface RouteCalculationResultListener {
 		void onRouteCalculated(RouteCalculationResult route);
 	}

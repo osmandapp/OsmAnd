@@ -15,10 +15,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
-import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
@@ -261,7 +261,7 @@ public class PoiFiltersHelper {
 				filters.add(f);
 			}
 			PluginsHelper.registerCustomPoiFilters(filters);
-			this.cacheTopStandardFilters = Algorithms.addAllToList(cacheTopStandardFilters, filters);
+			this.cacheTopStandardFilters = CollectionUtils.addAllToList(cacheTopStandardFilters, filters);
 		}
 		List<PoiUIFilter> result = new ArrayList<>();
 		for (PoiUIFilter filter : cacheTopStandardFilters) {
@@ -430,7 +430,7 @@ public class PoiFiltersHelper {
 				filtersToRemove.add(f);
 			}
 		}
-		cacheTopStandardFilters = Algorithms.removeAllFromList(cacheTopStandardFilters, filtersToRemove);
+		cacheTopStandardFilters = CollectionUtils.removeAllFromList(cacheTopStandardFilters, filtersToRemove);
 		boolean res = helper.addFilter(filter, helper.getWritableDatabase(), false, forHistory);
 		if (res) {
 			addTopPoiFilter(filter);
@@ -496,13 +496,13 @@ public class PoiFiltersHelper {
 
 	private PoiUIFilter addTopPoiFilter(@NonNull PoiUIFilter filter) {
 		checkTopStandardFiltersCache();
-		cacheTopStandardFilters = Algorithms.addToList(cacheTopStandardFilters, filter);
+		cacheTopStandardFilters = CollectionUtils.addToList(cacheTopStandardFilters, filter);
 		return filter;
 	}
 
 	private void removeTopPoiFilter(@NonNull PoiUIFilter filter) {
 		checkTopStandardFiltersCache();
-		cacheTopStandardFilters = Algorithms.removeFromList(cacheTopStandardFilters, filter);
+		cacheTopStandardFilters = CollectionUtils.removeFromList(cacheTopStandardFilters, filter);
 	}
 
 	private void checkTopStandardFiltersCache() {
@@ -754,21 +754,21 @@ public class PoiFiltersHelper {
 		}
 
 		public long getLastModifiedTime() {
-			long lastModifiedTime = BackupHelper.getLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME);
+			long lastModifiedTime = BackupUtils.getLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME);
 			if (lastModifiedTime == 0) {
 				File dbFile = context.getDatabasePath(DATABASE_NAME);
 				lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
-				BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
+				BackupUtils.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
 			}
 			return lastModifiedTime;
 		}
 
 		public void setLastModifiedTime(long lastModifiedTime) {
-			BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
+			BackupUtils.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME, lastModifiedTime);
 		}
 
 		private void updateLastModifiedTime() {
-			BackupHelper.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME);
+			BackupUtils.setLastModifiedTime(context, FILTERS_LAST_MODIFIED_NAME);
 		}
 
 		private void deleteOldFilters(SQLiteConnection conn) {

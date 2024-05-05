@@ -42,6 +42,8 @@ public class OsmandRegions {
 
 	public static final String MAP_TYPE = "region_map";
 	public static final String ROADS_TYPE = "region_roads";
+	public static final String MAP_JOIN_TYPE = "region_join_map";
+	public static final String ROADS_JOIN_TYPE = "region_join_roads";
 
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
 	public static final String FIELD_NAME = "name";
@@ -278,7 +280,7 @@ public class OsmandRegions {
 		return reader != null;
 	}
 
-	public boolean contain(BinaryMapDataObject bo, int tx, int ty) {
+	public static boolean contain(BinaryMapDataObject bo, int tx, int ty) {
 		int t = 0;
 		for (int i = 1; i < bo.getPointsLength(); i++) {
 			int fx = MapAlgorithms.ray_intersect_x(bo.getPoint31XTile(i - 1),
@@ -292,7 +294,7 @@ public class OsmandRegions {
 		return t % 2 == 1;
 	}
 
-	public boolean intersect(BinaryMapDataObject bo, int lx, int ty, int rx, int by) {
+	public static boolean intersect(BinaryMapDataObject bo, int lx, int ty, int rx, int by) {
 		// 1. polygon in object 
 		if (contain(bo, lx, ty)) {
 			return true;
@@ -922,6 +924,19 @@ public class OsmandRegions {
 		return foundObjects;
 	}
 
+	public List<BinaryMapDataObject> getRegionsToDownload(double lat, double lon) throws IOException {
+		List<BinaryMapDataObject> l = new ArrayList<BinaryMapDataObject>();
+		int x31 = MapUtils.get31TileNumberX(lon);
+		int y31 = MapUtils.get31TileNumberY(lat);
+		List<BinaryMapDataObject> cs = query(x31, y31);
+		for (BinaryMapDataObject b : cs) {
+			if (contain(b, x31, y31) && !Algorithms.isEmpty(getDownloadName(b))) {
+				l.add(b);
+			}
+		}
+		return l;
+	}
+	
 	public List<String> getRegionsToDownload(double lat, double lon, List<String> keyNames) throws IOException {
 		keyNames.clear();
 		int x31 = MapUtils.get31TileNumberX(lon);

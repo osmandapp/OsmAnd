@@ -5,60 +5,50 @@ import static net.osmand.gpx.GPXUtilities.POINT_SPEED;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities.RouteSegment;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class GPXTrackAnalysis {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXTrackAnalysis.class);
 
+	// Increase carefully if really necessary! This causes the statistics of all tracks to be recalculated.
+	// Next value is 3!
+	public static final int ANALYSIS_VERSION = 1;
+
 	public String name;
 
-	public float totalDistance = 0;
 	public float totalDistanceWithoutGaps = 0;
-	public int totalTracks = 0;
-	public long startTime = Long.MAX_VALUE;
-	public long endTime = Long.MIN_VALUE;
-	public long timeSpan = 0;
 	public long timeSpanWithoutGaps = 0;
+	public long expectedRouteDuration = 0;
 	//Next few lines for Issue 3222 heuristic testing only
 	//public long timeMoving0 = 0;
 	//public float totalDistanceMoving0 = 0;
-	public long timeMoving = 0;
 	public long timeMovingWithoutGaps = 0;
-	public float totalDistanceMoving = 0;
 	public float totalDistanceMovingWithoutGaps = 0;
 
-	public double diffElevationUp = 0;
-	public double diffElevationDown = 0;
-	public double avgElevation = 0;
-	public double minElevation = 99999;
-	public double maxElevation = -100;
-
-	public float minSpeed = Float.MAX_VALUE;
-	public float maxSpeed = 0;
-	public float avgSpeed;
+	private final Map<GpxParameter, Object> parameters = new HashMap<>();
 
 	public double minHdop = Double.NaN;
 	public double maxHdop = Double.NaN;
 
-	public int points;
-	public int wptPoints = 0;
-
-	public Set<String> wptCategoryNames;
-
 	public double metricEnd;
 	public double secondaryMetricEnd;
 
-	public LatLon latLonStart;
 	public WptPt locationStart;
 	public WptPt locationEnd;
 
@@ -72,16 +62,271 @@ public class GPXTrackAnalysis {
 
 	public boolean hasSpeedInTrack = false;
 
+	public Object getGpxParameter(GpxParameter parameter) {
+		Object value = parameter.getDefaultValue();
+		if (parameters.containsKey(parameter)) {
+			value = parameters.get(parameter);
+		}
+		return value;
+	}
+
+	public void setGpxParameter(GpxParameter parameter, Object value) {
+		parameters.put(parameter, value);
+	}
+
+	public void setStartTime(long startTime) {
+		setGpxParameter(GpxParameter.START_TIME, startTime);
+	}
+
+	public long getStartTime() {
+		Object startTime = getGpxParameter(GpxParameter.START_TIME);
+		return (long) startTime;
+	}
+
+	public void setEndTime(long endTime) {
+		setGpxParameter(GpxParameter.END_TIME, endTime);
+	}
+
+	public long getEndTime() {
+		Object endTime = getGpxParameter(GpxParameter.END_TIME);
+		return (long) endTime;
+	}
+
+	public void setTimeSpan(long timeSpan) {
+		setGpxParameter(GpxParameter.TIME_SPAN, timeSpan);
+	}
+
+	public long getTimeSpan() {
+		Object timeSpan = getGpxParameter(GpxParameter.TIME_SPAN);
+		return (long) timeSpan;
+	}
+
+	public long getTimeMoving() {
+		Object timeMoving = getGpxParameter(GpxParameter.TIME_MOVING);
+		return (long) timeMoving;
+	}
+
+	public void setTimeMoving(long timeMoving) {
+		setGpxParameter(GpxParameter.TIME_MOVING, timeMoving);
+	}
+
+	public void setMaxElevation(double maxElevation) {
+		setGpxParameter(GpxParameter.MAX_ELEVATION, maxElevation);
+	}
+
+	public double getMaxElevation() {
+		Object maxElevation = getGpxParameter(GpxParameter.MAX_ELEVATION);
+		return (double) maxElevation;
+	}
+
+	public void setDiffElevationUp(double diffElevationUp) {
+		setGpxParameter(GpxParameter.DIFF_ELEVATION_UP, diffElevationUp);
+	}
+
+	public double getDiffElevationUp() {
+		Object diffElevationUp = getGpxParameter(GpxParameter.DIFF_ELEVATION_UP);
+		return (double) diffElevationUp;
+	}
+
+	public void setDiffElevationDown(double diffElevationDown) {
+		setGpxParameter(GpxParameter.DIFF_ELEVATION_DOWN, diffElevationDown);
+	}
+
+	public double getDiffElevationDown() {
+		Object diffElevationDown = getGpxParameter(GpxParameter.DIFF_ELEVATION_DOWN);
+		return (double) diffElevationDown;
+	}
+
+	public void setMinElevation(double minElevation) {
+		setGpxParameter(GpxParameter.MIN_ELEVATION, minElevation);
+	}
+
+	public double getMinElevation() {
+		Object minElevation = getGpxParameter(GpxParameter.MIN_ELEVATION);
+		return (double) minElevation;
+	}
+
+	public void setAvgElevation(double avgElevation) {
+		setGpxParameter(GpxParameter.AVG_ELEVATION, avgElevation);
+	}
+
+	public double getAvgElevation() {
+		return (double) getGpxParameter(GpxParameter.AVG_ELEVATION);
+	}
+
+
+	public void setAvgSpeed(float avgSpeed) {
+		setGpxParameter(GpxParameter.AVG_SPEED, (double) avgSpeed);
+	}
+
+	public float getAvgSpeed() {
+		Object avgSpeed = getGpxParameter(GpxParameter.AVG_SPEED);
+		return ((Double) avgSpeed).floatValue();
+	}
+
+	public void setMinSpeed(float minSpeed) {
+		setGpxParameter(GpxParameter.MIN_SPEED, (double) minSpeed);
+	}
+
+	public float getMinSpeed() {
+		Object minSpeed = getGpxParameter(GpxParameter.MIN_SPEED);
+		return ((Double) minSpeed).floatValue();
+	}
+
+	public void setMaxSpeed(float maxSpeed) {
+		setGpxParameter(GpxParameter.MAX_SPEED, (double) maxSpeed);
+	}
+
+	public float getMaxSpeed() {
+		Object maxSpeed = getGpxParameter(GpxParameter.MAX_SPEED);
+		return ((Double) maxSpeed).floatValue();
+	}
+
+	public void setMaxSensorHr(int maxSensorHr) {
+		setGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE, maxSensorHr);
+	}
+
+	public int getMaxSensorHr() {
+		Object maxSensorHr = getGpxParameter(GpxParameter.MAX_SENSOR_HEART_RATE);
+		return (int) maxSensorHr;
+	}
+
+	public void setPoints(int points) {
+		setGpxParameter(GpxParameter.POINTS, points);
+	}
+
+	public int getPoints() {
+		Object points = getGpxParameter(GpxParameter.POINTS);
+		return (int) points;
+	}
+
+	public void setWptPoints(int wptPoints) {
+		setGpxParameter(GpxParameter.WPT_POINTS, wptPoints);
+	}
+
+	public int getWptPoints() {
+		Object wptPoints = getGpxParameter(GpxParameter.WPT_POINTS);
+		return (int) wptPoints;
+	}
+
+	public void setMaxSensorTemperature(int maxSensorTemperature) {
+		setGpxParameter(GpxParameter.MAX_SENSOR_TEMPERATURE, maxSensorTemperature);
+	}
+
+	public int getMaxSensorPower() {
+		Object maxSensorPower = getGpxParameter(GpxParameter.MAX_SENSOR_POWER);
+		return (int) maxSensorPower;
+	}
+
+	public void setMaxSensorPower(int maxSensorPower) {
+		setGpxParameter(GpxParameter.MAX_SENSOR_POWER, maxSensorPower);
+	}
+
+	public int getTotalTracks() {
+		Object totalTracks = getGpxParameter(GpxParameter.TOTAL_TRACKS);
+		return (int) totalTracks;
+	}
+
+	public void setTotalTracks(int totalTracks) {
+		setGpxParameter(GpxParameter.TOTAL_TRACKS, totalTracks);
+	}
+
+	public int getMaxSensorTemperature() {
+		Object maxSensorTemperature = getGpxParameter(GpxParameter.MAX_SENSOR_TEMPERATURE);
+		return (int) maxSensorTemperature;
+	}
+
+	public void setMaxSensorSpeed(float maxSensorSpeed) {
+		setGpxParameter(GpxParameter.MAX_SENSOR_SPEED, (double) maxSensorSpeed);
+	}
+
+	public float getMaxSensorSpeed() {
+		Object maxSensorSpeed = getGpxParameter(GpxParameter.MAX_SENSOR_SPEED);
+		return ((Double) maxSensorSpeed).floatValue();
+	}
+
+	public void setMaxSensorCadence(float maxSensorCadence) {
+		setGpxParameter(GpxParameter.MAX_SENSOR_CADENCE, (double) maxSensorCadence);
+	}
+
+	public float getMaxSensorCadence() {
+		Object maxSensorCadence = getGpxParameter(GpxParameter.MAX_SENSOR_CADENCE);
+		return ((Double) maxSensorCadence).floatValue();
+	}
+
+	public void setAvgSensorSpeed(float avgSensorSpeed) {
+		setGpxParameter(GpxParameter.AVG_SENSOR_SPEED, (double) avgSensorSpeed);
+	}
+
+	public float getAvgSensorSpeed() {
+		Object avgSensorSpeed = getGpxParameter(GpxParameter.AVG_SENSOR_SPEED);
+		return ((Double) avgSensorSpeed).floatValue();
+	}
+
+	public void setAvgSensorCadence(float avgSensorCadence) {
+		setGpxParameter(GpxParameter.AVG_SENSOR_CADENCE, (double) avgSensorCadence);
+	}
+
+	public float getAvgSensorCadence() {
+		Object avgSensorCadence = getGpxParameter(GpxParameter.AVG_SENSOR_CADENCE);
+		return ((Double) avgSensorCadence).floatValue();
+	}
+
+	public void setAvgSensorHr(float avgSensorHr) {
+		setGpxParameter(GpxParameter.AVG_SENSOR_HEART_RATE, (double) avgSensorHr);
+	}
+
+	public float getAvgSensorHr() {
+		Object avgSensorHr = getGpxParameter(GpxParameter.AVG_SENSOR_HEART_RATE);
+		return ((Double) avgSensorHr).floatValue();
+	}
+
+	public void setAvgSensorPower(float avgSensorPower) {
+		setGpxParameter(GpxParameter.AVG_SENSOR_POWER, (double) avgSensorPower);
+	}
+
+	public float getAvgSensorPower() {
+		Object avgSensorPower = getGpxParameter(GpxParameter.AVG_SENSOR_POWER);
+		return ((Double) avgSensorPower).floatValue();
+	}
+
+	public void setAvgSensorTemperature(float avgSensorTemperature) {
+		setGpxParameter(GpxParameter.AVG_SENSOR_TEMPERATURE, (double) avgSensorTemperature);
+	}
+
+	public float getAvgSensorTemperature() {
+		Object avgSensorTemperature = getGpxParameter(GpxParameter.AVG_SENSOR_TEMPERATURE);
+		return ((Double) avgSensorTemperature).floatValue();
+	}
+
+	public void setTotalDistanceMoving(float totalDistanceMoving) {
+		setGpxParameter(GpxParameter.TOTAL_DISTANCE_MOVING, (double) totalDistanceMoving);
+	}
+
+	public float getTotalDistanceMoving() {
+		Object totalDistanceMoving = getGpxParameter(GpxParameter.TOTAL_DISTANCE_MOVING);
+		return ((Double) totalDistanceMoving).floatValue();
+	}
+
+	public void setTotalDistance(float totalDistance) {
+		setGpxParameter(GpxParameter.TOTAL_DISTANCE, (double) totalDistance);
+	}
+
+	public float getTotalDistance() {
+		Object totalDistance = getGpxParameter(GpxParameter.TOTAL_DISTANCE);
+		return ((Double) totalDistance).floatValue();
+	}
+
 	public boolean isTimeSpecified() {
-		return startTime != Long.MAX_VALUE && startTime != 0;
+		return getStartTime() != Long.MAX_VALUE && getStartTime() != 0;
 	}
 
 	public boolean isTimeMoving() {
-		return timeMoving != 0;
+		return getTimeMoving() != 0;
 	}
 
 	public boolean isElevationSpecified() {
-		return maxElevation != -100;
+		return getMaxElevation() != -100;
 	}
 
 	public boolean hasSpeedInTrack() {
@@ -93,7 +338,7 @@ public class GPXTrackAnalysis {
 	}
 
 	public boolean isSpeedSpecified() {
-		return avgSpeed > 0;
+		return getAvgSpeed() > 0;
 	}
 
 	public boolean isHdopSpecified() {
@@ -110,6 +355,30 @@ public class GPXTrackAnalysis {
 		}
 	}
 
+	public void setLatLonStart(double latitude, double longitude) {
+		setGpxParameter(GpxParameter.START_LAT, latitude);
+		setGpxParameter(GpxParameter.START_LON, longitude);
+	}
+
+	public LatLon getLatLonStart() {
+		Object lat = getGpxParameter(GpxParameter.START_LAT);
+		Object lon = getGpxParameter(GpxParameter.START_LON);
+
+		if (lat != null && lon != null) {
+			return new LatLon((double) lat, (double) lon);
+		} else {
+			return null;
+		}
+	}
+
+	public Object getLatStart() {
+		return getGpxParameter(GpxParameter.START_LAT);
+	}
+
+	public Object getLonStart() {
+		return getGpxParameter(GpxParameter.START_LON);
+	}
+
 	public boolean hasSpeedData() {
 		return hasData(POINT_SPEED);
 	}
@@ -119,6 +388,12 @@ public class GPXTrackAnalysis {
 	}
 
 	public boolean hasData(String tag) {
+		if (Objects.equals(tag, PointAttributes.SENSOR_TAG_TEMPERATURE)) {
+			return CollectionUtils.containsAny(availableAttributes,
+					PointAttributes.SENSOR_TAG_TEMPERATURE_W,
+					PointAttributes.SENSOR_TAG_TEMPERATURE_A
+			);
+		}
 		return availableAttributes.contains(tag);
 	}
 
@@ -128,6 +403,23 @@ public class GPXTrackAnalysis {
 		} else {
 			availableAttributes.remove(tag);
 		}
+	}
+
+	public void setWptCategoryNames(String wptCategoryNames) {
+		setGpxParameter(GpxParameter.WPT_CATEGORY_NAMES, wptCategoryNames);
+	}
+
+	public void setWptCategoryNames(Set<String> wptCategoryNames) {
+		setGpxParameter(GpxParameter.WPT_CATEGORY_NAMES, wptCategoryNames == null ? null : Algorithms.encodeCollection(wptCategoryNames));
+	}
+
+	public String getWptCategoryNames() {
+		return (String) getGpxParameter(GpxParameter.WPT_CATEGORY_NAMES);
+	}
+
+	public Set<String> getWptCategoryNamesSet() {
+		String wptCategoryNames = getWptCategoryNames();
+		return wptCategoryNames == null ? null : Algorithms.decodeStringSet(wptCategoryNames);
 	}
 
 	public static GPXTrackAnalysis prepareInformation(long fileTimeStamp, TrackPointsAnalyser pointsAnalyzer, TrkSegment segment) {
@@ -150,22 +442,34 @@ public class GPXTrackAnalysis {
 		long timeDiffMillis = 0;
 		int timeDiff = 0;
 		double totalSpeedSum = 0;
-		points = 0;
+
+		int sensorSpeedCount = 0;
+		double totalSensorSpeedSum = 0;
+		int sensorHrCount = 0;
+		double totalSensorHrSum = 0;
+		int sensorPowerCount = 0;
+		double totalSensorPowerSum = 0;
+		int sensorTemperatureCount = 0;
+		double totalSensorTemperatureSum = 0;
+		int sensorCadenceCount = 0;
+		double totalSensorCadenceSum = 0;
+
+		setPoints(0);
 
 		pointAttributes = new ArrayList<>();
 		availableAttributes = new HashSet<>();
-
 		for (final SplitSegment s : splitSegments) {
 			final int numberOfPoints = s.getNumberOfPoints();
 			float segmentDistance = 0f;
 			metricEnd += s.metricEnd;
 			secondaryMetricEnd += s.secondaryMetricEnd;
-			points += numberOfPoints;
+			setPoints(getPoints() + numberOfPoints);
+			expectedRouteDuration += getExpectedRouteSegmentDuration(s);
 			for (int j = 0; j < numberOfPoints; j++) {
 				WptPt point = s.get(j);
 				if (j == 0 && locationStart == null) {
 					locationStart = point;
-					latLonStart = new LatLon(point.lat, point.lon);
+					setLatLonStart(point.lat, point.lon);
 				}
 				if (j == numberOfPoints - 1) {
 					locationEnd = point;
@@ -186,8 +490,8 @@ public class GPXTrackAnalysis {
 							}
 						}
 					}
-					startTime = Math.min(startTime, time);
-					endTime = Math.max(endTime, time);
+					setStartTime(Math.min(getStartTime(), time));
+					setEndTime(Math.max(getEndTime(), time));
 				}
 				updateBounds(point);
 
@@ -214,7 +518,7 @@ public class GPXTrackAnalysis {
 					// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 					// a little more exact, also seems slightly faster:
 					net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
-					totalDistance += calculations[0];
+					setTotalDistance(getTotalDistance() + calculations[0]);
 					segmentDistance += calculations[0];
 					point.distance = segmentDistance;
 
@@ -232,8 +536,8 @@ public class GPXTrackAnalysis {
 					//   calculations[0] > minDisplacment * time  is heuristic needed because tracks may be filtered at recording time, so points at rest may not be present in file at all
 					boolean timeSpecified = point.time != 0 && prev.time != 0;
 					if (speed > 0 && timeSpecified && calculations[0] > timeDiffMillis / 10000f) {
-						timeMoving = timeMoving + timeDiffMillis;
-						totalDistanceMoving += calculations[0];
+						setTimeMoving(getTimeMoving() + timeDiffMillis);
+						setTotalDistanceMoving(getTotalDistanceMoving() + calculations[0]);
 						if (s.segment.generalSegment && !point.firstPoint) {
 							timeMovingOfSingleSegment += timeDiffMillis;
 							distanceMovingOfSingleSegment += calculations[0];
@@ -246,10 +550,10 @@ public class GPXTrackAnalysis {
 					//		totalDistanceMoving0 += calculations[0];
 					//	}
 				}
-				minSpeed = Math.min(speed, minSpeed);
-				if (speed > 0) {
+				setMinSpeed(Math.min(speed, getMinSpeed()));
+				if (speed > 0 && !Float.isInfinite(speed)) {
 					totalSpeedSum += speed;
-					maxSpeed = Math.max(speed, maxSpeed);
+					setMaxSpeed(Math.max(speed, getMaxSpeed()));
 					speedCount++;
 				}
 				boolean isNaN = Double.isNaN(point.ele);
@@ -257,8 +561,8 @@ public class GPXTrackAnalysis {
 				if (!isNaN) {
 					totalElevation += point.ele;
 					elevationPoints++;
-					minElevation = Math.min(point.ele, minElevation);
-					maxElevation = Math.max(point.ele, maxElevation);
+					setMinElevation(Math.min(point.ele, getMinElevation()));
+					setMaxElevation(Math.max(point.ele, getMaxElevation()));
 				}
 
 				boolean firstPoint = false;
@@ -283,20 +587,55 @@ public class GPXTrackAnalysis {
 				attribute.speed = speed;
 				attribute.elevation = elevation;
 				addWptAttribute(point, attribute, pointsAnalyser);
+				if (attribute.sensorSpeed > 0 && !Float.isInfinite(attribute.sensorSpeed)) {
+					setMaxSensorSpeed(Math.max(attribute.sensorSpeed, getMaxSensorSpeed()));
+					sensorSpeedCount++;
+					totalSensorSpeedSum += attribute.sensorSpeed;
+				}
+
+				if (attribute.bikeCadence > 0) {
+					setMaxSensorCadence(Math.max(attribute.bikeCadence, getMaxSensorCadence()));
+					sensorCadenceCount++;
+					totalSensorCadenceSum += attribute.bikeCadence;
+				}
+
+				if (attribute.heartRate > 0) {
+					setMaxSensorHr(Math.max((int) attribute.heartRate, getMaxSensorHr()));
+					sensorHrCount++;
+					totalSensorHrSum += attribute.heartRate;
+				}
+
+				float temperature = attribute.getTemperature();
+				if (temperature > 0) {
+					setMaxSensorTemperature(Math.max((int) temperature, getMaxSensorTemperature()));
+					sensorTemperatureCount++;
+					totalSensorTemperatureSum += temperature;
+				}
+
+				if (attribute.bikePower > 0) {
+					setMaxSensorPower(Math.max((int) attribute.bikePower, getMaxSensorPower()));
+					sensorPowerCount++;
+					totalSensorPowerSum += attribute.bikePower;
+				}
 			}
 			processElevationDiff(s);
 		}
 		checkUnspecifiedValues(fileTimeStamp);
 		processAverageValues(totalElevation, elevationPoints, totalSpeedSum, speedCount);
 
+		setAvgSensorSpeed(processAverageValue(totalSensorSpeedSum, sensorSpeedCount));
+		setAvgSensorCadence(processAverageValue(totalSensorCadenceSum, sensorCadenceCount));
+		setAvgSensorHr(processAverageValue(totalSensorHrSum, sensorHrCount));
+		setAvgSensorPower(processAverageValue(totalSensorPowerSum, sensorPowerCount));
+		setAvgSensorTemperature(processAverageValue(totalSensorTemperatureSum, sensorTemperatureCount));
 		return this;
 	}
 
 	private void addWptAttribute(WptPt point, PointAttributes attribute, TrackPointsAnalyser pointsAnalyser) {
-		if (!hasSpeedData() && attribute.speed > 0 && totalDistance > 0) {
+		if (!hasSpeedData() && attribute.speed > 0 && getTotalDistance() > 0) {
 			setHasData(POINT_SPEED, true);
 		}
-		if (!hasElevationData() && !Float.isNaN(attribute.elevation) && totalDistance > 0) {
+		if (!hasElevationData() && !Float.isNaN(attribute.elevation) && getTotalDistance() > 0) {
 			setHasData(POINT_ELEVATION, true);
 		}
 		if (pointsAnalyser != null) {
@@ -332,32 +671,60 @@ public class GPXTrackAnalysis {
 	}
 
 	private void checkUnspecifiedValues(long fileTimeStamp) {
-		if (totalDistance < 0) {
+		if (getTotalDistance() < 0) {
 			availableAttributes.clear();
 		}
 		if (!isTimeSpecified()) {
-			startTime = fileTimeStamp;
-			endTime = fileTimeStamp;
+			setStartTime(fileTimeStamp);
+			setEndTime(fileTimeStamp);
 		}
-		if (timeSpan == 0) {
-			timeSpan = endTime - startTime;
+		if (getTimeSpan() == 0) {
+			setTimeSpan(getEndTime() - getStartTime());
 		}
+	}
+
+	public long getDurationInMs() {
+		return getTimeSpan() > 0 ? getTimeSpan() : expectedRouteDuration;
+	}
+
+	public int getDurationInSeconds() {
+		return (int) (getDurationInMs() / 1000f + 0.5f);
+	}
+
+	private long getExpectedRouteSegmentDuration(SplitSegment segment) {
+		List<RouteSegment> routeSegments = segment.segment.routeSegments;
+		if (routeSegments != null && !segment.segment.generalSegment) {
+			long result = 0;
+			for (RouteSegment routeSegment : routeSegments) {
+				result += (long) (1000 * Algorithms.parseFloatSilently(routeSegment.segmentTime, 0.0f));
+			}
+			return result;
+		}
+		return 0;
 	}
 
 	private void processAverageValues(float totalElevation, int elevationPoints, double totalSpeedSum, int speedCount) {
 		if (elevationPoints > 0) {
-			avgElevation = totalElevation / elevationPoints;
+			setAvgElevation(totalElevation / elevationPoints);
 		}
 		//    Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
 		//    Averaging speed values is less precise than totalDistanceMoving/timeMoving
 		if (speedCount > 0) {
-			if (timeMoving > 0) {
-				avgSpeed = totalDistanceMoving / (float) timeMoving * 1000f;
+			if (getTimeMoving() > 0) {
+				setAvgSpeed(getTotalDistanceMoving() / (float) getTimeMoving() * 1000f);
 			} else {
-				avgSpeed = (float) totalSpeedSum / (float) speedCount;
+				setAvgSpeed((float) totalSpeedSum / (float) speedCount);
 			}
 		} else {
-			avgSpeed = -1;
+			setAvgSpeed(-1);
+		}
+	}
+
+	private Float processAverageValue(Number totalSum, int valuesCount) {
+		if (valuesCount > 0) {
+			return (float) ((double) totalSum / valuesCount);
+		} else {
+			return -1f;
 		}
 	}
 
@@ -369,8 +736,8 @@ public class GPXTrackAnalysis {
 		if (distances != null && elevations != null) {
 			ElevationDiffsCalculator elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations);
 			elevationDiffsCalc.calculateElevationDiffs();
-			diffElevationUp += elevationDiffsCalc.getDiffElevationUp();
-			diffElevationDown += elevationDiffsCalc.getDiffElevationDown();
+			setDiffElevationUp(getDiffElevationUp() + elevationDiffsCalc.getDiffElevationUp());
+			setDiffElevationDown(getDiffElevationDown() + elevationDiffsCalc.getDiffElevationDown());
 		}
 	}
 

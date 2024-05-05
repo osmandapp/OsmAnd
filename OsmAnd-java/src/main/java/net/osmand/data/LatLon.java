@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class LatLon implements Serializable {
 
+	private static final long serialVersionUID = 1811582709897737392L;
 	private final double latitude;
 	private final double longitude;
 

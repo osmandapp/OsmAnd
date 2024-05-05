@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.track.Gpx3DLinePositionType;
+import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.util.Algorithms;
 
 import java.util.Arrays;
@@ -19,6 +22,10 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	public static final int COLORIZATION_NONE = 0;
 	public static final int COLORIZATION_GRADIENT = 1;
 	public static final int COLORIZATION_SOLID = 2;
+	protected Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	protected Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	protected float additionalExaggeration = 1f;
 
 	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
@@ -126,7 +133,11 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 		GeometryWayStyle<?> o = (GeometryWayStyle<?>) other;
 		return Algorithms.objectEquals(color, o.color)
 				&& Algorithms.objectEquals(width, o.width)
-				&& Arrays.equals(dashPattern, o.dashPattern);
+				&& Arrays.equals(dashPattern, o.dashPattern)
+				&& o.trackVisualizationType == ((GeometryWayStyle<?>) other).trackVisualizationType
+				&& o.trackWallColorType == ((GeometryWayStyle<?>) other).trackWallColorType
+				&& o.trackLinePositionType == ((GeometryWayStyle<?>) other).trackLinePositionType
+				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration;
 	}
 
 	public int getColorizationScheme() {

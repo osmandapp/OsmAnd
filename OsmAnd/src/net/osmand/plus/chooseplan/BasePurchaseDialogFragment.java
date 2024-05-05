@@ -55,7 +55,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		ROUNDED_SMALL(R.drawable.rectangle_rounded_small),
 		ROUNDED_LARGE(R.drawable.rectangle_rounded_large);
 
-		public int drawableId;
+		public final int drawableId;
 
 		ButtonBackground(int drawableId) {
 			this.drawableId = drawableId;
@@ -275,10 +275,5 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	@NonNull
 	protected Drawable getEmptyCheckmark() {
 		return getIcon(nightMode ? R.drawable.ic_action_radio_button_night : R.drawable.ic_action_radio_button_day);
-	}
-
-	@ColorInt
-	protected int getColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(app, colorId);
 	}
 }

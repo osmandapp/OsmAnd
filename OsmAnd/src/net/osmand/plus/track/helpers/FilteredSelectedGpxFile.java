@@ -1,5 +1,12 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -34,10 +41,9 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 
 	public FilteredSelectedGpxFile(@NonNull OsmandApplication app,
 	                               @NonNull SelectedGpxFile sourceSelectedGpxFile,
-	                               @Nullable GpxDataItem gpxDataItem) {
+	                               @Nullable GpxDataItem dataItem) {
 		this.sourceSelectedGpxFile = sourceSelectedGpxFile;
 		this.joinSegments = sourceSelectedGpxFile.joinSegments;
-		this.hiddenGroups = sourceSelectedGpxFile.getHiddenGroups();
 
 		setGpxFile(GpsFilterHelper.copyGpxFile(app, sourceSelectedGpxFile.gpxFile), app);
 		if (joinSegments) {
@@ -48,12 +54,11 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		speedFilter = new SpeedFilter(app, sourceSelectedGpxFile);
 		altitudeFilter = new AltitudeFilter(app, sourceSelectedGpxFile);
 		hdopFilter = new HdopFilter(app, sourceSelectedGpxFile);
-		if (gpxDataItem != null) {
-			GpxData gpxData = gpxDataItem.getGpxData();
-			smoothingFilter.updateValue(gpxData.getSmoothingThreshold());
-			speedFilter.updateValues(gpxData.getMinFilterSpeed(), gpxData.getMaxFilterSpeed());
-			altitudeFilter.updateValues(gpxData.getMinFilterAltitude(), gpxData.getMaxFilterAltitude());
-			hdopFilter.updateValue(gpxData.getMaxFilterHdop());
+		if (dataItem != null) {
+			smoothingFilter.updateValue(dataItem.getParameter(SMOOTHING_THRESHOLD));
+			speedFilter.updateValues(dataItem.getParameter(MIN_FILTER_SPEED), dataItem.getParameter(MAX_FILTER_SPEED));
+			altitudeFilter.updateValues(dataItem.getParameter(MIN_FILTER_ALTITUDE), dataItem.getParameter(MAX_FILTER_ALTITUDE));
+			hdopFilter.updateValue(dataItem.getParameter(MAX_FILTER_HDOP));
 		}
 	}
 
@@ -109,11 +114,17 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		hdopFilter.reset();
 
 		GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
-		GpxDataItem gpxDataItem = gpxDbHelper.getItem(new File(gpxFile.path));
-		if (gpxDataItem != null) {
-			gpxDbHelper.resetGpsFilters(gpxDataItem);
-		}
+		GpxDataItem item = gpxDbHelper.getItem(new File(gpxFile.path));
+		if (item != null) {
+			item.setParameter(SMOOTHING_THRESHOLD, Double.NaN);
+			item.setParameter(MIN_FILTER_SPEED, Double.NaN);
+			item.setParameter(MAX_FILTER_SPEED, Double.NaN);
+			item.setParameter(MIN_FILTER_ALTITUDE, Double.NaN);
+			item.setParameter(MAX_FILTER_ALTITUDE, Double.NaN);
+			item.setParameter(MAX_FILTER_HDOP, Double.NaN);
 
+			gpxDbHelper.updateDataItem(item);
+		}
 		app.getGpsFilterHelper().filterGpxFile(this, true);
 	}
 
@@ -158,11 +169,15 @@ public class FilteredSelectedGpxFile extends SelectedGpxFile {
 		return hdopFilter;
 	}
 
-	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem dataItem) {
-		GpxData data = dataItem.getGpxData();
-		double sum = data.getSmoothingThreshold() + data.getMinFilterSpeed()
-				+ data.getMaxFilterSpeed() + data.getMinFilterAltitude()
-				+ data.getMaxFilterAltitude() + data.getMaxFilterHdop();
+	public static boolean isGpsFiltersConfigValid(@NonNull GpxDataItem item) {
+		double smoothingThreshold = item.getParameter(SMOOTHING_THRESHOLD);
+		double minFilterSpeed = item.getParameter(MIN_FILTER_SPEED);
+		double maxFilterSpeed = item.getParameter(MAX_FILTER_SPEED);
+		double minFilterAltitude = item.getParameter(MIN_FILTER_ALTITUDE);
+		double maxFilterAltitude = item.getParameter(MAX_FILTER_ALTITUDE);
+		double maxFilterHdop = item.getParameter(MAX_FILTER_HDOP);
+
+		double sum = smoothingThreshold + minFilterSpeed + maxFilterSpeed + minFilterAltitude + maxFilterAltitude + maxFilterHdop;
 		return !Double.isNaN(sum) && sum != 0;
 	}
 }

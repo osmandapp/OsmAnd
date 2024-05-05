@@ -8,6 +8,7 @@ import java.util.List;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.util.MapUtils;
@@ -209,7 +210,7 @@ public class PrecalculatedRouteDirection {
 			double nx = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX[ind + 1], pointsY[ind + 1]);
 			double pr = BinaryRoutePlanner.squareRootDist(x31, y31, pointsX[ind - 1], pointsY[ind - 1]);
 			int nind =  nx > pr ? ind -1 : ind +1;
-			QuadPoint proj = MapUtils.getProjectionPoint31(x31, y31, pointsX[ind], pointsY[ind], pointsX[nind], pointsX[nind]);
+			QuadPointDouble proj = MapUtils.getProjectionPoint31(x31, y31, pointsX[ind], pointsY[ind], pointsX[nind], pointsX[nind]);
 			distToPoint = (float) BinaryRoutePlanner.squareRootDist(x31, y31, (int)proj.x, (int)proj.y) ;
 		}
 		return distToPoint;
@@ -282,7 +283,20 @@ public class PrecalculatedRouteDirection {
 		return routeDirection;
 	}
 
-
-	
-
+	public void updatePreciseStartEnd(int sx, int sy, int ex, int ey) {
+		if (sx > 0 && sy > 0) {
+			int ind = getIndex(sx, sy);
+			if (ind != -1) {
+				startPoint = calc(sx, sy);
+				startFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind], pointsY[ind], sx, sy) / maxSpeed;
+			}
+		}
+		if (ex > 0 && ey > 0) {
+			int ind = getIndex(ex, ey);
+			if (ind != -1) {
+				endPoint = calc(ex, ey);
+				endFinishTime = (float) BinaryRoutePlanner.squareRootDist(pointsX[ind], pointsY[ind], ex, ey) / maxSpeed;
+			}
+		}
+	}
 }

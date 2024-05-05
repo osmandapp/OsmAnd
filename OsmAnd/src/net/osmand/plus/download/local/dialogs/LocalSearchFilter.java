@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
@@ -18,15 +19,15 @@ public final class LocalSearchFilter extends Filter {
 
 
 	private final OsmandApplication app;
-	private final List<LocalItem> items = new ArrayList<>();
-	private final CallbackWithObject<List<LocalItem>> callback;
+	private final List<BaseLocalItem> items = new ArrayList<>();
+	private final CallbackWithObject<List<BaseLocalItem>> callback;
 
-	public LocalSearchFilter(@NonNull OsmandApplication app, @Nullable CallbackWithObject<List<LocalItem>> callback) {
+	public LocalSearchFilter(@NonNull OsmandApplication app, @Nullable CallbackWithObject<List<BaseLocalItem>> callback) {
 		this.app = app;
 		this.callback = callback;
 	}
 
-	public void setItems(@NonNull List<LocalItem> items) {
+	public void setItems(@NonNull List<BaseLocalItem> items) {
 		this.items.clear();
 		this.items.addAll(items);
 	}
@@ -40,8 +41,8 @@ public final class LocalSearchFilter extends Filter {
 		} else {
 			String namePart = constraint.toString();
 			NameStringMatcher matcher = new NameStringMatcher(namePart.trim(), StringMatcherMode.CHECK_CONTAINS);
-			List<LocalItem> localItems = new ArrayList<>();
-			for (LocalItem item : items) {
+			List<BaseLocalItem> localItems = new ArrayList<>();
+			for (BaseLocalItem item : items) {
 				if (matcher.matches(item.getName(app).toString())) {
 					localItems.add(item);
 				}
@@ -55,7 +56,7 @@ public final class LocalSearchFilter extends Filter {
 	@Override
 	protected void publishResults(CharSequence constraint, FilterResults results) {
 		if (callback != null) {
-			callback.processResult((List<LocalItem>) results.values);
+			callback.processResult((List<BaseLocalItem>) results.values);
 		}
 	}
 }

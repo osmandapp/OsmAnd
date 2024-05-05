@@ -1,5 +1,6 @@
 package net.osmand.aidl;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
 import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
@@ -15,7 +16,9 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.gpx.GpxParameter.API_IMPORTED;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
@@ -42,10 +45,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.aidlapi.navigation.NavigateGpxParams;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
@@ -66,18 +65,22 @@ import net.osmand.aidlapi.logcat.OnLogcatMessageParams;
 import net.osmand.aidlapi.map.ALatLon;
 import net.osmand.aidlapi.map.ALocation;
 import net.osmand.aidlapi.navigation.ABlockedRoad;
+import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
-import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.NavigateGpxHelper;
@@ -87,19 +90,19 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
+import net.osmand.plus.myplaces.tracks.MapBitmapDrawerListener;
+import net.osmand.plus.myplaces.tracks.MapDrawParams;
 import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TrackBitmapDrawerListener;
-import net.osmand.plus.myplaces.tracks.TrackBitmapDrawer.TracksDrawParams;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.plugins.development.LogcatAsyncTask;
 import net.osmand.plus.plugins.development.LogcatMessageListener;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -108,18 +111,18 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
+import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxData;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -132,9 +135,10 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
+import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -367,8 +371,7 @@ public class OsmandAidlApi {
 							mapView.setRotate(rotation, false);
 						}
 						if (animated) {
-							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart,
-									true, false, null, null);
+							mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, zoomFloatPart);
 						} else {
 							mapView.setLatLon(lat, lon);
 							mapView.setZoomWithFloatPart(zoom, zoomFloatPart);
@@ -396,13 +399,13 @@ public class OsmandAidlApi {
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 						if (widgetData != null && layer != null) {
 							WidgetsAvailabilityHelper.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
-							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId, defaultPanel);
 							connectedApp.getWidgetControls().put(widgetId, widget);
 
 							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
-							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
@@ -411,7 +414,7 @@ public class OsmandAidlApi {
 							MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 							registry.registerWidget(widgetInfo);
 
-							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
+							widgetInfo.setExternalProviderPackage(connectedApp.getPack());
 							layer.recreateControls();
 						}
 					}
@@ -496,6 +499,32 @@ public class OsmandAidlApi {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
 			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode);
 		}
+	}
+
+	public TextInfoWidget askCreateExternalWidget(@NonNull MapActivity mapActivity,
+	                                              @Nullable String widgetId,
+	                                              @Nullable WidgetsPanel panel) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			TextInfoWidget mapWidget = connectedApp.askCreateWidgetControl(mapActivity, widgetId, panel);
+			if (mapWidget != null) {
+				return mapWidget;
+			}
+		}
+		return null;
+	}
+
+
+	public MapWidgetInfo askCreateExternalWidgetInfo(@NonNull WidgetInfoCreator creator,
+	                                                 @NonNull MapWidget widget,
+	                                                 @NonNull String widgetId,
+	                                                 @NonNull WidgetsPanel panel) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			MapWidgetInfo widgetInfo = connectedApp.askCreateWidgetInfo(creator, widget, widgetId, panel);
+			if (widgetInfo != null) {
+				return widgetInfo;
+			}
+		}
+		return null;
 	}
 
 	private void registerAddMapLayerReceiver(@NonNull MapActivity mapActivity) {
@@ -789,7 +818,7 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 					if (routingHelper.isPauseNavigation() || routingHelper.isFollowingMode()) {
-						mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+						mapActivity.getMapLayers().getMapActionsHelper().stopNavigationWithoutConfirm();
 					}
 				}
 			}
@@ -879,9 +908,9 @@ public class OsmandAidlApi {
 				int actionNumber = intent.getIntExtra(AIDL_QUICK_ACTION_NUMBER, -1);
 				MapActivity mapActivity = mapActivityRef.get();
 				if (actionNumber != -1 && mapActivity != null) {
-					List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+					List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 					if (actionNumber < actionsList.size()) {
-						QuickActionRegistry.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
+						MapButtonsHelper.produceAction(actionsList.get(actionNumber)).execute(mapActivity);
 					}
 				}
 			}
@@ -984,7 +1013,7 @@ public class OsmandAidlApi {
 		}
 		int color = 0;
 		if (!Algorithms.isEmpty(colorTag)) {
-			color = ColorDialogs.getColorByTag(colorTag);
+			color = DefaultColors.valueOf(colorTag);
 		}
 		FavoriteGroup group = favoritesHelper.addFavoriteGroup(name, color);
 		group.setVisible(visible);
@@ -1008,7 +1037,7 @@ public class OsmandAidlApi {
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
 		FavoriteGroup group = favoritesHelper.getGroup(prevGroupName);
 		if (group != null) {
-			int color = Algorithms.isEmpty(colorTag) ? 0 : ColorDialogs.getColorByTag(colorTag);
+			int color = Algorithms.isEmpty(colorTag) ? 0 : DefaultColors.valueOf(colorTag);
 
 			favoritesHelper.updateGroupColor(group, color, true, false);
 			favoritesHelper.updateGroupVisibility(group, visible, false);
@@ -1026,7 +1055,7 @@ public class OsmandAidlApi {
 		point.setDescription(description);
 		int color = 0;
 		if (!Algorithms.isEmpty(colorTag)) {
-			color = ColorDialogs.getColorByTag(colorTag);
+			color = DefaultColors.valueOf(colorTag);
 		}
 		point.setColor(color);
 		point.setVisible(visible);
@@ -1255,16 +1284,16 @@ public class OsmandAidlApi {
 		int col = GpxAppearanceAdapter.parseTrackColor(
 				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
-			GpxDataItem gpxDataItem = new GpxDataItem(destination);
-			GpxData gpxData = gpxDataItem.getGpxData();
-			gpxData.setColor(col);
-			gpxData.setImportedByApi(true);
-			app.getGpxDbHelper().add(gpxDataItem);
+			GpxDataItem item = new GpxDataItem(app, destination);
+			item.setParameter(COLOR, col);
+			item.setParameter(API_IMPORTED, true);
+			app.getGpxDbHelper().add(item);
 		} else {
 			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
-				item.getGpxData().setImportedByApi(true);
-				app.getGpxDbHelper().updateColor(item, col);
+				item.setParameter(COLOR, col);
+				item.setParameter(API_IMPORTED, true);
+				app.getGpxDbHelper().updateDataItem(item);
 			}
 		}
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
@@ -1307,9 +1336,7 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						GpxSelectionParams params = GpxSelectionParams.newInstance()
-								.showOnMap().syncGroup().selectedByUser().addToMarkers()
-								.addToHistory().saveSelection();
+						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 						helper.selectGpxFile(gpx, params);
 						refreshMap();
 					}
@@ -1427,9 +1454,7 @@ public class OsmandAidlApi {
 				@Override
 				protected void onPostExecute(GPXFile gpx) {
 					if (gpx.error == null) {
-						GpxSelectionParams params = GpxSelectionParams.newInstance()
-								.showOnMap().syncGroup().selectedByUser().addToMarkers()
-								.addToHistory().saveSelection();
+						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 						app.getSelectedGpxHelper().selectGpxFile(gpx, params);
 						refreshMap();
 					}
@@ -1505,19 +1530,18 @@ public class OsmandAidlApi {
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = dataItem.getFile();
 			if (file.exists()) {
-				GpxData gpxData = dataItem.getGpxData();
 				String fileName = file.getName();
 				String absolutePath = file.getAbsolutePath();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(absolutePath) != null;
-				long modifiedTime = gpxData.getFileLastModifiedTime();
+				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
-				int color = gpxData.getColor();
+				Integer color = dataItem.getParameter(COLOR);
 				String colorName = "";
-				if (color != 0) {
+				if (color != null) {
 					colorName = GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 				}
 				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
-				GPXTrackAnalysis analysis = gpxData.getAnalysis();
+				GPXTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
@@ -1535,13 +1559,12 @@ public class OsmandAidlApi {
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = dataItem.getFile();
 			if (file.exists()) {
-				GpxData gpxData = dataItem.getGpxData();
 				String fileName = file.getName();
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
-				long modifiedTime = gpxData.getFileLastModifiedTime();
+				long modifiedTime = dataItem.getParameter(FILE_LAST_MODIFIED_TIME);
 				long fileSize = file.length();
 				AGpxFileDetails details = null;
-				GPXTrackAnalysis analysis = gpxData.getAnalysis();
+				GPXTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					details = createGpxFileDetails(analysis);
 				}
@@ -1557,8 +1580,8 @@ public class OsmandAidlApi {
 			File file = dataItem.getFile();
 			if (file.exists()) {
 				if (file.getName().equals(gpxFileName)) {
-					int color = dataItem.getGpxData().getColor();
-					if (color != 0) {
+					Integer color = dataItem.getParameter(COLOR);
+					if (color != null) {
 						return GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 					}
 				}
@@ -1577,7 +1600,8 @@ public class OsmandAidlApi {
 
 		if (file != null && file.exists()) {
 			GpxDataItem item = app.getGpxDbHelper().getItem(file);
-			if (item != null && item.getGpxData().isImportedByApi()) {
+			boolean apiImported = item != null ? item.getParameter(API_IMPORTED) : false;
+			if (apiImported) {
 				return FileUtils.removeGpxFile(app, file);
 			}
 		}
@@ -2262,48 +2286,33 @@ public class OsmandAidlApi {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}
-		TrackBitmapDrawerListener drawerListener = new TrackBitmapDrawerListener() {
+		MapBitmapDrawerListener listener = new MapBitmapDrawerListener() {
 			@Override
-			public void onTrackBitmapDrawing() {
-			}
-
-			@Override
-			public void onTrackBitmapDrawn(boolean success) {
-
-			}
-
-			@Override
-			public boolean isTrackBitmapSelectionSupported() {
-				return false;
-			}
-
-			@Override
-			public void drawTrackBitmap(Bitmap bitmap) {
+			public void onBitmapDrawn(@NonNull Bitmap bitmap) {
 				callback.onGpxBitmapCreatedComplete(bitmap);
 			}
 		};
 
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
-
 				@Override
 				public void onFinish(@NonNull AppInitializer init) {
-					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+					createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, listener);
 				}
 			});
 		} else {
-			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, drawerListener);
+			createGpxBitmapFromUri(gpxUri, density, widthPixels, heightPixels, color, listener);
 		}
 		return true;
 	}
 
 	private void createGpxBitmapFromUri(Uri gpxUri, float density, int widthPixels,
-	                                    int heightPixels, int color, TrackBitmapDrawerListener drawerListener) {
+	                                    int heightPixels, int color, MapBitmapDrawerListener listener) {
 		GpxAsyncLoaderTask gpxAsyncLoaderTask = new GpxAsyncLoaderTask(app, gpxUri, result -> {
-			TracksDrawParams drawParams = new TracksDrawParams(density, widthPixels, heightPixels, color);
-			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, result, drawParams, null);
-			trackBitmapDrawer.addListener(drawerListener);
-			trackBitmapDrawer.setDrawEnabled(true);
+			MapDrawParams params = new MapDrawParams(density, widthPixels, heightPixels);
+			TrackBitmapDrawer trackBitmapDrawer = new TrackBitmapDrawer(app, params, result, null);
+			trackBitmapDrawer.addListener(listener);
+			trackBitmapDrawer.setDefaultTrackColor(color);
 			trackBitmapDrawer.initAndDraw();
 			return false;
 		});
@@ -2328,7 +2337,7 @@ public class OsmandAidlApi {
 	                               boolean silent, String latestChanges, int version) {
 		if (profileUri != null) {
 			Bundle bundle = new Bundle();
-			bundle.putStringArrayList(SettingsHelper.SETTINGS_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
+			bundle.putStringArrayList(SettingsHelper.EXPORT_TYPE_LIST_KEY, new ArrayList<>(settingsTypeKeys));
 			bundle.putBoolean(REPLACE_KEY, replace);
 			bundle.putBoolean(SILENT_IMPORT_KEY, silent);
 			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
@@ -2358,10 +2367,9 @@ public class OsmandAidlApi {
 
 	public boolean getQuickActionsInfo(List<QuickActionInfoParams> quickActions) {
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, String>>() {
-		}.getType();
+		Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 		for (int i = 0; i < actionsList.size(); i++) {
 			QuickAction action = actionsList.get(i);
 			String name = action.getName(app);
@@ -2375,10 +2383,9 @@ public class OsmandAidlApi {
 
 	public boolean getQuickActionsInfoV2(List<net.osmand.aidlapi.quickaction.QuickActionInfoParams> quickActions) {
 		Gson gson = new Gson();
-		Type type = new TypeToken<HashMap<String, String>>() {
-		}.getType();
+		Type type = new TypeToken<HashMap<String, String>>() {}.getType();
 
-		List<QuickAction> actionsList = app.getQuickActionRegistry().getFilteredQuickActions();
+		List<QuickAction> actionsList = app.getMapButtonsHelper().getFlattenedQuickActions();
 		for (int i = 0; i < actionsList.size(); i++) {
 			QuickAction action = actionsList.get(i);
 			String name = action.getName(app);
@@ -2390,20 +2397,17 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean exportProfile(String appModeKey, List<String> settingsTypesKeys) {
+	public boolean exportProfile(String appModeKey, List<String> acceptedExportTypeKeys) {
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(appModeKey, null);
 		if (app != null && appMode != null) {
-			List<ExportSettingsType> settingsTypes = new ArrayList<>();
-			for (String key : settingsTypesKeys) {
-				settingsTypes.add(ExportSettingsType.valueOf(key));
-			}
-			settingsTypes.remove(ExportSettingsType.PROFILE);
+			List<ExportType> acceptedExportTypes = ExportType.valuesOf(acceptedExportTypeKeys);
+			acceptedExportTypes.remove(ExportType.PROFILE);
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false, true));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(acceptedExportTypes, true, false, true));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}
@@ -2445,8 +2449,8 @@ public class OsmandAidlApi {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			ApplicationModeBean bean = mode.toModeBean();
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
-					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
-					bean.navIcon.name(), bean.order);
+					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon,
+					bean.navIcon, bean.order);
 			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);
@@ -2454,21 +2458,21 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	public boolean getBlockedRoads(List<ABlockedRoad> blockedRoads) {
-		Map<LatLon, AvoidRoadInfo> impassableRoads = app.getAvoidSpecificRoads().getImpassableRoads();
-		for (AvoidRoadInfo info : impassableRoads.values()) {
-			blockedRoads.add(new ABlockedRoad(info.id, info.latitude, info.longitude, info.direction, info.name, info.appModeKey));
+	public boolean getBlockedRoads(@NonNull List<ABlockedRoad> blockedRoads) {
+		for (AvoidRoadInfo info : app.getAvoidSpecificRoads().getImpassableRoads()) {
+			blockedRoads.add(new ABlockedRoad(info.getId(), info.getLatitude(), info.getLongitude(),
+					info.getDirection(), info.getName(app), info.getAppModeKey()));
 		}
 		return true;
 	}
 
-	public boolean addRoadBlock(ABlockedRoad road) {
+	public boolean addRoadBlock(@NonNull ABlockedRoad road) {
 		LatLon latLon = new LatLon(road.getLatitude(), road.getLongitude());
 		app.getAvoidSpecificRoads().addImpassableRoad(null, latLon, false, false, road.getAppModeKey());
 		return true;
 	}
 
-	public boolean removeRoadBlock(ABlockedRoad road) {
+	public boolean removeRoadBlock(@NonNull ABlockedRoad road) {
 		app.getAvoidSpecificRoads().removeImpassableRoad(new LatLon(road.getLatitude(), road.getLongitude()));
 		return true;
 	}
@@ -2509,7 +2513,23 @@ public class OsmandAidlApi {
 		if (pref != null && settings.isExportAvailableForPref(pref)) {
 			String value = params.getValue();
 			ApplicationMode appMode = ApplicationMode.valueOfStringKey(params.getAppModeKey(), null);
-			return settings.setPreference(prefId, value, appMode);
+
+			boolean success = settings.setPreference(prefId, value, appMode);
+			if (success) {
+				if (settings.isRenderProperty(prefId)) {
+					if (mapActivity != null) {
+						mapActivity.refreshMapComplete();
+					}
+				} else if (ImpassableRoadsStorage.isAvoidRoadsPref(prefId)) {
+					app.getAvoidSpecificRoads().loadImpassableRoads();
+					app.getAvoidSpecificRoads().initRouteObjects(true);
+					app.getRoutingHelper().onSettingsChanged(null);
+					if (mapActivity != null) {
+						mapActivity.refreshMap();
+					}
+				}
+			}
+			return success;
 		}
 		return false;
 	}
@@ -2675,17 +2695,17 @@ public class OsmandAidlApi {
 	}
 
 	private static AGpxFileDetails createGpxFileDetails(@NonNull GPXTrackAnalysis a) {
-		return new AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
-				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
-				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
-				a.points, a.wptPoints, a.wptCategoryNames);
+		return new AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
+				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
+				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
+				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
 	}
 
 	private static net.osmand.aidlapi.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GPXTrackAnalysis a) {
-		return new net.osmand.aidlapi.gpx.AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
-				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
-				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
-				a.points, a.wptPoints, a.wptCategoryNames);
+		return new net.osmand.aidlapi.gpx.AGpxFileDetails(a.getTotalDistance(), a.getTotalTracks(), a.getStartTime(), a.getEndTime(),
+				a.getTimeSpan(), a.getTimeMoving(), a.getTotalDistanceMoving(), a.getDiffElevationUp(), a.getDiffElevationDown(),
+				a.getAvgElevation(), a.getMinElevation(), a.getMaxElevation(), a.getMinSpeed(), a.getMaxSpeed(), a.getAvgSpeed(),
+				a.getPoints(), a.getWptPoints(), a.getWptCategoryNamesSet());
 	}
 
 	public boolean onKeyEvent(KeyEvent event) {

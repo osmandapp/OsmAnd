@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="?attr/selectableItemBackground"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/content_padding_small_half"
-    android:paddingBottom="@dimen/content_padding_small_half"
-    android:paddingLeft="@dimen/content_padding_small"
-    android:paddingRight="@dimen/content_padding_small">
-    
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/standard_icon_size"
-        android:layout_height="@dimen/standard_icon_size"
+    android:layout_weight="1"
+    android:minHeight="@dimen/acceptable_touch_radius"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/background_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        tools:src="@drawable/ic_action_info_dark"/>
+        android:minHeight="36dp"
+        android:paddingLeft="@dimen/content_padding_small"
+        android:paddingTop="@dimen/content_padding_small_half"
+        android:paddingRight="@dimen/content_padding_small"
+        android:paddingBottom="@dimen/content_padding_small_half">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/standard_icon_size"
+            android:layout_height="@dimen/standard_icon_size"
+            android:layout_gravity="center"
+            tools:src="@drawable/ic_action_info_dark" />
+
+    </FrameLayout>
 
 </FrameLayout>

@@ -275,4 +275,8 @@
     <string name="shared_string_error">Помилка</string>
     <string name="send_live_location_error">Надіслати помилку місцеперебування: %1$s</string>
     <string name="ltr_or_rtl_combine_via_dash">%1$s — %2$s</string>
+    <string name="location_source">Джерело даних про місцеположення</string>
+    <string name="location_source_summary">Типово, OsmAnd встановлений з Google Play, використовує Служби Google Play для визначення розташування.
+\n
+\nЯкщо ви отримуєте неточні дані про розташування або використовуєте пристрій без Служб Google Play, спробуйте перейти на Android API</string>
 </resources>

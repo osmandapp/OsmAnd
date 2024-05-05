@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
@@ -43,12 +44,12 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(OsmandApplication app, GPXFile gpx) {
-		this.app = app;
+	public CoordinateInputAdapter(@NonNull Context context, GPXFile gpx) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.gpx = gpx;
 
 		uiUtilities = app.getUIUtilities();
-		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		updateViewCache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 		nightTheme = !app.getSettings().isLightContent();
 	}
 
@@ -65,7 +66,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		WptPt wpt = getItem(position);
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
-		holder.icon.setImageDrawable(PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt));
+		holder.icon.setImageDrawable(PointImageUtils.getFromPoint(app, wpt.getColor(), false, wpt));
 		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(app, nightTheme));
 		holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightTheme));
 		holder.divider.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.divider_color_dark : R.color.divider_color_light));

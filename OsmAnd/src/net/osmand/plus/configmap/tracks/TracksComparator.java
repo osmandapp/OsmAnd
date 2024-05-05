@@ -1,6 +1,7 @@
 package net.osmand.plus.configmap.tracks;
 
 import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
+import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
@@ -17,7 +18,7 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.ComparableTracksGroup;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -117,8 +118,8 @@ public class TracksComparator implements Comparator<Object> {
 
 		GpxDataItem dataItem1 = item1.getDataItem();
 		GpxDataItem dataItem2 = item2.getDataItem();
-		GPXTrackAnalysis analysis1 = dataItem1 != null ? dataItem1.getGpxData().getAnalysis() : null;
-		GPXTrackAnalysis analysis2 = dataItem2 != null ? dataItem2.getGpxData().getAnalysis() : null;
+		GPXTrackAnalysis analysis1 = dataItem1 != null ? dataItem1.getAnalysis() : null;
+		GPXTrackAnalysis analysis2 = dataItem2 != null ? dataItem2.getAnalysis() : null;
 
 		if (shouldCheckAnalysis()) {
 			Integer analysis = checkItemsAnalysis(item1, item2, analysis1, analysis2);
@@ -135,10 +136,10 @@ public class TracksComparator implements Comparator<Object> {
 			case NAME_DESCENDING:
 				return -compareTrackItemNames(item1, item2);
 			case DATE_ASCENDING:
-				long startTime1_asc = analysis1 == null ? 0 : analysis1.startTime;
-				long startTime2_asc = analysis2 == null ? 0 : analysis2.startTime;
-				long time1_asc = dataItem1 == null ? startTime1_asc : dataItem1.getGpxData().getFileCreationTime();
-				long time2_asc = dataItem2 == null ? startTime2_asc : dataItem2.getGpxData().getFileCreationTime();
+				long startTime1_asc = analysis1 == null ? 0 : analysis1.getStartTime();
+				long startTime2_asc = analysis2 == null ? 0 : analysis2.getStartTime();
+				long time1_asc = dataItem1 == null ? startTime1_asc : (long) dataItem1.getParameter(FILE_CREATION_TIME);
+				long time2_asc = dataItem2 == null ? startTime2_asc : (long) dataItem2.getParameter(FILE_CREATION_TIME);
 				if (time1_asc == time2_asc || time1_asc < 10 && time2_asc < 10) {
 					return compareTrackItemNames(item1, item2);
 				}
@@ -149,10 +150,10 @@ public class TracksComparator implements Comparator<Object> {
 				}
 				return -Long.compare(time1_asc, time2_asc);
 			case DATE_DESCENDING:
-				long startTime1_desc = analysis1 == null ? 0 : analysis1.startTime;
-				long startTime2_desc = analysis2 == null ? 0 : analysis2.startTime;
-				long time1_desc = dataItem1 == null ? startTime1_desc : dataItem1.getGpxData().getFileCreationTime();
-				long time2_desc = dataItem2 == null ? startTime2_desc : dataItem2.getGpxData().getFileCreationTime();
+				long startTime1_desc = analysis1 == null ? 0 : analysis1.getStartTime();
+				long startTime2_desc = analysis2 == null ? 0 : analysis2.getStartTime();
+				long time1_desc = dataItem1 == null ? startTime1_desc : (long) dataItem1.getParameter(FILE_CREATION_TIME);
+				long time2_desc = dataItem2 == null ? startTime2_desc : (long) dataItem2.getParameter(FILE_CREATION_TIME);
 				if (time1_desc == time2_desc || time1_desc < 10 && time2_desc < 10) {
 					return compareTrackItemNames(item1, item2);
 				}
@@ -165,31 +166,31 @@ public class TracksComparator implements Comparator<Object> {
 			case LAST_MODIFIED:
 				return compareItemFilesByLastModified(item1, item2);
 			case DISTANCE_DESCENDING:
-				if (Math.abs(analysis1.totalDistance - analysis2.totalDistance) < EQUIVALENT_TOLERANCE) {
+				if (Math.abs(analysis1.getTotalDistance() - analysis2.getTotalDistance()) < EQUIVALENT_TOLERANCE) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return -Float.compare(analysis1.totalDistance, analysis2.totalDistance);
+				return -Float.compare(analysis1.getTotalDistance(), analysis2.getTotalDistance());
 			case DISTANCE_ASCENDING:
-				if (Math.abs(analysis1.totalDistance - analysis2.totalDistance) < EQUIVALENT_TOLERANCE) {
+				if (Math.abs(analysis1.getTotalDistance() - analysis2.getTotalDistance()) < EQUIVALENT_TOLERANCE) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return Float.compare(analysis1.totalDistance, analysis2.totalDistance);
+				return Float.compare(analysis1.getTotalDistance(), analysis2.getTotalDistance());
 			case DURATION_DESCENDING:
-				if (analysis1.timeSpan == analysis2.timeSpan) {
+				if (analysis1.getDurationInSeconds() == analysis2.getDurationInSeconds()) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return -Long.compare(analysis1.timeSpan, analysis2.timeSpan);
+				return -Long.compare(analysis1.getDurationInSeconds(), analysis2.getDurationInSeconds());
 			case DURATION_ASCENDING:
-				if (analysis1.timeSpan == analysis2.timeSpan) {
+				if (analysis1.getDurationInSeconds() == analysis2.getDurationInSeconds()) {
 					return compareTrackItemNames(item1, item2);
 				}
-				return Long.compare(analysis1.timeSpan, analysis2.timeSpan);
+				return Long.compare(analysis1.getDurationInSeconds(), analysis2.getDurationInSeconds());
 		}
 		return 0;
 	}
 
 	private boolean shouldCheckAnalysis() {
-		return !Algorithms.equalsToAny(sortMode, NAME_ASCENDING, NAME_DESCENDING, LAST_MODIFIED);
+		return !CollectionUtils.equalsToAny(sortMode, NAME_ASCENDING, NAME_DESCENDING, LAST_MODIFIED);
 	}
 
 	@Nullable
@@ -217,17 +218,17 @@ public class TracksComparator implements Comparator<Object> {
 
 	private int compareNearestItems(@NonNull TrackItem item1, @NonNull TrackItem item2,
 	                                @NonNull GPXTrackAnalysis analysis1, @NonNull GPXTrackAnalysis analysis2) {
-		if (analysis1.latLonStart == null) {
-			return analysis2.latLonStart == null ? compareTrackItemNames(item1, item2) : 1;
+		if (analysis1.getLatLonStart() == null) {
+			return analysis2.getLatLonStart() == null ? compareTrackItemNames(item1, item2) : 1;
 		}
-		if (analysis2.latLonStart == null) {
+		if (analysis2.getLatLonStart() == null) {
 			return -1;
 		}
-		if (analysis1.latLonStart.equals(analysis2.latLonStart)) {
+		if (analysis1.getLatLonStart().equals(analysis2.getLatLonStart())) {
 			return compareTrackItemNames(item1, item2);
 		}
-		double distance1 = MapUtils.getDistance(latLon, analysis1.latLonStart);
-		double distance2 = MapUtils.getDistance(latLon, analysis2.latLonStart);
+		double distance1 = MapUtils.getDistance(latLon, analysis1.getLatLonStart());
+		double distance2 = MapUtils.getDistance(latLon, analysis2.getLatLonStart());
 		return Double.compare(distance1, distance2);
 	}
 

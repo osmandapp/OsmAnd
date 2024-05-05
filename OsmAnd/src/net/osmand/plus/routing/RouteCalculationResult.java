@@ -18,7 +18,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -61,6 +60,12 @@ public class RouteCalculationResult {
 	protected List<LocationPoint> locationPoints = new ArrayList<>();
 
 	protected List<WorldRegion> missingMaps;
+	protected List<WorldRegion> mapsToUpdate;
+	protected List<WorldRegion> usedMaps;
+
+	protected List<LatLon> missingMapsPoints;
+
+	protected RoutingContext missingMapsRoutingContext;
 
 	// params
 	protected final ApplicationMode appMode;
@@ -74,8 +79,6 @@ public class RouteCalculationResult {
 	protected int currentDirectionInfo;
 	protected int currentRoute;
 	protected int nextIntermediate;
-	protected int currentWaypointGPX;
-	protected int lastWaypointGPX;
 	protected int currentStraightAngleRoute = -1;
 	protected Location currentStraightAnglePoint;
 
@@ -207,8 +210,39 @@ public class RouteCalculationResult {
 		return missingMaps;
 	}
 
+	public void setMissingMaps(List<WorldRegion> missingMaps,
+							   List<WorldRegion> mapsToUpdate,List<WorldRegion> usedMaps,
+							   RoutingContext ctx, List<LatLon> points) {
+		this.missingMaps = missingMaps;
+		this.mapsToUpdate = mapsToUpdate;
+		this.usedMaps = usedMaps;
+		if(Algorithms.isEmpty(this.missingMaps) && Algorithms.isEmpty(this.mapsToUpdate)) {
+			this.missingMapsRoutingContext = null;
+			this.missingMapsPoints = null;
+		} else {
+			this.missingMapsPoints = points;
+			this.missingMapsRoutingContext = ctx;
+		}
+	}
+
+	public RoutingContext getMissingMapsRoutingContext() {
+		return missingMapsRoutingContext;
+	}
+
+	public List<LatLon> getMissingMapsPoints() {
+		return missingMapsPoints;
+	}
+
+	public List<WorldRegion> getMapsToUpdate() {
+		return mapsToUpdate;
+	}
+
+	public List<WorldRegion> getUsedMaps() {
+		return usedMaps;
+	}
+
 	public boolean hasMissingMaps() {
-		return !Algorithms.isEmpty(missingMaps);
+		return !Algorithms.isEmpty(missingMaps) || !Algorithms.isEmpty(mapsToUpdate);
 	}
 
 	public boolean isInitialCalculation() {
@@ -251,7 +285,9 @@ public class RouteCalculationResult {
 					if (locationIndex > interLocations[currentIntermediate]
 							&& getDistanceToLocation(locations, intermediates.get(currentIntermediate), locationIndex) > 50) {
 						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
-						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.straight());
+						// intermediate point should split using average speed from its actual (previous) segment
+						float currentAvgSpeed = localDirections.get(Math.max(0, currentDirection - 1)).getAverageSpeed();
+						RouteDirectionInfo info = new RouteDirectionInfo(currentAvgSpeed, TurnType.straight());
 						info.setRef(toSplit.getRef());
 						info.setStreetName(toSplit.getStreetName());
 						info.setRouteDataObject(toSplit.getRouteDataObject());
@@ -1281,7 +1317,7 @@ public class RouteCalculationResult {
 		for (int i = increase; currentRoute < locations.size() && currentRoute + i >= 0 && currentRoute + i < locations.size(); i = i + increase) {
 			Location loc = locations.get(currentRoute + i);
 			double dist = MapUtils.getDistance(locations.get(currentRoute), loc);
-			if (Math.abs(meters) >= dist) {
+			if (dist >= Math.abs(meters)) {
 				return loc;
 			}
 		}
@@ -1298,6 +1334,16 @@ public class RouteCalculationResult {
 			return directions.get(currentDirectionInfo);
 		}
 		return null;
+	}
+
+	public int getDistanceToPoint(Location lastKnownLocation, int locationIndex ) {
+		int dist = getDistanceToPoint(locationIndex);
+		Location next = getNextRouteLocation();
+		if (lastKnownLocation != null && next != null) {
+			dist += MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+					next.getLatitude(), next.getLongitude());
+		}
+		return dist;
 	}
 
 	public int getDistanceToPoint(int locationIndex) {

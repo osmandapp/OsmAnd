@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -47,7 +47,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
 
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+			ExportType exportType = ExportType.findBy(item);
 			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
 				exporter.addOldItemToDelete(item);
 			}

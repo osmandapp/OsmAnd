@@ -5,14 +5,16 @@
 			android:src="@drawable/map_navigation_car_bottom"
 			android:gravity="bottom|center" />
 	</item>
-	<item android:id="@+id/center">
-		<bitmap
-			android:src="@drawable/map_navigation_car_center"
-			android:gravity="bottom|center" />
-	</item>
+
+	<item
+		android:id="@+id/center"
+		android:drawable="@drawable/map_navigation_car_center"
+		android:gravity="bottom|center" />
+
 	<item android:id="@+id/top">
 		<bitmap
 			android:src="@drawable/map_navigation_car_top"
 			android:gravity="bottom|center" />
 	</item>
+
 </layer-list>

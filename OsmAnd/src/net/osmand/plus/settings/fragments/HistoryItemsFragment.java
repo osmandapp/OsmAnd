@@ -1,11 +1,16 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.enums.HistorySource.NAVIGATION;
+import static net.osmand.plus.settings.enums.HistorySource.SEARCH;
+import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,12 +33,13 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.enums.HistorySource;
 import net.osmand.plus.settings.fragments.HistoryAdapter.OnItemSelectedListener;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -42,8 +48,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
 		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
@@ -55,7 +59,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected View appbar;
 	protected DialogButton deleteButton;
 	protected DialogButton selectAllButton;
-	protected ImageView shareButton;
+	protected ImageButton shareButton;
 	protected HistoryAdapter adapter;
 	protected RecyclerView recyclerView;
 	protected View warningCard;
@@ -88,7 +92,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			}
 		});
 
-		adapter = new HistoryAdapter(app, this, nightMode);
+		adapter = new HistoryAdapter(mapActivity, this, nightMode);
 		adapter.updateSettingsItems(items, itemsGroups, selectedItems);
 		recyclerView.setAdapter(adapter);
 
@@ -122,7 +126,9 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			dismiss();
 		});
 
-		shareButton = appbar.findViewById(R.id.action_button_icon);
+		ViewGroup container = appbar.findViewById(R.id.actions_container);
+		LayoutInflater inflater = UiUtilities.getInflater(appbar.getContext(), nightMode);
+		shareButton = (ImageButton) inflater.inflate(R.layout.action_button, container, false);
 		shareButton.setOnClickListener(v -> {
 			if (selectedItems.isEmpty()) {
 				app.showShortToastMessage(getString(R.string.no_items_selected_warning));
@@ -130,6 +136,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 				shareItems();
 			}
 		});
+		container.addView(shareButton);
 		updateToolbarSwitch(appbar);
 	}
 
@@ -329,6 +336,14 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			locationProvider.removeLocationListener(this);
 			locationProvider.removeCompassListener(this);
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
+		}
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull HistorySource source, @Nullable Fragment target) {
+		if (source == NAVIGATION) {
+			NavigationHistorySettingsFragment.showInstance(manager, target);
+		} else if (source == SEARCH) {
+			SearchHistorySettingsFragment.showInstance(manager, target);
 		}
 	}
 }

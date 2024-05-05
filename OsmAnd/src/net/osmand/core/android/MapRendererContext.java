@@ -3,6 +3,10 @@ package net.osmand.core.android;
 import static net.osmand.IndexConstants.GEOTIFF_DIR;
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
 import static net.osmand.plus.views.OsmandMapTileView.MAP_DEFAULT_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.FOG_DEFAULT_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.FOG_NIGHTMODE_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.SKY_DEFAULT_COLOR;
+import static net.osmand.plus.views.OsmandMapTileView.SKY_NIGHTMODE_COLOR;
 
 import android.util.Log;
 
@@ -171,7 +175,9 @@ public class MapRendererContext {
 	}
 
 	protected int getRasterTileSize() {
-		return (int) (getReferenceTileSize() * app.getSettings().MAP_DENSITY.get());
+		float mapDensity = app.getSettings().MAP_DENSITY.get();
+		float mapDensityAligned = mapDensity > 2.0f ? 2.0f : Math.min(mapDensity, 1.0f);
+		return (int) (getReferenceTileSize() * mapDensityAligned);
 	}
 
 	private float getReferenceTileSize() {
@@ -241,6 +247,7 @@ public class MapRendererContext {
 			}
 			setMapBackgroundColor();
 		}
+		setSkyAndFogColors();
 		PluginsHelper.updateMapPresentationEnvironment(this);
 	}
 
@@ -261,6 +268,14 @@ public class MapRendererContext {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
 			mapRendererView.setBackgroundColor(NativeUtilities.createFColorRGB(color));
+		}
+	}
+
+	private void setSkyAndFogColors() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView != null) {
+			mapRendererView.setSkyColor(NativeUtilities.createFColorRGB(nightMode ? SKY_NIGHTMODE_COLOR : SKY_DEFAULT_COLOR));
+			mapRendererView.setFogColor(NativeUtilities.createFColorRGB(nightMode ? FOG_NIGHTMODE_COLOR : FOG_DEFAULT_COLOR));
 		}
 	}
 
@@ -372,8 +387,8 @@ public class MapRendererContext {
 	public void recreateHeightmapProvider() {
 		MapRendererView mapRendererView = this.mapRendererView;
 		if (mapRendererView != null) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			if (plugin == null || !plugin.is3DMapsEnabled()) {
+			SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+			if (srtmPlugin == null || !srtmPlugin.is3DMapsEnabled()) {
 				mapRendererView.resetElevationDataProvider();
 				return;
 			}
@@ -412,7 +427,7 @@ public class MapRendererContext {
 			mapRendererView.removeSymbolsProvider(obfMapSymbolsProvider);
 		}
 		// Create new OBF map symbols provider
-		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize());
+		obfMapSymbolsProvider = new MapObjectsSymbolsProvider(mapPrimitivesProvider, getReferenceTileSize(), null, false, false);
 		// If there's bound view, add new provider
 		if (mapRendererView != null) {
 			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
@@ -439,6 +454,7 @@ public class MapRendererContext {
 			mapRendererView.addSymbolsProvider(providerType.symbolsSectionIndex, obfMapSymbolsProvider);
 		}
 		recreateHeightmapProvider();
+		updateVerticalExaggerationScale();
 		setMapBackgroundColor();
 	}
 
@@ -455,6 +471,17 @@ public class MapRendererContext {
 			elevationConfiguration.setVisualizationStyle(VisualizationStyle.None);
 		}
 		mapRendererView.setElevationConfiguration(elevationConfiguration);
+	}
+
+	public void updateVerticalExaggerationScale() {
+		MapRendererView mapRendererView = this.mapRendererView;
+		if (mapRendererView == null) {
+			return;
+		}
+		SRTMPlugin plugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+		if (plugin != null) {
+			mapRendererView.setElevationScaleFactor(plugin.getVerticalExaggerationScale());
+		}
 	}
 
 	public void updateCachedHeightmapTiles() {

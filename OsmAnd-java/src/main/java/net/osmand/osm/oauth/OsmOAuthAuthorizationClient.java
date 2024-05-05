@@ -1,18 +1,15 @@
 // License: GPL. For details, see LICENSE file.
 package net.osmand.osm.oauth;
 
-import com.github.scribejava.core.builder.ServiceBuilder;
-import com.github.scribejava.core.builder.api.DefaultApi10a;
-import com.github.scribejava.core.builder.api.OAuth1SignatureType;
+import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.httpclient.jdk.JDKHttpClientConfig;
-import com.github.scribejava.core.model.OAuth1AccessToken;
-import com.github.scribejava.core.model.OAuth1RequestToken;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
 import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
-import com.github.scribejava.core.oauth.OAuth10aService;
+import com.github.scribejava.core.oauth.OAuth20Service;
 
 import net.osmand.PlatformUtil;
 
@@ -27,62 +24,43 @@ import java.util.concurrent.ExecutionException;
  * @since 2746
  */
 public class OsmOAuthAuthorizationClient {
-    private OAuth1RequestToken requestToken;
-    private OAuth1AccessToken accessToken;
-    private final OAuth10aService service;
+    private OAuth2AccessToken accessToken;
+    private String apiSecret;
+    private final OAuth20Service service;
     private final OsmAndJDKHttpClient httpClient;
     public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationClient.class);
-
-    public OsmOAuthAuthorizationClient(String key, String secret, DefaultApi10a api) {
+    public OsmOAuthAuthorizationClient(String key, String apiSecret, DefaultApi20 api, String redirectUri, String scope) {
+        this.apiSecret = apiSecret;
         httpClient = new OsmAndJDKHttpClient(JDKHttpClientConfig.defaultConfig());
         service = new ServiceBuilder(key)
-                .apiSecret(secret)
+                .apiSecret(apiSecret)
                 .httpClient(httpClient)
-                .callback("osmand-oauth://example.com/oauth")
+                .defaultScope(scope)
+                .callback(redirectUri)
                 .build(api);
     }
 
-    public static class OsmApi extends DefaultApi10a {
-        @Override
-        public OAuth1SignatureType getSignatureType() {
-            return OAuth1SignatureType.QUERY_STRING;
-        }
-
-        @Override
-        public String getRequestTokenEndpoint() {
-            return "https://www.openstreetmap.org/oauth/request_token";
-        }
-
+    public static class OsmApi extends DefaultApi20 {
         @Override
         public String getAccessTokenEndpoint() {
-            return "https://www.openstreetmap.org/oauth/access_token";
+            return "https://www.openstreetmap.org/oauth2/token";
         }
 
         @Override
         protected String getAuthorizationBaseUrl() {
-            return "https://www.openstreetmap.org/oauth/authorize";
+            return "https://www.openstreetmap.org/oauth2/authorize";
         }
     }
 
-    public static class OsmDevApi extends DefaultApi10a {
-        @Override
-        public OAuth1SignatureType getSignatureType() {
-            return OAuth1SignatureType.QUERY_STRING;
-        }
-
-        @Override
-        public String getRequestTokenEndpoint() {
-            return "https://master.apis.dev.openstreetmap.org/oauth/request_token";
-        }
-
+    public static class OsmDevApi extends DefaultApi20 {
         @Override
         public String getAccessTokenEndpoint() {
-            return "https://master.apis.dev.openstreetmap.org/oauth/access_token";
+            return "https://master.apis.dev.openstreetmap.org/oauth2/token";
         }
 
         @Override
         protected String getAuthorizationBaseUrl() {
-            return "https://master.apis.dev.openstreetmap.org/oauth/authorize";
+            return "https://master.apis.dev.openstreetmap.org/oauth2/authorize";
         }
     }
 
@@ -90,20 +68,20 @@ public class OsmOAuthAuthorizationClient {
         return httpClient;
     }
 
-    public OAuth10aService getService() {
+    public OAuth20Service getService() {
         return service;
     }
 
-    public void setAccessToken(OAuth1AccessToken accessToken) {
+    public void setAccessToken(OAuth2AccessToken accessToken) {
         this.accessToken = accessToken;
     }
 
-    public OAuth1AccessToken getAccessToken() {
+    public OAuth2AccessToken getAccessToken() {
         return accessToken;
     }
 
-    public OAuth1RequestToken getRequestToken() {
-        return requestToken;
+    public String getApiSecret() {
+        return apiSecret;
     }
 
     public Response performRequestWithoutAuth(String url, String requestMethod, String requestBody)
@@ -125,7 +103,6 @@ public class OsmOAuthAuthorizationClient {
 
     public Response performRequest(String url, String method, String body)
             throws InterruptedException, ExecutionException, IOException {
-        service.getApi().getSignatureType();
         if (accessToken == null) {
             throw new IllegalStateException("Access token is null");
         }
@@ -137,18 +114,9 @@ public class OsmOAuthAuthorizationClient {
         return service.execute(req);
     }
 
-    public OAuth1RequestToken startOAuth() {
+    public OAuth2AccessToken authorize(String oauthVerifier) {
         try {
-            requestToken = service.getRequestToken();
-        } catch (IOException | InterruptedException | ExecutionException e) {
-            log.error(e);
-        }
-        return requestToken;
-    }
-
-    public OAuth1AccessToken authorize(String oauthVerifier) {
-        try {
-            setAccessToken(service.getAccessToken(requestToken, oauthVerifier));
+            setAccessToken(service.getAccessToken(oauthVerifier));
         } catch (OAuthException | IOException | InterruptedException | ExecutionException | IllegalArgumentException e) {
             log.error(e);
         }

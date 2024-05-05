@@ -83,7 +83,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 		if (!Algorithms.isEmpty(mapStyles)) {
 			boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 			if (showBottomSheetStyles) {
-				showChooseDialog(mapActivity.getSupportFragmentManager());
+				showChooseDialog(mapActivity);
 				return;
 			}
 			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());

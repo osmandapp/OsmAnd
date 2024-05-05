@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.INDEX_DOWNLOAD_DOMAIN;
 import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
 import static net.osmand.IndexConstants.WEATHER_MAP_INDEX_EXT;
 import static net.osmand.IndexConstants.ZIP_EXT;
@@ -18,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.util.Algorithms;
 
@@ -337,7 +339,7 @@ public class DownloadActivityType {
 	}
 
 	public String getBaseUrl(OsmandApplication ctx, String fileName) {
-		String url = "https://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
+		String url = AndroidNetworkUtils.getHttpProtocol() + INDEX_DOWNLOAD_DOMAIN + "/download?event=2&"
 				+ Version.getVersionAsURLParam(ctx) + "&file=" + encode(fileName);
 		if (this == LIVE_UPDATES_FILE && fileName.length() > 16) {
 			// DATE_AND_EXT_STR_LEN = "_18_06_02.obf.gz".length()

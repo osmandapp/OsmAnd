@@ -209,7 +209,7 @@ public class MapAlgorithms {
 	
 
 	private static long combine2Points(int x, int y) {
-		return (((long) x ) <<32) | ((long)y );
+		return (((long) x) << 32) | ((long) y);
 	}
 	/**
 	 * outx,outy are the coordinates out of the box 

@@ -1,5 +1,22 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
@@ -11,10 +28,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.track.Gpx3DLinePositionType;
+import net.osmand.plus.track.Gpx3DVisualizationType;
+import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
-import net.osmand.plus.track.helpers.GpxData;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.util.Algorithms;
 
@@ -41,33 +64,40 @@ public class GpxAppearanceInfo {
 	public double minFilterAltitude = Double.NaN;
 	public double maxFilterAltitude = Double.NaN;
 	public double maxFilterHdop = Double.NaN;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	private float verticalExaggeration = 1f;
 
 	public GpxAppearanceInfo() {
 	}
 
-	public GpxAppearanceInfo(@NonNull GpxDataItem dataItem) {
-		GpxData gpxData = dataItem.getGpxData();
-		color = gpxData.getColor();
-		width = gpxData.getWidth();
-		showArrows = gpxData.isShowArrows();
-		showStartFinish = gpxData.isShowStartFinish();
-		splitType = gpxData.getSplitType();
-		splitInterval = gpxData.getSplitInterval();
-		coloringType = gpxData.getColoringType();
+	public GpxAppearanceInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
+		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
+		color = helper.requireParameter(item, COLOR);
+		width = helper.getParameter(item, WIDTH);
+		showArrows = helper.requireParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
+		splitType = helper.requireParameter(item, SPLIT_TYPE);
+		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
+		coloringType = helper.getParameter(item, COLORING_TYPE);
+		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
+		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
+		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
+		verticalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 
-		GPXTrackAnalysis analysis = gpxData.getAnalysis();
+		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
-			timeSpan = analysis.timeSpan;
-			wptPoints = analysis.wptPoints;
-			totalDistance = analysis.totalDistance;
+			timeSpan = analysis.getTimeSpan();
+			wptPoints = analysis.getWptPoints();
+			totalDistance = analysis.getTotalDistance();
 		}
-
-		smoothingThreshold = gpxData.getSmoothingThreshold();
-		minFilterSpeed = gpxData.getMinFilterSpeed();
-		maxFilterSpeed = gpxData.getMaxFilterSpeed();
-		minFilterAltitude = gpxData.getMinFilterAltitude();
-		maxFilterAltitude = gpxData.getMaxFilterAltitude();
-		maxFilterHdop = gpxData.getMaxFilterHdop();
+		smoothingThreshold = item.requireParameter(SMOOTHING_THRESHOLD);
+		minFilterSpeed = item.requireParameter(MIN_FILTER_SPEED);
+		maxFilterSpeed = item.requireParameter(MAX_FILTER_SPEED);
+		minFilterAltitude = item.requireParameter(MIN_FILTER_ALTITUDE);
+		maxFilterAltitude = item.requireParameter(MAX_FILTER_ALTITUDE);
+		maxFilterHdop = item.requireParameter(MAX_FILTER_HDOP);
 	}
 
 	public void toJson(@NonNull JSONObject json) throws JSONException {
@@ -78,6 +108,10 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "coloring_type", coloringType);
+		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
+		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
+		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
+		writeParam(json, "vertical_exaggeration_scale", verticalExaggeration);
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
@@ -107,13 +141,25 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
 		hasAnyParam |= json.has("coloring_type");
 		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
-		if (ColoringType.getNullableTrackColoringTypeByName(gpxAppearanceInfo.coloringType) == null) {
+		if (ColoringType.valueOf(ColoringPurpose.TRACK, gpxAppearanceInfo.coloringType) == null) {
 			hasAnyParam |= json.has("gradient_scale_type");
 			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
-			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+			ColoringType coloringType = ColoringType.valueOf(scaleType);
 			gpxAppearanceInfo.coloringType = coloringType == null
 					? null : coloringType.getName(null);
 		}
+
+		hasAnyParam |= json.has("line_3d_visualization_by_type");
+		String trackVisualizationType = json.optString("line_3d_visualization_by_type");
+		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
+		hasAnyParam |= json.has("line_3d_visualization_wall_color_type");
+		String trackWallColorType = json.optString("line_3d_visualization_wall_color_type");
+		gpxAppearanceInfo.trackWallColorType = Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
+		hasAnyParam |= json.has("line_3d_visualization_position_type");
+		String trackLinePositionType = json.optString("line_3d_visualization_position_type");
+		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
+		hasAnyParam |= json.has("vertical_exaggeration_scale");
+		gpxAppearanceInfo.verticalExaggeration = (float) json.optDouble("vertical_exaggeration_scale", SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
 
 		hasAnyParam |= json.has("time_span");
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");
@@ -171,7 +217,7 @@ public class GpxAppearanceInfo {
 		}
 	}
 
-	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name, double value) throws JSONException{
+	private static void writeValidDouble(@NonNull JSONObject json, @NonNull String name, double value) throws JSONException {
 		if (!Double.isNaN(value)) {
 			json.putOpt(name, value);
 		}

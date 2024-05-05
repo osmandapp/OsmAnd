@@ -18,6 +18,7 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportType;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.IOException;
@@ -280,6 +281,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 				if (item.exists() && !isDefaultObfMap(settingsItem)) {
 					duplicateItems.add(settingsItem.getFile());
 				}
+			} else if (item instanceof QuickActionsSettingsItem) {
+				if (item.exists()) {
+					duplicateItems.add(((QuickActionsSettingsItem) item).getButtonState());
+				}
 			}
 		}
 		return duplicateItems;
@@ -317,7 +322,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	}
 
 	private boolean isDefaultObfMap(@NonNull FileSettingsItem settingsItem) {
-		String fileName = BackupHelper.getItemFileName(settingsItem);
-		return BackupHelper.isDefaultObfMap(app, settingsItem, fileName);
+		String fileName = BackupUtils.getItemFileName(settingsItem);
+		return BackupUtils.isDefaultObfMap(app, settingsItem, fileName);
 	}
 }

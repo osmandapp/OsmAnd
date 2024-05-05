@@ -126,6 +126,7 @@ public class OnlineRoutingHelper {
 	public String makeRequest(@NonNull String url, @NonNull String method,
 							  @Nullable String body, @Nullable Map<String, String> headers)
 			throws IOException {
+		long tm = System.currentTimeMillis();
 		LOG.info("Calling online routing: " + url);
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
@@ -159,6 +160,7 @@ public class OnlineRoutingHelper {
 			reader.close();
 		} catch (IOException ignored) {
 		}
+		LOG.info(String.format("Online routing request finished %d ms", System.currentTimeMillis() - tm));
 		return content.toString();
 	}
 

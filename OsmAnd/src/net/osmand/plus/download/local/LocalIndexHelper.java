@@ -1,33 +1,10 @@
 package net.osmand.plus.download.local;
 
 
-import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
-import static net.osmand.IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_ROAD_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_SRTM_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_WIKI_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.FONT_INDEX_DIR;
-import static net.osmand.IndexConstants.FONT_INDEX_EXT;
-import static net.osmand.IndexConstants.GEOTIFF_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
-import static net.osmand.IndexConstants.HEIGHTMAP_SQLITE_EXT;
-import static net.osmand.IndexConstants.HIDDEN_DIR;
-import static net.osmand.IndexConstants.MAPS_PATH;
-import static net.osmand.IndexConstants.NAUTICAL_INDEX_DIR;
-import static net.osmand.IndexConstants.ROADS_INDEX_DIR;
-import static net.osmand.IndexConstants.SRTM_INDEX_DIR;
-import static net.osmand.IndexConstants.TIF_EXT;
-import static net.osmand.IndexConstants.TILES_INDEX_DIR;
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-import static net.osmand.IndexConstants.WEATHER_EXT;
-import static net.osmand.IndexConstants.WEATHER_FORECAST_DIR;
-import static net.osmand.IndexConstants.WIKIVOYAGE_INDEX_DIR;
-import static net.osmand.IndexConstants.WIKI_INDEX_DIR;
+import static net.osmand.IndexConstants.*;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
+import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
 import static net.osmand.plus.download.local.LocalItemType.OTHER;
 import static net.osmand.plus.download.local.LocalItemType.ROAD_DATA;
@@ -37,18 +14,22 @@ import static net.osmand.plus.download.local.LocalItemType.TTS_VOICE_DATA;
 import static net.osmand.plus.download.local.LocalItemType.VOICE_DATA;
 import static net.osmand.plus.download.local.LocalItemType.WEATHER_DATA;
 import static net.osmand.plus.download.local.LocalItemType.WIKI_AND_TRAVEL_MAPS;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.download.local.dialogs.LiveGroupItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
+import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.SQLiteTileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -121,10 +102,37 @@ public class LocalIndexHelper {
 				category = new LocalCategory(categoryType);
 				categories.put(categoryType, category);
 			}
+			addLocalItem(category, file, itemType);
+		}
+	}
+
+	private void addLocalItem(@NonNull LocalCategory category, @NonNull File file, @NonNull LocalItemType itemType) {
+		if (itemType == LIVE_UPDATES) {
+			addLiveItem(category, file, itemType);
+		} else {
 			LocalItem item = new LocalItem(file, itemType);
 			LocalItemUtils.updateItem(app, item);
 			category.addLocalItem(item);
 		}
+	}
+
+	private void addLiveItem(@NonNull LocalCategory category, @NonNull File file, @NonNull LocalItemType itemType) {
+		String basename = FileNameTranslationHelper.getBasename(app, file.getName());
+		String liveGroupName = getNameToDisplay(basename.replaceAll("(_\\d*)*$", ""), app);
+
+		LocalGroup localGroup = category.getGroups().get(LIVE_UPDATES);
+		if (localGroup == null) {
+			localGroup = new LocalGroup(LIVE_UPDATES);
+			category.getGroups().put(LIVE_UPDATES, localGroup);
+		}
+		LiveGroupItem liveGroup = (LiveGroupItem) localGroup.getItem(liveGroupName);
+		if (liveGroup == null) {
+			liveGroup = new LiveGroupItem(liveGroupName);
+			localGroup.addItem(liveGroupName, liveGroup);
+		}
+		LocalItem item = new LocalItem(file, itemType);
+		LocalItemUtils.updateItem(app, item);
+		((LiveGroupItem) liveGroup).addLocalItem(item);
 	}
 
 	private void collectLocalItems(@NonNull List<LocalItem> items, @NonNull LocalItemType type,
@@ -307,7 +315,7 @@ public class LocalIndexHelper {
 			for (File file : listFilesSorted(dir)) {
 				if (file.isFile()) {
 					String fileName = file.getName();
-					boolean tilesData = Algorithms.endsWithAny(fileName, SQLiteTileSource.EXT, HEIGHTMAP_SQLITE_EXT);
+					boolean tilesData = CollectionUtils.endsWithAny(fileName, SQLiteTileSource.EXT, HEIGHTMAP_SQLITE_EXT);
 					if (tilesData) {
 						loadLocalData(file, TILES_DATA, items, shouldUpdate, task);
 					}

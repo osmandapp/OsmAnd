@@ -43,6 +43,7 @@ import net.osmand.plus.settings.fragments.NavigationFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
+import net.osmand.plus.widgets.popup.OnPopUpMenuItemClickListener;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -320,9 +321,9 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet implem
 		return null;
 	}
 
-	protected View.OnClickListener getOptionDeleteClickListener(ProfilesGroup group) {
+	protected OnPopUpMenuItemClickListener getOptionDeleteClickListener(@NonNull ProfilesGroup group) {
 		String fileName = String.valueOf(group.getTitle());
-		return view -> {
+		return menuItem -> {
 			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getMapActivity(), isNightMode(app)));
 			builder.setTitle(getString(R.string.shared_string_delete_file));
 			builder.setMessage(getString(R.string.nav_profile_confirm_delete, fileName));

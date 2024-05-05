@@ -38,6 +38,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener {
 
@@ -96,9 +97,9 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 					purchase = PurchaseUiDataUtils.createUiData(app, inAppPurchase);
 				}
 			}
-		} else if (Algorithms.startsWithAny(promoType, app.getString(R.string.osmand_start))) {
+		} else if (CollectionUtils.startsWithAny(promoType, app.getString(R.string.osmand_start))) {
 			purchase = PurchaseUiDataUtils.createFreeAccPurchaseUiData(app);
-		} else if (Algorithms.startsWithAny(promoType, app.getString(R.string.tripltek))) {
+		} else if (CollectionUtils.startsWithAny(promoType, app.getString(R.string.tripltek))) {
 			purchase = PurchaseUiDataUtils.createTripltekPurchaseUiData(app);
 		} else {
 			purchase = PurchaseUiDataUtils.createBackupSubscriptionUiData(app);
@@ -157,7 +158,7 @@ public class PurchaseItemFragment extends BaseOsmAndDialogFragment implements In
 		boolean liveVisible = purchase.isLiveUpdateSubscription();
 		setupLiveButton(liveVisible);
 		setupManageButton(manageVisible);
-		setupTripltekPromoDetails(Algorithms.startsWithAny(promoType, app.getString(R.string.tripltek)));
+		setupTripltekPromoDetails(CollectionUtils.startsWithAny(promoType, app.getString(R.string.tripltek)));
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_divider), manageVisible || liveVisible);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}

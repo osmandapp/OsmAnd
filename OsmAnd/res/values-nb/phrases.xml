@@ -1544,8 +1544,8 @@
     <string name="poi_volcano_last_eruption">Siste utbrudd</string>
     <string name="poi_volcano_type_shield">Skjold</string>
     <string name="poi_sms">SMS</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Undertrykk</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Under trykk</string>
+    <string name="poi_fire_hydrant_pressure_suction">Undertrykk</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Under trykk</string>
     <string name="poi_water_source_groundwater">Grunnvann</string>
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_drinking_water_refill_network">Nettverk for påfyll av drikkevann</string>
@@ -1927,5 +1927,5 @@
     <string name="poi_vehicle_designated">Beregnet for kjøretøy</string>
     <string name="poi_horse_designated">Beregnet for hester</string>
     <string name="poi_foot_designated">Beregnet for fotgjengere</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Alle unntatt kollektivtransportskur</string>
+    <string name="poi_not_pt_shelter_yes">Alle unntatt kollektivtransportskur</string>
 </resources>

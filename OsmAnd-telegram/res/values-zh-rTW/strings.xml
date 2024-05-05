@@ -275,4 +275,8 @@
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="shared_string_error">錯誤</string>
     <string name="send_live_location_error">傳送即時位置時發生錯誤：%1$s</string>
+    <string name="location_source_summary">預設情況下，從 Google Play 安裝的 OsmAnd 使用 Google Play 服務來偵測位置。
+\n
+\n如果您獲得不準確的位置資訊或使用沒有 Google Play 服務的裝置，請嘗試切換到 Android API</string>
+    <string name="location_source">定位服務</string>
 </resources>

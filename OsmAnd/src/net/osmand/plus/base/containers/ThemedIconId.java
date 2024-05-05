@@ -4,8 +4,8 @@ import androidx.annotation.DrawableRes;
 
 public class ThemedIconId {
 
-	private int iconDayId;
-	private int iconNightId;
+	private final int iconDayId;
+	private final int iconNightId;
 
 	public ThemedIconId(@DrawableRes int iconDayId, @DrawableRes int iconNightId) {
 		this.iconDayId = iconDayId;

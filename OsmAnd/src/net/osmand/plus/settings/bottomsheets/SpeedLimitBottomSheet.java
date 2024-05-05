@@ -1,9 +1,8 @@
 package net.osmand.plus.settings.bottomsheets;
 
-import static net.osmand.plus.utils.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeed;
 import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeedValue;
-import static net.osmand.plus.utils.OsmAndFormatter.getMetersInModeUnit;
+import static net.osmand.plus.utils.OsmAndFormatter.getMpSFromFormattedValue;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -92,16 +91,16 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		slider.setStepSize(step);
 
 		TextView summary = view.findViewById(R.id.summary);
-		summary.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedSelectedValue, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
+		summary.setText(getFormattedSpeed(getMpSFromFormattedValue(app, convertedSelectedValue, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		TextView fromTv = view.findViewById(R.id.from_value);
-		fromTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitFrom, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
+		fromTv.setText(getFormattedSpeed(getMpSFromFormattedValue(app, convertedLimitFrom, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		TextView toTv = view.findViewById(R.id.to_value);
-		toTv.setText(getFormattedSpeed(getMpSFromFormattedValue(convertedLimitTo, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
+		toTv.setText(getFormattedSpeed(getMpSFromFormattedValue(app, convertedLimitTo, speedFormat), app, isSpeedToleranceBigRange, speedFormat));
 
 		slider.addOnChangeListener((s, value, fromUser) -> {
-			float selectedSpeedInMS = getMpSFromFormattedValue(value, speedFormat);
+			float selectedSpeedInMS = getMpSFromFormattedValue(app, value, speedFormat);
 			selectedValue = selectedSpeedInMS * 3.6f;
 			summary.setText(getFormattedSpeed(selectedSpeedInMS, app, isSpeedToleranceBigRange, speedFormat));
 		});
@@ -112,10 +111,6 @@ public class SpeedLimitBottomSheet extends BasePreferenceBottomSheet {
 		return new BaseBottomSheetItem.Builder()
 				.setCustomView(view)
 				.create();
-	}
-
-	private float getMpSFromFormattedValue(float value, SpeedConstants speedFormat) {
-		return (value * getMetersInModeUnit(app, speedFormat) / METERS_IN_KILOMETER) / 3.6f;
 	}
 
 	private int getIntegerSpeed(float floatSpeed) {

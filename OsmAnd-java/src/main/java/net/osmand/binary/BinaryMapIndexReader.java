@@ -1,19 +1,61 @@
 package net.osmand.binary;
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.logging.Log;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.CodedOutputStream;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.StringMatcher;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiRegion;
@@ -37,48 +79,11 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.edit.Way;
+import net.osmand.router.HHRouteDataStructure.HHRouteRegionPointsCtx;
+import net.osmand.router.HHRouteDataStructure.HHRoutingContext;
+import net.osmand.router.HHRouteDataStructure.NetworkDBPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
-import org.apache.commons.logging.Log;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
-import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TIntHashSet;
 
 public class BinaryMapIndexReader {
 
@@ -113,6 +118,7 @@ public class BinaryMapIndexReader {
 	/*private*/ List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
 	/*private*/ List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
 	/*private*/ List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
+	/*private*/ List<HHRouteRegion> hhIndexes = new ArrayList<HHRouteRegion>();
 	/*private*/ List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
 	TLongObjectHashMap<IncompleteTransportRoute> incompleteTransportRoutes = null;
 	
@@ -122,6 +128,7 @@ public class BinaryMapIndexReader {
 	private final BinaryMapPoiReaderAdapter poiAdapter;
 	private final BinaryMapAddressReaderAdapter addressAdapter;
 	private final BinaryMapRouteReaderAdapter routeAdapter;
+	private final BinaryHHRouteReaderAdapter hhAdapter;
 
 	private static final String BASEMAP_NAME = "basemap";
 
@@ -130,11 +137,12 @@ public class BinaryMapIndexReader {
 		this.raf = raf;
 		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		codedIS.setSizeLimit(CodedInputStream.MAX_DEFAULT_SIZE_LIMIT);
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		init();
 	}
 
@@ -142,11 +150,12 @@ public class BinaryMapIndexReader {
 		this.raf = raf;
 		this.file = file;
 		codedIS = CodedInputStream.newInstance(raf);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		codedIS.setSizeLimit(CodedInputStream.MAX_DEFAULT_SIZE_LIMIT);
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		if (init) {
 			init();
 		}
@@ -156,18 +165,20 @@ public class BinaryMapIndexReader {
 		this.raf = raf;
 		this.file = referenceToSameFile.file;
 		codedIS = CodedInputStream.newInstance(raf);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		codedIS.setSizeLimit(CodedInputStream.MAX_DEFAULT_SIZE_LIMIT);
 		version = referenceToSameFile.version;
 		dateCreated = referenceToSameFile.dateCreated;
 		transportAdapter = new BinaryMapTransportReaderAdapter(this);
 		addressAdapter = new BinaryMapAddressReaderAdapter(this);
 		poiAdapter = new BinaryMapPoiReaderAdapter(this);
 		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		hhAdapter = new BinaryHHRouteReaderAdapter(this);
 		mapIndexes = new ArrayList<BinaryMapIndexReader.MapIndex>(referenceToSameFile.mapIndexes);
 		poiIndexes = new ArrayList<PoiRegion>(referenceToSameFile.poiIndexes);
 		addressIndexes = new ArrayList<AddressRegion>(referenceToSameFile.addressIndexes);
 		transportIndexes = new ArrayList<TransportIndex>(referenceToSameFile.transportIndexes);
 		routingIndexes = new ArrayList<RouteRegion>(referenceToSameFile.routingIndexes);
+		hhIndexes = new ArrayList<HHRouteRegion>(referenceToSameFile.hhIndexes);
 		indexes = new ArrayList<BinaryIndexPart>(referenceToSameFile.indexes);
 		basemap = referenceToSameFile.basemap;
 		calculateCenterPointForRegions();
@@ -201,8 +212,8 @@ public class BinaryMapIndexReader {
 				dateCreated = codedIS.readInt64();
 				break;
 			case OsmandOdb.OsmAndStructure.OWNER_FIELD_NUMBER:
-				int len = codedIS.readInt32();
-				int oldLimit = codedIS.pushLimit(len);
+				long len = codedIS.readInt32();
+				long oldLimit = codedIS.pushLimitLong((long) len);
 				owner = new OsmAndOwner();
 				readOsmAndOwner();
 				codedIS.popLimit(oldLimit);
@@ -211,7 +222,7 @@ public class BinaryMapIndexReader {
 				MapIndex mapIndex = new MapIndex();
 				mapIndex.length = readInt();
 				mapIndex.filePointer = codedIS.getTotalBytesRead();
-				oldLimit = codedIS.pushLimit(mapIndex.length);
+				oldLimit = codedIS.pushLimitLong((long) mapIndex.length);
 				readMapIndex(mapIndex, false);
 				basemap = basemap || mapIndex.isBaseMap();
 				codedIS.popLimit(oldLimit);
@@ -224,7 +235,7 @@ public class BinaryMapIndexReader {
 				region.length = readInt();
 				region.filePointer = codedIS.getTotalBytesRead();
 				if(addressAdapter != null){
-					oldLimit = codedIS.pushLimit(region.length);
+					oldLimit = codedIS.pushLimitLong((long) region.length);
 					addressAdapter.readAddressIndex(region);
 					if(region.name != null){
 						addressIndexes.add(region);
@@ -239,7 +250,7 @@ public class BinaryMapIndexReader {
 				ind.length = readInt();
 				ind.filePointer = codedIS.getTotalBytesRead();
 				if (transportAdapter != null) {
-					oldLimit = codedIS.pushLimit(ind.length);
+					oldLimit = codedIS.pushLimitLong((long) ind.length);
 					transportAdapter.readTransportIndex(ind);
 					codedIS.popLimit(oldLimit);
 					transportIndexes.add(ind);
@@ -252,7 +263,7 @@ public class BinaryMapIndexReader {
 				routeReg.length = readInt();
 				routeReg.filePointer = codedIS.getTotalBytesRead();
 				if (routeAdapter != null) {
-					oldLimit = codedIS.pushLimit(routeReg.length);
+					oldLimit = codedIS.pushLimitLong((long) routeReg.length);
 					routeAdapter.readRouteIndex(routeReg);
 					codedIS.popLimit(oldLimit);
 					routingIndexes.add(routeReg);
@@ -265,13 +276,26 @@ public class BinaryMapIndexReader {
 				poiInd.length = readInt();
 				poiInd.filePointer = codedIS.getTotalBytesRead();
 				if (poiAdapter != null) {
-					oldLimit = codedIS.pushLimit(poiInd.length);
+					oldLimit = codedIS.pushLimitLong((long) poiInd.length);
 					poiAdapter.readPoiIndex(poiInd, false);
 					codedIS.popLimit(oldLimit);
 					poiIndexes.add(poiInd);
 					indexes.add(poiInd);
 				}
 				codedIS.seek(poiInd.filePointer + poiInd.length);
+				break;
+			case OsmandOdb.OsmAndStructure.HHROUTINGINDEX_FIELD_NUMBER:
+				HHRouteRegion hhreg = new HHRouteRegion();
+				hhreg.length = readInt();
+				hhreg.filePointer = codedIS.getTotalBytesRead();
+				if (hhAdapter != null) {
+					oldLimit = codedIS.pushLimitLong((long) hhreg.length);
+					hhAdapter.readHHIndex(hhreg, false);
+					codedIS.popLimit(oldLimit);
+					indexes.add(hhreg);
+					hhIndexes.add(hhreg);
+				}
+				codedIS.seek(hhreg.filePointer + hhreg.length);
 				break;
 			case OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER :
 				int cversion = codedIS.readUInt32();
@@ -295,7 +319,7 @@ public class BinaryMapIndexReader {
 					}
 				}
 			}
-			if(reg.calculatedCenter == null) {
+			if (reg.calculatedCenter == null) {
 				for (RouteRegion map : routingIndexes) {
 					if (Algorithms.objectEquals(reg.name, map.name)) {
 						reg.calculatedCenter = new LatLon(map.getTopLatitude() / 2 + map.getBottomLatitude() / 2,
@@ -318,6 +342,10 @@ public class BinaryMapIndexReader {
 	public List<RouteRegion> getRoutingIndexes() {
 		return routingIndexes;
 	}
+	
+	public List<HHRouteRegion> getHHRoutingIndexes() {
+		return hhIndexes;
+	}
 
 	public boolean isBasemap() {
 		return basemap;
@@ -333,6 +361,27 @@ public class BinaryMapIndexReader {
 
 	public boolean containsRouteData() {
 		return routingIndexes.size() > 0;
+	}
+	
+	public boolean containsActualRouteData(int x31, int y31, Set<String> checkedRegions) throws IOException {
+		int zoomToLoad = 14;
+		int x = x31 >> zoomToLoad;
+		int y = y31 >> zoomToLoad;
+		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(x << zoomToLoad,
+				(x + 1) << zoomToLoad, y << zoomToLoad, (y + 1) << zoomToLoad, null);
+		for (RouteRegion reg : getRoutingIndexes()) {
+			if (checkedRegions != null) {
+				if (checkedRegions.contains(reg.getName())) {
+					continue;
+				}
+				checkedRegions.add(reg.getName());
+			}
+			List<RouteSubregion> res = searchRouteIndexTree(request, reg.getSubregions());
+			if (!res.isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean containsRouteData(int left31x, int top31y, int right31x, int bottom31y, int zoom) {
@@ -417,7 +466,16 @@ public class BinaryMapIndexReader {
 		}
 		return "";
 	}
+	
+	public <T extends NetworkDBPoint> TLongObjectHashMap<T> initHHPoints(HHRouteRegion reg, short mapId, Class<T> cl) throws IOException {
+		return hhAdapter.initRegionAndLoadPoints(reg, mapId, cl);
+	}
 
+	public <T extends NetworkDBPoint> int loadNetworkSegmentPoint(HHRoutingContext<T>  ctx, HHRouteRegionPointsCtx<T> reg,
+			T point, boolean reverse) throws IOException {
+		return hhAdapter.loadNetworkSegmentPoint(ctx, reg, point, reverse);
+	}
+	
 	public String getRegionName() {
 		List<String> rg = getRegionNames();
 		if (rg.size() == 0) {
@@ -441,8 +499,8 @@ public class BinaryMapIndexReader {
 				if (ls.contains(".")) {
 					ls = ls.substring(0, ls.indexOf("."));
 				}
-				if (ls.endsWith("_2")) {
-					ls = ls.substring(0, ls.length() - "_2".length());
+				if (ls.endsWith("_" + IndexConstants.BINARY_MAP_VERSION)) {
+					ls = ls.substring(0, ls.length() - ("_" + IndexConstants.BINARY_MAP_VERSION).length());
 				}
 				if (ls.lastIndexOf('_') != -1) {
 					ls = ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
@@ -464,12 +522,23 @@ public class BinaryMapIndexReader {
 		}
 	}
 
-	public final int readInt() throws IOException {
-		int ch1 = readByte();
-		int ch2 = readByte();
-		int ch3 = readByte();
-		int ch4 = readByte();
-		return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
+	public final long readInt() throws IOException {
+		long l = readByte();
+		boolean _8byte = l > 0x7f;
+		if (_8byte) {
+			l = l & 0x7f;
+		}
+		l = (l << 8) + readByte();
+		l = (l << 8) + readByte();
+		l = (l << 8) + readByte();
+		if (_8byte) {
+			l = (l << 8) + readByte();
+			l = (l << 8) + readByte();
+			l = (l << 8) + readByte();
+			l = (l << 8) + readByte();
+			
+		}
+		return l;
 	}
 
 
@@ -481,7 +550,7 @@ public class BinaryMapIndexReader {
 	protected void skipUnknownField(int tag) throws IOException {
 		int wireType = WireFormat.getTagWireType(tag);
 		if (wireType == WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED) {
-			int length = readInt();
+			long length = readInt();
 			codedIS.skipRawBytes(length);
 		} else {
 			codedIS.skipField(tag);
@@ -489,36 +558,36 @@ public class BinaryMapIndexReader {
 	}
 
 
-	public TIntObjectHashMap<TransportRoute> getTransportRoutes(int[] filePointers) throws IOException {
-		TIntObjectHashMap<TransportRoute> result = new TIntObjectHashMap<TransportRoute>();
+	public TLongObjectHashMap<TransportRoute> getTransportRoutes(long[] filePointers) throws IOException {
+		TLongObjectHashMap<TransportRoute> result = new TLongObjectHashMap<TransportRoute>();
 		loadTransportRoutes(filePointers, result);
 		return result;
 	}
 	/**
 	 * Transport public methods
 	 */
-	public void loadTransportRoutes(int[] filePointers, TIntObjectHashMap<TransportRoute> result) throws IOException {
-		Map<TransportIndex, TIntArrayList> groupPoints = new HashMap<TransportIndex, TIntArrayList>();
-		for (int filePointer : filePointers) {
+	public void loadTransportRoutes(long[] filePointers, TLongObjectHashMap<TransportRoute> result) throws IOException {
+		Map<TransportIndex, TLongArrayList> groupPoints = new HashMap<TransportIndex, TLongArrayList>();
+		for (long filePointer : filePointers) {
 			TransportIndex ind = getTransportIndex(filePointer);
 			if (ind != null) {
 				if (!groupPoints.containsKey(ind)) {
-					groupPoints.put(ind, new TIntArrayList());
+					groupPoints.put(ind, new TLongArrayList());
 				}
 				groupPoints.get(ind).add(filePointer);
 			}
 		}
-		Iterator<Entry<TransportIndex, TIntArrayList>> it = groupPoints.entrySet().iterator();
+		Iterator<Entry<TransportIndex, TLongArrayList>> it = groupPoints.entrySet().iterator();
 		while (it.hasNext()) {
-			Entry<TransportIndex, TIntArrayList> e = it.next();
+			Entry<TransportIndex, TLongArrayList> e = it.next();
 			TransportIndex ind = e.getKey();
-			TIntArrayList pointers = e.getValue();
+			TLongArrayList pointers = e.getValue();
 			pointers.sort();
 			TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
 			List<TransportRoute> finishInit = new ArrayList<TransportRoute>();
 			
 			for (int i = 0; i < pointers.size(); i++) {
-				int filePointer = pointers.get(i);
+				long filePointer = pointers.get(i);
 				TransportRoute transportRoute = transportAdapter.getTransportRoute(filePointer, stringTable, false);
 				result.put(filePointer, transportRoute);
 				finishInit.add(transportRoute);	
@@ -541,7 +610,7 @@ public class BinaryMapIndexReader {
 		return transportIndexes;
 	}
 
-	private TransportIndex getTransportIndex(int filePointer) {
+	private TransportIndex getTransportIndex(long filePointer) {
 		TransportIndex ind = null;
 		for (TransportIndex i : transportIndexes) {
 			if (i.filePointer <= filePointer && (filePointer - i.filePointer) < i.length) {
@@ -582,7 +651,7 @@ public class BinaryMapIndexReader {
 			return req.getSearchResults();
 		}
 		codedIS.seek(index.stopsFileOffset);
-		int oldLimit = codedIS.pushLimit(index.stopsFileLength);
+		long oldLimit = codedIS.pushLimitLong((long) index.stopsFileLength);
 		int offset = req.searchResults.size();
 		TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
 		transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req, stringTable);
@@ -638,7 +707,7 @@ public class BinaryMapIndexReader {
 			for (CitiesBlock block : r.cities) {
 				if (block.type == cityType) {
 					codedIS.seek(block.filePointer);
-					int old = codedIS.pushLimit(block.length);
+					long old = codedIS.pushLimitLong((long) block.length);
 					addressAdapter.readCities(cities, resultMatcher, matcher, r.attributeTagsTable);
 					codedIS.popLimit(old);
 				}
@@ -651,13 +720,14 @@ public class BinaryMapIndexReader {
 			int cityType) throws IOException {
 		return getCities(region, resultMatcher, null, cityType);
 	}
+	
 	public List<City> getCities(AddressRegion region, SearchRequest<City> resultMatcher, StringMatcher matcher,  
 			int cityType) throws IOException {
 		List<City> cities = new ArrayList<City>();
 		for (CitiesBlock block : region.cities) {
 			if (block.type == cityType) {
 				codedIS.seek(block.filePointer);
-				int old = codedIS.pushLimit(block.length);
+				long old = codedIS.pushLimitLong((long) block.length);
 				addressAdapter.readCities(cities, resultMatcher, matcher, region.attributeTagsTable);
 				codedIS.popLimit(old);
 			}
@@ -674,13 +744,13 @@ public class BinaryMapIndexReader {
 		}
 		codedIS.seek(c.getFileOffset());
 		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
+		long old = codedIS.pushLimitLong((long) size);
 		addressAdapter.readCityStreets(resultMatcher, c, reg.attributeTagsTable);
 		codedIS.popLimit(old);
 		return size;
 	}
 
-	private AddressRegion checkAddressIndex(int offset) {
+	private AddressRegion checkAddressIndex(long offset) {
 		for (AddressRegion r : addressIndexes) {
 			if (offset >= r.filePointer && offset <= (r.length + r.filePointer)) {
 				return r;
@@ -693,8 +763,8 @@ public class BinaryMapIndexReader {
 	public void preloadBuildings(Street s, SearchRequest<Building> resultMatcher) throws IOException {
 		AddressRegion reg = checkAddressIndex(s.getFileOffset());
 		codedIS.seek(s.getFileOffset());
-		int size = codedIS.readRawVarint32();
-		int old = codedIS.pushLimit(size);
+		long size = codedIS.readRawVarint32();
+		long old = codedIS.pushLimitLong((long) size);
 		City city = s.getCity();
 		addressAdapter.readStreet(s, resultMatcher, true, 0, 0, city != null && city.isPostcode() ? city.getName() : null,
 				reg.attributeTagsTable);
@@ -708,8 +778,8 @@ public class BinaryMapIndexReader {
 
 	private void readMapIndex(MapIndex index, boolean onlyInitEncodingRules) throws IOException {
 		int defaultId = 1;
-		int oldLimit;
-		int encodingRulesSize = 0;
+		long oldLimit;
+		long encodingRulesSize = 0;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -726,23 +796,23 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
 				if (onlyInitEncodingRules) {
-					if(encodingRulesSize == 0) {
+					if (encodingRulesSize == 0) {
 						encodingRulesSize = codedIS.getTotalBytesRead();
 					}
 					int len = codedIS.readInt32();
-					oldLimit = codedIS.pushLimit(len);
+					oldLimit = codedIS.pushLimitLong((long) len);
 					readMapEncodingRule(index, defaultId++);
 					codedIS.popLimit(oldLimit);
-					index.encodingRulesSizeBytes = (codedIS.getTotalBytesRead() - encodingRulesSize);
+					index.encodingRulesSizeBytes = (int) (codedIS.getTotalBytesRead() - encodingRulesSize);
 				} else {
 					skipUnknownField(t);
 				}
 				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
-				int length = readInt();
-				int filePointer = codedIS.getTotalBytesRead();
+				long length = readInt();
+				long filePointer = codedIS.getTotalBytesRead();
 				if (!onlyInitEncodingRules) {
-					oldLimit = codedIS.pushLimit(length);
+					oldLimit = codedIS.pushLimitLong((long) length);
 					MapRoot mapRoot = readMapLevel(new MapRoot());
 					mapRoot.length = length;
 					mapRoot.filePointer = filePointer;
@@ -816,14 +886,14 @@ public class BinaryMapIndexReader {
 				root.minZoom = codedIS.readInt32();
 				break;
 			case MapRootLevel.BOXES_FIELD_NUMBER :
-				int length = readInt();
-				int filePointer = codedIS.getTotalBytesRead();
+				long length = readInt();
+				long filePointer = codedIS.getTotalBytesRead();
 				if (root.trees != null) {
 					MapTree r = new MapTree();
 					// left, ... already initialized
 					r.length = length;
 					r.filePointer = filePointer;
-					int oldLimit = codedIS.pushLimit(r.length);
+					long oldLimit = codedIS.pushLimitLong((long) r.length);
 					readMapTreeBounds(r, root.left, root.right, root.top, root.bottom);
 					root.trees.add(r);
 					codedIS.popLimit(oldLimit);
@@ -895,7 +965,7 @@ public class BinaryMapIndexReader {
 			// lazy initializing rules
 			if (mapIndex.encodingRules.isEmpty()) {
 				codedIS.seek(mapIndex.filePointer);
-				int oldLimit = codedIS.pushLimit(mapIndex.length);
+				long oldLimit = codedIS.pushLimitLong((long) mapIndex.length);
 				readMapIndex(mapIndex, true);
 				codedIS.popLimit(oldLimit);
 			}
@@ -911,7 +981,7 @@ public class BinaryMapIndexReader {
 					if (index.trees == null) {
 						index.trees = new ArrayList<MapTree>();
 						codedIS.seek(index.filePointer);
-						int oldLimit = codedIS.pushLimit(index.length);
+						long oldLimit = codedIS.pushLimitLong((long) index.length);
 						readMapLevel(index);
 						codedIS.popLimit(oldLimit);
 					}
@@ -921,7 +991,7 @@ public class BinaryMapIndexReader {
 							continue;
 						}
 						codedIS.seek(tree.filePointer);
-						int oldLimit = codedIS.pushLimit(tree.length);
+						long oldLimit = codedIS.pushLimitLong((long) tree.length);
 						searchMapTreeBounds(tree, index, req, foundSubtrees);
 						codedIS.popLimit(oldLimit);
 					}
@@ -936,7 +1006,7 @@ public class BinaryMapIndexReader {
 						if (!req.isCancelled()) {
 							codedIS.seek(tree.mapDataBlock);
 							int length = codedIS.readRawVarint32();
-							int oldLimit = codedIS.pushLimit(length);
+							long oldLimit = codedIS.pushLimitLong((long) length);
 							readMapDataBlocks(req, tree, mapIndex);
 							codedIS.popLimit(oldLimit);
 						}
@@ -980,7 +1050,7 @@ public class BinaryMapIndexReader {
 				break;
 			case MapDataBlock.DATAOBJECTS_FIELD_NUMBER:
 				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+				long oldLimit = codedIS.pushLimitLong((long) length);
 				if(READ_STATS) {
 					req.stat.lastObjectSize += length;
 					req.stat.addBlockHeader(MapDataBlock.DATAOBJECTS_FIELD_NUMBER, length);
@@ -1000,7 +1070,7 @@ public class BinaryMapIndexReader {
 				break;
 			case MapDataBlock.STRINGTABLE_FIELD_NUMBER:
 				length = codedIS.readRawVarint32();
-				oldLimit = codedIS.pushLimit(length);
+				oldLimit = codedIS.pushLimitLong((long) length);
 				if(READ_STATS) {
 					req.stat.addBlockHeader(MapDataBlock.STRINGTABLE_FIELD_NUMBER, length);
 					req.stat.lastBlockStringTableSize += length;
@@ -1085,7 +1155,7 @@ public class BinaryMapIndexReader {
 				MapTree child = new MapTree();
 				child.length = readInt();
 				child.filePointer = codedIS.getTotalBytesRead();
-				int oldLimit = codedIS.pushLimit(child.length);
+				long oldLimit = codedIS.pushLimitLong((long) child.length);
 				if(current.ocean != null ){
 					child.ocean = current.ocean;
 				}
@@ -1115,7 +1185,7 @@ public class BinaryMapIndexReader {
 			req.stat.addTagHeader(OsmandOdb.MapData.COORDINATES_FIELD_NUMBER,
 					size);
 		}
-		int old = codedIS.pushLimit(size);
+		long old = codedIS.pushLimitLong((long) size);
 		int px = tree.left & MASK_TO_READ;
 		int py = tree.top & MASK_TO_READ;
 		boolean contains = false;
@@ -1184,7 +1254,7 @@ public class BinaryMapIndexReader {
 					req.stat.addTagHeader(OsmandOdb.MapData.POLYGONINNERCOORDINATES_FIELD_NUMBER,
 							size);
 				}
-				old = codedIS.pushLimit(size);
+				old = codedIS.pushLimitLong((long) size);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int x = (codedIS.readSInt32() << SHIFT_COORDINATES) + px;
 					int y = (codedIS.readSInt32() << SHIFT_COORDINATES) + py;
@@ -1198,7 +1268,7 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER:
 				additionalTypes = new TIntArrayList();
 				int sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				if(READ_STATS) {
 					req.stat.lastObjectAdditionalTypes += sizeL;
 					req.stat.addTagHeader(OsmandOdb.MapData.ADDITIONALTYPES_FIELD_NUMBER,
@@ -1213,7 +1283,7 @@ public class BinaryMapIndexReader {
 			case OsmandOdb.MapData.TYPES_FIELD_NUMBER:
 				req.cacheTypes.clear();
 				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				if(READ_STATS) {
 					req.stat.addTagHeader(OsmandOdb.MapData.TYPES_FIELD_NUMBER, sizeL);
 					req.stat.lastObjectTypes += sizeL;
@@ -1244,7 +1314,7 @@ public class BinaryMapIndexReader {
 				stringNames = new TIntObjectHashMap<String>();
 				stringOrder = new TIntArrayList();
 				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				while (codedIS.getBytesUntilLimit() > 0) {
 					int stag = codedIS.readRawVarint32();
 					int pId = codedIS.readRawVarint32();
@@ -1259,7 +1329,7 @@ public class BinaryMapIndexReader {
 				break;
 			case OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER:
 				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				old = codedIS.pushLimitLong((long) sizeL);
 				int i = 0;
 				while (codedIS.getBytesUntilLimit() > 0) {
 					if (i == 0) {
@@ -1314,8 +1384,8 @@ public class BinaryMapIndexReader {
 		for (AddressRegion reg : addressIndexes) {
 			if (reg.indexNameOffset != -1) {
 				codedIS.seek(reg.indexNameOffset);
-				int len = readInt();
-				int old = codedIS.pushLimit(len);
+				long len = readInt();
+				long old = codedIS.pushLimitLong((long) len);
 				addressAdapter.searchAddressDataByName(reg, req, typeFilter);
 				codedIS.popLimit(old);
 			}
@@ -1344,7 +1414,7 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
-			int old = codedIS.pushLimit(poiIndex.length);
+			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
 			codedIS.popLimit(old);
 		}
@@ -1407,12 +1477,10 @@ public class BinaryMapIndexReader {
 		for (PoiRegion poiIndex : poiIndexes) {
 			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
-			int old = codedIS.pushLimit(poiIndex.length);
+			long old = codedIS.pushLimitLong((long) poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 			codedIS.popLimit(old);
 		}
-		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		return req.getSearchResults();
 	}
@@ -1425,13 +1493,9 @@ public class BinaryMapIndexReader {
 
 		poiAdapter.initCategories(poiIndex);
 		codedIS.seek(poiIndex.filePointer);
-		int old = codedIS.pushLimit(poiIndex.length);
+		long old = codedIS.pushLimitLong((long) poiIndex.length);
 		poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
 		codedIS.popLimit(old);
-
-		log.info("Search poi is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		log.info("Read " + req.numberOfReadSubtrees + " subtrees. Go through " + req.numberOfAcceptedSubtrees + " subtrees.");   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
-
 		return req.getSearchResults();
 	}
 
@@ -1726,6 +1790,7 @@ public class BinaryMapIndexReader {
 		TIntArrayList cacheTypes = new TIntArrayList();
 		TLongArrayList cacheIdsA = new TLongArrayList();
 		TLongArrayList cacheIdsB = new TLongArrayList();
+		TLongArrayList cacheIdsC = new TLongArrayList();
 
 		MapObjectStat stat = new MapObjectStat();
 
@@ -1853,6 +1918,9 @@ public class BinaryMapIndexReader {
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
+			cacheIdsA.clear();
+			cacheIdsB.clear();
+			cacheIdsC.clear();
 			land = false;
 			ocean = false;
 			numberOfVisitedObjects = 0;
@@ -1886,8 +1954,6 @@ public class BinaryMapIndexReader {
 
 		// to speed up comparision
 		private MapIndex referenceMapIndex;
-
-		
 
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);
@@ -2139,8 +2205,8 @@ public class BinaryMapIndexReader {
 	}
 
 	private static class MapTree {
-		int filePointer = 0;
-		int length = 0;
+		long filePointer = 0;
+		long length = 0;
 
 		long mapDataBlock = 0;
 		Boolean ocean = null;
@@ -2166,11 +2232,11 @@ public class BinaryMapIndexReader {
 			return bottom;
 		}
 
-		public int getLength() {
+		public long getLength() {
 			return length;
 		}
 
-		public int getFilePointer() {
+		public long getFilePointer() {
 			return filePointer;
 		}
 
@@ -2386,7 +2452,7 @@ public class BinaryMapIndexReader {
 		for (TransportStop s : reader.searchTransportIndex(buildSearchTransportRequest(sleft, sright, stop, sbottom,
 				-1, null))) {
 			println(s.getName());
-			TIntObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
+			TLongObjectHashMap<TransportRoute> routes = reader.getTransportRoutes(s.getReferencesToRoutes());
 			for (net.osmand.data.TransportRoute route : routes.valueCollection()) {
 				println(" " + route.getRef() + " " + route.getName() + " " + route.getDistance() + " "
 						+ route.getAvgBothDistance());
@@ -2458,7 +2524,7 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.VAL_FIELD_NUMBER :
-				int val = readInt();
+				int val = (int) readInt(); // FIXME
 				for (int i = 0; i < queries.size(); i++) {
 					if (matched[i]) {
 						listOffsets.get(i).add(val);
@@ -2466,8 +2532,8 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			case OsmandOdb.IndexedStringTable.SUBTABLES_FIELD_NUMBER :
-				int len = codedIS.readRawVarint32();
-				int oldLim = codedIS.pushLimit(len);
+				long len = codedIS.readRawVarint32();
+				long oldLim = codedIS.pushLimitLong((long) len);
 				if (shouldWeReadSubtable && key != null) {
 					List<String> subqueries = new ArrayList<>(queries);
 					// reset query so we don't search what was not matched
@@ -2734,7 +2800,7 @@ public class BinaryMapIndexReader {
 			for (TransportIndex ti : transportIndexes) {
 				if (ti.incompleteRoutesLength > 0) {
 					codedIS.seek(ti.incompleteRoutesOffset);
-					int oldLimit = codedIS.pushLimit(ti.incompleteRoutesLength);
+					long oldLimit = codedIS.pushLimitLong((long) ti.incompleteRoutesLength);
 					transportAdapter.readIncompleteRoutesList(incompleteTransportRoutes, ti.filePointer);
 					codedIS.popLimit(oldLimit);
 				}
@@ -2815,5 +2881,11 @@ public class BinaryMapIndexReader {
 					break;
 			}
 		}
+	}
+
+	
+	@Override
+	public String toString() {
+		return file.getName();
 	}
 }

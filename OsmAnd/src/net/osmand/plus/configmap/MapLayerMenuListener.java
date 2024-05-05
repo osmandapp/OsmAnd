@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.configmap.tracks.TracksFragment;
+import net.osmand.plus.configmap.tracks.TracksTabsFragment;
 import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
@@ -42,7 +42,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			showPoiFilterDialog(uiAdapter, item);
 			return false;
 		} else if (itemId == R.string.layer_gpx_layer) {
-			TracksFragment.showInstance(mapActivity.getSupportFragmentManager());
+			TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager());
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			TransportLinesMenu.showTransportsDialog(mapActivity);
@@ -88,7 +88,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				selectedGpxHelper.clearAllGpxFilesToShow(true);
 				item.setDescription(selectedGpxHelper.getGpxDescription());
 			} else {
-				TracksFragment.showInstance(mapActivity.getSupportFragmentManager());
+				TracksTabsFragment.showInstance(mapActivity.getSupportFragmentManager());
 			}
 		} else if (itemId == R.string.rendering_category_transport) {
 			boolean selected = transportLinesMenu.isShowAnyTransport();

@@ -4155,7 +4155,7 @@
     <string name="shared_string_loading">Cargando</string>
     <string name="delete_smart_folder_dialog_message">Isto eliminará o cartafol intelixente \"%1$s\".</string>
     <string name="sort_size_ascending">Tamaño pequeno primeiro</string>
-    <string name="discard_filter_changes_prompt">¿Estás seguro de que queres restablecer todos os filtros\?</string>
+    <string name="discard_filter_changes_prompt">¿Estás seguro de que queres restablecer todos os filtros?</string>
     <string name="no_config_smart_folder_description">Os cartafoles intelixentes permiten agrupar pistas por filtros aplicados</string>
     <string name="widget_available_ram">RAM dispoñible</string>
     <string name="select_nav_profile_dialog_message">O \'Tipo de navegación\' selecciona como calculánse as rutas, con motores de rutas en liña e fóra de liña dispoñibles.</string>
@@ -4163,7 +4163,7 @@
     <string name="save_track_to_gpx_descrp">Inicia de xeito automático a gravación da pista mentres navegas e gárdarase despois.</string>
     <string name="loading_tracks">Recargando pistas</string>
     <string name="sort_country_name_descending">Nome do país: Z – A</string>
-    <string name="delete_map_description">¿Estás seguro de que queres eliminar o mapa de %1$s\?</string>
+    <string name="delete_map_description">¿Estás seguro de que queres eliminar o mapa de %1$s?</string>
     <string name="searching_matching_tracks">Procura todas as pistas coincidentes</string>
     <string name="maps_and_resources">Mapas e recursos</string>
 </resources>

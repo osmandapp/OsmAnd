@@ -42,6 +42,7 @@ import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.enums.TracksSortByMode;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -364,7 +365,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			} else if (card instanceof TrackEditCard) {
 				openPlanRoute(false);
 			} else if (card instanceof SelectTrackCard) {
-				updateSelectionMode(true);
+				SelectTrackTabsFragment.GpxFileSelectionListener gpxFileSelectionListener = gpxFile -> {
+					selectTrackToFollow(gpxFile, true);
+					updateSelectionMode(false);
+				};
+				SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), gpxFileSelectionListener);
 			} else if (card instanceof ReverseTrackCard
 					|| card instanceof NavigateTrackOptionsCard) {
 				updateMenu();
@@ -502,7 +507,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				items.add(new PopUpMenuItem.Builder(app)
 						.setTitleId(mode.getNameId())
 						.setIcon(app.getUIUtilities().getThemedIcon(mode.getIconId()))
-						.setOnClickListener(itemView -> {
+						.setOnClickListener(menuItem -> {
 							sortByMode = mode;
 							sortButton.setImageResource(mode.getIconId());
 							if (tracksCard != null) {
@@ -548,7 +553,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				if (!mapActivity.isChangingConfigurations()) {
 					mapActivity.getMapRouteInfoMenu().cancelSelectionFromTracks();
 				}
-				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				mapActivity.getMapLayers().getMapActionsHelper().showRouteInfoControlDialog();
 			}
 		} catch (Exception e) {
 			log.error(e);

@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.filters
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
@@ -7,9 +8,9 @@ import com.google.gson.JsonElement
 import net.osmand.plus.myplaces.tracks.TrackFiltersHelper
 import java.lang.reflect.Type
 
-class TrackFilterDeserializer(private val smartFolderHelper: SmartFolderHelper) :
+class TrackFilterDeserializer :
 	JsonDeserializer<BaseTrackFilter> {
-	val gson = GsonBuilder()
+	val gson: Gson = GsonBuilder()
 		.excludeFieldsWithoutExposeAnnotation()
 		.create()
 
@@ -17,9 +18,10 @@ class TrackFilterDeserializer(private val smartFolderHelper: SmartFolderHelper) 
 		json: JsonElement,
 		typeOfT: Type,
 		context: JsonDeserializationContext): BaseTrackFilter? {
-		var baseFilterObject = json.asJsonObject
-		var filterType = gson.fromJson(baseFilterObject.get("filterType"), FilterType::class.java)
-		var realFilterObjectType = TrackFiltersHelper.getFilterClass(filterType)
+		val baseFilterObject = json.asJsonObject
+		val trackFilterType =
+			gson.fromJson(baseFilterObject.get("filterType"), TrackFilterType::class.java)
+		val realFilterObjectType = TrackFiltersHelper.getFilterClass(trackFilterType)
 		return gson.fromJson(baseFilterObject, realFilterObjectType)
 	}
 }

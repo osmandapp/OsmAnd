@@ -34,6 +34,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 
 	public static final String TRACK_WIDTH_BOLD = "bold";
 	public static final String TRACK_WIDTH_MEDIUM = "medium";
+	public static final String TRACK_WIDTH_THIN = "thin";
 	public static final String SHOW_START_FINISH_ATTR = "show_start_finish_attr";
 
 	private final OsmandApplication app;
@@ -112,16 +113,17 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 	}
 
 	@NonNull
-	public static List<Integer> getTrackColors(@NonNull OsmandApplication app) {
+	public static List<AppearanceListItem> getUniqueTrackColorItems(@NonNull OsmandApplication app) {
 		List<Integer> colors = new ArrayList<>();
+		List<AppearanceListItem> result = new ArrayList<>();
 		for (AppearanceListItem item : getAppearanceItems(app, TRACK_COLOR)) {
 			if (!colors.contains(item.getColor())) {
 				colors.add(item.getColor());
+				result.add(item);
 			}
 		}
-		return colors;
+		return result;
 	}
-
 
 	public static List<AppearanceListItem> getAppearanceItems(@NonNull OsmandApplication app, GpxAppearanceAdapterType adapterType) {
 		return getAppearanceItems(app, adapterType, false);

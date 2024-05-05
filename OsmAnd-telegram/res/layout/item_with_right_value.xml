@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minHeight="@dimen/list_item_height_big"
+	android:background="?attr/selectableItemBackground"
+	android:paddingLeft="@dimen/content_padding_standard"
+	android:paddingRight="@dimen/content_padding_standard"
+	tools:background="@color/card_bg_light">
+
+	<ImageView
+		android:id="@+id/icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="@dimen/content_padding_big"
+		android:layout_marginRight="@dimen/content_padding_big"
+		android:layout_gravity="center_vertical"
+		tools:src="@drawable/ic_action_live_now"
+		tools:tint="@color/icon_light"/>
+
+		<net.osmand.telegram.ui.views.TextViewEx
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginEnd="@dimen/content_padding_standard"
+			android:layout_marginRight="@dimen/content_padding_standard"
+			android:layout_marginTop="@dimen/content_padding_small"
+			android:layout_marginBottom="@dimen/content_padding_small"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/list_item_title_text_size"
+			android:layout_gravity="center_vertical"
+			app:typeface="@string/font_roboto_regular"
+			tools:text="Some title"/>
+
+	<net.osmand.telegram.ui.views.TextViewEx
+		android:id="@+id/value"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:textColor="?attr/ctrl_active_color"
+		app:typeface="@string/font_roboto_medium"
+		tools:text="Value"/>
+
+</LinearLayout>

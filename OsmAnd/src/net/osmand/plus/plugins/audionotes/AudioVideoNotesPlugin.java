@@ -11,7 +11,6 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_RECORD_VIDEO;
 import static net.osmand.plus.views.mapwidgets.WidgetType.AV_NOTES_TAKE_PHOTO;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
@@ -61,7 +60,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
-import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.OsmandPlugin;
@@ -1887,8 +1886,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void bindCommonKeyEventCommands(InputDeviceProfile deviceProfile) {
-		deviceProfile.requestBindCommand(KeyEvent.KEYCODE_CAMERA, TakeMediaNoteCommand.ID);
+	public void addCommonKeyEventAssignments(@NonNull List<KeyAssignment> assignments) {
+		assignments.add(new KeyAssignment(TakeMediaNoteCommand.ID, KeyEvent.KEYCODE_CAMERA));
 	}
 
 	@Override
@@ -1899,7 +1898,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	@TargetApi(Build.VERSION_CODES.M)
 	@Override
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
 											   int[] grantResults) {

@@ -49,7 +49,7 @@ public class ParkingMapWidget extends SimpleWidget {
 			LatLon parkingPoint = plugin.getParkingPosition();
 			if (parkingPoint != null) {
 				int fZoom = Math.max(view.getZoom(), 15);
-				thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
+				thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom);
 			}
 		};
 	}

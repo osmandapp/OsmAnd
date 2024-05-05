@@ -1,39 +1,6 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSMAND_VERSION_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARKER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SHARE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.*;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CHOSEN_PROFILE_TAG;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_CONTROL_BUTTON_TAG;
 import static net.osmand.plus.widgets.ctxmenu.ViewCreator.PROFILES_NORMAL_PROFILE_TAG;
@@ -87,8 +54,6 @@ import net.osmand.plus.plugins.PluginsFragment;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
-import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.dialogs.DismissRouteBottomSheetFragment;
 import net.osmand.plus.profiles.data.ProfileDataObject;
@@ -106,7 +71,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.views.mapwidgets.configure.ConfigureScreenFragment;
+import net.osmand.plus.views.mapwidgets.configure.dialogs.ConfigureScreenFragment;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
 import net.osmand.plus.widgets.ctxmenu.ViewCreator;
@@ -380,12 +345,14 @@ public class MapActivityActions extends MapActions {
 	public boolean hasUiContext() {
 		return true;
 	}
+
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
 	                                           boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,
 				useIntermediatePointsByDefault, showMenu, menuState, false);
 	}
+
 	@Override
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
@@ -404,7 +371,7 @@ public class MapActivityActions extends MapActions {
 	public void recalculateRoute(boolean showDialog) {
 		super.recalculateRoute(showDialog);
 		if (showDialog) {
-			app.getOsmandMap().getMapLayers().getMapControlsLayer().showRouteInfoMenu();
+			app.getOsmandMap().getMapLayers().getMapActionsHelper().showRouteInfoMenu();
 		}
 	}
 
@@ -435,25 +402,15 @@ public class MapActivityActions extends MapActions {
 		List<ApplicationMode> activeModes = ApplicationMode.values(app);
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
 
-		String modeDescription;
-
 		RoutingProfilesHolder profiles = routingDataUtils.getRoutingProfiles();
 		for (ApplicationMode appMode : activeModes) {
-			if (appMode.isCustomProfile()) {
-				modeDescription = getProfileDescription(app, appMode, profiles, getString(R.string.profile_type_user_string));
-			} else {
-				modeDescription = getProfileDescription(app, appMode, profiles, getString(R.string.profile_type_osmand_string));
-			}
-
-			int tag = currentMode.equals(appMode) ? PROFILES_CHOSEN_PROFILE_TAG : PROFILES_NORMAL_PROFILE_TAG;
-
 			adapter.addItem(new ContextMenuItem(null)
 					.setLayout(R.layout.profile_list_item)
 					.setIcon(appMode.getIconRes())
 					.setColor(appMode.getProfileColor(nightMode))
-					.setTag(tag)
+					.setTag(currentMode == appMode ? PROFILES_CHOSEN_PROFILE_TAG : PROFILES_NORMAL_PROFILE_TAG)
 					.setTitle(appMode.toHumanString())
-					.setDescription(modeDescription)
+					.setDescription(getProfileDescription(appMode, profiles))
 					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.getSettings().setApplicationMode(appMode);
 						updateDrawerMenu();
@@ -554,11 +511,7 @@ public class MapActivityActions extends MapActions {
 					.setListener((uiAdapter, view, item, isChecked) -> {
 						app.logEvent("trip_recording_open");
 						MapActivity.clearPrevActivityIntent();
-						if (monitoringPlugin.hasDataToSave() || monitoringPlugin.wasTrackMonitored()) {
-							TripRecordingBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
-						} else {
-							TripRecordingStartingBottomSheet.showTripRecordingDialog(app, mapActivity);
-						}
+						monitoringPlugin.askShowTripRecordingDialog(mapActivity);
 						return true;
 					}));
 		}
@@ -570,7 +523,7 @@ public class MapActivityActions extends MapActions {
 					app.logEvent("drawer_directions_open");
 					MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
 					if (mapControlsLayer != null) {
-						mapControlsLayer.doRoute();
+						mapControlsLayer.getMapActionsHelper().doRoute();
 					}
 					return true;
 				}));
@@ -585,7 +538,7 @@ public class MapActivityActions extends MapActions {
 					return false;
 				}));
 
-		String d = getString(R.string.welmode_download_maps);
+		String d = getString(R.string.maps_and_resources);
 		if (app.getDownloadThread().getIndexes().isDownloadedFromInternet) {
 			List<IndexItem> updt = app.getDownloadThread().getIndexes().getItemsToUpdate();
 			if (updt != null && updt.size() > 0) {
@@ -593,7 +546,7 @@ public class MapActivityActions extends MapActions {
 			}
 		}
 		optionsMenuHelper.addItem(new ContextMenuItem(DRAWER_DOWNLOAD_MAPS_ID)
-				.setTitleId(R.string.welmode_download_maps, null)
+				.setTitleId(R.string.maps_and_resources, null)
 				.setTitle(d).setIcon(R.drawable.ic_type_archive)
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					app.logEvent("drawer_download_maps_open");
@@ -691,13 +644,6 @@ public class MapActivityActions extends MapActions {
 	private void createProfilesController(OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode, boolean listExpanded) {
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
-		String modeDescription;
-		RoutingProfilesHolder profiles = routingDataUtils.getRoutingProfiles();
-		if (currentMode.isCustomProfile()) {
-			modeDescription = getProfileDescription(app, currentMode, profiles, getString(R.string.profile_type_user_string));
-		} else {
-			modeDescription = getProfileDescription(app, currentMode, profiles, getString(R.string.profile_type_osmand_string));
-		}
 
 		int icArrowResId = listExpanded ? R.drawable.ic_action_arrow_drop_up : R.drawable.ic_action_arrow_drop_down;
 		int nextMode = listExpanded ? DRAWER_MODE_NORMAL : DRAWER_MODE_SWITCH_PROFILE;
@@ -707,7 +653,7 @@ public class MapActivityActions extends MapActions {
 				.setSecondaryIcon(icArrowResId)
 				.setColor(currentMode.getProfileColor(nightMode))
 				.setTitle(currentMode.toHumanString())
-				.setDescription(modeDescription)
+				.setDescription(getProfileDescription(currentMode))
 				.setListener((uiAdapter, view, item, isChecked) -> {
 					drawerMode = nextMode;
 					updateDrawerMenu();
@@ -724,10 +670,20 @@ public class MapActivityActions extends MapActions {
 				}));
 	}
 
-	private String getProfileDescription(@NonNull OsmandApplication app, @NonNull ApplicationMode mode,
-	                                     @NonNull RoutingProfilesHolder profiles,
-	                                     @NonNull String defaultDescription) {
-		String description = defaultDescription;
+	@NonNull
+	private String getProfileDescription(@NonNull ApplicationMode mode) {
+		return getProfileDescription(mode, routingDataUtils.getRoutingProfiles());
+	}
+
+	@NonNull
+	private String getProfileDescription(@NonNull ApplicationMode mode, @NonNull RoutingProfilesHolder profiles) {
+		String type = getString(mode.isCustomProfile() ? R.string.profile_type_user_string : R.string.profile_type_osmand_string);
+		return getProfileDescription(mode, profiles, type);
+	}
+
+	@NonNull
+	private String getProfileDescription(@NonNull ApplicationMode mode, @NonNull RoutingProfilesHolder profiles, @NonNull String defValue) {
+		String description = defValue;
 		String routingProfileKey = mode.getRoutingProfile();
 		String derivedProfile = mode.getDerivedProfile();
 		if (!Algorithms.isEmpty(routingProfileKey)) {
@@ -818,7 +774,7 @@ public class MapActivityActions extends MapActions {
 		menu.show();
 	}
 
-	protected void updateDrawerMenu() {
+	public void updateDrawerMenu() {
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		ListView menuItemsListView = mapActivity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));

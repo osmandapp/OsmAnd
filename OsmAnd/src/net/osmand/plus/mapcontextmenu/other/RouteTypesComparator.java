@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.osm.OsmRouteType.*;
+
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -8,7 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import net.osmand.router.network.NetworkRouteSelector.RouteType;
+import net.osmand.osm.OsmRouteType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,28 +18,6 @@ import java.util.Comparator;
 import java.util.List;
 
 class RouteTypesComparator implements Comparator<MenuObject> {
-
-	private String ROUTE_BICYCLE = "bicycle";
-	private String ROUTE_BUS = "bus";
-	private String ROUTE_CANOE = "canoe";
-	private String ROUTE_DETOUR = "detour";
-	private String ROUTE_FERRY = "ferry";
-	private String ROUTE_FOOT = "foot";
-	private String ROUTE_HIKING = "hiking";
-	private String ROUTE_HORSE = "horse";
-	private String ROUTE_INLINE_SKATES = "inline_skates";
-	private String ROUTE_LIGHT_RAIL = "light_rail";
-	private String ROUTE_MTB = "mtb";
-	private String ROUTE_PISTE = "piste";
-	private String ROUTE_RAILWAY = "railway";
-	private String ROUTE_ROAD = "road";
-	private String ROUTE_RUNNING = "running";
-	private String ROUTE_SKI = "ski";
-	private String ROUTE_SUBWAY = "subway";
-	private String ROUTE_TRAIN = "train";
-	private String ROUTE_TRACKS = "tracks";
-	private String ROUTE_TRAM = "tram";
-	private String ROUTE_TROLLEYBUS = "trolleybus";
 
 	private final ApplicationMode appMode;
 	private final List<String> orderedRouteTypes = new ArrayList<>();
@@ -51,39 +31,29 @@ class RouteTypesComparator implements Comparator<MenuObject> {
 		orderedRouteTypes.clear();
 
 		addRouteTypes(ApplicationMode.CAR,
-				ROUTE_ROAD, ROUTE_DETOUR, ROUTE_BICYCLE, ROUTE_MTB);
-
+				ROAD.getName(), DETOUR.getName(), BICYCLE.getName(), MOUNTAINBIKE.getName());
 		addRouteTypes(ApplicationMode.BICYCLE,
-				ROUTE_BICYCLE, ROUTE_MTB, ROUTE_ROAD, ROUTE_DETOUR);
-
+				BICYCLE.getName(), MOUNTAINBIKE.getName(), ROAD.getName(), DETOUR.getName());
 		addRouteTypes(ApplicationMode.PEDESTRIAN,
-				ROUTE_FOOT, ROUTE_HIKING, ROUTE_RUNNING);
-
+				FOOT.getName(), HIKING.getName(), RUNNING.getName());
 		addRouteTypes(ApplicationMode.TRUCK,
-				ROUTE_ROAD, ROUTE_DETOUR, ROUTE_BICYCLE, ROUTE_MTB);
-
+				ROAD.getName(), DETOUR.getName(), BICYCLE.getName(), MOUNTAINBIKE.getName());
 		addRouteTypes(ApplicationMode.MOTORCYCLE,
-				ROUTE_ROAD, ROUTE_DETOUR, ROUTE_BICYCLE, ROUTE_MTB);
-
+				ROAD.getName(), DETOUR.getName(), BICYCLE.getName(), MOUNTAINBIKE.getName());
 		addRouteTypes(ApplicationMode.MOPED,
-				ROUTE_ROAD, ROUTE_DETOUR, ROUTE_BICYCLE, ROUTE_MTB);
-
+				ROAD.getName(), DETOUR.getName(), BICYCLE.getName(), MOUNTAINBIKE.getName());
 		addRouteTypes(ApplicationMode.PUBLIC_TRANSPORT,
-				ROUTE_BUS, ROUTE_TRAM, ROUTE_TROLLEYBUS, ROUTE_SUBWAY, ROUTE_TRAIN,
-				ROUTE_RAILWAY, ROUTE_TRACKS, ROUTE_LIGHT_RAIL, ROUTE_PISTE);
-
+				BUS.getName(), TRAM.getName(), TROLLEYBUS.getName(), SUBWAY.getName(), TRAIN.getName(),
+				RAILWAY.getName(), TRACKS.getName(), LIGHT_RAIL.getName(), PISTE.getName());
 		addRouteTypes(ApplicationMode.TRAIN,
-				ROUTE_TRAIN, ROUTE_LIGHT_RAIL, ROUTE_TRACKS, ROUTE_SUBWAY, ROUTE_TRAM);
-
-		addRouteTypes(ApplicationMode.BOAT, ROUTE_FERRY, ROUTE_CANOE);
-
+				TRAIN.getName(), LIGHT_RAIL.getName(), TRACKS.getName(), SUBWAY.getName(), TRAM.getName());
+		addRouteTypes(ApplicationMode.BOAT,
+				FERRY.getName(), CANOE.getName());
 		/*addRouteTypes(ApplicationMode.AIRCRAFT);*/ // No available types yet
-
 		addRouteTypes(ApplicationMode.SKI,
-				ROUTE_SKI, ROUTE_INLINE_SKATES);
-
+				SKI.getName(), INLINE_SKATES.getName());
 		addRouteTypes(ApplicationMode.HORSE,
-				ROUTE_HORSE);
+				HORSE.getName());
 	}
 
 	private void addRouteTypes(@NonNull ApplicationMode baseAppMode, @NonNull String ... routeTypes) {
@@ -149,8 +119,8 @@ class RouteTypesComparator implements Comparator<MenuObject> {
 			Object firstObject = pair.first;
 			if (firstObject instanceof RouteKey) {
 				RouteKey routeKey = (RouteKey) firstObject;
-				RouteType routeType = routeKey.type;
-				return routeType != null ? routeType.getTag() : null;
+				OsmRouteType routeType = routeKey.type;
+				return routeType != null ? routeType.getName() : null;
 			}
 		}
 		return null;

@@ -37,7 +37,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -716,6 +716,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		return ColorUtilities.getListBgColorId(deviceNightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	public void showSearchLocationWizard(boolean updateWizardView, boolean searchByIp) {
 		searchLocationByIp = searchByIp;
 		setWizardType(WizardType.SEARCH_LOCATION, updateWizardView);
@@ -815,18 +819,16 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 		Log.e(TAG, "Error: " + msg, e);
 	}
 
-	public static boolean showFragment(@Nullable FragmentActivity activity) {
-		if (!wizardClosed && activity != null) {
-			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (!fragmentManager.isStateSaved()) {
-				FirstUsageWizardFragment fragment = new FirstUsageWizardFragment();
-				fragment.showAppropriateWizard(activity, false);
-				activity.getSupportFragmentManager()
-						.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, TAG)
-						.commitAllowingStateLoss();
-				return true;
-			}
+	public static boolean showFragment(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (!wizardClosed && AndroidUtils.isFragmentCanBeAdded(manager, TAG, true)) {
+			FirstUsageWizardFragment fragment = new FirstUsageWizardFragment();
+			fragment.showAppropriateWizard(activity, false);
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.commitAllowingStateLoss();
+			return true;
 		}
 		return false;
 	}

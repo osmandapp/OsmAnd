@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class PoiType extends AbstractPoiType {
+
+	public static final int DEFAULT_ORDER = 90;
 	
 	private PoiCategory category;
 	private PoiFilter filter;
@@ -25,7 +27,7 @@ public class PoiType extends AbstractPoiType {
 	private boolean text;
 	private boolean nameOnly;
 	private boolean relation;
-	private int order = 90;
+	private int order = DEFAULT_ORDER;
 
 
 	public PoiType(MapPoiTypes poiTypes, PoiCategory category, PoiFilter filter, String keyName) {

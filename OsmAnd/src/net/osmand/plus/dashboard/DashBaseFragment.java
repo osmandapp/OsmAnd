@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -141,7 +142,7 @@ public abstract class DashBaseFragment extends Fragment {
 	}
 
 	@ColorInt
-	protected int getColor(@ColorInt int resId) {
+	protected int getColor(@ColorRes int resId) {
 		return ColorUtilities.getColor(getContext(), resId);
 	}
 

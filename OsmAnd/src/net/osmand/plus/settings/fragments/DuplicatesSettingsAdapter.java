@@ -17,9 +17,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.avoidroads.AvoidRoadInfo;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -31,12 +30,14 @@ import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.profiles.data.RoutingProfilesResources;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationModeBean;
+import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -128,10 +129,10 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 				int actualIconColor = customIconColor != null ?
 						customIconColor : ContextCompat.getColor(app, iconColor.getColor(nightMode));
 				itemHolder.icon.setImageDrawable(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
-			} else if (currentItem instanceof QuickAction) {
-				QuickAction action = (QuickAction) currentItem;
-				itemHolder.title.setText(action.getName(app));
-				itemHolder.icon.setImageDrawable(uiUtilities.getIcon(action.getIconRes(), activeColorRes));
+			} else if (currentItem instanceof QuickActionButtonState) {
+				QuickActionButtonState buttonState = (QuickActionButtonState) currentItem;
+				itemHolder.title.setText(buttonState.getName());
+				itemHolder.icon.setImageDrawable(buttonState.getIcon(nightMode, false, ColorUtilities.getColor(app, activeColorRes)));
 			} else if (currentItem instanceof PoiUIFilter) {
 				PoiUIFilter filter = (PoiUIFilter) currentItem;
 				itemHolder.title.setText(filter.getName());
@@ -167,7 +168,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					itemHolder.icon.setImageDrawable(uiUtilities.getIcon(fileSubtype.getIconId(), activeColorRes));
 				}
 			} else if (currentItem instanceof AvoidRoadInfo) {
-				itemHolder.title.setText(((AvoidRoadInfo) currentItem).name);
+				itemHolder.title.setText(((AvoidRoadInfo) currentItem).getName(app));
 				itemHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_alert, activeColorRes));
 			} else if (currentItem instanceof FavoriteGroup) {
 				itemHolder.title.setText(((FavoriteGroup) currentItem).getDisplayName(app));

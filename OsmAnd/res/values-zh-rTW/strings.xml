@@ -278,7 +278,7 @@
     <string name="zoom_by_trackball_descr">以軌跡球水平移動改變地圖縮放。</string>
     <string name="zoom_by_trackball">以軌跡球控制地圖縮放</string>
     <string name="accessibility_preferences_descr">無障礙相關的偏好設定。</string>
-    <string name="shared_string_accessibility">無障礙</string>
+    <string name="shared_string_accessibility">無障礙設施</string>
     <string name="rendering_out_of_memory">處理記憶體不足，無法顯示已選取的區域</string>
     <string name="use_fluorescent_overlays">螢光層</string>
     <string name="use_fluorescent_overlays_descr">使用螢光色彩來顯示軌跡與導航路線。</string>
@@ -928,7 +928,7 @@
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="map_widget_audionotes">音訊註解</string>
     <string name="audionotes_plugin_description">在旅程中取得音訊／相片／視訊註記，使用地圖按鈕或位置情境選單。</string>
-    <string name="audionotes_plugin_name">音訊/視訊附註</string>
+    <string name="audionotes_plugin_name">語音/影音註記</string>
     <string name="srtm_plugin_name">地形</string>
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
@@ -1197,7 +1197,7 @@
     <string name="rendering_attr_moreDetailed_name">更多細節</string>
     <string name="rendering_attr_lessDetailed_name">較少細節</string>
     <string name="rendering_attr_hideAccess_name">存取限制</string>
-    <string name="rendering_attr_showAccess_name">顯示進入限制</string>
+    <string name="rendering_attr_showAccess_name">顯示進入與收費限制</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
     <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
@@ -1716,7 +1716,7 @@
     <string name="map_legend">地圖圖例</string>
     <string name="shared_string_upload">上傳</string>
     <string name="shared_string_update">更新</string>
-    <string name="rendering_attr_showProposed_name">已提出的物件</string>
+    <string name="rendering_attr_showProposed_name">計劃物件</string>
     <string name="read_more">讀取更多</string>
     <string name="whats_new">有什麼新的在</string>
     <!-- string name="map_legend_item_description">圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示</string -->
@@ -2188,7 +2188,7 @@
     <string name="nearest_cities">最近的城市</string>
     <string name="select_city">選擇城市</string>
     <string name="select_postcode">郵遞區號搜尋</string>
-    <string name="quick_action_auto_zoom">自動縮放地圖開/關</string>
+    <string name="quick_action_auto_zoom">自動縮放地圖</string>
     <string name="quick_action_auto_zoom_on">開啟自動縮放</string>
     <string name="quick_action_auto_zoom_off">關閉自動縮放</string>
     <string name="quick_action_add_destination">設定目的地</string>
@@ -3175,7 +3175,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">空中航道</string>
     <string name="rendering_attr_piste_difficulty_connection_name">連線</string>
     <string name="shared_string_calculate">計算</string>
-    <string name="shared_string_osmand_usage">OsmAnd 用法</string>
+    <string name="shared_string_osmand_usage">OsmAnd 空間使用</string>
     <string name="shared_string_tiles">圖磚</string>
     <string name="shared_string_maps">地圖</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
@@ -4464,7 +4464,7 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">顯示註記標籤</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">低縮放程度的圖示</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">低縮放程度圖示的示意圖</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">水路隧道</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">不要隱藏水路隧道</string>
     <string name="rendering_attr_showWaterwayTunnels_description">不要隱藏水路隧道</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Fixme 標籤</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4491,7 +4491,7 @@
     <string name="location_source_descr">預設情況下，從 Google Play 安裝的 OsmAnd 會使用 %1$s 來確認位置。
 \n
 \n若您得到了不準確的位置資訊，或是使用沒有 %2$s 的裝置，請嘗試切換至「%3$s」</string>
-    <string name="location_source">位置來源</string>
+    <string name="location_source">定位服務</string>
     <string name="shared_string_shape">形狀</string>
     <string name="default_appearance_desc">預設色彩、圖示與形狀將會套用到新增至群組中的收藏點。</string>
     <string name="default_appearance">預設外觀</string>
@@ -4649,8 +4649,8 @@
     <string name="map_widget_time_to_intermediate">到中轉點的時間</string>
     <string name="map_widget_distance_to_intermediate">到中轉點的距離</string>
     <string name="radius_ruler_mode_desc">點擊小工具來切換至半徑尺規模式。</string>
-    <string name="average_speed_skip_stops">考慮停止</string>
-    <string name="average_speed_time_interval_desc">指定速度平均的時間間隔。</string>
+    <string name="average_speed_skip_stops">考慮停止時間</string>
+    <string name="average_speed_time_interval_desc">指定平均速度的時間區間。</string>
     <string name="average_speed_widget_desc">顯示目前旅程的平均速度。</string>
     <string name="map_widget_average_speed">平均速率</string>
     <string name="lang_sat">桑塔利文</string>
@@ -4743,7 +4743,7 @@
     <string name="download_tiles">下載圖磚</string>
     <string name="available_as_part_of_subscription_plan">作為 %1$s 訂閱的一部分提供。</string>
     <string name="included_in_your_current_plan">包含在您目前的「%1$s」方案中</string>
-    <string name="favorite_confirm_delete_group">您確定您想要刪除「%1$s」群組與其中所有包含的點 (%2$d) 嗎？</string>
+    <string name="favorite_confirm_delete_group">刪除「%1$s」群組與其中所有包含的點 (%2$d) 嗎？</string>
     <string name="favorite_delete_group">刪除群組</string>
     <string name="download_heightmap_maps">高度圖</string>
     <string name="shared_string_normal">正常</string>
@@ -5009,7 +5009,6 @@
     <string name="sound_beep_minimal">蜂鳴器：最小</string>
     <string name="last_synchronized">最後同步</string>
     <string name="display_position_automatic_descr">取決於地圖方向：底部為移動方向，中心為其他所有方向。</string>
-    <string name="change_default_tracks_appearance_confirmation_description">變更 %1$s 軌跡的外觀？</string>
     <string name="empty_tracks">您沒有軌跡檔案。</string>
     <string name="shared_string_apply_changes">套用變更</string>
     <string name="shared_string_select_recent">選取最近</string>
@@ -5159,7 +5158,7 @@
     <string name="is_imported">%1$s 已匯入。</string>
     <string name="file_already_exists_description">「%1$s」。同名檔案已存在。取代將會覆寫對目前版本的所有變動。</string>
     <string name="file_already_exists">檔案已存在</string>
-    <string name="nav_profile_confirm_delete">您確定要刪除「%1$s」嗎？</string>
+    <string name="nav_profile_confirm_delete">刪除「%1$s」嗎？</string>
     <string name="no_search_results">無結果</string>
     <string name="search_track_by_name">透過名稱搜尋軌跡</string>
     <string name="number_of_tracks">%1$s 個軌跡</string>
@@ -5228,7 +5227,7 @@
     <string name="osmand_cloud_deleting_account_descr">稍後，您所有的資料與帳號將從 OsmAnd Cloud 中刪除。
 \n
 \n裝置上的所有資料均保持不變。</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">您確定您想要刪除 OsmAnd Cloud 帳號嗎？
+    <string name="osmand_cloud_delete_account_confirmation_descr">刪除 OsmAnd Cloud 帳號嗎？
 \n
 \n此動作無法還原。</string>
     <string name="osmand_cloud_delete_account_confirmation">刪除帳號？</string>
@@ -5237,7 +5236,7 @@
     <string name="osmand_cloud_deletion_account_warning">您的帳號與所有帳號詳細資訊都將會 %1$s</string>
     <string name="osmand_cloud_deletion_all_data_warning">所有來自 OsmAnd Cloud 的資料都將會 %1$s。裝置上的資料會維持不變。</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">這不會取消您的 OsmAnd Pro 訂閱。</string>
-    <string name="delete_account_warning">您確定您想要刪除 %1$s 帳號嗎？</string>
+    <string name="delete_account_warning">刪除 %1$s 帳號嗎？</string>
     <string name="shared_string_deleting">正在刪除</string>
     <string name="deleting_complete">刪除完成</string>
     <string name="delete_account">刪除帳號</string>
@@ -5340,31 +5339,31 @@
     <string name="external_sensor_name_property_description">偵測器名稱</string>
     <string name="contact_us">聯絡我們</string>
     <string name="help_article_map_interact_with_map_name">與地圖互動</string>
-    <string name="help_article_map_legend_nautical_map_name">航海圖樣式</string>
-    <string name="help_article_map_legend_osmand_name">OsmAnd 地圖樣式</string>
-    <string name="help_article_map_legend_ski_map_name">滑雪地圖樣式</string>
-    <string name="help_article_map_map_context_menu_name">地圖情境選單</string>
-    <string name="help_article_map_point_layers_on_map_name">地圖上的點</string>
-    <string name="help_article_map_raster_maps_name">點陣地圖（線上/離線）</string>
-    <string name="help_article_map_vector_maps_name">向量地圖（地圖樣式）</string>
+    <string name="help_article_map_legend_nautical_map_name">航海圖地圖風格</string>
+    <string name="help_article_map_legend_osmand_name">OsmAnd 地圖風格</string>
+    <string name="help_article_map_legend_ski_map_name">滑雪地圖風格</string>
+    <string name="help_article_map_map_context_menu_name">地圖內容選單</string>
+    <string name="help_article_map_point_layers_on_map_name">地圖上的點位</string>
+    <string name="help_article_map_raster_maps_name">點陣地圖 (線上/離線)</string>
+    <string name="help_article_map_vector_maps_name">向量地圖 (地圖樣式)</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="help_article_navigation_guidance_name">導引</string>
-    <string name="help_article_navigation_guidance_map_during_navigation_name">導航期間的地圖畫面</string>
-    <string name="help_article_navigation_guidance_voice_navigation_name">語音提示/通知</string>
-    <string name="help_article_navigation_setup_gpx_navigation_name">按軌跡導航</string>
-    <string name="help_article_navigation_setup_markers_navigation_name">按標記導航</string>
-    <string name="help_article_navigation_setup_route_details_name">路線詳細資訊</string>
-    <string name="help_article_plan_route_web_name">網路路線規劃程式</string>
+    <string name="help_article_navigation_guidance_name">導航指引</string>
+    <string name="help_article_navigation_guidance_map_during_navigation_name">導航時的地圖螢幕</string>
+    <string name="help_article_navigation_guidance_voice_navigation_name">語音介面 / 通知</string>
+    <string name="help_article_navigation_setup_gpx_navigation_name">經由路徑導航</string>
+    <string name="help_article_navigation_setup_markers_navigation_name">經由標記導航</string>
+    <string name="help_article_navigation_setup_route_details_name">路線詳情</string>
+    <string name="help_article_plan_route_web_name">網路路徑規劃</string>
     <string name="help_article_purchases_android_name">Android 購買</string>
-    <string name="help_article_purchases_giveaway_name">贈送</string>
+    <string name="help_article_purchases_giveaway_name">禮物</string>
     <string name="help_article_purchases_ios_name">iOS 購買</string>
-    <string name="help_article_search_search_all_name">搜尋全部</string>
+    <string name="help_article_search_search_all_name">搜尋所有</string>
     <string name="help_article_search_search_coordinates_name">搜尋座標</string>
     <string name="help_article_search_search_poi_name">搜尋 POI</string>
-    <string name="help_article_start_with_name">使用 OsmAnd 開始</string>
+    <string name="help_article_start_with_name">用 OsmAnd 開始</string>
     <string name="help_article_start_with_first_steps_name">第一步</string>
-    <string name="help_article_start_with_main_menu_name">主選單</string>
+    <string name="help_article_start_with_main_menu_name">主要選單</string>
     <string name="help_article_widgets_markers_name">標記小工具</string>
     <string name="help_article_widgets_nav_widgets_name">導航小工具</string>
     <string name="help_article_widgets_radius_ruler_name">半徑尺規與尺規</string>
@@ -5372,11 +5371,11 @@
     <string name="report_an_issues">回報問題</string>
     <string name="copy_build_version">複製建構版本</string>
     <string name="most_viewed">最多檢視</string>
-    <string name="help_article_map_track_context_menu_name">軌跡情境選單</string>
-    <string name="help_article_navigation_routing_name">路線規劃參數</string>
-    <string name="help_article_navigation_routing_bicycle_based_routing_name">腳踏車路線 (MTB)</string>
-    <string name="help_article_map_tracks_on_map_name">軌跡與路線</string>
-    <string name="help_article_navigation_routing_boat_navigation_name">船隻路線</string>
+    <string name="help_article_map_track_context_menu_name">軌跡選單內容</string>
+    <string name="help_article_navigation_routing_name">路徑參數</string>
+    <string name="help_article_navigation_routing_bicycle_based_routing_name">單車導航 (登山車)</string>
+    <string name="help_article_map_tracks_on_map_name">軌跡與路徑</string>
+    <string name="help_article_navigation_routing_boat_navigation_name">船隻導航</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_car_based_routing_name">汽車路線（卡車、摩托車）</string>
     <string name="help_article_navigation_routing_direct_to_point_routing_name">直接到點路線規劃（船）</string>
@@ -5384,7 +5383,7 @@
     <string name="help_article_navigation_routing_moped_routing_name">輕便摩托車路線</string>
     <string name="help_article_navigation_setup_route_navigation_name">路線準備</string>
     <string name="help_article_plan_route_coordinate_input_name">座標輸入</string>
-    <string name="help_article_troubleshooting_crash_logs_name">當機紀錄檔</string>
+    <string name="help_article_troubleshooting_crash_logs_name">當機記錄</string>
     <string name="help_article_widgets_name">地圖小工具</string>
     <string name="help_article_widgets_info_widgets_name">資訊小工具</string>
     <string name="shared_string_setup">設定</string>
@@ -5399,40 +5398,44 @@
     <string name="user_guide">使用者指南</string>
     <string name="free_versions_descr">下載並安裝免費的 OsmAnd 版本</string>
     <string name="help_article_navigation_routing_osmand_routing_name">關於 OsmAnd 路線</string>
-    <string name="help_article_personal_import_export_name">匯入/匯出</string>
+    <string name="help_article_personal_import_export_name">匯入 / 匯出</string>
     <string name="help_article_troubleshooting_maps_data_name">地圖與資料</string>
     <string name="free_versions">免費版本</string>
-    <string name="help_article_personal_profiles_name">設定檔（設定）</string>
+    <string name="help_article_personal_profiles_name">設定檔 (設定)</string>
     <string name="help_article_plan_route_name">計畫路線</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">軌跡錄製</string>
     <string name="about_osmand">關於 OsmAnd</string>
-    <string name="help_article_navigation_routing_pedestrian_routing_name">步行路線</string>
+    <string name="help_article_navigation_routing_pedestrian_routing_name">行人導航</string>
     <string name="help_article_personal_storage_name">儲存空間</string>
     <string name="send_logcat_log_descr">詳細的紀錄檔</string>
     <string name="send_crash_log_descr">僅包含關於當機的資訊</string>
-    <string name="help_article_navigation_routing_public_transport_navigation_name">大眾運輸路線</string>
-    <string name="help_article_navigation_routing_ski_routing_name">滑雪路線</string>
-    <string name="help_article_navigation_routing_straight_line_routing_name">直線路線規劃（飛機）</string>
-    <string name="help_article_navigation_routing_train_routing_name">火車路線</string>
+    <string name="help_article_navigation_routing_public_transport_navigation_name">大眾運輸導航</string>
+    <string name="help_article_navigation_routing_ski_routing_name">滑雪導航</string>
+    <string name="help_article_navigation_routing_straight_line_routing_name">直線導航 (飛行器)</string>
+    <string name="help_article_navigation_routing_train_routing_name">火車導航</string>
     <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat={0}、lon={1}、timestamp={2}、hdop={3}、altitude={4}、speed={5}、bearing={6}、 eta= {7}、etfa={8}、eda={9}、edfa={10}。</string>
     <string name="shared_string_temperature">溫度</string>
-    <string name="release_4_6">• 新增變更外部輸入裝置按鍵綁定的功能
+    <string name="release_4_6">• Android Auto：新增 3D 模式
 \n
-\n • 新增「滑翔比」小工具
+\n • 軌跡：引入了篩選條件與智慧型資料夾，改善了較大檔案的記憶體使用量
 \n
-\n • 新增軌跡的篩選條件與智慧型資料夾
+\n • 強化的頂部與底部小工具面板以容納所有小工具
 \n
-\n • 新增頂部與底部小工具面板的列，並支援所有小工具
+\n • 改善的本機資源管理
 \n
-\n • 新增對 ANT+ 溫度小工具的支援
+\n • 外部控制器的可自訂按鈕對應
 \n
-\n • 改善大型 GPX 軌跡的記憶體管理
+\n • 新的小工具：「滑翔比」與「太陽位置」
 \n
-\n • 更新了「下載」資料夾中的本機資源管理
+\n • OsmAnd Cloud：現在可以存取已刪除的檔案
 \n
-\n • 新增小工具「可用記憶體」
+\n • 使用新的對稱漸層強化坡度模式下的軌跡著色
 \n
-\n • 修復透明狀態列的問題
+\n • 解決了透明狀態列的問題
+\n
+\n • 新增了對 ANT+ 溫度小工具的支援
+\n
+\n • 引入了「可用記憶體」小工具
 \n
 \n</string>
     <string name="sensor_temperature_desc">顯示來自偵測器的溫度</string>
@@ -5464,7 +5467,7 @@
     <string name="widget_available_ram">可用 RAM</string>
     <string name="terrain_maps">地形圖</string>
     <string name="sort_country_name_descending">國家名稱：Z – A</string>
-    <string name="delete_map_description">您確定您想要刪除 %1$s 地圖嗎？</string>
+    <string name="delete_map_description">刪除 %1$s 地圖嗎？</string>
     <string name="maps_and_resources">地圖與資源</string>
     <string name="smart_folder_name_present">這樣的 Smart Folder 已存在</string>
     <string name="smart_folder_saved">已儲存 Smart Folder</string>
@@ -5474,25 +5477,23 @@
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
     <string name="delete_smart_folder_dialog_message">這將會刪除「%1$s」智慧型資料夾。</string>
     <string name="empty_smart_folder_title">沒有相符的軌跡</string>
-    <string name="empty_smart_folder_description">所有相符的軌跡將會自動出現在此</string>
+    <string name="empty_smart_folder_description">相符的軌跡會出現在此</string>
     <string name="configure_filter">設定篩選條件</string>
     <string name="no_config_smart_folder_title">未設定</string>
     <string name="discard_filter_changes">放棄篩選條件變更</string>
     <string name="shared_string_loading">正在載入</string>
-    <string name="discard_filter_changes_prompt">您確定您想要重設所有篩選條件嗎？</string>
+    <string name="discard_filter_changes_prompt">重設所有篩選條件嗎？</string>
     <string name="no_config_smart_folder_description">智慧型資料夾允許透過套用的篩選條件對軌跡分組</string>
     <string name="loading_tracks">正在重新載入軌跡</string>
     <string name="searching_matching_tracks">搜尋所有相符的軌跡</string>
     <plurals name="tracks">
         <item quantity="other">%1$d（%2$d 個軌跡）</item>
     </plurals>
-    <string name="cloud_trash_clear_confirmation">您確定要永久刪除回收桶中的所有項目嗎？此動作無法還原。</string>
+    <string name="cloud_trash_clear_confirmation">永久刪除垃圾桶中的所有項目嗎？</string>
     <string name="restore_from_trash">從回收桶還原</string>
     <string name="delete_all_items">刪除所有項目</string>
     <string name="trash_is_empty_banner_desc">從 OsmAnd Cloud 移除的檔案將在%1$s天後在此處可用。</string>
-    <string name="delete_trash_item_confirmation_desc">「%1$s」將會永久刪除。您確定嗎？
-\n
-\n此動作無法還原。</string>
+    <string name="delete_trash_item_confirmation_desc">永久刪除「%1$s」嗎？</string>
     <string name="shared_string_empty_trash">清空回收桶</string>
     <string name="shared_string_delete_immediately">立刻刪除</string>
     <string name="shared_string_is_deleted">%1$s 已刪除。</string>
@@ -5521,7 +5522,7 @@
     <string name="key_event_action_take_media_note">記下媒體附註</string>
     <string name="key_event_action_activity_back_pressed">按下返回活動</string>
     <string name="key_event_action_emit_navigation_hint">發出導航提示</string>
-    <string name="remove_type_q">您真的想要移除「%1$s」類型嗎？</string>
+    <string name="remove_type_q">移除「%1$s」類型嗎？</string>
     <string name="shared_string_action">動作</string>
     <string name="add_new_type">新增類型</string>
     <string name="key_event_action_move_up">向上移動</string>
@@ -5542,7 +5543,7 @@
     <string name="download_to_device">下載到裝置</string>
     <string name="remove_widget_first">請先移除小工具</string>
     <string name="add_row">新增列</string>
-    <string name="discard_changes_prompt">您確定您要放棄變更嗎？</string>
+    <string name="discard_changes_prompt">放棄變更嗎？</string>
     <string name="row_number">列 %1$s</string>
     <string name="tripltek_promo">Tripltek 促銷%1$s個月</string>
     <string name="tripltek_promo_description">免費使用無限地圖下載、3D 地形陰影等功能%1$s個月</string>
@@ -5558,4 +5559,150 @@
     <string name="shared_string_eta">預計到達時間</string>
     <string name="rendering_attr_showToll_name">顯示通行費限制</string>
     <string name="rendering_attr_showToll_description">顯示道路通行費限制</string>
+    <string name="lang_zh_hans">簡體中文</string>
+    <string name="lang_zh_hant">正體中文</string>
+    <string name="zoom_non_animated">非動畫縮放</string>
+    <string name="zoom_animated">動畫縮放</string>
+    <string name="button_already_assigned_to_this_action">按鈕已分配給此動作。</string>
+    <string name="key_assignments_already_cleared_message">所有按鍵分配都已清除</string>
+    <string name="add_new_button">新增按鈕</string>
+    <string name="use_v1_auto_zoom">單獨自動縮放（舊版本）</string>
+    <string name="shared_string_next_event">下次事件</string>
+    <string name="map_widget_sun_position">太陽位置</string>
+    <string name="map_widget_sun_position_desc">顯示到日出或日落之前的時間。</string>
+    <string name="previous_row_has_complex_widget">上一列有複雜的小工具</string>
+    <string name="complex_widget_alert">%1$s 小工具只能放在自己的列上。</string>
+    <string name="precise_distance_numbers">精確的距離數字</string>
+    <string name="any_connected">任何已連線</string>
+    <string name="any_connected_with_device">任何已連結的：%s</string>
+    <string name="shared_string_road_maps">道路地圖</string>
+    <string name="shared_string_all_tracks">所有軌跡</string>
+    <string name="shared_string_license">授權條款</string>
+    <string name="shared_string_link">連結</string>
+    <string name="shared_string_copyright">著作權</string>
+    <string name="shared_string_author">作者</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_extensions">擴充套件</string>
+    <string name="battery_optimization_banner_content">Android 電池最佳化可能導致錄製的軌跡出現空白或不準確。</string>
+    <string name="dont_ask_anymore">不再詢問</string>
+    <string name="battery_optimization_settings">電池最佳化設定</string>
+    <string name="battery_optimization_desc">Android 中的電池最佳化可能導致錄製的軌跡出現空白或不準確。
+\n
+\n若您遇到這些問題，可以試試看將電池使用改為「無限制」</string>
+    <string name="battery_optimization">電池最佳化</string>
+    <string name="max_sensor_heartrate">最大心率</string>
+    <string name="avg_sensor_heartrate">平均心率</string>
+    <string name="max_sensor_cadence">腳踏車最大踏頻</string>
+    <string name="avg_sensor_cadence">腳踏車平均踏頻</string>
+    <string name="max_sensor_bycicle_power">腳踏車最大功率</string>
+    <string name="avg_sensor_bycicle_power">腳踏車平均功率</string>
+    <string name="max_sensor_speed">最大感應器速度</string>
+    <string name="avg_sensor_speed">平均感應器速度</string>
+    <string name="max_sensor_temperature">最大溫度</string>
+    <string name="avg_sensor_temperature">平均溫度</string>
+    <string name="shared_string_keywords">關鍵字</string>
+    <string name="sort_subfolders">排序子資料夾</string>
+    <string name="shared_string_activity">活動</string>
+    <string name="shared_string_additional">附加</string>
+    <string name="sorted_sufolders_toast">「%1$s」中的子資料夾排序依據：「%2$s」</string>
+    <string name="custom_buttons">自訂按鈕</string>
+    <string name="custom_map_button_name_present">如此按鈕已存在</string>
+    <string name="add_button">新增按鈕</string>
+    <string name="special_routing_cpp">特殊路線規劃類型</string>
+    <string name="default_buttons">預設按鈕</string>
+    <string name="speed_limit_warning">速限警告</string>
+    <string name="when_exceeded">當超過時</string>
+    <string name="speedometer_description">透過 GPS 回報顯示您目前的速度</string>
+    <string name="shared_string_speedometer">速度表</string>
+    <string name="shared_string_limit">限制</string>
+    <string name="help_article_setup_a_route_name">設定路線</string>
+    <string name="rendering_attr_padusDisplayMode_description">按進入類型或管理者名稱</string>
+    <string name="rendering_value_access_name">按進入類型</string>
+    <string name="rendering_value_managerName_name">按管理者名稱</string>
+    <string name="rendering_attr_padusHideBoundaries_name">隱藏公有地邊界</string>
+    <string name="rendering_attr_padusHideBoundaries_description">隱藏公有地邊界但保留區域</string>
+    <string name="rendering_attr_padusDisplayMode_name">公有地顯示模式</string>
+    <string name="routing_type_a_star_classic">A* 經典</string>
+    <string name="auto_zoom_smooth">平順</string>
+    <string name="auto_zoom_discrete">分離</string>
+    <string name="auto_zoom">自動縮放</string>
+    <string name="java_safe">Java（安全）</string>
+    <string name="gpx_approximation">GPX 近似</string>
+    <string name="routing_type">路線規劃類型</string>
+    <string name="routing_type_a_star_2_phase">A* 2-相</string>
+    <string name="shared_sting_all_colors">所有顏色</string>
+    <string name="lang_ta_in">泰米爾語（印度）</string>
+    <string name="release_4_7">• 與 Android Auto 相容的新「速度計」小工具
+\n
+\n • 透過新增多個「快速操作」按鈕來設定地圖畫面
+\n
+\n • 改善圖表中資料的可讀性
+\n
+\n • 新增了按軌跡的感應器資料過濾功能
+\n
+\n • 改善的軌跡群組外觀自訂
+\n
+\n • 新增了對其他 GPX 標籤的支援
+\n
+\n • 自訂「導航期間的距離」：在精確數字或四捨五入數字之間進行選擇
+\n
+\n • 用於軌跡選擇的統一使用者介面
+\n
+\n • OpenStreetMap 登入已切換至 OAuth 2.0
+\n
+\n</string>
+    <string name="precise">精確</string>
+    <string name="distance_during_navigation_description">選擇距離資訊在導航小工具中的顯示方式（到點的距離、下一個轉彎、車道）。
+\n
+\n選擇「%1$s」以取得準確的數字，或選擇「%2$s」以提高可讀性。</string>
+    <string name="distance_during_navigation">導航時的距離</string>
+    <string name="round_up">大約</string>
+    <string name="upload_local_versions">上傳本機版本</string>
+    <string name="download_cloud_versions">下載雲端版本</string>
+    <string name="map_widget_map_scale">地圖比例尺</string>
+    <string name="unchanged_parameter_summary">每個軌跡都會保留自己的參數。</string>
+    <string name="shared_string_unchanged">未變更</string>
+    <string name="gpx_approximation_cpp">以路徑規劃為基礎 (C++)</string>
+    <string name="gpx_approximation_java">以路徑規劃為基礎 (Java)</string>
+    <string name="gpx_approximation_geo_java">以幾何為基礎（Java，快速）</string>
+    <string name="fix_north_up_descr">請勿在北方向上的地圖中使用手勢旋轉地圖</string>
+    <string name="fix_north_up">啟用固定北方向上</string>
+    <string name="change_default_appearance_confirmation">變更 %1$s 的預設外觀？</string>
+    <string name="use_3d_track_visualization">3D 視覺化</string>
+    <string name="change_default_tracks_appearance_confirmation">套用變更到資料夾中既有的軌跡或是僅套用到新的？</string>
+    <string name="shared_string_changes">變更</string>
+    <string name="apply_only_to_new">僅套用到新的</string>
+    <string name="release_4_8">• 為 4.8 準備</string>
+    <string name="shared_string_scale">比例尺</string>
+    <string name="vertical_exaggeration">垂直誇大</string>
+    <string name="relief_3d_download_description">需要額外的地圖才能在地圖上檢視地形。</string>
+    <string name="vertical_exaggeration_description">透過變更比例尺的值，您可以強調 3D 地形。</string>
+    <string name="use_terrain_maps">使用地形圖</string>
+    <string name="use_nearby_roads_summary">使用離線地圖尋找附近的道路與相對高度資料。可以調整軌跡幾何形狀。</string>
+    <string name="use_nearby_roads">使用附近的道路</string>
+    <string name="delete_actions_button_confirmation">您確定要刪除「%1$s」以及所有新增的動作嗎？</string>
+    <string name="delete_actions_button">刪除按鈕</string>
+    <string name="use_terrain_maps_summary">使用地形圖取得相對高度資料。軌跡幾何形狀保持不變。</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd 可以從附近的道路或地形圖擷取相對高度資料。</string>
+    <string name="required_maps">所需的地圖</string>
+    <string name="missing_maps_header">缺少或過時的地圖</string>
+    <string name="maps_that_also_be_used">也可以使用的地圖：%1$s</string>
+    <string name="getting_list_of_required_maps">取得所需地圖的清單……</string>
+    <string name="required_maps_calculate_online_summary">缺少的地圖清單是以直線路線為基礎。為了取得準確的地圖清單，OsmAnd 可以線上預先計算您的路線。</string>
+    <string name="missing_maps_description">此路線所需的一些離線地圖遺失或非最新。請下載貨更新這些地圖。</string>
+    <string name="route_line_use_coloring_speed">路線根據移動速度著色。</string>
+    <string name="route_line_use_coloring_altitude">路線根據海拔高度著色。</string>
+    <string name="visualized_by">視覺化方式</string>
+    <string name="wall_color">牆壁顏色</string>
+    <string name="track_line">軌跡線</string>
+    <string name="fixed_height">固定高度</string>
+    <string name="downward_gradient">向下斜率</string>
+    <string name="upward_gradient">向上斜率</string>
+    <string name="top">頂部</string>
+    <string name="bottom">底部</string>
+    <string name="top_and_bottom">頂部與底部</string>
+    <string name="title_3d_track">3D 軌跡</string>
+    <string name="explore_3d_track_description">以互動式 3D 方式探索軌跡！在地圖上直接視覺化高度、速度等。</string>
+    <string name="gpx_approximation_geo_cpp">以幾何為基礎（C++，快速）</string>
 </resources>

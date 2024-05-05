@@ -10,12 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,14 +26,14 @@ import java.util.Map;
 
 public class ImportedSettingsItemsAdapter extends
 		RecyclerView.Adapter<ImportedSettingsItemsAdapter.ItemViewHolder> {
-	private final Map<ExportSettingsType, List<?>> itemsMap;
-	private final List<ExportSettingsType> itemsTypes;
+	private final Map<ExportType, List<?>> itemsMap;
+	private final List<ExportType> itemsTypes;
 	private final UiUtilities uiUtils;
 	private final OsmandApplication app;
 	private final boolean nightMode;
 	private final OnItemClickListener listener;
 
-	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportSettingsType, List<?>> itemsMap,
+	ImportedSettingsItemsAdapter(@NonNull OsmandApplication app, Map<ExportType, List<?>> itemsMap,
 								 boolean nightMode, OnItemClickListener listener) {
 		this.app = app;
 		this.itemsMap = itemsMap;
@@ -53,7 +54,7 @@ public class ImportedSettingsItemsAdapter extends
 
 	@Override
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-		ExportSettingsType currentItemType = itemsTypes.get(position);
+		ExportType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
 		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
@@ -63,12 +64,7 @@ public class ImportedSettingsItemsAdapter extends
 			holder.title.setTypeface(typeface);
 		}
 		holder.divider.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
-		holder.itemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(currentItemType);
-			}
-		});
+		holder.itemView.setOnClickListener(view -> listener.onItemClick(currentItemType));
 		holder.subTitle.setText(String.format(
 				app.getString(R.string.ltr_or_rtl_combine_via_colon),
 				app.getString(R.string.items_added),
@@ -124,9 +120,25 @@ public class ImportedSettingsItemsAdapter extends
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_favorite, activeColorRes));
 				holder.title.setText(R.string.shared_string_favorites);
 				break;
-			case OFFLINE_MAPS:
+			case STANDARD_MAPS:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
-				holder.title.setText(R.string.shared_string_maps);
+				holder.title.setText(R.string.standard_maps);
+				break;
+			case ROAD_MAPS:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_map, activeColorRes));
+				holder.title.setText(R.string.download_roads_only_maps);
+				break;
+			case WIKI_AND_TRAVEL:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_wikipedia, activeColorRes));
+				holder.title.setText(R.string.wikipedia_and_travel_maps);
+				break;
+			case TERRAIN_DATA:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_terrain, activeColorRes));
+				holder.title.setText(R.string.topography_maps);
+				break;
+			case DEPTH_DATA:
+				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_anchor, activeColorRes));
+				holder.title.setText(R.string.nautical_maps);
 				break;
 			case TTS_VOICE:
 				holder.icon.setImageDrawable(uiUtils.getIcon(R.drawable.ic_action_volume_up, activeColorRes));
@@ -192,6 +204,6 @@ public class ImportedSettingsItemsAdapter extends
 	}
 
 	interface OnItemClickListener {
-		void onItemClick(ExportSettingsType type);
+		void onItemClick(@NonNull ExportType type);
 	}
 }

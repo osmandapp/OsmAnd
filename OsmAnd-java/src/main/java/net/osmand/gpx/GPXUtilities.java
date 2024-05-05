@@ -40,6 +40,11 @@ import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -61,11 +66,14 @@ public class GPXUtilities {
 	public static final String COLOR_NAME_EXTENSION = "color";
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
+	public static final String HIDDEN_EXTENSION = "hidden";
 
+	public static final String GPXTPX_PREFIX = "gpxtpx:";
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
 	public static final String OSM_PREFIX = "osm_tag_";
 	public static final String AMENITY_PREFIX = "amenity_";
 	public static final String AMENITY_ORIGIN_EXTENSION = "amenity_origin";
+	public static final String AMENITY_ORIGIN_POI_TYPE_EXTENSION = "amenity_origin_poi_type";
 
 	public static final String GAP_PROFILE_TYPE = "gap";
 	public static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
@@ -73,6 +81,7 @@ public class GPXUtilities {
 
 	public static final String POINT_ELEVATION = "ele";
 	public static final String POINT_SPEED = "speed";
+	public static final String POINT_BEARING = "bearing";
 
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
@@ -83,8 +92,19 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final String GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
-	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+
+	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>() {{
+		put("heartrate", PointAttributes.SENSOR_TAG_HEART_RATE);
+		put("osmand:hr", PointAttributes.SENSOR_TAG_HEART_RATE);
+		put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
+		put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
+		put("cad", PointAttributes.SENSOR_TAG_CADENCE);
+		put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
+		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);
+	}};
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
@@ -146,6 +166,7 @@ public class GPXUtilities {
 	public static class GPXExtensions {
 		public Map<String, String> extensions = null;
 		GPXExtensionsWriter extensionsWriter = null;
+		GPXExtensionsWriter additionalExtensionsWriter = null;
 
 		public Map<String, String> getExtensionsToRead() {
 			if (extensions == null) {
@@ -168,12 +189,20 @@ public class GPXUtilities {
 			}
 		}
 
+		public GPXExtensionsWriter getAdditionalExtensionsWriter() {
+			return additionalExtensionsWriter;
+		}
+
 		public GPXExtensionsWriter getExtensionsWriter() {
 			return extensionsWriter;
 		}
 
 		public void setExtensionsWriter(GPXExtensionsWriter extensionsWriter) {
 			this.extensionsWriter = extensionsWriter;
+		}
+
+		public void setAdditionalExtensionsWriter(GPXExtensionsWriter additionalExtensionsWriter) {
+			this.additionalExtensionsWriter = additionalExtensionsWriter;
 		}
 
 		public int getColor(int defColor) {
@@ -207,12 +236,17 @@ public class GPXUtilities {
 	}
 
 	public static int parseColor(String colorString, int defColor) {
+		Integer color = parseColor(colorString);
+		return color != null ? color : defColor;
+	}
+
+	public static Integer parseColor(String colorString) {
 		if (!Algorithms.isEmpty(colorString)) {
 			if (colorString.charAt(0) == '#') {
 				try {
 					return Algorithms.parseColor(colorString);
 				} catch (IllegalArgumentException e) {
-					return defColor;
+					log.error(e);
 				}
 			} else {
 				GPXColor gpxColor = GPXColor.getColorFromName(colorString);
@@ -221,7 +255,7 @@ public class GPXUtilities {
 				}
 			}
 		}
-		return defColor;
+		return null;
 	}
 
 	public static class WptPt extends GPXExtensions {
@@ -241,6 +275,7 @@ public class GPXUtilities {
 		public double speed = 0;
 		public double hdop = Double.NaN;
 		public float heading = Float.NaN;
+		public float bearing = Float.NaN;
 		public boolean deleted = false;
 		public int speedColor = 0;
 		public int altitudeColor = 0;
@@ -297,6 +332,11 @@ public class GPXUtilities {
 
 		public float getHeading() {
 			return heading;
+		}
+
+		public WptPt(double lat, double lon) {
+			this.lat = lat;
+			this.lon = lon;
 		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
@@ -357,6 +397,15 @@ public class GPXUtilities {
 			getExtensionsToWrite().put(AMENITY_ORIGIN_EXTENSION, originName);
 		}
 
+		public String getAmenityOriginPoiType() {
+			Map<String, String> extensionsToRead = getExtensionsToRead();
+			return extensionsToRead.get(AMENITY_ORIGIN_POI_TYPE_EXTENSION);
+		}
+
+		public void setAmenityOriginPoiType(String originPoiType) {
+			getExtensionsToWrite().put(AMENITY_ORIGIN_POI_TYPE_EXTENSION, originPoiType);
+		}
+
 		public int getColor(ColorizationType type) {
 			if (type == ColorizationType.SPEED) {
 				return speedColor;
@@ -399,6 +448,10 @@ public class GPXUtilities {
 			} else {
 				getExtensionsToWrite().put(ADDRESS_EXTENSION, address);
 			}
+		}
+
+		public void setHidden(String hidden) {
+			getExtensionsToWrite().put(HIDDEN_EXTENSION, hidden);
 		}
 
 		public void setProfileType(String profileType) {
@@ -502,21 +555,27 @@ public class GPXUtilities {
 			this.desc = pt.desc;
 			this.name = pt.name;
 			this.category = pt.category;
-			String color = pt.extensions.get(COLOR_NAME_EXTENSION);
+
+			Map<String, String> extensions = pt.getExtensionsToRead();
+			String color = extensions.get(COLOR_NAME_EXTENSION);
 			if (color != null) {
 				setColor(color);
 			}
-			String iconName = pt.extensions.get(ICON_NAME_EXTENSION);
+			String iconName = extensions.get(ICON_NAME_EXTENSION);
 			if (iconName != null) {
 				setIconName(iconName);
 			}
-			String backgroundType = pt.extensions.get(BACKGROUND_TYPE_EXTENSION);
+			String backgroundType = extensions.get(BACKGROUND_TYPE_EXTENSION);
 			if (backgroundType != null) {
 				setBackgroundType(backgroundType);
 			}
-			String address = pt.extensions.get(ADDRESS_EXTENSION);
+			String address = extensions.get(ADDRESS_EXTENSION);
 			if (address != null) {
 				setAddress(address);
+			}
+			String hidden = extensions.get(HIDDEN_EXTENSION);
+			if (hidden != null) {
+				setHidden(hidden);
 			}
 		}
 	}
@@ -738,14 +797,17 @@ public class GPXUtilities {
 
 	public static class PointsGroup {
 
-		public final String name;
+		public static final String DEFAULT_WPT_GROUP_NAME = "";
+
+		public String name;
 		public String iconName;
 		public String backgroundType;
 		public List<WptPt> points = new ArrayList<>();
 		public int color;
+		public boolean hidden;
 
 		public PointsGroup(String name) {
-			this.name = name != null ? name : "";
+			this.name = name != null ? name : DEFAULT_WPT_GROUP_NAME;
 		}
 
 		public PointsGroup(String name, String iconName, String backgroundType, int color) {
@@ -762,9 +824,21 @@ public class GPXUtilities {
 			this.backgroundType = point.getBackgroundType();
 		}
 
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public boolean isHidden() {
+			return hidden;
+		}
+
+		public void setHidden(boolean hidden) {
+			this.hidden = hidden;
+		}
+
 		@Override
 		public int hashCode() {
-			return Algorithms.hash(name, iconName, backgroundType, color, points);
+			return Algorithms.hash(name, iconName, backgroundType, color, points, hidden);
 		}
 
 		@Override
@@ -781,7 +855,8 @@ public class GPXUtilities {
 					&& Algorithms.objectEquals(points, that.points)
 					&& Algorithms.stringsEqual(name, that.name)
 					&& Algorithms.stringsEqual(iconName, that.iconName)
-					&& Algorithms.stringsEqual(backgroundType, that.backgroundType);
+					&& Algorithms.stringsEqual(backgroundType, that.backgroundType)
+					&& Algorithms.objectEquals(hidden, that.hidden);
 		}
 
 		public StringBundle toStringBundle() {
@@ -797,6 +872,9 @@ public class GPXUtilities {
 			if (!Algorithms.isEmpty(backgroundType)) {
 				bundle.putString(BACKGROUND_TYPE_EXTENSION, backgroundType);
 			}
+			if (isHidden()) {
+				bundle.putBoolean(HIDDEN_EXTENSION, true);
+			}
 			return bundle;
 		}
 
@@ -806,6 +884,7 @@ public class GPXUtilities {
 			category.color = parseColor(parser.getAttributeValue("", "color"), 0);
 			category.iconName = parser.getAttributeValue("", ICON_NAME_EXTENSION);
 			category.backgroundType = parser.getAttributeValue("", BACKGROUND_TYPE_EXTENSION);
+			category.hidden = Boolean.valueOf(parser.getAttributeValue("", HIDDEN_EXTENSION));
 			return category;
 		}
 	}
@@ -916,6 +995,7 @@ public class GPXUtilities {
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1"); //$NON-NLS-1$ //$NON-NLS-2$
 			serializer.attribute(null, "xmlns:osmand", "https://osmand.net");
+			serializer.attribute(null, "xmlns:gpxtpx", "http://www.garmin.com/xmlschemas/TrackPointExtension/v1");
 			serializer.attribute(null, "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
@@ -1114,16 +1194,19 @@ public class GPXUtilities {
 
 	private static void writeExtensions(XmlSerializer serializer, Map<String, String> extensions, GPXExtensions p, IProgress progress) throws IOException {
 		GPXExtensionsWriter extensionsWriter = p.getExtensionsWriter();
-		if (!extensions.isEmpty() || extensionsWriter != null) {
+		GPXExtensionsWriter additionalExtensionsWriter = p.getAdditionalExtensionsWriter();
+		boolean hasExtensions = !Algorithms.isEmpty(extensions);
+		if (hasExtensions || extensionsWriter != null) {
 			serializer.startTag(null, "extensions");
-			if (!extensions.isEmpty()) {
+			if (hasExtensions) {
 				for (Entry<String, String> entry : extensions.entrySet()) {
-					String key = entry.getKey().replace(":", "_-_");
-					if (!key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
-						key = OSMAND_EXTENSIONS_PREFIX + key;
-					}
-					writeNotNullText(serializer, key, entry.getValue());
+					writeNotNullText(serializer, getOsmandTagKey(entry), entry.getValue());
 				}
+			}
+			if (additionalExtensionsWriter != null) {
+				serializer.startTag(null, "gpxtpx:TrackPointExtension");
+				additionalExtensionsWriter.writeExtensions(serializer);
+				serializer.endTag(null, "gpxtpx:TrackPointExtension");
 			}
 			if (extensionsWriter != null) {
 				extensionsWriter.writeExtensions(serializer);
@@ -1165,18 +1248,61 @@ public class GPXUtilities {
 			// Leave "profile" and "trkpt" tags for rtept only
 			extensions.remove(PROFILE_TYPE_EXTENSION);
 			extensions.remove(TRKPT_INDEX_EXTENSION);
-			writeExtensions(serializer, extensions, p, null);
 		} else {
 			// Remove "gap" profile
 			String profile = extensions.get(PROFILE_TYPE_EXTENSION);
 			if (GAP_PROFILE_TYPE.equals(profile)) {
 				extensions.remove(PROFILE_TYPE_EXTENSION);
 			}
-			writeExtensions(serializer, p, null);
 		}
+		assignExtensionWriter(p, extensions);
+		writeExtensions(serializer, null, p, null);
 		if (progress != null) {
 			progress.progress(1);
 		}
+	}
+
+	public static void assignExtensionWriter(WptPt wptPt, Map<String, String> pluginsExtensions) {
+		if (wptPt.getExtensionsWriter() == null) {
+			HashMap<String, String> regularExtensions = new HashMap<>();
+			HashMap<String, String> gpxtpxExtensions = new HashMap<>();
+
+			for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
+				if (entry.getKey().startsWith(GPXTPX_PREFIX)) {
+					gpxtpxExtensions.put(entry.getKey(), entry.getValue());
+				} else {
+					regularExtensions.put(entry.getKey(), entry.getValue());
+				}
+			}
+			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions, true));
+			if (!Algorithms.isEmpty(gpxtpxExtensions)) {
+				wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions, false));
+			}
+		}
+	}
+
+	private static GPXUtilities.GPXExtensionsWriter createExtensionsWriter(final Map<String, String> extensions, final boolean addOsmandPrefix) {
+		return new GPXExtensionsWriter() {
+			@Override
+			public void writeExtensions(XmlSerializer serializer) {
+				for (Entry<String, String> entry : extensions.entrySet()) {
+					try {
+						GPXUtilities.writeNotNullText(serializer, addOsmandPrefix ? getOsmandTagKey(entry) : entry.getKey(), entry.getValue());
+					} catch (IOException e) {
+						log.error(e);
+					}
+				}
+			}
+		};
+	}
+
+	private static String getOsmandTagKey(final Entry<String, String> entry) {
+		String key = entry.getKey();
+		if (key.startsWith(OSMAND_EXTENSIONS_PREFIX)) {
+			key = key.replace(OSMAND_EXTENSIONS_PREFIX, "");
+		}
+		key = key.replace(":", "_-_");
+		return OSMAND_EXTENSIONS_PREFIX + key;
 	}
 
 	private static void writeAuthor(XmlSerializer serializer, Author author) throws IOException {
@@ -1194,7 +1320,9 @@ public class GPXUtilities {
 	}
 
 	private static void writeCopyright(XmlSerializer serializer, Copyright copyright) throws IOException {
-		serializer.attribute(null, "author", copyright.author);
+		if (copyright.author != null) {
+			serializer.attribute(null, "author", copyright.author);
+		}
 		writeNotNullText(serializer, "year", copyright.year);
 		writeNotNullText(serializer, "license", copyright.license);
 	}
@@ -1287,15 +1415,15 @@ public class GPXUtilities {
 		}
 	}
 
-	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
+	public static long parseTime(String text, SimpleDateFormat format, DateTimeFormatter formatMillis) {
 		long time = 0;
 		if (text != null) {
 			try {
 				time = format.parse(text).getTime();
 			} catch (ParseException e1) {
 				try {
-					time = formatMillis.parse(text).getTime();
-				} catch (ParseException e2) {
+					time = ZonedDateTime.parse(text, formatMillis).toInstant().toEpochMilli();
+				} catch (DateTimeParseException e2) {
 					try {
 						time = getTimeNoTimeZoneFormatter().parse(text).getTime();
 					} catch (ParseException e3) {
@@ -1343,11 +1471,14 @@ public class GPXUtilities {
 		return format;
 	}
 
-	private static SimpleDateFormat getTimeFormatterMills() {
-		String pattern = GPX_TIME_OLD_FORMAT ? GPX_TIME_MILLIS_PATTERN_OLD : GPX_TIME_MILLIS_PATTERN;
-		SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
-		return format;
+	private static DateTimeFormatter getTimeFormatterMills() {
+		if (GPX_TIME_OLD_FORMAT) {
+			// never used
+			DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+			return builder.appendPattern(GPX_TIME_MILLIS_PATTERN_OLD).toFormatter().withZone(ZoneId.of("UTC"));
+		} else {
+			return DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.of("UTC"));
+		}
 	}
 
 	public static GPXFile loadGPXFile(File file) {
@@ -1364,6 +1495,9 @@ public class GPXUtilities {
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime;
 
 			Algorithms.closeStream(fis);
+			if (gpxFile.error != null) {
+				log.info("Error reading gpx " + gpxFile.path);
+			}
 			return gpxFile;
 		} catch (IOException e) {
 			GPXFile gpxFile = new GPXFile(null);
@@ -1446,17 +1580,22 @@ public class GPXUtilities {
 									if (values.size() > 0) {
 										for (Entry<String, String> entry : values.entrySet()) {
 											String t = entry.getKey().toLowerCase();
+											String supportedTag = getExtensionsSupportedTag(t);
 											String value = entry.getValue();
-											if (t.equals("heartrate")) {
-												t = "hr";
-											}
-											parse.getExtensionsToWrite().put(t, value);
-
-											if (tag.equals(POINT_SPEED) && parse instanceof WptPt) {
-												try {
-													((WptPt) parse).speed = Float.parseFloat(value);
-												} catch (NumberFormatException e) {
-													log.debug(e.getMessage(), e);
+											parse.getExtensionsToWrite().put(supportedTag, value);
+											if (parse instanceof WptPt) {
+												WptPt wptPt = (WptPt) parse;
+												if (POINT_SPEED.equals(tag)) {
+													try {
+														wptPt.speed = Float.parseFloat(value);
+													} catch (NumberFormatException e) {
+														log.debug(e.getMessage(), e);
+													}
+												} else if (POINT_BEARING.equals(tag)) {
+													try {
+														wptPt.bearing = Float.parseFloat(value);
+													} catch (NumberFormatException ignored) {
+													}
 												}
 											}
 										}
@@ -1750,10 +1889,15 @@ public class GPXUtilities {
 			}
 		} catch (Exception e) {
 			gpxFile.error = e;
-			log.error("Error reading gpx", e); //$NON-NLS-1$
+			log.error("Error reading gpx. " + gpxFile.path, e); //$NON-NLS-1$
 		}
 
 		return gpxFile;
+	}
+
+	private static String getExtensionsSupportedTag(String tag) {
+		String supportedTag = SUPPORTED_EXTENSION_TAGS.get(tag);
+		return supportedTag == null ? tag : supportedTag;
 	}
 
 	private static Map<String, String> parseRouteKeyAttributes(XmlPullParser parser) {

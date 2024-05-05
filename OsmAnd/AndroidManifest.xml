@@ -24,7 +24,6 @@
 
 	<uses-permission android:name="androidx.car.app.NAVIGATION_TEMPLATES"/>
 	<uses-permission android:name="androidx.car.app.ACCESS_SURFACE"/>
-	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
 	<uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
 	<uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -81,7 +80,8 @@
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true"
 		android:supportsRtl="true" android:usesCleartextTraffic="true"
 		android:hasFragileUserData="true" android:requestLegacyExternalStorage="true"
-		android:localeConfig="@xml/locales_config">
+		android:localeConfig="@xml/locales_config"
+		android:memtagMode="off">
 
 		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />
@@ -559,6 +559,15 @@
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
 				<data android:scheme="osmand-oauth" />
+			</intent-filter>
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="https" />
+				<data android:host="osmand.net" android:pathPrefix="/redirect-url"/>
+
 			</intent-filter>
 
 			<intent-filter>
@@ -1159,6 +1168,7 @@
 
 		<service
 			android:name="net.osmand.plus.auto.NavigationCarAppService"
+			android:foregroundServiceType="location"
 			android:exported="true">
 
 			<intent-filter>

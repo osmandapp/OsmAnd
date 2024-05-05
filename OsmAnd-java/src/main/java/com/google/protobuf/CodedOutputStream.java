@@ -908,6 +908,12 @@ public final class CodedOutputStream {
   public void writeRawByte(final int value) throws IOException {
     writeRawByte((byte) value);
   }
+  
+  /** Write a single byte, represented by an integer value. */
+  // osmand change
+  public void writeRawByte(final long value) throws IOException {
+    writeRawByte((byte) value);
+  }
 
   /** Write a byte string. */
   public void writeRawBytes(final ByteString value) throws IOException {

@@ -4,6 +4,8 @@ package net.osmand.plus.resources;
 import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_JS;
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
+import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -27,6 +29,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
@@ -38,7 +41,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -513,9 +515,9 @@ public class ResourceManager {
 		close();
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress, false, true));
-		progress.notifyEvent(InitEvents.ASSETS_COPIED);
+		progress.notifyEvent(ASSETS_COPIED);
 		reloadIndexes(progress, warnings);
-		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
+		progress.notifyEvent(MAPS_INITIALIZED);
 		indexesLoadedOnStart = true;
 		return warnings;
 	}
@@ -580,9 +582,11 @@ public class ResourceManager {
 
 	public interface ReloadIndexesListener {
 
-		void reloadIndexesStarted();
+		default void reloadIndexesStarted() {
 
-		void reloadIndexesFinished(List<String> reloadIndexesWarnings);
+		}
+
+		void reloadIndexesFinished(@NonNull List<String> warnings);
 	}
 
 	public List<String> indexAdditionalMaps(@Nullable IProgress progress) {
@@ -928,7 +932,7 @@ public class ResourceManager {
 		File indCache = context.getAppPath(INDEXES_CACHE);
 		if (indCache.exists()) {
 			try {
-				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+				cachedOsmandIndexes.readFromFile(indCache);
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
@@ -1167,8 +1171,16 @@ public class ResourceManager {
 		return res;
 	}
 
-	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter,
-	                                     double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, int zoom, ResultMatcher<Amenity> matcher) {
+	@NonNull
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, QuadRect rect, boolean includeTravel) {
+		return searchAmenities(filter, rect.top, rect.left, rect.bottom, rect.right, -1, includeTravel, null);
+	}
+
+	@NonNull
+	public List<Amenity> searchAmenities(SearchPoiTypeFilter filter, double topLatitude,
+	                                     double leftLongitude, double bottomLatitude,
+	                                     double rightLongitude, int zoom, boolean includeTravel,
+	                                     ResultMatcher<Amenity> matcher) {
 		List<Amenity> amenities = new ArrayList<>();
 		searchAmenitiesInProgress = true;
 		try {
@@ -1177,7 +1189,7 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				for (AmenityIndexRepository index : getAmenityRepositories()) {
+				for (AmenityIndexRepository index : getAmenityRepositories(includeTravel)) {
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;

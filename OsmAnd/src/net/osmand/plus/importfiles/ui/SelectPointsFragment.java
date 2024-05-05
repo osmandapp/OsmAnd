@@ -112,7 +112,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 		GPXFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
 		GpxDisplayGroup group = app.getGpxDisplayHelper().buildPointsDisplayGroup(gpxFile, points, trackItem.name);
 
-		adapter = new TrackPointsAdapter(app, selectedPoints, nightMode);
+		adapter = new TrackPointsAdapter(view.getContext(), selectedPoints, nightMode);
 		adapter.setListener(this);
 		adapter.synchronizeGroups(Collections.singletonList(group));
 

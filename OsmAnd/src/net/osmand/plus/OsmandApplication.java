@@ -22,6 +22,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarToast;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -33,14 +37,14 @@ import net.osmand.map.WorldRegion;
 import net.osmand.map.WorldRegion.RegionParams;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
-import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.screens.NavigationScreen;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -53,18 +57,18 @@ import net.osmand.plus.feedback.FeedbackHelper;
 import net.osmand.plus.feedback.RateUsHelper;
 import net.osmand.plus.feedback.RateUsState;
 import net.osmand.plus.helpers.AndroidApiLocationServiceHelper;
-import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
 import net.osmand.plus.helpers.GmsLocationServiceHelper;
 import net.osmand.plus.helpers.LauncherShortcutsHelper;
 import net.osmand.plus.helpers.LocaleHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LockHelper;
+import net.osmand.plus.helpers.Model3dHelper;
 import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.keyevent.InputDeviceHelper;
+import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
@@ -83,12 +87,11 @@ import net.osmand.plus.plugins.rastermaps.DownloadTilesHelper;
 import net.osmand.plus.plugins.weather.OfflineForecastHelper;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
-import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
-import net.osmand.plus.routing.AvoidRoadsHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
@@ -99,6 +102,7 @@ import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.enums.DrivingRegion;
 import net.osmand.plus.settings.enums.LocationSource;
 import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
@@ -175,7 +179,6 @@ public class OsmandApplication extends MultiDexApplication {
 	WaypointHelper waypointHelper;
 	RoutingOptionsHelper routingOptionsHelper;
 	DownloadIndexesThread downloadIndexesThread;
-	AvoidSpecificRoads avoidSpecificRoads;
 	AvoidRoadsHelper avoidRoadsHelper;
 	BRouterServiceConnection bRouterServiceConnection;
 	OsmandRegions regions;
@@ -187,11 +190,11 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	KeyEventHelper keyEventHelper;
-	InputDeviceHelper inputDeviceHelper;
+	InputDevicesHelper inputDeviceHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
-	QuickActionRegistry quickActionRegistry;
+	MapButtonsHelper mapButtonsHelper;
 	OsmOAuthHelper osmOAuthHelper;
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
@@ -207,10 +210,13 @@ public class OsmandApplication extends MultiDexApplication {
 	DialogManager dialogManager;
 	SmartFolderHelper smartFolderHelper;
 
+	Model3dHelper model3dHelper;
+
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
-
+	private boolean appInForeground;
+	private boolean androidAutoInForeground;
 	// Typeface
 
 	@Override
@@ -219,14 +225,22 @@ public class OsmandApplication extends MultiDexApplication {
 			return;
 		}
 		long timeToStart = System.currentTimeMillis();
-		if (Version.isDeveloperVersion(this)) {
-			try {
-				Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		enableStrictMode();
 		super.onCreate();
+
+		LifecycleObserver appLifecycleObserver = new DefaultLifecycleObserver() {
+			@Override
+			public void onStart(@NonNull LifecycleOwner owner) {
+				appInForeground = true;
+			}
+
+			@Override
+			public void onStop(@NonNull LifecycleOwner owner) {
+				appInForeground = false;
+			}
+		};
+		ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
+
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
@@ -258,6 +272,11 @@ public class OsmandApplication extends MultiDexApplication {
 
 		osmandMap.getMapLayers().updateLayers(null);
 
+		if (appInitializer.isFirstTime()) {
+			settings.resetLastGlobalPreferencesEditTime();
+			settings.resetLastPreferencesEditTime(settings.APPLICATION_MODE.get());
+		}
+
 		SearchUICore.setDebugMode(PluginsHelper.isDevelopment());
 		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
 	}
@@ -282,6 +301,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapPoiTypes getPoiTypes() {
 		return poiTypes;
+	}
+
+	public boolean isAppInForeground() {
+		return appInForeground || androidAutoInForeground;
 	}
 
 	private void createInUiThread() {
@@ -322,11 +345,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return taskManager;
 	}
 
-	public AvoidSpecificRoads getAvoidSpecificRoads() {
-		return avoidSpecificRoads;
-	}
-
-	public AvoidRoadsHelper getAvoidRoadsHelper() {
+	public AvoidRoadsHelper getAvoidSpecificRoads() {
 		return avoidRoadsHelper;
 	}
 
@@ -338,8 +357,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return appCustomization;
 	}
 
-	public QuickActionRegistry getQuickActionRegistry() {
-		return quickActionRegistry;
+	public MapButtonsHelper getMapButtonsHelper() {
+		return mapButtonsHelper;
 	}
 
 	public LocationServiceHelper createLocationServiceHelper() {
@@ -432,7 +451,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return keyEventHelper;
 	}
 
-	public InputDeviceHelper getInputDeviceHelper() {
+	public InputDevicesHelper getInputDeviceHelper() {
 		return inputDeviceHelper;
 	}
 
@@ -593,6 +612,11 @@ public class OsmandApplication extends MultiDexApplication {
 		return weatherHelper.getOfflineForecastHelper();
 	}
 
+	@NonNull
+	public Model3dHelper getModel3dHelper() {
+		return model3dHelper;
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
@@ -642,7 +666,9 @@ public class OsmandApplication extends MultiDexApplication {
 			if (navigationService != null) {
 				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
 			}
+			androidAutoInForeground = false;
 		} else {
+			androidAutoInForeground = true;
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
 		this.carNavigationSession = carNavigationSession;
@@ -818,7 +844,8 @@ public class OsmandApplication extends MultiDexApplication {
 		context.setTheme(themeId);
 	}
 
-	public IBRouterService reconnectToBRouter() {
+	@Nullable
+	public synchronized IBRouterService reconnectToBRouter() {
 		try {
 			bRouterServiceConnection = BRouterServiceConnection.connect(this);
 			// a delay is necessary as the service process needs time to start..
@@ -827,20 +854,21 @@ public class OsmandApplication extends MultiDexApplication {
 				return bRouterServiceConnection.getBrouterService();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 		return null;
 	}
 
-	public IBRouterService getBRouterService() {
+	@Nullable
+	public synchronized IBRouterService getBRouterService() {
 		if (bRouterServiceConnection == null) {
 			return null;
 		}
-		IBRouterService s = bRouterServiceConnection.getBrouterService();
-		if (s != null && !s.asBinder().isBinderAlive()) {
-			s = reconnectToBRouter();
+		IBRouterService service = bRouterServiceConnection.getBrouterService();
+		if (service != null && !service.asBinder().isBinderAlive()) {
+			service = reconnectToBRouter();
 		}
-		return s;
+		return service;
 	}
 
 	public String getLanguage() {
@@ -944,7 +972,11 @@ public class OsmandApplication extends MultiDexApplication {
 		Intent intent = new Intent(this, NavigationService.class);
 		intent.putExtra(NavigationService.USAGE_INTENT, usageIntent);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-			startForegroundService(intent);
+			runInUIThread(() -> {
+				if (isAppInForeground()) {
+					startForegroundService(intent);
+				}
+			});
 		} else {
 			startService(intent);
 		}
@@ -1032,5 +1064,15 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean useOpenGlRenderer() {
 		return NativeCoreContext.isInit() && settings.USE_OPENGL_RENDER.get();
+	}
+
+	private void enableStrictMode() {
+		if (Version.isDeveloperVersion(this)) {
+			try {
+				Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
+			} catch (Exception e) {
+				LOG.error(e);
+			}
+		}
 	}
 }

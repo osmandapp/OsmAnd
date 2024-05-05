@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 
 import java.util.Calendar;
 
@@ -101,6 +102,11 @@ public class InAppPurchaseUtils {
 
 	public static boolean is3dMapsAvailable(@NonNull OsmandApplication app) {
 		return isOsmAndProAvailable(app) || isTripltekPromoAvailable(app);
+	}
+
+	public static boolean isExportTypeAvailable(@NonNull OsmandApplication app,
+	                                            @NonNull ExportType exportType) {
+		return isBackupAvailable(app) || exportType.isAvailableInFreeVersion();
 	}
 
 	public static boolean isBackupAvailable(@NonNull OsmandApplication app) {

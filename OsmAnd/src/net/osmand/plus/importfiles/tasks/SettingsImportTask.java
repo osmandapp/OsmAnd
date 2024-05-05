@@ -1,7 +1,7 @@
 package net.osmand.plus.importfiles.tasks;
 
 import static net.osmand.plus.AppInitializer.loadRoutingFiles;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.getSettingsToOperate;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.collectSettingsToOperate;
 
 import android.app.ProgressDialog;
 import android.net.Uri;
@@ -10,24 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.FileUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.AppInitializer;
-import net.osmand.plus.plugins.CustomOsmandPlugin;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupUtils;
+import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.plugins.custom.CustomOsmandPlugin;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.FileImportSettingsFragment;
 import net.osmand.plus.settings.fragments.ImportCompleteFragment;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -39,15 +39,15 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 
 	private final Uri uri;
 	private final String name;
-	private final List<ExportSettingsType> settingsTypes;
+	private final List<ExportType> settingsTypes;
 	private final boolean replace;
 	private final boolean silentImport;
 	private final String latestChanges;
 	private final int version;
 
 	public SettingsImportTask(@NonNull FragmentActivity activity, @NonNull Uri uri,
-							  @NonNull String name, List<ExportSettingsType> settingsTypes,
-							  boolean replace, boolean silentImport, String latestChanges, int version) {
+	                          @NonNull String name, List<ExportType> settingsTypes,
+	                          boolean replace, boolean silentImport, String latestChanges, int version) {
 		super(activity);
 		this.uri = uri;
 		this.name = name;
@@ -94,7 +94,7 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 								FileImportSettingsFragment.showInstance(fragmentManager, pluginIndependentItems, file);
 							}
 						} else {
-							Map<ExportSettingsType, List<?>> allSettingsMap = getSettingsToOperate(pluginIndependentItems, false, false);
+							Map<ExportType, List<?>> allSettingsMap = collectSettingsToOperate(pluginIndependentItems, false, false);
 							List<SettingsItem> settingsList = settingsHelper.getFilteredSettingsItems(allSettingsMap, settingsTypes, pluginIndependentItems, false);
 							settingsHelper.checkDuplicates(file, settingsList, settingsList, getDuplicatesListener(file, replace));
 						}
@@ -127,20 +127,15 @@ public class SettingsImportTask extends BaseImportAsyncTask<Void, Void, String> 
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
-					app.getRendererRegistry().updateExternalRenderers();
-					app.getPoiFilters().loadSelectedPoiFilters();
-					AppInitializer.loadRoutingFiles(app, null);
+					BackupUtils.updateCacheForItems(app, items);
+
 					FragmentActivity activity = activityRef.get();
-					AudioVideoNotesPlugin plugin = PluginsHelper.getPlugin(AudioVideoNotesPlugin.class);
-					if (plugin != null) {
-						plugin.indexingFiles(true, true);
-					}
 					if (activity instanceof MapActivity) {
 						((MapActivity) activity).updateApplicationModeSettings();
 					}
 					if (!silentImport && file != null && activity != null) {
-						FragmentManager fm = activity.getSupportFragmentManager();
-						ImportCompleteFragment.showInstance(fm, items, file.getName(), needRestart);
+						FragmentManager manager = activity.getSupportFragmentManager();
+						ImportCompleteFragment.showInstance(manager, items, file.getName(), needRestart);
 					}
 				}
 			}

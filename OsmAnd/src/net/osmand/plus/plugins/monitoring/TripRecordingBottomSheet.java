@@ -323,6 +323,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		GPXFile gpxFile = getGPXFile();
 		File file = new File(gpxFile.path);
 		displayHelper.setFile(file);
+		displayHelper.setSelectedGpxFile(selectedGpxFile);
 		displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		displayHelper.setGpx(gpxFile);
 

@@ -5,18 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.Location;
 
-import java.util.List;
-
 public abstract class LocationServiceHelper {
-
-	public abstract static class LocationCallback {
-
-		public void onLocationResult(@NonNull List<Location> locations) {
-		}
-
-		public void onLocationAvailability(boolean locationAvailable) {
-		}
-	}
 
 	public abstract void requestLocationUpdates(@NonNull LocationCallback locationCallback);
 

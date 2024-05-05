@@ -3790,8 +3790,8 @@
     <string name="poi_seamark_water_level_awash">Poziom wody: obmywający falami</string>
     <string name="poi_seamark_water_level_covers">Poziom wody: pokrywający</string>
     <string name="poi_internet_access_fee_customers">Dostęp do Internetu: klienci</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Ssanie</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Pod ciśnieniem</string>
+    <string name="poi_fire_hydrant_pressure_suction">Ssanie</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Pod ciśnieniem</string>
     <string name="poi_water_source_groundwater">Woda podziemna</string>
     <string name="poi_fire_hydrant_type_pipe">Rura</string>
     <string name="poi_fire_hydrant_pressure_filter">Ciśnienie</string>
@@ -4384,8 +4384,8 @@
     <string name="poi_climbing_grade_elite">Dla elity</string>
     <string name="poi_climbing_grade_super_elite">Dla super elity</string>
     <string name="poi_climbing_grade_aliens">Dla obcych</string>
-    <string name="poi_osmand_climbing_bolts_yes">Tak</string>
-    <string name="poi_osmand_climbing_bolts_no">Nie</string>
+    <string name="poi_climbing_bolts_yes">Tak</string>
+    <string name="poi_climbing_bolts_no">Nie</string>
     <string name="poi_blowhole">Szczelina</string>
     <string name="poi_skate">Skateshop</string>
     <string name="poi_payment_visa_contactless_no">Karta zbliżeniowa Visa nie jest akceptowana</string>
@@ -4607,7 +4607,7 @@
     <string name="poi_healthcare_speciality_haematology">Hematologia</string>
     <string name="poi_lock_height">Wysokość śluzy</string>
     <string name="poi_healthcare_speciality_geriatrics">Geriatria</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Wszystkie oprócz przystanków komunikacji miejskiej</string>
+    <string name="poi_not_pt_shelter_yes">Wszystkie oprócz przystanków komunikacji miejskiej</string>
     <string name="poi_boat_private">Dostęp dla łodzi: prywatny</string>
     <string name="poi_healthcare_speciality_paediatric_surgery">Chirurgia dziecięca</string>
     <string name="poi_draft">Głębokość toru wodnego</string>

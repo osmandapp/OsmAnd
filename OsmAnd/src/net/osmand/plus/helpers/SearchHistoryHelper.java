@@ -10,7 +10,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -19,6 +19,7 @@ import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -169,7 +170,7 @@ public class SearchHistoryHelper {
 			if (pd.isCustomPoiFilter()) {
 				app.getPoiFilters().markHistory(pd.getName(), false);
 			}
-			loadedEntries = Algorithms.removeFromList(loadedEntries, model);
+			loadedEntries = CollectionUtils.removeFromList(loadedEntries, model);
 			mp.remove(pd);
 		}
 	}
@@ -202,7 +203,7 @@ public class SearchHistoryHelper {
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.update(model);
 			} else {
-				loadedEntries = Algorithms.addToList(loadedEntries, model);
+				loadedEntries = CollectionUtils.addToList(loadedEntries, model);
 				mp.put(model.getName(), model);
 				model.markAsAccessed(System.currentTimeMillis());
 				helper.add(model);
@@ -483,21 +484,21 @@ public class SearchHistoryHelper {
 		}
 
 		public long getLastModifiedTime() {
-			long lastModifiedTime = BackupHelper.getLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME);
+			long lastModifiedTime = BackupUtils.getLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME);
 			if (lastModifiedTime == 0) {
 				File dbFile = app.getDatabasePath(DB_NAME);
 				lastModifiedTime = dbFile.exists() ? dbFile.lastModified() : 0;
-				BackupHelper.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+				BackupUtils.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
 			}
 			return lastModifiedTime;
 		}
 
 		public void setLastModifiedTime(long lastModifiedTime) {
-			BackupHelper.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
+			BackupUtils.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME, lastModifiedTime);
 		}
 
 		private void updateLastModifiedTime() {
-			BackupHelper.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME);
+			BackupUtils.setLastModifiedTime(app, HISTORY_LAST_MODIFIED_NAME);
 		}
 
 		public boolean remove(HistoryEntry e) {

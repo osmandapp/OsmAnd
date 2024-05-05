@@ -1,5 +1,8 @@
 package net.osmand.plus.auto;
 
+import static androidx.car.app.CarContext.ACTION_NAVIGATE;
+import static net.osmand.plus.NavigationService.DEEP_LINK_ACTION_OPEN_ROOT_SCREEN;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -24,17 +27,33 @@ import androidx.lifecycle.Lifecycle.State;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.ValueHolder;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.auto.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.auto.screens.LandingScreen;
+import net.osmand.plus.auto.screens.NavigationScreen;
+import net.osmand.plus.auto.screens.RequestPermissionScreen;
+import net.osmand.plus.auto.screens.RequestPermissionScreen.LocationPermissionCheckCallback;
+import net.osmand.plus.auto.screens.RequestPurchaseScreen;
+import net.osmand.plus.auto.screens.RoutePreviewScreen;
+import net.osmand.plus.auto.screens.SearchResultsScreen;
+import net.osmand.plus.auto.screens.SettingsScreen;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
+import net.osmand.util.GeoParsedPoint;
+import net.osmand.util.GeoPointParserUtil;
 
 import java.util.List;
 
@@ -43,6 +62,7 @@ import java.util.List;
  */
 public class NavigationSession extends Session implements NavigationListener, OsmAndLocationListener,
 		DefaultLifecycleObserver, IRouteInformationListener {
+
 	static final String TAG = NavigationSession.class.getSimpleName();
 	static final String URI_SCHEME = "osmand";
 	static final String URI_HOST = "car_navigation";
@@ -61,7 +81,6 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	 * Zoom-out scale factor, used for the zoom-out button.
 	 */
 	public static final float ZOOM_OUT_BUTTON_SCALE_FACTOR = 0.9f;
-
 
 	NavigationScreen navigationScreen;
 	LandingScreen landingScreen;
@@ -145,6 +164,15 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
 		getLifecycle().removeObserver(this);
+		OsmandSettings settings = getApp().getSettings();
+		if (settings.simulateNavigationStartedFromAdb) {
+			settings.simulateNavigation = false;
+			OsmAndLocationSimulation locationSimulation = getApp().getLocationProvider().getLocationSimulation();
+			if (locationSimulation.isRouteAnimating() || locationSimulation.isLoadingRouteLocations()) {
+				locationSimulation.stop();
+			}
+		}
+		getApp().getSettings().simulateNavigationStartedFromAdb = false;
 	}
 
 	public boolean hasStarted() {
@@ -166,22 +194,21 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	public Screen onCreateScreen(@NonNull Intent intent) {
 		Log.i(TAG, "In onCreateScreen()");
 		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
-		settingsAction =
-				new Action.Builder()
-						.setIcon(new CarIcon.Builder(
-								IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_settings_outlined))
-								.build())
-						.setOnClickListener(() -> getCarContext()
-								.getCarService(ScreenManager.class)
-								.push(new SettingsScreen(getCarContext())))
-						.build();
+		settingsAction = new Action.Builder()
+				.setIcon(new CarIcon.Builder(
+						IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_settings_outlined))
+						.build())
+				.setOnClickListener(() -> getCarContext()
+						.getCarService(ScreenManager.class)
+						.push(new SettingsScreen(getCarContext())))
+				.build();
 
 		if (mapView != null) {
 			navigationCarSurface.setMapView(mapView);
 		}
 
 		String action = intent.getAction();
-		if (CarContext.ACTION_NAVIGATE.equals(action)) {
+		if (ACTION_NAVIGATE.equals(action)) {
 			CarToast.makeText(getCarContext(), "Navigation intent: " + intent.getDataString(), CarToast.LENGTH_LONG).show();
 		}
 		landingScreen = new LandingScreen(getCarContext(), settingsAction);
@@ -231,35 +258,63 @@ public class NavigationSession extends Session implements NavigationListener, Os
 	@Override
 	public void onNewIntent(@NonNull Intent intent) {
 		Log.i(TAG, "In onNewIntent() " + intent);
-		ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
-		if (CarContext.ACTION_NAVIGATE.equals(intent.getAction())) {
-			Uri uri = Uri.parse("http://" + intent.getDataString());
-			screenManager.popToRoot();
-			String query = uri.getQueryParameter("q");
-			if (query == null) {
-				query = "";
-			}
-			screenManager.pushForResult(
-					new SearchResultsScreen(
-							getCarContext(),
-							settingsAction,
-							query),
-					(obj) -> {
-					});
-
-			return;
-		}
-
-		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
-		// the
-		// top if any other screens were pushed onto it.
 		Uri uri = intent.getData();
-		if (uri != null
-				&& URI_SCHEME.equals(uri.getScheme())
-				&& URI_HOST.equals(uri.getSchemeSpecificPart())) {
+		if (uri != null) {
+			if (ACTION_NAVIGATE.equals(intent.getAction())) {
+				processNavigationIntent(uri);
+			} else {
+				processDeepLinkActions(uri);
+			}
+		}
+	}
 
+	private void processNavigationIntent(@NonNull Uri uri) {
+		GeoParsedPoint point = GeoPointParserUtil.parse(uri.toString());
+		if (point != null) {
+			CarContext context = getCarContext();
+			ScreenManager screenManager = context.getCarService(ScreenManager.class);
+			screenManager.popToRoot();
+
+			if (point.isGeoPoint()) {
+				SearchResult result = new SearchResult();
+				result.objectType = ObjectType.LOCATION;
+				result.object = result.location = new LatLon(point.getLatitude(), point.getLongitude());
+
+				String label = point.getLabel();
+				if (Algorithms.isEmpty(label)) {
+					PointDescription description = new PointDescription(point.getLatitude(), point.getLongitude());
+					result.localeName = description.getSimpleName(getApp(), false);
+				} else {
+					result.localeName = label;
+				}
+				screenManager.pushForResult(new RoutePreviewScreen(context, settingsAction, result), (obj) -> {
+					getApp().getOsmandMap().getMapLayers().getMapActionsHelper().startNavigation();
+					if (hasStarted()) {
+						startNavigation();
+					}
+				});
+			} else {
+				String text = point.isGeoAddress() ? point.getQuery() : uri.toString();
+				screenManager.pushForResult(new SearchResultsScreen(context, settingsAction, text), (obj) -> {});
+			}
+		}
+	}
+
+	private void processDeepLinkActions(@NonNull Uri uri) {
+		// Process the intent from DeepLinkNotificationReceiver. Bring the routing screen back to
+		// the top if any other screens were pushed onto it.
+		if (URI_SCHEME.equals(uri.getScheme()) && URI_HOST.equals(uri.getSchemeSpecificPart())
+				&& DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment())) {
+			ScreenManager screenManager = getCarContext().getCarService(ScreenManager.class);
 			Screen top = screenManager.getTop();
-			if (NavigationService.DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment()) && !(top instanceof LandingScreen)) {
+
+			RoutingHelper routingHelper = getApp().getRoutingHelper();
+			boolean followingMode = routingHelper.isFollowingMode();
+			boolean routeCalculated = routingHelper.isRouteCalculated();
+			boolean pauseNavigation = routingHelper.isPauseNavigation();
+
+			boolean navigation = followingMode || routeCalculated && pauseNavigation;
+			if (navigation && !(top instanceof NavigationScreen) || !navigation && !(top instanceof LandingScreen)) {
 				screenManager.popToRoot();
 			}
 		}

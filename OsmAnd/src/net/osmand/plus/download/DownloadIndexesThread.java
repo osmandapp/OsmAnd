@@ -671,7 +671,7 @@ public class DownloadIndexesThread {
 							nonHiddenFile.delete();
 						}
 					}
-					checkDownload(item);
+					checkDownload(item, time);
 				} else {
 					app.logMapDownloadEvent("failed", item, time);
 				}
@@ -690,10 +690,14 @@ public class DownloadIndexesThread {
 		}
 	}
 
-	private void checkDownload(IndexItem item) {
+	private void checkDownload(IndexItem item, long downloadTime) {
 		Map<String, String> params = new HashMap<>();
 		params.put("file_name", item.fileName);
 		params.put("file_size", item.size);
-		AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/check_download", params, "Check download", false, false, null);
+		int downloadTimeSec = (int) (downloadTime / 1000L);
+		params.put("download_time", String.valueOf(downloadTimeSec));
+
+		String url = AndroidNetworkUtils.getHttpProtocol() + "osmand.net/api/check_download";
+		AndroidNetworkUtils.sendRequestAsync(app, url, params, "Check download", false, false, null);
 	}
 }

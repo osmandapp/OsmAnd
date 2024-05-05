@@ -354,11 +354,11 @@
     <string name="routing_attr_prefer_motorway_name">Preferir autopistas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
     <string name="routing_attr_avoid_toll_name">Sin peajes</string>
-    <string name="routing_attr_avoid_toll_description">Evitar caminos con peajes</string>
+    <string name="routing_attr_avoid_toll_description">Evita caminos con peajes</string>
     <string name="routing_attr_avoid_unpaved_name">Sólo caminos pavimentados</string>
-    <string name="routing_attr_avoid_unpaved_description">Evitar caminos sin pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_description">Evita caminos sin pavimentar</string>
     <string name="routing_attr_avoid_motorway_name">Sin autopistas</string>
-    <string name="routing_attr_avoid_motorway_description">Evitar autopistas</string>
+    <string name="routing_attr_avoid_motorway_description">Evita tomar autopistas</string>
     <string name="routing_attr_weight_name">Peso</string>
     <string name="routing_attr_weight_description">Indica el peso del vehículo permitido en rutas.</string>
     <string name="lang_sw">Suajili</string>
@@ -482,7 +482,7 @@
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
     <string name="use_displayed_track_for_navigation">¿Usar la traza mostrada para la navegación?</string>
     <string name="routing_attr_avoid_ferries_name">Sin ferris o transbordadores</string>
-    <string name="routing_attr_avoid_ferries_description">Evitar ferris o transbordadores</string>
+    <string name="routing_attr_avoid_ferries_description">Evita usar ferris o transbordadores</string>
     <string name="android_19_location_disabled">Desde Android 4.4 (KitKat), la carpeta de almacenamiento antigua (%s) se encuentra en desuso. ¿Copiar todos los archivos de OsmAnd a la nueva ubicación de almacenamiento\?
 \n Nota 1: Los archivos antiguos permanecerán intactos (pero pueden borrarse manualmente).
 \n Nota 2: En la nueva ubicación de almacenamiento será imposible compartir archivos entre OsmAnd y OsmAnd+.</string>
@@ -611,7 +611,7 @@
     <string name="accessibility_options">Opciones de accesibilidad</string>
     <string name="select_address_activity">Indicar dirección</string>
     <string name="favourites_list_activity">Elegir favorito</string>
-    <string name="local_openstreetmap_act_title">Cambios OSM</string>
+    <string name="local_openstreetmap_act_title">Cambios de OSM</string>
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="access_arrival_time">Hora de llegada</string>
@@ -974,11 +974,11 @@
     <string name="offline_edition_descr">Si se activa la edición sin conexión, los cambios serán guardados localmente primero y serán cargados por solicitud, de lo contrario los cambios serán cargados de inmediato.</string>
     <string name="update_poi_does_not_change_indexes">Los cambios de PDI dentro de la aplicación no afectan a los archivos de mapa descargados; en su lugar, los cambios se guardan como un archivo en el dispositivo.</string>
     <string name="local_openstreetmap_uploading">Subiendo…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} PDI/notas de OSM subidos</string>
+    <string name="local_openstreetmap_were_uploaded">Se enviaron {0} PDI/notas de OSM</string>
     <string name="local_openstreetmap_uploadall">Enviar todos</string>
     <string name="local_openstreetmap_upload">Subir a OpenStreetMap</string>
     <string name="local_openstreetmap_delete">Borrar edición</string>
-    <string name="local_openstreetmap_descr_title">Edición asíncrona OSM:</string>
+    <string name="local_openstreetmap_descr_title">Edición de OSM asíncrona:</string>
     <string name="local_openstreetmap_settings">PDI/notas de OSM guardados en el dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Muestra y gestiona PDI/notas de OSM en la base de datos del dispositivo.</string>
     <string name="live_monitoring_interval_descr">Indica el intervalo del seguimiento en línea.</string>
@@ -1517,7 +1517,7 @@
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_install_needs_network">Debes conectarte a Internet para instalar este complemento.</string>
     <string name="shared_string_get">Obtener</string>
-    <string name="routing_attr_avoid_borders_description">Evitar cruzar las fronteras nacionales</string>
+    <string name="routing_attr_avoid_borders_description">Evita cruzar las fronteras nacionales</string>
     <string name="routing_attr_height_name">Altura</string>
     <string name="routing_attr_height_description">Indica la altura permitida del vehículo en rutas.</string>
     <string name="use_fast_recalculation">Recálculo inteligente de ruta</string>
@@ -1614,7 +1614,7 @@
 \nsin conexión</string>
     <string name="commit_poi">Enviar PDI</string>
     <string name="routing_attr_avoid_shuttle_train_name">Sin trenes de enlace</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Evitar trenes de enlace</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Evita usar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
     <string name="tab_title_advanced">Avanzado</string>
@@ -1765,7 +1765,7 @@
     <string name="access_from_map">Acceso desde el mapa</string>
     <string name="please_specify_poi_type_only_from_list">Indica el tipo de PDI correcto u omítelo.</string>
     <string name="routing_attr_avoid_stairs_name">Sin escaleras</string>
-    <string name="routing_attr_avoid_stairs_description">Evitar escaleras</string>
+    <string name="routing_attr_avoid_stairs_description">Evita ir por escaleras</string>
     <string name="routing_attr_avoid_borders_name">Sin cruces fronterizos</string>
     <string name="shared_string_near">Cerca de</string>
     <string name="shared_string_hide">Ocultar</string>
@@ -2041,7 +2041,7 @@
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos de trazas aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos de trazas a la carpeta</string>
-    <string name="gpx_add_track">Añadir</string>
+    <string name="gpx_add_track">Añadir más…</string>
     <string name="shared_string_appearance">Aspecto</string>
     <string name="rendering_value_fine_name">Muy fino</string>
     <string name="route_calculation">Cálculo de la ruta</string>
@@ -2325,7 +2325,7 @@
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacencia</string>
-    <string name="quick_action_auto_zoom">Alternar zum automático del mapa</string>
+    <string name="quick_action_auto_zoom">Zum automático del mapa</string>
     <string name="quick_action_auto_zoom_desc">Un botón que alterna el zum automático de acuerdo a la velocidad.</string>
     <string name="quick_action_auto_zoom_on">Activar el zum automático</string>
     <string name="quick_action_auto_zoom_off">Desactivar el zum automático</string>
@@ -2492,7 +2492,7 @@
     <string name="fast_coordinates_input_descr">Elige el formato de ingreso de las coordenadas. Pulsa en «Opciones» para cambiarlo.</string>
     <string name="fast_coordinates_input">Ingreso rápido de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Sin caminos de hielo ni vados</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar caminos con hielo y vados.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita caminos con hielo y vados.</string>
     <string name="make_round_trip_descr">Duplica el punto de partida y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="osn_modify_dialog_error">No se pudo modificar la nota.</string>
@@ -2635,7 +2635,7 @@
     <string name="waypoints_removed_from_map_markers">Puntos de referencia borrados de los marcadores del mapa</string>
     <string name="use_two_digits_longitude">Usar longitud de dos dígitos</string>
     <string name="shared_string_result">Resultado</string>
-    <string name="saved_articles">Artículos favoritos</string>
+    <string name="saved_articles">Artículos destacados</string>
     <string name="shared_string_explore">Explorar</string>
     <string name="wikivoyage_search_hint">Buscar por país, ciudad o provincia</string>
     <string name="shared_string_read">Leer</string>
@@ -2695,7 +2695,7 @@
     <string name="paid_app">Aplicación de pago</string>
     <string name="paid_plugin">Complemento de pago</string>
     <string name="osmand_team">Equipo de OsmAnd</string>
-    <string name="maps_you_need_descr">Basado en los artículos favoritos, se recomienda descargar los siguientes mapas:</string>
+    <string name="maps_you_need_descr">Basado en los artículos destacados, se recomienda descargar los siguientes mapas:</string>
     <string name="maps_you_need">Mapas que necesitas</string>
     <string name="shared_string_restart">Reiniciar aplicación</string>
     <string name="purchase_cancelled_dialog_title">Has cancelado la suscripción de OsmAnd Live</string>
@@ -2713,7 +2713,7 @@
     <string name="light_rs_render_descr">Estilo de conducción simple. Modo nocturno suave, caminos contrastantes con estilo naranja, atenúa los objetos de mapas secundarios, características topográficas como curvas de nivel.</string>
     <string name="topo_render_descr">Para practicar caminatas, senderismo y ciclismo en la naturaleza. Legible al aire libre. Caminos y objetos naturales en contraste, diferentes tipos de recorridos, opciones avanzadas en curvas de nivel, detalles adicionales. Ajustar la integridad de la superficie distingue la calidad del camino. Sin modo nocturno.</string>
     <string name="default_render_descr">Estilo de uso general. Ciudades densas mostradas limpiamente. Cuenta con recorridos, calidad de la superficie, restricciones de acceso, escudos, visualización de caminos según escala SAC/CAI y características de deportes acuáticos y topográficas como curvas de nivel.</string>
-    <string name="shared_string_bookmark">Favorito</string>
+    <string name="shared_string_bookmark">Destacar</string>
     <string name="off_road_render_descr">Adecuado para usarlo durante la conducción todoterreno basado en el estilo «Topo» y como un mapa subyacente con imágenes satelitales verdes. Reducción del grosor en carreteras principales, aumento del grosor de las vías, senderos, bicicletas y otras rutas.</string>
     <string name="touring_view_render_descr">Estilo turístico con alto contraste y máximo detalle. Incluye todas las opciones del estilo predefinido de OsmAnd, mientras que muestra tantos detalles como sea posible, en caminos, senderos y otras formas de viaje. Clara distinción del «atlas turístico» entre tipos de caminos. Adecuado para uso diurno, nocturno y al aire libre.</string>
     <string name="access_intermediate_arrival_time">Hora de llegada intermedia</string>
@@ -2874,23 +2874,23 @@
     <string name="avoid_pt_types">Evitar tipos de transporte…</string>
     <string name="quick_action_day_night_mode">modo %s</string>
     <string name="routing_attr_avoid_sett_name">Sin adoquinado natural</string>
-    <string name="routing_attr_avoid_sett_description">Evitar calles con adoquines naturales</string>
+    <string name="routing_attr_avoid_sett_description">Evita calles con adoquines naturales</string>
     <string name="shared_string_degrees">Grados</string>
     <string name="shared_string_milliradians">Miliradián</string>
     <string name="angular_measeurement">Unidad angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Sin tranvías</string>
-    <string name="routing_attr_avoid_tram_description">Evitar tranvías</string>
+    <string name="routing_attr_avoid_tram_description">Evita usar tranvías</string>
     <string name="routing_attr_avoid_bus_name">Sin autobuses</string>
-    <string name="routing_attr_avoid_bus_description">Evitar autobuses y trolebuses</string>
+    <string name="routing_attr_avoid_bus_description">Evita usar autobuses y trolebuses</string>
     <string name="routing_attr_avoid_share_taxi_name">Sin taxis compartidos</string>
-    <string name="routing_attr_avoid_share_taxi_description">Evitar taxis compartidos</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evita usar taxis compartidos</string>
     <string name="routing_attr_avoid_train_name">Sin trenes</string>
-    <string name="routing_attr_avoid_train_description">Evitar trenes</string>
+    <string name="routing_attr_avoid_train_description">Evita usar trenes</string>
     <string name="routing_attr_avoid_subway_name">Sin metros</string>
-    <string name="routing_attr_avoid_subway_description">Evitar metros y trenes ligeros</string>
+    <string name="routing_attr_avoid_subway_description">Evita usar metros y trenes ligeros</string>
     <string name="routing_attr_avoid_ferry_name">Sin ferris o transbordadores</string>
-    <string name="routing_attr_avoid_ferry_description">Evitar ferris o transbordadores</string>
+    <string name="routing_attr_avoid_ferry_description">Evita usar ferris o transbordadores</string>
     <string name="send_log">Enviar registro del problema</string>
     <string name="files_moved">Se movieron %1$d archivos (%2$s).</string>
     <string name="files_copied">Se copiaron %1$d archivos (%2$s).</string>
@@ -4136,7 +4136,7 @@
     <string name="restore_complete">Restaurado</string>
     <string name="backup_version_history">Historial de versiones</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
-    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
+    <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios para los tipos de datos obsoletos en OsmAnd Cloud?</string>
     <string name="delete_version_history">Borrar el historial de versiones</string>
     <string name="routing_attr_avoid_tunnels_description">Evita los túneles</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
@@ -4455,8 +4455,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Muestra etiquetas con información no obvia sobre algún elemento (note)</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconos en zums bajos</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualización esquemática de iconos en zums bajos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneles fluviales</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Mostrar los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar visibilidad de los túneles fluviales</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilidad de los túneles fluviales</string>
     <string name="shared_string_used">Usados</string>
     <string name="waypoint_template">Plantilla de punto de referencia</string>
     <string name="turn_arrows_descr">Elige si se indican las flechas de giro en la línea de ruta.</string>
@@ -4664,14 +4664,14 @@
     <string name="routing_attr_hazmat_category_name">Categoría de materiales peligrosos</string>
     <string name="routing_attr_hazmat_category_no_restrictions_name">A (Sin restricciones)</string>
     <string name="routing_attr_avoid_fords_name">Evitar vados</string>
-    <string name="routing_attr_avoid_fords_description">Evitar pasar por vados</string>
+    <string name="routing_attr_avoid_fords_description">Evita pasar por vados</string>
     <string name="routing_attr_hazmat_category_description">Categoría de materiales peligrosos / Considera los permisos de acceso para vehículos con materiales peligrosos</string>
     <string name="time_to_navigation_point_widget_settings_desc">Pulsa el widget para cambiar de modo.</string>
     <string name="radius_ruler_mode_desc">Pulsa el widget para alternar el modo de «Regla radial».</string>
-    <string name="map_widget_distance_to_intermediate">Distancia al intermedio</string>
+    <string name="map_widget_distance_to_intermediate">Distancia al punto intermedio</string>
     <string name="shared_string_mode">Modo</string>
     <string name="map_widget_time_to_destination">Tiempo al destino</string>
-    <string name="map_widget_time_to_intermediate">Tiempo al intermedio</string>
+    <string name="map_widget_time_to_intermediate">Tiempo al punto intermedio</string>
     <string name="lang_sat">Santalí</string>
     <string name="average_speed_skip_stops">Tener en cuenta las paradas</string>
     <string name="average_speed_time_interval_desc">Indica el intervalo de tiempo para la velocidad media.</string>
@@ -4779,7 +4779,7 @@
     <string name="how_to_use">Cómo usar:</string>
     <string name="distance_by_tap_use_description">Pulsa en el mapa para ver la distancia entre la ubicación actual y el punto pulsado.
 \nPulsa con 2 dedos en el mapa para ver la distancia entre los puntos pulsados.</string>
-    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">¿Borrar el grupo «%1$s» y todos los puntos incluidos (%2$d)?</string>
     <string name="included_in_your_current_plan">Incluido en el plan actual de «%1$s»</string>
     <string name="available_as_part_of_subscription_plan">Disponible como parte de la suscripción «%1$s».</string>
     <string name="quick_action_map_center_widget_descr">Un botón que muestra u oculta en el mapa, el widget para centrar el mapa.</string>
@@ -4799,14 +4799,14 @@
     <string name="coordinates_widget_current_location">Coordenadas: ubicación actual</string>
     <string name="favorites_backup">Copia de seguridad de favoritos</string>
     <string name="purchases_feature_desc_cross_buy">Usa las funciones de la suscripción en diferentes plataformas (Android/iOS/web) sin costo adicional.</string>
-    <string name="external_sensor_widgets">Widgets de ANT+</string>
+    <string name="external_sensor_widgets">Sensores externos</string>
     <string name="ant_missing_dependency">Falta la dependencia</string>
     <string name="ant_go_to_store">Ir a la tienda</string>
     <string name="ant_read_data">Leer datos</string>
     <string name="ant_write_to_gpx">Escribir datos en la traza</string>
     <string name="ant_heart_rate_write_gpx_desc">Incluye la frecuencia cardíaca en la traza</string>
     <string name="map_widget_ant_heart_rate">Ritmo cardíaco</string>
-    <string name="map_widget_ant_heart_rate_desc">Muestra la frecuencia cardíaca del usuario durante una determinada actividad en tiempo real</string>
+    <string name="map_widget_ant_heart_rate_desc">Muestra el ritmo cardíaco del usuario durante una determinada actividad en tiempo real</string>
     <string name="map_widget_ant_bicycle_power">Potencia de la bicicleta</string>
     <string name="map_widget_ant_bicycle_power_desc">Muestra la potencia de salida del ciclista, que se usa para mover la bicicleta hacia adelante</string>
     <string name="map_widget_ant_bicycle_cadence">Cadencia de la bicicleta</string>
@@ -5003,7 +5003,7 @@
     <string name="cloud_conflict">Conflicto</string>
     <string name="upload_all">Enviar todos</string>
     <string name="cloud_recent_changes">Cambios</string>
-    <string name="cloud_all_changes_uploaded">Se cargaron todo los cambios</string>
+    <string name="cloud_all_changes_uploaded">Todos los cambios cargados</string>
     <string name="cloud_all_changes_downloaded">Todos los cambios descargados</string>
     <string name="last_sync">Última sincronización</string>
     <string name="import_export">Importar/exportar</string>
@@ -5031,7 +5031,6 @@
     <string name="weight_limit_error">El valor mínimo es de %1$s toneladas. Usa el perfil «%2$s» si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="sound_beep_complex_loud">Pitido: complejo (alto)</string>
     <string name="sound_beep_complex">Pitido: complejo</string>
-    <string name="change_default_tracks_appearance_confirmation_description">¿Cambiar el aspecto de %1$s trazas\?</string>
     <string name="shared_string_apply_changes">Aplicar cambios</string>
     <string name="no_visible_tracks_description">Marca las trazas a mostrar en el mapa.</string>
     <string name="no_visible_tracks">Sin trazas en el mapa</string>
@@ -5180,7 +5179,7 @@
     <string name="ant_plus_pair_bluetooth_prompt">Puedes vincular con OsmAnd, sensores «Bluetooth LE» y «ANT+».</string>
     <string name="learn_more_about_sensors_link">Véase más sobre sensores.</string>
     <string name="file_already_exists_description">«%1$s». Ya existe un archivo con ese nombre. Al reemplazarlo, se sobrescribirán todos los cambios realizados con la versión actual.</string>
-    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»\?</string>
+    <string name="nav_profile_confirm_delete">¿Borrar «%1$s»?</string>
     <string name="number_of_tracks">%1$s trazas</string>
     <string name="search_track_by_name">Buscar traza por el nombre</string>
     <string name="no_search_results">Sin resultados</string>
@@ -5245,7 +5244,7 @@
     <string name="osmand_cloud_deleting_account_descr">En un momento será borrada tu cuenta con todos los datos de OsmAnd Cloud.
 \n
 \nTodos los datos en el dispositivo permanecen intactos.</string>
-    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud\?
+    <string name="osmand_cloud_delete_account_confirmation_descr">¿Borrar la cuenta de OsmAnd Cloud?
 \n
 \nEsta acción no puede deshacerse.</string>
     <string name="osmand_cloud_delete_account_confirmation">¿Borrar cuenta\?</string>
@@ -5255,7 +5254,7 @@
     <string name="osmand_cloud_deletion_all_data_warning">Todos los datos de OsmAnd Cloud serán %1$s. Los datos en el dispositivo se mantienen intactos.</string>
     <string name="osmand_cloud_deletion_subscriptions_warning">Esto no cancelará la suscripción a OsmAnd Pro.</string>
     <string name="manage_subscriptions">Gestionar suscripciones.</string>
-    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»\?</string>
+    <string name="delete_account_warning">¿Borrar la cuenta «%1$s»?</string>
     <string name="shared_string_deleting">Borrando</string>
     <string name="deleting_complete">Borrado completo</string>
     <string name="delete_account">Borrar cuenta</string>
@@ -5374,7 +5373,7 @@
     <string name="help_article_map_tracks_on_map_name">Trazas y rutas</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
     <string name="help_article_navigation_car_play_name">CarPlay</string>
-    <string name="help_article_navigation_guidance_name">Guía</string>
+    <string name="help_article_navigation_guidance_name">Guía de navegación</string>
     <string name="help_article_navigation_guidance_map_during_navigation_name">Pantalla del mapa al navegar</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Avisos por voz / Notificaciones</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">Navegación en bicicleta (MTB)</string>
@@ -5448,23 +5447,27 @@
     <string name="max_altitude">Altitud máx.</string>
     <string name="track_filter_date_selected_format">%s - %s</string>
     <string name="shared_string_created">Creado</string>
-    <string name="release_4_6">• Se ha añadido la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.
+    <string name="release_4_6">• Android Auto: Se ha añadido el modo 3D
 \n
-\n• Se ha añadido el widget «Relación de planeo».
-\n
-\n• Se añadieron filtros y carpetas inteligentes para las trazas
+\n• Trazas: Se añadieron filtros y carpetas inteligentes para las trazas y se ha optimizado la memoria para archivos grandes
 \n
 \n• Se añadieron filas para los paneles de widget superior e inferior, con admisión a todos los widgets
 \n
-\n• Se ha añadido el widget de temperatura en ANT+
+\n• Se ha mejorado la gestión local de recursos
 \n
-\n• Se ha mejorado la gestión de memoria para trazas GPX grandes
+\n• Se ha añadido la capacidad de cambiar los atajos de teclado para dispositivos de entrada externos.
 \n
-\n• Se ha mejorado la gestión de archivos locales en el menú «Descargas»
+\n• Se ha añadido el widget «Relación de planeo» y «Ubicacion del Sol»
 \n
-\n• Se ha añadido el widget «RAM disponible»
+\n• OsmAnd Cloud: Ahora puedes acceder a archivos eliminados
+\n
+\n• Mejora en la coloración de trazas en modo pendiente con nuevo gradiente simétrico
 \n
 \n• Se han corregido los problemas de transparencia en la barra de estado
+\n
+\n• Se ha añadido el widget de temperatura en ANT+
+\n
+\n• Se ha añadido el widget «RAM disponible»
 \n
 \n</string>
     <string name="app_mode_paragliding">Parapente</string>
@@ -5487,12 +5490,12 @@
     <string name="terrain_maps">Mapas topográficos</string>
     <string name="shared_string_temperature">Temperatura</string>
     <string name="sort_country_name_descending">Nombre del país: Z – A</string>
-    <string name="delete_map_description">¿Borrar el mapa «%1$s»\?</string>
-    <string name="maps_and_resources">Mapas y Recursos</string>
-    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera\? Esta acción no se puede deshacer.</string>
+    <string name="delete_map_description">¿Borrar el mapa «%1$s»?</string>
+    <string name="maps_and_resources">Mapas y recursos</string>
+    <string name="cloud_trash_clear_confirmation">¿Borrar permanentemente todos los elementos de la papelera?</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
     <string name="smart_folder_name_present">Esta carpeta inteligente, ya se encuentra presente</string>
-    <string name="empty_smart_folder_description">Todas las trazas que coincidan, serán añadidas automáticamente aquí</string>
+    <string name="empty_smart_folder_description">Las trazas que coincidan, serán añadidas aquí</string>
     <string name="configure_filter">Configurar filtro</string>
     <string name="restore_from_trash">Restaurar desde la papelera</string>
     <string name="smart_folder_saved">Carpeta inteligente guardada</string>
@@ -5507,9 +5510,7 @@
     <string name="add_smart_folder">Añadir carpeta inteligente</string>
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
-    <string name="delete_trash_item_confirmation_desc">«%1$s» será borrado permanentemente. ¿Estás seguro\?
-\n
-\nEsta acción no se puede deshacer.</string>
+    <string name="delete_trash_item_confirmation_desc">¿Borrar «%1$s» permanentemente?</string>
     <string name="discard_filter_changes">Descartar cambios del filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
     <string name="shared_string_empty_trash">Vaciar papelera</string>
@@ -5519,7 +5520,7 @@
     <string name="shared_string_is_deleted">«%1$s» se ha borrado.</string>
     <string name="cloud_item_restored">«%1$s» se ha restaurado en Cloud.</string>
     <string name="trash_alert_card_desc">Los elementos en la papelera serán borrados pasados los %1$s días.</string>
-    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros\?</string>
+    <string name="discard_filter_changes_prompt">¿Restablecer todos los filtros?</string>
     <string name="no_config_smart_folder_description">Las carpetas inteligentes permiten agrupar trazas mediante filtros aplicados</string>
     <string name="trash_is_empty">Papelera vacía</string>
     <string name="shared_string_trash">Papelera</string>
@@ -5547,14 +5548,14 @@
     <string name="key_event_action_take_media_note">Crear nota multimedia</string>
     <string name="key_event_action_activity_back_pressed">Actividad atrás pulsada</string>
     <string name="key_event_action_emit_navigation_hint">Emitir sugerencia de navegación</string>
-    <string name="remove_type_q">¿Quitar el tipo «%1$s»\?</string>
+    <string name="remove_type_q">¿Quitar el tipo «%1$s»?</string>
     <string name="shared_string_action">Acción</string>
     <string name="add_new_type">Añadir nuevo tipo</string>
     <string name="key_event_action_move_up">Mover arriba</string>
     <string name="key_event_action_open_search_view">Abrir vista de búsqueda</string>
     <string name="key_event_action_zoom_out">Alejar</string>
     <string name="key_event_action_toggle_drower">Mostrar/ocultar menú lateral</string>
-    <string name="key_is_already_assigned_error">La tecla «%1$s» ya se ha asignado a otra acción: «%2$s»</string>
+    <string name="key_is_already_assigned_error">La tecla «%1$s» ya se ha asignado a la acción: «%2$s»</string>
     <string name="key_event_action_open_navigation_view">Abrir vista de navegación</string>
     <string name="external_input_device_title">Dispositivo de entrada externo</string>
     <string name="key_bindings">Atajos de teclado</string>
@@ -5572,4 +5573,125 @@
     <string name="discard_changes_prompt">¿Descartar cambios?</string>
     <string name="row_number">Fila %1$s</string>
     <string name="see_all_plans">Ver todos los planes</string>
+    <string name="key_assignments">Asignaciones de teclas</string>
+    <string name="reset_key_assignments_desc">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="rendering_attr_showToll_name">Mostrar restricciones de peajes</string>
+    <string name="topography_maps">Mapas topográficos</string>
+    <string name="lang_zh_hans">Chino simplificado</string>
+    <string name="shared_string_reassign">Reasignar</string>
+    <string name="reset_key_assignments">Restablecer asignaciones de teclas</string>
+    <string name="rendering_attr_showToll_description">Muestra las restricciones de peajes en las carreteras</string>
+    <string name="zoom_non_animated">Zum no animado</string>
+    <string name="target_elevation">Elevación del objetivo</string>
+    <string name="lang_zh_hant">Chino tradicional</string>
+    <string name="zoom_animated">Zum animado</string>
+    <string name="shared_string_eta">ETA</string>
+    <string name="clear_key_assignment">Vaciar asignación de tecla</string>
+    <string name="clear_key_assignment_desc">La vinculación con la tecla para la acción elegida, será vaciada y definida a «Ninguno».</string>
+    <string name="button_already_assigned_to_this_action">El botón ya se ha asignado a esta acción.</string>
+    <string name="previous_row_has_complex_widget">La fila anterior tiene un widget complejo</string>
+    <string name="complex_widget_alert">El widget «%1$s» sólo puede colocarse en su propia fila.</string>
+    <string name="key_assignments_already_cleared_message">Todas las asignaciones de teclas ya fueron vaciadas</string>
+    <string name="shared_string_next_event">Próximo evento</string>
+    <string name="precise_distance_numbers">Números precisos de distancia</string>
+    <string name="use_v1_auto_zoom">Zum automático discreto (versión antigua)</string>
+    <string name="any_connected">Cualquiera conectado</string>
+    <string name="map_widget_sun_position">Ubicación del Sol</string>
+    <string name="add_new_button">Añadir un nuevo botón</string>
+    <string name="map_widget_sun_position_desc">Muestra el tiempo hasta el amanecer o el atardecer.</string>
+    <string name="any_connected_with_device">Cualquiera conectado: %s</string>
+    <string name="shared_string_link">Enlace</string>
+    <string name="shared_string_copyright">Derechos de autor</string>
+    <string name="shared_string_author">Autor</string>
+    <string name="shared_string_road_maps">Mapas viales</string>
+    <string name="shared_string_extensions">Extensiones</string>
+    <string name="shared_string_license">Licencia</string>
+    <string name="ltr_or_rtl_combine_with_brackets">%1$s (%2$s)</string>
+    <string name="shared_string_all_tracks">Todas las trazas</string>
+    <string name="shared_string_activity">Actividad</string>
+    <string name="battery_optimization_desc">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.
+\n
+\nSi experimenta alguno de estos problemas, puede intentar cambiar el uso de la batería a «Sin restricciones».</string>
+    <string name="avg_sensor_cadence">Cadencia de la bicicleta, promedio</string>
+    <string name="max_sensor_bycicle_power">Potencia de la bicicleta, máx</string>
+    <string name="avg_sensor_bycicle_power">Potencia de la bicicleta, promedio</string>
+    <string name="max_sensor_temperature">Temperatura, máx</string>
+    <string name="avg_sensor_temperature">Temperatura, promedio</string>
+    <string name="avg_sensor_speed">Velocidad del sensor, promedio</string>
+    <string name="sorted_sufolders_toast">Subcarpetas en «%1$s» están ordenadas por: «%2$s»</string>
+    <string name="sort_subfolders">Ordenar subcarpetas</string>
+    <string name="shared_string_keywords">Palabras clave</string>
+    <string name="shared_string_additional">Adicional</string>
+    <string name="battery_optimization_banner_content">La optimización de la batería en Android puede causar vacíos e imprecisiones en las trazas grabadas.</string>
+    <string name="battery_optimization_settings">Ajustes de optimización de la batería</string>
+    <string name="battery_optimization">Optimización de la batería</string>
+    <string name="max_sensor_speed">Velocidad del sensor, máx</string>
+    <string name="special_routing_cpp">Tipo de navegación especial</string>
+    <string name="custom_map_button_name_present">Ese botón ya existe</string>
+    <string name="add_button">Añadir botón</string>
+    <string name="custom_buttons">Botones personalizados</string>
+    <string name="default_buttons">Botones predefinidos</string>
+    <string name="max_sensor_heartrate">Ritmo cardíaco, máx</string>
+    <string name="avg_sensor_heartrate">Ritmo cardíaco, promedio</string>
+    <string name="max_sensor_cadence">Cadencia de la bicicleta, máx</string>
+    <string name="dont_ask_anymore">No preguntar más</string>
+    <string name="release_4_7">• Nuevo widget «Velocímetro» compatible con Android Auto
+\n
+\n• Configura la pantalla añadiendo varios botones de «Acción rápida»
+\n
+\n• Mejora de legibilidad de los datos en los gráficos
+\n
+\n• Se añadieron filtros de datos del sensor para las trazas
+\n
+\n• Se ha mejorado la personalización de la interfaz para los grupos de trazas.
+\n
+\n• Ahora se admiten etiquetas GPX adicionales
+\n
+\n• Personalización de «Distancia al navegar»: elige entre números precisos o estimados
+\n
+\n• Interfaz de usuario unificada para la selección de trazas
+\n
+\n• Inicio de sesión en OpenStreetMap cambiado a OAuth2
+\n
+\n</string>
+    <string name="auto_zoom_discrete">Discreto</string>
+    <string name="auto_zoom">Zum automático</string>
+    <string name="java_safe">Java (Seguro)</string>
+    <string name="rendering_attr_padusDisplayMode_name">Modo de visualización de tierras públicas</string>
+    <string name="rendering_attr_padusDisplayMode_description">Por tipo de acceso o nombre del administrador</string>
+    <string name="rendering_value_managerName_name">Por nombre del administrador</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Ocultar límites de tierras públicas</string>
+    <string name="speedometer_description">Muestra la velocidad actual detectada por el GPS</string>
+    <string name="shared_string_speedometer">Velocímetro</string>
+    <string name="shared_sting_all_colors">Todos los colores</string>
+    <string name="routing_type_a_star_2_phase">A* 2 fases</string>
+    <string name="auto_zoom_smooth">Suave</string>
+    <string name="gpx_approximation">Aproximación GPX</string>
+    <string name="routing_type">Tipo de navegación</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Ocultar límites de tierras públicas pero mantener sus áreas</string>
+    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="when_exceeded">Al excederse</string>
+    <string name="shared_string_limit">Límite</string>
+    <string name="rendering_value_access_name">Por tipo de acceso</string>
+    <string name="help_article_setup_a_route_name">Configurar una ruta</string>
+    <string name="routing_type_a_star_classic">A* clásico</string>
+    <string name="lang_ta_in">Tamil (India)</string>
+    <string name="distance_during_navigation">Distancia al navegar</string>
+    <string name="precise">Preciso</string>
+    <string name="round_up">Redondear</string>
+    <string name="download_cloud_versions">Descargar versiones de la nube</string>
+    <string name="upload_local_versions">Cargar versiones locales</string>
+    <string name="distance_during_navigation_description">Elige cómo se muestra la información de distancia en los widgets de navegación (distancia al punto, próximo giro, carriles).
+\n
+\nElige «%1$s» para números exactos, o «%2$s» para una legibilidad más fácil.</string>
+    <string name="gpx_approximation_cpp">Basado en la navegación (C++)</string>
+    <string name="gpx_approximation_java">Basado en la navegación (Java)</string>
+    <string name="gpx_approximation_geo_java">Basado en la geometría (Java, rápido)</string>
+    <string name="unchanged_parameter_summary">Cada traza conservará sus propios parámetros.</string>
+    <string name="shared_string_unchanged">Sin cambios</string>
+    <string name="map_widget_map_scale">Escala del mapa</string>
+    <string name="fix_north_up">Bloquear orientación «Norte arriba»</string>
+    <string name="fix_north_up_descr">El mapa no rota al usar gestos, en la orientación «Norte arriba»</string>
+    <string name="change_default_appearance_confirmation">¿Cambiar el aspecto predefinido de %1$s?</string>
+    <string name="use_3d_track_visualization">Vista 3D</string>
 </resources>

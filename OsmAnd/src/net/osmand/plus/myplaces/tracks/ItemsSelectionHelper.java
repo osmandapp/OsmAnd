@@ -67,6 +67,10 @@ public class ItemsSelectionHelper<T> {
 		allItems.add(item);
 	}
 
+	public void addItemToOriginalSelected(@NonNull T item) {
+		originalSelectedItems.add(item);
+	}
+
 	public boolean isItemSelected(@NonNull T item) {
 		return selectedItems.contains(item);
 	}

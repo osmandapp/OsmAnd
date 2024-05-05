@@ -340,7 +340,7 @@ public class PublicTransportCard extends MapBaseCard {
 	}
 
 	private View createRouteBadge(@NonNull TransportRouteResultSegment segment, boolean badgesRowClickable) {
-		LinearLayout bageView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
+		LinearLayout bageView = (LinearLayout) themedInflater.inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		TransportRoute transportRoute = segment.route;
 		TransportStopRoute transportStopRoute = TransportStopRoute.getTransportStopRoute(transportRoute, segment.getStart());
 

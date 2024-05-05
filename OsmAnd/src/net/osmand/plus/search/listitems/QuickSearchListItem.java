@@ -32,10 +32,11 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
+import net.osmand.plus.poi.PoiFilterUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
@@ -119,7 +120,12 @@ public class QuickSearchListItem {
 
 	public String getTypeName() {
 		String typeName = getTypeName(app, searchResult);
-		return (searchResult.alternateName != null ? searchResult.alternateName + " • " : "") + typeName;
+		String[] alternateName = new String[]{searchResult.alternateName};
+		if (searchResult.object instanceof Amenity) {
+			((Amenity) searchResult.object).getAdditionalInfoAndCollectCategories(
+					app.getPoiTypes(), null, null, alternateName);
+		}
+		return (alternateName[0] != null ? alternateName[0] + " • " : "") + typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
@@ -326,7 +332,7 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_intersection);
 			case POI_TYPE:
 				if (searchResult.object instanceof AbstractPoiType) {
-					String iconName = PoiUIFilter.getPoiTypeIconName((AbstractPoiType) searchResult.object);
+					String iconName = PoiFilterUtils.getPoiTypeIconName((AbstractPoiType) searchResult.object);
 					if (Algorithms.isEmpty(iconName) && searchResult.object instanceof PoiType) {
 						iconName = RenderingIcons.getIconNameForPoiType((PoiType) searchResult.object);
 					}
@@ -367,7 +373,7 @@ public class QuickSearchListItem {
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				int color = app.getFavoritesHelper().getColorWithCategory(fav, ContextCompat.getColor(app, R.color.color_favorite));
-				return PointImageDrawable.getFromFavorite(app, color, false, fav);
+				return PointImageUtils.getFromPoint(app, color, false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
 				color = group.getColor() == 0 ? ContextCompat.getColor(app, R.color.color_favorite) : group.getColor();
@@ -384,7 +390,7 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
-				return PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt);
+				return PointImageUtils.getFromPoint(app, wpt.getColor(), false, wpt);
 			case MAP_MARKER:
 				MapMarker marker = (MapMarker) searchResult.object;
 				if (!marker.history) {
@@ -525,7 +531,7 @@ public class QuickSearchListItem {
 	@DrawableRes
 	public static int getCustomFilterIconRes(@Nullable PoiUIFilter filter) {
 		int iconId = 0;
-		String iconName = PoiUIFilter.getCustomFilterIconName(filter);
+		String iconName = PoiFilterUtils.getCustomFilterIconName(filter);
 		if (iconName != null && RenderingIcons.containsBigIcon(iconName)) {
 			iconId = RenderingIcons.getBigIconResourceId(iconName);
 		}

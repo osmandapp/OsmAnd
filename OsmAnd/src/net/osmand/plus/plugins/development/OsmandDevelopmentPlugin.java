@@ -1,27 +1,22 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
-
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import com.github.mikephil.charting.charts.LineChart;
 
 import net.osmand.StateChangedListener;
+import net.osmand.core.android.MapRendererView;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.charts.GPXDataSetAxisType;
+import net.osmand.plus.charts.GPXDataSetType;
+import net.osmand.plus.charts.OrderedLineDataSet;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
-import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.widget.CameraDistanceWidget;
@@ -38,16 +33,32 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.WidgetsAvailabilityHelper;
 import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.fragments.SettingsScreenType;
+import net.osmand.plus.simulation.DashSimulateFragment;
+import net.osmand.plus.views.AutoZoomBySpeedHelper;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
+import net.osmand.plus.views.mapwidgets.widgetstates.ZoomLevelWidgetState;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_OSMAND_DEV;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_CAMERA_TILT;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_FPS;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_TARGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_ZOOM_LEVEL;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -56,7 +67,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	public final OsmandPreference<Boolean> USE_RASTER_SQLITEDB;
 	public final OsmandPreference<Boolean> SAVE_BEARING_TO_GPX;
 	public final OsmandPreference<Boolean> SAVE_HEADING_TO_GPX;
+	public final OsmandPreference<Boolean> SHOW_SYMBOLS_DEBUG_INFO;
+	public final OsmandPreference<Boolean> ALLOW_SYMBOLS_DISPLAY_ON_TOP;
 	private final StateChangedListener<Boolean> useRasterSQLiteDbListener;
+	private final StateChangedListener<Boolean> symbolsDebugInfoListener;
 
 	public OsmandDevelopmentPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -70,7 +84,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		WidgetsAvailabilityHelper.regWidgetVisibility(DEV_TARGET_DISTANCE, noAppMode);
 
 		pluginPreferences.add(settings.SAFE_MODE);
-		pluginPreferences.add(settings.APPROX_SAFE_MODE);
 		pluginPreferences.add(settings.DEBUG_RENDERING_INFO);
 		pluginPreferences.add(settings.SHOULD_SHOW_FREE_VERSION_BANNER);
 		pluginPreferences.add(settings.TRANSPARENT_STATUS_BAR);
@@ -80,6 +93,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		USE_RASTER_SQLITEDB = registerBooleanPreference("use_raster_sqlitedb", false).makeGlobal().makeShared().cache();
 		SAVE_BEARING_TO_GPX = registerBooleanPreference("save_bearing_to_gpx", false).makeGlobal().makeShared().cache();
 		SAVE_HEADING_TO_GPX = registerBooleanPreference("save_heading_to_gpx", true).makeGlobal().makeShared().cache();
+		SHOW_SYMBOLS_DEBUG_INFO = registerBooleanPreference("show_symbols_debug_info", false).makeGlobal().makeShared().cache();
+		ALLOW_SYMBOLS_DISPLAY_ON_TOP = registerBooleanPreference("allow_symbols_display_on_top", false).makeGlobal().makeShared().cache();
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
@@ -88,6 +103,16 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			}
 		};
 		USE_RASTER_SQLITEDB.addListener(useRasterSQLiteDbListener);
+
+		symbolsDebugInfoListener = change -> {
+			OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+			MapRendererView mapRenderer = mapView.getMapRenderer();
+			if (mapRenderer != null) {
+				mapView.applyDebugSettings(mapRenderer);
+			}
+		};
+		SHOW_SYMBOLS_DEBUG_INFO.addListener(symbolsDebugInfoListener);
+		ALLOW_SYMBOLS_DISPLAY_ON_TOP.addListener(symbolsDebugInfoListener);
 	}
 
 	@Override
@@ -163,7 +188,8 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			case DEV_CAMERA_DISTANCE:
 				return new CameraDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_ZOOM_LEVEL:
-				return new ZoomLevelWidget(mapActivity, customId, widgetsPanel);
+				ZoomLevelWidgetState zoomLevelWidgetState = new ZoomLevelWidgetState(app, customId);
+				return new ZoomLevelWidget(mapActivity, zoomLevelWidgetState, customId, widgetsPanel);
 			case DEV_TARGET_DISTANCE:
 				return new TargetDistanceWidget(mapActivity, customId, widgetsPanel);
 			case DEV_MEMORY:
@@ -210,25 +236,30 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		return quickActionTypes;
 	}
 
-	// If enabled, map should be rendered with elevation data (in 3D)
-	public boolean is3DMapsEnabled() {
-		return isRelief3dAllowed() && settings.ENABLE_3D_MAPS.get();
-	}
-
 	public boolean generateTerrainFrom3DMaps() {
 		return app.useOpenGlRenderer() && !USE_RASTER_SQLITEDB.get();
-	}
-
-	public boolean isRelief3dAllowed() {
-		return app.useOpenGlRenderer() && isRelief3dPurchased();
-	}
-
-	public boolean isRelief3dPurchased() {
-		return InAppPurchaseUtils.is3dMapsAvailable(app);
 	}
 
 	@Nullable
 	private SRTMPlugin getSrtmPlugin() {
 		return PluginsHelper.getEnabledPlugin(SRTMPlugin.class);
+	}
+
+	@Override
+	public void getAvailableGPXDataSetTypes(@NonNull GPXTrackAnalysis analysis, @NonNull List<GPXDataSetType[]> availableTypes) {
+		AutoZoomBySpeedHelper.addAvailableGPXDataSetTypes(app, analysis, availableTypes);
+	}
+
+	@Nullable
+	@Override
+	public OrderedLineDataSet getOrderedLineDataSet(@NonNull LineChart chart, @NonNull GPXTrackAnalysis analysis, @NonNull GPXDataSetType graphType, @NonNull GPXDataSetAxisType chartAxisType, boolean calcWithoutGaps, boolean useRightAxis) {
+		return AutoZoomBySpeedHelper.getOrderedLineDataSet(app, chart, analysis, graphType, chartAxisType,
+				calcWithoutGaps, useRightAxis);
+	}
+
+	@Nullable
+	@Override
+	protected TrackPointsAnalyser getTrackPointsAnalyser() {
+		return AutoZoomBySpeedHelper.getTrackPointsAnalyser(app);
 	}
 }

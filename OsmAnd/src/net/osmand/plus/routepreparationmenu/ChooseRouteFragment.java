@@ -1,13 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -24,24 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
@@ -93,6 +73,27 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.NAVIGATION_ROUTE_DETAILS_OPTIONS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
@@ -205,8 +206,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 								card.updateButtons();
 							}
 							if (fragment == current) {
-								updateZoomButtonsPos(fragment, fragment.getViewY(), true);
-								updatePagesViewPos(fragment, fragment.getViewY(), true);
+								updateElementsPosition(fragment);
 							}
 							Bundle args = fragment.getArguments();
 							if (args != null) {
@@ -222,6 +222,21 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		buildZoomButtons(view);
 		buildMenuButtons(view);
 		return view;
+	}
+
+	private void updateElementsPosition(@NonNull RouteDetailsFragment fragment) {
+		View fragmentView = fragment.getView();
+		if (fragmentView != null) {
+			fragmentView.getViewTreeObserver().addOnGlobalLayoutListener(
+					new ViewTreeObserver.OnGlobalLayoutListener() {
+						@Override
+						public void onGlobalLayout() {
+							fragmentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+							updatePagesViewPos(fragment, fragment.getViewY(), true);
+							updateZoomButtonsPos(fragment, fragment.getViewY(), true);
+						}
+					});
+		}
 	}
 
 	@Override
@@ -497,13 +512,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_as_file))
 					.setIcon(getContentIcon(R.drawable.ic_action_file_routing))
-					.setOnClickListener(_view -> shareFile(app))
+					.setOnClickListener(menuItem -> shareFile(app))
 					.create());
 
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitle(getString(R.string.share_link))
 					.setIcon(getContentIcon(R.drawable.ic_action_link))
-					.setOnClickListener(_view -> shareLink(app))
+					.setOnClickListener(menuItem -> shareLink(app))
 					.create());
 
 			PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
@@ -801,7 +816,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!visible) {
 				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 				if (!portrait) {
-					mapActivity.getMapView().setMapPositionX(1);
+					mapActivity.getMapPositionManager().setMapPositionShiftedX(true);
 				}
 			}
 			mapActivity.updateStatusBarColor();
@@ -887,7 +902,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (mapActivity != null) {
 			dismiss(false);
 			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
-				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+				mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
 			}
 		}
 	}

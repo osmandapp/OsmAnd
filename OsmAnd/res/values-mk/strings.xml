@@ -2409,7 +2409,7 @@
     <string name="search_location">Baranje za lokacija…</string>
     <string name="storage_free_space">Sloboden prostor</string>
     <string name="storage_place_description">Skladiranje podatoci na OsmAnd (za karti, datoteki so pesni itn.): %1$s.</string>
-    <string name="give_permission">Dozvola za donacija (grant)</string>
+    <string name="give_permission">Dozvole</string>
     <string name="allow_access_location">Dozvolete pristap na lokacija</string>
     <string name="first_usage_greeting">Dobijte nasoki i otkrijte novi mesta bez internet konekcija</string>
     <string name="routing_attr_short_way_name">Efikasen način za gorivo</string>

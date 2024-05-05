@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.backup.ui.BackupAuthorizationFragment.OPEN_BACKUP_AUTH;
+import static net.osmand.plus.helpers.MapFragmentsHelper.CLOSE_ALL_FRAGMENTS;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -202,15 +205,21 @@ public class MyPlacesActivity extends TabActivity {
 	public void showOnMap(@Nullable FragmentStateHolder fragment, double latitude, double longitude,
 	                      int zoom, PointDescription pointDescription, boolean addToHistory, Object toShow) {
 		settings.setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
+
+		Bundle args = new Bundle();
+		args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
+
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
-		MapActivity.launchMapActivityMoveToTop(this, bundle);
+		MapActivity.launchMapActivityMoveToTop(this, bundle, null, args);
 	}
 
 	public void showOsmAndCloud(@Nullable FragmentStateHolder fragment) {
+		Bundle args = new Bundle();
+		args.putBoolean(OPEN_BACKUP_AUTH, true);
+		args.putBoolean(CLOSE_ALL_FRAGMENTS, true);
+
 		Bundle bundle = fragment != null ? fragment.storeState() : null;
-		Bundle openScreenArguments = new Bundle();
-		openScreenArguments.putBoolean(BackupAuthorizationFragment.OPEN_BACKUP_AUTH, true);
-		MapActivity.launchMapActivityMoveToTop(this, bundle, null, openScreenArguments);
+		MapActivity.launchMapActivityMoveToTop(this, bundle, null, args);
 	}
 
 	@Nullable

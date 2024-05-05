@@ -13,7 +13,7 @@ import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.util.Algorithms;
@@ -29,16 +29,16 @@ import java.util.Map;
 
 public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 
-	private final List<ExportSettingsType> types;
+	private final List<ExportType> types;
 
 	public DeleteAllFilesCommand(@NonNull BackupHelper helper,
-								 @Nullable List<ExportSettingsType> types) {
+								 @Nullable List<ExportType> types) {
 		super(helper, true);
 		this.types = types;
 	}
 
 	public DeleteAllFilesCommand(@NonNull BackupHelper helper,
-								 @Nullable List<ExportSettingsType> types,
+								 @Nullable List<ExportType> types,
 								 @Nullable OnDeleteFilesListener listener) {
 		super(helper, true, listener);
 		this.types = types;
@@ -101,7 +101,7 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 				List<RemoteFile> filesToDelete = new ArrayList<>();
 				if (types != null) {
 					for (RemoteFile file : remoteFiles) {
-						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+						ExportType exportType = ExportType.findBy(file);
 						if (types.contains(exportType)) {
 							filesToDelete.add(file);
 						}

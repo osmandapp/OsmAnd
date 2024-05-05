@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -25,6 +26,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
 import net.osmand.plus.plugins.parking.ParkingPositionPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.configure.settings.AverageGlideWidgetSettingsFragment;
@@ -38,8 +40,9 @@ import net.osmand.plus.views.mapwidgets.configure.settings.SensorWidgetSettingFr
 import net.osmand.plus.views.mapwidgets.configure.settings.SunriseSunsetSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.TimeToNavigationPointSettingsFragment;
 import net.osmand.plus.views.mapwidgets.configure.settings.WidgetSettingsBaseFragment;
+import net.osmand.plus.views.mapwidgets.configure.settings.ZoomLevelSettingsFragment;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -120,6 +123,7 @@ public enum WidgetType {
 	WEATHER_CLOUDS_WIDGET("weather_cloud", R.string.map_settings_weather_cloud, R.string.clouds_widget_desc, R.drawable.widget_weather_clouds_day, R.drawable.widget_weather_clouds_night, 0, WEATHER, RIGHT),
 	WEATHER_AIR_PRESSURE_WIDGET("weather_pressure", R.string.map_settings_weather_air_pressure, R.string.air_pressure_widget_desc, R.drawable.widget_weather_air_pressure_day, R.drawable.widget_weather_air_pressure_night, 0, WEATHER, RIGHT),
 
+	SUN_POSITION("day_night_mode_sun_position", R.string.map_widget_sun_position, R.string.map_widget_sun_position_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNRISE("day_night_mode_sunrise", R.string.shared_string_sunrise, R.string.map_widget_sunrise_desc, R.drawable.widget_sunrise_day, R.drawable.widget_sunrise_night, 0, SUNRISE_SUNSET, RIGHT),
 	SUNSET("day_night_mode_sunset", R.string.shared_string_sunset, R.string.map_widget_sunset_desc, R.drawable.widget_sunset_day, R.drawable.widget_sunset_night, 0, SUNRISE_SUNSET, RIGHT),
 
@@ -187,8 +191,8 @@ public enum WidgetType {
 
 	public boolean isAllowed() {
 		if (this == ALTITUDE_MAP_CENTER) {
-			OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-			return plugin != null && plugin.is3DMapsEnabled();
+			SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+			return plugin != null && plugin.is3DReliefAllowed();
 		}
 		return true;
 	}
@@ -309,7 +313,7 @@ public enum WidgetType {
 			return new MapMarkerSideWidgetSettingsFragment();
 		} else if (this == AVERAGE_SPEED) {
 			return new AverageSpeedWidgetSettingFragment();
-		} else if (this == SUNRISE || this == SUNSET) {
+		} else if (this == SUNRISE || this == SUNSET || this == SUN_POSITION) {
 			return new SunriseSunsetSettingsFragment();
 		} else if (this == HEART_RATE ||
 				this == BICYCLE_POWER ||
@@ -321,6 +325,8 @@ public enum WidgetType {
 			return new SensorWidgetSettingFragment();
 		} else if (this == GLIDE_AVERAGE) {
 			return new AverageGlideWidgetSettingsFragment();
+		} else if (this == DEV_ZOOM_LEVEL) {
+			return new ZoomLevelSettingsFragment();
 		}
 
 		if (widgetInfo instanceof SimpleWidgetInfo) {
@@ -340,8 +346,11 @@ public enum WidgetType {
 
 	@Nullable
 	public static WidgetType getById(@NonNull String id) {
+		String defaultId = getDefaultWidgetId(id);
+		if (defaultId.startsWith(OsmandAidlApi.WIDGET_ID_PREFIX)) {
+			return AIDL_WIDGET;
+		}
 		for (WidgetType widget : values()) {
-			String defaultId = getDefaultWidgetId(id);
 			if (widget.id.equals(defaultId)) {
 				return widget;
 			}
@@ -359,7 +368,7 @@ public enum WidgetType {
 	}
 
 	public static boolean isComplexWidget(@NonNull String widgetId) {
-		return Algorithms.equalsToAny(getDefaultWidgetId(widgetId), getComplexWidgetIds());
+		return CollectionUtils.equalsToAny(getDefaultWidgetId(widgetId), (Object[])getComplexWidgetIds());
 	}
 
 	@NonNull

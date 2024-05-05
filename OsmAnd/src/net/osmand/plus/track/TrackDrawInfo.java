@@ -1,5 +1,18 @@
 package net.osmand.plus.track;
 
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
+import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
@@ -12,12 +25,15 @@ import androidx.annotation.Nullable;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
-import net.osmand.plus.track.helpers.GpxData;
+import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -46,6 +62,11 @@ public class TrackDrawInfo {
 	private static final String TRACK_SHOW_ARROWS = "track_show_arrows";
 	private static final String TRACK_SHOW_START_FINISH = "track_show_start_finish";
 
+	private static final String TRACK_VISUALIZATION_TYPE_KEY = "track_visualization_type";
+	private static final String TRACK_WALL_COLOR_TYPE_KEY = "track_wall_color_type";
+	private static final String TRACK_LINE_POSITION_TYPE_KEY = "track_line_position_type";
+	private static final String ADDITIONAL_EXAGGERATION_KEY = "additional_exaggeration";
+
 	private String filePath;
 	private String width;
 	private ColoringType coloringType;
@@ -56,6 +77,10 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	private float additionalExaggeration = 1f;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -100,6 +125,9 @@ public class TrackDrawInfo {
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
 		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
+		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
+		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
+		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
 	}
 
 	public void initDefaultTrackParams(@NonNull OsmandApplication app, @NonNull ApplicationMode mode) {
@@ -110,36 +138,41 @@ public class TrackDrawInfo {
 		color = GpxAppearanceAdapter.parseTrackColor(renderer, colorPref.getModeValue(mode));
 		width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).getModeValue(mode);
 
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		coloringType = ColoringType.requireValueOf(TRACK);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 	}
 
-	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem dataItem) {
+	public void updateParams(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
 		OsmandSettings settings = app.getSettings();
+		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 
-		GpxData gpxData = dataItem.getGpxData();
-		width = gpxData.getWidth();
+		width = helper.getParameter(item, WIDTH);
 		if (Algorithms.isEmpty(width)) {
 			width = settings.getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR).get();
 		}
 		if (Algorithms.isEmpty(width)) {
 			width = getRenderDefaultTrackWidth(renderer);
 		}
-		color = gpxData.getColor();
+		color = helper.getParameter(item, COLOR);
 		if (color == 0) {
 			color = GpxAppearanceAdapter.parseTrackColor(renderer, settings.getCustomRenderProperty(CURRENT_TRACK_COLOR_ATTR).get());
 		}
 		if (color == 0) {
 			color = getRenderDefaultTrackColor(renderer);
 		}
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxData.getColoringType());
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxData.getColoringType());
-		splitType = gpxData.getSplitType();
-		splitInterval = gpxData.getSplitInterval();
-		joinSegments = gpxData.isJoinSegments();
-		showArrows = gpxData.isShowArrows();
-		showStartFinish = gpxData.isShowStartFinish();
+		String type = helper.getParameter(item, COLORING_TYPE);
+		coloringType = ColoringType.requireValueOf(TRACK, type);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(type);
+		splitType = helper.requireParameter(item, SPLIT_TYPE);
+		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
+		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
+		showArrows = helper.requireParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
+		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
+		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
+		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
+		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 	}
 
 	@Nullable
@@ -178,6 +211,11 @@ public class TrackDrawInfo {
 	}
 
 	@NonNull
+	public ColoringStyle getColoringStyle() {
+		return new ColoringStyle(getColoringType(), getRouteInfoAttribute());
+	}
+
+	@NonNull
 	public ColoringType getColoringType() {
 		return coloringType == null ? ColoringType.TRACK_SOLID : coloringType;
 	}
@@ -191,11 +229,16 @@ public class TrackDrawInfo {
 		return routeInfoAttribute;
 	}
 
-	public void setColoringType(ColoringType coloringType) {
+	public void setColoringStyle(@NonNull ColoringStyle coloringStyle) {
+		setColoringType(coloringStyle.getType());
+		setRouteInfoAttribute(coloringStyle.getRouteInfoAttribute());
+	}
+
+	public void setColoringType(@NonNull ColoringType coloringType) {
 		this.coloringType = coloringType;
 	}
 
-	public void setRouteInfoAttribute(String routeInfoAttribute) {
+	public void setRouteInfoAttribute(@Nullable String routeInfoAttribute) {
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
@@ -235,6 +278,38 @@ public class TrackDrawInfo {
 		this.showArrows = showArrows;
 	}
 
+	public Gpx3DVisualizationType getTrackVisualizationType() {
+		return trackVisualizationType;
+	}
+
+	public void setTrackVisualizationType(Gpx3DVisualizationType trackVisualizationType) {
+		this.trackVisualizationType = trackVisualizationType;
+	}
+
+	public Gpx3DWallColorType getTrackWallColorType() {
+		return trackWallColorType;
+	}
+
+	public void setTrackWallColorType(Gpx3DWallColorType trackWallColorType) {
+		this.trackWallColorType = trackWallColorType;
+	}
+
+	public Gpx3DLinePositionType getTrackLinePositionType() {
+		return trackLinePositionType;
+	}
+
+	public void setTrackLinePositionType(Gpx3DLinePositionType trackLinePositionType) {
+		this.trackLinePositionType = trackLinePositionType;
+	}
+
+	public float getAdditionalExaggeration() {
+		return additionalExaggeration;
+	}
+
+	public void setAdditionalExaggeration(float additionalExaggeration) {
+		this.additionalExaggeration = additionalExaggeration;
+	}
+
 	public void setShowStartFinish(boolean showStartFinish) {
 		this.showStartFinish = showStartFinish;
 	}
@@ -261,14 +336,18 @@ public class TrackDrawInfo {
 			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_ARROWS.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_START_FINISH.resetToDefault();
+			settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.resetToDefault();
 			initCurrentTrackParams(app);
 		} else if (isDefaultAppearance()) {
 			color = getRenderDefaultTrackColor(renderer);
 			width = getRenderDefaultTrackWidth(renderer);
 			showArrows = false;
 			showStartFinish = true;
-			coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+			coloringType = ColoringType.requireValueOf(TRACK);
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+			trackVisualizationType = Gpx3DVisualizationType.NONE;
+			trackWallColorType = Gpx3DWallColorType.NONE;
+			trackLinePositionType = Gpx3DLinePositionType.TOP;
 		} else if (gpxFile != null) {
 			color = gpxFile.getColor(getRenderDefaultTrackColor(renderer));
 			width = gpxFile.getWidth(getRenderDefaultTrackWidth(renderer));
@@ -276,15 +355,18 @@ public class TrackDrawInfo {
 			showStartFinish = gpxFile.isShowStartFinish();
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
-			coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxFile.getColoringType());
+			coloringType = ColoringType.requireValueOf(TRACK, gpxFile.getColoringType());
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxFile.getColoringType());
+			trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(gpxFile.get3DVisualizationType());
+			trackWallColorType = Gpx3DWallColorType.get3DWallColorType(gpxFile.get3DWallColoringType());
+			trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(gpxFile.get3DLinePositionType());
 		}
 	}
 
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(bundle.getString(TRACK_COLORING_TYPE));
+		coloringType = ColoringType.requireValueOf(TRACK, bundle.getString(TRACK_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
 		color = bundle.getInt(TRACK_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);
@@ -292,6 +374,10 @@ public class TrackDrawInfo {
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
 		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
 		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
+		trackVisualizationType = AndroidUtils.getSerializable(bundle, TRACK_VISUALIZATION_TYPE_KEY, Gpx3DVisualizationType.class);
+		trackWallColorType = AndroidUtils.getSerializable(bundle, TRACK_WALL_COLOR_TYPE_KEY, Gpx3DWallColorType.class);
+		trackLinePositionType = AndroidUtils.getSerializable(bundle, TRACK_LINE_POSITION_TYPE_KEY, Gpx3DLinePositionType.class);
+		additionalExaggeration = bundle.getFloat(ADDITIONAL_EXAGGERATION_KEY);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -305,5 +391,9 @@ public class TrackDrawInfo {
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
 		bundle.putInt(TRACK_APPEARANCE_TYPE, appearanceType);
+		bundle.putSerializable(TRACK_VISUALIZATION_TYPE_KEY, trackVisualizationType);
+		bundle.putSerializable(TRACK_WALL_COLOR_TYPE_KEY, trackWallColorType);
+		bundle.putSerializable(TRACK_LINE_POSITION_TYPE_KEY, trackLinePositionType);
+		bundle.putFloat(ADDITIONAL_EXAGGERATION_KEY, trackVisualizationType == null ? 0 : additionalExaggeration);
 	}
 }

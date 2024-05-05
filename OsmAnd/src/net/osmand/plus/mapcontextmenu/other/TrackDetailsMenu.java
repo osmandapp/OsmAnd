@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.github.mikephil.charting.charts.ElevationChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -150,7 +151,7 @@ public class TrackDetailsMenu {
 	public void updateMyLocation(@NonNull View mainView, @NonNull Location location) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			LineChart chart = mainView.findViewById(R.id.chart);
+			ElevationChart chart = mainView.findViewById(R.id.chart);
 			GpxDisplayItem gpxItem = getGpxItem();
 			TrkSegment segment = getTrackSegment(chart);
 			LineData lineData = chart.getLineData();
@@ -251,9 +252,7 @@ public class TrackDetailsMenu {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			if (!portrait) {
-				mapActivity.getMapView().setMapPositionX(1);
-			} else {
+			if (portrait) {
 				TrackDetailsToolbarController toolbarController = new TrackDetailsToolbarController();
 				this.toolbarController = toolbarController;
 				if (gpxItem.group != null) {
@@ -295,7 +294,6 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
-			mapActivity.getMapView().setMapPositionX(0);
 			mapActivity.refreshMap();
 		}
 		if (hidding) {
@@ -370,7 +368,7 @@ public class TrackDetailsMenu {
 					float startTime = startPos * 1000;
 					float endTime = endPos * 1000;
 					for (WptPt p : segment.points) {
-						if (p.time - gpxItem.analysis.startTime >= startTime && p.time - gpxItem.analysis.startTime <= endTime) {
+						if (p.time - gpxItem.analysis.getStartTime() >= startTime && p.time - gpxItem.analysis.getStartTime() <= endTime) {
 							if (left == 0 && right == 0) {
 								left = p.getLongitude();
 								right = p.getLongitude();
@@ -582,7 +580,8 @@ public class TrackDetailsMenu {
 			return;
 		}
 
-		LineChart chart = parentView.findViewById(R.id.chart);
+		ElevationChart chart = parentView.findViewById(R.id.chart);
+
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
@@ -665,9 +664,9 @@ public class TrackDetailsMenu {
 		});
 
 		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
-		boolean useHours = analysis.timeSpan != 0 && analysis.timeSpan / HOUR_IN_MILLIS > 0;
-		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.startTime, useHours);
-		ChartUtils.setupGPXChart(chart, markerView, 24, 16, true);
+		boolean useHours = analysis.getTimeSpan() != 0 && analysis.getTimeSpan() / HOUR_IN_MILLIS > 0;
+		GpxMarkerView markerView = new GpxMarkerView(themedContext, analysis.getStartTime(), useHours);
+		ChartUtils.setupElevationChart(chart, markerView, 24, 16,true);
 
 		List<ILineDataSet> dataSets = new ArrayList<>();
 		if (gpxItem.chartTypes != null && gpxItem.chartTypes.length > 0) {
@@ -675,21 +674,32 @@ public class TrackDetailsMenu {
 				OrderedLineDataSet dataSet = null;
 				boolean withoutGaps = selectedGpxFile != null && (!selectedGpxFile.isJoinSegments() && gpxItem.isGeneralTrack());
 				switch (dataSetType) {
-					case ALTITUDE:
+					case ALTITUDE: {
 						dataSet = ChartUtils.createGPXElevationDataSet(app, chart, analysis,
 								dataSetType, gpxItem.chartAxisType, false, true, withoutGaps);
 						break;
-					case SPEED:
+					}
+					case SPEED: {
+						boolean setYAxisMinimum = true;
+						for (GPXDataSetType type : gpxItem.chartTypes) {
+							if (type == GPXDataSetType.ZOOM_ANIMATED || type == GPXDataSetType.ZOOM_NON_ANIMATED) {
+								setYAxisMinimum = false;
+								break;
+							}
+						}
 						dataSet = ChartUtils.createGPXSpeedDataSet(app, chart, analysis,
-								dataSetType, gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, withoutGaps);
+								dataSetType, gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, setYAxisMinimum, true, withoutGaps);
 						break;
-					case SLOPE:
+					}
+					case SLOPE: {
 						boolean useRightAxis = gpxItem.chartTypes[0] != GPXDataSetType.SLOPE;
 						dataSet = ChartUtils.createGPXSlopeDataSet(app, chart, analysis,
 								dataSetType, gpxItem.chartAxisType, null, useRightAxis, true, withoutGaps);
 						break;
+					}
 					default: {
-						dataSet = PluginsHelper.getOrderedLineDataSet(chart, analysis, dataSetType, gpxItem.chartAxisType, withoutGaps, false);
+						boolean useRightAxis = !dataSets.isEmpty();
+						dataSet = PluginsHelper.getOrderedLineDataSet(chart, analysis, dataSetType, gpxItem.chartAxisType, withoutGaps, useRightAxis);
 					}
 				}
 				if (dataSet != null) {

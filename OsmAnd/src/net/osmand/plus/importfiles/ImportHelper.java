@@ -16,7 +16,9 @@ import static net.osmand.plus.importfiles.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.EXPORT_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_LATEST_CHANGES_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_VERSION_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 import android.content.ActivityNotFoundException;
@@ -46,7 +48,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.AppInitializer;
-import net.osmand.plus.AppInitializer.AppInitializeListener;
+import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ActivityResultListener;
@@ -68,8 +70,7 @@ import net.osmand.plus.importfiles.ui.ImportTracksFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.fragments.TrackMenuFragment;
 import net.osmand.plus.track.helpers.GpxUiHelper;
@@ -77,6 +78,7 @@ import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -128,12 +130,12 @@ public class ImportHelper {
 
 	public void addImportTaskListener(@NonNull ImportTaskListener listener) {
 		if (!taskListeners.contains(listener)) {
-			taskListeners = Algorithms.addToList(taskListeners, listener);
+			taskListeners = CollectionUtils.addToList(taskListeners, listener);
 		}
 	}
 
 	public void removeImportTaskListener(@NonNull ImportTaskListener listener) {
-		taskListeners = Algorithms.removeFromList(taskListeners, listener);
+		taskListeners = CollectionUtils.removeFromList(taskListeners, listener);
 	}
 
 	public void notifyImportFinished() {
@@ -316,28 +318,23 @@ public class ImportHelper {
 
 	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras) {
 		fileName = fileName.replace(ZIP_EXT, "");
-		if (extras != null
-				&& extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY)
-				&& extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
-			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
-			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
+		if (extras != null && CollectionUtils.containsAny(extras.keySet(), SETTINGS_VERSION_KEY, SETTINGS_LATEST_CHANGES_KEY)) {
+			int version = extras.getInt(SETTINGS_VERSION_KEY, -1);
+			String latestChanges = extras.getString(SETTINGS_LATEST_CHANGES_KEY);
 			boolean replace = extras.getBoolean(REPLACE_KEY);
 			boolean silentImport = extras.getBoolean(SILENT_IMPORT_KEY);
-			ArrayList<String> settingsTypeKeys = extras.getStringArrayList(SETTINGS_TYPE_LIST_KEY);
-			List<ExportSettingsType> settingsTypes = null;
-			if (settingsTypeKeys != null) {
-				settingsTypes = new ArrayList<>();
-				for (String key : settingsTypeKeys) {
-					settingsTypes.add(ExportSettingsType.valueOf(key));
-				}
+			ArrayList<String> exportTypeKeys = extras.getStringArrayList(EXPORT_TYPE_LIST_KEY);
+			List<ExportType> exportTypes = null;
+			if (exportTypeKeys != null) {
+				exportTypes = ExportType.valuesOf(exportTypeKeys);
 			}
-			handleOsmAndSettingsImport(intentUri, fileName, settingsTypes, replace, silentImport, latestChanges, version);
+			handleOsmAndSettingsImport(intentUri, fileName, exportTypes, replace, silentImport, latestChanges, version);
 		} else {
 			handleOsmAndSettingsImport(intentUri, fileName, null, false, false, null, -1);
 		}
 	}
 
-	public void handleOsmAndSettingsImport(Uri uri, String name, List<ExportSettingsType> settingsTypes,
+	public void handleOsmAndSettingsImport(Uri uri, String name, List<ExportType> settingsTypes,
 	                                       boolean replace, boolean silentImport, String latestChanges, int version) {
 		executeImportTask(new SettingsImportTask(activity, uri, name, settingsTypes, replace, silentImport, latestChanges, version));
 	}
@@ -383,26 +380,43 @@ public class ImportHelper {
 		}
 		String error = null;
 		InputStream in = null;
-		OutputStream out = null;
-		ZipInputStream zis = null;
 		try {
 			in = app.getContentResolver().openInputStream(uri);
 			if (in != null) {
-				if (unzip) {
-					ZipEntry entry;
-					zis = new ZipInputStream(in);
-					String extension = Algorithms.getFileExtension(dest);
-					while ((entry = zis.getNextEntry()) != null) {
-						if (entry.getName().endsWith(extension)) {
-							out = new FileOutputStream(dest);
-							Algorithms.streamCopy(zis, out);
-							break;
-						}
+				error = copyFile(app, dest, in, overwrite, unzip);
+			}
+		} catch (IOException | SecurityException e) {
+			e.printStackTrace();
+			error = e.getMessage();
+		} finally {
+			Algorithms.closeStream(in);
+		}
+		return error;
+	}
+
+	@Nullable
+	public static String copyFile(@NonNull OsmandApplication app, @NonNull File dest, @NonNull InputStream in, boolean overwrite, boolean unzip) {
+		if (dest.exists() && !overwrite) {
+			return app.getString(R.string.file_with_name_already_exists);
+		}
+		String error = null;
+		OutputStream out = null;
+		ZipInputStream zis = null;
+		try {
+			if (unzip) {
+				ZipEntry entry;
+				zis = new ZipInputStream(in);
+				String extension = Algorithms.getFileExtension(dest);
+				while ((entry = zis.getNextEntry()) != null) {
+					if (entry.getName().endsWith(extension)) {
+						out = new FileOutputStream(dest);
+						Algorithms.streamCopy(zis, out);
+						break;
 					}
-				} else {
-					out = new FileOutputStream(dest);
-					Algorithms.streamCopy(in, out);
 				}
+			} else {
+				out = new FileOutputStream(dest);
+				Algorithms.streamCopy(in, out);
 			}
 		} catch (IOException | SecurityException e) {
 			e.printStackTrace();

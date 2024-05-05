@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.R;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.LocalItem;
 import net.osmand.plus.download.local.dialogs.viewholders.HeaderViewHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.LocalItemHolder;
@@ -24,7 +25,6 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	protected static final int LIST_ITEM_TYPE = 0;
 	private static final int LIST_HEADER_TYPE = 1;
 	private static final int MEMORY_USAGE_TYPE = 2;
-
 
 	private final List<Object> items = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			MemoryViewHolder viewHolder = (MemoryViewHolder) holder;
 			viewHolder.bindView(memoryInfo, !hideDivider);
 		} else if (holder instanceof LocalItemHolder) {
-			LocalItem item = (LocalItem) items.get(position);
+			BaseLocalItem item = (BaseLocalItem) items.get(position);
 			boolean lastItem = position == getItemCount() - 1;
 			boolean hideDivider = !lastItem && items.get(position + 1) instanceof HeaderGroup;
 
@@ -96,7 +96,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public int getItemViewType(int position) {
 		Object object = items.get(position);
-		if (object instanceof LocalItem) {
+		if (object instanceof BaseLocalItem) {
 			return LIST_ITEM_TYPE;
 		} else if (object instanceof HeaderGroup) {
 			return LIST_HEADER_TYPE;
@@ -124,7 +124,7 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public interface LocalItemListener {
 
-		default boolean isItemSelected(@NonNull LocalItem item) {
+		default boolean isItemSelected(@NonNull BaseLocalItem item) {
 			return false;
 		}
 
@@ -132,11 +132,11 @@ public class LocalItemsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return false;
 		}
 
-		default void onItemSelected(@NonNull LocalItem item) {
+		default void onItemSelected(@NonNull BaseLocalItem item) {
 
 		}
 
-		default void onItemOptionsSelected(@NonNull LocalItem item, @NonNull View view) {
+		default void onItemOptionsSelected(@NonNull BaseLocalItem item, @NonNull View view) {
 
 		}
 	}

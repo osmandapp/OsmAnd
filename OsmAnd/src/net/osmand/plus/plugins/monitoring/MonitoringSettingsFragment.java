@@ -6,6 +6,7 @@ import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin.SECONDS;
 import static net.osmand.plus.settings.backend.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.settings.backend.OsmandSettings.REC_DIRECTORY;
+import static net.osmand.plus.settings.controllers.BatteryOptimizationController.isIgnoringBatteryOptimizations;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
@@ -31,8 +33,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.plugins.externalsensors.ExternalSensorTrackDataType;
+import net.osmand.plus.plugins.externalsensors.ExternalSensorsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -42,6 +44,7 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
+import net.osmand.plus.settings.controllers.BatteryOptimizationController;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -53,9 +56,9 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment
-		implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
+	private static final String DISABLE_BATTERY_OPTIMIZATION = "disable_battery_optimization";
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String OPEN_TRACKS = "open_tracks";
@@ -93,6 +96,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 	@Override
 	protected void setupPreferences() {
+		setupDisableBatteryOptimizationPref();
 		setupShowStartDialog();
 
 		setupSaveTrackToGpxPref();
@@ -115,6 +119,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 
 		setupCopyProfileSettingsPref();
 		setupResetToDefaultPref();
+	}
+
+	private void setupDisableBatteryOptimizationPref() {
+		Preference preference = findPreference(DISABLE_BATTERY_OPTIMIZATION);
+		preference.setIcon(getIcon(R.drawable.ic_action_warning_colored));
+		preference.setVisible(!isIgnoringBatteryOptimizations(app));
 	}
 
 	private void setupShowStartDialog() {
@@ -294,22 +304,32 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 		}
 	}
 
+	@NonNull
 	private List<String> getLinkedSensorNames() {
-		ApplicationMode selectedAppMode = getSelectedAppMode();
-		List<String> res = new ArrayList<>();
-		ExternalSensorsPlugin sensorsPlugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
-		if (sensorsPlugin != null) {
+		List<String> names = new ArrayList<>();
+		ExternalSensorsPlugin plugin = PluginsHelper.getPlugin(ExternalSensorsPlugin.class);
+		if (plugin != null) {
+			ApplicationMode appMode = getSelectedAppMode();
 			for (ExternalSensorTrackDataType dataType : ExternalSensorTrackDataType.values()) {
-				CommonPreference<String> deviceIdPref = sensorsPlugin.getWriteToTrackDeviceIdPref(dataType);
-				String deviceId = deviceIdPref.getModeValue(selectedAppMode);
-				if (!Algorithms.isEmpty(deviceId) &&
-						!ExternalSensorsPlugin.DENY_WRITE_SENSOR_DATA_TO_TRACK_KEY.equals(deviceId) &&
-						sensorsPlugin.getDevice(deviceId) != null) {
-					res.add(app.getString(dataType.getTitleId()));
+				CommonPreference<String> pref = plugin.getWriteToTrackDeviceIdPref(dataType);
+
+				String deviceId = pref.getModeValue(appMode);
+				if (!Algorithms.isEmpty(deviceId)) {
+					boolean sensorLinked = false;
+					if (!plugin.isAnyConnectedDeviceId(deviceId)) {
+						if (plugin.getDevice(deviceId) != null) {
+							sensorLinked = true;
+						}
+					} else if (plugin.getAnyDevice(dataType.getSensorType()) != null) {
+						sensorLinked = true;
+					}
+					if (sensorLinked) {
+						names.add(getString(dataType.getTitleId()));
+					}
 				}
 			}
 		}
-		return res;
+		return names;
 	}
 
 	private void setupLiveMonitoringPref() {
@@ -354,6 +374,12 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		setupDisableBatteryOptimizationPref();
+	}
+
+	@Override
 	public void onDestroy() {
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
@@ -363,6 +389,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 			}
 		}
 		super.onDestroy();
+	}
+
+	@Override
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+		if (DISABLE_BATTERY_OPTIMIZATION.equals(preference.getKey())) {
+			setupPrefRoundedBg(holder);
+		}
 	}
 
 	@Override
@@ -387,6 +421,11 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, getSelectedAppMode(), this);
+			}
+		} else if (DISABLE_BATTERY_OPTIMIZATION.endsWith(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				BatteryOptimizationController.showDialog(mapActivity, false, null);
 			}
 		}
 		return super.onPreferenceClick(preference);

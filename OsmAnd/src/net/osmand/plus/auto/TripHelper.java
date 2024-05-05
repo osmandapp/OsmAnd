@@ -22,6 +22,7 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
@@ -45,6 +46,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.MetricsConstants;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
@@ -218,7 +220,7 @@ public class TripHelper {
 
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
-			Distance stepDistance = getDistance(app, nextTurnDistance);
+			Distance stepDistance = getFormattedDistance(app, nextTurnDistance);
 			DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
 			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec);
@@ -327,46 +329,34 @@ public class TripHelper {
 		return bitmap;
 	}
 
-	static Distance getDistance(@NonNull OsmandApplication app, double meters) {
+	private static Distance getFormattedDistance(@NonNull OsmandApplication app, double meters) {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
-		int displayUnit;
-		float mainUnitInMeters;
-		if (mc == KILOMETERS_AND_METERS) {
-			displayUnit = Distance.UNIT_KILOMETERS;
-			mainUnitInMeters = METERS_IN_KILOMETER;
-		} else if (mc == NAUTICAL_MILES_AND_METERS || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-			displayUnit = Distance.UNIT_MILES;
-			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
-		} else {
-			displayUnit = Distance.UNIT_MILES;
-			mainUnitInMeters = METERS_IN_ONE_MILE;
+		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.USE_LOWER_BOUNDS, mc);
+
+		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
+	}
+
+	public static Distance getDistance(@NonNull OsmandApplication app, double meters) {
+		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+		OsmAndFormatter.FormattedValue formattedValue = OsmAndFormatter.getFormattedDistanceValue((float) meters, app, OsmAndFormatter.OsmAndFormatterParams.DEFAULT, mc);
+
+		return Distance.create(formattedValue.valueSrc, getDistanceUnit(formattedValue.unitId));
+	}
+
+	@Distance.Unit
+	private static int getDistanceUnit(@StringRes int unitId) {
+		if (unitId == R.string.m) {
+			return Distance.UNIT_METERS;
+		} else if (unitId == R.string.yard) {
+			return Distance.UNIT_YARDS;
+		} else if (unitId == R.string.foot) {
+			return Distance.UNIT_FEET;
+		} else if (unitId == R.string.mile || unitId == R.string.nm) {
+			return Distance.UNIT_MILES;
+		} else if (unitId == R.string.km) {
+			return Distance.UNIT_KILOMETERS;
 		}
-		if (meters >= 100 * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (meters > 9.99f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (meters > 0.999f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == NAUTICAL_MILES_AND_METERS && meters > 0.99f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else if (mc == MetricsConstants.NAUTICAL_MILES_AND_FEET && meters > 0.99f * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters, displayUnit);
-		} else {
-			if (mc == KILOMETERS_AND_METERS || mc == MILES_AND_METERS) {
-				return Distance.create(meters,  Distance.UNIT_METERS);
-			} else if (mc == MILES_AND_FEET || mc == MetricsConstants.NAUTICAL_MILES_AND_FEET) {
-				return Distance.create(meters * FEET_IN_ONE_METER, Distance.UNIT_FEET);
-			} else if (mc == MILES_AND_YARDS) {
-				return Distance.create(meters * YARDS_IN_ONE_METER, Distance.UNIT_YARDS);
-			}
-			return Distance.create(meters,  Distance.UNIT_METERS);
-		}
+		return Distance.UNIT_METERS;
 	}
 
 	private int getManeuverType(@NonNull TurnType turnType) {

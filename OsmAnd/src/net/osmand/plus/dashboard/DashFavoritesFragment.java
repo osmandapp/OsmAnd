@@ -24,7 +24,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.favorites.FavoritesListener;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -134,7 +134,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			}
 
 			int iconColor = app.getFavoritesHelper().getColorWithCategory(point, getColor(R.color.color_favorite));
-			Drawable favoriteIcon = PointImageDrawable.getFromFavorite(app, iconColor, false, point);
+			Drawable favoriteIcon = PointImageUtils.getFromPoint(app, iconColor, false, point);
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(favoriteIcon);
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));

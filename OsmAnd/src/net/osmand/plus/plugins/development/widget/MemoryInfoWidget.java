@@ -2,29 +2,21 @@ package net.osmand.plus.plugins.development.widget;
 
 import static net.osmand.plus.views.mapwidgets.WidgetType.DEV_MEMORY;
 
-import android.os.Debug;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.widgets.SimpleWidget;
 
-import org.apache.commons.logging.Log;
-
 public class MemoryInfoWidget extends SimpleWidget {
 
-	private static final Log log = PlatformUtil.getLog(MemoryInfoWidget.class);
 
 	private static final long UPDATE_INTERVAL_MS = 1000;
 
-	private long cachedDalvikSize;
-	private long cachedTotalMemory;
-	private long cachedAvailableMemory;
+	private long cachedUsedMemory;
 
 	private long lastUpdateTime;
 	private boolean memoryChanged;
@@ -46,17 +38,10 @@ public class MemoryInfoWidget extends SimpleWidget {
 
 	private boolean checkMemoryChanged() {
 		Runtime runtime = Runtime.getRuntime();
+		long usedMemory = runtime.totalMemory() - runtime.freeMemory();
 
-		long dalvikSize = Debug.getNativeHeapAllocatedSize(); // not used currently
-		long totalMemory = runtime.totalMemory();
-		long availableMemory = totalMemory - runtime.freeMemory();
-
-		if (this.cachedDalvikSize != dalvikSize
-				|| this.cachedTotalMemory != totalMemory
-				|| this.cachedAvailableMemory != availableMemory) {
-			this.cachedDalvikSize = dalvikSize;
-			this.cachedTotalMemory = totalMemory;
-			this.cachedAvailableMemory = availableMemory;
+		if (cachedUsedMemory != usedMemory) {
+			cachedUsedMemory = usedMemory;
 			memoryChanged = true;
 		}
 		return memoryChanged;
@@ -68,6 +53,6 @@ public class MemoryInfoWidget extends SimpleWidget {
 
 	@NonNull
 	private String getFormattedValue() {
-		return AndroidUtils.formatRatioOfSizes(app, cachedAvailableMemory, cachedTotalMemory, true);
+		return AndroidUtils.formatSize(app, cachedUsedMemory, true);
 	}
 }

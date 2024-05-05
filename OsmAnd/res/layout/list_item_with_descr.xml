@@ -17,29 +17,48 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingStart="@dimen/content_padding"
-		android:paddingTop="@dimen/content_padding_small"
-		android:paddingEnd="@dimen/content_padding"
-		android:paddingBottom="@dimen/content_padding_small">
+		android:orientation="horizontal">
 
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/description"
-			style="@style/DescStyle"
-			android:layout_width="match_parent"
+		<LinearLayout
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:textColor="?android:textColorSecondary"
-			tools:text="Some description" />
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingStart="@dimen/content_padding"
+			android:paddingTop="@dimen/content_padding_small"
+			android:paddingEnd="@dimen/content_padding"
+			android:paddingBottom="@dimen/content_padding_small">
 
-		<net.osmand.plus.widgets.TextViewEx
-			android:id="@+id/title"
-			style="@style/TitleStyle"
-			android:layout_width="match_parent"
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/description"
+				style="@style/DescStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textColor="?android:textColorSecondary"
+				tools:text="Some description" />
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/title"
+				style="@style/TitleStyle"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="end"
+				android:gravity="center_vertical"
+				android:maxLines="2"
+				tools:text="Some title" />
+
+		</LinearLayout>
+
+		<androidx.appcompat.widget.AppCompatImageView
+			android:id="@+id/expand_button"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:ellipsize="end"
-			android:gravity="center_vertical"
-			android:maxLines="2"
-			tools:text="Some title" />
+			android:layout_gravity="center_vertical"
+			android:layout_marginEnd="@dimen/content_padding"
+			android:visibility="gone"
+			android:tint="?attr/default_icon_color"
+			android:src="@drawable/ic_action_arrow_down"
+			tools:visibility="visible"/>
 
 	</LinearLayout>
 

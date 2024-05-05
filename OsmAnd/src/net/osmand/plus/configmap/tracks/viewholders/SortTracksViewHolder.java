@@ -1,5 +1,6 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -87,7 +88,7 @@ public class SortTracksViewHolder extends RecyclerView.ViewHolder {
 		@NonNull
 		TracksSortMode getTracksSortMode();
 
-		void setTracksSortMode(@NonNull TracksSortMode sortMode);
+		void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders);
 	}
 }
 

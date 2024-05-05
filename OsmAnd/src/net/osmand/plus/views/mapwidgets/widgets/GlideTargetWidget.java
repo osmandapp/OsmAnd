@@ -21,7 +21,7 @@ import net.osmand.plus.views.mapwidgets.WidgetType;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 import net.osmand.plus.views.mapwidgets.utils.GlideUtils;
 import net.osmand.plus.views.mapwidgets.widgetstates.GlideTargetWidgetState;
-import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.Objects;
@@ -171,7 +171,7 @@ public class GlideTargetWidget extends GlideBaseWidget {
 
 	@Nullable
 	private String calculateFormattedRatio(Location l1, Double a1, LatLon l2, Double a2) {
-		if (Algorithms.anyIsNull(l1, a1, l2, a2)) {
+		if (CollectionUtils.anyIsNull(l1, a1, l2, a2)) {
 			return null;
 		}
 		LatLon l1LatLon = new LatLon(l1.getLatitude(), l1.getLongitude());

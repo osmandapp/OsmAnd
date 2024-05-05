@@ -142,6 +142,14 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		return !Algorithms.isEmpty(syncBackupTasks);
 	}
 
+	public boolean isSyncing(@NonNull String key) {
+		SyncBackupTask syncTask = getSyncTask(key);
+		if (syncTask == null) {
+			syncTask = getSyncTask(SYNC_ITEMS_KEY);
+		}
+		return syncTask != null;
+	}
+
 	void finishImport(@Nullable ImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
 		String error = collectFormattedWarnings(items);
 		if (!Algorithms.isEmpty(error)) {
@@ -270,7 +278,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 					break;
 				case SYNC_OPERATION_DOWNLOAD:
 					if (remoteFile != null) {
-						syncTask.downloadRemoteVersion(remoteFile.item, filesType, shouldReplace, restoreDeleted);
+						syncTask.downloadItem(remoteFile.item, filesType, shouldReplace, restoreDeleted);
 					}
 					break;
 			}

@@ -168,12 +168,8 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 	}
 
 	@Override
-	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<Integer> indexes,
-	                             List<Float> tx, List<Float> ty,
-	                             List<Integer> tx31, List<Integer> ty31,
-								 List<Double> angles, List<Double> distances, double distToFinish,
-								 List<GeometryWayStyle<?>> styles) {
-		super.drawRouteSegment(tb, canvas, indexes, tx, ty, tx31, ty31, angles, distances, distToFinish, styles);
+	public void drawRouteSegment(@NonNull RotatedTileBox tb, @Nullable Canvas canvas, List<GeometryWayPoint> points, double distToFinish) {
+		super.drawRouteSegment(tb, canvas, points, distToFinish);
 
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {

@@ -1,10 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
-import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
-import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.plugins.srtm.TerrainMode.HILLSHADE;
 import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
 
 import android.app.Activity;
@@ -13,13 +9,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,31 +24,17 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.github.ksoichiro.android.observablescrollview.ObservableListView;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.download.DownloadActivityType;
-import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.download.DownloadValidationManager;
-import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.plugins.PluginsHelper;
-import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
-import net.osmand.plus.widgets.ctxmenu.ContextMenuListAdapter;
-import net.osmand.plus.widgets.ctxmenu.ViewCreator;
-import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
-import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenu;
 import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
@@ -66,8 +46,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,13 +75,9 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private LinearLayout emptyState;
 	private View emptyStateDivider;
 	private LinearLayout contentContainer;
-	private LinearLayout downloadContainer;
 	private View titleBottomDivider;
-	private View downloadTopDivider;
-	private View downloadBottomDivider;
-	private ObservableListView observableListView;
 
-	private ContextMenuListAdapter listAdapter;
+	private DownloadMapsCard downloadMapsCard;
 
 	@Nullable
 	private MapActivity getMapActivity() {
@@ -153,10 +127,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		emptyStateDivider = root.findViewById(R.id.empty_state_divider);
 		stateTv = root.findViewById(R.id.state_tv);
 		iconIv = root.findViewById(R.id.icon_iv);
-		downloadContainer = root.findViewById(R.id.download_container);
-		downloadTopDivider = root.findViewById(R.id.download_container_top_divider);
-		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
-		observableListView = root.findViewById(R.id.list_view);
+		downloadMapsCard = new DownloadMapsCard(app, srtmPlugin, root.findViewById(R.id.download_maps_card), nightMode);
 
 		titleTv.setText(R.string.shared_string_terrain);
 		String pluginUrl = getString(R.string.osmand_features_contour_lines_plugin);
@@ -280,7 +251,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 					downloadDescriptionTv.setText(R.string.slope_download_description);
 					break;
 			}
-			updateDownloadSection();
+			downloadMapsCard.updateDownloadSection(getMapActivity());
 		} else {
 			iconIv.setImageDrawable(uiUtilities.getIcon(
 					R.drawable.ic_action_hillshade_dark,
@@ -301,10 +272,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	private void setupClickableText(TextView textView,
-	                                String text,
-	                                String clickableText,
-	                                String url,
-	                                boolean medium) {
+									String text,
+									String clickableText,
+									String url,
+									boolean medium) {
 		SpannableString spannableString = new SpannableString(text);
 		ClickableSpan clickableSpan = new CustomClickableSpan() {
 			@Override
@@ -356,150 +327,19 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 	}
 
-	private void updateDownloadSection() {
-		ContextMenuAdapter adapter = new ContextMenuAdapter(app);
-
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
-		}
-		WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			if (settings.isInternetConnectionAvailable()) {
-				downloadThread.runReloadIndexFiles();
-			}
-		}
-
-		if (downloadThread.shouldDownloadIndexes()) {
-			adapter.addItem(new ContextMenuItem(null)
-					.setLayout(R.layout.list_item_icon_and_download)
-					.setTitleId(R.string.downloading_list_indexes, mapActivity)
-					.setLoading(true));
-		} else {
-			try {
-				DownloadActivityType type = getDownloadActivityType();
-				IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
-				int currentDownloadingProgress = (int) downloadThread.getCurrentDownloadProgress();
-				List<IndexItem> terrainItems = DownloadResources.findIndexItemsAt(app,
-						mapActivity.getMapLocation(), type, false, -1, true);
-				if (terrainItems.size() > 0) {
-					downloadContainer.setVisibility(View.VISIBLE);
-					downloadTopDivider.setVisibility(View.VISIBLE);
-					downloadBottomDivider.setVisibility(View.VISIBLE);
-					for (IndexItem indexItem : terrainItems) {
-						ContextMenuItem _item = new ContextMenuItem(null)
-								.setLayout(R.layout.list_item_icon_and_download)
-								.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-								.setDescription(type.getString(app) + " • " + indexItem.getSizeDescription(app))
-								.setIcon(type.getIconResource())
-								.setListener((uiAdapter, view, item, isChecked) -> {
-									MapActivity mapActivity1 = mapActivityRef.get();
-									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
-										if (downloadThread.isDownloading(indexItem)) {
-											downloadThread.cancelDownload(indexItem);
-											item.setProgress(ContextMenuItem.INVALID_ID);
-											item.setLoading(false);
-											item.setSecondaryIcon(R.drawable.ic_action_import);
-											uiAdapter.onDataSetChanged();
-										} else {
-											new DownloadValidationManager(app).startDownload(mapActivity1, indexItem);
-											item.setProgress(ContextMenuItem.INVALID_ID);
-											item.setLoading(true);
-											item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-											uiAdapter.onDataSetChanged();
-										}
-									}
-									return false;
-								})
-								.setProgressListener((progressObject, progress, adptr, itemId, position) -> {
-									if (progressObject instanceof IndexItem) {
-										IndexItem progressItem = (IndexItem) progressObject;
-										if (indexItem.compareTo(progressItem) == 0) {
-											ContextMenuItem item = adptr.getItem(position);
-											if (item != null) {
-												item.setProgress(progress);
-												item.setLoading(true);
-												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-												adptr.notifyDataSetChanged();
-											}
-											return true;
-										}
-									}
-									return false;
-								});
-
-						if (indexItem == currentDownloadingItem) {
-							_item.setLoading(true)
-									.setProgress(currentDownloadingProgress)
-									.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-						} else {
-							_item.setSecondaryIcon(R.drawable.ic_action_import);
-						}
-						adapter.addItem(_item);
-					}
-				} else {
-					downloadContainer.setVisibility(View.GONE);
-					downloadTopDivider.setVisibility(View.GONE);
-					downloadBottomDivider.setVisibility(View.GONE);
-				}
-			} catch (IOException e) {
-				LOG.error(e);
-			}
-		}
-
-		ApplicationMode appMode = settings.getApplicationMode();
-		ViewCreator viewCreator = new ViewCreator(mapActivity, nightMode);
-		viewCreator.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
-		viewCreator.setCustomControlsColor(appMode.getProfileColor(nightMode));
-
-		listAdapter = adapter.toListAdapter(mapActivity, viewCreator);
-		observableListView.setAdapter(listAdapter);
-		observableListView.setOnItemClickListener((parent, view, position, id) -> {
-			ContextMenuItem item = adapter.getItem(position);
-			ItemClickListener click = item.getItemClickListener();
-			if (click != null) {
-				click.onContextMenuClick(listAdapter, view, item, false);
-			}
-		});
-	}
-
-	@NonNull
-	private DownloadActivityType getDownloadActivityType() {
-		OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
-		if (plugin != null && plugin.generateTerrainFrom3DMaps()) {
-			return GEOTIFF_FILE;
-		} else {
-			return srtmPlugin.getTerrainMode() == HILLSHADE ? HILLSHADE_FILE : SLOPE_FILE;
-		}
-	}
-
 	@Override
 	public void onUpdatedIndexesList() {
-		updateDownloadSection();
+		downloadMapsCard.updateDownloadSection(getMapActivity());
 	}
 
 	@Override
 	public void downloadInProgress() {
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
-		if (downloadIndexItem != null && listAdapter != null) {
-			int downloadProgress = (int) downloadThread.getCurrentDownloadProgress();
-			ArrayAdapter<ContextMenuItem> adapter = listAdapter;
-			for (int i = 0; i < adapter.getCount(); i++) {
-				ContextMenuItem item = adapter.getItem(i);
-				if (item != null && item.getProgressListener() != null) {
-					item.getProgressListener().onProgressChanged(
-							downloadIndexItem, downloadProgress, adapter, (int) adapter.getItemId(i), i);
-				}
-			}
-		}
+		downloadMapsCard.downloadInProgress();
 	}
 
 	@Override
 	public void downloadHasFinished() {
-		updateDownloadSection();
+		downloadMapsCard.updateDownloadSection(getMapActivity());
 		MapActivity mapActivity = getMapActivity();
 		SRTMPlugin plugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
 		if (mapActivity != null && plugin != null && plugin.isTerrainLayerEnabled()) {

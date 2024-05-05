@@ -11,6 +11,7 @@ public class RotatedTileBox {
 	/// primary fields
 	private double lat;
 	private double lon;
+	private float height;
 	private float rotate;
 	private float density;
 	private int zoom;
@@ -339,6 +340,10 @@ public class RotatedTileBox {
 		return rotateSin;
 	}
 
+	public double getFullZoom() {
+		return getZoom() + getZoomFloatPart() + getZoomAnimation();
+	}
+
 	public int getZoom() {
 		return zoom;
 	}
@@ -363,6 +368,10 @@ public class RotatedTileBox {
 		this.lat = lat;
 		this.lon = lon;
 		calculateDerivedFields();
+	}
+
+	public void setHeight(float height) {
+		this.height = height;
 	}
 
 	public void setRotate(float rotate) {
@@ -474,6 +483,10 @@ public class RotatedTileBox {
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
 		calculateDerivedFields();
+	}
+
+	public float getHeight() {
+		return height;
 	}
 
 	public float getRotate() {

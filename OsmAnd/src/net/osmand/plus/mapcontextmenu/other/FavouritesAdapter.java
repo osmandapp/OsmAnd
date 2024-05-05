@@ -1,11 +1,13 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 
 import java.util.List;
 
@@ -27,10 +29,10 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 	private final UpdateLocationViewCache cache;
 
-	public FavouritesAdapter(OsmandApplication app, List<FavouritePoint> FavouritePoints) {
-		this.app = app;
+	public FavouritesAdapter(@NonNull Context context, List<FavouritePoint> FavouritePoints) {
+		this.app = (OsmandApplication) context.getApplicationContext();
 		this.favouritePoints = FavouritePoints;
-		cache = UpdateLocationUtils.getUpdateLocationViewCache(app);
+		cache = UpdateLocationUtils.getUpdateLocationViewCache(context);
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			favouritesViewHolder.title.setText(favouritePoint.getDisplayName(app));
 			favouritesViewHolder.description.setText(favouritePoint.getCategoryDisplayName(app));
 			favouritesViewHolder.favouriteImage.setImageDrawable(
-					PointImageDrawable.getFromFavorite(app,
+					PointImageUtils.getFromPoint(app,
 							app.getFavoritesHelper().getColorWithCategory(favouritePoint,
 									ContextCompat.getColor(app, R.color.color_favorite)), false, favouritePoint));
 			UpdateLocationUtils.updateLocationView(app, cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,

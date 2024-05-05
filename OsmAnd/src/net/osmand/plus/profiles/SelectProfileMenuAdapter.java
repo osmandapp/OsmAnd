@@ -73,11 +73,6 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 		notifyDataSetChanged();
 	}
 
-	@Override
-	public int getItemViewType(int position) {
-		return super.getItemViewType(position);
-	}
-
 	@NonNull
 	@Override
 	public SelectProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

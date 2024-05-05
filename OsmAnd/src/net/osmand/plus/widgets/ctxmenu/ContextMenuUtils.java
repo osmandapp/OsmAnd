@@ -21,6 +21,7 @@ import net.osmand.plus.settings.backend.preferences.ContextMenuItemsPreference;
 import net.osmand.plus.settings.fragments.configureitems.ScreenType;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -167,7 +168,7 @@ public class ContextMenuUtils {
 	}
 
 	public static boolean isCategoryItem(@Nullable String id) {
-		return Algorithms.equalsToAny(id, SHOW_CATEGORY_ID, TERRAIN_CATEGORY_ID,
+		return CollectionUtils.equalsToAny(id, SHOW_CATEGORY_ID, TERRAIN_CATEGORY_ID,
 				OPEN_STREET_MAP_CATEGORY_ID, ROUTES_CATEGORY_ID, MAP_RENDERING_CATEGORY_ID);
 	}
 }

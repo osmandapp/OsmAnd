@@ -229,7 +229,6 @@
 						android:contentDescription="@string/map_widget_search"
 						android:layout_width="@dimen/map_small_button_size"
 						android:layout_height="@dimen/map_small_button_size"
-						android:layout_marginLeft="@dimen/map_small_button_margin"
 						android:layout_marginStart="@dimen/map_small_button_margin"
 						android:background="@drawable/btn_inset_circle_trans"
 						tools:src="@drawable/ic_action_remove_dark"/>

@@ -2251,7 +2251,7 @@
     <string name="poi_volcano_status_inactive">不活跃火山</string>
     <string name="poi_paintball">彩弹射击</string>
     <string name="poi_dive_centre">水肺潜水中心</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">加压</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">加压</string>
     <string name="poi_sms_yes">是；短信息</string>
     <string name="poi_bowling_alley">保龄球馆</string>
     <string name="poi_drinking_water_refill_no">饮用水再填充：否</string>
@@ -2303,7 +2303,7 @@
     <string name="poi_tactile_paving_incorrect">不合理</string>
     <string name="poi_traffic_signals_sound_locate">仅用于找到灯杆</string>
     <string name="poi_traffic_signals_arrow_no">箭头：否</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">抽吸</string>
+    <string name="poi_fire_hydrant_pressure_suction">抽吸</string>
     <string name="poi_traffic_signals_vibration_yes">是；交通号志振动</string>
     <string name="poi_departures_board_timetable">时刻表；发车时刻表</string>
     <string name="poi_diplomatic_embassy">大使馆</string>

@@ -35,28 +35,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.layers.ContextMenuLayer;
-import net.osmand.plus.views.layers.DistanceRulerControlLayer;
-import net.osmand.plus.views.layers.DownloadedRegionsLayer;
-import net.osmand.plus.views.layers.FavouritesLayer;
-import net.osmand.plus.views.layers.GPXLayer;
-import net.osmand.plus.views.layers.ImpassableRoadsLayer;
-import net.osmand.plus.views.layers.MapControlsLayer;
-import net.osmand.plus.views.layers.MapInfoLayer;
-import net.osmand.plus.views.layers.MapMarkersLayer;
-import net.osmand.plus.views.layers.MapQuickActionLayer;
-import net.osmand.plus.views.layers.MapTextLayer;
-import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.layers.MapVectorLayer;
-import net.osmand.plus.views.layers.NetworkRouteSelectionLayer;
-import net.osmand.plus.views.layers.POIMapLayer;
-import net.osmand.plus.views.layers.PointLocationLayer;
-import net.osmand.plus.views.layers.PointNavigationLayer;
-import net.osmand.plus.views.layers.PreviewRouteLineLayer;
-import net.osmand.plus.views.layers.RadiusRulerControlLayer;
-import net.osmand.plus.views.layers.RouteLayer;
-import net.osmand.plus.views.layers.TransportStopsLayer;
-import net.osmand.plus.views.layers.TravelSelectionLayer;
+import net.osmand.plus.views.layers.*;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -507,9 +486,9 @@ public class MapLayers {
 				.setNegativeButton(R.string.shared_string_dismiss, null);
 
 		CustomAlert.showSingleSelection(dialogData, items, selectedItem, v -> {
-					int which = (int) v.getTag();
-					String layerKey = entriesMapList.get(which).getKey();
-					onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
+			int which = (int) v.getTag();
+			String layerKey = entriesMapList.get(which).getKey();
+			onMapLayerSelected(mapActivity, includeOfflineMaps, targetLayer, callback, layerKey);
 		});
 	}
 
@@ -657,6 +636,10 @@ public class MapLayers {
 
 	public MapControlsLayer getMapControlsLayer() {
 		return mapControlsLayer;
+	}
+
+	public MapActionsHelper getMapActionsHelper() {
+		return mapControlsLayer.getMapActionsHelper();
 	}
 
 	public MapQuickActionLayer getMapQuickActionLayer() {

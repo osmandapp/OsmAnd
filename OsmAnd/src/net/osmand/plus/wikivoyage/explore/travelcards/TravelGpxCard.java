@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.osm.RouteActivityType;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -56,7 +56,7 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.user.setText(article.user);
 			String activityTypeKey = article.activityType;
 			if (!Algorithms.isEmpty(activityTypeKey)) {
-				RouteActivityType activityType = RouteActivityType.getOrCreateTypeFromName(activityTypeKey);
+				OsmRouteType activityType = OsmRouteType.getOrCreateTypeFromName(activityTypeKey);
 				int activityTypeIcon = getActivityTypeIcon(activityType);
 				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
 				holder.activityType.setText(getActivityTypeTitle(activityType));
@@ -95,12 +95,12 @@ public class TravelGpxCard extends BaseTravelCard {
 	}
 
 	@DrawableRes
-	private int getActivityTypeIcon(RouteActivityType activityType) {
+	private int getActivityTypeIcon(OsmRouteType activityType) {
 		int iconId = app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
 		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
 	}
 
-	private String getActivityTypeTitle(RouteActivityType activityType) {
+	private String getActivityTypeTitle(OsmRouteType activityType) {
 		return AndroidUtils.getActivityTypeStringPropertyName(app, activityType.getName(),
 				capitalizeFirstLetterAndLowercase(activityType.getName()));
 	}

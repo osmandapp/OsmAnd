@@ -14,7 +14,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXUtilities.Track;
 import net.osmand.gpx.GPXUtilities.WptPt;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -22,7 +21,7 @@ import net.osmand.plus.track.SplitTrackAsyncTask;
 import net.osmand.plus.track.helpers.GpxDisplayGroup;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
-import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.track.helpers.TrackDisplayGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,19 +62,14 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 	@NonNull
 	private GpxDisplayGroup buildGeneralGpxDisplayGroup(@NonNull GPXFile gpxFile, @NonNull Track track) {
 		String name = GpxDisplayHelper.getGroupName(app, gpxFile);
-
-		GpxDisplayGroup group = new GpxDisplayGroup(gpxFile);
-		group.setGpxName(name);
+		TrackDisplayGroup group = new TrackDisplayGroup(gpxFile, track, true);
+		group.applyName(app, name);
 		group.setColor(track.getColor(gpxFile.getColor(0)));
-		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
-		group.setTrack(track);
-		group.setName(app.getString(R.string.gpx_selection_track, name, ""));
 		String description = "";
 		if (track.name != null && !track.name.isEmpty()) {
 			description = track.name + " " + description;
 		}
 		group.setDescription(description);
-		group.setGeneralTrack(true);
 		SplitTrackAsyncTask.processGroupTrack(app, group, null, false);
 		return group;
 	}

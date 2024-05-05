@@ -33,8 +33,8 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
@@ -50,7 +50,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.PointImageDrawable;
+import net.osmand.plus.views.PointImageUtils;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
@@ -248,13 +248,13 @@ public class GPXAction extends QuickAction implements FileSelected {
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
 			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
-				if (item.getGpxData().getAnalysis() != null) {
-					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getGpxData().getAnalysis(), app);
+				if (item.getAnalysis() != null) {
+					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
 			});
 
-			if (gpxDataItem != null && gpxDataItem.getGpxData().getAnalysis() != null) {
-				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getGpxData().getAnalysis(), app);
+			if (gpxDataItem != null && gpxDataItem.getAnalysis() != null) {
+				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getAnalysis(), app);
 			}
 		}
 	}
@@ -275,12 +275,12 @@ public class GPXAction extends QuickAction implements FileSelected {
 		ImageView distanceIcon = trackInfoContainer.findViewById(R.id.distance_icon);
 		TextView distanceText = trackInfoContainer.findViewById(R.id.distance);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 		ImageView waypointsIcon = trackInfoContainer.findViewById(R.id.points_icon);
 		TextView waypointsCountText = trackInfoContainer.findViewById(R.id.points_count);
 		waypointsIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_waypoint_16));
-		waypointsCountText.setText(String.valueOf(analysis.wptPoints));
+		waypointsCountText.setText(String.valueOf(analysis.getWptPoints()));
 
 		ImageView timeIcon = trackInfoContainer.findViewById(R.id.time_icon);
 		if (analysis.isTimeSpecified()) {
@@ -288,7 +288,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
 
 			TextView timeText = trackInfoContainer.findViewById(R.id.time);
-			int duration = (int) (analysis.timeSpan / 1000);
+			int duration = analysis.getDurationInSeconds();
 			timeText.setText(Algorithms.formatDuration(duration, app.accessibilityEnabled()));
 		} else {
 			AndroidUiHelper.updateVisibility(timeIcon, false);
@@ -349,7 +349,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 			WptPt waypoint = createWaypoint();
 
 			ImageView predefinedIcon = container.findViewById(R.id.predefined_icon);
-			Drawable icon = PointImageDrawable.getFromWpt(context, waypoint.getColor(),
+			Drawable icon = PointImageUtils.getFromPoint(context, waypoint.getColor(),
 					false, waypoint);
 			predefinedIcon.setImageDrawable(icon);
 
@@ -452,7 +452,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	@ColorInt
 	private int getWaypointColorFromParams() {
-		return getColorFromParams(KEY_WPT_COLOR, ColorDialogs.pallette[0]);
+		return getColorFromParams(KEY_WPT_COLOR, DefaultColors.values()[0].getColor());
 	}
 
 	@NonNull

@@ -9,6 +9,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.StringExternalizable;
 import net.osmand.data.LatLon;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -23,9 +24,8 @@ import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
 
 
 public class RouteSegmentResult implements StringExternalizable<RouteDataBundle> {
-	// this should be bigger (50-80m) but tests need to be fixed first
+
 	public static final float DIST_BEARING_DETECT = 15;
-	
 	public static final float DIST_BEARING_DETECT_UNMATCHED = 50;
 	
 	private RouteDataObject object;
@@ -37,7 +37,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private float routingTime;
 	private float speed;
 	private float distance;
-	private String description = "";
+	private String[] description = null;
 	// this make not possible to make turns in between segment result for now
 	private TurnType turnType;
 	private boolean leftside = false;
@@ -243,6 +243,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			int refTypeRule = region.getRefTypeRule();
 			object.names = new TIntObjectHashMap<>();
 			for (int nameId : object.nameIds) {
+				if (nameId >= region.quickGetEncodingRulesSize()) {
+					continue;
+				}
 				RouteTypeRule rule = region.quickGetEncodingRule(nameId);
 				if (rule != null) {
 					if (nameTypeRule != -1 && "name".equals(rule.getTag())) {
@@ -316,7 +319,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		if (object.pointTypes != null && start < object.pointTypes.length) {
 			int[][] types = Arrays.copyOfRange(object.pointTypes, start, Math.min(end, object.pointTypes.length));
 			if (reversed) {
-				Algorithms.reverseArray(types);
+				CollectionUtils.reverseArray(types);
 			}
 			bundle.putArray("pointTypes", convertTypes(types, rules));
 		}
@@ -327,8 +330,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			int[][] types = Arrays.copyOfRange(object.pointNameTypes, start, Math.min(end, object.pointNameTypes.length));
 			String[][] names = Arrays.copyOfRange(object.pointNames, start, Math.min(end, object.pointNames.length));
 			if (reversed) {
-				Algorithms.reverseArray(types);
-				Algorithms.reverseArray(names);
+				CollectionUtils.reverseArray(types);
+				CollectionUtils.reverseArray(names);
 			}
 			bundle.putArray("pointNames", convertPointNames(types, names, rules));
 		}
@@ -436,7 +439,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		int capacity = Math.abs(endPointIndex - startPointIndex) + 1;
 		List<RouteSegmentResult>[] old = this.attachedRoutes;
 		this.attachedRoutes = new List[capacity];
-		if(old != null){
+		if (old != null) {
 			System.arraycopy(old, 0, this.attachedRoutes, 0, Math.min(old.length, this.attachedRoutes.length));
 		}
 	}
@@ -549,9 +552,25 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	public int getStartPointIndex() {
 		return startPointIndex;
 	}
+	
+	public int getStartPointX() {
+		return object.getPoint31XTile(startPointIndex);
+	}
+	
+	public int getStartPointY() {
+		return object.getPoint31YTile(startPointIndex);
+	}
 
 	public int getEndPointIndex() {
 		return endPointIndex;
+	}
+	
+	public int getEndPointX() {
+		return object.getPoint31XTile(endPointIndex);
+	}
+	
+	public int getEndPointY() {
+		return object.getPoint31YTile(endPointIndex);
 	}
 
 	public LatLon getPoint(int i) {
@@ -602,12 +621,22 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		this.distance = distance;
 	}
 	
-	public String getDescription() {
-		return description;
+	public String getDescription(boolean full) {
+		if(description == null || description.length == 0) {
+			return "";
+		}
+		if(full && description.length > 1) {
+			return description[1];
+		}
+		return description[0];
 	}
 	
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String shortD, String full) {
+		this.description = new String[] {shortD, full};
+	}
+	
+	public void clearDescription() {
+		this.description = null;
 	}
 	
 	public void setObject(RouteDataObject r) {

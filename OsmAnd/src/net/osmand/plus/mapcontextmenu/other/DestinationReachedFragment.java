@@ -99,7 +99,7 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 					helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
 							true, -1, target.getOriginalPointDescription());
 					mapActivity.getMapActions().recalculateRoute(false);
-					mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+					mapActivity.getMapLayers().getMapActionsHelper().startNavigation();
 				}
 			}
 		});
@@ -205,10 +205,6 @@ public class DestinationReachedFragment extends Fragment implements RouteCalcula
 
 	@Override
 	public void onRequestPrivateAccessRouting() {
-	}
-
-	@Override
-	public void onUpdateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 	}
 
 	@Override

@@ -82,9 +82,7 @@ public class RouteDirectionsCard extends MapBaseCard {
 		if (mapActivity == null) {
 			return null;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
-		ContextThemeWrapper context = new ContextThemeWrapper(mapActivity, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-		View row = LayoutInflater.from(context).inflate(R.layout.route_info_list_item, null);
+		View row = themedInflater.inflate(R.layout.route_info_list_item, null);
 
 		TextView label = row.findViewById(R.id.description);
 		TextView distanceLabel = row.findViewById(R.id.distance);

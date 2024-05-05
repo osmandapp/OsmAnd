@@ -56,7 +56,7 @@ public class TracksTabAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-		return trackTabs.get(position).getName(app, false);
+		return trackTabs.get(position).getName(app);
 	}
 
 	@Override

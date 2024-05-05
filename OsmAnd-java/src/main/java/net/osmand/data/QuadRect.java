@@ -21,6 +21,26 @@ public class QuadRect {
 	public QuadRect() {
 	}
 
+
+	public boolean invertedY() {
+		// for latitude bbox
+		return top > bottom;
+	}
+	
+	public void expand(double left, double top, double right, double bottom) {
+		if (hasInitialState()) {
+			this.left = left;
+			this.right = right;
+			this.top = top;
+			this.bottom = bottom;
+		} else {
+			this.left = left < right ? Math.min(left, this.left) : Math.max(left, this.left);
+			this.right = left < right ? Math.max(right, this.right) : Math.min(right, this.right);
+			this.top = top < bottom ? Math.min(top, this.top) : Math.max(top, this.top);
+			this.bottom = top < bottom ? Math.max(bottom, this.bottom) : Math.min(bottom, this.bottom);
+		}
+	}
+	
 	public double width() {
 		return Math.abs(right - left);
 	}
@@ -28,6 +48,7 @@ public class QuadRect {
 	public double height() {
 		return Math.abs(bottom - top);
 	}
+	
 
 	public boolean contains(double left, double top, double right, double bottom) {
 		return Math.min(this.left, this.right) <= Math.min(left, right)
@@ -45,6 +66,21 @@ public class QuadRect {
 				&& Math.max(a.left, a.right) >= Math.min(b.left, b.right)
 				&& Math.min(a.bottom, a.top) <= Math.max(b.bottom, b.top)
 				&& Math.max(a.bottom, a.top) >= Math.min(b.bottom, b.top);
+	}
+	
+	public static double intersectionArea(QuadRect a, QuadRect b) {
+		double xleft = Math.max(Math.min(a.left, a.right), Math.min(b.left, b.right));
+		double xright = Math.min(Math.max(a.left, a.right), Math.max(b.left, b.right));
+		double ytop = Math.max(Math.min(a.top, a.bottom), Math.min(b.top, b.bottom));
+		double ybottom = Math.min(Math.max(a.top, a.bottom), Math.max(b.top, b.bottom));
+		if (xright <= xleft || ybottom <= ytop) {
+	        return 0;
+		}
+		double intersectionArea = (xright - xleft) * (ybottom - ytop);
+//		double aArea = Math.abs(a.right - a.left) * Math.abs(a.bottom - a.top);
+//		double bArea = Math.abs(b.right - b.left) * Math.abs(b.bottom - b.top);
+		// double iou = intersectionArea / (aArea + bArea - intersectionArea);
+		return intersectionArea;
 	}
 	
 	 public static boolean trivialOverlap(QuadRect a, QuadRect b) {
@@ -66,7 +102,7 @@ public class QuadRect {
 		bottom += dy;
 	}
 
-	public void inset(double dx, double  dy) {
+	public void inset(double dx, double dy) {
 		left += dx;
 		top += dy;
 		right -= dx;

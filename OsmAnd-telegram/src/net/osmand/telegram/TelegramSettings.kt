@@ -7,6 +7,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import net.osmand.PlatformUtil
+import net.osmand.telegram.TelegramSettings.LocationSource.GOOGLE_PLAY_SERVICES
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.ShareLocationHelper.Companion.MAX_MESSAGES_IN_TDLIB_PER_CHAT
 import net.osmand.telegram.helpers.ShowLocationHelper
@@ -73,6 +74,7 @@ private const val SETTINGS_NAME = "osmand_telegram_settings"
 
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
 private const val HIDDEN_ON_MAP_CHATS_KEY = "hidden_on_map_chats"
+private const val LOCATION_SOURCE = "location_source"
 
 private const val SHARING_MODE_KEY = "current_sharing_mode"
 
@@ -132,6 +134,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var currentProxyPref: ProxyPref = ProxySOCKS5Pref(-1, "", -1, "", "")
 		private set
+
+	var locationSource: LocationSource = GOOGLE_PLAY_SERVICES
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
@@ -631,7 +635,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			shareChatsInfo[chatId]?.shouldSendViaBotTextMessage = true
 		}
 	}
-	
+
 	fun save() {
 		val prefs = app.getSharedPreferences(SETTINGS_NAME, Context.MODE_PRIVATE)
 		val edit = prefs.edit()
@@ -674,6 +678,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		edit.putLong(BUFFER_TIME_KEY, bufferTime)
 
 		edit.putLong(FREE_TIMELINE_INFO_SHOWN_TIME_KEY, freeTimelineInfoShownTime)
+
+		edit.putString(LOCATION_SOURCE, locationSource.name)
 
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
@@ -774,6 +780,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 		bufferTime = prefs.getLong(BUFFER_TIME_KEY, BUFFER_TIME[BUFFER_TIME_INDEX])
 
 		freeTimelineInfoShownTime = prefs.getLong(FREE_TIMELINE_INFO_SHOWN_TIME_KEY, 0L)
+
+		val locationSourceName = prefs.getString(LOCATION_SOURCE, GOOGLE_PLAY_SERVICES.name)
+		locationSource = LocationSource.valueOf(locationSourceName!!)
 
 		try {
 			parseProxyPreferences(JSONObject(prefs.getString(PROXY_PREFERENCES_KEY, "")))
@@ -1333,6 +1342,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 			R.color.sharing_status_icon_error,
 			false
 		);
+	}
+
+	enum class LocationSource(
+		val nameId: Int
+	) {
+		GOOGLE_PLAY_SERVICES(R.string.google_play_services),
+		ANDROID_API(R.string.android_api)
 	}
 
 	class DeviceBot {

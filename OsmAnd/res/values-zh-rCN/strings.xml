@@ -2245,7 +2245,7 @@
     <string name="av_camera_focus_descr">相机对焦模式：</string>
     <string name="av_camera_focus_hiperfocal">超焦距对焦</string>
     <string name="av_camera_focus_edof">扩展景深／全幅聚焦 （EDOF）</string>
-    <string name="av_camera_focus_infinity">将焦点设置在无穷远</string>
+    <string name="av_camera_focus_infinity">将焦点设置为无穷远</string>
     <string name="av_camera_focus_macro">微距（特写）对焦模式</string>
     <string name="av_camera_focus_continuous">相机将尝试连续对焦</string>
     <string name="av_camera_pic_size">相机图片大小</string>
@@ -3769,7 +3769,7 @@
     <string name="storage_migration_wrong_folder_warning">在选定的文件夹中找不到 OsmAnd 数据。请再试一次。</string>
     <string name="exit_without_saving_warning">不保存更改就退出？</string>
     <string name="migration_files_present">%1$d 文件 (%2$s) 已存在于目标 \'%3$s\' 中，且未被覆盖。</string>
-    <string name="memory_allocated_for_routing_ds">更高的内存分配将加速长途线路(超过500公里)的计算，但可能会影响其他应用的性能。
+    <string name="memory_allocated_for_routing_ds">更高的内存分配将加速长途线路(超过500千米)的计算，但可能会影响其他应用的性能。
 \n对短途线路的计算速度没有影响。</string>
     <string name="use_routing_fallback">离线后备路线规划</string>
     <string name="shared_string_statistics">统计数字</string>
@@ -5179,7 +5179,6 @@
     <string name="sound_beep_minimal">蜂鸣：最小</string>
     <string name="shared_string_new_track">新轨迹</string>
     <string name="track_not_recorded">未记录</string>
-    <string name="change_default_tracks_appearance_confirmation_description">改变 %1$s 轨迹的外观？</string>
     <string name="shared_string_all_world">全世界</string>
     <string name="ltr_or_rtl_triple_combine_via_bold_point">%1$s • %2$s • %3$s</string>
     <string name="routing_attr_hazmat_category_usa_2_name">燃气</string>
@@ -5439,4 +5438,14 @@
     <string name="date_of_creation">创建日期</string>
     <string name="map_is_up_to_date">%1$s 地图已为最新版本。</string>
     <string name="delete_map_description">您确定要删除 %1$s 地图吗？</string>
+    <string name="change_button">更改按钮</string>
+    <string name="root_folder">根文件夹</string>
+    <string name="deletion_error">删除错误</string>
+    <string name="shared_string_button">按钮</string>
+    <string name="folder">文件夹</string>
+    <string name="key_event_action_toggle_drower">显示/隐藏侧边栏</string>
+    <string name="precise_distance_numbers">精确距离数字</string>
+    <string name="external_input_device_title">外部输入设备</string>
+    <string name="key_event_action_move_to_my_location">移动到我的位置</string>
+    <string name="download_to_device">下载到设备</string>
 </resources>

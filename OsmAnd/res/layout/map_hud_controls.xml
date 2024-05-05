@@ -32,7 +32,6 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
 		android:layout_marginStart="@dimen/map_button_spacing"
-		android:layout_marginLeft="@dimen/map_button_spacing"
 		android:orientation="vertical">
 
 		<ImageButton

@@ -1,9 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -12,6 +8,7 @@ import android.content.DialogInterface;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -25,6 +22,43 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
+import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.helpers.Model3dHelper;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.profiles.ProfileIcons;
+import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
+import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.controllers.ProfileColorController;
+import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.FlowLayout;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
+import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
+import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
@@ -41,43 +75,13 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
-import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.ProfileIcons;
-import net.osmand.plus.profiles.SelectBaseProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routing.RouteService;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
-import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
-import net.osmand.plus.track.cards.ColorsCard;
-import net.osmand.plus.track.fragments.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
-import net.osmand.plus.widgets.FlowLayout;
-import net.osmand.plus.widgets.OsmandTextFieldBoxes;
-import net.osmand.plus.widgets.dialogbutton.DialogButton;
-import net.osmand.plus.widgets.tools.SimpleTextWatcher;
-import net.osmand.util.Algorithms;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.settings.backend.ApplicationMode.CUSTOM_MODE_KEY_SEPARATOR;
 
-import org.apache.commons.logging.Log;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback,
-		CardListener, ColorPickerListener {
+public class ProfileAppearanceFragment extends BaseSettingsFragment
+		implements OnSelectProfileCallback, OnColorsPaletteListener {
 
 	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
@@ -115,7 +119,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private ApplicationProfileObject changedProfile;
 	private EditText profileName;
 	private TextView colorName;
-	private ColorsCard colorsCard;
 	private FlowLayout iconItems;
 	private FlowLayout locationIconItems;
 	private FlowLayout navIconItems;
@@ -170,7 +173,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		});
 	}
 
-	public void setupAppProfileObjectFromAppMode(ApplicationMode baseModeForNewProfile) {
+	public void setupAppProfileObjectFromAppMode(@NonNull ApplicationMode baseModeForNewProfile) {
 		profile.stringKey = baseModeForNewProfile.getStringKey();
 		profile.parent = baseModeForNewProfile.getParent();
 		profile.name = baseModeForNewProfile.toHumanString();
@@ -250,12 +253,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				goBackWithoutSaving();
 			});
 			saveButton.setOnClickListener(v -> {
-				if (getActivity() != null) {
-					hideKeyboard();
-					if (isChanged() && checkProfileName()) {
-						saveProfile();
-					}
-				}
+				onSaveButtonClicked();
 			});
 			getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
 				@Override
@@ -294,8 +292,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 		outState.putBoolean(IS_NEW_PROFILE_KEY, isNewProfile);
 		outState.putBoolean(IS_BASE_PROFILE_IMPORTED, isBaseProfileImported);
-		outState.putSerializable(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
-		outState.putSerializable(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
+		outState.putString(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
+		outState.putString(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
 	}
 
 	private void restoreState(Bundle savedInstanceState) {
@@ -307,8 +305,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
-		changedProfile.locationIcon = AndroidUtils.getSerializable(savedInstanceState, PROFILE_LOCATION_ICON_KEY, LocationIcon.class);
-		changedProfile.navigationIcon = AndroidUtils.getSerializable(savedInstanceState, PROFILE_NAVIGATION_ICON_KEY, NavigationIcon.class);
+		changedProfile.locationIcon = savedInstanceState.getString(PROFILE_LOCATION_ICON_KEY);
+		changedProfile.navigationIcon = savedInstanceState.getString(PROFILE_NAVIGATION_ICON_KEY);
 		isNewProfile = savedInstanceState.getBoolean(IS_NEW_PROFILE_KEY);
 	}
 
@@ -331,7 +329,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		if (PROFILE_NAME.equals(preference.getKey())) {
 			profileName = (EditText) holder.findViewById(R.id.profile_name_et);
@@ -404,7 +402,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {
 			locationIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			locationIconItems.removeAllViews();
-			for (LocationIcon locationIcon : LocationIcon.values()) {
+			for (String locationIcon : listLocationIcons()) {
 				View iconItemView = createLocationIconView(locationIcon, locationIconItems);
 				locationIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
 			}
@@ -412,7 +410,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		} else if (NAV_ICON_ITEMS.equals(preference.getKey())) {
 			navIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			navIconItems.removeAllViews();
-			for (NavigationIcon navigationIcon : NavigationIcon.values()) {
+			for (String navigationIcon : listNavigationIcons()) {
 				View iconItemView = createNavigationIconView(navigationIcon, navIconItems);
 				navIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
 			}
@@ -430,7 +428,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	public void onPause() {
 		super.onPause();
 		if (isNewProfile) {
-			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+			File file = FileUtils.getBackupFileForCustomAppMode(app, changedProfile.stringKey);
 			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				app.getFileSettingsHelper().updateExportListener(file, null);
@@ -438,24 +436,28 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getColorsPaletteController().onDestroy(getActivity());
+	}
+
 	private void createColorsCard(PreferenceViewHolder holder) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
-			return;
+		if (mapActivity != null) {
+			ViewGroup container = (ViewGroup) holder.itemView;
+			container.removeAllViews();
+			ColorsPaletteCard colorsPaletteCard = new ColorsPaletteCard(mapActivity, getColorsPaletteController());
+			container.addView(colorsPaletteCard.build(app));
+			updateColorName();
 		}
-		FlowLayout colorsCardContainer = (FlowLayout) holder.findViewById(R.id.color_items);
-		colorsCardContainer.removeAllViews();
+	}
 
-		int selectedColor = changedProfile.getActualColor();
-		List<Integer> colors = new ArrayList<>();
-		for (ProfileIconColors color : ProfileIconColors.values()) {
-			colors.add(ContextCompat.getColor(app, color.getColor(isNightMode())));
-		}
-		colorsCard = new ColorsCard(mapActivity, getSelectedAppMode(), this, selectedColor,
-				colors, app.getSettings().CUSTOM_ICON_COLORS, false);
-		colorsCard.setListener(this);
-		colorsCardContainer.addView(colorsCard.build(app));
-		updateColorName();
+	@NonNull
+	private ProfileColorController getColorsPaletteController() {
+		return ProfileColorController.getInstance(
+				app, getSelectedAppMode(), this, changedProfile.getActualColor(), isNightMode()
+		);
 	}
 
 	private void updateProfileNameAppearance() {
@@ -500,7 +502,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		updateProfileButton();
 	}
 
-	private View createLocationIconView(LocationIcon locationIcon, ViewGroup rootView) {
+	private View createLocationIconView(@NonNull String locationIconName, ViewGroup rootView) {
+		LocationIcon locationIcon = LocationIcon.fromName(locationIconName);
+
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		int changedProfileColor = changedProfile.getActualColor();
@@ -517,9 +521,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
 						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredRect.setOnClickListener(v -> {
-			if (locationIcon != changedProfile.locationIcon) {
+			if (!locationIconName.equals(changedProfile.locationIcon)) {
 				setVerticalScrollBarEnabled(false);
-				updateLocationIconSelector(locationIcon);
+				updateLocationIconSelector(locationIconName);
 				setVerticalScrollBarEnabled(true);
 			}
 		});
@@ -530,11 +534,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 		outlineRect.setImageDrawable(rectContourDrawable);
 		outlineRect.setVisibility(View.GONE);
-		locationIconView.setTag(locationIcon);
+		locationIconView.setTag(locationIconName);
 		return locationIconView;
 	}
 
-	private void updateLocationIconSelector(LocationIcon locationIcon) {
+	private void updateLocationIconSelector(@NonNull String locationIcon) {
 		View viewWithTag = locationIconItems.findViewWithTag(changedProfile.locationIcon);
 		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
 		viewWithTag = locationIconItems.findViewWithTag(locationIcon);
@@ -542,29 +546,34 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		changedProfile.locationIcon = locationIcon;
 	}
 
-	private View createNavigationIconView(NavigationIcon navigationIcon, ViewGroup rootView) {
-		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
-				.inflate(R.layout.preference_select_icon_button, rootView, false);
-		LayerDrawable navigationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
-		if (navigationIconDrawable != null) {
-			DrawableCompat.setTint(DrawableCompat.wrap(navigationIconDrawable.getDrawable(1)),
-					changedProfile.getActualColor());
+	private View createNavigationIconView(@NonNull String navigationIconName, ViewGroup rootView) {
+		NavigationIcon navigationIcon = NavigationIcon.fromName(navigationIconName);
+
+		LayoutInflater inflater = UiUtilities.getInflater(getContext(), isNightMode());
+		FrameLayout navigationIconView = (FrameLayout) inflater.inflate(R.layout.preference_select_icon_button, rootView, false);
+		LayerDrawable navigationDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
+		if (navigationDrawable != null) {
+			Drawable topDrawable = DrawableCompat.wrap(navigationDrawable.getDrawable(1));
+			DrawableCompat.setTint(topDrawable, changedProfile.getActualColor());
 		}
 		ImageView imageView = navigationIconView.findViewById(R.id.icon);
-		imageView.setImageDrawable(navigationIconDrawable);
+		imageView.setImageDrawable(navigationDrawable);
 		Matrix matrix = new Matrix();
 		imageView.setScaleType(ImageView.ScaleType.MATRIX);
-		matrix.postRotate((float) -90, imageView.getDrawable().getIntrinsicWidth() / 2,
-				imageView.getDrawable().getIntrinsicHeight() / 2);
+		float width = imageView.getDrawable().getIntrinsicWidth() / 2f;
+		float height = imageView.getDrawable().getIntrinsicHeight() / 2f;
+		matrix.postRotate((float) -90, width, height);
 		imageView.setImageMatrix(matrix);
+
 		ImageView coloredRect = navigationIconView.findViewById(R.id.backgroundRect);
-		AndroidUtils.setBackground(coloredRect,
-				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
-						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+		Drawable coloredDrawable = UiUtilities.tintDrawable(
+				AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
+				ColorUtilities.getColor(app, R.color.icon_color_default_light, 0.1f));
+		AndroidUtils.setBackground(coloredRect, coloredDrawable);
 		coloredRect.setOnClickListener(v -> {
-			if (navigationIcon != changedProfile.navigationIcon) {
+			if (!navigationIconName.equals(changedProfile.navigationIcon)) {
 				setVerticalScrollBarEnabled(false);
-				updateNavigationIconSelector(navigationIcon);
+				updateNavigationIconSelector(navigationIconName);
 				setVerticalScrollBarEnabled(true);
 			}
 		});
@@ -576,11 +585,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 		outlineRect.setImageDrawable(rectContourDrawable);
 		outlineRect.setVisibility(View.GONE);
-		navigationIconView.setTag(navigationIcon);
+		navigationIconView.setTag(navigationIconName);
 		return navigationIconView;
 	}
 
-	private void updateNavigationIconSelector(NavigationIcon navigationIcon) {
+	private void updateNavigationIconSelector(@NonNull String navigationIcon) {
 		View viewWithTag = navIconItems.findViewWithTag(changedProfile.navigationIcon);
 		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
 		viewWithTag = navIconItems.findViewWithTag(navigationIcon);
@@ -680,6 +689,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		return true;
 	}
 
+	private void onSaveButtonClicked() {
+		if (getActivity() != null) {
+			hideKeyboard();
+			if (isChanged() && checkProfileName()) {
+				getColorsPaletteController().refreshLastUsedTime();
+				saveProfile();
+			}
+		}
+	}
+
 	private void saveProfile() {
 		profile = changedProfile;
 		if (isNewProfile) {
@@ -753,7 +772,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 
 	private void checkSavingProfile() {
 		if (isNewProfile) {
-			File file = ConfigureProfileFragment.getBackupFileForCustomMode(app, changedProfile.stringKey);
+			File file = FileUtils.getBackupFileForCustomAppMode(app, changedProfile.stringKey);
 			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showNewProfileSavingDialog(null);
@@ -787,14 +806,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		}
 	}
 
-	private String getUniqueStringKey(ApplicationMode mode) {
-		return mode.getStringKey() + "_" + System.currentTimeMillis();
+	@NonNull
+	private String getUniqueStringKey(@NonNull ApplicationMode mode) {
+		return mode.getStringKey() + CUSTOM_MODE_KEY_SEPARATOR + System.currentTimeMillis();
 	}
 
 	private boolean hasNameDuplicate() {
-		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.toHumanString().trim().equals(changedProfile.name.trim()) &&
-					!m.getStringKey().trim().equals(profile.stringKey.trim())) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			if (mode.toHumanString().trim().equals(changedProfile.name.trim()) &&
+					!mode.getStringKey().trim().equals(profile.stringKey.trim())) {
 				return true;
 			}
 		}
@@ -808,6 +828,25 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	private void disableSaveButtonWithErrorMessage(String errorMessage) {
 		saveButton.setEnabled(false);
 		profileNameOtfb.setError(errorMessage, true);
+	}
+
+	@NonNull
+	private List<String> listLocationIcons() {
+		List<String> locationIcons = new ArrayList<>();
+		locationIcons.add(LocationIcon.DEFAULT.name());
+		locationIcons.add(LocationIcon.CAR.name());
+		locationIcons.add(LocationIcon.BICYCLE.name());
+		locationIcons.addAll(Model3dHelper.listModels(app));
+		return locationIcons;
+	}
+
+	@NonNull List<String> listNavigationIcons() {
+		List<String> navigationIcons = new ArrayList<>();
+		navigationIcons.add(NavigationIcon.DEFAULT.name());
+		navigationIcons.add(NavigationIcon.NAUTICAL.name());
+		navigationIcons.add(NavigationIcon.CAR.name());
+		navigationIcons.addAll(Model3dHelper.listModels(app));
+		return navigationIcons;
 	}
 
 	public void showExitDialog() {
@@ -851,14 +890,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	private void updateColorName() {
-		if (colorsCard == null || colorName == null) {
-			return;
-		}
-		int selectedColor = colorsCard.getSelectedColor();
-		if (colorsCard.isBaseColor(selectedColor)) {
-			colorName.setText(changedProfile.getProfileColorByColorValue(selectedColor).getName());
-		} else {
-			colorName.setText(R.string.custom_color);
+		PaletteColor selectedColor = getColorsPaletteController().getSelectedColor();
+		if (selectedColor != null && colorName != null) {
+			colorName.setText(selectedColor.toHumanString(app));
 		}
 	}
 
@@ -870,50 +904,25 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 	}
 
 	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-	}
-
-	@Override
-	public void onCardPressed(@NonNull BaseCard card) {
-		if (card instanceof ColorsCard) {
-			ColorsCard cardOfColors = (ColorsCard) card;
-			int color = cardOfColors.getSelectedColor();
-
-			if (color == changedProfile.getActualColor()) {
-				return;
-			}
-
-			if (cardOfColors.isBaseColor(color)) {
-				changedProfile.customColor = null;
-				changedProfile.color = changedProfile.getProfileColorByColorValue(color);
-			} else {
-				changedProfile.customColor = cardOfColors.getSelectedColor();
-				changedProfile.color = null;
-			}
-
-			if (iconItems != null) {
-				updateIconColor(changedProfile.iconRes);
-			}
-
-			updateColorName();
-			updateProfileNameAppearance();
-			updateProfileButton();
-			setVerticalScrollBarEnabled(false);
-			updatePreference(findPreference(MASTER_PROFILE));
-			updatePreference(findPreference(LOCATION_ICON_ITEMS));
-			updatePreference(findPreference(NAV_ICON_ITEMS));
-			setVerticalScrollBarEnabled(true);
+	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
+		if (paletteColor.isDefault()) {
+			changedProfile.customColor = null;
+			changedProfile.color = changedProfile.getProfileColorByColorValue(paletteColor.getColor());
+		} else {
+			changedProfile.customColor = paletteColor.getColor();
+			changedProfile.color = null;
 		}
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-	}
-
-	@Override
-	public void onColorSelected(Integer prevColor, int newColor) {
-		colorsCard.onColorSelected(prevColor, newColor);
-		this.onCardPressed(colorsCard);
+		if (iconItems != null) {
+			updateIconColor(changedProfile.iconRes);
+		}
+		updateColorName();
+		updateProfileNameAppearance();
+		updateProfileButton();
+		setVerticalScrollBarEnabled(false);
+		updatePreference(findPreference(MASTER_PROFILE));
+		updatePreference(findPreference(LOCATION_ICON_ITEMS));
+		updatePreference(findPreference(NAV_ICON_ITEMS));
+		setVerticalScrollBarEnabled(true);
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
@@ -947,8 +956,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		int iconRes;
 		String routingProfile;
 		RouteService routeService;
-		NavigationIcon navigationIcon;
-		LocationIcon locationIcon;
+		String navigationIcon;
+		String locationIcon;
 
 		@ColorInt
 		public int getActualColor() {
@@ -984,8 +993,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
 				return false;
 			if (routeService != that.routeService) return false;
-			if (navigationIcon != that.navigationIcon) return false;
-			return locationIcon == that.locationIcon;
+			if (!Algorithms.objectEquals(navigationIcon, that.navigationIcon)) return false;
+			return Algorithms.objectEquals(locationIcon, that.locationIcon);
 		}
 
 		@Override

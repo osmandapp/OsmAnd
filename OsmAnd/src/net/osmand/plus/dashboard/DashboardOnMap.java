@@ -11,6 +11,7 @@ import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.MTB_ROUTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.NAUTICAL_DEPTH;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OSM_NOTES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.OVERLAY_MAP;
+import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.RELIEF_3D;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TERRAIN;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRANSPORT_LINES;
 import static net.osmand.plus.dashboard.DashboardOnMap.DashboardType.TRAVEL_ROUTES;
@@ -61,7 +62,6 @@ import androidx.fragment.app.FragmentManager;
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
-import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -92,6 +92,7 @@ import net.osmand.plus.plugins.openseamaps.NauticalDepthContourFragment;
 import net.osmand.plus.plugins.osmedit.menu.OsmNotesMenu;
 import net.osmand.plus.plugins.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.plugins.srtm.ContourLinesMenu;
+import net.osmand.plus.plugins.srtm.Relief3DFragment;
 import net.osmand.plus.plugins.srtm.TerrainFragment;
 import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
@@ -201,6 +202,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		OSM_NOTES,
 		WIKIPEDIA,
 		TERRAIN,
+		RELIEF_3D,
 		CYCLE_ROUTES,
 		HIKING_ROUTES,
 		TRAVEL_ROUTES,
@@ -346,6 +348,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.osm_notes);
 		} else if (isCurrentType(TERRAIN)) {
 			tv.setText(R.string.shared_string_terrain);
+		}else if (isCurrentType(RELIEF_3D)) {
+			tv.setText(R.string.relief_3d);
 		} else if (isCurrentType(WIKIPEDIA)) {
 			tv.setText(R.string.shared_string_wikipedia);
 		} else if (isCurrentType(CYCLE_ROUTES)) {
@@ -444,7 +448,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		navigateButton.icon = AppCompatResources.getDrawable(mapActivity, R.drawable.ic_action_start_navigation);
 		navigateButton.text = mapActivity.getString(R.string.follow);
 		navigateButton.onClickListener = v -> {
-			mapActivity.getMapLayers().getMapControlsLayer().doNavigate();
+			mapActivity.getMapLayers().getMapActionsHelper().doNavigate();
 			hideDashboard();
 		};
 
@@ -453,7 +457,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		routeButton.text = mapActivity.getString(R.string.layer_route);
 		routeButton.onClickListener = v -> {
 			hideDashboard();
-			mapActivity.getMapLayers().getMapControlsLayer().doRoute();
+			mapActivity.getMapLayers().getMapActionsHelper().doRoute();
 		};
 
 		actionButtons.put(DashboardActionButtonType.MY_LOCATION, myLocationButton);
@@ -562,7 +566,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visible) {
 			mapActivity.getFragmentsHelper().dismissCardDialog();
 			mapActivity.getFragmentsHelper().dismissFragment(TrackMenuFragment.TAG);
-			mapActivity.getContextMenu().hideMenues();
+			mapActivity.getContextMenu().hideMenus();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
 			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
@@ -603,6 +607,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					NauticalDepthContourFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(TERRAIN)) {
 					TerrainFragment.showInstance(fragmentManager);
+				}else if (isCurrentType(RELIEF_3D)) {
+					Relief3DFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER)) {
 					WeatherMainFragment.showInstance(fragmentManager);
 				} else if (isCurrentType(WEATHER_LAYER)) {
@@ -787,6 +793,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(MapillaryFiltersFragment.TAG);
 		} else if (isCurrentType(TERRAIN)) {
 			refreshFragment(TerrainFragment.TAG);
+		}else if (isCurrentType(RELIEF_3D)) {
+			refreshFragment(Relief3DFragment.TAG);
 		} else if (isCurrentType(CYCLE_ROUTES)) {
 			refreshFragment(CycleRoutesFragment.TAG);
 		} else if (isCurrentType(HIKING_ROUTES)) {
@@ -1038,7 +1046,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public boolean isCurrentTypeHasIndividualFragment() {
 		return isCurrentType(
-				CONFIGURE_MAP, MAPILLARY, TERRAIN, CYCLE_ROUTES, HIKING_ROUTES,
+				CONFIGURE_MAP, MAPILLARY, TERRAIN, RELIEF_3D, CYCLE_ROUTES, HIKING_ROUTES,
 				TRAVEL_ROUTES, TRANSPORT_LINES, WEATHER, WEATHER_LAYER,
 				WEATHER_CONTOURS, NAUTICAL_DEPTH, MTB_ROUTES, DIFFICULTY_CLASSIFICATION
 		);

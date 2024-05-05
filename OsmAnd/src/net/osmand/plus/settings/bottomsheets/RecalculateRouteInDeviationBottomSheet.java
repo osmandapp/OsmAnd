@@ -222,7 +222,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	private static String getFormattedDistance(@NonNull OsmandApplication app, float value) {
-		return OsmAndFormatter.getFormattedDistance(value, app, false);
+		return OsmAndFormatter.getFormattedDistance(value, app, OsmAndFormatter.OsmAndFormatterParams.NO_TRAILING_ZEROS);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,

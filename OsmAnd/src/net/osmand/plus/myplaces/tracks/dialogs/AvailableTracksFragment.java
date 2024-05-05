@@ -1,5 +1,7 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_EMPTY_TRACKS;
 import static net.osmand.plus.myplaces.tracks.dialogs.TrackFoldersAdapter.TYPE_SORT_TRACKS;
 import static net.osmand.plus.utils.AndroidUtils.getViewOnScreenY;
@@ -24,7 +26,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.TrackItemsFragment;
-import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.myplaces.MyPlacesActivity;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.myplaces.tracks.SearchMyPlacesTracksFragment;
@@ -38,6 +39,7 @@ import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -83,7 +85,12 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 
-		trackFoldersHelper = new TrackFoldersHelper(requireMyActivity());
+		File gpxDir = FileUtils.getExistingDir(app, GPX_INDEX_DIR);
+		TrackFolder folder = new TrackFolder(gpxDir, null);
+		setRootFolder(folder);
+		setSelectedFolder(folder);
+
+		trackFoldersHelper = new TrackFoldersHelper(requireMyActivity(), folder);
 		trackFoldersHelper.setLoadTracksListener(getLoadTracksListener());
 
 		visibleTracksGroup = new VisibleTracksGroup(app);
@@ -125,7 +132,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		super.onResume();
 		smartFolderHelper.addUpdateListener(this);
 		if (!trackFoldersHelper.isImporting()) {
-			if (rootFolder == null && !trackFoldersHelper.isLoadingTracks()) {
+			if (rootFolder.isEmpty() && !trackFoldersHelper.isLoadingTracks()) {
 				reloadTracks();
 			} else {
 				updateContent();
@@ -317,11 +324,11 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 		} else if (group instanceof SmartFolder) {
 			openSmartFolder((SmartFolder) group);
 		} else if (group instanceof VisibleTracksGroup) {
-			showTracksVisibilityDialog(TrackTabType.ON_MAP.name(), false);
+			showTracksVisibilityDialog(ON_MAP.name(), ON_MAP, false);
 		}
 	}
 
-	public void showSmartFolderDetails(SmartFolder folder) {
+	public void showSmartFolderDetails(@NonNull SmartFolder folder) {
 		openSmartFolder(folder);
 	}
 
@@ -452,18 +459,24 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			}
 
 			@Override
+			public void loadTracksProgress(@NonNull TrackItem[] items) {
+				updateContent();
+				updateFragmentsFolders(false);
+			}
+
+			@Override
 			public void loadTracksFinished(@NonNull TrackFolder folder) {
 				setRootFolder(folder);
 				setSelectedFolder(folder);
 
 				updateContent();
-				updateFragmentsFolders();
+				updateFragmentsFolders(true);
 				updateProgressVisibility(false);
 
 				restoreState(getArguments());
 			}
 
-			public void updateFragmentsFolders() {
+			public void updateFragmentsFolders(boolean loadTracksFinished) {
 				List<TrackFolder> folders = new ArrayList<>(rootFolder.getFlattenedSubFolders());
 				folders.add(rootFolder);
 
@@ -471,16 +484,16 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				if (activity != null) {
 					TrackFolderFragment folderFragment = activity.getFragment(TrackFolderFragment.TAG);
 					if (folderFragment != null) {
-						updateFragmentFolders(folderFragment, folders);
+						updateFragmentFolders(folderFragment, folders, loadTracksFinished);
 					}
 					TracksSelectionFragment selectionFragment = activity.getFragment(TracksSelectionFragment.TAG);
 					if (selectionFragment != null) {
-						updateFragmentFolders(selectionFragment, folders);
+						updateFragmentFolders(selectionFragment, folders, loadTracksFinished);
 					}
 				}
 			}
 
-			public void updateFragmentFolders(@NonNull BaseTrackFolderFragment fragment, @NonNull List<TrackFolder> folders) {
+			public void updateFragmentFolders(@NonNull BaseTrackFolderFragment fragment, @NonNull List<TrackFolder> folders, boolean loadTracksFinished) {
 				TrackFolder rootFolder = fragment.getRootFolder();
 				TrackFolder selectedFolder = fragment.getSelectedFolder();
 
@@ -508,7 +521,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 
 	@Override
 	public void onSmartFolderUpdated(@NonNull SmartFolder smartFolder) {
-		adapter.updateItem(smartFolder);
+		app.runInUIThread(() -> adapter.updateItem(smartFolder));
 	}
 
 	@Override

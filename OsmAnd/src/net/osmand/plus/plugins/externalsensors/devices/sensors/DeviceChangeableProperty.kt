@@ -7,14 +7,19 @@ import net.osmand.plus.OsmandApplication
 import net.osmand.plus.R
 import net.osmand.plus.plugins.externalsensors.DevicesSettingsCollection
 import net.osmand.plus.utils.OsmAndFormatter
-import net.osmand.util.Algorithms
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
 
-enum class DeviceChangeableProperty(val displayNameResId: Int, val inputType: Int) {
-	NAME(R.string.shared_string_name, EditorInfo.TYPE_CLASS_TEXT),
-	WHEEL_CIRCUMFERENCE(R.string.wheel_circumference, EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
+enum class DeviceChangeableProperty(
+	val displayNameResId: Int,
+	val inputType: Int,
+	val defValue: String) {
+	NAME(R.string.shared_string_name, EditorInfo.TYPE_CLASS_TEXT, ""),
+	WHEEL_CIRCUMFERENCE(
+		R.string.wheel_circumference,
+		EditorInfo.TYPE_CLASS_NUMBER or EditorInfo.TYPE_NUMBER_FLAG_DECIMAL,
+		DevicesSettingsCollection.DEFAULT_WHEEL_CIRCUMFERENCE.toString());
 
 
 	fun getFormattedValue(context: Context, value: String?): String {
@@ -28,7 +33,9 @@ enum class DeviceChangeableProperty(val displayNameResId: Int, val inputType: In
 			if (app.settings.METRIC_SYSTEM.get().shouldUseFeet()) {
 				floatValue *= OsmAndFormatter.INCHES_IN_ONE_METER
 			}
-			res = DecimalFormat("#.####", DecimalFormatSymbols(Locale.US)).format(floatValue.toDouble())
+			res = DecimalFormat(
+				"#.####",
+				DecimalFormatSymbols(Locale.US)).format(floatValue.toDouble())
 		} else if (value != null) {
 			res = value
 		} else {
@@ -45,7 +52,9 @@ enum class DeviceChangeableProperty(val displayNameResId: Int, val inputType: In
 			if (app.settings.METRIC_SYSTEM.get().shouldUseFeet()) {
 				floatValue /= OsmAndFormatter.INCHES_IN_ONE_METER
 			}
-			res = DecimalFormat("#.####", DecimalFormatSymbols(Locale.US)).format(floatValue.toDouble())
+			res = DecimalFormat(
+				"#.####",
+				DecimalFormatSymbols(Locale.US)).format(floatValue.toDouble())
 		} else {
 			res = value.trim()
 		}

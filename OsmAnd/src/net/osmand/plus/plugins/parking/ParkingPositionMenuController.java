@@ -7,12 +7,12 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.views.PointImageUtils;
 
 public class ParkingPositionMenuController extends MenuController {
 
@@ -107,7 +107,7 @@ public class ParkingPositionMenuController extends MenuController {
 	public Drawable getRightIcon() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return PointImageDrawable.getFromFavorite(mapActivity.getMyApplication(),
+			return PointImageUtils.getFromPoint(mapActivity.getMyApplication(),
 					ContextCompat.getColor(mapActivity, R.color.parking_icon_background), false, fav);
 		} else {
 			return null;

@@ -36,7 +36,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.CurrentPositionHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
-import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.helpers.LocationPointWrapper;
 import net.osmand.plus.render.TextDrawInfo;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -112,10 +112,9 @@ public class StreetNameWidget extends MapWidget {
 			turnDrawable.setColor(turnArrowColorId);
 		}
 
-		boolean hideStreetName = mapActivity.isTopToolbarActive()
-				|| mapActivity.shouldHideTopControls()
-				|| MapRouteInfoMenu.chooseRoutesVisible
-				|| MapRouteInfoMenu.waypointsVisible;
+		boolean hideStreetName = MapRouteInfoMenu.chooseRoutesVisible
+				|| MapRouteInfoMenu.waypointsVisible
+				|| mapActivity.getWidgetsVisibilityHelper().shouldHideVerticalWidgets();
 		if (hideStreetName) {
 			updateVisibility(false);
 		} else if (showClosestWaypointFirstInAddress && updateWaypoint()) {

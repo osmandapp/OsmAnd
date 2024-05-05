@@ -209,10 +209,11 @@ public class TerrainLayer extends MapTileLayer {
 						Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
 						indexCachedResources(fileModified, rs);
 						indexNonCachedResources(fileModified, rs);
-						sqliteDb.close();
 						resources = rs;
 					} catch (RuntimeException e) {
 						log.error(e.getMessage(), e);
+					} finally {
+						sqliteDb.close();
 					}
 				}
 				return null;

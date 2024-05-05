@@ -21,25 +21,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.configmap.tracks.TracksAdapter.ItemVisibilityCallback;
 import net.osmand.plus.mapmarkers.SelectionMarkersGroupBottomSheetDialogFragment.AddMarkersGroupFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersGroupsAdapter;
+import net.osmand.plus.track.GpxSelectionParams;
+import net.osmand.plus.track.SelectTrackTabsFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment.GpxDataItemSelectionListener;
+import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.track.helpers.GpxFileLoaderTask;
+import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EmptyStateRecyclerView;
 import net.osmand.util.MapUtils;
+
+import java.io.File;
 
 public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -390,8 +400,50 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 			@Override
 			public void waypointsOnClick() {
-				openAddGroupMenu(new AddTracksGroupBottomSheetDialogFragment());
+				SelectTrackTabsFragment.showInstance(requireActivity().getSupportFragmentManager(), getGpxDataItemSelectionListener(), getItemVisibilityCallback());
 			}
+		};
+	}
+
+	private GpxDataItemSelectionListener getGpxDataItemSelectionListener() {
+		return gpxDataItem -> {
+			if (gpxDataItem != null) {
+				GPXTrackAnalysis analysis = gpxDataItem.getAnalysis();
+				if (analysis != null && analysis.getWptCategoryNamesSet() != null && analysis.getWptCategoryNamesSet().size() > 1) {
+					Bundle args = new Bundle();
+					args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, gpxDataItem.getFile().getAbsolutePath());
+
+					SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
+					fragment.setArguments(args);
+					fragment.setUsedOnMap(false);
+					fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
+				} else {
+					GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
+					File gpx = gpxDataItem.getFile();
+					if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
+						GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
+							GpxSelectionParams params = GpxSelectionParams.newInstance()
+									.showOnMap().selectedAutomatically().saveSelection();
+							selectionHelper.selectGpxFile(gpxFile, params);
+							app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
+							return true;
+						});
+					} else {
+						app.getMapMarkersHelper().addOrEnableGpxGroup(gpx);
+					}
+				}
+			}
+		};
+	}
+
+	private ItemVisibilityCallback getItemVisibilityCallback() {
+		return trackItem -> {
+			GpxDataItem item = trackItem.getDataItem();
+			if (item != null) {
+				GPXTrackAnalysis analysis = item.getAnalysis();
+				return analysis != null && analysis.getWptPoints() > 0;
+			}
+			return false;
 		};
 	}
 

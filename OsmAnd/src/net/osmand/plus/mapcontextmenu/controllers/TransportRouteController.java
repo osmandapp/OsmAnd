@@ -17,6 +17,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 
 import java.util.List;
@@ -308,8 +309,9 @@ public class TransportRouteController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
-			int cz = transportRoute.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
-			mapActivity.getMyApplication().getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
+			OsmandMapTileView mapView = mapActivity.getMapView();
+			int zoom = transportRoute.calculateZoom(0, mapView.getCurrentRotatedTileBox());
+			mapView.setIntZoom(zoom);
 			stopsLayer.setRoute(transportRoute);
 		}
 	}

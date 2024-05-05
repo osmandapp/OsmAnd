@@ -57,7 +57,6 @@ public class OfflineWeatherForecastCard extends MapBaseCard implements DownloadE
 	private final DownloadIndexesThread downloadThread;
 	private final DownloadValidationManager downloadManager;
 
-	private final LayoutInflater themedInflater;
 	private final List<View> itemViews = new ArrayList<>();
 	private final int profileColor;
 	private final int defaultColor;
@@ -68,7 +67,6 @@ public class OfflineWeatherForecastCard extends MapBaseCard implements DownloadE
 		settings = app.getSettings();
 		downloadThread = app.getDownloadThread();
 		downloadManager = new DownloadValidationManager(app);
-		themedInflater = UiUtilities.getInflater(activity, nightMode);
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		profileColor = appMode.getProfileColor(nightMode);

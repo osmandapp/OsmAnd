@@ -220,7 +220,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 				if (AndroidUtils.isActivityNotDestroyed(activity) && activity instanceof MapActivity) {
 					MapActivity mapActivity = (MapActivity) activity;
 					OsmandMapTileView mapView = mapActivity.getMapView();
-					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, mapView.getZoom(), true);
+					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, mapView.getZoom());
 					mapView.refreshMap();
 				}
 			}

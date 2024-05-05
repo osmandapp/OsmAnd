@@ -544,15 +544,15 @@ public class TileSourceManager {
 			bous.close();
 			return bous.toByteArray();
 		}
-		
-		
+
+
 		@Override
 		public void deleteTiles(String path) {
 			File pf = new File(path);
 			File[] list = pf.listFiles();
-			if(list != null) {
-				for(File l : list) {
-					if(l.isDirectory()) {
+			if (list != null) {
+				for (File l : list) {
+					if (l.isDirectory()) {
 						Algorithms.removeAllFiles(l);
 					}
 				}
@@ -561,13 +561,57 @@ public class TileSourceManager {
 
 		@Override
 		public int getAvgSize() {
-			return this.avgSize;
+			return avgSize;
+		}
+
+		public Map<String, String> getProperties() {
+			Map<String, String> properties = new LinkedHashMap<>();
+
+			if (!Algorithms.isEmpty(getRule())) {
+				properties.put("rule", getRule());
+			}
+			if (getUrlTemplate() != null) {
+				properties.put("url_template", getUrlTemplate());
+			}
+			if (!Algorithms.isEmpty(getReferer())) {
+				properties.put("referer", getReferer());
+			}
+			if (!Algorithms.isEmpty(getUserAgent())) {
+				properties.put("user_agent", getUserAgent());
+			}
+
+			properties.put("ext", getTileFormat());
+			properties.put("min_zoom", getMinimumZoomSupported() + "");
+			properties.put("max_zoom", getMaximumZoomSupported() + "");
+			properties.put("tile_size", getTileSize() + "");
+			properties.put("img_density", getBitDensity() + "");
+			properties.put("avg_img_size", getAverageSize() + "");
+
+			if (isEllipticYTile()) {
+				properties.put("ellipsoid", isEllipticYTile() + "");
+			}
+			if (isInvertedYTile()) {
+				properties.put("inverted_y", isInvertedYTile() + "");
+			}
+			if (getRandoms() != null) {
+				properties.put("randoms", getRandoms());
+			}
+			if (getExpirationTimeMinutes() != -1) {
+				properties.put("expiration_time_minutes", getExpirationTimeMinutes() + "");
+			}
+			if (paramType != ParameterType.UNDEFINED) {
+				properties.put("param_type", paramType.getParamName());
+				properties.put("param_min", paramMin + "");
+				properties.put("param_step", paramStep + "");
+				properties.put("param_max", paramMax + "");
+			}
+			return properties;
 		}
 	}
-	
-	private static int parseInt(Map<String, String> attributes, String value, int def){
+
+	private static int parseInt(Map<String, String> attributes, String value, int def) {
 		String val = attributes.get(value);
-		if(val == null){
+		if (val == null) {
 			return def;
 		}
 		try {
@@ -576,49 +620,11 @@ public class TileSourceManager {
 			return def;
 		}
 	}
-	
-	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException {
-		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
-		Map<String, String> properties = new LinkedHashMap<>();
 
-		if (!Algorithms.isEmpty(tm.getRule())) {
-			properties.put("rule", tm.getRule());
-		}
-		if (tm.getUrlTemplate() != null) {
-			properties.put("url_template", tm.getUrlTemplate());
-		}
-		if (!Algorithms.isEmpty(tm.getReferer())) {
-			properties.put("referer", tm.getReferer());
-		}
-		if (!Algorithms.isEmpty(tm.getUserAgent())) {
-			properties.put("user_agent", tm.getUserAgent());
-		}
+	public static void createMetaInfoFile(File dir, TileSourceTemplate template, boolean override) throws IOException {
+		File metainfo = new File(dir, ".metainfo");
+		Map<String, String> properties = template.getProperties();
 
-		properties.put("ext", tm.getTileFormat());
-		properties.put("min_zoom", tm.getMinimumZoomSupported() + "");
-		properties.put("max_zoom", tm.getMaximumZoomSupported() + "");
-		properties.put("tile_size", tm.getTileSize() + "");
-		properties.put("img_density", tm.getBitDensity() + "");
-		properties.put("avg_img_size", tm.getAverageSize() + "");
-
-		if (tm.isEllipticYTile()) {
-			properties.put("ellipsoid", tm.isEllipticYTile() + "");
-		}
-		if (tm.isInvertedYTile()) {
-			properties.put("inverted_y", tm.isInvertedYTile() + "");
-		}
-		if (tm.getRandoms() != null) {
-			properties.put("randoms", tm.getRandoms());
-		}
-		if (tm.getExpirationTimeMinutes() != -1) {
-			properties.put("expiration_time_minutes", tm.getExpirationTimeMinutes() + "");
-		}
-		if (tm.paramType != ParameterType.UNDEFINED) {
-			properties.put("param_type", tm.paramType.getParamName());
-			properties.put("param_min", tm.paramMin + "");
-			properties.put("param_step", tm.paramStep + "");
-			properties.put("param_max", tm.paramMax + "");
-		}
 		if (override || !metainfo.exists()) {
 			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(metainfo)));
 			for (Entry<String, String> entry : properties.entrySet()) {

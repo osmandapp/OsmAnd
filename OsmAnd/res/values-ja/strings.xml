@@ -877,7 +877,7 @@ POIの更新は利用できません</string>
     <string name="local_openstreetmap_uploadall">すべてのアップロード</string>
     <string name="local_openstreetmap_upload">OSMへの変更をアップロード</string>
     <string name="local_openstreetmap_delete">変更を削除</string>
-    <string name="local_openstreetmap_descr_title">非同期OSMの編集:</string>
+    <string name="local_openstreetmap_descr_title">非同期OSM編集:</string>
     <string name="local_openstreetmap_settings">端末内に保存されたOSM POI/メモ</string>
     <string name="animate_routing_route_not_calculated">最初にルート検索をしてください</string>
     <string name="animate_routing_route">"計算されたルートを使用してシミュレーション "</string>
@@ -1426,7 +1426,7 @@ POIの更新は利用できません</string>
     <string name="action_create">アクションの作成</string>
     <string name="action_modify">アクションの変更</string>
     <string name="action_delete">アクションの削除</string>
-    <string name="osm_edits">OSMの編集</string>
+    <string name="osm_edits">OSM編集データ</string>
     <string name="osmand_parking_hour">時間</string>
     <string name="shared_string_minute_lowercase">分</string>
     <string name="osmand_parking_time_left">駐車可能です</string>
@@ -1535,7 +1535,7 @@ POIの更新は利用できません</string>
     <string name="storage_directory_default">内部メモリ</string>
     <string name="storage_directory">マップストレージ</string>
     <string name="shared_string_copy">コピー</string>
-    <string name="osm_edit_context_menu_delete">OSMの編集を削除</string>
+    <string name="osm_edit_context_menu_delete">OSM編集データを削除</string>
     <string name="rendering_value_disabled_name">無効</string>
     <string name="shared_string_logoff">ログオフ</string>
     <string name="routing_attr_avoid_borders_description">国境を越えて別の国に入るようなルート設定を避けます。</string>
@@ -1732,7 +1732,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>
     <string name="shared_string_location">緯度・経度</string>
-    <string name="share_osm_edits_subject">OSMの編集をOsmAndで共有</string>
+    <string name="share_osm_edits_subject">OSM編集データをOsmAndで共有</string>
     <string name="lang_nds">低地ドイツ語</string>
     <string name="lang_mk">マケドニア語</string>
     <string name="lang_fy">フリジア語</string>
@@ -1804,7 +1804,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_move_up">上に移動</string>
     <string name="shared_string_move_down">下に移動</string>
     <string name="finish_navigation">ナビゲーションの終了</string>
-    <string name="avoid_road">避ける道を指定</string>
+    <string name="avoid_road">避ける道の指定</string>
     <string name="storage_directory_readonly_desc">選択したデータ保存フォルダーが書き込み保護されているため、内部メモリに切り替えました。書き込み可能な保存用ディレクトリを選択してください。</string>
     <string name="storage_directory_shared">共有記憶域</string>
     <string name="full_report">より詳細なレポートは以下サイトにて</string>
@@ -1971,7 +1971,7 @@ POIの更新は利用できません</string>
     <string name="share_history_subject">OsmAnd経由で共有</string>
     <string name="search_categories">カテゴリー</string>
     <string name="postcode">郵便番号</string>
-    <string name="shared_string_from">から</string>
+    <string name="shared_string_from">コピー元</string>
     <string name="city_type_district">地区</string>
     <string name="city_type_neighbourhood">小字・丁目</string>
     <string name="map_widget_search">検索</string>
@@ -3240,7 +3240,7 @@ POIの更新は利用できません</string>
     <string name="route_way">道</string>
     <string name="sit_on_the_stop">停留所標識</string>
     <string name="lang_oc">オック語</string>
-    <string name="layer_osm_edits">OSMの編集</string>
+    <string name="layer_osm_edits">OSM編集データ</string>
     <string name="quick_action_contour_lines_descr">マップ上の等高線の表示/非表示を切り替えられるボタンです。</string>
     <string name="quick_action_hillshade_descr">マップ上の陰影起伏図の表示/非表示を切り替えられるボタンです。</string>
     <string name="tts_initialization_error">テキスト読み上げエンジンを起動できません。</string>
@@ -3432,7 +3432,7 @@ POIの更新は利用できません</string>
     <string name="replace_all">全て置き換える</string>
     <string name="keep_both">両方を維持する</string>
     <string name="keep_both_desc">インポートアイテムはデータ先頭に追加されます</string>
-    <string name="import_duplicates_description">OsmAndには、すでにインポートされたものと同じ名前の項目があります。
+    <string name="import_duplicates_description">OsmAnd には、すでにインポートされたものと同じ名前の項目があります。
 \n
 \n対応を選択してください。</string>
     <string name="import_duplicates_title">一部のアイテムは既に存在します</string>
@@ -4516,7 +4516,7 @@ POIの更新は利用できません</string>
 \nすべてのデータを新しいフォルダーにコピーします。</string>
     <string name="folder_access_denied">選択したフォルダにアクセスするには権限が必要です。</string>
     <string name="copying_completed">コピー済み</string>
-    <string name="shared_string_copy_to">以下へコピーする</string>
+    <string name="shared_string_copy_to">コピー先</string>
     <string name="start_copying">コピーを開始</string>
     <string name="skip_confirmation">はい、スキップします</string>
     <string name="shared_storage">共有ストレージ</string>
@@ -4887,7 +4887,6 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showTrainRoutes_name">鉄道路線</string>
     <string name="shared_string_item">アイテム</string>
     <string name="simulation_constant_mode_title">定速走行</string>
-    <string name="change_default_tracks_appearance_confirmation_description">%1$s経路の外観を変更しますか？</string>
     <string name="no_visible_tracks_description">マップ上に表示する経路を選択します。</string>
     <string name="no_visible_tracks">マップ上に経路がありません</string>
     <string name="ant_missing_dependency_descr">必要なサービス\"%1$s\"が見つかりませんでした。

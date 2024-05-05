@@ -406,7 +406,7 @@ public abstract class OsmandMapLayer implements MapRendererViewListener {
 		return (int) textScale * radiusPoi;
 	}
 
-	public static void setMapButtonIcon(@NonNull ImageView imageView, @NonNull Drawable icon) {
+	public static void setMapButtonIcon(@NonNull ImageView imageView, @Nullable Drawable icon) {
 		int btnSizePx = imageView.getLayoutParams().height;
 		int iconSizePx = imageView.getContext().getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
 		int iconPadding = (btnSizePx - iconSizePx) / 2;

@@ -1,7 +1,7 @@
 package net.osmand.plus.plugins.development;
 
-import static net.osmand.plus.OsmAndLocationSimulation.LocationSimulationListener;
 import static net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.showResetSettingsDialog;
+import static net.osmand.plus.simulation.OsmAndLocationSimulation.LocationSimulationListener;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,17 +13,19 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
-import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.mapillary.MapillaryPlugin;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BooleanRadioButtonsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.settings.bottomsheets.ConfirmationBottomSheet.ConfirmationDialogListener;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.SimulateLocationFragment;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.SunriseSunset;
 
@@ -60,7 +62,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		Preference safeCategory = findPreference("safe");
 		safeCategory.setIconSpaceReserved(false);
 		setupSafeModePref();
-		setupApproximationSafeModePref();
 
 		Preference routingCategory = findPreference("routing");
 		routingCategory.setIconSpaceReserved(false);
@@ -79,6 +80,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		setupPressedKeyInfoPref();
 
 		setupTripRecordingPrefs();
+
+		setupMapTextsPrefs();
 
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
@@ -103,16 +106,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		}
 	}
 
-	private void setupApproximationSafeModePref() {
-		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
-		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
-		safeMode.setIconSpaceReserved(false);
-	}
-
 	private void setupHeightmapRelatedPrefs() {
 		SwitchPreferenceEx preference = findPreference(plugin.USE_RASTER_SQLITEDB.getId());
 		preference.setIconSpaceReserved(false);
-		preference.setEnabled(plugin.isRelief3dAllowed());
+		SRTMPlugin srtmPlugin = PluginsHelper.getActivePlugin(SRTMPlugin.class);
+		boolean enabled = srtmPlugin != null && srtmPlugin.is3DReliefAllowed();
+		preference.setEnabled(enabled);
 	}
 
 	private void setupSimulateYourLocationPref() {
@@ -176,14 +175,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		headingPref.setDescription(R.string.write_heading_description);
 	}
 
+	private void setupMapTextsPrefs() {
+		Preference textsCategory = findPreference("texts");
+		textsCategory.setIconSpaceReserved(false);
+
+		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
+		syminfoPref.setIconSpaceReserved(false);
+		syminfoPref.setDescription(R.string.show_debug_info_description);
+
+		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
+		symtopPref.setIconSpaceReserved(false);
+		symtopPref.setDescription(R.string.allow_display_on_top_description);
+	}
+
 	private void setupMemoryAllocatedForRoutingPref() {
-		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
 		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
-		String description = getString(
-				R.string.ltr_or_rtl_combine_via_space,
-				String.valueOf(value),
-				"MB");
-		preference.setSummary(description);
+		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
+		preference.setSummary(getString(R.string.ltr_or_rtl_combine_via_space, String.valueOf(value), "MB"));
 		preference.setIconSpaceReserved(false);
 	}
 
@@ -193,7 +201,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		long dalvikSize = android.os.Debug.getNativeHeapAllocatedSize() / (1024 * 1024L);
 
 		Preference globalAppAllocatedMemory = findPreference("global_app_allocated_memory");
-		globalAppAllocatedMemory.setSummary(getString(R.string.global_app_allocated_memory_descr, javaAvailMem, javaTotal, dalvikSize));
+		globalAppAllocatedMemory.setSummary(getString(R.string.global_app_allocated_memory_descr,
+				String.valueOf(javaAvailMem), String.valueOf(javaTotal), String.valueOf(dalvikSize)));
 		globalAppAllocatedMemory.setIconSpaceReserved(false);
 	}
 
@@ -247,7 +256,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		if (SIMULATE_YOUR_LOCATION.equals(prefId)) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				SimulatePositionFragment.showInstance(activity.getSupportFragmentManager(), null, false);
+				SimulateLocationFragment.showInstance(activity.getSupportFragmentManager(), null, false);
 			}
 			return true;
 		} else if (SIMULATE_INITIAL_STARTUP.equals(prefId)) {

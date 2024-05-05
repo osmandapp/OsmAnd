@@ -74,7 +74,7 @@
     <string name="poi_tobacco">Tobak</string>
     <string name="poi_toys">Legetøjsbuttik</string>
     <string name="poi_trade">Handelsplads</string>
-    <string name="poi_vacuum_cleaner">Støvsuger</string>
+    <string name="poi_vacuum_cleaner">Støvsuger-butik</string>
     <string name="poi_variety_store">Fastpris butik</string>
     <string name="poi_video">Video</string>
     <string name="poi_window_blind">Persienner</string>
@@ -1649,7 +1649,7 @@
     <string name="poi_shelter_type_public_transport">Offentlig transport</string>
     <string name="poi_shelter_type_picnic_shelter">Picnic</string>
     <string name="poi_shelter_type_weather_shelter">Tarp</string>
-    <string name="poi_shelter_type_lean_to">Bivuak</string>
+    <string name="poi_shelter_type_lean_to">Shelter</string>
     <string name="poi_shelter_type_basic_hut">Hytte</string>
     <string name="poi_shelter_type_building">Bygning</string>
     <string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
@@ -2422,7 +2422,7 @@
     <string name="poi_compressed_air_yes">Ja</string>
     <string name="poi_compressed_air_no">Trykluft: nej</string>
     <string name="poi_car_wash_yes">Ja</string>
-    <string name="poi_vacuum_cleaner_yes">Ja</string>
+    <string name="poi_vacuum_cleaner_yes">Ja;Støvsuger</string>
     <string name="poi_vacuum_cleaner_no">Støvsuger: nej</string>
     <string name="poi_amenity_vacuum_cleaner">Støvsuger</string>
     <string name="poi_sport_free_flying">Freeflying (sport)</string>
@@ -3790,8 +3790,8 @@
     <string name="poi_drinking_water_refill_network">Netværk til påfyldning af drikkevand</string>
     <string name="poi_drinking_water_refill_no">Påfyldning af drikkevand: nej</string>
     <string name="poi_drinking_water_refill_yes">Påfyldning af drikkevand: ja</string>
-    <string name="poi_osmand_fire_hydrant_pressure_suction">Sugning</string>
-    <string name="poi_osmand_fire_hydrant_pressure_pressurized">Under tryk</string>
+    <string name="poi_fire_hydrant_pressure_suction">Sugning</string>
+    <string name="poi_fire_hydrant_pressure_pressurized">Under tryk</string>
     <string name="poi_water_source_groundwater">Grundvand</string>
     <string name="poi_fire_hydrant_type_pipe">Rør</string>
     <string name="poi_fire_hydrant_pressure_filter">Tryk</string>
@@ -3803,7 +3803,7 @@
     <string name="poi_traffic_signals_vibration">Vibration</string>
     <string name="poi_city_block">Karré</string>
     <string name="poi_borough">Bydistrikt</string>
-    <string name="poi_give_box">Donationsboks</string>
+    <string name="poi_give_box">Bytteboks</string>
     <string name="poi_traffic_signals_arrow_no">Pil: nej</string>
     <string name="poi_elevator">Elevator</string>
     <string name="poi_nuts">Nøddebutik</string>
@@ -4034,7 +4034,7 @@
     <string name="poi_surface_rubber">Overflade: gummi</string>
     <string name="poi_sac_scale">SAC-skala</string>
     <string name="poi_assembly_point">Samlingssted</string>
-    <string name="poi_osmand_not_pt_shelter_yes">Alle undtagen læskure til offentlig transport</string>
+    <string name="poi_not_pt_shelter_yes">Alle undtagen læskure til offentlig transport</string>
     <string name="poi_foot_designated">Beregnet til fodgængere</string>
     <string name="poi_motorcar_designated">Beregnet til biler</string>
     <string name="poi_motor_vehicle_designated">Beregnet til motorkøretøjer</string>

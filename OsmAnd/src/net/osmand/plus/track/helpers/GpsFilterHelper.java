@@ -1,5 +1,12 @@
 package net.osmand.plus.track.helpers;
 
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
+import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
+import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
+import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
+
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.text.SpannableString;
@@ -28,6 +35,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -188,7 +196,7 @@ public class GpsFilterHelper {
 			if (successfulFinish && !isCancelled()) {
 				filteredSelectedGpxFile.updateGpxFile(app, filteredGpxFile);
 				filteredSelectedGpxFile.setTrackAnalysis(trackAnalysis);
-				filteredSelectedGpxFile.setDisplayGroups(displayGroups);
+				filteredSelectedGpxFile.setSplitGroups(displayGroups);
 				for (GpsFilterListener listener : listeners) {
 					listener.onFinishFiltering(filteredGpxFile);
 				}
@@ -202,6 +210,7 @@ public class GpsFilterHelper {
 		copy.author = source.author;
 		copy.metadata = new Metadata(source.metadata);
 		copy.tracks = copyTracks(source.tracks);
+		copy.setPointsGroups(new LinkedHashMap<>(source.getPointsGroups()));
 		copy.addPoints(source.getPoints());
 		copy.routes = new ArrayList<>(source.routes);
 		copy.path = source.path;
@@ -388,13 +397,12 @@ public class GpsFilterHelper {
 
 		public static void writeValidFilterValuesToExtensions(@NonNull Map<String, String> gpxExtensions,
 		                                                      @NonNull GpxDataItem dataItem) {
-			GpxData gpxData = dataItem.getGpxData();
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, gpxData.getSmoothingThreshold());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, gpxData.getMinFilterSpeed());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, gpxData.getMaxFilterSpeed());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, gpxData.getMinFilterAltitude());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, gpxData.getMaxFilterAltitude());
-			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, gpxData.getMaxFilterHdop());
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_SMOOTHING_THRESHOLD, dataItem.getParameter(SMOOTHING_THRESHOLD));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_SPEED, dataItem.getParameter(MIN_FILTER_SPEED));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_SPEED, dataItem.getParameter(MAX_FILTER_SPEED));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MIN_FILTER_ALTITUDE, dataItem.getParameter(MIN_FILTER_ALTITUDE));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_ALTITUDE, dataItem.getParameter(MAX_FILTER_ALTITUDE));
+			writeValueToExtensionsIfValid(gpxExtensions, TAG_MAX_FILTER_HDOP, dataItem.getParameter(MAX_FILTER_HDOP));
 		}
 
 		private static void writeValueToExtensionsIfValid(@NonNull Map<String, String> gpxExtensions,
@@ -516,7 +524,7 @@ public class GpsFilterHelper {
 
 		@Override
 		public double getMaxValue() {
-			return Math.ceil(analysis.maxSpeed);
+			return Math.ceil(analysis.getMaxSpeed());
 		}
 
 		@Override
@@ -607,12 +615,12 @@ public class GpsFilterHelper {
 
 		@Override
 		public double getMinValue() {
-			return ((int) Math.floor(analysis.minElevation));
+			return ((int) Math.floor(analysis.getMinElevation()));
 		}
 
 		@Override
 		public double getMaxValue() {
-			return ((int) Math.ceil(analysis.maxElevation));
+			return ((int) Math.ceil(analysis.getMaxElevation()));
 		}
 
 		@Override

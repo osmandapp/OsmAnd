@@ -58,7 +58,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("LLLL yyyy");
 
 	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
-	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
+	private static final String USER_CHANGES_URL = AndroidNetworkUtils.getHttpProtocol() + "osmand.net/changesets/user-changes";
 
 	private static final int VISIBLE_MONTHS_COUNT = 6;
 	private static final int CHANGES_FOR_MAPPER_PROMO = 30;

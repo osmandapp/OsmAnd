@@ -9,9 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.iterator.TLongObjectIterator;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -25,13 +24,13 @@ import net.osmand.util.MapUtils;
 public class TransportStopsRouteReader {
 	public static final int MISSING_STOP_SEARCH_RADIUS = 50000;
 	TLongObjectHashMap<TransportRoute> combinedRoutesCache = new TLongObjectHashMap<TransportRoute>();
-	Map<BinaryMapIndexReader, TIntObjectHashMap<TransportRoute>> routesFilesCache = new LinkedHashMap<BinaryMapIndexReader, 
-			TIntObjectHashMap<TransportRoute>>();
+	Map<BinaryMapIndexReader, TLongObjectHashMap<TransportRoute>> routesFilesCache = new LinkedHashMap<BinaryMapIndexReader, 
+			TLongObjectHashMap<TransportRoute>>();
 	
 	
 	public TransportStopsRouteReader(Collection<BinaryMapIndexReader> fls) {
 		for(BinaryMapIndexReader r : fls) {
-			routesFilesCache.put(r, new TIntObjectHashMap<TransportRoute>());
+			routesFilesCache.put(r, new TLongObjectHashMap<TransportRoute>());
 		}
 	}
 	
@@ -41,7 +40,7 @@ public class TransportStopsRouteReader {
 		for (BinaryMapIndexReader r : routesFilesCache.keySet()) {
 			sr.clearSearchResults();
 			List<TransportStop> stops = r.searchTransportIndex(sr);
-			TIntObjectHashMap<TransportRoute> routesToLoad = mergeTransportStops(r, loadedTransportStops, stops);
+			TLongObjectHashMap<TransportRoute> routesToLoad = mergeTransportStops(r, loadedTransportStops, stops);
 			loadRoutes(r, routesToLoad);
 			for (TransportStop stop : stops) {
 				// skip missing stops
@@ -50,11 +49,11 @@ public class TransportStopsRouteReader {
 				}
 				long stopId = stop.getId();
 				TransportStop multifileStop = loadedTransportStops.get(stopId);
-				int[] rrs = stop.getReferencesToRoutes();
+				long[] rrs = stop.getReferencesToRoutes();
 				// clear up so it won't be used because there is multi file stop
 				stop.setReferencesToRoutes(null);
 				if (rrs != null && !multifileStop.isDeleted()) {
-					for (int rr : rrs) {
+					for (long rr : rrs) {
 						TransportRoute route = routesToLoad.get(rr);
 						if (route == null) {
 							if (routesToLoad.containsKey(rr)) {
@@ -80,10 +79,10 @@ public class TransportStopsRouteReader {
 	}
 	
 
-	public TIntObjectHashMap<TransportRoute> mergeTransportStops(BinaryMapIndexReader reader,
+	public TLongObjectHashMap<TransportRoute> mergeTransportStops(BinaryMapIndexReader reader,
 			TLongObjectHashMap<TransportStop> loadedTransportStops, List<TransportStop> stops) throws IOException {
 		Iterator<TransportStop> it = stops.iterator();
-		TIntObjectHashMap<TransportRoute> routesToLoad = routesFilesCache.get(reader);
+		TLongObjectHashMap<TransportRoute> routesToLoad = routesFilesCache.get(reader);
 		
 		while (it.hasNext()) {
 			TransportStop stop = it.next();
@@ -107,7 +106,7 @@ public class TransportStopsRouteReader {
 					}
 				}
 				if (routesIds != null && routesIds.length > 0) {
-					int[] refs = stop.getReferencesToRoutes();
+					long[] refs = stop.getReferencesToRoutes();
 					for (int i = 0; i < routesIds.length; i++) {
 						long routeId = routesIds[i];
 						if (!multifileStop.hasRoute(routeId) && !multifileStop.isRouteDeleted(routeId)) {
@@ -131,7 +130,7 @@ public class TransportStopsRouteReader {
 		return routesToLoad;
 	}
 
-	private void putAll(TIntObjectHashMap<TransportRoute> routesToLoad, int[] referencesToRoutes) {
+	private void putAll(TLongObjectHashMap<TransportRoute> routesToLoad, long[] referencesToRoutes) {
 		for(int k = 0 ; k < referencesToRoutes.length; k++) {
 			if(!routesToLoad.containsKey(referencesToRoutes[k])) {
 				routesToLoad.put(referencesToRoutes[k], null);
@@ -139,11 +138,11 @@ public class TransportStopsRouteReader {
 		}
 	}
 
-	public void loadRoutes(BinaryMapIndexReader reader, TIntObjectHashMap<TransportRoute> localFileRoutes) throws IOException {
+	public void loadRoutes(BinaryMapIndexReader reader, TLongObjectHashMap<TransportRoute> localFileRoutes) throws IOException {
 		// load/combine routes
 		if (localFileRoutes.size() > 0) {
-			TIntArrayList routesToLoad = new TIntArrayList(localFileRoutes.size()); 
-			TIntObjectIterator<TransportRoute> it = localFileRoutes.iterator();
+			TLongArrayList routesToLoad = new TLongArrayList(localFileRoutes.size()); 
+			TLongObjectIterator<TransportRoute> it = localFileRoutes.iterator();
 			while(it.hasNext()) {
 				it.advance();
 				if(it.value() == null) {
@@ -387,7 +386,7 @@ public class TransportStopsRouteReader {
 			// here we could limit routeMap indexes by only certain bbox around start / end (check comment on field)
 			IncompleteTransportRoute ptr = bmir.getIncompleteTransportRoutes().get(baseRoute.getId());
 			if (ptr != null) {
-				TIntArrayList lst = new TIntArrayList();
+				TLongArrayList lst = new TLongArrayList();
 				while (ptr != null) {
 					lst.add(ptr.getRouteOffset());
 					ptr = ptr.getNextLinkedRoute();

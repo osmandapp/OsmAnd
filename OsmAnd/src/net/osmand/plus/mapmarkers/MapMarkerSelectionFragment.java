@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
@@ -23,7 +23,6 @@ import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.OnMarkerSelectListener;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
-import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 
@@ -60,7 +59,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
 			onClickListener = routeInfoMenu.getOnMarkerSelectListener();
 
-			screenOrientation = app.getUIUtilities().getScreenOrientation(mapActivity);
+			screenOrientation = AndroidUiHelper.getScreenOrientation(mapActivity);
 
 			MapViewTrackingUtilities trackingUtils = mapActivity.getMapViewTrackingUtilities();
 			if (trackingUtils != null) {

@@ -3,16 +3,18 @@ package net.osmand.plus.track.helpers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.AreaI;
+import net.osmand.core.jni.PointI;
 import net.osmand.core.jni.TrackArea;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.PointsGroup;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
 import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -20,9 +22,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class SelectedGpxFile {
@@ -33,9 +33,8 @@ public class SelectedGpxFile {
 	protected GPXFile gpxFile;
 	protected GPXTrackAnalysis trackAnalysis;
 
-	protected Set<String> hiddenGroups = new HashSet<>();
 	protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-	protected List<GpxDisplayGroup> displayGroups;
+	protected List<GpxDisplayGroup> splitGroups;
 
 	@NonNull
 	protected QuadRect bounds = new QuadRect();
@@ -85,8 +84,8 @@ public class SelectedGpxFile {
 		this.trackAnalysis = trackAnalysis;
 	}
 
-	public void setDisplayGroups(@Nullable List<GpxDisplayGroup> displayGroups) {
-		this.displayGroups = displayGroups;
+	public void setSplitGroups(@Nullable List<GpxDisplayGroup> splitGroups) {
+		this.splitGroups = splitGroups;
 		this.splitProcessed = true;
 	}
 
@@ -97,7 +96,7 @@ public class SelectedGpxFile {
 		long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
 				? System.currentTimeMillis()
 				: new File(gpxFile.path).lastModified();
-		trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
+		trackAnalysis = gpxFile.getAnalysis(fileTimestamp, null, null, PluginsHelper.getTrackPointsAnalyser());
 
 		updateSplit(app);
 
@@ -107,7 +106,7 @@ public class SelectedGpxFile {
 	}
 
 	private void updateSplit(@NonNull OsmandApplication app) {
-		displayGroups = null;
+		splitGroups = null;
 		if (showCurrentTrack) {
 			splitProcessed = true;
 		} else {
@@ -232,24 +231,19 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public Set<String> getHiddenGroups() {
-		return Collections.unmodifiableSet(hiddenGroups);
-	}
-
 	public int getHiddenGroupsCount() {
-		return hiddenGroups.size();
+		int counter = 0;
+		for (PointsGroup group : new ArrayList<>(gpxFile.getPointsGroups().values())) {
+			if (group.isHidden()) {
+				counter++;
+			}
+		}
+		return counter;
 	}
 
-	public void addHiddenGroups(@Nullable String group) {
-		hiddenGroups.add(Algorithms.isBlank(group) ? null : group);
-	}
-
-	public void removeHiddenGroups(@Nullable String group) {
-		hiddenGroups.remove(Algorithms.isBlank(group) ? null : group);
-	}
-
-	public boolean isGroupHidden(@Nullable String group) {
-		return hiddenGroups.contains(Algorithms.isBlank(group) ? null : group);
+	public boolean isGroupHidden(@Nullable String name) {
+		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(name != null ? name : "");
+		return pointsGroup != null && pointsGroup.isHidden();
 	}
 
 	@NonNull
@@ -304,22 +298,22 @@ public class SelectedGpxFile {
 		}
 	}
 
-	public List<GpxDisplayGroup> getDisplayGroups(@NonNull OsmandApplication app) {
+	public List<GpxDisplayGroup> getSplitGroups(@NonNull OsmandApplication app) {
 		if (modifiedTime != gpxFile.modifiedTime) {
 			update(app);
 		}
 		if (!splitProcessed) {
 			updateSplit(app);
 		}
-		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getDisplayGroups(app) : displayGroups;
+		return filteredSelectedGpxFile != null ? filteredSelectedGpxFile.getSplitGroups(app) : splitGroups;
 	}
 
-	public void setDisplayGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
+	public void setSplitGroups(List<GpxDisplayGroup> displayGroups, OsmandApplication app) {
 		if (filteredSelectedGpxFile != null) {
-			filteredSelectedGpxFile.setDisplayGroups(displayGroups, app);
+			filteredSelectedGpxFile.setSplitGroups(displayGroups, app);
 		} else {
 			this.splitProcessed = true;
-			this.displayGroups = displayGroups;
+			this.splitGroups = displayGroups;
 
 			if (modifiedTime != gpxFile.modifiedTime) {
 				update(app);

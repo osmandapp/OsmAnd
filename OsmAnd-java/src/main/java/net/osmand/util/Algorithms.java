@@ -1,7 +1,10 @@
 package net.osmand.util;
 
+import static net.osmand.util.CollectionUtils.startsWithAny;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -25,6 +28,7 @@ import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -50,10 +54,6 @@ import java.util.zip.GZIPOutputStream;
 public class Algorithms {
 	private static final int BUFFER_SIZE = 1024;
 	private static final Log log = PlatformUtil.getLog(Algorithms.class);
-
-	public static boolean isEmpty(Collection<?> c) {
-		return c == null || c.size() == 0;
-	}
 	
 	private static final char[] CHARS_TO_NORMALIZE_KEY = {'’'};
 	private static final char[] CHARS_TO_NORMALIZE_VALUE = {'\''};
@@ -112,6 +112,10 @@ public class Algorithms {
 			}
 		}
 		return splitStr;
+	}
+
+	public static boolean isEmpty(Collection<?> c) {
+		return c == null || c.size() == 0;
 	}
 
 	public static boolean isEmpty(Map<?, ?> map) {
@@ -322,14 +326,31 @@ public class Algorithms {
 		};
 	}
 
-    private static String simplifyFileName(String fn) {
-        String lc = fn.toLowerCase();
+	public static String getRegionName(String filename) {
+		String lc = filename.toLowerCase();
+		int firstPoint = lc.indexOf(".");
+		if (firstPoint != -1) {
+			lc = lc.substring(0, firstPoint);
+		}
+		int ind = lc.length() - 1;
+		for (; ind > 0; ind--) {
+			if ((lc.charAt(ind) >= '0' && lc.charAt(ind) <= '9') || lc.charAt(ind) == '_') {
+				// timestamp ending or version ending
+			} else {
+				break;
+			}
+		}
+		return lc.substring(0, ind + 1);
+	}
+	
+    private static String simplifyFileName(String filename) {
+        String lc = filename.toLowerCase();
         if (lc.contains(".")) {
             lc = lc.substring(0, lc.indexOf("."));
         }
-        if (lc.endsWith("_2")) {
-            lc = lc.substring(0, lc.length() - "_2".length());
-        }
+        if (lc.endsWith("_" + IndexConstants.BINARY_MAP_VERSION)) {
+			lc = lc.substring(0, lc.length() - ("_" + IndexConstants.BINARY_MAP_VERSION).length());
+		}
         boolean hasTimestampEnd = false;
         for (int i = 0; i < lc.length(); i++) {
             if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
@@ -555,60 +576,7 @@ public class Algorithms {
 		return ((ch1 << 8) + ch2);
 	}
 
-	public static boolean startsWithAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.startsWith(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
-	public static boolean containsAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.contains(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean endsWithAny(String s, String ... args) {
-		if (!isEmpty(s) && args != null && args.length > 0) {
-			for (String arg : args) {
-				if (s.endsWith(arg)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean equalsToAny(Object o, Object ... args) {
-		if (o != null && args != null) {
-			for (Object o1 : args) {
-				if (o.equals(o1)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public static boolean anyIsNull(Object ... args) {
-		if (args != null) {
-			for (Object o : args) {
-				if (o == null) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
@@ -783,11 +751,18 @@ public class Algorithms {
 
 
 	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor) throws IOException {
+		streamCopy(in, out, pg, bytesDivisor, null);
+	}
+
+	public static void streamCopy(InputStream in, OutputStream out, IProgress pg, int bytesDivisor, MessageDigest digest) throws IOException {
 		byte[] b = new byte[BUFFER_SIZE];
 		int read;
 		int cp = 0;
 		while ((read = in.read(b)) != -1) {
 			out.write(b, 0, read);
+			if (digest != null) {
+				digest.update(b, 0, read);
+			}
 			cp += read;
 			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
@@ -872,6 +847,9 @@ public class Algorithms {
 
 	public static String gzipToString(byte[] gzip) {
 		try {
+			if (gzip == null) {
+				return null;
+			}
 			GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
 			return readFromInputStream(gzipIs).toString();
 		} catch (IOException e) {
@@ -881,6 +859,9 @@ public class Algorithms {
 	
 	public static byte[] stringToGzip(String str) {
 		try {
+			if (str == null) {
+				return null;
+			}
 			ByteArrayOutputStream bous = new ByteArrayOutputStream();
 			GZIPOutputStream gzout = new GZIPOutputStream(bous);
 			gzout.write(str.getBytes());
@@ -1186,78 +1167,6 @@ public class Algorithms {
 		return map;
 	}
 
-	public static <T> void reverseArray(T[] array) {
-		for (int i = 0; i < array.length / 2; i++) {
-			T temp = array[i];
-			array[i] = array[array.length - i - 1];
-			array[array.length - i - 1] = temp;
-		}
-	}
-
-	public static boolean containsInArrayL(long[] array, long value) {
-		return Arrays.binarySearch(array, value) >= 0;
-	}
-
-	public static long[] addToArrayL(long[] array, long value, boolean skipIfExists) {
-		long[] result;
-		if (array == null) {
-			result = new long[]{ value };
-		} else if (skipIfExists && Arrays.binarySearch(array, value) >= 0) {
-			result = array;
-		} else {
-			result = new long[array.length + 1];
-			System.arraycopy(array, 0, result, 0, array.length);
-			result[result.length - 1] = value;
-			Arrays.sort(result);
-		}
-		return result;
-	}
-
-	public static long[] removeFromArrayL(long[] array, long value) {
-		long[] result;
-		if (array != null) {
-			int index = Arrays.binarySearch(array, value);
-			if (index >= 0) {
-				result = new long[array.length - 1];
-				System.arraycopy(array, 0, result, 0, index);
-				if (index < result.length) {
-					System.arraycopy(array, index + 1, result, index, array.length - (index + 1));
-				}
-				return result;
-			} else {
-				return array;
-			}
-		} else {
-			return array;
-		}
-	}
-
-	public static String arrayToString(int[] a) {
-		if (a == null || a.length == 0) {
-			return null;
-		}
-		StringBuilder b = new StringBuilder();
-		for (int value : a) {
-			if (b.length() > 0) {
-				b.append(",");
-			}
-			b.append(value);
-		}
-		return b.toString();
-	}
-
-	public static int[] stringToArray(String array) throws NumberFormatException {
-		if (array == null || array.length() == 0) {
-			return null;
-		}
-		String[] items = array.split(",");
-		int[] res = new int[items.length];
-		for (int i = 0; i < items.length; i++) {
-			res[i] = Integer.parseInt(items[i]);
-		}
-		return res;
-	}
-
 	public static boolean isValidMessageFormat(CharSequence sequence) {
 		if (!isEmpty(sequence)) {
 			int counter = 0;
@@ -1333,36 +1242,6 @@ public class Algorithms {
 		return copy;
 	}
 
-	public static <T> List<T> addToList(Collection<T> original, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.add(element);
-		return copy;
-	}
-
-	public static <T> List<T> addAllToList(Collection<T> original, Collection<T> elements) {
-		List<T> copy = new ArrayList<>(original);
-		copy.addAll(elements);
-		return copy;
-	}
-
-	public static <T> List<T> setInList(Collection<T> original, int position, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.set(position, element);
-		return copy;
-	}
-
-	public static <T> List<T> removeFromList(Collection<T> original, T element) {
-		List<T> copy = new ArrayList<>(original);
-		copy.remove(element);
-		return copy;
-	}
-
-	public static <T> List<T> removeAllFromList(Collection<T> original, Collection<T> elements) {
-		List<T> copy = new ArrayList<>(original);
-		copy.removeAll(elements);
-		return copy;
-	}
-
 	public static void extendRectToContainPoint(QuadRect mapRect, double longitude, double latitude) {
 		mapRect.left = mapRect.left == 0.0 ? longitude : Math.min(mapRect.left, longitude);
 		mapRect.right = Math.max(mapRect.right, longitude);
@@ -1375,6 +1254,10 @@ public class Algorithms {
 		mapRect.right = Math.max(mapRect.right, gpxRect.right);
 		mapRect.top = Math.max(mapRect.top, gpxRect.top);
 		mapRect.bottom = mapRect.bottom == 0.0 ? gpxRect.bottom : Math.min(mapRect.bottom, gpxRect.bottom);
+	}
+	
+	public static long combine2Points(int x, int y) {
+		return (((long) x) << 32) | ((long) y);
 	}
 
 	public static String makeUniqueName(String oldName, CallbackWithObject<String> checkNameCallback) {
@@ -1400,4 +1283,103 @@ public class Algorithms {
 		while (!checkNameCallback.processResult(newName));
 		return newName;
 	}
+	
+
+	public static int lowerTo10BaseRoundingBounds(int num, int[] roundRange) {
+		int k = 1;
+		while (k < roundRange.length && (roundRange[k] > num || roundRange[k - 1] > num) ) {
+			k += 2;
+		}
+		if (k < roundRange.length) {
+			return (num / roundRange[k - 1]) * roundRange[k - 1];
+		}
+		return num;
+	}
+	
+	public static int[] generate10BaseRoundingBounds(int max, int multCoef) {
+		int basenum = 1, mult = 1, num = basenum * mult, ind = 0;
+		List<Integer> bounds = new ArrayList<>();
+		while (num < max) {
+			ind++;
+			if (ind % 3 == 1) {
+				mult = 2;
+			} else if (ind % 3 == 2) {
+				mult = 5;
+			} else {
+				basenum *= 10;
+				mult = 1;
+			}
+			if (ind > 1) {
+				int bound = num * multCoef;
+				while (bound % (basenum * mult) != 0 && bound > basenum * mult ) {
+					bound += num;
+				}
+				bounds.add(bound);
+			}
+			num = basenum * mult;
+			bounds.add(num);
+		}
+		int[] ret = new int[bounds.size()];
+		for(int j = 0; j < ret.length; j++) {
+			ret[j] = bounds.get(bounds.size() - j - 1);
+		}
+		return ret;
+	}
+	
+	public static final String DEFAULT_SERIALIZER = ",";
+
+	public static String serializeStringArray(String[] array) {
+		return serializeStringArray(array, DEFAULT_SERIALIZER);
+	}
+	public static String serializeStringArray(String[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < array.length; i++) {
+			String v = array[i];
+			if (v == null) {
+				v = "";
+			}
+	        sb.append("\"").append(v.replace("\"", "\"\"")).append("\""); // Double quotes are escaped by doubling them
+	        if (i < array.length - 1) {
+	            sb.append(delimiter);
+	        }
+	    }
+	    return sb.toString();
+	}
+
+	public static String[] deserializeStringArray(String serialized) {
+		return deserializeStringArray(serialized, DEFAULT_SERIALIZER);
+	}
+
+	public static String[] deserializeStringArray(String serialized, String delimiter) {
+		if (serialized == null || serialized.trim().length() == 0) {
+			return new String[0];
+		}
+		List<String> resultList = new ArrayList<>();
+		boolean inQuotes = false;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < serialized.length(); i++) {
+			char c = serialized.charAt(i);
+			if (c == '"') {
+				if (i < serialized.length() - 1 && serialized.charAt(i + 1) == '"') {
+					sb.append(c); // Append one quote of the escaped quotes
+					i++; // Skip the next quote since it's part of the escaped pair
+				} else {
+					inQuotes = !inQuotes;
+				}
+				continue;
+			}
+			if (!inQuotes && c == delimiter.charAt(0)) {
+				resultList.add(sb.toString());
+				sb = new StringBuilder();
+			} else {
+				sb.append(c);
+			}
+		}
+		resultList.add(sb.toString());
+		return resultList.toArray(new String[resultList.size()]);
+	}
+
 }

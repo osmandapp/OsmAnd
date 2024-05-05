@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="map_widget_map_rendering">Pasqyrim i hartës</string>
+    <string name="map_widget_map_rendering">Pasqyrim i hartës</string>
     <string name="app_mode_hiking">Eskursion</string>
     <string name="app_mode_motorcycle">Motoçikletë</string>
     <string name="app_mode_boat">Varkë</string>
@@ -11,9 +11,9 @@
     <string name="shared_string_remember_my_choice">Kujto zgjedhjen time</string>
     <string name="shared_string_and">dhe</string>
     <string name="shared_string_or">ose</string>
-	<string name="auto_zoom_none">Nuk ka afrim automatik</string>
-	<string name="shared_string_no">Jo</string>
-	<string name="shared_string_yes">Po</string>
+    <string name="auto_zoom_none">Nuk ka afrim automatik</string>
+    <string name="shared_string_no">Jo</string>
+    <string name="shared_string_yes">Po</string>
     <string name="about_version">Versioni :</string>
     <string name="shared_string_about">Rreth</string>
     <string name="about_settings_descr">Informacion versioni, liçensat, anëtarët e projektit</string>
@@ -21,30 +21,30 @@
     <string name="local_index_tile_data_downloadable">E shkarkueshme: %1$s</string>
     <string name="edit_tilesource_expiration_time">Skadon (minuta)</string>
     <string name="driving_region_japan">Japoni</string>
-	<string name="driving_region_us">Shtetet e Bashkuara</string>
-	<string name="driving_region_canada">Kanada</string>
-	<string name="driving_region_europe_asia">Evropë &amp; Azi</string>
-	<string name="driving_region_uk">BM, Indi, Australi &amp; Të tjera</string>
+    <string name="driving_region_us">Shtetet e Bashkuara</string>
+    <string name="driving_region_canada">Kanada</string>
+    <string name="driving_region_europe_asia">Evropë &amp; Azi</string>
+    <string name="driving_region_uk">BM, Indi, Australi &amp; Të tjera</string>
     <string name="speak_title">Njofto…</string>
-	<string name="speak_street_names">Njofto emrat e rrugëve (TTS)</string>
+    <string name="speak_street_names">Njofto emrat e rrugëve (TTS)</string>
     <string name="speak_speed_limit">Njofto kufizimin e shpejtësisë</string>
     <string name="speak_cameras">Njofto kamerat e shpejtësisë</string>
-	<string name="keep_intermediate_points">Mbaj pikat ndërmjetëse</string>
+    <string name="keep_intermediate_points">Mbaj pikat ndërmjetëse</string>
     <string name="clear_intermediate_points">Fshi pikat ndërmjetëse</string>
     <string name="light_theme">Ndriçimi</string>
     <string name="rendering_attr_hideHouseNumbers_name">Hiç numrat e shtëpive</string>
     <string name="action_create">Aksion i krijuar</string>
-	<string name="action_modify">Aksion i modifikuar</string>
-	<string name="action_delete">Aksion i fshirë</string>
-	<string name="shared_string_control_start">Fillo</string>
-	<string name="shared_string_my_places">Vendet e mia</string>
-	<string name="shared_string_currently_recording_track">Gjurmët e deritanishme të rregjistruara</string>
-	<string name="audionotes_plugin_name">Shënimet e audio/video</string>
-	<string name="days_behind">ditët pas</string>
-	<string name="watch">Kujdes</string>
-	<string name="rendering_attr_roadStyle_name">Stil i rrugës</string>
+    <string name="action_modify">Aksion i modifikuar</string>
+    <string name="action_delete">Aksion i fshirë</string>
+    <string name="shared_string_control_start">Fillo</string>
+    <string name="shared_string_my_places">Vendet e mia</string>
+    <string name="shared_string_currently_recording_track">Gjurmët e deritanishme të rregjistruara</string>
+    <string name="audionotes_plugin_name">Shënimet e audio/video</string>
+    <string name="days_behind">ditët pas</string>
+    <string name="watch">Kujdes</string>
+    <string name="rendering_attr_roadStyle_name">Stil i rrugës</string>
     <string name="traffic_warning_pedestrian">Mbikalim për këmbësorë</string>
-	<string name="routing_attr_no_new_routing_name">Jo v1.9 rregullat e llogaritjes së rrugëtimit</string>
+    <string name="routing_attr_no_new_routing_name">Jo v1.9 rregullat e llogaritjes së rrugëtimit</string>
     <string name="navigate_point_northing">Vlera veriore</string>
     <string name="navigate_point_easting">Vlera lindore</string>
     <string name="home_button">Shtëpia</string>
@@ -52,7 +52,7 @@
     <string name="use_kalman_filter_compass">Përdor filterat e Kalmanit</string>
     <string name="context_menu_item_last_intermediate_point">Shtoje si pikë rruge të fundit</string>
     <string name="snap_to_road">Shko tek rruga</string>
-	<string name="first_time_msg">Faleminderit që përdorni OsmAnd. Për shumë përfitime të këtij programi ju keni nevojë për disa të dhëna regjonale \"offline\" të cilat ju mund ti shkarkoni tek \"Ndryshimet\" → \"Menagjo skedarët e hartave\". Më pas ju do të jeni në gjendje të shihni hartat, gjeni adresat, shikoni pikat e interesit, dhe të gjeni transportin publik.</string>
-	<string name="favorite_home_category">Shtëpia</string>
-	<string name="local_index_action_do">Ju jeni përafërsisht të %1$s %2$s elemente. Dëshironi të vazhdoni?</string>
-	</resources>
+    <string name="first_time_msg">Faleminderit që përdorni OsmAnd. Për shumë përfitime të këtij programi ju keni nevojë për disa të dhëna regjonale \"offline\" të cilat ju mund ti shkarkoni tek \"Ndryshimet\" → \"Menagjo skedarët e hartave\". Më pas ju do të jeni në gjendje të shihni hartat, gjeni adresat, shikoni pikat e interesit, dhe të gjeni transportin publik.</string>
+    <string name="favorite_home_category">Shtëpia</string>
+    <string name="local_index_action_do">Ju jeni përafërsisht të %1$s %2$s elemente. Dëshironi të vazhdoni?</string>
+</resources>

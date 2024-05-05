@@ -10,33 +10,39 @@ import androidx.annotation.WorkerThread;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.SmartFolderHelper;
-import net.osmand.plus.settings.enums.TracksSortByMode;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxDataItem;
-import net.osmand.plus.track.helpers.GPXFolderUtils;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxUiHelper;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.Deque;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
-	public static final Log LOG = PlatformUtil.getLog(TrackFolderLoaderTask.class);
+public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
+
+	private static final Log LOG = PlatformUtil.getLog(TrackFolderLoaderTask.class);
 
 	private final GpxDbHelper gpxDbHelper;
-	private final File dir;
-	private final TracksSortByMode sortByMode;
-	private final LoadTracksListener listener;
 	private final SmartFolderHelper smartFolderHelper;
 
-	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull File dir, @NonNull LoadTracksListener listener) {
-		this.dir = dir;
+	private final TrackFolder folder;
+	private final LoadTracksListener listener;
+	private long loadingTime = 0;
+	private int tracksCounter = 0;
+	private static final int LOG_BATCH_SIZE = 100;
+
+	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
+		this.folder = folder;
 		this.listener = listener;
 		this.gpxDbHelper = app.getGpxDbHelper();
-		this.sortByMode = app.getSettings().TRACKS_SORT_BY_MODE.get();
-		smartFolderHelper = app.getSmartFolderHelper();
+		this.smartFolderHelper = app.getSmartFolderHelper();
 	}
 
 	@Override
@@ -47,40 +53,79 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 	}
 
 	@Override
-	protected TrackFolder doInBackground(Void... voids) {
-		long startLoadingTime = System.currentTimeMillis();
-		LOG.info("Start loading tracks in " + dir.getName());
-		TrackFolder tracksFolder = new TrackFolder(dir, null);
-		loadGPXFolder(tracksFolder, "", true);
+	protected void onProgressUpdate(TrackItem... values) {
 		if (listener != null) {
-			listener.tracksLoaded(tracksFolder);
+			listener.loadTracksProgress(values);
 		}
-		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - startLoadingTime) + "ms");
-		return tracksFolder;
 	}
 
-	private void loadGPXFolder(@NonNull TrackFolder trackFolder, @NonNull String subfolder, boolean updateSmartFolder) {
-		File folderFile = trackFolder.getDirFile();
-		File[] files = GPXFolderUtils.listFilesSorted(sortByMode, folderFile);
-		for (File file : files) {
-			if (file.isDirectory()) {
-				TrackFolder folder = new TrackFolder(file, trackFolder);
-				trackFolder.addSubFolder(folder);
-				loadGPXFolder(folder, GPXFolderUtils.getSubfolderTitle(file, subfolder), updateSmartFolder);
-			} else if (GpxUiHelper.isGpxFile(file)) {
-				TrackItem trackItem = new TrackItem(file);
-				trackItem.setDataItem(getDataItem(trackItem));
-				trackFolder.addTrackItem(trackItem);
-				if (updateSmartFolder) {
-					smartFolderHelper.addTrackItemToSmartFolder(trackItem);
+	@Override
+	protected Void doInBackground(Void... voids) {
+		long start = System.currentTimeMillis();
+		LOG.info("Start loading tracks in " + folder.getDirName());
+
+		folder.clearData();
+		loadingTime = System.currentTimeMillis();
+
+		List<TrackItem> progress = new ArrayList<>();
+		loadGPXFolder(folder, progress);
+		if (!progress.isEmpty()) {
+			publishProgress(progress.toArray(new TrackItem[0]));
+		}
+		if (listener != null) {
+			listener.tracksLoaded(folder);
+		}
+		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - start) + "ms");
+		return null;
+	}
+
+	private void loadGPXFolder(@NonNull TrackFolder rootFolder, @NonNull List<TrackItem> progress) {
+		Deque<TrackFolder> folders = new ArrayDeque<>();
+		folders.push(rootFolder);
+
+		while (!folders.isEmpty()) {
+			TrackFolder folder = folders.pop();
+			File dir = folder.getDirFile();
+			File[] files = dir.listFiles();
+			if (Algorithms.isEmpty(files)) {
+				continue;
+			}
+			List<TrackItem> trackItems = new ArrayList<>();
+			List<TrackFolder> subFolders = new ArrayList<>();
+
+			for (File file : files) {
+				if (file.isDirectory()) {
+					TrackFolder subfolder = new TrackFolder(file, folder);
+					subFolders.add(subfolder);
+					folders.push(subfolder); // Add subfolder to the queue for processing
+				} else if (GpxUiHelper.isGpxFile(file)) {
+					TrackItem item = new TrackItem(file);
+					item.setDataItem(getDataItem(item, file));
+					trackItems.add(item);
+
+					progress.add(item);
+					// Screen refresh issue: Publishing interim progress here causes once published tracks stats never updated on screen
+					//if (progress.size() > 7) {
+					//	publishProgress(progress.toArray(new TrackItem[0]));
+					//	progress.clear();
+					//}
+					tracksCounter++;
+					if (tracksCounter % LOG_BATCH_SIZE == 0) {
+						long endTime = System.currentTimeMillis();
+						LOG.info("Loading " + LOG_BATCH_SIZE + "tracks. took " + (endTime - loadingTime) + "ms");
+						loadingTime = endTime;
+					}
 				}
 			}
+			folder.setTrackItems(trackItems);
+			folder.setSubFolders(subFolders);
+			folder.resetCashedData();
+			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
 	}
 
 	@Nullable
-	private GpxDataItem getDataItem(@NonNull TrackItem trackItem) {
-		File file = trackItem.getFile();
+	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
 		if (file != null) {
 			GpxDataItemCallback callback = new GpxDataItemCallback() {
 				@Override
@@ -99,7 +144,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 	}
 
 	@Override
-	protected void onPostExecute(@NonNull TrackFolder folder) {
+	protected void onPostExecute(Void unused) {
 		if (listener != null) {
 			listener.loadTracksFinished(folder);
 		}
@@ -110,6 +155,10 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, Void, TrackFolder> {
 
 		@UiThread
 		default void loadTracksStarted() {
+		}
+
+		@UiThread
+		default void loadTracksProgress(@NonNull TrackItem[] items) {
 		}
 
 		@WorkerThread

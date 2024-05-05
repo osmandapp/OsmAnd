@@ -25,6 +25,7 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.util.Algorithms;
+import net.osmand.util.CollectionUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -258,24 +259,24 @@ public class FavouritesHelper {
 	}
 
 	public void delete(@Nullable Set<FavoriteGroup> groupsToDelete, @Nullable Set<FavouritePoint> favoritesSelected) {
-		if (favoritesSelected != null) {
+		if (!Algorithms.isEmpty(favoritesSelected)) {
 			Set<FavoriteGroup> groupsToSync = new HashSet<>();
-			for (FavouritePoint p : favoritesSelected) {
-				FavoriteGroup group = flatGroups.get(p.getCategory());
+			for (FavouritePoint point : favoritesSelected) {
+				FavoriteGroup group = flatGroups.get(point.getCategory());
 				if (group != null) {
-					group.getPoints().remove(p);
+					group.getPoints().remove(point);
 					groupsToSync.add(group);
 				}
-				if (p.isHomeOrWork()) {
+				if (point.isHomeOrWork()) {
 					app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 				}
-				removeFavouritePoint(p);
+				removeFavouritePoint(point);
 			}
-			for (FavoriteGroup gr : groupsToSync) {
-				runSyncWithMarkers(gr);
+			for (FavoriteGroup group : groupsToSync) {
+				runSyncWithMarkers(group);
 			}
 		}
-		if (groupsToDelete != null) {
+		if (!Algorithms.isEmpty(groupsToDelete)) {
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 			ArrayList<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
 			for (FavoriteGroup g : groupsToDelete) {
@@ -492,7 +493,7 @@ public class FavouritesHelper {
 	}
 
 	public boolean deleteGroup(@NonNull FavoriteGroup group, boolean saveImmediately) {
-		ArrayList<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
+		List<FavoriteGroup> tmpFavoriteGroups = new ArrayList<>(favoriteGroups);
 		boolean remove = tmpFavoriteGroups.remove(group);
 		if (remove) {
 			favoriteGroups = tmpFavoriteGroups;
@@ -518,7 +519,7 @@ public class FavouritesHelper {
 		group.setColor(color);
 		group.setIconName(iconName);
 		group.setBackgroundType(backgroundType);
-		favoriteGroups = Algorithms.addToList(favoriteGroups, group);
+		favoriteGroups = CollectionUtils.addToList(favoriteGroups, group);
 		Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 		tmpFlatGroups.put(group.getName(), group);
 		flatGroups = tmpFlatGroups;
@@ -615,15 +616,15 @@ public class FavouritesHelper {
 	}
 
 	private void addFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints = Algorithms.addToList(cachedFavoritePoints, point);
+		cachedFavoritePoints = CollectionUtils.addToList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoint(@NonNull FavouritePoint point) {
-		cachedFavoritePoints = Algorithms.removeFromList(cachedFavoritePoints, point);
+		cachedFavoritePoints = CollectionUtils.removeFromList(cachedFavoritePoints, point);
 	}
 
 	private void removeFavouritePoints(@NonNull List<FavouritePoint> points) {
-		cachedFavoritePoints = Algorithms.removeAllFromList(cachedFavoritePoints, points);
+		cachedFavoritePoints = CollectionUtils.removeAllFromList(cachedFavoritePoints, points);
 	}
 
 	public void recalculateCachedFavPoints() {
@@ -753,7 +754,7 @@ public class FavouritesHelper {
 				tmpFlatGroups.put(group.getName(), group);
 				flatGroups = tmpFlatGroups;
 			} else {
-				favoriteGroups = Algorithms.removeFromList(favoriteGroups, group);
+				favoriteGroups = CollectionUtils.removeFromList(favoriteGroups, group);
 			}
 			for (FavouritePoint point : group.getPoints()) {
 				point.setCategory(newName);
@@ -783,7 +784,7 @@ public class FavouritesHelper {
 			Map<String, FavoriteGroup> tmpFlatGroups = new LinkedHashMap<>(flatGroups);
 			tmpFlatGroups.put(favoriteGroup.getName(), favoriteGroup);
 			flatGroups = tmpFlatGroups;
-			favoriteGroups = Algorithms.addToList(favoriteGroups, favoriteGroup);
+			favoriteGroups = CollectionUtils.addToList(favoriteGroups, favoriteGroup);
 		}
 		updateGroupAppearance(favoriteGroup, pointsGroup);
 

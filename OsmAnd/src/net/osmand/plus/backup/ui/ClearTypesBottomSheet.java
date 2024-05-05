@@ -12,7 +12,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
-import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.exporttype.ExportType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 	private static final String CLEAR_TYPE_KEY = "clear_type_key";
 	private static final String DISABLED_TYPES_KEY = "disabled_types_key";
 
-	private final List<ExportSettingsType> types = new ArrayList<>();
+	private final List<ExportType> types = new ArrayList<>();
 	private BackupClearType clearType;
 
 	@Override
@@ -33,8 +33,8 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 		if (savedInstanceState != null) {
 			if (savedInstanceState.containsKey(DISABLED_TYPES_KEY)) {
 				List<String> names = savedInstanceState.getStringArrayList(DISABLED_TYPES_KEY);
-				for (String name : names) {
-					types.add(ExportSettingsType.valueOf(name));
+				if (names != null) {
+					types.addAll(ExportType.valuesOf(names));
 				}
 			}
 			if (savedInstanceState.containsKey(CLEAR_TYPE_KEY)) {
@@ -62,8 +62,8 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		ArrayList<String> names = new ArrayList<>();
-		for (ExportSettingsType type : types) {
-			names.add(type.name());
+		for (ExportType exportType : types) {
+			names.add(exportType.name());
 		}
 		outState.putStringArrayList(DISABLED_TYPES_KEY, names);
 		outState.putString(CLEAR_TYPE_KEY, clearType.name());
@@ -93,7 +93,7 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 		return DialogButtonType.SECONDARY_HARMFUL;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull List<ExportSettingsType> types,
+	public static void showInstance(@NonNull FragmentManager manager, @NonNull List<ExportType> types,
 									@NonNull BackupClearType clearType, @NonNull Fragment target) {
 		if (!manager.isStateSaved()) {
 			ClearTypesBottomSheet fragment = new ClearTypesBottomSheet();
@@ -126,6 +126,6 @@ public class ClearTypesBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public interface OnClearTypesListener {
-		void onClearTypesConfirmed(@NonNull List<ExportSettingsType> types);
+		void onClearTypesConfirmed(@NonNull List<ExportType> types);
 	}
 }

@@ -1,5 +1,7 @@
 package net.osmand.gpx;
 
+import static net.osmand.gpx.GPXUtilities.PointsGroup.DEFAULT_WPT_GROUP_NAME;
+
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.gpx.GPXUtilities.Route;
@@ -19,8 +21,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class GPXFile extends GPXUtilities.GPXExtensions {
-
-	private static final String DEFAULT_WPT_GROUP_NAME = "";
 
 	public String author;
 	public GPXUtilities.Metadata metadata = new GPXUtilities.Metadata();
@@ -183,10 +183,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		}
 	}
 
-	public void updateWptPt(String wptName, int wptIndex, GPXUtilities.WptPt newWpt) {
+	public void updateWptPt(String wptName, int wptIndex, GPXUtilities.WptPt newWpt, boolean updateTimestamp) {
 		GPXUtilities.WptPt currentWpt = getWptPt(wptName, wptIndex);
 		if (currentWpt != null) {
-			updateWptPt(currentWpt, newWpt);
+			updateWptPt(currentWpt, newWpt, updateTimestamp);
 		} else {
 			addPoint(newWpt);
 		}
@@ -203,13 +203,17 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return currentWpt;
 	}
 
-	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
+	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt, boolean updateTimestamp) {
 		int index = points.indexOf(existingPoint);
 		if (index == -1) {
 			return;
 		}
 		String prevGroupName = existingPoint.category == null ? DEFAULT_WPT_GROUP_NAME : existingPoint.category;
+		long prevTime = existingPoint.time;
 		existingPoint.updatePoint(newWpt);
+		if (!updateTimestamp) {
+			existingPoint.time = prevTime;
+		}
 		if (Algorithms.stringsEqual(newWpt.category, prevGroupName)
 				|| Algorithms.isEmpty(newWpt.category) && Algorithms.isEmpty(prevGroupName)) {
 			removePointFromGroup(existingPoint, prevGroupName);
@@ -218,6 +222,10 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		}
 		modifiedTime = System.currentTimeMillis();
 		pointsModifiedTime = modifiedTime;
+	}
+
+	public void updateWptPt(GPXUtilities.WptPt existingPoint, GPXUtilities.WptPt newWpt) {
+		updateWptPt(existingPoint, newWpt, true);
 	}
 
 	public void updatePointsGroup(String prevGroupName, GPXUtilities.PointsGroup pointsGroup) {
@@ -288,8 +296,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	public GPXTrackAnalysis getAnalysis(long fileTimestamp, Double fromDistance, Double toDistance, TrackPointsAnalyser pointsAnalyzer) {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
 		analysis.name = path;
-		analysis.wptPoints = points.size();
-		analysis.wptCategoryNames = getWaypointCategories();
+		analysis.setWptPoints(points.size());
+		analysis.setWptCategoryNames(getWaypointCategories());
 
 		List<SplitSegment> segments = getSplitSegments(analysis, fromDistance, toDistance);
 		analysis.prepareInformation(fileTimestamp, pointsAnalyzer, segments.toArray(new SplitSegment[0]));
@@ -302,7 +310,8 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 			GPXUtilities.Track subtrack = tracks.get(i);
 			for (GPXUtilities.TrkSegment segment : subtrack.segments) {
 				if (!segment.generalSegment) {
-					analysis.totalTracks++;
+					int totalTracks = analysis.getTotalTracks();
+					analysis.setTotalTracks(totalTracks + 1);
 					if (segment.points.size() > 1) {
 						splitSegments.add(createSplitSegment(segment, fromDistance, toDistance));
 					}
@@ -742,6 +751,42 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void setShowArrows(boolean showArrows) {
 		getExtensionsToWrite().put("show_arrows", String.valueOf(showArrows));
+	}
+
+	public String get3DVisualizationType() {
+		return extensions == null ? null : extensions.get("line_3d_visualization_by_type");
+	}
+
+	public void set3DVisualizationType(String visualizationType) {
+		getExtensionsToWrite().put("line_3d_visualization_by_type", String.valueOf(visualizationType));
+	}
+
+	public String get3DWallColoringType() {
+		return extensions == null ? null : extensions.get("line_3d_visualization_wall_color_type");
+	}
+
+	public void set3DWallColoringType(String trackWallColoringType) {
+		getExtensionsToWrite().put("line_3d_visualization_wall_color_type", String.valueOf(trackWallColoringType));
+	}
+
+	public String get3DLinePositionType() {
+		return extensions == null ? null : extensions.get("line_3d_visualization_position_type");
+	}
+
+	public void set3DLinePositionType(String trackLinePositionType) {
+		getExtensionsToWrite().put("line_3d_visualization_position_type", String.valueOf(trackLinePositionType));
+	}
+
+	public void setAdditionalExaggeration(int additionalExaggeration) {
+		getExtensionsToWrite().put("vertical_exaggeration_scale", String.valueOf(additionalExaggeration));
+	}
+
+	public float getAdditionalExaggeration() {
+		String additionalExaggeration = null;
+		if (extensions != null) {
+			additionalExaggeration = extensions.get("vertical_exaggeration_scale");
+		}
+		return Algorithms.parseFloatSilently(additionalExaggeration, 1f);
 	}
 
 	public boolean isShowStartFinishSet() {

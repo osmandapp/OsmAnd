@@ -58,6 +58,7 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,6 +82,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
 
+	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
+	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
+
 	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM;
 	public final CommonPreference<Integer> HILLSHADE_TRANSPARENCY;
@@ -92,11 +96,13 @@ public class SRTMPlugin extends OsmandPlugin {
 	public final CommonPreference<Boolean> TERRAIN;
 	public final CommonPreference<TerrainMode> TERRAIN_MODE;
 
+
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 
 	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> terrainListener;
 	private final StateChangedListener<TerrainMode> terrainModeListener;
+	private final StateChangedListener<Float> verticalExaggerationListener;
 
 	private TerrainLayer terrainLayer;
 
@@ -144,6 +150,13 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		});
 		TERRAIN_MODE.addListener(terrainModeListener);
+		verticalExaggerationListener = scale -> {
+			MapRendererContext mapContext = NativeCoreContext.getMapRendererContext();
+			if (mapContext != null) {
+				mapContext.updateVerticalExaggerationScale();
+			}
+		};
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.addListener(verticalExaggerationListener);
 	}
 
 	@Override
@@ -212,14 +225,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		OsmandSettings settings = app.getSettings();
-		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
-		if (pref.get().isEmpty()) {
-			for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-				if (pref.getModeValue(m).isEmpty()) {
-					pref.setModeValue(m, "13");
-				}
-			}
-		}
+		settings.getCustomRenderProperty(CONTOUR_LINES_ATTR).setDefaultValue("13");
 		return true;
 	}
 
@@ -233,6 +239,24 @@ public class SRTMPlugin extends OsmandPlugin {
 			terrainLayer = new TerrainLayer(context, this);
 			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
 		}
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		MapRendererContext mapRendererContext = NativeCoreContext.getMapRendererContext();
+		if (mapRendererContext != null) {
+			updateMapPresentationEnvironment(mapRendererContext);
+		}
+	}
+
+	// If enabled, map should be rendered with elevation data (in 3D)
+	public boolean is3DMapsEnabled() {
+		return is3DReliefAllowed() && settings.ENABLE_3D_MAPS.get();
+	}
+
+	public boolean is3DReliefAllowed() {
+		return app.useOpenGlRenderer() && InAppPurchaseUtils.is3dMapsAvailable(app);
 	}
 
 	public boolean isTerrainLayerEnabled() {
@@ -283,6 +307,18 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 	}
 
+	public static float normalizeVerticalExaggerationScale(float scale) {
+		return Math.max(MIN_VERTICAL_EXAGGERATION, Math.min(MAX_VERTICAL_EXAGGERATION, scale));
+	}
+
+	public float getVerticalExaggerationScale() {
+		return normalizeVerticalExaggerationScale(app.getSettings().VERTICAL_EXAGGERATION_SCALE.get());
+	}
+
+	public void setVerticalExaggerationScale(float scale) {
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.set(normalizeVerticalExaggerationScale(scale));
+	}
+
 	public int getTerrainTransparency() {
 		switch (getTerrainMode()) {
 			case HILLSHADE:
@@ -315,6 +351,10 @@ public class SRTMPlugin extends OsmandPlugin {
 				SLOPE_TRANSPARENCY.resetToDefault();
 				break;
 		}
+	}
+
+	public void resetVerticalExaggerationToDefault(){
+		app.getSettings().VERTICAL_EXAGGERATION_SCALE.resetToDefault();
 	}
 
 	public int getTerrainMinZoom() {
@@ -393,9 +433,6 @@ public class SRTMPlugin extends OsmandPlugin {
 				addTerrainDescriptionItem(adapter, mapActivity);
 			} else {
 				createContextMenuItems(adapter, mapActivity);
-				if (app.useOpenGlRenderer()) {
-					add3DReliefItem(adapter, mapActivity);
-				}
 			}
 			NauticalMapsPlugin nauticalPlugin = PluginsHelper.getPlugin(NauticalMapsPlugin.class);
 			if (nauticalPlugin != null) {
@@ -435,6 +472,13 @@ public class SRTMPlugin extends OsmandPlugin {
 				} else if (itemId == R.string.shared_string_terrain) {
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.TERRAIN, viewCoordinates);
 					return false;
+				} else if (itemId == R.string.relief_3d) {
+					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.RELIEF_3D, viewCoordinates);
+					} else {
+						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
+					}
+					return false;
 				}
 				return true;
 			}
@@ -473,6 +517,18 @@ public class SRTMPlugin extends OsmandPlugin {
 						updateLayers(mapActivity, mapActivity);
 						mapActivity.refreshMapComplete();
 					});
+				} else if (itemId == R.string.relief_3d) {
+					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
+						settings.ENABLE_3D_MAPS.set(isChecked);
+						item.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						item.setSelected(isChecked);
+						item.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
+						uiAdapter.onDataSetChanged();
+
+						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(mapActivity));
+					} else {
+						ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.RELIEF_3D);
+					}
 				}
 				return true;
 			}
@@ -508,26 +564,16 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 
 		);
+		if (app.useOpenGlRenderer()) {
+			add3DReliefItem(adapter, mapActivity, listener);
+		}
 	}
 
-	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity) {
+	private void add3DReliefItem(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity activity, @NonNull ItemClickListener listener) {
 		ContextMenuItem item = new ContextMenuItem(RELIEF_3D_ID)
 				.setTitleId(R.string.relief_3d, app)
 				.setIcon(R.drawable.ic_action_3d_relief)
-				.setListener((uiAdapter, view, contextItem, isChecked) -> {
-					if (InAppPurchaseUtils.is3dMapsAvailable(app)) {
-						settings.ENABLE_3D_MAPS.set(isChecked);
-						contextItem.setColor(app, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						contextItem.setSelected(isChecked);
-						contextItem.setDescription(app.getString(isChecked ? R.string.shared_string_on : R.string.shared_string_off));
-						uiAdapter.onDataSetChanged();
-
-						app.runInUIThread(() -> app.getOsmandMap().getMapLayers().getMapInfoLayer().recreateAllControls(activity));
-					} else {
-						ChoosePlanFragment.showInstance(activity, OsmAndFeature.RELIEF_3D);
-					}
-					return false;
-				});
+				.setListener(listener);
 
 		boolean enabled3DMode = settings.ENABLE_3D_MAPS.get();
 		if (!InAppPurchaseUtils.is3dMapsAvailable(app)) {
@@ -537,6 +583,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		} else {
 			item.setColor(app, enabled3DMode ? R.color.osmand_orange : INVALID_ID);
 			item.setSelected(enabled3DMode);
+			item.setSecondaryIcon(R.drawable.ic_action_additional_option);
 			item.setDescription(app.getString(enabled3DMode ? R.string.shared_string_on : R.string.shared_string_off));
 		}
 		adapter.addItem(item);
@@ -698,5 +745,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void updateMapPresentationEnvironment(@NonNull MapRendererContext mapRendererContext) {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
+		mapRendererContext.updateVerticalExaggerationScale();
 	}
 }

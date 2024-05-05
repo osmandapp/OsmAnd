@@ -3,6 +3,7 @@ package net.osmand.plus.utils;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -646,11 +647,11 @@ public class AndroidNetworkUtils {
 					stream = new FileOutputStream(fileToSave);
 					Algorithms.streamCopy(inputStream, stream, progress, 1024);
 					stream.flush();
+					result = lastModified > 0 ? lastModified : 1;
 				} finally {
 					Algorithms.closeStream(inputStream);
 					Algorithms.closeStream(stream);
 				}
-				result = lastModified > 0 ? lastModified : 1;
 			}
 		} catch (UnknownHostException e) {
 			LOG.error("UnknownHostException, cannot download file " + url + " " + e.getMessage());
@@ -1036,5 +1037,10 @@ public class AndroidNetworkUtils {
 		@Override
 		public void setGeneralProgress(String genProgress) {
 		}
+	}
+
+	@NonNull
+	public static String getHttpProtocol() {
+		return Build.VERSION.SDK_INT < Build.VERSION_CODES.N_MR1 ? "http://" : "https://";
 	}
 }

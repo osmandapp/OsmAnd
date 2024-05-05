@@ -18,10 +18,10 @@ public class TrackFilterList {
 	private static final Log LOG = PlatformUtil.getLog(SmartFolderHelper.class);
 
 	@Nullable
-	public static List<SmartFolder> parseFilters(String str, SmartFolderHelper smartFolderHelper) {
+	public static List<SmartFolder> parseFilters(String str) {
 		Gson gson = new GsonBuilder()
 				.excludeFieldsWithoutExposeAnnotation()
-				.registerTypeAdapter(BaseTrackFilter.class, new TrackFilterDeserializer(smartFolderHelper))
+				.registerTypeAdapter(BaseTrackFilter.class, new TrackFilterDeserializer())
 				.create();
 
 		Type token = new TypeToken<List<SmartFolder>>() {

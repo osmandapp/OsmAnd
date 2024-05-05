@@ -4748,7 +4748,7 @@
 \n</string>
     <string name="lang_sat">Santali</string>
     <string name="radius_rules_widget_desc">Su traste de sa righighedda radiale ammustrat sos chircos de distàntzia a fùrriu a unu puntu seletzionadu in sa mapa.</string>
-    <string name="favorite_confirm_delete_group">Ses seguru de bòlere iscantzellare su grupu \"%1$s\" e totu sos puntos incluidos (%2$d)\?</string>
+    <string name="favorite_confirm_delete_group">Ses seguru de bòlere iscantzellare su grupu \"%1$s\" e totu sos puntos incluidos (%2$d)?</string>
     <string name="favorite_delete_group">Iscantzella su grupu</string>
     <string name="download_heightmap_maps">Mapa de sas artàrias</string>
     <string name="available_as_part_of_subscription_plan">A disponimentu comente parte de s\'abbonamentu %1$s.</string>
@@ -4955,7 +4955,6 @@
     <string name="mtb_imba">IMBA</string>
     <string name="mtb_imba_full">Assòtziu Internatzionale de su Tziclismu de Monte (International Mountain Bicycling Association)</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Isolìnias de sas pretzipitatziones</string>
-    
     <string name="rendering_attr_weatherCloudContours_name">Isolìnias de sas nues</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Isolìnias de sa velotzidade de su bentu</string>
     <string name="open_weather_action_description">Ti permitit de abèrrere un\'ischermada cun informatziones meteorològicas a sa minuda.</string>

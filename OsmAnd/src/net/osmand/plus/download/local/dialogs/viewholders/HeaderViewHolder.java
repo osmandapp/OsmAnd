@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.download.local.LocalItem;
+import net.osmand.plus.download.local.BaseLocalItem;
 import net.osmand.plus.download.local.dialogs.HeaderGroup;
 import net.osmand.plus.utils.AndroidUtils;
 
@@ -29,7 +29,7 @@ public class HeaderViewHolder extends RecyclerView.ViewHolder {
 
 	public long getSize(@NonNull HeaderGroup group) {
 		long size = 0;
-		for (LocalItem item : group.getItems()) {
+		for (BaseLocalItem item : group.getItems()) {
 			size += item.getSize();
 		}
 		return size;

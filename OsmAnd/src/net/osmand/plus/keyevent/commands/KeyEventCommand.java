@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.keyevent.KeyEventCategory;
+import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Objects;
@@ -68,8 +68,8 @@ public abstract class KeyEventCommand implements Callback {
 	}
 
 	@NonNull
-	public KeyEventCategory getCategory() {
-		return KeyEventCategory.ACTIONS;
+	public KeyAssignmentCategory getCategory() {
+		return KeyAssignmentCategory.ACTIONS;
 	}
 
 	@NonNull

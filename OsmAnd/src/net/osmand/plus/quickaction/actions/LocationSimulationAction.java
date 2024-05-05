@@ -22,7 +22,7 @@ import com.google.android.material.slider.Slider;
 import net.osmand.CallbackWithObject;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.plus.OsmAndLocationSimulation;
+import net.osmand.plus.simulation.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,7 +32,7 @@ import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
+import net.osmand.plus.track.SelectTrackTabsFragment;
 import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -124,7 +124,7 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		if (sim.isRouteAnimating()) {
 			sim.startStopGpxAnimation(mapActivity);
 		} else if (gpxFile != null && gpxFile.hasTrkPt()) {
-			sim.startAnimationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
+			sim.startSimulationThread(app, gpxFile, (int) cutOffValue, true, speedUpValue);
 		}
 	}
 
@@ -215,12 +215,12 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			setupGpxTrackInfo(trackInfoContainer, gpxName, selectedGpxFile.getTrackAnalysis(app), app);
 		} else {
 			GpxDataItem gpxDataItem = app.getGpxDbHelper().getItem(file, item -> {
-				if (item.getGpxData().getAnalysis() != null) {
-					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getGpxData().getAnalysis(), app);
+				if (item.getAnalysis() != null) {
+					setupGpxTrackInfo(trackInfoContainer, gpxName, item.getAnalysis(), app);
 				}
 			});
-			if (gpxDataItem != null && gpxDataItem.getGpxData().getAnalysis() != null) {
-				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getGpxData().getAnalysis(), app);
+			if (gpxDataItem != null && gpxDataItem.getAnalysis() != null) {
+				setupGpxTrackInfo(trackInfoContainer, gpxName, gpxDataItem.getAnalysis(), app);
 			}
 		}
 	}
@@ -241,12 +241,12 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 		ImageView distanceIcon = trackInfoContainer.findViewById(R.id.distance_icon);
 		TextView distanceText = trackInfoContainer.findViewById(R.id.distance);
 		distanceIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
 
 		ImageView waypointsIcon = trackInfoContainer.findViewById(R.id.points_icon);
 		TextView waypointsCountText = trackInfoContainer.findViewById(R.id.points_count);
 		waypointsIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_waypoint_16));
-		waypointsCountText.setText(String.valueOf(analysis.wptPoints));
+		waypointsCountText.setText(String.valueOf(analysis.getWptPoints()));
 
 		ImageView timeIcon = trackInfoContainer.findViewById(R.id.time_icon);
 		if (analysis.isTimeSpecified()) {
@@ -254,17 +254,17 @@ public class LocationSimulationAction extends QuickAction implements FileSelecte
 			timeIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_16));
 
 			TextView timeText = trackInfoContainer.findViewById(R.id.time);
-			int duration = (int) (analysis.timeSpan / 1000);
+			int duration = analysis.getDurationInSeconds();
 			timeText.setText(Algorithms.formatDuration(duration, app.accessibilityEnabled()));
 		} else {
 			AndroidUiHelper.updateVisibility(timeIcon, false);
 		}
 
-		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.totalDistance / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
+		setupCutOffSlider(trackInfoContainer.getRootView(), app, (int) (analysis.getTotalDistance() / CUTOFF_STEP_SIZE) * CUTOFF_STEP_SIZE);
 	}
 
 	private void showSelectTrackFileDialog(@NonNull MapActivity mapActivity, CallbackWithObject<String> onFileSelect) {
-		SelectTrackFileDialogFragment.showInstance(mapActivity.getSupportFragmentManager(), getDialog(mapActivity), onFileSelect);
+		SelectTrackTabsFragment.showInstance(mapActivity.getSupportFragmentManager(), onFileSelect != null ? onFileSelect : getDialog(mapActivity));
 	}
 
 	private void setupSpeedUpSlider(@NonNull View container, @NonNull OsmandApplication app) {

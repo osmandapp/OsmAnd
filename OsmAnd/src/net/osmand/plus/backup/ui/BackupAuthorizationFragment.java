@@ -46,6 +46,10 @@ public class BackupAuthorizationFragment extends BaseOsmAndFragment implements I
 		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
+	public boolean getContentStatusBarNightMode() {
+		return nightMode;
+	}
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

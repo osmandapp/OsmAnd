@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="transport_nearby_routes">အတွင်း</string>
     <string name="make_as_start_point">ဒီနေရာကိုအစထားမယ်</string>
@@ -413,4 +413,5 @@
     <string name="add_group">အဖွဲ့တစ်ဖွဲ့ထည့်ပါ</string>
     <string name="open_settings">Settings ဖွင့်ပါ</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
+    <string name="output"></string>
 </resources>

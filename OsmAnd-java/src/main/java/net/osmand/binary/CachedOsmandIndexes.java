@@ -1,6 +1,8 @@
 package net.osmand.binary;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRoutePointsBox;
+import net.osmand.binary.BinaryHHRouteReaderAdapter.HHRouteRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.CitiesBlock;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
@@ -13,6 +15,7 @@ import net.osmand.binary.BinaryMapTransportReaderAdapter.TransportIndex;
 import net.osmand.binary.OsmandIndex.AddressPart;
 import net.osmand.binary.OsmandIndex.CityBlock;
 import net.osmand.binary.OsmandIndex.FileIndex;
+import net.osmand.binary.OsmandIndex.HHRoutingPart;
 import net.osmand.binary.OsmandIndex.MapLevel;
 import net.osmand.binary.OsmandIndex.MapPart;
 import net.osmand.binary.OsmandIndex.OsmAndStoredIndex;
@@ -28,6 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.List;
 
 public class CachedOsmandIndexes {
 
@@ -37,7 +41,7 @@ public class CachedOsmandIndexes {
 	private boolean hasChanged = false;
 	public static final String INDEXES_DEFAULT_FILENAME = "indexes.cache";
 
-	public static final int VERSION = 2;
+	public static final int VERSION = 4;// synchronize with binaryRead.cpp CACHE_VERSION
 
 	public FileIndex addToCache(BinaryMapIndexReader reader, File f) {
 		hasChanged = true;
@@ -51,6 +55,18 @@ public class CachedOsmandIndexes {
 						storedIndexBuilder.addFileIndex(ex);
 					}
 				}
+			}
+		} else {
+			int found = -1;
+			List<FileIndex> fileIndexList = storedIndexBuilder.getFileIndexList();
+			for (int i = 0; i < fileIndexList.size(); i++) {
+				if (fileIndexList.get(i).getFileName().equals(f.getName())) {
+					found = i;
+					break;
+				}
+			}
+			if (found >= 0) {
+				storedIndexBuilder.removeFileIndex(found);
 			}
 		}
 
@@ -157,6 +173,22 @@ public class CachedOsmandIndexes {
 			}
 			fileIndex.addRoutingIndex(routing);
 		}
+		
+		for (HHRouteRegion index : reader.getHHRoutingIndexes()) {
+			HHRoutingPart.Builder routing = OsmandIndex.HHRoutingPart.newBuilder();
+			routing.setSize(index.getLength());
+			routing.setOffset(index.getFilePointer());
+			routing.setEdition(index.edition);
+			routing.addAllProfileParams(index.profileParams);
+			routing.setProfile(index.profile);
+			routing.setPointsLength(index.top.length);
+			routing.setPointsOffset(index.top.filePointer);
+			routing.setBottom(index.top.bottom);
+			routing.setTop(index.top.top);
+			routing.setLeft(index.top.left);
+			routing.setRight(index.top.right);
+			fileIndex.addHhRoutingIndex(routing);
+		}
 
 		FileIndex fi = fileIndex.build();
 		storedIndexBuilder.addFileIndex(fi);
@@ -227,14 +259,14 @@ public class CachedOsmandIndexes {
 
 		for (MapPart index : found.getMapIndexList()) {
 			MapIndex mi = new MapIndex();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 
 			for (MapLevel mr : index.getLevelsList()) {
 				MapRoot root = new MapRoot();
-				root.length = (int) mr.getSize();
-				root.filePointer = (int) mr.getOffset();
+				root.length = mr.getSize();
+				root.filePointer = mr.getOffset();
 				root.left = mr.getLeft();
 				root.right = mr.getRight();
 				root.top = mr.getTop();
@@ -250,15 +282,15 @@ public class CachedOsmandIndexes {
 
 		for (AddressPart index : found.getAddressIndexList()) {
 			AddressRegion mi = new AddressRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 			mi.enName = index.getNameEn();
 			mi.indexNameOffset = index.getIndexNameOffset();
 			for (CityBlock mr : index.getCitiesList()) {
 				CitiesBlock cblock = new CitiesBlock();
-				cblock.length = (int) mr.getSize();
-				cblock.filePointer = (int) mr.getOffset();
+				cblock.length = mr.getSize();
+				cblock.filePointer = mr.getOffset();
 				cblock.type = mr.getType();
 				mi.cities.add(cblock);
 			}
@@ -269,8 +301,8 @@ public class CachedOsmandIndexes {
 
 		for (PoiPart index : found.getPoiIndexList()) {
 			PoiRegion mi = new PoiRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 			mi.left31 = index.getLeft();
 			mi.right31 = index.getRight();
@@ -282,8 +314,8 @@ public class CachedOsmandIndexes {
 
 		for (TransportPart index : found.getTransportIndexList()) {
 			TransportIndex mi = new TransportIndex();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 			mi.left = index.getLeft();
 			mi.right = index.getRight();
@@ -302,14 +334,14 @@ public class CachedOsmandIndexes {
 
 		for (RoutingPart index : found.getRoutingIndexList()) {
 			RouteRegion mi = new RouteRegion();
-			mi.length = (int) index.getSize();
-			mi.filePointer = (int) index.getOffset();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
 			mi.name = index.getName();
 
 			for (RoutingSubregion mr : index.getSubregionsList()) {
 				RouteSubregion sub = new RouteSubregion(mi);
-				sub.length = (int) mr.getSize();
-				sub.filePointer = (int) mr.getOffset();
+				sub.length = mr.getSize();
+				sub.filePointer = mr.getOffset();
 				sub.left = mr.getLeft();
 				sub.right = mr.getRight();
 				sub.top = mr.getTop();
@@ -324,24 +356,40 @@ public class CachedOsmandIndexes {
 			reader.routingIndexes.add(mi);
 			reader.indexes.add(mi);
 		}
+		
+		for (HHRoutingPart index : found.getHhRoutingIndexList()) {
+			HHRouteRegion mi = new HHRouteRegion();
+			mi.length = index.getSize();
+			mi.filePointer = index.getOffset();
+			mi.edition = index.getEdition();
+			mi.profile = index.getProfile();
+			mi.profileParams = index.getProfileParamsList();
+			mi.top = new HHRoutePointsBox();
+			mi.top.bottom = index.getBottom();
+			mi.top.right = index.getRight();
+			mi.top.left = index.getLeft();
+			mi.top.top = index.getTop();
+			reader.hhIndexes.add(mi);
+			reader.indexes.add(mi);
+		}
 
 		return reader;
 	}
 	
 
-	public void readFromFile(File f, int version) throws IOException {
+	public void readFromFile(File f) throws IOException {
 		long time = System.currentTimeMillis();
 		FileInputStream is = new FileInputStream(f);
 		try {
 			storedIndex = OsmandIndex.OsmAndStoredIndex.newBuilder().mergeFrom(is).build();
 			hasChanged = false;
-			if (storedIndex.getVersion() != version) {
+			if (storedIndex.getVersion() != CachedOsmandIndexes.VERSION) {
 				storedIndex = null;
 			}
 		} finally {
 			is.close();
 		}
-		log.info("Initialize cache " + (System.currentTimeMillis() - time));
+		log.info("Initialize cache " + f.getName() + " " + (System.currentTimeMillis() - time) + " ms");
 	}
 
 	public void writeToFile(File f) throws IOException {

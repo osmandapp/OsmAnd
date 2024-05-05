@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.configmap.ConfigureMapDialogs;
 
 public class ZoomOutButton extends MapButton {
 
@@ -22,9 +22,12 @@ public class ZoomOutButton extends MapButton {
 			if (mapActivity.getContextMenu().zoomOutPressed()) {
 				return;
 			}
-			app.getOsmandMap().changeZoom(-1, System.currentTimeMillis());
+			mapActivity.getMapView().zoomOutAndAdjustTiltAngle();
 		});
-		setOnLongClickListener(MapControlsLayer.getOnClickMagnifierListener(mapActivity.getMapView()));
+		setOnLongClickListener(notUseCouldBeNull -> {
+			ConfigureMapDialogs.showMapMagnifierDialog(mapActivity.getMapView());
+			return true;
+		});
 		updateIcon(app.getDaynightHelper().isNightModeForMapControls());
 	}
 

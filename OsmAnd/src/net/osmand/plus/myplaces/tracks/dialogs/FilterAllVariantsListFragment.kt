@@ -41,14 +41,18 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 			dialogClosedListener: DialogClosedListener?,
 			selectedItemsListener: NewSelectedItemsListener) {
 			if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-				val initialFilter = TrackFiltersHelper.createFilter(app, filter.filterType, null)
+				val initialFilter =
+					TrackFiltersHelper.createFilter(app, filter.trackFilterType, null)
 				if (initialFilter !is ListTrackFilter) {
 					throw IllegalArgumentException("Filter should be subclass from ListTrackFilter")
 				}
 				initialFilter.initWithValue(filter)
 				val nightMode = app.daynightHelper.isNightMode(true)
 				val currentFilter =
-					TrackFiltersHelper.createFilter(app, filter.filterType, null) as ListTrackFilter
+					TrackFiltersHelper.createFilter(
+						app,
+						filter.trackFilterType,
+						null) as ListTrackFilter
 				currentFilter.initWithValue(filter)
 				currentFilter.setFullItemsCollection(filter.allItemsCollection)
 				val adapter = ListFilterAdapter(app, nightMode, null, null)
@@ -141,9 +145,9 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 		showButton = view.findViewById(R.id.show_button)
 		showButton?.setOnClickListener {
 			val newSelectedItems = ArrayList<String>()
-			val oldSelectedItems = initialFilter.getSelectedItems()
+			val oldSelectedItems = initialFilter.selectedItems
 			val currentSelectedItems =
-				currentChangesFilter.getSelectedItems()
+				currentChangesFilter.selectedItems
 			for (selectedItem in currentSelectedItems) {
 				if (!oldSelectedItems.contains(selectedItem)) {
 					newSelectedItems.add(selectedItem)
@@ -165,7 +169,7 @@ class FilterAllVariantsListFragment : BaseOsmAndDialogFragment(), SmartFolderUpd
 			setNavigationOnClickListener {
 				closeWithoutApply()
 			}
-			setTitle(currentChangesFilter.displayNameId)
+			setTitle(currentChangesFilter.trackFilterType.nameResId)
 		}
 	}
 
