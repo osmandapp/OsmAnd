@@ -2433,7 +2433,7 @@
     <string name="monitoring_min_speed_descr_recommendation">Preporuka: prvo koristi detekciju pokreta kroz filtar minimalnog pomaka (B), na taj ćeš način dobiti bolje rezultate i kasnije izgubiti manje podataka. Ako snimanje trase nastavi \'usporeno\' pri malim brzinama, pokušaj uneti vrednosti veće od nule. Za neka merenja brzina (zavisno od interneta) uopšte ne prijavljuju, pa će u skladu s tim takvi zapisi nedostajati.</string>
     <string name="monitoring_min_speed_descr_side_effect">Usputne pojave: Tvojim trasama će nedostajati sve dionice na kojima nije zadovoljen kriterijum minimalne brzine (npr. gde ste gurali bicikl uzbrdo). Takođe, neće biti podataka o razdobljima mirovanja, kao što su odmori. Ovo može uticati na analizu ili naknadnu obradu, kao što je određivanje ukupne dužine puta, vremena vožnje, ili prosečne brzine.</string>
     <string name="monitoring_min_speed_descr">Ovo je filter za odsecanje malih brzina koji ne beleži tačke ispod određene brzine. Zbog toga snimljene staze mogu izgledati glatkije kada se gledaju na mapi.</string>
-    <string name="not_support_file_type_with_ext">Umesto toga, odaberi podržani fajls ekstenzijom %1$s.</string>
+    <string name="not_support_file_type_with_ext">Umesto ovog formata, odaberi podržani format %1$s.</string>
     <string name="file_does_not_contain_routing_rules">Nema pravila za navođenje u ’%1$s’. Odaberi drugi fajl.</string>
     <string name="logcat_buffer_descr">Pregled i zajedničko korišćenje dnevnika o aplikacijama</string>
     <string name="permission_is_required">Potrebne su dozvole za korišćenje ove mogućnosti.</string>
