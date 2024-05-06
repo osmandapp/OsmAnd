@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.osmedit.dialogs;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-import static net.osmand.plus.plugins.osmedit.OsmEditingPlugin.ORIGINAL_POI_TYPE_TAG;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -490,12 +489,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				entity.putTagNoLC(POI_TYPE_TAG, poiTypeTag);
-				if (poiTypeTag != null) {
-					PoiType originalPoiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
-					if (originalPoiType != null) {
-						entity.putTagNoLC(ORIGINAL_POI_TYPE_TAG, originalPoiType.getCategory().getDefaultTag());
-					}
-				}
 			}
 			String actionString = action == Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
 			comment = actionString + " " + poiTypeTag;
