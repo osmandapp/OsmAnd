@@ -4790,7 +4790,7 @@
     <string name="ant_missing_dependency_descr">Nisam uspeo da pronađem odgovarajuću službu „%1$s“ 
 \nTreba da ugradiš ili osvežiš ANT + službu priključaka 
 \nDa li želiš da pokreneš skladište igara za to?</string>
-    <string name="worldwide_maps">Svetske mape</string>
+    <string name="worldwide_maps">Mape sveta</string>
     <string name="favorite_delete_group">Obriši grupu</string>
     <string name="trip_recording_uphill_widget_desc">Prikazuje ukupno sve uspone na putu koji se trenutno snima.</string>
     <string name="map_settings_weather_wind">Vetar</string>
