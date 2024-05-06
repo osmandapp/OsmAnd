@@ -72,9 +72,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				remove(file);
 			}
 		});
-
-		long end = System.currentTimeMillis();
-		LOG.info("Time to loadGpxItems " + (end - start) + " ms items count " + items.size());
+		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms, " + items.size() +  " items");
 	}
 
 	public void loadGpxDirItems() {
