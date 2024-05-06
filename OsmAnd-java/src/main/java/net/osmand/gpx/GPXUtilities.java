@@ -94,17 +94,18 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
 
-	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>() {{
-		put("heartrate", PointAttributes.SENSOR_TAG_HEART_RATE);
-		put("osmand:hr", PointAttributes.SENSOR_TAG_HEART_RATE);
-		put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
-		put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
-		put("cad", PointAttributes.SENSOR_TAG_CADENCE);
-		put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
-		put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
-		put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
-		put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);
-	}};
+	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>();
+	static {
+		SUPPORTED_EXTENSION_TAGS.put("heartrate", PointAttributes.SENSOR_TAG_HEART_RATE);
+		SUPPORTED_EXTENSION_TAGS.put("osmand:hr", PointAttributes.SENSOR_TAG_HEART_RATE);
+		SUPPORTED_EXTENSION_TAGS.put("hr", PointAttributes.SENSOR_TAG_HEART_RATE);
+		SUPPORTED_EXTENSION_TAGS.put("speed_sensor", PointAttributes.SENSOR_TAG_SPEED);
+		SUPPORTED_EXTENSION_TAGS.put("cad", PointAttributes.SENSOR_TAG_CADENCE);
+		SUPPORTED_EXTENSION_TAGS.put("cadence", PointAttributes.SENSOR_TAG_CADENCE);
+		SUPPORTED_EXTENSION_TAGS.put("temp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		SUPPORTED_EXTENSION_TAGS.put("wtemp", PointAttributes.SENSOR_TAG_TEMPERATURE_W);
+		SUPPORTED_EXTENSION_TAGS.put("atemp", PointAttributes.SENSOR_TAG_TEMPERATURE_A);
+	}
 
 	private static final NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####", new DecimalFormatSymbols(Locale.US));
 	// speed, ele, hdop
@@ -670,7 +671,14 @@ public class GPXUtilities {
 		}
 
 		public String getDescription() {
-			return getExtensionsToRead().get("desc");
+			return desc;
+		}
+
+		public void readDescription() {
+			String readDescription = getExtensionsToWrite().remove("desc");
+			if (Algorithms.isEmpty(readDescription) && Algorithms.isEmpty(desc)) {
+				desc = readDescription;
+			}
 		}
 	}
 
@@ -1337,8 +1345,8 @@ public class GPXUtilities {
 	}
 
 	public static class GPXFileResult {
-		public ArrayList<List<Location>> locations = new ArrayList<List<Location>>();
-		public ArrayList<WptPt> wayPoints = new ArrayList<>();
+		public List<List<Location>> locations = new ArrayList<List<Location>>();
+		public List<WptPt> wayPoints = new ArrayList<>();
 		// special case for cloudmate gpx : they discourage common schema
 		// by using waypoint as track points and rtept are not very close to real way
 		// such as wpt. However they provide additional information into gpx.
@@ -1823,7 +1831,9 @@ public class GPXUtilities {
 					}
 
 					if (tag.equals("metadata")) {
-						Object pop = parserState.pop();
+						Metadata pop = (Metadata) parserState.pop();
+						pop.readDescription();
+						
 						assert pop instanceof Metadata;
 					} else if (tag.equals("author")) {
 						if (parse instanceof Author) {
