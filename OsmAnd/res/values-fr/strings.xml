@@ -5711,5 +5711,7 @@
     <string name="map_text">Textes de la carte</string>
     <string name="allow_display_on_top">Autoriser l\'affichage par dessus</string>
     <string name="allow_display_on_top_description">Permet d\'afficher les textes de carte les uns par dessus les autres</string>
-    <string name="show_debug_info_description">Affiche les infos graphiques de position pour chaque texte sur la carte</string>
+    <string name="show_debug_info_description">Affiche les données graphiques de position pour chaque texte sur la carte</string>
+    <string name="gpx_approximation_geo_cpp">Basé sur la géométrie (C++, rapide)</string>
+    <string name="track_vertical_exaggeration_description">En modifiant la valeur de l\'échelle, vous pouvez modifier la hauteur de la trace 3D.</string>
 </resources>
