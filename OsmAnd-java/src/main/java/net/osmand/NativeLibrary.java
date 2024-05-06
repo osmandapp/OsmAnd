@@ -143,6 +143,7 @@ public class NativeLibrary {
 		public double lat;
 		public double lon;
 		public double cumDist;
+		public int targetInd;
 		public List<RouteSegmentResult> routeToTarget;
 
 		NativeGpxPointApproximation(GpxPoint gpxPoint) {
@@ -151,11 +152,12 @@ public class NativeLibrary {
 			cumDist = gpxPoint.cumDist;
 		}
 
-		public NativeGpxPointApproximation(int ind, double lat, double lon, double cumDist) {
+		public NativeGpxPointApproximation(int ind, double lat, double lon, double cumDist, int targetInd) {
 			this.ind = ind;
 			this.lat = lat;
 			this.lon = lon;
 			this.cumDist = cumDist;
+			this.targetInd = targetInd;
 			routeToTarget = new ArrayList<>();
 		}
 
@@ -173,6 +175,7 @@ public class NativeLibrary {
 				fixStraightLineRegion();
 			}
 
+			point.targetInd = targetInd;
 			point.routeToTarget = new ArrayList<>(routeToTarget);
 			return point;
 		}
