@@ -1184,7 +1184,7 @@
     <string name="rendering_attr_moreDetailed_name">Più dettagli</string>
     <string name="rendering_attr_lessDetailed_name">Meno dettagli</string>
     <string name="rendering_attr_hideAccess_name">Limitazioni di accesso</string>
-    <string name="rendering_attr_showAccess_name">Mostra limitazioni di accesso</string>
+    <string name="rendering_attr_showAccess_name">Mostra le restrizioni di accesso e di pedaggio</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostra qualità strade</string>
     <string name="rendering_attr_showSurfaces_name">Mostra il tipo di superficie delle strade</string>
     <string name="rendering_attr_showCycleRoutes_name">Percorsi ciclabili</string>
@@ -4457,8 +4457,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostra etichette Note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Icone a zoom bassi</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Visualizzazione schematica delle icone a basso zoom</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunnel per canali</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Non nascondere i tunnel per canali</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumenta la visibilità per i tunnel dei corsi d\'acqua</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumenta la visibilità per i tunnel dei corsi d\'acqua</string>
     <string name="rendering_value_omit_name">Ometti</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_value_category_name">Categoria</string>
@@ -5641,7 +5641,7 @@
 \n
 \n• Aggiunta dei filtri in base ai dati dei sensori per le tracce
 \n
-\n• Migliorata la personalizzazione dell\'aspetto di gruppi di tracce
+\n• Migliorata la personalizzazione dell\'aspetto per gruppi di tracce
 \n
 \n• Aggiunto il supporto per tag GPX aggiuntivi
 \n
@@ -5673,27 +5673,46 @@
     <string name="shared_string_changes">Cambiamenti</string>
     <string name="shared_string_scale">Scala</string>
     <string name="vertical_exaggeration">Esagerazione verticale</string>
-    <string name="vertical_exaggeration_description">Cambiando il valore della scala puoi enfatizzare i rilievi 3D.</string>
+    <string name="vertical_exaggeration_description">Cambiando il valore della scala puoi accentuare i rilievi 3D.</string>
     <string name="gpx_approximation_cpp">Routing-based (C++)</string>
     <string name="delete_actions_button">Pulsante elimina</string>
     <string name="use_terrain_maps">Usa le mappe di Elevazione</string>
-    <string name="use_terrain_maps_summary">Utilizza mappe del terreno per i dati di altimetria. Le geometrie delle tracce non verranno modificate.</string>
+    <string name="use_terrain_maps_summary">Utilizza mappe del terreno per i dati di altimetria. La geometria del tracciato rimane invariata.</string>
     <string name="use_nearby_roads">Usa strade vicine</string>
     <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
     <string name="auto_zoom_smooth">Liscio</string>
     <string name="gpx_approximation_java">Routing-based (Java)</string>
     <string name="release_4_8">• Predisposto per la 4.8</string>
     <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" con tutte le azioni aggiunte?</string>
-    <string name="retrieve_elevation_data_summary">OsmAnd può recuperare dati altimetrici da strade nelle vicinanze o dalle mappe altimetriche.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd può recuperare i dati altimetrici dalle strade nelle vicinanze o dalle mappe del terreno.</string>
     <string name="shared_string_osm_id">ID OSM</string>
-    <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il suolo sulla mappa.</string>
-    <string name="use_nearby_roads_summary">Utilizza mappe offline per individuare strade &amp; dati altimetrici. Potrebbe correggere la geometria della traccia.</string>
+    <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il terreno sulla mappa.</string>
+    <string name="use_nearby_roads_summary">Utilizza la mappa offline per trovare strade e dati di elevazione nelle vicinanze. Potrebbe correggere la geometria del tracciato.</string>
     <string name="maps_that_also_be_used">Mappe già utilizzate: %1$s</string>
-    <string name="required_maps_calculate_online_summary">La lista delle mappe mancanti è basata sul base del percorso in linea retta. Per avere una lista accurata delle mappe, OsmAnd può pre-calcolare online il tuo percorso.</string>
-    <string name="missing_maps_description">Alcune mappe offline non aggiornate o mancanti sono richieste. Pregasi di aggiornarle o scaricarle.</string>
-    <string name="getting_list_of_required_maps">Recuperando la lista delle mappe richieste …</string>
+    <string name="required_maps_calculate_online_summary">L\'elenco delle mappe mancanti si basa sul percorso in linea retta. Per avere una lista accurata delle mappe, OsmAnd può pre-calcolare il tuo percorso online.</string>
+    <string name="missing_maps_description">Alcune mappe offline richieste per questo percorso mancano o non sono aggiornate. Scarica o aggiorna queste mappe.</string>
+    <string name="getting_list_of_required_maps">Recupero una lista delle mappe richieste…</string>
     <string name="required_maps">Mappe richieste</string>
-    <string name="route_line_use_coloring_speed">La linea del percorso è colorata in base alla velocità dello spostamento.</string>
-    <string name="route_line_use_coloring_altitude">La linea del percorso è colorata i base all\'altitudine.</string>
+    <string name="route_line_use_coloring_speed">La linea del percorso è colorata in base alla velocità del movimento.</string>
+    <string name="route_line_use_coloring_altitude">La linea del percorso è colorata in base all\'altitudine.</string>
     <string name="missing_maps_header">Mappe mancanti o da aggiornare</string>
+    <string name="track_vertical_exaggeration_description">Modificando il valore della scala, puoi modificare l\'altezza della traccia 3D.</string>
+    <string name="downward_gradient">Gradiente verso il basso</string>
+    <string name="top">Sopra</string>
+    <string name="title_3d_track">Traccia 3D</string>
+    <string name="gpx_approximation_geo_cpp">Geometry-based (C++, fast)</string>
+    <string name="upward_gradient">Gradiente verso l\'alto</string>
+    <string name="bottom">Sotto</string>
+    <string name="top_and_bottom">Sopra e sotto</string>
+    <string name="explore_3d_track_description">Esplora la traccia in 3D interattivo! Visualizza altezza, velocità e altro direttamente sulla mappa.</string>
+    <string name="visualized_by">Visualizzato da</string>
+    <string name="wall_color">Colore della parete</string>
+    <string name="track_line">Linea della traccia</string>
+    <string name="fixed_height">Altezza fissata</string>
+    <string name="allow_display_on_top">Consenti la visualizzazione in alto</string>
+    <string name="allow_display_on_top_description">Consenti la visualizzazione dei testi della mappa uno sopra l\'altro</string>
+    <string name="show_debug_info">Mostra informazioni di debug</string>
+    <string name="show_debug_info_description">Visualizza informazioni grafiche sul posizionamento di ciascun testo della mappa</string>
+    <string name="map_text">Testi della mappa</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evita il ciottolo</string>
 </resources>
