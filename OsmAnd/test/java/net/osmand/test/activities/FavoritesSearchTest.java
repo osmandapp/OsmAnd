@@ -15,6 +15,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.Matchers.childAtPosition;
+import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialogs;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
@@ -59,6 +60,7 @@ public class FavoritesSearchTest extends AndroidTest {
         // Given
         final String favorite = "Morgenstelle";
         ActivityScenario.launch(MapActivity.class);
+        skipAppStartDialogs(app);
         navigateToFavoritesSearchUI();
 
         // When
