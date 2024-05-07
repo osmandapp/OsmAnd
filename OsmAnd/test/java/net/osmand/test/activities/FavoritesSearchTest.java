@@ -19,10 +19,11 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.is;
 
+import android.view.View;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.DataInteraction;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
@@ -31,6 +32,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.ResourcesImporter;
 
+import org.hamcrest.Matcher;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,85 +48,81 @@ public class FavoritesSearchTest extends AndroidTest {
 
     @Test
     public void assertIssue19242IsFixed_a_prepare() {
-        try (final ActivityScenario<MapActivity> scenario = ActivityScenario.launch(MapActivity.class)) {
-            scenario.onActivity(activity -> importFavorite(new File("favorites.gpx"), activity));
+        try (final ActivityScenario<MapActivity> activityScenario = ActivityScenario.launch(MapActivity.class)) {
+            activityScenario.onActivity(activity -> importFavorite(new File("favorites.gpx"), activity));
         }
     }
 
     // assert that https://github.com/osmandapp/OsmAnd/issues/19242 is fixed
     @Test
     public void assertIssue19242IsFixed_b() {
+        // Given
+        final String favorite = "Morgenstelle";
         ActivityScenario.launch(MapActivity.class);
-        openMapMenu();
-        openMyPlaces();
-        openSearch();
-        enterIntoSearchQueryTextField("Morgenstelle");
-        selectFirstSearchResult();
+        navigateToFavoritesSearchUI();
+
+        // When
+        onView(searchQueryTextField()).perform(replaceText(favorite), closeSoftKeyboard()); // results in UI state A
+        displayFavoriteOnMap();
         pressBack();
         pressBack();
-        assertSearchQueryTextFieldDisplays("Morgenstelle");
+
+        // Then UI state A is restored
+        onView(searchQueryTextField()).check(matches(withText(favorite)));
     }
 
-    private static void openMapMenu() {
-        final ViewInteraction appCompatImageButton =
-                onView(
+    private static void navigateToFavoritesSearchUI() {
+        onView(mapMenu()).perform(click());
+        myPlaces().perform(click());
+        onView(search()).perform(click());
+    }
+
+    private static Matcher<View> mapMenu() {
+        return allOf(
+                withId(R.id.map_menu_button),
+                withContentDescription(R.string.backToMenu),
+                childAtPosition(
+                        childAtPosition(
+                                withId(R.id.bottom_controls_container),
+                                3),
+                        0),
+                isDisplayed());
+    }
+
+    private static DataInteraction myPlaces() {
+        return onData(anything())
+                .inAdapterView(
                         allOf(
-                                withId(R.id.map_menu_button),
-                                withContentDescription(R.string.backToMenu),
+                                withId(R.id.menuItems),
                                 childAtPosition(
-                                        childAtPosition(
-                                                withId(R.id.bottom_controls_container),
-                                                3),
-                                        0),
-                                isDisplayed()));
-        appCompatImageButton.perform(click());
+                                        withId(R.id.drawer_relative_layout),
+                                        0)))
+                .atPosition(3);
     }
 
-    private static void openMyPlaces() {
-        final DataInteraction linearLayout =
-                onData(anything())
-                        .inAdapterView(
-                                allOf(
-                                        withId(R.id.menuItems),
-                                        childAtPosition(
-                                                withId(R.id.drawer_relative_layout),
-                                                0)))
-                        .atPosition(3);
-        linearLayout.perform(click());
+    private static Matcher<View> search() {
+        return allOf(
+                withContentDescription("Filter"),
+                childAtPosition(
+                        childAtPosition(
+                                withId(me.zhanghai.android.materialprogressbar.R.id.action_bar),
+                                3),
+                        0),
+                isDisplayed());
     }
 
-    private static void openSearch() {
-        final ViewInteraction actionMenuItemView =
-                onView(
+    private static Matcher<View> searchQueryTextField() {
+        return allOf(
+                withId(R.id.searchEditText),
+                withParent(
                         allOf(
-                                withContentDescription("Filter"),
-                                childAtPosition(
-                                        childAtPosition(
-                                                withId(me.zhanghai.android.materialprogressbar.R.id.action_bar),
-                                                3),
-                                        0),
-                                isDisplayed()));
-        actionMenuItemView.perform(click());
+                                withId(R.id.search_container),
+                                withParent(withId(R.id.toolbar)))),
+                isDisplayed());
     }
 
-    private static void enterIntoSearchQueryTextField(final String searchQuery) {
-        final ViewInteraction appCompatEditText =
-                onView(
-                        allOf(
-                                withId(R.id.searchEditText),
-                                childAtPosition(
-                                        allOf(
-                                                withId(R.id.search_container),
-                                                childAtPosition(
-                                                        withId(R.id.toolbar),
-                                                        0)),
-                                        0),
-                                isDisplayed()));
-        appCompatEditText.perform(replaceText(searchQuery), closeSoftKeyboard());
-    }
-
-    private static void selectFirstSearchResult() {
-        final DataInteraction linearLayout2 =
+    private static void displayFavoriteOnMap() {
+        final DataInteraction favorite =
                 onData(anything())
                         .inAdapterView(
                                 allOf(
@@ -133,20 +131,7 @@ public class FavoritesSearchTest extends AndroidTest {
                                                 withClassName(is("android.widget.LinearLayout")),
                                                 1)))
                         .atPosition(2);
-        linearLayout2.perform(click());
-    }
-
-    private static void assertSearchQueryTextFieldDisplays(final String searchQuery) {
-        final ViewInteraction editText =
-                onView(
-                        allOf(
-                                withId(R.id.searchEditText),
-                                withParent(
-                                        allOf(
-                                                withId(R.id.search_container),
-                                                withParent(withId(R.id.toolbar)))),
-                                isDisplayed()));
-        editText.check(matches(withText(searchQuery)));
+        favorite.perform(click());
     }
 
     private void importFavorite(final File favoriteAssetFile, final FragmentActivity activity) {
