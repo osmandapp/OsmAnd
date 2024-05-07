@@ -241,12 +241,7 @@ public class GpxDbUtils {
 
 	private static void addTableColumn(@NonNull SQLiteConnection db, @NonNull String tableName,
 	                                   @NonNull String columnName, @NonNull String columnType) {
-		try {
-			db.execSQL("ALTER TABLE " + tableName + " ADD " + columnName + " " + columnType);
-		} catch(SQLiteException e) {
-			throw new IllegalStateException("Failed adding column " + columnName + " to " + tableName + " type " + columnType,
-					e);
-		}
+		db.execSQL("ALTER TABLE " + tableName + " ADD " + columnName + " " + columnType);
 	}
 
 	public static boolean isAnalyseNeeded(@Nullable GpxDataItem item) {

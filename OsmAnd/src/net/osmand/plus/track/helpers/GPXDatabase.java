@@ -40,7 +40,7 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	protected static final int DB_VERSION = 23;
+	protected static final int DB_VERSION = 24;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
@@ -92,12 +92,12 @@ public class GPXDatabase {
 				return null;
 			}
 			int version = conn.getVersion();
-			conn.setVersion(DB_VERSION);
 			if (version == 0) {
 				GpxDbUtils.onCreate(conn);
 			} else {
 				GpxDbUtils.onUpgrade(this, conn, version, DB_VERSION);
 			}
+			conn.setVersion(DB_VERSION);
 		}
 		return conn;
 	}
