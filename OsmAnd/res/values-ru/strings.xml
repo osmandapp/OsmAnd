@@ -5720,4 +5720,11 @@
     <string name="explore_3d_track_description">Исследуйте трек в интерактивном 3D! Визуализируйте высоту, скорость и многое другое прямо на карте.</string>
     <string name="routing_attr_avoid_cobblestone_name">Без булыжника</string>
     <string name="routing_attr_avoid_cobblestone_description">Без булыжника</string>
+    <string name="track_vertical_exaggeration_description">Изменяя значение масштаба, вы можете изменить высоту 3D-трека.</string>
+    <string name="gpx_approximation_geo_cpp">На основе геометрии (C++, быстрая)</string>
+    <string name="allow_display_on_top">Разрешить отображение поверх</string>
+    <string name="allow_display_on_top_description">Разрешить отображение текстовых меток на карте друг над другом</string>
+    <string name="show_debug_info">Показать отладочную информацию</string>
+    <string name="show_debug_info_description">Отображение графической информации о размещении каждого текста на карте</string>
+    <string name="map_text">Текста карты</string>
 </resources>

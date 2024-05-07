@@ -11,7 +11,6 @@ import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
@@ -45,26 +44,6 @@ public class AmenityExtensionsHelper {
 			if (Algorithms.stringsEqual(amenity.toStringEn(), nameEn)) {
 				return amenity;
 			}
-		}
-		return null;
-	}
-
-	@Nullable
-	public Amenity findAmenityByPoiType(@NonNull String poiType, double lat, double lon) {
-		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 5);
-		List<Amenity> amenities = app.getResourceManager().searchAmenities(new BinaryMapIndexReader.SearchPoiTypeFilter() {
-			@Override
-			public boolean accept(PoiCategory poiCategory, String s) {
-				return poiCategory.getDefaultTag().equals(poiType);
-			}
-
-			@Override
-			public boolean isEmpty() {
-				return false;
-			}
-		}, rect, true);
-		if (!Algorithms.isEmpty(amenities)) {
-			return amenities.get(0);
 		}
 		return null;
 	}

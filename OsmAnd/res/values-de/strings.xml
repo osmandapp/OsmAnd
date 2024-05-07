@@ -5665,7 +5665,7 @@
 \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
 \n
 \n</string>
-    <string name="round_up">Abrunden</string>
+    <string name="round_up">Aufrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Distanz während der Navigation</string>
     <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
@@ -5726,4 +5726,5 @@
     <string name="map_text">Kartentexte</string>
     <string name="routing_attr_avoid_cobblestone_name">Kopfsteinpflaster vermeiden</string>
     <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
+    <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts kannst du die Höhe des 3D-Tracks ändern.</string>
 </resources>

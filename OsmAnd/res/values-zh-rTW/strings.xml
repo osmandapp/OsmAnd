@@ -5705,4 +5705,12 @@
     <string name="title_3d_track">3D 軌跡</string>
     <string name="explore_3d_track_description">以互動式 3D 方式探索軌跡！在地圖上直接視覺化高度、速度等。</string>
     <string name="gpx_approximation_geo_cpp">以幾何為基礎（C++，快速）</string>
+    <string name="track_vertical_exaggeration_description">透過變更比例值，您可以變更 3D 軌跡高度。</string>
+    <string name="allow_display_on_top">允許顯示在頂部</string>
+    <string name="allow_display_on_top_description">允許在彼此之上顯示地圖文字</string>
+    <string name="show_debug_info">顯示除錯資訊</string>
+    <string name="show_debug_info_description">顯示關於每個地圖文字位置的圖形資訊</string>
+    <string name="map_text">地圖文字</string>
+    <string name="routing_attr_avoid_cobblestone_name">避免鵝卵石</string>
+    <string name="routing_attr_avoid_cobblestone_description">避免鵝卵石</string>
 </resources>

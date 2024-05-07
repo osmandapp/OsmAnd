@@ -47,7 +47,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public GPXFile(String title, String lang, String description) {
 		if (description != null) {
-			metadata.getExtensionsToWrite().put("desc", description);
+			metadata.desc = description;
 		}
 		if (lang != null) {
 			metadata.getExtensionsToWrite().put("article_lang", lang);

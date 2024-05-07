@@ -5700,4 +5700,24 @@
     <string name="route_line_use_coloring_speed">Линија руте је обојена по брзини кретања.</string>
     <string name="maps_that_also_be_used">Мапе које се такође користе: %1$s</string>
     <string name="required_maps_calculate_online_summary">Листа мапа које недостају заснива се на праволинијској рути. Да бисте добили тачну листу мапа, ОсмАнд може унапред да израчуна вашу руту на мрежи.</string>
+    <string name="downward_gradient">Надоле градијент</string>
+    <string name="upward_gradient">Градијент навише</string>
+    <string name="bottom">Дно</string>
+    <string name="explore_3d_track_description">Истражите путању у интерактивном 3Д! Визуелизујте висину, брзину и још много тога директно на мапи.</string>
+    <string name="gpx_approximation_geo_cpp">Засновано на геометрији (C++, брзо)</string>
+    <string name="track_vertical_exaggeration_description">Променом вредности размере, можете променити висину 3Д стазе.</string>
+    <string name="top_and_bottom">Врх и дно</string>
+    <string name="title_3d_track">3Д Путања</string>
+    <string name="visualized_by">Визуализовано од</string>
+    <string name="wall_color">Боја зида</string>
+    <string name="track_line">Линија стазе</string>
+    <string name="fixed_height">Фиксна висина</string>
+    <string name="top">Врх</string>
+    <string name="allow_display_on_top">Дозволи приказ на врху</string>
+    <string name="allow_display_on_top_description">Дозволи приказивање текстова мапе један на другом</string>
+    <string name="show_debug_info">Прикажи информације за отклањање грешака</string>
+    <string name="show_debug_info_description">Приказ графичке информације о положају сваког текста на мапи</string>
+    <string name="map_text">Текстови мапе</string>
+    <string name="routing_attr_avoid_cobblestone_name">Избегавај калдрму</string>
+    <string name="routing_attr_avoid_cobblestone_description">Избегавање калдрме</string>
 </resources>

@@ -2136,7 +2136,7 @@
     <string name="update_existing">Asenda</string>
     <string name="loading_streets_buildings">Laadin tänavaid/hooneid…</string>
     <string name="use_online_routing">Kasuta veebipõhist navigeerimist</string>
-    <string name="update_tile">Uuenda kaart</string>
+    <string name="update_tile">Uuenda</string>
     <string name="choose_building">Vali hoone</string>
     <string name="map_tile_source_descr">Vali veebipõhiste või puhverdatud kaardipaanide allikas.</string>
     <string name="incremental_search_building">Otsi hoonet kasvavalt</string>
@@ -4577,4 +4577,6 @@
     <string name="configure_filter">Seadista filtrit</string>
     <string name="no_config_smart_folder_title">Seadistamata</string>
     <string name="key_event_action_move_down">Tõsta alla</string>
+    <string name="simulation_real_mode_title">Realistlik simulatsioon</string>
+    <string name="import_export">Import/eksport</string>
 </resources>
