@@ -64,9 +64,9 @@ public class GpxAppearanceInfo {
 	public double minFilterAltitude = Double.NaN;
 	public double maxFilterAltitude = Double.NaN;
 	public double maxFilterHdop = Double.NaN;
-	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
-	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
-	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.getDefault();
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.getDefault();
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.getDefault();
 	private float verticalExaggeration = 1f;
 
 	public GpxAppearanceInfo() {

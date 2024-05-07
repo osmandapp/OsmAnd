@@ -77,9 +77,9 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
-	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
-	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
-	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.getDefault();
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.getDefault();
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.getDefault();
 	private float additionalExaggeration = 1f;
 
 	@TrackAppearanceType
@@ -345,9 +345,9 @@ public class TrackDrawInfo {
 			showStartFinish = true;
 			coloringType = ColoringType.requireValueOf(TRACK);
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
-			trackVisualizationType = Gpx3DVisualizationType.NONE;
-			trackWallColorType = Gpx3DWallColorType.NONE;
-			trackLinePositionType = Gpx3DLinePositionType.TOP;
+			trackVisualizationType = Gpx3DVisualizationType.getDefault();
+			trackWallColorType = Gpx3DWallColorType.getDefault();
+			trackLinePositionType = Gpx3DLinePositionType.getDefault();
 		} else if (gpxFile != null) {
 			color = gpxFile.getColor(getRenderDefaultTrackColor(renderer));
 			width = gpxFile.getWidth(getRenderDefaultTrackWidth(renderer));

@@ -27,7 +27,7 @@ public enum Gpx3DVisualizationType {
 				return type;
 			}
 		}
-		return NONE;
+		return getDefault();
 	}
 
 	public String getTypeName() {
@@ -37,5 +37,9 @@ public enum Gpx3DVisualizationType {
 	@StringRes
 	public int getDisplayNameResId() {
 		return displayNameResId;
+	}
+
+	public static Gpx3DVisualizationType getDefault() {
+		return NONE;
 	}
 }

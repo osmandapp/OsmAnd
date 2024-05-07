@@ -27,7 +27,7 @@ public enum Gpx3DLinePositionType {
 				return type;
 			}
 		}
-		return TOP;
+		return getDefault();
 	}
 
 	public String getTypeName() {
@@ -37,5 +37,9 @@ public enum Gpx3DLinePositionType {
 	@StringRes
 	public int getDisplayNameResId() {
 		return displayNameResId;
+	}
+
+	public static Gpx3DLinePositionType getDefault() {
+		return TOP;
 	}
 }

@@ -28,7 +28,7 @@ public enum Gpx3DWallColorType {
 				return type;
 			}
 		}
-		return NONE;
+		return getDefault();
 	}
 
 	public String getTypeName() {
@@ -38,5 +38,9 @@ public enum Gpx3DWallColorType {
 	@StringRes
 	public int getDisplayNameResId() {
 		return displayNameResId;
+	}
+
+	public static Gpx3DWallColorType getDefault() {
+		return UPWARD_GRADIENT;
 	}
 }
