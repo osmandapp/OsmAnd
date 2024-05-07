@@ -1,6 +1,7 @@
 package net.osmand.test.common;
 
 import android.content.res.AssetManager;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,47 +58,67 @@ public class ResourcesImporter {
 		}
 	}
 
-    public static void importFavorites(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths, final FragmentActivity activity) throws IOException {
-        File tmpDir = FileUtils.getTempDir(app);
+    public static void importObfAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
+        String error = null;
         for (String assetFilePath : assetFilePaths) {
-            String fileName = new File(assetFilePath).getName();
-            File file = new File(tmpDir, System.currentTimeMillis() + "_" + fileName);
-            try (InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets()
-                    .open(assetFilePath, AssetManager.ACCESS_STREAMING)) {
-                String error = ImportHelper.copyFile(app, file, is, true, false);
-                if (error == null) {
-                    GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
-                    new FavoritesImportTask(activity, gpxFile, fileName, false).execute().get();
-                }
-            } catch (ExecutionException | InterruptedException e) {
-                throw new RuntimeException(e);
+            String name = new File(assetFilePath).getName();
+            InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets()
+                    .open(assetFilePath, AssetManager.ACCESS_STREAMING);
+            boolean unzip = name.endsWith(IndexConstants.ZIP_EXT);
+            String fileName = unzip ? name.replace(IndexConstants.ZIP_EXT, "") : name;
+            File dest = getObfDestFile(app, fileName);
+            error = ImportHelper.copyFile(app, dest, is, true, unzip);
+            if (error != null) {
+                break;
+            }
+        }
+        if (error == null) {
+            app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
+            app.getDownloadThread().updateLoadedFiles();
+        } else {
+            throw new IOException("Map import error: " + error);
+        }
+    }
+
+    public static void importFavorite(final File favoriteAssetFile, final OsmandApplication app, final FragmentActivity activity) throws IOException {
+        executeAndWaitForCompletion(createFavoritesImportTask(favoriteAssetFile, app, activity));
+    }
+
+    private static FavoritesImportTask createFavoritesImportTask(
+            final File favoriteAssetFile,
+            final OsmandApplication app,
+            final FragmentActivity activity) throws IOException {
+        return new FavoritesImportTask(
+                activity,
+                getGpxFile(favoriteAssetFile, app),
+                favoriteAssetFile.getName(),
+                false);
+    }
+
+    private static GPXFile getGpxFile(final File favoriteAssetFile, final OsmandApplication app) throws IOException {
+        final File tmpFavoriteAssetFile = new File(FileUtils.getTempDir(app), System.currentTimeMillis() + "_" + favoriteAssetFile.getName());
+        copy(app, favoriteAssetFile, tmpFavoriteAssetFile);
+        return GPXUtilities.loadGPXFile(tmpFavoriteAssetFile);
+    }
+
+    private static void copy(final OsmandApplication app, final File srcAssetFile, final File dst) throws IOException {
+        try (final InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets().open(srcAssetFile.getName(), AssetManager.ACCESS_STREAMING)) {
+            final boolean success = ImportHelper.copyFile(app, dst, is, true, false) != null;
+            if (!success) {
+                throw new IOException();
             }
         }
     }
 
-    public static void importObfAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
-		String error = null;
-		for (String assetFilePath : assetFilePaths) {
-			String name = new File(assetFilePath).getName();
-			InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets()
-					.open(assetFilePath, AssetManager.ACCESS_STREAMING);
-			boolean unzip = name.endsWith(IndexConstants.ZIP_EXT);
-			String fileName = unzip ? name.replace(IndexConstants.ZIP_EXT, "") : name;
-			File dest = getObfDestFile(app, fileName);
-			error = ImportHelper.copyFile(app, dest, is, true, unzip);
-			if (error != null) {
-				break;
-			}
-		}
-		if (error == null) {
-			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
-			app.getDownloadThread().updateLoadedFiles();
-		} else {
-			throw new IOException("Map import error: " + error);
-		}
-	}
+    private static void executeAndWaitForCompletion(final AsyncTask<?, ?, ?> favoritesImportTask) {
+        try {
+            favoritesImportTask.execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	@NonNull
+    @NonNull
 	private static File getObfDestFile(@NonNull OsmandApplication app, @NonNull String name) {
 		if (name.endsWith(IndexConstants.BINARY_ROAD_MAP_INDEX_EXT)) {
 			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR + name);
