@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.osmand.IProgress;
@@ -13,6 +14,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
+import net.osmand.plus.importfiles.tasks.FavoritesImportTask;
 import net.osmand.plus.importfiles.tasks.SaveGpxAsyncTask;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
@@ -55,7 +57,25 @@ public class ResourcesImporter {
 		}
 	}
 
-	public static void importObfAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
+    public static void importFavorites(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths, final FragmentActivity activity) throws IOException {
+        File tmpDir = FileUtils.getTempDir(app);
+        for (String assetFilePath : assetFilePaths) {
+            String fileName = new File(assetFilePath).getName();
+            File file = new File(tmpDir, System.currentTimeMillis() + "_" + fileName);
+            try (InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets()
+                    .open(assetFilePath, AssetManager.ACCESS_STREAMING)) {
+                String error = ImportHelper.copyFile(app, file, is, true, false);
+                if (error == null) {
+                    GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+                    new FavoritesImportTask(activity, gpxFile, fileName, false).execute().get();
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void importObfAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
 		String error = null;
 		for (String assetFilePath : assetFilePaths) {
 			String name = new File(assetFilePath).getName();
