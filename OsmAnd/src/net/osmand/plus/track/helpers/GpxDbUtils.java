@@ -251,6 +251,7 @@ public class GpxDbUtils {
 			case "int":
 				int value = query.getInt(index);
 				return parameter.getTypeClass() == Boolean.class ? value == 1 : value;
+			case "bigint":
 			case "long":
 				return query.getLong(index);
 		}
