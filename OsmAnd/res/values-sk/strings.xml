@@ -5417,7 +5417,7 @@
     <string name="slope_legend_description">Sklony používajú farby pre vizualizovanie strmosť terénu. Viac o mape Sklonov si môžete prečítať na %1$s.</string>
     <string name="calculate_offline_altitude_descr">Vypočítať nadmorskú výšku offline, na základe údajov terénnej mapy (3D). Rozdiely oproti nadmorskej výške zmeranej zariadením môžu byť použité na korekcie výšky.</string>
     <string name="save_track_external_sensors_data">Údaje</string>
-    <string name="delete_track_folder_dialog_message">Toto vymaže priečinok \"%1$s\" a všetky stopy (%2$s) v ňom.</string>
+    <string name="delete_track_folder_dialog_message">Toto vymaže priečinok \"%1$s\" a všetkých %2$s stôp v ňom.</string>
     <string name="delete_folder_question">Odstrániť priečinok?</string>
     <string name="tracks_empty_folder_description">Tento priečinok ešte nemá žiadne stopy.</string>
     <string name="track_not_recorded">Nezaznamenané</string>
