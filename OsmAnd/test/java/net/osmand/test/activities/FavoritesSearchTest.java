@@ -58,21 +58,11 @@ public class FavoritesSearchTest extends AndroidTest {
         openMapMenu();
         openMyPlaces();
         openSearch();
-        enterSearchQuery("Morgenstelle");
+        enterIntoSearchQueryTextField("Morgenstelle");
         selectFirstSearchResult();
         pressBack();
         pressBack();
-
-        final ViewInteraction editText =
-                onView(
-                        allOf(
-                                withId(R.id.searchEditText), withText("Morgenstelle"),
-                                withParent(
-                                        allOf(
-                                                withId(R.id.search_container),
-                                                withParent(withId(R.id.toolbar)))),
-                                isDisplayed()));
-        editText.check(matches(withText("Morgenstelle")));
+        assertSearchQueryTextFieldDisplays("Morgenstelle");
     }
 
     private static void openMapMenu() {
@@ -117,7 +107,7 @@ public class FavoritesSearchTest extends AndroidTest {
         actionMenuItemView.perform(click());
     }
 
-    private static void enterSearchQuery(final String searchQuery) {
+    private static void enterIntoSearchQueryTextField(final String searchQuery) {
         final ViewInteraction appCompatEditText =
                 onView(
                         allOf(
@@ -144,6 +134,19 @@ public class FavoritesSearchTest extends AndroidTest {
                                                 1)))
                         .atPosition(2);
         linearLayout2.perform(click());
+    }
+
+    private static void assertSearchQueryTextFieldDisplays(final String searchQuery) {
+        final ViewInteraction editText =
+                onView(
+                        allOf(
+                                withId(R.id.searchEditText),
+                                withParent(
+                                        allOf(
+                                                withId(R.id.search_container),
+                                                withParent(withId(R.id.toolbar)))),
+                                isDisplayed()));
+        editText.check(matches(withText(searchQuery)));
     }
 
     private void importFavorite(final File favoriteAssetFile, final FragmentActivity activity) {
