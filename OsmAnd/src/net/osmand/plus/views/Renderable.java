@@ -91,9 +91,9 @@ public class Renderable {
 
         protected GpxGeometryWay geometryWay;
         protected boolean drawArrows;
-        protected Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
-        protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
-        protected Gpx3DLinePositionType trackLinePosition = Gpx3DLinePositionType.TOP;
+        protected Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.getDefault();
+        protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.getDefault();
+        protected Gpx3DLinePositionType trackLinePosition = Gpx3DLinePositionType.getDefault();
         protected float additionalExaggeration;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {

@@ -88,7 +88,11 @@ public class Track3DCard extends BaseCard {
 		for (Gpx3DLinePositionType item : Gpx3DLinePositionType.values()) {
 			trackLineItems.add(ctx.getString(item.getDisplayNameResId()));
 		}
-		initSpinner(ctx, visualizedBy, visualizedByItems, new Track3dSettingSelectListener() {
+		initSpinner(ctx,
+				visualizedBy,
+				visualizedByItems,
+				trackDrawInfo.getTrackVisualizationType().ordinal(),
+				new Track3dSettingSelectListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				visualizedBy.setSelection(position);
@@ -97,7 +101,11 @@ public class Track3DCard extends BaseCard {
 				notifyCardPressed();
 			}
 		});
-		initSpinner(ctx, wallColor, wallColorItems, new Track3dSettingSelectListener() {
+		initSpinner(ctx,
+				wallColor,
+				wallColorItems,
+				trackDrawInfo.getTrackWallColorType().ordinal(),
+				new Track3dSettingSelectListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				wallColor.setSelection(position);
@@ -105,7 +113,11 @@ public class Track3DCard extends BaseCard {
 				notifyCardPressed();
 			}
 		});
-		initSpinner(ctx, trackLine, trackLineItems, new Track3dSettingSelectListener() {
+		initSpinner(ctx,
+				trackLine,
+				trackLineItems,
+				trackDrawInfo.getTrackLinePositionType().ordinal(),
+				new Track3dSettingSelectListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				trackLine.setSelection(position);
@@ -121,11 +133,12 @@ public class Track3DCard extends BaseCard {
 	private void initSpinner(@NonNull Context ctx,
 	                         @NonNull Spinner spinner,
 	                         @NonNull List<String> items,
+							 int initialSelectedPosition,
 	                         @NonNull AdapterView.OnItemSelectedListener onItemSelectedListener) {
 		ArrayAdapter<String> adapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item, items);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
-		spinner.setSelection(1);
+		spinner.setSelection(initialSelectedPosition);
 		spinner.setOnItemSelectedListener(onItemSelectedListener);
 	}
 
