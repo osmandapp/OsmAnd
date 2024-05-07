@@ -11,7 +11,6 @@ import android.text.Html;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
@@ -20,7 +19,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -41,8 +39,6 @@ public class ShareMenu extends BaseMenuController {
 
 	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
 	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
-	private static final String ZXING_BARCODE_SCANNER_COMPONENT = "com.google.zxing.client.android";
-	private static final String ZXING_BARCODE_SCANNER_ACTIVITY = "com.google.zxing.client.android.ENCODE";
 
 	private LatLon latLon;
 	private String title;
@@ -54,8 +50,7 @@ public class ShareMenu extends BaseMenuController {
 		ADDRESS(R.drawable.ic_action_street_name, R.string.copy_address),
 		NAME(R.drawable.ic_action_copy, R.string.copy_poi_name),
 		COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
-		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo),
-		QR_CODE(R.drawable.ic_action_qrcode, R.string.shared_string_qr_code);
+		GEO(R.drawable.ic_world_globe_dark, R.string.share_geo);
 
 		final int iconResourceId;
 		final int titleResourceId;
@@ -86,7 +81,6 @@ public class ShareMenu extends BaseMenuController {
 		list.add(ShareItem.NAME);
 		list.add(ShareItem.COORDINATES);
 		list.add(ShareItem.GEO);
-		list.add(ShareItem.QR_CODE);
 		return list;
 	}
 
@@ -178,12 +172,6 @@ public class ShareMenu extends BaseMenuController {
 					AndroidUtils.startActivityIfSafe(mapActivity, mapIntent);
 				}
 				break;
-			case QR_CODE:
-				Bundle bundle = new Bundle();
-				bundle.putFloat("LAT", (float) latLon.getLatitude());
-				bundle.putFloat("LONG", (float) latLon.getLongitude());
-				sendQRCode(mapActivity, "LOCATION_TYPE", bundle, null);
-				break;
 		}
 	}
 
@@ -225,37 +213,6 @@ public class ShareMenu extends BaseMenuController {
 		AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 	}
 
-	public static void sendQRCode(Activity activity, String encodeType, Bundle encodeData, String strEncodeData) {
-		Intent intent = new Intent();
-		intent.addCategory(Intent.CATEGORY_DEFAULT);
-		intent.setAction(ZXING_BARCODE_SCANNER_ACTIVITY);
-		intent.putExtra("ENCODE_TYPE", encodeType);
-		if (strEncodeData != null) {
-			intent.putExtra("ENCODE_DATA", strEncodeData);
-		} else {
-			intent.putExtra("ENCODE_DATA", encodeData);
-		}
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-
-		if (!AndroidUtils.startActivityIfSafe(activity, intent)) {
-			if (Version.isMarketEnabled()) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
-				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), (dialog, which) -> {
-					OsmandApplication app = ((OsmandApplication) activity.getApplication());
-					Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, ZXING_BARCODE_SCANNER_COMPONENT));
-					Intent viewIntent = new Intent(Intent.ACTION_VIEW, uri);
-					AndroidUtils.startActivityIfSafe(activity, viewIntent);
-				});
-				builder.setNegativeButton(activity.getString(R.string.shared_string_no), null);
-				builder.show();
-			} else {
-				Toast.makeText(activity, R.string.zxing_barcode_scanner_not_found, Toast.LENGTH_LONG).show();
-			}
-		}
-	}
-
 	public static void copyToClipboardWithToast(@NonNull Context context, @NonNull String text, int duration) {
 		copyToClipboard(context, text, true, duration);
 	}
@@ -271,7 +228,7 @@ public class ShareMenu extends BaseMenuController {
 	 * @return true if text was copied
 	 */
 	private static boolean copyToClipboard(@NonNull Context context, @NonNull String text,
-										   boolean showToast, int duration) {
+	                                       boolean showToast, int duration) {
 		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
 		if (object instanceof ClipboardManager) {
 			ClipboardManager clipboardManager = (ClipboardManager) object;

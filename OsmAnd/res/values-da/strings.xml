@@ -5211,7 +5211,7 @@
     <string name="tracks_empty_folder_description">Denne mappe indeholder endnu ingen spor.</string>
     <string name="delete_folder">Slet mappe</string>
     <string name="show_all_tracks_on_the_map">Vis alle spor på kortet</string>
-    <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle spor (%2$s), den indeholder.</string>
+    <string name="delete_track_folder_dialog_message">Dette vil slette mappen \"%1$s\" og alle %2$s spor, den indeholder.</string>
     <string name="delete_folder_question">Slet mappe\?</string>
     <string name="tracks_empty_folder">Tom mappe</string>
     <string name="track_not_recorded">Ikke optaget</string>
@@ -5489,7 +5489,7 @@
     <string name="smart_folder_saved">Smart-mappe gemt</string>
     <string name="add_smart_folder">Tilføj smart-mappe</string>
     <string name="save_as_smart_folder">Gem som smart-mappe</string>
-    <string name="delete_smart_folder_dialog_message">Dette vil slette \"%1$s\" smart-mappe.</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\".</string>
     <string name="empty_smart_folder_title">Ingen matchende spor</string>
     <string name="empty_smart_folder_description">Matchende spor vises her</string>
     <string name="configure_filter">Konfigurér filter</string>

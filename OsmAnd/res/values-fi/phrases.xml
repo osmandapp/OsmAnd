@@ -1891,4 +1891,11 @@
     <string name="poi_covered_no">Ei katettu</string>
     <string name="poi_telephone_exchange">Puhelinkeskus</string>
     <string name="poi_club_ethnic">Etninen kerho</string>
+    <string name="poi_water_place_access">Vesi paikka pääsy</string>
+    <string name="poi_sms">SMS</string>
+    <string name="poi_faculty_filter">Tiedekunta</string>
+    <string name="poi_access_mofa">Mopo pääsy</string>
+    <string name="poi_access_hgv">Kuorma-auto pääsy</string>
+    <string name="poi_mattress_filter">Patja</string>
+    <string name="poi_observatory_designation">Nimitys</string>
 </resources>

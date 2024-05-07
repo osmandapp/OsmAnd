@@ -5584,8 +5584,8 @@
     <string name="shared_string_changes">Breytingar</string>
     <string name="shared_string_unchanged">Óbreytt</string>
     <string name="map_widget_map_scale">Kvarði korts</string>
-    <string name="routing_attr_avoid_cobblestone_description"></string>
-    <string name="routing_attr_avoid_cobblestone_name"></string>
-    <string name="map_text"></string>
-    <string name="show_debug_info_description"></string>
+    <string name="routing_attr_avoid_cobblestone_description"/>
+    <string name="routing_attr_avoid_cobblestone_name"/>
+    <string name="map_text"/>
+    <string name="show_debug_info_description"/>
 </resources>
