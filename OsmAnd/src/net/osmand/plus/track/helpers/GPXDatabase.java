@@ -92,12 +92,13 @@ public class GPXDatabase {
 				return null;
 			}
 			int version = conn.getVersion();
+			conn.setVersion(DB_VERSION); // not correct version but dangerous for crash loop
 			if (version == 0) {
 				GpxDbUtils.onCreate(conn);
 			} else {
 				GpxDbUtils.onUpgrade(this, conn, version, DB_VERSION);
 			}
-			conn.setVersion(DB_VERSION);
+//			conn.setVersion(DB_VERSION); // correct version but dangerous for crash loop
 		}
 		return conn;
 	}
