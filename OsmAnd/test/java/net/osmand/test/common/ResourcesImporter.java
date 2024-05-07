@@ -57,27 +57,27 @@ public class ResourcesImporter {
 		}
 	}
 
-    public static void importObfAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
-        String error = null;
-        for (String assetFilePath : assetFilePaths) {
-            String name = new File(assetFilePath).getName();
-            InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets()
-                    .open(assetFilePath, AssetManager.ACCESS_STREAMING);
-            boolean unzip = name.endsWith(IndexConstants.ZIP_EXT);
-            String fileName = unzip ? name.replace(IndexConstants.ZIP_EXT, "") : name;
-            File dest = getObfDestFile(app, fileName);
-            error = ImportHelper.copyFile(app, dest, is, true, unzip);
-            if (error != null) {
-                break;
-            }
-        }
-        if (error == null) {
-            app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
-            app.getDownloadThread().updateLoadedFiles();
-        } else {
-            throw new IOException("Map import error: " + error);
-        }
-    }
+	public static void importObfAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
+		String error = null;
+		for (String assetFilePath : assetFilePaths) {
+			String name = new File(assetFilePath).getName();
+			InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets()
+					.open(assetFilePath, AssetManager.ACCESS_STREAMING);
+			boolean unzip = name.endsWith(IndexConstants.ZIP_EXT);
+			String fileName = unzip ? name.replace(IndexConstants.ZIP_EXT, "") : name;
+			File dest = getObfDestFile(app, fileName);
+			error = ImportHelper.copyFile(app, dest, is, true, unzip);
+			if (error != null) {
+				break;
+			}
+		}
+		if (error == null) {
+			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<>());
+			app.getDownloadThread().updateLoadedFiles();
+		} else {
+			throw new IOException("Map import error: " + error);
+		}
+	}
 
     public static void importFavorite(final File favoriteAssetFile, final OsmandApplication app, final FragmentActivity activity) throws IOException {
         executeAndWaitForCompletion(createFavoritesImportTask(favoriteAssetFile, app, activity));
