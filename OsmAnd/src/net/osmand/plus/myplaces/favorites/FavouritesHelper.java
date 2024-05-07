@@ -677,7 +677,7 @@ public class FavouritesHelper {
 			}
 			int res = collator.compare(ot1, ot2);
 			if (res == 0) {
-				res = i1 - i2;
+				res = Integer.compare(i1, i2);
 			}
 			if (res == 0) {
 				res = collator.compare(s1, s2);
