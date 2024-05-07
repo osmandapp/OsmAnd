@@ -37,11 +37,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	private final Map<File, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
 
 	private GpxReaderTask readerTask;
-	private DBTestCallback dbTestCallback;
-
-	public interface DBTestCallback {
-		void onReadItemAttempt(String filePath);
-	}
+	public static long readTrackItemCount = 0;
 
 	public interface GpxDataItemCallback {
 
@@ -218,9 +214,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		}
 		GpxDataItem item = dataItems.get(file);
 		if (GpxDbUtils.isAnalyseNeeded(item) && !isGpxReading(file)) {
-			if(dbTestCallback != null) {
-				dbTestCallback.onReadItemAttempt(file.getPath());
-			}
+			readTrackItemCount++;
 			readGpxItem(file, item, callback);
 		}
 		return item;
@@ -342,9 +336,5 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		} else {
 			readerTask = null;
 		}
-	}
-
-	public void setDbTestCallback(DBTestCallback dbTestCallback) {
-		this.dbTestCallback = dbTestCallback;
 	}
 }

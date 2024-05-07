@@ -65,7 +65,6 @@ import java.util.concurrent.TimeUnit;
 public class AnalysisUpdateCallsTest extends AndroidTest {
 
 	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
-	private Map<String, Integer> readTrackItemCalls = new HashMap<>();
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> mActivityScenarioRule =
@@ -97,10 +96,6 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 	public void test() throws Throwable {
 		skipAppStartDialogs(app);
 		GpxDbHelper dbHelper = app.getGpxDbHelper();
-		dbHelper.setDbTestCallback(filePath -> {
-			Integer readCount = readTrackItemCalls.get(filePath);
-			readTrackItemCalls.put(filePath, readCount == null ? 1 : readCount + 1);
-		});
 		GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 		GpxDataItem testItem = getTestGpxItem(dbHelper);
 		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
@@ -142,8 +137,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 			Runnable checkLeftDistanceTask = () -> {
 				GpxDbHelper dbHelper = app.getGpxDbHelper();
 				GpxDataItem testItem = getTestGpxItem(dbHelper);
-				Integer count = readTrackItemCalls.get(testItem.getFile().getPath());
-				if (count != null && count > 2) {
+				if (GpxDbHelper.readTrackItemCount > 2) {
 					throw new AssertionError("To many updates of analysis");
 				}
 				idle = true;
