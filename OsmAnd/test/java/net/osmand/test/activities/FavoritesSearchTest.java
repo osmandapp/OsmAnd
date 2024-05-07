@@ -31,21 +31,30 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.ResourcesImporter;
 
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.io.File;
 import java.io.IOException;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FavoritesSearchTest extends AndroidTest {
+
+    @Test
+    public void assertIssue19242IsFixed_a_prepare() {
+        try (final ActivityScenario<MapActivity> scenario = ActivityScenario.launch(MapActivity.class)) {
+            scenario.onActivity(activity -> importFavorite(new File("favorites.gpx"), activity));
+        }
+    }
 
     // assert that https://github.com/osmandapp/OsmAnd/issues/19242 is fixed
     @Test
-    public void assertIssue19242IsFixed() {
-        final ActivityScenario<MapActivity> scenario = ActivityScenario.launch(MapActivity.class);
-        scenario.onActivity(this::importFavorites);
+    public void assertIssue19242IsFixed_b() {
+        ActivityScenario.launch(MapActivity.class);
         final ViewInteraction appCompatImageButton =
                 onView(
                         allOf(
@@ -123,9 +132,9 @@ public class FavoritesSearchTest extends AndroidTest {
         editText.check(matches(withText("Morgenstelle")));
     }
 
-    private void importFavorites(final FragmentActivity activity) {
+    private void importFavorite(final File favoriteAssetFile, final FragmentActivity activity) {
         try {
-            ResourcesImporter.importFavorite(new File("favorites.gpx"), app, activity);
+            ResourcesImporter.importFavorite(favoriteAssetFile, app, activity);
         } catch (final IOException e) {
             throw new RuntimeException(e);
         }

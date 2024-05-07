@@ -1,7 +1,6 @@
 package net.osmand.test.common;
 
 import android.content.res.AssetManager;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -103,14 +102,14 @@ public class ResourcesImporter {
 
     private static void copy(final OsmandApplication app, final File srcAssetFile, final File dst) throws IOException {
         try (final InputStream is = InstrumentationRegistry.getInstrumentation().getContext().getAssets().open(srcAssetFile.getName(), AssetManager.ACCESS_STREAMING)) {
-            final boolean success = ImportHelper.copyFile(app, dst, is, true, false) != null;
+            final boolean success = ImportHelper.copyFile(app, dst, is, true, false) == null;
             if (!success) {
                 throw new IOException();
             }
         }
     }
 
-    private static void executeAndWaitForCompletion(final AsyncTask<?, ?, ?> favoritesImportTask) {
+    private static void executeAndWaitForCompletion(final FavoritesImportTask favoritesImportTask) {
         try {
             favoritesImportTask.execute().get();
         } catch (ExecutionException | InterruptedException e) {
