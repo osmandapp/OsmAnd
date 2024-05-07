@@ -414,7 +414,9 @@ public class MapPoiTypes {
 						}
 						categoriesList.add(lastCategory);
 					} else if (name.equals("poi_filter")) {
-						PoiFilter tp = new PoiFilter(this, lastCategory, parser.getAttributeValue("", "name"));
+						String keyName = parser.getAttributeValue("", "name");
+						String iconName = parser.getAttributeValue("", "icon");
+						PoiFilter tp = new PoiFilter(this, lastCategory, keyName, iconName);
 						tp.setTopVisible(Boolean.parseBoolean(parser.getAttributeValue("", "top")));
 						lastFilter = tp;
 						lastFilterPoiAdditionalsCategories.addAll(lastCategoryPoiAdditionalsCategories);
