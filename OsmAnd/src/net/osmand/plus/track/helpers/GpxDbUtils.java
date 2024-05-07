@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import android.database.sqlite.SQLiteException;
+
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
 import static net.osmand.gpx.GpxParameter.*;
@@ -214,9 +216,11 @@ public class GpxDbUtils {
 				addGpxTableColumn(db, parameter);
 			}
 		}
-		if (oldVersion < 19) {
-			db.execSQL(getCreateGpxDirTableQuery());
-		}
+
+		// we can always create table it has create table if not exists
+//		if (oldVersion < 24) {
+		db.execSQL(getCreateGpxDirTableQuery());
+//		}
 		SQLiteCursor gpxDirCursor = db.rawQuery("select * from " + GPX_DIR_TABLE_NAME + " limit 0", null);
 		for (GpxParameter parameter : GpxParameter.getGpxDirParameters()) {
 			if (gpxDirCursor.getColumnIndex(parameter.getColumnName()) == -1) {
@@ -237,7 +241,12 @@ public class GpxDbUtils {
 
 	private static void addTableColumn(@NonNull SQLiteConnection db, @NonNull String tableName,
 	                                   @NonNull String columnName, @NonNull String columnType) {
-		db.execSQL("ALTER TABLE " + tableName + " ADD " + columnName + " " + columnType);
+		try {
+			db.execSQL("ALTER TABLE " + tableName + " ADD " + columnName + " " + columnType);
+		} catch(SQLiteException e) {
+			throw new IllegalStateException("Failed adding column " + columnName + " to " + tableName + " type " + columnType,
+					e);
+		}
 	}
 
 	public static boolean isAnalyseNeeded(@Nullable GpxDataItem item) {
@@ -247,7 +256,6 @@ public class GpxDbUtils {
 					|| item.getAnalysis().getLatLonStart() == null && item.getAnalysis().getPoints() > 0
 					|| (long) item.requireParameter(FILE_LAST_MODIFIED_TIME) != item.getFile().lastModified()
 					|| (long) item.requireParameter(FILE_CREATION_TIME) <= 0
-					//|| (long) item.requireParameter(EXPECTED_ROUTE_DURATION) < 0
 					|| createDataVersion(ANALYSIS_VERSION) > (int) item.requireParameter(DATA_VERSION);
 		}
 		return true;
