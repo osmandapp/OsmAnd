@@ -20,9 +20,9 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.Deque;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
@@ -69,6 +69,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 
 		List<TrackItem> progress = new ArrayList<>();
 		loadGPXFolder(folder, progress);
+
 		if (!progress.isEmpty()) {
 			publishProgress(progress.toArray(new TrackItem[0]));
 		}
@@ -104,11 +105,10 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					trackItems.add(item);
 
 					progress.add(item);
-					// Screen refresh issue: Publishing interim progress here causes once published tracks stats never updated on screen
-					//if (progress.size() > 7) {
-					//	publishProgress(progress.toArray(new TrackItem[0]));
-					//	progress.clear();
-					//}
+					if (progress.size() > 7) {
+						publishProgress(progress.toArray(new TrackItem[0]));
+						progress.clear();
+					}
 					tracksCounter++;
 					if (tracksCounter % LOG_BATCH_SIZE == 0) {
 						long endTime = System.currentTimeMillis();
@@ -122,6 +122,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			folder.resetCashedData();
 			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
+		rootFolder.resetCashedData();
 	}
 
 	@Nullable

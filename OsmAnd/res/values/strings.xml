@@ -237,7 +237,7 @@
     <string name="discard_filter_changes_prompt">Reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
     <string name="edit_filter">Edit filter</string>
-    <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
+    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\".</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>
     <string name="add_smart_folder">Add smart folder</string>
@@ -472,7 +472,7 @@
     <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
     <string name="external_sensors_not_found">Sensors not found</string>
     <string name="external_sensors_source_of_data">Source of data</string>
-    <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
+    <string name="delete_track_folder_dialog_message">This will delete folder \"%1$s\" and all %2$s tracks contained.</string>
     <string name="delete_folder_question">Delete folder?</string>
     <string name="delete_folder">Delete folder</string>
     <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
