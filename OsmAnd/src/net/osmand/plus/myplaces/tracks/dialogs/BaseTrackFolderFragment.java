@@ -390,7 +390,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			tabsSortModes.put(folder.getDirName(), oldTabsSortModes.get(folder.getDirName()));
 		}
 		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName(), oldTabsSortModes.get(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName()));
+			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName(),
+					  oldTabsSortModes.get(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName()));
 		}
 		settings.saveTabsSortModes(tabsSortModes);
 	}
