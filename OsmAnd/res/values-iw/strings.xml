@@ -4896,7 +4896,7 @@
     <string name="shared_string_included">נכלל</string>
     <string name="feature_available_as_part_of_plan">%1$s זמין כחלק מהתוכנית %2$s</string>
     <string name="write_data_from_sensor_to_track">לכתוב נתונים מחיישנים חיצוניים ל־GPX בעת הקלטת טיול.</string>
-    <string name="delete_track_folder_dialog_message">פעולה זו תמחק את התיקייה „%1$s” ואת כל המסלולים (%2$s) שבה.</string>
+    <string name="delete_track_folder_dialog_message">הפעולה הזאת תמחק את התיקייה „%1$s” ואת כל %2$s המסלולים שבה.</string>
     <string name="delete_folder_question">למחוק את התיקייה\?</string>
     <string name="tracks_empty_folder_description">אין עדיין מסלולים בתיקייה הזאת.</string>
     <string name="ant_plus_pair_bluetooth_prompt">אפשר לצמד חיישני Bluetooth LE ו־ANT+‎ עם OsmAnd.</string>
