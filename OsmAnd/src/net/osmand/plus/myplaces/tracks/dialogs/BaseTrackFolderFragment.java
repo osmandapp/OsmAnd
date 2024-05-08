@@ -3,6 +3,7 @@ package net.osmand.plus.myplaces.tracks.dialogs;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
+import static net.osmand.plus.configmap.tracks.TrackTab.SMART_FOLDER_TAB_NAME_PREFIX;
 import static net.osmand.plus.configmap.tracks.TrackTabType.ALL;
 import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
 import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
@@ -387,6 +388,9 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		tabsSortModes.put(rootFolder.getDirName(), oldTabsSortModes.get(rootFolder.getDirName()));
 		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
 			tabsSortModes.put(folder.getDirName(), oldTabsSortModes.get(folder.getDirName()));
+		}
+		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
+			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName(), oldTabsSortModes.get(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName()));
 		}
 		settings.saveTabsSortModes(tabsSortModes);
 	}
