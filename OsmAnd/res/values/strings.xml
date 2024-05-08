@@ -595,7 +595,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="metric_lbs">lbs</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
-    <string name="sort_duration_ascending">Shorter duration first</string>
+    <string name="sort_duration_ascending">Shortest duration first</string>
     <string name="sort_duration_descending">Longest duration first</string>
     <string name="sort_distance_ascending">Shortest distance first</string>
     <string name="sort_distance_descending">Longest distance first</string>
