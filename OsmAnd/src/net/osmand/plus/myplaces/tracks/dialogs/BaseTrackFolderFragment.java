@@ -348,6 +348,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		if (sortSubFolders) {
+			removeSurplusTabsSortModes();
 			sortSubFolder(sortMode);
 		} else {
 			Map<String, String> tabsSortModes = settings.getTrackSortModes();
@@ -363,7 +364,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	private void sortSubFolder(TracksSortMode sortMode) {
-		removeSurplusTabsSortModes();
 		OsmandSettings settings = app.getSettings();
 		Map<String, String> tabsSortModes = settings.getTrackSortModes();
 		sortFolders(selectedFolder, tabsSortModes, sortMode);
