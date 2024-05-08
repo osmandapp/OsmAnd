@@ -384,9 +384,11 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		
 		tabsSortModes.put(TrackTabType.ON_MAP.name(), oldTabsSortModes.get(TrackTabType.ON_MAP.name()));
 		tabsSortModes.put(TrackTabType.ALL.name(), oldTabsSortModes.get(TrackTabType.ALL.name()));
+		tabsSortModes.put(rootFolder.getDirName(), oldTabsSortModes.get(rootFolder.getDirName()));
 		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
 			tabsSortModes.put(folder.getDirName(), oldTabsSortModes.get(folder.getDirName()));
 		}
+		settings.saveTabsSortModes(tabsSortModes);
 	}
 
 	@Override
