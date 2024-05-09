@@ -300,9 +300,9 @@ public class TransportStopController extends MenuController {
 	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
-		List<TransportStop> amenityStops = null;
+		List<TransportStop> amenityStops = new ArrayList<>();
 		if ("subway_entrance".equals(amenity.getSubType())) {
-			amenityStops = findSubwayStopsForSubwayExit(transportStops, amenity);
+			amenityStops = findSubwayStopsForAmenityExit(transportStops, amenity.getLocation());
 		}
 		LatLon amenityLocation = amenity.getLocation();
 		for (TransportStop stop : transportStops) {
@@ -314,8 +314,9 @@ public class TransportStopController extends MenuController {
 				stopAddedAsLocal = true;
 			} else {
 				for (TransportStopExit exit : stop.getExits()) {
-					if (MapUtils.getDistance(exit.getLocation(), amenityLocation) < ROUNDING_ERROR
-							|| isEqualsToAnyStopExit(exit.getLocation(), amenityStops)) {
+					LatLon exitLocation = exit.getLocation();
+					if (MapUtils.getDistance(exitLocation, amenityLocation) < ROUNDING_ERROR
+							|| hasCommonExit(exitLocation, amenityStops)) {
 						stopAddedAsLocal = true;
 						stopAggregated.addLocalTransportStop(stop);
 						break;
@@ -332,13 +333,10 @@ public class TransportStopController extends MenuController {
 		return stopAggregated;
 	}
 
-	private static boolean isEqualsToAnyStopExit(LatLon exit, List<TransportStop> amenityStops) {
-		if (amenityStops == null) {
-			return false;
-		}
+	private static boolean hasCommonExit(@NonNull LatLon exitLocation, @NonNull List<TransportStop> amenityStops) {
 		for (TransportStop amenityStop : amenityStops) {
 			for (TransportStopExit amenityExit : amenityStop.getExits()) {
-				if (MapUtils.getDistance(amenityExit.getLocation(), exit) < ROUNDING_ERROR) {
+				if (MapUtils.getDistance(amenityExit.getLocation(), exitLocation) < ROUNDING_ERROR) {
 					return true;
 				}
 			}
@@ -346,14 +344,13 @@ public class TransportStopController extends MenuController {
 		return false;
 	}
 
-	private static List<TransportStop> findSubwayStopsForSubwayExit(List<TransportStop> transportStops, Amenity amenity) {
-		List<TransportStop> foundStops = null;
+	@NonNull
+	private static List<TransportStop> findSubwayStopsForAmenityExit(@NonNull List<TransportStop> transportStops,
+	                                                                 @NonNull LatLon amenityExitLocation) {
+		List<TransportStop> foundStops = new ArrayList<>();
 		for (TransportStop stop : transportStops) {
 			for (TransportStopExit exit : stop.getExits()) {
-				if (MapUtils.getDistance(exit.getLocation(), amenity.getLocation()) < ROUNDING_ERROR) {
-					if (foundStops == null) {
-						foundStops = new ArrayList<>();
-					}
+				if (MapUtils.getDistance(exit.getLocation(), amenityExitLocation) < ROUNDING_ERROR) {
 					foundStops.add(stop);
 				}
 			}
