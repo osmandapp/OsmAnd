@@ -5194,7 +5194,7 @@
     <string name="map_3d_mode_description">用兩隻手指觸摸地圖並上下移動以調整地圖傾斜。</string>
     <string name="show_all_tracks_on_the_map">在地圖上顯示所有軌跡</string>
     <string name="delete_folder_question">刪除資料夾？</string>
-    <string name="delete_track_folder_dialog_message">這將會刪除「%1$s」資料夾與其包含的所有軌跡 (%2$s)。</string>
+    <string name="delete_track_folder_dialog_message">這將會刪除資料夾「%1$s」與其包含的全部 %2$s 個軌跡。</string>
     <string name="delete_folder">刪除資料夾</string>
     <string name="rssi_widget_desc">顯示您外部裝置的 RSSI 層級。</string>
     <string name="map_widget_rssi">RSSI</string>
@@ -5475,7 +5475,7 @@
     <string name="empty_name">空名稱</string>
     <string name="edit_filter">編輯篩選條件</string>
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
-    <string name="delete_smart_folder_dialog_message">這將會刪除「%1$s」智慧型資料夾。</string>
+    <string name="delete_smart_folder_dialog_message">這將會移除智慧型資料夾「%1$s」。</string>
     <string name="empty_smart_folder_title">沒有相符的軌跡</string>
     <string name="empty_smart_folder_description">相符的軌跡會出現在此</string>
     <string name="configure_filter">設定篩選條件</string>

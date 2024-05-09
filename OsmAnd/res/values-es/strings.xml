@@ -5210,7 +5210,7 @@
     <string name="track_not_recorded">Sin guardar</string>
     <string name="shared_string_new_track">Nueva pista</string>
     <string name="shared_string_visible_on_map">Visible en el mapa</string>
-    <string name="delete_track_folder_dialog_message">Esto borrará la carpeta \"%1$s\" y todas las pistas (%2$s) incluidas.</string>
+    <string name="delete_track_folder_dialog_message">Esto borrará la carpeta «%1$s» y todas las pistas (%2$s) incluidas.</string>
     <string name="delete_folder_question">¿Borrar la carpeta\?</string>
     <string name="there_are_no_connected_sensors_of_this_type">No hay ningún sensor conectado de este tipo</string>
     <string name="write_data_from_sensor_to_track">Escribe los datos de los sensores externos a GPX durante la grabación del viaje.</string>
@@ -5484,7 +5484,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar el filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>

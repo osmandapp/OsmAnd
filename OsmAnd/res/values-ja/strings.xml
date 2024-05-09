@@ -820,7 +820,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_help">ヘルプ</string>
     <string name="accessibility_mode">アクセシビリティモード</string>
     <string name="accessibility_mode_descr">アクセシビリティ(ユーザー補助)機能を設定します</string>
-    <string name="shared_string_on">On</string>
+    <string name="shared_string_on">有効</string>
     <string name="shared_string_off">OFF</string>
     <string name="accessibility_default">デバイス側のユーザー補助設定に従う</string>
     <string name="backToMenu">メニューに戻る</string>
@@ -5324,4 +5324,12 @@ POIの更新は利用できません</string>
     <string name="help_article_navigation_routing_boat_navigation_name">ボートルーティング</string>
     <string name="see_all_plans">すべてのプランを見る</string>
     <string name="help_article_navigation_routing_bicycle_based_routing_name">自転車ルーティング (MTB)</string>
+    <string name="rendering_attr_showToll_name">料金制限の表示</string>
+    <string name="shared_string_new_track">新規経路</string>
+    <string name="track_not_recorded">記録データ無し</string>
+    <string name="free_favorites_backup_description">OsmAnd Cloudに登録すると、お気に入りと設定を無料でバックアップできます。</string>
+    <string name="free_favorites_backup">お気に入りバックアップ(無料)</string>
+    <string name="relief_3d">3Dレリーフマップ</string>
+    <string name="rendering_attr_showToll_description">道路の料金制限を表示します</string>
+    <string name="relief_3d_description">ご近所や大陸全体のスケールモデルを利用し道案内に役立てて下さい。</string>
 </resources>

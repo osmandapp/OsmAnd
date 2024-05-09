@@ -3334,7 +3334,7 @@
     <string name="poi_surface_clay">Antuka</string>
     <string name="poi_generator_source_biomass">Zdroj energie: biomasa</string>
     <string name="poi_snowmobile_filter">Prístup snežným skútrom</string>
-    <string name="poi_access_bus">Prístup autobusom</string>
+    <string name="poi_access_bus">Prístup autobusom verejnej dopravy</string>
     <string name="poi_access_caravan">Prístup karavanom</string>
     <string name="poi_access_motorhome">Prístup obytným autom</string>
     <string name="poi_access_trailer">Prístup s prívesom</string>
@@ -3418,7 +3418,7 @@
     <string name="poi_psv_yes">Prístup vozidiel verejnej prepravy osôb: áno</string>
     <string name="poi_psv_designated">Prístup vozidiel verejnej prepravy osôb: určený</string>
     <string name="poi_psv_no">Prístup vozidiel verejnej prepravy osôb: nie</string>
-    <string name="poi_bus_no">Prístup autobusov: nie</string>
+    <string name="poi_bus_no">Prístup autobusov verejnej dopravy: nie</string>
     <string name="poi_tourist_bus_yes">Prístup turistických autobusov: áno</string>
     <string name="poi_tourist_bus_designated">Prístup turistických autobusov: určený</string>
     <string name="poi_tourist_bus_no">Prístup turistických autobusov: nie</string>
@@ -4500,4 +4500,5 @@
     <string name="poi_cuisine_fish">Ryby</string>
     <string name="poi_indoor_seating_no">Žiadne vnútorné sedenie</string>
     <string name="poi_wetland_string_bog">Žilnaté vrchovisko</string>
+    <string name="poi_property_management">Správca nehnuteľností/majetku</string>
 </resources>

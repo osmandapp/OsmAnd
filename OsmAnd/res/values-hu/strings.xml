@@ -5205,7 +5205,7 @@
     <string name="track_not_recorded">Nem lett rögzítve</string>
     <string name="shared_string_new_track">Új nyomvonal</string>
     <string name="shared_string_visible_on_map">Látható a térképen</string>
-    <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) %1$s mappát és minden benne tárolt nyomvonalat (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) \"%1$s\" mappát és minden benne tárolt %2$s nyomvonalat.</string>
     <string name="delete_folder_question">Mappa törlése\?</string>
     <string name="delete_folder">Mappa törlése</string>
     <string name="external_sensors_not_found">Nem találhatók érzékelők</string>
@@ -5482,7 +5482,7 @@
     <string name="empty_name">Üres név</string>
     <string name="edit_filter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
-    <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
+    <string name="delete_smart_folder_dialog_message">Ez eltávolítja a következő okosmappát: \"%1$s\".</string>
     <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
     <string name="empty_smart_folder_description">Az egyező nyomvonalak itt jelennek meg</string>
     <string name="configure_filter">Szűrő konfigurálása</string>

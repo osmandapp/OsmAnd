@@ -1,5 +1,7 @@
 package net.osmand.plus.track.helpers;
 
+import android.database.sqlite.SQLiteException;
+
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
 import static net.osmand.gpx.GpxParameter.*;
@@ -25,6 +27,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class GpxDbUtils {
 
@@ -104,127 +108,100 @@ public class GpxDbUtils {
 	}
 
 	protected static void onUpgrade(@NonNull GPXDatabase database, @NonNull SQLiteConnection db, int oldVersion, int newVersion) {
-		if (oldVersion < 2) {
-			addGpxTableColumn(db, COLOR);
+		SQLiteCursor gpxCursor = db.rawQuery("select * from " + GPX_TABLE_NAME + " limit 1", null);
+		Set<String> columnNames = new TreeSet<>();
+		for(String lc : gpxCursor.getColumnNames()){
+			columnNames.add(lc.toLowerCase());
 		}
-		if (oldVersion < 3) {
-			addGpxTableColumn(db, FILE_LAST_MODIFIED_TIME);
-		}
-		if (oldVersion < 4) {
-			addGpxTableColumn(db, SPLIT_TYPE);
-			addGpxTableColumn(db, SPLIT_INTERVAL);
-		}
-		if (oldVersion < 5) {
-			boolean colorColumnExists = false;
-			boolean fileLastModifiedTimeColumnExists = false;
-			boolean splitTypeColumnExists = false;
-			boolean splitIntervalColumnExists = false;
-			SQLiteCursor cursor = db.rawQuery("PRAGMA table_info(" + GPX_TABLE_NAME + ")", null);
-			if (cursor.moveToFirst()) {
-				do {
-					String columnName = cursor.getString(1);
-					if (!colorColumnExists && columnName.equals(COLOR.getColumnName())) {
-						colorColumnExists = true;
-					} else if (!fileLastModifiedTimeColumnExists && columnName.equals(FILE_LAST_MODIFIED_TIME.getColumnName())) {
-						fileLastModifiedTimeColumnExists = true;
-					} else if (!splitTypeColumnExists && columnName.equals(SPLIT_TYPE.getColumnName())) {
-						splitTypeColumnExists = true;
-					} else if (!splitIntervalColumnExists && columnName.equals(SPLIT_INTERVAL.getColumnName())) {
-						splitIntervalColumnExists = true;
-					}
-				} while (cursor.moveToNext());
-			}
-			cursor.close();
-			if (!colorColumnExists) {
-				addGpxTableColumn(db, COLOR);
-			}
-			if (!fileLastModifiedTimeColumnExists) {
-				addGpxTableColumn(db, FILE_LAST_MODIFIED_TIME);
-				for (GpxDataItem item : database.getGpxDataItems()) {
-					item.setParameter(FILE_LAST_MODIFIED_TIME, item.getFile().lastModified());
-					database.updateDataItem(item);
-				}
-			}
-			if (!splitTypeColumnExists) {
-				addGpxTableColumn(db, SPLIT_TYPE);
-			}
-			if (!splitIntervalColumnExists) {
-				addGpxTableColumn(db, SPLIT_INTERVAL);
-			}
-		}
-		if (oldVersion < 6) {
-			addGpxTableColumn(db, API_IMPORTED);
-			db.execSQL("UPDATE " + GPX_TABLE_NAME +
-					" SET " + API_IMPORTED.getColumnName() + " = ? " +
-					"WHERE " + API_IMPORTED.getColumnName() + " IS NULL", new Object[] {0});
-		}
-		if (oldVersion < 7) {
-			addGpxTableColumn(db, WPT_CATEGORY_NAMES);
-		}
-		if (oldVersion < 8) {
-			addGpxTableColumn(db, SHOW_AS_MARKERS);
-			db.execSQL("UPDATE " + GPX_TABLE_NAME +
-					" SET " + SHOW_AS_MARKERS.getColumnName() + " = ? " +
-					"WHERE " + SHOW_AS_MARKERS.getColumnName() + " IS NULL", new Object[] {0});
-		}
-		if (oldVersion < 10) {
-			addGpxTableColumn(db, JOIN_SEGMENTS);
-			db.execSQL("UPDATE " + GPX_TABLE_NAME +
-					" SET " + JOIN_SEGMENTS.getColumnName() + " = ? " +
-					"WHERE " + JOIN_SEGMENTS.getColumnName() + " IS NULL", new Object[] {0});
-		}
-		if (oldVersion < 11) {
-			addGpxTableColumn(db, SHOW_ARROWS);
-			addGpxTableColumn(db, SHOW_START_FINISH);
-			addGpxTableColumn(db, WIDTH);
-			addTableColumn(db, GPX_TABLE_NAME, "gradientSpeedColor", "TEXT");
-			addTableColumn(db, GPX_TABLE_NAME, "gradientAltitudeColor", "TEXT");
-			addTableColumn(db, GPX_TABLE_NAME, "gradientSlopeColor", "TEXT");
-			addGpxTableColumn(db, COLORING_TYPE);
-
-			db.execSQL(GPX_UPDATE_PARAMETERS_START + SHOW_ARROWS.getColumnName() + " = ? " +
-					"WHERE " + SHOW_ARROWS.getColumnName() + " IS NULL", new Object[] {0});
-			db.execSQL(GPX_UPDATE_PARAMETERS_START + SHOW_START_FINISH.getColumnName() + " = ? " +
-					"WHERE " + SHOW_START_FINISH.getColumnName() + " IS NULL", new Object[] {1});
-		}
-		if (oldVersion < 12) {
-			addGpxTableColumn(db, FILE_LAST_UPLOADED_TIME);
-		}
-		if (oldVersion < 13) {
-			addGpxTableColumn(db, SMOOTHING_THRESHOLD);
-			addGpxTableColumn(db, MIN_FILTER_SPEED);
-			addGpxTableColumn(db, MAX_FILTER_SPEED);
-			addGpxTableColumn(db, MIN_FILTER_ALTITUDE);
-			addGpxTableColumn(db, MAX_FILTER_ALTITUDE);
-			addGpxTableColumn(db, MAX_FILTER_HDOP);
-		}
-		if (oldVersion < 14) {
-			addGpxTableColumn(db, START_LAT);
-			addGpxTableColumn(db, START_LON);
-		}
-		if (oldVersion < 15) {
-			addGpxTableColumn(db, NEAREST_CITY_NAME);
-		}
-		if (oldVersion < 16) {
-			addGpxTableColumn(db, FILE_CREATION_TIME);
-		}
-		SQLiteCursor gpxCursor = db.rawQuery("select * from " + GPX_TABLE_NAME + " limit 0", null);
+		// temporary code to test failure
+		addIfMissingGpxTableColumn(columnNames, db, FILE_NAME);
+		addIfMissingGpxTableColumn(columnNames, db, FILE_DIR);
+		addIfMissingGpxTableColumn(columnNames, db, TOTAL_DISTANCE);
+		addIfMissingGpxTableColumn(columnNames, db, TOTAL_TRACKS);
+		addIfMissingGpxTableColumn(columnNames, db, START_TIME);
+		addIfMissingGpxTableColumn(columnNames, db, END_TIME);
+		addIfMissingGpxTableColumn(columnNames, db, TIME_SPAN);
+		addIfMissingGpxTableColumn(columnNames, db, TIME_MOVING);
+		addIfMissingGpxTableColumn(columnNames, db, TOTAL_DISTANCE_MOVING);
+		addIfMissingGpxTableColumn(columnNames, db, DIFF_ELEVATION_UP);
+		addIfMissingGpxTableColumn(columnNames, db, DIFF_ELEVATION_DOWN);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_ELEVATION);
+		addIfMissingGpxTableColumn(columnNames, db, MIN_ELEVATION);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_ELEVATION);
+		addIfMissingGpxTableColumn(columnNames, db, MIN_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, POINTS);
+		addIfMissingGpxTableColumn(columnNames, db, WPT_POINTS);
+		addIfMissingGpxTableColumn(columnNames, db, COLOR);
+		addIfMissingGpxTableColumn(columnNames, db, FILE_LAST_MODIFIED_TIME);
+		addIfMissingGpxTableColumn(columnNames, db, FILE_LAST_UPLOADED_TIME);
+		addIfMissingGpxTableColumn(columnNames, db, FILE_CREATION_TIME);
+		addIfMissingGpxTableColumn(columnNames, db, SPLIT_TYPE);
+		addIfMissingGpxTableColumn(columnNames, db, SPLIT_INTERVAL);
+		addIfMissingGpxTableColumn(columnNames, db, API_IMPORTED);
+		addIfMissingGpxTableColumn(columnNames, db, WPT_CATEGORY_NAMES);
+		addIfMissingGpxTableColumn(columnNames, db, SHOW_AS_MARKERS);
+		addIfMissingGpxTableColumn(columnNames, db, JOIN_SEGMENTS);
+		addIfMissingGpxTableColumn(columnNames, db, SHOW_ARROWS);
+		addIfMissingGpxTableColumn(columnNames, db, SHOW_START_FINISH);
+		addIfMissingGpxTableColumn(columnNames, db, TRACK_VISUALIZATION_TYPE);
+		addIfMissingGpxTableColumn(columnNames, db, TRACK_3D_WALL_COLORING_TYPE);
+		addIfMissingGpxTableColumn(columnNames, db, TRACK_3D_LINE_POSITION_TYPE);
+		addIfMissingGpxTableColumn(columnNames, db, ADDITIONAL_EXAGGERATION);
+		addIfMissingGpxTableColumn(columnNames, db, WIDTH);
+		addIfMissingGpxTableColumn(columnNames, db, COLORING_TYPE);
+		addIfMissingGpxTableColumn(columnNames, db, SMOOTHING_THRESHOLD);
+		addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_ALTITUDE);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_ALTITUDE);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_HDOP);
+		addIfMissingGpxTableColumn(columnNames, db, START_LAT);
+		addIfMissingGpxTableColumn(columnNames, db, START_LON);
+		addIfMissingGpxTableColumn(columnNames, db, NEAREST_CITY_NAME);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_TEMPERATURE);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_TEMPERATURE);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_SPEED);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_POWER);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_POWER);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_CADENCE);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_CADENCE);
+		addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_HEART_RATE);
+		addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_HEART_RATE);
+		addIfMissingGpxTableColumn(columnNames, db, DATA_VERSION);
+		// temporary code to test failure
 		for (GpxParameter parameter : GpxParameter.values()) {
-			if (gpxCursor.getColumnIndex(parameter.getColumnName()) == -1) {
+			if (!columnNames.contains(parameter.getColumnName().toLowerCase())) {
 				addGpxTableColumn(db, parameter);
 			}
 		}
-		if (oldVersion < 19) {
-			db.execSQL(getCreateGpxDirTableQuery());
+
+		// we can always create table it has create table if not exists
+//		if (oldVersion < 24) {
+		db.execSQL(getCreateGpxDirTableQuery());
+//		}
+		SQLiteCursor gpxDirCursor = db.rawQuery("select * from " + GPX_DIR_TABLE_NAME + " limit 1", null);
+		columnNames = new TreeSet<>();
+		for(String lc : gpxDirCursor.getColumnNames()){
+			columnNames.add(lc.toLowerCase());
 		}
-		SQLiteCursor gpxDirCursor = db.rawQuery("select * from " + GPX_DIR_TABLE_NAME + " limit 0", null);
 		for (GpxParameter parameter : GpxParameter.getGpxDirParameters()) {
-			if (gpxDirCursor.getColumnIndex(parameter.getColumnName()) == -1) {
+			if (!columnNames.contains(parameter.getColumnName().toLowerCase())) {
 				addGpxDirTableColumn(db, parameter);
 			}
 		}
 		db.execSQL(getGpxIndexQuery());
 		db.execSQL(getGpxDirIndexQuery());
+	}
+
+	private static void addIfMissingGpxTableColumn(Set<String> columnNamesLC, SQLiteConnection db, GpxParameter p) {
+		if (columnNamesLC.contains(p.getColumnName().toLowerCase())) {
+			return;
+		}
+		columnNamesLC.add(p.getColumnName().toLowerCase());
+		addGpxTableColumn(db, p);
 	}
 
 	private static void addGpxTableColumn(@NonNull SQLiteConnection db, @NonNull GpxParameter parameter) {
@@ -247,7 +224,6 @@ public class GpxDbUtils {
 					|| item.getAnalysis().getLatLonStart() == null && item.getAnalysis().getPoints() > 0
 					|| (long) item.requireParameter(FILE_LAST_MODIFIED_TIME) != item.getFile().lastModified()
 					|| (long) item.requireParameter(FILE_CREATION_TIME) <= 0
-					//|| (long) item.requireParameter(EXPECTED_ROUTE_DURATION) < 0
 					|| createDataVersion(ANALYSIS_VERSION) > (int) item.requireParameter(DATA_VERSION);
 		}
 		return true;
@@ -342,6 +318,7 @@ public class GpxDbUtils {
 			case "int":
 				int value = query.getInt(index);
 				return parameter.getTypeClass() == Boolean.class ? value == 1 : value;
+			case "bigint":
 			case "long":
 				return query.getLong(index);
 		}
