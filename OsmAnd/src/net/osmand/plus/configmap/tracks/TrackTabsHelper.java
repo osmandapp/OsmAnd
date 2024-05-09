@@ -309,7 +309,7 @@ public class TrackTabsHelper {
 	}
 
 	public void saveTabsSortModes() {
-		Map<String, String> tabsSortModes = new HashMap<>();
+		Map<String, String> tabsSortModes = settings.getTrackSortModes();
 		for (TrackTab trackTab : trackTabs.values()) {
 			String name = trackTab.getTypeName();
 			String sortType = trackTab.getSortMode().name();
