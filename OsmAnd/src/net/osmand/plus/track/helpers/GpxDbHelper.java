@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.stream.Collectors;
 
 public class GpxDbHelper implements GpxDbReaderCallback {
 	private static final Log LOG = PlatformUtil.getLog(GpxDbHelper.class);
@@ -59,25 +60,19 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	public void loadGpxItems() {
 		long start = System.currentTimeMillis();
-		long batchTime = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
 
-		int counter = 0;
-		for (GpxDataItem item : items) {
+		Map<File, Boolean> fileExistenceMap = items.stream().collect(Collectors.toMap(GpxDataItem::getFile, item -> item.getFile().exists()));
+
+		items.forEach(item -> {
 			File file = item.getFile();
-			if (file.exists()) {
-				putToCache(item);
+			if (Boolean.TRUE.equals(fileExistenceMap.get(file))) {
+				dataItems.put(file, item);
 			} else {
 				remove(file);
 			}
-			counter++;
-			if (counter % 100 == 0) {
-				long endTime = System.currentTimeMillis();
-				LOG.info("Loading tracks batch. took " + (endTime - batchTime) + "ms");
-				batchTime = endTime;
-			}
-		}
-		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms items count " + items.size());
+		});
+		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms, " + items.size() +  " items");
 	}
 
 	public void loadGpxDirItems() {
