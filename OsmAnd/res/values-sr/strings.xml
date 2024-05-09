@@ -1281,7 +1281,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Брдовито</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Мање брдовито</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Равно</string>
-    <string name="routing_attr_driving_style_speed_name">Краће путање</string>
+    <string name="routing_attr_driving_style_speed_name">Краће руте</string>
     <string name="routing_attr_driving_style_balance_name">Уравнотежено</string>
     <string name="routing_attr_driving_style_safety_name">Радије иди споредним</string>
     <string name="relief_smoothness_factor_descr">Омиљено тло: равно или брдовито.</string>
@@ -5201,7 +5201,7 @@
     <string name="ant_plus_bluetooth_off">Блутут је искључен</string>
     <string name="ant_plus_bluetooth_off_description">Укључите претрагу Блутута и упарите пријемнике.</string>
     <string name="delete_folder">Избриши фолдер</string>
-    <string name="delete_track_folder_dialog_message">Ово ће избрисати фасциклу „%1$s“ и све садржане стазе (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Ово ће избрисати фолдер „%1$s“ и све %2$s садржане стазе.</string>
     <string name="track_not_recorded">Није снимљено</string>
     <string name="shared_string_new_track">Нови траг</string>
     <string name="map_2d_mode_action">Површински начин приказа (2д)</string>
@@ -5559,7 +5559,7 @@
     <string name="widget_available_ram">Доступан РАМ</string>
     <string name="filter_by_name">Филтер по имену</string>
     <string name="special_routing_cpp">Специјални тип рутирања</string>
-    <string name="delete_smart_folder_dialog_message">Ово ће избрисати \"%1$s\" паметан фолдер.</string>
+    <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметан фолдер \"%1$s\".</string>
     <string name="discard_filter_changes_prompt">Ресетовати све филтере?</string>
     <string name="empty_name">Празно име</string>
     <string name="calculate_offline_altitude_descr">Израчунавање елевације офлајн, на основу података Теренске мапе (3Д). Разлике у односу на сачувану висину на уређају могу се користити за корекцију елевације.</string>
