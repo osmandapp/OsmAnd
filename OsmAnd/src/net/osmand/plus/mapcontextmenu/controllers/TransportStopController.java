@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.util.MapUtils.ROUNDING_ERROR;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -26,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
 public class TransportStopController extends MenuController {
 
@@ -88,7 +88,7 @@ public class TransportStopController extends MenuController {
 	protected List<TransportStopRoute> getSubTransportStopRoutes(boolean nearby) {
 		return nearby ? routesNearby : routesOnTheSameExit;
 	}
-	
+
 	@Override
 	public boolean needStreetName() {
 		return Algorithms.isEmpty(getNameStr());
@@ -310,18 +310,23 @@ public class TransportStopController extends MenuController {
 	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
+		List<TransportStop> amenityStops = new ArrayList<>();
+		if ("subway_entrance".equals(amenity.getSubType())) {
+			amenityStops = findSubwayStopsForAmenityExit(transportStops, amenity.getLocation());
+		}
 		LatLon amenityLocation = amenity.getLocation();
 		for (TransportStop stop : transportStops) {
 			stop.setTransportStopAggregated(stopAggregated);
-			List<TransportStopExit> stopExits = stop.getExits();
 			boolean stopAddedAsLocal = false;
 			if ("public_transport_station".equals(amenity.getSubType()) && (stop.getName().equals(amenity.getName()) ||
 					stop.getEnName(false).equals(amenity.getEnName(false)))) {
 				stopAggregated.addLocalTransportStop(stop);
 				stopAddedAsLocal = true;
 			} else {
-				for (TransportStopExit exit : stopExits) {
-					if (MapUtils.getDistance(exit.getLocation(), amenityLocation) < ROUNDING_ERROR) {
+				for (TransportStopExit exit : stop.getExits()) {
+					LatLon exitLocation = exit.getLocation();
+					if (MapUtils.getDistance(exitLocation, amenityLocation) < ROUNDING_ERROR
+							|| hasCommonExit(exitLocation, amenityStops)) {
 						stopAddedAsLocal = true;
 						stopAggregated.addLocalTransportStop(stop);
 						break;
@@ -336,6 +341,31 @@ public class TransportStopController extends MenuController {
 		sortTransportStopsExits(amenityLocation, stopAggregated.getLocalTransportStops());
 		sortTransportStopsExits(amenityLocation, stopAggregated.getNearbyTransportStops());
 		return stopAggregated;
+	}
+
+	private static boolean hasCommonExit(@NonNull LatLon exitLocation, @NonNull List<TransportStop> amenityStops) {
+		for (TransportStop amenityStop : amenityStops) {
+			for (TransportStopExit amenityExit : amenityStop.getExits()) {
+				if (MapUtils.getDistance(amenityExit.getLocation(), exitLocation) < ROUNDING_ERROR) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@NonNull
+	private static List<TransportStop> findSubwayStopsForAmenityExit(@NonNull List<TransportStop> transportStops,
+	                                                                 @NonNull LatLon amenityExitLocation) {
+		List<TransportStop> foundStops = new ArrayList<>();
+		for (TransportStop stop : transportStops) {
+			for (TransportStopExit exit : stop.getExits()) {
+				if (MapUtils.getDistance(exit.getLocation(), amenityExitLocation) < ROUNDING_ERROR) {
+					foundStops.add(stop);
+				}
+			}
+		}
+		return foundStops;
 	}
 
 	private static boolean checkSameRoute(List<TransportStopRoute> stopRoutes, TransportRoute route) {
