@@ -102,10 +102,11 @@ public class TransportStopController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		if (transportStop.getAmenity() == null) {
+		Amenity amenity = transportStop.getAmenity();
+		if (amenity == null) {
 			return transportStop.getName(getPreferredMapLang(), isTransliterateNames());
 		} else {
-			return transportStop.getAmenity().getName(getPreferredMapLang(), isTransliterateNames());
+			return amenity.getName(getPreferredMapLang(), isTransliterateNames());
 		}
 	}
 
