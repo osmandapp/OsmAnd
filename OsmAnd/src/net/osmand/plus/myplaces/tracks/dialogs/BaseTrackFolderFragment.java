@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
@@ -88,6 +89,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
 		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
 		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener {
+
+	private static final String TAG = BaseTrackFolderFragment.class.getSimpleName();
 
 	public static final String SELECTED_SMART_FOLDER_KEY = "selected_smart_folder_key";
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
@@ -505,6 +508,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			bundle.putString(PRESELECTED_TRACKS_TAB_NAME, name);
 			bundle.putSerializable(PRESELECTED_TRACKS_TAB_TYPE, type);
 			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAll);
+			bundle.putString(CALLING_FRAGMENT_TAG, TAG);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}

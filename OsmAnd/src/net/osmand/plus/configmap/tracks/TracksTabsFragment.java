@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.GeoidAltitudeCorrection;
-import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -82,6 +81,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 	@Nullable
 	private PreselectedTabParams preselectedTabParams;
+	private String callingFragmentTag = null;
 
 	public boolean getContentStatusBarNightMode() {
 		return nightMode;
@@ -95,10 +95,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		Dialog dialog = new Dialog(activity, themeId) {
 			@Override
 			public void onBackPressed() {
-				if (preselectedTabParams != null && activity instanceof MapActivity) {
-					((MapActivity) activity).launchPrevActivityIntent();
-				}
-				dismiss();
+				TracksTabsFragment.this.onBackPressed();
 			}
 		};
 		Window window = dialog.getWindow();
@@ -148,11 +145,23 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				SearchTrackItemsFragment.showInstance(activity.getSupportFragmentManager(), this, true, isUsedOnMap());
 			}
 		});
-		toolbar.findViewById(R.id.back_button).setOnClickListener(v -> dismiss());
+		ImageButton backButton = toolbar.findViewById(R.id.back_button);
+		backButton.setImageResource(callingFragmentTag == null ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app));
+		backButton.setOnClickListener(v -> onBackPressed());
 
 		int iconColor = ColorUtilities.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 		switchGroup.setImageTintList(ColorStateList.valueOf(iconColor));
 		actionsButton.setImageTintList(ColorStateList.valueOf(iconColor));
+	}
+
+	private void onBackPressed() {
+		if (callingFragmentTag != null || preselectedTabParams != null) {
+			FragmentActivity activity = getActivity();
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).launchPrevActivityIntent();
+			}
+		}
+		dismiss();
 	}
 
 	private void showOptionsMenu(@NonNull View view) {
@@ -457,13 +466,16 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		showInstance(manager, null);
+		showInstance(manager, null, null);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable PreselectedTabParams params) {
+	public static void showInstance(@NonNull FragmentManager manager,
+	                                @Nullable PreselectedTabParams params,
+	                                @Nullable String callingFragmentTag) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			TracksTabsFragment fragment = new TracksTabsFragment();
 			fragment.preselectedTabParams = params;
+			fragment.callingFragmentTag = callingFragmentTag;
 			fragment.setRetainInstance(true);
 			fragment.show(manager, TAG);
 		}
