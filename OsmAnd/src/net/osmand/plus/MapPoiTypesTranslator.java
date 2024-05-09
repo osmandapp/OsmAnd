@@ -39,7 +39,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 				return app.poiTypes.getBasePoiName(baseLangType) + langTranslation;
 			}
 		}
-		return getTranslation(type.getFormattedKeyName());
+		return getTranslation(type.getIconKeyName());
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 		if (baseLangType != null) {
 			return getSynonyms(baseLangType);
 		}
-		return getSynonyms(type.getFormattedKeyName());
+		return getSynonyms(type.getIconKeyName());
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class MapPoiTypesTranslator implements PoiTranslator {
 		if (baseLangType != null) {
 			return getEnTranslation(baseLangType) + " (" + AndroidUtils.getLangTranslation(app, type.getLang()).toLowerCase() + ")";
 		}
-		return getEnTranslation(type.getFormattedKeyName());
+		return getEnTranslation(type.getIconKeyName());
 	}
 
 	@Override

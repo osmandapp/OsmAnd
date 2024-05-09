@@ -93,12 +93,10 @@ public class PoiFilter extends AbstractPoiType {
 	}
 
 	public String getIconKeyName() {
-		return formatKeyName(iconKeyName != null ? iconKeyName : getKeyName());
+		return getIconKeyName(iconKeyName != null ? iconKeyName : getKeyName());
 	}
 
 	public List<PoiType> getPoiTypes() {
 		return poiTypes;
 	}
-
-
 }
