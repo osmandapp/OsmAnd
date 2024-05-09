@@ -223,7 +223,7 @@
     <string name="poi_service_tyres">Gume</string>
     <string name="poi_vehicle_inspection">Pregled vozila</string>
     <string name="poi_car_wash">Auto perionica</string>
-    <string name="poi_fuel">Benzinska pumpa;Pumpa za plin;Stanica za punjenje</string>
+    <string name="poi_fuel">Benzinska stanica;Benzinska pumpa</string>
     <string name="poi_fuel_diesel">Dizel</string>
     <string name="poi_fuel_gtl_diesel">GTL dizel</string>
     <string name="poi_fuel_hgv_diesel">HGV dizel</string>
@@ -246,8 +246,8 @@
     <string name="poi_fuel_biogas">Biogas</string>
     <string name="poi_fuel_lh2">Tečni vodonik</string>
     <string name="poi_fuel_electricity">Struja</string>
-    <string name="poi_aeroway_fuel">Benzinska pumpa za letelice</string>
-    <string name="poi_waterway_fuel">Benzinska pumpa na vodi</string>
+    <string name="poi_aeroway_fuel">Benzinska stanica za letelice</string>
+    <string name="poi_waterway_fuel">Benzinska stanica na vodi</string>
     <string name="poi_compressed_air">Kompresor za gume</string>
     <string name="poi_parking">Parking</string>
     <string name="poi_motorcycle_parking">Parking za motore</string>
@@ -1465,7 +1465,7 @@
     <string name="poi_ship_chandler">Nautička oprema</string>
     <string name="poi_stationery">Kancelarijska oprema</string>
     <string name="poi_trade">Stovarište</string>
-    <string name="poi_variety_store">Mešovita roba</string>
+    <string name="poi_variety_store">Diskontna prodavnica</string>
     <string name="poi_window_blind">Žaluzine, roletne i tende</string>
     <string name="poi_department_store">Robna kuća</string>
     <string name="poi_energy">Energetsko odeljenje</string>
@@ -3154,7 +3154,7 @@
     <string name="poi_pump_style_modern">Stil pumpe: moderan</string>
     <string name="poi_pump_type_gravity">Tip pumpe: gravitaciona</string>
     <string name="poi_pump_type_india_mk_2_3">Tip pumpe: Indija Mk II ili III&gt;</string>
-    <string name="poi_pump_type_beam_pump">Tip pumpe: pumpa snopa</string>
+    <string name="poi_pump_type_beam_pump">Tip pumpe: klipna pumpa</string>
     <string name="poi_ventilation_shaft">Ventilacioni otvor</string>
     <string name="poi_valley_balka">Balka</string>
     <string name="poi_aerodrome_type_private">Privatni</string>
@@ -3837,7 +3837,7 @@
     <string name="poi_gpx_point">GPKS tačka</string>
     <string name="poi_fuel_lng">LNG - plin</string>
     <string name="poi_nuts">Orašasti proizvodi</string>
-    <string name="poi_beehive">Košnica</string>
+    <string name="poi_beehive">Pčelinjak</string>
     <string name="poi_departures_board_timetable">Raspored;Tabla s polascima</string>
     <string name="poi_departures_board_realtime">Realno vreme;Tabla s polascima</string>
     <string name="poi_departures_board_delay">Kašnjenje;Tabla s polascima</string>
@@ -4865,4 +4865,5 @@
     <string name="poi_indoor_seating_yes">Sedenje unutra: Da</string>
     <string name="poi_indoor_seating_no">Nema sedećih mesta</string>
     <string name="poi_indoor_seating_bar_table">Barski sto</string>
+    <string name="poi_property_management">Upravljanje imovinom</string>
 </resources>

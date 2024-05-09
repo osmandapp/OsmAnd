@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
@@ -25,12 +26,14 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -59,6 +62,11 @@ public class TrackDrawInfo {
 	private static final String TRACK_SHOW_ARROWS = "track_show_arrows";
 	private static final String TRACK_SHOW_START_FINISH = "track_show_start_finish";
 
+	private static final String TRACK_VISUALIZATION_TYPE_KEY = "track_visualization_type";
+	private static final String TRACK_WALL_COLOR_TYPE_KEY = "track_wall_color_type";
+	private static final String TRACK_LINE_POSITION_TYPE_KEY = "track_line_position_type";
+	private static final String ADDITIONAL_EXAGGERATION_KEY = "additional_exaggeration";
+
 	private String filePath;
 	private String width;
 	private ColoringType coloringType;
@@ -69,10 +77,10 @@ public class TrackDrawInfo {
 	private boolean joinSegments;
 	private boolean showArrows;
 	private boolean showStartFinish = true;
-	private Gpx3DVisualizationType trackVisualizationType;
-	private Gpx3DWallColorType trackWallColorType;
-	private Gpx3DLinePositionType trackLinePositionType;
-	private int additionalExaggeration;
+	private Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	private float additionalExaggeration = 1f;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -156,14 +164,15 @@ public class TrackDrawInfo {
 		String type = helper.getParameter(item, COLORING_TYPE);
 		coloringType = ColoringType.requireValueOf(TRACK, type);
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(type);
-		splitType = helper.getParameter(item, SPLIT_TYPE);
-		splitInterval = helper.getParameter(item, SPLIT_INTERVAL);
-		joinSegments = helper.getParameter(item, JOIN_SEGMENTS);
-		showArrows = helper.getParameter(item, SHOW_ARROWS);
-		showStartFinish = helper.getParameter(item, SHOW_START_FINISH);
+		splitType = helper.requireParameter(item, SPLIT_TYPE);
+		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
+		joinSegments = helper.requireParameter(item, JOIN_SEGMENTS);
+		showArrows = helper.requireParameter(item, SHOW_ARROWS);
+		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
+		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 	}
 
 	@Nullable
@@ -293,11 +302,11 @@ public class TrackDrawInfo {
 		this.trackLinePositionType = trackLinePositionType;
 	}
 
-	public int getAdditionalExaggeration() {
+	public float getAdditionalExaggeration() {
 		return additionalExaggeration;
 	}
 
-	public void setAdditionalExaggeration(int additionalExaggeration) {
+	public void setAdditionalExaggeration(float additionalExaggeration) {
 		this.additionalExaggeration = additionalExaggeration;
 	}
 
@@ -365,6 +374,10 @@ public class TrackDrawInfo {
 		joinSegments = bundle.getBoolean(TRACK_JOIN_SEGMENTS);
 		showArrows = bundle.getBoolean(TRACK_SHOW_ARROWS);
 		showStartFinish = bundle.getBoolean(TRACK_SHOW_START_FINISH);
+		trackVisualizationType = AndroidUtils.getSerializable(bundle, TRACK_VISUALIZATION_TYPE_KEY, Gpx3DVisualizationType.class);
+		trackWallColorType = AndroidUtils.getSerializable(bundle, TRACK_WALL_COLOR_TYPE_KEY, Gpx3DWallColorType.class);
+		trackLinePositionType = AndroidUtils.getSerializable(bundle, TRACK_LINE_POSITION_TYPE_KEY, Gpx3DLinePositionType.class);
+		additionalExaggeration = bundle.getFloat(ADDITIONAL_EXAGGERATION_KEY);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -378,5 +391,9 @@ public class TrackDrawInfo {
 		bundle.putBoolean(TRACK_SHOW_ARROWS, showArrows);
 		bundle.putBoolean(TRACK_SHOW_START_FINISH, showStartFinish);
 		bundle.putInt(TRACK_APPEARANCE_TYPE, appearanceType);
+		bundle.putSerializable(TRACK_VISUALIZATION_TYPE_KEY, trackVisualizationType);
+		bundle.putSerializable(TRACK_WALL_COLOR_TYPE_KEY, trackWallColorType);
+		bundle.putSerializable(TRACK_LINE_POSITION_TYPE_KEY, trackLinePositionType);
+		bundle.putFloat(ADDITIONAL_EXAGGERATION_KEY, trackVisualizationType == null ? 0 : additionalExaggeration);
 	}
 }

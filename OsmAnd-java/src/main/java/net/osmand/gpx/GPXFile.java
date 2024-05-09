@@ -47,7 +47,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public GPXFile(String title, String lang, String description) {
 		if (description != null) {
-			metadata.getExtensionsToWrite().put("desc", description);
+			metadata.desc = description;
 		}
 		if (lang != null) {
 			metadata.getExtensionsToWrite().put("article_lang", lang);
@@ -778,15 +778,15 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 	}
 
 	public void setAdditionalExaggeration(int additionalExaggeration) {
-		getExtensionsToWrite().put("additional_exaggeration", String.valueOf(additionalExaggeration));
+		getExtensionsToWrite().put("vertical_exaggeration_scale", String.valueOf(additionalExaggeration));
 	}
 
-	public int getAdditionalExaggeration() {
+	public float getAdditionalExaggeration() {
 		String additionalExaggeration = null;
 		if (extensions != null) {
-			additionalExaggeration = extensions.get("additional_exaggeration");
+			additionalExaggeration = extensions.get("vertical_exaggeration_scale");
 		}
-		return Algorithms.parseIntSilently(additionalExaggeration, 1);
+		return Algorithms.parseFloatSilently(additionalExaggeration, 1f);
 	}
 
 	public boolean isShowStartFinishSet() {

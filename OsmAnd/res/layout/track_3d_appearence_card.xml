@@ -73,7 +73,7 @@
 			android:id="@+id/item_label"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/content_padding"
 			android:gravity="center_vertical|start"
 			android:letterSpacing="0.01"
 			android:lineSpacingExtra="5sp"
@@ -158,6 +158,41 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="end" />
+		</LinearLayout>
+
+		<include
+			android:id="@+id/exaggeration_divider"
+			layout="@layout/divider" />
+
+		<LinearLayout
+			android:id="@+id/exaggeration_container"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:paddingVertical="@dimen/content_padding"
+			android:paddingEnd="@dimen/content_padding">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="start"
+				android:letterSpacing="0.01"
+				android:lineSpacingExtra="5sp"
+				android:text="@string/vertical_exaggeration"
+				android:textSize="16sp" />
+
+			<TextView
+				android:id="@+id/exaggeration_value"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="end"
+				android:letterSpacing="0.01"
+				android:lineSpacingExtra="5sp"
+				tools:text="1"
+				android:text="1"
+				android:textSize="16sp" />
+
 		</LinearLayout>
 
 	</LinearLayout>

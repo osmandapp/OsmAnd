@@ -72,8 +72,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -135,9 +135,9 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.SideWidgetInfo;
 import net.osmand.plus.views.mapwidgets.WidgetInfoCreator;
 import net.osmand.plus.views.mapwidgets.WidgetsPanel;
+import net.osmand.plus.views.mapwidgets.widgets.MapWidget;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
@@ -398,13 +398,13 @@ public class OsmandAidlApi {
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 						if (widgetData != null && layer != null) {
 							WidgetsAvailabilityHelper.regWidgetVisibility(widgetData.getId(), (ApplicationMode[]) null);
-							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId);
+							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
+							TextInfoWidget widget = connectedApp.createWidgetControl(mapActivity, widgetId, defaultPanel);
 							connectedApp.getWidgetControls().put(widgetId, widget);
 
 							int iconId = AndroidUtils.getDrawableId(app, widgetData.getMenuIconName());
 							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							String widgetKey = WIDGET_ID_PREFIX + widgetId;
-							WidgetsPanel defaultPanel = widgetData.isRightPanelByDefault() ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT;
 							ApplicationMode appMode = app.getSettings().getApplicationMode();
 
 							WidgetInfoCreator creator = new WidgetInfoCreator(app, appMode);
@@ -413,8 +413,8 @@ public class OsmandAidlApi {
 							MapWidgetRegistry registry = app.getOsmandMap().getMapLayers().getMapWidgetRegistry();
 							registry.registerWidget(widgetInfo);
 
-							((SideWidgetInfo) widgetInfo).setExternalProviderPackage(connectedApp.getPack());
-							layer.recreateControls();
+							widgetInfo.setExternalProviderPackage(connectedApp.getPack());
+							layer.recreateAllControls(mapActivity);
 						}
 					}
 				}
@@ -498,6 +498,32 @@ public class OsmandAidlApi {
 		for (ConnectedApp connectedApp : connectedApps.values()) {
 			connectedApp.createWidgetControls(mapActivity, widgetsInfos, appMode);
 		}
+	}
+
+	public TextInfoWidget askCreateExternalWidget(@NonNull MapActivity mapActivity,
+	                                              @Nullable String widgetId,
+	                                              @Nullable WidgetsPanel panel) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			TextInfoWidget mapWidget = connectedApp.askCreateWidgetControl(mapActivity, widgetId, panel);
+			if (mapWidget != null) {
+				return mapWidget;
+			}
+		}
+		return null;
+	}
+
+
+	public MapWidgetInfo askCreateExternalWidgetInfo(@NonNull WidgetInfoCreator creator,
+	                                                 @NonNull MapWidget widget,
+	                                                 @NonNull String widgetId,
+	                                                 @NonNull WidgetsPanel panel) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			MapWidgetInfo widgetInfo = connectedApp.askCreateWidgetInfo(creator, widget, widgetId, panel);
+			if (widgetInfo != null) {
+				return widgetInfo;
+			}
+		}
+		return null;
 	}
 
 	private void registerAddMapLayerReceiver(@NonNull MapActivity mapActivity) {
@@ -2422,8 +2448,8 @@ public class OsmandAidlApi {
 		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 			ApplicationModeBean bean = mode.toModeBean();
 			AProfile aProfile = new AProfile(bean.stringKey, bean.userProfileName, bean.parent, bean.iconName,
-					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon.name(),
-					bean.navIcon.name(), bean.order);
+					bean.iconColor.name(), bean.routingProfile, bean.routeService.name(), bean.locIcon,
+					bean.navIcon, bean.order);
 			aProfile.setVersion(bean.version);
 
 			profiles.add(aProfile);

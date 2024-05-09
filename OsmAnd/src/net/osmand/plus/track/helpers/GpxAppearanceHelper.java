@@ -125,15 +125,15 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public int getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
+	public float getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getAdditionalExaggeration();
 		} else if (gpxFile.showCurrentTrack) {
 			return settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
 		} else {
-			Integer exaggeration = getAppearanceParameter(new File(gpxFile.path), ADDITIONAL_EXAGGERATION);
+			Double exaggeration = getAppearanceParameter(new File(gpxFile.path), ADDITIONAL_EXAGGERATION);
 			if (exaggeration != null) {
-				return exaggeration;
+				return exaggeration.floatValue();
 			}
 			return gpxFile.getAdditionalExaggeration();
 		}
@@ -162,6 +162,20 @@ public class GpxAppearanceHelper {
 			color = getAppearanceParameter(new File(gpxFile.path), COLOR);
 		}
 		return color != null ? color : gpxFile.getColor(defaultColor);
+	}
+
+	@NonNull
+	@SuppressWarnings("unchecked")
+	public <T> T requireParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
+		Object value = getAppearanceParameter(item, parameter);
+		if (value == null) {
+			value = parameter.getDefaultValue();
+		}
+		if (value == null) {
+			throw new IllegalStateException("Requested parameter '" + parameter + "' is null.");
+		} else {
+			return ((Class<T>) parameter.getTypeClass()).cast(value);
+		}
 	}
 
 	@Nullable

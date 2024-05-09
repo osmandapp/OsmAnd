@@ -3803,7 +3803,7 @@
     <string name="poi_traffic_signals_vibration">Vibration</string>
     <string name="poi_city_block">Karré</string>
     <string name="poi_borough">Bydistrikt</string>
-    <string name="poi_give_box">Donationsboks</string>
+    <string name="poi_give_box">Bytteboks</string>
     <string name="poi_traffic_signals_arrow_no">Pil: nej</string>
     <string name="poi_elevator">Elevator</string>
     <string name="poi_nuts">Nøddebutik</string>

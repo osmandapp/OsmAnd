@@ -42,6 +42,7 @@
 		android:focusable="false" />
 
 	<net.osmand.plus.widgets.TextViewEx
+		android:id="@+id/vertical_exaggeration_description"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginHorizontal="@dimen/content_padding"

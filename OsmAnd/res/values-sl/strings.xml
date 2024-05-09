@@ -1515,7 +1515,7 @@
     <string name="plugin_nautical_descr">Obogati zemljevid z informacijami o plovnih poteh, navigacijskih lučeh, navtičnih nevarnih območjih, območjih z omejitvami jadranja ali privezovanja itd. Za uporabo prenesi ustrezne navtične karte in omogočite slog »Navtična karta« pod »Nastavitvah zemljevida«.
 \n
 \nNadaljnje branje na %1$s.</string>
-    <string name="routing_attr_avoid_borders_description">Izogni se mednarodnim mejnim prehodom</string>
+    <string name="routing_attr_avoid_borders_description">Izogni se prečkanju mednarodnih mejnih prehodov</string>
     <string name="routing_attr_height_name">Višina</string>
     <string name="routing_attr_height_description">Navedi dovoljeno višino vozila na poteh.</string>
     <string name="use_fast_recalculation">Pametno preračunavanje poti</string>
@@ -4556,7 +4556,7 @@
     <string name="snowmobile_render_descr">Za vožnjo z motornimi sanmi z namenskimi cestami in stezami.</string>
     <string name="shared_string_memory_used_gb_desc">Uporabljeno %1$s GB</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Srednja</string>
-    <string name="routing_attr_avoid_4wd_only_name">Izogibaj se cest za štirikolesni pogon</string>
+    <string name="routing_attr_avoid_4wd_only_name">Brez cest za štirikolesni pogon</string>
     <string name="routing_attr_avoid_4wd_only_description">Izogibaj se cest, ki so primerne le za vozila s štirikolesnim pogonom (4WD)</string>
     <string name="monitoring_min_accuracy_descr_remark">Opomba: če bi bil tik pred snemanjem GPS izklopljen, bi lahko imela prva izmerjena točka manjšo natančnost, zato bomo v naši kodi morda želeli počakati kakšno sekundo, preden posnamemo točko (ali zabeležimo najboljšo od 3 zaporednih točk itd. .), vendar se to še ne izvaja.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Prikaži kolesarske poti v omrežju vozlišč</string>
@@ -5333,4 +5333,12 @@
     <string name="hillshade_slope">Senčenje terena, naklon</string>
     <string name="local_indexes_category_terrain">Zemljevidi terena (3D)</string>
     <string name="shared_string_all_tracks">Vse sledi</string>
+    <string name="maps_and_resources">Zemljevidi in drugi viri</string>
+    <string name="allow_display_on_top">Dovoli prikaz na vrhu</string>
+    <string name="allow_display_on_top_description">Omogočanje prikaza besedil na zemljevidu eno nad drugim</string>
+    <string name="show_debug_info">Prikaži informacije za odpravljanje napak</string>
+    <string name="show_debug_info_description">Prikaz grafičnih informacij o umestitvi posameznih besedil na zemljevidu</string>
+    <string name="map_text">Besedila na zemljevidu</string>
+    <string name="routing_attr_avoid_cobblestone_name">Brez tlakovanih cest</string>
+    <string name="routing_attr_avoid_cobblestone_description">Načrtovanje poti brez uporabe tlakovanih cest</string>
 </resources>

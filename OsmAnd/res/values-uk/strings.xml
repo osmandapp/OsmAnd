@@ -1089,7 +1089,7 @@
     <string name="rendering_attr_moreDetailed_name">Докладніше</string>
     <string name="rendering_attr_lessDetailed_name">Спрощено</string>
     <string name="rendering_attr_hideAccess_name">Обмеження доступу</string>
-    <string name="rendering_attr_showAccess_name">Показати обмеження доступу</string>
+    <string name="rendering_attr_showAccess_name">Показати обмеження доступу та плати за проїзд</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показувати тип покриття</string>
     <string name="rendering_attr_showCycleRoutes_name">Веломаршрути</string>
@@ -4480,8 +4480,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_description">Показувати теґи note</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Піктограми на загальних масштабах</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Схематичний вигляд піктограм на загальних масштабах</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Тунелі на водних шляхах</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Не приховати тунелі на водних шляхах</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Підвищення видимості для водних тунелів</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Підвищення видимості для водних тунелів</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Теґи fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
     <string name="rendering_attr_seabedDetail_description">Додаткові текстові відомості про поверхню (surface_qualification) морського дна, комбіновані типи поверхні, категорію та тип рослинності</string>
@@ -5354,7 +5354,7 @@
     <string name="help_article_map_point_layers_on_map_name">Точки на мапі</string>
     <string name="help_article_map_raster_maps_name">Растрові мапи (онлайн / офлайн)</string>
     <string name="help_article_map_vector_maps_name">Векторні мапи (стилі мапи)</string>
-    <string name="help_article_navigation_guidance_name">Вказівки</string>
+    <string name="help_article_navigation_guidance_name">Навігаційні вказівки</string>
     <string name="help_article_navigation_guidance_voice_navigation_name">Голосові вказівки / сповіщення</string>
     <string name="help_article_navigation_routing_brouter_name">BRouter</string>
     <string name="help_article_navigation_routing_car_based_routing_name">Автомаршрути (вантажівки, мотоцикли)</string>
@@ -5624,5 +5624,112 @@
     <string name="shared_string_speedometer">Спідометр</string>
     <string name="custom_buttons">Користувацькі кнопки</string>
     <string name="fix_north_up">Зафіксувати північ угорі</string>
-    <string name="fix_north_up_descr">Не повертати мапу за допомогою жестів в режимі орієнтації мапи \"Північ угорі\"</string>
+    <string name="fix_north_up_descr">Не обертати мапу жестами в режимі орієнтації мапи \"Північ угорі\"</string>
+    <string name="change_default_appearance_confirmation">Змінити усталений вигляд %1$s?</string>
+    <string name="upload_local_versions">Вивантажити локальні версії</string>
+    <string name="download_cloud_versions">Завантажити версії з хмари</string>
+    <string name="use_3d_track_visualization">3D-візуалізація</string>
+    <string name="apply_only_to_new">Застосовувати лише до нових</string>
+    <string name="shared_string_changes">Зміни</string>
+    <string name="change_default_tracks_appearance_confirmation">Застосувати зміни до наявних треків у теці чи лише до нових?</string>
+    <string name="unchanged_parameter_summary">Кожен трек збереже свої параметри.</string>
+    <string name="shared_string_unchanged">Без змін</string>
+    <string name="map_widget_map_scale">Масштаб мапи</string>
+    <string name="max_sensor_speed">Максимальна швидкість датчика</string>
+    <string name="shared_string_scale">масштаб</string>
+    <string name="use_terrain_maps_summary">Використовує карти місцевості для даних про висоту. Геометрія треку залишається незмінною.</string>
+    <string name="use_terrain_maps">Використовувати мапи місцевості</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd може отримувати дані про висоту з найближчих доріг або мап місцевості.</string>
+    <string name="precise">Точно</string>
+    <string name="auto_zoom_discrete">Дискретно</string>
+    <string name="gpx_approximation_cpp">На основі маршрутизації (C++)</string>
+    <string name="gpx_approximation_java">На основі маршрутизації (Java)</string>
+    <string name="sorted_sufolders_toast">Підтеки у \"%1$s\" відсортовано за: \"%2$s\"</string>
+    <string name="use_nearby_roads_summary">Використовує офлайн-мапу для пошуку найближчих доріг та даних про висоту. Може регулювати геометрію колії.</string>
+    <string name="use_nearby_roads">Використовувати найближчі дороги</string>
+    <string name="relief_3d_download_description">Для перегляду Місцевість на мапі потрібні додаткові мапи.</string>
+    <string name="vertical_exaggeration_description">Змінюючи значення масштабу, ви можете підкреслити 3D-рельєф.</string>
+    <string name="vertical_exaggeration">Вертикальне перебільшення</string>
+    <string name="max_sensor_cadence">Максимальна частота обертання педалей на велосипеді</string>
+    <string name="avg_sensor_cadence">Середня частота обертання педалей на велосипеді</string>
+    <string name="lang_ta_in">Тамільська (Індія)</string>
+    <string name="shared_sting_all_colors">Всі кольори</string>
+    <string name="routing_type_a_star_classic">A* класичний</string>
+    <string name="auto_zoom_smooth">Плавно</string>
+    <string name="auto_zoom">Автозум</string>
+    <string name="java_safe">Java (Безпечно)</string>
+    <string name="gpx_approximation">Наближення GPX</string>
+    <string name="routing_type">Тип маршрутизації</string>
+    <string name="avg_sensor_bycicle_power">Середня потужність велосипеда</string>
+    <string name="rendering_attr_padusDisplayMode_name">Режим відображення земель загального користування</string>
+    <string name="routing_type_a_star_2_phase">A* 2-фазний</string>
+    <string name="gpx_approximation_geo_java">На основі геометрії (Java, швидко)</string>
+    <string name="rendering_attr_padusHideBoundaries_description">Приховати межі громадських земель, але залишити зони</string>
+    <string name="shared_string_activity">Активність</string>
+    <string name="shared_string_keywords">Ключові слова</string>
+    <string name="help_article_setup_a_route_name">Встановити маршрутизацію</string>
+    <string name="rendering_attr_padusHideBoundaries_name">Приховати межі громадських земель</string>
+    <string name="sort_subfolders">Сортувати підтеки</string>
+    <string name="rendering_attr_padusDisplayMode_description">За типом доступу або іменем менеджера</string>
+    <string name="rendering_value_access_name">За типом доступу</string>
+    <string name="rendering_value_managerName_name">За іменем менеджера</string>
+    <string name="max_sensor_bycicle_power">Максимальна потужність велосипеда</string>
+    <string name="avg_sensor_speed">Середня швидкість датчика</string>
+    <string name="release_4_8">• Бути готовим до 4.8</string>
+    <string name="shared_string_additional">Додатково</string>
+    <string name="distance_during_navigation_description">Виберіть спосіб показу інформації про відстань у віджетах навігації (відстань до точки, наступного повороту, смуги руху).
+\n
+\nВиберіть \"%1$s\" для точних чисел або \"%2$s\" для зручнішого читання.</string>
+    <string name="distance_during_navigation">Відстань під час навігації</string>
+    <string name="round_up">Округлити</string>
+    <string name="release_4_7">• Новий віджет \"Спідометр\" сумісний з Android Auto
+\n
+\n • Налаштуйте екран карти, додавши кілька кнопок \"Швидкої дії\"
+\n
+\n • Покращена читабельність даних на графіках
+\n
+\n • Додано фільтри за даними датчиків для треків
+\n
+\n • Покращено налаштування зовнішнього вигляду для групи треків
+\n
+\n • Додано підтримку додаткових тегів GPX
+\n
+\n • Налаштування \"Відстані під час навігації\": обирайте між точним та заокругленим значенням
+\n
+\n • Уніфікований інтерфейс для вибору треків
+\n
+\n • Вхід до OpenStreetMap переключено на OAuth 2.0
+\n
+\n</string>
+    <string name="visualized_by">Візуаліовано</string>
+    <string name="track_line">Лінія треку</string>
+    <string name="fixed_height">Фіксована висота</string>
+    <string name="downward_gradient">Спадний градієнт</string>
+    <string name="upward_gradient">Висхідний градієнт</string>
+    <string name="bottom">Внизу</string>
+    <string name="top_and_bottom">Зверху і внизу</string>
+    <string name="title_3d_track">3D-трек</string>
+    <string name="explore_3d_track_description">Досліджуйте трек в інтерактивному 3D! Візуалізуйте висоту, швидкість та багато іншого безпосередньо на мапі.</string>
+    <string name="maps_that_also_be_used">Мапи, які також можна використовувати: %1$s</string>
+    <string name="getting_list_of_required_maps">Отримання списку необхідних мап…</string>
+    <string name="required_maps">Необхідні мапи</string>
+    <string name="missing_maps_description">Деякі офлайн-мапи, необхідні для прокладання цього маршруту, відсутні або неактуальні. Будь ласка, завантажте або оновіть їх.</string>
+    <string name="route_line_use_coloring_speed">Лінія маршруту зафарбована відповідно до швидкості руху.</string>
+    <string name="route_line_use_coloring_altitude">Лінія маршруту зафарбована відповідно до висоти над рівнем моря.</string>
+    <string name="delete_actions_button">Кнопка видалення</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="wall_color">Колір стіни</string>
+    <string name="top">Зверху</string>
+    <string name="required_maps_calculate_online_summary">Список відсутніх мап базується на прямому маршруті. Щоб отримати точний список мап, OsmAnd може попередньо обчислити ваш маршрут онлайн.</string>
+    <string name="missing_maps_header">Зниклі або неактуальні мапи</string>
+    <string name="delete_actions_button_confirmation">Ви впевнені, що хочете видалити \"%1$s\" з усіма доданими діями?</string>
+    <string name="track_vertical_exaggeration_description">Змінюючи значення масштабу, ви можете змінювати висоту 3D-доріжки.</string>
+    <string name="gpx_approximation_geo_cpp">На основі геометрії (C++, швидко)</string>
+    <string name="allow_display_on_top">Дозволити відображення вгорі</string>
+    <string name="allow_display_on_top_description">Дозволити відображати тексти мап один над одним</string>
+    <string name="show_debug_info">Показати інформацію про налагодження</string>
+    <string name="show_debug_info_description">Відображати графічну інформацію про розміщення кожного тексту на карті</string>
+    <string name="map_text">Тексти мап</string>
+    <string name="routing_attr_avoid_cobblestone_name">Уникайте бруківки</string>
+    <string name="routing_attr_avoid_cobblestone_description">Уникайте бруківки</string>
 </resources>

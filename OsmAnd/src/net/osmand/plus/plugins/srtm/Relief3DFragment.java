@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.VerticalExaggerationFragment.getFormattedScaleValue;
+import static net.osmand.plus.configmap.VerticalExaggerationFragment.getFormattedScaleValue;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -19,13 +19,16 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.configmap.VerticalExaggerationFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.UiUtilities;
 
-public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClickListener, DownloadIndexesThread.DownloadEvents {
+public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClickListener, DownloadIndexesThread.DownloadEvents,
+		VerticalExaggerationFragment.ExaggerationChangeListener {
 
 	public static final String TAG = Relief3DFragment.class.getSimpleName();
 
@@ -106,7 +109,10 @@ public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClick
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getDashboard().hideDashboard();
-				VerticalExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager());
+				VerticalExaggerationFragment.showInstance(mapActivity.getSupportFragmentManager(),
+						this,
+						srtmPlugin.getVerticalExaggerationScale(),
+						R.string.vertical_exaggeration_description);
 			}
 		});
 	}
@@ -183,6 +189,25 @@ public class Relief3DFragment extends BaseOsmAndFragment implements View.OnClick
 			fragmentManager.beginTransaction()
 					.replace(R.id.content, new Relief3DFragment(), TAG)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	@Override
+	public void onExaggerationChanged(float exaggeration, boolean isFinished) {
+		srtmPlugin.setVerticalExaggerationScale(exaggeration);
+		refreshMap();
+		if (isFinished) {
+			MapActivity activity = getMapActivity();
+			if (activity != null && !activity.isDestroyed()) {
+				activity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.RELIEF_3D, false);
+			}
+		}
+	}
+
+	protected void refreshMap() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMap();
 		}
 	}
 }

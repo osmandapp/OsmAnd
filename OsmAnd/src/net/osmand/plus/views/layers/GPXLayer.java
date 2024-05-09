@@ -144,7 +144,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private int cachedColor;
 	private float defaultTrackWidth;
 	private final Map<String, Float> cachedTrackWidth = new HashMap<>();
-	private Map<String, Gpx3DVisualizationType> cachedTracksWith3dVisualization = new HashMap<>();
+	private final Map<String, Gpx3DVisualizationType> cachedTracksWith3dVisualization = new HashMap<>();
+	private final Map<String, Gpx3DLinePositionType> cachedTracksWith3dLinePosition = new HashMap<>();
+	private final Map<String, Float> cachedTracksVerticalExaggeration = new HashMap<>();
+	private final Map<String, Integer> cachedTracksColors = new HashMap<>();
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
@@ -191,7 +194,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private OsmandRenderer osmandRenderer;
 
 	//OpenGl
-	private GpxAdditionalIconsProvider additionalIconsProvider;
+	private List<GpxAdditionalIconsProvider> additionalIconsProviders = new ArrayList<>();
 	private int startFinishPointsCountCached;
 	private int splitLabelsCountCached;
 	private int pointCountCached;
@@ -571,10 +574,23 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			int splitLabelsCount = 0;
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				Gpx3DLinePositionType trackLinePosition = getTrackLinePositionType(gpxFile);
+				Gpx3DLinePositionType cachedTrackLinePositionType = cachedTracksWith3dLinePosition.get(gpxFile.path);
 				Gpx3DVisualizationType trackVisualizationType = getTrackVisualizationType(gpxFile);
 				Gpx3DVisualizationType cachedTrackVisualizationType = cachedTracksWith3dVisualization.get(gpxFile.path);
-				if(cachedTrackVisualizationType != trackVisualizationType) {
+				float trackVerticalExaggeration = getTrackExaggeration(gpxFile);
+				Float cachedTrackVerticalExaggeration = cachedTracksVerticalExaggeration.get(gpxFile.path);
+				int trackColor = getTrackColor(gpxFile, cachedColor);
+				if(!Algorithms.objectEquals(trackColor, cachedTracksColors.get(gpxFile.path))) {
+					cachedTracksColors.put(gpxFile.path, trackColor);
+					changed = true;
+				}
+				if (cachedTrackVisualizationType != trackVisualizationType ||
+						cachedTrackVerticalExaggeration == null || trackVerticalExaggeration != cachedTrackVerticalExaggeration ||
+						trackLinePosition != cachedTrackLinePositionType) {
 					cachedTracksWith3dVisualization.put(gpxFile.path, trackVisualizationType);
+					cachedTracksVerticalExaggeration.put(gpxFile.path, trackVerticalExaggeration);
+					cachedTracksWith3dLinePosition.put(gpxFile.path, trackLinePosition);
 					changed = true;
 				}
 				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
@@ -605,9 +621,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			clearSelectedFilesSplits();
 
 			QListFloat startFinishHeights = new QListFloat();
-			QListPointI startFinishPoints = new QListPointI();
-			SplitLabelList splitLabels = new SplitLabelList();
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
+				QListPointI startFinishPoints = new QListPointI();
+				SplitLabelList splitLabels = new SplitLabelList();
+				Gpx3DLinePositionType trackLinePosition = getTrackLinePositionType(selectedGpxFile.getGpxFile());
 				Gpx3DVisualizationType trackVisualizationType = getTrackVisualizationType(selectedGpxFile.getGpxFile());
 				if (isShowStartFinishForTrack(selectedGpxFile.getGpxFile())) {
 					List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
@@ -615,7 +632,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						if (segment.points.size() >= 2) {
 							WptPt start = segment.points.get(0);
 							WptPt finish = segment.points.get(segment.points.size() - 1);
-							if (trackVisualizationType != Gpx3DVisualizationType.NONE) {
+							if (trackVisualizationType != Gpx3DVisualizationType.NONE && trackLinePosition == Gpx3DLinePositionType.TOP) {
 								startFinishHeights.add((float) start.ele);
 								startFinishHeights.add((float) finish.ele);
 							}
@@ -636,22 +653,29 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 							if (ind > 0) {
 								name = name.substring(0, ind);
 							}
+							SplitLabel splitLabel;
 							PointI point31 = new PointI(Utilities.get31TileNumberX(point.lon), Utilities.get31TileNumberY(point.lat));
-							SplitLabel splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179),
-									trackVisualizationType != Gpx3DVisualizationType.NONE ? (float) point.ele : 0);
+							if (trackVisualizationType == Gpx3DVisualizationType.NONE || trackLinePosition != Gpx3DLinePositionType.TOP) {
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179));
+							} else {
+								splitLabel = new SplitLabel(point31, name, NativeUtilities.createColorARGB(color, 179), (float) point.ele);
+							}
 							splitLabels.add(splitLabel);
 						}
 					}
 				}
-			}
-			if (!startFinishPoints.isEmpty() || !splitLabels.isEmpty()) {
-				additionalIconsProvider = new GpxAdditionalIconsProvider(getPointsOrder() - selectedGPXFiles.size() - 101, tileBox.getDensity(),
-						startFinishPoints, splitLabels,
-						NativeUtilities.createSkImageFromBitmap(startPointImage),
-						NativeUtilities.createSkImageFromBitmap(finishPointImage),
-						NativeUtilities.createSkImageFromBitmap(startAndFinishImage),
-						startFinishHeights);
-				mapRenderer.addSymbolsProvider(additionalIconsProvider);
+				if (!startFinishPoints.isEmpty() || !splitLabels.isEmpty()) {
+					float elevationScaleFactor = getTrackExaggeration(selectedGpxFile.getGpxFile());
+					GpxAdditionalIconsProvider additionalIconsProvider = new GpxAdditionalIconsProvider(getPointsOrder() - selectedGPXFiles.size() - 101, tileBox.getDensity(),
+							startFinishPoints, splitLabels,
+							NativeUtilities.createSkImageFromBitmap(startPointImage),
+							NativeUtilities.createSkImageFromBitmap(finishPointImage),
+							NativeUtilities.createSkImageFromBitmap(startAndFinishImage),
+							startFinishHeights,
+							elevationScaleFactor);
+					mapRenderer.addSymbolsProvider(additionalIconsProvider);
+					additionalIconsProviders.add(additionalIconsProvider);
+				}
 			}
 		} else {
 			startFinishPointsCountCached = 0;
@@ -688,9 +712,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void clearSelectedFilesSplits() {
 		MapRendererView mapRenderer = getMapRenderer();
-		if (mapRenderer != null && additionalIconsProvider != null) {
-			mapRenderer.removeSymbolsProvider(additionalIconsProvider);
-			additionalIconsProvider = null;
+		if (mapRenderer != null && !Algorithms.isEmpty(additionalIconsProviders)) {
+			List<GpxAdditionalIconsProvider> oldProviders = additionalIconsProviders;
+			additionalIconsProviders = new ArrayList<>();
+			for (GpxAdditionalIconsProvider provider : oldProviders) {
+				mapRenderer.removeSymbolsProvider(provider);
+			}
 		}
 	}
 
@@ -767,7 +794,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						getTrackVisualizationType(selectedGpxFile.getGpxFile()),
 						getTrackWallColorType(selectedGpxFile.getGpxFile()),
 						getTrackLinePositionType(selectedGpxFile.getGpxFile()),
-						getAdditionalExaggeration(selectedGpxFile.getGpxFile())
+						getTrackExaggeration(selectedGpxFile.getGpxFile())
 				);
 				List<TrkSegment> segments = coloringType.isGradient()
 						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), false)
@@ -1213,7 +1240,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					updated |= renderableSegment.setTrackVisualizationType(getTrackVisualizationType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackWallColorType(getTrackWallColorType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackLineColorType(getTrackLinePositionType(selectedGpxFile.getGpxFile()));
-					updated |= renderableSegment.setAdditionalExaggeration(1/*getAdditionalExaggeration(selectedGpxFile.getGpxFile())*/);
+					updated |= renderableSegment.setAdditionalExaggeration(getTrackExaggeration(selectedGpxFile.getGpxFile()));
 					if (updated || !hasMapRenderer) {
 						float[] intervals = null;
 						PathEffect pathEffect = paint.getPathEffect();
@@ -1298,12 +1325,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return customObjectsDelegate != null || GpxSelectionHelper.isGpxFileSelected(app, gpxFile);
 	}
 
-	private int getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
-		return isGpxFileSelected(gpxFile) ? gpxAppearanceHelper.getAdditionalExaggeration(gpxFile) : 1;
-	}
-
 	private Gpx3DVisualizationType getTrackVisualizationType(@NonNull GPXFile gpxFile) {
-		if(isGpxFileSelected(gpxFile)) {
+		if (isGpxFileSelected(gpxFile)) {
 			return gpxAppearanceHelper.getTrackVisualizationForTrack(gpxFile);
 		} else {
 			return Gpx3DVisualizationType.NONE;
@@ -1311,7 +1334,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private Gpx3DWallColorType getTrackWallColorType(@NonNull GPXFile gpxFile) {
-		if(isGpxFileSelected(gpxFile)) {
+		if (isGpxFileSelected(gpxFile)) {
 			return gpxAppearanceHelper.getTrackWallColorType(gpxFile);
 		} else {
 			return Gpx3DWallColorType.NONE;
@@ -1319,19 +1342,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private Gpx3DLinePositionType getTrackLinePositionType(@NonNull GPXFile gpxFile) {
-		if(isGpxFileSelected(gpxFile)) {
+		if (isGpxFileSelected(gpxFile)) {
 			return gpxAppearanceHelper.getTrackLinePositionType(gpxFile);
 		} else {
 			return Gpx3DLinePositionType.TOP;
 		}
 	}
 
-	private int getTrackExaggeration(@NonNull GPXFile gpxFile) {
-		if(isGpxFileSelected(gpxFile)) {
-			return gpxAppearanceHelper.getAdditionalExaggeration(gpxFile);
-		} else {
-			return 1;
-		}
+	private float getTrackExaggeration(@NonNull GPXFile gpxFile) {
+		return isGpxFileSelected(gpxFile) ? gpxAppearanceHelper.getAdditionalExaggeration(gpxFile) : 1f;
 	}
 
 	private boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {

@@ -143,6 +143,7 @@ public class NativeLibrary {
 		public double lat;
 		public double lon;
 		public double cumDist;
+		public int targetInd;
 		public List<RouteSegmentResult> routeToTarget;
 
 		NativeGpxPointApproximation(GpxPoint gpxPoint) {
@@ -151,11 +152,12 @@ public class NativeLibrary {
 			cumDist = gpxPoint.cumDist;
 		}
 
-		public NativeGpxPointApproximation(int ind, double lat, double lon, double cumDist) {
+		public NativeGpxPointApproximation(int ind, double lat, double lon, double cumDist, int targetInd) {
 			this.ind = ind;
 			this.lat = lat;
 			this.lon = lon;
 			this.cumDist = cumDist;
+			this.targetInd = targetInd;
 			routeToTarget = new ArrayList<>();
 		}
 
@@ -173,6 +175,7 @@ public class NativeLibrary {
 				fixStraightLineRegion();
 			}
 
+			point.targetInd = targetInd;
 			point.routeToTarget = new ArrayList<>(routeToTarget);
 			return point;
 		}
@@ -279,14 +282,14 @@ public class NativeLibrary {
 		}
 	}
 
-	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
+	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints, boolean useGeo) {
 		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		int pointsSize = gpxPoints.size();
 		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[pointsSize];
 		for (int i = 0; i < pointsSize; i++) {
 			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
 		}
-		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions);
+		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions, useGeo);
 		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
 			gCtx.finalPoints.add(point.convertToGpxPoint());
 		}
@@ -300,6 +303,20 @@ public class NativeLibrary {
 
 	private void initRouteRegion(GpxRouteApproximation gCtx, RouteSegmentResult rsr) {
 		RouteRegion region = rsr.getObject().region;
+		if (region == null) {
+			// gCtx.finalPoints is fixed by fixStraightLineRegion
+			// gCtx.result null region(s) should be fixed here
+			RouteRegion reg = new RouteRegion();
+			reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+			RouteDataObject newRdo = new RouteDataObject(reg);
+			RouteDataObject rdo = rsr.getObject();
+			newRdo.pointsX = rdo.pointsX;
+			newRdo.pointsY = rdo.pointsY;
+			newRdo.types = rdo.getTypes();
+			newRdo.id = -1;
+			rsr.setObject(newRdo);
+			return;
+		}
 		BinaryMapIndexReader reader = gCtx.ctx.reverseMap.get(region);
 		if (reader != null) {
 			try {
@@ -328,7 +345,7 @@ public class NativeLibrary {
 	/**/
 	protected static native NativeGpxRouteApproximationResult nativeSearchGpxRoute(RoutingContext c,
 	                                                                               NativeGpxPointApproximation[] gpxPoints,
-	                                                                               RouteRegion[] regions);
+	                                                                               RouteRegion[] regions, boolean useGeo);
 
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
 	                                                                boolean loadObjects);

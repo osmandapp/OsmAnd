@@ -4127,7 +4127,7 @@
     <string name="gpx_no_routes_descr">\"%1$s\" tresna erabil dezakezu ibilbidea fitxategi gisa gordetzeko.</string>
     <string name="safe_settings">Gorde</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Zoom txikitako ikonoen ikuspegi eskematikoa</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelak</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Ubideetako tunelen ikusgarritasuna areagotzea</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Zoom txikitako ikonoak</string>
     <string name="icon_group_education">Hezkuntza</string>
     <string name="location_source_descr">Lehenespenez, Google Play-tik instalatutako OsmAnd-ek %1$s erabiltzen du kokapena zehazteko.
@@ -4162,7 +4162,7 @@
     <string name="rendering_attr_OSMMapperAssistantFixme_description">Konpontzeko eskaera-etiketak (fixme) erakusten ditu</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Ohar etiketak</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Erakutsi ohar etiketak</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Ez ezkutatu ubideetako tunelak</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Areagotu ubideetako tunelen ikusgarritasuna</string>
     <string name="files_with_route_restrictions">Ibilbideen murrizketak dituzten fitxategiak</string>
     <string name="waypoint_template">Bide-puntuen txantiloia</string>
     <string name="always_ask_waypoint_appearance_description">Ekintza hau sakatzean \"Gehitu bide-puntua\" pantaila irekiko da, non haren izena eta itxura alda ditzakezun.</string>
@@ -5474,7 +5474,7 @@
     <string name="press_button_to_link_with_action">Sakatu zure gailuko botoia ekintza honi esleitzeko: %1$s</string>
     <string name="tripltek_promo_description">Doako sarbidea eginbideetara, besteak beste, mapa deskarga mugagabea, 3D erliebea eta abar %1$s hilabetez</string>
     <string name="deletion_error">Errorea ezabatzean</string>
-    <string name="button_already_assigned_to_this_action">Botoi hau ekintza honi esleituta dago jada.</string>
+    <string name="button_already_assigned_to_this_action">Botoia ekintza honi esleituta dago jada.</string>
     <string name="key_event_action_move_right">Mugitu eskuinera</string>
     <string name="shared_string_button">Botoia</string>
     <string name="key_event_action_next_app_profile">Aplikazioaren hurrengo profila</string>
@@ -5582,7 +5582,7 @@
     <string name="searching_matching_tracks">Bilatu bat datozen arrasto guztiak</string>
     <string name="maps_and_resources">Mapa eta baliabideak</string>
     <string name="any_connected_with_device">Konektatutako edozein: %s</string>
-    <string name="sorted_sufolders_toast">\"%1$s\"-ko azpikarpetak honela ordenatu dira: \"%2$s\"</string>
+    <string name="sorted_sufolders_toast">\"%1$s\"-ko azpikarpetak honela daude ordenatuta: \"%2$s\"</string>
     <string name="max_sensor_heartrate">Bihotz-taupadak, altuena</string>
     <string name="max_sensor_cadence">Bizikletaren kadentzia, altuena</string>
     <string name="avg_sensor_heartrate">Bihotz-taupadak, batez beste</string>
@@ -5637,4 +5637,78 @@
     <string name="auto_zoom_smooth">Leuna</string>
     <string name="auto_zoom">Zoom automatikoa</string>
     <string name="gpx_approximation">GPX hurbilketa</string>
+    <string name="fixed_height">Altuera finkoa</string>
+    <string name="visualized_by">Ikusita</string>
+    <string name="wall_color">Hormaren kolorea</string>
+    <string name="track_line">Arrastoaren lerroa</string>
+    <string name="downward_gradient">Beheranzko gradientea</string>
+    <string name="bottom">Behean</string>
+    <string name="top">Gaian</string>
+    <string name="upward_gradient">Goranzko gradientea</string>
+    <string name="top_and_bottom">Goian eta behean</string>
+    <string name="title_3d_track">3D arrastoa</string>
+    <string name="release_4_8">• 4.8rako prest egon</string>
+    <string name="shared_string_scale">Eskala</string>
+    <string name="upload_local_versions">Kargatu tokiko bertsioak</string>
+    <string name="download_cloud_versions">Deskargatu hodeiko bertsioak</string>
+    <string name="precise">Zehatza</string>
+    <string name="fix_north_up">Gaitu Iparralde finkoa gora</string>
+    <string name="fix_north_up_descr">Ez biratu mapa Iparralde gorako maparen orientazioan keinuekin</string>
+    <string name="change_default_appearance_confirmation">%1$s-ren itxura lehenetsia aldatu?</string>
+    <string name="use_3d_track_visualization">3D bistaratzea</string>
+    <string name="auto_zoom_discrete">Diskretua</string>
+    <string name="gpx_approximation_geo_java">Geometrian oinarrituta (Java, azkarra)</string>
+    <string name="distance_during_navigation_description">Aukeratu nola bistaratzen den distantziaren informazioa nabigazio-trepetetan (punturako distantzia, hurrengo bira, erreiak).
+\n
+\nAukeratu “%1$s” zenbaki zehatzetarako, edo “%2$s” errazago irakurtzeko.</string>
+    <string name="explore_3d_track_description">Ikusi arrastoa 3D interaktiboan! Ikusi altuera, abiadura eta gehiago zuzenean mapan.</string>
+    <string name="maps_that_also_be_used">Mapa hauek ere erabiliko dira: %1$s</string>
+    <string name="use_terrain_maps">Erabili lur-mapak</string>
+    <string name="shared_string_osm_id">OSMaren ID</string>
+    <string name="vertical_exaggeration">Gehitze bertikala</string>
+    <string name="distance_during_navigation">Distantzia nabigazioan zehar</string>
+    <string name="delete_actions_button">Ezabatu botoia</string>
+    <string name="getting_list_of_required_maps">Beharrezko mapen zerrenda eskuratzen…</string>
+    <string name="missing_maps_header">Falta diren edo zaharkituak dauden mapak</string>
+    <string name="required_maps_calculate_online_summary">Falta diren mapen zerrenda lerro zuzeneko ibilbidean oinarritzen da. Mapen zerrenda zehatza lortzeko, OsmAndek zure ibilbidea aurrez kalkula dezake linean.</string>
+    <string name="use_terrain_maps_summary">Lurreko mapak erabiltzen ditu kota datuetarako. Pistaren geometria ez da aldatu.</string>
+    <string name="required_maps">Behar diren mapak</string>
+    <string name="missing_maps_description">Ibilbide honetarako beharrezkoak diren lineaz kanpoko mapa batzuk falta dira edo ez daude eguneratuta. Mesedez, deskargatu edo eguneratu mapa hauek.</string>
+    <string name="route_line_use_coloring_speed">Ibilbidearen marra mugimenduaren abiaduraren arabera margotuta dago.</string>
+    <string name="route_line_use_coloring_altitude">Ibilbide-lerroa kotaren altitudearen arabera margotuta dago.</string>
+    <string name="delete_actions_button_confirmation">Ziur \"%1$s\" ezabatu nahi duzula gehitutako ekintza guztiekin?</string>
+    <string name="use_nearby_roads_summary">Lineaz kanpoko mapa erabiltzen du inguruko errepideak eta kota datuak aurkitzeko. Arrastoaren geometria doi dezake.</string>
+    <string name="use_nearby_roads">Erabili gertuko errepideak</string>
+    <string name="retrieve_elevation_data_summary">OsmAndek inguruko errepideetatik edo lur-mapetatik kota-datuak berreskura ditzake.</string>
+    <string name="relief_3d_download_description">Mapa gehigarriak behar dira lurra mapan ikusteko.</string>
+    <string name="vertical_exaggeration_description">Eskalaren balioa aldatuz, 3D erliebea nabarmendu dezakezu.</string>
+    <string name="apply_only_to_new">Aplikatu berriei soilik</string>
+    <string name="change_default_tracks_appearance_confirmation">Aldaketak karpetako arrastoei aplikatu ala berriei soilik?</string>
+    <string name="shared_string_changes">Aldaketak</string>
+    <string name="gpx_approximation_cpp">Bideratzean oinarrituta (C++)</string>
+    <string name="gpx_approximation_java">Bideratzean oinarrituta (Java)</string>
+    <string name="unchanged_parameter_summary">Arrasto bakoitzak bere parametroak mantenduko ditu.</string>
+    <string name="shared_string_unchanged">Aldaketarik gabe</string>
+    <string name="map_widget_map_scale">Maparen eskala</string>
+    <string name="round_up">Borobildu</string>
+    <string name="release_4_7">Android Auto-rekin bateragarria den \"Abiadura-neurgailua\" trepeta berria
+\n
+\n • Konfiguratu maparen pantaila \"Ekintza bizkorra\" botoi batzuk gehituz
+\n
+\n • Datuen irakurgarritasuna hobetu da grafikoetan
+\n
+\n • Sentsoreen datuen arabera iragazkiak gehitu dira arrastoetan
+\n
+\n • Arrasto taldeen itxuraren pertsonalizazioa hobetu da
+\n
+\n • GPX etiketa gehigarrietarako laguntza gehitu da
+\n
+\n • Pertsonalizatu \"Distantzia nabigazioan zehar\": aukeratu zenbaki zehatzak edo biribilduak
+\n
+\n • UI bateratua arrastoa hautatzeko
+\n
+\n • OpenStreetMap-en saioa OAuth 2.0ra aldatu da
+\n
+\n</string>
+    <string name="lang_ta_in">Tamilera (India)</string>
 </resources>

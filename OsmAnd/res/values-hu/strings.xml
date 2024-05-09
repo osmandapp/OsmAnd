@@ -5205,7 +5205,7 @@
     <string name="track_not_recorded">Nem lett rögzítve</string>
     <string name="shared_string_new_track">Új nyomvonal</string>
     <string name="shared_string_visible_on_map">Látható a térképen</string>
-    <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) %1$s mappát és minden benne tárolt nyomvonalat (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Ez törölni fogja a(z) \"%1$s\" mappát és minden benne tárolt %2$s nyomvonalat.</string>
     <string name="delete_folder_question">Mappa törlése\?</string>
     <string name="delete_folder">Mappa törlése</string>
     <string name="external_sensors_not_found">Nem találhatók érzékelők</string>
@@ -5334,14 +5334,14 @@
     <string name="shared_string_included">Belefoglalva</string>
     <string name="local_indexes_category_terrain">Domborzati térképek (3D)</string>
     <string name="hillshade_slope">Domborzatárnyékolás, lejtés</string>
-    <string name="map_widget_group_glide_ratio">Siklószám</string>
+    <string name="map_widget_group_glide_ratio">Siklásszám</string>
     <string name="average_glide_ratio">Átlagos siklószám</string>
-    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklószámot.</string>
-    <string name="average_glide_time_interval_desc">Adja meg a siklószám átlagának kiszámításához használt időintervallumot.</string>
+    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklásszámot.</string>
+    <string name="average_glide_time_interval_desc">Adja meg a siklásszám átlagának kiszámításához használt időintervallumot.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklószámot mutatják.</string>
-    <string name="glide_ratio_to_target">Siklószám a célig</string>
-    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott intervallumhoz.</string>
+    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklásszámot mutatják.</string>
+    <string name="glide_ratio_to_target">Siklásszám a célig</string>
+    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklásszámot a megadott intervallumhoz.</string>
     <string name="external_sensor_name_property_description">Szenzor neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
@@ -5432,7 +5432,7 @@
 \n
 \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
 \n
-\n • Új widgetek: „Siklószám” és „Nap állása”
+\n • Új widgetek: „Siklásszám” és „Nap állása”
 \n
 \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
 \n
@@ -5482,7 +5482,7 @@
     <string name="empty_name">Üres név</string>
     <string name="edit_filter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
-    <string name="delete_smart_folder_dialog_message">Ez törli a következő okosmappát: %1$s.</string>
+    <string name="delete_smart_folder_dialog_message">Ez eltávolítja a következő okosmappát: \"%1$s\".</string>
     <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
     <string name="empty_smart_folder_description">Az egyező nyomvonalak itt jelennek meg</string>
     <string name="configure_filter">Szűrő konfigurálása</string>
@@ -5652,7 +5652,7 @@
 \n
 \n • További GPX-címkék támogatása
 \n
-\n • A „Távolság navigáció közben” testreszabása: válasszon pontos vagy felfelé kerekített számok közül
+\n • A „Távolság navigáció közben” testreszabása: válasszon a pontos vagy a felkerekített értékek között
 \n
 \n • Egységes felhasználói felület a nyomvonalválasztásához
 \n
@@ -5677,4 +5677,48 @@
     <string name="fix_north_up_descr">Ne forgassa el a térképet gesztusokkal, ha a fent rögzített északi irány be van kapcsolva</string>
     <string name="change_default_appearance_confirmation">Megváltoztatja %1$s alapértelmezett kinézetét?</string>
     <string name="use_3d_track_visualization">3D vizualizáció</string>
+    <string name="shared_string_changes">Módosítások</string>
+    <string name="change_default_tracks_appearance_confirmation">Alkalmazza a módosításokat a mappában meglévő nyomvonalakra vagy csak az újra?</string>
+    <string name="apply_only_to_new">Alkalmazás csak az újra</string>
+    <string name="release_4_8">• Felkészítve a 4.8-ashoz</string>
+    <string name="shared_string_scale">Skála</string>
+    <string name="relief_3d_download_description">További térképekre van szükség a domborzat térképen való megjelenítéséhez.</string>
+    <string name="vertical_exaggeration_description">A skálaérték megváltoztatásával kiemelheti a 3D domborzatot.</string>
+    <string name="vertical_exaggeration">Függőleges eltúlzás</string>
+    <string name="use_nearby_roads_summary">Offline térképet használ a közeli utak és magassági adatok megkereséséhez. Módosíthatja a nyomvonal geometriáját.</string>
+    <string name="use_nearby_roads">Közeli utak használata</string>
+    <string name="retrieve_elevation_data_summary">Az OsmAnd le tudja kérni a magassági adatokat a közeli utakról vagy domborzati térképekről.</string>
+    <string name="use_terrain_maps">Domborzati térkép használata</string>
+    <string name="use_terrain_maps_summary">Domborzati térkép használata a magassági adatokhoz. A nyomvonal geometriája változatlan marad.</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="delete_actions_button">Gomb törlése</string>
+    <string name="delete_actions_button_confirmation">Biztos törölni akarja \"%1$s\"-t az összes hozzáadott művelettel együtt?</string>
+    <string name="required_maps">Szükséges térképek</string>
+    <string name="missing_maps_description">Néhány ehhez az útvonalhoz szükséges offline térkép hiányzik vagy nem naprakész. Kérjük, töltse le vagy frissítse ezeket a térképeket.</string>
+    <string name="maps_that_also_be_used">Szintén használt térképek: %1$s</string>
+    <string name="getting_list_of_required_maps">A szükséges térképek listájának lekérése…</string>
+    <string name="required_maps_calculate_online_summary">A hiányzó térképek listája légvonalú útvonalon alapul. A térképek pontos listájához az OsmAnd online előre ki tudja számítani az útvonalat.</string>
+    <string name="missing_maps_header">Hiányzó vagy nem naprakész térképek</string>
+    <string name="route_line_use_coloring_altitude">Az útvonal a magasság változása szerint színezett.</string>
+    <string name="route_line_use_coloring_speed">Az útvonal a haladás sebessége szerint színezett.</string>
+    <string name="visualized_by">Vizualizálás:</string>
+    <string name="wall_color">Fal szín</string>
+    <string name="track_line">Nyomvonal csík</string>
+    <string name="fixed_height">Fix magasság</string>
+    <string name="downward_gradient">Lefelé mutató gradiens</string>
+    <string name="upward_gradient">Felfelé mutató gradiens</string>
+    <string name="top">Fent</string>
+    <string name="bottom">Lent</string>
+    <string name="top_and_bottom">Fent és lent</string>
+    <string name="title_3d_track">3D nyomvonal</string>
+    <string name="explore_3d_track_description">Fedezze fel a nyomvonalat interaktív 3D-ben! Lássa közvetlenül a térképen a magasságot, sebességet és egyebeket.</string>
+    <string name="gpx_approximation_geo_cpp">Geometria alapú (C++, gyors)</string>
+    <string name="allow_display_on_top_description">A térképszövegek egymás feletti megjelenítésének engedélyezése</string>
+    <string name="allow_display_on_top">Megjelenítés felül engedélyezése</string>
+    <string name="show_debug_info">Hibakeresési információk mutatása</string>
+    <string name="show_debug_info_description">Grafikus információk megjelenítése az egyes térképszövegek elhelyezéséről</string>
+    <string name="map_text">Térképszövegek</string>
+    <string name="routing_attr_avoid_cobblestone_name">Macskakő elkerülése</string>
+    <string name="routing_attr_avoid_cobblestone_description">Macskakő elkerülése</string>
+    <string name="track_vertical_exaggeration_description">A skála értékének változtatásával módosíthatja a 3D nyomvonal magasságát.</string>
 </resources>

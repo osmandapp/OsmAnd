@@ -15,15 +15,15 @@ public enum Gpx3DVisualizationType {
 	private final String typeName;
 	private final int displayNameResId;
 
-	Gpx3DVisualizationType(@NonNull String type, @StringRes int displayNameResId) {
-		this.typeName = type;
+	Gpx3DVisualizationType(@NonNull String typeName, @StringRes int displayNameResId) {
+		this.typeName = typeName;
 		this.displayNameResId = displayNameResId;
 	}
 
 	@NonNull
 	public static Gpx3DVisualizationType get3DVisualizationType(@Nullable String typeName) {
 		for (Gpx3DVisualizationType type : values()) {
-			if (type.name().equalsIgnoreCase(typeName)) {
+			if (type.typeName.equalsIgnoreCase(typeName)) {
 				return type;
 			}
 		}

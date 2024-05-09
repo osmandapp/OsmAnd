@@ -22,10 +22,10 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	public static final int COLORIZATION_NONE = 0;
 	public static final int COLORIZATION_GRADIENT = 1;
 	public static final int COLORIZATION_SOLID = 2;
-	protected Gpx3DVisualizationType trackVisualizationType;
-	protected Gpx3DWallColorType trackWallColorType;
-	protected Gpx3DLinePositionType trackLinePositionType;
-	protected int additionalExaggeration = 0;
+	protected Gpx3DVisualizationType trackVisualizationType = Gpx3DVisualizationType.NONE;
+	protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
+	protected Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
+	protected float additionalExaggeration = 1f;
 
 	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;

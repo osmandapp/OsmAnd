@@ -181,11 +181,11 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 
 		SwitchPreferenceEx syminfoPref = findPreference(plugin.SHOW_SYMBOLS_DEBUG_INFO.getId());
 		syminfoPref.setIconSpaceReserved(false);
-		syminfoPref.setDescription("Display graphical info about placement of each map text");
+		syminfoPref.setDescription(R.string.show_debug_info_description);
 
 		SwitchPreferenceEx symtopPref = findPreference(plugin.ALLOW_SYMBOLS_DISPLAY_ON_TOP.getId());
 		symtopPref.setIconSpaceReserved(false);
-		symtopPref.setDescription("Allow displaying map texts on top of each other");
+		symtopPref.setDescription(R.string.allow_display_on_top_description);
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {

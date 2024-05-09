@@ -40,7 +40,7 @@ public class GPXDatabase {
 
 	public static final Log LOG = PlatformUtil.getLog(GPXDatabase.class);
 
-	protected static final int DB_VERSION = 21;
+	protected static final int DB_VERSION = 25;
 	private static final String DB_NAME = "gpx_database";
 
 	protected static final String GPX_TABLE_NAME = "gpxTable";
@@ -92,12 +92,13 @@ public class GPXDatabase {
 				return null;
 			}
 			int version = conn.getVersion();
-			conn.setVersion(DB_VERSION);
+			conn.setVersion(DB_VERSION); // not correct version but dangerous for crash loop
 			if (version == 0) {
 				GpxDbUtils.onCreate(conn);
 			} else {
 				GpxDbUtils.onUpgrade(this, conn, version, DB_VERSION);
 			}
+//			conn.setVersion(DB_VERSION); // correct version but dangerous for crash loop
 		}
 		return conn;
 	}
@@ -195,6 +196,11 @@ public class GPXDatabase {
 		String fileName = query.getString(query.getColumnIndex(FILE_NAME.getColumnName()));
 
 		File gpxDir = app.getAppPath(GPX_INDEX_DIR);
+		if ((fileName + "/").equalsIgnoreCase(GPX_INDEX_DIR)) {
+			return gpxDir;
+		}
+		fileDir = fileDir.replace(gpxDir.getPath(), "");
+		fileDir = fileDir.replace(app.getAppPath(null).getPath(), "");
 		File dir = Algorithms.isEmpty(fileDir) ? gpxDir : new File(gpxDir, fileDir);
 		return new File(dir, fileName);
 	}

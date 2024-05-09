@@ -1,6 +1,7 @@
 package net.osmand.plus.track.helpers;
 
 import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.DATA_VERSION;
 import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
@@ -25,6 +26,7 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
+import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -90,11 +92,16 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 							database.insertItem(item, conn);
 						}
 						item.setAnalysis(analysis);
-						long creationTime = item.getParameter(FILE_CREATION_TIME);
+						long creationTime = item.requireParameter(FILE_CREATION_TIME);
 						if (creationTime <= 0) {
 							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
 						}
 						setupNearestCityName(item);
+						double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);
+						if (additionalExaggeration < SRTMPlugin.MIN_VERTICAL_EXAGGERATION
+								|| additionalExaggeration > SRTMPlugin.MAX_VERTICAL_EXAGGERATION) {
+							item.setParameter(ADDITIONAL_EXAGGERATION, (double) SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
+						}
 						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
 
 						if (database.getDataItem(file, conn) != null) {

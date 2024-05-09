@@ -7,21 +7,13 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.search.SearchUICore;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -38,6 +30,7 @@ public class Amenity extends MapObject {
 	public static final String COLLECTION_TIMES = "collection_times";
 	public static final String CONTENT = "content";
 	public static final String CUISINE = "cuisine";
+	public static final String WIKIPEDIA = "wikipedia";
 	public static final String WIKIDATA = "wikidata";
 	public static final String WIKIMEDIA_COMMONS = "wikimedia_commons";
 	public static final String MAPILLARY = "mapillary";
@@ -63,6 +56,9 @@ public class Amenity extends MapObject {
 	public static final String NAME = "name";
 	public static final String SEPARATOR = ";";
 	public static final String ALT_NAME_WITH_LANG_PREFIX = "alt_name:";
+	private static final String COLLAPSABLE_PREFIX = "collapsable_";
+	public static final String AMENITY_PREFIX = "amenity_";
+	private static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList(PHONE, WEBSITE);
 
 	private String subType;
 	private PoiCategory type;
@@ -555,5 +551,49 @@ public class Amenity extends MapObject {
 			}
 		}
 		return a;
+	}
+	
+	public Map<String, String> getAmenityExtensions() {
+		Map<String, String> result = new HashMap<>();
+		Map<String, List<PoiType>> collectedPoiAdditionalCategories = new HashMap<>();
+		
+		String name = this.name;
+		if (name != null) {
+			result.put(AMENITY_PREFIX + NAME, name);
+		}
+		
+		if (subType != null) {
+			result.put(AMENITY_PREFIX + SUBTYPE, subType);
+		}
+		
+		if (type != null) {
+			result.put(AMENITY_PREFIX + TYPE, type.getKeyName());
+		}
+		
+		if (openingHours != null) {
+			result.put(AMENITY_PREFIX + OPENING_HOURS, openingHours);
+		}
+		if (hasAdditionalInfo()) {
+			SearchUICore searchUICore = new SearchUICore(MapPoiTypes.getDefault(), "en", false);
+			result.putAll(getAdditionalInfoAndCollectCategories(searchUICore.getPoiTypes(),
+					HIDING_EXTENSIONS_AMENITY_TAGS, collectedPoiAdditionalCategories, null));
+			
+			//join collected tags by category into one string
+			for (Map.Entry<String, List<PoiType>> entry : collectedPoiAdditionalCategories.entrySet()) {
+				String categoryName = COLLAPSABLE_PREFIX + entry.getKey();
+				List<PoiType> categoryTypes = entry.getValue();
+				if (!categoryTypes.isEmpty()) {
+					StringBuilder builder = new StringBuilder();
+					for (PoiType poiType : categoryTypes) {
+						if (builder.length() > 0) {
+							builder.append(SEPARATOR);
+						}
+						builder.append(poiType.getKeyName());
+					}
+					result.put(categoryName, builder.toString());
+				}
+			}
+		}
+		return result;
 	}
 }

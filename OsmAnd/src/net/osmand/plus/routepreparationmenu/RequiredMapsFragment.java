@@ -82,10 +82,10 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		DialogManager dialogManager = app.getDialogManager();
 		controller = (RequiredMapsController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			dismiss();
-		} else {
-			dialogManager.register(PROCESS_ID, this);
+			controller = new RequiredMapsController(app);
+			dialogManager.register(PROCESS_ID, controller);
 		}
+		dialogManager.register(PROCESS_ID, this);
 	}
 
 	@Nullable
