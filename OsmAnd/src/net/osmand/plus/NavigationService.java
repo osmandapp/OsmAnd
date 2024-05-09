@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Build;
 import android.os.IBinder;
 import android.widget.Toast;
 
@@ -126,11 +127,19 @@ public class NavigationService extends Service {
 			if (isUsedByNavigation()) {
 				startCarNavigation();
 			}
-			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+			} else {
+				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			}
 			app.getNotificationHelper().refreshNotifications();
 		} else {
 			notification = app.getNotificationHelper().buildErrorNotification();
-			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+			} else {
+				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			}
 			stopSelf();
 			return START_NOT_STICKY;
 		}
