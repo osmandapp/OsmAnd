@@ -5132,7 +5132,7 @@
     <string name="key_event_action_move_left">Pomeri levo</string>
     <string name="key_event_action_move_down">Pomeri dole</string>
     <string name="shared_string_close_the_dialog">Zatvori prozor</string>
-    <string name="delete_track_folder_dialog_message">Ovo će izbrisati folder „%1$s“ i sve sadržane trase (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Ovo će izbrisati folder „%1$s“ i sve %2$s sadržane trase.</string>
     <string name="delete_folder_question">Da li brišeš folder?</string>
     <string name="cloud_sync_progress">Sinhronizacija…%1$s</string>
     <string name="check_for_updates">Proveri osveženja</string>
@@ -5514,7 +5514,7 @@
     <string name="shared_string_is_deleted">%1$s je obrisan.</string>
     <string name="shared_string_delete_immediately">Obriši odmah</string>
     <string name="shared_string_delete_item">Obriši stavku</string>
-    <string name="delete_smart_folder_dialog_message">Ovo će izbrisati \"%1$s\" pametan folder.</string>
+    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\".</string>
     <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
     <string name="empty_name">Prazan naziv</string>
     <string name="loading_tracks">Ponovno učitavanje staza</string>
