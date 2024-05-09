@@ -102,7 +102,11 @@ public class TransportStopController extends MenuController {
 	@NonNull
 	@Override
 	public String getNameStr() {
-		return transportStop.getName(getPreferredMapLang(), isTransliterateNames());
+		if (transportStop.getAmenity() == null) {
+			return transportStop.getName(getPreferredMapLang(), isTransliterateNames());
+		} else {
+			return transportStop.getAmenity().getName(getPreferredMapLang(), isTransliterateNames());
+		}
 	}
 
 	@NonNull
@@ -133,9 +137,11 @@ public class TransportStopController extends MenuController {
 			ArrayList<TransportStop> nearbyTransportStops = new ArrayList<>(transportStop.getNearbyTransportStops());
 
 			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames);
-			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
-
 			sortTransportStopRoutes(routesOnTheSameExit);
+			if (topType == null && !Algorithms.isEmpty(routesOnTheSameExit)) {
+				topType = routesOnTheSameExit.get(0).type;
+			}
+			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
 			sortTransportStopRoutes(routesNearby);
 		}
 	}
