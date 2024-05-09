@@ -66,8 +66,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 		items.forEach(item -> {
 			File file = item.getFile();
-			if (fileExistenceMap.get(file)) {
-				dataItems.put(file, item); // putToCache
+			if (Boolean.TRUE.equals(fileExistenceMap.get(file))) {
+				dataItems.put(file, item);
 			} else {
 				remove(file);
 			}
