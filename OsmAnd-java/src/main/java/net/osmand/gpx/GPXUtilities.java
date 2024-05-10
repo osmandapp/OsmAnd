@@ -3,6 +3,7 @@ package net.osmand.gpx;
 
 
 import static net.osmand.gpx.GPXUtilities.RouteSegment.START_TRKPT_IDX_ATTR;
+import static net.osmand.util.Algorithms.isDigit;
 
 import net.osmand.IProgress;
 import net.osmand.Location;
@@ -51,8 +52,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class GPXUtilities {
 
@@ -88,9 +87,6 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 	private static final String GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
-	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
-	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-	private static final int GPX_TIME_MILLIS_PATTERN_ROUND_MS_DIGITS = 3;
 
 	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>();
 	static {
@@ -1405,56 +1401,42 @@ public class GPXUtilities {
 	}
 
 	public static long parseTime(String text) {
-		// API level 24 does not support Java 8 DateTimeFormatter()
-		// Old SimpleDateFormat() requires fixed-length milliseconds.
-		// Shorter or longer ms-length must be aligned to a fixed length.
-		// Without align, parseTime() fails and results 1-second precision.
-		String aligned = alignGpxTimeMilliseconds(text);
 		if (GPX_TIME_OLD_FORMAT) {
-			return parseTime(aligned, getTimeFormatter(), getTimeFormatterMills());
+			return parseTime(text, getTimeFormatter());
 		} else {
-			return parseTime(aligned, getTimeFormatterTZ(), getTimeFormatterMills());
+			return parseTime(text, getTimeFormatterTZ());
 		}
 	}
 
-	private static String alignGpxTimeMilliseconds(String text) {
-		if (text.indexOf('.') == -1) {
-			return text; // speed up
-		}
-		// 2024-05-10T12:34:20.5 -> 2024-05-10T12:34:20.500
-		// 2024-05-10T12:34:20.587 -> 2024-05-10T12:34:20.587
-		// 2024-05-10T12:34:20.5870657 -> 2024-05-10T12:34:20.587
-		Pattern pattern = Pattern.compile("\\.[0-9]+");
-		Matcher matcher = pattern.matcher(text);
-		StringBuffer result = new StringBuffer();
-		while (matcher.find()) {
-			Double ms = Double.parseDouble(matcher.group()); // .12345 -> 0.12345
-			String format = "%." + GPX_TIME_MILLIS_PATTERN_ROUND_MS_DIGITS + "f"; // %.3f 0.12345 -> 0.123
-			String replacement = String.format(format, ms).substring(1); // 0.123 -> .123
-			matcher.appendReplacement(result, replacement);
-		}
-		matcher.appendTail(result);
-		return result.toString();
-	}
-
-	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
+	public static long parseTime(String text, SimpleDateFormat format) {
 		long time = 0;
 		if (text != null) {
 			try {
-				time = format.parse(text).getTime();
+				time = flexibleGpxTimeParser(text, format);
 			} catch (ParseException e1) {
 				try {
-					time = formatMillis.parse(text).getTime();
-				} catch (ParseException e2) {
-					try {
-						time = getTimeNoTimeZoneFormatter().parse(text).getTime();
-					} catch (ParseException e3) {
-						log.error("Failed to parse date " + text);
-					}
+					time = getTimeNoTimeZoneFormatter().parse(text).getTime();
+				} catch (ParseException e3) {
+					log.error("Failed to parse date " + text);
 				}
 			}
 		}
 		return time;
+	}
+
+	private static long flexibleGpxTimeParser(String text, SimpleDateFormat parser) throws ParseException {
+		// Starting from API level 26 it is better to migrate from SimpleDateFormat to DateTimeFormatter
+		double ms = 0;
+		int is = text.indexOf('.');
+		if (is > 0) {
+			int es = is + 1;
+			while (es < text.length() && isDigit(text.charAt(es))) {
+				es++;
+			}
+			ms = Double.parseDouble("0" + text.substring(is, es));
+			text = text.substring(0, is) + text.substring(es);
+		}
+		return parser.parse(text).getTime() + (long)(ms * 1000);
 	}
 
 	public static long getCreationTime(GPXFile gpxFile) {
@@ -1489,13 +1471,6 @@ public class GPXUtilities {
 
 	private static SimpleDateFormat getTimeFormatterTZ() {
 		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_PATTERN_TZ, Locale.US);
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
-		return format;
-	}
-
-	private static SimpleDateFormat getTimeFormatterMills() {
-		String pattern = GPX_TIME_OLD_FORMAT ? GPX_TIME_MILLIS_PATTERN_OLD : GPX_TIME_MILLIS_PATTERN;
-		SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		return format;
 	}
