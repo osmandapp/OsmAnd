@@ -105,10 +105,10 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					trackItems.add(item);
 
 					progress.add(item);
-					if (progress.size() > 7) {
-						publishProgress(progress.toArray(new TrackItem[0]));
-						progress.clear();
-					}
+					//if (progress.size() > 7) {
+					//	publishProgress(progress.toArray(new TrackItem[0]));
+					//	progress.clear();
+					//}
 					tracksCounter++;
 					if (tracksCounter % LOG_BATCH_SIZE == 0) {
 						long endTime = System.currentTimeMillis();
@@ -122,7 +122,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			folder.resetCashedData();
 			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
 		}
-		rootFolder.resetCashedData();
+		//rootFolder.resetCashedData();
 	}
 
 	@Nullable
