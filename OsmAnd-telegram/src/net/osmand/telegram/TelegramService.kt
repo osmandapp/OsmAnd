@@ -97,7 +97,12 @@ class TelegramService : Service(), TelegramIncomingMessagesListener, TelegramOut
 
 		val locationNotification = app.notificationHelper.locationNotification
 		val notification = app.notificationHelper.buildNotification(locationNotification)
-		startForeground(locationNotification.telegramNotificationId, notification)
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+			startForeground(locationNotification.telegramNotificationId, notification,
+				android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION)
+		} else {
+			startForeground(locationNotification.telegramNotificationId, notification)
+		}
 		app.notificationHelper.refreshNotification(locationNotification.type)
 
 		if (isUsedByMyLocation(usedBy)) {
