@@ -57,8 +57,8 @@ public class GPXTrackAnalysis {
 	public double top = 0;
 	public double bottom = 0;
 
-	public List<PointAttributes> pointAttributes;
-	public Set<String> availableAttributes;
+	public List<PointAttributes> pointAttributes = new ArrayList<>();
+	public Set<String> availableAttributes = new HashSet<>();
 
 	public boolean hasSpeedInTrack = false;
 

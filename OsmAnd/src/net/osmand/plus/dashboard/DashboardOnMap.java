@@ -815,7 +815,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			refreshFragment(MtbRoutesFragment.TAG);
 		} else if (isCurrentType(DIFFICULTY_CLASSIFICATION)) {
 			refreshFragment(DifficultyClassificationFragment.TAG);
-		} else {
+		} else if (listAdapter != null) {
 			listAdapter.notifyDataSetChanged();
 		}
 	}

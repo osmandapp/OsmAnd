@@ -335,7 +335,7 @@ public final class NavigationScreen extends BaseAndroidAutoScreen implements Sur
 		});
 
 		if (navigating) {
-			if (destinationTravelEstimate != null) {
+			if (destinationTravelEstimate != null && destinationTravelEstimate.getRemainingTimeSeconds() >= 0) {
 				builder.setDestinationTravelEstimate(destinationTravelEstimate);
 			}
 			if (isRerouting()) {

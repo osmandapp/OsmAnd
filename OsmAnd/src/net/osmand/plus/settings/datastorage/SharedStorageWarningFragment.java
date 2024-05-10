@@ -263,7 +263,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			skipButton.setOnClickListener(v -> showSkipMigrationDialog());
 			rightButton.setOnClickListener(v -> {
 				Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-				startActivityForResult(intent, FOLDER_ACCESS_REQUEST);
+				AndroidUtils.startActivityForResultIfSafe(this, intent, FOLDER_ACCESS_REQUEST);
 			});
 			skipButton.setButtonType(DialogButtonType.SECONDARY);
 			skipButton.setTitleId(R.string.shared_string_skip);
