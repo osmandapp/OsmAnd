@@ -51,6 +51,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GPXUtilities {
 
@@ -88,6 +90,7 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 	private static final String GPX_TIME_MILLIS_PATTERN_OLD = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+	private static final int GPX_TIME_MILLIS_PATTERN_ROUND_MS_DIGITS = 3;
 
 	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>();
 	static {
@@ -1402,11 +1405,36 @@ public class GPXUtilities {
 	}
 
 	public static long parseTime(String text) {
+		// API level 24 does not support Java 8 DateTimeFormatter()
+		// Old SimpleDateFormat() requires fixed-length milliseconds.
+		// Shorter or longer ms-length must be aligned to a fixed length.
+		// Without align, parseTime() fails and results 1-second precision.
+		String aligned = alignGpxTimeMilliseconds(text);
 		if (GPX_TIME_OLD_FORMAT) {
-			return parseTime(text, getTimeFormatter(), getTimeFormatterMills());
+			return parseTime(aligned, getTimeFormatter(), getTimeFormatterMills());
 		} else {
-			return parseTime(text, getTimeFormatterTZ(), getTimeFormatterMills());
+			return parseTime(aligned, getTimeFormatterTZ(), getTimeFormatterMills());
 		}
+	}
+
+	private static String alignGpxTimeMilliseconds(String text) {
+		if (text.indexOf('.') == -1) {
+			return text; // speed up
+		}
+		// 2024-05-10T12:34:20.5 -> 2024-05-10T12:34:20.500
+		// 2024-05-10T12:34:20.587 -> 2024-05-10T12:34:20.587
+		// 2024-05-10T12:34:20.5870657 -> 2024-05-10T12:34:20.587
+		Pattern pattern = Pattern.compile("\\.[0-9]+");
+		Matcher matcher = pattern.matcher(text);
+		StringBuffer result = new StringBuffer();
+		while (matcher.find()) {
+			Double ms = Double.parseDouble(matcher.group()); // .12345 -> 0.12345
+			String format = "%." + GPX_TIME_MILLIS_PATTERN_ROUND_MS_DIGITS + "f"; // %.3f 0.12345 -> 0.123
+			String replacement = String.format(format, ms).substring(1); // 0.123 -> .123
+			matcher.appendReplacement(result, replacement);
+		}
+		matcher.appendTail(result);
+		return result.toString();
 	}
 
 	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
