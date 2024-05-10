@@ -662,7 +662,7 @@ public class GPXUtilities {
 
 		public void readDescription() {
 			String readDescription = getExtensionsToWrite().remove("desc");
-			if (Algorithms.isEmpty(readDescription) && Algorithms.isEmpty(desc)) {
+			if (!Algorithms.isEmpty(readDescription) && Algorithms.isEmpty(desc)) {
 				desc = readDescription;
 			}
 		}
