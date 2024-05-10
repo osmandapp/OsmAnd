@@ -30,6 +30,7 @@ import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -149,7 +150,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		PreviewRouteLineInfo previewRouteLineInfo = new PreviewRouteLineInfo(colorDay, colorNight,
 				coloringType, routeInfoAttribute, widthKey, showTurnArrows);
 
-		previewRouteLineInfo.setIconId(appMode.getNavigationIcon().getIconId());
+		String navigationIconName = appMode.getNavigationIcon();
+		NavigationIcon navigationIcon = NavigationIcon.isModel(navigationIconName)
+				? NavigationIcon.DEFAULT
+				: NavigationIcon.fromName(navigationIconName);
+		previewRouteLineInfo.setIconId(navigationIcon.getIconId());
 		previewRouteLineInfo.setIconColor(appMode.getProfileColor(isNightMode()));
 
 		return previewRouteLineInfo;

@@ -10,6 +10,17 @@
 	- For wording and consistency, please note https://docs.osmand.net/docs/technical/contributions/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="allow_display_on_top">Allow display on top</string>
+    <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>
+    <string name="show_debug_info">Show debug information</string>
+    <string name="show_debug_info_description">Display graphical info about placement of each map text</string>
+    <string name="map_text">Map texts</string>
+    <string name="routing_attr_avoid_cobblestone_name">Avoid cobblestone</string>
+    <string name="routing_attr_avoid_cobblestone_description">Avoid cobblestone</string>
+    <string name="release_4_8">
+        • To be prepared for 4.8
+    </string>
     <string name="track_vertical_exaggeration_description">By changing the scale value, you can change 3D track height.</string>
     <string name="visualized_by">Visualized by</string>
     <string name="wall_color">Wall color</string>
@@ -22,7 +33,6 @@
     <string name="top_and_bottom">Top and bottom</string>
     <string name="title_3d_track">3D Track</string>
     <string name="explore_3d_track_description">Explore the track in interactive 3D! Visualize height, speed, and more directly on the map.</string>
-
     <string name="maps_that_also_be_used">Maps that also be used: %1$s</string>
     <string name="getting_list_of_required_maps">Getting a list of required maps…</string>
     <string name="required_maps_calculate_online_summary">The list of missing maps is based on the straight line route. To get an accurate list of maps, OsmAnd can pre-calculate your route online.</string>
@@ -227,7 +237,7 @@
     <string name="discard_filter_changes_prompt">Reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
     <string name="edit_filter">Edit filter</string>
-    <string name="delete_smart_folder_dialog_message">This will delete \"%1$s\" smart folder.</string>
+    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\".</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>
     <string name="add_smart_folder">Add smart folder</string>
@@ -462,7 +472,7 @@
     <string name="there_are_no_connected_sensors_of_this_type">There are no connected sensors of this type</string>
     <string name="external_sensors_not_found">Sensors not found</string>
     <string name="external_sensors_source_of_data">Source of data</string>
-    <string name="delete_track_folder_dialog_message">This will delete \"%1$s\" folder and all tracks (%2$s) included.</string>
+    <string name="delete_track_folder_dialog_message">This will delete folder \"%1$s\" and all %2$s tracks contained.</string>
     <string name="delete_folder_question">Delete folder?</string>
     <string name="delete_folder">Delete folder</string>
     <string name="show_all_tracks_on_the_map">Show all tracks on the map</string>
@@ -585,7 +595,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="metric_lbs">lbs</string>
     <string name="app_mode_moped">Moped</string>
     <string name="selected_value">Selected value</string>
-    <string name="sort_duration_ascending">Shorter duration first</string>
+    <string name="sort_duration_ascending">Shortest duration first</string>
     <string name="sort_duration_descending">Longest duration first</string>
     <string name="sort_distance_ascending">Shortest distance first</string>
     <string name="sort_distance_descending">Longest distance first</string>

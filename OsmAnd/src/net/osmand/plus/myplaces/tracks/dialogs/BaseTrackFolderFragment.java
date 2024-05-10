@@ -1,9 +1,13 @@
 package net.osmand.plus.myplaces.tracks.dialogs;
 
+import static net.osmand.plus.configmap.tracks.PreselectedTabParams.CALLING_FRAGMENT_TAG;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_NAME;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
+import static net.osmand.plus.configmap.tracks.TrackTab.SMART_FOLDER_TAB_NAME_PREFIX;
+import static net.osmand.plus.configmap.tracks.TrackTabType.ALL;
 import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
+import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
 import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
@@ -79,6 +83,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -88,6 +93,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		SortTracksListener, TrackSelectionListener, TrackGroupsListener, EmptyTracksListener, OsmAuthorizationListener,
 		SelectGpxTaskListener, OnTrackFolderAddListener, GpxImportListener, TrackFolderOptionsListener,
 		OnTrackFileMoveListener, RenameCallback, SelectionHelperProvider<TrackItem>, SmartFolderOptionsListener {
+
+	private static final String TAG = BaseTrackFolderFragment.class.getSimpleName();
 
 	public static final String SELECTED_SMART_FOLDER_KEY = "selected_smart_folder_key";
 	public static final String SELECTED_FOLDER_KEY = "selected_folder_key";
@@ -344,6 +351,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		if (sortSubFolders) {
+			removeSurplusTabsSortModes();
 			sortSubFolder(sortMode);
 		} else {
 			Map<String, String> tabsSortModes = settings.getTrackSortModes();
@@ -371,6 +379,24 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		for (TrackFolder folder : trackFolder.getFlattenedSubFolders()) {
 			tabsSortModes.put(folder.getDirName(), sortMode.name());
 		}
+	}
+
+	private void removeSurplusTabsSortModes() {
+		OsmandSettings settings = app.getSettings();
+		Map<String, String> oldTabsSortModes = settings.getTrackSortModes();
+		Map<String, String> tabsSortModes = new HashMap<>();
+		
+		tabsSortModes.put(TrackTabType.ON_MAP.name(), oldTabsSortModes.get(TrackTabType.ON_MAP.name()));
+		tabsSortModes.put(TrackTabType.ALL.name(), oldTabsSortModes.get(TrackTabType.ALL.name()));
+		tabsSortModes.put(rootFolder.getDirName(), oldTabsSortModes.get(rootFolder.getDirName()));
+		for (TrackFolder folder : rootFolder.getFlattenedSubFolders()) {
+			tabsSortModes.put(folder.getDirName(), oldTabsSortModes.get(folder.getDirName()));
+		}
+		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
+			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName(),
+					  oldTabsSortModes.get(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName()));
+		}
+		settings.saveTabsSortModes(tabsSortModes);
 	}
 
 	@Override
@@ -497,7 +523,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		showTracksVisibilityDialog(smartFolder.getFolderName(), SMART_FOLDER, true);
 	}
 
-
 	protected void showTracksVisibilityDialog(@NonNull String name, @NonNull TrackTabType type, boolean selectAll) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
@@ -505,6 +530,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			bundle.putString(PRESELECTED_TRACKS_TAB_NAME, name);
 			bundle.putSerializable(PRESELECTED_TRACKS_TAB_TYPE, type);
 			bundle.putBoolean(SELECT_ALL_ITEMS_ON_TAB, selectAll);
+			bundle.putString(CALLING_FRAGMENT_TAG, TAG);
 			MapActivity.launchMapActivityMoveToTop(activity, storeState(), null, bundle);
 		}
 	}

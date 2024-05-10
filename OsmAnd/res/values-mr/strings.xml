@@ -584,4 +584,7 @@
     <string name="download_tab_local">आधीच उतरवलेले</string>
     <string name="save_track_to_gpx_descrp">मार्गनिर्देशनच्या वेळी आपोआप ट्रॅक मुद्रण चालू करुन नंतर आपोआप साठवा.</string>
     <string name="monitoring_control_start">मुद्रण</string>
+    <string name="use_nearby_roads">जवळचे रस्ते वापरा</string>
+    <string name="delete_actions_button">हटवा बटण</string>
+    <string name="use_terrain_maps">भूप्रदेश नकाशे वापरा</string>
 </resources>

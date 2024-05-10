@@ -1201,7 +1201,7 @@
     <string name="map_widget_plain_time">Aktuelle Zeit</string>
     <string name="selected_gpx_info_show">"
 \n
-\nZur Darstellung lange auf der Karte tippen"</string>
+\nZur Darstellung auf der Karte lange tippen"</string>
     <string name="delay_navigation_start">Navigation automatisch starten</string>
     <string name="save_as_favorites_points">Als Favoritengruppe speichern</string>
     <string name="select_destination_and_intermediate_points">Ziele auswählen</string>
@@ -4460,7 +4460,7 @@
     <string name="gps_filter_actions_description">OsmAnd wendet die Änderungen auf den Track an, ohne die Datei zu aktualisieren. Sie können die Änderungen manuell speichern.</string>
     <string name="shared_string_gps_filter">GPS-Filter</string>
     <string name="storage_migration_wrong_folder_warning">Keine OsmAnd-Daten im ausgewählten Ordner gefunden. Bitte versuchen Sie es erneut.</string>
-    <string name="use_routing_fallback_description">Offline-Routenführung verwenden, wenn Online-Routenführung nicht erreichbar ist.</string>
+    <string name="use_routing_fallback_description">Offline-Routenführung verwenden, wenn Online-Routenführung nicht verfügbar ist.</string>
     <string name="use_routing_fallback">Alternativ Offline-Routenführung nutzen</string>
     <string name="created_on">Erstellt am</string>
     <string name="shared_string_size">Größe</string>
@@ -5213,7 +5213,7 @@
     <string name="track_not_recorded">Nicht aufgezeichnet</string>
     <string name="shared_string_new_track">Neuer Track</string>
     <string name="shared_string_visible_on_map">Sichtbar auf der Karte</string>
-    <string name="delete_track_folder_dialog_message">Dies löscht den Ordner „%1$s“ und alle darin enthaltenen Tracks (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Dies löscht den Ordner „%1$s“ und alle %2$s darin enthaltenen Tracks.</string>
     <string name="delete_folder">Ordner löschen</string>
     <string name="show_all_tracks_on_the_map">Alle Tracks auf der Karte anzeigen</string>
     <string name="save_track_external_sensors_data">Daten</string>
@@ -5636,8 +5636,8 @@
     <string name="rendering_attr_padusHideBoundaries_description">Grenzen von öffentlichem Land ausblenden, aber Gebiete belassen</string>
     <string name="rendering_attr_padusDisplayMode_description">Nach Zugangsart oder Name der Verwaltung</string>
     <string name="rendering_attr_padusDisplayMode_name">Anzeigemodus für öffentliche Flächen</string>
-    <string name="auto_zoom_smooth">Sanft</string>
-    <string name="auto_zoom_discrete">Diskret</string>
+    <string name="auto_zoom_smooth">Glatt</string>
+    <string name="auto_zoom_discrete">Schrittweise</string>
     <string name="auto_zoom">Autozoom</string>
     <string name="java_safe">Java (sicher)</string>
     <string name="gpx_approximation">GPX-Annäherung</string>
@@ -5665,7 +5665,7 @@
 \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
 \n
 \n</string>
-    <string name="round_up">Abrunden</string>
+    <string name="round_up">Aufrunden</string>
     <string name="precise">Präzise</string>
     <string name="distance_during_navigation">Distanz während der Navigation</string>
     <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
@@ -5683,4 +5683,48 @@
     <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standard-Aussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
+    <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Titel im Ordner oder nur auf neue Titel anwenden?</string>
+    <string name="shared_string_changes">Änderungen</string>
+    <string name="apply_only_to_new">Nur für neue</string>
+    <string name="release_4_8">• Für 4.8 vorbereitet</string>
+    <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
+    <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Terrain auf der Karte anzuzeigen.</string>
+    <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts kannst du das 3D- Profil hervorheben.</string>
+    <string name="shared_string_scale">Maßstab</string>
+    <string name="use_terrain_maps">Terrain Karten verwenden</string>
+    <string name="use_nearby_roads">Nutzung von nahegelegenen Straßen</string>
+    <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Spurgeometrie bleibt unverändert.</string>
+    <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um in der Nähe Straßen und Höhendaten zu finden. Kann Weggeometrie anpassen.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd kann Höhendaten von nahe gelegenen Straßen oder Geländekarten abrufen.</string>
+    <string name="delete_actions_button">Löschen Taste</string>
+    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="maps_that_also_be_used">Karten, die auch verwendet werden: %1$s</string>
+    <string name="route_line_use_coloring_speed">Die Routenlinie ist nach der Geschwindigkeit der Fortbewegung eingefärbt.</string>
+    <string name="required_maps_calculate_online_summary">Die Liste der fehlenden Karten basiert auf der direkten Streckenroute. Um eine genaue Liste der Karten zu erhalten, kann OsmAnd Ihre Route online vorberechnen.</string>
+    <string name="required_maps">Benötigte Karten</string>
+    <string name="missing_maps_description">Einige Offline-Karten, die für diese Route benötigt werden, fehlen oder sind nicht auf dem neuesten Stand. Bitte lade diese Karten herunter oder aktualisiere diese.</string>
+    <string name="missing_maps_header">Fehlende oder veraltete Karte</string>
+    <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
+    <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage bzw. Höhe gefärbt.</string>
+    <string name="delete_actions_button_confirmation">Bist du sicher, dass du \"%1$s\" mit allen hinzugefügten Aktionen löschen möchtest?</string>
+    <string name="visualized_by">Visualisiert von</string>
+    <string name="wall_color">Wandfarbe</string>
+    <string name="track_line">Bahnlinie</string>
+    <string name="fixed_height">Feste Höhe</string>
+    <string name="downward_gradient">Abwärtsneigung</string>
+    <string name="upward_gradient">Aufwärtsneigung</string>
+    <string name="bottom">Unten</string>
+    <string name="top">Oben</string>
+    <string name="top_and_bottom">Oben und unten</string>
+    <string name="title_3d_track">3D Track</string>
+    <string name="explore_3d_track_description">Entdecke den Track in interaktiver 3D! Visualisiere Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
+    <string name="gpx_approximation_geo_cpp">Geometriebasiert (C++, schnell)</string>
+    <string name="allow_display_on_top">Anzeige oben zulassen</string>
+    <string name="allow_display_on_top_description">Kartentexte übereinander anzeigen lassen</string>
+    <string name="show_debug_info">Debug Informationen anzeigen</string>
+    <string name="show_debug_info_description">Zeige grafische Informationen über die Platzierung jedes Kartentextes an</string>
+    <string name="map_text">Kartentexte</string>
+    <string name="routing_attr_avoid_cobblestone_name">Kopfsteinpflaster vermeiden</string>
+    <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
+    <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts kannst du die Höhe des 3D-Tracks ändern.</string>
 </resources>

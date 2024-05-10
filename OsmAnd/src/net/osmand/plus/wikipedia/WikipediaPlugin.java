@@ -6,7 +6,6 @@ import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
-import static net.osmand.wiki.WikiCoreHelper.USE_OSMAND_WIKI_API;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,7 +36,6 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.plugins.OsmandPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -58,8 +56,6 @@ import net.osmand.plus.widgets.ctxmenu.callback.ItemClickListener;
 import net.osmand.plus.widgets.ctxmenu.callback.OnDataChangeUiAdapter;
 import net.osmand.plus.widgets.ctxmenu.callback.OnRowItemClick;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
-import net.osmand.plus.wikimedia.WikiImageCard;
-import net.osmand.plus.wikimedia.WikiImageHelper;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
@@ -78,7 +74,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class WikipediaPlugin extends OsmandPlugin {
@@ -556,26 +551,6 @@ public class WikipediaPlugin extends OsmandPlugin {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
-	                                            @NonNull Map<String, String> params,
-	                                            @Nullable Map<String, String> additionalParams,
-	                                            @Nullable GetImageCardsListener listener) {
-		if (mapActivity != null && additionalParams != null) {
-			String wikidataId = additionalParams.get(Amenity.WIKIDATA);
-			if (wikidataId != null) {
-				additionalParams.remove(Amenity.WIKIDATA);
-				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, holder);
-			}
-			String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
-			if (wikimediaContent != null && !(USE_OSMAND_WIKI_API && wikidataId != null)) {
-				additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
-				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, holder);
-			}
-			params.putAll(additionalParams);
-		}
 	}
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {
