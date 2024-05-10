@@ -20,7 +20,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
+import net.osmand.plus.myplaces.favorites.dialogs.FavoritesSearchFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
@@ -81,8 +81,15 @@ public class MyPlacesActivity extends TabActivity {
 					}
 				}
 				viewPager.setCurrentItem(pagerItem, false);
+				maybeShowFavoritesSearch(intentParams);
 			}
 		}
+	}
+
+	private void maybeShowFavoritesSearch(final Bundle bundle) {
+		FavoritesSearchFragment
+				.getSearchQuery(bundle)
+				.ifPresent(searchQuery -> FavoritesSearchFragment.showInstance(this, searchQuery));
 	}
 
 	public void updateToolbar() {
