@@ -431,7 +431,7 @@ public class TravelObfHelper implements TravelHelper {
 					}
 				}
 			}
-			sortSearchResults(res);
+			sortSearchResults(res, searchQuery);
 		}
 		return res;
 	}
@@ -454,8 +454,30 @@ public class TravelObfHelper implements TravelHelper {
 		return langs;
 	}
 
-	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> results) {
-		Collections.sort(results, (o1, o2) -> collator.compare(o1.getArticleTitle(), o2.getArticleTitle()));
+	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> results, String searchQuery) {
+		results.sort(new Comparator<WikivoyageSearchResult>() {
+			@Override
+			public int compare(WikivoyageSearchResult ts1, WikivoyageSearchResult ts2) {
+				boolean ts1EqualsTestString = ts1.getArticleTitle().equals(searchQuery);
+				boolean ts2EqualsTestString = ts2.getArticleTitle().equals(searchQuery);
+				boolean ts1ContainsTestString = ts1.getArticleTitle().contains(searchQuery);
+				boolean ts2ContainsTestString = ts2.getArticleTitle().contains(searchQuery);
+
+				if (ts1EqualsTestString && !ts2EqualsTestString) {
+					return -1;
+				} else if (!ts1EqualsTestString && ts2EqualsTestString) {
+					return 1;
+				} else if (ts1EqualsTestString && ts2EqualsTestString) {
+					return 0;
+				} else if (ts1ContainsTestString && !ts2ContainsTestString) {
+					return -1;
+				} else if (!ts1ContainsTestString && ts2ContainsTestString) {
+					return 1;
+				} else {
+					return ts1.getIsPartOf().compareTo(ts2.getIsPartOf());
+				}
+			}
+		});
 	}
 
 	@NonNull
@@ -525,7 +547,7 @@ public class TravelObfHelper implements TravelHelper {
 			WikivoyageSearchResult searchResult = headerObjs.get(header);
 			List<WikivoyageSearchResult> results = navMap.get(header);
 			if (results != null) {
-				sortSearchResults(results);
+				sortSearchResults(results, header);
 				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult("", header, null, null, null);
 				searchResult = searchResult != null ? searchResult : emptyResult;
 				res.put(searchResult, results);
