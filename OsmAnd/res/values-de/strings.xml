@@ -5189,7 +5189,7 @@
     <string name="number_of_tracks">%1$s Tracks</string>
     <string name="shared_string_foot">Fuß</string>
     <string name="device_disconnected">%1$s wurde getrennt</string>
-    <string name="rendering_attr_lightDetail_name">Helles Detail</string>
+    <string name="rendering_attr_lightDetail_name">Leuchtfeuer Detail</string>
     <string name="rendering_value_sectors_name">Sektoren</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
     <string name="rendering_value_sector2_name">Sektor 2</string>
