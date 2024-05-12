@@ -376,17 +376,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		transportRouteCalculationProgressCallback = new TransportRouteCalculationProgressCallback() {
 			@Override
 			public void start() {
-				routeCalculationProgressCallback.onCalculationStart();
+				if (routeCalculationProgressCallback != null) {
+					routeCalculationProgressCallback.onCalculationStart();
+				}
 			}
 
 			@Override
 			public void updateProgress(int progress) {
-				routeCalculationProgressCallback.onUpdateCalculationProgress(progress);
+				if (routeCalculationProgressCallback != null) {
+					routeCalculationProgressCallback.onUpdateCalculationProgress(progress);
+				}
 			}
 
 			@Override
 			public void finish() {
-				routeCalculationProgressCallback.onCalculationFinish();
+				if (routeCalculationProgressCallback != null) {
+					routeCalculationProgressCallback.onCalculationFinish();
+				}
 			}
 		};
 		app.getTransportRoutingHelper().setProgressBar(transportRouteCalculationProgressCallback);

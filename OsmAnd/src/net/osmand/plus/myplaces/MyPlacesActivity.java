@@ -20,7 +20,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
-import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FavoritesTreeFragment;
 import net.osmand.plus.myplaces.favorites.dialogs.FragmentStateHolder;
 import net.osmand.plus.myplaces.tracks.dialogs.AvailableTracksFragment;
@@ -60,6 +59,7 @@ public class MyPlacesActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
+		app.getImportHelper().setUiActivity(this);
 
 		updateToolbar();
 		setContentView(R.layout.my_places);

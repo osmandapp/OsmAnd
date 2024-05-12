@@ -331,7 +331,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					boolean gpxFileNonEmpty = gpxFile != null && (gpxFile.hasTrkPt() || gpxFile.hasWptPt());
 					if (fileExists && gpxFileNonEmpty) {
 						if (openTrack) {
-							TrackMenuFragment.openTrack(mapActivity, file, null);
+							TrackMenuFragment.openTrack(fragmentActivity, file, null);
 						} else {
 							FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
 							SaveGPXBottomSheet.showInstance(fragmentManager, file.getAbsolutePath());
