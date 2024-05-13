@@ -289,9 +289,8 @@ public class ResourceManager {
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
 		resetStoreDirectory();
 
-		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
+		getApplication().getContextDisplay().getMetrics(dm);
 		// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
 		// at least 3*9?
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
@@ -302,6 +301,11 @@ public class ResourceManager {
 		if (!path.exists()) {
 			path.mkdir();
 		}
+	}
+
+	@NonNull
+	public OsmandApplication getApplication() {
+		return (OsmandApplication) context.getApplicationContext();
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {

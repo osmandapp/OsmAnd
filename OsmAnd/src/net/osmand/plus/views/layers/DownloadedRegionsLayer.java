@@ -174,9 +174,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		paintBackuped = getPaint(getColor(R.color.region_backuped));
 
 		textPaint = new TextPaint();
-		WindowManager wmgr = (WindowManager) view.getApplication().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
-		wmgr.getDefaultDisplay().getMetrics(dm);
+		app.getContextDisplay().getMetrics(dm);
 		textPaint.setStrokeWidth(21 * dm.scaledDensity);
 		textPaint.setAntiAlias(true);
 		textPaint.setTextAlign(Paint.Align.CENTER);

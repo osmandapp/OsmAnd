@@ -114,9 +114,8 @@ public class MapViewWithLayers extends FrameLayout {
 				mapRendererContext.setMapRendererView(null);
 			}
 		}
-		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
+		app.getContextDisplay().getMetrics(dm);
 		NativeCoreContext.setMapRendererContext(app, dm.density);
 		mapRendererContext = NativeCoreContext.getMapRendererContext();
 		if (mapRendererContext != null) {

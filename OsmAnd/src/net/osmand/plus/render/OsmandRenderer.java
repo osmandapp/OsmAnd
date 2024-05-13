@@ -23,7 +23,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeSearchResult;
@@ -34,6 +35,7 @@ import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.map.MapTileDownloader;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -144,8 +146,12 @@ public class OsmandRenderer {
 		paint.setAntiAlias(true);
 
 		dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
+		getApplication().getContextDisplay().getMetrics(dm);
+	}
+
+	@NonNull
+	public OsmandApplication getApplication() {
+		return (OsmandApplication) context.getApplicationContext();
 	}
 
 	public PathEffect getDashEffect(RenderingContext rc, float[] cachedValues, float st){

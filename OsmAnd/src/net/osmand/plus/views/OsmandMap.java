@@ -60,8 +60,7 @@ public class OsmandMap {
 		int height;
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession == null) {
-			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
+			Display display = app.getContextDisplay();
 			Point screenDimensions = new Point(0, 0);
 			display.getSize(screenDimensions);
 			width = screenDimensions.x;

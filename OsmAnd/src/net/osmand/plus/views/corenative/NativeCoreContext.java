@@ -58,9 +58,8 @@ public class NativeCoreContext {
 				File directory = app.getAppPath("");
 				Logger.get().addLogSink(QIODeviceLogSink.createFileLogSink(new File(directory, LOG_FILE_NAME).getAbsolutePath()));
 
-				WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 				DisplayMetrics dm = new DisplayMetrics();
-				mgr.getDefaultDisplay().getMetrics(dm);
+				app.getContextDisplay().getMetrics(dm);
 
 				String cacheFilePath = new File(app.getCacheDir(), CACHE_FILE_NAME).getAbsolutePath();
 

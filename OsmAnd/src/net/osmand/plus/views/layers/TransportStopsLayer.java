@@ -7,7 +7,6 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -96,8 +95,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		super.initLayer(view);
 
 		DisplayMetrics dm = new DisplayMetrics();
-		WindowManager wmgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-		wmgr.getDefaultDisplay().getMetrics(dm);
+		getApplication().getContextDisplay().getMetrics(dm);
 		path = new Path();
 		attrs = new RenderingLineAttributes("transport_route");
 		attrs.defaultWidth = (int) (6 * view.getDensity());

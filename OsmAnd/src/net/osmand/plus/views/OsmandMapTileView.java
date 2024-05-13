@@ -300,9 +300,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		animatedMapMarkersThread = new AnimateMapMarkersThread(this);
 
-		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
+		application.getContextDisplay().getMetrics(dm);
 		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBoxBuilder()
 				.setLocation(ll.getLatitude(), ll.getLongitude())

@@ -3,9 +3,8 @@ package net.osmand.plus.base;
 import static net.osmand.plus.settings.enums.CompassMode.COMPASS_DIRECTION;
 import static net.osmand.plus.views.AnimateDraggingMapThread.SKIP_ANIMATION_DP_THRESHOLD;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.view.WindowManager;
+import android.view.Display;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -135,10 +134,10 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		mapDisplayPositionManager.setMapView(mapView);
 		autoZoomBySpeedHelper.setMapView(mapView);
 		if (mapView != null) {
-			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
+			Display display = app.getContextDisplay();
 			int orientation = 0;
-			if (wm != null) {
-				orientation = wm.getDefaultDisplay().getRotation();
+			if (display != null) {
+				orientation = display.getRotation();
 			}
 			app.getLocationProvider().updateScreenOrientation(orientation);
 			mapView.addMapLocationListener(this);
