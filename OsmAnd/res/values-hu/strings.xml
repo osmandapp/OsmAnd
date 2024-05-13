@@ -5073,7 +5073,7 @@
 \n • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
 \n
 \n</string>
-    <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
+    <string name="sort_duration_ascending">Először a legrövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
     <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
     <string name="sort_distance_descending">Először a leghosszabb távolság</string>
@@ -5339,7 +5339,7 @@
     <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklásszámot.</string>
     <string name="average_glide_time_interval_desc">Adja meg a siklásszám átlagának kiszámításához használt időintervallumot.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklásszámot mutatják.</string>
+    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklószámot mutatják.</string>
     <string name="glide_ratio_to_target">Siklásszám a célig</string>
     <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklásszámot a megadott intervallumhoz.</string>
     <string name="external_sensor_name_property_description">Szenzor neve</string>
@@ -5432,7 +5432,7 @@
 \n
 \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
 \n
-\n • Új widgetek: „Siklásszám” és „Nap állása”
+\n • Új widgetek: „Siklószám” és „Nap állása”
 \n
 \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
 \n
