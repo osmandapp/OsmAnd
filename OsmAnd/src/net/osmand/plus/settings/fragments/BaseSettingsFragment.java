@@ -46,6 +46,8 @@ import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bytehamster.lib.preferencesearch.SearchConfiguration;
+import com.bytehamster.lib.preferencesearch.SearchPreference;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -143,7 +145,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
 				if (prefManager.setPreferences(preferenceScreen)) {
-					setupPreferences();
+					setupSearchablePreferences();
 					registerPreferences(preferenceScreen);
 				}
 			} else {
@@ -384,6 +386,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected abstract void setupPreferences();
 
+	private void setupSearchablePreferences() {
+		final SearchPreference searchPreference = findPreference("searchPreference");
+		if (searchPreference != null) {
+			final SearchConfiguration config = searchPreference.getSearchConfiguration();
+			config.setActivity(getMapActivity());
+			config.index(currentScreenType.preferencesResId);
+		}
+		setupPreferences();
+	}
+
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
@@ -543,7 +555,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (resId != -1) {
 				addPreferencesFromResource(resId);
 			}
-			setupPreferences();
+			setupSearchablePreferences();
 			registerPreferences(getPreferenceScreen());
 		}
 	}
@@ -905,6 +917,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			LOG.error(e);
 		}
 		return false;
+	}
+
+	public static Fragment getActualFragment(final FragmentActivity activity) {
+        return activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 	}
 
 	void updateRouteInfoMenu() {

@@ -36,6 +36,9 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
+import com.bytehamster.lib.preferencesearch.SearchPreferenceResult;
+import com.bytehamster.lib.preferencesearch.SearchPreferenceResultListener;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -149,7 +152,7 @@ import java.util.concurrent.Executors;
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
 		OnDrawMapListener, OsmAndAppCustomizationListener, LockUIAdapter,
-		OnPreferenceStartFragmentCallback {
+		OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
 
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
@@ -1628,5 +1631,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onInAppPurchaseItemPurchased(String sku) {
 		getMapLayers().getRouteLayer().resetColorAvailabilityCache();
+	}
+
+	@Override
+	public void onSearchResultClicked(@NonNull final SearchPreferenceResult result) {
+		result.closeSearchPage(this);
+		result.highlight((PreferenceFragmentCompat) BaseSettingsFragment.getActualFragment(this));
 	}
 }
