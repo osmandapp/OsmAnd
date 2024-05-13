@@ -240,7 +240,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			int items = tracks.size() + groups.size();
 			int total = tracks.size();
 			for (TracksGroup group : groups) {
-				total += group.getTrackItems().size();
+				total += ((TrackFolder) group).getFlattenedTrackItems().size();
 			}
 			String text = getResources().getQuantityString(R.plurals.tracks, total, items, total);
 			actionBar.setTitle(text);
