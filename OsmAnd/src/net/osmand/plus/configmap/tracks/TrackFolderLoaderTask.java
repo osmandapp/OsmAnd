@@ -119,8 +119,10 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 			}
 			folder.setTrackItems(trackItems);
 			folder.setSubFolders(subFolders);
-			folder.resetCashedData();
 			smartFolderHelper.addTrackItemsToSmartFolder(trackItems);
+		}
+		for (TrackFolder folder : rootFolder.getFlattenedSubFolders())  {
+			folder.resetCashedData();
 		}
 		rootFolder.resetCashedData();
 	}
