@@ -201,6 +201,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean shouldHideInstallDialog() {
+		return true;
+	}
+
+	@Override
 	public String getComponentId1() {
 		return PARKING_PLUGIN_COMPONENT;
 	}

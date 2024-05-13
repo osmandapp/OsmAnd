@@ -172,6 +172,10 @@ public abstract class OsmandPlugin {
 		return isEnabled() && !isLocked();
 	}
 
+	public boolean shouldHideInstallDialog() {
+		return false;
+	}
+
 	public boolean isEnableByDefault() {
 		return false;
 	}

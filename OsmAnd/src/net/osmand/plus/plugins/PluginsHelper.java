@@ -318,7 +318,7 @@ public class PluginsHelper {
 			}
 
 			if (plugin.isMarketPlugin() || plugin.isPaid()) {
-				if (plugin.isActive()) {
+				if (plugin.isActive() && !plugin.shouldHideInstallDialog()) {
 					plugin.showInstallDialog(activity);
 				} else if (checkPluginPackage(app, plugin)) {
 					plugin.showDisableDialog(activity);

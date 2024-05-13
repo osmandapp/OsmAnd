@@ -103,6 +103,10 @@ public class ExternalSensorsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean shouldHideInstallDialog() {
+		return true;
+	}
+	@Override
 	public boolean isLocked() {
 		return !Version.isPaidVersion(app);
 	}
