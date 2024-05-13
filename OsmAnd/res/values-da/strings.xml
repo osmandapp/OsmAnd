@@ -5080,7 +5080,7 @@
 \n • Rettet kortbevægelser for tilt, zoom og rotation
 \n
 \n</string>
-    <string name="sort_duration_ascending">Kortere varighed først</string>
+    <string name="sort_duration_ascending">Korteste varighed først</string>
     <string name="selected_value">Valgt værdi</string>
     <string name="sort_duration_descending">Længste varighed først</string>
     <string name="sort_distance_ascending">Korteste distance først</string>
