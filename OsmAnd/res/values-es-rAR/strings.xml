@@ -5219,7 +5219,7 @@
     <string name="delete_folder_question">¿Borrar carpeta\?</string>
     <string name="delete_folder">Borrar carpeta</string>
     <string name="shared_string_new_track">Nueva traza</string>
-    <string name="delete_track_folder_dialog_message">Esto borrará la carpeta «%1$s» y todas las trazas (%2$s) incluidas.</string>
+    <string name="delete_track_folder_dialog_message">Quitarás la carpeta «%1$s» y sus %2$s trazas incluidas.</string>
     <string name="map_widget_rssi">RSSI</string>
     <string name="track_not_recorded">No grabado</string>
     <string name="show_all_tracks_on_the_map">Mostrar todas las trazas en el mapa</string>
@@ -5499,7 +5499,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
+    <string name="delete_smart_folder_dialog_message">Quitarás la carpeta inteligente «%1$s».</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
     <string name="empty_smart_folder_description">Las trazas que coincidan, serán añadidas aquí</string>
     <string name="configure_filter">Configurar filtro</string>
