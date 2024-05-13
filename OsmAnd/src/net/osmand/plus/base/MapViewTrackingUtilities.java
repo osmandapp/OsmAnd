@@ -120,7 +120,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	@Override
-	public void onMapMarkerChanged(MapMarker mapMarker) {}
+	public void onMapMarkerChanged(MapMarker mapMarker) {
+	}
 
 	@Override
 	public void onMapMarkersChanged() {
@@ -572,9 +573,12 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void onCompassModeChanged() {
 		showCompassModeToast();
 		updateSettings();
-		mapView.refreshMap();
-		if (mapView.isCarView()) {
-			app.refreshCarScreen();
+
+		if (mapView != null) {
+			mapView.refreshMap();
+			if (mapView.isCarView()) {
+				app.refreshCarScreen();
+			}
 		}
 	}
 

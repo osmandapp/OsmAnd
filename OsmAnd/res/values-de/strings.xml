@@ -5080,7 +5080,7 @@
 \n• Kartengesten für Neigen, Zoomen und Drehen korrigiert
 \n
 \n</string>
-    <string name="sort_duration_ascending">Kürzere Dauer zuerst</string>
+    <string name="sort_duration_ascending">Kürzeste Dauer zuerst</string>
     <string name="sort_distance_descending">Längste Entfernung zuerst</string>
     <string name="sort_date_ascending">Neuestes Datum zuerst</string>
     <string name="sort_date_descending">Ältestes Datum zuerst</string>
@@ -5189,7 +5189,7 @@
     <string name="number_of_tracks">%1$s Tracks</string>
     <string name="shared_string_foot">Fuß</string>
     <string name="device_disconnected">%1$s wurde getrennt</string>
-    <string name="rendering_attr_lightDetail_name">Helles Detail</string>
+    <string name="rendering_attr_lightDetail_name">Leuchtfeuer Detail</string>
     <string name="rendering_value_sectors_name">Sektoren</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
     <string name="rendering_value_sector2_name">Sektor 2</string>
@@ -5484,7 +5484,7 @@
     <string name="help_article_troubleshooting_track_recording_issues_name">Streckenaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
-    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenter Ordner „%1$s“.</string>
+    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“.</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
     <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>

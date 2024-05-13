@@ -5659,4 +5659,45 @@
 \n - Entrada do OpenStreetMap alterado para OAuth 2.0
 \n
 \n</string>
+    <string name="shared_string_changes">Alterações</string>
+    <string name="maps_that_also_be_used">Mapas que também podem ser usados: %1$s</string>
+    <string name="getting_list_of_required_maps">Obtendo uma lista de mapas necessários…</string>
+    <string name="required_maps_calculate_online_summary">A lista de mapas ausentes é baseada na rota em linha reta. Para obter uma lista precisa de mapas, o OsmAnd pode pré-calcular sua rota online.</string>
+    <string name="required_maps">Mapas obrigatórios</string>
+    <string name="missing_maps_header">Mapas ausentes ou desatualizados</string>
+    <string name="route_line_use_coloring_speed">A linha da rota é colorida pela velocidade do movimento.</string>
+    <string name="delete_actions_button">Botão de exclusão</string>
+    <string name="use_nearby_roads_summary">Usa mapa off-line para encontrar estradas próximas e dados de elevação. Pode ajustar a geometria da pista.</string>
+    <string name="use_nearby_roads">Usar estradas próximas</string>
+    <string name="shared_string_osm_id">ID do OSM</string>
+    <string name="shared_string_scale">Escala</string>
+    <string name="relief_3d_download_description">Mapas adicionais são necessários para visualizar o terreno no mapa.</string>
+    <string name="vertical_exaggeration">Exagero vertical</string>
+    <string name="vertical_exaggeration_description">Ao alterar o valor da escala, você pode enfatizar o relevo 3D.</string>
+    <string name="wall_color">Cor das paredes</string>
+    <string name="fixed_height">Altura fixa</string>
+    <string name="top">Topo</string>
+    <string name="bottom">Base</string>
+    <string name="top_and_bottom">Topo e base</string>
+    <string name="title_3d_track">Trilha 3D</string>
+    <string name="use_terrain_maps_summary">Usa mapas de terreno para dados de elevação. A geometria da trilha permanece inalterada.</string>
+    <string name="use_terrain_maps">Usar mapas de terreno</string>
+    <string name="release_4_8">• Estar preparado para 4.8</string>
+    <string name="track_vertical_exaggeration_description">Ao alterar o valor da escala, você pode alterar a altura da trilha 3D.</string>
+    <string name="visualized_by">Visualizado por</string>
+    <string name="track_line">Linha da trilha</string>
+    <string name="downward_gradient">Gradiente descendente</string>
+    <string name="upward_gradient">Gradiente ascendente</string>
+    <string name="explore_3d_track_description">Explore a trilha em 3D interativa! Visualize altura, velocidade e muito mais diretamente no mapa.</string>
+    <string name="missing_maps_description">Alguns mapas off-line necessários para esta rota estão faltando ou não estão atualizados. Baixe ou atualize esses mapas.</string>
+    <string name="delete_actions_button_confirmation">Tem certeza de que deseja excluir \"%1$s\" com todas as ações adicionadas?</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd pode recuperar dados de elevação de estradas próximas ou mapas de terreno.</string>
+    <string name="route_line_use_coloring_altitude">A linha da rota é colorida pela altitude de elevação.</string>
+    <string name="allow_display_on_top">Permitir exibição na parte superior</string>
+    <string name="allow_display_on_top_description">Permitir a exibição de textos de mapas uns sobre os outros</string>
+    <string name="show_debug_info">Mostrar informações de depuração</string>
+    <string name="show_debug_info_description">Exibir informações gráficas sobre o posicionamento de cada texto do mapa</string>
+    <string name="map_text">Textos do mapas</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evitar paralelepípedos</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evitar paralelepípedos</string>
 </resources>

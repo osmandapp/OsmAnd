@@ -5080,7 +5080,7 @@
     <string name="sort_distance_descending">La distancia más larga primero</string>
     <string name="sort_date_ascending">La fecha más reciente primero</string>
     <string name="shared_string_nearest">Más cerca</string>
-    <string name="sort_duration_ascending">Primero el de menor duración</string>
+    <string name="sort_duration_ascending">Primero la duración más corta</string>
     <string name="sort_date_descending">La fecha más antigua primero</string>
     <string name="selected_value">Valor elegido</string>
     <string name="app_mode_moped">Ciclomotor</string>
