@@ -454,27 +454,27 @@ public class TravelObfHelper implements TravelHelper {
 		return langs;
 	}
 
-	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> results, String searchQuery) {
-		results.sort(new Comparator<WikivoyageSearchResult>() {
-			@Override
-			public int compare(WikivoyageSearchResult ts1, WikivoyageSearchResult ts2) {
-				boolean ts1EqualsTestString = ts1.getArticleTitle().equals(searchQuery);
-				boolean ts2EqualsTestString = ts2.getArticleTitle().equals(searchQuery);
-				boolean ts1ContainsTestString = ts1.getArticleTitle().contains(searchQuery);
-				boolean ts2ContainsTestString = ts2.getArticleTitle().contains(searchQuery);
+	public void sortSearchResults(@NonNull List<WikivoyageSearchResult> results, String searchQuery) {
+		String searchQueryLC = searchQuery.toLowerCase();
+		results.sort((sr1, sr2) -> {
+			int sr1Comparison = collator.compare(sr1.getArticleTitle(), searchQuery);
+			int sr2Comparison = collator.compare(sr2.getArticleTitle(), searchQuery);
 
-				if (ts1EqualsTestString && !ts2EqualsTestString) {
+			if (sr1Comparison == 0 && sr2Comparison != 0) {
+				return -1;
+			} else if (sr1Comparison != 0 && sr2Comparison == 0) {
+				return 1;
+			} else if (sr1Comparison == 0) {
+				return collator.compare(sr1.getArticleTitle(), sr2.getArticleTitle());
+			} else {
+				String title1LC = sr1.getArticleTitle().toLowerCase();
+				String title2LC = sr2.getArticleTitle().toLowerCase();
+				if (title1LC.contains(searchQueryLC) && !title2LC.contains(searchQueryLC)) {
 					return -1;
-				} else if (!ts1EqualsTestString && ts2EqualsTestString) {
-					return 1;
-				} else if (ts1EqualsTestString && ts2EqualsTestString) {
-					return 0;
-				} else if (ts1ContainsTestString && !ts2ContainsTestString) {
-					return -1;
-				} else if (!ts1ContainsTestString && ts2ContainsTestString) {
+				} else if (!title1LC.contains(searchQueryLC) && title2LC.contains(searchQueryLC)) {
 					return 1;
 				} else {
-					return ts1.getIsPartOf().compareTo(ts2.getIsPartOf());
+					return collator.compare(sr1.getArticleTitle(), sr2.getArticleTitle());
 				}
 			}
 		});
