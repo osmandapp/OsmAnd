@@ -70,14 +70,18 @@ public class TerrainMode {
 					continue;
 				}
 				String nm = lf.getName();
-				if (nm.startsWith(HILLSHADE_PREFIX) && !HILLSHADE_KEY.equals(nm)) {
+				if (nm.startsWith(HILLSHADE_PREFIX)) {
 					String key = nm.substring(HILLSHADE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-					tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), true));
-				} else if (nm.startsWith(COLOR_SLOPE_PREFIX) && !SLOPE_KEY.equals(nm)) {
+					if (!HILLSHADE_KEY.equals(key)) {
+						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), true));
+					}
+				} else if (nm.startsWith(COLOR_SLOPE_PREFIX)) {
 					String key = nm.substring(COLOR_SLOPE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-					tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), false));
+					if (!SLOPE_KEY.equals(key)) {
+						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), false));
+					}
 				}
 			}
 		}
