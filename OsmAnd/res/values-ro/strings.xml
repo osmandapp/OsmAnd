@@ -392,7 +392,7 @@
     <string name="local_index_upload_gpx_description">Încărcați fișiere GPX către comunitatea OSM, îmbunătățind hărțile.</string>
     <string name="local_index_items_uploaded">%1$d din %2$d element(e) încărcate .</string>
     <string name="local_index_mi_upload_gpx">Trimite la OSM</string>
-    <string name="show_more_map_detail">Arată mai multe detalii pe hartă</string>
+    <string name="show_more_map_detail">Arată mai multe detalii ale hărții</string>
     <string name="show_more_map_detail_descr">Arată câteva delii ale hărții vectoriale (drumuri etc) de la niveluri mai joase de zoom.</string>
     <string name="favourites_delete_multiple_succesful">Puncte favorite șterse.</string>
     <string name="favorite_delete_multiple">Ștergeți %1$d favorite și %2$d grupuri de favorite\?</string>
@@ -809,7 +809,7 @@
     <string name="navigate_point_format_D">DDD.DDDDD</string>
     <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.S</string>
-    <string name="shared_string_show_on_map">Arată pe hartă</string>
+    <string name="shared_string_show_on_map">Afișare pe hartă</string>
     <string name="search_address_top_text">Adresă</string>
     <string name="search_address_region">Regiune</string>
     <string name="search_address_city">Oraș</string>
@@ -1675,7 +1675,7 @@
     <string name="first_intermediate_dest_description">Adaugă oprirea inițială</string>
     <string name="subsequent_dest_description">Mutați destinația sus și creați-o</string>
     <string name="show_closed_notes">Arată notele incheiate</string>
-    <string name="switch_osm_notes_visibility_desc">Arată/sau ascunde notele OSM pe hartă.</string>
+    <string name="switch_osm_notes_visibility_desc">Arată sau ascunde notele OSM pe hartă.</string>
     <string name="gpx_file_desc">GPX - disponibill pentru export catre JOSM sau alte editoare OSM.</string>
     <string name="osc_file_desc">OSC - disponibil pentru export catre OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Fișier GPX</string>
@@ -1778,7 +1778,7 @@
     <string name="marker_save_as_track_descr">Exportați marcajele dumneavoastră în următorul fișier GPX:</string>
     <string name="group_will_be_removed_after_restart">Grupul va dispărea data viitoare când porniți aplicația.</string>
     <string name="show_guide_line">Afișați liniile direcționale</string>
-    <string name="show_arrows_on_the_map">Arată săgețile pe hartă</string>
+    <string name="show_arrows_on_the_map">Arată săgeți pe hartă</string>
     <string name="remove_from_map_markers">Șterge din \'Marcaje de hartă\'</string>
     <string name="descendingly">Z-A</string>
     <string name="ascendingly">A-Z</string>
@@ -2605,7 +2605,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Moale</string>
     <string name="routeInfo_tracktype_name">Rezistența suprafeței</string>
     <string name="shared_string_file_is_saved">%s este salvat</string>
-    <string name="shared_string_open_track">Înregistrare deschisă</string>
+    <string name="shared_string_open_track">Deschide traseu</string>
     <string name="shared_string_track_is_saved">Traseul %s este salvat</string>
     <string name="app_mode_camper">Camping</string>
     <string name="app_mode_campervan">Rulota</string>
