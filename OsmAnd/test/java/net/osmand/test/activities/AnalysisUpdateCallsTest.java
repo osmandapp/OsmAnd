@@ -127,8 +127,9 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 			Runnable checkLeftDistanceTask = () -> {
 				MapRendererView rendererView = mapView.getMapRenderer();
 				if (rendererView != null) {
-					if(rendererView.getFrameId() - startFrameId < 50) {
-						throw new AssertionError("Map rendering to slow");
+					int renderedFrames = rendererView.getFrameId() - startFrameId;
+					if(renderedFrames < 50) {
+						throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
 					}
 				} else {
 					throw new AssertionError("Failed to get map renderer");
