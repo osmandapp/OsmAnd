@@ -13,6 +13,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GpxParameter;
@@ -28,6 +29,7 @@ import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,6 +44,7 @@ import java.util.concurrent.TimeUnit;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AnalysisUpdateCallsTest extends AndroidTest {
+	public static final Log LOG = PlatformUtil.getLog(AnalysisUpdateCallsTest.class);
 
 	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
 
@@ -86,15 +89,15 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 
 		mActivityScenarioRule.getScenario().moveToState(State.RESUMED).onActivity(activity -> {
 			mapView = activity.getMapView();
+
 			MapRendererView rendererView = mapView.getMapRenderer();
 			if (rendererView != null) {
 				startFrameId = rendererView.getFrameId();
 			}
+			observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
+			registerIdlingResources(observeDistToFinishIdlingResource);
+
 		});
-
-		observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
-		registerIdlingResources(observeDistToFinishIdlingResource);
-
 		Espresso.onIdle();
 	}
 
@@ -128,6 +131,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 				MapRendererView rendererView = mapView.getMapRenderer();
 				if (rendererView != null) {
 					int renderedFrames = rendererView.getFrameId() - startFrameId;
+					LOG.debug("rendered " + renderedFrames + " frames");
 					if (renderedFrames < 25) {
 						throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
 					}
