@@ -257,7 +257,7 @@ public class AppInitializer implements IProgress {
 				Algorithms.streamCopy(stream, new FileOutputStream(file));
 			}
 			app.regions.prepareFile(file.getAbsolutePath());
-			RoutePlannerFrontEnd.initMissingMapsCalculator(app.regions);
+			PlatformUtil.setOsmandRegions(app.regions);
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
 			file.delete(); // recreate file

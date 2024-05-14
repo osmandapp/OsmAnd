@@ -39,7 +39,9 @@ import net.osmand.plus.settings.enums.RoutingType;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.PrecalculatedRouteDirection;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -127,7 +129,9 @@ public class RouteProvider {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
-
+					if (params.calculationProgress.missingMapsCalculationResult != null) {
+						res.setMissingMapsCalculationResult(params.calculationProgress.missingMapsCalculationResult);
+					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.ONLINE) {
@@ -788,20 +792,11 @@ public class RouteProvider {
 		}
 		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
 		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
-		List<LatLon> inters = new ArrayList<LatLon>();
+		List<LatLon> inters = new ArrayList<>();
 		if (params.intermediates != null) {
-			inters = new ArrayList<LatLon>(params.intermediates);
+			inters = new ArrayList<>(params.intermediates);
 		}
-		RouteCalculationResult result = calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
-		List<LatLon> points  = new ArrayList<>();
-		points.add(st);
-		points.addAll(inters);
-		points.add(en);
-		result.setMissingMaps(params.calculationProgress.missingMaps,
-			 params.calculationProgress.mapsToUpdate,
-			 params.calculationProgress.potentiallyUsedMaps, env.getCtx(), points);
-
-		return result;
+		return calcOfflineRouteImpl(params, env.getRouter(), env.getCtx(), env.getComplexCtx(), st, en, inters, env.getPrecalculated());
 	}
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, RouteCalculationParams params, OsmandSettings settings,
