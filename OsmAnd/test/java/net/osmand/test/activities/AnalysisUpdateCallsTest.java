@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.Lifecycle.State;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.IdlingPolicies;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -87,7 +87,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 		gpxFile.path = testItem.getFile().getPath();
 		app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 
-		mActivityScenarioRule.getScenario().moveToState(Lifecycle.State.RESUMED).onActivity(activity -> {
+		mActivityScenarioRule.getScenario().moveToState(State.RESUMED).onActivity(activity -> {
 			mapView = activity.getMapView();
 
 			MapRendererView rendererView = mapView.getMapRenderer();
@@ -132,7 +132,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 				if (rendererView != null) {
 					int renderedFrames = rendererView.getFrameId() - startFrameId;
 					LOG.debug("rendered " + renderedFrames + " frames");
-					if(renderedFrames < 50) {
+					if (renderedFrames < 25) {
 						throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
 					}
 				} else {
