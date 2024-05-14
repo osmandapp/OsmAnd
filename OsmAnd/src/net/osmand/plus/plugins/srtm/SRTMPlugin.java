@@ -75,9 +75,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
-	public static final String SLOPE_MAIN_COLOR_FILENAME = "slopes_main.txt";
-	public static final String HILLSHADE_MAIN_COLOR_FILENAME = "hillshade_main.txt";
-	public static final String SLOPE_SECONDARY_COLOR_FILENAME = "color_slope.txt";
+	public static final String SLOPE_MAIN_COLOR_FILENAME = "clr_slope.txt";
+	public static final String HILLSHADE_MAIN_COLOR_FILENAME = "hs_main_hillshade.txt";
+	public static final String SLOPE_SECONDARY_COLOR_FILENAME = "hs_scnd_hillshade.txt";
 
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
