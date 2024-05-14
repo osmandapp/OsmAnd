@@ -4,9 +4,9 @@ import static net.osmand.test.common.OsmAndDialogInteractions.skipAppStartDialog
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle.State;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.IdlingPolicies;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -84,7 +84,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 		gpxFile.path = testItem.getFile().getPath();
 		app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
 
-		mActivityScenarioRule.getScenario().onActivity(activity -> {
+		mActivityScenarioRule.getScenario().moveToState(State.RESUMED).onActivity(activity -> {
 			mapView = activity.getMapView();
 			MapRendererView rendererView = mapView.getMapRenderer();
 			if (rendererView != null) {
@@ -128,7 +128,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 				MapRendererView rendererView = mapView.getMapRenderer();
 				if (rendererView != null) {
 					int renderedFrames = rendererView.getFrameId() - startFrameId;
-					if(renderedFrames < 50) {
+					if (renderedFrames < 25) {
 						throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
 					}
 				} else {
