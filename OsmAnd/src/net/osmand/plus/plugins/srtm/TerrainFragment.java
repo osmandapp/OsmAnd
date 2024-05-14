@@ -152,7 +152,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		int maxZoom = srtmPlugin.getTerrainMaxZoom();
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
-		coloSchemeTv.setText(mode.nameId);
+		coloSchemeTv.setText(mode.getDescription());
 		AndroidUiHelper.updateVisibility(legend, mode.isColor());
 	}
 
@@ -162,7 +162,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			List<PopUpMenuItem> menuItems = new ArrayList<>();
 			for (TerrainMode mode : TerrainMode.values(app)) {
 				menuItems.add(new PopUpMenuItem.Builder(app)
-						.setTitle(getString(mode.nameId))
+						.setTitle(mode.getDescription())
 						.setOnClickListener(v -> setupTerrainMode(mode))
 						.create());
 			}
