@@ -103,7 +103,9 @@ public class MissingMapsCalculator {
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
-					CollectionUtils.addIfNotContains(p.regions.get(0), missingMaps, mapsToDownload);
+					String region = p.regions.get(0);
+					missingMaps.add(region);
+					mapsToDownload.add(region);
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -113,7 +115,7 @@ public class MissingMapsCalculator {
 				}
 			} else {
 				if (p.regions.size() > 0) {
-					CollectionUtils.addIfNotContains(usedMaps, p.regions.get(0));
+					usedMaps.add(p.regions.get(0));
 				}
 			}
 		}
@@ -139,9 +141,10 @@ public class MissingMapsCalculator {
 				}
 				if (region != null) {
 					if (!fresh) {
-						CollectionUtils.addIfNotContains(region, mapsToUpdate, mapsToDownload);
+						mapsToUpdate.add(region);
+						mapsToDownload.add(region);
 					} else {
-						CollectionUtils.addIfNotContains(usedMaps, region);
+						usedMaps.add(region);
 					}
 				}
 			}
@@ -150,7 +153,7 @@ public class MissingMapsCalculator {
 			for (Point p : pointsToCheck) {
 				for (int i = 0; p.hhEditions != null && i < p.hhEditions.length; i++) {
 					if (p.hhEditions[i] == selectedEdition ) {
-						CollectionUtils.addIfNotContains(usedMaps, p.regions.get(i));
+						usedMaps.add(p.regions.get(i));
 						break;
 					}
 				}
