@@ -1,7 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
 import static net.osmand.IndexConstants.GEOTIFF_SQLITE_CACHE_DIR;
-import static net.osmand.plus.plugins.srtm.TerrainMode.SLOPE;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -153,17 +152,17 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		int maxZoom = srtmPlugin.getTerrainMaxZoom();
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
-		coloSchemeTv.setText(mode.nameId);
-		AndroidUiHelper.updateVisibility(legend, mode == SLOPE);
+		coloSchemeTv.setText(mode.getDescription());
+		AndroidUiHelper.updateVisibility(legend, mode.isColor());
 	}
 
 	private void setupColorSchemeCard(@NonNull View root) {
 		View colorSchemeBtn = root.findViewById(R.id.color_scheme_button);
 		colorSchemeBtn.setOnClickListener(view -> {
 			List<PopUpMenuItem> menuItems = new ArrayList<>();
-			for (TerrainMode mode : TerrainMode.values()) {
+			for (TerrainMode mode : TerrainMode.values(app)) {
 				menuItems.add(new PopUpMenuItem.Builder(app)
-						.setTitle(getString(mode.nameId))
+						.setTitle(mode.getDescription())
 						.setOnClickListener(v -> setupTerrainMode(mode))
 						.create());
 			}
@@ -234,22 +233,19 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, profileColor));
 			stateTv.setText(R.string.shared_string_enabled);
 
-			switch (mode) {
-				case HILLSHADE:
-					descriptionTv.setText(R.string.hillshade_description);
-					downloadDescriptionTv.setText(R.string.hillshade_download_description);
-					break;
-				case SLOPE:
-					descriptionTv.setText(R.string.slope_legend_description);
-					String wikiString = getString(R.string.shared_string_wikipedia);
-					String readMoreText = String.format(
-							getString(R.string.slope_legend_description),
-							wikiString
-					);
-					String wikiSlopeUrl = getString(R.string.url_wikipedia_slope);
-					setupClickableText(descriptionTv, readMoreText, wikiString, wikiSlopeUrl, false);
-					downloadDescriptionTv.setText(R.string.slope_download_description);
-					break;
+			if (mode.isHillshade()) {
+				descriptionTv.setText(R.string.hillshade_description);
+				downloadDescriptionTv.setText(R.string.hillshade_download_description);
+			} else if (mode.isColor()) {
+				descriptionTv.setText(R.string.slope_legend_description);
+				String wikiString = getString(R.string.shared_string_wikipedia);
+				String readMoreText = String.format(
+						getString(R.string.slope_legend_description),
+						wikiString
+				);
+				String wikiSlopeUrl = getString(R.string.url_wikipedia_slope);
+				setupClickableText(descriptionTv, readMoreText, wikiString, wikiSlopeUrl, false);
+				downloadDescriptionTv.setText(R.string.slope_download_description);
 			}
 			downloadMapsCard.updateDownloadSection(getMapActivity());
 		} else {
