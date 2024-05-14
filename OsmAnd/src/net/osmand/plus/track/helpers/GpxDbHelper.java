@@ -38,6 +38,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	private final Map<File, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
 
 	private GpxReaderTask readerTask;
+	public static long readTrackItemCount = 0;
 
 	public interface GpxDataItemCallback {
 
@@ -208,6 +209,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		}
 		GpxDataItem item = dataItems.get(file);
 		if (GpxDbUtils.isAnalyseNeeded(item) && !isGpxReading(file)) {
+			readTrackItemCount++;
 			readGpxItem(file, item, callback);
 		}
 		return item;
