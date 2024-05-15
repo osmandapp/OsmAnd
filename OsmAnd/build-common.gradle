@@ -386,7 +386,7 @@ dependencies {
 	implementation "androidx.car.app:app-projected:1.2.0"
 
 	implementation 'com.google.android.gms:play-services-location:21.0.1'
-	implementation 'com.github.ByteHamster:SearchPreference:v2.5.1'
+	implementation 'com.github.KnollFrank:SearchPreference:d1a3cb44e0'
 	implementation 'com.google.guava:guava:30.1.1-jre'
 
 	//implementation "androidx.tracing:tracing:1.1.0"

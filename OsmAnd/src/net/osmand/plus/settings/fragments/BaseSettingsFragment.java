@@ -395,7 +395,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (searchPreference != null) {
 			final SearchConfiguration config = searchPreference.getSearchConfiguration();
 			config.setActivity(getMapActivity());
-            indexItems(getPreferences(getPreferenceScreen()), config);
+            config.indexItems(getPreferences(getPreferenceScreen()));
 		}
 	}
 
@@ -409,10 +409,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			}
 		}
 		return preferencesBuilder.build();
-	}
-
-	private static void indexItems(final List<Preference> preferences, final SearchConfiguration config) {
-		preferences.forEach(config::indexItem);
 	}
 
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
