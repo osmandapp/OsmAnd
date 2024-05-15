@@ -50,6 +50,8 @@ import com.bytehamster.lib.preferencesearch.SearchConfiguration;
 import com.bytehamster.lib.preferencesearch.SearchPreference;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -83,6 +85,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
@@ -387,13 +390,29 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected abstract void setupPreferences();
 
 	private void setupSearchablePreferences() {
+		setupPreferences();
 		final SearchPreference searchPreference = findPreference("searchPreference");
 		if (searchPreference != null) {
 			final SearchConfiguration config = searchPreference.getSearchConfiguration();
 			config.setActivity(getMapActivity());
-			config.index(currentScreenType.preferencesResId);
+            indexItems(getPreferences(getPreferenceScreen()), config);
 		}
-		setupPreferences();
+	}
+
+	private static List<Preference> getPreferences(final PreferenceGroup preferenceGroup) {
+		final Builder<Preference> preferencesBuilder = ImmutableList.builder();
+		for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
+			final Preference preference = preferenceGroup.getPreference(i);
+			preferencesBuilder.add(preference);
+			if (preference instanceof PreferenceGroup) {
+                preferencesBuilder.addAll(getPreferences((PreferenceGroup) preference));
+			}
+		}
+		return preferencesBuilder.build();
+	}
+
+	private static void indexItems(final List<Preference> preferences, final SearchConfiguration config) {
+		preferences.forEach(config::indexItem);
 	}
 
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
