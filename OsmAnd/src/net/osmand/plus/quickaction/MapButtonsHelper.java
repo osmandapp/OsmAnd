@@ -187,7 +187,8 @@ public class MapButtonsHelper {
 
 	public boolean isActionNameUnique(@NonNull List<QuickAction> actions, @NonNull QuickAction quickAction) {
 		for (QuickAction action : actions) {
-			if (quickAction.id != action.id && Algorithms.stringsEqual(quickAction.getName(app), action.getName(app))) {
+			if (quickAction.getId() != action.getId()
+					&& Algorithms.stringsEqual(quickAction.getName(app), action.getName(app))) {
 				return false;
 			}
 		}
@@ -392,6 +393,17 @@ public class MapButtonsHelper {
 	public QuickActionButtonState getButtonStateById(@NonNull String id) {
 		for (QuickActionButtonState buttonState : mapButtonStates) {
 			if (Algorithms.stringsEqual(buttonState.getId(), id)) {
+				return buttonState;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public QuickActionButtonState getButtonStateByAction(@NonNull QuickAction action) {
+		long id = action.getId();
+		for (QuickActionButtonState buttonState : mapButtonStates) {
+			if (buttonState.getQuickAction(id) != null) {
 				return buttonState;
 			}
 		}
