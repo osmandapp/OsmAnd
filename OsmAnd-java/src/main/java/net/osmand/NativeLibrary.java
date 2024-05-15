@@ -297,7 +297,7 @@ public class NativeLibrary {
 		for (RouteSegmentResult rsr : results) {
 			initRouteRegion(gCtx, rsr);
 		}
-		gCtx.result.addAll(results);
+		gCtx.fullRoute.addAll(results);
 		return gCtx;
 	}
 

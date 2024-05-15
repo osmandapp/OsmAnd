@@ -67,6 +67,7 @@ public class GpxSegmentsApproximation {
 				continue;
 			}
 			currentPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
+			fres.setGpxPointIndex(currentPoint.ind);
 			currentPoint.routeToTarget.add(fres);
 			currentPoint.targetInd = minNextInd;
 
