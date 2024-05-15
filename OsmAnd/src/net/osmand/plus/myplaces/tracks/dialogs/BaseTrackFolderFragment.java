@@ -382,6 +382,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	private void removeSurplusTabsSortModes() {
+	// TODO: Find adequate places to call this from
+	// Call only from tracks root folder to not lose valid entries!
 		OsmandSettings settings = app.getSettings();
 		Map<String, String> oldTabsSortModes = settings.getTrackSortModes();
 		Map<String, String> tabsSortModes = new HashMap<>();
