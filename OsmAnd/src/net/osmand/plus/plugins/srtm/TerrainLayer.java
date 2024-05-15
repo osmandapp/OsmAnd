@@ -115,7 +115,7 @@ public class TerrainLayer extends MapTileLayer {
 		OsmandApplication app = getApplication();
 		String slopeColorFilename = app.getAppPath(HEIGHTMAP_INDEX_DIR + mode.getMainFile()).getAbsolutePath();
 		SlopeRasterMapLayerProvider provider = new SlopeRasterMapLayerProvider(geoTiffCollection, slopeColorFilename);
-		// provider.setKey(mode.getKey()); // FIXME opengl binding (cache should be key +'.cache')
+		// provider.setKey(mode.getKey()); // opengl binding (cache should be key +'.cache')
 		provider.setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
 		provider.setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
 		return provider;
@@ -129,7 +129,7 @@ public class TerrainLayer extends MapTileLayer {
 		String slopeSecondaryColorFilename = new File(heightmapDir, mode.getSecondFile()).getAbsolutePath();
 		HillshadeRasterMapLayerProvider provider =
 				new HillshadeRasterMapLayerProvider(geoTiffCollection, hillshadeColorFilename, slopeSecondaryColorFilename);
-		// provider.setKey(mode.getKey()); // FIXME opengl binding (cache should be key +'.cache')
+		// provider.setKey(mode.getKey()); //  opengl binding (cache should be key +'.cache')
 		provider.setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
 		provider.setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
 		return provider;
