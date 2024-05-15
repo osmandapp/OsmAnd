@@ -30,10 +30,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
+import net.osmand.plus.views.layers.MapQuickActionLayer;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -160,11 +161,17 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract String getNextSelectedItem(OsmandApplication app);
 
 	protected void showChooseDialog(@NonNull MapActivity mapActivity) {
-		MapLayers mapLayers = mapActivity.getMapLayers();
-		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
-		if (selectedButton != null) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		MapQuickActionLayer layer = mapActivity.getMapLayers().getMapQuickActionLayer();
+
+		QuickActionButton button = layer.getSelectedButton();
+		QuickActionButtonState buttonState = button != null ? button.getButtonState() : null;
+		if (buttonState == null) {
+			buttonState = app.getMapButtonsHelper().getButtonStateByAction(this);
+		}
+		if (buttonState != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			SelectMapViewQuickActionsBottomSheet.showInstance(manager, selectedButton.getButtonState(), id);
+			SelectMapViewQuickActionsBottomSheet.showInstance(manager, buttonState, id);
 		}
 	}
 
