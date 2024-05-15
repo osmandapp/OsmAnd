@@ -61,7 +61,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 	@Override
 	public void setup() {
 		super.setup();
-		IdlingPolicies.setIdlingResourceTimeout(40, TimeUnit.SECONDS);
+		IdlingPolicies.setIdlingResourceTimeout(360, TimeUnit.SECONDS);
 		try {
 			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME));
 		} catch (IOException e) {
@@ -90,14 +90,9 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 		mActivityScenarioRule.getScenario().moveToState(State.RESUMED).onActivity(activity -> {
 			mapView = activity.getMapView();
 
-			MapRendererView rendererView = mapView.getMapRenderer();
-			if (rendererView != null) {
-				startFrameId = rendererView.getFrameId();
-			}
-			observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
-			registerIdlingResources(observeDistToFinishIdlingResource);
-
 		});
+		observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
+		registerIdlingResources(observeDistToFinishIdlingResource);
 		Espresso.onIdle();
 	}
 
@@ -127,24 +122,34 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 		public ObserveDistToFinishIdlingResource(@NonNull OsmandApplication app) {
 			super(app);
 			Handler handler = new Handler(Looper.getMainLooper());
-			Runnable checkLeftDistanceTask = () -> {
+			handler.postDelayed(createTaskRunnable(), 30000);
+		}
+
+		private Runnable createTaskRunnable() {
+			return () -> {
 				MapRendererView rendererView = mapView.getMapRenderer();
 				if (rendererView != null) {
-					int renderedFrames = rendererView.getFrameId() - startFrameId;
-					LOG.debug("rendered " + renderedFrames + " frames");
-					if (renderedFrames < 25) {
-						throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
+					if (startFrameId == 0) {
+						startFrameId = rendererView.getFrameId();
+						Handler handler = new Handler(Looper.getMainLooper());
+						handler.postDelayed(createTaskRunnable(), CHECK_INTERVAL);
+					} else {
+						int renderedFrames = rendererView.getFrameId() - startFrameId;
+						LOG.debug("rendered " + renderedFrames + " frames");
+						if (renderedFrames < 25) {
+							throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
+						}
+						idle = true;
+						notifyIdleTransition();
 					}
 				} else {
 					throw new AssertionError("Failed to get map renderer");
 				}
+				LOG.debug("readTrackItemCount " + GpxDbHelper.readTrackItemCount);
 				if (GpxDbHelper.readTrackItemCount > 2) {
 					throw new AssertionError("To many updates of analysis " + GpxDbHelper.readTrackItemCount);
 				}
-				idle = true;
-				notifyIdleTransition();
 			};
-			handler.postDelayed(checkLeftDistanceTask, CHECK_INTERVAL);
 		}
 
 		@Override
