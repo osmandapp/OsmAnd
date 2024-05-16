@@ -137,7 +137,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 						int renderedFrames = rendererView.getFrameId() - startFrameId;
 						LOG.debug("rendered " + renderedFrames + " frames");
 						if (renderedFrames < 25) {
-//							throw new AssertionError("Map rendering to slow. rendered " + renderedFrames + " frames");
+//							throw new AssertionError("Map rendering too slow. rendered " + renderedFrames + " frames");
 						}
 						idle = true;
 						notifyIdleTransition();
