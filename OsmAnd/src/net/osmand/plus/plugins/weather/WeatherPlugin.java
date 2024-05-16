@@ -214,11 +214,6 @@ public class WeatherPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean shouldHideInstallDialog() {
-		return true;
-	}
-
-	@Override
 	public boolean isLocked() {
 		return !InAppPurchaseUtils.isWeatherAvailable(app);
 	}

@@ -65,6 +65,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -172,8 +173,8 @@ public abstract class OsmandPlugin {
 		return isEnabled() && !isLocked();
 	}
 
-	public boolean shouldHideInstallDialog() {
-		return false;
+	public boolean shouldShowInstallDialog() {
+		return isActive() && (!Algorithms.isEmpty(getAddedAppModes()) || !Algorithms.isEmpty(getSuggestedMaps()));
 	}
 
 	public boolean isEnableByDefault() {
