@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins;
 
 
+import static net.osmand.plus.plugins.PluginsHelper.checkPluginPackage;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -177,6 +179,10 @@ public abstract class OsmandPlugin {
 		return isActive() && (!Algorithms.isEmpty(getAddedAppModes()) || !Algorithms.isEmpty(getSuggestedMaps()));
 	}
 
+	public boolean shouldShowDisableDialog() {
+		return !isActive() && checkPluginPackage(app, this);
+	}
+
 	public boolean isEnableByDefault() {
 		return false;
 	}
@@ -314,7 +320,7 @@ public abstract class OsmandPlugin {
 	}
 
 	protected boolean isAvailable(OsmandApplication app) {
-		return PluginsHelper.checkPluginPackage(app, this) || !isPaid();
+		return checkPluginPackage(app, this) || !isPaid();
 	}
 
 	protected List<IndexItem> getMapsForType(@NonNull LatLon latLon, @NonNull DownloadActivityType type) {
