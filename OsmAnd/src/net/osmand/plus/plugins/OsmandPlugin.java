@@ -1,6 +1,8 @@
 package net.osmand.plus.plugins;
 
 
+import static net.osmand.plus.plugins.PluginsHelper.checkPluginPackage;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -65,6 +67,7 @@ import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.search.core.SearchPhrase;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
@@ -170,6 +173,14 @@ public abstract class OsmandPlugin {
 
 	public boolean isActive() {
 		return isEnabled() && !isLocked();
+	}
+
+	public boolean shouldShowInstallDialog() {
+		return isActive() && (!Algorithms.isEmpty(getAddedAppModes()) || !Algorithms.isEmpty(getSuggestedMaps()));
+	}
+
+	public boolean shouldShowDisableDialog() {
+		return !isActive() && checkPluginPackage(app, this);
 	}
 
 	public boolean isEnableByDefault() {
@@ -309,7 +320,7 @@ public abstract class OsmandPlugin {
 	}
 
 	protected boolean isAvailable(OsmandApplication app) {
-		return PluginsHelper.checkPluginPackage(app, this) || !isPaid();
+		return checkPluginPackage(app, this) || !isPaid();
 	}
 
 	protected List<IndexItem> getMapsForType(@NonNull LatLon latLon, @NonNull DownloadActivityType type) {
