@@ -57,6 +57,9 @@ public class GpxSegmentsApproximation {
 					minDistSqrSegment = minDistSqr;
 					minNextInd = j;
 				}
+				if (MapUtils.getDistance(currentPoint.loc, gpxPoints.get(j).loc) > minPointApproximation) {
+					break; // avoid shortcutting of loops
+				}
 			}
 			if (minNextInd < 0) {
 				break;
