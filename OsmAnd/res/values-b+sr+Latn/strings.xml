@@ -5729,4 +5729,5 @@
     <string name="map_text">Tekst mape</string>
     <string name="routing_attr_avoid_cobblestone_name">Izbegavati kaldrmu</string>
     <string name="routing_attr_avoid_cobblestone_description">Izbegavati kaldrmu</string>
+    <string name="steps_per_minute_unit">KPM</string>
 </resources>
