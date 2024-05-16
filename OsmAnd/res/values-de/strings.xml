@@ -5727,4 +5727,5 @@
     <string name="routing_attr_avoid_cobblestone_name">Kopfsteinpflaster vermeiden</string>
     <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
     <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts kannst du die Höhe des 3D-Tracks ändern.</string>
+    <string name="steps_per_minute_unit">SPM</string>
 </resources>
