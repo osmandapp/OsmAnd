@@ -498,18 +498,12 @@ public class TravelObfHelper implements TravelHelper {
 				case MACH_TITLE:
 					return Boolean.compare(sr1Comparison, sr2Comparison);
 				case CONTAINS_OF_TITLE:
-					if (sr1Comparison || sr2Comparison) {
-						String title1LC = articleTitle1.toLowerCase();
-						String title2LC = articleTitle2.toLowerCase();
-						return Boolean.compare(!title1LC.contains(c.searchQueryLC), !title2LC.contains(c.searchQueryLC));
-					}
-					break;
+					boolean title1contains = articleTitle1.toLowerCase().contains(c.searchQueryLC);
+					boolean title2contains = articleTitle2.toLowerCase().contains(c.searchQueryLC);
+					return -Boolean.compare(title1contains, title2contains);
 				case OTHER:
 					int comp = c.collator.compare(articleTitle1, articleTitle2);
-					if (comp == 0) {
-						return c.collator.compare(sr1.isPartOf, sr2.isPartOf);
-					}
-					return comp;
+					return (comp != 0) ? comp : c.collator.compare(sr1.isPartOf, sr2.isPartOf);
 			}
 			return 0;
 		}
