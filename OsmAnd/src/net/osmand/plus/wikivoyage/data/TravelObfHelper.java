@@ -492,25 +492,16 @@ public class TravelObfHelper implements TravelHelper {
 		public int compare(WikivoyageSearchResult sr1, WikivoyageSearchResult sr2, SearchResultComparator c) {
 			String articleTitle1 = sr1.getArticleTitle();
 			String articleTitle2 = sr2.getArticleTitle();
-			int sr1Comparison = c.collator.compare(articleTitle1, c.searchQuery);
-			int sr2Comparison = c.collator.compare(articleTitle2, c.searchQuery);
+			boolean sr1Comparison = c.collator.compare(articleTitle1, c.searchQuery) != 0;
+			boolean sr2Comparison = c.collator.compare(articleTitle2, c.searchQuery) != 0;
 			switch (this) {
 				case MACH_TITLE:
-					if (sr1Comparison == 0) {
-						return -1;
-					} else if (sr2Comparison == 0) {
-						return 1;
-					}
-					break;
+					return Boolean.compare(sr1Comparison, sr2Comparison);
 				case CONTAINS_OF_TITLE:
-					if (sr1Comparison != 0 || sr2Comparison != 0) {
+					if (sr1Comparison || sr2Comparison) {
 						String title1LC = articleTitle1.toLowerCase();
 						String title2LC = articleTitle2.toLowerCase();
-						if (title1LC.contains(c.searchQueryLC) && !title2LC.contains(c.searchQueryLC)) {
-							return -1;
-						} else if (!title1LC.contains(c.searchQueryLC) && title2LC.contains(c.searchQueryLC)) {
-							return 1;
-						}
+						return Boolean.compare(!title1LC.contains(c.searchQueryLC), !title2LC.contains(c.searchQueryLC));
 					}
 					break;
 				case OTHER:
