@@ -454,30 +454,74 @@ public class TravelObfHelper implements TravelHelper {
 		return langs;
 	}
 
-	public void sortSearchResults(@NonNull List<WikivoyageSearchResult> results, String searchQuery) {
-		String searchQueryLC = searchQuery.toLowerCase();
-		results.sort((sr1, sr2) -> {
-			int sr1Comparison = collator.compare(sr1.getArticleTitle(), searchQuery);
-			int sr2Comparison = collator.compare(sr2.getArticleTitle(), searchQuery);
+	public void sortSearchResults(List<WikivoyageSearchResult> results, String searchQuery) {
+		results.sort(new SearchResultComparator(searchQuery, collator));
+	}
 
-			if (sr1Comparison == 0 && sr2Comparison != 0) {
-				return -1;
-			} else if (sr1Comparison != 0 && sr2Comparison == 0) {
-				return 1;
-			} else if (sr1Comparison == 0) {
-				return collator.compare(sr1.getArticleTitle(), sr2.getArticleTitle());
-			} else {
-				String title1LC = sr1.getArticleTitle().toLowerCase();
-				String title2LC = sr2.getArticleTitle().toLowerCase();
-				if (title1LC.contains(searchQueryLC) && !title2LC.contains(searchQueryLC)) {
-					return -1;
-				} else if (!title1LC.contains(searchQueryLC) && title2LC.contains(searchQueryLC)) {
-					return 1;
-				} else {
-					return collator.compare(sr1.getArticleTitle(), sr2.getArticleTitle());
+	public static class SearchResultComparator implements Comparator<WikivoyageSearchResult> {
+		private final Collator collator;
+		private final String searchQuery;
+		private final String searchQueryLC;
+
+
+		public SearchResultComparator(String searchQuery, Collator collator) {
+			this.searchQuery = searchQuery;
+			this.collator = collator;
+			searchQueryLC = searchQuery.toLowerCase();
+		}
+
+		@Override
+		public int compare(WikivoyageSearchResult sr1, WikivoyageSearchResult sr2) {
+			for (ResultCompareStep step : ResultCompareStep.values()) {
+				int res = step.compare(sr1, sr2, this);
+				if (res != 0) {
+					return res;
 				}
 			}
-		});
+			return 0;
+		}
+
+	}
+
+	private enum ResultCompareStep {
+		MACH_TITLE,
+		CONTAINS_OF_TITLE,
+		OTHER;
+
+		// -1 - means 1st is less (higher list position) than 2nd
+		public int compare(WikivoyageSearchResult sr1, WikivoyageSearchResult sr2, SearchResultComparator c) {
+			String articleTitle1 = sr1.getArticleTitle();
+			String articleTitle2 = sr2.getArticleTitle();
+			int sr1Comparison = c.collator.compare(articleTitle1, c.searchQuery);
+			int sr2Comparison = c.collator.compare(articleTitle2, c.searchQuery);
+			switch (this) {
+				case MACH_TITLE:
+					if (sr1Comparison == 0) {
+						return -1;
+					} else if (sr2Comparison == 0) {
+						return 1;
+					}
+					break;
+				case CONTAINS_OF_TITLE:
+					if (sr1Comparison != 0 || sr2Comparison != 0) {
+						String title1LC = articleTitle1.toLowerCase();
+						String title2LC = articleTitle2.toLowerCase();
+						if (title1LC.contains(c.searchQueryLC) && !title2LC.contains(c.searchQueryLC)) {
+							return -1;
+						} else if (!title1LC.contains(c.searchQueryLC) && title2LC.contains(c.searchQueryLC)) {
+							return 1;
+						}
+					}
+					break;
+				case OTHER:
+					int comp = c.collator.compare(articleTitle1, articleTitle2);
+					if (comp == 0) {
+						return c.collator.compare(sr1.isPartOf, sr2.isPartOf);
+					}
+					return comp;
+			}
+			return 0;
+		}
 	}
 
 	@NonNull
