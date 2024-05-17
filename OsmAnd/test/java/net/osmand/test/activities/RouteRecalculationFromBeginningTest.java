@@ -67,7 +67,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		IdlingPolicies.setIdlingResourceTimeout(40, TimeUnit.SECONDS);
 		enableSimulation(500);
 		try {
-			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME));
+			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), null);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
