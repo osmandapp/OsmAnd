@@ -50,6 +50,8 @@ public class MapPoiTypes {
 	public static final String ROUTE_TRACK = "route_track";
 	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
+	public static final String OSMAND_BRAND_FILTER = "osmand_brand_filter";
+
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
@@ -936,6 +938,10 @@ public class MapPoiTypes {
 		a.setSubType(pt.getKeyName());
 		if (pt.getNameTag() != null) {
 			a.setName(nameValue);
+		}
+		String brand = otherTags.get("brand");
+		if (brand != null) {
+			a.setBrand(brand);
 		}
 		a.setOrder(pt.getOrder());
 		// additional info

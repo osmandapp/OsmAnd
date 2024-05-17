@@ -1617,9 +1617,14 @@ public class BinaryMapIndexReader {
 		request.resultMatcher = resultMatcher;
 		return request;
 	}
-	
+
+	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom,
+	                                                           SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher) {
+		return 	buildSearchPoiRequest(sleft, sright, stop, sbottom, zoom, poiTypeFilter, null, matcher);
+	}
+
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int sleft, int sright, int stop, int sbottom, int zoom, 
-			SearchPoiTypeFilter poiTypeFilter, ResultMatcher<Amenity> matcher){
+			SearchPoiTypeFilter poiTypeFilter, SearchPoiSubcategoryFilter subcategoryFilter, ResultMatcher<Amenity> matcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
 		request.left = sleft;
 		request.right = sright;
@@ -1627,6 +1632,7 @@ public class BinaryMapIndexReader {
 		request.bottom = sbottom;
 		request.zoom = zoom;
 		request.poiTypeFilter = poiTypeFilter;
+		request.subcategoryFilter = subcategoryFilter;
 		request.resultMatcher = matcher;
 
 		return request;
@@ -1716,6 +1722,10 @@ public class BinaryMapIndexReader {
 		public boolean isEmpty();
 	}
 
+	public static interface SearchPoiSubcategoryFilter {
+		public boolean accept(PoiSubType poiSubType, String value);
+	}
+
 	public static class MapObjectStat {
 		public int lastStringNamesSize;
 		public int lastObjectIdSize;
@@ -1784,6 +1794,7 @@ public class BinaryMapIndexReader {
 		SearchFilter searchFilter = null;
 
 		SearchPoiTypeFilter poiTypeFilter = null;
+		SearchPoiSubcategoryFilter subcategoryFilter;
 
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();

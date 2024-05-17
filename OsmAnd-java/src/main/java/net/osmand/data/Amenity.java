@@ -71,6 +71,7 @@ public class Amenity extends MapObject {
 	private TIntArrayList x;
 	private String mapIconName;
 	private int order;
+	private String brand;
 
 	public int getOrder() {
 		return order;
@@ -78,6 +79,14 @@ public class Amenity extends MapObject {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public static class AmenityRoutePoint {

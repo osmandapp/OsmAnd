@@ -723,10 +723,20 @@ public class BinaryMapPoiReaderAdapter {
 		StringBuilder retValue = new StringBuilder();
 		PoiCategory amenityType = null;
 		LinkedList<String> textTags = null;
+		boolean hasSubcategories = false;
+		boolean subcategoryFound = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			if (amenityType == null && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER || tag == 0)) {
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				return null;
+			}
+			if (req.subcategoryFilter != null && !hasSubcategories && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER || tag == 0)) {
+				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+				return null;
+			}
+			if (req.subcategoryFilter != null && !subcategoryFound && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER || tag == 0)) {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return null;
 			}
@@ -778,7 +788,16 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER:
 				int subtypev = codedIS.readUInt32();
 				retValue.setLength(0);
+				hasSubcategories = true;
 				PoiSubType st = region.getSubtypeFromId(subtypev, retValue);
+				if (req.subcategoryFilter != null) {
+					if (st != null && st.name.equals(MapPoiTypes.OSMAND_BRAND_FILTER)) {
+						System.out.println("BRAND:" + retValue.toString());
+					}
+					if (st != null && req.subcategoryFilter.accept(st, retValue.toString())) {
+						subcategoryFound = true;
+					}
+				}
 				if (st != null) {
 					am.setAdditionalInfo(st.name, retValue.toString());
 				}
