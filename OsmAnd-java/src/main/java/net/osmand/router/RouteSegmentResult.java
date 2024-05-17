@@ -70,7 +70,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex,
 	                          RouteSegmentResult[][] preAttachedRoutes, float segmentTime,
-	                          float routingTime, float speed, float distance, TurnType turnType) {
+	                          float routingTime, float speed, float distance, int gpxPointIndex, TurnType turnType) {
+		// JNI-only method
 		this.object = object;
 		this.startPointIndex = startPointIndex;
 		this.endPointIndex = endPointIndex;
@@ -79,6 +80,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		this.routingTime = routingTime;
 		this.speed = speed;
 		this.distance = distance;
+		this.gpxPointIndex = gpxPointIndex;
 		this.turnType = turnType;
 		updateCapacity();
 	}
