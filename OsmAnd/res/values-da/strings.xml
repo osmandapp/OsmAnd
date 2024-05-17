@@ -5022,7 +5022,7 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_automatic_descr">Afhænger af kortorientering: nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortorientering: Bund for bevægelsesretning, centrum for alle andre.</string>
     <string name="shared_string_apply_changes">Anvend ændringer</string>
     <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
     <string name="no_visible_tracks">Ingen spor på kortet</string>
