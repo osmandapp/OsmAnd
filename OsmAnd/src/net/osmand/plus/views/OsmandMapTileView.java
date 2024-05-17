@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
+import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapAnimator;
 import net.osmand.core.jni.MapRendererDebugSettings;
@@ -111,6 +112,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
+
+	private boolean DISABLE_MAP_LAYERS;
+	private StateChangedListener<Boolean> disableMapLayersListener;
 
 	private View view;
 	private final Context ctx;
@@ -314,6 +318,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		currentViewport.setDensity(dm.density);
 		setMapDensityImpl(getSettingsMapDensity());
 		elevationAngle = settings.getLastKnownMapElevation();
+
+		DISABLE_MAP_LAYERS = settings.DISABLE_MAP_LAYERS.get();
+		disableMapLayersListener = change -> DISABLE_MAP_LAYERS = change;
+		settings.DISABLE_MAP_LAYERS.addListener(disableMapLayersListener);
 	}
 
 	private float getCurrentDensity() {
@@ -1128,6 +1136,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	@SuppressLint("WrongCall")
 	public void drawOverMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		if (DISABLE_MAP_LAYERS) {
+			return;
+		}
 		if (mapRenderer == null) {
 			fillCanvas(canvas, drawSettings);
 		}
