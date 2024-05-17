@@ -184,7 +184,7 @@ public class RoutePlannerFrontEnd {
 		}
 
 		public void reconstructFinalPointsFromFullRoute() {
-			// create gpx-to-final index map, routeToTarget(s)
+			// create gpx-to-final index map, clear routeToTarget(s)
 			Map<Integer, Integer> gpxIndexFinalIndex = new HashMap<>();
 			for (int i = 0; i < finalPoints.size(); i++) {
 				gpxIndexFinalIndex.put(finalPoints.get(i).ind, i);
@@ -203,7 +203,7 @@ public class RoutePlannerFrontEnd {
 				finalPoints.get(gpxIndexFinalIndex.get(index)).routeToTarget.add(seg);
 			}
 
-			// finally remove finalPoints without any route
+			// finally remove finalPoints with empty route
 			List<GpxPoint> emptyFinalPoints = new ArrayList<>();
 			for (GpxPoint gp : finalPoints) {
 				if (gp.routeToTarget != null) {
