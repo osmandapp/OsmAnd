@@ -13,7 +13,6 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
 
-import net.osmand.PlatformUtil;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
@@ -22,21 +21,18 @@ import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
-import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
 import net.osmand.test.common.ResourcesImporter;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +40,6 @@ import java.util.concurrent.TimeUnit;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AnalysisUpdateCallsTest extends AndroidTest {
-	public static final Log LOG = PlatformUtil.getLog(AnalysisUpdateCallsTest.class);
 
 	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
 
@@ -122,7 +117,6 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 						handler.postDelayed(createTaskRunnable(), CHECK_INTERVAL);
 					} else {
 						int renderedFrames = rendererView.getFrameId() - startFrameId;
-						LOG.debug("rendered " + renderedFrames + " frames");
 						if (renderedFrames < 25) {
 //							throw new AssertionError("Map rendering too slow. rendered " + renderedFrames + " frames");
 						}
@@ -132,11 +126,7 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 				} else {
 					throw new AssertionError("Failed to get map renderer");
 				}
-				SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByName(SELECTED_GPX_NAME);
-				if (selectedGpxFile != null) {
-					gpxDbHelper.getItem(new File(selectedGpxFile.getGpxFile().path)); // simulate multiple calls for getting GpxDataItem
-				}
-				LOG.debug("readTrackItemCount " + GpxDbHelper.readTrackItemCount);
+				app.showToastMessage("readTrackItemCount " + GpxDbHelper.readTrackItemCount);
 				if (GpxDbHelper.readTrackItemCount > 2) {
 					throw new AssertionError("To many updates of analysis " + GpxDbHelper.readTrackItemCount);
 				}

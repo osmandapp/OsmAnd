@@ -85,7 +85,6 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
 					if (GpxDbUtils.isAnalyseNeeded(item)) {
-
 						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified(), null, null, PluginsHelper.getTrackPointsAnalyser());
 						if (item == null) {
