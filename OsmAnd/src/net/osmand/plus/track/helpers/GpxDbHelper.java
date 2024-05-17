@@ -73,7 +73,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 				remove(file);
 			}
 		});
-		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms, " + items.size() +  " items");
+		LOG.info("Time to loadGpxItems " + (System.currentTimeMillis() - start) + " ms, " + items.size() + " items");
 	}
 
 	public void loadGpxDirItems() {
@@ -204,7 +204,7 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 
 	@Nullable
 	public GpxDataItem getItem(@NonNull File file, @Nullable GpxDataItemCallback callback) {
-		if (file.getPath().isEmpty()) {
+		if (file.getPath().isEmpty() || !file.exists()) {
 			return null;
 		}
 		GpxDataItem item = dataItems.get(file);
