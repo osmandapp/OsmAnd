@@ -5017,7 +5017,7 @@
     <string name="sound_beep_simple_loud">Pitido: sencillo ruidoso</string>
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección de movimiento, centro para todas las demás.</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección del movimiento, centro para todos los demás.</string>
     <string name="no_visible_tracks_description">Seleccione las vías para visualizarlas en el mapa.</string>
     <string name="no_visible_tracks">No hay pistas en el mapa</string>
     <string name="recently_visible">Visibles recientemente %1$s</string>

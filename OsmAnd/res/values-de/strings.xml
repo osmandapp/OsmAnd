@@ -4612,7 +4612,7 @@
     <string name="average_speed_time_interval_desc">Gib das Zeitintervall für die Durchschnittsberechnung der Geschwindigkeit an.</string>
     <string name="average_speed_widget_desc">Zeigt die Durchschnittsgeschwindigkeit der aktuellen Reise an.</string>
     <string name="map_widget_average_speed">Durchschnittsgeschwindigkeit</string>
-    <string name="time_to_navigation_point_widget_settings_desc">Tippe auf das Widget, um die Modi zu wechseln.</string>
+    <string name="time_to_navigation_point_widget_settings_desc">Tippen Sie auf das Widget, um den Modus zu wechseln.</string>
     <string name="rendering_attr_weatherPressureContours_name">Isobaren</string>
     <string name="routing_attr_avoid_fords_description">Furten vermeiden</string>
     <string name="distance_circles">Entfernungskreise</string>
@@ -5189,7 +5189,7 @@
     <string name="number_of_tracks">%1$s Tracks</string>
     <string name="shared_string_foot">Fuß</string>
     <string name="device_disconnected">%1$s wurde getrennt</string>
-    <string name="rendering_attr_lightDetail_name">Leuchtfeuer Detail</string>
+    <string name="rendering_attr_lightDetail_name">Leuchtfeuer-Detail</string>
     <string name="rendering_value_sectors_name">Sektoren</string>
     <string name="rendering_value_sector1_name">Sektor 1</string>
     <string name="rendering_value_sector2_name">Sektor 2</string>
@@ -5200,7 +5200,7 @@
     <string name="rendering_value_name_only_name">Nur Name</string>
     <string name="poi_categories">OVI-Kategorien</string>
     <string name="no_poi_for_category">OVI nicht gefunden</string>
-    <string name="map_3d_mode_description">Berühre die Karte mit zwei Fingern und bewege sie nach oben und unten, um die Kartenneigung anzupassen.</string>
+    <string name="map_3d_mode_description">Berühren Sie die Karte mit zwei Fingern und bewegen Sie diese nach oben und unten, um die Kartenneigung anzupassen.</string>
     <string name="map_2d_mode_action">2D-Modus</string>
     <string name="map_3d_mode_action">3D-Modus</string>
     <string name="map_3d_mode_hint">Durch langes Tippen auf die Schaltfläche kann die Position der Schaltfläche geändert werden.</string>
@@ -5232,7 +5232,7 @@
     <string name="relief_3d">3D-Relief</string>
     <string name="relief_3d_description">Besitzen und beobachten Sie das maßstabsgetreue Modell Ihrer Nachbarschaft oder des ganzen Kontinents.</string>
     <string name="osmand_cloud_delete_account_confirmation">Konto löschen\?</string>
-    <string name="osmand_cloud_deletion_subscriptions_warning">Dadurch wird dein OsmAnd Pro-Abonnement nicht gekündigt.</string>
+    <string name="osmand_cloud_deletion_subscriptions_warning">Dadurch wird Ihr OsmAnd Pro-Abonnement nicht gekündigt.</string>
     <string name="manage_subscriptions">Abonnements verwalten.</string>
     <string name="delete_account_warning">Konto %1$s löschen?</string>
     <string name="shared_string_deleting">Wird gelöscht</string>
@@ -5243,20 +5243,20 @@
     <string name="action_cannot_be_undone">Diese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_secondary_devices_warning">Zweitgeräte werden von OsmAnd Cloud abgemeldet und verlieren den Zugriff auf kostenpflichtige Funktionen.</string>
     <string name="osmand_cloud_deletion_account_warning">Ihr Konto und alle Kontodaten werden %1$s</string>
-    <string name="osmand_cloud_deleting_account_descr">In wenigen Augenblicken werden alle deine Daten und dein Konto aus der OsmAnd Cloud gelöscht.
+    <string name="osmand_cloud_deleting_account_descr">In wenigen Augenblicken werden alle Ihre Daten und Ihr Konto aus der OsmAnd Cloud gelöscht.
 \n
 \nAlle Daten auf dem Gerät bleiben unangetastet.</string>
     <string name="osmand_cloud_delete_account_confirmation_descr">OsmAnd Cloud-Konto löschen?
 \n
 \nDiese Aktion kann nicht rückgängig gemacht werden.</string>
     <string name="osmand_cloud_deletion_all_data_warning">Alle Daten von OsmAnd Cloud werden %1$s. Daten auf dem Gerät bleiben unangetastet.</string>
-    <string name="verify_account_deletion_descr">Wir müssen dein Konto verifizieren, bevor wir es löschen können.
+    <string name="verify_account_deletion_descr">Wir müssen Ihr Konto verifizieren, bevor wir es löschen können.
 \n
-\nBitte gib die E-Mail-Adresse ein, mit der du dich registriert hast. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
+\nBitte geben Sie die E-Mail-Adresse ein, mit der Sie sich registriert haben. An diese Adresse wird ein Einmalpasswort für den nächsten Schritt gesendet.</string>
     <string name="verify_account">Konto bestätigen</string>
     <string name="slope_legend_description">Hangneigung verwendet Farben, um den Neigungsgrad des Geländes zu visualisieren. Weitere Informationen über Hangneigung finden Sie unter %1$s.</string>
     <string name="terrain_category_description">Höhenlinien, graustufige Reliefschattierungen und farbige Hangneigungskarten, zur Darstellung von Erhebungen und Niederungen.</string>
-    <string name="free_favorites_backup_description">Registriere dich in OsmAnd Cloud, um ein kostenloses Backup deiner Favoriten und Einstellungen zu erhalten.</string>
+    <string name="free_favorites_backup_description">Registrieren Sie sich in OsmAnd Cloud, um ein kostenloses Backup Ihrer Favoriten und Einstellungen zu erhalten.</string>
     <string name="free_favorites_backup">Kostenloses Backup Ihrer Favoriten</string>
     <string name="shared_string_avoid">Meiden</string>
     <string name="may_be_used_if_there_is_shortcut">Kann verwendet werden, wenn es eine Abkürzung gibt</string>
@@ -5623,7 +5623,7 @@
     <string name="add_button">Schaltfläche hinzufügen</string>
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
     <string name="custom_map_button_name_present">Solch eine Schaltfläche ist bereits vorhanden</string>
-    <string name="default_buttons">Standard-Schaltfläche</string>
+    <string name="default_buttons">Standardschaltflächen</string>
     <string name="speed_limit_warning">Warnung vor Tempolimit</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">Bei Überschreitung</string>
@@ -5650,17 +5650,17 @@
 \n
 \n• Konfigurieren des Kartenbildschirms durch Hinzufügen mehrerer Schaltflächen für „Schnellaktionen“
 \n
-\n• Verbesserte Lesbarkeit der Daten in Diagrammen
+\n• Lesbarkeit der Daten in Diagrammen verbessert
 \n
 \n• Filter nach Sensordaten für Strecken hinzugefügt
 \n
-\n• Verbesserte Anpassung des Aussehens für Trackgruppen
+\n• Anpassung des Aussehens für Trackgruppen verbessert
 \n
 \n• Unterstützung für zusätzliche GPX-Tags hinzugefügt
 \n
 \n• „Distanz während der Navigation“ angepasst: Wahl zwischen präzisen oder gerundeten Zahlen
 \n
-\n• Vereinheitlichte Benutzeroberfläche für die Streckenauswahl
+\n• Benutzeroberfläche für die Streckenauswahl vereinheitlicht
 \n
 \n• OpenStreetMap-Login auf OAuth 2.0 umgestellt
 \n
@@ -5681,7 +5681,7 @@
     <string name="gpx_approximation_geo_java">Geometriebasiert (Java, schnell)</string>
     <string name="fix_north_up">Festen Norden oben aktivieren</string>
     <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
-    <string name="change_default_appearance_confirmation">Ändern des Standard-Aussehens von %1$s?</string>
+    <string name="change_default_appearance_confirmation">Ändern des Standardaussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
     <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Titel im Ordner oder nur auf neue Titel anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
@@ -5689,24 +5689,24 @@
     <string name="release_4_8">• Für 4.8 vorbereitet</string>
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Terrain auf der Karte anzuzeigen.</string>
-    <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts kannst du das 3D- Profil hervorheben.</string>
+    <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts können Sie das 3D-Profil hervorheben.</string>
     <string name="shared_string_scale">Maßstab</string>
-    <string name="use_terrain_maps">Terrain Karten verwenden</string>
+    <string name="use_terrain_maps">Terrainkarten verwenden</string>
     <string name="use_nearby_roads">Nutzung von nahegelegenen Straßen</string>
-    <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Spurgeometrie bleibt unverändert.</string>
-    <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um in der Nähe Straßen und Höhendaten zu finden. Kann Weggeometrie anpassen.</string>
+    <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Trackgeometrie bleibt unverändert.</string>
+    <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um Straßen und Höhendaten in der Nähe zu finden. Kann die Trackgeometrie anpassen.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kann Höhendaten von nahe gelegenen Straßen oder Geländekarten abrufen.</string>
-    <string name="delete_actions_button">Löschen Taste</string>
-    <string name="shared_string_osm_id">OSM ID</string>
+    <string name="delete_actions_button">Löschen-Schaltfläche</string>
+    <string name="shared_string_osm_id">OSM-ID</string>
     <string name="maps_that_also_be_used">Karten, die auch verwendet werden: %1$s</string>
     <string name="route_line_use_coloring_speed">Die Routenlinie ist nach der Geschwindigkeit der Fortbewegung eingefärbt.</string>
     <string name="required_maps_calculate_online_summary">Die Liste der fehlenden Karten basiert auf der direkten Streckenroute. Um eine genaue Liste der Karten zu erhalten, kann OsmAnd Ihre Route online vorberechnen.</string>
     <string name="required_maps">Benötigte Karten</string>
-    <string name="missing_maps_description">Einige Offline-Karten, die für diese Route benötigt werden, fehlen oder sind nicht auf dem neuesten Stand. Bitte lade diese Karten herunter oder aktualisiere diese.</string>
-    <string name="missing_maps_header">Fehlende oder veraltete Karte</string>
+    <string name="missing_maps_description">Einige Offline-Karten, die für diese Route benötigt werden, fehlen oder sind nicht auf dem neuesten Stand. Bitte laden Sie diese Karten herunter oder aktualisieren Sie diese.</string>
+    <string name="missing_maps_header">Fehlende oder veraltete Karten</string>
     <string name="getting_list_of_required_maps">Beschaffung einer Liste der benötigten Karten…</string>
-    <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage bzw. Höhe gefärbt.</string>
-    <string name="delete_actions_button_confirmation">Bist du sicher, dass du \"%1$s\" mit allen hinzugefügten Aktionen löschen möchtest?</string>
+    <string name="route_line_use_coloring_altitude">Die Routenlinie ist nach der Höhenlage eingefärbt.</string>
+    <string name="delete_actions_button_confirmation">Sind Sie sicher, dass Sie „%1$s“ mit allen hinzugefügten Aktionen löschen möchten?</string>
     <string name="visualized_by">Visualisiert von</string>
     <string name="wall_color">Wandfarbe</string>
     <string name="track_line">Bahnlinie</string>
@@ -5716,16 +5716,16 @@
     <string name="bottom">Unten</string>
     <string name="top">Oben</string>
     <string name="top_and_bottom">Oben und unten</string>
-    <string name="title_3d_track">3D Track</string>
-    <string name="explore_3d_track_description">Entdecke den Track in interaktiver 3D! Visualisiere Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
+    <string name="title_3d_track">3D-Track</string>
+    <string name="explore_3d_track_description">Entdecken Sie den Track in interaktivem 3D! Visualisieren Sie Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
     <string name="gpx_approximation_geo_cpp">Geometriebasiert (C++, schnell)</string>
     <string name="allow_display_on_top">Anzeige oben zulassen</string>
     <string name="allow_display_on_top_description">Kartentexte übereinander anzeigen lassen</string>
-    <string name="show_debug_info">Debug Informationen anzeigen</string>
-    <string name="show_debug_info_description">Zeige grafische Informationen über die Platzierung jedes Kartentextes an</string>
+    <string name="show_debug_info">Debug-Informationen anzeigen</string>
+    <string name="show_debug_info_description">Grafische Informationen über die Platzierung jedes Kartentextes anzeigen</string>
     <string name="map_text">Kartentexte</string>
     <string name="routing_attr_avoid_cobblestone_name">Kopfsteinpflaster vermeiden</string>
     <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
-    <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts kannst du die Höhe des 3D-Tracks ändern.</string>
+    <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts können Sie die Höhe des 3D-Tracks ändern.</string>
     <string name="steps_per_minute_unit">SPM</string>
 </resources>

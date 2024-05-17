@@ -5515,4 +5515,10 @@
     <string name="speedometer_description">Visar din nuvarande hastighet enligt GPS</string>
     <string name="shared_string_limit">Gräns</string>
     <string name="speed_limit_warning">Hastighetsgränsvarning</string>
+    <string name="distance_during_navigation">Avstånd under navigation</string>
+    <string name="round_up">Avrunda uppåt</string>
+    <string name="precise">Precis</string>
+    <string name="show_debug_info">Visa avlusningsinformation</string>
+    <string name="routing_attr_avoid_cobblestone_name">Undvik kullersten</string>
+    <string name="routing_attr_avoid_cobblestone_description">Undvik kullersten</string>
 </resources>
