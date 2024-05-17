@@ -78,6 +78,15 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		}
 	}
 
+	public void removeKeyAssignmentCompletely(@NonNull String assignmentId) {
+		// TODO remove assignment completely instead of clearing assigned buttons
+		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
+		if (assignment != null) {
+			assignment.clearKeyCodes();
+			assignmentsCollection.syncCache();
+		}
+	}
+
 	public void clearAssignmentKeyCodes(@NonNull String assignmentId) {
 		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {

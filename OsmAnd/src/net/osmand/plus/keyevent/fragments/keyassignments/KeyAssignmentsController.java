@@ -17,7 +17,7 @@ import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
-import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentFragment;
+import net.osmand.plus.keyevent.fragments.assignmentoverview.KeyAssignmentOverviewFragment;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -92,10 +92,10 @@ class KeyAssignmentsController {
 		return inputDevice != null && inputDevice.isCustom();
 	}
 
-	public void askEditAssignment(@NonNull KeyAssignment assignment) {
+	public void askOpenAssignmentOverview(@NonNull KeyAssignment assignment) {
 		if (inputDevice != null) {
 			FragmentManager fm = activity.getSupportFragmentManager();
-			EditKeyAssignmentFragment.showInstance(fm, appMode, inputDevice.getId(), assignment.getId());
+			KeyAssignmentOverviewFragment.showInstance(fm, appMode, inputDevice.getId(), assignment.getId());
 		}
 	}
 

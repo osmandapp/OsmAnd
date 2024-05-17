@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="action_icon">Action icon</string>
+    <string name="assigned_keys">Assigned Keys</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>

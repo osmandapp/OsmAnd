@@ -101,7 +101,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
-				controller.askEditAssignment(assignment);
+				controller.askOpenAssignmentOverview(assignment);
 			}: null);
 			h.actionName.setText(assignment.getName(app));
 			List<String> keyLabels = assignment.getKeyLabels(app);
