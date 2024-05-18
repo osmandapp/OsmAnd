@@ -4683,4 +4683,6 @@
     <string name="poi_healthcare_speciality_neonatology">Neonatologi</string>
     <string name="poi_via">Via</string>
     <string name="poi_property_management">Fastighetsförvaltarkontor</string>
+    <string name="poi_healthcare_speciality_body">Kroppspsykoterapi</string>
+    <string name="poi_healthcare_speciality_humanistic">Humanistisk psykologi</string>
 </resources>
