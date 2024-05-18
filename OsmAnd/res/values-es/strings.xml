@@ -5725,4 +5725,6 @@
     <string name="routing_attr_avoid_cobblestone_description">Evite los adoquines</string>
     <string name="track_vertical_exaggeration_description">Al cambiar el valor de escala, puede cambiar la altura de la pista 3D.</string>
     <string name="steps_per_minute_unit">PPM</string>
+    <string name="disable_map_layers">Deshabilitar capas de mapas</string>
+    <string name="disable_map_layers_descr">Deshabilite todas las capas del mapa sobre el mapa vectorial (es necesario reiniciar).</string>
 </resources>
