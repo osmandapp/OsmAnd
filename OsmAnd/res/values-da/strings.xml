@@ -1010,7 +1010,7 @@
     <string name="edit_tilesource_elliptic_tile">Elliptisk mercatorprojektion</string>
     <string name="edit_tilesource_maxzoom">Maksimal zoom</string>
     <string name="edit_tilesource_expiration_time">Udløbstid (minutter)</string>
-    <string name="edit_tilesource_minzoom">Mindste zoom</string>
+    <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
     <string name="maps_define_edit">Definer/rediger…</string>
@@ -5729,4 +5729,6 @@
     <string name="routing_attr_avoid_cobblestone_name">Undgå brosten</string>
     <string name="track_vertical_exaggeration_description">Ved at ændre skalaværdien kan du ændre 3D-sporets højde.</string>
     <string name="steps_per_minute_unit">SPM</string>
+    <string name="disable_map_layers_descr">Deaktiver alle kortlag over vektorkortet (genstart påkrævet).</string>
+    <string name="disable_map_layers">Deaktiver kortlag</string>
 </resources>
