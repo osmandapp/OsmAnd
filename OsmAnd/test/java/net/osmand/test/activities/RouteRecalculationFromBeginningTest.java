@@ -4,7 +4,6 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static net.osmand.test.common.EspressoUtils.waitForView;
@@ -68,7 +67,7 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 		IdlingPolicies.setIdlingResourceTimeout(40, TimeUnit.SECONDS);
 		enableSimulation(500);
 		try {
-			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME));
+			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), null);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
@@ -109,15 +108,8 @@ public class RouteRecalculationFromBeginningTest extends AndroidTest {
 				withText(GpxUiHelper.getGpxTitle(SELECTED_GPX_NAME)), isDisplayed()));
 		trackItemView.perform(click());
 
-		ViewInteraction appCompatImageButton2 = onView(
-				allOf(withId(R.id.close_button), withContentDescription("Navigate up"),
-						childAtPosition(
-								childAtPosition(
-										withId(R.id.route_menu_top_shadow_all),
-										1),
-								0),
-						isDisplayed()));
-		appCompatImageButton2.perform(click());
+		ViewInteraction closeButton = onView(allOf(withId(R.id.close_button), isDisplayed()));
+		closeButton.perform(click());
 
 		setRouteStart(START);
 		startNavigation();

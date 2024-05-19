@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="disable_map_layers">Disable map layers</string>
+    <string name="disable_map_layers_descr">Disable all map layers above the vector map (restart required).</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>

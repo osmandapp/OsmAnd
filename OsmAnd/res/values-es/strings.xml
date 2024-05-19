@@ -5017,7 +5017,7 @@
     <string name="sound_beep_simple_loud">Pitido: sencillo ruidoso</string>
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección de movimiento, centro para todas las demás.</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección del movimiento, centro para todos los demás.</string>
     <string name="no_visible_tracks_description">Seleccione las vías para visualizarlas en el mapa.</string>
     <string name="no_visible_tracks">No hay pistas en el mapa</string>
     <string name="recently_visible">Visibles recientemente %1$s</string>
@@ -5724,4 +5724,7 @@
     <string name="routing_attr_avoid_cobblestone_name">Evite los adoquines</string>
     <string name="routing_attr_avoid_cobblestone_description">Evite los adoquines</string>
     <string name="track_vertical_exaggeration_description">Al cambiar el valor de escala, puede cambiar la altura de la pista 3D.</string>
+    <string name="steps_per_minute_unit">PPM</string>
+    <string name="disable_map_layers">Deshabilitar capas de mapas</string>
+    <string name="disable_map_layers_descr">Deshabilite todas las capas del mapa sobre el mapa vectorial (es necesario reiniciar).</string>
 </resources>

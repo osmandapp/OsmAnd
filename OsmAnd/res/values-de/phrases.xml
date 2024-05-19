@@ -2101,7 +2101,7 @@
     <string name="poi_group_only_yes">Nur Gruppen: ja</string>
     <string name="poi_group_only_no">Nur Gruppen: nein</string>
     <string name="poi_impromptu_yes">ja</string>
-    <string name="poi_impromptu_no">Improvisiert: Nein</string>
+    <string name="poi_impromptu_no">Improvisiert: nein</string>
     <string name="poi_sanitary_dump_station_yes">Sanitäre Entsorgungsstation: ja</string>
     <string name="poi_sanitary_dump_station_no">Sanitäre Entsorgungsstation: nein</string>
     <string name="poi_refugee_yes">Flüchtlingsunterkunft</string>
@@ -3138,7 +3138,7 @@
     <string name="poi_reservation_required">Erforderlich</string>
     <string name="poi_reservation_recommended">Empfohlen</string>
     <string name="poi_reservation_yes">ja</string>
-    <string name="poi_reservation_no">Nein</string>
+    <string name="poi_reservation_no">nein</string>
     <string name="poi_reservation_members_only">Nur für Mitglieder</string>
     <string name="poi_boat_rental_type">Mietboote</string>
     <string name="poi_boat_rental">Bootsvermietung</string>
@@ -4815,7 +4815,7 @@
     <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Verteilter Campingplatz</string>
     <string name="poi_us_maps_recreation_area_activity_fossil_collecting">Fossilien sammeln</string>
     <string name="poi_us_maps_recreation_area_activity_game_bird_waterfowl">Wildvogel Wasservogel</string>
-    <string name="poi_us_maps_recreation_area_activity_geocaching_and_letterboxing">Geocaching und Briefkastensuchen</string>
+    <string name="poi_us_maps_recreation_area_activity_geocaching_and_letterboxing">Geocaching und Briefkastensuche</string>
     <string name="poi_us_maps_recreation_area_activity_group_picnicking">Gruppenpicknick</string>
     <string name="poi_us_maps_recreation_area_activity_lake_and_pond_fishing">See- und Teichfischerei</string>
     <string name="poi_us_maps_recreation_area_activity_nature_viewing">Naturbeobachtung</string>

@@ -5021,7 +5021,7 @@
     <string name="sound_beep_simple">Bipe: simples</string>
     <string name="sound_beep_simple_loud">Bipe: simples e alto</string>
     <string name="last_synchronized">Última sincronização</string>
-    <string name="display_position_automatic_descr">Depende da orientação do mapa: a parte inferior para a direção do movimento, o centro para tudo o resto.</string>
+    <string name="display_position_automatic_descr">Depende da orientação do mapa: em baixo para a direção do movimento, ao centro para todas as outras.</string>
     <string name="shared_string_select_recent">Selecionar recente</string>
     <string name="change_appearance">Alterar aparência</string>
     <string name="shared_string_kilograms">quilogramas</string>
@@ -5212,7 +5212,7 @@
     <string name="save_track_external_sensors_data">Dados</string>
     <string name="tracks_empty_folder">Pasta vazia</string>
     <string name="track_not_recorded">Não gravado</string>
-    <string name="delete_track_folder_dialog_message">Isto eliminará a pasta \"%1$s\" e todos os trilhos (%2$s) incluídos.</string>
+    <string name="delete_track_folder_dialog_message">Isto irá eliminar a pasta \"%1$s\" e todos os %2$s trilhos nela contidas.</string>
     <string name="delete_folder_question">Eliminar pasta\?</string>
     <string name="delete_folder">Eliminar pasta</string>
     <string name="show_all_tracks_on_the_map">Mostrar todos os trilhos no mapa</string>
@@ -5499,7 +5499,7 @@
     <string name="shared_string_delete_immediately">Eliminar imediatamente</string>
     <string name="shared_string_loading">A carregar</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="delete_smart_folder_dialog_message">Isto eliminará a pasta inteligente \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Isto irá remover a pasta inteligente \"%1$s\".</string>
     <string name="shared_string_is_deleted">%1$s foi eliminado.</string>
     <string name="sort_size_ascending">Tamanho pequeno primeiro</string>
     <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
@@ -5728,4 +5728,5 @@
     <string name="map_text">Textos do mapa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evitar pedras irregulares</string>
     <string name="routing_attr_avoid_cobblestone_description">Evitar pedras irregulares</string>
+    <string name="steps_per_minute_unit">PPM</string>
 </resources>

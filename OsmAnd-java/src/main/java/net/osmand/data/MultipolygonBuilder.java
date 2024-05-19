@@ -1,6 +1,8 @@
 package net.osmand.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
@@ -81,6 +83,13 @@ public class MultipolygonBuilder {
 	public List<Multipolygon> splitPerOuterRing(Log log) {
 		SortedSet<Ring> inners = new TreeSet<Ring>(combineToRings(innerWays));
 		ArrayList<Ring> outers = combineToRings(outerWays);
+		Collections.sort(outers, new Comparator<Ring>() {
+
+			@Override
+			public int compare(Ring o1, Ring o2) {
+				return -Integer.compare(o1.getBorder().size(), o2.getBorder().size());
+			}
+		});
 		ArrayList<Multipolygon> multipolygons = new ArrayList<Multipolygon>();
 		// loop; start with the smallest outer ring
 		for (Ring outer : outers) {
