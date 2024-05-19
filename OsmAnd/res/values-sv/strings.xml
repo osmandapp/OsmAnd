@@ -5560,4 +5560,25 @@
     <string name="gpx_approximation">GPX approximering</string>
     <string name="routing_type">Ruttberäkningstyp</string>
     <string name="unchanged_parameter_summary">Varje spår behåller sina egna parametrar.</string>
+    <string name="lang_ta_in">Tamil (Indien)</string>
+    <string name="track_vertical_exaggeration_description">Genom att ändra skalningsvärdet kan du förändra 3D-spårets höjd.</string>
+    <string name="vertical_exaggeration_description">Genom att ändra på skalningsvärdet kan du framhäva 3D-reliefen.</string>
+    <string name="upload_local_versions">Ladda upp lokala versioner</string>
+    <string name="fix_north_up_descr">Rotera inte kartan genom gester i kartorienteringen Norr Uppåt</string>
+    <string name="distance_during_navigation_description">Välj hur avståndsinformation visas i navigations-widgetar (avstånd till punkt, nästa sväng, körfält).
+\n
+\nVälj \"%1$s\" för exakta tal, eller \"%2$s\" för ökad läsbarhet.</string>
+    <string name="delete_actions_button_confirmation">Är du säker på att du vill ta bort \"%1$s\" med alla tillagda åtgärder?</string>
+    <string name="visualized_by">Visualiseras av</string>
+    <string name="fixed_height">Fast höjd</string>
+    <string name="top">Längst upp</string>
+    <string name="bottom">Längst ned</string>
+    <string name="top_and_bottom">Längst upp och längst ned</string>
+    <string name="wall_color">Väggfärg</string>
+    <string name="track_line">Spårlinje</string>
+    <string name="downward_gradient">Nedåtgående gradient</string>
+    <string name="upward_gradient">Uppåtgående gradient</string>
+    <string name="delete_actions_button">Ta bort knapp</string>
+    <string name="auto_zoom_smooth">Jämn</string>
+    <string name="auto_zoom_discrete">Diskret</string>
 </resources>
