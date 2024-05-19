@@ -5718,4 +5718,6 @@
     <string name="routing_attr_avoid_cobblestone_name">Vyhnúť sa okrúhlym kameňom</string>
     <string name="routing_attr_avoid_cobblestone_description">Vyhnúť sa okrúhlym kameňom</string>
     <string name="steps_per_minute_unit">k/m</string>
+    <string name="disable_map_layers">Vypnúť mapové vrstvy</string>
+    <string name="disable_map_layers_descr">Vypnúť všetky vrstvy mapy nad vektorovou mapou (vyžaduje reštart).</string>
 </resources>
