@@ -4493,4 +4493,11 @@
     <string name="use_terrain_maps">Utilitzar mapes de terreny</string>
     <string name="use_nearby_roads">Utilitzar carreteres properes</string>
     <string name="vertical_exaggeration">Accentuació vertical</string>
+    <string name="maps_and_resources">Mapes i Descàrregues</string>
+    <string name="rendering_attr_alpineHiking_description">Tipus de classificació de la dificultat de les rutes.</string>
+    <string name="street_level_imagery">Imatges a nivell de carrer</string>
+    <string name="rendering_attr_alpineHiking_name">Classificació de la dificultat</string>
+    <string name="relief_3d">Relleu en 3D</string>
+    <string name="rendering_attr_showRunningRoutes_description">Mostrar rutes per a córrer</string>
+    <string name="rendering_attr_showRunningRoutes_name">Rutes per a córrer</string>
 </resources>
