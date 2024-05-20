@@ -22,7 +22,7 @@ public class ShowHideGpxTracksAction extends QuickAction {
 			"gpx.showhide", ShowHideGpxTracksAction.class)
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.show_gpx).iconRes(R.drawable.ic_action_polygom_dark).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.TRACKS);
 
 	public ShowHideGpxTracksAction() {
 		super(TYPE);

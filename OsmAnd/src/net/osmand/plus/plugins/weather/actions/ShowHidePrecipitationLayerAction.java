@@ -14,7 +14,7 @@ public class ShowHidePrecipitationLayerAction extends BaseWeatherQuickAction {
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.precipitation_layer)
 			.iconRes(R.drawable.ic_action_precipitation).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.WEATHER);
 
 	public ShowHidePrecipitationLayerAction() {
 		super(TYPE);
