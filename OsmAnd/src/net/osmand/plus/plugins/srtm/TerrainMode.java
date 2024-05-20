@@ -62,27 +62,30 @@ public class TerrainMode {
 		File dir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		if (dir.exists() && dir.listFiles() != null) {
 			for (File lf : dir.listFiles()) {
-				if(lf == null || !lf.getName().endsWith(EXT) ) {
+				if (lf == null || !lf.getName().endsWith(EXT)) {
 					continue;
 				}
 				String nm = lf.getName();
 				if (nm.startsWith(HILLSHADE_PREFIX)) {
 					String key = nm.substring(HILLSHADE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
 					if (!DEFAULT_KEY.equals(key)) {
-						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), TerrainType.HILLSHADE));
+						tms.add(new TerrainMode(app, key, name, TerrainType.HILLSHADE));
 					}
 				} else if (nm.startsWith(COLOR_SLOPE_PREFIX)) {
 					String key = nm.substring(COLOR_SLOPE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
 					if (!DEFAULT_KEY.equals(key)) {
-						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), TerrainType.SLOPE));
+						tms.add(new TerrainMode(app, key, name, TerrainType.SLOPE));
 					}
 				} else if (nm.startsWith(HEIGHT_PREFIX)) {
 					String key = nm.substring(HEIGHT_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
 					if (!DEFAULT_KEY.equals(key)) {
-						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), TerrainType.HEIGHT));
+						tms.add(new TerrainMode(app, key, name, TerrainType.HEIGHT));
 					}
 				}
 			}
@@ -113,7 +116,7 @@ public class TerrainMode {
 
 	public String getMainFile() {
 		String prefix = HILLSHADE_PREFIX;
-		if(type == TerrainType.HEIGHT) {
+		if (type == TerrainType.HEIGHT) {
 			prefix = HEIGHT_PREFIX;
 		} else if(type == TerrainType.SLOPE) {
 			prefix = COLOR_SLOPE_PREFIX;

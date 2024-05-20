@@ -96,7 +96,9 @@ public class TerrainLayer extends MapTileLayer {
 
 		if (terrainFromHeightmap && geoTiffCollection != null) {
 			layerProvider = createGeoTiffLayerProvider(mode, geoTiffCollection);
-			mapRenderer.setMapLayerProvider(layerIndex, layerProvider);
+			if (layerProvider != null) {
+				mapRenderer.setMapLayerProvider(layerIndex, layerProvider);
+			}
 		} else {
 			TileSourceProxyProvider prov = new TerrainTilesProvider(getApplication(), map, srtmPlugin);
 			mapRenderer.setMapLayerProvider(layerIndex, prov.instantiateProxy(true));
@@ -123,10 +125,10 @@ public class TerrainLayer extends MapTileLayer {
 			provider = new SlopeRasterMapLayerProvider(geoTiffCollection, mainColorFilename);
 			((SlopeRasterMapLayerProvider) provider).setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
 			((SlopeRasterMapLayerProvider) provider).setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
-		} else {
+		} else if (mode.getType() == TerrainMode.TerrainType.HEIGHT) {
 			provider = new HeightRasterMapLayerProvider(geoTiffCollection, mainColorFilename);
-			((SlopeRasterMapLayerProvider) provider).setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
-			((SlopeRasterMapLayerProvider) provider).setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
+			((HeightRasterMapLayerProvider) provider).setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
+			((HeightRasterMapLayerProvider) provider).setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
 		}
 		// provider.setKey(mode.getKey()); // opengl binding (cache should be key +'.cache')
 
