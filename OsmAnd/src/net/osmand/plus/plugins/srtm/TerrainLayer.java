@@ -14,6 +14,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.GeoTiffCollection;
+import net.osmand.core.jni.HeightRasterMapLayerProvider;
 import net.osmand.core.jni.HillshadeRasterMapLayerProvider;
 import net.osmand.core.jni.IRasterMapLayerProvider;
 import net.osmand.core.jni.SlopeRasterMapLayerProvider;
@@ -123,8 +124,7 @@ public class TerrainLayer extends MapTileLayer {
 			((SlopeRasterMapLayerProvider) provider).setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
 			((SlopeRasterMapLayerProvider) provider).setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
 		} else {
-			// TODO new height provider
-			provider = new SlopeRasterMapLayerProvider(geoTiffCollection, mainColorFilename);
+			provider = new HeightRasterMapLayerProvider(geoTiffCollection, mainColorFilename);
 			((SlopeRasterMapLayerProvider) provider).setMinVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMinZoom()));
 			((SlopeRasterMapLayerProvider) provider).setMaxVisibleZoom(ZoomLevel.swigToEnum(srtmPlugin.getTerrainMaxZoom()));
 		}
