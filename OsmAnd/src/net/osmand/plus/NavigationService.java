@@ -149,6 +149,11 @@ public class NavigationService extends Service {
 		}
 		requestLocationUpdates();
 
+		if (isUsedBy(USED_BY_CAR_APP)) {
+			if (routingHelper.isRouteCalculated() && routingHelper.isPauseNavigation()) {
+				routingHelper.resumeNavigation();
+			}
+		}
 		return hasNotification ? START_REDELIVER_INTENT : START_NOT_STICKY;
 	}
 
@@ -241,7 +246,11 @@ public class NavigationService extends Service {
 			this.navigationManager.setNavigationManagerCallback(new NavigationManagerCallback() {
 				@Override
 				public void onStopNavigation() {
-					getApp().stopNavigation();
+					if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
+						routingHelper.pauseNavigation();
+					} else {
+						getApp().stopNavigation();
+					}
 				}
 
 				@Override
