@@ -23,7 +23,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.resources.SQLiteTileSource;
@@ -241,7 +241,7 @@ public class TerrainLayer extends MapTileLayer {
 			private void indexCachedResources(Map<String, Long> fileModified, Map<String, SQLiteTileSource> rs) {
 				Cursor cursor = sqliteDb.rawQuery("SELECT filename, date_modified, left, right, top, bottom FROM TILE_SOURCES", 
 						new String[0]);
-				if(cursor.moveToFirst()) {
+				if(cursor.moveToNext()) {
 					do {
 						String filename = cursor.getString(0);
 						long lastModified = cursor.getLong(1);

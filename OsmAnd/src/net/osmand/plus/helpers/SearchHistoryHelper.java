@@ -8,8 +8,8 @@ import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
@@ -23,6 +23,7 @@ import net.osmand.util.CollectionUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -508,7 +509,7 @@ public class SearchHistoryHelper {
 					db.execSQL("DELETE FROM " + HISTORY_TABLE_NAME + " WHERE " +
 									HISTORY_COL_NAME + " = ? AND " +
 									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ?",
-							new Object[] {e.getSerializedName(), e.getLat(), e.getLon()});
+							Arrays.asList(e.getSerializedName(), e.getLat(), e.getLon()));
 					updateLastModifiedTime();
 				} finally {
 					db.close();
@@ -542,8 +543,8 @@ public class SearchHistoryHelper {
 									", " + HISTORY_COL_FREQ_VALUES + "= ? WHERE " +
 									HISTORY_COL_NAME + " = ? AND " +
 									HISTORY_COL_LAT + " = ? AND " + HISTORY_COL_LON + " = ? AND " + HISTORY_COL_SOURCE + " = ?",
-							new Object[] {e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
-									e.getSerializedName(), e.getLat(), e.getLon(), e.getSource().name()});
+							Arrays.asList(e.getLastAccessTime(), e.getIntervals(), e.getIntervalsValues(),
+									e.getSerializedName(), e.getLat(), e.getLon(), e.getSource().name()));
 					updateLastModifiedTime();
 				} finally {
 					db.close();
@@ -569,8 +570,8 @@ public class SearchHistoryHelper {
 		private void insert(HistoryEntry e, SQLiteConnection db) {
 			db.execSQL(
 					"INSERT INTO " + HISTORY_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?)",
-					new Object[] {e.getSerializedName(), e.getLastAccessTime(),
-							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon(), e.getSource().name()});
+					Arrays.asList(e.getSerializedName(), e.getLastAccessTime(),
+							e.getIntervals(), e.getIntervalsValues(), e.getLat(), e.getLon(), e.getSource().name()));
 			updateLastModifiedTime();
 		}
 
@@ -584,7 +585,7 @@ public class SearchHistoryHelper {
 									HISTORY_COL_TIME + ", " + HISTORY_COL_FREQ_INTERVALS + ", " + HISTORY_COL_FREQ_VALUES + ", " + HISTORY_COL_SOURCE +
 									" FROM " + HISTORY_TABLE_NAME, null);
 					Map<PointDescription, HistoryEntry> st = new HashMap<>();
-					if (query != null && query.moveToFirst()) {
+					if (query != null && query.moveToNext()) {
 						boolean reinsert = false;
 						do {
 							String name = query.getString(0);

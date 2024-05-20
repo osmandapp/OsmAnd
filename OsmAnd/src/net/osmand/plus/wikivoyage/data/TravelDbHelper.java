@@ -20,8 +20,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -260,9 +260,9 @@ public class TravelDbHelper implements TravelHelper {
 			}
 			query += ") ";
 			if (params.size() > 0) {
-				SQLiteCursor cursor = conn.rawQuery(query, params.toArray(new String[0]));
+				SQLiteCursor cursor = conn.rawQuery(query, params);
 				if (cursor != null) {
-					if (cursor.moveToFirst()) {
+					if (cursor.moveToNext()) {
 						do {
 							String routeId = cursor.getLong(0) + "";
 							String articleTitle = cursor.getString(1);
@@ -310,7 +310,7 @@ public class TravelDbHelper implements TravelHelper {
 		List<PopularArticle> popReadArticlesOrder = new ArrayList<>();
 		List<PopularArticle> popReadArticlesLocation = new ArrayList<>();
 		List<PopularArticle> popReadArticles = new ArrayList<>();
-		if (cursor.moveToFirst()) {
+		if (cursor.moveToNext()) {
 			do {
 				PopularArticle travelArticle = PopularArticle.readArticle(cursor);
 				if (language.equals(travelArticle.lang)) {
@@ -382,7 +382,7 @@ public class TravelDbHelper implements TravelHelper {
 		cursor = conn.rawQuery(bld.toString(), null);
 		Map<String, TravelArticle> ts = new HashMap<String, TravelArticle>();
 		if (cursor != null) {
-			if (cursor.moveToFirst()) {
+			if (cursor.moveToNext()) {
 				do {
 					TravelArticle travelArticle = readArticle(cursor);
 					ts.put(travelArticle.routeId, travelArticle);
@@ -515,8 +515,8 @@ public class TravelDbHelper implements TravelHelper {
 					params.add(lang);
 				}
 			}
-			SQLiteCursor cursor = conn.rawQuery(query.toString(), params.toArray(new String[0]));
-			if (cursor != null && cursor.moveToFirst()) {
+			SQLiteCursor cursor = conn.rawQuery(query.toString(), params);
+			if (cursor != null && cursor.moveToNext()) {
 				do {
 					String routeId = cursor.getLong(0) + "";
 					String articleTitle = cursor.getString(1);
@@ -566,9 +566,9 @@ public class TravelDbHelper implements TravelHelper {
 		String routeId = articleId.routeId;
 		if (conn != null && !Algorithms.isEmpty(routeId) && lang != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TRIP_ID + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[]{routeId, lang});
+					+ ARTICLES_COL_LANG + " = ?", Arrays.asList(routeId, lang));
 			if (cursor != null) {
-				if (cursor.moveToFirst()) {
+				if (cursor.moveToNext()) {
 					res = readArticle(cursor);
 				}
 				cursor.close();
@@ -602,9 +602,9 @@ public class TravelDbHelper implements TravelHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TITLE + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
+					+ ARTICLES_COL_LANG + " = ?", Arrays.asList(title, lang));
 			if (cursor != null) {
-				if (cursor.moveToFirst()) {
+				if (cursor.moveToNext()) {
 					res = readArticle(cursor);
 				}
 				cursor.close();
@@ -628,9 +628,9 @@ public class TravelDbHelper implements TravelHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery(ARTICLES_TABLE_SELECT + " WHERE " + ARTICLES_COL_TITLE + " = ? AND "
-					+ ARTICLES_COL_LANG + " = ?", new String[]{title, lang});
+					+ ARTICLES_COL_LANG + " = ?", Arrays.asList(title, lang));
 			if (cursor != null) {
-				if (cursor.moveToFirst()) {
+				if (cursor.moveToNext()) {
 					article = readArticle(cursor);
 				}
 				cursor.close();
@@ -646,9 +646,9 @@ public class TravelDbHelper implements TravelHelper {
 		SQLiteConnection conn = openConnection();
 		if (conn != null) {
 			SQLiteCursor cursor = conn.rawQuery("SELECT " + ARTICLES_COL_LANG + " FROM " + ARTICLES_TABLE_NAME
-					+ " WHERE " + ARTICLES_COL_TRIP_ID + " = ?", new String[]{articleId.routeId});
+					+ " WHERE " + ARTICLES_COL_TRIP_ID + " = ?", Collections.singletonList(articleId.routeId));
 			if (cursor != null) {
-				if (cursor.moveToFirst()) {
+				if (cursor.moveToNext()) {
 					String baseLang = application.getLanguage();
 					do {
 						String lang = cursor.getString(0);

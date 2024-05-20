@@ -18,11 +18,12 @@ import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+//import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+//import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.AndroidDbUtils;
+import net.osmand.shared.api.SQLiteAPI;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -72,14 +73,14 @@ public class GPXDatabase {
 	GPXDatabase(@NonNull OsmandApplication app) {
 		this.app = app;
 		// init database
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection  db = openConnection(false);
 		if (db != null) {
 			db.close();
 		}
 	}
 
-	SQLiteConnection openConnection(boolean readonly) {
-		SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+	SQLiteAPI.SQLiteConnection openConnection(boolean readonly) {
+		SQLiteAPI.SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 		if (conn == null) {
 			return null;
 		}
@@ -113,7 +114,7 @@ public class GPXDatabase {
 
 	private boolean updateGpxParameters(@NonNull Map<GpxParameter, Object> rowsToUpdate,
 	                                    @NonNull String tableName, @NonNull Map<String, Object> rowsToSearch) {
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				return updateGpxParameters(db, tableName, rowsToUpdate, rowsToSearch);
@@ -124,13 +125,13 @@ public class GPXDatabase {
 		return false;
 	}
 
-	private boolean updateGpxParameters(@NonNull SQLiteConnection db, @NonNull String tableName,
+	private boolean updateGpxParameters(@NonNull SQLiteAPI.SQLiteConnection db, @NonNull String tableName,
 	                                    @NonNull Map<GpxParameter, Object> rowsToUpdate,
 	                                    @NonNull Map<String, Object> rowsToSearch) {
 		Map<String, Object> map = GpxDbUtils.convertGpxParameters(rowsToUpdate);
 		Pair<String, Object[]> pair = AndroidDbUtils.createDbUpdateQuery(tableName, map, rowsToSearch);
 		//todo (done in ui, move to worker)
-		db.execSQL(pair.first, pair.second);
+		db.execSQL(pair.first, Arrays.asList(pair.second));
 		return true;
 	}
 
@@ -144,13 +145,13 @@ public class GPXDatabase {
 	}
 
 	public boolean remove(@NonNull File file) {
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				String fileName = file.getName();
 				String fileDir = GpxDbUtils.getGpxFileDir(app, file);
 				String tableName = GpxDbUtils.getTableName(file);
-				db.execSQL("DELETE FROM " + tableName + GPX_FIND_BY_NAME_AND_DIR, new Object[] {fileName, fileDir});
+				db.execSQL("DELETE FROM " + tableName + GPX_FIND_BY_NAME_AND_DIR, Arrays.asList(fileName, fileDir));
 			} finally {
 				db.close();
 			}
@@ -160,7 +161,7 @@ public class GPXDatabase {
 	}
 
 	public boolean add(@NonNull DataItem item) {
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				insertItem(item, db);
@@ -172,15 +173,15 @@ public class GPXDatabase {
 		return false;
 	}
 
-	void insertItem(@NonNull DataItem item, @NonNull SQLiteConnection db) {
+	void insertItem(@NonNull DataItem item, @NonNull SQLiteAPI.SQLiteConnection db) {
 		File file = item.getFile();
 		String tableName = GpxDbUtils.getTableName(file);
 		Map<String, Object> map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(item));
-		db.execSQL(AndroidDbUtils.createDbInsertQuery(tableName, map.keySet()), map.values().toArray());
+		db.execSQL(AndroidDbUtils.createDbInsertQuery(tableName, map.keySet()), Arrays.asList(map.values().toArray()));
 	}
 
 	@NonNull
-	private GpxDataItem readGpxDataItem(@NonNull SQLiteCursor query) {
+	private GpxDataItem readGpxDataItem(@NonNull SQLiteAPI.SQLiteCursor query) {
 		File file = readItemFile(query);
 		GpxDataItem item = new GpxDataItem(app, file);
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
@@ -191,7 +192,7 @@ public class GPXDatabase {
 	}
 
 	@NonNull
-	private File readItemFile(@NonNull SQLiteCursor query) {
+	private File readItemFile(@NonNull SQLiteAPI.SQLiteCursor query) {
 		String fileDir = query.getString(query.getColumnIndex(FILE_DIR.getColumnName()));
 		String fileName = query.getString(query.getColumnIndex(FILE_NAME.getColumnName()));
 
@@ -205,7 +206,7 @@ public class GPXDatabase {
 		return new File(dir, fileName);
 	}
 
-	private void processItemParameters(@NonNull DataItem item, @NonNull SQLiteCursor query,
+	private void processItemParameters(@NonNull DataItem item, @NonNull SQLiteAPI.SQLiteCursor query,
 	                                   @NonNull List<GpxParameter> parameters,
 	                                   @Nullable GPXTrackAnalysis analysis) {
 		for (GpxParameter parameter : parameters) {
@@ -235,7 +236,7 @@ public class GPXDatabase {
 	}
 
 	@NonNull
-	private GpxDirItem readGpxDirItem(@NonNull SQLiteCursor query) {
+	private GpxDirItem readGpxDirItem(@NonNull SQLiteAPI.SQLiteCursor query) {
 		File file = readItemFile(query);
 		GpxDirItem item = new GpxDirItem(app, file);
 		processItemParameters(item, query, GpxParameter.getGpxDirParameters(), null);
@@ -245,13 +246,13 @@ public class GPXDatabase {
 
 	public long getTracksMinCreateDate() {
 		long minDate = -1;
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GPX_MIN_CREATE_DATE, null);
+				SQLiteAPI.SQLiteCursor query = db.rawQuery(GPX_MIN_CREATE_DATE, null);
 				if (query != null) {
 					try {
-						if (query.moveToFirst()) {
+						if (query.moveToNext()) {
 							minDate = query.getLong(0);
 						}
 					} finally {
@@ -267,14 +268,14 @@ public class GPXDatabase {
 
 	public String getColumnMaxValue(@NonNull GpxParameter parameter) {
 		String maxValue = "";
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				String queryString = String.format(GPX_MAX_COLUMN_VALUE, parameter.getColumnName());
-				SQLiteCursor query = db.rawQuery(queryString, null);
+				SQLiteAPI.SQLiteCursor  query = db.rawQuery(queryString, null);
 				if (query != null) {
 					try {
-						if (query.moveToFirst()) {
+						if (query.moveToNext()) {
 							maxValue = query.getString(0);
 						}
 					} finally {
@@ -304,13 +305,13 @@ public class GPXDatabase {
 	@NonNull
 	private List<Pair<String, Integer>> getStringIntItemsCollection(@NonNull String dataQuery) {
 		List<Pair<String, Integer>> folderCollection = new ArrayList<>();
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection  db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(dataQuery, null);
+				SQLiteAPI.SQLiteCursor  query = db.rawQuery(dataQuery, null);
 				if (query != null) {
 					try {
-						if (query.moveToFirst()) {
+						if (query.moveToNext()) {
 							do {
 								folderCollection.add(new Pair<>(query.getString(0), query.getInt(1)));
 							} while (query.moveToNext());
@@ -329,13 +330,13 @@ public class GPXDatabase {
 	@NonNull
 	public List<GpxDataItem> getGpxDataItems() {
 		Set<GpxDataItem> items = new HashSet<>();
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection  db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GpxDbUtils.getSelectGpxQuery(), null);
+				SQLiteAPI.SQLiteCursor query = db.rawQuery(GpxDbUtils.getSelectGpxQuery(), null);
 				if (query != null) {
 					try {
-						if (query.moveToFirst()) {
+						if (query.moveToNext()) {
 							do {
 								items.add(readGpxDataItem(query));
 							} while (query.moveToNext());
@@ -354,13 +355,13 @@ public class GPXDatabase {
 	@NonNull
 	public List<GpxDirItem> getGpxDirItems() {
 		Set<GpxDirItem> items = new HashSet<>();
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GpxDbUtils.getSelectGpxDirQuery(), null);
+				SQLiteAPI.SQLiteCursor query = db.rawQuery(GpxDbUtils.getSelectGpxDirQuery(), null);
 				if (query != null) {
 					try {
-						if (query.moveToFirst()) {
+						if (query.moveToNext()) {
 							do {
 								items.add(readGpxDirItem(query));
 							} while (query.moveToNext());
@@ -395,7 +396,7 @@ public class GPXDatabase {
 	@Nullable
 	private DataItem getDataItem(@NonNull File file) {
 		DataItem result = null;
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				result = getDataItem(file, db);
@@ -407,16 +408,16 @@ public class GPXDatabase {
 	}
 
 	@Nullable
-	public DataItem getDataItem(@NonNull File file, @NonNull SQLiteConnection db) {
+	public DataItem getDataItem(@NonNull File file, @NonNull SQLiteAPI.SQLiteConnection db) {
 		String name = file.getName();
 		String dir = GpxDbUtils.getGpxFileDir(app, file);
 		boolean gpxFile = GpxUiHelper.isGpxFile(file);
 
 		String selectQuery = gpxFile ? GpxDbUtils.getSelectGpxQuery() : GpxDbUtils.getSelectGpxDirQuery();
-		SQLiteCursor query = db.rawQuery(selectQuery + GPX_FIND_BY_NAME_AND_DIR, new String[] {name, dir});
+		SQLiteAPI.SQLiteCursor query = db.rawQuery(selectQuery + GPX_FIND_BY_NAME_AND_DIR, Arrays.asList(name, dir));
 		if (query != null) {
 			try {
-				if (query.moveToFirst()) {
+				if (query.moveToNext()) {
 					return gpxFile ? readGpxDataItem(query) : readGpxDirItem(query);
 				}
 			} finally {

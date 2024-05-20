@@ -8,8 +8,8 @@ import net.osmand.gpx.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -302,8 +303,8 @@ public class TravelLocalDataHelper {
 				String selectedTravelBookName = context.getTravelHelper().getSelectedTravelBookName();
 				if (selectedTravelBookName != null) {
 					Object[] args = {selectedTravelBookName};
-					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", args);
-					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", args);
+					conn.execSQL("UPDATE " + HISTORY_TABLE_NAME + " SET " + HISTORY_COL_TRAVEL_BOOK + " = ?", Arrays.asList(args));
+					conn.execSQL("UPDATE " + BOOKMARKS_TABLE_NAME + " SET " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?", Arrays.asList(args));
 				}
 			}
 			if (oldVersion < 4) {
@@ -338,7 +339,7 @@ public class TravelLocalDataHelper {
 				try {
 					SQLiteCursor cursor = conn.rawQuery(HISTORY_TABLE_SELECT, null);
 					if (cursor != null) {
-						if (cursor.moveToFirst()) {
+						if (cursor.moveToNext()) {
 							do {
 								WikivoyageSearchHistoryItem item = readHistoryItem(cursor);
 								res.put(item.getKey(), item);
@@ -363,8 +364,8 @@ public class TravelLocalDataHelper {
 				try {
 					conn.execSQL("INSERT INTO " + HISTORY_TABLE_NAME + "(" + HISTORY_COL_ARTICLE_TITLE + ", "
 							+ HISTORY_COL_LANG + ", " + HISTORY_COL_IS_PART_OF + ", " + HISTORY_COL_LAST_ACCESSED
-							+ ", " + HISTORY_COL_TRAVEL_BOOK + ") VALUES (?, ?, ?, ?, ?)", new Object[] {
-							item.articleTitle, item.lang, item.isPartOf, item.lastAccessed, travelBook});
+							+ ", " + HISTORY_COL_TRAVEL_BOOK + ") VALUES (?, ?, ?, ?, ?)", Arrays.asList(
+							item.articleTitle, item.lang, item.isPartOf, item.lastAccessed, travelBook));
 				} finally {
 					conn.close();
 				}
@@ -385,8 +386,8 @@ public class TravelLocalDataHelper {
 									"WHERE " + HISTORY_COL_ARTICLE_TITLE + " = ? " +
 									" AND " + HISTORY_COL_LANG + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[] {item.isPartOf, item.lastAccessed,
-									item.articleTitle, item.lang, travelBook});
+							Arrays.asList(item.isPartOf, item.lastAccessed,
+									item.articleTitle, item.lang, travelBook));
 				} finally {
 					conn.close();
 				}
@@ -405,7 +406,7 @@ public class TravelLocalDataHelper {
 									" WHERE " + HISTORY_COL_ARTICLE_TITLE + " = ?" +
 									" AND " + HISTORY_COL_LANG + " = ?" +
 									" AND " + HISTORY_COL_TRAVEL_BOOK + " = ?",
-							new Object[] {item.articleTitle, item.lang, travelBook});
+							Arrays.asList(item.articleTitle, item.lang, travelBook));
 				} finally {
 					conn.close();
 				}
@@ -431,7 +432,7 @@ public class TravelLocalDataHelper {
 				try {
 					SQLiteCursor cursor = conn.rawQuery(BOOKMARKS_TABLE_SELECT, null);
 					if (cursor != null) {
-						if (cursor.moveToFirst()) {
+						if (cursor.moveToNext()) {
 							do {
 								TravelArticle dbArticle = readSavedArticle(cursor);
 								TravelArticle article = context.getTravelHelper().findSavedArticle(dbArticle);
@@ -459,7 +460,7 @@ public class TravelLocalDataHelper {
 				try {
 					SQLiteCursor cursor = conn.rawQuery("SELECT COUNT(*) FROM " + BOOKMARKS_TABLE_NAME, null);
 					if (cursor != null) {
-						if (cursor.moveToFirst()) {
+						if (cursor.moveToNext()) {
 							count = cursor.getInt(0);
 						}
 						cursor.close();
@@ -507,7 +508,7 @@ public class TravelLocalDataHelper {
 							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile)));
 
 							conn.execSQL(AndroidDbUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
-									rowsMap.values().toArray());
+									Arrays.asList(rowsMap.values().toArray()));
 						} finally {
 							conn.close();
 						}
@@ -547,7 +548,7 @@ public class TravelLocalDataHelper {
 									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + ((article.lang != null) ? " = '" + article.lang + "'" : " IS NULL") +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?";
-							conn.execSQL(query, new Object[] {article.title, article.routeId, travelBook});
+							conn.execSQL(query, Arrays.asList(article.title, article.routeId, travelBook));
 						} finally {
 							conn.close();
 						}
@@ -580,11 +581,11 @@ public class TravelLocalDataHelper {
 									" AND " + BOOKMARKS_COL_ROUTE_ID + " = ?" +
 									" AND " + BOOKMARKS_COL_LANG + " = ?" +
 									" AND " + BOOKMARKS_COL_TRAVEL_BOOK + " = ?",
-							new Object[] {newArticle.title, newArticle.lang, newArticle.aggregatedPartOf,
+							Arrays.asList(newArticle.title, newArticle.lang, newArticle.aggregatedPartOf,
 									newArticle.imageTitle, newArticle.getTravelBook(context), newArticle.lat,
 									newArticle.lon, newArticle.routeId, newArticle.contentsJson, newArticle.content,
 									newArticle.getLastModified(),
-									odlArticle.title, odlArticle.routeId, odlArticle.lang, travelBook});
+									odlArticle.title, odlArticle.routeId, odlArticle.lang, travelBook));
 
 				} finally {
 					conn.close();

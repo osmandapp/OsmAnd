@@ -54,6 +54,7 @@ import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.AndroidNetworkUtils.NetworkResult;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.api.SQLiteAPI;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
@@ -678,7 +679,7 @@ public class BackupHelper {
 		AsyncTask<Void, LocalFile, List<LocalFile>> task = new AsyncTask<Void, LocalFile, List<LocalFile>>() {
 
 			BackupDbHelper dbHelper;
-			SQLiteConnection db;
+			SQLiteAPI.SQLiteConnection db;
 			Map<String, UploadedFileInfo> infos;
 
 			@Override

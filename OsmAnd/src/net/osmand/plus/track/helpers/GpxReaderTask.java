@@ -24,7 +24,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.util.Algorithms;

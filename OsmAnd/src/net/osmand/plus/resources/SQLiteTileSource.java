@@ -18,8 +18,9 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -29,6 +30,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -281,9 +283,8 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			try {
 				SQLiteCursor cursor = db.rawQuery("SELECT * FROM info", null);
-				if (cursor.moveToFirst()) {
-					String[] columnNames = cursor.getColumnNames();
-					List<String> list = Arrays.asList(columnNames);
+				if (cursor.moveToNext()) {
+					List<String> list = cursor.getColumnNames();
 					int url = list.indexOf(URL);
 					if (url != -1) {
 						String template = cursor.getString(url);
@@ -452,8 +453,8 @@ public class SQLiteTileSource implements ITileSource {
 	private boolean hasTimeColumn(SQLiteConnection db) {
 		SQLiteCursor cursor;
 		cursor = db.rawQuery("SELECT * FROM tiles", null);
-		cursor.moveToFirst();
-		List<String> cols = Arrays.asList(cursor.getColumnNames());
+		cursor.moveToNext();
+		List<String> cols = cursor.getColumnNames();
 		boolean timeSupported = cols.contains("time");
 		cursor.close();
 		return timeSupported;
@@ -467,9 +468,9 @@ public class SQLiteTileSource implements ITileSource {
 		try {
 			int z = getFileZoom(zoom);
 			SQLiteCursor cursor = db.rawQuery(
-					"SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] { x + "", y + "", z + "" }); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+					"SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", Arrays.asList( x + "", y + "", z + "" )); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			try {
-				boolean e = cursor.moveToFirst();
+				boolean e = cursor.moveToNext();
 				cursor.close();
 				return e;
 			} catch (SQLiteDiskIOException e) {
@@ -489,8 +490,8 @@ public class SQLiteTileSource implements ITileSource {
 		SQLiteConnection db = getDatabase();
 		if (db != null && zoom <= maxZoom && timeSupported) {
 			String[] params = getTileDbParams(x, y, zoom);
-			SQLiteCursor cursor = db.rawQuery("SELECT time FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
-			if (cursor.moveToFirst()) {
+			SQLiteCursor cursor = db.rawQuery("SELECT time FROM tiles WHERE x = ? AND y = ? AND z = ?", Arrays.asList(params));
+			if (cursor.moveToNext()) {
 				time = cursor.getLong(0);
 			}
 			cursor.close();
@@ -512,8 +513,8 @@ public class SQLiteTileSource implements ITileSource {
 				String[] params = getTileDbParams(x, y, zoom);
 				boolean queryTime = timeHolder != null && timeHolder.length > 0 && timeSupported;
 				SQLiteCursor cursor = db.rawQuery("SELECT image " + (queryTime ? ", time" : "")
-						+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
-				if (cursor.moveToFirst()) {
+						+ " FROM tiles WHERE x = ? AND y = ? AND z = ?", Arrays.asList(params));
+				if (cursor.moveToNext()) {
 					blob = cursor.getBlob(0);
 					if (queryTime) {
 						timeHolder[0] = cursor.getLong(1);
@@ -552,7 +553,7 @@ public class SQLiteTileSource implements ITileSource {
 			SQLiteConnection db = getDatabase();
 			if (db != null) {
 				// Delete broken image
-				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params);
+				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", Arrays.asList(params));
 			}
 		} else if (!tileSizeSpecified && tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 			tileSize = bmp.getWidth();
@@ -582,13 +583,13 @@ public class SQLiteTileSource implements ITileSource {
 			// 17 - z = zoom, x << (25 - zoom) = 25th x tile = 8 + z,
 			cursor = db.rawQuery("SELECT max(x << (8+z)), min(x << (8+z)), max(y << (8+z)), min(y << (8+z))" +
 					" from tiles where z < "
-					+ minZoom, new String[0]);
+					+ minZoom, Collections.singletonList("0"));
 		} else {
 			cursor = db.rawQuery("SELECT max(x << (25-z)), min(x << (25-z)), max(y << (25-z)), min(y << (25-z))"
 					+ " from tiles where z > " + minZ,
-					new String[0]);
+					Collections.singletonList("0"));
 		}
-		cursor.moveToFirst();
+		cursor.moveToNext();
 		int right = cursor.getInt(0) >> (25 - coordinatesZoom);
 		int left = cursor.getInt(1) >> (25 - coordinatesZoom);
 		int top = cursor.getInt(3) >> (25 - coordinatesZoom);
@@ -604,7 +605,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null || db.isReadOnly()){
 			return;
 		}
-		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"", getFileZoom(zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+		db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", Arrays.asList(x+"", y+"", getFileZoom(zoom)+""));    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 	}
 
 	private static final int BUF_SIZE = 1024;
@@ -679,7 +680,7 @@ public class SQLiteTileSource implements ITileSource {
 		
 		String query = timeSupported ? "INSERT OR REPLACE INTO tiles(x,y,z,s,image,time) VALUES(?, ?, ?, ?, ?, ?)"
 				: "INSERT OR REPLACE INTO tiles(x,y,z,s,image) VALUES(?, ?, ?, ?, ?)";
-		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
+		SQLiteAPI.SQLiteStatement statement = db.compileStatement(query); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, getFileZoom(zoom));

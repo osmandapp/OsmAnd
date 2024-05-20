@@ -260,7 +260,7 @@ public class ImportHelper {
 		try {
 			String name;
 			Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
-			if (returnCursor != null && returnCursor.moveToFirst()) {
+			if (returnCursor != null && returnCursor.moveToNext()) {
 				int columnIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
 				if (columnIndex != -1) {
 					name = returnCursor.getString(columnIndex);

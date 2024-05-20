@@ -12,9 +12,9 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -785,7 +785,7 @@ public class PoiFiltersHelper {
 				String query = "SELECT " + FILTER_COL_ID + ", " + FILTER_COL_HISTORY + ", " + FILTER_COL_DELETED + " FROM " + FILTER_NAME;
 				SQLiteCursor cursor = conn.rawQuery(query, null);
 				if (cursor != null) {
-					if (cursor.moveToFirst()) {
+					if (cursor.moveToNext()) {
 						do {
 							if (cursor.getInt(1) == FALSE_INT && cursor.getInt(2) == TRUE_INT) {
 								deleteFilter(conn, cursor.getString(0));
@@ -801,7 +801,7 @@ public class PoiFiltersHelper {
 			SQLiteConnection conn = getWritableDatabase();
 			if (conn != null) {
 				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ? WHERE " + FILTER_COL_ID + " = ?",
-						new Object[]{history ? TRUE_INT : FALSE_INT, filterId});
+						Arrays.asList(history ? TRUE_INT : FALSE_INT, filterId));
 				updateLastModifiedTime();
 			}
 		}
@@ -809,7 +809,7 @@ public class PoiFiltersHelper {
 		void clearHistory() {
 			SQLiteConnection conn = getWritableDatabase();
 			if (conn != null) {
-				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ?", new Object[]{FALSE_INT});
+				conn.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_HISTORY + " = ?", Collections.singletonList(FALSE_INT));
 				updateLastModifiedTime();
 			}
 		}
@@ -820,7 +820,7 @@ public class PoiFiltersHelper {
 					p.setDeleted(forHistory);
 					int value = forHistory ? TRUE_INT : FALSE_INT;
 					db.execSQL("INSERT INTO " + FILTER_NAME + " VALUES (?, ?, ?, ?, ?)",
-							new Object[]{p.getName(), p.getFilterId(), p.getFilterByName(), value, value});
+							Arrays.asList(p.getName(), p.getFilterId(), p.getFilterByName(), value, value));
 				}
 				Map<PoiCategory, LinkedHashSet<String>> types = p.getAcceptedTypes();
 				SQLiteStatement insertCategories = db.compileStatement("INSERT INTO " + CATEGORIES_NAME + " VALUES (?, ?, ?)");
@@ -853,7 +853,7 @@ public class PoiFiltersHelper {
 				SQLiteCursor query = conn.rawQuery("SELECT " + CATEGORIES_FILTER_ID + ", " + CATEGORIES_COL_CATEGORY + "," + CATEGORIES_COL_SUBCATEGORY + " FROM " +
 						CATEGORIES_NAME, null);
 				Map<String, Map<PoiCategory, LinkedHashSet<String>>> map = new LinkedHashMap<>();
-				if (query != null && query.moveToFirst()) {
+				if (query != null && query.moveToNext()) {
 					do {
 						String filterId = query.getString(0);
 						if (!map.containsKey(filterId)) {
@@ -882,7 +882,7 @@ public class PoiFiltersHelper {
 						FILTER_COL_FILTERBYNAME + ", " +
 						FILTER_COL_DELETED +
 						" FROM " + FILTER_NAME, null);
-				if (query != null && query.moveToFirst()) {
+				if (query != null && query.moveToNext()) {
 					do {
 						String filterId = query.getString(0);
 						boolean deleted = query.getInt(3) == TRUE_INT;
@@ -912,7 +912,7 @@ public class PoiFiltersHelper {
 		protected boolean editFilter(SQLiteConnection conn, PoiUIFilter filter) {
 			if (conn != null) {
 				conn.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?",
-						new Object[]{filter.getFilterId()});
+						Collections.singletonList(filter.getFilterId()));
 				addFilter(filter, conn, true, false);
 				updateName(conn, filter);
 				updateLastModifiedTime();
@@ -923,7 +923,7 @@ public class PoiFiltersHelper {
 
 		private void updateName(SQLiteConnection db, PoiUIFilter filter) {
 			db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_FILTERBYNAME + " = ?, " + FILTER_COL_NAME + " = ? " + " WHERE "
-					+ FILTER_COL_ID + "= ?", new Object[]{filter.getFilterByName(), filter.getName(), filter.getFilterId()});
+					+ FILTER_COL_ID + "= ?", Arrays.asList(filter.getFilterByName(), filter.getName(), filter.getFilterId()));
 			updateLastModifiedTime();
 		}
 
@@ -933,7 +933,7 @@ public class PoiFiltersHelper {
 					deleteFilter(db, p.getFilterId());
 				} else {
 					db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_DELETED + " = ? WHERE " + FILTER_COL_ID + " = ?",
-							new Object[]{TRUE_INT, p.getFilterId()});
+							Arrays.asList(TRUE_INT, p.getFilterId()));
 				}
 				updateLastModifiedTime();
 				return true;
@@ -942,8 +942,8 @@ public class PoiFiltersHelper {
 		}
 
 		private void deleteFilter(@NonNull SQLiteConnection db, String key) {
-			db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " + FILTER_COL_ID + " = ?", new Object[]{key});
-			db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?", new Object[]{key});
+			db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " + FILTER_COL_ID + " = ?", Collections.singletonList(key));
+			db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?", Collections.singletonList(key));
 			updateLastModifiedTime();
 		}
 
@@ -955,8 +955,8 @@ public class PoiFiltersHelper {
 					CACHED_POI_CATEGORIES +
 					" FROM " +
 					POI_TYPES_CACHE_NAME +
-					" WHERE " + MAP_FILE_NAME + " = ?", new String[]{fileName});
-			if (query != null && query.moveToFirst()) {
+					" WHERE " + MAP_FILE_NAME + " = ?", Collections.singletonList(fileName));
+			if (query != null && query.moveToNext()) {
 				long lastModified = query.getLong(0);
 				Map<String, List<String>> categories = getCategories(query.getString(1));
 				cache = new Pair<>(lastModified, categories);
@@ -990,7 +990,7 @@ public class PoiFiltersHelper {
 								MAP_FILE_DATE + " = ?, " +
 								CACHED_POI_CATEGORIES + " = ? " +
 								"WHERE " + MAP_FILE_NAME + " = ?",
-						new Object[]{lastModified, getCategoriesJson(categories), fileName});
+						Arrays.asList(lastModified, getCategoriesJson(categories), fileName));
 			} catch (JSONException e) {
 				LOG.error("Error converting category to json: " + e);
 			}
@@ -999,7 +999,7 @@ public class PoiFiltersHelper {
 		protected void insertCacheForResource(@NonNull SQLiteConnection db, String fileName, long lastModified, Map<String, List<String>> categories) {
 			try {
 				db.execSQL("INSERT INTO " + POI_TYPES_CACHE_NAME + " VALUES(?,?,?)",
-						new Object[]{fileName, lastModified, getCategoriesJson(categories)});
+						Arrays.asList(fileName, lastModified, getCategoriesJson(categories)));
 			} catch (JSONException e) {
 				LOG.error("Error converting category to json: " + e);
 			}

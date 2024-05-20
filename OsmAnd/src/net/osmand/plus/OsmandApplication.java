@@ -39,8 +39,8 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.RestartActivity;
-import net.osmand.plus.api.SQLiteAPI;
-import net.osmand.plus.api.SQLiteAPIImpl;
+//import net.osmand.plus.api.SQLiteAPI;
+//import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.screens.NavigationScreen;
@@ -120,6 +120,8 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.search.SearchUICore;
+import net.osmand.shared.api.SQLiteAPI;
+import net.osmand.shared.db.KtSQLiteAPIImpl;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -150,7 +152,7 @@ public class OsmandApplication extends MultiDexApplication {
 	NavigationCarAppService navigationCarAppService;
 	NavigationSession carNavigationSession;
 
-	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
+	private final SQLiteAPI sqliteAPI = new KtSQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
 	private final LocaleHelper localeHelper = new LocaleHelper(this);
