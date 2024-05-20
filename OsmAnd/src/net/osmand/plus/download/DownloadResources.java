@@ -410,10 +410,6 @@ public class DownloadResources extends DownloadResourceGroup {
 				}
 				continue;
 			}
-			if (type == DownloadActivityType.HEIGHTMAP_FILE_LEGACY) {
-				// Hide heightmaps of sqlite format
-				continue;
-			}
 			if (type == DownloadActivityType.HILLSHADE_FILE || type == DownloadActivityType.SLOPE_FILE) {
 				OsmandDevelopmentPlugin plugin = PluginsHelper.getPlugin(OsmandDevelopmentPlugin.class);
 				if (app.useOpenGlRenderer() && plugin != null && !plugin.USE_RASTER_SQLITEDB.get()) {

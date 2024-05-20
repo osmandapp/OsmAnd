@@ -367,7 +367,6 @@ public class FileUtils {
 		FileUtils.removeFilesWithExtensions(app.getAppPath(NAUTICAL_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKI_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(WIKIVOYAGE_INDEX_DIR), false, DOWNLOAD_EXT);
-		FileUtils.removeFilesWithExtensions(app.getAppPath(HEIGHTMAP_INDEX_DIR), false, DOWNLOAD_EXT);
 		FileUtils.removeFilesWithExtensions(app.getAppPath(GEOTIFF_DIR), false, DOWNLOAD_EXT);
 	}
 

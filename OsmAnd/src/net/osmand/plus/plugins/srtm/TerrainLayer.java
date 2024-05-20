@@ -110,7 +110,7 @@ public class TerrainLayer extends MapTileLayer {
 	@NonNull
 	private IRasterMapLayerProvider createGeoTiffLayerProvider(TerrainMode mode, @NonNull GeoTiffCollection geoTiffCollection) {
 		OsmandApplication app = getApplication();
-		File heightmapDir = app.getAppPath(HEIGHTMAP_INDEX_DIR);
+		File heightmapDir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		String mainColorFilename = new File(heightmapDir, mode.getMainFile()).getAbsolutePath();
 		IRasterMapLayerProvider provider;
 		if (mode.getType() == TerrainMode.TerrainType.HILLSHADE) {
