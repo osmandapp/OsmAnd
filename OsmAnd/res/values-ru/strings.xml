@@ -5727,6 +5727,6 @@
     <string name="show_debug_info">Показать отладочную информацию</string>
     <string name="show_debug_info_description">Отображение графической информации о размещении каждого текста на карте</string>
     <string name="map_text">Текста карты</string>
-    <string name="disable_map_layers_descr">Отключает все слои карты над векторной картой (требуется перезапуск).</string>
+    <string name="disable_map_layers_descr">Отключает все слои над векторной картой (требуется перезапуск).</string>
     <string name="disable_map_layers">Отключить слои карты</string>
 </resources>

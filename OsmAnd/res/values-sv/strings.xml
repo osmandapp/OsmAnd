@@ -4478,8 +4478,8 @@
     <string name="map_marker_average_speed_desc">Ange tidsintervallet för medelhastigheten (används för beräknad ankomsttid).</string>
     <string name="marker_2nd">Andra markören</string>
     <string name="goods_delivery_desc_2">Vägar stängda för varuleveranser kommer att undvikas.</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Tunnlar för vattendrag</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Dölj inte tunnlar för vattendrag</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Ökad synlighet för tunnlar för vattendrag</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Ökad synlighet för tunnlar för vattendrag</string>
     <string name="app_mode_climbing">Klättring</string>
     <string name="weather_download_error">Kunde inte ladda ned %1$s rastertiles.</string>
     <string name="select_layer">Välj lager</string>
@@ -5394,7 +5394,7 @@
     <string name="add_row">Lägg till rad</string>
     <string name="discard_changes_prompt">Kassera ändringarna?</string>
     <string name="shared_string_empty_trash">Töm papperskorgen</string>
-    <string name="delete_track_folder_dialog_message">Detta kommer radera mappen \'%1$s\' och alla innehållande spår (%2$s).</string>
+    <string name="delete_track_folder_dialog_message">Detta kommer radera mappen \'%1$s\' och alla %2$s innehållande spår.</string>
     <string name="shared_string_delete_immediately">Radera omedelbart</string>
     <string name="delete_smart_folder_dialog_message">Detta kommer radera smarta mappen \"%1$s\".</string>
     <string name="shared_string_is_deleted">%1$s har raderats.</string>
@@ -5539,7 +5539,7 @@
     <string name="route_line_use_coloring_altitude">Ruttlinjen färgläggs efter höjd.</string>
     <string name="route_line_use_coloring_speed">Ruttlinje färgläggs efter rörelsens hastighet.</string>
     <string name="title_3d_track">3D-spår</string>
-    <string name="explore_3d_track_description">Utforska spåret i interaktiv 3D! Visualiseria höjd, hastighet med mera direkt på kartan.</string>
+    <string name="explore_3d_track_description">Utforska spåret i interaktiv 3D! Visualisera höjd, hastighet med mera direkt på kartan.</string>
     <string name="required_maps_calculate_online_summary">Listan över saknade kartor baseras på den rutt som utgörs av en rak linje. För att få en korrekt lista över kartor kan OsmAnd räkna ut din rutt online på förhand.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kan hämta höjddata från närliggande vägar eller terrängkartor.</string>
     <string name="change_default_tracks_appearance_confirmation">Tillämpa ändringar på existerande spår i mappen eller bara på nya?</string>
@@ -5554,4 +5554,31 @@
     <string name="allow_display_on_top_description">Tillåt visning av texter på karta ovanpå varandra</string>
     <string name="show_debug_info_description">Visa grafisk information om placering av varje karttext</string>
     <string name="map_text">Karttexter</string>
+    <string name="shared_string_scale">Skala</string>
+    <string name="shared_string_osm_id">OSM-ID</string>
+    <string name="help_article_setup_a_route_name">Förbered en rutt</string>
+    <string name="gpx_approximation">GPX approximering</string>
+    <string name="routing_type">Ruttberäkningstyp</string>
+    <string name="unchanged_parameter_summary">Varje spår behåller sina egna parametrar.</string>
+    <string name="lang_ta_in">Tamil (Indien)</string>
+    <string name="track_vertical_exaggeration_description">Genom att ändra skalningsvärdet kan du förändra 3D-spårets höjd.</string>
+    <string name="vertical_exaggeration_description">Genom att ändra på skalningsvärdet kan du framhäva 3D-reliefen.</string>
+    <string name="upload_local_versions">Ladda upp lokala versioner</string>
+    <string name="fix_north_up_descr">Rotera inte kartan genom gester i kartorienteringen Norr Uppåt</string>
+    <string name="distance_during_navigation_description">Välj hur avståndsinformation visas i navigations-widgetar (avstånd till punkt, nästa sväng, körfält).
+\n
+\nVälj \"%1$s\" för exakta tal, eller \"%2$s\" för ökad läsbarhet.</string>
+    <string name="delete_actions_button_confirmation">Är du säker på att du vill ta bort \"%1$s\" med alla tillagda åtgärder?</string>
+    <string name="visualized_by">Visualiseras av</string>
+    <string name="fixed_height">Fast höjd</string>
+    <string name="top">Längst upp</string>
+    <string name="bottom">Längst ned</string>
+    <string name="top_and_bottom">Längst upp och längst ned</string>
+    <string name="wall_color">Väggfärg</string>
+    <string name="track_line">Spårlinje</string>
+    <string name="downward_gradient">Nedåtgående gradient</string>
+    <string name="upward_gradient">Uppåtgående gradient</string>
+    <string name="delete_actions_button">Ta bort knapp</string>
+    <string name="auto_zoom_smooth">Jämn</string>
+    <string name="auto_zoom_discrete">Diskret</string>
 </resources>
