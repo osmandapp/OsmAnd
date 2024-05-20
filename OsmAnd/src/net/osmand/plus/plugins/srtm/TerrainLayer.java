@@ -44,7 +44,6 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static net.osmand.IndexConstants.HEIGHTMAP_INDEX_DIR;
 
 public class TerrainLayer extends MapTileLayer {
 
@@ -266,7 +265,7 @@ public class TerrainLayer extends MapTileLayer {
 					for(File f : files) {
 						if (f != null
 								&& f.getName().endsWith(IndexConstants.SQLITE_EXT)
-								&& f.getName().toLowerCase().startsWith(mode.getKey())) {
+								&& f.getName().toLowerCase().startsWith(mode.getKeyName())) {
 							SQLiteTileSource ts = new SQLiteTileSource(app, f, new ArrayList<>());
 							rs.put(f.getName(), ts);
 							fileModified.put(f.getName(), f.lastModified());
@@ -352,7 +351,7 @@ public class TerrainLayer extends MapTileLayer {
 			
 			@Override
 			public String getName() {
-				return Algorithms.capitalizeFirstLetter(mode.getKey().toLowerCase());
+				return Algorithms.capitalizeFirstLetter(mode.getKeyName().toLowerCase());
 			}
 			
 			@Override

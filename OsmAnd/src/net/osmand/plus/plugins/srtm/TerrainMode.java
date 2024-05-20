@@ -16,8 +16,7 @@ import java.util.List;
 public class TerrainMode {
 
 
-	private static final String HILLSHADE_KEY = "hillshade";
-	private static final String SLOPE_KEY = "slope";
+	private static final String DEFAULT_KEY = "default";
 	public static final String HILLSHADE_PREFIX = "hillshade_main_";
 	public static final String HILLSHADE_SCND_PREFIX = "hillshade_color_";
 	public static final String COLOR_SLOPE_PREFIX = "slope_";
@@ -53,9 +52,9 @@ public class TerrainMode {
 			return terrainModes;
 		}
 		TerrainMode hillshade =
-				new TerrainMode(app, HILLSHADE_KEY, app.getString(R.string.shared_string_hillshade), TerrainType.HILLSHADE);
+				new TerrainMode(app, DEFAULT_KEY, app.getString(R.string.shared_string_hillshade), TerrainType.HILLSHADE);
 		TerrainMode slope =
-				new TerrainMode(app, SLOPE_KEY, app.getString(R.string.shared_string_slope), TerrainType.SLOPE);
+				new TerrainMode(app, DEFAULT_KEY, app.getString(R.string.shared_string_slope), TerrainType.SLOPE);
 		List<TerrainMode> tms = new ArrayList<>();
 		// HILLSHADE first
 		tms.add(hillshade);
@@ -70,21 +69,21 @@ public class TerrainMode {
 				if (nm.startsWith(HILLSHADE_PREFIX)) {
 					String key = nm.substring(HILLSHADE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-					if (!HILLSHADE_KEY.equals(key)) {
+					if (!DEFAULT_KEY.equals(key)) {
 						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), TerrainType.HILLSHADE));
 					}
 				} else if (nm.startsWith(COLOR_SLOPE_PREFIX)) {
 					String key = nm.substring(COLOR_SLOPE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-					if (!SLOPE_KEY.equals(key)) {
+					if (!DEFAULT_KEY.equals(key)) {
 						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), TerrainType.SLOPE));
 					}
 				} else if (nm.startsWith(HEIGHT_PREFIX)) {
 					String key = nm.substring(HEIGHT_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-//					if (!SLOPE_KEY.equals(key)) {
+					if (!DEFAULT_KEY.equals(key)) {
 						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), TerrainType.HEIGHT));
-//					}
+					}
 				}
 			}
 		}
@@ -95,7 +94,7 @@ public class TerrainMode {
 	public static TerrainMode getByKey(String key) {
 		TerrainMode hillshade = null;
 		for (TerrainMode m : terrainModes) {
-			if (Algorithms.stringsEqual(m.getKey(), key)) {
+			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
 				return m;
 			} else if (m.type == TerrainType.HILLSHADE && hillshade == null) {
 				hillshade = m;
@@ -126,14 +125,17 @@ public class TerrainMode {
 		return (isHillshade() ? HILLSHADE_SCND_PREFIX : "") + key + EXT;
 	}
 
-	public String getKey() {
+	public String getKeyName() {
+		if (key.equals(DEFAULT_KEY)) {
+			return type.name().toLowerCase();
+		}
 		return key;
 	}
 
 	//	private static final String HILLSHADE_CACHE = "hillshade.cache";
 	//	private static final String SLOPE_CACHE = "slope.cache";
 	public String getCacheFileName() {
-		return key +".cache";
+		return type.name().toLowerCase() +".cache";
 	}
 
 	public void setZoomValues(int minZoom, int maxZoom) {
