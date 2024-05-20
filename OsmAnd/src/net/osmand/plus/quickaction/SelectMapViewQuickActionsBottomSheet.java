@@ -1,7 +1,7 @@
 package net.osmand.plus.quickaction;
 
 
-import static net.osmand.plus.quickaction.AddQuickActionDialog.QUICK_ACTION_BUTTON_KEY;
+import static net.osmand.plus.quickaction.AddQuickActionFragment.QUICK_ACTION_BUTTON_KEY;
 import static net.osmand.plus.quickaction.SwitchableAction.KEY_ID;
 
 import android.app.Activity;
