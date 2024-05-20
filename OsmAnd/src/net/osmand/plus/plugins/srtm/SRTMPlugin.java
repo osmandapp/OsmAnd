@@ -250,9 +250,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN.set(enabled);
 	}
 
-	public boolean isSlopeMode() {
-		return getTerrainMode().isColor();
-	}
 
 	public boolean isHillshadeMode() {
 		return getTerrainMode().isHillshade();
