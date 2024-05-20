@@ -5730,4 +5730,5 @@
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers_descr">Alle Kartenebenen über der Vektorkarte deaktivieren (Neustart erforderlich).</string>
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
+    <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um Relief zu visualisieren.</string>
 </resources>
