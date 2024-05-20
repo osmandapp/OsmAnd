@@ -114,7 +114,7 @@ public class TerrainLayer extends MapTileLayer {
 		OsmandApplication app = getApplication();
 		File heightmapDir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		String mainColorFilename = new File(heightmapDir, mode.getMainFile()).getAbsolutePath();
-		IRasterMapLayerProvider provider;
+		IRasterMapLayerProvider provider = null;
 		if (mode.getType() == TerrainMode.TerrainType.HILLSHADE) {
 			String slopeSecondaryColorFilename = new File(heightmapDir, mode.getSecondFile()).getAbsolutePath();
 			provider =
