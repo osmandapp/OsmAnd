@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ColorPalette;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -178,7 +179,7 @@ public abstract class MultiColoringGeometryWay
 			RouteSegmentAttribute attribute =
 					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
 			int color = attribute.getColor();
-			color = color == 0 ? RouteColorize.LIGHT_GREY : color;
+			color = color == 0 ? net.osmand.ColorPalette.LIGHT_GREY : color;
 
 			if (i == 0) {
 				for (int j = 0; j < firstSegmentLocationIdx; j++) {
@@ -271,7 +272,7 @@ public abstract class MultiColoringGeometryWay
 				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
 				int prevColor = locationProvider.getColor(startLocationIndex - 1);
 				int nextColor = locationProvider.getColor(startLocationIndex);
-				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
+				gradientWayStyle.currColor = ColorPalette.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
 		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?>) {
