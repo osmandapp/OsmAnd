@@ -18,9 +18,9 @@ public class TerrainMode {
 
 	private static final String HILLSHADE_KEY = "hillshade";
 	private static final String SLOPE_KEY = "slope";
-	public static final String HILLSHADE_PREFIX = "hs_main_";
-	public static final String HILLSHADE_SCND_PREFIX = "hs_scnd_";
-	public static final String COLOR_SLOPE_PREFIX = "clr_";
+	public static final String HILLSHADE_PREFIX = "hillshade_main_";
+	public static final String HILLSHADE_SCND_PREFIX = "hillshade_color_";
+	public static final String COLOR_SLOPE_PREFIX = "slope_";
 
 	public static final String HEIGHT_PREFIX = "height_";
 	public static final String EXT = ".txt";
@@ -60,7 +60,7 @@ public class TerrainMode {
 		// HILLSHADE first
 		tms.add(hillshade);
 		tms.add(slope);
-		File dir = app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+		File dir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		if (dir.exists() && dir.listFiles() != null) {
 			for (File lf : dir.listFiles()) {
 				if(lf == null || !lf.getName().endsWith(EXT) ) {

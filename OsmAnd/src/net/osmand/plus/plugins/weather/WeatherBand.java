@@ -462,15 +462,15 @@ public class WeatherBand {
 	public String getColorFilePath() {
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
-				return WEATHER_INDEX_DIR + "cloud_color.txt";
+				return CLR_PALETTE_DIR + "weather_cloud.txt";
 			case WEATHER_BAND_TEMPERATURE:
-				return WEATHER_INDEX_DIR + "temperature_color.txt";
+				return CLR_PALETTE_DIR + "weather_temperature.txt";
 			case WEATHER_BAND_PRESSURE:
-				return WEATHER_INDEX_DIR + "pressure_color.txt";
+				return CLR_PALETTE_DIR + "weather_pressure.txt";
 			case WEATHER_BAND_WIND_SPEED:
-				return WEATHER_INDEX_DIR + "wind_color.txt";
+				return CLR_PALETTE_DIR + "weather_wind.txt";
 			case WEATHER_BAND_PRECIPITATION:
-				return WEATHER_INDEX_DIR + "precip_color.txt";
+				return CLR_PALETTE_DIR + "weather_precip.txt";
 			case WEATHER_BAND_UNDEFINED:
 				return null;
 		}
