@@ -3,13 +3,13 @@ package net.osmand.plus.routing;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.LatLon;
 import net.osmand.data.ValueHolder;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -145,6 +145,18 @@ public class RoutingHelper {
 
 	public String getLastRouteCalcErrorShort() {
 		return routeRecalculationHelper.getLastRouteCalcErrorShort();
+	}
+
+	public void resumeNavigation() {
+		setRoutePlanningMode(false);
+		setFollowingMode(true);
+		setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+	}
+
+	public void pauseNavigation() {
+		setRoutePlanningMode(true);
+		setFollowingMode(false);
+		setPauseNavigation(true);
 	}
 
 	public void setPauseNavigation(boolean pause) {
