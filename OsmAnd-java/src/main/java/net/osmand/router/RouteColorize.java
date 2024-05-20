@@ -18,36 +18,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteColorize {
-
-	public double[] latitudes;
-	public double[] longitudes;
-	public double[] values;
-	public double minValue;
-	public double maxValue;
-	public double[][] palette;
-
-	private List<RouteColorizationPoint> dataList;
-
-	private static final float DEFAULT_BASE = 17.2f;
+	
 	public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters
+	public static int SLOPE_RANGE = 150;// 150 meters
+	private static final Log LOG = PlatformUtil.getLog(RouteColorize.class);
+	private static final float DEFAULT_BASE = 17.2f;
+	private static final double MIN_DIFFERENCE_SLOPE = 0.05d;// 5%
+
+
+	private double[] latitudes;
+	private double[] longitudes;
+	private double[] values;
+	private double minValue;
+	private double maxValue;
+	private ColorPalette palette;
+	private List<RouteColorizationPoint> dataList;
+	private ColorizationType colorizationType;
 
 	public enum ColorizationType {
 		ELEVATION, SPEED, SLOPE, NONE
 	}
-
-	private final int VALUE_INDEX = 0;
-	private final int DECIMAL_COLOR_INDEX = 1;// sRGB decimal format
-	private final int RED_COLOR_INDEX = 1;// RGB
-	private final int GREEN_COLOR_INDEX = 2;// RGB
-	private final int BLUE_COLOR_INDEX = 3;// RGB
-	private final int ALPHA_COLOR_INDEX = 4;// RGBA
-
-	private ColorizationType colorizationType;
-
-	public static int SLOPE_RANGE = 150;// 150 meters
-	private static final double MIN_DIFFERENCE_SLOPE = 0.05d;// 5%
-
-	private static final Log LOG = PlatformUtil.getLog(RouteColorize.class);
 
 	/**
 	 * @param minValue can be NaN
@@ -56,40 +46,40 @@ public class RouteColorize {
 	 *                 {{value,RED,GREEN,BLUE,ALPHA},...} - color in RGBA format
 	 */
 	public RouteColorize(double[] latitudes, double[] longitudes, double[] values, double minValue, double maxValue,
-			double[][] palette) {
+			ColorPalette palette) {
 		this.latitudes = latitudes;
 		this.longitudes = longitudes;
 		this.values = values;
 		this.minValue = minValue;
 		this.maxValue = maxValue;
 		this.palette = palette;
-
 		if (Double.isNaN(minValue) || Double.isNaN(maxValue)) {
 			calculateMinMaxValue();
 		}
-		checkPalette();
-		sortPalette();
+		if (palette == null || palette.getColors().size() < 2) {
+			this.palette = new ColorPalette(ColorPalette.MIN_MAX_PALETTE, minValue, maxValue);
+		} else {
+			this.palette = palette;
+		}
 	}
 
 	/**
 	 * @param type ELEVATION, SPEED, SLOPE
 	 */
-	public RouteColorize(GPXFile gpxFile, ColorizationType type) {
-		this(gpxFile, null, type, 0);
+	public RouteColorize(GPXFile gpxFile, ColorizationType type, ColorPalette palette) {
+		this(gpxFile, null, type, palette, 0);
 	}
 
-	public RouteColorize(GPXFile gpxFile, GPXTrackAnalysis analysis, ColorizationType type, float maxProfileSpeed) {
-
+	public RouteColorize(GPXFile gpxFile, GPXTrackAnalysis analysis, ColorizationType type,
+			ColorPalette palette, float maxProfileSpeed) {
 		if (!gpxFile.hasTrkPt()) {
 			LOG.warn("GPX file is not consist of track points");
 			return;
 		}
-
 		List<Double> latList = new ArrayList<>();
 		List<Double> lonList = new ArrayList<>();
 		List<Double> valList = new ArrayList<>();
 		int wptIdx = 0;
-
 		if (analysis == null) {
 			long time = Algorithms.isEmpty(gpxFile.path) ? System.currentTimeMillis() : gpxFile.modifiedTime;
 			analysis = gpxFile.getAnalysis(time);
@@ -123,8 +113,16 @@ public class RouteColorize {
 			values = listToArray(valList);
 		}
 		calculateMinMaxValue(analysis, maxProfileSpeed);
-		checkPalette();
-		sortPalette();
+		if (type == ColorizationType.SLOPE) {
+			this.palette = isValidPalette(palette) ? palette : ColorPalette.SLOPE_PALETTE;
+		} else {
+			this.palette = new ColorPalette(isValidPalette(palette) ? palette : ColorPalette.MIN_MAX_PALETTE, minValue,
+					maxValue);
+		}
+	}
+
+	private boolean isValidPalette(ColorPalette palette) {
+		return palette != null && palette.getColors().size() >= 2;
 	}
 
 	/**
@@ -237,46 +235,14 @@ public class RouteColorize {
 
 	private void setColorsToPoints(List<RouteColorizationPoint> points) {
 		for (RouteColorizationPoint point : points) {
-			point.color = getColorByValue(point.val);
+			point.color = palette.getColorByValue(point.val);
 		}
 	}
 
-	public int getColorByValue(double value) {
-		if (Double.isNaN(value)) {
-			return ColorPalette.LIGHT_GREY;
+	public void setPalette(ColorPalette palette) {
+		if (palette != null) {
+			this.palette = palette;
 		}
-		for (int i = 0; i < palette.length - 1; i++) {
-			if (value == palette[i][VALUE_INDEX])
-				return (int) palette[i][DECIMAL_COLOR_INDEX];
-			if (value >= palette[i][VALUE_INDEX] && value <= palette[i + 1][VALUE_INDEX]) {
-				int minPaletteColor = (int) palette[i][DECIMAL_COLOR_INDEX];
-				int maxPaletteColor = (int) palette[i + 1][DECIMAL_COLOR_INDEX];
-				double minPaletteValue = palette[i][VALUE_INDEX];
-				double maxPaletteValue = palette[i + 1][VALUE_INDEX];
-				double percent = (value - minPaletteValue) / (maxPaletteValue - minPaletteValue);
-				return ColorPalette.getIntermediateColor(minPaletteColor, maxPaletteColor, percent);
-			}
-		}
-		if (value <= palette[0][0]) {
-			return (int) palette[0][1];
-		} else if (value >= palette[palette.length - 1][0]) {
-			return (int) palette[palette.length - 1][1];
-		}
-		return ColorPalette.getTransparentColor();
-	}
-
-	public void setPalette(double[][] palette) {
-		this.palette = palette;
-		checkPalette();
-		sortPalette();
-	}
-
-	public void setPalette(int[] gradientPalette) {
-		if (gradientPalette == null || gradientPalette.length != 3) {
-			return;
-		}
-		setPalette(new double[][] { { minValue, gradientPalette[0] }, { (minValue + maxValue) / 2, gradientPalette[1] },
-				{ maxValue, gradientPalette[2] } });
 	}
 
 	public List<RouteColorizationPoint> simplify(int simplificationZoom) {
@@ -352,54 +318,6 @@ public class RouteColorize {
 		return result;
 	}
 
-	private void checkPalette() {
-		if (palette == null || palette.length < 2 || palette[0].length < 2 || palette[1].length < 2) {
-			LOG.info("Will use default palette");
-			palette = getDefaultPalette(colorizationType);
-		}
-		double min;
-		double max = min = palette[0][VALUE_INDEX];
-		int minIndex = 0;
-		int maxIndex = 0;
-		double[][] sRGBPalette = new double[palette.length][2];
-		for (int i = 0; i < palette.length; i++) {
-			double[] p = palette[i];
-			if (p.length == 2) {
-				sRGBPalette[i] = p;
-			} else if (p.length == 4) {
-				int color = ColorPalette.rgbaToDecimal((int) p[RED_COLOR_INDEX], (int) p[GREEN_COLOR_INDEX],
-						(int) p[BLUE_COLOR_INDEX], 255);
-				sRGBPalette[i] = new double[] { p[VALUE_INDEX], color };
-			} else if (p.length >= 5) {
-				int color = ColorPalette.rgbaToDecimal((int) p[RED_COLOR_INDEX], (int) p[GREEN_COLOR_INDEX],
-						(int) p[BLUE_COLOR_INDEX], (int) p[ALPHA_COLOR_INDEX]);
-				sRGBPalette[i] = new double[] { p[VALUE_INDEX], color };
-			}
-			if (p[VALUE_INDEX] > max) {
-				max = p[VALUE_INDEX];
-				maxIndex = i;
-			}
-			if (p[VALUE_INDEX] < min) {
-				min = p[VALUE_INDEX];
-				minIndex = i;
-			}
-		}
-		palette = sRGBPalette;
-		if (minValue < min) {
-			palette[minIndex][VALUE_INDEX] = minValue;
-		}
-		if (maxValue > max) {
-			palette[maxIndex][VALUE_INDEX] = maxValue;
-		}
-	}
-
-	private void sortPalette() {
-		java.util.Arrays.sort(palette, new java.util.Comparator<double[]>() {
-			public int compare(double[] a, double[] b) {
-				return Double.compare(a[VALUE_INDEX], b[VALUE_INDEX]);
-			}
-		});
-	}
 
 	/**
 	 * @return double[minElevation, maxElevation, minDist, maxDist]
@@ -512,11 +430,11 @@ public class RouteColorize {
 		return result;
 	}
 
-	private double[][] getDefaultPalette(ColorizationType colorizationType) {
+	public static ColorPalette getDefaultPalette(ColorizationType colorizationType) {
 		if (colorizationType == ColorizationType.SLOPE) {
 			return ColorPalette.SLOPE_PALETTE;
 		} else {
-			return ColorPalette.getPaletteScale(minValue, maxValue);
+			return ColorPalette.MIN_MAX_PALETTE;
 		}
 	}
 

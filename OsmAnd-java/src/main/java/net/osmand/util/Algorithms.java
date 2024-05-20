@@ -3,7 +3,6 @@ package net.osmand.util;
 import static net.osmand.util.CollectionUtils.startsWithAny;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.ColorPalette;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -1183,13 +1182,6 @@ public class Algorithms {
 		return false;
 	}
 
-	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
-		return ColorPalette.stringToGradientPalette(str, gradientScaleType);
-	}
-
-	public static String gradientPaletteToString(int[] palette, String gradientScaleType) {
-		return ColorPalette.gradientPaletteToString(palette, gradientScaleType);
-	}
 
 	public static boolean isUrl(String value) {
 		String[] urlPrefixes = new String[] {"http://", "https://", "HTTP://", "HTTPS://"};

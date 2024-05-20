@@ -130,4 +130,8 @@
     <asset source="color-palette/weather_pressure.txt" destination="color-palette/weather_pressure.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_temperature.txt" destination="color-palette/weather_temperature.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_wind.txt" destination="color-palette/weather_wind.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/route_elevation_default.txt" destination="color-palette/route_elevation_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/route_slope_default.txt" destination="color-palette/route_slope_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/route_speed_default.txt" destination="color-palette/route_speed_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/user_palette_default.txt" destination="color-palette/user_palette_default.txt" mode="copyOnlyIfDoesNotExist" />
 </assets>

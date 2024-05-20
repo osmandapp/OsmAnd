@@ -418,11 +418,9 @@ public class RouteGeometryWay extends
 		}
 
 		for (Segment segment : cachedSegments) {
-
 			if (!segment.isCompleted()) {
 				return null;
 			}
-
 			int pointOrder = segment.getPointOrders(actionPoint.index);
 			if (pointOrder == -1) {
 				return null;
