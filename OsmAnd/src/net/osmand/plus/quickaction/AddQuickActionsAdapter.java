@@ -46,7 +46,7 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	public void setItems(@NonNull List<QuickActionType> items) {
 		this.items.clear();
 		this.items.addAll(items);
-		this.items.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(app.getString(o1.getNameRes()), app.getString(o2.getNameRes())));
+		this.items.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
 	}
 
 	private void setItemsFromMap() {
@@ -57,17 +57,17 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 					items.addAll(typeActions);
 				} else {
 					for (QuickActionType action : typeActions) {
-						if (app.getString(action.getNameRes()).toLowerCase().contains(filterQuery.toLowerCase())) {
+						if (action.getFullName(app).toLowerCase().contains(filterQuery.toLowerCase())) {
 							items.add(action);
 						}
 					}
 				}
 			}
-			items.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(app.getString(o1.getNameRes()), app.getString(o2.getNameRes())));
+			items.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
 		} else {
 			quickActionsMap.keySet()
 					.stream()
-					.sorted((o1, o2) -> app.getMapButtonsHelper().compareNames(app.getString(o1.getNameRes()), app.getString(o2.getNameRes())))
+					.sorted((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)))
 					.forEach(items::add);
 		}
 	}

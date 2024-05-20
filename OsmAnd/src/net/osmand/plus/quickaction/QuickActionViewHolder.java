@@ -44,13 +44,7 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(@NonNull QuickActionType type, int itemsCount, boolean lastItem) {
-		if (type.getActionNameRes() != 0) {
-			String name = app.getString(type.getNameRes());
-			String actionName = app.getString(type.getActionNameRes());
-			title.setText(app.getString(R.string.ltr_or_rtl_combine_via_dash, actionName, name));
-		} else {
-			title.setText(type.getNameRes());
-		}
+		title.setText(type.getFullName(app));
 
 		ApplicationMode appMode = settings.getApplicationMode();
 		int iconRes = type.getIconRes();

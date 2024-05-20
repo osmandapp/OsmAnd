@@ -75,7 +75,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 			searchMode = savedInstanceState.getBoolean(QUICK_ACTION_SEARCH_MODE_KEY, false);
 		}
 
-		requireMapActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			@Override
 			public void handleOnBackPressed() {
 				onBackPressed();
@@ -149,7 +149,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		AndroidUiHelper.setVisibility(searchMode ? View.VISIBLE : View.GONE, searchEditText);
 		if (searchMode) {
 			searchEditText.requestFocus();
-			AndroidUtils.showSoftKeyboard(requireMapActivity(), searchEditText);
+			AndroidUtils.showSoftKeyboard(requireActivity(), searchEditText);
 		} else {
 			AndroidUtils.hideSoftKeyboard(requireActivity(), searchEditText);
 			AndroidUiHelper.updateVisibility(clearSearchQuery, false);
@@ -157,7 +157,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	}
 
 	private void setupContent(@NonNull View view, @Nullable Bundle savedInstanceState) {
-		adapter = new AddQuickActionsAdapter(app, requireMapActivity(), this, nightMode);
+		adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
 		adapter.setMap(getAdapterItems());
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -188,19 +188,10 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	}
 
 	private void dismiss() {
-		FragmentManager fragmentManager = requireMapActivity().getSupportFragmentManager();
+		FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	@Override

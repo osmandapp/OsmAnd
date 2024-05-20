@@ -91,7 +91,7 @@ public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQui
 	}
 
 	private void setupContent(@NonNull View view) {
-		AddQuickActionsAdapter adapter = new AddQuickActionsAdapter(app, requireMapActivity(), this, nightMode);
+		AddQuickActionsAdapter adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
 		adapter.setItems(getCategoryTypes());
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
@@ -112,15 +112,6 @@ public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQui
 		if (activity != null) {
 			activity.onBackPressed();
 		}
-	}
-
-	@NonNull
-	public MapActivity requireMapActivity() {
-		FragmentActivity activity = getActivity();
-		if (!(activity instanceof MapActivity)) {
-			throw new IllegalStateException("Fragment " + this + " not attached to an activity.");
-		}
-		return (MapActivity) activity;
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager, @NonNull QuickActionButtonState buttonState, int quickActionCategoryId) {
