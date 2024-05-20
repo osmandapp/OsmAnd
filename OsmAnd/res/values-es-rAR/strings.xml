@@ -5739,4 +5739,7 @@
     <string name="map_text">Textos del mapa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evitar adoquinado</string>
     <string name="routing_attr_avoid_cobblestone_description">Evita pasar por caminos adoquinados</string>
+    <string name="disable_map_layers_descr">Desactiva todas las capas del mapa por encima del mapa vectorial (se debe reiniciar).</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="disable_map_layers">Desactivar capas del mapa</string>
 </resources>

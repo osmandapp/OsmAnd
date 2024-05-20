@@ -2435,7 +2435,7 @@
     <string name="poi_social_facility_for_senior">Seniori</string>
     <string name="poi_social_facility_for_child">Deti</string>
     <string name="poi_social_facility_for_orphan">Siroty</string>
-    <string name="poi_social_facility_for_disabled">Invalidi</string>
+    <string name="poi_social_facility_for_disabled">Telesne postihnutí</string>
     <string name="poi_social_facility_for_mental_health">Pacienti s duševnými poruchami</string>
     <string name="poi_social_facility_for_juvenile">Mladiství</string>
     <string name="poi_social_facility_for_homeless">Bezdomovci</string>
@@ -3460,8 +3460,8 @@
     <string name="poi_hgv_delivery">Zásobovanie;Vstup pre zásobovacie vozidlá</string>
     <string name="poi_goods_yes">Áno;Malé obchodné vozidlá</string>
     <string name="poi_goods_designated">Určené;Určené pre malé obchodné vozidlá</string>
-    <string name="poi_disabled_yes">Áno;Invalidi</string>
-    <string name="poi_disabled_designated">Určené;Určené pre invalidov</string>
+    <string name="poi_disabled_yes">Áno;Vozíčkari</string>
+    <string name="poi_disabled_designated">Určené;Určené pre vozíčkarov</string>
     <string name="poi_health_food">Zdravé jedlo</string>
     <string name="poi_craft_builder">Staviteľ</string>
     <string name="poi_craft_distillery">Pálenica/Výrobca destilátov</string>
