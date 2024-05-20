@@ -37,7 +37,6 @@ public class IndexConstants {
 	public static final String OSM_GZ_EXT = ".osm.gz";
 	public static final String HTML_EXT = ".html";
 	public static final String GEN_LOG_EXT = ".gen.log";
-	public static final String HEIGHTMAP_SQLITE_EXT = ".sqlite";
 	public static final String DOWNLOAD_EXT = ".download";
 	public static final String TIF_EXT = ".tif";
 	public static final String TIFF_DB_EXT = ".tiff.db";

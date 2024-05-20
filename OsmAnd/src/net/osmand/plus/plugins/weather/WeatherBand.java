@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.weather;
 
-import static net.osmand.IndexConstants.WEATHER_INDEX_DIR;
 import static net.osmand.plus.plugins.weather.units.CloudUnit.PERCENT;
 import static net.osmand.plus.plugins.weather.units.PrecipitationUnit.INCHES;
 import static net.osmand.plus.plugins.weather.units.PrecipitationUnit.MILIMETERS;
@@ -19,6 +18,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.core.jni.MapPresentationEnvironment;
 import net.osmand.core.jni.QListDouble;
@@ -462,15 +462,15 @@ public class WeatherBand {
 	public String getColorFilePath() {
 		switch (bandIndex) {
 			case WEATHER_BAND_CLOUD:
-				return CLR_PALETTE_DIR + "weather_cloud.txt";
+				return IndexConstants.CLR_PALETTE_DIR + "weather_cloud.txt";
 			case WEATHER_BAND_TEMPERATURE:
-				return CLR_PALETTE_DIR + "weather_temperature.txt";
+				return IndexConstants.CLR_PALETTE_DIR + "weather_temperature.txt";
 			case WEATHER_BAND_PRESSURE:
-				return CLR_PALETTE_DIR + "weather_pressure.txt";
+				return IndexConstants.CLR_PALETTE_DIR + "weather_pressure.txt";
 			case WEATHER_BAND_WIND_SPEED:
-				return CLR_PALETTE_DIR + "weather_wind.txt";
+				return IndexConstants.CLR_PALETTE_DIR + "weather_wind.txt";
 			case WEATHER_BAND_PRECIPITATION:
-				return CLR_PALETTE_DIR + "weather_precip.txt";
+				return IndexConstants.CLR_PALETTE_DIR + "weather_precip.txt";
 			case WEATHER_BAND_UNDEFINED:
 				return null;
 		}

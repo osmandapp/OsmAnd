@@ -71,8 +71,6 @@ public class DownloadActivityType {
 			new DownloadActivityType(R.string.shared_string_gpx_tracks, R.drawable.ic_action_polygom_dark, "gpx", 75);
 	public static final DownloadActivityType SQLITE_FILE =
 			new DownloadActivityType(R.string.shared_string_online_maps, "sqlite", 80);
-	public static final DownloadActivityType HEIGHTMAP_FILE_LEGACY =
-			new DownloadActivityType(R.string.download_heightmap_maps, R.drawable.ic_action_altitude, "heightmap", 85);
 	public static final DownloadActivityType WEATHER_FORECAST =
 			new DownloadActivityType(R.string.weather_forecast, R.drawable.ic_action_umbrella, "weather", 90);
 	public static final DownloadActivityType GEOTIFF_FILE =
@@ -167,8 +165,6 @@ public class DownloadActivityType {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
 		} else if (SLOPE_FILE == this) {
 			return fileName.endsWith(IndexConstants.SQLITE_EXT);
-		} else if (HEIGHTMAP_FILE_LEGACY == this) {
-			return fileName.endsWith(IndexConstants.HEIGHTMAP_SQLITE_EXT);
 		} else if (GEOTIFF_FILE == this) {
 			return fileName.endsWith(IndexConstants.TIF_EXT);
 		} else if (DEPTH_CONTOUR_FILE == this) {
@@ -218,8 +214,6 @@ public class DownloadActivityType {
 			return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		} else if (SLOPE_FILE == this) {
 			return app.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		} else if (HEIGHTMAP_FILE_LEGACY == this) {
-			return app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
 		} else if (GEOTIFF_FILE == this) {
 			return app.getAppPath(IndexConstants.GEOTIFF_DIR);
 		} else if (DEPTH_CONTOUR_FILE == this) {
@@ -239,7 +233,6 @@ public class DownloadActivityType {
 	public boolean isZipStream() {
 		return HILLSHADE_FILE != this
 				&& SLOPE_FILE != this
-				&& HEIGHTMAP_FILE_LEGACY != this
 				&& GEOTIFF_FILE != this
 				&& SQLITE_FILE != this
 				&& WIKIVOYAGE_FILE != this
@@ -289,8 +282,6 @@ public class DownloadActivityType {
 			return IndexConstants.SQLITE_EXT;
 		} else if (SQLITE_FILE == this) {
 			return IndexConstants.SQLITE_EXT;
-		} else if (HEIGHTMAP_FILE_LEGACY == this) {
-			return IndexConstants.HEIGHTMAP_SQLITE_EXT;
 		} else if (GEOTIFF_FILE == this) {
 			return IndexConstants.TIF_EXT;
 		} else if (DEPTH_CONTOUR_FILE == this) {
@@ -328,7 +319,7 @@ public class DownloadActivityType {
 			return "&inapp=depth";
 		} else if (this == GPX_FILE) {
 			return "&gpx=yes";
-		} else if (this == HEIGHTMAP_FILE_LEGACY || this == GEOTIFF_FILE) {
+		} else if (this == GEOTIFF_FILE) {
 			return "&heightmap=yes";
 		} else if (this == DEPTH_MAP_FILE) {
 			return "&depth=yes";
@@ -486,8 +477,6 @@ public class DownloadActivityType {
 			return fileName.replace('_', ' ');
 		} else if (this == SLOPE_FILE) {
 			return fileName.replace('_', ' ');
-		} else if (this == HEIGHTMAP_FILE_LEGACY) {
-			return fileName.replace('_', ' ').replace(".heightmap", "");
 		} else if (this == GEOTIFF_FILE) {
 			return fileName.replace('_', ' ');
 		} else if (this == SQLITE_FILE) {
@@ -552,11 +541,6 @@ public class DownloadActivityType {
 		if (this == SLOPE_FILE) {
 			return fileName.substring(0, fileName.length() - IndexConstants.SQLITE_EXT.length())
 					.replace(FileNameTranslationHelper.SLOPE + "_", "");
-		}
-		if (this == HEIGHTMAP_FILE_LEGACY) {
-			String heightmapSuffix = ".heightmap" + IndexConstants.HEIGHTMAP_SQLITE_EXT;
-			return fileName.substring(0, fileName.length() - heightmapSuffix.length())
-					.replace(FileNameTranslationHelper.HEIGHTMAP + "_", "");
 		}
 		if (this == GEOTIFF_FILE) {
 			return fileName.substring(0, fileName.length() - IndexConstants.TIF_EXT.length())

@@ -184,8 +184,6 @@ public class DownloadResources extends DownloadResourceGroup {
 				IndexConstants.BINARY_WIKIVOYAGE_MAP_INDEX_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR),
 				IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, indexFileNames);
-		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR),
-				IndexConstants.HEIGHTMAP_SQLITE_EXT, indexFileNames);
 		listWithAlternatives(dateFormat, app.getAppPath(IndexConstants.GEOTIFF_DIR),
 				IndexConstants.TIF_EXT, indexFileNames);
 
