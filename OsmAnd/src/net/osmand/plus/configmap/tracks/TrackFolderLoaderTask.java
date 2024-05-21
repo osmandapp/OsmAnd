@@ -76,7 +76,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 		if (listener != null) {
 			listener.tracksLoaded(folder);
 		}
-		LOG.info("Finished loading tracks. took " + (System.currentTimeMillis() - start) + "ms");
+		LOG.info("Finished loading tracks. Took " + (System.currentTimeMillis() - start) + "ms");
 		return null;
 	}
 
@@ -112,7 +112,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 					tracksCounter++;
 					if (tracksCounter % LOG_BATCH_SIZE == 0) {
 						long endTime = System.currentTimeMillis();
-						LOG.info("Loading " + LOG_BATCH_SIZE + "tracks. took " + (endTime - loadingTime) + "ms");
+						LOG.info("Loading " + LOG_BATCH_SIZE + " tracks. Took " + (endTime - loadingTime) + "ms");
 						loadingTime = endTime;
 					}
 				}
