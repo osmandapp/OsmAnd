@@ -22,6 +22,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.util.Algorithms;
+import net.osmand.wiki.WikivoyageOSMTags;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -207,6 +208,15 @@ public class TravelArticle {
 		String category = amenity.getTagSuffix("category_");
 		if (category != null) {
 			wptPt.category = capitalizeFirstLetter(category);
+		}
+		for (String key : amenity.getAdditionalInfoKeys()) {
+			if (!WikivoyageOSMTags.contains(key)) {
+				continue;
+			}
+			String amenityAdditionalInfo = amenity.getAdditionalInfo(key);
+			if (amenityAdditionalInfo != null) {
+				wptPt.getExtensionsToWrite().put(key, amenityAdditionalInfo);
+			}
 		}
 		return wptPt;
 	}
