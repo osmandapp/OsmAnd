@@ -8,7 +8,6 @@ import net.osmand.data.LatLon;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
 
 // TO-THINK ? fix minor "Points are not connected" (~0.01m)
