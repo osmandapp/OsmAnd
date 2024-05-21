@@ -1,6 +1,9 @@
 package net.osmand.plus.views;
 
 
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,8 +28,10 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -44,14 +49,14 @@ import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.auto.SurfaceRenderer;
+import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
@@ -84,12 +89,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
-import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
 
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
@@ -304,9 +303,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		animatedMapMarkersThread = new AnimateMapMarkersThread(this);
 
-		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
+		AndroidUtils.getDisplay(ctx).getMetrics(dm);
 		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBoxBuilder()
 				.setLocation(ll.getLatitude(), ll.getLongitude())

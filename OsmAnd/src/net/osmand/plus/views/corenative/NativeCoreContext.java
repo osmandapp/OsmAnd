@@ -1,8 +1,6 @@
 package net.osmand.plus.views.corenative;
 
-import android.content.Context;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +20,7 @@ import net.osmand.plus.inapp.InAppPurchaseUtils;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
+import net.osmand.plus.utils.AndroidUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -58,9 +57,8 @@ public class NativeCoreContext {
 				File directory = app.getAppPath("");
 				Logger.get().addLogSink(QIODeviceLogSink.createFileLogSink(new File(directory, LOG_FILE_NAME).getAbsolutePath()));
 
-				WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 				DisplayMetrics dm = new DisplayMetrics();
-				mgr.getDefaultDisplay().getMetrics(dm);
+				AndroidUtils.getDisplay(app).getMetrics(dm);
 
 				String cacheFilePath = new File(app.getCacheDir(), CACHE_FILE_NAME).getAbsolutePath();
 
