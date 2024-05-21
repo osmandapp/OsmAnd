@@ -217,7 +217,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 			if (quickActionType.getId() != 0) {
 				CreateEditActionDialog.showInstance(manager, buttonState, quickActionType.getId());
 			} else {
-				AddCategoryQuickAction.showInstance(manager, buttonState, quickActionType.getCategory());
+				AddCategoryQuickActionFragment.showInstance(manager, buttonState, quickActionType.getCategory());
 			}
 		}
 	}
