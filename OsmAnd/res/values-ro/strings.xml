@@ -3225,7 +3225,7 @@
     <string name="activity_type_snowmobile_name">Snowmobil</string>
     <string name="activity_type_riding_name">Echitație</string>
     <string name="activity_type_racing_name">Cursă</string>
-    <string name="activity_type_mountainbike_name">Bicicletă de munte</string>
+    <string name="activity_type_mountainbike_name">Mountain bike</string>
     <string name="activity_type_cycling_name">Ciclism</string>
     <string name="activity_type_hiking_name">Drumeție</string>
     <string name="activity_type_running_name">Alergare</string>
@@ -5688,20 +5688,20 @@
 \n</string>
     <string name="use_terrain_maps_summary">Folosește hărți ale terenului pentru datele de altitudine. Geometria pistei rămâne neschimbată.</string>
     <string name="maps_that_also_be_used">Hărți care pot fi utilizate și în acest caz: %1$s</string>
-    <string name="shared_string_scale">Scală</string>
+    <string name="shared_string_scale">Scară</string>
     <string name="required_maps_calculate_online_summary">Lista hărților lipsă se bazează pe traseul în linie dreaptă. Pentru a obține o listă precisă de hărți, OsmAnd vă poate precalcula traseul online.</string>
-    <string name="use_terrain_maps">Utilizați hărți de teren</string>
+    <string name="use_terrain_maps">Folosește hărți de teren</string>
     <string name="delete_actions_button_confirmation">Sunteți sigur că doriți să ștergeți \"%1$s\" cu toate acțiunile adăugate?</string>
     <string name="relief_3d_download_description">Sunt necesare hărți suplimentare pentru a vizualiza terenul pe hartă.</string>
-    <string name="vertical_exaggeration_description">Prin modificarea valorii scalei, puteți accentua relieful 3D.</string>
+    <string name="vertical_exaggeration_description">Prin modificarea valorii scării, puteți accentua relieful 3D.</string>
     <string name="missing_maps_header">Hărți lipsă sau învechite</string>
-    <string name="getting_list_of_required_maps">Obținerea unei liste de hărți necesare…</string>
+    <string name="getting_list_of_required_maps">Se obține o listă de hărți necesare…</string>
     <string name="required_maps">Hărți necesare</string>
     <string name="route_line_use_coloring_altitude">Linia de traseu este colorată în funcție de altitudine.</string>
     <string name="delete_actions_button">Buton de ștergere</string>
     <string name="use_nearby_roads_summary">Folosește harta offline pentru a găsi drumurile din apropiere și datele de altitudine. Poate ajusta geometria pistei.</string>
-    <string name="use_nearby_roads">Utilizați drumurile din apropiere</string>
-    <string name="retrieve_elevation_data_summary">OsmAnd poate prelua date de altitudine de pe drumurile din apropiere sau de pe hărțile de teren.</string>
+    <string name="use_nearby_roads">Folosește drumuri din apropiere</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd poate prelua date de elevație de la drumurile din apropiere sau de la hărțile de teren.</string>
     <string name="shared_string_osm_id">ID OSM</string>
     <string name="missing_maps_description">Unele hărți offline necesare pentru acest traseu lipsesc sau nu sunt actualizate. Vă rugăm să descărcați sau să actualizați aceste hărți.</string>
     <string name="vertical_exaggeration">Exagerare verticală</string>

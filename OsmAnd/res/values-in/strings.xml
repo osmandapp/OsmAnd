@@ -1842,7 +1842,7 @@
     <string name="shared_string_calculate">Hitung</string>
     <string name="shared_string_memory_used_kb_desc">Menggunakan %1$s KB</string>
     <string name="shared_string_memory_used_mb_desc">Menggunakan %1$s MB</string>
-    <string name="shared_string_memory_used_gb_desc">Menggunakan %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Menggunakan %1$s GB</string>
     <string name="shared_string_memory_used_tb_desc">Menggunakan %1$s TB</string>
     <string name="layer_osm_edits">Suntingan OSM</string>
     <string name="tts_initialization_error">Tidak dapat memulai mesin teks ke suara.</string>
