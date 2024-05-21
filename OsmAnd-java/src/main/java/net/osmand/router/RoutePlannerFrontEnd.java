@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
-import net.osmand.gpx.GPXUtilities;
 import org.apache.commons.logging.Log;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -75,15 +74,6 @@ public class RoutePlannerFrontEnd {
 	
 	
 	public static class GpxRouteApproximation {
-		// ! MAIN parameter to approximate (35m good for custom recorded tracks) 
-		// public double MINIMUM_POINT_APPROXIMATION = 200; // 35 m good for small deviations
-		// This parameter could speed up or slow down evaluation (better to make bigger for long routes and smaller for short)
-		// public double MAXIMUM_STEP_APPROXIMATION = 3000;
-		// don't search subsegments shorter than specified distance (also used to step back for car turns)
-		// public double MINIMUM_STEP_APPROXIMATION = 100;
-		// Parameter to smoother the track itself (could be 0 if it's not recorded track)
-		// public double SMOOTHEN_POINTS_NO_ROUTE = 5;
-		
 		public final RoutingContext ctx;
 		public int routeCalculations = 0;
 		public int routePointsSearched = 0;
