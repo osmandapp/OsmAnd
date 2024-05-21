@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.QuickActionType.CREATE_CATEGORY;
 import static net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState.DEFAULT_BUTTON_ID;
 
 import androidx.annotation.NonNull;
@@ -8,6 +9,8 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.plugins.PluginsHelper;
@@ -20,8 +23,12 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.Map3DButtonState;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.util.Algorithms;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -41,19 +48,78 @@ public class MapButtonsHelper {
 		void onActionsUpdated();
 	}
 
+	@Retention(RetentionPolicy.RUNTIME)
+	public @interface QuickActionCategoryType {
+	}
+
+	@QuickActionCategoryType
 	public static final QuickActionType TYPE_ADD_ITEMS = new QuickActionType(0, "").
-			nameRes(R.string.quick_action_add_create_items).category(QuickActionType.CREATE_CATEGORY);
+			nameRes(R.string.quick_action_add_create_items).category(CREATE_CATEGORY);
+	@QuickActionCategoryType
 	public static final QuickActionType TYPE_CONFIGURE_MAP = new QuickActionType(0, "").
-			nameRes(R.string.quick_action_add_configure_map).category(QuickActionType.CONFIGURE_MAP);
+			nameRes(R.string.quick_action_add_configure_map).category(QuickActionType.CONFIGURE_MAP).iconRes(R.drawable.ic_layer_top);
+	@QuickActionCategoryType
 	public static final QuickActionType TYPE_NAVIGATION = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_navigation).category(QuickActionType.NAVIGATION);
+			nameRes(R.string.shared_string_navigation).category(QuickActionType.NAVIGATION).iconRes(R.drawable.ic_action_gdirections_dark);
+	@QuickActionCategoryType
 	public static final QuickActionType TYPE_CONFIGURE_SCREEN = new QuickActionType(0, "").
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
+	@QuickActionCategoryType
 	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
-			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS);
+			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS).iconRes(R.drawable.ic_action_settings);
+	@QuickActionCategoryType
 	public static final QuickActionType TYPE_OPEN = new QuickActionType(0, "").
 			nameRes(R.string.shared_string_open).category(QuickActionType.OPEN);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_AUDIO_VIDEO_NOTES = new QuickActionType(0, "").
+			nameRes(R.string.audionotes_plugin_name).category(QuickActionType.AUDIO_VIDEO_NOTES).iconRes(R.drawable.ic_action_micro_dark);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_FAVORITES = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_favorites).category(QuickActionType.FAVORITES).iconRes(R.drawable.ic_action_favorite);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_MAP_APPEARANCE = new QuickActionType(0, "").
+			nameRes(R.string.map_look_descr).category(QuickActionType.MAP_APPEARANCE).iconRes(R.drawable.ic_action_map_style);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_MAP_INTERACTIONS = new QuickActionType(0, "").
+			nameRes(R.string.key_event_category_map_interactions).category(QuickActionType.MAP_INTERACTIONS).iconRes(R.drawable.ic_action_settings);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_OSM_EDITING = new QuickActionType(0, "").
+			nameRes(R.string.osm_editing_plugin_name).category(QuickActionType.OSM_EDITING).iconRes(R.drawable.ic_action_openstreetmap_logo);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_TOPOGRAPHY = new QuickActionType(0, "").
+			nameRes(R.string.srtm_plugin_name).category(QuickActionType.TOPOGRAPHY).iconRes(R.drawable.ic_action_terrain);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_TRACKS = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_tracks).category(QuickActionType.TRACKS).iconRes(R.drawable.ic_action_polygom_dark);
+	@QuickActionCategoryType
+	public static final QuickActionType TYPE_WEATHER = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_weather).category(QuickActionType.WEATHER).iconRes(R.drawable.ic_action_umbrella);
 
+	public static List<QuickActionType> collectQuickActionCategoryType(Class<?> typeClass) {
+		List<QuickActionType> annotatedFields = new ArrayList<>();
+		Field[] fields = typeClass.getDeclaredFields();
+
+		for (Field field : fields) {
+			if (field.isAnnotationPresent(QuickActionCategoryType.class)) {
+				try {
+					annotatedFields.add((QuickActionType) field.get(null));
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return annotatedFields;
+	}
+
+	@Nullable
+	public QuickActionType getCategoryActionTypeFromId(int typeId) {
+		for (QuickActionType type : collectQuickActionCategoryType(this.getClass())) {
+			if (type.getCategory() == typeId) {
+				return type;
+			}
+		}
+		return null;
+	}
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -68,6 +134,7 @@ public class MapButtonsHelper {
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 	private Set<QuickActionUpdatesListener> updatesListeners = new HashSet<>();
+	private final Collator collator = OsmAndCollator.primaryCollator();
 
 	public MapButtonsHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -235,6 +302,13 @@ public class MapButtonsHelper {
 		allTypes.add(GPXAction.TYPE);
 		allTypes.add(MarkerAction.TYPE);
 		allTypes.add(RouteAction.TYPE);
+		allTypes.add(MapScrollUpAction.TYPE);
+		allTypes.add(MapScrollDownAction.TYPE);
+		allTypes.add(MapScrollLeftAction.TYPE);
+		allTypes.add(MapScrollRightAction.TYPE);
+		allTypes.add(MapZoomInAction.TYPE);
+		allTypes.add(MapZoomOutAction.TYPE);
+		allTypes.add(MoveToMyLocationAction.TYPE);
 		// configure map
 		allTypes.add(ShowHideFavoritesAction.TYPE);
 		allTypes.add(ShowHideGpxTracksAction.TYPE);
@@ -256,6 +330,8 @@ public class MapButtonsHelper {
 		allTypes.add(NavRemoveNextDestination.TYPE);
 		// settings
 		allTypes.add(DisplayPositionAction.TYPE);
+		allTypes.add(NextAppProfileAction.TYPE);
+		allTypes.add(PreviousAppProfileAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		PluginsHelper.registerQuickActionTypesPlugins(allTypes, enabledTypes);
@@ -312,23 +388,30 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public List<QuickActionType> produceTypeActionsListWithHeaders(@NonNull QuickActionButtonState buttonState) {
-		List<QuickActionType> actionTypes = new ArrayList<>();
-		filterQuickActions(buttonState, TYPE_ADD_ITEMS, actionTypes);
-		filterQuickActions(buttonState, TYPE_CONFIGURE_MAP, actionTypes);
-		filterQuickActions(buttonState, TYPE_NAVIGATION, actionTypes);
-//		filterQuickActions(buttonState, TYPE_CONFIGURE_SCREEN, actionTypes);
-		filterQuickActions(buttonState, TYPE_SETTINGS, actionTypes);
-		filterQuickActions(buttonState, TYPE_OPEN, actionTypes);
+	public Map<QuickActionType, List<QuickActionType>>  produceTypeActionsListWithHeaders(@NonNull QuickActionButtonState buttonState) {
+		Map<QuickActionType, List<QuickActionType>> quickActions = new HashMap<>();
 
-		return actionTypes;
+		filterQuickActions(buttonState, TYPE_ADD_ITEMS, quickActions);
+		filterQuickActions(buttonState, TYPE_CONFIGURE_MAP, quickActions);
+		filterQuickActions(buttonState, TYPE_NAVIGATION, quickActions);
+//		filterQuickActions(buttonState, TYPE_CONFIGURE_SCREEN, actionTypes);
+		filterQuickActions(buttonState, TYPE_SETTINGS, quickActions);
+
+		filterQuickActions(buttonState, TYPE_AUDIO_VIDEO_NOTES, quickActions);
+		filterQuickActions(buttonState, TYPE_FAVORITES, quickActions);
+		filterQuickActions(buttonState, TYPE_MAP_APPEARANCE, quickActions);
+		filterQuickActions(buttonState, TYPE_MAP_INTERACTIONS, quickActions);
+		filterQuickActions(buttonState, TYPE_OSM_EDITING, quickActions);
+		filterQuickActions(buttonState, TYPE_TOPOGRAPHY, quickActions);
+		filterQuickActions(buttonState, TYPE_TRACKS, quickActions);
+		filterQuickActions(buttonState, TYPE_WEATHER, quickActions);
+
+		return quickActions;
 	}
 
-	private void filterQuickActions(@NonNull QuickActionButtonState buttonState,
-	                                @NonNull QuickActionType filter,
-	                                @NonNull List<QuickActionType> actionTypes) {
-		actionTypes.add(filter);
-
+	public void filterQuickActions(@NonNull QuickActionButtonState buttonState,
+									@NonNull QuickActionType filter,
+									@NonNull List<QuickActionType> actionTypes) {
 		Set<Integer> set = new TreeSet<>();
 		for (QuickAction action : buttonState.getQuickActions()) {
 			set.add(action.getActionType().getId());
@@ -345,6 +428,28 @@ public class MapButtonsHelper {
 				}
 			}
 		}
+	}
+
+	private void filterQuickActions(@NonNull QuickActionButtonState buttonState,
+									@NonNull QuickActionType filter,
+									@NonNull Map<QuickActionType, List<QuickActionType>> actionTypes) {
+		List<QuickActionType> categoryActions = actionTypes.get(filter);
+		if (categoryActions == null) {
+			categoryActions = new ArrayList<>();
+		} else {
+			categoryActions.clear();
+		}
+
+		filterQuickActions(buttonState, filter, categoryActions);
+
+		if (!Algorithms.isEmpty(categoryActions)) {
+			categoryActions.sort((o1, o2) -> compareNames(app.getString(o1.getNameRes()), app.getString(o2.getNameRes())));
+			actionTypes.put(filter, categoryActions);
+		}
+	}
+
+	public int compareNames(@NonNull String item1, @NonNull String item2) {
+		return collator.compare(item1, item2);
 	}
 
 	@Nullable
