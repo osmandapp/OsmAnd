@@ -22,7 +22,7 @@ public class RouteAction extends QuickAction {
 			.nameRes(R.string.plan_route_create_new_route)
 			.iconRes(R.drawable.ic_action_plan_route)
 			.nonEditable()
-			.category(QuickActionType.CREATE_CATEGORY);
+			.category(QuickActionType.NAVIGATION);
 
 	public RouteAction() {
 		super(TYPE);

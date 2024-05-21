@@ -268,7 +268,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_show_on_map)
 				.setIcon(getContentIcon(R.drawable.ic_show_on_map))
 				.setOnClickListener(v -> {
-					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems);
+					gpxSelectionHelper.saveTracksVisibility(selectedTrackItems, false);
 					dismissFragment(fragment, false);
 				})
 				.create()

@@ -779,9 +779,7 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 					if (routingHelper.isRouteCalculated() && !routingHelper.isRoutePlanningMode()) {
-						routingHelper.setRoutePlanningMode(true);
-						routingHelper.setFollowingMode(false);
-						routingHelper.setPauseNavigation(true);
+						routingHelper.pauseNavigation();
 					}
 				}
 			}
@@ -798,8 +796,7 @@ public class OsmandAidlApi {
 				if (mapActivity != null) {
 					RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 					if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
-						routingHelper.setRoutePlanningMode(false);
-						routingHelper.setFollowingMode(true);
+						routingHelper.resumeNavigation();
 						AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 					}
 				}

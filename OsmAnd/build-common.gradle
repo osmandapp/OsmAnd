@@ -192,15 +192,9 @@ task copyProjDb(type: Copy) {
 	into "assets"
 }
 
-task copyWeatherFiles(type: Copy) {
-	from "../../resources/weather"
-	into "assets/weather"
-	include "*.*"
-}
-
-task copyHeightmapFiles(type: Copy) {
-	from "../../resources/heightmap"
-	into "assets/heightmap"
+task copyColorPalettes(type: Copy) {
+	from "../../resources/color-palette"
+	into "assets/color-palette"
 	include "*.*"
 }
 
@@ -265,8 +259,7 @@ task collectExternalResources {
 			copyLargePOIIcons,
 			validateTranslate,
 			copyProjDb,
-			copyWeatherFiles,
-			copyHeightmapFiles,
+			copyColorPalettes,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
 			downloadDefaultWikivoyage,

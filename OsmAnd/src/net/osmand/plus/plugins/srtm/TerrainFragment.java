@@ -153,7 +153,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
 		coloSchemeTv.setText(mode.getDescription());
-		AndroidUiHelper.updateVisibility(legend, mode.isColor());
+		AndroidUiHelper.updateVisibility(legend, mode.getType() == TerrainMode.TerrainType.SLOPE);
 	}
 
 	private void setupColorSchemeCard(@NonNull View root) {
@@ -233,10 +233,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			iconIv.setImageDrawable(uiUtilities.getPaintedIcon(R.drawable.ic_action_hillshade_dark, profileColor));
 			stateTv.setText(R.string.shared_string_enabled);
 
-			if (mode.isHillshade()) {
+			if (mode.getType() == TerrainMode.TerrainType.HILLSHADE) {
 				descriptionTv.setText(R.string.hillshade_description);
 				downloadDescriptionTv.setText(R.string.hillshade_download_description);
-			} else if (mode.isColor()) {
+			} else if (mode.getType() == TerrainMode.TerrainType.SLOPE) {
 				descriptionTv.setText(R.string.slope_legend_description);
 				String wikiString = getString(R.string.shared_string_wikipedia);
 				String readMoreText = String.format(
@@ -246,6 +246,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 				String wikiSlopeUrl = getString(R.string.url_wikipedia_slope);
 				setupClickableText(descriptionTv, readMoreText, wikiString, wikiSlopeUrl, false);
 				downloadDescriptionTv.setText(R.string.slope_download_description);
+			} else if (mode.getType() == TerrainMode.TerrainType.HEIGHT) {
+				descriptionTv.setText(R.string.height_legend_description);
 			}
 			downloadMapsCard.updateDownloadSection(getMapActivity());
 		} else {

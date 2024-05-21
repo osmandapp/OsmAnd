@@ -60,6 +60,13 @@
 		android:title="@string/trace_rendering" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="disable_map_layers"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/disable_map_layers" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="transparent_status_bar"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"

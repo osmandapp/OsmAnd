@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -351,7 +352,6 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void setTracksSortMode(@NonNull TracksSortMode sortMode, boolean sortSubFolders) {
 		if (sortSubFolders) {
-			removeSurplusTabsSortModes();
 			sortSubFolder(sortMode);
 		} else {
 			Map<String, String> tabsSortModes = settings.getTrackSortModes();
@@ -382,8 +382,10 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	}
 
 	private void removeSurplusTabsSortModes() {
-	// TODO: Find adequate places to call this from
-	// Call only from tracks root folder to not lose valid entries!
+		if (!rootFolder.getDirFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
+			// Execute only from tracks root folder to not lose valid entries
+			return;
+		}
 		OsmandSettings settings = app.getSettings();
 		Map<String, String> oldTabsSortModes = settings.getTrackSortModes();
 		Map<String, String> tabsSortModes = new HashMap<>();
@@ -508,11 +510,13 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 	@Override
 	public void onFolderRenamed(@NonNull File newDir) {
 		updateContent();
+		removeSurplusTabsSortModes();
 	}
 
 	@Override
 	public void onFolderDeleted() {
 		reloadTracks();
+		removeSurplusTabsSortModes();
 	}
 
 	@Override

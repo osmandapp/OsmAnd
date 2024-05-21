@@ -72,6 +72,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		debuggingAndDevelopment.setIconSpaceReserved(false);
 
 		setupDebugRenderingInfoPref();
+		setupDisableMapLayersPref();
 		setupSimulateInitialStartupPref();
 		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
@@ -125,6 +126,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment implements
 		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
 		debugRenderingInfo.setIconSpaceReserved(false);
+	}
+
+	private void setupDisableMapLayersPref() {
+		SwitchPreferenceEx disableMapLayers = findPreference(settings.DISABLE_MAP_LAYERS.getId());
+		disableMapLayers.setDescription(getString(R.string.disable_map_layers_descr));
+		disableMapLayers.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateInitialStartupPref() {

@@ -3238,7 +3238,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Надати перевагу дорогам без покриття.</string>
     <string name="layer_osm_edits">Правки OSM</string>
     <string name="quick_action_contour_lines_descr">Увімк/вимк показ ізоліній на мапі.</string>
-    <string name="quick_action_hillshade_descr">Кнопка, що показує чи приховує рельєф на мапі.</string>
+    <string name="quick_action_hillshade_descr">Кнопка, щоб показати або приховати тінь на мапі.</string>
     <string name="tts_initialization_error">Не вдається запустити рушій TTS.</string>
     <string name="simulate_your_location_gpx_descr">Симуляція положення за допомогою записаного треку GPX.</string>
     <string name="export_profile">Експорт профілю</string>
@@ -5024,7 +5024,7 @@
     <string name="sound_beep_simple_loud">Звуковий сигнал: простий гучний</string>
     <string name="sound_beep_simple">Звуковий сигнал: простий</string>
     <string name="last_synchronized">Востаннє синхронізовано</string>
-    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу — для орієнтації мапи за напрямком руху, по центру — для всіх інших.</string>
+    <string name="display_position_automatic_descr">Залежить від орієнтації мапи: внизу - для напрямку руху, в центрі - для всіх інших.</string>
     <string name="shared_string_apply_changes">Застосувати зміни</string>
     <string name="no_visible_tracks_description">Виберіть треки, щоб показати їх на мапі.</string>
     <string name="empty_tracks_description">За допомогою OsmAnd ви можете імпортувати, створювати або записувати файли треків.</string>
@@ -5082,7 +5082,7 @@
 \n
 \n</string>
     <string name="shared_string_add_manually">Додати вручну…</string>
-    <string name="sort_duration_ascending">Спочатку менш тривалі</string>
+    <string name="sort_duration_ascending">Спочатку найкоротша тривалість</string>
     <string name="sort_duration_descending">Спочатку більш тривалі</string>
     <string name="sort_distance_ascending">Спочатку найкоротші</string>
     <string name="sort_distance_descending">Спочатку найдовші</string>
@@ -5216,7 +5216,7 @@
     <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новий трек</string>
     <string name="shared_string_visible_on_map">Показати на мапі</string>
-    <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде вилучено разом з усіма треками (%2$s) в ній.</string>
+    <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма доріжками %2$s, що в ній містяться.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
     <string name="external_sensors_not_found">Датчиків не знайдено</string>
@@ -5388,7 +5388,7 @@
     <string name="help_article_widgets_map_buttons_name">Кнопки мапи</string>
     <string name="help_article_widgets_markers_name">Віджети позначок</string>
     <string name="help_article_widgets_nav_widgets_name">Навігаційні віджети</string>
-    <string name="help_article_widgets_radius_ruler_name">Радіусна лінійка та лінійка</string>
+    <string name="help_article_widgets_radius_ruler_name">Радіус-лінійка та лінійка</string>
     <string name="send_crash_log_descr">Містить лише дані про збої</string>
     <string name="open_issue_on_github_descr">Ставте запитання, пропонуйте функції</string>
     <string name="open_issue_on_github">Відкрити обговорення на GitHub</string>
@@ -5461,7 +5461,7 @@
     <string name="empty_name">Назва відсутня</string>
     <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
-    <string name="delete_smart_folder_dialog_message">Це видалить розумну теку \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Це призведе до вилучення розумної папки \"%1$s\".</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
     <string name="release_4_6">• Android Auto: Додано 3D-режим
 \n
@@ -5732,4 +5732,7 @@
     <string name="map_text">Тексти мап</string>
     <string name="routing_attr_avoid_cobblestone_name">Уникайте бруківки</string>
     <string name="routing_attr_avoid_cobblestone_description">Уникайте бруківки</string>
+    <string name="disable_map_layers">Вимкнути шари мапи</string>
+    <string name="disable_map_layers_descr">Вимкнути всі шари мапи над векторною мапою (потрібен перезапуск).</string>
+    <string name="steps_per_minute_unit">СПК</string>
 </resources>

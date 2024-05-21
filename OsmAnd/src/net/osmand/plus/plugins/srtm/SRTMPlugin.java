@@ -106,7 +106,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
-		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKey()).makeProfile();
+		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 
@@ -250,9 +250,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN.set(enabled);
 	}
 
-	public boolean isSlopeMode() {
-		return getTerrainMode().isColor();
-	}
 
 	public boolean isHillshadeMode() {
 		return getTerrainMode().isHillshade();
@@ -263,7 +260,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void setTerrainMode(TerrainMode mode) {
-		TERRAIN_MODE.set(mode.getKey());
+		TERRAIN_MODE.set(mode.getKeyName());
 	}
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {

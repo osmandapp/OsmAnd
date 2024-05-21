@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="disable_map_layers">Disable map layers</string>
+    <string name="disable_map_layers_descr">Disable all map layers above the vector map (restart required).</string>
+    <string name="height_legend_description">Altitude color maps are used to visualize relief.</string>
     <string name="action_icon">Action icon</string>
     <string name="assigned_keys">Assigned Keys</string>
     <string name="steps_per_minute_unit">SPM</string>

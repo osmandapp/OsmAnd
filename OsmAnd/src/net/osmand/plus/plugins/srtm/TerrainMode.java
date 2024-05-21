@@ -16,38 +16,34 @@ import java.util.List;
 public class TerrainMode {
 
 
-	private static final String HILLSHADE_KEY = "hillshade";
-	private static final String SLOPE_KEY = "slope";
-	public static final String HILLSHADE_PREFIX = "hs_main_";
-	public static final String HILLSHADE_SCND_PREFIX = "hs_scnd_";
-	public static final String COLOR_SLOPE_PREFIX = "clr_";
+	private static final String DEFAULT_KEY = "default";
+	public static final String HILLSHADE_PREFIX = "hillshade_main_";
+	public static final String HILLSHADE_SCND_PREFIX = "hillshade_color_";
+	public static final String COLOR_SLOPE_PREFIX = "slope_";
+
+	public static final String HEIGHT_PREFIX = "height_";
 	public static final String EXT = ".txt";
-//	public static final String SLOPE_MAIN_COLOR_FILENAME = "clr_slope.txt";
-//	public static final String HILLSHADE_MAIN_COLOR_FILENAME = "hs_main_hillshade.txt";
-//	public static final String SLOPE_SECONDARY_COLOR_FILENAME = "hs_scnd_hillshade.txt";
 	private static TerrainMode[] terrainModes;
+
+	public enum TerrainType {
+		HILLSHADE, SLOPE, HEIGHT
+	}
 
 	String translateName;
 	private final CommonPreference<Integer> MIN_ZOOM;
 	private final CommonPreference<Integer> MAX_ZOOM;
 	private final CommonPreference<Integer> TRANSPARENCY;
-	private final boolean hilshade;
+	private final TerrainType type;
 	private final String key;
-	// hillshade, slope
-//	HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
-//	HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
-//	HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 100).makeProfile();
-//	SLOPE_MIN_ZOOM = registerIntPreference("slope_min_zoom", 3).makeProfile();
-//	SLOPE_MAX_ZOOM = registerIntPreference("slope_max_zoom", 17).makeProfile();
-//	SLOPE_TRANSPARENCY = registerIntPreference("slope_transparency", 80).makeProfile();
-	public TerrainMode(OsmandApplication app, String key, String translateName, boolean hillshade) {
-		this.hilshade = hillshade;
+
+	public TerrainMode(OsmandApplication app, String key, String translateName, TerrainType type) {
+		this.type = type;
 		this.key = key;
 		this.translateName = translateName;
 		MIN_ZOOM = app.getSettings().registerIntPreference(key+"_min_zoom", 3).makeProfile();
 		MAX_ZOOM = app.getSettings().registerIntPreference(key+"_max_zoom", 17).makeProfile();
 		TRANSPARENCY = app.getSettings().registerIntPreference(key+"_transparency",
-				hillshade ? 100 : 80).makeProfile();
+				type == TerrainType.HILLSHADE ? 100 : 80).makeProfile();
 	}
 
 
@@ -56,31 +52,40 @@ public class TerrainMode {
 			return terrainModes;
 		}
 		TerrainMode hillshade =
-				new TerrainMode(app, HILLSHADE_KEY, app.getString(R.string.shared_string_hillshade), true);
+				new TerrainMode(app, DEFAULT_KEY, app.getString(R.string.shared_string_hillshade), TerrainType.HILLSHADE);
 		TerrainMode slope =
-				new TerrainMode(app, SLOPE_KEY, app.getString(R.string.shared_string_slope), false);
+				new TerrainMode(app, DEFAULT_KEY, app.getString(R.string.shared_string_slope), TerrainType.SLOPE);
 		List<TerrainMode> tms = new ArrayList<>();
 		// HILLSHADE first
 		tms.add(hillshade);
 		tms.add(slope);
-		File dir = app.getAppPath(IndexConstants.HEIGHTMAP_INDEX_DIR);
+		File dir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		if (dir.exists() && dir.listFiles() != null) {
 			for (File lf : dir.listFiles()) {
-				if(lf == null || !lf.getName().endsWith(EXT) ) {
+				if (lf == null || !lf.getName().endsWith(EXT)) {
 					continue;
 				}
 				String nm = lf.getName();
 				if (nm.startsWith(HILLSHADE_PREFIX)) {
 					String key = nm.substring(HILLSHADE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-					if (!HILLSHADE_KEY.equals(key)) {
-						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), true));
+					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
+					if (!DEFAULT_KEY.equals(key)) {
+						tms.add(new TerrainMode(app, key, name, TerrainType.HILLSHADE));
 					}
 				} else if (nm.startsWith(COLOR_SLOPE_PREFIX)) {
 					String key = nm.substring(COLOR_SLOPE_PREFIX.length());
 					key = key.substring(0, key.length() - EXT.length());
-					if (!SLOPE_KEY.equals(key)) {
-						tms.add(new TerrainMode(app, key, Algorithms.capitalizeFirstLetter(key), false));
+					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
+					if (!DEFAULT_KEY.equals(key)) {
+						tms.add(new TerrainMode(app, key, name, TerrainType.SLOPE));
+					}
+				} else if (nm.startsWith(HEIGHT_PREFIX)) {
+					String key = nm.substring(HEIGHT_PREFIX.length());
+					key = key.substring(0, key.length() - EXT.length());
+					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
+					if (!DEFAULT_KEY.equals(key)) {
+						tms.add(new TerrainMode(app, key, name, TerrainType.HEIGHT));
 					}
 				}
 			}
@@ -92,9 +97,9 @@ public class TerrainMode {
 	public static TerrainMode getByKey(String key) {
 		TerrainMode hillshade = null;
 		for (TerrainMode m : terrainModes) {
-			if (Algorithms.stringsEqual(m.getKey(), key)) {
+			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
 				return m;
-			} else if (m.hilshade && hillshade == null) {
+			} else if (m.type == TerrainType.HILLSHADE && hillshade == null) {
 				hillshade = m;
 			}
 		}
@@ -102,29 +107,38 @@ public class TerrainMode {
 	}
 
 	public boolean isHillshade() {
-		return hilshade;
+		return type == TerrainType.HILLSHADE;
 	}
 
-	public boolean isColor() {
-		return !hilshade;
+	public TerrainType getType() {
+		return type;
 	}
 
 	public String getMainFile() {
-		return (hilshade ? HILLSHADE_PREFIX : COLOR_SLOPE_PREFIX) + key + EXT;
+		String prefix = HILLSHADE_PREFIX;
+		if (type == TerrainType.HEIGHT) {
+			prefix = HEIGHT_PREFIX;
+		} else if(type == TerrainType.SLOPE) {
+			prefix = COLOR_SLOPE_PREFIX;
+		}
+		return prefix + key + EXT;
 	}
 
 	public String getSecondFile() {
-		return (hilshade ? HILLSHADE_SCND_PREFIX : "") + key + EXT;
+		return (isHillshade() ? HILLSHADE_SCND_PREFIX : "") + key + EXT;
 	}
 
-	public String getKey() {
+	public String getKeyName() {
+		if (key.equals(DEFAULT_KEY)) {
+			return type.name().toLowerCase();
+		}
 		return key;
 	}
 
 	//	private static final String HILLSHADE_CACHE = "hillshade.cache";
 	//	private static final String SLOPE_CACHE = "slope.cache";
 	public String getCacheFileName() {
-		return key +".cache";
+		return type.name().toLowerCase() +".cache";
 	}
 
 	public void setZoomValues(int minZoom, int maxZoom) {

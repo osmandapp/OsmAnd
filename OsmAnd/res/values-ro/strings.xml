@@ -2023,7 +2023,7 @@
     <string name="avoid_road">Evitare drum</string>
     <string name="storage_directory_shared">Memorie partajată</string>
     <string name="full_report">Raport complet</string>
-    <string name="recalculate_route">Recalcularea rutei</string>
+    <string name="recalculate_route">Recalculează ruta</string>
     <string name="open_street_map_login_and_pass">Nume utilizator și parola OSM</string>
     <string name="rendering_value_darkyellow_name">Galben închis</string>
     <string name="rendering_value_translucent_pink_name">Roz translucent</string>

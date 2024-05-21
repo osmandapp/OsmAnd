@@ -119,14 +119,19 @@
 	<asset source="World_basemap_mini.obf" destination="World_basemap_mini.obf" mode="alwaysOverwriteOrCopy" />
 	<asset source="Default_wikivoyage.travel.obf" destination="travel/Default_wikivoyage.travel.obf" mode="copyOnlyIfDoesNotExist" />
 	<asset source="proj.db" destination="proj.db" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/cloud_color.txt" destination="weather/cloud_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/precip_color.txt" destination="weather/precip_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/pressure_color.txt" destination="weather/pressure_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/temperature_color.txt" destination="weather/temperature_color.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="weather/wind_color.txt" destination="weather/wind_color.txt" mode="copyOnlyIfDoesNotExist" />
 
-	<!-- Heightmap color profiles -->
-	<asset source="heightmap/clr_slope.txt" destination="heightmap/clr_slope.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="heightmap/hs_main_hillshade.txt" destination="heightmap/hs_main_hillshade.txt" mode="copyOnlyIfDoesNotExist" />
-	<asset source="heightmap/hs_scnd_hillshade.txt" destination="heightmap/hs_scnd_hillshade.txt" mode="copyOnlyIfDoesNotExist" />
+
+	<!-- Color palettes -->
+    <asset source="color-palette/hillshade_color_default.txt" destination="color-palette/hillshade_color_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/hillshade_main_default.txt" destination="color-palette/hillshade_main_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/slope_default.txt" destination="color-palette/slope_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/weather_cloud.txt" destination="color-palette/weather_cloud.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/weather_precip.txt" destination="color-palette/weather_precip.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/weather_pressure.txt" destination="color-palette/weather_pressure.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/weather_temperature.txt" destination="color-palette/weather_temperature.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/weather_wind.txt" destination="color-palette/weather_wind.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/route_elevation_default.txt" destination="color-palette/route_elevation_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/route_slope_default.txt" destination="color-palette/route_slope_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/route_speed_default.txt" destination="color-palette/route_speed_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/user_palette_default.txt" destination="color-palette/user_palette_default.txt" mode="copyOnlyIfDoesNotExist" />
 </assets>

@@ -318,9 +318,9 @@ public class PluginsHelper {
 			}
 
 			if (plugin.isMarketPlugin() || plugin.isPaid()) {
-				if (plugin.isActive()) {
+				if (plugin.shouldShowInstallDialog()) {
 					plugin.showInstallDialog(activity);
-				} else if (checkPluginPackage(app, plugin)) {
+				} else if (plugin.shouldShowDisableDialog()) {
 					plugin.showDisableDialog(activity);
 				}
 			}

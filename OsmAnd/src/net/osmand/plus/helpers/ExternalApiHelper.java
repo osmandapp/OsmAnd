@@ -380,16 +380,13 @@ public class ExternalApiHelper {
 			} else if (API_CMD_PAUSE_NAVIGATION.equals(cmd)) {
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (routingHelper.isRouteCalculated() && !routingHelper.isRoutePlanningMode()) {
-					routingHelper.setRoutePlanningMode(true);
-					routingHelper.setFollowingMode(false);
-					routingHelper.setPauseNavigation(true);
+					routingHelper.pauseNavigation();
 					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_RESUME_NAVIGATION.equals(cmd)) {
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				if (routingHelper.isRouteCalculated() && routingHelper.isRoutePlanningMode()) {
-					routingHelper.setRoutePlanningMode(false);
-					routingHelper.setFollowingMode(true);
+					routingHelper.resumeNavigation();
 					AndroidUtils.requestNotificationPermissionIfNeeded(mapActivity);
 					resultCode = Activity.RESULT_OK;
 				}
