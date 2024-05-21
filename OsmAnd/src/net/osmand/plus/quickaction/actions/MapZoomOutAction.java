@@ -11,7 +11,7 @@ public class MapZoomOutAction extends BaseMapZoomAction {
 	public static final QuickActionType TYPE = new QuickActionType(MAP_ZOOM_OUT_ACTION,
 			"map.zoom.out", MapZoomOutAction.class)
 			.nameRes(R.string.key_event_action_zoom_out)
-			.iconRes(R.drawable.ic_action_magnifier_plus).nonEditable()
+			.iconRes(R.drawable.ic_action_magnifier_minus).nonEditable()
 			.category(QuickActionType.MAP_INTERACTIONS);
 
 	public MapZoomOutAction() {

@@ -28,7 +28,7 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener {
+public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener, CreateEditActionDialog.AddQuickActionListener {
 
 	public static final String TAG = AddCategoryQuickAction.class.getSimpleName();
 
@@ -138,5 +138,10 @@ public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQui
 				CreateEditActionDialog.showInstance(manager, buttonState, quickActionType.getId());
 			}
 		}
+	}
+
+	@Override
+	public void onQuickActionAdded() {
+		dismiss();
 	}
 }
