@@ -2324,7 +2324,7 @@
     <string name="add_location_as_first_point_descr">A tökéletes útvonal megtervezéséhez adja meg kiindulási pontként saját pozícióját.</string>
     <string name="my_location">Saját helyzetem</string>
     <string name="shared_string_finish">Befejezés</string>
-    <string name="plan_route">Egy útvonal tervezése</string>
+    <string name="plan_route">Útvonal tervezése</string>
     <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
@@ -5073,7 +5073,7 @@
 \n • Gesztusok javítása a térkép döntéséhez, nagyításához elforgatásához
 \n
 \n</string>
-    <string name="sort_duration_ascending">Először a rövidebb időtartam</string>
+    <string name="sort_duration_ascending">Először a legrövidebb időtartam</string>
     <string name="sort_duration_descending">Először a leghosszabb időtartam</string>
     <string name="sort_distance_ascending">Először a legrövidebb távolság</string>
     <string name="sort_distance_descending">Először a leghosszabb távolság</string>
@@ -5334,14 +5334,14 @@
     <string name="shared_string_included">Belefoglalva</string>
     <string name="local_indexes_category_terrain">Domborzati térképek (3D)</string>
     <string name="hillshade_slope">Domborzatárnyékolás, lejtés</string>
-    <string name="map_widget_group_glide_ratio">Siklásszám</string>
+    <string name="map_widget_group_glide_ratio">Siklószám</string>
     <string name="average_glide_ratio">Átlagos siklószám</string>
-    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklásszámot.</string>
-    <string name="average_glide_time_interval_desc">Adja meg a siklásszám átlagának kiszámításához használt időintervallumot.</string>
+    <string name="map_widget_glide_target_desc">Mutatja a célpont eléréséhez szükséges siklószámot.</string>
+    <string name="average_glide_time_interval_desc">Adja meg a siklószám átlagának kiszámításához használt időintervallumot.</string>
     <string name="ltr_or_rtl_combine_via_colon_with_space">%1$s : %2$s</string>
-    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklásszámot mutatják.</string>
-    <string name="glide_ratio_to_target">Siklásszám a célig</string>
-    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklásszámot a megadott intervallumhoz.</string>
+    <string name="map_widget_group_glide_desc">A widgetek a célhoz vezető vagy az aktuális útra vonatkozó átlagos siklószámot mutatják.</string>
+    <string name="glide_ratio_to_target">Siklószám a célig</string>
+    <string name="map_widget_glide_average_desc">Megjeleníti az átlagos siklószámot a megadott intervallumhoz.</string>
     <string name="external_sensor_name_property_description">Szenzor neve</string>
     <string name="wheel_circumference">Kerék kerülete</string>
     <string name="contact_us">Kapcsolatfelvétel</string>
@@ -5432,7 +5432,7 @@
 \n
 \n • Testreszabható gomb-hozzárendelés külső vezérlőkhöz
 \n
-\n • Új widgetek: „Siklásszám” és „Nap állása”
+\n • Új widgetek: „Siklószám” és „Nap állása”
 \n
 \n • OsmAnd Cloud: Mostantól hozzáférhet a törölt fájlokhoz
 \n
@@ -5721,4 +5721,7 @@
     <string name="routing_attr_avoid_cobblestone_name">Macskakő elkerülése</string>
     <string name="routing_attr_avoid_cobblestone_description">Macskakő elkerülése</string>
     <string name="track_vertical_exaggeration_description">A skála értékének változtatásával módosíthatja a 3D nyomvonal magasságát.</string>
+    <string name="steps_per_minute_unit">lépés/p</string>
+    <string name="disable_map_layers_descr">Tiltsa le az összes térképréteget a vektortérkép felett (újraindítás szükséges).</string>
+    <string name="disable_map_layers">Térképrétegek letiltása</string>
 </resources>

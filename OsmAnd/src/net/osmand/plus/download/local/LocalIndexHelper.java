@@ -216,7 +216,6 @@ public class LocalIndexHelper {
 					break;
 				case TILES_DATA:
 					loadTilesData(app.getAppPath(TILES_INDEX_DIR), items, shouldUpdate, task);
-					loadTilesData(app.getAppPath(HEIGHTMAP_INDEX_DIR), items, shouldUpdate, task);
 					break;
 				case TTS_VOICE_DATA:
 				case VOICE_DATA:
@@ -315,7 +314,7 @@ public class LocalIndexHelper {
 			for (File file : listFilesSorted(dir)) {
 				if (file.isFile()) {
 					String fileName = file.getName();
-					boolean tilesData = CollectionUtils.endsWithAny(fileName, SQLiteTileSource.EXT, HEIGHTMAP_SQLITE_EXT);
+					boolean tilesData = CollectionUtils.endsWithAny(fileName, SQLiteTileSource.EXT);
 					if (tilesData) {
 						loadLocalData(file, TILES_DATA, items, shouldUpdate, task);
 					}

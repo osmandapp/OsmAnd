@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.quickaction.AddQuickActionDialog.QUICK_ACTION_BUTTON_KEY;
+import static net.osmand.plus.quickaction.AddQuickActionFragment.QUICK_ACTION_BUTTON_KEY;
 import static net.osmand.plus.utils.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.widgets.dialogbutton.DialogButtonType.SECONDARY;
 
@@ -883,7 +883,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	private void showAddQuickActionDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			AddQuickActionDialog.showInstance(manager, buttonState, false);
+			AddQuickActionFragment.showInstance(manager, buttonState);
 		}
 	}
 

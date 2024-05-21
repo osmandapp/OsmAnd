@@ -26,7 +26,8 @@ import java.util.concurrent.ExecutionException;
 
 public class ResourcesImporter {
 
-	public static void importGpxAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths) throws IOException {
+	public static void importGpxAssets(@NonNull OsmandApplication app, @NonNull List<String> assetFilePaths,
+	                                   @Nullable SaveImportedGpxListener listener) throws IOException {
 		File tmpDir = FileUtils.getTempDir(app);
 		File gpxDestinationDir = ImportHelper.getGpxDestinationDir(app, true);
 		for (String assetFilePath : assetFilePaths) {
@@ -38,13 +39,16 @@ public class ResourcesImporter {
 				if (error == null) {
 					GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
 					String[] errors = {""};
-					SaveImportedGpxListener listener = new SaveImportedGpxListener() {
+					new SaveGpxAsyncTask(app, gpxFile, gpxDestinationDir, fileName, new SaveImportedGpxListener() {
 						@Override
 						public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
 							errors[0] = error;
+
+							if (listener != null) {
+								listener.onGpxSaved(error, gpxFile);
+							}
 						}
-					};
-					new SaveGpxAsyncTask(app, gpxFile, gpxDestinationDir, fileName, listener, true).execute().get();
+					}, true).execute().get();
 					if (!Algorithms.isEmpty(errors[0])) {
 						throw new IOException("Import gpx error: " + errors[0]);
 					}

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import net.osmand.ColorPalette;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.PointI;
@@ -417,11 +418,9 @@ public class RouteGeometryWay extends
 		}
 
 		for (Segment segment : cachedSegments) {
-
 			if (!segment.isCompleted()) {
 				return null;
 			}
-
 			int pointOrder = segment.getPointOrders(actionPoint.index);
 			if (pointOrder == -1) {
 				return null;
@@ -435,7 +434,7 @@ public class RouteGeometryWay extends
 				} else {
 					int startColor = gradientStyle.currColor;
 					int endColor = gradientStyle.nextColor;
-					return RouteColorize.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
+					return ColorPalette.getIntermediateColor(startColor, endColor, actionPoint.normalizedOffset);
 				}
 			} else {
 				return style.getColor();

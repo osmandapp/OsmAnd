@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.quickaction.AddQuickActionDialog;
+import net.osmand.plus.quickaction.AddQuickActionFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.views.MapLayers;
@@ -32,7 +32,7 @@ public class NewAction extends QuickAction {
 		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
 		if (selectedButton != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			AddQuickActionDialog.showInstance(manager, selectedButton.getButtonState(), true);
+			AddQuickActionFragment.showInstance(manager, selectedButton.getButtonState());
 		}
 	}
 }

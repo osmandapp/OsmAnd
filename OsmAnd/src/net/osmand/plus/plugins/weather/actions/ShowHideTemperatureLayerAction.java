@@ -14,7 +14,7 @@ public class ShowHideTemperatureLayerAction extends BaseWeatherQuickAction {
 			.nameActionRes(R.string.quick_action_show_hide_title)
 			.nameRes(R.string.temperature_layer)
 			.iconRes(R.drawable.ic_action_thermometer).nonEditable()
-			.category(QuickActionType.CONFIGURE_MAP);
+			.category(QuickActionType.WEATHER);
 
 	public ShowHideTemperatureLayerAction() {
 		super(TYPE);

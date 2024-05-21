@@ -21,7 +21,7 @@ public class TakePhotoNoteAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(TAKE_PHOTO_NOTE_ACTION_ID,
 			"photo.note", TakePhotoNoteAction .class).
 			nameRes(R.string.quick_action_take_photo_note).iconRes(R.drawable.ic_action_photo_dark).nonEditable().
-			category(QuickActionType.CREATE_CATEGORY);
+			category(QuickActionType.AUDIO_VIDEO_NOTES);
 
 	public TakePhotoNoteAction() {
 		super(TYPE);

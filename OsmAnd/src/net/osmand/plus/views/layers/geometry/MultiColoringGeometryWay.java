@@ -7,7 +7,10 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ColorPalette;
+import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXFile;
@@ -34,6 +37,9 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -124,7 +130,18 @@ public abstract class MultiColoringGeometryWay
 		GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();
-			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, 0);
+			File filePalette = getContext().getApp().getAppPath(IndexConstants.CLR_PALETTE_DIR +
+					"route_" + colorizationType.name().toLowerCase() + "_default.txt");
+			ColorPalette colorPalette = null;
+			try {
+				if (filePalette.exists()) {
+					colorPalette = ColorPalette.parseColorPalette(new FileReader(filePalette));
+				}
+			} catch (IOException e) {
+				PlatformUtil.getLog(MultiColoringGeometryWay.class).error("Error reading color file ",
+						e);
+			}
+			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, colorPalette, 0);
 			List<RouteColorizationPoint> points = routeColorize.getResult();
 			updateWay(new GradientGeometryWayProvider(routeColorize, points, null), createGradientStyles(points), tb);
 		}
@@ -178,7 +195,7 @@ public abstract class MultiColoringGeometryWay
 			RouteSegmentAttribute attribute =
 					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
 			int color = attribute.getColor();
-			color = color == 0 ? RouteColorize.LIGHT_GREY : color;
+			color = color == 0 ? net.osmand.ColorPalette.LIGHT_GREY : color;
 
 			if (i == 0) {
 				for (int j = 0; j < firstSegmentLocationIdx; j++) {
@@ -271,7 +288,7 @@ public abstract class MultiColoringGeometryWay
 				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
 				int prevColor = locationProvider.getColor(startLocationIndex - 1);
 				int nextColor = locationProvider.getColor(startLocationIndex);
-				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
+				gradientWayStyle.currColor = ColorPalette.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
 		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?>) {

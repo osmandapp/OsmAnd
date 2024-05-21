@@ -59,6 +59,12 @@ public class CollectionUtils {
 		}
 	}
 
+	public static <T> void addIfNotContains(T element, Collection<T> ... collections) {
+		for (Collection<T> collection : collections) {
+			addIfNotContains(collection, element);
+		}
+	}
+
 	public static <T> void addIfNotContains(Collection<T> collection, T element) {
 		if (!collection.contains(element)) {
 			collection.add(element);

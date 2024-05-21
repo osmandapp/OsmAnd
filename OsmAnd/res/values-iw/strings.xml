@@ -4782,8 +4782,8 @@
     <string name="shared_string_in_progress">בתהליך</string>
     <string name="shared_string_nearest">הקרוב ביותר</string>
     <string name="selected_value">ערך נבחר</string>
-    <string name="sort_duration_ascending">הצגת תקופה קצרה קודם</string>
-    <string name="sort_duration_descending">הצגת תקופה ארוכה קודם</string>
+    <string name="sort_duration_ascending">המשך הקצר ביותר בהתחלה</string>
+    <string name="sort_duration_descending">המשך הארוך ביותר קודם</string>
     <string name="sort_distance_ascending">העדפת מרחק קצר קודם</string>
     <string name="speak_route_deviation">הכרזה על סטייה ממסלול</string>
     <string name="app_mode_climbing">טיפוס</string>

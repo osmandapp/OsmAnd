@@ -12,6 +12,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.LayerDrawable;
 
+import net.osmand.ColorPalette;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -33,7 +34,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -199,7 +199,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 
 	private void fillAltitudeGradientArrays(List<GeometryWayPoint> points) {
-		int[] colors = RouteColorize.COLORS;
+		int[] colors = ColorPalette.COLORS;
 		GeometryGradientWayStyle<?> style = null;
 		for (int i = 1; i < points.size(); i++) {
 			style = previewLineGeometry.getGradientWayStyle();
@@ -215,7 +215,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 	private void fillSlopeGradientArrays(List<GeometryWayPoint> points) {
 		List<Integer> palette = new ArrayList<>();
-		for (int color : RouteColorize.SLOPE_COLORS) {
+		for (int color : ColorPalette.SLOPE_COLORS) {
 			palette.add(color);
 		}
 		List<Double> gradientLengthsRatio = Arrays.asList(0.145833, 0.130209, 0.291031);
@@ -234,7 +234,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				style.nextColor = colors.get(i);
 			} else {
 				double coeff = currDist / (currDist + nextDist);
-				style.nextColor = RouteColorize.getIntermediateColor(colors.get(i - 1), colors.get(i + 1), coeff);
+				style.nextColor = ColorPalette.getIntermediateColor(colors.get(i - 1), colors.get(i + 1), coeff);
 			}
 		}
 		points.get(points.size() - 1).style = points.get(points.size() - 2).style;
@@ -433,7 +433,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		if (index == 0) {
 			return colors[0];
 		} else if (index > 0 && index < colors.length) {
-			return RouteColorize.getIntermediateColor(colors[index - 1], colors[index], coeff);
+			return ColorPalette.getIntermediateColor(colors[index - 1], colors[index], coeff);
 		} else if (index == colors.length) {
 			return colors[index - 1];
 		}
@@ -526,7 +526,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) (style);
 				int startColor = gradientStyle.currColor;
 				int endColor = gradientStyle.nextColor;
-				lineColor = RouteColorize.getIntermediateColor(startColor, endColor, offset);
+				lineColor = ColorPalette.getIntermediateColor(startColor, endColor, offset);
 			} else {
 				 lineColor = style.getColor(getRouteLineColor());
 			}

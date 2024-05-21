@@ -607,7 +607,7 @@ POIの更新は利用できません</string>
     <string name="av_video_format">動画出力形式</string>
     <string name="av_use_external_recorder_descr">動画撮影時にシステムレコーダを使用します。</string>
     <string name="av_use_external_recorder">システムレコーダを使用</string>
-    <string name="av_use_external_camera_descr">写真の撮影にシステムアプリケーションを使用します</string>
+    <string name="av_use_external_camera_descr">写真の撮影にシステムアプリケーションを使用します。</string>
     <string name="av_use_external_camera">カメラアプリを使用</string>
     <string name="av_settings_descr">音声と動画に関する設定をします。</string>
     <string name="av_settings">音声/動画設定</string>
@@ -3675,7 +3675,7 @@ POIの更新は利用できません</string>
     <string name="uninstall_speed_cameras">スピードカメラデータの削除</string>
     <string name="shared_string_legal">法的事項</string>
     <string name="speed_camera_pois">スピードカメラPOI</string>
-    <string name="speed_cameras_legal_descr">一部の国や地域では、スピードカメラ警告機能の使用が法律で禁止されています。
+    <string name="speed_cameras_legal_descr">一部の国や地域では、スピードカメラ警告アプリの使用が法律で禁止されています。
 \n
 \n国の法律に基づいて、使用を望むかどうかを決定する必要があります。
 \n
@@ -5304,7 +5304,7 @@ POIの更新は利用できません</string>
     <string name="remove_widget_first">まずウィジェットを削除してください</string>
     <string name="help_article_map_track_context_menu_name">経路コンテキストメニュー</string>
     <string name="date_of_creation">作成日</string>
-    <string name="key_is_already_assigned_error">\"%1$s\" キーはすでに別のアクション\"%2$s\"に割り当てられています</string>
+    <string name="key_is_already_assigned_error">\"%1$s\" キーは既にアクション\"%2$s\"に割り当てられています</string>
     <string name="add_row">行を追加</string>
     <string name="discard_changes_prompt">変更を破棄してもよろしいですか？</string>
     <string name="help_article_map_legend_osmand_name">OsmAndマップのスタイル</string>
@@ -5332,4 +5332,13 @@ POIの更新は利用できません</string>
     <string name="relief_3d">3Dレリーフマップ</string>
     <string name="rendering_attr_showToll_description">道路の料金制限を表示します</string>
     <string name="relief_3d_description">ご近所や大陸全体のスケールモデルを利用し道案内に役立てて下さい。</string>
+    <string name="reset_key_assignments">キー割り当てをリセット</string>
+    <string name="key_assignments">キー割り当て</string>
+    <string name="clear_key_assignment">キー割り当ての初期化</string>
+    <string name="use_raster_sqlitedb_for_slope_hillshade">陰影起伏／傾斜にRaster-SQLiteDBを使用</string>
+    <string name="reset_key_assignments_desc">選択したすべてのキー割り当てが削除されます。</string>
+    <string name="clear_key_assignment_desc">選択したアクションのキー割り当てが消去され\"なし\"に設定されます。</string>
+    <string name="key_assignments_already_cleared_message">すべてのキー割り当てはすでに初期化されています</string>
+    <string name="camera_app">カメラアプリ</string>
+    <string name="use_v1_auto_zoom">不連続オートズーム（旧バージョン）</string>
 </resources>

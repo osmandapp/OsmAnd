@@ -48,10 +48,14 @@ public abstract class AbstractPoiType {
 	}
 
 	public String getIconKeyName() {
-		return getIconKeyName(getKeyName());
+		return getFormattedKeyName();
 	}
 
-	protected String getIconKeyName(String kn) {
+	public String getFormattedKeyName() {
+		return formatKeyName(getKeyName());
+	}
+
+	protected String formatKeyName(String kn) {
 		if (kn.startsWith("osmand_")) {
 			kn = kn.substring("osmand_".length());
 		}

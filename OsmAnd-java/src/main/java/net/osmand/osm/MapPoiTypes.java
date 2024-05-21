@@ -332,6 +332,10 @@ public class MapPoiTypes {
 		categories.add(category);
 		this.categories = categories;
 	}
+	
+	public List<PoiCategory> getCategories() {
+		return categories;
+	}
 
 	public PoiTranslator getPoiTranslator() {
 		return poiTranslator;

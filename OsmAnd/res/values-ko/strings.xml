@@ -5144,4 +5144,27 @@
     <string name="delete_actions_button_confirmation">\"%1$s\"를 삭제하시겠습니까?</string>
     <string name="delete_actions_button">삭제 버튼</string>
     <string name="give_permission">권한 부여</string>
+    <string name="shared_string_changes">변경하기</string>
+    <string name="track_vertical_exaggeration_description">스케일 값을 변경하면 3D 트랙 높이를 변경할 수 있습니다.</string>
+    <string name="use_terrain_maps_summary">고도 데이터를 위한 지형지도를 사용합니다. 지오메트리는 변경되지 않습니다.</string>
+    <string name="use_nearby_roads">인근 도로 사용</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd는 인근 도로 또는 지형지도에서 고도 데이터를 검색 할 수 있습니다.</string>
+    <string name="modify_the_search_query">검색을 변경하십시오.</string>
+    <string name="quick_action_map_style_switch">맵 스타일은 \"%s\"로 변경됩니다.</string>
+    <string name="quick_action_map_overlay_switch">지도 오버레이가 \"%s\"로 변경되었습니다.</string>
+    <string name="last_map_change">마지막지도 변경: %s</string>
+    <string name="quick_action_map_style">지도 스타일 변경</string>
+    <string name="quick_action_map_underlay_switch">지도 언레이는 \"%s\"로 변경됩니다.</string>
+    <string name="change_default_appearance_confirmation">%1$s의 기본 외관 변경?</string>
+    <string name="use_terrain_maps">Terrain 지도 사용</string>
+    <string name="quick_action_map_overlay">지도 overlay 변경</string>
+    <string name="quick_action_map_underlay">지도 밑줄 변경</string>
+    <string name="use_nearby_roads_summary">도로 및 고도 데이터를 찾을 수있는 오프라인지도를 사용합니다. 트랙 형상을 조정할 수 있습니다.</string>
+    <string name="shared_string_unchanged">변경되지 않음</string>
+    <string name="allow_display_on_top">상단에 표시 허용</string>
+    <string name="allow_display_on_top_description">지도 텍스트를 서로 위에 표시할 수 있습니다.</string>
+    <string name="show_debug_info">debug 정보 표시</string>
+    <string name="map_text">지도 텍스트</string>
+    <string name="routing_attr_avoid_cobblestone_name">Cobblestone를 피하십시오</string>
+    <string name="routing_attr_avoid_cobblestone_description">Cobblestone를 피하십시오</string>
 </resources>

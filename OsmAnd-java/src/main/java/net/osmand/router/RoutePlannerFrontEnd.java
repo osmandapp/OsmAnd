@@ -24,7 +24,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
-import net.osmand.map.OsmandRegions;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
@@ -50,7 +49,6 @@ public class RoutePlannerFrontEnd {
 	private boolean useOnlyHHRouting = false;
 	private HHRoutingConfig hhRoutingConfig = null;
 	private HHRoutingType hhRoutingType = HHRoutingType.JAVA;
-	private static MissingMapsCalculator missingMapsCalculator;
 
 
 	public RoutePlannerFrontEnd() {
@@ -377,21 +375,13 @@ public class RoutePlannerFrontEnd {
 		return useNativeApproximation;
 	}
 
-	public static void initMissingMapsCalculator(OsmandRegions osmandRegions) {
-		if (missingMapsCalculator == null) {
-			missingMapsCalculator = new MissingMapsCalculator(osmandRegions);
-		}
-	}
-
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints,
 	                                            ResultMatcher<GpxRouteApproximation> resultMatcher,
-	                                            boolean useExternalTimestamps)
-			throws IOException, InterruptedException {
+	                                            boolean useExternalTimestamps) throws IOException, InterruptedException {
 		GpxRouteApproximation result;
 		if (useGeometryBasedApproximation) {
 			result = searchGpxSegments(gctx, gpxPoints, resultMatcher);
-		}
-		else {
+		} else {
 			result = searchGpxRouteByRouting(gctx, gpxPoints, resultMatcher);
 		}
 		if (useExternalTimestamps) {
@@ -988,12 +978,9 @@ public class RoutePlannerFrontEnd {
 		}
 		targets.add(end);
 		if (CALCULATE_MISSING_MAPS) {
-			if (missingMapsCalculator == null) {
-				missingMapsCalculator = new MissingMapsCalculator();
-			}
-			if (missingMapsCalculator.checkIfThereAreMissingMaps(ctx, start, targets,
-					hhRoutingConfig != null)) {
-				return new RouteCalcResult(missingMapsCalculator.getErrorMessage(ctx));
+			MissingMapsCalculator calculator = new MissingMapsCalculator(PlatformUtil.getOsmandRegions());
+			if (calculator.checkIfThereAreMissingMaps(ctx, start, targets, hhRoutingConfig != null)) {
+				return new RouteCalcResult(ctx.calculationProgress.missingMapsCalculationResult.getErrorMessage());
 			}
 		}
 		if (needRequestPrivateAccessRouting(ctx, targets)) {
