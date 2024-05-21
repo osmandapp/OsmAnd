@@ -1,7 +1,5 @@
 package net.osmand.plus;
 
-import static android.view.Display.DEFAULT_DISPLAY;
-import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
@@ -13,21 +11,16 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.hardware.display.DisplayManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Display;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.annotation.UiContext;
 import androidx.car.app.CarToast;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleObserver;
@@ -114,6 +107,7 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
@@ -226,8 +220,6 @@ public class OsmandApplication extends MultiDexApplication {
 	private boolean androidAutoInForeground;
 	// Typeface
 
-	private Context uiContext;
-
 	@Override
 	public void onCreate() {
 		if (RestartActivity.isRestartProcess(this)) {
@@ -250,7 +242,6 @@ public class OsmandApplication extends MultiDexApplication {
 		};
 		ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver);
 
-		setupUIContext();
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
@@ -291,14 +282,6 @@ public class OsmandApplication extends MultiDexApplication {
 		BackupHelper.DEBUG = true;//PluginsHelper.isDevelopment();
 	}
 
-	private void setupUIContext() {
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-			final DisplayManager dm = this.getSystemService(DisplayManager.class);
-			final Display primaryDisplay = dm.getDisplay(DEFAULT_DISPLAY);
-			uiContext = this.createDisplayContext(primaryDisplay).createWindowContext(TYPE_APPLICATION_OVERLAY, null);
-		}
-	}
-
 	public boolean isPlusVersionInApp() {
 		return true;
 	}
@@ -326,7 +309,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	private void createInUiThread() {
-		new Toast(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R ? getWindowContext() : this); // activate in UI thread to avoid further exceptions
+		new Toast(AndroidUtils.createDisplayContext(this)); // activate in UI thread to avoid further exceptions
 		new AsyncTask<View, Void, Void>() {
 			@Override
 			protected Void doInBackground(View... params) {
@@ -341,24 +324,6 @@ public class OsmandApplication extends MultiDexApplication {
 	@NonNull
 	public UiUtilities getUIUtilities() {
 		return iconsCache;
-	}
-
-	@UiContext
-	@RequiresApi(Build.VERSION_CODES.R)
-	public Context getWindowContext(){
-		return uiContext;
-	}
-
-	public Display getContextDisplay() {
-		Display display;
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-			DisplayManager displayManager = (DisplayManager) this.getSystemService(Context.DISPLAY_SERVICE);
-			display = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
-		} else {
-			WindowManager wmgr = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
-			display = wmgr.getDefaultDisplay();
-		}
-		return display;
 	}
 
 	@Override

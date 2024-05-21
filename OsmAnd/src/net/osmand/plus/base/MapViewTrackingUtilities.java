@@ -38,6 +38,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.CompassMode;
 import net.osmand.plus.settings.enums.DrivingRegion;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.AutoZoomBySpeedHelper;
@@ -134,7 +135,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		mapDisplayPositionManager.setMapView(mapView);
 		autoZoomBySpeedHelper.setMapView(mapView);
 		if (mapView != null) {
-			Display display = app.getContextDisplay();
+			Display display = AndroidUtils.getDisplay(app);
 			int orientation = 0;
 			if (display != null) {
 				orientation = display.getRotation();

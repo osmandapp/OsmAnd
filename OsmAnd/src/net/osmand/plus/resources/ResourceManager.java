@@ -7,13 +7,11 @@ import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 import static net.osmand.plus.AppInitEvents.ASSETS_COPIED;
 import static net.osmand.plus.AppInitEvents.MAPS_INITIALIZED;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.HandlerThread;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -290,7 +288,7 @@ public class ResourceManager {
 		resetStoreDirectory();
 
 		DisplayMetrics dm = new DisplayMetrics();
-		getApplication().getContextDisplay().getMetrics(dm);
+		AndroidUtils.getDisplay(context).getMetrics(dm);
 		// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
 		// at least 3*9?
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
@@ -301,11 +299,6 @@ public class ResourceManager {
 		if (!path.exists()) {
 			path.mkdir();
 		}
-	}
-
-	@NonNull
-	public OsmandApplication getApplication() {
-		return (OsmandApplication) context.getApplicationContext();
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {

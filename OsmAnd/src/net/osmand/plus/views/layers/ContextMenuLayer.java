@@ -1,6 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static android.os.Build.*;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.plus.views.layers.geometry.GeometryWayDrawer.VECTOR_LINE_SCALE_COEF;
 
@@ -149,8 +148,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 
-		Context context = getContext();
-		contextMarker = new ImageView(VERSION.SDK_INT >= VERSION_CODES.R ? getApplication().getWindowContext() : context);
+		Context context = AndroidUtils.createDisplayContext(getContext());
+		contextMarker = new ImageView(AndroidUtils.createDisplayContext(context));
 		contextMarker.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		Drawable markerDrawable = AppCompatResources.getDrawable(context, R.drawable.map_pin_context_menu);
 		contextMarker.setImageDrawable(markerDrawable);

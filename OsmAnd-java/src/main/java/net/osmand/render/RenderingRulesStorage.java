@@ -390,8 +390,8 @@ public class RenderingRulesStorage {
 				if(!renderingConstants.containsKey(attrsMap.get("name"))){
 					renderingConstants.put(attrsMap.get("name"), attrsMap.get("value"));
 				}
-			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
-				if(!addon){
+			} else if ("renderingStyle".equals(name)) { //$NON-NLS-1$
+				if (!addon) {
 					String depends = attrsMap.get("depends");
 					if (depends != null && depends.length() > 0) {
 						this.dependsStorage = resolver.resolve(depends, resolver);
@@ -404,8 +404,7 @@ public class RenderingRulesStorage {
 					}
 					internalRenderingName = attrsMap.get("name");
 				}
-
-			} else if("renderer".equals(name)){ //$NON-NLS-1$
+			} else if ("renderer".equals(name)) { //$NON-NLS-1$
 				throw new XmlPullParserException("Rendering style is deprecated and no longer supported.");
 			} else {
 				log.warn("Unknown tag : " + name); //$NON-NLS-1$
