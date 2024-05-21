@@ -14,7 +14,7 @@ public class MapScrollLeftAction extends BaseMapScrollAction{
 	public static final QuickActionType TYPE = new QuickActionType(MAP_SCROLL_LEFT_ACTION,
 			"map.scroll.left", MapScrollLeftAction.class)
 			.nameRes(R.string.key_event_action_move_left)
-			.iconRes(R.drawable.mm_special_arrow_left).nonEditable()
+			.iconRes(R.drawable.ic_action_map_move_left).nonEditable()
 			.category(QuickActionType.MAP_INTERACTIONS);
 
 	public MapScrollLeftAction() {

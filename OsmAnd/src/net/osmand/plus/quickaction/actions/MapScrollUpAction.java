@@ -9,12 +9,12 @@ import net.osmand.plus.helpers.MapScrollHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 
-public class MapScrollUpAction extends BaseMapScrollAction{
+public class MapScrollUpAction extends BaseMapScrollAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(MAP_SCROLL_UP_ACTION,
 			"map.scroll.up", MapScrollUpAction.class)
 			.nameRes(R.string.key_event_action_move_up)
-			.iconRes(R.drawable.ic_action_arrow_up).nonEditable()
+			.iconRes(R.drawable.ic_action_map_move_up).nonEditable()
 			.category(QuickActionType.MAP_INTERACTIONS);
 
 	public MapScrollUpAction() {
