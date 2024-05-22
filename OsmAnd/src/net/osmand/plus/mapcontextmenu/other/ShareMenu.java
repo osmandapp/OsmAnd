@@ -1,16 +1,28 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ACTION_ID;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_ADDRESS;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_COORDINATES;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_GEOURL;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_SMS;
+import static net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver.KEY_SHARE_TITLE;
+
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.Bundle;
+import android.service.chooser.ChooserAction;
 import android.text.Html;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
@@ -29,6 +41,7 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +56,9 @@ public class ShareMenu extends BaseMenuController {
 	private LatLon latLon;
 	private String title;
 	private String address;
+	private String coordinates;
+	private String geoUrl;
+	private String sms;
 
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
@@ -98,7 +114,59 @@ public class ShareMenu extends BaseMenuController {
 		menu.title = title;
 		menu.address = address;
 
-		ShareMenuFragment.showInstance(menu);
+		if (android.os.Build.VERSION.SDK_INT >= 34) {
+			showNativeShareSheetWithActions(menu, mapActivity);
+		} else {
+			ShareMenuFragment.showInstance(menu);
+		}
+	}
+
+	@RequiresApi(api = 34)
+	private static void showNativeShareSheetWithActions(@NonNull ShareMenu menu, @NonNull MapActivity mapActivity) {
+		menu.setupSharingFields(mapActivity);
+		List<ShareItem> allowedItems = getAllowedItemsForNativeShareSheet();
+
+		ChooserAction[] actions = new ChooserAction[allowedItems.size()];
+
+		Intent intent = new Intent(mapActivity.getMyApplication(), ShareSheetReceiver.class);
+		intent.putExtra(KEY_SHARE_SMS, menu.sms);
+		intent.putExtra(KEY_SHARE_ADDRESS, menu.address);
+		intent.putExtra(KEY_SHARE_TITLE, menu.title);
+		intent.putExtra(KEY_SHARE_COORDINATES, menu.coordinates);
+		intent.putExtra(KEY_SHARE_GEOURL, menu.geoUrl);
+
+		for (int i = 0; i < allowedItems.size(); i++) {
+			ShareItem shareItem = allowedItems.get(i);
+			intent.putExtra(KEY_SHARE_ACTION_ID, shareItem.ordinal());
+
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(mapActivity.getMyApplication(), shareItem.ordinal(),
+					intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+			actions[i] = new ChooserAction.Builder(Icon.createWithResource(mapActivity.getMyApplication(),
+					shareItem.iconResourceId),
+					mapActivity.getString(shareItem.titleResourceId),
+					pendingIntent
+			).build();
+		}
+
+		Intent sendIntent = new Intent(Intent.ACTION_SEND);
+		sendIntent.setType("text/plain");
+		sendIntent.putExtra(Intent.EXTRA_TEXT, menu.sms);
+		sendIntent.setAction(Intent.ACTION_SEND);
+
+		Intent shareIntent = Intent.createChooser(sendIntent, null);
+		shareIntent.putExtra(Intent.EXTRA_CHOOSER_CUSTOM_ACTIONS, actions);
+		AndroidUtils.startActivityIfSafe(mapActivity.getMyApplication(), sendIntent, shareIntent);
+	}
+
+	private static List<ShareItem> getAllowedItemsForNativeShareSheet() {
+		List<ShareItem> allowedItemsForNativeShareSheet = new ArrayList<>();
+		for (ShareItem shareItem : ShareItem.values()) {
+			if (shareItem != ShareItem.MESSAGE) {
+				allowedItemsForNativeShareSheet.add(shareItem);
+			}
+		}
+		return allowedItemsForNativeShareSheet;
 	}
 
 	public void share(ShareItem item) {
@@ -106,6 +174,12 @@ public class ShareMenu extends BaseMenuController {
 		if (mapActivity == null) {
 			return;
 		}
+
+		setupSharingFields(mapActivity);
+		startAction(mapActivity, mapActivity, item, sms, address, title, coordinates, geoUrl);
+	}
+
+	private void setupSharingFields(@NonNull MapActivity mapActivity) {
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {
 			sb.append(title).append("\n");
@@ -118,7 +192,7 @@ public class ShareMenu extends BaseMenuController {
 			sb.append("\n");
 		}
 
-		String geoUrl = "";
+		geoUrl = "";
 		String httpUrl = "";
 		try {
 			String lat = LocationConvert.convertLatitude(latLon.getLatitude(), LocationConvert.FORMAT_DEGREES, false);
@@ -134,42 +208,48 @@ public class ShareMenu extends BaseMenuController {
 		if (!Algorithms.isEmpty(geoUrl) && !Algorithms.isEmpty(httpUrl)) {
 			sb.append(geoUrl).append("\n").append(httpUrl);
 		}
-		String sms = sb.toString();
+		OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
+		int f = st.COORDINATES_FORMAT.get();
+		coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f);
+		sms = sb.toString();
+	}
+
+	public static void startAction(@NonNull Context context, @Nullable Activity activity, @NonNull ShareItem item, @NonNull String sms,
+								   @NonNull String address, @NonNull String title, @NonNull String coordinates, @NonNull String geoUrl) {
 		switch (item) {
 			case MESSAGE:
-				sendMessage(mapActivity, sms);
+				if (activity != null) {
+					sendMessage(activity, sms);
+				}
 				break;
 			case CLIPBOARD:
-				copyToClipboardWithToast(mapActivity, sms, Toast.LENGTH_LONG);
+				copyToClipboardWithToast(context, sms, Toast.LENGTH_LONG);
 				break;
 			case ADDRESS:
 				if (!Algorithms.isEmpty(address)) {
-					copyToClipboardWithToast(mapActivity, address, Toast.LENGTH_LONG);
+					copyToClipboardWithToast(context, address, Toast.LENGTH_LONG);
 				} else {
-					Toast.makeText(mapActivity,
+					Toast.makeText(context,
 							R.string.no_address_found,
 							Toast.LENGTH_LONG).show();
 				}
 				break;
 			case NAME:
 				if (!Algorithms.isEmpty(title)) {
-					copyToClipboardWithToast(mapActivity, title, Toast.LENGTH_LONG);
+					copyToClipboardWithToast(context, title, Toast.LENGTH_LONG);
 				} else {
-					Toast.makeText(mapActivity,
+					Toast.makeText(context,
 							R.string.toast_empty_name_error,
 							Toast.LENGTH_LONG).show();
 				}
 				break;
 			case COORDINATES:
-				OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
-				int f = st.COORDINATES_FORMAT.get();
-				String coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f);
-				copyToClipboardWithToast(mapActivity, coordinates, Toast.LENGTH_LONG);
+				copyToClipboardWithToast(context, coordinates, Toast.LENGTH_LONG);
 				break;
 			case GEO:
 				if (!Algorithms.isEmpty(geoUrl)) {
 					Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
-					AndroidUtils.startActivityIfSafe(mapActivity, mapIntent);
+					AndroidUtils.startActivityIfSafe(context, mapIntent);
 				}
 				break;
 		}
@@ -228,7 +308,7 @@ public class ShareMenu extends BaseMenuController {
 	 * @return true if text was copied
 	 */
 	private static boolean copyToClipboard(@NonNull Context context, @NonNull String text,
-	                                       boolean showToast, int duration) {
+										   boolean showToast, int duration) {
 		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
 		if (object instanceof ClipboardManager) {
 			ClipboardManager clipboardManager = (ClipboardManager) object;

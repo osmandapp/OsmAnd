@@ -104,6 +104,7 @@
 				android:resource="@xml/paths" />
 		</provider>
 
+		<receiver android:name="net.osmand.plus.mapcontextmenu.other.ShareSheetReceiver"/>
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 		<receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver" />
 		<receiver android:name="net.osmand.plus.plugins.audionotes.MediaRemoteControlReceiver"
