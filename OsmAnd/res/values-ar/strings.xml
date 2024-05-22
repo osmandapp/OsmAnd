@@ -167,8 +167,8 @@
     <string name="about_version">الإصدار :</string>
     <string name="shared_string_about">عنْ التطبيق</string>
     <string name="about_settings_descr">معلومات النسخة، والتراخيص، أعضاء المشروع</string>
-    <string name="edit_tilesource_maxzoom">التّقريب الأقصى</string>
-    <string name="edit_tilesource_minzoom">التكبير اﻷقصى</string>
+    <string name="edit_tilesource_maxzoom">الحد الأقصى للتكبير</string>
+    <string name="edit_tilesource_minzoom">الحد الأدنى من التكبير</string>
     <string name="edit_tilesource_url_to_load">الرابط</string>
     <string name="driving_region_descr">حدد منطقة القيادة: الولايات المتحدة، أوروبا، المملكة المتحدة، آسيا، وأخرى.</string>
     <string name="driving_region">منطقة القيادة</string>
@@ -3483,7 +3483,7 @@
     <string name="listed_exist">المدرج %1$s, موجودة بالفعل في أوسماند.</string>
     <string name="keep_both">احتفظ بكليهما</string>
     <string name="keep_both_desc">سيتم إضافة العناصر المستوردة مع زيادة قبل اسمها</string>
-    <string name="import_duplicates_description">OsmAnd يحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها. 
+    <string name="import_duplicates_description">OsmAnd يحتوي بالفعل على عناصر بنفس الأسماء مثل التي استوردتها.
 \n 
 \nحدد إجراء.</string>
     <string name="import_duplicates_title">بعض العناصر موجودة بالفعل</string>
@@ -5730,6 +5730,8 @@
 \n
 \n • تمت إضافة المرشحات حسب بيانات الاستشعار للمسارات
 \n
+\n• تحسين تخصيص المظهر لمجموعة من المسارات
+\n
 \n • تمت إضافة دعم لعلامات GPX الإضافية
 \n
 \n • تخصيص \"المسافة أثناء التنقل\": اختر بين الأرقام الدقيقة أو التقريبية
@@ -5739,4 +5741,61 @@
 \n • تم تحويل تسجيل الدخول إلى OpenStreetMap إلى OAuth 2.0
 \n
 \n</string>
+    <string name="track_vertical_exaggeration_description">من خلال تغيير قيمة المقياس، يمكنك تغيير ارتفاع المسار ثلاثي الأبعاد.</string>
+    <string name="missing_maps_description">بعض الخرائط المطلوبة لهذا المسار مفقودة أو غير محدثة. يرجى تنزيل هذه الخرائط أو تحديثها.</string>
+    <string name="route_line_use_coloring_speed">يتم تلوين خط الطريق حسب سرعة الحركة.</string>
+    <string name="route_line_use_coloring_altitude">يتم تلوين خط الطريق حسب ارتفاع الارتفاع.</string>
+    <string name="use_terrain_maps_summary">يستخدم خرائط التضاريس لبيانات الارتفاع. هندسة المسار تبقى دون تغيير.</string>
+    <string name="use_terrain_maps">استخدام خرائط التضاريس</string>
+    <string name="use_nearby_roads_summary">استخدام الخريطة غير المتصلة بالإنترنت للعثور على الطرق القريبة وبيانات الارتفاع. قد يعاد هندسة المسار.</string>
+    <string name="use_nearby_roads">استخدام الطرق المجاورة</string>
+    <string name="retrieve_elevation_data_summary">أوسماند يمكنه استرجاع بيانات الارتفاع من الطرق القريبة أو خرائط التضاريس.</string>
+    <string name="disable_map_layers">تعطيل طبقات الخريطة</string>
+    <string name="disable_map_layers_descr">قم بتعطيل جميع طبقات الخريطة أعلى الخريطة المتجهة (يلزم إعادة التشغيل).</string>
+    <string name="shared_string_changes">التغييرات</string>
+    <string name="change_default_tracks_appearance_confirmation">تطبيق التغييرات على المسارات الموجودة في الملف أو فقط على المسارات الجديدة؟?</string>
+    <string name="vertical_exaggeration">تضخيم عمودي</string>
+    <string name="change_default_appearance_confirmation">هل تريد تغيير المظهر الافتراضي لـ %1$s؟</string>
+    <string name="use_3d_track_visualization">محاكي ثلاثي أبعاد</string>
+    <string name="shared_string_scale">حجم</string>
+    <string name="required_maps">الخرائط المطلوبة</string>
+    <string name="height_legend_description">تُستخدم خرائط الألوان للارتفاع لتصور التضاريس.</string>
+    <string name="missing_maps_header">الخرائط المفقودة أو القديمة</string>
+    <string name="delete_actions_button_confirmation">هل أنت متأكد من أنك تريد حذف \"%1$s\" مع كل الإجراءات الإضافية؟?</string>
+    <string name="delete_actions_button">زر الحذف</string>
+    <string name="shared_string_osm_id">معرف OSM</string>
+    <string name="relief_3d_download_description">هناك حاجة إلى خرائط إضافية لعرض التضاريس على الخريطة.</string>
+    <string name="fix_north_up">تمكين الشمال الثابت لأعلى</string>
+    <string name="gpx_approximation_java">برمجة التوجيه (Java)</string>
+    <string name="gpx_approximation_cpp">برمجة التوجيه(C++)</string>
+    <string name="gpx_approximation_geo_cpp">يعتمد على برمجة (C++, fast)</string>
+    <string name="gpx_approximation_geo_java">يعتمد على برمجة (Java, fast)</string>
+    <string name="vertical_exaggeration_description">من خلال تغيير قيمة المقياس، يمكنك التأكيد على التضاريس ثلاثية الأبعاد.</string>
+    <string name="required_maps_calculate_online_summary">قائمة الخرائط المفقودة مبنية على خط مستقيم للحصول على قائمة دقيقة للخرائط،أوسماند يمكن أن يجهز طريقك مسبقا على الانترنت.</string>
+    <string name="fix_north_up_descr">لا تقم بتدوير الخريطة بالإيماءات في اتجاه الخريطة باتجاه الشمال لأعلى</string>
+    <string name="fixed_height">ارتفاع ثابت</string>
+    <string name="top">أعلى</string>
+    <string name="downward_gradient">التدرج الهبوطي</string>
+    <string name="upward_gradient">التدرج التصاعدي</string>
+    <string name="visualized_by">رؤية</string>
+    <string name="wall_color">اللون</string>
+    <string name="track_line">خط المسار</string>
+    <string name="bottom">أسفل</string>
+    <string name="top_and_bottom">أعلى و أسفل</string>
+    <string name="title_3d_track">المسار 3D</string>
+    <string name="explore_3d_track_description">استكشاف المسار في 3D التفاعلية! تصور الارتفاع والسرعة والمزيد مباشرة على الخريطة.</string>
+    <string name="maps_that_also_be_used">الخرائط التي يمكن استخدامها أيضًا: %1$s</string>
+    <string name="getting_list_of_required_maps">جار الحصول على قائمة الخرائط المطلوبة…</string>
+    <string name="apply_only_to_new">التطبيق فقط للجديد</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="unchanged_parameter_summary">سيحتفظ كل مسار بمعاييره الخاصة.</string>
+    <string name="shared_string_unchanged">بدون تغيير</string>
+    <string name="allow_display_on_top">السماح بالعرض في الأعلى</string>
+    <string name="allow_display_on_top_description">السماح بعرض نصوص الخريطة فوق بعضها البعض</string>
+    <string name="show_debug_info">إظهار معلومات التصحيح</string>
+    <string name="show_debug_info_description">عرض معلومات رسومية حول موضع كل نص للخريطة</string>
+    <string name="map_text">نصوص الخريطة</string>
+    <string name="routing_attr_avoid_cobblestone_name">تجنب الحصى</string>
+    <string name="routing_attr_avoid_cobblestone_description">تجنب الحصى</string>
+    <string name="release_4_8">• الاستعداد لـ 4.8</string>
 </resources>

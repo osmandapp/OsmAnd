@@ -11,7 +11,7 @@ public class PreviousAppProfileAction extends BaseSwitchAppModeAction {
 	public static final QuickActionType TYPE = new QuickActionType(PREVIOUS_PROFILE_PROFILE_ACTION,
 			"change.profile.previous", PreviousAppProfileAction.class)
 			.nameRes(R.string.key_event_action_previous_app_profile)
-			.iconRes(R.drawable.ic_action_settings).nonEditable()
+			.iconRes(R.drawable.ic_action_profile_previous).nonEditable()
 			.category(QuickActionType.SETTINGS);
 
 	public PreviousAppProfileAction() {
