@@ -225,12 +225,12 @@ public class InputDevicesHelper {
 		}
 	}
 
-	public void removeKeyAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                @NonNull String assignmentId) {
+	public void removeKeyAssignmentCompletely(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                          @NonNull String assignmentId) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.clearAssignmentKeyCodes(assignmentId);
+			device.removeKeyAssignmentCompletely(assignmentId);
 			syncSettings(devicesCollection, EventType.CLEAR_ASSIGNMENT_KEYCODES);
 		}
 	}

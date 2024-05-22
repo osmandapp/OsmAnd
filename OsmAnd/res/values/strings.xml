@@ -11,6 +11,11 @@
 	Thx - Hardy
 -->
 
+    <string name="edit_key_assignment">Edite key assignment</string>
+    <string name="new_key_assignment">New key assignment</string>
+    <string name="key_name_pattern">Key \"%1$s\"</string>
+    <string name="key_assignment_add_key">Add key</string>
+    <string name="key_assignment_add_action">Add action</string>
     <string name="disable_map_layers">Disable map layers</string>
     <string name="disable_map_layers_descr">Disable all map layers above the vector map (restart required).</string>
     <string name="height_legend_description">Altitude color maps are used to visualize relief.</string>

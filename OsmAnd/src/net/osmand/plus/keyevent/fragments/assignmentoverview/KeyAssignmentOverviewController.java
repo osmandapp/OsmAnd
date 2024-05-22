@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
@@ -89,6 +90,7 @@ public class KeyAssignmentOverviewController {
 	}
 
 	public void askEditAssignment() {
+		EditKeyAssignmentFragment.showInstance(activity.getSupportFragmentManager(), appMode, deviceId, assignmentId);
 		// TODO show Editing dialog
 	}
 
@@ -136,7 +138,7 @@ public class KeyAssignmentOverviewController {
 				.setTitle(R.string.clear_key_assignment)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
-					deviceHelper.removeKeyAssignment(appMode, deviceId, assignmentId);
+					deviceHelper.removeKeyAssignmentCompletely(appMode, deviceId, assignmentId);
 					// TODO dismiss dialog
 				});
 		CustomAlert.showSimpleMessage(dialogData, R.string.clear_key_assignment_desc);

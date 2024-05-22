@@ -69,4 +69,23 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_button_ex_height"
+		android:layout_gravity="bottom"
+		android:background="?attr/list_background_color">
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/save_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			osmand:dialogButtonType="primary"
+			android:layout_gravity="center_vertical"
+			android:visibility="gone"
+			android:layout_marginHorizontal="@dimen/content_padding"
+			tools:visibility="visible"
+			tools:dialogButtonTitle="@string/shared_string_save" />
+
+	</FrameLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

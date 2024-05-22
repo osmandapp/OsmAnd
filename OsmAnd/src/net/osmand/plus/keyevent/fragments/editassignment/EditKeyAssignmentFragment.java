@@ -30,6 +30,7 @@ import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallbac
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		implements OnKeyCodeSelectedCallback, InputDevicesEventListener {
@@ -114,12 +115,19 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 	private void updateViewContent(@NonNull View view) {
 		updateToolbarTitle(view);
+		updateSaveButton(view);
 		adapter.setScreenData(controller.populateScreenItems());
 	}
 
 	private void updateToolbarTitle(@NonNull View view) {
 		CollapsingToolbarLayout collapsingToolbarLayout = view.findViewById(R.id.toolbar_layout);
-		collapsingToolbarLayout.setTitle(controller.getCustomNameSummary());
+		collapsingToolbarLayout.setTitle(controller.getDialogTitle());
+	}
+
+	private void updateSaveButton(@NonNull View view) {
+		DialogButton saveButton = view.findViewById(R.id.save_button);
+		saveButton.setEnabled(controller.hasChangesToSave());
+		saveButton.setOnClickListener(v -> controller.saveChanges());
 	}
 
 	@Override

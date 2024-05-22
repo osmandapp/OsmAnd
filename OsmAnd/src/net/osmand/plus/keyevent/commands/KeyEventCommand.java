@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.KeyEvent;
 import android.view.KeyEvent.Callback;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -70,6 +72,11 @@ public abstract class KeyEventCommand implements Callback {
 	@NonNull
 	public KeyAssignmentCategory getCategory() {
 		return KeyAssignmentCategory.ACTIONS;
+	}
+
+	@DrawableRes
+	public int getIconId() { // TODO get appropriate icon
+		return R.drawable.ic_action_my_location;
 	}
 
 	@NonNull
