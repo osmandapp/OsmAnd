@@ -21,6 +21,7 @@ import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
@@ -104,9 +105,11 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 
 		private static final int CHECKS_COUNT = 30;
 		private static final int CHECK_INTERVAL_MS = 1000;
+		private static final int LOW_FPS_VALUE = 15;
+		private static final int LOW_FPS_COUNT = 10;
 
-		private int counter;
-		private int startFrameId;
+		private int checksCounter;
+		private int lowFpsCounter;
 
 		public ObserveDistToFinishIdlingResource(@NonNull OsmandApplication app) {
 			super(app);
@@ -116,7 +119,7 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 		private void startHandler() {
 			Handler handler = new Handler(Looper.getMainLooper());
 			handler.postDelayed(() -> {
-				counter++;
+				checksCounter++;
 
 				checkFPS();
 				checkAnalysisUpdate();
@@ -130,14 +133,13 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 		}
 
 		private void checkFPS() {
-			MapRendererView rendererView = mapView.getMapRenderer();
-			if (rendererView != null) {
-				if (startFrameId == 0) {
-					startFrameId = rendererView.getFrameId();
-				} else {
-					int renderedFrames = rendererView.getFrameId() - startFrameId;
-					if (renderedFrames < 25) {
-//							throw new AssertionError("Map rendering too slow. rendered " + renderedFrames + " frames");
+			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer != null) {
+				float fps = mapView.calculateRenderFps();
+				if (fps < LOW_FPS_VALUE) {
+					lowFpsCounter++;
+					if (lowFpsCounter >= LOW_FPS_COUNT) {
+						throw new AssertionError("Map rendering too slow. rendered " + OsmAndFormatter.formatFps(fps) + " frames");
 					}
 				}
 			} else {
@@ -147,7 +149,6 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 
 		private void checkAnalysisUpdate() {
 			gpxDbHelper.getItem(file); // simulate multiple calls for getting GpxDataItem
-			app.showToastMessage("readTrackItemCount " + GpxDbHelper.readTrackItemCount);
 			if (GpxDbHelper.readTrackItemCount > 2) {
 				throw new AssertionError("To many updates of analysis " + GpxDbHelper.readTrackItemCount);
 			}
@@ -155,7 +156,7 @@ public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 
 		@Override
 		public boolean isIdleNow() {
-			return counter >= CHECKS_COUNT;
+			return checksCounter >= CHECKS_COUNT;
 		}
 	}
 }
