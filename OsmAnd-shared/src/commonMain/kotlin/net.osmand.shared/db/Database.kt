@@ -3,6 +3,7 @@ package net.osmand.shared.db
 import com.squareup.sqldelight.db.SqlCursor
 
 class Database @Throws(Exception::class) constructor(databaseDriverFactory: DatabaseDriverFactory) {
+	private var dbClosed = false
 	private val driver = databaseDriverFactory.createDriver()
 
 	@Throws(Exception::class)
@@ -70,5 +71,12 @@ class Database @Throws(Exception::class) constructor(databaseDriverFactory: Data
 		} catch (e: Exception) {
 			throw e
 		}
+		finally {
+			dbClosed = true
+		}
+	}
+
+	fun isClosed():Boolean {
+		return dbClosed
 	}
 }

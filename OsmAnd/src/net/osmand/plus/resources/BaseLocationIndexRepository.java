@@ -65,13 +65,13 @@ public class BaseLocationIndexRepository<T extends MapObject> {
 		}
 		String metaTable = getMetaLocation(tableLocation); 
 		Cursor cursor = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name='"+metaTable+"'", null); //$NON-NLS-1$ //$NON-NLS-2$
-		boolean dbExist = cursor.moveToFirst();
+		boolean dbExist = cursor.moveToNext();
 		cursor.close();
 		boolean found = false;
 		boolean write = true;
 		if(dbExist){
 			cursor = db.rawQuery("SELECT MAX_LAT, MAX_LON, MIN_LAT, MIN_LON  FROM " +metaTable, null); //$NON-NLS-1$
-			if(cursor.moveToFirst()){
+			if(cursor.moveToNext()){
 				dataTopLatitude = cursor.getDouble(0);
 				dataRightLongitude = cursor.getDouble(1);
 				dataBottomLatitude = cursor.getDouble(2);

@@ -22,6 +22,10 @@ import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
 
 import java.io.File;
+import java.util.Objects;
+
+import kotlin.jvm.JvmClassMappingKt;
+import kotlin.reflect.KClass;
 
 public class GpxAppearanceHelper {
 

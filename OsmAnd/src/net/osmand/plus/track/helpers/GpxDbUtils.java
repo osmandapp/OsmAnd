@@ -1,14 +1,11 @@
 package net.osmand.plus.track.helpers;
 
-import android.database.sqlite.SQLiteException;
-
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
 import static net.osmand.gpx.GpxParameter.*;
 import static net.osmand.plus.track.helpers.GPXDatabase.DB_VERSION;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_DIR_TABLE_NAME;
 import static net.osmand.plus.track.helpers.GPXDatabase.GPX_TABLE_NAME;
-import static net.osmand.plus.track.helpers.GPXDatabase.GPX_UPDATE_PARAMETERS_START;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +13,8 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.util.Algorithms;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 
 import java.io.File;
 import java.util.Arrays;
@@ -29,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import kotlin.jvm.JvmClassMappingKt;
 
 public class GpxDbUtils {
 

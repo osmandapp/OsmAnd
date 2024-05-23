@@ -4,11 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -124,8 +125,8 @@ public class BackupDbHelper {
 	}
 
 	@Nullable
-	public SQLiteConnection openConnection(boolean readonly) {
-		SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+	public SQLiteAPI.SQLiteConnection openConnection(boolean readonly) {
+		SQLiteAPI.SQLiteConnection conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 		if (conn != null && conn.getVersion() < DB_VERSION) {
 			if (readonly) {
 				conn.close();
@@ -144,14 +145,14 @@ public class BackupDbHelper {
 		return conn;
 	}
 
-	public void onCreate(SQLiteConnection db) {
+	public void onCreate(SQLiteAPI.SQLiteConnection db) {
 		db.execSQL(UPLOADED_FILES_TABLE_CREATE);
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + UPLOADED_FILES_INDEX_TYPE_NAME + " ON " + UPLOADED_FILES_TABLE_NAME
 				+ " (" + UPLOADED_FILE_COL_TYPE + ", " + UPLOADED_FILE_COL_NAME + ");");
 		db.execSQL(LAST_MODIFIED_TABLE_CREATE);
 	}
 
-	public void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
+	public void onUpgrade(SQLiteAPI.SQLiteConnection db, int oldVersion, int newVersion) {
 		if (oldVersion < 2) {
 			db.execSQL(LAST_MODIFIED_TABLE_CREATE);
 		}
@@ -163,12 +164,12 @@ public class BackupDbHelper {
 	}
 
 	public boolean removeUploadedFileInfo(@NonNull UploadedFileInfo info) {
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + UPLOADED_FILES_TABLE_NAME + " WHERE " +
 								UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-						new Object[] {info.type, info.name});
+						Arrays.asList(info.type, info.name));
 			} finally {
 				db.close();
 			}
@@ -178,7 +179,7 @@ public class BackupDbHelper {
 	}
 
 	public boolean removeUploadedFileInfos() {
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + UPLOADED_FILES_TABLE_NAME);
@@ -190,37 +191,37 @@ public class BackupDbHelper {
 		return false;
 	}
 
-	private void updateUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
+	private void updateUploadedFileInfo(@NonNull SQLiteAPI.SQLiteConnection db, @NonNull UploadedFileInfo info) {
 		db.execSQL(
 				"UPDATE " + UPLOADED_FILES_TABLE_NAME + " SET "
 						+ UPLOADED_FILE_COL_UPLOAD_TIME + " = ?, "
 						+ UPLOADED_FILE_COL_MD5_DIGEST + " = ? "
 						+ "WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " + UPLOADED_FILE_COL_NAME + " = ?",
-				new Object[] {info.uploadTime, info.md5Digest, info.type, info.name});
+				Arrays.asList(info.uploadTime, info.md5Digest, info.type, info.name));
 	}
 
-	private void addUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull UploadedFileInfo info) {
+	private void addUploadedFileInfo(@NonNull SQLiteAPI.SQLiteConnection db, @NonNull UploadedFileInfo info) {
 		db.execSQL(
 				"INSERT INTO " + UPLOADED_FILES_TABLE_NAME + "(" + UPLOADED_FILE_COL_TYPE + ", "
 						+ UPLOADED_FILE_COL_NAME + ", " + UPLOADED_FILE_COL_UPLOAD_TIME + ", "
 						+ UPLOADED_FILE_COL_MD5_DIGEST
 						+ ") VALUES (?, ?, ?, ?)",
-				new Object[] {info.type, info.name, info.uploadTime, info.md5Digest});
+				Arrays.asList(info.type, info.name, info.uploadTime, info.md5Digest));
 	}
 
 	@NonNull
 	public List<UploadedFileInfo> getUploadedFileInfos() {
 		List<UploadedFileInfo> infos = new ArrayList<>();
-		SQLiteConnection db = openConnection(true);
+		SQLiteAPI.SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(
+				SQLiteAPI.SQLiteCursor query = db.rawQuery(
 						"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
 								UPLOADED_FILE_COL_NAME + ", " +
 								UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
 								UPLOADED_FILE_COL_MD5_DIGEST +
 								" FROM " + UPLOADED_FILES_TABLE_NAME, null);
-				if (query != null && query.moveToFirst()) {
+				if (query != null && query.moveToNext()) {
 					do {
 						UploadedFileInfo info = readUploadedFileInfo(query);
 						infos.add(info);
@@ -239,16 +240,16 @@ public class BackupDbHelper {
 	@NonNull
 	public Map<String, UploadedFileInfo> getUploadedFileInfoMap() {
 		Map<String, UploadedFileInfo> infoMap = new HashMap<>();
-		SQLiteConnection db = openConnection(true);
+		SQLiteAPI.SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(
+				SQLiteAPI.SQLiteCursor query = db.rawQuery(
 						"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
 								UPLOADED_FILE_COL_NAME + ", " +
 								UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
 								UPLOADED_FILE_COL_MD5_DIGEST +
 								" FROM " + UPLOADED_FILES_TABLE_NAME, null);
-				if (query != null && query.moveToFirst()) {
+				if (query != null && query.moveToNext()) {
 					do {
 						UploadedFileInfo info = readUploadedFileInfo(query);
 						infoMap.put(info.getType() + "___" + info.getName(), info);
@@ -267,7 +268,7 @@ public class BackupDbHelper {
 	@Nullable
 	public UploadedFileInfo getUploadedFileInfo(@NonNull String type, @NonNull String name) {
 		UploadedFileInfo info = null;
-		SQLiteConnection db = openConnection(true);
+		SQLiteAPI.SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				info = getUploadedFileInfo(db, type, name);
@@ -279,9 +280,9 @@ public class BackupDbHelper {
 	}
 
 	@Nullable
-	public UploadedFileInfo getUploadedFileInfo(@NonNull SQLiteConnection db, @NonNull String type, @NonNull String name) {
+	public UploadedFileInfo getUploadedFileInfo(@NonNull SQLiteAPI.SQLiteConnection db, @NonNull String type, @NonNull String name) {
 		UploadedFileInfo info = null;
-		SQLiteCursor query = db.rawQuery(
+		SQLiteAPI.SQLiteCursor query = db.rawQuery(
 				"SELECT " + UPLOADED_FILE_COL_TYPE + ", " +
 						UPLOADED_FILE_COL_NAME + ", " +
 						UPLOADED_FILE_COL_UPLOAD_TIME + ", " +
@@ -289,8 +290,8 @@ public class BackupDbHelper {
 						" FROM " + UPLOADED_FILES_TABLE_NAME +
 						" WHERE " + UPLOADED_FILE_COL_TYPE + " = ? AND " +
 						UPLOADED_FILE_COL_NAME + " = ?",
-				new String[] {type, name});
-		if (query != null && query.moveToFirst()) {
+				Arrays.asList(type, name));
+		if (query != null && query.moveToNext()) {
 			info = readUploadedFileInfo(query);
 		}
 		if (query != null) {
@@ -300,7 +301,7 @@ public class BackupDbHelper {
 	}
 
 	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
-		SQLiteConnection db = openConnection(true);
+		SQLiteAPI.SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
@@ -318,7 +319,7 @@ public class BackupDbHelper {
 	}
 
 	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Digest) {
-		SQLiteConnection db = openConnection(true);
+		SQLiteAPI.SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				UploadedFileInfo info = getUploadedFileInfo(db, type, fileName);
@@ -336,7 +337,7 @@ public class BackupDbHelper {
 	}
 
 	@NonNull
-	private UploadedFileInfo readUploadedFileInfo(SQLiteCursor query) {
+	private UploadedFileInfo readUploadedFileInfo(SQLiteAPI.SQLiteCursor query) {
 		String type = query.getString(0);
 		String name = query.getString(1);
 		long uploadTime = query.getLong(2);
@@ -345,14 +346,14 @@ public class BackupDbHelper {
 	}
 
 	public void setLastModifiedTime(@NonNull String name, long lastModifiedTime) {
-		SQLiteConnection db = openConnection(false);
+		SQLiteAPI.SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + LAST_MODIFIED_TABLE_NAME +
-						" WHERE " + LAST_MODIFIED_COL_NAME + " = ?", new Object[] {name});
+						" WHERE " + LAST_MODIFIED_COL_NAME + " = ?", Collections.singletonList(name));
 				db.execSQL("INSERT INTO " + LAST_MODIFIED_TABLE_NAME + "(" + LAST_MODIFIED_COL_NAME + ", "
 								+ LAST_MODIFIED_COL_MODIFIED_TIME + ") VALUES (?, ?)",
-						new Object[] {name, lastModifiedTime});
+						Arrays.asList(name, lastModifiedTime));
 			} finally {
 				db.close();
 			}
@@ -361,15 +362,15 @@ public class BackupDbHelper {
 
 	public long getLastModifiedTime(@NonNull String name) {
 		long res = 0;
-		SQLiteConnection db = openConnection(true);
+		SQLiteAPI.SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(
+				SQLiteAPI.SQLiteCursor query = db.rawQuery(
 						"SELECT " + LAST_MODIFIED_COL_MODIFIED_TIME +
 								" FROM " + LAST_MODIFIED_TABLE_NAME +
 								" WHERE " + LAST_MODIFIED_COL_NAME + " = ?",
-						new String[] {name});
-				if (query != null && query.moveToFirst()) {
+						Collections.singletonList(name));
+				if (query != null && query.moveToNext()) {
 					res = query.getLong(0);
 				}
 				if (query != null) {

@@ -1,12 +1,14 @@
 package net.osmand.plus.mapmarkers;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -102,7 +104,7 @@ public class MarkersDb39HelperLegacy {
 		if (oldVersion < 9) {
 			db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
 					" SET " + GROUPS_COL_DISABLED + " = ? " +
-					"WHERE " + GROUPS_COL_DISABLED + " IS NULL", new Object[] {0});
+					"WHERE " + GROUPS_COL_DISABLED + " IS NULL", Collections.singletonList(0));
 		}
 		if (oldVersion < 13) {
 			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_CATEGORIES + " TEXT");
@@ -138,7 +140,7 @@ public class MarkersDb39HelperLegacy {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT, null);
-				if (query != null && query.moveToFirst()) {
+				if (query != null && query.moveToNext()) {
 					do {
 						MapMarkersGroup group = readGroup(query);
 						res.put(group.getId(), group);

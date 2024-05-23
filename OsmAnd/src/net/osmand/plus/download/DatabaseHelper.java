@@ -1,9 +1,11 @@
 package net.osmand.plus.download;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI;
+import net.osmand.shared.api.SQLiteAPI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -79,7 +81,7 @@ public class DatabaseHelper {
             try {
                 switch (type){
                     case DOWNLOAD_ENTRY:
-                        db.execSQL("DELETE FROM " + DOWNLOADS_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        db.execSQL("DELETE FROM " + DOWNLOADS_TABLE_NAME + " WHERE " + HISTORY_COL_NAME + " = ?", Collections.singletonList(e.getName())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 }
             } finally {
                 db.close();
@@ -108,7 +110,7 @@ public class DatabaseHelper {
             try {
                 switch (type) {
                     case DOWNLOAD_ENTRY:
-                        db.execSQL("UPDATE " + DOWNLOADS_TABLE_NAME + " SET " + HISTORY_COL_COUNT + " = ? WHERE " + HISTORY_COL_NAME + " = ?", new Object[] { e.getCount(), e.getName() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        db.execSQL("UPDATE " + DOWNLOADS_TABLE_NAME + " SET " + HISTORY_COL_COUNT + " = ? WHERE " + HISTORY_COL_NAME + " = ?", Arrays.asList(e.getCount(), e.getName())); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 }
             } finally {
                 db.close();
@@ -124,7 +126,7 @@ public class DatabaseHelper {
             try {
                 switch (type) {
                     case DOWNLOAD_ENTRY:
-                        db.execSQL("INSERT INTO " + DOWNLOADS_TABLE_NAME + " VALUES (?, ?)", new Object[] { e.getName(), e.getCount()}); //$NON-NLS-1$ //$NON-NLS-2$
+                        db.execSQL("INSERT INTO " + DOWNLOADS_TABLE_NAME + " VALUES (?, ?)", Arrays.asList(e.getName(), e.getCount())); //$NON-NLS-1$ //$NON-NLS-2$
                 }
             } finally {
                 db.close();
@@ -152,7 +154,7 @@ public class DatabaseHelper {
                 }
 
 				if (query != null) {
-					if (query.moveToFirst()) {
+					if (query.moveToNext()) {
 						count = query.getInt(0);
 					}
 					query.close();
@@ -181,7 +183,7 @@ public class DatabaseHelper {
                         break;
                 }
 				if (query != null) {
-					if (query.moveToFirst()) {
+					if (query.moveToNext()) {
 						do {
 							HistoryDownloadEntry e = new HistoryDownloadEntry(
 									query.getString(0), query.getInt(1));

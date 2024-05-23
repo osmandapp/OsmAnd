@@ -5,8 +5,8 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
-import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.settings.enums.HistorySource;
@@ -14,6 +14,8 @@ import net.osmand.plus.utils.AndroidDbUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -157,7 +159,7 @@ public class MapMarkersDbHelper {
 		if (oldVersion < 9) {
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
 					" SET " + MARKERS_COL_DISABLED + " = ? " +
-					"WHERE " + MARKERS_COL_DISABLED + " IS NULL", new Object[] {0});
+					"WHERE " + MARKERS_COL_DISABLED + " IS NULL", Collections.singletonList(0));
 			upgraded = true;
 		}
 		if (oldVersion < 10) {
@@ -167,7 +169,7 @@ public class MapMarkersDbHelper {
 		if (oldVersion < 11) {
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
 					" SET " + MARKERS_COL_SELECTED + " = ? " +
-					"WHERE " + MARKERS_COL_SELECTED + " IS NULL", new Object[] {0});
+					"WHERE " + MARKERS_COL_SELECTED + " IS NULL", Collections.singletonList(0));
 			upgraded = true;
 		}
 		if (oldVersion < 12) {
@@ -187,7 +189,7 @@ public class MapMarkersDbHelper {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
 								" WHERE " + MARKERS_COL_GROUP_KEY + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[] {groupId, 1});
+						Arrays.asList(groupId, 1));
 
 				updateMarkersLastModifiedTime();
 			} finally {
@@ -252,7 +254,7 @@ public class MapMarkersDbHelper {
 		rowsMap.put(MARKERS_COL_SELECTED, 0);
 		rowsMap.put(MARKERS_COL_MAP_OBJECT_NAME, marker.mapObjectName);
 
-		db.execSQL(AndroidDbUtils.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
+		db.execSQL(AndroidDbUtils.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap.keySet()), Arrays.asList(rowsMap.values().toArray()));
 
 		if (marker.history) {
 			updateMarkersHistoryLastModifiedTime();
@@ -272,8 +274,8 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ID + " = ?", new String[] {id});
-				if (query != null && query.moveToFirst()) {
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ID + " = ?", Collections.singletonList(id));
+				if (query != null && query.moveToNext()) {
 					res = readItem(query, legacy);
 				}
 				if (query != null) {
@@ -296,8 +298,8 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
-						new String[] {String.valueOf(1)});
-				if (query != null && query.moveToFirst()) {
+						Collections.singletonList(String.valueOf(1)));
+				if (query != null && query.moveToNext()) {
 					do {
 						MapMarker marker = readItem(query, legacy);
 						if (marker != null) {
@@ -364,7 +366,7 @@ public class MapMarkersDbHelper {
 								MARKERS_COL_COLOR + " = ?, " +
 								MARKERS_COL_SELECTED + " = ? " +
 								"WHERE " + MARKERS_COL_ID + " = ?",
-						new Object[] {marker.getLatitude(), marker.getLongitude(), descr, marker.colorIndex, marker.selected, marker.id});
+						Arrays.asList(marker.getLatitude(), marker.getLongitude(), descr, marker.colorIndex, marker.selected, marker.id));
 
 				updateMarkersLastModifiedTime();
 			} finally {
@@ -383,7 +385,7 @@ public class MapMarkersDbHelper {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
 						MARKERS_COL_VISITED + " = ? " +
-						"WHERE " + MARKERS_COL_ID + " = ?", new Object[] {0, marker.visitedDate, marker.id});
+						"WHERE " + MARKERS_COL_ID + " = ?", Arrays.asList(0, marker.visitedDate, marker.id));
 				updateMarkersLastModifiedTime();
 				updateMarkersHistoryLastModifiedTime();
 			} finally {
@@ -399,7 +401,7 @@ public class MapMarkersDbHelper {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
 						MARKERS_COL_VISITED + " = ? " +
-						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[] {0, timestamp, 1});
+						"WHERE " + MARKERS_COL_ACTIVE + " = ?", Arrays.asList(0, timestamp, 1));
 				updateMarkersLastModifiedTime();
 				updateMarkersHistoryLastModifiedTime();
 			} finally {
@@ -419,7 +421,7 @@ public class MapMarkersDbHelper {
 								MARKERS_COL_ACTIVE + " = ? " +
 								"WHERE " + MARKERS_COL_ID + " = ? " +
 								"AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[] {1, marker.id, 0});
+						Arrays.asList(1, marker.id, 0));
 				updateMarkersLastModifiedTime();
 				updateMarkersHistoryLastModifiedTime();
 			} finally {
@@ -438,8 +440,8 @@ public class MapMarkersDbHelper {
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
-						new String[] {String.valueOf(0)});
-				if (query != null && query.moveToFirst()) {
+						Collections.singletonList(String.valueOf(0)));
+				if (query != null && query.moveToNext()) {
 					do {
 						MapMarker marker = readItem(query, legacy);
 						if (marker != null) {
@@ -467,7 +469,7 @@ public class MapMarkersDbHelper {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
 								" WHERE " + MARKERS_COL_ID + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[] {marker.id, marker.history ? 0 : 1});
+						Arrays.asList(marker.id, marker.history ? 0 : 1));
 				if (marker.history) {
 					updateMarkersHistoryLastModifiedTime();
 				} else {
