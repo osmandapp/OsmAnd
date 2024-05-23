@@ -1,5 +1,6 @@
 package net.osmand.plus.keyevent.fragments.editassignment;
 
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController.PROCESS_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
@@ -56,7 +57,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		String deviceId = arguments.getString(ATTR_DEVICE_ID, "");
 		String assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID, "");
 		controller = EditKeyAssignmentController.getInstance(app, appMode, deviceId, assignmentId, isUsedOnMap());
-		app.getDialogManager().register(EditKeyAssignmentController.PROCESS_ID, this);
+		app.getDialogManager().register(PROCESS_ID, this);
 	}
 
 	@Nullable
@@ -191,6 +192,15 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		}
 		controller.setActivity(null);
 		app.getInputDeviceHelper().removeListener(this);
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			app.getDialogManager().unregister(PROCESS_ID);
+		}
 	}
 
 	private void dismiss() {
