@@ -34,6 +34,7 @@ import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
+import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -140,9 +141,9 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
-			Fragment target = getTargetFragment();
-			if (target instanceof OnKeyCodeSelectedCallback) {
-				((OnKeyCodeSelectedCallback) target).onKeyCodeSelected(initialKeyCode, keyCode);
+			EditKeyAssignmentController controller = EditKeyAssignmentController.getInstance(app);
+			if (controller != null) {
+				controller.onKeyCodeSelected(initialKeyCode, keyCode);
 			}
 			dismiss();
 		});
@@ -323,7 +324,6 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager,
-									@NonNull Fragment targetFragment,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull String deviceId,
 									@NonNull String assignmentId,
@@ -336,7 +336,6 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 			arguments.putString(ATTR_ASSIGNMENT_ID, assignmentId);
 			arguments.putInt(ATTR_KEY_CODE, keyCode);
 			fragment.setArguments(arguments);
-			fragment.setTargetFragment(targetFragment, 0);
 			manager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)

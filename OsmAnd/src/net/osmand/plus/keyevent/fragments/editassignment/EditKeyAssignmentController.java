@@ -34,6 +34,7 @@ import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
@@ -48,7 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-class EditKeyAssignmentController implements IDialogController {
+public class EditKeyAssignmentController implements IDialogController, OnKeyCodeSelectedCallback {
 
 	public static final String PROCESS_ID = "edit_key_assignment";
 
@@ -59,18 +60,15 @@ class EditKeyAssignmentController implements IDialogController {
 	private final String assignmentId;
 	private EditingBundle editBundle;
 	private FragmentActivity activity;
-	private final Fragment targetFragment;
 	private final boolean usedOnMap;
 
 	public EditKeyAssignmentController(@NonNull OsmandApplication app,
 	                                   @NonNull ApplicationMode appMode,
-									   @NonNull Fragment targetFragment,
 									   @NonNull String deviceId,
 									   @NonNull String assignmentId,
 	                                   boolean usedOnMap) {
 		this.app = app;
 		this.appMode = appMode;
-		this.targetFragment = targetFragment;
 		this.usedOnMap = usedOnMap;
 		this.deviceHelper = app.getInputDeviceHelper();
 		this.deviceId = deviceId;
@@ -238,24 +236,15 @@ class EditKeyAssignmentController implements IDialogController {
 	public void askChangeKeyCode(int keyCode) {
 		SelectKeyCodeFragment.showInstance(
 				activity.getSupportFragmentManager(),
-				targetFragment, appMode, deviceId, assignmentId, keyCode);
+				appMode, deviceId, assignmentId, keyCode);
 	}
 
-	@Nullable
-	public KeyAssignment getAssignment() {
-		return deviceHelper.findAssignment(appMode, deviceId, assignmentId);
-	}
-
-	public boolean isNightMode() {
-		return app.getDaynightHelper().isNightMode(usedOnMap);
-	}
-
-	public void addOrUpdateKeyCode(int oldKeyCode, int newKeyCode) {
-		if (oldKeyCode == KeyEvent.KEYCODE_UNKNOWN) {
-			deviceHelper.addAssignmentKeyCode(appMode, deviceId, assignmentId, newKeyCode);
-		} else {
-			deviceHelper.updateAssignmentKeyCode(appMode, deviceId, assignmentId, oldKeyCode, newKeyCode);
+	@Override
+	public void onKeyCodeSelected(int oldKeyCode, int newKeyCode) {
+		if (editBundle != null) {
+			editBundle.keyCodes.add((Integer) newKeyCode);
 		}
+		askRefreshDialog();
 	}
 
 	public void enterEditMode() {
@@ -273,14 +262,6 @@ class EditKeyAssignmentController implements IDialogController {
 		editBundle = null;
 	}
 
-	private void askRefreshDialog() {
-		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
-	}
-
-	private void askDismissDialog() {
-		app.getDialogManager().askDismissDialog(PROCESS_ID);
-	}
-
 	public boolean isInEditMode() {
 		return editBundle != null;
 	}
@@ -293,21 +274,44 @@ class EditKeyAssignmentController implements IDialogController {
 		// TODO
 	}
 
+	@Nullable
+	public KeyAssignment getAssignment() {
+		return deviceHelper.findAssignment(appMode, deviceId, assignmentId);
+	}
+
+	private void askRefreshDialog() {
+		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
+	}
+
+	private void askDismissDialog() {
+		app.getDialogManager().askDismissDialog(PROCESS_ID);
+	}
+
+	public boolean isNightMode() {
+		return app.getDaynightHelper().isNightMode(usedOnMap);
+	}
+
 	private static class EditingBundle {
 		KeyEventCommand command;
 		List<Integer> keyCodes;
 	}
 
+	@Nullable
+	public static EditKeyAssignmentController getInstance(@NonNull OsmandApplication app) {
+		DialogManager dialogManager = app.getDialogManager();
+		return (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
+	}
+
+	@NonNull
 	public static EditKeyAssignmentController getInstance(@NonNull OsmandApplication app,
 	                                                      @NonNull ApplicationMode appMode,
-	                                                      @NonNull Fragment targetFragment,
 	                                                      @NonNull String deviceId,
 	                                                      @NonNull String assignmentId,
 	                                                      boolean usedOnMap) {
 		DialogManager dialogManager = app.getDialogManager();
 		EditKeyAssignmentController controller = (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
 		if (controller == null) {
-			controller = new EditKeyAssignmentController(app, appMode, targetFragment, deviceId, assignmentId, usedOnMap);
+			controller = new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap);
 			dialogManager.register(PROCESS_ID, controller);
 		}
 		return controller;

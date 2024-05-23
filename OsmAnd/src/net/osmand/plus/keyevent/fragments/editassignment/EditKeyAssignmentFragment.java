@@ -30,14 +30,13 @@ import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
-import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class EditKeyAssignmentFragment extends BaseOsmAndFragment
-		implements IAskRefreshDialogCompletely, IAskDismissDialog, OnKeyCodeSelectedCallback, InputDevicesEventListener {
+		implements IAskRefreshDialogCompletely, IAskDismissDialog, InputDevicesEventListener {
 
 	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
 
@@ -51,13 +50,12 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Fragment thisFragment = this;
 		Bundle arguments = requireArguments();
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		String deviceId = arguments.getString(ATTR_DEVICE_ID, "");
 		String assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID, "");
-		controller = EditKeyAssignmentController.getInstance(app, appMode, thisFragment, deviceId, assignmentId, isUsedOnMap());
+		controller = EditKeyAssignmentController.getInstance(app, appMode, deviceId, assignmentId, isUsedOnMap());
 		app.getDialogManager().register(EditKeyAssignmentController.PROCESS_ID, this);
 	}
 
@@ -133,11 +131,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		int color = getPrimaryIconColor(app, nightMode);
 		int navIconId = controller.isInEditMode() ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app);
 		return getPaintedContentIcon(navIconId, color);
-	}
-
-	@Override
-	public void onKeyCodeSelected(int oldKeyCode, int newKeyCode) {
-		controller.addOrUpdateKeyCode(oldKeyCode, newKeyCode);
 	}
 
 	@Override
