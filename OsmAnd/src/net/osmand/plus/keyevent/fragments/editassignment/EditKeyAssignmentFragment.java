@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,12 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
-import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
@@ -41,9 +40,6 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
 
-	private static final String ATTR_DEVICE_ID = "attr_device_id";
-	private static final String ATTR_ASSIGNMENT_ID = "attr_key_assignment";
-
 	private EditKeyAssignmentAdapter adapter;
 	private EditKeyAssignmentController controller;
 	private ApplicationMode appMode;
@@ -54,9 +50,10 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		Bundle arguments = requireArguments();
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		String deviceId = arguments.getString(ATTR_DEVICE_ID, "");
-		String assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID, "");
-		controller = EditKeyAssignmentController.getInstance(app, appMode, deviceId, assignmentId, isUsedOnMap());
+		controller = EditKeyAssignmentController.getInstance(app);
+		if (controller == null) {
+			dismiss();
+		}
 		app.getDialogManager().register(PROCESS_ID, this);
 	}
 
@@ -226,15 +223,15 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		return nightMode;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
+	public static void showInstance(@NonNull OsmandApplication app,
+	                                @NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull String deviceId,
 	                                @NonNull String assignmentId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			EditKeyAssignmentController.registerInstance(app, appMode, deviceId, assignmentId, false);
 			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();
 			Bundle arguments = new Bundle();
-			arguments.putString(ATTR_DEVICE_ID, deviceId);
-			arguments.putString(ATTR_ASSIGNMENT_ID, assignmentId);
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);
 			manager.beginTransaction()

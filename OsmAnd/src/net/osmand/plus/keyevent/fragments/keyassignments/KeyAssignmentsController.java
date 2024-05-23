@@ -95,7 +95,7 @@ class KeyAssignmentsController {
 	public void askOpenAssignmentOverview(@NonNull KeyAssignment assignment) {
 		if (inputDevice != null) {
 			FragmentManager fm = activity.getSupportFragmentManager();
-			EditKeyAssignmentFragment.showInstance(fm, appMode, inputDevice.getId(), assignment.getId());
+			EditKeyAssignmentFragment.showInstance(app, fm, appMode, inputDevice.getId(), assignment.getId());
 		}
 	}
 

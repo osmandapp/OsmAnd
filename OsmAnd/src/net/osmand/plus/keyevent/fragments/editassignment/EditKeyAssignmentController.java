@@ -22,7 +22,6 @@ import android.widget.EditText;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
@@ -296,24 +295,19 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		List<Integer> keyCodes;
 	}
 
+	public static void registerInstance(@NonNull OsmandApplication app,
+	                                    @NonNull ApplicationMode appMode,
+	                                    @NonNull String deviceId,
+	                                    @NonNull String assignmentId,
+	                                    boolean usedOnMap) {
+		app.getDialogManager().register(
+				PROCESS_ID, new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap)
+		);
+	}
+
 	@Nullable
 	public static EditKeyAssignmentController getInstance(@NonNull OsmandApplication app) {
 		DialogManager dialogManager = app.getDialogManager();
 		return (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
-	}
-
-	@NonNull
-	public static EditKeyAssignmentController getInstance(@NonNull OsmandApplication app,
-	                                                      @NonNull ApplicationMode appMode,
-	                                                      @NonNull String deviceId,
-	                                                      @NonNull String assignmentId,
-	                                                      boolean usedOnMap) {
-		DialogManager dialogManager = app.getDialogManager();
-		EditKeyAssignmentController controller = (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
-		if (controller == null) {
-			controller = new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap);
-			dialogManager.register(PROCESS_ID, controller);
-		}
-		return controller;
 	}
 }
