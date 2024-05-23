@@ -28,9 +28,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.RequestMapThemeParams;
+import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.FlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +43,14 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	static final int HEADER_ITEM = 2;
 	static final int ADD_ACTION_ITEM = 3;
 	static final int ASSIGNED_ACTION_ITEM = 4;
-	static final int CARD_DIVIDER = 5;
+	static final int LIST_DIVIDER = 5;
 	static final int ASSIGNED_KEY_ITEM = 6;
 	static final int ADD_KEY_ITEM = 7;
 	static final int CARD_BOTTOM_SHADOW = 8;
 	static final int SPACE = 9;
+	static final int CARD_DIVIDER = 10;
+	static final int ASSIGNED_ACTION_OVERVIEW = 11;
+	static final int ASSIGNED_KEYS_OVERVIEW = 12;
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
@@ -80,12 +85,18 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			case ADD_KEY_ITEM:
 			case ASSIGNED_KEY_ITEM:
 				return new ActionItemViewHolder(inflate(R.layout.list_item_edit_key_assignment));
-			case CARD_DIVIDER:
+			case LIST_DIVIDER:
 				return new CardDividerViewHolder(inflate(R.layout.divider));
+			case CARD_DIVIDER:
+				return new CardDividerViewHolder(inflate(R.layout.list_item_divider));
 			case CARD_BOTTOM_SHADOW:
 				return new CardBottomShadowViewHolder(inflate(R.layout.card_bottom_divider));
 			case SPACE:
 				return new SpaceViewHolder(new View(context), getDimen(R.dimen.fab_margin_bottom_big));
+			case ASSIGNED_ACTION_OVERVIEW:
+				return new ActionItemViewHolder(inflate(R.layout.list_item_key_assignment_action_simple));
+			case ASSIGNED_KEYS_OVERVIEW:
+				return new AssignedKeysViewHolder(inflate(R.layout.list_item_assigned_keys_overview));
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -94,15 +105,28 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		int itemType = getItemViewType(position);
-		if (!equalsToAny(itemType, HEADER_ITEM, ADD_ACTION_ITEM, ASSIGNED_ACTION_ITEM, ADD_KEY_ITEM, ASSIGNED_KEY_ITEM)) {
-			return;
-		}
 		ScreenItem screenItem = screenItems.get(position);
 		if (itemType == HEADER_ITEM) {
 			HeaderViewHolder h = (HeaderViewHolder) holder;
 			h.title.setText(getString((Integer) screenItem.getValue()));
 			return;
-
+		} else if (itemType == ASSIGNED_ACTION_OVERVIEW) {
+			ActionItemViewHolder h = (ActionItemViewHolder) holder;
+			KeyEventCommand command = (KeyEventCommand) screenItem.getValue();
+			h.icon.setImageResource(command.getIconId());
+			h.title.setText(command.toHumanString(app));
+			return;
+		} else if (itemType == ASSIGNED_KEYS_OVERVIEW) {
+			AssignedKeysViewHolder h = (AssignedKeysViewHolder) holder;
+			h.flowLayout.removeAllViews();
+			List<Integer> keyCodes = (List<Integer>) screenItem.getValue();
+			for (Integer keycode : keyCodes) {
+				h.flowLayout.addView(createKeycodeView(keycode));
+			}
+			return;
+		}
+		if (!equalsToAny(itemType, ADD_ACTION_ITEM, ASSIGNED_ACTION_ITEM, ADD_KEY_ITEM, ASSIGNED_KEY_ITEM)) {
+			return;
 		}
 		ActionItemViewHolder h = (ActionItemViewHolder) holder;
 		if (itemType == ADD_ACTION_ITEM) {
@@ -141,6 +165,14 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 		}
 //		int color = appMode.getProfileColor(isNightMode());
 //		setupSelectableBackground(h.buttonView, color);
+	}
+
+	@NonNull
+	private View createKeycodeView(@NonNull Integer keyCode) {
+		View view = inflate(R.layout.item_key_assignment_button);
+		TextView title = view.findViewById(R.id.description);
+		title.setText(getKeySymbol(app, keyCode));
+		return view;
 	}
 
 	public void setScreenData(@NonNull List<ScreenItem> screenItems) {
@@ -224,13 +256,21 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 		public CardBottomShadowViewHolder(@NonNull View itemView) {
 			super(itemView);
 		}
-
 	}
 
 	static class SpaceViewHolder extends ViewHolder {
 		public SpaceViewHolder(@NonNull View itemView, int hSpace) {
 			super(itemView);
 			itemView.setLayoutParams(new LayoutParams(MATCH_PARENT, hSpace));
+		}
+	}
+
+	static class AssignedKeysViewHolder extends ViewHolder {
+		public FlowLayout flowLayout;
+
+		public AssignedKeysViewHolder(@NonNull View itemView) {
+			super(itemView);
+			flowLayout = itemView.findViewById(R.id.flow_layout);
 		}
 	}
 
@@ -250,7 +290,9 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			icon = itemView.findViewById(R.id.icon);
 			title = itemView.findViewById(R.id.title);
 			summaryContainer = itemView.findViewById(R.id.assigned_key);
-			summary = summaryContainer.findViewById(R.id.description);
+			if (summaryContainer != null) {
+				summary = summaryContainer.findViewById(R.id.description);
+			}
 		}
 	}
 

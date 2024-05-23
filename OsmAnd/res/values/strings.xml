@@ -11,7 +11,6 @@
 	Thx - Hardy
 -->
 
-    <string name="edit_key_assignment">Edite key assignment</string>
     <string name="new_key_assignment">New key assignment</string>
     <string name="key_name_pattern">Key \"%1$s\"</string>
     <string name="key_assignment_add_key">Add key</string>

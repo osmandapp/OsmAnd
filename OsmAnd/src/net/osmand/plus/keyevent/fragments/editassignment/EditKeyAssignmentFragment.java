@@ -3,6 +3,7 @@ package net.osmand.plus.keyevent.fragments.editassignment;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,9 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskRefreshDialogCompletely;
+import net.osmand.plus.base.dialog.interfaces.dialog.IDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.listener.EventType;
 import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
@@ -33,7 +37,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.widgets.dialogbutton.DialogButton;
 
 public class EditKeyAssignmentFragment extends BaseOsmAndFragment
-		implements OnKeyCodeSelectedCallback, InputDevicesEventListener {
+		implements IAskRefreshDialogCompletely, IAskDismissDialog, OnKeyCodeSelectedCallback, InputDevicesEventListener {
 
 	public static final String TAG = EditKeyAssignmentFragment.class.getSimpleName();
 
@@ -53,7 +57,8 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
 		String deviceId = arguments.getString(ATTR_DEVICE_ID, "");
 		String assignmentId = arguments.getString(ATTR_ASSIGNMENT_ID, "");
-		controller = new EditKeyAssignmentController(app, appMode, thisFragment, deviceId, assignmentId, isUsedOnMap());
+		controller = EditKeyAssignmentController.getInstance(app, appMode, thisFragment, deviceId, assignmentId, isUsedOnMap());
+		app.getDialogManager().register(EditKeyAssignmentController.PROCESS_ID, this);
 	}
 
 	@Nullable
@@ -78,26 +83,56 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		AppBarLayout appBar = view.findViewById(R.id.appbar);
 		appBar.setExpanded(AndroidUiHelper.isOrientationPortrait(requireActivity()));
 
-		int color = getPrimaryIconColor(app, nightMode);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
-		toolbar.setNavigationContentDescription(R.string.shared_string_close);
+		toolbar.setNavigationIcon(getNavigationIcon());
+		toolbar.setNavigationContentDescription(R.string.shared_string_exit);
 		toolbar.setNavigationOnClickListener(v -> {
-			dismiss();
+			if (controller.isInEditMode()) {
+				exitEditMode(view);
+			} else {
+				dismiss();
+			}
 		});
 
-		toolbar.inflateMenu(R.menu.edit_key_assignment_menu);
+		toolbar.inflateMenu(R.menu.key_assignment_overview_menu);
 		toolbar.setOnMenuItemClickListener(item -> {
 			int itemId = item.getItemId();
-			if (itemId == R.id.action_add_new_button) {
-				controller.askAddKeyCode();
+			if (itemId == R.id.action_edit) {
+				enterEditMode(view);
 				return true;
-			} else if (itemId == R.id.action_clear_key_assignment) {
-				controller.askClearKeyCodes();
+			} else if (itemId == R.id.action_overflow_menu) {
+				View itemView = view.findViewById(R.id.action_overflow_menu);
+				controller.showOverflowMenu(itemView);
 				return true;
 			}
 			return false;
 		});
+	}
+
+	private void enterEditMode(@NonNull View view) {
+		controller.enterEditMode();
+		onScreenModeChange(view, true);
+	}
+
+	private void exitEditMode(@NonNull View view) {
+		controller.exitEditMode();
+		onScreenModeChange(view, false);
+	}
+
+	private void onScreenModeChange(@NonNull View view, boolean editMode) {
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		toolbar.setNavigationIcon(getNavigationIcon());
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_edit), !editMode);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_overflow_menu), !editMode);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons), editMode);
+		updateViewContent(view);
+	}
+
+	@NonNull
+	private Drawable getNavigationIcon() {
+		int color = getPrimaryIconColor(app, nightMode);
+		int navIconId = controller.isInEditMode() ? R.drawable.ic_action_close : AndroidUtils.getNavigationIconResId(app);
+		return getPaintedContentIcon(navIconId, color);
 	}
 
 	@Override
@@ -113,10 +148,23 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		}
 	}
 
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		View view = getView();
+		if (view != null) {
+			updateViewContent(view);
+		}
+	}
+
 	private void updateViewContent(@NonNull View view) {
 		updateToolbarTitle(view);
 		updateSaveButton(view);
 		adapter.setScreenData(controller.populateScreenItems());
+	}
+
+	@Override
+	public void onAskDismissDialog(@NonNull String processId) {
+		dismiss();
 	}
 
 	private void updateToolbarTitle(@NonNull View view) {

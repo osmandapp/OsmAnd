@@ -3,43 +3,62 @@ package net.osmand.plus.keyevent.fragments.editassignment;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.ADD_ACTION_ITEM;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.ADD_KEY_ITEM;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.ASSIGNED_ACTION_ITEM;
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.ASSIGNED_ACTION_OVERVIEW;
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.ASSIGNED_KEYS_OVERVIEW;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.ASSIGNED_KEY_ITEM;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.CARD_BOTTOM_SHADOW;
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.CARD_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.CARD_TOP_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.HEADER_ITEM;
+import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.LIST_DIVIDER;
 import static net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentAdapter.SPACE;
+import static net.osmand.plus.utils.ColorUtilities.getActiveColor;
 
+import android.graphics.drawable.Drawable;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.EditText;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
+import net.osmand.plus.base.dialog.DialogManager;
+import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
+import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
+import net.osmand.plus.widgets.popup.PopUpMenu;
+import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
+import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-class EditKeyAssignmentController {
+class EditKeyAssignmentController implements IDialogController {
+
+	public static final String PROCESS_ID = "edit_key_assignment";
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final InputDevicesHelper deviceHelper;
 	private final String deviceId;
 	private final String assignmentId;
+	private EditingBundle editBundle;
 	private FragmentActivity activity;
-	private final AssignmentEditBundle editBundle = new AssignmentEditBundle();
 	private final Fragment targetFragment;
 	private final boolean usedOnMap;
 
@@ -56,13 +75,6 @@ class EditKeyAssignmentController {
 		this.deviceHelper = app.getInputDeviceHelper();
 		this.deviceId = deviceId;
 		this.assignmentId = assignmentId;
-		KeyAssignment keyAssignment = getAssignment();
-		if (keyAssignment != null) {
-			editBundle.command = keyAssignment.getCommand(app);
-			editBundle.keyCodes = keyAssignment.getKeyCodes();
-		} else {
-			editBundle.keyCodes = new ArrayList<>();
-		}
 	}
 
 	@NonNull
@@ -70,16 +82,33 @@ class EditKeyAssignmentController {
 		List<ScreenItem> screenItems = new ArrayList<>();
 		screenItems.add(new ScreenItem(CARD_TOP_DIVIDER));
 		screenItems.add(new ScreenItem(HEADER_ITEM, R.string.shared_string_action));
-		if (editBundle.command != null) {
-			screenItems.add(new ScreenItem(ASSIGNED_ACTION_ITEM, editBundle.command));
+		if (isInEditMode()) {
+			if (editBundle.command != null) {
+				screenItems.add(new ScreenItem(ASSIGNED_ACTION_ITEM, editBundle.command));
+				screenItems.add(new ScreenItem(CARD_DIVIDER));
+			} else {
+				screenItems.add(new ScreenItem(ADD_ACTION_ITEM));
+				screenItems.add(new ScreenItem(LIST_DIVIDER));
+			}
 		} else {
-			screenItems.add(new ScreenItem(ADD_ACTION_ITEM));
+			KeyAssignment assignment = getAssignment();
+			if (assignment != null) {
+				screenItems.add(new ScreenItem(ASSIGNED_ACTION_OVERVIEW, assignment.getCommand(app)));
+			}
+			screenItems.add(new ScreenItem(LIST_DIVIDER));
 		}
 		screenItems.add(new ScreenItem(HEADER_ITEM, R.string.assigned_keys));
-		for (Integer keyCode : editBundle.keyCodes) {
-			screenItems.add(new ScreenItem(ASSIGNED_KEY_ITEM, keyCode));
+		if (isInEditMode()) {
+			for (Integer keyCode : editBundle.keyCodes) {
+				screenItems.add(new ScreenItem(ASSIGNED_KEY_ITEM, keyCode));
+			}
+			screenItems.add(new ScreenItem(ADD_KEY_ITEM));
+		} else {
+			KeyAssignment assignment = getAssignment();
+			if (assignment != null) {
+				screenItems.add(new ScreenItem(ASSIGNED_KEYS_OVERVIEW, assignment.getKeyCodes()));
+			}
 		}
-		screenItems.add(new ScreenItem(ADD_KEY_ITEM));
 		screenItems.add(new ScreenItem(CARD_BOTTOM_SHADOW));
 		screenItems.add(new ScreenItem(SPACE));
 		return screenItems;
@@ -89,19 +118,103 @@ class EditKeyAssignmentController {
 		this.activity = activity;
 	}
 
+	public void showOverflowMenu(@Nullable View actionView) {
+		List<PopUpMenuItem> menuItems = new ArrayList<>();
+
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_rename)
+				.setIcon(getContentIcon(R.drawable.ic_action_edit_outlined))
+				.setOnClickListener(v -> askRenameAssignment())
+				.create()
+		);
+		menuItems.add(new PopUpMenuItem.Builder(activity)
+				.setTitleId(R.string.shared_string_remove)
+				.setIcon(getContentIcon(R.drawable.ic_action_delete_outlined))
+				.showTopDivider(true)
+				.setOnClickListener(v -> askRemoveAssignment())
+				.create()
+		);
+
+		PopUpMenuDisplayData displayData = new PopUpMenuDisplayData();
+		displayData.anchorView = actionView;
+		displayData.menuItems = menuItems;
+		displayData.nightMode = isNightMode();
+		PopUpMenu.show(displayData);
+	}
+
+	public void askRenameAssignment() {
+		String oldName = getCustomNameSummary();
+		showEnterNameDialog(oldName, newName -> {
+			onNameEntered(newName);
+			return true;
+		});
+	}
+
+	private void showEnterNameDialog(@Nullable String oldName,
+	                                 @NonNull CallbackWithObject<String> callback) {
+		boolean nightMode = isNightMode();
+
+		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
+				.setTitle(R.string.shared_string_name)
+				.setControlsColor(getActiveColor(activity, nightMode))
+				.setNegativeButton(R.string.shared_string_cancel, null);
+
+		dialogData.setPositiveButton(R.string.shared_string_apply, (dialog, which) -> {
+			Object extra = dialogData.getExtra(AlertDialogExtra.EDIT_TEXT);
+			if (extra instanceof EditText) {
+				EditText editText = (EditText) extra;
+				String newName = editText.getText().toString();
+				if (Objects.equals(oldName, newName)) {
+					return;
+				}
+				if (Algorithms.isBlank(newName)) {
+					app.showToastMessage(R.string.empty_name);
+				} else if (deviceHelper.hasAssignmentNameDuplicate(app, appMode, deviceId, newName)) {
+					app.showToastMessage(R.string.message_name_is_already_exists);
+				} else {
+					callback.processResult(newName.trim());
+				}
+			}
+		});
+		String caption = activity.getString(R.string.shared_string_name);
+		CustomAlert.showInput(dialogData, activity, oldName, caption);
+	}
+
+	private void onNameEntered(@NonNull String newName) {
+		deviceHelper.renameAssignment(appMode, deviceId, assignmentId, newName);
+	}
+
+	public void askRemoveAssignment() {
+		KeyAssignment assignment = getAssignment();
+		if (assignment != null && !assignment.hasKeyCodes()) {
+			app.showShortToastMessage(R.string.key_assignments_already_cleared_message);
+			return;
+		}
+		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
+				.setTitle(R.string.clear_key_assignment)
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
+					deviceHelper.removeKeyAssignmentCompletely(appMode, deviceId, assignmentId);
+					askDismissDialog();
+				});
+		CustomAlert.showSimpleMessage(dialogData, R.string.clear_key_assignment_desc);
+	}
+
 	@Nullable
 	public String getCustomNameSummary() {
 		KeyAssignment assignment = getAssignment();
 		return assignment != null ? assignment.getName(app) : null;
 	}
 
-	@NonNull
+	@Nullable
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return app.getUIUtilities().getThemedIcon(id);
+	}
+
+	@Nullable
 	public String getDialogTitle() {
-		if (editBundle.command != null) {
-			return editBundle.command.toHumanString(app);
-		}
-		return app.getString(getAssignment() != null
-				? R.string.edit_key_assignment : R.string.new_key_assignment);
+		KeyAssignment assignment = getAssignment();
+		return assignment != null? assignment.getName(app) : app.getString(R.string.new_key_assignment);
 	}
 
 	public void askAddAction() {
@@ -110,12 +223,12 @@ class EditKeyAssignmentController {
 
 	public void askDeleteAction() {
 		editBundle.command = null;
-		// TODO update menu
+		askRefreshDialog();
 	}
 
-	public void askDeleteKeyCode(int keyCode) {
+	public void askDeleteKeyCode(Integer keyCode) {
 		editBundle.keyCodes.remove(keyCode);
-		// TODO update menu
+		askRefreshDialog();
 	}
 
 	public void askAddKeyCode() {
@@ -126,21 +239,6 @@ class EditKeyAssignmentController {
 		SelectKeyCodeFragment.showInstance(
 				activity.getSupportFragmentManager(),
 				targetFragment, appMode, deviceId, assignmentId, keyCode);
-	}
-
-	public void askClearKeyCodes() {
-		KeyAssignment assignment = getAssignment();
-		if (assignment != null && !assignment.hasKeyCodes()) {
-			app.showShortToastMessage(R.string.key_assignments_already_cleared_message);
-			return;
-		}
-		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
-				.setTitle(R.string.clear_key_assignment)
-				.setNegativeButton(R.string.shared_string_cancel, null)
-				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
-					deviceHelper.clearAssignmentKeyCodes(appMode, deviceId, assignmentId);
-				});
-		CustomAlert.showSimpleMessage(dialogData, R.string.clear_key_assignment_desc);
 	}
 
 	@Nullable
@@ -160,16 +258,58 @@ class EditKeyAssignmentController {
 		}
 	}
 
+	public void enterEditMode() {
+		KeyAssignment assignment = getAssignment();
+		editBundle = new EditingBundle();
+		if (assignment != null) {
+			editBundle.command = assignment.getCommand(app);
+			editBundle.keyCodes = assignment.getKeyCodes();
+		} else {
+			editBundle.keyCodes = new ArrayList<>();
+		}
+	}
+
+	public void exitEditMode() {
+		editBundle = null;
+	}
+
+	private void askRefreshDialog() {
+		app.getDialogManager().askRefreshDialogCompletely(PROCESS_ID);
+	}
+
+	private void askDismissDialog() {
+		app.getDialogManager().askDismissDialog(PROCESS_ID);
+	}
+
+	public boolean isInEditMode() {
+		return editBundle != null;
+	}
+
 	public boolean hasChangesToSave() {
-		return editBundle.command != null && !Algorithms.isEmpty(editBundle.keyCodes);
+		return editBundle != null && editBundle.command != null && !Algorithms.isEmpty(editBundle.keyCodes);
 	}
 
 	public void saveChanges() {
 		// TODO
 	}
 
-	private static class AssignmentEditBundle {
+	private static class EditingBundle {
 		KeyEventCommand command;
 		List<Integer> keyCodes;
+	}
+
+	public static EditKeyAssignmentController getInstance(@NonNull OsmandApplication app,
+	                                                      @NonNull ApplicationMode appMode,
+	                                                      @NonNull Fragment targetFragment,
+	                                                      @NonNull String deviceId,
+	                                                      @NonNull String assignmentId,
+	                                                      boolean usedOnMap) {
+		DialogManager dialogManager = app.getDialogManager();
+		EditKeyAssignmentController controller = (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
+		if (controller == null) {
+			controller = new EditKeyAssignmentController(app, appMode, targetFragment, deviceId, assignmentId, usedOnMap);
+			dialogManager.register(PROCESS_ID, controller);
+		}
+		return controller;
 	}
 }

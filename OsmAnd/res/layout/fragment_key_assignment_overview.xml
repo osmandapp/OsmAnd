@@ -59,15 +59,6 @@
 						android:paddingHorizontal="@dimen/content_padding"
 						android:text="@string/assigned_keys" />
 
-					<net.osmand.plus.widgets.FlowLayout
-						android:id="@+id/assigned_keys"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginHorizontal="@dimen/content_padding_round_medium"
-						android:layout_marginBottom="@dimen/content_padding"
-						osmand:horizontalItemsSpacing="@dimen/content_padding_medium"
-						osmand:verticalItemsSpacing="@dimen/content_padding_small" />
-
 				</LinearLayout>
 
 				<include layout="@layout/card_bottom_divider" />

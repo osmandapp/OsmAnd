@@ -23,8 +23,8 @@
 				android:id="@+id/recycler_view"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:nestedScrollingEnabled="false"
 				android:clipToPadding="false"
+				android:nestedScrollingEnabled="false"
 				android:orientation="vertical"
 				android:scrollbars="none" />
 
@@ -70,6 +70,7 @@
 	</com.google.android.material.appbar.AppBarLayout>
 
 	<FrameLayout
+		android:id="@+id/bottom_buttons"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/dialog_button_ex_height"
 		android:layout_gravity="bottom"
@@ -79,12 +80,10 @@
 			android:id="@+id/save_button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			osmand:dialogButtonType="primary"
 			android:layout_gravity="center_vertical"
-			android:visibility="gone"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			tools:visibility="visible"
-			tools:dialogButtonTitle="@string/shared_string_save" />
+			osmand:dialogButtonTitle="@string/shared_string_save"
+			osmand:dialogButtonType="primary" />
 
 	</FrameLayout>
 

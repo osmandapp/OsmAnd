@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/list_item_height">
+	android:layout_height="@dimen/list_item_height"
+	android:background="?attr/list_background_color">
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/icon"
