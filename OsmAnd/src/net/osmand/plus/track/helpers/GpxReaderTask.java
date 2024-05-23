@@ -4,6 +4,7 @@ import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.DATA_VERSION;
 import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
 
 import android.os.AsyncTask;
@@ -116,12 +117,14 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		}
 		if (gpxFile.error == null) {
 			TrackPointsAnalyser analyser = PluginsHelper.getTrackPointsAnalyser();
-			GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified(), null, null, analyser);
-			item.setAnalysis(analysis);
+			item.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser));
+
 			long creationTime = item.requireParameter(FILE_CREATION_TIME);
 			if (creationTime <= 0) {
 				item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
 			}
+			item.setParameter(FILE_LAST_MODIFIED_TIME, file.lastModified());
+
 			setupNearestCityName(item);
 			double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);
 			if (additionalExaggeration < SRTMPlugin.MIN_VERTICAL_EXAGGERATION
