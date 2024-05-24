@@ -83,10 +83,11 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		SQLiteConnection conn = database.openConnection(false);
 		if (conn != null) {
 			try {
+				boolean isApplicationInitializing = app.isApplicationInitializing();
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (GpxDbUtils.isAnalyseNeeded(item) && !app.isApplicationInitializing()) {
+					if (GpxDbUtils.isAnalyseNeeded(item) && !isApplicationInitializing) {
 						item = updateGpxDataItem(conn, item);
 					}
 					if (listener != null) {
