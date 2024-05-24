@@ -38,21 +38,19 @@ public class NominatimPoiFilter extends PoiUIFilter {
 	private String lastError = "";
 	private final boolean bboxSearch;
 	
-	public NominatimPoiFilter(OsmandApplication application, boolean useBbox) {
+	public NominatimPoiFilter(OsmandApplication application, boolean noBbox) {
 		super(application);
-		this.bboxSearch = useBbox;
+		this.bboxSearch = !noBbox;
 		this.name = app.getString(R.string.poi_filter_nominatim);
 		if (!bboxSearch) {
 			this.name += " - " + app.getString(R.string.shared_string_address);
+			this.distanceToSearchValues = new double[] {500, 10000};
+			this.filterId = FILTER_ID + "_address";
 		} else {
 			this.name += " - " + app.getString(R.string.shared_string_places);
-		}
-		if (!bboxSearch) {
-			this.distanceToSearchValues = new double[] {500, 10000};
-		} else {
 			this.distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 100, 500, 10000};
+			this.filterId = FILTER_ID + "_places";
 		}
-		this.filterId = FILTER_ID + (!bboxSearch ? "_address" : "_places");
 	}
 	
 
