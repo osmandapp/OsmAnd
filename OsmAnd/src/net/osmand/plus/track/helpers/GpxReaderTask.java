@@ -86,7 +86,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (GpxDbUtils.isAnalyseNeeded(item)) {
+					if (GpxDbUtils.isAnalyseNeeded(item) && !app.isApplicationInitializing()) {
 						item = updateGpxDataItem(conn, item);
 					}
 					if (listener != null) {
