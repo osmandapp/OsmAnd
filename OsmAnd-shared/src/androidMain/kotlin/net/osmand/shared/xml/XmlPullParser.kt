@@ -1,0 +1,197 @@
+package net.osmand.shared.xml
+
+import android.util.Xml
+import okio.IOException
+import okio.Source
+import okio.buffer
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
+import java.io.File
+import java.io.FileInputStream
+import java.io.InputStream
+
+actual class XmlPullParser {
+	private val parser: XmlPullParser = Xml.newPullParser()
+	private var inputStream: InputStream? = null
+
+	@Throws(XmlParserException::class)
+	actual fun setFeature(name: String, state: Boolean) = try {
+		parser.setFeature(name, state)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	actual fun getFeature(name: String): Boolean = parser.getFeature(name)
+
+	@Throws(XmlParserException::class)
+	actual fun setProperty(name: String, value: Any?) = try {
+		parser.setProperty(name, value)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	actual fun getProperty(name: String): Any? = parser.getProperty(name)
+
+	@Throws(XmlParserException::class)
+	actual fun setInput(filePath: String, inputEncoding: String?) {
+		inputStream = FileInputStream(File(filePath))
+		parser.setInput(inputStream, inputEncoding)
+	}
+
+	@Throws(IOException::class)
+	actual fun close() {
+		inputStream?.close()
+	}
+
+	@Throws(XmlParserException::class)
+	actual fun setInput(input: Source, inputEncoding: String?) {
+		val inputBuffer = input.buffer()
+		val inputStream = object : InputStream() {
+			override fun read(): Int = inputBuffer.readByte().toInt()
+
+			override fun read(b: ByteArray?): Int = b?.let { inputBuffer.read(it) } ?: -1
+
+			override fun read(b: ByteArray?, off: Int, len: Int): Int =
+				b?.let { inputBuffer.read(it, off, len) } ?: -1
+
+			override fun skip(n: Long): Long {
+				inputBuffer.skip(n)
+				return n
+			}
+
+			override fun readNBytes(len: Int): ByteArray = inputBuffer.readByteArray(len.toLong())
+
+			override fun readNBytes(b: ByteArray?, off: Int, len: Int): Int =
+				b?.let { inputBuffer.read(it, off, len) } ?: -1
+
+			override fun readAllBytes(): ByteArray = inputBuffer.readByteArray()
+
+			override fun close() = inputBuffer.close()
+		}
+		parser.setInput(inputStream, inputEncoding)
+	}
+
+	actual fun getInputEncoding(): String? = parser.inputEncoding
+
+	@Throws(XmlParserException::class)
+	actual fun defineEntityReplacementText(entityName: String, replacementText: String) = try {
+		parser.defineEntityReplacementText(entityName, replacementText)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class)
+	actual fun getNamespaceCount(depth: Int): Int = try {
+		parser.getNamespaceCount(depth)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class)
+	actual fun getNamespacePrefix(pos: Int): String? = try {
+		parser.getNamespacePrefix(pos)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class)
+	actual fun getNamespaceUri(pos: Int): String? = try {
+		parser.getNamespaceUri(pos)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	actual fun getNamespace(prefix: String?): String? = parser.namespace
+
+	actual fun getDepth(): Int = parser.depth
+
+	actual fun getPositionDescription(): String? = parser.positionDescription
+
+	actual fun getLineNumber(): Int = parser.lineNumber
+
+	actual fun getColumnNumber(): Int = parser.columnNumber
+
+	@Throws(XmlParserException::class)
+	actual fun isWhitespace(): Boolean = try {
+		parser.isWhitespace
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	actual fun getText(): String? = parser.text
+
+	actual fun getTextCharacters(holderForStartAndLength: IntArray): CharArray? =
+		parser.getTextCharacters(holderForStartAndLength)
+
+	actual fun getNamespace(): String? = parser.namespace
+
+	actual fun getName(): String? = parser.name
+
+	actual fun getPrefix(): String? = parser.prefix
+
+	@Throws(XmlParserException::class)
+	actual fun isEmptyElementTag(): Boolean = try {
+		parser.isEmptyElementTag
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	actual fun getAttributeCount(): Int = parser.attributeCount
+
+	actual fun getAttributeNamespace(index: Int): String? = parser.getAttributeNamespace(index)
+
+	actual fun getAttributeName(index: Int): String? = parser.getAttributeName(index)
+
+	actual fun getAttributePrefix(index: Int): String? = parser.getAttributePrefix(index)
+
+	actual fun getAttributeType(index: Int): String? = parser.getAttributeType(index)
+
+	actual fun isAttributeDefault(index: Int): Boolean = parser.isAttributeDefault(index)
+
+	actual fun getAttributeValue(index: Int): String? = parser.getAttributeValue(index)
+
+	actual fun getAttributeValue(namespace: String?, name: String?): String? =
+		parser.getAttributeValue(namespace, name)
+
+	@Throws(XmlParserException::class)
+	actual fun getEventType(): Int = try {
+		parser.eventType
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	actual fun next(): Int = try {
+		parser.next()
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	actual fun nextToken(): Int = try {
+		parser.nextToken()
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	actual fun require(type: Int, namespace: String?, name: String?) = try {
+		parser.require(type, namespace, name)
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	actual fun nextText(): String = try {
+		parser.nextText()
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+
+	@Throws(XmlParserException::class, IOException::class)
+	actual fun nextTag(): Int = try {
+		parser.nextTag()
+	} catch (e: XmlPullParserException) {
+		throw XmlParserException(e.message, e)
+	}
+}

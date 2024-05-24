@@ -28,12 +28,17 @@ kotlin {
     val sqliteVersion = "2.3.1"
     val sqlDelightVersion = "1.5.4"
     val serializationVersion = "1.6.3"
+    val coroutinesCoreVersion = "1.8.1"
+    val datetimeVersion = "0.6.0"
+    val okioVersion = "3.9.0"
 
     sourceSets {
         commonMain.dependencies {
             implementation("org.jetbrains.kotlin:kotlin-stdlib")
             implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
+            implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
+            implementation("com.squareup.okio:okio:$okioVersion")
             implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
         }
         androidMain.dependencies {

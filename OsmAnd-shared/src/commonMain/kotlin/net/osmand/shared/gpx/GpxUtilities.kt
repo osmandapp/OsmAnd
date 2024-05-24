@@ -1,11 +1,21 @@
 package net.osmand.shared.gpx
 
+import kotlinx.datetime.*
+import kotlinx.datetime.format.DateTimeFormat
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
+import net.osmand.shared.data.QuadRect
 import net.osmand.shared.gpx.SplitMetric.*
 import net.osmand.shared.util.Algorithms
 import net.osmand.shared.util.Algorithms.hash
+import net.osmand.shared.util.LoggerFactory
+import net.osmand.shared.util.MapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
+import kotlin.math.round
 
 object GpxUtilities {
+
+	val log = LoggerFactory.getLogger("GpxUtilities")
 
 	const val ICON_NAME_EXTENSION = "icon"
 	const val BACKGROUND_TYPE_EXTENSION = "background"
@@ -33,7 +43,6 @@ object GpxUtilities {
 	const val TRAVEL_GPX_CONVERT_MULT_1 = 2
 	const val TRAVEL_GPX_CONVERT_MULT_2 = 5
 
-	var GPX_TIME_OLD_FORMAT = false
 	private const val GPX_TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 	private const val GPX_TIME_NO_TIMEZONE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss"
 	private const val GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX"
@@ -719,6 +728,8 @@ object GpxUtilities {
 		var names: String? = null
 
 		companion object {
+			const val START_TRKPT_IDX_ATTR = "startTrkptIdx"
+
 			fun fromStringBundle(bundle: StringBundle): RouteSegment {
 				val s = RouteSegment()
 				s.id = bundle.getString("id", null)
@@ -810,13 +821,12 @@ object GpxUtilities {
 		}
 
 		override fun hashCode(): Int {
-			return Objects.hash(name, iconName, backgroundType, color, points, hidden)
+			return hash(name, iconName, backgroundType, color, points, hidden)
 		}
 
 		override fun equals(other: Any?): Boolean {
 			if (this === other) return true
-			if (other == null || javaClass != other.javaClass) return false
-			other as PointsGroup
+			if (other == null || other !is PointsGroup) return false
 			return color == other.color &&
 					hidden == other.hidden &&
 					name == other.name &&
@@ -827,7 +837,7 @@ object GpxUtilities {
 
 		fun toStringBundle(): StringBundle {
 			val bundle = StringBundle()
-			bundle.putString("name", name ?: "")
+			bundle.putString("name", name)
 			if (color != 0) {
 				bundle.putString("color", Algorithms.colorToString(color))
 			}
@@ -1194,10 +1204,10 @@ object GpxUtilities {
 	}
 
 	private fun writeWpt(serializer: XmlSerializer, p: WptPt, progress: IProgress?) {
-		serializer.attribute(null, "lat", LAT_LON_FORMAT.format(p.lat))
-		serializer.attribute(null, "lon", LAT_LON_FORMAT.format(p.lon))
+		serializer.attribute(null, "lat", formatLatLon(p.lat))
+		serializer.attribute(null, "lon", formatLatLon(p.lon))
 		if (!p.ele.isNaN()) {
-			writeNotNullText(serializer, POINT_ELEVATION, DECIMAL_FORMAT.format(p.ele))
+			writeNotNullText(serializer, POINT_ELEVATION, formatDecimal(p.ele))
 		}
 		if (p.time != 0L) {
 			writeNotNullText(serializer, "time", formatTime(p.time))
@@ -1208,15 +1218,15 @@ object GpxUtilities {
 		writeNotNullText(serializer, "type", p.category)
 		writeNotNullText(serializer, "cmt", p.comment)
 		if (!p.hdop.isNaN()) {
-			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop))
+			writeNotNullText(serializer, "hdop", formatDecimal(p.hdop))
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite()[POINT_SPEED] = DECIMAL_FORMAT.format(p.speed)
+			p.getExtensionsToWrite()[POINT_SPEED] = formatDecimal(p.speed)
 		}
 		if (!p.heading.isNaN()) {
-			p.getExtensionsToWrite()["heading"] = Math.round(p.heading).toString()
+			p.getExtensionsToWrite()["heading"] = round(p.heading).toString()
 		}
-		val extensions = p.getExtensionsToRead()
+		val extensions = p.getExtensionsToRead().toMutableMap()
 		if (serializer.name != "rtept") {
 			extensions.remove(PROFILE_TYPE_EXTENSION)
 			extensions.remove(TRKPT_INDEX_EXTENSION)
@@ -1303,10 +1313,10 @@ object GpxUtilities {
 
 	private fun writeBounds(serializer: XmlSerializer, bounds: Bounds) {
 		serializer.startTag(null, "bounds")
-		serializer.attribute(null, "minlat", LAT_LON_FORMAT.format(bounds.minlat))
-		serializer.attribute(null, "minlon", LAT_LON_FORMAT.format(bounds.minlon))
-		serializer.attribute(null, "maxlat", LAT_LON_FORMAT.format(bounds.maxlat))
-		serializer.attribute(null, "maxlon", LAT_LON_FORMAT.format(bounds.maxlon))
+		serializer.attribute(null, "minlat", formatLatLon(bounds.minlat))
+		serializer.attribute(null, "minlon", formatLatLon(bounds.minlon))
+		serializer.attribute(null, "maxlat", formatLatLon(bounds.maxlat))
+		serializer.attribute(null, "maxlon", formatLatLon(bounds.maxlon))
 		serializer.endTag(null, "bounds")
 	}
 
@@ -1376,47 +1386,41 @@ object GpxUtilities {
 
 	fun formatTime(time: Long): String {
 		val format = getTimeFormatter()
-		return format.format(Date(time))
+		return format.format(Instant.fromEpochMilliseconds(time).toLocalDateTime(TimeZone.UTC))
 	}
 
 	fun parseTime(text: String): Long {
-		return if (GPX_TIME_OLD_FORMAT) {
-			parseTime(text, getTimeFormatter())
-		} else {
-			parseTime(text, getTimeFormatterTZ())
-		}
+		return parseTime(text, getTimeFormatterTZ())
 	}
 
-	fun parseTime(text: String, format: SimpleDateFormat): Long {
+	fun parseTime(text: String, format: DateTimeFormat<LocalDateTime>): Long {
 		var time: Long = 0
-		if (text != null) {
+		try {
+			time = flexibleGpxTimeParser(text, format)
+		} catch (e: Exception) {
 			try {
-				time = flexibleGpxTimeParser(text, format)
-			} catch (e1: ParseException) {
-				try {
-					time = getTimeNoTimeZoneFormatter().parse(text)?.time ?: 0
-				} catch (e3: ParseException) {
-					e3.printStackTrace()
-				}
+				time = getTimeNoTimeZoneFormatter().parse(text).toInstant(TimeZone.UTC).toEpochMilliseconds()
+			} catch (e: Exception) {
+				log.error("Failed to parse date $text", e)
 			}
 		}
 		return time
 	}
 
-	@Throws(ParseException::class)
-	private fun flexibleGpxTimeParser(text: String, parser: SimpleDateFormat): Long {
-		var text = text
+	@Throws(Exception::class)
+	private fun flexibleGpxTimeParser(timeStr: String, parser: DateTimeFormat<LocalDateTime>): Long {
+		var text = timeStr
 		var ms = 0.0
 		val isIndex = text.indexOf('.')
 		if (isIndex > 0) {
 			var esIndex = isIndex + 1
-			while (esIndex < text.length && isDigit(text[esIndex])) {
+			while (esIndex < text.length && text[esIndex].isDigit()) {
 				esIndex++
 			}
-			ms = "0" + text.substring(isIndex, esIndex).toDouble()
+			ms = ("0" + text.substring(isIndex, esIndex)).toDouble()
 			text = text.substring(0, isIndex) + text.substring(esIndex)
 		}
-		return parser.parse(text)?.time?.plus((ms * 1000).toLong()) ?: 0
+		return parser.parse(text).toInstant(TimeZone.UTC).toEpochMilliseconds() + (ms * 1000).toLong()
 	}
 
 	fun getCreationTime(gpxFile: GPXFile?): Long {
@@ -1432,27 +1436,30 @@ object GpxUtilities {
 			}
 		}
 		if (time == 0L) {
-			time = System.currentTimeMillis()
+			time = currentTimeMillis()
 		}
 		return time
 	}
 
-	private fun getTimeFormatter(): SimpleDateFormat {
-		val format = SimpleDateFormat(GPX_TIME_PATTERN, Locale.US)
-		format.timeZone = TimeZone.getTimeZone("UTC")
-		return format
+	private fun getTimeFormatter(): DateTimeFormat<LocalDateTime> {
+		@OptIn(FormatStringsInDatetimeFormats::class)
+		return LocalDateTime.Format {
+			byUnicodePattern(GPX_TIME_PATTERN)
+		}
 	}
 
-	private fun getTimeNoTimeZoneFormatter(): SimpleDateFormat {
-		val format = SimpleDateFormat(GPX_TIME_NO_TIMEZONE_PATTERN, Locale.US)
-		format.timeZone = TimeZone.getTimeZone("UTC")
-		return format
+	private fun getTimeNoTimeZoneFormatter(): DateTimeFormat<LocalDateTime> {
+		@OptIn(FormatStringsInDatetimeFormats::class)
+		return LocalDateTime.Format {
+			byUnicodePattern(GPX_TIME_NO_TIMEZONE_PATTERN)
+		}
 	}
 
-	private fun getTimeFormatterTZ(): SimpleDateFormat {
-		val format = SimpleDateFormat(GPX_TIME_PATTERN_TZ, Locale.US)
-		format.timeZone = TimeZone.getTimeZone("UTC")
-		return format
+	private fun getTimeFormatterTZ(): DateTimeFormat<LocalDateTime> {
+		@OptIn(FormatStringsInDatetimeFormats::class)
+		return LocalDateTime.Format {
+			byUnicodePattern(GPX_TIME_PATTERN_TZ)
+		}
 	}
 
 	fun loadGPXFile(file: File): GPXFile {
@@ -1504,7 +1511,7 @@ object GpxUtilities {
 			val routeTrack = Track()
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
-			val parserState = Stack<GPXExtensions>()
+			val parserState = ArrayDeque<GPXExtensions>()
 			var firstSegment: TrkSegment? = null
 			var extensionReadMode = false
 			var routePointExtension = false
@@ -1515,11 +1522,11 @@ object GpxUtilities {
 			var typesExtension = false
 			var pointsGroupsExtension = false
 			var networkRoute = false
-			parserState.push(gpxFile)
+			parserState.add(gpxFile)
 			var tok: Int
 			while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
-					val parse = parserState.peek()
+					val parse = parserState.lastOrNull()
 					val tag = parser.name
 					if (extensionReadMode && parse != null && !routePointExtension) {
 						val tagName = tag.lowercase(Locale.getDefault())
@@ -1596,7 +1603,7 @@ object GpxUtilities {
 						if (tag == "rpt") {
 							val wptPt = parseWptAttributes(parser)
 							routeTrackSegment.points.add(wptPt)
-							parserState.push(wptPt)
+							parserState.add(wptPt)
 						}
 					} else {
 						when (parse) {
@@ -1606,25 +1613,25 @@ object GpxUtilities {
 									"metadata" -> {
 										val metadata = Metadata()
 										parse.metadata = metadata
-										parserState.push(metadata)
+										parserState.add(metadata)
 									}
 
 									"trk" -> {
 										val track = Track()
 										parse.tracks.add(track)
-										parserState.push(track)
+										parserState.add(track)
 									}
 
 									"rte" -> {
 										val route = Route()
 										parse.routes.add(route)
-										parserState.push(route)
+										parserState.add(route)
 									}
 
 									"wpt" -> {
 										val wptPt = parseWptAttributes(parser)
 										parse.points.add(wptPt)
-										parserState.push(wptPt)
+										parserState.add(wptPt)
 									}
 								}
 							}
@@ -1637,7 +1644,7 @@ object GpxUtilities {
 										val author = Author()
 										author.name = parser.text
 										parse.author = author
-										parserState.push(author)
+										parserState.add(author)
 									}
 
 									"copyright" -> {
@@ -1645,7 +1652,7 @@ object GpxUtilities {
 										copyright.license = parser.text
 										copyright.author = parser.getAttributeValue("", "author")
 										parse.copyright = copyright
-										parserState.push(copyright)
+										parserState.add(copyright)
 									}
 
 									"link" -> parse.link = parser.getAttributeValue("", "href")
@@ -1658,7 +1665,7 @@ object GpxUtilities {
 									"bounds" -> {
 										val bounds = parseBoundsAttributes(parser)
 										parse.bounds = bounds
-										parserState.push(bounds)
+										parserState.add(bounds)
 									}
 								}
 							}
@@ -1692,7 +1699,7 @@ object GpxUtilities {
 									"rtept" -> {
 										val wptPt = parseWptAttributes(parser)
 										parse.points.add(wptPt)
-										parserState.push(wptPt)
+										parserState.add(wptPt)
 									}
 								}
 							}
@@ -1704,7 +1711,7 @@ object GpxUtilities {
 									"trkseg" -> {
 										val trkSeg = TrkSegment()
 										parse.segments.add(trkSeg)
-										parserState.push(trkSeg)
+										parserState.add(trkSeg)
 									}
 
 									"trkpt", "rpt" -> {
@@ -1713,7 +1720,7 @@ object GpxUtilities {
 											parse.segments.add(TrkSegment())
 										}
 										parse.segments.last().points.add(wptPt)
-										parserState.push(wptPt)
+										parserState.add(wptPt)
 									}
 								}
 							}
@@ -1724,7 +1731,7 @@ object GpxUtilities {
 									"trkpt", "rpt" -> {
 										val wptPt = parseWptAttributes(parser)
 										parse.points.add(wptPt)
-										parserState.push(wptPt)
+										parserState.add(wptPt)
 									}
 
 									"csvattributes" -> {
@@ -1802,7 +1809,7 @@ object GpxUtilities {
 						}
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
-					val parse = parserState.peek()
+					val parse = parserState.lastOrNull()
 					val tag = parser.name
 
 					if (tag.equals("routepointextension", ignoreCase = true)) {
@@ -1826,55 +1833,50 @@ object GpxUtilities {
 
 					when (tag) {
 						"metadata" -> {
-							val pop = parserState.pop() as Metadata
+							val pop = parserState.removeLast() as Metadata
 							pop.readDescription()
 						}
 
 						"author" -> {
 							if (parse is Author) {
-								parserState.pop()
+								parserState.removeLast()
 							}
 						}
 
 						"copyright" -> {
 							if (parse is Copyright) {
-								parserState.pop()
+								parserState.removeLast()
 							}
 						}
 
 						"bounds" -> {
 							if (parse is Bounds) {
-								parserState.pop()
+								parserState.removeLast()
 							}
 						}
 
 						"trkpt" -> {
-							val pop = parserState.pop()
-							assert(pop is WptPt)
+							val pop = parserState.removeLast()
 						}
 
 						"wpt" -> {
-							val pop = parserState.pop()
-							assert(pop is WptPt)
+							val pop = parserState.removeLast()
 						}
 
 						"rtept" -> {
-							val pop = parserState.pop()
-							assert(pop is WptPt)
+							val pop = parserState.removeLast()
 						}
 
 						"trk" -> {
-							val pop = parserState.pop()
-							assert(pop is Track)
+							val pop = parserState.removeLast()
 						}
 
 						"rte" -> {
-							val pop = parserState.pop()
-							assert(pop is Route)
+							val pop = parserState.removeLast()
 						}
 
 						"trkseg" -> {
-							val pop = parserState.pop()
+							val pop = parserState.removeLast()
 							if (pop is TrkSegment) {
 								pop.routeSegments = routeSegments
 								pop.routeTypes = routeTypes
@@ -1884,12 +1886,10 @@ object GpxUtilities {
 									firstSegment = pop
 								}
 							}
-							assert(pop is TrkSegment)
 						}
 
 						"rpt" -> {
-							val pop = parserState.pop()
-							assert(pop is WptPt)
+							val pop = parserState.removeLast()
 						}
 					}
 				}
@@ -1912,7 +1912,6 @@ object GpxUtilities {
 			}
 		} catch (e: Exception) {
 			gpxFile.error = e
-			e.printStackTrace()
 		}
 
 		return gpxFile

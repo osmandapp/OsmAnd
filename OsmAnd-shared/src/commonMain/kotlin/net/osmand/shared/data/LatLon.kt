@@ -1,6 +1,7 @@
 package net.osmand.shared.data
 
 import kotlinx.serialization.Serializable
+import net.osmand.shared.util.MapUtils
 import kotlin.math.floor
 
 @Serializable
@@ -20,7 +21,7 @@ data class LatLon(val latitude: Double, val longitude: Double) {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
 		other as LatLon
-		return false//MapUtils.areLatLonEqual(this, other)
+		return MapUtils.areLatLonEqual(this, other)
 	}
 
 	override fun toString(): String {
