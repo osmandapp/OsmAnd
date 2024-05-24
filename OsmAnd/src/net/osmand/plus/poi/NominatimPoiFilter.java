@@ -111,7 +111,7 @@ public class NominatimPoiFilter extends PoiUIFilter {
 						if (err != null && err.length() > 0) {
 							lastError = err;
 							stream.close();
-							return currentSearchResult;
+							break;
 						}
 					}
 					if (parser.getName().equals("place")) { //$NON-NLS-1$
