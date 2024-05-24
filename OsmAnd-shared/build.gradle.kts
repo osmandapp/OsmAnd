@@ -1,6 +1,7 @@
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
+    id("org.jetbrains.kotlin.plugin.serialization")
     id("com.android.library")
 }
 
@@ -26,9 +27,13 @@ kotlin {
 
     val sqliteVersion = "2.3.1"
     val sqlDelightVersion = "1.5.4"
+    val serializationVersion = "1.6.3"
 
     sourceSets {
         commonMain.dependencies {
+            implementation("org.jetbrains.kotlin:kotlin-stdlib")
+            implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
             implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
         }
         androidMain.dependencies {
