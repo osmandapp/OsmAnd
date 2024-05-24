@@ -336,7 +336,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							AbstractPoiType uselectedPoiType = searchUICore.getUnselectedPoiType();
 							if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 								app.getPoiFilters().resetNominatimFilters();
-								filter = app.getPoiFilters().getNominatimPOIFilter();
+								filter = app.getPoiFilters().getNominatimAddressFilter();
 								filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
 								filter.clearCurrentResults();
 							} else if (uselectedPoiType != null) {
