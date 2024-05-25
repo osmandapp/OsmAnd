@@ -224,10 +224,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
-			Drawable icon = app.getUIUtilities().getPaintedIcon(
-					getItemIconRes(app, item), getItemIconColor(app, item));
-			holder.icon.setImageDrawable(icon);
-
+			holder.icon.setImageDrawable(getIcon(app, item));
 			holder.title.setText(getItemName(context, item));
 
 			holder.handleView.setOnTouchListener((v, event) -> {
@@ -351,6 +348,10 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected abstract void saveListToParams(List<T> list);
 
 	protected abstract String getItemName(Context context, T item);
+	protected Drawable getIcon(@NonNull OsmandApplication app, T item){
+		return app.getUIUtilities().getPaintedIcon(
+				getItemIconRes(app, item), getItemIconColor(app, item));
+	}
 
 	@DrawableRes
 	protected int getItemIconRes(Context context, T item) {
