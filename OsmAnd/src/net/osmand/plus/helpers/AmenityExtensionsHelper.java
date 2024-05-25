@@ -11,6 +11,7 @@ import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
@@ -19,12 +20,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AmenityExtensionsHelper {
+
+	private static final Log LOG = PlatformUtil.getLog(AmenityExtensionsHelper.class);
 
 	private static final String COLLAPSABLE_PREFIX = "collapsable_";
 	private static final List<String> HIDING_EXTENSIONS_AMENITY_TAGS = Arrays.asList("phone", "website");
@@ -103,5 +110,30 @@ public class AmenityExtensionsHelper {
 			}
 		}
 		return result;
+	}
+
+	public Map<String, String> getImagesParams(Map<String, String> amenityExtensions) {
+		Map<String, String> params = new HashMap<>();
+		List<String> imageTags = Arrays.asList("image", Amenity.MAPILLARY, Amenity.WIKIDATA, Amenity.WIKIPEDIA, Amenity.WIKIMEDIA_COMMONS);
+		for (String imageTag : imageTags) {
+			String value = amenityExtensions.get(imageTag);
+			if (!Algorithms.isEmpty(value)) {
+				if (imageTag.equals("image")) {
+					params.put("osm_image", getDecodedAdditionalInfo(value));
+				} else {
+					params.put(imageTag, getDecodedAdditionalInfo(value));
+				}
+			}
+		}
+		return params;
+	}
+
+	private String getDecodedAdditionalInfo(String additionalInfo) {
+		try {
+			return URLDecoder.decode(additionalInfo, "UTF-8");
+		} catch (UnsupportedEncodingException | IllegalArgumentException e) {
+			LOG.error(e);
+		}
+		return additionalInfo;
 	}
 }
