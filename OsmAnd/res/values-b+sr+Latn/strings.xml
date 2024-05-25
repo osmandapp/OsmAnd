@@ -5732,4 +5732,5 @@
     <string name="steps_per_minute_unit">KPM</string>
     <string name="disable_map_layers_descr">Onemogućite sve slojeve mape iznad vektorske mape (potrebno je ponovno pokretanje).</string>
     <string name="disable_map_layers">Onemogući slojeve mape</string>
+    <string name="height_legend_description">Za vizualizaciju reljefa koriste se mape visina u boji.</string>
 </resources>
