@@ -18,8 +18,8 @@
     <string name="local_index_tile_data_expire">Ističe za (minuta): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Najveće uveličanje: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Eliptična Merkator projekcija</string>
-    <string name="edit_tilesource_maxzoom">Najveći zum</string>
-    <string name="edit_tilesource_minzoom">Najmanji zum</string>
+    <string name="edit_tilesource_maxzoom">Maksimalan zum</string>
+    <string name="edit_tilesource_minzoom">Minimalan zum</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izaberi postojeći…</string>
     <string name="driving_region_japan">Japan</string>
@@ -5514,7 +5514,7 @@
     <string name="shared_string_is_deleted">%1$s je obrisan.</string>
     <string name="shared_string_delete_immediately">Obriši odmah</string>
     <string name="shared_string_delete_item">Obriši stavku</string>
-    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\". (Nijedna putanja neće biti izbrisana.)</string>
     <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
     <string name="empty_name">Prazan naziv</string>
     <string name="loading_tracks">Ponovno učitavanje staza</string>
