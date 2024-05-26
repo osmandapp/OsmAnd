@@ -5482,7 +5482,7 @@
     <string name="empty_name">Üres név</string>
     <string name="edit_filter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
-    <string name="delete_smart_folder_dialog_message">Ez eltávolítja a következő okosmappát: \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Ez eltávolítja a következő okosmappát: \"%1$s\". (Nyomvonal nem lesz törölve.)</string>
     <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
     <string name="empty_smart_folder_description">Az egyező nyomvonalak itt jelennek meg</string>
     <string name="configure_filter">Szűrő konfigurálása</string>
