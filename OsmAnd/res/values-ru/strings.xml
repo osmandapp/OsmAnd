@@ -5676,7 +5676,7 @@
     <string name="fix_north_up">Зафиксировать север сверху</string>
     <string name="fix_north_up_descr">Не поворачивать карту жестами при ориентации карты «Север сверху»</string>
     <string name="unchanged_parameter_summary">Каждый трек сохраняет свои собственные параметры.</string>
-    <string name="change_default_appearance_confirmation">Изменить внешний вид %1$s по умолчанию?</string>
+    <string name="change_default_appearance_confirmation">Изменить стандартный внешний вид %1$s?</string>
     <string name="apply_only_to_new">Применять только к новым</string>
     <string name="change_default_tracks_appearance_confirmation">Применить изменения к существующим трекам в папке или только к новым?</string>
     <string name="shared_string_changes">Изменения</string>
@@ -5729,4 +5729,6 @@
     <string name="map_text">Текста карты</string>
     <string name="disable_map_layers_descr">Отключает все слои над векторной картой (требуется перезапуск).</string>
     <string name="disable_map_layers">Отключить слои карты</string>
+    <string name="steps_per_minute_unit">Шаги в минуту</string>
+    <string name="height_legend_description">Для визуализации рельефа используются цветовые карты высот.</string>
 </resources>
