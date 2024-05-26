@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
+import static net.osmand.plus.activities.MapActivity.FRAGMENT_CONTAINER_VIEW;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -46,12 +47,13 @@ import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bytehamster.lib.preferencesearch.BaseSearchPreferenceFragment;
+import com.bytehamster.lib.preferencesearch.PreferenceFragmentHelper;
+import com.bytehamster.lib.preferencesearch.PreferencesGraphProvider;
 import com.bytehamster.lib.preferencesearch.SearchConfiguration;
 import com.bytehamster.lib.preferencesearch.SearchPreference;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -85,10 +87,10 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
+public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
@@ -395,21 +397,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (searchPreference != null) {
 			final SearchConfiguration config = searchPreference.getSearchConfiguration();
 			config.setActivity(getMapActivity());
-            config.indexItems(getPreferences(getPreferenceScreen()));
+            config.setFragmentContainerViewId(FRAGMENT_CONTAINER_VIEW);
+            config.setPreferenceFragmentsSupplier(() -> getPreferenceFragments(new MainSettingsFragment()));
 		}
 	}
 
-	private static List<Preference> getPreferences(final PreferenceGroup preferenceGroup) {
-		final Builder<Preference> preferencesBuilder = ImmutableList.builder();
-		for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
-			final Preference preference = preferenceGroup.getPreference(i);
-			preferencesBuilder.add(preference);
-			if (preference instanceof PreferenceGroup) {
-                preferencesBuilder.addAll(getPreferences((PreferenceGroup) preference));
-			}
-		}
-		return preferencesBuilder.build();
-	}
+	private Set<Class<? extends PreferenceFragmentCompat>> getPreferenceFragments(final PreferenceFragmentCompat root) {
+        return new PreferencesGraphProvider(new PreferenceFragmentHelper(getActivity(), FRAGMENT_CONTAINER_VIEW))
+                .getPreferencesGraph(root)
+                .vertexSet()
+                .stream()
+                .map(preferenceScreenWithHost -> preferenceScreenWithHost.host)
+                .collect(Collectors.toSet());
+    }
 
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
