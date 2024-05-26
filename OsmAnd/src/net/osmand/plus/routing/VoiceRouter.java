@@ -1010,9 +1010,9 @@ public class VoiceRouter {
 		if (destination == null) {
 			return null;
 		}
-		String[] words = destination.split(",");
+		String[] words = destination.split(";");
 		if (words.length > 3) {
-			return words[0] + "," + words[1] + "," + words[2];
+			return words[0] + ";" + words[1] + ";" + words[2];
 		}
 		return destination;
 	}
