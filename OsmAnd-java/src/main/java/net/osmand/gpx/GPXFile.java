@@ -824,13 +824,6 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return null;
 	}
 
-	public String getOuterRadius() {
-		QuadRect rect = getRect();
-		int radius = (int) MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right);
-		return MapUtils.convertDistToChar(radius, GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER, GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST,
-				GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1, GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2);
-	}
-
 	public String getArticleTitle() {
 		return metadata.getArticleTitle();
 	}

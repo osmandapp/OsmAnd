@@ -3,7 +3,7 @@ package net.osmand.shared.xml
 import okio.IOException
 import okio.Source
 
-expect class XmlPullParser {
+expect class XmlPullParser() {
 
 	@Throws(XmlParserException::class)
 	fun setFeature(name: String, state: Boolean)

@@ -1,8 +1,11 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.data.LatLon
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment
 import net.osmand.shared.gpx.GpxUtilities.WptPt
+import net.osmand.shared.util.Algorithms
 
-class GPXTrackAnalysis {
+class GpxTrackAnalysis {
 
 	companion object {
 		const val ANALYSIS_VERSION = 1
@@ -246,8 +249,8 @@ class GPXTrackAnalysis {
 	companion object {
 		fun prepareInformation(
 			fileTimeStamp: Long, pointsAnalyzer: TrackPointsAnalyser, segment: TrkSegment
-		): GPXTrackAnalysis {
-			return GPXTrackAnalysis().prepareInformation(
+		): GpxTrackAnalysis {
+			return GpxTrackAnalysis().prepareInformation(
 				fileTimeStamp, pointsAnalyzer, SplitSegment(segment)
 			)
 		}
@@ -257,7 +260,7 @@ class GPXTrackAnalysis {
 		fileTimeStamp: Long,
 		pointsAnalyser: TrackPointsAnalyser?,
 		vararg splitSegments: SplitSegment
-	): GPXTrackAnalysis {
+	): GpxTrackAnalysis {
 		val calculations = FloatArray(1)
 
 		var startTimeOfSingleSegment: Long = 0
@@ -336,14 +339,14 @@ class GPXTrackAnalysis {
 				updateHdop(point)
 
 				if (j > 0) {
-					val prev = s.get(j - 1)
+					val prev = s[j - 1]
 
 					net.osmand.Location.distanceBetween(
 						prev.lat, prev.lon, point.lat, point.lon, calculations
 					)
 					totalDistance += calculations[0]
 					segmentDistance += calculations[0]
-					point.distance = segmentDistance
+					point.distance = segmentDistance.toDouble()
 
 					timeDiffMillis = maxOf(0, point.time - prev.time)
 					timeDiff = (timeDiffMillis / 1000).toInt()
@@ -394,7 +397,7 @@ class GPXTrackAnalysis {
 					}
 				}
 				val distance = if (j > 0) calculations[0] else 0f
-				val attribute = PointAttributes(distance, timeDiff, firstPoint, lastPoint).apply {
+				val attribute = PointAttributes(distance, timeDiff.toFloat(), firstPoint, lastPoint).apply {
 					this.speed = speed
 					this.elevation = elevation
 				}
@@ -417,7 +420,7 @@ class GPXTrackAnalysis {
 					totalSensorHrSum += attribute.heartRate
 				}
 
-				val temperature = attribute.temperature
+				val temperature = attribute.getTemperature()
 				if (temperature > 0) {
 					maxSensorTemperature = maxOf(temperature.toInt(), maxSensorTemperature)
 					sensorTemperatureCount++
@@ -506,7 +509,7 @@ class GPXTrackAnalysis {
 
 	private fun getExpectedRouteSegmentDuration(segment: SplitSegment): Long {
 		val routeSegments = segment.segment.routeSegments
-		if (routeSegments != null && !segment.segment.generalSegment) {
+		if (!segment.segment.generalSegment) {
 			var result: Long = 0
 			for (routeSegment in routeSegments) {
 				result += (1000 * Algorithms.parseFloatSilently(
@@ -522,16 +525,16 @@ class GPXTrackAnalysis {
 		totalElevation: Float, elevationPoints: Int, totalSpeedSum: Double, speedCount: Int
 	) {
 		if (elevationPoints > 0) {
-			avgElevation = totalElevation / elevationPoints
+			avgElevation = totalElevation.toDouble() / elevationPoints
 		}
-		if (speedCount > 0) {
+		avgSpeed = if (speedCount > 0) {
 			if (timeMoving > 0) {
-				avgSpeed = totalDistanceMoving / timeMoving * 1000f
+				totalDistanceMoving / timeMoving * 1000f
 			} else {
-				avgSpeed = (totalSpeedSum / speedCount).toFloat()
+				(totalSpeedSum / speedCount).toFloat()
 			}
 		} else {
-			avgSpeed = -1f
+			-1f
 		}
 	}
 
@@ -591,6 +594,6 @@ class GPXTrackAnalysis {
 	}
 
 	interface TrackPointsAnalyser {
-		fun onAnalysePoint(analysis: GPXTrackAnalysis, point: WptPt, attribute: PointAttributes)
+		fun onAnalysePoint(analysis: GpxTrackAnalysis, point: WptPt, attribute: PointAttributes)
 	}
 }

@@ -1,16 +1,16 @@
 package net.osmand.shared.xml
 
 import android.util.Xml
+import net.osmand.shared.io.SourceInputStream
 import okio.IOException
 import okio.Source
-import okio.buffer
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream
 
-actual class XmlPullParser {
+actual class XmlPullParser actual constructor() {
 	private val parser: XmlPullParser = Xml.newPullParser()
 	private var inputStream: InputStream? = null
 
@@ -45,29 +45,7 @@ actual class XmlPullParser {
 
 	@Throws(XmlParserException::class)
 	actual fun setInput(input: Source, inputEncoding: String?) {
-		val inputBuffer = input.buffer()
-		val inputStream = object : InputStream() {
-			override fun read(): Int = inputBuffer.readByte().toInt()
-
-			override fun read(b: ByteArray?): Int = b?.let { inputBuffer.read(it) } ?: -1
-
-			override fun read(b: ByteArray?, off: Int, len: Int): Int =
-				b?.let { inputBuffer.read(it, off, len) } ?: -1
-
-			override fun skip(n: Long): Long {
-				inputBuffer.skip(n)
-				return n
-			}
-
-			override fun readNBytes(len: Int): ByteArray = inputBuffer.readByteArray(len.toLong())
-
-			override fun readNBytes(b: ByteArray?, off: Int, len: Int): Int =
-				b?.let { inputBuffer.read(it, off, len) } ?: -1
-
-			override fun readAllBytes(): ByteArray = inputBuffer.readByteArray()
-
-			override fun close() = inputBuffer.close()
-		}
+		val inputStream = SourceInputStream(input)
 		parser.setInput(inputStream, inputEncoding)
 	}
 

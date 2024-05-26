@@ -31,6 +31,7 @@ kotlin {
     val coroutinesCoreVersion = "1.8.1"
     val datetimeVersion = "0.6.0"
     val okioVersion = "3.9.0"
+    val kxml2Version = "2.1.8"
 
     sourceSets {
         commonMain.dependencies {
@@ -44,6 +45,7 @@ kotlin {
         androidMain.dependencies {
             implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
             implementation("androidx.sqlite:sqlite-framework:$sqliteVersion")
+            implementation("net.sf.kxml:kxml2:$kxml2Version")
         }
         iosMain.dependencies {
             implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")

@@ -8,9 +8,20 @@ import net.osmand.shared.data.QuadRect
 import net.osmand.shared.gpx.SplitMetric.*
 import net.osmand.shared.util.Algorithms
 import net.osmand.shared.util.Algorithms.hash
+import net.osmand.shared.util.IProgress
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.MapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
+import net.osmand.shared.xml.XmlParserException
+import net.osmand.shared.xml.XmlPullParser
+import net.osmand.shared.xml.XmlSerializer
+import okio.Buffer
+import okio.FileSystem
+import okio.IOException
+import okio.Path.Companion.toPath
+import okio.SYSTEM
+import okio.Sink
+import okio.Source
 import kotlin.math.round
 
 object GpxUtilities {
@@ -62,7 +73,7 @@ object GpxUtilities {
 	const val RADIUS_DIVIDER = 5000
 	const val PRIME_MERIDIAN = 179.999991234
 
-	enum class GPXColor(val color: Int) {
+	enum class GpxColor(val color: Int) {
 		BLACK(0xFF000000.toInt()),
 		DARKGRAY(0xFF444444.toInt()),
 		GRAY(0xFF888888.toInt()),
@@ -89,7 +100,7 @@ object GpxUtilities {
 		TEAL(0xFF008080.toInt());
 
 		companion object {
-			fun getColorFromName(name: String): GPXColor? {
+			fun getColorFromName(name: String): GpxColor? {
 				return values().firstOrNull { it.name.equals(name, ignoreCase = true) }
 			}
 		}
@@ -122,19 +133,19 @@ object GpxUtilities {
 		}
 	}
 
-	interface GPXExtensionsWriter {
+	interface GpxExtensionsWriter {
 		fun writeExtensions(serializer: XmlSerializer)
 	}
 
-	interface GPXExtensionsReader {
-		@Throws(IOException::class, XmlPullParserException::class)
-		fun readExtensions(res: GPXFile, parser: XmlPullParser): Boolean
+	interface GpxExtensionsReader {
+		@Throws(IOException::class, XmlParserException::class)
+		fun readExtensions(res: GpxFile, parser: XmlPullParser): Boolean
 	}
 
-	open class GPXExtensions {
+	open class GpxExtensions {
 		var extensions: MutableMap<String, String>? = null
-		var extensionsWriter: GPXExtensionsWriter? = null
-		var additionalExtensionsWriter: GPXExtensionsWriter? = null
+		var extensionsWriter: GpxExtensionsWriter? = null
+		var additionalExtensionsWriter: GpxExtensionsWriter? = null
 
 		fun getExtensionsToRead(): Map<String, String> {
 			return extensions ?: emptyMap()
@@ -147,26 +158,26 @@ object GpxUtilities {
 			return extensions!!
 		}
 
-		fun copyExtensions(e: GPXExtensions) {
+		fun copyExtensions(e: GpxExtensions) {
 			val extensionsToRead = e.getExtensionsToRead()
 			if (extensionsToRead.isNotEmpty()) {
 				getExtensionsToWrite().putAll(extensionsToRead)
 			}
 		}
 
-		fun getAdditionalExtensionsWriter(): GPXExtensionsWriter? {
+		fun getAdditionalExtensionsWriter(): GpxExtensionsWriter? {
 			return additionalExtensionsWriter
 		}
 
-		fun getExtensionsWriter(): GPXExtensionsWriter? {
+		fun getExtensionsWriter(): GpxExtensionsWriter? {
 			return extensionsWriter
 		}
 
-		fun setExtensionsWriter(extensionsWriter: GPXExtensionsWriter?) {
+		fun setExtensionsWriter(extensionsWriter: GpxExtensionsWriter?) {
 			this.extensionsWriter = extensionsWriter
 		}
 
-		fun setAdditionalExtensionsWriter(additionalExtensionsWriter: GPXExtensionsWriter?) {
+		fun setAdditionalExtensionsWriter(additionalExtensionsWriter: GpxExtensionsWriter?) {
 			this.additionalExtensionsWriter = additionalExtensionsWriter
 		}
 
@@ -216,7 +227,7 @@ object GpxUtilities {
 					null
 				}
 			} else {
-				val gpxColor = GPXColor.getColorFromName(colorString)
+				val gpxColor = GpxColor.getColorFromName(colorString)
 				if (gpxColor != null) {
 					return gpxColor.color
 				}
@@ -225,7 +236,7 @@ object GpxUtilities {
 		return null
 	}
 
-	class WptPt : GPXExtensions {
+	class WptPt : GpxExtensions {
 		var firstPoint = false
 		var lastPoint = false
 		var lat: Double = 0.0
@@ -557,7 +568,7 @@ object GpxUtilities {
 		}
 	}
 
-	class TrkSegment : GPXExtensions() {
+	class TrkSegment : GpxExtensions() {
 		var name: String? = null
 		var generalSegment = false
 		var points = mutableListOf<WptPt>()
@@ -569,11 +580,11 @@ object GpxUtilities {
 			return routeSegments.isNotEmpty() && routeTypes.isNotEmpty()
 		}
 
-		fun splitByDistance(meters: Double, joinSegments: Boolean): List<GPXTrackAnalysis> {
+		fun splitByDistance(meters: Double, joinSegments: Boolean): List<GpxTrackAnalysis> {
 			return split(DistanceSplitMetric(), TimeSplitMetric(), meters, joinSegments)
 		}
 
-		fun splitByTime(seconds: Int, joinSegments: Boolean): List<GPXTrackAnalysis> {
+		fun splitByTime(seconds: Int, joinSegments: Boolean): List<GpxTrackAnalysis> {
 			return split(TimeSplitMetric(), DistanceSplitMetric(), seconds.toDouble(), joinSegments)
 		}
 
@@ -582,7 +593,7 @@ object GpxUtilities {
 			secondaryMetric: SplitMetric,
 			metricLimit: Double,
 			joinSegments: Boolean
-		): List<GPXTrackAnalysis> {
+		): List<GpxTrackAnalysis> {
 			val splitSegments = mutableListOf<SplitSegment>()
 			SplitMetric.splitSegment(
 				metric,
@@ -596,20 +607,20 @@ object GpxUtilities {
 		}
 	}
 
-	class Track : GPXExtensions() {
+	class Track : GpxExtensions() {
 		var name: String? = null
 		var desc: String? = null
 		var segments = mutableListOf<TrkSegment>()
 		var generalTrack = false
 	}
 
-	class Route : GPXExtensions() {
+	class Route : GpxExtensions() {
 		var name: String? = null
 		var desc: String? = null
 		var points = mutableListOf<WptPt>()
 	}
 
-	class Metadata : GPXExtensions {
+	class Metadata : GpxExtensions {
 		var name: String? = null
 		var desc: String? = null
 		var link: String? = null
@@ -657,16 +668,16 @@ object GpxUtilities {
 		fun readDescription() {
 			val readDescription = getExtensionsToWrite().remove("desc")
 			if (!Algorithms.isEmpty(readDescription)) {
-				if (Algorithms.isEmpty(desc)) {
-					desc = readDescription
+				desc = if (Algorithms.isEmpty(desc)) {
+					readDescription
 				} else {
-					desc = "$desc; $readDescription"
+					"$desc; $readDescription"
 				}
 			}
 		}
 	}
 
-	class Author : GPXExtensions {
+	class Author : GpxExtensions {
 		var name: String? = null
 		var email: String? = null
 		var link: String? = null
@@ -681,7 +692,7 @@ object GpxUtilities {
 		}
 	}
 
-	class Copyright : GPXExtensions {
+	class Copyright : GpxExtensions {
 		var author: String? = null
 		var year: String? = null
 		var license: String? = null
@@ -696,7 +707,7 @@ object GpxUtilities {
 		}
 	}
 
-	class Bounds : GPXExtensions {
+	class Bounds : GpxExtensions {
 		var minlat: Double = 0.0
 		var minlon: Double = 0.0
 		var maxlat: Double = 0.0
@@ -866,10 +877,10 @@ object GpxUtilities {
 		}
 	}
 
-	private fun convert(splitSegments: List<SplitSegment>): List<GPXTrackAnalysis> {
-		val list = mutableListOf<GPXTrackAnalysis>()
+	private fun convert(splitSegments: List<SplitSegment>): List<GpxTrackAnalysis> {
+		val list = mutableListOf<GpxTrackAnalysis>()
 		for (segment in splitSegments) {
-			val analysis = GPXTrackAnalysis()
+			val analysis = GpxTrackAnalysis()
 			analysis.prepareInformation(0, null, segment)
 			list.add(analysis)
 		}
@@ -930,42 +941,43 @@ object GpxUtilities {
 		}
 	}
 
-	fun asString(file: GPXFile): String {
-		val writer = StringWriter()
+	fun asString(file: GpxFile): String {
+		val writer = Buffer()
 		writeGpx(writer, file, null)
 		return writer.toString()
 	}
 
-	fun writeGpxFile(fout: File, file: GPXFile): Exception? {
-		var output: Writer? = null
+	fun writeGpxFile(filePath: String, file: GpxFile): Exception? {
+		var output: Sink? = null
 		return try {
-			if (fout.parentFile != null) {
-				fout.parentFile.mkdirs()
-			}
-			output = OutputStreamWriter(FileOutputStream(fout), "UTF-8")
+			val path = filePath.toPath()
+			FileSystem.SYSTEM.createDirectories(path)
+			output = FileSystem.SYSTEM.sink(path)
 			if (Algorithms.isEmpty(file.path)) {
-				file.path = fout.absolutePath
+				file.path = (if (path.isAbsolute) path.toString() else
+					FileSystem.SYSTEM.canonicalize(path).toString())
 			}
 			writeGpx(output, file, null)
 		} catch (e: Exception) {
-			e.printStackTrace()
+			log.error("Failed to write gpx '$filePath'", e)
 			e
 		} finally {
-			Algorithms.closeStream(output)
+			output?.close()
 		}
 	}
 
-	fun writeGpx(output: Writer, file: GPXFile, progress: IProgress?): Exception? {
+	fun writeGpx(output: Sink, file: GpxFile, progress: IProgress?): Exception? {
 		progress?.startWork(file.getItemsToWriteSize())
 		return try {
-			val serializer = PlatformUtil.newSerializer()
+			val serializer = XmlSerializer()
 			serializer.setOutput(output)
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true)
 			serializer.startDocument("UTF-8", true)
 			serializer.startTag(null, "gpx")
 			serializer.attribute(null, "version", "1.1")
-			if (file.author != null) {
-				serializer.attribute(null, "creator", file.author)
+			val author = file.author
+			if (author != null) {
+				serializer.attribute(null, "creator", author)
 			}
 			serializer.attribute(null, "xmlns", "http://www.topografix.com/GPX/1/1")
 			serializer.attribute(null, "xmlns:osmand", "https://osmand.net")
@@ -993,13 +1005,13 @@ object GpxUtilities {
 			serializer.flush()
 			null
 		} catch (e: Exception) {
-			e.printStackTrace()
+			log.error("Failed to write gpx", e)
 			e
 		}
 	}
 
-	fun createNetworkRouteExtensionWriter(networkRouteTags: Map<String, String>): GPXExtensionsWriter {
-		return object : GPXExtensionsWriter {
+	fun createNetworkRouteExtensionWriter(networkRouteTags: Map<String, String>): GpxExtensionsWriter {
+		return object : GpxExtensionsWriter {
 			override fun writeExtensions(serializer: XmlSerializer) {
 				val bundle = StringBundle()
 				val tagsBundle = StringBundle()
@@ -1019,9 +1031,9 @@ object GpxUtilities {
 		}
 	}
 
-	private fun assignPointsGroupsExtensionWriter(gpxFile: GPXFile) {
+	private fun assignPointsGroupsExtensionWriter(gpxFile: GpxFile) {
 		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(object : GPXExtensionsWriter {
+			gpxFile.setExtensionsWriter(object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
 					val categoriesBundle = mutableListOf<StringBundle>()
@@ -1036,20 +1048,22 @@ object GpxUtilities {
 		}
 	}
 
-	private fun writeMetadata(serializer: XmlSerializer, file: GPXFile, progress: IProgress?) {
+	private fun writeMetadata(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		val defName = file.metadata.name
 		val trackName = if (!Algorithms.isEmpty(defName)) defName else getFilename(file.path)
 		serializer.startTag(null, "metadata")
 		writeNotNullText(serializer, "name", trackName)
 		writeNotNullText(serializer, "desc", file.metadata.desc)
-		if (file.metadata.author != null) {
+		val author = file.metadata.author
+		if (author != null) {
 			serializer.startTag(null, "author")
-			writeAuthor(serializer, file.metadata.author)
+			writeAuthor(serializer, author)
 			serializer.endTag(null, "author")
 		}
-		if (file.metadata.copyright != null) {
+		val copyright = file.metadata.copyright
+		if (copyright != null) {
 			serializer.startTag(null, "copyright")
-			writeCopyright(serializer, file.metadata.copyright)
+			writeCopyright(serializer, copyright)
 			serializer.endTag(null, "copyright")
 		}
 		writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link)
@@ -1057,15 +1071,16 @@ object GpxUtilities {
 			writeNotNullText(serializer, "time", formatTime(file.metadata.time))
 		}
 		writeNotNullText(serializer, "keywords", file.metadata.keywords)
-		if (file.metadata.bounds != null) {
-			writeBounds(serializer, file.metadata.bounds)
+		val bounds = file.metadata.bounds
+		if (bounds != null) {
+			writeBounds(serializer, bounds)
 		}
 		writeExtensions(serializer, file.metadata, null)
 		progress?.progress(1)
 		serializer.endTag(null, "metadata")
 	}
 
-	private fun writePoints(serializer: XmlSerializer, file: GPXFile, progress: IProgress?) {
+	private fun writePoints(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		for (l in file.points) {
 			serializer.startTag(null, "wpt")
 			writeWpt(serializer, l, progress)
@@ -1073,7 +1088,7 @@ object GpxUtilities {
 		}
 	}
 
-	private fun writeRoutes(serializer: XmlSerializer, file: GPXFile, progress: IProgress?) {
+	private fun writeRoutes(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		for (route in file.routes) {
 			serializer.startTag(null, "rte")
 			writeNotNullText(serializer, "name", route.name)
@@ -1088,7 +1103,7 @@ object GpxUtilities {
 		}
 	}
 
-	private fun writeTracks(serializer: XmlSerializer, file: GPXFile, progress: IProgress?) {
+	private fun writeTracks(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		for (track in file.tracks) {
 			if (!track.generalTrack) {
 				serializer.startTag(null, "trk")
@@ -1114,7 +1129,7 @@ object GpxUtilities {
 
 	private fun assignRouteExtensionWriter(segment: TrkSegment) {
 		if (segment.hasRoute() && segment.getExtensionsWriter() == null) {
-			segment.setExtensionsWriter(object : GPXExtensionsWriter {
+			segment.setExtensionsWriter(object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
 					val segmentsBundle = mutableListOf<StringBundle>()
@@ -1170,23 +1185,23 @@ object GpxUtilities {
 		}
 	}
 
-	private fun writeExtensions(serializer: XmlSerializer, p: GPXExtensions, progress: IProgress?) {
+	private fun writeExtensions(serializer: XmlSerializer, p: GpxExtensions, progress: IProgress?) {
 		writeExtensions(serializer, p.getExtensionsToRead(), p, progress)
 	}
 
 	private fun writeExtensions(
 		serializer: XmlSerializer,
-		extensions: Map<String, String>,
-		p: GPXExtensions,
+		extensions: Map<String, String>?,
+		p: GpxExtensions,
 		progress: IProgress?
 	) {
 		val extensionsWriter = p.getExtensionsWriter()
 		val additionalExtensionsWriter = p.getAdditionalExtensionsWriter()
-		val hasExtensions = extensions.isNotEmpty()
+		val hasExtensions = !extensions.isNullOrEmpty()
 		if (hasExtensions || extensionsWriter != null) {
 			serializer.startTag(null, "extensions")
 			if (hasExtensions) {
-				for ((key, value) in extensions) {
+				for ((key, value) in extensions!!) {
 					writeNotNullText(serializer, getOsmandTagKey(key, value), value)
 				}
 			}
@@ -1195,9 +1210,7 @@ object GpxUtilities {
 				additionalExtensionsWriter.writeExtensions(serializer)
 				serializer.endTag(null, "gpxtpx:TrackPointExtension")
 			}
-			if (extensionsWriter != null) {
-				extensionsWriter.writeExtensions(serializer)
-			}
+			extensionsWriter?.writeExtensions(serializer)
 			serializer.endTag(null, "extensions")
 			progress?.progress(1)
 		}
@@ -1227,7 +1240,7 @@ object GpxUtilities {
 			p.getExtensionsToWrite()["heading"] = round(p.heading).toString()
 		}
 		val extensions = p.getExtensionsToRead().toMutableMap()
-		if (serializer.name != "rtept") {
+		if (serializer.getName() != "rtept") {
 			extensions.remove(PROFILE_TYPE_EXTENSION)
 			extensions.remove(TRKPT_INDEX_EXTENSION)
 		} else {
@@ -1262,8 +1275,8 @@ object GpxUtilities {
 	private fun createExtensionsWriter(
 		extensions: Map<String, String>,
 		addOsmandPrefix: Boolean
-	): GPXExtensionsWriter {
-		return object : GPXExtensionsWriter {
+	): GpxExtensionsWriter {
+		return object : GpxExtensionsWriter {
 			override fun writeExtensions(serializer: XmlSerializer) {
 				for ((key, value) in extensions) {
 					try {
@@ -1304,8 +1317,9 @@ object GpxUtilities {
 	}
 
 	private fun writeCopyright(serializer: XmlSerializer, copyright: Copyright) {
-		if (copyright.author != null) {
-			serializer.attribute(null, "author", copyright.author)
+		val author = copyright.author
+		if (author != null) {
+			serializer.attribute(null, "author", author)
 		}
 		writeNotNullText(serializer, "year", copyright.year)
 		writeNotNullText(serializer, "license", copyright.license)
@@ -1320,7 +1334,7 @@ object GpxUtilities {
 		serializer.endTag(null, "bounds")
 	}
 
-	class GPXFileResult {
+	class GpxFileResult {
 		var locations = mutableListOf<List<Location>>()
 		var wayPoints = mutableListOf<WptPt>()
 		var cloudMadeFile = false
@@ -1338,33 +1352,32 @@ object GpxUtilities {
 		}
 	}
 
-	@Throws(XmlPullParserException::class, IOException::class)
+	@Throws(XmlParserException::class, IOException::class)
 	fun readText(parser: XmlPullParser, key: String): String? {
 		var tok: Int
 		var text: StringBuilder? = null
 		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
-			if (tok == XmlPullParser.END_TAG && parser.name == key) {
+			if (tok == XmlPullParser.END_TAG && parser.getName() == key) {
 				break
 			} else if (tok == XmlPullParser.TEXT) {
 				if (text == null) {
-					text = StringBuilder(parser.text)
-				} else {
-					text.append(parser.text)
+					text = StringBuilder()
 				}
+				text.append(parser.getText())
 			}
 		}
 		return text?.toString()
 	}
 
-	@Throws(XmlPullParserException::class, IOException::class)
+	@Throws(XmlParserException::class, IOException::class)
 	fun readTextMap(parser: XmlPullParser, key: String): Map<String, String> {
 		var tok: Int
 		var text: StringBuilder? = null
 		val result: MutableMap<String, String> = HashMap()
 		while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
 			if (tok == XmlPullParser.END_TAG) {
-				val tag = parser.name
-				if (text != null && text.toString().trim().isNotEmpty()) {
+				val tag = parser.getName()
+				if (tag != null && text != null && text.toString().trim().isNotEmpty()) {
 					result[tag] = text.toString()
 				}
 				if (tag == key) {
@@ -1375,10 +1388,9 @@ object GpxUtilities {
 				text = null
 			} else if (tok == XmlPullParser.TEXT) {
 				if (text == null) {
-					text = StringBuilder(parser.text)
-				} else {
-					text.append(parser.text)
+					text = StringBuilder()
 				}
+				text.append(parser.getText())
 			}
 		}
 		return result
@@ -1399,7 +1411,8 @@ object GpxUtilities {
 			time = flexibleGpxTimeParser(text, format)
 		} catch (e: Exception) {
 			try {
-				time = getTimeNoTimeZoneFormatter().parse(text).toInstant(TimeZone.UTC).toEpochMilliseconds()
+				time = getTimeNoTimeZoneFormatter().parse(text).toInstant(TimeZone.UTC)
+					.toEpochMilliseconds()
 			} catch (e: Exception) {
 				log.error("Failed to parse date $text", e)
 			}
@@ -1408,7 +1421,10 @@ object GpxUtilities {
 	}
 
 	@Throws(Exception::class)
-	private fun flexibleGpxTimeParser(timeStr: String, parser: DateTimeFormat<LocalDateTime>): Long {
+	private fun flexibleGpxTimeParser(
+		timeStr: String,
+		parser: DateTimeFormat<LocalDateTime>
+	): Long {
 		var text = timeStr
 		var ms = 0.0
 		val isIndex = text.indexOf('.')
@@ -1420,13 +1436,14 @@ object GpxUtilities {
 			ms = ("0" + text.substring(isIndex, esIndex)).toDouble()
 			text = text.substring(0, isIndex) + text.substring(esIndex)
 		}
-		return parser.parse(text).toInstant(TimeZone.UTC).toEpochMilliseconds() + (ms * 1000).toLong()
+		return parser.parse(text).toInstant(TimeZone.UTC)
+			.toEpochMilliseconds() + (ms * 1000).toLong()
 	}
 
-	fun getCreationTime(gpxFile: GPXFile?): Long {
+	fun getCreationTime(gpxFile: GpxFile?): Long {
 		var time: Long = 0
 		if (gpxFile != null) {
-			if (gpxFile.metadata != null && gpxFile.metadata.time > 0) {
+			if (gpxFile.metadata.time > 0) {
 				time = gpxFile.metadata.time
 			} else {
 				time = gpxFile.getLastPointTime()
@@ -1462,19 +1479,19 @@ object GpxUtilities {
 		}
 	}
 
-	fun loadGPXFile(file: File): GPXFile {
-		return loadGPXFile(file, null, true)
+	fun loadGpxFile(filePath: String): GpxFile {
+		return loadGpxFile(filePath, null, true)
 	}
 
-	fun loadGPXFile(
-		file: File,
-		extensionsReader: GPXExtensionsReader?,
+	fun loadGpxFile(
+		filePath: String,
+		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
-	): GPXFile {
+	): GpxFile {
 		var fis: FileInputStream? = null
 		return try {
 			fis = FileInputStream(file)
-			val gpxFile = loadGPXFile(fis, extensionsReader, addGeneralTrack)
+			val gpxFile = loadGpxFile(fis, extensionsReader, addGeneralTrack)
 			gpxFile.path = file.absolutePath
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
@@ -1484,7 +1501,7 @@ object GpxUtilities {
 			}
 			gpxFile
 		} catch (e: IOException) {
-			val gpxFile = GPXFile(null)
+			val gpxFile = GpxFile(null)
 			gpxFile.path = file.absolutePath
 			e.printStackTrace()
 			gpxFile.error = e
@@ -1494,24 +1511,24 @@ object GpxUtilities {
 		}
 	}
 
-	fun loadGPXFile(stream: InputStream): GPXFile {
-		return loadGPXFile(stream, null, true)
+	fun loadGpxFile(source: Source): GpxFile {
+		return loadGpxFile(source, null, true)
 	}
 
-	fun loadGPXFile(
-		stream: InputStream,
-		extensionsReader: GPXExtensionsReader?,
+	fun loadGpxFile(
+		source: Source,
+		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
-	): GPXFile {
-		val gpxFile = GPXFile(null)
+	): GpxFile {
+		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
 		try {
-			val parser = PlatformUtil.newXMLPullParser()
-			parser.setInput(getUTF8Reader(stream))
+			val parser = XmlPullParser()
+			parser.setInput(getUTF8Reader(source))
 			val routeTrack = Track()
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
-			val parserState = ArrayDeque<GPXExtensions>()
+			val parserState = ArrayDeque<GpxExtensions>()
 			var firstSegment: TrkSegment? = null
 			var extensionReadMode = false
 			var routePointExtension = false
@@ -1527,7 +1544,7 @@ object GpxUtilities {
 			while (parser.next().also { tok = it } != XmlPullParser.END_DOCUMENT) {
 				if (tok == XmlPullParser.START_TAG) {
 					val parse = parserState.lastOrNull()
-					val tag = parser.name
+					val tag = parser.getName() ?: ""
 					if (extensionReadMode && parse != null && !routePointExtension) {
 						val tagName = tag.lowercase(Locale.getDefault())
 						when {
@@ -1578,7 +1595,7 @@ object GpxUtilities {
 												when (tag) {
 													POINT_SPEED -> {
 														try {
-															parse.speed = value.toFloat()
+															parse.speed = value.toDouble()
 														} catch (e: NumberFormatException) {
 															println(e.message)
 														}
@@ -1607,7 +1624,7 @@ object GpxUtilities {
 						}
 					} else {
 						when (parse) {
-							is GPXFile -> {
+							is GpxFile -> {
 								when (tag) {
 									"gpx" -> parse.author = parser.getAttributeValue("", "creator")
 									"metadata" -> {
@@ -1642,14 +1659,14 @@ object GpxUtilities {
 									"desc" -> parse.desc = readText(parser, "desc")
 									"author" -> {
 										val author = Author()
-										author.name = parser.text
+										author.name = parser.getText()
 										parse.author = author
 										parserState.add(author)
 									}
 
 									"copyright" -> {
 										val copyright = Copyright()
-										copyright.license = parser.text
+										copyright.license = parser.getText()
 										copyright.author = parser.getAttributeValue("", "author")
 										parse.copyright = copyright
 										parserState.add(copyright)
@@ -1749,7 +1766,7 @@ object GpxUtilities {
 														wptPt.ele = pointAttrs[2].toDouble()
 													}
 												}
-											} catch (e: NumberFormatException) {
+											} catch (_: NumberFormatException) {
 											}
 										}
 									}
@@ -1764,11 +1781,11 @@ object GpxUtilities {
 									POINT_SPEED -> {
 										try {
 											val value = readText(parser, POINT_SPEED)
-											if (!Algorithms.isEmpty(value)) {
-												parse.speed = value!!.toFloat()
+											if (!value.isNullOrEmpty()) {
+												parse.speed = value.toDouble()
 												parse.getExtensionsToWrite()[POINT_SPEED] = value
 											}
-										} catch (e: NumberFormatException) {
+										} catch (_: NumberFormatException) {
 										}
 									}
 
@@ -1784,7 +1801,7 @@ object GpxUtilities {
 										val text = readText(parser, POINT_ELEVATION)
 										if (text != null) {
 											try {
-												parse.ele = text.toFloat()
+												parse.ele = text.toDouble()
 											} catch (e: NumberFormatException) {
 											}
 										}
@@ -1794,7 +1811,7 @@ object GpxUtilities {
 										val text = readText(parser, "hdop")
 										if (text != null) {
 											try {
-												parse.hdop = text.toFloat()
+												parse.hdop = text.toDouble()
 											} catch (e: NumberFormatException) {
 											}
 										}
@@ -1810,7 +1827,7 @@ object GpxUtilities {
 					}
 				} else if (tok == XmlPullParser.END_TAG) {
 					val parse = parserState.lastOrNull()
-					val tag = parser.name
+					val tag = parser.getName()
 
 					if (tag.equals("routepointextension", ignoreCase = true)) {
 						routePointExtension = false
@@ -2052,12 +2069,12 @@ object GpxUtilities {
 			if (maxlon != null) {
 				bounds.maxlon = maxlon.toDouble()
 			}
-		} catch (e: NumberFormatException) {
+		} catch (_: NumberFormatException) {
 		}
 		return bounds
 	}
 
-	fun mergeGPXFileInto(to: GPXFile, from: GPXFile?) {
+	fun mergeGpxFileInto(to: GpxFile, from: GpxFile?) {
 		if (from == null) {
 			return
 		}
@@ -2067,12 +2084,8 @@ object GpxUtilities {
 		if (from.points.isNotEmpty()) {
 			to.addPoints(from.points)
 		}
-		if (from.tracks != null) {
-			to.tracks.addAll(from.tracks)
-		}
-		if (from.routes != null) {
-			to.routes.addAll(from.routes)
-		}
+		to.tracks.addAll(from.tracks)
+		to.routes.addAll(from.routes)
 		if (from.error != null) {
 			to.error = from.error
 		}
