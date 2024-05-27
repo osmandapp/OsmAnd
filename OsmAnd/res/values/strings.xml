@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="travel_topics">Travel topics</string>
     <string name="disable_map_layers">Disable map layers</string>
     <string name="disable_map_layers_descr">Disable all map layers above the vector map (restart required).</string>
     <string name="height_legend_description">Altitude color maps are used to visualize relief.</string>
