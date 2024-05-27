@@ -117,7 +117,7 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 		uiPreference.setKey(PREF_ID_BINDING);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr);
 		uiPreference.setTitle(R.string.key_assignments);
-		uiPreference.setSummary(String.valueOf(device.getActiveAssignmentsCount()));
+		uiPreference.setSummary(String.valueOf(device.getAssignmentsCount()));
 		uiPreference.setIcon(getContentIcon(R.drawable.ic_action_button_default));
 		uiPreference.setSelectable(true);
 		return uiPreference;
@@ -144,7 +144,7 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				FragmentManager fm = activity.getSupportFragmentManager();
-				KeyAssignmentsFragment.showInstance(fm, getSelectedAppMode());
+				KeyAssignmentsFragment.showInstance(app, fm, getSelectedAppMode());
 			}
 			return true;
 		}

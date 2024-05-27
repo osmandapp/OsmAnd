@@ -24,7 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.CallbackWithObject;
+import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.containers.ScreenItem;
@@ -64,7 +64,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	public EditKeyAssignmentController(@NonNull OsmandApplication app,
 	                                   @NonNull ApplicationMode appMode,
 									   @NonNull String deviceId,
-									   @NonNull String assignmentId,
+									   @Nullable String assignmentId,
 	                                   boolean usedOnMap) {
 		this.app = app;
 		this.appMode = appMode;
@@ -141,14 +141,11 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 
 	public void askRenameAssignment() {
 		String oldName = getCustomNameSummary();
-		showEnterNameDialog(oldName, newName -> {
-			onNameEntered(newName);
-			return true;
-		});
+		showEnterNameDialog(oldName, this::onNameEntered);
 	}
 
 	private void showEnterNameDialog(@Nullable String oldName,
-	                                 @NonNull CallbackWithObject<String> callback) {
+	                                 @NonNull OnResultCallback<String> callback) {
 		boolean nightMode = isNightMode();
 
 		AlertDialogData dialogData = new AlertDialogData(activity, nightMode)
@@ -169,7 +166,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 				} else if (deviceHelper.hasAssignmentNameDuplicate(app, appMode, deviceId, newName)) {
 					app.showToastMessage(R.string.message_name_is_already_exists);
 				} else {
-					callback.processResult(newName.trim());
+					callback.onResult(newName.trim());
 				}
 			}
 		});
@@ -298,7 +295,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	public static void registerInstance(@NonNull OsmandApplication app,
 	                                    @NonNull ApplicationMode appMode,
 	                                    @NonNull String deviceId,
-	                                    @NonNull String assignmentId,
+	                                    @Nullable String assignmentId,
 	                                    boolean usedOnMap) {
 		app.getDialogManager().register(
 				PROCESS_ID, new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap)

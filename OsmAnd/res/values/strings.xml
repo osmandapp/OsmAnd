@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="no_assigned_keys_desc">Select an action and assign a key by tapping the \'Add\' button.</string>
+    <string name="no_assigned_keys">No assigned keys</string>
+    <string name="shared_string_key">Key</string>
     <string name="new_key_assignment">New key assignment</string>
     <string name="key_name_pattern">Key \"%1$s\"</string>
     <string name="key_assignment_add_key">Add key</string>

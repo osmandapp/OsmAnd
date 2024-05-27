@@ -227,7 +227,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	                                @NonNull FragmentManager manager,
 	                                @NonNull ApplicationMode appMode,
 	                                @NonNull String deviceId,
-	                                @NonNull String assignmentId) {
+	                                @Nullable String assignmentId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditKeyAssignmentController.registerInstance(app, appMode, deviceId, assignmentId, false);
 			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();

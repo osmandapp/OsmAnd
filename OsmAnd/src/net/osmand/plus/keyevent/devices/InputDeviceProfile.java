@@ -36,7 +36,7 @@ public abstract class InputDeviceProfile {
 
 	@NonNull
 	public List<KeyAssignment> getAssignments() {
-		return assignmentsCollection.getAllAssignments();
+		return assignmentsCollection.getAssignments();
 	}
 
 	@NonNull
@@ -64,16 +64,12 @@ public abstract class InputDeviceProfile {
 		return assignmentsCollection.findById(assignmentId);
 	}
 
-	public int getAssignmentsCount() {
-		return assignmentsCollection.getAllAssignments().size();
-	}
-
 	public boolean hasActiveAssignments() {
-		return getActiveAssignmentsCount() > 0;
+		return getAssignmentsCount() > 0;
 	}
 
-	public int getActiveAssignmentsCount() {
-		return assignmentsCollection.getActiveAssignmentsCount();
+	public int getAssignmentsCount() {
+		return assignmentsCollection.getAssignments().size();
 	}
 
 	@NonNull

@@ -37,7 +37,10 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		List<KeyAssignment> assignments = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			assignments.add(new KeyAssignment(jsonObject));
+			KeyAssignment keyAssignment = new KeyAssignment(jsonObject);
+			if (keyAssignment.hasKeyCodes()) {
+				assignments.add(keyAssignment);
+			}
 		}
 		setAssignments(assignments);
 	}
@@ -96,7 +99,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	public void resetAllAssignments() {
-		for (KeyAssignment assignment : assignmentsCollection.getAllAssignments()) {
+		for (KeyAssignment assignment : assignmentsCollection.getAssignments()) {
 			assignment.clearKeyCodes();
 		}
 		assignmentsCollection.syncCache();

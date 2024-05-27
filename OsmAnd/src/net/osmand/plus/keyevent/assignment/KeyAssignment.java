@@ -5,6 +5,7 @@ import static net.osmand.plus.keyevent.KeySymbolMapper.getKeySymbol;
 import android.content.Context;
 import android.view.KeyEvent;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -34,7 +35,7 @@ public class KeyAssignment {
 
 	public KeyAssignment(@NonNull String commandId, @NonNull Integer ... keyCodes) {
 		this.commandId = commandId;
-		this.keyCodes = Arrays.asList(keyCodes);
+		this.keyCodes = new ArrayList<>(Arrays.asList(keyCodes));
 	}
 
 	public KeyAssignment(@NonNull JSONObject jsonObject) throws JSONException {
@@ -150,6 +151,11 @@ public class KeyAssignment {
 	@NonNull
 	public List<Integer> getKeyCodes() {
 		return keyCodes;
+	}
+
+	@DrawableRes
+	public int getIconId() {
+		return R.drawable.ic_action_my_location; // todo use icon from command
 	}
 
 	@Override
