@@ -36,7 +36,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
 	private AmenityUIHelper rowsBuilder;
-	Map<String, String> additionalInfo;
+	private final Map<String, String> additionalInfo;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -44,6 +44,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
+		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
+		additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
 	}
 
 	@Override
@@ -56,9 +58,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
-		additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
-
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
 		rowsBuilder.setLight(light);
 		rowsBuilder.setLatLon(getLatLon());
@@ -184,8 +183,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
-		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-		return helper.getImagesParams(additionalInfo != null ? additionalInfo : helper.getAmenityExtensions(amenity));
+		return AmenityExtensionsHelper.getImagesParams(additionalInfo);
 	}
 
 	@Nullable

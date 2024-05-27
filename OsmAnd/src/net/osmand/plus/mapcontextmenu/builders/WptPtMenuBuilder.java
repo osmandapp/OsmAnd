@@ -96,8 +96,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	protected Map<String, String> getAdditionalCardParams() {
-		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-		return helper.getImagesParams(amenityExtensions);
+		return AmenityExtensionsHelper.getImagesParams(amenityExtensions);
 	}
 
 	@Override

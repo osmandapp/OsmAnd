@@ -1,11 +1,7 @@
 package net.osmand.plus.helpers;
 
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
-import static net.osmand.data.Amenity.NAME;
-import static net.osmand.data.Amenity.OPENING_HOURS;
-import static net.osmand.data.Amenity.SEPARATOR;
-import static net.osmand.data.Amenity.SUBTYPE;
-import static net.osmand.data.Amenity.TYPE;
+import static net.osmand.data.Amenity.*;
 import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
 
 import androidx.annotation.NonNull;
@@ -112,9 +108,10 @@ public class AmenityExtensionsHelper {
 		return result;
 	}
 
-	public Map<String, String> getImagesParams(Map<String, String> amenityExtensions) {
+	@NonNull
+	public static Map<String, String> getImagesParams(@NonNull Map<String, String> amenityExtensions) {
 		Map<String, String> params = new HashMap<>();
-		List<String> imageTags = Arrays.asList("image", Amenity.MAPILLARY, Amenity.WIKIDATA, Amenity.WIKIPEDIA, Amenity.WIKIMEDIA_COMMONS);
+		List<String> imageTags = Arrays.asList("image", MAPILLARY, WIKIDATA, WIKIPEDIA, WIKIMEDIA_COMMONS);
 		for (String imageTag : imageTags) {
 			String value = amenityExtensions.get(imageTag);
 			if (!Algorithms.isEmpty(value)) {
@@ -128,7 +125,7 @@ public class AmenityExtensionsHelper {
 		return params;
 	}
 
-	private String getDecodedAdditionalInfo(String additionalInfo) {
+	private static String getDecodedAdditionalInfo(String additionalInfo) {
 		try {
 			return URLDecoder.decode(additionalInfo, "UTF-8");
 		} catch (UnsupportedEncodingException | IllegalArgumentException e) {
