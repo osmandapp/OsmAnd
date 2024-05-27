@@ -16,23 +16,20 @@ public class ShareSheetReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Bundle extras = intent.getExtras();
-		if (extras == null) {
+		Bundle bundle = intent.getExtras();
+		if (bundle == null) {
 			return;
 		}
+		int actionId = bundle.getInt(KEY_SHARE_ACTION_ID, -1);
+		if (actionId >= 0 && actionId < ShareItem.values().length) {
+			String sms = bundle.getString(KEY_SHARE_SMS, "");
+			String address = bundle.getString(KEY_SHARE_ADDRESS, "");
+			String title = bundle.getString(KEY_SHARE_TITLE, "");
+			String coordinates = bundle.getString(KEY_SHARE_COORDINATES, "");
+			String geoUrl = bundle.getString(KEY_SHARE_GEOURL, "");
 
-		int actionId = extras.getInt(KEY_SHARE_ACTION_ID, -1);
-		if (actionId == -1) {
-			return;
+			ShareItem item = ShareItem.values()[actionId];
+			ShareMenu.startAction(context, item, sms, address, title, coordinates, geoUrl);
 		}
-
-		String sms = extras.getString(KEY_SHARE_SMS, "");
-		String address = extras.getString(KEY_SHARE_ADDRESS, "");
-		String title = extras.getString(KEY_SHARE_TITLE, "");
-		String coordinates = extras.getString(KEY_SHARE_COORDINATES, "");
-		String geoUrl = extras.getString(KEY_SHARE_GEOURL, "");
-
-		ShareMenu.ShareItem item = ShareMenu.ShareItem.values()[actionId];
-		ShareMenu.startAction(context, null, item, sms, address, title, coordinates, geoUrl);
 	}
 }
