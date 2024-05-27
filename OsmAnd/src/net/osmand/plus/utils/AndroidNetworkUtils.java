@@ -638,6 +638,10 @@ public class AndroidNetworkUtils {
 				if (lastModified > 0 && lastModified <= lastTime) {
 					return 0;
 				}
+				if (progress != null) {
+					int contentLength = connection.getContentLength();
+					progress.startWork(contentLength);
+				}
 				InputStream inputStream = gzip
 						? new GZIPInputStream(connection.getInputStream())
 						: new BufferedInputStream(connection.getInputStream(), 8 * 1024);
