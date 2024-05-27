@@ -5475,7 +5475,7 @@
     <string name="empty_name">空名稱</string>
     <string name="edit_filter">編輯篩選條件</string>
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
-    <string name="delete_smart_folder_dialog_message">這將會移除智慧型資料夾「%1$s」。</string>
+    <string name="delete_smart_folder_dialog_message">這將會移除智慧型資料夾「%1$s」。（不會刪除任何軌跡。）</string>
     <string name="empty_smart_folder_title">沒有相符的軌跡</string>
     <string name="empty_smart_folder_description">相符的軌跡會出現在此</string>
     <string name="configure_filter">設定篩選條件</string>
