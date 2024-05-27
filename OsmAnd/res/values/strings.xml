@@ -241,7 +241,7 @@
     <string name="discard_filter_changes_prompt">Reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
     <string name="edit_filter">Edit filter</string>
-    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\". (No tracks will be deleted.)</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>
     <string name="add_smart_folder">Add smart folder</string>

@@ -572,7 +572,7 @@ public class VoiceRouter {
 			if (includeDest == true) {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
-				String dest = cutLongDestination(getSpeakablePointName(i.getDestinationName()));
+				String dest = getSpeakablePointName(cutLongDestination(i.getDestinationName()));
 				result.put(TO_DEST, getNonNullString(dest));
 			} else {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
@@ -587,7 +587,7 @@ public class VoiceRouter {
 							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
 					result.put(FROM_STREET_NAME, getNonNullString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
 							settings.MAP_TRANSLITERATE_NAMES.get()))));
-					String dest = cutLongDestination(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
+					String dest = getSpeakablePointName(cutLongDestination(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
 							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection())));
 					result.put(FROM_DEST, getNonNullString(dest));
 				} else {
@@ -627,7 +627,7 @@ public class VoiceRouter {
 			return new StreetName(result);
 		}
 		result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-		String dest = cutLongDestination(getSpeakablePointName(routeInfo.getDestinationName()));
+		String dest = getSpeakablePointName(cutLongDestination(routeInfo.getDestinationName()));
 		result.put(TO_DEST, getNonNullString(dest));
 		result.put(TO_STREET_NAME, "");
 		return new StreetName(result);
@@ -1010,9 +1010,9 @@ public class VoiceRouter {
 		if (destination == null) {
 			return null;
 		}
-		String[] words = destination.split(",");
+		String[] words = destination.split(";");
 		if (words.length > 3) {
-			return words[0] + "," + words[1] + "," + words[2];
+			return words[0] + ";" + words[1] + ";" + words[2];
 		}
 		return destination;
 	}

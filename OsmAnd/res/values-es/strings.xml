@@ -5484,7 +5484,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar el filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
+    <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista).</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>

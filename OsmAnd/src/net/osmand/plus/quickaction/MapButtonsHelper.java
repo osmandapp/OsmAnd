@@ -81,7 +81,7 @@ public class MapButtonsHelper {
 			nameRes(R.string.map_look_descr).category(QuickActionType.MAP_APPEARANCE).iconRes(R.drawable.ic_action_map_style);
 	@QuickActionCategoryType
 	public static final QuickActionType TYPE_MAP_INTERACTIONS = new QuickActionType(0, "").
-			nameRes(R.string.key_event_category_map_interactions).category(QuickActionType.MAP_INTERACTIONS).iconRes(R.drawable.ic_action_settings);
+			nameRes(R.string.key_event_category_map_interactions).category(QuickActionType.MAP_INTERACTIONS).iconRes(R.drawable.ic_action_map_move_up);
 	@QuickActionCategoryType
 	public static final QuickActionType TYPE_OSM_EDITING = new QuickActionType(0, "").
 			nameRes(R.string.osm_editing_plugin_name).category(QuickActionType.OSM_EDITING).iconRes(R.drawable.ic_action_openstreetmap_logo);

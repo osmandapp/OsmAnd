@@ -19,8 +19,8 @@
     <string name="local_index_tile_data_expire">Истиче за (минута): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Највеће увеличање: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Елиптична Меркатор пројекција</string>
-    <string name="edit_tilesource_maxzoom">Највеће увеличање</string>
-    <string name="edit_tilesource_minzoom">Најмање увеличање</string>
+    <string name="edit_tilesource_maxzoom">Максималан зум</string>
+    <string name="edit_tilesource_minzoom">Минималан зум</string>
     <string name="edit_tilesource_url_to_load">Адреса</string>
     <string name="edit_tilesource_choose_existing">Изаберите постојећи…</string>
     <string name="driving_region_japan">Јапан</string>
@@ -5559,7 +5559,7 @@
     <string name="widget_available_ram">Доступан РАМ</string>
     <string name="filter_by_name">Филтер по имену</string>
     <string name="special_routing_cpp">Специјални тип рутирања</string>
-    <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметан фолдер \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Ово ће уклонити паметан фолдер \"%1$s\". (Ниједна путања неће бити избрисана.)</string>
     <string name="discard_filter_changes_prompt">Ресетовати све филтере?</string>
     <string name="empty_name">Празно име</string>
     <string name="calculate_offline_altitude_descr">Израчунавање елевације офлајн, на основу података Теренске мапе (3Д). Разлике у односу на сачувану висину на уређају могу се користити за корекцију елевације.</string>
@@ -5723,4 +5723,5 @@
     <string name="steps_per_minute_unit">КПМ</string>
     <string name="disable_map_layers_descr">Онемогућите све слојеве мапе изнад векторске мапе (потребно је поновно покретање).</string>
     <string name="disable_map_layers">Онемогући слојеве мапе</string>
+    <string name="height_legend_description">За визуелизацију рељефа користе се висинске мапе у боји.</string>
 </resources>

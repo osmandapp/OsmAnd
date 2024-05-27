@@ -5484,7 +5484,7 @@
     <string name="help_article_troubleshooting_track_recording_issues_name">Streckenaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
-    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“.</string>
+    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
     <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>

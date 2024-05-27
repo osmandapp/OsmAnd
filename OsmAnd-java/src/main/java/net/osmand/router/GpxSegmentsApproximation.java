@@ -5,17 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 import net.osmand.util.MapUtils;
-
-// DONE Native lib - required
-// DONE use minPointApproximation to restart after "lost" gpx segments with initRoutingPoint
-// DONE "same" loadRouteSegment() segments are actually "sorted" with DILUTE_BY_SEGMENT_DISTANCE
-// DONE fixed Map Creator gpx "gaps" (the bug was lost results of splitRoadsAndAttachRoadSegments)
 
 // TO-THINK ? fix minor "Points are not connected" (~0.01m)
 // TO-THINK ? think about "bearing" in addition to LOOKUP_AHEAD to keep sharp/loop-shaped gpx parts
@@ -70,6 +63,7 @@ public class GpxSegmentsApproximation {
 				continue;
 			}
 			currentPoint.routeToTarget = new ArrayList<RouteSegmentResult>();
+			fres.setGpxPointIndex(currentPoint.ind);
 			currentPoint.routeToTarget.add(fres);
 			currentPoint.targetInd = minNextInd;
 

@@ -124,7 +124,7 @@ import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
+import net.osmand.router.GpxRouteApproximation;
 import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;

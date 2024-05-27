@@ -5499,7 +5499,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Guardar como carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Quitarás la carpeta inteligente «%1$s».</string>
+    <string name="delete_smart_folder_dialog_message">Quitarás la carpeta inteligente «%1$s». (Ninguna traza será borrada.)</string>
     <string name="empty_smart_folder_title">Sin trazas que coincidan</string>
     <string name="empty_smart_folder_description">Las trazas que coincidan, serán añadidas aquí</string>
     <string name="configure_filter">Configurar filtro</string>
@@ -5742,4 +5742,5 @@
     <string name="disable_map_layers_descr">Desactiva todas las capas del mapa por encima del mapa vectorial (se debe reiniciar).</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers">Desactivar capas del mapa</string>
+    <string name="height_legend_description">Los mapas de altitud coloreados, se usan para visualizar el relieve.</string>
 </resources>

@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -28,9 +27,9 @@ import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener {
+public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener, CreateEditActionDialog.AddQuickActionListener {
 
-	public static final String TAG = AddCategoryQuickAction.class.getSimpleName();
+	public static final String TAG = AddCategoryQuickActionFragment.class.getSimpleName();
 
 	public static final String QUICK_ACTION_CATEGORY_KEY = "quick_action_category_key";
 
@@ -120,7 +119,7 @@ public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQui
 			bundle.putString(QUICK_ACTION_BUTTON_KEY, buttonState.getId());
 			bundle.putInt(QUICK_ACTION_CATEGORY_KEY, quickActionCategoryId);
 
-			AddCategoryQuickAction fragment = new AddCategoryQuickAction();
+			AddCategoryQuickActionFragment fragment = new AddCategoryQuickActionFragment();
 			fragment.setArguments(bundle);
 			manager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
@@ -138,5 +137,10 @@ public class AddCategoryQuickAction extends BaseOsmAndFragment implements AddQui
 				CreateEditActionDialog.showInstance(manager, buttonState, quickActionType.getId());
 			}
 		}
+	}
+
+	@Override
+	public void onQuickActionAdded() {
+		dismiss();
 	}
 }

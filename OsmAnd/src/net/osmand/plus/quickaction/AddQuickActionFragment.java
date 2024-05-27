@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -21,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.utils.AndroidUtils;
@@ -74,13 +72,6 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		if (savedInstanceState != null) {
 			searchMode = savedInstanceState.getBoolean(QUICK_ACTION_SEARCH_MODE_KEY, false);
 		}
-
-		requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-			@Override
-			public void handleOnBackPressed() {
-				onBackPressed();
-			}
-		});
 	}
 
 	@Nullable
@@ -183,11 +174,14 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		if (searchMode) {
 			setSearchMode(false);
 		} else {
-			dismiss();
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.onBackPressed();
+			}
 		}
 	}
 
-	private void dismiss() {
+	private void closeFragment() {
 		FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			fragmentManager.popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
@@ -223,14 +217,14 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 			if (quickActionType.getId() != 0) {
 				CreateEditActionDialog.showInstance(manager, buttonState, quickActionType.getId());
 			} else {
-				AddCategoryQuickAction.showInstance(manager, buttonState, quickActionType.getCategory());
+				AddCategoryQuickActionFragment.showInstance(manager, buttonState, quickActionType.getCategory());
 			}
 		}
 	}
 
 	@Override
 	public void onQuickActionAdded() {
-		dismiss();
+		closeFragment();
 	}
 }
 

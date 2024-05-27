@@ -12,7 +12,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,6 +47,7 @@ import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -174,10 +174,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		paintBackuped = getPaint(getColor(R.color.region_backuped));
 
 		textPaint = new TextPaint();
-		WindowManager wmgr = (WindowManager) view.getApplication().getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
-		wmgr.getDefaultDisplay().getMetrics(dm);
-		textPaint.setStrokeWidth(21 * dm.scaledDensity);
+		DisplayMetrics metrics = new DisplayMetrics();
+		AndroidUtils.getDisplay(app).getMetrics(metrics);
+		textPaint.setStrokeWidth(21 * metrics.scaledDensity);
 		textPaint.setAntiAlias(true);
 		textPaint.setTextAlign(Paint.Align.CENTER);
 

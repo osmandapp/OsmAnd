@@ -14,7 +14,7 @@ public class MapScrollDownAction extends BaseMapScrollAction{
 	public static final QuickActionType TYPE = new QuickActionType(MAP_SCROLL_DOWN_ACTION,
 			"map.scroll.down", MapScrollDownAction.class)
 			.nameRes(R.string.key_event_action_move_down)
-			.iconRes(R.drawable.ic_action_arrow_down).nonEditable()
+			.iconRes(R.drawable.ic_action_map_move_down).nonEditable()
 			.category(QuickActionType.MAP_INTERACTIONS);
 
 	public MapScrollDownAction() {

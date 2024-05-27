@@ -1883,7 +1883,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="lang_be_by">Belarusų (Lotynų)</string>
     <string name="lang_hu_formal">Vengrų (oficiali)</string>
     <string name="search_categories">Kategorijos</string>
-    <string name="map_widget_battery">Baterijos būklė</string>
+    <string name="map_widget_battery">Baterijos lygis</string>
     <string name="city_type_neighbourhood">Kaimynystė</string>
     <string name="shared_string_from">iš</string>
     <string name="coords_format_descr">Pritaikyti geografinėms koordinatėms.</string>
@@ -3239,4 +3239,59 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
 \nNorėdami sukurti atsarginę duomenų kopiją arba atkurti duomenis, turėsite prisijungti dar kartą.</string>
     <string name="osmand_cloud_delete_account_confirmation">Ištrinti paskyrą?</string>
     <string name="cloud_trash_clear_confirmation">Ištrinti visus šiukšliadėžėje esančius elementus visam laikui?</string>
+    <string name="shared_string_reset_all">Nustatyti iš naujo viską</string>
+    <string name="sync_now">Sinchronizuoti dabar</string>
+    <string name="not_enough_contributions_descr">Reikia mažiausiai %1$s pakeitimų per paskutinius du mėnesius %2$s, kad gautumėte prieigą prie neriboto valandinio žemėlapio atnaujinimo.</string>
+    <string name="contributions_may_calculate_with_delay">Bendradarbiavimo apskaičiavimas gali užtrukti keletą valandų.</string>
+    <string name="receiving_data_from_server">Priimami duomenys iš serverio…</string>
+    <string name="osmand_cloud_help_descr">Reikia pagalbos? Susisiekite su mumis adresu %1$s</string>
+    <string name="osm_live_payment_header">Mokėjimo intervalas:</string>
+    <string name="markers_remove_dialog_msg">Ištrinti žemėlapio žymeklį „%s“?</string>
+    <string name="restore_complete">Atstatyta</string>
+    <string name="grey_color_undefined">Dalys be duomenų yra pilkos spalvos.</string>
+    <string name="benefits_for_contributors_secondary_descr">Prisijunkite prie OpenStreetMap, kad patikrintumėte, ar turite teisę gauti neribotus mėnesinius ir valandinius žemėlapių atnaujinimus.</string>
+    <string name="reset_to_original">Atkurti pradinį</string>
+    <string name="online_maps_searching_descr">Ieškoma internete…</string>
+    <string name="cloud_email_not_registered">Šis el. pašto adresas nėra registruotas OsmAnd Cloud</string>
+    <string name="map_updates_are_unavailable_yet">Žemėlapio atnaujinimai dar nepasiekiami. :-(</string>
+    <string name="verify_email_address">Patvirtinkite el. pašto adresą</string>
+    <string name="enough_contributions_descr">Sveikiname, pateikėte pakankamai OpenStreetMap pakeitimų ir dabar galite mėgautis neribotais OsmAnd žemėlapių atnaujinimais!</string>
+    <string name="backup_error_no_subscription">Prenumeratos nėra</string>
+    <string name="announcement_time_off_route"></string>
+    <string name="osmand_cloud_create_account_descr">Įveskite savo el. pašto adresą, ten bus atsiųstas patvirtinimo kodas,
+\nir visi jūsų duomenys bus su juo susieti.</string>
+    <string name="connect_track_points_as">Sujungti maršruto taškus</string>
+    <string name="revolutions_per_minute_unit">APM</string>
+    <string name="osm_live_payment_renews_annually">Kasmet atnaujinama</string>
+    <string name="connect_with_straight_line">Sujungti tiesia linija</string>
+    <string name="shared_string_contributions">Bendradarbiavimas</string>
+    <string name="map_updates_for_mappers">Žemėlapių atnaujinimai žemėlapių kūrėjams</string>
+    <string name="approximate_file_size">Apytikslis failo dydis</string>
+    <string name="osm_live_payment_contribute_descr">Aukos padeda finansuoti OSM kartografiją.</string>
+    <string name="benefits_for_contributors">Privalumai aktyviems OSM bendradarbiams</string>
+    <string name="changes">Pakeitimai %1$s</string>
+    <string name="enter_verification_code">Įveskite vienkartinį slaptažodį</string>
+    <string name="verify_email_address_descr">Patvirtinimo kodas išsiųstas adresu %1$s. Įveskite jį žemiau esančiame laukelyje.</string>
+    <string name="osmand_cloud_login_descr">Įveskite el. pašto adresą, kuriuo užsiregistravote. Juo bus išsiųstas vienkartinis slaptažodis.</string>
+    <string name="restart">Perkrauti</string>
+    <string name="check_for_updates">Ieškoti atnaujinimų</string>
+    <string name="arrival_time_widget_desc">Atvykimo į paskirties tašką laikas.</string>
+    <string name="available_until">Galioja iki %1$s</string>
+    <string name="online_direct_line_maps_link">Patikrinkite reikiamus žemėlapius.</string>
+    <string name="choose_what_to_restore">Pasirinkite, ką atkurti.</string>
+    <string name="edit_map_marker">Redaguoti žemėlapio žymeklį</string>
+    <string name="ant_plus_bluetooth_off">Bluetooth išjungtas</string>
+    <string name="date_of_creation">Sukūrimo data</string>
+    <string name="filter_by_name">Filtruoti pagal pavadinimą</string>
+    <string name="shared_string_turn">Posūkis</string>
+    <string name="purchases_restored">Pirkiniai atstatyti</string>
+    <string name="pro_features">Pro funkcijos</string>
+    <string name="benefits_for_contributors_primary_descr">Aktyvūs OpenStreetMap.org bendradarbiai gali turėti teisę į neribotą valandinį žemėlapio atnaujinimą.</string>
+    <string name="online_maps_required_descr">Deja, OsmAnd negalėjo nustatyti maršruto jūsų nustatymams.
+\n
+\nGalbūt kai kurie žemėlapiai neįkelti, galite atlikti internetinę reikiamų žemėlapių patikrą.</string>
+    <string name="cloud_email_already_registered">Šis elektroninis pašto adresas jau užregistruotas.</string>
+    <string name="use_login_and_password">Naudokite vartotojo vardą ir slaptažodį</string>
+    <string name="restore_selected_data">Atkurti pasirinktus duomenis</string>
+    <string name="filter_screen_title">Filtras</string>
 </resources>
