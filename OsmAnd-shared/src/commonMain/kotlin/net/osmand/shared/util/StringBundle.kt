@@ -1,4 +1,4 @@
-package net.osmand.shared.gpx
+package net.osmand.shared.util
 
 import kotlin.math.pow
 import kotlin.math.round
@@ -65,9 +65,11 @@ class StringBundle {
 		}
 	}
 
-	class StringListItem(name: String, list: List<Item<*>>) : Item<List<Item<*>>>(name, ItemType.LIST, list)
+	class StringListItem(name: String, list: List<Item<*>>) : Item<List<Item<*>>>(name,
+		ItemType.LIST, list)
 
-	open class StringMapItem(name: String, map: Map<String, Item<*>>) : Item<Map<String, Item<*>>>(name, ItemType.MAP, map)
+	open class StringMapItem(name: String, map: Map<String, Item<*>>) : Item<Map<String, Item<*>>>(name,
+		ItemType.MAP, map)
 
 	class StringBundleItem(name: String, bundle: StringBundle) : StringMapItem(name, bundle.map)
 

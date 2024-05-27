@@ -12,6 +12,9 @@ import net.osmand.shared.util.IProgress
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.MapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
+import net.osmand.shared.util.StringBundle
+import net.osmand.shared.util.StringBundleXmlReader
+import net.osmand.shared.util.StringBundleXmlWriter
 import net.osmand.shared.xml.XmlParserException
 import net.osmand.shared.xml.XmlPullParser
 import net.osmand.shared.xml.XmlSerializer
@@ -101,7 +104,7 @@ object GpxUtilities {
 
 		companion object {
 			fun getColorFromName(name: String): GpxColor? {
-				return values().firstOrNull { it.name.equals(name, ignoreCase = true) }
+				return entries.firstOrNull { it.name.equals(name, ignoreCase = true) }
 			}
 		}
 	}
@@ -223,7 +226,7 @@ object GpxUtilities {
 				return try {
 					Algorithms.parseColor(colorString)
 				} catch (e: IllegalArgumentException) {
-					e.printStackTrace()
+					log.error("Error parse color", e)
 					null
 				}
 			} else {
@@ -1286,7 +1289,7 @@ object GpxUtilities {
 							value
 						)
 					} catch (e: IOException) {
-						e.printStackTrace()
+						log.error("Error writeExtensions", e)
 					}
 				}
 			}
@@ -1332,24 +1335,6 @@ object GpxUtilities {
 		serializer.attribute(null, "maxlat", formatLatLon(bounds.maxlat))
 		serializer.attribute(null, "maxlon", formatLatLon(bounds.maxlon))
 		serializer.endTag(null, "bounds")
-	}
-
-	class GpxFileResult {
-		var locations = mutableListOf<List<Location>>()
-		var wayPoints = mutableListOf<WptPt>()
-		var cloudMadeFile = false
-		var error: String? = null
-
-		fun findFistLocation(): Location? {
-			for (l in locations) {
-				for (ls in l) {
-					if (ls != null) {
-						return ls
-					}
-				}
-			}
-			return null
-		}
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
@@ -1443,10 +1428,10 @@ object GpxUtilities {
 	fun getCreationTime(gpxFile: GpxFile?): Long {
 		var time: Long = 0
 		if (gpxFile != null) {
-			if (gpxFile.metadata.time > 0) {
-				time = gpxFile.metadata.time
+			time = if (gpxFile.metadata.time > 0) {
+				gpxFile.metadata.time
 			} else {
-				time = gpxFile.getLastPointTime()
+				gpxFile.getLastPointTime()
 			}
 			if (time == 0L) {
 				time = gpxFile.modifiedTime
@@ -1488,26 +1473,26 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
-		var fis: FileInputStream? = null
+		val path = filePath.toPath()
+		var source: Source? = null
 		return try {
-			fis = FileInputStream(file)
-			val gpxFile = loadGpxFile(fis, extensionsReader, addGeneralTrack)
-			gpxFile.path = file.absolutePath
-			gpxFile.modifiedTime = file.lastModified()
+			source = FileSystem.SYSTEM.source(path)
+			val gpxFile = loadGpxFile(source, extensionsReader, addGeneralTrack)
+			gpxFile.path = FileSystem.SYSTEM.canonicalize(path).toString()
+			gpxFile.modifiedTime = FileSystem.SYSTEM.metadata(path).lastModifiedAtMillis ?: 0
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
-			Algorithms.closeStream(fis)
 			if (gpxFile.error != null) {
-				println("Error reading gpx ${gpxFile.path}")
+				log.info("Error reading gpx ${gpxFile.path}")
 			}
 			gpxFile
 		} catch (e: IOException) {
 			val gpxFile = GpxFile(null)
-			gpxFile.path = file.absolutePath
-			e.printStackTrace()
+			gpxFile.path = FileSystem.SYSTEM.canonicalize(path).toString()
+			log.error("Error reading gpx ${gpxFile.path}", e)
 			gpxFile.error = e
 			gpxFile
 		} finally {
-			Algorithms.closeStream(fis)
+			source?.close()
 		}
 	}
 
@@ -1524,7 +1509,7 @@ object GpxUtilities {
 		gpxFile.metadata.time = 0
 		try {
 			val parser = XmlPullParser()
-			parser.setInput(getUTF8Reader(source))
+			parser.setInput(source, "UTF-8")
 			val routeTrack = Track()
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
@@ -1546,7 +1531,7 @@ object GpxUtilities {
 					val parse = parserState.lastOrNull()
 					val tag = parser.getName() ?: ""
 					if (extensionReadMode && parse != null && !routePointExtension) {
-						val tagName = tag.lowercase(Locale.getDefault())
+						val tagName = tag.lowercase()
 						when {
 							routeExtension && tagName == "segment" -> {
 								val segment = parseRouteSegmentAttributes(parser)
@@ -1589,7 +1574,7 @@ object GpxUtilities {
 									if (values.isNotEmpty()) {
 										for ((t, value) in values) {
 											val supportedTag =
-												getExtensionsSupportedTag(t.lowercase(Locale.getDefault()))
+												getExtensionsSupportedTag(t.lowercase())
 											parse.getExtensionsToWrite()[supportedTag] = value
 											if (parse is WptPt) {
 												when (tag) {
@@ -1802,7 +1787,7 @@ object GpxUtilities {
 										if (text != null) {
 											try {
 												parse.ele = text.toDouble()
-											} catch (e: NumberFormatException) {
+											} catch (_: NumberFormatException) {
 											}
 										}
 									}
@@ -1812,7 +1797,7 @@ object GpxUtilities {
 										if (text != null) {
 											try {
 												parse.hdop = text.toDouble()
-											} catch (e: NumberFormatException) {
+											} catch (_: NumberFormatException) {
 											}
 										}
 									}
@@ -1943,9 +1928,9 @@ object GpxUtilities {
 		val networkRouteKeyTags: MutableMap<String, String> = LinkedHashMap()
 		val reader = StringBundleXmlReader(parser)
 		reader.readBundle()
-		val bundle = reader.bundle
+		val bundle = reader.getBundle()
 		if (!bundle.isEmpty()) {
-			for (item in bundle.map.values) {
+			for (item in bundle.getMap().values) {
 				if (item.type == StringBundle.ItemType.STRING) {
 					networkRouteKeyTags[item.name] = item.value as String
 				}
@@ -1986,29 +1971,16 @@ object GpxUtilities {
 		return pointsGroups
 	}
 
-	@Throws(IOException::class)
-	private fun getUTF8Reader(f: InputStream): Reader {
-		val bis = BufferedInputStream(f)
-		require(bis.markSupported())
-		bis.mark(3)
-		var reset = true
-		val t = ByteArray(3)
-		bis.read(t)
-		if (t[0] == 0xef.toByte() && t[1] == 0xbb.toByte() && t[2] == 0xbf.toByte()) {
-			reset = false
-		}
-		if (reset) {
-			bis.reset()
-		}
-		return InputStreamReader(bis, "UTF-8")
-	}
-
 	private fun parseWptAttributes(parser: XmlPullParser): WptPt {
 		val wpt = WptPt()
 		try {
-			wpt.lat = parser.getAttributeValue("", "lat").toDouble()
-			wpt.lon = parser.getAttributeValue("", "lon").toDouble()
-		} catch (e: NumberFormatException) {
+			val latStr = parser.getAttributeValue("", "lat")
+			val lonStr = parser.getAttributeValue("", "lon")
+			if (!latStr.isNullOrEmpty() && !lonStr.isNullOrEmpty()) {
+				wpt.lat = latStr.toDouble()
+				wpt.lon = lonStr.toDouble()
+			}
+		} catch (_: NumberFormatException) {
 		}
 		return wpt
 	}

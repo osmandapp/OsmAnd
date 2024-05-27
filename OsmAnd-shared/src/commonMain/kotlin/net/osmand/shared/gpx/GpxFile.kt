@@ -1,15 +1,16 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.data.QuadRect
+import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
 import net.osmand.shared.gpx.GpxUtilities.Metadata
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.GpxUtilities.Route
 import net.osmand.shared.gpx.GpxUtilities.Track
-import net.osmand.shared.gpx.GpxUtilities.WptPt
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
-import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
+import net.osmand.shared.gpx.GpxUtilities.WptPt
 import net.osmand.shared.gpx.GpxUtilities.createNetworkRouteExtensionWriter
 import net.osmand.shared.gpx.GpxUtilities.updateQR
+import net.osmand.shared.util.MapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import kotlin.collections.set
 
@@ -692,6 +693,18 @@ class GpxFile : GpxExtensions {
 
 	fun getRef(): String? {
 		return extensions?.get("ref")
+	}
+
+	fun getOuterRadius(): String {
+		val rect = getRect()
+		val radius = MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right).toInt()
+		return MapUtils.convertDistToChar(
+			radius,
+			GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER,
+			GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST,
+			GpxUtilities.TRAVEL_GPX_CONVERT_MULT_1,
+			GpxUtilities.TRAVEL_GPX_CONVERT_MULT_2
+		)
 	}
 
 	fun getArticleTitle(): String? {

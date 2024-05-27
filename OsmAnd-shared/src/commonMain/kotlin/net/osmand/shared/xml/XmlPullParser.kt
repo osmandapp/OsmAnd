@@ -5,6 +5,21 @@ import okio.Source
 
 expect class XmlPullParser() {
 
+	companion object {
+		val NO_NAMESPACE: String
+		val START_DOCUMENT: Int
+		val END_DOCUMENT: Int
+		val START_TAG: Int
+		val END_TAG: Int
+		val TEXT: Int
+		val CDSECT: Int
+		val ENTITY_REF: Int
+		val IGNORABLE_WHITESPACE: Int
+		val PROCESSING_INSTRUCTION: Int
+		val COMMENT: Int
+		val DOCDECL: Int
+	}
+
 	@Throws(XmlParserException::class)
 	fun setFeature(name: String, state: Boolean)
 

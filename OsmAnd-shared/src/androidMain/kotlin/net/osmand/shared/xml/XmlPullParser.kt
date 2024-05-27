@@ -11,6 +11,22 @@ import java.io.FileInputStream
 import java.io.InputStream
 
 actual class XmlPullParser actual constructor() {
+
+	actual companion object {
+		actual const val NO_NAMESPACE: String = ""
+		actual const val START_DOCUMENT: Int = 0
+		actual const val END_DOCUMENT: Int = 1
+		actual const val START_TAG: Int = 2
+		actual const val END_TAG: Int = 3
+		actual const val TEXT: Int = 4
+		actual const val CDSECT: Int = 5
+		actual const val ENTITY_REF: Int = 6
+		actual const val IGNORABLE_WHITESPACE: Int = 7
+		actual const val PROCESSING_INSTRUCTION: Int = 8
+		actual const val COMMENT: Int = 9
+		actual const val DOCDECL: Int = 10
+	}
+
 	private val parser: XmlPullParser = Xml.newPullParser()
 	private var inputStream: InputStream? = null
 
