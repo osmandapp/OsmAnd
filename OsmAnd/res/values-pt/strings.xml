@@ -5499,7 +5499,7 @@
     <string name="shared_string_delete_immediately">Eliminar imediatamente</string>
     <string name="shared_string_loading">A carregar</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="delete_smart_folder_dialog_message">Isto irá remover a pasta inteligente \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Isto irá remover a pasta inteligente \"%1$s\". (Nenhum trilho será eliminado).</string>
     <string name="shared_string_is_deleted">%1$s foi eliminado.</string>
     <string name="sort_size_ascending">Tamanho pequeno primeiro</string>
     <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
@@ -5628,7 +5628,7 @@
     <string name="speed_limit_warning">Aviso de limite de velocidade</string>
     <string name="shared_string_limit">Limite</string>
     <string name="when_exceeded">Quando excedido</string>
-    <string name="speedometer_description">Mostra a velocidade atual detetada pelo GPS</string>
+    <string name="speedometer_description">Mostra a sua velocidade atual conforme indicada pelo GPS</string>
     <string name="help_article_setup_a_route_name">Configurar uma rota</string>
     <string name="rendering_attr_padusDisplayMode_description">Por tipo de acesso ou nome do gestor</string>
     <string name="rendering_value_access_name">Por tipo de acesso</string>
@@ -5729,4 +5729,7 @@
     <string name="routing_attr_avoid_cobblestone_name">Evitar pedras irregulares</string>
     <string name="routing_attr_avoid_cobblestone_description">Evitar pedras irregulares</string>
     <string name="steps_per_minute_unit">PPM</string>
+    <string name="disable_map_layers">Desativar camadas de mapas</string>
+    <string name="disable_map_layers_descr">Desativar todas as camadas de mapas por cima do mapa vetorial (é necessário reiniciar).</string>
+    <string name="height_legend_description">São utilizados mapas de cores de altitude para visualizar o relevo.</string>
 </resources>
