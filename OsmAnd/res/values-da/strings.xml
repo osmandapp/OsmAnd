@@ -5489,7 +5489,7 @@
     <string name="smart_folder_saved">Smart-mappe gemt</string>
     <string name="add_smart_folder">Tilføj smart-mappe</string>
     <string name="save_as_smart_folder">Gem som smart-mappe</string>
-    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\". (Ingen spor slettes.)</string>
     <string name="empty_smart_folder_title">Ingen matchende spor</string>
     <string name="empty_smart_folder_description">Matchende spor vises her</string>
     <string name="configure_filter">Konfigurér filter</string>
