@@ -5454,7 +5454,7 @@
     <string name="save_as_smart_folder">Uložit jako chytrou složku</string>
     <string name="shared_string_show_icon">Zobrazit ikonu</string>
     <string name="shared_string_loading">Načítání</string>
-    <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Tím se odstraní chytrá složka \"%1$s\". (Žádné stopy nebudou smazány.)</string>
     <string name="discard_filter_changes_prompt">Resetovat všechny filtry?</string>
     <string name="no_config_smart_folder_description">Chytré složky umožňují seskupovat trasy podle použitých filtrů</string>
     <string name="loading_tracks">Znovu načítání tras</string>
