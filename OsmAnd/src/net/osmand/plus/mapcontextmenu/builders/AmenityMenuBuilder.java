@@ -185,7 +185,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
 		AmenityExtensionsHelper helper = new AmenityExtensionsHelper(app);
-		return helper.getImagesParams(additionalInfo != null ? additionalInfo : amenity.getAmenityExtensions());
+		return helper.getImagesParams(additionalInfo != null ? additionalInfo : helper.getAmenityExtensions(amenity));
 	}
 
 	@Nullable
