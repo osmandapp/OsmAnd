@@ -4,6 +4,8 @@ object Algorithms {
 	private const val BUFFER_SIZE = 1024
 	//private val log = PlatformUtil.getLog(Algorithms::class.java)
 
+	private const val CHAR_TO_SPLIT = ','
+
 	private val CHARS_TO_NORMALIZE_KEY = charArrayOf('’')
 	private val CHARS_TO_NORMALIZE_VALUE = charArrayOf('\'')
 
@@ -187,4 +189,29 @@ object Algorithms {
 		}
 	}
 
+	fun decodeStringSet(s: String): Set<String> {
+		return decodeStringSet(s, CHAR_TO_SPLIT.toString())
+	}
+
+	fun decodeStringSet(s: String, split: String): Set<String> {
+		if (s.isEmpty()) {
+			return emptySet()
+		}
+		return s.split(split).toSet()
+	}
+
+	fun <T> encodeCollection(collection: Collection<T>): String {
+		return encodeCollection(collection, CHAR_TO_SPLIT.toString())
+	}
+
+	fun <T> encodeCollection(collection: Collection<T>, split: String): String {
+		if (collection.isNotEmpty()) {
+			val sb = StringBuilder()
+			for (item in collection) {
+				sb.append(item).append(split)
+			}
+			return sb.toString()
+		}
+		return ""
+	}
 }

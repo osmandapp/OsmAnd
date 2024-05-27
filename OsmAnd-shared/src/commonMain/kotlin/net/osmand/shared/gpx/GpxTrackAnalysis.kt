@@ -1,14 +1,25 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.data.LatLon
+import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
+import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
 import net.osmand.shared.gpx.GpxUtilities.WptPt
 import net.osmand.shared.util.Algorithms
+import net.osmand.shared.util.MapUtils
 
 class GpxTrackAnalysis {
 
 	companion object {
 		const val ANALYSIS_VERSION = 1
+
+		fun prepareInformation(
+			fileTimeStamp: Long, pointsAnalyzer: TrackPointsAnalyser, segment: TrkSegment
+		): GpxTrackAnalysis {
+			return GpxTrackAnalysis().prepareInformation(
+				fileTimeStamp, pointsAnalyzer, SplitSegment(segment)
+			)
+		}
 	}
 
 	var name: String? = null
@@ -18,7 +29,7 @@ class GpxTrackAnalysis {
 	var timeMovingWithoutGaps: Long = 0
 	var totalDistanceMovingWithoutGaps = 0f
 
-	private val parameters = mutableMapOf<GpxParameter, Any>()
+	private val parameters = mutableMapOf<GpxParameter, Any?>()
 
 	var minHdop = Double.NaN
 	var maxHdop = Double.NaN
@@ -43,7 +54,7 @@ class GpxTrackAnalysis {
 		return parameters[parameter] ?: parameter.defaultValue
 	}
 
-	fun setGpxParameter(parameter: GpxParameter, value: Any) {
+	fun setGpxParameter(parameter: GpxParameter, value: Any?) {
 		parameters[parameter] = value
 	}
 
@@ -183,14 +194,6 @@ class GpxTrackAnalysis {
 		return minHdop > 0
 	}
 
-	fun isColorizationTypeAvailable(colorizationType: ColorizationType): Boolean {
-		return when (colorizationType) {
-			ColorizationType.SPEED -> isSpeedSpecified()
-			ColorizationType.ELEVATION, ColorizationType.SLOPE -> isElevationSpecified()
-			else -> true
-		}
-	}
-
 	fun setLatLonStart(latitude: Double, longitude: Double) {
 		setGpxParameter(GpxParameter.START_LAT, latitude)
 		setGpxParameter(GpxParameter.START_LON, longitude)
@@ -244,16 +247,6 @@ class GpxTrackAnalysis {
 
 	fun getWptCategoryNamesSet(): Set<String>? {
 		return wptCategoryNames?.let { Algorithms.decodeStringSet(it) }
-	}
-
-	companion object {
-		fun prepareInformation(
-			fileTimeStamp: Long, pointsAnalyzer: TrackPointsAnalyser, segment: TrkSegment
-		): GpxTrackAnalysis {
-			return GpxTrackAnalysis().prepareInformation(
-				fileTimeStamp, pointsAnalyzer, SplitSegment(segment)
-			)
-		}
 	}
 
 	fun prepareInformation(
@@ -341,9 +334,13 @@ class GpxTrackAnalysis {
 				if (j > 0) {
 					val prev = s[j - 1]
 
-					net.osmand.Location.distanceBetween(
-						prev.lat, prev.lon, point.lat, point.lon, calculations
-					)
+					calculations[0] = MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
+					// TODO: Fix if needed
+					// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
+					// a little more exact, also seems slightly faster:
+					//net.osmand.Location.distanceBetween(
+					//	prev.lat, prev.lon, point.lat, point.lon, calculations
+					//)
 					totalDistance += calculations[0]
 					segmentDistance += calculations[0]
 					point.distance = segmentDistance.toDouble()
@@ -545,28 +542,28 @@ class GpxTrackAnalysis {
 	private fun processElevationDiff(segment: SplitSegment) {
 		val approximator = getElevationApproximator(segment)
 		approximator.approximate()
-		val distances = approximator.distances
-		val elevations = approximator.elevations
+		val distances = approximator.getDistances()
+		val elevations = approximator.getElevations()
 		if (distances != null && elevations != null) {
 			val elevationDiffsCalc = getElevationDiffsCalculator(distances, elevations)
 			elevationDiffsCalc.calculateElevationDiffs()
-			diffElevationUp += elevationDiffsCalc.diffElevationUp
-			diffElevationDown += elevationDiffsCalc.diffElevationDown
+			diffElevationUp += elevationDiffsCalc.getDiffElevationUp()
+			diffElevationDown += elevationDiffsCalc.getDiffElevationDown()
 		}
 	}
 
 	private fun getElevationApproximator(segment: SplitSegment): ElevationApproximator {
 		return object : ElevationApproximator() {
 			override fun getPointLatitude(index: Int): Double {
-				return segment.get(index).lat
+				return segment[index].lat
 			}
 
 			override fun getPointLongitude(index: Int): Double {
-				return segment.get(index).lon
+				return segment[index].lon
 			}
 
 			override fun getPointElevation(index: Int): Double {
-				return segment.get(index).ele
+				return segment[index].ele
 			}
 
 			override fun getPointsCount(): Int {

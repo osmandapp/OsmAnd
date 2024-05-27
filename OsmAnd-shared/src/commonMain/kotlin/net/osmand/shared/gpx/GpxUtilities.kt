@@ -396,24 +396,6 @@ object GpxUtilities {
 			getExtensionsToWrite()[AMENITY_ORIGIN_EXTENSION] = originName
 		}
 
-		/* TODO: fix
-		fun getColor(type: ColorizationType): Int {
-			return when (type) {
-				ColorizationType.SPEED -> speedColor
-				ColorizationType.ELEVATION -> altitudeColor
-				else -> slopeColor
-			}
-		}
-
-		fun setColor(type: ColorizationType, color: Int) {
-			when (type) {
-				ColorizationType.SPEED -> speedColor = color
-				ColorizationType.ELEVATION -> altitudeColor = color
-				ColorizationType.SLOPE -> slopeColor = color
-			}
-		}
-		 */
-
 		fun getBackgroundType(): String? {
 			return getExtensionsToRead()[BACKGROUND_TYPE_EXTENSION]
 		}
