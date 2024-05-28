@@ -634,13 +634,14 @@ public class AndroidNetworkUtils {
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				return result;
 			} else {
+				int bytesDivisor = 1024;
 				long lastModified = connection.getLastModified();
 				if (lastModified > 0 && lastModified <= lastTime) {
 					return 0;
 				}
 				if (progress != null) {
-					int contentLength = connection.getContentLength();
-					progress.startWork(contentLength);
+					int work = (int) (connection.getContentLengthLong() / bytesDivisor);
+					progress.startWork(work);
 				}
 				InputStream inputStream = gzip
 						? new GZIPInputStream(connection.getInputStream())
@@ -649,7 +650,7 @@ public class AndroidNetworkUtils {
 				OutputStream stream = null;
 				try {
 					stream = new FileOutputStream(fileToSave);
-					Algorithms.streamCopy(inputStream, stream, progress, 1024);
+					Algorithms.streamCopy(inputStream, stream, progress, bytesDivisor);
 					stream.flush();
 					result = lastModified > 0 ? lastModified : 1;
 				} finally {
