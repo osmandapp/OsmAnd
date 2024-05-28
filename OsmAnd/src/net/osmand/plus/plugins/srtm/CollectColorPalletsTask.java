@@ -34,7 +34,7 @@ public class CollectColorPalletsTask extends AsyncTask<Void, Void, ColorPalette>
 	@Override
 	protected ColorPalette doInBackground(Void... params) {
 		if (!TerrainMode.isModeExist(modeKey)) {
-			PlatformUtil.getLog(TerrainColorSchemeAction.class).error("Provided terrain mode doesn't exist");
+			PlatformUtil.getLog(CollectColorPalletsTask.class).error("Provided terrain mode doesn't exist");
 			return null;
 		}
 		TerrainMode mode = TerrainMode.getByKey(modeKey);
@@ -47,7 +47,7 @@ public class CollectColorPalletsTask extends AsyncTask<Void, Void, ColorPalette>
 				colorPalette = ColorPalette.parseColorPalette(new FileReader(mainColorFile));
 			}
 		} catch (IOException e) {
-			PlatformUtil.getLog(TerrainColorSchemeAction.class).error("Error reading color file ", e);
+			PlatformUtil.getLog(CollectColorPalletsTask.class).error("Error reading color file ", e);
 		}
 
 		return colorPalette;
@@ -61,6 +61,7 @@ public class CollectColorPalletsTask extends AsyncTask<Void, Void, ColorPalette>
 
 	public interface CollectColorPalletListener {
 		void onGetColorPalette(@Nullable ColorPalette colorPalette);
+
 		void onChangeCollectingState(boolean isCollecting);
 	}
 }
