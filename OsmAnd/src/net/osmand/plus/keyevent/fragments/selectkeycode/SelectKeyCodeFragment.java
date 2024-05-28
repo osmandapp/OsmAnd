@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -141,7 +140,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	private void setupApplyButton(@NonNull View view) {
 		applyButton = view.findViewById(R.id.dismiss_button);
 		applyButton.setOnClickListener(v -> {
-			EditKeyAssignmentController controller = EditKeyAssignmentController.getInstance(app);
+			EditKeyAssignmentController controller = EditKeyAssignmentController.getExistedInstance(app);
 			if (controller != null) {
 				controller.onKeyCodeSelected(initialKeyCode, keyCode);
 			}
@@ -206,8 +205,9 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 
 	private void updateApplyButtonState() {
 		applyButton.setEnabled(isKeyCodeChanged() && !isKeyCodeAlreadyAssignedToThisAction());
-		applyButton.setButtonType(isKeyCodeFree() ? DialogButtonType.PRIMARY : DialogButtonType.PRIMARY_HARMFUL);
-		applyButton.setTitleId(isKeyCodeFree() ? R.string.shared_string_save : R.string.shared_string_reassign);
+		boolean keyCodeFree = isKeyCodeFree();
+		applyButton.setButtonType(keyCodeFree ? DialogButtonType.PRIMARY : DialogButtonType.PRIMARY_HARMFUL);
+		applyButton.setTitleId(keyCodeFree ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
 
 	@Override

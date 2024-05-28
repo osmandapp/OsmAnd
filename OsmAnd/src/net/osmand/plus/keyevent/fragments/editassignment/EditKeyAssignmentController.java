@@ -72,6 +72,9 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		this.deviceHelper = app.getInputDeviceHelper();
 		this.deviceId = deviceId;
 		this.assignmentId = assignmentId;
+		if (assignmentId == null) {
+			enterEditMode();
+		}
 	}
 
 	@NonNull
@@ -262,12 +265,20 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		return editBundle != null;
 	}
 
+	public boolean isNewAssignment() {
+		return assignmentId == null;
+	}
+
 	public boolean hasChangesToSave() {
 		return editBundle != null && editBundle.command != null && !Algorithms.isEmpty(editBundle.keyCodes);
 	}
 
-	public void saveChanges() {
-		// TODO
+	public void askSaveChanges() {
+		if (isNewAssignment()) {
+
+		} else {
+
+		}
 	}
 
 	@Nullable
@@ -292,18 +303,18 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		List<Integer> keyCodes;
 	}
 
-	public static void registerInstance(@NonNull OsmandApplication app,
-	                                    @NonNull ApplicationMode appMode,
-	                                    @NonNull String deviceId,
-	                                    @Nullable String assignmentId,
-	                                    boolean usedOnMap) {
+	public static void createInstance(@NonNull OsmandApplication app,
+	                                  @NonNull ApplicationMode appMode,
+	                                  @NonNull String deviceId,
+	                                  @Nullable String assignmentId,
+	                                  boolean usedOnMap) {
 		app.getDialogManager().register(
 				PROCESS_ID, new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap)
 		);
 	}
 
 	@Nullable
-	public static EditKeyAssignmentController getInstance(@NonNull OsmandApplication app) {
+	public static EditKeyAssignmentController getExistedInstance(@NonNull OsmandApplication app) {
 		DialogManager dialogManager = app.getDialogManager();
 		return (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
 	}

@@ -140,23 +140,21 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		updateViewContent();
 	}
 
-	private void updateViewContent() {
-		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceTypeEditable());
-	}
-
 	private void enterEditMode(@NonNull View view) {
 		controller.enterEditMode();
-		onScreenModeChange(view);
+		updateScreenMode(view);
 	}
 
 	private void askExitEditMode(@NonNull View view) {
 		// todo check changes
 		controller.exitEditMode();
-		onScreenModeChange(view);
+		updateScreenMode(view);
 	}
 
-	private void onScreenModeChange(@NonNull View view) {
+	private void updateScreenMode(@NonNull View view) {
 		updateToolbar(view);
+		updateSaveButton(view);
+		updateFabButton(view);
 		updateViewContent();
 	}
 
@@ -174,6 +172,10 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		FloatingActionButton addButton = view.findViewById(R.id.fabButton);
 		addButton.setVisibility(!controller.isInEditMode() ? View.VISIBLE : View.GONE);
 		addButton.setOnClickListener(v -> controller.askAddAssignment());
+	}
+
+	private void updateViewContent() {
+		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceTypeEditable());
 	}
 
 	@Override

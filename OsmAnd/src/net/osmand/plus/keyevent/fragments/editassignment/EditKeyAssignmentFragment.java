@@ -50,11 +50,12 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		Bundle arguments = requireArguments();
 		String appModeKey = arguments.getString(APP_MODE_KEY);
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = EditKeyAssignmentController.getInstance(app);
-		if (controller == null) {
+		controller = EditKeyAssignmentController.getExistedInstance(app);
+		if (controller != null) {
+			app.getDialogManager().register(PROCESS_ID, this);
+		} else {
 			dismiss();
 		}
-		app.getDialogManager().register(PROCESS_ID, this);
 	}
 
 	@Nullable
@@ -71,7 +72,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
-		updateViewContent(view);
+		updateScreenMode(view);
 		return view;
 	}
 
@@ -83,7 +84,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		toolbar.setNavigationIcon(getNavigationIcon());
 		toolbar.setNavigationContentDescription(R.string.shared_string_exit);
 		toolbar.setNavigationOnClickListener(v -> {
-			if (controller.isInEditMode()) {
+			if (controller.isInEditMode() && !controller.isNewAssignment()) {
 				exitEditMode(view);
 			} else {
 				dismiss();
@@ -107,17 +108,18 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 
 	private void enterEditMode(@NonNull View view) {
 		controller.enterEditMode();
-		onScreenModeChange(view, true);
+		updateScreenMode(view);
 	}
 
 	private void exitEditMode(@NonNull View view) {
 		controller.exitEditMode();
-		onScreenModeChange(view, false);
+		updateScreenMode(view);
 	}
 
-	private void onScreenModeChange(@NonNull View view, boolean editMode) {
+	private void updateScreenMode(@NonNull View view) {
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getNavigationIcon());
+		boolean editMode = controller.isInEditMode();
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_edit), !editMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.action_overflow_menu), !editMode);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.bottom_buttons), editMode);
@@ -166,7 +168,10 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	private void updateSaveButton(@NonNull View view) {
 		DialogButton saveButton = view.findViewById(R.id.save_button);
 		saveButton.setEnabled(controller.hasChangesToSave());
-		saveButton.setOnClickListener(v -> controller.saveChanges());
+		saveButton.setOnClickListener(v -> {
+			controller.askSaveChanges();
+			dismiss();
+		});
 	}
 
 	@Override
@@ -229,7 +234,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	                                @NonNull String deviceId,
 	                                @Nullable String assignmentId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			EditKeyAssignmentController.registerInstance(app, appMode, deviceId, assignmentId, false);
+			EditKeyAssignmentController.createInstance(app, appMode, deviceId, assignmentId, false);
 			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
