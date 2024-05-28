@@ -5731,4 +5731,5 @@
     <string name="disable_map_layers_descr">Alle Kartenebenen über der Vektorkarte deaktivieren (Neustart erforderlich).</string>
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
     <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um Relief zu visualisieren.</string>
+    <string name="travel_topics">Reisethemen</string>
 </resources>
