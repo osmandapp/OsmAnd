@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.QuickActionListFragment.*;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +24,7 @@ import java.util.Map;
 public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 	private final OsmandApplication app;
 	private final Map<QuickActionType, List<QuickActionType>> quickActionsMap = new HashMap<>();
-	private final List<QuickActionType> items = new ArrayList<>();
+	private final List<ListItem> items = new ArrayList<>();
 	private boolean searchMode = false;
 	private String filterQuery;
 
@@ -43,32 +45,43 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		setItemsFromMap();
 	}
 
-	public void setItems(@NonNull List<QuickActionType> items) {
+	public void setItems(@NonNull List<QuickActionType> actionItems) {
 		this.items.clear();
-		this.items.addAll(items);
-		this.items.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
+		actionItems.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
+		if (actionItems.size() > 0) {
+			items.add(new ListItem(ItemType.LIST_DIVIDER));
+		}
+		fillItems(actionItems);
+	}
+
+	private void fillItems(@NonNull List<QuickActionType> typeActions) {
+		for (QuickActionType type : typeActions) {
+			items.add(new ListItem(ItemType.ACTION, type));
+		}
 	}
 
 	private void setItemsFromMap() {
 		items.clear();
 		if (searchMode) {
+			List<QuickActionType> sortedActions = new ArrayList<>();
 			for (List<QuickActionType> typeActions : quickActionsMap.values()) {
 				if (Algorithms.isEmpty(filterQuery)) {
-					items.addAll(typeActions);
+					sortedActions.addAll(typeActions);
 				} else {
 					for (QuickActionType action : typeActions) {
 						if (action.getFullName(app).toLowerCase().contains(filterQuery.toLowerCase())) {
-							items.add(action);
+							sortedActions.add(action);
 						}
 					}
 				}
 			}
-			items.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
+			sortedActions.sort((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)));
+			fillItems(sortedActions);
 		} else {
 			quickActionsMap.keySet()
 					.stream()
 					.sorted((o1, o2) -> app.getMapButtonsHelper().compareNames(o1.getFullName(app), o2.getFullName(app)))
-					.forEach(items::add);
+					.forEach(quickActionType -> items.add(new ListItem(ItemType.ACTION, quickActionType)));
 		}
 	}
 
@@ -85,14 +98,30 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = themedInflater.inflate(R.layout.configure_screen_list_item, parent, false);
-		return new QuickActionViewHolder(view, nightMode);
+		ItemType type = viewType < ItemType.values().length ? ItemType.values()[viewType] : ItemType.LIST_DIVIDER;
+		View itemView;
+		switch (type) {
+			case ACTION:
+				View view = themedInflater.inflate(R.layout.configure_screen_list_item, parent, false);
+				return new QuickActionViewHolder(view, nightMode);
+			case LIST_DIVIDER:
+				itemView = themedInflater.inflate(R.layout.list_item_divider, parent, false);
+				return new ListDivider(itemView);
+			default:
+				throw new IllegalArgumentException("Unsupported view type");
+		}
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		ListItem item = items.get(position);
+		return item.type.ordinal();
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 		if (holder instanceof QuickActionViewHolder) {
-			QuickActionType item = items.get(position);
+			QuickActionType item = (QuickActionType) items.get(position).value;
 			boolean lastItem = position == getItemCount() - 1;
 			int descriptionCount = 0;
 			if (!searchMode && item.getId() == 0) {
@@ -106,7 +135,7 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 			viewHolder.itemView.setOnClickListener(v -> {
 				int adapterPosition = holder.getAdapterPosition();
 				if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
-					listener.onItemClick(items.get(adapterPosition));
+					listener.onItemClick((QuickActionType) items.get(adapterPosition).value);
 				}
 			});
 		}
@@ -121,6 +150,13 @@ public class AddQuickActionsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 		this.searchMode = searchMode;
 		setItemsFromMap();
 		notifyDataSetChanged();
+	}
+
+	private class ListDivider extends RecyclerView.ViewHolder {
+
+		public ListDivider(View itemView) {
+			super(itemView);
+		}
 	}
 
 	public interface ItemClickListener {

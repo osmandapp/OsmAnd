@@ -41,6 +41,7 @@ public class QuickActionViewHolder extends RecyclerView.ViewHolder {
 		description = itemView.findViewById(R.id.description);
 		itemsCountView = itemView.findViewById(R.id.items_count_descr);
 		shortDivider = itemView.findViewById(R.id.short_divider);
+		itemView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	public void bindView(@NonNull QuickActionType type, int itemsCount, boolean lastItem) {

@@ -850,7 +850,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 		BUTTON
 	}
 
-	private static class ListItem {
+	public static class ListItem {
 		ItemType type;
 		Object value;
 
