@@ -1784,7 +1784,7 @@
     <string name="rendering_value_bicycle_name">Bizikleta</string>
     <string name="rendering_value_pedestrian_name">Oinez</string>
     <string name="rendering_attr_hideAccess_name">Sarbide murrizketak</string>
-    <string name="rendering_attr_showAccess_name">Erakutsi sarbide murrizketak</string>
+    <string name="rendering_attr_showAccess_name">Erakutsi sarbide- eta bidesari-murrizketak</string>
     <string name="local_index_select_gpx_file">Hautatu arrastoa</string>
     <string name="sort_by_distance">Ordenatu distantziaren arabera</string>
     <string name="sort_by_name">Ordenatu izenaren arabera</string>
@@ -5567,7 +5567,7 @@
     <string name="shared_string_show_icon">Erakutsi ikonoa</string>
     <string name="map_is_up_to_date">%1$s mapa eguneratuta dago.</string>
     <string name="shared_string_loading">Kargatzen</string>
-    <string name="delete_smart_folder_dialog_message">Honek \"%1$s\" karpeta adimenduna ezabatuko du.</string>
+    <string name="delete_smart_folder_dialog_message">Honek \"%1$s\" karpeta adimenduna ezabatuko du. (Ez da arrastorik ezabatuko.)</string>
     <string name="sort_size_ascending">Tamaina txikikoa lehenik</string>
     <string name="trash_alert_card_desc">Zakarrontziko elementuak %1$s egun igaro ondoren ezabatuko dira.</string>
     <string name="discard_filter_changes_prompt">Iragazki guztiak berrezarri?</string>
@@ -5724,4 +5724,7 @@
     <string name="map_text">Mapako testuak</string>
     <string name="routing_attr_avoid_cobblestone_name">Saihestu harlauzak</string>
     <string name="routing_attr_avoid_cobblestone_description">Saihestu harlauzak</string>
+    <string name="play_weather_forecast">Erreproduzitu eguraldiaren iragarpena</string>
+    <string name="change_terrain_color_scheme">Aldatu Lurraren kolore-eskema</string>
+    <string name="travel_topics">Bidaiaen gaiak</string>
 </resources>
