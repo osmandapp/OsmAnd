@@ -5729,4 +5729,6 @@
     <string name="disable_map_layers_descr">Deshabilite todas las capas del mapa sobre el mapa vectorial (es necesario reiniciar).</string>
     <string name="height_legend_description">Los mapas de color de altitud se utilizan para visualizar el relieve.</string>
     <string name="travel_topics">Temas de los viajes</string>
+    <string name="play_weather_forecast">Reproducir pronóstico del tiempo</string>
+    <string name="change_terrain_color_scheme">Cambiar esquema de color del terreno</string>
 </resources>
