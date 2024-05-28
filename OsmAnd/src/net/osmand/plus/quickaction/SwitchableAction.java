@@ -229,8 +229,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			setupIcon(app, item, new CollectIconListener() {
 				@Override
-				public void onGetIcon(@Nullable Drawable drawable) {
-					holder.icon.setImageDrawable(drawable != null ? drawable : getDefaultItemIcon(app, item));
+				public void onGetIcon(@NonNull Drawable drawable) {
+					holder.icon.setImageDrawable(drawable);
 				}
 
 				@Override
@@ -365,7 +365,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected abstract String getItemName(Context context, T item);
 
-	private Drawable getDefaultItemIcon(@NonNull OsmandApplication app, T item){
+	protected Drawable getDefaultItemIcon(@NonNull OsmandApplication app, T item){
 		return app.getUIUtilities().getPaintedIcon(
 				getItemIconRes(app, item), getItemIconColor(app, item));
 	}
@@ -404,7 +404,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	public interface CollectIconListener {
-		void onGetIcon(@Nullable Drawable drawable);
+		void onGetIcon(@NonNull Drawable drawable);
 
 		void onChangeCollectingState(boolean isCollecting);
 	}

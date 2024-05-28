@@ -1,8 +1,11 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_COLOR_SCHEME_ACTION;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
+import net.osmand.ColorPalette;
+import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -222,7 +227,30 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	protected void setupIcon(@NonNull OsmandApplication app, String item, @NonNull CollectIconListener listener) {
 		SRTMPlugin srtmPlugin = getSrtmPlugin();
 		if (srtmPlugin != null) {
-			srtmPlugin.getTerrainModeIcon(item, listener);
+			srtmPlugin.getTerrainModeIcon(item, new CollectColorPalletListener() {
+				@Override
+				public void onGetColorPalette(@Nullable ColorPalette colorPalette) {
+					if (colorPalette != null) {
+						List<ColorValue> colorsList = colorPalette.getColors();
+						int[] colors = new int[colorsList.size()];
+						for (int i = 0; i < colorsList.size(); i++) {
+							ColorValue value = colorsList.get(i);
+							colors[i] = Color.argb(value.a, value.r, value.g, value.b);
+						}
+						GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
+						gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+						gradientDrawable.setShape(GradientDrawable.OVAL);
+						listener.onGetIcon(gradientDrawable);
+					} else {
+						listener.onGetIcon(getDefaultItemIcon(app, item));
+					}
+				}
+
+				@Override
+				public void onChangeCollectingState(boolean isCollecting) {
+					listener.onChangeCollectingState(isCollecting);
+				}
+			});
 		} else {
 			super.setupIcon(app, item, listener);
 		}

@@ -9,14 +9,12 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
-import static net.osmand.plus.quickaction.SwitchableAction.CollectIconListener;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.view.View;
 
@@ -24,8 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.ColorPalette;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -64,9 +60,6 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -103,7 +96,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 
-	private Map<String, Drawable> cachedTerrainModeIcons = new HashMap<>();
+	private Map<String, ColorPalette> cachedTerrainModeColorPalette = new HashMap<>();
 
 	private TerrainLayer terrainLayer;
 
@@ -683,18 +676,18 @@ public class SRTMPlugin extends OsmandPlugin {
 		mapRendererContext.updateVerticalExaggerationScale();
 	}
 
-	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectIconListener listener) {
-		Drawable cachedIcon = cachedTerrainModeIcons.get(modeKey);
-		if (cachedIcon != null) {
-			listener.onGetIcon(cachedIcon);
+	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
+		ColorPalette colorPalette = cachedTerrainModeColorPalette.get(modeKey);
+		if (colorPalette != null) {
+			listener.onGetColorPalette(colorPalette);
 		} else {
-			collectTerrainModeIcon(app, modeKey, new CollectIconListener() {
+			CollectColorPalletsTask collectColorPalletsTask = new CollectColorPalletsTask(app, modeKey, new CollectColorPalletListener() {
 				@Override
-				public void onGetIcon(@Nullable Drawable drawable) {
-					if (drawable != null) {
-						cachedTerrainModeIcons.put(modeKey, drawable);
+				public void onGetColorPalette(@Nullable ColorPalette colorPalette) {
+					if (colorPalette != null) {
+						cachedTerrainModeColorPalette.put(modeKey, colorPalette);
 					}
-					listener.onGetIcon(drawable);
+					listener.onGetColorPalette(colorPalette);
 				}
 
 				@Override
@@ -702,56 +695,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					listener.onChangeCollectingState(isCollecting);
 				}
 			});
+			collectColorPalletsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
-	}
-
-	private static void collectTerrainModeIcon(@NonNull OsmandApplication app, @NonNull String modeKey, @NonNull CollectIconListener listener) {
-
-		new AsyncTask<Void, Void, Drawable>() {
-
-			@Override
-			protected void onPreExecute() {
-				listener.onChangeCollectingState(true);
-			}
-
-			@Override
-			protected Drawable doInBackground(Void... params) {
-				if(!TerrainMode.isModeExist(modeKey)){
-					PlatformUtil.getLog(TerrainColorSchemeAction.class).error("Provided terrain mode doesn't exist");
-					return null;
-				}
-				TerrainMode mode = TerrainMode.getByKey(modeKey);
-				File heightmapDir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
-				File mainColorFile = new File(heightmapDir, mode.getMainFile());
-
-				ColorPalette colorPalette = null;
-				try {
-					if (mainColorFile.exists()) {
-						colorPalette = ColorPalette.parseColorPalette(new FileReader(mainColorFile));
-					}
-				} catch (IOException e) {
-					PlatformUtil.getLog(TerrainColorSchemeAction.class).error("Error reading color file ", e);
-				}
-
-				if (colorPalette == null) {
-					return null;
-				}
-				int[] colors = new int[colorPalette.getColors().size()];
-				for (int i = 0; i < colorPalette.getColors().size(); i++) {
-					ColorPalette.ColorValue value = colorPalette.getColors().get(i);
-					colors[i] = Color.argb(value.a, value.r, value.g, value.b);
-				}
-				GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
-				gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-				gradientDrawable.setShape(GradientDrawable.OVAL);
-				return gradientDrawable;
-			}
-
-			@Override
-			protected void onPostExecute(Drawable drawable) {
-				listener.onChangeCollectingState(false);
-				listener.onGetIcon(drawable);
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 }
