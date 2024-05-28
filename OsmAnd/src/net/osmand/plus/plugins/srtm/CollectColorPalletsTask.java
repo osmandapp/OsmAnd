@@ -28,7 +28,7 @@ public class CollectColorPalletsTask extends AsyncTask<Void, Void, ColorPalette>
 
 	@Override
 	protected void onPreExecute() {
-		listener.onChangeCollectingState(true);
+		listener.collectingPalletStarted();
 	}
 
 	@Override
@@ -55,13 +55,15 @@ public class CollectColorPalletsTask extends AsyncTask<Void, Void, ColorPalette>
 
 	@Override
 	protected void onPostExecute(ColorPalette colorPalette) {
-		listener.onChangeCollectingState(false);
+		listener.collectingPalletFinished();
 		listener.onGetColorPalette(colorPalette);
 	}
 
 	public interface CollectColorPalletListener {
 		void onGetColorPalette(@Nullable ColorPalette colorPalette);
 
-		void onChangeCollectingState(boolean isCollecting);
+		void collectingPalletStarted();
+
+		void collectingPalletFinished();
 	}
 }

@@ -691,8 +691,13 @@ public class SRTMPlugin extends OsmandPlugin {
 				}
 
 				@Override
-				public void onChangeCollectingState(boolean isCollecting) {
-					listener.onChangeCollectingState(isCollecting);
+				public void collectingPalletStarted() {
+					listener.collectingPalletStarted();
+				}
+
+				@Override
+				public void collectingPalletFinished() {
+					listener.collectingPalletFinished();
 				}
 			});
 			collectColorPalletsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

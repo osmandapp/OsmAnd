@@ -9,6 +9,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -224,7 +227,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected void setupIcon(@NonNull OsmandApplication app, String item, @NonNull CollectIconListener listener) {
+	protected void setIcon(@NonNull OsmandApplication app, String item, @NonNull ImageView imageView, @NonNull ProgressBar iconProgressBar) {
 		SRTMPlugin srtmPlugin = getSrtmPlugin();
 		if (srtmPlugin != null) {
 			srtmPlugin.getTerrainModeIcon(item, new CollectColorPalletListener() {
@@ -240,19 +243,29 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 						GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
 						gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
 						gradientDrawable.setShape(GradientDrawable.OVAL);
-						listener.onGetIcon(gradientDrawable);
+						imageView.setImageDrawable(gradientDrawable);
 					} else {
-						listener.onGetIcon(getDefaultItemIcon(app, item));
+						TerrainColorSchemeAction.super.setIcon(app, item, imageView, iconProgressBar);
 					}
 				}
 
 				@Override
-				public void onChangeCollectingState(boolean isCollecting) {
-					listener.onChangeCollectingState(isCollecting);
+				public void collectingPalletStarted() {
+					changeProgressBarVisibility(true);
+				}
+
+				@Override
+				public void collectingPalletFinished() {
+					changeProgressBarVisibility(false);
+				}
+
+				private void changeProgressBarVisibility(boolean showProgressBar){
+					AndroidUiHelper.updateVisibility(imageView, !showProgressBar);
+					AndroidUiHelper.updateVisibility(iconProgressBar, showProgressBar);
 				}
 			});
 		} else {
-			super.setupIcon(app, item, listener);
+			super.setIcon(app, item, imageView, iconProgressBar);
 		}
 	}
 

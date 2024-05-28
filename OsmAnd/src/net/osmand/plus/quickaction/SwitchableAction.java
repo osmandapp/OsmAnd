@@ -3,7 +3,6 @@ package net.osmand.plus.quickaction;
 import static net.osmand.plus.utils.AndroidUtils.isLayoutRtl;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
@@ -30,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.QuickActionListFragment.OnStartDragListener;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
@@ -227,18 +224,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 
-			setupIcon(app, item, new CollectIconListener() {
-				@Override
-				public void onGetIcon(@NonNull Drawable drawable) {
-					holder.icon.setImageDrawable(drawable);
-				}
-
-				@Override
-				public void onChangeCollectingState(boolean isCollecting) {
-					AndroidUiHelper.updateVisibility(holder.iconProgressBar, isCollecting);
-					AndroidUiHelper.updateVisibility(holder.icon, !isCollecting);
-				}
-			});
+			setIcon(app, item, holder.icon, holder.iconProgressBar);
 			holder.title.setText(getItemName(context, item));
 
 			holder.handleView.setOnTouchListener((v, event) -> {
@@ -365,13 +351,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected abstract String getItemName(Context context, T item);
 
-	protected Drawable getDefaultItemIcon(@NonNull OsmandApplication app, T item){
-		return app.getUIUtilities().getPaintedIcon(
-				getItemIconRes(app, item), getItemIconColor(app, item));
-	}
-
-	protected void setupIcon(@NonNull OsmandApplication app, T item, @NonNull CollectIconListener listener) {
-		listener.onGetIcon(getDefaultItemIcon(app, item));
+	protected void setIcon(@NonNull OsmandApplication app, T item, @NonNull ImageView imageView, @NonNull ProgressBar iconProgressBar) {
+		imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(
+				getItemIconRes(app, item), getItemIconColor(app, item)));
 	}
 
 	@DrawableRes
@@ -401,11 +383,5 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	protected void onItemsSelected(Context ctx, List<T> selectedItems) {
 
-	}
-
-	public interface CollectIconListener {
-		void onGetIcon(@NonNull Drawable drawable);
-
-		void onChangeCollectingState(boolean isCollecting);
 	}
 }
