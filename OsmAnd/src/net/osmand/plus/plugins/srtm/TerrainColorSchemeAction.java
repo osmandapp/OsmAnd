@@ -3,21 +3,16 @@ package net.osmand.plus.plugins.srtm;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_COLOR_SCHEME_ACTION;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
-import net.osmand.ColorPalette;
-import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -28,9 +23,6 @@ import net.osmand.plus.quickaction.SwitchableAction;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,7 +50,11 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return PluginsHelper.getPlugin(SRTMPlugin.class).getTerrainMode().getKeyName();
+		SRTMPlugin srtmPlugin = getSrtmPlugin();
+		if (srtmPlugin != null) {
+			return srtmPlugin.getTerrainMode().getKeyName();
+		}
+		return "";
 	}
 
 	@Override
@@ -75,6 +71,11 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 			return nextStyle;
 		}
 		return null;
+	}
+
+	@Nullable
+	private SRTMPlugin getSrtmPlugin() {
+		return PluginsHelper.getPlugin(SRTMPlugin.class);
 	}
 
 	@Override
@@ -98,7 +99,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		TerrainMode newMode = TerrainMode.getByKey(params);
 		if (newMode != null) {
-			SRTMPlugin srtmPlugin = PluginsHelper.getPlugin(SRTMPlugin.class);
+			SRTMPlugin srtmPlugin = getSrtmPlugin();
 			if (srtmPlugin != null) {
 				srtmPlugin.setTerrainMode(newMode);
 				srtmPlugin.updateLayers(mapActivity, mapActivity);
@@ -111,11 +112,12 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 		return TerrainMode.getByKey(item).translateName;
 	}
 
+	@NonNull
 	public List<String> getFilteredStyles() {
 		List<String> loadedListFromParams = loadListFromParams();
 		List<String> filteredList = new ArrayList<>();
 		for (String mode : loadedListFromParams) {
-			if (TerrainMode.getByKey(mode) != null) {
+			if (TerrainMode.isModeExist(mode)) {
 				filteredList.add(mode);
 			}
 		}
@@ -192,15 +194,19 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 
 	@Override
 	public List<String> loadListFromParams() {
-		List<String> modes = new ArrayList<>();
-
+		List<String> loadedModes = new ArrayList<>();
 		String filtersId = getParams().get(getListKey());
-
 		if (filtersId != null && !filtersId.trim().isEmpty()) {
-			Collections.addAll(modes, filtersId.split(","));
+			Collections.addAll(loadedModes, filtersId.split(","));
 		}
 
-		return modes;
+		List<String> existingModes = new ArrayList<>();
+		for (String mode : loadedModes) {
+			if (TerrainMode.isModeExist(mode)) {
+				existingModes.add(mode);
+			}
+		}
+		return existingModes;
 	}
 
 	@Override
@@ -213,36 +219,13 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	protected Drawable getIcon(@NonNull OsmandApplication app, String item) {
-		TerrainMode mode = TerrainMode.getByKey(item);
-		if (mode == null) {
-			return null;
+	protected void setupIcon(@NonNull OsmandApplication app, String item, @NonNull CollectIconListener listener) {
+		SRTMPlugin srtmPlugin = getSrtmPlugin();
+		if (srtmPlugin != null) {
+			srtmPlugin.getTerrainModeIcon(item, listener);
+		} else {
+			super.setupIcon(app, item, listener);
 		}
-
-		File heightmapDir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
-		File mainColorFile = new File(heightmapDir, mode.getMainFile());
-
-		ColorPalette colorPalette = null;
-		try {
-			if (mainColorFile.exists()) {
-				colorPalette = ColorPalette.parseColorPalette(new FileReader(mainColorFile));
-			}
-		} catch (IOException e) {
-			PlatformUtil.getLog(TerrainColorSchemeAction.class).error("Error reading color file ", e);
-		}
-
-		if (colorPalette == null) {
-			return null;
-		}
-		int[] colors = new int[colorPalette.getColors().size()];
-		for (int i = 0; i < colorPalette.getColors().size(); i++) {
-			ColorPalette.ColorValue value = colorPalette.getColors().get(i);
-			colors[i] = Color.argb(value.a, value.r, value.g, value.b);
-		}
-		GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
-		gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-		gradientDrawable.setShape(GradientDrawable.OVAL);
-		return gradientDrawable;
 	}
 
 	@Override
