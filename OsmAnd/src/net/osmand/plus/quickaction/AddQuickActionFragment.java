@@ -203,7 +203,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 			AddQuickActionFragment fragment = new AddQuickActionFragment();
 			fragment.setArguments(bundle);
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
