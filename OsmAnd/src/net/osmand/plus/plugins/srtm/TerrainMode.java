@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.IndexConstants;
@@ -104,6 +105,15 @@ public class TerrainMode {
 			}
 		}
 		return hillshade;
+	}
+
+	public static boolean isModeExist(@NonNull String key) {
+		for (TerrainMode m : terrainModes) {
+			if (Algorithms.stringsEqual(m.getKeyName(), key)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isHillshade() {

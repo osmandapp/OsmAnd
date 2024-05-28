@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="change_terrain_color_scheme">Change Terrain color scheme</string>
     <string name="play_weather_forecast">Play weather forecast</string>
     <string name="travel_topics">Travel topics</string>
     <string name="disable_map_layers">Disable map layers</string>
