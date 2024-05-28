@@ -5226,7 +5226,7 @@
     <string name="average_glide_ratio">Priemerný pomer kĺzania</string>
     <string name="empty_smart_folder_title">Žiadna vyhovujúca stopa</string>
     <string name="empty_smart_folder_description">Vyhovujúce stopy sa zobrazia tu</string>
-    <string name="delete_smart_folder_dialog_message">Toto odstráni chytrý priečinok \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Toto odstráni chytrý priečinok \"%1$s\". (Nebudú vymazané žiadne stopy.)</string>
     <string name="empty_name">Prázdny názov</string>
     <string name="add_smart_folder">Pridať chytrý priečinok</string>
     <string name="sort_country_name_descending">Názov krajiny: Z – A</string>
@@ -5720,4 +5720,5 @@
     <string name="steps_per_minute_unit">k/m</string>
     <string name="disable_map_layers">Vypnúť mapové vrstvy</string>
     <string name="disable_map_layers_descr">Vypnúť všetky vrstvy mapy nad vektorovou mapou (vyžaduje reštart).</string>
+    <string name="height_legend_description">Farebné výškové mapy sa používajú na vizualizáciu terénu.</string>
 </resources>

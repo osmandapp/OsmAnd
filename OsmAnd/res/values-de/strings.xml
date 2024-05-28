@@ -3595,7 +3595,7 @@
 \n 
 \n%2$s sind die Ebenen, auf denen die ursprünglichen Kacheln sichtbar sind, eine Hoch- oder Herunterskalierung findet außerhalb dieser Werte statt.</string>
     <string name="map_source_zoom_levels">Legen Sie eine minimale und maximale Zoomstufe fest, um die Online-Karte anzuzeigen oder zu laden.</string>
-    <string name="shared_string_always">Immer</string>
+    <string name="shared_string_always">Jederzeit</string>
     <string name="screen_control">Bildschirmsteuerung</string>
     <string name="system_screen_timeout_descr">Schaltet den Bildschirm entsprechend dem Bildschirm-Timeout des Systems aus.</string>
     <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
@@ -4688,7 +4688,7 @@
     <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
     <string name="map_markers_bar_widget_desc">Das Widget in der oberen Leiste zeigt die Entfernung und Richtung zur nächsten Kartenmarkierung von Ihrem aktuellen Standort aus an. Das Widget kann so konfiguriert werden, dass es 1 oder 2 Markierungen anzeigt.</string>
-    <string name="live_update_frequency_day_variant">Kartenaktualisierungen werden täglich überprüft.</string>
+    <string name="live_update_frequency_day_variant">Es wird täglich nach Kartenaktualisierungen gesucht.</string>
     <string name="next_live_update_time">Nächste Aktualisierung um %1$s Uhr.</string>
     <string name="live_update_frequency_hour_variant">Es wird stündlich nach Kartenaktualisierungen gesucht.</string>
     <string name="live_update_frequency_week_variant">Es wird wöchentlich nach Kartenaktualisierungen gesucht.</string>
@@ -5484,7 +5484,7 @@
     <string name="help_article_troubleshooting_track_recording_issues_name">Streckenaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
-    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“.</string>
+    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
     <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>
@@ -5627,8 +5627,8 @@
     <string name="speed_limit_warning">Warnung vor Tempolimit</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">Bei Überschreitung</string>
-    <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
-    <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
+    <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie über GPS gemeldet</string>
+    <string name="shared_string_speedometer">Tachometer</string>
     <string name="help_article_setup_a_route_name">Route einrichten</string>
     <string name="rendering_value_access_name">Nach Zugangsart</string>
     <string name="rendering_value_managerName_name">Nach Name der Verwaltung</string>
