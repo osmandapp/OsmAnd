@@ -1351,7 +1351,7 @@
     <string name="map_widget_plain_time">Praegune aeg</string>
     <string name="selected_gpx_info_show">"
 \n
-\nPikk puudutus kaardil vaatamiseks"</string>
+\nKaardil vaatamiseks puuduta pikalt"</string>
     <string name="delay_navigation_start">Alusta pöörangupõhist juhendamist automaatselt</string>
     <string name="local_index_gpx_info_show">"
 \n
@@ -2636,9 +2636,9 @@
     <string name="routing_attr_width_description">Määra teedel lubatud sõiduki laius.</string>
     <string name="simulate_your_location_gpx_descr">Simuleeri oma asukohta kasutades salvestatud GPX rada.</string>
     <string name="quick_action_directions_from_desc">Nupp ekraani keskkoha lähtekohaks muutmiseks. Seejärel on kas võimalik valida sihtkohta või alustada teekonna arvutamist.</string>
-    <string name="record_plugin_description">See lisa aktiveerib radade salvestamise funktsionaalsuse, puudutades käsitsi kaardil GPX logimisvidinat või logides automaatselt kõik oma teekonnad GPX faili.
+    <string name="record_plugin_description">Salvesta oma radu ja treeninguid ning analüüsi nende andmeid nagu kiirus, tõusud, laskumised, kõrgusprofiil, jne. Salvestatud radu saad arhiveerida, jagada sõpradega, muuta ja järeltöödelda.
 \n
-\nSalvestatud radu saad jagada oma sõpradega või kasutada OSM kaastöödeks. Sportlased saavad kasutada salvestatud radu oma treeningute jälgimiseks. Mõningast raja põhianalüüsi saad teha otse OsmAnd sees, näiteks ringiajad, keskmine kiirus jne. Lisaks muidugi saad radu hiljem analüüsida ka spetsiaalsetete kolmandate osapoolte analüüsitööriistadega.</string>
+\nLisateave %1$s.</string>
     <string name="srtm_plugin_description">See laiendus pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud kontuurjoontest, maastiku reljeefstruktuurist ning nõlvade toonimisest.
 \n
 \nAndmed pärinevad SRTM (süstiku radari topograafiamissioon) ja ASTER (täiustatud kosmose termilise kiirguse ja peegelduse radiomeeter) andmekogudest.
@@ -2655,11 +2655,9 @@
 \nSpetsiaalset kaardi allalaadimist pole vaja, vaade on loodud meie tavakaartidest.
 \n
 \nSelle vaate saad tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises „Kaardi seadistamine“ „Kaardistiil“.</string>
-    <string name="plugin_nautical_descr">See lisa rikastab OsmAnd kaardi ja navigatsioonirakendust, et toota ka merekaarte paadisõiduks, purjetamiseks ja muud tüüpi veespordi jaoks.
+    <string name="plugin_nautical_descr">See lisamoodul rikastab OsmAndi kaardirakendust meresõiduks vajaliku teabega, nagu laevateed, meremärgid, ohutsoonid, sildumisjuhendid ja muu oluline. Kasutamiseks lülita alajaotuses „Seadista kaarti“ sisse valik „Merekaardid“ ning laadi alla soovitud piirkonna kaart.
 \n
-\nSpetsiaalne OsmAnd kaardi lisamoodul pakub kõiki merenavigatsioonimärke ja kaardisümboleid nii sisemaal kui ka rannikul navigeerimiseks. Iga navigatsioonimärgi kirjeldus sisaldab nende identifitseerimiseks vajalikke üksikasju ja tähendust (kategooria, kuju, värv, järjestus, viide jne).
-\n
-\nOsmAnd tavapärase kaardistiili juurde naasmiseks lihtsalt aktiveerige see laiendus uuesti või muutke vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
+\nLisateave: %1$s.</string>
     <string name="plugin_ski_descr">See OsmAnd laiendus toob sõrmeulatusse üksikasjad globaalsete mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade, köisraudteede ja suusaliftide kohta. Teekonnad ja suusaradade raskusastmed on tähistatud värvikoodidega ning kujutatud spetsiaalses talvises kaardistiilis, mis sulab ühte lumivalge talvemaastikuga.
 \n
 \nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
@@ -2669,7 +2667,9 @@
     <string name="unit_of_length_descr">Muuda pikkusühikuid.</string>
     <string name="osmand_distance_planning_plugin_description">Selleks, et reise kavandada ja punktide vahelist kaugust mõõta, loo teekondi kaardil koputades või olemasolevaid GPX-faile kasutades, Tulemusi saad salvestada GPX-failina, mida on hiljem võimalik juhendamiseks kasutada.</string>
     <string name="osmand_accessibility_description">Teeb seadme erivajadusega kasutajatele mõeldud funktsioonid otse OsmAndis kättesaadavaks. See lihtsustab näiteks kõnesünteesi häälte kõnekiiruse reguleerimist, ekraanil navigeerimise suuna seadistamist, rulliku kasutamist suurenduse juhtimiseks või kõnesünteesi tagasisidet, näiteks oma asukoha automaatseks teatamiseks.</string>
-    <string name="osm_editing_plugin_description">Tee OsmAnd\'i abil OSM\'i kaastöid, näiteks loo või muuda OSM\'i huvipunkte, ava või kommenteeri OSM\'i märkmeid ning lisa salvestatud GPX faile. Selleks sisesta oma OSM\'i kasutajanimi ja salasõna. OSM on kogukonna juhitud globaalne vaba litsentsi alusel avaldatud kaardistamisprojekt.</string>
+    <string name="osm_editing_plugin_description">Tee OsmAndi abil OSMi kaastöid, näiteks loo või muuda OSMi huvipunkte, ava või kommenteeri OSMi märkmeid ning lisa salvestatud GPX faile. Selleks sisesta oma OSMi kasutajanimi ja salasõna. OSM on kogukonna juhitud globaalne vaba litsentsi alusel avaldatud kaardistamisprojekt.
+\n
+\nKaardi muutmiseks vajaliku teabe leiad meie veebisaidist: %1$s.</string>
     <string name="osmand_development_plugin_description">Arendus- ja silumisfunktsioonide seadistused, nagu teekonna simulatsioon, visualiseerimise jõudlus või hääljuhiste testimine. Need seaded on mõeldud arendajatele ja pole tavakasutaja jaoks vajalikud.</string>
     <string name="avoid_roads_msg">Vali alternatiivne teekond, valides välditavad teed</string>
     <string name="use_opengl_render_descr">Kasuta riistvarakiirendatud OpenGL tuge (võib kasutada rohkem akut või mitte töötada väga vanades seadmetes).</string>
@@ -4479,6 +4479,8 @@
 \n
 \n • Lisasime radade filtreerimisvõimaluse sensorite alusel
 \n
+\n • Parandasime välimuse kohandamist radade tüüpide kaupa
+\n
 \n • Lisasime täiendavate GPX-siltide toe
 \n
 \n • Nüüd saad kohandada valikut „Vahemaa navigeerimisel“: valida võid täpsete ja ümardatud numbrite vahel
@@ -4579,4 +4581,38 @@
     <string name="key_event_action_move_down">Tõsta alla</string>
     <string name="simulation_real_mode_title">Realistlik simulatsioon</string>
     <string name="import_export">Import/eksport</string>
+    <string name="add_new_type">Lisa uus tüüp</string>
+    <string name="explore_3d_track_description">Tutvu rajaga interaktiivses 3D-vaates! Visualiseeri kõrgust, kiirust ja palju muud otse kaardil.</string>
+    <string name="maps_that_also_be_used">Lisaks kasutatavad kaardid: %1$s</string>
+    <string name="getting_list_of_required_maps">Laadime vajalike kaartide loendit…</string>
+    <string name="required_maps_calculate_online_summary">Puuduvate kaartide loend põhineb sirgjoonel. Täpse kaartide loendi saamiseks võib OsmAnd sinu teekonna koostada võrguteenuse abil.</string>
+    <string name="route_line_use_coloring_altitude">Teekonna joon on värvitud kõrgusjoonte alusel.</string>
+    <string name="disable_map_layers">Lülita kaardikihid välja</string>
+    <string name="disable_map_layers_descr">Lülita kõik vektorkaardi peal asuvad kaardikihid välja (jõustamiseks käivita rakendus uuesti).</string>
+    <string name="required_maps">Vajalikud kaardid</string>
+    <string name="missing_maps_description">Mõned selle teekonna jaoks vajalikud allalaaditud kaardid kas on puudu või uuendamata. Palun laadi vajalikud kaardid alla või uuenda nad.</string>
+    <string name="key_event_action_move_to_my_location">Tõsta alajaotusse „Minu kohad“</string>
+    <string name="not_specified">Määratlemata</string>
+    <string name="travel_topics">Reiside teemad</string>
+    <string name="missing_maps_header">Puuduvad või aegunud kaardid</string>
+    <string name="route_line_use_coloring_speed">Teekonna joon on värvitud liikumiskiiruse alusel.</string>
+    <string name="delete_actions_button_confirmation">Kas sa oled kindel, et soovid kustutada „%1$s“ koos kõikide oma tegevustega?</string>
+    <string name="remove_type_q">Kas eemaldame tüübi „%1$s“?</string>
+    <string name="enable_to_use_external_input_device">Võimalda välise sisendseadme kasutamist koos OsmAndiga</string>
+    <string name="delete_actions_button">Kustuta nupp</string>
+    <string name="wall_color">Seina värv</string>
+    <string name="fixed_height">Fikseeritud kõrgus</string>
+    <string name="downward_gradient">Tee kalle alla</string>
+    <string name="upward_gradient">Tee kalle üles</string>
+    <string name="top">Üleval</string>
+    <string name="bottom">All</string>
+    <string name="top_and_bottom">Üleval ja all</string>
+    <string name="allow_display_on_top">Luba kuvamist kõige peal</string>
+    <string name="allow_display_on_top_description">Luba kaarditekstide kuvamist üksteise peal</string>
+    <string name="show_debug_info">Näita silumisteavet</string>
+    <string name="map_text">Kaarditekstid</string>
+    <string name="show_debug_info_description">Näita iga kaarditeksti asetuse kohta graafilist teavet</string>
+    <string name="routing_attr_avoid_cobblestone_name">Väldi munakiviteid</string>
+    <string name="routing_attr_avoid_cobblestone_description">Väldi munakiviteid</string>
+    <string name="title_3d_track">3D rada</string>
 </resources>
