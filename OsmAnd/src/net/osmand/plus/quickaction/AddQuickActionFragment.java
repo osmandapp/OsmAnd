@@ -136,6 +136,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 	private void updateToolbar() {
 		backButton.setImageDrawable(getContentIcon(searchMode ? AndroidUtils.getNavigationIconResId(app) : R.drawable.ic_action_close));
+		backButton.setContentDescription(app.getString(searchMode ? R.string.access_shared_string_navigate_up : R.string.shared_string_close));
 		AndroidUiHelper.setVisibility(searchMode ? View.GONE : View.VISIBLE, searchButton, title);
 		AndroidUiHelper.setVisibility(searchMode ? View.VISIBLE : View.GONE, searchEditText);
 		if (searchMode) {
@@ -203,7 +204,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 			AddQuickActionFragment fragment = new AddQuickActionFragment();
 			fragment.setArguments(bundle);
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

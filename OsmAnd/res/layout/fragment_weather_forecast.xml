@@ -114,13 +114,25 @@
 			android:clickable="true"
 			android:focusable="true"
 			android:orientation="vertical"
-			android:paddingTop="@dimen/content_padding"
 			android:paddingBottom="@dimen/content_padding">
+
+			<ProgressBar
+				android:id="@+id/load_forecast_progress"
+				style="?android:attr/progressBarStyleHorizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="0dp"
+				android:background="?attr/list_background_color"
+				android:indeterminate="true"
+				android:minHeight="0dp"
+				android:visibility="visible"
+				tools:visibility="visible" />
 
 			<androidx.recyclerview.widget.RecyclerView
 				android:id="@+id/recycler_view"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_marginTop="@dimen/content_padding"
 				android:clipToPadding="false"
 				android:orientation="horizontal"
 				android:paddingHorizontal="@dimen/content_padding_half"
@@ -129,15 +141,32 @@
 				tools:listitem="@layout/forecast_date_item"
 				tools:orientation="horizontal" />
 
-			<net.osmand.plus.plugins.weather.dialogs.TimeSlider
-				android:id="@+id/time_slider"
+			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginHorizontal="@dimen/content_padding"
-				android:valueTo="24"
-				tools:stepSize="1"
-				tools:value="12"
-				tools:valueFrom="0" />
+				android:orientation="horizontal">
+
+				<ImageButton
+					android:id="@+id/play_forecast_button"
+					android:layout_width="@dimen/map_button_size"
+					android:layout_height="@dimen/map_button_size"
+					android:layout_gravity="center_vertical"
+					android:layout_marginStart="@dimen/content_padding"
+					android:background="@drawable/btn_circle"
+					android:contentDescription="@string/play_weather_forecast"
+					android:src="@drawable/ic_play_dark" />
+
+				<net.osmand.plus.plugins.weather.dialogs.TimeSlider
+					android:id="@+id/time_slider"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginHorizontal="@dimen/content_padding"
+					android:valueTo="24"
+					tools:stepSize="1"
+					tools:value="12"
+					tools:valueFrom="0" />
+			</LinearLayout>
 
 		</LinearLayout>
 
