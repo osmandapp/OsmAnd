@@ -34,6 +34,7 @@ import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -120,9 +121,10 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void setupDescription(@NonNull View view) {
-		KeyEventCommand command = KeyEventCommandsCache.getCommand(app, getCommandId());
-		if (command != null) {
-			String action = command.toHumanString(app);
+		EditKeyAssignmentController controller = EditKeyAssignmentController.getExistedInstance(app);
+		QuickAction quickAction = controller != null ? controller.getSelectedAction() : null;
+		if (quickAction != null) {
+			String action = quickAction.getName(app);
 			String message = getString(R.string.press_button_to_link_with_action, action);
 			TextView description = view.findViewById(R.id.description);
 			description.setText(createSpannableString(message, BOLD, action));
@@ -186,12 +188,12 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		View warning = view.findViewById(R.id.warning);
 		View warningIcon = view.findViewById(R.id.warning_icon);
 		TextView warningMessage = view.findViewById(R.id.warning_message);
-		KeyEventCommand commandDuplicate = getCommandDuplication(keyCode);
-		if (commandDuplicate != null) {
+		QuickAction actionDuplicate = getActionDuplication(keyCode);
+		if (actionDuplicate != null) {
 			AndroidUiHelper.updateVisibility(warning, true);
 			AndroidUiHelper.updateVisibility(warningIcon, true);
 			String keyLabel = KeySymbolMapper.getKeySymbol(app, keyCode);
-			String actionName = commandDuplicate.toHumanString(app);
+			String actionName = actionDuplicate.getName(app);
 			String message = getString(R.string.key_is_already_assigned_error, keyLabel, actionName);
 			warningMessage.setText(createSpannableString(message, BOLD, keyLabel, actionName));
 		} else if (isKeyCodeAlreadyAssignedToThisAction() && hasInputFromUser) {
@@ -245,7 +247,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private boolean isKeyCodeFree() {
-		return getCommandDuplication(keyCode) == null;
+		return getActionDuplication(keyCode) == null;
 	}
 
 	private boolean isKeyCodeAlreadyAssignedToThisAction() {
@@ -253,20 +255,15 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		return keyAssignment != null && keyAssignment.hasKeyCode(keyCode);
 	}
 
-	private KeyEventCommand getCommandDuplication(int keyCode) {
+	@Nullable
+	private QuickAction getActionDuplication(int keyCode) {
 		if (inputDevice != null) {
-			KeyEventCommand command = inputDevice.findCommand(keyCode);
-			if (command != null && !Objects.equals(getCommandId(), command.getId())) {
-				return command;
+			QuickAction action = inputDevice.findAction(keyCode);
+			if (action != null && !Objects.equals(getKeyAssignment().getAction().getId(), action.getId())) { // TODO check assignments instead of actions
+				return action;
 			}
 		}
 		return null;
-	}
-
-	@NonNull
-	private String getCommandId() {
-		KeyAssignment assignment = getKeyAssignment();
-		return assignment != null ? assignment.getCommandId() : "";
 	}
 
 	@Nullable

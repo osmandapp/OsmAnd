@@ -150,6 +150,23 @@ public class QuickAction {
 		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixX, centerPixY);
 	}
 
+	public boolean onKeyDown(@NonNull MapActivity mapActivity) {
+		return true;
+	}
+
+	public boolean onKeyLongPress(@NonNull MapActivity mapActivity) {
+		return true;
+	}
+
+	public boolean onKeyUp(@NonNull MapActivity mapActivity) {
+		execute(mapActivity);
+		return true;
+	}
+
+	public boolean onKeyMultiple(@NonNull MapActivity mapActivity, int count) {
+		return true;
+	}
+
     public void execute(@NonNull MapActivity mapActivity) {
 	}
 

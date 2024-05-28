@@ -32,6 +32,20 @@ public abstract class BaseMapScrollAction extends QuickAction {
 	public abstract int getQuickActionDescription();
 
 	@Override
+	public boolean onKeyDown(@NonNull MapActivity mapActivity) {
+		MapScrollHelper scrollHelper = mapActivity.getMapScrollHelper();
+		scrollHelper.startScrolling(getScrollingDirection());
+		return true;
+	}
+
+	@Override
+	public boolean onKeyUp(@NonNull MapActivity mapActivity) {
+		MapScrollHelper scrollHelper = mapActivity.getMapScrollHelper();
+		scrollHelper.removeDirection(getScrollingDirection());
+		return true;
+	}
+
+	@Override
 	public void execute(@NonNull MapActivity mapActivity) {
 		MapScrollHelper scrollHelper = mapActivity.getMapScrollHelper();
 		scrollHelper.scrollMapAction(getScrollingDirection());

@@ -32,9 +32,9 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
@@ -83,8 +83,8 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		screenItems.add(new ScreenItem(CARD_TOP_DIVIDER));
 		screenItems.add(new ScreenItem(HEADER_ITEM, R.string.shared_string_action));
 		if (isInEditMode()) {
-			if (editBundle.command != null) {
-				screenItems.add(new ScreenItem(ASSIGNED_ACTION_ITEM, editBundle.command));
+			if (editBundle.action != null) {
+				screenItems.add(new ScreenItem(ASSIGNED_ACTION_ITEM, editBundle.action));
 				screenItems.add(new ScreenItem(CARD_DIVIDER));
 			} else {
 				screenItems.add(new ScreenItem(ADD_ACTION_ITEM));
@@ -93,7 +93,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		} else {
 			KeyAssignment assignment = getAssignment();
 			if (assignment != null) {
-				screenItems.add(new ScreenItem(ASSIGNED_ACTION_OVERVIEW, assignment.getCommand(app)));
+				screenItems.add(new ScreenItem(ASSIGNED_ACTION_OVERVIEW, assignment.getAction()));
 			}
 			screenItems.add(new ScreenItem(LIST_DIVIDER));
 		}
@@ -219,7 +219,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	public void askDeleteAction() {
-		editBundle.command = null;
+		editBundle.action = null;
 		askRefreshDialog();
 	}
 
@@ -250,7 +250,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		KeyAssignment assignment = getAssignment();
 		editBundle = new EditingBundle();
 		if (assignment != null) {
-			editBundle.command = assignment.getCommand(app);
+			editBundle.action = assignment.getAction();
 			editBundle.keyCodes = assignment.getKeyCodes();
 		} else {
 			editBundle.keyCodes = new ArrayList<>();
@@ -270,7 +270,12 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	public boolean hasChangesToSave() {
-		return editBundle != null && editBundle.command != null && !Algorithms.isEmpty(editBundle.keyCodes);
+		return editBundle != null && editBundle.action != null && !Algorithms.isEmpty(editBundle.keyCodes);
+	}
+
+	@Nullable
+	public QuickAction getSelectedAction() {
+		return editBundle != null ? editBundle.action : null;
 	}
 
 	public void askSaveChanges() {
@@ -299,7 +304,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	private static class EditingBundle {
-		KeyEventCommand command;
+		QuickAction action;
 		List<Integer> keyCodes;
 	}
 

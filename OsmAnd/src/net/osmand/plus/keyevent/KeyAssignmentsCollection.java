@@ -4,10 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,24 +36,6 @@ public class KeyAssignmentsCollection {
 			copy.add(new KeyAssignment(assignment));
 		}
 		return copy;
-	}
-
-	@NonNull
-	public Map<KeyAssignmentCategory, List<KeyAssignment>> getCategorizedAssignments(@NonNull OsmandApplication app) {
-		Map<KeyAssignmentCategory, List<KeyAssignment>> result = new HashMap<>();
-		for (KeyAssignment assignment : getAssignments()) {
-			KeyEventCommand command = assignment.getCommand(app);
-			if (command != null) {
-				KeyAssignmentCategory category = command.getCategory();
-				List<KeyAssignment> assignments = result.get(category);
-				if (assignments == null) {
-					assignments = new ArrayList<>();
-					result.put(category, assignments);
-				}
-				assignments.add(assignment);
-			}
-		}
-		return result;
 	}
 
 	public boolean hasNameDuplicate(@NonNull OsmandApplication context, @NonNull String newName) {

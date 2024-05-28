@@ -38,7 +38,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 			KeyAssignment keyAssignment = new KeyAssignment(jsonObject);
-			if (keyAssignment.hasKeyCodes()) {
+			if (keyAssignment.hasKeyCodes() && keyAssignment.getAction() != null) {
 				assignments.add(keyAssignment);
 			}
 		}

@@ -7,12 +7,11 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.KeyAssignmentsCollection;
-import net.osmand.plus.keyevent.assignment.KeyAssignmentCategory;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.quickaction.QuickAction;
 
 import java.util.List;
-import java.util.Map;
 
 public abstract class InputDeviceProfile {
 
@@ -30,11 +29,6 @@ public abstract class InputDeviceProfile {
 	}
 
 	@NonNull
-	public Map<KeyAssignmentCategory, List<KeyAssignment>> getCategorizedAssignments() {
-		return assignmentsCollection.getCategorizedAssignments(app);
-	}
-
-	@NonNull
 	public List<KeyAssignment> getAssignments() {
 		return assignmentsCollection.getAssignments();
 	}
@@ -49,9 +43,9 @@ public abstract class InputDeviceProfile {
 	}
 
 	@Nullable
-	public KeyEventCommand findCommand(int keyCode) {
+	public QuickAction findAction(int keyCode) {
 		KeyAssignment assignment = findAssignment(keyCode);
-		return assignment != null ? assignment.getCommand(app) : null;
+		return assignment != null ? assignment.getAction() : null;
 	}
 
 	@Nullable

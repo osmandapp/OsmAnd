@@ -30,6 +30,7 @@ import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.commands.KeyEventCommand;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.FlowLayout;
@@ -112,9 +113,9 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			return;
 		} else if (itemType == ASSIGNED_ACTION_OVERVIEW) {
 			ActionItemViewHolder h = (ActionItemViewHolder) holder;
-			KeyEventCommand command = (KeyEventCommand) screenItem.getValue();
-			h.icon.setImageResource(command.getIconId());
-			h.title.setText(command.toHumanString(app));
+			QuickAction action = (QuickAction) screenItem.getValue();
+			h.icon.setImageResource(action.getIconRes(app));
+			h.title.setText(action.getName(app));
 			return;
 		} else if (itemType == ASSIGNED_KEYS_OVERVIEW) {
 			AssignedKeysViewHolder h = (AssignedKeysViewHolder) holder;

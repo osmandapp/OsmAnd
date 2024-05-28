@@ -108,7 +108,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 				int color = appMode.getProfileColor(nightMode);
 				setupSelectableBackground(h.buttonView, color);
 			}
-			h.icon.setImageResource(assignment.getIconId());
+			h.icon.setImageResource(assignment.getIconId(context));
 			h.icon.setVisibility(View.VISIBLE);
 			h.actionButton.setVisibility(editMode ? View.VISIBLE : View.GONE);
 			h.actionButton.setOnClickListener(v -> controller.askRemoveAssignment());
