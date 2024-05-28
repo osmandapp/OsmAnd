@@ -1,5 +1,6 @@
 package net.osmand.shared.xml
 
+import net.osmand.shared.io.CommonFile
 import net.osmand.shared.io.SinkStringWriter
 import okio.IOException
 import okio.Sink
@@ -22,8 +23,8 @@ actual class XmlSerializer actual constructor() {
 	actual fun getProperty(name: String): Any? = serializer.getProperty(name)
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
-	actual fun setOutput(filePath: String) {
-		val fout = File(filePath)
+	actual fun setOutput(file: CommonFile) {
+		val fout = File(file.absolutePath())
 		var output: OutputStreamWriter? = null
 		try {
 			fout.parentFile?.mkdirs()

@@ -13,7 +13,8 @@ actual class DatabaseDriverFactory(private val dbName: String,
 				name = dbName,
 				version = version,
 				create = {},
-				extendedConfig = DatabaseConfiguration.Extended(basePath = dbPath))
+				extendedConfig = DatabaseConfiguration.Extended(basePath = dbPath)
+			)
 		)
 	}
 }

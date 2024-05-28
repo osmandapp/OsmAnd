@@ -36,6 +36,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation("org.jetbrains.kotlin:kotlin-stdlib")
+            implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
             implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")

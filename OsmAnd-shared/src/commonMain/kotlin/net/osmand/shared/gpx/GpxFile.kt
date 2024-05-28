@@ -610,7 +610,7 @@ class GpxFile : GpxExtensions {
 		getExtensionsToWrite()["split_interval"] = splitInterval.toString()
 	}
 
-	fun getWidth(defWidth: String): String {
+	fun getWidth(defWidth: String?): String? {
 		return extensions?.get("width") ?: defWidth
 	}
 

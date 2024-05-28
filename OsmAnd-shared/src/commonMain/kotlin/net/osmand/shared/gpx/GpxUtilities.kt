@@ -6,6 +6,7 @@ import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import net.osmand.shared.data.QuadRect
 import net.osmand.shared.gpx.SplitMetric.*
+import net.osmand.shared.io.CommonFile
 import net.osmand.shared.util.Algorithms
 import net.osmand.shared.util.Algorithms.hash
 import net.osmand.shared.util.IProgress
@@ -932,19 +933,18 @@ object GpxUtilities {
 		return writer.toString()
 	}
 
-	fun writeGpxFile(filePath: String, file: GpxFile): Exception? {
+	fun writeGpxFile(fout: CommonFile, file: GpxFile): Exception? {
 		var output: Sink? = null
 		return try {
-			val path = filePath.toPath()
-			FileSystem.SYSTEM.createDirectories(path)
-			output = FileSystem.SYSTEM.sink(path)
+			fout.createDirectories()
+			output = fout.sink()
 			if (Algorithms.isEmpty(file.path)) {
-				file.path = (if (path.isAbsolute) path.toString() else
-					FileSystem.SYSTEM.canonicalize(path).toString())
+				file.path = (if (fout.isAbsolute()) fout.path() else
+					fout.absolutePath())
 			}
 			writeGpx(output, file, null)
 		} catch (e: Exception) {
-			log.error("Failed to write gpx '$filePath'", e)
+			log.error("Failed to write gpx '$fout.path()'", e)
 			e
 		} finally {
 			output?.close()
@@ -1446,22 +1446,21 @@ object GpxUtilities {
 		}
 	}
 
-	fun loadGpxFile(filePath: String): GpxFile {
-		return loadGpxFile(filePath, null, true)
+	fun loadGpxFile(file: CommonFile): GpxFile {
+		return loadGpxFile(file, null, true)
 	}
 
 	fun loadGpxFile(
-		filePath: String,
+		file: CommonFile,
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
-		val path = filePath.toPath()
 		var source: Source? = null
 		return try {
-			source = FileSystem.SYSTEM.source(path)
+			source = file.source()
 			val gpxFile = loadGpxFile(source, extensionsReader, addGeneralTrack)
-			gpxFile.path = FileSystem.SYSTEM.canonicalize(path).toString()
-			gpxFile.modifiedTime = FileSystem.SYSTEM.metadata(path).lastModifiedAtMillis ?: 0
+			gpxFile.path = file.absolutePath()
+			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
 			if (gpxFile.error != null) {
 				log.info("Error reading gpx ${gpxFile.path}")
@@ -1469,7 +1468,7 @@ object GpxUtilities {
 			gpxFile
 		} catch (e: IOException) {
 			val gpxFile = GpxFile(null)
-			gpxFile.path = FileSystem.SYSTEM.canonicalize(path).toString()
+			gpxFile.path = file.absolutePath()
 			log.error("Error reading gpx ${gpxFile.path}", e)
 			gpxFile.error = e
 			gpxFile

@@ -1,5 +1,6 @@
 package net.osmand.shared.xml
 
+import net.osmand.shared.io.CommonFile
 import okio.IOException
 import okio.Source
 
@@ -31,7 +32,7 @@ expect class XmlPullParser() {
 	fun getProperty(name: String): Any?
 
 	@Throws(XmlParserException::class)
-	fun setInput(filePath: String, inputEncoding: String?)
+	fun setInput(file: CommonFile, inputEncoding: String?)
 
 	@Throws(XmlParserException::class)
 	fun setInput(input: Source, inputEncoding: String?)

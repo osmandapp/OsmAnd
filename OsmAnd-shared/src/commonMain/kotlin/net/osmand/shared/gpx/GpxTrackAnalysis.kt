@@ -50,7 +50,7 @@ class GpxTrackAnalysis {
 
 	var hasSpeedInTrack = false
 
-	private fun getGpxParameter(parameter: GpxParameter): Any? {
+	fun getGpxParameter(parameter: GpxParameter): Any? {
 		return parameters[parameter] ?: parameter.defaultValue
 	}
 
