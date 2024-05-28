@@ -231,8 +231,14 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 		SRTMPlugin srtmPlugin = getSrtmPlugin();
 		if (srtmPlugin != null) {
 			srtmPlugin.getTerrainModeIcon(item, new CollectColorPalletListener() {
+
 				@Override
-				public void onGetColorPalette(@Nullable ColorPalette colorPalette) {
+				public void collectingPalletStarted() {
+					changeProgressBarVisibility(true);
+				}
+
+				@Override
+				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
 					if (colorPalette != null) {
 						List<ColorValue> colorsList = colorPalette.getColors();
 						int[] colors = new int[colorsList.size()];
@@ -247,15 +253,6 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 					} else {
 						TerrainColorSchemeAction.super.setIcon(app, item, imageView, iconProgressBar);
 					}
-				}
-
-				@Override
-				public void collectingPalletStarted() {
-					changeProgressBarVisibility(true);
-				}
-
-				@Override
-				public void collectingPalletFinished() {
 					changeProgressBarVisibility(false);
 				}
 

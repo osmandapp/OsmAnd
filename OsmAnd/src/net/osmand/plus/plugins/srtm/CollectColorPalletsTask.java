@@ -55,15 +55,13 @@ public class CollectColorPalletsTask extends AsyncTask<Void, Void, ColorPalette>
 
 	@Override
 	protected void onPostExecute(ColorPalette colorPalette) {
-		listener.collectingPalletFinished();
-		listener.onGetColorPalette(colorPalette);
+		listener.collectingPalletFinished(colorPalette);
 	}
 
 	public interface CollectColorPalletListener {
-		void onGetColorPalette(@Nullable ColorPalette colorPalette);
 
 		void collectingPalletStarted();
 
-		void collectingPalletFinished();
+		void collectingPalletFinished(@Nullable ColorPalette colorPalette);
 	}
 }

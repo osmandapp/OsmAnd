@@ -62,9 +62,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -96,7 +95,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 
-	private Map<String, ColorPalette> cachedTerrainModeColorPalette = new HashMap<>();
+	private final ConcurrentHashMap<String, ColorPalette> cachedTerrainModeColorPalette = new ConcurrentHashMap<>();
 
 	private TerrainLayer terrainLayer;
 
@@ -679,16 +678,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
 		ColorPalette colorPalette = cachedTerrainModeColorPalette.get(modeKey);
 		if (colorPalette != null) {
-			listener.onGetColorPalette(colorPalette);
+			listener.collectingPalletFinished(colorPalette);
 		} else {
 			CollectColorPalletsTask collectColorPalletsTask = new CollectColorPalletsTask(app, modeKey, new CollectColorPalletListener() {
-				@Override
-				public void onGetColorPalette(@Nullable ColorPalette colorPalette) {
-					if (colorPalette != null) {
-						cachedTerrainModeColorPalette.put(modeKey, colorPalette);
-					}
-					listener.onGetColorPalette(colorPalette);
-				}
 
 				@Override
 				public void collectingPalletStarted() {
@@ -696,8 +688,11 @@ public class SRTMPlugin extends OsmandPlugin {
 				}
 
 				@Override
-				public void collectingPalletFinished() {
-					listener.collectingPalletFinished();
+				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
+					if (colorPalette != null) {
+						cachedTerrainModeColorPalette.put(modeKey, colorPalette);
+					}
+					listener.collectingPalletFinished(colorPalette);
 				}
 			});
 			collectColorPalletsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
