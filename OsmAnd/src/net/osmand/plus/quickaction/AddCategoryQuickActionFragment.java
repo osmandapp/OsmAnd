@@ -12,10 +12,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -79,14 +83,18 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 	}
 
 	private void setupToolbar(@NonNull View view) {
-		TextView title = view.findViewById(R.id.toolbar_title);
-		if (categoryAction != null) {
-			title.setText(app.getString(categoryAction.getNameRes()));
-		}
+		CollapsingToolbarLayout toolbarLayout = view.findViewById(R.id.toolbar_layout);
+		ViewCompat.setElevation(toolbarLayout, 5);
 
-		ImageView backButton = view.findViewById(R.id.back_button);
-		backButton.setImageDrawable(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
-		backButton.setOnClickListener(v -> dismiss());
+		Toolbar toolbar = view.findViewById(R.id.toolbar);
+		if (categoryAction != null) {
+			toolbar.setTitle(app.getString(categoryAction.getNameRes()));
+		}
+		toolbar.setNavigationIcon(getContentIcon(AndroidUtils.getNavigationIconResId(app)));
+		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+		toolbar.setNavigationOnClickListener(v -> {
+			dismiss();
+		});
 	}
 
 	private void setupContent(@NonNull View view) {
@@ -122,7 +130,7 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 			AddCategoryQuickActionFragment fragment = new AddCategoryQuickActionFragment();
 			fragment.setArguments(bundle);
 			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}
