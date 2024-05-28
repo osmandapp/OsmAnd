@@ -373,7 +373,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_SEARCH);
 			this.app = app;
-			this.filter = app.getPoiFilters().getNominatimPOIFilter();
+			this.filter = app.getPoiFilters().getNominatimAddressFilter();
 		}
 
 		@Override

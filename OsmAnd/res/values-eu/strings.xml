@@ -5711,4 +5711,17 @@
 \n
 \n</string>
     <string name="lang_ta_in">Tamilera (India)</string>
+    <string name="track_vertical_exaggeration_description">Eskalaren balioa aldatuz gero, 3D pistaren altuera alda dezakezu.</string>
+    <string name="disable_map_layers_descr">Desgaitu mapa bektorialaren gaineko mapa-geruza guztiak (berrabiarazi behar da).</string>
+    <string name="steps_per_minute_unit">UM</string>
+    <string name="gpx_approximation_geo_cpp">Geometrian oinarritutako (C++, azkarra)</string>
+    <string name="disable_map_layers">Desgaitu mapa geruzak</string>
+    <string name="height_legend_description">Altitude kolore-mapak erabiltzen dira erliebea ikusteko.</string>
+    <string name="allow_display_on_top">Baimendu goiko bistaratzea</string>
+    <string name="allow_display_on_top_description">Baimendu mapako testuak bata bestearen gainean bistaratzea</string>
+    <string name="show_debug_info">Erakutsi arazketa-informazioa</string>
+    <string name="show_debug_info_description">Bistaratu mapako testu bakoitzaren kokapenari buruzko informazio grafikoa</string>
+    <string name="map_text">Mapako testuak</string>
+    <string name="routing_attr_avoid_cobblestone_name">Saihestu harlauzak</string>
+    <string name="routing_attr_avoid_cobblestone_description">Saihestu harlauzak</string>
 </resources>
