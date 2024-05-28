@@ -5607,4 +5607,5 @@
     <string name="wall_color">Kolor ściany</string>
     <string name="top">Góra</string>
     <string name="release_4_8">- Aby być przygotowanym na 4.8</string>
+    <string name="allow_display_on_top">Zawsze wyświetl na wierzchu</string>
 </resources>
