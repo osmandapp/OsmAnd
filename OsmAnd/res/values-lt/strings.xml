@@ -2775,7 +2775,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="save_global_track_interval_descr">Pasirinkite bendrojo maršruto įrašymo intervalą (įjungtas per \"kelionės įrašymo\" valdiklį žemėlapyje).</string>
     <string name="routing_attr_short_way_description">Optimizuotas trumpesnis maršrutas (energijos taupymas)</string>
     <string name="snap_to_road_descr">Dabartinės pozicijos piktograma įsijungs į esamą navigacijos maršrutą</string>
-    <string name="routing_attr_height_obstacles_description">Maršrutai gali išvengti stiprių kalnų.</string>
+    <string name="routing_attr_height_obstacles_description">Numatomas kelionės laikas atspindės aukščio poveikį. Maršruto pasirinkimas gali padėti išvengti stačių įkalnių:</string>
     <string name="regular_price">Įprasta kaina</string>
     <string name="shared_preference">Bendri</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
@@ -3257,7 +3257,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="verify_email_address">Patvirtinkite el. pašto adresą</string>
     <string name="enough_contributions_descr">Sveikiname, pateikėte pakankamai OpenStreetMap pakeitimų ir dabar galite mėgautis neribotais OsmAnd žemėlapių atnaujinimais!</string>
     <string name="backup_error_no_subscription">Prenumeratos nėra</string>
-    <string name="announcement_time_off_route"></string>
+    <string name="announcement_time_off_route"/>
     <string name="osmand_cloud_create_account_descr">Įveskite savo el. pašto adresą, ten bus atsiųstas patvirtinimo kodas,
 \nir visi jūsų duomenys bus su juo susieti.</string>
     <string name="connect_track_points_as">Sujungti maršruto taškus</string>
@@ -3294,4 +3294,30 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="use_login_and_password">Naudokite vartotojo vardą ir slaptažodį</string>
     <string name="restore_selected_data">Atkurti pasirinktus duomenis</string>
     <string name="filter_screen_title">Filtras</string>
+    <string name="temporary_conditional_routing_descr">Naudoti dabar žemėlapyje esančius kelių apribojimus</string>
+    <string name="activity_type_mountainbike_name">Kalnų dviratis</string>
+    <string name="activity_type_riding_name">Jojimas</string>
+    <string name="activity_type_racing_name">Lenktynės</string>
+    <string name="activity_type_winter_name">Žiema</string>
+    <string name="activity_type_snowmobile_name">Sniego motociklas</string>
+    <string name="activity_type_hiking_name">Žygiavimas</string>
+    <string name="track_recording_stop_without_saving">Sustabdyti neišsaugojus</string>
+    <string name="activity_type_motorbike_name">Motoroleris</string>
+    <string name="delete_updates">Ištrinti naujinimus</string>
+    <string name="latest_openstreetmap_update">Galimas naujausias OpenStreetMap naujinimas:</string>
+    <string name="track_recording_save_and_stop">Išsaugoti ir sustabdyti įrašymą</string>
+    <string name="routing_attr_driving_style_description">Pasirinkite vairavimo tikslą, kad gautumėte trumpesnį, greitesnį ar saugesnį maršrutą</string>
+    <string name="activity_type_car_name">Automobilis</string>
+    <string name="shared_strings_all_regions">Visi regionai</string>
+    <string name="activity_type_water_name">Vanduo</string>
+    <string name="travel_topics">Kelionių temos</string>
+    <string name="last_time_checked">Paskutinį kartą tikrinta: %s</string>
+    <string name="update_frequency">Atnaujinimo dažnumas</string>
+    <string name="track_recording_title">Maršruto įrašymas sustabdytas</string>
+    <string name="activity_type_cycling_name">Važiavimas dviračiu</string>
+    <string name="updated">Atnaujinta: %s</string>
+    <string name="app_restart_required">Norint pritaikyti kai kuriuos nustatymus, reikia iš naujo paleisti programą.</string>
+    <string name="track_recording_description">Sustabdyti įrašymą?
+\nVisi neišsaugoti duomenys bus prarasti.</string>
+    <string name="delete_number_files_question">Ištrinti %1$d failus?</string>
 </resources>
