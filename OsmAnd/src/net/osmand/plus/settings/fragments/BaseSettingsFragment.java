@@ -49,7 +49,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bytehamster.lib.preferencesearch.BaseSearchPreferenceFragment;
 import com.bytehamster.lib.preferencesearch.PreferenceFragments;
-import com.bytehamster.lib.preferencesearch.PreferencesGraphProvider;
+import com.bytehamster.lib.preferencesearch.PreferenceScreensProvider;
 import com.bytehamster.lib.preferencesearch.SearchConfiguration;
 import com.bytehamster.lib.preferencesearch.SearchPreference;
 import com.google.android.material.appbar.AppBarLayout;
@@ -399,13 +399,13 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			config.setActivity(getMapActivity());
             config.setFragmentContainerViewId(FRAGMENT_CONTAINER_VIEW);
             config.setPreferenceFragmentsSupplier(() -> getPreferenceFragments(new MainSettingsFragment()));
+			config.setFuzzySearchEnabled(false);
 		}
 	}
 
 	private Set<Class<? extends PreferenceFragmentCompat>> getPreferenceFragments(final PreferenceFragmentCompat root) {
-        return new PreferencesGraphProvider(new PreferenceFragments(getActivity(), FRAGMENT_CONTAINER_VIEW))
-                .getPreferencesGraph(root)
-                .vertexSet()
+        return new PreferenceScreensProvider(new PreferenceFragments(getActivity(), FRAGMENT_CONTAINER_VIEW))
+                .getPreferenceScreens(root)
                 .stream()
                 .map(preferenceScreenWithHost -> preferenceScreenWithHost.host)
                 .collect(Collectors.toSet());
