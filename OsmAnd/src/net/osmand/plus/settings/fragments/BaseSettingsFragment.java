@@ -48,7 +48,7 @@ import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bytehamster.lib.preferencesearch.BaseSearchPreferenceFragment;
-import com.bytehamster.lib.preferencesearch.PreferenceFragmentHelper;
+import com.bytehamster.lib.preferencesearch.PreferenceFragments;
 import com.bytehamster.lib.preferencesearch.PreferencesGraphProvider;
 import com.bytehamster.lib.preferencesearch.SearchConfiguration;
 import com.bytehamster.lib.preferencesearch.SearchPreference;
@@ -403,7 +403,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	}
 
 	private Set<Class<? extends PreferenceFragmentCompat>> getPreferenceFragments(final PreferenceFragmentCompat root) {
-        return new PreferencesGraphProvider(new PreferenceFragmentHelper(getActivity(), FRAGMENT_CONTAINER_VIEW))
+        return new PreferencesGraphProvider(new PreferenceFragments(getActivity(), FRAGMENT_CONTAINER_VIEW))
                 .getPreferencesGraph(root)
                 .vertexSet()
                 .stream()
