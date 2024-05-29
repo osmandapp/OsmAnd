@@ -111,7 +111,11 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.icon.setImageResource(assignment.getIconId(context));
 			h.icon.setVisibility(View.VISIBLE);
 			h.actionButton.setVisibility(editMode ? View.VISIBLE : View.GONE);
-			h.actionButton.setOnClickListener(v -> controller.askRemoveAssignment());
+			h.actionButton.setOnClickListener(v -> {
+				if (editMode) {
+					controller.askRemoveAssignment();
+				}
+			});
 
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
@@ -123,8 +127,20 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.actionName.setText(assignment.getName(app));
 
 			h.assignedKeys.removeAllViews();
-			for (Integer keyCode : assignment.getKeyCodes()) {
+			List<Integer> keyCodes = assignment.getKeyCodes();
+			int keyCodesCount = keyCodes.size();
+			int visibleKeyCodesCount = 0;
+			int visibleKeyCodesLimit = editMode ? 2 : 3;
+			for (Integer keyCode : keyCodes) {
 				h.assignedKeys.addView(createKeycodeView(keyCode));
+				visibleKeyCodesCount++;
+				if (visibleKeyCodesCount < keyCodesCount) {
+					h.assignedKeys.addView(inflate(R.layout.item_key_assignment_element_space));
+					if (visibleKeyCodesCount == visibleKeyCodesLimit) {
+						h.assignedKeys.addView(inflate(R.layout.item_key_assignment_element_more));
+						break;
+					}
+				}
 			}
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;

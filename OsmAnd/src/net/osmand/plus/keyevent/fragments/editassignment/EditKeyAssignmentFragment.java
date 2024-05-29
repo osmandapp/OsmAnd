@@ -68,7 +68,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
 
-		adapter = new EditKeyAssignmentAdapter(app, appMode, controller, isUsedOnMap());
+		adapter = new EditKeyAssignmentAdapter((MapActivity) requireMyActivity(), appMode, controller, isUsedOnMap());
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
@@ -201,7 +201,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
 		if (activity != null && !activity.isChangingConfigurations()) {
-			app.getDialogManager().unregister(PROCESS_ID);
+			controller.unregisterFromDialogManager();
 		}
 	}
 

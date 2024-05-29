@@ -49,6 +49,8 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 
 	public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
+	public static final String PROCESS_ID = "create_or_edit_quick_action";
+
 	public static final String KEY_ACTION_ID = "action_id";
 	public static final String KEY_ACTION_TYPE = "action_type";
 	public static final String KEY_ACTION_IS_NEW = "action_is_new";
@@ -181,6 +183,12 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 					saveFirstTagWithEmptyValue();
 				}
 				if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
+					QuickActionChangeListener externalListener = (QuickActionChangeListener) app.getDialogManager().findController(PROCESS_ID);
+					if (externalListener != null) {
+						externalListener.onQuickActionChanged(action);
+						notifyOnActionAdded();
+						return;
+					}
 					List<QuickAction> actions = buttonState.getQuickActions();
 					if (mapButtonsHelper.isActionNameUnique(actions, action)) {
 						if (isNew) {
@@ -189,7 +197,6 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 							mapButtonsHelper.updateQuickAction(buttonState, action);
 						}
 						notifyOnActionAdded();
-						dismiss();
 					} else {
 						action = mapButtonsHelper.generateUniqueActionName(actions, action);
 						showDuplicatedDialog();
@@ -213,6 +220,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 				((AddQuickActionListener) fragment).onQuickActionAdded();
 			}
 		}
+		dismiss();
 	}
 
 	private void showDuplicatedDialog() {
@@ -227,7 +235,6 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 			}
 			CreateEditActionDialog.this.dismiss();
 			notifyOnActionAdded();
-			dismiss();
 		}).create().show();
 	}
 
@@ -299,6 +306,11 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 			dialog.show(fragmentManager, TAG);
 		}
 	}
+
+	public interface QuickActionChangeListener {
+		void onQuickActionChanged(@NonNull QuickAction action);
+	}
+
 	public interface AddQuickActionListener {
 		void onQuickActionAdded();
 	}

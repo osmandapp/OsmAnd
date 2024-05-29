@@ -23,10 +23,12 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -34,8 +36,13 @@ import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
+import net.osmand.plus.quickaction.AddQuickActionFragment;
+import net.osmand.plus.quickaction.CreateEditActionDialog;
+import net.osmand.plus.quickaction.CreateEditActionDialog.QuickActionChangeListener;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -48,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class EditKeyAssignmentController implements IDialogController, OnKeyCodeSelectedCallback {
+public class EditKeyAssignmentController implements IDialogController, QuickActionChangeListener, OnKeyCodeSelectedCallback {
 
 	public static final String PROCESS_ID = "edit_key_assignment";
 
@@ -214,8 +221,19 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		return assignment != null? assignment.getName(app) : app.getString(R.string.new_key_assignment);
 	}
 
-	public void askAddAction() {
-		// TODO open action menu screen
+	public void askAddAction(@NonNull MapActivity mapActivity) {
+		MapLayers mapLayers = mapActivity.getMapLayers();
+		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
+		if (selectedButton != null) {
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
+			AddQuickActionFragment.showInstance(manager, selectedButton.getButtonState());
+		}
+	}
+
+	@Override
+	public void onQuickActionChanged(@NonNull QuickAction action) {
+		editBundle.action = action;
+		askRefreshDialog();
 	}
 
 	public void askDeleteAction() {
@@ -223,7 +241,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		askRefreshDialog();
 	}
 
-	public void askDeleteKeyCode(Integer keyCode) {
+	public void askDeleteKeyCode(@NonNull Integer keyCode) {
 		editBundle.keyCodes.remove(keyCode);
 		askRefreshDialog();
 	}
@@ -239,9 +257,9 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	@Override
-	public void onKeyCodeSelected(int oldKeyCode, int newKeyCode) {
+	public void onKeyCodeSelected(@Nullable Integer oldKeyCode, @NonNull Integer newKeyCode) {
 		if (editBundle != null) {
-			editBundle.keyCodes.add((Integer) newKeyCode);
+			editBundle.keyCodes.add(newKeyCode);
 		}
 		askRefreshDialog();
 	}
@@ -299,6 +317,12 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		app.getDialogManager().askDismissDialog(PROCESS_ID);
 	}
 
+	public void unregisterFromDialogManager() {
+		DialogManager dialogManager = app.getDialogManager();
+		dialogManager.unregister(PROCESS_ID);
+		dialogManager.unregister(CreateEditActionDialog.PROCESS_ID);
+	}
+
 	public boolean isNightMode() {
 		return app.getDaynightHelper().isNightMode(usedOnMap);
 	}
@@ -313,9 +337,11 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	                                  @NonNull String deviceId,
 	                                  @Nullable String assignmentId,
 	                                  boolean usedOnMap) {
-		app.getDialogManager().register(
-				PROCESS_ID, new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap)
-		);
+		DialogManager dialogManager = app.getDialogManager();
+		EditKeyAssignmentController controller =
+				new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap);
+		dialogManager.register(PROCESS_ID, controller);
+		dialogManager.register(CreateEditActionDialog.PROCESS_ID, controller);
 	}
 
 	@Nullable

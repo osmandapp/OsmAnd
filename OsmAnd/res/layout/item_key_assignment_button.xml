@@ -8,7 +8,7 @@
 
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/description"
-		style="@style/DescStyle"
+		style="@style/DescStyle.Medium"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:textColor="@color/preference_category_title"

@@ -44,6 +44,7 @@
 			android:layout_marginEnd="@dimen/content_padding"
 			android:layout_weight="1"
 			android:ellipsize="marquee"
+			android:maxLines="1"
 			android:paddingTop="@dimen/content_padding_half"
 			android:paddingBottom="@dimen/content_padding_half"
 			android:textColor="?android:textColorPrimary"

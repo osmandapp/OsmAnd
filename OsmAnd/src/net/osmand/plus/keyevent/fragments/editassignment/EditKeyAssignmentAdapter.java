@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
@@ -54,6 +55,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	static final int ASSIGNED_KEYS_OVERVIEW = 12;
 
 	private final OsmandApplication app;
+	private final MapActivity mapActivity;
 	private final ApplicationMode appMode;
 	private ViewGroup parent;
 	private Context context;
@@ -62,10 +64,11 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	private final boolean usedOnMap;
 	private final EditKeyAssignmentController controller;
 
-	public EditKeyAssignmentAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
+	public EditKeyAssignmentAdapter(@NonNull MapActivity mapActivity, @NonNull ApplicationMode appMode,
 	                                @NonNull EditKeyAssignmentController controller, boolean usedOnMap) {
 		setHasStableIds(true);
-		this.app = app;
+		this.mapActivity = mapActivity;
+		this.app = mapActivity.getMyApplication();
 		this.appMode = appMode;
 		this.usedOnMap = usedOnMap;
 		this.controller = controller;
@@ -135,14 +138,14 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.title.setText(R.string.key_assignment_add_action);
 			h.icon.setVisibility(View.GONE);
 			h.summaryContainer.setVisibility(View.GONE);
-			h.buttonView.setOnClickListener(v -> controller.askAddAction());
+			h.buttonView.setOnClickListener(v -> controller.askAddAction(mapActivity));
 
 		} else if (itemType == ASSIGNED_ACTION_ITEM) {
-			KeyEventCommand command = (KeyEventCommand) screenItem.getValue();
+			QuickAction command = (QuickAction) screenItem.getValue();
 			h.actionButton.setImageDrawable(getDeleteIcon());
-			h.title.setText(command.toHumanString(app));
+			h.title.setText(command.getName(app));
 			h.icon.setVisibility(View.VISIBLE);
-			h.icon.setImageResource(command.getIconId());
+			h.icon.setImageResource(command.getIconRes(app));
 			h.summaryContainer.setVisibility(View.GONE);
 			h.actionButton.setOnClickListener(v -> controller.askDeleteAction());
 
@@ -162,10 +165,9 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.icon.setVisibility(View.GONE);
 			h.summaryContainer.setVisibility(View.VISIBLE);
 			h.summary.setText(keyName);
-
 		}
-//		int color = appMode.getProfileColor(isNightMode());
-//		setupSelectableBackground(h.buttonView, color);
+		int color = appMode.getProfileColor(isNightMode());
+		setupSelectableBackground(h.buttonView, color);
 	}
 
 	@NonNull
