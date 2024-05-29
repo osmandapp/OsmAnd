@@ -5721,4 +5721,6 @@
     <string name="disable_map_layers">Vypnúť mapové vrstvy</string>
     <string name="disable_map_layers_descr">Vypnúť všetky vrstvy mapy nad vektorovou mapou (vyžaduje reštart).</string>
     <string name="height_legend_description">Farebné výškové mapy sa používajú na vizualizáciu terénu.</string>
+    <string name="play_weather_forecast">Prehrať predpoveď počasia</string>
+    <string name="change_terrain_color_scheme">Zmeniť farebnú schému terénu</string>
 </resources>
