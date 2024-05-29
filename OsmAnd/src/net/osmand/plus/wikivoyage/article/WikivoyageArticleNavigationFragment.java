@@ -120,7 +120,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.list_background_color_light;
 	}
 
-	private void sendResults(String title, String lang) {
+	private void sendResults(@NonNull String title, @NonNull String lang) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			WikivoyageArticleDialogFragment.showInstanceByTitle(app, getParentFragmentManager(), title, lang);

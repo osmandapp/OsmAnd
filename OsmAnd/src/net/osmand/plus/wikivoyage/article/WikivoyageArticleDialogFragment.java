@@ -361,7 +361,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		String imageTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
 			String[] aggregatedPartOfArrayOrig = Arrays.stream(article.getAggregatedPartOf().split(","))
-					.map(WikivoyageUtils::getTileWithoutPrefix).toArray(String[]::new);
+					.map(WikivoyageUtils::getTitleWithoutPrefix).toArray(String[]::new);
 			if (aggregatedPartOfArrayOrig.length > 0) {
 				String current = aggregatedPartOfArrayOrig[0];
 				sb.append("<div class=\"nav-bar").append(nightModeClass).append("\" onClick=\"showNavigation()\">");

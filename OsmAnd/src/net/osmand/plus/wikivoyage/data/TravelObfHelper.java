@@ -550,7 +550,7 @@ public class TravelObfHelper implements TravelHelper {
 
 		for (String header : headers) {
 			String parentLang = header.startsWith("en:") ? "en" : lang;
-			header = WikivoyageUtils.getTileWithoutPrefix(header);
+			header = WikivoyageUtils.getTitleWithoutPrefix(header);
 			TravelArticle parentArticle = getParentArticleByTitle(header, parentLang);
 			if (parentArticle == null) {
 				continue;
@@ -576,12 +576,14 @@ public class TravelObfHelper implements TravelHelper {
 
 		Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
 		for (String header : headers) {
-			header = WikivoyageUtils.getTileWithoutPrefix(header);
+			String parentLang = header.startsWith("en:") ? "en" : lang;
+			header = WikivoyageUtils.getTitleWithoutPrefix(header);
 			WikivoyageSearchResult searchResult = headerObjs.get(header);
 			List<WikivoyageSearchResult> results = navMap.get(header);
 			if (results != null) {
 				sortSearchResults(results, header);
-				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult("", header, null, null, null);
+				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult("", header, null,
+						null, Collections.singletonList(parentLang));
 				searchResult = searchResult != null ? searchResult : emptyResult;
 				res.put(searchResult, results);
 			}

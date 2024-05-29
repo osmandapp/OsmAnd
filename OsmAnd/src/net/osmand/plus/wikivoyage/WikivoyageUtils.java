@@ -122,7 +122,7 @@ public class WikivoyageUtils {
 	}
 
 	@NonNull
-	public static String getTileWithoutPrefix(@NonNull String title) {
+	public static String getTitleWithoutPrefix(@NonNull String title) {
 		return title.startsWith(EN_LANG_PREFIX) ? title.substring(EN_LANG_PREFIX.length()) : title;
 	}
 
