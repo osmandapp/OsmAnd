@@ -5725,4 +5725,7 @@
     <string name="disable_map_layers_descr">Tiltsa le az összes térképréteget a vektortérkép felett (újraindítás szükséges).</string>
     <string name="disable_map_layers">Térképrétegek letiltása</string>
     <string name="height_legend_description">A színes magassági térképek a domborzat megjelenítésére használhatók.</string>
+    <string name="play_weather_forecast">Időjárás előrejelzés lejátszása</string>
+    <string name="travel_topics">Utazási témák</string>
+    <string name="change_terrain_color_scheme">Domborzati színséma módosítása</string>
 </resources>
