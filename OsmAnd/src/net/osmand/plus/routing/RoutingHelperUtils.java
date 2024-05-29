@@ -175,6 +175,9 @@ public class RoutingHelperUtils {
 		// this code has an effect on route recalculation which should be detected without mistakes
 		if (currentLocation.hasBearing() && nextRouteLocation != null) {
 			float bearingMotion = currentLocation.getBearing();
+			if (bearingMotion == 90.0) {
+				return false; // no bearing (special case, possibly only in the Android emulator)
+			}
 			float bearingToRoute = prevRouteLocation != null
 					? prevRouteLocation.bearingTo(nextRouteLocation)
 					: currentLocation.bearingTo(nextRouteLocation);
