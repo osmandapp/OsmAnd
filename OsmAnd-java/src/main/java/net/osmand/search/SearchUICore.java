@@ -392,11 +392,9 @@ public class SearchUICore {
 		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
 		SearchAmenityByNameAPI amenitiesApi = (SearchAmenityByNameAPI) apis.get(apis.size() - 1);
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi));
-
 		apis.add(new SearchAmenityTypesAPI(poiTypes));
 		SearchAmenityTypesAPI searchAmenityTypesAPI = (SearchAmenityTypesAPI) apis.get(apis.size() - 1);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-
 		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
 		SearchBuildingAndIntersectionsByStreetAPI streetsApi = (SearchBuildingAndIntersectionsByStreetAPI) apis.get(apis.size() - 1);
 		apis.add(new SearchCoreFactory.SearchStreetByCityAPI(streetsApi));
