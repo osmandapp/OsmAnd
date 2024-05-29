@@ -5732,4 +5732,7 @@
     <string name="disable_map_layers_descr">Deaktiver alle kortlag over vektorkortet (genstart påkrævet).</string>
     <string name="disable_map_layers">Deaktiver kortlag</string>
     <string name="height_legend_description">Højdefarvekort bruges til at visualisere relief.</string>
+    <string name="change_terrain_color_scheme">Skift farvetema for terræn</string>
+    <string name="play_weather_forecast">Afspil vejrudsigt</string>
+    <string name="travel_topics">Rejse-emner</string>
 </resources>
