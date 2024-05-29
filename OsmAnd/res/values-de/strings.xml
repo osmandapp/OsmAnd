@@ -5732,4 +5732,6 @@
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
     <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um Relief zu visualisieren.</string>
     <string name="travel_topics">Reisethemen</string>
+    <string name="play_weather_forecast">Wettervorhersage abspielen</string>
+    <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
 </resources>
