@@ -37,7 +37,6 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.Preference.OnPreferenceClickListener;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceGroupAdapter;
 import androidx.preference.PreferenceManager;
@@ -49,7 +48,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bytehamster.lib.preferencesearch.BaseSearchPreferenceFragment;
 import com.bytehamster.lib.preferencesearch.PreferenceFragments;
-import com.bytehamster.lib.preferencesearch.PreferenceScreensProvider;
 import com.bytehamster.lib.preferencesearch.SearchConfiguration;
 import com.bytehamster.lib.preferencesearch.SearchPreference;
 import com.google.android.material.appbar.AppBarLayout;
@@ -88,7 +86,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {
@@ -398,18 +395,10 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			final SearchConfiguration config = searchPreference.getSearchConfiguration();
 			config.setActivity(getMapActivity());
             config.setFragmentContainerViewId(FRAGMENT_CONTAINER_VIEW);
-            config.setPreferenceFragmentsSupplier(() -> getPreferenceFragments(new MainSettingsFragment()));
+            config.setPreferenceFragmentsSupplier(() -> PreferenceFragments.getPreferenceFragments(new MainSettingsFragment(), getActivity(), FRAGMENT_CONTAINER_VIEW));
 			config.setFuzzySearchEnabled(false);
 		}
 	}
-
-	private Set<Class<? extends PreferenceFragmentCompat>> getPreferenceFragments(final PreferenceFragmentCompat root) {
-        return new PreferenceScreensProvider(new PreferenceFragments(getActivity(), FRAGMENT_CONTAINER_VIEW))
-                .getPreferenceScreens(root)
-                .stream()
-                .map(preferenceScreenWithHost -> preferenceScreenWithHost.host)
-                .collect(Collectors.toSet());
-    }
 
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
