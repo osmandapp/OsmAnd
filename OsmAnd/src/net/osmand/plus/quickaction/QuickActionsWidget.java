@@ -36,7 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.QuickAction.QuickActionSelectionListener;
 import net.osmand.plus.quickaction.actions.NewAction;
-import net.osmand.plus.quickaction.controller.AddMapQuickActionController;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -236,8 +236,7 @@ public class QuickActionsWidget extends LinearLayout {
 					if (action instanceof NewAction) {
 						QuickActionListFragment.showInstance(activity, buttonState);
 					} else {
-						AddMapQuickActionController.createInstance(app, buttonState);
-						CreateEditActionDialog.showInstance(fragmentManager, action);
+						AddQuickActionController.showCreateEditActionDialog(app, fragmentManager, buttonState, action);
 					}
 					return true;
 				});

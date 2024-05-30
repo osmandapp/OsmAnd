@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
@@ -58,11 +57,5 @@ public class AddMapQuickActionController extends AddQuickActionController {
 	@Override
 	public QuickActionButtonState getButtonState() {
 		return buttonState;
-	}
-
-	public static void createInstance(@NonNull OsmandApplication app,
-	                                  @NonNull QuickActionButtonState buttonState) {
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(PROCESS_ID, new AddMapQuickActionController(app, buttonState));
 	}
 }

@@ -36,7 +36,6 @@ import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
-import net.osmand.plus.quickaction.AddQuickActionFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -220,11 +219,9 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	public void askAddAction(@NonNull MapActivity mapActivity) {
-		DialogManager dialogManager = app.getDialogManager();
-		dialogManager.register(AddQuickActionController.PROCESS_ID, new AddKeyEventQuickActionController(app));
-
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		AddQuickActionFragment.showInstance(manager);
+		AddQuickActionController controller = new AddKeyEventQuickActionController(app);
+		AddQuickActionController.showAddQuickActionDialog(app, manager, controller);
 	}
 
 	public void askDeleteAction() {

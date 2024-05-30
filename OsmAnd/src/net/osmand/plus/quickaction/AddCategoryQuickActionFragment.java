@@ -105,20 +105,6 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, int quickActionCategoryId) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			Bundle bundle = new Bundle();
-			bundle.putInt(QUICK_ACTION_CATEGORY_KEY, quickActionCategoryId);
-
-			AddCategoryQuickActionFragment fragment = new AddCategoryQuickActionFragment();
-			fragment.setArguments(bundle);
-			manager.beginTransaction()
-					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		}
-	}
-
 	@Override
 	public void onItemClick(@NonNull QuickActionType quickActionType) {
 		FragmentActivity activity = getActivity();
@@ -133,5 +119,19 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 	@Override
 	public void onQuickActionAdded() {
 		dismiss();
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager, int quickActionCategoryId) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			Bundle bundle = new Bundle();
+			bundle.putInt(QUICK_ACTION_CATEGORY_KEY, quickActionCategoryId);
+
+			AddCategoryQuickActionFragment fragment = new AddCategoryQuickActionFragment();
+			fragment.setArguments(bundle);
+			manager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

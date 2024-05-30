@@ -2,10 +2,13 @@ package net.osmand.plus.quickaction.controller;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
+import net.osmand.plus.quickaction.AddQuickActionFragment;
+import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -76,8 +79,35 @@ public abstract class AddQuickActionController implements IDialogController {
 	@Nullable
 	protected abstract QuickActionButtonState getButtonState();
 
-	public static void showAddQuickActionDialog() {
+	public static void showAddQuickActionDialog(@NonNull OsmandApplication app,
+												@NonNull FragmentManager fragmentManager,
+	                                            @NonNull QuickActionButtonState buttonState) {
+		registerControllerIfNotExists(app, buttonState);
+		AddQuickActionFragment.showInstance(fragmentManager);
+	}
 
+	public static void showAddQuickActionDialog(@NonNull OsmandApplication app,
+	                                            @NonNull FragmentManager fragmentManager,
+	                                            @NonNull AddQuickActionController controller) {
+		DialogManager dialogManager = app.getDialogManager();
+		dialogManager.register(PROCESS_ID, controller);
+		AddQuickActionFragment.showInstance(fragmentManager);
+	}
+
+	public static void showCreateEditActionDialog(@NonNull OsmandApplication app,
+	                                              @NonNull FragmentManager fragmentManager,
+	                                              @NonNull QuickActionButtonState buttonState,
+	                                              @NonNull QuickAction action) {
+		registerControllerIfNotExists(app, buttonState);
+		CreateEditActionDialog.showInstance(fragmentManager, action);
+	}
+
+	private static void registerControllerIfNotExists(@NonNull OsmandApplication app,
+	                                                  @NonNull QuickActionButtonState buttonState) {
+		DialogManager dialogManager = app.getDialogManager();
+		if (dialogManager.findController(PROCESS_ID) == null) {
+			dialogManager.register(PROCESS_ID, new AddMapQuickActionController(app, buttonState));
+		}
 	}
 
 	@Nullable
