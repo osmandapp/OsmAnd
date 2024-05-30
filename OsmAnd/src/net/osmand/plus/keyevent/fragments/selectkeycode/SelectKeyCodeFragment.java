@@ -27,11 +27,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.keyevent.InputDevicesHelper;
-import net.osmand.plus.keyevent.KeyEventCommandsCache;
 import net.osmand.plus.keyevent.KeyEventHelper;
 import net.osmand.plus.keyevent.KeySymbolMapper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController;
 import net.osmand.plus.quickaction.QuickAction;
@@ -188,12 +186,12 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 		View warning = view.findViewById(R.id.warning);
 		View warningIcon = view.findViewById(R.id.warning_icon);
 		TextView warningMessage = view.findViewById(R.id.warning_message);
-		QuickAction actionDuplicate = getActionDuplication(keyCode);
-		if (actionDuplicate != null) {
+		KeyAssignment assignmentDuplication = getAssignmentDuplication(keyCode);
+		if (assignmentDuplication != null) {
 			AndroidUiHelper.updateVisibility(warning, true);
 			AndroidUiHelper.updateVisibility(warningIcon, true);
 			String keyLabel = KeySymbolMapper.getKeySymbol(app, keyCode);
-			String actionName = actionDuplicate.getName(app);
+			String actionName = assignmentDuplication.getName(app);
 			String message = getString(R.string.key_is_already_assigned_error, keyLabel, actionName);
 			warningMessage.setText(createSpannableString(message, BOLD, keyLabel, actionName));
 		} else if (isKeyCodeAlreadyAssignedToThisAction() && hasInputFromUser) {
@@ -247,7 +245,7 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private boolean isKeyCodeFree() {
-		return getActionDuplication(keyCode) == null;
+		return getAssignmentDuplication(keyCode) == null;
 	}
 
 	private boolean isKeyCodeAlreadyAssignedToThisAction() {
@@ -256,11 +254,11 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	@Nullable
-	private QuickAction getActionDuplication(int keyCode) {
+	private KeyAssignment getAssignmentDuplication(int keyCode) {
 		if (inputDevice != null) {
-			QuickAction action = inputDevice.findAction(keyCode);
-			if (action != null && !Objects.equals(getKeyAssignment().getAction().getId(), action.getId())) { // TODO check assignments instead of actions
-				return action;
+			KeyAssignment assignment = inputDevice.findAssignment(keyCode);
+			if (assignment != null && !Objects.equals(getKeyAssignment(), assignment)) {
+				return assignment;
 			}
 		}
 		return null;

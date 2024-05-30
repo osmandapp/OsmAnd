@@ -43,6 +43,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
 import net.osmand.plus.quickaction.MapButtonsHelper.QuickActionUpdatesListener;
+import net.osmand.plus.quickaction.controller.AddMapQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -565,7 +566,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 					h.itemContainer.setOnClickListener(view -> {
 						FragmentManager manager = getFragmentManager();
 						if (manager != null) {
-							CreateEditActionDialog.showInstance(manager, buttonState, action);
+							AddMapQuickActionController.createInstance(app, buttonState);
+							CreateEditActionDialog.showInstance(manager, action);
 						}
 					});
 				} else if (screenType == SCREEN_TYPE_DELETE) {
@@ -883,7 +885,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 	private void showAddQuickActionDialog() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			AddQuickActionFragment.showInstance(manager, buttonState);
+			AddMapQuickActionController.createInstance(app, buttonState);
+			AddQuickActionFragment.showInstance(manager);
 		}
 	}
 

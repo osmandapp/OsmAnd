@@ -388,7 +388,7 @@ public class MapButtonsHelper {
 	}
 
 	@NonNull
-	public Map<QuickActionType, List<QuickActionType>>  produceTypeActionsListWithHeaders(@NonNull QuickActionButtonState buttonState) {
+	public Map<QuickActionType, List<QuickActionType>> produceTypeActionsListWithHeaders(@Nullable QuickActionButtonState buttonState) {
 		Map<QuickActionType, List<QuickActionType>> quickActions = new HashMap<>();
 
 		filterQuickActions(buttonState, TYPE_ADD_ITEMS, quickActions);
@@ -409,12 +409,19 @@ public class MapButtonsHelper {
 		return quickActions;
 	}
 
-	public void filterQuickActions(@NonNull QuickActionButtonState buttonState,
-									@NonNull QuickActionType filter,
-									@NonNull List<QuickActionType> actionTypes) {
+	public void filterQuickActions(@NonNull QuickActionType filter,
+	                               @NonNull List<QuickActionType> actionTypes) {
+		filterQuickActions(null, filter, actionTypes);
+	}
+
+	public void filterQuickActions(@Nullable QuickActionButtonState buttonState,
+	                               @NonNull QuickActionType filter,
+	                               @NonNull List<QuickActionType> actionTypes) {
 		Set<Integer> set = new TreeSet<>();
-		for (QuickAction action : buttonState.getQuickActions()) {
-			set.add(action.getActionType().getId());
+		if (buttonState != null) {
+			for (QuickAction action : buttonState.getQuickActions()) {
+				set.add(action.getActionType().getId());
+			}
 		}
 		for (QuickActionType type : enabledTypes) {
 			if (type.getCategory() == filter.getCategory()) {
@@ -430,7 +437,7 @@ public class MapButtonsHelper {
 		}
 	}
 
-	private void filterQuickActions(@NonNull QuickActionButtonState buttonState,
+	private void filterQuickActions(@Nullable QuickActionButtonState buttonState,
 									@NonNull QuickActionType filter,
 									@NonNull Map<QuickActionType, List<QuickActionType>> actionTypes) {
 		List<QuickActionType> categoryActions = actionTypes.get(filter);

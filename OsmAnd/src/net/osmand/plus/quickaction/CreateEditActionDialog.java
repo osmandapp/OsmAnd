@@ -1,6 +1,5 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.quickaction.AddQuickActionFragment.QUICK_ACTION_BUTTON_KEY;
 import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 import android.app.Dialog;
@@ -32,11 +31,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 
 import java.util.List;
@@ -49,8 +48,6 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 
 	public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
-	public static final String PROCESS_ID = "create_or_edit_quick_action";
-
 	public static final String KEY_ACTION_ID = "action_id";
 	public static final String KEY_ACTION_TYPE = "action_type";
 	public static final String KEY_ACTION_IS_NEW = "action_is_new";
@@ -58,9 +55,8 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 	private OsmandApplication app;
 	private OsmandSettings settings;
 	private UiUtilities uiUtilities;
-	private MapButtonsHelper mapButtonsHelper;
+	private AddQuickActionController controller;
 	private QuickAction action;
-	private QuickActionButtonState buttonState;
 
 	private boolean isNew;
 	private boolean nightMode;
@@ -72,20 +68,20 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		app = (OsmandApplication) requireActivity().getApplication();
 		settings = app.getSettings();
 		uiUtilities = app.getUIUtilities();
-		mapButtonsHelper = app.getMapButtonsHelper();
+		controller = AddQuickActionController.getExistedInstance(app);
+		if (controller == null) {
+			dismiss();
+		} else {
+			controller.registerDialog(TAG);
+			nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
+			setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 
-		Bundle args = getArguments();
-		String key = args != null ? args.getString(QUICK_ACTION_BUTTON_KEY) : null;
-		if (key != null) {
-			buttonState = mapButtonsHelper.getButtonStateById(key);
+			Bundle args = requireArguments();
+			int type = savedInstanceState == null ? args.getInt(KEY_ACTION_TYPE) : savedInstanceState.getInt(KEY_ACTION_TYPE);
+			long actionId = savedInstanceState == null ? args.getLong(KEY_ACTION_ID) : savedInstanceState.getLong(KEY_ACTION_ID);
+			isNew = savedInstanceState == null ? actionId == 0 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
+			action = controller.produceQuickAction(isNew, type, actionId);
 		}
-		nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
-		setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
-
-		int type = savedInstanceState == null ? getArguments().getInt(KEY_ACTION_TYPE) : savedInstanceState.getInt(KEY_ACTION_TYPE);
-		long actionId = savedInstanceState == null ? getArguments().getLong(KEY_ACTION_ID) : savedInstanceState.getLong(KEY_ACTION_ID);
-		isNew = savedInstanceState == null ? actionId == 0 : savedInstanceState.getBoolean(KEY_ACTION_IS_NEW);
-		action = MapButtonsHelper.produceAction(isNew ? mapButtonsHelper.newActionByType(type) : buttonState.getQuickAction(actionId));
 	}
 
 	@Override
@@ -183,24 +179,13 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 					saveFirstTagWithEmptyValue();
 				}
 				if (action.fillParams(((ViewGroup) root.findViewById(R.id.container)).getChildAt(0), (MapActivity) getActivity())) {
-					QuickActionChangeListener externalListener = (QuickActionChangeListener) app.getDialogManager().findController(PROCESS_ID);
-					if (externalListener != null) {
-						externalListener.onQuickActionChanged(action);
-						notifyOnActionAdded();
-						return;
-					}
-					List<QuickAction> actions = buttonState.getQuickActions();
-					if (mapButtonsHelper.isActionNameUnique(actions, action)) {
-						if (isNew) {
-							mapButtonsHelper.addQuickAction(buttonState, action);
-						} else {
-							mapButtonsHelper.updateQuickAction(buttonState, action);
-						}
-						notifyOnActionAdded();
-					} else {
-						action = mapButtonsHelper.generateUniqueActionName(actions, action);
+					if (!controller.isNameUnique(action)) {
+						action = controller.generateUniqueActionName(action);
 						showDuplicatedDialog();
 						((EditText) root.findViewById(R.id.name)).setText(action.getName(app));
+					} else {
+						controller.askSaveAction(isNew, action);
+						notifyOnActionAdded();
 					}
 				} else {
 					app.showShortToastMessage(R.string.quick_action_empty_param_error);
@@ -228,11 +213,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		builder.setTitle(R.string.quick_action_duplicate);
 		builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(app)));
 		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-			if (isNew) {
-				mapButtonsHelper.addQuickAction(buttonState, action);
-			} else {
-				mapButtonsHelper.updateQuickAction(buttonState, action);
-			}
+			controller.askSaveAction(isNew, action);
 			CreateEditActionDialog.this.dismiss();
 			notifyOnActionAdded();
 		}).create().show();
@@ -254,7 +235,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 
 	@Override
 	public void onConfirmButtonClick() {
-		mapButtonsHelper.deleteQuickAction(buttonState, action);
+		controller.askRemoveAction(action);
 		dismiss();
 	}
 
@@ -272,6 +253,15 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		}
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			controller.unregisterDialog(TAG);
+		}
+	}
+
 	@Nullable
 	private MapActivity getMapActivity() {
 		return getActivity() == null ? null : ((MapActivity) getActivity());
@@ -281,12 +271,10 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		void onGpxFileSelected(@NonNull View container, @NonNull MapActivity mapActivity, @NonNull String gpxFilePath);
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager,
-	                                @NonNull QuickActionButtonState buttonState, int actionTypeId) {
+	public static void showInstance(@NonNull FragmentManager manager, int actionTypeId) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			Bundle args = new Bundle();
 			args.putInt(KEY_ACTION_TYPE, actionTypeId);
-			args.putString(QUICK_ACTION_BUTTON_KEY, buttonState.getId());
 
 			CreateEditActionDialog dialog = new CreateEditActionDialog();
 			dialog.setArguments(args);
@@ -295,20 +283,15 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull QuickActionButtonState buttonState, @NonNull QuickAction action) {
+	                                @NonNull QuickAction action) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putLong(KEY_ACTION_ID, action.id);
-			args.putString(QUICK_ACTION_BUTTON_KEY, buttonState.getId());
 
 			CreateEditActionDialog dialog = new CreateEditActionDialog();
 			dialog.setArguments(args);
 			dialog.show(fragmentManager, TAG);
 		}
-	}
-
-	public interface QuickActionChangeListener {
-		void onQuickActionChanged(@NonNull QuickAction action);
 	}
 
 	public interface AddQuickActionListener {

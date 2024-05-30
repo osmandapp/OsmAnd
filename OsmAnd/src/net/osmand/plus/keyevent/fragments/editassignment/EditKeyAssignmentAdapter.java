@@ -280,7 +280,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 	static class ActionItemViewHolder extends ViewHolder {
 
 		public View buttonView;
-		public ImageButton actionButton;
+		public ImageView actionButton;
 		public ImageView icon;
 		public TextView title;
 		public View summaryContainer;

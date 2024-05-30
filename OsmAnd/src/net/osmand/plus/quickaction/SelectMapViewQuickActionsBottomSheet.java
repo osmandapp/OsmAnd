@@ -34,6 +34,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
+import net.osmand.plus.quickaction.controller.AddMapQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -129,7 +130,8 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	protected void onDismissButtonClickAction() {
 		FragmentManager manager = getFragmentManager();
 		if (manager != null) {
-			CreateEditActionDialog.showInstance(manager, buttonState, action);
+			AddMapQuickActionController.createInstance(requiredMyApplication(), buttonState);
+			CreateEditActionDialog.showInstance(manager, action);
 		}
 	}
 

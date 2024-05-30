@@ -10,6 +10,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.AddQuickActionFragment;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
+import net.osmand.plus.quickaction.controller.AddMapQuickActionController;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
 
@@ -32,7 +33,8 @@ public class NewAction extends QuickAction {
 		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
 		if (selectedButton != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			AddQuickActionFragment.showInstance(manager, selectedButton.getButtonState());
+			AddMapQuickActionController.createInstance(mapActivity.getMyApplication(), selectedButton.getButtonState());
+			AddQuickActionFragment.showInstance(manager);
 		}
 	}
 }

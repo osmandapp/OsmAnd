@@ -37,12 +37,10 @@ import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
 import net.osmand.plus.quickaction.AddQuickActionFragment;
-import net.osmand.plus.quickaction.CreateEditActionDialog;
-import net.osmand.plus.quickaction.CreateEditActionDialog.QuickActionChangeListener;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.views.MapLayers;
-import net.osmand.plus.views.controls.maphudbuttons.QuickActionButton;
+import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.AlertDialogExtra;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -55,7 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class EditKeyAssignmentController implements IDialogController, QuickActionChangeListener, OnKeyCodeSelectedCallback {
+public class EditKeyAssignmentController implements IDialogController, OnKeyCodeSelectedCallback {
 
 	public static final String PROCESS_ID = "edit_key_assignment";
 
@@ -222,18 +220,11 @@ public class EditKeyAssignmentController implements IDialogController, QuickActi
 	}
 
 	public void askAddAction(@NonNull MapActivity mapActivity) {
-		MapLayers mapLayers = mapActivity.getMapLayers();
-		QuickActionButton selectedButton = mapLayers.getMapQuickActionLayer().getSelectedButton();
-		if (selectedButton != null) {
-			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			AddQuickActionFragment.showInstance(manager, selectedButton.getButtonState());
-		}
-	}
+		DialogManager dialogManager = app.getDialogManager();
+		dialogManager.register(AddQuickActionController.PROCESS_ID, new AddKeyEventQuickActionController(app));
 
-	@Override
-	public void onQuickActionChanged(@NonNull QuickAction action) {
-		editBundle.action = action;
-		askRefreshDialog();
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		AddQuickActionFragment.showInstance(manager);
 	}
 
 	public void askDeleteAction() {
@@ -320,7 +311,7 @@ public class EditKeyAssignmentController implements IDialogController, QuickActi
 	public void unregisterFromDialogManager() {
 		DialogManager dialogManager = app.getDialogManager();
 		dialogManager.unregister(PROCESS_ID);
-		dialogManager.unregister(CreateEditActionDialog.PROCESS_ID);
+		dialogManager.unregister(AddQuickActionController.PROCESS_ID);
 	}
 
 	public boolean isNightMode() {
@@ -341,12 +332,51 @@ public class EditKeyAssignmentController implements IDialogController, QuickActi
 		EditKeyAssignmentController controller =
 				new EditKeyAssignmentController(app, appMode, deviceId, assignmentId, usedOnMap);
 		dialogManager.register(PROCESS_ID, controller);
-		dialogManager.register(CreateEditActionDialog.PROCESS_ID, controller);
 	}
 
 	@Nullable
 	public static EditKeyAssignmentController getExistedInstance(@NonNull OsmandApplication app) {
 		DialogManager dialogManager = app.getDialogManager();
 		return (EditKeyAssignmentController) dialogManager.findController(PROCESS_ID);
+	}
+
+	public class AddKeyEventQuickActionController extends AddQuickActionController {
+
+		public AddKeyEventQuickActionController(@NonNull OsmandApplication app) {
+			super(app);
+		}
+
+		@NonNull
+		@Override
+		public QuickAction produceQuickAction(boolean isNew, int type, long actionId) {
+			return isNew ? mapButtonsHelper.newActionByType(type) : editBundle.action;
+		}
+
+		@Override
+		public boolean isNameUnique(@NonNull QuickAction action) {
+			return true;
+		}
+
+		@Override
+		public QuickAction generateUniqueActionName(@NonNull QuickAction action) {
+			return null;
+		}
+
+		@Override
+		public void askSaveAction(boolean isNew, @NonNull QuickAction action) {
+			editBundle.action = action;
+			askRefreshDialog();
+		}
+
+		@Override
+		public void askRemoveAction(@NonNull QuickAction action) {
+			askDeleteAction();
+		}
+
+		@Nullable
+		@Override
+		protected QuickActionButtonState getButtonState() {
+			return null;
+		}
 	}
 }
