@@ -3471,7 +3471,7 @@
     <string name="height_limit_description">Унесите висину возила, нека ограничења пута могу бити примењена за висока возила.</string>
     <string name="weight_limit_description">Унесите тежину возила, нека ограничења пута могу бити примењена за тешка возила.</string>
     <string name="system_screen_timeout_descr">Искључи заслон према системском времену закључавања.</string>
-    <string name="shared_string_always">Увек&gt;</string>
+    <string name="shared_string_always">Увек</string>
     <string name="screen_control">Управљање заслоном</string>
     <string name="system_screen_timeout">Користи системско време закључавања заслона</string>
     <string name="turn_screen_on_descr">Одаберите могућности укључивања заслона (ОсмАнд треба да буде у прочељу када се уређај закључа):</string>
@@ -5724,4 +5724,7 @@
     <string name="disable_map_layers_descr">Онемогућите све слојеве мапе изнад векторске мапе (потребно је поновно покретање).</string>
     <string name="disable_map_layers">Онемогући слојеве мапе</string>
     <string name="height_legend_description">За визуелизацију рељефа користе се висинске мапе у боји.</string>
+    <string name="travel_topics">Теме путовања</string>
+    <string name="play_weather_forecast">Пусти временску прогнозу</string>
+    <string name="change_terrain_color_scheme">Промена шеме боје терена</string>
 </resources>
