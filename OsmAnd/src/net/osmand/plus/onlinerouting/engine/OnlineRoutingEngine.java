@@ -110,7 +110,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return !Algorithms.isEmpty(value);
 	}
 
-	public boolean isRescueTrackService() {
+	public boolean isRescueTrackEngine() {
 		return shouldApproximateRoute() && get(EngineParameter.CUSTOM_URL) != null
 				&& get(EngineParameter.CUSTOM_URL).contains("rescuetrack");
 	}

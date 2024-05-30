@@ -177,7 +177,7 @@ class RouteRecalculationHelper {
 			// If route is in wrong direction after one more setLocation it will be recalculated
 			boolean isRescueTrack = res.getAppMode().getRouteService() == RouteService.ONLINE &&
 					app.getOnlineRoutingHelper().getEngineByKey(res.getAppMode().getRoutingProfile())
-							.isRescueTrackService();
+							.isRescueTrackEngine();
 			boolean announceNewRoute = isRescueTrack
 					? res.initialCalculation == true // rescuetrack - announce before approximation
 					: res.initialCalculation == false;
