@@ -389,16 +389,16 @@ public class SearchUICore {
 	}
 
 	public void init() {
-		apis.add(new SearchCoreFactory.SearchAmenityByNameAPI());
-		SearchAmenityByNameAPI amenitiesApi = (SearchAmenityByNameAPI) apis.get(apis.size() - 1);
+		SearchAmenityByNameAPI amenitiesApi = new SearchCoreFactory.SearchAmenityByNameAPI();
+		apis.add(amenitiesApi);
 		apis.add(new SearchCoreFactory.SearchLocationAndUrlAPI(amenitiesApi));
-		apis.add(new SearchAmenityTypesAPI(poiTypes));
-		SearchAmenityTypesAPI searchAmenityTypesAPI = (SearchAmenityTypesAPI) apis.get(apis.size() - 1);
+		SearchAmenityTypesAPI searchAmenityTypesAPI = new SearchAmenityTypesAPI(poiTypes);
+		apis.add(searchAmenityTypesAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		apis.add(new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI());
-		SearchBuildingAndIntersectionsByStreetAPI streetsApi = (SearchBuildingAndIntersectionsByStreetAPI) apis.get(apis.size() - 1);
-		apis.add(new SearchCoreFactory.SearchStreetByCityAPI(streetsApi));
-		SearchStreetByCityAPI cityApi = (SearchStreetByCityAPI) apis.get(apis.size() - 1);
+		SearchBuildingAndIntersectionsByStreetAPI streetsApi = new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
+		apis.add(streetsApi);
+		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
+		apis.add(cityApi);
 		apis.add(new SearchCoreFactory.SearchAddressByNameAPI(streetsApi, cityApi));
 	}
 
