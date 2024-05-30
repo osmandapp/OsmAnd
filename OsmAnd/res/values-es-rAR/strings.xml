@@ -5743,4 +5743,7 @@
     <string name="steps_per_minute_unit">SPM</string>
     <string name="disable_map_layers">Desactivar capas del mapa</string>
     <string name="height_legend_description">Los mapas de altitud coloreados, se usan para visualizar el relieve.</string>
+    <string name="play_weather_forecast">Reproducir previsión del clima</string>
+    <string name="travel_topics">Tendencias de viaje</string>
+    <string name="change_terrain_color_scheme">Cambiar el esquema de color del terreno</string>
 </resources>

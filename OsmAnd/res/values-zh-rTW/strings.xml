@@ -5717,4 +5717,7 @@
     <string name="disable_map_layers_descr">停用向量地圖上的所有地圖圖層（需要重新啟動）。</string>
     <string name="disable_map_layers">停用地圖圖層</string>
     <string name="height_legend_description">海拔顏色圖用於視覺化地形。</string>
+    <string name="change_terrain_color_scheme">變更地形配色方案</string>
+    <string name="play_weather_forecast">播放天氣預報</string>
+    <string name="travel_topics">旅遊話題</string>
 </resources>
