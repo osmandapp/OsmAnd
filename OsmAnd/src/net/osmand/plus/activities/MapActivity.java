@@ -430,7 +430,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateProgress(int progress) {
 		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible()) {
+			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible() ||
+					app.getSettings().getApplicationMode().shouldAvoidProgressBar()) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
 				return;
 			}

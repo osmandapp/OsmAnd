@@ -281,4 +281,13 @@ public class OnlineRoutingHelper {
 			settings.ONLINE_ROUTING_ENGINES.set(null);
 		}
 	}
+
+	public boolean wasRescueTrackEngineUsed() {
+		for (OnlineRoutingEngine engine : cachedEngines.values()) {
+			if (engine.isRescueTrackEngine()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

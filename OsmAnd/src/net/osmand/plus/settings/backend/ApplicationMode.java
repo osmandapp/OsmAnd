@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
@@ -176,6 +177,16 @@ public class ApplicationMode {
 
 	public boolean isCustomProfile() {
 		return isCustomProfile(getStringKey());
+	}
+
+	public boolean shouldAvoidProgressBar() {
+		if (getRouteService() == RouteService.ONLINE) {
+			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(getRoutingProfile());
+			return engine != null
+					? engine.isRescueTrackEngine()
+					: app.getOnlineRoutingHelper().wasRescueTrackEngineUsed();
+		}
+		return false;
 	}
 
 	public static boolean isCustomProfile(@NonNull String key) {
