@@ -1,5 +1,6 @@
 package net.osmand.shared.util
 
+import net.osmand.shared.extensions.format
 import platform.Foundation.NSBundle
 import platform.Foundation.NSString
 import platform.Foundation.stringWithFormat
@@ -51,13 +52,13 @@ actual object Localization {
 				if (upperCase) newValue.uppercase() else newValue
 			} else {
 				if (upperCase) {
-					NSString.stringWithFormat(newValue, args).uppercase()
+					newValue.format(args).uppercase()
 				} else {
-					NSString.stringWithFormat(newValue, args)
+					newValue.format(args)
 				}
 			}
 		} else {
-			result = NSString.stringWithFormat(defaultValue, args)
+			result = defaultValue.format(args)
 		}
 
 		return result

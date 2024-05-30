@@ -1,10 +1,12 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.db.SQLiteAPI.*
 import net.osmand.shared.extensions.format
-import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.CommonFile
 import net.osmand.shared.routing.ColoringType
+import net.osmand.shared.util.DbUtils
+import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 
 class GpxDatabase {
@@ -37,13 +39,13 @@ class GpxDatabase {
 	}
 
 	fun openConnection(readonly: Boolean): SQLiteConnection? {
-		var conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly)
+		var conn = PlatformUtil.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly)
 		if (conn == null) return null
 
 		if (conn.getVersion() < DB_VERSION) {
 			if (readonly) {
 				conn.close()
-				conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false)
+				conn = PlatformUtil.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false)
 			}
 			if (conn == null) return null
 			val version = conn.getVersion()
@@ -65,26 +67,23 @@ class GpxDatabase {
 	}
 
 	private fun updateGpxParameters(
-		rowsToUpdate: Map<GpxParameter, Any>,
+		rowsToUpdate: Map<GpxParameter, Any?>,
 		tableName: String,
-		rowsToSearch: Map<String, Any>
+		rowsToSearch: Map<String, Any?>
 	): Boolean {
 		val db = openConnection(false)
-		db?.use {
-			return updateGpxParameters(it, tableName, rowsToUpdate, rowsToSearch)
-		}
-		return false
+		return db?.let { updateGpxParameters(it, tableName, rowsToUpdate, rowsToSearch) } ?: false
 	}
 
 	private fun updateGpxParameters(
 		db: SQLiteConnection,
 		tableName: String,
-		rowsToUpdate: Map<GpxParameter, Any>,
-		rowsToSearch: Map<String, Any>
+		rowsToUpdate: Map<GpxParameter, Any?>,
+		rowsToSearch: Map<String, Any?>
 	): Boolean {
 		val map = GpxDbUtils.convertGpxParameters(rowsToUpdate)
-		val pair = AndroidDbUtils.createDbUpdateQuery(tableName, map, rowsToSearch)
-		db.execSQL(pair.first, *pair.second)
+		val pair = DbUtils.createDbUpdateQuery(tableName, map, rowsToSearch)
+		db.execSQL(pair.first, pair.second)
 		return true
 	}
 
@@ -99,7 +98,7 @@ class GpxDatabase {
 
 	fun remove(file: CommonFile): Boolean {
 		val db = openConnection(false)
-		db?.use {
+		if (db != null) {
 			val fileName = file.name()
 			val fileDir = GpxDbUtils.getGpxFileDir(file)
 			val tableName = GpxDbUtils.getTableName(file)
@@ -114,21 +113,25 @@ class GpxDatabase {
 
 	fun add(item: DataItem): Boolean {
 		val db = openConnection(false)
-		db?.use {
-			insertItem(item, it)
-			return true
+		return if (db != null) {
+			insertItem(item, db)
+			true
+		} else {
+			false
 		}
-		return false
 	}
 
 	private fun insertItem(item: DataItem, db: SQLiteConnection) {
-		val file = item.getFile()
+		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
 		val map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(item))
-		db.execSQL(
-			AndroidDbUtils.createDbInsertQuery(tableName, map.keys),
-			map.values.toTypedArray()
-		)
+		val values: Array<Any> = map.values.filterNotNull().toTypedArray()
+		if (values.size == map.values.size) {
+			db.execSQL(
+				DbUtils.createDbInsertQuery(tableName, map.keys),
+				values
+			)
+		}
 	}
 
 	private fun readGpxDataItem(query: SQLiteCursor): GpxDataItem {
@@ -146,7 +149,7 @@ class GpxDatabase {
 
 		val appDir = PlatformUtil.getAppDir()
 		val gpxDir = PlatformUtil.getGpxDir()
-		if ("$fileName" == gpxDir.name()) {
+		if (fileName == gpxDir.name()) {
 			return gpxDir
 		}
 		fileDir = fileDir.replace(gpxDir.toString(), "")
@@ -195,12 +198,10 @@ class GpxDatabase {
 	fun getTracksMinCreateDate(): Long {
 		var minDate = -1L
 		val db = openConnection(false)
-		db?.use {
+		if (db != null) {
 			val query = db.rawQuery(GPX_MIN_CREATE_DATE, null)
-			query?.use {
-				if (query.moveToFirst()) {
-					minDate = query.getLong(0)
-				}
+			if (query != null && query.moveToFirst()) {
+				minDate = query.getLong(0)
 			}
 		}
 		return minDate
@@ -209,13 +210,11 @@ class GpxDatabase {
 	fun getColumnMaxValue(parameter: GpxParameter): String {
 		var maxValue = ""
 		val db = openConnection(false)
-		db?.use {
-			val queryString = String.format(GPX_MAX_COLUMN_VALUE, parameter.columnName)
+		if (db != null) {
+			val queryString = GPX_MAX_COLUMN_VALUE.format(parameter.columnName)
 			val query = db.rawQuery(queryString, null)
-			query?.use {
-				if (query.moveToFirst()) {
-					maxValue = query.getString(0)
-				}
+			if (query != null && query.moveToFirst()) {
+				maxValue = query.getString(0)
 			}
 		}
 		return maxValue
@@ -246,14 +245,12 @@ class GpxDatabase {
 	private fun getStringIntItemsCollection(dataQuery: String): List<Pair<String, Int>> {
 		val folderCollection = mutableListOf<Pair<String, Int>>()
 		val db = openConnection(false)
-		db?.use {
+		if (db != null) {
 			val query = db.rawQuery(dataQuery, null)
-			query?.use {
-				if (query.moveToFirst()) {
-					do {
-						folderCollection.add(Pair(query.getString(0), query.getInt(1)))
-					} while (query.moveToNext())
-				}
+			if (query != null && query.moveToFirst()) {
+				do {
+					folderCollection.add(Pair(query.getString(0), query.getInt(1)))
+				} while (query.moveToNext())
 			}
 		}
 		return folderCollection
@@ -262,14 +259,12 @@ class GpxDatabase {
 	fun getGpxDataItems(): List<GpxDataItem> {
 		val items = mutableSetOf<GpxDataItem>()
 		val db = openConnection(false)
-		db?.use {
+		if (db != null) {
 			val query = db.rawQuery(GpxDbUtils.getSelectGpxQuery(), null)
-			query?.use {
-				if (query.moveToFirst()) {
-					do {
-						items.add(readGpxDataItem(query))
-					} while (query.moveToNext())
-				}
+			if (query != null && query.moveToFirst()) {
+				do {
+					items.add(readGpxDataItem(query))
+				} while (query.moveToNext())
 			}
 		}
 		return items.toList()
@@ -278,41 +273,28 @@ class GpxDatabase {
 	fun getGpxDirItems(): List<GpxDirItem> {
 		val items = mutableSetOf<GpxDirItem>()
 		val db = openConnection(false)
-		db?.use {
+		if (db != null) {
 			val query = db.rawQuery(GpxDbUtils.getSelectGpxDirQuery(), null)
-			query?.use {
-				if (query.moveToFirst()) {
-					do {
-						items.add(readGpxDirItem(query))
-					} while (query.moveToNext())
-				}
+			if (query != null && query.moveToFirst()) {
+				do {
+					items.add(readGpxDirItem(query))
+				} while (query.moveToNext())
 			}
 		}
 		return items.toList()
 	}
 
 	fun getGpxDataItem(file: CommonFile): GpxDataItem? {
-		return if (GpxDbUtils.isGpxFile(file)) {
-			getDataItem(file) as? GpxDataItem
-		} else {
-			null
-		}
+		return if (GpxDbUtils.isGpxFile(file)) getDataItem(file) as? GpxDataItem else null
 	}
 
 	fun getGpxDirItem(file: CommonFile): GpxDirItem? {
-		return if (file.isDirectory()) {
-			getDataItem(file) as? GpxDirItem
-		} else {
-			null
-		}
+		return if (file.isDirectory()) getDataItem(file) as? GpxDirItem else null
 	}
 
 	private fun getDataItem(file: CommonFile): DataItem? {
 		val db = openConnection(false)
-		db?.use {
-			return getDataItem(file, it)
-		}
-		return null
+		return if (db != null) getDataItem(file, db) else null
 	}
 
 	private fun getDataItem(file: CommonFile, db: SQLiteConnection): DataItem? {
@@ -322,10 +304,8 @@ class GpxDatabase {
 		val selectQuery =
 			if (gpxFile) GpxDbUtils.getSelectGpxQuery() else GpxDbUtils.getSelectGpxDirQuery()
 		val query = db.rawQuery("$selectQuery $GPX_FIND_BY_NAME_AND_DIR", arrayOf(name, dir))
-		query?.use {
-			if (query.moveToFirst()) {
-				return if (gpxFile) readGpxDataItem(query) else readGpxDirItem(query)
-			}
+		if (query != null && query.moveToFirst()) {
+			return if (gpxFile) readGpxDataItem(query) else readGpxDirItem(query)
 		}
 		return null
 	}

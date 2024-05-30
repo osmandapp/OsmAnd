@@ -1,5 +1,6 @@
 package net.osmand.shared.util
 
+import net.osmand.shared.db.SQLiteAPI
 import net.osmand.shared.io.CommonFile
 
 expect object PlatformUtil {
@@ -8,4 +9,6 @@ expect object PlatformUtil {
 	fun getAppDir(): CommonFile
 
 	fun getGpxDir(): CommonFile
+
+	fun getSQLiteAPI(): SQLiteAPI
 }

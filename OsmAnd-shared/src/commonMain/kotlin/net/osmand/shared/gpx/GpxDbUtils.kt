@@ -1,6 +1,7 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.IndexConstants
+import net.osmand.shared.db.SQLiteAPI.*
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_DIR_TABLE_NAME
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_TABLE_NAME
 import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION
@@ -76,27 +77,31 @@ object GpxDbUtils {
 
 	fun onUpgrade(database: GpxDatabase, db: SQLiteConnection, oldVersion: Int, newVersion: Int) {
 		val gpxCursor = db.rawQuery("SELECT * FROM $GPX_TABLE_NAME LIMIT 1", null)
-		val columnNames = gpxCursor.columnNames.map { it.toLowerCase() }.toMutableSet()
+		if (gpxCursor != null) {
+			val columnNames = gpxCursor.getColumnNames().map { it.lowercase() }.toMutableSet()
 
-		addIfMissingGpxTableColumn(columnNames, db, GpxParameter.FILE_NAME)
-		addIfMissingGpxTableColumn(columnNames, db, GpxParameter.FILE_DIR)
-		addIfMissingGpxTableColumn(columnNames, db, GpxParameter.TOTAL_DISTANCE)
-		// Add other columns similarly...
+			addIfMissingGpxTableColumn(columnNames, db, GpxParameter.FILE_NAME)
+			addIfMissingGpxTableColumn(columnNames, db, GpxParameter.FILE_DIR)
+			addIfMissingGpxTableColumn(columnNames, db, GpxParameter.TOTAL_DISTANCE)
+			// Add other columns similarly...
 
-		GpxParameter.entries.forEach { parameter ->
-			if (!columnNames.contains(parameter.columnName.toLowerCase())) {
-				addGpxTableColumn(db, parameter)
+			GpxParameter.entries.forEach { parameter ->
+				if (!columnNames.contains(parameter.columnName.lowercase())) {
+					addGpxTableColumn(db, parameter)
+				}
 			}
 		}
 
 		db.execSQL(getCreateGpxDirTableQuery())
 
 		val gpxDirCursor = db.rawQuery("SELECT * FROM $GPX_DIR_TABLE_NAME LIMIT 1", null)
-		val dirColumnNames = gpxDirCursor.columnNames.map { it.toLowerCase() }.toMutableSet()
+		if (gpxDirCursor != null) {
+			val dirColumnNames = gpxDirCursor.getColumnNames().map { it.lowercase() }.toMutableSet()
 
-		GpxParameter.getGpxDirParameters().forEach { parameter ->
-			if (!dirColumnNames.contains(parameter.columnName.toLowerCase())) {
-				addGpxDirTableColumn(db, parameter)
+			GpxParameter.getGpxDirParameters().forEach { parameter ->
+				if (!dirColumnNames.contains(parameter.columnName.lowercase())) {
+					addGpxDirTableColumn(db, parameter)
+				}
 			}
 		}
 
@@ -105,10 +110,10 @@ object GpxDbUtils {
 	}
 
 	private fun addIfMissingGpxTableColumn(columnNamesLC: MutableSet<String>, db: SQLiteConnection, parameter: GpxParameter) {
-		if (columnNamesLC.contains(parameter.columnName.toLowerCase())) {
+		if (columnNamesLC.contains(parameter.columnName.lowercase())) {
 			return
 		}
-		columnNamesLC.add(parameter.columnName.toLowerCase())
+		columnNamesLC.add(parameter.columnName.lowercase())
 		addGpxTableColumn(db, parameter)
 	}
 

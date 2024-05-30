@@ -1,5 +1,7 @@
 package net.osmand.shared.util
 
+import net.osmand.shared.db.SQLiteAPI
+import net.osmand.shared.db.SQLiteAPIImpl
 import net.osmand.shared.io.CommonFile
 import platform.Foundation.NSDate
 import platform.Foundation.NSString
@@ -10,9 +12,13 @@ actual object PlatformUtil {
 	private var appDir: String? = null
 	private var gpxDir: String? = null
 
+	private var sqliteApi: SQLiteAPI? = null
+
 	fun initialize(appDir: NSString, gpxDir: NSString) {
 		this.appDir = appDir.toString()
 		this.gpxDir = gpxDir.toString()
+
+		sqliteApi = SQLiteAPIImpl()
 	}
 
 	actual fun currentTimeMillis(): Long {
@@ -34,6 +40,15 @@ actual object PlatformUtil {
 			throw IllegalStateException("Gpx dir not initialized")
 		} else {
 			return CommonFile(dir)
+		}
+	}
+
+	actual fun getSQLiteAPI(): SQLiteAPI {
+		val sqliteApi = sqliteApi
+		if (sqliteApi == null) {
+			throw IllegalStateException("SQLiteAPI not initialized")
+		} else {
+			return sqliteApi
 		}
 	}
 }
