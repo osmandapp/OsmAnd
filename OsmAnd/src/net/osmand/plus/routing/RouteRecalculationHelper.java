@@ -175,7 +175,13 @@ class RouteRecalculationHelper {
 			}
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
-			if (!res.initialCalculation && (!wrongMovementDirection || newRoute)) {
+			boolean isRescueTrack = res.getAppMode().getRouteService() == RouteService.ONLINE &&
+					app.getOnlineRoutingHelper().getEngineByKey(res.getAppMode().getRoutingProfile())
+							.isRescueTrackService();
+			boolean announceNewRoute = isRescueTrack
+					? res.initialCalculation == true // rescuetrack - announce before approximation
+					: res.initialCalculation == false;
+			if (announceNewRoute && (!wrongMovementDirection || newRoute)) {
 				getVoiceRouter().newRouteIsCalculated(newRoute);
 			}
 		}
