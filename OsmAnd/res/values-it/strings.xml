@@ -5463,7 +5463,7 @@
     <string name="weather_online">Meteo online</string>
     <string name="shared_string_show_icon">Mostra l\'icona</string>
     <string name="map_is_up_to_date">La mappa %1$s è aggiornata.</string>
-    <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\". (Non sarà cancellata alcuna traccia)</string>
     <string name="sort_size_ascending">Ordine ascendente</string>
     <string name="widget_available_ram">RAM disponibile</string>
     <string name="terrain_maps">Mappe del terreno</string>
@@ -5719,4 +5719,5 @@
     <string name="height_legend_description">Le mappe a colori dell\'altitudine sono utilizzate per visualizzare i rilievi.</string>
     <string name="disable_map_layers_descr">Disabilita tutti i livelli della mappa sopra la mappa vettoriale (è necessario riavviare).</string>
     <string name="steps_per_minute_unit">SPM</string>
+    <string name="travel_topics">Argomenti di viaggio</string>
 </resources>
