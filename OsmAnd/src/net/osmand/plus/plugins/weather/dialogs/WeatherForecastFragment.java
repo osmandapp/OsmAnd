@@ -210,6 +210,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
 	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+		isAnimatingForecast = false;
+		animateForecastHandler.removeCallbacksAndMessages(null);
+	}
+
 	private void setupTimeSlider(@NonNull View view) {
 		timeSlider = view.findViewById(R.id.time_slider);
 		timeSlider.setValueTo(24);
@@ -504,7 +511,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 				playForecastBtn.setEnabled(true);
 				showProgressBar(false);
 			}, WAIT_FOR_NEW_DOWNLOAD_START_DELAY);
-
 		}
 	}
 }
