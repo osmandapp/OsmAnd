@@ -97,12 +97,14 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.accessibility.MapAccessibilityActions;
 import net.osmand.plus.render.UpdateVectorRendererAsyncTask;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressListener;
+import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
 import net.osmand.plus.search.ShowQuickSearchMode;
@@ -430,8 +432,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateProgress(int progress) {
 		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible() ||
-					app.getSettings().getApplicationMode().shouldAvoidProgressBar()) {
+			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible() || shouldHideMapProgressBar()) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
 				return;
 			}
@@ -442,6 +443,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			progressBar.invalidate();
 			progressBar.requestLayout();
 		}
+	}
+
+	public boolean shouldHideMapProgressBar() {
+		ApplicationMode mode = app.getSettings().getApplicationMode();
+		if (mode.getRouteService() == RouteService.ONLINE) {
+			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(mode.getRoutingProfile());
+			return engine != null
+					? engine.isRescueTrackEngine()
+					: app.getOnlineRoutingHelper().wasRescueTrackEngineUsed();
+		}
+		return false;
 	}
 
 	private boolean isRouteBeingCalculated() {

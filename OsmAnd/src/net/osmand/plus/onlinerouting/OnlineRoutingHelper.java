@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
@@ -122,7 +123,7 @@ public class OnlineRoutingHelper {
 			return makeRequest(url, "GET", null, null);
 	}
 
-	private Map<String, String> simpleHttpCache = new HashMap<>();
+	private final Map<String, String> simpleHttpCache = new ConcurrentHashMap<>();
 
 	@NonNull
 	public String makeRequest(@NonNull String url, @NonNull String method,
