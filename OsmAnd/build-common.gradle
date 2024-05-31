@@ -134,23 +134,10 @@ task validateTranslate {
 	}
 }
 
-
-task downloadDefaultWikivoyage(type: Download) {
-	src 'https://creator.osmand.net/basemap/Default_wikivoyage_2.travel.obf'
-	dest 'assets/Default_wikivoyage.travel.obf'
-	onlyIfModified true
-}
-
 task downloadWorldMiniBasemap(type: Download)  {
 	src 'https://creator.osmand.net/basemap/World_basemap_mini_2.obf'
 	dest 'assets/World_basemap_mini.obf'
 	onlyIfModified true
-}
-
-task downloadDefaultWikivoyageAnt {
-	doLast {
-		ant.get(src: 'https://creator.osmand.net/basemap/Default_wikivoyage_2.travel.obf', dest: 'assets/Default_wikivoyage.travel.obf', skipexisting: 'true')
-	}
 }
 
 task downloadWorldMiniBasemapAnt {
@@ -262,7 +249,6 @@ task collectExternalResources {
 			copyColorPalettes,
 			copyPoiCategories,
 			downloadWorldMiniBasemap,
-			downloadDefaultWikivoyage,
 			collectTestResources
 }
 
