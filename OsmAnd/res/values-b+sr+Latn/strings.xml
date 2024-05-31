@@ -5733,7 +5733,7 @@
     <string name="disable_map_layers_descr">Onemogućite sve slojeve mape iznad vektorske mape (potrebno je ponovno pokretanje).</string>
     <string name="disable_map_layers">Onemogući slojeve mape</string>
     <string name="height_legend_description">Za vizualizaciju reljefa koriste se mape visina u boji.</string>
-    <string name="change_terrain_color_scheme">Promena šeme boja terena</string>
-    <string name="play_weather_forecast">Aktivacija vremenske prognoze</string>
+    <string name="change_terrain_color_scheme">Promena boje terena</string>
+    <string name="play_weather_forecast">Pokretanje vremenske prognoze</string>
     <string name="travel_topics">Teme putovanja</string>
 </resources>
