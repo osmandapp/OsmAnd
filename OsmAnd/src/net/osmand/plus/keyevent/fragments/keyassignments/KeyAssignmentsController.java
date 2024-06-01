@@ -23,7 +23,7 @@ import net.osmand.plus.helpers.RequestMapThemeParams;
 import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
-import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentFragment;
+import net.osmand.plus.keyevent.fragments.editassignment.EditKeyAssignmentController;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.alert.AlertDialogData;
 import net.osmand.plus.widgets.alert.CustomAlert;
@@ -150,15 +150,13 @@ public class KeyAssignmentsController implements IDialogController {
 
 	public void askAddAssignment() {
 		if (inputDevice != null) {
-			FragmentManager fm = activity.getSupportFragmentManager();
-			EditKeyAssignmentFragment.showInstance(app, fm, appMode, inputDevice.getId(), null);
+			EditKeyAssignmentController.showAddAssignmentDialog(activity, appMode, inputDevice.getId());
 		}
 	}
 
 	public void askEditAssignment(@NonNull KeyAssignment assignment) {
 		if (inputDevice != null) {
-			FragmentManager fm = activity.getSupportFragmentManager();
-			EditKeyAssignmentFragment.showInstance(app, fm, appMode, inputDevice.getId(), assignment.getId());
+			EditKeyAssignmentController.showEditAssignmentDialog(activity, appMode, inputDevice.getId(), assignment.getId());
 		}
 	}
 

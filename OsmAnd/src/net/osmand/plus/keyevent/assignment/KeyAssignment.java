@@ -40,8 +40,12 @@ public class KeyAssignment {
 	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
 
 	public KeyAssignment(@NonNull String commandId, @NonNull Integer ... keyCodes) {
+		this(CommandToActionConverter.createQuickAction(commandId), keyCodes);
+	}
+
+	public KeyAssignment(@Nullable QuickAction action, @NonNull Integer ... keyCodes) {
 		this.id = generateUniqueId();
-		this.action = CommandToActionConverter.createQuickAction(commandId);
+		this.action = action;
 		this.keyCodes = new ArrayList<>(Arrays.asList(keyCodes));
 	}
 
@@ -83,6 +87,14 @@ public class KeyAssignment {
 		this.action = original.action;
 		this.customName = original.customName;
 		this.keyCodes = original.keyCodes;
+	}
+
+	public void setAction(@NonNull QuickAction action) {
+		this.action = action;
+	}
+
+	public void setKeyCodes(@NonNull List<Integer> keyCodes) {
+		this.keyCodes = keyCodes;
 	}
 
 	public void addKeyCode(int keyCode) {

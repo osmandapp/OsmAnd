@@ -154,7 +154,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.title.setText(R.string.key_assignment_add_key);
 			h.icon.setVisibility(View.GONE);
 			h.summaryContainer.setVisibility(View.GONE);
-			h.buttonView.setOnClickListener(v -> controller.askAddKeyCode());
+			h.buttonView.setOnClickListener(v -> controller.askAddKeyCode(mapActivity));
 
 		} else if (itemType == ASSIGNED_KEY_ITEM) {
 			int keyCode = (int) screenItem.getValue();

@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.quickaction.QuickAction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,6 +13,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CustomInputDeviceProfile extends InputDeviceProfile {
 
@@ -56,28 +58,33 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		}
 	}
 
-	public void addAssignmentKeyCode(@NonNull String assignmentId, int keyCode) {
+	public void addAssignment(@NonNull KeyAssignment assignment) {
+		for (int keyCode : assignment.getKeyCodes()) {
+			removeKeyCodeFromPreviousAssignment(assignment, keyCode);
+		}
+		assignmentsCollection.addAssignment(assignment);
+		assignmentsCollection.syncCache();
+	}
+
+	public void updateAssignment(@NonNull String assignmentId,
+	                             @NonNull QuickAction action, @NonNull List<Integer> keyCodes) {
 		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {
-			removeKeyCodeFromPreviousAssignment(keyCode);
-			assignment.addKeyCode(keyCode);
-			assignmentsCollection.syncCache();
+			for (int keyCode: keyCodes) {
+				removeKeyCodeFromPreviousAssignment(assignment, keyCode);
+			}
+			assignment.setAction(action);
+			assignment.setKeyCodes(keyCodes);
 		}
 	}
 
-	public void updateAssignmentKeyCode(@NonNull String assignmentId, int oldKeyCode, int newKeyCode) {
-		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
-		if (assignment != null) {
-			removeKeyCodeFromPreviousAssignment(newKeyCode);
-			assignment.updateKeyCode(oldKeyCode, newKeyCode);
-			assignmentsCollection.syncCache();
-		}
-	}
-
-	private void removeKeyCodeFromPreviousAssignment(int keyCode) {
+	private void removeKeyCodeFromPreviousAssignment(@NonNull KeyAssignment assignment, int keyCode) {
 		KeyAssignment previousAssignment = assignmentsCollection.findByKeyCode(keyCode);
 		if (previousAssignment != null) {
 			previousAssignment.removeKeyCode(keyCode);
+			if (!Objects.equals(assignment.getId(), previousAssignment.getId()) && !previousAssignment.hasKeyCodes()) {
+				removeKeyAssignmentCompletely(previousAssignment.getId());
+			}
 		}
 	}
 

@@ -29,6 +29,10 @@ public class KeyAssignmentsCollection {
 		this.assignments.addAll(assignments);
 	}
 
+	public void addAssignment(@NonNull KeyAssignment assignment) {
+		this.assignments.add(assignment);
+	}
+
 	@NonNull
 	public List<KeyAssignment> getAssignments() {
 		return assignments;

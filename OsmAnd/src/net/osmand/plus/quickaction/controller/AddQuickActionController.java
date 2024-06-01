@@ -77,7 +77,9 @@ public abstract class AddQuickActionController implements IDialogController {
 	public abstract void askRemoveAction(@NonNull QuickAction action);
 
 	@Nullable
-	protected abstract QuickActionButtonState getButtonState();
+	protected QuickActionButtonState getButtonState() {
+		return null;
+	}
 
 	public static void showAddQuickActionDialog(@NonNull OsmandApplication app,
 												@NonNull FragmentManager fragmentManager,

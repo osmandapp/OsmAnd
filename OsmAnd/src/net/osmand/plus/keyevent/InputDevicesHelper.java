@@ -15,6 +15,7 @@ import net.osmand.plus.keyevent.listener.InputDevicesEventListener;
 import net.osmand.plus.keyevent.devices.CustomInputDeviceProfile;
 import net.osmand.plus.keyevent.devices.InputDeviceProfile;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
@@ -25,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -205,23 +207,24 @@ public class InputDevicesHelper {
 		}
 	}
 
-	public void updateAssignmentKeyCode(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                    @NonNull String assignmentId, int oldKeyCode, int newKeyCode) {
+	public void addAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                          @NonNull KeyAssignment assignment) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.updateAssignmentKeyCode(assignmentId, oldKeyCode, newKeyCode);
-			syncSettings(devicesCollection, EventType.UPDATE_ASSIGNMENT_KEYCODE);
+			device.addAssignment(assignment);
+			syncSettings(devicesCollection, EventType.ADD_ASSIGNMENT);
 		}
 	}
 
-	public void addAssignmentKeyCode(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                 @NonNull String assignmentId, int keyCode) {
+	public void updateAssignment(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                             @NonNull String assignmentId, @NonNull QuickAction action,
+	                             @NonNull List<Integer> keyCodes) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.addAssignmentKeyCode(assignmentId, keyCode);
-			syncSettings(devicesCollection, EventType.ADD_ASSIGNMENT_KEYCODE);
+			device.updateAssignment(assignmentId, action, keyCodes);
+			syncSettings(devicesCollection, EventType.UPDATE_ASSIGNMENT);
 		}
 	}
 
