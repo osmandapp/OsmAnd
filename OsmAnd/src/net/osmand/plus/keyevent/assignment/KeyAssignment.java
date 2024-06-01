@@ -53,10 +53,9 @@ public class KeyAssignment {
 				: null;
 
 		if (jsonObject.has("action")) {
-			String actionJson = jsonObject.getString("action");
-			Type type = new TypeToken<List<QuickAction>>() {}.getType();
-			List<QuickAction> actions = gson.fromJson(actionJson, type);
-			action = actions.get(0);
+			JSONObject actionJson = jsonObject.getJSONObject("action");
+			Type type = new TypeToken<QuickAction>() {}.getType();
+			action = gson.fromJson(actionJson.toString(), type);
 		} else if (jsonObject.has("commandId")) {
 			// For previous version compatibility
 			String commandId = jsonObject.getString("commandId");
@@ -173,8 +172,9 @@ public class KeyAssignment {
 		if (customName != null) {
 			jsonObject.put("customName", customName);
 		}
-		Type type = new TypeToken<List<QuickAction>>() {}.getType();
-		jsonObject.put("action", gson.toJson(Collections.singletonList(action), type));
+		Type type = new TypeToken<QuickAction>() {}.getType();
+		String actionJson = gson.toJson(action, type);
+		jsonObject.put("action", new JSONObject(actionJson));
 
 		if (!Algorithms.isEmpty(keyCodes)) {
 			JSONArray keyCodesJsonArray = new JSONArray();
