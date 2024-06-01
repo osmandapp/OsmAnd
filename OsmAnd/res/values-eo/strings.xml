@@ -5721,4 +5721,5 @@
     <string name="disable_map_layers_descr">Malaktivigi ĉiujn map-tavolojn super la vektora mapo (postulas restarton).</string>
     <string name="disable_map_layers">Malaktivigi surtavolojn</string>
     <string name="height_legend_description">Kolorigitaj altmapoj taŭgas por vidigi map-reliefon.</string>
+    <string name="change_terrain_color_scheme">Ŝanĝi kolor-skemon de tereno</string>
 </resources>
