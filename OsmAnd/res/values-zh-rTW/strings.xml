@@ -458,8 +458,8 @@
     <string name="system_locale">系統</string>
     <string name="preferred_locale_descr">應用程式顯示語言（在 OsmAnd 重新啟動後套用）。</string>
     <string name="preferred_locale">顯示語言</string>
-    <string name="shared_string_next">下一頁</string>
-    <string name="shared_string_previous">上一頁</string>
+    <string name="shared_string_next">下一站</string>
+    <string name="shared_string_previous">上一站</string>
     <string name="unit_of_length_descr">變更距離的測量方式。</string>
     <string name="unit_of_length">長度單位</string>
     <string name="si_mi_feet">英哩/英呎</string>
