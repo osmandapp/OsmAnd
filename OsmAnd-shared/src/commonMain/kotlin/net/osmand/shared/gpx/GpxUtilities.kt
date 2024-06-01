@@ -1,11 +1,16 @@
 package net.osmand.shared.gpx
 
-import kotlinx.datetime.*
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
 import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
 import net.osmand.shared.data.QuadRect
-import net.osmand.shared.gpx.SplitMetric.*
+import net.osmand.shared.gpx.SplitMetric.DistanceSplitMetric
+import net.osmand.shared.gpx.SplitMetric.TimeSplitMetric
 import net.osmand.shared.io.CommonFile
 import net.osmand.shared.util.Algorithms
 import net.osmand.shared.util.Algorithms.hash
@@ -20,10 +25,7 @@ import net.osmand.shared.xml.XmlParserException
 import net.osmand.shared.xml.XmlPullParser
 import net.osmand.shared.xml.XmlSerializer
 import okio.Buffer
-import okio.FileSystem
 import okio.IOException
-import okio.Path.Companion.toPath
-import okio.SYSTEM
 import okio.Sink
 import okio.Source
 import kotlin.math.round
@@ -1066,7 +1068,7 @@ object GpxUtilities {
 	}
 
 	private fun writePoints(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
-		for (l in file.points) {
+		for (l in file.getPointsList()) {
 			serializer.startTag(null, "wpt")
 			writeWpt(serializer, l, progress)
 			serializer.endTag(null, "wpt")
@@ -1613,7 +1615,7 @@ object GpxUtilities {
 
 									"wpt" -> {
 										val wptPt = parseWptAttributes(parser)
-										parse.points.add(wptPt)
+										parse.addParsedPoint(wptPt)
 										parserState.add(wptPt)
 									}
 								}
@@ -1884,8 +1886,8 @@ object GpxUtilities {
 				firstSegment.routeSegments = routeSegments
 				firstSegment.routeTypes = routeTypes
 			}
-			if (pointsGroups.isNotEmpty() || gpxFile.points.isNotEmpty()) {
-				gpxFile.pointsGroups.putAll(mergePointsGroups(pointsGroups, gpxFile.points))
+			if (pointsGroups.isNotEmpty() || !gpxFile.isPointsEmpty()) {
+				gpxFile.pointsGroups.putAll(mergePointsGroups(pointsGroups, gpxFile.getPointsList()))
 			}
 			if (addGeneralTrack) {
 				gpxFile.addGeneralTrack()
@@ -2034,8 +2036,8 @@ object GpxUtilities {
 		if (from.showCurrentTrack) {
 			to.showCurrentTrack = true
 		}
-		if (from.points.isNotEmpty()) {
-			to.addPoints(from.points)
+		if (!from.isPointsEmpty()) {
+			to.addPoints(from.getPointsList())
 		}
 		to.tracks.addAll(from.tracks)
 		to.routes.addAll(from.routes)

@@ -1,5 +1,7 @@
 package net.osmand.shared.util
 
+import net.osmand.shared.data.LatLon
+
 object Algorithms {
 	private const val BUFFER_SIZE = 1024
 	//private val log = PlatformUtil.getLog(Algorithms::class.java)
@@ -214,4 +216,41 @@ object Algorithms {
 		}
 		return ""
 	}
+
+	fun isFirstPolygonInsideSecond(firstPolygon: List<LatLon>, secondPolygon: List<LatLon>): Boolean {
+		for (point in firstPolygon) {
+			if (!isPointInsidePolygon(point, secondPolygon)) {
+				// if at least one point is not inside the boundary, return false
+				return false
+			}
+		}
+		return true
+	}
+
+	/**
+	 * @see <a href="http://alienryderflex.com/polygon/">Determining Whether A Point Is Inside A Complex Polygon</a>
+	 * @param point
+	 * @param polygon
+	 * @return true if the point is in the area of the polygon
+	 */
+	fun isPointInsidePolygon(point: LatLon, polygon: List<LatLon>): Boolean {
+		val px = point.longitude
+		val py = point.latitude
+		var oddNodes = false
+		var j = polygon.size - 1
+		for (i in polygon.indices) {
+			val x1 = polygon[i].longitude
+			val y1 = polygon[i].latitude
+			val x2 = polygon[j].longitude
+			val y2 = polygon[j].latitude
+			if ((y1 < py && y2 >= py || y2 < py && y1 >= py) && (x1 <= px || x2 <= px)) {
+				if (x1 + (py - y1) / (y2 - y1) * (x2 - x1) < px) {
+					oddNodes = !oddNodes
+				}
+			}
+			j = i
+		}
+		return oddNodes
+	}
+
 }

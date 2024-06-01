@@ -53,4 +53,8 @@ actual object PlatformUtil {
 			return sqliteApi
 		}
 	}
+
+	fun getCommonFile(file: File): CommonFile {
+		return CommonFile(file.absolutePath)
+	}
 }

@@ -80,7 +80,7 @@ enum class GpxParameter(
 	fun isAppearanceParameter(): Boolean = appearanceParameters.contains(this)
 
 	companion object {
-		val appearanceParameters = listOf(
+		private val appearanceParameters = listOf(
 			COLOR, WIDTH, COLORING_TYPE, SHOW_ARROWS,
 			SHOW_START_FINISH, SPLIT_TYPE, SPLIT_INTERVAL,
 			TRACK_3D_LINE_POSITION_TYPE, TRACK_VISUALIZATION_TYPE, TRACK_3D_WALL_COLORING_TYPE

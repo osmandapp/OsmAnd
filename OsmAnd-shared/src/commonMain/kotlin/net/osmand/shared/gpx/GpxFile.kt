@@ -19,7 +19,7 @@ class GpxFile : GpxExtensions {
 	var metadata = Metadata()
 	var tracks: MutableList<Track> = mutableListOf()
 	var routes: MutableList<Route> = mutableListOf()
-	val points: MutableList<WptPt> = mutableListOf()
+	private val points: MutableList<WptPt> = mutableListOf()
 	var pointsGroups: MutableMap<String, PointsGroup> = LinkedHashMap()
 	private val networkRouteKeyTags: MutableMap<String, String> = LinkedHashMap()
 
@@ -55,12 +55,12 @@ class GpxFile : GpxExtensions {
 
 	fun getAllPoints(): List<WptPt> {
 		val total = mutableListOf<WptPt>()
-		total.addAll(getPoints())
+		total.addAll(getPointsList())
 		total.addAll(getAllSegmentsPoints())
 		return total
 	}
 
-	fun getPoints(): List<WptPt> {
+	fun getPointsList(): List<WptPt> {
 		return points.toList()
 	}
 
@@ -100,6 +100,10 @@ class GpxFile : GpxExtensions {
 		addPointsToGroups(setOf(point))
 		modifiedTime = currentTimeMillis()
 		pointsModifiedTime = modifiedTime
+	}
+
+	fun addParsedPoint(point: WptPt) {
+		points.add(point)
 	}
 
 	fun addPoint(position: Int, point: WptPt) {
@@ -548,10 +552,6 @@ class GpxFile : GpxExtensions {
 		return pointsGroups.keys
 	}
 
-	fun getPointsGroups(): Map<String, PointsGroup> {
-		return pointsGroups
-	}
-
 	fun getRect(): QuadRect {
 		return getBounds(0.0, 0.0)
 	}
@@ -732,7 +732,7 @@ class GpxFile : GpxExtensions {
 		return listOf(
 			getLastPointTime(getAllSegmentsPoints()),
 			getLastPointTime(getRoutePoints()),
-			getLastPointTime(getPoints())
+			getLastPointTime(getPointsList())
 		).firstOrNull { it > 0 } ?: 0
 	}
 
