@@ -28,6 +28,9 @@ public abstract class PredefinedInputDeviceProfile extends InputDeviceProfile {
 
 	public void addAssignment(@NonNull List<KeyAssignment> assignments,
 	                          @NonNull String commandId, @NonNull Integer ... keyCodes) {
-		assignments.add(new KeyAssignment(commandId, keyCodes));
+		KeyAssignment assignment = new KeyAssignment(commandId, keyCodes);
+		if (assignment.hasRequiredParameters()) {
+			assignments.add(assignment);
+		}
 	}
 }

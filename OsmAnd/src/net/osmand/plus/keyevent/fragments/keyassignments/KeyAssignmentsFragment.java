@@ -1,6 +1,5 @@
 package net.osmand.plus.keyevent.fragments.keyassignments;
 
-import static net.osmand.plus.keyevent.fragments.keyassignments.KeyAssignmentsController.PROCESS_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.AndroidUtils.getNavigationIconResId;
 
@@ -23,7 +22,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -54,10 +52,13 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		Bundle arguments = getArguments();
 		String appModeKey = arguments != null ? arguments.getString(APP_MODE_KEY) : "";
 		appMode = ApplicationMode.valueOfStringKey(appModeKey, settings.getApplicationMode());
-		controller = KeyAssignmentsController.getInstance(app);
-
 		deviceHelper = app.getInputDeviceHelper();
-		app.getDialogManager().register(PROCESS_ID, this);
+		controller = KeyAssignmentsController.getExistedInstance(app);
+		if (controller != null) {
+			controller.registerDialog(this);
+		} else {
+			dismiss();
+		}
 	}
 
 	@Nullable
@@ -68,14 +69,12 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		View view = themedInflater.inflate(R.layout.fragment_key_assignments_list, container, false);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
 		setupToolbar(view);
-		updateFabButton(view);
-		updateSaveButton(view);
 
 		adapter = new KeyAssignmentsAdapter(app, appMode, controller);
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
-		updateViewContent();
+		updateScreen(view);
 		return view;
 	}
 
@@ -84,7 +83,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		closeButton.setOnClickListener(v -> {
 			if (controller.isInEditMode()) {
-				askExitEditMode(view);
+				controller.askExitEditMode(getActivity());
 			} else {
 				dismiss();
 			}
@@ -97,14 +96,39 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 				if (controller.isInEditMode()) {
 					controller.askRemoveAllAssignments();
 				} else {
-					enterEditMode(view);
+					controller.enterEditMode();
 				}
 			});
 		} else {
 			actionButton.setVisibility(View.GONE);
 		}
 		ViewCompat.setElevation(view.findViewById(R.id.appbar), 5.0f);
+	}
+
+	@Override
+	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
+		if (event.isAssignmentRelated()) {
+			askUpdateScreen();
+		}
+	}
+
+	@Override
+	public void onAskRefreshDialogCompletely(@NonNull String processId) {
+		askUpdateScreen();
+	}
+
+	private void askUpdateScreen() {
+		View view = getView();
+		if (view != null) {
+			updateScreen(view);
+		}
+	}
+
+	private void updateScreen(@NonNull View view) {
 		updateToolbar(view);
+		updateSaveButton(view);
+		updateFabButton(view);
+		updateListContent();
 	}
 
 	private void updateToolbar(@NonNull View view) {
@@ -128,44 +152,12 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		actionButton.setEnabled(enabled);
 	}
 
-	@Override
-	public void processInputDevicesEvent(@NonNull ApplicationMode appMode, @NonNull EventType event) {
-		if (event.isAssignmentRelated()) {
-			updateViewContent();
-		}
-	}
-
-	@Override
-	public void onAskRefreshDialogCompletely(@NonNull String processId) {
-		updateViewContent();
-	}
-
-	private void enterEditMode(@NonNull View view) {
-		controller.enterEditMode();
-		updateScreenMode(view);
-	}
-
-	private void askExitEditMode(@NonNull View view) {
-		// todo check changes
-		controller.exitEditMode();
-		updateScreenMode(view);
-	}
-
-	private void updateScreenMode(@NonNull View view) {
-		updateToolbar(view);
-		updateSaveButton(view);
-		updateFabButton(view);
-		updateViewContent();
-	}
-
 	private void updateSaveButton(@NonNull View view) {
 		View bottomButtons = view.findViewById(R.id.bottom_buttons);
 		bottomButtons.setVisibility(controller.isInEditMode() ? View.VISIBLE : View.GONE);
-		DialogButton saveButton = view.findViewById(R.id.save_button);
-		saveButton.setOnClickListener(v -> {
-			controller.saveChanges();
-			dismiss();
-		});
+		DialogButton applyButton = view.findViewById(R.id.save_button);
+		applyButton.setOnClickListener(v -> controller.askSaveChanges());
+		applyButton.setEnabled(controller.hasChanges());
 	}
 
 	private void updateFabButton(@NonNull View view) {
@@ -174,7 +166,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		addButton.setOnClickListener(v -> controller.askAddAssignment());
 	}
 
-	private void updateViewContent() {
+	private void updateListContent() {
 		adapter.setScreenData(controller.populateScreenItems(), controller.isDeviceTypeEditable());
 	}
 
@@ -203,10 +195,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		FragmentActivity activity = getActivity();
-		if (activity != null && !activity.isChangingConfigurations()) {
-			app.getDialogManager().unregister(PROCESS_ID);
-		}
+		controller.unregisterDialogIfNeeded(getActivity());
 	}
 
 	private void dismiss() {
@@ -231,11 +220,9 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 		return nightMode;
 	}
 
-	public static void showInstance(@NonNull OsmandApplication app,
-	                                @NonNull FragmentManager manager,
-	                                @NonNull ApplicationMode appMode) {
+	public static boolean showInstance(@NonNull FragmentManager manager,
+	                                   @NonNull ApplicationMode appMode) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			KeyAssignmentsController.registerInstance(app, appMode, false);
 			KeyAssignmentsFragment fragment = new KeyAssignmentsFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
@@ -244,6 +231,8 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
+			return true;
 		}
+		return false;
 	}
 }

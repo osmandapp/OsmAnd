@@ -65,7 +65,7 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_marginHorizontal="@dimen/content_padding"
-				app:dialogButtonTitle="@string/shared_string_save"
+				app:dialogButtonTitle="@string/shared_string_apply"
 				app:dialogButtonType="primary" />
 
 		</FrameLayout>

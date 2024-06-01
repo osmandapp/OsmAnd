@@ -24,6 +24,11 @@ public class KeyAssignmentsCollection {
 		syncCache();
 	}
 
+	public void setAssignments(@NonNull List<KeyAssignment> assignments) {
+		this.assignments.clear();
+		this.assignments.addAll(assignments);
+	}
+
 	@NonNull
 	public List<KeyAssignment> getAssignments() {
 		return assignments;

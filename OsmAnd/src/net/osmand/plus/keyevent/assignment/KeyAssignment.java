@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -54,7 +55,8 @@ public class KeyAssignment {
 		if (jsonObject.has("action")) {
 			String actionJson = jsonObject.getString("action");
 			Type type = new TypeToken<List<QuickAction>>() {}.getType();
-			action = gson.fromJson(actionJson, type);
+			List<QuickAction> actions = gson.fromJson(actionJson, type);
+			action = actions.get(0);
 		} else if (jsonObject.has("commandId")) {
 			// For previous version compatibility
 			String commandId = jsonObject.getString("commandId");
@@ -137,6 +139,10 @@ public class KeyAssignment {
 		return !Algorithms.isEmpty(getKeyCodes());
 	}
 
+	public boolean hasRequiredParameters() {
+		return hasKeyCodes() && action != null;
+	}
+
 	@NonNull
 	public List<Integer> getKeyCodes() {
 		return keyCodes;
@@ -168,7 +174,7 @@ public class KeyAssignment {
 			jsonObject.put("customName", customName);
 		}
 		Type type = new TypeToken<List<QuickAction>>() {}.getType();
-		jsonObject.put("action", gson.toJson(action, type));
+		jsonObject.put("action", gson.toJson(Collections.singletonList(action), type));
 
 		if (!Algorithms.isEmpty(keyCodes)) {
 			JSONArray keyCodesJsonArray = new JSONArray();
@@ -182,7 +188,9 @@ public class KeyAssignment {
 		return jsonObject;
 	}
 
+	private static int idCounter = 0;
+
 	private static String generateUniqueId() {
-		return "key_assignment_" + System.currentTimeMillis();
+		return "key_assignment_" + System.currentTimeMillis() + "_" + ++idCounter;
 	}
 }

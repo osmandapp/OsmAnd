@@ -231,26 +231,26 @@ public class InputDevicesHelper {
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
 			device.removeKeyAssignmentCompletely(assignmentId);
-			syncSettings(devicesCollection, EventType.CLEAR_ASSIGNMENT_KEYCODES);
+			syncSettings(devicesCollection, EventType.REMOVE_KEY_ASSIGNMENT_COMPLETELY);
 		}
 	}
 
-	public void clearAssignmentKeyCodes(@NonNull ApplicationMode appMode, @NonNull String deviceId,
-	                                    @NonNull String assignmentId) {
+	public void saveUpdatedAssignmentsList(@NonNull ApplicationMode appMode, @NonNull String deviceId,
+	                                       @NonNull List<KeyAssignment> assignments) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.clearAssignmentKeyCodes(assignmentId);
-			syncSettings(devicesCollection, EventType.CLEAR_ASSIGNMENT_KEYCODES);
+			device.saveUpdatedAssignmentsList(assignments);
+			syncSettings(devicesCollection, EventType.SAVE_UPDATED_ASSIGNMENTS_LIST);
 		}
 	}
 
-	public void resetAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
+	public void clearAllAssignments(@NonNull ApplicationMode appMode, @NonNull String deviceId) {
 		InputDevicesCollection devicesCollection = getCustomizationCollection(appMode);
 		CustomInputDeviceProfile device = devicesCollection.getCustomDeviceById(deviceId);
 		if (device != null) {
-			device.resetAllAssignments();
-			syncSettings(devicesCollection, EventType.RESET_ASSIGNMENTS);
+			device.clearAllAssignments();
+			syncSettings(devicesCollection, EventType.CLEAR_ALL_ASSIGNMENTS);
 		}
 	}
 

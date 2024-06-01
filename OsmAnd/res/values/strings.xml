@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="clear_all_key_shortcuts_summary">All key assignments for the selected type will be removed.</string>
+    <string name="clear_all_key_shortcuts">Clear all key shortcuts</string>
     <string name="no_assigned_keys_desc">Select an action and assign a key by tapping the \'Add\' button.</string>
     <string name="no_assigned_keys">No assigned keys</string>
     <string name="shared_string_key">Key</string>

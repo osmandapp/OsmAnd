@@ -113,7 +113,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.actionButton.setVisibility(editMode ? View.VISIBLE : View.GONE);
 			h.actionButton.setOnClickListener(v -> {
 				if (editMode) {
-					controller.askRemoveAssignment();
+					controller.askRemoveAssignment(assignment);
 				}
 			});
 

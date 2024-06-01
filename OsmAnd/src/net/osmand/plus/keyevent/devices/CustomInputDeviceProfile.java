@@ -38,7 +38,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 			KeyAssignment keyAssignment = new KeyAssignment(jsonObject);
-			if (keyAssignment.hasKeyCodes() && keyAssignment.getAction() != null) {
+			if (keyAssignment.hasRequiredParameters()) {
 				assignments.add(keyAssignment);
 			}
 		}
@@ -82,26 +82,20 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	public void removeKeyAssignmentCompletely(@NonNull String assignmentId) {
-		// TODO remove assignment completely instead of clearing assigned buttons
 		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
 		if (assignment != null) {
-			assignment.clearKeyCodes();
+			assignmentsCollection.getAssignments().remove(assignment);
 			assignmentsCollection.syncCache();
 		}
 	}
 
-	public void clearAssignmentKeyCodes(@NonNull String assignmentId) {
-		KeyAssignment assignment = assignmentsCollection.findById(assignmentId);
-		if (assignment != null) {
-			assignment.clearKeyCodes();
-			assignmentsCollection.syncCache();
-		}
+	public void saveUpdatedAssignmentsList(@NonNull List<KeyAssignment> assignments) {
+		assignmentsCollection.setAssignments(assignments);
+		assignmentsCollection.syncCache();
 	}
 
-	public void resetAllAssignments() {
-		for (KeyAssignment assignment : assignmentsCollection.getAssignments()) {
-			assignment.clearKeyCodes();
-		}
+	public void clearAllAssignments() {
+		assignmentsCollection.getAssignments().clear();
 		assignmentsCollection.syncCache();
 	}
 
