@@ -3,9 +3,9 @@ package net.osmand.shared.gpx
 import kotlin.collections.MutableMap
 import kotlin.collections.HashMap
 import net.osmand.shared.gpx.GpxParameter.*
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 
-abstract class DataItem(val file: CommonFile) {
+abstract class DataItem(val file: KFile) {
 	protected val map: MutableMap<GpxParameter, Any?> = HashMap()
 
 	init {

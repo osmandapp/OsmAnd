@@ -1,12 +1,11 @@
 package net.osmand.shared.util
 
 import kotlinx.coroutines.runBlocking
-import net.osmand.shared.data.LatLon
-import net.osmand.shared.data.QuadPointDouble
+import net.osmand.shared.data.KLatLon
 import kotlin.math.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import net.osmand.shared.data.QuadRect
+import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.extensions.toDegrees
 import net.osmand.shared.extensions.toRadians
 
@@ -95,11 +94,11 @@ object MapUtils {
 		return 2 * R * 1000 * asin(sqrt(a))
 	}
 
-	fun getDistance(l1: LatLon, l2: LatLon): Double {
+	fun getDistance(l1: KLatLon, l2: KLatLon): Double {
 		return getDistance(l1.latitude, l1.longitude, l2.latitude, l2.longitude)
 	}
 
-	fun getDistance(l: LatLon, latitude: Double, longitude: Double): Double {
+	fun getDistance(l: KLatLon, latitude: Double, longitude: Double): Double {
 		return getDistance(l.latitude, l.longitude, latitude, longitude)
 	}
 
@@ -114,16 +113,9 @@ object MapUtils {
 		return (xB - xA) * (xC - xA) + (yB - yA) * (yC - yA)
 	}
 
-	/* TODO: Fix or remove
-	fun calculateMidPoint(s1: Location, s2: Location): Location {
+	fun calculateMidPoint(s1: KLatLon, s2: KLatLon): KLatLon {
 		val latLon = calculateMidPoint(s1.latitude, s1.longitude, s2.latitude, s2.longitude)
-		return Location("", latLon[0], latLon[1])
-	}
-	 */
-
-	fun calculateMidPoint(s1: LatLon, s2: LatLon): LatLon {
-		val latLon = calculateMidPoint(s1.latitude, s1.longitude, s2.latitude, s2.longitude)
-		return LatLon(latLon[0], latLon[1])
+		return KLatLon(latLon[0], latLon[1])
 	}
 
 	fun calculateMidPoint(
@@ -146,7 +138,7 @@ object MapUtils {
 
 	fun calculateIntermediatePoint(
 		fromLat: Double, fromLon: Double, toLat: Double, toLon: Double, coeff: Double
-	): LatLon {
+	): KLatLon {
 		val lat1 = fromLat.toRadians()
 		val lon1 = fromLon.toRadians()
 		val lat2 = toLat.toRadians()
@@ -168,7 +160,7 @@ object MapUtils {
 
 		val lat = atan2(z, sqrt(x * x + y * y))
 		val lon = atan2(y, x)
-		return LatLon(checkLatitude(lat * 180 / PI), checkLongitude(lon * 180 / PI))
+		return KLatLon(checkLatitude(lat * 180 / PI), checkLongitude(lon * 180 / PI))
 	}
 
 	fun getOrthogonalDistance(
@@ -184,7 +176,7 @@ object MapUtils {
 		fromLon: Double,
 		toLat: Double,
 		toLon: Double
-	): LatLon {
+	): KLatLon {
 		val mDist = (fromLat - toLat).pow(2.0) + (fromLon - toLon).pow(2.0)
 		val projection = scalarMultiplication(fromLat, fromLon, toLat, toLon, lat, lon)
 		val prlat: Double
@@ -205,7 +197,7 @@ object MapUtils {
 				prlon = fromLon + (toLon - fromLon) * (projection / mDist)
 			}
 		}
-		return LatLon(prlat, prlon)
+		return KLatLon(prlat, prlon)
 	}
 
 	fun getProjectionCoeff(
@@ -341,15 +333,15 @@ object MapUtils {
 	}
 
 	fun getTileDistanceWidth(lat: Double, zoom: Double): Double {
-		val ll = LatLon(lat, getLongitudeFromTile(zoom, 0.0))
-		val ll2 = LatLon(lat, getLongitudeFromTile(zoom, 1.0))
+		val ll = KLatLon(lat, getLongitudeFromTile(zoom, 0.0))
+		val ll2 = KLatLon(lat, getLongitudeFromTile(zoom, 1.0))
 		return getDistance(ll, ll2)
 	}
 
 	fun getTileDistanceHeight(lat: Double, zoom: Double): Double {
 		val y = getTileNumberY(zoom, lat)
-		val ll = LatLon(getLatitudeFromTile(zoom, floor(y)), 0.0)
-		val ll2 = LatLon(getLatitudeFromTile(zoom, floor(y) + 1), 0.0)
+		val ll = KLatLon(getLatitudeFromTile(zoom, floor(y)), 0.0)
+		val ll2 = KLatLon(getLatitudeFromTile(zoom, floor(y) + 1), 0.0)
 		return getDistance(ll, ll2)
 	}
 
@@ -398,12 +390,6 @@ object MapUtils {
 		return ((getTileNumberY(zoom, lat1) - getTileNumberY(zoom, lat2)) * tileSize).toInt()
 	}
 
-	/* TODO: Fix or remove
-	fun sortListOfMapObject(list: List<MapObject>, lat: Double, lon: Double) {
-		list.sortedWith(compareBy { getDistance(it.location, lat, lon) })
-	}
-	 */
-
 	fun buildGeoUrl(latitude: String, longitude: String, zoom: Int): String {
 		return "geo:$latitude,$longitude?z=$zoom"
 	}
@@ -425,43 +411,6 @@ object MapUtils {
 		}
 		return str
 	}
-
-	/* TODO: Fix or remove
-	fun decodeShortLinkString(s: String): GeoParsedPoint {
-		var s = s.replace("@", "~")
-		var i = 0
-		var x: Long = 0
-		var y: Long = 0
-		var z = -8
-
-		while (i < s.length) {
-			var digit = -1
-			val c = s[i]
-			for (j in intToBase64.indices) {
-				if (c == intToBase64[j]) {
-					digit = j
-					break
-				}
-			}
-			if (digit < 0) break
-			x = x shl 3
-			y = y shl 3
-			for (j in 2 downTo 0) {
-				x = x or if (digit and (1 shl (j + j + 1)) == 0) 0 else (1 shl j).toLong()
-				y = y or if (digit and (1 shl (j + j)) == 0) 0 else (1 shl j).toLong()
-			}
-			z += 3
-			i++
-		}
-		var lon = x * 2.0.pow(2 - 3 * i) * 90.0 - 180
-		var lat = y * 2.0.pow(2 - 3 * i) * 45.0 - 90
-		if (i < s.length && s[i] == '-') {
-			z -= 2
-			if (i + 1 < s.length && s[i + 1] == '-') z++
-		}
-		return GeoParsedPoint(lat, lon, z)
-	}
-	 */
 
 	fun interleaveBits(x: Long, y: Long): Long {
 		var c: Long = 0
@@ -525,39 +474,6 @@ object MapUtils {
 			diff += 360
 		}
 		return diff
-	}
-
-	fun getProjectionPoint31(
-		px: Int,
-		py: Int,
-		st31x: Int,
-		st31y: Int,
-		end31x: Int,
-		end31y: Int
-	): QuadPointDouble {
-		val tWidth = runBlocking { getTileWidth(py) }
-		val projection = (end31x - st31x) * tWidth * (px - st31x) * tWidth +
-				(end31y - st31y) * tWidth * (py - st31y) * tWidth
-		val mDist = squareRootDist31(end31x, end31y, st31x, st31y)
-		var prx = end31x.toDouble()
-		var pry = end31y.toDouble()
-		when {
-			projection < 0 -> {
-				prx = st31x.toDouble()
-				pry = st31y.toDouble()
-			}
-
-			projection >= mDist * mDist -> {
-				prx = end31x.toDouble()
-				pry = end31y.toDouble()
-			}
-
-			else -> {
-				prx = st31x + (end31x - st31x) * (projection / (mDist * mDist))
-				pry = st31y + (end31y - st31y) * (projection / (mDist * mDist))
-			}
-		}
-		return QuadPointDouble(prx, pry)
 	}
 
 	fun squareRootDist31(x1: Int, y1: Int, x2: Int, y2: Int): Double {
@@ -659,7 +575,7 @@ object MapUtils {
 		return x
 	}
 
-	fun calculateLatLonBbox(latitude: Double, longitude: Double, radiusMeters: Int): QuadRect {
+	fun calculateLatLonBbox(latitude: Double, longitude: Double, radiusMeters: Int): KQuadRect {
 		val zoom = 16.0
 		val coeff = radiusMeters / getTileDistanceWidth(zoom)
 		val tx = getTileNumberX(zoom, longitude)
@@ -670,7 +586,7 @@ object MapUtils {
 		val bottomRightX = min(max.toDouble(), tx + coeff)
 		val bottomRightY = min(max.toDouble(), ty + coeff)
 		val pw = getPowZoom(31 - zoom)
-		val rect = QuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw)
+		val rect = KQuadRect(topLeftX * pw, topLeftY * pw, bottomRightX * pw, bottomRightY * pw)
 		rect.left = get31LongitudeX(rect.left.toInt())
 		rect.top = get31LatitudeY(rect.top.toInt())
 		rect.right = get31LongitudeX(rect.right.toInt())
@@ -691,7 +607,7 @@ object MapUtils {
 		}
 	}
 
-	fun insetLatLonRect(r: QuadRect, latitude: Double, longitude: Double) {
+	fun insetLatLonRect(r: KQuadRect, latitude: Double, longitude: Double) {
 		if (r.left == 0.0 && r.right == 0.0) {
 			r.left = longitude
 			r.right = longitude
@@ -705,21 +621,7 @@ object MapUtils {
 		}
 	}
 
-	/* TODO: Fix or remove
-	fun areLatLonEqual(l1: Location?, l2: Location?): Boolean {
-		return l1 == null && l2 == null || l2 != null && areLatLonEqual(l1, l2.latitude, l2.longitude)
-	}
-
-	fun areLatLonEqual(l1: Location?, l2: Location?, precision: Double): Boolean {
-		return l1 == null && l2 == null || l1 != null && l2 != null && areLatLonEqual(l1.latitude, l1.longitude, l2.latitude, l2.longitude, precision)
-	}
-
-	fun areLatLonEqual(l: Location?, lat: Double, lon: Double): Boolean {
-		return l != null && areLatLonEqual(l.latitude, l.longitude, lat, lon)
-	}
-	 */
-
-	fun areLatLonEqual(l1: LatLon?, l2: LatLon?): Boolean {
+	fun areLatLonEqual(l1: KLatLon?, l2: KLatLon?): Boolean {
 		return l1 == null && l2 == null || l2 != null && areLatLonEqual(
 			l1,
 			l2.latitude,
@@ -727,7 +629,7 @@ object MapUtils {
 		)
 	}
 
-	fun areLatLonEqual(l: LatLon?, lat: Double, lon: Double): Boolean {
+	fun areLatLonEqual(l: KLatLon?, lat: Double, lon: Double): Boolean {
 		return l != null && areLatLonEqual(l.latitude, l.longitude, lat, lon)
 	}
 
@@ -735,7 +637,7 @@ object MapUtils {
 		return areLatLonEqual(lat1, lon1, lat2, lon2, DEFAULT_LATLON_PRECISION)
 	}
 
-	fun areLatLonEqual(l1: LatLon?, l2: LatLon?, precision: Double): Boolean {
+	fun areLatLonEqual(l1: KLatLon?, l2: KLatLon?, precision: Double): Boolean {
 		return l1 == null && l2 == null || l1 != null && l2 != null && areLatLonEqual(
 			l1.latitude,
 			l1.longitude,
@@ -755,11 +657,11 @@ object MapUtils {
 		return abs(lat1 - lat2) < precision && abs(lon1 - lon2) < precision
 	}
 
-	fun rhumbDestinationPoint(latLon: LatLon, distance: Double, bearing: Double): LatLon {
+	fun rhumbDestinationPoint(latLon: KLatLon, distance: Double, bearing: Double): KLatLon {
 		return rhumbDestinationPoint(latLon.latitude, latLon.longitude, distance, bearing)
 	}
 
-	fun rhumbDestinationPoint(lat: Double, lon: Double, distance: Double, bearing: Double): LatLon {
+	fun rhumbDestinationPoint(lat: Double, lon: Double, distance: Double, bearing: Double): KLatLon {
 		val radius = EARTH_RADIUS_A.toDouble()
 
 		val d = distance / radius // angular distance in radians
@@ -776,7 +678,7 @@ object MapUtils {
 		val deltaLambda = d * sin(theta) / q
 		val lambda2 = lambda1 + deltaLambda
 
-		return LatLon(phi2.toDegrees(), lambda2.toDegrees())
+		return KLatLon(phi2.toDegrees(), lambda2.toDegrees())
 	}
 
 	fun getSqrtDistance(startX: Int, startY: Int, endX: Int, endY: Int): Double {

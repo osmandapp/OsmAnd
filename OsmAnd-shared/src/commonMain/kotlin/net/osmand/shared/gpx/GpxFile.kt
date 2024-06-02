@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.data.QuadRect
+import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
 import net.osmand.shared.gpx.GpxUtilities.Metadata
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
@@ -548,13 +548,13 @@ class GpxFile : GpxExtensions {
 		return pointsGroups.keys
 	}
 
-	fun getRect(): QuadRect {
+	fun getRect(): KQuadRect {
 		return getBounds(0.0, 0.0)
 	}
 
-	fun getBounds(defaultMissingLat: Double, defaultMissingLon: Double): QuadRect {
+	fun getBounds(defaultMissingLat: Double, defaultMissingLon: Double): KQuadRect {
 		val qr =
-			QuadRect(defaultMissingLon, defaultMissingLat, defaultMissingLon, defaultMissingLat)
+			KQuadRect(defaultMissingLon, defaultMissingLat, defaultMissingLon, defaultMissingLat)
 		for (track in tracks) {
 			for (segment in track.segments) {
 				for (p in segment.points) {

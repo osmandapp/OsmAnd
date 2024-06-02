@@ -2,7 +2,7 @@ package net.osmand.shared.util
 
 import net.osmand.shared.db.SQLiteAPI
 import net.osmand.shared.db.SQLiteAPIImpl
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import platform.Foundation.NSDate
 import platform.Foundation.NSString
 import platform.Foundation.timeIntervalSince1970
@@ -25,21 +25,21 @@ actual object PlatformUtil {
 		return (NSDate().timeIntervalSince1970 * 1000).toLong()
 	}
 
-	actual fun getAppDir(): CommonFile {
+	actual fun getAppDir(): KFile {
 		val dir = appDir
 		if (dir == null) {
 			throw IllegalStateException("App dir not initialized")
 		} else {
-			return CommonFile(dir)
+			return KFile(dir)
 		}
 	}
 
-	actual fun getGpxDir(): CommonFile {
+	actual fun getGpxDir(): KFile {
 		val dir = gpxDir
 		if (dir == null) {
 			throw IllegalStateException("Gpx dir not initialized")
 		} else {
-			return CommonFile(dir)
+			return KFile(dir)
 		}
 	}
 

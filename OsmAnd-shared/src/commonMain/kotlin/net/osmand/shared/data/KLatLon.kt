@@ -5,7 +5,7 @@ import net.osmand.shared.util.MapUtils
 import kotlin.math.floor
 
 @Serializable
-data class LatLon(val latitude: Double, val longitude: Double) {
+data class KLatLon(val latitude: Double, val longitude: Double) {
 
 	override fun hashCode(): Int {
 		val prime = 31
@@ -20,7 +20,7 @@ data class LatLon(val latitude: Double, val longitude: Double) {
 	override fun equals(other: Any?): Boolean {
 		if (this === other) return true
 		if (other == null || this::class != other::class) return false
-		other as LatLon
+		other as KLatLon
 		return MapUtils.areLatLonEqual(this, other)
 	}
 

@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.data.LatLon
+import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
 import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
@@ -199,10 +199,10 @@ class GpxTrackAnalysis {
 		setGpxParameter(GpxParameter.START_LON, longitude)
 	}
 
-	fun getLatLonStart(): LatLon? {
+	fun getLatLonStart(): KLatLon? {
 		val lat = getGpxParameter(GpxParameter.START_LAT)
 		val lon = getGpxParameter(GpxParameter.START_LON)
-		return if (lat != null && lon != null) LatLon(lat as Double, lon as Double) else null
+		return if (lat != null && lon != null) KLatLon(lat as Double, lon as Double) else null
 	}
 
 	fun getLatStart(): Any? {

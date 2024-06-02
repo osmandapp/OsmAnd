@@ -1,10 +1,10 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import net.osmand.shared.routing.ColoringType
 
 class GpxDataItem(
-	file: CommonFile
+	file: KFile
 ) : DataItem(file) {
 
 	private var analysis: GpxTrackAnalysis? = null

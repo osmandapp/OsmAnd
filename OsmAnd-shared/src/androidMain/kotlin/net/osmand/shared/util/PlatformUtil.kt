@@ -3,7 +3,7 @@ package net.osmand.shared.util
 import android.content.Context
 import net.osmand.shared.db.SQLiteAPI
 import net.osmand.shared.db.SQLiteAPIImpl
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import java.io.File
 import java.lang.ref.WeakReference
 
@@ -27,21 +27,21 @@ actual object PlatformUtil {
 		return System.currentTimeMillis()
 	}
 
-	actual fun getAppDir(): CommonFile {
+	actual fun getAppDir(): KFile {
 		val dir = appDir
 		if (dir == null) {
 			throw IllegalStateException("App dir not initialized")
 		} else {
-			return CommonFile(dir.absolutePath)
+			return KFile(dir.absolutePath)
 		}
 	}
 
-	actual fun getGpxDir(): CommonFile {
+	actual fun getGpxDir(): KFile {
 		val dir = gpxDir
 		if (dir == null) {
 			throw IllegalStateException("Gpx dir not initialized")
 		} else {
-			return CommonFile(dir.absolutePath)
+			return KFile(dir.absolutePath)
 		}
 	}
 
@@ -54,7 +54,7 @@ actual object PlatformUtil {
 		}
 	}
 
-	fun getCommonFile(file: File): CommonFile {
-		return CommonFile(file.absolutePath)
+	fun getCommonFile(file: File): KFile {
+		return KFile(file.absolutePath)
 	}
 }

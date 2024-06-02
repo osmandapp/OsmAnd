@@ -1,6 +1,6 @@
 package net.osmand.shared.xml
 
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import okio.IOException
 import okio.Sink
 
@@ -24,7 +24,7 @@ actual class XmlSerializer actual constructor() {
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
-	actual fun setOutput(file: CommonFile) {
+	actual fun setOutput(file: KFile) {
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)

@@ -1,6 +1,6 @@
 package net.osmand.shared.xml
 
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import okio.IOException
 import okio.Sink
 
@@ -19,7 +19,7 @@ expect class  XmlSerializer() {
 	fun getProperty(name: String): Any?
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
-	fun setOutput(file: CommonFile)
+	fun setOutput(file: KFile)
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	fun setOutput(output: Sink)

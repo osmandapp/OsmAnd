@@ -3,7 +3,7 @@ package net.osmand.shared.gpx
 import net.osmand.shared.db.SQLiteAPI.*
 import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxParameter.*
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import net.osmand.shared.routing.ColoringType
 import net.osmand.shared.util.DbUtils
 import net.osmand.shared.util.LoggerFactory
@@ -87,7 +87,7 @@ class GpxDatabase {
 		return true
 	}
 
-	fun rename(currentFile: CommonFile, newFile: CommonFile): Boolean {
+	fun rename(currentFile: KFile, newFile: KFile): Boolean {
 		val map = linkedMapOf(
 			FILE_NAME to newFile.name(),
 			FILE_DIR to GpxDbUtils.getGpxFileDir(newFile)
@@ -96,7 +96,7 @@ class GpxDatabase {
 		return updateGpxParameters(map, tableName, GpxDbUtils.getItemRowsToSearch(currentFile))
 	}
 
-	fun remove(file: CommonFile): Boolean {
+	fun remove(file: KFile): Boolean {
 		val db = openConnection(false)
 		if (db != null) {
 			val fileName = file.name()
@@ -143,7 +143,7 @@ class GpxDatabase {
 		return item
 	}
 
-	private fun readItemFile(query: SQLiteCursor): CommonFile {
+	private fun readItemFile(query: SQLiteCursor): KFile {
 		var fileDir: String = query.getString(query.getColumnIndex(FILE_DIR.columnName))
 		val fileName = query.getString(query.getColumnIndex(FILE_NAME.columnName))
 
@@ -154,8 +154,8 @@ class GpxDatabase {
 		}
 		fileDir = fileDir.replace(gpxDir.toString(), "")
 		fileDir = fileDir.replace(appDir.toString(), "")
-		val dir = if (fileDir.isEmpty()) gpxDir else CommonFile(gpxDir, fileDir)
-		return CommonFile(dir, fileName)
+		val dir = if (fileDir.isEmpty()) gpxDir else KFile(gpxDir, fileDir)
+		return KFile(dir, fileName)
 	}
 
 	private fun processItemParameters(
@@ -284,20 +284,20 @@ class GpxDatabase {
 		return items.toList()
 	}
 
-	fun getGpxDataItem(file: CommonFile): GpxDataItem? {
+	fun getGpxDataItem(file: KFile): GpxDataItem? {
 		return if (GpxDbUtils.isGpxFile(file)) getDataItem(file) as? GpxDataItem else null
 	}
 
-	fun getGpxDirItem(file: CommonFile): GpxDirItem? {
+	fun getGpxDirItem(file: KFile): GpxDirItem? {
 		return if (file.isDirectory()) getDataItem(file) as? GpxDirItem else null
 	}
 
-	private fun getDataItem(file: CommonFile): DataItem? {
+	private fun getDataItem(file: KFile): DataItem? {
 		val db = openConnection(false)
 		return if (db != null) getDataItem(file, db) else null
 	}
 
-	private fun getDataItem(file: CommonFile, db: SQLiteConnection): DataItem? {
+	private fun getDataItem(file: KFile, db: SQLiteConnection): DataItem? {
 		val name = file.name()
 		val dir = GpxDbUtils.getGpxFileDir(file)
 		val gpxFile = GpxDbUtils.isGpxFile(file)

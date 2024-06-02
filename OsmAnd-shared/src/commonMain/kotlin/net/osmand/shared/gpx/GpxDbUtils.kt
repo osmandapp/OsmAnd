@@ -5,7 +5,7 @@ import net.osmand.shared.db.SQLiteAPI.*
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_DIR_TABLE_NAME
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_TABLE_NAME
 import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import net.osmand.shared.util.PlatformUtil
 import kotlin.collections.set
 
@@ -141,13 +141,13 @@ object GpxDbUtils {
 		return true
 	}
 
-	fun getGpxFileDir(file: CommonFile): String {
+	fun getGpxFileDir(file: KFile): String {
 		file.parent()?.let {
 			val gpxDir = PlatformUtil.getGpxDir()
 			if (file == gpxDir) {
 				return ""
 			}
-			val relativePath = CommonFile(file.path().replace("${gpxDir.path}/", ""))
+			val relativePath = KFile(file.path().replace("${gpxDir.path}/", ""))
 			val fileDir = if (file.isDirectory()) relativePath.path else relativePath.parent()
 			return fileDir.toString()
 		}
@@ -192,14 +192,14 @@ object GpxDbUtils {
 		return map
 	}
 
-	fun getItemRowsToSearch(file: CommonFile): Map<String, Any?> {
+	fun getItemRowsToSearch(file: KFile): Map<String, Any?> {
 		val map = LinkedHashMap<String, Any?>()
 		map[GpxParameter.FILE_NAME.columnName] = file.name()
 		map[GpxParameter.FILE_DIR.columnName] = getGpxFileDir(file)
 		return map
 	}
 
-	fun getTableName(file: CommonFile): String {
+	fun getTableName(file: KFile): String {
 		return if (file.exists()) {
 			if (!file.isDirectory()) GPX_TABLE_NAME else GPX_DIR_TABLE_NAME
 		} else {
@@ -224,7 +224,7 @@ object GpxDbUtils {
 		}
 	}
 
-	fun isGpxFile(file: CommonFile): Boolean {
+	fun isGpxFile(file: KFile): Boolean {
 		return file.name().lowercase().endsWith(IndexConstants.GPX_FILE_EXT)
 	}
 

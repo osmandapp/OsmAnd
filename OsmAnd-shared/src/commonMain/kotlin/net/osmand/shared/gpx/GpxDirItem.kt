@@ -1,8 +1,8 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 
-class GpxDirItem(file: CommonFile) : DataItem(file) {
+class GpxDirItem(file: KFile) : DataItem(file) {
 
 	override fun isValidValue(parameter: GpxParameter, value: Any?): Boolean {
 		return parameter.isAppearanceParameter() && (value == null || parameter.typeClass == value::class)

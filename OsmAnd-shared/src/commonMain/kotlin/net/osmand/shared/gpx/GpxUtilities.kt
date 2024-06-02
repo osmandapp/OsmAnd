@@ -8,10 +8,10 @@ import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import net.osmand.shared.data.QuadRect
+import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.SplitMetric.DistanceSplitMetric
 import net.osmand.shared.gpx.SplitMetric.TimeSplitMetric
-import net.osmand.shared.io.CommonFile
+import net.osmand.shared.io.KFile
 import net.osmand.shared.util.Algorithms
 import net.osmand.shared.util.Algorithms.hash
 import net.osmand.shared.util.IProgress
@@ -839,8 +839,8 @@ object GpxUtilities {
 		return list
 	}
 
-	fun calculateBounds(pts: List<WptPt>): QuadRect {
-		val trackBounds = QuadRect(
+	fun calculateBounds(pts: List<WptPt>): KQuadRect {
+		val trackBounds = KQuadRect(
 			Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
 			Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY
 		)
@@ -848,8 +848,8 @@ object GpxUtilities {
 		return trackBounds
 	}
 
-	fun calculateTrackBounds(segments: List<TrkSegment>): QuadRect {
-		val trackBounds = QuadRect(
+	fun calculateTrackBounds(segments: List<TrkSegment>): KQuadRect {
+		val trackBounds = KQuadRect(
 			Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY,
 			Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY
 		)
@@ -860,10 +860,10 @@ object GpxUtilities {
 				updated = true
 			}
 		}
-		return if (updated) trackBounds else QuadRect()
+		return if (updated) trackBounds else KQuadRect()
 	}
 
-	fun updateBounds(trackBounds: QuadRect, pts: List<WptPt>, startIndex: Int) {
+	fun updateBounds(trackBounds: KQuadRect, pts: List<WptPt>, startIndex: Int) {
 		for (i in startIndex until pts.size) {
 			val pt = pts[i]
 			trackBounds.right = maxOf(trackBounds.right, pt.lon)
@@ -877,7 +877,7 @@ object GpxUtilities {
 		return segments.sumOf { it.points.size }
 	}
 
-	fun updateQR(q: QuadRect, p: WptPt, defLat: Double, defLon: Double) {
+	fun updateQR(q: KQuadRect, p: WptPt, defLat: Double, defLon: Double) {
 		if (q.left == defLon && q.top == defLat &&
 			q.right == defLon && q.bottom == defLat
 		) {
@@ -899,7 +899,7 @@ object GpxUtilities {
 		return writer.toString()
 	}
 
-	fun writeGpxFile(fout: CommonFile, file: GpxFile): Exception? {
+	fun writeGpxFile(fout: KFile, file: GpxFile): Exception? {
 		var output: Sink? = null
 		return try {
 			fout.createDirectories()
@@ -1412,12 +1412,12 @@ object GpxUtilities {
 		}
 	}
 
-	fun loadGpxFile(file: CommonFile): GpxFile {
+	fun loadGpxFile(file: KFile): GpxFile {
 		return loadGpxFile(file, null, true)
 	}
 
 	fun loadGpxFile(
-		file: CommonFile,
+		file: KFile,
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {

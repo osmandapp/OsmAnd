@@ -11,7 +11,7 @@ import okio.Source
 import okio.buffer
 import okio.use
 
-class CommonFile {
+class KFile {
 	val path: Path
 
 	constructor(filePath: String) {
@@ -22,7 +22,7 @@ class CommonFile {
 		this.path = path
 	}
 
-	constructor(file: CommonFile, fileName: String) {
+	constructor(file: KFile, fileName: String) {
 		this.path = file.path.resolve(fileName)
 	}
 
