@@ -99,7 +99,7 @@
     <string name="poi_trash_disposal">Kante za smeće</string>
     <string name="poi_education">Edukacija</string>
     <string name="poi_administrative">Administracija</string>
-    <string name="poi_healthcare">Zdravstvo</string>
+    <string name="poi_healthcare">Zdravstvene usluge</string>
     <string name="poi_office">Kancelarije</string>
     <string name="poi_sport">Sport</string>
     <string name="poi_tourism">Turizam</string>
@@ -168,7 +168,7 @@
     <string name="poi_photo">Foto radnja</string>
     <string name="poi_second_hand">Polovne stvari</string>
     <string name="poi_sports">Sportska oprema</string>
-    <string name="poi_ticket">Prodaja karata</string>
+    <string name="poi_ticket">Biletarnica</string>
     <string name="poi_tobacco">Duvan</string>
     <string name="poi_toys">Igračke</string>
     <string name="poi_tyres">Auto gume</string>
@@ -2841,7 +2841,7 @@
     <string name="poi_health_person_type_paramedic">Uloga zdravstvenog radnika: bolničar</string>
     <string name="poi_health_person_type_nurse">Uloga zdravstvenog radnika: medicinska sestra</string>
     <string name="poi_health_person_type_midwife">Uloga zdravstvenog radnika: babica</string>
-    <string name="poi_health_person_type_healer">Uloga zdravstvenog radnika: iscelitelj</string>
+    <string name="poi_health_person_type_healer">Uloga zdravstvenog radnika: lekar</string>
     <string name="poi_health_person_type_assistant">Uloga zdravstvenog radnika: asistent</string>
     <string name="poi_fire_hydrant_type_wall">Zid</string>
     <string name="poi_fire_hydrant_type_pond">Pond</string>
@@ -3939,7 +3939,7 @@
     <string name="poi_us_maps_recreation_area_activity">Rekreativna oblast</string>
     <string name="poi_healthcare_speciality_clinic">Klinika</string>
     <string name="poi_healthcare_speciality_psychotherapist">Psihoterapija</string>
-    <string name="poi_healthcare_speciality_laboratory">Specijalnost u zdravstvu: laborant</string>
+    <string name="poi_healthcare_speciality_laboratory">Specijalnost u zdravstvu: laboratorija</string>
     <string name="poi_water_filter">Voda; Pijaća voda</string>
     <string name="poi_socket_schuko_voltage">Utičnica: Šuko: napon</string>
     <string name="poi_socket_schuko_voltage_medium">Srednji</string>
