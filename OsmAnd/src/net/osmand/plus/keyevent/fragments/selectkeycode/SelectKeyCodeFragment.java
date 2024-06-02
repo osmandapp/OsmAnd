@@ -204,10 +204,11 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private void updateApplyButtonState() {
-		applyButton.setEnabled(isKeyCodeChanged() && !isKeyCodeAlreadyAssignedToThisAction());
+		boolean assignedToThisAction = isKeyCodeAlreadyAssignedToThisAction();
+		applyButton.setEnabled(isKeyCodeChanged() && !assignedToThisAction);
 		boolean keyCodeFree = isKeyCodeFree();
 		applyButton.setButtonType(keyCodeFree ? DialogButtonType.PRIMARY : DialogButtonType.PRIMARY_HARMFUL);
-		applyButton.setTitleId(keyCodeFree ? R.string.shared_string_save : R.string.shared_string_reassign);
+		applyButton.setTitleId(keyCodeFree || assignedToThisAction ? R.string.shared_string_save : R.string.shared_string_reassign);
 	}
 
 	@Override
@@ -249,8 +250,8 @@ public class SelectKeyCodeFragment extends BaseOsmAndFragment implements KeyEven
 	}
 
 	private boolean isKeyCodeAlreadyAssignedToThisAction() {
-		KeyAssignment keyAssignment = getKeyAssignment();
-		return keyAssignment != null && keyAssignment.hasKeyCode(keyCode);
+		EditKeyAssignmentController controller = EditKeyAssignmentController.getExistedInstance(app);
+		return controller != null && controller.isKeyCodeAlreadyAssignedToThisAction(keyCode);
 	}
 
 	@Nullable

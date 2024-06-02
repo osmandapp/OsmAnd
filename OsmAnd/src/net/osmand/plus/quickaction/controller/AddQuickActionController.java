@@ -104,6 +104,15 @@ public abstract class AddQuickActionController implements IDialogController {
 		CreateEditActionDialog.showInstance(fragmentManager, action);
 	}
 
+	public static void showCreateEditActionDialog(@NonNull OsmandApplication app,
+	                                              @NonNull FragmentManager fragmentManager,
+	                                              @NonNull AddQuickActionController controller,
+	                                              @NonNull QuickAction action) {
+		DialogManager dialogManager = app.getDialogManager();
+		dialogManager.register(PROCESS_ID, controller);
+		CreateEditActionDialog.showInstance(fragmentManager, action);
+	}
+
 	private static void registerControllerIfNotExists(@NonNull OsmandApplication app,
 	                                                  @NonNull QuickActionButtonState buttonState) {
 		DialogManager dialogManager = app.getDialogManager();

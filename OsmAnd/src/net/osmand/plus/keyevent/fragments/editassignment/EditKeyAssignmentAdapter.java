@@ -148,6 +148,7 @@ class EditKeyAssignmentAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.icon.setImageResource(command.getIconRes(app));
 			h.summaryContainer.setVisibility(View.GONE);
 			h.actionButton.setOnClickListener(v -> controller.askDeleteAction());
+			h.buttonView.setOnClickListener(v -> controller.askEditAction(mapActivity));
 
 		} else if (itemType == ADD_KEY_ITEM) {
 			h.actionButton.setImageDrawable(getAddIcon());

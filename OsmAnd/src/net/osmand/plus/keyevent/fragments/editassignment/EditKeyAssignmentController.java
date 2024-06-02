@@ -28,7 +28,6 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.OnResultCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.containers.ScreenItem;
 import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
@@ -37,6 +36,7 @@ import net.osmand.plus.keyevent.InputDevicesHelper;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.keyevent.fragments.selectkeycode.OnKeyCodeSelectedCallback;
 import net.osmand.plus.keyevent.fragments.selectkeycode.SelectKeyCodeFragment;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -62,6 +62,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	private final InputDevicesHelper deviceHelper;
 	private final String deviceId;
 	private final String assignmentId;
+	private EditingBundle initialBundle;
 	private EditingBundle editBundle;
 
 	public EditKeyAssignmentController(@NonNull OsmandApplication app,
@@ -219,6 +220,12 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		askRefreshDialog();
 	}
 
+	public void askEditAction(@NonNull FragmentActivity activity) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		AddQuickActionController controller = new AddKeyEventQuickActionController(app);
+		AddQuickActionController.showCreateEditActionDialog(app, manager, controller, editBundle.action);
+	}
+
 	public void askDeleteKeyCode(@NonNull Integer keyCode) {
 		editBundle.keyCodes.remove(keyCode);
 		askRefreshDialog();
@@ -241,20 +248,48 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	public void enterEditMode() {
 		KeyAssignment assignment = getAssignment();
 		editBundle = new EditingBundle();
+		initialBundle = new EditingBundle();
 		if (assignment != null) {
 			editBundle.action = assignment.getAction();
 			editBundle.keyCodes = assignment.getKeyCodes();
+			initialBundle.action = editBundle.action;
+			initialBundle.keyCodes = new ArrayList<>(editBundle.keyCodes);
 		}
 		askRefreshDialog();
 	}
 
-	public void exitEditMode() {
+	public void askExitEditMode(@Nullable FragmentActivity activity) {
+		if (activity != null && hasChanges()) {
+			AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
+					.setTitle(R.string.discard_changes_prompt)
+					.setNegativeButton(R.string.shared_string_cancel, null)
+					.setPositiveButton(R.string.shared_string_continue, (dialog, which) -> exitEditMode());
+			CustomAlert.showSimpleMessage(dialogData, R.string.unsaved_changes_will_be_lost);
+		} else {
+			exitEditMode();
+		}
+	}
+
+	private void exitEditMode() {
 		editBundle = null;
-		askRefreshDialog();
+		initialBundle = null;
+		if (isNewAssignment()) {
+			askDismissDialog();
+		} else {
+			askRefreshDialog();
+		}
+	}
+
+	public boolean hasChanges() {
+		return !Objects.equals(initialBundle, editBundle);
 	}
 
 	public boolean hasChangesToSave() {
 		return editBundle != null && editBundle.action != null && !Algorithms.isEmpty(editBundle.keyCodes);
+	}
+
+	public boolean isKeyCodeAlreadyAssignedToThisAction(@NonNull Integer keyCode) {
+		return editBundle != null && editBundle.keyCodes.contains(keyCode);
 	}
 
 	@Nullable
@@ -306,6 +341,24 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	private static class EditingBundle {
 		QuickAction action;
 		List<Integer> keyCodes = new ArrayList<>();
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof EditingBundle)) return false;
+
+			EditingBundle that = (EditingBundle) o;
+
+			if (!Objects.equals(action, that.action)) return false;
+			return Objects.equals(keyCodes, that.keyCodes);
+		}
+
+		@Override
+		public int hashCode() {
+			int result = action != null ? action.hashCode() : 0;
+			result = 31 * result + (keyCodes != null ? keyCodes.hashCode() : 0);
+			return result;
+		}
 	}
 
 	public static void showEditAssignmentDialog(@NonNull FragmentActivity activity,
@@ -329,7 +382,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		EditKeyAssignmentController controller =
 				new EditKeyAssignmentController(app, appMode, deviceId, assignmentId);
 		if (assignmentId == null) {
-			controller.editBundle = new EditingBundle();
+			controller.enterEditMode();
 		}
 		DialogManager dialogManager = app.getDialogManager();
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
@@ -354,7 +407,12 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		@NonNull
 		@Override
 		public QuickAction produceQuickAction(boolean isNew, int type, long actionId) {
-			return isNew ? mapButtonsHelper.newActionByType(type) : editBundle.action;
+			return isNew ? mapButtonsHelper.newActionByType(type) : createActionCopy(editBundle.action);
+		}
+
+		@Nullable
+		private QuickAction createActionCopy(@Nullable QuickAction action) {
+			return action != null ? MapButtonsHelper.produceAction(action) : null;
 		}
 
 		@Override

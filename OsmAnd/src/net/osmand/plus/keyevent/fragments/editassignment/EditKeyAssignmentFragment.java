@@ -82,8 +82,8 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		toolbar.setNavigationIcon(getNavigationIcon());
 		toolbar.setNavigationContentDescription(R.string.shared_string_exit);
 		toolbar.setNavigationOnClickListener(v -> {
-			if (controller.isInEditMode() && !controller.isNewAssignment()) {
-				controller.exitEditMode();
+			if (controller.isInEditMode()) {
+				controller.askExitEditMode(getActivity());
 			} else {
 				dismiss();
 			}
