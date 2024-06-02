@@ -171,22 +171,6 @@ object GpxUtilities {
 			}
 		}
 
-		fun getAdditionalExtensionsWriter(): GpxExtensionsWriter? {
-			return additionalExtensionsWriter
-		}
-
-		fun getExtensionsWriter(): GpxExtensionsWriter? {
-			return extensionsWriter
-		}
-
-		fun setExtensionsWriter(extensionsWriter: GpxExtensionsWriter?) {
-			this.extensionsWriter = extensionsWriter
-		}
-
-		fun setAdditionalExtensionsWriter(additionalExtensionsWriter: GpxExtensionsWriter?) {
-			this.additionalExtensionsWriter = additionalExtensionsWriter
-		}
-
 		fun getColor(defColor: Int): Int {
 			var clrValue: String? = null
 			val extensions = this.extensions
@@ -289,14 +273,6 @@ object GpxUtilities {
 			getExtensionsToWrite().putAll(wptPt.getExtensionsToWrite())
 		}
 
-		fun setDistance(dist: Double) {
-			distance = dist
-		}
-
-		fun getDistance(): Double {
-			return distance
-		}
-
 		fun getColor(): Int {
 			return getColor(0)
 		}
@@ -307,10 +283,6 @@ object GpxUtilities {
 
 		fun getLongitude(): Double {
 			return lon
-		}
-
-		fun getHeading(): Float {
-			return heading
 		}
 
 		constructor(lat: Double, lon: Double) {
@@ -807,16 +779,8 @@ object GpxUtilities {
 			backgroundType = point.getBackgroundType()
 		}
 
-		fun setName(name: String) {
-			this.name = name
-		}
-
 		fun isHidden(): Boolean {
 			return hidden
-		}
-
-		fun setHidden(hidden: Boolean) {
-			this.hidden = hidden
 		}
 
 		override fun hashCode(): Int {
@@ -1019,8 +983,8 @@ object GpxUtilities {
 	}
 
 	private fun assignPointsGroupsExtensionWriter(gpxFile: GpxFile) {
-		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(object : GpxExtensionsWriter {
+		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.extensionsWriter == null) {
+			gpxFile.extensionsWriter = object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
 					val categoriesBundle = mutableListOf<StringBundle>()
@@ -1031,7 +995,7 @@ object GpxUtilities {
 					val bundleWriter = StringBundleXmlWriter(bundle, serializer)
 					bundleWriter.writeBundle()
 				}
-			})
+			}
 		}
 	}
 
@@ -1115,8 +1079,8 @@ object GpxUtilities {
 	}
 
 	private fun assignRouteExtensionWriter(segment: TrkSegment) {
-		if (segment.hasRoute() && segment.getExtensionsWriter() == null) {
-			segment.setExtensionsWriter(object : GpxExtensionsWriter {
+		if (segment.hasRoute() && segment.extensionsWriter == null) {
+			segment.extensionsWriter = object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
 					val segmentsBundle = mutableListOf<StringBundle>()
@@ -1132,7 +1096,7 @@ object GpxUtilities {
 					val bundleWriter = StringBundleXmlWriter(bundle, serializer)
 					bundleWriter.writeBundle()
 				}
-			})
+			}
 		}
 	}
 
@@ -1182,8 +1146,8 @@ object GpxUtilities {
 		p: GpxExtensions,
 		progress: IProgress?
 	) {
-		val extensionsWriter = p.getExtensionsWriter()
-		val additionalExtensionsWriter = p.getAdditionalExtensionsWriter()
+		val extensionsWriter = p.extensionsWriter
+		val additionalExtensionsWriter = p.additionalExtensionsWriter
 		val hasExtensions = !extensions.isNullOrEmpty()
 		if (hasExtensions || extensionsWriter != null) {
 			serializer.startTag(null, "extensions")
@@ -1242,7 +1206,7 @@ object GpxUtilities {
 	}
 
 	fun assignExtensionWriter(wptPt: WptPt, pluginsExtensions: Map<String, String>) {
-		if (wptPt.getExtensionsWriter() == null) {
+		if (wptPt.extensionsWriter == null) {
 			val regularExtensions = HashMap<String, String>()
 			val gpxtpxExtensions = HashMap<String, String>()
 			for ((key, value) in pluginsExtensions) {
@@ -1252,9 +1216,9 @@ object GpxUtilities {
 					regularExtensions[key] = value
 				}
 			}
-			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions, true))
+			wptPt.extensionsWriter = createExtensionsWriter(regularExtensions, true)
 			if (gpxtpxExtensions.isNotEmpty()) {
-				wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions, false))
+				wptPt.additionalExtensionsWriter = createExtensionsWriter(gpxtpxExtensions, false)
 			}
 		}
 	}

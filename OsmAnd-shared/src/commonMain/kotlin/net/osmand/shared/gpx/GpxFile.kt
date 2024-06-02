@@ -127,10 +127,6 @@ class GpxFile : GpxExtensions {
 		pointsModifiedTime = modifiedTime
 	}
 
-	fun setPointsGroups(groups: Map<String, PointsGroup>) {
-		pointsGroups = groups.toMutableMap()
-	}
-
 	private fun addPointsToGroups(collection: Collection<WptPt>) {
 		for (point in collection) {
 			val pointsGroup = getOrCreateGroup(point)
@@ -676,11 +672,10 @@ class GpxFile : GpxExtensions {
 
 	fun addRouteKeyTags(routeKey: Map<String, String>) {
 		networkRouteKeyTags.putAll(routeKey)
-		setExtensionsWriter(
+		extensionsWriter =
 			if (networkRouteKeyTags.isEmpty()) null else createNetworkRouteExtensionWriter(
 				networkRouteKeyTags
 			)
-		)
 	}
 
 	fun getRouteKeyTags(): Map<String, String> {
@@ -724,7 +719,7 @@ class GpxFile : GpxExtensions {
 		if (metadata.author != null) size++
 		if (metadata.copyright != null) size++
 		if (metadata.bounds != null) size++
-		if (getExtensionsToWrite().isNotEmpty() || getExtensionsWriter() != null) size++
+		if (getExtensionsToWrite().isNotEmpty() || extensionsWriter != null) size++
 		return size
 	}
 

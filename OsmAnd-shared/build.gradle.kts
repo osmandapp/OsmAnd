@@ -22,7 +22,6 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "OsmAndShared"
             isStatic = true
-            linkerOpts.add("-lsqlite3")
         }
     }
 
@@ -42,7 +41,6 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesCoreVersion")
             implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
             implementation("com.squareup.okio:okio:$okioVersion")
-            implementation("co.touchlab:sqliter-driver:$sqliterVersion")
         }
         androidMain.dependencies {
             implementation("androidx.sqlite:sqlite:$sqliteVersion")
@@ -50,6 +48,7 @@ kotlin {
             implementation("net.sf.kxml:kxml2:$kxml2Version")
         }
         iosMain.dependencies {
+            implementation("co.touchlab:sqliter-driver:$sqliterVersion")
         }
     }
 }

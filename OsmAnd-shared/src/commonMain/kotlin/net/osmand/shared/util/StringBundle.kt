@@ -172,11 +172,11 @@ class StringBundle {
 		}
 	}
 
-	fun <T> putMap(key: String, map: Map<Int, T>) {
-		val bundle = StringBundle()
-		map.forEach { (k, v) -> bundle.putString(k.toString(), v.toString()) }
-		this.map[key] = StringBundleItem(key, bundle)
-	}
+//	fun <T> putMap(key: String, map: Map<Int, T>) {
+//		val bundle = StringBundle()
+//		map.forEach { (k, v) -> bundle.putString(k.toString(), v.toString()) }
+//		this.map[key] = StringBundleItem(key, bundle)
+//	}
 
 	fun <K, V> putMap(key: String, map: Map<K, V>) {
 		val bundle = StringBundle()

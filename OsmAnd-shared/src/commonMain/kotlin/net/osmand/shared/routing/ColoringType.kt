@@ -63,8 +63,6 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 		}
 	}
 
-	fun getId(): String = id
-
 	fun getName(routeInfoAttribute: String?): String? {
 		return if (!isRouteInfoAttribute()) {
 			id
@@ -72,10 +70,6 @@ enum class ColoringType(val id: String, val titleId: String, val iconId: String)
 			if (routeInfoAttribute.isNullOrEmpty()) null else routeInfoAttribute
 		}
 	}
-
-	fun getTitleId(): String = titleId
-
-	fun getIconId(): String = iconId
 
 	fun isDefault(): Boolean = this == DEFAULT
 

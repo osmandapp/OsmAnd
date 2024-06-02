@@ -27,12 +27,6 @@ enum class GradientScaleType(
 		"ic_action_altitude_ascent"
 	);
 
-	fun getTypeName(): String = typeName
-
-	fun getColorTypeName(): String = colorTypeName
-
-	fun getIconId(): String = iconId
-
 	fun getHumanString(): String = Localization.getString(resId)
 
 	/* TODO
