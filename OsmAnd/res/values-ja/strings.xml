@@ -5341,4 +5341,7 @@ POIの更新は利用できません</string>
     <string name="key_assignments_already_cleared_message">すべてのキー割り当てはすでに初期化されています</string>
     <string name="camera_app">カメラアプリ</string>
     <string name="use_v1_auto_zoom">不連続オートズーム（旧バージョン）</string>
+    <string name="get_osmand_cloud">OsmAnd Cloudを入手</string>
+    <string name="speedometer_description">GPSを基にあなたの現在の速度を表示します</string>
+    <string name="shared_string_speedometer">スピードメーター</string>
 </resources>
