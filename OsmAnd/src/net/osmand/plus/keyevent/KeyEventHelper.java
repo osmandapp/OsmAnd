@@ -69,7 +69,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 			return externalCallback.onKeyDown(keyCode, event);
 		}
 		QuickAction action = findAction(keyCode);
-		if (action != null && action.onKeyDown(mapActivity)) {
+		if (action != null && action.onKeyDown(mapActivity, keyCode, event)) {
 			return true;
 		}
 		return app.getAidlApi().onKeyEvent(event);
@@ -81,7 +81,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 			return externalCallback.onKeyLongPress(keyCode, event);
 		}
 		QuickAction action = findAction(keyCode);
-		return action != null && action.onKeyLongPress(mapActivity);
+		return action != null && action.onKeyLongPress(mapActivity, keyCode, event);
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 			return externalCallback.onKeyUp(keyCode, event);
 		}
 		QuickAction action = findAction(keyCode);
-		if (action != null && action.onKeyUp(mapActivity)) {
+		if (action != null && action.onKeyUp(mapActivity, keyCode, event)) {
 			return true;
 		}
 		return app.getAidlApi().onKeyEvent(event);
@@ -105,7 +105,7 @@ public class KeyEventHelper implements KeyEvent.Callback, InputDevicesEventListe
 			return externalCallback.onKeyMultiple(keyCode, count, event);
 		}
 		QuickAction action = findAction(keyCode);
-		return action != null && action.onKeyMultiple(mapActivity, count);
+		return action != null && action.onKeyMultiple(mapActivity, keyCode, count, event);
 	}
 
 	@Override

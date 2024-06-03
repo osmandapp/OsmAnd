@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,20 +33,20 @@ public abstract class BaseMapZoomAction extends QuickAction {
 	public abstract int getQuickActionDescription();
 
 	@Override
-	public boolean onKeyDown(@NonNull MapActivity mapActivity) {
+	public boolean onKeyDown(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		if (continuous) {
 			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
 			return true;
 		}
-		return super.onKeyDown(mapActivity);
+		return super.onKeyDown(mapActivity, keyCode, event);
 	}
 
 	@Override
-	public boolean onKeyUp(@NonNull MapActivity mapActivity) {
+	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		if (!continuous) {
 			changeZoom(mapActivity.getMyApplication(), shouldIncrement() ? 1 : -1);
 		}
-		return super.onKeyUp(mapActivity);
+		return super.onKeyUp(mapActivity, keyCode, event);
 	}
 
 	@Override

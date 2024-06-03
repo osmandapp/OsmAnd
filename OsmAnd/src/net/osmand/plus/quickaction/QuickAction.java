@@ -2,6 +2,7 @@ package net.osmand.plus.quickaction;
 
 
 import android.content.Context;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -150,20 +151,20 @@ public class QuickAction {
 		return NativeUtilities.getLatLonFromElevatedPixel(mapRenderer, tb, centerPixX, centerPixY);
 	}
 
-	public boolean onKeyDown(@NonNull MapActivity mapActivity) {
+	public boolean onKeyDown(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		return true;
 	}
 
-	public boolean onKeyLongPress(@NonNull MapActivity mapActivity) {
+	public boolean onKeyLongPress(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		return true;
 	}
 
-	public boolean onKeyUp(@NonNull MapActivity mapActivity) {
+	public boolean onKeyUp(@NonNull MapActivity mapActivity, int keyCode, KeyEvent event) {
 		execute(mapActivity);
 		return true;
 	}
 
-	public boolean onKeyMultiple(@NonNull MapActivity mapActivity, int count) {
+	public boolean onKeyMultiple(@NonNull MapActivity mapActivity, int keyCode, int count, KeyEvent event) {
 		return true;
 	}
 
