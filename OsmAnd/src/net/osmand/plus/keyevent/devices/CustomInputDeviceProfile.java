@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.quickaction.QuickAction;
 
@@ -27,7 +28,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		setAssignments(parentDevice.getAssignmentsCopy());
 	}
 
-	public CustomInputDeviceProfile(@NonNull JSONObject object) throws JSONException {
+	public CustomInputDeviceProfile(@NonNull OsmandApplication app, @NonNull JSONObject object) throws JSONException {
 		customId = object.getString("id");
 		customName = object.getString("name");
 
@@ -39,7 +40,7 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 		List<KeyAssignment> assignments = new ArrayList<>();
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
-			KeyAssignment keyAssignment = new KeyAssignment(jsonObject);
+			KeyAssignment keyAssignment = new KeyAssignment(app, jsonObject);
 			if (keyAssignment.hasRequiredParameters()) {
 				assignments.add(keyAssignment);
 			}
@@ -118,13 +119,13 @@ public class CustomInputDeviceProfile extends InputDeviceProfile {
 	}
 
 	@NonNull
-	public JSONObject toJson() throws JSONException {
+	public JSONObject toJson(@NonNull OsmandApplication app) throws JSONException {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("id", customId);
 		jsonObject.put("name", customName);
 		JSONArray jsonArray = new JSONArray();
 		for (KeyAssignment assignment : getAssignments()) {
-			jsonArray.put(assignment.toJson());
+			jsonArray.put(assignment.toJson(app));
 		}
 		jsonObject.put("assignments", jsonArray);
 		return jsonObject;

@@ -7,14 +7,11 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.CommandToActionConverter;
+import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionSerializer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
@@ -36,9 +33,6 @@ public class KeyAssignment {
 	private QuickAction action;
 	private List<Integer> keyCodes = new ArrayList<>();
 
-	private final QuickActionSerializer serializer = new QuickActionSerializer();
-	private final Gson gson = new GsonBuilder().registerTypeAdapter(QuickAction.class, serializer).create();
-
 	public KeyAssignment(@NonNull String commandId, @NonNull Integer ... keyCodes) {
 		this(CommandToActionConverter.createQuickAction(commandId), keyCodes);
 	}
@@ -49,17 +43,18 @@ public class KeyAssignment {
 		this.keyCodes = new ArrayList<>(Arrays.asList(keyCodes));
 	}
 
-	public KeyAssignment(@NonNull JSONObject jsonObject) throws JSONException {
+	public KeyAssignment(@NonNull OsmandApplication app, @NonNull JSONObject jsonObject) throws JSONException {
 		id = jsonObject.has("id") ? jsonObject.getString("id") : generateUniqueId();
 
 		this.customName = jsonObject.has("customName")
 				? jsonObject.getString("customName")
 				: null;
 
+		MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
 		if (jsonObject.has("action")) {
-			JSONObject actionJson = jsonObject.getJSONObject("action");
-			Type type = new TypeToken<QuickAction>() {}.getType();
-			action = gson.fromJson(actionJson.toString(), type);
+			JSONArray actionJsonArray = jsonObject.getJSONArray("action");
+			List<QuickAction> actions = mapButtonsHelper.parseActionsFromJson(actionJsonArray.toString());
+			action = !Algorithms.isEmpty(actions) ? actions.get(0) : null;
 		} else if (jsonObject.has("commandId")) {
 			// For previous version compatibility
 			String commandId = jsonObject.getString("commandId");
@@ -178,16 +173,18 @@ public class KeyAssignment {
 	}
 
 	@NonNull
-	public JSONObject toJson() throws JSONException {
+	public JSONObject toJson(@NonNull OsmandApplication app) throws JSONException {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("id", id);
 		if (customName != null) {
 			jsonObject.put("customName", customName);
 		}
-		Type type = new TypeToken<QuickAction>() {}.getType();
-		String actionJson = gson.toJson(action, type);
-		jsonObject.put("action", new JSONObject(actionJson));
-
+		if (action != null) {
+			MapButtonsHelper mapButtonsHelper = app.getMapButtonsHelper();
+			String actionJson = mapButtonsHelper.convertActionsToJson(Collections.singletonList(action));
+			JSONArray actionJsonArray = new JSONArray(actionJson);
+			jsonObject.put("action", actionJsonArray);
+		}
 		if (!Algorithms.isEmpty(keyCodes)) {
 			JSONArray keyCodesJsonArray = new JSONArray();
 			for (Integer keyCode : keyCodes) {

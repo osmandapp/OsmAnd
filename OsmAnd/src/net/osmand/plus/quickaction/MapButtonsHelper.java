@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
@@ -26,6 +27,7 @@ import net.osmand.util.Algorithms;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -235,6 +237,18 @@ public class MapButtonsHelper {
 	private void onQuickActionsChanged(@NonNull QuickActionButtonState buttonState) {
 		buttonState.saveActions(gson);
 		notifyUpdates();
+	}
+
+	@NonNull
+	public String convertActionsToJson(@NonNull List<QuickAction> quickActions) {
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		return gson.toJson(quickActions, type);
+	}
+
+	@Nullable
+	public List<QuickAction> parseActionsFromJson(@NonNull String json) {
+		Type type = new TypeToken<List<QuickAction>>() {}.getType();
+		return gson.fromJson(json, type);
 	}
 
 	public void onButtonStateChanged(@NonNull QuickActionButtonState buttonState) {

@@ -325,7 +325,7 @@ public class InputDevicesHelper {
 		JSONObject json = new JSONObject();
 		ApplicationMode appMode = devicesCollection.getAppMode();
 		try {
-			writeToJson(json, devicesCollection.getCustomDevices());
+			writeToJson(app, json, devicesCollection.getCustomDevices());
 			settings.CUSTOM_EXTERNAL_INPUT_DEVICES.setModeValue(appMode, json.toString());
 		} catch (JSONException e) {
 			LOG.debug("Error while writing custom devices to JSON ", e);
@@ -342,7 +342,7 @@ public class InputDevicesHelper {
 		JSONArray jsonArray = json.getJSONArray("items");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			try {
-				res.add(new CustomInputDeviceProfile(jsonArray.getJSONObject(i)).initialize(app));
+				res.add(new CustomInputDeviceProfile(app, jsonArray.getJSONObject(i)).initialize(app));
 			} catch (JSONException e) {
 				LOG.debug("Error while reading a custom device from JSON ", e);
 			}
@@ -350,11 +350,11 @@ public class InputDevicesHelper {
 		return res;
 	}
 
-	private static void writeToJson(@NonNull JSONObject json,
+	private static void writeToJson(@NonNull OsmandApplication app, @NonNull JSONObject json,
 	                                @NonNull List<InputDeviceProfile> customDevices) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		for (InputDeviceProfile device : customDevices) {
-			jsonArray.put(((CustomInputDeviceProfile) device).toJson());
+			jsonArray.put(((CustomInputDeviceProfile) device).toJson(app));
 		}
 		json.put("items", jsonArray);
 	}
