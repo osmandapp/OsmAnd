@@ -18,8 +18,8 @@
     <string name="local_index_tile_data_expire">Ističe za (minuta): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Najveće uveličanje: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Eliptična Merkator projekcija</string>
-    <string name="edit_tilesource_maxzoom">Najveći zum</string>
-    <string name="edit_tilesource_minzoom">Najmanji zum</string>
+    <string name="edit_tilesource_maxzoom">Maksimalan zum</string>
+    <string name="edit_tilesource_minzoom">Minimalan zum</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izaberi postojeći…</string>
     <string name="driving_region_japan">Japan</string>
@@ -5514,7 +5514,7 @@
     <string name="shared_string_is_deleted">%1$s je obrisan.</string>
     <string name="shared_string_delete_immediately">Obriši odmah</string>
     <string name="shared_string_delete_item">Obriši stavku</string>
-    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\". (Nijedna putanja neće biti izbrisana.)</string>
     <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
     <string name="empty_name">Prazan naziv</string>
     <string name="loading_tracks">Ponovno učitavanje staza</string>
@@ -5630,7 +5630,7 @@
     <string name="when_exceeded">Kad se prekorači</string>
     <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
     <string name="shared_string_speedometer">Brzinomer</string>
-    <string name="speed_limit_warning">Upozorenje na ograničenje brzine</string>
+    <string name="speed_limit_warning">Upozorenje na ograničenu brzinu</string>
     <string name="help_article_setup_a_route_name">Podešavanje rute</string>
     <string name="rendering_attr_padusDisplayMode_name">Način prikaza javnih površina</string>
     <string name="rendering_attr_padusDisplayMode_description">Po načinu pristupa ili imenu upravitelja</string>
@@ -5729,4 +5729,11 @@
     <string name="map_text">Tekst mape</string>
     <string name="routing_attr_avoid_cobblestone_name">Izbegavati kaldrmu</string>
     <string name="routing_attr_avoid_cobblestone_description">Izbegavati kaldrmu</string>
+    <string name="steps_per_minute_unit">KPM</string>
+    <string name="disable_map_layers_descr">Onemogućite sve slojeve mape iznad vektorske mape (potrebno je ponovno pokretanje).</string>
+    <string name="disable_map_layers">Onemogući slojeve mape</string>
+    <string name="height_legend_description">Za vizualizaciju reljefa koriste se mape visina u boji.</string>
+    <string name="change_terrain_color_scheme">Promena boje terena</string>
+    <string name="play_weather_forecast">Pokretanje vremenske prognoze</string>
+    <string name="travel_topics">Teme putovanja</string>
 </resources>

@@ -1,5 +1,8 @@
 package net.osmand.plus;
 
+import static android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION;
+import static net.osmand.plus.notifications.OsmandNotification.TOP_NOTIFICATION_SERVICE_ID;
+
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
@@ -26,7 +29,6 @@ import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.auto.screens.NavigationScreen;
 import net.osmand.plus.helpers.LocationCallback;
 import net.osmand.plus.helpers.LocationServiceHelper;
-import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.LocationSource;
@@ -51,6 +53,7 @@ public class NavigationService extends Service {
 	private final NavigationServiceBinder binder = new NavigationServiceBinder();
 
 	private OsmandSettings settings;
+	private RoutingHelper routingHelper;
 
 	protected int usedBy;
 	private OsmAndLocationProvider locationProvider;
@@ -76,8 +79,8 @@ public class NavigationService extends Service {
 		return usedBy != 0;
 	}
 
-	public boolean isUsedByNavigation() {
-		return (usedBy & USED_BY_NAVIGATION) == USED_BY_NAVIGATION;
+	public boolean isUsedBy(int type) {
+		return (usedBy & type) == type;
 	}
 
 	public void addUsageIntent(int usageIntent) {
@@ -88,7 +91,7 @@ public class NavigationService extends Service {
 		if ((usedBy & usageIntent) > 0) {
 			usedBy -= usageIntent;
 		}
-		if (!isUsedByNavigation()) {
+		if (!isUsedBy(USED_BY_NAVIGATION)) {
 			stopCarNavigation();
 		}
 		if (usageIntent == USED_BY_CAR_APP) {
@@ -111,6 +114,7 @@ public class NavigationService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		OsmandApplication app = getApp();
 		settings = app.getSettings();
+		routingHelper = app.getRoutingHelper();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
 
 		locationProvider = app.getLocationProvider();
@@ -123,29 +127,34 @@ public class NavigationService extends Service {
 		}
 
 		Notification notification = app.getNotificationHelper().buildTopNotification();
-		if (notification != null) {
-			if (isUsedByNavigation()) {
+		boolean hasNotification = notification != null;
+		if (hasNotification) {
+			if (isUsedBy(USED_BY_NAVIGATION)) {
 				startCarNavigation();
 			}
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
 			} else {
-				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
 			}
 			app.getNotificationHelper().refreshNotifications();
 		} else {
 			notification = app.getNotificationHelper().buildErrorNotification();
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification, android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification, FOREGROUND_SERVICE_TYPE_LOCATION);
 			} else {
-				startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+				startForeground(TOP_NOTIFICATION_SERVICE_ID, notification);
 			}
 			stopSelf();
-			return START_NOT_STICKY;
 		}
 		requestLocationUpdates();
 
-		return START_REDELIVER_INTENT;
+		if (isUsedBy(USED_BY_CAR_APP)) {
+			if (routingHelper.isRouteCalculated() && routingHelper.isPauseNavigation()) {
+				routingHelper.resumeNavigation();
+			}
+		}
+		return hasNotification ? START_REDELIVER_INTENT : START_NOT_STICKY;
 	}
 
 	@Override
@@ -234,25 +243,27 @@ public class NavigationService extends Service {
 		if (carContext != null) {
 			this.tripHelper = new TripHelper(getApp());
 			this.navigationManager = carContext.getCarService(NavigationManager.class);
-			this.navigationManager.setNavigationManagerCallback(
-					new NavigationManagerCallback() {
-						@Override
-						public void onStopNavigation() {
-							getApp().stopNavigation();
-						}
+			this.navigationManager.setNavigationManagerCallback(new NavigationManagerCallback() {
+				@Override
+				public void onStopNavigation() {
+					if (routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
+						routingHelper.pauseNavigation();
+					} else {
+						getApp().stopNavigation();
+					}
+				}
 
-						@Override
-						public void onAutoDriveEnabled() {
-							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
-							if (!settings.simulateNavigation) {
-								OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
-								sim.startStopRouteAnimation(null);
-								settings.simulateNavigation = true;
-								settings.simulateNavigationStartedFromAdb = true;
-							}
-						}
-					});
-
+				@Override
+				public void onAutoDriveEnabled() {
+					CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+					if (!settings.simulateNavigation) {
+						OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
+						sim.startStopRouteAnimation(null);
+						settings.simulateNavigation = true;
+						settings.simulateNavigationStartedFromAdb = true;
+					}
+				}
+			});
 			// Uncomment if navigating
 			// mNavigationManager.navigationStarted();
 		} else {
@@ -301,7 +312,6 @@ public class NavigationService extends Service {
 
 	public void updateCarNavigation(Location currentLocation) {
 		OsmandApplication app = getApp();
-		RoutingHelper routingHelper = app.getRoutingHelper();
 		TripHelper tripHelper = this.tripHelper;
 		if (carNavigationActive && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {

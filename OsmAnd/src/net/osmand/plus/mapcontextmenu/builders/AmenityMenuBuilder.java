@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
-import static net.osmand.data.Amenity.MAPILLARY;
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
@@ -26,11 +24,8 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
-import java.net.URLDecoder;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -41,6 +36,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	private final Amenity amenity;
 	private AmenityUIHelper rowsBuilder;
+	private final Map<String, String> additionalInfo;
 
 	public AmenityMenuBuilder(@NonNull MapActivity mapActivity, @NonNull Amenity amenity) {
 		super(mapActivity);
@@ -48,6 +44,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		setAmenity(amenity);
 		setShowNearestWiki(true);
 		setShowNearestPoi(!amenity.getType().isWiki());
+		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
+		additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
 	}
 
 	@Override
@@ -60,9 +58,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	public void buildInternal(View view) {
-		AmenityExtensionsHelper extensionsHelper = new AmenityExtensionsHelper(app);
-		Map<String, String> additionalInfo = extensionsHelper.getAmenityExtensions(amenity);
-
 		rowsBuilder = new AmenityUIHelper(mapActivity, getPreferredMapAppLang(), additionalInfo);
 		rowsBuilder.setLight(light);
 		rowsBuilder.setLatLon(getLatLon());
@@ -188,37 +183,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected Map<String, String> getAdditionalCardParams() {
-		Map<String, String> params = new HashMap<>();
-		String imageValue = amenity.getAdditionalInfo("image");
-		String mapillaryValue = amenity.getAdditionalInfo(MAPILLARY);
-		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
-		String wikipediaValue = amenity.getAdditionalInfo(Amenity.WIKIPEDIA);
-		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
-		if (!Algorithms.isEmpty(imageValue)) {
-			params.put("osm_image", getDecodedAdditionalInfo(imageValue));
-		}
-		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put(MAPILLARY, getDecodedAdditionalInfo(mapillaryValue));
-		}
-		if (!Algorithms.isEmpty(wikidataValue)) {
-			params.put(Amenity.WIKIDATA, getDecodedAdditionalInfo(wikidataValue));
-		}
-		if (!Algorithms.isEmpty(wikipediaValue)) {
-			params.put(Amenity.WIKIPEDIA, getDecodedAdditionalInfo(wikipediaValue));
-		}
-		if (!Algorithms.isEmpty(wikimediaValue)) {
-			params.put(Amenity.WIKIMEDIA_COMMONS, getDecodedAdditionalInfo(wikimediaValue));
-		}
-		return params;
-	}
-
-	private String getDecodedAdditionalInfo(String additionalInfo) {
-		try {
-			return URLDecoder.decode(additionalInfo, "UTF-8");
-		} catch (UnsupportedEncodingException | IllegalArgumentException e) {
-			LOG.error(e);
-		}
-		return additionalInfo;
+		return AmenityExtensionsHelper.getImagesParams(additionalInfo);
 	}
 
 	@Nullable

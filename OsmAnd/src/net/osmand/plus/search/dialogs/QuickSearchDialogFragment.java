@@ -203,6 +203,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private static final double DISTANCE_THRESHOLD = 70000; // 70km
 	private static final int EXPIRATION_TIME_MIN = 10; // 10 minutes
 
+	private static boolean isDebugMode = SearchUICore.isDebugMode();
+
 	public enum QuickSearchTab {
 		HISTORY,
 		CATEGORIES,
@@ -334,7 +336,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							AbstractPoiType uselectedPoiType = searchUICore.getUnselectedPoiType();
 							if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getFirstUnknownSearchWord())) {
 								app.getPoiFilters().resetNominatimFilters();
-								filter = app.getPoiFilters().getNominatimPOIFilter();
+								filter = app.getPoiFilters().getNominatimAddressFilter();
 								filter.setFilterByName(searchPhrase.getUnknownSearchPhrase());
 								filter.clearCurrentResults();
 							} else if (uselectedPoiType != null) {
@@ -1144,7 +1146,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void reloadCategoriesInternal() {
 		try {
-			if (SearchUICore.isDebugMode()) {
+			if (isDebugMode) {
 				LOG.info("UI >> Start loading categories");
 			}
 			SearchResultCollection res = searchUICore.shallowSearch(SearchAmenityTypesAPI.class, "", null);
@@ -1216,7 +1218,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					categoriesSearchFragment.updateListAdapter(rows, false);
 				}
 			}
-			if (SearchUICore.isDebugMode()) {
+			if (isDebugMode) {
 				LOG.info("UI >> Categories loaded");
 			}
 		} catch (IOException e) {
@@ -1246,7 +1248,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void reloadCitiesInternal() {
-		if (SearchUICore.isDebugMode()) {
+		if (isDebugMode) {
 			LOG.info("UI >> Start loading nearest cities");
 		}
 		updateCitiesItems();
@@ -1262,11 +1264,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 			@Override
 			public boolean searchFinished(SearchPhrase phrase) {
-				if (SearchUICore.isDebugMode()) {
+				if (isDebugMode) {
 					LOG.info("UI >> Nearest cities found: " + getSearchResultCollectionFormattedSize(getResultCollection()));
 				}
 				updateCitiesItems();
-				if (SearchUICore.isDebugMode()) {
+				if (isDebugMode) {
 					LOG.info("UI >> Nearest cities loaded");
 				}
 				return true;
@@ -1281,7 +1283,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		OsmandSettings settings = app.getSettings();
 		List<QuickSearchListItem> rows = new ArrayList<>();
 
-		if (SearchUICore.isDebugMode()) {
+		if (isDebugMode) {
 			LOG.info("UI >> Start last city searching (within nearests)");
 		}
 		SearchResult lastCity = null;
@@ -1295,7 +1297,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			}
 		}
-		if (SearchUICore.isDebugMode()) {
+		if (isDebugMode) {
 			LOG.info("UI >> Last city found: " + (lastCity != null ? lastCity.localeName : "-"));
 		}
 
@@ -1315,7 +1317,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					LatLon lastCityPoint = settings.getLastSearchedPoint();
 					if (lastCityId != -1 && lastCityPoint != null) {
 						startLastCitySearch(lastCityPoint);
-						if (SearchUICore.isDebugMode()) {
+						if (isDebugMode) {
 							LOG.info("UI >> Start last city searching (standalone)");
 						}
 						runCoreSearch("", false, false, new SearchResultListener() {
@@ -1327,7 +1329,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								if (res1 != null) {
 									for (SearchResult sr : res1.getCurrentSearchResults()) {
 										if (sr.objectType == ObjectType.CITY && ((City) sr.object).getId() == lastCityId) {
-											if (SearchUICore.isDebugMode()) {
+											if (isDebugMode) {
 												LOG.info("UI >> Last city found: " + sr.localeName);
 											}
 											cityFound = true;
@@ -1634,33 +1636,33 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	                            SearchResultListener resultListener) {
 		app.runInUIThread(() -> {
 			if (!paused && !cancelPrev) {
-				if (SearchUICore.isDebugMode()) {
+				if (isDebugMode) {
 					LOG.info("UI >> Showing API results <" + phrase + "> API=<" + searchApi + "> Results=" + apiResults.size());
 				}
 				boolean append = getResultCollection() != null;
 				if (append) {
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> Appending API results <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 					getResultCollection().addSearchResults(apiResults, true, true);
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> API results appended <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 				} else {
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> Assign API results <" + phrase + "> API=<" + searchApi + ">");
 					}
 					SearchResultCollection resCollection = new SearchResultCollection(phrase);
 					resCollection.addSearchResults(apiResults, true, true);
 					setResultCollection(resCollection);
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> API results assigned <" + phrase + "> API=<" + searchApi + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 				}
 				if (!hasRegionCollection && resultListener != null) {
 					resultListener.publish(getResultCollection(), append);
 				}
-				if (SearchUICore.isDebugMode()) {
+				if (isDebugMode) {
 					LOG.info("UI >> API results shown <" + phrase + "> API=<" + searchApi + "> Results=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 				}
 			}
@@ -1673,26 +1675,26 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	                               SearchResultListener resultListener) {
 		app.runInUIThread(() -> {
 			if (!paused && !cancelPrev) {
-				if (SearchUICore.isDebugMode()) {
+				if (isDebugMode) {
 					LOG.info("UI >> Showing region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
 				}
 				if (getResultCollection() != null) {
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> Combining region results <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(getResultCollection()));
 					}
 					SearchResultCollection resCollection = getResultCollection().combineWithCollection(regionResultCollection, true, true);
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> Region results combined <" + phrase + "> Region=<" + region.getFile().getName() + "> Result collection=" + getSearchResultCollectionFormattedSize(resCollection));
 					}
 					if (resultListener != null) {
 						resultListener.publish(resCollection, true);
 					}
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(resCollection));
 					}
 				} else if (resultListener != null) {
 					resultListener.publish(regionResultCollection, false);
-					if (SearchUICore.isDebugMode()) {
+					if (isDebugMode) {
 						LOG.info("UI >> Region results shown <" + phrase + "> Region=<" + region.getFile().getName() + "> Results=" + getSearchResultCollectionFormattedSize(regionResultCollection));
 					}
 				}

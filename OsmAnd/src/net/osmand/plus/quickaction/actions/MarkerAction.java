@@ -21,7 +21,7 @@ public class MarkerAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(MARKER_ACTION_ID,
 			"marker.add", MarkerAction.class).
 			nameRes(R.string.quick_action_add_marker).iconRes(R.drawable.ic_action_flag).nonEditable().
-			category(QuickActionType.CREATE_CATEGORY);
+			category(QuickActionType.CONFIGURE_MAP);
 
 
 	public MarkerAction() {

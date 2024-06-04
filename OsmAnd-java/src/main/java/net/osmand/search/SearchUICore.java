@@ -397,8 +397,7 @@ public class SearchUICore {
 		SearchCoreFactory.SearchAmenityBrandAPI searchAmenityBrandAPI = new SearchCoreFactory.SearchAmenityBrandAPI();
 		apis.add(searchAmenityBrandAPI);
 		apis.add(new SearchAmenityByTypeAPI(poiTypes, searchAmenityTypesAPI));
-		SearchBuildingAndIntersectionsByStreetAPI streetsApi =
-				new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
+		SearchBuildingAndIntersectionsByStreetAPI streetsApi = new SearchCoreFactory.SearchBuildingAndIntersectionsByStreetAPI();
 		apis.add(streetsApi);
 		SearchStreetByCityAPI cityApi = new SearchCoreFactory.SearchStreetByCityAPI(streetsApi);
 		apis.add(cityApi);

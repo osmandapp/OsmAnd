@@ -95,6 +95,10 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		ReadPointDescriptionFragment.showInstance(mapActivity, description);
 	}
 
+	protected Map<String, String> getAdditionalCardParams() {
+		return AmenityExtensionsHelper.getImagesParams(amenityExtensions);
+	}
+
 	@Override
 	public void buildInternal(View view) {
 		buildDateRow(view, wpt.time);

@@ -1008,9 +1008,9 @@
     <string name="local_index_tile_data_expire">Χρόνος λήξης (σε λεπτά): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Μέγιστη εστίαση: %1$s</string>
     <string name="local_index_tile_data_minzoom">Ελάχιστη εστίαση: %1$s</string>
-    <string name="edit_tilesource_maxzoom">Μέγιστη εστίαση</string>
+    <string name="edit_tilesource_maxzoom">Μέγιστο ζουμ</string>
     <string name="edit_tilesource_expiration_time">Χρόνος λήξης (σε λεπτά)</string>
-    <string name="edit_tilesource_minzoom">Ελάχιστη εστίαση</string>
+    <string name="edit_tilesource_minzoom">Ελάχιστο ζουμ</string>
     <string name="maps_define_edit">Καθορισμός/Επεξεργασία…</string>
     <string name="local_index_tile_data_downloadable">Διαθέσιμο για λήψη: %1$s</string>
     <string name="local_index_tile_data_zooms">Μεταφορτωμένα επίπεδα εστίασης: %1$s</string>
@@ -4330,4 +4330,5 @@
     <string name="map_3d_mode_description">Αγγίξτε τον χάρτη με δύο δάχτυλα και τα μετακινήσετε τον πάνω και κάτω για να προσαρμόσετε την κλίση του χάρτη.</string>
     <string name="visible_in_3d_mode">Ορατό σε λειτουργία 3D</string>
     <string name="map_3d_mode_hint">Με το παρατεταμένο πάτημα του κουμπιού επιτρέπει την αλλαγή της θέσης του κουμπιού.</string>
+    <string name="shared_strings_all_regions">Όλες οι περιοχές</string>
 </resources>

@@ -9,16 +9,19 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ColorPalette;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -38,7 +41,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -58,10 +60,10 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -93,6 +95,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
 
+	private final ConcurrentHashMap<String, ColorPalette> cachedTerrainModeColorPalette = new ConcurrentHashMap<>();
+
 	private TerrainLayer terrainLayer;
 
 	@Override
@@ -106,7 +110,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
 		TerrainMode[] tms = TerrainMode.values(app);
-		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKey()).makeProfile();
+		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 
@@ -250,9 +254,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN.set(enabled);
 	}
 
-	public boolean isSlopeMode() {
-		return getTerrainMode().isColor();
-	}
 
 	public boolean isHillshadeMode() {
 		return getTerrainMode().isHillshade();
@@ -263,7 +264,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void setTerrainMode(TerrainMode mode) {
-		TERRAIN_MODE.set(mode.getKey());
+		TERRAIN_MODE.set(mode.getKeyName());
 	}
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {
@@ -639,6 +640,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(ContourLinesAction.TYPE);
 		quickActionTypes.add(TerrainAction.TYPE);
+		quickActionTypes.add(TerrainColorSchemeAction.TYPE);
 		return quickActionTypes;
 	}
 
@@ -671,5 +673,29 @@ public class SRTMPlugin extends OsmandPlugin {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
 		mapRendererContext.updateVerticalExaggerationScale();
+	}
+
+	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
+		ColorPalette colorPalette = cachedTerrainModeColorPalette.get(modeKey);
+		if (colorPalette != null) {
+			listener.collectingPalletFinished(colorPalette);
+		} else {
+			CollectColorPalletsTask collectColorPalletsTask = new CollectColorPalletsTask(app, modeKey, new CollectColorPalletListener() {
+
+				@Override
+				public void collectingPalletStarted() {
+					listener.collectingPalletStarted();
+				}
+
+				@Override
+				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
+					if (colorPalette != null) {
+						cachedTerrainModeColorPalette.put(modeKey, colorPalette);
+					}
+					listener.collectingPalletFinished(colorPalette);
+				}
+			});
+			collectColorPalletsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 }

@@ -22,7 +22,7 @@ public class OpenWeatherAction extends QuickAction {
 			"weather.forecast.open", OpenWeatherAction.class)
 			.nameRes(R.string.open_weather_action)
 			.iconRes(R.drawable.ic_action_umbrella).nonEditable()
-			.category(QuickActionType.OPEN);
+			.category(QuickActionType.WEATHER);
 
 	public OpenWeatherAction() {
 		super(TYPE);

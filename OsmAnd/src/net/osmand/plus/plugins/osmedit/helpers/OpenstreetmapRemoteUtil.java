@@ -1,6 +1,7 @@
 package net.osmand.plus.plugins.osmedit.helpers;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.osm.edit.Entity.REMOVE_TAG_PREFIX;
 
 import android.util.Xml;
 import android.widget.Toast;
@@ -278,7 +279,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		for (String k : entity.getTagKeySet()) {
 			String val = entity.getTag(k);
 			if (val.length() == 0 || k.length() == 0 || POI_TYPE_TAG.equals(k) ||
-					k.startsWith(Entity.REMOVE_TAG_PREFIX) || k.contains(Entity.REMOVE_TAG_PREFIX))
+					k.startsWith(REMOVE_TAG_PREFIX) || k.contains(REMOVE_TAG_PREFIX))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
@@ -402,7 +403,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 				// merge non existing tags
 				Map<String, String> updatedTags = new HashMap<>();
 				for (String tagKey : entity.getTagKeySet()) {
-					if (tagKey != null && !deletedTag(n, tagKey)) {
+					if (tagKey != null && !isDeletedTag(n, tagKey)) {
 						addIfNotNull(tagKey, entity.getTag(tagKey), updatedTags);
 					}
 				}
@@ -451,8 +452,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		}
 	}
 
-	private boolean deletedTag(Entity entity, String tag) {
-		return entity.getTagKeySet().contains(Entity.REMOVE_TAG_PREFIX + tag);
+	public static boolean isDeletedTag(@NonNull Entity entity, @NonNull String tag) {
+		return entity.getTagKeySet().contains(REMOVE_TAG_PREFIX + tag);
 	}
 
 	@Override

@@ -201,9 +201,7 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 			} else if (item.getType() == ROAD_DATA) {
 				parent = app.getAppPath(ROADS_INDEX_DIR);
 			} else if (item.getType() == TILES_DATA) {
-				if (fileName.endsWith(HEIGHTMAP_SQLITE_EXT)) {
-					parent = app.getAppPath(HEIGHTMAP_INDEX_DIR);
-				} else if (fileName.endsWith(TIF_EXT)) {
+				if (fileName.endsWith(TIF_EXT)) {
 					parent = app.getAppPath(GEOTIFF_DIR);
 				} else {
 					parent = app.getAppPath(TILES_INDEX_DIR);

@@ -60,6 +60,8 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				trackFile.set3DVisualizationType(gpxFile.get3DVisualizationType());
 				trackFile.set3DWallColoringType(gpxFile.get3DWallColoringType());
 				trackFile.set3DLinePositionType(gpxFile.get3DLinePositionType());
+				trackFile.setAdditionalExaggeration(gpxFile.getAdditionalExaggeration());
+				trackFile.setElevationMeters(gpxFile.getElevationMeters());
 
 				SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(trackFile, app);

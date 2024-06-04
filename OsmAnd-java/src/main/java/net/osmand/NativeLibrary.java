@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import net.osmand.router.*;
 import org.apache.commons.logging.Log;
 
 import com.google.gson.JsonObject;
@@ -32,17 +33,8 @@ import net.osmand.data.MapObject;
 import net.osmand.data.QuadRect;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.GeneralRouter;
 import net.osmand.router.HHRouteDataStructure.HHRoutingConfig;
-import net.osmand.router.HHRoutePlanner;
-import net.osmand.router.NativeTransportRoutingResult;
-import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
-import net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
-import net.osmand.router.RouteResultPreparation;
-import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RoutingContext;
-import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -297,7 +289,7 @@ public class NativeLibrary {
 		for (RouteSegmentResult rsr : results) {
 			initRouteRegion(gCtx, rsr);
 		}
-		gCtx.result.addAll(results);
+		gCtx.fullRoute.addAll(results);
 		return gCtx;
 	}
 

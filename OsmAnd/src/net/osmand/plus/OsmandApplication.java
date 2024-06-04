@@ -107,6 +107,7 @@ import net.osmand.plus.track.helpers.GpsFilterHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDisplayHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.OsmandMap;
@@ -308,7 +309,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	private void createInUiThread() {
-		new Toast(this); // activate in UI thread to avoid further exceptions
+		new Toast(AndroidUtils.createDisplayContext(this)); // activate in UI thread to avoid further exceptions
 		new AsyncTask<View, Void, Void>() {
 			@Override
 			protected Void doInBackground(View... params) {

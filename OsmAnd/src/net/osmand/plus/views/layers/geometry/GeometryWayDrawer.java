@@ -176,6 +176,7 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 			GeometryWayStyle<?> style = pathsData.get(0).style;
 			showRaised = style.trackVisualizationType != Gpx3DVisualizationType.NONE;
 			additionalExaggeration = style.additionalExaggeration;
+			fixedHeight = style.elevationMeters;
 			useFixedHeight = style.trackVisualizationType == Gpx3DVisualizationType.FIXED_HEIGHT;
 			wallColorType = style.trackWallColorType;
 			linePositionType = style.trackLinePositionType;

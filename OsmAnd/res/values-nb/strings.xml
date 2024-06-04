@@ -5540,4 +5540,13 @@
     <string name="when_exceeded">Når overskredet</string>
     <string name="auto_zoom">Autoforstørrelse</string>
     <string name="shared_string_unchanged">Uendret</string>
+    <string name="gpx_approximation_geo_java">Geometribasert (Java, rask)</string>
+    <string name="delete_trash_item_confirmation_desc">Slett «%1$s» for godt?</string>
+    <string name="disable_map_layers">Skru av kartlag</string>
+    <string name="travel_topics">Reiseemner</string>
+    <string name="play_weather_forecast">Spill av værmelding</string>
+    <string name="routing_attr_avoid_cobblestone_name">Unngå brostein</string>
+    <string name="routing_attr_avoid_cobblestone_description">Unngå brostein</string>
+    <string name="show_debug_info">Vis avlusningsinfø</string>
+    <string name="map_text">Karttekst</string>
 </resources>

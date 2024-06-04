@@ -4,6 +4,7 @@ import static net.osmand.gpx.GPXTrackAnalysis.ANALYSIS_VERSION;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.DATA_VERSION;
 import static net.osmand.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.gpx.GpxParameter.NEAREST_CITY_NAME;
 
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
 import net.osmand.gpx.GPXUtilities;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.AppInitializeListener;
@@ -81,34 +83,12 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		SQLiteConnection conn = database.openConnection(false);
 		if (conn != null) {
 			try {
+				boolean isApplicationInitializing = app.isApplicationInitializing();
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (GpxDbUtils.isAnalyseNeeded(item)) {
-						GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
-						GPXTrackAnalysis analysis = gpxFile.getAnalysis(file.lastModified(), null, null, PluginsHelper.getTrackPointsAnalyser());
-						if (item == null) {
-							item = new GpxDataItem(app, file);
-							database.insertItem(item, conn);
-						}
-						item.setAnalysis(analysis);
-						long creationTime = item.requireParameter(FILE_CREATION_TIME);
-						if (creationTime <= 0) {
-							item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
-						}
-						setupNearestCityName(item);
-						double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);
-						if (additionalExaggeration < SRTMPlugin.MIN_VERTICAL_EXAGGERATION
-								|| additionalExaggeration > SRTMPlugin.MAX_VERTICAL_EXAGGERATION) {
-							item.setParameter(ADDITIONAL_EXAGGERATION, (double) SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
-						}
-						item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
-
-						if (database.getDataItem(file, conn) != null) {
-							gpxDbHelper.updateDataItem(item);
-						} else {
-							database.insertItem(item, conn);
-						}
+					if (GpxDbUtils.isAnalyseNeeded(item) && !isApplicationInitializing) {
+						item = updateGpxDataItem(conn, item);
 					}
 					if (listener != null) {
 						listener.onGpxDataItemRead(item);
@@ -127,6 +107,40 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 			cancel(false);
 		}
 		return null;
+	}
+
+	@NonNull
+	private GpxDataItem updateGpxDataItem(@NonNull SQLiteConnection conn, @Nullable GpxDataItem item) {
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(file);
+		if (item == null) {
+			item = new GpxDataItem(app, file);
+			database.insertItem(item, conn);
+		}
+		if (gpxFile.error == null) {
+			TrackPointsAnalyser analyser = PluginsHelper.getTrackPointsAnalyser();
+			item.setAnalysis(gpxFile.getAnalysis(file.lastModified(), null, null, analyser));
+
+			long creationTime = item.requireParameter(FILE_CREATION_TIME);
+			if (creationTime <= 0) {
+				item.setParameter(FILE_CREATION_TIME, GPXUtilities.getCreationTime(gpxFile));
+			}
+			item.setParameter(FILE_LAST_MODIFIED_TIME, file.lastModified());
+
+			setupNearestCityName(item);
+			double additionalExaggeration = item.requireParameter(ADDITIONAL_EXAGGERATION);
+			if (additionalExaggeration < SRTMPlugin.MIN_VERTICAL_EXAGGERATION
+					|| additionalExaggeration > SRTMPlugin.MAX_VERTICAL_EXAGGERATION) {
+				item.setParameter(ADDITIONAL_EXAGGERATION, (double) SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
+			}
+			item.setParameter(DATA_VERSION, GpxDbUtils.createDataVersion(ANALYSIS_VERSION));
+
+			if (database.getDataItem(file, conn) != null) {
+				gpxDbHelper.updateDataItem(item);
+			} else {
+				database.insertItem(item, conn);
+			}
+		}
+		return item;
 	}
 
 	private void setupNearestCityName(@NonNull GpxDataItem item) {

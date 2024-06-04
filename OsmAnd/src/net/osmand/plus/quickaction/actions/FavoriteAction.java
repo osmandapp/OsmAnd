@@ -37,7 +37,7 @@ public class FavoriteAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(FAVORITE_ACTION_ID,
 			"fav.add", FavoriteAction.class).
 			nameRes(R.string.quick_action_add_favorite).iconRes(R.drawable.ic_action_favorite).
-			category(QuickActionType.CREATE_CATEGORY);
+			category(QuickActionType.FAVORITES);
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DIALOG = "dialog";
 	public static final String KEY_CATEGORY_NAME = "category_name";

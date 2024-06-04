@@ -15,6 +15,7 @@ import android.graphics.Shader;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ColorPalette;
 import net.osmand.core.jni.QListFColorARGB;
 import net.osmand.core.jni.VectorLinesCollection;
 import net.osmand.plus.routing.ColoringType;
@@ -267,7 +268,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 		private int getCircleColor(@NonNull GeometrySolidWayStyle<?> style) {
 			if (style instanceof GeometryGradientWayStyle<?>) {
 				GeometryGradientWayStyle<?> gradientStyle = ((GeometryGradientWayStyle<?>) style);
-				return RouteColorize.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
+				return ColorPalette.getIntermediateColor(gradientStyle.currColor, gradientStyle.nextColor, percent);
 			}
 			return style.getColor(0);
 		}

@@ -1,6 +1,9 @@
 package net.osmand.plus.views;
 
 
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
+import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -25,8 +28,10 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -44,14 +49,14 @@ import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
+import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.auto.SurfaceRenderer;
+import net.osmand.plus.auto.views.CarSurfaceView;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.MapDisplayPositionManager;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
@@ -85,12 +90,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MAX_ZOOM;
-import static net.osmand.plus.views.layers.base.BaseMapLayer.DEFAULT_MIN_ZOOM;
-
 public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public static final float DEFAULT_ELEVATION_ANGLE = 90;
@@ -112,6 +111,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
+	private final MapRenderFPSMeasurement renderFPSMeasurement = new MapRenderFPSMeasurement();
 
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
@@ -129,24 +129,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
 		int colorNight = MAP_DEFAULT_COLOR;
-	}
-
-	private static class FPSMeasurement {
-		int fpsMeasureCount;
-		int fpsMeasureMs;
-		long fpsFirstMeasurement;
-		float fps;
-
-		void calculateFPS(long start, long end) {
-			fpsMeasureMs += end - start;
-			fpsMeasureCount++;
-			if (fpsMeasureCount > 10 || (start - fpsFirstMeasurement) > 400) {
-				fpsFirstMeasurement = start;
-				fps = (1000f * fpsMeasureCount / fpsMeasureMs);
-				fpsMeasureCount = 0;
-				fpsMeasureMs = 0;
-			}
-		}
 	}
 
 	public interface OnTrackBallListener {
@@ -304,9 +286,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		animatedDraggingThread = new AnimateDraggingMapThread(this);
 		animatedMapMarkersThread = new AnimateMapMarkersThread(this);
 
-		WindowManager mgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 		dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
+		AndroidUtils.getDisplay(ctx).getMetrics(dm);
 		LatLon ll = settings.getLastKnownMapLocation();
 		currentViewport = new RotatedTileBoxBuilder()
 				.setLocation(ll.getLatitude(), ll.getLongitude())
@@ -612,7 +593,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		if (baseZoom >= MIN_ZOOM_LEVEL_TO_ADJUST_CAMERA_TILT && baseZoom <= MAX_ZOOM_LIMIT) {
 			int angle = 90 - (baseZoom - 2) * 5;
 			if (angle >= MIN_ALLOWED_ELEVATION_ANGLE && angle < DEFAULT_ELEVATION_ANGLE) {
-				animatedDraggingThread.startTilting(angle);
+				animatedDraggingThread.startTilting(angle, AnimateDraggingMapThread.ZOOM_ANIMATION_TIME);
 			}
 		}
 	}
@@ -1115,11 +1096,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float getFPS() {
-		return main.fps;
+		return main.getFps();
 	}
 
 	public float getSecondaryFPS() {
-		return additional.fps;
+		return additional.getFps();
+	}
+
+	public float calculateRenderFps() {
+		MapRendererView renderer = getMapRenderer();
+		if (renderer != null) {
+			renderFPSMeasurement.calculateFPS(renderer.getFrameId());
+		}
+		return renderFPSMeasurement.getFps();
 	}
 
 	public boolean isAnimatingMapZoom() {

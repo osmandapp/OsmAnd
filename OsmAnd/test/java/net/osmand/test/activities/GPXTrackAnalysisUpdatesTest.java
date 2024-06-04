@@ -8,7 +8,6 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.test.espresso.Espresso;
-import androidx.test.espresso.IdlingPolicies;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
@@ -17,10 +16,12 @@ import net.osmand.core.android.MapRendererView;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
+import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.test.common.AndroidTest;
 import net.osmand.test.common.BaseIdlingResource;
@@ -33,25 +34,26 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class AnalysisUpdateCallsTest extends AndroidTest {
+public class GPXTrackAnalysisUpdatesTest extends AndroidTest {
 
 	private static final String SELECTED_GPX_NAME = "gpx_recalc_test.gpx";
 
 	@Rule
 	public ActivityScenarioRule<MapActivity> scenarioRule = new ActivityScenarioRule<>(MapActivity.class);
 
-	private ObserveDistToFinishIdlingResource observeDistToFinishIdlingResource;
+	private ObserveDistToFinishIdlingResource idlingResource;
 
 	private GpxDbHelper gpxDbHelper;
 	private OsmandMapTileView mapView;
 	private GpxSelectionHelper selectionHelper;
-	private int startFrameId;
+
+	private File file;
 
 	@Before
 	@Override
@@ -61,14 +63,18 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 		mapView = app.getOsmandMap().getMapView();
 		selectionHelper = app.getSelectedGpxHelper();
 
-		IdlingPolicies.setIdlingResourceTimeout(360, TimeUnit.SECONDS);
+		importAndShowGpx();
+	}
+
+	private void importAndShowGpx() {
 		try {
 			ResourcesImporter.importGpxAssets(app, Collections.singletonList(SELECTED_GPX_NAME), new SaveImportedGpxListener() {
 				@Override
 				public void onGpxSaved(@Nullable String error, @NonNull GPXFile gpxFile) {
 					if (Algorithms.isEmpty(error)) {
-						GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
-						selectionHelper.selectGpxFile(gpxFile, params);
+						file = new File(ImportHelper.getGpxDestinationDir(app, true), SELECTED_GPX_NAME);
+						gpxFile.path = file.getAbsolutePath();
+						selectionHelper.selectGpxFile(gpxFile, GpxSelectionParams.getDefaultSelectionParams());
 					}
 				}
 			});
@@ -80,8 +86,8 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 	@After
 	public void cleanUp() {
 		super.cleanUp();
-		if (observeDistToFinishIdlingResource != null) {
-			unregisterIdlingResources(observeDistToFinishIdlingResource);
+		if (idlingResource != null) {
+			unregisterIdlingResources(idlingResource);
 		}
 	}
 
@@ -89,53 +95,69 @@ public class AnalysisUpdateCallsTest extends AndroidTest {
 	public void test() throws Throwable {
 		skipAppStartDialogs(app);
 
-		observeDistToFinishIdlingResource = new ObserveDistToFinishIdlingResource(app);
-		registerIdlingResources(observeDistToFinishIdlingResource);
+		idlingResource = new ObserveDistToFinishIdlingResource(app);
+		registerIdlingResources(idlingResource);
 
 		Espresso.onIdle();
 	}
 
 	private class ObserveDistToFinishIdlingResource extends BaseIdlingResource {
 
-		private static final int CHECK_INTERVAL = 15000;
+		private static final int CHECKS_COUNT = 30;
+		private static final int CHECK_INTERVAL_MS = 1000;
+		private static final int LOW_FPS_VALUE = 15;
+		private static final int LOW_FPS_COUNT = 10;
 
-		private boolean idle = false;
+		private int checksCounter;
+		private int lowFpsCounter;
 
 		public ObserveDistToFinishIdlingResource(@NonNull OsmandApplication app) {
 			super(app);
-			Handler handler = new Handler(Looper.getMainLooper());
-			handler.postDelayed(createTaskRunnable(), 30000);
+			startHandler();
 		}
 
-		private Runnable createTaskRunnable() {
-			return () -> {
-				MapRendererView rendererView = mapView.getMapRenderer();
-				if (rendererView != null) {
-					if (startFrameId == 0) {
-						startFrameId = rendererView.getFrameId();
-						Handler handler = new Handler(Looper.getMainLooper());
-						handler.postDelayed(createTaskRunnable(), CHECK_INTERVAL);
-					} else {
-						int renderedFrames = rendererView.getFrameId() - startFrameId;
-						if (renderedFrames < 25) {
-//							throw new AssertionError("Map rendering too slow. rendered " + renderedFrames + " frames");
-						}
-						idle = true;
-						notifyIdleTransition();
-					}
+		private void startHandler() {
+			Handler handler = new Handler(Looper.getMainLooper());
+			handler.postDelayed(() -> {
+				checksCounter++;
+
+				checkFPS();
+				checkAnalysisUpdate();
+
+				if (isIdleNow()) {
+					notifyIdleTransition();
 				} else {
-					throw new AssertionError("Failed to get map renderer");
+					startHandler();
 				}
-				app.showToastMessage("readTrackItemCount " + GpxDbHelper.readTrackItemCount);
-				if (GpxDbHelper.readTrackItemCount > 2) {
-//					throw new AssertionError("To many updates of analysis " + GpxDbHelper.readTrackItemCount);
+			}, CHECK_INTERVAL_MS);
+		}
+
+		private void checkFPS() {
+			MapRendererView renderer = mapView.getMapRenderer();
+			if (renderer != null) {
+				float fps = mapView.calculateRenderFps();
+				if (fps < LOW_FPS_VALUE) {
+					lowFpsCounter++;
+					if (lowFpsCounter >= LOW_FPS_COUNT) {
+						app.showToastMessage("Map rendering too slow. rendered " + OsmAndFormatter.formatFps(fps) + " frames");
+//						throw new AssertionError("Map rendering too slow. rendered " + OsmAndFormatter.formatFps(fps) + " frames");
+					}
 				}
-			};
+			} else {
+				throw new AssertionError("Failed to get map renderer");
+			}
+		}
+
+		private void checkAnalysisUpdate() {
+			gpxDbHelper.getItem(file); // simulate multiple calls for getting GpxDataItem
+			if (GpxDbHelper.readTrackItemCount > 2) {
+				throw new AssertionError("To many updates of analysis " + GpxDbHelper.readTrackItemCount);
+			}
 		}
 
 		@Override
 		public boolean isIdleNow() {
-			return idle;
+			return checksCounter >= CHECKS_COUNT;
 		}
 	}
 }

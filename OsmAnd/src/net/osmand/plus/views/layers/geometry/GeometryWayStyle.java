@@ -26,6 +26,7 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 	protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
 	protected Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	protected float additionalExaggeration = 1f;
+	protected float elevationMeters = 1000f;
 
 	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
@@ -137,7 +138,8 @@ public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 				&& o.trackVisualizationType == ((GeometryWayStyle<?>) other).trackVisualizationType
 				&& o.trackWallColorType == ((GeometryWayStyle<?>) other).trackWallColorType
 				&& o.trackLinePositionType == ((GeometryWayStyle<?>) other).trackLinePositionType
-				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration;
+				&& o.additionalExaggeration == ((GeometryWayStyle<?>) other).additionalExaggeration
+				&& o.elevationMeters == ((GeometryWayStyle<?>) other).elevationMeters;
 	}
 
 	public int getColorizationScheme() {
