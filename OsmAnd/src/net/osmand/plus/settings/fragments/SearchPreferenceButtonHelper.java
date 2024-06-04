@@ -33,12 +33,14 @@ class SearchPreferenceButtonHelper {
 
     private SearchConfiguration getSearchConfiguration() {
         if (!searchConfigurationCache.isPresent()) {
-            searchConfigurationCache =
-                    Optional.of(
-                            baseSettingsFragment
-                                    .getMapActivity()
-                                    .createSearchConfiguration(new MainSettingsFragment()));
+            searchConfigurationCache = Optional.of(createSearchConfiguration());
         }
         return searchConfigurationCache.get();
+    }
+
+    private SearchConfiguration createSearchConfiguration() {
+        return baseSettingsFragment
+                .getMapActivity()
+                .createSearchConfiguration(new MainSettingsFragment());
     }
 }
