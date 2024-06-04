@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.keyevent.CommandToActionConverter;
 import net.osmand.plus.quickaction.MapButtonsHelper;
 import net.osmand.plus.quickaction.QuickAction;
@@ -138,7 +139,7 @@ public class KeyAssignment {
 
 	@DrawableRes
 	public int getIconId(@NonNull Context context) {
-		return action.getIconRes(context);
+		return action != null ? action.getIconRes(context) : R.drawable.ic_action_info_outlined;
 	}
 
 	@Override

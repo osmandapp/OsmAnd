@@ -68,11 +68,6 @@ public abstract class KeyEventCommand implements Callback {
 		return commandId;
 	}
 
-	@DrawableRes
-	public int getIconId() { // TODO get appropriate icon
-		return R.drawable.ic_action_my_location;
-	}
-
 	@NonNull
 	public abstract String toHumanString(@NonNull Context context);
 }
