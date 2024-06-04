@@ -14,7 +14,7 @@ class SearchPreferenceButtonHelper {
 
     private final BaseSettingsFragment baseSettingsFragment;
 
-    public SearchPreferenceButtonHelper(BaseSettingsFragment baseSettingsFragment) {
+    public SearchPreferenceButtonHelper(final BaseSettingsFragment baseSettingsFragment) {
         this.baseSettingsFragment = baseSettingsFragment;
     }
 
