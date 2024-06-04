@@ -162,7 +162,7 @@ public class KeyAssignmentsFragment extends BaseOsmAndFragment
 
 	private void updateFabButton(@NonNull View view) {
 		FloatingActionButton addButton = view.findViewById(R.id.fabButton);
-		addButton.setVisibility(!controller.isInEditMode() ? View.VISIBLE : View.GONE);
+		addButton.setVisibility(controller.isDeviceTypeEditable() && !controller.isInEditMode() ? View.VISIBLE : View.GONE);
 		addButton.setOnClickListener(v -> controller.askAddAssignment());
 	}
 
