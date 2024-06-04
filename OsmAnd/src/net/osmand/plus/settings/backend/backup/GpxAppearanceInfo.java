@@ -1,22 +1,6 @@
 package net.osmand.plus.settings.backend.backup;
 
-import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
-import static net.osmand.gpx.GpxParameter.MAX_FILTER_HDOP;
-import static net.osmand.gpx.GpxParameter.MAX_FILTER_SPEED;
-import static net.osmand.gpx.GpxParameter.MIN_FILTER_ALTITUDE;
-import static net.osmand.gpx.GpxParameter.MIN_FILTER_SPEED;
-import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.SMOOTHING_THRESHOLD;
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.gpx.GpxParameter.*;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
 import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
@@ -68,6 +52,7 @@ public class GpxAppearanceInfo {
 	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private float verticalExaggeration = 1f;
+	private float elevationMeters = 1000f;
 
 	public GpxAppearanceInfo() {
 	}
@@ -85,6 +70,7 @@ public class GpxAppearanceInfo {
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		verticalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
+		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
 
 		GPXTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
@@ -112,6 +98,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
 		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
 		writeParam(json, "vertical_exaggeration_scale", verticalExaggeration);
+		writeParam(json, "elevation_meters", elevationMeters);
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
@@ -160,6 +147,8 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
 		hasAnyParam |= json.has("vertical_exaggeration_scale");
 		gpxAppearanceInfo.verticalExaggeration = (float) json.optDouble("vertical_exaggeration_scale", SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
+		hasAnyParam |= json.has("elevation_meters");
+		gpxAppearanceInfo.elevationMeters = (float) json.optDouble("elevation_meters");
 
 		hasAnyParam |= json.has("time_span");
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");

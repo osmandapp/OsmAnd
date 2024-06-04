@@ -89,10 +89,12 @@ public abstract class MultiColoringGeometryWay
 		Gpx3DWallColorType trackWallColorType = track3DStyle == null ? Gpx3DWallColorType.NONE : track3DStyle.getWallColorType();
 		Gpx3DLinePositionType trackLinePositionType = track3DStyle == null ? Gpx3DLinePositionType.TOP : track3DStyle.getLinePositionType();
 		float exaggeration = track3DStyle == null ? 1f : track3DStyle.getAdditionalExaggeration();
+		float elevationMeters = track3DStyle == null ? 1000f : track3DStyle.getElevationMeters();
 		style.trackVisualizationType = trackVisualizationType;
 		style.trackWallColorType = trackWallColorType;
 		style.trackLinePositionType = trackLinePositionType;
 		style.additionalExaggeration = exaggeration;
+		style.elevationMeters = elevationMeters;
 	}
 
 	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
