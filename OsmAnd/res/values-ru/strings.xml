@@ -95,8 +95,8 @@
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Переключатель автомасштаба карты</string>
     <string name="quick_action_auto_zoom_desc">Кнопка переключения автомасштабирования на основе скорости.</string>
-    <string name="quick_action_auto_zoom_on">Включение автомасштаба</string>
-    <string name="quick_action_auto_zoom_off">Выключение автомасштаба</string>
+    <string name="quick_action_auto_zoom_on">Включить автомасштабирование</string>
+    <string name="quick_action_auto_zoom_off">Выключить автомасштабирование</string>
     <string name="quick_action_add_destination">Добавить пункт назначения</string>
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Первый промежуточный пункт</string>
@@ -1326,7 +1326,7 @@
     <string name="animate_routing_route_not_calculated">Сначала постройте маршрут</string>
     <string name="animate_routing_route">Моделирование с использованием рассчитанного маршрута</string>
     <string name="animate_routing_gpx">Моделирование с использованием GPX трека</string>
-    <string name="auto_zoom_none">Без автомасштаба</string>
+    <string name="auto_zoom_none">Без автомасштабирования</string>
     <string name="auto_zoom_close">К ближнему плану</string>
     <string name="auto_zoom_far">К среднему плану</string>
     <string name="auto_zoom_farthest">К дальнему плану</string>
@@ -2054,7 +2054,7 @@
     <string name="data_is_not_available">Данные недоступны</string>
     <string name="clear_updates_proposition_message">Загруженные обновления можно удалить и вернуться к первоначальной редакции карты</string>
     <string name="add_time_span">Добавить временной интервал</string>
-    <string name="road_blocked">Нежелательный участок</string>
+    <string name="road_blocked">Дорога перекрыта</string>
     <string name="nm">мор. миля</string>
     <string name="nm_h">уз</string>
     <string name="downloads_left_template">Осталось загрузок: %1$s</string>
@@ -5471,21 +5471,21 @@
     <string name="live_monitoring_adress_descr">Укажите веб-адрес используя следующие параметры: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
     <string name="shared_string_show_icon">Показать значок</string>
     <string name="bicycle_scd_device_name">Велосипед</string>
-    <string name="smart_folder_name_present">Смарт-папка с таким именем уже существует</string>
-    <string name="smart_folder_saved">Смарт-папка сохранена</string>
-    <string name="add_smart_folder">Создать смарт-папку</string>
+    <string name="smart_folder_name_present">Динамическая папка с таким названием уже существует</string>
+    <string name="smart_folder_saved">Динамическая папка сохранена</string>
+    <string name="add_smart_folder">Создать динамическую папку</string>
     <string name="empty_name">Отсутствует имя</string>
     <string name="edit_filter">Изменить фильтр</string>
     <string name="save_as_smart_folder">Сохранить как смарт-папку</string>
-    <string name="delete_smart_folder_dialog_message">Это приведёт к удалению смарт-папки \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Динамическая папка \"%1$s\" будет удалена. (Треки удалены не будут.)</string>
     <string name="empty_smart_folder_title">Нет подходящего трека</string>
     <string name="empty_smart_folder_description">Здесь появится все подходящие треки</string>
     <string name="configure_filter">Настройка фильтра</string>
-    <string name="no_config_smart_folder_title">Не настроен</string>
+    <string name="no_config_smart_folder_title">Не настроена</string>
     <string name="discard_filter_changes">Отменить изменения фильтра</string>
     <string name="shared_string_loading">Загрузка</string>
     <string name="discard_filter_changes_prompt">Сбросить все фильтры?</string>
-    <string name="no_config_smart_folder_description">Смарт-папки позволяют группировать треки по примененным фильтрам</string>
+    <string name="no_config_smart_folder_description">Динамические папки позволяют группировать треки по примененным фильтрам</string>
     <string name="loading_tracks">Перезагрузка треков</string>
     <string name="searching_matching_tracks">Искать все подходящие треки</string>
     <string name="shared_string_is_deleted">%1$s удалено.</string>
