@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
@@ -19,11 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceViewHolder;
-
-import com.bytehamster.lib.preferencesearch.SearchConfiguration;
-import com.bytehamster.lib.preferencesearch.SearchPreferenceFragments;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -273,23 +268,11 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	protected void createToolbar(@NonNull final LayoutInflater inflater, @NonNull final View view) {
 		super.createToolbar(inflater, view);
-		configureSearchPreferenceButton(view.findViewById(R.id.action_button));
+		new SearchPreferenceButtonHelper(this).configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
 
 	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
-	}
-
-	private void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
-		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment(new MainSettingsFragment()));
-		searchPreferenceButton.setImageDrawable(getIcon(R.drawable.searchpreference_ic_search));
-		searchPreferenceButton.setVisibility(View.VISIBLE);
-	}
-
-	private void showSearchPreferenceFragment(final PreferenceFragmentCompat root) {
-		final SearchConfiguration searchConfiguration = getMapActivity().createSearchConfiguration(root);
-		final SearchPreferenceFragments searchPreferenceFragments = new SearchPreferenceFragments(searchConfiguration);
-		searchPreferenceFragments.showSearchPreferenceFragment();
 	}
 }
