@@ -6,8 +6,10 @@ import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -675,6 +677,8 @@ public class GpxUiHelper {
 		gpxFile.set3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		gpxFile.set3DWallColoringType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		gpxFile.set3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
+		gpxFile.setAdditionalExaggeration(helper.getParameter(item, ADDITIONAL_EXAGGERATION));
+		gpxFile.setElevationMeters(helper.getParameter(item, ELEVATION_METERS));
 
 		int color = helper.getParameter(item, COLOR);
 		if (color != 0) {

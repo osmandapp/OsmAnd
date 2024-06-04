@@ -2,6 +2,7 @@ package net.osmand.plus.track.helpers;
 
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
+import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
@@ -136,6 +137,20 @@ public class GpxAppearanceHelper {
 				return exaggeration.floatValue();
 			}
 			return gpxFile.getAdditionalExaggeration();
+		}
+	}
+
+	public float getElevationMeters(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getElevationMeters();
+		} else if (gpxFile.showCurrentTrack) {
+			return settings.CURRENT_TRACK_ELEVATION_METERS.get();
+		} else {
+			Double elevation = getAppearanceParameter(new File(gpxFile.path), ELEVATION_METERS);
+			if (elevation != null) {
+				return elevation.floatValue();
+			}
+			return gpxFile.getElevationMeters();
 		}
 	}
 
