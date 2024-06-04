@@ -253,7 +253,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver, MapRende
 	public void handleTilt() {
 		synchronized (this) {
 			if (mapView != null && mapView.getAnimatedDraggingThread() != null && offscreenMapRendererView != null)
-				mapView.getAnimatedDraggingThread().startTilting(offscreenMapRendererView.getElevationAngle() < 90.0f ? 90.0f : 30.0f);
+				mapView.getAnimatedDraggingThread().startTilting(offscreenMapRendererView.getElevationAngle() < 90.0f ? 90.0f : 30.0f, 0.0f);
 		}
 	}
 
