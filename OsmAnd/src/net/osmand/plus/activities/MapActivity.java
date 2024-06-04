@@ -16,6 +16,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -38,8 +40,11 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
 
 import com.bytehamster.lib.preferencesearch.Navigation;
+import com.bytehamster.lib.preferencesearch.PreferenceFragments;
+import com.bytehamster.lib.preferencesearch.SearchConfiguration;
 import com.bytehamster.lib.preferencesearch.SearchPreferenceResult;
 import com.bytehamster.lib.preferencesearch.SearchPreferenceResultListener;
+import com.bytehamster.lib.preferencesearch.common.UIUtils;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -246,7 +251,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
         trackDetailsMenu.setMapActivity(this);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        _setContentView(R.layout.main);
         enterToFullScreen();
         // Navigation Drawer
         AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
@@ -1642,15 +1647,42 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
     }
 
     @IdRes
-    public static final int FRAGMENT_CONTAINER_VIEW = R.id.fragmentContainer;
+    private static final int FRAGMENT_CONTAINER_VIEW = R.id.fragmentContainer;
+
+    @IdRes
+    private int dummyFragmentContainerViewId = View.NO_ID;
 
     @Override
     public void onSearchResultClicked(@NonNull final SearchPreferenceResult result) {
-        Navigation.navigatePathAndHighlightPreference(
-                result.getResourceFile().getName(),
+        Navigation.showPreferenceScreenAndHighlightPreference(
+                result.getPreferenceFragmentClass().getName(),
                 result.getKey(),
-                true,
                 this,
                 FRAGMENT_CONTAINER_VIEW);
+    }
+
+    private void _setContentView(final @LayoutRes int resource) {
+        final Pair<View, Integer> contentViewAndDummyFragmentContainerViewId =
+                UIUtils.createContentViewAndDummyFragmentContainerViewId(
+                        resource,
+                        this);
+        dummyFragmentContainerViewId = contentViewAndDummyFragmentContainerViewId.second;
+        setContentView(contentViewAndDummyFragmentContainerViewId.first);
+    }
+
+    public SearchConfiguration createSearchConfiguration(final PreferenceFragmentCompat root) {
+        final SearchConfiguration searchConfiguration = new SearchConfiguration();
+        searchConfiguration.setActivity(this);
+        searchConfiguration.setFragmentContainerViewId(FRAGMENT_CONTAINER_VIEW);
+        searchConfiguration.setDummyFragmentContainerViewId(dummyFragmentContainerViewId);
+        searchConfiguration.setPreferenceFragments(
+                PreferenceFragments.getPreferenceFragments(
+                        root,
+                        this,
+                        dummyFragmentContainerViewId));
+        searchConfiguration.setBreadcrumbsEnabled(true);
+        searchConfiguration.setFuzzySearchEnabled(false);
+        searchConfiguration.setHistoryEnabled(true);
+        return searchConfiguration;
     }
 }

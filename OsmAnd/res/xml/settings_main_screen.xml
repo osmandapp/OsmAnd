@@ -4,9 +4,6 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:title="@string/shared_string_settings">
 
-	<com.bytehamster.lib.preferencesearch.SearchPreference
-		android:key="searchPreference" />
-
 	<Preference
 		android:key="global_settings"
 		android:layout="@layout/preference_with_descr"

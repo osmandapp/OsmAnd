@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.SETTINGS_ID;
-import static net.osmand.plus.activities.MapActivity.FRAGMENT_CONTAINER_VIEW;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -47,9 +46,6 @@ import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bytehamster.lib.preferencesearch.BaseSearchPreferenceFragment;
-import com.bytehamster.lib.preferencesearch.PreferenceFragments;
-import com.bytehamster.lib.preferencesearch.SearchConfiguration;
-import com.bytehamster.lib.preferencesearch.SearchPreference;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -147,7 +143,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
 				if (prefManager.setPreferences(preferenceScreen)) {
-					setupSearchablePreferences();
+					setupPreferences();
 					registerPreferences(preferenceScreen);
 				}
 			} else {
@@ -388,18 +384,6 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 
 	protected abstract void setupPreferences();
 
-	private void setupSearchablePreferences() {
-		setupPreferences();
-		final SearchPreference searchPreference = findPreference("searchPreference");
-		if (searchPreference != null) {
-			final SearchConfiguration config = searchPreference.getSearchConfiguration();
-			config.setActivity(getMapActivity());
-            config.setFragmentContainerViewId(FRAGMENT_CONTAINER_VIEW);
-            config.setPreferenceFragmentsSupplier(() -> PreferenceFragments.getPreferenceFragments(new MainSettingsFragment(), getActivity(), FRAGMENT_CONTAINER_VIEW));
-			config.setFuzzySearchEnabled(false);
-		}
-	}
-
 	protected void onBindPreferenceViewHolder(@NonNull Preference preference, @NonNull PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
 			View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
@@ -559,7 +543,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 			if (resId != -1) {
 				addPreferencesFromResource(resId);
 			}
-			setupSearchablePreferences();
+			setupPreferences();
 			registerPreferences(getPreferenceScreen());
 		}
 	}
