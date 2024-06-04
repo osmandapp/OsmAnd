@@ -5525,7 +5525,7 @@
     <string name="shared_string_show_icon">Montri emblemon</string>
     <string name="shared_string_delete_immediately">Forigi senprokraste</string>
     <string name="shared_string_loading">Ŝargado</string>
-    <string name="delete_smart_folder_dialog_message">Tio ĉi forigos la inteligentan dosierujon “%1$s”.</string>
+    <string name="delete_smart_folder_dialog_message">Tio ĉi forigos la inteligentan dosierujon “%1$s”. (Neniu spuro foriĝos.)</string>
     <string name="shared_string_is_deleted">%1$s estas forigita.</string>
     <string name="cloud_item_restored">%1$s estas restarigita al OsmAnd-Nubo.</string>
     <string name="trash_alert_card_desc">Objektoj en la rubujo estos forigitaj post %1$s tagoj.</string>
@@ -5721,4 +5721,7 @@
     <string name="disable_map_layers_descr">Malaktivigi ĉiujn map-tavolojn super la vektora mapo (postulas restarton).</string>
     <string name="disable_map_layers">Malaktivigi surtavolojn</string>
     <string name="height_legend_description">Kolorigitaj altmapoj taŭgas por vidigi map-reliefon.</string>
+    <string name="change_terrain_color_scheme">Ŝanĝi kolor-skemon de tereno</string>
+    <string name="travel_topics">Vojaĝaj temoj</string>
+    <string name="play_weather_forecast">Ruli veterprognozon</string>
 </resources>

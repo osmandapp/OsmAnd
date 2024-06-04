@@ -194,7 +194,7 @@ public class ColorPalette {
 				try {
 					ColorValue rgba = ColorValue.rgba(Double.parseDouble(values[0]), Integer.parseInt(values[1]),
 							Integer.parseInt(values[2]), Integer.parseInt(values[3]),
-							values.length >= 4 ? Integer.parseInt(values[4]) : 255);
+							values.length >= 5 ? Integer.parseInt(values[4]) : 255);
 					palette.colors.add(rgba);
 				} catch (NumberFormatException e) {
 					LOG.error(e.getMessage(), e);

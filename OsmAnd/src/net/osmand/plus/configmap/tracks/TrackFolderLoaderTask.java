@@ -37,6 +37,7 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	private long loadingTime = 0;
 	private int tracksCounter = 0;
 	private static final int LOG_BATCH_SIZE = 100;
+	private GpxDataItemCallback callback;
 
 	public TrackFolderLoaderTask(@NonNull OsmandApplication app, @NonNull TrackFolder folder, @NonNull LoadTracksListener listener) {
 		this.folder = folder;
@@ -130,17 +131,19 @@ public class TrackFolderLoaderTask extends AsyncTask<Void, TrackItem, Void> {
 	@Nullable
 	private GpxDataItem getDataItem(@NonNull TrackItem trackItem, File file) {
 		if (file != null) {
-			GpxDataItemCallback callback = new GpxDataItemCallback() {
-				@Override
-				public boolean isCancelled() {
-					return TrackFolderLoaderTask.this.isCancelled();
-				}
+			if (callback == null) {
+				callback = new GpxDataItemCallback() {
+					@Override
+					public boolean isCancelled() {
+						return TrackFolderLoaderTask.this.isCancelled();
+					}
 
-				@Override
-				public void onGpxDataItemReady(@NonNull GpxDataItem item) {
-					trackItem.setDataItem(item);
-				}
-			};
+					@Override
+					public void onGpxDataItemReady(@NonNull GpxDataItem item) {
+						trackItem.setDataItem(item);
+					}
+				};
+			}
 			return gpxDbHelper.getItem(file, callback);
 		}
 		return null;

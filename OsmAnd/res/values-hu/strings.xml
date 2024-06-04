@@ -5482,7 +5482,7 @@
     <string name="empty_name">Üres név</string>
     <string name="edit_filter">Szűrő szerkesztése</string>
     <string name="save_as_smart_folder">Mentés okosmappaként</string>
-    <string name="delete_smart_folder_dialog_message">Ez eltávolítja a következő okosmappát: \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Ez eltávolítja a következő okosmappát: \"%1$s\". (Nyomvonal nem lesz törölve.)</string>
     <string name="empty_smart_folder_title">Nincs egyező nyomvonal</string>
     <string name="empty_smart_folder_description">Az egyező nyomvonalak itt jelennek meg</string>
     <string name="configure_filter">Szűrő konfigurálása</string>
@@ -5725,4 +5725,7 @@
     <string name="disable_map_layers_descr">Tiltsa le az összes térképréteget a vektortérkép felett (újraindítás szükséges).</string>
     <string name="disable_map_layers">Térképrétegek letiltása</string>
     <string name="height_legend_description">A színes magassági térképek a domborzat megjelenítésére használhatók.</string>
+    <string name="play_weather_forecast">Időjárás előrejelzés lejátszása</string>
+    <string name="travel_topics">Utazási témák</string>
+    <string name="change_terrain_color_scheme">Domborzati színséma módosítása</string>
 </resources>

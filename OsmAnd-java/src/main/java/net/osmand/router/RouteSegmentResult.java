@@ -42,6 +42,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 	private TurnType turnType;
 	private boolean leftside = false;
 
+	private int gpxPointIndex = -1; // used by approximation to reconstruct finalPoints.routeToTarget
+
 	// Evaluates street name that the route follows after turn within specified distance.
 	// It is useful to find names for short segments on intersections
 	private static final float DIST_TO_SEEK_STREET_NAME = 150;
@@ -68,7 +70,8 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 
 	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex,
 	                          RouteSegmentResult[][] preAttachedRoutes, float segmentTime,
-	                          float routingTime, float speed, float distance, TurnType turnType) {
+	                          float routingTime, float speed, float distance, int gpxPointIndex, TurnType turnType) {
+		// JNI-only method
 		this.object = object;
 		this.startPointIndex = startPointIndex;
 		this.endPointIndex = endPointIndex;
@@ -77,6 +80,7 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		this.routingTime = routingTime;
 		this.speed = speed;
 		this.distance = distance;
+		this.gpxPointIndex = gpxPointIndex;
 		this.turnType = turnType;
 		updateCapacity();
 	}
@@ -720,5 +724,13 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			}
 		}
 		return rdo;
+	}
+
+	public int getGpxPointIndex() {
+		return gpxPointIndex;
+	}
+
+	public void setGpxPointIndex(int gpxPointIndex) {
+		this.gpxPointIndex = gpxPointIndex;
 	}
 }

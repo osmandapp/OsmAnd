@@ -369,8 +369,8 @@ public class SearchCoreFactory {
 					List<City> l = r.getCities(null, BinaryMapAddressReaderAdapter.CITY_TOWN_TYPE);
 					townCities.put(r, l);
 					for (City c  : l) {
-						LatLon cl = c.getLocation();
 						c.setReferenceFile(r);
+						LatLon cl = c.getLocation();
 						int y = MapUtils.get31TileNumberY(cl.getLatitude());
 						int x = MapUtils.get31TileNumberX(cl.getLongitude());
 						QuadRect qr = new QuadRect(x, y, x, y);

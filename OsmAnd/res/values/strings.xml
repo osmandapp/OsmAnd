@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="change_terrain_color_scheme">Change Terrain color scheme</string>
+    <string name="play_weather_forecast">Play weather forecast</string>
+    <string name="travel_topics">Travel topics</string>
     <string name="clear_key_assignment_summary">Key assignment for the selected action will be cleared.</string>
     <string name="clear_all_key_shortcuts_summary">All key assignments for the selected type will be removed.</string>
     <string name="clear_all_key_shortcuts">Clear all key shortcuts</string>
@@ -253,7 +256,7 @@
     <string name="discard_filter_changes_prompt">Reset all filters?</string>
     <string name="smart_folder_saved">Smart Folder saved</string>
     <string name="edit_filter">Edit filter</string>
-    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">This will remove smart folder \"%1$s\". (No tracks will be deleted.)</string>
     <string name="smart_folder_name_present">Such smart folder already present</string>
     <string name="empty_name">Empty name</string>
     <string name="add_smart_folder">Add smart folder</string>

@@ -2769,7 +2769,7 @@
     <string name="poi_observatory_designation">Designación</string>
     <string name="poi_telescope_type">Tipo de telescopio</string>
     <string name="poi_animal_training_type">Tipo de amaestramiento</string>
-    <string name="poi_diplomatic_filter">Embajada</string>
+    <string name="poi_diplomatic_filter">Institución diplomática</string>
     <string name="poi_city_capital">Capital</string>
     <string name="poi_healthcare_alternative_types">Especialidad</string>
     <string name="poi_free_flying_characteristics">Características</string>
@@ -3034,7 +3034,7 @@
     <string name="poi_railway_yard">Estación ferroviaria de carga</string>
     <string name="poi_coworking_space">Espacio de trabajo compartido</string>
     <string name="poi_fast_food_cafeteria">Sí;Cafetería (patio);Cantina</string>
-    <string name="poi_drive_in">En el automóvil</string>
+    <string name="poi_drive_in">Autoservicio en coche</string>
     <string name="poi_drive_through">Desde el automóvil</string>
     <string name="poi_cuisine_bubble_tea">Té de burbujas</string>
     <string name="poi_cuisine_sagardotegia">Sidrería</string>

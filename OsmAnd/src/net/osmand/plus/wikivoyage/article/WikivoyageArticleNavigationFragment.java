@@ -120,14 +120,17 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		return nightMode ? R.color.wikivoyage_bottom_bar_bg_dark : R.color.list_background_color_light;
 	}
 
-	private void sendResults(String title) {
-		WikivoyageArticleDialogFragment.showInstanceByTitle(getMyApplication(), getFragmentManager(), title, selectedLang);
+	private void sendResults(@NonNull String title, @NonNull String lang) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			WikivoyageArticleDialogFragment.showInstanceByTitle(app, getParentFragmentManager(), title, lang);
+		}
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-									   @Nullable Fragment targetFragment,
-									   @NonNull TravelArticleIdentifier articleId,
-									   @NonNull String selectedLang) {
+	                                   @Nullable Fragment targetFragment,
+	                                   @NonNull TravelArticleIdentifier articleId,
+	                                   @NonNull String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
@@ -297,7 +300,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			public boolean onChildClick(ExpandableListView parent, View v,
 										int groupPosition, int childPosition, long id) {
 				WikivoyageSearchResult articleItem = listAdapter.getArticleItem(groupPosition, childPosition);
-				sendResults(articleItem.getArticleTitle());
+				sendResults(articleItem.getArticleTitle(), articleItem.getLangs().get(0));
 				dismiss();
 				return true;
 			}
@@ -309,7 +312,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				if (Algorithms.isEmpty(articleItem.getArticleTitle())) {
 					Toast.makeText(ctx, R.string.wiki_article_not_found, Toast.LENGTH_LONG).show();
 				} else {
-					sendResults(articleItem.getArticleTitle());
+					sendResults(articleItem.getArticleTitle(), articleItem.getLangs().get(0));
 					dismiss();
 				}
 				return true;

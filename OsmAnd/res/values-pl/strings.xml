@@ -5590,4 +5590,22 @@
     <string name="avg_sensor_heartrate">Średnie tętno</string>
     <string name="unchanged_parameter_summary">Każda ścieżka zachowa swoje parametry.</string>
     <string name="map_widget_map_scale">Skala mapy</string>
+    <string name="track_vertical_exaggeration_description">Zmieniając wartość skali, można zmienić wysokość ścieżki 3D.</string>
+    <string name="maps_that_also_be_used">Mapy, które również mogą być używane: %1$s</string>
+    <string name="getting_list_of_required_maps">Pobieranie listy wymaganych map…</string>
+    <string name="required_maps_calculate_online_summary">Lista brakujących map jest oparta na trasie w linii prostej. Aby uzyskać dokładną listę map, OsmAnd może wstępnie obliczyć trasę online.</string>
+    <string name="required_maps">Wymagane mapy</string>
+    <string name="missing_maps_description">Brakuje niektórych map offline wymaganych dla tej trasy lub nie są one aktualne. Prosimy o pobranie lub zaktualizowanie tych map.</string>
+    <string name="missing_maps_header">Brakujące lub nieaktualne mapy</string>
+    <string name="height_legend_description">Kolorowe mapy wysokości służą do wizualizacji rzeźby terenu.</string>
+    <string name="top_and_bottom">Góra i dół</string>
+    <string name="title_3d_track">Ścieżka 3D</string>
+    <string name="route_line_use_coloring_altitude">Linia trasy jest kolorowana według wysokości nad poziomem morza.</string>
+    <string name="disable_map_layers">Wyłącz warstwy mapy</string>
+    <string name="disable_map_layers_descr">Wyłączenie wszystkich warstw mapy powyżej mapy wektorowej (wymagany restart).</string>
+    <string name="visualized_by">Wizualizowane przez</string>
+    <string name="wall_color">Kolor ściany</string>
+    <string name="top">Góra</string>
+    <string name="release_4_8">- Aby być przygotowanym na 4.8</string>
+    <string name="allow_display_on_top">Zawsze wyświetl na wierzchu</string>
 </resources>

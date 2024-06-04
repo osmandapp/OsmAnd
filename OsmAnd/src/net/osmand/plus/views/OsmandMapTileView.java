@@ -111,6 +111,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean MEASURE_FPS;
 	private final FPSMeasurement main = new FPSMeasurement();
 	private final FPSMeasurement additional = new FPSMeasurement();
+	private final MapRenderFPSMeasurement renderFPSMeasurement = new MapRenderFPSMeasurement();
 
 	private boolean DISABLE_MAP_LAYERS;
 	private StateChangedListener<Boolean> disableMapLayersListener;
@@ -128,24 +129,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
 		int colorNight = MAP_DEFAULT_COLOR;
-	}
-
-	private static class FPSMeasurement {
-		int fpsMeasureCount;
-		int fpsMeasureMs;
-		long fpsFirstMeasurement;
-		float fps;
-
-		void calculateFPS(long start, long end) {
-			fpsMeasureMs += end - start;
-			fpsMeasureCount++;
-			if (fpsMeasureCount > 10 || (start - fpsFirstMeasurement) > 400) {
-				fpsFirstMeasurement = start;
-				fps = (1000f * fpsMeasureCount / fpsMeasureMs);
-				fpsMeasureCount = 0;
-				fpsMeasureMs = 0;
-			}
-		}
 	}
 
 	public interface OnTrackBallListener {
@@ -1113,11 +1096,19 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public float getFPS() {
-		return main.fps;
+		return main.getFps();
 	}
 
 	public float getSecondaryFPS() {
-		return additional.fps;
+		return additional.getFps();
+	}
+
+	public float calculateRenderFps() {
+		MapRendererView renderer = getMapRenderer();
+		if (renderer != null) {
+			renderFPSMeasurement.calculateFPS(renderer.getFrameId());
+		}
+		return renderFPSMeasurement.getFps();
 	}
 
 	public boolean isAnimatingMapZoom() {

@@ -103,7 +103,6 @@ import java.util.concurrent.Executors;
 public class ResourceManager {
 
 	private static final String INDEXES_CACHE = "ind.cache";
-	private static final String DEFAULT_WIKIVOYAGE_TRAVEL_OBF = "Default_wikivoyage.travel.obf";
 	private static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm";
 
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
@@ -903,8 +902,6 @@ public class ResourceManager {
 		if (Version.isPaidVersion(context)) {
 			collectFiles(context.getAppPath(IndexConstants.WIKI_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT, files);
-		} else {
-			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), DEFAULT_WIKIVOYAGE_TRAVEL_OBF, files);
 		}
 		if (PluginsHelper.isActive(SRTMPlugin.class) || InAppPurchaseUtils.isContourLinesAvailable(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
@@ -975,7 +972,7 @@ public class ResourceManager {
 				}
 				boolean wikiMap = WikipediaPlugin.containsWikipediaExtension(fileName);
 				boolean srtmMap = SrtmDownloadItem.containsSrtmExtension(fileName);
-				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap && !fileName.equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF))) {
+				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap)) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), fileName)); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {
@@ -1119,13 +1116,8 @@ public class ResourceManager {
 		return res;
 	}
 
-	public boolean isOnlyDefaultTravelBookPresent() {
-		for (BinaryMapIndexReader reader : getTravelRepositories()) {
-			if (!reader.getFile().getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF)) {
-				return false;
-			}
-		}
-		return true;
+	public boolean isTravelGuidesRepositoryEmpty() {
+		return getTravelRepositories().isEmpty();
 	}
 
 	public void initMapBoundariesCacheNative() {
