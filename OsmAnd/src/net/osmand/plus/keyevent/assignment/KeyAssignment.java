@@ -19,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,12 +28,14 @@ import java.util.Objects;
 public class KeyAssignment {
 
 	private final String id;
+	private String commandId;
 	private String customName;
 	private QuickAction action;
 	private List<Integer> keyCodes = new ArrayList<>();
 
 	public KeyAssignment(@NonNull String commandId, @NonNull Integer ... keyCodes) {
 		this(CommandToActionConverter.createQuickAction(commandId), keyCodes);
+		this.commandId = commandId;
 	}
 
 	public KeyAssignment(@Nullable QuickAction action, @NonNull Integer ... keyCodes) {
@@ -57,6 +58,7 @@ public class KeyAssignment {
 			action = !Algorithms.isEmpty(actions) ? actions.get(0) : null;
 		} else if (jsonObject.has("commandId")) {
 			// For previous version compatibility
+			this.commandId = commandId;
 			String commandId = jsonObject.getString("commandId");
 			action = CommandToActionConverter.createQuickAction(commandId);
 		}
@@ -80,6 +82,7 @@ public class KeyAssignment {
 	public KeyAssignment(@NonNull KeyAssignment original) {
 		this.id = original.id;
 		this.action = original.action;
+		this.commandId = original.commandId;
 		this.customName = original.customName;
 		this.keyCodes = original.keyCodes;
 	}
@@ -92,34 +95,8 @@ public class KeyAssignment {
 		this.keyCodes = keyCodes;
 	}
 
-	public void addKeyCode(int keyCode) {
-		if (!keyCodes.contains(keyCode)) {
-			keyCodes = CollectionUtils.addToList(keyCodes, keyCode);
-		}
-	}
-
-	public void updateKeyCode(int oldKeyCode, int newKeyCode) {
-		if (keyCodes.contains(oldKeyCode)) {
-			int index = keyCodes.indexOf(oldKeyCode);
-			keyCodes = CollectionUtils.setInList(keyCodes, index, newKeyCode);
-		}
-	}
-
 	public void removeKeyCode(int keyCode) {
 		keyCodes = CollectionUtils.removeFromList(keyCodes, (Integer) keyCode);
-	}
-
-	public void clearKeyCodes() {
-		keyCodes = new ArrayList<>();
-	}
-
-	public boolean hasKeyCode(int keyCode) {
-		for (int assignedKeyCode : getKeyCodes()) {
-			if (assignedKeyCode == keyCode) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@NonNull
@@ -129,7 +106,12 @@ public class KeyAssignment {
 
 	@Nullable
 	public String getName(@NonNull OsmandApplication context) {
-		return customName != null ? customName : action.getName(context);
+		return customName != null ? customName : getDefaultName(context);
+	}
+
+	@Nullable
+	private String getDefaultName(@NonNull OsmandApplication context) {
+		return action != null ? action.getName(context) : commandId;
 	}
 
 	public void setCustomName(@Nullable String customName) {
@@ -184,6 +166,10 @@ public class KeyAssignment {
 			String actionJson = mapButtonsHelper.convertActionsToJson(Collections.singletonList(action));
 			JSONArray actionJsonArray = new JSONArray(actionJson);
 			jsonObject.put("action", actionJsonArray);
+		}
+		if (commandId != null) {
+			// For previous version compatibility
+			jsonObject.put("commandId", commandId);
 		}
 		if (!Algorithms.isEmpty(keyCodes)) {
 			JSONArray keyCodesJsonArray = new JSONArray();

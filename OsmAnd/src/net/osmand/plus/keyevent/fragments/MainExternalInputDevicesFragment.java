@@ -117,7 +117,7 @@ public class MainExternalInputDevicesFragment extends BaseSettingsFragment {
 		uiPreference.setKey(PREF_ID_BINDING);
 		uiPreference.setLayoutResource(R.layout.preference_with_descr);
 		uiPreference.setTitle(R.string.key_assignments);
-		uiPreference.setSummary(String.valueOf(device.getAssignmentsCount()));
+		uiPreference.setSummary(String.valueOf(device.getFilledAssignmentsCount()));
 		uiPreference.setIcon(getContentIcon(R.drawable.ic_action_button_default));
 		uiPreference.setSelectable(true);
 		return uiPreference;

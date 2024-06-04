@@ -66,7 +66,7 @@ public class KeyAssignmentsController implements IDialogController {
 		boolean editMode = isInEditMode();
 		List<ScreenItem> screenItems = new ArrayList<>();
 		int itemType = editMode ? EDIT_KEY_ASSIGNMENT_ITEM : KEY_ASSIGNMENT_ITEM;
-		List<KeyAssignment> assignments = editMode ? editBundle.assignments : inputDevice.getAssignments();
+		List<KeyAssignment> assignments = editMode ? editBundle.getFilledAssignments() : inputDevice.getFilledAssignments();
 		if (!Algorithms.isEmpty(assignments)) {
 			screenItems.add(new ScreenItem(CARD_TOP_DIVIDER));
 			screenItems.add(new ScreenItem(HEADER));
@@ -192,7 +192,18 @@ public class KeyAssignmentsController implements IDialogController {
 	}
 
 	private static class EditingBundle {
-		List<KeyAssignment> assignments;
+		private List<KeyAssignment> assignments;
+
+		@NonNull
+		public List<KeyAssignment> getFilledAssignments() {
+			List<KeyAssignment> result = new ArrayList<>();
+			for (KeyAssignment assignment : assignments) {
+				if (assignment.hasRequiredParameters()) {
+					result.add(assignment);
+				}
+			}
+			return result;
+		}
 
 		@Override
 		public boolean equals(Object o) {

@@ -7,10 +7,10 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.keyevent.KeyAssignmentsCollection;
-import net.osmand.plus.keyevent.commands.KeyEventCommand;
 import net.osmand.plus.keyevent.assignment.KeyAssignment;
 import net.osmand.plus.quickaction.QuickAction;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class InputDeviceProfile {
@@ -26,6 +26,17 @@ public abstract class InputDeviceProfile {
 
 	protected void setAssignments(@NonNull List<KeyAssignment> assignments) {
 		assignmentsCollection = new KeyAssignmentsCollection(assignments);
+	}
+
+	@NonNull
+	public List<KeyAssignment> getFilledAssignments() {
+		List<KeyAssignment> result = new ArrayList<>();
+		for (KeyAssignment assignment : getAssignments()) {
+			if (assignment.hasRequiredParameters()) {
+				result.add(assignment);
+			}
+		}
+		return result;
 	}
 
 	@NonNull
@@ -59,11 +70,11 @@ public abstract class InputDeviceProfile {
 	}
 
 	public boolean hasActiveAssignments() {
-		return getAssignmentsCount() > 0;
+		return getFilledAssignmentsCount() > 0;
 	}
 
-	public int getAssignmentsCount() {
-		return assignmentsCollection.getAssignments().size();
+	public int getFilledAssignmentsCount() {
+		return getFilledAssignments().size();
 	}
 
 	@NonNull

@@ -1887,10 +1887,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void addCommonKeyEventAssignments(@NonNull List<KeyAssignment> assignments) {
-		KeyAssignment assignment = new KeyAssignment(TakeMediaNoteCommand.ID, KeyEvent.KEYCODE_CAMERA);
-		if (assignment.hasRequiredParameters()) {
-			assignments.add(assignment);
-		}
+		assignments.add(new KeyAssignment(TakeMediaNoteCommand.ID, KeyEvent.KEYCODE_CAMERA));
 	}
 
 	@Override
