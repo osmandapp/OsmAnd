@@ -112,7 +112,7 @@
     <string name="map_widget_config">組態螢幕顯示</string>
     <string name="map_widget_back_to_loc">目前位置</string>
     <string name="map_widget_lock_screen">鎖定</string>
-    <string name="map_widget_compass">電子羅盤</string>
+    <string name="map_widget_compass">指南針</string>
     <string name="map_widget_reset">恢復預設</string>
     <string name="map_widget_parking">停車場</string>
     <string name="map_widget_time">剩餘時間</string>
@@ -570,7 +570,7 @@
     <string name="transport_context_menu">搜尋公車站牌</string>
     <string name="poi_context_menu_modify">修改 POI</string>
     <string name="poi_context_menu_delete">刪除 POI</string>
-    <string name="rotate_map_compass_opt">羅盤方向</string>
+    <string name="rotate_map_compass_opt">指南針方向</string>
     <string name="rotate_map_bearing_opt">行進方向</string>
     <string name="rotate_map_north_opt">北方向上</string>
     <string name="rotate_map_to_descr">地圖對齊方式：</string>
