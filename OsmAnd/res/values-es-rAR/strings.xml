@@ -5746,4 +5746,5 @@
     <string name="play_weather_forecast">Reproducir previsión del clima</string>
     <string name="travel_topics">Tendencias de viaje</string>
     <string name="change_terrain_color_scheme">Cambiar el esquema de color del terreno</string>
+    <string name="wall_height">Altura del muro</string>
 </resources>
