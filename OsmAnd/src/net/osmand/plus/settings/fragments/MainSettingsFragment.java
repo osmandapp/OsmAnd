@@ -270,9 +270,4 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 		super.createToolbar(inflater, view);
 		new SearchPreferenceButtonHelper(this).configureSearchPreferenceButton(view.findViewById(R.id.action_button));
 	}
-
-	@Override
-	protected void updateToolbar() {
-		super.updateToolbar();
-	}
 }
