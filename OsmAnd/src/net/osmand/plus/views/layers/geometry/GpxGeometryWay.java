@@ -88,7 +88,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		if (this.drawDirectionArrows != drawDirectionArrows) {
 			resetArrowsProvider();
 		}
-		if (Algorithms.objectEquals(this.getTrack3DStyle(), track3DStyle)) {
+		if (!Algorithms.objectEquals(getTrack3DStyle(), track3DStyle)) {
 			resetSymbolProviders();
 		}
 		updateTrack3DStyle(track3DStyle);
@@ -204,6 +204,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			style.trackWallColorType = getTrack3DStyle().getWallColorType();
 			style.trackLinePositionType = getTrack3DStyle().getLinePositionType();
 			style.additionalExaggeration = getTrack3DStyle().getAdditionalExaggeration();
+			style.elevationMeters = getTrack3DStyle().getElevationMeters();
 		}
 	}
 

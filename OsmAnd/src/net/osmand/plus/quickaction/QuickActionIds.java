@@ -43,5 +43,14 @@ public class QuickActionIds {
 	public static final int SHOW_HIDE_AIR_PRESSURE_LAYER_ACTION_ID = 43;
 	public static final int OPEN_WEATHER_ACTION_ID = 44;
 	public static final int LOCATION_SIMULATION_ACTION_ID = 45;
-
+	public static final int MAP_SCROLL_UP_ACTION = 46;
+	public static final int MAP_SCROLL_DOWN_ACTION = 47;
+	public static final int MAP_SCROLL_LEFT_ACTION = 48;
+	public static final int MAP_SCROLL_RIGHT_ACTION = 49;
+	public static final int MAP_ZOOM_IN_ACTION = 50;
+	public static final int MAP_ZOOM_OUT_ACTION = 51;
+	public static final int MOVE_TO_MY_LOCATION_ACTION = 52;
+	public static final int NEXT_PROFILE_PROFILE_ACTION = 53;
+	public static final int PREVIOUS_PROFILE_PROFILE_ACTION = 54;
+	public static final int TERRAIN_COLOR_SCHEME_ACTION = 55;
 }

@@ -112,7 +112,7 @@
     <string name="map_widget_config">組態螢幕顯示</string>
     <string name="map_widget_back_to_loc">目前位置</string>
     <string name="map_widget_lock_screen">鎖定</string>
-    <string name="map_widget_compass">電子羅盤</string>
+    <string name="map_widget_compass">指南針</string>
     <string name="map_widget_reset">恢復預設</string>
     <string name="map_widget_parking">停車場</string>
     <string name="map_widget_time">剩餘時間</string>
@@ -458,8 +458,8 @@
     <string name="system_locale">系統</string>
     <string name="preferred_locale_descr">應用程式顯示語言（在 OsmAnd 重新啟動後套用）。</string>
     <string name="preferred_locale">顯示語言</string>
-    <string name="shared_string_next">下一頁</string>
-    <string name="shared_string_previous">上一頁</string>
+    <string name="shared_string_next">下一站</string>
+    <string name="shared_string_previous">上一站</string>
     <string name="unit_of_length_descr">變更距離的測量方式。</string>
     <string name="unit_of_length">長度單位</string>
     <string name="si_mi_feet">英哩/英呎</string>
@@ -570,7 +570,7 @@
     <string name="transport_context_menu">搜尋公車站牌</string>
     <string name="poi_context_menu_modify">修改 POI</string>
     <string name="poi_context_menu_delete">刪除 POI</string>
-    <string name="rotate_map_compass_opt">羅盤方向</string>
+    <string name="rotate_map_compass_opt">指南針方向</string>
     <string name="rotate_map_bearing_opt">行進方向</string>
     <string name="rotate_map_north_opt">北方向上</string>
     <string name="rotate_map_to_descr">地圖對齊方式：</string>
@@ -5475,7 +5475,7 @@
     <string name="empty_name">空名稱</string>
     <string name="edit_filter">編輯篩選條件</string>
     <string name="save_as_smart_folder">另存為智慧型資料夾</string>
-    <string name="delete_smart_folder_dialog_message">這將會移除智慧型資料夾「%1$s」。</string>
+    <string name="delete_smart_folder_dialog_message">這將會移除智慧型資料夾「%1$s」。（不會刪除任何軌跡。）</string>
     <string name="empty_smart_folder_title">沒有相符的軌跡</string>
     <string name="empty_smart_folder_description">相符的軌跡會出現在此</string>
     <string name="configure_filter">設定篩選條件</string>
@@ -5713,4 +5713,11 @@
     <string name="map_text">地圖文字</string>
     <string name="routing_attr_avoid_cobblestone_name">避免鵝卵石</string>
     <string name="routing_attr_avoid_cobblestone_description">避免鵝卵石</string>
+    <string name="steps_per_minute_unit">步數每分鐘</string>
+    <string name="disable_map_layers_descr">停用向量地圖上的所有地圖圖層（需要重新啟動）。</string>
+    <string name="disable_map_layers">停用地圖圖層</string>
+    <string name="height_legend_description">海拔顏色圖用於視覺化地形。</string>
+    <string name="change_terrain_color_scheme">變更地形配色方案</string>
+    <string name="play_weather_forecast">播放天氣預報</string>
+    <string name="travel_topics">旅遊話題</string>
 </resources>

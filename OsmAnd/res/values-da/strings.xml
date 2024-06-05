@@ -908,7 +908,7 @@
     <string name="search_address_region">Område</string>
     <string name="add_favorite_dialog_favourite_added_template">Favoritpunkt \'{0}\' tilføjet.</string>
     <string name="poi_dialog_comment_default">Interessepunkt ændres</string>
-    <string name="app_mode_default">Gennemse kort</string>
+    <string name="app_mode_default">Vis kort</string>
     <string name="poi_error_info_not_loaded">Information om knudepunkt blev ikke indlæst</string>
     <string name="default_buttons_commit">Udfør</string>
     <string name="amenity_type_geocache">Geocaching</string>
@@ -1010,7 +1010,7 @@
     <string name="edit_tilesource_elliptic_tile">Elliptisk mercatorprojektion</string>
     <string name="edit_tilesource_maxzoom">Maksimal zoom</string>
     <string name="edit_tilesource_expiration_time">Udløbstid (minutter)</string>
-    <string name="edit_tilesource_minzoom">Mindste zoom</string>
+    <string name="edit_tilesource_minzoom">Minimum zoom</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Vælg eksisterende…</string>
     <string name="maps_define_edit">Definer/rediger…</string>
@@ -1239,7 +1239,7 @@
     <string name="rendering_value_car_name">Bil</string>
     <string name="rendering_value_bicycle_name">Cykel</string>
     <string name="rendering_value_pedestrian_name">Til fods</string>
-    <string name="rendering_value_browse_map_name">Gennemse kort</string>
+    <string name="rendering_value_browse_map_name">Vis kort</string>
     <string name="download_additional_maps">Hent manglende kort %1$s (%2$d MB)?</string>
     <string name="shared_string_waypoints">Rutepunkter</string>
     <string name="way_alarms">Trafikadvarsler</string>
@@ -5022,7 +5022,7 @@
     <string name="sound_beep_complex_loud">Bip: komplekst højt</string>
     <string name="sound_beep_minimal">Bip: minimalt</string>
     <string name="last_synchronized">Sidst synkroniseret</string>
-    <string name="display_position_automatic_descr">Afhænger af kortorientering: nederst for bevægelsesretning, centrum for alle andre.</string>
+    <string name="display_position_automatic_descr">Afhænger af kortorientering: Bund for bevægelsesretning, centrum for alle andre.</string>
     <string name="shared_string_apply_changes">Anvend ændringer</string>
     <string name="no_visible_tracks_description">Vælg spor for at få dem vist på kortet.</string>
     <string name="no_visible_tracks">Ingen spor på kortet</string>
@@ -5489,7 +5489,7 @@
     <string name="smart_folder_saved">Smart-mappe gemt</string>
     <string name="add_smart_folder">Tilføj smart-mappe</string>
     <string name="save_as_smart_folder">Gem som smart-mappe</string>
-    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\". (Ingen spor slettes.)</string>
     <string name="empty_smart_folder_title">Ingen matchende spor</string>
     <string name="empty_smart_folder_description">Matchende spor vises her</string>
     <string name="configure_filter">Konfigurér filter</string>
@@ -5625,10 +5625,10 @@
     <string name="default_buttons">Standardknapper</string>
     <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
     <string name="add_button">Tilføj knap</string>
-    <string name="shared_string_speedometer">Hastighedsmåler</string>
+    <string name="shared_string_speedometer">Speedometer</string>
     <string name="speed_limit_warning">Advarsel om fartgrænse</string>
-    <string name="shared_string_limit">Begrænsning</string>
-    <string name="when_exceeded">Når overskredet</string>
+    <string name="shared_string_limit">Grænse</string>
+    <string name="when_exceeded">Ved overskridelse</string>
     <string name="speedometer_description">Viser din aktuelle hastighed som rapporteret via GPS</string>
     <string name="help_article_setup_a_route_name">Opret en rute</string>
     <string name="rendering_attr_padusDisplayMode_description">Efter adgangstype eller forvalternavn</string>
@@ -5680,8 +5680,8 @@
     <string name="gpx_approximation_cpp">Ruteberegning-baseret (C++)</string>
     <string name="gpx_approximation_java">Ruteberegning-baseret (Java)</string>
     <string name="gpx_approximation_geo_java">Geometri-baseret (Java, hurtig)</string>
-    <string name="fix_north_up_descr">Drej ikke kortet ved berøringer i kortorientering Nord op</string>
-    <string name="fix_north_up">Aktivér fast nord op</string>
+    <string name="fix_north_up_descr">Drej ikke kortet ved berøringer i kortorientering, hvor nord er opad</string>
+    <string name="fix_north_up">Fastlås nord opad</string>
     <string name="change_default_appearance_confirmation">Skift standardudseende for %1$s?</string>
     <string name="use_3d_track_visualization">3D-visualisering</string>
     <string name="shared_string_changes">Ændringer</string>
@@ -5728,4 +5728,11 @@
     <string name="map_text">Korttekster</string>
     <string name="routing_attr_avoid_cobblestone_name">Undgå brosten</string>
     <string name="track_vertical_exaggeration_description">Ved at ændre skalaværdien kan du ændre 3D-sporets højde.</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="disable_map_layers_descr">Deaktiver alle kortlag over vektorkortet (genstart påkrævet).</string>
+    <string name="disable_map_layers">Deaktiver kortlag</string>
+    <string name="height_legend_description">Højdefarvekort bruges til at visualisere relief.</string>
+    <string name="change_terrain_color_scheme">Skift farvetema for terræn</string>
+    <string name="play_weather_forecast">Afspil vejrudsigt</string>
+    <string name="travel_topics">Rejse-emner</string>
 </resources>

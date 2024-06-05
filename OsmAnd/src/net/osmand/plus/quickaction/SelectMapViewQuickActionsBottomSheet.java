@@ -1,7 +1,7 @@
 package net.osmand.plus.quickaction;
 
 
-import static net.osmand.plus.quickaction.AddQuickActionDialog.QUICK_ACTION_BUTTON_KEY;
+import static net.osmand.plus.quickaction.AddQuickActionFragment.QUICK_ACTION_BUTTON_KEY;
 import static net.osmand.plus.quickaction.SwitchableAction.KEY_ID;
 
 import android.app.Activity;
@@ -32,6 +32,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.plugins.srtm.TerrainColorSchemeAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
 import net.osmand.plus.quickaction.actions.SwitchProfileAction;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -160,6 +161,15 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 				boolean selected = entry.equals(selectedItem);
 				createItemRow(selected, counter, getContentIcon(action.getIconRes()),
 						mapStyleAction.getTranslatedItemName(context, entry), entry);
+				counter++;
+			}
+		} else if (action instanceof TerrainColorSchemeAction) {
+			TerrainColorSchemeAction terrainColorSchemeAction = (TerrainColorSchemeAction) action;
+			List<String> terrainModes = terrainColorSchemeAction.getFilteredStyles();
+			for (String entry : terrainModes) {
+				boolean selected = entry.equals(selectedItem);
+				createItemRow(selected, counter, getContentIcon(action.getIconRes()),
+						terrainColorSchemeAction.getTranslatedItemName(context, entry), entry);
 				counter++;
 			}
 		} else if (action instanceof SwitchProfileAction) {

@@ -52,6 +52,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.core.SearchPhrase;
@@ -431,7 +432,7 @@ public class TravelObfHelper implements TravelHelper {
 					}
 				}
 			}
-			sortSearchResults(res);
+			sortSearchResults(res, searchQuery);
 		}
 		return res;
 	}
@@ -454,8 +455,59 @@ public class TravelObfHelper implements TravelHelper {
 		return langs;
 	}
 
-	private void sortSearchResults(@NonNull List<WikivoyageSearchResult> results) {
-		Collections.sort(results, (o1, o2) -> collator.compare(o1.getArticleTitle(), o2.getArticleTitle()));
+	public void sortSearchResults(List<WikivoyageSearchResult> results, String searchQuery) {
+		results.sort(new SearchResultComparator(searchQuery, collator));
+	}
+
+	public static class SearchResultComparator implements Comparator<WikivoyageSearchResult> {
+		private final Collator collator;
+		private final String searchQuery;
+		private final String searchQueryLC;
+
+
+		public SearchResultComparator(String searchQuery, Collator collator) {
+			this.searchQuery = searchQuery;
+			this.collator = collator;
+			searchQueryLC = searchQuery.toLowerCase();
+		}
+
+		@Override
+		public int compare(WikivoyageSearchResult sr1, WikivoyageSearchResult sr2) {
+			for (ResultCompareStep step : ResultCompareStep.values()) {
+				int res = step.compare(sr1, sr2, this);
+				if (res != 0) {
+					return res;
+				}
+			}
+			return 0;
+		}
+
+	}
+
+	private enum ResultCompareStep {
+		MACH_TITLE,
+		CONTAINS_OF_TITLE,
+		OTHER;
+
+		// -1 - means 1st is less (higher list position) than 2nd
+		public int compare(WikivoyageSearchResult sr1, WikivoyageSearchResult sr2, SearchResultComparator c) {
+			String articleTitle1 = sr1.getArticleTitle();
+			String articleTitle2 = sr2.getArticleTitle();
+			boolean sr1Comparison = c.collator.compare(articleTitle1, c.searchQuery) != 0;
+			boolean sr2Comparison = c.collator.compare(articleTitle2, c.searchQuery) != 0;
+			switch (this) {
+				case MACH_TITLE:
+					return Boolean.compare(sr1Comparison, sr2Comparison);
+				case CONTAINS_OF_TITLE:
+					boolean title1contains = articleTitle1.toLowerCase().contains(c.searchQueryLC);
+					boolean title2contains = articleTitle2.toLowerCase().contains(c.searchQueryLC);
+					return -Boolean.compare(title1contains, title2contains);
+				case OTHER:
+					int comp = c.collator.compare(articleTitle1, articleTitle2);
+					return (comp != 0) ? comp : c.collator.compare(sr1.isPartOf, sr2.isPartOf);
+			}
+			return 0;
+		}
 	}
 
 	@NonNull
@@ -497,16 +549,18 @@ public class TravelObfHelper implements TravelHelper {
 		}
 
 		for (String header : headers) {
-			TravelArticle parentArticle = getParentArticleByTitle(header, lang);
+			String parentLang = header.startsWith("en:") ? "en" : lang;
+			header = WikivoyageUtils.getTitleWithoutPrefix(header);
+			TravelArticle parentArticle = getParentArticleByTitle(header, parentLang);
 			if (parentArticle == null) {
 				continue;
 			}
-			navMap.put(header, new ArrayList<WikivoyageSearchResult>());
+			navMap.put(header, new ArrayList<>());
 			String[] isParentOf = parentArticle.isParentOf.split(";");
 			for (String childTitle : isParentOf) {
 				if (!childTitle.isEmpty()) {
 					WikivoyageSearchResult searchResult = new WikivoyageSearchResult("", childTitle, null,
-							null, Collections.singletonList(lang));
+							null, Collections.singletonList(parentLang));
 					List<WikivoyageSearchResult> resultList = navMap.get(header);
 					if (resultList == null) {
 						resultList = new ArrayList<>();
@@ -522,11 +576,14 @@ public class TravelObfHelper implements TravelHelper {
 
 		Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> res = new LinkedHashMap<>();
 		for (String header : headers) {
+			String parentLang = header.startsWith("en:") ? "en" : lang;
+			header = WikivoyageUtils.getTitleWithoutPrefix(header);
 			WikivoyageSearchResult searchResult = headerObjs.get(header);
 			List<WikivoyageSearchResult> results = navMap.get(header);
 			if (results != null) {
-				sortSearchResults(results);
-				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult("", header, null, null, null);
+				sortSearchResults(results, header);
+				WikivoyageSearchResult emptyResult = new WikivoyageSearchResult("", header, null,
+						null, Collections.singletonList(parentLang));
 				searchResult = searchResult != null ? searchResult : emptyResult;
 				res.put(searchResult, results);
 			}

@@ -3,6 +3,7 @@ package net.osmand.plus.track;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
@@ -15,6 +16,7 @@ import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.track.Gpx3DVisualizationType.FIXED_HEIGHT;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.os.Bundle;
@@ -26,7 +28,6 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.plugins.srtm.SRTMPlugin;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -66,6 +67,7 @@ public class TrackDrawInfo {
 	private static final String TRACK_WALL_COLOR_TYPE_KEY = "track_wall_color_type";
 	private static final String TRACK_LINE_POSITION_TYPE_KEY = "track_line_position_type";
 	private static final String ADDITIONAL_EXAGGERATION_KEY = "additional_exaggeration";
+	private static final String ELEVATION_METERS_KEY = "elevation_meters";
 
 	private String filePath;
 	private String width;
@@ -81,6 +83,7 @@ public class TrackDrawInfo {
 	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private float additionalExaggeration = 1f;
+	private float elevationMeters = 1000f;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -125,6 +128,8 @@ public class TrackDrawInfo {
 		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
 		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
 		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
+		additionalExaggeration = settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
+		elevationMeters = settings.CURRENT_TRACK_ELEVATION_METERS.get();
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
@@ -173,6 +178,7 @@ public class TrackDrawInfo {
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
+		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
 	}
 
 	@Nullable
@@ -186,7 +192,6 @@ public class TrackDrawInfo {
 		return "";
 	}
 
-	@Nullable
 	private int getRenderDefaultTrackColor(@Nullable RenderingRulesStorage renderer) {
 		if (renderer != null) {
 			RenderingRuleProperty property = renderer.PROPS.getCustomRule(CURRENT_TRACK_COLOR_ATTR);
@@ -310,6 +315,14 @@ public class TrackDrawInfo {
 		this.additionalExaggeration = additionalExaggeration;
 	}
 
+	public float getElevationMeters() {
+		return elevationMeters;
+	}
+
+	public void setElevationMeters(int elevationMeters) {
+		this.elevationMeters = elevationMeters;
+	}
+
 	public void setShowStartFinish(boolean showStartFinish) {
 		this.showStartFinish = showStartFinish;
 	}
@@ -324,6 +337,10 @@ public class TrackDrawInfo {
 
 	public boolean isDefaultAppearance() {
 		return appearanceType == DEFAULT;
+	}
+
+	public boolean isFixedHeight() {
+		return trackVisualizationType == FIXED_HEIGHT;
 	}
 
 	public void resetParams(@NonNull OsmandApplication app, @Nullable GPXFile gpxFile) {
@@ -378,6 +395,7 @@ public class TrackDrawInfo {
 		trackWallColorType = AndroidUtils.getSerializable(bundle, TRACK_WALL_COLOR_TYPE_KEY, Gpx3DWallColorType.class);
 		trackLinePositionType = AndroidUtils.getSerializable(bundle, TRACK_LINE_POSITION_TYPE_KEY, Gpx3DLinePositionType.class);
 		additionalExaggeration = bundle.getFloat(ADDITIONAL_EXAGGERATION_KEY);
+		elevationMeters = bundle.getFloat(ELEVATION_METERS_KEY);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -395,5 +413,6 @@ public class TrackDrawInfo {
 		bundle.putSerializable(TRACK_WALL_COLOR_TYPE_KEY, trackWallColorType);
 		bundle.putSerializable(TRACK_LINE_POSITION_TYPE_KEY, trackLinePositionType);
 		bundle.putFloat(ADDITIONAL_EXAGGERATION_KEY, trackVisualizationType == null ? 0 : additionalExaggeration);
+		bundle.putFloat(ELEVATION_METERS_KEY, elevationMeters);
 	}
 }

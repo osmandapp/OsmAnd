@@ -1363,7 +1363,7 @@
     <string name="navigate_point_zone">Zone</string>
     <string name="navigate_point_easting">Abscisse</string>
     <string name="navigate_point_northing">Ordonnée</string>
-    <string name="download_tab_local">Installé</string>
+    <string name="download_tab_local">Taille</string>
     <string name="map_locale">Langue de la carte</string>
     <string name="rendering_attr_transportStops_name">Arrêts de transports en commun</string>
     <string name="voices">Guidage vocal</string>
@@ -1677,7 +1677,7 @@
     <string name="regions">Régions</string>
     <string name="region_maps">Cartes régionales</string>
     <string name="world_maps">Cartes mondiales</string>
-    <string name="downloads">Téléchargements</string>
+    <string name="downloads">Télécharger</string>
     <string name="favorite_category_name">Nom de la catégorie</string>
     <string name="favorite_category_add_new_title">Ajouter une catégorie</string>
     <string name="favorite_category_dublicate_message">Cette catégorie existe déjà. Veuillez saisir un autre nom.</string>
@@ -3181,7 +3181,7 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Transport par câble aérien</string>
     <string name="shared_string_calculate">Calculer</string>
-    <string name="shared_string_osmand_usage">Utilisation d\'OsmAnd</string>
+    <string name="shared_string_osmand_usage">Utilisé par OsmAnd</string>
     <string name="shared_string_tiles">Tuiles</string>
     <string name="shared_string_maps">Cartes</string>
     <string name="shared_string_memory_tb_desc">%1$s To</string>
@@ -3840,7 +3840,7 @@
     <string name="app_mode_kayak">Kayak</string>
     <string name="export_not_enough_space_descr">Votre appareil n\'a que %1$s disponible. Veuillez libérer de l\'espace ou désélectionner l\'export de certains éléments.</string>
     <string name="app_mode_motorboat">Bateau à moteur</string>
-    <string name="shared_string_resources">Ressources</string>
+    <string name="shared_string_resources">Téléchargés</string>
     <string name="approximate_file_size">Taille approximative du fichier</string>
     <string name="select_data_to_export">Sélectionnez les données à exporter dans le fichier.</string>
     <string name="file_size_needed_for_import">Nécessaire pour l\'import</string>
@@ -3862,9 +3862,9 @@
     <string name="lang_de_casual">Allemand (courant)</string>
     <string name="app_mode_light_aircraft">Aviation légère</string>
     <string name="gpx_upload_trackable_visibility_descr">« Traçable » signifie que la trace ne s\'affichera pas dans les listes publiques, mais que les points de cheminement horodatés qu\'elle contient seront téléchargeables depuis l\'API GPS publique (ces points sont traités afin de n\'avoir aucun lien direct avec vous).</string>
-    <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les ressources, mes lieux
+    <string name="release_3_9">• Ajout d\'une option pour exporter et importer toutes les données, y compris les paramètres, les cartes téléchargées, les lieux favoris
 \n
-\n • Planifier l\'itinéraire : graphiques pour les segments de piste pour l\'itinéraire et ajout de la possibilité de créer et de modifier des pistes à segments multiples
+\n • Planifier l\'itinéraire : graphiques pour les segments de piste pour l\'itinéraire et ajout de la possibilité de créer et de modifier des pistes à segments multiples
 \n
 \n • Ajout de la méthode d\'authentification OAuth pour OpenStreetMap, amélioration de l\'interface utilisateur des boîtes de dialogue OSM
 \n
@@ -5028,10 +5028,10 @@
     <string name="movement_speed">Vitesse de déplacement</string>
     <string name="shared_string_inches">pouces</string>
     <string name="shared_string_add_manually">Ajouter manuellement …</string>
-    <string name="sort_duration_ascending">Durée plus courte en premier</string>
-    <string name="sort_duration_descending">Durée plus longue en premier</string>
-    <string name="sort_distance_ascending">Distance plus courte en premier</string>
-    <string name="sort_distance_descending">Distance plus longue en premier</string>
+    <string name="sort_duration_ascending">Courte durée en premier</string>
+    <string name="sort_duration_descending">Longue durée en premier</string>
+    <string name="sort_distance_ascending">Courte distance en premier</string>
+    <string name="sort_distance_descending">Longue distance en premier</string>
     <string name="sort_date_ascending">Date plus récente en premier</string>
     <string name="shared_string_nearest">Le plus proche</string>
     <string name="selected_value">Valeur sélectionnée</string>
@@ -5466,7 +5466,7 @@
     <string name="terrain_maps">Cartes de terrain</string>
     <string name="sort_country_name_descending">Nom de pays : Z – A</string>
     <string name="delete_map_description">Effacer la carte %1$s ?</string>
-    <string name="maps_and_resources">Cartes et ressources</string>
+    <string name="maps_and_resources">Cartes et Téléchargements</string>
     <string name="shared_string_show_icon">Afficher l\'icône</string>
     <string name="smart_folder_name_present">Ce dossier intelligent existe déjà</string>
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
@@ -5714,4 +5714,5 @@
     <string name="show_debug_info_description">Affiche les données graphiques de position pour chaque texte sur la carte</string>
     <string name="gpx_approximation_geo_cpp">Basé sur la géométrie (C++, rapide)</string>
     <string name="track_vertical_exaggeration_description">En modifiant la valeur de l\'échelle, vous pouvez modifier la hauteur de la trace 3D.</string>
+    <string name="steps_per_minute_unit">PPM (Pas Par Min)</string>
 </resources>

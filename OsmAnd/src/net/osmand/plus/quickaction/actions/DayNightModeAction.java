@@ -22,7 +22,7 @@ public class DayNightModeAction extends QuickAction {
 	public static final QuickActionType TYPE = new QuickActionType(DAY_NIGHT_MODE_ACTION_ID,
 			"daynight.switch", DayNightModeAction.class).
 			nameRes(R.string.quick_action_day_night_switch_mode).iconRes(R.drawable.ic_action_map_day).nonEditable().
-			category(QuickActionType.NAVIGATION);
+			category(QuickActionType.MAP_APPEARANCE);
 
 	public DayNightModeAction() {super(TYPE);}
 

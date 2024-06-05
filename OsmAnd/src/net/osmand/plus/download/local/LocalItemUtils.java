@@ -186,7 +186,7 @@ public class LocalItemUtils {
 		} else if (name.endsWith(THREEGP_EXTENSION) || name.endsWith(MPEG4_EXTENSION) || name.endsWith(IMG_EXTENSION)) {
 			return MULTIMEDIA_NOTES;
 		} else if (path.contains(TILES_INDEX_DIR)) {
-			if (name.endsWith(SQLiteTileSource.EXT) || name.endsWith(HEIGHTMAP_SQLITE_EXT)) {
+			if (name.endsWith(SQLiteTileSource.EXT)) {
 				return TILES_DATA;
 			}
 			if (file.isDirectory()) {

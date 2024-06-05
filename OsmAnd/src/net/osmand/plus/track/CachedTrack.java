@@ -1,11 +1,14 @@
 package net.osmand.plus.track;
 
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
-import static net.osmand.router.RouteColorize.LIGHT_GREY;
+import static net.osmand.ColorPalette.LIGHT_GREY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ColorPalette;
+import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
 import net.osmand.gpx.GPXFile;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.gpx.GPXUtilities.TrkSegment;
@@ -15,6 +18,7 @@ import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
@@ -22,6 +26,9 @@ import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -134,7 +141,18 @@ public class CachedTrack {
 		GPXTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
-		return new RouteColorize(gpxFile, trackAnalysis, colorizationType, maxSpeed);
+		File filePalette = app.getAppPath(IndexConstants.CLR_PALETTE_DIR +
+				"route_" + colorizationType.name().toLowerCase() + "_default.txt");
+		ColorPalette colorPalette = null;
+		try {
+			if (filePalette.exists()) {
+				colorPalette = ColorPalette.parseColorPalette(new FileReader(filePalette));
+			}
+		} catch (IOException e) {
+			PlatformUtil.getLog(CachedTrack.class).error("Error reading color file ",
+					e);
+		}
+		return new RouteColorize(gpxFile, trackAnalysis, colorizationType, colorPalette, maxSpeed);
 	}
 
 	@NonNull

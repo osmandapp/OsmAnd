@@ -1,6 +1,6 @@
 package net.osmand.plus.quickaction;
 
-import static net.osmand.plus.quickaction.AddQuickActionDialog.QUICK_ACTION_BUTTON_KEY;
+import static net.osmand.plus.quickaction.AddQuickActionFragment.QUICK_ACTION_BUTTON_KEY;
 import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 import android.app.Dialog;
@@ -22,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -187,6 +188,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 						} else {
 							mapButtonsHelper.updateQuickAction(buttonState, action);
 						}
+						notifyOnActionAdded();
 						dismiss();
 					} else {
 						action = mapButtonsHelper.generateUniqueActionName(actions, action);
@@ -204,6 +206,15 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		});
 	}
 
+	private void notifyOnActionAdded() {
+		FragmentManager manager = getParentFragmentManager();
+		for (Fragment fragment : manager.getFragments()) {
+			if (fragment instanceof AddQuickActionListener) {
+				((AddQuickActionListener) fragment).onQuickActionAdded();
+			}
+		}
+	}
+
 	private void showDuplicatedDialog() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 		builder.setTitle(R.string.quick_action_duplicate);
@@ -215,6 +226,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 				mapButtonsHelper.updateQuickAction(buttonState, action);
 			}
 			CreateEditActionDialog.this.dismiss();
+			notifyOnActionAdded();
 			dismiss();
 		}).create().show();
 	}
@@ -286,5 +298,8 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 			dialog.setArguments(args);
 			dialog.show(fragmentManager, TAG);
 		}
+	}
+	public interface AddQuickActionListener {
+		void onQuickActionAdded();
 	}
 }

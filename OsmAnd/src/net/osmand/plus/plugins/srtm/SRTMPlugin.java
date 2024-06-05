@@ -9,16 +9,19 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.ColorPalette;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -38,7 +41,6 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.plugins.openseamaps.NauticalMapsPlugin;
 import net.osmand.plus.quickaction.QuickActionType;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.utils.AndroidUtils;
@@ -58,10 +60,10 @@ import net.osmand.util.Algorithms;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -75,34 +77,25 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_WIDTH_ATTR = "contourWidth";
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
-	public static final String SLOPE_MAIN_COLOR_FILENAME = "slopes_main.txt";
-	public static final String HILLSHADE_MAIN_COLOR_FILENAME = "hillshade_main.txt";
-	public static final String SLOPE_SECONDARY_COLOR_FILENAME = "color_slope.txt";
-
 	public static final int TERRAIN_MIN_SUPPORTED_ZOOM = 4;
 	public static final int TERRAIN_MAX_SUPPORTED_ZOOM = 19;
 
 	public static final float MIN_VERTICAL_EXAGGERATION = 1.0f;
 	public static final float MAX_VERTICAL_EXAGGERATION = 3.0f;
 
-	public final CommonPreference<Integer> HILLSHADE_MIN_ZOOM;
-	public final CommonPreference<Integer> HILLSHADE_MAX_ZOOM;
-	public final CommonPreference<Integer> HILLSHADE_TRANSPARENCY;
-
-	public final CommonPreference<Integer> SLOPE_MIN_ZOOM;
-	public final CommonPreference<Integer> SLOPE_MAX_ZOOM;
-	public final CommonPreference<Integer> SLOPE_TRANSPARENCY;
 
 	public final CommonPreference<Boolean> TERRAIN;
-	public final CommonPreference<TerrainMode> TERRAIN_MODE;
+	public final CommonPreference<String> TERRAIN_MODE;
 
 
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM;
 
 	private final StateChangedListener<Boolean> enable3DMapsListener;
 	private final StateChangedListener<Boolean> terrainListener;
-	private final StateChangedListener<TerrainMode> terrainModeListener;
+	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
+
+	private final ConcurrentHashMap<String, ColorPalette> cachedTerrainModeColorPalette = new ConcurrentHashMap<>();
 
 	private TerrainLayer terrainLayer;
 
@@ -114,16 +107,10 @@ public class SRTMPlugin extends OsmandPlugin {
 	public SRTMPlugin(OsmandApplication app) {
 		super(app);
 
-		HILLSHADE_MIN_ZOOM = registerIntPreference("hillshade_min_zoom", 3).makeProfile();
-		HILLSHADE_MAX_ZOOM = registerIntPreference("hillshade_max_zoom", 17).makeProfile();
-		HILLSHADE_TRANSPARENCY = registerIntPreference("hillshade_transparency", 100).makeProfile();
-
-		SLOPE_MIN_ZOOM = registerIntPreference("slope_min_zoom", 3).makeProfile();
-		SLOPE_MAX_ZOOM = registerIntPreference("slope_max_zoom", 17).makeProfile();
-		SLOPE_TRANSPARENCY = registerIntPreference("slope_transparency", 80).makeProfile();
 
 		TERRAIN = registerBooleanPreference("terrain_layer", true).makeProfile();
-		TERRAIN_MODE = registerEnumStringPreference("terrain_mode", TerrainMode.HILLSHADE, TerrainMode.values(), TerrainMode.class).makeProfile();
+		TerrainMode[] tms = TerrainMode.values(app);
+		TERRAIN_MODE = registerStringPreference("terrain_mode", tms.length == 0 ? "" : tms[0].getKeyName()).makeProfile();
 
 		CONTOUR_LINES_ZOOM = registerStringPreference("contour_lines_zoom", null).makeProfile().cache();
 
@@ -267,44 +254,25 @@ public class SRTMPlugin extends OsmandPlugin {
 		TERRAIN.set(enabled);
 	}
 
-	public boolean isSlopeMode() {
-		return getTerrainMode() == TerrainMode.SLOPE;
-	}
 
 	public boolean isHillshadeMode() {
-		return getTerrainMode() == TerrainMode.HILLSHADE;
+		return getTerrainMode().isHillshade();
 	}
 
 	public TerrainMode getTerrainMode() {
-		return TERRAIN_MODE.get();
+		return TerrainMode.getByKey(TERRAIN_MODE.get());
 	}
 
 	public void setTerrainMode(TerrainMode mode) {
-		TERRAIN_MODE.set(mode);
+		TERRAIN_MODE.set(mode.getKeyName());
 	}
 
 	public void setTerrainTransparency(int transparency, TerrainMode mode) {
-		switch (mode) {
-			case HILLSHADE:
-				HILLSHADE_TRANSPARENCY.set(transparency);
-				break;
-			case SLOPE:
-				SLOPE_TRANSPARENCY.set(transparency);
-				break;
-		}
+		mode.setTransparency(transparency);
 	}
 
 	public void setTerrainZoomValues(int minZoom, int maxZoom, TerrainMode mode) {
-		switch (mode) {
-			case HILLSHADE:
-				HILLSHADE_MIN_ZOOM.set(minZoom);
-				HILLSHADE_MAX_ZOOM.set(maxZoom);
-				break;
-			case SLOPE:
-				SLOPE_MIN_ZOOM.set(minZoom);
-				SLOPE_MAX_ZOOM.set(maxZoom);
-				break;
-		}
+		mode.setZoomValues(minZoom, maxZoom);
 	}
 
 	public static float normalizeVerticalExaggerationScale(float scale) {
@@ -320,37 +288,15 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public int getTerrainTransparency() {
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				return HILLSHADE_TRANSPARENCY.get();
-			case SLOPE:
-				return SLOPE_TRANSPARENCY.get();
-		}
-		return 100;
+		return getTerrainMode().getTransparency();
 	}
 
 	public void resetZoomLevelsToDefault() {
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				HILLSHADE_MIN_ZOOM.resetToDefault();
-				HILLSHADE_MAX_ZOOM.resetToDefault();
-				break;
-			case SLOPE:
-				SLOPE_MIN_ZOOM.resetToDefault();
-				SLOPE_MAX_ZOOM.resetToDefault();
-				break;
-		}
+		getTerrainMode().resetZoomsToDefault();
 	}
 
 	public void resetTransparencyToDefault() {
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				HILLSHADE_TRANSPARENCY.resetToDefault();
-				break;
-			case SLOPE:
-				SLOPE_TRANSPARENCY.resetToDefault();
-				break;
-		}
+		getTerrainMode().resetTransparencyToDefault();
 	}
 
 	public void resetVerticalExaggerationToDefault(){
@@ -359,30 +305,12 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public int getTerrainMinZoom() {
 		int minSupportedZoom = TERRAIN_MIN_SUPPORTED_ZOOM;
-		int minZoom = minSupportedZoom;
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				minZoom = HILLSHADE_MIN_ZOOM.get();
-				break;
-			case SLOPE:
-				minZoom = SLOPE_MIN_ZOOM.get();
-				break;
-		}
-		return Math.max(minSupportedZoom, minZoom);
+		return Math.max(minSupportedZoom, getTerrainMode().getMinZoom());
 	}
 
 	public int getTerrainMaxZoom() {
 		int maxSupportedZoom = TERRAIN_MAX_SUPPORTED_ZOOM;
-		int maxZoom = maxSupportedZoom;
-		switch (getTerrainMode()) {
-			case HILLSHADE:
-				maxZoom = HILLSHADE_MAX_ZOOM.get();
-				break;
-			case SLOPE:
-				maxZoom = SLOPE_MAX_ZOOM.get();
-				break;
-		}
-		return Math.min(maxSupportedZoom, maxZoom);
+		return Math.min(maxSupportedZoom, getTerrainMode().getMaxZoom());
 	}
 
 	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
@@ -550,12 +478,10 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setListener(listener));
 		}
 		boolean terrainEnabled = TERRAIN.get();
-		TerrainMode terrainMode = TERRAIN_MODE.get();
+		TerrainMode terrainMode = TerrainMode.getByKey(TERRAIN_MODE.get());
 		adapter.addItem(new ContextMenuItem(TERRAIN_ID)
 				.setTitleId(R.string.shared_string_terrain, mapActivity)
-				.setDescription(app.getString(terrainMode == TerrainMode.HILLSHADE
-						? R.string.shared_string_hillshade
-						: R.string.download_slope_maps))
+				.setDescription(terrainMode.getDescription())
 				.setSelected(terrainEnabled)
 				.setColor(app, terrainEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
@@ -714,6 +640,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		List<QuickActionType> quickActionTypes = new ArrayList<>();
 		quickActionTypes.add(ContourLinesAction.TYPE);
 		quickActionTypes.add(TerrainAction.TYPE);
+		quickActionTypes.add(TerrainColorSchemeAction.TYPE);
 		return quickActionTypes;
 	}
 
@@ -746,5 +673,29 @@ public class SRTMPlugin extends OsmandPlugin {
 		mapRendererContext.updateElevationConfiguration();
 		mapRendererContext.recreateHeightmapProvider();
 		mapRendererContext.updateVerticalExaggerationScale();
+	}
+
+	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
+		ColorPalette colorPalette = cachedTerrainModeColorPalette.get(modeKey);
+		if (colorPalette != null) {
+			listener.collectingPalletFinished(colorPalette);
+		} else {
+			CollectColorPalletsTask collectColorPalletsTask = new CollectColorPalletsTask(app, modeKey, new CollectColorPalletListener() {
+
+				@Override
+				public void collectingPalletStarted() {
+					listener.collectingPalletStarted();
+				}
+
+				@Override
+				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
+					if (colorPalette != null) {
+						cachedTerrainModeColorPalette.put(modeKey, colorPalette);
+					}
+					listener.collectingPalletFinished(colorPalette);
+				}
+			});
+			collectColorPalletsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 }

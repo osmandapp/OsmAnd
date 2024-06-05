@@ -79,32 +79,19 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void setDateTime(long dateTime) {
-		long dayStart = OsmAndFormatter.getStartOfDayForTime(timePeriodStart);
+		long dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
 		long dayEnd = dayStart + DAY_IN_MILLISECONDS;
-		if (dateTime < dayStart || dateTime > dayEnd) {
-			dayStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
-			dayEnd = dayStart + DAY_IN_MILLISECONDS;
-		}
 		long todayStep = HOUR_IN_MILLISECONDS;
 		long nextStep = todayStep * 3;
 		long startOfToday = OsmAndFormatter.getStartOfToday();
 		long step = dayStart == startOfToday ? todayStep : nextStep;
-		long switchStepTime = (System.currentTimeMillis() + DAY_IN_MILLISECONDS) / nextStep * nextStep;
-		if (switchStepTime > startOfToday && switchStepTime >= dayStart + todayStep && switchStepTime <= dayEnd - nextStep) {
-			if (dateTime < switchStepTime) {
-				dayEnd = switchStepTime;
-				step = todayStep;
-			} else
-				dayStart = switchStepTime;
-		}
 		long prevTime = (dateTime - dayStart) / step * step + dayStart;
 		long nextTime = prevTime + step;
-		long nearestTime = dateTime - prevTime < nextTime - dateTime ? prevTime : nextTime;
 		if (timePeriodStep != step
-				|| (timePeriodStart > dayStart && nearestTime <= timePeriodStart)
-				|| (timePeriodEnd < dayEnd && nearestTime >= timePeriodEnd)) {
-			timePeriodStart = Math.max(nearestTime - step * 2, dayStart);
-			timePeriodEnd = Math.min(nearestTime + step * 2, dayEnd);
+				|| timePeriodStart != dayStart
+				|| timePeriodEnd != dayEnd) {
+			timePeriodStart = dayStart;
+			timePeriodEnd = dayEnd;
 			timePeriodStep = step;
 			requireTimePeriodChange = true;
 		}

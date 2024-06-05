@@ -98,7 +98,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 		useRasterSQLiteDbListener = change -> {
 			SRTMPlugin plugin = getSrtmPlugin();
-			if (plugin != null && plugin.isTerrainLayerEnabled() && (plugin.isHillshadeMode() || plugin.isSlopeMode())) {
+			if (plugin != null && plugin.isTerrainLayerEnabled()) {
 				plugin.updateLayers(app, null);
 			}
 		};

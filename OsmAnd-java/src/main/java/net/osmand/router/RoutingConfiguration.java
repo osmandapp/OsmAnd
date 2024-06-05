@@ -469,7 +469,17 @@ public class RoutingConfiguration {
 	private static void addSubclause(RoutingRule rr, RouteAttributeContext ctx) {
 		boolean not = "ifnot".equals(rr.tagName);
 		if(!Algorithms.isEmpty(rr.param)) {
-			ctx.getLastRule().registerAndParamCondition(rr.param, not);
+			if (rr.param.contains(",")) {
+				String[] params = rr.param.split(",");
+				for (String p : params) {
+					p = p.trim();
+					if (!Algorithms.isEmpty(p)) {
+						ctx.getLastRule().registerAndParamCondition(p, not);
+					}
+				}
+			} else {
+				ctx.getLastRule().registerAndParamCondition(rr.param, not);
+			}
 		}
 		if (!Algorithms.isEmpty(rr.t)) {
 			ctx.getLastRule().registerAndTagValueCondition(rr.t, Algorithms.isEmpty(rr.v) ? null : rr.v, not);

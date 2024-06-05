@@ -39,7 +39,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			"profile.change", SwitchProfileAction.class)
 			.nameRes(R.string.change_application_profile)
 			.iconRes(R.drawable.ic_action_manage_profiles)
-			.category(QuickActionType.NAVIGATION);
+			.category(QuickActionType.SETTINGS);
 
 	public SwitchProfileAction() {
 		super(TYPE);

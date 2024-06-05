@@ -1,9 +1,9 @@
 package net.osmand.plus.views;
 
-import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
-import android.view.WindowManager;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
@@ -16,13 +16,10 @@ import net.osmand.plus.helpers.TargetPointsHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
 
 public class OsmandMap {
 
@@ -60,8 +57,7 @@ public class OsmandMap {
 		int height;
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (carNavigationSession == null) {
-			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
-			Display display = wm.getDefaultDisplay();
+			Display display = AndroidUtils.getDisplay(app);
 			Point screenDimensions = new Point(0, 0);
 			display.getSize(screenDimensions);
 			width = screenDimensions.x;

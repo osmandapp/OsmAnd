@@ -5017,7 +5017,7 @@
     <string name="sound_beep_simple_loud">Pitido: sencillo ruidoso</string>
     <string name="weight_limit_error">El valor mínimo es \"%1$s\" toneladas. Utilice el perfil \"%2$s\" si el peso del vehículo es inferior al valor mínimo.</string>
     <string name="last_synchronized">Última sincronización</string>
-    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección de movimiento, centro para todas las demás.</string>
+    <string name="display_position_automatic_descr">Depende de la orientación del mapa: abajo para la dirección del movimiento, centro para todos los demás.</string>
     <string name="no_visible_tracks_description">Seleccione las vías para visualizarlas en el mapa.</string>
     <string name="no_visible_tracks">No hay pistas en el mapa</string>
     <string name="recently_visible">Visibles recientemente %1$s</string>
@@ -5484,7 +5484,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar el filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
+    <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista).</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>
@@ -5622,10 +5622,10 @@
     <string name="default_buttons">Botones por defecto</string>
     <string name="custom_map_button_name_present">Este botón ya existe</string>
     <string name="shared_string_limit">Límite</string>
-    <string name="when_exceeded">Cuando se supere</string>
-    <string name="speedometer_description">Muestra tu velocidad actual a través del GPS</string>
+    <string name="when_exceeded">Cuando se excede</string>
+    <string name="speedometer_description">Muestra su velocidad actual según lo informado a través del GPS</string>
     <string name="shared_string_speedometer">Velocímetro</string>
-    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="speed_limit_warning">Advertencia de límite de velocidad</string>
     <string name="help_article_setup_a_route_name">Crear una ruta</string>
     <string name="rendering_attr_padusDisplayMode_description">Por tipo de acceso o nombre del gestor</string>
     <string name="rendering_value_access_name">Por tipo de acceso</string>
@@ -5724,4 +5724,11 @@
     <string name="routing_attr_avoid_cobblestone_name">Evite los adoquines</string>
     <string name="routing_attr_avoid_cobblestone_description">Evite los adoquines</string>
     <string name="track_vertical_exaggeration_description">Al cambiar el valor de escala, puede cambiar la altura de la pista 3D.</string>
+    <string name="steps_per_minute_unit">PPM</string>
+    <string name="disable_map_layers">Deshabilitar capas de mapas</string>
+    <string name="disable_map_layers_descr">Deshabilite todas las capas del mapa sobre el mapa vectorial (es necesario reiniciar).</string>
+    <string name="height_legend_description">Los mapas de color de altitud se utilizan para visualizar el relieve.</string>
+    <string name="travel_topics">Temas de los viajes</string>
+    <string name="play_weather_forecast">Reproducir pronóstico del tiempo</string>
+    <string name="change_terrain_color_scheme">Cambiar esquema de color del terreno</string>
 </resources>

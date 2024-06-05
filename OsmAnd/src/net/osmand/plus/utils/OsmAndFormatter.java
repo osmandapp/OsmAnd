@@ -324,8 +324,8 @@ public class OsmAndFormatter {
 	public static class OsmAndFormatterParams {
 		public static final boolean DEFAULT_FORCE_TRAILING = true;
 		public static final int DEFAULT_EXTRA_DECIMAL_PRECISION = 1;
-		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING ;
-		int extraDecimalPrecision =  DEFAULT_EXTRA_DECIMAL_PRECISION;
+		boolean forceTrailingZerosInDecimalMainUnit = DEFAULT_FORCE_TRAILING;
+		int extraDecimalPrecision = DEFAULT_EXTRA_DECIMAL_PRECISION;
 
 		public static final OsmAndFormatterParams USE_LOWER_BOUNDS = useLowerBoundParam();
 		public static final OsmAndFormatterParams NO_TRAILING_ZEROS = new OsmAndFormatterParams().setTrailingZerosForMainUnit(false);
@@ -365,7 +365,7 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static String getFormattedDistance(float meters, @NonNull OsmandApplication ctx,
-											  OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
+	                                          OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
 		return getFormattedDistanceValue(meters, ctx, pms, mc).format(ctx);
 	}
 
@@ -376,9 +376,10 @@ public class OsmAndFormatter {
 	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx, OsmAndFormatterParams pms) {
 		return getFormattedDistanceValue(meters, ctx, pms, ctx.getSettings().METRIC_SYSTEM.get());
 	}
+
 	@NonNull
 	public static FormattedValue getFormattedDistanceValue(float meters, @NonNull OsmandApplication ctx,
-														   OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
+	                                                       OsmAndFormatterParams pms, @NonNull MetricsConstants mc) {
 		int mainUnitStr;
 		float mainUnitInMeters;
 		if (pms == null) {
@@ -399,7 +400,7 @@ public class OsmAndFormatter {
 		}
 
 		float floatDistance = meters / mainUnitInMeters;
-		boolean forceTrailingZeros  = pms.forceTrailingZerosInDecimalMainUnit;
+		boolean forceTrailingZeros = pms.forceTrailingZerosInDecimalMainUnit;
 		int decimalPrecision = pms.extraDecimalPrecision;
 		if (meters >= 100 * mainUnitInMeters) {
 			return formatValue((int) (meters / mainUnitInMeters + 0.5), mainUnitStr, forceTrailingZeros,
@@ -664,7 +665,7 @@ public class OsmAndFormatter {
 
 	@NonNull
 	public static FormattedValue formatValue(float value, @NonNull String unit, @StringRes int unitId, boolean forceTrailingZeroes,
-											 int decimalPlacesNumber, @NonNull OsmandApplication app) {
+	                                         int decimalPlacesNumber, @NonNull OsmandApplication app) {
 		String pattern = "0";
 		if (decimalPlacesNumber > 0) {
 			char fractionDigitPattern = forceTrailingZeroes ? '0' : '#';
@@ -1000,5 +1001,10 @@ public class OsmAndFormatter {
 			DateFormat timeFormat = twelveHoursFormat ? amPmTimeFormat : simpleTimeFormat;
 			return timeFormat.format(date);
 		}
+	}
+
+	@NonNull
+	public static String formatFps(float fps) {
+		return fps > 0 ? String.format(Locale.US, "%.1f", fps) : "-";
 	}
 }

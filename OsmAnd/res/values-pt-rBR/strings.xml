@@ -379,7 +379,7 @@
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_lessDetailed_name">Menos detalhes</string>
     <string name="rendering_attr_hideAccess_name">Restrições de acesso</string>
-    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso</string>
+    <string name="rendering_attr_showAccess_name">Mostrar restrições de acesso e pedágio</string>
     <string name="rendering_attr_showSurfaceGrade_name">Mostrar qualidade da via</string>
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_showCycleRoutes_name">Rotas de bicicleta</string>
@@ -4472,8 +4472,8 @@
     <string name="rendering_attr_OSMMapperAssistantNote_name">Tags de observação</string>
     <string name="rendering_attr_OSMMapperAssistantNote_description">Mostrar tags de observação</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Exibição esquemática de ícones em zooms baixos</string>
-    <string name="rendering_attr_showWaterwayTunnels_name">Túneis hidroviários</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Não ocultar túneis hidroviários</string>
+    <string name="rendering_attr_showWaterwayTunnels_name">Aumentar a visibilidade dos túneis hidroviários</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Aumentar a visibilidade dos túneis hidroviários</string>
     <string name="gpx_no_routes_title">Não há rotas</string>
     <string name="gpx_no_routes_descr">Você pode usar a ferramenta \"%1$s\" para adicionar rota ao arquivo.</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Ícones em ampliações baixas</string>
@@ -5199,7 +5199,7 @@
     <string name="save_track_external_sensors_data">Dados</string>
     <string name="there_are_no_connected_sensors_of_this_type">Não há sensores conectados deste tipo</string>
     <string name="external_sensors_source_of_data">Fonte de dados</string>
-    <string name="delete_track_folder_dialog_message">Isto eliminará a pasta \"%1$s\" e todas as trilhas (%2$s) incluídas.</string>
+    <string name="delete_track_folder_dialog_message">Isto irá eliminar a pasta \"%1$s\" e todas as %2$s trilhas nela contidas.</string>
     <string name="map_widget_rssi">RSSI</string>
     <string name="is_imported">%1$s é importado.</string>
     <string name="external_device_forget_sensor">Esquecer o sensor</string>
@@ -5449,7 +5449,7 @@
     <string name="edit_filter">Editar filtro</string>
     <string name="save_as_smart_folder">Salvar como pasta inteligente</string>
     <string name="shared_string_show_icon">Mostrar ícone</string>
-    <string name="delete_smart_folder_dialog_message">Isso excluirá a pasta inteligente \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Isso excluirá a pasta inteligente \"%1$s\". (Nenhuma trilha será excluída.)</string>
     <string name="help_article_navigation_routing_horse_routing_name">Roteamento de cavalo</string>
     <string name="empty_smart_folder_title">Nenhuma trilha correspondente</string>
     <string name="smart_folder_name_present">Essa pasta inteligente já está presente</string>
@@ -5594,7 +5594,7 @@
     <string name="routing_type">Tipo de roteamento</string>
     <string name="rendering_attr_padusDisplayMode_description">Por tipo de acesso ou nome do gerente</string>
     <string name="rendering_value_access_name">Por tipo de acesso</string>
-    <string name="speedometer_description">Mostra sua velocidade atual conforme relatada via GPS</string>
+    <string name="speedometer_description">Mostra sua velocidade atual, conforme relatado via GPS</string>
     <string name="shared_string_speedometer">Velocímetro</string>
     <string name="custom_map_button_name_present">Esse botão já está presente</string>
     <string name="add_button">Adicionar botão</string>
@@ -5700,4 +5700,22 @@
     <string name="map_text">Textos do mapas</string>
     <string name="routing_attr_avoid_cobblestone_name">Evitar paralelepípedos</string>
     <string name="routing_attr_avoid_cobblestone_description">Evitar paralelepípedos</string>
+    <string name="change_terrain_color_scheme">Alterar esquema de cores do terreno</string>
+    <string name="fix_north_up_descr">Não rodar o mapa com gestos na orientação do mapa de norte para cima</string>
+    <string name="apply_only_to_new">Aplicar apenas a novos</string>
+    <string name="change_default_tracks_appearance_confirmation">Aplicar alterações nas trilhas existentes na pasta ou apenas às novas?</string>
+    <string name="gpx_approximation_geo_cpp">Baseado em geometria (C++, rápido)</string>
+    <string name="travel_topics">Tópicos de viagem</string>
+    <string name="disable_map_layers">Desativar camadas de mapa</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="disable_map_layers_descr">Desative todas as camadas do mapa acima do mapa vetorial (reinício necessário).</string>
+    <string name="height_legend_description">Os mapas de cores de altitude são usados para visualizar relevo.</string>
+    <string name="gpx_approximation_geo_java">Baseado em geometria (Java, rápido)</string>
+    <string name="change_default_appearance_confirmation">Alterar a aparência padrão de %1$s?</string>
+    <string name="fix_north_up">Ativar o norte fixo para cima</string>
+    <string name="shared_string_unchanged">Inalterada</string>
+    <string name="use_3d_track_visualization">Visualização 3D</string>
+    <string name="unchanged_parameter_summary">Cada trilha manterá seus próprios parâmetros.</string>
+    <string name="gpx_approximation_cpp">Baseado em roteamento (C++)</string>
+    <string name="gpx_approximation_java">Baseado em roteamento (Java)</string>
 </resources>
