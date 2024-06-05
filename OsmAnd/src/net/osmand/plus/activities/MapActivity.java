@@ -1680,9 +1680,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
                         root,
                         this,
                         dummyFragmentContainerViewId));
-        searchConfiguration.setBreadcrumbsEnabled(true);
+        searchConfiguration.setBreadcrumbsEnabled(false);
         searchConfiguration.setFuzzySearchEnabled(false);
-        searchConfiguration.setHistoryEnabled(true);
         return searchConfiguration;
     }
 }

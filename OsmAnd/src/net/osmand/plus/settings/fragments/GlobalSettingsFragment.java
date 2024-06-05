@@ -7,8 +7,6 @@ import android.app.Activity;
 import android.app.backup.BackupManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -337,16 +335,5 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 			settings.setPreference(settings.DEFAULT_APPLICATION_MODE.getId(), value);
 		}
 		setupDefaultAppModePref();
-	}
-
-	@Override
-	protected void createToolbar(@NonNull final LayoutInflater inflater, @NonNull final View view) {
-		super.createToolbar(inflater, view);
-		new SearchPreferenceButtonHelper(this).configureSearchPreferenceButton(view.findViewById(R.id.action_button));
-	}
-
-	@Override
-	protected void updateToolbar() {
-		super.updateToolbar();
 	}
 }
