@@ -5723,4 +5723,5 @@
     <string name="height_legend_description">Farebné výškové mapy sa používajú na vizualizáciu terénu.</string>
     <string name="play_weather_forecast">Prehrať predpoveď počasia</string>
     <string name="change_terrain_color_scheme">Zmeniť farebnú schému terénu</string>
+    <string name="travel_topics">Cestovné témy</string>
 </resources>
