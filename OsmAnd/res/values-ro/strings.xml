@@ -4985,7 +4985,7 @@
     <string name="deleted_file">Fișier șters</string>
     <string name="sync_now">Sincronizează acum</string>
     <string name="cloud_conflicts">Conflicte</string>
-    <string name="cloud_conflict">Conflict</string>
+    <string name="cloud_conflict">Conflictul</string>
     <string name="upload_all">Încarcă tot</string>
     <string name="cloud_recent_changes">Modificări</string>
     <string name="cloud_all_changes_uploaded">S-au încărcat toate modificările</string>
@@ -5733,4 +5733,5 @@
     <string name="routing_attr_avoid_cobblestone_name">Evită piatra cubică</string>
     <string name="routing_attr_avoid_cobblestone_description">Evită piatra cubică</string>
     <string name="fixed_height">Înălțime fixă</string>
+    <string name="wall_height">Înălțime perete</string>
 </resources>
