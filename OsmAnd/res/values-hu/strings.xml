@@ -5728,4 +5728,5 @@
     <string name="play_weather_forecast">Időjárás előrejelzés lejátszása</string>
     <string name="travel_topics">Utazási témák</string>
     <string name="change_terrain_color_scheme">Domborzati színséma módosítása</string>
+    <string name="wall_height">Fal magassága</string>
 </resources>
