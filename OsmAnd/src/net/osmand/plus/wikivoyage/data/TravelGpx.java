@@ -1,14 +1,14 @@
 package net.osmand.plus.wikivoyage.data;
 
-import static net.osmand.gpx.GPXUtilities.POINT_ELEVATION;
-import static net.osmand.gpx.GPXUtilities.WptPt;
+import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
+import static net.osmand.shared.gpx.GpxUtilities.WptPt;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.data.Amenity;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 public class TravelGpx extends TravelArticle {
 
@@ -33,8 +33,8 @@ public class TravelGpx extends TravelArticle {
 
 	@Nullable
 	@Override
-	public GPXTrackAnalysis getAnalysis() {
-		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
+	public GpxTrackAnalysis getAnalysis() {
+		GpxTrackAnalysis analysis = new GpxTrackAnalysis();
 		if (gpxFile.hasAltitude) {
 			analysis = gpxFile.getAnalysis(0);
 		} else {

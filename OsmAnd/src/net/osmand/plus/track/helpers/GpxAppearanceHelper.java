@@ -1,27 +1,32 @@
 package net.osmand.plus.track.helpers;
 
-import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GpxParameter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.Gpx3DLinePositionType;
 import net.osmand.plus.track.Gpx3DVisualizationType;
 import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.TrackDrawInfo;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxDirItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.shared.io.KFile;
 
 import java.io.File;
+
+import kotlin.reflect.KClasses;
 
 public class GpxAppearanceHelper {
 
@@ -50,18 +55,18 @@ public class GpxAppearanceHelper {
 		this.trackDrawInfo = trackDrawInfo;
 	}
 
-	public boolean hasTrackDrawInfoForTrack(@NonNull GPXFile gpxFile) {
-		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.showCurrentTrack
-				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
+	public boolean hasTrackDrawInfoForTrack(@NonNull GpxFile gpxFile) {
+		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.isShowCurrentTrack()
+				|| gpxFile.getPath().equals(trackDrawInfo.getFilePath()));
 	}
 
-	public boolean isShowArrowsForTrack(@NonNull GPXFile gpxFile) {
+	public boolean isShowArrowsForTrack(@NonNull GpxFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowArrows();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.isShowCurrentTrack()) {
 			return settings.CURRENT_TRACK_SHOW_ARROWS.get();
 		} else {
-			Boolean show = getAppearanceParameter(new File(gpxFile.path), SHOW_ARROWS);
+			Boolean show = getAppearanceParameter(new File(gpxFile.getPath()), SHOW_ARROWS);
 			if (show != null) {
 				return show;
 			}
@@ -69,13 +74,13 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public boolean isShowStartFinishForTrack(@NonNull GPXFile gpxFile) {
+	public boolean isShowStartFinishForTrack(@NonNull GpxFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.isShowStartFinish();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.isShowCurrentTrack()) {
 			return settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 		} else {
-			Boolean show = getAppearanceParameter(new File(gpxFile.path), SHOW_START_FINISH);
+			Boolean show = getAppearanceParameter(new File(gpxFile.getPath()), SHOW_START_FINISH);
 			if (show != null) {
 				return show;
 			}
@@ -83,13 +88,13 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public Gpx3DVisualizationType getTrackVisualizationForTrack(@NonNull GPXFile gpxFile) {
+	public Gpx3DVisualizationType getTrackVisualizationForTrack(@NonNull GpxFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getTrackVisualizationType();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.isShowCurrentTrack()) {
 			return Gpx3DVisualizationType.get3DVisualizationType(settings.CURRENT_TRACK_3D_VISUALIZATION_TYPE.get());
 		} else {
-			String trackVisualizationType = getAppearanceParameter(new File(gpxFile.path), TRACK_VISUALIZATION_TYPE);
+			String trackVisualizationType = getAppearanceParameter(new File(gpxFile.getPath()), TRACK_VISUALIZATION_TYPE);
 			if (trackVisualizationType != null) {
 				return Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);
 			}
@@ -97,13 +102,13 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public Gpx3DWallColorType getTrackWallColorType(@NonNull GPXFile gpxFile) {
+	public Gpx3DWallColorType getTrackWallColorType(@NonNull GpxFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getTrackWallColorType();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.isShowCurrentTrack()) {
 			return Gpx3DWallColorType.get3DWallColorType(settings.CURRENT_TRACK_3D_WALL_COLORING_TYPE.get());
 		} else {
-			String trackWallColorType = getAppearanceParameter(new File(gpxFile.path), TRACK_3D_WALL_COLORING_TYPE);
+			String trackWallColorType = getAppearanceParameter(new File(gpxFile.getPath()), TRACK_3D_WALL_COLORING_TYPE);
 			if (trackWallColorType != null) {
 				return Gpx3DWallColorType.get3DWallColorType(trackWallColorType);
 			}
@@ -111,13 +116,13 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public Gpx3DLinePositionType getTrackLinePositionType(@NonNull GPXFile gpxFile) {
+	public Gpx3DLinePositionType getTrackLinePositionType(@NonNull GpxFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getTrackLinePositionType();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.getShowCurrentTrack()) {
 			return Gpx3DLinePositionType.get3DLinePositionType(settings.CURRENT_TRACK_3D_LINE_POSITION_TYPE.get());
 		} else {
-			String trackLinePositionType = getAppearanceParameter(new File(gpxFile.path), TRACK_3D_LINE_POSITION_TYPE);
+			String trackLinePositionType = getAppearanceParameter(new File(gpxFile.getPath()), TRACK_3D_LINE_POSITION_TYPE);
 			if (trackLinePositionType != null) {
 				return Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
 			}
@@ -125,13 +130,13 @@ public class GpxAppearanceHelper {
 		}
 	}
 
-	public float getAdditionalExaggeration(@NonNull GPXFile gpxFile) {
+	public float getAdditionalExaggeration(@NonNull GpxFile gpxFile) {
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getAdditionalExaggeration();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.getShowCurrentTrack()) {
 			return settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.get();
 		} else {
-			Double exaggeration = getAppearanceParameter(new File(gpxFile.path), ADDITIONAL_EXAGGERATION);
+			Double exaggeration = getAppearanceParameter(new File(gpxFile.getPath()), ADDITIONAL_EXAGGERATION);
 			if (exaggeration != null) {
 				return exaggeration.floatValue();
 			}
@@ -140,26 +145,26 @@ public class GpxAppearanceHelper {
 	}
 
 	@Nullable
-	public String getTrackWidth(@NonNull GPXFile gpxFile, @Nullable String defaultWidth) {
+	public String getTrackWidth(@NonNull GpxFile gpxFile, @Nullable String defaultWidth) {
 		String width;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			width = trackDrawInfo.getWidth();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.getShowCurrentTrack()) {
 			width = settings.CURRENT_TRACK_WIDTH.get();
 		} else {
-			width = getAppearanceParameter(new File(gpxFile.path), WIDTH);
+			width = getAppearanceParameter(new File(gpxFile.getPath()), WIDTH);
 		}
 		return width != null ? width : gpxFile.getWidth(defaultWidth);
 	}
 
-	public int getTrackColor(@NonNull GPXFile gpxFile, int defaultColor) {
+	public int getTrackColor(@NonNull GpxFile gpxFile, int defaultColor) {
 		Integer color;
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			color = trackDrawInfo.getColor();
-		} else if (gpxFile.showCurrentTrack) {
+		} else if (gpxFile.getShowCurrentTrack()) {
 			color = settings.CURRENT_TRACK_COLOR.get();
 		} else {
-			color = getAppearanceParameter(new File(gpxFile.path), COLOR);
+			color = getAppearanceParameter(new File(gpxFile.getPath()), COLOR);
 		}
 		return color != null ? color : gpxFile.getColor(defaultColor);
 	}
@@ -174,7 +179,7 @@ public class GpxAppearanceHelper {
 		if (value == null) {
 			throw new IllegalStateException("Requested parameter '" + parameter + "' is null.");
 		} else {
-			return ((Class<T>) parameter.getTypeClass()).cast(value);
+			return KClasses.cast(parameter.getTypeClass(), value);
 		}
 	}
 
@@ -185,7 +190,7 @@ public class GpxAppearanceHelper {
 		if (value == null) {
 			value = parameter.getDefaultValue();
 		}
-		return ((Class<T>) parameter.getTypeClass()).cast(value);
+		return KClasses.cast(parameter.getTypeClass(), value);
 	}
 
 	@Nullable
@@ -202,14 +207,14 @@ public class GpxAppearanceHelper {
 	public <T> T getAppearanceParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
 		Object value = item.getParameter(parameter);
 		if (value != null) {
-			return ((Class<T>) parameter.getTypeClass()).cast(value);
+			return KClasses.cast(parameter.getTypeClass(), value);
 		}
-		File dir = item.getFile().getParentFile();
+		KFile dir = item.getFile().getParentFile();
 		if (dir != null) {
 			GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(dir);
 			value = dirItem.getParameter(parameter);
 			if (value != null) {
-				return ((Class<T>) parameter.getTypeClass()).cast(value);
+				return KClasses.cast(parameter.getTypeClass(), value);
 			}
 		}
 		return null;

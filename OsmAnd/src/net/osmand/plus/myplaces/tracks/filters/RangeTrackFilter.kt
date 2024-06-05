@@ -1,7 +1,7 @@
 package net.osmand.plus.myplaces.tracks.filters
 
 import com.google.gson.annotations.Expose
-import net.osmand.gpx.GpxParameter
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.plus.OsmandApplication
 import net.osmand.plus.configmap.tracks.TrackItem
 import kotlin.math.ceil

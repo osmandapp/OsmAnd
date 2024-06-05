@@ -1,7 +1,5 @@
 package net.osmand.plus.mapmarkers;
 
-import static net.osmand.gpx.GPXUtilities.readText;
-import static net.osmand.gpx.GPXUtilities.writeNotNullText;
 import static net.osmand.util.MapUtils.createShortLinkString;
 
 import android.util.Pair;
@@ -10,11 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.GPXExtensionsReader;
-import net.osmand.gpx.GPXUtilities.GPXExtensionsWriter;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.SharedUtil;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsReader;
+import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsWriter;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
@@ -23,14 +22,14 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.xml.XmlParserException;
+import net.osmand.shared.xml.XmlPullParser;
+import net.osmand.shared.xml.XmlSerializer;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -109,21 +108,21 @@ public class ItineraryDataHelper {
 			return false;
 		}
 		List<ItineraryGroupInfo> groupInfos = new ArrayList<>();
-		GPXFile gpxFile = loadGPXFile(file, groupInfos);
-		if (gpxFile.error != null) {
+		GpxFile gpxFile = loadGPXFile(file, groupInfos);
+		if (gpxFile.getError() != null) {
 			return false;
 		}
 		collectMarkersGroups(gpxFile, groups, groupInfos, sortedMarkers);
 		return true;
 	}
 
-	public void collectMarkersGroups(GPXFile gpxFile, Map<String, MapMarkersGroup> groups,
+	public void collectMarkersGroups(GpxFile gpxFile, Map<String, MapMarkersGroup> groups,
 	                                 List<ItineraryGroupInfo> groupInfos, Map<String, MapMarker> sortedMarkers) {
 		for (ItineraryGroupInfo groupInfo : groupInfos) {
 			MapMarkersGroup group = ItineraryGroupInfo.createGroup(groupInfo);
 			groups.put(groupInfo.alias, group);
 		}
-		for (WptPt point : gpxFile.getPoints()) {
+		for (WptPt point : gpxFile.getPointsList()) {
 			String itineraryId = point.getExtensionsToRead().get(ITINERARY_ID);
 			Entry<String, MapMarkersGroup> entry = getMapMarkersGroupForItineraryId(groups, itineraryId);
 			if (entry != null) {
@@ -164,10 +163,10 @@ public class ItineraryDataHelper {
 		}
 	}
 
-	public Exception saveFile(@NonNull File file, @NonNull List<MapMarkersGroup> groups, @Nullable List<MapMarker> sortedMarkers) {
+	public kotlin.Exception saveFile(@NonNull File file, @NonNull List<MapMarkersGroup> groups, @Nullable List<MapMarker> sortedMarkers) {
 		long lastModifiedTime = getLastModifiedTime();
-		GPXFile gpxFile = generateGpx(groups, sortedMarkers);
-		Exception exception = GPXUtilities.writeGpxFile(file, gpxFile);
+		GpxFile gpxFile = generateGpx(groups, sortedMarkers);
+		kotlin.Exception exception = GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(file), gpxFile);
 		if (exception == null) {
 			FileInputStream is = null;
 			try {
@@ -188,20 +187,21 @@ public class ItineraryDataHelper {
 		return exception;
 	}
 
-	private void assignExtensionWriter(GPXFile gpxFile, Collection<ItineraryGroupInfo> groups) {
+	private void assignExtensionWriter(GpxFile gpxFile, Collection<ItineraryGroupInfo> groups) {
 		if (gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
+			gpxFile.setExtensionsWriter(new GpxExtensionsWriter() {
+
 				@Override
 				public void writeExtensions(XmlSerializer serializer) {
 					for (ItineraryGroupInfo group : groups) {
 						try {
 							serializer.startTag(null, "osmand:" + ITINERARY_GROUP);
 
-							writeNotNullText(serializer, "osmand:name", group.name);
-							writeNotNullText(serializer, "osmand:type", group.type);
-							writeNotNullText(serializer, "osmand:path", group.path);
-							writeNotNullText(serializer, "osmand:alias", group.alias);
-							writeNotNullText(serializer, "osmand:categories", group.categories);
+							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:name", group.name);
+							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:type", group.type);
+							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:path", group.path);
+							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:alias", group.alias);
+							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:categories", group.categories);
 
 							serializer.endTag(null, "osmand:" + ITINERARY_GROUP);
 						} catch (IOException e) {
@@ -213,14 +213,14 @@ public class ItineraryDataHelper {
 		}
 	}
 
-	private GPXFile loadGPXFile(File file, List<ItineraryGroupInfo> groupInfos) {
-		return GPXUtilities.loadGPXFile(file, getGPXExtensionsReader(groupInfos), false);
+	private GpxFile loadGPXFile(File file, List<ItineraryGroupInfo> groupInfos) {
+		return GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(file), getGpxExtensionsReader(groupInfos), false);
 	}
 
-	public GPXExtensionsReader getGPXExtensionsReader(List<ItineraryGroupInfo> groupInfos) {
-		return new GPXExtensionsReader() {
+	public GpxExtensionsReader getGpxExtensionsReader(List<ItineraryGroupInfo> groupInfos) {
+		return new GpxExtensionsReader() {
 			@Override
-			public boolean readExtensions(GPXFile res, XmlPullParser parser) throws IOException, XmlPullParserException {
+			public boolean readExtensions(GpxFile res, XmlPullParser parser) throws IOException, XmlParserException {
 				if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
 					ItineraryGroupInfo groupInfo = new ItineraryGroupInfo();
 
@@ -229,15 +229,15 @@ public class ItineraryDataHelper {
 						if (tok == XmlPullParser.START_TAG) {
 							String tagName = parser.getName().toLowerCase();
 							if ("name".equals(tagName)) {
-								groupInfo.name = readText(parser, tagName);
+								groupInfo.name = GpxUtilities.INSTANCE.readText(parser, tagName);
 							} else if ("type".equals(tagName)) {
-								groupInfo.type = readText(parser, tagName);
+								groupInfo.type = GpxUtilities.INSTANCE.readText(parser, tagName);
 							} else if ("path".equals(tagName)) {
-								groupInfo.path = readText(parser, tagName);
+								groupInfo.path = GpxUtilities.INSTANCE.readText(parser, tagName);
 							} else if ("alias".equals(tagName)) {
-								groupInfo.alias = readText(parser, tagName);
+								groupInfo.alias = GpxUtilities.INSTANCE.readText(parser, tagName);
 							} else if ("categories".equals(tagName)) {
-								groupInfo.categories = readText(parser, tagName);
+								groupInfo.categories = GpxUtilities.INSTANCE.readText(parser, tagName);
 							}
 						} else if (tok == XmlPullParser.END_TAG) {
 							if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
@@ -253,7 +253,7 @@ public class ItineraryDataHelper {
 	}
 
 	public String saveMarkersToFile(String fileName) {
-		GPXFile gpxFile = generateGpx();
+		GpxFile gpxFile = generateGpx();
 		String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
 		File dir = app.getAppPath(dirName);
 		if (!dir.exists()) {
@@ -261,26 +261,26 @@ public class ItineraryDataHelper {
 		}
 		String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
 		File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
-		GPXUtilities.writeGpxFile(fout, gpxFile);
+		GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(fout), gpxFile);
 
 		return fout.getAbsolutePath();
 	}
 
-	public GPXFile generateGpx() {
+	public GpxFile generateGpx() {
 		return generateGpx(mapMarkersHelper.getMapMarkers(), false);
 	}
 
-	public GPXFile generateGpx(List<MapMarker> markers, boolean completeBackup) {
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+	public GpxFile generateGpx(List<MapMarker> markers, boolean completeBackup) {
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (MapMarker marker : markers) {
 			WptPt wpt = toWpt(marker);
 			wpt.setColor(ContextCompat.getColor(app, MapMarker.getColorId(marker.colorIndex)));
 			if (completeBackup) {
 				if (marker.creationDate != 0) {
-					wpt.getExtensionsToWrite().put(CREATION_DATE, GPXUtilities.formatTime(marker.creationDate));
+					wpt.getExtensionsToWrite().put(CREATION_DATE, GpxUtilities.INSTANCE.formatTime(marker.creationDate));
 				}
 				if (marker.visitedDate != 0) {
-					wpt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(marker.visitedDate));
+					wpt.getExtensionsToWrite().put(VISITED_DATE, GpxUtilities.INSTANCE.formatTime(marker.visitedDate));
 				}
 			}
 			gpxFile.addPoint(wpt);
@@ -288,8 +288,8 @@ public class ItineraryDataHelper {
 		return gpxFile;
 	}
 
-	public GPXFile generateGpx(@NonNull List<MapMarkersGroup> mapMarkersGroups, @Nullable List<MapMarker> sortedMarkers) {
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+	public GpxFile generateGpx(@NonNull List<MapMarkersGroup> mapMarkersGroups, @Nullable List<MapMarker> sortedMarkers) {
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		Map<String, ItineraryGroupInfo> groups = new HashMap<>();
 
 		List<MapMarker> markers = new ArrayList<>();
@@ -302,7 +302,7 @@ public class ItineraryDataHelper {
 		return gpxFile;
 	}
 
-	private void addMarkersToGpx(@NonNull GPXFile gpxFile, @NonNull Map<String, ItineraryGroupInfo> groups, @NonNull List<MapMarker> markers) {
+	private void addMarkersToGpx(@NonNull GpxFile gpxFile, @NonNull Map<String, ItineraryGroupInfo> groups, @NonNull List<MapMarker> markers) {
 		for (MapMarker marker : markers) {
 			WptPt wptPt = toWpt(marker);
 			gpxFile.addPoint(wptPt);
@@ -313,7 +313,7 @@ public class ItineraryDataHelper {
 				if (Algorithms.stringsEqual(groupInfo.type, ItineraryType.MARKERS.getTypeName())) {
 					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + marker.id);
 				} else {
-					String itineraryId = marker.getName(app) + createShortLinkString(wptPt.lat, wptPt.lon, 15);
+					String itineraryId = marker.getName(app) + createShortLinkString(wptPt.getLat(), wptPt.getLon(), 15);
 					extensions.put(ITINERARY_ID, groupInfo.alias + ":" + itineraryId);
 				}
 				if (Algorithms.stringsEqual(groupInfo.type, ItineraryType.TRACK.getTypeName())) {
@@ -327,9 +327,9 @@ public class ItineraryDataHelper {
 	}
 
 	@NonNull
-	public List<MapMarker> readMarkersFromGpx(@NonNull GPXFile gpxFile, boolean history) {
+	public List<MapMarker> readMarkersFromGpx(@NonNull GpxFile gpxFile, boolean history) {
 		List<MapMarker> mapMarkers = new ArrayList<>();
-		for (WptPt point : gpxFile.getPoints()) {
+		for (WptPt point : gpxFile.getPointsList()) {
 			MapMarker marker = fromWpt(app, point, null);
 			marker.history = history;
 			mapMarkers.add(marker);
@@ -359,13 +359,13 @@ public class ItineraryDataHelper {
 
 	public static MapMarker fromWpt(@NonNull OsmandApplication app, @NonNull WptPt point, @Nullable MapMarkersGroup group) {
 		int colorIndex = MapMarker.getColorIndex(app, point.getColor());
-		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, point.name);
-		MapMarker marker = new MapMarker(new LatLon(point.lat, point.lon), name, colorIndex);
+		PointDescription name = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, point.getName());
+		MapMarker marker = new MapMarker(new LatLon(point.getLat(), point.getLon()), name, colorIndex);
 
 		marker.id = getMarkerId(app, marker, group);
 		marker.wptPt = point;
-		marker.creationDate = GPXUtilities.parseTime(point.getExtensionsToRead().get(CREATION_DATE));
-		marker.visitedDate = GPXUtilities.parseTime(point.getExtensionsToRead().get(VISITED_DATE));
+		marker.creationDate = GpxUtilities.INSTANCE.parseTime(point.getExtensionsToRead().get(CREATION_DATE));
+		marker.visitedDate = GpxUtilities.INSTANCE.parseTime(point.getExtensionsToRead().get(VISITED_DATE));
 		marker.history = marker.visitedDate != 0;
 
 		if (group != null) {
@@ -378,10 +378,10 @@ public class ItineraryDataHelper {
 
 	public static WptPt toWpt(@NonNull MapMarker marker) {
 		WptPt wpt = new WptPt();
-		wpt.lat = marker.getLatitude();
-		wpt.lon = marker.getLongitude();
-		wpt.name = marker.getOnlyName();
-		wpt.time = marker.creationDate;
+		wpt.setLat(marker.getLatitude());
+		wpt.setLon(marker.getLongitude());
+		wpt.setName(marker.getOnlyName());
+		wpt.setTime(marker.creationDate);
 		return wpt;
 	}
 

@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;
@@ -59,7 +59,7 @@ public class ShareOsmPointsAsyncTask extends AsyncTask<OsmPoint, OsmPoint, Strin
 	}
 
 	private String saveGpxFile(OsmPoint[] points) {
-		GPXFile gpx = new GPXFile(Version.getFullVersion(app));
+		GpxFile gpx = new GpxFile(Version.getFullVersion(app));
 		for (OsmPoint point : points) {
 			if (point.getGroup() == Group.POI) {
 				OpenstreetmapPoint p = (OpenstreetmapPoint) point;
@@ -81,7 +81,7 @@ public class ShareOsmPointsAsyncTask extends AsyncTask<OsmPoint, OsmPoint, Strin
 				gpx.addPoint(wpt);
 			}
 		}
-		Exception exception = GPXUtilities.writeGpxFile(srcFile, gpx);
+		Exception exception = GpxUtilities.writeGpxFile(srcFile, gpx);
 		if (exception != null) {
 			return exception.getMessage();
 		}

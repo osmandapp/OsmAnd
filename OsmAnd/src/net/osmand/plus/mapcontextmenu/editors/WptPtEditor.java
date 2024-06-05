@@ -4,9 +4,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
@@ -26,7 +26,7 @@ public class WptPtEditor extends PointEditor {
 	private OnTemplateAddedListener onTemplateAddedListener;
 	private OnDismissListener onDismissListener;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private WptPt wpt;
 	@ColorInt
 	private int categoryColor;
@@ -84,7 +84,7 @@ public class WptPtEditor extends PointEditor {
 	}
 
 	@Nullable
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
@@ -123,7 +123,7 @@ public class WptPtEditor extends PointEditor {
 		return TAG;
 	}
 
-	public void add(GPXFile gpxFile, LatLon latLon, String title, @Nullable Amenity amenity) {
+	public void add(GpxFile gpxFile, LatLon latLon, String title, @Nullable Amenity amenity) {
 		MapActivity mapActivity = getMapActivity();
 		if (latLon == null || mapActivity == null) {
 			return;
@@ -153,7 +153,7 @@ public class WptPtEditor extends PointEditor {
 		showEditorFragment();
 	}
 
-	public void add(@NonNull GPXFile gpxFile, @NonNull WptPt wpt, String categoryName, int categoryColor, boolean skipDialog) {
+	public void add(@NonNull GpxFile gpxFile, @NonNull WptPt wpt, String categoryName, int categoryColor, boolean skipDialog) {
 		if (mapActivity == null) {
 			return;
 		}
@@ -203,7 +203,7 @@ public class WptPtEditor extends PointEditor {
 		showEditorFragment();
 	}
 
-	public void addWaypointTemplate(@Nullable WptPt from, @NonNull GPXFile gpxFile) {
+	public void addWaypointTemplate(@Nullable WptPt from, @NonNull GpxFile gpxFile) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
 			return;

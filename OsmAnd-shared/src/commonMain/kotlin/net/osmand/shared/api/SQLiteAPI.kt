@@ -1,4 +1,4 @@
-package net.osmand.shared.db
+package net.osmand.shared.api
 
 interface SQLiteAPI {
 

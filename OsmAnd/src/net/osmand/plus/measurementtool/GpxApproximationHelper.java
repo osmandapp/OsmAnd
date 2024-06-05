@@ -9,8 +9,8 @@ import net.osmand.CallbackWithObject;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.GpxApproximator;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -186,9 +186,9 @@ public class GpxApproximationHelper {
 	}
 
 	public static void approximateGpxSilently(@NonNull OsmandApplication app,
-	                                          @NonNull GPXFile gpxFile,
+	                                          @NonNull GpxFile gpxFile,
 	                                          @NonNull GpxApproximationParams params,
-	                                          @NonNull CallbackWithObject<GPXFile> callback) {
+	                                          @NonNull CallbackWithObject<GpxFile> callback) {
 		GpxData gpxData = new GpxData(gpxFile);
 		MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 		ctx.setGpxData(gpxData);

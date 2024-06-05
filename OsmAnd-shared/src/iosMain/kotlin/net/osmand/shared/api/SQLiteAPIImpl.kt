@@ -1,4 +1,4 @@
-package net.osmand.shared.db
+package net.osmand.shared.api
 
 import co.touchlab.sqliter.Cursor
 import co.touchlab.sqliter.DatabaseConfiguration
@@ -12,7 +12,7 @@ import co.touchlab.sqliter.longForQuery
 import co.touchlab.sqliter.setVersion
 import co.touchlab.sqliter.stringForQuery
 import co.touchlab.sqliter.withStatement
-import net.osmand.shared.db.SQLiteAPI.*
+import net.osmand.shared.api.SQLiteAPI.*
 import okio.Path.Companion.toPath
 
 class SQLiteAPIImpl : SQLiteAPI {

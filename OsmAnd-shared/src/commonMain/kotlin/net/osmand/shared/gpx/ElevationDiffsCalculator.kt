@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.util.MapUtils
+import net.osmand.shared.util.KMapUtils
 import kotlin.math.sqrt
 
 abstract class ElevationDiffsCalculator {
@@ -33,7 +33,7 @@ abstract class ElevationDiffsCalculator {
 
 	private fun getProjectionDist(x: Double, y: Double, fromx: Double, fromy: Double, tox: Double, toy: Double): Double {
 		val mDist = (fromx - tox) * (fromx - tox) + (fromy - toy) * (fromy - toy)
-		val projection = MapUtils.scalarMultiplication(fromx, fromy, tox, toy, x, y)
+		val projection = KMapUtils.scalarMultiplication(fromx, fromy, tox, toy, x, y)
 		val (prx, pry) = when {
 			projection < 0 -> Pair(fromx, fromy)
 			projection >= mDist -> Pair(tox, toy)

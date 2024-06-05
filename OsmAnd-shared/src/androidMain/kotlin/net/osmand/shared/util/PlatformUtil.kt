@@ -1,8 +1,8 @@
 package net.osmand.shared.util
 
 import android.content.Context
-import net.osmand.shared.db.SQLiteAPI
-import net.osmand.shared.db.SQLiteAPIImpl
+import net.osmand.shared.api.SQLiteAPI
+import net.osmand.shared.api.SQLiteAPIImpl
 import net.osmand.shared.io.KFile
 import java.io.File
 import java.lang.ref.WeakReference

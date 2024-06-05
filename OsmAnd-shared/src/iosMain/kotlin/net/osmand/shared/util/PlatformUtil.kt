@@ -1,7 +1,7 @@
 package net.osmand.shared.util
 
-import net.osmand.shared.db.SQLiteAPI
-import net.osmand.shared.db.SQLiteAPIImpl
+import net.osmand.shared.api.SQLiteAPI
+import net.osmand.shared.api.SQLiteAPIImpl
 import net.osmand.shared.io.KFile
 import platform.Foundation.NSDate
 import platform.Foundation.NSString

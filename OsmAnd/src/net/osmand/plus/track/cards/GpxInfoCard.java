@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -29,10 +29,10 @@ import java.util.Locale;
 
 public class GpxInfoCard extends MapBaseCard {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
 
-	public GpxInfoCard(@NonNull MapActivity mapActivity, @NonNull GPXFile gpxFile) {
+	public GpxInfoCard(@NonNull MapActivity mapActivity, @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 	}

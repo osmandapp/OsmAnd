@@ -4,8 +4,8 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
@@ -20,11 +20,11 @@ import java.util.Set;
 public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 
 	private final OsmandApplication app;
-	private final GPXFile gpx;
+	private final GpxFile gpx;
 	private final Set<GpxDisplayItem> selectedItems;
 	private final WeakReference<OnPointsDeleteListener> listenerRef;
 
-	public DeletePointsTask(OsmandApplication app, GPXFile gpxFile, Set<GpxDisplayItem> selectedItems, OnPointsDeleteListener listener) {
+	public DeletePointsTask(OsmandApplication app, GpxFile gpxFile, Set<GpxDisplayItem> selectedItems, OnPointsDeleteListener listener) {
 		this.app = app;
 		this.gpx = gpxFile;
 		this.selectedItems = selectedItems;
@@ -55,7 +55,7 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 				}
 			}
 			if (!gpx.showCurrentTrack) {
-				GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
+				GpxUtilities.writeGpxFile(new File(gpx.path), gpx);
 				boolean selected = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.path) != null;
 				if (selected) {
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
@@ -66,7 +66,7 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 		return null;
 	}
 
-	public static void syncGpx(@NonNull OsmandApplication app, GPXFile gpxFile) {
+	public static void syncGpx(@NonNull OsmandApplication app, GpxFile gpxFile) {
 		MapMarkersHelper helper = app.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {

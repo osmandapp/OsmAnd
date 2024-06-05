@@ -15,7 +15,7 @@ import net.osmand.shared.extensions.toRadians
  * 2. finding center for array of nodes
  * 3. tile evaluation algorithms
  */
-object MapUtils {
+object KMapUtils {
 
 	const val ROUNDING_ERROR = 3
 	private const val EARTH_RADIUS_B = 6356752

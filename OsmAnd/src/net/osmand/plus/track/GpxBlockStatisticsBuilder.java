@@ -22,8 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -58,7 +58,7 @@ public class GpxBlockStatisticsBuilder {
 
 	private RecyclerView blocksView;
 	private final SelectedGpxFile selectedGpxFile;
-	private GPXTrackAnalysis analysis;
+	private GpxTrackAnalysis analysis;
 
 	private BlockStatisticsAdapter adapter;
 	private final List<StatBlock> items = new ArrayList<>();
@@ -105,16 +105,16 @@ public class GpxBlockStatisticsBuilder {
 
 	@Nullable
 	public GpxDisplayItem getDisplayItem() {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		return GpxUiHelper.makeGpxDisplayItem(app, gpxFile, GPX, analysis);
 	}
 
-	private GPXFile getGPXFile() {
+	private GpxFile getGPXFile() {
 		return selectedGpxFile.getGpxFileToDisplay();
 	}
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
-	                           @Nullable GPXTrackAnalysis analysis) {
+	                           @Nullable GpxTrackAnalysis analysis) {
 		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(), actionsListener, activeColor);
 		adapter.setItems(items);
@@ -155,8 +155,8 @@ public class GpxBlockStatisticsBuilder {
 		initItems(null);
 	}
 
-	public void initItems(@Nullable GPXTrackAnalysis initAnalysis) {
-		GPXFile gpxFile = getGPXFile();
+	public void initItems(@Nullable GpxTrackAnalysis initAnalysis) {
+		GpxFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;
 		}
@@ -164,7 +164,7 @@ public class GpxBlockStatisticsBuilder {
 		if (initAnalysis == null) {
 			withoutGaps = true;
 			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
-				GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				GpxFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
 				analysis = currentGpx.getAnalysis(0);
 				withoutGaps = !selectedGpxFile.isJoinSegments()
 						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
@@ -441,7 +441,7 @@ public class GpxBlockStatisticsBuilder {
 			holder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					GPXTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
+					GpxTrackAnalysis analysis = displayItem != null ? displayItem.analysis : null;
 					if (blocksClickable && analysis != null && actionsListener != null) {
 						ArrayList<GPXDataSetType> list = new ArrayList<>();
 						if (analysis.hasElevationData() || analysis.isSpeedSpecified() || analysis.hasSpeedData()) {

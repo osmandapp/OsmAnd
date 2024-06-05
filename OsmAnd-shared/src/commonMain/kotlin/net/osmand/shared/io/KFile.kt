@@ -30,6 +30,11 @@ class KFile {
 
 	fun parent(): Path? = path.parent
 
+	fun getParentFile(): KFile? {
+		val parent = path.parent
+		return if (parent != null) KFile(parent) else null
+	}
+
 	@Throws(IOException::class)
 	fun exists(): Boolean = FileSystem.SYSTEM.exists(path)
 

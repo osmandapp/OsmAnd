@@ -4,13 +4,13 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 
 public class WptLocationPoint implements LocationPoint {
 
-	GPXUtilities.WptPt pt;
+	GpxUtilities.WptPt pt;
 
-	public WptLocationPoint(GPXUtilities.WptPt p) {
+	public WptLocationPoint(GpxUtilities.WptPt p) {
 		this.pt = p;
 	}
 
@@ -38,7 +38,7 @@ public class WptLocationPoint implements LocationPoint {
 		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.name);
 	}
 
-	public GPXUtilities.WptPt getPt() {
+	public GpxUtilities.WptPt getPt() {
 		return pt;
 	}
 }

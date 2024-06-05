@@ -12,11 +12,11 @@ import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.SplitMetric.DistanceSplitMetric
 import net.osmand.shared.gpx.SplitMetric.TimeSplitMetric
 import net.osmand.shared.io.KFile
-import net.osmand.shared.util.Algorithms
-import net.osmand.shared.util.Algorithms.hash
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KAlgorithms.hash
 import net.osmand.shared.util.IProgress
 import net.osmand.shared.util.LoggerFactory
-import net.osmand.shared.util.MapUtils
+import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import net.osmand.shared.util.StringBundle
 import net.osmand.shared.util.StringBundleXmlReader
@@ -190,7 +190,7 @@ object GpxUtilities {
 		}
 
 		fun setColor(color: Int) {
-			setColor(Algorithms.colorToString(color))
+			setColor(KAlgorithms.colorToString(color))
 		}
 
 		fun setColor(color: String) {
@@ -208,10 +208,10 @@ object GpxUtilities {
 	}
 
 	fun parseColor(colorString: String?): Int? {
-		if (!Algorithms.isEmpty(colorString)) {
+		if (!KAlgorithms.isEmpty(colorString)) {
 			if (colorString!![0] == '#') {
 				return try {
-					Algorithms.parseColor(colorString)
+					KAlgorithms.parseColor(colorString)
 				} catch (e: IllegalArgumentException) {
 					log.error("Error parse color", e)
 					null
@@ -388,7 +388,7 @@ object GpxUtilities {
 		}
 
 		fun setAddress(address: String?) {
-			if (Algorithms.isBlank(address)) {
+			if (KAlgorithms.isBlank(address)) {
 				getExtensionsToWrite().remove(ADDRESS_EXTENSION)
 			} else {
 				getExtensionsToWrite()[ADDRESS_EXTENSION] = address!!
@@ -536,6 +536,8 @@ object GpxUtilities {
 		var routeSegments = mutableListOf<RouteSegment>()
 		var routeTypes = mutableListOf<RouteType>()
 
+		fun isGeneralSegment() = generalSegment
+
 		fun hasRoute(): Boolean {
 			return routeSegments.isNotEmpty() && routeTypes.isNotEmpty()
 		}
@@ -572,6 +574,8 @@ object GpxUtilities {
 		var desc: String? = null
 		var segments = mutableListOf<TrkSegment>()
 		var generalTrack = false
+
+		fun isGeneralTrack() = generalTrack
 	}
 
 	class Route : GpxExtensions() {
@@ -627,8 +631,8 @@ object GpxUtilities {
 
 		fun readDescription() {
 			val readDescription = getExtensionsToWrite().remove("desc")
-			if (!Algorithms.isEmpty(readDescription)) {
-				desc = if (Algorithms.isEmpty(desc)) {
+			if (!KAlgorithms.isEmpty(readDescription)) {
+				desc = if (KAlgorithms.isEmpty(desc)) {
 					readDescription
 				} else {
 					"$desc; $readDescription"
@@ -802,12 +806,12 @@ object GpxUtilities {
 			val bundle = StringBundle()
 			bundle.putString("name", name)
 			if (color != 0) {
-				bundle.putString("color", Algorithms.colorToString(color))
+				bundle.putString("color", KAlgorithms.colorToString(color))
 			}
-			if (!Algorithms.isEmpty(iconName)) {
+			if (!KAlgorithms.isEmpty(iconName)) {
 				bundle.putString(ICON_NAME_EXTENSION, iconName)
 			}
-			if (!Algorithms.isEmpty(backgroundType)) {
+			if (!KAlgorithms.isEmpty(backgroundType)) {
 				bundle.putString(BACKGROUND_TYPE_EXTENSION, backgroundType)
 			}
 			if (isHidden()) {
@@ -904,7 +908,7 @@ object GpxUtilities {
 		return try {
 			fout.createDirectories()
 			output = fout.sink()
-			if (Algorithms.isEmpty(file.path)) {
+			if (KAlgorithms.isEmpty(file.path)) {
 				file.path = (if (fout.isAbsolute()) fout.path() else
 					fout.absolutePath())
 			}
@@ -983,7 +987,7 @@ object GpxUtilities {
 	}
 
 	private fun assignPointsGroupsExtensionWriter(gpxFile: GpxFile) {
-		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.extensionsWriter == null) {
+		if (!KAlgorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.extensionsWriter == null) {
 			gpxFile.extensionsWriter = object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
@@ -1001,7 +1005,7 @@ object GpxUtilities {
 
 	private fun writeMetadata(serializer: XmlSerializer, file: GpxFile, progress: IProgress?) {
 		val defName = file.metadata.name
-		val trackName = if (!Algorithms.isEmpty(defName)) defName else getFilename(file.path)
+		val trackName = if (!KAlgorithms.isEmpty(defName)) defName else getFilename(file.path)
 		serializer.startTag(null, "metadata")
 		writeNotNullText(serializer, "name", trackName)
 		writeNotNullText(serializer, "desc", file.metadata.desc)
@@ -1625,7 +1629,7 @@ object GpxUtilities {
 									"email" -> {
 										val id = parser.getAttributeValue("", "id")
 										val domain = parser.getAttributeValue("", "domain")
-										if (!Algorithms.isEmpty(id) && !Algorithms.isEmpty(domain)) {
+										if (!KAlgorithms.isEmpty(id) && !KAlgorithms.isEmpty(domain)) {
 											parse.email = "$id@$domain"
 										}
 									}
@@ -1906,11 +1910,11 @@ object GpxUtilities {
 				pointsGroup.color = color
 			}
 			val iconName = point.getIconName()
-			if (Algorithms.isEmpty(pointsGroup.iconName) && !Algorithms.isEmpty(iconName)) {
+			if (KAlgorithms.isEmpty(pointsGroup.iconName) && !KAlgorithms.isEmpty(iconName)) {
 				pointsGroup.iconName = iconName
 			}
 			val backgroundType = point.getBackgroundType()
-			if (Algorithms.isEmpty(pointsGroup.backgroundType) && !Algorithms.isEmpty(backgroundType)) {
+			if (KAlgorithms.isEmpty(pointsGroup.backgroundType) && !KAlgorithms.isEmpty(backgroundType)) {
 				pointsGroup.backgroundType = backgroundType
 			}
 			pointsGroup.points.add(point)
@@ -2011,7 +2015,7 @@ object GpxUtilities {
 	}
 
 	fun projectionOnPrimeMeridian(previous: WptPt, next: WptPt): WptPt {
-		val lat = MapUtils.getProjection(
+		val lat = KMapUtils.getProjection(
 			0.0,
 			0.0,
 			previous.lat,
@@ -2021,7 +2025,7 @@ object GpxUtilities {
 		).latitude
 		val lon = if (previous.lon < 0) -PRIME_MERIDIAN else PRIME_MERIDIAN
 		val projectionCoeff =
-			MapUtils.getProjectionCoeff(0.0, 0.0, previous.lat, previous.lon, next.lat, next.lon)
+			KMapUtils.getProjectionCoeff(0.0, 0.0, previous.lat, previous.lon, next.lat, next.lon)
 		val time = (previous.time + (next.time - previous.time) * projectionCoeff).toLong()
 		val ele =
 			if (previous.ele.isNaN() && next.ele.isNaN()) Double.NaN else previous.ele + (next.ele - previous.ele) * projectionCoeff

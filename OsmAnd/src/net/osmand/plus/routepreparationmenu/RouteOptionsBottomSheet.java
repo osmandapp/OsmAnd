@@ -28,7 +28,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.avoidroads.AvoidRoadsBottomSheetDialogFragment;
@@ -546,7 +546,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
 			descriptionColorId = ColorUtilities.getActiveColorId(nightMode);
-			GPXFile gpxFile = routeParamsBuilder.getFile();
+			GpxFile gpxFile = routeParamsBuilder.getFile();
 			if (!Algorithms.isEmpty(gpxFile.path)) {
 				description = new File(gpxFile.path).getName();
 			} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
@@ -686,13 +686,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	@Override
 	public void attachToRoadsSelected(int segmentIndex) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
 		openPlanRoute(gpxFile, segmentIndex, ATTACH_ROADS_MODE | FOLLOW_TRACK_MODE);
 	}
 
 	@Override
 	public void calculateOnlineSelected(int segmentIndex) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
 		gpxFile.path = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
@@ -703,7 +703,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 
 	@Override
 	public void calculateOfflineSelected(int segmentIndex) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
 		gpxFile.path = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
@@ -712,7 +712,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 		});
 	}
 
-	public void openPlanRoute(@NonNull GPXFile gpxFile, int segmentIndex, int mode) {
+	public void openPlanRoute(@NonNull GpxFile gpxFile, int segmentIndex, int mode) {
 		if (mapActivity != null) {
 			MeasurementToolFragment.showInstance(mapActivity, gpxFile, segmentIndex, mode);
 			mapActivity.getMapRouteInfoMenu().hide();

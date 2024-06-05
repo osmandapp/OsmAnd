@@ -18,8 +18,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.resources.ResourceManager;
@@ -45,7 +45,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 
 	private OsmandApplication app;
 	private ResourceManager resourceManager;
-	private Map<RouteKey, GPXFile> routesCache = new HashMap<>();
+	private Map<RouteKey, GpxFile> routesCache = new HashMap<>();
 
 	private NetworkRouteSelectionTask selectionTask;
 
@@ -110,7 +110,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 				Pair<RouteKey, QuadRect> routePair = (Pair<RouteKey, QuadRect>) pair;
 
 				LatLon latLon = getObjectLocation(object);
-				GPXFile gpxFile = routesCache.get(pair.first);
+				GpxFile gpxFile = routesCache.get(pair.first);
 				if (gpxFile == null) {
 					if (isSelectingRoute()) {
 						cancelRouteSelection();
@@ -128,7 +128,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	private void loadNetworkGpx(@NonNull Pair<RouteKey, QuadRect> pair, @NonNull LatLon latLon) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
-			CallbackWithObject<GPXFile> callback = gpxFile -> {
+			CallbackWithObject<GpxFile> callback = gpxFile -> {
 				if (gpxFile != null && gpxFile.error == null) {
 					routesCache.put(pair.first, gpxFile);
 					saveAndOpenGpx(gpxFile, pair, latLon);
@@ -140,7 +140,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 		}
 	}
 
-	private void saveAndOpenGpx(@NonNull GPXFile gpxFile, @NonNull Pair<RouteKey, QuadRect> pair, @NonNull LatLon latLon) {
+	private void saveAndOpenGpx(@NonNull GpxFile gpxFile, @NonNull Pair<RouteKey, QuadRect> pair, @NonNull LatLon latLon) {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			WptPt wptPt = new WptPt();
@@ -165,8 +165,8 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	}
 
 	private void clearRouteCache(@NonNull BinaryMapIndexReader reader) {
-		Map<RouteKey, GPXFile> cache = new HashMap<>(routesCache);
-		for (Iterator<Entry<RouteKey, GPXFile>> iterator = cache.entrySet().iterator(); iterator.hasNext(); ) {
+		Map<RouteKey, GpxFile> cache = new HashMap<>(routesCache);
+		for (Iterator<Entry<RouteKey, GpxFile>> iterator = cache.entrySet().iterator(); iterator.hasNext(); ) {
 			QuadRect rect = iterator.next().getValue().getRect();
 			boolean containsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(rect.left),
 					MapUtils.get31TileNumberY(rect.top), MapUtils.get31TileNumberX(rect.right),

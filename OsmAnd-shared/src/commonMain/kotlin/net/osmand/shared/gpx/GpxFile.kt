@@ -5,12 +5,14 @@ import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
 import net.osmand.shared.gpx.GpxUtilities.Metadata
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
 import net.osmand.shared.gpx.GpxUtilities.Route
+import net.osmand.shared.gpx.GpxUtilities.RouteSegment
+import net.osmand.shared.gpx.GpxUtilities.RouteType
 import net.osmand.shared.gpx.GpxUtilities.Track
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
 import net.osmand.shared.gpx.GpxUtilities.WptPt
 import net.osmand.shared.gpx.GpxUtilities.createNetworkRouteExtensionWriter
 import net.osmand.shared.gpx.GpxUtilities.updateQR
-import net.osmand.shared.util.MapUtils
+import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import kotlin.collections.set
 
@@ -19,7 +21,7 @@ class GpxFile : GpxExtensions {
 	var metadata = Metadata()
 	var tracks: MutableList<Track> = mutableListOf()
 	var routes: MutableList<Route> = mutableListOf()
-	private val points: MutableList<WptPt> = mutableListOf()
+	private var points: MutableList<WptPt> = mutableListOf()
 	var pointsGroups: MutableMap<String, PointsGroup> = LinkedHashMap()
 	private val networkRouteKeyTags: MutableMap<String, String> = LinkedHashMap()
 
@@ -49,6 +51,10 @@ class GpxFile : GpxExtensions {
 		}
 	}
 
+	fun isShowCurrentTrack() = showCurrentTrack
+
+	fun hasAltitude() = hasAltitude
+
 	fun hasRoute(): Boolean {
 		return getNonEmptyTrkSegments(true).isNotEmpty()
 	}
@@ -62,6 +68,10 @@ class GpxFile : GpxExtensions {
 
 	fun getPointsList(): List<WptPt> {
 		return points.toList()
+	}
+
+	fun setPointsList(points: List<WptPt>) {
+		this.points = points.toMutableList()
 	}
 
 	fun getAllSegmentsPoints(): List<WptPt> {
@@ -692,8 +702,8 @@ class GpxFile : GpxExtensions {
 
 	fun getOuterRadius(): String {
 		val rect = getRect()
-		val radius = MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right).toInt()
-		return MapUtils.convertDistToChar(
+		val radius = KMapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right).toInt()
+		return KMapUtils.convertDistToChar(
 			radius,
 			GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER,
 			GpxUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST,
@@ -733,6 +743,119 @@ class GpxFile : GpxExtensions {
 
 	private fun getLastPointTime(points: List<WptPt>): Long {
 		return points.asReversed().firstOrNull { it.time > 0 }?.time ?: 0
+	}
+
+	fun clone(): GpxFile {
+		val dest = GpxFile(this.author)
+		dest.metadata = Metadata(this.metadata)
+		val tracks = dest.tracks
+		for (track in this.tracks) {
+			tracks.add(cloneTrack(track))
+		}
+		val routes = dest.routes
+		for (route in this.routes) {
+			routes.add(cloneRoute(route))
+		}
+		val points = mutableListOf<WptPt>()
+		for (point in this.points) {
+			points.add(WptPt(point))
+		}
+		dest.setPointsList(points)
+
+		dest.pointsGroups = LinkedHashMap()
+		val pointsGroups = dest.pointsGroups
+		for ((key, value) in this.pointsGroups.entries) {
+			pointsGroups[key] = clonePointsGroup(value)
+		}
+		dest.pointsGroups = pointsGroups
+
+		dest.addRouteKeyTags(this.getRouteKeyTags())
+		return dest
+	}
+
+	private fun cloneTrack(source: Track): Track {
+		val dest = Track()
+		dest.name = source.name
+		dest.desc = source.desc
+		dest.generalTrack = source.generalTrack
+		val trkSegments = mutableListOf<TrkSegment>()
+		for (segment in source.segments) {
+			trkSegments.add(cloneTrkSegment(segment))
+		}
+		dest.segments = trkSegments
+		copyExtensions(source)
+		return dest
+	}
+
+	private fun cloneRoute(source: Route): Route {
+		val dest = Route()
+		dest.name = source.name
+		dest.desc = source.desc
+		val points = mutableListOf<WptPt>()
+		for (point in source.points) {
+			points.add(WptPt(point))
+		}
+		dest.points = points
+		copyExtensions(source)
+		return dest
+	}
+
+	private fun clonePointsGroup(source: PointsGroup): PointsGroup {
+		val dest = PointsGroup(source.name, source.iconName, source.backgroundType, source.color)
+		dest.hidden = source.hidden
+		val points = mutableListOf<WptPt>()
+		for (point in source.points) {
+			points.add(WptPt(point))
+		}
+		dest.points = points
+		return dest
+	}
+
+	private fun cloneTrkSegment(source: TrkSegment): TrkSegment {
+		val dest = TrkSegment()
+		dest.name = source.name
+		dest.generalSegment = source.generalSegment
+		val kPoints = mutableListOf<WptPt>()
+		for (point in source.points) {
+			kPoints.add(WptPt(point))
+		}
+		dest.points = kPoints
+		val routeSegments = mutableListOf<RouteSegment>()
+		for (rs in source.routeSegments) {
+			routeSegments.add(cloneRouteSegment(rs))
+		}
+		dest.routeSegments = routeSegments
+		val routeTypes = mutableListOf<RouteType>()
+		for (rt in source.routeTypes) {
+			routeTypes.add(cloneRouteType(rt))
+		}
+		dest.routeTypes = routeTypes
+		copyExtensions(source)
+		return dest
+	}
+
+	private fun cloneRouteSegment(source: RouteSegment): RouteSegment {
+		val dest = RouteSegment()
+		dest.id = source.id
+		dest.length = source.length
+		dest.startTrackPointIndex = source.startTrackPointIndex
+		dest.segmentTime = source.segmentTime
+		dest.speed = source.speed
+		dest.turnType = source.turnType
+		dest.turnLanes = source.turnLanes
+		dest.turnAngle = source.turnAngle
+		dest.skipTurn = source.skipTurn
+		dest.types = source.types
+		dest.pointTypes = source.pointTypes
+		dest.names = source.names
+		return dest
+	}
+
+	private fun cloneRouteType(source: RouteType): RouteType {
+		val dest = RouteType()
+		dest.tag = source.tag
+		dest.value = source.value
+		return dest
 	}
 
 	companion object {

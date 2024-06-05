@@ -1,6 +1,6 @@
 package net.osmand.plus.importfiles.tasks;
 
-import static net.osmand.gpx.GPXUtilities.PointsGroup;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import static net.osmand.plus.myplaces.MyPlacesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.MyPlacesActivity.TAB_ID;
 
@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavouritesHelper;
@@ -24,13 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile> {
+public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile> {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final String fileName;
 	private final boolean forceImport;
 
-	public FavoritesImportTask(@NonNull FragmentActivity activity, @NonNull GPXFile gpxFile,
+	public FavoritesImportTask(@NonNull FragmentActivity activity, @NonNull GpxFile gpxFile,
 	                           @NonNull String fileName, boolean forceImport) {
 		super(activity);
 		this.gpxFile = gpxFile;
@@ -39,7 +39,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile
 	}
 
 	@Override
-	protected GPXFile doInBackground(Void... nothing) {
+	protected GpxFile doInBackground(Void... nothing) {
 		mergeFavorites();
 		return null;
 	}
@@ -91,7 +91,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GPXFile
 	}
 
 	@Override
-	protected void onPostExecute(GPXFile result) {
+	protected void onPostExecute(GpxFile result) {
 		hideProgress();
 		notifyImportFinished();
 		FragmentActivity activity = activityRef.get();

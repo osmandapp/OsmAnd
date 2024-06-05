@@ -7,7 +7,7 @@ import android.text.style.ForegroundColorSpan;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -21,7 +21,7 @@ import net.osmand.router.RouteColorize.ColorizationType;
 public class ColoringStyleDetailsCardController implements IColoringStyleDetailsController {
 
 	protected final OsmandApplication app;
-	protected final GPXTrackAnalysis analysis;
+	protected final GpxTrackAnalysis analysis;
 	protected ColoringStyle coloringStyle;
 	protected ColoringStyleDetailsCard card;
 
@@ -32,7 +32,7 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 
 	public ColoringStyleDetailsCardController(@NonNull OsmandApplication app,
 	                                          @NonNull ColoringStyle coloringStyle,
-	                                          @Nullable GPXTrackAnalysis analysis) {
+	                                          @Nullable GpxTrackAnalysis analysis) {
 		this.app = app;
 		this.coloringStyle = coloringStyle;
 		this.analysis = analysis;

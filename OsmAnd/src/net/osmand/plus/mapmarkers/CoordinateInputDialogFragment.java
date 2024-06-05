@@ -57,9 +57,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -102,7 +102,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final String SELECTED_POINT_KEY = "selected_point_key";
 	public static final double SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15;
 
-	private GPXFile newGpxFile;
+	private GpxFile newGpxFile;
 	private OnPointsSavedListener listener;
 	private WptPt selectedWpt;
 	private SavingTrackHelper savingTrackHelper;
@@ -142,17 +142,17 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		lightTheme = app.getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-		newGpxFile = new GPXFile(Version.getFullVersion(app));
+		newGpxFile = new GpxFile(Version.getFullVersion(app));
 		savingTrackHelper = app.getSavingTrackHelper();
 		selectedGpxHelper = app.getSelectedGpxHelper();
 	}
 
 	@Nullable
-	private GPXFile getGpx() {
+	private GpxFile getGpx() {
 		return newGpxFile;
 	}
 
-	private void syncGpx(GPXFile gpxFile) {
+	private void syncGpx(GpxFile gpxFile) {
 		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(gpxFile);
 		if (group != null) {
@@ -160,7 +160,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	protected void addWpt(GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
+	protected void addWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.showCurrentTrack) {
 				savingTrackHelper.insertPointData(lat, lon, description, name, category, color);
@@ -172,7 +172,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	protected void updateWpt(GPXFile gpx, String description, String name, String category, int color, double lat, double lon) {
+	protected void updateWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
 			if (gpx.showCurrentTrack) {
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
@@ -190,7 +190,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			if (Algorithms.isEmpty(getGpx().path)) {
 				showSaveDialog();
 			} else {
-				GPXFile gpx = getGpx();
+				GpxFile gpx = getGpx();
 				new SaveGpxAsyncTask(getMyApplication(), gpx, null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				syncGpx(gpx);
 				if (listener != null) {
@@ -238,7 +238,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return dialog;
 	}
 
-	public void setGpx(GPXFile gpx) {
+	public void setGpx(GpxFile gpx) {
 		this.newGpxFile = gpx;
 		adapter.setGpx(gpx);
 	}
@@ -1399,11 +1399,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private static class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
 		private final OsmandApplication app;
-		private final GPXFile gpx;
+		private final GpxFile gpx;
 		private final boolean gpxSelected;
 		private final String fileName;
 
-		SaveGpxAsyncTask(OsmandApplication app, GPXFile gpx, String fileName, boolean gpxSelected) {
+		SaveGpxAsyncTask(OsmandApplication app, GpxFile gpx, String fileName, boolean gpxSelected) {
 			this.app = app;
 			this.gpx = gpx;
 			this.fileName = fileName;
@@ -1421,10 +1421,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					}
 					String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
 					File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
-					GPXUtilities.writeGpxFile(fout, gpx);
+					GpxUtilities.writeGpxFile(fout, gpx);
 				}
 			} else {
-				GPXUtilities.writeGpxFile(new File(gpx.path), gpx);
+				GpxUtilities.writeGpxFile(new File(gpx.path), gpx);
 			}
 			app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 			return null;

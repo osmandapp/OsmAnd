@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.db.SQLiteAPI.*
+import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.extensions.format
 import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.io.KFile
@@ -10,6 +10,8 @@ import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil
 
 class GpxDatabase {
+
+	class StringIntPair(val string: String?, val integer: Int?);
 
 	companion object {
 		val log = LoggerFactory.getLogger("GpxDatabase")
@@ -121,7 +123,7 @@ class GpxDatabase {
 		}
 	}
 
-	private fun insertItem(item: DataItem, db: SQLiteConnection) {
+	fun insertItem(item: DataItem, db: SQLiteConnection) {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
 		val map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(item))
@@ -225,7 +227,7 @@ class GpxDatabase {
 		includeEmptyValues: Boolean,
 		sortByName: Boolean,
 		sortDescending: Boolean
-	): List<Pair<String, Int>> {
+	): List<StringIntPair> {
 		val column1 =
 			if (includeEmptyValues) CHANGE_NULL_TO_EMPTY_STRING_QUERY_PART.format(columnName) else columnName
 		val includeEmptyValuesPart =
@@ -242,14 +244,14 @@ class GpxDatabase {
 		return getStringIntItemsCollection(query)
 	}
 
-	private fun getStringIntItemsCollection(dataQuery: String): List<Pair<String, Int>> {
-		val folderCollection = mutableListOf<Pair<String, Int>>()
+	private fun getStringIntItemsCollection(dataQuery: String): List<StringIntPair> {
+		val folderCollection = mutableListOf<StringIntPair>()
 		val db = openConnection(false)
 		if (db != null) {
 			val query = db.rawQuery(dataQuery, null)
 			if (query != null && query.moveToFirst()) {
 				do {
-					folderCollection.add(Pair(query.getString(0), query.getInt(1)))
+					folderCollection.add(StringIntPair(query.getString(0), query.getInt(1)))
 				} while (query.moveToNext())
 			}
 		}
@@ -297,7 +299,7 @@ class GpxDatabase {
 		return if (db != null) getDataItem(file, db) else null
 	}
 
-	private fun getDataItem(file: KFile, db: SQLiteConnection): DataItem? {
+	fun getDataItem(file: KFile, db: SQLiteConnection): DataItem? {
 		val name = file.name()
 		val dir = GpxDbUtils.getGpxFileDir(file)
 		val gpxFile = GpxDbUtils.isGpxFile(file)

@@ -11,8 +11,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -71,7 +71,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null && article.getGpxFile() != null) {
-				GPXFile gpxFile = article.getGpxFile();
+				GpxFile gpxFile = article.getGpxFile();
 				List<WptPt> points = gpxFile.getPoints();
 				String coordinates = url.replace(PREFIX_GEO, "");
 				WptPt gpxPoint = WikivoyageUtils.findNearestPoint(points, coordinates);

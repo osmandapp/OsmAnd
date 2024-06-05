@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -55,7 +55,7 @@ public class ColoringStyleAlgorithms {
 		String attributeName = coloringStyle.getRouteInfoAttribute();
 		if (coloringType.isGradient()) {
 			GradientScaleType scaleType = coloringType.toGradientScaleType();
-			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+			GpxTrackAnalysis analysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
 			if (analysis != null && scaleType != null) {
 				return analysis.isColorizationTypeAvailable(scaleType.toColorizationType());
 			}
@@ -115,7 +115,7 @@ public class ColoringStyleAlgorithms {
 	}
 
 	@Nullable
-	public static List<RouteSegmentResult> getRouteSegmentsInTrack(@NonNull GPXFile gpxFile) {
+	public static List<RouteSegmentResult> getRouteSegmentsInTrack(@NonNull GpxFile gpxFile) {
 		if (!RouteExporter.OSMAND_ROUTER_V2.equals(gpxFile.author)) {
 			return null;
 		}

@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -140,19 +140,19 @@ public class RestoreNavigationHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void restoreRoutingModeInner(@Nullable TargetPoint pointToNavigate, @Nullable String gpxPath) {
-		AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
+		AsyncTask<String, Void, GpxFile> task = new AsyncTask<String, Void, GpxFile>() {
 			@Override
-			protected GPXFile doInBackground(String... params) {
+			protected GpxFile doInBackground(String... params) {
 				if (gpxPath != null) {
 					// Reverse also should be stored ?
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(gpxPath));
+					GpxFile gpxFile = GpxUtilities.loadGPXFile(new File(gpxPath));
 					return gpxFile.error == null ? gpxFile : null;
 				}
 				return null;
 			}
 
 			@Override
-			protected void onPostExecute(GPXFile result) {
+			protected void onPostExecute(GpxFile result) {
 				GPXRouteParamsBuilder gpxRoute;
 				if (result != null) {
 					gpxRoute = new GPXRouteParamsBuilder(result, settings);

@@ -10,9 +10,9 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -76,7 +76,7 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 	private File generateGpxFileForRecordings() {
 		File tmpFile = new File(app.getCacheDir(), "share/noteLocations.gpx");
 		tmpFile.getParentFile().mkdirs();
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (Recording recording : getRecordingsForGpx()) {
 
 			if (isCancelled()) {
@@ -99,7 +99,7 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 				app.getSelectedGpxHelper().addPoint(wpt, gpxFile);
 			}
 		}
-		GPXUtilities.writeGpxFile(tmpFile, gpxFile);
+		GpxUtilities.writeGpxFile(tmpFile, gpxFile);
 		return tmpFile;
 	}
 

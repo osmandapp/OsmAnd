@@ -9,10 +9,10 @@ import androidx.annotation.Nullable;
 import net.osmand.ColorPalette;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
@@ -123,7 +123,7 @@ public class CachedTrack {
 	}
 
 	private boolean isCachedTrackChanged() {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean useJoinSegments = selectedGpxFile.isJoinSegments();
 		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 		if (useFilteredGpx != params.useFilteredGpx
@@ -137,8 +137,8 @@ public class CachedTrack {
 
 	@NonNull
 	private RouteColorize createGpxColorization(@NonNull GradientScaleType scaleType) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
-		GPXTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxTrackAnalysis trackAnalysis = selectedGpxFile.getTrackAnalysisToDisplay(app);
 		ColorizationType colorizationType = scaleType.toColorizationType();
 		float maxSpeed = app.getSettings().getApplicationMode().getMaxSpeed();
 		File filePalette = app.getAppPath(IndexConstants.CLR_PALETTE_DIR +
@@ -158,7 +158,7 @@ public class CachedTrack {
 	@NonNull
 	private List<TrkSegment> createColoredSegments(@NonNull List<RouteColorizationPoint> colorizationPoints,
 	                                               @NonNull GradientScaleType scaleType) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
+		GpxFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean joinSegments = selectedGpxFile.isJoinSegments();
 
 		List<TrkSegment> simplifiedSegments = new ArrayList<>();

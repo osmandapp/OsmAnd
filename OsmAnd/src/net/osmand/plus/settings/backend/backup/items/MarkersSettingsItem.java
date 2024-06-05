@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -165,7 +165,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
-				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
+				GpxFile gpxFile = GpxUtilities.loadGPXFile(inputStream);
 				if (gpxFile.error != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
@@ -180,7 +180,7 @@ public class MarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
+		GpxFile gpxFile = markersHelper.getDataHelper().generateGpx(items, true);
 		return getGpxWriter(gpxFile);
 	}
 }

@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Location;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.settings.enums.SimulationMode;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -104,7 +104,7 @@ public class LocationSimulationUtils {
 	}
 
 	@NonNull
-	protected static List<SimulatedLocation> getSimulatedLocationsForGpx(@NonNull GPXFile gpxFile, int firstLocationOffset) {
+	protected static List<SimulatedLocation> getSimulatedLocationsForGpx(@NonNull GpxFile gpxFile, int firstLocationOffset) {
 		double distanceFromStart = 0;
 		List<SimulatedLocation> locations = new ArrayList<>();
 		List<WptPt> points = gpxFile.getAllSegmentsPoints();

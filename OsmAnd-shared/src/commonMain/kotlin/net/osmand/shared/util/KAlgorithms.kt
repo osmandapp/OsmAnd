@@ -1,6 +1,10 @@
 package net.osmand.shared.util
 
-object Algorithms {
+import net.osmand.shared.data.KQuadRect
+import kotlin.math.max
+import kotlin.math.min
+
+object KAlgorithms {
 	private const val CHAR_TO_SPLIT = ','
 
 	fun isEmpty(c: Collection<*>?): Boolean {
@@ -152,5 +156,19 @@ object Algorithms {
 			return sb.toString()
 		}
 		return ""
+	}
+
+	fun extendRectToContainPoint(mapRect: KQuadRect, longitude: Double, latitude: Double) {
+		mapRect.left = if (mapRect.left == 0.0) longitude else min(mapRect.left, longitude)
+		mapRect.right = max(mapRect.right, longitude)
+		mapRect.bottom = if (mapRect.bottom == 0.0) latitude else min(mapRect.bottom, latitude)
+		mapRect.top = max(mapRect.top, latitude)
+	}
+
+	fun extendRectToContainRect(mapRect: KQuadRect, gpxRect: KQuadRect) {
+		mapRect.left = if (mapRect.left == 0.0) gpxRect.left else min(mapRect.left, gpxRect.left)
+		mapRect.right = max(mapRect.right, gpxRect.right)
+		mapRect.top = max(mapRect.top, gpxRect.top)
+		mapRect.bottom = if (mapRect.bottom == 0.0) gpxRect.bottom else min(mapRect.bottom, gpxRect.bottom)
 	}
 }

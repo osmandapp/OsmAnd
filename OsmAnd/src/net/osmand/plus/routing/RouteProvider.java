@@ -15,11 +15,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.Route;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
@@ -931,14 +931,14 @@ public class RouteProvider {
 	}
 
 	@NonNull
-	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
+	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GpxFile gpxFile,
 	                                                           List<Location> segmentEndpoints,
 	                                                           int selectedSegment) {
 		return parseOsmAndGPXRoute(points, gpxFile, segmentEndpoints, selectedSegment, false);
 	}
 
 	@NonNull
-	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
+	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GpxFile gpxFile,
 	                                                           List<Location> segmentEndpoints,
 	                                                           int selectedSegment, boolean leftSide) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
@@ -954,7 +954,7 @@ public class RouteProvider {
 		}
 	}
 
-	protected static void collectSegmentPointsFromGpx(GPXFile gpxFile, List<Location> points,
+	protected static void collectSegmentPointsFromGpx(GpxFile gpxFile, List<Location> points,
 													  List<Location> segmentEndpoints, int selectedSegment) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
@@ -978,7 +978,7 @@ public class RouteProvider {
 		}
 	}
 
-	protected static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
+	protected static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> points, GpxFile gpxFile,
 																  List<Location> segmentEndpoints,
 																  boolean osmandRouter, boolean leftSide,
 																  float defSpeed, int selectedSegment) {
@@ -1121,7 +1121,7 @@ public class RouteProvider {
 		return directions;
 	}
 
-	public GPXFile createOsmandRouterGPX(RouteCalculationResult route, OsmandApplication ctx, String name) {
+	public GpxFile createOsmandRouterGPX(RouteCalculationResult route, OsmandApplication ctx, String name) {
 		TargetPointsHelper helper = ctx.getTargetPointsHelper();
 		List<WptPt> points = new ArrayList<>();
 		List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
@@ -1231,7 +1231,7 @@ public class RouteProvider {
 			} else {
 				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
 			}
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(gpxStream);
+			GpxFile gpxFile = GpxUtilities.loadGPXFile(gpxStream);
 			infos = parseOsmAndGPXRoute(res, gpxFile, segmentEndpoints, true, params.leftSide, params.mode.getDefaultSpeed(), -1);
 			if (infos != null) {
 				addMissingTurns = false;

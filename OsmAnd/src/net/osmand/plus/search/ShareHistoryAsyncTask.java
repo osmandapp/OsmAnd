@@ -8,9 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -44,7 +44,7 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 	@NonNull
 	@Override
 	protected Pair<File, String> doInBackground(Void... params) {
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (HistoryEntry h : historyEntries) {
 			WptPt pt = new WptPt();
 			pt.lat = h.getLat();
@@ -62,9 +62,9 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 			dir.mkdir();
 		}
 		File historyFile = new File(dir, "History.gpx");
-		GPXUtilities.writeGpxFile(historyFile, gpxFile);
+		GpxUtilities.writeGpxFile(historyFile, gpxFile);
 
-		return Pair.create(historyFile, GPXUtilities.asString(gpxFile));
+		return Pair.create(historyFile, GpxUtilities.asString(gpxFile));
 	}
 
 	@Override

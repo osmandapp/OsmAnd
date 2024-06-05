@@ -5,8 +5,8 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
@@ -155,7 +155,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
 				List<ItineraryGroupInfo> groupInfos = new ArrayList<>();
-				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream, dataHelper.getGPXExtensionsReader(groupInfos), false);
+				GpxFile gpxFile = GpxUtilities.loadGPXFile(inputStream, dataHelper.getGpxExtensionsReader(groupInfos), false);
 				if (gpxFile.error != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
@@ -172,7 +172,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = dataHelper.generateGpx(items, null);
+		GpxFile gpxFile = dataHelper.generateGpx(items, null);
 		return getGpxWriter(gpxFile);
 	}
 }

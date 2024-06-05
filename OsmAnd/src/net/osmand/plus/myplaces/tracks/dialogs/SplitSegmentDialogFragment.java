@@ -30,10 +30,10 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -74,7 +74,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 	private GpxDisplayItem gpxItem;
 	private final GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
-	private GPXUtilities.TrkSegment trkSegment;
+	private GpxUtilities.TrkSegment trkSegment;
 
 	private final List<String> options = new ArrayList<>();
 	private final List<Double> distanceSplit = new ArrayList<>();
@@ -208,7 +208,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		this.gpxItem = gpxItem;
 	}
 
-	public void setTrkSegment(GPXUtilities.TrkSegment trkSegment) {
+	public void setTrkSegment(GpxUtilities.TrkSegment trkSegment) {
 		this.trkSegment = trkSegment;
 	}
 
@@ -334,7 +334,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	@Nullable
-	private GPXFile getGpx() {
+	private GpxFile getGpx() {
 		return displayHelper.getGpx();
 	}
 
@@ -530,7 +530,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					.setImageDrawable(ic.getIcon(R.drawable.ic_action_max_speed_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 
 			if (currentGpxDisplayItem != null) {
-				GPXTrackAnalysis analysis = currentGpxDisplayItem.analysis;
+				GpxTrackAnalysis analysis = currentGpxDisplayItem.analysis;
 				if (analysis != null) {
 					ImageView distanceOrTimeSpanImageView = convertView.findViewById(R.id.distance_or_timespan_image);
 					TextView distanceOrTimeSpanValue = convertView.findViewById(R.id.distance_or_time_span_value);

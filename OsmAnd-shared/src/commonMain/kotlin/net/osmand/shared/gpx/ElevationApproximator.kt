@@ -1,6 +1,6 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.util.MapUtils
+import net.osmand.shared.util.KMapUtils
 
 abstract class ElevationApproximator {
 
@@ -59,7 +59,7 @@ abstract class ElevationApproximator {
 			}
 			val ele = getPointElevation(i)
 			val prevEle = getPointElevation(lastSurvived)
-			val dist = MapUtils.getDistance(
+			val dist = KMapUtils.getDistance(
 				getPointLatitude(i), getPointLongitude(i),
 				getPointLatitude(lastSurvived), getPointLongitude(lastSurvived)
 			)
@@ -83,7 +83,7 @@ abstract class ElevationApproximator {
 			if (!survived[i] || k == survivedCount) {
 				continue
 			}
-			distances[k] = if (lastSurvived == i) 0.0 else MapUtils.getDistance(
+			distances[k] = if (lastSurvived == i) 0.0 else KMapUtils.getDistance(
 				getPointLatitude(i), getPointLongitude(i),
 				getPointLatitude(lastSurvived), getPointLongitude(lastSurvived)
 			)

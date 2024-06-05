@@ -5,9 +5,9 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.Track;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -22,11 +22,11 @@ import java.util.List;
 public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackItem>> {
 
 	private final OsmandApplication app;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final String fileName;
 	private final CollectTracksListener listener;
 
-	public CollectTracksTask(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	public CollectTracksTask(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile,
 	                         @NonNull String fileName, @Nullable CollectTracksListener listener) {
 		this.app = app;
 		this.gpxFile = gpxFile;
@@ -48,7 +48,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 		for (int i = 0; i < gpxFile.tracks.size(); i++) {
 			Track track = gpxFile.tracks.get(i);
 			if (!track.generalTrack) {
-				GPXFile trackFile = new GPXFile(Version.getFullVersion(app));
+				GpxFile trackFile = new GpxFile(Version.getFullVersion(app));
 				trackFile.tracks.add(track);
 				trackFile.setColor(gpxFile.getColor(0));
 				trackFile.setWidth(gpxFile.getWidth(null));
@@ -85,7 +85,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 		ImportTrackItem trackItem = null;
 		double minDistance = Double.MAX_VALUE;
 		for (ImportTrackItem item : items) {
-			GPXFile gpxFile = item.selectedGpxFile.getGpxFile();
+			GpxFile gpxFile = item.selectedGpxFile.getGpxFile();
 			for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
 				double distance = MapUtils.getDistance(point.lat, point.lon, wptPt.lat, wptPt.lon);
 				if (distance < minDistance) {

@@ -3,7 +3,7 @@ package net.osmand.plus.measurementtool;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.MapUtils;

@@ -6,7 +6,7 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.fragments.EditDescriptionFragment.OnDescriptionSavedCallback;
@@ -29,7 +29,7 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 	}
 
 	public void setupWebViewController(@NonNull WebView webView, @NonNull View view, @NonNull ReadGpxDescriptionFragment fragment) {
-		GPXFile gpxFile = getGpxFile();
+		GpxFile gpxFile = getGpxFile();
 		if (gpxFile != null) {
 			webView.setWebViewClient(new ArticleWebViewClient(fragment, activity, gpxFile, view, true));
 		}
@@ -42,7 +42,7 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 			return;
 		}
 
-		GPXFile gpx = trackMenuFragment.getGpx();
+		GpxFile gpx = trackMenuFragment.getGpx();
 		gpx.metadata.desc = editedText;
 
 		File file = trackMenuFragment.getDisplayHelper().getFile();
@@ -58,7 +58,7 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 	}
 
 	@Nullable
-	private GPXFile getGpxFile() {
+	private GpxFile getGpxFile() {
 		TrackMenuFragment trackMenuFragment = activity.getFragmentsHelper().getTrackMenuFragment();
 		if (trackMenuFragment != null) {
 			TrackDisplayHelper displayHelper = trackMenuFragment.getDisplayHelper();

@@ -5,8 +5,8 @@ import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
 import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
 import net.osmand.shared.gpx.GpxUtilities.WptPt
-import net.osmand.shared.util.Algorithms
-import net.osmand.shared.util.MapUtils
+import net.osmand.shared.util.KAlgorithms
+import net.osmand.shared.util.KMapUtils
 
 class GpxTrackAnalysis {
 
@@ -242,11 +242,11 @@ class GpxTrackAnalysis {
 
 	fun setWptCategoryNames(wptCategoryNames: Set<String>?) {
 		setGpxParameter(GpxParameter.WPT_CATEGORY_NAMES,
-			wptCategoryNames?.let { Algorithms.encodeCollection(it) })
+			wptCategoryNames?.let { KAlgorithms.encodeCollection(it) })
 	}
 
 	fun getWptCategoryNamesSet(): Set<String>? {
-		return wptCategoryNames?.let { Algorithms.decodeStringSet(it) }
+		return wptCategoryNames?.let { KAlgorithms.decodeStringSet(it) }
 	}
 
 	fun prepareInformation(
@@ -334,7 +334,7 @@ class GpxTrackAnalysis {
 				if (j > 0) {
 					val prev = s[j - 1]
 
-					calculations[0] = MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
+					calculations[0] = KMapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon).toFloat()
 					// TODO: Fix if needed
 					// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 					// a little more exact, also seems slightly faster:
@@ -509,7 +509,7 @@ class GpxTrackAnalysis {
 		if (!segment.segment.generalSegment) {
 			var result: Long = 0
 			for (routeSegment in routeSegments) {
-				result += (1000 * Algorithms.parseFloatSilently(
+				result += (1000 * KAlgorithms.parseFloatSilently(
 					routeSegment.segmentTime, 0.0f
 				)).toLong()
 			}

@@ -1,8 +1,8 @@
-package net.osmand.shared.db
+package net.osmand.shared.api
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import net.osmand.shared.db.SQLiteAPI.*
+import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.util.LoggerFactory
 
 class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {

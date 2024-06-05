@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -50,12 +50,12 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	private LinearLayout startItem;
 
 	@Nullable
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 
 	private boolean usedOnMap;
 	private LocationSimulationListener simulationListener;
 
-	public void setGpxFile(@Nullable GPXFile gpxFile) {
+	public void setGpxFile(@Nullable GpxFile gpxFile) {
 		this.gpxFile = gpxFile;
 	}
 
@@ -267,7 +267,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 		return speed == 1 ? getString(R.string.shared_string_original) : "x" + speed;
 	}
 
-	public static void showInstance(@NonNull FragmentManager manager, @Nullable GPXFile gpxFile, boolean usedOnMap) {
+	public static void showInstance(@NonNull FragmentManager manager, @Nullable GpxFile gpxFile, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			SimulateLocationFragment fragment = new SimulateLocationFragment();
 			fragment.setGpxFile(gpxFile);
@@ -280,7 +280,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	}
 
 	@Override
-	public void onSelectGpxFile(@NonNull GPXFile gpxFile) {
+	public void onSelectGpxFile(@NonNull GpxFile gpxFile) {
 		this.gpxFile = gpxFile;
 		updateCard();
 	}

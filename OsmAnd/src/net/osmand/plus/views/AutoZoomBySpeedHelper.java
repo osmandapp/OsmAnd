@@ -13,9 +13,9 @@ import net.osmand.core.jni.MapRendererState;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXTrackAnalysis.TrackPointsAnalyser;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis.TrackPointsAnalyser;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
@@ -296,7 +296,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 			boolean firstPoint = true;
 
 			@Override
-			public void onAnalysePoint(GPXTrackAnalysis analysis, WptPt point, PointAttributes attributes) {
+			public void onAnalysePoint(GpxTrackAnalysis analysis, WptPt point, PointAttributes attributes) {
 				// First point is skipped is GPS simulation
 				if (firstPoint) {
 					firstPoint = false;
@@ -353,7 +353,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	}
 
 	public static void addAvailableGPXDataSetTypes(@NonNull OsmandApplication app,
-			@NonNull GPXTrackAnalysis analysis,
+			@NonNull GpxTrackAnalysis analysis,
 			@NonNull List<GPXDataSetType[]> availableTypes) {
 		if (!app.getOsmandMap().getMapView().hasMapRenderer()) {
 			return;
@@ -369,7 +369,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	@Nullable
 	public static OrderedLineDataSet getOrderedLineDataSet(@NonNull OsmandApplication app,
 	                                                       @NonNull LineChart chart,
-	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GpxTrackAnalysis analysis,
 	                                                       @NonNull GPXDataSetType graphType,
 	                                                       @NonNull GPXDataSetAxisType chartAxisType,
 	                                                       boolean calcWithoutGaps,
@@ -393,7 +393,7 @@ public class AutoZoomBySpeedHelper implements ManualZoomListener, TouchListener 
 	@NonNull
 	private static OrderedLineDataSet getZoomDataSet(@NonNull OsmandApplication app,
 	                                                 @NonNull LineChart chart,
-	                                                 @NonNull GPXTrackAnalysis analysis,
+	                                                 @NonNull GpxTrackAnalysis analysis,
 	                                                 @NonNull List<PointAttributes> pointAttributes,
 	                                                 @NonNull GPXDataSetType graphType,
 	                                                 @NonNull GPXDataSetAxisType chartAxisType,

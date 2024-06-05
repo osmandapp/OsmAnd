@@ -6,7 +6,7 @@ import static net.osmand.data.Amenity.OPENING_HOURS;
 import static net.osmand.data.Amenity.SEPARATOR;
 import static net.osmand.data.Amenity.SUBTYPE;
 import static net.osmand.data.Amenity.TYPE;
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

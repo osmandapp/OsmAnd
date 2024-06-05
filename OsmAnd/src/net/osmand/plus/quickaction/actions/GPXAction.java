@@ -26,10 +26,10 @@ import androidx.fragment.app.Fragment;
 import net.osmand.CallbackWithObject;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -43,7 +43,7 @@ import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.quickaction.SelectTrackFileDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -109,7 +109,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 		}
 	}
 
-	private void addWaypoint(@Nullable GPXFile gpxFile, @NonNull MapActivity mapActivity) {
+	private void addWaypoint(@Nullable GpxFile gpxFile, @NonNull MapActivity mapActivity) {
 		LatLon latLon = getMapLocation(mapActivity);
 		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 		if (usePredefinedWaypoint) {
@@ -261,7 +261,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	private void setupGpxTrackInfo(@NonNull View trackInfoContainer,
 	                               @NonNull String gpxName,
-	                               @NonNull GPXTrackAnalysis analysis,
+	                               @NonNull GpxTrackAnalysis analysis,
 	                               @NonNull OsmandApplication app) {
 		UiUtilities iconsCache = app.getUIUtilities();
 
@@ -459,7 +459,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 	private String getIconNameFromParams() {
 		String iconName = getParams().get(KEY_WPT_ICON);
 		return Algorithms.isEmpty(iconName) || !RenderingIcons.containsBigIcon(iconName)
-				? GPXUtilities.DEFAULT_ICON_NAME
+				? GpxUtilities.DEFAULT_ICON_NAME
 				: iconName;
 	}
 
@@ -528,7 +528,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 
 	private void getGpxFile(@NonNull String gpxFilePath,
 	                        @NonNull MapActivity mapActivity,
-	                        @NonNull CallbackWithObject<GPXFile> onGpxFileAvailable) {
+	                        @NonNull CallbackWithObject<GpxFile> onGpxFileAvailable) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		if (gpxFilePath.isEmpty()) {
 			onGpxFileAvailable.processResult(app.getSavingTrackHelper().getCurrentGpx());
@@ -537,7 +537,7 @@ public class GPXAction extends QuickAction implements FileSelected {
 			if (selectedGpxFile != null) {
 				onGpxFileAvailable.processResult(selectedGpxFile.getGpxFile());
 			} else {
-				CallbackWithObject<GPXFile[]> onGpxFileLoaded = gpxFiles -> {
+				CallbackWithObject<GpxFile[]> onGpxFileLoaded = gpxFiles -> {
 					onGpxFileAvailable.processResult(gpxFiles[0]);
 					return true;
 				};

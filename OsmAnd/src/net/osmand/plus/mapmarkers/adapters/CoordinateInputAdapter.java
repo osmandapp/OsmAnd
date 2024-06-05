@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.utils.AndroidUtils;
@@ -24,7 +24,7 @@ import net.osmand.plus.views.PointImageUtils;
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
 	public static final String ADAPTER_POSITION_KEY = "adapter_position_key";
-	private GPXFile gpx;
+	private GpxFile gpx;
 
 	private final OsmandApplication app;
 
@@ -44,7 +44,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		this.actionsListener = actionsListener;
 	}
 	
-	public CoordinateInputAdapter(@NonNull Context context, GPXFile gpx) {
+	public CoordinateInputAdapter(@NonNull Context context, GpxFile gpx) {
 		this.app = (OsmandApplication) context.getApplicationContext();
 		this.gpx = gpx;
 
@@ -114,7 +114,7 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		}
 	}
 	
-	public void setGpx(GPXFile gpx) {
+	public void setGpx(GpxFile gpx) {
 		this.gpx = gpx;
 		notifyDataSetChanged();
 	}

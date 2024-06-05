@@ -5,7 +5,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GpxParameter;
+import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.util.Algorithms;
 
 import java.util.HashMap;

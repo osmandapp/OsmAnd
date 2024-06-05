@@ -11,7 +11,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.WptLocationPoint;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TargetPointsHelper.TargetPoint;
@@ -86,8 +86,8 @@ public class LocationPointWrapper {
 		} else if (type == WaypointHelper.WAYPOINTS) {
 			if (point instanceof WptLocationPoint) {
 				return PointImageUtils.getFromPoint(context, point.getColor(), false, ((WptLocationPoint) point).getPt());
-			} else if (point instanceof GPXUtilities.WptPt) {
-				return PointImageUtils.getFromPoint(context, point.getColor(), false, (GPXUtilities.WptPt) point);
+			} else if (point instanceof GpxUtilities.WptPt) {
+				return PointImageUtils.getFromPoint(context, point.getColor(), false, (GpxUtilities.WptPt) point);
 			} else {
 				return null;
 			}

@@ -2,7 +2,7 @@ package net.osmand.plus.settings.backend.backup.items;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.gpx.GPXUtilities.PointsGroup;
+import static net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import static net.osmand.plus.importfiles.tasks.FavoritesImportTask.wptAsFavourites;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_FILE_PREFIX;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.FAV_GROUP_NAME_SEPARATOR;
@@ -15,8 +15,8 @@ import androidx.annotation.Nullable;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.SpecialPointType;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.favorites.FavoriteGroup;
@@ -239,7 +239,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			@Override
 			public void readFromStream(@NonNull InputStream inputStream, @Nullable File inputFile,
 			                           @Nullable String entryName) throws IllegalArgumentException {
-				GPXFile gpxFile = GPXUtilities.loadGPXFile(inputStream);
+				GpxFile gpxFile = GpxUtilities.loadGPXFile(inputStream);
 				if (gpxFile.error != null) {
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
@@ -259,7 +259,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			}
 
 			@NonNull
-			private FavoriteGroup createFavoriteGroup(@NonNull GPXFile gpxFile, @NonNull FavouritePoint point) {
+			private FavoriteGroup createFavoriteGroup(@NonNull GpxFile gpxFile, @NonNull FavouritePoint point) {
 				FavoriteGroup favoriteGroup = new FavoriteGroup(point);
 
 				PointsGroup pointsGroup = gpxFile.getPointsGroups().get(favoriteGroup.getName());
@@ -276,7 +276,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
+		GpxFile gpxFile = favoritesHelper.getFileHelper().asGpxFile(items);
 		return getGpxWriter(gpxFile);
 	}
 }

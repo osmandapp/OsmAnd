@@ -1,7 +1,7 @@
 package net.osmand.shared.gpx
 
 import net.osmand.shared.IndexConstants
-import net.osmand.shared.db.SQLiteAPI.*
+import net.osmand.shared.api.SQLiteAPI.*
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_DIR_TABLE_NAME
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_TABLE_NAME
 import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION

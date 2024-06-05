@@ -26,9 +26,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -158,7 +158,7 @@ public class MapActivityActions extends MapActions {
 		});
 	}
 
-	public static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GPXFile> {
+	public static class SaveDirectionsAsyncTask extends AsyncTask<File, Void, GpxFile> {
 
 		private final OsmandApplication app;
 		boolean showOnMap;
@@ -169,12 +169,12 @@ public class MapActivityActions extends MapActions {
 		}
 
 		@Override
-		protected GPXFile doInBackground(File... params) {
+		protected GpxFile doInBackground(File... params) {
 			if (params.length > 0) {
 				File file = params[0];
 				String fileName = Algorithms.getFileNameWithoutExtension(file);
-				GPXFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
-				gpx.error = GPXUtilities.writeGpxFile(file, gpx);
+				GpxFile gpx = app.getRoutingHelper().generateGPXFileWithRoute(fileName);
+				gpx.error = GpxUtilities.writeGpxFile(file, gpx);
 				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 				return gpx;
 			}
@@ -182,7 +182,7 @@ public class MapActivityActions extends MapActions {
 		}
 
 		@Override
-		protected void onPostExecute(GPXFile gpxFile) {
+		protected void onPostExecute(GpxFile gpxFile) {
 			if (gpxFile.error == null) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance().syncGroup().saveSelection();
 				if (showOnMap) {
@@ -346,7 +346,7 @@ public class MapActivityActions extends MapActions {
 		return true;
 	}
 
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode, LatLon from,
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
 	                                           boolean showMenu, int menuState) {
 		enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,
@@ -354,7 +354,7 @@ public class MapActivityActions extends MapActions {
 	}
 
 	@Override
-	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
+	public void enterRoutePlanningModeGivenGpx(GpxFile gpxFile, ApplicationMode appMode, LatLon from,
 	                                           PointDescription fromName, boolean useIntermediatePointsByDefault,
 	                                           boolean showMenu, int menuState, boolean passWholeRoute) {
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName,

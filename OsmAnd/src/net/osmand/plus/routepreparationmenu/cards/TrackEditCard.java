@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities.Route;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -21,7 +21,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
@@ -33,9 +33,9 @@ import java.util.List;
 
 public class TrackEditCard extends MapBaseCard {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 
-	public TrackEditCard(MapActivity mapActivity, GPXFile gpxFile) {
+	public TrackEditCard(MapActivity mapActivity, GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 	}
@@ -65,7 +65,7 @@ public class TrackEditCard extends MapBaseCard {
 		}
 
 		GPXInfo gpxInfo = new GPXInfo(fileName, file);
-		GPXTrackAnalysis analysis = null;
+		GpxTrackAnalysis analysis = null;
 		if (file != null) {
 			GpxDataItem dataItem = getDataItem(gpxInfo);
 			if (dataItem != null) {
@@ -131,7 +131,7 @@ public class TrackEditCard extends MapBaseCard {
 	}
 
 	public static String getGpxTitleWithSelectedItem(@NonNull OsmandApplication app, @NonNull GPXRouteParamsBuilder paramsBuilder, String fileName) {
-		GPXFile gpxFile = paramsBuilder.getFile();
+		GpxFile gpxFile = paramsBuilder.getFile();
 		int selectedRoute = paramsBuilder.getSelectedRoute();
 		int selectedSegment = paramsBuilder.getSelectedSegment();
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && selectedSegment != -1) {

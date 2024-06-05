@@ -20,7 +20,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
@@ -73,7 +73,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	private ImportHelper importHelper;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 
 	private View buttonsShadow;
 	private ImageButton sortButton;
@@ -396,11 +396,11 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			String filePath = gpxInfo.getFilePath();
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(filePath);
 			if (selectedGpxFile != null) {
-				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				GpxFile gpxFile = selectedGpxFile.getGpxFile();
 				selectTrackToFollow(gpxFile, true);
 				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() > 1);
 			} else {
-				CallbackWithObject<GPXFile[]> callback = result -> {
+				CallbackWithObject<GpxFile[]> callback = result -> {
 					MapActivity activity = getMapActivity();
 					if (activity != null) {
 						selectTrackToFollow(result[0], true);
@@ -415,7 +415,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	private void selectTrackToFollow(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
+	private void selectTrackToFollow(@NonNull GpxFile gpxFile, boolean showSelectionDialog) {
 		this.gpxFile = gpxFile;
 
 		MapActivity mapActivity = getMapActivity();
@@ -448,7 +448,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				Uri uri = data.getData();
 				importHelper.setGpxImportListener(new GpxImportListener() {
 					@Override
-					public void onSaveComplete(boolean success, GPXFile gpxFile) {
+					public void onSaveComplete(boolean success, GpxFile gpxFile) {
 						if (success) {
 							selectTrackToFollow(gpxFile, true);
 							updateSelectionMode(false);
@@ -566,7 +566,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	@Override
-	public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
+	public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 		app.getSettings().GPX_SEGMENT_INDEX.set(selectedSegment);
 		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
@@ -579,7 +579,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 
 	@Override
-	public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+	public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 		app.getSettings().GPX_ROUTE_INDEX.set(selectedRoute);
 		selectTrackToFollow(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();

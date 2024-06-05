@@ -13,7 +13,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
@@ -126,7 +126,7 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	protected void updateGradientWay(RotatedTileBox tb, List<Location> locations) {
-		GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, getContext().getApp());
+		GpxFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, getContext().getApp());
 		GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();

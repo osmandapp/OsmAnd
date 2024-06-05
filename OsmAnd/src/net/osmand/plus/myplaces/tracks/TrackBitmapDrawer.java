@@ -1,7 +1,7 @@
 package net.osmand.plus.myplaces.tracks;
 
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,12 +20,12 @@ import androidx.core.content.ContextCompat;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.Renderable.CurrentTrack;
@@ -34,7 +34,7 @@ import net.osmand.plus.views.Renderable.StandardTrack;
 
 public class TrackBitmapDrawer extends MapBitmapDrawer {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final GpxDataItem dataItem;
 
 	private final Paint paint = new Paint();
@@ -51,7 +51,7 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 	public int currentTrackColor;
 
 	public TrackBitmapDrawer(@NonNull OsmandApplication app, @NonNull MapDrawParams params,
-	                         @NonNull GPXFile gpxFile, @Nullable GpxDataItem dataItem) {
+	                         @NonNull GpxFile gpxFile, @Nullable GpxDataItem dataItem) {
 		super(app, params);
 		this.gpxFile = gpxFile;
 		this.dataItem = dataItem;

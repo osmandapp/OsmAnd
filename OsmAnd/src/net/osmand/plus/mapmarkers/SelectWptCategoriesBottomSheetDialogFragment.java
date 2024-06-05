@@ -2,8 +2,8 @@ package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -37,7 +37,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 
 	private OsmandApplication app;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 
 	private final Set<String> selectedCategories = new HashSet<>();
 	private final List<BottomSheetItemWithCompoundButton> categoryItems = new ArrayList<>();
@@ -155,7 +155,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		return true;
 	}
 
-	private String getGpxName(GPXFile gpxFile) {
+	private String getGpxName(GpxFile gpxFile) {
 		return new File(gpxFile.path).getName()
 				.replace(IndexConstants.GPX_FILE_EXT, "")
 				.replace("/", " ")

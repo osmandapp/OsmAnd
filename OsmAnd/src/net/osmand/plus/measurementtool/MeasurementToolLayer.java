@@ -15,9 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -506,8 +506,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		segments.addAll(afterSegments);
 		MapRendererView mapRenderer = getMapRenderer();
 		if (mapRenderer != null) {
-			int beforePointsCount = GPXUtilities.calculateTrackPoints(beforeSegments);
-			int afterPointsCount = GPXUtilities.calculateTrackPoints(afterSegments);
+			int beforePointsCount = GpxUtilities.calculateTrackPoints(beforeSegments);
+			int afterPointsCount = GpxUtilities.calculateTrackPoints(afterSegments);
 			boolean draw = forceDraw;
 			draw |= beforePointsCountCached != beforePointsCount;
 			draw |= afterPointsCountCached != afterPointsCount;

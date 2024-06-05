@@ -51,8 +51,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.SpecialPointType;
 import net.osmand.data.ValueHolder;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -625,7 +625,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
-			GPXFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
+			GpxFile gpx = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
 			SimpleRouteCard simpleRouteCard = new SimpleRouteCard(mapActivity, gpx);
 			simpleRouteCard.setListener(this);
 			menuCards.add(simpleRouteCard);
@@ -727,7 +727,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 				// Gpx card
 				List<SelectedGpxFile> selectedGPXFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
-				List<GPXFile> gpxFiles = new ArrayList<>();
+				List<GpxFile> gpxFiles = new ArrayList<>();
 				for (SelectedGpxFile gs : selectedGPXFiles) {
 					if (!gs.isShowCurrentTrack()) {
 						if (gs.getGpxFile().hasRtePt() || gs.getGpxFile().hasTrkPt()) {
@@ -839,11 +839,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	public void selectTrack(@NonNull GPXFile gpxFile, boolean showSelectionDialog) {
+	public void selectTrack(@NonNull GpxFile gpxFile, boolean showSelectionDialog) {
 		selectTrack(gpxFile, showSelectionDialog, null);
 	}
 
-	public void selectTrack(@NonNull GPXFile gpxFile, boolean showSelectionDialog, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
+	public void selectTrack(@NonNull GpxFile gpxFile, boolean showSelectionDialog, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
@@ -1690,7 +1690,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			String via = generateViaDescription();
 			GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
-				GPXFile gpxFile = paramsBuilder.getFile();
+				GpxFile gpxFile = paramsBuilder.getFile();
 				String fileName = null;
 				if (!Algorithms.isEmpty(gpxFile.path)) {
 					fileName = new File(gpxFile.path).getName();
@@ -2045,7 +2045,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private OnSegmentSelectedListener getOnSegmentSelectedListener() {
 		return new OnSegmentSelectedListener() {
 			@Override
-			public void onSegmentSelect(@NonNull GPXFile gpxFile, int selectedSegment) {
+			public void onSegmentSelect(@NonNull GpxFile gpxFile, int selectedSegment) {
 				if (app == null) {
 					return;
 				}
@@ -2054,7 +2054,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 
 			@Override
-			public void onRouteSelected(@NonNull GPXFile gpxFile, int selectedRoute) {
+			public void onRouteSelected(@NonNull GpxFile gpxFile, int selectedRoute) {
 				if (app == null) {
 					return;
 				}
@@ -2063,7 +2063,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		};
 	}
 
-	private void onGpxSelected(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @NonNull OsmandPreference<Integer> gpxRouteSegmentPreference, int selectedIndex) {
+	private void onGpxSelected(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull OsmandPreference<Integer> gpxRouteSegmentPreference, int selectedIndex) {
 		gpxRouteSegmentPreference.set(selectedIndex);
 		selectTrack(gpxFile, false);
 		GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();

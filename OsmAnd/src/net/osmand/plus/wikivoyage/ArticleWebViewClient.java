@@ -9,8 +9,8 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -35,14 +35,14 @@ public class ArticleWebViewClient extends WebViewClient {
 	private final OsmandApplication app;
 	private final ReadDescriptionFragment fragment;
 	private final FragmentActivity activity;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final View view;
 	private final boolean usedOnMap;
 	private final WikiArticleHelper wikiArticleHelper;
 
 	public ArticleWebViewClient(@NonNull ReadDescriptionFragment fragment,
 	                            @NonNull FragmentActivity activity,
-	                            @NonNull GPXFile gpxFile,
+	                            @NonNull GpxFile gpxFile,
 	                            @NonNull View view,
 	                            boolean usedOnMap) {
 		this.fragment = fragment;

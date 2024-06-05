@@ -11,11 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Route;
-import net.osmand.gpx.GPXUtilities.Track;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.Route;
+import net.osmand.shared.gpx.GpxUtilities.Track;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.ItemViewHolder;
@@ -39,7 +39,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 
 	private OnItemClickListener listener;
 
-	public TrackSelectSegmentAdapter(@NonNull Context ctx, @NonNull GPXFile gpxFile) {
+	public TrackSelectSegmentAdapter(@NonNull Context ctx, @NonNull GpxFile gpxFile) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
 		iconsCache = app.getUIUtilities();
@@ -51,7 +51,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 	}
 
 	@NonNull
-	private List<GpxItem> getGpxItems(@NonNull GPXFile gpxFile) {
+	private List<GpxItem> getGpxItems(@NonNull GpxFile gpxFile) {
 		List<GpxItem> gpxItems = new ArrayList<>();
 
 		int segmentIndex = 0;

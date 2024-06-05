@@ -35,10 +35,10 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -102,7 +102,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private int pageMarginPx;
 	private int toolbarHeightPx;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	@Nullable
 	private OrderedLineDataSet elevationDataSet;
 	private GpxDisplayItem gpxItem;
@@ -317,7 +317,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
 		if (route != null) {
 			List<RouteStatistics> routeStatistics = calculateRouteStatistics(app, route, isNightMode());
-			GPXTrackAnalysis analysis = gpxFile.getAnalysis(0);
+			GpxTrackAnalysis analysis = gpxFile.getAnalysis(0);
 
 			for (RouteStatistics statistic : routeStatistics) {
 				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);

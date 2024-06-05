@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
@@ -343,7 +343,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 			}
 
 			@Override
-			public void onSaveComplete(boolean success, GPXFile gpxFile) {
+			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
 					addTrackItem(new TrackItem(new File(gpxFile.path)));
 				}

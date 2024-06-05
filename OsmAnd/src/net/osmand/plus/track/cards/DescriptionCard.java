@@ -15,8 +15,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.Metadata;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -39,11 +39,11 @@ import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
 public class DescriptionCard extends MapBaseCard {
 
 	private final Fragment targetFragment;
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 
 	public DescriptionCard(@NonNull MapActivity mapActivity,
 	                       @NonNull Fragment targetFragment,
-	                       @NonNull GPXFile gpxFile) {
+	                       @NonNull GpxFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.targetFragment = targetFragment;

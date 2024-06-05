@@ -1,14 +1,14 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.data.QuadRect;
 
 public class GpxData {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 	private final QuadRect rect;
 
-	public GpxData(GPXFile gpxFile) {
+	public GpxData(GpxFile gpxFile) {
 		this.gpxFile = gpxFile;
 		if (gpxFile != null) {
 			this.rect = gpxFile.getRect();
@@ -17,7 +17,7 @@ public class GpxData {
 		}
 	}
 
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 

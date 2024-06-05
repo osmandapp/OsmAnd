@@ -3,8 +3,8 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -484,7 +484,7 @@ public class TravelLocalDataHelper {
 				}
 
 				@Override
-				public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+				public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 					if (gpxFile != null) {
 						travelHelper.createGpxFile(article);
 					}
@@ -504,7 +504,7 @@ public class TravelLocalDataHelper {
 							rowsMap.put(BOOKMARKS_COL_CONTENT_JSON, article.contentsJson);
 							rowsMap.put(BOOKMARKS_COL_CONTENT, article.content);
 							rowsMap.put(BOOKMARKS_COL_LAST_MODIFIED, article.getFile().lastModified());
-							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile)));
+							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GpxUtilities.asString(article.gpxFile)));
 
 							conn.execSQL(AndroidDbUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
 									rowsMap.values().toArray());
@@ -529,7 +529,7 @@ public class TravelLocalDataHelper {
 				}
 
 				@Override
-				public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+				public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 					if (gpxFile != null) {
 						String name = travelHelper.getGPXName(article);
 						gpxFile.path = context.getAppPath(IndexConstants.GPX_TRAVEL_DIR + name).getAbsolutePath();
@@ -628,7 +628,7 @@ public class TravelLocalDataHelper {
 				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BOOKMARKS_COL_GPX_GZ));
 				if (blob != null) {
 					String gpxContent = Algorithms.gzipToString(blob);
-					res.gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+					res.gpxFile = GpxUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 				}
 			} catch (IOException e) {
 				LOG.error(e.getMessage(), e);

@@ -22,7 +22,7 @@ import androidx.lifecycle.LifecycleOwner;
 import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
 import net.osmand.data.ValueHolder;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.TripHelper;
@@ -53,7 +53,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 	private List<Row> routeRows = new ArrayList<>();
 
 	@Nullable
-	private GPXFile routeGpxFile;
+	private GpxFile routeGpxFile;
 
 
 	private final StateChangedListener<Void> stateChangedListener = new StateChangedListener<Void>() {
@@ -99,7 +99,7 @@ public final class RoutePreviewScreen extends BaseAndroidAutoScreen implements I
 		}
 	}
 
-	private void buildRouteByGivenGpx(@NonNull GPXFile gpxFile) {
+	private void buildRouteByGivenGpx(@NonNull GpxFile gpxFile) {
 		routeGpxFile = gpxFile;
 		getApp().getOsmandMap().getMapLayers().getMapActionsHelper().buildRouteByGivenGpx(gpxFile);
 		invalidate();
