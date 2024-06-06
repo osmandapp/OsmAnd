@@ -5731,4 +5731,5 @@
     <string name="travel_topics">Temas de los viajes</string>
     <string name="play_weather_forecast">Reproducir pronóstico del tiempo</string>
     <string name="change_terrain_color_scheme">Cambiar esquema de color del terreno</string>
+    <string name="wall_height">Altura de la pared</string>
 </resources>
