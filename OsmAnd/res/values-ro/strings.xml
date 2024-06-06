@@ -4475,7 +4475,7 @@
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_name">Iconuri la niveluri mici de zoom</string>
     <string name="rendering_attr_OSMMapperAssistantIconsLowZooms_description">Afișare schematică a iconurilor la niveluri reduse de zoom</string>
     <string name="rendering_attr_showWaterwayTunnels_name">Creșterea vizibilității pentru tunelurile navigabile</string>
-    <string name="rendering_attr_showWaterwayTunnels_description">Creșterea vizibilității pentru tunelurile navigabile</string>
+    <string name="rendering_attr_showWaterwayTunnels_description">Mărește vizibilitatea pentru tunelurile navigabile</string>
     <string name="rendering_attr_OSMMapperAssistantNote_name">Etichete note</string>
     <string name="rendering_attr_OSMMapperAssistantFixme_name">Etichete Fixme</string>
     <string name="shared_string_open_street_map">OpenStreetMap</string>
@@ -4606,7 +4606,7 @@
     <string name="distance_circles">Distanța-cercuri</string>
     <string name="circle_settings">Setările cercului</string>
     <string name="navigation_points">Puncte de navigație</string>
-    <string name="calculate_online">Calculați online</string>
+    <string name="calculate_online">Calculează online</string>
     <string name="routing_attr_freeride_policy_do_not_go_offpiste_name">Nu merge în afara pârtiei</string>
     <string name="on_with_params">%1$s pe %2$s</string>
     <string name="routing_attr_motor_type_lpg_name">GPL</string>
@@ -5206,7 +5206,7 @@
     <string name="map_3d_mode_description">Atingeți harta cu două degete și deplasați-le în sus și în jos pentru a regla înclinarea hărții.</string>
     <string name="external_device_characteristic_pulse_rate">Frecvența pulsului</string>
     <string name="ant_plus_help_title">Nu știu ce tip de senzor am</string>
-    <string name="ant_plus_searching_text_description">Vă rugăm să țineți dispozitivul aproape de senzor. Trebuie să activați senzorul pentru ca OsmAnd să îl poată găsi.</string>
+    <string name="ant_plus_searching_text_description">Țineți dispozitivul aproape de senzor. Trebuie să activați senzorul pentru ca OsmAnd să îl poată găsi.</string>
     <string name="ant_plus_open_settings">Deschideți setările</string>
     <string name="external_device_characteristic_cuff_pressure">Presiunea manșetei</string>
     <string name="ant_plus_bluetooth_off_description">Porniți Bluetooth, găsiți și împerecheați senzorii.</string>
@@ -5661,7 +5661,7 @@
     <string name="apply_only_to_new">Aplică doar la cele noi</string>
     <string name="release_4_8">- De pregătit pentru 4.8</string>
     <string name="precise">Precis</string>
-    <string name="round_up">Rotunjire în sus</string>
+    <string name="round_up">Rotunjește în sus</string>
     <string name="upload_local_versions">Încărcați versiuni locale</string>
     <string name="change_default_appearance_confirmation">Schimbați aspectul implicit al lui %1$s?</string>
     <string name="use_3d_track_visualization">Vizualizare 3D</string>
@@ -5714,13 +5714,13 @@
     <string name="bottom">Jos</string>
     <string name="top_and_bottom">Sus și jos</string>
     <string name="explore_3d_track_description">Explorați traseul în 3D, interactiv! Vizualizați înălțimea, viteza și multe altele direct pe hartă.</string>
-    <string name="play_weather_forecast">Joacă prognoza meteo</string>
+    <string name="play_weather_forecast">Redă prognoza meteo</string>
     <string name="travel_topics">Subiecte de călătorie</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="wall_color">Culoare perete</string>
     <string name="track_line">Linie de cale ferată</string>
-    <string name="disable_map_layers">Dezactivarea straturilor de hartă</string>
-    <string name="disable_map_layers_descr">Dezactivați toate straturile de hartă de deasupra hărții vectoriale (este necesară repornirea).</string>
+    <string name="disable_map_layers">Dezactivează straturile de hartă</string>
+    <string name="disable_map_layers_descr">Dezactivează toate straturile de hartă de deasupra hărții vectoriale (este necesară repornirea).</string>
     <string name="title_3d_track">Traseu 3D</string>
     <string name="height_legend_description">Pentru a vizualiza relieful, se utilizează hărți color de altitudine.</string>
     <string name="gpx_approximation_geo_cpp">Bazat pe geometrie (C++, rapid)</string>
