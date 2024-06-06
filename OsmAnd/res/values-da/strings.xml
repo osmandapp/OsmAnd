@@ -5735,4 +5735,5 @@
     <string name="change_terrain_color_scheme">Skift farvetema for terræn</string>
     <string name="play_weather_forecast">Afspil vejrudsigt</string>
     <string name="travel_topics">Rejse-emner</string>
+    <string name="wall_height">Murhøjde</string>
 </resources>
