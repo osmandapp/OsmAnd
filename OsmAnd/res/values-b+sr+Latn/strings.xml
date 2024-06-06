@@ -5736,4 +5736,5 @@
     <string name="change_terrain_color_scheme">Promena boje terena</string>
     <string name="play_weather_forecast">Pokretanje vremenske prognoze</string>
     <string name="travel_topics">Teme putovanja</string>
+    <string name="wall_height">Visina zida</string>
 </resources>
