@@ -189,7 +189,7 @@ class RouteRecalculationHelper {
 	private boolean shouldAnnounceNewRoute(RouteCalculationResult res) {
 		if (res.getAppMode().getRouteService() == RouteService.ONLINE) {
 			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(res.getAppMode().getRoutingProfile());
-			if (engine != null && engine.isRescueTrackEngine()) {
+			if (engine != null && engine.isOnlineEngineWithApproximation()) {
 				return res.initialCalculation; // announce at 1st phase (before approximation)
 			}
 		}

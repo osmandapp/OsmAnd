@@ -446,12 +446,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public boolean shouldHideMapProgressBar() {
-		ApplicationMode mode = app.getSettings().getApplicationMode();
+		if (getRoutingHelper() == null || getRoutingHelper().getAppMode() == null) {
+			return false;
+		}
+		ApplicationMode mode = getRoutingHelper().getAppMode();
 		if (mode.getRouteService() == RouteService.ONLINE) {
 			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(mode.getRoutingProfile());
 			return engine != null
-					? engine.isRescueTrackEngine()
-					: app.getOnlineRoutingHelper().wasRescueTrackEngineUsed();
+					? engine.isOnlineEngineWithApproximation()
+					: app.getOnlineRoutingHelper().wasOnlineEngineWithApproximationUsed();
 		}
 		return false;
 	}

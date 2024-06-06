@@ -283,9 +283,9 @@ public class OnlineRoutingHelper {
 		}
 	}
 
-	public boolean wasRescueTrackEngineUsed() {
+	public boolean wasOnlineEngineWithApproximationUsed() {
 		for (OnlineRoutingEngine engine : cachedEngines.values()) {
-			if (engine.isRescueTrackEngine()) {
+			if (engine.isOnlineEngineWithApproximation()) {
 				return true;
 			}
 		}
