@@ -110,6 +110,7 @@ public class GPXUtilities {
 	public static final double PRIME_MERIDIAN = 179.999991234;
 
 	public enum GPXColor {
+
 		BLACK(0xFF000000),
 		DARKGRAY(0xFF444444),
 		GRAY(0xFF888888),
@@ -133,7 +134,12 @@ public class GPXUtilities {
 		OLIVE(0xFF808000),
 		PURPLE(0xFF800080),
 		SILVER(0xFFC0C0C0),
-		TEAL(0xFF008080);
+		TEAL(0xFF008080),
+		DARKYELLOW(0xFF999900),
+		DARKRED(0xFF990000),
+		DARKBLUE(0xFF000066),
+		DARKMAGENTA(0xFF660066),
+		DARKCYAN(0xFF006666);
 
 		public final int color;
 
@@ -205,20 +211,29 @@ public class GPXUtilities {
 		}
 
 		public int getColor(int defColor) {
-			String clrValue = null;
+			String value = getColorValue();
+			return parseColor(value, defColor);
+		}
+
+		public String getColorValue() {
+			String value = null;
 			if (extensions != null) {
-				clrValue = extensions.get(COLOR_NAME_EXTENSION);
-				if (clrValue == null) {
-					clrValue = extensions.get("colour");
+				value = extensions.get(COLOR_NAME_EXTENSION);
+				if (value == null) {
+					value = extensions.get("colour");
 				}
-				if (clrValue == null) {
-					clrValue = extensions.get("displaycolor");
+				if (value == null) {
+					value = extensions.get("displaycolor");
 				}
-				if (clrValue == null) {
-					clrValue = extensions.get("displaycolour");
+				if (value == null) {
+					value = extensions.get("displaycolour");
 				}
 			}
-			return parseColor(clrValue, defColor);
+			return value;
+		}
+
+		public boolean hasColor() {
+			return getColorValue() != null;
 		}
 
 		public void setColor(int color) {
