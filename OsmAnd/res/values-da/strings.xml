@@ -5736,4 +5736,5 @@
     <string name="play_weather_forecast">Afspil vejrudsigt</string>
     <string name="travel_topics">Rejse-emner</string>
     <string name="wall_height">Murhøjde</string>
+    <string name="rendering_value_dark_orange_name">Mørk orange</string>
 </resources>
