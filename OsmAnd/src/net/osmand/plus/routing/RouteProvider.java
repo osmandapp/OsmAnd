@@ -194,13 +194,11 @@ public class RouteProvider {
 					|| routeParams.mode.getRouteService() == RouteService.ONLINE) {
 				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
 						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
-						gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation,
-						routeParams.onlineRouterResponse);
+						gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
 			}
 			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult,
 					routeParams.start, routeParams.end, routeParams.intermediates, routeParams.ctx,
-					routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false,
-					routeParams.initialCalculation, routeParams.onlineRouterResponse);
+					routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false, routeParams.initialCalculation);
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
 			int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
 			Location nearestGpxLocation = null;
@@ -261,8 +259,7 @@ public class RouteProvider {
 
 			return new RouteCalculationResult(newGpxRoute, routeParams.start, routeParams.end,
 					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
-					gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation,
-					routeParams.onlineRouterResponse);
+					gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
 		}
 
 		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
@@ -905,7 +902,7 @@ public class RouteProvider {
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result.getList(), params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
-								params.mode, true, params.initialCalculation, params.onlineRouterResponse);
+								params.mode, true, params.initialCalculation);
 				return res;
 			}
 		} catch (RuntimeException e) {
@@ -1172,14 +1169,12 @@ public class RouteProvider {
 		OnlineRoutingResponse response =
 				helper.calculateRouteOnline(engineKey, getPathFromParams(params),
 						params.start.hasBearing() ? params.start.getBearing() : null,
-						params.leftSide, params.initialCalculation, params.calculationProgress,
-						params.onlineRouterResponse);
+						params.leftSide, params.initialCalculation, params.calculationProgress);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {
 				GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(response.getGpxFile(), settings);
 				builder.setCalculatedRouteTimeSpeed(response.hasCalculatedTimeSpeed());
-				params.onlineRouterResponse = response.getOnlineRouterResponse();
 				params.gpxRoute = builder.build(app);
 				return calculateGpxRoute(params);
 			}

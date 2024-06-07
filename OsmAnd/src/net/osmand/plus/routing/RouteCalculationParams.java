@@ -28,7 +28,6 @@ public class RouteCalculationParams {
 	public boolean inPublicTransportMode;
 	public boolean extraIntermediates;
 	public boolean initialCalculation;
-	public String onlineRouterResponse;
 
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressListener calculationProgressListener;

@@ -73,7 +73,6 @@ public class RouteCalculationResult {
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
 	protected final boolean initialCalculation;
-	protected final String onlineRouterResponse;
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -101,7 +100,6 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = 0;
 		this.routeVisibleAngle = 0;
 		this.initialCalculation = false;
-		this.onlineRouterResponse = null;
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions,
@@ -146,14 +144,12 @@ public class RouteCalculationResult {
 			this.routeVisibleAngle = 0;
 		}
 		this.initialCalculation = params.initialCalculation;
-		this.onlineRouterResponse = params.onlineRouterResponse;
 	}
 
 	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end,
 	                              List<LatLon> intermediates, OsmandApplication ctx, boolean leftSide,
 	                              RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode,
-								  boolean calculateFirstAndLastPoint, boolean initialCalculation,
-								  String onlineRouterResponse) {
+								  boolean calculateFirstAndLastPoint, boolean initialCalculation) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -196,7 +192,6 @@ public class RouteCalculationResult {
 		this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
 		this.initialCalculation = initialCalculation;
-		this.onlineRouterResponse = onlineRouterResponse;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -252,10 +247,6 @@ public class RouteCalculationResult {
 
 	public boolean isInitialCalculation() {
 		return initialCalculation;
-	}
-
-	public String getOnlineRouterResponse() {
-		return onlineRouterResponse;
 	}
 
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,

@@ -110,10 +110,6 @@ public class GpxEngine extends OnlineRoutingEngine {
 		if ((previousRoute == null || previousRoute.isEmpty()) && shouldApproximateRoute()) {
 			params.initialCalculation = true;
 		}
-		if (previousRoute != null &&
-				previousRoute.isInitialCalculation() && previousRoute.getOnlineRouterResponse() != null) {
-			params.onlineRouterResponse = previousRoute.getOnlineRouterResponse(); // 2nd phase online+approximation
-		}
 	}
 
 	@Override
@@ -127,12 +123,11 @@ public class GpxEngine extends OnlineRoutingEngine {
 	                                           boolean leftSideNavigation, boolean initialCalculation,
 	                                           @Nullable RouteCalculationProgress calculationProgress) {
 		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation, calculationProgress, content) : null;
+		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation, calculationProgress) : null;
 	}
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
-	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress,
-	                                              String content) {
+	                                              boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress) {
 		boolean[] calculatedTimeSpeed = new boolean[]{useExternalTimestamps()};
 		if (shouldApproximateRoute() && !initialCalculation) {
 			GPXFile approximated = approximateGpxFile(app, gpxFile, calculationProgress, calculatedTimeSpeed);
@@ -140,7 +135,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				gpxFile = approximated;
 			}
 		}
-		return new OnlineRoutingResponse(gpxFile, calculatedTimeSpeed[0], content);
+		return new OnlineRoutingResponse(gpxFile, calculatedTimeSpeed[0]);
 	}
 
 	@Nullable
