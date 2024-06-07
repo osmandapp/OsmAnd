@@ -1,13 +1,12 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
+import static net.osmand.plus.utils.AndroidUtils.getActivityTypeTitle;
 import static net.osmand.plus.utils.ColorUtilities.getDividerColor;
 import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -127,8 +126,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
 			if (pair.first instanceof RouteKey) {
 				RouteKey key = (RouteKey) pair.first;
-				String tag = key.type.getName();
-				String routeType = getActivityTypeStringPropertyName(item.getMyApplication(), tag, capitalizeFirstLetterAndLowercase(tag));
+				String routeType = getActivityTypeTitle(item.getMyApplication(), key.type);
 				line2Str.append(" - ").append(routeType);
 			}
 		}

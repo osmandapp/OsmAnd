@@ -5,14 +5,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.gpx.GPXFile;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -24,7 +22,8 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
+import static net.osmand.plus.utils.AndroidUtils.getActivityTypeIcon;
+import static net.osmand.plus.utils.AndroidUtils.getActivityTypeTitle;
 
 public class TravelGpxCard extends BaseTravelCard {
 
@@ -57,9 +56,9 @@ public class TravelGpxCard extends BaseTravelCard {
 			String activityTypeKey = article.activityType;
 			if (!Algorithms.isEmpty(activityTypeKey)) {
 				OsmRouteType activityType = OsmRouteType.getOrCreateTypeFromName(activityTypeKey);
-				int activityTypeIcon = getActivityTypeIcon(activityType);
+				int activityTypeIcon = getActivityTypeIcon(app, activityType);
 				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
-				holder.activityType.setText(getActivityTypeTitle(activityType));
+				holder.activityType.setText(getActivityTypeTitle(app, activityType));
 				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));
@@ -92,17 +91,6 @@ public class TravelGpxCard extends BaseTravelCard {
 			holder.divider.setVisibility(isLastItem ? View.GONE : View.VISIBLE);
 			holder.shadow.setVisibility(isLastItem ? View.VISIBLE : View.GONE);
 		}
-	}
-
-	@DrawableRes
-	private int getActivityTypeIcon(OsmRouteType activityType) {
-		int iconId = app.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", app.getPackageName());
-		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
-	}
-
-	private String getActivityTypeTitle(OsmRouteType activityType) {
-		return AndroidUtils.getActivityTypeStringPropertyName(app, activityType.getName(),
-				capitalizeFirstLetterAndLowercase(activityType.getName()));
 	}
 
 	private void updateSaveButton(TravelGpxVH holder) {

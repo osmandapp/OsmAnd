@@ -45,7 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
+import static net.osmand.plus.utils.AndroidUtils.getActivityTypeTitle;
 import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
 import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
@@ -85,11 +85,7 @@ public class RouteInfoCard extends MapBaseCard {
 		LinearLayout container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		RouteKey routeKey = this.routeKey;
-		String routeTypeName = routeKey.type.getName();
-
-		String routeTypeToDisplay = capitalizeFirstLetterAndLowercase(routeTypeName);
-		routeTypeToDisplay = getActivityTypeStringPropertyName(app, routeTypeName, routeTypeToDisplay);
+		String routeTypeToDisplay = getActivityTypeTitle(app, routeKey.type);
 		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
 
 		for (TagsRow row : getRows()) {
