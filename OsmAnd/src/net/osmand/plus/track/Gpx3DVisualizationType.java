@@ -38,4 +38,8 @@ public enum Gpx3DVisualizationType {
 	public int getDisplayNameResId() {
 		return displayNameResId;
 	}
+
+	public boolean is3dType() {
+		return this != NONE;
+	}
 }
