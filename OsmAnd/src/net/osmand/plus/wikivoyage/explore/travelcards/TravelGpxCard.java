@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.gpx.GPXFile;
 import net.osmand.osm.OsmRouteType;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -21,9 +22,6 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeIcon;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeTitle;
 
 public class TravelGpxCard extends BaseTravelCard {
 
@@ -56,9 +54,9 @@ public class TravelGpxCard extends BaseTravelCard {
 			String activityTypeKey = article.activityType;
 			if (!Algorithms.isEmpty(activityTypeKey)) {
 				OsmRouteType activityType = OsmRouteType.getOrCreateTypeFromName(activityTypeKey);
-				int activityTypeIcon = getActivityTypeIcon(app, activityType);
+				int activityTypeIcon = AndroidUtils.getActivityTypeIcon(app, activityType);
 				holder.activityTypeIcon.setImageDrawable(getActiveIcon(activityTypeIcon));
-				holder.activityType.setText(getActivityTypeTitle(app, activityType));
+				holder.activityType.setText(AndroidUtils.getActivityTypeTitle(app, activityType));
 				holder.activityTypeLabel.setVisibility(View.VISIBLE);
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(article.totalDistance, app));

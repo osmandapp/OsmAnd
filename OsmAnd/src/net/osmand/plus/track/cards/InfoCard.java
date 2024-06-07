@@ -1,9 +1,5 @@
 package net.osmand.plus.track.cards;
 
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeIcon;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeTitle;
-
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -12,6 +8,7 @@ import net.osmand.gpx.GPXUtilities;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import net.osmand.util.Algorithms;
 
@@ -41,8 +38,9 @@ public class InfoCard extends BaseMetadataCard {
 		if (visible) {
 			if (routeKey != null) {
 				OsmRouteType activityType = routeKey.type;
-				String routeTypeToDisplay = getActivityTypeTitle(app, activityType);
-				createItemRow(getString(R.string.shared_string_activity), routeTypeToDisplay, getContentIcon(getActivityTypeIcon(app, activityType)));
+				String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, activityType);
+				createItemRow(getString(R.string.shared_string_activity), routeTypeToDisplay, 
+						getContentIcon(AndroidUtils.getActivityTypeIcon(app, activityType)));
 			}
 			if (!Algorithms.isEmpty(metadata.keywords)) {
 				createItemRow(getString(R.string.shared_string_keywords), metadata.keywords, getContentIcon(R.drawable.ic_action_label));

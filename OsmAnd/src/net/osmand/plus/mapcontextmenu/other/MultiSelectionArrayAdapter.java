@@ -1,7 +1,5 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeTitle;
 import static net.osmand.plus.utils.ColorUtilities.getDividerColor;
 import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
@@ -99,7 +97,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 		line2.setText(getSecondLineText(item));
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
-		line2.setCompoundDrawablePadding(dpToPx(context, 5f));
+		line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 5f));
 
 		// Divider
 		View divider = convertView.findViewById(R.id.divider);
@@ -126,7 +124,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
 			if (pair.first instanceof RouteKey) {
 				RouteKey key = (RouteKey) pair.first;
-				String routeType = getActivityTypeTitle(item.getMyApplication(), key.type);
+				String routeType = AndroidUtils.getActivityTypeTitle(item.getMyApplication(), key.type);
 				line2Str.append(" - ").append(routeType);
 			}
 		}
