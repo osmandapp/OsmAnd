@@ -3238,7 +3238,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Надати перевагу дорогам без покриття.</string>
     <string name="layer_osm_edits">Правки OSM</string>
     <string name="quick_action_contour_lines_descr">Увімк/вимк показ ізоліній на мапі.</string>
-    <string name="quick_action_hillshade_descr">Кнопка, щоб показати або приховати тінь на мапі.</string>
+    <string name="quick_action_hillshade_descr">Кнопка, щоб показати або сховати рельєф на мапі.</string>
     <string name="tts_initialization_error">Не вдається запустити рушій TTS.</string>
     <string name="simulate_your_location_gpx_descr">Симуляція положення за допомогою записаного треку GPX.</string>
     <string name="export_profile">Експорт профілю</string>
@@ -5216,7 +5216,7 @@
     <string name="track_not_recorded">Не записано</string>
     <string name="shared_string_new_track">Новий трек</string>
     <string name="shared_string_visible_on_map">Показати на мапі</string>
-    <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма доріжками %2$s, що в ній містяться.</string>
+    <string name="delete_track_folder_dialog_message">Теку \"%1$s\" буде видалено разом з усіма %2$s треками, що в ній містяться.</string>
     <string name="delete_folder_question">Вилучити теку\?</string>
     <string name="delete_folder">Вилучити теку</string>
     <string name="external_sensors_not_found">Датчиків не знайдено</string>
@@ -5461,7 +5461,7 @@
     <string name="empty_name">Назва відсутня</string>
     <string name="edit_filter">Змінити фільтр</string>
     <string name="save_as_smart_folder">Зберегти як розумну теку</string>
-    <string name="delete_smart_folder_dialog_message">Це призведе до вилучення смарт-теки «%1$s». (Доріжки не буде видалено).</string>
+    <string name="delete_smart_folder_dialog_message">Це призведе до вилучення смарттеки «%1$s». (Треки не буде видалено).</string>
     <string name="average_glide_time_interval_desc">Вкажіть інтервал часу для усереднення ковзання.</string>
     <string name="release_4_6">• Android Auto: Додано 3D-режим
 \n
@@ -5725,8 +5725,8 @@
     <string name="delete_actions_button_confirmation">Ви впевнені, що хочете видалити \"%1$s\" з усіма доданими діями?</string>
     <string name="track_vertical_exaggeration_description">Змінюючи значення масштабу, ви можете змінювати висоту 3D-доріжки.</string>
     <string name="gpx_approximation_geo_cpp">На основі геометрії (C++, швидко)</string>
-    <string name="allow_display_on_top">Дозволити відображення вгорі</string>
-    <string name="allow_display_on_top_description">Дозволити відображати тексти мап один над одним</string>
+    <string name="allow_display_on_top">Дозволити показ зверху</string>
+    <string name="allow_display_on_top_description">Дозволити показ текстів мап один над одним</string>
     <string name="show_debug_info">Показати інформацію про налагодження</string>
     <string name="show_debug_info_description">Відображати графічну інформацію про розміщення кожного тексту на карті</string>
     <string name="map_text">Тексти мап</string>
@@ -5734,8 +5734,8 @@
     <string name="routing_attr_avoid_cobblestone_description">Уникайте бруківки</string>
     <string name="disable_map_layers">Вимкнути шари мапи</string>
     <string name="disable_map_layers_descr">Вимкнути всі шари мапи над векторною мапою (потрібен перезапуск).</string>
-    <string name="steps_per_minute_unit">СПК</string>
-    <string name="height_legend_description">Для візуалізації рельєфу використовуються кольорові карти висот.</string>
+    <string name="steps_per_minute_unit">Кроки/хв</string>
+    <string name="height_legend_description">Для візуалізації рельєфу використовуються кольорові мапи висот.</string>
     <string name="change_terrain_color_scheme">Змінити колірну схему Рельєфу</string>
     <string name="play_weather_forecast">Відтворити прогноз погоди</string>
     <string name="travel_topics">Теми подорожей</string>
