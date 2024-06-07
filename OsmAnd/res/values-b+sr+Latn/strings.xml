@@ -5737,4 +5737,5 @@
     <string name="play_weather_forecast">Pokretanje vremenske prognoze</string>
     <string name="travel_topics">Teme putovanja</string>
     <string name="wall_height">Visina zida</string>
+    <string name="rendering_value_dark_orange_name">Tamno narančasta</string>
 </resources>
