@@ -319,6 +319,7 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		private List<RouteDirectionInfo> directions;
 
 		private GPXFile gpxFile;
+		private String onlineRouterResponse;
 		private boolean calculatedTimeSpeed;
 
 		// constructor for JSON responses
@@ -328,8 +329,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		}
 
 		// constructor for GPX responses
-		public OnlineRoutingResponse(GPXFile gpxFile, boolean calculatedTimeSpeed) {
+		public OnlineRoutingResponse(GPXFile gpxFile, boolean calculatedTimeSpeed, String content) {
 			this.gpxFile = gpxFile;
+			this.onlineRouterResponse = content;
 			this.calculatedTimeSpeed = calculatedTimeSpeed;
 		}
 
@@ -347,6 +349,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 		public boolean hasCalculatedTimeSpeed() {
 			return calculatedTimeSpeed;
+		}
+
+		public String getOnlineRouterResponse() {
+			return onlineRouterResponse;
 		}
 	}
 

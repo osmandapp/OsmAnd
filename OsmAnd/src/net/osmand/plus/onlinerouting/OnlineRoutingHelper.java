@@ -100,21 +100,23 @@ public class OnlineRoutingHelper {
 	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey, @NonNull List<LatLon> path,
 	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
-	                                                  @Nullable RouteCalculationProgress calculationProgress) throws IOException, JSONException {
+	                                                  @Nullable RouteCalculationProgress calculationProgress,
+	                                                  @Nullable String previousContent) throws IOException, JSONException {
 		OnlineRoutingEngine engine = getEngineByKey(stringKey);
 		return engine != null ? calculateRouteOnline(engine, path, startBearing, leftSideNavigation,
-				initialCalculation, calculationProgress) : null;
+				initialCalculation, calculationProgress, previousContent) : null;
 	}
 
 	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path,
 	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
-													  @Nullable RouteCalculationProgress calculationProgress) throws IOException, JSONException {
+	                                                  @Nullable RouteCalculationProgress calculationProgress,
+	                                                  @Nullable String previousContent) throws IOException, JSONException {
 		String url = engine.getFullUrl(path, startBearing);
 		String method = engine.getHTTPMethod();
 		String body = engine.getRequestBody(path, startBearing);
 		Map<String, String> headers = engine.getRequestHeaders();
-		String content = makeRequest(url, method, body, headers);
+		String content = previousContent != null ? previousContent : makeRequest(url, method, body, headers);
 		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation, calculationProgress);
 	}
 
