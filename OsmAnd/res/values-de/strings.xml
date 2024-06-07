@@ -5734,4 +5734,5 @@
     <string name="travel_topics">Reisethemen</string>
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
+    <string name="wall_height">Wandhöhe</string>
 </resources>

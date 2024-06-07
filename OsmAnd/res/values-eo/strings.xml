@@ -5724,4 +5724,5 @@
     <string name="change_terrain_color_scheme">Ŝanĝi kolor-skemon de tereno</string>
     <string name="travel_topics">Vojaĝaj temoj</string>
     <string name="play_weather_forecast">Ruli veterprognozon</string>
+    <string name="wall_height">Alto de muro</string>
 </resources>

@@ -5720,4 +5720,5 @@
     <string name="change_terrain_color_scheme">變更地形配色方案</string>
     <string name="play_weather_forecast">播放天氣預報</string>
     <string name="travel_topics">旅遊話題</string>
+    <string name="wall_height">牆的高度</string>
 </resources>
