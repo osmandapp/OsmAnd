@@ -32,7 +32,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipInputStream;
 
@@ -123,16 +122,10 @@ public class OnlineRoutingHelper {
 			return makeRequest(url, "GET", null, null);
 	}
 
-	private final Map<String, String> simpleHttpCache = new ConcurrentHashMap<>();
-
 	@NonNull
 	public String makeRequest(@NonNull String url, @NonNull String method,
 							  @Nullable String body, @Nullable Map<String, String> headers)
 			throws IOException {
-		if ("GET".equals(method) && headers == null && body == null && simpleHttpCache.containsKey(url)) {
-			LOG.info("Cached online routing: " + url);
-			return simpleHttpCache.get(url);
-		}
 		long tm = System.currentTimeMillis();
 		LOG.info("Calling online routing: " + url);
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
@@ -168,9 +161,6 @@ public class OnlineRoutingHelper {
 		} catch (IOException ignored) {
 		}
 		LOG.info(String.format("Online routing request finished %d ms", System.currentTimeMillis() - tm));
-		if ("GET".equals(method) && headers == null && body == null) {
-			simpleHttpCache.put(url, content.toString());
-		}
 		return content.toString();
 	}
 
