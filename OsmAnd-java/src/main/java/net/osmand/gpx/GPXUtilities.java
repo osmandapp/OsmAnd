@@ -89,6 +89,7 @@ public class GPXUtilities {
 	private static final String GPX_TIME_PATTERN_TZ = "yyyy-MM-dd'T'HH:mm:ssXXX";
 
 	private static final Map<String, String> SUPPORTED_EXTENSION_TAGS = new HashMap<String, String>();
+
 	static {
 		SUPPORTED_EXTENSION_TAGS.put("heartrate", PointAttributes.SENSOR_TAG_HEART_RATE);
 		SUPPORTED_EXTENSION_TAGS.put("osmand:hr", PointAttributes.SENSOR_TAG_HEART_RATE);
@@ -159,9 +160,9 @@ public class GPXUtilities {
 	}
 
 	public static class GPXExtensions {
+
 		public Map<String, String> extensions = null;
-		GPXExtensionsWriter extensionsWriter = null;
-		GPXExtensionsWriter additionalExtensionsWriter = null;
+		public Map<String, GPXExtensionsWriter> extensionsWriters = null;
 
 		public Map<String, String> getExtensionsToRead() {
 			if (extensions == null) {
@@ -177,6 +178,13 @@ public class GPXUtilities {
 			return extensions;
 		}
 
+		public Map<String, GPXExtensionsWriter> getExtensionsWriters() {
+			if (extensionsWriters == null) {
+				extensionsWriters = new LinkedHashMap<>();
+			}
+			return extensionsWriters;
+		}
+
 		public void copyExtensions(GPXExtensions e) {
 			Map<String, String> extensionsToRead = e.getExtensionsToRead();
 			if (!extensionsToRead.isEmpty()) {
@@ -184,20 +192,16 @@ public class GPXUtilities {
 			}
 		}
 
-		public GPXExtensionsWriter getAdditionalExtensionsWriter() {
-			return additionalExtensionsWriter;
+		public GPXExtensionsWriter getExtensionsWriter(String key) {
+			return getExtensionsWriters().get(key);
 		}
 
-		public GPXExtensionsWriter getExtensionsWriter() {
-			return extensionsWriter;
+		public void setExtensionsWriter(String key, GPXExtensionsWriter extensionsWriter) {
+			getExtensionsWriters().put(key, extensionsWriter);
 		}
 
-		public void setExtensionsWriter(GPXExtensionsWriter extensionsWriter) {
-			this.extensionsWriter = extensionsWriter;
-		}
-
-		public void setAdditionalExtensionsWriter(GPXExtensionsWriter additionalExtensionsWriter) {
-			this.additionalExtensionsWriter = additionalExtensionsWriter;
+		public void removeExtensionsWriter(String key) {
+			getExtensionsWriters().remove(key);
 		}
 
 		public int getColor(int defColor) {
@@ -998,6 +1002,7 @@ public class GPXUtilities {
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
 			assignPointsGroupsExtensionWriter(file);
+			assignNetworkRouteExtensionWriter(file);
 			writeMetadata(serializer, file, progress);
 			writePoints(serializer, file, progress);
 			writeRoutes(serializer, file, progress);
@@ -1014,29 +1019,33 @@ public class GPXUtilities {
 		return null;
 	}
 
-	public static GPXExtensionsWriter createNetworkRouteExtensionWriter(final Map<String, String> networkRouteTags) {
-		return new GPXExtensionsWriter() {
+	private static void assignNetworkRouteExtensionWriter(final GPXFile gpxFile) {
+		if (!Algorithms.isEmpty(gpxFile.networkRouteKeyTags)) {
+			gpxFile.setExtensionsWriter("network_route", new GPXExtensionsWriter() {
 
-			@Override
-			public void writeExtensions(XmlSerializer serializer) {
-				StringBundle bundle = new StringBundle();
-				StringBundle tagsBundle = new StringBundle();
-				tagsBundle.putString("type", networkRouteTags.get("type"));
-				for (Map.Entry<String, String> tag : networkRouteTags.entrySet()) {
-					tagsBundle.putString(tag.getKey(), tag.getValue());
+				@Override
+				public void writeExtensions(XmlSerializer serializer) {
+					StringBundle bundle = new StringBundle();
+					StringBundle tagsBundle = new StringBundle();
+					tagsBundle.putString("type", gpxFile.networkRouteKeyTags.get("type"));
+					for (Map.Entry<String, String> tag : gpxFile.networkRouteKeyTags.entrySet()) {
+						tagsBundle.putString(tag.getKey(), tag.getValue());
+					}
+					List<StringBundle> routeKeyBundle = new ArrayList<>();
+					routeKeyBundle.add(tagsBundle);
+					bundle.putBundleList("network_route", OSMAND_EXTENSIONS_PREFIX + "route_key", routeKeyBundle);
+					StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
+					bundleWriter.writeBundle();
 				}
-				List<StringBundle> routeKeyBundle = new ArrayList<>();
-				routeKeyBundle.add(tagsBundle);
-				bundle.putBundleList("network_route", OSMAND_EXTENSIONS_PREFIX + "route_key", routeKeyBundle);
-				StringBundleWriter bundleWriter = new StringBundleXmlWriter(bundle, serializer);
-				bundleWriter.writeBundle();
-			}
-		};
+			});
+		} else {
+			gpxFile.removeExtensionsWriter("network_route");
+		}
 	}
 
 	private static void assignPointsGroupsExtensionWriter(final GPXFile gpxFile) {
-		if (!Algorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
+		if (!Algorithms.isEmpty(gpxFile.pointsGroups)) {
+			gpxFile.setExtensionsWriter("points_groups", new GPXExtensionsWriter() {
 
 				@Override
 				public void writeExtensions(XmlSerializer serializer) {
@@ -1050,6 +1059,8 @@ public class GPXUtilities {
 					bundleWriter.writeBundle();
 				}
 			});
+		} else {
+			gpxFile.removeExtensionsWriter("points_groups");
 		}
 	}
 
@@ -1133,8 +1144,8 @@ public class GPXUtilities {
 	}
 
 	private static void assignRouteExtensionWriter(final TrkSegment segment) {
-		if (segment.hasRoute() && segment.getExtensionsWriter() == null) {
-			segment.setExtensionsWriter(new GPXExtensionsWriter() {
+		if (segment.hasRoute() && segment.getExtensionsWriter("route") == null) {
+			segment.setExtensionsWriter("route", new GPXExtensionsWriter() {
 				@Override
 				public void writeExtensions(XmlSerializer serializer) {
 					StringBundle bundle = new StringBundle();
@@ -1190,23 +1201,21 @@ public class GPXUtilities {
 	}
 
 	private static void writeExtensions(XmlSerializer serializer, Map<String, String> extensions, GPXExtensions p, IProgress progress) throws IOException {
-		GPXExtensionsWriter extensionsWriter = p.getExtensionsWriter();
-		GPXExtensionsWriter additionalExtensionsWriter = p.getAdditionalExtensionsWriter();
+		Map<String, GPXExtensionsWriter> extensionsWriters = p.getExtensionsWriters();
 		boolean hasExtensions = !Algorithms.isEmpty(extensions);
-		if (hasExtensions || extensionsWriter != null) {
+		boolean hasExtensionWriters = !Algorithms.isEmpty(extensionsWriters);
+
+		if (hasExtensions || hasExtensionWriters) {
 			serializer.startTag(null, "extensions");
 			if (hasExtensions) {
 				for (Entry<String, String> entry : extensions.entrySet()) {
 					writeNotNullText(serializer, getOsmandTagKey(entry), entry.getValue());
 				}
 			}
-			if (additionalExtensionsWriter != null) {
-				serializer.startTag(null, "gpxtpx:TrackPointExtension");
-				additionalExtensionsWriter.writeExtensions(serializer);
-				serializer.endTag(null, "gpxtpx:TrackPointExtension");
-			}
-			if (extensionsWriter != null) {
-				extensionsWriter.writeExtensions(serializer);
+			if (hasExtensionWriters) {
+				for (GPXExtensionsWriter writer : extensionsWriters.values()) {
+					writer.writeExtensions(serializer);
+				}
 			}
 			serializer.endTag(null, "extensions");
 			if (progress != null) {
@@ -1260,37 +1269,56 @@ public class GPXUtilities {
 	}
 
 	public static void assignExtensionWriter(WptPt wptPt, Map<String, String> pluginsExtensions) {
-		if (wptPt.getExtensionsWriter() == null) {
-			HashMap<String, String> regularExtensions = new HashMap<>();
-			HashMap<String, String> gpxtpxExtensions = new HashMap<>();
+		HashMap<String, String> regularExtensions = new HashMap<>();
+		HashMap<String, String> gpxtpxExtensions = new HashMap<>();
 
-			for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
-				if (entry.getKey().startsWith(GPXTPX_PREFIX)) {
-					gpxtpxExtensions.put(entry.getKey(), entry.getValue());
-				} else {
-					regularExtensions.put(entry.getKey(), entry.getValue());
-				}
+		for (Entry<String, String> entry : pluginsExtensions.entrySet()) {
+			if (entry.getKey().startsWith(GPXTPX_PREFIX)) {
+				gpxtpxExtensions.put(entry.getKey(), entry.getValue());
+			} else {
+				regularExtensions.put(entry.getKey(), entry.getValue());
 			}
-			wptPt.setExtensionsWriter(createExtensionsWriter(regularExtensions, true));
-			if (!Algorithms.isEmpty(gpxtpxExtensions)) {
-				wptPt.setAdditionalExtensionsWriter(createExtensionsWriter(gpxtpxExtensions, false));
-			}
+		}
+		if (!Algorithms.isEmpty(regularExtensions)) {
+			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true));
+		}
+		if (!Algorithms.isEmpty(gpxtpxExtensions)) {
+			wptPt.setExtensionsWriter("gpxtpx:TrackPointExtension", createGpxTpxExtensionsWriter(gpxtpxExtensions, false));
 		}
 	}
 
-	private static GPXUtilities.GPXExtensionsWriter createExtensionsWriter(final Map<String, String> extensions, final boolean addOsmandPrefix) {
+	private static GPXExtensionsWriter createExtensionsWriter(final Map<String, String> extensions, final boolean addOsmandPrefix) {
 		return new GPXExtensionsWriter() {
 			@Override
 			public void writeExtensions(XmlSerializer serializer) {
-				for (Entry<String, String> entry : extensions.entrySet()) {
-					try {
-						GPXUtilities.writeNotNullText(serializer, addOsmandPrefix ? getOsmandTagKey(entry) : entry.getKey(), entry.getValue());
-					} catch (IOException e) {
-						log.error(e);
-					}
+				writeExtensionsWithPrefix(serializer, extensions, addOsmandPrefix);
+			}
+		};
+	}
+
+	private static GPXExtensionsWriter createGpxTpxExtensionsWriter(final Map<String, String> extensions, final boolean addOsmandPrefix) {
+		return new GPXExtensionsWriter() {
+			@Override
+			public void writeExtensions(XmlSerializer serializer) {
+				try {
+					serializer.startTag(null, "gpxtpx:TrackPointExtension");
+					writeExtensionsWithPrefix(serializer, extensions, addOsmandPrefix);
+					serializer.endTag(null, "gpxtpx:TrackPointExtension");
+				} catch (IOException e) {
+					log.error(e);
 				}
 			}
 		};
+	}
+
+	private static void writeExtensionsWithPrefix(XmlSerializer serializer, Map<String, String> extensions, boolean addOsmandPrefix) {
+		for (Entry<String, String> entry : extensions.entrySet()) {
+			try {
+				GPXUtilities.writeNotNullText(serializer, addOsmandPrefix ? getOsmandTagKey(entry) : entry.getKey(), entry.getValue());
+			} catch (IOException e) {
+				log.error(e);
+			}
+		}
 	}
 
 	private static String getOsmandTagKey(final Entry<String, String> entry) {
@@ -1440,7 +1468,7 @@ public class GPXUtilities {
 			ms = Double.parseDouble("0" + text.substring(is, es));
 			text = text.substring(0, is) + text.substring(es);
 		}
-		return parser.parse(text).getTime() + (long)(ms * 1000);
+		return parser.parse(text).getTime() + (long) (ms * 1000);
 	}
 
 	public static long getCreationTime(GPXFile gpxFile) {
@@ -1550,7 +1578,7 @@ public class GPXUtilities {
 							PointsGroup pointsGroup = PointsGroup.parsePointsGroupAttributes(parser);
 							pointsGroups.add(pointsGroup);
 						} else if (networkRoute && tagName.equals("route_key")) {
-							gpxFile.addRouteKeyTags(parseRouteKeyAttributes(parser));
+							gpxFile.networkRouteKeyTags.putAll(parseRouteKeyAttributes(parser));
 						}
 						switch (tagName) {
 							case "routepointextension":
@@ -1823,7 +1851,7 @@ public class GPXUtilities {
 					if (tag.equals("metadata")) {
 						Metadata pop = (Metadata) parserState.pop();
 						pop.readDescription();
-						
+
 						assert pop instanceof Metadata;
 					} else if (tag.equals("author")) {
 						if (parse instanceof Author) {
