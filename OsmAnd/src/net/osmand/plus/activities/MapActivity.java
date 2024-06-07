@@ -432,7 +432,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public void updateProgress(int progress) {
 		ProgressBar progressBar = findViewById(R.id.map_horizontal_progress);
 		if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible() || shouldHideMapProgressBar()) {
+			if (mapRouteInfoMenu.isVisible() || dashboardOnMap.isVisible() || isOnlineRoutingWithApproximation()) {
 				AndroidUiHelper.updateVisibility(progressBar, false);
 				return;
 			}
@@ -445,12 +445,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public boolean shouldHideMapProgressBar() {
-		if (getRoutingHelper() == null || getRoutingHelper().getAppMode() == null) {
-			return false;
-		}
+	public boolean isOnlineRoutingWithApproximation() {
 		ApplicationMode mode = getRoutingHelper().getAppMode();
-		if (mode.getRouteService() == RouteService.ONLINE) {
+		if (mode != null && mode.getRouteService() == RouteService.ONLINE) {
 			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(mode.getRoutingProfile());
 			return engine != null
 					? engine.isOnlineEngineWithApproximation()
