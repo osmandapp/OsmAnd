@@ -107,6 +107,7 @@ public class OnlineRoutingHelper {
 				initialCalculation, calculationProgress, previousContent) : null;
 	}
 
+	private final Map<String, String> onlineContentCache = new ConcurrentHashMap<>();
 	@Nullable
 	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path,
 	                                                  @Nullable Float startBearing, boolean leftSideNavigation, boolean initialCalculation,
@@ -116,7 +117,15 @@ public class OnlineRoutingHelper {
 		String method = engine.getHTTPMethod();
 		String body = engine.getRequestBody(path, startBearing);
 		Map<String, String> headers = engine.getRequestHeaders();
-		String content = previousContent != null ? previousContent : makeRequest(url, method, body, headers);
+
+		// String content = previousContent != null ? previousContent : makeRequest(url, method, body, headers);
+		String key = url + body + headers; // nullable ok
+		String content = onlineContentCache.containsKey(key) ? onlineContentCache.get(key)
+				: makeRequest(url, method, body, headers);
+		if (content != null && content.length() > 0) {
+			onlineContentCache.put(key, content);
+		}
+
 		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation, calculationProgress);
 	}
 
@@ -125,16 +134,10 @@ public class OnlineRoutingHelper {
 			return makeRequest(url, "GET", null, null);
 	}
 
-	private final Map<String, String> simpleHttpCache = new ConcurrentHashMap<>();
-
 	@NonNull
 	public String makeRequest(@NonNull String url, @NonNull String method,
 							  @Nullable String body, @Nullable Map<String, String> headers)
 			throws IOException {
-		if ("GET".equals(method) && headers == null && body == null && simpleHttpCache.containsKey(url)) {
-			LOG.info("Cached online routing: " + url);
-			return simpleHttpCache.get(url);
-		}
 		long tm = System.currentTimeMillis();
 		LOG.info("Calling online routing: " + url);
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
@@ -170,9 +173,6 @@ public class OnlineRoutingHelper {
 		} catch (IOException ignored) {
 		}
 		LOG.info(String.format("Online routing request finished %d ms", System.currentTimeMillis() - tm));
-		if ("GET".equals(method) && headers == null && body == null) {
-			simpleHttpCache.put(url, content.toString());
-		}
 		return content.toString();
 	}
 
