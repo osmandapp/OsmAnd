@@ -5729,4 +5729,17 @@
     <string name="travel_topics">Utazási témák</string>
     <string name="change_terrain_color_scheme">Domborzati színséma módosítása</string>
     <string name="wall_height">Fal magassága</string>
+    <string name="rendering_value_dark_orange_name">Sötét narancs</string>
+    <string name="assigned_keys">Hozzárendelt billentyűk</string>
+    <string name="new_key_assignment">Új billentyű-hozzárendelés</string>
+    <string name="clear_all_key_shortcuts">Az összes billentyűparancsot törlése</string>
+    <string name="no_assigned_keys_desc">Válasszon ki egy műveletet, és rendeljen hozzá egy billentyűt a „Hozzáadás” gomb megérintésével.</string>
+    <string name="key_assignment_add_action">Művelet hozzáadása</string>
+    <string name="shared_string_key">Billentyű</string>
+    <string name="no_assigned_keys">Nincsenek hozzárendelt billentyűk</string>
+    <string name="clear_all_key_shortcuts_summary">A kiválasztott típushoz tartozó összes billentyű-hozzárendelés el lesz távolítva.</string>
+    <string name="key_name_pattern">\"%1$s\" billentyű</string>
+    <string name="clear_key_assignment_summary">A kiválasztott művelethez tartozó billentyű-hozzárendelés törlődik.</string>
+    <string name="key_assignment_add_key">Billentyű hozzáadása</string>
+    <string name="action_icon">Műveletikon</string>
 </resources>
