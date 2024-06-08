@@ -175,7 +175,7 @@ class RouteRecalculationHelper {
 			}
 			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
-			if (!res.initialCalculation && (!wrongMovementDirection || newRoute)) {
+			if (shouldAnnounceNewRoute(res) && (!wrongMovementDirection || newRoute)) {
 				getVoiceRouter().newRouteIsCalculated(newRoute);
 			}
 		}
@@ -184,6 +184,16 @@ class RouteRecalculationHelper {
 		if (res.initialCalculation) {
 			app.runInUIThread(() -> routingHelper.recalculateRouteDueToSettingsChange(false));
 		}
+	}
+
+	private boolean shouldAnnounceNewRoute(RouteCalculationResult res) {
+		if (res.getAppMode().getRouteService() == RouteService.ONLINE) {
+			OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(res.getAppMode().getRoutingProfile());
+			if (engine != null && engine.isOnlineEngineWithApproximation()) {
+				return res.initialCalculation; // announce at 1st phase (before approximation)
+			}
+		}
+		return !res.initialCalculation; // announce at final
 	}
 
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
