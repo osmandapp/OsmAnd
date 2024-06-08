@@ -5735,4 +5735,5 @@
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
     <string name="wall_height">Wandhöhe</string>
+    <string name="rendering_value_dark_orange_name">Dunkelorange</string>
 </resources>
