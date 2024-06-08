@@ -5560,7 +5560,7 @@
     <string name="tripltek_promo">Promocio Tripltek por %1$s monato(j)</string>
     <string name="tripltek_promo_description">Senpaga aliro interalie al senlimaj elŝutoj de mapoj, 3-dimensia map-reliefo kaj pli por %1$s monato(j)</string>
     <string name="shared_string_reassign">Reatribui</string>
-    <string name="reset_key_assignments">Reagordi klav-asingojn</string>
+    <string name="reset_key_assignments">Reagordi klav-asignojn</string>
     <string name="target_elevation">Alcela altitudo</string>
     <string name="remove_widget_first">Unue forigu la fenestraĵon</string>
     <string name="lang_zh_hant">Ĉina tradicia</string>
@@ -5725,4 +5725,7 @@
     <string name="travel_topics">Vojaĝaj temoj</string>
     <string name="play_weather_forecast">Ruli veterprognozon</string>
     <string name="wall_height">Alto de muro</string>
+    <string name="clear_key_assignment_summary">Klav-asigno por la elektita ago estos forviŝita.</string>
+    <string name="rendering_value_dark_orange_name">Oranĝkolora malhela</string>
+    <string name="clear_all_key_shortcuts_summary">Ĉiuj klav-asignoj de la elektita speco estos forviŝitaj.</string>
 </resources>
