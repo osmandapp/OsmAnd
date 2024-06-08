@@ -45,11 +45,11 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 	protected List<ImportTrackItem> doInBackground(Void... params) {
 		List<ImportTrackItem> items = new ArrayList<>();
 		String name = Algorithms.getFileNameWithoutExtension(fileName);
-		for (int i = 0; i < gpxFile.tracks.size(); i++) {
-			Track track = gpxFile.tracks.get(i);
-			if (!track.generalTrack) {
+		for (int i = 0; i < gpxFile.getTracks().size(); i++) {
+			Track track = gpxFile.getTracks().get(i);
+			if (!track.isGeneralTrack()) {
 				GpxFile trackFile = new GpxFile(Version.getFullVersion(app));
-				trackFile.tracks.add(track);
+				trackFile.getTracks().add(track);
 				trackFile.setColor(gpxFile.getColor(0));
 				trackFile.setWidth(gpxFile.getWidth(null));
 				trackFile.setShowArrows(gpxFile.isShowArrows());
@@ -64,14 +64,14 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(trackFile, app);
 
-				String trackName = track.name;
+				String trackName = track.getName();
 				if (Algorithms.isEmpty(trackName)) {
 					trackName = app.getString(R.string.ltr_or_rtl_combine_via_dash, name, String.valueOf(i));
 				}
 				items.add(new ImportTrackItem(selectedGpxFile, trackName, i));
 			}
 		}
-		for (WptPt point : gpxFile.getPoints()) {
+		for (WptPt point : gpxFile.getPointsList()) {
 			ImportTrackItem item = findNearestTrack(point, items);
 			if (item != null) {
 				item.selectedPoints.add(point);
@@ -87,7 +87,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 		for (ImportTrackItem item : items) {
 			GpxFile gpxFile = item.selectedGpxFile.getGpxFile();
 			for (WptPt wptPt : gpxFile.getAllSegmentsPoints()) {
-				double distance = MapUtils.getDistance(point.lat, point.lon, wptPt.lat, wptPt.lon);
+				double distance = MapUtils.getDistance(point.getLat(), point.getLon(), wptPt.getLat(), wptPt.getLon());
 				if (distance < minDistance) {
 					minDistance = distance;
 					trackItem = item;

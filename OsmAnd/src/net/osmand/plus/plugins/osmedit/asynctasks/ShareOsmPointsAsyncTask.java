@@ -7,6 +7,7 @@ import android.util.Xml;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
@@ -64,24 +65,24 @@ public class ShareOsmPointsAsyncTask extends AsyncTask<OsmPoint, OsmPoint, Strin
 			if (point.getGroup() == Group.POI) {
 				OpenstreetmapPoint p = (OpenstreetmapPoint) point;
 				WptPt wpt = new WptPt();
-				wpt.name = p.getTagsString();
-				wpt.lat = p.getLatitude();
-				wpt.lon = p.getLongitude();
-				wpt.desc = "id: " + p.getId() +
-						" node" + " " + OsmPoint.stringAction.get(p.getAction());
+				wpt.setName(p.getTagsString());
+				wpt.setLat(p.getLatitude());
+				wpt.setLon(p.getLongitude());
+				wpt.setDesc("id: " + p.getId() +
+						" node" + " " + OsmPoint.stringAction.get(p.getAction()));
 				gpx.addPoint(wpt);
 			} else if (point.getGroup() == Group.BUG) {
 				OsmNotesPoint p = (OsmNotesPoint) point;
 				WptPt wpt = new WptPt();
-				wpt.name = p.getText();
-				wpt.lat = p.getLatitude();
-				wpt.lon = p.getLongitude();
-				wpt.desc = "id: " + p.getId() +
-						" note" + " " + OsmPoint.stringAction.get(p.getAction());
+				wpt.setName(p.getText());
+				wpt.setLat(p.getLatitude());
+				wpt.setLon(p.getLongitude());
+				wpt.setDesc("id: " + p.getId() +
+						" note" + " " + OsmPoint.stringAction.get(p.getAction()));
 				gpx.addPoint(wpt);
 			}
 		}
-		Exception exception = GpxUtilities.writeGpxFile(srcFile, gpx);
+		Exception exception = SharedUtil.writeGpxFile(srcFile, gpx);
 		if (exception != null) {
 			return exception.getMessage();
 		}

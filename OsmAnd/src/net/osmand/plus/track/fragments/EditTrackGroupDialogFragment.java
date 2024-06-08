@@ -92,7 +92,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		if (gpxFile.showCurrentTrack) {
 			selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 		} else {
-			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.getPath());
 		}
 		boolean trackPoints = displayGroup.getType() == GpxDisplayItemType.TRACK_POINTS;
 		if (trackPoints && selectedGpxFile != null) {
@@ -183,7 +183,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	private void updateGroupWptCategory(boolean synced) {
-		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.getPath());
 		if (selectedGpxFile == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
 					.showOnMap().selectedAutomatically().saveSelection();

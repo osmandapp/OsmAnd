@@ -6,19 +6,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
-import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.Map;
 
-public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, kotlin.Exception> {
+public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, Exception> {
 
 	private final GpxFile gpxFile;
 	private final Map<String, PointsGroup> changedGroups;
@@ -41,11 +41,11 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, kotlin
 	}
 
 	@Override
-	protected kotlin.Exception doInBackground(Void... voids) {
+	protected Exception doInBackground(Void... voids) {
 		updatePoints();
 
 		if (!gpxFile.isShowCurrentTrack() && gpxUpdated) {
-			return GpxUtilities.INSTANCE.writeGpxFile(new KFile(gpxFile.getPath()), gpxFile);
+			return SharedUtil.writeGpxFile(new File(gpxFile.getPath()), gpxFile);
 		}
 		return null;
 	}
@@ -77,7 +77,7 @@ public class UpdatePointsGroupsTask extends BaseLoadAsyncTask<Void, Void, kotlin
 		} else {
 			WptPt wptInfo = new WptPt(wpt.getLatitude(), wpt.getLongitude(), wpt.getDesc(), wpt.getName(), category,
 					Algorithms.colorToString(color), iconName, backgroundType);
-			gpxFile.updateWptPt(wpt, wptInfo);
+			gpxFile.updateWptPt(wpt, wptInfo, true);
 		}
 	}
 

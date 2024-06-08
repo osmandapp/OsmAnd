@@ -373,7 +373,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (!Algorithms.isBlank(gpxFile.getArticleTitle())) {
 			gpxTitle = gpxFile.getArticleTitle();
 		} else {
-			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.path));
+			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(gpxFile.getPath()));
 		}
 	}
 
@@ -910,8 +910,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		super.onDestroy();
 
 		GpxFile gpxFile = getGpx();
-		if (gpxFile != null && FileUtils.isTempFile(app, gpxFile.path)) {
-			FileUtils.removeGpxFile(app, new File(gpxFile.path));
+		if (gpxFile != null && FileUtils.isTempFile(app, gpxFile.getPath())) {
+			FileUtils.removeGpxFile(app, new File(gpxFile.getPath()));
 		}
 	}
 
@@ -1146,24 +1146,24 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				OsmandApplication app = mapActivity.getMyApplication();
 				if (gpxFile.showCurrentTrack) {
 					GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-				} else if (!Algorithms.isEmpty(gpxFile.path)) {
+				} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
 					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 				}
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
 				OsmEditingPlugin osmEditingPlugin = PluginsHelper.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
-					File file = new File(gpxFile.path);
+					File file = new File(gpxFile.getPath());
 					osmEditingPlugin.sendGPXFiles(mapActivity, this, file);
 				}
 			} else if (buttonIndex == EDIT_BUTTON_INDEX) {
 				GpxSelectionParams params = GpxSelectionParams.newInstance().showOnMap();
 				selectedGpxFile = gpxSelectionHelper.selectGpxFile(gpxFile, params);
 				dismiss();
-				MeasurementToolFragment.showInstance(fragmentManager, gpxFile.path, false);
+				MeasurementToolFragment.showInstance(fragmentManager, gpxFile.getPath(), false);
 			} else if (buttonIndex == RENAME_BUTTON_INDEX) {
-				FileUtils.renameFile(mapActivity, new File(gpxFile.path), this, true);
+				FileUtils.renameFile(mapActivity, new File(gpxFile.getPath()), this, true);
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {
-				File file = new File(gpxFile.path);
+				File file = new File(gpxFile.getPath());
 				MoveGpxFileBottomSheet.showInstance(fragmentManager, file, file.getParentFile(), this, true, false);
 			} else if (buttonIndex == GPS_FILTER_BUTTON_INDEX) {
 				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile, this);
@@ -1184,12 +1184,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == SIMULATE_POSITION_BUTTON_INDEX) {
 				SimulateLocationFragment.showInstance(fragmentManager, gpxFile, true);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
-				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
+				String fileName = Algorithms.getFileWithoutDirs(gpxFile.getPath());
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
 				builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
 				builder.setMessage(R.string.are_you_sure);
-				String gpxFilePath = gpxFile.path;
+				String gpxFilePath = gpxFile.getPath();
 				builder.setNegativeButton(R.string.shared_string_cancel, null)
 						.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
 							if (FileUtils.removeGpxFile(app, new File(gpxFilePath))) {
@@ -1595,7 +1595,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void saveGpx(SelectedGpxFile selectedGpxFile, GpxFile gpxFile) {
-		SaveGpxHelper.saveGpx(new File(gpxFile.path), gpxFile, errorMessage -> {
+		SaveGpxHelper.saveGpx(new File(gpxFile.getPath()), gpxFile, errorMessage -> {
 			if (selectedGpxFile != null) {
 				List<GpxDisplayGroup> groups = displayHelper.getDisplayGroups(
 						new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT});
@@ -1789,7 +1789,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 			if (gpxPoint != null) {
 				WptPt wptPt = gpxPoint.getSelectedPoint();
-				fragment.setLatLon(new LatLon(wptPt.lat, wptPt.lon));
+				fragment.setLatLon(new LatLon(wptPt.getLat(), wptPt.getLon()));
 				fragment.setGpxPoint(gpxPoint);
 			} else {
 				QuadRect rect = selectedGpxFile.getGpxFile().getRect();

@@ -18,7 +18,7 @@ public class SaveGpxHelper {
 	}
 
 	public static void saveGpx(@NonNull GpxFile gpx, @Nullable SaveGpxListener listener) {
-		saveGpx(new File(gpx.path), gpx, listener);
+		saveGpx(new File(gpx.getPath()), gpx, listener);
 	}
 
 	public static void saveGpx(@NonNull File file, @NonNull GpxFile gpx) {

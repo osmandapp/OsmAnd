@@ -1,12 +1,12 @@
 package net.osmand.plus.myplaces.tracks.tasks;
 
+import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.WIDTH;
-import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,18 +14,18 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxParameter;
+import net.osmand.SharedUtil;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxParameter;
 
 import org.apache.commons.logging.Log;
 
@@ -79,15 +79,15 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 	@Nullable
 	private GpxFile getGpxFile(@NonNull File file) {
 		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(file.getAbsolutePath());
-		GpxFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : GpxUtilities.loadGPXFile(file);
-		if (gpxFile.error != null) {
-			LOG.error("Failed read gpx file", gpxFile.error);
+		GpxFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : SharedUtil.loadGpxFile(file);
+		if (gpxFile.getError() != null) {
+			LOG.error("Failed read gpx file", SharedUtil.jException(gpxFile.getError()));
 		}
-		return gpxFile.error == null ? gpxFile : null;
+		return gpxFile.getError() == null ? gpxFile : null;
 	}
 
 	private void updateTrackAppearance(@NonNull GpxDataItem item, @Nullable GpxFile gpxFile) {
-		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			if (data.shouldResetParameter(parameter)) {
 				if (gpxFile != null) {
 					item.readGpxAppearanceParameter(gpxFile, parameter);
@@ -101,7 +101,7 @@ public class ChangeTracksAppearanceTask extends BaseLoadAsyncTask<Void, File, Vo
 		}
 		app.getGpxDbHelper().updateDataItem(item);
 
-		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getAbsolutePath());
+		SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedFileByPath(item.getFile().getParentFile().absolutePath());
 		if (selectedGpxFile != null) {
 			selectedGpxFile.resetSplitProcessed();
 		}

@@ -75,8 +75,8 @@ public class OptionsCard extends MapBaseCard {
 		itemsContainer.removeAllViews();
 		items.clear();
 
-		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
-		if (!FileUtils.isTempFile(app, gpxFile.path)) {
+		boolean fileAvailable = gpxFile.getPath() != null && !gpxFile.showCurrentTrack;
+		if (!FileUtils.isTempFile(app, gpxFile.getPath())) {
 			items.add(createShowOnMapItem());
 			items.add(createAppearanceItem());
 			if (fileAvailable) {
@@ -104,7 +104,7 @@ public class OptionsCard extends MapBaseCard {
 
 			items.add(createDividerItem());
 
-			if (!FileUtils.isTempFile(app, gpxFile.path)) {
+			if (!FileUtils.isTempFile(app, gpxFile.getPath())) {
 				items.add(createEditItem());
 			}
 			items.add(createRenameItem());
@@ -262,7 +262,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createChangeFolderItem() {
-		File file = new File(gpxFile.path).getParentFile();
+		File file = new File(gpxFile.getPath()).getParentFile();
 		String folder = file != null ? file.getName() : null;
 		Drawable changeFolderIcon = getActiveIcon(R.drawable.ic_action_folder_move);
 

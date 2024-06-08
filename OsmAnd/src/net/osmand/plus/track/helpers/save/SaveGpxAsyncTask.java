@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
 
@@ -32,7 +33,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
 
 	@Override
 	protected Exception doInBackground(Void... params) {
-		return GpxUtilities.writeGpxFile(file, gpx);
+		return SharedUtil.writeGpxFile(file, gpx);
 	}
 
 	@Override

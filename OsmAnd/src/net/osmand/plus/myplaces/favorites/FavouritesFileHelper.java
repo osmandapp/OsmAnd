@@ -11,14 +11,13 @@ import androidx.annotation.Nullable;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -186,9 +185,9 @@ public class FavouritesFileHelper {
 	}
 
 	@Nullable
-	public kotlin.Exception saveFile(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File file) {
+	public Exception saveFile(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File file) {
 		GpxFile gpx = asGpxFile(favoriteGroups);
-		return GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(file), gpx);
+		return SharedUtil.writeGpxFile(file, gpx);
 	}
 
 	private File getBackupsFolder() {

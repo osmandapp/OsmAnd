@@ -8,23 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.SharedUtil;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsReader;
-import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsWriter;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.utils.FileUtils;
-import net.osmand.shared.xml.XmlParserException;
-import net.osmand.shared.xml.XmlPullParser;
-import net.osmand.shared.xml.XmlSerializer;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsReader;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
@@ -35,7 +31,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,17 +41,17 @@ import java.util.UUID;
 
 public class ItineraryDataHelper {
 
-	private static final Log log = PlatformUtil.getLog(ItineraryDataHelper.class);
+	static final Log LOG = PlatformUtil.getLog(ItineraryDataHelper.class);
 
 	public static final String VISITED_DATE = "visited_date";
 	public static final String CREATION_DATE = "creation_date";
 	public static final String FILE_TO_SAVE = "itinerary.gpx";
 
-	private static final String CATEGORIES_SPLIT = ",";
-	private static final String ITINERARY_ID = "itinerary_id";
-	private static final String ITINERARY_GROUP = "itinerary_group";
-	private static final String GPX_KEY = "gpx";
-	private static final String FAVOURITES_KEY = "favourites_group";
+	static final String CATEGORIES_SPLIT = ",";
+	static final String ITINERARY_ID = "itinerary_id";
+	static final String ITINERARY_GROUP = "itinerary_group";
+	static final String GPX_KEY = "gpx";
+	static final String FAVOURITES_KEY = "favourites_group";
 
 	private final OsmandApplication app;
 	private final MapMarkersHelper mapMarkersHelper;
@@ -159,14 +154,14 @@ public class ItineraryDataHelper {
 		try {
 			saveFile(getExternalFile(), groups, sortedMarkers);
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			LOG.error(e.getMessage(), e);
 		}
 	}
 
-	public kotlin.Exception saveFile(@NonNull File file, @NonNull List<MapMarkersGroup> groups, @Nullable List<MapMarker> sortedMarkers) {
+	public Exception saveFile(@NonNull File file, @NonNull List<MapMarkersGroup> groups, @Nullable List<MapMarker> sortedMarkers) {
 		long lastModifiedTime = getLastModifiedTime();
 		GpxFile gpxFile = generateGpx(groups, sortedMarkers);
-		kotlin.Exception exception = GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(file), gpxFile);
+		Exception exception = SharedUtil.writeGpxFile(file, gpxFile);
 		if (exception == null) {
 			FileInputStream is = null;
 			try {
@@ -187,69 +182,8 @@ public class ItineraryDataHelper {
 		return exception;
 	}
 
-	private void assignExtensionWriter(GpxFile gpxFile, Collection<ItineraryGroupInfo> groups) {
-		if (gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(new GpxExtensionsWriter() {
-
-				@Override
-				public void writeExtensions(XmlSerializer serializer) {
-					for (ItineraryGroupInfo group : groups) {
-						try {
-							serializer.startTag(null, "osmand:" + ITINERARY_GROUP);
-
-							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:name", group.name);
-							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:type", group.type);
-							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:path", group.path);
-							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:alias", group.alias);
-							GpxUtilities.INSTANCE.writeNotNullText(serializer, "osmand:categories", group.categories);
-
-							serializer.endTag(null, "osmand:" + ITINERARY_GROUP);
-						} catch (IOException e) {
-							log.error(e);
-						}
-					}
-				}
-			});
-		}
-	}
-
 	private GpxFile loadGPXFile(File file, List<ItineraryGroupInfo> groupInfos) {
-		return GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(file), getGpxExtensionsReader(groupInfos), false);
-	}
-
-	public GpxExtensionsReader getGpxExtensionsReader(List<ItineraryGroupInfo> groupInfos) {
-		return new GpxExtensionsReader() {
-			@Override
-			public boolean readExtensions(GpxFile res, XmlPullParser parser) throws IOException, XmlParserException {
-				if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
-					ItineraryGroupInfo groupInfo = new ItineraryGroupInfo();
-
-					int tok;
-					while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-						if (tok == XmlPullParser.START_TAG) {
-							String tagName = parser.getName().toLowerCase();
-							if ("name".equals(tagName)) {
-								groupInfo.name = GpxUtilities.INSTANCE.readText(parser, tagName);
-							} else if ("type".equals(tagName)) {
-								groupInfo.type = GpxUtilities.INSTANCE.readText(parser, tagName);
-							} else if ("path".equals(tagName)) {
-								groupInfo.path = GpxUtilities.INSTANCE.readText(parser, tagName);
-							} else if ("alias".equals(tagName)) {
-								groupInfo.alias = GpxUtilities.INSTANCE.readText(parser, tagName);
-							} else if ("categories".equals(tagName)) {
-								groupInfo.categories = GpxUtilities.INSTANCE.readText(parser, tagName);
-							}
-						} else if (tok == XmlPullParser.END_TAG) {
-							if (ITINERARY_GROUP.equalsIgnoreCase(parser.getName())) {
-								groupInfos.add(groupInfo);
-								return true;
-							}
-						}
-					}
-				}
-				return false;
-			}
-		};
+		return SharedUtil.loadGpxFile(file, ItineraryDataHelperKt.getGpxExtensionsReader(groupInfos), false);
 	}
 
 	public String saveMarkersToFile(String fileName) {
@@ -261,7 +195,7 @@ public class ItineraryDataHelper {
 		}
 		String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
 		File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
-		GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(fout), gpxFile);
+		SharedUtil.writeGpxFile(fout, gpxFile);
 
 		return fout.getAbsolutePath();
 	}
@@ -298,7 +232,7 @@ public class ItineraryDataHelper {
 			groups.put(group.getId(), ItineraryGroupInfo.createGroupInfo(app, group));
 		}
 		addMarkersToGpx(gpxFile, groups, sortedMarkers != null ? sortedMarkers : markers);
-		assignExtensionWriter(gpxFile, groups.values());
+		ItineraryDataHelperKt.assignExtensionWriter(gpxFile, groups.values());
 		return gpxFile;
 	}
 

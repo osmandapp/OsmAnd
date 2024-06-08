@@ -1383,7 +1383,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
 			if (gpxItem.chartHighlightPos != -1) {
-				TrkSegment segment = gpxFile.tracks.get(0).segments.get(0);
+				TrkSegment segment = gpxFile.getTracks().get(0).segments.get(0);
 				if (segment != null) {
 					float distance = gpxItem.chartHighlightPos * elevationDataSet.getDivX();
 					for (WptPt p : segment.points) {

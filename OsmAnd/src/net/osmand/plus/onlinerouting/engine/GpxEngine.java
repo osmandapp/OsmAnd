@@ -5,6 +5,7 @@ import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
@@ -188,7 +189,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		InputStream gpxStream;
 		try {
 			gpxStream = new ByteArrayInputStream(content.getBytes("UTF-8"));
-			return GpxUtilities.loadGPXFile(gpxStream);
+			return SharedUtil.loadGpxFile(gpxStream);
 		} catch (UnsupportedEncodingException e) {
 			LOG.debug("Error when parsing GPX from server response: " + e.getMessage());
 		}

@@ -93,11 +93,11 @@ public class WptPtEditor extends PointEditor {
 		if (gpxFile != null) {
 			return gpxFile.getPointsGroups();
 		}
-		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.category) && categoryColor != 0) {
-			PointsGroup pointsGroup = new PointsGroup(wpt.category, wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor);
+		if (isProcessingTemplate() && !Algorithms.isEmpty(wpt.getCategory()) && categoryColor != 0) {
+			PointsGroup pointsGroup = new PointsGroup(wpt.getCategory(), wpt.getIconNameOrDefault(), wpt.getBackgroundType(), categoryColor);
 
 			Map<String, PointsGroup> predefinedCategory = new HashMap<>();
-			predefinedCategory.put(wpt.category, pointsGroup);
+			predefinedCategory.put(wpt.getCategory(), pointsGroup);
 			return predefinedCategory;
 		}
 		return new HashMap<>();
@@ -132,12 +132,12 @@ public class WptPtEditor extends PointEditor {
 		categoryColor = 0;
 
 		this.gpxFile = gpxFile;
-		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 		gpxSelected = selectedGpxFile != null;
 
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
-		wpt.name = title;
+		wpt.setName(title);
 
 		if (amenity != null) {
 			int preselectedIconId = RenderingIcons.getPreselectedIconId(amenity);
@@ -162,7 +162,7 @@ public class WptPtEditor extends PointEditor {
 
 		this.gpxFile = gpxFile;
 		SelectedGpxFile selectedGpxFile =
-				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 		gpxSelected = selectedGpxFile != null;
 
 		if (!Algorithms.isEmpty(categoryName)) {
@@ -180,7 +180,7 @@ public class WptPtEditor extends PointEditor {
 			categoryName = "";
 		}
 
-		wpt.category = categoryName;
+		wpt.setCategory(categoryName);
 		this.wpt = wpt;
 
 		showEditorFragment(skipDialog);
@@ -212,7 +212,7 @@ public class WptPtEditor extends PointEditor {
 		this.isNew = true;
 		this.processedObject = ProcessedObject.WAYPOINT_TEMPLATE;
 		this.categoryColor = 0;
-		this.gpxSelected = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null;
+		this.gpxSelected = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath()) != null;
 		this.gpxFile = gpxFile;
 		this.wpt = from != null ? from : new WptPt();
 		showEditorFragment();

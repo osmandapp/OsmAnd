@@ -39,7 +39,7 @@ public class MapActions {
 	}
 
 	public void setGPXRouteParams(@Nullable GpxFile result) {
-		app.logRoutingEvent("setGPXRouteParams result " + (result != null ? result.path : null));
+		app.logRoutingEvent("setGPXRouteParams result " + (result != null ? result.getPath() : null));
 		if (result == null) {
 			app.getRoutingHelper().setGpxParams(null);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -51,7 +51,7 @@ public class MapActions {
 			params.setSelectedRoute(settings.GPX_ROUTE_INDEX.get());
 			List<Location> ps = params.getPoints(settings.getContext());
 			app.getRoutingHelper().setGpxParams(params);
-			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
+			settings.FOLLOW_THE_GPX_ROUTE.set(result.getPath());
 			if (!ps.isEmpty()) {
 				Location startLoc = ps.get(0);
 				Location finishLoc = ps.get(ps.size() - 1);

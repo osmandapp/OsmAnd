@@ -71,7 +71,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 	private void setupTrackRow(@NonNull View view) {
 		View routesContainer = view.findViewById(R.id.gpx_track_container);
 
-		String titleGpxTrack = Algorithms.getFileWithoutDirs(gpxFile.path);
+		String titleGpxTrack = Algorithms.getFileWithoutDirs(gpxFile.getPath());
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String selectSegmentDescription = getString(R.string.select_segments_description, titleGpxTrack);
 		SpannableString gpxTrackName = new SpannableString(selectSegmentDescription);

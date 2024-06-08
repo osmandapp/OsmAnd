@@ -58,7 +58,7 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 			Map<String, FavouritePoint> deletedPoints = new LinkedHashMap<>();
 
 			File internalFile = fileHelper.getInternalFile();
-			GpxFile gpxFile = GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(internalFile));
+			GpxFile gpxFile = SharedUtil.loadGpxFile(internalFile);
 			if (gpxFile.getError() == null) {
 				fileHelper.collectFavoriteGroups(gpxFile, deletedGroups);
 			}
@@ -92,7 +92,7 @@ public class SaveFavoritesTask extends AsyncTask<Void, String, Void> {
 		File[] files = fileHelper.getFavoritesFiles();
 		if (!Algorithms.isEmpty(files)) {
 			for (File file : files) {
-				GpxFile gpxFile = GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(file));
+				GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 				if (gpxFile.getError() == null) {
 					fileHelper.collectFavoriteGroups(gpxFile, favoriteGroups);
 				}

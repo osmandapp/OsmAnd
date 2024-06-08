@@ -128,8 +128,8 @@ public class CachedTrack {
 		boolean useFilteredGpx = selectedGpxFile.getFilteredSelectedGpxFile() != null;
 		if (useFilteredGpx != params.useFilteredGpx
 				|| useJoinSegments != params.useJoinSegments
-				|| gpxFile.modifiedTime != params.prevModifiedTime) {
-			params = new CachedTrackParams(gpxFile.modifiedTime, useFilteredGpx, useJoinSegments);
+				|| gpxFile.getModifiedTime() != params.prevModifiedTime) {
+			params = new CachedTrackParams(gpxFile.getModifiedTime(), useFilteredGpx, useJoinSegments);
 			return true;
 		}
 		return false;
@@ -171,19 +171,19 @@ public class CachedTrack {
 			TrkSegment segment = segments.get(i);
 
 			// Such segments are not processed by colorization
-			if (segment.points.size() < 2) {
+			if (segment.getPoints().size() < 2) {
 				continue;
 			}
 
 			TrkSegment simplifiedSegment = new TrkSegment();
 			simplifiedSegments.add(simplifiedSegment);
-			for (WptPt pt : segment.points) {
+			for (WptPt pt : segment.getPoints()) {
 				if (colorPointIdx >= colorizationPoints.size()) {
 					return simplifiedSegments;
 				}
 				RouteColorizationPoint colorPoint = colorizationPoints.get(colorPointIdx);
 				if (colorPoint.id == id) {
-					simplifiedSegment.points.add(pt);
+					simplifiedSegment.getPoints().add(pt);
 					pt.setColor(colorizationType, colorPoint.color);
 					colorPointIdx++;
 				}
@@ -201,19 +201,19 @@ public class CachedTrack {
 	@NonNull
 	private TrkSegment createStraightSegment(ColorizationType colorizationType, List<TrkSegment> segments, int segIdx) {
 		TrkSegment straightSegment = new TrkSegment();
-		WptPt currentSegmentLastPoint = segments.get(segIdx).points.get(segments.get(segIdx).points.size() - 1);
-		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).points.get(0);
+		WptPt currentSegmentLastPoint = segments.get(segIdx).getPoints().get(segments.get(segIdx).getPoints().size() - 1);
+		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).getPoints().get(0);
 		WptPt firstPoint = new WptPt(currentSegmentLastPoint);
 		WptPt lastPoint = new WptPt(nextSegmentFirstPoint);
 		firstPoint.setColor(colorizationType, LIGHT_GREY);
 		lastPoint.setColor(colorizationType, LIGHT_GREY);
-		straightSegment.points.add(firstPoint);
-		straightSegment.points.add(lastPoint);
+		straightSegment.getPoints().add(firstPoint);
+		straightSegment.getPoints().add(lastPoint);
 		return straightSegment;
 	}
 
 	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
-		if (params.prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().modifiedTime || availableColoringTypes == null) {
+		if (params.prevModifiedTime != selectedGpxFile.getGpxFileToDisplay().getModifiedTime() || availableColoringTypes == null) {
 			availableColoringTypes = listAvailableColoringTypes();
 		}
 		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));

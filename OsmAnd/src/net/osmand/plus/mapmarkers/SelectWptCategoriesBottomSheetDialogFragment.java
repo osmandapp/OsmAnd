@@ -132,7 +132,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 
-		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
+		SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
 		if (selectedGpxFile == null) {
 			GpxSelectionParams params = GpxSelectionParams.newInstance()
 					.showOnMap().selectedAutomatically().saveSelection();
@@ -156,7 +156,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 	}
 
 	private String getGpxName(GpxFile gpxFile) {
-		return new File(gpxFile.path).getName()
+		return new File(gpxFile.getPath()).getName()
 				.replace(IndexConstants.GPX_FILE_EXT, "")
 				.replace("/", " ")
 				.replace("_", " ");

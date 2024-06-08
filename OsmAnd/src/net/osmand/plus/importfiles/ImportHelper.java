@@ -46,6 +46,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializeListener;
@@ -492,10 +493,10 @@ public class ImportHelper {
 			if (singleImport) {
 				showPermissionsAlert();
 			}
-		} else if (gpxFile.error != null) {
-			app.showToastMessage(gpxFile.error.getMessage());
+		} else if (gpxFile.getError() != null) {
+			app.showToastMessage(SharedUtil.jException(gpxFile.getError()).getMessage());
 		}
-		return gpxFile != null && gpxFile.error == null;
+		return gpxFile != null && gpxFile.getError() == null;
 	}
 
 	private void handleResult(GpxFile result, String name, OnSuccessfulGpxImport onGpxImport,
@@ -574,7 +575,7 @@ public class ImportHelper {
 
 			@Override
 			public void onGpxSaved(@Nullable String error, @NonNull GpxFile gpxFile) {
-				importedFileName = new File(gpxFile.path).getName();
+				importedFileName = new File(gpxFile.getPath()).getName();
 			}
 
 			@Override
@@ -601,7 +602,7 @@ public class ImportHelper {
 			}
 
 			private void openTrack(@NonNull GpxFile gpxFile, @Nullable OnSuccessfulGpxImport onGpxImport) {
-				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 				if (selectedGpxFile != null) {
 					selectedGpxFile.setGpxFile(gpxFile, app);
 				}
@@ -647,7 +648,7 @@ public class ImportHelper {
 
 	protected void showNeededScreen(@Nullable OnSuccessfulGpxImport onGpxImport, @NonNull GpxFile gpxFile) {
 		if (onGpxImport == OPEN_GPX_CONTEXT_MENU) {
-			showGpxContextMenu(gpxFile.path);
+			showGpxContextMenu(gpxFile.getPath());
 		} else if (onGpxImport == OPEN_PLAN_ROUTE_FRAGMENT) {
 			showPlanRouteFragment(gpxFile);
 		}
@@ -702,7 +703,7 @@ public class ImportHelper {
 		if (forceImportFavourites) {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else if (fileName != null) {
-			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.tracks)) {
+			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.getTracks())) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, showSnackbar);
 			} else {
 				ImportGpxBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(),

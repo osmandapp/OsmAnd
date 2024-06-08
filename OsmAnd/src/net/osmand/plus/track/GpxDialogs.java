@@ -335,7 +335,7 @@ public class GpxDialogs {
 							OsmandApplication app = (OsmandApplication) activity.getApplication();
 							GpxSelectionParams params = GpxSelectionParams.getDefaultSelectionParams();
 							app.getSelectedGpxHelper().selectGpxFile(gpxFile, params);
-							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.path);
+							updateGpxDialogAfterImport(activity, listAdapter, contextMenuAdapter, allGpxFiles, gpxFile.getPath());
 						}
 						importHelper.setGpxImportListener(null);
 					}

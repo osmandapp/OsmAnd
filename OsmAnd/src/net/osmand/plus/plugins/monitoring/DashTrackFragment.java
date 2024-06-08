@@ -111,7 +111,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			if (!sg.isShowCurrentTrack()) {
 				GpxFile gpxFile = sg.getGpxFile();
 				if (gpxFile != null) {
-					list.add(gpxFile.path);
+					list.add(gpxFile.getPath());
 				}
 			}
 		}

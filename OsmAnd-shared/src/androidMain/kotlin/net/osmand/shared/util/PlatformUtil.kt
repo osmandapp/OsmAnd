@@ -1,6 +1,7 @@
 package net.osmand.shared.util
 
 import android.content.Context
+import net.osmand.shared.KException
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
 import net.osmand.shared.io.KFile
@@ -54,7 +55,11 @@ actual object PlatformUtil {
 		}
 	}
 
-	fun getCommonFile(file: File): KFile {
-		return KFile(file.absolutePath)
+	fun getKotlinException(e: java.lang.Exception): KException {
+		return KException(e.message, e)
+	}
+
+	fun getJavaException(e: KException): java.lang.Exception {
+		return Exception(e.message, e)
 	}
 }

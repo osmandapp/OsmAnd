@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.helpers.Kml2Gpx;
@@ -57,7 +58,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GpxFile> {
 				String error = ImportHelper.copyFile(app, file, uri, true, false);
 				if (error == null) {
 					fileSize = file.length();
-					return GpxUtilities.loadGPXFile(file);
+					return SharedUtil.loadGpxFile(file);
 				}
 			} else {
 				is = app.getContentResolver().openInputStream(uri);
@@ -88,7 +89,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GpxFile> {
 		InputStream gpxStream = convertKmlToGpxStream(stream);
 		if (gpxStream != null) {
 			fileSize = gpxStream.available();
-			return GpxUtilities.loadGPXFile(gpxStream);
+			return SharedUtil.loadGpxFile(gpxStream);
 		}
 		return null;
 	}
@@ -98,7 +99,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GpxFile> {
 		ZipEntry entry;
 		while ((entry = stream.getNextEntry()) != null) {
 			if (entry.getName().endsWith(GPX_FILE_EXT)) {
-				return GpxUtilities.loadGPXFile(stream);
+				return SharedUtil.loadGpxFile(stream);
 			}
 		}
 		return null;
@@ -112,7 +113,7 @@ public class GpxImportTask extends BaseImportAsyncTask<Void, Void, GpxFile> {
 				InputStream gpxStream = convertKmlToGpxStream(stream);
 				if (gpxStream != null) {
 					fileSize = gpxStream.available();
-					return GpxUtilities.loadGPXFile(gpxStream);
+					return SharedUtil.loadGpxFile(gpxStream);
 				}
 			}
 		}

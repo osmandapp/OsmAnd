@@ -19,7 +19,6 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.GestureDetector;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,9 +56,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -83,6 +80,8 @@ import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;
@@ -162,11 +161,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	protected void addWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
-			if (gpx.showCurrentTrack) {
+			if (gpx.isShowCurrentTrack()) {
 				savingTrackHelper.insertPointData(lat, lon, description, name, category, color);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
-				WptPt point = WptPt.createAdjustedPoint(lat, lon, description, name, category, color, null, null, null, null);
+				WptPt point = WptPt.Companion.createAdjustedPoint(lat, lon, description, name, category, color, null, null, null, null);
 				gpx.addPoint(point);
 			}
 		}
@@ -174,20 +173,20 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	protected void updateWpt(GpxFile gpx, String description, String name, String category, int color, double lat, double lon) {
 		if (gpx != null) {
-			if (gpx.showCurrentTrack) {
+			if (gpx.isShowCurrentTrack()) {
 				savingTrackHelper.updatePointData(selectedWpt, lat, lon, description, name, category, color, null, null);
 				selectedGpxHelper.setGpxFileToDisplay(gpx);
 			} else {
 				WptPt wptInfo = new WptPt(lat, lon, description, name, category,
 						Algorithms.colorToString(color), null, null);
-				gpx.updateWptPt(selectedWpt, wptInfo);
+				gpx.updateWptPt(selectedWpt, wptInfo, true);
 			}
 		}
 	}
 
 	private void quit() {
 		if (getGpx().hasWptPt() && hasUnsavedChanges) {
-			if (Algorithms.isEmpty(getGpx().path)) {
+			if (Algorithms.isEmpty(getGpx().getPath())) {
 				showSaveDialog();
 			} else {
 				GpxFile gpx = getGpx();
@@ -1047,7 +1046,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				adapter.removeItem(position);
 				hasUnsavedChanges = true;
-				snackbar = Snackbar.make(mainView, getString(R.string.point_deleted, wpt.name), Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(mainView, getString(R.string.point_deleted, wpt.getName()), Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, view -> {
 							getGpx().addPoint(position, wpt);
 							adapter.notifyDataSetChanged();
@@ -1142,8 +1141,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void enterEditingMode(WptPt wptPt) {
 		selectedWpt = wptPt;
 		Format format = getMyApplication().getSettings().COORDS_INPUT_FORMAT.get();
-		double lat = Math.abs(wptPt.lat);
-		double lon = Math.abs(wptPt.lon);
+		double lat = Math.abs(wptPt.getLat());
+		double lon = Math.abs(wptPt.getLon());
 		if (format == Format.DD_MM_MMM || format == Format.DD_MM_MMMM) {
 			int accuracy = format.getThirdPartSymbolsCount();
 			updateInputsDdm(true, CoordinateInputFormats.ddToDdm(lat), accuracy);
@@ -1156,15 +1155,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			updateInputsDms(true, CoordinateInputFormats.ddToDms(lat));
 			updateInputsDms(false, CoordinateInputFormats.ddToDms(lon));
 		}
-		boolean latPositive = wptPt.lat > 0;
+		boolean latPositive = wptPt.getLat() > 0;
 		if ((latPositive && !north) || (!latPositive && north)) {
 			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lat_side_of_the_world_btn), true);
 		}
-		boolean lonPositive = wptPt.lon > 0;
+		boolean lonPositive = wptPt.getLon() > 0;
 		if ((lonPositive && !east) || (!lonPositive && east)) {
 			updateSideOfTheWorldBtn(mainView.findViewById(R.id.lon_side_of_the_world_btn), true);
 		}
-		((EditText) mainView.findViewById(R.id.point_name_et)).setText(wptPt.name);
+		((EditText) mainView.findViewById(R.id.point_name_et)).setText(wptPt.getName());
 		((TextView) mainView.findViewById(R.id.toolbar_text)).setText(R.string.coord_input_edit_point);
 		TextView addButton = mainView.findViewById(R.id.add_marker_button);
 		addButton.setText(R.string.shared_string_apply);
@@ -1412,7 +1411,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		@Override
 		protected Void doInBackground(Void... params) {
-			if (Algorithms.isEmpty(gpx.path)) {
+			if (Algorithms.isEmpty(gpx.getPath())) {
 				if (!Algorithms.isEmpty(fileName)) {
 					String dirName = IndexConstants.GPX_INDEX_DIR + IndexConstants.MAP_MARKERS_INDEX_DIR;
 					File dir = app.getAppPath(dirName);
@@ -1421,10 +1420,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					}
 					String uniqueFileName = FileUtils.createUniqueFileName(app, fileName, dirName, IndexConstants.GPX_FILE_EXT);
 					File fout = new File(dir, uniqueFileName + IndexConstants.GPX_FILE_EXT);
-					GpxUtilities.writeGpxFile(fout, gpx);
+					SharedUtil.writeGpxFile(fout, gpx);
 				}
 			} else {
-				GpxUtilities.writeGpxFile(new File(gpx.path), gpx);
+				SharedUtil.writeGpxFile(new File(gpx.getPath()), gpx);
 			}
 			app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
 			return null;

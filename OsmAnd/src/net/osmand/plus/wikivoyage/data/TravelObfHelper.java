@@ -1016,7 +1016,7 @@ public class TravelObfHelper implements TravelHelper {
 		GpxFile gpx;
 		gpx = article.getGpxFile();
 		File file = app.getAppPath(IndexConstants.GPX_TRAVEL_DIR + getGPXName(article));
-		GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(file), gpx);
+		SharedUtil.writeGpxFile(file, gpx);
 		return file;
 	}
 

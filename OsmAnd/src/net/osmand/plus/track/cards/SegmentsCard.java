@@ -117,11 +117,11 @@ public class SegmentsCard extends MapBaseCard {
 		if (gpxPoint != null) {
 			for (GpxDisplayItem item : displayItems) {
 				TrkSegment segment = GPXItemPagerAdapter.getSegmentForAnalysis(item, item.analysis);
-				if (segment != null && (segment.points.contains(gpxPoint.getSelectedPoint())
-						|| segment.points.contains(gpxPoint.getPrevPoint())
-						&& segment.points.contains(gpxPoint.getNextPoint()))) {
+				if (segment != null && (segment.getPoints().contains(gpxPoint.getSelectedPoint())
+						|| segment.getPoints().contains(gpxPoint.getPrevPoint())
+						&& segment.getPoints().contains(gpxPoint.getNextPoint()))) {
 					item.locationOnMap = gpxPoint.getSelectedPoint();
-					listener.onPointSelected(segment, item.locationOnMap.lat, item.locationOnMap.lon);
+					listener.onPointSelected(segment, item.locationOnMap.getLat(), item.locationOnMap.getLon());
 				}
 			}
 		}

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.IndexConstants;
+import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
@@ -224,7 +225,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			if (selectedGpx != null) {
 				return selectedGpx.getGpxFile();
 			}
-			return GpxUtilities.loadGPXFile(new File(filePath));
+			return SharedUtil.loadGpxFile(new File(filePath));
 		}
 		return null;
 	}
@@ -484,7 +485,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							gpxFile[0] = selectedGpxFile.getGpxFile();
 						} else {
 							// TODO IO load in another thread ?
-							gpxFile[0] = GpxUtilities.loadGPXFile(new File(gpxPath));
+							gpxFile[0] = SharedUtil.loadGpxFile(new File(gpxPath));
 						}
 						switchGpxVisibility(gpxFile[0], selectedGpxFile, !disabled);
 					}

@@ -12,9 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +22,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxFile;
 
 import org.apache.commons.logging.Log;
 
@@ -145,8 +145,8 @@ public class RestoreNavigationHelper {
 			protected GpxFile doInBackground(String... params) {
 				if (gpxPath != null) {
 					// Reverse also should be stored ?
-					GpxFile gpxFile = GpxUtilities.loadGPXFile(new File(gpxPath));
-					return gpxFile.error == null ? gpxFile : null;
+					GpxFile gpxFile = SharedUtil.loadGpxFile(new File(gpxPath));
+					return gpxFile.getError() == null ? gpxFile : null;
 				}
 				return null;
 			}
@@ -188,7 +188,7 @@ public class RestoreNavigationHelper {
 		app.logRoutingEvent("enterRoutingMode gpxRoute " + gpxRoute);
 
 		mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);
+		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().getPath() : null);
 
 		routingHelper.setGpxParams(gpxRoute);
 		if (targetPointsHelper.getPointToStart() == null) {

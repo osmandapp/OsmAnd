@@ -18,6 +18,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -129,7 +130,7 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			CallbackWithObject<GpxFile> callback = gpxFile -> {
-				if (gpxFile != null && gpxFile.error == null) {
+				if (gpxFile != null && gpxFile.getError() == null) {
 					routesCache.put(pair.first, gpxFile);
 					saveAndOpenGpx(gpxFile, pair, latLon);
 				}
@@ -144,8 +145,8 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			WptPt wptPt = new WptPt();
-			wptPt.lat = latLon.getLatitude();
-			wptPt.lon = latLon.getLongitude();
+			wptPt.setLat(latLon.getLatitude());
+			wptPt.setLon(latLon.getLongitude());
 
 			String name = getObjectName(pair).getName();
 			String fileName = Algorithms.convertToPermittedFileName(name.endsWith(GPX_FILE_EXT) ? name : name + GPX_FILE_EXT);
@@ -167,10 +168,10 @@ public class NetworkRouteSelectionLayer extends OsmandMapLayer implements IConte
 	private void clearRouteCache(@NonNull BinaryMapIndexReader reader) {
 		Map<RouteKey, GpxFile> cache = new HashMap<>(routesCache);
 		for (Iterator<Entry<RouteKey, GpxFile>> iterator = cache.entrySet().iterator(); iterator.hasNext(); ) {
-			QuadRect rect = iterator.next().getValue().getRect();
-			boolean containsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(rect.left),
-					MapUtils.get31TileNumberY(rect.top), MapUtils.get31TileNumberX(rect.right),
-					MapUtils.get31TileNumberY(rect.bottom), 15);
+			KQuadRect rect = iterator.next().getValue().getRect();
+			boolean containsRoute = reader.containsRouteData(MapUtils.get31TileNumberX(rect.getLeft()),
+					MapUtils.get31TileNumberY(rect.getTop()), MapUtils.get31TileNumberX(rect.getRight()),
+					MapUtils.get31TileNumberY(rect.getBottom()), 15);
 			if (containsRoute) {
 				iterator.remove();
 			}

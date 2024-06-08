@@ -263,7 +263,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 	@Nullable
 	private TrackItem findTrackItem(@NonNull SelectedGpxFile selectedGpxFile) {
 		for (TrackItem item : itemsSelectionHelper.getAllItems()) {
-			if (Algorithms.stringsEqual(selectedGpxFile.getGpxFile().path, item.getPath())) {
+			if (Algorithms.stringsEqual(selectedGpxFile.getGpxFile().getPath(), item.getPath())) {
 				return item;
 			}
 		}
@@ -345,7 +345,7 @@ public abstract class BaseTracksTabsFragment extends BaseOsmAndDialogFragment im
 			@Override
 			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
-					addTrackItem(new TrackItem(new File(gpxFile.path)));
+					addTrackItem(new TrackItem(new File(gpxFile.getPath())));
 				}
 				super.onSaveComplete(success, gpxFile);
 			}

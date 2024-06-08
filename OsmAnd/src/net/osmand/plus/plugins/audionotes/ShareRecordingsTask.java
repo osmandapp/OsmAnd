@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
@@ -89,17 +90,17 @@ class ShareRecordingsTask extends AsyncTask<Void, Void, List<Uri>> {
 					desc = recording.getFileName();
 				}
 				WptPt wpt = new WptPt();
-				wpt.lat = recording.getLatitude();
-				wpt.lon = recording.getLongitude();
-				wpt.name = desc;
-				wpt.link = recording.getFileName();
-				wpt.time = recording.getFile().lastModified();
-				wpt.category = recording.getSearchHistoryType();
-				wpt.desc = recording.getTypeWithDuration(app);
+				wpt.setLat(recording.getLatitude());
+				wpt.setLon(recording.getLongitude());
+				wpt.setName(desc);
+				wpt.setLink(recording.getFileName());
+				wpt.setTime(recording.getFile().lastModified());
+				wpt.setCategory(recording.getSearchHistoryType());
+				wpt.setDesc(recording.getTypeWithDuration(app));
 				app.getSelectedGpxHelper().addPoint(wpt, gpxFile);
 			}
 		}
-		GpxUtilities.writeGpxFile(tmpFile, gpxFile);
+		SharedUtil.writeGpxFile(tmpFile, gpxFile);
 		return tmpFile;
 	}
 

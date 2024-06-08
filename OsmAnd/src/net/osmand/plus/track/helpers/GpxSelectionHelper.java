@@ -241,7 +241,7 @@ public class GpxSelectionHelper {
 						if (progress != null) {
 							progress.startTask(app.getString(R.string.loading_smth, fl.getName()), -1);
 						}
-						GpxFile gpx = GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(fl));
+						GpxFile gpx = SharedUtil.loadGpxFile(fl);
 						if (obj.has(COLOR)) {
 							int color = GpxUtilities.INSTANCE.parseColor(obj.getString(COLOR), 0);
 							gpx.setColor(color);

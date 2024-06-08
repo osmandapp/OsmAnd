@@ -7,6 +7,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
@@ -47,12 +48,12 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (HistoryEntry h : historyEntries) {
 			WptPt pt = new WptPt();
-			pt.lat = h.getLat();
-			pt.lon = h.getLon();
-			pt.name = h.getName().getName();
+			pt.setLat(h.getLat());
+			pt.setLon(h.getLon());
+			pt.setName(h.getName().getName());
 			boolean hasTypeInDescription = !Algorithms.isEmpty(h.getName().getTypeName());
 			if (hasTypeInDescription) {
-				pt.desc = h.getName().getTypeName();
+				pt.setDesc(h.getName().getTypeName());
 			}
 			gpxFile.addPoint(pt);
 		}
@@ -62,9 +63,9 @@ public class ShareHistoryAsyncTask extends AsyncTask<Void, Void, Pair<File, Stri
 			dir.mkdir();
 		}
 		File historyFile = new File(dir, "History.gpx");
-		GpxUtilities.writeGpxFile(historyFile, gpxFile);
+		SharedUtil.writeGpxFile(historyFile, gpxFile);
 
-		return Pair.create(historyFile, GpxUtilities.asString(gpxFile));
+		return Pair.create(historyFile, GpxUtilities.INSTANCE.asString(gpxFile));
 	}
 
 	@Override

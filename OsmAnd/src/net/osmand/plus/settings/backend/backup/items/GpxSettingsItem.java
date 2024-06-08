@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -95,7 +96,7 @@ public class GpxSettingsItem extends FileSettingsItem {
 				boolean readItem = gpxDbHelper.hasGpxDataItem(savedFile);
 				GpxDataItem dataItem = null;
 				if (!readItem) {
-					dataItem = new GpxDataItem(app, savedFile);
+					dataItem = new GpxDataItem(SharedUtil.kFile(savedFile));
 					readItem = !gpxDbHelper.add(dataItem);
 				}
 				if (readItem) {
@@ -157,14 +158,14 @@ public class GpxSettingsItem extends FileSettingsItem {
 				GpxSelectionHelper gpxHelper = app.getSelectedGpxHelper();
 				SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(file.getAbsolutePath());
 				if (selectedGpxFile != null) {
-					GpxFile gpxFile = GpxUtilities.loadGPXFile(file);
+					GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
 							.showOnMap().syncGroup().setSelectedByUser(selectedGpxFile.selectedByUser);
 					gpxHelper.selectGpxFile(gpxFile, params);
 				}
 				GpxDbHelper gpxDbHelper = app.getGpxDbHelper();
 				if (!gpxDbHelper.hasGpxDataItem(file)) {
-					gpxDbHelper.add(new GpxDataItem(app, file));
+					gpxDbHelper.add(new GpxDataItem(SharedUtil.kFile(file)));
 				}
 			}
 		};

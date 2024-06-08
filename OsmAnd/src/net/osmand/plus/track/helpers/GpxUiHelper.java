@@ -42,6 +42,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
+import net.osmand.shared.KException;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
@@ -491,9 +492,10 @@ public class GpxUiHelper {
 			}
 			for (String name : filename) {
 				File file = new File(dir, name);
-				GpxFile gpxFile = GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(file));
-				if (gpxFile.getError() != null && !Algorithms.isEmpty(gpxFile.getError().getMessage())) {
-					builder.append(gpxFile.getError().getMessage()).append("\n");
+				GpxFile gpxFile = SharedUtil.loadGpxFile(file);
+				Exception error = gpxFile.getError() != null ? SharedUtil.jException(gpxFile.getError()) : null;
+				if (error != null && !Algorithms.isEmpty(error.getMessage())) {
+					builder.append(error.getMessage()).append("\n");
 				} else {
 					gpxFile.addGeneralTrack();
 				}

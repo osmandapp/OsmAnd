@@ -274,7 +274,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper implements IRouteInforma
 				}
 
 				KFile fKout = SharedUtil.kFile(fout);
-				kotlin.Exception warn = GpxUtilities.INSTANCE.writeGpxFile(fKout, gpx);
+				Exception warn = SharedUtil.writeGpxFile(fKout, gpx);
 				if (warn != null) {
 					warnings.add(warn.getMessage());
 					return new SaveGpxResult(warnings, new HashMap<>());

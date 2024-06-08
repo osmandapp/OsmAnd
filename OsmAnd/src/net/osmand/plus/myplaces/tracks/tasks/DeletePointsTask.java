@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.track.helpers.GpxDisplayItem;
@@ -44,7 +45,7 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 		SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 		if (gpx != null) {
 			for (GpxDisplayItem item : selectedItems) {
-				if (gpx.showCurrentTrack) {
+				if (gpx.isShowCurrentTrack()) {
 					savingTrackHelper.deletePointData(item.locationStart);
 				} else {
 					if (item.group.getType() == GpxDisplayItemType.TRACK_POINTS) {
@@ -54,9 +55,9 @@ public class DeletePointsTask extends AsyncTask<Void, Void, Void> {
 					}
 				}
 			}
-			if (!gpx.showCurrentTrack) {
-				GpxUtilities.writeGpxFile(new File(gpx.path), gpx);
-				boolean selected = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.path) != null;
+			if (!gpx.isShowCurrentTrack()) {
+				SharedUtil.writeGpxFile(new File(gpx.getPath()), gpx);
+				boolean selected = app.getSelectedGpxHelper().getSelectedFileByPath(gpx.getPath()) != null;
 				if (selected) {
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 				}

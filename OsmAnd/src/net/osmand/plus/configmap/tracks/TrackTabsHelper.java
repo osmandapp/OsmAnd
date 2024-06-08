@@ -229,7 +229,7 @@ public class TrackTabsHelper {
 		recentlyVisibleTrackItem.clear();
 		boolean monitoringActive = PluginsHelper.isActive(OsmandMonitoringPlugin.class);
 		for (GpxFile gpxFile : gpxSelectionHelper.getSelectedGpxFilesBackUp().keySet()) {
-			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.path);
+			SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(gpxFile.getPath());
 			if (selectedGpxFile == null && (!gpxFile.showCurrentTrack || monitoringActive)) {
 				recentlyVisibleTrackItem.add(new TrackItem(app, gpxFile));
 			}

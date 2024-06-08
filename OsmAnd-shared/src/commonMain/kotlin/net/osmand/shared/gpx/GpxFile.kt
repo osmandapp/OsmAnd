@@ -1,5 +1,6 @@
 package net.osmand.shared.gpx
 
+import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
 import net.osmand.shared.gpx.GpxUtilities.Metadata
@@ -25,7 +26,7 @@ class GpxFile : GpxExtensions {
 	var pointsGroups: MutableMap<String, PointsGroup> = LinkedHashMap()
 	private val networkRouteKeyTags: MutableMap<String, String> = LinkedHashMap()
 
-	var error: Exception? = null
+	var error: KException? = null
 	var path: String = ""
 	var showCurrentTrack: Boolean = false
 	var hasAltitude: Boolean = false

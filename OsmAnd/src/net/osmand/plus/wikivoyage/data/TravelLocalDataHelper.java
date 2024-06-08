@@ -3,16 +3,17 @@ package net.osmand.plus.wikivoyage.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.track.GpxSelectionParams;
 import net.osmand.plus.utils.AndroidDbUtils;
 import net.osmand.plus.wikivoyage.data.TravelHelper.GpxReadCallback;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -504,7 +505,7 @@ public class TravelLocalDataHelper {
 							rowsMap.put(BOOKMARKS_COL_CONTENT_JSON, article.contentsJson);
 							rowsMap.put(BOOKMARKS_COL_CONTENT, article.content);
 							rowsMap.put(BOOKMARKS_COL_LAST_MODIFIED, article.getFile().lastModified());
-							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GpxUtilities.asString(article.gpxFile)));
+							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GpxUtilities.INSTANCE.asString(article.gpxFile)));
 
 							conn.execSQL(AndroidDbUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
 									rowsMap.values().toArray());
@@ -532,7 +533,7 @@ public class TravelLocalDataHelper {
 				public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 					if (gpxFile != null) {
 						String name = travelHelper.getGPXName(article);
-						gpxFile.path = context.getAppPath(IndexConstants.GPX_TRAVEL_DIR + name).getAbsolutePath();
+						gpxFile.setPath(context.getAppPath(IndexConstants.GPX_TRAVEL_DIR + name).getAbsolutePath());
 						GpxSelectionParams params = GpxSelectionParams.newInstance()
 								.hideFromMap().syncGroup().saveSelection()
 								.notShowNavigationDialog();
@@ -628,7 +629,7 @@ public class TravelLocalDataHelper {
 				byte[] blob = cursor.getBlob(cursor.getColumnIndex(BOOKMARKS_COL_GPX_GZ));
 				if (blob != null) {
 					String gpxContent = Algorithms.gzipToString(blob);
-					res.gpxFile = GpxUtilities.loadGPXFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
+					res.gpxFile = SharedUtil.loadGpxFile(new ByteArrayInputStream(gpxContent.getBytes("UTF-8")));
 				}
 			} catch (IOException e) {
 				LOG.error(e.getMessage(), e);

@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IProgress;
@@ -276,8 +277,7 @@ public abstract class SettingsItem {
 		return new SettingsItemWriter<SettingsItem>(this) {
 			@Override
 			public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
-				Writer writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-				kotlin.Exception error = GpxUtilities.INSTANCE.writeGpx(Okio.sink(outputStream), gpxFile, progress);
+				Exception error = SharedUtil.writeGpx(outputStream, gpxFile, SharedUtil.kIProgress(progress));
 				if (error != null) {
 					warnings.add(app.getString(R.string.settings_item_write_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed write to gpx file", error);

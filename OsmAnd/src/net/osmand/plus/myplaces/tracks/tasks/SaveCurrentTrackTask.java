@@ -4,13 +4,13 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.IndexConstants;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.plugins.monitoring.SavingTrackHelper;
 import net.osmand.plus.track.helpers.save.SaveGpxListener;
+import net.osmand.shared.gpx.GpxFile;
 
 import java.io.File;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 		Map<String, GpxFile> files = savingTrackHelper.collectRecordedData();
 		File dir;
 		boolean shouldClearPath = false;
-		if (gpx.path.isEmpty()) {
+		if (gpx.getPath().isEmpty()) {
 			dir = app.getCacheDir();
 			shouldClearPath = true;
 		} else {
@@ -52,7 +52,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 		}
 		for (String f : files.keySet()) {
 			File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-			Exception exception = GpxUtilities.writeGpxFile(fout, gpx);
+			Exception exception = SharedUtil.writeGpxFile(fout, gpx);
 			if (exception == null) {
 				app.getSavingTrackHelper().setLastTimeFileSaved(fout.lastModified());
 				app.getSmartFolderHelper().addTrackItemToSmartFolder(new TrackItem(app, gpx));
@@ -68,7 +68,7 @@ public class SaveCurrentTrackTask extends AsyncTask<Void, Void, Boolean> {
 				saveGpxListener.onSaveGpxFinished(null);
 			}
 			if (shouldClearPath) {
-				gpx.path = "";
+				gpx.setPath("");
 			}
 		}
 	}

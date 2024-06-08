@@ -114,22 +114,22 @@ public class GPXAction extends QuickAction implements FileSelected {
 		boolean usePredefinedWaypoint = Boolean.parseBoolean(getParams().get(KEY_USE_PREDEFINED_WPT_APPEARANCE));
 		if (usePredefinedWaypoint) {
 			WptPt wptPt = createWaypoint();
-			wptPt.lat = latLon.getLatitude();
-			wptPt.lon = latLon.getLongitude();
-			wptPt.time = System.currentTimeMillis();
+			wptPt.setLat(latLon.getLatitude());
+			wptPt.setLon(latLon.getLongitude());
+			wptPt.setTime(System.currentTimeMillis());
 
 			String categoryName = getParams().get(KEY_CATEGORY_NAME);
 			int categoryColor = getColorFromParams(KEY_CATEGORY_COLOR, 0);
 
-			if (Algorithms.isBlank(wptPt.name) && Algorithms.isBlank(wptPt.getAddress())) {
+			if (Algorithms.isBlank(wptPt.getName()) && Algorithms.isBlank(wptPt.getAddress())) {
 				lookupAddress(latLon, mapActivity, foundAddress -> {
-					wptPt.name = foundAddress;
+					wptPt.setName(foundAddress);
 					mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
 					return true;
 				});
 			} else {
-				if (Algorithms.isBlank(wptPt.name)) {
-					wptPt.name = wptPt.getAddress();
+				if (Algorithms.isBlank(wptPt.getName())) {
+					wptPt.setName(wptPt.getAddress());
 					wptPt.setAddress(null);
 				}
 				mapActivity.getContextMenu().addWptPt(wptPt, categoryName, categoryColor, true, gpxFile);
@@ -354,12 +354,12 @@ public class GPXAction extends QuickAction implements FileSelected {
 			predefinedIcon.setImageDrawable(icon);
 
 			TextView predefinedTitle = container.findViewById(R.id.predefined_title);
-			String waypointName = waypoint.name;
+			String waypointName = waypoint.getName();
 			String title = Algorithms.isEmpty(waypointName) ? context.getString(R.string.address) : waypointName;
 			predefinedTitle.setText(title);
 
 			TextView predefinedCategoryName = container.findViewById(R.id.predefined_category_name);
-			String categoryName = Algorithms.isEmpty(waypoint.category) ? "" : waypoint.category;
+			String categoryName = Algorithms.isEmpty(waypoint.getCategory()) ? "" : waypoint.getCategory();
 			predefinedCategoryName.setText(categoryName);
 			int categoryColor = getCategoryColor();
 			int categoryColorToDisplay = categoryColor != 0
@@ -440,10 +440,10 @@ public class GPXAction extends QuickAction implements FileSelected {
 	@NonNull
 	private WptPt createWaypoint() {
 		WptPt waypoint = new WptPt();
-		waypoint.name = predefinedWaypoint != null ? predefinedWaypoint.name : getParams().get(KEY_WPT_NAME);
+		waypoint.setName(predefinedWaypoint != null ? predefinedWaypoint.getName() : getParams().get(KEY_WPT_NAME));
 		waypoint.setAddress(predefinedWaypoint != null ? predefinedWaypoint.getAddress() : getParams().get(KEY_WPT_ADDRESS));
-		waypoint.desc = predefinedWaypoint != null ? predefinedWaypoint.desc : getParams().get(KEY_WPT_DESCRIPTION);
-		waypoint.category = predefinedWaypoint != null ? predefinedWaypoint.category : getParams().get(KEY_CATEGORY_NAME);
+		waypoint.setDesc(predefinedWaypoint != null ? predefinedWaypoint.getDesc() : getParams().get(KEY_WPT_DESCRIPTION));
+		waypoint.setCategory(predefinedWaypoint != null ? predefinedWaypoint.getCategory() : getParams().get(KEY_CATEGORY_NAME));
 		waypoint.setColor(predefinedWaypoint != null ? predefinedWaypoint.getColor() : getWaypointColorFromParams());
 		waypoint.setIconName(predefinedWaypoint != null ? predefinedWaypoint.getIconName() : getIconNameFromParams());
 		waypoint.setBackgroundType(predefinedWaypoint != null ? predefinedWaypoint.getBackgroundType() : getBackgroundTypeFromParams());
@@ -500,13 +500,13 @@ public class GPXAction extends QuickAction implements FileSelected {
 		boolean usePredefinedTemplate = appearanceToggleButton.getSelectedItemIndex() == 1;
 		getParams().put(KEY_USE_PREDEFINED_WPT_APPEARANCE, String.valueOf(usePredefinedTemplate));
 		if (predefinedWaypoint != null) {
-			getParams().put(KEY_WPT_NAME, predefinedWaypoint.name);
+			getParams().put(KEY_WPT_NAME, predefinedWaypoint.getName());
 			getParams().put(KEY_WPT_ADDRESS, predefinedWaypoint.getAddress());
-			getParams().put(KEY_WPT_DESCRIPTION, predefinedWaypoint.desc);
+			getParams().put(KEY_WPT_DESCRIPTION, predefinedWaypoint.getDesc());
 			getParams().put(KEY_WPT_COLOR, String.valueOf(predefinedWaypoint.getColor()));
 			getParams().put(KEY_WPT_ICON, predefinedWaypoint.getIconName());
 			getParams().put(KEY_WPT_BACKGROUND_TYPE, predefinedWaypoint.getBackgroundType());
-			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.category);
+			getParams().put(KEY_CATEGORY_NAME, predefinedWaypoint.getCategory());
 			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(predefinedCategoryColor));
 		}
 

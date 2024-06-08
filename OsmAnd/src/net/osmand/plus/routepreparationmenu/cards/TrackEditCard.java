@@ -54,11 +54,11 @@ public class TrackEditCard extends MapBaseCard {
 	protected void updateContent() {
 		String fileName = null;
 		File file = null;
-		if (!Algorithms.isEmpty(gpxFile.path)) {
-			file = new File(gpxFile.path);
-			fileName = gpxFile.path;
-		} else if (!Algorithms.isEmpty(gpxFile.tracks)) {
-			fileName = gpxFile.tracks.get(0).name;
+		if (!Algorithms.isEmpty(gpxFile.getPath())) {
+			file = new File(gpxFile.getPath());
+			fileName = gpxFile.getPath();
+		} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
+			fileName = gpxFile.getTracks().get(0).name;
 		}
 		if (Algorithms.isEmpty(fileName)) {
 			fileName = app.getString(R.string.shared_string_gpx_track);

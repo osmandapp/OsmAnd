@@ -47,7 +47,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 	private TrackDisplayHelper createTrackDisplayHelper() {
 		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
 		GpxFile gpxFile = filteredSelectedGpxFile.getGpxFile();
-		displayHelper.setFile(new File(gpxFile.path));
+		displayHelper.setFile(new File(gpxFile.getPath()));
 		displayHelper.setGpx(gpxFile);
 		displayHelper.setSelectedGpxFile(filteredSelectedGpxFile);
 		return displayHelper;

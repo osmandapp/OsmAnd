@@ -227,7 +227,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
 					if (gpxFile.showCurrentTrack) {
 						GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-					} else if (!Algorithms.isEmpty(gpxFile.path)) {
+					} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
 						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 					}
 					return true;
@@ -342,7 +342,7 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 
 			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
 				if (errorMessage == null) {
-					plugin.sendGPXFiles(activity, fragment, new File(gpxFile.path));
+					plugin.sendGPXFiles(activity, fragment, new File(gpxFile.getPath()));
 				}
 			});
 		} else {

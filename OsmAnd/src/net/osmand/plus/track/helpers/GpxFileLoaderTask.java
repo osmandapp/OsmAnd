@@ -83,8 +83,7 @@ public class GpxFileLoaderTask extends AsyncTask<Void, Void, GpxFile> {
 	@Override
 	protected GpxFile doInBackground(Void... voids) {
 		return file != null
-				? GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(file))
-				: GpxUtilities.INSTANCE.loadGpxFile(Okio.source(inputStream));
+				? SharedUtil.loadGpxFile(file) : SharedUtil.loadGpxFile(inputStream);
 	}
 
 	@Override

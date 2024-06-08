@@ -9,19 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.SharedUtil;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.SaveImportedGpxListener;
 import net.osmand.plus.myplaces.tracks.tasks.DeletePointsTask;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 
@@ -100,7 +99,7 @@ public class SaveGpxAsyncTask extends AsyncTask<Void, Void, String> {
 				return app.getString(R.string.error_reading_gpx);
 			}
 		} else {
-			kotlin.Exception exception = GpxUtilities.INSTANCE.writeGpxFile(SharedUtil.kFile(toSave), gpxFile);
+			Exception exception = SharedUtil.writeGpxFile(toSave, gpxFile);
 			return exception != null ? exception.getMessage() : null;
 		}
 		return null;

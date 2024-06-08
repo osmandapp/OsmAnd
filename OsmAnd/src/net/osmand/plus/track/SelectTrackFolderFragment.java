@@ -397,7 +397,7 @@ public class SelectTrackFolderFragment extends BaseOsmAndDialogFragment implemen
 			@Override
 			public void onSaveComplete(boolean success, GpxFile gpxFile) {
 				if (isAdded() && success) {
-					addTrackItem(new TrackItem(new File(gpxFile.path)));
+					addTrackItem(new TrackItem(new File(gpxFile.getPath())));
 				}
 				super.onSaveComplete(success, gpxFile);
 			}

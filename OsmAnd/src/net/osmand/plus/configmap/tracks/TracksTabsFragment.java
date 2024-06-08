@@ -374,7 +374,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
 					if (gpxFile.showCurrentTrack) {
 						GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-					} else if (!Algorithms.isEmpty(gpxFile.path)) {
+					} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
 						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 					}
 					return true;
@@ -421,7 +421,7 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 
 			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
 				if (errorMessage == null) {
-					plugin.sendGPXFiles(activity, this, new File(gpxFile.path));
+					plugin.sendGPXFiles(activity, this, new File(gpxFile.getPath()));
 				}
 			});
 		} else {

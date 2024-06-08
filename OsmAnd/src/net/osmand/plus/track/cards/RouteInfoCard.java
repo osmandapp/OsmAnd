@@ -245,7 +245,7 @@ public class RouteInfoCard extends MapBaseCard {
 		List<LatLon> points = new ArrayList<>();
 		if (gpxFile != null) {
 			for (WptPt wptPt : gpxFile.getAllPoints()) {
-				points.add(new LatLon(wptPt.lat, wptPt.lon));
+				points.add(new LatLon(wptPt.getLat(), wptPt.getLon()));
 			}
 		}
 		return points;

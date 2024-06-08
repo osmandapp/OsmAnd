@@ -5,12 +5,12 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.views.corenative.NativeCoreContext;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,8 +65,8 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 			if (gpx != null) {
 				points = getGpxPoints(gpx);
 			} else if (file != null && file.exists()) {
-				gpx = GpxUtilities.loadGPXFile(file);
-				if (gpx.error == null) {
+				gpx = SharedUtil.loadGpxFile(file);
+				if (gpx.getError() == null) {
 					points = getGpxPoints(gpx);
 				}
 			}
@@ -78,7 +78,7 @@ public class HeightsResolverTask extends AsyncTask<Void, Void, float[]> {
 			List<WptPt> segmentsPoints = gpx.getAllSegmentsPoints();
 			int i = 0;
 			for (WptPt point : segmentsPoints) {
-				point.ele = heights[i++];
+				point.setEle(heights[i++]);
 			}
 			this.gpxFile = gpx;
 		}

@@ -187,7 +187,7 @@ public class WptPtMenuController extends MenuController {
 	@NonNull
 	@Override
 	public String getSubtypeStr() {
-		return wpt.category != null ? wpt.category : "";
+		return wpt.getCategory() != null ? wpt.getCategory() : "";
 	}
 
 	@NonNull

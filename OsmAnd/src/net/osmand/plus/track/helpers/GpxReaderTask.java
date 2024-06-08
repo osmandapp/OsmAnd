@@ -115,7 +115,7 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 
 	@NonNull
 	private GpxDataItem updateGpxDataItem(@NonNull SQLiteConnection conn, @Nullable GpxDataItem item) {
-		GpxFile gpxFile = GpxUtilities.INSTANCE.loadGpxFile(file);
+		GpxFile gpxFile = SharedUtil.loadGpxFile(file);
 		if (item == null) {
 			item = new GpxDataItem(file);
 			database.insertItem(item, conn);

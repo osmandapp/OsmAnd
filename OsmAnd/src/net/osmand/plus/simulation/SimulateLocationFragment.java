@@ -91,7 +91,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (gpxFile != null) {
-			outState.putString(TRACK_FILE_NAME, gpxFile.path);
+			outState.putString(TRACK_FILE_NAME, gpxFile.getPath());
 		}
 	}
 
@@ -201,7 +201,7 @@ public class SimulateLocationFragment extends BaseOsmAndFragment implements Sele
 		if (enabled) {
 			TextView trackDescription = trackItem.findViewById(R.id.description);
 			AndroidUiHelper.updateVisibility(trackDescription, true);
-			String name = gpxFile.path;
+			String name = gpxFile.getPath();
 			int i = name.lastIndexOf('/');
 			if (i >= 0) {
 				name = name.substring(i + 1);

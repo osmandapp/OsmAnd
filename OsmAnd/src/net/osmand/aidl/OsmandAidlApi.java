@@ -16,12 +16,12 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.shared.gpx.GpxParameter.API_IMPORTED;
-import static net.osmand.shared.gpx.GpxParameter.COLOR;
-import static net.osmand.shared.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 import static net.osmand.plus.myplaces.favorites.FavouritesFileHelper.LEGACY_FAV_FILE_PREFIX;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
 import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+import static net.osmand.shared.gpx.GpxParameter.API_IMPORTED;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.FILE_LAST_MODIFIED_TIME;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -70,9 +70,6 @@ import net.osmand.aidlapi.navigation.NavigateGpxParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.AppInitializeListener;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
@@ -124,7 +121,6 @@ import net.osmand.plus.settings.backend.preferences.OsmandPreference;
 import net.osmand.plus.settings.backend.storages.ImpassableRoadsStorage;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxSelectionHelper;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
@@ -143,6 +139,9 @@ import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 import net.osmand.plus.widgets.ctxmenu.ContextMenuAdapter;
 import net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -170,8 +169,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import okio.Okio;
 
 public class OsmandAidlApi {
 
@@ -1303,7 +1300,7 @@ public class OsmandAidlApi {
 
 					@Override
 					protected GpxFile doInBackground(File... files) {
-						return GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(files[0]));
+						return SharedUtil.loadGpxFile(files[0]);
 					}
 
 					@Override
@@ -1329,7 +1326,7 @@ public class OsmandAidlApi {
 
 				@Override
 				protected GpxFile doInBackground(File... files) {
-					return GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(files[0]));
+					return SharedUtil.loadGpxFile(files[0]);
 				}
 
 				@Override
@@ -1447,7 +1444,7 @@ public class OsmandAidlApi {
 
 				@Override
 				protected GpxFile doInBackground(File... files) {
-					return GpxUtilities.INSTANCE.loadGpxFile(SharedUtil.kFile(files[0]));
+					return SharedUtil.loadGpxFile(files[0]);
 				}
 
 				@Override
@@ -2687,7 +2684,7 @@ public class OsmandAidlApi {
 			}
 			if (gpxParcelDescriptor != null) {
 				FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-				return GpxUtilities.INSTANCE.loadGpxFile(Okio.source(new FileInputStream(fileDescriptor)));
+				return SharedUtil.loadGpxFile(new FileInputStream(fileDescriptor));
 			}
 			return null;
 		}

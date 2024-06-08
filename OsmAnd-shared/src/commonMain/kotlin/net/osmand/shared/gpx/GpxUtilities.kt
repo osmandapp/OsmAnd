@@ -8,6 +8,7 @@ import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
+import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.SplitMetric.DistanceSplitMetric
 import net.osmand.shared.gpx.SplitMetric.TimeSplitMetric
@@ -28,6 +29,7 @@ import okio.Buffer
 import okio.IOException
 import okio.Sink
 import okio.Source
+import okio.buffer
 import kotlin.math.round
 
 object GpxUtilities {
@@ -903,17 +905,17 @@ object GpxUtilities {
 		return writer.toString()
 	}
 
-	fun writeGpxFile(fout: KFile, file: GpxFile): Exception? {
+	fun writeGpxFile(fout: KFile, file: GpxFile): KException? {
 		var output: Sink? = null
 		return try {
 			fout.createDirectories()
-			output = fout.sink()
+			output = fout.sink().buffer()
 			if (KAlgorithms.isEmpty(file.path)) {
 				file.path = (if (fout.isAbsolute()) fout.path() else
 					fout.absolutePath())
 			}
 			writeGpx(output, file, null)
-		} catch (e: Exception) {
+		} catch (e: KException) {
 			log.error("Failed to write gpx '$fout.path()'", e)
 			e
 		} finally {
@@ -921,11 +923,11 @@ object GpxUtilities {
 		}
 	}
 
-	fun writeGpx(output: Sink, file: GpxFile, progress: IProgress?): Exception? {
+	fun writeGpx(output: Sink, file: GpxFile, progress: IProgress?): KException? {
 		progress?.startWork(file.getItemsToWriteSize())
 		return try {
 			val serializer = XmlSerializer()
-			serializer.setOutput(output)
+			serializer.setOutput(output.buffer())
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true)
 			serializer.startDocument("UTF-8", true)
 			serializer.startTag(null, "gpx")
@@ -961,7 +963,7 @@ object GpxUtilities {
 			null
 		} catch (e: Exception) {
 			log.error("Failed to write gpx", e)
-			e
+			KException(e.message, e)
 		}
 	}
 
@@ -1440,7 +1442,7 @@ object GpxUtilities {
 			val gpxFile = GpxFile(null)
 			gpxFile.path = file.absolutePath()
 			log.error("Error reading gpx ${gpxFile.path}", e)
-			gpxFile.error = e
+			gpxFile.error = KException(e.message, e)
 			gpxFile
 		} finally {
 			source?.close()
@@ -1460,7 +1462,7 @@ object GpxUtilities {
 		gpxFile.metadata.time = 0
 		try {
 			val parser = XmlPullParser()
-			parser.setInput(source, "UTF-8")
+			parser.setInput(source.buffer(), "UTF-8")
 			val routeTrack = Track()
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
@@ -1864,7 +1866,7 @@ object GpxUtilities {
 				gpxFile.metadata.time = getCreationTime(gpxFile)
 			}
 		} catch (e: Exception) {
-			gpxFile.error = e
+			gpxFile.error = KException(e.message, e)
 		}
 
 		return gpxFile

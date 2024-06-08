@@ -68,8 +68,8 @@ public class TripRecordingTimeWidget extends SimpleWidget {
 		SelectedGpxFile currentTrack = savingTrackHelper.getCurrentTrack();
 		GpxFile gpxFile = currentTrack.getGpxFile();
 		boolean withoutGaps = !currentTrack.isJoinSegments()
-				&& (Algorithms.isEmpty(gpxFile.tracks) || gpxFile.tracks.get(0).generalTrack);
+				&& (Algorithms.isEmpty(gpxFile.getTracks()) || gpxFile.getTracks().get(0).isGeneralTrack());
 		GpxTrackAnalysis analysis = currentTrack.getTrackAnalysis(app);
-		return withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+		return withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
 	}
 }

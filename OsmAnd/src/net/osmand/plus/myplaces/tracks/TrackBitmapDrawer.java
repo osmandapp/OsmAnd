@@ -18,19 +18,19 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.Renderable.CurrentTrack;
 import net.osmand.plus.views.Renderable.RenderableSegment;
 import net.osmand.plus.views.Renderable.StandardTrack;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 
 public class TrackBitmapDrawer extends MapBitmapDrawer {
 
@@ -92,7 +92,7 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 	}
 
 	protected void createTileBox() {
-		QuadRect rect = gpxFile.getRect();
+		KQuadRect rect = gpxFile.getRect();
 		tileBox = new RotatedTileBox.RotatedTileBoxBuilder()
 				.setLocation(rect.centerY(), rect.centerX())
 				.setZoom(15)
@@ -100,10 +100,10 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 				.setMapDensity(params.density)
 				.setPixelDimensions(params.widthPixels, params.heightPixels, 0.5f, 0.5f).build();
 
-		while (tileBox.getZoom() < 17 && tileBox.containsLatLon(rect.top, rect.left) && tileBox.containsLatLon(rect.bottom, rect.right)) {
+		while (tileBox.getZoom() < 17 && tileBox.containsLatLon(rect.getTop(), rect.getLeft()) && tileBox.containsLatLon(rect.getBottom(), rect.getRight())) {
 			tileBox.setZoom(tileBox.getZoom() + 1);
 		}
-		while (tileBox.getZoom() >= 7 && (!tileBox.containsLatLon(rect.top, rect.left) || !tileBox.containsLatLon(rect.bottom, rect.right))) {
+		while (tileBox.getZoom() >= 7 && (!tileBox.containsLatLon(rect.getTop(), rect.getLeft()) || !tileBox.containsLatLon(rect.getBottom(), rect.getRight()))) {
 			tileBox.setZoom(tileBox.getZoom() - 1);
 		}
 	}
@@ -131,10 +131,10 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 
 	@NonNull
 	private SelectedGpxFile getSelectedGpxFile() {
-		if (gpxFile.showCurrentTrack) {
+		if (gpxFile.isShowCurrentTrack()) {
 			return app.getSavingTrackHelper().getCurrentTrack();
 		} else {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.getPath());
 			if (selectedGpxFile == null) {
 				selectedGpxFile = new SelectedGpxFile();
 				if (dataItem != null) {
@@ -150,16 +150,16 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 		GpxDataItem item = !selectedGpxFile.isShowCurrentTrack() ? dataItem : null;
 		for (TrkSegment segment : selectedGpxFile.getPointsToDisplay()) {
 			int color = getTrackColor(selectedGpxFile, segment, item);
-			if (segment.renderer == null && !segment.points.isEmpty()) {
+			if (segment.getRenderer() == null && !segment.getPoints().isEmpty()) {
 				if (selectedGpxFile.isShowCurrentTrack()) {
-					segment.renderer = new CurrentTrack(segment.points);
+					segment.setRenderer(new CurrentTrack(segment.getPoints()));
 				} else {
-					segment.renderer = new StandardTrack(segment.points, 17.2);
+					segment.setRenderer(new StandardTrack(segment.getPoints(), 17.2));
 				}
 			}
 			paint.setColor(color);
-			if (segment.renderer instanceof RenderableSegment) {
-				((RenderableSegment) segment.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+			if (segment.getRenderer() instanceof RenderableSegment) {
+				((RenderableSegment) segment.getRenderer() ).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
 			}
 		}
 	}
@@ -181,9 +181,9 @@ public class TrackBitmapDrawer extends MapBitmapDrawer {
 	private void drawPoints(@NonNull Canvas canvas, @NonNull SelectedGpxFile selectedGpxFile) {
 		int color = selectedGpxFile.getColor();
 		int pointsColor = color == 0 ? ContextCompat.getColor(app, R.color.gpx_color_point) : color;
-		for (WptPt point : selectedGpxFile.getGpxFile().getPoints()) {
-			float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
-			float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
+		for (WptPt point : selectedGpxFile.getGpxFile().getPointsList()) {
+			float x = tileBox.getPixXFromLatLon(point.getLat(), point.getLon());
+			float y = tileBox.getPixYFromLatLon(point.getLat(), point.getLon());
 
 			int pointColor = point.getColor(pointsColor) | 0xff000000;
 			paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));

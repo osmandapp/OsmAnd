@@ -13,13 +13,10 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.Route;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.avoidroads.AvoidRoadsHelper;
@@ -40,9 +37,7 @@ import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.GpxRouteApproximation;
-import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.router.PrecalculatedRouteDirection;
-import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteImporter;
 import net.osmand.router.RoutePlannerFrontEnd;
@@ -55,6 +50,10 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.gpx.GPXUtilities.Route;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -105,9 +104,32 @@ public class RouteProvider {
 		return loc;
 	}
 
+	public static Location createLocation(net.osmand.shared.gpx.GpxUtilities.WptPt pt){
+		Location loc = new Location("OsmandRouteProvider");
+		loc.setLatitude(pt.getLatitude());
+		loc.setLongitude(pt.getLongitude());
+		loc.setSpeed((float) pt.getSpeed());
+		if(!Double.isNaN(pt.getEle())) {
+			loc.setAltitude(pt.getEle());
+		}
+		loc.setTime(pt.getTime());
+		if(!Double.isNaN(pt.getHdop())) {
+			loc.setAccuracy((float) pt.getHdop());
+		}
+		return loc;
+	}
+
 	public static List<Location> locationsFromWpts(List<WptPt> wpts) {
 		List<Location> locations = new ArrayList<>(wpts.size());
 		for (WptPt pt : wpts) {
+			locations.add(createLocation(pt));
+		}
+		return locations;
+	}
+
+	public static List<Location> locationsFromSharedWpts(List<net.osmand.shared.gpx.GpxUtilities.WptPt> wpts) {
+		List<Location> locations = new ArrayList<>(wpts.size());
+		for (net.osmand.shared.gpx.GpxUtilities.WptPt pt : wpts) {
 			locations.add(createLocation(pt));
 		}
 		return locations;
@@ -941,20 +963,32 @@ public class RouteProvider {
 	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GpxFile gpxFile,
 	                                                           List<Location> segmentEndpoints,
 	                                                           int selectedSegment, boolean leftSide) {
-		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+		GPXFile javaGpx = SharedUtil.jGpxFile(gpxFile);
+		List<TrkSegment> segments = javaGpx.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
 			TrkSegment segment = segments.get(selectedSegment);
 			points.addAll(locationsFromWpts(segment.points));
-			RouteImporter routeImporter = new RouteImporter(segment, gpxFile.getRoutePoints(selectedSegment));
+			RouteImporter routeImporter = new RouteImporter(segment, javaGpx.getRoutePoints(selectedSegment));
 			return routeImporter.importRoute();
 		} else {
 			collectPointsFromSegments(segments, points, segmentEndpoints);
-			RouteImporter routeImporter = new RouteImporter(gpxFile, leftSide);
+			RouteImporter routeImporter = new RouteImporter(javaGpx, leftSide);
 			return routeImporter.importRoute();
 		}
 	}
 
 	protected static void collectSegmentPointsFromGpx(GpxFile gpxFile, List<Location> points,
+													  List<Location> segmentEndpoints, int selectedSegment) {
+		List<net.osmand.shared.gpx.GpxUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+		if (selectedSegment != -1 && segments.size() > selectedSegment) {
+			net.osmand.shared.gpx.GpxUtilities.TrkSegment segment = segments.get(selectedSegment);
+			points.addAll(locationsFromSharedWpts(segment.getPoints()));
+		} else {
+			collectPointsFromSharedSegments(segments, points, segmentEndpoints);
+		}
+	}
+
+	protected static void collectSegmentPointsFromGpx(GPXFile gpxFile, List<Location> points,
 													  List<Location> segmentEndpoints, int selectedSegment) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
@@ -978,17 +1012,31 @@ public class RouteProvider {
 		}
 	}
 
+	protected static void collectPointsFromSharedSegments(List<net.osmand.shared.gpx.GpxUtilities.TrkSegment> segments, List<Location> points, List<Location> segmentEndpoints) {
+		Location lastPoint = null;
+		for (int i = 0; i < segments.size(); i++) {
+			net.osmand.shared.gpx.GpxUtilities.TrkSegment segment = segments.get(i);
+			points.addAll(locationsFromSharedWpts(segment.getPoints()));
+			if (i <= segments.size() - 1 && lastPoint != null) {
+				segmentEndpoints.add(lastPoint);
+				segmentEndpoints.add(points.get((points.size() - segment.getPoints().size())));
+			}
+			lastPoint = points.get(points.size() - 1);
+		}
+	}
+
 	protected static List<RouteDirectionInfo> parseOsmAndGPXRoute(List<Location> points, GpxFile gpxFile,
 																  List<Location> segmentEndpoints,
 																  boolean osmandRouter, boolean leftSide,
 																  float defSpeed, int selectedSegment) {
+		GPXFile javaGpx = SharedUtil.jGpxFile(gpxFile);
 		List<RouteDirectionInfo> directions = null;
 		if (!osmandRouter) {
-			for (WptPt pt : gpxFile.getPoints()) {
+			for (WptPt pt : javaGpx.getPoints()) {
 				points.add(createLocation(pt));
 			}
 		} else {
-			collectSegmentPointsFromGpx(gpxFile, points, segmentEndpoints, selectedSegment);
+			collectSegmentPointsFromGpx(javaGpx, points, segmentEndpoints, selectedSegment);
 		}
 		float[] distanceToEnd = new float[points.size()];
 		for (int i = points.size() - 2; i >= 0; i--) {
@@ -996,8 +1044,8 @@ public class RouteProvider {
 		}
 
 		Route route = null;
-		if (gpxFile.routes.size() > 0) {
-			route = gpxFile.routes.get(0);
+		if (javaGpx.routes.size() > 0) {
+			route = javaGpx.routes.get(0);
 		}
 		RouteDirectionInfo previous = null;
 		if (route != null && route.points.size() > 0) {
@@ -1123,10 +1171,10 @@ public class RouteProvider {
 
 	public GpxFile createOsmandRouterGPX(RouteCalculationResult route, OsmandApplication ctx, String name) {
 		TargetPointsHelper helper = ctx.getTargetPointsHelper();
-		List<WptPt> points = new ArrayList<>();
+		List<net.osmand.gpx.GPXUtilities.WptPt> points = new ArrayList<>();
 		List<TargetPoint> ps = helper.getIntermediatePointsWithTarget();
 		for (int k = 0; k < ps.size(); k++) {
-			WptPt pt = new WptPt();
+			net.osmand.gpx.GPXUtilities.WptPt pt = new net.osmand.gpx.GPXUtilities.WptPt();
 			pt.lat = ps.get(k).getLatitude();
 			pt.lon = ps.get(k).getLongitude();
 			if (k < ps.size()) {
@@ -1153,7 +1201,7 @@ public class RouteProvider {
 		List<Location> locations = route.getImmutableAllLocations();
 		List<RouteSegmentResult> originalRoute = route.getOriginalRoute();
 		RouteExporter exporter = new RouteExporter(name, originalRoute, locations, null, points);
-		return exporter.exportRoute();
+		return SharedUtil.kGpxFile(exporter.exportRoute());
 	}
 
 	private RouteCalculationResult findOnlineRoute(RouteCalculationParams params) throws IOException, JSONException {
@@ -1231,7 +1279,7 @@ public class RouteProvider {
 			} else {
 				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
 			}
-			GpxFile gpxFile = GpxUtilities.loadGPXFile(gpxStream);
+			GpxFile gpxFile = SharedUtil.loadGpxFile(gpxStream);
 			infos = parseOsmAndGPXRoute(res, gpxFile, segmentEndpoints, true, params.leftSide, params.mode.getDefaultSpeed(), -1);
 			if (infos != null) {
 				addMissingTurns = false;

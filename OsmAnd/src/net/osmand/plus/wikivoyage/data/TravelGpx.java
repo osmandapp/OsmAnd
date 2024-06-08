@@ -35,7 +35,7 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public GpxTrackAnalysis getAnalysis() {
 		GpxTrackAnalysis analysis = new GpxTrackAnalysis();
-		if (gpxFile.hasAltitude) {
+		if (gpxFile.hasAltitude()) {
 			analysis = gpxFile.getAnalysis(0);
 		} else {
 			analysis.setDiffElevationDown(diffElevationDown);
@@ -43,7 +43,7 @@ public class TravelGpx extends TravelArticle {
 			analysis.setMaxElevation(maxElevation);
 			analysis.setMinElevation(minElevation);
 			analysis.setTotalDistance(totalDistance);
-			analysis.totalDistanceWithoutGaps = totalDistance;
+			analysis.setTotalDistanceWithoutGaps(totalDistance);
 			analysis.setAvgElevation(avgElevation);
 
 			if (!Double.isNaN(maxElevation) || !Double.isNaN(minElevation)) {
@@ -57,9 +57,9 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
 		WptPt wptPt = new WptPt();
-		wptPt.lat = amenity.getLocation().getLatitude();
-		wptPt.lon = amenity.getLocation().getLongitude();
-		wptPt.name = amenity.getName();
+		wptPt.setLat(amenity.getLocation().getLatitude());
+		wptPt.setLon(amenity.getLocation().getLongitude());
+		wptPt.setName(amenity.getName());
 		return wptPt;
 	}
 

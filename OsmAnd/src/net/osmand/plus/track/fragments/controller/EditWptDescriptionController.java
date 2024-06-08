@@ -28,14 +28,14 @@ public class EditWptDescriptionController extends EditPointDescriptionController
 		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 			GpxFile gpx = selectedGpxFile.getGpxFile();
-			if (gpx.showCurrentTrack) {
+			if (gpx.isShowCurrentTrack()) {
 				SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 				savingTrackHelper.updatePointData(wpt, wpt.getLatitude(), wpt.getLongitude(), editedText,
-						wpt.name, wpt.category, wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
+						wpt.getName(), wpt.getCategory(), wpt.getColor(), wpt.getIconName(), wpt.getBackgroundType());
 			} else {
 				WptPt wptRes = wpt;
-				wptRes.desc = editedText;
-				gpx.updateWptPt(wpt, wptRes);
+				wptRes.setDesc(editedText);
+				gpx.updateWptPt(wpt, wptRes, true);
 				SaveGpxHelper.saveGpx(gpx);
 			}
 			LatLon latLon = new LatLon(wpt.getLatitude(), wpt.getLongitude());

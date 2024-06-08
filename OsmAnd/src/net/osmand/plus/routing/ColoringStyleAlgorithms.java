@@ -116,7 +116,7 @@ public class ColoringStyleAlgorithms {
 
 	@Nullable
 	public static List<RouteSegmentResult> getRouteSegmentsInTrack(@NonNull GpxFile gpxFile) {
-		if (!RouteExporter.OSMAND_ROUTER_V2.equals(gpxFile.author)) {
+		if (!RouteExporter.OSMAND_ROUTER_V2.equals(gpxFile.getAuthor())) {
 			return null;
 		}
 		List<RouteSegmentResult> routeSegments = new ArrayList<>();

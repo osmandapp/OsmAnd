@@ -73,8 +73,8 @@ public abstract class JsonOnlineRoutingEngine extends OnlineRoutingEngine {
 		if (!isEmpty(route)) {
 			for (LatLon pt : route) {
 				WptPt wpt = new WptPt();
-				wpt.lat = pt.getLatitude();
-				wpt.lon = pt.getLongitude();
+				wpt.setLat(pt.getLatitude());
+				wpt.setLon(pt.getLongitude());
 				result.add(RouteProvider.createLocation(wpt));
 			}
 		}

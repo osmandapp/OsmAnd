@@ -5,13 +5,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Track3DStyle;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -52,7 +52,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 		@Override
 		public float getHeight(int index) {
-			return (float) points.get(index).ele;
+			return (float) points.get(index).getEle();
 		}
 
 		@Override
@@ -134,7 +134,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 				}
 			} else if (coloringType.isRouteInfoAttribute()) {
 				if (points != null && routeSegments != null) {
-					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromWpts(points), routeSegments);
+					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromSharedWpts(points), routeSegments);
 				} else {
 					clearWay();
 				}
@@ -147,8 +147,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		List<Float> pointHeights = new ArrayList<>();
 		for (int i = 0; i < points.size(); i++) {
 			WptPt point = points.get(i);
-			RouteColorizationPoint cp = new RouteColorizationPoint(i, point.lat, point.lon, 0);
-			pointHeights.add((float) point.ele);
+			RouteColorizationPoint cp = new RouteColorizationPoint(i, point.getLat(), point.getLon(), 0);
+			pointHeights.add((float) point.getEle());
 			switch (coloringType) {
 				case SPEED:
 					cp.color = point.getColor(ColorizationType.SPEED);

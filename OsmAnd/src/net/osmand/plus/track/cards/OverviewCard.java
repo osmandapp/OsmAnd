@@ -81,7 +81,7 @@ public class OverviewCard extends MapBaseCard {
 		int iconColorDef = nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 		int iconColorPres = R.color.active_buttons_and_links_text_dark;
 		GpxFile gpxFile = getGPXFile();
-		boolean fileAvailable = gpxFile.path != null && !gpxFile.showCurrentTrack;
+		boolean fileAvailable = gpxFile.getPath() != null && !gpxFile.isShowCurrentTrack();
 
 		showButton = view.findViewById(R.id.show_button);
 		appearanceButton = view.findViewById(R.id.appearance_button);
@@ -93,7 +93,7 @@ public class OverviewCard extends MapBaseCard {
 
 		setupDescription();
 		initShowButton(iconColorDef, iconColorPres);
-		if (!FileUtils.isTempFile(app, gpxFile.path)) {
+		if (!FileUtils.isTempFile(app, gpxFile.getPath())) {
 			initAppearanceButton(iconColorDef, iconColorPres);
 			if (fileAvailable) {
 				initEditButton(iconColorDef, iconColorPres);
@@ -126,7 +126,7 @@ public class OverviewCard extends MapBaseCard {
 
 	@DrawableRes
 	private int getActiveShowHideIcon() {
-		if (FileUtils.isTempFile(app, getGPXFile().path)) {
+		if (FileUtils.isTempFile(app, getGPXFile().getPath())) {
 			return R.drawable.ic_action_gsave_dark;
 		} else {
 			return isGpxFileSelected(app, getGPXFile()) ? R.drawable.ic_action_hide : R.drawable.ic_action_view;
@@ -177,14 +177,14 @@ public class OverviewCard extends MapBaseCard {
 
 	private void setupDescription() {
 		GpxFile gpxFile = getGPXFile();
-		String descriptionHtml = gpxFile.metadata.getDescription();
+		String descriptionHtml = gpxFile.getMetadata().getDescription();
 		if (Algorithms.isBlank(descriptionHtml)) {
 			AndroidUiHelper.updateVisibility(description, false);
 		} else {
 			description.setText(getFirstParagraph(descriptionHtml));
 			description.setOnClickListener(v -> {
 				String title = gpxFile.getArticleTitle();
-				String imageUrl = getMetadataImageLink(gpxFile.metadata);
+				String imageUrl = getMetadataImageLink(gpxFile.getMetadata());
 				ReadGpxDescriptionFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			});
 			AndroidUiHelper.updateVisibility(description, true);
