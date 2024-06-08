@@ -5732,7 +5732,7 @@
     <string name="rendering_value_dark_orange_name">Sötét narancs</string>
     <string name="assigned_keys">Hozzárendelt billentyűk</string>
     <string name="new_key_assignment">Új billentyű-hozzárendelés</string>
-    <string name="clear_all_key_shortcuts">Az összes billentyűparancsot törlése</string>
+    <string name="clear_all_key_shortcuts">Az összes billentyűparancs törlése</string>
     <string name="no_assigned_keys_desc">Válasszon ki egy műveletet, és rendeljen hozzá egy billentyűt a „Hozzáadás” gomb megérintésével.</string>
     <string name="key_assignment_add_action">Művelet hozzáadása</string>
     <string name="shared_string_key">Billentyű</string>
