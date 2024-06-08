@@ -5737,4 +5737,16 @@
     <string name="travel_topics">Rejse-emner</string>
     <string name="wall_height">Murhøjde</string>
     <string name="rendering_value_dark_orange_name">Mørk orange</string>
+    <string name="clear_all_key_shortcuts">Ryd alle tastaturgenveje</string>
+    <string name="new_key_assignment">Ny tastetildeling</string>
+    <string name="key_name_pattern">Tast \"%1$s\"</string>
+    <string name="key_assignment_add_key">Tilføj tast</string>
+    <string name="key_assignment_add_action">Tilføj handling</string>
+    <string name="action_icon">Handlingsikon</string>
+    <string name="assigned_keys">Tildelte taster</string>
+    <string name="clear_key_assignment_summary">Tastetildeling for den valgte handling ryddes.</string>
+    <string name="clear_all_key_shortcuts_summary">Alle tastetildelinger for den valgte type fjernes.</string>
+    <string name="no_assigned_keys_desc">Vælg en handling, og tildel en tast ved at trykke på knappen \'Tilføj\'.</string>
+    <string name="no_assigned_keys">Ingen tildelte taster</string>
+    <string name="shared_string_key">Tast</string>
 </resources>
