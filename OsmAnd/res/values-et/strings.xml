@@ -4615,4 +4615,17 @@
     <string name="routing_attr_avoid_cobblestone_name">Väldi munakiviteid</string>
     <string name="routing_attr_avoid_cobblestone_description">Väldi munakiviteid</string>
     <string name="title_3d_track">3D rada</string>
+    <string name="local_indexes_category_terrain">Maastikukaardid (3D)</string>
+    <string name="use_terrain_maps">Kasuta maastikukaarte</string>
+    <string name="rendering_value_dark_orange_name">Tumeoranž</string>
+    <string name="wall_height">Seina kõrgus</string>
+    <string name="change_terrain_color_scheme">Muuda maastiku värviteemat</string>
+    <string name="play_weather_forecast">Esita ilmaennustust</string>
+    <string name="terrain_maps">Maastikukaardid</string>
+    <string name="use_terrain_maps_summary">Kõrguskoonte jaoks kasutame maastikukaarte. Raja geomeetria sellega ei muutu.</string>
+    <string name="relief_3d_download_description">Maastiku kuvamiseks on vaja täiendavaid kaarte.</string>
+    <string name="retrieve_elevation_data_summary">OsmAnd võib laadida kõrgusjoonte andmed nii läheduses olevate teede andmetest kui maastikukaartidelt.</string>
+    <string name="clear_all_key_shortcuts">Eemalda kõik kiirklahvid</string>
+    <string name="clear_key_assignment_summary">Valitud tegevuse jaoks määratud klahvikombinatsioon nüüd eemaldatakse.</string>
+    <string name="clear_all_key_shortcuts_summary">Kõik valitud tüübi jaoks määratud klahvikombinatsioonid nüüd eemaldatakse.</string>
 </resources>
