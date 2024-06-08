@@ -173,9 +173,12 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	}
 
 	@Nullable
-	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
-	                                                    boolean leftSideNavigation, boolean initialCalculation,
-	                                                    @Nullable RouteCalculationProgress calculationProgress) throws JSONException;
+	public abstract OnlineRoutingResponse responseByContent(@NonNull OsmandApplication app, @NonNull String content,
+	                                                        boolean leftSideNavigation, boolean initialCalculation,
+	                                                        @Nullable RouteCalculationProgress calculationProgress) throws JSONException;
+
+	public abstract OnlineRoutingResponse responseByGpxFile(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                                        boolean initialCalculation, @Nullable RouteCalculationProgress calculationProgress);
 
 	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                                   @NonNull String content) throws JSONException;
