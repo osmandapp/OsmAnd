@@ -5747,4 +5747,17 @@
     <string name="travel_topics">Tendencias de viaje</string>
     <string name="change_terrain_color_scheme">Cambiar el esquema de color del terreno</string>
     <string name="wall_height">Altura del muro</string>
+    <string name="rendering_value_dark_orange_name">Anaranjado oscuro</string>
+    <string name="clear_key_assignment_summary">La asignación de tecla para la acción elegida, será vaciada.</string>
+    <string name="clear_all_key_shortcuts">Vaciar todos los atajos de teclas</string>
+    <string name="new_key_assignment">Nueva asignación de tecla</string>
+    <string name="clear_all_key_shortcuts_summary">Serán borradas todas las asignaciones de teclas para el tipo elegido.</string>
+    <string name="no_assigned_keys">Sin teclas asignadas</string>
+    <string name="shared_string_key">Tecla</string>
+    <string name="no_assigned_keys_desc">Elige una acción y asigna una tecla para el botón «Añadir».</string>
+    <string name="key_assignment_add_action">Añadir acción</string>
+    <string name="key_name_pattern">Tecla «%1$s»</string>
+    <string name="key_assignment_add_key">Añadir tecla</string>
+    <string name="assigned_keys">Teclas asignadas</string>
+    <string name="action_icon">Añadir icono</string>
 </resources>
