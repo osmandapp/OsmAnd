@@ -5043,4 +5043,5 @@
     <string name="shared_string_extensions">הרחבות</string>
     <string name="sorted_sufolders_toast">תת־תיקיות תחת „%1$s” מסודרות לפי: „%2$s”</string>
     <string name="dont_ask_anymore">לא לשאול שוב</string>
+    <string name="use_nearby_roads">להשתמש בדרכים סמוכות</string>
 </resources>
