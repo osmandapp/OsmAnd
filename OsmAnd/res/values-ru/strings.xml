@@ -5516,13 +5516,13 @@
     <string name="key_event_action_zoom_out">Отдалить</string>
     <string name="key_event_action_toggle_drower">Показать/скрыть боковое меню</string>
     <string name="shared_string_rows">Ряды</string>
-    <string name="key_is_already_assigned_error">Кнопка «%1$s» уже назначена на действие: «%2$s»</string>
+    <string name="key_is_already_assigned_error">Клавиша «%1$s» уже назначена на действие: «%2$s»</string>
     <string name="topography_maps">Карты ландшафта</string>
     <string name="cloud_trash_clear_confirmation">Удалить все элементы в корзине окончательно?</string>
-    <string name="key_assignments">Назначения кнопок</string>
+    <string name="key_assignments">Назначения клавиш</string>
     <string name="change_button">Изменить клавишу</string>
     <string name="root_folder">Корневая папка</string>
-    <string name="reset_key_assignments_desc">Все назначения кнопок для выбранного типа будут удалены.</string>
+    <string name="reset_key_assignments_desc">Все назначения клавиш для выбранного типа будут удалены.</string>
     <string name="rendering_attr_showToll_name">Показывать ограничения платного проезда</string>
     <string name="restore_from_trash">Восстановить из корзины</string>
     <string name="all_folders">Все папки</string>
@@ -5530,7 +5530,7 @@
     <string name="folder">Папка</string>
     <string name="shared_string_reassign">Переназначить</string>
     <string name="app_mode_baby_transport">Детский транспорт</string>
-    <string name="reset_key_assignments">Сбросить назначения кнопок</string>
+    <string name="reset_key_assignments">Сбросить назначения клавиш</string>
     <string name="rendering_attr_showToll_description">Показывать ограничения платного проезда на дорогах</string>
     <string name="remove_widget_first">Пожалуйста, сначала удалите виджет</string>
     <string name="add_row">Добавить ряд</string>
@@ -5557,7 +5557,7 @@
     <string name="lang_zh_hans">Китайский упрощённый</string>
     <string name="button_already_assigned_to_this_action">Кнопка уже назначена на это действие.</string>
     <string name="zoom_non_animated">Приближение без анимации</string>
-    <string name="key_assignments_already_cleared_message">Все назначения кнопок уже удалены</string>
+    <string name="key_assignments_already_cleared_message">Все назначения клавиш уже удалены</string>
     <string name="lang_zh_hant">Китайский традиционный</string>
     <string name="zoom_animated">Приближение с анимацией</string>
     <string name="add_new_button">Добавить новую кнопку</string>
@@ -5733,4 +5733,18 @@
     <string name="height_legend_description">Для визуализации рельефа используются цветовые карты высот.</string>
     <string name="change_terrain_color_scheme">Изменить цветовую схему рельефа</string>
     <string name="play_weather_forecast">Воспроизвести прогноз погоды</string>
+    <string name="new_key_assignment">Новое назначение клавиши</string>
+    <string name="key_assignment_add_key">Добавить клавишу</string>
+    <string name="key_assignment_add_action">Добавить действие</string>
+    <string name="assigned_keys">Назначенные клавиши</string>
+    <string name="rendering_value_dark_orange_name">Темно-оранжевый</string>
+    <string name="wall_height">Высота стены</string>
+    <string name="clear_all_key_shortcuts">Очистить все сочетания клавиш</string>
+    <string name="action_icon">Значок действия</string>
+    <string name="clear_all_key_shortcuts_summary">Все назначения клавиш для выбранного типа будут удалены.</string>
+    <string name="no_assigned_keys_desc">Выберите действие и назначьте клавишу, нажав кнопку «Добавить».</string>
+    <string name="key_name_pattern">Клавиша \"%1$s\"</string>
+    <string name="no_assigned_keys">Нет назначенных клавиш</string>
+    <string name="shared_string_key">Клавиша</string>
+    <string name="clear_key_assignment_summary">Назначение клавиши для выбранного действия будет удалено.</string>
 </resources>
