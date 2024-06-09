@@ -5728,4 +5728,14 @@
     <string name="clear_key_assignment_summary">Klav-asigno por la elektita ago estos forviŝita.</string>
     <string name="rendering_value_dark_orange_name">Oranĝkolora malhela</string>
     <string name="clear_all_key_shortcuts_summary">Ĉiuj klav-asignoj de la elektita speco estos forviŝitaj.</string>
+    <string name="clear_all_key_shortcuts">Forviŝi ĉiujn klav-asignojn</string>
+    <string name="no_assigned_keys_desc">Elektu agon aŭ asignu klavon per frapeti la butonon “Aldoni”.</string>
+    <string name="no_assigned_keys">Neniu asignita klavo</string>
+    <string name="shared_string_key">Klavo</string>
+    <string name="new_key_assignment">Nova klav-asigno</string>
+    <string name="action_icon">Emblemo de ago</string>
+    <string name="key_name_pattern">Klavo “%1$s”</string>
+    <string name="key_assignment_add_key">Aldoni klavon</string>
+    <string name="key_assignment_add_action">Aldoni agon</string>
+    <string name="assigned_keys">Asignitaj klavoj</string>
 </resources>
