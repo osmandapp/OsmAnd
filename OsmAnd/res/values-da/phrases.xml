@@ -3907,7 +3907,7 @@
     <string name="poi_water_polo">Vandpolo</string>
     <string name="poi_jiu_jitsu">Jiu Jitsu</string>
     <string name="poi_karate">Karate</string>
-    <string name="poi_camp_pitch">Lejrplads</string>
+    <string name="poi_camp_pitch">Standplads</string>
     <string name="poi_wildlife_crossing">Vildtpassage</string>
     <string name="poi_consulate_consular_office">Konsulat</string>
     <string name="poi_embassy_interests_section">Interessersektion</string>
@@ -4042,4 +4042,11 @@
     <string name="poi_bicycle_designated">Beregnet til cykler</string>
     <string name="poi_vehicle_designated">Beregnet til køretøjer</string>
     <string name="poi_research_institute">Forskningscenter</string>
+    <string name="poi_us_maps_recreation_area_activity_camping_and_cabins">Camping og hytter</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_riding_and_camping">Ridning og camping</string>
+    <string name="poi_permanent_camping_only">Udelukkende;Udelukkende permanent camping</string>
+    <string name="poi_permanent_camping_yes">Ja;Permanent camping</string>
+    <string name="poi_us_maps_recreation_area_activity_horse_camping">Hestecamping</string>
+    <string name="poi_us_maps_recreation_area_activity_dispersed_camping">Spredt camping</string>
+    <string name="poi_us_maps_recreation_area_activity_group_camping">Gruppecamping</string>
 </resources>
