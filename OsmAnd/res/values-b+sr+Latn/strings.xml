@@ -5738,4 +5738,16 @@
     <string name="travel_topics">Teme putovanja</string>
     <string name="wall_height">Visina zida</string>
     <string name="rendering_value_dark_orange_name">Tamnonarančasta</string>
+    <string name="clear_all_key_shortcuts_summary">Sva dodeljivanja tastera za izabrani tip će biti uklonjena.</string>
+    <string name="no_assigned_keys_desc">Izaberite akciju i dodelite taster dodirom na dugme \'Dodaj\'.</string>
+    <string name="no_assigned_keys">Nema dodeljenja tastera</string>
+    <string name="new_key_assignment">Novo dodeljenje tastera</string>
+    <string name="key_name_pattern">Taster \"%1$s\"</string>
+    <string name="clear_key_assignment_summary">Dodeljivanje tastera za izabranu radnju će biti obrisano.</string>
+    <string name="clear_all_key_shortcuts">Izbriši sve prečica tastera</string>
+    <string name="shared_string_key">Taster</string>
+    <string name="key_assignment_add_key">Dodaj taster</string>
+    <string name="key_assignment_add_action">Dodaj akciju</string>
+    <string name="action_icon">Dodaj ikonu</string>
+    <string name="assigned_keys">Dodeljenja tastera</string>
 </resources>
