@@ -94,44 +94,46 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 
 	@NonNull
 	public List<TrackItem> getFlattenedTrackItems() {
-		if (this.flattenedTrackItems == null) {
-			this.flattenedTrackItems = new ArrayList<>();
+		if (flattenedTrackItems == null) {
+			flattenedTrackItems = new ArrayList<>();
 			Deque<TrackFolder> stack = new ArrayDeque<>();
 			stack.push(this);
 			while (!stack.isEmpty()) {
 				TrackFolder current = stack.pop();
-				this.flattenedTrackItems.addAll(current.getTrackItems());
-				for (TrackFolder folder : current.getSubFolders()) {
-                			stack.push(folder);
-				}
-			}
-    		}
-		return this.flattenedTrackItems;
-	}
-
-	@NonNull
-	public List<TrackFolder> getFlattenedSubFolders() {
-		if (this.flattenedSubFolders == null) {
-			this.flattenedSubFolders = new ArrayList<>();
-			Deque<TrackFolder> stack = new ArrayDeque<>();
-			stack.push(this);
-			while (!stack.isEmpty()) {
-				TrackFolder current = stack.pop();
-				this.flattenedSubFolders.addAll(current.getSubFolders());
+				flattenedTrackItems.addAll(current.getTrackItems());
 				for (TrackFolder folder : current.getSubFolders()) {
 					stack.push(folder);
 				}
 			}
 		}
-		return this.flattenedSubFolders;
+		return flattenedTrackItems;
+	}
+
+	@NonNull
+	public List<TrackFolder> getFlattenedSubFolders() {
+		if (flattenedSubFolders == null) {
+			flattenedSubFolders = new ArrayList<>();
+			Deque<TrackFolder> stack = new ArrayDeque<>();
+			stack.push(this);
+			while (!stack.isEmpty()) {
+				TrackFolder current = stack.pop();
+				flattenedSubFolders.addAll(current.getSubFolders());
+				for (TrackFolder folder : current.getSubFolders()) {
+					stack.push(folder);
+				}
+			}
+		}
+		return flattenedSubFolders;
 	}
 
 	@NonNull
 	public TrackFolderAnalysis getFolderAnalysis() {
-		if (folderAnalysis == null) {
-			folderAnalysis = new TrackFolderAnalysis(this);
+		TrackFolderAnalysis analysis = folderAnalysis;
+		if (analysis == null) {
+			analysis = new TrackFolderAnalysis(this);
+			folderAnalysis = analysis;
 		}
-		return folderAnalysis;
+		return analysis;
 	}
 
 	public long getLastModified() {
