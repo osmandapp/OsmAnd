@@ -1254,7 +1254,7 @@
     <string name="rendering_attr_showAccess_name">Behajtási és útdíjjal kapcsolatos korlátozások megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
-    <string name="rendering_attr_showCycleRoutes_name">Kerékpárutak</string>
+    <string name="rendering_attr_showCycleRoutes_name">Kerékpáros útvonalak</string>
     <string name="home">Irányítópult</string>
     <string name="lang_fa">perzsa</string>
     <string name="rendering_attr_coloredBuildings_name">Épületek színezése típus szerint</string>
@@ -1763,7 +1763,7 @@
     <string name="use_drawer_btn">Menü használata</string>
     <string name="dashboard_or_drawer_title">Vezérlés irányítópulttal vagy menüvel</string>
     <string name="dashboard_or_drawer_description">Választhat, hogy az alkalmazást elsősorban a rugalmas irányítópulttal vagy egy statikus menüvel kívánja vezérelni. A döntés bármikor megváltoztatható az irányítópult beállításaiban.</string>
-    <string name="shared_string_near">Közelben</string>
+    <string name="shared_string_near">ennek közelében:</string>
     <string name="shared_string_hide">Elrejtés</string>
     <string name="av_video_quality_low">Legalacsonyabb minőség</string>
     <string name="av_video_quality_high">Legmagasabb minőség</string>
@@ -2041,7 +2041,7 @@
     <string name="rendering_value_light_brown_name">Világosbarna</string>
     <string name="rendering_value_dark_brown_name">Sötétbarna</string>
     <string name="rendering_attr_contourColorScheme_name">Szintvonalak színsémája</string>
-    <string name="rendering_attr_surfaceIntegrity_name">Útfelület épsége</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Útfelszín épsége</string>
     <string name="search_hint">Város, cím, érdekes pont (POI) nevének megadása</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
@@ -2608,7 +2608,7 @@
     <string name="nautical_render_descr">Hajózási navigációhoz. Főbb tulajdonságok: bóják, világítótornyok, folyók, tengeri útvonalak és jelzések, kikötők, hajózási jelzések, mélységvonalak.</string>
     <string name="ski_map_render_descr">Síeléshez. Kiemeli a sípályákat, a felvonókat, a sífutónyomokat stb. A másodlagos térképobjektumokat elhalványítja.</string>
     <string name="light_rs_render_descr">Egyszerű vezetési stílus. Kellemes éjszakai mód, kontrasztos narancsszínű utak, elhalványított másodlagos térképobjektumok, topográfiai jellemzők, mint pl. szintvonalak.</string>
-    <string name="topo_render_descr">Túrázáshoz és természetben történő kerékpározáshoz. Szabad téren is olvasható. Kontrasztos utak és természeti objektumok, különböző úttípusok, speciális szintvonalbeállítások, további részletek. A felület sértetlenségének kiigazítása láthatóbbá teszi az útminőséget. Éjszakai mód nincs.</string>
+    <string name="topo_render_descr">Túrázáshoz és természetben történő kerékpározáshoz. Szabad téren is olvasható. Kontrasztos utak és természeti objektumok, különböző úttípusok, speciális szintvonalbeállítások, további részletek. Ha beállítjuk az útfelszín épségének megjelenítését, akkor láthatóvá válik az út minősége. Éjszakai mód nincs.</string>
     <string name="touring_view_render_descr">Turisztikai stílus erős kontraszttal és a legtöbb részlettel. Tartalmazza az OsmAnd alapértelmezett stílus össze beállítását, miközben megjeleníti a lehető legtöbb részletet, különösen utakat, ösvényeket és más utazási útvonalakat. A „Turistaatlasz-szerű” stílus világos különbséget tesz az úttípusok között. Alkalmas nappali, éjszakai és szabad téri használatra is.</string>
     <string name="default_render_descr">Általános felhasználású stílus. A sűrű városok világosan jelennek meg. Jellemzői az útvonalak, a felszínminőség, a használati korlátozások, útszámozások, ösvények SAC/CAI-skála szerint, vadvízi sportlétesítmények, topográfiai jellemzők, mint pl. szintvonalak.</string>
     <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
@@ -4052,9 +4052,9 @@
     <string name="user_points">Felhasználói pontok</string>
     <string name="output">Kimenet</string>
     <string name="srtm_download_single_help_message">Kérjük, válassza ki a mértékegységet. A formátum módosításához újra le kell töltenie a fájlt.</string>
-    <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonal magasságát. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
+    <string name="srtm_download_list_help_message">Az OsmAnd méterben és lábban adja meg a szintvonalak közötti távolságot. A mértékegység módosításához újra le kell töltenie a fájlt.</string>
     <string name="shared_string_feet">láb</string>
-    <string name="srtm_unit_format">Szintvonalak egységváltozata</string>
+    <string name="srtm_unit_format">Szintvonalak mértékegysége</string>
     <string name="route_line_use_gradient_coloring">Az útvonal a lejtési viszonyok szerint van színezve.</string>
     <string name="shared_string_min_height">Min. magasság</string>
     <string name="shared_string_max_height">Max. magasság</string>
@@ -4876,7 +4876,7 @@
     <string name="empty_screen_weather_wind_layer">Kapcsolja be a szél réteg megtekintéséhez a térképen.</string>
     <string name="empty_screen_weather_precipitation_layer">Kapcsolja be a csapadék réteg megtekintéséhez a térképen.</string>
     <string name="empty_screen_weather_temperature_layer">Kapcsolja be a hőmérséklet réteg megtekintéséhez a térképen.</string>
-    <string name="shared_string_contours">Kontúrok</string>
+    <string name="shared_string_contours">Szintvonalak</string>
     <string name="explore_weather_forecast">Időjárás-előrejelzés megtekintése.</string>
     <string name="weather_precip_in">hüvelyk</string>
     <string name="weather_precip_mm">mm</string>
@@ -5267,7 +5267,7 @@
 \n
 \n • Új vonat profil, vasúti útvonalak megtervezéséhez
 \n
-\n • Kontúrvonalak minden térképforráshoz
+\n • Szintvonalak minden térképforráshoz
 \n
 \n • Kibővitett lista a külső billentyűzetek alapértelmezett műveleteihez
 \n
@@ -5738,7 +5738,7 @@
     <string name="shared_string_key">Billentyű</string>
     <string name="no_assigned_keys">Nincsenek hozzárendelt billentyűk</string>
     <string name="clear_all_key_shortcuts_summary">A kiválasztott típushoz tartozó összes billentyű-hozzárendelés el lesz távolítva.</string>
-    <string name="key_name_pattern">\"%1$s\" billentyű</string>
+    <string name="key_name_pattern">%1$s billentyű</string>
     <string name="clear_key_assignment_summary">A kiválasztott művelethez tartozó billentyű-hozzárendelés törlődik.</string>
     <string name="key_assignment_add_key">Billentyű hozzáadása</string>
     <string name="action_icon">Műveletikon</string>
