@@ -12,6 +12,8 @@
 -->
 
     <string name="rendering_value_dark_orange_name">Dark orange</string>
+    <string name="user_palette">User palette</string>
+    <string name="shared_string_colors">Colors</string>
     <string name="wall_height">Wall height</string>
     <string name="change_terrain_color_scheme">Change Terrain color scheme</string>
     <string name="play_weather_forecast">Play weather forecast</string>
