@@ -5741,4 +5741,8 @@
     <string name="new_key_assignment">Asignación de nuevas teclas</string>
     <string name="key_assignment_add_key">Añadir tecla</string>
     <string name="key_assignment_add_action">Añadir una acción</string>
+    <string name="shared_string_key">Tecla</string>
+    <string name="key_name_pattern">Tecla «%1$s»</string>
+    <string name="action_icon">Icono con la acción</string>
+    <string name="assigned_keys">Teclas asignadas</string>
 </resources>
