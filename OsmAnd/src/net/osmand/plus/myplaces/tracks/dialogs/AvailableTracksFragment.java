@@ -226,7 +226,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 			}
 		}
 		if (!isTracksEmpty && rootFolder != null) {
-			items.add(new TrackFolderAnalysis(rootFolder));
+			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;
 	}
