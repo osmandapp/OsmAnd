@@ -45,7 +45,6 @@ import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bytehamster.lib.preferencesearch.BaseSearchPreferenceFragment;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -82,6 +81,8 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import de.KnollFrank.lib.preferencesearch.BaseSearchPreferenceFragment;
 
 public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange, OnPreferenceChanged {

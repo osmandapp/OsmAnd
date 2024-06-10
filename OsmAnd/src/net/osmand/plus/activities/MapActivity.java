@@ -16,7 +16,6 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,8 +24,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -38,13 +35,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceFragmentCompat.OnPreferenceStartFragmentCallback;
-
-import com.bytehamster.lib.preferencesearch.Navigation;
-import com.bytehamster.lib.preferencesearch.PreferenceFragments;
-import com.bytehamster.lib.preferencesearch.SearchConfiguration;
-import com.bytehamster.lib.preferencesearch.SearchPreferenceResult;
-import com.bytehamster.lib.preferencesearch.SearchPreferenceResultListener;
-import com.bytehamster.lib.preferencesearch.common.UIUtils;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -159,7 +149,7 @@ import java.util.concurrent.Executors;
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
         IRouteInformationListener, AMapPointUpdateListener, MapMarkerChangedListener,
         OnDrawMapListener, OsmAndAppCustomizationListener, LockUIAdapter,
-        OnPreferenceStartFragmentCallback, SearchPreferenceResultListener {
+        OnPreferenceStartFragmentCallback {
 
     public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
     public static final String INTENT_PARAMS = "intent_prarams";
@@ -251,7 +241,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
         trackDetailsMenu.setMapActivity(this);
 
         super.onCreate(savedInstanceState);
-        _setContentView(R.layout.main);
+        setContentView(R.layout.main);
         enterToFullScreen();
         // Navigation Drawer
         AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
@@ -1644,44 +1634,5 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
     @Override
     public void onInAppPurchaseItemPurchased(String sku) {
         getMapLayers().getRouteLayer().resetColorAvailabilityCache();
-    }
-
-    @IdRes
-    private static final int FRAGMENT_CONTAINER_VIEW = R.id.fragmentContainer;
-
-    @IdRes
-    private int dummyFragmentContainerViewId = View.NO_ID;
-
-    @Override
-    public void onSearchResultClicked(@NonNull final SearchPreferenceResult result) {
-        Navigation.showPreferenceScreenAndHighlightPreference(
-                result.getPreferenceFragmentClass().getName(),
-                result.getKey(),
-                this,
-                FRAGMENT_CONTAINER_VIEW);
-    }
-
-    private void _setContentView(final @LayoutRes int resource) {
-        final Pair<View, Integer> contentViewAndDummyFragmentContainerViewId =
-                UIUtils.createContentViewAndDummyFragmentContainerViewId(
-                        resource,
-                        this);
-        dummyFragmentContainerViewId = contentViewAndDummyFragmentContainerViewId.second;
-        setContentView(contentViewAndDummyFragmentContainerViewId.first);
-    }
-
-    public SearchConfiguration createSearchConfiguration(final PreferenceFragmentCompat root) {
-        final SearchConfiguration searchConfiguration = new SearchConfiguration();
-        searchConfiguration.setActivity(this);
-        searchConfiguration.setFragmentContainerViewId(FRAGMENT_CONTAINER_VIEW);
-        searchConfiguration.setDummyFragmentContainerViewId(dummyFragmentContainerViewId);
-        searchConfiguration.setPreferenceFragments(
-                PreferenceFragments.getPreferenceFragments(
-                        root,
-                        this,
-                        dummyFragmentContainerViewId));
-        searchConfiguration.setBreadcrumbsEnabled(false);
-        searchConfiguration.setFuzzySearchEnabled(false);
-        return searchConfiguration;
     }
 }
