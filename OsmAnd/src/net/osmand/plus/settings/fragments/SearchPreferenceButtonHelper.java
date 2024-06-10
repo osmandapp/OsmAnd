@@ -31,13 +31,14 @@ class SearchPreferenceButtonHelper {
 
     private void showSearchPreferenceFragment() {
         final SearchPreferenceFragments searchPreferenceFragments =
-                new SearchPreferenceFragments(createSearchConfiguration());
+                new SearchPreferenceFragments(
+                        createSearchConfiguration(),
+                        baseSettingsFragment.getActivity().getSupportFragmentManager());
         searchPreferenceFragments.showSearchPreferenceFragment();
     }
 
     private SearchConfiguration createSearchConfiguration() {
         return new SearchConfiguration(
-                Optional.of(baseSettingsFragment.getMapActivity()),
                 fragmentContainerViewId,
                 Optional.empty(),
                 baseSettingsFragment.getClass());
