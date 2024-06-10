@@ -5007,7 +5007,7 @@
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
     <string name="last_synchronized">Ultima sincronizzazione</string>
-    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa: in basso per la direzione del movimento, al centro per il resto.</string>
+    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa: in basso per la direzione del movimento, al centro per tutte le altre.</string>
     <string name="sound_beep_complex_loud">Bip: complesso e forte</string>
     <string name="sound_beep_simple_loud">Bip: semplice e forte</string>
     <string name="shared_string_kilograms">chilogrammi</string>
@@ -5618,7 +5618,7 @@
     <string name="shared_string_speedometer">Tachimetro</string>
     <string name="help_article_setup_a_route_name">Imposta un percorso</string>
     <string name="speed_limit_warning">Avviso limite di velocità</string>
-    <string name="speedometer_description">Mostra la velocità attuale come riportata dal GPS</string>
+    <string name="speedometer_description">Mostra la tua velocità attuale come riportata dal GPS</string>
     <string name="rendering_attr_padusDisplayMode_description">Per tipo di accesso o nome del gestore</string>
     <string name="rendering_value_access_name">Per tipo di accesso</string>
     <string name="rendering_value_managerName_name">Per nome del gestore</string>
@@ -5720,4 +5720,18 @@
     <string name="disable_map_layers_descr">Disabilita tutti i livelli della mappa sopra la mappa vettoriale (è necessario riavviare).</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="travel_topics">Argomenti di viaggio</string>
+    <string name="wall_height">Altezza della parete</string>
+    <string name="rendering_value_dark_orange_name">Arancione scuro</string>
+    <string name="change_terrain_color_scheme">Cambia la combinazione dei colori del terreno</string>
+    <string name="clear_key_assignment_summary">L\'assegnazione dei tasti per l\'azione selezionata verrà cancellata.</string>
+    <string name="key_assignment_add_key">Aggiungi tasto</string>
+    <string name="shared_string_key">Tasto</string>
+    <string name="clear_all_key_shortcuts_summary">Tutte le assegnazioni dei tasti per il tipo selezionato verranno rimossi.</string>
+    <string name="new_key_assignment">Nuova assegnazione dei tasti</string>
+    <string name="clear_all_key_shortcuts">Cancella tutte le scorciatoie da tastiera</string>
+    <string name="no_assigned_keys">Nessun tasto assegnato</string>
+    <string name="key_name_pattern">Tasto \"%1$s\"</string>
+    <string name="assigned_keys">Tasti assegnati</string>
+    <string name="key_assignment_add_action">Aggiungi azione</string>
+    <string name="no_assigned_keys_desc">Seleziona un\'azione e assegna un tasto toccando il pulsante \"Aggiungi\".</string>
 </resources>
