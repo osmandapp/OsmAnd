@@ -146,7 +146,7 @@ public class TracksSelectionFragment extends BaseTrackFolderFragment implements 
 			} else {
 				items.addAll(trackItems);
 				if (shouldShowFolderStats()) {
-					items.add(new TrackFolderAnalysis(selectedFolder));
+					items.add(selectedFolder.getFolderAnalysis());
 				}
 			}
 			return items;
