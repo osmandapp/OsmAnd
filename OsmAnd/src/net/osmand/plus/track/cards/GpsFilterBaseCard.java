@@ -99,7 +99,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 	}
 
 	private void saveAsCopy() {
-		String sourceFilePath = filteredSelectedGpxFile.getGpxFile().path;
+		String sourceFilePath = filteredSelectedGpxFile.getGpxFile().getPath();
 		String sourceFileNameWithExtension = Algorithms.getFileWithoutDirs(sourceFilePath);
 		String sourceFileName = Algorithms.getFileNameWithoutExtension(sourceFileNameWithExtension);
 		String destFileName = sourceFileName + "-copy";
@@ -113,15 +113,15 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 		GpxFile newGpxFile = filteredSelectedGpxFile.getGpxFile();
 		filteredSelectedGpxFile.getSourceSelectedGpxFile().setGpxFile(newGpxFile, app);
 
-		File outFile = new File(newGpxFile.path);
+		File outFile = new File(newGpxFile.getPath());
 
 		SaveGpxHelper.saveGpx(outFile, newGpxFile, errorMessage -> {
 			String toastMessage = errorMessage == null
-					? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
+					? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.getPath())
 					: errorMessage.getMessage();
 			app.showToastMessage(toastMessage);
 			if (target instanceof SaveIntoFileListener) {
-				((SaveIntoFileListener) target).onSavedIntoFile(newGpxFile.path);
+				((SaveIntoFileListener) target).onSavedIntoFile(newGpxFile.getPath());
 			}
 		});
 
@@ -179,7 +179,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard {
 	}
 
 	private boolean isSourceFileSaved() {
-		return new File(filteredSelectedGpxFile.getGpxFile().path).exists();
+		return new File(filteredSelectedGpxFile.getGpxFile().getPath()).exists();
 	}
 
 	public abstract void onFinishFiltering();

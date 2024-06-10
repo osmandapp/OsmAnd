@@ -49,8 +49,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.gpx.GPXFile;
 import net.osmand.osm.OsmRouteType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -71,6 +70,7 @@ import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.wikivoyage.data.TravelGpx;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.router.network.NetworkRouteSelector;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -440,8 +440,8 @@ public class MapSelectionHelper {
 		TravelGpx travelGpx = app.getTravelHelper().searchGpx(result.pointLatLon, filter, object.getTagValue("ref"));
 		if (travelGpx != null && isUniqueGpx(result.selectedObjects, travelGpx)) {
 			WptPt selectedPoint = new WptPt();
-			selectedPoint.lat = result.pointLatLon.getLatitude();
-			selectedPoint.lon = result.pointLatLon.getLongitude();
+			selectedPoint.setLat(result.pointLatLon.getLatitude());
+			selectedPoint.setLon(result.pointLatLon.getLongitude());
 			SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(null, selectedPoint);
 			result.selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), mapLayers.getTravelSelectionLayer());
 		}
@@ -511,7 +511,7 @@ public class MapSelectionHelper {
 	                                   @NonNull NetworkRouteSelectorFilter selectorFilter) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(readers, selectorFilter, null);
-		Map<RouteKey, GpxFile> routes = new LinkedHashMap<>();
+		Map<RouteKey, GPXFile> routes = new LinkedHashMap<>();
 		try {
 			routes = routeSelector.getRoutes(rect, false, null);
 		} catch (Exception e) {

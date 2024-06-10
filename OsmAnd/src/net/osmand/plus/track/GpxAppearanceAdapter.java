@@ -203,7 +203,7 @@ public class GpxAppearanceAdapter extends ArrayAdapter<AppearanceListItem> {
 				}
 			}
 		}
-		return GpxUtilities.parseColor(colorName, defaultColor);
+		return GpxUtilities.INSTANCE.parseColor(colorName, defaultColor);
 	}
 
 	public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {

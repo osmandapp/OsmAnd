@@ -5,6 +5,8 @@ import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
 import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
 import net.osmand.shared.gpx.GpxUtilities.WptPt
+import net.osmand.shared.routing.RouteColorize
+import net.osmand.shared.routing.RouteColorize.ColorizationType
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils
 
@@ -192,6 +194,14 @@ class GpxTrackAnalysis {
 
 	fun isHdopSpecified(): Boolean {
 		return minHdop > 0
+	}
+
+	fun isColorizationTypeAvailable(colorizationType: ColorizationType): Boolean {
+		return when (colorizationType) {
+			ColorizationType.SPEED -> isSpeedSpecified()
+			ColorizationType.ELEVATION, ColorizationType.SLOPE -> isElevationSpecified()
+			else -> true
+		}
 	}
 
 	fun setLatLonStart(latitude: Double, longitude: Double) {

@@ -41,7 +41,7 @@ public class SelectFavouriteGroupBottomSheet extends SelectPointsCategoryBottomS
 		FavouritesHelper helper = app.getFavoritesHelper();
 		for (FavoriteGroup favoriteGroup : helper.getFavoriteGroups()) {
 			PointsGroup pointsGroup = favoriteGroup.toPointsGroup(app);
-			pointsGroups.put(pointsGroup.name, pointsGroup);
+			pointsGroups.put(pointsGroup.getName(), pointsGroup);
 		}
 	}
 

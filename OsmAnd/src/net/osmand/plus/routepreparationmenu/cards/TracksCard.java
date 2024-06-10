@@ -1,25 +1,23 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.IndexConstants;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.track.data.GPXInfo;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 
 import java.io.File;
 import java.text.Collator;
@@ -50,8 +48,8 @@ public class TracksCard extends MapBaseCard {
 
 		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		for (GpxFile gpx : gpxFiles) {
-			File file = new File(gpx.path);
-			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : file.getName();
+			File file = new File(gpx.getPath());
+			String fileName = gpx.getPath().startsWith(gpxDir) ? gpx.getPath().substring(gpxDir.length() + 1) : file.getName();
 			gpxItems.add(new GpxItem(GpxUiHelper.getGpxTitle(file.getName()), gpx, new GPXInfo(fileName, file)));
 		}
 		Collator collator = Collator.getInstance();

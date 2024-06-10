@@ -13,11 +13,12 @@ import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.SplitMetric.DistanceSplitMetric
 import net.osmand.shared.gpx.SplitMetric.TimeSplitMetric
 import net.osmand.shared.io.KFile
+import net.osmand.shared.routing.RouteColorize.ColorizationType
+import net.osmand.shared.util.IProgress
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KAlgorithms.hash
-import net.osmand.shared.util.IProgress
-import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.KMapUtils
+import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import net.osmand.shared.util.StringBundle
 import net.osmand.shared.util.StringBundleXmlReader
@@ -371,6 +372,23 @@ object GpxUtilities {
 
 		fun setAmenityOriginName(originName: String) {
 			getExtensionsToWrite()[AMENITY_ORIGIN_EXTENSION] = originName
+		}
+
+		fun getColor(type: ColorizationType): Int {
+			return when (type) {
+				ColorizationType.SPEED -> speedColor
+				ColorizationType.ELEVATION -> altitudeColor
+				else -> slopeColor
+			}
+		}
+
+		fun setColor(type: ColorizationType, color: Int) {
+			when (type) {
+				ColorizationType.SPEED -> speedColor = color
+				ColorizationType.ELEVATION -> altitudeColor = color
+				ColorizationType.SLOPE -> slopeColor = color
+				else -> {}
+			}
 		}
 
 		fun getBackgroundType(): String? {

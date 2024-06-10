@@ -46,7 +46,7 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 
 	private void mergeFavorites() {
 		String defCategory = forceImport ? fileName : "";
-		List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPoints(), defCategory);
+		List<FavouritePoint> favourites = wptAsFavourites(app, gpxFile.getPointsList(), defCategory);
 		checkDuplicateNames(favourites);
 
 		FavouritesHelper favoritesHelper = app.getFavoritesHelper();
@@ -109,10 +109,10 @@ public class FavoritesImportTask extends BaseImportAsyncTask<Void, Void, GpxFile
 	                                                   @NonNull String defaultCategory) {
 		List<FavouritePoint> favourites = new ArrayList<>();
 		for (WptPt point : points) {
-			if (Algorithms.isEmpty(point.name)) {
-				point.name = app.getString(R.string.shared_string_waypoint);
+			if (Algorithms.isEmpty(point.getName())) {
+				point.setName(app.getString(R.string.shared_string_waypoint));
 			}
-			String category = point.category != null ? point.category : defaultCategory;
+			String category = point.getCategory() != null ? point.getCategory() : defaultCategory;
 			favourites.add(FavouritePoint.fromWpt(point, category));
 		}
 		return favourites;

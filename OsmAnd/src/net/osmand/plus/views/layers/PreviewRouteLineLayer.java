@@ -1,5 +1,11 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
+import static net.osmand.plus.views.layers.geometry.RouteGeometryWay.MIN_COLOR_SQUARE_DISTANCE;
+import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
+import static net.osmand.render.RenderingRuleStorageProperties.TAG;
+import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
@@ -12,7 +18,11 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.LayerDrawable;
 
-import net.osmand.ColorPalette;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
@@ -31,8 +41,8 @@ import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.shared.ColorPalette;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -41,17 +51,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.RENDERER_PREFERENCE_PREFIX;
-import static net.osmand.plus.views.layers.geometry.RouteGeometryWay.MIN_COLOR_SQUARE_DISTANCE;
-import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
-import static net.osmand.render.RenderingRuleStorageProperties.TAG;
-import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
 
 public class PreviewRouteLineLayer extends BaseRouteLayer {
 
@@ -199,7 +198,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 
 	private void fillAltitudeGradientArrays(List<GeometryWayPoint> points) {
-		int[] colors = ColorPalette.COLORS;
+		int[] colors = ColorPalette.Companion.getCOLORS();
 		GeometryGradientWayStyle<?> style = null;
 		for (int i = 1; i < points.size(); i++) {
 			style = previewLineGeometry.getGradientWayStyle();
@@ -215,7 +214,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 	private void fillSlopeGradientArrays(List<GeometryWayPoint> points) {
 		List<Integer> palette = new ArrayList<>();
-		for (int color : ColorPalette.SLOPE_COLORS) {
+		for (int color : ColorPalette.Companion.getSLOPE_COLORS()) {
 			palette.add(color);
 		}
 		List<Double> gradientLengthsRatio = Arrays.asList(0.145833, 0.130209, 0.291031);
@@ -234,7 +233,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				style.nextColor = colors.get(i);
 			} else {
 				double coeff = currDist / (currDist + nextDist);
-				style.nextColor = ColorPalette.getIntermediateColor(colors.get(i - 1), colors.get(i + 1), coeff);
+				style.nextColor = ColorPalette.Companion.getIntermediateColor(colors.get(i - 1), colors.get(i + 1), coeff);
 			}
 		}
 		points.get(points.size() - 1).style = points.get(points.size() - 2).style;
@@ -433,7 +432,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		if (index == 0) {
 			return colors[0];
 		} else if (index > 0 && index < colors.length) {
-			return ColorPalette.getIntermediateColor(colors[index - 1], colors[index], coeff);
+			return ColorPalette.Companion.getIntermediateColor(colors[index - 1], colors[index], coeff);
 		} else if (index == colors.length) {
 			return colors[index - 1];
 		}
@@ -526,7 +525,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 				GeometryGradientWayStyle<?> gradientStyle = (GeometryGradientWayStyle<?>) (style);
 				int startColor = gradientStyle.currColor;
 				int endColor = gradientStyle.nextColor;
-				lineColor = ColorPalette.getIntermediateColor(startColor, endColor, offset);
+				lineColor = ColorPalette.Companion.getIntermediateColor(startColor, endColor, offset);
 			} else {
 				 lineColor = style.getColor(getRouteLineColor());
 			}

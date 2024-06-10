@@ -19,7 +19,7 @@ class AndroidLogger(private val tag: String) : Logger {
 		Log.w(tag, message)
 	}
 
-	override fun error(message: String, throwable: Throwable?) {
+	override fun error(message: String?, throwable: Throwable?) {
 		Log.e(tag, message, throwable)
 	}
 }

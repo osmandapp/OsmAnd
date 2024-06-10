@@ -274,7 +274,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			point = gpxFile.findPointToShow();
 		}
 		if (point != null) {
-			settings.setMapLocationToShow(point.lat, point.lon, settings.getLastKnownMapZoom());
+			settings.setMapLocationToShow(point.getLat(), point.getLon(), settings.getLastKnownMapZoom());
 		}
 		app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 		MapActivity.launchMapActivityMoveToTop(activity);

@@ -20,6 +20,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -263,12 +264,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			QuadRect rect = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
 
 			if (gpxFile != null) {
-				QuadRect gpxRect = gpxFile.getRect();
+				KQuadRect gpxRect = gpxFile.getRect();
 
-				rect.left = Math.min(rect.left, gpxRect.left);
-				rect.right = Math.max(rect.right, gpxRect.right);
-				rect.top = Math.max(rect.top, gpxRect.top);
-				rect.bottom = Math.min(rect.bottom, gpxRect.bottom);
+				rect.left = Math.min(rect.left, gpxRect.getLeft());
+				rect.right = Math.max(rect.right, gpxRect.getRight());
+				rect.top = Math.max(rect.top, gpxRect.getTop());
+				rect.bottom = Math.min(rect.bottom, gpxRect.getBottom());
 			}
 
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();

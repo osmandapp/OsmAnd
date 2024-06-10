@@ -15,8 +15,8 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
 
 public class ColoringStyleDetailsCardController implements IColoringStyleDetailsController {
 
@@ -92,8 +92,8 @@ public class ColoringStyleDetailsCardController implements IColoringStyleDetails
 		if (isLegendDataSpecified() && coloringType.toGradientScaleType() != null) {
 			ApplicationMode appMode = app.getSettings().getApplicationMode();
 			ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
-			double min = RouteColorize.getMinValue(colorizationType, analysis);
-			double max = RouteColorize.getMaxValue(colorizationType, analysis, min, appMode.getMaxSpeed());
+			double min = RouteColorize.Companion.getMinValue(colorizationType, analysis);
+			double max = RouteColorize.Companion.getMaxValue(colorizationType, analysis, min, appMode.getMaxSpeed());
 			return new CharSequence[] { formatValue(min), formatValue(max) };
 		} else if (coloringType == ColoringType.SPEED) {
 			return new CharSequence[] {

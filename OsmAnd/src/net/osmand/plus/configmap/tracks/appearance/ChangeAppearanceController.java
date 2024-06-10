@@ -136,7 +136,7 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@NonNull
 	private AppearanceData buildAppearanceData() {
 		AppearanceData data = new AppearanceData();
-		for (GpxParameter parameter : GpxParameter.getAppearanceParameters()) {
+		for (GpxParameter parameter : GpxParameter.Companion.getAppearanceParameters()) {
 			data.setParameter(parameter, null);
 		}
 		return data;

@@ -139,7 +139,7 @@ class TrackPointsAdapter extends OsmandBaseExpandableListAdapter {
 		WptPt point = getChild(groupPosition, childPosition);
 
 		TextView title = view.findViewById(R.id.title);
-		title.setText(point.name);
+		title.setText(point.getName());
 
 		CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 		compoundButton.setChecked(selectedPoints.contains(point));

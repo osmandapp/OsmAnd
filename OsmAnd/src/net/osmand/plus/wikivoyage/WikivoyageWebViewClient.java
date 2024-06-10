@@ -72,7 +72,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		} else if (url.startsWith(PREFIX_GEO)) {
 			if (article != null && article.getGpxFile() != null) {
 				GpxFile gpxFile = article.getGpxFile();
-				List<WptPt> points = gpxFile.getPoints();
+				List<WptPt> points = gpxFile.getPointsList();
 				String coordinates = url.replace(PREFIX_GEO, "");
 				WptPt gpxPoint = WikivoyageUtils.findNearestPoint(points, coordinates);
 
@@ -80,7 +80,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
 							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.name),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.getName()),
 							false,
 							gpxPoint);
 
@@ -92,7 +92,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 					fragmentManager.popBackStackImmediate();
 
 					File path = app.getTravelHelper().createGpxFile(article);
-					gpxFile.getPath() = path.getAbsolutePath();
+					gpxFile.setPath(path.getAbsolutePath());
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxFile);
 					MapActivity.launchMapActivityMoveToTop(activity);
 				}

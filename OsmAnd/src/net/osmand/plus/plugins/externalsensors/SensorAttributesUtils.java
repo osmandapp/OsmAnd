@@ -1,12 +1,12 @@
 package net.osmand.plus.plugins.externalsensors;
 
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_CADENCE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_SPEED;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
-import static net.osmand.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_BIKE_POWER;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_CADENCE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_HEART_RATE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_SPEED;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_A;
+import static net.osmand.shared.gpx.PointAttributes.SENSOR_TAG_TEMPERATURE_W;
 import static net.osmand.util.CollectionUtils.equalsToAny;
 
 import android.util.Pair;
@@ -20,7 +20,7 @@ import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
-import net.osmand.gpx.PointAttributes;
+import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.charts.GPXDataSetAxisType;
@@ -156,7 +156,7 @@ public class SensorAttributesUtils {
 		YAxis yAxis = ChartUtils.getYAxis(chart, textColor, useRightAxis);
 		yAxis.setAxisMinimum(0f);
 
-		List<Entry> values = ChartUtils.getPointAttributeValues(graphType.getDataKey(), analysis.pointAttributes, axisType, divX, mulY, divY, calcWithoutGaps);
+		List<Entry> values = ChartUtils.getPointAttributeValues(graphType.getDataKey(), analysis.getPointAttributes(), axisType, divX, mulY, divY, calcWithoutGaps);
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", graphType, axisType, !useRightAxis);
 
 		String format = null;

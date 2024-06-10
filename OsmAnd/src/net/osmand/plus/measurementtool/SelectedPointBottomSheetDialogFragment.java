@@ -348,7 +348,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@NonNull
 	private String getTitle() {
 		int pos = editingCtx.getSelectedPointPosition();
-		String pointName = editingCtx.getPoints().get(pos).name;
+		String pointName = editingCtx.getPoints().get(pos).getName();
 		if (!TextUtils.isEmpty(pointName)) {
 			return pointName;
 		}
@@ -368,7 +368,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		int pos = editingCtx.getSelectedPointPosition();
 		List<WptPt> points = editingCtx.getPoints();
 		WptPt pt = points.get(pos);
-		String pointDesc = pt.desc;
+		String pointDesc = pt.getDesc();
 		if (!TextUtils.isEmpty(pointDesc)) {
 			description.append(pointDesc);
 		} else if (pos < 1 && before) {
@@ -377,12 +377,12 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			float distance = getTrimmedDistance(editingCtx, before);
 			description.append(OsmAndFormatter.getFormattedDistance(distance, app));
 		}
-		double elevation = pt.ele;
+		double elevation = pt.getEle();
 		if (!Double.isNaN(elevation)) {
 			description.append("  ").append((getString(R.string.altitude)).charAt(0)).append(": ");
 			description.append(OsmAndFormatter.getFormattedAlt(elevation, app));
 		}
-		float speed = (float) pt.speed;
+		float speed = (float) pt.getSpeed();
 		if (speed != 0) {
 			description.append("  ").append((getString(R.string.shared_string_speed)).charAt(0)).append(": ");
 			description.append(OsmAndFormatter.getFormattedSpeed(speed, app));
@@ -412,7 +412,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 			boolean routeSegmentBuilt = segment != null && segment.getDistance() > 0;
 			dist += routeSegmentBuilt
 					? segment.getDistance()
-					: MapUtils.getDistance(first.lat, first.lon, second.lat, second.lon);
+					: MapUtils.getDistance(first.getLat(), first.getLon(), second.getLat(), second.getLon());
 		}
 
 		return dist;

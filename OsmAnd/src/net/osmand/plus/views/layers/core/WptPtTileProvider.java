@@ -146,7 +146,7 @@ public class WptPtTileProvider extends interface_MapTiledCollectionProvider {
    @Override
    public String getCaption(int index) {
       MapLayerData data = index < mapLayerDataList.size() ? mapLayerDataList.get(index) : null;
-      return data != null ? data.wptPt.name : "";
+      return data != null ? data.wptPt.getName() : "";
    }
 
    @Override

@@ -12,8 +12,10 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
+import net.osmand.gpx.GPXUtilities;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
@@ -917,7 +919,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			routePoints.add(points.get(points.size() - 1));
 		}
 
-		RouteImporter routeImporter = new RouteImporter(segment, routePoints);
+		GPXUtilities.TrkSegment jTrkSegment = SharedUtil.jTrkSegment(segment);
+		List<GPXUtilities.WptPt> jRoutePoints = SharedUtil.jWptPtList(routePoints);
+		RouteImporter routeImporter = new RouteImporter(jTrkSegment, jRoutePoints);
 		List<RouteSegmentResult> routeSegments = routeImporter.importRoute();
 
 		for (int i = 0; i < routePoints.size() - 1; i++) {
@@ -1169,8 +1173,8 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		return params;
 	}
 
-	public List<List<WptPt>> getRoutePoints() {
-		List<List<WptPt>> res = new ArrayList<>();
+	public List<List<GPXUtilities.WptPt>> getRoutePoints() {
+		List<List<GPXUtilities.WptPt>> res = new ArrayList<>();
 		List<WptPt> plainPoints = new ArrayList<>(before.getPoints());
 		plainPoints.addAll(after.getPoints());
 		List<WptPt> points = new ArrayList<>();
@@ -1178,13 +1182,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			if (point.getTrkPtIndex() != -1) {
 				points.add(point);
 				if (point.isGap()) {
-					res.add(points);
+					res.add(SharedUtil.jWptPtList(points));
 					points = new ArrayList<>();
 				}
 			}
 		}
 		if (!points.isEmpty()) {
-			res.add(points);
+			res.add(SharedUtil.jWptPtList(points));
 		}
 		return res;
 	}
@@ -1199,11 +1203,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (gpxData != null && gpxData.getGpxFile() != null) {
 			points = gpxData.getGpxFile().getPointsList();
 		}
-
-		return RouteExporter.exportRoute(gpxName, getRouteSegments(), points, getRoutePoints());
+		List<GPXUtilities.WptPt> jPoints = points != null ? SharedUtil.jWptPtList(points) : null;
+		return SharedUtil.kGpxFile(
+				RouteExporter.exportRoute(gpxName, getRouteSegments(), jPoints, getRoutePoints()));
 	}
 
-	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
+	private GPXUtilities.TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {
 		List<RouteSegmentResult> route = new ArrayList<>();
 		List<Location> locations = new ArrayList<>();
 		List<Integer> routePointIndexes = new ArrayList<>();
@@ -1235,15 +1240,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			before.getPoints().get(startPointIndex).setTrkPtIndex(0);
 			return new RouteExporter("", route, locations, routePointIndexes, null).generateRouteSegment();
 		} else if (endPointIndex - startPointIndex >= 0) {
-			TrkSegment segment = new TrkSegment();
-			segment.setPoints(new ArrayList<>(before.getPoints().subList(startPointIndex, endPointIndex + 1)));
+			GPXUtilities.TrkSegment segment = new GPXUtilities.TrkSegment();
+			segment.points = SharedUtil.jWptPtList(
+					new ArrayList<>(before.getPoints().subList(startPointIndex, endPointIndex + 1)));
 			return segment;
 		}
 		return null;
 	}
 
-	private List<TrkSegment> getRouteSegments() {
-		List<TrkSegment> res = new ArrayList<>();
+	private List<GPXUtilities.TrkSegment> getRouteSegments() {
+		List<GPXUtilities.TrkSegment> res = new ArrayList<>();
 		List<Integer> lastPointIndexes = new ArrayList<>();
 		for (int i = 0; i < before.getPoints().size(); i++) {
 			WptPt pt = before.getPoints().get(i);
@@ -1256,7 +1262,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		}
 		int firstPointIndex = 0;
 		for (Integer lastPointIndex : lastPointIndexes) {
-			TrkSegment segment = getRouteSegment(firstPointIndex, lastPointIndex);
+			GPXUtilities.TrkSegment segment = getRouteSegment(firstPointIndex, lastPointIndex);
 			if (segment != null) {
 				res.add(segment);
 			}

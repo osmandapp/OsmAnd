@@ -63,7 +63,8 @@ public abstract class AsynchronousResampler extends AsyncTask<String,Integer,Str
 
             for (int i = start + 1; i < end && !isCancelled(); i++) {
                 WptPt pt = rs.points.get(i);
-                double d = MapUtils.getOrthogonalDistance(pt.lat, pt.lon, startPt.lat, startPt.lon, endPt.lat, endPt.lon);
+                double d = MapUtils.getOrthogonalDistance(pt.getLat(), pt.getLon(),
+                        startPt.getLat(), startPt.getLon(), endPt.getLat(), endPt.getLon());
                 if (d > dmax) {
                     dmax = d;
                     index = i;

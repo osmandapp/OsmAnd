@@ -1,10 +1,5 @@
 package net.osmand.plus.configmap.tracks.viewholders;
 
-import static net.osmand.shared.gpx.GpxParameter.COLOR;
-import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
-import static net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME;
-import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.settings.enums.TracksSortMode.DATE_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.DATE_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.DISTANCE_ASCENDING;
@@ -17,6 +12,11 @@ import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NEAREST;
 import static net.osmand.plus.track.fragments.TrackAppearanceFragment.getTrackIcon;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
+import static net.osmand.shared.gpx.GpxParameter.NEAREST_CITY_NAME;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -30,8 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.data.LatLon;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -42,7 +41,6 @@ import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.data.TrackFolder;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.AndroidUtils;
@@ -53,6 +51,9 @@ import net.osmand.plus.utils.UpdateLocationUtils;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationInfo;
 import net.osmand.plus.utils.UpdateLocationUtils.UpdateLocationViewCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.shared.data.KLatLon;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -278,9 +279,9 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 	private void appendNearestDescription(@NonNull SpannableStringBuilder builder,
 	                                      @NonNull GpxTrackAnalysis analysis,
 	                                      @Nullable String cityName) {
-		LatLon latLon = analysis.getLatLonStart();
+		KLatLon latLon = analysis.getLatLonStart();
 		if (latLon != null) {
-			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, latLon);
+			UpdateLocationInfo locationInfo = new UpdateLocationInfo(app, null, SharedUtil.jLatLon(latLon));
 			builder.append(UpdateLocationUtils.getFormattedDistance(app, locationInfo, locationViewCache));
 
 			if (!Algorithms.isEmpty(cityName)) {

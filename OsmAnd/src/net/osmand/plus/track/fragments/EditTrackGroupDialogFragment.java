@@ -89,7 +89,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		items.add(new TitleItem(getCategoryName(app, displayGroup.getName())));
 
 		SelectedGpxFile selectedGpxFile;
-		if (gpxFile.showCurrentTrack) {
+		if (gpxFile.isShowCurrentTrack()) {
 			selectedGpxFile = selectedGpxHelper.getSelectedCurrentRecordingTrack();
 		} else {
 			selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxFile.getPath());
@@ -104,7 +104,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 		}
 		items.add(new OptionsDividerItem(app));
 
-		if (!gpxFile.showCurrentTrack) {
+		if (!gpxFile.isShowCurrentTrack()) {
 			items.add(createCopyToMarkersItem());
 		}
 		items.add(createCopyToFavoritesItem());
@@ -143,7 +143,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	private void updateGroupVisibility() {
 		MapActivity activity = (MapActivity) getActivity();
 		if (activity != null) {
-			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.name, pointsGroup);
+			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), pointsGroup);
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(activity, gpxFile, groups, null);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}

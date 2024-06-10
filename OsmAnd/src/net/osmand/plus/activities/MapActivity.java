@@ -863,7 +863,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					hideContextAndRouteInfoMenues();
 					GpxFile gpxFile = (GpxFile) toShow;
 					SelectedGpxFile selectedGpxFile;
-					if (gpxFile.showCurrentTrack) {
+					if (gpxFile.isShowCurrentTrack()) {
 						selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 					} else {
 						GpxSelectionParams params = GpxSelectionParams.newInstance()

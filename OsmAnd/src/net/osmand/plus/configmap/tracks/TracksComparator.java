@@ -1,32 +1,34 @@
 package net.osmand.plus.configmap.tracks;
 
 import static com.jwetherell.openmap.common.LatLonPoint.EQUIVALENT_TOLERANCE;
-import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
 import static net.osmand.plus.settings.enums.TracksSortMode.LAST_MODIFIED;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_ASCENDING;
 import static net.osmand.plus.settings.enums.TracksSortMode.NAME_DESCENDING;
+import static net.osmand.shared.gpx.GpxParameter.FILE_CREATION_TIME;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.myplaces.tracks.VisibleTracksGroup;
 import net.osmand.plus.settings.enums.TracksSortMode;
 import net.osmand.plus.track.ComparableTracksGroup;
 import net.osmand.plus.track.data.TrackFolderAnalysis;
+import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.util.KMapUtils;
 import net.osmand.util.CollectionUtils;
-import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.util.Comparator;
 
 public class TracksComparator implements Comparator<Object> {
 
-	public final LatLon latLon;
+	public final KLatLon latLon;
 	public final TrackTab trackTab;
 	public final TracksSortMode sortMode;
 	public final Collator collator = OsmAndCollator.primaryCollator();
@@ -34,13 +36,13 @@ public class TracksComparator implements Comparator<Object> {
 	public TracksComparator(@NonNull TrackTab trackTab, @NonNull LatLon latLon) {
 		this.trackTab = trackTab;
 		this.sortMode = trackTab.getSortMode();
-		this.latLon = latLon;
+		this.latLon = SharedUtil.kLatLon(latLon);
 	}
 
 	public TracksComparator(@NonNull TracksSortMode sortMode, @NonNull LatLon latLon) {
 		trackTab = null;
 		this.sortMode = sortMode;
-		this.latLon = latLon;
+		this.latLon = SharedUtil.kLatLon(latLon);
 	}
 
 	@Override
@@ -250,8 +252,8 @@ public class TracksComparator implements Comparator<Object> {
 		if (analysis1.getLatLonStart().equals(analysis2.getLatLonStart())) {
 			return compareTrackItemNames(item1, item2);
 		}
-		double distance1 = MapUtils.getDistance(latLon, analysis1.getLatLonStart());
-		double distance2 = MapUtils.getDistance(latLon, analysis2.getLatLonStart());
+		double distance1 = KMapUtils.INSTANCE.getDistance(latLon, analysis1.getLatLonStart());
+		double distance2 = KMapUtils.INSTANCE.getDistance(latLon, analysis2.getLatLonStart());
 		return Double.compare(distance1, distance2);
 	}
 

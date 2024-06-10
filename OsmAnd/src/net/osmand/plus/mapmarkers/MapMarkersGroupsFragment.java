@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.Location;
+import net.osmand.SharedUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -411,7 +412,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				GpxTrackAnalysis analysis = gpxDataItem.getAnalysis();
 				if (analysis != null && analysis.getWptCategoryNamesSet() != null && analysis.getWptCategoryNamesSet().size() > 1) {
 					Bundle args = new Bundle();
-					args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, gpxDataItem.getFile().getAbsolutePath());
+					args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, gpxDataItem.getFile().getParentFile().absolutePath());
 
 					SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
 					fragment.setArguments(args);
@@ -419,7 +420,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 				} else {
 					GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
-					File gpx = gpxDataItem.getFile();
+					File gpx = SharedUtil.jFile(gpxDataItem.getFile());
 					if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
 						GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
 							GpxSelectionParams params = GpxSelectionParams.newInstance()

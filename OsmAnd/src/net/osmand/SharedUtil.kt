@@ -8,6 +8,7 @@ import net.osmand.shared.KException
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.GpxFile
+import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.GpxUtilities
 import net.osmand.shared.gpx.GpxUtilities.Author
 import net.osmand.shared.gpx.GpxUtilities.Bounds
@@ -32,6 +33,7 @@ import okio.source
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
+import kotlin.reflect.KClass
 
 object SharedUtil {
 
@@ -73,6 +75,17 @@ object SharedUtil {
 	@JvmStatic
 	fun jException(ke: KException): Exception {
 		return PlatformUtil.getJavaException(ke)
+	}
+
+	@JvmStatic
+	@Suppress("UNCHECKED_CAST")
+	fun <T : Any> castGpxParameter(parameter: GpxParameter, value: Any): T? {
+		return if (parameter.typeClass.isInstance(value)) value as T else null
+	}
+
+	@JvmStatic
+	fun isGpxParameterClass(parameter: GpxParameter, javaClass: Class<*>): Boolean {
+		return parameter.typeClass == javaClass
 	}
 
 	@JvmStatic
@@ -191,7 +204,7 @@ object SharedUtil {
 		return jGpxFile
 	}
 
-	private fun jTrack(track: Track): GPXUtilities.Track {
+	fun jTrack(track: Track): GPXUtilities.Track {
 		val jTrack = GPXUtilities.Track()
 		jTrack.name = track.name
 		jTrack.desc = track.desc
@@ -205,7 +218,8 @@ object SharedUtil {
 		return jTrack
 	}
 
-	private fun jRoute(route: Route): GPXUtilities.Route {
+	@JvmStatic
+	fun jRoute(route: Route): GPXUtilities.Route {
 		val jRoute = GPXUtilities.Route()
 		jRoute.name = route.name
 		jRoute.desc = route.desc
@@ -218,7 +232,8 @@ object SharedUtil {
 		return jRoute
 	}
 
-	private fun jPointsGroup(group: PointsGroup): GPXUtilities.PointsGroup {
+	@JvmStatic
+	fun jPointsGroup(group: PointsGroup): GPXUtilities.PointsGroup {
 		val jGroup =
 			GPXUtilities.PointsGroup(group.name, group.iconName, group.backgroundType, group.color)
 		jGroup.hidden = group.hidden
@@ -230,7 +245,8 @@ object SharedUtil {
 		return jGroup
 	}
 
-	private fun jTrkSegment(segment: TrkSegment): GPXUtilities.TrkSegment {
+	@JvmStatic
+	fun jTrkSegment(segment: TrkSegment): GPXUtilities.TrkSegment {
 		val jSegment = GPXUtilities.TrkSegment()
 		jSegment.name = segment.name
 		jSegment.generalSegment = segment.generalSegment
@@ -253,7 +269,26 @@ object SharedUtil {
 		return jSegment
 	}
 
-	private fun jWptPt(point: WptPt): GPXUtilities.WptPt {
+	@JvmStatic
+	fun jWptPtList(points: List<WptPt>): List<GPXUtilities.WptPt> {
+		val res = mutableListOf<GPXUtilities.WptPt>()
+		for (point in points) {
+			res.add(jWptPt(point));
+		}
+		return res
+	}
+
+	@JvmStatic
+	fun kWptPtList(points: List<GPXUtilities.WptPt>): List<WptPt> {
+		val res = mutableListOf<WptPt>()
+		for (point in points) {
+			res.add(kWptPt(point));
+		}
+		return res
+	}
+
+	@JvmStatic
+	fun jWptPt(point: WptPt): GPXUtilities.WptPt {
 		val jPoint = GPXUtilities.WptPt()
 		jPoint.firstPoint = point.firstPoint
 		jPoint.lastPoint = point.lastPoint
@@ -280,7 +315,8 @@ object SharedUtil {
 		return jPoint
 	}
 
-	private fun jRouteSegment(rs: RouteSegment): GPXUtilities.RouteSegment {
+	@JvmStatic
+	fun jRouteSegment(rs: RouteSegment): GPXUtilities.RouteSegment {
 		val jRs = GPXUtilities.RouteSegment()
 		jRs.id = rs.id
 		jRs.length = rs.length
@@ -297,14 +333,16 @@ object SharedUtil {
 		return jRs
 	}
 
-	private fun jRouteType(rt: RouteType): GPXUtilities.RouteType {
+	@JvmStatic
+	fun jRouteType(rt: RouteType): GPXUtilities.RouteType {
 		val jRt = GPXUtilities.RouteType()
 		jRt.tag = rt.tag
 		jRt.value = rt.value
 		return jRt
 	}
 
-	private fun jMetadata(metadata: Metadata): GPXUtilities.Metadata {
+	@JvmStatic
+	fun jMetadata(metadata: Metadata): GPXUtilities.Metadata {
 		val jMetadata = GPXUtilities.Metadata()
 		jMetadata.name = metadata.name
 		jMetadata.link = metadata.link
@@ -326,7 +364,8 @@ object SharedUtil {
 		return jMetadata
 	}
 
-	private fun jAuthor(author: Author): GPXUtilities.Author {
+	@JvmStatic
+	fun jAuthor(author: Author): GPXUtilities.Author {
 		val jAuthor = GPXUtilities.Author()
 		jAuthor.name = author.name
 		jAuthor.link = author.link
@@ -335,7 +374,8 @@ object SharedUtil {
 		return jAuthor
 	}
 
-	private fun jCopyright(copyright: Copyright): GPXUtilities.Copyright {
+	@JvmStatic
+	fun jCopyright(copyright: Copyright): GPXUtilities.Copyright {
 		val jCopyright = GPXUtilities.Copyright()
 		jCopyright.author = copyright.author
 		jCopyright.year = copyright.year
@@ -344,7 +384,8 @@ object SharedUtil {
 		return jCopyright
 	}
 
-	private fun jBounds(bounds: Bounds): GPXUtilities.Bounds {
+	@JvmStatic
+	fun jBounds(bounds: Bounds): GPXUtilities.Bounds {
 		val jBounds = GPXUtilities.Bounds()
 		jBounds.minlat = bounds.minlat
 		jBounds.minlon = bounds.minlon
@@ -354,7 +395,8 @@ object SharedUtil {
 		return jBounds
 	}
 
-	private fun copyExtensions(source: GpxExtensions, destination: GPXUtilities.GPXExtensions) {
+	@JvmStatic
+	fun copyExtensions(source: GpxExtensions, destination: GPXUtilities.GPXExtensions) {
 		val extensionsToRead = source.getExtensionsToRead()
 		if (extensionsToRead.isNotEmpty()) {
 			destination.extensionsToWrite.putAll(extensionsToRead)
@@ -389,7 +431,8 @@ object SharedUtil {
 		return kGpxFile
 	}
 
-	private fun kTrack(track: GPXUtilities.Track): Track {
+	@JvmStatic
+	fun kTrack(track: GPXUtilities.Track): Track {
 		val kTrack = Track()
 		kTrack.name = track.name
 		kTrack.desc = track.desc
@@ -403,7 +446,8 @@ object SharedUtil {
 		return kTrack
 	}
 
-	private fun kRoute(route: GPXUtilities.Route): Route {
+	@JvmStatic
+	fun kRoute(route: GPXUtilities.Route): Route {
 		val kRoute = Route()
 		kRoute.name = route.name
 		kRoute.desc = route.desc
@@ -416,7 +460,8 @@ object SharedUtil {
 		return kRoute
 	}
 
-	private fun kPointsGroup(group: GPXUtilities.PointsGroup): PointsGroup {
+	@JvmStatic
+	fun kPointsGroup(group: GPXUtilities.PointsGroup): PointsGroup {
 		val kGroup =
 			PointsGroup(group.name, group.iconName, group.backgroundType, group.color)
 		kGroup.hidden = group.hidden
@@ -428,7 +473,8 @@ object SharedUtil {
 		return kGroup
 	}
 
-	private fun kTrkSegment(segment: GPXUtilities.TrkSegment): TrkSegment {
+	@JvmStatic
+	fun kTrkSegment(segment: GPXUtilities.TrkSegment): TrkSegment {
 		val kSegment = TrkSegment()
 		kSegment.name = segment.name
 		kSegment.generalSegment = segment.generalSegment
@@ -451,7 +497,8 @@ object SharedUtil {
 		return kSegment
 	}
 
-	private fun kWptPt(point: GPXUtilities.WptPt): WptPt {
+	@JvmStatic
+	fun kWptPt(point: GPXUtilities.WptPt): WptPt {
 		val kPoint = WptPt()
 		kPoint.firstPoint = point.firstPoint
 		kPoint.lastPoint = point.lastPoint
@@ -478,7 +525,8 @@ object SharedUtil {
 		return kPoint
 	}
 
-	private fun kRouteSegment(rs: GPXUtilities.RouteSegment): RouteSegment {
+	@JvmStatic
+	fun kRouteSegment(rs: GPXUtilities.RouteSegment): RouteSegment {
 		val kRs = RouteSegment()
 		kRs.id = rs.id
 		kRs.length = rs.length
@@ -495,14 +543,16 @@ object SharedUtil {
 		return kRs
 	}
 
-	private fun kRouteType(rt: GPXUtilities.RouteType): RouteType {
+	@JvmStatic
+	fun kRouteType(rt: GPXUtilities.RouteType): RouteType {
 		val kRt = RouteType()
 		kRt.tag = rt.tag
 		kRt.value = rt.value
 		return kRt
 	}
 
-	private fun kMetadata(metadata: GPXUtilities.Metadata): Metadata {
+	@JvmStatic
+	fun kMetadata(metadata: GPXUtilities.Metadata): Metadata {
 		val kMetadata = Metadata()
 		kMetadata.name = metadata.name
 		kMetadata.link = metadata.link
@@ -521,7 +571,8 @@ object SharedUtil {
 		return kMetadata
 	}
 
-	private fun kAuthor(author: GPXUtilities.Author): Author {
+	@JvmStatic
+	fun kAuthor(author: GPXUtilities.Author): Author {
 		val kAuthor = Author()
 		kAuthor.name = author.name
 		kAuthor.link = author.link
@@ -530,7 +581,8 @@ object SharedUtil {
 		return kAuthor
 	}
 
-	private fun kCopyright(copyright: GPXUtilities.Copyright): Copyright {
+	@JvmStatic
+	fun kCopyright(copyright: GPXUtilities.Copyright): Copyright {
 		val kCopyright = Copyright()
 		kCopyright.author = copyright.author
 		kCopyright.year = copyright.year
@@ -539,7 +591,8 @@ object SharedUtil {
 		return kCopyright
 	}
 
-	private fun kBounds(bounds: GPXUtilities.Bounds): Bounds {
+	@JvmStatic
+	fun kBounds(bounds: GPXUtilities.Bounds): Bounds {
 		val kBounds = Bounds()
 		kBounds.minlat = bounds.minlat
 		kBounds.minlon = bounds.minlon
@@ -549,7 +602,8 @@ object SharedUtil {
 		return kBounds
 	}
 
-	private fun copyExtensions(source: GPXUtilities.GPXExtensions, destination: GpxExtensions) {
+	@JvmStatic
+	fun copyExtensions(source: GPXUtilities.GPXExtensions, destination: GpxExtensions) {
 		val extensionsToRead = source.extensionsToRead
 		if (extensionsToRead.isNotEmpty()) {
 			destination.getExtensionsToWrite().putAll(extensionsToRead)

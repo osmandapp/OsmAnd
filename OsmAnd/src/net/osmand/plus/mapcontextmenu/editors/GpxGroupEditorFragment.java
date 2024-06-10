@@ -55,7 +55,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 	@Override
 	protected boolean isCategoryExists(@NonNull String name) {
 		for (PointsGroup group : pointsGroups.values()) {
-			if (group.name.equalsIgnoreCase(name)) {
+			if (group.getName().equalsIgnoreCase(name)) {
 				return true;
 			}
 		}
@@ -74,7 +74,7 @@ public class GpxGroupEditorFragment extends GroupEditorFragment {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
 			String backgroundType = getBackgroundType().getTypeName();
 			PointsGroup newGroup = new PointsGroup(groupName, getIconName(), backgroundType, getColor());
-			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.name, newGroup);
+			Map<String, PointsGroup> groups = Collections.singletonMap(pointsGroup.getName(), newGroup);
 
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
 			task.setUpdatePointsAppearance(updatePointsAppearance);

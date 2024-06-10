@@ -886,8 +886,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		if (rotate) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
-		float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
-		float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
+		float locX = tb.getPixXFromLatLon(pt.getLat(), pt.getLon());
+		float locY = tb.getPixYFromLatLon(pt.getLat(), pt.getLon());
 		if (tb.containsPoint(locX, locY, 0)) {
 			canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 		}
@@ -900,8 +900,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getCenterLatLon();
 		WptPt pt = new WptPt();
-		pt.lat = l.getLatitude();
-		pt.lon = l.getLongitude();
+		pt.setLat(l.getLatitude());
+		pt.setLon(l.getLongitude());
 		boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 		if (allowed) {
 			editingCtx.addPoint(pt, addPointBefore ? AdditionMode.ADD_BEFORE : AdditionMode.ADD_AFTER);
@@ -915,8 +915,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			WptPt pt = new WptPt();
 			double lat = pressedPointLatLon.getLatitude();
 			double lon = pressedPointLatLon.getLongitude();
-			pt.lat = lat;
-			pt.lon = lon;
+			pt.setLat(lat);
+			pt.setLon(lon);
 			pressedPointLatLon = null;
 			boolean allowed = editingCtx.getPointsCount() == 0 || !editingCtx.getPoints().get(editingCtx.getPointsCount() - 1).equals(pt);
 			if (allowed) {
@@ -933,8 +933,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		LatLon latLon = tb.getCenterLatLon();
 		WptPt originalPoint = editingCtx.getOriginalPointToMove();
 		WptPt point = new WptPt(originalPoint);
-		point.lat = latLon.getLatitude();
-		point.lon = latLon.getLongitude();
+		point.setLat(latLon.getLatitude());
+		point.setLon(latLon.getLongitude());
 		point.copyExtensions(originalPoint);
 		return point;
 	}

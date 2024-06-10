@@ -70,7 +70,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		selectAllItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(!isUpdateMode || categories != null && categories.size() == pointsGroups.size())
 				.setCompoundButtonColorId(activeColorResId)
-				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPoints().size())
+				.setDescription(getString(R.string.shared_string_total) + ": " + gpxFile.getPointsList().size())
 				.setIcon(getContentIcon(R.drawable.ic_action_group_select_all))
 				.setTitle(getString(R.string.shared_string_select_all))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)
@@ -99,7 +99,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 						}
 					})
 					.setCompoundButtonColorId(activeColorResId)
-					.setDescription(String.valueOf(entry.getValue().points.size()))
+					.setDescription(String.valueOf(entry.getValue().getPoints().size()))
 					.setIcon(getContentIcon(R.drawable.ic_action_folder))
 					.setTitle(category.isEmpty() ? getString(R.string.shared_string_waypoints) : category)
 					.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp)

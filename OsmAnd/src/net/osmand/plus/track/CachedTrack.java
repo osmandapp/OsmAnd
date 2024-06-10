@@ -1,12 +1,12 @@
 package net.osmand.plus.track;
 
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
-import static net.osmand.ColorPalette.LIGHT_GREY;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
+import net.osmand.SharedUtil;
+import net.osmand.shared.ColorPalette;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.shared.gpx.GpxFile;
@@ -20,9 +20,9 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 
@@ -146,9 +146,9 @@ public class CachedTrack {
 		ColorPalette colorPalette = null;
 		try {
 			if (filePalette.exists()) {
-				colorPalette = ColorPalette.parseColorPalette(new FileReader(filePalette));
+				colorPalette = ColorPalette.Companion.parseColorPalette(SharedUtil.kFile(filePalette));
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			PlatformUtil.getLog(CachedTrack.class).error("Error reading color file ",
 					e);
 		}
@@ -182,9 +182,9 @@ public class CachedTrack {
 					return simplifiedSegments;
 				}
 				RouteColorizationPoint colorPoint = colorizationPoints.get(colorPointIdx);
-				if (colorPoint.id == id) {
+				if (colorPoint.getId() == id) {
 					simplifiedSegment.getPoints().add(pt);
-					pt.setColor(colorizationType, colorPoint.color);
+					pt.setColor(colorizationType, colorPoint.getColor());
 					colorPointIdx++;
 				}
 				id++;
@@ -205,8 +205,8 @@ public class CachedTrack {
 		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).getPoints().get(0);
 		WptPt firstPoint = new WptPt(currentSegmentLastPoint);
 		WptPt lastPoint = new WptPt(nextSegmentFirstPoint);
-		firstPoint.setColor(colorizationType, LIGHT_GREY);
-		lastPoint.setColor(colorizationType, LIGHT_GREY);
+		firstPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
+		lastPoint.setColor(colorizationType, ColorPalette.Companion.getLIGHT_GREY());
 		straightSegment.getPoints().add(firstPoint);
 		straightSegment.getPoints().add(lastPoint);
 		return straightSegment;

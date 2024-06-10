@@ -16,12 +16,12 @@ public class WptLocationPoint implements LocationPoint {
 
 	@Override
 	public double getLatitude() {
-		return pt.lat;
+		return pt.getLat();
 	}
 
 	@Override
 	public double getLongitude() {
-		return pt.lon;
+		return pt.getLon();
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class WptLocationPoint implements LocationPoint {
 	}
 
 	public PointDescription getPointDescription(@NonNull Context ctx) {
-		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.name);
+		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.getName());
 	}
 
 	public GpxUtilities.WptPt getPt() {

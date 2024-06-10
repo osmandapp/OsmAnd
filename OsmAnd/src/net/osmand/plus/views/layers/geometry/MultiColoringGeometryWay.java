@@ -7,13 +7,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
@@ -28,18 +27,18 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
+import net.osmand.shared.ColorPalette;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.routing.RouteColorize;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -135,9 +134,9 @@ public abstract class MultiColoringGeometryWay
 			ColorPalette colorPalette = null;
 			try {
 				if (filePalette.exists()) {
-					colorPalette = ColorPalette.parseColorPalette(new FileReader(filePalette));
+					colorPalette = ColorPalette.Companion.parseColorPalette(SharedUtil.kFile(filePalette));
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				PlatformUtil.getLog(MultiColoringGeometryWay.class).error("Error reading color file ",
 						e);
 			}
@@ -153,8 +152,8 @@ public abstract class MultiColoringGeometryWay
 		Track3DStyle track3DStyle = getTrack3DStyle();
 		for (int i = 0; i < points.size() - 1; i++) {
 			GeometryGradientWayStyle<?> style = getGradientWayStyle();
-			style.currColor = points.get(i).color;
-			style.nextColor = points.get(i + 1).color;
+			style.currColor = points.get(i).getColor();
+			style.nextColor = points.get(i + 1).getColor();
 			styleMap.put(i, style);
 			updateTrack3DStyle(style, track3DStyle);
 		}
@@ -195,7 +194,7 @@ public abstract class MultiColoringGeometryWay
 			RouteSegmentAttribute attribute =
 					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
 			int color = attribute.getColor();
-			color = color == 0 ? net.osmand.ColorPalette.LIGHT_GREY : color;
+			color = color == 0 ? ColorPalette.Companion.getLIGHT_GREY() : color;
 
 			if (i == 0) {
 				for (int j = 0; j < firstSegmentLocationIdx; j++) {
@@ -288,7 +287,7 @@ public abstract class MultiColoringGeometryWay
 				double percent = MapUtils.getProjectionCoeff(currLat, currLon, prevLat, prevLon, nextLat, nextLon);
 				int prevColor = locationProvider.getColor(startLocationIndex - 1);
 				int nextColor = locationProvider.getColor(startLocationIndex);
-				gradientWayStyle.currColor = ColorPalette.getIntermediateColor(prevColor, nextColor, percent);
+				gradientWayStyle.currColor = ColorPalette.Companion.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
 		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle<?>) {
@@ -349,17 +348,17 @@ public abstract class MultiColoringGeometryWay
 		}
 
 		public int getColor(int index) {
-			return locations.get(index).color;
+			return locations.get(index).getColor();
 		}
 
 		@Override
 		public double getLatitude(int index) {
-			return locations.get(index).lat;
+			return locations.get(index).getLat();
 		}
 
 		@Override
 		public double getLongitude(int index) {
-			return locations.get(index).lon;
+			return locations.get(index).getLon();
 		}
 
 		@Override
@@ -387,7 +386,7 @@ public abstract class MultiColoringGeometryWay
 				List<RouteColorizationPoint> simplified = provider.simplify(tb.getZoom());
 				if (simplified != null) {
 					for (RouteColorizationPoint location : simplified) {
-						simplifyPoints.set(location.id, (byte) 1);
+						simplifyPoints.set(location.getId(), (byte) 1);
 					}
 				}
 			}

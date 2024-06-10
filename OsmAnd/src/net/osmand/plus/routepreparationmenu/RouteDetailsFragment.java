@@ -1383,23 +1383,23 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			WptPt wpt = null;
 			gpxItem.chartTypes = new GPXDataSetType[]{GPXDataSetType.ALTITUDE, GPXDataSetType.SLOPE};
 			if (gpxItem.chartHighlightPos != -1) {
-				TrkSegment segment = gpxFile.getTracks().get(0).segments.get(0);
+				TrkSegment segment = gpxFile.getTracks().get(0).getSegments().get(0);
 				if (segment != null) {
 					float distance = gpxItem.chartHighlightPos * elevationDataSet.getDivX();
-					for (WptPt p : segment.points) {
-						if (p.distance >= distance) {
+					for (WptPt p : segment.getPoints()) {
+						if (p.getDistance() >= distance) {
 							wpt = p;
 							break;
 						}
 					}
 					if (wpt != null) {
-						location = new LatLon(wpt.lat, wpt.lon);
+						location = new LatLon(wpt.getLat(), wpt.getLon());
 					}
 				}
 			}
 
 			if (location == null) {
-				location = new LatLon(gpxItem.locationStart.lat, gpxItem.locationStart.lon);
+				location = new LatLon(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon());
 			}
 			if (wpt != null) {
 				gpxItem.locationOnMap = wpt;

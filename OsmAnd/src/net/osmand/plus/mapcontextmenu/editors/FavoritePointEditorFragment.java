@@ -143,7 +143,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void setPointsGroup(@NonNull PointsGroup group, boolean updateAppearance) {
 		Context ctx = getContext();
 		if (ctx != null) {
-			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.name);
+			String groupIdName = FavoriteGroup.convertDisplayNameToGroupIdName(ctx, group.getName());
 			this.group = favouritesHelper.getGroup(groupIdName);
 			super.setPointsGroup(group, updateAppearance);
 		}
@@ -362,7 +362,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				}
 			}
 			for (PointsGroup group : hiddenCategories) {
-				pointsGroups.put(group.name, group);
+				pointsGroups.put(group.getName(), group);
 			}
 		}
 		return pointsGroups;

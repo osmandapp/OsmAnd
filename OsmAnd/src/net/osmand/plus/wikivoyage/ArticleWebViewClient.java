@@ -1,5 +1,8 @@
 package net.osmand.plus.wikivoyage;
 
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
@@ -9,20 +12,17 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.fragments.ReadDescriptionFragment;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
-
-import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
-import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
+import net.osmand.shared.data.KQuadRect;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 
 public class ArticleWebViewClient extends WebViewClient {
 
@@ -69,7 +69,7 @@ public class ArticleWebViewClient extends WebViewClient {
 			WikivoyageUtils.processWikivoyageDomain(activity, url, isNightMode());
 			fragment.dismiss();
 		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
-			QuadRect rect = gpxFile.getRect();
+			KQuadRect rect = gpxFile.getRect();
 			LatLon defaultCoordinates = new LatLon(rect.centerY(), rect.centerX());
 			WikivoyageUtils.processWikipediaDomain(wikiArticleHelper, defaultCoordinates, url);
 		} else if (url.contains(PREFIX_TEL)) {
@@ -79,12 +79,12 @@ public class ArticleWebViewClient extends WebViewClient {
 		} else if (url.contains(PREFIX_GEO)) {
 			fragment.closeAll();
 			String coordinates = url.replace(PREFIX_GEO, "");
-			WptPt gpxPoint = WikivoyageUtils.findNearestPoint(gpxFile.getPoints(), coordinates);
+			WptPt gpxPoint = WikivoyageUtils.findNearestPoint(gpxFile.getPointsList(), coordinates);
 			if (gpxPoint != null) {
 				OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
 						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.name),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.getName()),
 						false,
 						gpxPoint);
 

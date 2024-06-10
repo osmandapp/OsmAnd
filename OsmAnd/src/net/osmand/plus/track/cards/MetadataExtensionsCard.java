@@ -26,7 +26,7 @@ public class MetadataExtensionsCard extends BaseMetadataCard {
 	public void updateContent() {
 		super.updateContent();
 
-		Map<String, String> extensions = metadata.extensions;
+		Map<String, String> extensions = metadata.getExtensions();
 		updateVisibility(!Algorithms.isEmpty(extensions));
 
 		if (extensions != null) {

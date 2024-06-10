@@ -92,7 +92,7 @@ public class OpenGpxDetailsTask extends BaseLoadAsyncTask<Void, Void, GpxDisplay
 				gpxItem.chartTypes = list.toArray(new GPXDataSetType[0]);
 			}
 			gpxItem.locationOnMap = selectedPoint;
-			settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
+			settings.setMapLocationToShow(gpxItem.locationStart.getLat(), gpxItem.locationStart.getLon(),
 					settings.getLastKnownMapZoom(),
 					new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
 					false,

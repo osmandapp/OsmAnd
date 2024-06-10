@@ -1695,7 +1695,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (!Algorithms.isEmpty(gpxFile.getPath())) {
 					fileName = new File(gpxFile.getPath()).getName();
 				} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
-					fileName = gpxFile.getTracks().get(0).name;
+					fileName = gpxFile.getTracks().get(0).getName();
 				}
 				if (Algorithms.isEmpty(fileName)) {
 					fileName = app.getString(R.string.shared_string_gpx_track);

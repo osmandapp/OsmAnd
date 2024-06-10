@@ -1026,7 +1026,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					listener.onPointsSaved();
 				}
 				snackbar = Snackbar.make(mainView, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
-						.setAction(R.string.shared_string_show, view -> TrackMenuFragment.openTrack(app, new File(getGpx().path), null));
+						.setAction(R.string.shared_string_show, view -> TrackMenuFragment.openTrack(app, new File(getGpx().getPath()), null));
 				UiUtilities.setupSnackbar(snackbar, !lightTheme);
 				snackbar.show();
 			}

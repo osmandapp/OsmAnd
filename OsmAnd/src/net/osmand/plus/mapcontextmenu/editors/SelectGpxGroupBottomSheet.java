@@ -52,7 +52,7 @@ public class SelectGpxGroupBottomSheet extends SelectPointsCategoryBottomSheet {
 		ViewGroup container = view.findViewById(R.id.list_container);
 
 		for (PointsGroup pointsGroup : pointsGroups.values()) {
-			boolean hidden = !WptPtEditorFragment.isCategoryVisible(app, gpxFile, pointsGroup.name);
+			boolean hidden = !WptPtEditorFragment.isCategoryVisible(app, gpxFile, pointsGroup.getName());
 			container.addView(createCategoryItem(pointsGroup, hidden));
 		}
 

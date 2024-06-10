@@ -59,7 +59,7 @@ public class FavoritePointEditor extends PointEditor {
 		}
 		double altitude = Double.NaN;
 		if (object instanceof WptPt) {
-			altitude = ((WptPt) object).ele;
+			altitude = ((WptPt) object).getEle();
 		}
 		favorite = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), title, lastCategory, altitude, 0);
 		favorite.setDescription("");

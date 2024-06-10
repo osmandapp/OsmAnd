@@ -43,7 +43,7 @@ public class EditGpxDescriptionController extends EditDescriptionController {
 		}
 
 		GpxFile gpx = trackMenuFragment.getGpx();
-		gpx.metadata.desc = editedText;
+		gpx.getMetadata().setDesc(editedText);
 
 		File file = trackMenuFragment.getDisplayHelper().getFile();
 		SaveGpxHelper.saveGpx(file, gpx, errorMessage -> {

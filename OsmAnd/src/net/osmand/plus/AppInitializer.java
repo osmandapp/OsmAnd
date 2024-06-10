@@ -137,11 +137,6 @@ public class AppInitializer implements IProgress {
 	private String taskName;
 	private SharedPreferences startPrefs;
 
-	static {
-		//Set old time format of GPX for Android 6.0 and lower
-		GpxUtilities.GPX_TIME_OLD_FORMAT = Build.VERSION.SDK_INT <= Build.VERSION_CODES.M;
-	}
-
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
 	}

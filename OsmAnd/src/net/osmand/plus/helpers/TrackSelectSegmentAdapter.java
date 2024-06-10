@@ -56,15 +56,15 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 
 		int segmentIndex = 0;
 		for (Track track : gpxFile.getTracks(false)) {
-			for (TrkSegment segment : track.segments) {
+			for (TrkSegment segment : track.getSegments()) {
 				String trackSegmentTitle = GpxDisplayHelper.buildTrackSegmentName(gpxFile, track, segment, app);
 				gpxItems.add(new SegmentItem(segment, trackSegmentTitle, segmentIndex));
 				segmentIndex++;
 			}
 		}
 
-		for (int i = 0; i < gpxFile.routes.size(); i++) {
-			Route route = gpxFile.routes.get(i);
+		for (int i = 0; i < gpxFile.getRoutes().size(); i++) {
+			Route route = gpxFile.getRoutes().get(i);
 			String title = GpxDisplayHelper.getRouteTitle(route, i, app);
 			gpxItems.add(new RouteItem(route, title, i));
 		}
@@ -101,12 +101,12 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 		double distance = 0;
 		if (holder instanceof SegmentViewHolder) {
 			SegmentItem item = (SegmentItem) gpxItem;
-			time = getSegmentTime(item.segment.points);
-			distance = getDistance(item.segment.points);
+			time = getSegmentTime(item.segment.getPoints());
+			distance = getDistance(item.segment.getPoints());
 		} else if (holder instanceof RouteViewHolder) {
 			RouteItem item = (RouteItem) gpxItem;
-			time = getSegmentTime(item.route.points);
-			distance = getDistance(item.route.points);
+			time = getSegmentTime(item.route.getPoints());
+			distance = getDistance(item.route.getPoints());
 		}
 		String formattedTime = time > 0 ? OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)) : "";
 		holder.time.setText(formattedTime);
@@ -141,7 +141,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<ItemViewHold
 		long startTime = Long.MAX_VALUE;
 		long endTime = Long.MIN_VALUE;
 		for (WptPt point : points) {
-			long time = point.time;
+			long time = point.getTime();
 			if (time != 0) {
 				startTime = Math.min(startTime, time);
 				endTime = Math.max(endTime, time);

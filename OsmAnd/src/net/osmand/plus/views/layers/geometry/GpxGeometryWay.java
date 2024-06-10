@@ -8,8 +8,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.track.Track3DStyle;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.shared.routing.RouteColorize.ColorizationType;
+import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
@@ -151,19 +151,19 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			pointHeights.add((float) point.getEle());
 			switch (coloringType) {
 				case SPEED:
-					cp.color = point.getColor(ColorizationType.SPEED);
+					cp.setColor(point.getColor(ColorizationType.SPEED));
 					break;
 				case ALTITUDE:
-					cp.color = point.getColor(ColorizationType.ELEVATION);
+					cp.setColor(point.getColor(ColorizationType.ELEVATION));
 					break;
 				case SLOPE:
-					cp.color = point.getColor(ColorizationType.SLOPE);
+					cp.setColor(point.getColor(ColorizationType.SLOPE));
 					break;
 				case DEFAULT:
 				case CUSTOM_COLOR:
 				case TRACK_SOLID:
 				case ATTRIBUTE:
-					cp.color = point.getColor();
+					cp.setColor(point.getColor());
 					break;
 			}
 			colorizationPoints.add(cp);

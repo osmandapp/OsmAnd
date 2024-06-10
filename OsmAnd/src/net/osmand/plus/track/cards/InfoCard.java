@@ -34,8 +34,8 @@ public class InfoCard extends BaseMetadataCard {
 	public void updateContent() {
 		super.updateContent();
 
-		boolean visible = metadata != null && (!Algorithms.isEmpty(metadata.keywords)
-				|| !Algorithms.isEmpty(metadata.link) || routeKey != null);
+		boolean visible = metadata != null && (!Algorithms.isEmpty(metadata.getKeywords())
+				|| !Algorithms.isEmpty(metadata.getLink()) || routeKey != null);
 
 		updateVisibility(visible);
 
@@ -47,10 +47,10 @@ public class InfoCard extends BaseMetadataCard {
 
 				createItemRow(getString(R.string.shared_string_activity), routeTypeToDisplay, getContentIcon(getActivityTypeIcon(routeKey.type)));
 			}
-			if (!Algorithms.isEmpty(metadata.keywords)) {
-				createItemRow(getString(R.string.shared_string_keywords), metadata.keywords, getContentIcon(R.drawable.ic_action_label));
+			if (!Algorithms.isEmpty(metadata.getKeywords())) {
+				createItemRow(getString(R.string.shared_string_keywords), metadata.getKeywords(), getContentIcon(R.drawable.ic_action_label));
 			}
-			createLinkItemRow(getString(R.string.shared_string_link), metadata.link, R.drawable.ic_action_link);
+			createLinkItemRow(getString(R.string.shared_string_link), metadata.getLink(), R.drawable.ic_action_link);
 		}
 	}
 

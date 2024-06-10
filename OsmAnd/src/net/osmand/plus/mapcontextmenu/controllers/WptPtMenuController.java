@@ -48,7 +48,7 @@ public class WptPtMenuController extends MenuController {
 
 		mapMarker = markersHelper.getMapMarker(wpt);
 		if (mapMarker == null) {
-			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.lat, wpt.lon));
+			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.getLat(), wpt.getLon()));
 		}
 		if (mapMarker != null && mapMarker.history && !app.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 			mapMarker = null;
@@ -86,8 +86,8 @@ public class WptPtMenuController extends MenuController {
 		if (plugin != null) {
 			Recording selectedRec = null;
 			for (Recording rec : plugin.getAllRecordings()) {
-				if (Math.abs(rec.getLatitude() - wpt.lat) < 0.0001
-						&& Math.abs(rec.getLongitude() - wpt.lon) < 0.0001) {
+				if (Math.abs(rec.getLatitude() - wpt.getLat()) < 0.0001
+						&& Math.abs(rec.getLongitude() - wpt.getLon()) < 0.0001) {
 					selectedRec = rec;
 					break;
 				}
@@ -174,7 +174,7 @@ public class WptPtMenuController extends MenuController {
 			sb.append(mapActivity.getString(R.string.shared_string_waypoint));
 			sb.append(", ");
 			if (selectedGpxFile != null) {
-				File file = new File(selectedGpxFile.getGpxFile().path);
+				File file = new File(selectedGpxFile.getGpxFile().getPath());
 				String gpxName = file.getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " ");
 				sb.append(gpxName);
 			}

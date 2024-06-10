@@ -1156,7 +1156,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 			List<SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			boolean forceAddToCurrentTrack = PluginsHelper.isActive(OsmandMonitoringPlugin.class)
-					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack));
+					&& (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack()));
 
 			if (forceAddToCurrentTrack) {
 				GpxFile gpxFile = app.getSavingTrackHelper().getCurrentGpx();
@@ -1184,7 +1184,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			} else {
 				List<SelectedGpxFile> list
 						= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
-				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack)) {
+				if (list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().isShowCurrentTrack())) {
 					GpxFile currentGpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 					wptPtPointEditor.add(currentGpxFile, wptPt, categoryName, categoryColor, skipDialog);
 				} else {

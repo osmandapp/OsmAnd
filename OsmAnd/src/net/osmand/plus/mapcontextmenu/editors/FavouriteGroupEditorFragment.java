@@ -42,7 +42,7 @@ public class FavouriteGroupEditorFragment extends GroupEditorFragment {
 		favouritesHelper = app.getFavoritesHelper();
 
 		if (pointsGroup != null) {
-			favoriteGroup = favouritesHelper.getGroup(pointsGroup.name);
+			favoriteGroup = favouritesHelper.getGroup(pointsGroup.getName());
 		}
 	}
 

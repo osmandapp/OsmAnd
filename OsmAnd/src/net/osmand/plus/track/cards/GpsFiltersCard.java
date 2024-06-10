@@ -54,7 +54,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	@Nullable
 	private GpxDataItem fetchGpxDataItem() {
-		File file = new File(filteredSelectedGpxFile.getGpxFile().path);
+		File file = new File(filteredSelectedGpxFile.getGpxFile().getPath());
 		GpxDataItemCallback callback = item -> gpxDataItem = item;
 		return gpxDbHelper.getItem(file, callback);
 	}

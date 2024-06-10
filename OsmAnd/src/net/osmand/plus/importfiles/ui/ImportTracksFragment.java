@@ -378,7 +378,7 @@ public class ImportTracksFragment extends BaseOsmAndDialogFragment implements On
 	public void onTrackItemPointsSelected(@NonNull ImportTrackItem item) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPoints(), this);
+			SelectPointsFragment.showInstance(activity.getSupportFragmentManager(), item, gpxFile.getPointsList(), this);
 		}
 	}
 

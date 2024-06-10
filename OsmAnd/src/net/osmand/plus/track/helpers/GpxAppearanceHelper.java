@@ -12,6 +12,7 @@ import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.Gpx3DLinePositionType;
@@ -169,8 +170,12 @@ public class GpxAppearanceHelper {
 		return color != null ? color : gpxFile.getColor(defaultColor);
 	}
 
-	@NonNull
 	@SuppressWarnings("unchecked")
+	private <T> T cast(Class<?> kClass, Object value) {
+		return (T) kClass.cast(value);
+	}
+
+	@NonNull
 	public <T> T requireParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
 		Object value = getAppearanceParameter(item, parameter);
 		if (value == null) {
@@ -179,18 +184,21 @@ public class GpxAppearanceHelper {
 		if (value == null) {
 			throw new IllegalStateException("Requested parameter '" + parameter + "' is null.");
 		} else {
-			return KClasses.cast(parameter.getTypeClass(), value);
+			T res = SharedUtil.castGpxParameter(parameter, value);
+			if (res == null) {
+				throw new IllegalStateException("Requested parameter '" + parameter + "' cast is null.");
+			}
+			return res;
 		}
 	}
 
 	@Nullable
-	@SuppressWarnings("unchecked")
 	public <T> T getParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
 		Object value = getAppearanceParameter(item, parameter);
 		if (value == null) {
 			value = parameter.getDefaultValue();
 		}
-		return KClasses.cast(parameter.getTypeClass(), value);
+		return SharedUtil.castGpxParameter(parameter, value);
 	}
 
 	@Nullable
@@ -203,18 +211,17 @@ public class GpxAppearanceHelper {
 	}
 
 	@Nullable
-	@SuppressWarnings("unchecked")
 	public <T> T getAppearanceParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {
 		Object value = item.getParameter(parameter);
 		if (value != null) {
-			return KClasses.cast(parameter.getTypeClass(), value);
+			return SharedUtil.castGpxParameter(parameter, value);
 		}
 		KFile dir = item.getFile().getParentFile();
 		if (dir != null) {
 			GpxDirItem dirItem = gpxDbHelper.getGpxDirItem(dir);
 			value = dirItem.getParameter(parameter);
 			if (value != null) {
-				return KClasses.cast(parameter.getTypeClass(), value);
+				return SharedUtil.castGpxParameter(parameter, value);
 			}
 		}
 		return null;

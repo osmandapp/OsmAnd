@@ -66,6 +66,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
+import net.osmand.shared.io.KFile;
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
@@ -505,8 +506,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	private String getTrackDescrForDataItem(@NonNull GpxDataItem dataItem) {
 		GpxTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
-			File parent = dataItem.getFile().getParentFile();
-			String folder = Algorithms.capitalizeFirstLetter(parent.getName());
+			KFile parent = dataItem.getFile().getParentFile();
+			String folder = Algorithms.capitalizeFirstLetter(parent.name());
 			String dist = OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app);
 			String points = analysis.getWptPoints() + " " + getString(R.string.shared_string_gpx_points).toLowerCase();
 			String descr = getString(R.string.ltr_or_rtl_combine_via_bold_point, folder, dist);

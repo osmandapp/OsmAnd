@@ -155,7 +155,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 	}
 
 	public static boolean shouldShowForGpxFile(@NonNull GpxFile gpxFile) {
-		return gpxFile.getNonEmptySegmentsCount() > 1 || gpxFile.routes.size() > 1;
+		return gpxFile.getNonEmptySegmentsCount() > 1 || gpxFile.getRoutes().size() > 1;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull GpxFile gpxFile, @Nullable OnSegmentSelectedListener onSegmentSelectedListener) {

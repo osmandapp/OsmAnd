@@ -104,7 +104,7 @@ class ImportTracksAdapter extends RecyclerView.Adapter<ViewHolder> {
 			boolean checked = selectedTracks.contains(item);
 			MapBitmapDrawerListener listener = getBitmapDrawerListener(item, viewHolder);
 
-			viewHolder.bindView(item, gpxFile.getPoints(), checked, listener);
+			viewHolder.bindView(item, gpxFile.getPointsList(), checked, listener);
 		} else if (holder instanceof FoldersViewHolder) {
 			FoldersViewHolder viewHolder = (FoldersViewHolder) holder;
 			viewHolder.bindView(selectedFolder);

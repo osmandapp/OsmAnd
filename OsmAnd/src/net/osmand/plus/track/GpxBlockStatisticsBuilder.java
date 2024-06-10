@@ -22,8 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.GPXDataSetType;
@@ -37,6 +35,8 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -167,7 +167,7 @@ public class GpxBlockStatisticsBuilder {
 				GpxFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
 				analysis = currentGpx.getAnalysis(0);
 				withoutGaps = !selectedGpxFile.isJoinSegments()
-						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+						&& (Algorithms.isEmpty(currentGpx.getTracks()) || currentGpx.getTracks().get(0).isGeneralTrack());
 			} else {
 				GpxDisplayItem displayItem = getDisplayItem();
 				if (displayItem != null) {
@@ -181,15 +181,15 @@ public class GpxBlockStatisticsBuilder {
 		items.clear();
 		if (analysis != null) {
 			if (tabItem == null) {
-				float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
+				float totalDistance = withoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
 				String asc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationUp(), app);
 				String desc = OsmAndFormatter.getFormattedAlt(analysis.getDiffElevationDown(), app);
 				String minElevation = OsmAndFormatter.getFormattedAlt(analysis.getMinElevation(), app);
 				String maxElevation = OsmAndFormatter.getFormattedAlt(analysis.getMaxElevation(), app);
 				String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
 				String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
-				float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
-				long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.getTimeMoving();
+				float timeSpan = withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
+				long timeMoving = withoutGaps ? analysis.getTimeMovingWithoutGaps() : analysis.getTimeMoving();
 				prepareDataDistance(totalDistance);
 				prepareDataAscent(asc);
 				prepareDataDescent(desc);
@@ -201,8 +201,8 @@ public class GpxBlockStatisticsBuilder {
 			} else {
 				switch (tabItem) {
 					case GPX_TAB_ITEM_GENERAL: {
-						float totalDistance = withoutGaps ? analysis.totalDistanceWithoutGaps : analysis.getTotalDistance();
-						float timeSpan = withoutGaps ? analysis.timeSpanWithoutGaps : analysis.getTimeSpan();
+						float totalDistance = withoutGaps ? analysis.getTotalDistanceWithoutGaps() : analysis.getTotalDistance();
+						float timeSpan = withoutGaps ? analysis.getTimeSpanWithoutGaps() : analysis.getTimeSpan();
 						Date start = new Date(analysis.getStartTime());
 						Date end = new Date(analysis.getEndTime());
 						prepareDataDistance(totalDistance);
@@ -225,8 +225,8 @@ public class GpxBlockStatisticsBuilder {
 					case GPX_TAB_ITEM_SPEED: {
 						String avg = OsmAndFormatter.getFormattedSpeed(analysis.getAvgSpeed(), app);
 						String max = OsmAndFormatter.getFormattedSpeed(analysis.getMaxSpeed(), app);
-						long timeMoving = withoutGaps ? analysis.timeMovingWithoutGaps : analysis.getTimeMoving();
-						float totalDistanceMoving = withoutGaps ? analysis.totalDistanceMovingWithoutGaps : analysis.getTotalDistanceMoving();
+						long timeMoving = withoutGaps ? analysis.getTimeMovingWithoutGaps() : analysis.getTimeMoving();
+						float totalDistanceMoving = withoutGaps ? analysis.getTotalDistanceMovingWithoutGaps() : analysis.getTotalDistanceMoving();
 						prepareDataAverageSpeed(avg);
 						prepareDataMaximumSpeed(max);
 						prepareDataTimeMoving(timeMoving);

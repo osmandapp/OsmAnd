@@ -44,7 +44,7 @@ public class TravelSelectionLayer extends OsmandMapLayer implements IContextMenu
 			Pair<?, ?> pair = (Pair<?, ?>) o;
 			if (pair.first instanceof TravelGpx && pair.second instanceof SelectedGpxPoint) {
 				WptPt point = ((SelectedGpxPoint) pair.second).getSelectedPoint();
-				return new LatLon(point.lat, point.lon);
+				return new LatLon(point.getLat(), point.getLon());
 			}
 		}
 		return null;

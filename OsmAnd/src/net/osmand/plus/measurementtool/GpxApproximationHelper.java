@@ -9,6 +9,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.SharedUtil;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
@@ -138,7 +139,7 @@ public class GpxApproximationHelper {
 			GpxRouteApproximation approximation = resultMap.get(locationsHolder);
 			if (approximation != null) {
 				approximations.add(approximation);
-				points.add(locationsHolder.getWptPtList());
+				points.add(SharedUtil.kWptPtList(locationsHolder.getWptPtList()));
 			}
 		}
 		listener.processApproximationResults(approximations, points);

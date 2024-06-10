@@ -86,8 +86,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		holder.divider.setVisibility((!singleItem && !lastItem) ? View.VISIBLE : View.GONE);
 
-		holder.title.setText(wpt.name);
-		UpdateLocationUtils.updateLocationView(app, updateViewCache, holder.iconDirection, holder.distance, wpt.lat, wpt.lon);
+		holder.title.setText(wpt.getName());
+		UpdateLocationUtils.updateLocationView(app, updateViewCache, holder.iconDirection, holder.distance, wpt.getLat(), wpt.getLon());
 	}
 
 	@Override
@@ -100,11 +100,11 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 	public WptPt getItem(int position) {
-		return gpx.getPoints().get(position);
+		return gpx.getPointsList().get(position);
 	}
 
 	public int getItemPosition(WptPt wptPt) {
-		return gpx.getPoints().indexOf(wptPt);
+		return gpx.getPointsList().indexOf(wptPt);
 	}
 
 	public void removeItem(int position) {

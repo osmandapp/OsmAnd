@@ -550,7 +550,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 			if (!Algorithms.isEmpty(gpxFile.getPath())) {
 				description = new File(gpxFile.getPath()).getName();
 			} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
-				description = gpxFile.getTracks().get(0).name;
+				description = gpxFile.getTracks().get(0).getName();
 			}
 		}
 
@@ -693,7 +693,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	@Override
 	public void calculateOnlineSelected(int segmentIndex) {
 		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
-		gpxFile.getPath() = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
+		gpxFile.setPath(FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT);
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				openPlanRoute(gpxFile, segmentIndex, CALCULATE_SRTM_MODE | FOLLOW_TRACK_MODE);
@@ -704,7 +704,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment imple
 	@Override
 	public void calculateOfflineSelected(int segmentIndex) {
 		GpxFile gpxFile = GpxUiHelper.makeGpxFromRoute(routingHelper.getRoute(), app);
-		gpxFile.getPath() = FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT;
+		gpxFile.setPath(FileUtils.getTempDir(app).getAbsolutePath() + "/route" + GPX_FILE_EXT);
 		SaveGpxHelper.saveGpx(gpxFile, errorMessage -> {
 			if (errorMessage == null) {
 				openPlanRoute(gpxFile, segmentIndex, CALCULATE_HEIGHTMAP_MODE | FOLLOW_TRACK_MODE);

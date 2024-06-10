@@ -75,7 +75,7 @@ public class OptionsCard extends MapBaseCard {
 		itemsContainer.removeAllViews();
 		items.clear();
 
-		boolean fileAvailable = gpxFile.getPath() != null && !gpxFile.showCurrentTrack;
+		boolean fileAvailable = gpxFile.getPath() != null && !gpxFile.isShowCurrentTrack();
 		if (!FileUtils.isTempFile(app, gpxFile.getPath())) {
 			items.add(createShowOnMapItem());
 			items.add(createAppearanceItem());

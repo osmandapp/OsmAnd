@@ -58,7 +58,7 @@ public class TrackEditCard extends MapBaseCard {
 			file = new File(gpxFile.getPath());
 			fileName = gpxFile.getPath();
 		} else if (!Algorithms.isEmpty(gpxFile.getTracks())) {
-			fileName = gpxFile.getTracks().get(0).name;
+			fileName = gpxFile.getTracks().get(0).getName();
 		}
 		if (Algorithms.isEmpty(fileName)) {
 			fileName = app.getString(R.string.shared_string_gpx_track);
@@ -88,10 +88,10 @@ public class TrackEditCard extends MapBaseCard {
 			if (selectedSegment != -1 && gpxFile.getNonEmptySegmentsCount() > selectedSegment) {
 				List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 				TrkSegment segment = segments.get(selectedSegment);
-				setupSecondRow(segment.points);
-			} else if (selectedRoute != -1 && gpxFile.routes.size() > selectedRoute) {
-				Route route = gpxFile.routes.get(selectedRoute);
-				setupSecondRow(route.points);
+				setupSecondRow(segment.getPoints());
+			} else if (selectedRoute != -1 && gpxFile.getRoutes().size() > selectedRoute) {
+				Route route = gpxFile.getRoutes().get(selectedRoute);
+				setupSecondRow(route.getPoints());
 			}
 		}
 		ImageButton editButton = view.findViewById(R.id.show_on_map);
@@ -137,8 +137,8 @@ public class TrackEditCard extends MapBaseCard {
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && selectedSegment != -1) {
 			int totalCount = gpxFile.getNonEmptyTrkSegments(false).size();
 			return app.getString(R.string.of, selectedSegment + 1, totalCount) + ", " + fileName;
-		} else if (gpxFile.routes.size() > 1 && selectedRoute != -1) {
-			int totalCount = gpxFile.routes.size();
+		} else if (gpxFile.getRoutes().size() > 1 && selectedRoute != -1) {
+			int totalCount = gpxFile.getRoutes().size();
 			return app.getString(R.string.of, selectedRoute + 1, totalCount) + ", " + fileName;
 		}
 		return fileName;

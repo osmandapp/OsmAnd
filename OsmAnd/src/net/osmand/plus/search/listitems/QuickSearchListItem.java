@@ -252,11 +252,11 @@ public class QuickSearchListItem {
 				if (!Algorithms.isEmpty(searchResult.localeRelatedObjectName)) {
 					sb.append(searchResult.localeRelatedObjectName);
 				}
-				if (gpx != null && !Algorithms.isEmpty(gpx.path)) {
+				if (gpx != null && !Algorithms.isEmpty(gpx.getPath())) {
 					if (sb.length() > 0) {
 						sb.append(", ");
 					}
-					sb.append(new File(gpx.path).getName());
+					sb.append(new File(gpx.getPath()).getName());
 				}
 				return sb.toString();
 			case MAP_MARKER:

@@ -34,7 +34,7 @@ public class TracksGroupsAdapter extends GroupsAdapter {
 			GpxDataItem gpx = getItem(position);
 			MapMarkersGroupViewHolder markersGroupViewHolder = (MapMarkersGroupViewHolder) holder;
 			markersGroupViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
-			markersGroupViewHolder.name.setText(gpx.getFile().getName().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " "));
+			markersGroupViewHolder.name.setText(gpx.getFile().name().replace(IndexConstants.GPX_FILE_EXT, "").replace("/", " ").replace("_", " "));
 			GpxTrackAnalysis analysis = gpx.getAnalysis();
 			markersGroupViewHolder.numberCount.setText(analysis != null ? String.valueOf(analysis.getWptPoints()) : "");
 			String description = getDescription(gpx);

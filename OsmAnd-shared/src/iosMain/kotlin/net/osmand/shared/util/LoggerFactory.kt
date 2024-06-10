@@ -19,7 +19,7 @@ class IosLogger(private val tag: String) : Logger {
 		NSLog("WARN: [$tag] $message")
 	}
 
-	override fun error(message: String, throwable: Throwable?) {
+	override fun error(message: String?, throwable: Throwable?) {
 		NSLog("ERROR: [$tag] $message")
 		throwable?.let {
 			NSLog("ERROR: [$tag] ${it.message}")
