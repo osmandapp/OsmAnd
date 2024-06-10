@@ -636,6 +636,9 @@ public class AndroidNetworkUtils {
 			} else {
 				long lastModified = connection.getLastModified();
 				if (lastModified > 0 && lastModified <= lastTime) {
+					if (progress != null) {
+						progress.finishTask();
+					}
 					return 0;
 				}
 				if (progress != null) {
