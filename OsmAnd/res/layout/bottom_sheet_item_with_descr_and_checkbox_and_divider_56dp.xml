@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
@@ -15,7 +14,7 @@
 		android:layout_gravity="center_vertical"
 		android:layout_marginStart="@dimen/content_padding"
 		android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-		tools:src="@drawable/list_destination"/>
+		tools:src="@drawable/list_destination" />
 
 	<LinearLayout
 		android:layout_width="0dp"
@@ -23,60 +22,9 @@
 		android:layout_weight="1"
 		android:orientation="vertical">
 
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:paddingTop="@dimen/context_menu_padding_margin_medium"
-			android:paddingBottom="@dimen/context_menu_padding_margin_medium">
+		<include layout="@layout/bottom_sheet_item_with_descr_and_checkbox_content_56dp" />
 
-			<LinearLayout
-				android:layout_width="0dp"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_weight="1"
-				android:orientation="vertical">
-
-				<TextView
-					android:id="@+id/title"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ellipsize="end"
-					android:maxLines="2"
-					android:textAppearance="@style/TextAppearance.ListItemTitle"
-					tools:text="Some title"/>
-
-				<TextView
-					android:id="@+id/description"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:ellipsize="end"
-					android:maxLines="2"
-					android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
-					android:textColor="@null"
-					tools:text="Some description"/>
-			</LinearLayout>
-
-			<androidx.appcompat.widget.AppCompatCheckBox
-				android:id="@+id/compound_button"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_gravity="center_vertical"
-				android:layout_marginHorizontal="@dimen/bottom_sheet_content_margin"
-				android:background="@null"
-				android:clickable="false"
-				android:focusable="false"
-				android:focusableInTouchMode="false"/>
-
-		</LinearLayout>
-
-		<View
-			android:id="@+id/divider_bottom"
-			android:layout_width="match_parent"
-			android:layout_height="1dp"
-			android:background="?attr/divider_color_basic"
-			android:visibility="gone"
-			tools:visibility="visible" />
+		<include layout="@layout/simple_divider_item" />
 
 	</LinearLayout>
 
