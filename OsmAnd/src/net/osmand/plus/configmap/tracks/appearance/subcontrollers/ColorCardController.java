@@ -1,7 +1,7 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 

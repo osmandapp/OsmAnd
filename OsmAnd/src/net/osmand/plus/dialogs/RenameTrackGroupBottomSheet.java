@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -55,7 +55,7 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 	}
 
 	private void renameGroupName() {
-		GPXFile gpxFile = group.getGpxFile();
+		GpxFile gpxFile = group.getGpxFile();
 		PointsGroup pointsGroup = gpxFile.getPointsGroups().get(group.getName());
 		if (pointsGroup != null) {
 			updateGpx(gpxFile, pointsGroup);
@@ -67,12 +67,12 @@ public class RenameTrackGroupBottomSheet extends EditTrackGroupBottomSheet {
 		dismiss();
 	}
 
-	private void updateGpx(@NonNull GPXFile gpxFile, @NonNull PointsGroup group) {
+	private void updateGpx(@NonNull GpxFile gpxFile, @NonNull PointsGroup group) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
 			UpdateGpxListener listener = getUpdateGpxListener(mapActivity);
-			PointsGroup newGroup = new PointsGroup(groupName, group.iconName, group.backgroundType, group.color);
-			Map<String, PointsGroup> groups = Collections.singletonMap(group.name, newGroup);
+			PointsGroup newGroup = new PointsGroup(groupName, group.getIconName(), group.getBackgroundType(), group.getColor());
+			Map<String, PointsGroup> groups = Collections.singletonMap(group.getName(), newGroup);
 
 			UpdatePointsGroupsTask task = new UpdatePointsGroupsTask(mapActivity, gpxFile, groups, listener);
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

@@ -12,9 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXFile;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,6 +22,7 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.utils.AndroidUtils;
+import net.osmand.shared.gpx.GpxFile;
 
 import org.apache.commons.logging.Log;
 
@@ -140,19 +140,19 @@ public class RestoreNavigationHelper {
 
 	@SuppressLint("StaticFieldLeak")
 	private void restoreRoutingModeInner(@Nullable TargetPoint pointToNavigate, @Nullable String gpxPath) {
-		AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
+		AsyncTask<String, Void, GpxFile> task = new AsyncTask<String, Void, GpxFile>() {
 			@Override
-			protected GPXFile doInBackground(String... params) {
+			protected GpxFile doInBackground(String... params) {
 				if (gpxPath != null) {
 					// Reverse also should be stored ?
-					GPXFile gpxFile = GPXUtilities.loadGPXFile(new File(gpxPath));
-					return gpxFile.error == null ? gpxFile : null;
+					GpxFile gpxFile = SharedUtil.loadGpxFile(new File(gpxPath));
+					return gpxFile.getError() == null ? gpxFile : null;
 				}
 				return null;
 			}
 
 			@Override
-			protected void onPostExecute(GPXFile result) {
+			protected void onPostExecute(GpxFile result) {
 				GPXRouteParamsBuilder gpxRoute;
 				if (result != null) {
 					gpxRoute = new GPXRouteParamsBuilder(result, settings);
@@ -188,7 +188,7 @@ public class RestoreNavigationHelper {
 		app.logRoutingEvent("enterRoutingMode gpxRoute " + gpxRoute);
 
 		mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().path : null);
+		settings.FOLLOW_THE_GPX_ROUTE.set(gpxRoute != null ? gpxRoute.getFile().getPath() : null);
 
 		routingHelper.setGpxParams(gpxRoute);
 		if (targetPointsHelper.getPointToStart() == null) {

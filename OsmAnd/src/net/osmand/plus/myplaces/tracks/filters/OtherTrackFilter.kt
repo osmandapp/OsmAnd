@@ -64,7 +64,7 @@ class OtherTrackFilter(
 			}
 
 			OtherTrackParam.WITH_WAYPOINTS -> {
-				val wptPointsCount = trackItem.dataItem?.analysis?.wptPoints ?: 0
+				val wptPointsCount = trackItem.dataItem?.getAnalysis()?.wptPoints ?: 0
 				wptPointsCount != 0
 			}
 		}

@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.util.CollectionUtils;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class GpxDisplayGroup {
 
-	private final GPXFile gpxFile;
+	private final GpxFile gpxFile;
 
 	private List<GpxDisplayItem> displayItems = new ArrayList<>();
 	private String gpxName;
@@ -23,13 +23,13 @@ public abstract class GpxDisplayGroup {
 	private int index = -1;
 	private int color;
 
-	GpxDisplayGroup(@NonNull GPXFile gpxFile, int index) {
+	GpxDisplayGroup(@NonNull GpxFile gpxFile, int index) {
 		this.gpxFile = gpxFile;
 		this.index = index;
 	}
 
 	@NonNull
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
@@ -99,7 +99,7 @@ public abstract class GpxDisplayGroup {
 	}
 
 	@NonNull
-	protected abstract GpxDisplayGroup newInstance(@NonNull GPXFile gpxFile);
+	protected abstract GpxDisplayGroup newInstance(@NonNull GpxFile gpxFile);
 
 	@Nullable
 	public static TrackDisplayGroup getTrackDisplayGroup(@Nullable GpxDisplayGroup group) {

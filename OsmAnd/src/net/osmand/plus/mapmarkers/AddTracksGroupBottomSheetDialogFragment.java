@@ -12,13 +12,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.SharedUtil;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.adapters.GroupsAdapter;
 import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
 import net.osmand.plus.track.GpxSelectionParams;
-import net.osmand.plus.track.helpers.GpxDataItem;
+import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.plus.track.helpers.GpxDbHelper;
 import net.osmand.plus.track.helpers.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
@@ -95,10 +96,10 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 	@Override
 	protected void onItemClick(int position) {
 		GpxDataItem dataItem = gpxList.get(position - 1);
-		GPXTrackAnalysis analysis = dataItem.getAnalysis();
+		GpxTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null && !Algorithms.isEmpty(analysis.getWptCategoryNames())) {
 			Bundle args = new Bundle();
-			args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, dataItem.getFile().getAbsolutePath());
+			args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, dataItem.getFile().absolutePath());
 
 			SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
 			fragment.setArguments(args);
@@ -106,7 +107,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 			fragment.show(getParentFragment().getChildFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 		} else {
 			GpxSelectionHelper selectionHelper = app.getSelectedGpxHelper();
-			File gpx = dataItem.getFile();
+			File gpx = SharedUtil.jFile(dataItem.getFile());
 			if (selectionHelper.getSelectedFileByPath(gpx.getAbsolutePath()) == null) {
 				GpxFileLoaderTask.loadGpxFile(gpx, getActivity(), gpxFile -> {
 					GpxSelectionParams params = GpxSelectionParams.newInstance()
@@ -124,7 +125,7 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 
 	private void populateList(GpxDataItem item) {
 		if (item != null) {
-			GPXTrackAnalysis analysis = item.getAnalysis();
+			GpxTrackAnalysis analysis = item.getAnalysis();
 			if (analysis != null && analysis.getWptPoints() > 0) {
 				int index = gpxList.indexOf(item);
 				if (index != -1) {

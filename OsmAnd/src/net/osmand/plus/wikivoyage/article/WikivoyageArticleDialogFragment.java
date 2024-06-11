@@ -30,7 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentManager.BackStackEntry;
 
 import net.osmand.IndexConstants;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -315,7 +315,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 					}
 
 					@Override
-					public void onGpxFileRead(@Nullable GPXFile gpxFile) {
+					public void onGpxFileRead(@Nullable GpxFile gpxFile) {
 						updateTrackButton(false, gpxFile);
 					}
 				});
@@ -333,7 +333,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		contentWebView.loadDataWithBaseURL(getBaseUrl(), createHtmlContent(), "text/html", "UTF-8", null);
 	}
 
-	private void updateTrackButton(boolean processing, @Nullable GPXFile gpxFile) {
+	private void updateTrackButton(boolean processing, @Nullable GpxFile gpxFile) {
 		Context ctx = getContext();
 		if (ctx != null) {
 			if (processing) {

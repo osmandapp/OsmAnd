@@ -23,8 +23,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.Location;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -109,7 +109,7 @@ public class SelectPointsFragment extends BaseOsmAndDialogFragment implements On
 	}
 
 	protected void setupListView(@NonNull View view) {
-		GPXFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
+		GpxFile gpxFile = trackItem.selectedGpxFile.getGpxFile();
 		GpxDisplayGroup group = app.getGpxDisplayHelper().buildPointsDisplayGroup(gpxFile, points, trackItem.name);
 
 		adapter = new TrackPointsAdapter(view.getContext(), selectedPoints, nightMode);

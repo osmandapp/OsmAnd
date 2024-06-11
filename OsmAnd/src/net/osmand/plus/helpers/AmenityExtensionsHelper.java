@@ -2,7 +2,7 @@ package net.osmand.plus.helpers;
 
 import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 import static net.osmand.data.Amenity.*;
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

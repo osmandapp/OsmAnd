@@ -1,23 +1,23 @@
 package net.osmand.plus.track;
 
-import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
-import static net.osmand.gpx.GpxParameter.COLOR;
-import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
-import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
-import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
-import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
-import static net.osmand.gpx.GpxParameter.SPLIT_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
-import static net.osmand.gpx.GpxParameter.WIDTH;
 import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.track.Gpx3DVisualizationType.FIXED_HEIGHT;
 import static net.osmand.plus.track.fragments.TrackMenuFragment.TRACK_FILE_NAME;
+import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
+import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.shared.gpx.GpxParameter.JOIN_SEGMENTS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
+import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
+import static net.osmand.shared.gpx.GpxParameter.SPLIT_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.os.Bundle;
 
@@ -25,7 +25,6 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.routing.ColoringType;
@@ -33,10 +32,11 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
-import net.osmand.plus.track.helpers.GpxDataItem;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import java.lang.annotation.Retention;
@@ -343,7 +343,7 @@ public class TrackDrawInfo {
 		return trackVisualizationType == FIXED_HEIGHT;
 	}
 
-	public void resetParams(@NonNull OsmandApplication app, @Nullable GPXFile gpxFile) {
+	public void resetParams(@NonNull OsmandApplication app, @Nullable GpxFile gpxFile) {
 		OsmandSettings settings = app.getSettings();
 		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		if (isCurrentRecording()) {

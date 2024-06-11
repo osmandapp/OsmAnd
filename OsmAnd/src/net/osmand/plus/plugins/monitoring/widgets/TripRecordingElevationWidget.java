@@ -9,7 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.myplaces.tracks.GPXTabItemType;
 import net.osmand.plus.settings.controllers.BatteryOptimizationController;
@@ -79,7 +79,7 @@ public abstract class TripRecordingElevationWidget extends SimpleWidget {
 	protected abstract double getElevationDiff(boolean reset);
 
 	@NonNull
-	protected GPXTrackAnalysis getAnalysis() {
+	protected GpxTrackAnalysis getAnalysis() {
 		return savingTrackHelper.getCurrentTrack().getTrackAnalysis(app);
 	}
 

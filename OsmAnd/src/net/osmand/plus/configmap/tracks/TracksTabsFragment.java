@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.configmap.tracks.TrackFolderLoaderTask.LoadTracksListener;
@@ -372,9 +372,9 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
-					if (gpxFile.showCurrentTrack) {
+					if (gpxFile.isShowCurrentTrack()) {
 						GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-					} else if (!Algorithms.isEmpty(gpxFile.path)) {
+					} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
 						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 					}
 					return true;
@@ -417,11 +417,11 @@ public class TracksTabsFragment extends BaseTracksTabsFragment implements LoadTr
 		FragmentActivity activity = requireActivity();
 		if (trackItem.isShowCurrentTrack()) {
 			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-			GPXFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
+			GpxFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
 
 			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
 				if (errorMessage == null) {
-					plugin.sendGPXFiles(activity, this, new File(gpxFile.path));
+					plugin.sendGPXFiles(activity, this, new File(gpxFile.getPath()));
 				}
 			});
 		} else {

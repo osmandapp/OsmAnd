@@ -1,6 +1,6 @@
 package net.osmand.plus.configmap.tracks.appearance.subcontrollers;
 
-import static net.osmand.gpx.GpxParameter.WIDTH;
+import static net.osmand.shared.gpx.GpxParameter.WIDTH;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;

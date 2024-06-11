@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -227,9 +227,9 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(getContentIcon(R.drawable.ic_action_gshare_dark))
 				.setOnClickListener(v -> GpxSelectionHelper.getGpxFile(activity, file, true, gpxFile -> {
-					if (gpxFile.showCurrentTrack) {
+					if (gpxFile.isShowCurrentTrack()) {
 						GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-					} else if (!Algorithms.isEmpty(gpxFile.path)) {
+					} else if (!Algorithms.isEmpty(gpxFile.getPath())) {
 						GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 					}
 					return true;
@@ -340,11 +340,11 @@ public class TrackFoldersHelper implements OnTrackFileMoveListener {
 	private void exportTrackItem(@NonNull OsmEditingPlugin plugin, @NonNull TrackItem trackItem, @NonNull BaseTrackFolderFragment fragment) {
 		if (trackItem.isShowCurrentTrack()) {
 			SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
-			GPXFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
+			GpxFile gpxFile = savingTrackHelper.getCurrentTrack().getGpxFile();
 
 			SaveGpxHelper.saveCurrentTrack(app, gpxFile, errorMessage -> {
 				if (errorMessage == null) {
-					plugin.sendGPXFiles(activity, fragment, new File(gpxFile.path));
+					plugin.sendGPXFiles(activity, fragment, new File(gpxFile.getPath()));
 				}
 			});
 		} else {

@@ -3,13 +3,13 @@ package net.osmand.plus.mapcontextmenu.builders;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_PHONE_ID;
 import static net.osmand.data.Amenity.ALT_NAME_WITH_LANG_PREFIX;
-import static net.osmand.gpx.GPXUtilities.ADDRESS_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.AMENITY_ORIGIN_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.AMENITY_PREFIX;
-import static net.osmand.gpx.GPXUtilities.BACKGROUND_TYPE_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.COLOR_NAME_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.ICON_NAME_EXTENSION;
-import static net.osmand.gpx.GPXUtilities.PROFILE_TYPE_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.ADDRESS_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_ORIGIN_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.AMENITY_PREFIX;
+import static net.osmand.shared.gpx.GpxUtilities.BACKGROUND_TYPE_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.COLOR_NAME_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.ICON_NAME_EXTENSION;
+import static net.osmand.shared.gpx.GpxUtilities.PROFILE_TYPE_EXTENSION;
 import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
 import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_FEET;
 import static net.osmand.plus.settings.enums.MetricsConstants.MILES_AND_YARDS;
@@ -40,7 +40,7 @@ import androidx.core.util.Pair;
 import androidx.core.util.PatternsCompat;
 
 import net.osmand.data.LatLon;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.osm.AbstractPoiType;
@@ -151,7 +151,7 @@ public class AmenityUIHelper extends MenuBuilder {
 			} else if (origKey.startsWith(AMENITY_PREFIX)) {
 				continue;
 			} else {
-				key = origKey.replace(GPXUtilities.OSM_PREFIX, "");
+				key = origKey.replace(GpxUtilities.OSM_PREFIX, "");
 			}
 			if (HIDDEN_EXTENSIONS.contains(key)) {
 				continue;

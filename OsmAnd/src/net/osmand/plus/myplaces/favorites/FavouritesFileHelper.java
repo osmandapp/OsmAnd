@@ -10,14 +10,14 @@ import androidx.annotation.Nullable;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.PointsGroup;
+import net.osmand.SharedUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.myplaces.favorites.SaveFavoritesTask.SaveFavoritesListener;
 import net.osmand.plus.track.helpers.GpxFileLoaderTask;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -111,8 +111,8 @@ public class FavouritesFileHelper {
 	}
 
 	private void loadFileGroups(@NonNull File file, @NonNull Map<String, FavoriteGroup> groups, boolean async) {
-		CallbackWithObject<GPXFile> callback = gpxFile -> {
-			if (gpxFile.error == null) {
+		CallbackWithObject<GpxFile> callback = gpxFile -> {
+			if (gpxFile.getError() == null) {
 				collectFavoriteGroups(gpxFile, groups);
 			}
 			return true;
@@ -124,15 +124,15 @@ public class FavouritesFileHelper {
 		}
 	}
 
-	public void loadGpxFile(@NonNull File file, @NonNull CallbackWithObject<GPXFile> callback) {
+	public void loadGpxFile(@NonNull File file, @NonNull CallbackWithObject<GpxFile> callback) {
 		GpxFileLoaderTask loaderTask = new GpxFileLoaderTask(file, null, callback);
 		loaderTask.executeOnExecutor(singleThreadExecutor);
 	}
 
-	public void loadGpxFileSync(@NonNull File file, @NonNull CallbackWithObject<GPXFile> callback) {
+	public void loadGpxFileSync(@NonNull File file, @NonNull CallbackWithObject<GpxFile> callback) {
 		GpxFileLoaderTask loaderTask = new GpxFileLoaderTask(file, null, null);
 		try {
-			GPXFile gpxFile = loaderTask.executeOnExecutor(singleThreadExecutor).get();
+			GpxFile gpxFile = loaderTask.executeOnExecutor(singleThreadExecutor).get();
 			callback.processResult(gpxFile);
 		} catch (ExecutionException | InterruptedException e) {
 			log.error(e);
@@ -153,7 +153,7 @@ public class FavouritesFileHelper {
 		}
 	}
 
-	public void collectFavoriteGroups(@NonNull GPXFile gpxFile, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
+	public void collectFavoriteGroups(@NonNull GpxFile gpxFile, @NonNull Map<String, FavoriteGroup> favoriteGroups) {
 		for (Map.Entry<String, PointsGroup> entry : gpxFile.getPointsGroups().entrySet()) {
 			String key = entry.getKey();
 			PointsGroup pointsGroup = entry.getValue();
@@ -176,8 +176,8 @@ public class FavouritesFileHelper {
 	}
 
 	@NonNull
-	public GPXFile asGpxFile(@NonNull List<FavoriteGroup> favoriteGroups) {
-		GPXFile gpxFile = new GPXFile(Version.getFullVersion(app));
+	public GpxFile asGpxFile(@NonNull List<FavoriteGroup> favoriteGroups) {
+		GpxFile gpxFile = new GpxFile(Version.getFullVersion(app));
 		for (FavoriteGroup group : favoriteGroups) {
 			gpxFile.addPointsGroup(group.toPointsGroup(app));
 		}
@@ -186,8 +186,8 @@ public class FavouritesFileHelper {
 
 	@Nullable
 	public Exception saveFile(@NonNull List<FavoriteGroup> favoriteGroups, @NonNull File file) {
-		GPXFile gpx = asGpxFile(favoriteGroups);
-		return GPXUtilities.writeGpxFile(file, gpx);
+		GpxFile gpx = asGpxFile(favoriteGroups);
+		return SharedUtil.writeGpxFile(file, gpx);
 	}
 
 	private File getBackupsFolder() {

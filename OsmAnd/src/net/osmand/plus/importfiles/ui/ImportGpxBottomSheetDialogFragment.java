@@ -7,7 +7,7 @@ import android.text.style.ForegroundColorSpan;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -25,7 +25,7 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	private ImportHelper importHelper;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private String fileName;
 	private long fileSize;
 
@@ -76,7 +76,7 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
 	                                @NonNull ImportHelper importHelper,
-	                                @NonNull GPXFile gpxFile,
+	                                @NonNull GpxFile gpxFile,
 	                                @NonNull String fileName,
 	                                long fileSize,
 	                                boolean save,

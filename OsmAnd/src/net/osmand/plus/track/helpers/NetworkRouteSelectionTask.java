@@ -6,13 +6,14 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.QuadRect;
-import net.osmand.gpx.GPXFile;
 import net.osmand.plus.base.BaseLoadAsyncTask;
 import net.osmand.router.network.NetworkRouteSelector;
 import net.osmand.router.network.NetworkRouteSelector.NetworkRouteSelectorFilter;
 import net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -20,18 +21,18 @@ import org.apache.commons.logging.Log;
 import java.util.Collections;
 import java.util.Map;
 
-public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
+public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GpxFile> {
 
 	private static final Log log = PlatformUtil.getLog(NetworkRouteSelectionTask.class);
 
 	private final QuadRect quadRect;
 	private final RouteKey routeKey;
-	private final CallbackWithObject<GPXFile> callback;
+	private final CallbackWithObject<GpxFile> callback;
 
 	public NetworkRouteSelectionTask(@NonNull FragmentActivity activity,
 	                                 @NonNull RouteKey routeKey,
 	                                 @NonNull QuadRect quadRect,
-	                                 @Nullable CallbackWithObject<GPXFile> callback) {
+	                                 @Nullable CallbackWithObject<GpxFile> callback) {
 		super(activity);
 		this.routeKey = routeKey;
 		this.quadRect = quadRect;
@@ -46,7 +47,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	}
 
 	@Override
-	protected GPXFile doInBackground(Void... voids) {
+	protected GpxFile doInBackground(Void... voids) {
 		BinaryMapIndexReader[] readers = app.getResourceManager().getReverseGeocodingMapFiles();
 		NetworkRouteSelectorFilter selectorFilter = new NetworkRouteSelectorFilter();
 		NetworkRouteSelector routeSelector = new NetworkRouteSelector(
@@ -55,12 +56,13 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 		if (routeKey != null) {
 			selectorFilter.keyFilter = Collections.singleton(routeKey);
 			try {
-				Map<RouteKey, GPXFile> routes = routeSelector.getRoutes(quadRect, true, routeKey);
+				Map<RouteKey, net.osmand.gpx.GPXFile> routes =
+						routeSelector.getRoutes(quadRect, true, routeKey);
 				if (isCancelled()) {
 					routes.clear();
 				}
 				if (!Algorithms.isEmpty(routes)) {
-					return routes.values().iterator().next();
+					return SharedUtil.kGpxFile(routes.values().iterator().next());
 				}
 			} catch (Exception e) {
 				log.error(e);
@@ -70,7 +72,7 @@ public class NetworkRouteSelectionTask extends BaseLoadAsyncTask<Void, Void, GPX
 	}
 
 	@Override
-	protected void onPostExecute(GPXFile gpxFile) {
+	protected void onPostExecute(GpxFile gpxFile) {
 		if (callback != null) {
 			callback.processResult(gpxFile);
 		}

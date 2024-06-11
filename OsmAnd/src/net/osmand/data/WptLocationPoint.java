@@ -4,24 +4,24 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxUtilities;
 
 public class WptLocationPoint implements LocationPoint {
 
-	GPXUtilities.WptPt pt;
+	GpxUtilities.WptPt pt;
 
-	public WptLocationPoint(GPXUtilities.WptPt p) {
+	public WptLocationPoint(GpxUtilities.WptPt p) {
 		this.pt = p;
 	}
 
 	@Override
 	public double getLatitude() {
-		return pt.lat;
+		return pt.getLat();
 	}
 
 	@Override
 	public double getLongitude() {
-		return pt.lon;
+		return pt.getLon();
 	}
 
 	@Override
@@ -35,10 +35,10 @@ public class WptLocationPoint implements LocationPoint {
 	}
 
 	public PointDescription getPointDescription(@NonNull Context ctx) {
-		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.name);
+		return new PointDescription(PointDescription.POINT_TYPE_WPT, pt.getName());
 	}
 
-	public GPXUtilities.WptPt getPt() {
+	public GpxUtilities.WptPt getPt() {
 		return pt;
 	}
 }

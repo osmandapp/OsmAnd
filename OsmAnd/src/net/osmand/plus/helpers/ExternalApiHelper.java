@@ -28,14 +28,15 @@ import com.google.gson.reflect.TypeToken;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.SharedUtil;
 import net.osmand.aidl.AidlSearchResultWrapper;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.search.SearchParams;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -210,16 +211,16 @@ public class ExternalApiHelper {
 				boolean navigate = API_CMD_NAVIGATE_GPX.equals(cmd);
 				String path = uri.getQueryParameter(PARAM_PATH);
 
-				GPXFile gpx = null;
+				GpxFile gpx = null;
 				if (path != null) {
 					File f = new File(path);
 					if (f.exists()) {
-						gpx = GPXUtilities.loadGPXFile(f);
+						gpx = SharedUtil.loadGpxFile(f);
 					}
 				} else if (intent.getStringExtra(PARAM_DATA) != null) {
 					String gpxStr = intent.getStringExtra(PARAM_DATA);
 					if (!Algorithms.isEmpty(gpxStr)) {
-						gpx = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxStr.getBytes()));
+						gpx = SharedUtil.loadGpxFile(new ByteArrayInputStream(gpxStr.getBytes()));
 					}
 				} else if (uri.getBooleanQueryParameter(PARAM_URI, false)) {
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -230,7 +231,7 @@ public class ExternalApiHelper {
 								.openFileDescriptor(gpxUri, "r");
 						if (gpxParcelDescriptor != null) {
 							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
-							gpx = GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
+							gpx = SharedUtil.loadGpxFile(new FileInputStream(fileDescriptor));
 						} else {
 							finish = true;
 							resultCode = RESULT_CODE_ERROR_GPX_NOT_FOUND;

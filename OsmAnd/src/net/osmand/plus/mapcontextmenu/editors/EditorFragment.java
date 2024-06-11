@@ -2,7 +2,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.shared.gpx.GpxUtilities.DEFAULT_ICON_NAME;
 
 import android.app.Activity;
 import android.content.Intent;

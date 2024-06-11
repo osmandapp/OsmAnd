@@ -3,7 +3,7 @@ package net.osmand.plus.track.data;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.gpx.GPXFile;
+import net.osmand.shared.gpx.GpxFile;
 import net.osmand.plus.track.helpers.GpxUiHelper;
 
 import java.io.File;
@@ -16,7 +16,7 @@ public class GPXInfo {
 	private final long fileSize;
 	private final long lastModified;
 
-	private GPXFile gpxFile;
+	private GpxFile gpxFile;
 	private boolean selected;
 
 	public GPXInfo(@NonNull String fileName, @Nullable File file) {
@@ -57,11 +57,11 @@ public class GPXInfo {
 	}
 
 	@Nullable
-	public GPXFile getGpxFile() {
+	public GpxFile getGpxFile() {
 		return gpxFile;
 	}
 
-	public void setGpxFile(@Nullable GPXFile gpxFile) {
+	public void setGpxFile(@Nullable GpxFile gpxFile) {
 		this.gpxFile = gpxFile;
 	}
 

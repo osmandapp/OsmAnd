@@ -31,10 +31,10 @@ import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXTrackAnalysis;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -167,20 +167,20 @@ public class TrackDetailsMenu {
 					float pos;
 					if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 							gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
-						pos = gpxItem.locationOnMap.time / 1000f;
+						pos = gpxItem.locationOnMap.getTime() / 1000f;
 					} else {
 						double totalDistance = 0;
-						int index = segment.points.indexOf(points.first);
+						int index = segment.getPoints().indexOf(points.first);
 						if (index != -1) {
 							WptPt previousPoint = null;
 							for (int i = 0; i < index; i++) {
-								WptPt currentPoint = segment.points.get(i);
+								WptPt currentPoint = segment.getPoints().get(i);
 								if (previousPoint != null) {
-									totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
+									totalDistance += MapUtils.getDistance(previousPoint.getLat(), previousPoint.getLon(), currentPoint.getLat(), currentPoint.getLon());
 								}
 								previousPoint = currentPoint;
 							}
-							totalDistance += MapUtils.getDistance(gpxItem.locationOnMap.lat, gpxItem.locationOnMap.lon, points.first.lat, points.first.lon);
+							totalDistance += MapUtils.getDistance(gpxItem.locationOnMap.getLat(), gpxItem.locationOnMap.getLon(), points.first.getLat(), points.first.getLon());
 						}
 						pos = (float) (totalDistance / ((OrderedLineDataSet) ds.get(0)).getDivX());
 					}
@@ -212,9 +212,9 @@ public class TrackDetailsMenu {
 
 		if (mapRenderer != null) {
 			List<PointI> polygon31 = NativeUtilities.getPolygon31FromPixelAndRadius(mapRenderer, pixel, radius);
-			return polygon31 != null ? GpxUtils.findLineInPolygon31(polygon31, segment.points) : null;
+			return polygon31 != null ? GpxUtils.findLineInPolygon31(polygon31, segment.getPoints()) : null;
 		} else {
-			return GpxUtils.findLineNearPoint(tileBox, segment.points, (int) radius, (int) pixel.x, (int) pixel.y);
+			return GpxUtils.findLineNearPoint(tileBox, segment.getPoints(), (int) radius, (int) pixel.x, (int) pixel.y);
 		}
 	}
 
@@ -246,9 +246,9 @@ public class TrackDetailsMenu {
 		GpxDisplayItem gpxItem = getGpxItem();
 		if (mapActivity != null && gpxItem != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			GPXFile groupGpx = gpxItem.group.getGpxFile();
+			GpxFile groupGpx = gpxItem.group.getGpxFile();
 			if (gpxItem.chartPointLayer == ChartPointLayer.GPX) {
-				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.path) == null;
+				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.getPath()) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
@@ -341,7 +341,7 @@ public class TrackDetailsMenu {
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		if (!Algorithms.isEmpty(ds) && gpxItem != null && segment != null) {
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			GPXFile gpxFile = gpxItem.group.getGpxFile();
+			GpxFile gpxFile = gpxItem.group.getGpxFile();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 				float time = pos * 1000;
@@ -351,7 +351,7 @@ public class TrackDetailsMenu {
 				point = GpxUtils.getSegmentPointByDistance(segment, gpxFile, distance, true, joinSegments);
 			}
 		}
-		return point == null ? null : new LatLon(point.lat, point.lon);
+		return point == null ? null : new LatLon(point.getLat(), point.getLon());
 	}
 
 	private QuadRect getRect(LineChart chart, float startPos, float endPos) {
@@ -367,8 +367,8 @@ public class TrackDetailsMenu {
 				if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME || gpxItem.chartAxisType == GPXDataSetAxisType.TIME_OF_DAY) {
 					float startTime = startPos * 1000;
 					float endTime = endPos * 1000;
-					for (WptPt p : segment.points) {
-						if (p.time - gpxItem.analysis.getStartTime() >= startTime && p.time - gpxItem.analysis.getStartTime() <= endTime) {
+					for (WptPt p : segment.getPoints()) {
+						if (p.getTime() - gpxItem.analysis.getStartTime() >= startTime && p.getTime() - gpxItem.analysis.getStartTime() <= endTime) {
 							if (left == 0 && right == 0) {
 								left = p.getLongitude();
 								right = p.getLongitude();
@@ -386,15 +386,15 @@ public class TrackDetailsMenu {
 					float startDistance = startPos * dataSet.getDivX();
 					float endDistance = endPos * dataSet.getDivX();
 					double previousSplitDistance = 0;
-					for (int i = 0; i < segment.points.size(); i++) {
-						WptPt currentPoint = segment.points.get(i);
+					for (int i = 0; i < segment.getPoints().size(); i++) {
+						WptPt currentPoint = segment.getPoints().get(i);
 						if (i != 0) {
-							WptPt previousPoint = segment.points.get(i - 1);
-							if (currentPoint.distance < previousPoint.distance) {
-								previousSplitDistance += previousPoint.distance;
+							WptPt previousPoint = segment.getPoints().get(i - 1);
+							if (currentPoint.getDistance() < previousPoint.getDistance()) {
+								previousSplitDistance += previousPoint.getDistance();
 							}
 						}
-						if (previousSplitDistance + currentPoint.distance >= startDistance && previousSplitDistance + currentPoint.distance <= endDistance) {
+						if (previousSplitDistance + currentPoint.getDistance() >= startDistance && previousSplitDistance + currentPoint.getDistance() <= endDistance) {
 							if (left == 0 && right == 0) {
 								left = currentPoint.getLongitude();
 								right = currentPoint.getLongitude();
@@ -570,12 +570,12 @@ public class TrackDetailsMenu {
 		OsmandApplication app = mapActivity.getMyApplication();
 		UiUtilities ic = app.getUIUtilities();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		GPXTrackAnalysis analysis = gpxItem.analysis;
+		GpxTrackAnalysis analysis = gpxItem.analysis;
 		if (analysis == null || gpxItem.chartTypes == null) {
 			parentView.setVisibility(View.GONE);
 			if (analysis != null && analysis.isBoundsCalculated()) {
 				mapActivity.getMapView()
-						.fitRectToMap(analysis.left, analysis.right, analysis.top, analysis.bottom, 0, 0, 0);
+						.fitRectToMap(analysis.getLeft(), analysis.getRight(), analysis.getTop(), analysis.getBottom(), 0, 0, 0);
 			}
 			return;
 		}
@@ -762,7 +762,7 @@ public class TrackDetailsMenu {
 		refreshChart(chart, forceFitTrackOnMap, true);
 	}
 
-	public List<GPXDataSetAxisType> getAvailableXTypes(GPXTrackAnalysis analysis) {
+	public List<GPXDataSetAxisType> getAvailableXTypes(GpxTrackAnalysis analysis) {
 		List<GPXDataSetAxisType> availableTypes = new ArrayList<>();
 
 		for (GPXDataSetAxisType type : GPXDataSetAxisType.values()) {
@@ -779,7 +779,7 @@ public class TrackDetailsMenu {
 	}
 
 	@NonNull
-	public List<GPXDataSetType[]> getAvailableYTypes(@NonNull GPXTrackAnalysis analysis) {
+	public List<GPXDataSetType[]> getAvailableYTypes(@NonNull GpxTrackAnalysis analysis) {
 		List<GPXDataSetType[]> availableTypes = new ArrayList<>();
 
 		boolean hasElevationData = analysis.hasElevationData();
@@ -848,7 +848,7 @@ public class TrackDetailsMenu {
 				List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 				if (ds != null && ds.size() > 0) {
 					OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.distance / dataSet.getDivX());
+					gpxItem.chartHighlightPos = (float) (gpxItem.locationOnMap.getDistance() / dataSet.getDivX());
 					chart.highlightValue(gpxItem.chartHighlightPos, 0);
 				}
 			} else {

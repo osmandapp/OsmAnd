@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.gpx.GPXTrackAnalysis;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItem;
@@ -39,7 +39,7 @@ public class UploadMultipleGPXBottomSheet extends MultipleSelectionBottomSheet<T
 		TextView pointsCount = view.findViewById(R.id.points_count);
 
 		TrackItem trackItem = item.getObject();
-		GPXTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(trackItem, app, null);
+		GpxTrackAnalysis analysis = GpxUiHelper.getGpxTrackAnalysis(trackItem, app, null);
 		if (analysis != null) {
 			pointsCount.setText(String.valueOf(analysis.getWptPoints()));
 			distance.setText(OsmAndFormatter.getFormattedDistance(analysis.getTotalDistance(), app));
