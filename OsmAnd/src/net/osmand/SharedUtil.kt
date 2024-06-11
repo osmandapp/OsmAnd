@@ -85,7 +85,7 @@ object SharedUtil {
 
 	@JvmStatic
 	fun isGpxParameterClass(parameter: GpxParameter, javaClass: Class<*>): Boolean {
-		return parameter.typeClass == javaClass
+		return parameter.typeClass.javaObjectType == javaClass
 	}
 
 	@JvmStatic

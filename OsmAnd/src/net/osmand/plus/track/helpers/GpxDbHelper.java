@@ -246,11 +246,11 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 	}
 
 	public boolean hasGpxDataItem(@NonNull File file) {
-		return dataItems.containsKey(file);
+		return dataItems.containsKey(SharedUtil.kFile(file));
 	}
 
 	public boolean hasGpxDirItem(@NonNull File file) {
-		return dirItems.containsKey(file);
+		return dirItems.containsKey(SharedUtil.kFile(file));
 	}
 
 	@NonNull

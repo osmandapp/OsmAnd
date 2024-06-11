@@ -78,6 +78,16 @@ class KFile {
 		}
 	}
 
+	override fun hashCode(): Int {
+		return path.hashCode()
+	}
+
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (other !is KFile) return false
+		return path == other.path
+	}
+
 	override fun toString(): String {
 		return path.toString()
 	}
