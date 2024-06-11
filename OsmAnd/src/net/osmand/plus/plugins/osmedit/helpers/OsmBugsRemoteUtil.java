@@ -3,6 +3,7 @@ package net.osmand.plus.plugins.osmedit.helpers;
 
 import androidx.annotation.NonNull;
 
+import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.model.Response;
 
 import net.osmand.PlatformUtil;
@@ -120,7 +121,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		if (authorizationAdapter.isValidToken() && !anonymous) {
 			try {
 				result = performOAuthRequest(url, requestMethod, userOperation, authorizationAdapter);
-			} catch (InterruptedException | ExecutionException | IOException e) {
+			} catch (InterruptedException | ExecutionException | IOException | OAuthException e) {
 				log.error(userOperation + " failed", e);
 				result.warning = e.getMessage();
 			}
