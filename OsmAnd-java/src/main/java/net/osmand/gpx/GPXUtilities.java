@@ -63,6 +63,7 @@ public class GPXUtilities {
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
 	public static final String HIDDEN_EXTENSION = "hidden";
+	public static final String POINT_TYPE_EXTENSION = "point_type";
 
 	public static final String GPXTPX_PREFIX = "gpxtpx:";
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
@@ -435,8 +436,16 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
 		}
 
-		public void setBackgroundType(String backType) {
-			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+		public void setBackgroundType(String type) {
+			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, type);
+		}
+
+		public String getSpecialPointType() {
+			return getExtensionsToRead().get(POINT_TYPE_EXTENSION);
+		}
+
+		public void setSpecialPointType(String type) {
+			getExtensionsToWrite().put(POINT_TYPE_EXTENSION, type);
 		}
 
 		public String getProfileType() {
