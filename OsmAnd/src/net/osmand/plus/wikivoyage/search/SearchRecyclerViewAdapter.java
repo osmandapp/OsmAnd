@@ -90,7 +90,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 				WikivoyageSearchHistoryItem historyItem = (WikivoyageSearchHistoryItem) item;
 				holder.icon.setImageDrawable(historyPlaceholder);
 				holder.title.setText(historyItem.getArticleTitle());
-				holder.leftDescr.setText(historyItem.getIsPartOf());
+				holder.leftDescr.setText(WikivoyageUtils.getTitleWithoutPrefix(historyItem.getIsPartOf()));
 				holder.rightDescr.setText(Algorithms.capitalizeFirstLetter(historyItem.getLang()));
 			}
 			holder.divider.setVisibility(lastItem ? View.GONE : View.VISIBLE);

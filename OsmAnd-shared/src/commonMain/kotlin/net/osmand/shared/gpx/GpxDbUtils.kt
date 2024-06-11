@@ -2,6 +2,7 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.IndexConstants
 import net.osmand.shared.api.SQLiteAPI.*
+import net.osmand.shared.gpx.GpxParameter.*
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_DIR_TABLE_NAME
 import net.osmand.shared.gpx.GpxDatabase.Companion.GPX_TABLE_NAME
 import net.osmand.shared.gpx.GpxTrackAnalysis.Companion.ANALYSIS_VERSION
@@ -80,10 +81,66 @@ object GpxDbUtils {
 		if (gpxCursor != null) {
 			val columnNames = gpxCursor.getColumnNames().map { it.lowercase() }.toMutableSet()
 
-			addIfMissingGpxTableColumn(columnNames, db, GpxParameter.FILE_NAME)
-			addIfMissingGpxTableColumn(columnNames, db, GpxParameter.FILE_DIR)
-			addIfMissingGpxTableColumn(columnNames, db, GpxParameter.TOTAL_DISTANCE)
-			// Add other columns similarly...
+			// temporary code to test failure
+			addIfMissingGpxTableColumn(columnNames, db, FILE_NAME);
+			addIfMissingGpxTableColumn(columnNames, db, FILE_DIR);
+			addIfMissingGpxTableColumn(columnNames, db, TOTAL_DISTANCE);
+			addIfMissingGpxTableColumn(columnNames, db, TOTAL_TRACKS);
+			addIfMissingGpxTableColumn(columnNames, db, START_TIME);
+			addIfMissingGpxTableColumn(columnNames, db, END_TIME);
+			addIfMissingGpxTableColumn(columnNames, db, TIME_SPAN);
+			addIfMissingGpxTableColumn(columnNames, db, TIME_MOVING);
+			addIfMissingGpxTableColumn(columnNames, db, TOTAL_DISTANCE_MOVING);
+			addIfMissingGpxTableColumn(columnNames, db, DIFF_ELEVATION_UP);
+			addIfMissingGpxTableColumn(columnNames, db, DIFF_ELEVATION_DOWN);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_ELEVATION);
+			addIfMissingGpxTableColumn(columnNames, db, MIN_ELEVATION);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_ELEVATION);
+			addIfMissingGpxTableColumn(columnNames, db, MIN_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, POINTS);
+			addIfMissingGpxTableColumn(columnNames, db, WPT_POINTS);
+			addIfMissingGpxTableColumn(columnNames, db, COLOR);
+			addIfMissingGpxTableColumn(columnNames, db, FILE_LAST_MODIFIED_TIME);
+			addIfMissingGpxTableColumn(columnNames, db, FILE_LAST_UPLOADED_TIME);
+			addIfMissingGpxTableColumn(columnNames, db, FILE_CREATION_TIME);
+			addIfMissingGpxTableColumn(columnNames, db, SPLIT_TYPE);
+			addIfMissingGpxTableColumn(columnNames, db, SPLIT_INTERVAL);
+			addIfMissingGpxTableColumn(columnNames, db, API_IMPORTED);
+			addIfMissingGpxTableColumn(columnNames, db, WPT_CATEGORY_NAMES);
+			addIfMissingGpxTableColumn(columnNames, db, SHOW_AS_MARKERS);
+			addIfMissingGpxTableColumn(columnNames, db, JOIN_SEGMENTS);
+			addIfMissingGpxTableColumn(columnNames, db, SHOW_ARROWS);
+			addIfMissingGpxTableColumn(columnNames, db, SHOW_START_FINISH);
+			addIfMissingGpxTableColumn(columnNames, db, TRACK_VISUALIZATION_TYPE);
+			addIfMissingGpxTableColumn(columnNames, db, TRACK_3D_WALL_COLORING_TYPE);
+			addIfMissingGpxTableColumn(columnNames, db, TRACK_3D_LINE_POSITION_TYPE);
+			addIfMissingGpxTableColumn(columnNames, db, ADDITIONAL_EXAGGERATION);
+			addIfMissingGpxTableColumn(columnNames, db, ELEVATION_METERS);
+			addIfMissingGpxTableColumn(columnNames, db, WIDTH);
+			addIfMissingGpxTableColumn(columnNames, db, COLORING_TYPE);
+			addIfMissingGpxTableColumn(columnNames, db, SMOOTHING_THRESHOLD);
+			addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_ALTITUDE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_ALTITUDE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_HDOP);
+			addIfMissingGpxTableColumn(columnNames, db, START_LAT);
+			addIfMissingGpxTableColumn(columnNames, db, START_LON);
+			addIfMissingGpxTableColumn(columnNames, db, NEAREST_CITY_NAME);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_TEMPERATURE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_SPEED);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_POWER);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_POWER);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_CADENCE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_CADENCE);
+			addIfMissingGpxTableColumn(columnNames, db, MAX_SENSOR_HEART_RATE);
+			addIfMissingGpxTableColumn(columnNames, db, AVG_SENSOR_HEART_RATE);
+			addIfMissingGpxTableColumn(columnNames, db, DATA_VERSION);
+			// temporary code to test failure
 
 			GpxParameter.entries.forEach { parameter ->
 				if (!columnNames.contains(parameter.columnName.lowercase())) {

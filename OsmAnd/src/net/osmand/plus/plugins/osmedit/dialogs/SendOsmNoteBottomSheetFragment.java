@@ -3,7 +3,6 @@ package net.osmand.plus.plugins.osmedit.dialogs;
 import static net.osmand.plus.plugins.osmedit.asynctasks.ValidateOsmLoginDetailsTask.ValidateOsmLoginListener;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendGpxBottomSheetFragment.showOpenStreetMapScreen;
 import static net.osmand.plus.plugins.osmedit.dialogs.SendPoiBottomSheetFragment.OPENSTREETMAP_POINT;
-import static net.osmand.plus.plugins.osmedit.fragments.OsmEditingFragment.OSM_LOGIN_DATA;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
@@ -39,7 +38,6 @@ import net.osmand.plus.plugins.osmedit.fragments.DashOsmEditsFragment;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.widgets.dialogbutton.DialogButtonType;
 import net.osmand.util.Algorithms;
@@ -98,14 +96,6 @@ public class SendOsmNoteBottomSheetFragment extends MenuBottomSheetDialogFragmen
 				app.getOsmOAuthHelper().addListener((OsmAuthorizationListener) fragment);
 			}
 			app.getOsmOAuthHelper().startOAuth((ViewGroup) getView(), nightMode);
-		});
-		View loginButton = sendOsmNoteView.findViewById(R.id.login_button);
-		loginButton.setOnClickListener(v -> {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA,
-						this, usedOnMap, null);
-			}
 		});
 		updateSignIn(uploadAnonymously.isChecked());
 		uploadAnonymously.setBackgroundResource(nightMode ? R.drawable.layout_bg_dark : R.drawable.layout_bg);

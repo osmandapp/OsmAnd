@@ -2636,7 +2636,7 @@
     <string name="saved_articles">Articles favoris</string>
     <string name="shared_string_explore">Explorer</string>
     <string name="use_two_digits_longitude">Utiliser une longitude à 2 chiffres</string>
-    <string name="wikivoyage_search_hint">Rechercher par Pays, Ville, Département</string>
+    <string name="wikivoyage_search_hint">Rechercher par pays, ville, département</string>
     <string name="shared_string_read">Lire</string>
     <string name="article_removed">Article supprimé</string>
     <string name="shared_string_contents">Contenu</string>
@@ -2676,7 +2676,7 @@
     <string name="travel_card_download_descr">Téléchargez les guides Wikivoyage pour consulter des articles sur les lieux sans connexion Internet.</string>
     <string name="update_is_available">Mise à jour disponible</string>
     <string name="download_file">Télécharger le fichier</string>
-    <string name="start_editing_card_image_text">Le guide de voyage mondial et gratuit que chacun peut améliorer.</string>
+    <string name="start_editing_card_image_text">Le guide de voyage libre du monde entier que chacun peut améliorer.</string>
     <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et ainsi partager vos connaissances, vos expériences et votre talent.</string>
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
@@ -5201,7 +5201,7 @@
     <string name="track_not_recorded">Non enregistré</string>
     <string name="shared_string_new_track">Nouvelle trace</string>
     <string name="shared_string_visible_on_map">Visible sur la carte</string>
-    <string name="delete_track_folder_dialog_message">Cela supprimera le dossier \"%1$s\" ainsi que toutes les traces (%2$s) dans celui-ci.</string>
+    <string name="delete_track_folder_dialog_message">Le dossier \"%1$s\" va être supprimé ainsi que toutes les traces (%2$s) qu\'il contient.</string>
     <string name="there_are_no_connected_sensors_of_this_type">Aucun capteur de ce type n\'est connecté</string>
     <string name="save_track_external_sensors_data">Données</string>
     <string name="external_sensors_source_of_data">Source des données</string>
@@ -5472,7 +5472,7 @@
     <string name="smart_folder_saved">Dossier intelligent enregistré</string>
     <string name="add_smart_folder">Ajouter un dossier intelligent</string>
     <string name="save_as_smart_folder">Enregistrer en tant que dossier intelligent</string>
-    <string name="delete_smart_folder_dialog_message">Ceci supprimera le dossier intelligent \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Le dossier intelligent \"%1$s\" va être supprimé (aucune trace ne sera supprimée).</string>
     <string name="empty_name">Sans nom</string>
     <string name="edit_filter">Modifier le filtre</string>
     <string name="empty_smart_folder_title">Aucune trace trouvée</string>
@@ -5689,7 +5689,7 @@
     <string name="top_and_bottom">En haut et en bas</string>
     <string name="title_3d_track">Trace 3D</string>
     <string name="track_line">Ligne de la trace</string>
-    <string name="downward_gradient">Dégradé vers le bas</string>
+    <string name="downward_gradient">Gradient vers le bas</string>
     <string name="maps_that_also_be_used">Cartes également utilisées : %1$s</string>
     <string name="getting_list_of_required_maps">Récupération de la liste des cartes requises…</string>
     <string name="required_maps">Cartes requises</string>
@@ -5699,7 +5699,7 @@
     <string name="route_line_use_coloring_altitude">La ligne d\'itinéraire est colorée selon l\'altitude.</string>
     <string name="delete_actions_button_confirmation">Êtes-vous certain de vouloir supprimer \"%1$s\" avec toutes les actions ajoutées ?</string>
     <string name="visualized_by">Affiché par</string>
-    <string name="upward_gradient">Dégradé vers le haut</string>
+    <string name="upward_gradient">Gradient vers le haut</string>
     <string name="explore_3d_track_description">Explorez la trace en 3D interactif ! Visualisez directement sur la carte : hauteur, vitesse et bien plus.</string>
     <string name="wall_color">Couleur du mur</string>
     <string name="route_line_use_coloring_speed">La ligne d\'itinéraire est colorée selon la vitesse de déplacement.</string>
@@ -5715,4 +5715,11 @@
     <string name="gpx_approximation_geo_cpp">Basé sur la géométrie (C++, rapide)</string>
     <string name="track_vertical_exaggeration_description">En modifiant la valeur de l\'échelle, vous pouvez modifier la hauteur de la trace 3D.</string>
     <string name="steps_per_minute_unit">PPM (Pas Par Min)</string>
+    <string name="disable_map_layers">Désactiver les couches de carte</string>
+    <string name="disable_map_layers_descr">Désactive toutes les couches affichées au-dessus de la carte vectorielle (nécessite un redémarrage).</string>
+    <string name="wall_height">Hauteur de mur</string>
+    <string name="travel_topics">Thèmes de voyage</string>
+    <string name="action_icon">Icône d\'action</string>
+    <string name="key_assignment_add_action">Ajouter une action</string>
+    <string name="rendering_value_dark_orange_name">Orange foncé</string>
 </resources>

@@ -11,7 +11,6 @@ import net.osmand.shared.gpx.GpxUtilities.RouteType
 import net.osmand.shared.gpx.GpxUtilities.Track
 import net.osmand.shared.gpx.GpxUtilities.TrkSegment
 import net.osmand.shared.gpx.GpxUtilities.WptPt
-import net.osmand.shared.gpx.GpxUtilities.createNetworkRouteExtensionWriter
 import net.osmand.shared.gpx.GpxUtilities.updateQR
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
@@ -24,7 +23,7 @@ class GpxFile : GpxExtensions {
 	var routes: MutableList<Route> = mutableListOf()
 	private var points: MutableList<WptPt> = mutableListOf()
 	var pointsGroups: MutableMap<String, PointsGroup> = LinkedHashMap()
-	private val networkRouteKeyTags: MutableMap<String, String> = LinkedHashMap()
+	val networkRouteKeyTags: MutableMap<String, String> = LinkedHashMap()
 
 	var error: KException? = null
 	var path: String = ""
@@ -661,12 +660,20 @@ class GpxFile : GpxExtensions {
 		getExtensionsToWrite()["line_3d_visualization_position_type"] = trackLinePositionType
 	}
 
-	fun setAdditionalExaggeration(additionalExaggeration: Int) {
+	fun setAdditionalExaggeration(additionalExaggeration: Float) {
 		getExtensionsToWrite()["vertical_exaggeration_scale"] = additionalExaggeration.toString()
 	}
 
 	fun getAdditionalExaggeration(): Float {
 		return extensions?.get("vertical_exaggeration_scale")?.toFloatOrNull() ?: 1f
+	}
+
+	fun setElevationMeters(elevation: Float) {
+		getExtensionsToWrite()["elevation_meters"] = elevation.toString()
+	}
+
+	fun getElevationMeters(): Float {
+		return extensions?.get("elevation_meters")?.toFloatOrNull() ?: 1000f
 	}
 
 	fun isShowStartFinishSet(): Boolean {
@@ -683,10 +690,6 @@ class GpxFile : GpxExtensions {
 
 	fun addRouteKeyTags(routeKey: Map<String, String>) {
 		networkRouteKeyTags.putAll(routeKey)
-		extensionsWriter =
-			if (networkRouteKeyTags.isEmpty()) null else createNetworkRouteExtensionWriter(
-				networkRouteKeyTags
-			)
 	}
 
 	fun getRouteKeyTags(): Map<String, String> {
@@ -730,7 +733,8 @@ class GpxFile : GpxExtensions {
 		if (metadata.author != null) size++
 		if (metadata.copyright != null) size++
 		if (metadata.bounds != null) size++
-		if (getExtensionsToWrite().isNotEmpty() || extensionsWriter != null) size++
+		size += getExtensionsToWrite().size
+		size += extensionsWriters?.size ?: 0
 		return size
 	}
 

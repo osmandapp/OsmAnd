@@ -529,7 +529,7 @@
     <string name="poi_military_naval_base">Militaire marinebasis</string>
     <string name="poi_man_made">Kunstmatig</string>
     <string name="poi_service">Dienst</string>
-    <string name="poi_rugby_union">Rugby union</string>
+    <string name="poi_rugby_union">Rugby bond</string>
     <string name="poi_rugby_league">Rugby competitie</string>
     <string name="poi_toboggan">Rodelen</string>
     <string name="poi_artwork">Kunst</string>
@@ -3760,7 +3760,7 @@
     <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
     <string name="poi_rtsa_scale_1a">1A</string>
     <string name="poi_rtsa_scale_nc_asterisk">n.b.*</string>
-    <string name="poi_rtsa_scale_nc">n.b.</string>
+    <string name="poi_rtsa_scale_nc">n.v.t.</string>
     <string name="poi_checkpoint_type_needler">Naald</string>
     <string name="poi_climbing_grade_uiaa_min">Makkelijkste route (UIAA)</string>
     <string name="poi_climbing_grade_french_min">Makkelijkste route (Frans)</string>
@@ -3926,8 +3926,25 @@
     <string name="poi_computer_parts">Computer onderdelen</string>
     <string name="poi_computer_sales">Computer verkoop</string>
     <string name="poi_laundry_service_filter">Wasserij</string>
-    <string name="poi_dry_cleaning_filter">Droog schoonmaken</string>
+    <string name="poi_dry_cleaning_filter">Stomerij</string>
     <string name="poi_dog">Honden</string>
     <string name="poi_climbing_grade_filter">Klimniveau</string>
     <string name="poi_arch">Boog</string>
+    <string name="poi_parking_fee_filter">Parkeertarief</string>
+    <string name="poi_recycling_pet_drink_bottles">PET drankflessen</string>
+    <string name="poi_water_filter">Water;Drinkwater</string>
+    <string name="poi_photo_booth">Foto cabine</string>
+    <string name="poi_live_music">Livemuziek</string>
+    <string name="poi_cemt">CEMT</string>
+    <string name="poi_vending_machine_fuel_filter">Automatische brandstofpompen;Brandstofautomaat</string>
+    <string name="poi_reservation">Reservering</string>
+    <string name="poi_us_maps_recreation_area_facility">Recreatiegebied voorziening</string>
+    <string name="poi_climbing_bolts_filter">Klimbouten</string>
+    <string name="poi_climbing_bolt">klimbout</string>
+    <string name="poi_healthcare_speciality_psychotherapist">Specialisme gezondheidszorg: psychotherapeut</string>
+    <string name="poi_healthcare_speciality_clinic">Specialisme gezondheidszorg: kliniek</string>
+    <string name="poi_healthcare_speciality_laboratory">Specialisme gezondheidszorg: laboratorium</string>
+    <string name="poi_shop_general">Warenhuis</string>
+    <string name="poi_hiking_filter">Geschikt voor trektochten</string>
+    <string name="poi_second_hand_filter">Tweedehands goederen</string>
 </resources>

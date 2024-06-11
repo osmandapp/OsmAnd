@@ -5489,7 +5489,7 @@
     <string name="smart_folder_saved">Smart-mappe gemt</string>
     <string name="add_smart_folder">Tilføj smart-mappe</string>
     <string name="save_as_smart_folder">Gem som smart-mappe</string>
-    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Dette vil fjerne smart-mappe \"%1$s\". (Ingen spor slettes.)</string>
     <string name="empty_smart_folder_title">Ingen matchende spor</string>
     <string name="empty_smart_folder_description">Matchende spor vises her</string>
     <string name="configure_filter">Konfigurér filter</string>
@@ -5625,10 +5625,10 @@
     <string name="default_buttons">Standardknapper</string>
     <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
     <string name="add_button">Tilføj knap</string>
-    <string name="shared_string_speedometer">Hastighedsmåler</string>
+    <string name="shared_string_speedometer">Speedometer</string>
     <string name="speed_limit_warning">Advarsel om fartgrænse</string>
-    <string name="shared_string_limit">Begrænsning</string>
-    <string name="when_exceeded">Når overskredet</string>
+    <string name="shared_string_limit">Grænse</string>
+    <string name="when_exceeded">Ved overskridelse</string>
     <string name="speedometer_description">Viser din aktuelle hastighed som rapporteret via GPS</string>
     <string name="help_article_setup_a_route_name">Opret en rute</string>
     <string name="rendering_attr_padusDisplayMode_description">Efter adgangstype eller forvalternavn</string>
@@ -5732,4 +5732,21 @@
     <string name="disable_map_layers_descr">Deaktiver alle kortlag over vektorkortet (genstart påkrævet).</string>
     <string name="disable_map_layers">Deaktiver kortlag</string>
     <string name="height_legend_description">Højdefarvekort bruges til at visualisere relief.</string>
+    <string name="change_terrain_color_scheme">Skift farvetema for terræn</string>
+    <string name="play_weather_forecast">Afspil vejrudsigt</string>
+    <string name="travel_topics">Rejse-emner</string>
+    <string name="wall_height">Murhøjde</string>
+    <string name="rendering_value_dark_orange_name">Mørk orange</string>
+    <string name="clear_all_key_shortcuts">Ryd alle tastaturgenveje</string>
+    <string name="new_key_assignment">Ny tastetildeling</string>
+    <string name="key_name_pattern">Tast \"%1$s\"</string>
+    <string name="key_assignment_add_key">Tilføj tast</string>
+    <string name="key_assignment_add_action">Tilføj handling</string>
+    <string name="action_icon">Handlingsikon</string>
+    <string name="assigned_keys">Tildelte taster</string>
+    <string name="clear_key_assignment_summary">Tastetildeling for den valgte handling ryddes.</string>
+    <string name="clear_all_key_shortcuts_summary">Alle tastetildelinger for den valgte type fjernes.</string>
+    <string name="no_assigned_keys_desc">Vælg en handling, og tildel en tast ved at trykke på knappen \'Tilføj\'.</string>
+    <string name="no_assigned_keys">Ingen tildelte taster</string>
+    <string name="shared_string_key">Tast</string>
 </resources>

@@ -97,6 +97,7 @@ public class Renderable {
         protected Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
         protected Gpx3DLinePositionType trackLinePosition = Gpx3DLinePositionType.TOP;
         protected float additionalExaggeration;
+        protected float elevationMeters;
 
         public RenderableSegment(List<WptPt> points, double segmentSize) {
             this.points = points;
@@ -135,6 +136,12 @@ public class Renderable {
         public boolean setAdditionalExaggeration(float additionalExaggeration) {
             boolean changed = this.additionalExaggeration != additionalExaggeration;
             this.additionalExaggeration = additionalExaggeration;
+            return changed;
+        }
+
+        public boolean setElevationMeters(float elevationMeters) {
+            boolean changed = this.elevationMeters != elevationMeters;
+            this.elevationMeters = elevationMeters;
             return changed;
         }
 
@@ -220,7 +227,7 @@ public class Renderable {
         public void drawGeometry(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
                                  @NonNull QuadRect quadRect, int trackColor, float trackWidth,
                                  @Nullable float[] dashPattern) {
-            Track3DStyle track3DStyle = new Track3DStyle(trackVisualizationType, trackWallColorType, trackLinePosition, additionalExaggeration);
+            Track3DStyle track3DStyle = new Track3DStyle(trackVisualizationType, trackWallColorType, trackLinePosition, additionalExaggeration, elevationMeters);
             drawGeometry(canvas, tileBox, quadRect, trackColor, trackWidth, dashPattern, drawArrows, track3DStyle);
         }
 

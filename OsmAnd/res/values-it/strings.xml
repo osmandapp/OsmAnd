@@ -5007,7 +5007,7 @@
     <string name="sound_beep_simple">Bip: semplice</string>
     <string name="sound_beep_complex">Bip: complesso</string>
     <string name="last_synchronized">Ultima sincronizzazione</string>
-    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa: in basso per la direzione del movimento, al centro per il resto.</string>
+    <string name="display_position_automatic_descr">Dipende dall\'orientamento della mappa: in basso per la direzione del movimento, al centro per tutte le altre.</string>
     <string name="sound_beep_complex_loud">Bip: complesso e forte</string>
     <string name="sound_beep_simple_loud">Bip: semplice e forte</string>
     <string name="shared_string_kilograms">chilogrammi</string>
@@ -5067,7 +5067,7 @@
 \n • Risolti i problemi con i gesti sulla mappa per inclinazione, zoom e rotazione
 \n
 \n</string>
-    <string name="sort_duration_ascending">Prima la durata più breve</string>
+    <string name="sort_duration_ascending">Prima il tempo minore</string>
     <string name="sort_duration_descending">Prima la durata maggiore</string>
     <string name="sort_distance_ascending">Prima la distanza minore</string>
     <string name="sort_distance_descending">Prima la distanza maggiore</string>
@@ -5189,7 +5189,7 @@
     <string name="write_data_from_sensor_to_track">Scrivi i dati dei sensori esterni sulla traccia GPX durante la registrazione del viaggio.</string>
     <string name="external_sensors_not_found">Sensori non trovati</string>
     <string name="there_are_no_connected_sensors_of_this_type">Non ci sono sensori collegati di questo tipo</string>
-    <string name="delete_track_folder_dialog_message">Questo eliminerà la cartella \"%1$s\" e tutte le tracce (%2$s) incluse.</string>
+    <string name="delete_track_folder_dialog_message">Questo eliminerà la cartella \"%1$s\" e tutte le %2$s tracce contenute.</string>
     <string name="external_sensors_source_of_data">Fonte dei dati</string>
     <string name="ant_plus_pair_bluetooth_prompt">Puoi associare con OsmAnd i sensori Bluetooth LE e ANT+.</string>
     <string name="rendering_attr_lightDetail_description">Predefinito: nome del contrassegno (carattere chiaro.gruppo.periodo), selezionare informazioni aggiuntive sui settori da 1 a 3 o carattere chiaro settore 1,2,3,4,5</string>
@@ -5463,7 +5463,7 @@
     <string name="weather_online">Meteo online</string>
     <string name="shared_string_show_icon">Mostra l\'icona</string>
     <string name="map_is_up_to_date">La mappa %1$s è aggiornata.</string>
-    <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Questa operazione eliminerà la cartella \"%1$s\". (Non sarà cancellata alcuna traccia)</string>
     <string name="sort_size_ascending">Ordine ascendente</string>
     <string name="widget_available_ram">RAM disponibile</string>
     <string name="terrain_maps">Mappe del terreno</string>
@@ -5618,7 +5618,7 @@
     <string name="shared_string_speedometer">Tachimetro</string>
     <string name="help_article_setup_a_route_name">Imposta un percorso</string>
     <string name="speed_limit_warning">Avviso limite di velocità</string>
-    <string name="speedometer_description">Mostra la velocità attuale come riportata dal GPS</string>
+    <string name="speedometer_description">Mostra la tua velocità attuale come riportata dal GPS</string>
     <string name="rendering_attr_padusDisplayMode_description">Per tipo di accesso o nome del gestore</string>
     <string name="rendering_value_access_name">Per tipo di accesso</string>
     <string name="rendering_value_managerName_name">Per nome del gestore</string>
@@ -5685,7 +5685,7 @@
     <string name="release_4_8">• Predisposto per la 4.8</string>
     <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" con tutte le azioni aggiunte?</string>
     <string name="retrieve_elevation_data_summary">OsmAnd può recuperare i dati altimetrici dalle strade nelle vicinanze o dalle mappe del terreno.</string>
-    <string name="shared_string_osm_id">ID OSM</string>
+    <string name="shared_string_osm_id">OSM ID</string>
     <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il terreno sulla mappa.</string>
     <string name="use_nearby_roads_summary">Utilizza la mappa offline per trovare strade e dati di elevazione nelle vicinanze. Potrebbe correggere la geometria del tracciato.</string>
     <string name="maps_that_also_be_used">Mappe già utilizzate: %1$s</string>
@@ -5715,4 +5715,23 @@
     <string name="show_debug_info_description">Visualizza informazioni grafiche sul posizionamento di ciascun testo della mappa</string>
     <string name="map_text">Testi della mappa</string>
     <string name="routing_attr_avoid_cobblestone_name">Evita il ciottolo</string>
+    <string name="disable_map_layers">Disabilita i livelli della mappa</string>
+    <string name="height_legend_description">Le mappe a colori dell\'altitudine sono utilizzate per visualizzare i rilievi.</string>
+    <string name="disable_map_layers_descr">Disabilita tutti i livelli della mappa sopra la mappa vettoriale (è necessario riavviare).</string>
+    <string name="steps_per_minute_unit">SPM</string>
+    <string name="travel_topics">Argomenti di viaggio</string>
+    <string name="wall_height">Altezza della parete</string>
+    <string name="rendering_value_dark_orange_name">Arancione scuro</string>
+    <string name="change_terrain_color_scheme">Cambia la combinazione dei colori del terreno</string>
+    <string name="clear_key_assignment_summary">L\'assegnazione dei tasti per l\'azione selezionata verrà cancellata.</string>
+    <string name="key_assignment_add_key">Aggiungi tasto</string>
+    <string name="shared_string_key">Tasto</string>
+    <string name="clear_all_key_shortcuts_summary">Tutte le assegnazioni dei tasti per il tipo selezionato verranno rimossi.</string>
+    <string name="new_key_assignment">Nuova assegnazione dei tasti</string>
+    <string name="clear_all_key_shortcuts">Cancella tutte le scorciatoie da tastiera</string>
+    <string name="no_assigned_keys">Nessun tasto assegnato</string>
+    <string name="key_name_pattern">Tasto \"%1$s\"</string>
+    <string name="assigned_keys">Tasti assegnati</string>
+    <string name="key_assignment_add_action">Aggiungi azione</string>
+    <string name="no_assigned_keys_desc">Seleziona un\'azione e assegna un tasto toccando il pulsante \"Aggiungi\".</string>
 </resources>

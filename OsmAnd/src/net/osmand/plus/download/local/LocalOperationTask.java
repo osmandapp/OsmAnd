@@ -1,6 +1,7 @@
 package net.osmand.plus.download.local;
 
 import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.download.local.LocalItemType.COLOR_DATA;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
 import static net.osmand.plus.download.local.LocalItemType.MAP_DATA;
@@ -227,6 +228,8 @@ public class LocalOperationTask extends AsyncTask<BaseLocalItem, BaseLocalItem, 
 						|| fileName.endsWith(BINARY_WIKIVOYAGE_MAP_INDEX_EXT)) {
 					parent = app.getAppPath(WIKIVOYAGE_INDEX_DIR);
 				}
+			} else if (item.getType() == COLOR_DATA) {
+				parent = app.getAppPath(COLOR_PALETTE_DIR);
 			}
 			return new File(parent, fileName);
 		}

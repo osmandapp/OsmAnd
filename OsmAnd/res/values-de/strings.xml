@@ -633,7 +633,7 @@
     <string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Laden Sie regionale Daten für die Offline-Verwendung über „Menü → Karten herunterladen“ herunter, um Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
     <string name="search_poi_location">Auf Signal warten …</string>
     <string name="search_near_map">Suche in der Nähe</string>
-    <string name="search_nearby">Suche um Aufenthaltsort</string>
+    <string name="search_nearby">In der Nähe suchen</string>
     <string name="map_orientation_default">Wie Standardeinstellung</string>
     <string name="map_orientation_portrait">Hochformat</string>
     <string name="map_orientation_landscape">Querformat</string>
@@ -3595,7 +3595,7 @@
 \n 
 \n%2$s sind die Ebenen, auf denen die ursprünglichen Kacheln sichtbar sind, eine Hoch- oder Herunterskalierung findet außerhalb dieser Werte statt.</string>
     <string name="map_source_zoom_levels">Legen Sie eine minimale und maximale Zoomstufe fest, um die Online-Karte anzuzeigen oder zu laden.</string>
-    <string name="shared_string_always">Immer</string>
+    <string name="shared_string_always">Jederzeit</string>
     <string name="screen_control">Bildschirmsteuerung</string>
     <string name="system_screen_timeout_descr">Schaltet den Bildschirm entsprechend dem Bildschirm-Timeout des Systems aus.</string>
     <string name="system_screen_timeout">Systembildschirm-Timeout verwenden</string>
@@ -4688,7 +4688,7 @@
     <string name="calculate_online_altitude_descr">Berechnen Sie die Höhe online auf OsmAnd-Servern anhand von Satellitenbildern und digitalen Höhenmodellen. Unterschiede zur vom Gerät aufgezeichneten Höhe können als Höhenkorrektur verwendet werden.</string>
     <string name="route_maneuvers_desc">Navigationswidgets werden während der Navigation aktiviert, um Informationen wie Entfernung, Ankunfts- oder verbleibende Zeit, nächste Abbiegungen, Peilung, aktueller Straßenname, Fahrspurinformationen, Höchstgeschwindigkeit, Annäherungswarnungen, POIs und Wegpunkte anzuzeigen.</string>
     <string name="map_markers_bar_widget_desc">Das Widget in der oberen Leiste zeigt die Entfernung und Richtung zur nächsten Kartenmarkierung von Ihrem aktuellen Standort aus an. Das Widget kann so konfiguriert werden, dass es 1 oder 2 Markierungen anzeigt.</string>
-    <string name="live_update_frequency_day_variant">Kartenaktualisierungen werden täglich überprüft.</string>
+    <string name="live_update_frequency_day_variant">Es wird täglich nach Kartenaktualisierungen gesucht.</string>
     <string name="next_live_update_time">Nächste Aktualisierung um %1$s Uhr.</string>
     <string name="live_update_frequency_hour_variant">Es wird stündlich nach Kartenaktualisierungen gesucht.</string>
     <string name="live_update_frequency_week_variant">Es wird wöchentlich nach Kartenaktualisierungen gesucht.</string>
@@ -4964,7 +4964,7 @@
     <string name="mtb_imba">IMBA</string>
     <string name="open_weather_action_description">Ermöglicht es Ihnen, einen Bildschirm mit detaillierten Wetterinformationen zu öffnen.</string>
     <string name="open_weather_action">Wetter öffnen</string>
-    <string name="shared_string_open">Öffnen</string>
+    <string name="shared_string_open">Geöffnet</string>
     <string name="rendering_attr_weatherCloudContours_name">Wolken-Isolinien</string>
     <string name="rendering_attr_weatherPrecipitationContours_name">Niederschlag-Isolinien</string>
     <string name="rendering_attr_weatherWindSpeedContours_name">Windgeschwindigkeits-Isolinien</string>
@@ -5484,7 +5484,7 @@
     <string name="help_article_troubleshooting_track_recording_issues_name">Streckenaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
-    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“.</string>
+    <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
     <string name="help_article_widgets_info_widgets_name">Informations-Widgets</string>
     <string name="help_article_navigation_routing_horse_routing_name">Reitrouting</string>
     <string name="help_article_widgets_name">Kartenwidgets</string>
@@ -5627,8 +5627,8 @@
     <string name="speed_limit_warning">Warnung vor Tempolimit</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">Bei Überschreitung</string>
-    <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie sie über GPS gemeldet wird</string>
-    <string name="shared_string_speedometer">Geschwindigkeitsmesser</string>
+    <string name="speedometer_description">Zeigt Ihre aktuelle Geschwindigkeit an, wie über GPS gemeldet</string>
+    <string name="shared_string_speedometer">Tachometer</string>
     <string name="help_article_setup_a_route_name">Route einrichten</string>
     <string name="rendering_value_access_name">Nach Zugangsart</string>
     <string name="rendering_value_managerName_name">Nach Name der Verwaltung</string>
@@ -5667,13 +5667,13 @@
 \n</string>
     <string name="round_up">Aufrunden</string>
     <string name="precise">Präzise</string>
-    <string name="distance_during_navigation">Distanz während der Navigation</string>
+    <string name="distance_during_navigation">Entfernung während der Navigation</string>
     <string name="distance_during_navigation_description">Wählen Sie, wie Entfernungsinformationen in Navigations-Widgets angezeigt werden (Entfernung zu einem Punkt, nächste Abbiegung, Spuren).
 \n
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
     <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
-    <string name="map_widget_map_scale">Maßstab</string>
+    <string name="map_widget_map_scale">Karten-Maßstab</string>
     <string name="shared_string_unchanged">Unverändert</string>
     <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
@@ -5683,13 +5683,13 @@
     <string name="fix_north_up_descr">Karte nicht mit Gesten in der Kartenausrichtung Nord oben drehen</string>
     <string name="change_default_appearance_confirmation">Ändern des Standardaussehens von %1$s?</string>
     <string name="use_3d_track_visualization">3D-Visualisierung</string>
-    <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Titel im Ordner oder nur auf neue Titel anwenden?</string>
+    <string name="change_default_tracks_appearance_confirmation">Änderungen auf vorhandene Tracks im Ordner oder nur auf neue Tracks anwenden?</string>
     <string name="shared_string_changes">Änderungen</string>
     <string name="apply_only_to_new">Nur für neue</string>
     <string name="release_4_8">• Für 4.8 vorbereitet</string>
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
-    <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Terrain auf der Karte anzuzeigen.</string>
-    <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts können Sie das 3D-Profil hervorheben.</string>
+    <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Gelände auf der Karte anzuzeigen.</string>
+    <string name="vertical_exaggeration_description">Durch Änderung des Skalierungs-Werts können Sie das 3D-Profil hervorheben.</string>
     <string name="shared_string_scale">Maßstab</string>
     <string name="use_terrain_maps">Terrainkarten verwenden</string>
     <string name="use_nearby_roads">Nutzung von nahegelegenen Straßen</string>
@@ -5717,7 +5717,7 @@
     <string name="top">Oben</string>
     <string name="top_and_bottom">Oben und unten</string>
     <string name="title_3d_track">3D-Track</string>
-    <string name="explore_3d_track_description">Entdecken Sie den Track in interaktivem 3D! Visualisieren Sie Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
+    <string name="explore_3d_track_description">Erkunden Sie den Track in interaktivem 3D! Visualisieren Sie Höhe, Geschwindigkeit und mehr direkt auf der Karte.</string>
     <string name="gpx_approximation_geo_cpp">Geometriebasiert (C++, schnell)</string>
     <string name="allow_display_on_top">Anzeige oben zulassen</string>
     <string name="allow_display_on_top_description">Kartentexte übereinander anzeigen lassen</string>
@@ -5728,7 +5728,23 @@
     <string name="routing_attr_avoid_cobblestone_description">Kopfsteinpflaster vermeiden</string>
     <string name="track_vertical_exaggeration_description">Durch Ändern des Skalenwerts können Sie die Höhe des 3D-Tracks ändern.</string>
     <string name="steps_per_minute_unit">SPM</string>
-    <string name="disable_map_layers_descr">Alle Kartenebenen über der Vektorkarte deaktivieren (Neustart erforderlich).</string>
+    <string name="disable_map_layers_descr">Alle Kartenebenen oberhalb der Vektorkarte deaktivieren (Neustart erforderlich).</string>
     <string name="disable_map_layers">Kartenebenen deaktivieren</string>
-    <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um Relief zu visualisieren.</string>
+    <string name="height_legend_description">Höhen-Farbkarten werden verwendet, um das Relief zu visualisieren.</string>
+    <string name="travel_topics">Reisethemen</string>
+    <string name="play_weather_forecast">Wettervorhersage abspielen</string>
+    <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
+    <string name="wall_height">Wandhöhe</string>
+    <string name="rendering_value_dark_orange_name">Dunkelorange</string>
+    <string name="clear_all_key_shortcuts">Alle Tastaturkürzel löschen</string>
+    <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
+    <string name="shared_string_key">Taste</string>
+    <string name="new_key_assignment">Neue Tastenzuweisung</string>
+    <string name="key_name_pattern">Taste \"%1$s\"</string>
+    <string name="clear_key_assignment_summary">Tastenzuweisung für die gewählte Aktion wird gelöscht.</string>
+    <string name="key_assignment_add_action">Aktion hinzufügen</string>
+    <string name="clear_all_key_shortcuts_summary">Tastenzuweisung für den gewählten Typ wird gelöscht.</string>
+    <string name="no_assigned_keys_desc">Wählen Sie eine Aktion und weisen Sie eine Taste mit der \"Hinzufügen\"-Schaltfläche zu.</string>
+    <string name="key_assignment_add_key">Taste hinzufügen</string>
+    <string name="assigned_keys">Zugewiesene Tasten</string>
 </resources>

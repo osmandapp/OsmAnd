@@ -99,19 +99,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding"
 			osmand:dialogButtonType="primary"
 			osmand:dialogButtonTitle="@string/sign_in_with_open_street_map"
-			osmand:dialogButtonBottomMargin="@dimen/content_padding_half" />
-
-		<net.osmand.plus.widgets.dialogbutton.DialogButton
-			android:id="@+id/login_button"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginHorizontal="@dimen/content_padding"
-			osmand:dialogButtonType="secondary"
-			osmand:dialogButtonTitle="@string/use_login_password"
-			osmand:dialogButtonTopMargin="@dimen/content_padding_small"
 			osmand:dialogButtonBottomMargin="@dimen/content_padding" />
 
 	</LinearLayout>

@@ -52,7 +52,8 @@ public class FileSettingsItem extends StreamSettingsItem {
 		TRAVEL("travel", IndexConstants.WIKIVOYAGE_INDEX_DIR, R.drawable.ic_plugin_wikipedia),
 		MULTIMEDIA_NOTES("multimedia_notes", IndexConstants.AV_INDEX_DIR, R.drawable.ic_action_photo_dark),
 		NAUTICAL_DEPTH("nautical_depth", IndexConstants.NAUTICAL_INDEX_DIR, R.drawable.ic_action_nautical_depth),
-		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites);
+		FAVORITES_BACKUP("favorites_backup", IndexConstants.BACKUP_INDEX_DIR, R.drawable.ic_action_folder_favorites),
+		COLOR_PALETTE("colors_palette", IndexConstants.COLOR_PALETTE_DIR, R.drawable.ic_action_file_color_palette);
 
 		private final String subtypeName;
 		private final String subtypeFolder;
@@ -144,6 +145,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 						break;
 					case NAUTICAL_DEPTH:
 						if (name.endsWith(IndexConstants.BINARY_DEPTH_MAP_INDEX_EXT)) {
+							return subtype;
+						}
+						break;
+					case COLOR_PALETTE:
+						if (name.endsWith(IndexConstants.TXT_EXT)) {
 							return subtype;
 						}
 						break;

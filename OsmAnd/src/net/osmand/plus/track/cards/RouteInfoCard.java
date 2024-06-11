@@ -45,9 +45,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTEXT_MENU_LINKS_ID;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
-import static net.osmand.plus.utils.AndroidUtils.getStringByProperty;
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 public class RouteInfoCard extends MapBaseCard {
 
@@ -85,11 +82,7 @@ public class RouteInfoCard extends MapBaseCard {
 		LinearLayout container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
 
-		RouteKey routeKey = this.routeKey;
-		String routeTypeName = routeKey.type.getName();
-
-		String routeTypeToDisplay = capitalizeFirstLetterAndLowercase(routeTypeName);
-		routeTypeToDisplay = getActivityTypeStringPropertyName(app, routeTypeName, routeTypeToDisplay);
+		String routeTypeToDisplay = AndroidUtils.getActivityTypeTitle(app, routeKey.type);
 		addInfoRow(container, app.getString(R.string.layer_route), routeTypeToDisplay, false, false);
 
 		for (TagsRow row : getRows()) {
@@ -291,14 +284,14 @@ public class RouteInfoCard extends MapBaseCard {
 					return app.getString(translatableKey.getValue());
 				}
 			}
-			return poiType != null ? poiType.getTranslation() : capitalizeFirstLetterAndLowercase(key);
+			return poiType != null ? poiType.getTranslation() : Algorithms.capitalizeFirstLetterAndLowercase(key);
 		}
 
 		@NonNull
 		public String getFormattedValue(@NonNull OsmandApplication app, @NonNull OsmRouteType routeType) {
 			switch (key) {
 				case "network":
-					String network = getStringByProperty(app, "poi_route_" + routeType.getName() + "_" + value + "_poi");
+					String network = AndroidUtils.getStringByProperty(app, "poi_route_" + routeType.getName() + "_" + value + "_poi");
 					return Algorithms.isEmpty(network) ? value : network;
 				case "wikipedia":
 					return WikiAlgorithms.getWikiUrl(value);

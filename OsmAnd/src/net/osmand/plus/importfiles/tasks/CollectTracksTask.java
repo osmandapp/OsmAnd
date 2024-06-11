@@ -5,14 +5,14 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.Track;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.importfiles.ui.ImportTrackItem;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxUtilities.Track;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -50,7 +50,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 			if (!track.isGeneralTrack()) {
 				GpxFile trackFile = new GpxFile(Version.getFullVersion(app));
 				trackFile.getTracks().add(track);
-				trackFile.setColor(gpxFile.getColor(0));
+				trackFile.setColor(track.getColor(gpxFile.getColor(0)));
 				trackFile.setWidth(gpxFile.getWidth(null));
 				trackFile.setShowArrows(gpxFile.isShowArrows());
 				trackFile.setShowStartFinish(gpxFile.isShowStartFinish());
@@ -60,6 +60,8 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				trackFile.set3DVisualizationType(gpxFile.get3DVisualizationType());
 				trackFile.set3DWallColoringType(gpxFile.get3DWallColoringType());
 				trackFile.set3DLinePositionType(gpxFile.get3DLinePositionType());
+				trackFile.setAdditionalExaggeration(gpxFile.getAdditionalExaggeration());
+				trackFile.setElevationMeters(gpxFile.getElevationMeters());
 
 				SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(trackFile, app);

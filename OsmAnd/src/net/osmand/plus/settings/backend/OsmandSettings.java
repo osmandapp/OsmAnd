@@ -1489,8 +1489,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 
-	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_type", HH_CPP, RoutingType.values()).makeProfile().cache();
-	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_type", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
+	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "router_type", HH_CPP, RoutingType.values()).makeProfile().cache(); // previously routing_type
+	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximator_type", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache(); // previously approximation_type
 
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 
@@ -1631,6 +1631,8 @@ public class OsmandSettings {
 	public final CommonPreference<String> CURRENT_TRACK_3D_WALL_COLORING_TYPE = new StringPreference(this, "currentTrackVisualization3dWallColorType", "none").makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_3D_LINE_POSITION_TYPE = new StringPreference(this, "currentTrackVisualization3dPositionType", "none").makeGlobal().makeShared().cache();
 	public final CommonPreference<Float> CURRENT_TRACK_ADDITIONAL_EXAGGERATION = new FloatPreference(this, "currentTrackVerticalExaggerationScale", 1f).makeGlobal().makeShared().cache();
+	public final CommonPreference<Float> CURRENT_TRACK_ELEVATION_METERS = new FloatPreference(this, "current_track_elevation_meters", 1000f).makeGlobal().makeShared().cache();
+
 	public final CommonPreference<String> TRACK_COLORS_PALETTE = new StringPreference(this, "track_colors_palette", null).makeGlobal().makeShared();
 	public final CommonPreference<String> POINT_COLORS_PALETTE = new StringPreference(this, "point_colors_palette", null).makeGlobal().makeShared();
 	public final CommonPreference<String> CUSTOM_TRACK_PALETTE_COLORS = new StringPreference(this, "custom_track_paletee_colors", null).makeGlobal().makeShared();

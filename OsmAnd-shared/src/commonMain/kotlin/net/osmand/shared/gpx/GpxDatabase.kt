@@ -57,6 +57,7 @@ class GpxDatabase {
 			} else {
 				GpxDbUtils.onUpgrade(this, conn, version, DB_VERSION)
 			}
+			//conn.setVersion(DB_VERSION); // correct version but dangerous for crash loop
 		}
 		return conn
 	}

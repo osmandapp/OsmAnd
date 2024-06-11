@@ -6,8 +6,11 @@ import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
 import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.GPX_RECORDED_INDEX_DIR;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
+import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -16,7 +19,6 @@ import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.WIDTH;
-import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
 import static net.osmand.util.Algorithms.formatDuration;
 
 import android.app.Activity;
@@ -42,14 +44,6 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SharedUtil;
-import net.osmand.shared.KException;
-import net.osmand.shared.gpx.GpxDataItem;
-import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.Track;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -74,6 +68,13 @@ import net.osmand.plus.track.helpers.save.SaveGpxHelper;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
+import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxFile;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
+import net.osmand.shared.gpx.GpxUtilities;
+import net.osmand.shared.gpx.GpxUtilities.Track;
+import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.GpxUtilities.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -672,15 +673,17 @@ public class GpxUiHelper {
 
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GpxFile gpxFile, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		gpxFile.setShowArrows(helper.getParameter(item, SHOW_ARROWS));
-		gpxFile.setShowStartFinish(helper.getParameter(item, SHOW_START_FINISH));
-		gpxFile.setSplitInterval(helper.getParameter(item, SPLIT_INTERVAL));
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.getParameter(item, SPLIT_TYPE)).getTypeName());
+		gpxFile.setShowArrows(helper.requireParameter(item, SHOW_ARROWS));
+		gpxFile.setShowStartFinish(helper.requireParameter(item, SHOW_START_FINISH));
+		gpxFile.setSplitInterval(helper.requireParameter(item, SPLIT_INTERVAL));
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.requireParameter(item, SPLIT_TYPE)).getTypeName());
 		gpxFile.set3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		gpxFile.set3DWallColoringType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		gpxFile.set3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
+		gpxFile.setAdditionalExaggeration(((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue());
+		gpxFile.setElevationMeters(((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue());
 
-		int color = helper.getParameter(item, COLOR);
+		int color = helper.requireParameter(item, COLOR);
 		if (color != 0) {
 			gpxFile.setColor(color);
 		}

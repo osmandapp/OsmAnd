@@ -25,8 +25,8 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
-import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.shared.data.KLatLon;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxDatabase;
 import net.osmand.shared.gpx.GpxDbUtils;
@@ -88,10 +88,11 @@ class GpxReaderTask extends AsyncTask<Void, GpxDataItem, Void> {
 		SQLiteConnection conn = database.openConnection(false);
 		if (conn != null) {
 			try {
+				boolean isApplicationInitializing = app.isApplicationInitializing();
 				file = readingItems.poll();
 				while (file != null && !isCancelled()) {
 					GpxDataItem item = readingItemsMap.remove(file);
-					if (GpxDbUtils.INSTANCE.isAnalyseNeeded(item)) {
+					if (GpxDbUtils.INSTANCE.isAnalyseNeeded(item) && !isApplicationInitializing) {
 						item = updateGpxDataItem(conn, item);
 					}
 					if (listener != null) {

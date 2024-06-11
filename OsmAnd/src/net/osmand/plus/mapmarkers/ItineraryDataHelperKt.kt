@@ -15,8 +15,8 @@ object ItineraryDataHelperKt {
 
 	@JvmStatic
 	fun assignExtensionWriter(gpxFile: GpxFile, groups: Collection<ItineraryGroupInfo>) {
-		if (gpxFile.extensionsWriter == null) {
-			gpxFile.extensionsWriter = object : GpxExtensionsWriter {
+		if (gpxFile.getExtensionsWriter("itinerary") == null) {
+			gpxFile.setExtensionsWriter("itinerary", object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					for (group in groups) {
 						try {
@@ -34,7 +34,7 @@ object ItineraryDataHelperKt {
 						}
 					}
 				}
-			}
+			})
 		}
 	}
 

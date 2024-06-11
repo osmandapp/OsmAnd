@@ -7,15 +7,19 @@ import static net.osmand.plus.routepreparationmenu.ChooseRouteFragment.ZOOM_OUT_
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +39,7 @@ import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherRasterLayer;
 import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
@@ -62,6 +67,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.TimeZone;
 
 public class WeatherForecastFragment extends BaseOsmAndFragment {
@@ -70,6 +76,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
+	public static final int ANIM_DELAY_MILLIS = 125;
+	public static final int WAIT_FOR_NEW_DOWNLOAD_START_DELAY = 1000;
 
 	private WeatherHelper weatherHelper;
 	private WeatherPlugin plugin;
@@ -77,6 +85,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private TimeSlider timeSlider;
 	private RulerWidget rulerWidget;
 	private WeatherWidgetsPanel widgetsPanel;
+	private Handler progressUpdateHandler;
+	private Handler animateForecastHandler;
 
 	private final Calendar currentDate = getDefaultCalendar();
 	private final Calendar selectedDate = getDefaultCalendar();
@@ -85,7 +95,10 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private final TimeFormatter timeFormatter = new TimeFormatter(Locale.getDefault(), "HH:mm", "h:mm a");
 
 	private WeatherContour previousWeatherContour;
-
+	private boolean isAnimatingForecast;
+	private ImageButton playForecastBtn;
+	private int currentStep;
+	private int animateStepCount;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -100,7 +113,10 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		progressUpdateHandler = new Handler(Objects.requireNonNull(Looper.myLooper()));
+		animateForecastHandler = new Handler(Objects.requireNonNull(Looper.myLooper()));
 		weatherHelper = app.getWeatherHelper();
+		weatherHelper.setDownloadStateListener(this::onDownloadStateChanged);
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 
 		currentDate.setTimeInMillis(WeatherUtils.roundForecastTimeToHour(System.currentTimeMillis()));
@@ -113,6 +129,13 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			zoomOutToMaxLayersZoom();
 		}
 		plugin.setContoursType(plugin.getSelectedForecastContoursType());
+	}
+
+	private void showProgressBar(boolean show) {
+		if (getView() != null) {
+			View progressBar = getView().findViewById(R.id.load_forecast_progress);
+			app.runInUIThread(() -> AndroidUiHelper.setVisibility(show ? View.VISIBLE : View.INVISIBLE, progressBar));
+		}
 	}
 
 	private void zoomOutToMaxLayersZoom() {
@@ -148,6 +171,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		widgetsPanel = view.findViewById(R.id.weather_widgets_panel);
 		widgetsPanel.setupWidgets(activity);
 
+		setupPLayForecastButton(view);
 		setupToolBar(view);
 		setupDatesView(view);
 		setupTimeSlider(view);
@@ -155,6 +179,71 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		moveCompassButton(view);
 
 		return view;
+	}
+
+	private void setupPLayForecastButton(View view) {
+		playForecastBtn = view.findViewById(R.id.play_forecast_button);
+		playForecastBtn.setOnClickListener((v) -> onPlayForecastClicked());
+		int bgRes = nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle;
+		playForecastBtn.setBackground(AppCompatResources.getDrawable(app, bgRes));
+		updatePlayForecastButton();
+	}
+
+	private void updatePlayForecastButton() {
+		int iconResId = isAnimatingForecast ? R.drawable.ic_pause : R.drawable.ic_play_dark;
+		Drawable iconDrawable = app.getUIUtilities().getIcon(iconResId, ColorUtilities.getActiveIconColorId(nightMode));
+		playForecastBtn.setImageDrawable(iconDrawable);
+	}
+
+	private void onPlayForecastClicked() {
+		isAnimatingForecast = !isAnimatingForecast;
+		if (isAnimatingForecast) {
+			Calendar calendar = getDefaultCalendar();
+			calendar.setTime(selectedDate.getTime());
+			int hour = (int) timeSlider.getValue();
+			calendar.set(Calendar.HOUR_OF_DAY, hour);
+			calendar.set(Calendar.MINUTE, (int) ((timeSlider.getValue() - (float) hour) * 60.0f));
+			plugin.prepareForDayAnimation(calendar.getTime());
+			requireMapActivity().refreshMap();
+			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
+			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
+			showProgressBar(true);
+			scheduleAnimationStart();
+		} else {
+			animateForecastHandler.removeCallbacksAndMessages(null);
+		}
+		updatePlayForecastButton();
+	}
+
+	private void moveToNextForecastFrame() {
+		animateForecastHandler.removeCallbacksAndMessages(null);
+		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
+			isAnimatingForecast = false;
+			updatePlayForecastButton();
+		} else {
+			currentStep++;
+			animateStepCount--;
+			float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
+			timeSlider.setValue(newValue);
+			if (isAnimatingForecast) {
+				animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
+			}
+		}
+	}
+
+	private int getStepsCount() {
+		if (timeSlider != null) {
+			return (int) ((timeSlider.getValueTo() - timeSlider.getValueFrom()) / timeSlider.getStepSize());
+		} else {
+			return 0;
+		}
+	}
+
+	@Override
+	public void onStop() {
+		super.onStop();
+		isAnimatingForecast = false;
+		animateForecastHandler.removeCallbacksAndMessages(null);
 	}
 
 	private void setupTimeSlider(@NonNull View view) {
@@ -190,7 +279,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
-		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
+		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 9);
 		timeSlider.setStepSize(today ? 1.0f / 6.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
 	}
 
@@ -436,5 +525,26 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 		}
+	}
+
+	private void onDownloadStateChanged(boolean isDownloading) {
+		progressUpdateHandler.removeCallbacksAndMessages(null);
+		if (isAnimatingForecast) {
+			if (isDownloading) {
+				showProgressBar(true);
+			} else {
+				scheduleAnimationStart();
+			}
+		} else {
+			showProgressBar(false);
+		}
+	}
+
+	private void scheduleAnimationStart() {
+		progressUpdateHandler.removeCallbacksAndMessages(null);
+		progressUpdateHandler.postDelayed(() -> {
+			showProgressBar(false);
+			moveToNextForecastFrame();
+		}, WAIT_FOR_NEW_DOWNLOAD_START_DELAY);
 	}
 }

@@ -44,6 +44,7 @@ enum class GpxParameter(
 	TRACK_3D_WALL_COLORING_TYPE("track_3d_wall_coloring_type", "TEXT", String::class, "none", false),
 	TRACK_3D_LINE_POSITION_TYPE("track_3d_line_position_type", "TEXT", String::class, "top", false),
 	ADDITIONAL_EXAGGERATION("additional_exaggeration", "double", Double::class, 1.0, false),
+	ELEVATION_METERS("elevation_meters", "double", Double::class, 1000.0, false),
 	WIDTH("width", "TEXT", String::class, null, false),
 	COLORING_TYPE("gradientScaleType", "TEXT", String::class, null, false),
 	SMOOTHING_THRESHOLD("smoothingThreshold", "double", Double::class, Double.NaN, false),

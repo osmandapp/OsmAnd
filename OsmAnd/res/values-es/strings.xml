@@ -5484,7 +5484,7 @@
     <string name="empty_name">Nombre vacío</string>
     <string name="edit_filter">Editar el filtro</string>
     <string name="save_as_smart_folder">Guardar como una carpeta inteligente</string>
-    <string name="delete_smart_folder_dialog_message">Esto borrará la carpeta inteligente «%1$s».</string>
+    <string name="delete_smart_folder_dialog_message">Esto eliminará la carpeta inteligente « %1$s ». (No se eliminará ninguna pista).</string>
     <string name="empty_smart_folder_title">No hay pista coincidente</string>
     <string name="empty_smart_folder_description">Las pistas coincidentes aparecen aquí</string>
     <string name="configure_filter">Configurar el filtro</string>
@@ -5622,10 +5622,10 @@
     <string name="default_buttons">Botones por defecto</string>
     <string name="custom_map_button_name_present">Este botón ya existe</string>
     <string name="shared_string_limit">Límite</string>
-    <string name="when_exceeded">Cuando se supere</string>
-    <string name="speedometer_description">Muestra tu velocidad actual a través del GPS</string>
+    <string name="when_exceeded">Cuando se excede</string>
+    <string name="speedometer_description">Muestra su velocidad actual según lo informado a través del GPS</string>
     <string name="shared_string_speedometer">Velocímetro</string>
-    <string name="speed_limit_warning">Aviso del límite de velocidad</string>
+    <string name="speed_limit_warning">Advertencia de límite de velocidad</string>
     <string name="help_article_setup_a_route_name">Crear una ruta</string>
     <string name="rendering_attr_padusDisplayMode_description">Por tipo de acceso o nombre del gestor</string>
     <string name="rendering_value_access_name">Por tipo de acceso</string>
@@ -5728,4 +5728,21 @@
     <string name="disable_map_layers">Deshabilitar capas de mapas</string>
     <string name="disable_map_layers_descr">Deshabilite todas las capas del mapa sobre el mapa vectorial (es necesario reiniciar).</string>
     <string name="height_legend_description">Los mapas de color de altitud se utilizan para visualizar el relieve.</string>
+    <string name="travel_topics">Temas de los viajes</string>
+    <string name="play_weather_forecast">Reproducir pronóstico del tiempo</string>
+    <string name="change_terrain_color_scheme">Cambiar esquema de color del terreno</string>
+    <string name="wall_height">Altura de la pared</string>
+    <string name="rendering_value_dark_orange_name">Naranja oscuro</string>
+    <string name="clear_key_assignment_summary">Se borrará la asignación de teclas para la acción seleccionada.</string>
+    <string name="clear_all_key_shortcuts_summary">Se eliminarán todas las asignaciones de teclas del tipo seleccionado.</string>
+    <string name="clear_all_key_shortcuts">Borrar todos los atajos de teclado</string>
+    <string name="no_assigned_keys_desc">Selecciona una acción y asigna una tecla pulsando el botón «Añadir».</string>
+    <string name="no_assigned_keys">Sin teclas asignadas</string>
+    <string name="new_key_assignment">Asignación de nuevas teclas</string>
+    <string name="key_assignment_add_key">Añadir tecla</string>
+    <string name="key_assignment_add_action">Añadir una acción</string>
+    <string name="shared_string_key">Tecla</string>
+    <string name="key_name_pattern">Tecla «%1$s»</string>
+    <string name="action_icon">Icono con la acción</string>
+    <string name="assigned_keys">Teclas asignadas</string>
 </resources>

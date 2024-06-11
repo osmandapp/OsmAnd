@@ -2,6 +2,7 @@ package net.osmand.plus.track.helpers;
 
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
+import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.shared.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
@@ -26,8 +27,6 @@ import net.osmand.shared.gpx.GpxParameter;
 import net.osmand.shared.io.KFile;
 
 import java.io.File;
-
-import kotlin.reflect.KClasses;
 
 public class GpxAppearanceHelper {
 
@@ -145,6 +144,20 @@ public class GpxAppearanceHelper {
 		}
 	}
 
+	public float getElevationMeters(@NonNull GpxFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getElevationMeters();
+		} else if (gpxFile.isShowCurrentTrack()) {
+			return settings.CURRENT_TRACK_ELEVATION_METERS.get();
+		} else {
+			Double elevation = getAppearanceParameter(new File(gpxFile.getPath()), ELEVATION_METERS);
+			if (elevation != null) {
+				return elevation.floatValue();
+			}
+			return gpxFile.getElevationMeters();
+		}
+	}
+
 	@Nullable
 	public String getTrackWidth(@NonNull GpxFile gpxFile, @Nullable String defaultWidth) {
 		String width;
@@ -168,11 +181,6 @@ public class GpxAppearanceHelper {
 			color = getAppearanceParameter(new File(gpxFile.getPath()), COLOR);
 		}
 		return color != null ? color : gpxFile.getColor(defaultColor);
-	}
-
-	@SuppressWarnings("unchecked")
-	private <T> T cast(Class<?> kClass, Object value) {
-		return (T) kClass.cast(value);
 	}
 
 	@NonNull

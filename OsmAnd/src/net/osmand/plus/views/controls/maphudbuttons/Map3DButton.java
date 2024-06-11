@@ -62,7 +62,7 @@ public class Map3DButton extends MapButton {
 		return view -> {
 			boolean defaultElevationAngle = isDefaultElevationAngle();
 			float tiltAngle = defaultElevationAngle ? getElevationAngle(mapView.getZoom()) : DEFAULT_ELEVATION_ANGLE;
-			animateDraggingMapThread.startTilting(tiltAngle);
+			animateDraggingMapThread.startTilting(tiltAngle, 0.0f);
 			mapView.refreshMap();
 		};
 	}

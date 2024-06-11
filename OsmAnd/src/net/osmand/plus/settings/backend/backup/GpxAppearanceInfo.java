@@ -1,8 +1,15 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
+import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 import static net.osmand.shared.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.shared.gpx.GpxParameter.COLOR;
 import static net.osmand.shared.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.shared.gpx.GpxParameter.ELEVATION_METERS;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_ALTITUDE;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_HDOP;
 import static net.osmand.shared.gpx.GpxParameter.MAX_FILTER_SPEED;
@@ -17,17 +24,10 @@ import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_3D_WALL_COLORING_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.TRACK_VISUALIZATION_TYPE;
 import static net.osmand.shared.gpx.GpxParameter.WIDTH;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_HDOP;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MAX_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_ALTITUDE;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_MIN_FILTER_SPEED;
-import static net.osmand.plus.track.helpers.GpsFilterHelper.GpsFilter.TAG_SMOOTHING_THRESHOLD;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.plugins.srtm.SRTMPlugin;
@@ -39,6 +39,7 @@ import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.helpers.GpxAppearanceHelper;
 import net.osmand.shared.gpx.GpxDataItem;
+import net.osmand.shared.gpx.GpxTrackAnalysis;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -68,6 +69,7 @@ public class GpxAppearanceInfo {
 	private Gpx3DWallColorType trackWallColorType = Gpx3DWallColorType.NONE;
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private float verticalExaggeration = 1f;
+	private float elevationMeters = 1000f;
 
 	public GpxAppearanceInfo() {
 	}
@@ -85,6 +87,7 @@ public class GpxAppearanceInfo {
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		verticalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
+		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
 
 		GpxTrackAnalysis analysis = item.getAnalysis();
 		if (analysis != null) {
@@ -112,6 +115,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
 		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
 		writeParam(json, "vertical_exaggeration_scale", verticalExaggeration);
+		writeParam(json, "elevation_meters", elevationMeters);
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
@@ -160,6 +164,8 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(trackLinePositionType);
 		hasAnyParam |= json.has("vertical_exaggeration_scale");
 		gpxAppearanceInfo.verticalExaggeration = (float) json.optDouble("vertical_exaggeration_scale", SRTMPlugin.MIN_VERTICAL_EXAGGERATION);
+		hasAnyParam |= json.has("elevation_meters");
+		gpxAppearanceInfo.elevationMeters = (float) json.optDouble("elevation_meters");
 
 		hasAnyParam |= json.has("time_span");
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");

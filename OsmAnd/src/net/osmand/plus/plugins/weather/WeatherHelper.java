@@ -48,6 +48,8 @@ public class WeatherHelper {
 	private final Map<Short, WeatherBand> weatherBands = new LinkedHashMap<>();
 	private final AtomicInteger bandsSettingsVersion = new AtomicInteger(0);
 	private final WeatherTotalCacheSize totalCacheSize;
+	private WeatherWebClient.WeatherWebClientListener downloadStateListener;
+	private WeatherWebClient webClient;
 
 	private WeatherTileResourcesManager weatherTileResourcesManager;
 
@@ -114,12 +116,15 @@ public class WeatherHelper {
 		int tileSize = 256;
 		MapPresentationEnvironment mapPresentationEnvironment = mapRenderer.getMapPresentationEnvironment();
 		float densityFactor = mapPresentationEnvironment.getDisplayDensityFactor();
-
-		WeatherWebClient webClient = new WeatherWebClient();
+		if(webClient != null) {
+			webClient.setDownloadStateListener(null);
+		}
+		webClient = new WeatherWebClient();
 		WeatherTileResourcesManager weatherTileResourcesManager = new WeatherTileResourcesManager(
 				new BandIndexGeoBandSettingsHash(), cacheDir.getAbsolutePath(), projResourcesPath,
 				tileSize, densityFactor, webClient.instantiateProxy(true)
 		);
+		webClient.setDownloadStateListener(downloadStateListener);
 		webClient.swigReleaseOwnership();
 		weatherTileResourcesManager.setBandSettings(getBandSettings(weatherTileResourcesManager));
 		this.weatherTileResourcesManager = weatherTileResourcesManager;
@@ -219,6 +224,13 @@ public class WeatherHelper {
 			}
 		}
 		return bandSettings;
+	}
+
+	public void setDownloadStateListener(WeatherWebClient.WeatherWebClientListener listener) {
+		downloadStateListener = listener;
+		if(webClient != null) {
+			webClient.setDownloadStateListener(downloadStateListener);
+		}
 	}
 
 	public int getBandsSettingsVersion() {

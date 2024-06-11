@@ -21,6 +21,7 @@ import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.LoggerFactory
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis
 import net.osmand.shared.util.StringBundle
+import net.osmand.shared.util.StringBundleWriter
 import net.osmand.shared.util.StringBundleXmlReader
 import net.osmand.shared.util.StringBundleXmlWriter
 import net.osmand.shared.xml.XmlParserException
@@ -32,6 +33,7 @@ import okio.Sink
 import okio.Source
 import okio.buffer
 import kotlin.math.round
+
 
 object GpxUtilities {
 
@@ -153,8 +155,7 @@ object GpxUtilities {
 
 	open class GpxExtensions {
 		var extensions: MutableMap<String, String>? = null
-		var extensionsWriter: GpxExtensionsWriter? = null
-		var additionalExtensionsWriter: GpxExtensionsWriter? = null
+		var extensionsWriters: MutableMap<String, GpxExtensionsWriter>? = null
 
 		fun getExtensionsToRead(): Map<String, String> {
 			return extensions ?: emptyMap()
@@ -165,6 +166,25 @@ object GpxUtilities {
 				extensions = LinkedHashMap()
 			}
 			return extensions!!
+		}
+
+		fun getExtensionsWritersToWrite(): MutableMap<String, GpxExtensionsWriter> {
+			if (extensionsWriters == null) {
+				extensionsWriters = LinkedHashMap()
+			}
+			return extensionsWriters!!
+		}
+
+		fun getExtensionsWriter(key: String?): GpxExtensionsWriter? {
+			return extensionsWriters?.get(key)
+		}
+
+		fun setExtensionsWriter(key: String, extensionsWriter: GpxExtensionsWriter) {
+			getExtensionsWritersToWrite()[key] = extensionsWriter
+		}
+
+		fun removeExtensionsWriter(key: String) {
+			extensionsWriters?.remove(key)
 		}
 
 		fun copyExtensions(e: GpxExtensions) {
@@ -969,6 +989,7 @@ object GpxUtilities {
 			)
 
 			assignPointsGroupsExtensionWriter(file)
+			assignNetworkRouteExtensionWriter(file)
 			writeMetadata(serializer, file, progress)
 			writePoints(serializer, file, progress)
 			writeRoutes(serializer, file, progress)
@@ -985,30 +1006,35 @@ object GpxUtilities {
 		}
 	}
 
-	fun createNetworkRouteExtensionWriter(networkRouteTags: Map<String, String>): GpxExtensionsWriter {
-		return object : GpxExtensionsWriter {
-			override fun writeExtensions(serializer: XmlSerializer) {
-				val bundle = StringBundle()
-				val tagsBundle = StringBundle()
-				tagsBundle.putString("type", networkRouteTags["type"])
-				for ((key, value) in networkRouteTags) {
-					tagsBundle.putString(key, value)
+	private fun assignNetworkRouteExtensionWriter(gpxFile: GpxFile) {
+		if (!KAlgorithms.isEmpty(gpxFile.networkRouteKeyTags)) {
+			gpxFile.setExtensionsWriter("network_route", object : GpxExtensionsWriter {
+				override fun writeExtensions(serializer: XmlSerializer) {
+					val bundle = StringBundle()
+					val tagsBundle = StringBundle()
+					tagsBundle.putString("type", gpxFile.networkRouteKeyTags.get("type"))
+					for ((key, value) in gpxFile.networkRouteKeyTags) {
+						tagsBundle.putString(key, value)
+					}
+					val routeKeyBundle = mutableListOf<StringBundle>()
+					routeKeyBundle.add(tagsBundle)
+					bundle.putBundleList(
+						"network_route",
+						OSMAND_EXTENSIONS_PREFIX + "route_key",
+						routeKeyBundle
+					)
+					val bundleWriter: StringBundleWriter = StringBundleXmlWriter(bundle, serializer)
+					bundleWriter.writeBundle()
 				}
-				val routeKeyBundle = mutableListOf(tagsBundle)
-				bundle.putBundleList(
-					"network_route",
-					OSMAND_EXTENSIONS_PREFIX + "route_key",
-					routeKeyBundle
-				)
-				val bundleWriter = StringBundleXmlWriter(bundle, serializer)
-				bundleWriter.writeBundle()
-			}
+			})
+		} else {
+			gpxFile.removeExtensionsWriter("network_route")
 		}
 	}
 
 	private fun assignPointsGroupsExtensionWriter(gpxFile: GpxFile) {
-		if (!KAlgorithms.isEmpty(gpxFile.pointsGroups) && gpxFile.extensionsWriter == null) {
-			gpxFile.extensionsWriter = object : GpxExtensionsWriter {
+		if (!KAlgorithms.isEmpty(gpxFile.pointsGroups)) {
+			gpxFile.setExtensionsWriter("points_groups", object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
 					val categoriesBundle = mutableListOf<StringBundle>()
@@ -1019,7 +1045,9 @@ object GpxUtilities {
 					val bundleWriter = StringBundleXmlWriter(bundle, serializer)
 					bundleWriter.writeBundle()
 				}
-			}
+			})
+		} else {
+			gpxFile.removeExtensionsWriter("points_groups");
 		}
 	}
 
@@ -1103,8 +1131,8 @@ object GpxUtilities {
 	}
 
 	private fun assignRouteExtensionWriter(segment: TrkSegment) {
-		if (segment.hasRoute() && segment.extensionsWriter == null) {
-			segment.extensionsWriter = object : GpxExtensionsWriter {
+		if (segment.hasRoute() && segment.getExtensionsWriter("route") == null) {
+			segment.setExtensionsWriter("route", object : GpxExtensionsWriter {
 				override fun writeExtensions(serializer: XmlSerializer) {
 					val bundle = StringBundle()
 					val segmentsBundle = mutableListOf<StringBundle>()
@@ -1120,7 +1148,7 @@ object GpxUtilities {
 					val bundleWriter = StringBundleXmlWriter(bundle, serializer)
 					bundleWriter.writeBundle()
 				}
-			}
+			})
 		}
 	}
 
@@ -1170,22 +1198,21 @@ object GpxUtilities {
 		p: GpxExtensions,
 		progress: IProgress?
 	) {
-		val extensionsWriter = p.extensionsWriter
-		val additionalExtensionsWriter = p.additionalExtensionsWriter
+		val extensionsWriters = p.getExtensionsWritersToWrite()
 		val hasExtensions = !extensions.isNullOrEmpty()
-		if (hasExtensions || extensionsWriter != null) {
+		val hasExtensionWriters = !KAlgorithms.isEmpty(extensionsWriters)
+		if (hasExtensions || hasExtensionWriters) {
 			serializer.startTag(null, "extensions")
 			if (hasExtensions) {
 				for ((key, value) in extensions!!) {
 					writeNotNullText(serializer, getOsmandTagKey(key, value), value)
 				}
 			}
-			if (additionalExtensionsWriter != null) {
-				serializer.startTag(null, "gpxtpx:TrackPointExtension")
-				additionalExtensionsWriter.writeExtensions(serializer)
-				serializer.endTag(null, "gpxtpx:TrackPointExtension")
+			if (hasExtensionWriters) {
+				for (writer in extensionsWriters.values) {
+					writer.writeExtensions(serializer)
+				}
 			}
-			extensionsWriter?.writeExtensions(serializer)
 			serializer.endTag(null, "extensions")
 			progress?.progress(1)
 		}
@@ -1230,20 +1257,20 @@ object GpxUtilities {
 	}
 
 	fun assignExtensionWriter(wptPt: WptPt, pluginsExtensions: Map<String, String>) {
-		if (wptPt.extensionsWriter == null) {
-			val regularExtensions = HashMap<String, String>()
-			val gpxtpxExtensions = HashMap<String, String>()
-			for ((key, value) in pluginsExtensions) {
-				if (key.startsWith(GPXTPX_PREFIX)) {
-					gpxtpxExtensions[key] = value
-				} else {
-					regularExtensions[key] = value
-				}
+		val regularExtensions = HashMap<String, String>()
+		val gpxtpxExtensions = HashMap<String, String>()
+		for ((key, value) in pluginsExtensions) {
+			if (key.startsWith(GPXTPX_PREFIX)) {
+				gpxtpxExtensions[key] = value
+			} else {
+				regularExtensions[key] = value
 			}
-			wptPt.extensionsWriter = createExtensionsWriter(regularExtensions, true)
-			if (gpxtpxExtensions.isNotEmpty()) {
-				wptPt.additionalExtensionsWriter = createExtensionsWriter(gpxtpxExtensions, false)
-			}
+		}
+		if (regularExtensions.isNotEmpty()) {
+			wptPt.setExtensionsWriter("extensions", createExtensionsWriter(regularExtensions, true))
+		}
+		if (gpxtpxExtensions.isNotEmpty()) {
+			wptPt.setExtensionsWriter("gpxtpx:TrackPointExtension", createGpxTpxExtensionsWriter(gpxtpxExtensions, false))
 		}
 	}
 
@@ -1253,17 +1280,31 @@ object GpxUtilities {
 	): GpxExtensionsWriter {
 		return object : GpxExtensionsWriter {
 			override fun writeExtensions(serializer: XmlSerializer) {
-				for ((key, value) in extensions) {
-					try {
-						writeNotNullText(
-							serializer,
-							if (addOsmandPrefix) getOsmandTagKey(key, value) else key,
-							value
-						)
-					} catch (e: IOException) {
-						log.error("Error writeExtensions", e)
-					}
+				writeExtensionsWithPrefix(serializer, extensions, addOsmandPrefix);
+			}
+		}
+	}
+
+	private fun createGpxTpxExtensionsWriter(extensions: Map<String, String>, addOsmandPrefix: Boolean): GpxExtensionsWriter {
+		return object : GpxExtensionsWriter {
+			override fun writeExtensions(serializer: XmlSerializer) {
+				try {
+					serializer.startTag(null, "gpxtpx:TrackPointExtension")
+					writeExtensionsWithPrefix(serializer, extensions, addOsmandPrefix)
+					serializer.endTag(null, "gpxtpx:TrackPointExtension")
+				} catch (e: IOException) {
+					log.error("Error create GpxTpxExtensions", e)
 				}
+			}
+		}
+	}
+
+	private fun writeExtensionsWithPrefix(serializer: XmlSerializer, extensions: Map<String, String>, addOsmandPrefix: Boolean) {
+		for ((key, value) in extensions.entries) {
+			try {
+				writeNotNullText(serializer, if (addOsmandPrefix) getOsmandTagKey(key, value) else key, value)
+			} catch (e: IOException) {
+				log.error("Error write ExtensionsWithPrefix", e)
 			}
 		}
 	}
@@ -1520,7 +1561,7 @@ object GpxUtilities {
 							}
 
 							networkRoute && tagName == "route_key" -> {
-								gpxFile.addRouteKeyTags(parseRouteKeyAttributes(parser))
+								gpxFile.networkRouteKeyTags.putAll(parseRouteKeyAttributes(parser))
 							}
 
 							tagName == "routepointextension" -> {
