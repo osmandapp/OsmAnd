@@ -632,6 +632,9 @@ public class AndroidNetworkUtils {
 			}
 			connection.connect();
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				if (progress != null) {
+					progress.finishTask();
+				}
 				return result;
 			} else {
 				long lastModified = connection.getLastModified();

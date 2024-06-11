@@ -97,6 +97,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private boolean isAnimatingForecast;
 	private ImageButton playForecastBtn;
 	private int currentStep;
+	private int animateStepCount;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -196,8 +197,15 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void onPlayForecastClicked() {
 		isAnimatingForecast = !isAnimatingForecast;
 		if (isAnimatingForecast) {
-			plugin.prepareForDayAnimation(new Date(System.currentTimeMillis()));
+			Calendar calendar = getDefaultCalendar();
+			calendar.setTime(selectedDate.getTime());
+			int hour = (int) timeSlider.getValue();
+			calendar.set(Calendar.HOUR_OF_DAY, hour);
+			calendar.set(Calendar.MINUTE, (int) ((timeSlider.getValue() - (float) hour) * 60.0f));
+			plugin.prepareForDayAnimation(calendar.getTime());
 			requireMapActivity().refreshMap();
+			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
+			animateStepCount = (int) (3.0 / timeSlider.getStepSize()) - 1;
 			showProgressBar(true);
 			scheduleAnimationStart();
 		} else {
@@ -208,15 +216,17 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private void moveToNextForecastFrame() {
 		animateForecastHandler.removeCallbacksAndMessages(null);
-		if (currentStep + 1 > getStepsCount()) {
-			currentStep = 0;
+		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
+			isAnimatingForecast = false;
+			updatePlayForecastButton();
 		} else {
 			currentStep++;
-		}
-		float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
-		timeSlider.setValue(newValue);
-		if (isAnimatingForecast) {
-			animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
+			animateStepCount--;
+			float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
+			timeSlider.setValue(newValue);
+			if (isAnimatingForecast) {
+				animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
+			}
 		}
 	}
 
@@ -533,7 +543,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		progressUpdateHandler.removeCallbacksAndMessages(null);
 		progressUpdateHandler.postDelayed(() -> {
 			showProgressBar(false);
-			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize());
 			moveToNextForecastFrame();
 		}, WAIT_FOR_NEW_DOWNLOAD_START_DELAY);
 	}

@@ -80,8 +80,8 @@ public class WeatherRasterLayer extends BaseMapLayer {
 	}
 
 	public void prepareForDayAnimation(long dateTime) {
-		timePeriodStart = OsmAndFormatter.getStartOfDayForTime(dateTime);
-		timePeriodEnd = timePeriodStart + DAY_IN_MILLISECONDS;
+		timePeriodStart = dateTime;
+		timePeriodEnd = timePeriodStart + 3 * HOUR_IN_MILLISECONDS;
 		timePeriodStep = 30 * MINUTE_IN_MILLISECONDS;
 		requireTimePeriodChange = true;
 		this.dateTime = dateTime;
