@@ -14,33 +14,33 @@ import de.KnollFrank.lib.preferencesearch.SearchPreferenceFragments;
 
 class SearchPreferenceButtonHelper {
 
-    private final BaseSettingsFragment baseSettingsFragment;
-    private final @IdRes int fragmentContainerViewId;
+	private final BaseSettingsFragment rootSearchPreferenceFragment;
+	private final @IdRes int fragmentContainerViewId;
 
-    public SearchPreferenceButtonHelper(final BaseSettingsFragment baseSettingsFragment,
-                                        final @IdRes int fragmentContainerViewId) {
-        this.baseSettingsFragment = baseSettingsFragment;
-        this.fragmentContainerViewId = fragmentContainerViewId;
-    }
+	public SearchPreferenceButtonHelper(final BaseSettingsFragment rootSearchPreferenceFragment,
+										final @IdRes int fragmentContainerViewId) {
+		this.rootSearchPreferenceFragment = rootSearchPreferenceFragment;
+		this.fragmentContainerViewId = fragmentContainerViewId;
+	}
 
-    public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
-        searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment());
-        searchPreferenceButton.setImageDrawable(baseSettingsFragment.getIcon(R.drawable.searchpreference_ic_search));
-        searchPreferenceButton.setVisibility(View.VISIBLE);
-    }
+	public void configureSearchPreferenceButton(final ImageView searchPreferenceButton) {
+		searchPreferenceButton.setOnClickListener(v -> showSearchPreferenceFragment());
+		searchPreferenceButton.setImageDrawable(rootSearchPreferenceFragment.getIcon(R.drawable.searchpreference_ic_search));
+		searchPreferenceButton.setVisibility(View.VISIBLE);
+	}
 
-    private void showSearchPreferenceFragment() {
-        final SearchPreferenceFragments searchPreferenceFragments =
-                new SearchPreferenceFragments(
-                        createSearchConfiguration(),
-                        baseSettingsFragment.getActivity().getSupportFragmentManager());
-        searchPreferenceFragments.showSearchPreferenceFragment();
-    }
+	private void showSearchPreferenceFragment() {
+		final SearchPreferenceFragments searchPreferenceFragments =
+				new SearchPreferenceFragments(
+						createSearchConfiguration(),
+						rootSearchPreferenceFragment.getActivity().getSupportFragmentManager());
+		searchPreferenceFragments.showSearchPreferenceFragment();
+	}
 
-    private SearchConfiguration createSearchConfiguration() {
-        return new SearchConfiguration(
-                fragmentContainerViewId,
-                Optional.empty(),
-                baseSettingsFragment.getClass());
-    }
+	private SearchConfiguration createSearchConfiguration() {
+		return new SearchConfiguration(
+				fragmentContainerViewId,
+				Optional.empty(),
+				rootSearchPreferenceFragment.getClass());
+	}
 }
