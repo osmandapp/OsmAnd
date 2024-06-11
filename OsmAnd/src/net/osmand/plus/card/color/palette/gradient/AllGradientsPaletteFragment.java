@@ -100,6 +100,7 @@ public class AllGradientsPaletteFragment extends BaseOsmAndDialogFragment implem
 
 	@Override
 	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
+		adapter.update();
 	}
 
 	@Override

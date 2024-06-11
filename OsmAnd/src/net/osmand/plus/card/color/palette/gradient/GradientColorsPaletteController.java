@@ -1,5 +1,6 @@
 package net.osmand.plus.card.color.palette.gradient;
 
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
@@ -7,22 +8,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.ColorPalette;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.OnColorsPaletteListener;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
-import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteController;
 import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class GradientColorsPaletteController implements IColorsPaletteController {
@@ -37,24 +39,33 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	protected GPXTrackAnalysis analysis;
 
-
-	public GradientColorsPaletteController(@NonNull OsmandApplication app, @NonNull GradientCollection gradientCollection, @NonNull String selectedGradientName, @Nullable GPXTrackAnalysis analysis) {
+	public GradientColorsPaletteController(@NonNull OsmandApplication app, @Nullable GPXTrackAnalysis analysis) {
 		this.app = app;
 		this.analysis = analysis;
-		updateContent(gradientCollection, selectedGradientName);
+	}
+
+	public void reloadGradientColors() {
+		ColorizationType colorizationType = gradientCollection.getColorizationType();
+		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(colorizationType);
+		this.gradientCollection = new GradientCollection(colorPaletteMap, app.getSettings().GRADIENT_PALETTES, colorizationType);
+		if (selectedPaletteColor instanceof PaletteGradientColor) {
+			notifyUpdatePaletteColors(null);
+		}
 	}
 
 	public void updateContent(@NonNull GradientCollection gradientCollection, @NonNull String selectedGradientName) {
 		this.gradientCollection = gradientCollection;
+		PaletteGradientColor newColor = null;
 		for (PaletteGradientColor gradientColor : gradientCollection.getPaletteColors()) {
 			if (gradientColor.getPaletteName().equals(selectedGradientName)) {
-				selectedPaletteColor = gradientColor;
+				newColor = gradientColor;
 			}
 		}
-		String colorizationName = gradientCollection.getColorizationType().name().toLowerCase();
-		if (selectedPaletteColor == null
-				|| (selectedPaletteColor instanceof PaletteGradientColor && !Algorithms.stringsEqual(((PaletteGradientColor) selectedPaletteColor).getColorizationTypeName(), colorizationName))) {
+
+		if (newColor == null) {
 			selectedPaletteColor = gradientCollection.getDefaultGradientPalette();
+		} else {
+			selectedPaletteColor = newColor;
 		}
 	}
 

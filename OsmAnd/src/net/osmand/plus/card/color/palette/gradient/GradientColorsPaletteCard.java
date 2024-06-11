@@ -62,6 +62,10 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 	@Override
 	protected void updateContent() {
 		setupColorsPalette();
+		updateCard();
+	}
+
+	private void updateCard() {
 		setupAllColorsButton();
 		askScrollToTargetColorPosition(controller.getSelectedColor(), false);
 		updateChart();
@@ -154,13 +158,8 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 
 	@Override
 	public void updatePaletteColors(@Nullable PaletteColor targetPaletteColor) {
+		updateCard();
 		paletteAdapter.updateColorsList();
-		if (targetPaletteColor != null) {
-			askScrollToTargetColorPosition(targetPaletteColor, true);
-		}
-		if (controller.isAccentColorCanBeChanged()) {
-			updateAllColorsButton();
-		}
 	}
 
 	@Override

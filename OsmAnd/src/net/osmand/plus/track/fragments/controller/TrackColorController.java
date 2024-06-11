@@ -120,7 +120,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 		GradientCollection gradientCollection = new GradientCollection(colorPaletteMap, settings.GRADIENT_PALETTES, colorizationType);
 
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, gradientCollection, drawInfo.getGradientColorName(), selectedGpx.getTrackAnalysis(app));
+			gradientPaletteController = new GradientColorsPaletteController(app, selectedGpx.getTrackAnalysis(app));
 		}
 		gradientPaletteController.updateContent(gradientCollection, drawInfo.getGradientColorName());
 		gradientPaletteController.setPaletteListener(getExternalListener());

@@ -188,7 +188,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 		GradientCollection gradientCollection = new GradientCollection(colorPaletteMap, settings.GRADIENT_PALETTES, colorizationType);
 
 		if (gradientPaletteController == null) {
-			gradientPaletteController = new GradientColorsPaletteController(app, gradientCollection, routeLinePreview.getGradientPalette(), null);
+			gradientPaletteController = new GradientColorsPaletteController(app, null);
 		}
 		gradientPaletteController.setPaletteListener(getExternalListener());
 		gradientPaletteController.updateContent(gradientCollection, routeLinePreview.getGradientPalette());
