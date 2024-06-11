@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 import static net.osmand.plus.settings.backend.ApplicationMode.valueOfStringKey;
 import static net.osmand.plus.settings.enums.MetricsConstants.KILOMETERS_AND_METERS;
@@ -259,6 +260,9 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectory = settings.getInternalAppPath();
 		}
 		FileUtils.removeUnnecessaryFiles(this);
+
+		// Initialize shared library
+		net.osmand.shared.util.PlatformUtil.INSTANCE.initialize(this, getAppPath(null), getAppPath(GPX_INDEX_DIR));
 
 		localeHelper.checkPreferredLocale();
 		appInitializer.onCreateApplication();

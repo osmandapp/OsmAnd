@@ -57,7 +57,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 			ds.rawExecSql(query)
 		}
 
-		override fun execSQL(query: String, objects: Array<Any>) {
+		override fun execSQL(query: String, objects: Array<Any?>) {
 			ds.withStatement("") {
 				objects.forEachIndexed { index, obj ->
 					when (obj) {
@@ -65,6 +65,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 						is Long -> bindLong(index, obj)
 						is Double -> bindDouble(index, obj)
 						is ByteArray -> bindBlob(index, obj)
+						null -> bindNull(index)
 					}
 				}
 				execute()

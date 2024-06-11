@@ -127,13 +127,7 @@ class GpxDatabase {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
 		val map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(item))
-		val values: Array<Any> = map.values.filterNotNull().toTypedArray()
-		if (values.size == map.values.size) {
-			db.execSQL(
-				DbUtils.createDbInsertQuery(tableName, map.keys),
-				values
-			)
-		}
+		db.execSQL(DbUtils.createDbInsertQuery(tableName, map.keys), map.values.toTypedArray())
 	}
 
 	private fun readGpxDataItem(query: SQLiteCursor): GpxDataItem {
@@ -175,9 +169,9 @@ class GpxDatabase {
 				analysis?.setGpxParameter(parameter, value)
 			} else {
 				if (parameter == COLOR) {
-					value = GpxUtilities.parseColor(value as String)
+					value = GpxUtilities.parseColor(value as String?)
 				} else if (parameter == COLORING_TYPE) {
-					val type = value as String
+					val type = value as String?
 					var coloringType = ColoringType.valueOf(ColoringPurpose.TRACK, type)
 					val scaleType = GradientScaleType.getGradientTypeByName(type)
 					if (coloringType == null && scaleType != null) {

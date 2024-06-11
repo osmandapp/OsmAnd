@@ -71,7 +71,8 @@ public class GpxDbHelper implements GpxDbReaderCallback {
 		long start = System.currentTimeMillis();
 		List<GpxDataItem> items = getItems();
 
-		Map<KFile, Boolean> fileExistenceMap = items.stream().collect(Collectors.toMap(GpxDataItem::getFile, item -> item.getFile().exists()));
+		Map<KFile, Boolean> fileExistenceMap = items.stream().collect(
+				Collectors.toMap(GpxDataItem::getFile, item -> item.getFile().exists()));
 
 		items.forEach(item -> {
 			KFile file = item.getFile();

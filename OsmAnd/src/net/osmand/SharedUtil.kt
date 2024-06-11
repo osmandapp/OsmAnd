@@ -79,7 +79,7 @@ object SharedUtil {
 
 	@JvmStatic
 	@Suppress("UNCHECKED_CAST")
-	fun <T : Any> castGpxParameter(parameter: GpxParameter, value: Any): T? {
+	fun <T : Any> castGpxParameter(parameter: GpxParameter, value: Any?): T? {
 		return if (parameter.typeClass.isInstance(value)) value as T else null
 	}
 

@@ -33,7 +33,6 @@ public class AppearanceData {
 	}
 
 	@Nullable
-	@SuppressWarnings("unchecked")
 	public <T> T getParameter(@NonNull GpxParameter parameter) {
 		Pair<Boolean, Object> pair = map.get(parameter);
 		return pair != null ? SharedUtil.castGpxParameter(parameter, pair.second) : null;

@@ -24,8 +24,8 @@ object DbUtils {
 		tableName: String,
 		columnsToUpdate: Map<String, Any?>,
 		columnsToSearch: Map<String, Any?>
-	): Pair<String, Array<Any>> {
-		val values = mutableListOf<Any>()
+	): Pair<String, Array<Any?>> {
+		val values = mutableListOf<Any?>()
 		val updateQuery = getRowsQuery(columnsToUpdate, values, ", ")
 		val whereQuery = getRowsQuery(columnsToSearch, values, " AND ")
 
@@ -33,21 +33,19 @@ object DbUtils {
 		return Pair(query, values.toTypedArray())
 	}
 
-	private fun getRowsQuery(map: Map<String, Any?>, values: MutableList<Any>, separator: String): String {
+	private fun getRowsQuery(map: Map<String, Any?>, values: MutableList<Any?>, separator: String): String {
 		val builder = StringBuilder()
 		val iterator = map.entries.iterator()
 
 		while (iterator.hasNext()) {
 			val entry = iterator.next()
-			val value = entry.value ?: continue
-
 			builder.append(entry.key)
 			builder.append(" = ?")
 
 			if (iterator.hasNext()) {
 				builder.append(separator)
 			}
-			values.add(value)
+			values.add(entry.value)
 		}
 
 		return builder.toString()

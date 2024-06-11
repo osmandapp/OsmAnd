@@ -6,7 +6,7 @@ interface SQLiteAPI {
 		fun close()
 		fun rawQuery(sql: String, selectionArgs: Array<String>?): SQLiteCursor?
 		fun execSQL(query: String)
-		fun execSQL(query: String, objects: Array<Any>)
+		fun execSQL(query: String, objects: Array<Any?>)
 		fun compileStatement(query: String): SQLiteStatement
 		fun setVersion(newVersion: Int)
 		fun getVersion(): Int

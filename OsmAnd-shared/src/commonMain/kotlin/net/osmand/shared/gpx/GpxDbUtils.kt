@@ -149,7 +149,8 @@ object GpxDbUtils {
 			}
 			val relativePath = KFile(file.path().replace("${gpxDir.path}/", ""))
 			val fileDir = if (file.isDirectory()) relativePath.path else relativePath.parent()
-			return fileDir.toString()
+			val res = fileDir.toString()
+			return if (res == ".") "" else res
 		}
 		return ""
 	}

@@ -35,7 +35,6 @@ class KFile {
 		return if (parent != null) KFile(parent) else null
 	}
 
-	@Throws(IOException::class)
 	fun exists(): Boolean = FileSystem.SYSTEM.exists(path)
 
 	fun isAbsolute(): Boolean = path.isAbsolute
@@ -43,15 +42,17 @@ class KFile {
 	fun isDirectory(): Boolean =
 		FileSystem.SYSTEM.metadataOrNull(path)?.isDirectory == true
 
-	@Throws(IOException::class)
 	fun lastModified(): Long {
-		val metadata: FileMetadata? = FileSystem.SYSTEM.metadataOrNull(path)
-		return metadata?.lastModifiedAtMillis ?: 0
+		return try {
+			val metadata: FileMetadata? = FileSystem.SYSTEM.metadataOrNull(path)
+			metadata?.lastModifiedAtMillis ?: 0
+		} catch (e: IOException) {
+			0
+		}
 	}
 
 	fun path(): String = path.toString()
 
-	@Throws(IOException::class)
 	fun absolutePath(): String = FileSystem.SYSTEM.canonicalize(path).toString()
 
 	@Throws(IOException::class)

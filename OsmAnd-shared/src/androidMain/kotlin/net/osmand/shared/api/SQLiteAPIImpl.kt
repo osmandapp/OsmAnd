@@ -48,7 +48,7 @@ class SQLiteAPIImpl(private val context: Context) : SQLiteAPI {
 
 		override fun execSQL(query: String) = ds.execSQL(query)
 
-		override fun execSQL(query: String, objects: Array<Any>) = ds.execSQL(query, objects)
+		override fun execSQL(query: String, objects: Array<Any?>) = ds.execSQL(query, objects)
 
 		override fun compileStatement(query: String): SQLiteStatement {
 			val st = ds.compileStatement(query)
