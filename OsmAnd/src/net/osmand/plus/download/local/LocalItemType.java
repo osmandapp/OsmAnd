@@ -35,6 +35,7 @@ public enum LocalItemType {
 	ACTIVE_MARKERS(R.string.map_markers, R.drawable.ic_action_flag_stroke),
 	HISTORY_MARKERS(R.string.shared_string_history, R.drawable.ic_action_history),
 	ITINERARY_GROUPS(R.string.shared_string_itinerary, R.drawable.ic_action_flag_stroke),
+	COLOR_DATA(R.string.shared_string_colors, R.drawable.ic_action_file_color_palette),
 	PROFILES(R.string.shared_string_profiles, R.drawable.ic_action_manage_profiles),
 	OTHER(R.string.shared_string_other, R.drawable.ic_action_settings);
 
@@ -76,7 +77,7 @@ public enum LocalItemType {
 	}
 
 	public boolean isSettingsCategory() {
-		return CollectionUtils.equalsToAny(this, PROFILES, OTHER);
+		return CollectionUtils.equalsToAny(this, COLOR_DATA, PROFILES, OTHER);
 	}
 
 	public boolean isMyPlacesCategory() {
