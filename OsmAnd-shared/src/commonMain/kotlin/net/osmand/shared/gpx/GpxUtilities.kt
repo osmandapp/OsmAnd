@@ -3,6 +3,7 @@ package net.osmand.shared.gpx
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.format.DateTimeComponents
 import kotlinx.datetime.format.DateTimeFormat
 import kotlinx.datetime.format.FormatStringsInDatetimeFormats
 import kotlinx.datetime.format.byUnicodePattern
@@ -1403,13 +1404,13 @@ object GpxUtilities {
 		return parseTime(text, getTimeFormatterTZ())
 	}
 
-	fun parseTime(text: String, format: DateTimeFormat<LocalDateTime>): Long {
+	private fun parseTime(text: String, format: DateTimeFormat<DateTimeComponents>): Long {
 		var time: Long = 0
 		try {
 			time = flexibleGpxTimeParser(text, format)
 		} catch (e: Exception) {
 			try {
-				time = getTimeNoTimeZoneFormatter().parse(text).toInstant(TimeZone.UTC)
+				time = getTimeNoTimeZoneFormatter().parse(text).toInstantUsingOffset()
 					.toEpochMilliseconds()
 			} catch (e: Exception) {
 				log.error("Failed to parse date $text", e)
@@ -1421,7 +1422,7 @@ object GpxUtilities {
 	@Throws(Exception::class)
 	private fun flexibleGpxTimeParser(
 		timeStr: String,
-		parser: DateTimeFormat<LocalDateTime>
+		parser: DateTimeFormat<DateTimeComponents>
 	): Long {
 		var text = timeStr
 		var ms = 0.0
@@ -1434,7 +1435,7 @@ object GpxUtilities {
 			ms = ("0" + text.substring(isIndex, esIndex)).toDouble()
 			text = text.substring(0, isIndex) + text.substring(esIndex)
 		}
-		return parser.parse(text).toInstant(TimeZone.UTC)
+		return parser.parse(text).toInstantUsingOffset()
 			.toEpochMilliseconds() + (ms * 1000).toLong()
 	}
 
@@ -1463,16 +1464,16 @@ object GpxUtilities {
 		}
 	}
 
-	private fun getTimeNoTimeZoneFormatter(): DateTimeFormat<LocalDateTime> {
-		@OptIn(FormatStringsInDatetimeFormats::class)
-		return LocalDateTime.Format {
+	@OptIn(FormatStringsInDatetimeFormats::class)
+	private fun getTimeNoTimeZoneFormatter(): DateTimeFormat<DateTimeComponents> {
+		return DateTimeComponents.Format {
 			byUnicodePattern(GPX_TIME_NO_TIMEZONE_PATTERN)
 		}
 	}
 
-	private fun getTimeFormatterTZ(): DateTimeFormat<LocalDateTime> {
-		@OptIn(FormatStringsInDatetimeFormats::class)
-		return LocalDateTime.Format {
+	@OptIn(FormatStringsInDatetimeFormats::class)
+	private fun getTimeFormatterTZ(): DateTimeFormat<DateTimeComponents> {
+		return DateTimeComponents.Format {
 			byUnicodePattern(GPX_TIME_PATTERN_TZ)
 		}
 	}
