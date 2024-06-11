@@ -85,24 +85,8 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutin
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteMenuAppModes;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
-import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsBannerCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.*;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routepreparationmenu.cards.HistoryCard;
-import net.osmand.plus.routepreparationmenu.cards.HomeWorkCard;
-import net.osmand.plus.routepreparationmenu.cards.LongDistanceWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.MapMarkersCard;
-import net.osmand.plus.routepreparationmenu.cards.MissingMapsWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.NauticalBridgeHeightWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.PedestrianRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportBetaWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundSettingsWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.PublicTransportNotFoundWarningCard;
-import net.osmand.plus.routepreparationmenu.cards.SimpleRouteCard;
-import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
-import net.osmand.plus.routepreparationmenu.cards.TracksCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -973,11 +957,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				updateOptionsButtons();
 			}
 		};
-		List<ApplicationMode> values = new ArrayList<>(ApplicationMode.values(app));
-		values.remove(ApplicationMode.DEFAULT);
-
-		if (values.size() > 0 && !values.contains(am)) {
-			ApplicationMode next = values.iterator().next();
+		List<ApplicationMode> appModes = ApplicationMode.getModesForRouting(app);
+		if (appModes.size() > 0 && !appModes.contains(am)) {
+			ApplicationMode next = appModes.iterator().next();
 			updateApplicationMode(am, next);
 		}
 
@@ -992,9 +974,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		int contentPaddingHalf = mapActivity.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
 		int startTogglePadding = layoutDirection == View.LAYOUT_DIRECTION_LTR ? contentPaddingHalf : contentPadding;
 		int endTogglePadding = layoutDirection == View.LAYOUT_DIRECTION_LTR ? contentPadding : contentPaddingHalf;
-		View[] buttons = new View[values.size()];
+		View[] buttons = new View[appModes.size()];
 		int k = 0;
-		Iterator<ApplicationMode> iterator = values.iterator();
+		Iterator<ApplicationMode> iterator = appModes.iterator();
 		boolean firstMode = true;
 		while (iterator.hasNext()) {
 			ApplicationMode mode = iterator.next();
@@ -1002,7 +984,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					ll.findViewById(R.id.app_modes_content), mode, true);
 
 			toggle.setAccessibilityDelegate(new View.AccessibilityDelegate() {
-				public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+				public void onInitializeAccessibilityNodeInfo(@NonNull View host, @NonNull AccessibilityNodeInfo info) {
 					super.onInitializeAccessibilityNodeInfo(host, info);
 					info.setContentDescription(mode.toHumanString());
 					info.setEnabled(host.isEnabled());
@@ -1033,12 +1015,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			buttons[k++] = toggle;
 		}
 		for (int i = 0; i < buttons.length; i++) {
-			AppModeDialog.updateButtonStateForRoute(app, values, selected, listener, buttons, i, true, true, nightMode);
+			AppModeDialog.updateButtonStateForRoute(app, appModes, selected, listener, buttons, i, true, true, nightMode);
 		}
 
 		ApplicationMode activeMode = app.getRoutingHelper().getAppMode();
 
-		int idx = values.indexOf(activeMode);
+		int idx = appModes.indexOf(activeMode);
 
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
