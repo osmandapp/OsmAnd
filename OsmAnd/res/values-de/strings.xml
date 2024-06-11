@@ -633,7 +633,7 @@
     <string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. Laden Sie regionale Daten für die Offline-Verwendung über „Menü → Karten herunterladen“ herunter, um Landkarten anzusehen, Adressen, POIs und öffentliche Verkehrsmittel zu finden.</string>
     <string name="search_poi_location">Auf Signal warten …</string>
     <string name="search_near_map">Suche in der Nähe</string>
-    <string name="search_nearby">Suche um Aufenthaltsort</string>
+    <string name="search_nearby">In der Nähe suchen</string>
     <string name="map_orientation_default">Wie Standardeinstellung</string>
     <string name="map_orientation_portrait">Hochformat</string>
     <string name="map_orientation_landscape">Querformat</string>
