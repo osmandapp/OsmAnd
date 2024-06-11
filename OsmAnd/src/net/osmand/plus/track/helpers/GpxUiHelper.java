@@ -10,6 +10,7 @@ import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -679,6 +680,7 @@ public class GpxUiHelper {
 		gpxFile.set3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		gpxFile.setAdditionalExaggeration(((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue());
 		gpxFile.setElevationMeters(((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue());
+		gpxFile.setGradientColorPalette((helper.getParameter(item, GRADIENT_PALETTE)));
 
 		int color = helper.requireParameter(item, COLOR);
 		if (color != 0) {
@@ -691,6 +693,10 @@ public class GpxUiHelper {
 		String coloringType = item.getParameter(COLORING_TYPE);
 		if (coloringType != null) {
 			gpxFile.setColoringType(coloringType);
+		}
+		String gradientPalette = item.getParameter(GRADIENT_PALETTE);
+		if (gradientPalette != null) {
+			gpxFile.setGradientColorPalette(gradientPalette);
 		}
 		GpsFilter.writeValidFilterValuesToExtensions(gpxFile.getExtensionsToWrite(), item);
 	}

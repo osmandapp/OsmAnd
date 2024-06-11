@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.*;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_COLOR_SCHEME_ACTION;
 
 import android.content.Context;

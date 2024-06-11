@@ -4,6 +4,7 @@ import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -51,6 +52,8 @@ import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
@@ -460,8 +463,14 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		trackDrawInfo.setColor(paletteColor.getColor());
-		updateColorItems();
+		if (paletteColor instanceof PaletteGradientColor) {
+			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+			trackDrawInfo.setGradientColorName(paletteGradientColor.getPaletteName());
+			refreshMap();
+		} else {
+			trackDrawInfo.setColor(paletteColor.getColor());
+			updateColorItems();
+		}
 	}
 
 	@Override
@@ -606,6 +615,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private void onSaveButtonClicked() {
 		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
+		if (gradientColorsPaletteController != null) {
+			gradientColorsPaletteController.refreshLastUsedTime();
+		}
 		saveTrackInfo();
 		dismiss();
 	}
@@ -679,6 +692,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			settings.CURRENT_TRACK_3D_LINE_POSITION_TYPE.set(trackDrawInfo.getTrackLinePositionType().getTypeName());
 			settings.CURRENT_TRACK_ADDITIONAL_EXAGGERATION.set(trackDrawInfo.getAdditionalExaggeration());
 			settings.CURRENT_TRACK_ELEVATION_METERS.set(trackDrawInfo.getElevationMeters());
+			settings.CURRENT_GRADIENT_PALETTE.set(trackDrawInfo.getGradientColorName());
 		} else if (gpxDataItem != null) {
 			gpxDataItem.setParameter(COLOR, trackDrawInfo.getColor());
 			gpxDataItem.setParameter(WIDTH, trackDrawInfo.getWidth());
@@ -692,6 +706,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(TRACK_3D_LINE_POSITION_TYPE, trackDrawInfo.getTrackLinePositionType().getTypeName());
 			gpxDataItem.setParameter(ADDITIONAL_EXAGGERATION, (double) trackDrawInfo.getAdditionalExaggeration());
 			gpxDataItem.setParameter(ELEVATION_METERS, (double) trackDrawInfo.getElevationMeters());
+			gpxDataItem.setParameter(GRADIENT_PALETTE, trackDrawInfo.getGradientColorName());
 			gpxDbHelper.updateDataItem(gpxDataItem);
 		}
 	}

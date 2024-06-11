@@ -311,7 +311,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					GpxGeometryWayContext wayContext = new GpxGeometryWayContext(getContext(), view.getDensity());
 					GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 					geometryWay.baseOrder = baseOrder;
-					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					cachedRenderer = renderer;

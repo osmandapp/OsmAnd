@@ -527,7 +527,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						segment.renderer = renderer;
 						GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 						geometryWay.baseOrder = baseOrder--;
-						renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+						renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 						renderer.setDrawArrows(false);
 						renderer.setGeometryWay(geometryWay);
 						cached.add(renderer);
@@ -572,7 +572,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							renderer = new StandardTrack(new ArrayList<>(points), 17.2);
 							GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 							geometryWay.baseOrder = baseOrder--;
-							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null);
+							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null, null);
 							renderer.setDrawArrows(false);
 							renderer.setGeometryWay(geometryWay);
 							cached.add(renderer);
@@ -798,7 +798,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						geometryWay.baseOrder = getBaseOrder() - 100;
 					}
 					renderer = new StandardTrack(new ArrayList<>(beforeAfterWpt), 17.2);
-					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					renderer.drawGeometry(canvas, tb, tb.getLatLonBounds(), lineAttrs.paint.getColor(),

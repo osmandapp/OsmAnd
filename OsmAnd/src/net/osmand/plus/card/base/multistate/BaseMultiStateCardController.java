@@ -40,15 +40,16 @@ public abstract class BaseMultiStateCardController implements IMultiStateCardCon
 		List<PopUpMenuItem> items = new ArrayList<>();
 		for (CardState state : getCardStates()) {
 			boolean available = isCardStateAvailable(state);
-			int color = available ? getPrimaryTextColor(app, nightMode) : getDisabledTextColor(app, nightMode);
-
-			items.add(new PopUpMenuItem.Builder(app)
-					.setTitle(state.toHumanString(app))
-					.showTopDivider(state.isShowTopDivider())
-					.setTitleColor(color)
-					.setTag(state)
-					.create()
-			);
+			if (available) {
+				int color = getPrimaryTextColor(app, nightMode);
+				items.add(new PopUpMenuItem.Builder(app)
+						.setTitle(state.toHumanString(app))
+						.showTopDivider(state.isShowTopDivider())
+						.setTitleColor(color)
+						.setTag(state)
+						.create()
+				);
+			}
 		}
 		PopUpMenuDisplayData data = new PopUpMenuDisplayData();
 		data.anchorView = view;

@@ -4,6 +4,7 @@ import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
 import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
@@ -28,6 +29,7 @@ import androidx.annotation.Nullable;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -68,6 +70,7 @@ public class TrackDrawInfo {
 	private static final String TRACK_LINE_POSITION_TYPE_KEY = "track_line_position_type";
 	private static final String ADDITIONAL_EXAGGERATION_KEY = "additional_exaggeration";
 	private static final String ELEVATION_METERS_KEY = "elevation_meters";
+	private static final String GRADIENT_COLOR_KEY = "gradient_color";
 
 	private String filePath;
 	private String width;
@@ -84,6 +87,7 @@ public class TrackDrawInfo {
 	private Gpx3DLinePositionType trackLinePositionType = Gpx3DLinePositionType.TOP;
 	private float additionalExaggeration = 1f;
 	private float elevationMeters = 1000f;
+	private String gradientColorName = PaletteGradientColor.DEFAULT_NAME;
 
 	@TrackAppearanceType
 	private final int appearanceType;
@@ -179,6 +183,7 @@ public class TrackDrawInfo {
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
+		gradientColorName = helper.getParameter(item, GRADIENT_PALETTE);
 	}
 
 	@Nullable
@@ -323,6 +328,14 @@ public class TrackDrawInfo {
 		this.elevationMeters = elevationMeters;
 	}
 
+	public String getGradientColorName() {
+		return gradientColorName;
+	}
+
+	public void setGradientColorName(String gradientColorName) {
+		this.gradientColorName = gradientColorName;
+	}
+
 	public void setShowStartFinish(boolean showStartFinish) {
 		this.showStartFinish = showStartFinish;
 	}
@@ -396,6 +409,7 @@ public class TrackDrawInfo {
 		trackLinePositionType = AndroidUtils.getSerializable(bundle, TRACK_LINE_POSITION_TYPE_KEY, Gpx3DLinePositionType.class);
 		additionalExaggeration = bundle.getFloat(ADDITIONAL_EXAGGERATION_KEY);
 		elevationMeters = bundle.getFloat(ELEVATION_METERS_KEY);
+		gradientColorName = bundle.getString(GRADIENT_COLOR_KEY);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
@@ -414,5 +428,6 @@ public class TrackDrawInfo {
 		bundle.putSerializable(TRACK_LINE_POSITION_TYPE_KEY, trackLinePositionType);
 		bundle.putFloat(ADDITIONAL_EXAGGERATION_KEY, trackVisualizationType == null ? 0 : additionalExaggeration);
 		bundle.putFloat(ELEVATION_METERS_KEY, elevationMeters);
+		bundle.putString(GRADIENT_COLOR_KEY, gradientColorName);
 	}
 }

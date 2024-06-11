@@ -65,8 +65,9 @@ public class RouteGeometryWay extends
 	                                boolean drawDirectionArrows,
 	                                @Nullable @ColorInt Integer directionArrowColor,
 	                                @NonNull ColoringType routeColoringType,
-	                                @Nullable String routeInfoAttribute) {
-		this.coloringChanged = this.coloringType != routeColoringType
+	                                @Nullable String routeInfoAttribute,
+									@Nullable String routeGradientPaletteName) {
+		this.coloringChanged = this.coloringType != routeColoringType || !this.gradientPaletteName.equals(routeGradientPaletteName)
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
@@ -86,6 +87,7 @@ public class RouteGeometryWay extends
 		this.customDirectionArrowColor = directionArrowColor;
 		this.coloringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+		this.gradientPaletteName = routeGradientPaletteName;
 	}
 
 	@Override

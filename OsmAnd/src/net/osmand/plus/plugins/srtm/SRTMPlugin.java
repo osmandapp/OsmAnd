@@ -9,7 +9,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
-import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.*;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
@@ -94,8 +94,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	private final StateChangedListener<Boolean> terrainListener;
 	private final StateChangedListener<String> terrainModeListener;
 	private final StateChangedListener<Float> verticalExaggerationListener;
-
-	private final ConcurrentHashMap<String, ColorPalette> cachedTerrainModeColorPalette = new ConcurrentHashMap<>();
 
 	private TerrainLayer terrainLayer;
 
@@ -676,26 +674,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
-		ColorPalette colorPalette = cachedTerrainModeColorPalette.get(modeKey);
-		if (colorPalette != null) {
-			listener.collectingPalletFinished(colorPalette);
-		} else {
-			CollectColorPalletsTask collectColorPalletsTask = new CollectColorPalletsTask(app, modeKey, new CollectColorPalletListener() {
-
-				@Override
-				public void collectingPalletStarted() {
-					listener.collectingPalletStarted();
-				}
-
-				@Override
-				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
-					if (colorPalette != null) {
-						cachedTerrainModeColorPalette.put(modeKey, colorPalette);
-					}
-					listener.collectingPalletFinished(colorPalette);
-				}
-			});
-			collectColorPalletsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
+		app.getColorPaletteHelper().getTerrainModeColorPaletteAsync(modeKey, listener);
 	}
 }
