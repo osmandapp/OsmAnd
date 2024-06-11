@@ -65,13 +65,13 @@ public class Amenity extends MapObject {
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;
+	private List<String> topIndexAdditional;
 	private AmenityRoutePoint routePoint; // for search on path
 	// context menu geometry;
 	private TIntArrayList y;
 	private TIntArrayList x;
 	private String mapIconName;
 	private int order;
-	private String brand;
 
 	public int getOrder() {
 		return order;
@@ -79,14 +79,6 @@ public class Amenity extends MapObject {
 
 	public void setOrder(int order) {
 		this.order = order;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
 	}
 
 	public static class AmenityRoutePoint {
