@@ -39,6 +39,7 @@ import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherRasterLayer;
 import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
@@ -205,7 +206,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			plugin.prepareForDayAnimation(calendar.getTime());
 			requireMapActivity().refreshMap();
 			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
-			animateStepCount = (int) (3.0 / timeSlider.getStepSize()) - 1;
+			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
 			showProgressBar(true);
 			scheduleAnimationStart();
 		} else {
@@ -278,7 +279,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
-		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
+		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 9);
 		timeSlider.setStepSize(today ? 1.0f / 6.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
 	}
 

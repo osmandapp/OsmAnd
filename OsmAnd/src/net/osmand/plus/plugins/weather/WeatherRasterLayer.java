@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherRasterLayer extends BaseMapLayer {
+	public static final int FORECAST_ANIMATION_DURATION_HOURS = 6;
 	private static final long MINUTE_IN_MILLISECONDS = 60 * 1000;
 	private static final long HOUR_IN_MILLISECONDS = 60 * 60 * 1000;
 	private static final long DAY_IN_MILLISECONDS = 24 * HOUR_IN_MILLISECONDS;
@@ -81,7 +82,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 
 	public void prepareForDayAnimation(long dateTime) {
 		timePeriodStart = dateTime;
-		timePeriodEnd = timePeriodStart + 3 * HOUR_IN_MILLISECONDS;
+		timePeriodEnd = timePeriodStart + FORECAST_ANIMATION_DURATION_HOURS * HOUR_IN_MILLISECONDS;
 		timePeriodStep = 30 * MINUTE_IN_MILLISECONDS;
 		requireTimePeriodChange = true;
 		this.dateTime = dateTime;
