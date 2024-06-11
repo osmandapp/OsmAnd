@@ -2226,7 +2226,7 @@
     <string name="use_osm_live_public_transport">Transport public OsmAnd Live</string>
     <string name="time_of_day">Ora din zi</string>
     <string name="by_transport_type">Cu %1$s</string>
-    <string name="step_by_step">Pas cu pas</string>
+    <string name="step_by_step">Rând-pe-rând</string>
     <string name="routeInfo_road_types_name">Tipuri drum</string>
     <string name="exit_at">Coborâre la stația</string>
     <string name="sit_on_the_stop">Urcare la stația</string>
@@ -5739,4 +5739,6 @@
     <string name="clear_all_key_shortcuts_summary">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
     <string name="shared_string_colors">Culori</string>
     <string name="rendering_value_dark_orange_name">Portocaliu închis</string>
+    <string name="action_icon">Pictograma de acțiune</string>
+    <string name="assigned_keys">Chei atribuite</string>
 </resources>
