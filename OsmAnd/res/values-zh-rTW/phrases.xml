@@ -4866,4 +4866,5 @@
     <string name="poi_indoor_seating_no">沒有室內座位</string>
     <string name="poi_indoor_seating_bar_table">室內座位：吧臺</string>
     <string name="poi_property_management">物業管理辦公室</string>
+    <string name="poi_engineer">工程師辦公室</string>
 </resources>

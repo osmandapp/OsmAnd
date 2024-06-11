@@ -5721,4 +5721,17 @@
     <string name="play_weather_forecast">播放天氣預報</string>
     <string name="travel_topics">旅遊話題</string>
     <string name="wall_height">牆的高度</string>
+    <string name="rendering_value_dark_orange_name">深橘色</string>
+    <string name="clear_all_key_shortcuts_summary">將會移除所選類型的所有按鍵分配。</string>
+    <string name="shared_string_key">鍵</string>
+    <string name="assigned_keys">分配按鍵</string>
+    <string name="clear_all_key_shortcuts">清除所有快捷鍵</string>
+    <string name="no_assigned_keys_desc">選擇一個操作並透過點擊「新增」按鈕分配一個鍵。</string>
+    <string name="new_key_assignment">分配新按鍵</string>
+    <string name="key_assignment_add_action">新增動作</string>
+    <string name="clear_key_assignment_summary">將會清除所選動作的按鍵分配。</string>
+    <string name="no_assigned_keys">沒有分配的按鍵</string>
+    <string name="key_name_pattern">按鍵「%1$s」</string>
+    <string name="key_assignment_add_key">新增鍵</string>
+    <string name="action_icon">動作圖示</string>
 </resources>
