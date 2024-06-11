@@ -1,8 +1,13 @@
 package net.osmand.plus.settings.backend.backup.exporttype;
 
+import static net.osmand.plus.helpers.ColorsPaletteUtils.getPaletteName;
+import static net.osmand.plus.helpers.ColorsPaletteUtils.getPaletteTypeName;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.Collator;
+import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalItemType;
@@ -13,6 +18,7 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +37,7 @@ public class ColorPaletteExportType extends LocalResourcesExportType {
 	@NonNull
 	@Override
 	public List<?> fetchExportData(@NonNull OsmandApplication app, boolean offlineBackup) {
-		return collectLocalResources(app);
+		return collectSortedLocalResource(app);
 	}
 
 	@NonNull
@@ -39,6 +45,21 @@ public class ColorPaletteExportType extends LocalResourcesExportType {
 	public List<?> fetchImportData(@NonNull SettingsItem settingsItem, boolean importCompleted) {
 		FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 		return Collections.singletonList(fileSettingsItem);
+	}
+
+	@NonNull
+	private List<File> collectSortedLocalResource(@NonNull OsmandApplication app) {
+		List<File> files = collectLocalResources(app);
+		sortLocalFiles(app, files);
+		return files;
+	}
+
+	private void sortLocalFiles(@NonNull OsmandApplication app, @NonNull List<File> files) {
+		Collator collator = OsmAndCollator.primaryCollator();
+		files.sort((lhs, rhs) -> {
+			int r = collator.compare(getPaletteTypeName(app, lhs), getPaletteTypeName(app, rhs));
+			return r == 0 ? collator.compare(getPaletteName(lhs), getPaletteName(rhs)) : r;
+		});
 	}
 
 	@NonNull
