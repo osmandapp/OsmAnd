@@ -802,7 +802,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	}
 
 	protected void showSingleSelectionDialog(@NonNull String processId,
-											 @NonNull IDialogController controller) {
+	                                         @NonNull IDialogController controller) {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			DialogManager dialogManager = app.getDialogManager();
@@ -835,7 +835,7 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	}
 
 	public static SwitchPreferenceEx createSwitchPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
-															  String title, String summary, int layoutId) {
+	                                                          String title, String summary, int layoutId) {
 		SwitchPreferenceEx p = new SwitchPreferenceEx(ctx);
 		p.setKey(prefId);
 		p.setTitle(title);
@@ -854,8 +854,8 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	}
 
 	public static ListPreferenceEx createListPreferenceEx(@NonNull Context ctx, @NonNull String prefId,
-														  @NonNull String[] names, @NonNull Object[] values,
-														  String title, int layoutId) {
+	                                                      @NonNull String[] names, @NonNull Object[] values,
+	                                                      String title, int layoutId) {
 		ListPreferenceEx listPreference = new ListPreferenceEx(ctx);
 		listPreference.setKey(prefId);
 		listPreference.setTitle(title);
@@ -876,16 +876,16 @@ public abstract class BaseSettingsFragment extends BaseSearchPreferenceFragment 
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
-									   @NonNull SettingsScreenType screenType,
-									   @Nullable ApplicationMode appMode) {
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable ApplicationMode appMode) {
 		return showInstance(activity, screenType, appMode, new Bundle(), null);
 	}
 
 	public static boolean showInstance(@NonNull FragmentActivity activity,
-									   @NonNull SettingsScreenType screenType,
-									   @Nullable ApplicationMode appMode,
-									   @NonNull Bundle args,
-									   @Nullable Fragment target) {
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable ApplicationMode appMode,
+	                                   @NonNull Bundle args,
+	                                   @Nullable Fragment target) {
 		try {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			String tag = screenType.fragmentName;
