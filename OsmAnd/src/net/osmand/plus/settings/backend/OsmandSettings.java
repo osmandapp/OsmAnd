@@ -1489,8 +1489,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference(this, "fast_route_mode", true).makeProfile();
 
-	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "routing_type", HH_CPP, RoutingType.values()).makeProfile().cache();
-	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximation_type", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache();
+	public final CommonPreference<RoutingType> ROUTING_TYPE = new EnumStringPreference<>(this, "router_type", HH_CPP, RoutingType.values()).makeProfile().cache(); // previously routing_type
+	public final CommonPreference<ApproximationType> APPROXIMATION_TYPE = new EnumStringPreference<>(this, "approximator_type", APPROX_GEO_CPP, ApproximationType.values()).makeProfile().cache(); // previously approximation_type
 
 	public final CommonPreference<Boolean> ENABLE_TIME_CONDITIONAL_ROUTING = new BooleanPreference(this, "enable_time_conditional_routing", true).makeProfile();
 

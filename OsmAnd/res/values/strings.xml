@@ -11,13 +11,28 @@
 	Thx - Hardy
 -->
 
+    <string name="rendering_value_dark_orange_name">Dark orange</string>
+    <string name="user_palette">User palette</string>
+    <string name="shared_string_colors">Colors</string>
     <string name="wall_height">Wall height</string>
     <string name="change_terrain_color_scheme">Change Terrain color scheme</string>
     <string name="play_weather_forecast">Play weather forecast</string>
     <string name="travel_topics">Travel topics</string>
+    <string name="clear_key_assignment_summary">Key assignment for the selected action will be cleared.</string>
+    <string name="clear_all_key_shortcuts_summary">All key assignments for the selected type will be removed.</string>
+    <string name="clear_all_key_shortcuts">Clear all key shortcuts</string>
+    <string name="no_assigned_keys_desc">Select an action and assign a key by tapping the \'Add\' button.</string>
+    <string name="no_assigned_keys">No assigned keys</string>
+    <string name="shared_string_key">Key</string>
+    <string name="new_key_assignment">New key assignment</string>
+    <string name="key_name_pattern">Key \"%1$s\"</string>
+    <string name="key_assignment_add_key">Add key</string>
+    <string name="key_assignment_add_action">Add action</string>
     <string name="disable_map_layers">Disable map layers</string>
     <string name="disable_map_layers_descr">Disable all map layers above the vector map (restart required).</string>
     <string name="height_legend_description">Altitude color maps are used to visualize relief.</string>
+    <string name="action_icon">Action icon</string>
+    <string name="assigned_keys">Assigned Keys</string>
     <string name="steps_per_minute_unit">SPM</string>
     <string name="allow_display_on_top">Allow display on top</string>
     <string name="allow_display_on_top_description">Allow displaying map texts on top of each other</string>

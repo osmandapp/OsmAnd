@@ -4866,4 +4866,5 @@
     <string name="poi_indoor_seating_yes">Bancos no interior: sim</string>
     <string name="poi_indoor_seating_no">Sem bancos no interior</string>
     <string name="poi_property_management">Empresa de gestão de imóveis</string>
+    <string name="poi_engineer">Gabinete de engenharia</string>
 </resources>

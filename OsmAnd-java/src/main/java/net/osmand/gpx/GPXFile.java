@@ -29,7 +29,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	final List<GPXUtilities.WptPt> points = new ArrayList<>();
 	Map<String, GPXUtilities.PointsGroup> pointsGroups = new LinkedHashMap<>();
-	private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
+	final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
 	public Exception error = null;
 	public String path = "";
@@ -812,7 +812,6 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void addRouteKeyTags(Map<String, String> routeKey) {
 		networkRouteKeyTags.putAll(routeKey);
-		setExtensionsWriter(Algorithms.isEmpty(networkRouteKeyTags) ? null : GPXUtilities.createNetworkRouteExtensionWriter(networkRouteKeyTags));
 	}
 
 	public Map<String, String> getRouteKeyTags() {
@@ -861,10 +860,9 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		if (metadata.bounds != null) {
 			size++;
 		}
+		size += getExtensionsToWrite().size();
+		size += getExtensionsWriters().size();
 
-		if (!getExtensionsToWrite().isEmpty() || getExtensionsWriter() != null) {
-			size++;
-		}
 		return size;
 	}
 

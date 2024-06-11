@@ -5727,4 +5727,18 @@
     <string name="travel_topics">Теме путовања</string>
     <string name="play_weather_forecast">Пусти временску прогнозу</string>
     <string name="change_terrain_color_scheme">Промена шеме боје терена</string>
+    <string name="clear_all_key_shortcuts_summary">Сва додељења тастера за изабрани тип ће бити уклоњена.</string>
+    <string name="no_assigned_keys_desc">Изаберите акцију и доделите тастер додиром на дугме „Додај“.</string>
+    <string name="new_key_assignment">Ново додељење тастера</string>
+    <string name="key_name_pattern">Тастер \"%1$s\"</string>
+    <string name="key_assignment_add_key">Додај тастер</string>
+    <string name="no_assigned_keys">Нема додељених тастера</string>
+    <string name="shared_string_key">Тастер</string>
+    <string name="wall_height">Висина зида</string>
+    <string name="clear_all_key_shortcuts">Уклони све пречице тастера</string>
+    <string name="rendering_value_dark_orange_name">Тамно наранџаста</string>
+    <string name="clear_key_assignment_summary">Додељивање тастера за изабрану радњу ће бити обрисано.</string>
+    <string name="key_assignment_add_action">Додај акцију</string>
+    <string name="assigned_keys">Додељења тастера</string>
+    <string name="action_icon">Додај икону</string>
 </resources>

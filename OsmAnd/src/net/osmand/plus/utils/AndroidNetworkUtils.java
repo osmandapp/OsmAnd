@@ -632,11 +632,17 @@ public class AndroidNetworkUtils {
 			}
 			connection.connect();
 			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+				if (progress != null) {
+					progress.finishTask();
+				}
 				return result;
 			} else {
 				int bytesDivisor = 1024;
 				long lastModified = connection.getLastModified();
 				if (lastModified > 0 && lastModified <= lastTime) {
+					if (progress != null) {
+						progress.finishTask();
+					}
 					return 0;
 				}
 				if (progress != null) {

@@ -91,6 +91,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.osm.OsmRouteType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -1205,7 +1206,21 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
-	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
+	@DrawableRes
+	public static int getActivityTypeIcon(@NonNull Context ctx,  @NonNull OsmRouteType activityType) {
+		int iconId = ctx.getResources().getIdentifier("mx_" + activityType.getIcon(), "drawable", ctx.getPackageName());
+		return iconId != 0 ? iconId : R.drawable.mx_special_marker;
+	}
+
+	@NonNull
+	public static String getActivityTypeTitle(@NonNull Context ctx, @NonNull OsmRouteType activityType) {
+		return getActivityTypeStringPropertyName(ctx, activityType.getName(),
+				Algorithms.capitalizeFirstLetterAndLowercase(activityType.getName()));
+	}
+
+	@NonNull
+	public static String getActivityTypeStringPropertyName(@NonNull Context ctx, @NonNull String propertyName,
+	                                                       @NonNull String defValue) {
 		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
 		return value != null ? value : defValue;
 	}
