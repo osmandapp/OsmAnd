@@ -5734,4 +5734,9 @@
     <string name="routing_attr_avoid_cobblestone_description">Evită piatra cubică</string>
     <string name="fixed_height">Înălțime fixă</string>
     <string name="wall_height">Înălțime perete</string>
+    <string name="clear_key_assignment_summary">Asignarea tastelor pentru acțiunea selectată va fi ștearsă.</string>
+    <string name="user_palette">Paleta utilizatorului</string>
+    <string name="clear_all_key_shortcuts_summary">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
+    <string name="shared_string_colors">Culori</string>
+    <string name="rendering_value_dark_orange_name">Portocaliu închis</string>
 </resources>

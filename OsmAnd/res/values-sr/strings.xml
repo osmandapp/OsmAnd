@@ -2865,7 +2865,7 @@
     <string name="rendering_attr_undefined_name">Неодређено</string>
     <string name="time_of_day">Доба дана</string>
     <string name="by_transport_type">До %1$s</string>
-    <string name="step_by_step">Корак-по-корак</string>
+    <string name="step_by_step">Скретање-по-скретање</string>
     <string name="routeInfo_road_types_name">Врсте путева</string>
     <string name="exit_at">Излаз на</string>
     <string name="shared_string_swap">Замени</string>
@@ -5741,4 +5741,6 @@
     <string name="key_assignment_add_action">Додај акцију</string>
     <string name="assigned_keys">Додељења тастера</string>
     <string name="action_icon">Додај икону</string>
+    <string name="user_palette">Корисничка палета</string>
+    <string name="shared_string_colors">Боје</string>
 </resources>

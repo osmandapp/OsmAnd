@@ -3802,7 +3802,7 @@
     <string name="sit_on_the_stop">Ukrcavanje na stanici</string>
     <string name="exit_at">Izlaz na</string>
     <string name="routeInfo_road_types_name">Vrste puteva</string>
-    <string name="step_by_step">Manevri</string>
+    <string name="step_by_step">Skretanje-po-skretanje</string>
     <string name="by_transport_type">Do %1$s</string>
     <string name="time_of_day">Doba dana</string>
     <string name="use_osm_live_public_transport">Javni prevoz OsmAnd Live</string>
@@ -5750,4 +5750,6 @@
     <string name="key_assignment_add_action">Dodaj akciju</string>
     <string name="action_icon">Dodaj ikonu</string>
     <string name="assigned_keys">Dodeljenja tastera</string>
+    <string name="user_palette">Korisnička paleta</string>
+    <string name="shared_string_colors">Boje</string>
 </resources>

@@ -5742,4 +5742,6 @@
     <string name="clear_key_assignment_summary">A kiválasztott művelethez tartozó billentyű-hozzárendelés törlődik.</string>
     <string name="key_assignment_add_key">Billentyű hozzáadása</string>
     <string name="action_icon">Műveletikon</string>
+    <string name="shared_string_colors">Színek</string>
+    <string name="user_palette">Felhasználói paletta</string>
 </resources>

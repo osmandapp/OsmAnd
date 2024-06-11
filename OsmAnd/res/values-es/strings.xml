@@ -2812,7 +2812,7 @@
     <string name="tracks_on_map">Trazas mostradas</string>
     <string name="time_of_day">Hora del día</string>
     <string name="by_transport_type">En %1$s</string>
-    <string name="step_by_step">Giro a giro</string>
+    <string name="step_by_step">Navegación paso a paso</string>
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajar en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
@@ -5745,4 +5745,6 @@
     <string name="key_name_pattern">Tecla «%1$s»</string>
     <string name="action_icon">Icono con la acción</string>
     <string name="assigned_keys">Teclas asignadas</string>
+    <string name="shared_string_colors">Colores</string>
+    <string name="user_palette">Paleta del usuario</string>
 </resources>
