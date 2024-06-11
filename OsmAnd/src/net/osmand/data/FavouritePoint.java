@@ -1,8 +1,11 @@
 package net.osmand.data;
 
+import static net.osmand.data.SpecialPointType.HOME;
+import static net.osmand.data.SpecialPointType.WORK;
 import static net.osmand.gpx.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
 import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+import static net.osmand.plus.myplaces.favorites.FavoriteGroup.PERSONAL_CATEGORY;
 
 import android.content.Context;
 
@@ -100,7 +103,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	private void initPersonalType() {
-		if (FavoriteGroup.PERSONAL_CATEGORY.equals(category)) {
+		if (PERSONAL_CATEGORY.equals(category)) {
 			for (SpecialPointType pointType : SpecialPointType.values()) {
 				if (Algorithms.stringsEqual(pointType.getName(), this.name)) {
 					this.specialPointType = pointType;
@@ -109,12 +112,17 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 	}
 
+	@Nullable
 	public SpecialPointType getSpecialPointType() {
 		return specialPointType;
 	}
 
+	public void setSpecialPointType(@Nullable SpecialPointType pointType) {
+		this.specialPointType = pointType;
+	}
+
 	public boolean isHomeOrWork() {
-		return specialPointType == SpecialPointType.HOME || specialPointType == SpecialPointType.WORK;
+		return specialPointType == HOME || specialPointType == WORK;
 	}
 
 	public int getColor() {
@@ -418,8 +426,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (iconName != null) {
 			point.setIconIdFromName(iconName);
 		}
-		BackgroundType backgroundType = BackgroundType.getByTypeName(wptPt.getBackgroundType(), null);
-		point.setBackgroundType(backgroundType);
+		point.setSpecialPointType(SpecialPointType.getByName(wptPt.getSpecialPointType()));
+		point.setBackgroundType(BackgroundType.getByTypeName(wptPt.getBackgroundType(), null));
+
 		return point;
 	}
 
@@ -460,6 +469,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (backgroundType != null) {
 			point.setBackgroundType(backgroundType.getTypeName());
+		}
+		if (specialPointType != null) {
+			point.setSpecialPointType(specialPointType.getName());
 		}
 		if (getColor() != 0) {
 			point.setColor(getColor());
