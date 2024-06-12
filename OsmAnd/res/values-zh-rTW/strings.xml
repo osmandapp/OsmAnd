@@ -5734,4 +5734,6 @@
     <string name="key_name_pattern">按鍵「%1$s」</string>
     <string name="key_assignment_add_key">新增鍵</string>
     <string name="action_icon">動作圖示</string>
+    <string name="user_palette">使用者調色板</string>
+    <string name="shared_string_colors">顏色</string>
 </resources>
