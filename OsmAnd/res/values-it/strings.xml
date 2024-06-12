@@ -2797,7 +2797,7 @@
     <string name="run_full_osmand_header">Lanciare OsmAnd\?</string>
     <string name="previous_route">Percorsi precedenti</string>
     <string name="add_home">Aggiungi casa</string>
-    <string name="step_by_step">Svolta per svolta</string>
+    <string name="step_by_step">Svolta dopo svolta</string>
     <string name="routeInfo_road_types_name">Tipi di strade</string>
     <string name="show_more">Mostra di più</string>
     <string name="tracks_on_map">Tracciati visualizzati</string>
@@ -5734,4 +5734,8 @@
     <string name="assigned_keys">Tasti assegnati</string>
     <string name="key_assignment_add_action">Aggiungi azione</string>
     <string name="no_assigned_keys_desc">Seleziona un\'azione e assegna un tasto toccando il pulsante \"Aggiungi\".</string>
+    <string name="action_icon">Icona azione</string>
+    <string name="shared_string_colors">Colori</string>
+    <string name="user_palette">Tavolozza utente</string>
+    <string name="routing_attr_avoid_cobblestone_description">Evita il ciottolo</string>
 </resources>
