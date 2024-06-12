@@ -31,7 +31,7 @@ public interface IColorsPaletteController extends IDialogController, ColorPicker
 
 	void onSelectColorFromPalette(@NonNull PaletteColor color, boolean renewLastUsedTime);
 
-	void selectColor(@ColorInt int colorInt);
+	void selectColor(@Nullable Integer color);
 
 	void selectColor(@Nullable PaletteColor paletteColor);
 
