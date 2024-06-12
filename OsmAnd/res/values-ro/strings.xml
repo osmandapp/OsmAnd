@@ -2226,7 +2226,7 @@
     <string name="use_osm_live_public_transport">Transport public OsmAnd Live</string>
     <string name="time_of_day">Ora din zi</string>
     <string name="by_transport_type">Cu %1$s</string>
-    <string name="step_by_step">Rând-pe-rând</string>
+    <string name="step_by_step">Pas cu pas</string>
     <string name="routeInfo_road_types_name">Tipuri drum</string>
     <string name="exit_at">Coborâre la stația</string>
     <string name="sit_on_the_stop">Urcare la stația</string>
