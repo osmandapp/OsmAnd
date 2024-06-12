@@ -680,8 +680,8 @@ public class GpxUiHelper {
 		gpxFile.setAdditionalExaggeration(((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue());
 		gpxFile.setElevationMeters(((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue());
 
-		int color = helper.requireParameter(item, COLOR);
-		if (color != 0) {
+		Integer color = helper.getParameter(item, COLOR);
+		if (color != null) {
 			gpxFile.setColor(color);
 		}
 		String width = helper.getParameter(item, WIDTH);

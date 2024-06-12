@@ -211,7 +211,7 @@ public class GPXUtilities {
 			getExtensionsWriters().remove(key);
 		}
 
-		public int getColor(int defColor) {
+		public Integer getColor(Integer defColor) {
 			String value = getColorValue();
 			return parseColor(value, defColor);
 		}
@@ -250,7 +250,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static int parseColor(String colorString, int defColor) {
+	public static Integer parseColor(String colorString, Integer defColor) {
 		Integer color = parseColor(colorString);
 		return color != null ? color : defColor;
 	}
