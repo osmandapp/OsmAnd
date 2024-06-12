@@ -5760,4 +5760,6 @@
     <string name="key_assignment_add_key">Añadir tecla</string>
     <string name="assigned_keys">Teclas asignadas</string>
     <string name="action_icon">Añadir icono</string>
+    <string name="user_palette">Paleta del usuario</string>
+    <string name="shared_string_colors">Colores</string>
 </resources>
