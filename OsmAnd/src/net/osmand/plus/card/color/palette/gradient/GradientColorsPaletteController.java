@@ -18,7 +18,6 @@ import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.util.Algorithms;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -158,7 +157,8 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 	}
 
 	@Override
-	public void selectColor(@ColorInt int colorInt) {
+	public void selectColor(@Nullable Integer color) {
+
 	}
 
 	@Override
@@ -180,7 +180,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	@Override
 	public void onColorLongClick(@NonNull FragmentActivity activity, @NonNull View view,
-								 @NonNull PaletteColor color, boolean nightMode) {
+	                             @NonNull PaletteColor color, boolean nightMode) {
 	}
 
 	@Override
