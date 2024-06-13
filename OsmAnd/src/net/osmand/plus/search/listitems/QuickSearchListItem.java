@@ -41,6 +41,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTopIndexAdditionalFilter;
 
 import java.io.File;
 import java.util.List;
@@ -208,6 +209,9 @@ public class QuickSearchListItem {
 					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
 					res = ((CustomSearchPoiFilter) searchResult.object).getName();
+				} else if (searchResult.object instanceof SearchPoiTopIndexAdditionalFilter) {
+					String name = ((SearchPoiTopIndexAdditionalFilter) searchResult.object).getName();
+					res = app.getPoiTypes().getPoiTranslation(name);
 				}
 				return res;
 			case POI:
@@ -345,6 +349,9 @@ public class QuickSearchListItem {
 					if (filter != null) {
 						iconId = getCustomFilterIconRes(filter);
 					}
+				} else if (searchResult.object instanceof SearchPoiTopIndexAdditionalFilter) {
+					SearchPoiTopIndexAdditionalFilter filter = (SearchPoiTopIndexAdditionalFilter) searchResult.object;
+					iconId = RenderingIcons.getBigIconResourceId(filter.getIconResource());
 				}
 				if (iconId > 0) {
 					return getIcon(app, iconId);

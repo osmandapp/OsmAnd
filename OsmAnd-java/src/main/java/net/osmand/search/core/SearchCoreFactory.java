@@ -754,16 +754,36 @@ public class SearchCoreFactory {
 					if (nm.matches(subType.possibleValues)) {
 						NameStringMatcher nm2 = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
 						SearchResult res = new SearchResult(phrase);
+						String topIndexValue = null;
+						String topIndexName = subType.name.replace(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX, "");
 						for (String s : subType.possibleValues) {
 							if (nm2.matches(s)) {
-								res.localeName = s;
+								topIndexValue = s;
 								break;
 							}
 						}
+						if (topIndexValue == null) {
+							continue;
+						}
+						res.localeName = topIndexValue;
+						final String finalTopIndexValue = topIndexValue;
 						res.object = new SearchPoiTopIndexAdditionalFilter() {
 							@Override
 							public boolean accept(PoiSubType poiSubType, String value) {
 								return poiSubType.name.equals(subType.name) && nm.matches(value);
+							}
+
+							@Override
+							public String getName() {
+								return topIndexName;
+							}
+
+							@Override
+							public String getIconResource() {
+								//Example: brand_mcdonalds, operator_bank_of_america
+								String val = finalTopIndexValue.toLowerCase().replaceAll("'", "");
+								val = val.replaceAll("\\W+", "_");
+								return topIndexName + "_" + val;
 							}
 						};
 						res.priorityDistance = 0;

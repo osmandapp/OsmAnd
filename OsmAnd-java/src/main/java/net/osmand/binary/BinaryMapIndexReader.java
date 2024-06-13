@@ -1724,6 +1724,8 @@ public class BinaryMapIndexReader {
 
 	public static interface SearchPoiTopIndexAdditionalFilter {
 		public boolean accept(PoiSubType poiSubType, String value);
+		String getName();
+		String getIconResource();
 	}
 
 	public static class MapObjectStat {
