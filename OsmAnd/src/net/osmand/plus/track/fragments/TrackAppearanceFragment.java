@@ -433,11 +433,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				TrackColorController colorController = getColorCardController();
 				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
 
-				IColorsPaletteController paletteController = colorController.getColorsPaletteController();
-				paletteController.selectColor(trackDrawInfo.getColor());
+				colorController.getColorsPaletteController().selectColor(trackDrawInfo.getColor());
 
-				WidthComponentController widthComponentController = getWidthCardController().getWidthComponentController();
-				widthComponentController.askSelectWidthMode(trackDrawInfo.getWidth());
+				WidthComponentController widthController = getWidthCardController().getWidthComponentController();
+				widthController.askSelectWidthMode(trackDrawInfo.getWidth());
 
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
@@ -506,10 +505,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void updateAppearanceIcon() {
-		TrackColorController trackColorController = getColorCardController();
-		int color = trackColorController.getSelectedControlsColor();
-		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color);
-		trackIcon.setImageDrawable(icon);
+		int color = getColorCardController().getSelectedControlsColor();
+		trackIcon.setImageDrawable(getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color));
 	}
 
 	@Override

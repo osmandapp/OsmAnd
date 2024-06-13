@@ -540,9 +540,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 
 	private void updateLocationIconSelector(@NonNull String locationIcon) {
 		View viewWithTag = locationIconItems.findViewWithTag(changedProfile.locationIcon);
-		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
-		viewWithTag = locationIconItems.findViewWithTag(locationIcon);
-		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.VISIBLE);
+		if (viewWithTag != null) {
+			viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
+			viewWithTag = locationIconItems.findViewWithTag(locationIcon);
+			viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.VISIBLE);
+		}
 		changedProfile.locationIcon = locationIcon;
 	}
 
@@ -591,9 +593,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 
 	private void updateNavigationIconSelector(@NonNull String navigationIcon) {
 		View viewWithTag = navIconItems.findViewWithTag(changedProfile.navigationIcon);
-		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
-		viewWithTag = navIconItems.findViewWithTag(navigationIcon);
-		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.VISIBLE);
+		if (viewWithTag != null) {
+			viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
+			viewWithTag = navIconItems.findViewWithTag(navigationIcon);
+			viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.VISIBLE);
+		}
 		changedProfile.navigationIcon = navigationIcon;
 	}
 

@@ -5749,4 +5749,6 @@
     <string name="no_assigned_keys_desc">Vælg en handling, og tildel en tast ved at trykke på knappen \'Tilføj\'.</string>
     <string name="no_assigned_keys">Ingen tildelte taster</string>
     <string name="shared_string_key">Tast</string>
+    <string name="user_palette">Brugerpalet</string>
+    <string name="shared_string_colors">Farver</string>
 </resources>

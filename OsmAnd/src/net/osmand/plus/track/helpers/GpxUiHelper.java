@@ -682,8 +682,8 @@ public class GpxUiHelper {
 		gpxFile.setElevationMeters(((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue());
 		gpxFile.setGradientColorPalette((helper.getParameter(item, GRADIENT_PALETTE)));
 
-		int color = helper.requireParameter(item, COLOR);
-		if (color != 0) {
+		Integer color = helper.getParameter(item, COLOR);
+		if (color != null) {
 			gpxFile.setColor(color);
 		}
 		String width = helper.getParameter(item, WIDTH);

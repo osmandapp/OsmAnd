@@ -2,6 +2,7 @@ package net.osmand.plus.download.local;
 
 
 import static net.osmand.IndexConstants.*;
+import static net.osmand.plus.download.local.LocalItemType.COLOR_DATA;
 import static net.osmand.plus.download.local.LocalItemType.DEPTH_DATA;
 import static net.osmand.plus.download.local.LocalItemType.FONT_DATA;
 import static net.osmand.plus.download.local.LocalItemType.LIVE_UPDATES;
@@ -239,6 +240,10 @@ public class LocalIndexHelper {
 					loadDataImpl(app.getAppPath(GEOTIFF_DIR), TERRAIN_DATA, TIF_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
 					loadDataImpl(app.getAppPath(SRTM_INDEX_DIR), TERRAIN_DATA, BINARY_MAP_INDEX_EXT,
+							readFiles, shouldUpdate, items, indexFiles, task);
+					break;
+				case COLOR_DATA:
+					loadDataImpl(app.getAppPath(COLOR_PALETTE_DIR), COLOR_DATA, TXT_EXT,
 							readFiles, shouldUpdate, items, indexFiles, task);
 					break;
 			}

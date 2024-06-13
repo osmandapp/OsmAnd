@@ -176,15 +176,18 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 	private void setupItemsList() {
 		ViewGroup container = view.findViewById(R.id.items_container);
 		container.removeAllViews();
-		for (DownloadItem downloadItem : controller.getMapsToDownload()) {
-			container.addView(createItemView(downloadItem));
+		List<DownloadItem> items = controller.getMapsToDownload();
+		for (int i = 0; i < items.size(); i++) {
+			DownloadItem downloadItem = items.get(i);
+			boolean showBottomDivider = i < items.size() - 1;
+			container.addView(createItemView(downloadItem, showBottomDivider));
 		}
 		updateListSelection();
 	}
 
 	@NonNull
-	private View createItemView(@NonNull DownloadItem downloadItem) {
-		View view = inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp, null);
+	private View createItemView(@NonNull DownloadItem downloadItem, boolean showBottomDivider) {
+		View view = inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_and_divider_56dp);
 		ImageView icon = view.findViewById(R.id.icon);
 		boolean downloaded = downloadItem.isDownloaded();
 		icon.setImageResource(downloaded ? R.drawable.ic_action_map_update : R.drawable.ic_action_map_download);
@@ -212,6 +215,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 			updateSelection();
 		});
 		view.setTag(downloadItem);
+		updateVisibility(view.findViewById(R.id.divider_bottom), showBottomDivider);
 		return view;
 	}
 

@@ -28,7 +28,7 @@ public enum GpxParameter {
 	AVG_SPEED("avgSpeed", "double", Double.class, 0d, true),
 	POINTS("points", "int", Integer.class, 0, true),
 	WPT_POINTS("wptPoints", "int", Integer.class, 0, true),
-	COLOR("color", "TEXT", Integer.class, 0, false),
+	COLOR("color", "TEXT", Integer.class, null, false),
 	FILE_LAST_MODIFIED_TIME("fileLastModifiedTime", "bigint", Long.class, 0L, false),
 	FILE_LAST_UPLOADED_TIME("fileLastUploadedTime", "bigint", Long.class, 0L, false),
 	FILE_CREATION_TIME("fileCreationTime", "bigint", Long.class, -1L, false),

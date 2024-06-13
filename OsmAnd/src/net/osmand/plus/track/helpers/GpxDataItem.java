@@ -82,7 +82,7 @@ public class GpxDataItem extends DataItem {
 	public void readGpxAppearanceParameter(@NonNull GPXFile gpxFile, @NonNull GpxParameter parameter) {
 		switch (parameter) {
 			case COLOR:
-				setParameter(COLOR, gpxFile.getColor(0));
+				setParameter(COLOR, gpxFile.getColor(null));
 				break;
 			case WIDTH:
 				setParameter(WIDTH, gpxFile.getWidth(null));
