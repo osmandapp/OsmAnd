@@ -6,12 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.ColorPalette;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class CollectColorPalletTask extends AsyncTask<Void, Void, ColorPalette> {
 

@@ -12,7 +12,6 @@ import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.Arrays;
-import java.util.List;
 
 public enum ColoringType {
 
@@ -161,18 +160,7 @@ public enum ColoringType {
 		return purpose == ColoringPurpose.TRACK ? TRACK_TYPES : ROUTE_TYPES;
 	}
 
-	public static boolean isColorTypeInPurpose(@NonNull ColoringType coloringType, @NonNull ColoringPurpose purpose) {
-		List<ColoringType> purposeColors;
-		switch (purpose) {
-			case TRACK:
-				purposeColors = Arrays.asList(TRACK_TYPES);
-				break;
-			case ROUTE_LINE:
-				purposeColors = Arrays.asList(ROUTE_TYPES);
-				break;
-			default:
-				return false;
-		}
-		return purposeColors.contains(coloringType);
+	public static boolean isColorTypeInPurpose(@NonNull ColoringType type, @NonNull ColoringPurpose purpose) {
+		return Arrays.asList(valuesOf(purpose)).contains(type);
 	}
 }

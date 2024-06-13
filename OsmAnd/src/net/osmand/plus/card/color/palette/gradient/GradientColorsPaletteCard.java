@@ -1,8 +1,5 @@
 package net.osmand.plus.card.color.palette.gradient;
 
-import static net.osmand.plus.utils.OsmAndFormatter.getFormattedSpeedValue;
-
-import android.graphics.Typeface;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -18,16 +15,15 @@ import com.github.mikephil.charting.data.LineData;
 import net.osmand.ColorPalette;
 import net.osmand.gpx.GPXTrackAnalysis;
 import net.osmand.plus.R;
-import net.osmand.plus.card.color.palette.main.HorizontalSpaceItemDecoration;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.charts.ChartUtils;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.plus.utils.OsmAndFormatter.FormattedValue;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.widgets.tools.HorizontalSpaceItemDecoration;
 import net.osmand.router.RouteColorize.ColorizationType;
 
 import java.text.DecimalFormat;

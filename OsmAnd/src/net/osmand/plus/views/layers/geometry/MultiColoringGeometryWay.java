@@ -2,21 +2,17 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.ColorPalette;
-import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.ColorPaletteHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.Gpx3DLinePositionType;
@@ -39,9 +35,6 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

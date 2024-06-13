@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import net.osmand.ColorPalette;
 import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main;
+package net.osmand.plus.widgets.tools;
 
 import android.graphics.Rect;
 import android.view.View;

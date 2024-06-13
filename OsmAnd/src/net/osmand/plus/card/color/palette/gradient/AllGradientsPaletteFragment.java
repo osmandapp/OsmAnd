@@ -92,7 +92,7 @@ public class AllGradientsPaletteFragment extends BaseOsmAndDialogFragment implem
 	}
 
 	private void setupColorsPalette(@NonNull View view) {
-		RecyclerView recyclerView = view.findViewById(R.id.gradients_recycler_view);
+		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		adapter = new AllGradientsPaletteAdapter(app, requireActivity(), controller, nightMode);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);

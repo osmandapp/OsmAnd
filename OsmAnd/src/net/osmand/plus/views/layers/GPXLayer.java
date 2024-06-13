@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.gpx.GPXUtilities.calculateTrackBounds;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.configmap.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableInSubscription;

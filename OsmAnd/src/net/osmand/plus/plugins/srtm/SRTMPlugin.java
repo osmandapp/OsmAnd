@@ -9,19 +9,17 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_DESCRIPTIO
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.TERRAIN_PROMO_ID;
 import static net.osmand.plus.download.DownloadActivityType.GEOTIFF_FILE;
-import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.*;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.CollectColorPalletListener;
 import static net.osmand.plus.widgets.ctxmenu.data.ContextMenuItem.INVALID_ID;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.ColorPalette;
 import net.osmand.StateChangedListener;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
@@ -63,7 +61,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class SRTMPlugin extends OsmandPlugin {
 
@@ -297,7 +294,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		getTerrainMode().resetTransparencyToDefault();
 	}
 
-	public void resetVerticalExaggerationToDefault(){
+	public void resetVerticalExaggerationToDefault() {
 		app.getSettings().VERTICAL_EXAGGERATION_SCALE.resetToDefault();
 	}
 
