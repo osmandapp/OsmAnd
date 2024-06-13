@@ -19,5 +19,4 @@ open class FolderTrackFilter(
 		}
 		return false
 	}
-
 }
