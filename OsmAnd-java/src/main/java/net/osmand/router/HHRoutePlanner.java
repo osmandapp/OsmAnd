@@ -196,6 +196,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Routing...");
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
+			if (finalPnt == null) {
+				printf(SL > 0, " finalPnt is null (stop)\n");
+				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
+			}
 			calcCount++;
 			if (progress.isCancelled) {
 				return cancelledStatus();
@@ -217,6 +221,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
 				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
+					printf(SL > 0, "Too many recalculations (stop)\n");
 					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
@@ -271,7 +276,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
 		printf(SL > 0, "%.2f ms\n", hctx.stats.prepTime);
 		printf(SL > 0, "Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( first met %,d, visited %,d (%,d unique) of %,d added vertices )", 
-				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / route.getHHRoutingTime()),
+				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / (route.getHHRoutingTime() + 0.01)),
 				route.segments.size(), hctx.stats.firstRouteVisitedVertices, hctx.stats.visitedVertices, hctx.stats.uniqueVisitedVertices, hctx.stats.addedVertices);
 		hctx.stats.prepTime += altRoutes;
 		if (SL > 0) {
