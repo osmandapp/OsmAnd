@@ -13,6 +13,7 @@ import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.util.Algorithms;
 
@@ -41,7 +42,6 @@ import static net.osmand.util.Algorithms.isEmpty;
 
 public class OnlineRoutingHelper {
 
-	private static final int CONNECTION_TIMEOUT = 30000;
 	private static final Log LOG = PlatformUtil.getLog(OnlineRoutingHelper.class);
 
 	private final OsmandApplication app;
@@ -131,7 +131,8 @@ public class OnlineRoutingHelper {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		connection.setRequestMethod(method);
-		connection.setConnectTimeout(CONNECTION_TIMEOUT);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		// set custom headers
 		if (headers != null) {
 			for (String key :  headers.keySet()) {

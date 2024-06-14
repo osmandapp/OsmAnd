@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
+    <string name="contact_support_retry">Try again or contact support</string>
     <string name="rendering_value_dark_orange_name">Dark orange</string>
     <string name="user_palette">User palette</string>
     <string name="shared_string_colors">Colors</string>
