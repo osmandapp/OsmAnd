@@ -1,3 +1,6 @@
 package net.osmand.shared.xml
 
-class XmlParserException(message: String?, e: Exception) : Exception(message, e)
+class XmlParserException : Exception {
+	constructor(message: String?) : super(message)
+	constructor(message: String?, e: Exception) : super(message, e)
+}

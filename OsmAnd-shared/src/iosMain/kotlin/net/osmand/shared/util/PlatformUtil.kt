@@ -2,6 +2,8 @@ package net.osmand.shared.util
 
 import net.osmand.shared.api.SQLiteAPI
 import net.osmand.shared.api.SQLiteAPIImpl
+import net.osmand.shared.api.XmlPullParserAPI
+import net.osmand.shared.api.XmlSerializerAPI
 import net.osmand.shared.io.KFile
 import platform.Foundation.NSDate
 import platform.Foundation.NSString
@@ -13,12 +15,18 @@ actual object PlatformUtil {
 	private var gpxDir: String? = null
 
 	private var sqliteApi: SQLiteAPI? = null
+	private var xmlPullParserApi: XmlPullParserAPI? = null
+	private var xmlSerializerApi: XmlSerializerAPI? = null
 
-	fun initialize(appDir: NSString, gpxDir: NSString) {
+	fun initialize(appDir: NSString, gpxDir: NSString,
+	               xmlPullParserApi: XmlPullParserAPI,
+	               xmlSerializerApi: XmlSerializerAPI) {
 		this.appDir = appDir.toString()
 		this.gpxDir = gpxDir.toString()
 
-		sqliteApi = SQLiteAPIImpl()
+		this.sqliteApi = SQLiteAPIImpl()
+		this.xmlPullParserApi = xmlPullParserApi
+		this.xmlSerializerApi = xmlSerializerApi
 	}
 
 	actual fun currentTimeMillis(): Long {
@@ -49,6 +57,24 @@ actual object PlatformUtil {
 			throw IllegalStateException("SQLiteAPI not initialized")
 		} else {
 			return sqliteApi
+		}
+	}
+
+	fun getXmlPullParserApi(): XmlPullParserAPI {
+		val xmlPullParserApi = xmlPullParserApi
+		if (xmlPullParserApi == null) {
+			throw IllegalStateException("XmlPullParserAPI not initialized")
+		} else {
+			return xmlPullParserApi
+		}
+	}
+
+	fun getXmlSerializerApi(): XmlSerializerAPI {
+		val xmlSerializerApi = xmlSerializerApi
+		if (xmlSerializerApi == null) {
+			throw IllegalStateException("XmlSerializerAPI not initialized")
+		} else {
+			return xmlSerializerApi
 		}
 	}
 }

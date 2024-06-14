@@ -1,6 +1,8 @@
 package net.osmand.shared.xml
 
+import net.osmand.shared.extensions.toNSData
 import net.osmand.shared.io.KFile
+import net.osmand.shared.util.PlatformUtil
 import okio.IOException
 import okio.Source
 import okio.buffer
@@ -22,200 +24,184 @@ actual class XmlPullParser actual constructor() {
 		actual const val DOCDECL: Int = 10
 	}
 
+	private val xmlPullParserAPI = PlatformUtil.getXmlPullParserApi()
+
 	@Throws(XmlParserException::class)
 	actual fun setFeature(name: String, state: Boolean) {
-		TODO("Not yet implemented")
+		xmlPullParserAPI.setFeature(name, state)
 	}
 
 	actual fun getFeature(name: String): Boolean {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getFeature(name)
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun setProperty(name: String, value: Any?) {
-		TODO("Not yet implemented")
+		xmlPullParserAPI.setProperty(name, value)
 	}
 
 	actual fun getProperty(name: String): Any? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getProperty(name)
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun setInput(file: KFile, inputEncoding: String?) {
-		/*
-		inputStream = FileInputStream(File(file.absolutePath()))
-		parser.setInput(inputStream, inputEncoding)
-		 */
+		xmlPullParserAPI.setInput(file.absolutePath(), inputEncoding)
 	}
 
 	@Throws(IOException::class)
 	actual fun close() {
-		TODO("Not yet implemented")
+		xmlPullParserAPI.close()
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun setInput(input: Source, inputEncoding: String?) {
 		val inputBuffer = input.buffer()
-		/*
-		val inputStream = object : InputStream() {
-			override fun read(): Int = inputBuffer.readByte().toInt()
-
-			override fun read(b: ByteArray?): Int = b?.let { inputBuffer.read(it) } ?: -1
-
-			override fun read(b: ByteArray?, off: Int, len: Int): Int =
-				b?.let { inputBuffer.read(it, off, len) } ?: -1
-
-			override fun skip(n: Long): Long {
-				inputBuffer.skip(n)
-				return n
-			}
-
-			override fun readNBytes(len: Int): ByteArray = inputBuffer.readByteArray(len.toLong())
-
-			override fun readNBytes(b: ByteArray?, off: Int, len: Int): Int =
-				b?.let { inputBuffer.read(it, off, len) } ?: -1
-
-			override fun readAllBytes(): ByteArray = inputBuffer.readByteArray()
-
-			override fun close() = inputBuffer.close()
-		}
-		parser.setInput(inputStream, inputEncoding)
-		 */
+		val byteArray = inputBuffer.readByteArray()
+		xmlPullParserAPI.setInput(byteArray.toNSData(), inputEncoding)
 	}
 
 	actual fun getInputEncoding(): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getInputEncoding()
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun defineEntityReplacementText(entityName: String, replacementText: String) {
-		TODO("Not yet implemented")
+		xmlPullParserAPI.defineEntityReplacementText(entityName, replacementText)
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun getNamespaceCount(depth: Int): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getNamespaceCount(depth)
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun getNamespacePrefix(pos: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getNamespacePrefix(pos)
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun getNamespaceUri(pos: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getNamespaceUri(pos)
 	}
 
 	actual fun getNamespace(prefix: String?): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getNamespace(prefix)
 	}
 
 	actual fun getDepth(): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getDepth()
 	}
 
 	actual fun getPositionDescription(): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getPositionDescription()
 	}
 
 	actual fun getLineNumber(): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getLineNumber()
 	}
 
 	actual fun getColumnNumber(): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getColumnNumber()
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun isWhitespace(): Boolean {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.isWhitespace()
 	}
 
 	actual fun getText(): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getText()
 	}
 
 	actual fun getTextCharacters(holderForStartAndLength: IntArray): CharArray? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getTextCharacters(holderForStartAndLength)
 	}
 
 	actual fun getNamespace(): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getNamespace()
 	}
 
 	actual fun getName(): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getName()
 	}
 
 	actual fun getPrefix(): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getPrefix()
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun isEmptyElementTag(): Boolean {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.isEmptyElementTag()
 	}
 
 	actual fun getAttributeCount(): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributeCount()
 	}
 
 	actual fun getAttributeNamespace(index: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributeNamespace(index)
 	}
 
 	actual fun getAttributeName(index: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributeName(index)
 	}
 
 	actual fun getAttributePrefix(index: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributePrefix(index)
 	}
 
 	actual fun getAttributeType(index: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributeType(index)
 	}
 
 	actual fun isAttributeDefault(index: Int): Boolean {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.isAttributeDefault(index)
 	}
 
 	actual fun getAttributeValue(index: Int): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributeValue(index)
 	}
 
 	actual fun getAttributeValue(namespace: String?, name: String?): String? {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.getAttributeValue(namespace, name)
 	}
 
 	@Throws(XmlParserException::class)
 	actual fun getEventType(): Int {
-		TODO("Not yet implemented")
+		val res = xmlPullParserAPI.getEventType()
+		if (res == -1) {
+			throw XmlParserException("Event type unresolved")
+		}
+		return res;
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun next(): Int {
-		TODO("Not yet implemented")
+		val res = xmlPullParserAPI.next()
+		if (xmlPullParserAPI.hasError()) {
+			throw XmlParserException(xmlPullParserAPI.getErrorString())
+		}
+		return res
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun nextToken(): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.nextToken()
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun require(type: Int, namespace: String?, name: String?) {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.require(type, namespace, name)
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun nextText(): String {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.nextText()
 	}
 
 	@Throws(XmlParserException::class, IOException::class)
 	actual fun nextTag(): Int {
-		TODO("Not yet implemented")
+		return xmlPullParserAPI.nextTag()
 	}
 }
