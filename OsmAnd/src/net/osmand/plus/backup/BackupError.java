@@ -3,10 +3,12 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,6 +28,7 @@ import static net.osmand.plus.backup.BackupHelper.STATUS_NO_ORDER_ID_ERROR;
 
 public class BackupError {
 
+	private static final Log LOG = PlatformUtil.getLog(BackupError.class);
 	private final String error;
 	private String message;
 	private int code;
@@ -65,9 +68,9 @@ public class BackupError {
 						message = error;
 					}
 				} catch (NumberFormatException ex) {
-					// ignore
-                }
-            }
+					LOG.warn("NumberFormatException: " + error);
+				}
+			}
 		}
 	}
 

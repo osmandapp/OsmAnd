@@ -718,7 +718,7 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="cloud_no_conflicts">There are no conflicts.</string>
     <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_do_not_exist">Do not exist</string>
-    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file.</string>
+    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
     <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
     <string name="last_sync">Last sync</string>
     <string name="import_export">Import/export</string>
