@@ -55,6 +55,18 @@ public class TrackFolder implements TracksGroup, ComparableTracksGroup {
 		return dirFile.getName();
 	}
 
+	@NonNull
+	public String getRelativePath() {
+		String dirName = getDirName();
+		TrackFolder parentFolder = getParentFolder();
+		return parentFolder != null && !parentFolder.isRootFolder()
+				? parentFolder.getRelativePath() + "/" + dirName : dirName;
+	}
+
+	public boolean isRootFolder() {
+		return getParentFolder() == null;
+	}
+
 	@Nullable
 	public TrackFolder getParentFolder() {
 		return parentFolder;
