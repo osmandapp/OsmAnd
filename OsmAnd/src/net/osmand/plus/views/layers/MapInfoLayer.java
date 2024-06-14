@@ -194,7 +194,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		rulerWidgets = new ArrayList<>();
 		sideWidgetsPanels = new ArrayList<>();
 
-		topToolbarView = new TopToolbarView(mapActivity);
+		if (topToolbarView == null) {
+			topToolbarView = new TopToolbarView(mapActivity);
+		}
 		updateTopToolbar(false);
 
 		alarmWidget = new AlarmWidget(app, mapActivity);

@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.slider.LabelFormatter;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.jni.WeatherLayer;
 import net.osmand.core.jni.WeatherTileResourcesManager;
 import net.osmand.core.jni.WeatherType;
@@ -60,6 +61,8 @@ import net.osmand.plus.widgets.popup.PopUpMenuDisplayData;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.plus.widgets.popup.PopUpMenuWidthMode;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -73,10 +76,11 @@ import java.util.TimeZone;
 public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = WeatherForecastFragment.class.getSimpleName();
+	private final Log log = PlatformUtil.getLog(WeatherForecastFragment.class);
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
-	public static final int ANIM_DELAY_MILLIS = 125;
+	public static final int ANIM_DELAY_MILLIS = 70;
 	public static final int WAIT_FOR_NEW_DOWNLOAD_START_DELAY = 1000;
 
 	private WeatherHelper weatherHelper;
@@ -207,6 +211,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			requireMapActivity().refreshMap();
 			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
 			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
+			updateSliderValue();
 			showProgressBar(true);
 			scheduleAnimationStart();
 		} else {
@@ -223,12 +228,16 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		} else {
 			currentStep++;
 			animateStepCount--;
-			float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
-			timeSlider.setValue(newValue);
+			updateSliderValue();
 			if (isAnimatingForecast) {
 				animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
 			}
 		}
+	}
+
+	private void updateSliderValue() {
+		float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
+		timeSlider.setValue(newValue);
 	}
 
 	private int getStepsCount() {
@@ -259,7 +268,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 			calendar.set(Calendar.HOUR_OF_DAY, hour);
 			calendar.set(Calendar.MINUTE, (int) ((value - (float) hour) * 60.0f));
 
-			updateSelectedDate(calendar.getTime());
+			updateSelectedDate(calendar.getTime(), fromUser);
 		});
 		UiUtilities.setupSlider(timeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), true);
 		timeSlider.setLabelBehavior(LABEL_FLOATING);
@@ -280,7 +289,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
 		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 9);
-		timeSlider.setStepSize(today ? 1.0f / 6.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
+		timeSlider.setStepSize(today ? 1.0f / 12.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
 	}
 
 	private void buildZoomButtons(@NonNull View view) {
@@ -303,7 +312,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void setupDatesView(@NonNull View view) {
 		ForecastAdapter adapter = new ForecastAdapter(view.getContext(), date -> {
 			selectedDate.setTime(date);
-			updateSelectedDate(date);
+			updateSelectedDate(date, true);
 			updateTimeSlider();
 
 			requireMapActivity().refreshMap();
@@ -329,8 +338,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		view.findViewById(R.id.contour_layers).setOnClickListener(this::chooseContour);
 	}
 
-	public void updateSelectedDate(@Nullable Date date) {
-		plugin.setForecastDate(date);
+	public void updateSelectedDate(@Nullable Date date, boolean updatePeriod) {
+		plugin.setForecastDate(date, updatePeriod);
 		if (date != null)
 			date.setTime(WeatherUtils.roundForecastTimeToHour(date.getTime()));
 		checkDateOffset(date);
@@ -376,7 +385,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		mapActivity.disableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().addSideWidgetsPanel(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.GONE);
-		updateSelectedDate(selectedDate.getTime());
+		updateSelectedDate(selectedDate.getTime(), true);
 	}
 
 	@Override
@@ -387,7 +396,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 		mapActivity.enableDrawer();
 		mapActivity.getMapLayers().getMapInfoLayer().removeSideWidgetsPanel(widgetsPanel);
 		updateWidgetsVisibility(mapActivity, View.VISIBLE);
-		updateSelectedDate(null);
+		updateSelectedDate(null, true);
 	}
 
 	private void updateWidgetsVisibility(@NonNull MapActivity activity, int visibility) {
@@ -528,6 +537,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void onDownloadStateChanged(boolean isDownloading) {
+		log.info("onDownloadStateChanged: " + isDownloading);
 		progressUpdateHandler.removeCallbacksAndMessages(null);
 		if (isAnimatingForecast) {
 			if (isDownloading) {

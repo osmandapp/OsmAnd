@@ -94,7 +94,7 @@ class ForecastAdapter extends RecyclerView.Adapter<DateViewHolder> {
 
 		holder.itemView.setOnClickListener(view -> {
 			int pos = holder.getAdapterPosition();
-			if (callback != null) {
+			if (callback != null && pos != -1) {
 				callback.processResult(dates.get(pos));
 			}
 			notifyDataSetChanged();
