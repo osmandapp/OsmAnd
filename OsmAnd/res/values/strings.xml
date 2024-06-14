@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
+    <string name="contact_support_retry">Try again or contact support</string>
     <string name="rendering_value_dark_orange_name">Dark orange</string>
     <string name="user_palette">User palette</string>
     <string name="shared_string_colors">Colors</string>
@@ -718,7 +720,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="cloud_no_conflicts">There are no conflicts.</string>
     <string name="download_cloud_version">Download cloud version</string>
     <string name="shared_string_do_not_exist">Do not exist</string>
-    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
     <string name="backup_error_failed_to_fetch_remote_items">Failed to fetch the file list from the server.</string>
     <string name="last_sync">Last sync</string>
     <string name="import_export">Import/export</string>
@@ -1579,7 +1580,6 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="troubleshooting_description">Please follow this link if you have any issues with purchases.</string>
     <string name="troubleshooting">Troubleshooting</string>
     <string name="contact_support">Contact support</string>
-    <string name="contact_support_retry">Try again or contact support</string>
     <string name="empty_purchases_description">If your purchases don\'t show up here, tap on “%1$s”, or contact our support team.</string>
     <string name="contact_support_description">If you have any questions, please contact us at %1$s.</string>
     <string name="new_device_account">New device / new account</string>
