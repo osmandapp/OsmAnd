@@ -5747,4 +5747,5 @@
     <string name="no_assigned_keys_desc">Wählen Sie eine Aktion und weisen Sie eine Taste mit der \"Hinzufügen\"-Schaltfläche zu.</string>
     <string name="key_assignment_add_key">Taste hinzufügen</string>
     <string name="assigned_keys">Zugewiesene Tasten</string>
+    <string name="shared_string_colors">Farben</string>
 </resources>

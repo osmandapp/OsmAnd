@@ -5747,4 +5747,6 @@
     <string name="no_assigned_keys">Нет назначенных клавиш</string>
     <string name="shared_string_key">Клавиша</string>
     <string name="clear_key_assignment_summary">Назначение клавиши для выбранного действия будет удалено.</string>
+    <string name="shared_string_colors">Цвета</string>
+    <string name="user_palette">Пользовательская палитра</string>
 </resources>
