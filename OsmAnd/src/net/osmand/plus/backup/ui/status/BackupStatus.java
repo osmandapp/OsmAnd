@@ -15,6 +15,8 @@ import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.util.Algorithms;
 
+import java.net.HttpURLConnection;
+
 public enum BackupStatus {
 	BACKUP_COMPLETE(R.string.last_sync, R.drawable.ic_action_cloud_done_colored, -1, -1, -1, R.string.sync_now),
 	MAKE_BACKUP(R.string.last_sync, R.drawable.ic_action_cloud_alert_colored, -1, -1, -1, R.string.sync_now),
@@ -56,6 +58,9 @@ public enum BackupStatus {
 					|| errorCode == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
 					|| errorCode == STATUS_NO_ORDER_ID_ERROR) {
 				return SUBSCRIPTION_EXPIRED;
+			}
+			if (errorCode >= HttpURLConnection.HTTP_BAD_REQUEST) {
+				return ERROR;
 			}
 		}
 		if (info != null) {

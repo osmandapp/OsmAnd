@@ -589,7 +589,9 @@ public class AndroidNetworkUtils {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}
 			connection.connect();
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND) {
+				error = connection.getResponseCode() + " " + connection.getResponseMessage();
+			} else if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
 				return streamToString(connection.getErrorStream());
 			} else {
 				InputStream inputStream = gzip
@@ -786,7 +788,9 @@ public class AndroidNetworkUtils {
 			LOG.info("Finish uploading file " + fileName);
 			LOG.info("Response code and message : " + responseCode + " " + responseMessage);
 
-			if (responseCode != HttpURLConnection.HTTP_OK) {
+			if (responseCode == HttpURLConnection.HTTP_NOT_FOUND) {
+				error = responseCode + " " + responseMessage;
+			} else if (responseCode != HttpURLConnection.HTTP_OK) {
 				InputStream errorStream = conn.getErrorStream();
 				error = errorStream != null ? streamToString(errorStream) : responseMessage;
 			} else {

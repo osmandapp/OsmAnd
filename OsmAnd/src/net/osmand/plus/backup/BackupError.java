@@ -59,8 +59,15 @@ public class BackupError {
 					message = errorObj.getString("message");
 				}
 			} catch (JSONException e) {
-				// ignore
-			}
+				try {
+					if (error.contains(" ") && Integer.parseInt(error.split(" ")[0]) > 0) {
+						code = Integer.parseInt(error.split(" ")[0]);
+						message = error;
+					}
+				} catch (NumberFormatException ex) {
+					// ignore
+                }
+            }
 		}
 	}
 
