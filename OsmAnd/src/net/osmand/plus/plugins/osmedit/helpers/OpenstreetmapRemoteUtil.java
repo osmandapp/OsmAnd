@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -76,9 +77,6 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	// reuse changeset
 	private long changeSetId = NO_CHANGESET_ID;
 	private long changeSetTimeStamp = NO_CHANGESET_ID;
-
-	private static final int CONNECT_TIMEOUT = 30000;
-	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 
 	public OpenstreetmapRemoteUtil(OsmandApplication app) {
 		this.ctx = app;
@@ -155,8 +153,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private String performBasicAuthRequest(String url, String requestMethod, String requestBody, String userOperation) throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		connection.setConnectTimeout(CONNECT_TIMEOUT);
-		connection.setReadTimeout(READ_TIMEOUT);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();

@@ -51,8 +51,8 @@ import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
 
-	private static final int CONNECT_TIMEOUT = 30000;
-	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
+	public static final int CONNECT_TIMEOUT = 30000;
+	public static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 	private static final Log LOG = PlatformUtil.getLog(AndroidNetworkUtils.class);
 
 	public static final String CANCELLED_MSG = "cancelled";

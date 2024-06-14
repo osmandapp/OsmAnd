@@ -18,6 +18,7 @@ import net.osmand.plus.plugins.osmedit.data.OsmNotesPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -45,9 +46,6 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private static final String NOTES_URL = "api/0.6/notes";
 	private static final String USER_DETAILS_URL = "api/0.6/user/details";
-
-	private static final int CONNECT_TIMEOUT = 30000;
-	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 
 	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
@@ -144,8 +142,8 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		OsmBugResult result = new OsmBugResult();
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		log.info(userOperation + " " + url);
-		connection.setConnectTimeout(CONNECT_TIMEOUT);
-		connection.setReadTimeout(READ_TIMEOUT);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		if (!anonymous) {
