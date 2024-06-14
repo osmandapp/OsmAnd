@@ -40,6 +40,8 @@ public class LiveMonitoringHelper {
 
 	private LatLon lastPoint;
 	private long lastTimeUpdated;
+	private final int CONNECT_TIMEOUT = 30000;
+	private final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 
 	public LiveMonitoringHelper(@NonNull OsmandApplication app) {
 		this.app = app;
@@ -203,8 +205,8 @@ public class LiveMonitoringHelper {
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
 					url.getPath(), url.getQuery(), url.getRef());
-			urlConnection.setConnectTimeout(15000);
-			urlConnection.setReadTimeout(15000);
+			urlConnection.setConnectTimeout(CONNECT_TIMEOUT);
+			urlConnection.setReadTimeout(READ_TIMEOUT);
 			log.info("Monitor " + uri);
 			if (urlConnection.getResponseCode() / 100 != 2) {
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$

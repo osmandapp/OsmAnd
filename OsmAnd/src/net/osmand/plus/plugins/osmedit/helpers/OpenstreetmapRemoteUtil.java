@@ -77,6 +77,9 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	private long changeSetId = NO_CHANGESET_ID;
 	private long changeSetTimeStamp = NO_CHANGESET_ID;
 
+	private static final int CONNECT_TIMEOUT = 30000;
+	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
+
 	public OpenstreetmapRemoteUtil(OsmandApplication app) {
 		this.ctx = app;
 		this.plugin = PluginsHelper.getPlugin(OsmEditingPlugin.class);
@@ -152,7 +155,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private String performBasicAuthRequest(String url, String requestMethod, String requestBody, String userOperation) throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(CONNECT_TIMEOUT);
+		connection.setReadTimeout(READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();

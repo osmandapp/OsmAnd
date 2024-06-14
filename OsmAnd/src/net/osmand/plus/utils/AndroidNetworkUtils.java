@@ -51,7 +51,8 @@ import java.util.zip.GZIPOutputStream;
 
 public class AndroidNetworkUtils {
 
-	private static final int CONNECTION_TIMEOUT = 15000;
+	private static final int CONNECT_TIMEOUT = 30000;
+	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 	private static final Log LOG = PlatformUtil.getLog(AndroidNetworkUtils.class);
 
 	public static final String CANCELLED_MSG = "cancelled";
@@ -493,7 +494,8 @@ public class AndroidNetworkUtils {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		connection.setRequestProperty("Accept-Charset", "UTF-8");
 		connection.setRequestProperty("User-Agent", app != null ? Version.getFullVersion(app) : "OsmAnd");
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(CONNECT_TIMEOUT);
+		connection.setReadTimeout(READ_TIMEOUT);
 		if (body != null && post) {
 			connection.setDoInput(true);
 			connection.setDoOutput(true);
@@ -561,8 +563,8 @@ public class AndroidNetworkUtils {
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection(url);
 			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 			try {
 				res = BitmapFactory.decodeStream(inputStream);
@@ -581,8 +583,8 @@ public class AndroidNetworkUtils {
 		String error = null;
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}
@@ -625,8 +627,8 @@ public class AndroidNetworkUtils {
 		long result = -1;
 		try {
 			HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-			connection.setConnectTimeout(CONNECTION_TIMEOUT);
-			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			connection.setConnectTimeout(CONNECT_TIMEOUT);
+			connection.setReadTimeout(READ_TIMEOUT);
 			if (gzip) {
 				connection.setRequestProperty("Accept-Encoding", "deflate, gzip");
 			}

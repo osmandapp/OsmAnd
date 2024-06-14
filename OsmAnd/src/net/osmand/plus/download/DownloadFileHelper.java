@@ -34,6 +34,8 @@ public class DownloadFileHelper {
 	private static final int BUFFER_SIZE = 32256;
 	protected static final int TRIES_TO_DOWNLOAD = 15;
 	protected static final long TIMEOUT_BETWEEN_DOWNLOADS = 8000;
+	private static final int CONNECT_TIMEOUT = 30000;
+	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
 
 	private final OsmandApplication ctx;
 	private boolean interruptDownloading;
@@ -76,12 +78,12 @@ public class DownloadFileHelper {
 						}
 						HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 						conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
-						conn.setReadTimeout(30000);
+						conn.setReadTimeout(READ_TIMEOUT);
 						if (fileread > 0) {
 							String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
 							conn.setRequestProperty("Range", range);  //$NON-NLS-1$
 						}
-						conn.setConnectTimeout(30000);
+						conn.setConnectTimeout(CONNECT_TIMEOUT);
 						log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
 						boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
 						if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){

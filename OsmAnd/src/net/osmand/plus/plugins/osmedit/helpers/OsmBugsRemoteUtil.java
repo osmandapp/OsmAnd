@@ -46,6 +46,9 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final String NOTES_URL = "api/0.6/notes";
 	private static final String USER_DETAILS_URL = "api/0.6/user/details";
 
+	private static final int CONNECT_TIMEOUT = 30000;
+	private static final int READ_TIMEOUT = CONNECT_TIMEOUT * 2;
+
 	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
 
@@ -141,7 +144,8 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		OsmBugResult result = new OsmBugResult();
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
 		log.info(userOperation + " " + url);
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(CONNECT_TIMEOUT);
+		connection.setReadTimeout(READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		if (!anonymous) {
