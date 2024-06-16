@@ -1134,6 +1134,16 @@ You need to activate the sensor so OsmAnd can find it.</string>
     <string name="map_settings_weather_cloud">Cloud</string>
     <string name="map_settings_weather_precip">Precipitation</string>
     <string name="measurement_units">Measurement units</string>
+    <string name="ais_address_settings">IP address settings</string>
+    <string name="ais_address_settings_description">Choose NMEA protocol (UDP/TCP) and define addresses</string>
+    <string name="ais_nmea_protocol">Protocol for NMEA data reception</string>
+    <string name="ais_nmea_protocol_description">Choose protocol for NMEA data reception</string>
+    <string name="ais_address_nmea_server">IP address of NMEA data source</string>
+    <string name="ais_address_nmea_server_description">Define IP address of the NMEA data source (if TCP is used)</string>
+    <string name="ais_port_nmea_server">TCP port of NMEA data source</string>
+    <string name="ais_port_nmea_server_description">Define TCP port number of the NMEA data source</string>
+    <string name="ais_port_nmea_local">UDP port of local NMEA data receiver</string>
+    <string name="ais_port_nmea_local_description">Define UPD port where OsmAnd receives NMEA data</string>
     <string name="shared_string_weather">Weather</string>
     <string name="explore_weather_forecast">Explore Weather forecast.</string>
     <string name="shared_string_contours">Contours</string>
@@ -4227,6 +4237,8 @@ Download tile maps directly, or copy them as SQLite database files to OsmAnd\'s 
     <string name="osmand_parking_plugin_description">Mark where your car is parked, and notify your calendar when the parking meter will expire. To place the marker, choose a place on the map, go to \"Actions\", and tap \"Add parking\".</string>
     <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
+    <string name="plugin_aistracker_name">AIS vessel tracker</string>
+    <string name="plugin_aistracker_description">Display AIS positions and information about surrounding vessels. The AIS data is received via network from an external AIS receiver.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. This facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto-announce your position.</string>
     <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
