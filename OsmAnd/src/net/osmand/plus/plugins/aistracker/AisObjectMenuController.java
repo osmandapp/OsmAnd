@@ -2,6 +2,8 @@ package net.osmand.plus.plugins.aistracker;
 
 import static net.osmand.plus.utils.OsmAndFormatter.FORMAT_MINUTES;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -82,10 +84,10 @@ public class AisObjectMenuController extends MenuController {
                 addMenuItem("COG", String.valueOf(aisObject.getCog()));
             }
             if (aisObject.getSog() != AisObjectConstants.INVALID_SOG) {
-                addMenuItem("SOG", String.valueOf(aisObject.getSog()));
+                addMenuItem("SOG", String.valueOf(aisObject.getSog()) + " kt");
             }
             if (aisObject.getAltitude() != AisObjectConstants.INVALID_ALTITUDE) {
-                addMenuItem("Altitude", String.valueOf(aisObject.getAltitude()));
+                addMenuItem("Altitude", String.valueOf(aisObject.getAltitude()) + " m");
             }
         } else {
             addMenuItem("Callsign", aisObject.getCallSign());
@@ -118,9 +120,9 @@ public class AisObjectMenuController extends MenuController {
                     (aisObject.getEtaHour() != AisObjectConstants.INVALID_ETA_HOUR) &&
                     (aisObject.getEtaMin() != AisObjectConstants.INVALID_ETA_MIN) &&
                     (aisObject.getEtaMon() != AisObjectConstants.INVALID_ETA)) {
-                String eta = new String(aisObject.getEtaDay() + "." +
-                        aisObject.getEtaMon() + ". " + aisObject.getEtaHour() + ":" +
-                        aisObject.getEtaMin());
+                @SuppressLint("DefaultLocale") String eta = new String(aisObject.getEtaDay() + "." +
+                        aisObject.getEtaMon() + ". " + String.format("%02d", aisObject.getEtaHour()) + ":" +
+                        String.format("%02d", aisObject.getEtaMin()));
                 addMenuItem("ETA", eta);
                 // TODO add prepending "0", if needed
             }

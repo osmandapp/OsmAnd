@@ -33,6 +33,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
     private AisTrackerLayer aisTrackerLayer = null;
 
     public static final String COMPONENT = "net.osmand.aistrackerPlugin";
+    public static final String AISTRACKER_ID = "osmand.aistracker";
     public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
     public static final int AIS_NMEA_PROTOCOL_UDP = 0;
     public static final int AIS_NMEA_PROTOCOL_TCP = 1;
@@ -98,7 +99,7 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
     @Override
     public String getId() {
-        return "osmand.aistracker";
+        return AISTRACKER_ID;
     }
 
     @Nullable
