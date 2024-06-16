@@ -37,10 +37,13 @@ public class AisTrackerSettingsFragment extends BaseSettingsFragment {
         String[] entries = {"UDP", "TCP"};
 
         ListPreferenceEx aisNmeaProtocol = findPreference(plugin.AIS_NMEA_PROTOCOL.getId());
-        aisNmeaProtocol.setEntries(entries);
-        aisNmeaProtocol.setEntryValues(entryValues);
-        aisNmeaProtocol.setDescription(R.string.ais_nmea_protocol_description);
-        return (int)aisNmeaProtocol.getValue();
+        if (aisNmeaProtocol != null) {
+            aisNmeaProtocol.setEntries(entries);
+            aisNmeaProtocol.setEntryValues(entryValues);
+            aisNmeaProtocol.setDescription(R.string.ais_nmea_protocol_description);
+            return (int)aisNmeaProtocol.getValue();
+        }
+        return 0;
     }
 
     private void setupIpAddress(int currentProtocol) {

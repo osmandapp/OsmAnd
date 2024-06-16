@@ -564,7 +564,7 @@ public class PluginsHelper {
 		List<String> l = new ArrayList<>();
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			List<String> ls = plugin.indexingFiles(progress);
-			if (ls != null && ls.size() > 0) {
+			if (ls != null && !ls.isEmpty()) {
 				l.addAll(ls);
 			}
 		}
