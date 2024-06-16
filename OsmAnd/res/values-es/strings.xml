@@ -5747,4 +5747,5 @@
     <string name="assigned_keys">Teclas asignadas</string>
     <string name="shared_string_colors">Colores</string>
     <string name="user_palette">Paleta del usuario</string>
+    <string name="contact_support_retry">Inténtalo de nuevo o ponte en contacto con el soporte</string>
 </resources>
