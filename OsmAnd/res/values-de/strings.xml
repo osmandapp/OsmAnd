@@ -2823,7 +2823,7 @@
     <string name="tracks_on_map">Angezeigte Tracks</string>
     <string name="time_of_day">Tageszeit</string>
     <string name="by_transport_type">Von %1$s</string>
-    <string name="step_by_step">Schritt für Schritt</string>
+    <string name="step_by_step">Abbiegehinweise</string>
     <string name="routeInfo_road_types_name">Straßentypen</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Eine Schaltfläche zum Ein- oder Ausblenden ausgewählter Tracks auf der Karte.</string>
     <string name="exit_at">Aussteigen bei</string>
@@ -5748,4 +5748,8 @@
     <string name="key_assignment_add_key">Taste hinzufügen</string>
     <string name="assigned_keys">Zugewiesene Tasten</string>
     <string name="shared_string_colors">Farben</string>
+    <string name="contact_support_retry">Versuche es erneut oder kontaktiere den Support</string>
+    <string name="action_icon">Aktionssymbol</string>
+    <string name="backup_error_failed_to_transfer_file">Die Übertragung der Cloud-Datei(en) ist fehlgeschlagen.</string>
+    <string name="user_palette">Benutzer-Palette</string>
 </resources>
