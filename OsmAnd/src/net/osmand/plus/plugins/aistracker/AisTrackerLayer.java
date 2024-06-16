@@ -59,22 +59,35 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
     }
 
     private void initTestObjects() {
-        AisObject ais1 = new AisObject(12345, 1, 20, 120, 120.0, 4.4,
-                37.42421d, -122.08381d, 30, 0,0,0,0);
-        AisObject ais2 = new AisObject(34567, 3, 20, 320, 320.0, 0.4,
-                37.42521d, -122.08481d, 36, 0,0,0,0);
-        AisObject ais3 = new AisObject(34568, 1, 20, 320, 320.0, 0.4,
-                50.738d, 7.099d, 70, 20,40,10,0);
-        AisObject ais4 = new AisObject(12341, 3, 20, 20, 20.0, 0.4,
-                50.737d, 7.098d, 60, 0,0,0,0);
+        // passenger ship
+        AisObject ais = new AisObject(34568, 1, 20, 0, 1, 320,
+                320.0, 8.4, 50.738d, 7.099d, 0.0);
+        updateAisObjectList(ais);
+        ais = new AisObject(34568, 5, 0, "TEST-CALLSIGN1", "TEST-Ship", 60 /* passenger */, 56,
+                65, 8, 12, 2,
+                "Potsdam", 8, 15, 22, 5);
+        updateAisObjectList(ais);
+        // sailing boat
+        ais = new AisObject(454011, 1, 20, 8, 0, 120,
+                125.0, 4.4, 50.737d, 7.098d, 0.0);
+        updateAisObjectList(ais);
+        ais = new AisObject(454011, 5, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
+                0, 0, 0, 0,
+                "", 0, 0, 0, 0);
+        updateAisObjectList(ais);
+        // land station
+        ais = new AisObject(878121, 4, 50.736d, 7.100d);
+        updateAisObjectList(ais);
+        // AIDS
+        ais = new AisObject( 521077, 21, 50.735d, 7.101d, 2,
+                0, 0, 0, 0);
+        updateAisObjectList(ais);
+        // aircraft
+        ais = new AisObject(910323, 9, 15, 65, 180.5, 55.0, 50.734d, 7.102d);
+        updateAisObjectList(ais);
 
-        updateAisObjectList(ais1);
-        updateAisObjectList(ais2);
-        removeOldestAisObjectListEntry();
-        updateAisObjectList(ais2);
-        updateAisObjectList(ais3);
-        updateAisObjectList(ais4);
-        removeLostAisObjects();
+        //removeOldestAisObjectListEntry();
+        //removeLostAisObjects();
     }
     private void initTimer() {
         this.taskCheckAisObjectList = new TimerTask() {
