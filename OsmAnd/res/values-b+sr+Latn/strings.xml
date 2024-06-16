@@ -5752,4 +5752,6 @@
     <string name="assigned_keys">Dodeljenja tastera</string>
     <string name="user_palette">Korisnička paleta</string>
     <string name="shared_string_colors">Boje</string>
+    <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
+    <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
 </resources>
