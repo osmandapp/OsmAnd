@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-public class PredefinedPaletteColor extends PaletteColor {
+public class PredefinedPaletteColor extends PaletteColorV1 {
 
 	@StringRes
 	private final int nameId;

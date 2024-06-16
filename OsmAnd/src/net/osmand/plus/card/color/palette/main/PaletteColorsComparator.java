@@ -2,12 +2,12 @@ package net.osmand.plus.card.color.palette.main;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColorV1;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 
 import java.util.Comparator;
 
-public class PaletteColorsComparator implements Comparator<PaletteColor> {
+public class PaletteColorsComparator implements Comparator<PaletteColorV1> { // todo remove
 
 	private final PaletteSortingMode sortingMode;
 
@@ -16,7 +16,7 @@ public class PaletteColorsComparator implements Comparator<PaletteColor> {
 	}
 
 	@Override
-	public int compare(PaletteColor o1, PaletteColor o2) {
+	public int compare(PaletteColorV1 o1, PaletteColorV1 o2) {
 		if (sortingMode == PaletteSortingMode.LAST_USED_TIME) {
 			return Long.compare(o2.getLastUsedTime(), o1.getLastUsedTime());
 		}

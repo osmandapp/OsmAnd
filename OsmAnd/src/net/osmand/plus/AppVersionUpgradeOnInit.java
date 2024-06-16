@@ -54,7 +54,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
-import net.osmand.plus.card.color.palette.ColorsMigrationAlgorithm;
+import net.osmand.plus.card.color.palette.migration.v1.ColorsMigrationAlgorithmV1;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
@@ -277,7 +277,7 @@ public class AppVersionUpgradeOnInit {
 					migrateRoutingTypePrefs();
 				}
 				if (prevAppVersion < VERSION_4_7_01) {
-					ColorsMigrationAlgorithm.doMigration(app);
+					ColorsMigrationAlgorithmV1.doMigration(app);
 				}
 				if (prevAppVersion < VERSION_4_7_02) {
 					migrateVerticalWidgetPanels(settings);

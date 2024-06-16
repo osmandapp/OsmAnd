@@ -26,14 +26,14 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,16 +96,12 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			OsmandSettings settings = app.getSettings();
-			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-			bundle.predefinedColors = TrackColorController.getPredefinedColors(app);
-			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
-			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
+			ColorsCollection colorsCollection = new ColorsCollection(app);
 			Integer color = data.getParameter(COLOR);
 			if (color == null) {
-				color = bundle.predefinedColors.get(0).getColor();
+				List<PaletteColor> colors = colorsCollection.getColors(PaletteSortingMode.ORIGINAL);
+				color = !Algorithms.isEmpty(colors) ? colors.get(0).getColor() : null;
 			}
-			ColorsCollection colorsCollection = new ColorsCollection(bundle);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, color);
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());

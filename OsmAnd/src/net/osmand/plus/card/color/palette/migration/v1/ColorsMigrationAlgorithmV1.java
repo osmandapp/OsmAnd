@@ -1,12 +1,12 @@
-package net.osmand.plus.card.color.palette;
+package net.osmand.plus.card.color.palette.migration.v1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollectionV1;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteColorV1;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
@@ -17,7 +17,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ColorsMigrationAlgorithm {
+/**
+ * Implements a migration from the old color preferences that stored simple color ints
+ * to the new preferences that store objects of the PaletteColor wrapper class.
+ */
+public class ColorsMigrationAlgorithmV1 {
 
 	private final OsmandSettings settings;
 
@@ -27,7 +31,7 @@ public class ColorsMigrationAlgorithm {
 
 	private long timestamp;
 
-	private ColorsMigrationAlgorithm(@NonNull OsmandApplication app) {
+	private ColorsMigrationAlgorithmV1(@NonNull OsmandApplication app) {
 		this.settings = app.getSettings();
 
 		CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference(
@@ -80,11 +84,11 @@ public class ColorsMigrationAlgorithm {
 		ListStringPreference oldPreference = migrationBundle.oldPreference;
 		List<Integer> customColorInts = collectCustomColorInts(oldPreference, appMode);
 
-		List<PaletteColor> customColors = new ArrayList<>();
+		List<PaletteColorV1> customColors = new ArrayList<>();
 		if (!Algorithms.isEmpty(customColorInts)) {
 			for (int colorInt : customColorInts) {
-				String id = PaletteColor.generateId(timestamp);
-				customColors.add(new PaletteColor(id, colorInt, timestamp));
+				String id = PaletteColorV1.generateId(timestamp);
+				customColors.add(new PaletteColorV1(id, colorInt, timestamp));
 				timestamp += 10;
 			}
 		}
@@ -94,7 +98,7 @@ public class ColorsMigrationAlgorithm {
 		bundle.paletteColors = customColors;
 		bundle.palettePreference = migrationBundle.newPreference;
 		bundle.customColorsPreference = migrationBundle.customColorsPreference;
-		ColorsCollection colorsCollection = new ColorsCollection(bundle);
+		ColorsCollectionV1 colorsCollection = new ColorsCollectionV1(bundle);
 		colorsCollection.saveToPreferences();
 	}
 
@@ -122,7 +126,7 @@ public class ColorsMigrationAlgorithm {
 	}
 
 	public static void doMigration(@NonNull OsmandApplication app) {
-		ColorsMigrationAlgorithm migrationAlgorithm = new ColorsMigrationAlgorithm(app);
+		ColorsMigrationAlgorithmV1 migrationAlgorithm = new ColorsMigrationAlgorithmV1(app);
 		migrationAlgorithm.execute();
 	}
 

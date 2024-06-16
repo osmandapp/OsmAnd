@@ -1,112 +1,60 @@
 package net.osmand.plus.card.color.palette.main.data;
 
-import android.content.Context;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
+import net.osmand.ColorPalette.ColorValue;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class PaletteColor {
 
-	public static final String CUSTOM_COLOR_PREFIX = "custom_";
-
-	// JSON tags
-	private static final String ID = "id";
-	private static final String COLOR_HEX = "color_hex";
-	private static final String CREATION_TIME = "creation_time";
-	private static final String LAST_USED_TIME = "last_used_time";
-
-	@ColorInt
-	private int color;
+	private ColorValue colorValue;
 	private final String id;
 	private final long creationTime;
-	private long lastUsedTime;
 
-	public PaletteColor(@NonNull String id, @ColorInt int color, long creationTime) {
-		this.id = id;
-		this.color = color;
+	public PaletteColor(@ColorInt int color, long creationTime) {
+		this(new ColorValue(color), creationTime);
+	}
+
+	public PaletteColor(@NonNull ColorValue colorValue, long creationTime) {
+		this.id = generateId(creationTime);
+		this.colorValue = colorValue;
 		this.creationTime = creationTime;
 	}
 
-	public PaletteColor(@NonNull JSONObject jsonObject) throws JSONException {
-		id = jsonObject.getString(ID);
-		String colorHex = jsonObject.getString(COLOR_HEX);
-		color = Algorithms.parseColor(colorHex);
-		if (jsonObject.has(CREATION_TIME)) {
-			creationTime = jsonObject.getLong(CREATION_TIME);
-		} else {
-			creationTime = 0;
-		}
-		if (jsonObject.has(LAST_USED_TIME)) {
-			lastUsedTime = jsonObject.getLong(LAST_USED_TIME);
-		}
-	}
-
-	public String getId() {
-		return id;
+	@NonNull
+	public ColorValue getColorValue() {
+		return colorValue;
 	}
 
 	@ColorInt
 	public int getColor() {
-		return color;
+		return colorValue.clr;
 	}
 
 	public void setColor(@ColorInt int color) {
-		this.color = color;
+		this.colorValue = new ColorValue(colorValue.val, color);
+	}
+
+	@NonNull
+	public String getId() {
+		return id;
 	}
 
 	public long getCreationTime() {
 		return creationTime;
 	}
 
-	public long getLastUsedTime() {
-		return lastUsedTime;
-	}
-
-	public void renewLastUsedTime() {
-		setLastUsedTime(System.currentTimeMillis());
-	}
-
-	public void setLastUsedTime(long lastUsedTime) {
-		this.lastUsedTime = lastUsedTime;
-	}
-
-	public boolean isDefault() {
-		return !isCustom();
-	}
-
-	public boolean isCustom() {
-		return creationTime > 0;
-	}
-
 	@NonNull
 	public PaletteColor duplicate() {
 		long now = System.currentTimeMillis();
-		return new PaletteColor(generateId(now), color, now);
+		return new PaletteColor(colorValue, now);
 	}
 
 	@NonNull
-	public String toHumanString(@NonNull Context context) {
-		return context.getString(R.string.custom_color);
-	}
-
-	@NonNull
-	public JSONObject toJson() throws JSONException {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put(ID, id);
-		jsonObject.put(COLOR_HEX, Algorithms.colorToString(color));
-		if (creationTime > 0) {
-			jsonObject.put(CREATION_TIME, creationTime);
-		}
-		if (lastUsedTime > 0) {
-			jsonObject.put(LAST_USED_TIME, lastUsedTime);
-		}
-		return jsonObject;
+	public String toHumanString(@NonNull OsmandApplication app) {
+		return app.getString(R.string.shared_string_custom);
 	}
 
 	@Override
@@ -126,6 +74,6 @@ public class PaletteColor {
 
 	@NonNull
 	public static String generateId(long creationTime) {
-		return CUSTOM_COLOR_PREFIX + creationTime;
+		return "palette_color_" + creationTime;
 	}
 }

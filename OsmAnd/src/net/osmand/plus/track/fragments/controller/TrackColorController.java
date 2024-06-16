@@ -31,13 +31,8 @@ import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.PaletteColor;
-import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
 import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
 import net.osmand.plus.track.TrackDrawInfo;
 import net.osmand.plus.track.helpers.GpxDataItem;
@@ -47,7 +42,6 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TrackColorController extends ColoringStyleCardController implements IDialogController, IControlsColorProvider {
@@ -87,12 +81,7 @@ public class TrackColorController extends ColoringStyleCardController implements
 	@NonNull
 	public IColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			OsmandSettings settings = app.getSettings();
-			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-			bundle.predefinedColors = getPredefinedColors(app);
-			bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
-			bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
-			ColorsCollection colorsCollection = new ColorsCollection(bundle);
+			ColorsCollection colorsCollection = new ColorsCollection(app);
 			colorsPaletteController = new ColorsPaletteController(app, colorsCollection, drawInfo.getColor());
 		}
 		colorsPaletteController.setPaletteListener(getExternalListener());
@@ -179,18 +168,6 @@ public class TrackColorController extends ColoringStyleCardController implements
 	@NonNull
 	protected ColoringType[] getSupportedColoringTypes() {
 		return ColoringType.valuesOf(ColoringPurpose.TRACK);
-	}
-
-	@NonNull
-	public static List<PaletteColor> getPredefinedColors(@NonNull OsmandApplication app) {
-		List<PaletteColor> predefinedColors = new ArrayList<>();
-		for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {
-			String id = item.getValue();
-			int colorInt = item.getColor();
-			String name = item.getLocalizedValue();
-			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, name));
-		}
-		return predefinedColors;
 	}
 
 	public static void saveCustomColorsToTracks(@NonNull OsmandApplication app, int prevColor, int newColor) {

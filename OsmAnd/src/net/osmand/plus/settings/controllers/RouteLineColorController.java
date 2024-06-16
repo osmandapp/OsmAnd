@@ -21,8 +21,6 @@ import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
 import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.DefaultColors;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteMode;
 import net.osmand.plus.card.color.palette.moded.ModedColorsPaletteCard;
@@ -34,7 +32,6 @@ import net.osmand.plus.helpers.DayNightHelper.MapThemeProvider;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.enums.DayNightMode;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.views.layers.PreviewRouteLineLayer;
@@ -69,11 +66,7 @@ public class RouteLineColorController extends ColoringStyleCardController
 	@NonNull
 	public ModedColorsPaletteController getColorsPaletteController() {
 		if (colorsPaletteController == null) {
-			OsmandSettings settings = app.getSettings();
-			ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-			bundle.predefinedColors = getPredefinedColors();
-			bundle.palettePreference = settings.ROUTE_LINE_COLORS_PALETTE;
-			ColorsCollection colorsCollection = new ColorsCollection(bundle);
+			ColorsCollection colorsCollection = new ColorsCollection(app);
 			colorsPaletteController = new ModedColorsPaletteController(app, colorsCollection) {
 
 				private PaletteMode paletteModeDay;
@@ -232,11 +225,6 @@ public class RouteLineColorController extends ColoringStyleCardController
 	public int getSelectedControlsColor() {
 		PreviewRouteLineLayer layer = app.getOsmandMap().getMapLayers().getPreviewRouteLineLayer();
 		return layer.getRouteLineColor(isNightMap());
-	}
-
-	@NonNull
-	public static List<PaletteColor> getPredefinedColors() {
-		return Arrays.asList(DefaultColors.values());
 	}
 
 	@NonNull

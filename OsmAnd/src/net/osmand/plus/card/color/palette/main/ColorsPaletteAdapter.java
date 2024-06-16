@@ -84,7 +84,7 @@ class ColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 	@Override
 	public long getItemId(int position) {
 		PaletteColor paletteColor = colors.get(position);
-		return paletteColor.isDefault() ? paletteColor.getId().hashCode() : paletteColor.getCreationTime();
+		return paletteColor.getCreationTime();
 	}
 
 	static class ColorViewHolder extends RecyclerView.ViewHolder {
