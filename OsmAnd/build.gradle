@@ -221,4 +221,6 @@ dependencies {
 
 	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
+
+	implementation 'net.sf.marineapi:marineapi:0.12.0'
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:title="AIS">
+
+    <PreferenceCategory
+        android:key="ais_address_settings"
+        android:layout="@layout/preference_category_with_descr"
+        android:title="@string/ais_address_settings" />
+
+    <net.osmand.plus.settings.preferences.ListPreferenceEx
+        android:key="ais_nmea_protocol"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_nmea_protocol"
+        tools:summary="@string/ais_nmea_protocol_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_address_nmea_server"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_address_nmea_server"
+        tools:summary="@string/ais_address_nmea_server_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_port_nmea_server"
+        android:layout="@layout/preference_with_descr"
+        android:inputType="number"
+        android:title="@string/ais_port_nmea_server"
+        tools:summary="@string/ais_port_nmea_server_description" />
+
+    <net.osmand.plus.settings.preferences.EditTextPreferenceEx
+        android:key="ais_port_nmea_local"
+        android:layout="@layout/preference_with_descr"
+        android:title="@string/ais_port_nmea_local"
+        tools:summary="@string/ais_port_nmea_local_description" />
+
+</PreferenceScreen>
