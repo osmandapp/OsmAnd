@@ -703,6 +703,8 @@ public class RouteProvider {
 
 		OsmandSettings settings = params.ctx.getSettings();
 
+		router.CALCULATE_MISSING_MAPS = !settings.IGNORE_MISSING_MAPS;
+
 		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
 		if (routingType.isHHRouting()) {
 			router.setDefaultHHRoutingConfig();

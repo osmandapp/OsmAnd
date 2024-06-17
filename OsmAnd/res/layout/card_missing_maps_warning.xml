@@ -28,7 +28,7 @@
 			android:layout_height="wrap_content"
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:textColor="?android:textColorPrimary"
-			android:text="@string/missing_maps_header"/>
+			android:text="@string/missing_maps_title"/>
 
 		<net.osmand.plus.widgets.TextViewEx
 			style="@style/DescStyle"
@@ -37,14 +37,22 @@
 			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:layout_marginTop="@dimen/content_padding_half"
 			android:textColor="@color/text_color_secondary_light"
-			android:text="@string/missing_maps_description" />
+			android:text="@string/missing_maps_details" />
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton
-			android:id="@+id/details_button"
+			android:id="@+id/download_button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			app:dialogButtonType="secondaryActive"
-			app:dialogButtonTitle="@string/shared_string_details"
+			app:dialogButtonTitle="@string/welmode_download_maps"
+			app:dialogButtonTopMargin="@dimen/content_padding" />
+
+		<net.osmand.plus.widgets.dialogbutton.DialogButton
+			android:id="@+id/ignore_button"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:dialogButtonType="secondaryActive"
+			app:dialogButtonTitle="@string/missing_maps_ignore"
 			app:dialogButtonTopMargin="@dimen/content_padding" />
 
 	</LinearLayout>
