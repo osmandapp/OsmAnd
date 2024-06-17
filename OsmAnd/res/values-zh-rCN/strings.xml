@@ -5507,4 +5507,39 @@
     <string name="apply_only_to_new">仅应用于新的</string>
     <string name="shared_string_changes">修改</string>
     <string name="change_default_tracks_appearance_confirmation">将修改应用于文件夹中的现有轨迹还是仅应用于新轨迹？</string>
+    <string name="battery_optimization_settings">电池优化设置</string>
+    <string name="battery_optimization_desc">Android 中的电池优化可导致录制的轨迹出现间隔和不准确。
+\n
+\n如果您遇到这些问题，可以尝试将电池使用情况更改为 “不受限制”</string>
+    <string name="battery_optimization">电池优化</string>
+    <string name="when_exceeded">当超过时</string>
+    <string name="any_connected_with_device">任何已连接：%s</string>
+    <string name="default_buttons">默认按钮</string>
+    <string name="shared_string_extensions">扩展</string>
+    <string name="any_connected">任何已连接</string>
+    <string name="sort_subfolders">排序子文件夹</string>
+    <string name="rendering_attr_padusDisplayMode_name">公共用地显示模式</string>
+    <string name="shared_string_keywords">关键字</string>
+    <string name="rendering_attr_padusDisplayMode_description">按访问类型或管理者名称</string>
+    <string name="rendering_value_access_name">按访问类型</string>
+    <string name="rendering_value_managerName_name">按管理者名称</string>
+    <string name="rendering_attr_padusHideBoundaries_description">隐藏公共用地边界但保留区域</string>
+    <string name="shared_string_additional">附加</string>
+    <string name="previous_row_has_complex_widget">上一行已有复杂的小工具</string>
+    <string name="rendering_attr_padusHideBoundaries_name">隐藏公共用地边界</string>
+    <string name="shared_string_speedometer">速度表</string>
+    <string name="add_button">新增按钮</string>
+    <string name="sorted_sufolders_toast">%1$s \"中的子文件夹按该方式排序： \"%2$s\"</string>
+    <string name="custom_map_button_name_present">此按钮已经存在</string>
+    <string name="dont_ask_anymore">不再询问</string>
+    <string name="battery_optimization_banner_content">Android 电池优化可导致录制的轨迹出现间隔和不准确。</string>
+    <string name="map_widget_sun_position">太阳位置</string>
+    <string name="speedometer_description">通过 GPS 报告显示您的当前速度</string>
+    <string name="custom_buttons">自定义按钮</string>
+    <string name="shared_string_activity">活动</string>
+    <string name="shared_string_next_event">下个事件</string>
+    <string name="map_widget_sun_position_desc">显示距离日出或日落前的剩余时间。</string>
+    <string name="complex_widget_alert">%1$s 小工具只能放置在它自己的行上。</string>
+    <string name="shared_string_road_maps">路线图</string>
+    <string name="shared_string_all_tracks">所有轨迹</string>
 </resources>
