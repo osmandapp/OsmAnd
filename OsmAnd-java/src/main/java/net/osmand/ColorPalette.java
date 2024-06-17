@@ -201,7 +201,7 @@ public class ColorPalette {
 		while ((line = r.readLine()) != null) {
 			String t = line.trim();
 			if (t.startsWith("#")) {
-				comments.add(line);
+				comments.add(t);
 				continue;
 			}
 			String[] values = t.split(",");

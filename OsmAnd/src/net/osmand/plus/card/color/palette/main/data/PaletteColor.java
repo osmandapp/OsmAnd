@@ -9,18 +9,16 @@ import net.osmand.plus.R;
 
 public class PaletteColor {
 
+	private final long id;
 	private ColorValue colorValue;
-	private final String id;
-	private final long creationTime;
 
 	public PaletteColor(@ColorInt int color, long creationTime) {
 		this(new ColorValue(color), creationTime);
 	}
 
 	public PaletteColor(@NonNull ColorValue colorValue, long creationTime) {
-		this.id = generateId(creationTime);
+		this.id = creationTime;
 		this.colorValue = colorValue;
-		this.creationTime = creationTime;
 	}
 
 	@NonNull
@@ -37,13 +35,17 @@ public class PaletteColor {
 		this.colorValue = new ColorValue(colorValue.val, color);
 	}
 
-	@NonNull
-	public String getId() {
-		return id;
+	public void setIndex(int index) {
+		colorValue.setValue(index);
 	}
 
-	public long getCreationTime() {
-		return creationTime;
+	public int getIndex() {
+		return (int) colorValue.val;
+	}
+
+	@NonNull
+	public Long getId() {
+		return id;
 	}
 
 	@NonNull
@@ -70,10 +72,5 @@ public class PaletteColor {
 	@Override
 	public int hashCode() {
 		return getId().hashCode();
-	}
-
-	@NonNull
-	public static String generateId(long creationTime) {
-		return "palette_color_" + creationTime;
 	}
 }

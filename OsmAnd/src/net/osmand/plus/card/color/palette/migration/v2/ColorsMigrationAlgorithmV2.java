@@ -3,23 +3,31 @@ package net.osmand.plus.card.color.palette.migration.v2;
 import static net.osmand.plus.utils.ColorUtilities.getColor;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionBundle;
-import net.osmand.plus.card.color.palette.main.data.ColorsCollectionV1;
+import net.osmand.plus.card.color.palette.main.data.ColorsCollection;
+import net.osmand.plus.card.color.palette.migration.v1.data.ColorsCollectionBundle;
+import net.osmand.plus.card.color.palette.main.data.PaletteColor;
+import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.card.color.palette.migration.v1.data.ColorsCollectionV1;
 import net.osmand.plus.card.color.palette.main.data.DefaultColors;
-import net.osmand.plus.card.color.palette.main.data.PaletteColorV1;
-import net.osmand.plus.card.color.palette.main.data.PredefinedPaletteColor;
+import net.osmand.plus.card.color.palette.migration.v1.data.PaletteColorV1;
+import net.osmand.plus.card.color.palette.migration.v1.data.PredefinedPaletteColor;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.preferences.CommonPreference;
+import net.osmand.plus.settings.backend.preferences.StringPreference;
 import net.osmand.plus.track.AppearanceListItem;
 import net.osmand.plus.track.GpxAppearanceAdapter;
-import net.osmand.plus.track.fragments.controller.TrackColorController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Implements a migration algorithm from using preferences
@@ -27,52 +35,149 @@ import java.util.List;
  */
 public class ColorsMigrationAlgorithmV2 {
 
-	public static ColorsCollectionV1 getFavoritesColorCollection(@NonNull OsmandApplication app) {
+	public final CommonPreference<String> TRACK_COLORS_PALETTE;
+	public final CommonPreference<String> POINT_COLORS_PALETTE;
+	public final CommonPreference<String> CUSTOM_TRACK_PALETTE_COLORS;
+	public final CommonPreference<String> PROFILE_COLORS_PALETTE;
+	public final CommonPreference<String> ROUTE_LINE_COLORS_PALETTE;
+
+	private final OsmandApplication app;
+
+	public static void doMigration(@NonNull OsmandApplication app) {
+		ColorsMigrationAlgorithmV2 migrationAlgorithm = new ColorsMigrationAlgorithmV2(app);
+		migrationAlgorithm.execute();
+	}
+
+	public ColorsMigrationAlgorithmV2(@NonNull OsmandApplication app) {
+		this.app = app;
 		OsmandSettings settings = app.getSettings();
+
+		TRACK_COLORS_PALETTE = new StringPreference(
+				settings, "track_colors_palette", null).makeGlobal();
+
+		POINT_COLORS_PALETTE = new StringPreference(
+				settings, "point_colors_palette", null).makeGlobal();
+
+		CUSTOM_TRACK_PALETTE_COLORS = new StringPreference(
+				settings, "custom_track_paletee_colors", null).makeGlobal();
+
+		PROFILE_COLORS_PALETTE = new StringPreference(
+				settings, "profile_colors_palette", null).makeProfile();
+
+		ROUTE_LINE_COLORS_PALETTE = new StringPreference(
+				settings, "route_line_colors_palette", null).makeGlobal();
+	}
+
+	private void execute() {
+		// Collect available colors from the user palette file
+		ColorsCollection newCollection = new ColorsCollection(app);
+		List<PaletteColor> originalOrder = newCollection.getColors(PaletteSortingMode.ORIGINAL);
+
+		// Collect available colors from the old preferences
+		List<ColorsCollectionV1> oldCollections = new ArrayList<>();
+		oldCollections.add(getOldCollection(TRACK_COLORS_PALETTE, CUSTOM_TRACK_PALETTE_COLORS, null));
+		oldCollections.add(getOldCollection(POINT_COLORS_PALETTE, CUSTOM_TRACK_PALETTE_COLORS, null));
+		oldCollections.add(getOldCollection(ROUTE_LINE_COLORS_PALETTE, null, null));
+		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
+			oldCollections.add(getOldCollection(PROFILE_COLORS_PALETTE, null, appMode));
+		}
+		// Prepare all old colors as one list
+		List<PaletteColorV1> oldColors = new ArrayList<>();
+		for (ColorsCollectionV1 oldCollection : oldCollections) {
+			oldColors.addAll(oldCollection.getColors(PaletteSortingMode.ORIGINAL));
+		}
+
+		// Prepare last used time cache, we will need this for the sorting
+		Map<Integer, Long> lastUsedTimeCache = new HashMap<>();
+		for (PaletteColor paletteColor : originalOrder) {
+			int colorInt = paletteColor.getColor();
+			lastUsedTimeCache.put(colorInt, 0L);
+		}
+
+		// Prepare result list with only unique colors
+		long now = System.currentTimeMillis();
+		for (PaletteColorV1 oldPaletteColor : oldColors) {
+			if (oldPaletteColor.isDefault()) {
+				// Ignore default colors
+				continue;
+			}
+			int colorInt = oldPaletteColor.getColor();
+			long lastUsedTime = oldPaletteColor.getLastUsedTime();
+			Long cachedLastUsedTime = lastUsedTimeCache.get(colorInt);
+			if (cachedLastUsedTime != null) {
+				// We already have this color in the result list
+				if (cachedLastUsedTime < lastUsedTime) {
+					// Update last used time to bigger value
+					lastUsedTimeCache.put(colorInt, lastUsedTime);
+				}
+			} else {
+				// Add a new color as it is not yet in the result list
+				originalOrder.add(new PaletteColor(colorInt, now++));
+				lastUsedTimeCache.put(colorInt, lastUsedTime);
+			}
+		}
+
+		// Save all unique colors to the user's palette file
+		List<PaletteColor> lastUsedOrder = new ArrayList<>(originalOrder);
+		lastUsedOrder.sort(new Comparator<PaletteColor>() {
+			@Override
+			public int compare(PaletteColor o1, PaletteColor o2) {
+				return Long.compare(getLastUsedTime(o2), getLastUsedTime(o1));
+			}
+
+			private long getLastUsedTime(@NonNull PaletteColor paletteColor) {
+				int colorInt = paletteColor.getColor();
+				Long lastUsedTime = lastUsedTimeCache.get(colorInt);
+				return lastUsedTime != null ? lastUsedTime : 0;
+			}
+		});
+		newCollection.setColors(originalOrder, lastUsedOrder);
+	}
+
+	@NonNull
+	private ColorsCollectionV1 getOldCollection(@NonNull CommonPreference<String> mainPreference,
+	                                            @Nullable CommonPreference<String> customPreference,
+	                                            @Nullable ApplicationMode appMode) {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
-		bundle.palettePreference = settings.POINT_COLORS_PALETTE;
-		bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
+		bundle.predefinedColors = new ArrayList<>();
+		bundle.palettePreference = mainPreference;
+		bundle.customColorsPreference = customPreference;
+		bundle.appMode = appMode;
 		return new ColorsCollectionV1(bundle);
 	}
 
-	public static ColorsCollectionV1 getProfileColorCollection(@NonNull OsmandApplication app,
-	                                                           @NonNull ApplicationMode appMode,
-	                                                           boolean nightMode) {
+	public ColorsCollectionV1 getFavoritesColorCollection() {
+		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
+		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
+		bundle.palettePreference = POINT_COLORS_PALETTE;
+		bundle.customColorsPreference = CUSTOM_TRACK_PALETTE_COLORS;
+		return new ColorsCollectionV1(bundle);
+	}
+
+	public ColorsCollectionV1 getProfileColorCollection(@NonNull OsmandApplication app,
+	                                                    @NonNull ApplicationMode appMode,
+	                                                    boolean nightMode) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
 		for (ProfileIconColors color : ProfileIconColors.values()) {
 			String id = color.name().toLowerCase();
 			int colorInt = getColor(app, color.getColor(nightMode));
 			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, color.getName()));
 		}
-
-		OsmandSettings settings = app.getSettings();
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.appMode = appMode;
 		bundle.predefinedColors = predefinedColors;
-		bundle.palettePreference = settings.PROFILE_COLORS_PALETTE;
+		bundle.palettePreference = PROFILE_COLORS_PALETTE;
 		return new ColorsCollectionV1(bundle);
 	}
 
-	public static ColorsCollectionV1 getRouteLineColorCollection(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
+	public ColorsCollectionV1 getRouteLineColorCollection() {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
-		bundle.palettePreference = settings.ROUTE_LINE_COLORS_PALETTE;
+		bundle.palettePreference = ROUTE_LINE_COLORS_PALETTE;
 		return new ColorsCollectionV1(bundle);
 	}
 
-	public static ColorsCollectionV1 getTrackColorCollection(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-		bundle.predefinedColors = getTrackPredefinedColors(app);
-		bundle.palettePreference = settings.TRACK_COLORS_PALETTE;
-		bundle.customColorsPreference = settings.CUSTOM_TRACK_PALETTE_COLORS;
-		return new ColorsCollectionV1(bundle);
-	}
-
-	@NonNull
-	public static List<PaletteColorV1> getTrackPredefinedColors(@NonNull OsmandApplication app) {
+	public ColorsCollectionV1 getTrackColorCollection(@NonNull OsmandApplication app) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
 		for (AppearanceListItem item : GpxAppearanceAdapter.getUniqueTrackColorItems(app)) {
 			String id = item.getValue();
@@ -80,7 +185,10 @@ public class ColorsMigrationAlgorithmV2 {
 			String name = item.getLocalizedValue();
 			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, name));
 		}
-		return predefinedColors;
+		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
+		bundle.predefinedColors = predefinedColors;
+		bundle.palettePreference = TRACK_COLORS_PALETTE;
+		bundle.customColorsPreference = CUSTOM_TRACK_PALETTE_COLORS;
+		return new ColorsCollectionV1(bundle);
 	}
-
 }

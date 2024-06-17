@@ -55,6 +55,7 @@ import net.osmand.data.SpecialPointType;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.backup.BackupUtils;
 import net.osmand.plus.card.color.palette.migration.v1.ColorsMigrationAlgorithmV1;
+import net.osmand.plus.card.color.palette.migration.v2.ColorsMigrationAlgorithmV2;
 import net.osmand.plus.download.local.LocalItemUtils;
 import net.osmand.plus.keyevent.devices.KeyboardDeviceProfile;
 import net.osmand.plus.keyevent.devices.ParrotDeviceProfile;
@@ -155,8 +156,10 @@ public class AppVersionUpgradeOnInit {
 	public static final int VERSION_4_7_02 = 4702;
 	public static final int VERSION_4_7_03 = 4703;
 	public static final int VERSION_4_7_04 = 4704;
+	// 4705 - 4.7-05 (Migrate from using preferences for colors storing to using external file)
+	public static final int VERSION_4_7_05 = 4705;
 
-	public static final int LAST_APP_VERSION = VERSION_4_7_04;
+	public static final int LAST_APP_VERSION = VERSION_4_7_05;
 
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 
@@ -291,6 +294,14 @@ public class AppVersionUpgradeOnInit {
 						@Override
 						public void onStart(@NonNull AppInitializer init) {
 							migrateProfileQuickActionButtons();
+						}
+					});
+				}
+				if (prevAppVersion < VERSION_4_7_05) {
+					app.getAppInitializer().addListener(new AppInitializeListener() {
+						@Override
+						public void onFinish(@NonNull AppInitializer init) {
+							ColorsMigrationAlgorithmV2.doMigration(app);
 						}
 					});
 				}

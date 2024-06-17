@@ -57,6 +57,15 @@ public class ColorsCollection {
 		return new ArrayList<>(sortingMode == PaletteSortingMode.ORIGINAL ? originalColors : lastUsedColors);
 	}
 
+	public void setColors(@NonNull List<PaletteColor> originalColors,
+	                      @NonNull List<PaletteColor> lastUsedColors) {
+		this.originalColors.clear();
+		this.lastUsedColors.clear();
+		this.originalColors.addAll(originalColors);
+		this.lastUsedColors.addAll(lastUsedColors);
+		syncFile();
+	}
+
 	@NonNull
 	public PaletteColor duplicateColor(@NonNull PaletteColor paletteColor) {
 		PaletteColor duplicate = paletteColor.duplicate();
@@ -126,16 +135,10 @@ public class ColorsCollection {
 				lastUsedColors.add(new PaletteColor(color, now++));
 			}
 			originalColors.addAll(lastUsedColors);
-			sortByIndexes(originalColors);
+			originalColors.sort((a, b) -> Double.compare(a.getIndex(), b.getIndex()));
 		} catch (IOException e) {
 			LOG.error("Error when trying to read file: " + e.getMessage());
 		}
-	}
-
-	private void sortByIndexes(@NonNull List<PaletteColor> list) {
-		Collections.sort(list, (a, b) -> {
-			return Double.compare(a.getColorValue().val, b.getColorValue().val);
-		});
 	}
 
 	private ColorPalette readFile() throws IOException {
@@ -147,18 +150,18 @@ public class ColorsCollection {
 		// Update indexes
 		for (PaletteColor paletteColor : originalColors) {
 			int index = originalColors.indexOf(paletteColor);
-			paletteColor.getColorValue().setValue(index + 1);
+			paletteColor.setIndex(index + 1);
 		}
 		// Use order of last used colors
-		List<ColorValue> values = new ArrayList<>();
+		List<ColorValue> colorValues = new ArrayList<>();
 		for (PaletteColor paletteColor : lastUsedColors) {
-			values.add(paletteColor.getColorValue());
+			colorValues.add(paletteColor.getColorValue());
 		}
 		StringBuilder content = new StringBuilder();
 		for (String comment : commentsFromFile) {
 			content.append(comment).append("\n");
 		}
-		content.append(ColorPalette.writeColorPalette(values));
+		content.append(ColorPalette.writeColorPalette(colorValues));
 
 		try {
 			FileWriter writer = new FileWriter(file);

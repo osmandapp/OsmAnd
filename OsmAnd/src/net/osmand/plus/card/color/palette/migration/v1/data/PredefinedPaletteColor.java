@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.migration.v1.data;
 
 import android.content.Context;
 

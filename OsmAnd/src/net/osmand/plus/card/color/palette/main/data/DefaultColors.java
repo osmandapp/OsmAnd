@@ -4,6 +4,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.R;
+import net.osmand.plus.card.color.palette.migration.v1.data.PaletteColorV1;
+import net.osmand.plus.card.color.palette.migration.v1.data.PredefinedPaletteColor;
 
 import java.util.Objects;
 

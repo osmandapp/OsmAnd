@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main.data;
+package net.osmand.plus.card.color.palette.migration.v1.data;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.card.color.palette.main.PaletteColorsComparator;
+import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;

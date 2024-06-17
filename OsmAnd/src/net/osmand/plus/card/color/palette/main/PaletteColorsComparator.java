@@ -2,7 +2,7 @@ package net.osmand.plus.card.color.palette.main;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.plus.card.color.palette.main.data.PaletteColorV1;
+import net.osmand.plus.card.color.palette.migration.v1.data.PaletteColorV1;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 
 import java.util.Comparator;
