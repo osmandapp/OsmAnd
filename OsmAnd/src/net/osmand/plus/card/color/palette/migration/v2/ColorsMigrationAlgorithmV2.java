@@ -75,16 +75,16 @@ public class ColorsMigrationAlgorithmV2 {
 
 		// Collect available colors from the old preferences
 		List<ColorsCollectionV1> oldCollections = new ArrayList<>();
-		oldCollections.add(getOldCollection(TRACK_COLORS_PALETTE, CUSTOM_TRACK_PALETTE_COLORS, null));
-		oldCollections.add(getOldCollection(POINT_COLORS_PALETTE, CUSTOM_TRACK_PALETTE_COLORS, null));
-		oldCollections.add(getOldCollection(ROUTE_LINE_COLORS_PALETTE, null, null));
+		oldCollections.add(getTrackColorCollection(app));
+		oldCollections.add(getFavoritesColorCollection());
+		oldCollections.add(getRouteLineColorCollection());
 		for (ApplicationMode appMode : ApplicationMode.allPossibleValues()) {
-			oldCollections.add(getOldCollection(PROFILE_COLORS_PALETTE, null, appMode));
+			oldCollections.add(getProfileColorCollection(app, appMode));
 		}
 		// Prepare all old colors as one list
 		List<PaletteColorV1> oldColors = new ArrayList<>();
 		for (ColorsCollectionV1 oldCollection : oldCollections) {
-			oldColors.addAll(oldCollection.getColors(PaletteSortingMode.ORIGINAL));
+			oldColors.addAll(oldCollection.getColors());
 		}
 
 		// Prepare last used time cache, we will need this for the sorting
@@ -134,18 +134,6 @@ public class ColorsMigrationAlgorithmV2 {
 		newCollection.setColors(originalOrder, lastUsedOrder);
 	}
 
-	@NonNull
-	private ColorsCollectionV1 getOldCollection(@NonNull CommonPreference<String> mainPreference,
-	                                            @Nullable CommonPreference<String> customPreference,
-	                                            @Nullable ApplicationMode appMode) {
-		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
-		bundle.predefinedColors = new ArrayList<>();
-		bundle.palettePreference = mainPreference;
-		bundle.customColorsPreference = customPreference;
-		bundle.appMode = appMode;
-		return new ColorsCollectionV1(bundle);
-	}
-
 	public ColorsCollectionV1 getFavoritesColorCollection() {
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();
 		bundle.predefinedColors = Arrays.asList(DefaultColors.values());
@@ -155,12 +143,11 @@ public class ColorsMigrationAlgorithmV2 {
 	}
 
 	public ColorsCollectionV1 getProfileColorCollection(@NonNull OsmandApplication app,
-	                                                    @NonNull ApplicationMode appMode,
-	                                                    boolean nightMode) {
+	                                                    @NonNull ApplicationMode appMode) {
 		List<PaletteColorV1> predefinedColors = new ArrayList<>();
 		for (ProfileIconColors color : ProfileIconColors.values()) {
 			String id = color.name().toLowerCase();
-			int colorInt = getColor(app, color.getColor(nightMode));
+			int colorInt = getColor(app, color.getColor(false));
 			predefinedColors.add(new PredefinedPaletteColor(id, colorInt, color.getName()));
 		}
 		ColorsCollectionBundle bundle = new ColorsCollectionBundle();

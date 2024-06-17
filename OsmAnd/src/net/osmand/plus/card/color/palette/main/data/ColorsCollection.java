@@ -18,7 +18,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,8 +29,8 @@ public class ColorsCollection {
 
 	private final File file;
 	private final List<String> commentsFromFile = new ArrayList<>();
-	private final List<PaletteColor> originalColors = new ArrayList<>();
-	private final List<PaletteColor> lastUsedColors = new LinkedList<>();
+	private final List<PaletteColor> originalOrder = new ArrayList<>();
+	private final List<PaletteColor> lastUsedOrder = new LinkedList<>();
 
 	public ColorsCollection(@NonNull OsmandApplication app) {
 		this(getSourceFile(app));
@@ -44,7 +43,7 @@ public class ColorsCollection {
 
 	@Nullable
 	public PaletteColor findPaletteColor(@ColorInt int colorInt) {
-		for (PaletteColor paletteColor : originalColors) {
+		for (PaletteColor paletteColor : originalOrder) {
 			if (paletteColor.getColor() == colorInt) {
 				return paletteColor;
 			}
@@ -54,23 +53,23 @@ public class ColorsCollection {
 
 	@NonNull
 	public List<PaletteColor> getColors(@NonNull PaletteSortingMode sortingMode) {
-		return new ArrayList<>(sortingMode == PaletteSortingMode.ORIGINAL ? originalColors : lastUsedColors);
+		return new ArrayList<>(sortingMode == PaletteSortingMode.ORIGINAL ? originalOrder : lastUsedOrder);
 	}
 
 	public void setColors(@NonNull List<PaletteColor> originalColors,
 	                      @NonNull List<PaletteColor> lastUsedColors) {
-		this.originalColors.clear();
-		this.lastUsedColors.clear();
-		this.originalColors.addAll(originalColors);
-		this.lastUsedColors.addAll(lastUsedColors);
+		this.originalOrder.clear();
+		this.lastUsedOrder.clear();
+		this.originalOrder.addAll(originalColors);
+		this.lastUsedOrder.addAll(lastUsedColors);
 		syncFile();
 	}
 
 	@NonNull
 	public PaletteColor duplicateColor(@NonNull PaletteColor paletteColor) {
 		PaletteColor duplicate = paletteColor.duplicate();
-		addColorDuplicate(originalColors, paletteColor, duplicate);
-		addColorDuplicate(lastUsedColors, paletteColor, duplicate);
+		addColorDuplicate(originalOrder, paletteColor, duplicate);
+		addColorDuplicate(lastUsedOrder, paletteColor, duplicate);
 		syncFile();
 		return duplicate;
 	}
@@ -87,8 +86,8 @@ public class ColorsCollection {
 	}
 
 	public boolean askRemoveColor(@NonNull PaletteColor paletteColor) {
-		if (originalColors.remove(paletteColor)) {
-			lastUsedColors.remove(paletteColor);
+		if (originalOrder.remove(paletteColor)) {
+			lastUsedOrder.remove(paletteColor);
 			syncFile();
 			return true;
 		}
@@ -105,8 +104,8 @@ public class ColorsCollection {
 	private PaletteColor addNewColor(@ColorInt int newColor) {
 		long now = System.currentTimeMillis();
 		PaletteColor paletteColor = new PaletteColor(newColor, now);
-		originalColors.add(paletteColor);
-		lastUsedColors.add(0, paletteColor);
+		originalOrder.add(paletteColor);
+		lastUsedOrder.add(0, paletteColor);
 		syncFile();
 		return paletteColor;
 	}
@@ -120,8 +119,8 @@ public class ColorsCollection {
 
 	public void askRenewLastUsedTime(@Nullable PaletteColor paletteColor) {
 		if (paletteColor != null) {
-			lastUsedColors.remove(paletteColor);
-			lastUsedColors.add(0, paletteColor);
+			lastUsedOrder.remove(paletteColor);
+			lastUsedOrder.add(0, paletteColor);
 		}
 	}
 
@@ -129,13 +128,13 @@ public class ColorsCollection {
 		long now = System.currentTimeMillis();
 		try {
 			ColorPalette palette = readFile();
-			originalColors.clear();
-			lastUsedColors.clear();
+			originalOrder.clear();
+			lastUsedOrder.clear();
 			for (ColorValue color : palette.getColors()) {
-				lastUsedColors.add(new PaletteColor(color, now++));
+				lastUsedOrder.add(new PaletteColor(color, now++));
 			}
-			originalColors.addAll(lastUsedColors);
-			originalColors.sort((a, b) -> Double.compare(a.getIndex(), b.getIndex()));
+			originalOrder.addAll(lastUsedOrder);
+			originalOrder.sort((a, b) -> Double.compare(a.getIndex(), b.getIndex()));
 		} catch (IOException e) {
 			LOG.error("Error when trying to read file: " + e.getMessage());
 		}
@@ -148,13 +147,13 @@ public class ColorsCollection {
 
 	private void syncFile() {
 		// Update indexes
-		for (PaletteColor paletteColor : originalColors) {
-			int index = originalColors.indexOf(paletteColor);
+		for (PaletteColor paletteColor : originalOrder) {
+			int index = originalOrder.indexOf(paletteColor);
 			paletteColor.setIndex(index + 1);
 		}
 		// Use order of last used colors
 		List<ColorValue> colorValues = new ArrayList<>();
-		for (PaletteColor paletteColor : lastUsedColors) {
+		for (PaletteColor paletteColor : lastUsedOrder) {
 			colorValues.add(paletteColor.getColorValue());
 		}
 		StringBuilder content = new StringBuilder();

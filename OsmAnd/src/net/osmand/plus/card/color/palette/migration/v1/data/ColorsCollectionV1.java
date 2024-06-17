@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.card.color.palette.main.PaletteColorsComparator;
-import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
@@ -17,7 +15,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,10 +36,8 @@ public class ColorsCollectionV1 {
 	}
 
 	@NonNull
-	public List<PaletteColorV1> getColors(@NonNull PaletteSortingMode sortingMode) {
-		List<PaletteColorV1> sortedPaletteColors = new ArrayList<>(this.paletteColors);
-		Collections.sort(sortedPaletteColors, new PaletteColorsComparator(sortingMode));
-		return sortedPaletteColors;
+	public List<PaletteColorV1> getColors() {
+		return new ArrayList<>(this.paletteColors);
 	}
 
 	@NonNull
