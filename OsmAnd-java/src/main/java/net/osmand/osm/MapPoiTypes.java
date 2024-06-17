@@ -466,7 +466,7 @@ public class MapPoiTypes {
 							categoryAdditionals.add(baseType);
 						}
 						if (baseType.isTopIndex()) {
-							topIndexPoiAdditional.put(baseType.getKeyName(), baseType);
+							topIndexPoiAdditional.put(TOP_INDEX_ADDITIONAL_PREFIX + baseType.getKeyName(), baseType);
 						}
 					} else if (name.equals("poi_additional_category")) {
 						if (lastPoiAdditionalCategory == null) {

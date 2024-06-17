@@ -65,7 +65,6 @@ public class Amenity extends MapObject {
 	// duplicate for fast access
 	private String openingHours;
 	private Map<String, String> additionalInfo;
-	private List<String> topIndexAdditional;
 	private AmenityRoutePoint routePoint; // for search on path
 	// context menu geometry;
 	private TIntArrayList y;
@@ -110,6 +109,28 @@ public class Amenity extends MapObject {
 
 	public void setSubType(String subType) {
 		this.subType = subType;
+	}
+
+	public String getSubTypeStr() {
+		PoiCategory pc = getType();
+		String[] subtypes = getSubType().split(";");
+		String typeStr = "";
+		//multi value
+		for (String subType : subtypes) {
+			PoiType pt = pc.getPoiTypeByKeyName(subType);
+			if (pt != null) {
+				if (!typeStr.isEmpty()) {
+					typeStr += ", " + pt.getTranslation().toLowerCase();
+				} else {
+					typeStr = pt.getTranslation();
+				}
+			}
+		}
+		if (typeStr.isEmpty()) {
+			typeStr = getSubType();
+			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
+		}
+		return typeStr;
 	}
 
 	public String getOpeningHours() {
