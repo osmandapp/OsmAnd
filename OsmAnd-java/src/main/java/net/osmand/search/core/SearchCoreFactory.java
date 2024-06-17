@@ -739,66 +739,6 @@ public class SearchCoreFactory {
 		public Set<String> foundWords = new LinkedHashSet<String>();
 	}
 
-	/*public static  class SearchPoiTopIndexAdditionalAPI extends SearchBaseAPI {
-		@Override
-		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
-			List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
-			String search = phrase.getText(true);
-			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
-			for (BinaryMapIndexReader r : offlineIndexes) {
-				List<PoiSubType> poiSubTypes = r.searchPoiSubTypesByPrefix(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX);
-				for (PoiSubType subType : poiSubTypes) {
-					if (subType.possibleValues == null) {
-						continue;
-					}
-					if (nm.matches(subType.possibleValues)) {
-						NameStringMatcher nm2 = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
-						SearchResult res = new SearchResult(phrase);
-						String topIndexValue = null;
-						String topIndexName = subType.name.replace(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX, "");
-						for (String s : subType.possibleValues) {
-							if (nm2.matches(s)) {
-								topIndexValue = s;
-								break;
-							}
-						}
-						if (topIndexValue == null) {
-							continue;
-						}
-						res.localeName = topIndexValue;
-						final String finalTopIndexValue = topIndexValue;
-						res.object = new SearchPoiAdditionalFilter() {
-							@Override
-							public boolean accept(PoiSubType poiSubType, String value) {
-								return poiSubType.name.equals(subType.name) && nm.matches(value);
-							}
-
-							@Override
-							public String getName() {
-								return topIndexName;
-							}
-
-							@Override
-							public String getIconResource() {
-								//Example: brand_mcdonalds, operator_bank_of_america
-								String val = finalTopIndexValue.toLowerCase().replaceAll("'", "");
-								val = val.replaceAll("\\W+", "_");
-								return topIndexName + "_" + val;
-							}
-						};
-						res.priorityDistance = 0;
-						res.objectType = ObjectType.POI_TYPE;
-						res.firstUnknownWordMatches = true;
-						phrase.countUnknownWordsMatchMainResult(res);
-						res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-						resultMatcher.publish(res);
-					}
-				}
-			}
-			return true;
-		}
-	}*/
-
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
 		public final static String STD_POI_FILTER_PREFIX = "std_";

@@ -797,9 +797,6 @@ public class BinaryMapPoiReaderAdapter {
 				hasSubcategoriesField = true;
 				PoiSubType st = region.getSubtypeFromId(subtypev, retValue);
 				if (req.poiAdditionalFilter != null) {
-					/*if (st != null && st.name.startsWith(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX)) {
-						System.out.println("BRAND:" + retValue.toString());
-					}*/
 					if (st != null && req.poiAdditionalFilter.accept(st, retValue.toString())) {
 						topIndexAdditonalFound = true;
 					}
