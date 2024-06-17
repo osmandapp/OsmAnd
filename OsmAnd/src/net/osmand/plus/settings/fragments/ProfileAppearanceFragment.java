@@ -504,15 +504,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 
 	private View createLocationIconView(@NonNull String locationIconName, ViewGroup rootView) {
 		LocationIcon locationIcon = LocationIcon.fromName(locationIconName);
-
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		int changedProfileColor = changedProfile.getActualColor();
-		LayerDrawable locationIconDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, locationIcon.getIconId());
-		if (locationIconDrawable != null) {
+		Drawable locDrawable =  LocationIcon.getDrawable(app, locationIconName);
+		if (locDrawable instanceof LayerDrawable) {
+			LayerDrawable locationIconDrawable = (LayerDrawable) locDrawable;
 			DrawableCompat.setTint(DrawableCompat.wrap(locationIconDrawable.getDrawable(1)), changedProfileColor);
 		}
-		locationIconView.<ImageView>findViewById(R.id.icon).setImageDrawable(locationIconDrawable);
+		locationIconView.<ImageView>findViewById(R.id.icon).setImageDrawable(locDrawable);
 		ImageView headingIcon = locationIconView.findViewById(R.id.headingIcon);
 		headingIcon.setImageDrawable(AppCompatResources.getDrawable(app, locationIcon.getHeadingIconId()));
 		headingIcon.setColorFilter(new PorterDuffColorFilter(changedProfileColor, PorterDuff.Mode.SRC_IN));
@@ -549,17 +549,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment
 	}
 
 	private View createNavigationIconView(@NonNull String navigationIconName, ViewGroup rootView) {
-		NavigationIcon navigationIcon = NavigationIcon.fromName(navigationIconName);
-
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), isNightMode());
 		FrameLayout navigationIconView = (FrameLayout) inflater.inflate(R.layout.preference_select_icon_button, rootView, false);
-		LayerDrawable navigationDrawable = (LayerDrawable) AppCompatResources.getDrawable(app, navigationIcon.getIconId());
-		if (navigationDrawable != null) {
+		Drawable navDrawable = NavigationIcon.getDrawable(app, navigationIconName);
+		if (navDrawable instanceof LayerDrawable) {
+			LayerDrawable navigationDrawable = (LayerDrawable) navDrawable;
 			Drawable topDrawable = DrawableCompat.wrap(navigationDrawable.getDrawable(1));
 			DrawableCompat.setTint(topDrawable, changedProfile.getActualColor());
 		}
 		ImageView imageView = navigationIconView.findViewById(R.id.icon);
-		imageView.setImageDrawable(navigationDrawable);
+		imageView.setImageDrawable(navDrawable);
 		Matrix matrix = new Matrix();
 		imageView.setScaleType(ImageView.ScaleType.MATRIX);
 		float width = imageView.getDrawable().getIntrinsicWidth() / 2f;
