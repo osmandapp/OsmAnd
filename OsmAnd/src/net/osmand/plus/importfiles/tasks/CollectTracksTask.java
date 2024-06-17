@@ -50,7 +50,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 			if (!track.generalTrack) {
 				GPXFile trackFile = new GPXFile(Version.getFullVersion(app));
 				trackFile.tracks.add(track);
-				trackFile.setColor(gpxFile.getColor(0));
+				trackFile.setColor(track.getColor(gpxFile.getColor(0)));
 				trackFile.setWidth(gpxFile.getWidth(null));
 				trackFile.setShowArrows(gpxFile.isShowArrows());
 				trackFile.setShowStartFinish(gpxFile.isShowStartFinish());
@@ -60,6 +60,8 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 				trackFile.set3DVisualizationType(gpxFile.get3DVisualizationType());
 				trackFile.set3DWallColoringType(gpxFile.get3DWallColoringType());
 				trackFile.set3DLinePositionType(gpxFile.get3DLinePositionType());
+				trackFile.setAdditionalExaggeration(gpxFile.getAdditionalExaggeration());
+				trackFile.setElevationMeters(gpxFile.getElevationMeters());
 
 				SelectedGpxFile selectedGpxFile = new SelectedGpxFile();
 				selectedGpxFile.setGpxFile(trackFile, app);

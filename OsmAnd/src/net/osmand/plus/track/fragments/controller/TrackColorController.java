@@ -136,16 +136,9 @@ public class TrackColorController extends ColoringStyleCardController implements
 
 	@Override
 	public int getSelectedControlsColor() {
-		ColoringStyle coloringStyle = requireSelectedColoringStyle();
-		ColoringType coloringType = coloringStyle.getType();
-		int color = 0;
-		if (coloringType == TRACK_SOLID) {
-			color = drawInfo.getColor();
-		}
-		if (color == 0) {
-			color = GpxAppearanceAdapter.getTrackColor(app);
-		}
-		return color;
+		ColoringStyle style = requireSelectedColoringStyle();
+		Integer color = style.getType() == TRACK_SOLID ? drawInfo.getColor() : null;
+		return color != null ? color : GpxAppearanceAdapter.getTrackColor(app);
 	}
 
 	@Override

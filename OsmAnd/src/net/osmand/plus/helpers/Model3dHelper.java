@@ -90,7 +90,7 @@ public class Model3dHelper {
 		}
 
 		modelsInProgress.add(modelName);
-		new Load3dModelTask(dir.getAbsolutePath(), model -> {
+		new Load3dModelTask(dir, model -> {
 			if (model == null) {
 				failedModels.add(modelName);
 			} else {
@@ -138,17 +138,18 @@ public class Model3dHelper {
 
 	private static class Load3dModelTask extends AsyncTask<Void, Void, Model3D> {
 
-		private final String modelDirPath;
+		private final File modelDirPath;
 		private final CallbackWithObject<Model3D> callback;
 
-		public Load3dModelTask(@NonNull String modelDirPath, @NonNull CallbackWithObject<Model3D> callback) {
+		public Load3dModelTask(@NonNull File modelDirPath, @NonNull CallbackWithObject<Model3D> callback) {
 			this.modelDirPath = modelDirPath;
 			this.callback = callback;
 		}
 
 		@Override
 		protected Model3D doInBackground(Void... voids) {
-			ObjParser parser = new ObjParser(modelDirPath + "/model.obj", modelDirPath + "/mtl");
+			ObjParser parser = new ObjParser(modelDirPath.getAbsolutePath() + "/"
+					+ modelDirPath.getName() + ".obj", modelDirPath.getAbsolutePath());
 			return parser.parse();
 		}
 

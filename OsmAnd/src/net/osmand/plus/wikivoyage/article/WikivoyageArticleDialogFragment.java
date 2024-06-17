@@ -43,6 +43,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.plus.wikivoyage.WikivoyageWebViewClient;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
@@ -54,6 +55,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -358,18 +360,17 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		String nightModeClass = nightMode ? " nightmode" : "";
 		String imageTitle = article.getImageTitle();
 		if (!TextUtils.isEmpty(article.getAggregatedPartOf())) {
-			String[] aggregatedPartOfArrayOrig = article.getAggregatedPartOf().split(",");
+			String[] aggregatedPartOfArrayOrig = Arrays.stream(article.getAggregatedPartOf().split(","))
+					.map(WikivoyageUtils::getTitleWithoutPrefix).toArray(String[]::new);
 			if (aggregatedPartOfArrayOrig.length > 0) {
 				String current = aggregatedPartOfArrayOrig[0];
-				sb.append("<div class=\"nav-bar" + nightModeClass + "\" onClick=\"showNavigation()\">");
-				if (aggregatedPartOfArrayOrig.length > 0) {
-					for (int i = 0; i < aggregatedPartOfArrayOrig.length; i++) {
-						if (i > 0) {
-							sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
-						} else {
-							if (!TextUtils.isEmpty(current)) {
-								sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
-							}
+				sb.append("<div class=\"nav-bar").append(nightModeClass).append("\" onClick=\"showNavigation()\">");
+				for (int i = 0; i < aggregatedPartOfArrayOrig.length; i++) {
+					if (i > 0) {
+						sb.append("&nbsp;&nbsp;•&nbsp;&nbsp;").append(aggregatedPartOfArrayOrig[i]);
+					} else {
+						if (!TextUtils.isEmpty(current)) {
+							sb.append("<span class=\"nav-bar-current\">").append(current).append("</span>");
 						}
 					}
 				}

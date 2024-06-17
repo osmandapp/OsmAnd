@@ -29,7 +29,7 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	final List<GPXUtilities.WptPt> points = new ArrayList<>();
 	Map<String, GPXUtilities.PointsGroup> pointsGroups = new LinkedHashMap<>();
-	private final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
+	final Map<String, String> networkRouteKeyTags = new LinkedHashMap<>();
 
 	public Exception error = null;
 	public String path = "";
@@ -777,16 +777,22 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		getExtensionsToWrite().put("line_3d_visualization_position_type", String.valueOf(trackLinePositionType));
 	}
 
-	public void setAdditionalExaggeration(int additionalExaggeration) {
+	public void setAdditionalExaggeration(float additionalExaggeration) {
 		getExtensionsToWrite().put("vertical_exaggeration_scale", String.valueOf(additionalExaggeration));
 	}
 
 	public float getAdditionalExaggeration() {
-		String additionalExaggeration = null;
-		if (extensions != null) {
-			additionalExaggeration = extensions.get("vertical_exaggeration_scale");
-		}
-		return Algorithms.parseFloatSilently(additionalExaggeration, 1f);
+		String exaggeration = getExtensionsToRead().get("vertical_exaggeration_scale");
+		return Algorithms.parseFloatSilently(exaggeration, 1f);
+	}
+
+	public void setElevationMeters(float elevation) {
+		getExtensionsToWrite().put("elevation_meters", String.valueOf(elevation));
+	}
+
+	public float getElevationMeters() {
+		String elevation = getExtensionsToRead().get("elevation_meters");
+		return Algorithms.parseFloatSilently(elevation, 1000f);
 	}
 
 	public boolean isShowStartFinishSet() {
@@ -806,7 +812,6 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public void addRouteKeyTags(Map<String, String> routeKey) {
 		networkRouteKeyTags.putAll(routeKey);
-		setExtensionsWriter(Algorithms.isEmpty(networkRouteKeyTags) ? null : GPXUtilities.createNetworkRouteExtensionWriter(networkRouteKeyTags));
 	}
 
 	public Map<String, String> getRouteKeyTags() {
@@ -855,10 +860,9 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		if (metadata.bounds != null) {
 			size++;
 		}
+		size += getExtensionsToWrite().size();
+		size += getExtensionsWriters().size();
 
-		if (!getExtensionsToWrite().isEmpty() || getExtensionsWriter() != null) {
-			size++;
-		}
 		return size;
 	}
 

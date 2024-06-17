@@ -1,6 +1,5 @@
 package net.osmand.plus.views.layers.geometry;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import androidx.annotation.ColorInt;
@@ -23,7 +22,6 @@ import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.Track3DStyle;
 import net.osmand.plus.track.helpers.GpxUiHelper;
-import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData31;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -48,9 +46,8 @@ import java.util.TreeMap;
 
 import gnu.trove.list.array.TByteArrayList;
 
-public abstract class MultiColoringGeometryWay
-		<C extends MultiColoringGeometryWayContext, D extends MultiColoringGeometryWayDrawer<C>> extends
-		GeometryWay<C, D> {
+public abstract class MultiColoringGeometryWay<C extends MultiColoringGeometryWayContext,
+		D extends MultiColoringGeometryWayDrawer<C>> extends GeometryWay<C, D> {
 
 	protected int customColor;
 	protected float customWidth;
@@ -60,6 +57,8 @@ public abstract class MultiColoringGeometryWay
 	protected String routeInfoAttribute;
 
 	protected boolean coloringChanged;
+
+	@Nullable
 	private Track3DStyle track3DStyle;
 
 	public MultiColoringGeometryWay(C context, D drawer) {
@@ -88,11 +87,13 @@ public abstract class MultiColoringGeometryWay
 		Gpx3DVisualizationType trackVisualizationType = track3DStyle == null ? Gpx3DVisualizationType.NONE : track3DStyle.getVisualizationType();
 		Gpx3DWallColorType trackWallColorType = track3DStyle == null ? Gpx3DWallColorType.NONE : track3DStyle.getWallColorType();
 		Gpx3DLinePositionType trackLinePositionType = track3DStyle == null ? Gpx3DLinePositionType.TOP : track3DStyle.getLinePositionType();
-		float exaggeration = track3DStyle == null ? 1f : track3DStyle.getAdditionalExaggeration();
+		float exaggeration = track3DStyle == null ? 1f : track3DStyle.getExaggeration();
+		float elevationMeters = track3DStyle == null ? 1000f : track3DStyle.getElevation();
 		style.trackVisualizationType = trackVisualizationType;
 		style.trackWallColorType = trackWallColorType;
 		style.trackLinePositionType = trackLinePositionType;
 		style.additionalExaggeration = exaggeration;
+		style.elevationMeters = elevationMeters;
 	}
 
 	protected void updateTrack3DStyle(@Nullable Track3DStyle track3DStyle) {
@@ -138,8 +139,7 @@ public abstract class MultiColoringGeometryWay
 					colorPalette = ColorPalette.parseColorPalette(new FileReader(filePalette));
 				}
 			} catch (IOException e) {
-				PlatformUtil.getLog(MultiColoringGeometryWay.class).error("Error reading color file ",
-						e);
+				PlatformUtil.getLog(MultiColoringGeometryWay.class).error("Error reading color file ", e);
 			}
 			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, colorPalette, 0);
 			List<RouteColorizationPoint> points = routeColorize.getResult();
@@ -327,196 +327,6 @@ public abstract class MultiColoringGeometryWay
 	@ColorInt
 	protected int getContrastLineColor(@ColorInt int lineColor) {
 		return ColorUtilities.getContrastColor(getContext().getCtx(), lineColor, false);
-	}
-
-	protected static class GradientGeometryWayProvider implements GeometryWayProvider {
-
-		private final RouteColorize routeColorize;
-		private final List<RouteColorizationPoint> locations;
-		private final List<Float> pointHeights;
-
-		public GradientGeometryWayProvider(@Nullable RouteColorize routeColorize,
-		                                   @NonNull List<RouteColorizationPoint> locations,
-		                                   @Nullable List<Float> pointHeights) {
-			this.routeColorize = routeColorize;
-			this.locations = locations;
-			this.pointHeights = pointHeights;
-		}
-
-		@Nullable
-		public List<RouteColorizationPoint> simplify(int zoom) {
-			return routeColorize != null ? routeColorize.simplify(zoom) : null;
-		}
-
-		public int getColor(int index) {
-			return locations.get(index).color;
-		}
-
-		@Override
-		public double getLatitude(int index) {
-			return locations.get(index).lat;
-		}
-
-		@Override
-		public double getLongitude(int index) {
-			return locations.get(index).lon;
-		}
-
-		@Override
-		public int getSize() {
-			return locations.size();
-		}
-
-		@Override
-		public float getHeight(int index) {
-			return pointHeights == null ? 0 : pointHeights.get(index);
-		}
-	}
-
-	protected static class GradientPathGeometryZoom extends PathGeometryZoom {
-
-		public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify,
-		                                @NonNull List<Integer> forceIncludedIndexes) {
-			super(locationProvider, tb, simplify, forceIncludedIndexes);
-		}
-
-		@Override
-		public void simplify(RotatedTileBox tb, GeometryWayProvider locationProvider, TByteArrayList simplifyPoints) {
-			if (locationProvider instanceof GradientGeometryWayProvider) {
-				GradientGeometryWayProvider provider = (GradientGeometryWayProvider) locationProvider;
-				List<RouteColorizationPoint> simplified = provider.simplify(tb.getZoom());
-				if (simplified != null) {
-					for (RouteColorizationPoint location : simplified) {
-						simplifyPoints.set(location.id, (byte) 1);
-					}
-				}
-			}
-		}
-	}
-
-	public static class GeometrySolidWayStyle<C extends MultiColoringGeometryWayContext> extends GeometryWayStyle<C> {
-
-		private static final float LINE_WIDTH_THRESHOLD_DP = 8f;
-		private static final float ARROW_DISTANCE_MULTIPLIER = 1.5f;
-		private static final float SPECIAL_ARROW_DISTANCE_MULTIPLIER = 10f;
-
-		public static final int OUTER_CIRCLE_COLOR = 0x33000000;
-
-		private final int directionArrowColor;
-
-		private final boolean hasPathLine;
-
-		private final float lineWidthThresholdPix;
-		private final float outerCircleRadius;
-		private final float innerCircleRadius;
-
-		GeometrySolidWayStyle(@NonNull C context, int lineColor, float lineWidth, int directionArrowColor,
-		                      boolean hasPathLine) {
-			super(context, lineColor, lineWidth);
-			this.directionArrowColor = directionArrowColor;
-			this.hasPathLine = hasPathLine;
-
-			this.innerCircleRadius = AndroidUtils.dpToPxAuto(context.getCtx(), 7);
-			this.outerCircleRadius = AndroidUtils.dpToPxAuto(context.getCtx(), 8);
-			this.lineWidthThresholdPix = AndroidUtils.dpToPxAuto(context.getCtx(), LINE_WIDTH_THRESHOLD_DP);
-		}
-
-		@Override
-		public Bitmap getPointBitmap() {
-			return useSpecialArrow() ? getContext().getSpecialArrowBitmap() : getContext().getArrowBitmap();
-		}
-
-		@NonNull
-		@Override
-		public Integer getPointColor() {
-			return directionArrowColor;
-		}
-
-		public boolean hasPathLine() {
-			return hasPathLine;
-		}
-
-		public float getInnerCircleRadius() {
-			return innerCircleRadius;
-		}
-
-		public float getOuterCircleRadius() {
-			return outerCircleRadius;
-		}
-
-		@Override
-		public double getPointStepPx(double zoomCoef) {
-			return useSpecialArrow() ? getSpecialPointStepPx() : getRegularPointStepPx();
-		}
-
-		public double getSpecialPointStepPx() {
-			Bitmap bitmap = getContext().getSpecialArrowBitmap();
-			return bitmap.getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER;
-		}
-
-		public double getRegularPointStepPx() {
-			Bitmap bitmap = getContext().getArrowBitmap();
-			return bitmap.getHeight() + getWidth(0) * ARROW_DISTANCE_MULTIPLIER;
-		}
-
-		public boolean useSpecialArrow() {
-			return getWidth(0) <= lineWidthThresholdPix;
-		}
-
-		@Override
-		public boolean equals(Object other) {
-			if (this == other) {
-				return true;
-			}
-			if (!super.equals(other)) {
-				return false;
-			}
-			if (!(other instanceof GeometrySolidWayStyle)) {
-				return false;
-			}
-			GeometrySolidWayStyle<?> o = (GeometrySolidWayStyle<?>) other;
-			return Algorithms.objectEquals(directionArrowColor, o.directionArrowColor);
-		}
-
-		@Override
-		public int getColorizationScheme() {
-			return COLORIZATION_SOLID;
-		}
-	}
-
-	public static class GeometryGradientWayStyle<C extends MultiColoringGeometryWayContext> extends GeometrySolidWayStyle<C> {
-
-		public int currColor;
-		public int nextColor;
-
-		public GeometryGradientWayStyle(@NonNull C context, int color, float width) {
-			super(context, color, width, Color.BLACK, true);
-		}
-
-		@Override
-		public boolean isUnique() {
-			return true;
-		}
-
-		@Override
-		public boolean equals(Object other) {
-			if (this == other) {
-				return true;
-			}
-			if (!super.equals(other)) {
-				return false;
-			}
-			if (!(other instanceof MultiColoringGeometryWay.GeometryGradientWayStyle)) {
-				return false;
-			}
-			GeometryGradientWayStyle<?> o = (GeometryGradientWayStyle<?>) other;
-			return currColor == o.currColor && nextColor == o.nextColor;
-		}
-
-		@Override
-		public int getColorizationScheme() {
-			return COLORIZATION_GRADIENT;
-		}
 	}
 
 	protected Track3DStyle getTrack3DStyle() {

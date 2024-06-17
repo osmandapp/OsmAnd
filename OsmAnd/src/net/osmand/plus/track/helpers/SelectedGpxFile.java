@@ -327,9 +327,8 @@ public class SelectedGpxFile {
 	}
 
 	@NonNull
-	public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app,
-	                                                             @Nullable GpxDataItem gpxDataItem) {
-		filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, gpxDataItem);
+	public FilteredSelectedGpxFile createFilteredSelectedGpxFile(@NonNull OsmandApplication app, @Nullable GpxDataItem item) {
+		filteredSelectedGpxFile = new FilteredSelectedGpxFile(app, this, item);
 		return filteredSelectedGpxFile;
 	}
 

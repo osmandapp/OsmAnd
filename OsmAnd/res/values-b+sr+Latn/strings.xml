@@ -18,8 +18,8 @@
     <string name="local_index_tile_data_expire">Ističe za (minuta): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Najveće uveličanje: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Eliptična Merkator projekcija</string>
-    <string name="edit_tilesource_maxzoom">Najveći zum</string>
-    <string name="edit_tilesource_minzoom">Najmanji zum</string>
+    <string name="edit_tilesource_maxzoom">Maksimalan zum</string>
+    <string name="edit_tilesource_minzoom">Minimalan zum</string>
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Izaberi postojeći…</string>
     <string name="driving_region_japan">Japan</string>
@@ -3802,7 +3802,7 @@
     <string name="sit_on_the_stop">Ukrcavanje na stanici</string>
     <string name="exit_at">Izlaz na</string>
     <string name="routeInfo_road_types_name">Vrste puteva</string>
-    <string name="step_by_step">Manevri</string>
+    <string name="step_by_step">Skretanje-po-skretanje</string>
     <string name="by_transport_type">Do %1$s</string>
     <string name="time_of_day">Doba dana</string>
     <string name="use_osm_live_public_transport">Javni prevoz OsmAnd Live</string>
@@ -5514,7 +5514,7 @@
     <string name="shared_string_is_deleted">%1$s je obrisan.</string>
     <string name="shared_string_delete_immediately">Obriši odmah</string>
     <string name="shared_string_delete_item">Obriši stavku</string>
-    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\".</string>
+    <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\". (Nijedna putanja neće biti izbrisana.)</string>
     <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
     <string name="empty_name">Prazan naziv</string>
     <string name="loading_tracks">Ponovno učitavanje staza</string>
@@ -5630,7 +5630,7 @@
     <string name="when_exceeded">Kad se prekorači</string>
     <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
     <string name="shared_string_speedometer">Brzinomer</string>
-    <string name="speed_limit_warning">Upozorenje na ograničenje brzine</string>
+    <string name="speed_limit_warning">Upozorenje na ograničenu brzinu</string>
     <string name="help_article_setup_a_route_name">Podešavanje rute</string>
     <string name="rendering_attr_padusDisplayMode_name">Način prikaza javnih površina</string>
     <string name="rendering_attr_padusDisplayMode_description">Po načinu pristupa ili imenu upravitelja</string>
@@ -5733,4 +5733,25 @@
     <string name="disable_map_layers_descr">Onemogućite sve slojeve mape iznad vektorske mape (potrebno je ponovno pokretanje).</string>
     <string name="disable_map_layers">Onemogući slojeve mape</string>
     <string name="height_legend_description">Za vizualizaciju reljefa koriste se mape visina u boji.</string>
+    <string name="change_terrain_color_scheme">Promena boje terena</string>
+    <string name="play_weather_forecast">Pokretanje vremenske prognoze</string>
+    <string name="travel_topics">Teme putovanja</string>
+    <string name="wall_height">Visina zida</string>
+    <string name="rendering_value_dark_orange_name">Tamnonarančasta</string>
+    <string name="clear_all_key_shortcuts_summary">Sva dodeljivanja tastera za izabrani tip će biti uklonjena.</string>
+    <string name="no_assigned_keys_desc">Izaberite akciju i dodelite taster dodirom na dugme \'Dodaj\'.</string>
+    <string name="no_assigned_keys">Nema dodeljenja tastera</string>
+    <string name="new_key_assignment">Novo dodeljenje tastera</string>
+    <string name="key_name_pattern">Taster \"%1$s\"</string>
+    <string name="clear_key_assignment_summary">Dodeljivanje tastera za izabranu radnju će biti obrisano.</string>
+    <string name="clear_all_key_shortcuts">Izbriši sve prečica tastera</string>
+    <string name="shared_string_key">Taster</string>
+    <string name="key_assignment_add_key">Dodaj taster</string>
+    <string name="key_assignment_add_action">Dodaj akciju</string>
+    <string name="action_icon">Dodaj ikonu</string>
+    <string name="assigned_keys">Dodeljenja tastera</string>
+    <string name="user_palette">Korisnička paleta</string>
+    <string name="shared_string_colors">Boje</string>
+    <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
+    <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
 </resources>

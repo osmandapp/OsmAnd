@@ -139,7 +139,7 @@ MB)をダウンロードしますか?</string>
     <string name="items_were_selected">{0} 件のアイテムを選択</string>
     <string name="filter_existing_indexes">ダウンロードされたフィルタ</string>
     <string name="shared_string_select_all">全て選択</string>
-    <string name="shared_string_refresh">リロード</string>
+    <string name="shared_string_refresh">更新</string>
     <string name="general_settings_descr">アプリの表示オプションや共通の設定をおこないます。</string>
     <string name="general_settings">全般設定</string>
     <string name="index_settings_descr">マップなどのデータを取得/更新します</string>
@@ -4481,7 +4481,7 @@ POIの更新は利用できません</string>
     <string name="track_file">経路ファイル</string>
     <string name="turn_arrows">方向転換の矢印</string>
     <string name="shared_string_size">サイズ</string>
-    <string name="created_on">以下で作成する</string>
+    <string name="created_on">作成日</string>
     <string name="use_routing_fallback">オフラインルーティング代替処理</string>
     <string name="use_routing_fallback_description">オンラインルーティングが利用できない場合は、オフラインルーティングを使用してください。</string>
     <string name="gps_filter_precision">GPS精度</string>
@@ -5341,4 +5341,10 @@ POIの更新は利用できません</string>
     <string name="key_assignments_already_cleared_message">すべてのキー割り当てはすでに初期化されています</string>
     <string name="camera_app">カメラアプリ</string>
     <string name="use_v1_auto_zoom">不連続オートズーム（旧バージョン）</string>
+    <string name="get_osmand_cloud">OsmAnd Cloudを入手</string>
+    <string name="speedometer_description">GPSを基にあなたの現在の速度を表示します</string>
+    <string name="shared_string_speedometer">スピードメーター</string>
+    <string name="cache_size">キャッシュサイズ</string>
+    <string name="map_3d_mode_action">3Dモード</string>
+    <string name="map_2d_mode_action">2Dモード</string>
 </resources>

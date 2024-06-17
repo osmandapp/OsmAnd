@@ -5,9 +5,7 @@ import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.PRESELECTED_TRACKS_TAB_TYPE;
 import static net.osmand.plus.configmap.tracks.PreselectedTabParams.SELECT_ALL_ITEMS_ON_TAB;
 import static net.osmand.plus.configmap.tracks.TrackTab.SMART_FOLDER_TAB_NAME_PREFIX;
-import static net.osmand.plus.configmap.tracks.TrackTabType.ALL;
 import static net.osmand.plus.configmap.tracks.TrackTabType.FOLDER;
-import static net.osmand.plus.configmap.tracks.TrackTabType.ON_MAP;
 import static net.osmand.plus.configmap.tracks.TrackTabType.SMART_FOLDER;
 import static net.osmand.plus.importfiles.ImportHelper.IMPORT_FILE_REQUEST;
 import static net.osmand.plus.myplaces.MyPlacesActivity.GPX_TAB;
@@ -42,7 +40,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.configmap.tracks.SortByBottomSheet;
 import net.osmand.plus.configmap.tracks.TrackItem;
-import net.osmand.plus.configmap.tracks.TrackTab;
 import net.osmand.plus.configmap.tracks.TrackTabType;
 import net.osmand.plus.configmap.tracks.TracksComparator;
 import net.osmand.plus.configmap.tracks.appearance.DefaultAppearanceController;
@@ -344,7 +341,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			return selectedFolder.getDirName();
 		}
 		if (smartFolder != null) {
-			return TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getName(app);
+			return SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getName(app);
 		}
 		return null;
 	}
@@ -356,7 +353,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		} else {
 			Map<String, String> tabsSortModes = settings.getTrackSortModes();
 			if (smartFolder != null) {
-				tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getFolderName(), sortMode.name());
+				tabsSortModes.put(SMART_FOLDER_TAB_NAME_PREFIX + smartFolder.getFolderName(), sortMode.name());
 			} else {
 				tabsSortModes.put(selectedFolder.getDirName(), sortMode.name());
 			}
@@ -389,7 +386,7 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 		OsmandSettings settings = app.getSettings();
 		Map<String, String> oldTabsSortModes = settings.getTrackSortModes();
 		Map<String, String> tabsSortModes = new HashMap<>();
-		
+
 		tabsSortModes.put(TrackTabType.ON_MAP.name(), oldTabsSortModes.get(TrackTabType.ON_MAP.name()));
 		tabsSortModes.put(TrackTabType.ALL.name(), oldTabsSortModes.get(TrackTabType.ALL.name()));
 		tabsSortModes.put(rootFolder.getDirName(), oldTabsSortModes.get(rootFolder.getDirName()));
@@ -397,8 +394,8 @@ public abstract class BaseTrackFolderFragment extends BaseOsmAndFragment impleme
 			tabsSortModes.put(folder.getDirName(), oldTabsSortModes.get(folder.getDirName()));
 		}
 		for (SmartFolder folder : app.getSmartFolderHelper().getSmartFolders()) {
-			tabsSortModes.put(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName(),
-					  oldTabsSortModes.get(TrackTab.SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName()));
+			String key = SMART_FOLDER_TAB_NAME_PREFIX + folder.getFolderName();
+			tabsSortModes.put(key, oldTabsSortModes.get(key));
 		}
 		settings.saveTabsSortModes(tabsSortModes);
 	}

@@ -131,9 +131,7 @@ public class NetworkUtils {
 						return r.getBody();
 					}
 					return null;
-				} catch (InterruptedException e) {
-					log.error(e);
-				} catch (ExecutionException e) {
+				} catch (InterruptedException | ExecutionException e) {
 					log.error(e);
 				}
 				return null;

@@ -411,7 +411,7 @@ public class RoutePlannerFrontEnd {
 				}
 			}
 		}
-		
+
 		double maxDistance = MapUtils.getDistance(start, end);
 		if (!intermediatesEmpty) {
 			LatLon b = start;
@@ -516,6 +516,7 @@ public class RoutePlannerFrontEnd {
 				dir = (r.detailed.get(r.detailed.size() - 1).getBearingEnd() / 180.0) * Math.PI;
 			}
 		}
+		ctx.unloadAllData(); // clean indexedSubregions is required for BRP-fallback
 		ctx.routingTime = r != null ? (float) r.getHHRoutingDetailed() : 0;
 		return r;
 	}
