@@ -124,6 +124,7 @@
     <asset source="color-palette/hillshade_color_default.txt" destination="color-palette/hillshade_color_default.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/hillshade_main_default.txt" destination="color-palette/hillshade_main_default.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/slope_default.txt" destination="color-palette/slope_default.txt" mode="copyOnlyIfDoesNotExist" />
+    <asset source="color-palette/height_altitude_default.txt" destination="color-palette/height_altitude_default.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_cloud.txt" destination="color-palette/weather_cloud.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_precip.txt" destination="color-palette/weather_precip.txt" mode="copyOnlyIfDoesNotExist" />
     <asset source="color-palette/weather_pressure.txt" destination="color-palette/weather_pressure.txt" mode="copyOnlyIfDoesNotExist" />

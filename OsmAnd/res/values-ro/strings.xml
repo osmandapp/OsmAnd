@@ -5666,7 +5666,7 @@
     <string name="change_default_appearance_confirmation">Schimbați aspectul implicit al lui %1$s?</string>
     <string name="use_3d_track_visualization">Vizualizare 3D</string>
     <string name="shared_string_changes">Modificări</string>
-    <string name="map_widget_map_scale">Scala hărții</string>
+    <string name="map_widget_map_scale">Scara hărții</string>
     <string name="release_4_7">Noul widget \"Speedometru\" compatibil cu Android Auto
 \n
 \n • Configurați ecranul hărții prin adăugarea mai multor butoane \"Acțiuni rapide\"
@@ -5734,4 +5734,19 @@
     <string name="routing_attr_avoid_cobblestone_description">Evită piatra cubică</string>
     <string name="fixed_height">Înălțime fixă</string>
     <string name="wall_height">Înălțime perete</string>
+    <string name="clear_key_assignment_summary">Asignarea tastelor pentru acțiunea selectată va fi ștearsă.</string>
+    <string name="user_palette">Paleta utilizatorului</string>
+    <string name="clear_all_key_shortcuts_summary">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
+    <string name="shared_string_colors">Culori</string>
+    <string name="rendering_value_dark_orange_name">Portocaliu închis</string>
+    <string name="action_icon">Pictograma de acțiune</string>
+    <string name="assigned_keys">Chei atribuite</string>
+    <string name="clear_all_key_shortcuts">Șterge toate scurtăturile de taste</string>
+    <string name="no_assigned_keys">Nicio tastă asignată</string>
+    <string name="no_assigned_keys_desc">Selectați o acțiune și asignați-i o tastă atingând butonul \'Adaugă\'.</string>
+    <string name="shared_string_key">Tastă</string>
+    <string name="key_assignment_add_action">Adaugă acțiune</string>
+    <string name="new_key_assignment">Asignare nouă de tastă</string>
+    <string name="key_name_pattern">Tasta \"%1$s\"</string>
+    <string name="key_assignment_add_key">Adaugă tastă</string>
 </resources>

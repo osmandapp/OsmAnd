@@ -3947,4 +3947,22 @@
     <string name="poi_shop_general">Warenhuis</string>
     <string name="poi_hiking_filter">Geschikt voor trektochten</string>
     <string name="poi_second_hand_filter">Tweedehands goederen</string>
+    <string name="poi_indoor_seating_no">Niet binnen zitten</string>
+    <string name="poi_indoor_seating_yes">Binnen zitten: ja</string>
+    <string name="poi_indoor_seating_bar_table">Binnen zitten: bar tafel</string>
+    <string name="poi_socket_type2_combo_voltage_filter">Type 2 combo voltage</string>
+    <string name="poi_access_permit">Vergunning vereist</string>
+    <string name="poi_music_venue">Muziek locatie</string>
+    <string name="poi_socket_chademo_voltage_filter">CHAdeMO voltage</string>
+    <string name="poi_access_yes">Toegang is toegestaan</string>
+    <string name="poi_cuisine_fish">Vis</string>
+    <string name="poi_climbing_quality">Staat van de klim</string>
+    <string name="poi_self_checkout">Zelfscan kassa</string>
+    <string name="poi_socket_type2_voltage_filter">Type 2 voltage</string>
+    <string name="poi_socket_type2_cable_voltage_filter">Type 2 voltage</string>
+    <string name="poi_impromptu">Spontaan</string>
+    <string name="poi_waste_accepted">Geaccepteerd afval</string>
+    <string name="poi_us_maps_recreation_area_activity">Recreatiegebied activiteit</string>
+    <string name="poi_us_maps_recreation_area_open_status">Recreatiegebied open</string>
+    <string name="poi_socket_type2_cable_output_filter">Type 2 vermogen</string>
 </resources>

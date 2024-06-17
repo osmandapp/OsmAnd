@@ -27,6 +27,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.local.dialogs.LiveGroupItem;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.plugins.audionotes.AudioVideoNotesPlugin.Recording;
@@ -211,6 +212,8 @@ public class LocalItemUtils {
 		} else if (path.startsWith(app.getCacheDir().getAbsolutePath()) && (path.contains(WEATHER_FORECAST_DIR)
 				|| path.contains(GEOTIFF_SQLITE_CACHE_DIR))) {
 			return file.isFile() ? CACHE : null;
+		} else if (path.contains(COLOR_PALETTE_DIR) && name.endsWith(TXT_EXT)) {
+			return COLOR_DATA;
 		}
 		if (file.isFile() && file.length() >= OTHER_MIN_SIZE) {
 			return OTHER;
@@ -255,6 +258,8 @@ public class LocalItemUtils {
 			if (attachedObject instanceof String) {
 				return RendererRegistry.getRendererName(context, (String) attachedObject);
 			}
+		} else if (type == COLOR_DATA) {
+			return ColorsPaletteUtils.getPaletteName(item.getFile());
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandRegions regions = app.getResourceManager().getOsmandRegions();
@@ -278,6 +283,8 @@ public class LocalItemUtils {
 		String size = AndroidUtils.formatSize(context, item.getFile().length());
 		if (item.getType() == CACHE) {
 			return size;
+		} else if (item.getType() == COLOR_DATA) {
+			return ColorsPaletteUtils.getPaletteTypeName(context, item.getFile());
 		} else {
 			String formattedDate = getFormattedDate(new Date(item.getLastModified()));
 			return context.getString(R.string.ltr_or_rtl_combine_via_bold_point, size, formattedDate);

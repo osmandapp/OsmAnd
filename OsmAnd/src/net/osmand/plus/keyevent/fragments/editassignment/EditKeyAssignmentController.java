@@ -251,7 +251,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		initialBundle = new EditingBundle();
 		if (assignment != null) {
 			editBundle.action = assignment.getAction();
-			editBundle.keyCodes = assignment.getKeyCodes();
+			editBundle.keyCodes = new ArrayList<>(assignment.getKeyCodes());
 			initialBundle.action = editBundle.action;
 			initialBundle.keyCodes = new ArrayList<>(editBundle.keyCodes);
 		}

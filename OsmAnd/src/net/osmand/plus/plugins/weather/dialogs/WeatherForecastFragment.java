@@ -39,6 +39,7 @@ import net.osmand.plus.plugins.weather.WeatherBand;
 import net.osmand.plus.plugins.weather.WeatherContour;
 import net.osmand.plus.plugins.weather.WeatherHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
+import net.osmand.plus.plugins.weather.WeatherRasterLayer;
 import net.osmand.plus.plugins.weather.WeatherUtils;
 import net.osmand.plus.plugins.weather.widgets.WeatherWidgetsPanel;
 import net.osmand.plus.utils.AndroidUtils;
@@ -75,8 +76,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private static final String PREVIOUS_WEATHER_CONTOUR_KEY = "previous_weather_contour";
 	private static final long MIN_UTC_HOURS_OFFSET = 24 * 60 * 60 * 1000;
-	public static final int ANIM_DELAY_MILLIS = 3000;
-	public static final int WAIT_FOR_NEW_DOWNLOAD_START_DELAY = 2000;
+	public static final int ANIM_DELAY_MILLIS = 125;
+	public static final int WAIT_FOR_NEW_DOWNLOAD_START_DELAY = 1000;
 
 	private WeatherHelper weatherHelper;
 	private WeatherPlugin plugin;
@@ -96,7 +97,8 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private WeatherContour previousWeatherContour;
 	private boolean isAnimatingForecast;
 	private ImageButton playForecastBtn;
-
+	private int currentStep;
+	private int animateStepCount;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -196,7 +198,17 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void onPlayForecastClicked() {
 		isAnimatingForecast = !isAnimatingForecast;
 		if (isAnimatingForecast) {
-			moveToNextForecastFrame();
+			Calendar calendar = getDefaultCalendar();
+			calendar.setTime(selectedDate.getTime());
+			int hour = (int) timeSlider.getValue();
+			calendar.set(Calendar.HOUR_OF_DAY, hour);
+			calendar.set(Calendar.MINUTE, (int) ((timeSlider.getValue() - (float) hour) * 60.0f));
+			plugin.prepareForDayAnimation(calendar.getTime());
+			requireMapActivity().refreshMap();
+			currentStep = (int) (timeSlider.getValue() / timeSlider.getStepSize()) + 1;
+			animateStepCount = (int) (WeatherRasterLayer.FORECAST_ANIMATION_DURATION_HOURS / timeSlider.getStepSize()) - 1;
+			showProgressBar(true);
+			scheduleAnimationStart();
 		} else {
 			animateForecastHandler.removeCallbacksAndMessages(null);
 		}
@@ -204,10 +216,27 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void moveToNextForecastFrame() {
-		float currentValue = timeSlider.getValue();
-		float newValue = currentValue == timeSlider.getValueTo() ? timeSlider.getValueFrom() : currentValue + 1;
-		timeSlider.setValue(newValue);
-		animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
+		animateForecastHandler.removeCallbacksAndMessages(null);
+		if (currentStep + 1 > getStepsCount() || animateStepCount <= 0) {
+			isAnimatingForecast = false;
+			updatePlayForecastButton();
+		} else {
+			currentStep++;
+			animateStepCount--;
+			float newValue = timeSlider.getValueFrom() + currentStep * timeSlider.getStepSize();
+			timeSlider.setValue(newValue);
+			if (isAnimatingForecast) {
+				animateForecastHandler.postDelayed(this::moveToNextForecastFrame, ANIM_DELAY_MILLIS);
+			}
+		}
+	}
+
+	private int getStepsCount() {
+		if (timeSlider != null) {
+			return (int) ((timeSlider.getValueTo() - timeSlider.getValueFrom()) / timeSlider.getStepSize());
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -250,7 +279,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 	private void updateTimeSlider() {
 		boolean today = OsmAndFormatter.isSameDay(selectedDate, currentDate);
-		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 12);
+		timeSlider.setValue(today ? currentDate.get(Calendar.HOUR_OF_DAY) : 9);
 		timeSlider.setStepSize(today ? 1.0f / 6.0f : 3.0f / 9.0f); // today ? 10 minutes : 20 minutes
 	}
 
@@ -501,16 +530,21 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	private void onDownloadStateChanged(boolean isDownloading) {
 		progressUpdateHandler.removeCallbacksAndMessages(null);
 		if (isAnimatingForecast) {
-			playForecastBtn.setEnabled(true);
-			showProgressBar(false);
-		} else if (isDownloading) {
-			playForecastBtn.setEnabled(false);
-			showProgressBar(true);
+			if (isDownloading) {
+				showProgressBar(true);
+			} else {
+				scheduleAnimationStart();
+			}
 		} else {
-			progressUpdateHandler.postDelayed(() -> {
-				playForecastBtn.setEnabled(true);
-				showProgressBar(false);
-			}, WAIT_FOR_NEW_DOWNLOAD_START_DELAY);
+			showProgressBar(false);
 		}
+	}
+
+	private void scheduleAnimationStart() {
+		progressUpdateHandler.removeCallbacksAndMessages(null);
+		progressUpdateHandler.postDelayed(() -> {
+			showProgressBar(false);
+			moveToNextForecastFrame();
+		}, WAIT_FOR_NEW_DOWNLOAD_START_DELAY);
 	}
 }

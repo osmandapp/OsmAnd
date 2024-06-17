@@ -63,6 +63,7 @@ public class GPXUtilities {
 	public static final String PROFILE_TYPE_EXTENSION = "profile";
 	public static final String ADDRESS_EXTENSION = "address";
 	public static final String HIDDEN_EXTENSION = "hidden";
+	public static final String POINT_TYPE_EXTENSION = "point_type";
 
 	public static final String GPXTPX_PREFIX = "gpxtpx:";
 	public static final String OSMAND_EXTENSIONS_PREFIX = "osmand:";
@@ -117,12 +118,17 @@ public class GPXUtilities {
 		LIGHTGRAY(0xFFCCCCCC),
 		WHITE(0xFFFFFFFF),
 		RED(0xFFFF0000),
+		DARKRED(0xFF8B0000),
 		GREEN(0xFF00FF00),
 		DARKGREEN(0xFF006400),
 		BLUE(0xFF0000FF),
+		DARKBLUE(0xFF00008B),
 		YELLOW(0xFFFFFF00),
+		DARKYELLOW(0xFF9B870C),
 		CYAN(0xFF00FFFF),
+		DARKCYAN(0xFF008B8B),
 		MAGENTA(0xFFFF00FF),
+		DARKMAGENTA(0xFF8B008B),
 		AQUA(0xFF00FFFF),
 		FUCHSIA(0xFFFF00FF),
 		DARKGREY(0xFF444444),
@@ -134,12 +140,7 @@ public class GPXUtilities {
 		OLIVE(0xFF808000),
 		PURPLE(0xFF800080),
 		SILVER(0xFFC0C0C0),
-		TEAL(0xFF008080),
-		DARKYELLOW(0xFF999900),
-		DARKRED(0xFF990000),
-		DARKBLUE(0xFF000066),
-		DARKMAGENTA(0xFF660066),
-		DARKCYAN(0xFF006666);
+		TEAL(0xFF008080);
 
 		public final int color;
 
@@ -210,7 +211,7 @@ public class GPXUtilities {
 			getExtensionsWriters().remove(key);
 		}
 
-		public int getColor(int defColor) {
+		public Integer getColor(Integer defColor) {
 			String value = getColorValue();
 			return parseColor(value, defColor);
 		}
@@ -249,7 +250,7 @@ public class GPXUtilities {
 		}
 	}
 
-	public static int parseColor(String colorString, int defColor) {
+	public static Integer parseColor(String colorString, Integer defColor) {
 		Integer color = parseColor(colorString);
 		return color != null ? color : defColor;
 	}
@@ -435,8 +436,16 @@ public class GPXUtilities {
 			return getExtensionsToRead().get(BACKGROUND_TYPE_EXTENSION);
 		}
 
-		public void setBackgroundType(String backType) {
-			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, backType);
+		public void setBackgroundType(String type) {
+			getExtensionsToWrite().put(BACKGROUND_TYPE_EXTENSION, type);
+		}
+
+		public String getSpecialPointType() {
+			return getExtensionsToRead().get(POINT_TYPE_EXTENSION);
+		}
+
+		public void setSpecialPointType(String type) {
+			getExtensionsToWrite().put(POINT_TYPE_EXTENSION, type);
 		}
 
 		public String getProfileType() {

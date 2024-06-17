@@ -1,5 +1,14 @@
 package net.osmand.plus.settings.backend;
 
+import static net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -18,15 +27,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 
 public class ApplicationMode {
 
@@ -130,14 +130,17 @@ public class ApplicationMode {
 		return cachedFilteredValues;
 	}
 
+	@NonNull
 	public static List<ApplicationMode> allPossibleValues() {
 		return values;
 	}
 
+	@NonNull
 	public static List<ApplicationMode> getDefaultValues() {
 		return defaultValues;
 	}
 
+	@NonNull
 	public static List<ApplicationMode> getCustomValues() {
 		List<ApplicationMode> customModes = new ArrayList<>();
 		for (ApplicationMode mode : values) {
@@ -157,14 +160,22 @@ public class ApplicationMode {
 		return def;
 	}
 
+	@NonNull
 	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
-		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
+		List<ApplicationMode> list = new ArrayList<>();
 		for (ApplicationMode a : values) {
 			if (a == am || a.getParent() == am) {
 				list.add(a);
 			}
 		}
 		return list;
+	}
+
+	@NonNull
+	public static List<ApplicationMode> getModesForRouting(@NonNull OsmandApplication app) {
+		List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(app));
+		modes.remove(DEFAULT);
+		return modes;
 	}
 
 	@NonNull

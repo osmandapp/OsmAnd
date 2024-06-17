@@ -52,6 +52,11 @@ public abstract class BaseOsmAndDialogFragment extends DialogFragment {
 	}
 
 	@NonNull
+	protected View inflate(@LayoutRes int layoutRedId) {
+		return inflate(layoutRedId, null);
+	}
+
+	@NonNull
 	protected View inflate(@LayoutRes int layoutResId, @Nullable ViewGroup root) {
 		return inflate(layoutResId, root, false);
 	}

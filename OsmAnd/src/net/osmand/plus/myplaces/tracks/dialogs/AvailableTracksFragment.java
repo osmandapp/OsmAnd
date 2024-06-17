@@ -37,6 +37,7 @@ import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.track.data.SmartFolder;
 import net.osmand.plus.track.data.TrackFolder;
+import net.osmand.plus.track.data.TrackFolderAnalysis;
 import net.osmand.plus.track.data.TracksGroup;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.plus.utils.FileUtils;
@@ -224,7 +225,7 @@ public class AvailableTracksFragment extends BaseTrackFolderFragment implements 
 				items.addAll(rootFolder.getTrackItems());
 			}
 		}
-		if (!isTracksEmpty) {
+		if (!isTracksEmpty && rootFolder != null) {
 			items.add(rootFolder.getFolderAnalysis());
 		}
 		return items;

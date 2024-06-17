@@ -5739,4 +5739,18 @@
     <string name="change_terrain_color_scheme">Змінити колірну схему Рельєфу</string>
     <string name="play_weather_forecast">Відтворити прогноз погоди</string>
     <string name="travel_topics">Теми подорожей</string>
+    <string name="wall_height">Висота стіни</string>
+    <string name="clear_all_key_shortcuts">Видалити всі сполучення кнопок</string>
+    <string name="rendering_value_dark_orange_name">Темно-жовтогарячий</string>
+    <string name="clear_key_assignment_summary">Призначення кнопки для вибраної дії буде очищено.</string>
+    <string name="clear_all_key_shortcuts_summary">Всі призначення кнопок для вибраного типу буде вилучено.</string>
+    <string name="shared_string_key">Кнопка</string>
+    <string name="no_assigned_keys_desc">Виберіть дію і призначте кнопку, натиснувши кнопку «Додати».</string>
+    <string name="no_assigned_keys">Немає призначених кнопок</string>
+    <string name="new_key_assignment">Нове призначення кнопки</string>
+    <string name="key_name_pattern">Кнопка \"%1$s\"</string>
+    <string name="assigned_keys">Призначені кнопки</string>
+    <string name="key_assignment_add_key">Додати кнопку</string>
+    <string name="action_icon">Піктограма дії</string>
+    <string name="key_assignment_add_action">Додати дію</string>
 </resources>
