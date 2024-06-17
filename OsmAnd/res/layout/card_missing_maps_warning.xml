@@ -40,7 +40,7 @@
 			android:text="@string/missing_maps_description" />
 
 		<net.osmand.plus.widgets.dialogbutton.DialogButton
-			android:id="@+id/download_button"
+			android:id="@+id/details_button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			app:dialogButtonType="secondaryActive"

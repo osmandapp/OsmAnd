@@ -20,7 +20,7 @@ public class MissingMapsWarningCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		DialogButton dialogButton = view.findViewById(R.id.download_button);
+		DialogButton dialogButton = view.findViewById(R.id.details_button);
 		dialogButton.setOnClickListener(v -> showMissingMapsDialog());
 	}
 
