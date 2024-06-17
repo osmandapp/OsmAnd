@@ -22,16 +22,9 @@ public class MissingMapsWarningCard extends MapBaseCard {
 	protected void updateContent() {
 		DialogButton dialogButton = view.findViewById(R.id.download_button);
 		dialogButton.setOnClickListener(v -> showMissingMapsDialog());
-		DialogButton ignoreButton = view.findViewById(R.id.ignore_button);
-		ignoreButton.setOnClickListener(v -> ignoreMissingMapsButton());
 	}
 
 	private void showMissingMapsDialog() {
 		RequiredMapsController.showDialog(getMapActivity());
-	}
-
-	private void ignoreMissingMapsButton() {
-		app.getSettings().IGNORE_MISSING_MAPS = true;
-		app.getRoutingHelper().onSettingsChanged(true);
 	}
 }
