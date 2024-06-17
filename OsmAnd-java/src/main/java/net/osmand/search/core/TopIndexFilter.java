@@ -9,17 +9,17 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 	private PoiSubType poiSubType;
 	private SearchPhrase.NameStringMatcher nameStringMatcher;
 	private MapPoiTypes types;
-	private String name;
+	private String valueKey;
+	private String tag; // brand, operator, ...
 	private String translatedName;
-	private String value;
-
+	
 	public TopIndexFilter(PoiSubType poiSubType, SearchPhrase.NameStringMatcher nameStringMatcher, MapPoiTypes types, String value) {
+		this.valueKey = value.toLowerCase().replace(':', '_').replaceAll("\'", "").replace(' ', '_').replaceAll("\"", "");
 		this.poiSubType = poiSubType;
 		this.nameStringMatcher = nameStringMatcher;
 		this.types = types;
-		this.value = value;
-		name = poiSubType.name.replace(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX, "");
-		translatedName = types.getPoiTranslation(name);
+		tag = poiSubType.name.replace(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX, "");
+		translatedName = types.getPoiTranslation(valueKey);
 	}
 
 	@Override
@@ -30,6 +30,10 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 		}
 		return false;
 	}
+	
+	public String getTag() {
+		return tag;
+	}
 
 	@Override
 	public String getName() {
@@ -38,8 +42,7 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 
 	@Override
 	public String getIconResource() {
-		//Example: brand_mcdonalds, operator_bank_of_america
-		String val = value.replaceAll(":", "");
-		return name + "_" + val;
+		//Example: mcdonalds, bank_of_america
+		return valueKey;
 	}
 }
