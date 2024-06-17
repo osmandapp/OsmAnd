@@ -100,9 +100,8 @@ public class MissingMapsCalculator {
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
-					for (String region : p.regions) {
-						result.addMissingMaps(region);
-					}
+					result.addMissingMaps(p.regions.get(0));
+					
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -113,6 +112,7 @@ public class MissingMapsCalculator {
 			} else {
 				if (p.regions.size() > 0) {
 					result.addUsedMaps(p.regions.get(0));
+					
 				}
 			}
 		}
