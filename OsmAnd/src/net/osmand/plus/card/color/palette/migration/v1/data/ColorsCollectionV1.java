@@ -1,6 +1,5 @@
 package net.osmand.plus.card.color.palette.migration.v1.data;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -23,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ColorsCollectionV1 { // TODO delete all unused methods (may be remove at all)
+public class ColorsCollectionV1 {
 
 	private static final Log LOG = PlatformUtil.getLog(ColorsCollectionV1.class);
 
@@ -39,90 +38,11 @@ public class ColorsCollectionV1 { // TODO delete all unused methods (may be remo
 		this.paletteColors = loadPaletteColors(bundle);
 	}
 
-	@Nullable
-	public PaletteColorV1 findPaletteColor(@ColorInt int colorInt) {
-		for (PaletteColorV1 paletteColor : paletteColors) {
-			if (paletteColor.getColor() == colorInt) {
-				return paletteColor;
-			}
-		}
-		return null;
-	}
-
 	@NonNull
 	public List<PaletteColorV1> getColors(@NonNull PaletteSortingMode sortingMode) {
 		List<PaletteColorV1> sortedPaletteColors = new ArrayList<>(this.paletteColors);
 		Collections.sort(sortedPaletteColors, new PaletteColorsComparator(sortingMode));
 		return sortedPaletteColors;
-	}
-
-	@NonNull
-	public PaletteColorV1 duplicateColor(@NonNull PaletteColorV1 paletteColor) {
-		PaletteColorV1 colorDuplicate = paletteColor.duplicate();
-		if (paletteColor.isCustom()) {
-			int index = paletteColors.indexOf(paletteColor);
-			if (index >= 0 && index < paletteColors.size()) {
-				paletteColors.add(index + 1, colorDuplicate);
-			} else {
-				paletteColors.add(colorDuplicate);
-			}
-		} else {
-			paletteColors.add(colorDuplicate);
-		}
-		syncSettings();
-		return colorDuplicate;
-	}
-
-	public boolean askRemoveColor(@NonNull PaletteColorV1 paletteColor) {
-		if (paletteColor.isCustom()) {
-			paletteColors.remove(paletteColor);
-			syncSettings();
-			return true;
-		}
-		return false;
-	}
-
-	@Nullable
-	public PaletteColorV1 addOrUpdateColor(@Nullable PaletteColorV1 oldColor, @ColorInt int newColor) {
-		if (oldColor == null) {
-			return addNewColor(newColor);
-		}
-		if (oldColor.isCustom()) {
-			updateColor(oldColor, newColor);
-			return oldColor;
-		}
-		return null;
-	}
-
-	@NonNull
-	private PaletteColorV1 addNewColor(@ColorInt int newColor) {
-		long now = System.currentTimeMillis();
-		String id = PaletteColorV1.generateId(now);
-		PaletteColorV1 paletteColor = new PaletteColorV1(id, newColor, now);
-		paletteColors.add(paletteColor);
-		paletteColor.setLastUsedTime(now);
-		syncSettings();
-		return paletteColor;
-	}
-
-	private void updateColor(@NonNull PaletteColorV1 paletteColor, @ColorInt int newColor) {
-		paletteColor.setColor(newColor);
-		syncSettings();
-	}
-
-
-	public void askRenewLastUsedTime(@Nullable PaletteColorV1 paletteColor) {
-		if (paletteColor != null) {
-			renewLastUsedTime(Collections.singletonList(paletteColor));
-		}
-	}
-
-	public void renewLastUsedTime(@NonNull List<PaletteColorV1> paletteColors) {
-		long now = System.currentTimeMillis();
-		for (PaletteColorV1 paletteColor : paletteColors) {
-			paletteColor.setLastUsedTime(now++);
-		}
-		syncSettings();
 	}
 
 	@NonNull

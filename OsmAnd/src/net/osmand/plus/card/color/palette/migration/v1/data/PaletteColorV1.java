@@ -60,16 +60,8 @@ public class PaletteColorV1 {
 		this.color = color;
 	}
 
-	public long getCreationTime() {
-		return creationTime;
-	}
-
 	public long getLastUsedTime() {
 		return lastUsedTime;
-	}
-
-	public void renewLastUsedTime() {
-		setLastUsedTime(System.currentTimeMillis());
 	}
 
 	public void setLastUsedTime(long lastUsedTime) {
