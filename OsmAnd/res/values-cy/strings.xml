@@ -1825,7 +1825,7 @@
     <string name="shared_string_currently_recording_track">Yn recordio trac ar hyn o bryd</string>
     <string name="shared_string_show_all">Dangos y cwbl</string>
     <string name="shared_string_my_location">Fy Lleoliad</string>
-    <string name="shared_string_my_places">Fy Llefydd</string>
+    <string name="shared_string_my_places">Fy llefydd</string>
     <string name="shared_string_show_on_map">Dangos ar y map</string>
     <string name="track_segments">Segmentau trac</string>
     <string name="route_points">Pwyntiau\'r llwybr</string>
@@ -4168,4 +4168,6 @@
     <string name="help_article_start_with_first_steps_name">Camau cyntaf</string>
     <string name="help_article_troubleshooting_track_recording_issues_name">Recordio traciau</string>
     <string name="ant_plus_searching">Wrthi\'n chwilio</string>
+    <string name="shared_string_weather">Tywydd</string>
+    <string name="maps_and_resources">Mapiau ac adnoddau</string>
 </resources>

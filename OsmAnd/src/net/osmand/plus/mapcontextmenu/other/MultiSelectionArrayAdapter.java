@@ -1,13 +1,10 @@
 package net.osmand.plus.mapcontextmenu.other;
 
-import static net.osmand.plus.utils.AndroidUtils.dpToPx;
-import static net.osmand.plus.utils.AndroidUtils.getActivityTypeStringPropertyName;
 import static net.osmand.plus.utils.ColorUtilities.getDividerColor;
 import static net.osmand.plus.utils.ColorUtilities.getListBgColorId;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryTextColor;
 import static net.osmand.plus.utils.ColorUtilities.getSecondaryTextColor;
 import static net.osmand.router.network.NetworkRouteSelector.RouteKey;
-import static net.osmand.util.Algorithms.capitalizeFirstLetterAndLowercase;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -100,7 +97,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 		line2.setText(getSecondLineText(item));
 		Drawable slIcon = item.getTypeIcon();
 		line2.setCompoundDrawablesWithIntrinsicBounds(slIcon, null, null, null);
-		line2.setCompoundDrawablePadding(dpToPx(context, 5f));
+		line2.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 5f));
 
 		// Divider
 		View divider = convertView.findViewById(R.id.divider);
@@ -127,8 +124,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MenuObject> {
 			Pair<?, ?> pair = (Pair<?, ?>) item.getObject();
 			if (pair.first instanceof RouteKey) {
 				RouteKey key = (RouteKey) pair.first;
-				String tag = key.type.getName();
-				String routeType = getActivityTypeStringPropertyName(item.getMyApplication(), tag, capitalizeFirstLetterAndLowercase(tag));
+				String routeType = AndroidUtils.getActivityTypeTitle(item.getMyApplication(), key.type);
 				line2Str.append(" - ").append(routeType);
 			}
 		}

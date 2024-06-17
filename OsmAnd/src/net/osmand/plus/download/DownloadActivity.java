@@ -75,6 +75,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String REGION_TO_SEARCH = "search_region";
 
 
+	private static final boolean SUGGEST_TO_DOWNLOAD_BASEMAP = false;
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP;
 
 	private OsmandApplication app;
@@ -387,13 +388,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 		if (downloadThread.getCurrentDownloadingItem() == null) {
 			return;
 		}
-		IndexItem worldMap = downloadThread.getIndexes().getWorldBaseMapItem();
-		// (!worldMap.isDownloaded() || worldMap.isOutdated()) - now suggest to download if downloaded 
-		if (!SUGGESTED_TO_DOWNLOAD_BASEMAP && worldMap != null && worldMap.isDownloaded()
-				&& worldMap.isOutdated() && !downloadThread.isDownloading(worldMap)) {
+		IndexItem item = downloadThread.getIndexes().getWorldBaseMapItem();
+		if (SUGGEST_TO_DOWNLOAD_BASEMAP && !SUGGESTED_TO_DOWNLOAD_BASEMAP && item != null
+				&& item.isDownloaded() && item.isOutdated() && !downloadThread.isDownloading(item)) {
 			SUGGESTED_TO_DOWNLOAD_BASEMAP = true;
+
 			AskMapDownloadFragment fragment = new AskMapDownloadFragment();
-			fragment.setIndexItem(worldMap);
+			fragment.setIndexItem(item);
 			fragment.show(getSupportFragmentManager(), AskMapDownloadFragment.TAG);
 		}
 	}

@@ -175,7 +175,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			return new HHNetworkRouteRes("Files for hh routing were not initialized. Route couldn't be calculated.");
 		}
 		filterPointsBasedOnConfiguration(hctx);
-		
+
 		TLongObjectHashMap<T> stPoints = new TLongObjectHashMap<>(), endPoints = new TLongObjectHashMap<>();
 		progress.hhIteration(HHIteration.START_END_POINT);
 		findFirstLastSegments(hctx, start, end, stPoints, endPoints, progress);
@@ -196,6 +196,10 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			printf((!recalc || DEBUG_VERBOSE_LEVEL > 0) && SL > 0, " Routing...");
 			long time = System.nanoTime();
 			NetworkDBPoint finalPnt = runRoutingPointsToPoints(hctx, stPoints, endPoints);
+			if (finalPnt == null) {
+				printf(SL > 0, " finalPnt is null (stop)\n");
+				return new HHNetworkRouteRes("No finalPnt found (points might be filtered by params)");
+			}
 			calcCount++;
 			if (progress.isCancelled) {
 				return cancelledStatus();
@@ -217,6 +221,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			hctx.stats.routingTime += time / 1e6;
 			if (recalc) {
 				if (calcCount > hctx.config.MAX_COUNT_REITERATION) {
+					printf(SL > 0, "Too many recalculations (stop)\n");
 					return new HHNetworkRouteRes("Too many recalculations (outdated maps or unsupported parameters).");
 				}
 				hctx.clearVisited(stPoints, endPoints);
@@ -271,7 +276,7 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		hctx.stats.prepTime += (System.nanoTime() - time) / 1e6;
 		printf(SL > 0, "%.2f ms\n", hctx.stats.prepTime);
 		printf(SL > 0, "Found final route - cost %.2f (detailed %.2f, %.1f%%), %d depth ( first met %,d, visited %,d (%,d unique) of %,d added vertices )", 
-				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / route.getHHRoutingTime()),
+				route.getHHRoutingTime(), route.getHHRoutingDetailed(), 100 * (1 - route.getHHRoutingDetailed() / (route.getHHRoutingTime() + 0.01)),
 				route.segments.size(), hctx.stats.firstRouteVisitedVertices, hctx.stats.visitedVertices, hctx.stats.uniqueVisitedVertices, hctx.stats.addedVertices);
 		hctx.stats.prepTime += altRoutes;
 		if (SL > 0) {
@@ -861,14 +866,17 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 			finitePnt.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, finitePnt));
 			finitePnt.setCostParentRt(reverse, plusCost, null, plusCost);
 			pnts.put(finitePnt.index, finitePnt);
-			
+
 			T dualPoint = (T) finitePnt.dualPoint;
 			dualPoint.setDistanceToEnd(reverse, hctx.distanceToEnd(reverse, dualPoint));
 			dualPoint.setCostParentRt(reverse, negCost, null, negCost);
 			pnts.put(dualPoint.index, dualPoint);
-			
+
 			return pnts;
 		}
+		int savedMaxVisited = hctx.rctx.config.MAX_VISITED;
+		int savedPlanRoadDirectrion = hctx.rctx.config.planRoadDirection;
+		float savedHeuristicCoefficient = hctx.rctx.config.heuristicCoefficient;
 		hctx.rctx.config.MAX_VISITED = MAX_POINTS_CLUSTER_ROUTING;
 		hctx.rctx.config.planRoadDirection = reverse ? -1 : 1;
 		hctx.rctx.config.heuristicCoefficient = 0; // dijkstra
@@ -877,7 +885,9 @@ public class HHRoutePlanner<T extends NetworkDBPoint> {
 		BinaryRoutePlanner planner = new BinaryRoutePlanner();
 		MultiFinalRouteSegment frs = (MultiFinalRouteSegment) planner.searchRouteInternal(hctx.rctx,
 				reverse ? null : s, reverse ? s : null, hctx.boundaries);
-		hctx.rctx.config.MAX_VISITED = -1;
+		hctx.rctx.config.heuristicCoefficient = savedHeuristicCoefficient;
+		hctx.rctx.config.planRoadDirection = savedPlanRoadDirectrion;
+		hctx.rctx.config.MAX_VISITED = savedMaxVisited;
 		if (HHRoutingConfig.STATS_VERBOSE_LEVEL > 0) {
 			System.out.println("  " + hctx.rctx.calculationProgress.getInfo(null));
 		}

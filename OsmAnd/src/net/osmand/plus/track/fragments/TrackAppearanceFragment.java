@@ -51,7 +51,6 @@ import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
@@ -430,11 +429,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				TrackColorController colorController = getColorCardController();
 				colorController.askSelectColoringStyle(trackDrawInfo.getColoringStyle());
 
-				IColorsPaletteController paletteController = colorController.getColorsPaletteController();
-				paletteController.selectColor(trackDrawInfo.getColor());
+				colorController.getColorsPaletteController().selectColor(trackDrawInfo.getColor());
 
-				WidthComponentController widthComponentController = getWidthCardController().getWidthComponentController();
-				widthComponentController.askSelectWidthMode(trackDrawInfo.getWidth());
+				WidthComponentController widthController = getWidthCardController().getWidthComponentController();
+				widthController.askSelectWidthMode(trackDrawInfo.getWidth());
 
 				applySplit(GpxSplitType.NO_SPLIT, 0, 0);
 				updateContent();
@@ -497,10 +495,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	private void updateAppearanceIcon() {
-		TrackColorController trackColorController = getColorCardController();
-		int color = trackColorController.getSelectedControlsColor();
-		Drawable icon = getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color);
-		trackIcon.setImageDrawable(icon);
+		int color = getColorCardController().getSelectedControlsColor();
+		trackIcon.setImageDrawable(getTrackIcon(app, trackDrawInfo.getWidth(), trackDrawInfo.isShowArrows(), color));
 	}
 
 	@Override

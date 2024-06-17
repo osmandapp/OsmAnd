@@ -50,7 +50,7 @@ public class CollectTracksTask extends AsyncTask<Void, Void, List<ImportTrackIte
 			if (!track.generalTrack) {
 				GPXFile trackFile = new GPXFile(Version.getFullVersion(app));
 				trackFile.tracks.add(track);
-				trackFile.setColor(gpxFile.getColor(0));
+				trackFile.setColor(track.getColor(gpxFile.getColor(0)));
 				trackFile.setWidth(gpxFile.getWidth(null));
 				trackFile.setShowArrows(gpxFile.isShowArrows());
 				trackFile.setShowStartFinish(gpxFile.isShowStartFinish());

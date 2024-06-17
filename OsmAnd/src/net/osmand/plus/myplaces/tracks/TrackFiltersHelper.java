@@ -6,6 +6,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.myplaces.tracks.filters.BaseTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.DateTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.FilterChangedListener;
+import net.osmand.plus.myplaces.tracks.filters.FolderTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.ListTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.OtherTrackFilter;
 import net.osmand.plus.myplaces.tracks.filters.RangeTrackFilter;
@@ -29,7 +30,9 @@ public class TrackFiltersHelper {
 	}
 
 	public static BaseTrackFilter createSingleListFilter(OsmandApplication app, TrackFilterType trackFilterType, FilterChangedListener listener) {
-		return new ListTrackFilter(app, trackFilterType, listener);
+		return trackFilterType == TrackFilterType.FOLDER
+				? new FolderTrackFilter(app, listener)
+				: new ListTrackFilter(app, trackFilterType, listener);
 	}
 
 	public static BaseTrackFilter createRangeFilter(OsmandApplication app, TrackFilterType trackFilterType, FilterChangedListener listener) {

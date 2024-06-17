@@ -32,7 +32,7 @@ public class GpxAppearanceInfo {
 
 	public String width;
 	public String coloringType;
-	public int color;
+	public Integer color;
 	public int splitType;
 	public double splitInterval;
 	public boolean showArrows;
@@ -59,7 +59,7 @@ public class GpxAppearanceInfo {
 
 	public GpxAppearanceInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		color = helper.requireParameter(item, COLOR);
+		color = helper.getParameter(item, COLOR);
 		width = helper.getParameter(item, WIDTH);
 		showArrows = helper.requireParameter(item, SHOW_ARROWS);
 		showStartFinish = helper.requireParameter(item, SHOW_START_FINISH);

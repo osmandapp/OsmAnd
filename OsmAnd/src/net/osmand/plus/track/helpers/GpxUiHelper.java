@@ -670,18 +670,18 @@ public class GpxUiHelper {
 
 	private static void addAppearanceToGpx(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile, @NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		gpxFile.setShowArrows(helper.getParameter(item, SHOW_ARROWS));
-		gpxFile.setShowStartFinish(helper.getParameter(item, SHOW_START_FINISH));
-		gpxFile.setSplitInterval(helper.getParameter(item, SPLIT_INTERVAL));
-		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.getParameter(item, SPLIT_TYPE)).getTypeName());
+		gpxFile.setShowArrows(helper.requireParameter(item, SHOW_ARROWS));
+		gpxFile.setShowStartFinish(helper.requireParameter(item, SHOW_START_FINISH));
+		gpxFile.setSplitInterval(helper.requireParameter(item, SPLIT_INTERVAL));
+		gpxFile.setSplitType(GpxSplitType.getSplitTypeByTypeId(helper.requireParameter(item, SPLIT_TYPE)).getTypeName());
 		gpxFile.set3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		gpxFile.set3DWallColoringType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		gpxFile.set3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
-		gpxFile.setAdditionalExaggeration(helper.getParameter(item, ADDITIONAL_EXAGGERATION));
-		gpxFile.setElevationMeters(helper.getParameter(item, ELEVATION_METERS));
+		gpxFile.setAdditionalExaggeration(((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue());
+		gpxFile.setElevationMeters(((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue());
 
-		int color = helper.getParameter(item, COLOR);
-		if (color != 0) {
+		Integer color = helper.getParameter(item, COLOR);
+		if (color != null) {
 			gpxFile.setColor(color);
 		}
 		String width = helper.getParameter(item, WIDTH);
