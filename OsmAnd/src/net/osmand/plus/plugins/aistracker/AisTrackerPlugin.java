@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.aistracker;
 
-//import static net.osmand.aidlapi.OsmAndCustomizationConstants.PLUGIN_AISTRACKER;
 import static net.osmand.plus.settings.fragments.SettingsScreenType.AIS_SETTINGS;
 
 import android.content.Context;
@@ -34,6 +33,11 @@ public class AisTrackerPlugin extends OsmandPlugin {
 
     public static final String COMPONENT = "net.osmand.aistrackerPlugin";
     public static final String AISTRACKER_ID = "osmand.aistracker";
+
+    public static final String AIS_NMEA_PROTOCOL_ID = "ais_nmea_protocol";
+    public static final String AIS_NMEA_IP_ADDRESS_ID = "ais_address_nmea_server";
+    public static final String AIS_NMEA_TCP_PORT_ID = "ais_port_nmea_server";
+    public static final String AIS_NMEA_UDP_PORT_ID = "ais_port_nmea_local";
     public final CommonPreference<Integer> AIS_NMEA_PROTOCOL;
     public static final int AIS_NMEA_PROTOCOL_UDP = 0;
     public static final int AIS_NMEA_PROTOCOL_TCP = 1;
@@ -47,10 +51,10 @@ public class AisTrackerPlugin extends OsmandPlugin {
     public AisTrackerPlugin(OsmandApplication app) {
         super(app);
         /* "ais_nmea_protocol" etc. is a reference to the content of ais_settings.xml */
-        AIS_NMEA_PROTOCOL = registerIntPreference("ais_nmea_protocol", AIS_NMEA_PROTOCOL_UDP);
-        AIS_NMEA_IP_ADDRESS = registerStringPreference("ais_address_nmea_server", AIS_NMEA_DEFAULT_IP);
-        AIS_NMEA_TCP_PORT = registerIntPreference("ais_port_nmea_server", AIS_NMEA_DEFAULT_TCP_PORT);
-        AIS_NMEA_UDP_PORT = registerIntPreference("ais_port_nmea_local", AIS_NMEA_DEFAULT_UDP_PORT);
+        AIS_NMEA_PROTOCOL = registerIntPreference(AIS_NMEA_PROTOCOL_ID, AIS_NMEA_PROTOCOL_UDP);
+        AIS_NMEA_IP_ADDRESS = registerStringPreference(AIS_NMEA_IP_ADDRESS_ID, AIS_NMEA_DEFAULT_IP);
+        AIS_NMEA_TCP_PORT = registerIntPreference(AIS_NMEA_TCP_PORT_ID, AIS_NMEA_DEFAULT_TCP_PORT);
+        AIS_NMEA_UDP_PORT = registerIntPreference(AIS_NMEA_UDP_PORT_ID, AIS_NMEA_DEFAULT_UDP_PORT);
 
         Log.d("AisTrackerPlugin", "constructor");
     }

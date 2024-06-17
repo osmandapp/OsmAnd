@@ -112,15 +112,17 @@ public class AisMessageListener {
         }
     }
     private void removeListeners() {
-        sentenceReader.stop();
-        while (!this.listenerList.isEmpty()) {
-            SentenceListener listener;
-            try {
-                listener = this.listenerList.pop();
-                sentenceReader.removeSentenceListener(listener);
-                Log.d("AisMessageListener", "SentenceListener removed");
-            } catch (EmptyStackException e) {
-                Log.e("AisMessageListener", "stack empty");
+        if (sentenceReader != null) {
+            sentenceReader.stop();
+            while (!this.listenerList.isEmpty()) {
+                SentenceListener listener;
+                try {
+                    listener = this.listenerList.pop();
+                    sentenceReader.removeSentenceListener(listener);
+                    Log.d("AisMessageListener", "SentenceListener removed");
+                } catch (EmptyStackException e) {
+                    Log.e("AisMessageListener", "stack empty");
+                }
             }
         }
     }
@@ -132,7 +134,7 @@ public class AisMessageListener {
         }
         removeListeners();
         if (tcpSocket != null) {
-            Log.d("AisMessageListener","stopListener");
+            Log.d("AisMessageListener","stopListener (TCP)");
             try {
                 if (tcpSocket.isConnected()) {
                     tcpSocket.close();
@@ -143,6 +145,7 @@ public class AisMessageListener {
             } catch (Exception ignore) { }
         }
         if (udpSocket != null) {
+            Log.d("AisMessageListener","stopListener (UDP)");
             if (udpSocket.isConnected()) {
                 udpSocket.disconnect();
             }

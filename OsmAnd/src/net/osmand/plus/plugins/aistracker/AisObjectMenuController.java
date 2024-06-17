@@ -124,7 +124,6 @@ public class AisObjectMenuController extends MenuController {
                         aisObject.getEtaMon() + ". " + String.format("%02d", aisObject.getEtaHour()) + ":" +
                         String.format("%02d", aisObject.getEtaMin()));
                 addMenuItem("ETA", eta);
-                // TODO add prepending "0", if needed
             }
         }
         if (lastUpdate > 60) {

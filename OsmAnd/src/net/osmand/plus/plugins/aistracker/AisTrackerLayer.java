@@ -55,7 +55,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         initTimer();
         startNetworkListener();
 
-        //initTestObjects();        // for test purposes:
+        initTestObjects();        // for test purposes:
     }
 
     private void initTestObjects() {
