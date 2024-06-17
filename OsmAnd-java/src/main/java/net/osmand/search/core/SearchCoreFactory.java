@@ -1117,7 +1117,8 @@ public class SearchCoreFactory {
 					Set<String> values = entry.getValue();
 					List<String> translation = new ArrayList<>();
 					for (String v : values) {
-						translation.add(types.getPoiTranslation(v));
+						String translate = getTopIndexTranslation(v);
+						translation.add(translate);
 					}
 					values.addAll(translation);
 				}
@@ -1138,13 +1139,8 @@ public class SearchCoreFactory {
 					if (match != null) {
 						SearchResult res = new SearchResult(phrase);
 						res.localeName = match.translatedValue;
-						res.object = new TopIndexFilter(match.subType, nm, types, match.value);
-						res.priorityDistance = 0;
-						res.objectType = ObjectType.POI_TYPE;
-						res.firstUnknownWordMatches = true;
-						phrase.countUnknownWordsMatchMainResult(res);
-						res.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-						resultMatcher.publish(res);
+						res.object = new TopIndexFilter(match.subType, types, match.value);
+						addPoiTypeResult(phrase, resultMatcher, false, null, res);
 					}
 				}
 			}
@@ -1155,11 +1151,10 @@ public class SearchCoreFactory {
 			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
 			for (PoiSubType subType : poiSubTypes) {
 				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
-				SearchResult res = new SearchResult(phrase);
 				String topIndexValue = null;
 				String translate = null;
 				for (String s : subType.possibleValues) {
-					translate = types.getPoiTranslation(s);
+					translate = getTopIndexTranslation(s);
 					if (nm.matches(s) || nm.matches(translate)) {
 						topIndexValue = s;
 						break;
@@ -1171,6 +1166,15 @@ public class SearchCoreFactory {
 				}
 			}
 			return null;
+		}
+
+		private String getTopIndexTranslation(String value) {
+			String key = TopIndexFilter.getValueKey(value);
+			String translate = types.getPoiTranslation(key);
+			if (translate.toLowerCase().equals(key)) {
+				translate = value;
+			}
+			return translate;
 		}
 	}
 

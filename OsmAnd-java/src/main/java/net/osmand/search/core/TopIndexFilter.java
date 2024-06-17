@@ -7,28 +7,22 @@ import net.osmand.osm.MapPoiTypes;
 public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalFilter {
 
 	private PoiSubType poiSubType;
-	private SearchPhrase.NameStringMatcher nameStringMatcher;
 	private MapPoiTypes types;
 	private String valueKey;
 	private String tag; // brand, operator, ...
-	private String translatedName;
-	
-	public TopIndexFilter(PoiSubType poiSubType, SearchPhrase.NameStringMatcher nameStringMatcher, MapPoiTypes types, String value) {
-		this.valueKey = value.toLowerCase().replace(':', '_').replaceAll("\'", "").replace(' ', '_').replaceAll("\"", "");
+	private String value;
+
+	public TopIndexFilter(PoiSubType poiSubType, MapPoiTypes types, String value) {
+		this.valueKey = getValueKey(value);
 		this.poiSubType = poiSubType;
-		this.nameStringMatcher = nameStringMatcher;
 		this.types = types;
+		this.value = value;
 		tag = poiSubType.name.replace(MapPoiTypes.TOP_INDEX_ADDITIONAL_PREFIX, "");
-		translatedName = types.getPoiTranslation(valueKey);
 	}
 
 	@Override
 	public boolean accept(PoiSubType poiSubType, String value) {
-		String translate = types.getPoiTranslation(value);
-		if (this.poiSubType.name.equals(poiSubType.name)) {
-			return nameStringMatcher.matches(value) || nameStringMatcher.matches(translate);
-		}
-		return false;
+		return this.poiSubType.name.equals(poiSubType.name) && this.value.equals(value);
 	}
 	
 	public String getTag() {
@@ -37,12 +31,17 @@ public class TopIndexFilter implements BinaryMapIndexReader.SearchPoiAdditionalF
 
 	@Override
 	public String getName() {
-		return translatedName;
+		// type of object: brand, operator
+		return types.getPoiTranslation(tag);
 	}
 
 	@Override
 	public String getIconResource() {
 		//Example: mcdonalds, bank_of_america
 		return valueKey;
+	}
+
+	public static String getValueKey(String value) {
+		return value.toLowerCase().replace(':', '_').replaceAll("\'", "").replace(' ', '_').replaceAll("\"", "");
 	}
 }

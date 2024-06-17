@@ -211,7 +211,7 @@ public class QuickSearchListItem {
 					res = ((CustomSearchPoiFilter) searchResult.object).getName();
 				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
 					String name = ((SearchPoiAdditionalFilter) searchResult.object).getName();
-					res = app.getPoiTypes().getPoiTranslation(name);
+					res = name;
 				}
 				return res;
 			case POI:
