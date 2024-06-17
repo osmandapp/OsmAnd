@@ -107,6 +107,11 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return result;
 	}
 
+	public void onIgnoreMissingMapsButtonClicked() {
+		app.getSettings().IGNORE_MISSING_MAPS = true;
+		app.getRoutingHelper().onSettingsChanged(true);
+	}
+
 	public void onCalculateOnlineButtonClicked() {
 		onlineCalculationRequested = true;
 		loadingMapsInProgress = true;
