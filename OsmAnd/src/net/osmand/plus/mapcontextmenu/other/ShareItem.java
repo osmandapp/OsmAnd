@@ -15,7 +15,7 @@ public enum ShareItem {
 	CLIPBOARD(R.drawable.ic_action_copy, R.string.shared_string_copy),
 	ADDRESS(R.drawable.ic_action_street_name, R.string.copy_address),
 	NAME(R.drawable.ic_action_copy, R.string.copy_poi_name),
-	COORDINATES(R.drawable.ic_action_copy, R.string.copy_coordinates),
+	COORDINATES(R.drawable.ic_action_coordinates_location, R.string.copy_coordinates),
 	GEO(R.drawable.ic_world_globe_dark, R.string.share_geo);
 
 	@DrawableRes
@@ -40,6 +40,6 @@ public enum ShareItem {
 
 	@NonNull
 	public static List<ShareItem> getNativeShareItems() {
-		return Arrays.asList(CLIPBOARD, ADDRESS, NAME, COORDINATES, GEO);
+		return Arrays.asList(ADDRESS, NAME, COORDINATES, GEO);
 	}
 }

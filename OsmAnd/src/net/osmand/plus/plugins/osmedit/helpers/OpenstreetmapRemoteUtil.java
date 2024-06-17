@@ -35,6 +35,7 @@ import net.osmand.plus.plugins.osmedit.OsmEditingPlugin;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint;
 import net.osmand.plus.plugins.osmedit.data.OsmPoint.Action;
 import net.osmand.plus.plugins.osmedit.oauth.OsmOAuthAuthorizationAdapter;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -152,7 +153,8 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 	private String performBasicAuthRequest(String url, String requestMethod, String requestBody, String userOperation) throws IOException {
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		connection.setConnectTimeout(15000);
+		connection.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
+		connection.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 		StringBuilder responseBody = new StringBuilder();

@@ -209,6 +209,7 @@
         <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_light</item>
         <item name="wikivoyage_secondary_btn_bg">@drawable/wikivoyage_secondary_btn_bg_light</item>
         <item name="wikivoyage_primary_btn_bg">@drawable/wikivoyage_primary_btn_bg_light</item>
+        <item name="bg_keybinding">@drawable/bg_keybinding_light</item>
         <item name="bg_keycode_cursor">@drawable/bg_keycode_cursor_light</item>
         <item name="bg_keycode_content">@drawable/bg_keycode_content_light</item>
         <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_light</item>

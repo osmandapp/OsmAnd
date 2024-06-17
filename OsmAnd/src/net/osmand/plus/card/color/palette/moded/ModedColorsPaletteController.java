@@ -71,7 +71,7 @@ public abstract class ModedColorsPaletteController extends ColorsPaletteControll
 			}
 		}
 		addPaletteColor(paletteColors, selectedPaletteMode);
-		colorsCollection.renewLastUsedTime(paletteColors);
+		collection.renewLastUsedTime(paletteColors);
 	}
 
 	private void addPaletteColor(@NonNull List<PaletteColor> paletteColors, @NonNull PaletteMode paletteMode) {

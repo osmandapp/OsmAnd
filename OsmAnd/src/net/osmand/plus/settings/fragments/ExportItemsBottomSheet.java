@@ -33,6 +33,7 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SimpleDividerItem;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.avoidroads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorsPaletteUtils;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapmarkers.ItineraryType;
@@ -429,6 +430,10 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			item.setDescription(AndroidUtils.formatSize(app, file.length()));
 		} else if (fileSubtype == FileSubtype.FAVORITES_BACKUP) {
 			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_folder_favorites, getItemIconColor(item.getTag())));
+		} else if (fileSubtype == FileSubtype.COLOR_PALETTE) {
+			item.setTitle(ColorsPaletteUtils.getPaletteName(file));
+			item.setDescription(ColorsPaletteUtils.getPaletteTypeName(app, file));
+			item.setIcon(uiUtilities.getIcon(R.drawable.ic_action_file_color_palette, getItemIconColor(item.getTag())));
 		} else if (fileSubtype.isMap()
 				|| fileSubtype == FileSettingsItem.FileSubtype.TTS_VOICE
 				|| fileSubtype == FileSettingsItem.FileSubtype.VOICE) {

@@ -10,16 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.GPXExtensionsReader;
-import net.osmand.gpx.GPXUtilities.GPXExtensionsWriter;
-import net.osmand.gpx.GPXFile;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.gpx.GPXFile;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.GPXExtensionsReader;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.plus.utils.FileUtils;
@@ -30,7 +29,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -189,24 +187,21 @@ public class ItineraryDataHelper {
 	}
 
 	private void assignExtensionWriter(GPXFile gpxFile, Collection<ItineraryGroupInfo> groups) {
-		if (gpxFile.getExtensionsWriter() == null) {
-			gpxFile.setExtensionsWriter(new GPXExtensionsWriter() {
-				@Override
-				public void writeExtensions(XmlSerializer serializer) {
-					for (ItineraryGroupInfo group : groups) {
-						try {
-							serializer.startTag(null, "osmand:" + ITINERARY_GROUP);
+		if (gpxFile.getExtensionsWriter("itinerary") == null) {
+			gpxFile.setExtensionsWriter("itinerary", serializer -> {
+				for (ItineraryGroupInfo group : groups) {
+					try {
+						serializer.startTag(null, "osmand:" + ITINERARY_GROUP);
 
-							writeNotNullText(serializer, "osmand:name", group.name);
-							writeNotNullText(serializer, "osmand:type", group.type);
-							writeNotNullText(serializer, "osmand:path", group.path);
-							writeNotNullText(serializer, "osmand:alias", group.alias);
-							writeNotNullText(serializer, "osmand:categories", group.categories);
+						writeNotNullText(serializer, "osmand:name", group.name);
+						writeNotNullText(serializer, "osmand:type", group.type);
+						writeNotNullText(serializer, "osmand:path", group.path);
+						writeNotNullText(serializer, "osmand:alias", group.alias);
+						writeNotNullText(serializer, "osmand:categories", group.categories);
 
-							serializer.endTag(null, "osmand:" + ITINERARY_GROUP);
-						} catch (IOException e) {
-							log.error(e);
-						}
+						serializer.endTag(null, "osmand:" + ITINERARY_GROUP);
+					} catch (IOException e) {
+						log.error(e);
 					}
 				}
 			});

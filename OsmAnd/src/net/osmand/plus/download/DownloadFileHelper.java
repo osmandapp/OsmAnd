@@ -10,6 +10,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.download.IndexItem.DownloadEntry;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.utils.AndroidNetworkUtils;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.util.Algorithms;
 
@@ -76,12 +77,12 @@ public class DownloadFileHelper {
 						}
 						HttpURLConnection conn = NetworkUtils.getHttpURLConnection(url);
 						conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
-						conn.setReadTimeout(30000);
+						conn.setReadTimeout(AndroidNetworkUtils.READ_TIMEOUT);
 						if (fileread > 0) {
 							String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
 							conn.setRequestProperty("Range", range);  //$NON-NLS-1$
 						}
-						conn.setConnectTimeout(30000);
+						conn.setConnectTimeout(AndroidNetworkUtils.CONNECT_TIMEOUT);
 						log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
 						boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
 						if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){

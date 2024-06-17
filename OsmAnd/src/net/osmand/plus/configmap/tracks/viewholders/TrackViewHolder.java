@@ -194,15 +194,12 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
 
 	private void setupIcon(@NonNull GpxDataItem item) {
 		GpxAppearanceHelper helper = new GpxAppearanceHelper(app);
-		setupIcon(helper.getParameter(item, COLOR), helper.getParameter(item, WIDTH), helper.getParameter(item, SHOW_ARROWS));
+		setupIcon(helper.getParameter(item, COLOR), helper.getParameter(item, WIDTH), helper.requireParameter(item, SHOW_ARROWS));
 	}
 
-	private void setupIcon(int color, String width, boolean showArrows) {
-		int trackColor = color;
-		if (trackColor == 0) {
-			trackColor = GpxAppearanceAdapter.getTrackColor(app);
-		}
-		imageView.setImageDrawable(getTrackIcon(app, width, showArrows, trackColor));
+	private void setupIcon(Integer color, String width, boolean showArrows) {
+		color = color != null ? color : GpxAppearanceAdapter.getTrackColor(app);
+		imageView.setImageDrawable(getTrackIcon(app, width, showArrows, color));
 	}
 
 	private void appendNameDescription(@NonNull SpannableStringBuilder builder, @NonNull TrackItem trackItem,

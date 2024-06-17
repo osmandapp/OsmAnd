@@ -22,13 +22,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
-import net.osmand.plus.views.mapwidgets.configure.buttons.QuickActionButtonState;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
-
-import java.util.List;
-import java.util.Map;
 
 public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener, CreateEditActionDialog.AddQuickActionListener {
 
@@ -45,8 +42,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	private TextView title;
 	private ImageView searchButton;
 
-	private MapButtonsHelper mapButtonsHelper;
-	private QuickActionButtonState buttonState;
+	private AddQuickActionController controller;
 	private boolean searchMode = false;
 
 	public boolean getContentStatusBarNightMode() {
@@ -62,15 +58,15 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mapButtonsHelper = app.getMapButtonsHelper();
 
-		Bundle args = getArguments();
-		String key = args != null ? args.getString(QUICK_ACTION_BUTTON_KEY) : null;
-		if (key != null) {
-			buttonState = mapButtonsHelper.getButtonStateById(key);
-		}
-		if (savedInstanceState != null) {
-			searchMode = savedInstanceState.getBoolean(QUICK_ACTION_SEARCH_MODE_KEY, false);
+		controller = AddQuickActionController.getExistedInstance(app);
+		if (controller == null) {
+			closeFragment();
+		} else {
+			controller.registerDialog(TAG);
+			if (savedInstanceState != null) {
+				searchMode = savedInstanceState.getBoolean(QUICK_ACTION_SEARCH_MODE_KEY, false);
+			}
 		}
 	}
 
@@ -150,7 +146,7 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 	private void setupContent(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		adapter = new AddQuickActionsAdapter(app, requireActivity(), this, nightMode);
-		adapter.setMap(getAdapterItems());
+		adapter.setMap(controller.getAdapterItems());
 		RecyclerView recyclerView = view.findViewById(R.id.content_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(app));
 		recyclerView.setAdapter(adapter);
@@ -164,11 +160,6 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 
 	private void updateAdapter() {
 		adapter.setSearchMode(searchMode);
-	}
-
-	@NonNull
-	private Map<QuickActionType, List<QuickActionType>> getAdapterItems() {
-		return mapButtonsHelper.produceTypeActionsListWithHeaders(buttonState);
 	}
 
 	private void onBackPressed() {
@@ -190,24 +181,19 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	}
 
 	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		FragmentActivity activity = getActivity();
+		if (activity != null && !activity.isChangingConfigurations()) {
+			controller.unregisterDialog(TAG);
+		}
+	}
+
+	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(QUICK_ACTION_SEARCH_KEY, adapter.getSearchQuery());
 		outState.putBoolean(QUICK_ACTION_SEARCH_MODE_KEY, searchMode);
 		super.onSaveInstanceState(outState);
-	}
-
-	public static void showInstance(@NonNull FragmentManager manager, @NonNull QuickActionButtonState buttonState) {
-		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
-			Bundle bundle = new Bundle();
-			bundle.putString(QUICK_ACTION_BUTTON_KEY, buttonState.getId());
-
-			AddQuickActionFragment fragment = new AddQuickActionFragment();
-			fragment.setArguments(bundle);
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		}
 	}
 
 	@Override
@@ -216,9 +202,9 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 		if (activity != null) {
 			FragmentManager manager = activity.getSupportFragmentManager();
 			if (quickActionType.getId() != 0) {
-				CreateEditActionDialog.showInstance(manager, buttonState, quickActionType.getId());
+				CreateEditActionDialog.showInstance(manager, quickActionType.getId());
 			} else {
-				AddCategoryQuickActionFragment.showInstance(manager, buttonState, quickActionType.getCategory());
+				AddCategoryQuickActionFragment.showInstance(manager, quickActionType.getCategory());
 			}
 		}
 	}
@@ -226,6 +212,16 @@ public class AddQuickActionFragment extends BaseOsmAndFragment implements AddQui
 	@Override
 	public void onQuickActionAdded() {
 		closeFragment();
+	}
+
+	public static void showInstance(@NonNull FragmentManager manager) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			AddQuickActionFragment fragment = new AddQuickActionFragment();
+			manager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }
 

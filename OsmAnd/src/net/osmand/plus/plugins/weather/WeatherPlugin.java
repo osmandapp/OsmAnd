@@ -550,6 +550,17 @@ public class WeatherPlugin extends OsmandPlugin {
 		updateLayersDate();
 	}
 
+	public void prepareForDayAnimation(@NonNull Date date) {
+		forecastDate = date;
+		long time = forecastDate.getTime();
+		if (weatherLayerLow != null) {
+			weatherLayerLow.prepareForDayAnimation(time);
+		}
+		if (weatherLayerHigh != null) {
+			weatherLayerHigh.prepareForDayAnimation(time);
+		}
+	}
+
 	private void updateLayersDate() {
 		long time = forecastDate != null ? forecastDate.getTime() : System.currentTimeMillis();
 		if (weatherLayerLow != null) {
