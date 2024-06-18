@@ -5702,7 +5702,7 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="getting_list_of_required_maps">Henter en liste over nødvendige kort…</string>
     <string name="required_maps_calculate_online_summary">Listen over manglende kort er baseret på ruten i lige linje. For at få en nøjagtig liste over kort kan OsmAnd forudberegne din rute online.</string>
-    <string name="maps_that_also_be_used">Kort, der også kan bruges: %1$s</string>
+    <string name="maps_that_also_be_used">Kort, der også vil blive brugt: %1$s</string>
     <string name="route_line_use_coloring_speed">Rutelinjen er farvet efter bevægelseshastighed.</string>
     <string name="route_line_use_coloring_altitude">Rutelinjen er farvet efter højde over havet.</string>
     <string name="required_maps">Nødvendige kort</string>

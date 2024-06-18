@@ -5516,7 +5516,7 @@
     <string name="shared_string_delete_item">Obriši stavku</string>
     <string name="delete_smart_folder_dialog_message">Ovo će ukloniti pametan folder \"%1$s\". (Nijedna putanja neće biti izbrisana.)</string>
     <string name="smart_folder_name_present">Takva pametan folder već je prisutan</string>
-    <string name="empty_name">Prazan naziv</string>
+    <string name="empty_name">Prazno ime</string>
     <string name="loading_tracks">Ponovno učitavanje staza</string>
     <string name="filter_by_name">Filtriranje po nazivu</string>
     <string name="shared_string_reset_all">Resetuj sve</string>
@@ -5623,9 +5623,9 @@
     <string name="error_calculate">Rezultat kalkulacije je prazan</string>
     <string name="special_routing_cpp">Specijalni tip rutiranja</string>
     <string name="add_button">Dodaj dugme</string>
-    <string name="custom_buttons">Sopstveno dugme</string>
-    <string name="default_buttons">Zadano dugme</string>
-    <string name="custom_map_button_name_present">Takvo dugme već postoji</string>
+    <string name="custom_buttons">Prilagođena dugmad</string>
+    <string name="default_buttons">Podrazumevana dugmad</string>
+    <string name="custom_map_button_name_present">Takavo dugme već postoji</string>
     <string name="shared_string_limit">Ograničenje</string>
     <string name="when_exceeded">Kad se prekorači</string>
     <string name="speedometer_description">Prikazuje trenutnu brzinu kako je prijavljena putem GPS-a</string>
@@ -5701,7 +5701,7 @@
     <string name="use_terrain_maps_summary">Koriste se mape terena za podatke o nadmorskoj visini. Geometrija putanje ostaje nepromenjena.</string>
     <string name="use_nearby_roads_summary">Koristi se vanmrežna mapa radi pronalaženja obližnjih puteva i podataka o nadmorskoj visini. Može prilagoditi geometriju putanje.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd može da preuzme podatke o nadmorskoj visini sa obližnjih puteva ili mapa terena.</string>
-    <string name="maps_that_also_be_used">Mape koje se takođe koriste: %1$s</string>
+    <string name="maps_that_also_be_used">Mape koje će se takođe koristiti: %1$s</string>
     <string name="getting_list_of_required_maps">Preuzima se lista potrebnih mapa…</string>
     <string name="required_maps_calculate_online_summary">Lista mapa koje nedostaju zasniva se na pravolinijskoj ruti. Da biste dobili tačnu listu mapa, OsmAnd može unapred da izračuna vašu rutu na mreži.</string>
     <string name="required_maps">Potrebne Mape</string>
@@ -5754,4 +5754,5 @@
     <string name="shared_string_colors">Boje</string>
     <string name="backup_error_failed_to_transfer_file">Prenos datoteke/a u Cloud nije uspelo.</string>
     <string name="contact_support_retry">Pokušaj ponovo ili kontaktiraj podršku</string>
+    <string name="missing_maps_ignore">Koristi postojeće mape</string>
 </resources>
