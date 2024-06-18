@@ -38,6 +38,14 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	private boolean verticalWidget;
 	private boolean isFullRow;
 	private MapInfoLayer.TextState textState;
+	private int customLayoutId;
+
+	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @LayoutRes int customLayoutId) {
+		super(mapActivity, widgetType);
+		widgetState = new SimpleWidgetState(app, customId, widgetType);
+		this.customLayoutId = customLayoutId;
+		setupViews();
+	}
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
@@ -52,7 +60,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 
-		int layoutId = verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		int layoutId = customLayoutId != 0 ? customLayoutId : verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
@@ -259,7 +267,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	@Override
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		this.textState = textState;
-		if (verticalWidget) {
+		if (verticalWidget || customLayoutId != 0) {
 			nightMode = textState.night;
 			textView.setTextColor(textState.textColor);
 			smallTextView.setTextColor(textState.secondaryTextColor);

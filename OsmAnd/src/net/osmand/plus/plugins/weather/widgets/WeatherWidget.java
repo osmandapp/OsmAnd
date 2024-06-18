@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -50,11 +51,11 @@ public class WeatherWidget extends SimpleWidget {
 		forecastNamingFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private final WeatherHelper weatherHelper;
-	private final IObtainValueAsyncCallback callback;
-	private final WeatherBand weatherBand;
-	private final short band;
-	private final int hideOldDataMessageId;
+	private  WeatherHelper weatherHelper;
+	private  IObtainValueAsyncCallback callback;
+	private  WeatherBand weatherBand;
+	private short band;
+	private int hideOldDataMessageId;
 
 	private PointI lastPotition31;
 	private ZoomLevel lastZoom;
@@ -65,8 +66,17 @@ public class WeatherWidget extends SimpleWidget {
 	private PointI lastDisplayedForecastPoint31;
 	private long lastDisplayedForecastTime;
 
+	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band, @LayoutRes int customLayoutId) {
+		super(mapActivity, widgetType, customId, customLayoutId);
+		init(widgetType, band);
+	}
+
 	public WeatherWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, short band) {
 		super(mapActivity, widgetType, customId, null);
+		init(widgetType, band);
+	}
+
+	private void init(@NonNull WidgetType widgetType, short band) {
 		this.band = band;
 		this.hideOldDataMessageId = OsmAndConstants.UI_HANDLER_WEATHER_WIDGET + band;
 		this.weatherHelper = app.getWeatherHelper();

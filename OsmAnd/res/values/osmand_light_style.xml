@@ -115,6 +115,7 @@
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
         <item name="activity_background_color">@color/activity_background_color_light</item>
         <item name="list_background_color">@color/list_background_color_light</item>
+        <item name="icon_color_primary">@color/icon_color_primary_light</item>
         <item name="widget_background_color">@color/widget_background_color_light</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
@@ -290,6 +291,7 @@
         <item name="icon_color_active">@color/icon_color_active_light</item>
         <item name="toolbar_active_color">@color/app_bar_active_light</item>
         <item name="status_bar_active_color">@color/status_bar_selection_color_light</item>
+        <item name="active_color_secondary">@color/active_color_secondary_light</item>
     </style>
 
 </resources>

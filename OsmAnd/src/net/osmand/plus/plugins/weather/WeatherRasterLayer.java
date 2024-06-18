@@ -166,7 +166,7 @@ public class WeatherRasterLayer extends BaseMapLayer {
 		BandIndexList bands = new BandIndexList();
 		for (WeatherBand weatherBand : enabledBandsCached) {
 			short bandIndex = weatherBand.getBandIndex();
-			if (bandIndex != WeatherBand.WEATHER_BAND_UNDEFINED) {
+			if (bandIndex != WeatherBand.WEATHER_BAND_NOTHING) {
 				bands.add(bandIndex);
 			}
 		}

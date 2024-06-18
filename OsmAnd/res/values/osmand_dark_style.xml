@@ -91,6 +91,7 @@
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
         <item name="activity_background_color">@color/activity_background_color_dark</item>
         <item name="list_background_color">@color/list_background_color_dark</item>
+        <item name="icon_color_primary">@color/icon_color_primary_dark</item>
         <item name="widget_background_color">@color/widget_background_color_dark</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
@@ -257,5 +258,6 @@
         <item name="icon_color_active">@color/icon_color_active_dark</item>
         <item name="toolbar_active_color">@color/app_bar_active_dark</item>
         <item name="status_bar_active_color">@color/status_bar_selection_color_dark</item>
+        <item name="active_color_secondary">@color/active_color_secondary_dark</item>
     </style>
 </resources>

@@ -1,6 +1,5 @@
 package net.osmand.plus.plugins.weather.widgets;
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetInfo.DELIMITER;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_AIR_PRESSURE_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_CLOUDS_WIDGET;
 import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_PRECIPITATION_WIDGET;
@@ -10,30 +9,33 @@ import static net.osmand.plus.views.mapwidgets.WidgetType.WEATHER_WIND_WIDGET;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.plugins.weather.WeatherPlugin;
-import net.osmand.plus.views.controls.SideWidgetsPanel;
-import net.osmand.plus.views.controls.WidgetsPagerAdapter;
+import net.osmand.plus.utils.ColorUtilities;
+import net.osmand.plus.utils.UiUtilities;
+import net.osmand.plus.views.controls.WidgetsContainer;
 import net.osmand.plus.views.controls.WidgetsPagerAdapter.VisiblePages;
 import net.osmand.plus.views.layers.MapInfoLayer.TextState;
 import net.osmand.plus.views.layers.base.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.WidgetType;
-import net.osmand.plus.views.mapwidgets.WidgetsPanel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-public class WeatherWidgetsPanel extends SideWidgetsPanel {
+public class WeatherWidgetsPanel extends LinearLayout implements WidgetsContainer {
 	private final static String WIDGET_ID = WeatherWidgetsPanel.class.getName();
 	private final WeatherPlugin plugin;
 	private final List<WeatherWidget> weatherWidgets = new ArrayList<>();
+	public boolean isNightMode;
 
 	private VisiblePages visiblePages;
 
@@ -54,22 +56,34 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 		plugin = PluginsHelper.getPlugin(WeatherPlugin.class);
 	}
 
-	public void setupWidgets(@NonNull MapActivity activity) {
+	public void setupWidgets(@NonNull MapActivity activity, boolean isNightMode) {
+		removeAllViews();
 		createWidgets(activity);
-
-		List<View> views = new ArrayList<>(weatherWidgets.size());
 		for (WeatherWidget widget : weatherWidgets) {
-			views.add(widget.getView());
+			View view = widget.getView();
+			LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+					0,
+					LayoutParams.MATCH_PARENT,
+					1.0f
+			);
+			view.setLayoutParams(param);
+			addView(view);
+			View divider = UiUtilities.getInflater(activity, isNightMode).inflate(R.layout.vertical_divider, null);
+			LinearLayout.LayoutParams dividerParam = new LinearLayout.LayoutParams(
+					1,
+					LayoutParams.MATCH_PARENT
+			);
+			divider.setLayoutParams(dividerParam);
+			addView(divider);
 		}
-		visiblePages = new VisiblePages(views);
 	}
 
 	private void createWidgets(@NonNull MapActivity activity) {
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_TEMPERATURE_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_AIR_PRESSURE_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_WIND_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_WIND_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_PRECIPITATION_WIDGET), null));
-		weatherWidgets.add(plugin.createMapWidgetForParams(activity, WEATHER_CLOUDS_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_CLOUDS_WIDGET), null));
+		weatherWidgets.add(plugin.createCustomLayoutWidgetForParams(activity, WEATHER_TEMPERATURE_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_TEMPERATURE_WIDGET), R.layout.widget_custom_vertical));
+		weatherWidgets.add(plugin.createCustomLayoutWidgetForParams(activity, WEATHER_AIR_PRESSURE_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_AIR_PRESSURE_WIDGET), R.layout.widget_custom_vertical));
+		weatherWidgets.add(plugin.createCustomLayoutWidgetForParams(activity, WEATHER_WIND_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_WIND_WIDGET), R.layout.widget_custom_vertical));
+		weatherWidgets.add(plugin.createCustomLayoutWidgetForParams(activity, WEATHER_PRECIPITATION_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_PRECIPITATION_WIDGET), R.layout.widget_custom_vertical));
+		weatherWidgets.add(plugin.createCustomLayoutWidgetForParams(activity, WEATHER_CLOUDS_WIDGET, WidgetType.getDuplicateWidgetId(WEATHER_CLOUDS_WIDGET), R.layout.widget_custom_vertical));
 	}
 
 	public void setSelectedDate(@Nullable Date date) {
@@ -80,8 +94,6 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 
 	@Override
 	public void update(DrawSettings drawSettings) {
-		super.update(drawSettings);
-
 		for (WeatherWidget widget : weatherWidgets) {
 			widget.updateInfo(drawSettings);
 		}
@@ -89,21 +101,13 @@ public class WeatherWidgetsPanel extends SideWidgetsPanel {
 
 	@Override
 	public void updateColors(@NonNull TextState textState) {
-		super.updateColors(textState);
-
 		for (WeatherWidget widget : weatherWidgets) {
+			View widgetView = widget.getView();
+			textState.night = isNightMode;
 			widget.updateColors(textState);
+			widgetView.findViewById(R.id.widget_bg).setBackgroundResource(isNightMode ? R.color.list_background_color_dark : R.color.widget_background_color_light);
+			((TextView) widgetView.findViewById(R.id.widget_text)).setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), isNightMode));
+			((TextView) widgetView.findViewById(R.id.widget_text_small)).setTextColor(ColorUtilities.getSecondaryTextColor(getContext(), isNightMode));
 		}
-	}
-
-	@Override
-	protected WidgetsPagerAdapter createPagerAdapter() {
-		return new WidgetsPagerAdapter(getMyApplication(), rightSide ? WidgetsPanel.RIGHT : WidgetsPanel.LEFT) {
-			@NonNull
-			@Override
-			public VisiblePages collectVisiblePages() {
-				return visiblePages != null ? visiblePages : new VisiblePages(Collections.emptyMap());
-			}
-		};
 	}
 }

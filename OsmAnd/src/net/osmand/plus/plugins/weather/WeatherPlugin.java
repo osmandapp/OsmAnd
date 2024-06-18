@@ -8,10 +8,11 @@ import static net.osmand.plus.AppInitEvents.NATIVE_OPEN_GL_INITIALIZED;
 import static net.osmand.plus.chooseplan.OsmAndFeature.WEATHER;
 import static net.osmand.plus.download.DownloadActivityType.WEATHER_FORECAST;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_NOTHING;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_ANIMATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_CLOUD_CONTOURS_LINES_ATTR;
 import static net.osmand.plus.plugins.weather.WeatherSettings.WEATHER_PRECIPITATION_CONTOURS_LINES_ATTR;
@@ -30,6 +31,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -108,7 +110,7 @@ public class WeatherPlugin extends OsmandPlugin {
 	private Date forecastDate;
 
 	@WeatherBandType
-	private short currentConfigureBand = WEATHER_BAND_UNDEFINED;
+	private short currentConfigureBand = WEATHER_BAND_NOTHING;
 
 	public WeatherPlugin(@NonNull OsmandApplication app) {
 		super(app);
@@ -279,6 +281,22 @@ public class WeatherPlugin extends OsmandPlugin {
 				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_CLOUD);
 			case WEATHER_AIR_PRESSURE_WIDGET:
 				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRESSURE);
+		}
+		return null;
+	}
+
+	public WeatherWidget createCustomLayoutWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @LayoutRes int customLayoutId) {
+		switch (widgetType) {
+			case WEATHER_TEMPERATURE_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_TEMPERATURE, customLayoutId);
+			case WEATHER_PRECIPITATION_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRECIPITATION, customLayoutId);
+			case WEATHER_WIND_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_WIND_SPEED, customLayoutId);
+			case WEATHER_CLOUDS_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_CLOUD, customLayoutId);
+			case WEATHER_AIR_PRESSURE_WIDGET:
+				return new WeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRESSURE, customLayoutId);
 		}
 		return null;
 	}
