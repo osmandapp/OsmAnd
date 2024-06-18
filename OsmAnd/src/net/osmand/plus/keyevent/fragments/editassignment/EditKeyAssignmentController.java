@@ -188,13 +188,13 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 
 	public void askRemoveAssignment(@NonNull FragmentActivity activity) {
 		AlertDialogData dialogData = new AlertDialogData(activity, isNightMode())
-				.setTitle(R.string.clear_key_assignment)
+				.setTitle(R.string.remove_key_assignment)
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.setPositiveButton(R.string.shared_string_remove, (dialog, which) -> {
 					deviceHelper.removeKeyAssignmentCompletely(appMode, deviceId, assignmentId);
 					askDismissDialog();
 				});
-		CustomAlert.showSimpleMessage(dialogData, R.string.clear_key_assignment_desc);
+		CustomAlert.showSimpleMessage(dialogData, R.string.remove_key_assignment_summary);
 	}
 
 	@Nullable
@@ -232,14 +232,25 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	}
 
 	public void askAddKeyCode(@NonNull FragmentActivity activity) {
+		showKeyCodeSelectionScreen(activity, KeyEvent.KEYCODE_UNKNOWN);
+	}
+
+	public void askChangeKeyCode(@NonNull FragmentActivity activity, int keyCode) {
+		showKeyCodeSelectionScreen(activity, keyCode);
+	}
+
+	private void showKeyCodeSelectionScreen(@NonNull FragmentActivity activity, int keyCode) {
 		SelectKeyCodeFragment.showInstance(
 				activity.getSupportFragmentManager(),
-				appMode, deviceId, assignmentId, KeyEvent.KEYCODE_UNKNOWN);
+				appMode, deviceId, assignmentId, keyCode);
 	}
 
 	@Override
 	public void onKeyCodeSelected(@Nullable Integer oldKeyCode, @NonNull Integer newKeyCode) {
 		if (editBundle != null) {
+			if (oldKeyCode != null) {
+				editBundle.keyCodes.remove(oldKeyCode);
+			}
 			editBundle.keyCodes.add(newKeyCode);
 		}
 		askRefreshDialog();

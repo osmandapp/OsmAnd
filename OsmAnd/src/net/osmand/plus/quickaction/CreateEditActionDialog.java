@@ -21,7 +21,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -29,6 +28,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.plugins.osmedit.quickactions.AddPOIAction;
 import net.osmand.plus.quickaction.ConfirmationBottomSheet.OnConfirmButtonClickListener;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
@@ -44,7 +44,8 @@ import java.util.List;
  * Created by rosty on 12/27/16.
  */
 
-public class CreateEditActionDialog extends DialogFragment implements CallbackWithObject<Object>, OnConfirmButtonClickListener {
+public class CreateEditActionDialog extends DialogFragment
+		implements CallbackWithObject<Object>, OnConfirmButtonClickListener, IAskDismissDialog {
 
 	public static final String TAG = CreateEditActionDialog.class.getSimpleName();
 
@@ -72,7 +73,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		if (controller == null) {
 			dismiss();
 		} else {
-			controller.registerDialog(TAG);
+			controller.registerDialog(TAG, this);
 			nightMode = !settings.isLightContent() || app.getDaynightHelper().isNightMode();
 			setStyle(DialogFragment.STYLE_NORMAL, nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme);
 
@@ -184,8 +185,7 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 						showDuplicatedDialog();
 						((EditText) root.findViewById(R.id.name)).setText(action.getName(app));
 					} else {
-						controller.askSaveAction(isNew, action);
-						notifyOnActionAdded();
+						controller.onAskSaveAction(isNew, action);
 					}
 				} else {
 					app.showShortToastMessage(R.string.quick_action_empty_param_error);
@@ -198,13 +198,8 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		});
 	}
 
-	private void notifyOnActionAdded() {
-		FragmentManager manager = getParentFragmentManager();
-		for (Fragment fragment : manager.getFragments()) {
-			if (fragment instanceof AddQuickActionListener) {
-				((AddQuickActionListener) fragment).onQuickActionAdded();
-			}
-		}
+	@Override
+	public void onAskDismissDialog(@NonNull String processId) {
 		dismiss();
 	}
 
@@ -212,11 +207,9 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
 		builder.setTitle(R.string.quick_action_duplicate);
 		builder.setMessage(getString(R.string.quick_action_duplicates, action.getName(app)));
-		builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
-			controller.askSaveAction(isNew, action);
-			CreateEditActionDialog.this.dismiss();
-			notifyOnActionAdded();
-		}).create().show();
+		builder.setPositiveButton(R.string.shared_string_ok,
+				(dialog, which) -> controller.onAskSaveAction(isNew, action)
+		).create().show();
 	}
 
 	@Override
@@ -292,9 +285,5 @@ public class CreateEditActionDialog extends DialogFragment implements CallbackWi
 			dialog.setArguments(args);
 			dialog.show(fragmentManager, TAG);
 		}
-	}
-
-	public interface AddQuickActionListener {
-		void onQuickActionAdded();
 	}
 }

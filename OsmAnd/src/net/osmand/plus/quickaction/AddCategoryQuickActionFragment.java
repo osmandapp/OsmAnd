@@ -18,13 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.dialog.interfaces.dialog.IAskDismissDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.controller.AddQuickActionController;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 
-public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implements AddQuickActionsAdapter.ItemClickListener, CreateEditActionDialog.AddQuickActionListener {
+public class AddCategoryQuickActionFragment extends BaseOsmAndFragment
+		implements AddQuickActionsAdapter.ItemClickListener, IAskDismissDialog {
 
 	public static final String TAG = AddCategoryQuickActionFragment.class.getSimpleName();
 
@@ -50,7 +53,7 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 		if (controller == null) {
 			dismiss();
 		} else {
-			controller.registerDialog(TAG);
+			controller.registerDialog(TAG, this);
 			Bundle args = getArguments();
 			int categoryTypeId = args != null ? args.getInt(QUICK_ACTION_CATEGORY_KEY, -1) : -1;
 			if (categoryTypeId != -1) {
@@ -104,6 +107,24 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).disableDrawer();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).enableDrawer();
+		}
+	}
+
+	@Override
 	public void onDestroy() {
 		super.onDestroy();
 		FragmentActivity activity = getActivity();
@@ -124,7 +145,7 @@ public class AddCategoryQuickActionFragment extends BaseOsmAndFragment implement
 	}
 
 	@Override
-	public void onQuickActionAdded() {
+	public void onAskDismissDialog(@NonNull String processId) {
 		dismiss();
 	}
 
