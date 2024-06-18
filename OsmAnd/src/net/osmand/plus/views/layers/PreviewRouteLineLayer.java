@@ -43,6 +43,7 @@ import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
 
