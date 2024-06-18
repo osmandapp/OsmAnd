@@ -479,6 +479,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			refreshMap();
 		} else {
 			trackDrawInfo.setColor(paletteColor.getColor());
+			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
 			updateColorItems();
 		}
 	}

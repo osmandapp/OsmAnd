@@ -5,6 +5,7 @@ import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.plus.card.color.ColoringPurpose.TRACK;
 import static net.osmand.plus.routing.ColoringType.TRACK_SOLID;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,16 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.ColorPalette;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.card.base.multistate.CardState;
 import net.osmand.plus.card.base.simple.DescriptionCard;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController;
 import net.osmand.plus.card.color.IControlsColorProvider;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCard;
 import net.osmand.plus.card.color.cstyle.ColoringStyleDetailsCardController;
 import net.osmand.plus.card.color.cstyle.IColoringStyleDetailsController;
+import net.osmand.plus.card.color.palette.gradient.GradientCollection;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteCard;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteCard;
 import net.osmand.plus.card.color.palette.main.ColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
@@ -32,11 +39,14 @@ import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxAppearanceAdapter;
+import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.fragments.controller.TrackColorController;
 import net.osmand.plus.utils.UiUtilities;
+import net.osmand.router.RouteColorize;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ColorCardController extends ColoringStyleCardController implements IControlsColorProvider {
 
@@ -44,6 +54,7 @@ public class ColorCardController extends ColoringStyleCardController implements 
 	private final boolean addUnchanged;
 
 	private IColorsPaletteController colorsPaletteController;
+	private GradientColorsPaletteController gradientPaletteController;
 	private IColoringStyleDetailsController coloringStyleDetailsController;
 
 	public ColorCardController(@NonNull OsmandApplication app, @NonNull AppearanceData data, boolean addUnchanged) {
@@ -86,11 +97,30 @@ public class ColorCardController extends ColoringStyleCardController implements 
 			container.addView(new DescriptionCard(activity, R.string.unchanged_parameter_summary).build());
 		} else if (!isAvailableInSubscription(coloringStyle)) {
 			container.addView(new PromoBannerCard(activity).build());
-		} else if (coloringType.isTrackSolid()) {
+		} else if (ColoringType.isColorTypeInPurpose(coloringType, ColoringPurpose.TRACK) && coloringType.toGradientScaleType() != null) {
+			GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
+			container.addView(new GradientColorsPaletteCard(activity, getGradientPaletteController(gradientScaleType)).build());
+		}else if (coloringType.isTrackSolid()) {
 			container.addView(new ColorsPaletteCard(activity, getColorsPaletteController()).build());
 		} else {
 			container.addView(new ColoringStyleDetailsCard(activity, getColoringStyleDetailsController()).build());
 		}
+	}
+
+	@NonNull
+	public GradientColorsPaletteController getGradientPaletteController(@NonNull GradientScaleType gradientScaleType) {
+		OsmandSettings settings = app.getSettings();
+
+		RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
+		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(colorizationType);
+		GradientCollection gradientCollection = new GradientCollection(colorPaletteMap, settings.GRADIENT_PALETTES, colorizationType);
+
+		if (gradientPaletteController == null) {
+			gradientPaletteController = new GradientColorsPaletteController(app, null);
+		}
+		gradientPaletteController.updateContent(gradientCollection, PaletteGradientColor.DEFAULT_NAME);
+		gradientPaletteController.setPaletteListener(getExternalListener());
+		return gradientPaletteController;
 	}
 
 	@NonNull
