@@ -32,6 +32,7 @@ public class GpxAppearanceInfo {
 
 	public String width;
 	public String coloringType;
+	public String gradientPaletteName;
 	public Integer color;
 	public int splitType;
 	public double splitInterval;
@@ -66,6 +67,7 @@ public class GpxAppearanceInfo {
 		splitType = helper.requireParameter(item, SPLIT_TYPE);
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		coloringType = helper.getParameter(item, COLORING_TYPE);
+		gradientPaletteName = helper.getParameter(item, COLOR_PALETTE);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
@@ -94,6 +96,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "coloring_type", coloringType);
+		writeParam(json, "color_palette", gradientPaletteName);
 		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
 		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
 		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
@@ -136,6 +139,8 @@ public class GpxAppearanceInfo {
 					? null : coloringType.getName(null);
 		}
 
+		hasAnyParam |= json.has("color_palette");
+		gpxAppearanceInfo.gradientPaletteName = json.optString("color_palette");
 		hasAnyParam |= json.has("line_3d_visualization_by_type");
 		String trackVisualizationType = json.optString("line_3d_visualization_by_type");
 		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);

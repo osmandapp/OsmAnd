@@ -16,16 +16,16 @@ public class PaletteColor {
 	public static final String CUSTOM_COLOR_PREFIX = "custom_";
 
 	// JSON tags
-	private static final String ID = "id";
+	protected static final String ID = "id";
 	private static final String COLOR_HEX = "color_hex";
-	private static final String CREATION_TIME = "creation_time";
-	private static final String LAST_USED_TIME = "last_used_time";
+	protected static final String CREATION_TIME = "creation_time";
+	protected static final String LAST_USED_TIME = "last_used_time";
 
 	@ColorInt
-	private int color;
-	private final String id;
-	private final long creationTime;
-	private long lastUsedTime;
+	protected int color;
+	protected final String id;
+	protected long creationTime;
+	protected long lastUsedTime;
 
 	public PaletteColor(@NonNull String id, @ColorInt int color, long creationTime) {
 		this.id = id;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+
+	<com.github.mikephil.charting.charts.GradientChart
+		android:id="@+id/chart"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/route_info_chart_height" />
+
+	<include layout="@layout/simple_divider_item" />
+
+	<Space
+		android:id="@+id/bottom_space"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_small" />
+
+	<include layout="@layout/card_colors_palette" />
+
+</LinearLayout>

@@ -148,6 +148,7 @@ public class GpxDbUtils {
 		addIfMissingGpxTableColumn(columnNames, db, ELEVATION_METERS);
 		addIfMissingGpxTableColumn(columnNames, db, WIDTH);
 		addIfMissingGpxTableColumn(columnNames, db, COLORING_TYPE);
+		addIfMissingGpxTableColumn(columnNames, db, COLOR_PALETTE);
 		addIfMissingGpxTableColumn(columnNames, db, SMOOTHING_THRESHOLD);
 		addIfMissingGpxTableColumn(columnNames, db, MIN_FILTER_SPEED);
 		addIfMissingGpxTableColumn(columnNames, db, MAX_FILTER_SPEED);
