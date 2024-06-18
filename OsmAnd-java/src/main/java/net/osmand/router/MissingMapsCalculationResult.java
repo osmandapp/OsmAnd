@@ -6,6 +6,7 @@ import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,9 +30,16 @@ public class MissingMapsCalculationResult {
 		this.missingMapsPoints = missingMapsPoints;
 	}
 	
-	public void addMissingMaps(String region) {
-		missingMaps.add(region);
-		mapsToDownload.add(region);
+	public void addMissingMapsByRegionsWithDistinctCountries(List<String> regions) {
+		Set<String> addedCountries = new HashSet<>();
+		for (String r : regions) {
+			String country = r.split("_")[0];
+			if (!addedCountries.contains(country)) {
+				missingMaps.add(r);
+				mapsToDownload.add(r);
+				addedCountries.add(country);
+			}
+		}
 	}
 	
 	public void addUsedMaps(String region) {

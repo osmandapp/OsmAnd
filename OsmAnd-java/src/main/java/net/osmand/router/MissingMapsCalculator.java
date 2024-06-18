@@ -103,8 +103,7 @@ public class MissingMapsCalculator {
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
 				if (p.regions.size() > 0) {
-					result.addMissingMaps(p.regions.get(0));
-					
+					result.addMissingMapsByRegionsWithDistinctCountries(p.regions);
 				}
 			} else if (checkHHEditions) {
 				if (presentTimestamps == null) {
@@ -115,7 +114,6 @@ public class MissingMapsCalculator {
 			} else {
 				if (p.regions.size() > 0) {
 					result.addUsedMaps(p.regions.get(0));
-					
 				}
 			}
 		}
