@@ -5655,7 +5655,7 @@
     <string name="assigned_keys">Przypisane klawisze</string>
     <string name="clear_key_assignment_summary">Przypisanie klawisza do wybranej akcji zostanie usunięte.</string>
     <string name="key_assignment_add_action">Dodaj akcję</string>
-    <string name="show_debug_info">Pokaż informacje debugowania</string>
+    <string name="show_debug_info">Pokaż informacje do debugowania</string>
     <string name="show_debug_info_description">Wyświetlaj graficzne informacje o rozmieszczeniu każdego tekstu mapy</string>
     <string name="routing_attr_avoid_cobblestone_name">Unikaj kocich łbów</string>
     <string name="user_palette">Paleta użytkownika</string>
