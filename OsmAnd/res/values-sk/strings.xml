@@ -5742,4 +5742,5 @@
     <string name="key_name_pattern">Kláves \"%1$s\"</string>
     <string name="key_assignment_add_action">Pridať akciu</string>
     <string name="assigned_keys">Priradené klávesy</string>
+    <string name="missing_maps_ignore">Použiť existujúce mapy</string>
 </resources>
