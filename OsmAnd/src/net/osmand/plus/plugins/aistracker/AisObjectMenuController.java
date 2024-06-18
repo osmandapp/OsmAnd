@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -19,10 +20,12 @@ import java.util.SortedSet;
 
 public class AisObjectMenuController extends MenuController {
     private AisObject aisObject;
+    private final OsmandApplication app;
     public AisObjectMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription,
                                    AisObject aisObject) {
         super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
         this.aisObject = aisObject;
+        this.app = builder.getApplication();
         builder.setShowTitleIfTruncated(false);
         builder.setShowNearestPoi(false);
         builder.setShowOnlinePhotos(false);
@@ -61,6 +64,7 @@ public class AisObjectMenuController extends MenuController {
         }
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
         SortedSet<Integer> msgTypes = aisObject.getMsgTypes();
@@ -74,6 +78,20 @@ public class AisObjectMenuController extends MenuController {
             addMenuItem("Location",
                     LocationConvert.convertLatitude(position.getLatitude(), FORMAT_MINUTES, true) +
                           ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
+            if (this.app != null) {
+                float distance = aisObject.getDistanceInNauticalMiles(app.getLocationProvider());
+                float bearing = aisObject.getBearing(app.getLocationProvider());
+                if (distance >= 0.0f) {
+                    try {
+                        addMenuItem("Distance",  String.format("%.1f nm", distance));
+                    } catch (Exception ignore) { }
+                }
+                if (bearing >= 0.0f) {
+                    try {
+                        addMenuItem("Bearing", String.format("%.1f", bearing));
+                    } catch (Exception ignore) { }
+                }
+            }
         }
         if (msgTypes.contains(21)) { // ATON (aid to navigation)
             addMenuItem("ATON Type",  aisObject.getAidTypeString());
