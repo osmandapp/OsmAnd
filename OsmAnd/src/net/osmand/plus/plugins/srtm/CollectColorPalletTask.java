@@ -13,12 +13,12 @@ import java.io.File;
 public class CollectColorPalletTask extends AsyncTask<Void, Void, ColorPalette> {
 
 	private final OsmandApplication app;
-	private final File colorPaletteFile;
+	private final String colorPaletteFileName;
 	private final CollectColorPalletListener listener;
 
-	public CollectColorPalletTask(@NonNull OsmandApplication app, @NonNull File colorPaletteFile, @NonNull CollectColorPalletListener listener) {
+	public CollectColorPalletTask(@NonNull OsmandApplication app, @NonNull String colorPaletteFileName, @NonNull CollectColorPalletListener listener) {
 		this.app = app;
-		this.colorPaletteFile = colorPaletteFile;
+		this.colorPaletteFileName = colorPaletteFileName;
 		this.listener = listener;
 	}
 
@@ -29,7 +29,7 @@ public class CollectColorPalletTask extends AsyncTask<Void, Void, ColorPalette> 
 
 	@Override
 	protected ColorPalette doInBackground(Void... params) {
-		return app.getColorPaletteHelper().getGradientColorPalette(colorPaletteFile);
+		return app.getColorPaletteHelper().getGradientColorPalette(colorPaletteFileName);
 	}
 
 	@Override

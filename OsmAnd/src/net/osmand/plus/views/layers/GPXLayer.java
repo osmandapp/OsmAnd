@@ -791,6 +791,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				boolean showArrows = isShowArrowsForTrack(gpxFile);
 				String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 				ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, coloringTypeName);
+				String gradientColorPalette = getTrackGradientPalette(selectedGpxFile.getGpxFile());
 
 				if (!showArrows || coloringType.isRouteInfoAttribute()
 						|| !QuadRect.trivialOverlap(correctedQuadRect, calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
@@ -807,7 +808,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						getElevationMeters(selectedGpxFile.getGpxFile())
 				);
 				List<TrkSegment> segments = coloringType.isGradient()
-						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), false)
+						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), gradientColorPalette, false)
 						: selectedGpxFile.getPointsToDisplay();
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof RenderableSegment) {
@@ -1203,7 +1204,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
 		} else {
-			segments.addAll(getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), !hasMapRenderer));
+			segments.addAll(getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), gradientColorPalette, !hasMapRenderer));
 		}
 
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
@@ -1246,7 +1247,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, gradientColorPalette);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
-					updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx, gradientColorPalette));
+					updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
 					updated |= renderableSegment.setDrawArrows(isShowArrowsForTrack(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackVisualizationType(getTrackVisualizationType(selectedGpxFile.getGpxFile()));
 					updated |= renderableSegment.setTrackWallColorType(getTrackWallColorType(selectedGpxFile.getGpxFile()));
@@ -1273,10 +1274,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@NonNull
 	private List<TrkSegment> getCachedSegments(@NonNull SelectedGpxFile selectedGpxFile,
 	                                           @NonNull GradientScaleType scaleType,
+	                                           @NonNull String  gradientPalette,
 	                                           boolean simplify) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
-		String gradientPalette = getTrackGradientPalette(gpxFile);
-
 		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 		return simplify
 				? cachedTrack.getSimplifiedTrackSegments(view.getZoom(), scaleType, gradientPalette)
@@ -1305,9 +1304,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		if (!isGpxFileSelected(gpxFile)) {
 			return ColoringType.TRACK_SOLID.getName(null);
 		}
-		TrackDrawInfo drawInfo = gpxAppearanceHelper.getTrackDrawInfo();
-		if (drawInfo != null) {
-			return drawInfo.getColoringType().getName(drawInfo.getRouteInfoAttribute());
+
+		String drawInfoColoringType = gpxAppearanceHelper.getColoringType(gpxFile);
+		if (!Algorithms.isEmpty(drawInfoColoringType)) {
+			return drawInfoColoringType;
 		}
 
 		GpxDataItem dataItem = null;
@@ -1398,8 +1398,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@NonNull
-	public List<RouteSegmentResult> getCachedRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx, @NonNull String gradientPalette) {
-		List<RouteSegmentResult> routeSegments = cachedTrack.getCachedRouteSegments(nonEmptySegmentIdx, gradientPalette);
+	public List<RouteSegmentResult> getCachedRouteSegments(@NonNull CachedTrack cachedTrack, int nonEmptySegmentIdx) {
+		List<RouteSegmentResult> routeSegments = cachedTrack.getCachedRouteSegments(nonEmptySegmentIdx);
 		if (routeSegments == null) {
 			loadRouteSegments(cachedTrack, nonEmptySegmentIdx);
 		}

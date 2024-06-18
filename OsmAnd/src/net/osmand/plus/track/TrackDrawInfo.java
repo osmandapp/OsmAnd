@@ -342,6 +342,7 @@ public class TrackDrawInfo {
 			settings.CURRENT_TRACK_COLOR.resetToDefault();
 			settings.CURRENT_TRACK_WIDTH.resetToDefault();
 			settings.CURRENT_TRACK_COLORING_TYPE.resetToDefault();
+			settings.CURRENT_GRADIENT_PALETTE.resetToDefault();
 			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_ARROWS.resetToDefault();
 			settings.CURRENT_TRACK_SHOW_START_FINISH.resetToDefault();
@@ -353,6 +354,7 @@ public class TrackDrawInfo {
 			showArrows = false;
 			showStartFinish = true;
 			coloringType = ColoringType.requireValueOf(TRACK);
+			gradientColorName = PaletteGradientColor.DEFAULT_NAME;
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
 			trackVisualizationType = Gpx3DVisualizationType.NONE;
 			trackWallColorType = Gpx3DWallColorType.NONE;
@@ -365,6 +367,7 @@ public class TrackDrawInfo {
 			splitInterval = gpxFile.getSplitInterval();
 			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
 			coloringType = ColoringType.requireValueOf(TRACK, gpxFile.getColoringType());
+			gradientColorName = !Algorithms.isEmpty(gpxFile.getGradientColorPalette()) ? gpxFile.getGradientColorPalette() : PaletteGradientColor.DEFAULT_NAME ;
 			routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxFile.getColoringType());
 			trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(gpxFile.get3DVisualizationType());
 			trackWallColorType = Gpx3DWallColorType.get3DWallColorType(gpxFile.get3DWallColoringType());

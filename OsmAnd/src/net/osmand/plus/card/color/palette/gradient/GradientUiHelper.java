@@ -24,13 +24,13 @@ import net.osmand.plus.utils.UiUtilities;
 
 import java.util.List;
 
-public class GradientPaletteElements {
+public class GradientUiHelper {
 
     private final OsmandApplication app;
     private final LayoutInflater themedInflater;
     private final boolean nightMode;
 
-    public GradientPaletteElements(@NonNull Context context, boolean nightMode) {
+    public GradientUiHelper(@NonNull Context context, boolean nightMode) {
         this.nightMode = nightMode;
         app = (OsmandApplication) context.getApplicationContext();
         themedInflater = UiUtilities.getInflater(context, nightMode);
@@ -44,16 +44,7 @@ public class GradientPaletteElements {
         if (paletteColor instanceof PaletteGradientColor) {
             PaletteGradientColor gradientColor = (PaletteGradientColor) paletteColor;
             List<ColorValue> colorsList = gradientColor.getColorPalette().getColors();
-            int[] colors = new int[colorsList.size()];
-            for (int i = 0; i < colorsList.size(); i++) {
-                ColorValue value = colorsList.get(i);
-                colors[i] = Color.argb(value.a, value.r, value.g, value.b);
-            }
-            GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
-            gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-            gradientDrawable.setShape(GradientDrawable.RECTANGLE);
-            gradientDrawable.setCornerRadius(AndroidUtils.dpToPx(app, 2));
-            background.setImageDrawable(gradientDrawable);
+            background.setImageDrawable(getGradientDrawable(app, colorsList, GradientDrawable.RECTANGLE));
         }
 
         if (showOutline) {
@@ -65,6 +56,21 @@ public class GradientPaletteElements {
             icon.setImageDrawable(UiUtilities.tintDrawable(
                     icon.getDrawable(), ColorUtilities.getDefaultIconColor(app, nightMode)));
         }
+    }
+
+    public static GradientDrawable getGradientDrawable(@NonNull OsmandApplication app, @NonNull List<ColorValue> colorsList, int drawableShape) {
+        int[] colors = new int[colorsList.size()];
+        for (int i = 0; i < colorsList.size(); i++) {
+            ColorValue value = colorsList.get(i);
+            colors[i] = Color.argb(value.a, value.r, value.g, value.b);
+        }
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
+        gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
+        gradientDrawable.setShape(drawableShape);
+        if (drawableShape == GradientDrawable.RECTANGLE) {
+            gradientDrawable.setCornerRadius(AndroidUtils.dpToPx(app, 2));
+        }
+        return gradientDrawable;
     }
 
     @NonNull

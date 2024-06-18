@@ -73,7 +73,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 									@NonNull ColoringType coloringType,
 									@Nullable String routeInfoAttribute,
 									@Nullable String gradientPaletteName) {
-		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPaletteName, gradientPaletteName)
+		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
 				|| this.coloringType != coloringType
 				|| coloringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
@@ -103,7 +103,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.drawDirectionArrows = drawDirectionArrows;
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
-		this.gradientPaletteName = gradientPaletteName;
+		this.gradientPalette = gradientPaletteName;
 	}
 
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {

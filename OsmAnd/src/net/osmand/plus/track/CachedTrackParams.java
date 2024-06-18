@@ -9,18 +9,16 @@ public class CachedTrackParams {
 	public final long prevModifiedTime;
 	public final boolean useFilteredGpx;
 	public final boolean useJoinSegments;
-	public final String gradientPaletteName;
 
-	public CachedTrackParams(long prevModifiedTime, boolean useFilteredGpx, boolean useJoinSegments, @Nullable String gradientPaletteName) {
+	public CachedTrackParams(long prevModifiedTime, boolean useFilteredGpx, boolean useJoinSegments) {
 		this.prevModifiedTime = prevModifiedTime;
 		this.useFilteredGpx = useFilteredGpx;
 		this.useJoinSegments = useJoinSegments;
-		this.gradientPaletteName = gradientPaletteName;
 	}
 
 	@Override
 	public int hashCode() {
-		return Algorithms.hash(prevModifiedTime, useFilteredGpx, useJoinSegments, gradientPaletteName);
+		return Algorithms.hash(prevModifiedTime, useFilteredGpx, useJoinSegments);
 	}
 
 	@Override
@@ -34,8 +32,7 @@ public class CachedTrackParams {
 		CachedTrackParams params = (CachedTrackParams) obj;
 		return prevModifiedTime == params.prevModifiedTime
 				&& useFilteredGpx == params.useFilteredGpx
-				&& useJoinSegments == params.useJoinSegments
-				&& Algorithms.stringsEqual(gradientPaletteName, params.gradientPaletteName);
+				&& useJoinSegments == params.useJoinSegments;
 	}
 
 	@Override
@@ -43,7 +40,6 @@ public class CachedTrackParams {
 		return "CachedTrackParams{" +
 				"prevModifiedTime=" + prevModifiedTime +
 				", useFilteredGpx=" + useFilteredGpx +
-				", useJoinSegments=" + useJoinSegments +
-				", gradientPaletteName=" + gradientPaletteName + "}";
+				", useJoinSegments=" + useJoinSegments;
 	}
 }

@@ -13,6 +13,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.gpx.GPXFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.ColorPaletteHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.Gpx3DLinePositionType;
@@ -53,7 +54,7 @@ public abstract class MultiColoringGeometryWay
 	@NonNull
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
-	protected String gradientPaletteName;
+	protected String gradientPalette;
 
 	protected boolean coloringChanged;
 	private Track3DStyle track3DStyle;
@@ -61,7 +62,7 @@ public abstract class MultiColoringGeometryWay
 	public MultiColoringGeometryWay(C context, D drawer) {
 		super(context, drawer);
 		coloringType = context.getDefaultColoringType();
-		gradientPaletteName = context.getDefaultGradientPalette();
+		gradientPalette = context.getDefaultGradientPalette();
 	}
 
 	protected void updateStylesWidth(@Nullable Float newWidth) {
@@ -129,7 +130,8 @@ public abstract class MultiColoringGeometryWay
 		GradientScaleType gradientScaleType = coloringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			ColorizationType colorizationType = gradientScaleType.toColorizationType();
-			ColorPalette colorPalette = getContext().getApp().getColorPaletteHelper().getRouteColorPaletteSync(colorizationType, gradientPaletteName);
+			ColorPaletteHelper paletteHelper = getContext().getApp().getColorPaletteHelper();
+			ColorPalette colorPalette = paletteHelper.getGradientColorPaletteSync(colorizationType, gradientPalette);
 
 			RouteColorize routeColorize = new RouteColorize(gpxFile, null, colorizationType, colorPalette, 0);
 			List<RouteColorizationPoint> points = routeColorize.getResult();

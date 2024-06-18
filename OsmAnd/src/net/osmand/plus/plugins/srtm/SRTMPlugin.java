@@ -671,6 +671,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	public void getTerrainModeIcon(@NonNull String modeKey, @NonNull CollectColorPalletListener listener) {
-		app.getColorPaletteHelper().getTerrainModeColorPaletteAsync(modeKey, listener);
+		app.getColorPaletteHelper().getColorPaletteAsync(modeKey, listener);
 	}
 }

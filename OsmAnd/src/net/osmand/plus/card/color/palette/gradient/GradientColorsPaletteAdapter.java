@@ -21,7 +21,7 @@ import java.util.List;
 class GradientColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder> {
 
 	private final IColorsPaletteController controller;
-	private final GradientPaletteElements paletteElements;
+	private final GradientUiHelper gradientUiHelper;
 	private List<PaletteColor> colors;
 
 	public GradientColorsPaletteAdapter(@NonNull FragmentActivity activity,
@@ -29,7 +29,7 @@ class GradientColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder>
 										boolean nightMode) {
 		this.controller = controller;
 		this.colors = controller.getColors(PaletteSortingMode.LAST_USED_TIME);
-		paletteElements = new GradientPaletteElements(activity, nightMode);
+		gradientUiHelper = new GradientUiHelper(activity, nightMode);
 		setHasStableIds(true);
 	}
 
@@ -42,7 +42,7 @@ class GradientColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder>
 	@NonNull
 	@Override
 	public ColorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View view = paletteElements.createRectangleView(parent);
+		View view = gradientUiHelper.createRectangleView(parent);
 		return new ColorViewHolder(view);
 	}
 
@@ -50,7 +50,7 @@ class GradientColorsPaletteAdapter extends RecyclerView.Adapter<ColorViewHolder>
 	public void onBindViewHolder(@NonNull ColorViewHolder holder, int position) {
 		PaletteColor paletteColor = colors.get(position);
 		boolean isSelected = controller.isSelectedColor(paletteColor);
-		paletteElements.updateColorItemView(holder.itemView, paletteColor, isSelected);
+		gradientUiHelper.updateColorItemView(holder.itemView, paletteColor, isSelected);
 		holder.itemView.setOnClickListener(v -> controller.onSelectColorFromPalette(paletteColor, false));
 	}
 

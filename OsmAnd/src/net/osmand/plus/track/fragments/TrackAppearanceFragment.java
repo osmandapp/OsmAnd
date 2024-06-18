@@ -50,11 +50,11 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.headed.HeadedContentCard;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
+import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
 import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
 import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
-import net.osmand.plus.card.color.palette.main.IColorsPaletteController;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.width.WidthComponentController;
 import net.osmand.plus.configmap.MapOptionSliderFragment.MapOptionSliderListener;
@@ -63,6 +63,7 @@ import net.osmand.plus.plugins.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.plugins.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -457,6 +458,16 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			View saveButton = view.findViewById(R.id.right_bottom_button);
 			saveButton.setEnabled(isAvailableInSubscription(app, coloringStyle));
 			updateColorItems();
+			updateGradientPalette(coloringStyle);
+		}
+	}
+
+	private void updateGradientPalette(@NonNull ColoringStyle coloringStyle) {
+		if (coloringStyle.getType().isGradient() && gpxDataItem != null) {
+			ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, gpxDataItem.getParameter(COLORING_TYPE));
+			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(GRADIENT_PALETTE) : PaletteGradientColor.DEFAULT_NAME);
+		} else {
+			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
 		}
 	}
 

@@ -219,7 +219,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		GradientScaleType gradientScaleType = routeColoringType.toGradientScaleType();
 		if (gradientScaleType != null) {
 			RouteColorize.ColorizationType colorizationType = gradientScaleType.toColorizationType();
-			previewPalette = getApplication().getColorPaletteHelper().requireRouteGradientPaletteSync(colorizationType, routeGradientPalette);
+			previewPalette = getApplication().getColorPaletteHelper().requireGradientColorPaletteSync(colorizationType, routeGradientPalette);
 		}
 		List<Integer> palette = new ArrayList<>();
 		for (ColorPalette.ColorValue colorValue : previewPalette.getColors()) {

@@ -193,6 +193,14 @@ public class GpxAppearanceHelper {
 		return gradientPalette != null ? gradientPalette : gpxFile.getGradientColorPalette();
 	}
 
+	@Nullable
+	public String getColoringType(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
+		}
+		return null;
+	}
+
 	@NonNull
 	@SuppressWarnings("unchecked")
 	public <T> T requireParameter(@NonNull GpxDataItem item, @NonNull GpxParameter parameter) {

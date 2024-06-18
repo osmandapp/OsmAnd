@@ -1633,7 +1633,7 @@ public class OsmandSettings {
 	public final CommonPreference<String> CURRENT_TRACK_3D_LINE_POSITION_TYPE = new StringPreference(this, "currentTrackVisualization3dPositionType", "none").makeGlobal().makeShared().cache();
 	public final CommonPreference<Float> CURRENT_TRACK_ADDITIONAL_EXAGGERATION = new FloatPreference(this, "currentTrackVerticalExaggerationScale", 1f).makeGlobal().makeShared().cache();
 	public final CommonPreference<Float> CURRENT_TRACK_ELEVATION_METERS = new FloatPreference(this, "current_track_elevation_meters", 1000f).makeGlobal().makeShared().cache();
-	public final CommonPreference<String> CURRENT_GRADIENT_PALETTE = new StringPreference(this, "current_track_gradient_palette", null).makeGlobal().makeShared().cache();
+	public final CommonPreference<String> CURRENT_GRADIENT_PALETTE = new StringPreference(this, "current_track_gradient_palette", PaletteGradientColor.DEFAULT_NAME).makeGlobal().makeShared().cache();
 
 	public final CommonPreference<String> GRADIENT_PALETTES = new StringPreference(this, "gradient_palettes", null).makeGlobal().makeShared();
 	public final CommonPreference<String> TRACK_COLORS_PALETTE = new StringPreference(this, "track_colors_palette", null).makeGlobal().makeShared();
