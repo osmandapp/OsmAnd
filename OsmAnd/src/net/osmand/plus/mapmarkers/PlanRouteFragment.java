@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.TspAnt;
 import net.osmand.data.LatLon;

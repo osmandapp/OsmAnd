@@ -112,7 +112,7 @@ import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

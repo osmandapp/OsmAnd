@@ -19,7 +19,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.utils.FileUtils;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;

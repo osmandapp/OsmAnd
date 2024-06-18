@@ -10,19 +10,19 @@ import net.osmand.shared.data.KQuadRect
 import net.osmand.shared.gpx.GpxFile
 import net.osmand.shared.gpx.GpxParameter
 import net.osmand.shared.gpx.GpxUtilities
-import net.osmand.shared.gpx.GpxUtilities.Author
-import net.osmand.shared.gpx.GpxUtilities.Bounds
-import net.osmand.shared.gpx.GpxUtilities.Copyright
-import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
+import net.osmand.shared.gpx.primitives.Author
+import net.osmand.shared.gpx.primitives.Bounds
+import net.osmand.shared.gpx.primitives.Copyright
+import net.osmand.shared.gpx.primitives.GpxExtensions
 import net.osmand.shared.gpx.GpxUtilities.GpxExtensionsReader
-import net.osmand.shared.gpx.GpxUtilities.Metadata
+import net.osmand.shared.gpx.primitives.Metadata
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
-import net.osmand.shared.gpx.GpxUtilities.Route
+import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment
 import net.osmand.shared.gpx.GpxUtilities.RouteType
-import net.osmand.shared.gpx.GpxUtilities.Track
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment
-import net.osmand.shared.gpx.GpxUtilities.WptPt
+import net.osmand.shared.gpx.primitives.Track
+import net.osmand.shared.gpx.primitives.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.io.KFile
 import net.osmand.shared.util.IProgress
 import net.osmand.shared.util.PlatformUtil
@@ -33,7 +33,6 @@ import okio.source
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
-import kotlin.reflect.KClass
 
 object SharedUtil {
 

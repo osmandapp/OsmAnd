@@ -104,7 +104,7 @@ public class RouteProvider {
 		return loc;
 	}
 
-	public static Location createLocation(net.osmand.shared.gpx.GpxUtilities.WptPt pt){
+	public static Location createLocation(net.osmand.shared.gpx.primitives.WptPt pt){
 		Location loc = new Location("OsmandRouteProvider");
 		loc.setLatitude(pt.getLatitude());
 		loc.setLongitude(pt.getLongitude());
@@ -127,9 +127,9 @@ public class RouteProvider {
 		return locations;
 	}
 
-	public static List<Location> locationsFromSharedWpts(List<net.osmand.shared.gpx.GpxUtilities.WptPt> wpts) {
+	public static List<Location> locationsFromSharedWpts(List<net.osmand.shared.gpx.primitives.WptPt> wpts) {
 		List<Location> locations = new ArrayList<>(wpts.size());
-		for (net.osmand.shared.gpx.GpxUtilities.WptPt pt : wpts) {
+		for (net.osmand.shared.gpx.primitives.WptPt pt : wpts) {
 			locations.add(createLocation(pt));
 		}
 		return locations;
@@ -979,9 +979,9 @@ public class RouteProvider {
 
 	protected static void collectSegmentPointsFromGpx(GpxFile gpxFile, List<Location> points,
 													  List<Location> segmentEndpoints, int selectedSegment) {
-		List<net.osmand.shared.gpx.GpxUtilities.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
+		List<net.osmand.shared.gpx.primitives.TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
-			net.osmand.shared.gpx.GpxUtilities.TrkSegment segment = segments.get(selectedSegment);
+			net.osmand.shared.gpx.primitives.TrkSegment segment = segments.get(selectedSegment);
 			points.addAll(locationsFromSharedWpts(segment.getPoints()));
 		} else {
 			collectPointsFromSharedSegments(segments, points, segmentEndpoints);
@@ -1012,10 +1012,10 @@ public class RouteProvider {
 		}
 	}
 
-	protected static void collectPointsFromSharedSegments(List<net.osmand.shared.gpx.GpxUtilities.TrkSegment> segments, List<Location> points, List<Location> segmentEndpoints) {
+	protected static void collectPointsFromSharedSegments(List<net.osmand.shared.gpx.primitives.TrkSegment> segments, List<Location> points, List<Location> segmentEndpoints) {
 		Location lastPoint = null;
 		for (int i = 0; i < segments.size(); i++) {
-			net.osmand.shared.gpx.GpxUtilities.TrkSegment segment = segments.get(i);
+			net.osmand.shared.gpx.primitives.TrkSegment segment = segments.get(i);
 			points.addAll(locationsFromSharedWpts(segment.getPoints()));
 			if (i <= segments.size() - 1 && lastPoint != null) {
 				segmentEndpoints.add(lastPoint);

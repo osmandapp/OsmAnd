@@ -22,7 +22,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 public class ArticleWebViewClient extends WebViewClient {
 

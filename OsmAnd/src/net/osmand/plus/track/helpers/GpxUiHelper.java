@@ -71,10 +71,9 @@ import net.osmand.plus.utils.OsmAndFormatter;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.Track;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -554,7 +553,7 @@ public class GpxUiHelper {
 					}
 					point.setTime(System.currentTimeMillis());
 				} else {
-					GpxUtilities.WptPt prevPoint = pts.get(pts.size() - 1);
+					WptPt prevPoint = pts.get(pts.size() - 1);
 					if (l.hasSpeed() && l.getSpeed() > 0) {
 						point.setSpeed(l.getSpeed());
 						double dist = MapUtils.getDistance(prevPoint.getLat(), prevPoint.getLon(), point.getLat(), point.getLon());

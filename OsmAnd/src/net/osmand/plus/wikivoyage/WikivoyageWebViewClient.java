@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;

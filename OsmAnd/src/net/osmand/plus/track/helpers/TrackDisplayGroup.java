@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.Track;
+import net.osmand.shared.gpx.primitives.Track;
 import net.osmand.plus.R;
 import net.osmand.plus.track.GpxSplitParams;
 import net.osmand.plus.track.helpers.GpxSelectionHelper.GpxDisplayItemType;

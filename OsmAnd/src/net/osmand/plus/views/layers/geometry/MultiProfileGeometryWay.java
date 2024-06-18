@@ -8,8 +8,8 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.util.Pair;
 
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;

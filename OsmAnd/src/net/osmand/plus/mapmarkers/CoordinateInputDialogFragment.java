@@ -81,7 +81,7 @@ import net.osmand.plus.utils.UiUtilities;
 import net.osmand.plus.widgets.EditTextEx;
 import net.osmand.plus.widgets.tools.SimpleTextWatcher;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.LocationParser;
 import net.osmand.util.MapUtils;

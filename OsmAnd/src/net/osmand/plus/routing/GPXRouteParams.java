@@ -5,7 +5,7 @@ import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 import androidx.annotation.NonNull;
 
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;

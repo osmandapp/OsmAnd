@@ -20,8 +20,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
@@ -516,7 +515,7 @@ public class QuickSearchListItem {
 				pointDescription.setIconName("ic_action_intersection");
 				break;
 			case WPT:
-				GpxUtilities.WptPt wpt = (GpxUtilities.WptPt) object;
+				WptPt wpt = (WptPt) object;
 				pointDescription = new WptLocationPoint(wpt).getPointDescription(app);
 				break;
 		}

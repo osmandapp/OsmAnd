@@ -3,8 +3,8 @@ package net.osmand.plus.track.cards;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
-import net.osmand.shared.gpx.GpxUtilities.Copyright;
-import net.osmand.shared.gpx.GpxUtilities.Metadata;
+import net.osmand.shared.gpx.primitives.Copyright;
+import net.osmand.shared.gpx.primitives.Metadata;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;

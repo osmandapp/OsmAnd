@@ -3,9 +3,8 @@ package net.osmand.shared.gpx
 import net.osmand.shared.data.KLatLon
 import net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION
 import net.osmand.shared.gpx.GpxUtilities.POINT_SPEED
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment
-import net.osmand.shared.gpx.GpxUtilities.WptPt
-import net.osmand.shared.routing.RouteColorize
+import net.osmand.shared.gpx.primitives.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.routing.RouteColorize.ColorizationType
 import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.KMapUtils

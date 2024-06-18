@@ -3,7 +3,7 @@ package net.osmand.plus.onlinerouting.engine;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;

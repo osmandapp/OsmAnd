@@ -32,8 +32,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -74,7 +73,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 	private GpxDisplayItem gpxItem;
 	private final GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
-	private GpxUtilities.TrkSegment trkSegment;
+	private TrkSegment trkSegment;
 
 	private final List<String> options = new ArrayList<>();
 	private final List<Double> distanceSplit = new ArrayList<>();
@@ -208,7 +207,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		this.gpxItem = gpxItem;
 	}
 
-	public void setTrkSegment(GpxUtilities.TrkSegment trkSegment) {
+	public void setTrkSegment(TrkSegment trkSegment) {
 		this.trkSegment = trkSegment;
 	}
 

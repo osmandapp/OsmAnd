@@ -24,7 +24,7 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

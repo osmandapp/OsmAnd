@@ -40,9 +40,9 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities.Track;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.Track;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.charts.ChartUtils;

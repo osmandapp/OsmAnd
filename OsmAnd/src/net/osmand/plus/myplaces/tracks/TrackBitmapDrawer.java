@@ -29,8 +29,8 @@ import net.osmand.plus.views.Renderable.StandardTrack;
 import net.osmand.shared.data.KQuadRect;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 public class TrackBitmapDrawer extends MapBitmapDrawer {
 

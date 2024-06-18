@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;

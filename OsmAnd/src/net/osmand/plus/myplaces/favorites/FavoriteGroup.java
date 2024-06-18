@@ -7,7 +7,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.BackgroundType;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.R;

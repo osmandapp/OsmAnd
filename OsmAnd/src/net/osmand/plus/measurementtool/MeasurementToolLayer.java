@@ -47,8 +47,8 @@ import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
 import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

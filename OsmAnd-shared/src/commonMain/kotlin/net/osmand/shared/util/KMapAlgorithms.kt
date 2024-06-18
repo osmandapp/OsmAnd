@@ -1,7 +1,7 @@
 package net.osmand.shared.util
 
-import net.osmand.shared.gpx.GpxUtilities
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment
+import net.osmand.shared.gpx.primitives.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
 
 object KMapAlgorithms {
 
@@ -26,7 +26,7 @@ object KMapAlgorithms {
 					if (stepHNextInd - prevHDistX > 0.5) {
 						// introduce extra point
 						val fraction = (stepHNextInd - prevHDistX) / (curHDistX - origHDistX)
-						val newPt = GpxUtilities.WptPt(
+						val newPt = WptPt(
 							lat = prev.lat + fraction * (cur.lat - prev.lat),
 							lon = prev.lon + fraction * (cur.lon - prev.lon),
 						)

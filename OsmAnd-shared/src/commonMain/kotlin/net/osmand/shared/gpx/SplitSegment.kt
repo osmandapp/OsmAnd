@@ -1,7 +1,7 @@
 package net.osmand.shared.gpx
 
-import net.osmand.shared.gpx.GpxUtilities.WptPt
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.gpx.primitives.TrkSegment
 
 class SplitSegment {
 

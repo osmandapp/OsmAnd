@@ -11,7 +11,7 @@ import net.osmand.plus.track.Track3DStyle;
 import net.osmand.shared.routing.RouteColorize.ColorizationType;
 import net.osmand.shared.routing.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

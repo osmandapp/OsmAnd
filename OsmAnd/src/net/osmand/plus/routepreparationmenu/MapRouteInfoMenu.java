@@ -52,7 +52,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.SpecialPointType;
 import net.osmand.data.ValueHolder;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;

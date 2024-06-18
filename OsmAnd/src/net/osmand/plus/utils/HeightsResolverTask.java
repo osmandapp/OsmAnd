@@ -10,7 +10,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 
 import java.io.File;
 import java.util.ArrayList;

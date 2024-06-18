@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import net.osmand.shared.gpx.GpxDataItem;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.track.helpers.GpsFilterHelper.AltitudeFilter;
 import net.osmand.plus.track.helpers.GpsFilterHelper.HdopFilter;

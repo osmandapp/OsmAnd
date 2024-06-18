@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;

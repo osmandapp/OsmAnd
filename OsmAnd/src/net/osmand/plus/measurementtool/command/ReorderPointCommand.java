@@ -2,7 +2,7 @@ package net.osmand.plus.measurementtool.command;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 import java.util.List;

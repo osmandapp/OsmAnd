@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;

@@ -65,8 +65,8 @@ import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
 import net.osmand.plus.views.mapwidgets.MarkersWidgetsHelper;
-import net.osmand.shared.gpx.GpxUtilities;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -138,7 +138,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean needDrawLines = true;
 	private final List<MapMarker> displayedMarkers = new ArrayList<>();
 	private int displayedWidgets;
-	private List<GpxUtilities.WptPt> cachedPoints = null;
+	private List<WptPt> cachedPoints = null;
 	private Renderable.RenderableSegment cachedRenderer;
 	private Location savedLoc;
 	private PointI cachedTarget31;

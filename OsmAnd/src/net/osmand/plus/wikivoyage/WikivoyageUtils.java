@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.RequestCreator;
 
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;

@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GpxRouteApproximation;
 

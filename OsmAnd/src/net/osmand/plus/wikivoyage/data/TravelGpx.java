@@ -1,7 +1,8 @@
 package net.osmand.plus.wikivoyage.data;
 
 import static net.osmand.shared.gpx.GpxUtilities.POINT_ELEVATION;
-import static net.osmand.shared.gpx.GpxUtilities.WptPt;
+
+import net.osmand.shared.gpx.primitives.WptPt;
 import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 import androidx.annotation.NonNull;

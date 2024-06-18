@@ -2,15 +2,15 @@ package net.osmand.shared.gpx
 
 import net.osmand.shared.KException
 import net.osmand.shared.data.KQuadRect
-import net.osmand.shared.gpx.GpxUtilities.GpxExtensions
-import net.osmand.shared.gpx.GpxUtilities.Metadata
+import net.osmand.shared.gpx.primitives.GpxExtensions
+import net.osmand.shared.gpx.primitives.Metadata
 import net.osmand.shared.gpx.GpxUtilities.PointsGroup
-import net.osmand.shared.gpx.GpxUtilities.Route
+import net.osmand.shared.gpx.primitives.Route
 import net.osmand.shared.gpx.GpxUtilities.RouteSegment
 import net.osmand.shared.gpx.GpxUtilities.RouteType
-import net.osmand.shared.gpx.GpxUtilities.Track
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment
-import net.osmand.shared.gpx.GpxUtilities.WptPt
+import net.osmand.shared.gpx.primitives.Track
+import net.osmand.shared.gpx.primitives.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
 import net.osmand.shared.gpx.GpxUtilities.updateQR
 import net.osmand.shared.util.KMapUtils
 import net.osmand.shared.util.PlatformUtil.currentTimeMillis

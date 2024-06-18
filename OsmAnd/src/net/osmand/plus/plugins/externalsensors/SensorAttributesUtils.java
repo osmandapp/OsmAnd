@@ -19,7 +19,7 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.shared.gpx.PointAttributes;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.charts.ChartUtils;

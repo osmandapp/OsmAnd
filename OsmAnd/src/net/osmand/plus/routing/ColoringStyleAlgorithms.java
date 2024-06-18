@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.Location;
 import net.osmand.shared.gpx.GpxFile;
 import net.osmand.shared.gpx.GpxTrackAnalysis;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.inapp.InAppPurchaseUtils;

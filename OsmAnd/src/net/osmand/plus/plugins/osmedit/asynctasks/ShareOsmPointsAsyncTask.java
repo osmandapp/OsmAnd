@@ -9,9 +9,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.SharedUtil;
 import net.osmand.plus.utils.AndroidUtils;
-import net.osmand.shared.gpx.GpxUtilities;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.WptPt;
+import net.osmand.shared.gpx.primitives.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;

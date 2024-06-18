@@ -1,8 +1,8 @@
 package net.osmand.shared.gpx
 
 import kotlin.math.*
-import net.osmand.shared.gpx.GpxUtilities.WptPt
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment
+import net.osmand.shared.gpx.primitives.WptPt
+import net.osmand.shared.gpx.primitives.TrkSegment
 import net.osmand.shared.extensions.toRadians
 
 abstract class SplitMetric {

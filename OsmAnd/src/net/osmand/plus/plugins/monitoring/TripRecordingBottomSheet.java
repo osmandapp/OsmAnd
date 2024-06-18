@@ -41,7 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.shared.gpx.GpxFile;
-import net.osmand.shared.gpx.GpxUtilities.TrkSegment;
+import net.osmand.shared.gpx.primitives.TrkSegment;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
