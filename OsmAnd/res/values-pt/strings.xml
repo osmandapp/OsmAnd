@@ -5732,4 +5732,5 @@
     <string name="disable_map_layers">Desativar camadas de mapas</string>
     <string name="disable_map_layers_descr">Desativar todas as camadas de mapas por cima do mapa vetorial (é necessário reiniciar).</string>
     <string name="height_legend_description">São utilizados mapas de cores de altitude para visualizar o relevo.</string>
+    <string name="wall_height">Altura da parede</string>
 </resources>

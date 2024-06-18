@@ -1,5 +1,7 @@
 package net.osmand.plus.plugins.srtm;
 
+import static net.osmand.IndexConstants.TXT_EXT;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
@@ -23,7 +25,6 @@ public class TerrainMode {
 	public static final String COLOR_SLOPE_PREFIX = "slope_";
 
 	public static final String HEIGHT_PREFIX = "height_";
-	public static final String EXT = ".txt";
 	private static TerrainMode[] terrainModes;
 
 	public enum TerrainType {
@@ -63,27 +64,27 @@ public class TerrainMode {
 		File dir = app.getAppPath(IndexConstants.CLR_PALETTE_DIR);
 		if (dir.exists() && dir.listFiles() != null) {
 			for (File lf : dir.listFiles()) {
-				if (lf == null || !lf.getName().endsWith(EXT)) {
+				if (lf == null || !lf.getName().endsWith(TXT_EXT)) {
 					continue;
 				}
 				String nm = lf.getName();
 				if (nm.startsWith(HILLSHADE_PREFIX)) {
 					String key = nm.substring(HILLSHADE_PREFIX.length());
-					key = key.substring(0, key.length() - EXT.length());
+					key = key.substring(0, key.length() - TXT_EXT.length());
 					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
 					if (!DEFAULT_KEY.equals(key)) {
 						tms.add(new TerrainMode(app, key, name, TerrainType.HILLSHADE));
 					}
 				} else if (nm.startsWith(COLOR_SLOPE_PREFIX)) {
 					String key = nm.substring(COLOR_SLOPE_PREFIX.length());
-					key = key.substring(0, key.length() - EXT.length());
+					key = key.substring(0, key.length() - TXT_EXT.length());
 					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
 					if (!DEFAULT_KEY.equals(key)) {
 						tms.add(new TerrainMode(app, key, name, TerrainType.SLOPE));
 					}
 				} else if (nm.startsWith(HEIGHT_PREFIX)) {
 					String key = nm.substring(HEIGHT_PREFIX.length());
-					key = key.substring(0, key.length() - EXT.length());
+					key = key.substring(0, key.length() - TXT_EXT.length());
 					String name = Algorithms.capitalizeFirstLetter(key).replace('_', ' ');
 					if (!DEFAULT_KEY.equals(key)) {
 						tms.add(new TerrainMode(app, key, name, TerrainType.HEIGHT));
@@ -131,11 +132,11 @@ public class TerrainMode {
 		} else if(type == TerrainType.SLOPE) {
 			prefix = COLOR_SLOPE_PREFIX;
 		}
-		return prefix + key + EXT;
+		return prefix + key + TXT_EXT;
 	}
 
 	public String getSecondFile() {
-		return (isHillshade() ? HILLSHADE_SCND_PREFIX : "") + key + EXT;
+		return (isHillshade() ? HILLSHADE_SCND_PREFIX : "") + key + TXT_EXT;
 	}
 
 	public String getKeyName() {

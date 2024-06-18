@@ -5724,4 +5724,22 @@
     <string name="play_weather_forecast">Prehrať predpoveď počasia</string>
     <string name="change_terrain_color_scheme">Zmeniť farebnú schému terénu</string>
     <string name="travel_topics">Cestovné témy</string>
+    <string name="backup_error_failed_to_transfer_file">Nepodarilo sa preniesť cloudové súbory.</string>
+    <string name="action_icon">Ikona akcie</string>
+    <string name="rendering_value_dark_orange_name">Tmavooranžová</string>
+    <string name="wall_height">Výška steny</string>
+    <string name="clear_key_assignment_summary">Priradenie klávesu pre zvolenú akciu bude vymazané.</string>
+    <string name="clear_all_key_shortcuts_summary">Všetky priradenia kláves pre zvolený typ budú vymazané.</string>
+    <string name="clear_all_key_shortcuts">Vymazať všetky klávesové skratky</string>
+    <string name="no_assigned_keys">Žiadne priradené klávesy</string>
+    <string name="no_assigned_keys_desc">Zvoľte akciu a stlačením tlačidla \'Pridať\' priraďte kláves.</string>
+    <string name="shared_string_key">Kláves</string>
+    <string name="new_key_assignment">Priradenie nového klávesu</string>
+    <string name="key_assignment_add_key">Pridať kláves</string>
+    <string name="contact_support_retry">Skúste znovu alebo kontaktujte podporu</string>
+    <string name="user_palette">Používateľská paleta</string>
+    <string name="shared_string_colors">Farby</string>
+    <string name="key_name_pattern">Kláves \"%1$s\"</string>
+    <string name="key_assignment_add_action">Pridať akciu</string>
+    <string name="assigned_keys">Priradené klávesy</string>
 </resources>

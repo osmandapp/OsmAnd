@@ -688,6 +688,17 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 		return null;
 	}
 
+	public String getGradientColorPalette() {
+		if (extensions != null) {
+			return extensions.get("color_palette");
+		}
+		return null;
+	}
+
+	public void setGradientColorPalette(String gradientColorPaletteName) {
+		getExtensionsToWrite().put("color_palette", gradientColorPaletteName);
+	}
+
 	public void setColoringType(String coloringType) {
 		getExtensionsToWrite().put("coloring_type", coloringType);
 	}

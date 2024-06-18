@@ -72,6 +72,9 @@ public class MissingMapsCalculator {
 			rmap.downloadName = Algorithms.getRegionName(r.getFile().getName());
 			rmap.reader = r;
 			rmap.standard = or.getRegionDataByDownloadName(rmap.downloadName) != null;
+			if (rmap.downloadName.toLowerCase().startsWith("world_")) {
+				continue;
+			}
 			knownMaps.put(rmap.downloadName, rmap);
 			for (HHRouteRegion rt : r.getHHRoutingIndexes()) {
 				if (rt.profile.equals(profile)) {

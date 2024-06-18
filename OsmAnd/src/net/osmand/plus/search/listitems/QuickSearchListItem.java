@@ -41,6 +41,7 @@ import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 
 import java.io.File;
 import java.util.List;
@@ -208,19 +209,14 @@ public class QuickSearchListItem {
 					}
 				} else if (searchResult.object instanceof CustomSearchPoiFilter) {
 					res = ((CustomSearchPoiFilter) searchResult.object).getName();
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
+					String name = ((SearchPoiAdditionalFilter) searchResult.object).getName();
+					res = name;
 				}
 				return res;
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				PoiCategory pc = amenity.getType();
-				PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-				String typeStr = amenity.getSubType();
-				if (pt != null) {
-					typeStr = pt.getTranslation();
-				} else if (typeStr != null) {
-					typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
-				}
-				return typeStr;
+				return amenity.getSubTypeStr();
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				if (latLon != null && searchResult.localeRelatedObjectName == null) {
@@ -345,6 +341,9 @@ public class QuickSearchListItem {
 					if (filter != null) {
 						iconId = getCustomFilterIconRes(filter);
 					}
+				} else if (searchResult.object instanceof SearchPoiAdditionalFilter) {
+					SearchPoiAdditionalFilter filter = (SearchPoiAdditionalFilter) searchResult.object;
+					iconId = RenderingIcons.getBigIconResourceId(filter.getIconResource());
 				}
 				if (iconId > 0) {
 					return getIcon(app, iconId);

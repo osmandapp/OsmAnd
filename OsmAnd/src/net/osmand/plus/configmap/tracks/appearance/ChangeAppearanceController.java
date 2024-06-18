@@ -2,6 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 
 import android.os.AsyncTask;
 
@@ -16,6 +17,7 @@ import net.osmand.plus.base.dialog.DialogManager;
 import net.osmand.plus.base.dialog.interfaces.controller.IDialogController;
 import net.osmand.plus.card.color.ColoringStyle;
 import net.osmand.plus.card.color.ColoringStyleCardController.IColorCardControllerListener;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.configmap.tracks.TrackItem;
 import net.osmand.plus.configmap.tracks.appearance.data.AppearanceData;
@@ -69,11 +71,17 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		data.setParameter(COLORING_TYPE, coloringStyle != null ? coloringStyle.getId() : null);
+		data.setParameter(COLOR_PALETTE, PaletteGradientColor.DEFAULT_NAME);
 	}
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		data.setParameter(COLOR, paletteColor.getColor());
+		if (paletteColor instanceof PaletteGradientColor) {
+			data.setParameter(COLOR_PALETTE, ((PaletteGradientColor) paletteColor).getPaletteName());
+		} else {
+			data.setParameter(COLOR_PALETTE, PaletteGradientColor.DEFAULT_NAME);
+			data.setParameter(COLOR, paletteColor.getColor());
+		}
 	}
 
 	public boolean hasAnyChangesToCommit() {

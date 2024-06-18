@@ -4542,7 +4542,7 @@
     <string name="shared_string_visible_widgets">Synlige moduler</string>
     <string name="top_widgets_panel">Øverste panel</string>
     <string name="bottom_widgets_panel">Bundpanel</string>
-    <string name="shared_string_item">Emne</string>
+    <string name="shared_string_item">Element</string>
     <string name="shared_string_buttons">Knapper</string>
     <string name="configure_screen_widgets_descr">Vælg skærmsektion for at tilføje eller omarrangere moduler.</string>
     <string name="simulation_real_mode_title">Realistisk simulering</string>
@@ -5623,7 +5623,7 @@
     <string name="special_routing_cpp">Speciel type ruteberegning</string>
     <string name="custom_buttons">Tilpassede knapper</string>
     <string name="default_buttons">Standardknapper</string>
-    <string name="custom_map_button_name_present">Sådanne en knap findes allerede</string>
+    <string name="custom_map_button_name_present">Sådan en knap findes allerede</string>
     <string name="add_button">Tilføj knap</string>
     <string name="shared_string_speedometer">Speedometer</string>
     <string name="speed_limit_warning">Advarsel om fartgrænse</string>
@@ -5702,7 +5702,7 @@
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="getting_list_of_required_maps">Henter en liste over nødvendige kort…</string>
     <string name="required_maps_calculate_online_summary">Listen over manglende kort er baseret på ruten i lige linje. For at få en nøjagtig liste over kort kan OsmAnd forudberegne din rute online.</string>
-    <string name="maps_that_also_be_used">Kort, der også kan bruges: %1$s</string>
+    <string name="maps_that_also_be_used">Kort, der også vil blive brugt: %1$s</string>
     <string name="route_line_use_coloring_speed">Rutelinjen er farvet efter bevægelseshastighed.</string>
     <string name="route_line_use_coloring_altitude">Rutelinjen er farvet efter højde over havet.</string>
     <string name="required_maps">Nødvendige kort</string>
@@ -5751,4 +5751,7 @@
     <string name="shared_string_key">Tast</string>
     <string name="user_palette">Brugerpalet</string>
     <string name="shared_string_colors">Farver</string>
+    <string name="backup_error_failed_to_transfer_file">Kunne ikke overføre cloud-fil(er).</string>
+    <string name="contact_support_retry">Prøv igen, eller kontakt support</string>
+    <string name="missing_maps_ignore">Brug eksisterende kort</string>
 </resources>

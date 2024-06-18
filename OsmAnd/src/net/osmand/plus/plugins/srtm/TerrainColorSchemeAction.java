@@ -1,6 +1,6 @@
 package net.osmand.plus.plugins.srtm;
 
-import static net.osmand.plus.plugins.srtm.CollectColorPalletsTask.*;
+import static net.osmand.plus.plugins.srtm.CollectColorPalletTask.*;
 import static net.osmand.plus.quickaction.QuickActionIds.TERRAIN_COLOR_SCHEME_ACTION;
 
 import android.content.Context;
@@ -23,6 +23,7 @@ import net.osmand.ColorPalette.ColorValue;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.card.color.palette.gradient.GradientUiHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.plugins.PluginsHelper;
 import net.osmand.plus.quickaction.QuickAction;
@@ -241,15 +242,7 @@ public class TerrainColorSchemeAction extends SwitchableAction<String> {
 				public void collectingPalletFinished(@Nullable ColorPalette colorPalette) {
 					if (colorPalette != null) {
 						List<ColorValue> colorsList = colorPalette.getColors();
-						int[] colors = new int[colorsList.size()];
-						for (int i = 0; i < colorsList.size(); i++) {
-							ColorValue value = colorsList.get(i);
-							colors[i] = Color.argb(value.a, value.r, value.g, value.b);
-						}
-						GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, colors);
-						gradientDrawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-						gradientDrawable.setShape(GradientDrawable.OVAL);
-						imageView.setImageDrawable(gradientDrawable);
+						imageView.setImageDrawable(GradientUiHelper.getGradientDrawable(app, colorsList, GradientDrawable.OVAL));
 					} else {
 						TerrainColorSchemeAction.super.setIcon(app, item, imageView, iconProgressBar);
 					}

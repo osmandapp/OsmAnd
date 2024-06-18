@@ -5698,7 +5698,7 @@
     <string name="missing_maps_description">Неке ванмрежне мапе потребне за ову руту недостају или нису ажуриране. Преузмите или ажурирајте ове мапе.</string>
     <string name="missing_maps_header">Недостајуће или застареле мапе</string>
     <string name="route_line_use_coloring_speed">Линија руте је обојена по брзини кретања.</string>
-    <string name="maps_that_also_be_used">Мапе које се такође користе: %1$s</string>
+    <string name="maps_that_also_be_used">Мапе које ће се такође користити: %1$s</string>
     <string name="required_maps_calculate_online_summary">Листа мапа које недостају заснива се на праволинијској рути. Да бисте добили тачну листу мапа, ОсмАнд може унапред да израчуна вашу руту на мрежи.</string>
     <string name="downward_gradient">Надоле градијент</string>
     <string name="upward_gradient">Градијент навише</string>
@@ -5743,4 +5743,7 @@
     <string name="action_icon">Додај икону</string>
     <string name="user_palette">Корисничка палета</string>
     <string name="shared_string_colors">Боје</string>
+    <string name="missing_maps_ignore">Користи постојеће мапе</string>
+    <string name="backup_error_failed_to_transfer_file">Пренос датотеке(а) у облаку није успео.</string>
+    <string name="contact_support_retry">Покушајте поново или контактирајте подршку</string>
 </resources>

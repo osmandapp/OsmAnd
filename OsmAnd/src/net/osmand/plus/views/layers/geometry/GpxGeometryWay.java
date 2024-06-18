@@ -42,10 +42,12 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	                                float trackWidth,
 	                                @Nullable float[] dashPattern,
 	                                boolean drawDirectionArrows,
-	                                @Nullable Track3DStyle track3DStyle,
-	                                @NonNull ColoringType coloringType,
-	                                @Nullable String routeInfoAttribute) {
-		boolean coloringTypeChanged = this.coloringType != coloringType
+									@Nullable Track3DStyle track3DStyle,
+									@NonNull ColoringType coloringType,
+									@Nullable String routeInfoAttribute,
+									@Nullable String gradientPaletteName) {
+		boolean coloringTypeChanged = !Algorithms.stringsEqual(this.gradientPalette, gradientPaletteName)
+				|| this.coloringType != coloringType
 				|| coloringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 		this.coloringChanged = this.customColor != trackColor || coloringTypeChanged;
@@ -74,6 +76,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		this.drawDirectionArrows = drawDirectionArrows;
 		this.coloringType = coloringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+		this.gradientPalette = gradientPaletteName;
 	}
 
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
