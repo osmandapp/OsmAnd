@@ -20,6 +20,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
+import net.osmand.map.WorldRegion;
 import net.osmand.util.Algorithms;
 import net.osmand.util.CollectionUtils;
 import net.osmand.util.MapUtils;
@@ -72,8 +73,8 @@ public class MissingMapsCalculator {
 			rmap.downloadName = Algorithms.getRegionName(r.getFile().getName());
 			rmap.reader = r;
 			rmap.standard = or.getRegionDataByDownloadName(rmap.downloadName) != null;
-			if (rmap.downloadName.toLowerCase().startsWith("world_")) {
-				continue;
+			if (rmap.downloadName.toLowerCase().startsWith(WorldRegion.WORLD + "_")) {
+				continue; // avoid including World_seamarks
 			}
 			knownMaps.put(rmap.downloadName, rmap);
 			for (HHRouteRegion rt : r.getHHRoutingIndexes()) {
@@ -188,10 +189,16 @@ public class MissingMapsCalculator {
 		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
 		for (BinaryMapDataObject o : resList) {
-			regions.add(or.getDownloadName(o));
-			if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-					&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
-				onlyJointMap = false;
+			if (or.isDownloadOfType(o, OsmandRegions.MAP_TYPE)
+					|| or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE)
+					|| or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
+					|| or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)
+			) {
+				regions.add(or.getDownloadName(o));
+				if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
+						&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
+					onlyJointMap = false;
+				}
 			}
 		}
 		Collections.sort(regions, new Comparator<String>() {
