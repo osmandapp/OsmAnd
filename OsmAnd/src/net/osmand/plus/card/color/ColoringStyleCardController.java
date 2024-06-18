@@ -73,8 +73,8 @@ public abstract class ColoringStyleCardController extends BaseMultiStateCardCont
 	}
 
 	protected void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
-		card.updateSelectedCardState();
 		externalListener.onColoringStyleSelected(coloringStyle);
+		card.updateSelectedCardState();
 	}
 
 	protected boolean isAvailableInSubscription(@NonNull ColoringStyle coloringStyle) {

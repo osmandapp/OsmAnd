@@ -3,6 +3,7 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
@@ -177,6 +178,27 @@ public class GpxAppearanceHelper {
 			color = getAppearanceParameter(new File(gpxFile.path), COLOR);
 		}
 		return color != null ? color : gpxFile.getColor(defaultColor);
+	}
+
+	@Nullable
+	public String getGradientPaletteName(@NonNull GPXFile gpxFile) {
+		String gradientPalette;
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			gradientPalette = trackDrawInfo.getGradientColorName();
+		} else if (gpxFile.showCurrentTrack) {
+			gradientPalette = settings.CURRENT_GRADIENT_PALETTE.get();
+		} else {
+			gradientPalette = getAppearanceParameter(new File(gpxFile.path), COLOR_PALETTE);
+		}
+		return gradientPalette != null ? gradientPalette : gpxFile.getGradientColorPalette();
+	}
+
+	@Nullable
+	public String getColoringType(@NonNull GPXFile gpxFile) {
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
+		}
+		return null;
 	}
 
 	@NonNull

@@ -5749,4 +5749,7 @@
     <string name="new_key_assignment">Asignare nouă de tastă</string>
     <string name="key_name_pattern">Tasta \"%1$s\"</string>
     <string name="key_assignment_add_key">Adaugă tastă</string>
+    <string name="backup_error_failed_to_transfer_file">Nu a reușit să transfere fișierul (fișierele) cloud.</string>
+    <string name="contact_support_retry">Încercați din nou sau contactați asistența</string>
+    <string name="missing_maps_ignore">Utilizați hărțile existente</string>
 </resources>

@@ -22,9 +22,6 @@ import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.NativeUtilities;
 import net.osmand.plus.views.layers.MapTileLayer;
-import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
-import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
-import net.osmand.router.RouteColorize;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;

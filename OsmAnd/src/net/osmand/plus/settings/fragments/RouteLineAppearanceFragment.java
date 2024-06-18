@@ -27,6 +27,8 @@ import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.card.base.multistate.IMultiStateCardController;
 import net.osmand.plus.card.base.multistate.MultiStateCard;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.gradient.GradientColorsPaletteController;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -145,10 +147,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		ColoringType coloringType = settings.ROUTE_COLORING_TYPE.getModeValue(appMode);
 		String routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(appMode);
 		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
+		String gradientPaletteName = settings.ROUTE_GRADIENT_PALETTE.getModeValue(appMode);
 		boolean showTurnArrows = settings.ROUTE_SHOW_TURN_ARROWS.getModeValue(appMode);
 
 		PreviewRouteLineInfo previewRouteLineInfo = new PreviewRouteLineInfo(colorDay, colorNight,
-				coloringType, routeInfoAttribute, widthKey, showTurnArrows);
+				coloringType, routeInfoAttribute, widthKey, gradientPaletteName, showTurnArrows);
 
 		String navigationIconName = appMode.getNavigationIcon();
 		NavigationIcon navigationIcon = NavigationIcon.isModel(navigationIconName)
@@ -316,6 +319,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	private void onSaveButtonClicked() {
 		getColorCardController().getColorsPaletteController().refreshLastUsedTime();
+		GradientColorsPaletteController gradientColorsPaletteController = getColorCardController().getGradientPaletteController();
+		if (gradientColorsPaletteController != null) {
+			gradientColorsPaletteController.refreshLastUsedTime();
+		}
 		saveRouteLineAppearance();
 		dismiss();
 	}
@@ -327,6 +334,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		settings.ROUTE_INFO_ATTRIBUTE.setModeValue(appMode, previewRouteLineInfo.getRouteInfoAttribute());
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, previewRouteLineInfo.getWidth());
 		settings.ROUTE_SHOW_TURN_ARROWS.setModeValue(appMode, previewRouteLineInfo.shouldShowTurnArrows());
+		settings.ROUTE_GRADIENT_PALETTE.setModeValue(appMode, previewRouteLineInfo.getGradientPalette());
 	}
 
 	private void setupScrollListener() {
@@ -532,9 +540,17 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
-		RouteLineColorController colorController = getColorCardController();
-		previewRouteLineInfo.setCustomColor(paletteColor.getColor(), colorController.isNightMap());
-		updateColorItems();
+		if (paletteColor instanceof PaletteGradientColor){
+			PaletteGradientColor paletteGradientColor = (PaletteGradientColor) paletteColor;
+			previewRouteLineInfo.setGradientPalette(paletteGradientColor.getPaletteName());
+			if (getMapActivity() != null) {
+				getMapActivity().refreshMap();
+			}
+		} else{
+			RouteLineColorController colorController = getColorCardController();
+			previewRouteLineInfo.setCustomColor(paletteColor.getColor(), colorController.isNightMap());
+			updateColorItems();
+		}
 	}
 
 	@Override

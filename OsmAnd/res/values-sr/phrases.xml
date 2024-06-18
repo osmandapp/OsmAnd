@@ -4870,4 +4870,5 @@
     <string name="poi_indoor_seating_no">Без седења унутар</string>
     <string name="poi_property_management">Канцеларија за управљање имовином</string>
     <string name="poi_engineer">Инжењерска канцеларија</string>
+    <string name="poi_mcdonalds">МекДоналд</string>
 </resources>

@@ -97,6 +97,11 @@ public class ColorUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
+	@ColorInt
+	public static int invertColor(@ColorInt int color) {
+		return (color & 0xFF000000) | (~color & 0x00FFFFFF);
+	}
+
 	/********************************* Basic colors *********************************/
 
 	@ColorInt

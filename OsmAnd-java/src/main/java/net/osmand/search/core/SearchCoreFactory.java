@@ -2,11 +2,13 @@ package net.osmand.search.core;
 
 
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_EQUALS;
+import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
 import static net.osmand.CollatorStringMatcher.StringMatcherMode.CHECK_STARTS_FROM_SPACE;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.search.core.ObjectType.POI;
 import static net.osmand.util.LocationParser.parseOpenLocationCode;
+import static net.osmand.binary.BinaryMapIndexReader.ACCEPT_ALL_POI_TYPE_FILTER;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -14,6 +16,8 @@ import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiAdditionalFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.CommonWords;
 import net.osmand.data.Amenity;
@@ -738,6 +742,7 @@ public class SearchCoreFactory {
 	public static class SearchAmenityTypesAPI extends SearchBaseAPI {
 
 		public final static String STD_POI_FILTER_PREFIX = "std_";
+		private static final int BBOX_RADIUS = 10000;
 
 		private Map<String, PoiType> translatedNames = new LinkedHashMap<>();
 		private List<AbstractPoiType> topVisibleFilters;
@@ -745,6 +750,7 @@ public class SearchCoreFactory {
 		private List<CustomSearchPoiFilter> customPoiFilters = new ArrayList<>();
 		private Map<String, Integer> activePoiFilters = new HashMap<>();
 		private MapPoiTypes types;
+		private Map<BinaryMapIndexReader, Set<String>> poiAdditionalTopIndexCache;
 
 		public SearchAmenityTypesAPI(MapPoiTypes types) {
 			super(ObjectType.POI_TYPE);
@@ -975,6 +981,7 @@ public class SearchCoreFactory {
 					addPoiTypeResult(phrase, resultMatcher, showTopFiltersOnly, csf.getFilterId(), res);
 				}
 			}
+			searchTopIndexPoiAdditional(phrase, resultMatcher);
 			return true;
 		}
 
@@ -1028,6 +1035,87 @@ public class SearchCoreFactory {
 			}
 			return SEARCH_AMENITY_TYPE_API_PRIORITY;
 		}
+
+		private void initPoiAdditionalTopIndex(SearchPhrase phrase) throws IOException {
+			if (poiAdditionalTopIndexCache == null) {
+				poiAdditionalTopIndexCache = new HashMap<>();
+				List<BinaryMapIndexReader> offlineIndexes = phrase.getOfflineIndexes();
+				for (BinaryMapIndexReader r : offlineIndexes) {
+					List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
+					Set<String> names = new HashSet<>();
+					for (PoiSubType subType : poiSubTypes) {
+						if (subType.possibleValues == null) {
+							continue;
+						}
+						names.addAll(subType.possibleValues);
+					}
+					if (names.size() > 0) {
+						poiAdditionalTopIndexCache.put(r, names);
+					}
+				}
+				for (Map.Entry<BinaryMapIndexReader, Set<String>> entry : poiAdditionalTopIndexCache.entrySet()) {
+					Set<String> values = entry.getValue();
+					List<String> translation = new ArrayList<>();
+					for (String v : values) {
+						String translate = getTopIndexTranslation(v);
+						translation.add(translate);
+					}
+					values.addAll(translation);
+				}
+			}
+		}
+
+		public void searchTopIndexPoiAdditional(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
+			initPoiAdditionalTopIndex(phrase);
+			Iterator<BinaryMapIndexReader> offlineIndexes = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,	SearchPhraseDataType.POI);
+			NameStringMatcher nm = phrase.getMainUnknownNameStringMatcher();
+			while (offlineIndexes.hasNext()) {
+				BinaryMapIndexReader r = offlineIndexes.next();
+				if (!poiAdditionalTopIndexCache.containsKey(r)) {
+					continue;
+				}
+				if (nm.matches(poiAdditionalTopIndexCache.get(r))) {
+					TopIndexMatch match = matchTopIndex(r, phrase);
+					if (match != null) {
+						SearchResult res = new SearchResult(phrase);
+						res.localeName = match.translatedValue;
+						res.object = new TopIndexFilter(match.subType, types, match.value);
+						addPoiTypeResult(phrase, resultMatcher, false, null, res);
+					}
+				}
+			}
+		}
+
+		private TopIndexMatch matchTopIndex(BinaryMapIndexReader r, SearchPhrase phrase) throws IOException {
+			String search = phrase.getText(true);
+			List<PoiSubType> poiSubTypes = r.getTopIndexSubTypes();
+			for (PoiSubType subType : poiSubTypes) {
+				NameStringMatcher nm = new NameStringMatcher(search, CHECK_ONLY_STARTS_WITH);
+				String topIndexValue = null;
+				String translate = null;
+				for (String s : subType.possibleValues) {
+					translate = getTopIndexTranslation(s);
+					if (nm.matches(s) || nm.matches(translate)) {
+						topIndexValue = s;
+						break;
+					}
+				}
+				if (topIndexValue != null) {
+					TopIndexMatch topIndexMatch = new TopIndexMatch(subType, topIndexValue, translate);
+					return topIndexMatch;
+				}
+			}
+			return null;
+		}
+
+		private String getTopIndexTranslation(String value) {
+			String key = TopIndexFilter.getValueKey(value);
+			String translate = types.getPoiTranslation(key);
+			if (translate.toLowerCase().equals(key)) {
+				translate = value;
+			}
+			return translate;
+		}
 	}
 
 	public static class SearchAmenityByTypeAPI extends SearchBaseAPI {
@@ -1071,6 +1159,7 @@ public class SearchCoreFactory {
 		public boolean search(final SearchPhrase phrase, final SearchResultMatcher resultMatcher) throws IOException {
 			unselectedPoiType = null;
 			SearchPoiTypeFilter poiTypeFilter = null;
+			SearchPoiAdditionalFilter poiAdditionalFilter = null;
 			String nameFilter = null;
 			int countExtraWords = 0;
 			Set<String> poiAdditionals = new LinkedHashSet<>();
@@ -1080,6 +1169,9 @@ public class SearchCoreFactory {
 					poiTypeFilter = getPoiTypeFilter((AbstractPoiType) obj, poiAdditionals);
 				} else if (obj instanceof SearchPoiTypeFilter) {
 					poiTypeFilter = (SearchPoiTypeFilter) obj;
+				} else if (obj instanceof SearchPoiAdditionalFilter) {
+					poiTypeFilter = ACCEPT_ALL_POI_TYPE_FILTER;
+					poiAdditionalFilter = (SearchPoiAdditionalFilter) obj;
 				} else {
 					throw new UnsupportedOperationException();
 				}
@@ -1139,7 +1231,7 @@ public class SearchCoreFactory {
 						rm = ((CustomSearchPoiFilter) poiTypeFilter).wrapResultMatcher(rm);
 					}
 					SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest((int) bbox.left,
-							(int) bbox.right, (int) bbox.top, (int) bbox.bottom, -1, poiTypeFilter, rm);
+							(int) bbox.right, (int) bbox.top, (int) bbox.bottom, -1, poiTypeFilter, poiAdditionalFilter, rm);
 					r.searchPoi(req);
 					resultMatcher.apiSearchRegionFinished(this, r, phrase);
 				}
@@ -1778,5 +1870,16 @@ public class SearchCoreFactory {
 	public static boolean isLastWordCityGroup(SearchPhrase p ) {
 		return p.isLastWord(ObjectType.CITY) || p.isLastWord(ObjectType.POSTCODE) ||
 				p.isLastWord(ObjectType.VILLAGE);
+	}
+
+	private static class TopIndexMatch {
+		TopIndexMatch(PoiSubType subType, String value, String translatedValue) {
+			this.subType = subType;
+			this.value = value;
+			this.translatedValue = translatedValue;
+		}
+		PoiSubType subType;
+		String value;
+		String translatedValue;
 	}
 }

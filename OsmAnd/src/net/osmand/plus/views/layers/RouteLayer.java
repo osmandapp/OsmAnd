@@ -450,7 +450,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean shouldShowDirectionArrows = previewRouteLineInfo == null
 					|| previewRouteLineInfo.shouldShowDirectionArrows();
 			routeGeometry.setRouteStyleParams(routeLineColor, routeLineWidth, shouldShowDirectionArrows,
-					directionArrowsColor, actualColoringType, routeInfoAttribute);
+					directionArrowsColor, actualColoringType, routeInfoAttribute, routeGradientPalette);
 			boolean routeUpdated = routeGeometry.updateRoute(tb, route);
 			boolean shouldShowTurnArrows = shouldShowTurnArrows();
 

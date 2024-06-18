@@ -476,6 +476,9 @@ public abstract class InAppPurchaseHelper {
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
 			}
+			if (userRequested) {
+				ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
+			}
 			return new String[] {activeSubscriptionsIds, subscriptionsState};
 		}
 

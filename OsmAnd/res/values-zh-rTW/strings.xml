@@ -5736,4 +5736,6 @@
     <string name="action_icon">動作圖示</string>
     <string name="user_palette">使用者調色板</string>
     <string name="shared_string_colors">顏色</string>
+    <string name="backup_error_failed_to_transfer_file">無法傳輸檔案。</string>
+    <string name="contact_support_retry">再試一次或聯絡客服</string>
 </resources>

@@ -15,9 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.gpx.GPXUtilities;
-import net.osmand.gpx.GPXUtilities.TrkSegment;
-import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.MapMarkerBuilder;
@@ -29,6 +26,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.gpx.GPXUtilities;
+import net.osmand.gpx.GPXUtilities.TrkSegment;
+import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -44,7 +44,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.layers.core.LocationPointsTileProvider;
 import net.osmand.plus.views.layers.core.TilePointsProvider;
-import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.GeometryWayPathAlgorithms;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWayContext;
@@ -527,7 +526,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						segment.renderer = renderer;
 						GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 						geometryWay.baseOrder = baseOrder--;
-						renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+						renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 						renderer.setDrawArrows(false);
 						renderer.setGeometryWay(geometryWay);
 						cached.add(renderer);
@@ -572,7 +571,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 							renderer = new StandardTrack(new ArrayList<>(points), 17.2);
 							GpxGeometryWay geometryWay = new GpxGeometryWay(wayContext);
 							geometryWay.baseOrder = baseOrder--;
-							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null);
+							renderer.setTrackParams(color, "", ColoringType.TRACK_SOLID, null, null);
 							renderer.setDrawArrows(false);
 							renderer.setGeometryWay(geometryWay);
 							cached.add(renderer);
@@ -798,7 +797,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 						geometryWay.baseOrder = getBaseOrder() - 100;
 					}
 					renderer = new StandardTrack(new ArrayList<>(beforeAfterWpt), 17.2);
-					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null);
+					renderer.setTrackParams(lineAttrs.paint.getColor(), "", ColoringType.TRACK_SOLID, null, null);
 					renderer.setDrawArrows(false);
 					renderer.setGeometryWay(geometryWay);
 					renderer.drawGeometry(canvas, tb, tb.getLatLonBounds(), lineAttrs.paint.getColor(),

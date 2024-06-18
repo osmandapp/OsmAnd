@@ -111,6 +111,28 @@ public class Amenity extends MapObject {
 		this.subType = subType;
 	}
 
+	public String getSubTypeStr() {
+		PoiCategory pc = getType();
+		String[] subtypes = getSubType().split(";");
+		String typeStr = "";
+		//multi value
+		for (String subType : subtypes) {
+			PoiType pt = pc.getPoiTypeByKeyName(subType);
+			if (pt != null) {
+				if (!typeStr.isEmpty()) {
+					typeStr += ", " + pt.getTranslation().toLowerCase();
+				} else {
+					typeStr = pt.getTranslation();
+				}
+			}
+		}
+		if (typeStr.isEmpty()) {
+			typeStr = getSubType();
+			typeStr = Algorithms.capitalizeFirstLetterAndLowercase(typeStr.replace('_', ' '));
+		}
+		return typeStr;
+	}
+
 	public String getOpeningHours() {
 		return openingHours;
 	}

@@ -395,6 +395,7 @@ class RouteRecalculationHelper {
 						routeCalcError = app.getString(R.string.empty_route_calculated);
 						routeCalcErrorShort = app.getString(R.string.empty_route_calculated);
 					}
+					app.getSettings().IGNORE_MISSING_MAPS = false; // reset on routing error
 					showMessage(routeCalcError);
 				}
 			}

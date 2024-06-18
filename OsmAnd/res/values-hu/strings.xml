@@ -5744,4 +5744,6 @@
     <string name="action_icon">Műveletikon</string>
     <string name="shared_string_colors">Színek</string>
     <string name="user_palette">Felhasználói paletta</string>
+    <string name="backup_error_failed_to_transfer_file">Nem sikerült a felhőfájl(ok) átvitele.</string>
+    <string name="contact_support_retry">Próbálja újra, vagy lépjen kapcsolatba az ügyfélszolgálattal</string>
 </resources>

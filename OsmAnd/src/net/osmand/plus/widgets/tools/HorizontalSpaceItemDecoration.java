@@ -1,4 +1,4 @@
-package net.osmand.plus.card.color.palette.main;
+package net.osmand.plus.widgets.tools;
 
 import android.graphics.Rect;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-class HorizontalSpaceItemDecoration extends RecyclerView.ItemDecoration {
+public class HorizontalSpaceItemDecoration extends RecyclerView.ItemDecoration {
 
 	private final int horizontalSpaceDp;
 

@@ -57,6 +57,7 @@ public class BinaryMapPoiReaderAdapter {
 		List<PoiCategory> categoriesType = new ArrayList<PoiCategory>();
 		List<List<String>> subcategories = new ArrayList<List<String>>();
 		List<PoiSubType> subTypes = new ArrayList<PoiSubType>();
+		List<PoiSubType> topIndexSubTypes = new ArrayList<PoiSubType>();
 
 		int left31;
 		int right31;
@@ -94,6 +95,10 @@ public class BinaryMapPoiReaderAdapter {
 		
 		public List<PoiSubType> getSubTypes() {
 			return subTypes;
+		}
+
+		public List<PoiSubType> getTopIndexSubTypes() {
+			return topIndexSubTypes;
 		}
 		
 		public int getFieldNumber() {
@@ -275,6 +280,9 @@ public class BinaryMapPoiReaderAdapter {
 					}
 				}
 				region.subTypes.add(st);
+				if (poiTypes.topIndexPoiAdditional.containsKey(st.name)) {
+					region.topIndexSubTypes.add(st);
+				}
 				codedIS.popLimit(oldLimit);
 				break;
 			default:
@@ -723,12 +731,20 @@ public class BinaryMapPoiReaderAdapter {
 		StringBuilder retValue = new StringBuilder();
 		PoiCategory amenityType = null;
 		LinkedList<String> textTags = null;
+		boolean hasSubcategoriesField = false;
+		boolean topIndexAdditonalFound = false;
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			if (amenityType == null && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.CATEGORIES_FIELD_NUMBER || tag == 0)) {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return null;
+			}
+			if (req.poiAdditionalFilter != null && (tag > OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER || tag == 0)) {
+				if (!hasSubcategoriesField || !topIndexAdditonalFound) {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return null;
+				}
 			}
 			switch (tag) {
 			case 0:
@@ -778,7 +794,13 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiBoxDataAtom.SUBCATEGORIES_FIELD_NUMBER:
 				int subtypev = codedIS.readUInt32();
 				retValue.setLength(0);
+				hasSubcategoriesField = true;
 				PoiSubType st = region.getSubtypeFromId(subtypev, retValue);
+				if (req.poiAdditionalFilter != null) {
+					if (st != null && req.poiAdditionalFilter.accept(st, retValue.toString())) {
+						topIndexAdditonalFound = true;
+					}
+				}
 				if (st != null) {
 					am.setAdditionalInfo(st.name, retValue.toString());
 				}
@@ -865,17 +887,18 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				return false;
-//			case OsmandOdb.OsmAndPoiCategories.SUBCATEGORIES_FIELD_NUMBER:
-//				int subcatvl = codedIS.readUInt32();
-//				if(req.poiTypeFilter.filterSubtypes()) {
-//					subType.setLength(0);
-//					PoiSubType pt = region.getSubtypeFromId(subcatvl, subType);
-//					if(pt != null && req.poiTypeFilter.accept(pt.name, subType.toString())) {
-//						codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-//						return true;
-//					}
-//				}
-//				break;
+			case OsmandOdb.OsmAndPoiCategories.SUBCATEGORIES_FIELD_NUMBER:
+				int subcat = codedIS.readUInt32();
+				StringBuilder subType = new StringBuilder();
+				PoiSubType poiSubType = region.getSubtypeFromId(subcat, subType);
+				String val = subType.toString();
+				if (poiSubType != null && !val.isEmpty()
+						&& req.poiAdditionalFilter != null
+						&& req.poiAdditionalFilter.accept(poiSubType, val)) {
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return true;
+				}
+				break;
 			case OsmandOdb.OsmAndPoiCategories.CATEGORIES_FIELD_NUMBER:
 				PoiCategory type = poiTypes.getOtherPoiCategory();
 				String subtype = "";

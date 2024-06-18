@@ -114,6 +114,11 @@ public class GpxDataItem extends DataItem {
 					setParameter(COLORING_TYPE, coloringType == null ? null : coloringType.getName(null));
 				}
 				break;
+			case COLOR_PALETTE:
+				if (!Algorithms.isEmpty(gpxFile.getGradientColorPalette())) {
+					setParameter(COLOR_PALETTE, gpxFile.getGradientColorPalette());
+				}
+				break;
 			case TRACK_VISUALIZATION_TYPE:
 				setParameter(TRACK_VISUALIZATION_TYPE, gpxFile.get3DVisualizationType());
 				break;
