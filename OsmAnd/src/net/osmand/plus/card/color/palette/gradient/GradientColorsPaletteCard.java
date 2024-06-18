@@ -1,5 +1,8 @@
 package net.osmand.plus.card.color.palette.gradient;
 
+import static net.osmand.gpx.GpxParameter.MAX_ELEVATION;
+import static net.osmand.gpx.GpxParameter.MIN_ELEVATION;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -29,6 +32,7 @@ import net.osmand.router.RouteColorize.ColorizationType;
 import java.text.DecimalFormat;
 
 public class GradientColorsPaletteCard extends BaseCard implements IColorsPalette {
+	public static final float MAX_ALTITUDE_ADDITION = 50f;
 
 	private final GradientColorsPaletteController controller;
 	private final GradientColorsPaletteAdapter paletteAdapter;
@@ -93,8 +97,19 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 					break;
 				case ELEVATION:
 					if (analysis != null) {
-						float maxElevation = (float) analysis.getMaxElevation();
-						formattedValue = OsmAndFormatter.getFormattedDistanceValue(value * maxElevation, app, null, app.getSettings().METRIC_SYSTEM.get());
+						float calculatedValue;
+						float minElevation = (float) analysis.getMinElevation();
+						float maxElevation = (float) analysis.getMaxElevation() + MAX_ALTITUDE_ADDITION;
+						if (minElevation != (double) MIN_ELEVATION.getDefaultValue() && maxElevation != (double) MAX_ELEVATION.getDefaultValue()) {
+							if (value == 0) {
+								calculatedValue = minElevation;
+							} else {
+								calculatedValue = minElevation + (value * ((maxElevation - minElevation)));
+							}
+						} else {
+							break;
+						}
+						formattedValue = OsmAndFormatter.getFormattedDistanceValue(calculatedValue, app, null, app.getSettings().METRIC_SYSTEM.get());
 						stringValue = formattedValue.value;
 						type = formattedValue.unit;
 					}
