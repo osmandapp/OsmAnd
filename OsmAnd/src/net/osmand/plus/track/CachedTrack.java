@@ -16,6 +16,7 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
+import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
@@ -41,7 +42,7 @@ public class CachedTrack {
 
 	private final Map<Integer, List<RouteSegmentResult>> routeCache = new ConcurrentHashMap<>();
 	private final Map<String, List<TrkSegment>> simplifiedSegmentsCache = new HashMap<>();
-	private final Map<Pair<GradientScaleType, String>, List<TrkSegment>> nonSimplifiedSegmentsCache = new HashMap<>();
+	private final Map<String, List<TrkSegment>> nonSimplifiedSegmentsCache = new HashMap<>();
 	private Set<String> availableColoringTypes;
 
 	private CachedTrackParams params;
@@ -89,12 +90,12 @@ public class CachedTrack {
 			clearCaches();
 		}
 
-		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(new Pair<>(scaleType, gradientPalette));
+		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(scaleType + "_" + gradientPalette);
 		if (segments == null) {
 			RouteColorize gpxColorization = createGpxColorization(scaleType, gradientPalette);
 			List<RouteColorizationPoint> colorsOfPoints = gpxColorization.getResult();
 			segments = createColoredSegments(colorsOfPoints, scaleType);
-			nonSimplifiedSegmentsCache.put(new Pair<>(scaleType, gradientPalette), segments);
+			nonSimplifiedSegmentsCache.put(scaleType + "_" + gradientPalette, segments);
 		}
 
 		return segments;

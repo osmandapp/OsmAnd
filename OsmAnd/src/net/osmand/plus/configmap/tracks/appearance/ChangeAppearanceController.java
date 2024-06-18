@@ -2,7 +2,7 @@ package net.osmand.plus.configmap.tracks.appearance;
 
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
-import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 
 import android.os.AsyncTask;
 
@@ -71,15 +71,15 @@ public class ChangeAppearanceController implements IDialogController, IColorCard
 	@Override
 	public void onColoringStyleSelected(@Nullable ColoringStyle coloringStyle) {
 		data.setParameter(COLORING_TYPE, coloringStyle != null ? coloringStyle.getId() : null);
-		data.setParameter(GRADIENT_PALETTE, PaletteGradientColor.DEFAULT_NAME);
+		data.setParameter(COLOR_PALETTE, PaletteGradientColor.DEFAULT_NAME);
 	}
 
 	@Override
 	public void onColorSelectedFromPalette(@NonNull PaletteColor paletteColor) {
 		if (paletteColor instanceof PaletteGradientColor) {
-			data.setParameter(GRADIENT_PALETTE, ((PaletteGradientColor) paletteColor).getPaletteName());
+			data.setParameter(COLOR_PALETTE, ((PaletteGradientColor) paletteColor).getPaletteName());
 		} else {
-			data.setParameter(GRADIENT_PALETTE, PaletteGradientColor.DEFAULT_NAME);
+			data.setParameter(COLOR_PALETTE, PaletteGradientColor.DEFAULT_NAME);
 			data.setParameter(COLOR, paletteColor.getColor());
 		}
 	}

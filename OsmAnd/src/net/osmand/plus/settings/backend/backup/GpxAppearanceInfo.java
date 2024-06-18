@@ -67,7 +67,7 @@ public class GpxAppearanceInfo {
 		splitType = helper.requireParameter(item, SPLIT_TYPE);
 		splitInterval = helper.requireParameter(item, SPLIT_INTERVAL);
 		coloringType = helper.getParameter(item, COLORING_TYPE);
-		gradientPaletteName = helper.getParameter(item, GRADIENT_PALETTE);
+		gradientPaletteName = helper.getParameter(item, COLOR_PALETTE);
 		trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(helper.getParameter(item, TRACK_VISUALIZATION_TYPE));
 		trackWallColorType = Gpx3DWallColorType.get3DWallColorType(helper.getParameter(item, TRACK_3D_WALL_COLORING_TYPE));
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));

@@ -3,7 +3,7 @@ package net.osmand.plus.track.helpers;
 import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.TRACK_3D_LINE_POSITION_TYPE;
@@ -188,7 +188,7 @@ public class GpxAppearanceHelper {
 		} else if (gpxFile.showCurrentTrack) {
 			gradientPalette = settings.CURRENT_GRADIENT_PALETTE.get();
 		} else {
-			gradientPalette = getAppearanceParameter(new File(gpxFile.path), GRADIENT_PALETTE);
+			gradientPalette = getAppearanceParameter(new File(gpxFile.path), COLOR_PALETTE);
 		}
 		return gradientPalette != null ? gradientPalette : gpxFile.getGradientColorPalette();
 	}

@@ -4,7 +4,7 @@ import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.JOIN_SEGMENTS;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
@@ -159,7 +159,7 @@ public class TrackDrawInfo {
 		trackLinePositionType = Gpx3DLinePositionType.get3DLinePositionType(helper.getParameter(item, TRACK_3D_LINE_POSITION_TYPE));
 		additionalExaggeration = ((Double) helper.requireParameter(item, ADDITIONAL_EXAGGERATION)).floatValue();
 		elevationMeters = ((Double) helper.requireParameter(item, ELEVATION_METERS)).floatValue();
-		gradientColorName = helper.getParameter(item, GRADIENT_PALETTE);
+		gradientColorName = helper.getParameter(item, COLOR_PALETTE);
 	}
 
 	@Nullable

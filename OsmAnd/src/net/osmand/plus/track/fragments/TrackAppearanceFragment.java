@@ -4,7 +4,7 @@ import static net.osmand.gpx.GpxParameter.ADDITIONAL_EXAGGERATION;
 import static net.osmand.gpx.GpxParameter.COLOR;
 import static net.osmand.gpx.GpxParameter.COLORING_TYPE;
 import static net.osmand.gpx.GpxParameter.ELEVATION_METERS;
-import static net.osmand.gpx.GpxParameter.GRADIENT_PALETTE;
+import static net.osmand.gpx.GpxParameter.COLOR_PALETTE;
 import static net.osmand.gpx.GpxParameter.SHOW_ARROWS;
 import static net.osmand.gpx.GpxParameter.SHOW_START_FINISH;
 import static net.osmand.gpx.GpxParameter.SPLIT_INTERVAL;
@@ -465,7 +465,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private void updateGradientPalette(@NonNull ColoringStyle coloringStyle) {
 		if (coloringStyle.getType().isGradient() && gpxDataItem != null) {
 			ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, gpxDataItem.getParameter(COLORING_TYPE));
-			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(GRADIENT_PALETTE) : PaletteGradientColor.DEFAULT_NAME);
+			trackDrawInfo.setGradientColorName(coloringStyle.getType() == coloringType ? gpxDataItem.getParameter(COLOR_PALETTE) : PaletteGradientColor.DEFAULT_NAME);
 		} else {
 			trackDrawInfo.setGradientColorName(PaletteGradientColor.DEFAULT_NAME);
 		}
@@ -715,7 +715,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDataItem.setParameter(TRACK_3D_LINE_POSITION_TYPE, trackDrawInfo.getTrackLinePositionType().getTypeName());
 			gpxDataItem.setParameter(ADDITIONAL_EXAGGERATION, (double) trackDrawInfo.getAdditionalExaggeration());
 			gpxDataItem.setParameter(ELEVATION_METERS, (double) trackDrawInfo.getElevationMeters());
-			gpxDataItem.setParameter(GRADIENT_PALETTE, trackDrawInfo.getGradientColorName());
+			gpxDataItem.setParameter(COLOR_PALETTE, trackDrawInfo.getGradientColorName());
 			gpxDbHelper.updateDataItem(gpxDataItem);
 		}
 	}
