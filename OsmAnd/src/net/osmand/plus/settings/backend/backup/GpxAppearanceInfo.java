@@ -96,7 +96,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "coloring_type", coloringType);
-		writeParam(json, "gradient_palette", gradientPaletteName);
+		writeParam(json, "color_palette", gradientPaletteName);
 		writeParam(json, "line_3d_visualization_by_type", trackVisualizationType.getTypeName());
 		writeParam(json, "line_3d_visualization_wall_color_type", trackWallColorType.getTypeName());
 		writeParam(json, "line_3d_visualization_position_type", trackLinePositionType.getTypeName());
@@ -139,8 +139,8 @@ public class GpxAppearanceInfo {
 					? null : coloringType.getName(null);
 		}
 
-		hasAnyParam |= json.has("gradient_palette");
-		gpxAppearanceInfo.gradientPaletteName = json.optString("gradient_palette");
+		hasAnyParam |= json.has("color_palette");
+		gpxAppearanceInfo.gradientPaletteName = json.optString("color_palette");
 		hasAnyParam |= json.has("line_3d_visualization_by_type");
 		String trackVisualizationType = json.optString("line_3d_visualization_by_type");
 		gpxAppearanceInfo.trackVisualizationType = Gpx3DVisualizationType.get3DVisualizationType(trackVisualizationType);

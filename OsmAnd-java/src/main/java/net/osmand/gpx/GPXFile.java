@@ -690,13 +690,13 @@ public class GPXFile extends GPXUtilities.GPXExtensions {
 
 	public String getGradientColorPalette() {
 		if (extensions != null) {
-			return extensions.get("gradient_color_palette");
+			return extensions.get("color_palette");
 		}
 		return null;
 	}
 
 	public void setGradientColorPalette(String gradientColorPaletteName) {
-		getExtensionsToWrite().put("gradient_color_palette", gradientColorPaletteName);
+		getExtensionsToWrite().put("color_palette", gradientColorPaletteName);
 	}
 
 	public void setColoringType(String coloringType) {
