@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="missing_maps_ignore">Use existing maps</string>
+    <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
+    <string name="contact_support_retry">Try again or contact support</string>
     <string name="rendering_value_dark_orange_name">Dark orange</string>
     <string name="user_palette">User palette</string>
     <string name="shared_string_colors">Colors</string>
@@ -56,7 +59,7 @@
     <string name="top_and_bottom">Top and bottom</string>
     <string name="title_3d_track">3D Track</string>
     <string name="explore_3d_track_description">Explore the track in interactive 3D! Visualize height, speed, and more directly on the map.</string>
-    <string name="maps_that_also_be_used">Maps that also be used: %1$s</string>
+    <string name="maps_that_also_be_used">Maps that will also be used: %1$s</string>
     <string name="getting_list_of_required_maps">Getting a list of required maps…</string>
     <string name="required_maps_calculate_online_summary">The list of missing maps is based on the straight line route. To get an accurate list of maps, OsmAnd can pre-calculate your route online.</string>
     <string name="required_maps">Required Maps</string>

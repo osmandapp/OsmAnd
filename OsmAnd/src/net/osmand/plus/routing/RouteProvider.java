@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 
 import static net.osmand.plus.settings.enums.RoutingType.A_STAR_2_PHASE;
 import static net.osmand.plus.settings.enums.RoutingType.HH_CPP;
+import static net.osmand.plus.settings.enums.RoutingType.HH_JAVA;
 
 import android.os.Bundle;
 import android.util.Base64;
@@ -703,6 +704,8 @@ public class RouteProvider {
 
 		OsmandSettings settings = params.ctx.getSettings();
 
+		router.CALCULATE_MISSING_MAPS = !settings.IGNORE_MISSING_MAPS;
+
 		RoutingType routingType = settings.ROUTING_TYPE.getModeValue(params.mode);
 		if (routingType.isHHRouting()) {
 			router.setDefaultHHRoutingConfig();
@@ -773,7 +776,8 @@ public class RouteProvider {
 			}
 		}
 		boolean complex = !skipComplex && params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)
-				&& routingType == A_STAR_2_PHASE && precalculated == null && router.getRecalculationEnd(ctx) == null;
+				&& (routingType == A_STAR_2_PHASE || routingType == HH_JAVA || routingType == HH_CPP)
+				&& precalculated == null && router.getRecalculationEnd(ctx) == null;
 
 		RoutingContext complexCtx = null;
 		if (complex) {

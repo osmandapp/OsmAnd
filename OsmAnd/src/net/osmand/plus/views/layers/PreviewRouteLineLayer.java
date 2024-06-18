@@ -34,16 +34,15 @@ import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.layers.base.BaseRouteLayer;
+import net.osmand.plus.views.layers.geometry.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.GeometryWayPoint;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
-import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
 

@@ -260,6 +260,12 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 		View buttonCalculateOnline = view.findViewById(R.id.calculate_online_button);
 		buttonCalculateOnline.setOnClickListener(v -> controller.onCalculateOnlineButtonClicked());
 		setupSelectableBackground(buttonCalculateOnline);
+
+		View buttonIgnoreMissingMaps = view.findViewById(R.id.ignore_missing_maps_button);
+		buttonIgnoreMissingMaps.setOnClickListener(v -> {
+			controller.onIgnoreMissingMapsButtonClicked();
+			dismiss();
+		});
 	}
 
 	private void updateDownloadButton() {

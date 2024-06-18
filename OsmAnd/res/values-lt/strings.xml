@@ -441,7 +441,7 @@
     <string name="poi_context_menu_modify">Koreguoti LV</string>
     <string name="poi_context_menu_delete">Ištrinti LV</string>
     <string name="rotate_map_compass_opt">Pagal kompasą</string>
-    <string name="rotate_map_bearing_opt">Pagal judėjimo kryptį</string>
+    <string name="rotate_map_bearing_opt">Judėjimo kryptis</string>
     <string name="rotate_map_north_opt">Nesukinėti (šiaurė viršuje)</string>
     <string name="rotate_map_to_descr">Pasirinkti žemėlapio ir ekrano krypčių derinimą.</string>
     <string name="rotate_map_to">Žemėlapio orientacija</string>
@@ -2715,7 +2715,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_night_map">Naktinis žemėlapis</string>
     <string name="shared_string_meters">metrai</string>
     <string name="routing_attr_length_name">Ilgio limitas</string>
-    <string name="shared_string_bearing">Azimutas</string>
+    <string name="shared_string_bearing">Kryptis</string>
     <string name="item_deleted">%1$s ištrinta</string>
     <string name="speed_cameras_restart_descr">Perkrovimas reikalingas kad būtų galima ištrinti greičio kamerų duomenis.</string>
     <string name="shared_string_uninstall_and_restart">Išinstaliuoti ir perkrauti</string>
@@ -3401,4 +3401,15 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="discard_changes">Atmesti pakeitimą</string>
     <string name="map_look">Žemėlapio išvaizda</string>
     <string name="x_axis">X ašis</string>
+    <string name="route_maneuvers_desc">Navigacijos valdikliai įjungiami navigacijos metu, kad būtų rodoma tokia informacija kaip atstumas, atvykimo arba likęs laikas, kiti posūkiai, kryptis, esamos gatvės pavadinimas, eismo juostų informacija, maksimalus greitis, artėjimo įspėjimai, LV, kelio taškai.</string>
+    <string name="bearing_desc">Rodo absoliučią arba santykinę kryptį į taikinį kampiniais vienetais (180 laipsnių, 360 laipsnių arba miliradianų režimu).</string>
+    <string name="approximate_bearing">Apytikslė kryptis</string>
+    <string name="true_bearing_wdiget_desc">Kampas tarp tikrosios šiaurės ir tikslo taško, stebimo iš jūsų vietos.</string>
+    <string name="bearing_secondary_desc">Galite pakeisti naudojamą duomenų formatą: %1$s – %2$s – %3$s.</string>
+    <string name="magnetic_bearing_widget_desc">Kampas tarp magnetinės šiaurės ir tikslo taško, stebimo iš jūsų vietos.</string>
+    <string name="navigation_points_desc">Navigacijos valdikliai yra įjungti navigacijos metu, kad būtų rodoma tokia informacija kaip atstumas, atvykimas ar likęs laikas, kiti posūkiai, posūkis, esamos/kitos gatvės pavadinimas, juostos informacija, maksimalus greitis, įspėjimai apie artėjimą, LV, kelio taškai.</string>
+    <string name="write_bearing">Įrašyti kryptį</string>
+    <string name="map_widget_true_bearing">Tikra kryptis</string>
+    <string name="relative_bearing_widget_desc">Rodo kampą tarp jūsų judėjimo pirmyn krypties ir tikslo taško.</string>
+    <string name="live_monitoring_adress_descr">Nurodykite žiniatinklio adresą naudodami parametrų sintaksę: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}, eta={7}, etfa={8}, eda={9}, edfa={10}.</string>
 </resources>

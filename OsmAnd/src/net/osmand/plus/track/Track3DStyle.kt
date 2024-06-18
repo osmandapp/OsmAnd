@@ -6,8 +6,8 @@ class Track3DStyle(
 	var visualizationType: Gpx3DVisualizationType,
 	var wallColorType: Gpx3DWallColorType,
 	var linePositionType: Gpx3DLinePositionType,
-	var additionalExaggeration: Float,
-	var elevationMeters: Float
+	var exaggeration: Float,
+	var elevation: Float
 ) {
 
 	override fun equals(other: Any?): Boolean {
@@ -15,8 +15,8 @@ class Track3DStyle(
 				&& visualizationType == other.visualizationType
 				&& wallColorType == other.wallColorType
 				&& linePositionType == other.linePositionType
-				&& additionalExaggeration == other.additionalExaggeration
-				&& elevationMeters == other.elevationMeters
+				&& exaggeration == other.exaggeration
+				&& elevation == other.elevation
 	}
 
 	override fun hashCode(): Int {
@@ -24,8 +24,13 @@ class Track3DStyle(
 			visualizationType,
 			wallColorType,
 			linePositionType,
-			additionalExaggeration,
-			elevationMeters
+			exaggeration,
+			elevation
 		)
+	}
+
+	override fun toString(): String {
+		return "Track3DStyle { visualization $visualizationType wallColor $wallColorType linePosition " +
+				"$linePositionType exaggeration $exaggeration elevation $elevation}"
 	}
 }
