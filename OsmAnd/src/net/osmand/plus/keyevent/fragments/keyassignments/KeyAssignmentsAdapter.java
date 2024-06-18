@@ -91,7 +91,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		ScreenItem item = screenItems.get(position);
 		if (holder instanceof EmptyStateViewHolder) {
 			EmptyStateViewHolder h = (EmptyStateViewHolder) holder;
-			h.btnAdd.setOnClickListener(v -> controller.askAddAssignment());
+			h.btnAdd.setOnClickListener(v -> controller.askAddAssignment(h.btnAdd));
 
 		} else if (holder instanceof HeaderViewHolder) {
 			HeaderViewHolder h = (HeaderViewHolder) holder;
@@ -121,9 +121,10 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
 				if (!editMode) {
-					controller.askEditAssignment(assignment);
+					controller.askEditAssignment(assignment, v);
 				}
 			}: null);
+			h.buttonView.setTransitionName("transition_" + assignment.getId());
 			h.actionName.setText(assignment.getName(app));
 
 			h.assignedKeys.removeAllViews();

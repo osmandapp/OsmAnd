@@ -3,6 +3,7 @@ package net.osmand.plus.keyevent.fragments.editassignment;
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 import static net.osmand.plus.utils.ColorUtilities.getPrimaryIconColor;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,11 +15,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.transition.MaterialContainerTransform;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -64,6 +67,7 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		updateNightMode();
 		View view = inflate(R.layout.fragment_edit_key_assignment, container);
 		AndroidUtils.addStatusBarPadding21v(requireMyActivity(), view);
+		setupTransitions(view);
 		setupToolbar(view);
 
 		adapter = new EditKeyAssignmentAdapter((MapActivity) requireMyActivity(), appMode, controller, isUsedOnMap());
@@ -72,6 +76,18 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 		recyclerView.setAdapter(adapter);
 		updateScreen(view);
 		return view;
+	}
+
+	private void setupTransitions(@NonNull View view) {
+		view.setTransitionName(EditKeyAssignmentController.TRANSITION_NAME);
+
+		MaterialContainerTransform enterTransform = new MaterialContainerTransform();
+		enterTransform.setScrimColor(Color.TRANSPARENT);
+		setSharedElementEnterTransition(enterTransform);
+
+		MaterialContainerTransform returnTransform = new MaterialContainerTransform();
+		returnTransform.setScrimColor(Color.TRANSPARENT);
+		setSharedElementReturnTransition(returnTransform);
 	}
 
 	private void setupToolbar(@NonNull View view) {
@@ -220,16 +236,21 @@ public class EditKeyAssignmentFragment extends BaseOsmAndFragment
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager,
-	                                   @NonNull ApplicationMode appMode) {
+	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable View anchorView) {
 		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			EditKeyAssignmentFragment fragment = new EditKeyAssignmentFragment();
 			Bundle arguments = new Bundle();
 			arguments.putString(APP_MODE_KEY, appMode.getStringKey());
 			fragment.setArguments(arguments);
-			manager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
+
+			FragmentTransaction transaction = manager.beginTransaction();
+			if (anchorView != null) {
+				transaction.addSharedElement(anchorView, EditKeyAssignmentController.TRANSITION_NAME);
+			}
+			transaction.replace(R.id.fragmentContainer, fragment, TAG);
+			transaction.addToBackStack(TAG);
+			transaction.commitAllowingStateLoss();
 			return true;
 		}
 		return false;

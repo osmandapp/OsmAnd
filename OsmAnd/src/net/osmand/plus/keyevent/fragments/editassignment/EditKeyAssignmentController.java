@@ -56,6 +56,8 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 
 	public static final String PROCESS_ID = "edit_key_assignment";
 
+	public static final String TRANSITION_NAME = "shared_element_container";
+
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
 	private final DialogManager dialogManager;
@@ -375,20 +377,23 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	public static void showEditAssignmentDialog(@NonNull FragmentActivity activity,
 	                                            @NonNull ApplicationMode appMode,
 	                                            @NonNull String deviceId,
-	                                            @NonNull String assignmentId) {
-		showDialog(activity, appMode, deviceId, assignmentId);
+	                                            @NonNull String assignmentId,
+	                                            @Nullable View anchorView) {
+		showDialog(activity, appMode, deviceId, assignmentId, anchorView);
 	}
 
 	public static void showAddAssignmentDialog(@NonNull FragmentActivity activity,
 	                                           @NonNull ApplicationMode appMode,
-	                                           @NonNull String deviceId) {
-		showDialog(activity, appMode, deviceId, null);
+	                                           @NonNull String deviceId,
+	                                           @Nullable View anchorView) {
+		showDialog(activity, appMode, deviceId, null, anchorView);
 	}
 
 	private static void showDialog(@NonNull FragmentActivity activity,
 	                               @NonNull ApplicationMode appMode,
 	                               @NonNull String deviceId,
-	                               @Nullable String assignmentId) {
+	                               @Nullable String assignmentId,
+	                               @Nullable View anchorView) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
 		EditKeyAssignmentController controller =
 				new EditKeyAssignmentController(app, appMode, deviceId, assignmentId);
@@ -398,7 +403,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 		DialogManager dialogManager = app.getDialogManager();
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		dialogManager.register(PROCESS_ID, controller);
-		if (!EditKeyAssignmentFragment.showInstance(fragmentManager, appMode)) {
+		if (!EditKeyAssignmentFragment.showInstance(fragmentManager, appMode, anchorView)) {
 			dialogManager.unregister(PROCESS_ID);
 		}
 	}
