@@ -250,7 +250,7 @@ public class EditKeyAssignmentController implements IDialogController, OnKeyCode
 	@Override
 	public void onKeyCodeSelected(@Nullable Integer oldKeyCode, @NonNull Integer newKeyCode) {
 		if (editBundle != null) {
-			if (oldKeyCode != null) {
+			if (oldKeyCode != null && oldKeyCode != KeyEvent.KEYCODE_UNKNOWN) {
 				editBundle.keyCodes.remove(oldKeyCode);
 			}
 			editBundle.keyCodes.add(newKeyCode);
