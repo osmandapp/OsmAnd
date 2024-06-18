@@ -5743,7 +5743,7 @@
     <string name="key_name_pattern">Taste „%1$s“</string>
     <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
-    <string name="clear_all_key_shortcuts_summary">Tastenzuweisung für den ausgewählten Typ wird gelöscht.</string>
+    <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden gelöscht.</string>
     <string name="no_assigned_keys_desc">Wählen Sie eine Aktion aus und weisen Sie eine Taste mit der Schaltfläche „Hinzufügen“ zu.</string>
     <string name="key_assignment_add_key">Taste hinzufügen</string>
     <string name="assigned_keys">Zugewiesene Tasten</string>
