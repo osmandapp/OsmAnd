@@ -13,7 +13,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -394,9 +393,8 @@ public abstract class PointEditorFragment extends EditorFragment {
 
 	@NonNull
 	private MapDrawParams getMapDrawParams() {
-		WindowManager mgr = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics metrics = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(metrics);
+		AndroidUtils.getDisplay(requireContext()).getMetrics(metrics);
 
 		int width = metrics.widthPixels - AndroidUtils.dpToPx(app, 32);
 		int height = getResources().getDimensionPixelSize(R.dimen.point_image_height);
