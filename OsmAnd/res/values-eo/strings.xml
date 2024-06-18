@@ -5738,4 +5738,8 @@
     <string name="key_assignment_add_key">Aldoni klavon</string>
     <string name="key_assignment_add_action">Aldoni agon</string>
     <string name="assigned_keys">Asignitaj klavoj</string>
+    <string name="backup_error_failed_to_transfer_file">Malsukcesis transigi dosiero(j)n el/al la nubo.</string>
+    <string name="contact_support_retry">Reprovu aŭ kontaktu nian subtenan teamon</string>
+    <string name="user_palette">Propra koloro</string>
+    <string name="shared_string_colors">Koloroj</string>
 </resources>

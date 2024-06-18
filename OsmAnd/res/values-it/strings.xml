@@ -4811,7 +4811,7 @@
     <string name="map_widget_ant_bicycle_speed">Velocità bicicletta</string>
     <string name="map_widget_ant_bicycle_dist">Distanza bicicletta</string>
     <string name="map_widget_ant_bicycle_dist_desc">Mostra la distanza percorsa</string>
-    <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, potenza, cadenza e battito cardiaco in bicicletta.</string>
+    <string name="purchases_feature_desc_external_sensors">Visualizza e registra dati da sensori esterni: velocità, cadenza e potenza sviluppata in bicicletta, frequenza cardiaca.</string>
     <string name="weather_plugin_description">Fornisce
 \n- previsioni meteo, 24 ore su 24, 7 giorni su 7, con 5 livelli
 \n- widget localizzati
@@ -4831,7 +4831,7 @@
     <string name="weather_wind_ms">m/s</string>
     <string name="weather_wind_knots">Nodi</string>
     <string name="weather_wind_meters_per_second">Metri/secondo</string>
-    <string name="weather_widgets_secondary_desc">Le unità di misura possono essere cambiate nelle impostazioni del componente aggiuntivo Meteo.</string>
+    <string name="weather_widgets_secondary_desc">Le unità di misura si possono modificare nelle impostazioni del componente aggiuntivo Meteo.</string>
     <string name="weather_pressure_inches_of_mercury">Pollici di mercurio</string>
     <string name="weather_pressure_hectopascals">Ettopascal</string>
     <string name="weather_prefs_descr">Previsioni meteo 24 ore su 7 giorni, aggiornate ogni 3 ore</string>
@@ -4840,7 +4840,7 @@
     <string name="action_not_supported_with_map_style">Questa azione non è supportata dallo stile della mappa attuale.</string>
     <string name="weather_temperature_fahrenheit">Fahrenheit</string>
     <string name="map_rendering_engine">Motore di rendering della mappa</string>
-    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D. Il disegno Versione 1 era il predefinito prima di OsmAnd 4.3, e ancora preferibile per i dispositivi più datati.</string>
+    <string name="map_rendering_engine_descr">Versione 2 (OpenGL) è un motore di disegno della mappa più veloce, fornisce anche la vista 2.5D. Il rendering Versione 1 era il predefinito prima di OsmAnd 4.3 ed è ancora preferibile per i dispositivi più datati.</string>
     <string name="show_map_symbols">Mostra i simboli della mappa</string>
     <string name="show_map_symbols_desc">Testo, segnali stradali e altro.</string>
     <string name="depth_contours">Isabate</string>
@@ -4924,10 +4924,10 @@
     <string name="map_rendering_engine_v1">Versione 1</string>
     <string name="map_rendering_engine_v2">Versione 2 (OpenGL)</string>
     <string name="share_crash_log">Condividi il log degli errori</string>
-    <string name="rendering_engine_failed_descr">OsmAnd ha ripristinato il rendering della mappa alla \'Versione 1\'. Puoi provare a cambiarlo alla \'Versione 2 (OpenGL)\' nelle Impostazioni.
+    <string name="rendering_engine_failed_descr">OsmAnd ha ripristinato il rendering della mappa alla \'Versione 1\'. Puoi provare a riattivare la \'Versione 2 (OpenGL)\' nelle Impostazioni.
 \n
 \nPer favore aiutaci a migliorare inviando i log degli errori.</string>
-    <string name="rendering_engine_failed">Il rendering della mappa di OsmAnd di recente è andato in errore.</string>
+    <string name="rendering_engine_failed">Durante la precedente esecuzione, il rendering della mappa di OsmAnd si è arrestato.</string>
     <string name="dismiss_changes_descr">Tutti i cambiamenti saranno persi.</string>
     <string name="rendering_attr_depthContourWidth_name">Spessore linea</string>
     <string name="quick_action_wind_layer">Un pulsante per mostrare o nascondere i venti sulla mappa.</string>
@@ -5674,16 +5674,16 @@
     <string name="shared_string_scale">Scala</string>
     <string name="vertical_exaggeration">Esagerazione verticale</string>
     <string name="vertical_exaggeration_description">Cambiando il valore della scala puoi accentuare i rilievi 3D.</string>
-    <string name="gpx_approximation_cpp">Routing-based (C++)</string>
+    <string name="gpx_approximation_cpp">Basato su routing (C++)</string>
     <string name="delete_actions_button">Pulsante elimina</string>
     <string name="use_terrain_maps">Usa le mappe di Elevazione</string>
     <string name="use_terrain_maps_summary">Utilizza mappe del terreno per i dati di altimetria. La geometria del tracciato rimane invariata.</string>
     <string name="use_nearby_roads">Usa strade vicine</string>
-    <string name="gpx_approximation_geo_java">Geometry-based (Java, fast)</string>
+    <string name="gpx_approximation_geo_java">Basato sulle geometrie (Java, fast)</string>
     <string name="auto_zoom_smooth">Liscio</string>
-    <string name="gpx_approximation_java">Routing-based (Java)</string>
+    <string name="gpx_approximation_java">Basato su routing (Java)</string>
     <string name="release_4_8">• Predisposto per la 4.8</string>
-    <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" con tutte le azioni aggiunte?</string>
+    <string name="delete_actions_button_confirmation">Sei sicuro di voler eliminare \"%1$s\" e tutte le azioni aggiunte?</string>
     <string name="retrieve_elevation_data_summary">OsmAnd può recuperare i dati altimetrici dalle strade nelle vicinanze o dalle mappe del terreno.</string>
     <string name="shared_string_osm_id">OSM ID</string>
     <string name="relief_3d_download_description">Sono necessarie mappe aggiuntive per visualizzare il terreno sulla mappa.</string>
@@ -5700,7 +5700,7 @@
     <string name="downward_gradient">Gradiente verso il basso</string>
     <string name="top">Sopra</string>
     <string name="title_3d_track">Traccia 3D</string>
-    <string name="gpx_approximation_geo_cpp">Geometry-based (C++, fast)</string>
+    <string name="gpx_approximation_geo_cpp">Basato sulle geometrie (C++, fast)</string>
     <string name="upward_gradient">Gradiente verso l\'alto</string>
     <string name="bottom">Sotto</string>
     <string name="top_and_bottom">Sopra e sotto</string>
@@ -5714,7 +5714,7 @@
     <string name="show_debug_info">Mostra informazioni di debug</string>
     <string name="show_debug_info_description">Visualizza informazioni grafiche sul posizionamento di ciascun testo della mappa</string>
     <string name="map_text">Testi della mappa</string>
-    <string name="routing_attr_avoid_cobblestone_name">Evita il ciottolo</string>
+    <string name="routing_attr_avoid_cobblestone_name">Evita acciottolato</string>
     <string name="disable_map_layers">Disabilita i livelli della mappa</string>
     <string name="height_legend_description">Le mappe a colori dell\'altitudine sono utilizzate per visualizzare i rilievi.</string>
     <string name="disable_map_layers_descr">Disabilita tutti i livelli della mappa sopra la mappa vettoriale (è necessario riavviare).</string>
@@ -5738,4 +5738,7 @@
     <string name="shared_string_colors">Colori</string>
     <string name="user_palette">Tavolozza utente</string>
     <string name="routing_attr_avoid_cobblestone_description">Evita il ciottolo</string>
+    <string name="contact_support_retry">Riprova o contatta l\'Assistenza</string>
+    <string name="backup_error_failed_to_transfer_file">Il trasferimento file è fallito.</string>
+    <string name="play_weather_forecast">Riproduci previsioni meteo</string>
 </resources>

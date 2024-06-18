@@ -3993,4 +3993,11 @@
     <string name="poi_state_abandoned">Stato: abbandonato</string>
     <string name="poi_state_active">Stato: attivo</string>
     <string name="poi_us_maps_recreation_area_operational_hours">Ore operative</string>
+    <string name="poi_health_facility_type_laboratory">Struttura sanitaria: laboratorio</string>
+    <string name="poi_plant_nursery">Vivaio</string>
+    <string name="poi_health_facility_type_field_hospital">Struttura sanitaria: ospedale da campo</string>
+    <string name="poi_health_facility_type_counselling_centre">Struttura sanitaria: centro di consulenza</string>
+    <string name="poi_health_facility_type_therapy">Struttura sanitaria: terapia</string>
+    <string name="poi_health_facility_type_first_aid">Struttura sanitaria: pronto soccorso</string>
+    <string name="poi_sport_free_flying">Volo libero (sport)</string>
 </resources>

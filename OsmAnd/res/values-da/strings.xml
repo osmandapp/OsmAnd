@@ -5751,4 +5751,6 @@
     <string name="shared_string_key">Tast</string>
     <string name="user_palette">Brugerpalet</string>
     <string name="shared_string_colors">Farver</string>
+    <string name="backup_error_failed_to_transfer_file">Kunne ikke overføre cloud-fil(er).</string>
+    <string name="contact_support_retry">Prøv igen, eller kontakt support</string>
 </resources>
