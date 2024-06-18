@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.geometry.GeometryWay.GeometryWayProvider;
-import net.osmand.plus.views.layers.geometry.GeometryWay.PathGeometryZoom;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
 
 import java.util.List;

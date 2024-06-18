@@ -794,6 +794,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, coloringTypeName);
 				String gradientColorPalette = getTrackGradientPalette(selectedGpxFile.getGpxFile());
 
+				ColoringType outlineColoringType = ColoringType.valueOf(getTrackWallColorType(gpxFile));
+				GradientScaleType scaleType = coloringType.toGradientScaleType();
+				GradientScaleType outlineScaleType = outlineColoringType != null ? outlineColoringType.toGradientScaleType() : null;
+				boolean gradient = scaleType != null || outlineScaleType != null;
+
 				if (!showArrows || coloringType.isRouteInfoAttribute()
 						|| !QuadRect.trivialOverlap(correctedQuadRect, calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
 					continue;
@@ -808,8 +813,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 						getTrackExaggeration(selectedGpxFile.getGpxFile()),
 						getElevationMeters(selectedGpxFile.getGpxFile())
 				);
-				List<TrkSegment> segments = coloringType.isGradient()
-						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), gradientColorPalette, false)
+				List<TrkSegment> segments = gradient
+						? getCachedSegments(selectedGpxFile, scaleType, outlineScaleType, gradientColorPalette, false)
 						: selectedGpxFile.getPointsToDisplay();
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof RenderableSegment) {
@@ -1183,13 +1188,18 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.requireValueOf(ColoringPurpose.TRACK, coloringTypeName);
-		String gradientColorPalette = getTrackGradientPalette(selectedGpxFile.getGpxFile());
+		String colorPalette = getTrackGradientPalette(selectedGpxFile.getGpxFile());
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
 		Gpx3DWallColorType wallColorType = getTrackWallColorType(gpxFile);
 		Gpx3DVisualizationType visualizationType = getTrackVisualizationType(gpxFile);
 
+		ColoringType outlineColoringType = ColoringType.valueOf(wallColorType);
+		GradientScaleType scaleType = coloringType.toGradientScaleType();
+		GradientScaleType outlineScaleType = outlineColoringType != null ? outlineColoringType.toGradientScaleType() : null;
+
+		boolean gradient = scaleType != null || outlineScaleType != null;
 		boolean visible = isGpxFileVisible(selectedGpxFile, tileBox);
-		if (!gpxFile.hasTrkPt() && coloringType.isGradient() || !visible) {
+		if (!gpxFile.hasTrkPt() && gradient || !visible) {
 			Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
 			if (renderedSegments != null) {
 				Iterator<TrkSegment> it = renderedSegments.iterator();
@@ -1204,10 +1214,10 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 
 		List<TrkSegment> segments = new ArrayList<>();
-		if (coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
+		if (gradient) {
+			segments.addAll(getCachedSegments(selectedGpxFile, scaleType, outlineScaleType, colorPalette, !hasMapRenderer));
+		} else if (coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			segments.addAll(selectedGpxFile.getPointsToDisplay());
-		} else {
-			segments.addAll(getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType(), gradientColorPalette, !hasMapRenderer));
 		}
 
 		Set<TrkSegment> renderedSegments = renderedSegmentsCache.get(gpxFilePath);
@@ -1242,7 +1252,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					|| mapActivityInvalidated || newTsRenderer || !renderedSegments.contains(ts);
 			if (ts.renderer instanceof RenderableSegment) {
 				RenderableSegment renderableSegment = (RenderableSegment) ts.renderer;
-				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, gradientColorPalette);
+				updated |= renderableSegment.setTrackParams(color, width, coloringType, routeIndoAttribute, colorPalette);
 				if (hasMapRenderer || coloringType.isRouteInfoAttribute()) {
 					CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 					updated |= renderableSegment.setRoute(getCachedRouteSegments(cachedTrack, segmentIdx));
@@ -1272,12 +1282,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@NonNull
 	private List<TrkSegment> getCachedSegments(@NonNull SelectedGpxFile selectedGpxFile,
 	                                           @NonNull GradientScaleType scaleType,
-	                                           @NonNull String  gradientPalette,
-	                                           boolean simplify) {
+	                                           @NonNull GradientScaleType outlineScaleType,
+	                                           @NonNull String palette, boolean simplify) {
 		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
 		return simplify
-				? cachedTrack.getSimplifiedTrackSegments(view.getZoom(), scaleType, gradientPalette)
-				: cachedTrack.getTrackSegments(scaleType, gradientPalette);
+				? cachedTrack.getSimplifiedTrackSegments(view.getZoom(), scaleType, outlineScaleType, palette)
+				: cachedTrack.getTrackSegments(scaleType, outlineScaleType, palette);
 	}
 
 	private float getTrackWidth(String width, float defaultTrackWidth) {

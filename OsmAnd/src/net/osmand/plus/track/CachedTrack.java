@@ -1,7 +1,7 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 import static net.osmand.ColorPalette.LIGHT_GREY;
+import static net.osmand.plus.routing.ColoringStyleAlgorithms.isAvailableForDrawingTrack;
 
 import android.util.Pair;
 
@@ -16,7 +16,6 @@ import net.osmand.gpx.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.card.color.ColoringStyle;
-import net.osmand.plus.card.color.palette.gradient.PaletteGradientColor;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.helpers.SelectedGpxFile;
 import net.osmand.render.RenderingRulesStorage;
@@ -85,34 +84,57 @@ public class CachedTrack {
 	}
 
 	@NonNull
-	public List<TrkSegment> getTrackSegments(@NonNull GradientScaleType scaleType, @NonNull String gradientPalette) {
+	public List<TrkSegment> getTrackSegments(@Nullable GradientScaleType scaleType,
+	                                         @Nullable GradientScaleType outlineScaleType,
+	                                         @NonNull String gradientPalette) {
 		if (isCachedTrackChanged()) {
 			clearCaches();
 		}
 
-		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(scaleType + "_" + gradientPalette);
+		String trackId = scaleType + "_" + outlineScaleType + "_" + gradientPalette;
+		List<TrkSegment> segments = nonSimplifiedSegmentsCache.get(trackId);
 		if (segments == null) {
-			RouteColorize gpxColorization = createGpxColorization(scaleType, gradientPalette);
-			List<RouteColorizationPoint> colorsOfPoints = gpxColorization.getResult();
-			segments = createColoredSegments(colorsOfPoints, scaleType);
-			nonSimplifiedSegmentsCache.put(scaleType + "_" + gradientPalette, segments);
+			RouteColorize colorization = scaleType != null ? createGpxColorization(scaleType, gradientPalette) : null;
+			RouteColorize outlineColorization = outlineScaleType != null ? createGpxColorization(outlineScaleType, gradientPalette) : null;
+
+			Pair<GradientScaleType, List<RouteColorizationPoint>> lineColors = null;
+			Pair<GradientScaleType, List<RouteColorizationPoint>> outlineColors = null;
+			if (colorization != null) {
+				lineColors = new Pair<>(scaleType, colorization.getResult());
+			}
+			if (outlineColorization != null) {
+				outlineColors = new Pair<>(outlineScaleType, outlineColorization.getResult());
+			}
+			segments = createColoredSegments(lineColors, outlineColors);
+			nonSimplifiedSegmentsCache.put(trackId, segments);
 		}
 
 		return segments;
 	}
 
 	@NonNull
-	public List<TrkSegment> getSimplifiedTrackSegments(int zoom, @NonNull GradientScaleType scaleType, @NonNull String gradientPalette) {
+	public List<TrkSegment> getSimplifiedTrackSegments(int zoom, @Nullable GradientScaleType scaleType,
+	                                                   @Nullable GradientScaleType outlineScaleType,
+	                                                   @NonNull String gradientPalette) {
 		if (isCachedTrackChanged()) {
 			clearCaches();
 		}
 
-		String trackId = zoom + "_" + scaleType;
+		String trackId = zoom + "_" + scaleType + "_" + outlineScaleType + "_" + gradientPalette;
 		List<TrkSegment> segments = simplifiedSegmentsCache.get(trackId);
 		if (segments == null) {
-			RouteColorize gpxColorization = createGpxColorization(scaleType, gradientPalette);
-			List<RouteColorizationPoint> colorsOfPoints = gpxColorization.getSimplifiedResult(zoom);
-			segments = createColoredSegments(colorsOfPoints, scaleType);
+			RouteColorize colorization = scaleType != null ? createGpxColorization(scaleType, gradientPalette) : null;
+			RouteColorize outlineColorization = outlineScaleType != null ? createGpxColorization(outlineScaleType, gradientPalette) : null;
+
+			Pair<GradientScaleType, List<RouteColorizationPoint>> lineColors = null;
+			Pair<GradientScaleType, List<RouteColorizationPoint>> outlineColors = null;
+			if (colorization != null) {
+				lineColors = new Pair<>(scaleType, colorization.getSimplifiedResult(zoom));
+			}
+			if (outlineColorization != null) {
+				outlineColors = new Pair<>(outlineScaleType, outlineColorization.getSimplifiedResult(zoom));
+			}
+			segments = createColoredSegments(lineColors, outlineColors);
 			simplifiedSegmentsCache.put(trackId, segments);
 		}
 
@@ -144,15 +166,17 @@ public class CachedTrack {
 	}
 
 	@NonNull
-	private List<TrkSegment> createColoredSegments(@NonNull List<RouteColorizationPoint> colorizationPoints,
-	                                               @NonNull GradientScaleType scaleType) {
+	private List<TrkSegment> createColoredSegments(@Nullable Pair<GradientScaleType, List<RouteColorizationPoint>> lineColors,
+	                                               @Nullable Pair<GradientScaleType, List<RouteColorizationPoint>> outlineColors) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFileToDisplay();
 		boolean joinSegments = selectedGpxFile.isJoinSegments();
+		ColorizationType colorizationType = lineColors != null ? lineColors.first.toColorizationType() : null;
+		ColorizationType outlineColorizationType = outlineColors != null ? outlineColors.first.toColorizationType() : null;
 
 		List<TrkSegment> simplifiedSegments = new ArrayList<>();
-		ColorizationType colorizationType = scaleType.toColorizationType();
 		int id = 0;
 		int colorPointIdx = 0;
+		int size = Math.max(lineColors != null ? lineColors.second.size() : 0, outlineColors != null ? outlineColors.second.size() : 0);
 
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		for (int i = 0; i < segments.size(); i++) {
@@ -166,20 +190,26 @@ public class CachedTrack {
 			TrkSegment simplifiedSegment = new TrkSegment();
 			simplifiedSegments.add(simplifiedSegment);
 			for (WptPt pt : segment.points) {
-				if (colorPointIdx >= colorizationPoints.size()) {
+				if (colorPointIdx >= size) {
 					return simplifiedSegments;
 				}
-				RouteColorizationPoint colorPoint = colorizationPoints.get(colorPointIdx);
-				if (colorPoint.id == id) {
+				RouteColorizationPoint point = lineColors != null && lineColors.second.size() > colorPointIdx ? lineColors.second.get(colorPointIdx) : null;
+				RouteColorizationPoint outlinePoint = outlineColors != null && outlineColors.second.size() > colorPointIdx ? outlineColors.second.get(colorPointIdx) : null;
+				if (point != null && point.id == id || outlinePoint != null && outlinePoint.id == id) {
 					simplifiedSegment.points.add(pt);
-					pt.setColor(colorizationType, colorPoint.color);
+					if (point != null) {
+						pt.setColor(colorizationType, point.color);
+					}
+					if (outlinePoint != null) {
+						pt.setColor(outlineColorizationType, outlinePoint.color);
+					}
 					colorPointIdx++;
 				}
 				id++;
 			}
 			if (joinSegments) {
 				if (i + 1 < segments.size()) {
-					simplifiedSegments.add(createStraightSegment(colorizationType, segments, i));
+					simplifiedSegments.add(createStraightSegment(colorizationType, outlineColorizationType, segments, i));
 				}
 			}
 		}
@@ -187,7 +217,9 @@ public class CachedTrack {
 	}
 
 	@NonNull
-	private TrkSegment createStraightSegment(ColorizationType colorizationType, List<TrkSegment> segments, int segIdx) {
+	private TrkSegment createStraightSegment(@Nullable ColorizationType colorizationType,
+	                                         @Nullable ColorizationType outlineColorizationType,
+	                                         @NonNull List<TrkSegment> segments, int segIdx) {
 		TrkSegment straightSegment = new TrkSegment();
 		WptPt currentSegmentLastPoint = segments.get(segIdx).points.get(segments.get(segIdx).points.size() - 1);
 		WptPt nextSegmentFirstPoint = segments.get(segIdx + 1).points.get(0);
@@ -195,6 +227,8 @@ public class CachedTrack {
 		WptPt lastPoint = new WptPt(nextSegmentFirstPoint);
 		firstPoint.setColor(colorizationType, LIGHT_GREY);
 		lastPoint.setColor(colorizationType, LIGHT_GREY);
+		firstPoint.setColor(outlineColorizationType, LIGHT_GREY);
+		lastPoint.setColor(outlineColorizationType, LIGHT_GREY);
 		straightSegment.points.add(firstPoint);
 		straightSegment.points.add(lastPoint);
 		return straightSegment;

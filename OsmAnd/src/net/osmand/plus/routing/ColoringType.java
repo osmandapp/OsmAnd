@@ -5,9 +5,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import net.osmand.plus.card.color.ColoringPurpose;
 import net.osmand.plus.R;
+import net.osmand.plus.card.color.ColoringPurpose;
+import net.osmand.plus.track.Gpx3DWallColorType;
 import net.osmand.plus.track.GradientScaleType;
+import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
 
@@ -107,18 +109,43 @@ public enum ColoringType {
 	}
 
 	@Nullable
+	public ColorizationType toColorizationType() {
+		if (this == SPEED) {
+			return ColorizationType.SPEED;
+		} else if (this == ALTITUDE) {
+			return ColorizationType.ELEVATION;
+		} else if (this == SLOPE) {
+			return ColorizationType.SLOPE;
+		} else {
+			return null;
+		}
+	}
+
+	@Nullable
 	public static String getRouteInfoAttribute(@Nullable String name) {
 		return !Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX) ?
 				name : null;
 	}
 
 	@Nullable
-	public static ColoringType valueOf(@Nullable GradientScaleType scaleType) {
-		if (scaleType == GradientScaleType.SPEED) {
+	public static ColoringType valueOf(@Nullable GradientScaleType type) {
+		if (type == GradientScaleType.SPEED) {
 			return SPEED;
-		} else if (scaleType == GradientScaleType.ALTITUDE) {
+		} else if (type == GradientScaleType.ALTITUDE) {
 			return ALTITUDE;
-		} else if (scaleType == GradientScaleType.SLOPE) {
+		} else if (type == GradientScaleType.SLOPE) {
+			return SLOPE;
+		}
+		return null;
+	}
+
+	@Nullable
+	public static ColoringType valueOf(@Nullable Gpx3DWallColorType type) {
+		if (type == Gpx3DWallColorType.SPEED) {
+			return SPEED;
+		} else if (type == Gpx3DWallColorType.ALTITUDE) {
+			return ALTITUDE;
+		} else if (type == Gpx3DWallColorType.SLOPE) {
 			return SLOPE;
 		}
 		return null;
