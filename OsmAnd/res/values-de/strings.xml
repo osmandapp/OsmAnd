@@ -5622,8 +5622,8 @@
     <string name="special_routing_cpp">Spezieller Navigationstyp</string>
     <string name="add_button">Schaltfläche hinzufügen</string>
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
-    <string name="custom_map_button_name_present">Solch eine Schaltfläche ist bereits vorhanden</string>
-    <string name="default_buttons">Standardschaltflächen</string>
+    <string name="custom_map_button_name_present">Diese Schaltfläche ist bereits vorhanden</string>
+    <string name="default_buttons">Standard-Schaltflächen</string>
     <string name="speed_limit_warning">Warnung vor Tempolimit</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">Bei Überschreitung</string>
@@ -5734,7 +5734,7 @@
     <string name="travel_topics">Reisethemen</string>
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
-    <string name="wall_height">Wandhöhe</string>
+    <string name="wall_height">Höhe der Mauer</string>
     <string name="rendering_value_dark_orange_name">Dunkelorange</string>
     <string name="clear_all_key_shortcuts">Alle Tastaturkürzel löschen</string>
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
@@ -5752,4 +5752,5 @@
     <string name="action_icon">Aktionssymbol</string>
     <string name="backup_error_failed_to_transfer_file">Die Übertragung der Cloud-Datei(en) ist fehlgeschlagen.</string>
     <string name="user_palette">Benutzerpalette</string>
+    <string name="missing_maps_ignore">Vorhandene Karten verwenden</string>
 </resources>
