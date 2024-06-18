@@ -28,7 +28,7 @@ public class MissingMapsCalculator {
 
 	protected static final Log LOG = PlatformUtil.getLog(MissingMapsCalculator.class);
 
-	public static final double DISTANCE_SPLIT = 50000;
+	public static final double DISTANCE_SPLIT = 15000;
 	public static final double DISTANCE_SKIP = 10000;
 	private OsmandRegions or;
 	private BinaryMapIndexReader reader;
