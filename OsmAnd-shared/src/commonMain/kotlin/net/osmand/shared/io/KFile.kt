@@ -53,7 +53,8 @@ class KFile {
 
 	fun path(): String = path.toString()
 
-	fun absolutePath(): String = FileSystem.SYSTEM.canonicalize(path).toString()
+	fun absolutePath(): String =
+		if (exists()) FileSystem.SYSTEM.canonicalize(path).toString() else path.toString()
 
 	@Throws(IOException::class)
 	fun source(): Source = FileSystem.SYSTEM.source(path)

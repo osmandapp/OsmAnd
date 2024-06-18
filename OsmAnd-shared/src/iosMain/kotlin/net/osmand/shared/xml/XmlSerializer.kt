@@ -1,6 +1,7 @@
 package net.osmand.shared.xml
 
 import net.osmand.shared.io.KFile
+import net.osmand.shared.util.KAlgorithms
 import net.osmand.shared.util.PlatformUtil
 import okio.IOException
 import okio.Sink
@@ -31,10 +32,13 @@ actual class XmlSerializer actual constructor() {
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setOutput(file: KFile) {
+		file.getParentFile()?.createDirectories()
+		xmlSerializerApi.setOutput(file.absolutePath())
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setOutput(output: Sink) {
+		xmlSerializerApi.setOutput(SinkOutputStream(output))
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
@@ -132,5 +136,10 @@ actual class XmlSerializer actual constructor() {
 	@Throws(IOException::class)
 	actual fun flush() {
 		xmlSerializerApi.flush()
+	}
+
+	@Throws(IOException::class)
+	actual fun close() {
+		xmlSerializerApi.close()
 	}
 }

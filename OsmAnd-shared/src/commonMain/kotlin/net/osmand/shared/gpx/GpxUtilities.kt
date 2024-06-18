@@ -392,40 +392,37 @@ object GpxUtilities {
 		}
 	}
 
-	fun asString(file: GpxFile): String {
+	fun asString(gpxFile: GpxFile): String {
 		val writer = Buffer()
-		writeGpx(writer, file, null)
+		writeGpx(null, writer, gpxFile, null)
 		return writer.toString()
 	}
 
-	fun writeGpxFile(fout: KFile, file: GpxFile): KException? {
-		var output: Sink? = null
+	fun writeGpxFile(file: KFile, gpxFile: GpxFile): KException? {
 		return try {
-			fout.createDirectories()
-			output = fout.sink().buffer()
-			if (KAlgorithms.isEmpty(file.path)) {
-				file.path = (if (fout.isAbsolute()) fout.path() else
-					fout.absolutePath())
-			}
-			writeGpx(output, file, null)
+			writeGpx(file, null, gpxFile, null)
 		} catch (e: KException) {
-			log.error("Failed to write gpx '$fout.path()'", e)
+			log.error("Failed to write gpx '$file.path()'", e)
 			e
-		} finally {
-			output?.close()
 		}
 	}
 
-	fun writeGpx(output: Sink, file: GpxFile, progress: IProgress?): KException? {
-		progress?.startWork(file.getItemsToWriteSize())
+	fun writeGpx(file: KFile?, stream: Sink?, gpxFile: GpxFile, progress: IProgress?): KException? {
+		progress?.startWork(gpxFile.getItemsToWriteSize())
 		return try {
 			val serializer = XmlSerializer()
-			serializer.setOutput(output.buffer())
+			if (file != null) {
+				serializer.setOutput(file)
+			} else if (stream != null) {
+				serializer.setOutput(stream.buffer())
+			} else {
+				throw KException("Output file or stream is not defined")
+			}
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true)
 			serializer.startDocument("UTF-8", true)
 			serializer.startTag(null, "gpx")
 			serializer.attribute(null, "version", "1.1")
-			val author = file.author
+			val author = gpxFile.author
 			if (author != null) {
 				serializer.attribute(null, "creator", author)
 			}
@@ -443,17 +440,17 @@ object GpxUtilities {
 				"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
 			)
 
-			assignPointsGroupsExtensionWriter(file)
-			assignNetworkRouteExtensionWriter(file)
-			writeMetadata(serializer, file, progress)
-			writePoints(serializer, file, progress)
-			writeRoutes(serializer, file, progress)
-			writeTracks(serializer, file, progress)
-			writeExtensions(serializer, file, progress)
+			assignPointsGroupsExtensionWriter(gpxFile)
+			assignNetworkRouteExtensionWriter(gpxFile)
+			writeMetadata(serializer, gpxFile, progress)
+			writePoints(serializer, gpxFile, progress)
+			writeRoutes(serializer, gpxFile, progress)
+			writeTracks(serializer, gpxFile, progress)
+			writeExtensions(serializer, gpxFile, progress)
 
 			serializer.endTag(null, "gpx")
 			serializer.endDocument()
-			serializer.flush()
+			serializer.close()
 			null
 		} catch (e: Exception) {
 			log.error("Failed to write gpx", e)
@@ -984,8 +981,8 @@ object GpxUtilities {
 			var firstSegment: TrkSegment? = null
 			var extensionReadMode = false
 			var routePointExtension = false
-			val routeSegments = mutableListOf<RouteSegment>()
-			val routeTypes = mutableListOf<RouteType>()
+			var routeSegments = mutableListOf<RouteSegment>()
+			var routeTypes = mutableListOf<RouteType>()
 			val pointsGroups = mutableListOf<PointsGroup>()
 			var routeExtension = false
 			var typesExtension = false
@@ -1349,8 +1346,8 @@ object GpxUtilities {
 							if (pop is TrkSegment) {
 								pop.routeSegments = routeSegments
 								pop.routeTypes = routeTypes
-								routeSegments.clear()
-								routeTypes.clear()
+								routeSegments = mutableListOf()
+								routeTypes = mutableListOf()
 								if (firstSegment == null) {
 									firstSegment = pop
 								}

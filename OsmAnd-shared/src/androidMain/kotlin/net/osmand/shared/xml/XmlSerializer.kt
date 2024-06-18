@@ -37,8 +37,7 @@ actual class XmlSerializer actual constructor() {
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setOutput(output: Sink) {
-		val writer = SinkStringWriter(output)
-		serializer.setOutput(writer)
+		serializer.setOutput(SinkStringWriter(output))
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
@@ -112,4 +111,7 @@ actual class XmlSerializer actual constructor() {
 
 	@Throws(IOException::class)
 	actual fun flush() = serializer.flush()
+
+	@Throws(IOException::class)
+	actual fun close() = flush()
 }

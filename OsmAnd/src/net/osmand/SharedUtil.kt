@@ -149,11 +149,11 @@ object SharedUtil {
 
 	@JvmStatic
 	fun writeGpx(output: OutputStream, file: GpxFile, progress: IProgress?): Exception? =
-		GpxUtilities.writeGpx(output.sink(), file, progress)
+		GpxUtilities.writeGpx(null, output.sink(), file, progress)
 
 	@JvmStatic
 	fun writeGpx(output: Sink, file: GpxFile, progress: IProgress?): Exception? =
-		GpxUtilities.writeGpx(output, file, progress)
+		GpxUtilities.writeGpx(null, output, file, progress)
 
 	@JvmStatic
 	fun kIProgress(progress: net.osmand.IProgress?) : IProgress? {

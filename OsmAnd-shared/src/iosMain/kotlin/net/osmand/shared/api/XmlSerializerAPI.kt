@@ -23,7 +23,7 @@ interface XmlSerializerAPI {
 	fun setOutput(filePath: String)
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
-	fun setOutput(output: NSOutputStream)
+	fun setOutput(output: OutputStreamAPI)
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	fun startDocument(encoding: String?, standalone: Boolean?)
@@ -78,4 +78,7 @@ interface XmlSerializerAPI {
 
 	@Throws(IOException::class)
 	fun flush()
+
+	@Throws(IOException::class)
+	fun close()
 }

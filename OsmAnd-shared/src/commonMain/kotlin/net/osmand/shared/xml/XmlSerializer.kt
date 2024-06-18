@@ -77,4 +77,7 @@ expect class  XmlSerializer() {
 
 	@Throws(IOException::class)
 	fun flush()
+
+	@Throws(IOException::class)
+	fun close()
 }
