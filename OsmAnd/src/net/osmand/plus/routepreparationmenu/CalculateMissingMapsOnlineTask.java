@@ -67,7 +67,7 @@ public class CalculateMissingMapsOnlineTask extends AsyncTask<Void, Void, Void> 
 				String response = helper.makeRequest(url.toString());
 				List<LatLon> locations = parseOnlineCalculationResponse(response);
 				calculator.checkIfThereAreMissingMaps(
-						routingContext, routePoints.get(0), locations, routingType.isHHRouting()
+						routingContext, routePoints.get(0), locations, routingType.isHHRouting(), true
 				);
 				if (routingContext.calculationProgress.missingMapsCalculationResult != null) {
 					route.setMissingMapsCalculationResult(routingContext.calculationProgress.missingMapsCalculationResult);
