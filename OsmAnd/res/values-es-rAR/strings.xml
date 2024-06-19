@@ -5710,7 +5710,7 @@
     <string name="change_default_tracks_appearance_confirmation">¿Aplicar cambios a las trazas existentes en la carpeta o sólo a las nuevas?</string>
     <string name="delete_actions_button_confirmation">¿Borrar «%1$s» con todas sus acciones añadidas?</string>
     <string name="delete_actions_button">Borrar botón</string>
-    <string name="maps_that_also_be_used">Mapas extras usados: %1$s</string>
+    <string name="maps_that_also_be_used">Mapas extras a usar: %1$s</string>
     <string name="required_maps_calculate_online_summary">La lista de mapas perdidos se basa en la línea recta de la ruta. Para obtener una lista exacta de mapas, OsmAnd puede pre-calcular la ruta en línea.</string>
     <string name="route_line_use_coloring_speed">La línea de la ruta se colorea según la velocidad del movimiento.</string>
     <string name="shared_string_osm_id">ID de OSM</string>
@@ -5762,4 +5762,7 @@
     <string name="action_icon">Añadir icono</string>
     <string name="user_palette">Paleta del usuario</string>
     <string name="shared_string_colors">Colores</string>
+    <string name="backup_error_failed_to_transfer_file">Error al transferir archivos de la nube.</string>
+    <string name="contact_support_retry">Prueba de nuevo o contacta con nosotros</string>
+    <string name="missing_maps_ignore">Ignorar mapas faltantes</string>
 </resources>
