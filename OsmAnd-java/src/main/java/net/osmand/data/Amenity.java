@@ -322,7 +322,7 @@ public class Amenity extends MapObject {
 		}
 		if (text.size() > 0) {
 			s.append(" non_default_poi_xml:[ ");
-			printNames(" text:", text, s);
+			printNames("", text, s);
 			s.append(" ] ");
 		}
 		printNames(" name:", getNamesMap(true), s);
@@ -334,11 +334,7 @@ public class Amenity extends MapObject {
 			if (e.getValue().startsWith(" gz ")) {
 				s.append(prefix).append(e.getKey()).append("='gzip ...'");
 			} else {
-				if (e.getValue().isEmpty()) {
-					s.append(prefix).append(e.getKey());
-				} else {
-					s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("'");
-				}
+				s.append(prefix).append(e.getKey()).append("='").append(e.getValue()).append("'");
 			}
 		}
 	}
