@@ -44,7 +44,7 @@
     <string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
     <string name="save_track_interval_globally">Aufzeichnungsintervall</string>
     <string name="save_track_interval">Erfassungsintervall während der Navigation</string>
-    <string name="save_track_interval_descr">Positionserfassungsintervall für Streckenaufzeichnung während der Navigation festlegen</string>
+    <string name="save_track_interval_descr">Positionserfassungsintervall für Trackaufzeichnung während der Navigation festlegen</string>
     <string name="rendering_value_browse_map_name">Karte ansehen</string>
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Fahrrad</string>
@@ -3747,7 +3747,7 @@
     <string name="shared_string_gpx_route">Trackroute</string>
     <string name="import_track_descr">Track Datei zum Folgen auswählen, oder vom Gerät importieren.</string>
     <string name="disable_recording_once_app_killed_descrp">Die Track-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
-    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (wird über die Schaltfläche „Routenaufzeichnung“ auf dem Kartenbildschirm angeschaltet).</string>
+    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Trackaufzeichnung festlegen (wird über die Schaltfläche „Routenaufzeichnung“ auf dem Kartenbildschirm angeschaltet).</string>
     <string name="quick_action_add_gpx">Track-Wegpunkt hinzufügen</string>
     <string name="number_of_gpx_files_selected_pattern">%s Trackdateien ausgewählt</string>
     <string name="simplified_track_description">Nur die Routenlinie wird gespeichert, die Wegpunkte werden gelöscht.</string>
@@ -3986,7 +3986,7 @@
     <string name="delete_number_files_question">%1$d Dateien löschen\?</string>
     <string name="track_recording_stop_without_saving">Stoppen ohne zu speichern</string>
     <string name="track_recording_save_and_stop">Speichern und Beenden der Aufzeichnung</string>
-    <string name="track_recording_title">Track-Aufnahme gestoppt</string>
+    <string name="track_recording_title">Trackaufzeichnung gestoppt</string>
     <string name="updated">Aktualisiert: %s</string>
     <string name="delete_updates">Updates löschen</string>
     <string name="purchases">Käufe</string>
@@ -5481,7 +5481,7 @@
     <string name="empty_name">Leerer Name</string>
     <string name="edit_filter">Filter bearbeiten</string>
     <string name="help_article_widgets_radius_ruler_name">Radius-Maßstab und Lineal</string>
-    <string name="help_article_troubleshooting_track_recording_issues_name">Streckenaufzeichnung</string>
+    <string name="help_article_troubleshooting_track_recording_issues_name">Trackaufzeichnung</string>
     <string name="save_as_smart_folder">Als intelligenten Ordner speichern</string>
     <string name="help_article_widgets_map_buttons_name">Schaltflächen der Karte</string>
     <string name="delete_smart_folder_dialog_message">Dies löscht den intelligenten Ordner „%1$s“. (Tracks werden nicht gelöscht.)</string>
@@ -5622,8 +5622,8 @@
     <string name="special_routing_cpp">Spezieller Navigationstyp</string>
     <string name="add_button">Schaltfläche hinzufügen</string>
     <string name="custom_buttons">Benutzerdefinierte Schaltflächen</string>
-    <string name="custom_map_button_name_present">Solch eine Schaltfläche ist bereits vorhanden</string>
-    <string name="default_buttons">Standardschaltflächen</string>
+    <string name="custom_map_button_name_present">Diese Schaltfläche ist bereits vorhanden</string>
+    <string name="default_buttons">Standard-Schaltflächen</string>
     <string name="speed_limit_warning">Warnung vor Tempolimit</string>
     <string name="shared_string_limit">Limit</string>
     <string name="when_exceeded">Bei Überschreitung</string>
@@ -5673,7 +5673,7 @@
 \nWählen Sie „%1$s“ für exakte Zahlen oder „%2$s“ für eine leichtere Lesbarkeit.</string>
     <string name="download_cloud_versions">Cloud-Versionen herunterladen</string>
     <string name="upload_local_versions">Lokale Versionen hochladen</string>
-    <string name="map_widget_map_scale">Karten-Maßstab</string>
+    <string name="map_widget_map_scale">Kartenmaßstab</string>
     <string name="shared_string_unchanged">Unverändert</string>
     <string name="unchanged_parameter_summary">Jede Spur behält ihre eigenen Parameter.</string>
     <string name="gpx_approximation_cpp">Routingbasiert (C++)</string>
@@ -5692,7 +5692,7 @@
     <string name="vertical_exaggeration_description">Durch Änderung des Skalierungs-Werts können Sie das 3D-Profil hervorheben.</string>
     <string name="shared_string_scale">Maßstab</string>
     <string name="use_terrain_maps">Terrainkarten verwenden</string>
-    <string name="use_nearby_roads">Nutzung von nahegelegenen Straßen</string>
+    <string name="use_nearby_roads">Nahe gelegene Straßen verwenden</string>
     <string name="use_terrain_maps_summary">Benutzt Geländekarten für Höhendaten. Trackgeometrie bleibt unverändert.</string>
     <string name="use_nearby_roads_summary">Verwendet Offline-Karte, um Straßen und Höhendaten in der Nähe zu finden. Kann die Trackgeometrie anpassen.</string>
     <string name="retrieve_elevation_data_summary">OsmAnd kann Höhendaten von nahe gelegenen Straßen oder Geländekarten abrufen.</string>
@@ -5734,22 +5734,23 @@
     <string name="travel_topics">Reisethemen</string>
     <string name="play_weather_forecast">Wettervorhersage abspielen</string>
     <string name="change_terrain_color_scheme">Farbschema des Geländes ändern</string>
-    <string name="wall_height">Wandhöhe</string>
+    <string name="wall_height">Höhe der Mauer</string>
     <string name="rendering_value_dark_orange_name">Dunkelorange</string>
     <string name="clear_all_key_shortcuts">Alle Tastaturkürzel löschen</string>
     <string name="no_assigned_keys">Keine zugewiesenen Tasten</string>
     <string name="shared_string_key">Taste</string>
     <string name="new_key_assignment">Neue Tastenzuweisung</string>
-    <string name="key_name_pattern">Taste \"%1$s\"</string>
-    <string name="clear_key_assignment_summary">Tastenzuweisung für die gewählte Aktion wird gelöscht.</string>
+    <string name="key_name_pattern">Taste „%1$s“</string>
+    <string name="clear_key_assignment_summary">Tastenzuweisung für die ausgewählte Aktion wird gelöscht.</string>
     <string name="key_assignment_add_action">Aktion hinzufügen</string>
-    <string name="clear_all_key_shortcuts_summary">Tastenzuweisung für den gewählten Typ wird gelöscht.</string>
-    <string name="no_assigned_keys_desc">Wählen Sie eine Aktion und weisen Sie eine Taste mit der \"Hinzufügen\"-Schaltfläche zu.</string>
+    <string name="clear_all_key_shortcuts_summary">Alle Tastenzuweisungen für den ausgewählten Typ werden gelöscht.</string>
+    <string name="no_assigned_keys_desc">Wählen Sie eine Aktion aus und weisen Sie eine Taste mit der Schaltfläche „Hinzufügen“ zu.</string>
     <string name="key_assignment_add_key">Taste hinzufügen</string>
     <string name="assigned_keys">Zugewiesene Tasten</string>
     <string name="shared_string_colors">Farben</string>
-    <string name="contact_support_retry">Versuche es erneut oder kontaktiere den Support</string>
+    <string name="contact_support_retry">Versuchen Sie es erneut oder kontaktieren Sie den Support</string>
     <string name="action_icon">Aktionssymbol</string>
     <string name="backup_error_failed_to_transfer_file">Die Übertragung der Cloud-Datei(en) ist fehlgeschlagen.</string>
-    <string name="user_palette">Benutzer-Palette</string>
+    <string name="user_palette">Benutzerpalette</string>
+    <string name="missing_maps_ignore">Vorhandene Karten verwenden</string>
 </resources>
