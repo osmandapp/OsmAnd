@@ -5689,7 +5689,7 @@
     <string name="release_4_8">• Für 4.8 vorbereitet</string>
     <string name="vertical_exaggeration">Vertikale Vergrößerung</string>
     <string name="relief_3d_download_description">Weitere Karten sind erforderlich, um Gelände auf der Karte anzuzeigen.</string>
-    <string name="vertical_exaggeration_description">Durch Änderung des Skalierungs-Werts können Sie das 3D-Profil hervorheben.</string>
+    <string name="vertical_exaggeration_description">Durch Änderung des Skalenwerts können Sie das 3D-Profil hervorheben.</string>
     <string name="shared_string_scale">Maßstab</string>
     <string name="use_terrain_maps">Terrainkarten verwenden</string>
     <string name="use_nearby_roads">Nahe gelegene Straßen verwenden</string>
