@@ -938,10 +938,8 @@ object GpxUtilities {
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
-		var source: Source? = null
 		return try {
-			source = file.source()
-			val gpxFile = loadGpxFile(source, extensionsReader, addGeneralTrack)
+			val gpxFile = loadGpxFile(file, null, extensionsReader, addGeneralTrack)
 			gpxFile.path = file.absolutePath()
 			gpxFile.modifiedTime = file.lastModified()
 			gpxFile.pointsModifiedTime = gpxFile.modifiedTime
@@ -955,25 +953,31 @@ object GpxUtilities {
 			log.error("Error reading gpx ${gpxFile.path}", e)
 			gpxFile.error = KException(e.message, e)
 			gpxFile
-		} finally {
-			source?.close()
 		}
 	}
 
 	fun loadGpxFile(source: Source): GpxFile {
-		return loadGpxFile(source, null, true)
+		return loadGpxFile(null, source, null, true)
 	}
 
 	fun loadGpxFile(
-		source: Source,
+		file: KFile?,
+		source: Source?,
 		extensionsReader: GpxExtensionsReader?,
 		addGeneralTrack: Boolean
 	): GpxFile {
 		val gpxFile = GpxFile(null)
 		gpxFile.metadata.time = 0
+		var parser: XmlPullParser? = null
 		try {
-			val parser = XmlPullParser()
-			parser.setInput(source.buffer(), "UTF-8")
+			parser = XmlPullParser()
+			if (file != null) {
+				parser.setInput(file, "UTF-8")
+			} else if (source != null) {
+				parser.setInput(source.buffer(), "UTF-8")
+			} else {
+				throw KException("Input file or source is not defined")
+			}
 			val routeTrack = Track()
 			val routeTrackSegment = TrkSegment()
 			routeTrack.segments.add(routeTrackSegment)
@@ -1378,6 +1382,8 @@ object GpxUtilities {
 			}
 		} catch (e: Exception) {
 			gpxFile.error = KException(e.message, e)
+		} finally {
+			parser?.close()
 		}
 
 		return gpxFile

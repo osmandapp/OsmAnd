@@ -6,9 +6,12 @@ import okio.IOException
 import okio.Sink
 import java.io.File
 import java.io.OutputStreamWriter
+import java.io.StringWriter
 
 actual class XmlSerializer actual constructor() {
 	private val serializer = org.kxml2.io.KXmlSerializer()
+	private var outputStream: OutputStreamWriter? = null
+	private var stringWriter: StringWriter? = null
 
 	@Throws(IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setFeature(name: String, state: Boolean) = serializer.setFeature(name, state)
@@ -24,20 +27,20 @@ actual class XmlSerializer actual constructor() {
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setOutput(file: KFile) {
+		outputStream?.close()
+
 		val fout = File(file.absolutePath())
-		var output: OutputStreamWriter? = null
-		try {
-			fout.parentFile?.mkdirs()
-			output = OutputStreamWriter(fout.outputStream(), "UTF-8")
-		} finally {
-			output?.close()
-		}
-		serializer.setOutput(output)
+		fout.parentFile?.mkdirs()
+
+		outputStream = OutputStreamWriter(fout.outputStream(), "UTF-8")
+		serializer.setOutput(outputStream)
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
 	actual fun setOutput(output: Sink) {
-		serializer.setOutput(SinkStringWriter(output))
+		stringWriter?.close()
+		stringWriter = SinkStringWriter(output)
+		serializer.setOutput(stringWriter)
 	}
 
 	@Throws(IOException::class, IllegalArgumentException::class, IllegalStateException::class)
@@ -113,5 +116,10 @@ actual class XmlSerializer actual constructor() {
 	actual fun flush() = serializer.flush()
 
 	@Throws(IOException::class)
-	actual fun close() = flush()
+	actual fun close() {
+		flush()
+
+		outputStream?.close()
+		stringWriter?.close()
+	}
 }
