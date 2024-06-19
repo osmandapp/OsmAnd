@@ -60,7 +60,7 @@ public class MissingMapsCalculator {
 
 
 	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets,
-											  boolean checkHHEditions, boolean isOnlineCalc)
+	                                          boolean checkHHEditions, boolean calledByCalcOnline)
 			throws IOException {
 //		start = testLatLons(targets);
 		long tm = System.nanoTime();
@@ -100,7 +100,7 @@ public class MissingMapsCalculator {
 		}
 		
 		List<LatLon> points = CollectionUtils.asOneList(Collections.singletonList(start), targets);
-		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points, isOnlineCalc);
+		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points, calledByCalcOnline);
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
@@ -159,7 +159,7 @@ public class MissingMapsCalculator {
 			}
 		}
 
-		if (result.hasMissingMaps() || isOnlineCalc) {
+		if (result.hasMissingMaps() || calledByCalcOnline) {
 			ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
 		}
 
@@ -189,14 +189,13 @@ public class MissingMapsCalculator {
 		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
 		for (BinaryMapDataObject o : resList) {
-			if (or.isDownloadOfType(o, OsmandRegions.MAP_TYPE)
-					|| or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE)
-					|| or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-					|| or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)
-			) {
+			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
+			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
+			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
+			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
+			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
 				regions.add(or.getDownloadName(o));
-				if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-						&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
+				if (!hasMapJoinType && !hasRoadsJoinType) {
 					onlyJointMap = false;
 				}
 			}
