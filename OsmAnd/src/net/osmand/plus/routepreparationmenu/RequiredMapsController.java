@@ -222,4 +222,8 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		dialogManager.register(PROCESS_ID, new RequiredMapsController(app));
 		RequiredMapsFragment.showInstance(activity.getSupportFragmentManager());
 	}
+
+	public boolean hasOnlineCalcResult() {
+		return app.getRoutingHelper().getRoute().getMissingMapsCalculationResult().isOnlineResult();
+	}
 }
