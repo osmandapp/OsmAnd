@@ -5616,7 +5616,7 @@
     <string name="key_event_action_next_app_profile">下一个应用程序配置文件</string>
     <string name="shared_string_empty_trash">清空回收箱</string>
     <string name="key_event_action_open_search_view">开启搜索视图</string>
-    <string name="delete_smart_folder_dialog_message">这将会删除智能文件夹“% 1$s” 。 （不会删除任何轨迹。 ）</string>
+    <string name="delete_smart_folder_dialog_message">这将会删除智能文件夹“%1$s” 。 （不会删除任何轨迹。 ）</string>
     <string name="trash_alert_card_desc">回收箱中的物品将在 %1$s 天后删除。</string>
     <string name="with_waypoints">有航路点</string>
     <string name="press_button_to_link_with_action">按下设备上的按钮将其分配给动作：%1$s</string>
