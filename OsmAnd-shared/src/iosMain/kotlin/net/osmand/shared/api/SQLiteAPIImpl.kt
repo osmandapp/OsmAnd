@@ -4,6 +4,7 @@ import co.touchlab.sqliter.Cursor
 import co.touchlab.sqliter.DatabaseConfiguration
 import co.touchlab.sqliter.DatabaseConnection
 import co.touchlab.sqliter.DatabaseManager
+import co.touchlab.sqliter.NO_VERSION_CHECK
 import co.touchlab.sqliter.Statement
 import co.touchlab.sqliter.createDatabaseManager
 import co.touchlab.sqliter.getColumnIndexOrThrow
@@ -20,7 +21,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 	private lateinit var databaseManager: DatabaseManager
 
 	override fun getOrCreateDatabase(name: String, readOnly: Boolean): SQLiteConnection {
-		val configuration = DatabaseConfiguration(name = name, version = 1, create = { db ->
+		val configuration = DatabaseConfiguration(name = name, version = NO_VERSION_CHECK, create = { db ->
 			// No-op: example creation logic
 		}, upgrade = { db, oldVersion, newVersion ->
 			// No-op: example upgrade logic
@@ -49,7 +50,7 @@ class SQLiteAPIImpl : SQLiteAPI {
 
 		override fun rawQuery(sql: String, selectionArgs: Array<String>?): SQLiteCursor {
 			val statement = ds.createStatement(sql)
-			selectionArgs?.forEachIndexed { index, s -> statement.bindString(index, s) }
+			selectionArgs?.forEachIndexed { index, s -> statement.bindString(index + 1, s) }
 			return SQLiteCursorImpl(statement.query(), statement)
 		}
 
@@ -58,14 +59,14 @@ class SQLiteAPIImpl : SQLiteAPI {
 		}
 
 		override fun execSQL(query: String, objects: Array<Any?>) {
-			ds.withStatement("") {
+			ds.withStatement(query) {
 				objects.forEachIndexed { index, obj ->
 					when (obj) {
-						is String -> bindString(index, obj)
-						is Long -> bindLong(index, obj)
-						is Double -> bindDouble(index, obj)
-						is ByteArray -> bindBlob(index, obj)
-						null -> bindNull(index)
+						is String -> bindString(index + 1, obj)
+						is Long -> bindLong(index + 1, obj)
+						is Double -> bindDouble(index + 1, obj)
+						is ByteArray -> bindBlob(index + 1, obj)
+						null -> bindNull(index + 1)
 					}
 				}
 				execute()

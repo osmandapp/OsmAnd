@@ -128,7 +128,8 @@ class GpxDatabase {
 		val file = item.file
 		val tableName = GpxDbUtils.getTableName(file)
 		val map = GpxDbUtils.convertGpxParameters(GpxDbUtils.getItemParameters(item))
-		db.execSQL(DbUtils.createDbInsertQuery(tableName, map.keys), map.values.toTypedArray())
+		val query = DbUtils.createDbInsertQuery(tableName, map.keys)
+		db.execSQL(query, map.values.toTypedArray())
 	}
 
 	private fun readGpxDataItem(query: SQLiteCursor): GpxDataItem {
