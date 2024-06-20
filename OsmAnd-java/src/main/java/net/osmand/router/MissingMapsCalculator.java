@@ -60,7 +60,7 @@ public class MissingMapsCalculator {
 
 
 	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets,
-											  boolean checkHHEditions, boolean isOnlineCalc)
+	                                          boolean checkHHEditions, boolean calledByCalcOnline)
 			throws IOException {
 //		start = testLatLons(targets);
 		long tm = System.nanoTime();
@@ -100,7 +100,7 @@ public class MissingMapsCalculator {
 		}
 		
 		List<LatLon> points = CollectionUtils.asOneList(Collections.singletonList(start), targets);
-		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points, isOnlineCalc);
+		MissingMapsCalculationResult result = new MissingMapsCalculationResult(ctx, points, calledByCalcOnline);
 		Set<Long> presentTimestamps = null;
 		for (Point p : pointsToCheck) {
 			if (p.hhEditions == null) {
@@ -161,7 +161,7 @@ public class MissingMapsCalculator {
 			}
 		}
 
-		if (result.hasMissingMaps() || isOnlineCalc) {
+		if (result.hasMissingMaps() || calledByCalcOnline) {
 			ctx.calculationProgress.missingMapsCalculationResult = result.prepare(or);
 		}
 

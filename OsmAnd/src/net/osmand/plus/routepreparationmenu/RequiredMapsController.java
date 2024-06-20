@@ -24,7 +24,6 @@ import net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.Calcu
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -190,10 +189,6 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		return itemsSelectionHelper.isAllItemsSelected();
 	}
 
-	public boolean isOnlineCalculationRequested() {
-		return onlineCalculationRequested;
-	}
-
 	public boolean isLoadingInProgress() {
 		return loadingMapsInProgress;
 	}
@@ -223,7 +218,12 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 		RequiredMapsFragment.showInstance(activity.getSupportFragmentManager());
 	}
 
-	public boolean hasOnlineCalcResult() {
-		return app.getRoutingHelper().getRoute().getMissingMapsCalculationResult().isOnlineResult();
+	public boolean shouldShowOnlineCalculation() {
+		return !onlineCalculationRequested && !isLoadingInProgress() && !hasOnlineCalcResult();
+	}
+
+	private boolean hasOnlineCalcResult() {
+		MissingMapsCalculationResult result = app.getRoutingHelper().getRoute().getMissingMapsCalculationResult();
+		return result != null && result.isOnlineResultPoints();
 	}
 }
