@@ -14,7 +14,7 @@ public class MissingMapsCalculationResult {
 
 	private final RoutingContext missingMapsRoutingContext;
 	private final List<LatLon> missingMapsPoints;
-	private boolean isOnlineResult = false;
+	private boolean onlineResultPoints = false;
 
 	Set<String> usedMaps = new LinkedHashSet<>();
 	Set<String> mapsToDownload = new LinkedHashSet<>();
@@ -26,10 +26,10 @@ public class MissingMapsCalculationResult {
 	private List<WorldRegion> usedRegions;
 
 	public MissingMapsCalculationResult(RoutingContext missingMapsRoutingContext, List<LatLon> missingMapsPoints,
-										boolean isOnline) {
+	                                    boolean calledByCalcOnline) {
 		this.missingMapsRoutingContext = missingMapsRoutingContext;
 		this.missingMapsPoints = missingMapsPoints;
-		this.isOnlineResult = isOnline;
+		this.onlineResultPoints = calledByCalcOnline;
 	}
 	
 	public void addMissingMaps(String region) {
@@ -111,7 +111,7 @@ public class MissingMapsCalculationResult {
 		return this;
 	}
 
-	public boolean isOnlineResult() {
-		return isOnlineResult;
+	public boolean isOnlineResultPoints() {
+		return onlineResultPoints;
 	}
 }

@@ -147,8 +147,7 @@ public class RequiredMapsFragment extends BaseOsmAndDialogFragment implements IA
 			setupItemsList();
 			updateUsedMapsSummary();
 		}
-		boolean showOnlineCalculationBanner = !controller.hasOnlineCalcResult() &&
-				!controller.isOnlineCalculationRequested() && !controller.isLoadingInProgress();
+		boolean showOnlineCalculationBanner = controller.shouldShowOnlineCalculation();
 		updateVisibility(view.findViewById(R.id.card_calculate_online), showOnlineCalculationBanner);
 		updateSelectionButtonVisibility();
 		updateIgnoreMissingMapsCard();
