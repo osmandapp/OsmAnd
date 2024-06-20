@@ -44,9 +44,9 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 	}
 
 	public void reloadGradientColors() {
-		ColorizationType colorizationType = gradientCollection.getColorizationType();
-		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(colorizationType);
-		this.gradientCollection = new GradientCollection(colorPaletteMap, app.getSettings().GRADIENT_PALETTES, colorizationType);
+		Object gradientType = gradientCollection.getGradientType();
+		Map<String, Pair<ColorPalette, Long>> colorPaletteMap = app.getColorPaletteHelper().getPalletsForType(gradientType);
+		this.gradientCollection = new GradientCollection(colorPaletteMap, app.getSettings().GRADIENT_PALETTES, gradientType);
 		if (selectedPaletteColor instanceof PaletteGradientColor) {
 			notifyUpdatePaletteColors(null);
 		}
@@ -54,18 +54,22 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	public void updateContent(@NonNull GradientCollection gradientCollection, @NonNull String selectedGradientName) {
 		this.gradientCollection = gradientCollection;
+		updateContent(selectedGradientName);
+	}
+
+	public void updateContent(@NonNull String selectedGradientName) {
 		PaletteGradientColor newColor = null;
 		for (PaletteGradientColor gradientColor : gradientCollection.getPaletteColors()) {
 			if (gradientColor.getPaletteName().equals(selectedGradientName)) {
 				newColor = gradientColor;
 			}
 		}
-
 		if (newColor == null) {
 			selectedPaletteColor = gradientCollection.getDefaultGradientPalette();
 		} else {
 			selectedPaletteColor = newColor;
 		}
+		notifyUpdatePaletteColors(null);
 	}
 
 	@Nullable
@@ -95,7 +99,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 		}
 	}
 
-	protected void notifyUpdatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
+	private void notifyUpdatePaletteSelection(@Nullable PaletteColor oldColor, @NonNull PaletteColor newColor) {
 		for (IColorsPalette palette : collectActivePalettes()) {
 			palette.updatePaletteSelection(oldColor, newColor);
 		}
@@ -120,6 +124,10 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 			}
 		}
 		return result;
+	}
+
+	public Object getGradientType(){
+		return gradientCollection.getGradientType();
 	}
 
 	@Override
@@ -180,7 +188,7 @@ public class GradientColorsPaletteController implements IColorsPaletteController
 
 	@Override
 	public void onColorLongClick(@NonNull FragmentActivity activity, @NonNull View view,
-	                             @NonNull PaletteColor color, boolean nightMode) {
+								 @NonNull PaletteColor color, boolean nightMode) {
 	}
 
 	@Override

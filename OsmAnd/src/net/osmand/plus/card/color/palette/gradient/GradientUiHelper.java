@@ -22,6 +22,7 @@ import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.utils.UiUtilities;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class GradientUiHelper {
@@ -80,5 +81,19 @@ public class GradientUiHelper {
 
     protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
         return app.getUIUtilities().getPaintedIcon(id, color);
+    }
+
+    public static String formatTerrainTypeValues(float value) {
+        DecimalFormat decimalFormat;
+        if (value >= 10) {
+            decimalFormat = new DecimalFormat("#");
+        } else {
+            decimalFormat = new DecimalFormat("#.#");
+        }
+        String formattedValue = decimalFormat.format(value);
+        if (formattedValue.endsWith(".0")) {
+            formattedValue = formattedValue.substring(0, formattedValue.length() - 2);
+        }
+        return formattedValue;
     }
 }

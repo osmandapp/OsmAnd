@@ -12,6 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.card.color.palette.main.PaletteColorsComparator;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.card.color.palette.main.data.PaletteSortingMode;
+import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
@@ -32,12 +33,19 @@ public class GradientCollection {
 
 	private final List<PaletteGradientColor> paletteColors = new ArrayList<>();
 	private final CommonPreference<String> gradientPalettesPreference;
-	private final ColorizationType colorizationType;
+	private String type;
+	private final Object gradientType;
 
-	public GradientCollection(@NonNull Map<String, Pair<ColorPalette, Long>> gradientPalettes, @NonNull CommonPreference<String> gradientPalettesPreference, @NonNull ColorizationType colorizationType) {
+	public GradientCollection(@NonNull Map<String, Pair<ColorPalette, Long>> gradientPalettes,
+							  @NonNull CommonPreference<String> gradientPalettesPreference, @NonNull Object gradientType) {
 		this.gradientPalettesPreference = gradientPalettesPreference;
-		this.colorizationType = colorizationType;
+		this.gradientType = gradientType;
 
+		if (gradientType instanceof ColorizationType) {
+			type = ((ColorizationType) gradientType).name().toLowerCase();
+		} else if (gradientType instanceof TerrainType) {
+			type = ((TerrainType) gradientType).name();
+		}
 		loadPaletteColors(gradientPalettes);
 	}
 
@@ -48,23 +56,16 @@ public class GradientCollection {
 			if (pair != null) {
 				ColorPalette palette = pair.first;
 				long creationTime = pair.second;
-				String paletteId = createGradientPaletteId(key, colorizationType.name().toLowerCase());
-				PaletteColor savedPaletteColorPreference = loadedPreferences.get(paletteId);
+				PaletteColor savedPaletteColorPreference = loadedPreferences.get(type + GRADIENT_ID_SPLITTER + key);
 				long lastUsedTime = savedPaletteColorPreference != null ? savedPaletteColorPreference.getLastUsedTime() : 0;
-
-				paletteColors.add(new PaletteGradientColor(paletteId, palette, creationTime, lastUsedTime));
+				paletteColors.add(new PaletteGradientColor(key, type, palette, creationTime, lastUsedTime));
 			}
 		}
 	}
 
 	@NonNull
-	private String createGradientPaletteId(@NonNull String paletteName, @NonNull String colorizationName) {
-		return colorizationName + GRADIENT_ID_SPLITTER + paletteName;
-	}
-
-	@NonNull
-	public ColorizationType getColorizationType() {
-		return colorizationType;
+	public Object getGradientType() {
+		return gradientType;
 	}
 
 	@Nullable
@@ -110,7 +111,7 @@ public class GradientCollection {
 
 		if (!Algorithms.isEmpty(jsonAsString)) {
 			try {
-				paletteColors = readFromJson(new JSONObject(jsonAsString), colorizationType);
+				paletteColors = readFromJson(new JSONObject(jsonAsString), type);
 			} catch (JSONException e) {
 				LOG.debug("Error while reading palette colors from JSON ", e);
 			}
@@ -119,13 +120,13 @@ public class GradientCollection {
 	}
 
 	@NonNull
-	private static HashMap<String, PaletteColor> readFromJson(@NonNull JSONObject json, @NonNull ColorizationType colorizationType) throws JSONException {
-		if (!json.has(colorizationType.name().toLowerCase())) {
+	private static HashMap<String, PaletteColor> readFromJson(@NonNull JSONObject json, @NonNull String type) throws JSONException {
+		if (!json.has(type)) {
 			return new HashMap<>();
 		}
 		HashMap<String, PaletteColor> res = new HashMap<>();
 
-		JSONArray typeGradients = json.getJSONArray(colorizationType.name().toLowerCase());
+		JSONArray typeGradients = json.getJSONArray(type);
 		for (int i = 0; i < typeGradients.length(); i++) {
 			try {
 				PaletteGradientColor paletteColor = new PaletteGradientColor(typeGradients.getJSONObject(i));
@@ -156,7 +157,7 @@ public class GradientCollection {
 			} else {
 				jsonObject = new JSONObject();
 			}
-			writeToJson(jsonObject, paletteColors, colorizationType);
+			writeToJson(jsonObject, paletteColors, type);
 			String newGradientPreferences = jsonObject.toString();
 			preference.set(newGradientPreferences);
 		} catch (JSONException e) {
@@ -166,11 +167,11 @@ public class GradientCollection {
 
 
 	private static void writeToJson(@NonNull JSONObject jsonObject,
-									@NonNull List<PaletteGradientColor> paletteColors, @NonNull ColorizationType colorizationType) throws JSONException {
+									@NonNull List<PaletteGradientColor> paletteColors, @NonNull String type) throws JSONException {
 		JSONArray jsonArray = new JSONArray();
 		for (PaletteGradientColor paletteColor : paletteColors) {
 			jsonArray.put(paletteColor.toJson());
 		}
-		jsonObject.put(colorizationType.name().toLowerCase(), jsonArray);
+		jsonObject.put(type, jsonArray);
 	}
 }

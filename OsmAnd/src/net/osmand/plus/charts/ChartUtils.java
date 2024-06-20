@@ -385,7 +385,7 @@ public class ChartUtils {
 	public static <E> LineData buildGradientChart(@NonNull OsmandApplication app,
 												  @NonNull LineChart chart,
 												  @NonNull ColorPalette gradientColorPalette,
-												  @NonNull IAxisValueFormatter iAxisValueFormatter,
+												  @Nullable IAxisValueFormatter iAxisValueFormatter,
 												  boolean nightMode) {
 
 		XAxis xAxis = chart.getXAxis();

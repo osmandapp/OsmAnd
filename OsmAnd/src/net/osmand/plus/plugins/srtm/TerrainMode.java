@@ -12,14 +12,16 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.preferences.CommonPreference;
 import net.osmand.util.Algorithms;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TerrainMode {
 
-
-	private static final String DEFAULT_KEY = "default";
+	public static final String DEFAULT_KEY = "default";
+	public static final String ALTITUDE_DEFAULT_KEY = "altitude_default";
 	public static final String HILLSHADE_PREFIX = "hillshade_main_";
 	public static final String HILLSHADE_SCND_PREFIX = "hillshade_color_";
 	public static final String COLOR_SLOPE_PREFIX = "slope_";
@@ -48,11 +50,15 @@ public class TerrainMode {
 				type == TerrainType.HILLSHADE ? 100 : 80).makeProfile();
 	}
 
-
 	public static TerrainMode[] values(OsmandApplication app) {
 		if (terrainModes != null) {
 			return terrainModes;
 		}
+		reloadTerrainMods(app);
+		return terrainModes;
+	}
+
+	public static void reloadTerrainMods(@NonNull OsmandApplication app){
 		TerrainMode hillshade =
 				new TerrainMode(app, DEFAULT_KEY, app.getString(R.string.shared_string_hillshade), TerrainType.HILLSHADE);
 		TerrainMode slope =
@@ -92,8 +98,27 @@ public class TerrainMode {
 				}
 			}
 		}
-		terrainModes = tms.toArray(new TerrainMode[tms.size()]);
-		return terrainModes;
+		terrainModes = tms.toArray(new TerrainMode[0]);
+	}
+
+	@Nullable
+	public static TerrainMode getMode(@NonNull TerrainType type, @NonNull String keyName) {
+		for (TerrainMode mode : terrainModes) {
+			if (mode.type == type && Algorithms.stringsEqual(mode.getKeyName(), keyName)) {
+				return mode;
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static TerrainMode getDefaultMode(@NonNull TerrainType type) {
+		for (TerrainMode mode : terrainModes) {
+			if (mode.type == type && mode.isDefaultMode()) {
+				return mode;
+			}
+		}
+		return null;
 	}
 
 	public static TerrainMode getByKey(String key) {
@@ -140,10 +165,18 @@ public class TerrainMode {
 	}
 
 	public String getKeyName() {
-		if (key.equals(DEFAULT_KEY)) {
+		if (key.equals(DEFAULT_KEY) || key.equals(ALTITUDE_DEFAULT_KEY)) {
 			return type.name().toLowerCase();
 		}
 		return key;
+	}
+
+	public boolean isDefaultMode() {
+		if (type == TerrainType.HEIGHT) {
+			return key.equals(ALTITUDE_DEFAULT_KEY);
+		} else {
+			return key.equals(DEFAULT_KEY);
+		}
 	}
 
 	//	private static final String HILLSHADE_CACHE = "hillshade.cache";
@@ -184,5 +217,16 @@ public class TerrainMode {
 
 	public String getDescription() {
 		return translateName;
+	}
+
+	@NonNull
+	public String getTranslatedType(@NonNull OsmandApplication app) {
+		if (type == TerrainType.HEIGHT) {
+			return app.getString(R.string.altitude);
+		} else if (type == TerrainType.HILLSHADE) {
+			return app.getString(R.string.shared_string_hillshade);
+		} else {
+			return app.getString(R.string.shared_string_slope);
+		}
 	}
 }

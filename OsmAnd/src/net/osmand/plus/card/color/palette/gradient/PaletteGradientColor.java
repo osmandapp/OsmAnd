@@ -13,17 +13,22 @@ import org.json.JSONObject;
 public class PaletteGradientColor extends PaletteColor {
 
     public static String DEFAULT_NAME = "default";
-
+    private String paletteName;
+    private String typeName;
     private ColorPalette colorPalette;
 
-    public PaletteGradientColor(@NonNull String id, @NonNull ColorPalette colorPalette, long creationTime) {
-        super(id, 0, creationTime);
+    public PaletteGradientColor(@NonNull String paletteName, @NonNull String typeName, @NonNull ColorPalette colorPalette, long creationTime) {
+        super(typeName + GRADIENT_ID_SPLITTER + paletteName, 0, creationTime);
+        this.paletteName = paletteName;
+        this.typeName = typeName;
         this.colorPalette = colorPalette;
     }
 
-    public PaletteGradientColor(@NonNull String id, @NonNull ColorPalette colorPalette, long creationTime, long lastUsedTime) {
-        super(id, 0, creationTime);
+    public PaletteGradientColor(@NonNull String paletteName, @NonNull String typeName, @NonNull ColorPalette colorPalette, long creationTime, long lastUsedTime) {
+        super(typeName + GRADIENT_ID_SPLITTER + paletteName, 0, creationTime);
         this.colorPalette = colorPalette;
+        this.paletteName = paletteName;
+        this.typeName = typeName;
         this.lastUsedTime = lastUsedTime;
     }
 
@@ -54,14 +59,12 @@ public class PaletteGradientColor extends PaletteColor {
 
     @NonNull
     public String getPaletteName() {
-        String[] splitId = getId().split(GRADIENT_ID_SPLITTER);
-        return splitId[1];
+        return paletteName;
     }
 
     @NonNull
-    public String getColorizationTypeName(){
-        String[] splitId = getId().split(GRADIENT_ID_SPLITTER);
-        return splitId[0].toLowerCase();
+    public String getTypeName(){
+        return typeName;
     }
 
     @NonNull

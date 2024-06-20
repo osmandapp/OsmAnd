@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.GradientChart;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import net.osmand.ColorPalette;
 import net.osmand.gpx.GPXTrackAnalysis;
@@ -21,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.card.color.palette.main.IColorsPalette;
 import net.osmand.plus.card.color.palette.main.data.PaletteColor;
 import net.osmand.plus.charts.ChartUtils;
+import net.osmand.plus.plugins.srtm.TerrainMode.TerrainType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.utils.AndroidUtils;
 import net.osmand.plus.utils.OsmAndFormatter;
@@ -82,9 +84,23 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 		int xAxisGridColor = AndroidUtils.getColorFromAttr(app, R.attr.chart_x_grid_line_axis_color);
 
 		ChartUtils.setupGradientChart(getMyApplication(), chart, 9, 24, false, xAxisGridColor, labelsColor);
-		ColorizationType colorizationType = controller.gradientCollection.getColorizationType();
-		GPXTrackAnalysis analysis = controller.analysis;
-		LineData barData = ChartUtils.buildGradientChart(app, chart, gradientColorPalette, (value, axis) -> {
+		Object gradientType = controller.gradientCollection.getGradientType();
+		LineData gradientChartData;
+		IAxisValueFormatter iAxisValueFormatter = null;
+		if (gradientType instanceof ColorizationType) {
+			iAxisValueFormatter = getColorizationTypeFormatter((ColorizationType) gradientType, controller.analysis);
+		} else if (gradientType instanceof TerrainType) {
+			iAxisValueFormatter = getTerrainTypeFormatter();
+		}
+		gradientChartData = ChartUtils.buildGradientChart(app, chart, gradientColorPalette, iAxisValueFormatter, nightMode);
+
+		chart.setData(gradientChartData);
+		chart.notifyDataSetChanged();
+		chart.invalidate();
+	}
+
+	private IAxisValueFormatter getColorizationTypeFormatter(@NonNull ColorizationType colorizationType, @Nullable GPXTrackAnalysis analysis){
+		return (value, axis) -> {
 			String stringValue = formatValue(value, 100);
 			String type = "%";
 			FormattedValue formattedValue;
@@ -116,11 +132,11 @@ public class GradientColorsPaletteCard extends BaseCard implements IColorsPalett
 					break;
 			}
 			return app.getString(R.string.ltr_or_rtl_combine_via_space, stringValue, type);
-		}, nightMode);
+		};
+	}
 
-		chart.setData(barData);
-		chart.notifyDataSetChanged();
-		chart.invalidate();
+	private IAxisValueFormatter getTerrainTypeFormatter() {
+		return (value, axis) -> GradientUiHelper.formatTerrainTypeValues(value);
 	}
 
 	@NonNull

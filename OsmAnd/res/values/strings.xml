@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_modify">Modify</string>
     <string name="missing_maps_ignore">Use existing maps</string>
     <string name="backup_error_failed_to_transfer_file">Failed to transfer cloud file(s).</string>
     <string name="contact_support_retry">Try again or contact support</string>
