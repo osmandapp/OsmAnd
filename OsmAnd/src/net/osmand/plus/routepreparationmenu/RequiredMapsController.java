@@ -22,6 +22,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.myplaces.tracks.ItemsSelectionHelper;
 import net.osmand.plus.routepreparationmenu.CalculateMissingMapsOnlineTask.CalculateMissingMapsOnlineListener;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.MissingMapsCalculationResult;
 import net.osmand.util.Algorithms;
 
@@ -219,11 +220,12 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	public boolean shouldShowOnlineCalculation() {
-		return !onlineCalculationRequested && !isLoadingInProgress(); // && !hasOnlineCalcResult();
+		return !onlineCalculationRequested && !isLoadingInProgress() && !isAlreadyCalcOnline();
 	}
 
-//	private boolean hasOnlineCalcResult() {
-//		MissingMapsCalculationResult result = app.getRoutingHelper().getRoute().getMissingMapsCalculationResult();
-//		return result != null && result.isOnlineResultPoints();
-//	}
+	private boolean isAlreadyCalcOnline() {
+		RoutingHelper helper = app.getRoutingHelper();
+		MissingMapsCalculationResult result = helper.getRoute().getMissingMapsCalculationResult();
+		return result != null && result.getMissingMapsPoints().size() > 2 + helper.getIntermediatePoints().size();
+	}
 }
