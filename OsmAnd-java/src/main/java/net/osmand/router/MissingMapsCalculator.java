@@ -189,14 +189,13 @@ public class MissingMapsCalculator {
 		boolean onlyJointMap = true;
 		List<String> regions = new ArrayList<String>();
 		for (BinaryMapDataObject o : resList) {
-			if (or.isDownloadOfType(o, OsmandRegions.MAP_TYPE)
-					|| or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE)
-					|| or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-					|| or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)
-			) {
+			boolean hasMapType = or.isDownloadOfType(o, OsmandRegions.MAP_TYPE);
+			boolean hasRoadsType = or.isDownloadOfType(o, OsmandRegions.ROADS_TYPE);
+			boolean hasMapJoinType = or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE);
+			boolean hasRoadsJoinType = or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE);
+			if (hasMapType || hasRoadsType || hasMapJoinType || hasRoadsJoinType) {
 				regions.add(or.getDownloadName(o));
-				if (!or.isDownloadOfType(o, OsmandRegions.MAP_JOIN_TYPE)
-						&& !or.isDownloadOfType(o, OsmandRegions.ROADS_JOIN_TYPE)) {
+				if (!hasMapJoinType && !hasRoadsJoinType) {
 					onlyJointMap = false;
 				}
 			}
