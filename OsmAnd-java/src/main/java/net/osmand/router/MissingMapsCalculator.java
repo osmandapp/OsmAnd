@@ -59,8 +59,7 @@ public class MissingMapsCalculator {
 	}
 
 
-	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets,
-	                                          boolean checkHHEditions)
+	public boolean checkIfThereAreMissingMaps(RoutingContext ctx, LatLon start, List<LatLon> targets, boolean checkHHEditions)
 			throws IOException {
 //		start = testLatLons(targets);
 		long tm = System.nanoTime();
