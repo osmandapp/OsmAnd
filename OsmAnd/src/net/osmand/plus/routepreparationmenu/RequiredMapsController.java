@@ -219,11 +219,11 @@ public class RequiredMapsController implements IDialogController, DownloadEvents
 	}
 
 	public boolean shouldShowOnlineCalculation() {
-		return !onlineCalculationRequested && !isLoadingInProgress() && !hasOnlineCalcResult();
+		return !onlineCalculationRequested && !isLoadingInProgress(); // && !hasOnlineCalcResult();
 	}
 
-	private boolean hasOnlineCalcResult() {
-		MissingMapsCalculationResult result = app.getRoutingHelper().getRoute().getMissingMapsCalculationResult();
-		return result != null && result.isOnlineResultPoints();
-	}
+//	private boolean hasOnlineCalcResult() {
+//		MissingMapsCalculationResult result = app.getRoutingHelper().getRoute().getMissingMapsCalculationResult();
+//		return result != null && result.isOnlineResultPoints();
+//	}
 }
