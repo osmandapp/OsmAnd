@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import net.osmand.plus.R;
 import net.osmand.plus.download.local.LocalCategory;
 import net.osmand.plus.download.local.LocalGroup;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.dialogs.viewholders.CategoryViewHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.GroupViewHolder;
 import net.osmand.plus.download.local.dialogs.viewholders.MemoryViewHolder;
@@ -45,6 +46,18 @@ public class CategoriesAdapter extends RecyclerView.Adapter<ViewHolder> {
 		this.memoryInfo = memoryInfo;
 
 		notifyDataSetChanged();
+	}
+
+	public LocalGroup getLocalGroup(@Nullable LocalItemType localItemType) {
+		for (Object object : items) {
+			if (object instanceof LocalGroup) {
+				LocalGroup group = (LocalGroup) object;
+				if (group.getType() == localItemType) {
+					return group;
+				}
+			}
+		}
+		return null;
 	}
 
 	@NonNull

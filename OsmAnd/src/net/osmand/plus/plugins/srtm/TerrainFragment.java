@@ -37,7 +37,9 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.charts.ChartUtils;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseUtils;
@@ -76,8 +78,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private TextView zoomLevelsTv;
 	private TextView coloSchemeTv;
 	private TextView cacheSizeValueTv;
-
-	private View legend;
 
 	private TextView downloadDescriptionTv;
 	private TextView descriptionTv;
@@ -127,8 +127,8 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		zoomLevelsTv = root.findViewById(R.id.zoom_value);
 		coloSchemeTv = root.findViewById(R.id.color_scheme_name);
 		cacheSizeValueTv = root.findViewById(R.id.cache_size_value);
-
-		legend = root.findViewById(R.id.legend);
+		View cacheButton = root.findViewById(R.id.cache_button);
+		cacheButton.setOnClickListener(view -> showCacheScreen());
 
 		TextView emptyStateDescriptionTv = root.findViewById(R.id.empty_state_description);
 		TextView titleTv = root.findViewById(R.id.title_tv);
@@ -211,6 +211,15 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 	}
 
+	public void showCacheScreen() {
+		if (getMapActivity() != null) {
+			Intent intent = new Intent(app, app.getAppCustomization().getDownloadIndexActivity());
+			intent.putExtra(DownloadActivity.TAB_TO_OPEN, DownloadActivity.LOCAL_TAB);
+			intent.putExtra(DownloadActivity.LOCAL_ITEM_TYPE, LocalItemType.CACHE.ordinal());
+			getMapActivity().startActivity(intent);
+		}
+	}
+
 	@NonNull
 	private String formatChartValue(float value) {
 		DecimalFormat decimalFormat = new DecimalFormat("#");
@@ -227,7 +236,6 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		String zoomLevels = minZoom + " - " + maxZoom;
 		zoomLevelsTv.setText(zoomLevels);
 		coloSchemeTv.setText(mode.getTranslatedType(app));
-		AndroidUiHelper.updateVisibility(legend, mode.getType() == TerrainType.SLOPE);
 	}
 
 	private void setupColorSchemeCard(@NonNull View root) {

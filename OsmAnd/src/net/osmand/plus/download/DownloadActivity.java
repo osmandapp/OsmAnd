@@ -29,6 +29,7 @@ import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.download.local.LocalItemType;
 import net.osmand.plus.download.local.dialogs.LocalCategoriesFragment;
 import net.osmand.plus.download.ui.AskMapDownloadFragment;
 import net.osmand.plus.download.ui.BannerAndDownloadFreeVersion;
@@ -67,6 +68,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String FILTER_KEY = "filter";
 	public static final String FILTER_CAT = "filter_cat";
 	public static final String FILTER_GROUP = "filter_group";
+	public static final String LOCAL_ITEM_TYPE = "filter_group";
 
 	public static final String TAB_TO_OPEN = "Tab_to_open";
 	public static final String LOCAL_TAB = "local";
@@ -87,6 +89,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private String filter;
 	private String filterCat;
 	private String filterGroup;
+	private LocalItemType localItemType;
 	private final List<TabItem> mTabs = new ArrayList<>();
 	private Set<WeakReference<Fragment>> fragSet = new HashSet<>();
 	private WorldRegion downloadItem;
@@ -163,6 +166,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			filter = intent.getExtras().getString(FILTER_KEY);
 			filterCat = intent.getExtras().getString(FILTER_CAT);
 			filterGroup = intent.getExtras().getString(FILTER_GROUP);
+			localItemType = LocalItemType.values()[intent.getExtras().getInt(LOCAL_ITEM_TYPE)];
 		}
 	}
 
@@ -414,6 +418,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public String getFilterGroupAndClear() {
 		String res = filterGroup;
 		filterGroup = null;
+		return res;
+	}
+
+	@Nullable
+	public LocalItemType getLocalItemType() {
+		LocalItemType res = localItemType;
+		localItemType = null;
 		return res;
 	}
 
