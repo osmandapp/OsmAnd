@@ -184,7 +184,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 
 		widgetsPanel = view.findViewById(R.id.weather_widgets_panel);
 		widgetsPanel.setupWidgets(activity, nightMode);
-		widgetsPanel.isNightMode = nightMode;
+		widgetsPanel.nightMode = nightMode;
 
 		setupPLayForecastButton(view);
 		setupToolBar(view);
@@ -417,7 +417,7 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	protected void updateNightMode() {
 		super.updateNightMode();
 		if (widgetsPanel != null) {
-			widgetsPanel.isNightMode = nightMode;
+			widgetsPanel.nightMode = nightMode;
 		}
 	}
 
@@ -631,7 +631,6 @@ public class WeatherForecastFragment extends BaseOsmAndFragment {
 	}
 
 	private void onDownloadStateChanged(boolean isDownloading) {
-		log.info("onDownloadStateChanged: " + isDownloading);
 		progressUpdateHandler.removeCallbacksAndMessages(null);
 		if (isAnimatingForecast) {
 			if (isDownloading) {

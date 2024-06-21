@@ -51,11 +51,11 @@ public class WeatherWidget extends SimpleWidget {
 		forecastNamingFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 	}
 
-	private WeatherHelper weatherHelper;
-	private IObtainValueAsyncCallback callback;
-	private WeatherBand weatherBand;
-	private short band;
-	private int hideOldDataMessageId;
+	private final WeatherHelper weatherHelper;
+	private final IObtainValueAsyncCallback callback;
+	private final WeatherBand weatherBand;
+	private final short band;
+	private final int hideOldDataMessageId;
 
 	private PointI lastPotition31;
 	private ZoomLevel lastZoom;

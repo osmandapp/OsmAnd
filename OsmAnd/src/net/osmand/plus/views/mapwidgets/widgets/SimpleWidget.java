@@ -58,6 +58,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		updateWidgetView();
 	}
 
+	@LayoutRes
 	protected int getContentLayoutId() {
 		return verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 	}

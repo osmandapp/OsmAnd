@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather.widgets
 
+import androidx.annotation.LayoutRes
 import net.osmand.plus.R
 import net.osmand.plus.activities.MapActivity
 import net.osmand.plus.views.layers.MapInfoLayer
@@ -11,6 +12,7 @@ class CustomWeatherWidget(
 	customId: String?,
 	band: Short) : WeatherWidget(mapActivity, widgetType, customId, band) {
 
+	@LayoutRes
 	override fun getContentLayoutId(): Int {
 		return R.layout.widget_custom_vertical
 	}

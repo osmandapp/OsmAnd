@@ -286,22 +286,6 @@ public class WeatherPlugin extends OsmandPlugin {
 		return null;
 	}
 
-	public WeatherWidget createCustomLayoutWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @LayoutRes int customLayoutId) {
-		switch (widgetType) {
-			case WEATHER_TEMPERATURE_WIDGET:
-				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_TEMPERATURE);
-			case WEATHER_PRECIPITATION_WIDGET:
-				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRECIPITATION);
-			case WEATHER_WIND_WIDGET:
-				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_WIND_SPEED);
-			case WEATHER_CLOUDS_WIDGET:
-				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_CLOUD);
-			case WEATHER_AIR_PRESSURE_WIDGET:
-				return new CustomWeatherWidget(mapActivity, widgetType, customId, WEATHER_BAND_PRESSURE);
-		}
-		return null;
-	}
-
 	@Nullable
 	@Override
 	public WeatherWidget createMapWidgetForParams(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType) {
