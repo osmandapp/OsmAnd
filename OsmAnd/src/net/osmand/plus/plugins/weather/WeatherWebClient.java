@@ -1,5 +1,6 @@
 package net.osmand.plus.plugins.weather;
 
+import net.osmand.PlatformUtil;
 import net.osmand.core.jni.IQueryController;
 import net.osmand.core.jni.IWebClient.DataRequest;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
@@ -7,11 +8,14 @@ import net.osmand.core.jni.SwigUtilities;
 import net.osmand.core.jni.interface_IWebClient;
 import net.osmand.plus.utils.AndroidNetworkUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 
 public class WeatherWebClient extends interface_IWebClient {
 
 	private WeatherWebClientListener downloadStateListener;
+	private final Log log = PlatformUtil.getLog(WeatherWebClient.class);
 
 	public interface WeatherWebClientListener {
 		void onDownloadStateChanged(boolean downloadState);
@@ -48,17 +52,13 @@ public class WeatherWebClient extends interface_IWebClient {
 				notifyDownloadStateChange(true);
 			}
 
-			@Override
-			public void finishTask() {
-				super.finishTask();
-			}
 		});
 		notifyDownloadStateChange(false);
 		return downloadResult;
 	}
 
 	private void notifyDownloadStateChange(boolean downloadState) {
-		if(downloadStateListener != null) {
+		if (downloadStateListener != null) {
 			downloadStateListener.onDownloadStateChanged(downloadState);
 		}
 	}

@@ -5726,14 +5726,14 @@
     <string name="clear_key_assignment_summary">L\'assegnazione dei tasti per l\'azione selezionata verrà cancellata.</string>
     <string name="key_assignment_add_key">Aggiungi tasto</string>
     <string name="shared_string_key">Tasto</string>
-    <string name="clear_all_key_shortcuts_summary">Tutte le assegnazioni dei tasti per il tipo selezionato verranno rimossi.</string>
-    <string name="new_key_assignment">Nuova assegnazione dei tasti</string>
+    <string name="clear_all_key_shortcuts_summary">Tutte le assegnazioni dei tasti per il tipo selezionato saranno rimosse.</string>
+    <string name="new_key_assignment">Nuova assegnazione di tasti</string>
     <string name="clear_all_key_shortcuts">Cancella tutte le scorciatoie da tastiera</string>
     <string name="no_assigned_keys">Nessun tasto assegnato</string>
     <string name="key_name_pattern">Tasto \"%1$s\"</string>
     <string name="assigned_keys">Tasti assegnati</string>
     <string name="key_assignment_add_action">Aggiungi azione</string>
-    <string name="no_assigned_keys_desc">Seleziona un\'azione e assegna un tasto toccando il pulsante \"Aggiungi\".</string>
+    <string name="no_assigned_keys_desc">Seleziona un\'azione e assegnale un tasto toccando il pulsante \"Aggiungi\".</string>
     <string name="action_icon">Icona azione</string>
     <string name="shared_string_colors">Colori</string>
     <string name="user_palette">Tavolozza utente</string>
@@ -5741,4 +5741,5 @@
     <string name="contact_support_retry">Riprova o contatta l\'Assistenza</string>
     <string name="backup_error_failed_to_transfer_file">Il trasferimento file è fallito.</string>
     <string name="play_weather_forecast">Riproduci previsioni meteo</string>
+    <string name="missing_maps_ignore">Usa le mappe già installate</string>
 </resources>

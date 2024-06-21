@@ -734,13 +734,26 @@ public class OsmAndFormatter {
 
 	public static String getPoiStringWithoutType(Amenity amenity, String locale, boolean transliterate) {
 		PoiCategory pc = amenity.getType();
-		PoiType pt = pc.getPoiTypeByKeyName(amenity.getSubType());
-		String typeName = amenity.getSubType();
-		if (pt != null) {
-			typeName = pt.getTranslation();
-		} else if (typeName != null) {
-			typeName = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
+
+		//multivalued amenity
+		String[] subtypes = amenity.getSubType().split(";");
+		String typeName = "";
+		for (String subType : subtypes) {
+			PoiType pt = pc.getPoiTypeByKeyName(subType);
+			String tmp;
+			if (pt != null) {
+				tmp = pt.getTranslation();
+			} else {
+				tmp = Algorithms.capitalizeFirstLetterAndLowercase(typeName.replace('_', ' '));
+			}
+			if (!typeName.isEmpty()) {
+				typeName += ", " + tmp.toLowerCase();
+				break;
+			} else {
+				typeName = tmp;
+			}
 		}
+
 		String localName = amenity.getName(locale, transliterate);
 		if (typeName != null && localName.contains(typeName)) {
 			// type is contained in name e.g.

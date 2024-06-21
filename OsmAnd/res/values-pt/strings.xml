@@ -2860,7 +2860,7 @@
     <string name="use_osm_live_public_transport">Transportes públicos OsmAnd Live</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
-    <string name="step_by_step">Curva a curva</string>
+    <string name="step_by_step">Passo a passo</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Sair em</string>
     <string name="shared_string_swap">Trocar</string>
@@ -5499,7 +5499,7 @@
     <string name="shared_string_delete_immediately">Eliminar imediatamente</string>
     <string name="shared_string_loading">A carregar</string>
     <string name="help_article_navigation_auto_car_name">Android Auto</string>
-    <string name="delete_smart_folder_dialog_message">Isto irá remover a pasta inteligente \"%1$s\". (Nenhum trilho será eliminado).</string>
+    <string name="delete_smart_folder_dialog_message">Isto irá remover a pasta inteligente \"%1$s\". (Nenhum trilho será eliminado.)</string>
     <string name="shared_string_is_deleted">%1$s foi eliminado.</string>
     <string name="sort_size_ascending">Tamanho pequeno primeiro</string>
     <string name="help_article_widgets_info_widgets_name">Widgets informativos</string>
@@ -5622,7 +5622,7 @@
     <string name="sorted_sufolders_toast">As subpastas em \"%1$s\" são ordenadas por: \"%2$s\"</string>
     <string name="special_routing_cpp">Tipo de roteamento especial</string>
     <string name="default_buttons">Botões predefinidos</string>
-    <string name="custom_map_button_name_present">Este botão já está presente</string>
+    <string name="custom_map_button_name_present">Este botão já existe</string>
     <string name="add_button">Adicionar botão</string>
     <string name="custom_buttons">Botões personalizados</string>
     <string name="speed_limit_warning">Aviso de limite de velocidade</string>
@@ -5714,7 +5714,7 @@
     <string name="upward_gradient">Gradiente ascendente</string>
     <string name="title_3d_track">Trilho 3D</string>
     <string name="explore_3d_track_description">Explore o trilho em 3D interativo! Visualize a altura, a velocidade e muito mais diretamente no mapa.</string>
-    <string name="maps_that_also_be_used">Mapas que também podem ser utilizados: %1$s</string>
+    <string name="maps_that_also_be_used">Mapas que também serão utilizados: %1$s</string>
     <string name="required_maps_calculate_online_summary">A lista de mapas em falta baseia-se no percurso em linha reta. Para obter uma lista exata de mapas, o OsmAnd pode pré-calcular o seu percurso online.</string>
     <string name="fixed_height">Altura fixa</string>
     <string name="getting_list_of_required_maps">A obter lista de mapas necessários…</string>
@@ -5732,4 +5732,26 @@
     <string name="disable_map_layers">Desativar camadas de mapas</string>
     <string name="disable_map_layers_descr">Desativar todas as camadas de mapas por cima do mapa vetorial (é necessário reiniciar).</string>
     <string name="height_legend_description">São utilizados mapas de cores de altitude para visualizar o relevo.</string>
+    <string name="wall_height">Altura da parede</string>
+    <string name="missing_maps_ignore">Usar mapas existentes</string>
+    <string name="change_terrain_color_scheme">Alterar o esquema de cores do terreno</string>
+    <string name="clear_all_key_shortcuts_summary">Todas as atribuições de teclas para o tipo selecionado serão removidas.</string>
+    <string name="no_assigned_keys">Sem teclas atribuídas</string>
+    <string name="shared_string_key">Tecla</string>
+    <string name="new_key_assignment">Nova atribuição de teclas</string>
+    <string name="key_name_pattern">Tecla \"%1$s\"</string>
+    <string name="key_assignment_add_key">Adicionar tecla</string>
+    <string name="travel_topics">Tópicos de viagem</string>
+    <string name="play_weather_forecast">Reproduzir a previsão meteorológica</string>
+    <string name="rendering_value_dark_orange_name">Laranja escuro</string>
+    <string name="clear_key_assignment_summary">A atribuição de teclas para a ação selecionada será apagada.</string>
+    <string name="key_assignment_add_action">Adicionar ação</string>
+    <string name="backup_error_failed_to_transfer_file">Falha na transferência dos ficheiros da nuvem.</string>
+    <string name="contact_support_retry">Tente novamente ou contacte o apoio ao cliente</string>
+    <string name="user_palette">Paleta do utilizador</string>
+    <string name="shared_string_colors">Cores</string>
+    <string name="clear_all_key_shortcuts">Limpar todos os atalhos de teclado</string>
+    <string name="no_assigned_keys_desc">Selecione uma ação e atribua uma tecla tocando no botão \"Adicionar\".</string>
+    <string name="action_icon">Ícone da ação</string>
+    <string name="assigned_keys">Teclas atribuídas</string>
 </resources>

@@ -5590,7 +5590,7 @@
     <string name="lang_zh_hans">Chineză simplificată</string>
     <string name="lang_zh_hant">Chineză tradițională</string>
     <string name="speedometer_description">Arată viteza curentă, raportată de GPS</string>
-    <string name="custom_map_button_name_present">Acest buton este deja prezent</string>
+    <string name="custom_map_button_name_present">Un asemenea buton este deja prezent</string>
     <string name="add_button">Adaugă buton</string>
     <string name="speed_limit_warning">Avertizare privind limita de viteză</string>
     <string name="shared_string_speedometer">Vitezometru</string>
@@ -5733,7 +5733,7 @@
     <string name="routing_attr_avoid_cobblestone_name">Evită piatra cubică</string>
     <string name="routing_attr_avoid_cobblestone_description">Evită piatra cubică</string>
     <string name="fixed_height">Înălțime fixă</string>
-    <string name="wall_height">Înălțime perete</string>
+    <string name="wall_height">Înălțimea peretelui</string>
     <string name="clear_key_assignment_summary">Asignarea tastelor pentru acțiunea selectată va fi ștearsă.</string>
     <string name="user_palette">Paleta utilizatorului</string>
     <string name="clear_all_key_shortcuts_summary">Toate asignările de taste pentru tipul selectat vor fi eliminate.</string>
@@ -5749,4 +5749,7 @@
     <string name="new_key_assignment">Asignare nouă de tastă</string>
     <string name="key_name_pattern">Tasta \"%1$s\"</string>
     <string name="key_assignment_add_key">Adaugă tastă</string>
+    <string name="backup_error_failed_to_transfer_file">Nu a reușit transferul de fișiere în cloud.</string>
+    <string name="contact_support_retry">Încercați din nou sau contactați asistența</string>
+    <string name="missing_maps_ignore">Utilizează hărțile existente</string>
 </resources>
