@@ -9,8 +9,8 @@ import net.osmand.plus.R;
 
 import java.util.Optional;
 
-import de.KnollFrank.lib.preferencesearch.SearchConfiguration;
-import de.KnollFrank.lib.preferencesearch.SearchPreferenceFragments;
+import de.KnollFrank.lib.preferencesearch.client.SearchConfiguration;
+import de.KnollFrank.lib.preferencesearch.client.SearchPreferenceFragments;
 
 class SearchPreferenceButtonHelper {
 
