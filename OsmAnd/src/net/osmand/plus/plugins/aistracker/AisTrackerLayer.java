@@ -73,7 +73,7 @@ public class AisTrackerLayer extends OsmandMapLayer implements ContextMenuLayer.
         updateAisObjectList(ais);
         ais = new AisObject(454011, 5, 0, "TEST-CALLSIGN2", "TEST-Sailor", 36 /* sailing  */, 0,
                 0, 0, 0, 0,
-                "", 0, 0, 0, 0);
+                "@@@", 0, 0, 0, 0);
         updateAisObjectList(ais);
         // land station
         ais = new AisObject(878121, 4, 50.736d, 7.100d);

@@ -143,7 +143,11 @@ public class AisObject {
         this.ais_draught = draught;
         this.ais_callSign = callSign;
         this.ais_shipName = shipName;
-        this.ais_destination = destination;
+        if (destination != null) {
+            if (!destination.matches("^@+$")) { // string consisting of only "@" characters is invalid
+                this.ais_destination = destination;
+            }
+        }
         this.ais_etaMon = etaMon;
         this.ais_etaDay = etaDay;
         this.ais_etaHour = etaHour;
