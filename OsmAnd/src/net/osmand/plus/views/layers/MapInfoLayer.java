@@ -26,6 +26,7 @@ import net.osmand.plus.utils.ColorUtilities;
 import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.views.controls.SideWidgetsPanel;
 import net.osmand.plus.views.controls.VerticalWidgetPanel;
+import net.osmand.plus.views.controls.WidgetsContainer;
 import net.osmand.plus.views.layers.base.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetInfo;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
@@ -61,6 +62,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private SpeedometerWidget speedometerWidget;
 	private List<RulerWidget> rulerWidgets;
 	private List<SideWidgetsPanel> sideWidgetsPanels;
+	private List<WidgetsContainer> additionalWidgets;
 
 	private AndroidAutoMapPlaceholderView androidAutoMapPlaceholderView;
 
@@ -128,6 +130,7 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			speedometerWidget = null;
 			rulerWidgets = null;
 			sideWidgetsPanels = null;
+			additionalWidgets = null;
 			topToolbarView = null;
 		}
 	}
@@ -181,6 +184,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 				sideWidgetsPanel.update(drawSettings);
 			}
 		}
+		if (!Algorithms.isEmpty(additionalWidgets)) {
+			for (WidgetsContainer widgetsContainer : additionalWidgets) {
+				widgetsContainer.update(drawSettings);
+			}
+		}
 	}
 
 	public void recreateAllControls(@NonNull MapActivity mapActivity) {
@@ -193,8 +201,11 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 	private void registerAllControls(@NonNull MapActivity mapActivity) {
 		rulerWidgets = new ArrayList<>();
 		sideWidgetsPanels = new ArrayList<>();
+		additionalWidgets = new ArrayList<>();
 
-		topToolbarView = new TopToolbarView(mapActivity);
+		if (topToolbarView == null) {
+			topToolbarView = new TopToolbarView(mapActivity);
+		}
 		updateTopToolbar(false);
 
 		alarmWidget = new AlarmWidget(app, mapActivity);
@@ -277,6 +288,19 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 		}
 	}
 
+	public void addAdditionalWidgetsContainer(@NonNull WidgetsContainer container) {
+		if (additionalWidgets != null) {
+			additionalWidgets = CollectionUtils.addToList(additionalWidgets, container);
+			container.updateColors(calculateTextState(false));
+		}
+	}
+
+	public void removeAdditionalWidgetsContainer(@NonNull WidgetsContainer container) {
+		if (additionalWidgets != null) {
+			additionalWidgets = CollectionUtils.removeFromList(additionalWidgets, container);
+		}
+	}
+
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
@@ -318,14 +342,17 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			leftWidgetsPanel.updateColors(sideWidgetsState);
 			rightWidgetsPanel.updateColors(sideWidgetsState);
 
-			topWidgetsPanel.updateColors(sideWidgetsState);
-			bottomWidgetsPanel.updateColors(sideWidgetsState);
+			topWidgetsPanel.updateColors(verticalWidgetsState);
+			bottomWidgetsPanel.updateColors(verticalWidgetsState);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {
 				rulerWidget.updateTextSize(nightMode, sideWidgetsState.textColor, sideWidgetsState.textShadowColor, (int) (2 * view.getDensity()));
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.updateColors(sideWidgetsState);
+			}
+			for (WidgetsContainer container : additionalWidgets) {
+				container.updateColors(verticalWidgetsState);
 			}
 			androidAutoMapPlaceholderView.updateNightMode(nightMode);
 		}
@@ -398,6 +425,9 @@ public class MapInfoLayer extends OsmandMapLayer implements ICoveredScreenRectPr
 			}
 			for (SideWidgetsPanel panel : sideWidgetsPanels) {
 				panel.update(drawSettings);
+			}
+			for (WidgetsContainer container : additionalWidgets) {
+				container.update(drawSettings);
 			}
 		}
 	}

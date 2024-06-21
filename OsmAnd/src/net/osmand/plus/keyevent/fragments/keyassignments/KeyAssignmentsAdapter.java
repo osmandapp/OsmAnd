@@ -54,7 +54,6 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 	public KeyAssignmentsAdapter(@NonNull OsmandApplication app, @NonNull ApplicationMode appMode,
 	                             @NonNull KeyAssignmentsController controller) {
-		setHasStableIds(true);
 		this.app = app;
 		this.appMode = appMode;
 		this.controller = controller;
@@ -92,7 +91,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 		ScreenItem item = screenItems.get(position);
 		if (holder instanceof EmptyStateViewHolder) {
 			EmptyStateViewHolder h = (EmptyStateViewHolder) holder;
-			h.btnAdd.setOnClickListener(v -> controller.askAddAssignment());
+			h.btnAdd.setOnClickListener(v -> controller.askAddAssignment(h.btnAdd));
 
 		} else if (holder instanceof HeaderViewHolder) {
 			HeaderViewHolder h = (HeaderViewHolder) holder;
@@ -116,14 +115,16 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 					controller.askRemoveAssignment(assignment);
 				}
 			});
+			h.extraIconPadding.setVisibility(editMode ? View.GONE : View.VISIBLE);
 
 			h.buttonView.setClickable(isEditable());
 			h.buttonView.setFocusable(isEditable());
 			h.buttonView.setOnClickListener(isEditable()? v -> {
 				if (!editMode) {
-					controller.askEditAssignment(assignment);
+					controller.askEditAssignment(assignment, v);
 				}
 			}: null);
+			h.buttonView.setTransitionName("transition_" + assignment.getId());
 			h.actionName.setText(assignment.getName(app));
 
 			h.assignedKeys.removeAllViews();
@@ -144,14 +145,15 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			}
 
 			ScreenItem nextItem = position < screenItems.size() - 1 ? screenItems.get(position + 1) : null;
-			boolean dividerNeeded = nextItem != null && nextItem.getType() == KEY_ASSIGNMENT_ITEM;
+			int nextItemType = nextItem != null ? nextItem.getType() : -1;
+			boolean dividerNeeded = nextItemType == KEY_ASSIGNMENT_ITEM || nextItemType == EDIT_KEY_ASSIGNMENT_ITEM;
 			AndroidUiHelper.updateVisibility(h.divider, dividerNeeded);
 		}
 	}
 
 	@NonNull
 	private View createKeycodeView(@NonNull Integer keyCode) {
-		View view = inflate(R.layout.item_key_assignment_button);
+		View view = inflate(R.layout.item_key_assignment_button_small);
 		TextView title = view.findViewById(R.id.description);
 		title.setText(getKeySymbol(app, keyCode));
 		return view;
@@ -251,6 +253,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 
 		public View buttonView;
 		public View actionButton;
+		public View extraIconPadding;
 		public ImageView icon;
 		public TextView actionName;
 		public ViewGroup assignedKeys;
@@ -260,6 +263,7 @@ class KeyAssignmentsAdapter extends RecyclerView.Adapter<ViewHolder> {
 			super(itemView);
 			buttonView = itemView.findViewById(R.id.selectable_list_item);
 			actionButton = itemView.findViewById(R.id.action_button);
+			extraIconPadding = itemView.findViewById(R.id.extra_space);
 			icon = itemView.findViewById(R.id.icon);
 			actionName = itemView.findViewById(R.id.title);
 			assignedKeys = itemView.findViewById(R.id.assigned_keys);

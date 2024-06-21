@@ -1,10 +1,11 @@
 package net.osmand.plus.plugins.weather.dialogs;
 
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_CLOUD;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_NOTHING;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRECIPITATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_PRESSURE;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_TEMPERATURE;
-import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_UNDEFINED;
+import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_ANIMATION;
 import static net.osmand.plus.plugins.weather.WeatherBand.WEATHER_BAND_WIND_SPEED;
 
 import android.graphics.drawable.Drawable;
@@ -184,14 +185,14 @@ public class WeatherLayerFragment extends BaseOsmAndFragment {
 				return app.getString(R.string.empty_screen_weather_temperature_layer);
 			case WEATHER_BAND_PRESSURE:
 				return app.getString(R.string.empty_screen_weather_pressure_layer);
+			case WEATHER_BAND_WIND_ANIMATION:
 			case WEATHER_BAND_WIND_SPEED:
 				return app.getString(R.string.empty_screen_weather_wind_layer);
 			case WEATHER_BAND_PRECIPITATION:
 				return app.getString(R.string.empty_screen_weather_precipitation_layer);
-			case WEATHER_BAND_UNDEFINED:
+			default:
 				return null;
 		}
-		return null;
 	}
 
 	private void updateScreenMode(@NonNull View view, boolean enabled) {
