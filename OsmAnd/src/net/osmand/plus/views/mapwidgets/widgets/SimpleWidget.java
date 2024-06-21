@@ -37,7 +37,7 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	private TextView widgetNameTextView;
 	private boolean verticalWidget;
 	private boolean isFullRow;
-	private MapInfoLayer.TextState textState;
+	protected MapInfoLayer.TextState textState;
 
 	public SimpleWidget(@NonNull MapActivity mapActivity, @NonNull WidgetType widgetType, @Nullable String customId, @Nullable WidgetsPanel panel) {
 		super(mapActivity, widgetType);
@@ -52,10 +52,15 @@ public abstract class SimpleWidget extends TextInfoWidget {
 		LinearLayout container = (LinearLayout) view;
 		container.removeAllViews();
 
-		int layoutId = verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
+		int layoutId = getContentLayoutId();
 		UiUtilities.getInflater(mapActivity, nightMode).inflate(layoutId, container);
 		findViews();
 		updateWidgetView();
+	}
+
+	@LayoutRes
+	protected int getContentLayoutId() {
+		return verticalWidget ? getProperVerticalLayoutId(widgetState) : R.layout.map_hud_widget;
 	}
 
 	public void updateValueAlign(boolean fullRow) {
@@ -260,18 +265,22 @@ public abstract class SimpleWidget extends TextInfoWidget {
 	public void updateColors(@NonNull MapInfoLayer.TextState textState) {
 		this.textState = textState;
 		if (verticalWidget) {
-			nightMode = textState.night;
-			textView.setTextColor(textState.textColor);
-			smallTextView.setTextColor(textState.secondaryTextColor);
-			widgetNameTextView.setTextColor(textState.secondaryTextColor);
-			int iconId = getIconId();
-			if (iconId != 0) {
-				setImageDrawable(iconId);
-			}
-			view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
+			updateVerticalWidgetColors(textState);
 		} else {
 			super.updateColors(textState);
 		}
+	}
+
+	protected void updateVerticalWidgetColors(@NonNull MapInfoLayer.TextState textState) {
+		nightMode = textState.night;
+		textView.setTextColor(textState.textColor);
+		smallTextView.setTextColor(textState.secondaryTextColor);
+		widgetNameTextView.setTextColor(textState.secondaryTextColor);
+		int iconId = getIconId();
+		if (iconId != 0) {
+			setImageDrawable(iconId);
+		}
+		view.findViewById(R.id.widget_bg).setBackgroundResource(textState.widgetBackgroundId);
 	}
 
 	@Override

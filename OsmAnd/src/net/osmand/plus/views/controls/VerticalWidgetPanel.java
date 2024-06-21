@@ -45,7 +45,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-public class VerticalWidgetPanel extends LinearLayout {
+public class VerticalWidgetPanel extends LinearLayout implements WidgetsContainer {
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -247,7 +247,7 @@ public class VerticalWidgetPanel extends LinearLayout {
 	}
 
 	@NonNull
-	private List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
+	protected List<Set<MapWidgetInfo>> getWidgetsToShow(ApplicationMode mode, List<MapWidget> widgetsToShow) {
 		Set<MapWidgetInfo> allPanelWidget = widgetRegistry.getWidgetsForPanel(getWidgetsPanel());
 
 		Map<Integer, Set<MapWidgetInfo>> rowWidgetMap = new TreeMap<>();
