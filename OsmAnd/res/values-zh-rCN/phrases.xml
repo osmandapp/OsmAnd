@@ -2853,4 +2853,6 @@
     <string name="poi_generator_method_photovoltaic">发电机方式：光伏</string>
     <string name="poi_beauty_salon_eyelash">睫毛</string>
     <string name="poi_generator_method_battery_storage">发电方式：电池储能</string>
+    <string name="poi_craft_sweep">烟囱清扫</string>
+    <string name="poi_craft_sun_protection">遮阳工艺</string>
 </resources>
