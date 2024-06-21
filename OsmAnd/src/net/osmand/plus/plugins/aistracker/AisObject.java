@@ -30,8 +30,6 @@ import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_ROT;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SHIP_TYPE;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.INVALID_SOG;
 import static net.osmand.plus.plugins.aistracker.AisObjectConstants.UNSPECIFIED_AID_TYPE;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.maxAgeInMinutes;
-import static net.osmand.plus.plugins.aistracker.AisObjectConstants.maxVesselAgeInMinutes;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -368,8 +366,8 @@ public class AisObject {
         this.bitmapColor = 0;
     }
 
-    private void setBitmap(@NonNull AisTrackerLayer mapLayer) {
-        if (isLost()) {
+    private void setBitmap(@NonNull AisTrackerLayer mapLayer, int maxAgeInMin) {
+        if (isLost(maxAgeInMin)) {
             if (isMovable()) {
                 this.bitmap = mapLayer.getBitmap(R.drawable.ais_vessel_cross);
             }
@@ -401,11 +399,11 @@ public class AisObject {
                     break;
             }
         }
-        this.setColor();
+        this.setColor(maxAgeInMin);
     }
 
-    private void setColor() {
-        if (isLost()) {
+    private void setColor(int maxAgeInMin) {
+        if (isLost(maxAgeInMin)) {
             if (isMovable()) {
                 this.bitmapColor = 0; // black
             }
@@ -436,9 +434,10 @@ public class AisObject {
     }
 
     public void draw(@NonNull AisTrackerLayer mapLayer, @NonNull Paint paint,
-                     @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-        if ((this.bitmap == null) || isLost()) {
-            this.setBitmap(mapLayer);
+                     @NonNull Canvas canvas, @NonNull RotatedTileBox tileBox,
+                     int maxAgeInMin) {
+        if ((this.bitmap == null) || isLost(maxAgeInMin)) {
+            this.setBitmap(mapLayer, maxAgeInMin);
         }
         if (this.bitmapColor != 0) {
             paint.setColorFilter(new LightingColorFilter(this.bitmapColor, 0));
@@ -460,7 +459,7 @@ public class AisObject {
                 canvas.rotate(rotation, locationX, locationY);
             }
             canvas.drawBitmap(this.bitmap, Math.round(fx), Math.round(fy), paint);
-            if ((speedFactor > 0) && (!isLost())) {
+            if ((speedFactor > 0) && (!isLost(maxAgeInMin))) {
                 float lineStartX = locationX;
                 float lineLength = (float)this.bitmap.getHeight() * speedFactor;
                 float lineStartY = locationY - this.bitmap.getHeight() / 4.0f;
@@ -511,18 +510,15 @@ public class AisObject {
         return false;
     }
 
-    private boolean isLost(long maxAgeInMin) {
+    private boolean isLost(int maxAgeInMin) {
         return ((System.currentTimeMillis() - this.lastUpdate) / 1000 / 60) > maxAgeInMin;
-    }
-    private boolean isLost() {
-        return isLost(maxVesselAgeInMinutes);
     }
 
     /*
     * this function checks the age of the object (check lastUpdate against its limit)
     * and returns true if the object is outdated and can be removed
     * */
-    public boolean checkObjectAge() {
+    public boolean checkObjectAge(int maxAgeInMinutes) {
         return isLost(maxAgeInMinutes);
     }
     public int getMsgType() { return this.ais_msgType; }
@@ -555,8 +551,18 @@ public class AisObject {
     @Nullable
     public Location getLocation() {
         if (this.ais_position != null) {
-            return new Location(AisTrackerPlugin.AISTRACKER_ID,
+            Location loc = new Location(AisTrackerPlugin.AISTRACKER_ID,
                     ais_position.getLatitude(), ais_position.getLongitude());
+            if (ais_cog != INVALID_COG) {
+                loc.setBearing((float)ais_cog);
+            }
+            if (ais_sog != INVALID_SOG) {
+                loc.setSpeed((float)ais_sog);
+            }
+            if (ais_altitude != INVALID_ALTITUDE) {
+                loc.setAltitude((float)ais_altitude);
+            }
+            return loc;
         }
         return null;
     }

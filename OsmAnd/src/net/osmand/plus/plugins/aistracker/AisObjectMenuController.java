@@ -75,7 +75,7 @@ public class AisObjectMenuController extends MenuController {
 
         addMenuItem("MMSI",  Integer.toString(aisObject.getMmsi()));
         if (position != null) {
-            addMenuItem("Location",
+            addMenuItem("Position",
                     LocationConvert.convertLatitude(position.getLatitude(), FORMAT_MINUTES, true) +
                           ", " + LocationConvert.convertLongitude(position.getLongitude(), FORMAT_MINUTES, true) );
             if (this.app != null) {
